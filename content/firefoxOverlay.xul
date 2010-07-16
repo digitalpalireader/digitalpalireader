@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://digitalpalireader/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<overlay id="digitalpalireader-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <script src="overlay.js"/>
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+    </stringbundleset>
+
+    <menupopup id="menu_ToolsPopup">
+        <menuitem id="digitalpalireader-load" label="DPR" 
+              oncommand="loadDPR();"/>
+    </menupopup>
+    <toolbarpalette  id="BrowserToolbarPalette">
+        <toolbarbutton id="dpr-button"     label="DPR"       oncommand="loadDPR()" onclick="if (event.button == 1) loadDPR()"
+                   class="toolbarbutton-1" tooltiptext="DPR"/>
+    </toolbarpalette>
+    <statusbar id="status-bar">
+        <statusbarpanel id="DPRStatusBar" role="button"
+                        onmouseup="loadDPR();"
+                        tooltiptext="Digital Pali Reader">
+            <image id="dpr-button" />
+        </statusbarpanel>
+    </statusbar>
+</overlay>

@@ -1,0 +1,324 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Digital Pali Reader Extension</title>
+<link REL="SHORTCUT ICON" HREF="images/favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+
+<script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/german.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/french.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/spanish.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/thai.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/loadxml.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/xmlassist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/misc.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/pedlist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/pedfunc.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript">
+
+function getPageSize() {
+    return [
+        document.body.offsetWidth,
+        document.body.offsetHeight
+    ];
+}
+function moveit(one,two,three,four)
+{
+	eval('window.open("' +one+'","'+two+'");');
+}
+</script>
+</head>
+
+
+
+<body>
+<div id="left">
+	<div id="maf" name="changecolor">
+		<div align="left" id="mafa"></div>
+		<div align="justify" id="mafb">
+			<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
+			<div id="mafe" align=center>
+			</div>
+			<div id="mafd" align=center>
+			</div>
+			<div id="mafdebug"></div>
+		</div>
+	</div>
+	<div id="leftbot">
+		<div id="cdif">
+            <div id="dif">
+                <div id="difb" name="changecolor">
+                </div>
+            </div>
+		</div>
+            <div id="lt"></div>
+            <div id="lb"></div>
+		<div id="cof">
+			<form name="convertor">
+				<table align=center>
+					<tr>
+						<td align="center" name="changecolor">Input</td>
+						<td align="center">
+							<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
+							<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
+						</td>
+						<td align="center" name="changecolor">Output</td>
+					</tr>
+					<tr>
+						<td align=left id="inputtd">
+							<textarea id="input" rows="8" cols="35" onkeyup="convert()" style="font-family: Arial"></textarea>
+						</td>
+						<td>	
+							<table id="table1">
+								<tr>
+									<td align="center" name="changecolor">from</td>
+									<td></td>
+									<td align="center" name="changecolor">to</td>
+								</tr>
+								<tr>
+									<td align="center"><input type="radio" value="V1" name="R1" onclick="javascript:changeit('c',1)"></td>
+									<td align="center" name="changecolor">CSCD</td>
+									<td align="center"><input type="radio" disabled=yes value="V1" name="R2" onclick="javascript:changeit('c',2)"></td>
+								</tr>
+								<tr>
+									<td align="center"><input type="radio" value="V2" name="R1" onclick="javascript:changeit('u',1)"></td>
+									<td align="center" name="changecolor">Uni</td>
+									<td align="center"><input type="radio" value="V2" checked name="R2" onclick="javascript:changeit('u',2)"></td>
+								</tr>
+								<tr>
+									<td align="center"><input type="radio" value="V3" checked name="R1" onclick="javascript:changeit('v',1)"></td>
+									<td align="center" name="changecolor">Velth</td>
+									<td align="center"><input type="radio" value="V3" name="R2" onclick="javascript:changeit('v',2)"></td>
+								</tr>
+								<tr>
+									<td align="center"><input type="radio" disabled=yes value="V4" name="R1" onclick="javascript:changeit('t',1)"></td>
+									<td align="center" name="changecolor">Thai</td>
+									<td align="center"><input type="radio" value="V4" name="R2" onclick="javascript:changeit('t',2)"></td>
+								</tr>
+							</table>
+						</td>
+						<td align=right><textarea id="output" rows="8" cols="35" style="font-family: Arial"></textarea>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="scf" align=center>
+			<table><tr><td colspan=2><textarea id="pad" rows="10" cols="120"></textarea></td></tr></table>
+			<input type=button value="Analyze" onclick="document.getElementById('mafa').innerHTML = 'Input From Scratchpad'; preout(document.getElementById('pad').value + '&lt;br&gt;'); moveframex(2);">
+		</div>
+	</div>
+	<div id="anf" align=right name="changecolor">
+        <div id="brtop"></div>
+        <div id="brmid"></div>
+        <div id="brbot"></div>
+        <div id="anft">
+            <div align="center" id="anfa"></div>
+            <div align="center" id="anfb"></div>
+        </div>
+	</div>
+</div>
+<div id="search">
+	<div id="searchb">
+		<div align="left" id="sbfa"></div>
+		<a name="sbftop"></a>
+		<div align="justify" id="sbfab"></div>
+		<div align="justify" id="sbfb"> 
+		</div>		
+	</div>
+	<div id="searcht">
+        <div align="justify" id="stfb">
+		</div>
+		<div align="justify" id="stfc">
+		</div>
+        <div id="searchtb"></div>
+	</div>
+</div>
+<div id="right">
+    <div id="brleft"></div>
+    <div id="brright"></div>
+	<form name="form">
+    <div id="cright">
+        <div id="lright">
+            <div align="center" style="float:left">	
+                <b name="changecolor">Collection</b><br>
+                <select class="sel" size="7" name="nik" onclick="changenikaya()">
+                    <option value="v">Vinaya</option>
+                    <option selected value="d">D&#299;gha</option>
+                    <option value="m">Majjhima</option>
+                    <option class="sel" value="s">Sa&#7747;yutta</option>
+                    <option value="a">A&#7749;guttara</option>
+                    <option value="k">Khuddaka</option>
+                    <option value="y">Abhidhamma</option>
+                    <option value="x">Vism.</option>
+                    <option value="g">By&#257;kara&#7751;a</option>
+                </select>
+            </div>
+            <div align="center" style="float:right">	
+                <b name="changecolor">Book</b><br>
+                <b id="book"><select class="sel" size="7" name="book" onclick="gettitles(0,2)">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select></b>
+            </div>
+            <div align="center" style="padding-top:150px">
+                <div align="center" id="title" name="changecolor">title</div>
+
+                <div align="center" style="padding-top:2px" id="meta"><select class="sel" size="1" name="meta"><option selected>a</option></select></div>
+
+                <div align="center" style="padding-top:2px" id="volume"><select class="sel" size="1" name="volume"><option selected>a</option></select></div>
+        
+
+                <div align="center" style="padding-top:2px" id="vagga"><select class="sel" size="1" name="vagga"><option selected>b</option></select></div>
+
+
+                <div align="center" style="padding-top:2px" id="sutta"><select class="sel" size="1" name="sutta"><option></option></select></div>
+
+
+                <div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
+            </div>
+            <div align="center" style="padding-top:10px">
+                <input type="button" class="btn" value="<" title="Retrieve last section" onClick="createTablep()">
+                <input type="button" class="btn" value="Go" onClick="importXML()" title="Retrieve the section for analysis" accesskey="g">
+                <input type="button" class="btn" value=">" title="Retrieve next section" onClick="createTablen()"><br>
+                <input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthius Pali">
+                <b id="hier"><input type="button" class="btn" id="hierv" name="hier" value="a" onclick="gettitles(0,3,'a')" title="Switch to Commentary"></b>
+                <span id="script"><input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script"></span>
+                <!--<input type="button" class="btn" value="1" onClick="getlink(1)" title="Recall saved file '1.htm'">-->
+            </div>
+            <div align="center" style="padding-top:10px">
+                <a href="javascript:bookmarkframe()" title="Show a list of all bookmarks"><b name="changecolor">Bookmarks</b></a><br>
+                <select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
+                <br>
+                <input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12">&nbsp;<input type="button" class="btn" value="S" onClick="bookmarks()" title="Set Bookmark">
+            </div>
+            <div align="center" style="padding-top:10px">
+
+                <table align=center>
+                    <tr><td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="usearch" title="Enter Velthius Pali word to search for" size="16">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td align=center valign=middle>
+                        <input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b></td></tr>
+                </table>
+            </div>
+            <div align="center" style="padding-top:10px">
+                <b name="changecolor">Dictionary</b>
+                <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" onclick="document.form.manual.value=''; document.getElementById('anfb').innerHTML = ''; document.form.lastsearch.value = '';" name="sped">
+                    <option selected>DPR</option>
+                    <option>PED</option>
+                    <option>EPD</option>
+                    <option>DPN</option>
+                    <option>CPD</option>
+                    <option>ATT</option>
+                </select> 
+                <br><input type="text" value="" name="manual" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
+            </div>
+        </div>
+        <div align=center id="rright">
+            <div style="position:relative; padding-top:10px;">
+                <div>
+                    <input type="button" class="btn" value="R" title="Maximize Read Frame" onClick="moveframex(1)" accesskey="r">
+                    <input type="button" class="btn" value="A" title="Restore to Analysis Mode" onClick="moveframex(2)" accesskey="a">
+                    <input type="button" class="btn" value="D" title="Maximize dIctionary Frame" onClick="moveframex(3)" accesskey="i">
+                </div>
+                <div style="padding-top:10px">
+                    <input type="button" class="btn" value="D" title="Bring up the Definitions" onClick="moveframey('dif')" accesskey="d">
+                    <input type="button" class="btn" value="C" title="Bring up the Converter" onClick="moveframey('cof')" accesskey="c">
+                    <input type="button" class="btn" value="T" title="Bring up the Textbox" onClick="moveframey('scf')" accesskey="s">
+                </div>
+                <div style="padding-top:10px">
+                    <input type="button" class="btn" value="v" title="Scroll to bookmark" onClick="scrolldown(scrollmuch)">
+                    <input type="button" class="btn" value="#" title="Get current location for bookmark" onClick="scrolldown('alert')">
+                    <input type="button" class="btn" value="^" title="Go to top" onClick="scrolldown(0)">
+                </div>
+                <div style="padding-top:10px">
+                    <input title="Run the analysis algorithm automatically" type="hidden" id="autoalg">
+                    <input type="button" class="btn" value="G" title="Open Grammar (New Window)" onClick="moveit('etc/grammar/GMD/index.html','grammar');">
+                    <input type="button" class="btn" value="C" title="Open Cheat Sheet (New Window)" onClick="moveit('etc/grammar/cheet.html','cheat');">
+                    <input type="button" class="btn" value="T" title="Open Grammar Tools (New Window)" onClick="moveit('etc/grammar/index.htm','grammartools');">
+                    <input type="button" class="btn" value="L" title="Open Links (New Window)" onClick="moveit('etc/links.htm','links');">
+                </div>
+                <div style="padding-top:10px"><input type="button" class="btn" value="%" title="Set configuration" onclick="loadOptions()"><input type="button" class="btn" value="X" title="Reset configuration" onclick="eraseOptions(); ">
+                </div>
+                <div style="padding-top:10px">
+                    <input type="button" class="btn" value="#" title="Pali Quiz" onClick="newquiz();">
+                    <input type="button" class="btn" value="." title="Quote of the Moment" onClick="bv();">
+                    <input type="button" class="btn" value="?" title="Help" onClick="helpXML('help.xml');">
+                    <input type="button" class="btn" value="@" title="Send Feedback" onClick="document.getElementById('mafa').innerHTML=''; document.getElementById('mafb').innerHTML='<form action=&quot;http://pali.sirimangalo.org/dprmail.php&quot; method=&quot;POST&quot;><h1>Feedback Form</h1><em>This form allows you to send comments, questions or bug reports directly to the creator of the DPR.<br>  Your email goes straight to me, so there is no need to worry about spam, etc.</em><p><b>Your Email</b><br><input type=&quot;text&quot; name=&quot;email&quot; size=40><p><b>Subject</b><br><input type=&quot;text&quot; name=&quot;subject&quot; size=40><p><b>Message</b><br><textarea cols=40 rows=10 name=&quot;message&quot;></textarea><p><input type=&quot;submit&quot; value=&quot; Send &quot;></form>';">
+                    <input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">
+                </div>
+            </div>
+        </div>
+	</div>
+	<div align="left" id="langtr" style="clear:both">
+		<select class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
+			<option value="xy">English</option>
+			<script> 
+				if(ft.length != 0) document.write('<option value="f">French</option>');
+				if(gt.length != 0) document.write('<option value="g">German</option>');
+				if(it.length != 0) document.write('<option value="i">Italian</option>');
+				if(rt.length != 0) document.write('<option value="r">Russian</option>');
+				if(st.length != 0) document.write('<option value="s">Spanish</option>');
+				if(tt.length != 0) document.write('<option value="t">Thai</option>');
+			</script>
+		</select>
+	</div>
+	<input id="manrem" type="hidden" value="0">
+	</form>
+</div>
+<div id="open" style="position:absolute; top:0; right:0; height:10px; width:10px">
+	<img id="o2" src="images/open1.png" style="display:none; position:absolute; top:0; left:0" title="Restore Control Panel" onmouseout="document.getElementById('o2').setAttribute('style','display:none'); document.getElementById('o1').setAttribute('style','display:block')" onclick="var opcl = document.getElementById('o3').value; if (opcl == 0) document.getElementById('o3').value = 1; else document.getElementById('o3').value = 0;  moveframet(opcl)">
+	<img id="o1" src="images/open.png" onmouseover="document.getElementById('o2').setAttribute('style','display:block'); document.getElementById('o1').setAttribute('style','display:none')">
+	<input type="hidden" id="o3" value=0>
+</div>
+<script>
+updatecookielist();
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/version.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/main_data.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/name_data.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/PaliWord.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/linkout.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/declension.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/link.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="etc/remotecheck.js"></script>
+<script type="text/javascript">
+ if (document.getElementById('mafa').innerHTML == '') refreshit();
+ //document.getElementById('mafe').innerHTML = '<span style="color:'+colorcfg['coltext']+'"><img src="images/ajax-loader.gif" width=15> Checking for updates... <input type=button value="cancel" onclick="document.getElementById(\'mafe\').setAttribute(\'style\',\'display:none\');"></span>';
+if (document.getElementById('lang').length == 1) document.getElementById('langtr').style.display = 'none';
+
+</script>
+<!--<script language="JavaScript1.3" type="text/javascript" src="http://pali.sirimangalo.org/latest.js"></script>-->
+<script type="text/javascript">
+	//if (ckup == 0) checkupdate();
+    moveframex(2);
+</script>
+</body>
+</html>

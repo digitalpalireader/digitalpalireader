@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<!DOCTYPE prefwindow SYSTEM "chrome://digitalpalireader/locale/prefwindow.dtd">
+<prefwindow id="digitalpalireaderPreferences" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" title="&prefwindow.title;">
+  <prefpane id="pane1" label="&pane1.title;">
+    <preferences>
+      <preference id="AnalyzeH" name="extensions.digitalpalireader.sizes.AnalyzeH" type="int"/>
+      <preference id="DictH" name="extensions.digitalpalireader.sizes.DictH" type="int"/>
+      <preference id="SearchH" name="extensions.digitalpalireader.sizes.SearchH" type="int"/>
+      <preference id="ControlW" name="extensions.digitalpalireader.sizes.ControlW" type="int"/>
+      
+      <preference id="coltext" name="extensions.digitalpalireader.colors.coltext" type="string"/>
+      <preference id="colsel" name="extensions.digitalpalireader.colors.colsel" type="string"/>
+
+      <preference id="coldppn" name="extensions.digitalpalireader.colors.coldppn" type="string"/>
+      <preference id="colped" name="extensions.digitalpalireader.colors.colped" type="string"/>
+      <preference id="colcpd" name="extensions.digitalpalireader.colors.colcpd" type="string"/>
+
+      <preference id="colbk1" name="extensions.digitalpalireader.colors.colbk1" type="string"/>
+      <preference id="colbk1" name="extensions.digitalpalireader.colors.colbk1" type="string"/>
+      <preference id="colbk3" name="extensions.digitalpalireader.colors.colbk3" type="string"/>
+
+      <preference id="green" name="extensions.digitalpalireader.colors.green" type="string"/>
+      <preference id="blue" name="extensions.digitalpalireader.colors.blue" type="string"/>
+      <preference id="brown" name="extensions.digitalpalireader.colors.brown" type="string"/>
+      <preference id="grey" name="extensions.digitalpalireader.colors.grey" type="string"/>
+      <preference id="red" name="extensions.digitalpalireader.colors.red" type="string"/>
+    </preferences>
+    <tabbox flex="1">
+      <tabs>
+        <tab label="&SizeTitle.label;"/>
+        <tab label="&ColorTitle.label;"/>
+      </tabs>
+      <tabpanels flex="1">
+        <tabpanel id="sizetab" orient="vertical">
+		   <groupbox>
+				<vbox>
+					<label accesskey="&AnalyzeH.accesskey;" control="AnalyzeHpref">&AnalyzeH.label;</label><textbox id="AnalyzeHpref" preference="AnalyzeH"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&DictH.accesskey;" control="DictHpref">&DictH.label;</label><textbox id="DictHpref" preference="DictH"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&ControlW.accesskey;" control="ControlWpref">&ControlW.label;</label><textbox id="ControlWpref" preference="ControlW"/>
+				</vbox>
+				<vbox>
+					<label accesskey="&SearchH.accesskey;" control="SearchHpref">&SearchH.label;</label><textbox id="SearchHpref" preference="SearchH"/>
+				</vbox>
+			</groupbox>
+		</tabpanel>
+        <tabpanel id="colortab" orient="vertical">
+			<hbox>
+			<vbox>
+			<groupbox>
+				<caption label="&TextColorTitle.label;"/>
+				<vbox>
+					<label accesskey="&coltext.accesskey;" control="coltextpref">&coltext.label;</label><textbox id="coltextpref" preference="coltext"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&colsel.accesskey;" control="colselpref">&colsel.label;</label><textbox id="colselpref" preference="colsel"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&coldppn.accesskey;" control="coldppnpref">&coldppn.label;</label><textbox id="coldppnpref" preference="coldppn"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&colped.accesskey;" control="colpedpref">&colped.label;</label><textbox id="colpedpref" preference="colped"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&colcpd.accesskey;" control="colcpdpref">&colcpd.label;</label><textbox id="colcpdpref" preference="colcpd"/>
+				</vbox>
+			</groupbox>
+			<groupbox>
+				<caption label="&SearchColorTitle.label;"/>
+				<vbox>
+					<label accesskey="&colbk1.accesskey;" control="colbk1pref">&colbk1.label;</label><textbox id="colbk1pref" preference="colbk1"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&colbk1.accesskey;" control="colbk1pref">&colbk1.label;</label><textbox id="colbk1pref" preference="colbk1"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&colbk3.accesskey;" control="colbk3pref">&colbk3.label;</label><textbox id="colbk3pref" preference="colbk3"/>
+				</vbox>	
+			</groupbox>
+			</vbox>
+			<groupbox>
+				<caption label="&MiscColorTitle.label;"/>
+				<vbox>
+					<label accesskey="&green.accesskey;" control="greenpref">&green.label;</label><textbox id="greenpref" preference="green"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&blue.accesskey;" control="bluepref">&blue.label;</label><textbox id="bluepref" preference="blue"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&brown.accesskey;" control="brownpref">&brown.label;</label><textbox id="brownpref" preference="brown"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&grey.accesskey;" control="greypref">&grey.label;</label><textbox id="greypref" preference="grey"/>
+				</vbox>	
+				<vbox>
+					<label accesskey="&red.accesskey;" control="redpref">&red.label;</label><textbox id="redpref" preference="red"/>  
+				</vbox>	
+			</groupbox>
+			</hbox>
+	  </tabpanel>
+	</tabpanels>
+  </tabbox>	
+  </prefpane>
+</prefwindow>
