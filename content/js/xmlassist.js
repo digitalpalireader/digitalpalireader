@@ -31,6 +31,30 @@ nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option
 nikvoladi['y'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option></select>';
 nikvoladi['g'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
 
+var knames = [];
+
+knames.push('KhP');
+knames.push('Dhp');
+knames.push('Uda');
+knames.push('Iti');
+knames.push('SN');
+knames.push('ViV');
+knames.push('PeV');
+knames.push('Thera');
+knames.push('Theri');
+knames.push('Ap.1');
+knames.push('Ap.2');
+knames.push('BdV');
+knames.push('Car');
+knames.push('Jat.1');
+knames.push('Jat.2');
+knames.push('MNid');
+knames.push('CNid');
+knames.push('PsM');
+knames.push('Mil');
+knames.push('Net');
+knames.push('Pet');
+
 
 function changenikaya(noget)
 {
@@ -92,7 +116,8 @@ function replacevelstandard(input) {
 
 function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 {
-	nikaya = nikname[nikaya];
+	if (nikaya == 'k') book = knames[book-1];
+    nikaya = nikname[nikaya];
 	
 	var title='<table><tr><td><font class="blue">' + nikaya + ' ' + book + ' ' + vna;
 	if (wna != ' ') title += '</font>&nbsp;</td><td><font class="green">' + wna + '</font>&nbsp;</td>';

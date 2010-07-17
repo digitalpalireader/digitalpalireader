@@ -504,7 +504,7 @@ function createTables(xmlDoc)
 						{
 							texttomatch = z[tmp].childNodes[0].nodeValue.substring(4);
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
-							if (yesplus >= 0)					
+							if (yesplus >= 0) // multiple search terms		
 							{
 								tagtitle = '';
 								tempexword = [];
@@ -611,7 +611,7 @@ function createTables(xmlDoc)
 								}
 								yesall = 0;
 							}
-							else
+							else // single search term
 							{
 								tempexword.length = 0;
 								startmatch = texttomatch.search(getstring);
@@ -625,9 +625,14 @@ function createTables(xmlDoc)
 										extranummatch++;
 										endmatch = startmatch + getstring.length;
 										beforem = texttomatch.substring(0,startmatch);
-										afterm = texttomatch.substring(endmatch,texttomatch.length);
+										if (getstring.search(/^[PVMT][0-9]+\.[0-9]+$/) == 0) {  // page search
+                                            beforem = beforem.substring(0,beforem.length - 3);
+                                            alert(beforem);
+                                            endmatch += 4;
+                                        } 
+                                        afterm = texttomatch.substring(endmatch,texttomatch.length);
 										postpara += beforem + '<font class="yellow"><b>' + getstring + '</b></font>';
-										texttomatch = texttomatch.substring(endmatch,texttomatch.length);
+										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
 										// get words

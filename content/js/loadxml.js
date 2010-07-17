@@ -1017,6 +1017,7 @@ function helpXML(file)
 		if(data[ippp].childNodes) outputit += data[ippp].childNodes[0].nodeValue;
 	}		
 	document.getElementById('mafb').innerHTML = outputit;
+    document.getElementById('maf').scrollTop = 0;
 }
 
 
@@ -1032,6 +1033,7 @@ function getatt(num) { // get atthakatha word
         var pca = loca[i].split('^');
         var nikaya = pca[0];
         var book = pca[1];
+        
         var bookload = 'xml/' + nikaya + book + 'a.xml';
 
         var xmlhttp = new window.XMLHttpRequest();
@@ -1051,8 +1053,9 @@ function getatt(num) { // get atthakatha word
         var vaggalist = '';
         var suttalist = '';
         var sectionlist = '';
-
-        var placen = nikaya.toUpperCase() + ' ' + book;
+        
+        if (nikaya == 'k') book = knames[book];
+        var placen = nikname[nikaya] + ' ' + book;
 
         var u = xmlDoc.getElementsByTagName("h0");
         if (u.length > 1) placen += '.' + (parseInt(meta)+1);
