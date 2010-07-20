@@ -462,7 +462,6 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                     break;
             }
             var mysn = book+vagga;
-            //alert (book + ' ' + vagga);
             mys = mysn + "";
             while (mys.length < 2) { mys = '0'+mys; }
             var atid = 'dn/dn.'+mys;
@@ -470,6 +469,126 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                 var auth = atiD[x].split('.')[3];
                 if (autha[auth]) {auth = autha[auth];}
                 if (atiD[x].indexOf(atid)==0) {output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiD[x]+'\');" value="'+auth+'" title="Translation of DN '+mysn+' by '+auth+'">');cnt++;}
+            }
+            if (mysn == 16) {
+                if (which > 0) {
+                        var surl = 'index.htm';
+                        var ssect = '';
+                    }
+                else {
+                    var ssect = '.' + (section+1);
+                    switch (section) {
+                        case 0: case 1:
+                            var surl = '01-King-Ajatasattu.htm';
+                            break;
+                        case 2:
+                            var surl = '02-Prevent-Vajji-Decline.htm';
+                            break;
+                        case 3:
+                            var surl = '03-Prevent-Community-Decline-1.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/04-Prevent-Community-Decline-2.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/05-Prevent-Community-Decline-3.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/06-Prevent-Community-Decline-4.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/07-Prevent-Community-Decline-5.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/08-Prevent-Community-Decline-6.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/09-Ambalatthika.htm';
+                            break;
+                        case 4:
+                            var surl = '10-Sariputta.htm';
+                            break;
+                        case 5:
+                            var surl = '11-Virtue.htm';
+                            break;
+                        case 6:
+                            var surl = '11-Virtue.htm';
+                            break;
+                        case 7:
+                            var surl = '12-Building.htm';
+                            break;
+                        case 8:
+                            var surl = '13-Truths.htm';
+                            break;
+                        case 9:
+                            var surl = '14-Mirror.htm';
+                            break;
+                        case 10:
+                            var surl = '14-Mirror.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/15-Ambapali.htm';
+                            break;
+                        case 11:
+                            var surl = '15-Ambapali.htm';
+                            break;
+                        case 12:
+                            var surl = '16-Sickness.htm';
+                            break;
+                        case 13:
+                            var surl = '17-Ananda\'s-Failure.htm';
+                            break;
+                        case 14: case 15:
+                            var surl = '18-Relinquishment.htm';
+                            break;
+                        case 16:
+                            var surl = '19-Earthquakes.htm';
+                            break;
+                        case 17:
+                            var surl = '20-Assemblies.htm';
+                            break;
+                        case 18:
+                            var surl = '21-Mind-Mastery.htm';
+                            break;
+                        case 19:
+                            var surl = '22-Liberations.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/23-Ananda\\\'s-Fault.htm';
+                            break;
+                        case 20:
+                            var surl = '23-Ananda\\\'s-Fault.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/24-Ananda-at-Rajagaha.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/25-Ananda-at-Vesali.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/26-Thirty-Seven-Things.htm';
+                            break;
+                        case 21:
+                            var surl = '27-Noble-Things.htm';
+                            break;
+                        case 22:
+                            var surl = '28-References.htm';
+                            break;
+                        case 23:
+                            var surl = '29-Last-Meal.htm';
+                            break;
+                        case 24:
+                            var surl = '30-Drinking-Water.htm';
+                            break;
+                        case 25:
+                            var surl = '31-Pukkusa.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/32-Cunda.htm';
+                            break;
+                        case 26:
+                            var surl = '33-Worshipping.htm';
+                            break;
+                        case 27:
+                            var surl = '34-Divinities.htm';
+                            break;
+                        case 28: case 29: case 30:
+                            var surl = '35-Four-Places.htm';
+                            break;
+                        case 31:
+                            var surl = '36-Ananda\\\'s-Qualities.htm';
+                            break;
+                        case 32:
+                            var surl = '37-Kusinara.htm';
+                            break;
+                        case 33:
+                            var surl = '38-Mallas.htm';
+                            break;
+                        case 34:
+                            var surl = '39-Subhadda.htm';
+                            break;
+                        case 35:
+                            var surl = '40-Last-Instructions.htm';
+                            break;
+                        case 36: 
+                            var surl = '41-Final-Emancipation.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/42-Preperation-of-Body.htm';
+                            break;
+                        case 37:
+                            var surl = '42-Preperation-of-Body.htm';
+                            break;
+                        case 38:
+                            var surl = '43-Mahakassapa.htm';
+                            break;
+                        case 39: case 40:
+                            var surl = '44-Distribution.htm';
+                            break;
+                    }
+                }
+                output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/'+surl+'\');" value="Anandajoti" title="Translation of DN 16'+ssect+' by Anandajoti">');cnt++;
             }
             break;
         case 'm':
@@ -690,7 +809,7 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                             }
                         }
                     }
-                    if (vagga == 4) {output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm\');" value="Anandajoti" title="Translation of SN 5 by Anandajoti">');cnt++;}
+                    if (vagga == 4) {output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm\');" value="Anandajoti" title="Translation of SN 5 by Anandajoti">');cnt++;}
                 break;
                 case 6: // Vv
                     // kn/ud/ud.2.01.irel.html
