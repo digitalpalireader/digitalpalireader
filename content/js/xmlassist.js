@@ -74,7 +74,6 @@ function replaceunistandard(input) {
 	input = input.replace(/\.t/g, 'ṭ');
 	input = input.replace(/\.d/g, 'ḍ');
 	input = input.replace(/\"n/g, 'ṅ');
-	input = input.replace(/\´n/g, 'ṅ');
 	input = input.replace(/\.n/g, 'ṇ');
 	input = input.replace(/\.m/g, 'ṃ');
 	input = input.replace(/\~n/g, 'ñ');
@@ -84,6 +83,7 @@ function replaceunistandard(input) {
 	input = input.replace(/UU/g, 'Ū');
 	input = input.replace(/\.T/g, 'Ṭ');
 	input = input.replace(/\.D/g, 'Ḍ');
+	input = input.replace(/\"N/g, 'Ṅ');
 	input = input.replace(/\.N/g, 'Ṇ');
 	input = input.replace(/\.M/g, 'Ṃ');
 	input = input.replace(/\~N/g, 'Ñ');
@@ -107,6 +107,7 @@ function replacevelstandard(input) {
 	input = input.replace(/\u016A/g, 'UU');
 	input = input.replace(/\u1E6C/g, '\.T');
 	input = input.replace(/\u1E0C/g, '\.D');
+	input = input.replace(/\u1E44/g, '\"N');
 	input = input.replace(/\u1E46/g, '\.N');
 	input = input.replace(/\u1E42/g, '\.M');
 	input = input.replace(/\u00D1/g, '\~N');
