@@ -326,17 +326,25 @@ function formatuniout(data,which) { // prepare without links
 		if (altread == 1) {
 			endpt = wordbyword[b].length-1;
 			if (wordbyword[b].charAt(endpt) == '}') {
-					altplus += wordbyword[b].substring(0,endpt);
-			  altread = 0;
-			  altplus = replaceunistandard(altplus);
-			  altplus = altplus.replace(/0/g, '.');
-			  finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+				altplus += wordbyword[b].substring(0,endpt);
+				altread = 0;
+				altplus = replaceunistandard(altplus);
+				altplus = altplus.replace(/0/g, '.');
+				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
 			}
 			else altplus += wordbyword[b] + ' ';
 		}
 		else if (wordbyword[b].charAt(0) == '{') {
-			altread = 1;
-			altplus = wordbyword[b].substring(1) + ' ';
+			if (wordbyword[b].charAt(wordbyword[b].length-1) == '}') { 
+				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
+				altplus = replaceunistandard(altplus);
+				altplus = altplus.replace(/0/g, '.');
+				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+			}
+			else {
+				altread = 1;
+				altplus = wordbyword[b].substring(1) + ' ';
+			}
 		}
 		else if (wordbyword[b+1] == '-') { // connect first part to search
 			addpre = wordbyword[b];
