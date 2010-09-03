@@ -139,9 +139,7 @@ function sortaz(mydata){  // sort velthius pali array
 	for (var a = 0; a < mydata.length; a++) {
 		wordval = '';
 
-		onestring = mydata[a].toLowerCase().substring(0,mydata[a].indexOf('#'));
-
-//		onestring = mydata[a].toLowerCase();
+		onestring = mydata[a].toLowerCase();
 		if (onestring.length > 0) {
 			badis = 0;
 			for (var b = 0; b < onestring.length; b++) {

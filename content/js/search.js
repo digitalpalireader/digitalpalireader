@@ -204,8 +204,8 @@ function pausesall()
 		document.getElementById('sbfab').innerHTML = '';
 		document.getElementById('sbfb').innerHTML = '<hr>';
 	
-		if (hier == "a") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><img id="stfstop" src="images/ajax-loader.gif" title="click to stop search" width=25 onclick="stopsearch=1;"></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;Results&nbsp;for&nbsp;<b>' + getstring + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1"></td></tr></table>';
-	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><img id="stfstop" src="images/ajax-loader.gif" title="click to stop search" width=25 onclick="stopsearch=1;"></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;Results&nbsp;for&nbsp;<b>' + getstring + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1;"></td></tr></table>';
+		if (hier == "a") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1"></td></tr></table>';
+	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1;"></td></tr></table>';
 	
 
 	
@@ -343,7 +343,7 @@ function importXMLs(cnt)
 		if (qz == 0) {
 			document.getElementById('sbfab').innerHTML = '';
 			document.getElementById('sbfb').innerHTML = '<hr>';
-			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><img id="stfstop" src="images/ajax-loader.gif" title="click to stop search" width=25 onclick="stopsearch=1;"></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;Results&nbsp;for&nbsp;<b>' + getstring + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="stopsearch=1; moves(0)"></td></tr></table>';
 		}
 
 		document.getElementById('sbfb').innerHTML += '<div title="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
@@ -383,7 +383,7 @@ function importXMLs(cnt)
 		document.getElementById('sbfab').innerHTML = '';
 		//document.getElementById('sbfb').innerHTML = '<hr><div title="xyz"><h1>' + nikname[nikaya] + ' ' + book + '</h1><hr></div>';
 
-		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><img id="stfstop" src="images/ajax-loader.gif" title="click to stop search" width=25 onclick="stopsearch=1;"></td><td align=left style="color:' + colorcfg['coltext'] + '">Search Results for <b>' + getstring + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="stopsearch=1; moves(0)"></td></tr></table>';
 		
 		bookload = 'xml/' + bookfile + hier + '.xml';
 
@@ -645,6 +645,9 @@ function createTables(xmlDoc)
 										aftermex = afterm.substring(0,spacea);
 										tempexword.push (beforem+getstring+aftermex);
 									}
+									
+									// word add
+									
 									l = tempexword.length;
 									texnodups.length = 0;
 									for(var i=0; i<l; i++) {
@@ -676,7 +679,6 @@ function createTables(xmlDoc)
 										else dups[dupsx] = 1;
 									}
 									exnodups = sortaz(exnodups);
-
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
 									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
@@ -704,13 +706,21 @@ function createTables(xmlDoc)
 									
 									postpara += afterm;
 									
+									// titles
+									
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
 									if(u.length>1) finalout +=  '.' + (sx+1);
 									if(v.length>1) finalout += '.' + (sy+1);
 									if(w.length>1) finalout += '.' + (sz+1);
 									if(x.length>1) finalout += '.' + (s+1);
 									if(y.length>1) finalout += '.' + (se+1);
+									
+									// paragraph
+									
 									finalout += ', Paragraph ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="javascript:searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									
+									// mumble mumble
+									
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 
 									thiscount++;

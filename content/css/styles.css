@@ -23,7 +23,9 @@ div        {
 a:link       {  text-decoration:none }
 a:visited    {  text-decoration:none }
 
-
+img {  
+	border-style: none;
+}
 
 #search {
 display:none; 
