@@ -204,8 +204,8 @@ function pausesall()
 		document.getElementById('sbfab').innerHTML = '';
 		document.getElementById('sbfb').innerHTML = '<hr>';
 	
-		if (hier == "a") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1"></td></tr></table>';
-	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1;"></td></tr></table>';
+		if (hier == "a") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1"></td></tr></table>';
+	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1;"></td></tr></table>';
 	
 
 	
@@ -343,7 +343,7 @@ function importXMLs(cnt)
 		if (qz == 0) {
 			document.getElementById('sbfab').innerHTML = '';
 			document.getElementById('sbfb').innerHTML = '<hr>';
-			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="stopsearch=1; moves(0)"></td></tr></table>';
 		}
 
 		document.getElementById('sbfb').innerHTML += '<div title="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
@@ -383,7 +383,7 @@ function importXMLs(cnt)
 		document.getElementById('sbfab').innerHTML = '';
 		//document.getElementById('sbfb').innerHTML = '<hr><div title="xyz"><h1>' + nikname[nikaya] + ' ' + book + '</h1><hr></div>';
 
-		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/ajax-loader.gif" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="stopsearch=1; moves(0)"></td></tr></table>';
 		
 		bookload = 'xml/' + bookfile + hier + '.xml';
 
@@ -504,6 +504,8 @@ function createTables(xmlDoc)
 						{
 							texttomatch = z[tmp].childNodes[0].nodeValue.substring(4);
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+							if (getstring.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
+							texttomatch = texttomatch.replace(/   */g, ' ');
 							if (yesplus >= 0) // multiple search terms		
 							{
 								tagtitle = '';
@@ -627,7 +629,6 @@ function createTables(xmlDoc)
 										beforem = texttomatch.substring(0,startmatch);
 										if (getstring.search(/^[PVMT][0-9]+\.[0-9]+$/) == 0) {  // page search
                                             beforem = beforem.substring(0,beforem.length - 3);
-                                            alert(beforem);
                                             endmatch += 4;
                                         } 
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
@@ -693,13 +694,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';

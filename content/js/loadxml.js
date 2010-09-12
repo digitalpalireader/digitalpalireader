@@ -499,41 +499,46 @@ var customfile = 0;
 
 function createTableman(type)
 {
-	if (type && document.form.sped.selectedIndex == 1)
-	{
-		moveframey('dif');
-		moveframex(3);
-		pedsearchstart();
+	document.form.manual.value = replacevelstandard(document.form.dictin.value);
+	if (type) {
+		switch (document.form.sped.selectedIndex) {
+			case 0:
+				var TheData = document.form.manual.value;
+				postout(TheData);
+				if(document.getElementById('autoalg').checked == false) moveframex(2);
+				break;
+			case 1:
+				moveframey('dif');
+				moveframex(3);
+				pedsearchstart();
+				break;
+			case 2:
+				moveframey('dif');
+				moveframex(3);
+				epdsearchstart();
+				break;
+			case 3:
+				moveframey('dif');
+				moveframex(3);
+				dppnsearchstart();
+				break;
+			case 4:
+				moveframey('dif');
+				moveframex(3);
+				mlsearchstart();
+				break;
+			case 5:
+				moveframey('dif');
+				moveframex(3);
+				attsearchstart();
+				break;
+		}
 	}
-	else if (type && document.form.sped.selectedIndex == 2)
-	{
-		moveframey('dif');
-		moveframex(3);
-		epdsearchstart();
+	else {
+		var TheData = document.form.manual.value;
+		postout(TheData);
+		if(document.getElementById('autoalg').checked == false) moveframex(2);
 	}
-	else if (type && document.form.sped.selectedIndex == 3)
-	{
-		moveframey('dif');
-		moveframex(3);
-		dppnsearchstart();
-	}
-	else if (type && document.form.sped.selectedIndex == 4)
-	{
-		moveframey('dif');
-		moveframex(3);
-		mlsearchstart();
-	}
-	else if (type && document.form.sped.selectedIndex == 5)
-	{
-		moveframey('dif');
-		moveframex(3);
-		attsearchstart();
-	}
-  else {
-    var TheData = document.form.manual.value;
-    postout(TheData);
-    if(document.getElementById('autoalg').checked == false) moveframex(2);
-  }
 }
 
 var versecheck = 0;
@@ -624,7 +629,7 @@ function importXML(manxml,labelsearchtemp)
 			onepar = z[tmp].childNodes[0].nodeValue.substring(4);
 			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
 			{
-				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; 
+				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
 			}	
 			if (quit == 1) {
 				theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
@@ -642,9 +647,9 @@ function importXML(manxml,labelsearchtemp)
 						if (onepar.charAt(opp - 1) != ' ') {
 							tmpdata += ' - ';
 						}
-						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl] + ' <xc> ';
+						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl].replace(/ /g, ' <xc> <c' + tmpl  + '> ') + ' <xc> ';
 						if (onepar.charAt(opp - 1 + labelsearch[tmpl].length) != ' ') {
-							tmpdata += ' - ';
+							tmpdata += ' _ ';
 						}
 						onepar = onepar.substring(opp + labelsearch[tmpl].length);
 					}

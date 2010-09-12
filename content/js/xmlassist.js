@@ -314,14 +314,14 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/\}/g, '} ');
 	data = data.replace(/ +/g, ' ');
 	var uniouta = replaceunistandard(data).split(' ');
-	data = data.replace(/\"/g, '\u00B4');
+	//data = data.replace(/\"/g, '\u00B4');
 	data = data.replace(/\'/g, '`');
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
     
-//	document.getElementById('b').innerHTML += '<p>';
-	
+	//document.getElementById('mafa').innerHTML = data;	
+
 	for (var b = 0; b < wordbyword.length; b++)
 	{
 		if (altread == 1) {
@@ -348,10 +348,19 @@ function formatuniout(data,which) { // prepare without links
 			}
 		}
 		else if (wordbyword[b+1] == '-') { // connect first part to search
-			addpre = wordbyword[b];
-			b++;
+			if (wordbyword[b+5] == '_') { // single word search embedded on both sides
+				addpre = wordbyword[b];
+				b++;
+			}
+			else { // word search embedded left side
+				convout += wordbyword[b] + wordbyword[b+3] + ' ';
+				unioutb = (replaceunistandard(wordbyword[b]).replace(/``/g, '&quot;') + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]).replace(/``/g, '&quot;') + '<xc>';
+				if (script != 0) unioutb = translit(unioutb);
+				finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
+				b = b + 4;
+			}				
 		}
-		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '-') { // connect search with rest of word
+		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
 			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
 			unioutb = (replaceunistandard(addpre).replace(/``/g, '&quot;') + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1].replace(/``/g, '&quot;') + '<xc> - ' + uniouta[b+4]).replace(/``/g, '&quot;');
 			if (script != 0) unioutb = translit(unioutb);

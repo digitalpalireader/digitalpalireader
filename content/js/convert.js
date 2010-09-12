@@ -181,7 +181,7 @@ function sendtoconvert(data)
 	moveframey('cof');
 	document.convertor.R1[1].checked = true;
 	document.convertor.R2[2].checked = true;
-	document.getElementById('output').innerHTML = '';
-	document.getElementById('input').innerHTML = data;
+	document.convertor.output.value = '';
+	document.convertor.input.value = data;
 	convert();
 }

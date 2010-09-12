@@ -202,7 +202,7 @@ function moveit(one,two,three,four)
                 <input type="button" class="btn" value="<" title="Retrieve last section" onClick="createTablep()">
                 <input type="button" class="btn" value="Go" onClick="importXML()" title="Retrieve the section for analysis" accesskey="g">
                 <input type="button" class="btn" value=">" title="Retrieve next section" onClick="createTablen()"><br>
-                <input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthius Pali">
+                <input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthuis Pali">
                 <b id="hier"><input type="button" class="btn" id="hierv" name="hier" value="a" onclick="gettitles(0,3,'a')" title="Switch to Commentary"></b>
                 <span id="script"><input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script"></span>
                 <!--<input type="button" class="btn" value="1" onClick="getlink(1)" title="Recall saved file '1.htm'">-->
@@ -216,18 +216,18 @@ function moveit(one,two,three,four)
             <div align="center" style="padding-top:10px">
 
                 <table align=center>
-                    <tr><td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="usearch" title="Enter Velthius Pali word to search for (for page search, see the help file" size="16">
+                    <tr><td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter Pali word to search for (for page search, see the help file" size="16"><input type="hidden" name="usearch" value=""> 
                     </td>
                 </tr>
 
                 <tr>
                     <td align=center valign=middle>
-                        <input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b></td></tr>
+                        <input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b></td></tr>
                 </table>
             </div>
             <div align="center" style="padding-top:10px">
                 <b name="changecolor">Dictionary</b>
-                <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" onclick="document.form.manual.value=''; document.getElementById('anfb').innerHTML = ''; document.form.lastsearch.value = '';" name="sped">
+                <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" onclick="document.form.dictin.value=''; document.getElementById('anfb').innerHTML = ''; document.form.lastsearch.value = '';" name="sped">
                     <option selected>DPR</option>
                     <option>PED</option>
                     <option>EPD</option>
@@ -235,7 +235,7 @@ function moveit(one,two,three,four)
                     <option>CPD</option>
                     <option>ATT</option>
                 </select> 
-                <br><input type="text" value="" name="manual" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
+                <br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
             </div>
         </div>
         <div align=center id="rright">
