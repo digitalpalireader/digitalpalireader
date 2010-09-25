@@ -34,12 +34,12 @@ function pedsearchstart()
         }
     }
     var pedl = ped.length;
-    if (getstring.length == 0) { pedl = 16165; } // only main
+    if (getstring.charAt(0) == '*') { pedl = 16165; } // only main
         
 	for (x = 0; x < pedl; x++)
 	{
         var yesstring = ped[x].substring(0,gslength);
-		if(yesstring == getstring)
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && ped[x].search(getstring.substring(1)) > -1))
 		{
             gsplit = ped[x].split('^');
 			
@@ -123,7 +123,7 @@ function epdsearchstart()
 	{
 		var yesstring = epd[x].substring(0,gslength);
 	
-		if(yesstring == getstring)
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && epd[x].search(getstring.substring(1)) > -1))
 		{
 			gsplit = epd[x].split('^');
 			
@@ -197,7 +197,7 @@ function dppnsearchstart()
 	{
 		var yesstring = dppn[x].substring(0,gslength);
 	
-		if(yesstring == getstring)
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && dppn[x].search(getstring.substring(1)) > -1))
 		{
 			gsplit = dppn[x].split('^');
 			
@@ -289,7 +289,7 @@ function mlsearchstart()
 		var yesstring = yg[x].substring(0,gslength);
 		var us = '';
 		var ud = '';
-		if(yesstring == getstring)
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && yg[x].search(getstring.substring(1)) > -1))
 		{
 			us = replaceunistandard(yg[x].replace(/,/g, ".").replace(/`n/g, "\"n"));
 			ud = replaceunistandard(yt[yg[x]].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
@@ -355,7 +355,7 @@ function attsearchstart()
 	for (x = 0; x < attlist.length; x++)
 	{
         var yesstring = attlist[x].substring(0,gslength);
-		if(yesstring == getstring)
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && attlist[x].search(getstring.substring(1)) > -1))
 		{
             gsplit = attlist[x].split('#')[0];
 			uniout = replaceunistandard(gsplit);

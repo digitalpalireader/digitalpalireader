@@ -216,7 +216,7 @@ function moveit(one,two,three,four)
             <div align="center" style="padding-top:10px">
 
                 <table align=center>
-                    <tr><td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter Pali word to search for (for page search, see the help file" size="16"><input type="hidden" name="usearch" value=""> 
+                    <tr><td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
                     </td>
                 </tr>
 
@@ -235,7 +235,7 @@ function moveit(one,two,three,four)
                     <option>CPD</option>
                     <option>ATT</option>
                 </select> 
-                <br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
+                <br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value != '*') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
             </div>
         </div>
         <div align=center id="rright">
