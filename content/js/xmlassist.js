@@ -398,7 +398,7 @@ function formatuniout(data,which) { // prepare without links
 			unioutb = uniouta[b].replace(/``/g, '&quot;');
 			//unioutb = unioutb.replace(/0/g, '.');
 			if (script != 0) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + wordbyword[b] + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
 		}
 	}
 	finout = finout.replace(/ <b> /g, '<b>');

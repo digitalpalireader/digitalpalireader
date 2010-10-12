@@ -11,7 +11,8 @@ var shortdefpost = new Array();
 
 function postout(dit,b)
 {
-
+	document.form.dictin.value=dit;
+	document.form.lastsearch.value=dit;
 
 	var fcx = 0;
 	var cfx = 0;
