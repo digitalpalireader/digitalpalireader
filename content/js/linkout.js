@@ -79,6 +79,11 @@ function output(sdp)
 				//alert('out');
 				lastword = 1;
 			}
+			else if (tr[a] == 'newrow')
+			{
+				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center"><i>';
+				tr[a] = '0^newrow^0^0';
+			}
 			else
 			{
 			//if (a == 0) document.getElementById('debug').innerHTML= '<p>' + tr[a];
@@ -86,58 +91,6 @@ function output(sdp)
 				var os = tr[a].split('^');
 				
 	
-				if (remote == true && (os[2] == 0 || os[2] == 3) && os[3] == 0) // fix to coallate with dsal site
-				{	
-					foldersw = os[0].split('/');
-					f0 = parseInt(foldersw[0],10);
-					f1 = parseInt(foldersw[1],10);
-					if (f0 == 0) {
-
-							f1 += 4;
-
-					}
-					if (f0 == 1) {
-						if(f1 < 158) {
-							f0 = 0;
-							f1 += 4451;
-						}
-						else {
-							f1 -= 154;
-						}
-					}
-					if (f0 == 2) {
-						if(f1 < 119) {
-							f0 = 1;
-							f1 += 2779;
-						}
-						else {
-							f1 -= 115;
-						}
-					}
-					if (f0 == 3) {
-						if(f1 < 189) {
-							f0 = 2;
-							f1 += 3793;
-						}
-						else {
-							f1 -= 185;
-						}
-					}
-					if (f0 == 4) {
-						if(f1 < 578) {
-							f0 = 3;
-							f1 += 3503;
-						}
-						else {
-							f1 -= 574;
-						}
-					}
-					os[0] = f0 + ':' + f1;
-					ped1 = 'http://dsal.uchicago.edu/cgi-bin/philologic/getobject.pl?c.';
-				}
-			
-				
-				
 				var paliword = new PaliWord(os[0],os[1],os[2],os[3],os[4],os[5]);
 				
 				// os[0] = hyperlink
@@ -146,7 +99,7 @@ function output(sdp)
 				// os[3] = proper name or not
 				// os[4] = tooltip or not
 				// os[5] = tooltip definition
-				// for os[2]: 0 = first match (top), 1 = below, 2 = single digit, 3 = special suffix
+				// for os[2]: 0 = first match (top), 1 = below, 2 = single digit, 3 = special suffix, 4 = new row
 				// for os[4]: 1 = tooltip only, 2 = tooltip + match
 			//if (os[1].length == 1 && os[2]
 			//alert(tr[a]);		

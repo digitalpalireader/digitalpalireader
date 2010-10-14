@@ -485,6 +485,233 @@ function postout(dit,b)
 
 
 
+// --------------------------- match finding function  ---------------------------------
+
+	
+	function findmatch()
+	{
+		fmx++;
+		//document.getElementById('c').innerHTML = 'fc: ' + fcx + 'cf: ' + cfx + 'fm: ' + fmx + 'mf: ' + mfx;
+		
+		//alert('fm' + ' ' + wtwt);
+		//alert(shortdefpre + ' 1');
+		
+		// ---------- create wtr variables for alternative stem matching ----------
+		
+		
+		for (var k = 0; k < wtwt.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
+		{		
+			cwt[k] = wtwt.substring(wtwt.length-k,wtwt.length);				
+		}
+		
+		
+		// ---------- stem matching and converting - note the wt doesnt change just we get alternatives ----------
+		prcount = 0;
+		wtr = new Array();
+		
+		for (var pr = 0;pr < prem.length; pr++)
+		{
+			preach = prem[pr].split('^');
+			pra = preach[0]; // ending to replace
+			prb = preach[1]; // size of old ending
+			prc = preach[2]; // size of cut
+			prd = preach[3]; // min. length for change
+			pre = preach[4]; // new ending if any
+			if (prd == 0) prd = 3;
+			if (cwt[prb] == pra && wtwt.length > prd) 
+			{
+					
+					if (pre)
+					{
+						wtr[prcount] = wtwt.substring(0, wtwt.length-prc) + pre;
+						prcount++;
+					}
+					else
+					{
+						wtr[prcount] = wtwt.substring(0, wtwt.length-prc);
+						prcount++;
+					}
+					if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'a' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'a')
+					{
+						wtr[prcount] = wtr[prcount-1] + 'a';
+						prcount++;
+					}
+					else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'u' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'u')
+					{
+						wtr[prcount] = wtr[prcount-1] + 'u';
+						prcount++;
+					}
+					else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'i' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'i')
+					{
+						wtr[prcount] = wtr[prcount-1] + 'i';
+						prcount++;
+					}					
+					//////alert(wtr);
+			}
+			
+		}
+	
+
+		
+		
+		res = new Array();
+		resn = new Array();
+	// exacts
+	
+	// exact maches
+	
+		if (mainda[wtwt] != null)
+		{
+			res[0] = mainda[wtwt]; 
+			aa++
+
+		}
+		
+		if (aa == 0) // no exact match, so we try exact matches that have a z# on the end
+		{
+			for (var a = 0; a < wtn.length; a++) // loop through z1 - z6
+			{				
+				wtxac = wtwt + wtn[a];
+				if (mainda[wtxac] != null) 
+				{
+					res[aa] = mainda[wtxac];
+					aa++;
+				}
+			}
+		}
+	
+	// alts				
+	
+		if (aa == 0) 			// if still no match, we look at variants
+		{				
+			for (var b = 0; b < wtr.length; b++) // check throuhg wtr variants that we set at the beginning
+			{			
+				wtalt = wtr[b];
+				if (mainda[wtalt] != null && indeclinable[wtalt] == null) 
+				{
+					
+					res[aa] = mainda[wtalt];				
+					aa++;
+				}
+			}
+		}
+			
+		if (aa == 0) // if still no match, look for numbered variants
+		{
+			for (b = 0; b < wtr.length; b++) // b for alternative types wtr
+			{							
+				
+					for (var c = 0; c < wtn.length; c++) // c for numbers one to six
+					{				
+						wtaln = wtr[b] + wtn[c];
+	
+						if (mainda[wtaln] != null) 
+						{
+							res[aa] = mainda[wtaln];
+							aa++;
+						}
+					}
+			}
+		}
+		
+	// whether there is a match or not, we look for DPPN matches, because they are different from PED definitions
+	
+		bb = 0;
+		for (var d = 0; d < wtp.length; d++)
+		{				
+			wtnum = wtwt + wtp[d]; // remember that we have added f# to the end of all DPPN entries.  Here we add it to come up with wtnum
+			if (mainda[wtnum] != null && wtwt.length > 2) 
+			{					
+				resn[bb] = mainda[wtnum];
+				bb++;
+			}
+		}
+		
+		if (bb == 0)
+		{
+			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+			{				
+				for (var d = 0; d < wtp.length; d++)
+				{				
+					wtnum = wtr[b] + wtp[d];
+					if (mainda[wtnum] != null && wtwt.length > 2) 
+					{					
+						resn[bb] = mainda[wtnum];
+						bb++;
+					}
+				}
+			}
+		}
+		
+	// for tooltips, we don't yet care whether the PED has a match or not, but when we output, we will.
+		
+		cc = 0;
+		resy = 0;
+		wttip = wtwt;
+		if (yt[wttip] != null) 
+		{					
+			resy = yt[wttip];
+			cc++;
+
+			shortdefpre[sdpv] = wttip; // for matching the dictionary entry in the output
+			sdpv++;
+		}
+	
+		
+		if (cc == 0)
+		{
+			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+			{				
+	
+				wttip = wtr[b];
+				
+				if (yt[wttip] != null && cc == 0 && indeclinable[wttip] == null) 
+				{					
+					resy = yt[wttip];
+					cc++;
+					
+					shortdefpre[sdpv] = wttip; // for matching the dictionary entry in the output
+					sdpv++;
+				}						
+	
+			}
+		}
+		
+		if (aa == 0 && bb == 0 && cc == 0 && stoptwo != 1)
+		{
+			for (var tempsuf = 5; tempsuf > 0; tempsuf--)
+			{
+				cutsuf = wt[i].substring(wt[i].length - tempsuf);
+				//
+				if (specsuf[cutsuf]) // if it finds a special suffix as plugged in at the start
+				{
+					//alert(cutsuf);
+					addsuf = 1;
+					arraysuf = specsuf[cutsuf].split('#');
+					remembersuf = arraysuf[0];
+					dictsuf = arraysuf[2];
+					wtwt = wt[i].substring(0,wt[i].length - arraysuf[1]);
+					//alert(wtwt);
+					compsn = new Array();
+					con = 0;
+					confirst = 0;
+					confound = 0;
+					comppart.length = 0;
+					comppart = new Array();
+					conchoice = new Array();
+					conchoice.length = 0;
+					ccvar = 0;
+					cwt = new Array(); //  alternatives below
+					wtr = new Array(); // alternatives below
+					stoptwo = 1; // patches the error of double results
+					findmatch(); // run find function
+				}
+			}			
+		}
+		
+	}		
+
+
 
 // --------------------------- compound finding function  (no match for entire word) ---------------------------------
 
@@ -929,231 +1156,6 @@ function postout(dit,b)
         return null;
 	}
 
-// --------------------------- match finding function  ---------------------------------
-
-	
-	function findmatch()
-	{
-		fmx++;
-		//document.getElementById('c').innerHTML = 'fc: ' + fcx + 'cf: ' + cfx + 'fm: ' + fmx + 'mf: ' + mfx;
-		
-		//alert('fm' + ' ' + wtwt);
-		//alert(shortdefpre + ' 1');
-		
-		// ---------- create wtr variables for alternative stem matching ----------
-		
-		
-		for (var k = 0; k < wtwt.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
-		{		
-			cwt[k] = wtwt.substring(wtwt.length-k,wtwt.length);				
-		}
-		
-		
-		// ---------- stem matching and converting - note the wt doesnt change just we get alternatives ----------
-		prcount = 0;
-		wtr = new Array();
-		
-		for (var pr = 0;pr < prem.length; pr++)
-		{
-			preach = prem[pr].split('^');
-			pra = preach[0]; // ending to replace
-			prb = preach[1]; // size of old ending
-			prc = preach[2]; // size of cut
-			prd = preach[3]; // min. length for change
-			pre = preach[4]; // new ending if any
-			if (prd == 0) prd = 3;
-			if (cwt[prb] == pra && wtwt.length > prd) 
-			{
-					
-					if (pre)
-					{
-						wtr[prcount] = wtwt.substring(0, wtwt.length-prc) + pre;
-						prcount++;
-					}
-					else
-					{
-						wtr[prcount] = wtwt.substring(0, wtwt.length-prc);
-						prcount++;
-					}
-					if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'a' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'a')
-					{
-						wtr[prcount] = wtr[prcount-1] + 'a';
-						prcount++;
-					}
-					else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'u' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'u')
-					{
-						wtr[prcount] = wtr[prcount-1] + 'u';
-						prcount++;
-					}
-					else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'i' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'i')
-					{
-						wtr[prcount] = wtr[prcount-1] + 'i';
-						prcount++;
-					}					
-					//////alert(wtr);
-			}
-			
-		}
-	
-
-		
-		
-		res = new Array();
-		resn = new Array();
-	// exacts
-	
-	// exact maches
-	
-		if (mainda[wtwt] != null)
-		{
-			res[0] = mainda[wtwt]; 
-			aa++
-
-		}
-		
-		if (aa == 0) // no exact match, so we try exact matches that have a z# on the end
-		{
-			for (var a = 0; a < wtn.length; a++) // loop through z1 - z6
-			{				
-				wtxac = wtwt + wtn[a];
-				if (mainda[wtxac] != null) 
-				{
-					res[aa] = mainda[wtxac];
-					aa++;
-				}
-			}
-		}
-	
-	// alts				
-	
-		if (aa == 0) 			// if still no match, we look at variants
-		{				
-			for (var b = 0; b < wtr.length; b++) // check throuhg wtr variants that we set at the beginning
-			{			
-				wtalt = wtr[b];
-				if (mainda[wtalt] != null && indeclinable[wtalt] == null) 
-				{
-					
-					res[aa] = mainda[wtalt];				
-					aa++;
-				}
-			}
-		}
-			
-		if (aa == 0) // if still no match, look for numbered variants
-		{
-			for (b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{							
-				
-					for (var c = 0; c < wtn.length; c++) // c for numbers one to six
-					{				
-						wtaln = wtr[b] + wtn[c];
-	
-						if (mainda[wtaln] != null) 
-						{
-							res[aa] = mainda[wtaln];
-							aa++;
-						}
-					}
-			}
-		}
-		
-	// whether there is a match or not, we look for DPPN matches, because they are different from PED definitions
-	
-		bb = 0;
-		for (var d = 0; d < wtp.length; d++)
-		{				
-			wtnum = wtwt + wtp[d]; // remember that we have added f# to the end of all DPPN entries.  Here we add it to come up with wtnum
-			if (mainda[wtnum] != null && wtwt.length > 2) 
-			{					
-				resn[bb] = mainda[wtnum];
-				bb++;
-			}
-		}
-		
-		if (bb == 0)
-		{
-			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{				
-				for (var d = 0; d < wtp.length; d++)
-				{				
-					wtnum = wtr[b] + wtp[d];
-					if (mainda[wtnum] != null && wtwt.length > 2) 
-					{					
-						resn[bb] = mainda[wtnum];
-						bb++;
-					}
-				}
-			}
-		}
-		
-	// for tooltips, we don't yet care whether the PED has a match or not, but when we output, we will.
-		
-		cc = 0;
-		resy = 0;
-		wttip = wtwt;
-		if (yt[wttip] != null) 
-		{					
-			resy = yt[wttip];
-			cc++;
-
-			shortdefpre[sdpv] = wttip; // for matching the dictionary entry in the output
-			sdpv++;
-		}
-	
-		
-		if (cc == 0)
-		{
-			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{				
-	
-				wttip = wtr[b];
-				
-				if (yt[wttip] != null && cc == 0 && indeclinable[wttip] == null) 
-				{					
-					resy = yt[wttip];
-					cc++;
-					
-					shortdefpre[sdpv] = wttip; // for matching the dictionary entry in the output
-					sdpv++;
-				}						
-	
-			}
-		}
-		
-		if (aa == 0 && bb == 0 && cc == 0 && stoptwo != 1)
-		{
-			for (var tempsuf = 5; tempsuf > 0; tempsuf--)
-			{
-				cutsuf = wt[i].substring(wt[i].length - tempsuf);
-				//
-				if (specsuf[cutsuf]) // if it finds a special suffix as plugged in at the start
-				{
-					//alert(cutsuf);
-					addsuf = 1;
-					arraysuf = specsuf[cutsuf].split('#');
-					remembersuf = arraysuf[0];
-					dictsuf = arraysuf[2];
-					wtwt = wt[i].substring(0,wt[i].length - arraysuf[1]);
-					//alert(wtwt);
-					compsn = new Array();
-					con = 0;
-					confirst = 0;
-					confound = 0;
-					comppart.length = 0;
-					comppart = new Array();
-					conchoice = new Array();
-					conchoice.length = 0;
-					ccvar = 0;
-					cwt = new Array(); //  alternatives below
-					wtr = new Array(); // alternatives below
-					stoptwo = 1; // patches the error of double results
-					findmatch(); // run find function
-				}
-			}			
-		}
-		
-	}		
 
 // --------------------------- add results function  ---------------------------------
 
@@ -1204,6 +1206,11 @@ function postout(dit,b)
 	
 					tr[dd] = resn[h] + '^' + 'n' + '^1^1';
 					dd++;		
+				}
+				if (cc == 0) { // only name match, so check for compounds.
+					tr[dd] = 'newrow';
+					dd++;
+					findcompound();
 				}
 	
 			}
