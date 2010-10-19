@@ -83,6 +83,7 @@ function output(sdp)
 			{
 				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center"><i>';
 				tr[a] = '0^newrow^0^0';
+				checksum1++;
 			}
 			else
 			{
