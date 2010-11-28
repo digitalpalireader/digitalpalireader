@@ -718,8 +718,6 @@ function createTables(xmlDoc)
 									
 									postpara += afterm;
 
-									alert (postpara);
-									
 									// titles
 									
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
