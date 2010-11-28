@@ -32,3 +32,4 @@ cPrefs.push("blueh"); cPrefVals.push("powderblue");
 cPrefs.push("blueh"); cPrefVals.push("powderblue");
 
 mPrefs.push("ctrans"); mPrefVals.push("checked");
+mPrefs.push("autodict"); mPrefVals.push("checked");

@@ -23,6 +23,7 @@ pref("extensions.digitalpalireader.colors.red", "red");
 pref("extensions.digitalpalireader.colors.blueh", "powderblue");
 
 pref("extensions.digitalpalireader.misc.ctrans", "");
+pref("extensions.digitalpalireader.misc.autodict", "");
 
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.digitalpalireader@noah.yuttadhammo.description", "chrome://digitalpalireader/locale/digitalpalireader.properties");

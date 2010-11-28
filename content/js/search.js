@@ -411,6 +411,7 @@ function createTables(xmlDoc)
 	var u = xmlDoc.getElementsByTagName("h0");
 	
 	var getstring = document.form.usearch.value;
+	var gotstring;
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	if (count == 2) book = bookperm + 1;
@@ -625,28 +626,38 @@ function createTables(xmlDoc)
 									{				
 										match = 1;
 										extranummatch++;
-										endmatch = startmatch + getstring.length;
+                                        gotstring = texttomatch.match(getstring)[0];
+										endmatch = startmatch + gotstring.length;
 										beforem = texttomatch.substring(0,startmatch);
 										if (getstring.search(/^[PVMT][0-9]+\.[0-9]+$/) == 0) {  // page search
                                             beforem = beforem.substring(0,beforem.length - 3);
                                             endmatch += 4;
-                                        } 
+                                        }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font class="yellow"><b>' + getstring + '</b></font>';
+										postpara += beforem + '<font class="yellow"><b>' + gotstring + '</b></font>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
 										// get words
 										spaceb = beforem.search(' ');
-										while (spaceb > -1) {
-											beforem = beforem.substring(spaceb+1);
-											spaceb = beforem.search(' ');
+										if (gotstring.charAt(0) != ' ') {
+											while (spaceb > -1) {
+												beforem = beforem.substring(spaceb+1);
+												spaceb = beforem.search(' ');
+											}
 										}
-										spacea = afterm.search(' ');
-										aftermex = afterm.substring(0,spacea);
-										tempexword.push (beforem+getstring+aftermex);
+										else { beforem = ''; }
+										if (gotstring.charAt(gotstring.length-1) != ' ') {
+											spacea = afterm.search(' ');
+											aftermex = afterm.substring(0,spacea);
+										}
+										else { 
+											aftermex = ''; 
+											postpara += ' ';
+										}
+										tempexword.push (beforem+gotstring+aftermex);
 									}
-									
+
 									// word add
 									
 									l = tempexword.length;
@@ -706,6 +717,8 @@ function createTables(xmlDoc)
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
 									
 									postpara += afterm;
+
+									alert (postpara);
 									
 									// titles
 									

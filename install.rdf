@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>digitalpalireader@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader</em:name>
-    <em:version>0.45</em:version>
+    <em:version>0.46</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://www.sourceforge.net/projects/digitalpali</em:homepageURL>
