@@ -51,12 +51,108 @@ function output(sdp)
 	var lct = 0; //count letters
 	var lctend = 0;
 	var lctlimit = 40;
-
+	
+// create option dropdown
+	
+	var firstcheck = 1; // check for first complete output
+	var trslice = 0;
 	osout = osout + '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr><td>';
-	//alert(tr);
-	for (var a = 0; a < tr.length; a++)
+	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + tr.join(' | ');
+
+	var outputs = []; // tr output
+	var outputsd = []; // sdp output
+	var outputshow = []; // displayed in option
+	
+	var onetword = [];
+	var showword = [];
+	var onesword = [];
+	var altsel = '<select size="1" id="anfout" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onchange="tr=this.options[this.selectedIndex].value.split(\'#\'); output(document.getElementById(\'anfouts\').options[this.selectedIndex].value.split(\'#\'));" title="Select alternative interpretations here"></select><select id="anfouts" style="visibility:hidden" title="Select alternative interpretations here"></select>';
+	
+	for (var b = 0; b < tr.length; b++)
 	{
-		
+			//alert(tr[b]);
+			if (tr[b] == 'in')
+			{
+				if (firstcheck == 1) {
+					document.getElementById('anfs').innerHTML = altsel;
+					trslice = b;
+					firstcheck = 0;
+					outputs.push(onetword.join('#'));
+					outputshow.push(showword.join(''));
+					onetword = [];
+					showword = [];
+				}
+			}
+			else if (tr[b] == 'out')
+			{
+				outputs.push(onetword.join('#'));
+				outputshow.push(showword.join(''));
+				onetword = [];
+				showword = [];
+			}
+			else if (tr[b] == 'newrow')
+			{
+				if (b == tr.length-1) { document.getElementById('anfs').innerHTML = ''; break; }  // only one match
+				if (firstcheck == 1) {  // to slice tr
+					document.getElementById('anfs').innerHTML = altsel;
+					trslice = b;
+					firstcheck = 0;
+				} 
+				outputs.push(onetword.join('#'));
+				outputshow.push(showword.join(''));
+				onetword = [];
+				showword = [];
+			}
+			else if (tr[b]){
+				onetword.push(tr[b]);
+				if (tr[b].split('^')[1].length > 1) { showword.push(tr[b].split('^')[1]) }
+				if (b == tr.length-1 && firstcheck == 0) { // last entry
+					outputs.push(onetword.join('#'));
+					outputshow.push(showword.join(''));
+					onetword = [];
+					showword = [];
+				}
+
+			}
+	}
+
+	if (trslice > 0) {
+		tr = tr.slice(0,trslice);
+	}
+	trslice = 0;
+	firstcheck = 1;
+	//alert(shortdefpre);
+	for (var b = 0; b < shortdefpre.length; b++)
+	{
+			if (shortdefpre[b] == 'q')
+			{
+				if (firstcheck == 1) {  // to slice sdp
+					trslice = b;
+					firstcheck = 0;
+					if (b == shortdefpre.length-1) { break; }  // only one match
+				} 
+				outputsd.push(onesword.join('#'));
+				onesword = [];
+			}
+			else {
+				onesword.push(shortdefpre[b]);
+			}
+			//alert(onesword);
+	}
+	//document.getElementById('difb').innerHTML += '<br>' + outputs.length + ' ' + outputsd.length + ' ' + outputshow.length + '<br>' + outputs + ' | ' + outputsd + ' | ' + outputshow;
+	//return;
+	if (firstcheck == 0) {
+		shortdefpre = shortdefpre.slice(0,trslice);
+		for (i in outputs) { 
+			document.getElementById('anfout').innerHTML += '<option value="' + outputs[i] + '">' + outputshow[i] + '</option>'; 
+			document.getElementById('anfouts').innerHTML +='<option value="' + outputsd[i] + '">' + outputshow[i] + '</option>';
+		}
+	}
+	
+// display first output
+
+	for (var a = 0; a < tr.length; a++)
+	{		
 		if(tr[a])
 		{
 			//osout += '<td>' + lct + '</td>';
@@ -66,7 +162,7 @@ function output(sdp)
 			
 			if (tr[a] == 'in')
 			{
-				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center">&nbsp;(<i>';
+				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center">&nbsp;( <i>';
 				tr[a] = '0^in^0^0';
 				//alert(osout);
 				lastword = 0;
@@ -74,7 +170,7 @@ function output(sdp)
 			}
 			else if (tr[a] == 'out')
 			{
-				osout += '</i>)';
+				osout += '</i> )';
 				tr[a] = '0^out^0^0';
 				//alert('out');
 				lastword = 1;
@@ -204,9 +300,9 @@ function output(sdp)
 									sdv++;
 									
 								} 
-								else if (os[0] == 0)
+								else if (os[0] == 0) // no match
 								{
-								  osout += paliword.spell;
+								  osout += '<b style="color:' + colorcfg['coltext'] + '">' + paliword.spell + '</b>';
 								}
 								else if (paliword.isProperName == 1)  // dppn match
 								{
@@ -273,7 +369,7 @@ function output(sdp)
 									  }
 									  else
 									  {
-										 osout = osout + '<a style="color:' + colorcfg['green'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>';
+										 osout = osout + '<a style="color:' + colorcfg['coldppn'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>';
 									  }
 								   }
 								   else if (os[0] == 0)
@@ -282,7 +378,7 @@ function output(sdp)
 								   }
 								   else
 								   {
-										 osout += ' <a style="color:' + colorcfg['green'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>'; // add space
+										 osout += ' <a style="color:' + colorcfg['coldppn'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>'; // add space
 								   }
 								}
 								else  // dictionary alt match
@@ -295,7 +391,7 @@ function output(sdp)
 									  }
 									  else
 									  {
-										 osout = osout + '<a style="color:' + colorcfg['yellow'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' + paliword.spell + '</a>';
+										 osout = osout + '<a style="color:' + colorcfg['colped'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' + paliword.spell + '</a>';
 									  }
 								   }
 								   else if (os[0] == 0)
@@ -304,7 +400,7 @@ function output(sdp)
 								   }
 								   else
 								   {
-										 osout += ' <a style="color:' + colorcfg['yellow'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' +
+										 osout += ' <a style="color:' + colorcfg['colped'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' +
 														  paliword.spell + '</a>';
 								   }
 								}
@@ -368,13 +464,13 @@ function output(sdp)
 		}
 
 
-	osout += '</tr></table></td><td align=center id=c></td><td align=right valign=top><table><td align=left>';
+	osout += '</tr></table></td><td align=center id=c></td><td align=right style="">';
+	var ootmp = '';
+	if (shortdefpre.length > 1) ootmp += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.options[this.selectedIndex].innerHTML;  var spdcol = spdouts.search(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdouts.substring(0,spdcol) + \':</b> \' + spdouts.substring(spdcol+1,spdouts.length);">';
 	if (ttcheck > 0)
 	{
 		var os5array = new Array();
 		var sdpone;
-		//alert(shortdefpre + ' ' + shortdef);
-		
 		for (sdt = 0; sdt < shortdefpre.length; sdt++)
 		{
 			sdpone = shortdefpre[sdt];
@@ -401,16 +497,18 @@ function output(sdp)
 
 			os5array = sdsone.split('^');
 			if (!sddup[sdpone]) {
-				osout += '<b style="color:' + colorcfg['colcpd'] + '">' + sdpone + ':</b> ' + os5array[0] + ' (' + os5array[1] + ')';
+				if (sdt == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + sdpone + ': </b>' + os5array[0] + ' (' + os5array[1] + ')'; } 
+				if (shortdefpre.length > 1) ootmp += '<option>' + sdpone + ': ' + os5array[0] + ' (' + os5array[1] + ')</option>';
 				sddup[sdpone] = sdsone;
-				if (sdt < shortdef.length) osout += '<br>';
 			}		
 		}
 		
 	}
+	//document.getElementById('difb').innerHTML += '<br>|' + shortdefpre + '|';
+	if (shortdefpre.length > 1) ootmp += '</select>';
+	if (shortdefpre.length > 1 || (shortdefpre[0] && shortdefpre[0].length > 0)) osout += '<span id=spdout>'+sdfirst+'</span></td></tr></table>';
 
-	osout = osout + '</td></tr></table></td></tr></table>';
-
+	document.getElementById('anfsd').innerHTML = ootmp;
 	document.getElementById('anfb').innerHTML = osout;
 	//document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
 	if (hotlink != 0) {
@@ -423,7 +521,7 @@ function output(sdp)
 	tr = new Array();
 	multiple = 0;
 	
-	if (checksum1 != checksum2) document.getElementById('anfb').innerHTML += '<p>(' + checksum1 + ' ' + checksum2 + ')</p>';
+	//if (checksum1 != checksum2) document.getElementById('anfb').innerHTML += '<p>(' + checksum1 + ' ' + checksum2 + ')</p>';
 	checksum1 = 0;
 	checksum2 = 0;
 	//alert(alex);

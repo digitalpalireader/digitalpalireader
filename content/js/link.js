@@ -13,6 +13,7 @@ function postout(dit,b)
 {
 	document.form.dictin.value=dit;
 	document.form.lastsearch.value=dit;
+	document.getElementById('anfs').innerHTML = '';
 
 	var fcx = 0;
 	var cfx = 0;
@@ -652,7 +653,6 @@ function postout(dit,b)
 		{					
 			resy = yt[wttip];
 			cc++;
-
 			shortdefpre[sdpv] = wttip; // for matching the dictionary entry in the output
 			sdpv++;
 		}
@@ -1051,7 +1051,6 @@ function postout(dit,b)
 					{
 						tr[dd] = 'in';
 						dd++;
-						////alert('in');
 					}
 						//////alert(comppart);
 					for (var ctemp = 0; ctemp < comppart.length; ctemp++)
@@ -1073,6 +1072,7 @@ function postout(dit,b)
 				
 				//alert('add from cf1')
 					
+					shortdefpost.push('q');
 					addresults();
 				
 					wt[i] = wtpre;
@@ -1115,7 +1115,6 @@ function postout(dit,b)
 					{
 						tr[dd] = 'in';
 						dd++;
-						////alert('in');
 					}
 						//////alert(comppart);
 					for (var ctemp = 0; ctemp < comppart.length; ctemp++)
@@ -1128,7 +1127,8 @@ function postout(dit,b)
 					}
 		
 				//alert('add from cf2' + wtpre + wtwt)
-					addresults();
+				shortdefpost.push('q');
+				addresults();
 					
 				}
 				wt[i] = wtpre;
@@ -1210,6 +1210,7 @@ function postout(dit,b)
 				if (cc == 0) { // only name match, so check for compounds.
 					tr[dd] = 'newrow';
 					dd++;
+					shortdefpost.push('q');
 					findcompound();
 				}
 	
