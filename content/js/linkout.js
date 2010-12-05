@@ -612,3 +612,49 @@ function DPPNXML(file)
 	document.getElementById('lb').innerHTML = bout;
 
 }
+
+function noah()
+{
+	var dataout = '';
+	for (i = 0; i <= 4; i++) {
+	
+		var pedp = 'etc/XML1/'+ i +'/ped.xml';
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", pedp, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var cntx = xmlDoc.getElementsByTagName('data').length;
+		var noc = ''; 
+		var nocd = 'x';
+		var nocdo;
+		for (e = 0; e < cntx; e++) {
+			noc = i+'/'+e;
+			if ( noahda[noc]) {
+				if ( noahda[noc].charAt(0) != nocd.charAt(0)) { dataout += '<h1>' + noahda[noc].charAt(0) + '</h1>\n'; }
+				nocd = noahda[noc];
+				var dataa = xmlDoc.getElementsByTagName('data')[e].getElementsByTagName('sdata');
+				var data = '';
+				for (j=0; j<dataa.length; j++) {
+					data += dataa[j].childNodes[0].nodeValue;
+				}
+				nocdo = nocd.replace(/aa/g, 'ā');
+				nocdo = nocdo.replace(/ii/g, 'ī');
+				nocdo = nocdo.replace(/uu/g, 'ū');
+				nocdo = nocdo.replace(/,t/g, 'ṭ');
+				nocdo = nocdo.replace(/,d/g, 'ḍ');
+				nocdo = nocdo.replace(/`n/g, 'ṅ');
+				nocdo = nocdo.replace(/,n/g, 'ṇ');
+				nocdo = nocdo.replace(/,m/g, 'ṃ');
+				nocdo = nocdo.replace(/\~n/g, 'ñ');
+				nocdo = nocdo.replace(/,l/g, 'ḷ');				
+				nocdo = nocdo.replace(/`/g, '-');
+				nocdo = nocdo.replace(/z/g, ' ');
+				dataout	+= '<h2>' + nocdo + '</h2>\n<p>' + data + '\n';
+			}
+		}
+	}
+	
+	writeFile('PEDdata.html', dataout, 'UTF-8')
+}

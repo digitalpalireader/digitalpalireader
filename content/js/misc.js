@@ -14,8 +14,8 @@ function moveframex(a) //read, etc
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('leftbot').style.display = 'none';
-            document.getElementById('maf').style.bottom = (parseInt(confmove[0])-4) + 'px';
-            document.getElementById('anf').style.bottom = '-10px';
+            document.getElementById('maf').style.bottom = (parseInt(confmove[0])+16) + 'px';
+            document.getElementById('anf').style.bottom = '-0px';
             document.getElementById('anf').style.top = '';
             break;
         case 2:  //normal view
@@ -39,12 +39,12 @@ function moveframex(a) //read, etc
             document.getElementById('leftbot').style.display = 'block';
 
             document.getElementById('leftbot').style.height = 'auto';
-            document.getElementById('leftbot').style.top = (parseInt(confmove[0])+4) + 'px';
+            document.getElementById('leftbot').style.top = (parseInt(confmove[0])+16) + 'px';
             document.getElementById('leftbot').style.bottom = '0px';
             
 
             
-            document.getElementById('anf').style.top = '-10px';
+            document.getElementById('anf').style.top = '0px';
             document.getElementById('anf').style.bottom = '';
             break;
     }

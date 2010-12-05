@@ -33,6 +33,7 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/noah_data.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript">
 
@@ -229,13 +230,13 @@ function moveit(one,two,three,four)
             </div>
             <div align="center" style="padding-top:10px">
                 <b name="changecolor">Dictionary</b>
-                <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" onclick="document.form.dictin.value=''; document.getElementById('anfb').innerHTML = ''; document.form.lastsearch.value = '';" name="sped">
+                <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
                     <option selected>DPR</option>
                     <option>PED</option>
-                    <option>EPD</option>
-                    <option>DPN</option>
-                    <option>CPD</option>
-                    <option>ATT</option>
+                    <option>CEPD</option>
+                    <option>DPPN</option>
+                    <option>CPED</option>
+                    <option>ATTH</option>
                 </select> 
                 <br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <input type="button" class="btn" value=">" title="Look up entry" onClick="createTableman(1)">
             </div>

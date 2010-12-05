@@ -462,11 +462,6 @@ function createTables(xmlDoc)
 	var perstring = '';
 	var yesall = 0;
 	
-	var clrstring = new Array();
-	clrstring[0] = 'yellow';
-	clrstring[1] = 'blue';
-	clrstring[2] = 'green';
-	
 	var yesplus = getstring.search(/\u002B/); // look for multi matches
 	if (yesplus >= 0) {
 		stringra = getstring.split('+');
@@ -527,7 +522,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font class="' + clrstring[d] + '"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -634,7 +629,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font class="yellow"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										

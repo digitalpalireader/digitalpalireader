@@ -69,8 +69,11 @@ function writeFile(aFileKey, aContent, aChars)
     try {
         aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
         var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
-        ostream.init(aFile, 2, 0x200, false);
-        ostream.write(aContent, aContent.length);
+        ostream.init(aFile, 0x02, 0666, 0);
+		var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);  
+		converter.init(ostream, "UTF-8", 0, 0);  
+		converter.writeString(aContent);  
+		converter.close();
         ostream.close();
     }
     catch(ex)

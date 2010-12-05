@@ -13,6 +13,7 @@ function postout(dit,b)
 {
 	document.form.dictin.value=dit;
 	document.form.lastsearch.value=dit;
+	document.form.sped.selectedIndex=0;
 	document.getElementById('anfs').innerHTML = '';
 
 	var fcx = 0;

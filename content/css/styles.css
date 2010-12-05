@@ -1,5 +1,5 @@
 html, body {
-background-image:url('../images/background.gif'); 
+ 
 width: 100%;
 height: 100%;
 margin:0;
@@ -34,7 +34,7 @@ bottom:0px;
 left:0px;
 top:0px;
 right:250px;
-background-image:url('../images/background.gif'); 
+ 
 }
 #searchtb {
 position:absolute; 
@@ -136,7 +136,7 @@ left:0px
 }
 #anfsd {
 position:absolute; 
-bottom:2px; 
+bottom:4px; 
 right:0px
 }
 #leftbot {  
@@ -163,18 +163,18 @@ bottom:0px;
 
 padding-left:10px; 
 padding-right:10px;
-background-image:url('../images/background.gif'); 
+ 
 }
 #cof {
 padding-left:10px; 
 padding-right:10px;
-background-image:url('../images/background.gif'); 
+ 
 display:none;
 }
 #scf {
 padding-left:10px; 
 padding-right:10px;
-background-image:url('../images/background.gif'); 
+ 
 display:none;
 }
 #difb {

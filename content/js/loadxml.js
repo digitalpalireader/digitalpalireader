@@ -17,8 +17,14 @@ function gettitles(altget,stop,prev,ssect)
 	if (stop == 3)
 	{
 		hier = prev;
-		if (hier == 'a') document.getElementById('hier').innerHTML='<input type="button" class="btn" name="hier" id="hierv" value="m" onclick="gettitles(0,3,\'m\')" title="Switch to Mula">';
-		else document.getElementById('hier').innerHTML='<input type="button" class="btn" value="a" name="hier" id="hierv" onclick="gettitles(0,3,\'a\')" title="Switch to Commentary">';
+		if (hier == 'a') {
+			document.getElementById('hier').innerHTML='<input type="button" class="btn" name="hier" id="hierv" value="m" onclick="gettitles(0,3,\'m\')" title="Switch to Mula">';
+			if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
+		}
+		else {
+			document.getElementById('hier').innerHTML='<input type="button" class="btn" value="a" name="hier" id="hierv" onclick="gettitles(0,3,\'a\')" title="Switch to Commentary">';
+			if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
+		}
 		newload = 2;
 	}
 	if (prev) prevyes = 1;
@@ -357,21 +363,25 @@ function importXMLindex() {
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
 		theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue;
+		if (z.length > 1 && theData == ' ') { theData = 'unnamed'; } 
 		if (theData != ' ') theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="green"><b>' + replaceunistandard(theData) + '</b></font></a><br>';
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
 			theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue;
+			if (y.length > 1 && theData == ' ') { theData = 'unnamed'; }
 			if (theData != ' ') theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="yellow">' + replaceunistandard(theData) + '</font></a><br>';
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
 				theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue;
+				if (x.length > 1 && theData == ' ') { theData = 'unnamed'; }
 				if (theData != ' ') theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="maroon">' + replaceunistandard(theData) + '</font></a><br>';
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
 					theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue;
+					if (w.length > 1 && theData == ' ') { theData = 'unnamed'; }
 					if (theData != ' ') {
                         theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="darkslateblue">' + replaceunistandard(theData) + '</font></a>';
                         var transin;
@@ -390,6 +400,7 @@ function importXMLindex() {
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
 						theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue;
+						if (v.length > 1 && theData == ' ') { theData = 'unnamed'; }
 						if (theData != ' ') {
                             theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="black">' + replaceunistandard(theData) + '</font></a>';
                             var transin;
@@ -408,6 +419,7 @@ function importXMLindex() {
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
 							theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue;
+							if (z.length > 1 && theData == ' ') { theData = 'unnamed'; }
 							if (theData != ' ') {
                                 theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="blue">' + replaceunistandard(theData) + '</font></a>';
                                 var transin;
@@ -428,6 +440,7 @@ function importXMLindex() {
 			}
 		}
 	}
+
 	document.getElementById('mafb').innerHTML = theDatao;  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
@@ -574,8 +587,6 @@ function importXML(manxml,labelsearchtemp)
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 
-
-
 	var meta = document.form.meta.selectedIndex;
 	var volume = document.form.volume.selectedIndex;
 	var vagga = document.form.vagga.selectedIndex;
@@ -665,6 +676,8 @@ function importXML(manxml,labelsearchtemp)
 			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
 		}
 	}
+
+
 	preout(theData);
 	if (document.getElementById('manrem').value < 0)
 	{

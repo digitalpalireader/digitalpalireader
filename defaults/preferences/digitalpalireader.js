@@ -10,9 +10,14 @@ pref("extensions.digitalpalireader.colors.coldppn", "#00B900");
 pref("extensions.digitalpalireader.colors.colped", "#CC4400");
 pref("extensions.digitalpalireader.colors.colcpd", "#5353D5");
 
+pref("extensions.digitalpalireader.colors.colbk", "#FFFFFF");
 pref("extensions.digitalpalireader.colors.colbk1", "yellow");
-pref("extensions.digitalpalireader.colors.colbk1", "aqua");
-pref("extensions.digitalpalireader.colors.colbk3", "chartruese");
+pref("extensions.digitalpalireader.colors.colbk2", "aqua");
+pref("extensions.digitalpalireader.colors.colbk3", "green");
+
+pref("extensions.digitalpalireader.colors.colsearch0", "yellow");
+pref("extensions.digitalpalireader.colors.colsearch1", "blue");
+pref("extensions.digitalpalireader.colors.colsearch2", "green");
 
 pref("extensions.digitalpalireader.colors.green", "#00B900");
 pref("extensions.digitalpalireader.colors.blue", "#5353D5");
@@ -24,6 +29,7 @@ pref("extensions.digitalpalireader.colors.blueh", "powderblue");
 
 pref("extensions.digitalpalireader.misc.ctrans", "");
 pref("extensions.digitalpalireader.misc.autodict", "");
+pref("extensions.digitalpalireader.misc.bkgimg", "checked");
 
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.digitalpalireader@noah.yuttadhammo.description", "chrome://digitalpalireader/locale/digitalpalireader.properties");
