@@ -11,6 +11,7 @@ var shortdefpost = new Array();
 
 function postout(dit,b)
 {
+	dit = replacevelstandard(dit);
 	document.form.dictin.value=dit;
 	document.form.lastsearch.value=dit;
 	document.form.sped.selectedIndex=0;

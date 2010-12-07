@@ -1,34 +1,68 @@
 var getsutta = 0;
 var prevyes = 0;
-var newload = 0;
 var searchsect = 0;
 var stop = 0;
 var labelsearch = null;
 
+function limitt() {
+	if (document.form.nik.selectedIndex < 1 ||  document.form.nik.selectedIndex > 4) { return true; }
+	else { return false };
+}
+
+function switchhier(htmp) {
+	if (htmp == 't' && limitt()) { 
+		return; 
+	}
+	hier = htmp;
+	var hia = 'hier'+hier+'a';
+	var hii = 'hier'+hier+'i';
+	
+	document.getElementById('hierma').onclick = function() {gettitles(0,3,'m');};
+	document.getElementById('hieraa').onclick = function() {gettitles(0,3,'a');};
+	document.getElementById('hierta').onclick = function() {gettitles(0,3,'t');};
+	document.getElementById('hierma').title = 'Change to Mūla';
+	document.getElementById('hieraa').title = 'Change to Aṭṭhakathā';
+	document.getElementById('hierta').title = 'Change to Ṭīkā';
+	document.getElementById('hierma').blur();
+	document.getElementById('hieraa').blur();
+	document.getElementById('hierta').blur();
+	
+	document.getElementById('hiermi').src = 'images/m0.jpg';
+	document.getElementById('hierai').src = 'images/a0.jpg';
+	document.getElementById('hierti').src = 'images/t0.jpg';
+	
+	document.getElementById(hia).onclick = function() {
+		void(0);
+	}
+	document.getElementById(hia).title = '';
+	document.getElementById(hii).src = 'images/'+hier+'1.jpg';
+		
+	if (hier == 'a') { 
+		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
+	}
+	else if (hier == 'm'){
+		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
+	}
+}	
+
 function gettitles(altget,stop,prev,ssect)
 {
+	var newload = 0;
+	
 	if (altget == 1 || altget == 3) getsutta = 1; // only remake section lists
 	if (altget == 4) getsutta = 2; // remake section and sutta lists only, not vagga, volume or meta lists
 	if (altget == 5) getsutta = 3; // remake section, sutta and vagga lists only, not volume or meta lists
 	if (altget == 6) getsutta = 4; // remake all but meta lists
 	if (ssect) searchsect = ssect;
+	if (stop == 0) newload = 0; // load xml data
 	if (stop == 1) newload = 1; // don't load xml data
 	if (stop == 2) newload = 2; // don't load xml data, load index instead
-	if (stop == 3)
-	{
-		hier = prev;
-		if (hier == 'a') {
-			document.getElementById('hier').innerHTML='<input type="button" class="btn" name="hier" id="hierv" value="m" onclick="gettitles(0,3,\'m\')" title="Switch to Mula">';
-			if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
-		}
-		else {
-			document.getElementById('hier').innerHTML='<input type="button" class="btn" value="a" name="hier" id="hierv" onclick="gettitles(0,3,\'a\')" title="Switch to Commentary">';
-			if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
-		}
-		newload = 2;
-	}
+	if (stop == 3) { switchhier(prev); newload = 2 };
 	if (prev) prevyes = 1;
-     
+	if ((hier == 't' || prev == 't') && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		return; 
+	}     
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
@@ -38,7 +72,6 @@ function gettitles(altget,stop,prev,ssect)
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
  
-
 	/*var divh = document.getElementById('topdiv').offsetHeight;
 	var toth = window.innerHeight;
 	var pos = (toth - divh)/2 - 25; 
@@ -228,6 +261,7 @@ function gettitles(altget,stop,prev,ssect)
 		vaggalist += '</select>'
 		document.getElementById('vagga').innerHTML=vaggalist;
 	}
+
 	if (getsutta != 1) // remake sutta list on getsutta = 0, 2, or 3
 	{
 		for (var a = 0; a < x.length; a++)
@@ -316,14 +350,16 @@ function gettitles(altget,stop,prev,ssect)
 	else if (newload == 2) importXMLindex();
 	getsutta = 0;
 	prevyes = 0;
-	newload = 0;
 	searchsect = 0;
 	stop = 0;
 }
 
 
 function importXMLindex() {
-	
+	if (hier == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		return; 
+	}	
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
@@ -351,7 +387,8 @@ function importXMLindex() {
 	document.getElementById('mafa').innerHTML = '';
 	document.getElementById('mafb').innerHTML = '';
 
-
+	var unnamed = '(unnamed)';
+	
 	var tmp = 0;
 	var tmp1 = 0;
 	var tmp2 = 0;
@@ -363,25 +400,25 @@ function importXMLindex() {
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
 		theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue;
-		if (z.length > 1 && theData == ' ') { theData = 'unnamed'; } 
+		if (z.length > 1 && theData == ' ') { theData = unnamed; } 
 		if (theData != ' ') theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="green"><b>' + replaceunistandard(theData) + '</b></font></a><br>';
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
 			theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue;
-			if (y.length > 1 && theData == ' ') { theData = 'unnamed'; }
+			if (y.length > 1 && theData == ' ') { theData = unnamed; }
 			if (theData != ' ') theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="yellow">' + replaceunistandard(theData) + '</font></a><br>';
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
 				theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue;
-				if (x.length > 1 && theData == ' ') { theData = 'unnamed'; }
+				if (x.length > 1 && theData == ' ') { theData = unnamed; }
 				if (theData != ' ') theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="maroon">' + replaceunistandard(theData) + '</font></a><br>';
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
 					theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue;
-					if (w.length > 1 && theData == ' ') { theData = 'unnamed'; }
+					if (w.length > 1 && theData == ' ') { theData = unnamed; }
 					if (theData != ' ') {
                         theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="darkslateblue">' + replaceunistandard(theData) + '</font></a>';
                         var transin;
@@ -400,7 +437,7 @@ function importXMLindex() {
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
 						theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue;
-						if (v.length > 1 && theData == ' ') { theData = 'unnamed'; }
+						if (v.length > 1 && theData == ' ') { theData = unnamed; }
 						if (theData != ' ') {
                             theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="black">' + replaceunistandard(theData) + '</font></a>';
                             var transin;
@@ -419,7 +456,7 @@ function importXMLindex() {
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
 							theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue;
-							if (z.length > 1 && theData == ' ') { theData = 'unnamed'; }
+							if (z.length > 1 && theData == ' ') { theData = unnamed; }
 							if (theData != ' ') {
                                 theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="blue">' + replaceunistandard(theData) + '</font></a>';
                                 var transin;
@@ -448,7 +485,10 @@ function importXMLindex() {
 
 function importXMLraw()
 {
-	
+	if (hier == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		return; 
+	}
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
@@ -560,6 +600,10 @@ var hier = 'm'; // m = mula, a = atthakatha
 
 function importXML(manxml,labelsearchtemp)
 {
+	if (hier == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		return; 
+	}
 
 	document.getElementById('mafa').innerHTML='';
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
@@ -619,12 +663,19 @@ function importXML(manxml,labelsearchtemp)
 	var xna = xn[0].childNodes[0].nodeValue;
 	var yna = yn[0].childNodes[0].nodeValue;
 	var zna = zn[0].childNodes[0].nodeValue;
-
+	
 	convtitle(nikaya,book,vna,wna,xna,yna,zna);
-	if (zna.length > 0 ) {
-		var bkgive = zna.replace(/ /g, '');
-		document.form.bmname.value = bkgive;
-	}
+
+	if (zna.length > 1) { var bknameme = zna }
+	else if (yna.length > 1) { var bknameme  = yna }
+	else if (xna.length > 1) { var bknameme  = xna }
+	else if (wna.length > 1) { var bknameme  = wna }
+	else if (vna.length > 1) { var bknameme  = vna }
+	
+	bknameme = bknameme.replace(/ /g, '');
+	
+	document.form.bmname.value = bknameme;
+	
 	var theData = '';
 	var onepar;
 	var quit = 0;
@@ -723,15 +774,10 @@ var setplace = new Array();
 
 function getplace(temp) { // standard function to get a place from an array
 	setplace = temp;
-
-	if (setplace[7] == 'm') {
-		hier = 'a';
-		document.getElementById('hier').innerHTML='<input type="button" class="btn" id="hierv" name="hier" value="m" onclick="gettitles(0,3,\'m\')" title="Switch to Mula">';
-	}
-	else {
-		hier = 'm';
-		document.getElementById('hier').innerHTML='<input type="button" class="btn" value="a" id="hierv" name="hier" onclick="gettitles(0,3,\'a\')" title="Switch to Commentary">';
-	}
+	
+	if (setplace[7] == 'm') { setplace[7] == 'a'; } // backwards!
+	else if (setplace[7] == 'a') { setplace[7] == 'm'; } // backwards!
+	switchhier(setplace[7]);
 
 	var sp0 = setplace[0];
 	var nikaya = document.form.nik[sp0].value;

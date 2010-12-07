@@ -58,6 +58,10 @@ knames.push('Pet');
 
 function changenikaya(noget)
 {
+	if (hier == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		return; 
+	} 
 	var nik = document.form.nik.value;
 	if (nik != '') 
 	{
@@ -172,12 +176,12 @@ function createTablen()
 					else
 					{
 						window.alert('End of Book');
+						return;
 					}
 				}
 			}
 		}
 	}
-
 }
 
 function createTablep()

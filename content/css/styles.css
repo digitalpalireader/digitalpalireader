@@ -7,13 +7,11 @@ padding:0;
 overflow: hidden;
 }
 
-select { font-family: sans-serif; font-size: 14px; border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; background: white}
+select { font-family: sans-serif; font-size: 14px; border: #000000; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; background: white;}
 
 input.btn {
   font: bold 84% 'courier new';
   border: 1px solid;
-  filter:progid:DXImageTransform.Microsoft.Gradient
-  (GradientType=0,StartColorStr='#ffffffff',EndColorStr='#ffeeddaa');
 }
 
 div        { 

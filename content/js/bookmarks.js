@@ -58,7 +58,7 @@ function bookmarkc(let)
 
 function bookmarks(let)
 {
-	var bookmarktemp = document.form.nik.selectedIndex + '#' + document.form.book.selectedIndex  + '#' + document.form.meta.selectedIndex  + '#' + document.form.volume.selectedIndex  + '#' + document.form.vagga.selectedIndex  + '#' + document.form.sutta.selectedIndex + '#' + document.form.section.selectedIndex + '#' + document.form.hier.value;
+	var bookmarktemp = document.form.nik.selectedIndex + '#' + document.form.book.selectedIndex  + '#' + document.form.meta.selectedIndex  + '#' + document.form.volume.selectedIndex  + '#' + document.form.vagga.selectedIndex  + '#' + document.form.sutta.selectedIndex + '#' + document.form.section.selectedIndex + '#' + hier;
 	
 	// create first cookie for page
 	
@@ -89,8 +89,7 @@ function bookmarks(let)
 		writeFile('DPS'+nameadd, cookscroll+"", "UTF-8");
 		
 		// create third cookie for description 
-		
-		var desquote = replacevelstandard(document.getSelection());
+		var desquote = replacevelstandard(window.getSelection().toString());
 		
 		desquote = desquote.replace(/;/g, "::");
 		if (desquote) writeFile('DPD'+nameadd,desquote, "UTF-8");
@@ -222,8 +221,9 @@ function bookmarkframe(refresh)
 				cloc[4]++;
 				cloc[5]++;
 				cloc[6]++;
-				if (cloc[7] == 'm') cloc[7] = 'att';
-				else cloc[7] = 'mul';
+				if (cloc[7] == 'm') cloc[7] = 'att'; //backwards!
+				else if (cloc[7] == 'a') cloc[7] = 'mul'; //backwards!
+				else {cloc[7] = 'ṭīkā';}
 				
 				allcookies +=  '<tr><td><table width=100%><tr><td class="blueh"><b><a href="javascript:void(0)" onclick="bookmarkc(\'' + name + '\')">' + cookietotalno + '. ' + name + ' </b>('+ niknoname[cloc[0]] + '.' + cloc[1] + '.' + cloc[2] + '.' + cloc[3] + '.' + cloc[4] + '.' + cloc[5] + '.' + cloc[6] + ' - ' + cloc[7] + ')</a></td><td align=right width="64" class="blueh"><input value="+" title="click here to edit this bookmark" type="button" id="hiderbutton' + name + '" onClick="hiddenout(\'' + name + '\')"><input value="x" type="button" onClick="erasecookie(\'' + name + '\')"><tr><td><i><font id="title' + name + '">&nbsp;</font></i></tr></table></td></tr>';
 				allcookies +=  '<tr><td><div class="hide" id="'+ name + '"><table width=100%><tr bgcolor="chartreuse"><td align=center><b>Old Name</b><td align=center><b>New Name</b><td><tr><td align=center>' + name + '<td align=center><input type=text value="" id="newname' + name + '" title="Enter a new name for this bookmark (max. 10 chars)" size=12><td align=center><input type=button value=change onClick="bookmarkxn(\'' + name + '\')" title="Change Name"></table></div></td></tr>';

@@ -202,12 +202,11 @@ function moveit(one,two,three,four)
                 <div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
             </div>
             <div align="center" style="padding-top:10px">
-                <input type="button" class="btn" value="<" title="Retrieve last section" onClick="createTablep()">
-                <input type="button" class="btn" value="Go" onClick="importXML()" title="Retrieve the section for analysis" accesskey="g">
-                <input type="button" class="btn" value=">" title="Retrieve next section" onClick="createTablen()"><br>
-                <input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthuis Pali">
-                <b id="hier"><input type="button" class="btn" id="hierv" name="hier" value="a" onclick="gettitles(0,3,'a')" title="Switch to Commentary"></b>
-                <span id="script"><input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script"></span>
+				<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.jpg';" onclick="this.blur(); createTablep()"><img src="images/<0.jpg" /></a><img src="images/mats.jpg" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.jpg';" onclick="this.blur(); importXML()"><img src="images/go0.jpg" /></a><img src="images/mats.jpg" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.jpg';" onclick="this.blur(); createTablen()"><img src="images/>0.jpg" /></a> 
+				<!--<input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthuis Pali">-->
+				<b id="hier"><span><a id="hierma" href="javascript:void(0)" onclick="void(0)"><img id="hiermi" src="images/m1.jpg" /></a></span><span><img src="images/mats.jpg" /></span><span><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="gettitles(0,3,'a')"><img id="hierai" src="images/a0.jpg" /></a></span><span><img src="images/mats.jpg" /></span><span><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="gettitles(0,3,'t')"><img id="hierti" src="images/t0.jpg" /></a></span></b><br />
+				<span id="script"><input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script"></span>
+				
                 <!--<input type="button" class="btn" value="1" onClick="getlink(1)" title="Recall saved file '1.htm'">-->
             </div>
             <div align="center" style="padding-top:10px">
@@ -229,7 +228,7 @@ function moveit(one,two,three,four)
                 </table>
             </div>
             <div align="center" style="padding-top:10px">
-                <b name="changecolor">Dictionary</b>
+                <b name="changecolor">Dictionary</b>&nbsp;
                 <select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
                     <option selected>DPR</option>
                     <option>PED</option>
@@ -244,9 +243,7 @@ function moveit(one,two,three,four)
         <div align=center id="rright">
             <div style="position:relative; padding-top:10px;">
                 <div>
-                    <input type="button" class="btn" value="R" title="Maximize Read Frame" onClick="moveframex(1)" accesskey="r">
-                    <input type="button" class="btn" value="A" title="Restore to Analysis Mode" onClick="moveframex(2)" accesskey="a">
-                    <input type="button" class="btn" value="D" title="Maximize dIctionary Frame" onClick="moveframex(3)" accesskey="i">
+					<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R1.jpg" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.jpg" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.jpg" /></a>
                 </div>
                 <div style="padding-top:10px">
                     <input type="button" class="btn" value="D" title="Bring up the Definitions" onClick="moveframey('dif')" accesskey="d">

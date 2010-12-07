@@ -11,6 +11,9 @@ function moveframex(a) //read, etc
     moves(0);
     switch (a) {
         case 1: //read
+			document.getElementById('RM').src="images/R1.jpg";
+			document.getElementById('AM').src="images/A0.jpg";
+			document.getElementById('DM').src="images/D0.jpg";
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('leftbot').style.display = 'none';
@@ -19,6 +22,9 @@ function moveframex(a) //read, etc
             document.getElementById('anf').style.top = '';
             break;
         case 2:  //normal view
+			document.getElementById('RM').src="images/R0.jpg";
+			document.getElementById('AM').src="images/A1.jpg";
+			document.getElementById('DM').src="images/D0.jpg";
             moveat = 2;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('leftbot').style.display = 'block';
@@ -32,6 +38,9 @@ function moveframex(a) //read, etc
             document.getElementById('leftbot').style.top = '';
             break;
         case 3: // dict
+			document.getElementById('RM').src="images/R0.jpg";
+			document.getElementById('AM').src="images/A0.jpg";
+			document.getElementById('DM').src="images/D1.jpg";
             moveat = 3;
             moveframey('dif'); // switch to dict
             
