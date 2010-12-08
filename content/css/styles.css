@@ -11,7 +11,6 @@ select { font-family: sans-serif; font-size: 14px; border: #000000; border-style
 
 input.btn {
   font: bold 84% 'courier new';
-  border: 1px solid;
 }
 
 div        { 
@@ -32,12 +31,12 @@ bottom:0px;
 left:0px;
 top:0px;
 right:250px;
- 
+z-index:2000;
 }
 #searchtb {
 position:absolute; 
 left:0;
-bottom:0;
+bottom:-4px;
 height:4px;
 width:100%;
 background-image:url('../images/bottomtrans.png'); 
@@ -47,7 +46,7 @@ top:0;
 left:0;
 right:0px;
 position:absolute; 
-height:50px;
+height:46px;
 background-color:#d9d4cc; 
 }
 #stfab {
@@ -68,9 +67,14 @@ padding-left:10px;
 padding-right:10px; 
 overflow:auto;
 }
-
-
-
+#sbr {
+position:absolute; 
+right:0;
+top:0;
+width:4px;
+height:100%;
+background-image:url('../images/lefttrans.png'); 
+}
 #left {  
 position:absolute;
 bottom:0px;
@@ -106,6 +110,7 @@ width:100%;
 background-image:url('../images/bottomtrans.png'); 
 }
 #anf {
+border-top: grey 1px solid;
 position:absolute;
 bottom:152px;
 left:0px;
@@ -114,6 +119,7 @@ padding-top:10px;
 padding-bottom:10px; 
 height:60px; 
 background-image:url('../images/anback.png');
+z-index:1000;
 }
 #anft {
 padding-top:2px; 
@@ -137,6 +143,24 @@ position:absolute;
 bottom:4px; 
 right:0px
 }
+
+#corb {
+position:absolute; 
+bottom:2px; 
+right:0px
+}
+#cort {
+position:absolute; 
+top:-2px; 
+right:0px
+}
+
+#cors {
+position:absolute; 
+top:50px; 
+right:0px
+}
+
 #leftbot {  
 position:absolute; 
 bottom:0px;

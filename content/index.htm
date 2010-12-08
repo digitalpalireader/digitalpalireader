@@ -11,10 +11,7 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/german.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/french.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/spanish.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/thai.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
@@ -33,7 +30,6 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/noah_data.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript">
 
@@ -116,6 +112,11 @@ function moveit(one,two,three,four)
 									<td align="center" name="changecolor">Thai</td>
 									<td align="center"><input type="radio" value="V4" name="R2" onclick="javascript:changeit('t',2)"></td>
 								</tr>
+								<tr>
+									<td align="center"><input type="radio" disabled=yes value="V5" name="R1" onclick="javascript:changeit('d',1)"></td>
+									<td align="center" name="changecolor">Deva</td>
+									<td align="center"><input type="radio" value="V5" name="R2" onclick="javascript:changeit('d',2)"></td>
+								</tr>
 							</table>
 						</td>
 						<td align=right><textarea id="output" rows="8" cols="35" style="font-family: Arial"></textarea>
@@ -126,7 +127,7 @@ function moveit(one,two,three,four)
 		</div>
 		<div id="scf" align=center>
 			<table><tr><td colspan=2><textarea id="pad" rows="10" cols="120"></textarea></td></tr></table>
-			<input type=button value="Analyze" onclick="document.getElementById('mafa').innerHTML = 'Input From Scratchpad'; preout(document.getElementById('pad').value + '&lt;br&gt;'); moveframex(2);">
+			<input type=button value="Analyze" onclick="document.getElementById('mafa').innerHTML = '<font class=&quot;blue&quot>Input From Scratchpad</font>'; preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;'); moveframex(2);">
 		</div>
 	</div>
 	<div id="anf" align=right name="changecolor">
@@ -139,6 +140,9 @@ function moveit(one,two,three,four)
         </div>
 		<div id="anfs"></div>
 		<div id="anfsd"></div>
+		<div id="cort"><img src="images/cort.png" /></div>
+		<div id="corb"><img src="images/corb.png" /></div>
+		
 	</div>
 </div>
 <div id="search">
@@ -146,8 +150,8 @@ function moveit(one,two,three,four)
 		<div align="left" id="sbfa"></div>
 		<a name="sbftop"></a>
 		<div align="justify" id="sbfab"></div>
-		<div align="justify" id="sbfb"> 
-		</div>		
+		<div align="justify" id="sbfb"></div>
+		<div id="sbr"></div>		
 	</div>
 	<div id="searcht">
         <div align="justify" id="stfb">
@@ -156,6 +160,7 @@ function moveit(one,two,three,four)
 		</div>
         <div id="searchtb"></div>
 	</div>
+	<div id="cors"><img src="images/corb.png" /></div>
 </div>
 <div id="right">
     <div id="brleft"></div>
@@ -202,12 +207,11 @@ function moveit(one,two,three,four)
                 <div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
             </div>
             <div align="center" style="padding-top:10px">
-				<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.jpg';" onclick="this.blur(); createTablep()"><img src="images/<0.jpg" /></a><img src="images/mats.jpg" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.jpg';" onclick="this.blur(); importXML()"><img src="images/go0.jpg" /></a><img src="images/mats.jpg" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.jpg';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.jpg';" onclick="this.blur(); createTablen()"><img src="images/>0.jpg" /></a> 
+				<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> 
 				<!--<input type="button" class="btn" value="vel" onClick="importXMLraw()" title="Retrieve the raw Velthuis Pali">-->
-				<b id="hier"><span><a id="hierma" href="javascript:void(0)" onclick="void(0)"><img id="hiermi" src="images/m1.jpg" /></a></span><span><img src="images/mats.jpg" /></span><span><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="gettitles(0,3,'a')"><img id="hierai" src="images/a0.jpg" /></a></span><span><img src="images/mats.jpg" /></span><span><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="gettitles(0,3,'t')"><img id="hierti" src="images/t0.jpg" /></a></span></b><br />
-				<span id="script"><input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script"></span>
+				<span><a id="hierma" href="javascript:void(0)" onclick="void(0)"><img id="hiermi" src="images/m1.png" /></a></span><span><img src="images/mats.png" /></span><span><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="gettitles(0,3,'a')"><img id="hierai" src="images/a0.png" /></a></span><span><img src="images/mats.png" /></span><span><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="gettitles(0,3,'t')"><img id="hierti" src="images/t0.png" /></a></span><br />
+				<span><a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a></span><span><img src="images/mats.png" /></span><span><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a></span><span><img src="images/mats.png" /></span><span><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a></span>
 				
-                <!--<input type="button" class="btn" value="1" onClick="getlink(1)" title="Recall saved file '1.htm'">-->
             </div>
             <div align="center" style="padding-top:10px">
                 <a href="javascript:bookmarkframe()" title="Show a list of all bookmarks"><b name="changecolor">Bookmarks</b></a><br>
@@ -243,12 +247,10 @@ function moveit(one,two,three,four)
         <div align=center id="rright">
             <div style="position:relative; padding-top:10px;">
                 <div>
-					<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R1.jpg" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.jpg" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.jpg" /></a>
+					<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/horizbtnspace.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a>
                 </div>
                 <div style="padding-top:10px">
-                    <input type="button" class="btn" value="D" title="Bring up the Definitions" onClick="moveframey('dif')" accesskey="d">
-                    <input type="button" class="btn" value="C" title="Bring up the Converter" onClick="moveframey('cof')" accesskey="c">
-                    <input type="button" class="btn" value="T" title="Bring up the Textbox" onClick="moveframey('scf')" accesskey="s">
+					<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><img src="images/horizbtnspace.jpg" /><a href="javascript:void(0)" title="Show Covertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><img src="images/horizbtnspace.png" /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
                 </div>
                 <div style="padding-top:10px">
                     <input type="button" class="btn" value="v" title="Scroll to bookmark" onClick="scrolldown(scrollmuch)">

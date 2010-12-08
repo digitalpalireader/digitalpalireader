@@ -4,46 +4,152 @@ var searchsect = 0;
 var stop = 0;
 var labelsearch = null;
 
-function limitt() {
-	if (document.form.nik.selectedIndex < 1 ||  document.form.nik.selectedIndex > 4) { return true; }
-	else { return false };
-}
 
-function switchhier(htmp) {
-	if (htmp == 't' && limitt()) { 
+var versecheck = 0;
+var versestop = 0;
+var hier = 'm'; // m = mula, a = atthakatha
+
+function importXML(manxml,labelsearchtemp)
+{
+	if (hier == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}
-	hier = htmp;
-	var hia = 'hier'+hier+'a';
-	var hii = 'hier'+hier+'i';
-	
-	document.getElementById('hierma').onclick = function() {gettitles(0,3,'m');};
-	document.getElementById('hieraa').onclick = function() {gettitles(0,3,'a');};
-	document.getElementById('hierta').onclick = function() {gettitles(0,3,'t');};
-	document.getElementById('hierma').title = 'Change to Mūla';
-	document.getElementById('hieraa').title = 'Change to Aṭṭhakathā';
-	document.getElementById('hierta').title = 'Change to Ṭīkā';
-	document.getElementById('hierma').blur();
-	document.getElementById('hieraa').blur();
-	document.getElementById('hierta').blur();
-	
-	document.getElementById('hiermi').src = 'images/m0.jpg';
-	document.getElementById('hierai').src = 'images/a0.jpg';
-	document.getElementById('hierti').src = 'images/t0.jpg';
-	
-	document.getElementById(hia).onclick = function() {
-		void(0);
+
+	document.getElementById('mafa').innerHTML='';
+	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+
+	var nikaya = document.form.nik.value;
+	var book = document.form.book.value;
+	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+	if (manxml == 's') {
+		labelsearch = labelsearchtemp;
 	}
-	document.getElementById(hia).title = '';
-	document.getElementById(hii).src = 'images/'+hier+'1.jpg';
-		
-	if (hier == 'a') { 
-		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
+	else if (manxml)
+	{
+		customfile = 1;
+		bookload = 'xml/1.xml';
+		if (manxml == 3) document.getElementById('manrem').value--;
+		else if (manxml == 2) document.getElementById('manrem').value++;
+		else document.getElementById('manrem').value = 0;
 	}
-	else if (hier == 'm'){
-		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
+	else document.getElementById('manrem').value = 0;
+
+
+	var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", bookload, false);
+    xmlhttp.send(null);
+    var xmlDoc = xmlhttp.responseXML.documentElement;
+
+
+	var meta = document.form.meta.selectedIndex;
+	var volume = document.form.volume.selectedIndex;
+	var vagga = document.form.vagga.selectedIndex;
+	var sutta = document.form.sutta.selectedIndex;
+	var section = document.form.section.selectedIndex;
+	if (document.getElementById('manrem').value > 0)
+	{
+		section = document.getElementById('manrem').value;
+		sutta = 0;
 	}
-}	
+	var book = document.form.book.value;
+	
+	var u = xmlDoc.getElementsByTagName("h0");
+	var v = u[meta].getElementsByTagName("h1");
+	var w = v[volume].getElementsByTagName("h2");
+	var x = w[vagga].getElementsByTagName("h3");
+	var y = x[sutta].getElementsByTagName("h4");
+	var z = y[section].getElementsByTagName("p");
+	
+	//titles
+
+	var nikaya = document.form.nik.value;
+	var vn = u[meta].getElementsByTagName("h0n");
+	var wn = v[volume].getElementsByTagName("h1n");
+	var xn = w[vagga].getElementsByTagName("h2n");
+	var yn = x[sutta].getElementsByTagName("h3n");
+	var zn = y[section].getElementsByTagName("h4n");
+	var vna = vn[0].childNodes[0].nodeValue;
+	var wna = wn[0].childNodes[0].nodeValue;
+	var xna = xn[0].childNodes[0].nodeValue;
+	var yna = yn[0].childNodes[0].nodeValue;
+	var zna = zn[0].childNodes[0].nodeValue;
+	
+	convtitle(nikaya,book,vna,wna,xna,yna,zna);
+
+	if (zna.length > 1) { var bknameme = zna }
+	else if (yna.length > 1) { var bknameme  = yna }
+	else if (xna.length > 1) { var bknameme  = xna }
+	else if (wna.length > 1) { var bknameme  = wna }
+	else if (vna.length > 1) { var bknameme  = vna }
+	
+	bknameme = bknameme.replace(/ /g, '');
+	
+	document.form.bmname.value = bknameme;
+	
+	var theData = '';
+	var onepar;
+	var quit = 0;
+	var tmpdata;
+	document.getElementById('mafb').innerHTML = '';
+	
+	// check if there is a search going on and add the labels
+	
+	if (labelsearch) {
+		for (tmp = 0; tmp < z.length; tmp++)
+		{
+			quit = 0;
+			onepar = z[tmp].childNodes[0].nodeValue.substring(4);
+			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+			{
+				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
+			}	
+			if (quit == 1) {
+				theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
+			}
+			else {
+				theData += ' <p> ';
+				tmpdata = onepar;
+				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+				{
+					onepar = tmpdata;
+					tmpdata = '';
+					while (onepar.search(labelsearch[tmpl]) > -1) {
+						opp = onepar.search(labelsearch[tmpl]);
+						tmpdata += onepar.substring(0,opp);
+						if (onepar.charAt(opp - 1) != ' ') {
+							tmpdata += ' - ';
+						}
+						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl].replace(/ /g, ' <xc> <c' + tmpl  + '> ') + ' <xc> ';
+						if (onepar.charAt(opp - 1 + labelsearch[tmpl].length) != ' ') {
+							tmpdata += ' _ ';
+						}
+						onepar = onepar.substring(opp + labelsearch[tmpl].length);
+					}
+					tmpdata += onepar;
+				}
+				theData += tmpdata;
+			} 
+		}		
+	}	
+	else {
+		for (tmp = 0; tmp < z.length; tmp++)
+		{
+			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
+		}
+	}
+
+
+	preout(theData);
+	if (document.getElementById('manrem').value < 0)
+	{
+		document.getElementById('manrem').value = 0;
+		alert('beginning of file');
+	}
+	customfile = 0;
+	labelsearch = null;
+}
+
 
 function gettitles(altget,stop,prev,ssect)
 {
@@ -558,7 +664,6 @@ function createTableman(type)
 			case 0:
 				var TheData = document.form.manual.value;
 				postout(TheData);
-				if(document.getElementById('autoalg').checked == false) moveframex(2);
 				break;
 			case 1:
 				moveframey('dif');
@@ -592,151 +697,6 @@ function createTableman(type)
 		postout(TheData);
 		if(document.getElementById('autoalg').checked == false) moveframex(2);
 	}
-}
-
-var versecheck = 0;
-var versestop = 0;
-var hier = 'm'; // m = mula, a = atthakatha
-
-function importXML(manxml,labelsearchtemp)
-{
-	if (hier == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
-		return; 
-	}
-
-	document.getElementById('mafa').innerHTML='';
-	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
-
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-	if (manxml == 's') {
-		labelsearch = labelsearchtemp;
-	}
-	else if (manxml)
-	{
-		customfile = 1;
-		bookload = 'xml/1.xml';
-		if (manxml == 3) document.getElementById('manrem').value--;
-		else if (manxml == 2) document.getElementById('manrem').value++;
-		else document.getElementById('manrem').value = 0;
-	}
-	else document.getElementById('manrem').value = 0;
-
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;
-	if (document.getElementById('manrem').value > 0)
-	{
-		section = document.getElementById('manrem').value;
-		sutta = 0;
-	}
-	var book = document.form.book.value;
-	
-	var u = xmlDoc.getElementsByTagName("h0");
-	var v = u[meta].getElementsByTagName("h1");
-	var w = v[volume].getElementsByTagName("h2");
-	var x = w[vagga].getElementsByTagName("h3");
-	var y = x[sutta].getElementsByTagName("h4");
-	var z = y[section].getElementsByTagName("p");
-	
-	//titles
-
-	var nikaya = document.form.nik.value;
-	var vn = u[meta].getElementsByTagName("h0n");
-	var wn = v[volume].getElementsByTagName("h1n");
-	var xn = w[vagga].getElementsByTagName("h2n");
-	var yn = x[sutta].getElementsByTagName("h3n");
-	var zn = y[section].getElementsByTagName("h4n");
-	var vna = vn[0].childNodes[0].nodeValue;
-	var wna = wn[0].childNodes[0].nodeValue;
-	var xna = xn[0].childNodes[0].nodeValue;
-	var yna = yn[0].childNodes[0].nodeValue;
-	var zna = zn[0].childNodes[0].nodeValue;
-	
-	convtitle(nikaya,book,vna,wna,xna,yna,zna);
-
-	if (zna.length > 1) { var bknameme = zna }
-	else if (yna.length > 1) { var bknameme  = yna }
-	else if (xna.length > 1) { var bknameme  = xna }
-	else if (wna.length > 1) { var bknameme  = wna }
-	else if (vna.length > 1) { var bknameme  = vna }
-	
-	bknameme = bknameme.replace(/ /g, '');
-	
-	document.form.bmname.value = bknameme;
-	
-	var theData = '';
-	var onepar;
-	var quit = 0;
-	var tmpdata;
-	document.getElementById('mafb').innerHTML = '';
-	
-	// check if there is a search going on and add the labels
-	
-	if (labelsearch) {
-		for (tmp = 0; tmp < z.length; tmp++)
-		{
-			quit = 0;
-			onepar = z[tmp].childNodes[0].nodeValue.substring(4);
-			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
-			{
-				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
-			}	
-			if (quit == 1) {
-				theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
-			}
-			else {
-				theData += ' <p> ';
-				tmpdata = onepar;
-				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
-				{
-					onepar = tmpdata;
-					tmpdata = '';
-					while (onepar.search(labelsearch[tmpl]) > -1) {
-						opp = onepar.search(labelsearch[tmpl]);
-						tmpdata += onepar.substring(0,opp);
-						if (onepar.charAt(opp - 1) != ' ') {
-							tmpdata += ' - ';
-						}
-						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl].replace(/ /g, ' <xc> <c' + tmpl  + '> ') + ' <xc> ';
-						if (onepar.charAt(opp - 1 + labelsearch[tmpl].length) != ' ') {
-							tmpdata += ' _ ';
-						}
-						onepar = onepar.substring(opp + labelsearch[tmpl].length);
-					}
-					tmpdata += onepar;
-				}
-				theData += tmpdata;
-			} 
-		}		
-	}	
-	else {
-		for (tmp = 0; tmp < z.length; tmp++)
-		{
-			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
-		}
-	}
-
-
-	preout(theData);
-	if (document.getElementById('manrem').value < 0)
-	{
-		document.getElementById('manrem').value = 0;
-		alert('beginning of file');
-	}
-	customfile = 0;
-	labelsearch = null;
 }
 
 function xmlrefget()

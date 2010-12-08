@@ -98,6 +98,7 @@ function checkbackground(x) {
 		document.getElementById('dif').style.backgroundImage = 'url(images/background.gif)';
 		document.getElementById('cof').style.backgroundImage = 'url(images/background.gif)';
 		document.getElementById('scf').style.backgroundImage = 'url(images/background.gif)';
+		document.getElementById('searchb').style.backgroundImage = 'url(images/background.gif)';
 		document.body.style.backgroundImage = 'url(images/background.gif)';
     }
     else {
@@ -106,10 +107,12 @@ function checkbackground(x) {
 		document.getElementById('dif').style.backgroundImage = '';
 		document.getElementById('cof').style.backgroundImage = '';
 		document.getElementById('scf').style.backgroundImage = '';
+		document.getElementById('searchb').style.backgroundImage = '';
 		document.body.style.backgroundImage = '';
 		document.getElementById('dif').style.backgroundColor = colort;
 		document.getElementById('cof').style.backgroundColor = colort;
 		document.getElementById('scf').style.backgroundColor = colort;
+		document.getElementById('searchb').style.backgroundColor = colort;
 		document.body.style.backgroundColor = colort;
 	}
 }

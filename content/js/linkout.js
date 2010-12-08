@@ -462,8 +462,8 @@ function output(sdp)
 			}
 			else tr[a] = '';
 		}
-
-
+	
+	
 	osout += '</tr></table></td><td align=center id=c></td><td align=right style="">';
 	var ootmp = '';
 	if (shortdefpre.length > 1) ootmp += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.options[this.selectedIndex].innerHTML;  var spdcol = spdouts.search(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdouts.substring(0,spdcol) + \':</b> \' + spdouts.substring(spdcol+1,spdouts.length);">';

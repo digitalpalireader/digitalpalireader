@@ -296,6 +296,7 @@ function preout(data) // calls text prep, then outputs it to preFrame
 
 
 function formatuniout(data,which) { // prepare without links
+
 	var convout = '';
 	var indexpage = '';
 	var altread = 0;
@@ -946,179 +947,44 @@ function xmlrefer()
 	document.form.xmlref.value = ref;
 }
 
-function thaiconv(input,type) {
-	var vowel = [];
-	vowel['a'] = 1;
-	vowel['i'] = 1;
-	vowel['u'] = 1;
-	vowel['e'] = 2;
-	vowel['o'] = 2;
+function limitt() {
+	if (document.form.nik.selectedIndex < 1 ||  document.form.nik.selectedIndex > 4) { return true; }
+	else { return false };
+}
 
-	var spec = [];
-	spec['k'] = 1;
-	spec['g'] = 1;
-	spec['c'] = 1;
-	spec['j'] = 1;
-	spec['t'] = 1;
-	spec['d'] = 1;
-	spec['p'] = 1;
-	spec['b'] = 1;
-
-	var thair = [];
-	thair['a'] = 'อ';
-	thair['aa'] = 'า';
-	thair['i'] = 'ิ';
-	thair['ii'] = 'ี';
-	thair['i.m'] = 'ึ';
-	thair['u'] = 'ุ';
-	thair['uu'] = 'ู';
-	thair['e'] = 'เ';
-	thair['o'] = 'โ';
-	thair['.m'] = 'ํ';
-	thair['k'] = 'ก';
-	thair['kh'] = 'ข';
-	thair['g'] = 'ค';
-	thair['gh'] = 'ฆ';
-	thair['"n'] = 'ง';
-	thair['c'] = 'จ';
-	thair['ch'] = 'ฉ';
-	thair['j'] = 'ช';
-	thair['jh'] = 'ฌ';
-	thair['~n'] = 'ญ';
-	thair['.t'] = 'ฏ';
-	thair['.th'] = 'ฐ';
-	thair['.d'] = 'ฑ';
-	thair['.dh'] = 'ฒ';
-	thair['.n'] = 'ณ';
-	thair['t'] = 'ต';
-	thair['th'] = 'ถ';
-	thair['d'] = 'ท';
-	thair['dh'] = 'ธ';
-	thair['n'] = 'น';
-	thair['p'] = 'ป';
-	thair['ph'] = 'ผ';
-	thair['b'] = 'พ';
-	thair['bh'] = 'ภ';
-	thair['m'] = 'ม';
-	thair['y'] = 'ย';
-	thair['r'] = 'ร';
-	thair['l'] = 'ล';
-	thair['.l'] = 'ล';
-	thair['v'] = 'ว';
-	thair['s'] = 'ส';
-	thair['h'] = 'ห';
-
-	var i0 = '';
-	var i1 = '';
-	var i2 = '';
-	var i3 = '';
-	var i4 = '';
-	var i5 = '';
-	var output = '';
-	var cons = 0;
-	var i = 0;
-	
-	input = input.replace(/\&quot;/g, '`');
-
-	while (i < input.length) {
-		i0 = input.charAt(i-1);
-		i1 = input.charAt(i);
-		i2 = input.charAt(i+1);
-		i3 = input.charAt(i+2);
-		i4 = input.charAt(i+3);
-		i5 = input.charAt(i+4);
-		
-		if (vowel[i1]) {
-			cons = 0;
-			if (i1 == 'o' || i1 == 'e') {
-				output += thair[i1];
-				if (i == 0 || i0 == 'a') output += thair['a'];
-				i++;
-			}
-			else {
-				if (i == 0 || i0 == 'a') output += thair['a'];
-				if (i1 == i2) {
-					output += thair[i1+i2];
-					i = i + 2;	
-				}
-				else if (i1 == 'i' && i2 == '.' && i3 == 'm') { // special i.m character
-					output += thair[i1+i2+i3];
-					i = i + 3;				
-				}
-				else if (i1 != 'a') { // nothing for a
-					output += thair[i1];
-					i++;
-				}
-				else i++;
-			}
-		}		
-		else if (thair[i1+i2+i3]) {		// three character match
-			cons++;
-			if (cons >= 2) output += 'ฺ';
-			if (i4 == 'o' || i4 == 'e') {
-				output += thair[i4];
-				i++;
-				cons = 0;
-			}	
-			output += thair[i1+i2+i3];
-			i = i + 3;
-		}					
-		else if (thair[i1+i2]) {		// two character match
-			cons++;
-			if (i2 == 'm') cons = 0 // exception for .m
-			if (cons >= 2) output += 'ฺ';
-			if (i3 == 'o' || i3 == 'e') {
-				output += thair[i3];
-				i++;
-				cons = 0;
-			}	
-			output += thair[i1+i2];
-			i = i + 2;
-		}					
-		else if (thair[i1] && i1 != 'a') {		// one character match except a
-			cons++;
-			if (cons >= 2) output += 'ฺ';
-			if (i2 == 'o' || i2 == 'e') {
-				output += thair[i2];
-				i++;
-				cons = 0;
-			}	
-			output += thair[i1];
-			i++;
-		}					
-		else if (!thair[i1]) {
-			cons = 0;
-			output += i1;
-			i++;				
-			if (i2 == 'o' || i2 == 'e') {  // long vowel first
-				output += thair[i2];
-				i++;
-				cons = 0;
-			}
-			if (vowel[i2]) {  // word-beginning vowel marker
-				output += thair['a']; 
-			}
-		}
-		else i++;
+function switchhier(htmp) {
+	if (htmp == 't' && limitt()) { 
+		return; 
 	}
-	output = output.replace(/\`+/g, '"');
-	return output;
+	hier = htmp;
+	var hia = 'hier'+hier+'a';
+	var hii = 'hier'+hier+'i';
+	
+	document.getElementById('hierma').onclick = function() {gettitles(0,3,'m');};
+	document.getElementById('hieraa').onclick = function() {gettitles(0,3,'a');};
+	document.getElementById('hierta').onclick = function() {gettitles(0,3,'t');};
+	document.getElementById('hierma').title = 'Change to Mūla';
+	document.getElementById('hieraa').title = 'Change to Aṭṭhakathā';
+	document.getElementById('hierta').title = 'Change to Ṭīkā';
+	document.getElementById('hierma').blur();
+	document.getElementById('hieraa').blur();
+	document.getElementById('hierta').blur();
+	
+	document.getElementById('hiermi').src = 'images/m0.png';
+	document.getElementById('hierai').src = 'images/a0.png';
+	document.getElementById('hierti').src = 'images/t0.png';
+	
+	document.getElementById(hia).onclick = function() {
+		void(0);
+	}
+	document.getElementById(hia).title = '';
+	document.getElementById(hii).src = 'images/'+hier+'1.png';
+		
+	if (hier == 'a') { 
+		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
+	}
+	else if (hier == 'm'){
+		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
+	}
 }	
 
-var script = 0;
-
-function chscript(reset) {
-	var scra = [];
-	scra[0] = '<input type="button" class="btn" value="T" onClick="chscript()" title="Change to Thai script">';
-	scra[1] = '<input type="button" class="btn" value="R" onClick="chscript()" title="Change to Roman script">';
-	if (reset) script = 0;
-	else script++;
-	if (script >= scra.length) script = 0;
-	document.getElementById('script').innerHTML = scra[script];
-	importXML();
-}
-		
-function translit(input) {
-	if (script == 1) output = thaiconv(replacevelstandard(input));
-	return output;
-}

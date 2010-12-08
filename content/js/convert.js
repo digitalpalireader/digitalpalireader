@@ -91,6 +91,32 @@ function convert()
 			spell = spell.replace(/\u201D/g, '\'');	
 			spell = thaiconv(spell);
 		}	
+		else if (Counta == 4) { // to Deva
+			spell = spell.replace(/±/g, 'aa');
+			spell = spell.replace(/²/g, 'ii');
+			spell = spell.replace(/³/g, 'uu');
+			spell = spell.replace(/µ/g, '.t');
+			spell = spell.replace(/¹/g, '.d');
+			spell = spell.replace(/ª/g, '"n');
+			spell = spell.replace(/º/g, '.n');
+			spell = spell.replace(/½/g, '.m');
+			spell = spell.replace(/\ñ/g, '~n');
+			spell = spell.replace(/\¼/g, '.l');
+			spell = spell.replace(/â/g, 'AA');
+			spell = spell.replace(/ä/g, 'II');
+			spell = spell.replace(/æ/g, 'UU');
+			spell = spell.replace(/ò/g, '.T');
+			spell = spell.replace(/ô/g, '.D');
+			spell = spell.replace(/ö/g, '.N');
+			spell = spell.replace(/ì/g, '.M');
+			spell = spell.replace(/¤/g, '~N');
+			spell = spell.replace(/ý/g, '.L');
+			spell = spell.replace(/\u000D/g, '');
+			spell = spell.replace(/\u000A/g, '');
+			spell = spell.replace(/\u201C/g, '\'');
+			spell = spell.replace(/\u201D/g, '\'');	
+			spell = todeva(spell);
+		}	
 	}
 	else if (Count == 1)
 	{
@@ -108,6 +134,12 @@ function convert()
             spell = replacevelstandard(spell);
 			spell = thaiconv(spell);
 		}
+		else if (Counta == 4) // Unicode to Deva
+		{
+
+            spell = replacevelstandard(spell);
+			spell = todeva(spell);
+		}
 	}
 	else if (Count == 2)
 	{
@@ -122,6 +154,10 @@ function convert()
 		else if (Counta == 3) // Velthius to Thai
 		{
 			spell = thaiconv(spell);
+		}			
+		else if (Counta == 4) // Velthius to Deva
+		{
+			spell = todeva(spell);
 		}			
 	}
 	document.getElementById('output').value = spell;	
@@ -149,12 +185,6 @@ function changeit(what,which)
 			
 			if (which == 1 && document.convertor.R2[2].checked) document.convertor.R2[1].checked = true;
 			else if (which == 2 && document.convertor.R1[2].checked) document.convertor.R1[1].checked = true;
-		}
-		else if (what == 't')
-		{
-			
-			if (which == 1 && document.convertor.R2[3].checked) document.convertor.R2[1].checked = true;
-			else if (which == 2 && document.convertor.R1[3].checked) document.convertor.R1[1].checked = true;
 		}
 		if (which == 1) document.getElementById('input').setAttribute('style','font-family: Arial');
 		else document.getElementById('output').setAttribute('style','font-family: Arial');
