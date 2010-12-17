@@ -107,7 +107,38 @@ filearraya.push("v3");
 filearraya.push("v4");
 filearraya.push("v5");
 filearraya.push("v6");
+filearraya.push("y1");
+filearraya.push("y2");
+filearraya.push("y3");
+filearraya.push("y4");
+filearraya.push("y5");
+filearraya.push("y6");
+filearraya.push("y7");
 
+var filearrayt = [];
+
+filearrayt.push("d1"); 
+filearrayt.push("d2");
+filearrayt.push("d3");
+filearrayt.push("m1");
+filearrayt.push("m2");
+filearrayt.push("m3");
+filearrayt.push("s1");
+filearrayt.push("s2");
+filearrayt.push("s3");
+filearrayt.push("s4");
+filearrayt.push("s5");
+filearrayt.push("a1");
+filearrayt.push("a2");
+filearrayt.push("a3");
+filearrayt.push("a4");
+filearrayt.push("a5");
+filearrayt.push("a6");
+filearrayt.push("a7");
+filearrayt.push("a8");
+filearrayt.push("a9");
+filearrayt.push("a10");
+filearrayt.push("a11");
 
 var nikletter = new Array();
 nikletter[0] = 'd';
@@ -204,13 +235,14 @@ function pausesall()
 		document.getElementById('sbfab').innerHTML = '';
 		document.getElementById('sbfb').innerHTML = '<hr>';
 	
-		if (hier == "a") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1"></td></tr></table>';
-	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); stopsearch=1;"></td></tr></table>';
+	if (hier == "t") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1"></td></tr></table>';
+	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
 	
 
 	
 	var tableout = '<table width=100% id="stftb"><tr>';
 	if (hier == "a") var fal = filearraya.length;
+	else if (hier == "t") var fal = filearrayt.length;
 	else var fal = filearray.length;
 	for (q2 = 0; q2 < fal; q2++)
 	{
@@ -287,6 +319,7 @@ function importXMLs(cnt)
 	if (cnt == 1) // whole tipitaka
 	{
 			if (hier == "a") bookfile = filearraya[qz];
+			else if (hier == "t") bookfile = filearrayt[qz];
 			else bookfile = filearray[qz];
 			newnikaya = bookfile.charAt(0);
 			if (nikayaat != newnikaya)
@@ -311,18 +344,19 @@ function importXMLs(cnt)
 			nikcount = nikletter[rescount];
             if (rescount < 0) document.getElementById('stf'+nikletter[0]).innerHTML = thiscount;
             else document.getElementById('stf'+nikcount).innerHTML = thiscount;
-			if ((hier == "a" && qz < filearraya.length-1) || (hier == "m" && qz < filearray.length-1)) 
+			if ((hier == "m" && qz < filearray.length-1) || (hier == "a" && qz < filearraya.length-1) || (hier == "t" && qz < filearrayt.length-1)) 
 			{
 				if (hier == "a") nextbookfile = filearraya[qz+1];
+				else if (hier == "t") nextbookfile = filearrayt[qz+1];
 				else nextbookfile = filearray[qz+1];
-				if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikletter[rescount]).setAttribute('class','yellow');
+				if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikletter[rescount]).style.color=colorcfg['colsel'];
 				qz++;
 				bounce();
 			}
 			else {
 				qz = 0;
 				bookperm = 0;
-				document.getElementById('stf'+nikletter[rescount]).setAttribute('class','yellow');
+				document.getElementById('stf'+nikletter[rescount]).style.color=colorcfg['colsel'];
 				document.getElementById('stfstop').setAttribute('style','display:none');
 			}			
 	}	
@@ -343,7 +377,7 @@ function importXMLs(cnt)
 		if (qz == 0) {
 			document.getElementById('sbfab').innerHTML = '';
 			document.getElementById('sbfb').innerHTML = '<hr>';
-			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		}
 
 		document.getElementById('sbfb').innerHTML += '<div title="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
@@ -383,7 +417,7 @@ function importXMLs(cnt)
 		document.getElementById('sbfab').innerHTML = '';
 		//document.getElementById('sbfb').innerHTML = '<hr><div title="xyz"><h1>' + nikname[nikaya] + ' ' + book + '</h1><hr></div>';
 
-		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="stopsearch=1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b>' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="stopsearch=1; moves(0)"></td></tr></table>';
+		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		
 		bookload = 'xml/' + bookfile + hier + '.xml';
 

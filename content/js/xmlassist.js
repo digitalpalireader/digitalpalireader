@@ -286,7 +286,7 @@ function preout(data) // calls text prep, then outputs it to preFrame
         }
 
 		document.getElementById('mafb').innerHTML = finout;
-		document.getElementById('mafb').innerHTML += ' <input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert"> <input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
+		document.getElementById('mafb').innerHTML += ' <input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert"> <input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
 		document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
         if (moveat == 3) {moveframex(2);}
         else {moves(0);}

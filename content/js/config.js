@@ -169,7 +169,10 @@ function saveOptions() {
         var Pref = cPrefs[i];
         if (document.getElementById(Pref)) {
             Val = document.getElementById(Pref).value;
-            if (Val) setColPref(Pref,Val);
+            if (Val) {
+	            if (Pref == 'ControlW' && Val < 250) { document.getElementById(Pref).value = 250; Val = 250; }
+				setColPref(Pref,Val);
+			}
         }
     }
     for (i = 0; i < sPrefs.length; i++) {

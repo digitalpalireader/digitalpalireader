@@ -16315,6 +16315,6 @@ mainda["paa,li"] = "2/2828";
 mainda["manasi"] = "3/71";
 mainda["yamaamase"] = "3/474";
 mainda["c"] = "1/1501";
-mainda["n"] = "1/2901"; // removed trailing 'n'
+//mainda["n"] = "1/2901"; // removed trailing 'n'
 mainda["upapajjanta"] = "0/3810";
 

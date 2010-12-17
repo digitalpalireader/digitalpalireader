@@ -4,7 +4,6 @@ function moveframex(a) //read, etc
 {
     getconfig();
     document.getElementById('left').style.right = (parseInt(confmove[2])-4) + 'px';
-    document.getElementById('search').style.right = (parseInt(confmove[2])-4) + 'px';
     document.getElementById('right').style.width = confmove[2] + 'px';
     document.getElementById('anf').style.height = confmove[0] + 'px';
     document.getElementById('searcht').style.height = confmove[3] + 'px';

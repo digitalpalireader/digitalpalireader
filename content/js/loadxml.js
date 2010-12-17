@@ -121,7 +121,7 @@ function importXML(manxml,labelsearchtemp)
 							tmpdata += ' - ';
 						}
 						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl].replace(/ /g, ' <xc> <c' + tmpl  + '> ') + ' <xc> ';
-						if (onepar.charAt(opp - 1 + labelsearch[tmpl].length) != ' ') {
+						if (onepar.charAt(opp + labelsearch[tmpl].length) != ' ') {
 							tmpdata += ' _ ';
 						}
 						onepar = onepar.substring(opp + labelsearch[tmpl].length);
@@ -138,7 +138,6 @@ function importXML(manxml,labelsearchtemp)
 			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
 		}
 	}
-
 
 	preout(theData);
 	if (document.getElementById('manrem').value < 0)
@@ -207,7 +206,7 @@ function gettitles(altget,stop,prev,ssect)
 	var nik = document.form.nik.value;
 	var book = document.form.book.value;
 
-	var maxlength = 15;  // change for display purposes
+	var maxlength = 20;  // change for display purposes
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
