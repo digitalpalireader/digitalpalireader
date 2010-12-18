@@ -362,6 +362,7 @@ function importXMLs(cnt)
 	}	
 	else if (cnt == 2) // nikaya
 	{
+		
 		var nikaya = document.form.nik.value;
 
 		// define number of books in the nikaya at hand

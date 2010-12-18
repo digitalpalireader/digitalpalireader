@@ -25,11 +25,17 @@ nikvoladi['d'] = '<select size="7" name="book" onclick="gettitles(0,2)"><option 
 nikvoladi['m'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
 nikvoladi['s'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>';
 nikvoladi['a'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>';
-nikvoladi['k'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">KhP</option><option value="2">Dhp</option><option value="3">Uda</option><option value="4">Iti</option><option value="5">SN</option><option value="6">ViV</option><option value="7">PeV</option><option value="8">Thera</option><option value="9">Theri</option><option value="10">Ap.1</option><option value="11">Ap.2</option><option value="12">BdV</option><option value="13">Car</option><option value="14">Jat.1</option><option value="15">Jat.2</option><option value="16">MNid</option><option value="17">CNid</option><option value="18">PsM</option><option value="19">Mil</option><option value="20">Net</option><option value="21">Pet</option></select>';
+nikvoladi['km'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">KhP</option><option value="2">Dhp</option><option value="3">Uda</option><option value="4">Iti</option><option value="5">SN</option><option value="6">ViV</option><option value="7">PeV</option><option value="8">Thera</option><option value="9">Theri</option><option value="10">Ap.1</option><option value="11">Ap.2</option><option value="12">BdV</option><option value="13">Car</option><option value="14">Jat.1</option><option value="15">Jat.2</option><option value="16">MNid</option><option value="17">CNid</option><option value="18">PsM</option><option value="19">Mil</option><option value="20">Net</option><option value="21">Pet</option></select>';
+nikvoladi['ka'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">KhP</option><option value="2">Dhp</option><option value="3">Uda</option><option value="4">Iti</option><option value="5">SN</option><option value="6">ViV</option><option value="7">PeV</option><option value="8">Thera</option><option value="9">Theri</option><option value="10">Apa</option><option value="12">BdV</option><option value="13">Car</option><option value="14">Jat.1</option><option value="15">Jat.2</option></select>';
+nikvoladi['kt'] = '<select size="7" name="book"></select>';
 nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Para</option><option value="2">Paci</option><option value="3">BhV</option><option value="4">MV</option><option value="5">CV</option><option value="6">Pari</option></select>';
 nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
-nikvoladi['y'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option></select>';
-nikvoladi['g'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
+nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option></select>';
+nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
+nikvoladi['yt'] = '<select size="7" name="book"></select>';
+nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
+nikvoladi['ga'] = '<select size="7" name="book"></select>';
+nikvoladi['gt'] = '<select size="7" name="book"></select>';
 
 var knames = [];
 
@@ -55,17 +61,30 @@ knames.push('Mil');
 knames.push('Net');
 knames.push('Pet');
 
+var oldnikaya = 0;
 
 function changenikaya(noget)
 {
-	if (hier == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
-		return; 
-	} 
 	var nik = document.form.nik.value;
 	if (nik != '') 
 	{
-		document.getElementById('book').innerHTML=nikvoladi[nik];
+		if (hier == 't' && limitt()) { 
+			alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+			document.form.nik.selectedIndex = oldnikaya;
+			return; 
+		} 
+		if (hier == 'a' && document.form.nik.value == 'g') {
+			alert('Atthakatha not available for Gram.');
+			document.form.nik.selectedIndex = oldnikaya;
+			return;
+		}
+		oldnikaya = document.form.nik.selectedIndex;
+		if (nikvoladi[nik]) {
+			document.getElementById('book').innerHTML=nikvoladi[nik];
+		}
+		else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
+
+		
 		if (noget) gettitles(0,1);
 		else gettitles(0,2);
 	}
@@ -953,16 +972,22 @@ function limitt() {
 }
 
 function switchhier(htmp) {
+
 	if (htmp == 't' && limitt()) { 
+		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
+	}
+	if (htmp == 'a' && document.form.nik.value == 'g') {
+		alert('Atthakatha not available for Gram.');
+		return;
 	}
 	hier = htmp;
 	var hia = 'hier'+hier+'a';
 	var hii = 'hier'+hier+'i';
 	
-	document.getElementById('hierma').onclick = function() {gettitles(0,3,'m');};
-	document.getElementById('hieraa').onclick = function() {gettitles(0,3,'a');};
-	document.getElementById('hierta').onclick = function() {gettitles(0,3,'t');};
+	document.getElementById('hierma').onclick = function() {this.blur(); switchhier('m');};
+	document.getElementById('hieraa').onclick = function() {this.blur(); switchhier('a');};
+	document.getElementById('hierta').onclick = function() {this.blur(); switchhier('t');};
 	document.getElementById('hierma').title = 'Change to Mūla';
 	document.getElementById('hieraa').title = 'Change to Aṭṭhakathā';
 	document.getElementById('hierta').title = 'Change to Ṭīkā';
@@ -975,16 +1000,11 @@ function switchhier(htmp) {
 	document.getElementById('hierti').src = 'images/t0.png';
 	
 	document.getElementById(hia).onclick = function() {
-		void(0);
+		this.blur(); 
 	}
 	document.getElementById(hia).title = '';
 	document.getElementById(hii).src = 'images/'+hier+'1.png';
 		
-	if (hier == 'a') { 
-		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option>'; }
-	}
-	else if (hier == 'm'){
-		if (document.form.nik.selectedIndex == 6) { document.form.book.innerHTML = '<option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option>'; }
-	}
+	changenikaya();
 }	
 

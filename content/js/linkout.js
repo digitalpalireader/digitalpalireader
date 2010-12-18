@@ -144,8 +144,8 @@ function output(sdp)
 	if (firstcheck == 0) {
 		shortdefpre = shortdefpre.slice(0,trslice);
 		for (i in outputs) { 
-			document.getElementById('anfout').innerHTML += '<option value="' + outputs[i] + '">' + outputshow[i] + '</option>'; 
-			document.getElementById('anfouts').innerHTML +='<option value="' + outputsd[i] + '">' + outputshow[i] + '</option>';
+			document.getElementById('anfout').innerHTML += '<option value="' + outputs[i] + '">' + replaceunistandard(outputshow[i].replace(/,/g, '.')) + '</option>'; 
+			document.getElementById('anfouts').innerHTML +='<option value="' + outputsd[i] + '">' + replaceunistandard(outputshow[i].replace(/,/g, '.')) + '</option>';
 		}
 	}
 	
@@ -466,7 +466,7 @@ function output(sdp)
 	
 	osout += '</tr></table></td><td align=center id=c></td><td align=right style="">';
 	var ootmp = '';
-	if (shortdefpre.length > 1) ootmp += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.options[this.selectedIndex].innerHTML;  var spdcol = spdouts.search(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdouts.substring(0,spdcol) + \':</b> \' + spdouts.substring(spdcol+1,spdouts.length);">';
+	if (shortdefpre.length > 1) ootmp += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.value;  var spdcol = spdouts.search(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdouts.substring(0,spdcol) + \':</b> \' + spdouts.substring(spdcol+1,spdouts.length);">';
 	if (ttcheck > 0)
 	{
 		var os5array = new Array();
@@ -498,7 +498,18 @@ function output(sdp)
 			os5array = sdsone.split('^');
 			if (!sddup[sdpone]) {
 				if (sdt == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + sdpone + ': </b>' + os5array[0] + ' (' + os5array[1] + ')'; } 
-				if (shortdefpre.length > 1) ootmp += '<option>' + sdpone + ': ' + os5array[0] + ' (' + os5array[1] + ')</option>';
+				if (shortdefpre.length > 1) {
+					var os5a0 = os5array[0];
+					if (os5array[0].length > 100) {
+						while (os5a0.length > 100) {
+							os5a0 = os5a0.substring(0,os5a0.length-1);
+						}
+						os5a0 += '...'
+					}
+					
+					ootmp += '<option value="' + sdpone + ': ' + os5array[0] + ' (' + os5array[1] + ')">' + sdpone + ': ' + os5a0 + ' (' + os5array[1] + ')</option>'; 
+						
+				}
 				sddup[sdpone] = sdsone;
 			}		
 		}

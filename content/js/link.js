@@ -462,7 +462,7 @@ function postout(dit,b)
 					//alert ('fc');
 					findcompound();// no match, so look for compounds
 				}
-				else addresults();
+				else { addresults(); }
 			}
 		}
 		else
@@ -1005,14 +1005,14 @@ function postout(dit,b)
 			{
 				
 				////alert('yes');
-				if (((aiu3 && aiu1 == null && aiu2 == null) || wtwt.charAt(0) == comps.charAt(comps.length-1)) && wtwt.charAt(0) != wtwt.charAt(1)) // check for shortened vowels, lengthen
+				if (((aiu3 && aiu1 == null && aiu2 == null) || wtwt.charAt(0) == comps.charAt(comps.length-1))) // check for shortened vowels, lengthen
 				{
 					wtwt = aiu3 + wtwt;
 					////alert('1' + wtwt);
 					findmatch();
 					wtwt = wtwt.substring(1);
 				}
-				else if (wtwt.charAt(0) == wtwt.charAt(1) && wtwt.length > 3 && wtwt.charAt(0) != 'a' && wtwt.charAt(0) != 'i' && wtwt.charAt(0) != 'u' && wtwt.charAt(0) != 'y' && !cdoubled[comppartraw.length]) // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
+				if (aa == 0 && bb == 0 && cc == 0 && wtwt.charAt(0) == wtwt.charAt(1) && wtwt.length > 3 && wtwt.charAt(0) != 'a' && wtwt.charAt(0) != 'i' && wtwt.charAt(0) != 'u' && wtwt.charAt(0) != 'y' && cdoubled[comppartraw.length] != 'yes') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
 				{
 					comppart[compcount] = '0^' + wtwt.charAt(0) + '-' + '^0^0'; // the 'p' in our example
 					cdoubled[comppartraw.length] = 'yes'; // tells it there was a doubling at this point
@@ -1020,29 +1020,19 @@ function postout(dit,b)
 					compcountparts++;
 					wtwt = wtwt.substring(1); // the 'pa.tipanno' in our example
 					compcount++;
-					//findmatch();
-				}
-				if (aa == 0 && bb == 0 && cc == 0 && ((aiu3 && aiu1 == null && aiu2 == null) || wtwt.charAt(0) == comps.charAt(comps.length-1)) && wtwt.charAt(0) == wtwt.charAt(1)) // check for shortened vowels again, this time without bothering for consonant doubling, lengthen
-				{
-					wtwt = aiu3 + wtwt;
-					////alert('1' + wtwt);
 					findmatch();
-					wtwt = wtwt.substring(1);
 				}
-										
+
 				if (aa == 0 && bb == 0 && cc == 0)
 				{
-					findmatch();
-					if (aa == 0 && bb == 0 && cc == 0)
-					{
-						//alert('yes' + wtwt);
-						compcountparts++;
-						checkno = 3;
-						findcompound();
-						
-					}
+
+					//alert('yes' + wtwt);
+					compcountparts++;
+					checkno = 3;
+					findcompound();
+
 					//else addresults();
-					
+
 					////alert('3' + wtwt);
 				}
 				else
@@ -1063,16 +1053,15 @@ function postout(dit,b)
 							dd++;
 						}
 					}
-				for (var s = 0; s < shortdefpre.length; s++)
-				{
-					s2 = shortdefpost.length;
-					shortdefpost[s2] = shortdefpre[s];
-				}
-				shortdefpre = new Array();
-				shortdefpre.length=0;
-				sdpv = 0;				
-				
-				//alert('add from cf1')
+					for (var s = 0; s < shortdefpre.length; s++)
+					{
+						s2 = shortdefpost.length;
+						shortdefpost[s2] = shortdefpre[s];
+					}
+					shortdefpre = new Array();
+					shortdefpre.length=0;
+					sdpv = 0;				
+					//alert('add from cf1')
 					
 					shortdefpost.push('q');
 					addresults();
@@ -1087,7 +1076,9 @@ function postout(dit,b)
 					comppartraw.length = 0;
 					cdoubled = new Array();
 					cdoubled.length = 0;
-
+					aa = 0;
+					bb = 0;
+					cc = 0;
 					compcount = 0;
 					checkno = 4;
 					findcompound();
@@ -1165,8 +1156,6 @@ function postout(dit,b)
 	{
 		mfx++;
 		//document.getElementById('c').innerHTML = 'fc: ' + fcx + 'cf: ' + cfx + 'fm: ' + fmx + 'mf: ' + mfx;
-		
-		
 		ddtip = dd; // since we will keep track of where we are at in the sequence of results by adding 1 to dd every time we add a match, this var ddtip allows us to mark where the original result stays in the order.  Later we will add a tooltip on to the end of that entry
 		
 	// adding PED results
@@ -1176,18 +1165,18 @@ function postout(dit,b)
 						
 			tr[dd] = res[0] + '^' + wtwt + '^0^0'; // tr is the results.  Here we have added the first match (called 'upper', because it will stay in the main line of our output text).  We use '^' to seperate parts of an entry, and these will become valuable later when we perform a split function in linkout.js  Note that the second part is set at wtwt, whereas in the rest of the matches it will be set at 'g', and will thus be displayed as a clickable number in the lower line of the output.  For info on the other parts of tr, please see linkout.js  
 			dd++; // bump the queue for the next match.
-			if (conhalt > 1) // extra compound matches
-			{
-				tr[dd] = 'out';
-				dd++;
-			}	
+
 			for (var f = 1; f < res.length; f++)
 			{
 				g = f + 1;
 				tr[dd] = res[f] + '^' + g + '^1^0';
 				dd++;		
 			}
-
+			if (conhalt > 1) // extra compound matches
+			{
+				tr[dd] = 'out';
+				dd++;
+			}	
 		}
 	
 	// adding DPPN results

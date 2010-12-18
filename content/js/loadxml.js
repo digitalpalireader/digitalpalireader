@@ -15,6 +15,10 @@ function importXML(manxml,labelsearchtemp)
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}
+	if (hier == 'a' && document.form.nik.value == 'g') {
+		alert('Atthakatha not available for grammar.');
+		return;
+	}		
 
 	document.getElementById('mafa').innerHTML='';
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
@@ -164,10 +168,7 @@ function gettitles(altget,stop,prev,ssect)
 	if (stop == 2) newload = 2; // don't load xml data, load index instead
 	if (stop == 3) { switchhier(prev); newload = 2 };
 	if (prev) prevyes = 1;
-	if ((hier == 't' || prev == 't') && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
-		return; 
-	}     
+	   
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';

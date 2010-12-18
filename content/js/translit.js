@@ -301,9 +301,9 @@ function chscript(ascript) {
 	var hia = 'script'+ascript;
 	var hii = 'scripti'+ascript;
 	
-	document.getElementById('scriptro').onclick = function() {chscript('ro');};
-	document.getElementById('scriptth').onclick = function() {chscript('th');};
-	document.getElementById('scriptde').onclick = function() {chscript('de');};
+	document.getElementById('scriptro').onclick = function() {this.blur(); chscript('ro');};
+	document.getElementById('scriptth').onclick = function() {this.blur(); chscript('th');};
+	document.getElementById('scriptde').onclick = function() {this.blur(); chscript('de');};
 	document.getElementById('scriptro').title = 'Change to Roman';
 	document.getElementById('scriptth').title = 'Change to Thai';
 	document.getElementById('scriptde').title = 'Change to Devanagari';
@@ -316,7 +316,7 @@ function chscript(ascript) {
 	document.getElementById('scriptide').src = 'images/de0.png';
 	
 	document.getElementById(hia).onclick = function() {
-		void(0);
+		this.blur(); 
 	}
 	document.getElementById(hia).title = '';
 	document.getElementById(hii).src = 'images/'+ascript+'1.png';
