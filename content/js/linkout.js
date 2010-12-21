@@ -1,559 +1,205 @@
-var remote = true;
+function convoutput(spell) {
+	spell = spell.replace(/aa/g, '&#257;');
+	spell = spell.replace(/ii/g, '&#299;');
+	spell = spell.replace(/uu/g, '&#363;');
+	spell = spell.replace(/\,t/g, '&#7789;');
+	spell = spell.replace(/\,d/g, '&#7693;');
+	spell = spell.replace(/\`n/g, '&#7749;');
+	spell = spell.replace(/\,n/g, '&#7751;');
+	spell = spell.replace(/\,m/g, '&#7747;');
+	spell = spell.replace(/\~n/g, '&ntilde;');
+	spell = spell.replace(/\,l/g, '&#7735;');
+	spell = spell.replace(/AA/g, '&#256;');
+	spell = spell.replace(/II/g, '&#298;');
+	spell = spell.replace(/UU/g, '&#362;');
+	spell = spell.replace(/\,T/g, '&#7788;');
+	spell = spell.replace(/\,D/g, '&#7692;');
+	spell = spell.replace(/\,N/g, '&#7750;');
+	spell = spell.replace(/\,M/g, '&#7746;');
+	spell = spell.replace(/\~N/g, '&Ntilde;');
+	spell = spell.replace(/\,L/g, '&#7734;');
 
-function output(sdp)
+	// periods are regular expressions
+	// so we changed them to commas
+	// for velthius match - here we change them back
+	
+	spell = spell.replace(/,/g, '.');
+	spell = spell.replace(/q/g, ',');
+	return spell;
+}
+
+function output(which,first)
 {
-	var checksumout = new Array();
-	var fff = 0;
-	var shortdefpre = sdp;
-	var hotlink = 0;
-	var ttcheck = 0;
-	var upcheck = 0;
-	
-	var shortdef = new Array();
-	var sddup = [];
-	var sdv = 0;
-	
-	var alex = "";
-	var spacestop = 0;
-	var punccheck = 0;
-	
-	// link entries with reference number more than
-	// 0 to pages on our computer - change for online linking 
-	var ped1 = 'etc/';
-	var ped2 = '.xml';
-	var dict = '../DPPN/';	
-
-	var foldersw = new Array();
-	var f0 = 0;
-	var f1 = 0;
-	
-	var remotewhat = "";
-	var folderno = 0;
-
-	if (remote == true) ped2 =  '.pali';
-	if (remote == true) dict = 'http://www.palikanon.com/english/pali_names/';
-	
-	var puncstop = 0;
-
-	
-	
-	var velcount = 0;
-	var trpunc = new Array();
-	var lastword = 0;
-
-
-	var osout = "";
-	var curly = "";
-
-  // lct is going to be our end-of-Line CounTer,
-  // defined here as 100 characters (approximately)
-  
-	var lct = 0; //count letters
-	var lctend = 0;
-	var lctlimit = 40;
 	
 // create option dropdown
 	
-	var firstcheck = 1; // check for first complete output
-	var trslice = 0;
-	osout = osout + '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr><td>';
-	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + tr.join(' | ');
+	var osout = '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr>';
+	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + outwords.join(' | ');
 
-	var outputs = []; // tr output
-	var outputsd = []; // sdp output
-	var outputshow = []; // displayed in option
+	var hotlink;
 	
-	var onetword = [];
-	var showword = [];
-	var onesword = [];
-	var altsel = '<select size="1" id="anfout" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onchange="tr=this.options[this.selectedIndex].value.split(\'#\'); output(document.getElementById(\'anfouts\').options[this.selectedIndex].value.split(\'#\'));" title="Select alternative interpretations here"></select><select id="anfouts" style="visibility:hidden" title="Select alternative interpretations here"></select>';
 	
-	for (var b = 0; b < tr.length; b++)
-	{
-			//alert(tr[b]);
-			if (tr[b] == 'in')
-			{
-				if (firstcheck == 1) {
-					document.getElementById('anfs').innerHTML = altsel;
-					trslice = b;
-					firstcheck = 0;
-					outputs.push(onetword.join('#'));
-					outputshow.push(showword.join(''));
-					onetword = [];
-					showword = [];
-				}
-			}
-			else if (tr[b] == 'out')
-			{
-				outputs.push(onetword.join('#'));
-				outputshow.push(showword.join(''));
-				onetword = [];
-				showword = [];
-			}
-			else if (tr[b] == 'newrow')
-			{
-				if (b == tr.length-1) { document.getElementById('anfs').innerHTML = ''; break; }  // only one match
-				if (firstcheck == 1) {  // to slice tr
-					document.getElementById('anfs').innerHTML = altsel;
-					trslice = b;
-					firstcheck = 0;
-				} 
-				outputs.push(onetword.join('#'));
-				outputshow.push(showword.join(''));
-				onetword = [];
-				showword = [];
-			}
-			else if (tr[b]){
-				onetword.push(tr[b]);
-				if (tr[b].split('^')[1].length > 1) { showword.push(tr[b].split('^')[1]) }
-				if (b == tr.length-1 && firstcheck == 0) { // last entry
-					outputs.push(onetword.join('#'));
-					outputshow.push(showword.join(''));
-					onetword = [];
-					showword = [];
-				}
+	if (outwords.length > 1 && first) {
+		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onchange="output(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
-			}
-	}
-
-	if (trslice > 0) {
-		tr = tr.slice(0,trslice);
-	}
-	trslice = 0;
-	firstcheck = 1;
-	//alert(shortdefpre);
-	for (var b = 0; b < shortdefpre.length; b++)
-	{
-			if (shortdefpre[b] == 'q')
-			{
-				if (firstcheck == 1) {  // to slice sdp
-					trslice = b;
-					firstcheck = 0;
-					if (b == shortdefpre.length-1) { break; }  // only one match
-				} 
-				outputsd.push(onesword.join('#'));
-				onesword = [];
-			}
-			else {
-				onesword.push(shortdefpre[b]);
-			}
-			//alert(onesword);
-	}
-	//document.getElementById('difb').innerHTML += '<br>' + outputs.length + ' ' + outputsd.length + ' ' + outputshow.length + '<br>' + outputs + ' | ' + outputsd + ' | ' + outputshow;
-	//return;
-	if (firstcheck == 0) {
-		shortdefpre = shortdefpre.slice(0,trslice);
-		for (i in outputs) { 
-			document.getElementById('anfout').innerHTML += '<option value="' + outputs[i] + '">' + replaceunistandard(outputshow[i].replace(/,/g, '.')) + '</option>'; 
-			document.getElementById('anfouts').innerHTML +='<option value="' + outputsd[i] + '">' + replaceunistandard(outputshow[i].replace(/,/g, '.')) + '</option>';
+		for (var b = 0; b < outwords.length; b++)  // get the word names
+		{	
+			var outword = outwords[b].split('$');
+			document.forma.out.innerHTML += '<option>' + replaceunistandard(outword[0].replace(/,/g, '.')) + '</option>'; 
 		}
 	}
 	
-// display first output
+	var owparts = outwords[which].split('$')[1].split('@');
+		
+	for (c in owparts) { // per part (with many variants)
+		
+		var partvars = owparts[c].split('#');
+		if (c > 0) {
+			osout += '<td>-<br><font size=2>&nbsp;</font></td>';	
+		}	
 
-	for (var a = 0; a < tr.length; a++)
-	{		
-		if(tr[a])
-		{
-			//osout += '<td>' + lct + '</td>';
-			//alert(tr[a]);
-			
-			
-			
-			if (tr[a] == 'in')
-			{
-				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center">&nbsp;( <i>';
-				tr[a] = '0^in^0^0';
-				//alert(osout);
-				lastword = 0;
-				checksum2--;
-			}
-			else if (tr[a] == 'out')
-			{
-				osout += '</i> )';
-				tr[a] = '0^out^0^0';
-				//alert('out');
-				lastword = 1;
-			}
-			else if (tr[a] == 'newrow')
-			{
-				osout += '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center"><i>';
-				tr[a] = '0^newrow^0^0';
-				checksum1++;
-			}
-			else
-			{
-			//if (a == 0) document.getElementById('debug').innerHTML= '<p>' + tr[a];
-				
-				var os = tr[a].split('^');
-				
-	
-				var paliword = new PaliWord(os[0],os[1],os[2],os[3],os[4],os[5]);
-				
-				// os[0] = hyperlink
-				// os[1] = pali word
-				// os[2] = category
-				// os[3] = proper name or not
-				// os[4] = tooltip or not
-				// os[5] = tooltip definition
-				// for os[2]: 0 = first match (top), 1 = below, 2 = single digit, 3 = special suffix, 4 = new row
-				// for os[4]: 1 = tooltip only, 2 = tooltip + match
-			//if (os[1].length == 1 && os[2]
-			//alert(tr[a]);		
-	
-				velcount = paliword.spell.replace(/\&....\;/g, 'x');
-				velcount = velcount.replace(/\&.....\;/g, 'x');
-				velcount = velcount.replace(/\&......\;/g, 'x');
-				velcount = velcount.replace(/\&.......\;/g, 'x');
-				
-				//if (velcount.length != paliword.spell.length) alert (velcount + paliword.spell);
-				
-				if (os[2] != 1 && (os[1].charAt(os[1].length-1) != '-' || os[1].length == 1) && os[2] != 3)
-				{
-					checksum2++;
-					checksumout[fff] = os[1];
-					fff++;
-				}
-			
+		osout += '<td align="center">';
 		
-					// ---------- variables for checking last and next entry ----------
-					var oss = new Array();
-					if (a > 0) oss = tr[a-1].split('^');
-					var osss = new Array();
-					if (tr[a+1]) osss = tr[a+1].split('^');
-						
-			
-					
-					//alex += oss[2] +' -- ';
-					
-					// tooltip split
-					if (paliword.toolTipDef)
-					{
-						paliword.toolTipDef = paliword.toolTipDef.replace(/,/g, '.');
-						paliword.toolTipDef = paliword.toolTipDef.replace(/\&comma\;/g, ',');
-						paliword.toolTipDef = paliword.toolTipDef.replace(/xxx/g, '^');
-						var os5 = new Array;
-						os5 = paliword.toolTipDef.split('^');
-					}
-				  
-	
-				  
-					if (paliword.category != 1)
-					{
-						lct += velcount.length + 1;
-						
-					}
-				  
-				  
-				  // internal table making
-				  
-					if (paliword.category != 1)
-					{
-						if (oss[2] == 1) 
-						{
-							osout = osout + '</font>';
-						}
-						
-						osout = osout + '</td><td width="1" valign="top" align="center">';
-						
-						if (lct >= lctlimit && oss[1] != '\'')      // end of line
-						{
-							lctend = 1;
-						}
-					}	
-					
-					if (oss[2] == 0 && paliword.category == 1) //create the lower line
-					{
-						osout = osout + '<br><font size="2">';
-					}
-					if (puncstop != true || os[2] != 2) // check whether to include punctuation
-					{
-	
-						if (paliword.category != 2)  // ---------- don't bother for nonword entries  ----------
-						{
-							
-							
-							if (paliword.category != 1) // not a subnote, either a non-match or a upper match
-							{
-								upcheck++; // add the upper word marker
-								if (lastword == 1) osout += '&nbsp;';  // ---------- add spaces ----------
-								if (oss[1] == '-' && puncstop != true) osout += '&nbsp;';  // ---------- add spaces ----------
-		
-								if (paliword.isToolTip > 0) // if tooltip
-								{
-									ttcheck++; // check whether to add the inline definition
-									if (paliword.isToolTip == 1)
-									{
-										osout += '<b style="color:' + colorcfg['colcpd'] + '">' + paliword.spell + '</b>';
-									}
-									else if (paliword.isProperName == 1)  // dppn match
-									{
-										osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + paliword.spell + '</b></a>';
-										hotlink = dict + os[0] + '.htm'; // opens link in lower frame
-									}
-									else
-									{
-										osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + paliword.spell + '</b></a>';
-										hotlink = 'PED/' + os[0]; // opens link in lower frame
-									}
-									shortdef[sdv] = os5[0] + '^' + os5[1];
-									sdv++;
-									
-								} 
-								else if (os[0] == 0) // no match
-								{
-								  osout += '<b style="color:' + colorcfg['coltext'] + '">' + paliword.spell + '</b>';
-								}
-								else if (paliword.isProperName == 1)  // dppn match
-								{
-								  osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + paliword.spell + '</b></a>';
-								  hotlink = 'dppn/' + os[0]; // opens link in lower frame
-								}
-								else
-								{
-								  osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')"><b style="color:' + colorcfg['colped'] + '">' + paliword.spell + '</b></a>';
-								  hotlink = 'PED/' + os[0]; // opens link in lower frame
-								}
-					
-							   /* add punctuation
-								   noneedpunc = 0;
-								   for (var lookpunc = a+1; lookpunc < tr.length; lookpunc++) 
-								   {
-										trpunc = tr[lookpunc].split('^');
-										if (trpunc[2] == 0) noneedpunc = 1; // no punctuation in between words
-										if (noneedpunc != 1) 
-										{
-					
-											if (trpunc[2] == 2)		// ---------- punctuation in between ----------
-						
-											{
-									
-												if (trpunc[1] == '.')
-												{
-													osout = osout + '. &nbsp;';
-												}
-												else if (trpunc[1] == 'q')
-												{
-													osout = osout + ', ';
-												}
-												else if (trpunc[1] == '-')
-												{
-													osout = osout + '-- ';
-												}
-												else
-												{
-													osout = osout + trpunc[1];
-												}
-											}
-										}
-								   }
-								   */
-								if (osss[1])
-								{
-									//alert(os + ' ' + osss);
-									//if (paliword.spell.charAt(paliword.spell.length-1) != '-' && osss[1].charAt(0) != '-' && osss[2] != 3 && osss[1].length != 1 && os[1] != '\'') osout += '&nbsp;';  // ---------- add spaces ----------
-									//if (osss[1] == '-' && puncstop != true) osout += '&nbsp;';  // ---------- add spaces ----------
-									
-								}
-							 
-							 }
-							 else // yes a below match
-							 {
-								if (paliword.isProperName == 1)  // name match
-								{      
-								   if (oss[2] != 1) // no space
-								   {
-									  if (os[0] == 0)
-									  {
-										 osout = osout + paliword.spell;
-									  }
-									  else
-									  {
-										 osout = osout + '<a style="color:' + colorcfg['coldppn'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>';
-									  }
-								   }
-								   else if (os[0] == 0)
-								   {
-										 osout += ' ' + paliword.spell;
-								   }
-								   else
-								   {
-										 osout += ' <a style="color:' + colorcfg['coldppn'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + os[0] + '\')">' + paliword.spell + '</a>'; // add space
-								   }
-								}
-								else  // dictionary alt match
-								{
-								   if (oss[2] != 1) // no space
-								   {
-									  if (os[0] == 0)
-									  {
-										 osout = osout + paliword.spell;
-									  }
-									  else
-									  {
-										 osout = osout + '<a style="color:' + colorcfg['colped'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' + paliword.spell + '</a>';
-									  }
-								   }
-								   else if (os[0] == 0)
-								   {
-										 osout = osout + ' ' + paliword.spell;
-								   }
-								   else
-								   {
-										 osout += ' <a style="color:' + colorcfg['colped'] + '" href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + os[0] + '\')">' +
-														  paliword.spell + '</a>';
-								   }
-								}
-							}
-						
-						}
-						else // punctuation rules
-						{
-							if (os[1] == '\\')
-							{
-								osout += '&nbsp;';
-								
-								osout += '\'';
-								
-								//if (osss[2] != 0 && osss[2] != 2) osout += '&nbsp;';
-							}
-							else if (os[1] == ';' || os[1] == 'q' || os[1] == '-' && osss[2] == 2)
-							{
-								//alert(os[1]);
-								osout = osout + paliword.spell + '&nbsp;';
-							}
-							else if (os[1] == ',' || os[1] == '?')
-							{
-								osout = osout + paliword.spell + '&nbsp;&nbsp;';
-							}					
-							else osout = osout + paliword.spell;
-						}
-						spacestop = 0;
-					}
-					else if (puncstop == 1 && spacestop != 1)
-					{
-						
-						osout = osout + '&nbsp;';
-						spacestop = 1;
-					}
-				}
-				if (os[2] != 1)
-				{
-					if (os[1].charAt(os[1].length-1) != '-' && os[1].length > 1 && osss[2] != 3) 
-					{ 
-						lastword = 1; // add a space
-						
-					}
-					else lastword = 0;
-				}
-				lctend = 0; // cancel next if
-				if (lctend == 1 && osss[2] != 1)
-				{
-					if (osss[1])
-					{
-						if (osss[1].length > 1)
-						{
-							osout = osout + '</td><td>&nbsp;<br>&nbsp;</td></tr></table><br><table cellspacing="0" cellpadding="0"><tr><td width="1" valign="top" align="center"><i>';
-							lct = 0;
-							lctend = 0;
-						}
-					}
+		for (d in partvars) { // per variant for each part
+			var data = partvars[d].split('^');
+
+				// data[0] = reference
+				// data[1] = pali word
+				// data[2] = category
+				// data[3] = concise definition (if any)
+				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
+
+			if (d == 0) { // first match (will go on top)
+				switch (data[2]) {
+				case '0':
+					if (!hotlink) { hotlink = 'PED/' + data[0]; } // opens link in lower frame
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + convoutput(data[1]) + '</b></a>';
+					break;
+				case '1':
+					if (!hotlink) { hotlink = 'dppn/' + data[0]; } // opens link in lower frame
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
+					break;
+				case '2':
+					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + convoutput(data[1]) + '</b>';
+					break;
+				case '3':
+					osout += '<b style="color:' + colorcfg['coltext'] + '">' + convoutput(data[1]) + '</b>';
+					break;
 				}
 			}
-			else tr[a] = '';
+			else { // lower match
+				if (d == 1) {
+					osout += '<br><font size="2">';
+				}
+				switch (data[2]) {
+				case '0':
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + (parseInt(d)+1) + '</b></a> ';
+					break;
+				case '1':
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a> ';
+					break;
+				}
+			}
 		}
+		if (d > 0) {
+			osout = osout.substring(0,osout.length-1);
+			osout += '</font>';
+		}
+		else {
+			osout += '<br><font size=2>&nbsp;</font>';
+		}		
+		osout += '</td>';
+		
+	}
+	osout += '</tr></table>';
 	
-	
-	osout += '</tr></table></td><td align=center id=c></td><td align=right style="">';
-	var ootmp = '';
-	if (shortdefpre.length > 1) ootmp += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.value;  var spdcol = spdouts.search(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdouts.substring(0,spdcol) + \':</b> \' + spdouts.substring(spdcol+1,spdouts.length);">';
-	if (ttcheck > 0)
-	{
-		var os5array = new Array();
-		var sdpone;
-		for (sdt = 0; sdt < shortdefpre.length; sdt++)
-		{
-			sdpone = shortdefpre[sdt];
-			sdsone = shortdef[sdt];
-			sdpone = sdpone.replace(/aa/g, '&#257;');
-			sdpone = sdpone.replace(/ii/g, '&#299;');
-			sdpone = sdpone.replace(/uu/g, '&#363;');
-			sdpone = sdpone.replace(/\,t/g, '&#7789;');
-			sdpone = sdpone.replace(/\,d/g, '&#7693;');
-			sdpone = sdpone.replace(/\`n/g, '&#7749;');
-			sdpone = sdpone.replace(/\,n/g, '&#7751;');
-			sdpone = sdpone.replace(/\,m/g, '&#7747;');
-			sdpone = sdpone.replace(/\~n/g, '&ntilde;');
-			sdpone = sdpone.replace(/\,l/g, '&#7735;');
-			sdpone = sdpone.replace(/AA/g, '&#256;');
-			sdpone = sdpone.replace(/II/g, '&#298;');
-			sdpone = sdpone.replace(/UU/g, '&#362;');
-			sdpone = sdpone.replace(/\,T/g, '&#7788;');
-			sdpone = sdpone.replace(/\,D/g, '&#7692;');
-			sdpone = sdpone.replace(/\,N/g, '&#7750;');
-			sdpone = sdpone.replace(/\,M/g, '&#7746;');
-			sdpone = sdpone.replace(/\~N/g, '&Ntilde;');
-			sdpone = sdpone.replace(/\,L/g, '&#7734;');
+	osout += '</td><td align=center id=c></td><td align=right>';
 
-			os5array = sdsone.split('^');
-			if (!sddup[sdpone]) {
-				if (sdt == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + sdpone + ': </b>' + os5array[0] + ' (' + os5array[1] + ')'; } 
-				if (shortdefpre.length > 1) {
-					var os5a0 = os5array[0];
-					if (os5array[0].length > 100) {
-						while (os5a0.length > 100) {
-							os5a0 = os5a0.substring(0,os5a0.length-1);
-						}
-						os5a0 += '...'
+// add concise definitions
+	
+	var thisconcise = [];
+	var conciseoutput = '';
+
+	if (shortdefpost[which]) {
+
+		thisconcise = shortdefpost[which].split('$'); 
+		
+		if (thisconcise.length > 1) conciseoutput += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \'</b> \' + spdcol[1];">';
+				
+		var concisedups = [];
+		
+		for (x = 0; x < thisconcise.length; x++)
+		{
+			var conciseword = thisconcise[x];
+			conciseword = conciseword.replace(/aa/g, '&#257;');
+			conciseword = conciseword.replace(/ii/g, '&#299;');
+			conciseword = conciseword.replace(/uu/g, '&#363;');
+			conciseword = conciseword.replace(/\,t/g, '&#7789;');
+			conciseword = conciseword.replace(/\,d/g, '&#7693;');
+			conciseword = conciseword.replace(/\`n/g, '&#7749;');
+			conciseword = conciseword.replace(/\,n/g, '&#7751;');
+			conciseword = conciseword.replace(/\,m/g, '&#7747;');
+			conciseword = conciseword.replace(/\~n/g, '&ntilde;');
+			conciseword = conciseword.replace(/\,l/g, '&#7735;');
+			conciseword = conciseword.replace(/AA/g, '&#256;');
+			conciseword = conciseword.replace(/II/g, '&#298;');
+			conciseword = conciseword.replace(/UU/g, '&#362;');
+			conciseword = conciseword.replace(/\,T/g, '&#7788;');
+			conciseword = conciseword.replace(/\,D/g, '&#7692;');
+			conciseword = conciseword.replace(/\,N/g, '&#7750;');
+			conciseword = conciseword.replace(/\,M/g, '&#7746;');
+			conciseword = conciseword.replace(/\~N/g, '&Ntilde;');
+			conciseword = conciseword.replace(/\,L/g, '&#7734;');
+
+			var concisedef = yt[thisconcise[x]].split('#');
+			
+			if (!concisedups[conciseword]) {
+				if (x == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
+				if (thisconcise.length > 1) {
+					var condefnotype = concisedef[0];
+					if (concisedef[0].length > 100) {
+							condefnotype.length = 100;
+						condefnotype += '...'
 					}
 					
-					ootmp += '<option value="' + sdpone + ': ' + os5array[0] + ' (' + os5array[1] + ')">' + sdpone + ': ' + os5a0 + ' (' + os5array[1] + ')</option>'; 
+					conciseoutput += '<option value="' + conciseword + ': ' + concisedef[0] + ' (' + concisedef[1] + ')">' + conciseword + ': ' + condefnotype + ' (' + concisedef[1] + ')</option>'; 
 						
 				}
-				sddup[sdpone] = sdsone;
+				concisedups[conciseword] = 1;
 			}		
 		}
 		
 	}
-	//document.getElementById('difb').innerHTML += '<br>|' + shortdefpre + '|';
-	if (shortdefpre.length > 1) ootmp += '</select>';
-	if (shortdefpre.length > 1 || (shortdefpre[0] && shortdefpre[0].length > 0)) osout += '<span id=spdout>'+sdfirst+'</span></td></tr></table>';
+	//document.getElementById('difb').innerHTML += '<br>|' + thisconcise + '|';
+	if (thisconcise.length > 1) conciseoutput += '</select>';
+	if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0)) osout += '<span id=spdout>'+sdfirst+'</span>';
 
-	document.getElementById('anfsd').innerHTML = ootmp;
+	osout += '</td></tr></table>';
 	document.getElementById('anfb').innerHTML = osout;
-	//document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
+	document.getElementById('anfsd').innerHTML = conciseoutput;
+
 	if (hotlink != 0) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
-		//else location = hotlink;
 	}
-	//else document.getElementById('difb').innerHTML = 'No PED Match';
-	
-	tr = new Array();
-	multiple = 0;
-	
-	//if (checksum1 != checksum2) document.getElementById('anfb').innerHTML += '<p>(' + checksum1 + ' ' + checksum2 + ')</p>';
-	checksum1 = 0;
-	checksum2 = 0;
-	//alert(alex);
+	return;
 }
+
 var pedfileget = '';
 function paliXML(file)
 {
 	var tloc = file.split('/');
-	pedfileget = tloc[1] + '/' + tloc[2];
-	var pedp = 'etc/XML1/'+ tloc[1]+'/ped.xml';
+	var t1 = tloc[1];	
+	var t2 = tloc[2];
+	pedfileget = t1 + '/' + t2;
+	var pedp = 'etc/XML1/'+ t1+'/ped.xml';
 
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", pedp, false);
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
-
-
-	var tloc = pedfileget.split('/');
-	var tloc1 = tloc[0];	
-	var tloc2 = tloc[1];	
-	var dataa = xmlDoc.getElementsByTagName('data')[tloc2].getElementsByTagName('sdata');
+	
+	var dataa = xmlDoc.getElementsByTagName('data')[t2].getElementsByTagName('sdata');
 	var data = '';
 	for (j=0; j<dataa.length; j++) {
 		data += dataa[j].childNodes[0].nodeValue;
@@ -563,19 +209,19 @@ function paliXML(file)
 	document.getElementById('difb').innerHTML = data;
     document.getElementById('cdif').scrollTop=0;
 
-	var pedln = [];
+	var pedln = []; // limit in folders
 	pedln.push(4446);
 	pedln.push(2932);
 	pedln.push(3907);
 	pedln.push(3687);
 	pedln.push(1304);
 	
-	var tnum = parseFloat(tloc2);
+	var tnum = parseFloat(t2);
 	var tout = '';
 	var bout = '';
 
-	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'PED/' + tloc1 + '/' + (tnum - 1) + '\')">';
-	if (tnum != pedln[tloc2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'PED/' + tloc1 + '/' + (tnum + 1) + '\')">';
+	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')">';
+	if (tnum != pedln[t2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')">';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
 }
@@ -613,10 +259,10 @@ function DPPNXML(file)
 	pedln.push(3687);
 	pedln.push(1304);
 	
-	var tnum = parseFloat(tloc2);
+	var tnum = parseFloat(t2);
 
-	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'etc/' + tloc1 + '/' + (tnum - 1) + '.xml\')">';
-	if (tnum != pedln[tloc2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'etc/' + tloc1 + '/' + (tnum + 1) + '.xml\')">';
+	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'etc/' + t1 + '/' + (tnum - 1) + '.xml\')">';
+	if (tnum != pedln[t2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'etc/' + t1 + '/' + (tnum + 1) + '.xml\')">';
 */
 
 	document.getElementById('lt').innerHTML = tout;

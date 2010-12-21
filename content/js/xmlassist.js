@@ -971,7 +971,7 @@ function limitt() {
 	else { return false };
 }
 
-function switchhier(htmp) {
+function switchhier(htmp,stop) {
 
 	if (htmp == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
@@ -1005,6 +1005,6 @@ function switchhier(htmp) {
 	document.getElementById(hia).title = '';
 	document.getElementById(hii).src = 'images/'+hier+'1.png';
 		
-	changenikaya();
+	changenikaya(stop);
 }	
 

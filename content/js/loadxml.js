@@ -737,7 +737,7 @@ function getplace(temp) { // standard function to get a place from an array
 	
 	if (setplace[7] == 'm') { setplace[7] == 'a'; } // backwards!
 	else if (setplace[7] == 'a') { setplace[7] == 'm'; } // backwards!
-	switchhier(setplace[7]);
+	switchhier(setplace[7],1);
 
 	var sp0 = setplace[0];
 	var nikaya = document.form.nik[sp0].value;
@@ -745,7 +745,8 @@ function getplace(temp) { // standard function to get a place from an array
 
 	var nik = document.form.nik.value;
 	var booknumber = setplace[1];
-	document.getElementById('book').innerHTML=nikvoladi[nik];
+	if (nikvoladi[nik]) {document.getElementById('book').innerHTML=nikvoladi[nik]; }
+	else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
 	document.form.book.selectedIndex = setplace[1];
 	var book = document.form.book.value;
 

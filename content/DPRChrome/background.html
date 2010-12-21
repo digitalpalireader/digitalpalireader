@@ -1,0 +1,24 @@
+<html>
+<script type="text/javascript" src="js/prefload.js"></script>
+<script>
+for (i = 0; i < cPrefs.length; i++) {
+    var Pref = cPrefs[i];
+    var Val = cPrefVals[i];
+    if (!localStorage[Pref]) localStorage[Pref] = Val;
+}
+for (i = 0; i < sPrefs.length; i++) {
+    var Pref = sPrefs[i];
+    var Val = sPrefVals[i];
+    if (!localStorage[Pref]) localStorage[Pref] = Val;
+}
+for (i = 0; i < mPrefs.length; i++) {
+    var Pref = mPrefs[i];
+    var Val = mPrefVals[i];
+    if (!localStorage[Pref]) localStorage[Pref] = Val;
+}
+chrome.browserAction.onClicked.addListener(function(tab) {
+    var viewTabUrl = chrome.extension.getURL('index.htm');
+    chrome.tabs.create({url:"index.htm"})
+});
+</script>
+</html>
