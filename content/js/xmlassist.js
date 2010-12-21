@@ -326,7 +326,11 @@ function formatuniout(data,which) { // prepare without links
 	var outarray = new Array();
 	
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-	data = data.replace(/\'\'/g, '``');
+	data = data.replace(/`/g, '\'');
+	data = data.replace(/"ti/g, '&quot; &quot;ti');
+	data = data.replace(/''ti/g, '&quot; &quot;ti');
+	data = data.replace(/'ti/g, '\' \'ti');
+	data = data.replace(/\'\'/g, ' &quot;');
 	data = data.replace(/\^b\^/g, ' <b> ');
 	data = data.replace(/\^eb\^/g, ' </b> ');
 	data = data.replace(/\^a\^\"/g, ' z');

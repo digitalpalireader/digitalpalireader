@@ -1,4 +1,4 @@
-var mainda = new Array();
+var mainda = [];
 
 //original
 
@@ -2539,10 +2539,10 @@ mainda["ahuhaaliya"] = "0/2534";
 mainda["ahe"] = "0/2535";
 mainda["aho"] = "0/2536";
 mainda["ahosi"] = "0/2537";
-mainda["aaz1"] = "0/2538";
-mainda["aa`z2"] = "0/2539";
-mainda["aa`z3"] = "0/2540";
-mainda["aa`z4"] = "0/2541";
+// mainda["aa"] = "0/2538"; pain in the neck
+mainda["aa`z1"] = "0/2539";
+mainda["aa`z2"] = "0/2540";
+mainda["aa`z3"] = "0/2541";
 mainda["aaka`nkhati"] = "0/2542";
 mainda["aaka`nkhaa"] = "0/2543";
 mainda["aaka,d,dhati"] = "0/2544";
@@ -11020,7 +11020,7 @@ mainda["bhava"] = "2/3627";
 mainda["bhavati"] = "2/3628";
 mainda["bhavatta"] = "2/3629";
 mainda["bhavana"] = "2/3630";
-mainda["bhavant"] = "2/3631";
+mainda["bhavanta"] = "2/3631";
 mainda["bhaveyya"] = "2/3632";
 mainda["bhasati"] = "2/3633";
 mainda["bhasita"] = "2/3634";
@@ -14294,7 +14294,8 @@ mainda["sa`nkhaaravant"] = "3/2990";
 mainda["sa`nkhitta"] = "3/2991";
 mainda["sa`nkhipati"] = "3/2992";
 mainda["sa`nkhippa"] = "3/2993";
-mainda["sa`nkhiyaa"] = "3/2994";
+mainda["sa`nkhiyadhamma"] = "3/2994"; // added
+mainda["sa`nkhiyaadhamma"] = "3/2994"; // edited
 mainda["sa`nkhubhati"] = "3/2995";
 mainda["sa`nkhubhita"] = "3/2996";
 mainda["sa`nkhepa"] = "3/2997";
@@ -15820,7 +15821,7 @@ mainda["siiha"] = "4/825";
 mainda["siiha,la"] = "4/826";
 mainda["siiha,laka"] = "4/827";
 mainda["suz1"] = "4/828";
-mainda["su"] = "4/829";
+mainda["suz2"] = "4/829";
 mainda["suz3"] = "4/830";
 mainda["su,msumaara"] = "4/831";
 mainda["suka"] = "4/832";
@@ -16317,4 +16318,3 @@ mainda["yamaamase"] = "3/474";
 mainda["c"] = "1/1501";
 //mainda["n"] = "1/2901"; // removed trailing 'n'
 mainda["upapajjanta"] = "0/3810";
-

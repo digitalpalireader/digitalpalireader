@@ -663,7 +663,7 @@ function createTableman(type)
 		switch (document.form.sped.selectedIndex) {
 			case 0:
 				var TheData = document.form.manual.value;
-				postout(TheData);
+				postout(TheData,0,1);
 				break;
 			case 1:
 				moveframey('dif');

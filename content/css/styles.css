@@ -15,7 +15,7 @@ color: #FFF;
 background-color: #FFF;
 }
 
-select { font-family: sans-serif; font-size: 14px; background: white;}
+select { font-family: sans; font-size: 14px; background: white;}
 
 input.btn, input.go {
   font: bold 84% 'courier new';
@@ -291,6 +291,10 @@ float:left;
 #rright {  
 width:40px; 
 float:right;
+}
+
+#spdout {
+font-size:14px;
 }
 
 .hide { display: none; }

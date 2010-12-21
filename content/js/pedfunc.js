@@ -28,13 +28,10 @@ function pedsearchstart()
 	var finout = '';
 	if (ped.length == 0) {
         for (a in mainda) {
-            if (a.charAt(a.length-2) != 'f') {
                 ped.push(a + '^' + mainda[a]);
-            }
         }
     }
     var pedl = ped.length;
-    if (getstring.charAt(0) == '*') { pedl = 16165; } // only main
         
 	for (x = 0; x < pedl; x++)
 	{
@@ -191,7 +188,7 @@ function dppnsearchstart()
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
-	if (dppn.length == 0) for (a in mainda) if (a.charAt(a.length-2) == 'f') dppn.push(a + '^' + mainda[a]);
+	if (dppn.length == 0) { for (a in nameda) { dppn.push(a + '^' + nameda[a]); } }
 
     for (x = 0; x < dppn.length; x++)
 	{

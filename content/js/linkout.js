@@ -30,7 +30,7 @@ function convoutput(spell) {
 
 function output(which,first)
 {
-	
+
 // create option dropdown
 	
 	var osout = '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr>';
@@ -40,12 +40,12 @@ function output(which,first)
 	
 	
 	if (outwords.length > 1 && first) {
-		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onchange="output(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
+		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-family: sans; font-size:12px" onmouseover="if(this.length < 20) { this.size = this.length; }" onmouseout="this.size=1;" onclick="this.size=1;" onchange="this.size=1; output(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	
 			var outword = outwords[b].split('$');
-			document.forma.out.innerHTML += '<option>' + replaceunistandard(outword[0].replace(/,/g, '.')) + '</option>'; 
+			document.forma.out.innerHTML += '<option>' + replaceunistandard(outword[0].replace(/,/g, '.').replace(/`n/g, '"n')) + '</option>'; 
 		}
 	}
 	
@@ -60,9 +60,8 @@ function output(which,first)
 
 		osout += '<td align="center">';
 		
-		for (d in partvars) { // per variant for each part
+		for (var d = 0; d < partvars.length; d++) { // per variant for each part
 			var data = partvars[d].split('^');
-
 				// data[0] = reference
 				// data[1] = pali word
 				// data[2] = category
@@ -93,16 +92,16 @@ function output(which,first)
 				}
 				switch (data[2]) {
 				case '0':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + (parseInt(d)+1) + '</b></a> ';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
 					break;
 				case '1':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a> ';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
 					break;
 				}
 			}
 		}
-		if (d > 0) {
-			osout = osout.substring(0,osout.length-1);
+		if (partvars.length > 1) {
+			osout = osout.substring(0,osout.length-6);
 			osout += '</font>';
 		}
 		else {
@@ -121,15 +120,16 @@ function output(which,first)
 	var conciseoutput = '';
 
 	if (shortdefpost[which]) {
-
 		thisconcise = shortdefpost[which].split('$'); 
 		
-		if (thisconcise.length > 1) conciseoutput += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \'</b> \' + spdcol[1];">';
+		if (thisconcise.length > 1) conciseoutput += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="this.size=1; var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
 				
 		var concisedups = [];
 		
 		for (x = 0; x < thisconcise.length; x++)
 		{
+			if (thisconcise[x].length == 0) continue;
+			
 			var conciseword = thisconcise[x];
 			conciseword = conciseword.replace(/aa/g, '&#257;');
 			conciseword = conciseword.replace(/ii/g, '&#299;');
@@ -158,7 +158,7 @@ function output(which,first)
 				if (thisconcise.length > 1) {
 					var condefnotype = concisedef[0];
 					if (concisedef[0].length > 100) {
-							condefnotype.length = 100;
+							condefnotype = condefnotype.substring(0,100);
 						condefnotype += '...'
 					}
 					
@@ -177,8 +177,8 @@ function output(which,first)
 	osout += '</td></tr></table>';
 	document.getElementById('anfb').innerHTML = osout;
 	document.getElementById('anfsd').innerHTML = conciseoutput;
-
-	if (hotlink != 0) {
+	
+	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
 	}
