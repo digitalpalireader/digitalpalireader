@@ -11,6 +11,8 @@ var hier = 'm'; // m = mula, a = atthakatha
 
 function importXML(manxml,labelsearchtemp)
 {
+	moves(0); // close search
+	
 	if (hier == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
@@ -87,9 +89,14 @@ function importXML(manxml,labelsearchtemp)
 	else if (wna.length > 1) { var bknameme  = wna }
 	else if (vna.length > 1) { var bknameme  = vna }
 	
-	bknameme = bknameme.replace(/ /g, '');
+	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 	
 	document.form.bmname.value = bknameme;
+	var hierb = hier;
+	if (hier=='a') hierb = 'm'; // fudge
+	if (hier=='m') hierb = 'a';
+	
+	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+"'"+hierb+"'");
 	
 	var theData = '';
 	var onepar;
@@ -732,11 +739,12 @@ function xmlrefget()
 
 var setplace = new Array();
 
-function getplace(temp) { // standard function to get a place from an array
+function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section,7=hier(backwards)
+
 	setplace = temp;
-	
-	if (setplace[7] == 'm') { setplace[7] == 'a'; } // backwards!
-	else if (setplace[7] == 'a') { setplace[7] == 'm'; } // backwards!
+	if (setplace[7] == 'm') { setplace[7] = 'a'; } // backwards!
+	else if (setplace[7] == 'a') { setplace[7] = 'm'; } // backwards!
+
 	switchhier(setplace[7],1);
 
 	var sp0 = setplace[0];

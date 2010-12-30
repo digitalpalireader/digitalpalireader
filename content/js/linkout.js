@@ -31,6 +31,8 @@ function convoutput(spell) {
 function output(which,first)
 {
 
+	//alert(outwords);
+
 // create option dropdown
 	
 	var osout = '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr>';

@@ -126,6 +126,7 @@ notpart["ya"] = 1;
 notpart["da"] = 1;
 notpart["hi"] = 1;
 notpart["ha"] = 1;
+notpart["ca"] = 1;
 notpart["ma"] = 1;
 notpart["la"] = 1;
 notpart["nu"] = 1;
@@ -142,6 +143,7 @@ notpart["maa"] = 1;
 
 var indeclinable = [];
 indeclinable["na"] = 1;
+//indeclinable["ca"] = 1;
 
 var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.
 specsuf["~nca"] = '1/1501^~nca^0#ca';
@@ -178,45 +180,43 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	// ---------- stem matching and converting - note the wt doesnt change just we get alternatives ----------
 	// this stuff is defined in declension.js
 	
-	prcount = 0;
 	wtr = new Array();
 	
 	for (var pr = 0;pr < prem.length; pr++)
 	{
 		preach = prem[pr].split('^');
 		pra = preach[0]; // ending to replace
-		prb = preach[1]; // size of old ending
-		prc = preach[2]; // size of cut
-		prd = preach[3]; // min. length for change
-		pre = preach[4]; // new ending if any
-		if (prd == 0) prd = 3;
-		if (cwt[prb] == pra && oneword.length > prd) 
+		prb = pra.length; // size of ending
+		prc = preach[1]; // find offset (positive means smaller cut)
+		prd = preach[2]; // min. length for change
+		pre = preach[3]; // new ending if any
+
+
+		if (cwt[prb] == pra && oneword.length > (parseInt(prb) + parseInt(prd))) 
 		{
-				
-			if (pre)
+			if (pre) // if we have a new ending to add
 			{
-				wtr[prcount] = oneword.substring(0, oneword.length-prc) + pre;
-				prcount++;
+				wtr.push(oneword.substring(0, oneword.length-(prb-prc)) + pre);
+
 			}
 			else
 			{
-				wtr[prcount] = oneword.substring(0, oneword.length-prc);
-				prcount++;
+				wtr.push(oneword.substring(0, oneword.length-(prb-prc)));
 			}
-			if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'a' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'a')
+			
+			// add long vowel variants
+			
+			if (wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-1) == 'a' && wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-2) != 'a')
 			{
-				wtr[prcount] = wtr[prcount-1] + 'a';
-				prcount++;
+				wtr.push(wtr[wtr.length-1] + 'a');
 			}
-			else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'u' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'u')
+			else if (wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-1) == 'u' && wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-2) != 'u')
 			{
-				wtr[prcount] = wtr[prcount-1] + 'u';
-				prcount++;
+				wtr.push(wtr[wtr.length-1] + 'u');
 			}
-			else if (wtr[prcount-1].charAt(wtr[prcount-1].length-1) == 'i' && wtr[prcount-1].charAt(wtr[prcount-1].length-2) != 'i')
+			else if (wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-1) == 'i' && wtr[wtr.length-1].charAt(wtr[wtr.length-1].length-2) != 'i')
 			{
-				wtr[prcount] = wtr[prcount-1] + 'i';
-				prcount++;
+				wtr.push(wtr[wtr.length-1] + 'i');
 			}					
 		}
 		
@@ -242,7 +242,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			var temp = oneword + 'z' + a;
 			if (pedda[temp]) 
 			{
-				if (!notpart[temp]) { res.push(pedda[temp]); } 
+				res.push(pedda[temp]);
 			}
 			else break;
 		}
@@ -266,8 +266,19 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	
 		if (!lastpart) { // do this if first compound part
 			if (!trick) {
+				
+				// adding the ` for special prefix only words
+				
 				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,1);
 				if (trickmatch) { return trickmatch; }
+				
+				// removing the 'm'
+				
+				if (oneword.charAt(oneword.length-1) == 'm') 
+				{
+					var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,1);
+					if (trickmatch) { return Array(trickmatch[0] + '-m', trickmatch[1] + '@0^m^3', (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+				}
 			}
 		}
 	}
@@ -277,7 +288,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		
 	// declensions			
 
-		if (res.length == 0) 			// if still no match, we look at variants
+		if (res.length == 0) 
 		{				
 			for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
 			{			
@@ -337,11 +348,13 @@ function findmatch(oneword,lastpart,nextpart,trick)
 
 			if (aiu3 && ((!aiu1 && !aiu2) || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1) // check for shortened vowels, lengthen
 			{
-				var trickmatch = findmatch(aiu3 + oneword,lastpart,nextpart,1);
-				if (trickmatch) { return trickmatch; } 
+				if (!notpart[aiu3 + oneword]) {
+					var trickmatch = findmatch(aiu3 + oneword,lastpart,nextpart,1);
+					if (trickmatch) { return trickmatch; } 
+				}
 			}
 			
-			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && !aiu2 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
+			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
 			{
 				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,1); // the 'pa.tipanno' in our example
 				if (trickmatch) { return Array(oneword.charAt(0) + '-' + trickmatch[0], '0^' + oneword.charAt(0) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); } 

@@ -1999,8 +1999,10 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	if (stringra) document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
 	var ssect = se;
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
-	var hierse = hier;
-	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierse);
+	var hierb = hier;
+	if (hier=='a') hierb = 'm'; // fudge
+	if (hier=='m') hierb = 'a';
+	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierb);
 	getplace(temp);
 	if (stringra) {
 		stringra = stringra.replace(/`/g, '"');

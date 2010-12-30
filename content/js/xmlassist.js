@@ -20,6 +20,18 @@ niknumber['y'] = "6";
 niknumber['x'] = "7";
 niknumber['g'] = "8";
 
+var numbernik = new Array();
+numbernik.push('v');
+numbernik.push('d');
+numbernik.push('m');
+numbernik.push('s');
+numbernik.push('a');
+numbernik.push('k');
+numbernik.push('y');
+numbernik.push('x');
+numbernik.push('g');
+
+
 var nikvoladi = new Array();
 nikvoladi['d'] = '<select size="7" name="book" onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
 nikvoladi['m'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
@@ -85,7 +97,7 @@ function changenikaya(noget)
 		else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
 
 		
-		if (noget) gettitles(0,1);
+		if (noget) gettitles(0,1); // don't load the passage
 		else gettitles(0,2);
 	}
 }
