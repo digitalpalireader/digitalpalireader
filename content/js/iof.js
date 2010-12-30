@@ -208,29 +208,33 @@ function getHistory() {
 }
 
 function addHistory(value) {
+	
 	var storeHistory = [value];
+    var content = '';
+    
     var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
     var dir = DIR.get("ProfD", Components.interfaces.nsIFile);
     dir.append("DPR");
     if ( !dir.exists() )
     {
-        return false;
+        dir.create(dir.DIRECTORY_TYPE, 0700);
     }
-    var aFile = dir.clone();
-    aFile.append('History_List_DPR');
-    try {
-        var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
-        istream.init(aFile, 1, 0, false);
-        var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
-        sstream.init(istream);
-        var content = sstream.read(sstream.available());
-        sstream.close();
-        istream.close();
-    }
-    catch(ex)
-    {
-        return false;
-    }
+	else {
+		var aFile = dir.clone();
+		aFile.append('History_List_DPR');
+		try {
+			var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
+			istream.init(aFile, 1, 0, false);
+			var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
+			sstream.init(istream);
+			content = sstream.read(sstream.available());
+			sstream.close();
+			istream.close();
+		}
+		catch(ex)
+		{
+		}
+	}
 	var oldHistory = content.split('#');
 	for (j in oldHistory) {
 		if (oldHistory[j] != value) { storeHistory.push(oldHistory[j]); }
