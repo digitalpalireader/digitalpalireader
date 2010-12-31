@@ -199,8 +199,8 @@ function bookmarkframe(refresh)
     ca = ca.sort();
 	if (ca.length < 2)
 	{
-			document.getElementById('mafa').innerHTML = '';
-			document.getElementById('mafb').innerHTML='<table><tr><td><div  id="c" align=center><br><br><h1>no bookmarks saved</h1></td><td width="1">'+hout+'</td></tr></table>';
+		document.getElementById('mafa').innerHTML = '';
+		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" class="blueh" valign=top>'+hout+'</td></tr></table>';
 	}
 	else
 	{
@@ -227,12 +227,12 @@ function bookmarkframe(refresh)
 				cloc[4]++;
 				cloc[5]++;
 				cloc[6]++;
-				if (cloc[7] == 'm') cloc[7] = 'att'; //backwards!
-				else if (cloc[7] == 'a') cloc[7] = 'mul'; //backwards!
+				if (cloc[7] == 'm') cloc[7] = 'mul';
+				else if (cloc[7] == 'a') cloc[7] = 'att';
 				else {cloc[7] = 'ṭīkā';}
 				
 				allcookies +=  '<tr><td><table width=100%><tr><td class="blueh"><a href="javascript:void(0)" onclick="bookmarkc(\'' + name + '\')"><b>' + cookietotalno + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + '</b>&nbsp;('+ niknoname[cloc[0]] + '.' + cloc[1] + '.' + cloc[2] + '.' + cloc[3] + '.' + cloc[4] + '.' + cloc[5] + '.' + cloc[6] + '&nbsp;-&nbsp;' + cloc[7] + ')</a></td><td class="blueh"><input value="+" title="click here to edit this bookmark" type="button" id="hiderbutton' + name + '" onClick="hiddenout(\'' + name + '\')"></td><td class="blueh"><input value="x" type="button" onClick="erasecookie(\'' + name + '\')"></td></tr><tr><td><i><font id="title' + name + '">&nbsp;</font></i></td></tr></table></td></tr>';
-				allcookies +=  '<tr><td><div class="hide" id="'+ name + '"><table width=100%><tr bgcolor="chartreuse"><td align=center><b>Old Name</b></td><td align=center><b>New Name</b></td></tr><tr><td align=center>' + name + '</td><td align=center><input type=text value="" id="newname' + name + '" title="Enter a new name for this bookmark (max. 10 chars)" size=12></td><td align=center><input type=button value=change onClick="bookmarkxn(\'' + name + '\')" title="Change Name"></td></tr></table></div></td></tr>';
+				allcookies +=  '<tr><td><div class="hide" id="'+ name + '"><table width=100%><tr bgcolor="chartreuse"><td align=center><b>Old Name</b></td><td align=center><b>New Name</b></td><td></td></tr><tr><td align=center>' + name + '</td><td align=center><input type=text value="" id="newname' + name + '" title="Enter a new name for this bookmark (max. 10 chars)" size=12></td><td align=center><input type=button value=change onClick="bookmarkxn(\'' + name + '\')" title="Change Name"></td></tr></table></div></td></tr>';
 				allcookies += '<tr><td align=center><div class="hide" id="html' + name + '"></div></td></tr>';
 					
 			}	

@@ -2000,8 +2000,6 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	var ssect = se;
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 	var hierb = hier;
-	if (hier=='a') hierb = 'm'; // fudge
-	if (hier=='m') hierb = 'a';
 	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierb);
 	getplace(temp);
 	if (stringra) {

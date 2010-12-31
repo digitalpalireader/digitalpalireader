@@ -93,8 +93,6 @@ function importXML(manxml,labelsearchtemp)
 	
 	document.form.bmname.value = bknameme;
 	var hierb = hier;
-	if (hier=='a') hierb = 'm'; // fudge
-	if (hier=='m') hierb = 'a';
 	
 	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+"'"+hierb+"'");
 	
@@ -739,11 +737,9 @@ function xmlrefget()
 
 var setplace = new Array();
 
-function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section,7=hier(backwards)
+function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section,7=hier
 
 	setplace = temp;
-	if (setplace[7] == 'm') { setplace[7] = 'a'; } // backwards!
-	else if (setplace[7] == 'a') { setplace[7] = 'm'; } // backwards!
 
 	switchhier(setplace[7],1);
 
