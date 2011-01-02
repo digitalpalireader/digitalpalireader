@@ -1,3 +1,4 @@
+var toolopen = 1;
 
 function preout(data) // calls text prep, then outputs it to preFrame
 {
@@ -15,15 +16,19 @@ function preout(data) // calls text prep, then outputs it to preFrame
 	var section = document.form.section.selectedIndex;
 	
 	var transin;
-	var transout='<div style="position:absolute; right:0px; top:0px;">';
+	var transout='';
 	if (hier == "m") { 
 		transin = addtrans(0,nikaya,book,meta,vagga,sutta,section);
 		if (transin) {
 			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-			transout += transin.join('')+'</div>';
-			document.getElementById('mafa').innerHTML += transout; 
+			transout += transin.join('');
+			document.getElementById('maftrans').innerHTML += transout; 
 		}
 	}
+	
+	document.getElementById('mafb').innerHTML += '<hr />' + finout + '<div class="toolbarspace">&nbsp;</div>';
+	
+	// add toolbar
 	
 	// history
 	
@@ -38,10 +43,76 @@ function preout(data) // calls text prep, then outputs it to preFrame
 		}
 		hout += '</select>';
 	}
-	
     
-	document.getElementById('mafb').innerHTML += '<hr />' + finout + '<hr />';
-	document.getElementById('mafa').innerHTML = '<div id="maftopen"><table class="toolbar"><tr><td class="toolbarc"><img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\';" title="show toolbar"/></td></tr></table></div><div id="maft"><table class="toolbar"><tr><td class="toolbarc"><img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\';" /></td><td class="spacer"></td><td class="toolbarc">&nbsp;<input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert">&nbsp;<input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">&nbsp;</td><td class="spacer"></td><td class="toolbarc">&nbsp;History:&nbsp;'+hout+'&nbsp;</td></tr></table></div>';
+	
+	
+	var mafaout = '<div id="maftopen">';
+		mafaout += '<table class="toolbar"><tr>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; toolopen=1" title="show toolbar"/>';
+			mafaout += '</td>';
+		mafaout += '</tr></table>';
+	mafaout += '</div>';
+	mafaout += '<div id="maft">';
+		mafaout += '<table class="toolbar"><tr>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\'; toolopen=0" />';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '&nbsp;';
+				mafaout += '<input type="button" value="<" title="Retrieve previous section" onclick="toolopen = 1; createTablep()" />';
+				mafaout += '<input type="button" value=">" title="Retrieve next section" onclick="toolopen = 1; createTablen()" />';
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '&nbsp;';
+				if (moveat == 2) {
+					mafaout += '<input type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
+				}
+				else { mafaout += '<input type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '&nbsp;';
+				if (cpout == 1) {
+					mafaout += '<input id="o2" type="button" value="x" title="Close Control Panel" onclick="moveframec();" />';
+				}
+				else { 
+					mafaout += '<input type="button" id="o2" value="o" title="Open Control Panel" onclick="moveframec();" />';
+				}
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '&nbsp;';
+				mafaout += '<input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert">';
+				mafaout += '<input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc">';
+				mafaout += '&nbsp;';
+				mafaout += 'History:';
+				mafaout += '&nbsp;';
+				mafaout += hout;
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+		mafaout += '</tr></table>';
+	mafaout += '</div>';
+	
+	document.getElementById('mafa').innerHTML = mafaout;
+	
+	if (toolopen == 1) {
+		document.getElementById('maft').style.display='block'; 
+		document.getElementById('maftopen').style.display='none';
+	}
+	else {
+		document.getElementById('maft').style.display='none'; 
+		document.getElementById('maftopen').style.display='block';
+	}
 	document.getElementById('mafb').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
 	moves(0);
@@ -347,13 +418,33 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 {
 	if (nikaya == 'k') book = knames[book-1];
     nikaya = nikname[nikaya];
-	
-	var title='<table><tr><td><font class="blue">' + nikaya + ' ' + book + ' ' + vna;
-	if (wna != ' ') title += '</font>&nbsp;</td><td><font class="green">' + wna + '</font>&nbsp;</td>';
-	if (xna != ' ') title += '<td><font class="yellow">' +  xna + '</font></td>';
-	if (yna != ' ') title += '<td><font class="green">' + yna + '</font>&nbsp;</td>';
-	if (zna != ' ') title += '<td><font class="yellow">' +  zna + '</font></td>';
-	title += '</tr></table>';
+	var col = ['colped','coldppn','colcpd'];
+	var w = 1;
+	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
+	if (vna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (wna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (xna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (yna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (zna != ' ') {
+				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+	}
+	title += '</td><td id="maftrans" align="right"></td></tr></table>';
 	
 	title = replaceunistandard(title);
 	document.getElementById('mafb').innerHTML=title;

@@ -324,7 +324,7 @@ function importXMLs(cnt)
 			newnikaya = bookfile.charAt(0);
 			if (nikayaat != newnikaya)
 			{
-				document.getElementById('sbfb').innerHTML += '<div id="sbf' + nikname[newnikaya] + '" title="xyz"><h1 style="color:'+colorcfg['coltext']+'">' + nikname[newnikaya] + '</h1><hr></div>';
+				document.getElementById('sbfb').innerHTML += '<div id="sbf' + nikname[newnikaya] + '" name="xyz"><h1 style="color:'+colorcfg['coltext']+'">' + nikname[newnikaya] + '</h1><hr></div>';
 				thiscount = 0;
 				rescount++;
 			}
@@ -383,7 +383,7 @@ function importXMLs(cnt)
 			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		}
 
-		document.getElementById('sbfb').innerHTML += '<div title="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
+		document.getElementById('sbfb').innerHTML += '<div name="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
 
 		// loop through the books - now loops through bounce function
 
@@ -1960,7 +1960,7 @@ function createTables(xmlDoc)
 		}
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
-	if (match == 0) document.getElementById('sbfb').innerHTML += '<div title="xyz"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book + '</font> - <font class="yellow" size=3><i>No Match</i> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
+	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book + '</font> - <font class="yellow" size=3><i>No Match</i> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
 	else document.getElementById('sbfb').innerHTML += finalout;
 	
 	match = 0;

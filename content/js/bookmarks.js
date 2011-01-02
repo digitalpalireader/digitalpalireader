@@ -193,7 +193,9 @@ function bookmarkframe(refresh)
 	var isclear = '';
 	for (i in theHistory) {
 		var thist = theHistory[i].split('@');
-		hout += '<a style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
+		var tt1 = thist[1].length-1;
+		thist[1] = thist[1].substring(0,tt1) + "'" + thist[1].charAt(tt1) + "'";
+		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
 	}
 	if(!hout) { hout = '<b style="color:'+colorcfg['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
@@ -203,7 +205,7 @@ function bookmarkframe(refresh)
 	if (ca.length < 2)
 	{
 		document.getElementById('mafa').innerHTML = '';
-		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" class="blueh" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
 	}
 	else
 	{
@@ -246,7 +248,7 @@ function bookmarkframe(refresh)
 		allcookies += ' - <input type="button" value="erase all" title="erase all stored bookmarks" onclick="erasecookies(\'go\')">';
 		
 		document.getElementById('mafa').innerHTML = '';
-		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" class="blueh" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
 		
 		// now add the descriptions
 		

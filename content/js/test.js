@@ -9,9 +9,13 @@ function newquiz() {
 function quizme() {
 	
 	// remember rights
-	var rights = readFile("DPTEST").split(',');
-    if (rights.length == 1 && rights[0] == "") rights = [];
-	document.getElementById('rights').innerHTML = rights.length;
+	var rights = readFile("DPTEST");
+	if(rights) {
+		rights=rights.split(',');
+		if (rights.length == 1 && rights[0] == "") rights = [];
+		document.getElementById('rights').innerHTML = rights.length;
+	}
+	else { rights = []; }
     
 	var quiza = new Array();
 	var quizeachwrong = new Array();
@@ -44,15 +48,15 @@ function quizme() {
 	document.getElementById('qq').innerHTML = questionout;
 	
 	var formatanswerwrong = '';
-	var formatanswer = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('xxx')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
-	var formatanswerout = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('xxx')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
-	if (yt[quiza[quizrandomright]].split('xxx').length > 1) formatanswerout += ' (' + yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('xxx')[1].replace(/,/g, '.') + ')';
+	var formatanswer = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
+	var formatanswerout = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
+	if (yt[quiza[quizrandomright]].split('#').length > 1) formatanswerout += ' (' + yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[1].replace(/,/g, '.') + ')';
 	for (qtmp = 0; qtmp < 4; qtmp++) {
 		if (qtmp == quizrightorder) {
 			quizanswersout += '<p><input type="button" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="&gt"> '+formatanswer+'</p>';
 		}
 		else {
-			formatanswerwrong = yt[quiza[quizeachwrong[qtmp2]]].replace(/\&comma/g, ',').split('xxx')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
+			formatanswerwrong = yt[quiza[quizeachwrong[qtmp2]]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
 			quizanswersout += '<p><input type="button" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="&gt"> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}

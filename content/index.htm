@@ -50,6 +50,141 @@ function moveit(one,two,three,four)
 
 <body>
 <div id="left">
+    <div id="brleft"></div>
+	<form name="form">
+    <div id="cleft">
+		<table width=100%>
+			<tr>
+				<td align=center>
+					<table width="1px">
+						<tr>
+							<td align=center>
+								<b name="changecolor">Collection</b>
+							</td>
+							<td>&nbsp;</td>
+							<td align=center>
+								<b name="changecolor">Book</b><br>
+							</td>
+						</tr>
+						<tr>
+							<td align=center>
+								<select class="sel" size="7" name="nik" onclick="changenikaya()">
+									<option value="v">Vinaya</option>
+									<option selected value="d">D&#299;gha</option>
+									<option value="m">Majjhima</option>
+									<option class="sel" value="s">Sa&#7747;yutta</option>
+									<option value="a">A&#7749;guttara</option>
+									<option value="k">Khuddaka</option>
+									<option value="y">Abhidhamma</option>
+									<option value="x">Vism.</option>
+									<option value="g">By&#257;kara&#7751;a</option>
+								</select>
+							</td>
+							<td>&nbsp;</td>
+							<td align=center>
+								<b id="book"><select class="sel" size="7" name="book" onclick="gettitles(0,2)">
+								<option selected value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								</select></b>
+							</td>
+						</table>
+					<hr />
+
+							<div align="center" id="title" name="changecolor">title</div>
+
+							<div align="center" style="padding-top:2px" id="meta"><select class="sel" size="1" name="meta"><option selected>a</option></select></div>
+
+							<div align="center" style="padding-top:2px" id="volume"><select class="sel" size="1" name="volume"><option selected>a</option></select></div>
+					
+
+							<div align="center" style="padding-top:2px" id="vagga"><select class="sel" size="1" name="vagga"><option selected>b</option></select></div>
+
+
+							<div align="center" style="padding-top:2px" id="sutta"><select class="sel" size="1" name="sutta"><option></option></select></div>
+
+
+							<div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
+					<hr />
+							<table>
+								<tr>
+									<td>
+										<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a><br />
+										
+
+										
+										<a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a><img src="images/mats.png" /><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a><img src="images/mats.png" /><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a>
+									</td>
+									<td valign=top>
+										<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Covertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
+									</td>
+									<td>
+										<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
+
+										<a id="hierma" href="javascript:void(0)" onclick="this.blur();"><img id="hiermi" src="images/m1.png" /></a><img src="images/mats.png" /><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="this.blur(); switchhier('a')"><img id="hierai" src="images/a0.png" /></a><img src="images/mats.png" /><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="this.blur(); switchhier('t')"><img id="hierti" src="images/t0.png" /></a>
+										
+									</td>
+								</tr>
+							</table>	
+					<hr />
+							<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b name="changecolor">Bookmarks</b></a><br>
+							<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
+							<br>
+							<input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
+					<hr />
+
+							<table align=center>
+								<tr>
+									<td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
+									</td>
+								</tr>
+
+								<tr>
+									<td align=center valign=middle>
+										<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>
+									</td>
+								</tr>
+							</table>
+					<hr />
+							<b name="changecolor">Dictionary</b>&nbsp;
+							<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
+								<option selected>DPR</option>
+								<option>PED</option>
+								<option>CEPD</option>
+								<option>DPPN</option>
+								<option>CPED</option>
+								<option>ATTH</option>
+							</select> 
+							<br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="createTableman(1)">
+
+			<!--<td>
+					<div align=center id="rright">
+							<div style="padding-top:10px">
+								<input type="button" class="btn" value="v" title="Scroll to bookmark" onClick="scrolldown(scrollmuch)">
+								<input type="button" class="btn" value="#" title="Get current location for bookmark" onClick="scrolldown('alert')">
+								<input type="button" class="btn" value="^" title="Go to top" onClick="scrolldown(0)">
+							</div>
+							<div style="padding-top:10px">
+								<input title="Run the analysis algorithm automatically" type="hidden" id="autoalg">
+								<input type="button" class="btn" value="G" title="Open Grammar (New Window)" onClick="moveit('etc/grammar/GMD/index.html','grammar');">
+								<input type="button" class="btn" value="C" title="Open Cheat Sheet (New Window)" onClick="moveit('etc/grammar/cheet.html','cheat');">
+								<input type="button" class="btn" value="T" title="Open Grammar Tools (New Window)" onClick="moveit('etc/grammar/index.htm','grammartools');">
+								<input type="button" class="btn" value="L" title="Open Links (New Window)" onClick="moveit('etc/links.htm','links');">
+							</div>
+					</div>
+
+				</td>-->
+
+			<hr />
+
+					<input type="button" class="btn" value="%" title="Set configuration" onclick="loadOptions()"><input type="button" class="btn" value="X" title="Reset configuration" onclick="eraseOptions(); "> <input type="button" class="btn" value="#" title="Pali Quiz" onClick="newquiz();"><input type="button" class="btn" value="." title="Quote of the Moment" onClick="bv();"> <input type="button" class="btn" value="?" title="Help" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback" onClick="document.getElementById('mafa').innerHTML=''; document.getElementById('mafb').innerHTML='<form action=&quot;http://pali.sirimangalo.org/dprmail.php&quot; method=&quot;POST&quot;><h1>Feedback Form</h1><em>This form allows you to send comments, questions or bug reports directly to the creator of the DPR.<br>  Your email goes straight to me, so there is no need to worry about spam, etc.</em><p><b>Your Email</b><br><input type=&quot;text&quot; name=&quot;email&quot; size=40><p><b>Subject</b><br><input type=&quot;text&quot; name=&quot;subject&quot; size=40><p><b>Message</b><br><textarea cols=40 rows=10 name=&quot;message&quot;></textarea><p><input type=&quot;submit&quot; value=&quot; Send &quot;></form>';"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
+				</td>
+			</tr>
+	
+		</table>
+	</div>
+</div>
+<div id="right">
 	<div id="maf" name="changecolor">
 		<div align="left" id="mafa"></div>
 		<div align="justify" id="mafb">
@@ -61,7 +196,7 @@ function moveit(one,two,three,four)
 			<div id="mafdebug"></div>
 		</div>
 	</div>
-	<div id="leftbot">
+	<div id="rightbot">
 		<div id="cdif">
             <div id="dif">
                 <div id="difb" name="changecolor">
@@ -162,142 +297,6 @@ function moveit(one,two,three,four)
 		<div id="cors"><img src="images/corb.png" /></div>
 	</div>
 </div>
-<div id="right">
-    <div id="brleft"></div>
-    <div id="brright"></div>
-	<form name="form">
-    <div id="cright">
-		<table width=100%>
-			<tr>
-				<td align=center>
-					<table width="1px">
-						<tr>
-							<td align=center>
-								<b name="changecolor">Collection</b>
-							</td>
-							<td>&nbsp;</td>
-							<td align=center>
-								<b name="changecolor">Book</b><br>
-							</td>
-						</tr>
-						<tr>
-							<td align=center>
-								<select class="sel" size="7" name="nik" onclick="changenikaya()">
-									<option value="v">Vinaya</option>
-									<option selected value="d">D&#299;gha</option>
-									<option value="m">Majjhima</option>
-									<option class="sel" value="s">Sa&#7747;yutta</option>
-									<option value="a">A&#7749;guttara</option>
-									<option value="k">Khuddaka</option>
-									<option value="y">Abhidhamma</option>
-									<option value="x">Vism.</option>
-									<option value="g">By&#257;kara&#7751;a</option>
-								</select>
-							</td>
-							<td>&nbsp;</td>
-							<td align=center>
-								<b id="book"><select class="sel" size="7" name="book" onclick="gettitles(0,2)">
-								<option selected value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								</select></b>
-							</td>
-						</table>
-					<hr />
-
-							<div align="center" id="title" name="changecolor">title</div>
-
-							<div align="center" style="padding-top:2px" id="meta"><select class="sel" size="1" name="meta"><option selected>a</option></select></div>
-
-							<div align="center" style="padding-top:2px" id="volume"><select class="sel" size="1" name="volume"><option selected>a</option></select></div>
-					
-
-							<div align="center" style="padding-top:2px" id="vagga"><select class="sel" size="1" name="vagga"><option selected>b</option></select></div>
-
-
-							<div align="center" style="padding-top:2px" id="sutta"><select class="sel" size="1" name="sutta"><option></option></select></div>
-
-
-							<div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
-					<hr />
-							<table>
-								<tr>
-									<td>
-										<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
-
-										<a id="hierma" href="javascript:void(0)" onclick="this.blur();"><img id="hiermi" src="images/m1.png" /></a><img src="images/mats.png" /><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="this.blur(); switchhier('a')"><img id="hierai" src="images/a0.png" /></a><img src="images/mats.png" /><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="this.blur(); switchhier('t')"><img id="hierti" src="images/t0.png" /></a>
-										
-									</td>
-									<td valign=top>
-										<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Covertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
-									</td>
-									<td>
-										<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a><br />
-										
-
-										
-										<a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a><img src="images/mats.png" /><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a><img src="images/mats.png" /><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a>
-									</td>
-								</tr>
-							</table>	
-					<hr />
-							<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b name="changecolor">Bookmarks</b></a><br>
-							<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
-							<br>
-							<input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
-					<hr />
-
-							<table align=center>
-								<tr>
-									<td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
-									</td>
-								</tr>
-
-								<tr>
-									<td align=center valign=middle>
-										<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>
-									</td>
-								</tr>
-							</table>
-					<hr />
-							<b name="changecolor">Dictionary</b>&nbsp;
-							<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
-								<option selected>DPR</option>
-								<option>PED</option>
-								<option>CEPD</option>
-								<option>DPPN</option>
-								<option>CPED</option>
-								<option>ATTH</option>
-							</select> 
-							<br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="createTableman(1)">
-
-			<!--<td>
-					<div align=center id="rright">
-							<div style="padding-top:10px">
-								<input type="button" class="btn" value="v" title="Scroll to bookmark" onClick="scrolldown(scrollmuch)">
-								<input type="button" class="btn" value="#" title="Get current location for bookmark" onClick="scrolldown('alert')">
-								<input type="button" class="btn" value="^" title="Go to top" onClick="scrolldown(0)">
-							</div>
-							<div style="padding-top:10px">
-								<input title="Run the analysis algorithm automatically" type="hidden" id="autoalg">
-								<input type="button" class="btn" value="G" title="Open Grammar (New Window)" onClick="moveit('etc/grammar/GMD/index.html','grammar');">
-								<input type="button" class="btn" value="C" title="Open Cheat Sheet (New Window)" onClick="moveit('etc/grammar/cheet.html','cheat');">
-								<input type="button" class="btn" value="T" title="Open Grammar Tools (New Window)" onClick="moveit('etc/grammar/index.htm','grammartools');">
-								<input type="button" class="btn" value="L" title="Open Links (New Window)" onClick="moveit('etc/links.htm','links');">
-							</div>
-					</div>
-
-				</td>-->
-
-			<hr />
-
-					<input type="button" class="btn" value="%" title="Set configuration" onclick="loadOptions()"><input type="button" class="btn" value="X" title="Reset configuration" onclick="eraseOptions(); "> <input type="button" class="btn" value="#" title="Pali Quiz" onClick="newquiz();"><input type="button" class="btn" value="." title="Quote of the Moment" onClick="bv();"> <input type="button" class="btn" value="?" title="Help" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback" onClick="document.getElementById('mafa').innerHTML=''; document.getElementById('mafb').innerHTML='<form action=&quot;http://pali.sirimangalo.org/dprmail.php&quot; method=&quot;POST&quot;><h1>Feedback Form</h1><em>This form allows you to send comments, questions or bug reports directly to the creator of the DPR.<br>  Your email goes straight to me, so there is no need to worry about spam, etc.</em><p><b>Your Email</b><br><input type=&quot;text&quot; name=&quot;email&quot; size=40><p><b>Subject</b><br><input type=&quot;text&quot; name=&quot;subject&quot; size=40><p><b>Message</b><br><textarea cols=40 rows=10 name=&quot;message&quot;></textarea><p><input type=&quot;submit&quot; value=&quot; Send &quot;></form>';"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
-				</td>
-			</tr>
-	
-		</table>
-	</div>
-</div>
 </div>
 	<div align="left" id="langtr" style="clear:both">
 		<select class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
@@ -316,8 +315,7 @@ function moveit(one,two,three,four)
 	</form>
 </div>
 <div class="openclose">
-	<img class="openclose" id="o1" src="images/close.png" onmouseover="this.src='images/closew.png'" onmouseout="this.src='images/close.png'" onclick="this.style.display='none'; document.getElementById('o2').style.display='block'; moveframet(0);" title="close control panel">
-	<img class="openclose" id="o2" src="images/open.png" style="display:none;" onmouseover="this.src='images/openw.png'" onmouseout="this.src='images/open.png'" onclick="this.style.display='none'; document.getElementById('o1').style.display='block'; moveframet(1);" title="open control panel">
+	<img class="openclose" id="o1" src="images/close.png" onmouseover="if(cpout==1) { this.src='images/closew.png'} else { this.src='images/openw.png' }" onmouseout="if(cpout==1) { this.src='images/close.png'} else { this.src='images/open.png' }" onclick="moveframec();" title="close control panel">
 </div>
 <script>
 updatecookielist();

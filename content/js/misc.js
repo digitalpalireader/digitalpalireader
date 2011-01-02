@@ -3,8 +3,9 @@ var moveat = 2;
 function moveframex(a,temp) //read, etc
 {
     if(!temp) getconfig();
-    document.getElementById('left').style.right = (parseInt(confmove[2])-4) + 'px';
-    document.getElementById('right').style.width = confmove[2] + 'px';
+    if(cpout == 1) { document.getElementById('right').style.left = confmove[2] + 'px'; }
+    else {document.getElementById('right').style.left = '0px'; }
+    document.getElementById('left').style.width = confmove[2] + 'px';
     document.getElementById('anf').style.height = confmove[0] + 'px';
     document.getElementById('searcht').style.height = confmove[3] + 'px';
     moves(0);
@@ -15,7 +16,7 @@ function moveframex(a,temp) //read, etc
 			document.getElementById('DM').src="images/D0.png";
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
-            document.getElementById('leftbot').style.display = 'none';
+            document.getElementById('rightbot').style.display = 'none';
             document.getElementById('maf').style.bottom = (parseInt(confmove[0])+16) + 'px';
             document.getElementById('anf').style.bottom = '-4px';
             document.getElementById('anf').style.top = '';
@@ -26,15 +27,15 @@ function moveframex(a,temp) //read, etc
 			document.getElementById('DM').src="images/D0.png";
             moveat = 2;
             document.getElementById('maf').style.display = 'block';
-            document.getElementById('leftbot').style.display = 'block';
+            document.getElementById('rightbot').style.display = 'block';
 
             document.getElementById('maf').style.bottom = (parseInt(confmove[0]) + parseInt(confmove[1]) + 16) + 'px';
-            document.getElementById('leftbot').style.bottom = '0px';
-            document.getElementById('leftbot').style.height = parseInt(confmove[1]) + 'px';
+            document.getElementById('rightbot').style.bottom = '0px';
+            document.getElementById('rightbot').style.height = parseInt(confmove[1]) + 'px';
             document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
             document.getElementById('anf').style.top = '';
 
-            document.getElementById('leftbot').style.top = '';
+            document.getElementById('rightbot').style.top = '';
             break;
         case 3: // dict
 			document.getElementById('RM').src="images/R0.png";
@@ -44,11 +45,11 @@ function moveframex(a,temp) //read, etc
             moveframey('dif'); // switch to dict
             
             document.getElementById('maf').style.display = 'none';
-            document.getElementById('leftbot').style.display = 'block';
+            document.getElementById('rightbot').style.display = 'block';
 
-            document.getElementById('leftbot').style.height = 'auto';
-            document.getElementById('leftbot').style.top = (parseInt(confmove[0])+16) + 'px';
-            document.getElementById('leftbot').style.bottom = '0px';
+            document.getElementById('rightbot').style.height = 'auto';
+            document.getElementById('rightbot').style.top = (parseInt(confmove[0])+16) + 'px';
+            document.getElementById('rightbot').style.bottom = '0px';
             
 
             
@@ -75,22 +76,43 @@ function moveframey(a) //dict, conv, or scratch
 	document.getElementById(a).style.display="block";
 }
 
-function moveframet(a) // open close control panel
+cpout = 1;
+
+function moveframec() // open close control panel
 {
-	if (a == 0) { // close
-		document.getElementById('right').style.display="none";
-		document.getElementById('left').style.right='0px';
+	if (cpout == 1) { // is open
+		document.getElementById('o1').title='open control panel'; 
+		document.getElementById('o1').src='images/open.png';
+
+		if(document.getElementById('o2')) { 
+			document.getElementById('o2').title='open control panel'; 
+			document.getElementById('o2').value='o';
+		}
+
+		document.getElementById('left').style.display="none";
+		document.getElementById('right').style.left='0px';
+		cpout = 0;
 	}
-	else { // open
-		document.getElementById('right').style.display='block';
-		document.getElementById('left').style.right=(confmove[2]-4)+'px';	
+	else { // is closed
+		document.getElementById('o1').title='close control panel'; 
+		document.getElementById('o1').src='images/close.png';
+
+		if(document.getElementById('o2')) { 
+			document.getElementById('o2').title='close control panel'; 
+			document.getElementById('o2').value='x';
+		}
+
+		document.getElementById('left').style.display='block';
+		document.getElementById('right').style.left=confmove[2]+'px';	
+		cpout = 1;
 	}
 }
 
 function moves(a) // search open
 {
 	if (a == 1) {
-		moveframet(1);
+		cpout = 0;
+		moveframec();
 		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="-" title="minimize search frame" onClick="moves(0)">';
 		document.getElementById('search').style.display="block";
 	}

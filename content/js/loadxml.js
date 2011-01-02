@@ -96,7 +96,7 @@ function importXML(manxml,labelsearchtemp)
 	document.form.bmname.value = bknameme;
 	var hierb = hier;
 	
-	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+"'"+hierb+"'");
+	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 	
 	var theData = '';
 	var onepar;
