@@ -116,7 +116,7 @@ function moveit(one,two,three,four)
 										<a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a><img src="images/mats.png" /><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a><img src="images/mats.png" /><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a>
 									</td>
 									<td valign=top>
-										<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Covertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
+										<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Convertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
 									</td>
 									<td>
 										<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
@@ -183,6 +183,22 @@ function moveit(one,two,three,four)
 	
 		</table>
 	</div>
+	<div align="left" id="langtr" style="clear:both">
+		<select class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
+			<option value="xy">English</option>
+			<script> 
+				if(ft.length != 0) document.write('<option value="f">French</option>');
+				if(gt.length != 0) document.write('<option value="g">German</option>');
+				if(it.length != 0) document.write('<option value="i">Italian</option>');
+				if(rt.length != 0) document.write('<option value="r">Russian</option>');
+				if(st.length != 0) document.write('<option value="s">Spanish</option>');
+				if(tt.length != 0) document.write('<option value="t">Thai</option>');
+			</script>
+		</select>
+	</div>
+	<input id="manrem" type="hidden" value="0">
+	</form>
+</div>
 </div>
 <div id="right">
 	<div id="maf" name="changecolor">
@@ -203,11 +219,11 @@ function moveit(one,two,three,four)
                 </div>
             </div>
 		</div>
-            <div id="lt"></div>
-            <div id="lb"></div>
+		<div id="lt"></div>
+		<div id="lb"></div>
+		<form name="convertor">
 		<div id="cof">
-			<form name="convertor">
-				<table align=center>
+				<table align="center">
 					<tr>
 						<td align="center" name="changecolor">Input</td>
 						<td align="center">
@@ -258,11 +274,11 @@ function moveit(one,two,three,four)
 						</td>
 					</tr>
 				</table>
-			</form>
 		</div>
+		</form>
 		<div id="scf" align=center>
 			<table><tr><td colspan=2><textarea id="pad" rows="10" cols="120"></textarea></td></tr></table>
-			<input type=button value="Analyze" onclick="document.getElementById('mafa').innerHTML = '<font class=&quot;blue&quot>Input From Scratchpad</font>'; preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;'); moveframex(2);">
+			<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">
 		</div>
 	</div>
 	<div id="anf" align=right name="changecolor">
@@ -296,23 +312,6 @@ function moveit(one,two,three,four)
 		</div>
 		<div id="cors"><img src="images/corb.png" /></div>
 	</div>
-</div>
-</div>
-	<div align="left" id="langtr" style="clear:both">
-		<select class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
-			<option value="xy">English</option>
-			<script> 
-				if(ft.length != 0) document.write('<option value="f">French</option>');
-				if(gt.length != 0) document.write('<option value="g">German</option>');
-				if(it.length != 0) document.write('<option value="i">Italian</option>');
-				if(rt.length != 0) document.write('<option value="r">Russian</option>');
-				if(st.length != 0) document.write('<option value="s">Spanish</option>');
-				if(tt.length != 0) document.write('<option value="t">Thai</option>');
-			</script>
-		</select>
-	</div>
-	<input id="manrem" type="hidden" value="0">
-	</form>
 </div>
 <div class="openclose">
 	<img class="openclose" id="o1" src="images/close.png" onmouseover="if(cpout==1) { this.src='images/closew.png'} else { this.src='images/openw.png' }" onmouseout="if(cpout==1) { this.src='images/close.png'} else { this.src='images/open.png' }" onclick="moveframec();" title="close control panel">

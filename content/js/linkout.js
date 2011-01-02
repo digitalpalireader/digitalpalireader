@@ -183,6 +183,7 @@ function output(which,first)
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
+		moveframey('dif');
 	}
 	return;
 }

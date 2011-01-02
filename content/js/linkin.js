@@ -70,12 +70,14 @@ function postout(input,divclicked,frombox)
 		outwords.push(input + '$0^' + input + '^3');
 	}
 	output(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
+	aw = 0;
+	fm = 0;
 }
 
-
+var aw = 0;
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
-	
+	aw++;
 	var matchedword;
 	var fullmatch;
 	var fullnames;
@@ -154,9 +156,12 @@ specsuf["va"] = '3/1047^va^0#va';
 specsuf["eva"] = '0/4338^eva^0#eva';
 specsuf["idha"] = '0/3208^idha^0#idha';
 
+var fm = 0;
+
+
 function findmatch(oneword,lastpart,nextpart,trick)
 {
-
+	fm++;
 
 	if (notpart[oneword]) { 
 		if (notpart[oneword] == 1 && nextpart) { return null; }
@@ -369,10 +374,11 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		for (var d = 1; d < 8; d++)
 		{				
 			var temp = oneword + 'f' + d; // remember that we have added f# to the end of all DPPN entries.  Here we add it to come up with wtnum
-			if (nameda[temp] && oneword.length > 2) 
+			if (nameda[temp]) 
 			{					
 				resn.push(nameda[temp]);
 			}
+			else { break; }
 		}
 		
 		if (resn.length == 0)

@@ -1,6 +1,6 @@
 var toolopen = 1;
 
-function preout(data) // calls text prep, then outputs it to preFrame
+function preout(data,notrans) // calls text prep, then outputs it to preFrame
 {
 	lastcolour = 0; // reset colour changing
 
@@ -17,7 +17,7 @@ function preout(data) // calls text prep, then outputs it to preFrame
 	
 	var transin;
 	var transout='';
-	if (hier == "m") { 
+	if (hier == "m" && !notrans) { 
 		transin = addtrans(0,nikaya,book,meta,vagga,sutta,section);
 		if (transin) {
 			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
@@ -27,8 +27,6 @@ function preout(data) // calls text prep, then outputs it to preFrame
 	}
 	
 	document.getElementById('mafb').innerHTML += '<hr />' + finout + '<div class="toolbarspace">&nbsp;</div>';
-	
-	// add toolbar
 	
 	// history
 	
@@ -44,7 +42,7 @@ function preout(data) // calls text prep, then outputs it to preFrame
 		hout += '</select>';
 	}
     
-	
+	// toolbar
 	
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
@@ -261,6 +259,42 @@ function preparepali(data) { // standard text prep for algorithm
 	return finout;
 }
 
+function convtitle(nikaya,book,vna,wna,xna,yna,zna)
+{
+	if (nikaya == 'k') book = knames[book-1];
+    if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
+	var col = ['colped','coldppn','colcpd'];
+	var w = 1;
+	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
+	if (vna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (wna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (xna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (yna != ' ') {
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		w++;
+		if(w == 3) { w = 0; }
+	}
+	if (zna != ' ') {
+				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+	}
+	title += '</td><td id="maftrans" align="right"></td></tr></table>';
+	
+	title = replaceunistandard(title);
+	document.getElementById('mafb').innerHTML=title;
+}
+
 
 var nikname = new Array();
 nikname['d'] = "DN";
@@ -414,41 +448,6 @@ function replacevelstandard(input) {
 	return input;
 }
 
-function convtitle(nikaya,book,vna,wna,xna,yna,zna)
-{
-	if (nikaya == 'k') book = knames[book-1];
-    nikaya = nikname[nikaya];
-	var col = ['colped','coldppn','colcpd'];
-	var w = 1;
-	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
-	if (vna != ' ') {
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
-	}
-	if (wna != ' ') {
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
-	}
-	if (xna != ' ') {
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
-	}
-	if (yna != ' ') {
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
-	}
-	if (zna != ' ') {
-				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
-	}
-	title += '</td><td id="maftrans" align="right"></td></tr></table>';
-	
-	title = replaceunistandard(title);
-	document.getElementById('mafb').innerHTML=title;
-}
 
 function createTablen()
 {

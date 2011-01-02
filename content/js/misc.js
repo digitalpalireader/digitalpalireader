@@ -61,6 +61,8 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a) //dict, conv, or scratch
 {
+	moves(0);
+
 	if (moveat == 1) moveframex(2);
 	document.getElementById('dM').src="images/d0.png";
 	document.getElementById('cM').src="images/c0.png";

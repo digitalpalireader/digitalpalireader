@@ -4,8 +4,7 @@ function refreshit()
 	if (remote) {
 		document.getElementById('mafd').innerHTML += '<p style="color:'+colorcfg['colsel']+'"><b>It seems you have not added the optional archive.  <br>The PED and DPPN will only be available remotely.  <br>Please see <a href="http://www.sourceforge.net/projects/digitalpali">the project site</a> for info on how to get and install this file.</b>';
 	}
-	var rverse=Math.floor(Math.random()*366)
-	document.getElementById('difb').innerHTML = '<h3 name="changecolor" style="color:'+colorcfg['coltext']+'">Quote of the Moment:</h3><p name="changecolor" valign=middle>' + dbv[rverse] + '</p>';
+	bv();
     changenikaya(1);
 }
 function checkupdate() {
