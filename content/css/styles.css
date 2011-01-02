@@ -50,10 +50,25 @@ right:0px;
 z-index:3000;
 }
 
-.toolbar td, .toolbar th {
+.toolbar {
+border-spacing: 0px 0px;
+border-collapse: seperate;
+padding:0px;
+margin:0px;
+}
+
+.toolbarc {
 border:1px solid grey;
 background-color:#d9d4cc;
+padding:0px;
+margin:0px;
 }
+
+.spacer{
+border:none;
+background-color:transparent;
+}
+
 
 #search {
 display:none; 
@@ -125,21 +140,27 @@ left:0px;
 right:0px;
 top:0px;
 bottom:228px;
+padding-bottom:10px;
 }
 #maft {
 display:none;
+left:0px;
+bottom:0px;
 }
 #maftopen {
-background-color:#d9d4cc;
+position:absolute;
+left:0px;
+bottom:0px;
 }
 #mafa {
 position:absolute;
-top:0px;
+bottom:0px;
 left:0px;
 }
 #mafb {
 height:100%;
 padding:10px;
+padding-bottom:0px;
 overflow:auto;
 }
 
