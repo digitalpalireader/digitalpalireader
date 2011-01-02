@@ -1,3 +1,196 @@
+
+function preout(data) // calls text prep, then outputs it to preFrame
+{
+	lastcolour = 0; // reset colour changing
+
+	var inarray = preparepali(data);
+	var finout = inarray[0];
+	var convout = replaceunistandard(inarray[1]);
+
+	var nikaya = document.form.nik.value;
+	var book = document.form.book.selectedIndex;
+	var meta = document.form.meta.selectedIndex;
+	var vagga = document.form.vagga.selectedIndex;
+	var sutta = document.form.sutta.selectedIndex;
+	var section = document.form.section.selectedIndex;
+	
+	var transin;
+	var transout='<div style="position:absolute; right:0px; top:0px;">';
+	if (hier == "m") { 
+		transin = addtrans(0,nikaya,book,meta,vagga,sutta,section);
+		if (transin) {
+			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
+			transout += transin.join('')+'</div>';
+			document.getElementById('mafa').innerHTML += transout; 
+		}
+	}
+	
+	// history
+	
+	var hout = '';
+	var theHistory = getHistory();
+	if (theHistory) {
+		hout = '<select onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
+		var isclear = '';
+		for (i in theHistory) {
+			var thist = theHistory[i].split('@');
+			hout += '<option value="'+thist[1]+'">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</option>';
+		}
+		hout += '</select>';
+	}
+	
+    
+	document.getElementById('mafb').innerHTML += '<hr />' + finout;
+	document.getElementById('mafa').innerHTML = '<div id="maft"><table class="toolbar"><tr><td>&nbsp;<input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert">&nbsp;<input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">&nbsp;</td><td>&nbsp;History:&nbsp;'+hout+'&nbsp;</td><td>&nbsp;<input type="button" value="x" title="hide toolbar" onclick="document.getElementById(\'maft\').style.display=\'none\'; document.getElementById(\'maftopen\').style.display=\'block\';">&nbsp;</td></tr></table></div><div id="maftopen"><img src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\';" title="show toolbar"/></div>';
+	document.getElementById('mafb').scrollTop = 0; 
+	if (moveat == 3) {moveframex(2);}
+	moves(0);
+	
+}
+
+
+function formatuniout(data,which) { // prepare without links
+
+	var convout = '';
+	var indexpage = '';
+	var altread = 0;
+	var altplus = '';	
+	var endpt = 0;
+	var unioutb = '';
+	var finout = '';
+	var outarray = new Array();
+	
+	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
+	data = data.replace(/`/g, '\'');
+	data = data.replace(/"ti/g, '&quot; &quot;ti');
+	data = data.replace(/''ti/g, '&quot; &quot;ti');
+	data = data.replace(/'ti/g, '\' \'ti');
+	data = data.replace(/\'\'/g, ' &quot;');
+	data = data.replace(/\^b\^/g, ' <b> ');
+	data = data.replace(/\^eb\^/g, ' </b> ');
+	data = data.replace(/\^a\^\"/g, ' z');
+	data = data.replace(/\"\^ea\^/g, 'z ');
+	data = data.replace(/\^a\^/g, ' z');
+	data = data.replace(/\^ea\^/g, 'z ');
+	data = data.replace(/\^v/g, '');
+	data = data.replace(/v\^/g, '');
+	data = data.replace(/\}/g, '} ');
+	data = data.replace(/ +/g, ' ');
+	var uniouta = replaceunistandard(data).split(' ');
+	//data = data.replace(/\"/g, '\u00B4');
+	data = data.replace(/\'/g, '`');
+	var wordbyword = data.split(' ');
+	var addpre = '';
+	var paran=0;
+    
+	//document.getElementById('mafa').innerHTML = data;	
+
+	for (var b = 0; b < wordbyword.length; b++)
+	{
+		if (altread == 1) {
+			endpt = wordbyword[b].length-1;
+			if (wordbyword[b].charAt(endpt) == '}') {
+				altplus += wordbyword[b].substring(0,endpt);
+				altread = 0;
+				altplus = replaceunistandard(altplus);
+				altplus = altplus.replace(/0/g, '.');
+				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+			}
+			else altplus += wordbyword[b] + ' ';
+		}
+		else if (wordbyword[b].charAt(0) == '{') {
+			if (wordbyword[b].charAt(wordbyword[b].length-1) == '}') { 
+				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
+				altplus = replaceunistandard(altplus);
+				altplus = altplus.replace(/0/g, '.');
+				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+			}
+			else {
+				altread = 1;
+				altplus = wordbyword[b].substring(1) + ' ';
+			}
+		}
+		else if (wordbyword[b+1] == '-') { // connect first part to search
+			if (wordbyword[b+5] == '_') { // single word search embedded on both sides
+				addpre = wordbyword[b];
+				b++;
+			}
+			else { // word search embedded left side
+				convout += wordbyword[b] + wordbyword[b+3] + ' ';
+				unioutb = (replaceunistandard(wordbyword[b]).replace(/``/g, '&quot;') + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]).replace(/``/g, '&quot;') + '<xc>';
+				if (script != 0) unioutb = translit(unioutb);
+				finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
+				b = b + 4;
+			}				
+		}
+		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
+			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
+			unioutb = (replaceunistandard(addpre).replace(/``/g, '&quot;') + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1].replace(/``/g, '&quot;') + '<xc> - ' + uniouta[b+4]).replace(/``/g, '&quot;');
+			if (script != 0) unioutb = translit(unioutb);
+			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			b = b + 4;
+			addpre = '';
+		}		
+
+		else if (wordbyword[b].substring(0,2) == '<f') {
+			finout += wordbyword[b] + ' ';
+		}		
+		else if (wordbyword[b] == '<p>') {
+			finout += '<p id="para'+paran+'">' + ' ';
+            paran++;
+		}		
+		else if (wordbyword[b].charAt(0) == '<')		{
+			finout += wordbyword[b];
+		}
+		else if (wordbyword[b].charAt(0) == 'z')
+		{
+			indexpage = wordbyword[b].charAt(1);
+			finout += ' <a href="javascript:void(0)" title="' + wordbyword[b].substring(2,8) + '"><font size=1>' + indexpage + '</font></a> ';
+		}
+		else if (which)
+		{
+			convout += wordbyword[b] + ' ';
+			unioutb = uniouta[b].replace(/``/g, '&quot;');
+			unioutb = unioutb.replace(/0/g, '.');
+			if (script != 0) unioutb = translit(unioutb);
+			finout += unioutb + ' ';
+		}
+		else
+		{
+			convout += wordbyword[b] + ' ';
+			unioutb = uniouta[b].replace(/``/g, '&quot;');
+			//unioutb = unioutb.replace(/0/g, '.');
+			if (script != 0) unioutb = translit(unioutb);
+			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+		}
+	}
+	finout = finout.replace(/ <b> /g, '<b>');
+	finout = finout.replace(/ <\/b> /g, '</b>');
+	if (!which) {
+		outarray[0] = finout;
+		outarray[1] = convout;
+		return outarray;
+	}
+	return finout;
+}
+
+function preparepali(data) { // standard text prep for algorithm
+	
+	var finout = formatuniout(data);
+	
+	// add search markers
+	
+	finout[0] = finout[0].replace(/<c0> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk1']+'">');
+	finout[0] = finout[0].replace(/<c1> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk2']+'">');
+	finout[0] = finout[0].replace(/<c2> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk3']+'">');
+	finout[0] = finout[0].replace(/ *<xc>/g, '</span> ');
+	finout[0] = finout[0].replace(/ *- */g, '');
+	finout[0] = finout[0].replace(/BACKGROUNDCOLOR/g, 'BACKGROUND-COLOR');
+
+	return finout;
+}
+
+
 var nikname = new Array();
 nikname['d'] = "DN";
 nikname['m'] = "MN";
@@ -163,7 +356,7 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 	title += '</tr></table>';
 	
 	title = replaceunistandard(title);
-	document.getElementById('mafa').innerHTML=title;
+	document.getElementById('mafb').innerHTML=title;
 }
 
 function createTablen()
@@ -283,188 +476,6 @@ function createTablep()
 		}
 	}
 
-}
-
-function preout(data) // calls text prep, then outputs it to preFrame
-{
-	lastcolour = 0; // reset colour changing
-/*	if (document.getElementById('autoalg').checked == true)
-	{
-		moveframex(0,'*',0,0);
-		parent.mainFrame.postout(data);		
-	}
-	else {*/
-		var inarray = preparepali(data);
-		var finout = inarray[0];
-        var convout = replaceunistandard(inarray[1]);
-
-        var nikaya = document.form.nik.value;
-        var book = document.form.book.selectedIndex;
-        var meta = document.form.meta.selectedIndex;
-        var vagga = document.form.vagga.selectedIndex;
-        var sutta = document.form.sutta.selectedIndex;
-        var section = document.form.section.selectedIndex;
-        
-        var transin;
-        var transout='<div style="position:absolute; right:0px; top:0px;">';
-        if (hier == "m") { 
-            transin = addtrans(0,nikaya,book,meta,vagga,sutta,section);
-            if (transin) {
-                if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-                transout += transin.join('')+'</div>';
-                document.getElementById('mafa').innerHTML += transout; 
-            }
-        }
-
-		document.getElementById('mafb').innerHTML = finout;
-		document.getElementById('mafb').innerHTML += ' <input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert"> <input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
-		document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
-        if (moveat == 3) {moveframex(2);}
-        else {moves(0);}
-	//}
-	
-}
-
-
-function formatuniout(data,which) { // prepare without links
-
-	var convout = '';
-	var indexpage = '';
-	var altread = 0;
-	var altplus = '';	
-	var endpt = 0;
-	var unioutb = '';
-	var finout = '';
-	var outarray = new Array();
-	
-	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-	data = data.replace(/`/g, '\'');
-	data = data.replace(/"ti/g, '&quot; &quot;ti');
-	data = data.replace(/''ti/g, '&quot; &quot;ti');
-	data = data.replace(/'ti/g, '\' \'ti');
-	data = data.replace(/\'\'/g, ' &quot;');
-	data = data.replace(/\^b\^/g, ' <b> ');
-	data = data.replace(/\^eb\^/g, ' </b> ');
-	data = data.replace(/\^a\^\"/g, ' z');
-	data = data.replace(/\"\^ea\^/g, 'z ');
-	data = data.replace(/\^a\^/g, ' z');
-	data = data.replace(/\^ea\^/g, 'z ');
-	data = data.replace(/\^v/g, '');
-	data = data.replace(/v\^/g, '');
-	data = data.replace(/\}/g, '} ');
-	data = data.replace(/ +/g, ' ');
-	var uniouta = replaceunistandard(data).split(' ');
-	//data = data.replace(/\"/g, '\u00B4');
-	data = data.replace(/\'/g, '`');
-	var wordbyword = data.split(' ');
-	var addpre = '';
-	var paran=0;
-    
-	//document.getElementById('mafa').innerHTML = data;	
-
-	for (var b = 0; b < wordbyword.length; b++)
-	{
-		if (altread == 1) {
-			endpt = wordbyword[b].length-1;
-			if (wordbyword[b].charAt(endpt) == '}') {
-				altplus += wordbyword[b].substring(0,endpt);
-				altread = 0;
-				altplus = replaceunistandard(altplus);
-				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
-			}
-			else altplus += wordbyword[b] + ' ';
-		}
-		else if (wordbyword[b].charAt(0) == '{') {
-			if (wordbyword[b].charAt(wordbyword[b].length-1) == '}') { 
-				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
-				altplus = replaceunistandard(altplus);
-				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
-			}
-			else {
-				altread = 1;
-				altplus = wordbyword[b].substring(1) + ' ';
-			}
-		}
-		else if (wordbyword[b+1] == '-') { // connect first part to search
-			if (wordbyword[b+5] == '_') { // single word search embedded on both sides
-				addpre = wordbyword[b];
-				b++;
-			}
-			else { // word search embedded left side
-				convout += wordbyword[b] + wordbyword[b+3] + ' ';
-				unioutb = (replaceunistandard(wordbyword[b]).replace(/``/g, '&quot;') + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]).replace(/``/g, '&quot;') + '<xc>';
-				if (script != 0) unioutb = translit(unioutb);
-				finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
-				b = b + 4;
-			}				
-		}
-		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
-			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
-			unioutb = (replaceunistandard(addpre).replace(/``/g, '&quot;') + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1].replace(/``/g, '&quot;') + '<xc> - ' + uniouta[b+4]).replace(/``/g, '&quot;');
-			if (script != 0) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
-			b = b + 4;
-			addpre = '';
-		}		
-
-		else if (wordbyword[b].substring(0,2) == '<f') {
-			finout += wordbyword[b] + ' ';
-		}		
-		else if (wordbyword[b] == '<p>') {
-			finout += '<p id="para'+paran+'">' + ' ';
-            paran++;
-		}		
-		else if (wordbyword[b].charAt(0) == '<')		{
-			finout += wordbyword[b];
-		}
-		else if (wordbyword[b].charAt(0) == 'z')
-		{
-			indexpage = wordbyword[b].charAt(1);
-			finout += ' <a href="javascript:void(0)" title="' + wordbyword[b].substring(2,8) + '"><font size=1>' + indexpage + '</font></a> ';
-		}
-		else if (which)
-		{
-			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b].replace(/``/g, '&quot;');
-			unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0) unioutb = translit(unioutb);
-			finout += unioutb + ' ';
-		}
-		else
-		{
-			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b].replace(/``/g, '&quot;');
-			//unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
-		}
-	}
-	finout = finout.replace(/ <b> /g, '<b>');
-	finout = finout.replace(/ <\/b> /g, '</b>');
-	if (!which) {
-		outarray[0] = finout;
-		outarray[1] = convout;
-		return outarray;
-	}
-	return finout;
-}
-
-function preparepali(data) { // standard text prep for algorithm
-	
-	var finout = formatuniout(data);
-	
-	// add search markers
-	
-	finout[0] = finout[0].replace(/<c0> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk1']+'">');
-	finout[0] = finout[0].replace(/<c1> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk2']+'">');
-	finout[0] = finout[0].replace(/<c2> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk3']+'">');
-	finout[0] = finout[0].replace(/ *<xc>/g, '</span> ');
-	finout[0] = finout[0].replace(/ *- */g, '');
-	finout[0] = finout[0].replace(/BACKGROUNDCOLOR/g, 'BACKGROUND-COLOR');
-
-	return finout;
 }
 
 function addtrans(which,nikaya,book,meta,vagga,sutta,section) {

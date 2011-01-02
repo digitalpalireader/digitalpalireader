@@ -186,6 +186,8 @@ function bookmarkframe(refresh)
 {
 	moveframex(2);
 
+	// get history
+
 	var theHistory = getHistory();
 	var hout = '';
 	var isclear = '';
@@ -195,6 +197,7 @@ function bookmarkframe(refresh)
 	}
 	if(!hout) { hout = '<b style="color:'+colorcfg['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
+    
     var ca = readDir();
     ca = ca.sort();
 	if (ca.length < 2)

@@ -50,6 +50,11 @@ right:0px;
 z-index:3000;
 }
 
+.toolbar td, .toolbar th {
+border:1px solid grey;
+background-color:#d9d4cc;
+}
+
 #search {
 display:none; 
 position:absolute;
@@ -113,18 +118,31 @@ top:0px;
 left:0px;
 right:254px;
 }
+
 #maf {
 position:absolute; 
 left:0px;
 right:0px;
 top:0px;
 bottom:228px;
-padding-top:10px; 
-padding-bottom:10px; 
-padding-left:10px; 
-padding-right:10px;
+}
+#maft {
+display:none;
+}
+#maftopen {
+background-color:#d9d4cc;
+}
+#mafa {
+position:absolute;
+top:0px;
+left:0px;
+}
+#mafb {
+height:100%;
+padding:10px;
 overflow:auto;
 }
+
 #brmid {
 position:absolute;
 top:0px;
@@ -268,7 +286,7 @@ background-color:#d9d4cc;
 }
 #cright {  
 position:absolute;
-padding-left:4px; 
+margin-left:4px; 
 height:100%;
 width:100%;
 overflow:auto;

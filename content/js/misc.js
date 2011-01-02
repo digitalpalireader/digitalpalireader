@@ -1,8 +1,8 @@
 var moveat = 2;
 
-function moveframex(a) //read, etc
+function moveframex(a,temp) //read, etc
 {
-    getconfig();
+    if(!temp) getconfig();
     document.getElementById('left').style.right = (parseInt(confmove[2])-4) + 'px';
     document.getElementById('right').style.width = confmove[2] + 'px';
     document.getElementById('anf').style.height = confmove[0] + 'px';
@@ -30,7 +30,7 @@ function moveframex(a) //read, etc
 
             document.getElementById('maf').style.bottom = (parseInt(confmove[0]) + parseInt(confmove[1]) + 16) + 'px';
             document.getElementById('leftbot').style.bottom = '0px';
-            document.getElementById('leftbot').style.height = confmove[1] + 'px';
+            document.getElementById('leftbot').style.height = parseInt(confmove[1]) + 'px';
             document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
             document.getElementById('anf').style.top = '';
 

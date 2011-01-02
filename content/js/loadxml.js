@@ -80,6 +80,8 @@ function importXML(manxml,labelsearchtemp)
 	var xna = xn[0].childNodes[0].nodeValue;
 	var yna = yn[0].childNodes[0].nodeValue;
 	var zna = zn[0].childNodes[0].nodeValue;
+
+	document.getElementById('mafb').innerHTML = '';
 	
 	convtitle(nikaya,book,vna,wna,xna,yna,zna);
 
@@ -100,7 +102,6 @@ function importXML(manxml,labelsearchtemp)
 	var onepar;
 	var quit = 0;
 	var tmpdata;
-	document.getElementById('mafb').innerHTML = '';
 	
 	// check if there is a search going on and add the labels
 	
