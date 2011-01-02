@@ -52,7 +52,7 @@ z-index:3000;
 
 .toolbar {
 border-spacing: 0px 0px;
-border-collapse: seperate;
+border-collapse: separate;
 padding:0px;
 margin:0px;
 }
@@ -224,7 +224,7 @@ left:0px
 position:absolute; 
 top:50px; 
 left:-1px;
-z-index=40000;
+z-index:40000;
 }
 
 #rightbot {  
