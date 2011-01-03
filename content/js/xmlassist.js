@@ -46,34 +46,34 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; toolopen=1" title="show toolbar"/>';
 			mafaout += '</td>';
 		mafaout += '</tr></table>';
 	mafaout += '</div>';
 	mafaout += '<div id="maft">';
 		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\'; toolopen=0" />';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
 				mafaout += '<input type="button" value="<" title="Retrieve previous section" onclick="toolopen = 1; createTablep()" />';
 				mafaout += '<input type="button" value=">" title="Retrieve next section" onclick="toolopen = 1; createTablen()" />';
 				mafaout += '&nbsp;';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
 				if (moveat == 2) {
-					mafaout += '<input type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
+					mafaout += '<input id="toolframebutton" type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
 				}
-				else { mafaout += '<input type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
+				else { mafaout += '<input id="toolframebutton" type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
 				mafaout += '&nbsp;';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
 				if (cpout == 1) {
 					mafaout += '<input id="o2" type="button" value="x" title="Close Control Panel" onclick="moveframec();" />';
@@ -84,14 +84,14 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 				mafaout += '&nbsp;';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
 				mafaout += '<input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert">';
 				mafaout += '<input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
 				mafaout += '&nbsp;';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc">';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
 				mafaout += 'History:';
 				mafaout += '&nbsp;';
@@ -121,7 +121,12 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 function formatuniout(data,which) { // prepare without links
 
 	var convout = '';
+	
 	var indexpage = '';
+	var pageno = '';
+	var pagetitle = '';
+	var volandpage = '';
+	
 	var altread = 0;
 	var altplus = '';	
 	var endpt = 0;
@@ -211,10 +216,29 @@ function formatuniout(data,which) { // prepare without links
 		else if (wordbyword[b].charAt(0) == '<')		{
 			finout += wordbyword[b];
 		}
-		else if (wordbyword[b].charAt(0) == 'z')
+		else if (wordbyword[b].charAt(0) == 'z') // pesky page numbers
 		{
 			indexpage = wordbyword[b].charAt(1);
-			finout += ' <a href="javascript:void(0)" title="' + wordbyword[b].substring(2,8) + '"><font size=1>' + indexpage + '</font></a> ';
+			pageno = wordbyword[b].substring(2,8);
+			switch (indexpage) {
+				case 'M':
+					pagetitle = 'Myanmar';
+					break;
+				case 'V':
+					pagetitle = 'VRI';
+					break;
+				case 'P':
+					pagetitle = 'PTS';
+					break;
+				case 'T':
+					pagetitle = 'Thai';
+					break;
+			}
+			
+			volandpage = pageno.split('.');
+			
+			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
+			finout += ' <a href="javascript:void(0)" title="' + pagetitle + '"><font size=1>' + indexpage + '</font></a> ';
 		}
 		else if (which)
 		{

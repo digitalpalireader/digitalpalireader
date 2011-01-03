@@ -509,30 +509,55 @@ function importXMLindex() {
 	var tmp5 = 0;
 	var tmp6 = 0;
 
+	var col = ['coltext','colsel','colped','coldppn','colcpd'];
+	var whichcol = [0,0,0,0,0];
+	var wcs = 0;
+	
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
 		theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue;
 		if (z.length > 1 && theData == ' ') { theData = unnamed; } 
-		if (theData != ' ') theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="green"><b>' + replaceunistandard(theData) + '</b></font></a><br>';
+		if (theData != ' ') {
+
+			whichcol[0] = 1; // bump up to let the second color know
+
+			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + replaceunistandard(theData) + '</b></font></a><br>';
+		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
 			theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue;
 			if (y.length > 1 && theData == ' ') { theData = unnamed; }
-			if (theData != ' ') theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="yellow">' + replaceunistandard(theData) + '</font></a><br>';
+			if (theData != ' ') {
+				
+				wcs = whichcol[0]; // either 0 or 1
+				whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
+				
+				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a><br>';
+			}
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
 				theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue;
 				if (x.length > 1 && theData == ' ') { theData = unnamed; }
-				if (theData != ' ') theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="maroon">' + replaceunistandard(theData) + '</font></a><br>';
+				if (theData != ' ') {
+					
+					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
+					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
+				
+					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a><br>';
+				}
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
 					theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue;
 					if (w.length > 1 && theData == ' ') { theData = unnamed; }
 					if (theData != ' ') {
-                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="darkslateblue">' + replaceunistandard(theData) + '</font></a>';
+						
+						wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
+						whichcol[3] = 1; // bump
+						
+                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -545,13 +570,18 @@ function importXMLindex() {
                         }
                         theDatao += '<br />';
                     }
+
 					v = w[tmp4].getElementsByTagName("h3");
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
 						theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue;
 						if (v.length > 1 && theData == ' ') { theData = unnamed; }
 						if (theData != ' ') {
-                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="black">' + replaceunistandard(theData) + '</font></a>';
+
+							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
+							whichcol[4] = 1; // bump
+
+                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -564,13 +594,19 @@ function importXMLindex() {
                             }
                             theDatao += '<br />';
                         }
+
+
 						u = v[tmp5].getElementsByTagName("h4");
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
 							theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue;
 							if (z.length > 1 && theData == ' ') { theData = unnamed; }
 							if (theData != ' ') {
-                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="blue">' + replaceunistandard(theData) + '</font></a>';
+
+								wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
+								if (wcs == 5) wcs = 0;
+
+                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 

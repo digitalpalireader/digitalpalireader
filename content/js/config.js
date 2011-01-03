@@ -19,6 +19,7 @@ colorcfg['colsearch1'] = getColPref('colsearch1');
 colorcfg['colsearch2'] = getColPref('colsearch2');
 
 colorcfg['colbk'] = getColPref('colbk');
+colorcfg['colbkcp'] = getColPref('colbkcp');
 colorcfg['colbk1'] = getColPref('colbk1');
 colorcfg['colbk2'] = getColPref('colbk2');
 colorcfg['colbk3'] = getColPref('colbk3');
@@ -59,6 +60,7 @@ function getconfig() {
 	colorcfg['colsearch2'] = getColPref('colsearch2');
 
 	colorcfg['colbk'] = getColPref('colbk');
+	colorcfg['colbkcp'] = getColPref('colbkcp');
 	colorcfg['colbk1'] = getColPref('colbk1');
 	colorcfg['colbk1'] = getColPref('colbk1');
 	colorcfg['colbk3'] = getColPref('colbk3');
@@ -85,7 +87,8 @@ function getconfig() {
     }
 
 	checkbackground();
-
+	checkcpbkg();
+	
 	var colchanges = document.getElementsByName('changecolor');
 	for(var i=0;i < colchanges.length;i++)
 	{
@@ -117,6 +120,18 @@ function checkbackground(x) {
 	}
 }
 
+function checkcpbkg(x) {
+	if (x==1) { 
+		var colort = document.getElementById('colbkcp').value 
+		document.getElementById('confanf').style.backgroundColor = colort;
+		document.getElementById('confcpf').style.backgroundColor = colort;
+	}
+	else { var colort = colorcfg['colbkcp'] }
+	document.getElementById('searcht').style.backgroundColor = colort;
+	document.getElementById('brmid').style.backgroundColor = colort;
+	document.getElementById('brleft').style.backgroundColor = colort;
+}
+
 function loadOptions() {
     moveframex(2);
     var colorcfg = [];
@@ -139,6 +154,7 @@ function loadOptions() {
 	colorcfg['colsearch1'] = getColPref('colsearch1');
 	colorcfg['colsearch2'] = getColPref('colsearch2');
 
+	colorcfg['colbkcp'] = getColPref('colbkcp');
 	colorcfg['colbk'] = getColPref('colbk');
     colorcfg['colbk1'] = getColPref("colbk1");
     colorcfg['colbk1'] = getColPref("colbk1");
@@ -160,7 +176,40 @@ function loadOptions() {
     var winH = window.innerHeight;
 
     document.getElementById('mafa').innerHTML = '';
-    document.getElementById('mafb').innerHTML = '<table style="width:' + (winW-confmove[2]-100) + 'px"><tr><td colspan=2><font size=4><b>DPR Configuration</b></font></td></tr><tr><td><p align=center><b>Size</b></p><p><form id="sizeform"><table align=center border=1 height="' + (winH/2.5) + '"><tr><td width="' + ((winW-confmove[2])/2.5) + '" align=center>(<i>auto</i>)</td><td bgcolor="#D9D4CC" align=center rowspan=3 width="' + (confmove[2]/2.5) + '">W<br><input onBlur="confmove[2] = checksizes(\'ControlW\',this.value); this.value = confmove[2]; moveframex(2,1);" id="ControlW" value="'+confmove[2]+'" type=input maxlength=4 size=4 title="Enter desired width"></td></tr><tr><td bgcolor="#D9D4CC" align=center height="' + (confmove[0]/2.5) + '">H <input onBlur="confmove[0] = checksizes(\'AnalyzeH\',this.value); this.value = confmove[0]; moveframex(2,1);" id="AnalyzeH" value="'+confmove[0]+'" type=input maxlength=4 size=4 title="Enter desired height"></td></tr><tr><td align=center height="' + (confmove[1]/2.5) + '">H <input onBlur="confmove[1] = checksizes(\'DictH\',this.value); this.value = confmove[1]; moveframex(2,1);" id="DictH" value="'+confmove[1]+'" type=input maxlength=4 size=4 title="Enter desired height"></td></tr></table></p></form></td><td align=center><form id="colorform"><p align=center><b>Color</b></p><p style="color:'+colorcfg['coltext']+'" id="col1">Text: <input name="color" id="coltext" value="'+colorcfg['coltext']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col1\').style.color=this.value;"><br><p style="color:'+colorcfg['colsel']+'" id="col2"><b>Selected: </b><input name="color" id="colsel" value="'+colorcfg['colsel']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col2\').style.color=this.value;"><br><p style="color:'+colorcfg['colped']+'" id="col3"><b>PED: </b><input name="color" id="colped" value="'+colorcfg['colped']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col3\').style.color=this.value;"><p style="color:'+colorcfg['coldppn']+'" id="col4"><b>DPPN: </b><input name="color" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;"><p style="color:'+colorcfg['colcpd']+'" id="col5"><b>CPD: </b><input name="color" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;"><p style="color:'+colorcfg['coltext']+'"><b id="col6" style="background-color:'+colorcfg['colbk']+'">BKGD: </b><input name="color" id="colbk" ' + (cfg['bkgimg']=='checked' ? 'disabled':'') + ' value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1); this.checked ? document.getElementById(\'colbk\').disabled=true : document.getElementById(\'colbk\').disabled=false" '+cfg['bkgimg']+'>Use image instead</input></form></td></tr><tr><td><p><b>Misc. Options:</b></p><p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+'><p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'></td></tr></table><p align=center><button class="btn" onclick="saveOptions()">Save</button><button class="btn" onclick="moveframex(2); refreshit()">Cancel</button><button class="btn" onclick="eraseOptions()">Restore defaults</button><b style="color:'+colorcfg['colsel']+'" id=message> </b></p>';
+    var mafaout = '<table style="width:' + (winW-confmove[2]-100) + 'px">';
+    mafaout += '<tr><td colspan=2><font size=4><b>DPR Configuration</b></font></td></tr>';
+    mafaout += '<tr><td><p align=center><b>Size</b></p><p><form id="sizeform">';
+		mafaout += '<table align=center border=1 height="' + (winH/2.5) + '">';
+		mafaout += '<tr>';
+			mafaout += '<td width="' + ((winW-confmove[2])/2.5) + '" align=center>(<i>auto</i>)</td>';
+			mafaout += '<td id="confanf" bgcolor="'+colorcfg['colbkcp']+'" align=center rowspan=3 width="' + (confmove[2]/2.5) + '">W<br><input onBlur="confmove[2] = checksizes(\'ControlW\',this.value); this.value = confmove[2]; moveframex(2,1);" id="ControlW" value="'+confmove[2]+'" type=input maxlength=4 size=4 title="Enter desired width"></td>';
+		mafaout += '</tr>';
+		mafaout += '<tr>';
+			mafaout += '<td id="confcpf" bgcolor="'+colorcfg['colbkcp']+'" align=center height="' + (confmove[0]/2.5) + '">H <input onBlur="confmove[0] = checksizes(\'AnalyzeH\',this.value); this.value = confmove[0]; moveframex(2,1);" id="AnalyzeH" value="'+confmove[0]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
+		mafaout += '</tr>';
+		mafaout += '<tr>';
+			mafaout += '<td align=center height="' + (confmove[1]/2.5) + '">H <input onBlur="confmove[1] = checksizes(\'DictH\',this.value); this.value = confmove[1]; moveframex(2,1);" id="DictH" value="'+confmove[1]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
+		mafaout += '</tr>';
+		mafaout += '</table>';
+    mafaout += '</p></form></td>';
+    mafaout += '<td align=center><form id="colorform">';
+    mafaout += '<p align=center><b>Color</b></p>';
+    mafaout += '<p style="color:'+colorcfg['coltext']+'" id="col1">Text: <input name="color" id="coltext" value="'+colorcfg['coltext']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col1\').style.color=this.value;"><br>';
+    mafaout += '<p style="color:'+colorcfg['colsel']+'" id="col2"><b>Selected: </b><input name="color" id="colsel" value="'+colorcfg['colsel']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col2\').style.color=this.value;"><br>';
+    mafaout += '<p style="color:'+colorcfg['colped']+'" id="col3"><b>PED: </b><input name="color" id="colped" value="'+colorcfg['colped']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col3\').style.color=this.value;">';
+    mafaout += '<p style="color:'+colorcfg['coldppn']+'" id="col4"><b>DPPN: </b><input name="color" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;">';
+    mafaout += '<p style="color:'+colorcfg['colcpd']+'" id="col5"><b>CPD: </b><input name="color" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;">';
+    mafaout += '<p style="color:'+colorcfg['coltext']+'"><b id="col6" style="background-color:'+colorcfg['colbkcp']+'">BKGD: </b><input name="color" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkcpbkg(1)">';
+    mafaout += '<p style="color:'+colorcfg['coltext']+'"><b id="col7" style="background-color:'+colorcfg['colbk']+'">BKGD: </b><input name="color" id="colbk" ' + (cfg['bkgimg']=='checked' ? 'disabled':'') + ' value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1); this.checked ? document.getElementById(\'colbk\').disabled=true : document.getElementById(\'colbk\').disabled=false" '+cfg['bkgimg']+'>Use image instead</input></form></td></tr><tr><td><p><b>Misc. Options:</b></p>';
+    mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+'>';
+    mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
+    mafaout += '</td></tr></table>';
+    mafaout += '<p align=center>';
+		mafaout += '<button class="btn" onclick="saveOptions()">Save</button>';
+		mafaout += '<button class="btn" onclick="moveframex(2); refreshit()">Cancel</button>';
+		mafaout += '<button class="btn" onclick="eraseOptions(1)">Restore defaults</button><b style="color:'+colorcfg['colsel']+'" id=message> </b>';
+    mafaout += '</p>';
+    document.getElementById('mafb').innerHTML = mafaout;
 }
 
 function saveOptions() {
@@ -220,7 +269,7 @@ function checksizes(pref,size) {
 	return parseInt(size);
 }
 
-function eraseOptions() {
+function eraseOptions(which) {
     for (i = 0; i < cPrefs.length; i++) {
         var Pref = cPrefs[i];
         var Val = cPrefVals[i];
@@ -236,8 +285,11 @@ function eraseOptions() {
         var Val = mPrefVals[i];
         setMiscPref(Pref,Val);
     }
-    loadOptions();
-    document.getElementById('message').innerHTML = " Options reset."
-    moveframex(2);
     getconfig();
+	if (which) {
+		loadOptions();
+		document.getElementById('message').innerHTML = " Options reset."
+		moveframex(2);
+	}
+	else { refreshit(1); }
 }

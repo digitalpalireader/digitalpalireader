@@ -77,8 +77,8 @@ function output(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + convoutput(data[1]) + '</b></a>';
 					break;
 				case '1':
-					if (!hotlink) { hotlink = 'dppn/' + data[0]; } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
+					if (!hotlink) { hotlink = 'dppn/' + data[0] +','+ data[1]; } // opens link in lower frame
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] +','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
 					break;
 				case '2':
 					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + convoutput(data[1]) + '</b>';
@@ -97,7 +97,7 @@ function output(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
 					break;
 				case '1':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0]+','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
 					break;
 				}
 			}
@@ -127,10 +127,9 @@ function output(which,first)
 		if (thisconcise.length > 1) conciseoutput += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="this.size=1; var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
 				
 		var concisedups = [];
-		
 		for (x = 0; x < thisconcise.length; x++)
 		{
-			if (thisconcise[x].length == 0) continue;
+			if (thisconcise[x].length == 0) { continue; }
 			
 			var conciseword = thisconcise[x];
 			conciseword = conciseword.replace(/aa/g, '&#257;');
@@ -183,94 +182,9 @@ function output(which,first)
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
-		moveframey('dif');
+		if(moveat == 2) { moveframey('dif'); }
 	}
 	return;
-}
-
-var pedfileget = '';
-function paliXML(file)
-{
-	var tloc = file.split('/');
-	var t1 = tloc[1];	
-	var t2 = tloc[2];
-	pedfileget = t1 + '/' + t2;
-	var pedp = 'etc/XML1/'+ t1+'/ped.xml';
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", pedp, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-	
-	var dataa = xmlDoc.getElementsByTagName('data')[t2].getElementsByTagName('sdata');
-	var data = '';
-	for (j=0; j<dataa.length; j++) {
-		data += dataa[j].childNodes[0].nodeValue;
-	}		
-	
-	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data;
-    document.getElementById('cdif').scrollTop=0;
-
-	var pedln = []; // limit in folders
-	pedln.push(4446);
-	pedln.push(2932);
-	pedln.push(3907);
-	pedln.push(3687);
-	pedln.push(1304);
-	
-	var tnum = parseFloat(t2);
-	var tout = '';
-	var bout = '';
-
-	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')">';
-	if (tnum != pedln[t2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')">';
-	document.getElementById('lt').innerHTML = tout;
-	document.getElementById('lb').innerHTML = bout;
-}
-
-function DPPNXML(file)
-{
-	var tloc = file.split('/')[1]+'/'+file.split('/')[2];
-	pedfileget = nameno[tloc].split('/')[1];
-	var pedp = 'etc/XML2/'+nameno[tloc].split('/')[0]+'.xml';
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", pedp, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-
-	var dataa = xmlDoc.getElementsByTagName('entry')[pedfileget].getElementsByTagName('data');
-	var data = '';
-	for (j=0; j<dataa.length; j++) {
-		data += dataa[j].childNodes[0].nodeValue;
-	}		
-	
-	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data;
-    document.getElementById('cdif').scrollTop=0;
-
-	var tout = '';
-	var bout = '';
-
-/*
-	var pedln = [];
-	pedln.push(4446);
-	pedln.push(2932);
-	pedln.push(3907);
-	pedln.push(3687);
-	pedln.push(1304);
-	
-	var tnum = parseFloat(t2);
-
-	if (tnum != 0) tout += '<input type="button" class="btn" value="<" onclick="paliXML(\'etc/' + t1 + '/' + (tnum - 1) + '.xml\')">';
-	if (tnum != pedln[t2]) bout += '<input type="button" class="btn" value=">" onclick="paliXML(\'etc/' + t1 + '/' + (tnum + 1) + '.xml\')">';
-*/
-
-	document.getElementById('lt').innerHTML = tout;
-	document.getElementById('lb').innerHTML = bout;
-
 }
 
 function noah()
@@ -317,4 +231,33 @@ function noah()
 	}
 	
 	writeFile('PEDdata.html', dataout, 'UTF-8')
+}
+
+function noah2()
+{
+	var dataout = '';
+	for (i = 1; i <= 8; i++) {
+	
+		var dn = 'etc/XML2/'+ i +'.xml';
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", dn, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var en = xmlDoc.getElementsByTagName('entry');
+		for (j = 0; j < en.length; j++) { 
+			var out = '';
+			var da = en[j].getElementsByTagName('data');
+			for (k = 0; k < da.length; k++) {
+				if(da[k].childNodes[0]) {
+					var data = da[k].childNodes[0].nodeValue;
+					out += data;
+				}
+			}
+			writeFile(i+'.'+j+'.html', out, 'UTF-8')
+		}
+		out = out.replace(/\&lt;/g, '\n<');
+		out = out.replace(/\&gt;/g, '>');
+	}
 }

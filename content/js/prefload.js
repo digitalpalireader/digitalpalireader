@@ -19,6 +19,7 @@ cPrefs.push("colped"); cPrefVals.push("#CC4400");
 cPrefs.push("colcpd"); cPrefVals.push("#5353D5");
 
 cPrefs.push("colbk"); cPrefVals.push("#FFFFFF");
+cPrefs.push("colbkcp"); cPrefVals.push("#d9d4cc");
 cPrefs.push("colbk1"); cPrefVals.push("yellow");
 cPrefs.push("colbk2"); cPrefVals.push("aqua");
 cPrefs.push("colbk3"); cPrefVals.push("green");
@@ -38,3 +39,17 @@ cPrefs.push("blueh"); cPrefVals.push("powderblue");
 mPrefs.push("ctrans"); mPrefVals.push("checked");
 mPrefs.push("autodict"); mPrefVals.push("checked");
 mPrefs.push("bkgimg"); mPrefVals.push("checked");
+
+for (i in sPrefs) {
+	if (!getSizePref(sPrefs[i])) { setSizePref(sPrefs[i],sPrefVals[i]); }
+}
+
+for (i in cPrefs) {
+	if (!getColPref(cPrefs[i])) { setColPref(cPrefs[i],cPrefVals[i]); }
+}
+
+/*
+for (i in mPrefs) {
+	if (!getMiscPref(mPrefs[i])) { setMiscPref(mPrefs[i],mPrefVals[i]); }
+}
+*/

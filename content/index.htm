@@ -10,42 +10,19 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/ioc.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
-
-<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
-
-<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/loadxml.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/xmlassist.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+
 <script language="JavaScript1.3" type="text/javascript" src="js/misc.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/pedfunc.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+
 <script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 
-<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
 
-<script language="JavaScript1.3" type="text/javascript">
-
-function getPageSize() {
-    return [
-        document.body.offsetWidth,
-        document.body.offsetHeight
-    ];
-}
-function moveit(one,two,three,four)
-{
-	eval('window.open("' +one+'","'+two+'");');
-}
-</script>
 </head>
-
 
 
 <body>
@@ -128,7 +105,7 @@ function moveit(one,two,three,four)
 							</table>	
 					<hr />
 							<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b name="changecolor">Bookmarks</b></a><br>
-							<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="clearHistory()" title="Load this bookmark">
+							<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
 							<br>
 							<input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
 					<hr />
@@ -177,28 +154,23 @@ function moveit(one,two,three,four)
 
 			<hr />
 
-					<input type="button" class="btn" value="%" title="Set configuration" onclick="loadOptions()"><input type="button" class="btn" value="X" title="Reset configuration" onclick="eraseOptions(); "> <input type="button" class="btn" value="#" title="Pali Quiz" onClick="newquiz();"><input type="button" class="btn" value="." title="Quote of the Moment" onClick="bv();"> <input type="button" class="btn" value="?" title="Help" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback" onClick="document.getElementById('mafa').innerHTML=''; document.getElementById('mafb').innerHTML='<form action=&quot;http://pali.sirimangalo.org/dprmail.php&quot; method=&quot;POST&quot;><h1>Feedback Form</h1><em>This form allows you to send comments, questions or bug reports directly to the creator of the DPR.<br>  Your email goes straight to me, so there is no need to worry about spam, etc.</em><p><b>Your Email</b><br><input type=&quot;text&quot; name=&quot;email&quot; size=40><p><b>Subject</b><br><input type=&quot;text&quot; name=&quot;subject&quot; size=40><p><b>Message</b><br><textarea cols=40 rows=10 name=&quot;message&quot;></textarea><p><input type=&quot;submit&quot; value=&quot; Send &quot;></form>';"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
+					<input type="button" class="btn" value="%" title="Set configuration" onclick="loadOptions()"><input type="button" class="btn" value="X" title="Reset configuration" onclick="eraseOptions();"> <input type="button" class="btn" value="#" title="Pali Quiz" onClick="newquiz();"><input type="button" class="btn" value="." title="Quote of the Moment" onClick="bv();"> <input type="button" class="btn" value="?" title="Help" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback" onClick="feedbackform();"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
 				</td>
 			</tr>
 	
 		</table>
 	</div>
 	<div align="left" id="langtr" style="clear:both">
-		<select class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
+		<select id="cpdlanglist" class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
 			<option value="xy">English</option>
-			<script> 
-				if(ft.length != 0) document.write('<option value="f">French</option>');
-				if(gt.length != 0) document.write('<option value="g">German</option>');
-				if(it.length != 0) document.write('<option value="i">Italian</option>');
-				if(rt.length != 0) document.write('<option value="r">Russian</option>');
-				if(st.length != 0) document.write('<option value="s">Spanish</option>');
-				if(tt.length != 0) document.write('<option value="t">Thai</option>');
-			</script>
 		</select>
 	</div>
 	<input id="manrem" type="hidden" value="0">
 	</form>
 </div>
+</div>
+<div id="openclose">
+	<img id="o1" src="images/close.png" onclick="moveframec();" title="close control panel">
 </div>
 <div id="right">
 	<div id="maf" name="changecolor">
@@ -313,29 +285,43 @@ function moveit(one,two,three,four)
 		<div id="cors"><img src="images/corb.png" /></div>
 	</div>
 </div>
-<div class="openclose">
-	<img class="openclose" id="o1" src="images/close.png" onmouseover="if(cpout==1) { this.src='images/closew.png'} else { this.src='images/openw.png' }" onmouseout="if(cpout==1) { this.src='images/close.png'} else { this.src='images/open.png' }" onclick="moveframec();" title="close control panel">
-</div>
 <script>
-updatecookielist();
+	updatecookielist();
+	if (document.getElementById('mafa').innerHTML == '') refreshit();
+	moveframex(2);
 </script>
-<script language="JavaScript1.3" type="text/javascript" src="js/version.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/pedfunc.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+
 <script language="JavaScript1.3" type="text/javascript" src="js/main_data.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/name_data.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/PaliWord.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/linkout.js"></script>
+
 <script language="JavaScript1.3" type="text/javascript" src="js/declension.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/linkin.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/PaliWord.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/linkout.js"></script>
+
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="etc/remotecheck.js"></script>
-<script type="text/javascript">
-	if (document.getElementById('mafa').innerHTML == '') refreshit();
- //document.getElementById('mafe').innerHTML = '<span style="color:'+colorcfg['coltext']+'"><img src="images/ajax-loader.gif" width=15> Checking for updates... <input type=button value="cancel" onclick="document.getElementById(\'mafe\').setAttribute(\'style\',\'display:none\');"></span>';
-	if (document.getElementById('lang').length == 1) document.getElementById('langtr').style.display = 'none';
-	//if (ckup == 0) checkupdate();
-	moveframex(2);
+<script language="JavaScript1.3" type="text/javascript" src="js/feedback.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+
+<script> 
+	if(ft.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="f">French</option>';
+	if(gt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="g">German</option>';
+	if(it.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="i">Italian</option>';
+	if(rt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="r">Russian</option>';
+	if(st.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="s">Spanish</option>';
+	if(tt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="t">Thai</option>';
+	if (document.getElementById('lang').length > 1) document.getElementById('langtr').style.display = 'block';
 </script>
 </body>
 </html>

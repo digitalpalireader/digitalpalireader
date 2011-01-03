@@ -3,14 +3,24 @@ var moveat = 2;
 function moveframex(a,temp) //read, etc
 {
     if(!temp) getconfig();
+
+	// adjust control panel based on cpout variable
+
     if(cpout == 1) { document.getElementById('right').style.left = confmove[2] + 'px'; }
     else {document.getElementById('right').style.left = '0px'; }
+
     document.getElementById('left').style.width = confmove[2] + 'px';
     document.getElementById('anf').style.height = confmove[0] + 'px';
     document.getElementById('searcht').style.height = confmove[3] + 'px';
     moves(0);
     switch (a) {
         case 1: //read
+			
+			if (document.getElementById('toolframebutton')) { 
+				document.getElementById('toolframebutton').value = 'A'; 
+				document.getElementById('toolframebutton').title = 'Restore Frames';
+			}
+
 			document.getElementById('RM').src="images/R1.png";
 			document.getElementById('AM').src="images/A0.png";
 			document.getElementById('DM').src="images/D0.png";
@@ -22,6 +32,12 @@ function moveframex(a,temp) //read, etc
             document.getElementById('anf').style.top = '';
             break;
         case 2:  //normal view
+
+			if (document.getElementById('toolframebutton')) { 
+				document.getElementById('toolframebutton').value = 'R'; 
+				document.getElementById('toolframebutton').title = 'Maximize Read Frame';
+			}
+
 			document.getElementById('RM').src="images/R0.png";
 			document.getElementById('AM').src="images/A1.png";
 			document.getElementById('DM').src="images/D0.png";
@@ -61,7 +77,7 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a) //dict, conv, or scratch
 {
-	moves(0);
+	moves(0); // close search
 
 	if (moveat == 1) moveframex(2);
 	document.getElementById('dM').src="images/d0.png";
@@ -110,15 +126,13 @@ function moveframec() // open close control panel
 	}
 }
 
-function moves(a) // search open
+function moves(a) // search open / close
 {
-	if (a == 1) {
-		cpout = 0;
-		moveframec();
+	if (a == 1) { // open search
 		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="-" title="minimize search frame" onClick="moves(0)">';
 		document.getElementById('search').style.display="block";
 	}
-	else {
+	else { // close search
 		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
 		document.getElementById('search').style.display="none";
 	}

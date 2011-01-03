@@ -122,6 +122,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 // --------------------------- match finding function  ---------------------------------
 
 var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning;
+notpart["ko"] = 1;
 notpart["va"] = 1;
 notpart["vaa"] = 1;
 notpart["ya"] = 1;
@@ -255,7 +256,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 
 // concise matches
 	
-	var resy = null;
+	var resy = '';
 
 	if (yt[oneword]) 
 	{					
@@ -408,7 +409,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				if (specsuf[cutsuf]) {
 					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)); // run find function on desuffixed word
 					if (desuf) {
-						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+'-'+cutsuf, desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], desuf[2]+'$'+specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
+						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+'-'+cutsuf, desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
 						return outsuf;
 					}
 				}
