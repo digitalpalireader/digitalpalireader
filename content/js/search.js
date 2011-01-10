@@ -1894,11 +1894,11 @@ function createTables(xmlDoc)
 									l = tempexword.length;
 									
 									for(var i=0; i<l; i++) {
-										while (/[a-zA-Z.~]/.exec(tempexword[i].charAt(0)) == -1) {
+										while (tempexword[i].charAt(0).search(/[a-zA-Z.~]/) == -1) {
 											tempexword[i] = tempexword[i].substring(1);
 										}
-										while (/[a-z]/.exec(tempexword[i].charAt(l)) == -1) {
-											tempexword[i] = tempexword[i].substring(0,l-1);
+										while (tempexword[i].charAt(tempexword[i].length-1).search(/[a-zA-Z]/) == -1) {
+											tempexword[i] = tempexword[i].substring(0,tempexword[i].length-1);
 										}
 									}
 									
@@ -1962,7 +1962,7 @@ function createTables(xmlDoc)
 									// titles
 									
 																
-									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
+									finalout += '<div id="' + countmatch + tagtitle + '"><p style="color:' + colorcfg['coltext'] + '"><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {

@@ -32,9 +32,10 @@ colorcfg['red'] = getColPref('red');
 
 colorcfg['blueh'] = getColPref('blueh');
 
-cfg['ctrans'] = getMiscPref('ctrans');
-cfg['autodict'] = getMiscPref('autodict');
-cfg['bkgimg'] = getMiscPref('bkgimg');
+cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
+cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
+cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
+
 cfg['toolbar'] = getMiscPref('toolbar');
 
 var colchanges = document.getElementsByName('changecolor');
@@ -74,9 +75,10 @@ function getconfig() {
 
 	colorcfg['blueh'] = getColPref('blueh');
 
-    cfg['ctrans'] = getMiscPref("ctrans");
-	cfg['autodict'] = getMiscPref('autodict');
-	cfg['bkgimg'] = getMiscPref('bkgimg');
+    cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
+	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
+	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
+
 	cfg['toolbar'] = getMiscPref('toolbar');
 	
     // Add ATI translations if preferred
@@ -170,9 +172,10 @@ function loadOptions() {
 
     colorcfg['blueh'] = getColPref("blueh");
 
-    cfg['ctrans'] = getMiscPref("ctrans");
-	cfg['autodict'] = getMiscPref('autodict');
-	cfg['bkgimg'] = getMiscPref('bkgimg');
+    cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
+	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
+	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
+
 	cfg['toolbar'] = getMiscPref('toolbar');
 
     var winW = window.innerWidth;
@@ -242,7 +245,7 @@ function saveOptions() {
         if (document.getElementById(Pref)) {
             Val = document.getElementById(Pref).checked;
             if (Val == true) Val = 'checked';
-            else Val = '';
+            else Val = 'unchecked';
             setMiscPref(Pref,Val);
         }
     }
