@@ -152,8 +152,12 @@ function output(which,first)
 			conciseword = conciseword.replace(/\~N/g, '&Ntilde;');
 			conciseword = conciseword.replace(/\,L/g, '&#7734;');
 
-			var concisedef = yt[thisconcise[x]].split('#');
+			var concisedefa = yt[thisconcise[x]];
+			concisedefa = concisedefa.replace(/,/g, '.');
+			concisedefa = concisedefa.replace(/\&comma;/g, ',');
+			concisedefa = replaceunistandard(concisedefa);
 			
+			var concisedef = concisedefa.split('#');
 			if (!concisedups[conciseword]) {
 				if (x == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
 				if (thisconcise.length > 1) {

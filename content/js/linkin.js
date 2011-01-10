@@ -108,6 +108,9 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	{
 		partword = oneword.substring(0,oneword.length-j);
 		restword = oneword.substring(oneword.length-j,oneword.length);
+
+		if (partword.length == 1 && (lastpart || partword != 'a')) { continue; } // no single letters, please
+
 		var newpart = findmatch(partword,lastpart,restword); // check for matched part
 		if (newpart) {
 			nextparts = parts.concat(Array(newpart[1])); // add the part to our list of matched parts
@@ -183,7 +186,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	}
 	
 	
-	// ---------- stem matching and converting - note the wt doesnt change just we get alternatives ----------
+	// ---------- stem matching and converting ----------
 	// this stuff is defined in declension.js
 	
 	wtr = new Array();

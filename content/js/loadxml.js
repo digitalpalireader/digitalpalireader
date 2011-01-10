@@ -1092,7 +1092,6 @@ function getatt(num) { // get atthakatha word
     var word = attlist[num].split('#')[0];
     var loc = attlist[num].substring(attlist[num].indexOf('#')+1);
     var loca = loc.split('#');
-    document.getElementById('mafa').innerHTML = '<h2>'+replaceunistandard(word)+'</h2>';
 	document.getElementById('mafb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
     var finout = '';
     for (i in loca) {
@@ -1137,7 +1136,8 @@ function getatt(num) { // get atthakatha word
         placen += ' Para. ' + (parseInt(para)+1);
         finout += '<p><a href="javascript:void(0)" onclick="getplace(Array(\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1])-1)+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\'m\',\''+pca[7]+'\'));" class="yellow"><b>'+placen+'</b></a> '+preparepali(z)[0]+'<br /><input type="button" value="Convert Text" onclick="sendtoconvert(\'' + preparepali(z)[1] + '\')"></p>';
     }
-    document.getElementById('mafb').innerHTML = finout;
+    document.getElementById('mafb').innerHTML = '<b style="text-size:24px">'+replaceunistandard(word)+'</b>';
+    document.getElementById('mafb').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }
  

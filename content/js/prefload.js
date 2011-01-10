@@ -39,6 +39,7 @@ cPrefs.push("blueh"); cPrefVals.push("powderblue");
 mPrefs.push("ctrans"); mPrefVals.push("checked");
 mPrefs.push("autodict"); mPrefVals.push("checked");
 mPrefs.push("bkgimg"); mPrefVals.push("checked");
+mPrefs.push("toolbar"); mPrefVals.push("1");
 
 for (i in sPrefs) {
 	if (!getSizePref(sPrefs[i])) { setSizePref(sPrefs[i],sPrefVals[i]); }

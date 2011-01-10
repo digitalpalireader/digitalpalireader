@@ -1,7 +1,8 @@
-var toolopen = 1;
 
 function preout(data,notrans) // calls text prep, then outputs it to preFrame
 {
+
+	var toolopen = getMiscPref('toolbar')
 	lastcolour = 0; // reset colour changing
 
 	var inarray = preparepali(data);
@@ -33,7 +34,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	var hout = '';
 	var theHistory = getHistory();
 	if (theHistory) {
-		hout = '<select onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
+		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
 		var isclear = '';
 		for (i in theHistory) {
 			var thist = theHistory[i].split('@');
@@ -47,20 +48,20 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; toolopen=1" title="show toolbar"/>';
+				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; setMiscPref(\'toolbar\',\'1\')" title="show toolbar"/>';
 			mafaout += '</td>';
 		mafaout += '</tr></table>';
 	mafaout += '</div>';
 	mafaout += '<div id="maft">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\'; toolopen=0" />';
+				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\';  setMiscPref(\'toolbar\',\'0\')" title="close toolbar" />';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
 				mafaout += '&nbsp;';
-				mafaout += '<input type="button" value="<" title="Retrieve previous section" onclick="toolopen = 1; createTablep()" />';
-				mafaout += '<input type="button" value=">" title="Retrieve next section" onclick="toolopen = 1; createTablen()" />';
+				mafaout += '<input type="button" value="<" title="Retrieve previous section" onclick="createTablep()" />';
+				mafaout += '<input type="button" value=">" title="Retrieve next section" onclick="createTablen()" />';
 				mafaout += '&nbsp;';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
@@ -103,7 +104,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	
 	document.getElementById('mafa').innerHTML = mafaout;
 	
-	if (toolopen == 1) {
+	if (toolopen == '1') {
 		document.getElementById('maft').style.display='block'; 
 		document.getElementById('maftopen').style.display='none';
 	}

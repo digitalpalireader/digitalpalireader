@@ -31,6 +31,7 @@ pref("extensions.digitalpalireader.colors.blueh", "powderblue");
 pref("extensions.digitalpalireader.misc.ctrans", "");
 pref("extensions.digitalpalireader.misc.autodict", "");
 pref("extensions.digitalpalireader.misc.bkgimg", "checked");
+pref("extensions.digitalpalireader.misc.toolbar", "1");
 
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.digitalpalireader@noah.yuttadhammo.description", "chrome://digitalpalireader/locale/digitalpalireader.properties");

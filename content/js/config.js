@@ -35,6 +35,7 @@ colorcfg['blueh'] = getColPref('blueh');
 cfg['ctrans'] = getMiscPref('ctrans');
 cfg['autodict'] = getMiscPref('autodict');
 cfg['bkgimg'] = getMiscPref('bkgimg');
+cfg['toolbar'] = getMiscPref('toolbar');
 
 var colchanges = document.getElementsByName('changecolor');
 for(var i=0;i < colchanges.length;i++)
@@ -76,6 +77,7 @@ function getconfig() {
     cfg['ctrans'] = getMiscPref("ctrans");
 	cfg['autodict'] = getMiscPref('autodict');
 	cfg['bkgimg'] = getMiscPref('bkgimg');
+	cfg['toolbar'] = getMiscPref('toolbar');
 	
     // Add ATI translations if preferred
     if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined') {
@@ -171,6 +173,7 @@ function loadOptions() {
     cfg['ctrans'] = getMiscPref("ctrans");
 	cfg['autodict'] = getMiscPref('autodict');
 	cfg['bkgimg'] = getMiscPref('bkgimg');
+	cfg['toolbar'] = getMiscPref('toolbar');
 
     var winW = window.innerWidth;
     var winH = window.innerHeight;

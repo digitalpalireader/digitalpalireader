@@ -1810,13 +1810,33 @@ function createTables(xmlDoc)
 									document.getElementById('sbfab').innerHTML = exwordout + '</tr></table><hr>';
 								
 																
-									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
-									if(u.length>1) finalout += '.' + (sx+1);
-									if(v.length>1) finalout += '.' + (sy+1);
-									if(w.length>1) finalout += '.' + (sz+1);
-									if(x.length>1) finalout += '.' + (s+1);
-									if(y.length>1) finalout += '.' + (se+1);
-									finalout += ', Paragraph ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
+									var colt = 0;
+									var cola = ['colped', 'coldppn', 'colsel'];
+									if(u.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(u[sx].getElementsByTagName("h0n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(v.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(v[sy].getElementsByTagName("h1n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(w.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(w[sz].getElementsByTagName("h2n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+
+									if(x.length>1) {
+										if(colt == 3) colt = 0;
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(x[s].getElementsByTagName("h3n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(y.length>1) {
+										if(colt == 3) colt = 0;
+										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1872,6 +1892,16 @@ function createTables(xmlDoc)
 									// word add
 									
 									l = tempexword.length;
+									
+									for(var i=0; i<l; i++) {
+										while (/[a-zA-Z.~]/.exec(tempexword[i].charAt(0)) == -1) {
+											tempexword[i] = tempexword[i].substring(1);
+										}
+										while (/[a-z]/.exec(tempexword[i].charAt(l)) == -1) {
+											tempexword[i] = tempexword[i].substring(0,l-1);
+										}
+									}
+									
 									texnodups.length = 0;
 									for(var i=0; i<l; i++) {
 										for(var j=i+1; j<l; j++) {
@@ -1931,16 +1961,35 @@ function createTables(xmlDoc)
 
 									// titles
 									
-									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
-									if(u.length>1) finalout +=  '.' + (sx+1);
-									if(v.length>1) finalout += '.' + (sy+1);
-									if(w.length>1) finalout += '.' + (sz+1);
-									if(x.length>1) finalout += '.' + (s+1);
-									if(y.length>1) finalout += '.' + (se+1);
+																
+									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
+									var colt = 0;
+									var cola = ['colped', 'coldppn', 'colsel'];
+									if(u.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(u[sx].getElementsByTagName("h0n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(v.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(v[sy].getElementsByTagName("h1n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(w.length>1) {
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(w[sz].getElementsByTagName("h2n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(x.length>1) {
+										if(colt == 3) colt = 0;
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(x[s].getElementsByTagName("h3n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+										 colt++;
+									 }
+									if(y.length>1) {
+										if(colt == 3) colt = 0;
+										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
+									 }
 									
 									// paragraph
 									
-									finalout += ', Paragraph ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1951,7 +2000,7 @@ function createTables(xmlDoc)
 									cmval = '';
 								}
 							}
-							if (count == 3) document.getElementById('num').innerHTML = '<font class=yellow>' + thiscount + '</font>';
+							if (count == 3) document.getElementById('num').innerHTML = '<font style="color:' + colorcfg['colsel'] + '">' + thiscount + '</font>';
 						}
 						nummatch = 0;
 					}
@@ -1960,7 +2009,7 @@ function createTables(xmlDoc)
 		}
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
-	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book + '</font> - <font class="yellow" size=3><i>No Match</i> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
+	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + book + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
 	else document.getElementById('sbfb').innerHTML += finalout;
 	
 	match = 0;

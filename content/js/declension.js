@@ -21,8 +21,8 @@
 	prem.push('aa^1^0');
 	prem.push('ii^1^0');
 	prem.push('uu^1^0');
-	prem.push('tu^0^0^ti');
-	prem.push('si^0^0^ti');
+	prem.push('tu^0^3^ti');
+	prem.push('si^0^3^ti');
 	prem.push('ahi^1^1');
 	prem.push('asu^1^1');
 	prem.push('anna,m^1^1');
@@ -73,7 +73,7 @@
 	prem.push('aami^1^0^ti');
 	prem.push('aama^1^0^ti');
 	prem.push('atha^1^0^ti');
-	prem.push('antu^1^0^ti');
+	prem.push('antu^1^1^ti');
 	prem.push('onti^1^0^ti');
 	prem.push('otha^1^0^ti');
 	prem.push('ontu^1^0^ti');

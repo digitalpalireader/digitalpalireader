@@ -294,7 +294,7 @@ function mlsearchstart()
 		{
 			us = replaceunistandard(yg[x].replace(/,/g, ".").replace(/`n/g, "\"n"));
 			ud = replaceunistandard(yt[yg[x]].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
-			ud = ud.replace(/#/, ', ');
+			ud = ud.replace(/#(.*)/, " ($1)");
 			
 			finouta[y] = '<a href="javascript:void(0)" class="white" onclick="document.getElementById(\'anfc\').innerHTML = \'<font class=white>' + us + '</font> = <font class=brown>' + ud +'</font>\'" onmouseover="document.getElementById(\'anfd\').innerHTML = \'' + ud +'\'" onmouseout="document.getElementById(\'anfd\').innerHTML = \'\'">' + us + '</a><br>';
 			y++;
