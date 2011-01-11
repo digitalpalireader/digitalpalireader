@@ -30,9 +30,11 @@
 	prem.push('inna,m^1^1');
 	prem.push('avo^0^0^u');
 	prem.push('ato^1^2^nt');
-	prem.push('ato^1^2^nt');
+	prem.push('ato^1^2^ti');
 	prem.push('anto^3^1');
+	prem.push('anto^1^1^ti');
 	prem.push('ataa^1^1^nt');
+	prem.push('ataa^2^1^i');
 	prem.push('ayo^0^1^i');
 	prem.push('ehi^0^0^a');
 	prem.push('ena^0^0^a');

@@ -1,6 +1,7 @@
 var colorcfg = [];
 var confmove = [];
 var cfg = [];
+var atiIns = 0;
 
 confmove[0] = getSizePref('AnalyzeH'); // used for the height of the analysis bar in the middle of the screen
 confmove[1] = getSizePref('DictH'); // used for the height of the bottom box containing the dictionary, scratchpad and convertpad
@@ -82,7 +83,8 @@ function getconfig() {
 	cfg['toolbar'] = getMiscPref('toolbar');
 	
     // Add ATI translations if preferred
-    if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined') {
+    if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
+		atiIns = 1;
         var headID = document.getElementsByTagName("head")[0];         
         var newScript = document.createElement('script');
         newScript.type = 'text/javascript';
