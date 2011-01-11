@@ -7,7 +7,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 
 	var inarray = preparepali(data);
 	var finout = inarray[0];
-	var convout = replaceunistandard(inarray[1]);
+	var convout = replaceunistandard(inarray[1]).replace(/  *,/g, ',');
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.selectedIndex;
@@ -602,6 +602,7 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
     var autha = [];
     autha['amar'] = "Amaravati";
     autha['bodh'] = "Bodhi";
+    autha['bpit'] = "Burma Pitaka Assoc.";
     autha['budd'] = "Buddharakkhita";
     autha['harv'] = "Harvey";
     autha['hekh'] = "Hecker and Khema";
@@ -774,6 +775,27 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                 }
                 output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/'+surl+'\');" value="Anandajoti" title="Translation of DN 16'+ssect+' by Anandajoti">');cnt++;
             }
+            if (mysn == 22) {
+                if (which > 0) {
+                        var surl = 'index.htm';
+                        var ssect = '';
+                    }
+                else {
+                    var ssect = '.' + (section+1);
+                    var surl = 'Satipatthana-';
+                    var sect0;
+                    switch (true) {
+						case (section <= 6):
+							sect0 = '0' + (section+1);
+							break;
+						case (section > 6):
+							sect0 = section + 9;
+							break;
+					}
+                    surl += sect0 + '.htm'; 
+                }
+                output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Satipatthana/'+surl+'\');" value="Anandajoti" title="Translation of DN 22'+ssect+' by Anandajoti">');cnt++;
+            }
             break;
         case 'm':
             if (which == 3 || which == 1) return null;
@@ -896,6 +918,7 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                             }
                         }
                     }
+					output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Khuddakapatha/Khuddakapatha.htm\');" value="Anandajoti" title="Translation of KhP by Anandajoti">');cnt++;		 
                 break;
                 case 2: // dhp
                 // kn/dhp/dhp.24.budd.html
@@ -936,6 +959,46 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
                             }
                         }
                     }
+                    
+                    // Anandajoti
+                    
+					if (which > 0) {
+							var surl = 'index.htm';
+							var ssect = '';
+						}
+					else {
+						var ssect = (vagga+1) + '.' + (section+1);
+						switch (vagga) {
+							case 0:
+							var surl = '1-Bodhivaggo-';
+							break;
+							case 1:
+							var surl = '2-Mucalindavaggo-';
+							break;
+							case 2:
+							var surl = '3-Nandavaggo-';
+							break;
+							case 3:
+							var surl = '4-Meghiyavaggo-';
+							break;
+							case 4:
+							var surl = '5-Sonavaggo-';
+							break;
+							case 5:
+							var surl = '6-Jaccandhavaggo-';
+							break;
+							case 6:
+							var surl = '7-Cullavaggo-';
+							break;
+							case 7:
+							var surl = '8-Pataligamiyavaggo-';
+							break;
+						}
+						var sect0 = (section+1);
+						if (sect0 < 10) { sect0 = '0'+sect0; }
+						surl += sect0 + '.htm';
+					}
+					output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Udana/'+surl+'\');" value="Anandajoti" title="Translation of Udana '+ssect+' by Anandajoti">');cnt++;		 
                 break;
                 case 4: // iti
                     // kn/iti/iti.1.001-027.than.html

@@ -206,6 +206,7 @@ function sendtoconvert(data)
 	data = data.replace(/ P /g, ' ');
 	data = data.replace(/ T /g, ' ');
 	data = data.replace(/ VAR /g, ' ');
+	data = data.replace(/  *,/g, ',')
 
 	moveframex(2)
 	moveframey('cof');

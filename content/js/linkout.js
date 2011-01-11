@@ -151,6 +151,7 @@ function output(which,first)
 			conciseword = conciseword.replace(/\,M/g, '&#7746;');
 			conciseword = conciseword.replace(/\~N/g, '&Ntilde;');
 			conciseword = conciseword.replace(/\,L/g, '&#7734;');
+			conciseword = conciseword.replace(/`$/g, '-');
 
 			var concisedefa = yt[thisconcise[x]];
 			concisedefa = concisedefa.replace(/,/g, '.');

@@ -21,6 +21,9 @@
 	prem.push('aa^1^0');
 	prem.push('ii^1^0');
 	prem.push('uu^1^0');
+	prem.push('a^1^0^a');
+	prem.push('i^1^0^i');
+	prem.push('u^1^0^u');
 	prem.push('tu^0^3^ti');
 	prem.push('si^0^3^ti');
 	prem.push('ahi^1^1');
