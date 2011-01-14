@@ -160,7 +160,7 @@ function output(which,first)
 			
 			var concisedef = concisedefa.split('#');
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b>' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
+				if (x == 0) { var sdfirst = '<b style="color:'+colorcfg['colcpd']+'">' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
 				if (thisconcise.length > 1) {
 					var condefnotype = concisedef[0];
 					if (concisedef[0].length > 100) {

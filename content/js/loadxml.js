@@ -22,7 +22,7 @@ function importXML(manxml,labelsearchtemp)
 		return;
 	}		
 
-	document.getElementById('mafa').innerHTML='';
+	addToolbar();
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
@@ -496,7 +496,7 @@ function importXMLindex() {
 	var bookn = document.form.book.value;
 	bookfile = nikaya + bookn;
 	
-	document.getElementById('mafa').innerHTML = '';
+	addToolbar();
 	document.getElementById('mafb').innerHTML = '';
 
 	var unnamed = '(unnamed)';
@@ -1100,7 +1100,7 @@ function helpXML(file)
 
 	var outputit = '';
 	document.getElementById('mafb').setAttribute('align','justify');
-	document.getElementById('mafa').innerHTML = '';
+	addToolbar();
 	document.getElementById('mafb').innerHTML = '';
 	var data = xmlDoc.getElementsByTagName('data')
 	for (ippp in data) {

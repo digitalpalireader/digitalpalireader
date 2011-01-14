@@ -12493,10 +12493,10 @@ mainda["vattanii"] = "3/1189";
 mainda["vattamaana"] = "3/1190";
 mainda["vattamaanaka"] = "3/1191";
 mainda["vatta"] = "3/1192"; // removed final r
-mainda["vatti"] = "3/1193";
+mainda["vattiz1"] = "3/1193";
+mainda["vattiz2"] = "3/1196"; // removed trailing 'n'
 mainda["vattika"] = "3/1194"; // removed =vatika
 mainda["vattita"] = "3/1195";
-mainda["vatti"] = "3/1196"; // removed trailing 'n'
 mainda["vatthaz1"] = "3/1197";
 mainda["vatthaz2"] = "3/1198";
 mainda["vatthabba"] = "3/1199";

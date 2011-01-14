@@ -1,8 +1,82 @@
+function addToolbar() {
+
+	
+	// history
+	
+	var hout = '';
+	var theHistory = getHistory();
+	if (theHistory) {
+		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
+		var isclear = '';
+		for (i in theHistory) {
+			var thist = theHistory[i].split('@');
+			hout += '<option value="'+thist[1]+'">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</option>';
+		}
+		hout += '</select>';
+	}
+
+
+	// toolbar
+	
+	var mafaout = '<div id="maftopen">';
+		mafaout += '<table class="toolbar"><tr>';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
+				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; setMiscPref(\'toolbar\',\'1\')" title="show toolbar"/>';
+			mafaout += '</td>';
+		mafaout += '</tr></table>';
+	mafaout += '</div>';
+	mafaout += '<div id="maft">';
+		mafaout += '<table class="toolbar"><tr>';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
+				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\';  setMiscPref(\'toolbar\',\'0\')" title="close toolbar" />';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
+				mafaout += '&nbsp;';
+				if (moveat == 2) {
+					mafaout += '<input id="toolframebutton" type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
+				}
+				else { mafaout += '<input id="toolframebutton" type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
+				mafaout += '&nbsp;';
+				if (cpout == 1) {
+					mafaout += '<input id="o2" type="button" value="x" title="Close Control Panel" onclick="moveframec();" />';
+				}
+				else { 
+					mafaout += '<input type="button" id="o2" value="o" title="Open Control Panel" onclick="moveframec();" />';
+				}
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+			mafaout += '<td class="spacer"></td>';
+			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
+				mafaout += '&nbsp;';
+				mafaout += 'History:';
+				mafaout += '&nbsp;';
+				mafaout += hout;
+				mafaout += '&nbsp;';
+			mafaout += '</td>';
+		mafaout += '</tr></table>';
+	mafaout += '</div>';
+	
+	document.getElementById('mafa').innerHTML = mafaout;
+	
+	if (getMiscPref('toolbar') == '1') {
+		document.getElementById('maft').style.display='block'; 
+		document.getElementById('maftopen').style.display='none';
+	}
+	else {
+		document.getElementById('maft').style.display='none'; 
+		document.getElementById('maftopen').style.display='block';
+	}
+}
 
 function preout(data,notrans) // calls text prep, then outputs it to preFrame
 {
 
-	var toolopen = getMiscPref('toolbar')
+	var toolopen = getMiscPref('toolbar');
 	lastcolour = 0; // reset colour changing
 
 	var inarray = preparepali(data);
@@ -42,8 +116,8 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 		}
 		hout += '</select>';
 	}
-    
-	// toolbar
+	
+		// toolbar
 	
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
@@ -112,6 +186,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 		document.getElementById('maft').style.display='none'; 
 		document.getElementById('maftopen').style.display='block';
 	}
+    
 	document.getElementById('mafb').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
 	moves(0);

@@ -1,5 +1,5 @@
 function feedbackform() {
-	document.getElementById('mafa').innerHTML='';
+	addToolbar();
 	var mafbout = '<form action="http://pali.sirimangalo.org/dprmail.php" method="POST">'
 	+ '<p><font size=5><b>Feedback Form</b></font>'
 	+ '<p><em>This form allows you to send comments, questions or bug reports directly to the creator of the DPR.<br>'
