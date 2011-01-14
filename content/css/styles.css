@@ -1,3 +1,17 @@
+body, p, table, div, b, a, select, input {
+	font-family: Sans;
+	color: #111;
+}
+
+body, p, table, div, b, a {
+	font-size: 16px;
+}
+
+select, input {
+	font-size: 14px
+}
+
+
 html, body {
  
 width: 100%;
@@ -15,7 +29,6 @@ color: #FFF;
 background-color: #FFF;
 }
 
-select { font-family: sans; font-size: 14px; background: white;}
 
 input.btn, input.go {
   font: bold 84% 'courier new';

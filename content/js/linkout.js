@@ -81,7 +81,7 @@ function output(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] +','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
 					break;
 				case '2':
-					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + convoutput(data[1]) + '</b>';
+					osout += '<b>' + convoutput(data[1]) + '</b>';
 					break;
 				case '3':
 					osout += '<b style="color:' + colorcfg['coltext'] + '">' + convoutput(data[1]) + '</b>';
@@ -160,7 +160,7 @@ function output(which,first)
 			
 			var concisedef = concisedefa.split('#');
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '">' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
+				if (x == 0) { var sdfirst = '<b>' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
 				if (thisconcise.length > 1) {
 					var condefnotype = concisedef[0];
 					if (concisedef[0].length > 100) {

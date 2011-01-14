@@ -10,6 +10,9 @@ pref("extensions.digitalpalireader.colors.coldppn", "#00B900");
 pref("extensions.digitalpalireader.colors.colped", "#CC4400");
 pref("extensions.digitalpalireader.colors.colcpd", "#5353D5");
 
+pref("extensions.digitalpalireader.colors.colfont", "Sans");
+pref("extensions.digitalpalireader.colors.colsize", "12");
+
 pref("extensions.digitalpalireader.colors.colbk", "#FFFFFF");
 pref("extensions.digitalpalireader.colors.colbkcp", "#d9d4cc");
 pref("extensions.digitalpalireader.colors.colbk1", "yellow");

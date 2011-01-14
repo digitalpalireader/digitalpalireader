@@ -521,7 +521,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + replaceunistandard(theData) + '</b></font></a><br>';
+			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + replaceunistandard(theData) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -533,7 +533,19 @@ function importXMLindex() {
 				wcs = whichcol[0]; // either 0 or 1
 				whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
 				
-				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a><br>';
+				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+
+				var transin;
+				var transout='';
+				if (hier == "m") { 
+					transin = addtrans(5,nikaya,book,tmp2);
+					if (transin) {
+						if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
+						transout += transin.join('');
+						theDatao += transout; 
+					}
+				}
+				theDatao += '<br />';
 			}
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
@@ -545,7 +557,19 @@ function importXMLindex() {
 					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
 					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 				
-					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a><br>';
+					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+
+					var transin;
+					var transout='';
+					if (hier == "m") { 
+						transin = addtrans(4,nikaya,book,tmp2,tmp3);
+						if (transin) {
+							if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
+							transout += transin.join('');
+							theDatao += transout; 
+						}
+					}
+					theDatao += '<br />';
 				}
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
@@ -561,7 +585,7 @@ function importXMLindex() {
                         var transin;
                         var transout='';
                         if (hier == "m") { 
-                            transin = addtrans(3,nikaya,book,tmp3,tmp4);
+                            transin = addtrans(3,nikaya,book,tmp2,tmp3,tmp4);
                             if (transin) {
                                 if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                 transout += transin.join('');
@@ -585,7 +609,7 @@ function importXMLindex() {
                             var transin;
                             var transout='';
                             if (hier == "m") { 
-                                transin = addtrans(2,nikaya,book,tmp3,tmp4,tmp5);
+                                transin = addtrans(2,nikaya,book,tmp2,tmp3,tmp4,tmp5);
                                 if (transin) {
                                     if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                     transout += transin.join('');
@@ -610,7 +634,7 @@ function importXMLindex() {
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
-                                    transin = addtrans(1,nikaya,book,tmp3,tmp4,tmp5,tmp6);
+                                    transin = addtrans(1,nikaya,book,tmp2,tmp3,tmp4,tmp5,tmp6);
                                     if (transin) {
                                         if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                         transout += transin.join('');

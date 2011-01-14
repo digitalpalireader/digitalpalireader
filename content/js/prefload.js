@@ -11,12 +11,15 @@ sPrefs.push("AnalyzeH"); sPrefVals.push(40);
 sPrefs.push("DictH"); sPrefVals.push(220);
 sPrefs.push("ControlW"); sPrefVals.push(254);
 
-cPrefs.push("coltext"); cPrefVals.push("#7F4C00");
+cPrefs.push("coltext"); cPrefVals.push("#111");
 cPrefs.push("colsel"); cPrefVals.push("#FFFF00");
 
 cPrefs.push("coldppn"); cPrefVals.push("#00B900");
 cPrefs.push("colped"); cPrefVals.push("#CC4400");
 cPrefs.push("colcpd"); cPrefVals.push("#5353D5");
+
+cPrefs.push("colfont"); cPrefVals.push("Sans");
+cPrefs.push("colsize"); cPrefVals.push("16");
 
 cPrefs.push("colbk"); cPrefVals.push("#FFFFFF");
 cPrefs.push("colbkcp"); cPrefVals.push("#d9d4cc");

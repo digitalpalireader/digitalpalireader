@@ -15,6 +15,9 @@ colorcfg['coldppn'] = getColPref('coldppn');
 colorcfg['colped'] = getColPref('colped');
 colorcfg['colcpd'] = getColPref('colcpd');
 
+colorcfg['colfont'] = getColPref('colfont');
+colorcfg['colsize'] = getColPref('colsize');
+
 colorcfg['colsearch0'] = getColPref('colsearch0');
 colorcfg['colsearch1'] = getColPref('colsearch1');
 colorcfg['colsearch2'] = getColPref('colsearch2');
@@ -58,6 +61,9 @@ function getconfig() {
 	colorcfg['colped'] = getColPref('colped');
 	colorcfg['colcpd'] = getColPref('colcpd');
 
+	colorcfg['colfont'] = getColPref('colfont');
+	colorcfg['colsize'] = getColPref('colsize');
+
 	colorcfg['colsearch0'] = getColPref('colsearch0');
 	colorcfg['colsearch1'] = getColPref('colsearch1');
 	colorcfg['colsearch2'] = getColPref('colsearch2');
@@ -94,21 +100,36 @@ function getconfig() {
 
 	checkbackground();
 	checkcpbkg();
-	
-	var colchanges = document.getElementsByName('changecolor');
-	for(var i=0;i < colchanges.length;i++)
-	{
-		colchanges[i].style.color=colorcfg['coltext'];
-	} 
+
+	document.styleSheets[0]['cssRules'][0].style.color = colorcfg['coltext']; 
+	document.styleSheets[0]['cssRules'][0].style.fontFamily = colorcfg['colfont']; 
+	document.styleSheets[0]['cssRules'][1].style.fontSize = colorcfg['colsize'] + 'px'; 
+	document.styleSheets[0]['cssRules'][2].style.fontSize = (parseInt(colorcfg['colsize']) - 2) + 'px'; 
+
+}
+
+function changecss(myclass,element,value) {
+	var CSSRules
+	if (document.all) {
+		CSSRules = 'rules'
+	}
+	else if (document.getElementById) {
+		CSSRules = 'cssRules'
+	}
+	for (var i = 0; i < document.styleSheets[0][CSSRules].length; i++) {
+		if (document.styleSheets[0][CSSRules][i].selectorText == myclass) {
+			document.styleSheets[0][CSSRules][i].style[element] = value
+		}
+	}	
 }
 
 function checkbackground(x) {
 	if ((!x && cfg['bkgimg'] == "checked") || (x == 1 && document.getElementById('bkgimg').checked)) {
-		document.getElementById('dif').style.backgroundImage = 'url(images/background.gif)';
-		document.getElementById('cof').style.backgroundImage = 'url(images/background.gif)';
-		document.getElementById('scf').style.backgroundImage = 'url(images/background.gif)';
-		document.getElementById('searchb').style.backgroundImage = 'url(images/background.gif)';
-		document.body.style.backgroundImage = 'url(images/background.gif)';
+		document.getElementById('dif').style.backgroundImage = 'url(images/background.png)';
+		document.getElementById('cof').style.backgroundImage = 'url(images/background.png)';
+		document.getElementById('scf').style.backgroundImage = 'url(images/background.png)';
+		document.getElementById('searchb').style.backgroundImage = 'url(images/background.png)';
+		document.body.style.backgroundImage = 'url(images/background.png)';
     }
     else {
 		if (x==1) { var colort = document.getElementById('colbk').value }
@@ -140,45 +161,6 @@ function checkcpbkg(x) {
 
 function loadOptions() {
     moveframex(2);
-    var colorcfg = [];
-    var confmove = [];
-    var cfg = [];
-
-    confmove[0] = getSizePref("AnalyzeH"); // used for the height of the analysis bar in the middle of the screen
-    confmove[1] = getSizePref("DictH"); // used for the height of the bottom box containing the dictionary, scratchpad and convertpad
-    confmove[2] = getSizePref("ControlW"); // used for the width of the control box on the right side of the screen.
-    confmove[3] = getSizePref("SearchH"); // used for the height of the search box (hidden)
-
-    colorcfg['coltext'] = getColPref("coltext");
-    colorcfg['colsel'] = getColPref("colsel");
-
-    colorcfg['coldppn'] = getColPref("coldppn");
-    colorcfg['colped'] = getColPref("colped");
-    colorcfg['colcpd'] = getColPref("colcpd");
-
-	colorcfg['colsearch0'] = getColPref('colsearch0');
-	colorcfg['colsearch1'] = getColPref('colsearch1');
-	colorcfg['colsearch2'] = getColPref('colsearch2');
-
-	colorcfg['colbkcp'] = getColPref('colbkcp');
-	colorcfg['colbk'] = getColPref('colbk');
-    colorcfg['colbk1'] = getColPref("colbk1");
-    colorcfg['colbk1'] = getColPref("colbk1");
-    colorcfg['colbk3'] = getColPref("colbk3");
-
-    colorcfg['green'] = getColPref("green");
-    colorcfg['blue'] = getColPref("blue");
-    colorcfg['brown'] = getColPref("brown");
-    colorcfg['grey'] = getColPref("grey");
-    colorcfg['red'] = getColPref("red");
-
-    colorcfg['blueh'] = getColPref("blueh");
-
-    cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
-	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
-	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-
-	cfg['toolbar'] = getMiscPref('toolbar');
 
     var winW = window.innerWidth;
     var winH = window.innerHeight;
@@ -186,7 +168,7 @@ function loadOptions() {
     document.getElementById('mafa').innerHTML = '';
     var mafaout = '<table style="width:' + (winW-confmove[2]-100) + 'px">';
     mafaout += '<tr><td colspan=2><font size=4><b>DPR Configuration</b></font></td></tr>';
-    mafaout += '<tr><td><p align=center><b>Size</b></p><p><form id="sizeform">';
+    mafaout += '<tr><td valign=top><p align=center><b>Size</b></p><p><form id="sizeform">';
 		mafaout += '<table align=center border=1 height="' + (winH/2.5) + '">';
 		mafaout += '<tr>';
 			mafaout += '<td width="' + ((winW-confmove[2])/2.5) + '" align=center>(<i>auto</i>)</td>';
@@ -201,14 +183,17 @@ function loadOptions() {
 		mafaout += '</table>';
     mafaout += '</p></form></td>';
     mafaout += '<td align=center><form id="colorform">';
-    mafaout += '<p align=center><b>Color</b></p>';
-    mafaout += '<p style="color:'+colorcfg['coltext']+'" id="col1">Text: <input name="color" id="coltext" value="'+colorcfg['coltext']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col1\').style.color=this.value;"><br>';
-    mafaout += '<p style="color:'+colorcfg['colsel']+'" id="col2"><b>Selected: </b><input name="color" id="colsel" value="'+colorcfg['colsel']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col2\').style.color=this.value;"><br>';
-    mafaout += '<p style="color:'+colorcfg['colped']+'" id="col3"><b>PED: </b><input name="color" id="colped" value="'+colorcfg['colped']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col3\').style.color=this.value;">';
-    mafaout += '<p style="color:'+colorcfg['coldppn']+'" id="col4"><b>DPPN: </b><input name="color" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;">';
-    mafaout += '<p style="color:'+colorcfg['colcpd']+'" id="col5"><b>CPD: </b><input name="color" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;">';
-    mafaout += '<p style="color:'+colorcfg['coltext']+'"><b id="col6" style="background-color:'+colorcfg['colbkcp']+'">BKGD: </b><input name="color" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkcpbkg(1)">';
-    mafaout += '<p style="color:'+colorcfg['coltext']+'"><b id="col7" style="background-color:'+colorcfg['colbk']+'">BKGD: </b><input name="color" id="colbk" ' + (cfg['bkgimg']=='checked' ? 'disabled':'') + ' value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1); this.checked ? document.getElementById(\'colbk\').disabled=true : document.getElementById(\'colbk\').disabled=false" '+cfg['bkgimg']+'>Use image instead</input></form></td></tr><tr><td><p><b>Misc. Options:</b></p>';
+    mafaout += '<p align=center><b>Text</b></p>';
+    mafaout += '<p style="color:'+colorcfg['coltext']+'" id="col1">Text: <input name="color1" id="coltext" value="'+colorcfg['coltext']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col1\').style.color=this.value;"><br>';
+    mafaout += '<p><b style="color:'+colorcfg['colsel']+'" id="col2">Selected: </b><input name="color2" id="colsel" value="'+colorcfg['colsel']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col2\').style.color=this.value;"><br>';
+    mafaout += '<p><b style="color:'+colorcfg['colped']+'" id="col3">PED: </b><input name="color3" id="colped" value="'+colorcfg['colped']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col3\').style.color=this.value;">';
+    mafaout += '<p><b style="color:'+colorcfg['coldppn']+'" id="col4">DPPN: </b><input name="color4" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;">';
+    mafaout += '<p><b style="color:'+colorcfg['colcpd']+'" id="col5">CPD: </b><input name="color5" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;">';
+    mafaout += '<p><b id="col6" style="color:'+colorcfg['coltext']+'; background-color:'+colorcfg['colbkcp']+'">Panel: </b><input name="color6" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkcpbkg(1)">';
+    mafaout += '<p><b id="col7" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">BKGD: </b><input name="color7" id="colbk" ' + (cfg['bkgimg']=='checked' ? 'disabled':'') + ' value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1); this.checked ? document.getElementById(\'colbk\').disabled=true : document.getElementById(\'colbk\').disabled=false" '+cfg['bkgimg']+'>Use image instead</input>';
+    mafaout += '<p><b id="col8">Font: </b><input name="color8" id="colfont" value="'+colorcfg['colfont']+'" type=input size=7 title="Enter desired font family" onkeyup="document.getElementById(\'col8\').style.fontFamily=this.value">';
+    mafaout += '<p><b id="col9">Size (px): </b><input name="color9" id="colsize" value="'+colorcfg['colsize']+'" type=input size=7 title="Enter desired font size in pixels" onkeyup="document.getElementById(\'col9\').style.fontSize=this.value + \'px\'">';
+    mafaout += '</form></td></tr><tr><td colspan=2><hr /><p><b>Misc. Options:</b></p>';
     mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+'>';
     mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
     mafaout += '</td></tr></table>';

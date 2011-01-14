@@ -368,7 +368,7 @@ dbv.push("And the Lord said to Magandiya: &quot;It is like a man born blind who 
 function bv() {
 	moveframex(2);
 	var rverse=Math.floor(Math.random()*366)
-	document.getElementById('difb').innerHTML = '<b name="changecolor" style="color:'+colorcfg['coltext']+'">Quote of the Moment:</b><p name="changecolor" valign=middle>' + dbv[rverse] + '</p>';
+	document.getElementById('difb').innerHTML = '<b name="changecolor" class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + dbv[rverse] + '</p>';
     document.getElementById('cdif').scrollTop=0;
 }
 

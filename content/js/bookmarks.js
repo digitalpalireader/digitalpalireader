@@ -191,14 +191,11 @@ function bookmarkframe(refresh)
 	var theHistory = getHistory();
 	var hout = '';
 	var isclear = '';
-
-	if (theHistory.length > 0) {
-		for (i in theHistory) {
-			var thist = theHistory[i].split('@');
-			var tt1 = thist[1].length-1;
-			thist[1] = thist[1].substring(0,tt1) + "'" + thist[1].charAt(tt1) + "'";
-			hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
-		}
+	for (i in theHistory) {
+		var thist = theHistory[i].split('@');
+		var tt1 = thist[1].length-1;
+		thist[1] = thist[1].substring(0,tt1) + "'" + thist[1].charAt(tt1) + "'";
+		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
 	}
 	if(!hout) { hout = '<b style="color:'+colorcfg['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }

@@ -37,11 +37,11 @@
 						<table width="1px">
 							<tr>
 								<td align=center>
-									<b name="changecolor">Collection</b>
+									<b>Collection</b>
 								</td>
 								<td>&nbsp;</td>
 								<td align=center>
-									<b name="changecolor">Book</b><br>
+									<b>Book</b><br>
 								</td>
 							</tr>
 							<tr>
@@ -69,7 +69,7 @@
 							</table>
 						<hr />
 
-								<div align="center" id="title" name="changecolor">title</div>
+								<div align="center" id="title">title</div>
 
 								<div align="center" style="padding-top:2px" id="meta"><select class="sel" size="1" name="meta"><option selected>a</option></select></div>
 
@@ -105,7 +105,7 @@
 									</tr>
 								</table>	
 						<hr />
-								<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b name="changecolor">Bookmarks</b></a><br>
+								<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
 								<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
 								<br>
 								<input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
@@ -113,7 +113,7 @@
 
 								<table align=center>
 									<tr>
-										<td align=center colspan=2><b name="changecolor">Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
+										<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
 										</td>
 									</tr>
 
@@ -124,7 +124,7 @@
 									</tr>
 								</table>
 						<hr />
-								<b name="changecolor">Dictionary</b>&nbsp;
+								<b>Dictionary</b>&nbsp;
 								<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
 									<option selected>DPR</option>
 									<option>PED</option>
@@ -173,7 +173,7 @@
 		<img id="o1" src="images/close.png" onclick="moveframec();" title="close control panel">
 	</div>
 	<div id="right">
-		<div id="maf" name="changecolor">
+		<div id="maf">
 			<div align="left" id="mafa"></div>
 			<div align="justify" id="mafb">
 				<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
@@ -187,7 +187,7 @@
 		<div id="rightbot">
 			<div id="cdif">
 				<div id="dif">
-					<div id="difb" name="changecolor">
+					<div id="difb">
 					</div>
 				</div>
 			</div>
@@ -197,12 +197,12 @@
 			<div id="cof">
 					<table align="center">
 						<tr>
-							<td align="center" name="changecolor">Input</td>
+							<td align="center">Input</td>
 							<td align="center">
 								<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
 								<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
 							</td>
-							<td align="center" name="changecolor">Output</td>
+							<td align="center">Output</td>
 						</tr>
 						<tr>
 							<td align=left id="inputtd">
@@ -211,33 +211,33 @@
 							<td>	
 								<table id="table1">
 									<tr>
-										<td align="center" name="changecolor">from</td>
+										<td align="center">from</td>
 										<td></td>
-										<td align="center" name="changecolor">to</td>
+										<td align="center">to</td>
 									</tr>
 									<tr>
 										<td align="center"><input type="radio" value="V1" name="R1" onclick="javascript:changeit('c',1)"></td>
-										<td align="center" name="changecolor">CSCD</td>
+										<td align="center">CSCD</td>
 										<td align="center"><input type="radio" disabled=yes value="V1" name="R2" onclick="javascript:changeit('c',2)"></td>
 									</tr>
 									<tr>
 										<td align="center"><input type="radio" value="V2" name="R1" onclick="javascript:changeit('u',1)"></td>
-										<td align="center" name="changecolor">Uni</td>
+										<td align="center">Uni</td>
 										<td align="center"><input type="radio" value="V2" checked name="R2" onclick="javascript:changeit('u',2)"></td>
 									</tr>
 									<tr>
 										<td align="center"><input type="radio" value="V3" checked name="R1" onclick="javascript:changeit('v',1)"></td>
-										<td align="center" name="changecolor">Velth</td>
+										<td align="center">Velth</td>
 										<td align="center"><input type="radio" value="V3" name="R2" onclick="javascript:changeit('v',2)"></td>
 									</tr>
 									<tr>
 										<td align="center"><input type="radio" disabled=yes value="V4" name="R1" onclick="javascript:changeit('t',1)"></td>
-										<td align="center" name="changecolor">Thai</td>
+										<td align="center">Thai</td>
 										<td align="center"><input type="radio" value="V4" name="R2" onclick="javascript:changeit('t',2)"></td>
 									</tr>
 									<tr>
 										<td align="center"><input type="radio" disabled=yes value="V5" name="R1" onclick="javascript:changeit('d',1)"></td>
-										<td align="center" name="changecolor">Deva</td>
+										<td align="center">Deva</td>
 										<td align="center"><input type="radio" value="V5" name="R2" onclick="javascript:changeit('d',2)"></td>
 									</tr>
 								</table>
@@ -253,7 +253,7 @@
 				<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">
 			</div>
 		</div>
-		<div id="anf" align=right name="changecolor">
+		<div id="anf" align=right>
 			<div id="brtop"></div>
 			<div id="brmid"></div>
 			<div id="brbot"></div>

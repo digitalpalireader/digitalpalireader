@@ -235,8 +235,8 @@ function pausesall()
 		document.getElementById('sbfab').innerHTML = '';
 		document.getElementById('sbfb').innerHTML = '<hr>';
 	
-	if (hier == "t") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1"></td></tr></table>';
-	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="javascript:go_anchor(\'searchb\',\'sbfDN\')">DN:</a> <font id="stfd"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfMN\')">MN:</a> <font id="stfm"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfSN\')">SN:</a> <font id="stfs"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAN\')">AN:</a> <font id="stfa"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfKN\')">KN:</a> <font id="stfk"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfVin\')">Vin:</a> <font id="stfv"></font>, <a href="javascript:go_anchor(\'searchb\',\'sbfAbhi\')">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
+	if (hier == "t") document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="#sbfDN">DN:</a> <font id="stfd"></font>, <a href="#sbfMN">MN:</a> <font id="stfm"></font>, <a href="#sbfSN">SN:</a> <font id="stfs"></font>, <a href="#sbfAN">AN:</a> <font id="stfa"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1"></td></tr></table>';
+	else document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="#sbfDN">DN:</a> <font id="stfd"></font>, <a href="#sbfMN">MN:</a> <font id="stfm"></font>, <a href="#sbfSN">SN:</a> <font id="stfs"></font>, <a href="#sbfAN">AN:</a> <font id="stfa"></font>, <a href="#sbfKN">KN:</a> <font id="stfk"></font>, <a href="#sbfVin">Vin:</a> <font id="stfv"></font>, <a href="#sbfAbhi">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
 	
 
 	
@@ -294,14 +294,14 @@ function importXMLs(cnt)
 	if (getstring.length < 3)
 	{
 		alert("Minimum three letter search length")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c" style="color:'+colorcfg['coltext']+'">ready</h1></div>';
+		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 		document.getElementById('sbfa').innerHTML='';
 		return;
 	}
 	if (stringra.length > 3)
 	{
 		alert("maximum three strings per search")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c" style="color:'+colorcfg['coltext']+'">ready</h1></div>';
+		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 		document.getElementById('sbfa').innerHTML='';
 		return;
 	}
@@ -310,7 +310,7 @@ function importXMLs(cnt)
 		if (stringra[s].length < 3 && stringra.length > 0)
 		{
 			alert("Minimum three letter search length")
-			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c" style="color:'+colorcfg['coltext']+'">ready</h1></div>';
+			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 			document.getElementById('sbfa').innerHTML='';
 			return;
 		}
@@ -324,7 +324,7 @@ function importXMLs(cnt)
 			newnikaya = bookfile.charAt(0);
 			if (nikayaat != newnikaya)
 			{
-				document.getElementById('sbfb').innerHTML += '<div id="sbf' + nikname[newnikaya] + '" name="xyz"><h1 style="color:'+colorcfg['coltext']+'">' + nikname[newnikaya] + '</h1><hr></div>';
+				document.getElementById('sbfb').innerHTML += '<div id="sbf' + nikname[newnikaya] + '" name="xyz"><h1>' + nikname[newnikaya] + '</h1><hr></div>';
 				thiscount = 0;
 				rescount++;
 			}
@@ -380,7 +380,7 @@ function importXMLs(cnt)
 		if (qz == 0) {
 			document.getElementById('sbfab').innerHTML = '';
 			document.getElementById('sbfb').innerHTML = '<hr>';
-			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['coltext']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		}
 
 		document.getElementById('sbfb').innerHTML += '<div name="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
@@ -421,7 +421,7 @@ function importXMLs(cnt)
 		document.getElementById('sbfab').innerHTML = '';
 		//document.getElementById('sbfb').innerHTML = '<hr><div title="xyz"><h1>' + nikname[nikaya] + ' ' + book + '</h1><hr></div>';
 
-		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left style="color:' + colorcfg['coltext'] + '">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		
 		bookload = 'xml/' + bookfile + hier + '.xml';
 
@@ -582,7 +582,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -606,7 +606,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -614,7 +614,7 @@ function createTables(xmlDoc)
 								
 																
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book + '.' + (sx+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -702,11 +702,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -714,13 +714,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -733,7 +733,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -815,7 +815,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -839,7 +839,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -849,7 +849,7 @@ function createTables(xmlDoc)
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
 									if(u.length>1) finalout += '.' + (sx+1);
 									if(v.length>1) finalout += '.' + (sy+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + '0,0,0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + '0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -937,11 +937,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -949,13 +949,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -970,7 +970,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',0,0,0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1053,7 +1053,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1077,7 +1077,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -1088,7 +1088,7 @@ function createTables(xmlDoc)
 									if(u.length>1) finalout += '.' + (sx+1);
 									if(v.length>1) finalout += '.' + (sy+1);
 									if(w.length>1) finalout += '.' + (sz+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1176,11 +1176,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -1188,13 +1188,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -1210,7 +1210,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1294,7 +1294,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1318,7 +1318,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -1330,7 +1330,7 @@ function createTables(xmlDoc)
 									if(v.length>1) finalout += '.' + (sy+1);
 									if(w.length>1) finalout += '.' + (sz+1);
 									if(x.length>1) finalout += '.' + (s+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1418,11 +1418,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -1430,13 +1430,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -1453,7 +1453,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1535,7 +1535,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1559,7 +1559,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -1572,7 +1572,7 @@ function createTables(xmlDoc)
 									if(w.length>1) finalout += '.' + (sz+1);
 									if(x.length>1) finalout += '.' + (s+1);
 									if(y.length>1) finalout += '.' + (se+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1660,11 +1660,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -1672,13 +1672,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -1696,7 +1696,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1779,7 +1779,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1803,7 +1803,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a style="color:' + colorcfg['coltext'] + '" href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}
@@ -1836,7 +1836,7 @@ function createTables(xmlDoc)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1934,11 +1934,11 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										ctab++;
 									}
 									if(exnodups.length > 1)
@@ -1946,13 +1946,13 @@ function createTables(xmlDoc)
 										exwordout += '</td><td valign="top">';
 										for (ex = ctab; ex < (ctab*2); ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 										
 										exwordout += '</td><td valign="top">';
 										for (ex = (ctab*2); ex < exnodups.length; ex++)
 										{
-										exwordout += '<div style="color:' + colorcfg['coltext'] + '"><a style="color:' + colorcfg['coltext'] + '" href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
+										exwordout += '<div><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</div>';
 										}	
 									}
 									document.getElementById('sbfab').innerHTML = exwordout + '</td></tr></table>';
@@ -1962,7 +1962,7 @@ function createTables(xmlDoc)
 									// titles
 									
 																
-									finalout += '<div id="' + countmatch + tagtitle + '"><p style="color:' + colorcfg['coltext'] + '"><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
+									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -1989,7 +1989,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p style="color:' + colorcfg['coltext'] + '">' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -2009,7 +2009,7 @@ function createTables(xmlDoc)
 		}
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
-	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + book + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" style="color:' + colorcfg['coltext'] + '" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
+	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + book + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
 	else document.getElementById('sbfb').innerHTML += finalout;
 	
 	match = 0;

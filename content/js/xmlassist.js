@@ -19,7 +19,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	var transin;
 	var transout='';
 	if (hier == "m" && !notrans) { 
-		transin = addtrans(0,nikaya,book,meta,vagga,sutta,section);
+		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
 			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
 			transout += transin.join('');
@@ -194,7 +194,7 @@ function formatuniout(data,which) { // prepare without links
 				convout += wordbyword[b] + wordbyword[b+3] + ' ';
 				unioutb = (replaceunistandard(wordbyword[b]).replace(/``/g, '&quot;') + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]).replace(/``/g, '&quot;') + '<xc>';
 				if (script != 0) unioutb = translit(unioutb);
-				finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
+				finout += '<a id="' + b + '" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 				b = b + 4;
 			}				
 		}
@@ -202,7 +202,7 @@ function formatuniout(data,which) { // prepare without links
 			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
 			unioutb = (replaceunistandard(addpre).replace(/``/g, '&quot;') + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1].replace(/``/g, '&quot;') + '<xc> - ' + uniouta[b+4]).replace(/``/g, '&quot;');
 			if (script != 0) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			finout += '<a id="' + b + '" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 			b = b + 4;
 			addpre = '';
 		}		
@@ -239,7 +239,7 @@ function formatuniout(data,which) { // prepare without links
 			volandpage = pageno.split('.');
 			
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
-			finout += ' <a href="javascript:void(0)" title="' + pagetitle + '"><font size=1>' + indexpage + '</font></a> ';
+			finout += ' <a style="color:blue" href="javascript:void(0)" title="' + pagetitle + '"><font size=1>' + indexpage + '</font></a> ';
 		}
 		else if (which)
 		{
@@ -255,7 +255,7 @@ function formatuniout(data,which) { // prepare without links
 			unioutb = uniouta[b].replace(/``/g, '&quot;');
 			//unioutb = unioutb.replace(/0/g, '.');
 			if (script != 0) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" style="color:'+colorcfg['coltext']+'" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			finout += '<a id="' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
 		}
 	}
 	finout = finout.replace(/ <b> /g, '<b>');
@@ -593,7 +593,7 @@ function createTablep()
 
 }
 
-function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
+function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
     if (getMiscPref("ctrans") != "checked" || typeof(atiD) == 'undefined') return;
     var cnt = 0;
     var output = [];
@@ -633,8 +633,69 @@ function addtrans(which,nikaya,book,meta,vagga,sutta,section) {
     autha['yaho'] = "Yahoo! Pali";
 
     switch (nikaya) {
+		case 'v':
+			switch (book) {
+                case 3:
+					if (which == 3 && vagga == 0) {
+                        var surl = 'index.htm';
+                        var ssect = '';
+                    }
+					else if (which == 0){
+						switch (section) {
+							case 0:
+								var surl="01-Awakening-Tree.htm";
+								break;
+							case 1:
+								var surl="02-Grumbling-Brahmana.htm";
+								break;
+							case 2:
+								var surl="03-Mucalinda.htm";
+								break;
+							case 3:
+								var surl="04-Tapussa-Bhallika.htm";
+								break;
+							case 4:
+								var surl="05-Brahmas-Request.htm";
+								break;
+							case 5:
+								var surl="06-Deciding.htm";
+								break;
+							case 6:
+								var surl="12-Yasas-Going-Forth.htm";
+								break;
+							case 7:
+								var surl="17-Mara.htm";
+								break;
+							case 8:
+								var surl="18-Ordination-Three-Refuges.htm";
+								break;
+							case 9:
+								var surl="19-Second-Mara.htm";
+								break;
+							case 10:
+								var surl="20-Good-Group.htm";
+								break;
+							case 11:
+								var surl="21-First-Miracle-Prose.htm";
+								break;
+							case 12:
+								var surl="39-King-Bimbisara.htm";
+								break;
+							case 13:
+								var surl="41-Sariputta-Moggallana.htm";
+								break;
+							case 14:
+								var surl="42-Sons.htm";
+								break;
+						}
+					}
+					if (surl) {	output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahakhandhako/'+surl+'\');" value="Anandajoti" title="Translation of Mahakhandhako by Anandajoti">');cnt++; }
+					break;			
+				break;
+			}
+		break;
         case 'd':
-            if (which == 2 || which == 1) return null;
+            if (which == 1) return null;
             switch (book) {
                 case 0:
                     book = 1;
