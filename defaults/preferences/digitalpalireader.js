@@ -4,17 +4,17 @@ pref("extensions.digitalpalireader.sizes.DictH", 220);
 pref("extensions.digitalpalireader.sizes.ControlW", 254);
 
 pref("extensions.digitalpalireader.colors.coltext", "#111");
-pref("extensions.digitalpalireader.colors.colsel", "#FFFF00");
+pref("extensions.digitalpalireader.colors.colsel", "#FF0");
 
-pref("extensions.digitalpalireader.colors.coldppn", "#00B900");
-pref("extensions.digitalpalireader.colors.colped", "#CC4400");
-pref("extensions.digitalpalireader.colors.colcpd", "#5353D5");
+pref("extensions.digitalpalireader.colors.coldppn", "#0B0");
+pref("extensions.digitalpalireader.colors.colped", "#C40");
+pref("extensions.digitalpalireader.colors.colcpd", "#44D");
 
 pref("extensions.digitalpalireader.colors.colfont", "Sans");
 pref("extensions.digitalpalireader.colors.colsize", "16");
 
-pref("extensions.digitalpalireader.colors.colbk", "#FFFFFF");
-pref("extensions.digitalpalireader.colors.colbkcp", "#d9d4cc");
+pref("extensions.digitalpalireader.colors.colbk", "#FFF");
+pref("extensions.digitalpalireader.colors.colbkcp", "#EEE");
 pref("extensions.digitalpalireader.colors.colbk1", "yellow");
 pref("extensions.digitalpalireader.colors.colbk2", "aqua");
 pref("extensions.digitalpalireader.colors.colbk3", "green");
@@ -34,7 +34,9 @@ pref("extensions.digitalpalireader.colors.blueh", "powderblue");
 pref("extensions.digitalpalireader.misc.ctrans", "");
 pref("extensions.digitalpalireader.misc.autodict", "");
 pref("extensions.digitalpalireader.misc.bkgimg", "checked");
+
 pref("extensions.digitalpalireader.misc.toolbar", "1");
+pref("extensions.digitalpalireader.misc.cpanel", "1");
 
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.digitalpalireader@noah.yuttadhammo.description", "chrome://digitalpalireader/locale/digitalpalireader.properties");
