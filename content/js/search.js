@@ -199,7 +199,7 @@ function pausesall()
 
 	var getstring = document.form.usearch.value;
 	var stringra = new Array();
-	
+		
 	var yesplus = getstring.search(/\u002B/);
 	if (yesplus >= 0)
 	{
@@ -449,6 +449,11 @@ function createTables(xmlDoc)
 	var u = xmlDoc.getElementsByTagName("h0");
 	
 	var getstring = document.form.usearch.value;
+
+	getstring = getstring.replace(/\./g, '\\\.');
+	getstring = getstring.replace(/,/g, '.');
+
+
 	var gotstring;
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;

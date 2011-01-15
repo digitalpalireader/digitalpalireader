@@ -1,3 +1,5 @@
+/* static - don't move these */
+
 body, p, table, div, b, a, select, input {
 	font-family: Sans;
 	color: #111;
@@ -8,9 +10,14 @@ body, p, table, div, b, a {
 }
 
 select, input {
-	font-size: 14px
+	font-size: 14px;
 }
 
+.small {
+	font-size: 10px;
+}
+
+/* end static */
 
 html, body {
  
@@ -68,7 +75,7 @@ top:-1px;
 left:-1px;
 width:15px;
 height:15px;
-z-index:1;
+z-index:4;
 background-image:url('../images/ocback.png'); 
 }
 
@@ -104,7 +111,7 @@ bottom:0px;
 right:0px;
 top:0px;
 left:-1px;
-z-index:1;
+z-index:5;
 }
 #searchtb {
 position:absolute; 
@@ -161,11 +168,14 @@ bottom:228px;
 padding-bottom:20px;
 }
 #maft {
-display:none;
+position:absolute;
+margin-left:auto; 
+margin-right: auto;
 left:0px;
 bottom:0px;
 }
 #maftopen {
+display:none;
 position:absolute;
 left:0px;
 bottom:0px;
@@ -174,6 +184,7 @@ bottom:0px;
 position:absolute;
 left:-1px;
 bottom:0px;
+width:100%;
 }
 #mafb {
 height:100%;
@@ -206,7 +217,7 @@ left:-1px;
 padding-top:10px; 
 padding-bottom:10px; 
 height:60px; 
-z-index:1;
+z-index:3;
 }
 #anft {
 padding-top:0px; 
@@ -246,7 +257,7 @@ left:0px
 position:absolute; 
 top:50px; 
 left:-1px;
-z-index:2;
+z-index:3;
 }
 
 #rightbot {  
@@ -308,6 +319,7 @@ top:0;
 left:0; 
 width:254px;
 height:100%;
+z-index:2;
 }
 
 #brleft {

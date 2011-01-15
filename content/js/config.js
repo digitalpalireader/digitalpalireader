@@ -41,6 +41,7 @@ cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 
 cfg['toolbar'] = getMiscPref('toolbar');
+cfg['cpanel'] = getMiscPref('cpanel');
 
 var colchanges = document.getElementsByName('changecolor');
 for(var i=0;i < colchanges.length;i++)
@@ -87,6 +88,7 @@ function getconfig() {
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 
 	cfg['toolbar'] = getMiscPref('toolbar');
+	cfg['cpanel'] = getMiscPref('cpanel');
 	
     // Add ATI translations if preferred
     if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
@@ -97,7 +99,13 @@ function getconfig() {
         newScript.src = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php';
         headID.appendChild(newScript);
     }
-
+	
+	// Control Panel && Toolbar
+	
+	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
+	
+	addToolbar();
+	
 	checkbackground();
 	checkcpbkg();
 
@@ -105,6 +113,7 @@ function getconfig() {
 	document.styleSheets[0]['cssRules'][0].style.fontFamily = colorcfg['colfont']; 
 	document.styleSheets[0]['cssRules'][1].style.fontSize = colorcfg['colsize'] + 'px'; 
 	document.styleSheets[0]['cssRules'][2].style.fontSize = (parseInt(colorcfg['colsize']) - 2) + 'px'; 
+	document.styleSheets[0]['cssRules'][3].style.fontSize = (parseInt(colorcfg['colsize']) - 6) + 'px'; 
 
 }
 

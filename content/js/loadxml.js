@@ -1092,7 +1092,9 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 function helpXML(file)
 {
-
+	moves(0);
+	if(moveat == 3) { moveframex(2); }
+	
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", file, false);
     xmlhttp.send(null);

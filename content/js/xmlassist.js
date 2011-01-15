@@ -1,3 +1,10 @@
+function switchTB() {
+	if (getMiscPref('toolbar') == '1') { 
+		closeTB();
+	}
+	else { openTB(); }
+}	
+
 function addToolbar() {
 
 	
@@ -21,14 +28,14 @@ function addToolbar() {
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; setMiscPref(\'toolbar\',\'1\')" title="show toolbar"/>';
+				mafaout += '<img id="toolimg" src="images/tools.png" width="8px" height="28px" onclick="openTB()" title="show toolbar"/>';
 			mafaout += '</td>';
 		mafaout += '</tr></table>';
 	mafaout += '</div>';
 	mafaout += '<div id="maft">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\';  setMiscPref(\'toolbar\',\'0\')" title="close toolbar" />';
+				mafaout += '<img id="toolimg" src="images/toolsin.png" width="8px" height="28px" onclick="closeTB()" title="close toolbar" />';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
@@ -63,15 +70,44 @@ function addToolbar() {
 	
 	document.getElementById('mafa').innerHTML = mafaout;
 	
-	if (getMiscPref('toolbar') == '1') {
-		document.getElementById('maft').style.display='block'; 
-		document.getElementById('maftopen').style.display='none';
-	}
-	else {
-		document.getElementById('maft').style.display='none'; 
-		document.getElementById('maftopen').style.display='block';
-	}
+	if (getMiscPref('toolbar') == '0') { 
+		closeTB(-10000);
+	}	
 }
+
+function closeTB(lT) {
+		var wT = document.getElementById('maft').offsetWidth;
+		if(!lT) lT = 0;
+		if(lT > (0-wT+30)) {
+			lT -= 30;
+			document.getElementById('maft').style.left=lT+'px';
+			setTimeout(function () { closeTB(lT); },10);
+		}
+		else {
+			document.getElementById('maft').style.left=(0-wT)+'px';
+			document.getElementById('maftopen').style.display='block';
+			setMiscPref('toolbar','0')
+		}
+}
+function openTB(lT) {
+
+		var wT = document.getElementById('maft').offsetWidth;
+
+		if(!lT) lT = 0-wT;
+
+		if(lT < (-30)) {
+			lT += 30;
+			document.getElementById('maft').style.left=lT+'px';
+			setTimeout(function () { openTB(lT); },10);
+		}
+		else {
+			document.getElementById('maft').style.left='0px';
+			document.getElementById('maftopen').style.display='none';
+			setMiscPref('toolbar','1')
+		}
+}
+
+
 
 function preout(data,notrans) // calls text prep, then outputs it to preFrame
 {
@@ -122,14 +158,14 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	var mafaout = '<div id="maftopen">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/tools.png" onclick="document.getElementById(\'maft\').style.display=\'block\'; document.getElementById(\'maftopen\').style.display=\'none\'; setMiscPref(\'toolbar\',\'1\')" title="show toolbar"/>';
+				mafaout += '<img id="toolimg" src="images/tools.png" onclick="openTB()" width="8px" height="28px" title="show toolbar"/>';
 			mafaout += '</td>';
 		mafaout += '</tr></table>';
 	mafaout += '</div>';
 	mafaout += '<div id="maft">';
 		mafaout += '<table class="toolbar"><tr>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="document.getElementById(\'maftopen\').style.display=\'block\'; document.getElementById(\'maft\').style.display=\'none\';  setMiscPref(\'toolbar\',\'0\')" title="close toolbar" />';
+				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="closeTB()" width="8px" height="28px" title="close toolbar" />';
 			mafaout += '</td>';
 			mafaout += '<td class="spacer"></td>';
 			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
@@ -178,14 +214,9 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	
 	document.getElementById('mafa').innerHTML = mafaout;
 	
-	if (toolopen == '1') {
-		document.getElementById('maft').style.display='block'; 
-		document.getElementById('maftopen').style.display='none';
-	}
-	else {
-		document.getElementById('maft').style.display='none'; 
-		document.getElementById('maftopen').style.display='block';
-	}
+	if (getMiscPref('toolbar') == '0') { 
+		closeTB(-10000);
+	}	
     
 	document.getElementById('mafb').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
@@ -244,7 +275,7 @@ function formatuniout(data,which) { // prepare without links
 				altread = 0;
 				altplus = replaceunistandard(altplus);
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
 			else altplus += wordbyword[b] + ' ';
 		}
@@ -253,7 +284,7 @@ function formatuniout(data,which) { // prepare without links
 				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
 				altplus = replaceunistandard(altplus);
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" style="color:'+colorcfg['grey']+'" title="' + altplus + '"><font size=1>VAR</font></a> ';
+				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
 			else {
 				altread = 1;
@@ -314,7 +345,7 @@ function formatuniout(data,which) { // prepare without links
 			volandpage = pageno.split('.');
 			
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
-			finout += ' <a style="color:blue" href="javascript:void(0)" title="' + pagetitle + '"><font size=1>' + indexpage + '</font></a> ';
+			finout += ' <a class="small" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a> ';
 		}
 		else if (which)
 		{
