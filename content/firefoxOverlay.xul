@@ -4,6 +4,9 @@
 <overlay id="digitalpalireader-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <script src="overlay.js"/>
+    <keyset>
+		<key id="DPR-key" modifiers="alt" key="p" oncommand="loadDPR();"/>
+	</keyset>
     <stringbundleset id="stringbundleset">
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>

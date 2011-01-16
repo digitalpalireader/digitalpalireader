@@ -1,7 +1,25 @@
 document.onkeypress = keyPressed;
 
+var isCtrl = false;
+var isAlt = false;
+var isShift = false;
+
+document.onkeyup=function(e){
+	if(e.which == 16) isShift=false;
+	if(e.which == 17) isCtrl=false;
+	if(e.which == 18) isAlt=false;
+}
+document.onkeydown=function(e){
+	if(e.which == 16) isShift=true;
+	if(e.which == 17) isCtrl=true;
+	if(e.which == 18) isAlt=true;
+}
+
 function keyPressed(e) {
+
+	if(isShift || isCtrl || isAlt) { return; }
 	if(document.activeElement.type) { return; }
+
 		if (e.charCode == 49) { moveframex(1); return; } // 1
 		if (e.charCode == 50) { moveframex(2); return; } // 2
 		if (e.charCode == 51) { moveframex(3); return; } // 3
