@@ -32,5 +32,5 @@ function keyPressed(e) {
 		if (e.charCode == 37) { loadOptions(); return; } // %
 		if (e.charCode == 46) { bv(); return; } // .
 		if (e.charCode == 63) { helpXML(); return; } // .
-		alert(e.charCode);
+		//alert(e.charCode);
 }
