@@ -87,22 +87,23 @@
 								<table>
 									<tr>
 										<td>
-											<a href="javascript:void(0)" title="Maximize Read Frame" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Restore Frames" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a><br />
+											<a href="javascript:void(0)" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a><br />
 											
 
 											
 											<a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a><img src="images/mats.png" /><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a><img src="images/mats.png" /><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a>
 										</td>
 										<td valign=top>
-											<a href="javascript:void(0)" title="Show Dictionary Frame" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Convertor" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
+											<a href="javascript:void(0)" title="Show Dictionary Frame (d)" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Convertor (c)" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad (t)" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
 										</td>
 										<td>
-											<a title="Retrieve previous section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
+											<a title="Retrieve previous section (p)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section (g)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section (n)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
 
-											<a id="hierma" href="javascript:void(0)" onclick="this.blur();"><img id="hiermi" src="images/m1.png" /></a><img src="images/mats.png" /><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="this.blur(); switchhier('a')"><img id="hierai" src="images/a0.png" /></a><img src="images/mats.png" /><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="this.blur(); switchhier('t')"><img id="hierti" src="images/t0.png" /></a>
+											<a id="hierma" href="javascript:void(0)" onclick="this.blur();"><img id="hiermi" src="images/m1.png" /></a><img src="images/mats.png" /><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="this.blur(); switchhier('a')"><img id="hierai" src="images/a0.png" /></a><img src="images/mats.png" /><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="this.blur(); switchhier('t')"><img id="hierti" src="images/t0.png" /></a><br/>
 											
 										</td>
 									</tr>
+									<tr><td colspan=3 id="history"></td></tr>
 								</table>	
 						<hr />
 								<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
@@ -172,7 +173,7 @@
 		</form>
 	</div>
 	<div id="cpopen">
-		<img id="o1" src="images/close.png" onclick="moveframec();" title="close control panel">
+		<img id="o1" src="images/close.png" onclick="moveframec();" title="close control panel (x)">
 	</div>
 	<div id="right">
 		<div id="maf">

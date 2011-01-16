@@ -22,7 +22,6 @@ function importXML(manxml,labelsearchtemp)
 		return;
 	}		
 
-	addToolbar();
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
@@ -97,7 +96,8 @@ function importXML(manxml,labelsearchtemp)
 	var hierb = hier;
 	
 	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
-	
+	historyBox();
+
 	var theData = '';
 	var onepar;
 	var quit = 0;
@@ -159,6 +159,8 @@ function importXML(manxml,labelsearchtemp)
 	labelsearch = null;
 }
 
+var maxlength = 20;  // change for display purposes, will affect history as well.
+
 
 function gettitles(altget,stop,prev,ssect)
 {
@@ -213,7 +215,6 @@ function gettitles(altget,stop,prev,ssect)
 	var nik = document.form.nik.value;
 	var book = document.form.book.value;
 
-	var maxlength = 20;  // change for display purposes
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
@@ -496,7 +497,6 @@ function importXMLindex() {
 	var bookn = document.form.book.value;
 	bookfile = nikaya + bookn;
 	
-	addToolbar();
 	document.getElementById('mafb').innerHTML = '';
 
 	var unnamed = '(unnamed)';
@@ -1092,6 +1092,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 function helpXML(file)
 {
+	if (!file) file = 'help.xml';
 	moves(0);
 	if(moveat == 3) { moveframex(2); }
 	
@@ -1102,7 +1103,6 @@ function helpXML(file)
 
 	var outputit = '';
 	document.getElementById('mafb').setAttribute('align','justify');
-	addToolbar();
 	document.getElementById('mafb').innerHTML = '';
 	var data = xmlDoc.getElementsByTagName('data')
 	for (ippp in data) {

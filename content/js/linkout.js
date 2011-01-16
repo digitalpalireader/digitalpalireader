@@ -57,7 +57,7 @@ function output(which,first)
 		
 		var partvars = owparts[c].split('#');
 		if (c > 0) {
-			osout += '<td>-<br><font size=2>&nbsp;</font></td>';	
+			osout += '<td><b>-</b><br><font size=2>&nbsp;</font></td>';	
 		}	
 
 		osout += '<td align="center">';

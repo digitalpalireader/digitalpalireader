@@ -1,5 +1,4 @@
 function newquiz() {
-	addToolbar();
 	document.getElementById('mafb').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="ran" value="0"><input type="hidden" id="wan" value="0"><p><b>Pali Quiz</b> <i id="checka">(click on the button corresponding to the right answer below)</i></p><p>Question #<font id="qn"></font>: What is the meaning of "<font id="qq"></font>"?</p><p><font id="answers"></font></p><p><table width=100%><tr><td>Right Answers: <b id="ra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="wa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b id="pa"></b></td></tr></table><p>Total Right Answers: <b id="rights"></b> <input type="button" class="btn" value="clear" onclick="clearrights()>';
 	document.getElementById('ra').innerHTML = '0';
 	document.getElementById('wa').innerHTML = '0';

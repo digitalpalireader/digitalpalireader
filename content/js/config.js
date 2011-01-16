@@ -40,7 +40,6 @@ cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
 cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 
-cfg['toolbar'] = getMiscPref('toolbar');
 cfg['cpanel'] = getMiscPref('cpanel');
 
 var colchanges = document.getElementsByName('changecolor');
@@ -87,7 +86,6 @@ function getconfig() {
 	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 
-	cfg['toolbar'] = getMiscPref('toolbar');
 	cfg['cpanel'] = getMiscPref('cpanel');
 	
     // Add ATI translations if preferred
@@ -100,12 +98,10 @@ function getconfig() {
         headID.appendChild(newScript);
     }
 	
-	// Control Panel && Toolbar
+	// Control Panel
 	
 	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
-	
-	addToolbar();
-	
+		
 	checkbackground();
 	checkcpbkg();
 

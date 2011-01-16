@@ -546,7 +546,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -648,7 +648,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -779,7 +779,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -883,7 +883,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1017,7 +1017,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1122,7 +1122,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1258,7 +1258,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b1>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1364,7 +1364,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1499,7 +1499,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1606,7 +1606,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b'+d+'>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1743,7 +1743,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<font style="color:'+colorcfg['colsearch'+d]+'"><b>' + stringra[d] + '</b></font>';
+											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1764,6 +1764,7 @@ function createTables(xmlDoc)
 								}
 								if (yesall == stringra.length)
 								{								
+									alert(tempexword[0]);
 									texnodups = [];
 									for(var t=0; t<tempexword.length; t++) {
 										texnodups[t] = [];
@@ -1870,7 +1871,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<font style="color:' + colorcfg['colsearch1'] + '"><b>' + gotstring + '</b></font>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										

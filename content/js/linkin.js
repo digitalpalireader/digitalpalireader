@@ -43,7 +43,7 @@ function postout(input,divclicked,frombox)
 	input = input.replace(/aa['"`]/g, 'a');
 	input = input.replace(/ii['"`]/g, 'i');
 	input = input.replace(/uu['"`]/g, 'u');
-	input = input.replace(/[`',{}?;!"-]/g, '');
+	input = input.replace(/[‘’“”`',{}?;!"-]/g, '');
 	input = input.replace(/xn/g, '`n');
 	input = input.toLowerCase();
 	input = input.replace(/\.([nmltd])/g, ",$1");

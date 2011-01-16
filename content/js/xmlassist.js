@@ -1,118 +1,7 @@
-function switchTB() {
-	if (getMiscPref('toolbar') == '1') { 
-		closeTB();
-	}
-	else { openTB(); }
-}	
-
-function addToolbar() {
-
-	
-	// history
-	
-	var hout = '';
-	var theHistory = getHistory();
-	if (theHistory) {
-		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
-		var isclear = '';
-		for (i in theHistory) {
-			var thist = theHistory[i].split('@');
-			hout += '<option value="'+thist[1]+'">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</option>';
-		}
-		hout += '</select>';
-	}
-
-
-	// toolbar
-	
-	var mafaout = '<div id="maftopen">';
-		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/tools.png" width="8px" height="28px" onclick="openTB()" title="show toolbar"/>';
-			mafaout += '</td>';
-		mafaout += '</tr></table>';
-	mafaout += '</div>';
-	mafaout += '<div id="maft">';
-		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/toolsin.png" width="8px" height="28px" onclick="closeTB()" title="close toolbar" />';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				if (moveat == 2) {
-					mafaout += '<input id="toolframebutton" type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
-				}
-				else { mafaout += '<input id="toolframebutton" type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				if (cpout == 1) {
-					mafaout += '<input id="o2" type="button" value="x" title="Close Control Panel" onclick="moveframec();" />';
-				}
-				else { 
-					mafaout += '<input type="button" id="o2" value="o" title="Open Control Panel" onclick="moveframec();" />';
-				}
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				mafaout += 'History:';
-				mafaout += '&nbsp;';
-				mafaout += hout;
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-		mafaout += '</tr></table>';
-	mafaout += '</div>';
-	
-	document.getElementById('mafa').innerHTML = mafaout;
-	
-	if (getMiscPref('toolbar') == '0') { 
-		closeTB(-10000);
-	}	
-}
-
-function closeTB(lT) {
-		var wT = document.getElementById('maft').offsetWidth;
-		if(!lT) lT = 0;
-		if(lT > (0-wT+30)) {
-			lT -= 30;
-			document.getElementById('maft').style.left=lT+'px';
-			setTimeout(function () { closeTB(lT); },10);
-		}
-		else {
-			document.getElementById('maft').style.left=(0-wT)+'px';
-			document.getElementById('maftopen').style.display='block';
-			setMiscPref('toolbar','0')
-		}
-}
-function openTB(lT) {
-
-		var wT = document.getElementById('maft').offsetWidth;
-
-		if(!lT) lT = 0-wT;
-
-		if(lT < (-30)) {
-			lT += 30;
-			document.getElementById('maft').style.left=lT+'px';
-			setTimeout(function () { openTB(lT); },10);
-		}
-		else {
-			document.getElementById('maft').style.left='0px';
-			document.getElementById('maftopen').style.display='none';
-			setMiscPref('toolbar','1')
-		}
-}
-
-
 
 function preout(data,notrans) // calls text prep, then outputs it to preFrame
 {
 
-	var toolopen = getMiscPref('toolbar');
 	lastcolour = 0; // reset colour changing
 
 	var inarray = preparepali(data);
@@ -137,86 +26,9 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 		}
 	}
 	
-	document.getElementById('mafb').innerHTML += '<hr />' + finout + '<div class="toolbarspace">&nbsp;</div>';
+	document.getElementById('mafb').innerHTML += '<hr />' + finout;
 	
-	// history
-	
-	var hout = '';
-	var theHistory = getHistory();
-	if (theHistory) {
-		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); getplace(thisv); importXML()">';
-		var isclear = '';
-		for (i in theHistory) {
-			var thist = theHistory[i].split('@');
-			hout += '<option value="'+thist[1]+'">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</option>';
-		}
-		hout += '</select>';
-	}
-	
-		// toolbar
-	
-	var mafaout = '<div id="maftopen">';
-		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/tools.png" onclick="openTB()" width="8px" height="28px" title="show toolbar"/>';
-			mafaout += '</td>';
-		mafaout += '</tr></table>';
-	mafaout += '</div>';
-	mafaout += '<div id="maft">';
-		mafaout += '<table class="toolbar"><tr>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '<img id="toolimg" src="images/toolsin.png" onclick="closeTB()" width="8px" height="28px" title="close toolbar" />';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				mafaout += '<input type="button" value="<" title="Retrieve previous section" onclick="createTablep()" />';
-				mafaout += '<input type="button" value=">" title="Retrieve next section" onclick="createTablen()" />';
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				if (moveat == 2) {
-					mafaout += '<input id="toolframebutton" type="button" value="R" title="Maximize Read Frame" onclick="if(moveat == 2) { this.value=\'A\'; this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />';
-				}
-				else { mafaout += '<input id="toolframebutton" type="button" value="A" title="Restore Frames" onclick="if(moveat == 2) { this.value=\'A\';  this.title=\'Restore Frames\'; moveframex(1) } else { this.value=\'R\'; this.title=\'Maximize Read Frame\'; moveframex(2) }" />'; }
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				if (cpout == 1) {
-					mafaout += '<input id="o2" type="button" value="x" title="Close Control Panel" onclick="moveframec();" />';
-				}
-				else { 
-					mafaout += '<input type="button" id="o2" value="o" title="Open Control Panel" onclick="moveframec();" />';
-				}
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				mafaout += '<input type="button" class="btn" title="Send all text to converter" onclick="sendtoconvert(\'' + convout + '\')" value="convert">';
-				mafaout += '<input type="button" class="btn" title="Send selected text to converter" onclick="var convout2 = document.getSelection().toString(); if (convout2) sendtoconvert(convout2);  else alert(\'Nothing selected.\');" value="convert selection">';
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-			mafaout += '<td class="spacer"></td>';
-			mafaout += '<td class="toolbarc" style="background-color:'+colorcfg['colbkcp']+'">';
-				mafaout += '&nbsp;';
-				mafaout += 'History:';
-				mafaout += '&nbsp;';
-				mafaout += hout;
-				mafaout += '&nbsp;';
-			mafaout += '</td>';
-		mafaout += '</tr></table>';
-	mafaout += '</div>';
-	
-	document.getElementById('mafa').innerHTML = mafaout;
-	
-	if (getMiscPref('toolbar') == '0') { 
-		closeTB(-10000);
-	}	
+
     
 	document.getElementById('mafb').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
@@ -242,11 +54,14 @@ function formatuniout(data,which) { // prepare without links
 	var outarray = new Array();
 	
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-	data = data.replace(/`/g, '\'');
-	data = data.replace(/"ti/g, '&quot; &quot;ti');
-	data = data.replace(/''ti/g, '&quot; &quot;ti');
-	data = data.replace(/'ti/g, '\' \'ti');
-	data = data.replace(/\'\'/g, ' &quot;');
+	data = data.replace(/"ti/g, '” ”ti');
+	data = data.replace(/''ti/g, '” ”ti');
+	data = data.replace(/''nti/g, '” ”nti');
+	data = data.replace(/’ti/g, '’ ’ti');
+	data = data.replace(/``/g, '“');
+	data = data.replace(/`/g, '‘');
+	data = data.replace(/''/g, '”');
+	data = data.replace(/'/g, '’');
 	data = data.replace(/\^b\^/g, ' <b> ');
 	data = data.replace(/\^eb\^/g, ' </b> ');
 	data = data.replace(/\^a\^\"/g, ' z');
@@ -259,7 +74,6 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/ +/g, ' ');
 	var uniouta = replaceunistandard(data).split(' ');
 	//data = data.replace(/\"/g, '\u00B4');
-	data = data.replace(/\'/g, '`');
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
@@ -298,7 +112,7 @@ function formatuniout(data,which) { // prepare without links
 			}
 			else { // word search embedded left side
 				convout += wordbyword[b] + wordbyword[b+3] + ' ';
-				unioutb = (replaceunistandard(wordbyword[b]).replace(/``/g, '&quot;') + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]).replace(/``/g, '&quot;') + '<xc>';
+				unioutb = (replaceunistandard(wordbyword[b]) + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]) + '<xc>';
 				if (script != 0) unioutb = translit(unioutb);
 				finout += '<a id="' + b + '" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 				b = b + 4;
@@ -306,7 +120,7 @@ function formatuniout(data,which) { // prepare without links
 		}
 		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
 			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
-			unioutb = (replaceunistandard(addpre).replace(/``/g, '&quot;') + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1].replace(/``/g, '&quot;') + '<xc> - ' + uniouta[b+4]).replace(/``/g, '&quot;');
+			unioutb = (replaceunistandard(addpre) + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1] + '<xc> - ' + uniouta[b+4]);
 			if (script != 0) unioutb = translit(unioutb);
 			finout += '<a id="' + b + '" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 			b = b + 4;
@@ -350,7 +164,7 @@ function formatuniout(data,which) { // prepare without links
 		else if (which)
 		{
 			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b].replace(/``/g, '&quot;');
+			unioutb = uniouta[b];
 			unioutb = unioutb.replace(/0/g, '.');
 			if (script != 0) unioutb = translit(unioutb);
 			finout += unioutb + ' ';
@@ -358,7 +172,7 @@ function formatuniout(data,which) { // prepare without links
 		else
 		{
 			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b].replace(/``/g, '&quot;');
+			unioutb = uniouta[b];
 			//unioutb = unioutb.replace(/0/g, '.');
 			if (script != 0) unioutb = translit(unioutb);
 			finout += '<a id="' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
@@ -366,6 +180,9 @@ function formatuniout(data,which) { // prepare without links
 	}
 	finout = finout.replace(/ <b> /g, '<b>');
 	finout = finout.replace(/ <\/b> /g, '</b>');
+	finout = finout.replace(/<b0>/g, '<b style="color:'+colorcfg['colped']+'">');
+	finout = finout.replace(/<b1>/g, '<b style="color:'+colorcfg['coldppn']+'">');
+	finout = finout.replace(/<b2>/g, '<b style="color:'+colorcfg['colcpd']+'">');
 	if (!which) {
 		outarray[0] = finout;
 		outarray[1] = convout;
@@ -1380,3 +1197,25 @@ function switchhier(htmp,stop) {
 	changenikaya(stop);
 }	
 
+function historyBox() {
+	
+	// history
+	
+	var hout = '';
+	var theHistory = getHistory();
+	if (theHistory) {
+		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); if (thisv != \'0\'){ getplace(thisv); importXML() }">';
+		hout += '<option value="0">History</option>';
+		var isclear = '';
+		for (i in theHistory) {
+			var thist = theHistory[i].split('@');
+			var thist0 = replaceunistandard(thist[0]);
+			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
+			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
+		}
+		hout += '</select>';
+	}
+		
+	document.getElementById('history').innerHTML = hout;
+	
+}
