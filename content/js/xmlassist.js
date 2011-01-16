@@ -11,6 +11,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.selectedIndex;
 	var meta = document.form.meta.selectedIndex;
+	var volume = document.form.volume.selectedIndex;
 	var vagga = document.form.vagga.selectedIndex;
 	var sutta = document.form.sutta.selectedIndex;
 	var section = document.form.section.selectedIndex;
