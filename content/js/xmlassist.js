@@ -180,9 +180,9 @@ function formatuniout(data,which) { // prepare without links
 	}
 	finout = finout.replace(/ <b> /g, '<b>');
 	finout = finout.replace(/ <\/b> /g, '</b>');
-	finout = finout.replace(/<b0>/g, '<b style="color:'+colorcfg['colped']+'">');
-	finout = finout.replace(/<b1>/g, '<b style="color:'+colorcfg['coldppn']+'">');
-	finout = finout.replace(/<b2>/g, '<b style="color:'+colorcfg['colcpd']+'">');
+	finout = finout.replace(/<b1>/g, '<b style="color:'+colorcfg['colped']+'">');
+	finout = finout.replace(/<b2>/g, '<b style="color:'+colorcfg['coldppn']+'">');
+	finout = finout.replace(/<b3>/g, '<b style="color:'+colorcfg['colcpd']+'">');
 	if (!which) {
 		outarray[0] = finout;
 		outarray[1] = convout;

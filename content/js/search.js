@@ -210,6 +210,7 @@ function pausesall()
 		alert("Minimum three letter search length")
 		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 		document.getElementById('sbfa').innerHTML='';
+		document.getElementById('sbfab').innerHTML='';
 		return;
 	}
 	if (stringra.length > 3)
@@ -226,6 +227,7 @@ function pausesall()
 			alert("Minimum three letter search length")
 			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 			document.getElementById('sbfa').innerHTML='';
+			document.getElementById('sbfab').innerHTML='';
 			return;
 		}
 	}
@@ -296,6 +298,7 @@ function importXMLs(cnt)
 		alert("Minimum three letter search length")
 		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 		document.getElementById('sbfa').innerHTML='';
+		document.getElementById('sbfab').innerHTML='';
 		return;
 	}
 	if (stringra.length > 3)
@@ -312,6 +315,7 @@ function importXMLs(cnt)
 			alert("Minimum three letter search length")
 			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
 			document.getElementById('sbfa').innerHTML='';
+			document.getElementById('sbfab').innerHTML='';
 			return;
 		}
 	}
@@ -546,7 +550,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -587,7 +591,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -707,7 +711,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -779,7 +783,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -820,7 +824,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -942,7 +946,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -1017,7 +1021,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1058,7 +1062,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1181,7 +1185,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -1299,7 +1303,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1423,7 +1427,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -1499,7 +1503,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1540,7 +1544,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1606,7 +1610,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b'+d+'>' + gotstring + '</b>';
+										postpara += beforem + '<b1>' + gotstring + '</b>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1665,7 +1669,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -1722,7 +1726,22 @@ function createTables(xmlDoc)
 							texttomatch = z[tmp].childNodes[0].nodeValue.substring(4);
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 							if (getstring.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
-							texttomatch = texttomatch.replace(/   */g, ' ');
+
+							texttomatch = texttomatch.replace(/\^b\^/g, ' <b> ');
+							texttomatch = texttomatch.replace(/\^eb\^/g, ' </b> ');
+
+							texttomatch = texttomatch.replace(/  */g, ' ');
+							texttomatch = texttomatch.replace(/"ti/g, '” ”ti');
+							texttomatch = texttomatch.replace(/''ti/g, '” ”ti');
+							texttomatch = texttomatch.replace(/''nti/g, '” ”nti');
+							texttomatch = texttomatch.replace(/’ti/g, '’ ’ti');
+							texttomatch = texttomatch.replace(/``/g, '“');
+							texttomatch = texttomatch.replace(/`/g, '‘');
+							texttomatch = texttomatch.replace(/''/g, '”');
+							texttomatch = texttomatch.replace(/'/g, '’');
+							texttomatch = texttomatch.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
+							texttomatch = texttomatch.replace(/\.\./g, '.');
+							
 							if (yesplus >= 0) // multiple search terms		
 							{
 								tagtitle = '';
@@ -1743,7 +1762,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+d+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1755,7 +1774,7 @@ function createTables(xmlDoc)
 											}
 											spacea = afterm.search(' ');
 											aftermex = afterm.substring(0,spacea);
-											tempexword[d].push (beforem+perstring+aftermex);								
+											tempexword[d].push ((beforem+perstring+aftermex).replace(/[‘’“”]/g,''));								
 										}
 									
 										postpara += afterm;
@@ -1764,7 +1783,6 @@ function createTables(xmlDoc)
 								}
 								if (yesall == stringra.length)
 								{								
-									alert(tempexword[0]);
 									texnodups = [];
 									for(var t=0; t<tempexword.length; t++) {
 										texnodups[t] = [];
@@ -1785,7 +1803,7 @@ function createTables(xmlDoc)
 									exnodups = [];
 									dups = [];
 
-									exwordout = '<div><a href="javascript:void(0);" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr>';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 
 									for(var t=0; t<exword.length; t++) {
 										l = exword[t].length;
@@ -1813,7 +1831,7 @@ function createTables(xmlDoc)
 										}
 										exwordout += '</td>';
 									}
-									document.getElementById('sbfab').innerHTML = exwordout + '</tr></table><hr>';
+									document.getElementById('sbfab').innerHTML = exwordout + '</tr></table>';
 								
 																
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + book + '</b>';
@@ -1892,7 +1910,7 @@ function createTables(xmlDoc)
 											aftermex = ''; 
 											postpara += ' ';
 										}
-										tempexword.push (beforem+gotstring+aftermex);
+										tempexword.push ((beforem+gotstring+aftermex).replace(/[‘’“”]/g,''));
 									}
 
 									// word add
@@ -1940,7 +1958,7 @@ function createTables(xmlDoc)
 									exnodups = sortaz(exnodups);
 									findiv = ((exnodups.length)/3);
 									ctab = 0;
-									exwordout = '<div><a href="#" onclick="showonly(\'xyz\')">Show All</a></div><hr><table width=100%><tr><td valign="top">';
+									exwordout = '<hr><div id="searchres"><table width=100%><tr>';
 									for (ex = 0; ex < findiv; ex++)
 									{
 										
@@ -2016,7 +2034,7 @@ function createTables(xmlDoc)
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
 	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + book + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
-	else document.getElementById('sbfb').innerHTML += finalout;
+	else document.getElementById('sbfb').innerHTML += finalout + '</div>';
 	
 	match = 0;
 
@@ -2038,6 +2056,7 @@ function createTables(xmlDoc)
 }
 
 function showonly(string) {
+
 	var da = document.getElementById('sbfb').getElementsByTagName('div');
 	for (x = 0; x < da.length; x++) {
 		if (string == 'xyz') da[x].style.display = "block";
@@ -2046,6 +2065,8 @@ function showonly(string) {
 			else da[x].style.display = "none";
 		}
 	}
+	if (string == 'xyz') { document.getElementById('showing').innerHTML = ''; }
+	else { document.getElementById('showing').innerHTML = '<b style="background-color:'+colorcfg['colbkcp']+'; color:'+colorcfg['colped']+'">' + replaceunistandard(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; }
 }
 
 function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)

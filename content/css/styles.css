@@ -143,11 +143,25 @@ top:50px;
 bottom:0px;
 right:0px;
 left:0px;
-padding-right:10px; 
-padding-left:10px; 
-overflow:auto;
 }
 
+#showing {
+position:absolute;
+top:0px;
+right:0px;
+border:grey 1px solid;
+}
+
+#sbfbc {
+padding-right:10px; 
+padding-left:10px; 
+position:absolute;
+top:0px;
+bottom:0px;
+right:0px;
+left:0px;
+overflow:auto;
+}
 #sbfab {  
 padding-top:10px; 
 }
