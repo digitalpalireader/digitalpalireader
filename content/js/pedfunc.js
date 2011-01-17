@@ -413,7 +413,7 @@ function paliXML(file)
 	}		
 	
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data;
+	document.getElementById('difb').innerHTML = data.replace(/\[/g, '<em style="color:'+colorcfg['colped']+'">').replace(/\]/g, '</em>');
     document.getElementById('cdif').scrollTop=0;
 
 	var pedln = []; // limit in folders

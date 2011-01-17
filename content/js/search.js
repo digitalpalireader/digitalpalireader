@@ -191,6 +191,7 @@ function resetvalues() {
     document.getElementById('sbfb').innerHTML = '';
     document.getElementById('stfb').innerHTML = '';
     document.getElementById('stfc').innerHTML = '';
+    document.getElementById('showing').innerHTML = '';
 }
 
 function pausesall() 
