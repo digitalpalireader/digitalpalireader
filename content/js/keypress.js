@@ -20,6 +20,15 @@ function keyPressed(e) {
 
 		if (e.charCode == 120) { moveframec(); return; } // x
 
+		if (e.charCode == 115) {  // s
+			if(getSelected() != '') {
+				sendtoconvert(getSelected()+'');
+			} 
+			else {
+				if(document.getElementById('convi')) { sendtoconvert(document.getElementById('convi').innerHTML); }
+			}
+			return; } // .
+
 		if (e.charCode == 103) { importXML(); return; } // g
 		if (e.charCode == 112) { createTablep(); return; } // p
 		if (e.charCode == 110) { createTablen(); return; } // n
@@ -33,4 +42,18 @@ function keyPressed(e) {
 		if (e.charCode == 46) { bv(); return; } // .
 		if (e.charCode == 63) { helpXML(); return; } // .
 		//alert(e.charCode);
+}
+
+function getSelected() {
+	var txt = '';
+	if (window.getSelection) {
+		txt = window.getSelection();
+	}
+	else if (document.getSelection)	{
+		txt = document.getSelection();
+	}
+	else if (document.selection) {
+		txt = document.selection.createRange().text;
+	}
+	return txt;
 }

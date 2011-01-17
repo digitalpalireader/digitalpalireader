@@ -42,7 +42,10 @@
   <data> who wish to advance their studies to a higher level.&lt;br&gt; &lt;/p&gt;</data>
   <data> &lt;hr&gt;</data>
   <data> &lt;h2&gt;How to Use:&lt;/h2&gt;</data>
-  <data> &lt;p&gt;(&lt;i&gt;Note: If any problem arises in the functioning of the reader, just press CTRL+F5 to reset the reader&lt;/i&gt;&lt;/p&gt;</data>
+  <data> &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; If any problem arises in the functioning of the reader, just press CTRL+F5 to reset the reader&lt;/p&gt;</data>
+  <data> &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Many common tasks are now mapped to keys, which may be used instead of the buttons themselves, as follows:&lt;br&gt;</data>
+  <data> &lt;ul&gt;</data>
+  <data> &lt;li&gt;&lt;b&gt;1,2,3&lt;/b&gt; for the three views (RAD)&lt;/li&gt;&lt;li&gt;&lt;b&gt;d,c,t&lt;/b&gt; for the three tools in the bottom frame &lt;/li&gt;&lt;li&gt; &lt;b&gt;x&lt;/b&gt; to open/close the control panel &lt;/li&gt;&lt;li&gt; &lt;b&gt;s&lt;/b&gt; to send selected text to the convertor, or the entire section if no text is selected.&lt;/li&gt;&lt;li&gt; &lt;b&gt;%,!,#,.,?,@&lt;/b&gt; for each of the six buttons at the bottom (see below).&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</data>
   <data> &lt;p&gt;The right side of the screen contains the main controls. Basic use should require little explanation. What follows is a brief explanation of all of the controls in the control panel:&lt;/p&gt;</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;li&gt;At the top, there is the list of nikayas, books and sub-sections for </data>
@@ -83,12 +86,9 @@
   <data> In the final section, there are three sets of two buttons each:&lt;br&gt;&lt;br&gt;&lt;input type="button" class="btn" value="%" title="Set configuration"&gt;&lt;input type="button" class="btn" value="X" title="Reset configuration"&gt; These buttons allow one to adjust the size and colors of the reader as well as other misc. options.&lt;br&gt;&lt;br&gt;</data>
   <data> &lt;input type="button" class="btn" value="#" title="Pali Quiz"&gt;&lt;input type="button" class="btn" value="." title="Quote of the Moment"&gt; The "#" button opens a Pali quiz to test your vocabulary.  The "." button displays a random quote from the book, Buddhavacana.&lt;br&gt;&lt;br&gt;</data>
   <data> &lt;input type="button" class="btn" value="?" title="Help (New Window)"&gt;&lt;input type="button" class="btn" value="@" title="Send Feedback"&gt; "?" shows this help file and "@" allows you to contact me via email.&lt;br&gt;&lt;br&gt;&lt;/li&gt;</data>
-  <data> &lt;li&gt;</data>
-  <data> Note: many of the commonly-used buttons are now mapped to keys, which may be used instead of the buttons themselves, as follows:&lt;br&gt;&lt;br&gt;&lt;b&gt;1,2,3&lt;/b&gt; for the three views (RAD); &lt;b&gt;d,c,t&lt;/b&gt; for the three tools in the bottom frame; &lt;b&gt;`&lt;/b&gt; (beside the "1" key) to open/close the control panel; and &lt;b&gt;q&lt;/b&gt; to open/close the toolbar.&lt;/li&gt;</data>
   <data> &lt;/ul&gt;</data>
   <data> &lt;p&gt;Once you have retrieved a section, click on any</data>
   <data> word as you read through to bring up an analysis of the word and hopefully at least one (hopefully correct) definition from one of the three dictionaries.&lt;/p&gt;</data>
-  <data> &lt;p&gt;Also, when a text is open, a toolbar will pop up to provide quick access to some important tools:&lt;br /&gt;&lt;br /&gt;&lt;img src="images/toolbarmock.png" /&gt;&lt;br /&gt;&lt;br /&gt;The first four buttons correspond with buttons on the control panel: prev. and next, layout switching, and open/close the control panel.  The next two buttons send the text to the convertor for easy copy and paste.  The final dropdown is a list of texts previously opened for quick access (this can also be accessed via the Bookmarks page).&lt;/p&gt;</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;/ul&gt;</data>
   <data> &lt;hr&gt;</data>

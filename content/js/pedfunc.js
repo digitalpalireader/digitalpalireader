@@ -413,7 +413,7 @@ function paliXML(file)
 	}		
 	
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data.replace(/\[/g, '<em style="color:'+colorcfg['colped']+'">').replace(/\]/g, '</em>');
+	document.getElementById('difb').innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
     document.getElementById('cdif').scrollTop=0;
 
 	var pedln = []; // limit in folders
@@ -427,8 +427,8 @@ function paliXML(file)
 	var tout = '';
 	var bout = '';
 
-	if (tnum != 0) tout += '<img src="images/toolsin.png" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')" />';
-	if (tnum != pedln[t2]) bout += '<img src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')">';
+	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/toolsin.png" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')" /></div>';
+	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
 }

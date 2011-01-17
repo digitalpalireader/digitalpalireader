@@ -5,6 +5,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	lastcolour = 0; // reset colour changing
 
 	var inarray = preparepali(data);
+		
 	var finout = inarray[0];
 	var convout = replaceunistandard(inarray[1]).replace(/  *,/g, ',');
 
@@ -27,9 +28,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 		}
 	}
 	
-	document.getElementById('mafb').innerHTML += '<hr />' + finout;
-	
-
+	document.getElementById('mafb').innerHTML += '<div id="convi">'+replaceunistandard(inarray[1])+'</div><hr />' + finout; // convi contains text for convertor
     
 	document.getElementById('mafb').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
@@ -57,7 +56,9 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 	data = data.replace(/"ti/g, '” ”ti');
 	data = data.replace(/''ti/g, '” ”ti');
+	data = data.replace(/"nti/g, '” ”nti');
 	data = data.replace(/''nti/g, '” ”nti');
+	data = data.replace(/'nti/g, '’ ’nti');
 	data = data.replace(/’ti/g, '’ ’ti');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
