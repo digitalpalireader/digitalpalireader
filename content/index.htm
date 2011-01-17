@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Digital Pali Reader Extension</title>
-<link REL="SHORTCUT ICON" HREF="images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
@@ -25,7 +25,7 @@
 </head>
 
 
-<body>
+<body onload="">
 <div id="content">
 	<div id="left">
 		<div id="brleft"></div>
@@ -253,7 +253,7 @@
 			</div>
 			</form>
 			<div id="scf" align=center>
-				<table><tr><td colspan=2><textarea id="pad" rows="10" cols="120"></textarea></td></tr></table>
+				<table><tr><td colspan=2><textarea id="pad" rows="9" cols="110"></textarea></td></tr></table>
 				<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">
 			</div>
 		</div>
@@ -280,7 +280,7 @@
 					<div align="justify" id="sbfb"></div>
 				</div>
 				<div id="sbr"></div>		
-				<div align="justify" id="showing"></div>
+				<div class="label" align="justify" id="showing"></div>
 			</div>
 			<div id="searcht">
 				<div align="justify" id="stfb">

@@ -438,12 +438,11 @@ var dhmark = 0;
 
 function DPPNXML(file,which)
 {
-
 	document.getElementById('lt').innerHTML = '';
 	document.getElementById('lb').innerHTML = '';
 	
 	if(!which) { // not from select
-	var dppnhistt = [];
+		var dppnhistt = [];
 		dppnhist = dppnhist.slice(0,dhmark+1); // cut old future
 		for (i in dppnhist) {
 			if (dppnhist[i] != file) { dppnhistt.push(dppnhist[i]); }
@@ -453,37 +452,59 @@ function DPPNXML(file,which)
 	}
 	
 	
-	var tloc = file.split('/')[1]+'/'+file.split('/')[2].split(',')[0];
-	dppnfileget = nameno[tloc].split('/')[1];
-	var dppnf = 'etc/XML2/'+nameno[tloc].split('/')[0]+'.xml';
+	var filea = file.split(',');
+	var tloc = filea[0].split('/');
+	if (nameno[tloc[1]+'/'+tloc[2]]) { // fudge
+		var ttmp = nameno[tloc[1]+'/'+tloc[2]].split('/');
+		tloc[0] = 'dppn';
+		tloc[1] = ttmp[0];
+		tloc[2] = ttmp[1];
+		tloc[3] = ttmp[2];
+	}
+	var dppnf = 'etc/XML2/'+tloc[1]+'.xml';
 
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", dppnf, false);
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
-
-	var dataa = xmlDoc.getElementsByTagName('entry')[dppnfileget].getElementsByTagName('data');
+	var dataa = xmlDoc.getElementsByTagName('entry')[tloc[2]].getElementsByTagName('data');
 	var data = '';
 	for (j=0; j<dataa.length; j++) {
 		data += ' ' + dataa[j].childNodes[0].nodeValue.replace(/\.  /g, '.&nbsp; ');
 	}		
 	
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data;
+	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data.replace(/href/g, 'style="color:blue" href');
     document.getElementById('cdif').scrollTop=0;
-	var tout = '<select title="show history" onchange="dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);">';
-	var bout = '';
-
+	var showing = '<select title="show history" onchange="dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);">';
+	
 	if (dppnhist.length > 1) { // show select
 		for (i = dppnhist.length-1; i >= 0; i--) {
-			tout += '<option value="'+dppnhist[i]+'"';
-			if (i == dhmark) { tout += ' selected'; }
+			showing += '<option value="'+dppnhist[i]+'"';
+			if (i == dhmark) { showing += ' selected'; }
 			var dhs = dppnhist[i].split(',');
-			tout += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
+			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
 		}
-		tout += '</select>';
-		document.getElementById('lt').innerHTML = tout;
-	}
+		showing += '</select>';
+		document.getElementById('dppnl').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'">' + showing + '</div>';
 
+	}
+	if (tloc[3]) {
+		var tnum = parseFloat(tloc[3]);
+		var tout = '';
+		var bout = '';
+		if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/toolsin.png" onclick="DPPNPick(' + (tnum - 1) + ')" /></div>';
+		if (tnum != 10253) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/tools.png"  onclick="DPPNPick(' + (tnum + 1) + ')"></div>';
+		document.getElementById('lt').innerHTML = tout;
+		document.getElementById('lb').innerHTML = bout;
+	}
+}
+
+function DPPNPick(n) {
+	var x = 0;
+	for (i in nameda) {
+		if(x == n) { DPPNXML('dppn/'+nameda[i]+','+replaceunistandard(i.substring(0,i.length-2))); return; }
+		x++;
+	}
 }
