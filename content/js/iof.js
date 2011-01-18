@@ -203,7 +203,10 @@ function removeHistory(value) {
 }
 //clearHistory();
 
-function clearHistory() {
+function clearHistory(cp) {
+	var answer = confirm('Are you sure you want to erase the history?');
+	if(!answer) { return; }
+
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 	var dir = DIR.get("ProfD", Components.interfaces.nsIFile);
 	dir.append("DPR");
@@ -215,7 +218,8 @@ function clearHistory() {
 	var aFile = dir.clone();
 	aFile.append("History_List_DPR");
 	if ( aFile.exists() ) aFile.remove(false);
-	bookmarkframe(1);
+	if(!cp) { bookmarkframe(1); }
+	historyBox();
 }	
 
 function getHistory() {

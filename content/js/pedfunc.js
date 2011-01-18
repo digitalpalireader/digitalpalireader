@@ -427,8 +427,8 @@ function paliXML(file)
 	var tout = '';
 	var bout = '';
 
-	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/toolsin.png" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')" /></div>';
-	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
+	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')" /></div>';
+	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
 }
@@ -454,6 +454,7 @@ function DPPNXML(file,which)
 	
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
+	
 	if (nameno[tloc[1]+'/'+tloc[2]]) { // fudge
 		var ttmp = nameno[tloc[1]+'/'+tloc[2]].split('/');
 		tloc[0] = 'dppn';
@@ -461,6 +462,9 @@ function DPPNXML(file,which)
 		tloc[2] = ttmp[1];
 		tloc[3] = ttmp[2];
 	}
+	
+	// xml
+	
 	var dppnf = 'etc/XML2/'+tloc[1]+'.xml';
 
 	var xmlhttp = new window.XMLHttpRequest();
@@ -473,6 +477,8 @@ function DPPNXML(file,which)
 	for (j=0; j<dataa.length; j++) {
 		data += ' ' + dataa[j].childNodes[0].nodeValue.replace(/\.  /g, '.&nbsp; ');
 	}		
+	
+	// output
 	
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data.replace(/href/g, 'style="color:blue" href');
@@ -490,21 +496,30 @@ function DPPNXML(file,which)
 		document.getElementById('dppnl').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'">' + showing + '</div>';
 
 	}
-	if (tloc[3]) {
-		var tnum = parseFloat(tloc[3]);
-		var tout = '';
-		var bout = '';
-		if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/toolsin.png" onclick="DPPNPick(' + (tnum - 1) + ')" /></div>';
-		if (tnum != 10253) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img src="images/tools.png"  onclick="DPPNPick(' + (tnum + 1) + ')"></div>';
-		document.getElementById('lt').innerHTML = tout;
-		document.getElementById('lb').innerHTML = bout;
+
+	// get number
+
+	var ncfull = 0;
+	if (namecount.length != 0) ncfull = 1;  // tell us no to make the array
+	
+	nnc = 0;
+	for (i in nameda) {
+		if (nameda[i] == tloc[1]+'/'+tloc[2]) {
+			tnum = nnc;
+			if (ncfull == 1) break; // no need to make the array
+		}
+		nnc++;
+		if (ncfull == 0) namecount.push([nameda[i],replaceunistandard(i.replace("f", " "))]);
 	}
+
+	// buttons
+	
+	var tout = '';
+	var bout = '';
+	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + namecount[tnum-1][0] + ',' + namecount[tnum-1][1] + '\')" /></div>';
+	if (tnum != namecount.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + namecount[tnum+1][0] + ',' + namecount[tnum+1][1] + '\')"></div>';
+	document.getElementById('lt').innerHTML = tout;
+	document.getElementById('lb').innerHTML = bout;
 }
 
-function DPPNPick(n) {
-	var x = 0;
-	for (i in nameda) {
-		if(x == n) { DPPNXML('dppn/'+nameda[i]+','+replaceunistandard(i.substring(0,i.length-2))); return; }
-		x++;
-	}
-}
+namecount = [];

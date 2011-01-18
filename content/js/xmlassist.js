@@ -1215,7 +1215,7 @@ function historyBox() {
 			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
 			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
 		}
-		hout += '</select>';
+		hout += '</select> <a href="javascript:void(0)" title="Clear History" onclick="clearHistory(1);">x</a>';
 	}
 		
 	document.getElementById('history').innerHTML = hout;

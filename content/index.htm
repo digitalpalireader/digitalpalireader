@@ -25,7 +25,7 @@
 </head>
 
 
-<body onload="">
+<body onload="//loaded()">
 <div id="content">
 	<div id="left">
 		<div id="brleft"></div>
@@ -103,7 +103,7 @@
 											
 										</td>
 									</tr>
-									<tr><td colspan=3 id="history"></td></tr>
+									<tr><td colspan=3 id="history" align="center"></td></tr>
 								</table>	
 						<hr />
 								<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
@@ -156,7 +156,7 @@
 
 				<hr />
 
-						<input type="button" class="btn" value="%" title="Set configuration (%)" onclick="loadOptions()"><input type="button" class="btn" value="!" title="Reset configuration (!)" onclick="eraseOptions();"> <input type="button" class="btn" value="#" title="Pali Quiz (#)" onClick="newquiz();"><input type="button" class="btn" value="." title="Quote of the Moment (.)" onClick="bv();"> <input type="button" class="btn" value="?" title="Help (?)" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback (@)" onClick="feedbackform();"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
+						<input type="button" class="btn" value="%" title="Set configuration (%)" onclick="loadOptions()"><input type="button" class="btn" value="!" title="Reset configuration (!)" onclick="eraseOptions();"> <input type="button" class="btn" value="#" title="Pali Quiz (#)" onClick="newquiz();"><input type="button" class="btn" value="*" title="Quote of the Moment (*)" onClick="bv();"> <input type="button" class="btn" value="?" title="Help (?)" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback (@)" onClick="feedbackform();"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
 					</td>
 				</tr>
 		
@@ -172,8 +172,10 @@
 		<input id="manrem" type="hidden" value="0">
 		</form>
 	</div>
-	<div id="cpopen">
-		<img id="o1" src="images/close.png" onclick="moveframec();" title="close control panel (x)">
+	<div id="cpc">
+		<div id="cpopen">
+			<a id="cpa" href="javascript:void(0)" onmouseover="this.style.color='white'" onmouseout="this.style.color='black'" onclick="moveframec();" title="close control panel (x)">x</a>
+		</div>
 	</div>
 	<div id="right">
 		<div id="maf">

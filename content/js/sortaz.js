@@ -12,29 +12,29 @@ reorder.push('8');
 reorder.push('9');
 
 reorder.push('a');
-reorder.push('aa');
+reorder.push('ā');
 reorder.push('i');
-reorder.push('ii');
+reorder.push('ī');
 reorder.push('u');
-reorder.push('uu');
+reorder.push('ū');
 reorder.push('e');
 reorder.push('o');
-reorder.push('.m');
+reorder.push('ṃ');
 reorder.push('k');
 reorder.push('kh');
 reorder.push('g');
 reorder.push('gh');
-reorder.push('"n');
+reorder.push('ṅ');
 reorder.push('c');
 reorder.push('ch');
 reorder.push('j');
 reorder.push('jh');
-reorder.push('~n');
-reorder.push('.t');
-reorder.push('.th');
-reorder.push('.d');
-reorder.push('.dh');
-reorder.push('.n');
+reorder.push('ñ');
+reorder.push('ṭ');
+reorder.push('ṭh');
+reorder.push('ḍ');
+reorder.push('ḍh');
+reorder.push('ṇ');
 reorder.push('t');
 reorder.push('th');
 reorder.push('d');
@@ -48,7 +48,7 @@ reorder.push('m');
 reorder.push('y');
 reorder.push('r');
 reorder.push('l');
-reorder.push('.l');
+reorder.push('ḷ');
 reorder.push('v');
 reorder.push('s');
 reorder.push('h');
@@ -122,13 +122,12 @@ for(var w = 0; w < reorder.length; w++) {
 
 
 function sortaz(mydata){  // sort velthius pali array
+	
 	var outarray = new Array();
 	var z=0;
 
 	var onestring = "";
 	var onechar = '';
-	var twochar = '';
-	var threechar = '';
 	var badoutdata = '';
 	var outdata = new Array();
 	var preoutdata = '';
@@ -139,23 +138,12 @@ function sortaz(mydata){  // sort velthius pali array
 	for (var a = 0; a < mydata.length; a++) {
 		wordval = '';
 
-		onestring = mydata[a].toLowerCase();
+		onestring = replaceunistandard(mydata[a].toLowerCase());
 		if (onestring.length > 0) {
 			badis = 0;
 			for (var b = 0; b < onestring.length; b++) {
 				onechar = onestring.charAt(b);
-				twochar = onestring.substring(b,b+2);
-				threechar = onestring.substring(b,b+3);
-				if (neworder[threechar]) {
-					wordval+=neworder[threechar];
-					b++;
-					b++;
-			}
-				else if (neworder[twochar]) {
-					wordval+=neworder[twochar];
-					b++;
-				}
-				else if (neworder[onechar]) {
+				if (neworder[onechar]) {
 					wordval+=neworder[onechar];
 				}
 				else {
@@ -180,13 +168,14 @@ function sortaz(mydata){  // sort velthius pali array
 	return outdata;
 }
 
-function loadedx() {
+function loaded() {
 
 	var x = [];
 
 	for (i in nameda) {
-		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.')+'#'+nameda[i]);
+		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+nameda[i]);
 	}
 	var y = sortaz(x);
+			
 	document.getElementById('pad').innerHTML = y.join('\n');
 }

@@ -39,21 +39,11 @@ function keyPressed(e) {
 
 		if (e.charCode == 35) { newquiz(); return; } // #
 		if (e.charCode == 37) { loadOptions(); return; } // %
-		if (e.charCode == 46) { bv(); return; } // .
-		if (e.charCode == 63) { helpXML(); return; } // .
-		//alert(e.charCode);
-}
+		if (e.charCode == 42) { bv(); return; } // *
+		if (e.charCode == 63) { helpXML(); return; } // ?
 
-function getSelected() {
-	var txt = '';
-	if (window.getSelection) {
-		txt = window.getSelection();
-	}
-	else if (document.getSelection)	{
-		txt = document.getSelection();
-	}
-	else if (document.selection) {
-		txt = document.selection.createRange().text;
-	}
-	return txt;
+		if (e.charCode == 44) { if(document.getElementById('tout')) { f = document.getElementById('tout').onclick; f(); } return; } // ,
+		if (e.charCode == 46) { if(document.getElementById('tout')) { f = document.getElementById('bout').onclick; f(); } return; } // .
+
+		//document.getElementById('mafb').innerHTML += e.charCode + '<br/>';
 }

@@ -100,24 +100,14 @@ cpout = 1;
 function moveframec() // open close control panel
 {
 	if (cpout == 1) { // is open, close
-		document.getElementById('o1').title='open control panel'; 
-		document.getElementById('o1').src='images/open.png';
-
-		if(document.getElementById('o2')) { 
-			document.getElementById('o2').title='open control panel'; 
-			document.getElementById('o2').value='o';
-		}
+		document.getElementById('cpa').title='open control panel (x)'; 
+		document.getElementById('cpa').innerHTML="o";
 
 		closeCP(parseInt(confmove[2]));
 	}
 	else { // is closed, open
-		document.getElementById('o1').title='close control panel'; 
-		document.getElementById('o1').src='images/close.png';
-
-		if(document.getElementById('o2')) { 
-			document.getElementById('o2').title='close control panel'; 
-			document.getElementById('o2').value='x';
-		}
+		document.getElementById('cpa').title='close control panel (x)'; 
+		document.getElementById('cpa').innerHTML="x";
 
 		openCP(0);
 	}
