@@ -288,7 +288,7 @@ function gettitles(altget,stop,prev,ssect)
 
 		}
 		else {
-			metalist = '<select size="1" name="meta" onChange="gettitles(5)">' + metalist;
+			metalist = '<select size="1" name="meta" onChange="gettitles(6)">' + metalist;
 
 		}	
 		metalist += '</select>'

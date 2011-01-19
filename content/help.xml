@@ -86,11 +86,11 @@
   <data> In the final section, there are three sets of two buttons each:&lt;br&gt;&lt;br&gt;&lt;input type="button" class="btn" value="%" title="Set configuration"&gt;&lt;input type="button" class="btn" value="!" title="Reset configuration"&gt; These buttons allow one to adjust the size and colors of the reader as well as other misc. options.&lt;br&gt;&lt;br&gt;</data>
   <data> &lt;input type="button" class="btn" value="#" title="Pali Quiz"&gt;&lt;input type="button" class="btn" value="*" title="Quote of the Moment"&gt; The "#" button opens a Pali quiz to test your vocabulary.  The "*" button displays a random quote from the book, Buddhavacana.&lt;br&gt;&lt;br&gt;</data>
   <data> &lt;input type="button" class="btn" value="?" title="Help (New Window)"&gt;&lt;input type="button" class="btn" value="@" title="Send Feedback"&gt; "?" shows this help file and "@" allows you to contact me via email.&lt;br&gt;&lt;br&gt;&lt;/li&gt;</data>
+  <data> &lt;li&gt;</data>
+  <data> There are some hidden tools in the DPR; hidden because I didn't kow where to put them.  Links to them will be placed here:&lt;br&gt;&lt;br&gt;&lt;a href="etc/grammar/GMD/index.html" style="color:blue" target="_blank"&gt;A Practical Grammar of the Pali Language by Charles Duroiselle&lt;/a&gt;&lt;br&gt;&lt;br&gt;&lt;a href="etc/grammar/cheet.html" style="color:blue" target="_blank"&gt;Pali Cheet Sheet by Alan McClure&lt;/a&gt;&lt;/li&gt;</data>
   <data> &lt;/ul&gt;</data>
   <data> &lt;p&gt;Once you have retrieved a section, click on any</data>
   <data> word as you read through to bring up an analysis of the word and hopefully at least one (hopefully correct) definition from one of the three dictionaries.&lt;/p&gt;</data>
-  <data> &lt;ul&gt;</data>
-  <data> &lt;/ul&gt;</data>
   <data> &lt;hr&gt;</data>
   <data> &lt;h2&gt;Gratitude:&lt;/h2&gt;</data>
   <data> &lt;p&gt;Thanks first and foremost to Alexander Genaud, without whom I would still be pulling my hair out (figuratively) waiting for the script to load a single section. Without his initial help there would be no DPR.</data>
