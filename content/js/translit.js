@@ -7,17 +7,17 @@ function toMyanmar(input,type) {
 	vowel['ii'] = "ဤ";
 	vowel['uu'] = "ဦ";
 	vowel['e'] = "ဧ";
-//	vowel['o'] = "ဩ";
+	vowel['o'] = "ဩ";
 
 	var myanr = [];
 
-	myanr['aa'] = 'ာ';
+	myanr['aa'] = 'ā'; // later
 	myanr['i'] = 'ိ';
 	myanr['ii'] = 'ီ';
 	myanr['u'] = 'ု';
 	myanr['uu'] = 'ူ';
-	myanr['e'] = 'ေ';
-	myanr['o'] = 'ဩ';
+	myanr['e'] = 'e'; // later
+	myanr['o'] = 'o'; // later
 	myanr['.m'] = 'ံ';
 	myanr['k'] = 'က';
 	myanr['kh'] = 'ခ';
@@ -52,6 +52,50 @@ function toMyanmar(input,type) {
 	myanr['s'] = 'သ';
 	myanr['h'] = 'ဟ';
 	
+	var cons = [];
+	
+	cons['k'] = 'က';
+	cons['kh'] = 'ခ';
+	cons['g'] = 'ဂ';
+	cons['gh'] = 'ဃ';
+	cons['"n'] = 'င';
+	cons['c'] = 'စ';
+	cons['ch'] = 'ဆ';
+	cons['j'] = 'ဇ';
+	cons['jh'] = 'ဈ';
+	cons['~n'] = 'ဉ';
+	cons['.t'] = 'ဋ';
+	cons['.th'] = 'ဌ';
+	cons['.d'] = 'ဍ';
+	cons['.dh'] = 'ဎ';
+	cons['.n'] = 'ဏ';
+	cons['t'] = 'တ';
+	cons['th'] = 'ထ';
+	cons['d'] = 'ဒ';
+	cons['dh'] = 'ဓ';
+	cons['n'] = 'န';
+	cons['p'] = 'ပ';
+	cons['ph'] = 'ဖ';
+	cons['b'] = 'ဗ';
+	cons['bh'] = 'ဘ';
+	cons['m'] = 'မ';
+	cons['y'] = 'ယ';
+	cons['r'] = 'ရ';
+	cons['l'] = 'လ';
+	cons['.l'] = 'ဠ';
+	cons['v'] = 'ဝ';
+	cons['s'] = 'သ';
+	cons['h'] = 'ဟ';
+
+	
+	var spec = []; // takes special aa
+	spec[ 'ခ' ] = 1;
+	spec[ 'ဂ' ] = 1;
+	spec[ 'င' ] = 1;
+	spec[ 'ဒ' ] = 1;
+	spec[ 'ပ' ] = 1;
+	spec[ 'ဝ' ] = 1; 
+	
 	var i0 = '';
 	var i1 = '';
 	var i2 = '';
@@ -59,7 +103,6 @@ function toMyanmar(input,type) {
 	var i4 = '';
 	var i5 = '';
 	var output = '';
-	var cons = 0;
 	var i = 0;
 	
 	input = input.replace(/\&quot;/g, '`');
@@ -73,82 +116,92 @@ function toMyanmar(input,type) {
 		i5 = input.charAt(i+4);
 		
 		if (vowel[i1]) {
-			cons=0;
-			if (vowel[i1+i2]) {
+			if (vowel[i1+i2] && i2 != '') {
 				if (i == 0 || i0 == 'a') output += vowel[i1+i2];
-				output += myanr[i1+i2];
+				else output += myanr[i1+i2];
 				i = i + 2;	
 			}
-			else if (i1 != 'a') { // nothing for a
-				if (i == 0 || i0 == 'a') output += vowel[i1];
-				else output += myanr[i1];
+			else { 
+				if (i == 0 || (i0 == 'a' && i1 != 'a')) output += vowel[i1];
+				else if (i1 != 'a') output += myanr[i1];
 				i++;
 			}
-			else i++;
 		}		
-		else if (myanr[i1+i2+i3]) {		// three character match
-			cons++;
+		else if (i1 == '.' && myanr[i1+i2+i3] && i2 != '' && i3 != '') {		// three character match
+			output += myanr[i1+i2+i3];
 			if (!vowel[i4]) {
 				output += '္';
 			}
-			if (i4 == 'o') {
-				output += myanr['e'];
-				output += myanr[i1+i2+i3];
-				output += myanr['aa'];
-				i++;
-				cons = 0;
-			}	
-			else output += myanr[i1+i2+i3];
 			i += 3;
 		}					
-		else if (myanr[i1+i2]) {		// two character match
-			cons++;
-			if (i2 == 'm') cons = 0 // exception for .m
-			if (!vowel[i3]) {
+		else if (myanr[i1+i2] && i2 != '') {		// two character match
+			output += myanr[i1+i2];
+			if (!vowel[i3] && i2 != 'm') {
 				output += '္';
 			}
-			if (i3 == 'o') {
-				output += myanr['e'];
-				output += myanr[i1+i2];
-				output += myanr['aa'];
-				i++;
-				cons = 0;
-			}	
-			else output += myanr[i1+i2];
 			i += 2;
 		}					
 		else if (myanr[i1] && i1 != 'a') {		// one character match except a
-			cons++;
+			output += myanr[i1];
 			if (!vowel[i2]) {
 				output += '္';
 			}
-			if (i2 == 'o') {
-				output += myanr['e'];
-				output += myanr[i1];
-				output += myanr['aa'];
-				i++;
-				cons = 0;
-			}	
-			else output += myanr[i1];
 			i++;
 		}					
 		else if (!myanr[i1]) {
-			cons = 0;
 			output += i1;
 			i++;				
-			if (i2 == 'o') {
-				output += myanr['e'];
-				output += myanr['a'];
-				output += myanr['aa'];
-				i++;
-				cons = 0;
-			}	
-			else if (vowel[i2]) {  // word-beginning vowel marker
-				output += vowel[i1]; 
+			if (vowel[i2]) {  // word-beginning vowel marker
+				if (vowel[i2+i3]) {
+					output += vowel[i2+i3];
+					i += 2;	
+				}
+				else { 
+					output += vowel[i2];
+					i++;
+				}
 			}
 		}
 		else i++;
 	}
+	
+	// deal with ā, e, o
+		
+	for (i=0; i < output.length; i++) {
+		var c = output.charAt(i);
+		var c0 = output.charAt(i-1);
+		if (c=='ā') {
+			var r = new RegExp(c0+c,'g');
+			if (spec[c0]) { output=output.replace(r,c0+'ါ'); }
+			else { output=output.replace(r,c0+'ာ'); };
+		}
+		else if (c=='e') {
+			var cs = '';
+			var im = 0;
+			var cm = ''
+			while (cons[cm]) {
+				cs = cm+cs;
+				cm = output.charAt(im);
+				im--;
+			}
+			var r = new RegExp(cs+c,'g');
+			output=output.replace(r,'ေ'+cs);
+		}
+		else if (c=='o') {
+			var cs = '';
+			var im = 0;
+			var cm = c0
+			while (cons[cm]) {
+				cs = cm+cs;
+				cm = output.charAt(im);
+				im--;
+			}
+			var r = new RegExp(cs+c,'g');
+			if (spec[c0]) { output=output.replace(r,'ေ'+cs+'ါ'); }
+			else { output=output.replace(r,'ေ'+cs+'ာ'); };
+		}
+	}
+	
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
@@ -204,7 +257,7 @@ function todeva(input,type) {
 	devar['y'] = 'य';
 	devar['r'] = 'र';
 	devar['l'] = 'ल';
-	devar['.l'] = 'ऌ';
+	devar['.l'] = 'ळ';
 	devar['v'] = 'व';
 	devar['s'] = 'स';
 	devar['h'] = 'ह';
@@ -239,23 +292,23 @@ function todeva(input,type) {
 				i += 1;
 			}
 		}		
-		else if (i2 && i3 && devar[i1+i2+i3]) {		// three character match
+		else if (i1 == '.' && i2 && i3 && i2 != '' && i3 != '' && devar[i1+i2+i3]) {		// three character match
 			output += devar[i1+i2+i3];
-			if (!vowel[i4]) {
+			if (i4 != '' && !vowel[i4]) {
 				output += '्';
 			}
 			i += 3;
 		}					
-		else if (i2 && devar[i1+i2]) {		// two character match
+		else if (i2 && i2 != '' && devar[i1+i2]) {		// two character match
 			output += devar[i1+i2];
-			if (!vowel[i1+i2] && !vowel[i3] && i2 != 'm') {
+			if (i3 != '' && !vowel[i1+i2] && !vowel[i3] && i2 != 'm') {
 				output += '्';
 			}
 			i += 2;
 		}					
 		else if (devar[i1]) {	// one character match except a
 			output += devar[i1];
-			if (!vowel[i1] && !vowel[i2]) {
+			if (!vowel[i1] && i2 && i2 != '' && !vowel[i2]) {
 				output += '्';
 			}
 			i++;
@@ -267,6 +320,14 @@ function todeva(input,type) {
 		else if (i1 != 'a') {
 			output += i1;
 			i++;
+			if(vowel[i2+i3]) {
+				output+=vowel[i2+i3];
+				i+=2;
+			}
+			else if(vowel[i2]) {
+				output+=vowel[i2];
+				i++;
+			}
 		}
 		else i++; // a
 	}
@@ -274,7 +335,7 @@ function todeva(input,type) {
 	return output;
 }	
 
-function thaiconv(input,type) {
+function thaiconv(input) {
 	var vowel = [];
 	vowel['a'] = 1;
 	vowel['i'] = 1;
@@ -371,7 +432,7 @@ function thaiconv(input,type) {
 				else i++;
 			}
 		}		
-		else if (thair[i1+i2+i3]) {		// three character match
+		else if (i1 == '.' && thair[i1+i2+i3]) {		// three character match
 			cons++;
 			if (cons >= 2) output += 'ฺ';
 			if (i4 == 'o' || i4 == 'e') {
@@ -426,45 +487,25 @@ function thaiconv(input,type) {
 
 var script = 0;
 
-function chscript(ascript) {
-	var hia = 'script'+ascript;
-	var hii = 'scripti'+ascript;
-	
-	document.getElementById('scriptro').onclick = function() {chscript('ro');};
-	document.getElementById('scriptth').onclick = function() {chscript('th');};
-	document.getElementById('scriptde').onclick = function() {chscript('de');};
-	document.getElementById('scriptro').title = 'Change to Roman';
-	document.getElementById('scriptth').title = 'Change to Thai';
-	document.getElementById('scriptde').title = 'Change to Devanagari';
-	document.getElementById('scriptro').blur();
-	document.getElementById('scriptth').blur();
-	document.getElementById('scriptde').blur();
-	
-	document.getElementById('scriptiro').src = 'images/ro0.png';
-	document.getElementById('scriptith').src = 'images/th0.png';
-	document.getElementById('scriptide').src = 'images/de0.png';
-	
-	document.getElementById(hia).onclick = function() {
-		void(0);
-	}
-	document.getElementById(hia).title = '';
-	document.getElementById(hii).src = 'images/'+ascript+'1.png';
-	switch (ascript) {
-		case 'ro':
-			script = 0;
-			break;
-		case 'th':
-			script = 1;
-			break;
-		case 'de':
-			script = 2;
-			break;
-	}
-	importXML();
+function changeScript() {
+	script = document.form.translits.selectedIndex; 
+	changenikaya();
 }
-		
-function translit(input) {
-	if (script == 1) output = thaiconv(replacevelstandard(input).toLowerCase());
-	else if (script == 2) output = todeva(replacevelstandard(input).toLowerCase());
+
+function translit(data) {
+	switch (script) {
+		case 0:
+		output = data;
+		break;
+		case 1:
+			output = thaiconv(replacevelstandard(data).toLowerCase());
+		break;
+		case 2:
+			output = todeva(replacevelstandard(data).toLowerCase());
+		break;
+		case 3:
+			output = toMyanmar(replacevelstandard(data).toLowerCase());
+		break;
+	}
 	return output;
 }

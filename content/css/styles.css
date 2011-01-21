@@ -393,7 +393,35 @@ float:left;
 font-size:14px;
 }
 
-
+.butc {
+border-collapse:collapse;
+border-spacing:0px;
+}
+.lbut {
+text-align:center;
+vertical-align:middle;
+height:30px;
+width:24px;
+background-image:url('../images/lb0.png');
+}
+.mbut {
+vertical-align:middle;
+text-align:center;
+height:30px;
+width:22px;
+background-image:url('../images/mb0.png');
+}
+.rbut {
+vertical-align:middle;
+text-align:center;
+height:30px;
+width:24px;
+background-image:url('../images/rb0.png');
+}
+.sbut {
+background-image:url('../images/mats.png');
+height:30px;
+}
 
 .hide { display: none; }
 .green        { color: #00B900 }

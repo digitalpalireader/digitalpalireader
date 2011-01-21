@@ -12,6 +12,7 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
 
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/loadxml.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/xmlassist.js"></script>
 
@@ -87,24 +88,91 @@
 								<table>
 									<tr>
 										<td>
-											<a href="javascript:void(0)" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)"><img id="RM" src="images/R0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)"><img id="AM" src="images/A0.png" /></a><img src="images/mats.png" /><a href="javascript:void(0)" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)"><img id="DM" src="images/D0.png" /></a><br />
-											
-
-											
-											<a id="scriptro" href="javascript:void(0)" onclick="void(0)"><img id="scriptiro" src="images/ro1.png" /></a><img src="images/mats.png" /><a title="Change to Thai" id="scriptth" href="javascript:void(0)" onclick="chscript('th')"><img id="scriptith" src="images/th0.png" /></a><img src="images/mats.png" /><a title="Change to Devanagari" id="scriptde" href="javascript:void(0)" onclick="chscript('de')"><img id="scriptide" src="images/de0.png" /></a>
-										</td>
-										<td valign=top>
-											<a href="javascript:void(0)" title="Show Dictionary Frame (d)" onclick="this.blur(); moveframey('dif')"><img id="dM" src="images/d1.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Convertor (c)" onclick="this.blur(); moveframey('cof')"><img id="cM" src="images/c0.png" /></a><br /><img src="images/horizbtnspace.png" /><br /><a href="javascript:void(0)" title="Show Textpad (t)" onclick="this.blur(); moveframey('scf')"><img id="sM" src="images/s0.png" /></a>
+											<table class="butc">
+												<tr>
+													<td id="RM" class="lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">
+															R
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="AM" class="mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">
+															A
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="DM" class="rbut"  title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
+															D
+													</td>
+												</tr>
+											</table>
 										</td>
 										<td>
-											<a title="Retrieve previous section (p)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/<1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/<0.png';" onclick="this.blur(); createTablep()"><img src="images/<0.png" /></a><img src="images/mats.png" /><a title="Retrieve current section (g)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/go1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/go0.png';" onclick="this.blur(); importXML()"><img src="images/go0.png" /></a><img src="images/mats.png" /><a title="Retrieve next section (n)" href="javascript:void(0)" onmouseover="this.getElementsByTagName('img')[0].src='images/>1.png';" onmouseout="this.getElementsByTagName('img')[0].src='images/>0.png';" onclick="this.blur(); createTablen()"><img src="images/>0.png" /></a> <br />
-
-											<a id="hierma" href="javascript:void(0)" onclick="this.blur();"><img id="hiermi" src="images/m1.png" /></a><img src="images/mats.png" /><a title="Change to Aṭṭhakathā" id="hieraa" href="javascript:void(0)" onclick="this.blur(); switchhier('a')"><img id="hierai" src="images/a0.png" /></a><img src="images/mats.png" /><a title="Change to Ṭīkā" id="hierta" href="javascript:void(0)" onclick="this.blur(); switchhier('t')"><img id="hierti" src="images/t0.png" /></a><br/>
-											
+											<table class="butc">
+												<tr>
+													<td class="lbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/lb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/lb0.png)';" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">
+														&lt;
+													</td>
+													<td class="sbut">
+													</td>
+													<td class="mbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/mb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/mb0.png)';" title="Retrieve current section (g)" onclick="this.blur(); importXML()">
+														go
+													</td>
+													<td class="sbut">
+													</td>
+													<td class="rbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/rb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/rb0.png)';" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">
+														&gt;
+													</td>
+												</tr>
+											</table>
 										</td>
 									</tr>
-									<tr><td colspan=3 id="history" align="center"></td></tr>
-								</table>	
+									<tr>
+										<td>
+											<table class="butc">
+												<tr>
+													<td style="background-image:url(images/lb1.png)" id="cdifM" class="lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">
+															D
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="cofM" class="mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Convertor Frame (c)" onclick="moveframey('cof')">
+															C
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="scfM" class="rbut"  title="Show Textpad Frame (t)" onclick="moveframey('scf')" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
+															T
+													</td>
+												</tr>
+											</table>
+										</td>
+										<td>
+											<table class="butc">
+												<tr>
+													<td style="background-image:url(images/lb1.png)" onclick="switchhier('m')" id="dhierm" class="lbut">
+															M
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="dhiera" class="mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" onclick="switchhier('a')">
+															A
+													</td>
+													<td class="sbut">
+													</td>
+													<td id="dhiert" class="rbut"  title="Change to Ṭīkā" onclick="switchhier('t')" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
+															T
+													</td>
+												</tr>
+											</table>
+										</td>
+									</tr>
+
+								</table>			
+
+								<div align="center" style="padding-top:2px" id="history"></div>
+
+								
+								
 						<hr />
 								<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
 								<select class="sel"  style="font-size: 75%" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
@@ -157,6 +225,15 @@
 				<hr />
 
 						<input type="button" class="btn" value="%" title="Set configuration (%)" onclick="loadOptions()"><input type="button" class="btn" value="!" title="Reset configuration (!)" onclick="eraseOptions();"> <input type="button" class="btn" value="#" title="Pali Quiz (#)" onClick="newquiz();"><input type="button" class="btn" value="*" title="Quote of the Moment (*)" onClick="bv();"> <input type="button" class="btn" value="?" title="Help (?)" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback (@)" onClick="feedbackform();"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
+
+						<hr/>			
+
+						<div align="center" style="padding-top:2px" id="translits">Script: <select class="sel" size="1" name="translits" onchange="changeScript();">
+							<option selected>Roman</option>
+							<option>Thai</option>
+							<option>Devanagari</option>
+							<option>Myanmar</option>
+						</select></div>
 					</td>
 				</tr>
 		
@@ -300,7 +377,6 @@
 		moveframex(2);
 	</script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>

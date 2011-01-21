@@ -217,26 +217,31 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 	var w = 1;
 	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
+		vna = translit(vna);
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (wna != ' ') {
+		wna = translit(wna);
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (xna != ' ') {
+		xna = translit(xna);
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (yna != ' ') {
+		yna = translit(yna);
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (zna != ' ') {
+		zna = translit(zna);
 				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 	}
 	title += '</td><td id="maftrans" align="right"></td></tr></table>';
@@ -1164,6 +1169,12 @@ function limitt() {
 
 function switchhier(htmp,stop) {
 
+	var himg = ['l','m','r'];
+	
+	var htitle = [];
+	htitle = ['Change to Mūla', 'Change to Aṭṭhakathā', 'Change to Ṭīkā'];
+	
+
 	if (htmp == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
@@ -1173,28 +1184,33 @@ function switchhier(htmp,stop) {
 		return;
 	}
 	hier = htmp;
-	var hia = 'hier'+hier+'a';
-	var hii = 'hier'+hier+'i';
 	
-	document.getElementById('hierma').onclick = function() {this.blur(); switchhier('m');};
-	document.getElementById('hieraa').onclick = function() {this.blur(); switchhier('a');};
-	document.getElementById('hierta').onclick = function() {this.blur(); switchhier('t');};
-	document.getElementById('hierma').title = 'Change to Mūla';
-	document.getElementById('hieraa').title = 'Change to Aṭṭhakathā';
-	document.getElementById('hierta').title = 'Change to Ṭīkā';
-	document.getElementById('hierma').blur();
-	document.getElementById('hieraa').blur();
-	document.getElementById('hierta').blur();
-	
-	document.getElementById('hiermi').src = 'images/m0.png';
-	document.getElementById('hierai').src = 'images/a0.png';
-	document.getElementById('hierti').src = 'images/t0.png';
-	
-	document.getElementById(hia).onclick = function() {
-		this.blur(); 
+
+	var ha = ['m','a','t'];
+
+	for(i=0; i<ha.length; i++) {
+		if (ha[i] == hier) {
+			document.getElementById('dhier'+ha[i]).onmouseover=function() {
+				return;
+			};
+			document.getElementById('dhier'+ha[i]).onmouseout=function() {
+				return;
+			};
+			document.getElementById('dhier'+ha[i]).title = '';
+
+			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b1.png)';
+		}
+		else {
+			document.getElementById('dhier'+ha[i]).onmouseover=function() {
+				document.body.style.cursor='pointer';
+			};
+			document.getElementById('dhier'+ha[i]).onmouseout=function() {
+				document.body.style.cursor='auto';
+			};
+
+			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b0.png)';
+		}
 	}
-	document.getElementById(hia).title = '';
-	document.getElementById(hii).src = 'images/'+hier+'1.png';
 		
 	changenikaya(stop);
 }	

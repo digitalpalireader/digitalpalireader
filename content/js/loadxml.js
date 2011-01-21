@@ -235,7 +235,7 @@ function gettitles(altget,stop,prev,ssect)
 	tnamea += '...';
 	}
 	tnamea = replaceunistandard(tnamea);
-	document.getElementById('title').innerHTML = '<input type="button" value="'+tnamea+'" title="click to return to index" onclick="importXMLindex();">';
+	document.getElementById('title').innerHTML = '<input type="button" value="'+translit(tnamea)+'" title="click to return to index" onclick="importXMLindex();">';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -278,6 +278,7 @@ function gettitles(altget,stop,prev,ssect)
 				unamea += '...';
 			}
 			unamea = replaceunistandard(unamea);
+			unamea = translit(unamea);
 
 			metalist += '<option';
 			if (a == 0) metalist += ' selected';
@@ -318,6 +319,7 @@ function gettitles(altget,stop,prev,ssect)
 				vnamea += '...';
 			}
 			vnamea = replaceunistandard(vnamea);
+			vnamea = translit(vnamea);
 
 			volumelist += '<option';
 			if (a == 0) volumelist += ' selected';
@@ -357,6 +359,7 @@ function gettitles(altget,stop,prev,ssect)
 				wnamea += '...';
 			}
 			wnamea = replaceunistandard(wnamea);
+			wnamea = translit(wnamea);
 
 			vaggalist += '<option';
 			if (a == 0) vaggalist += ' selected';
@@ -398,6 +401,7 @@ function gettitles(altget,stop,prev,ssect)
 				xnamea += '...';
 			}
 			xnamea = replaceunistandard(xnamea);
+			xnamea = translit(xnamea);
 
 		
 			suttalist += '<option';
@@ -439,7 +443,7 @@ function gettitles(altget,stop,prev,ssect)
 			}
 			
 			ynamea = replaceunistandard(ynamea);
-
+			ynamea = translit(ynamea);
 	
 		sectionlist += '<option';
 		if (d == 0) sectionlist += ' selected';
@@ -521,7 +525,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + replaceunistandard(theData) + '</b></font></a><br />';
+			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -533,7 +537,7 @@ function importXMLindex() {
 				wcs = whichcol[0]; // either 0 or 1
 				whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
 				
-				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -557,7 +561,7 @@ function importXMLindex() {
 					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
 					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 				
-					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -581,7 +585,7 @@ function importXMLindex() {
 						wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
 						whichcol[3] = 1; // bump
 						
-                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -605,7 +609,7 @@ function importXMLindex() {
 							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
 							whichcol[4] = 1; // bump
 
-                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -630,7 +634,7 @@ function importXMLindex() {
 								wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
 								if (wcs == 5) wcs = 0;
 
-                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="'+colorcfg[col[wcs]]+'">' + replaceunistandard(theData) + '</font></a>';
+                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
@@ -866,7 +870,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	tnamea += '...';
 	}
 	tnamea = replaceunistandard(tnamea);
-	document.getElementById('title').innerHTML = '<input type="button" onclick="importXMLindex();" value="' + tnamea + '" title="click to return to index">';
+	document.getElementById('title').innerHTML = '<input type="button" onclick="importXMLindex();" value="' + translit(tnamea) + '" title="click to return to index">';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -907,7 +911,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 		metalist += '<option';
 		if (a == meta) metalist += ' selected';
-		metalist += '>' + unamea + '</option>'
+		metalist += '>' + translit(unamea) + '</option>'
 	}
 	if (ap == 1 && unamea == ' ') {
 		metalist = '<select size="1" name="meta" class="hide">' + metalist;
@@ -946,7 +950,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 		volumelist += '<option';
 		if (a == volume) volumelist += ' selected';
-		volumelist += '>' + vnamea + '</option>'
+		volumelist += '>' + translit(vnamea) + '</option>'
 	}
 	if (ap == 1 && vnamea == ' ') {
 		volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
@@ -985,7 +989,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 		vaggalist += '<option';
 		if (a == vagga) vaggalist += ' selected';
-		vaggalist += '>' + wnamea + '</option>'
+		vaggalist += '>' + translit(wnamea) + '</option>'
 	}
 	if (ap == 1 && wnamea == ' ') {
 		vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
@@ -1026,7 +1030,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	
 		suttalist += '<option';
 		if (a == sutta) suttalist += ' selected';
-		suttalist += '>' + xnamea + '</option>'
+		suttalist += '>' + translit(xnamea) + '</option>'
 	}
 	if (ap == 1 && xnamea == ' ') {
 		suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
@@ -1067,7 +1071,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	
 		sectionlist += '<option';
 		if (d == section) sectionlist += ' selected';
-		sectionlist += '>' + ynamea + '</option>';
+		sectionlist += '>' + translit(ynamea) + '</option>';
 	}
 	if (bp == 1 && ynamea == ' ') {
 		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;

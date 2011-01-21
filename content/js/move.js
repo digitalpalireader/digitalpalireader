@@ -21,9 +21,9 @@ function moveframex(a,temp) //read, etc
 				document.getElementById('toolframebutton').title = 'Restore Frames';
 			}
 
-			document.getElementById('RM').src="images/R1.png";
-			document.getElementById('AM').src="images/A0.png";
-			document.getElementById('DM').src="images/D0.png";
+			document.getElementById('RM').style.backgroundImage='url(images/lb1.png)';
+			document.getElementById('AM').style.backgroundImage='url(images/mb0.png)';
+			document.getElementById('DM').style.backgroundImage='url(images/rb0.png)';
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'none';
@@ -37,10 +37,9 @@ function moveframex(a,temp) //read, etc
 				document.getElementById('toolframebutton').value = 'R'; 
 				document.getElementById('toolframebutton').title = 'Maximize Read Frame';
 			}
-
-			document.getElementById('RM').src="images/R0.png";
-			document.getElementById('AM').src="images/A1.png";
-			document.getElementById('DM').src="images/D0.png";
+			document.getElementById('RM').style.backgroundImage='url(images/lb0.png)';
+			document.getElementById('AM').style.backgroundImage='url(images/mb1.png)';
+			document.getElementById('DM').style.backgroundImage='url(images/rb0.png)';
             moveat = 2;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'block';
@@ -54,9 +53,9 @@ function moveframex(a,temp) //read, etc
             document.getElementById('rightbot').style.top = '';
             break;
         case 3: // dict
-			document.getElementById('RM').src="images/R0.png";
-			document.getElementById('AM').src="images/A0.png";
-			document.getElementById('DM').src="images/D1.png";
+			document.getElementById('RM').style.backgroundImage='url(images/lb0.png)';
+			document.getElementById('AM').style.backgroundImage='url(images/mb0.png)';
+			document.getElementById('DM').style.backgroundImage='url(images/rb1.png)';
             moveat = 3;
            // moveframey('dif'); // switch to dict
             
@@ -80,12 +79,22 @@ function moveframey(a) //dict, conv, or scratch
 	moves(0); // close search
 
 	if (moveat == 1) moveframex(2);
-	document.getElementById('dM').src="images/d0.png";
-	document.getElementById('cM').src="images/c0.png";
-	document.getElementById('sM').src="images/s0.png";
-	document.getElementById(a.charAt(0)+'M').src="images/"+a.charAt(0)+"1.png";
+	
+	var fimg = [];
+	fimg['cdif'] = 'l';
+	fimg['cof'] = 'm';
+	fimg['scf'] = 'r';
+	
+	var fa = ['cdif','cof','scf'];
 
-	if (a=='dif') a = 'cdif';
+	for (i in fa) {
+		if (a == fa[i]) {
+			document.getElementById(a+'M').style.backgroundImage='url(images/'+fimg[a]+'b1.png)';
+		}
+		else {
+			document.getElementById(fa[i]+'M').style.backgroundImage='url(images/'+fimg[fa[i]]+'b0.png)';
+		}
+	}
 
     document.getElementById('cdif').style.display="none";
 	document.getElementById('cof').style.display="none";
