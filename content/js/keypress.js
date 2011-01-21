@@ -42,8 +42,17 @@ function keyPressed(e) {
 		if (e.charCode == 42) { bv(); return; } // *
 		if (e.charCode == 63) { helpXML(); return; } // ?
 
-		if (e.charCode == 44) { if(document.getElementById('tout')) { f = document.getElementById('tout').onclick; f(); } return; } // ,
-		if (e.charCode == 46) { if(document.getElementById('tout')) { f = document.getElementById('bout').onclick; f(); } return; } // .
+		if (e.charCode == 44) { // ,
+			if(document.getElementById('tout')) { f = document.getElementById('tout').onclick; f(); }
+			else createTablep();
+			return; 
+		} 
+		
+		if (e.charCode == 46) { // .
+			if(document.getElementById('tout')) { f = document.getElementById('bout').onclick; f(); } 
+			else createTablen(); 
+			return; 
+		} 
 
 		//document.getElementById('mafb').innerHTML += e.charCode + '<br/>';
 }

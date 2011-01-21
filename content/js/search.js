@@ -450,7 +450,6 @@ function importXMLs(cnt)
 function createTables(xmlDoc)
 {
 	//alert(bookload);
-	if (script != 0) chscript(1);				
 	var u = xmlDoc.getElementsByTagName("h0");
 	
 	var getstring = document.form.usearch.value;

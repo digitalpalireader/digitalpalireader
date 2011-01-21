@@ -39,8 +39,9 @@ colorcfg['blueh'] = getColPref('blueh');
 cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
 cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-
+cfg['script'] = getMiscPref('script');
 cfg['cpanel'] = getMiscPref('cpanel');
+
 
 var colchanges = document.getElementsByName('changecolor');
 for(var i=0;i < colchanges.length;i++)
@@ -85,7 +86,7 @@ function getconfig() {
     cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
 	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-
+	cfg['script'] = getMiscPref('script');
 	cfg['cpanel'] = getMiscPref('cpanel');
 	
     // Add ATI translations if preferred
@@ -101,9 +102,13 @@ function getconfig() {
 	// Control Panel
 	
 	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
+
+	// update backgrounds
 		
 	checkbackground();
 	checkcpbkg();
+
+	// update fonts
 
 	document.styleSheets[0]['cssRules'][0].style.color = colorcfg['coltext']; 
 	document.styleSheets[0]['cssRules'][0].style.fontFamily = colorcfg['colfont']; 
@@ -111,6 +116,10 @@ function getconfig() {
 	document.styleSheets[0]['cssRules'][2].style.fontSize = (parseInt(colorcfg['colsize']) - 2) + 'px'; 
 	document.styleSheets[0]['cssRules'][3].style.fontSize = (parseInt(colorcfg['colsize']) - 6) + 'px'; 
 
+	// update script
+	
+	script = parseInt(cfg['script']);
+	document.form.translits.selectedIndex = script;
 }
 
 function changecss(myclass,element,value) {

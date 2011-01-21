@@ -89,7 +89,7 @@ function formatuniout(data,which) { // prepare without links
 			if (wordbyword[b].charAt(endpt) == '}') {
 				altplus += wordbyword[b].substring(0,endpt);
 				altread = 0;
-				altplus = replaceunistandard(altplus);
+				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
@@ -98,7 +98,7 @@ function formatuniout(data,which) { // prepare without links
 		else if (wordbyword[b].charAt(0) == '{') {
 			if (wordbyword[b].charAt(wordbyword[b].length-1) == '}') { 
 				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
-				altplus = replaceunistandard(altplus);
+				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
@@ -114,16 +114,15 @@ function formatuniout(data,which) { // prepare without links
 			}
 			else { // word search embedded left side
 				convout += wordbyword[b] + wordbyword[b+3] + ' ';
-				unioutb = (replaceunistandard(wordbyword[b]) + ' - <' + wordbyword[b+2].substring(1,3) + '>' + uniouta[b+3]) + '<xc>';
-				if (script != 0) unioutb = translit(unioutb);
+				unioutb = translit(replaceunistandard(wordbyword[b])) + ' - <' + wordbyword[b+2].substring(1,3) + '>' + translit(uniouta[b+3]) + '<xc>';
 				finout += '<a id="' + b + '" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 				b = b + 4;
 			}				
 		}
 		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
 			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
-			unioutb = (replaceunistandard(addpre) + ' - <' + wordbyword[b].substring(1,3) + '>' + uniouta[b+1] + '<xc> - ' + uniouta[b+4]);
-			if (script != 0) unioutb = translit(unioutb);
+			unioutb = (translit(replaceunistandard(addpre)) + ' - <' + wordbyword[b].substring(1,3) + '>' + translit(uniouta[b+1]) + '<xc> - ' + translit(uniouta[b+4]));
+
 			finout += '<a id="' + b + '" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
 			b = b + 4;
 			addpre = '';
@@ -168,7 +167,7 @@ function formatuniout(data,which) { // prepare without links
 			convout += wordbyword[b] + ' ';
 			unioutb = uniouta[b];
 			unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0) unioutb = translit(unioutb);
+			if (script != 0 && unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
 			finout += unioutb + ' ';
 		}
 		else
@@ -176,7 +175,7 @@ function formatuniout(data,which) { // prepare without links
 			convout += wordbyword[b] + ' ';
 			unioutb = uniouta[b];
 			//unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0) unioutb = translit(unioutb);
+			if (script != 0 && unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
 			finout += '<a id="' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
 		}
 	}

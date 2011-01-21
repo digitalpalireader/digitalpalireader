@@ -202,6 +202,10 @@ function toMyanmar(input,type) {
 		}
 	}
 	
+	// fudges
+	
+	output = output.replace(/ဉ္ဉ/g, 'ည');
+	
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
@@ -488,14 +492,15 @@ function thaiconv(input) {
 var script = 0;
 
 function changeScript() {
-	script = document.form.translits.selectedIndex; 
+	script = document.form.translits.selectedIndex;
+	setMiscPref('script',script);
 	changenikaya();
 }
 
 function translit(data) {
 	switch (script) {
 		case 0:
-		output = data;
+			output = data;
 		break;
 		case 1:
 			output = thaiconv(replacevelstandard(data).toLowerCase());

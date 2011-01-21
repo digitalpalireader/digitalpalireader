@@ -35,7 +35,7 @@ pref("extensions.digitalpalireader.misc.ctrans", "");
 pref("extensions.digitalpalireader.misc.autodict", "");
 pref("extensions.digitalpalireader.misc.bkgimg", "checked");
 
-pref("extensions.digitalpalireader.misc.toolbar", "1");
+pref("extensions.digitalpalireader.misc.script", "0");
 pref("extensions.digitalpalireader.misc.cpanel", "1");
 
 // See http://kb.mozillazine.org/Localize_extension_descriptions
