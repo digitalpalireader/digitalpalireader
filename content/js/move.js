@@ -76,6 +76,7 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a) //dict, conv, or scratch
 {
+	if(a == 'dif') a = 'cdif';
 	moves(0); // close search
 
 	if (moveat == 1) moveframex(2);

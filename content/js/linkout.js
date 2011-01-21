@@ -28,7 +28,7 @@ function convoutput(spell) {
 	return spell;
 }
 
-function output(which,first)
+function outputDef(which,first)
 {
 
 	//alert(outwords);
@@ -42,7 +42,7 @@ function output(which,first)
 	
 	
 	if (outwords.length > 1 && first) {
-		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-family: sans; font-size:12px" onmouseover="if(this.length < 20) { this.size = this.length; }" onmouseout="this.size=1;" onclick="this.size=1;" onchange="this.size=1; output(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
+		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-family: sans; font-size:12px" onmouseover="if(this.length < 20) { this.size = this.length; }" onmouseout="this.size=1;" onclick="this.size=1;" onchange="this.size=1; outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	

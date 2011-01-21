@@ -70,7 +70,7 @@ function postout(input,divclicked,frombox)
 	{
 		outwords.push(input + '$0^' + input + '^3');
 	}
-	output(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
+	outputDef(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
 	aw = 0;
 	fm = 0;
 }
