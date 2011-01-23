@@ -3,37 +3,37 @@ function toMyanmar(input,type) {
 	vowel['a'] = "အ";
 	vowel['i'] = "ဣ";
 	vowel['u'] = "ဥ";
-	vowel['aa'] = "အာ";
-	vowel['ii'] = "ဤ";
-	vowel['uu'] = "ဦ";
+	vowel['ā'] = "အာ";
+	vowel['ī'] = "ဤ";
+	vowel['ū'] = "ဦ";
 	vowel['e'] = "ဧ";
 	vowel['o'] = "ဩ";
 
 	var myanr = [];
 
-	myanr['aa'] = 'ā'; // later
+	myanr['ā'] = 'ā'; // later
 	myanr['i'] = 'ိ';
-	myanr['ii'] = 'ီ';
+	myanr['ī'] = 'ီ';
 	myanr['u'] = 'ု';
-	myanr['uu'] = 'ူ';
+	myanr['ū'] = 'ူ';
 	myanr['e'] = 'e'; // later
 	myanr['o'] = 'o'; // later
-	myanr['.m'] = 'ံ';
+	myanr['ṃ'] = 'ံ';
 	myanr['k'] = 'က';
 	myanr['kh'] = 'ခ';
 	myanr['g'] = 'ဂ';
 	myanr['gh'] = 'ဃ';
-	myanr['"n'] = 'င';
+	myanr['ṅ'] = 'င';
 	myanr['c'] = 'စ';
 	myanr['ch'] = 'ဆ';
 	myanr['j'] = 'ဇ';
 	myanr['jh'] = 'ဈ';
-	myanr['~n'] = 'ဉ';
-	myanr['.t'] = 'ဋ';
-	myanr['.th'] = 'ဌ';
-	myanr['.d'] = 'ဍ';
-	myanr['.dh'] = 'ဎ';
-	myanr['.n'] = 'ဏ';
+	myanr['ñ'] = 'ဉ';
+	myanr['ṭ'] = 'ဋ';
+	myanr['ṭh'] = 'ဌ';
+	myanr['ḍ'] = 'ဍ';
+	myanr['ḍh'] = 'ဎ';
+	myanr['ṇ'] = 'ဏ';
 	myanr['t'] = 'တ';
 	myanr['th'] = 'ထ';
 	myanr['d'] = 'ဒ';
@@ -47,7 +47,7 @@ function toMyanmar(input,type) {
 	myanr['y'] = 'ယ';
 	myanr['r'] = 'ရ';
 	myanr['l'] = 'လ';
-	myanr['.l'] = 'ဠ';
+	myanr['ḷ'] = 'ဠ';
 	myanr['v'] = 'ဝ';
 	myanr['s'] = 'သ';
 	myanr['h'] = 'ဟ';
@@ -55,34 +55,24 @@ function toMyanmar(input,type) {
 	var cons = [];
 	
 	cons['k'] = 'က';
-	cons['kh'] = 'ခ';
 	cons['g'] = 'ဂ';
-	cons['gh'] = 'ဃ';
-	cons['"n'] = 'င';
+	cons['ṅ'] = 'င';
 	cons['c'] = 'စ';
-	cons['ch'] = 'ဆ';
 	cons['j'] = 'ဇ';
-	cons['jh'] = 'ဈ';
-	cons['~n'] = 'ဉ';
-	cons['.t'] = 'ဋ';
-	cons['.th'] = 'ဌ';
-	cons['.d'] = 'ဍ';
-	cons['.dh'] = 'ဎ';
-	cons['.n'] = 'ဏ';
+	cons['ñ'] = 'ဉ';
+	cons['ṭ'] = 'ဋ';
+	cons['ḍ'] = 'ဍ';
+	cons['ṇ'] = 'ဏ';
 	cons['t'] = 'တ';
-	cons['th'] = 'ထ';
 	cons['d'] = 'ဒ';
-	cons['dh'] = 'ဓ';
 	cons['n'] = 'န';
 	cons['p'] = 'ပ';
-	cons['ph'] = 'ဖ';
 	cons['b'] = 'ဗ';
-	cons['bh'] = 'ဘ';
 	cons['m'] = 'မ';
 	cons['y'] = 'ယ';
 	cons['r'] = 'ရ';
 	cons['l'] = 'လ';
-	cons['.l'] = 'ဠ';
+	cons['ḷ'] = 'ဠ';
 	cons['v'] = 'ဝ';
 	cons['s'] = 'သ';
 	cons['h'] = 'ဟ';
@@ -104,7 +94,7 @@ function toMyanmar(input,type) {
 	var i5 = '';
 	var output = '';
 	var i = 0;
-	
+
 	input = input.replace(/\&quot;/g, '`');
 
 	while (i < input.length) {
@@ -116,37 +106,19 @@ function toMyanmar(input,type) {
 		i5 = input.charAt(i+4);
 		
 		if (vowel[i1]) {
-			if (vowel[i1+i2] && i2 != '') {
-				if (i == 0 || i0 == 'a') output += vowel[i1+i2];
-				else output += myanr[i1+i2];
-				i = i + 2;	
-			}
-			else { 
-				if (i == 0 || (i0 == 'a' && i1 != 'a')) output += vowel[i1];
-				else if (i1 != 'a') output += myanr[i1];
-				i++;
-			}
+			if (i == 0 || (i0 == 'a' && i1 != 'a')) output += vowel[i1];
+			else if (i1 != 'a') output += myanr[i1];
+			i++;
 		}		
-		else if (i1 == '.' && myanr[i1+i2+i3] && i2 != '' && i3 != '') {		// three character match
-			output += myanr[i1+i2+i3];
-			if (!vowel[i4]) {
-				output += '္';
-			}
-			i += 3;
-		}					
 		else if (myanr[i1+i2] && i2 != '') {		// two character match
 			output += myanr[i1+i2];
-			if (!vowel[i3] && i2 != 'm') {
-				output += '္';
-			}
 			i += 2;
+			if(cons[i3]) output += '္';
 		}					
 		else if (myanr[i1] && i1 != 'a') {		// one character match except a
 			output += myanr[i1];
-			if (!vowel[i2]) {
-				output += '္';
-			}
 			i++;
+			if(cons[i2]) output += '္';
 		}					
 		else if (!myanr[i1]) {
 			output += i1;
@@ -205,7 +177,13 @@ function toMyanmar(input,type) {
 	// fudges
 	
 	output = output.replace(/ဉ္ဉ/g, 'ည');
-	
+	output = output.replace(/္ယ/g, 'ျ');
+	output = output.replace(/္ရ/g, 'ြ');
+	output = output.replace(/္ဝ/g, 'ွ');
+	output = output.replace(/္ဟ/g, 'ှ');
+	output = output.replace(/သ္သ/g, 'ဿ');
+	output = output.replace(/င္/g, 'င်္');
+
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
@@ -489,7 +467,8 @@ function thaiconv(input) {
 	return output;
 }	
 
-var script = 0;
+var script = 0;				output += '္';
+
 
 function changeScript() {
 	script = document.form.translits.selectedIndex;
@@ -503,13 +482,13 @@ function translit(data) {
 			output = data;
 		break;
 		case 1:
-			output = thaiconv(replacevelstandard(data).toLowerCase());
+			output = thaiconv(data.toLowerCase());
 		break;
 		case 2:
-			output = todeva(replacevelstandard(data).toLowerCase());
+			output = todeva(data.toLowerCase());
 		break;
 		case 3:
-			output = toMyanmar(replacevelstandard(data).toLowerCase());
+			output = toMyanmar(data.toLowerCase());
 		break;
 	}
 	return output;

@@ -216,31 +216,31 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 	var w = 1;
 	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
-		vna = translit(vna);
+		vna = translit(replaceunistandard(vna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (wna != ' ') {
-		wna = translit(wna);
+		wna = translit(replaceunistandard(wna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (xna != ' ') {
-		xna = translit(xna);
+		xna = translit(replaceunistandard(xna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (yna != ' ') {
-		yna = translit(yna);
+		yna = translit(replaceunistandard(yna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (zna != ' ') {
-		zna = translit(zna);
+		zna = translit(replaceunistandard(zna));
 				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 	}
 	title += '</td><td id="maftrans" align="right"></td></tr></table>';
