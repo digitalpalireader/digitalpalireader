@@ -138,27 +138,31 @@ function changecss(myclass,element,value) {
 }
 
 function checkbackground(x) {
-	if ((!x && cfg['bkgimg'] == "checked") || (x == 1 && document.getElementById('bkgimg').checked)) {
-		document.getElementById('dif').style.backgroundImage = 'url(images/background.png)';
-		document.getElementById('cof').style.backgroundImage = 'url(images/background.png)';
-		document.getElementById('scf').style.backgroundImage = 'url(images/background.png)';
-		document.getElementById('searchb').style.backgroundImage = 'url(images/background.png)';
-		document.body.style.backgroundImage = 'url(images/background.png)';
-    }
-    else {
-		if (x==1) { var colort = document.getElementById('colbk').value }
-		else { var colort = colorcfg['colbk'] }
-		document.getElementById('dif').style.backgroundImage = '';
-		document.getElementById('cof').style.backgroundImage = '';
-		document.getElementById('scf').style.backgroundImage = '';
-		document.getElementById('searchb').style.backgroundImage = '';
-		document.body.style.backgroundImage = '';
-		document.getElementById('dif').style.backgroundColor = colort;
-		document.getElementById('cof').style.backgroundColor = colort;
-		document.getElementById('scf').style.backgroundColor = colort;
-		document.getElementById('searchb').style.backgroundColor = colort;
-		document.body.style.backgroundColor = colort;
+	if (x==1) { 
+		var colort = document.getElementById('colbk').value; 
+		var bkgimg = document.getElementById('bkgimg').checked; 
 	}
+	else { 
+		var colort = colorcfg['colbk']; 
+		var bkgimg = cfg['bkgimg']; 
+	}
+	if (bkgimg == 'checked' || bkgimg == true) var bkgurl = 'url(images/background.png)';
+	else bkgurl = '';
+
+	document.getElementById('mafa').style.backgroundImage = bkgurl;
+	document.getElementById('mafb').style.backgroundImage = bkgurl;
+	document.getElementById('dif').style.backgroundImage = bkgurl;
+	document.getElementById('cof').style.backgroundImage = bkgurl;
+	document.getElementById('scf').style.backgroundImage = bkgurl;
+	document.getElementById('searchb').style.backgroundImage = bkgurl;
+
+	document.getElementById('mafa').style.backgroundColor = colort;
+	document.getElementById('mafb').style.backgroundColor = colort;
+	document.getElementById('dif').style.backgroundColor = colort;
+	document.getElementById('cof').style.backgroundColor = colort;
+	document.getElementById('scf').style.backgroundColor = colort;
+	document.getElementById('searchb').style.backgroundColor = colort;
+	document.body.style.backgroundColor = colort;
 }
 
 function checkcpbkg(x) {
@@ -204,7 +208,7 @@ function loadOptions() {
     mafaout += '<p><b style="color:'+colorcfg['coldppn']+'" id="col4">DPPN: </b><input name="color4" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;">';
     mafaout += '<p><b style="color:'+colorcfg['colcpd']+'" id="col5">CPD: </b><input name="color5" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;">';
     mafaout += '<p><b id="col6" style="color:'+colorcfg['coltext']+'; background-color:'+colorcfg['colbkcp']+'">Panel: </b><input name="color6" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkcpbkg(1)">';
-    mafaout += '<p><b id="col7" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">BKGD: </b><input name="color7" id="colbk" ' + (cfg['bkgimg']=='checked' ? 'disabled':'') + ' value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1); this.checked ? document.getElementById(\'colbk\').disabled=true : document.getElementById(\'colbk\').disabled=false" '+cfg['bkgimg']+'>Use image instead</input>';
+    mafaout += '<p><b id="col7" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">BKGD: </b><input name="color7" id="colbk" value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1);" '+cfg['bkgimg']+'>Add parchment texture</input>';
     mafaout += '<p><b id="col8">Font: </b><input name="color8" id="colfont" value="'+colorcfg['colfont']+'" type=input size=7 title="Enter desired font family" onkeyup="document.getElementById(\'col8\').style.fontFamily=this.value">';
     mafaout += '<p><b id="col9">Size (px): </b><input name="color9" id="colsize" value="'+colorcfg['colsize']+'" type=input size=7 title="Enter desired font size in pixels" onkeyup="document.getElementById(\'col9\').style.fontSize=this.value + \'px\'">';
     mafaout += '</form></td></tr><tr><td colspan=2><hr /><p><b>Misc. Options:</b></p>';

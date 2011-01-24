@@ -13,7 +13,7 @@ pref("extensions.digitalpalireader.colors.colcpd", "#44D");
 pref("extensions.digitalpalireader.colors.colfont", "Sans");
 pref("extensions.digitalpalireader.colors.colsize", "16");
 
-pref("extensions.digitalpalireader.colors.colbk", "#FFF");
+pref("extensions.digitalpalireader.colors.colbk", "#FFB");
 pref("extensions.digitalpalireader.colors.colbkcp", "#DDC");
 pref("extensions.digitalpalireader.colors.colbk1", "yellow");
 pref("extensions.digitalpalireader.colors.colbk2", "aqua");

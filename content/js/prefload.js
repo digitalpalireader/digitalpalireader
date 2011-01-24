@@ -21,7 +21,7 @@ cPrefs.push("colcpd"); cPrefVals.push("#44D");
 cPrefs.push("colfont"); cPrefVals.push("Sans");
 cPrefs.push("colsize"); cPrefVals.push("16");
 
-cPrefs.push("colbk"); cPrefVals.push("#FFF");
+cPrefs.push("colbk"); cPrefVals.push("#FFB");
 cPrefs.push("colbkcp"); cPrefVals.push("#DDC");
 cPrefs.push("colbk1"); cPrefVals.push("yellow");
 cPrefs.push("colbk2"); cPrefVals.push("aqua");

@@ -193,7 +193,7 @@ right:0px;
 left:0px;
 top:0px;
 bottom:228px;
-padding-bottom:20px;
+overflow:auto;
 }
 #maft {
 position:absolute;
@@ -215,10 +215,9 @@ bottom:0px;
 width:100%;
 }
 #mafb {
-height:100%;
+min-height:100%;
 padding:20px;
-padding-bottom:0px;
-overflow:auto;
+margin-bottom:-35px;
 }
 #convi {
 display:none;
@@ -307,11 +306,11 @@ bottom:0px;
 overflow:auto;
 }
 #dif {
+min-height:100%;
 position:absolute;
-right:0px;
 left:0px;
+right:0px;
 top:0px;
-bottom:0px; 
 padding-left:15px;
 padding-right:15px;
 padding-top:10px;
@@ -319,11 +318,15 @@ padding-bottom:10px;
  
 }
 #cof {
+height:100%;
+width:100%;
 padding-right:10px; 
 padding-left:10px;
 display:none;
 }
 #scf {
+height:100%;
+width:100%;
 padding-right:10px; 
 padding-left:10px;
  
