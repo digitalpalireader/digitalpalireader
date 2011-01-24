@@ -11,13 +11,13 @@ function toMyanmar(input,type) {
 
 	var myanr = [];
 
-	myanr['ā'] = 'ā'; // later
+//	myanr['ā'] = 'ā'; // later
 	myanr['i'] = 'ိ';
 	myanr['ī'] = 'ီ';
 	myanr['u'] = 'ု';
 	myanr['ū'] = 'ူ';
-	myanr['e'] = 'e'; // later
-	myanr['o'] = 'o'; // later
+	myanr['e'] = 'ေ'; 
+//	myanr['o'] = 'ေā'; // later
 	myanr['ṃ'] = 'ံ';
 	myanr['k'] = 'က';
 	myanr['kh'] = 'ခ';
@@ -79,38 +79,41 @@ function toMyanmar(input,type) {
 
 	
 	var spec = []; // takes special aa
-	spec[ 'ခ' ] = 1;
-	spec[ 'ဂ' ] = 1;
-	spec[ 'င' ] = 1;
-	spec[ 'ဒ' ] = 1;
-	spec[ 'ပ' ] = 1;
-	spec[ 'ဝ' ] = 1; 
+	spec['kh'] = 1;
+	spec['g'] = 1;
+	spec['dh'] = 1;
+	spec['p'] = 1;
+	spec['v'] = 1; 
 	
-	var i0 = '';
-	var i1 = '';
-	var i2 = '';
-	var i3 = '';
-	var i4 = '';
-	var i5 = '';
+	var im, i0, i1, i2, i3
 	var output = '';
 	var i = 0;
 
 	input = input.replace(/\&quot;/g, '`');
 
 	while (i < input.length) {
+		im = input.charAt(i-2);
 		i0 = input.charAt(i-1);
 		i1 = input.charAt(i);
 		i2 = input.charAt(i+1);
 		i3 = input.charAt(i+2);
-		i4 = input.charAt(i+3);
-		i5 = input.charAt(i+4);
 		
 		if (vowel[i1]) {
-			if (i == 0 || (i0 == 'a' && i1 != 'a')) output += vowel[i1];
-			else if (i1 != 'a') output += myanr[i1];
+			if (i == 0 || i0 == 'a') output += vowel[i1];
+			else if (i1 == 'ā') {
+				if (spec[i0] || spec[im+i0]) { output += 'ါ'; }
+				else { output += 'ာ'; };
+			}
+			else if (i1 == 'o') {
+				if (spec[i0] || spec[im+i0]) { output += 'ေါ'; }
+				else { output += 'ော'; };
+			}
+			else if (i1 != 'a') {
+				output += myanr[i1];
+			}
 			i++;
 		}		
-		else if (myanr[i1+i2] && i2 != '') {		// two character match
+		else if (myanr[i1+i2] && i2 == 'h') {		// two character match
 			output += myanr[i1+i2];
 			i += 2;
 			if(cons[i3]) output += '္';
@@ -136,44 +139,7 @@ function toMyanmar(input,type) {
 		}
 		else i++;
 	}
-	
-	// deal with ā, e, o
-		
-	for (i=0; i < output.length; i++) {
-		var c = output.charAt(i);
-		var c0 = output.charAt(i-1);
-		if (c=='ā') {
-			var r = new RegExp(c0+c,'g');
-			if (spec[c0]) { output=output.replace(r,c0+'ါ'); }
-			else { output=output.replace(r,c0+'ာ'); };
-		}
-		else if (c=='e') {
-			var cs = '';
-			var im = 0;
-			var cm = ''
-			while (cons[cm]) {
-				cs = cm+cs;
-				cm = output.charAt(im);
-				im--;
-			}
-			var r = new RegExp(cs+c,'g');
-			output=output.replace(r,'ေ'+cs);
-		}
-		else if (c=='o') {
-			var cs = '';
-			var im = 0;
-			var cm = c0
-			while (cons[cm]) {
-				cs = cm+cs;
-				cm = output.charAt(im);
-				im--;
-			}
-			var r = new RegExp(cs+c,'g');
-			if (spec[c0]) { output=output.replace(r,'ေ'+cs+'ါ'); }
-			else { output=output.replace(r,'ေ'+cs+'ာ'); };
-		}
-	}
-	
+
 	// fudges
 	
 	output = output.replace(/ဉ္ဉ/g, 'ည');
@@ -195,37 +161,37 @@ function todeva(input,type) {
 	vowel['a'] = " अ";
 	vowel['i'] = " इ";
 	vowel['u'] = " उ";
-	vowel['aa'] = " आ";
-	vowel['ii'] = " ई";
-	vowel['uu'] = " ऊ";
+	vowel['ā'] = " आ";
+	vowel['ī'] = " ई";
+	vowel['ū'] = " ऊ";
 	vowel['e'] = " ए";
 	vowel['o'] = " ओ";
 	
 	var devar = [];
 
-	devar['aa'] = 'ा';
+	devar['ā'] = 'ा';
 	devar['i'] = 'ि';
-	devar['ii'] = 'ी';
+	devar['ī'] = 'ी';
 	devar['u'] = 'ु';
-	devar['uu'] = 'ू';
+	devar['ū'] = 'ू';
 	devar['e'] = 'े';
 	devar['o'] = 'ो';
-	devar['.m'] = 'ं';
+	devar['ṃ'] = 'ं';
 	devar['k'] = 'क';
 	devar['kh'] = 'ख';
 	devar['g'] = 'ग';
 	devar['gh'] = 'घ';
-	devar['"n'] = 'ङ';
+	devar['ṅ'] = 'ङ';
 	devar['c'] = 'च';
 	devar['ch'] = 'छ';
 	devar['j'] = 'ज';
 	devar['jh'] = 'झ';
-	devar['~n'] = 'ञ';
-	devar['.t'] = 'ट';
-	devar['.th'] = 'ठ';
-	devar['.d'] = 'ड';
-	devar['.dh'] = 'ढ';
-	devar['.n'] = 'ण';
+	devar['ñ'] = 'ञ';
+	devar['ṭ'] = 'ट';
+	devar['ṭh'] = 'ठ';
+	devar['ḍ'] = 'ड';
+	devar['ḍh'] = 'ढ';
+	devar['ṇ'] = 'ण';
 	devar['t'] = 'त';
 	devar['th'] = 'थ';
 	devar['d'] = 'द';
@@ -239,7 +205,7 @@ function todeva(input,type) {
 	devar['y'] = 'य';
 	devar['r'] = 'र';
 	devar['l'] = 'ल';
-	devar['.l'] = 'ळ';
+	devar['ḷ'] = 'ळ';
 	devar['v'] = 'व';
 	devar['s'] = 'स';
 	devar['h'] = 'ह';
@@ -265,48 +231,27 @@ function todeva(input,type) {
 		i5 = input.charAt(i+4);
 		
 		if (i == 0 && vowel[i1]) { // first letter vowel
-			if (i2 == i1 && (i1 == 'a' || i1 == 'i' || i1 == 'u')) {
-				output += vowel[i1+i2];
-				i += 2;
-			}
-			else {
-				output += vowel[i1];
-				i += 1;
-			}
+			output += vowel[i1];
+			i += 1;
 		}		
-		else if (i1 == '.' && i2 && i3 && i2 != '' && i3 != '' && devar[i1+i2+i3]) {		// three character match
-			output += devar[i1+i2+i3];
-			if (i4 != '' && !vowel[i4]) {
-				output += '्';
-			}
-			i += 3;
-		}					
-		else if (i2 && i2 != '' && devar[i1+i2]) {		// two character match
+		else if (i2 == 'h' && devar[i1+i2]) {		// two character match
 			output += devar[i1+i2];
-			if (i3 != '' && !vowel[i1+i2] && !vowel[i3] && i2 != 'm') {
+			if (i3 != '' && !vowel[i3] && i2 != 'ṃ') {
 				output += '्';
 			}
 			i += 2;
 		}					
 		else if (devar[i1]) {	// one character match except a
 			output += devar[i1];
-			if (!vowel[i1] && i2 && i2 != '' && !vowel[i2]) {
+			if (i2 != '' && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
 				output += '्';
 			}
 			i++;
 		}
-		else if (i1 == 'a' && i2 == '.' && i3 == 'm') {
-			output += 'ं';
-			i += 3;
-		}					
 		else if (i1 != 'a') {
 			output += i1;
 			i++;
-			if(vowel[i2+i3]) {
-				output+=vowel[i2+i3];
-				i+=2;
-			}
-			else if(vowel[i2]) {
+			if(vowel[i2]) {
 				output+=vowel[i2];
 				i++;
 			}
@@ -319,39 +264,43 @@ function todeva(input,type) {
 
 function thaiconv(input) {
 	var vowel = [];
-	vowel['a'] = 1;
-	vowel['i'] = 1;
-	vowel['u'] = 1;
-	vowel['e'] = 2;
-	vowel['o'] = 2;
+	vowel['a'] = '1';
+	vowel['ā'] = '1';
+	vowel['i'] = '1';
+	vowel['ī'] = '1';
+	vowel['iṃ'] = '1';
+	vowel['u'] = '1';
+	vowel['ū'] = '1';
+	vowel['e'] = '2';
+	vowel['o'] = '2';
 
 
 	var thair = [];
 	thair['a'] = 'อ';
-	thair['aa'] = 'า';
+	thair['ā'] = 'า';
 	thair['i'] = 'ิ';
-	thair['ii'] = 'ี';
-	thair['i.m'] = 'ึ';
+	thair['ī'] = 'ี';
+	thair['iṃ'] = 'ึ';
 	thair['u'] = 'ุ';
-	thair['uu'] = 'ู';
+	thair['ū'] = 'ู';
 	thair['e'] = 'เ';
 	thair['o'] = 'โ';
-	thair['.m'] = 'ํ';
+	thair['ṃ'] = 'ํ';
 	thair['k'] = 'ก';
 	thair['kh'] = 'ข';
 	thair['g'] = 'ค';
 	thair['gh'] = 'ฆ';
-	thair['"n'] = 'ง';
+	thair['ṅ'] = 'ง';
 	thair['c'] = 'จ';
 	thair['ch'] = 'ฉ';
 	thair['j'] = 'ช';
 	thair['jh'] = 'ฌ';
-	thair['~n'] = 'ญ';
-	thair['.t'] = 'ฏ';
-	thair['.th'] = 'ฐ';
-	thair['.d'] = 'ฑ';
-	thair['.dh'] = 'ฒ';
-	thair['.n'] = 'ณ';
+	thair['ñ'] = 'ญ';
+	thair['ṭ'] = 'ฏ';
+	thair['ṭh'] = 'ฐ';
+	thair['ḍ'] = 'ฑ';
+	thair['ḍh'] = 'ฒ';
+	thair['ṇ'] = 'ณ';
 	thair['t'] = 'ต';
 	thair['th'] = 'ถ';
 	thair['d'] = 'ท';
@@ -365,7 +314,7 @@ function thaiconv(input) {
 	thair['y'] = 'ย';
 	thair['r'] = 'ร';
 	thair['l'] = 'ล';
-	thair['.l'] = 'ล';
+	thair['ḷ'] = 'ล';
 	thair['v'] = 'ว';
 	thair['s'] = 'ส';
 	thair['h'] = 'ห';
@@ -393,42 +342,26 @@ function thaiconv(input) {
 		if (vowel[i1]) {
 			cons = 0;
 			if (i1 == 'o' || i1 == 'e') {
-				output += thair[i1];
-				if (i == 0 || i0 == 'a') output += thair['a'];
+				output += thair[i1] + thair['a'];
 				i++;
 			}
 			else {
-				if (i == 0 || i0 == 'a') output += thair['a'];
-				if (i1 == i2) {
+				if (i == 0 || i0 == 'a') {
+					output += thair['a'];
+					if (i1 != 'a') { output += thair[i1]; }
+				}	
+				else if (i1 == 'i' && i2 == 'ṃ') { // special i.m character
 					output += thair[i1+i2];
-					i = i + 2;	
+					i++;				
 				}
-				else if (i1 == 'i' && i2 == '.' && i3 == 'm') { // special i.m character
-					output += thair[i1+i2+i3];
-					i = i + 3;				
-				}
-				else if (i1 != 'a') { // nothing for a
-					output += thair[i1];
-					i++;
-				}
-				else i++;
+				else if (i1 != 'a') { output += thair[i1]; }
+				i++;
 			}
 		}		
-		else if (i1 == '.' && thair[i1+i2+i3]) {		// three character match
-			cons++;
-			if (cons >= 2) output += 'ฺ';
-			if (i4 == 'o' || i4 == 'e') {
-				output += thair[i4];
-				i++;
-				cons = 0;
-			}	
-			output += thair[i1+i2+i3];
-			i = i + 3;
-		}					
-		else if (thair[i1+i2]) {		// two character match
+		else if (thair[i1+i2] && i2 == 'h') {		// two character match
 			cons++;
 			if (i2 == 'm') cons = 0 // exception for .m
-			if (cons >= 2) output += 'ฺ';
+			if (cons > 1) output += 'ฺ';
 			if (i3 == 'o' || i3 == 'e') {
 				output += thair[i3];
 				i++;
@@ -439,7 +372,7 @@ function thaiconv(input) {
 		}					
 		else if (thair[i1] && i1 != 'a') {		// one character match except a
 			cons++;
-			if (cons >= 2) output += 'ฺ';
+			if (cons > 1) output += 'ฺ';
 			if (i2 == 'o' || i2 == 'e') {
 				output += thair[i2];
 				i++;
@@ -461,13 +394,16 @@ function thaiconv(input) {
 				output += thair['a']; 
 			}
 		}
-		else i++;
+		else { // a
+			cons = 0;
+			i++;
+		}
 	}
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
 
-var script = 0;				output += '္';
+var script = 0;	
 
 
 function changeScript() {
