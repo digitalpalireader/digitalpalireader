@@ -1,6 +1,6 @@
 {
   "name": "Digital Pali Reader",
-  "version": "0.954",
+  "version": "0.955",
   "description": "Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.",
   "icons": { 
   "48": "images/logo48.png",
