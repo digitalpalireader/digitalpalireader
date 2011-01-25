@@ -4,6 +4,8 @@ var searchsect = 0;
 var stop = 0;
 var labelsearch = null;
 
+var unnamed = '(unnamed)';
+
 
 var versecheck = 0;
 var versestop = 0;
@@ -74,11 +76,11 @@ function importXML(manxml,labelsearchtemp)
 	var xn = w[vagga].getElementsByTagName("h2n");
 	var yn = x[sutta].getElementsByTagName("h3n");
 	var zn = y[section].getElementsByTagName("h4n");
-	var vna = vn[0].childNodes[0].nodeValue;
-	var wna = wn[0].childNodes[0].nodeValue;
-	var xna = xn[0].childNodes[0].nodeValue;
-	var yna = yn[0].childNodes[0].nodeValue;
-	var zna = zn[0].childNodes[0].nodeValue;
+	var vna = (vn[0].childNodes[0] ? vn[0].childNodes[0].nodeValue : ' ');
+	var wna = (wn[0].childNodes[0] ? wn[0].childNodes[0].nodeValue : ' ');
+	var xna = (xn[0].childNodes[0] ? xn[0].childNodes[0].nodeValue : ' ');
+	var yna = (yn[0].childNodes[0] ? yn[0].childNodes[0].nodeValue : ' ');
+	var zna = (zn[0].childNodes[0] ? zn[0].childNodes[0].nodeValue : ' ');
 
 	document.getElementById('mafb').innerHTML = '';
 	
@@ -89,6 +91,7 @@ function importXML(manxml,labelsearchtemp)
 	else if (xna.length > 1) { var bknameme  = xna }
 	else if (wna.length > 1) { var bknameme  = wna }
 	else if (vna.length > 1) { var bknameme  = vna }
+	else bknameme = '';
 	
 	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 	
@@ -166,10 +169,10 @@ function gettitles(altget,stop,prev,ssect)
 {
 	var newload = 0;
 	
-	if (altget == 1 || altget == 3) getsutta = 1; // only remake section lists
-	if (altget == 4) getsutta = 2; // remake section and sutta lists only, not vagga, volume or meta lists
-	if (altget == 5) getsutta = 3; // remake section, sutta and vagga lists only, not volume or meta lists
-	if (altget == 6) getsutta = 4; // remake all but meta lists
+	if (altget == 3) getsutta = 4; // only remake section lists
+	if (altget == 4) getsutta = 3; // remake section and sutta lists only, not vagga, volume or meta lists
+	if (altget == 5) getsutta = 2; // remake section, sutta and vagga lists only, not volume or meta lists
+	if (altget == 6) getsutta = 1; // remake all but meta lists
 	if (ssect) searchsect = ssect;
 	if (stop == 0) newload = 0; // load xml data
 	if (stop == 1) newload = 1; // don't load xml data
@@ -197,14 +200,10 @@ function gettitles(altget,stop,prev,ssect)
 	var xnamea = 0;
 	var ynamea = 0;
 	
-	if (getsutta != 0) var meta = document.form.meta.selectedIndex;
-	else var meta = 0;
-	if (getsutta != 0 && getsutta != 4) var volume = document.form.volume.selectedIndex;
-	else var volume = 0;
-	if (getsutta == 1 || getsutta == 2) var vagga = document.form.vagga.selectedIndex;
-	else var vagga = 0;
-	if (getsutta == 1) var sutta = document.form.sutta.selectedIndex;
-	else var sutta = 0;	
+	 var meta = document.form.meta.selectedIndex;
+	 var volume = document.form.volume.selectedIndex;
+	 var vagga = document.form.vagga.selectedIndex;
+	 var sutta = document.form.sutta.selectedIndex;
 
 	var metalist = '';
 	var volumelist = '';
@@ -218,7 +217,7 @@ function gettitles(altget,stop,prev,ssect)
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	var tnamea = tname[0].childNodes[0].nodeValue;
+	if (tname[0].childNodes[0]) var tnamea = tname[0].childNodes[0].nodeValue; else tnamea = unnamed;
 	var countt = tnamea;
 	countt = countt.replace(/aa/g, 'a');
 	countt = countt.replace(/ii/g, 'i');
@@ -261,7 +260,7 @@ function gettitles(altget,stop,prev,ssect)
 		{
 			ap = a + 1;
 			uname = u[a].getElementsByTagName("h0n");
-			unamea = uname[0].childNodes[0].nodeValue;
+			if (uname[0].childNodes[0]) unamea = uname[0].childNodes[0].nodeValue; else unamea = unnamed;
 			countu = unamea;
 			countu = countu.replace(/aa/g, 'a');
 			countu = countu.replace(/ii/g, 'i');
@@ -284,7 +283,7 @@ function gettitles(altget,stop,prev,ssect)
 			if (a == 0) metalist += ' selected';
 			metalist += '>' + unamea + '</option>'
 		}
-		if (ap == 1 && unamea == ' ') {
+		if (u.length < 2 && (unamea == ' ' || unamea == unnamed)) {
 			metalist = '<select size="1" name="meta" class="hide">' + metalist;
 
 		}
@@ -296,13 +295,13 @@ function gettitles(altget,stop,prev,ssect)
 		document.getElementById('meta').innerHTML=metalist;
 	}
 	
-	if (getsutta == 0 || getsutta == 4) // remake volume list
+	if (getsutta < 2) // remake volume list
 	{
 		for (var a = 0; a < v.length; a++)
 		{
 			ap = a + 1;
 			vname = v[a].getElementsByTagName("h1n");
-			vnamea = vname[0].childNodes[0].nodeValue;
+			if (vname[0].childNodes[0]) vnamea = vname[0].childNodes[0].nodeValue; else vnamea = unnamed;
 			countv = vnamea;
 			countv = countv.replace(/aa/g, 'a');
 			countv = countv.replace(/ii/g, 'i');
@@ -325,7 +324,7 @@ function gettitles(altget,stop,prev,ssect)
 			if (a == 0) volumelist += ' selected';
 			volumelist += '>' + vnamea + '</option>'
 		}
-		if (ap == 1 && vnamea == ' ') {
+		if (v.length < 2 && (vnamea == ' ' || vnamea == unnamed)) {
 			volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
 
 		}
@@ -336,13 +335,12 @@ function gettitles(altget,stop,prev,ssect)
 		volumelist += '</select>'
 		document.getElementById('volume').innerHTML=volumelist;
 	}
-	if (getsutta == 0 || getsutta == 3) // remake vaggalist
+	if (getsutta < 3) // remake vaggalist
 	{
 		for (var a = 0; a < w.length; a++)
 		{
-			ap = a + 1;
 			wname = w[a].getElementsByTagName("h2n");
-			wnamea = wname[0].childNodes[0].nodeValue;
+			if (wname[0].childNodes[0]) wnamea = wname[0].childNodes[0].nodeValue; else wnamea = unnamed;
 			countw = wnamea;
 			countw = countw.replace(/aa/g, 'a');
 			countw = countw.replace(/ii/g, 'i');
@@ -365,26 +363,23 @@ function gettitles(altget,stop,prev,ssect)
 			if (a == 0) vaggalist += ' selected';
 			vaggalist += '>' + wnamea + '</option>'
 		}
-		if (ap == 1 && wnamea == ' ') {
+		if (w.length < 2 && (wnamea == ' ' || wnamea == unnamed)) {
 			vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
-
 		}
 		else {
 			vaggalist = '<select size="1" name="vagga" onChange="gettitles(4)">' + vaggalist;
-
-
 		}
 		vaggalist += '</select>'
 		document.getElementById('vagga').innerHTML=vaggalist;
 	}
 
-	if (getsutta != 1) // remake sutta list on getsutta = 0, 2, or 3
+	if (getsutta < 4) // remake sutta list on getsutta = 0, 2, or 3
 	{
 		for (var a = 0; a < x.length; a++)
 		{
 			ap = a + 1;
 			xname = x[a].getElementsByTagName("h3n");
-			xnamea = xname[0].childNodes[0].nodeValue;
+			if (xname[0].childNodes[0]) xnamea = xname[0].childNodes[0].nodeValue; else xnamea = unnamed;
 			countx = xnamea;
 			countx = countx.replace(/aa/g, 'a');
 			countx = countx.replace(/ii/g, 'i');
@@ -408,12 +403,12 @@ function gettitles(altget,stop,prev,ssect)
 			if (a == 0) suttalist += ' selected';
 			suttalist += '>' + xnamea + '</option>'
 		}
-		if (ap == 1 && xnamea == ' ') {
+		if (x.length < 2 && (xnamea == ' ' || xnamea == unnamed)) {
 			suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
 
 		}
 		else {
-			suttalist = '<select size="1" name="sutta" onChange="gettitles(1)">' + suttalist;
+			suttalist = '<select size="1" name="sutta" onChange="gettitles(3)">' + suttalist;
 
 
 		}
@@ -424,7 +419,7 @@ function gettitles(altget,stop,prev,ssect)
 	{
 		bp = d + 1;
 		yname = y[d].getElementsByTagName("h4n");
-		ynamea = yname[0].childNodes[0].nodeValue;
+		if (yname[0].childNodes[0]) ynamea = yname[0].childNodes[0].nodeValue; else ynamea = unnamed;
 		
 			county = ynamea;
 			county = county.replace(/aa/g, 'a');
@@ -449,7 +444,7 @@ function gettitles(altget,stop,prev,ssect)
 		if (d == 0) sectionlist += ' selected';
 		sectionlist += '>' + ynamea + '</option>';
 	}
-	if (bp == 1 && ynamea == ' ') {
+	if (y.length < 2 && (ynamea == ' ' || ynamea == unnamed)) {
 		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
 
 	}
@@ -502,8 +497,6 @@ function importXMLindex() {
 	bookfile = nikaya + bookn;
 	
 	document.getElementById('mafb').innerHTML = '';
-
-	var unnamed = '(unnamed)';
 	
 	var tmp = 0;
 	var tmp1 = 0;
@@ -519,7 +512,7 @@ function importXMLindex() {
 	
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
-		theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue;
+		if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue; else theData = ' ';
 		if (z.length > 1 && theData == ' ') { theData = unnamed; } 
 		if (theData != ' ') {
 
@@ -530,7 +523,7 @@ function importXMLindex() {
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
-			theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue;
+			if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue; else theData = ' ';
 			if (y.length > 1 && theData == ' ') { theData = unnamed; }
 			if (theData != ' ') {
 				
@@ -554,7 +547,7 @@ function importXMLindex() {
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
-				theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue;
+				if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue; else theData = ' ';
 				if (x.length > 1 && theData == ' ') { theData = unnamed; }
 				if (theData != ' ') {
 					
@@ -578,7 +571,7 @@ function importXMLindex() {
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
-					theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue;
+					if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue; else theData = ' ';
 					if (w.length > 1 && theData == ' ') { theData = unnamed; }
 					if (theData != ' ') {
 						
@@ -602,7 +595,7 @@ function importXMLindex() {
 					v = w[tmp4].getElementsByTagName("h3");
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
-						theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue;
+						if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue; else theData = ' ';
 						if (v.length > 1 && theData == ' ') { theData = unnamed; }
 						if (theData != ' ') {
 
@@ -627,7 +620,7 @@ function importXMLindex() {
 						u = v[tmp5].getElementsByTagName("h4");
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
-							theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue;
+							if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue; else theData = ' ';
 							if (z.length > 1 && theData == ' ') { theData = unnamed; }
 							if (theData != ' ') {
 
@@ -850,7 +843,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	var tnamea = tname[0].childNodes[0].nodeValue;
+	if (tname[0].childNodes[0]) var tnamea = tname[0].childNodes[0].nodeValue; else tnamea = unnamed;
 	var countt = tnamea;
 
 	var maxlength = 15;  // change for display purposes
@@ -891,7 +884,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		uname = u[a].getElementsByTagName("h0n");
-		unamea = uname[0].childNodes[0].nodeValue;
+		if (uname[0].childNodes[0]) unamea = uname[0].childNodes[0].nodeValue; else unamea = unnamed;
 		countu = unamea;
 		countu = countu.replace(/aa/g, 'a');
 		countu = countu.replace(/ii/g, 'i');
@@ -913,7 +906,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == meta) metalist += ' selected';
 		metalist += '>' + translit(unamea) + '</option>'
 	}
-	if (ap == 1 && unamea == ' ') {
+	if (ap == 1 && (unamea == ' ' || unamea == unnamed)) {
 		metalist = '<select size="1" name="meta" class="hide">' + metalist;
 
 	}
@@ -930,7 +923,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		vname = v[a].getElementsByTagName("h1n");
-		vnamea = vname[0].childNodes[0].nodeValue;
+		if (vname[0].childNodes[0]) vnamea = vname[0].childNodes[0].nodeValue; else vnamea = unnamed;
 		countv = vnamea;
 		countv = countv.replace(/aa/g, 'a');
 		countv = countv.replace(/ii/g, 'i');
@@ -952,7 +945,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == volume) volumelist += ' selected';
 		volumelist += '>' + translit(vnamea) + '</option>'
 	}
-	if (ap == 1 && vnamea == ' ') {
+	if (ap == 1 && (vnamea == ' ' || vnamea == unnamed)) {
 		volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
 
 	}
@@ -969,7 +962,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		wname = w[a].getElementsByTagName("h2n");
-		wnamea = wname[0].childNodes[0].nodeValue;
+		if (wname[0].childNodes[0]) wnamea = wname[0].childNodes[0].nodeValue; else wnamea = unnamed;
 		countw = wnamea;
 		countw = countw.replace(/aa/g, 'a');
 		countw = countw.replace(/ii/g, 'i');
@@ -991,7 +984,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == vagga) vaggalist += ' selected';
 		vaggalist += '>' + translit(wnamea) + '</option>'
 	}
-	if (ap == 1 && wnamea == ' ') {
+	if (ap == 1 && (wnamea == ' ' || wnamea == unnamed)) {
 		vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
 
 	}
@@ -1009,7 +1002,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		xname = x[a].getElementsByTagName("h3n");
-		xnamea = xname[0].childNodes[0].nodeValue;
+		if (xname[0].childNodes[0]) xnamea = xname[0].childNodes[0].nodeValue; else xnamea = unnamed;
 		countx = xnamea;
 		countx = countx.replace(/aa/g, 'a');
 		countx = countx.replace(/ii/g, 'i');
@@ -1032,7 +1025,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == sutta) suttalist += ' selected';
 		suttalist += '>' + translit(xnamea) + '</option>'
 	}
-	if (ap == 1 && xnamea == ' ') {
+	if (ap == 1 && (xnamea == ' ' || xnamea == unnamed)) {
 		suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
 
 	}
@@ -1048,7 +1041,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		bp = d + 1;
 		yname = y[d].getElementsByTagName("h4n");
-		ynamea = yname[0].childNodes[0].nodeValue;
+		if (yname[0].childNodes[0]) ynamea = yname[0].childNodes[0].nodeValue; else ynamea = unnamed;
 		
 			county = ynamea;
 			county = county.replace(/aa/g, 'a');
@@ -1073,7 +1066,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (d == section) sectionlist += ' selected';
 		sectionlist += '>' + translit(ynamea) + '</option>';
 	}
-	if (bp == 1 && ynamea == ' ') {
+	if (bp == 1 && (ynamea == ' ' || ynamea == unnamed)) {
 		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
 
 	}

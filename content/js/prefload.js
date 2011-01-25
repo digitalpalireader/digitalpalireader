@@ -12,7 +12,7 @@ sPrefs.push("DictH"); sPrefVals.push(220);
 sPrefs.push("ControlW"); sPrefVals.push(254);
 
 cPrefs.push("coltext"); cPrefVals.push("#111");
-cPrefs.push("colsel"); cPrefVals.push("#FF0");
+cPrefs.push("colsel"); cPrefVals.push("#550");
 
 cPrefs.push("coldppn"); cPrefVals.push("#0B0");
 cPrefs.push("colped"); cPrefVals.push("#C40");

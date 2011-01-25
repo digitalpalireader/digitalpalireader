@@ -4,7 +4,7 @@ pref("extensions.digitalpalireader.sizes.DictH", 220);
 pref("extensions.digitalpalireader.sizes.ControlW", 254);
 
 pref("extensions.digitalpalireader.colors.coltext", "#111");
-pref("extensions.digitalpalireader.colors.colsel", "#FF0");
+pref("extensions.digitalpalireader.colors.colsel", "#550");
 
 pref("extensions.digitalpalireader.colors.coldppn", "#0B0");
 pref("extensions.digitalpalireader.colors.colped", "#C40");

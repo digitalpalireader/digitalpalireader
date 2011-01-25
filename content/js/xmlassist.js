@@ -295,7 +295,7 @@ nikvoladi['kt'] = '<select size="7" name="book"></select>';
 nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Para</option><option value="2">Paci</option><option value="3">BhV</option><option value="4">MV</option><option value="5">CV</option><option value="6">Pari</option></select>';
 nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option></select>';
 nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
-nikvoladi['yt'] = '<select size="7" name="book"></select>';
+nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
 nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
 nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
 nikvoladi['ga'] = '<select size="7" name="book"></select>';
@@ -417,7 +417,7 @@ function createTablen()
 		if (sutta < document.form.sutta.options.length)
 		{
 			document.form.sutta.selectedIndex++;
-			gettitles(1);					
+			gettitles(3);					
 		}
 		else {
 			var vagga = document.form.vagga.selectedIndex + 1;
@@ -467,7 +467,7 @@ function createTablep()
 		if (sutta >= 0)
 		{
 			document.form.sutta.selectedIndex--;
-			gettitles(1,1);	
+			gettitles(3,1);	
 			document.form.section.selectedIndex = document.form.section.options.length - 1;
 			importXML();			
 		}
@@ -477,7 +477,7 @@ function createTablep()
 				document.form.vagga.selectedIndex--;
 				gettitles(4,1);	
 				document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-				gettitles(1,1);	
+				gettitles(3,1);	
 				document.form.section.selectedIndex = document.form.section.options.length - 1;
 				importXML();
 			}
@@ -491,7 +491,7 @@ function createTablep()
 					document.form.vagga.selectedIndex = document.form.vagga.options.length - 1;
 					gettitles(4,1);	
 					document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-					gettitles(1,1);	
+					gettitles(3,1);	
 					document.form.section.selectedIndex = document.form.section.options.length - 1;
 					importXML();
 
@@ -507,7 +507,7 @@ function createTablep()
 						document.form.vagga.selectedIndex = document.form.vagga.options.length - 1;
 						gettitles(4,1);	
 						document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-						gettitles(1,1);	
+						gettitles(3,1);	
 						document.form.section.selectedIndex = document.form.section.options.length - 1;
 						importXML();
 					}
@@ -1162,7 +1162,7 @@ function xmlrefer()
 }
 
 function limitt() {
-	if (document.form.nik.selectedIndex > 4) { return true; }
+	if (document.form.nik.selectedIndex == 5 || document.form.nik.selectedIndex > 6) { return true; }
 	else { return false };
 }
 
