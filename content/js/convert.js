@@ -81,14 +81,14 @@ function changeit(what,which)
 	if (what == 'u')
 	{
 		
-		if (which == 1 && document.convertor.R2[1].checked) document.convertor.R2[2].checked = true;
-		else if (which == 2 && document.convertor.R1[1].checked) document.convertor.R1[2].checked = true;
+		if (which == 1 && document.convertor.R2[0].checked) document.convertor.R2[1].checked = true;
+		else if (which == 2 && document.convertor.R1[0].checked) document.convertor.R1[1].checked = true;
 	}
 	else if (what == 'v')
 	{
 		
-		if (which == 1 && document.convertor.R2[2].checked) document.convertor.R2[1].checked = true;
-		else if (which == 2 && document.convertor.R1[2].checked) document.convertor.R1[1].checked = true;
+		if (which == 1 && document.convertor.R2[1].checked) document.convertor.R2[0].checked = true;
+		else if (which == 2 && document.convertor.R1[1].checked) document.convertor.R1[0].checked = true;
 	}
 	convert();
 }

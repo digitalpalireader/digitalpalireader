@@ -200,10 +200,10 @@ function gettitles(altget,stop,prev,ssect)
 	var xnamea = 0;
 	var ynamea = 0;
 	
-	 var meta = document.form.meta.selectedIndex;
-	 var volume = document.form.volume.selectedIndex;
-	 var vagga = document.form.vagga.selectedIndex;
-	 var sutta = document.form.sutta.selectedIndex;
+	var meta = (getsutta > 0  ? document.form.meta.selectedIndex : 0);
+	var volume = (getsutta > 1 ? document.form.volume.selectedIndex : 0);
+	var vagga = (getsutta > 2 ? document.form.vagga.selectedIndex : 0);
+	var sutta = (getsutta > 3 ? document.form.sutta.selectedIndex : 0);
 
 	var metalist = '';
 	var volumelist = '';
@@ -326,11 +326,9 @@ function gettitles(altget,stop,prev,ssect)
 		}
 		if (v.length < 2 && (vnamea == ' ' || vnamea == unnamed)) {
 			volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
-
 		}
 		else {
 			volumelist = '<select size="1" name="volume" onChange="gettitles(5)">' + volumelist;
-
 		}	
 		volumelist += '</select>'
 		document.getElementById('volume').innerHTML=volumelist;
@@ -405,12 +403,9 @@ function gettitles(altget,stop,prev,ssect)
 		}
 		if (x.length < 2 && (xnamea == ' ' || xnamea == unnamed)) {
 			suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
-
 		}
 		else {
 			suttalist = '<select size="1" name="sutta" onChange="gettitles(3)">' + suttalist;
-
-
 		}
 		suttalist += '</select>'
 		document.getElementById('sutta').innerHTML=suttalist;
@@ -446,12 +441,9 @@ function gettitles(altget,stop,prev,ssect)
 	}
 	if (y.length < 2 && (ynamea == ' ' || ynamea == unnamed)) {
 		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
-
 	}
 	else {
 		sectionlist = '<select size="1" name="section" onChange="importXML()">' + sectionlist;
-
-
 	}
 
 	sectionlist += '</select>'
@@ -911,7 +903,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	}
 	else {
-		metalist = '<select size="1" name="meta" onChange="gettitles(5)">' + metalist;
+		metalist = '<select size="1" name="meta" onChange="gettitles(6)">' + metalist;
 
 	}	
 	metalist += '</select>'
@@ -1030,7 +1022,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	}
 	else {
-		suttalist = '<select size="1" name="sutta" onChange="gettitles(1)">' + suttalist;
+		suttalist = '<select size="1" name="sutta" onChange="gettitles(3)">' + suttalist;
 	}
 	suttalist += '</select>'
 	document.getElementById('sutta').innerHTML=suttalist;
