@@ -151,7 +151,7 @@ function importXML(manxml,labelsearchtemp)
 			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
 		}
 	}
-
+	
 	preout(theData);
 	if (document.getElementById('manrem').value < 0)
 	{

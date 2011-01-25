@@ -30,7 +30,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	
 	document.getElementById('mafb').innerHTML += '<div id="convi">'+replaceunistandard(inarray[1])+'</div><hr />' + finout; // convi contains text for convertor
     
-	document.getElementById('mafb').scrollTop = 0; 
+	document.getElementById('maf').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
 	moves(0);
 	
