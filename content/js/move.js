@@ -104,7 +104,7 @@ function moveframey(a) //dict, conv, or scratch
 	document.getElementById(a).style.display="block";
 }
 
-cpout = 1;
+var cpout = 1;
 
 
 function moveframec() // open close control panel

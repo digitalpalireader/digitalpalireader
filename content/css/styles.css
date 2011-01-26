@@ -444,3 +444,110 @@ height:30px;
 .color0        { BACKGROUND-COLOR: yellow }
 .color1        { BACKGROUND-COLOR: aqua }
 .color2        { BACKGROUND-COLOR: #7FFF00 }
+
+
+/* for quiz */
+
+.quizb {
+position:absolute;
+margin-right:auto;
+margin-left:auto;
+top:0;
+padding: 2px;
+border:1px solid grey;
+background-color: #d9d4cc;
+}
+	
+p.txt {
+	margin: auto;
+	font-size: 22pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: bold;
+	text-align: center;
+	}
+		
+p.cite  {
+	padding-bottom: 12pt;
+	margin: auto;
+	font-size: 22pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-style: italic;
+	text-align: center;
+	}
+		
+table.dec {  margin: auto;
+			margin-top: 14pt;
+			border-collapse: collapse;
+			
+			}
+			
+td.dec {
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: normal;
+	text-align: right;
+	padding-left: 4pt;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+		border-right:none;
+	}
+			
+td.decr {
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: normal;
+	text-align: right;
+	padding-left: 4pt;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+		border-left:none;
+	}
+	
+th.dec {
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: bold;
+	text-align: center;
+	background-color: #9F9F9F;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+	
+	}
+	
+th.toprow {
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: bold;
+	text-align: center;
+	background-color: #9F9F9F;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+	}
+			
+table.decMenu {
+}
+				
+
+
+button.control {background-color: #FFE7B9;
+						font-size: 10pt;
+				 font-family: Gentium;
+				 font-weight: bold;
+				 border-style: inset;
+				
+				 }
+
+button.control:focus {background-color: #B5FF3F ;
+							border-style: outset;
+						}
+						
+button.control:focus::-moz-focus-inner { border:none}
+								
+.controls, #corrects {
+text-align:center;
+}
+

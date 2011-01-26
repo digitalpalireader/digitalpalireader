@@ -1904,13 +1904,13 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
 											postpara += ' ';
 										}
-										tempexword.push ((beforem+gotstring+aftermex).replace(/[‘’“”]/g,''));
+										tempexword.push((beforem+gotstring+aftermex).replace(/[‘’“”]/g,''));
 									}
 
 									// word add
@@ -1926,12 +1926,11 @@ function createTables(xmlDoc)
 										}
 									}
 									
-									texnodups.length = 0;
+									texnodups = [];
 									for(var i=0; i<l; i++) {
 										for(var j=i+1; j<l; j++) {
-											if (tempexword[i] === tempexword[j])
-												j = ++i;
-											}
+											if (tempexword[i] === tempexword[j]) { j = ++i; }
+										}
 										texnodups.push(tempexword[i]);
 									}
 									tagtitle = 'q' + texnodups.join('q') + 'q';
