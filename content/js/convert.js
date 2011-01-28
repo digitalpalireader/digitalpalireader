@@ -15,7 +15,7 @@ function getSelected() {
 
 function convert()
 {
-	var spell = document.convertor.input.value;
+	var spell = document.convertor.inputc.value;
 
 	for (Count = 0; Count < 4; Count++) 
 	{
@@ -35,20 +35,16 @@ function convert()
 		}
 		else if (Counta == 2) // Unicode to Thai
 		{
-
-            spell = replacevelstandard(spell);
 			spell = thaiconv(spell);
 		}
 		else if (Counta == 3) // Unicode to Deva
 		{
 
-            spell = replacevelstandard(spell);
 			spell = todeva(spell);
 		}
 		else if (Counta == 4) // Unicode to Myan
 		{
 
-            spell = replacevelstandard(spell);
 			spell = toMyanmar(spell);
 		}
 	}
@@ -60,18 +56,18 @@ function convert()
 		}
 		else if (Counta == 2) // Velthius to Thai
 		{
-			spell = thaiconv(spell);
+			spell = thaiconv(replaceunistandard(spell));
 		}			
 		else if (Counta == 3) // Velthius to Deva
 		{
-			spell = todeva(spell);
+			spell = todeva(replaceunistandard(spell));
 		}			
 		else if (Counta == 4) // Velthius to Myan
 		{
-			spell = toMyanmar(spell);
+			spell = toMyanmar(replaceunistandard(spell));
 		}			
 	}
-	document.getElementById('output').value = spell;	
+	document.convertor.outputc.value = spell;	
 }
 
 
@@ -94,8 +90,8 @@ function changeit(what,which)
 }
 function clearboth()
 {
-	document.convertor.input.value = '';
-	document.convertor.output.value = '';
+	document.convertor.inputc.value = '';
+	document.convertor.outputc.value = '';
 }
 
 function sendtoconvert(data)
@@ -113,7 +109,7 @@ function sendtoconvert(data)
 	moveframey('cof');
 	document.convertor.R1[1].checked = true;
 	document.convertor.R2[2].checked = true;
-	document.convertor.output.value = '';
-	document.convertor.input.value = data;
+	document.convertor.outputc.value = '';
+	document.convertor.inputc.value = data;
 	convert();
 }

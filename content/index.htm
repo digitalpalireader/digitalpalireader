@@ -275,8 +275,8 @@
 			</div>
 			<div id="lt"></div>
 			<div id="lb"></div>
-			<form name="convertor">
 			<div id="cof">
+				<form name="convertor">
 					<table align="center">
 						<tr>
 							<td align="center">Input</td>
@@ -288,7 +288,7 @@
 						</tr>
 						<tr>
 							<td align=left id="inputtd">
-								<textarea id="input" rows="8" cols="35" onkeyup="convert()" style="font-family: Arial"></textarea>
+								<textarea id="inputc" rows="8" cols="35" onkeyup="convert()" style="font-family: Arial"></textarea>
 							</td>
 							<td>	
 								<table id="table1">
@@ -324,13 +324,13 @@
 									</tr>
 								</table>
 							</td>
-							<td align=right><textarea id="output" rows="8" cols="35" style="font-family: Arial"></textarea>
+							<td align=right><textarea name="outputc" rows="8" cols="35" style="font-family: Arial"></textarea>
 							</td>
 						</tr>
 					</table>
 					<p align="center">Use the "s" key to send a selection or entire section to this convertor.</p>
+				</form>
 			</div>
-			</form>
 			<div id="scf" align=center>
 				<table><tr><td colspan=2><textarea id="pad" rows="9" cols="110"></textarea></td></tr></table>
 				<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">

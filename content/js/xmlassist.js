@@ -119,7 +119,7 @@ function formatuniout(data,which) { // prepare without links
 				b = b + 4;
 			}				
 		}
-		else if (wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
+		else if (!which && wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
 			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
 			unioutb = (translit(replaceunistandard(addpre)) + ' - <' + wordbyword[b].substring(1,3) + '>' + translit(uniouta[b+1]) + '<xc> - ' + translit(uniouta[b+4]));
 
@@ -135,7 +135,7 @@ function formatuniout(data,which) { // prepare without links
 			finout += '<p id="para'+paran+'">' + ' ';
             paran++;
 		}		
-		else if (wordbyword[b].charAt(0) == '<')		{
+		else if (!which && wordbyword[b].charAt(0) == '<')		{
 			finout += wordbyword[b];
 		}
 		else if (wordbyword[b].charAt(0) == 'z') // pesky page numbers
@@ -167,15 +167,15 @@ function formatuniout(data,which) { // prepare without links
 			convout += wordbyword[b] + ' ';
 			unioutb = uniouta[b];
 			unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0 && unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
-			finout += unioutb + ' ';
+			unioutb = translit(unioutb);
+			finout += unioutb + '  ';
 		}
 		else
 		{
 			convout += wordbyword[b] + ' ';
 			unioutb = uniouta[b];
 			//unioutb = unioutb.replace(/0/g, '.');
-			if (script != 0 && unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
+			if (unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
 			finout += '<a id="' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
 		}
 	}

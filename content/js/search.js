@@ -561,7 +561,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push (beforem+perstring+aftermex);								
 										}
 									
@@ -667,7 +667,7 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
@@ -794,7 +794,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push (beforem+perstring+aftermex);								
 										}
 									
@@ -902,7 +902,7 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
@@ -1032,7 +1032,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push (beforem+perstring+aftermex);								
 										}
 									
@@ -1141,7 +1141,7 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
@@ -1273,7 +1273,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push (beforem+perstring+aftermex);								
 										}
 									
@@ -1383,7 +1383,7 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
@@ -1514,7 +1514,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push (beforem+perstring+aftermex);								
 										}
 									
@@ -1625,7 +1625,7 @@ function createTables(xmlDoc)
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 
 											aftermex = ''; 
@@ -1773,7 +1773,7 @@ function createTables(xmlDoc)
 												spaceb = beforem.search(' ');
 											}
 											spacea = afterm.search(' ');
-											aftermex = afterm.substring(0,spacea);
+											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 											tempexword[d].push ((beforem+perstring+aftermex).replace(/[‘’“”]/g,''));								
 										}
 									
@@ -2104,20 +2104,6 @@ function findString (strx,nummatch) {
  var str = replaceunistandard(strx)
  if (parseInt(navigator.appVersion)<4) return;
  var strFound;
- if (navigator.appName=="Netscape") {
-
-  // NAVIGATOR-SPECIFIC CODE
-
-	for (var xz = 0; xz < nummatch; xz ++)
-	{
-		strFound=find(str);
-	}
-	
-  if (!strFound) {
-   strFound=find(str,0,1)
-   while (find(str,0,1)) continue
-  }
- }
  if (navigator.appName.indexOf("Microsoft")!=-1) {
 
   // EXPLORER-SPECIFIC CODE
@@ -2131,6 +2117,20 @@ function findString (strx,nummatch) {
    TRange=self.document.body.createTextRange()
    strFound=TRange.findText(str)
    if (strFound) TRange.select()
+  }
+ }
+ else {
+
+  // NAVIGATOR-SPECIFIC CODE
+
+	for (var xz = 0; xz < nummatch; xz ++)
+	{
+		strFound=find(str);
+	}
+	
+  if (!strFound) {
+   strFound=find(str,0,1)
+   while (find(str,0,1)) continue
   }
  }
  //if (!strFound) alert ("String '"+str+"' not found!")
