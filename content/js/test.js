@@ -1,13 +1,14 @@
 function newquiz() {
-	document.getElementById('mafb').innerHTML = '<div class="quizb"><b>Pali Vocab Quiz</b> <input type="button" onclick="newDquiz()" value="Pali Declension Quiz"></div><input type="hidden" id="qno" value="1"><input type="hidden" id="ran" value="0"><input type="hidden" id="wan" value="0"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p><p><i id="checka">Choose the right answer below:</i></p><p><font id="answers"></font></p><hr><p><table width=100%><tr><td>Right Answers: <b id="ra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="wa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b id="pa"></b></td></tr></table><p>Total Right Answers: <b id="rights"></b> <input type="button" class="btn" value="clear" onclick="clearrights()">';
-	document.getElementById('ra').innerHTML = '0';
-	document.getElementById('wa').innerHTML = '0';
+	moveframex(1);
+	document.getElementById('mafb').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'" class="quizb"><button disabled>Pali Vocab Quiz</button> <button onclick="newDquiz()">Pali Declension Quiz</button></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr></table><p>Total Right Answers: <b id="Qrights"></b> <input type="button" class="btn" value="clear" onclick="clearrights()"></div>';
+	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
+	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
 	quizme();
 
 }
 
 function newDquiz() {
-document.getElementById('mafb').innerHTML = '<div class="quizb"><input type="button" onclick="newquiz()" value="Pali Vocab Quiz"> <b>Pali Declension Quiz</b></div><input type="hidden" id="whichS"><p class="txt" id="whichT">Masculine Nouns with "-A" Stem</p><p class="cite" id="whichC">dhamma; noun masc.; "the teaching"</p><table class="dec"   id = "declension"><tr><th class="dec"></th><th colspan=2 class = "toprow">SINGULAR</th><th colspan=2 class = "toprow">PLURAL</th></tr><tr><th class="dec">NOM</th><td class="dec"><span id="nomSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="nomPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomPlt" onfocus="this.value=this.value;" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">ACC</th><td class="dec"><span id="accSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="accSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="accPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="accPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">INST</th><td class="dec"><span id="instSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="instSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="instPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="instPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">DAT</th><td class="dec"><span id="datSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="datSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="datPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="datPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">ABL</th><td class="dec"><span id="ablSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="ablPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">GEN</th><td class="dec"><span id="genSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="genSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="genPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="genPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">LOC</th><td class="dec"><span id="locSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="locSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="locPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="locPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">VOC</th><td class="dec"><span id="vocSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="vocPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr></table><p class="controls"><button title="Check your answers (1)" onclick="checkAnswers()" class="control" id="checkAns" type="button">Check</button><button title="Clear table (2)" onclick="clearAnswers()" class="control" id="clear" type="button">Clear</button><button title="Show correct answers (3)" onclick="showAnswers()" class="control" id="show" type="button">Show</button><button title="Get a new declension (4)" onclick="resetTable()" class="control" id="new" type="button">New</button></p><hr /><h2 align=center>Correct Answers:</h2><p id="corrects"></p></body></html>';
+document.getElementById('mafb').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'" class="quizb"><button onclick="newquiz()">Pali Vocab Quiz</button> <button disabled>Pali Declension Quiz</button></div><input type="hidden" id="QwhichS"><p class="txt" id="QwhichT">Masculine Nouns with "-A" Stem</p><p class="cite" id="QwhichC">dhamma; noun masc.; "the teaching"</p><table class="dec" id="Qdeclension"><tr><th class="dec"></th><th colspan=2 class = "toprow">SINGULAR</th><th colspan=2 class = "toprow">PLURAL</th></tr><tr><th class="dec">NOM</th><td class="dec"><span id="nomSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="nomPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomPlt" onfocus="this.value=this.value;" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">ACC</th><td class="dec"><span id="accSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="accSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="accPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="accPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">INST</th><td class="dec"><span id="instSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="instSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="instPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="instPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">DAT</th><td class="dec"><span id="datSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="datSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="datPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="datPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">ABL</th><td class="dec"><span id="ablSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="ablPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">GEN</th><td class="dec"><span id="genSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="genSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="genPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="genPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">LOC</th><td class="dec"><span id="locSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="locSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="locPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="locPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr><tr><th class="dec">VOC</th><td class="dec"><span id="vocSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocSint" onkeyup="this.value=replaceunistandard(this.value);"></td><td class="dec"><span id="vocPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocPlt" onkeyup="this.value=replaceunistandard(this.value);"></td></tr></table><p class="controls"><button title="Check your answers (1)" onclick="checkAnswers()" class="control" id="QcheckAns" type="button">Check</button><button title="Clear table (2)" onclick="clearAnswers()" class="control" id="Qclear" type="button">Clear</button><button title="Show correct answers (3)" onclick="showAnswers()" class="control" id="Qshow" type="button">Show</button><button title="Get a new declension (4)" onclick="resetTable()" class="control" id="Qnew" type="button">New</button></p><hr /><h2 align=center>Correct Answers:</h2><p id="Qcorrects"></p>';
 resetTable();
 }
 
@@ -18,7 +19,7 @@ function quizme() {
 	if(rights) {
 		rights=rights.split(',');
 		if (rights.length == 1 && rights[0] == "") rights = [];
-		document.getElementById('rights').innerHTML = rights.length;
+		document.getElementById('Qrights').innerHTML = rights.length;
 	}
 	else { rights = []; }
     
@@ -58,11 +59,11 @@ function quizme() {
 	if (yt[quiza[quizrandomright]].split('#').length > 1) formatanswerout += ' (' + yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[1].replace(/,/g, '.') + ')';
 	for (qtmp = 0; qtmp < 4; qtmp++) {
 		if (qtmp == quizrightorder) {
-			quizanswersout += '<p><input type="button" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="&gt"> '+formatanswer+'</p>';
+			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="'+(qtmp+1)+'"> '+formatanswer+'</p>';
 		}
 		else {
 			formatanswerwrong = yt[quiza[quizeachwrong[qtmp2]]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\'');
-			quizanswersout += '<p><input type="button" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="&gt"> '+formatanswerwrong+'</p>';
+			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="'+(qtmp+1)+'"> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}
 	}
@@ -72,8 +73,8 @@ function quizme() {
 function answerquiz(right,answer,numb) {
 	document.getElementById('qn').innerHTML = ++document.getElementById('qno').value;
 	if (right == 1) {
-		document.getElementById('checka').innerHTML = '<font color=green>Right! &nbsp;' + answer + '</font>';
-		document.getElementById('ra').innerHTML = ++document.getElementById('ran').value;
+		document.getElementById('Qchecka').innerHTML = '<font color=green>Right! &nbsp;' + answer + '</font>';
+		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
 		
 		// add right to list of rights
         var rightfile = readFile('DPTEST');
@@ -86,36 +87,36 @@ function answerquiz(right,answer,numb) {
         }
 	}	
 	else {
-		document.getElementById('checka').innerHTML ='<font color=red>Wrong! &nbsp;' + answer + '</font>';
-		document.getElementById('wa').innerHTML = ++document.getElementById('wan').value;
+		document.getElementById('Qchecka').innerHTML ='<font color=red>Wrong! &nbsp;' + answer + '</font>';
+		document.getElementById('Qwa').innerHTML = '&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;';
 	}
 
-	var percentr = Number(document.getElementById('ran').value) / (Number(document.getElementById('ran').value) + Number(document.getElementById('wan').value))*100;
+	var percentr = Number(document.getElementById('Qran').value) / (Number(document.getElementById('Qran').value) + Number(document.getElementById('Qwan').value))*100;
 
 	var colorpc = 0;
 	if (percentr <= 50) {
 		colorpc = Math.round(percentr/50*255);
 		colorpc = colorpc.toString(16).toUpperCase();
 		if (colorpc.length == 1) colorpc = '0'+colorpc;
-		document.getElementById('pa').setAttribute('style','color:#'+ 'FF' + colorpc + '00');
+		document.getElementById('Qpa').style.color = '#'+ 'FF' + colorpc + '00';
 	}
 	else {
 		colorpc = Math.round((percentr - 50)/50*255)*(-1)+255;
 		colorpc = colorpc.toString(16).toUpperCase();
 		if (colorpc.length == 1) colorpc = '0'+colorpc;
-		document.getElementById('pa').setAttribute('style','color:#' + colorpc +'FF' + '00');
+		document.getElementById('Qpa').style.color = '#' + colorpc +'FF' + '00';
 	}
-	document.getElementById('pa').innerHTML = Math.round(percentr) + '%';
+	document.getElementById('Qpa').innerHTML = '&nbsp;'+Math.round(percentr) + '%&nbsp;';
 	quizme();
 }
 
 function clearrights() {
-    document.getElementById('ra').innerHTML = 0;
-    document.getElementById('ran').value = 0;
-    document.getElementById('wa').innerHTML = 0;
-    document.getElementById('wan').value = 0;
-    document.getElementById('pa').innerHTML = "";
-	document.getElementById('rights').innerHTML = 0;
+    document.getElementById('Qra').innerHTML = 0;
+    document.getElementById('Qran').value = 0;
+    document.getElementById('Qwa').innerHTML = 0;
+    document.getElementById('Qwan').value = 0;
+    document.getElementById('Qpa').innerHTML = "";
+	document.getElementById('Qrights').innerHTML = 0;
     
 	writeFile("DPTEST","","UTF-8");
 }
@@ -441,14 +442,14 @@ function resetTable()  {
 		alert('done'); 
 		rights = [];
 	}
-	if (document.getElementById('show').innerHTML == 'Hide') hideAnswers();
+	if (document.getElementById('Qshow').innerHTML == 'Hide') hideAnswers();
 	var rn=Math.floor(Math.random()*12);
 	while(Drights[rn] == 1) {
 		rn=Math.floor(Math.random()*12);
 	}
-	document.getElementById('whichS').value = rn
-	document.getElementById('whichT').innerHTML = allT[rn];
-	document.getElementById('whichC').innerHTML = allC[rn];
+	document.getElementById('QwhichS').value = rn
+	document.getElementById('QwhichT').innerHTML = allT[rn];
+	document.getElementById('QwhichC').innerHTML = allC[rn];
 	var stem = stems[rn];
 	for (i in decls) {
 		document.getElementById(decls[i]+'s').innerHTML = rstems[stem];
@@ -465,7 +466,7 @@ function checkAnswers() {
 	var wrong = 0;
 	for (i in decls) {
 		var right = 0;
-		var rn = document.getElementById('whichS').value;
+		var rn = document.getElementById('QwhichS').value;
 		var stem = stems[rn];
 		var thisa = document.getElementById(decls[i]+'t');
 		for (j in correctDec[stem][decls[i]]) {
@@ -492,15 +493,15 @@ function checkAnswers() {
 }
 
 function showRights() {
-	document.getElementById('corrects').innerHTML = '';
+	document.getElementById('Qcorrects').innerHTML = '';
 	for (i in Drights) {
-		document.getElementById('corrects').innerHTML += stems[i]+'-<br />';
+		document.getElementById('Qcorrects').innerHTML += stems[i]+'-<br />';
 	}
-	if (document.getElementById('corrects').innerHTML != '') document.getElementById('corrects').innerHTML += '<br /><button title="Reset right answers" onclick="rights = []; showRights();" class="control" id="resetRights" type="button">Reset</button>';
+	if (document.getElementById('Qcorrects').innerHTML != '') document.getElementById('Qcorrects').innerHTML += '<br /><button title="Reset right answers" onclick="rights = []; showRights();" class="control" id="resetRights" type="button">Reset</button>';
 }
 
 function clearAnswers() {
-	var rn = document.getElementById('whichS').value;
+	var rn = document.getElementById('QwhichS').value;
 	var stem = stems[rn];
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').value = '';
@@ -510,9 +511,9 @@ function clearAnswers() {
 
 function showAnswers() {
 	
-	document.getElementById('show').innerHTML = 'Hide';
-	document.getElementById('show').onclick = function () { hideAnswers() };
-	var rn = document.getElementById('whichS').value;
+	document.getElementById('Qshow').innerHTML = 'Hide';
+	document.getElementById('Qshow').onclick = function () { hideAnswers() };
+	var rn = document.getElementById('QwhichS').value;
 	var stem = stems[rn];
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').style.backgroundColor = '';
@@ -521,8 +522,8 @@ function showAnswers() {
 	}
 }
 function hideAnswers() {
-	document.getElementById('show').innerHTML = 'Show';
-	document.getElementById('show').onclick = function() { showAnswers() };
+	document.getElementById('Qshow').innerHTML = 'Show';
+	document.getElementById('Qshow').onclick = function() { showAnswers() };
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').style.backgroundColor = 'white';
 		document.getElementById(decls[i]+'t').style.display = 'block';

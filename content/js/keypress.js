@@ -14,9 +14,29 @@ document.onkeydown=function(e){
 
 function keyPressed(e) {
 	if(document.activeElement.type || isCtrl == true || isAlt == true) { return; }
-		if (e.charCode == 49) { moveframex(1); return; } // 1
-		if (e.charCode == 50) { moveframex(2); return; } // 2
-		if (e.charCode == 51) { moveframex(3); return; } // 3
+		if (e.charCode == 49) { // 1
+			if(document.getElementById('Qa1')) { f = document.getElementById('Qa1').onclick; f(); }
+			else if(document.getElementById('QcheckAns')) { f = document.getElementById('QcheckAns').onclick; f(); }
+			else moveframex(1); 
+			return; 
+		} 
+		if (e.charCode == 50) { // 2
+			if(document.getElementById('Qa2')) { f = document.getElementById('Qa2').onclick; f(); }
+			else if(document.getElementById('Qclear')) { f = document.getElementById('Qclear').onclick; f(); }
+			else moveframex(2); 
+			return; 
+		} 
+		if (e.charCode == 51) { // 3
+			if(document.getElementById('Qa3')) { f = document.getElementById('Qa3').onclick; f(); }
+			else if(document.getElementById('Qshow')) { f = document.getElementById('Qshow').onclick; f(); }
+			else moveframex(3); 
+			return; 
+		} 
+		if (e.charCode == 52) { // 4
+			if(document.getElementById('Qa4')) { f = document.getElementById('Qa4').onclick; f(); }
+			else if(document.getElementById('Qnew')) { f = document.getElementById('Qnew').onclick; f(); }
+			return; 
+		} 
 
 		if (e.charCode == 120) { moveframec(); return; } // x
 
