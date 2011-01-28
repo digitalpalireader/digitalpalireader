@@ -551,7 +551,7 @@ function DPPNXML(file,which)
 	}		
 	
 	// output
-	attlist
+
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data.replace(/href/g, 'style="color:blue" href');
     document.getElementById('cdif').scrollTop=0;
