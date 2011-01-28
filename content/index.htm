@@ -194,15 +194,16 @@
 								</table>
 						<hr />
 								<b>Dictionary</b>&nbsp;
-								<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; EPD = English-Pali Dictionary;  DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; ATT = Atthakatha Lookup" name="sped">
+								<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; EPD = English-Pali Dictionary; ATT = Aṭṭhakathā Terms; ATT = Ṭīka Terms" name="sped" onchange="dictLoad()">
 									<option selected>DPR</option>
 									<option>PED</option>
-									<option>CEPD</option>
 									<option>DPPN</option>
 									<option>CPED</option>
-									<option>ATTH</option>
+									<option>CEPD</option>
+									<option>ATT</option>
+									<option>TIK</option>
 								</select> 
-								<br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; createTableman(1)};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="createTableman(1)">
+								<br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
 
 				<!--<td>
 						<div align=center id="rright">
@@ -332,8 +333,10 @@
 				</form>
 			</div>
 			<div id="scf" align=center>
-				<table><tr><td colspan=2><textarea id="pad" rows="9" cols="110"></textarea></td></tr></table>
+				<form name="textpad">
+				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
 				<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">
+				</form>
 			</div>
 		</div>
 		<div id="anf" align=right>
@@ -380,9 +383,7 @@
 	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/pedfunc.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/main_data.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>

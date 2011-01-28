@@ -1,11 +1,11 @@
 /* static - don't move these */
 
-body, p, table, div, a, select, input, textarea {
+body, p, table, div, a, font, select, input, textarea {
 	font-family: Sans;
 	color: #111;
 }
 
-body, p, table, div, a {
+body, p, table, div, a, font {
 	font-size: 16px;
 }
 

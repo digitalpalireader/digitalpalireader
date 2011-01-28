@@ -139,6 +139,19 @@ filearrayt.push("a8");
 filearrayt.push("a9");
 filearrayt.push("a10");
 filearrayt.push("a11");
+filearrayt.push("v1");
+filearrayt.push("v2");
+filearrayt.push("v3");
+filearrayt.push("v4");
+filearrayt.push("v5");
+filearrayt.push("v6");
+filearrayt.push("y1");
+filearrayt.push("y2");
+filearrayt.push("y3");
+filearrayt.push("y4");
+filearrayt.push("y5");
+filearrayt.push("y6");
+filearrayt.push("y7");
 
 var nikletter = new Array();
 nikletter[0] = 'd';
@@ -550,7 +563,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<c'+d+'>' + stringra[d] + '<xc>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -623,7 +636,7 @@ function createTables(xmlDoc)
 								
 																
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book + '.' + (sx+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -652,7 +665,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -742,7 +755,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',0,0,0,0,0,\'' + sraout + '\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -783,7 +796,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<c'+d+'>' + stringra[d] + '<xc>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -858,7 +871,7 @@ function createTables(xmlDoc)
 									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4 class="green">' + nikname[nikaya] + ' ' + book;
 									if(u.length>1) finalout += '.' + (sx+1);
 									if(v.length>1) finalout += '.' + (sy+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + '0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + '0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -887,7 +900,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -979,7 +992,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',0,0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1021,7 +1034,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<c'+d+'>' + stringra[d] + '<xc>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1097,7 +1110,7 @@ function createTables(xmlDoc)
 									if(u.length>1) finalout += '.' + (sx+1);
 									if(v.length>1) finalout += '.' + (sy+1);
 									if(w.length>1) finalout += '.' + (sz+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1126,7 +1139,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1219,7 +1232,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',0,0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1339,7 +1352,7 @@ function createTables(xmlDoc)
 									if(v.length>1) finalout += '.' + (sy+1);
 									if(w.length>1) finalout += '.' + (sz+1);
 									if(x.length>1) finalout += '.' + (s+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1368,7 +1381,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1462,7 +1475,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',0,0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1503,7 +1516,7 @@ function createTables(xmlDoc)
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
+											postpara += beforem + '<c'+d+'>' + stringra[d] + '<xc>';
 											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
 											startmatch = texttomatch.search(stringra[d]);
 											
@@ -1581,7 +1594,7 @@ function createTables(xmlDoc)
 									if(w.length>1) finalout += '.' + (sz+1);
 									if(x.length>1) finalout += '.' + (s+1);
 									if(y.length>1) finalout += '.' + (se+1);
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1610,7 +1623,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -1705,7 +1718,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ' Title <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',0,\'\',0)"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1761,9 +1774,9 @@ function createTables(xmlDoc)
 											if (d == 0) extranummatch++;
 											endmatch = startmatch + stringra[d].length;
 											beforem = texttomatch.substring(0,startmatch);
-											afterm = texttomatch.substring(endmatch,texttomatch.length);
-											postpara += beforem + '<b'+(d+1)+'>' + stringra[d] + '</b>';
-											texttomatch = texttomatch.substring(endmatch,texttomatch.length);
+											afterm = texttomatch.substring(endmatch);
+											postpara += beforem + '<c'+d+'>' + stringra[d] + '<xc>';
+											texttomatch = texttomatch.substring(endmatch);
 											startmatch = texttomatch.search(stringra[d]);
 											
 											// get words
@@ -1860,7 +1873,7 @@ function createTables(xmlDoc)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].childNodes[0].nodeValue.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -1889,7 +1902,7 @@ function createTables(xmlDoc)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<b1>' + gotstring + '</b>';
+										postpara += beforem + '<c0>' + gotstring + '<xc>';
 										texttomatch = texttomatch.substring(endmatch);
 										startmatch = texttomatch.search(getstring);
 										
@@ -2012,7 +2025,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + formatuniout(postpara,1) + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -2080,8 +2093,8 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	if (stringra) {
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');
-		importXML('s',stringra);
-		findString (stringra[0],nummatch);
+		importXML(stringra,tmp);
+
 	}
 	else importXML();
 				
@@ -2136,3 +2149,66 @@ function findString (strx,nummatch) {
  //if (!strFound) alert ("String '"+str+"' not found!")
 }
 
+var out = [];
+var dup = [];
+
+function noahs() {
+for (i in filearrayt) {
+
+	var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", 'xml/'+filearrayt[i]+'t.xml', false);
+    xmlhttp.send(null);
+    var xmlDoc = xmlhttp.responseXML.documentElement;
+
+	var u = xmlDoc.getElementsByTagName("h0");
+	
+	var iw = filearrayt[i].charAt(0);
+	var ino = filearrayt[i].charAt(1);	
+
+	for (var sx = 0; sx < u.length; sx++) // per h0
+	{							
+		var v = u[sx].getElementsByTagName("h1");
+			
+		for (var sy = 0; sy < v.length; sy++) // per h1
+		{			
+			var w = v[sy].getElementsByTagName("h2");
+		
+			for (var sz = 0; sz < w.length; sz++) // per h2
+			{
+				var x = w[sz].getElementsByTagName("h3");
+				
+				for (var s = 0; s < x.length; s++) // per h3
+				{
+					var y = x[s].getElementsByTagName("h4");
+					
+					for (var se = 0; se < y.length; se++) // per h4
+					{
+						var z = y[se].getElementsByTagName("p");		
+
+						for (var tmp = 0; tmp < z.length; tmp++) // per paragraph
+						{
+							var text = z[tmp].childNodes[0].nodeValue;
+							var qus = text.search(/\^b\^/);
+							while (qus > -1) {
+								var que = text.search(/\^eb\^/);
+								var term = text.substring(qus+3,que);
+								term = term.replace(/^[^a-zA-Z\.~]*/g,'').replace(/^[^a-zA-Z]  */g,'').replace(/   */g,' ').replace(/[^a-zA-Z]*$/g,'').toLowerCase();
+								if(dup[term]) dup[term] += '#'+iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
+								else dup[term] = iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
+								text = text.substring(que+4);
+								qus = text.search(/\^b\^/);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+for (j in dup) {
+	out.push(j+'#'+dup[j]);
+}
+out=sortaz(out);
+
+document.textpad.pad.value=out.join('\n');
+}

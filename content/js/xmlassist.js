@@ -1,13 +1,13 @@
 
-function preout(data,notrans) // calls text prep, then outputs it to preFrame
+function preout(data,which) // calls text prep, then outputs it to preFrame
 {
 
 	lastcolour = 0; // reset colour changing
 
-	var inarray = preparepali(data);
+	var inarray = preparepali(data,which);
 		
 	var finout = inarray[0];
-	var convout = replaceunistandard(inarray[1]).replace(/  *,/g, ',');
+	var convout = inarray[1].replace(/  *,/g, ',');
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.selectedIndex;
@@ -19,7 +19,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 	
 	var transin;
 	var transout='';
-	if (hier == "m" && !notrans) { 
+	if (hier == "m") { 
 		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
 			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
@@ -27,8 +27,8 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
 	}
-	
-	document.getElementById('mafb').innerHTML += '<div id="convi">'+replaceunistandard(inarray[1])+'</div><hr />' + finout; // convi contains text for convertor
+	document.textpad.pad.value = inarray[1];
+	document.getElementById('mafb').innerHTML += '<div id="convi">'+convout+'</div><hr />' + finout; // convi contains text for convertor
     
 	document.getElementById('maf').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
@@ -38,7 +38,7 @@ function preout(data,notrans) // calls text prep, then outputs it to preFrame
 
 
 function formatuniout(data,which) { // prepare without links
-
+	
 	var convout = '';
 	
 	var indexpage = '';
@@ -53,95 +53,124 @@ function formatuniout(data,which) { // prepare without links
 	var finout = '';
 	var outarray = new Array();
 	
+
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-	data = data.replace(/"ti/g, '” ”ti');
-	data = data.replace(/''ti/g, '” ”ti');
-	data = data.replace(/"nti/g, '” ”nti');
-	data = data.replace(/''nti/g, '” ”nti');
-	data = data.replace(/'nti/g, '’ ’nti');
-	data = data.replace(/’ti/g, '’ ’ti');
+	data = data.replace(/[”"]ti/g, '” ”ti');
+	data = data.replace(/['’]+ti/g, '’ ’ti');
+	data = data.replace(/[”"]nti/g, '” ”nti');
+	data = data.replace(/['’]+nti/g, '’ ’nti');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
 	data = data.replace(/''/g, '”');
 	data = data.replace(/'/g, '’');
-	data = data.replace(/\^b\^/g, ' <b> ');
-	data = data.replace(/\^eb\^/g, ' </b> ');
+	data = data.replace(/\^b\^/g, '<@>');
+	data = data.replace(/\^eb\^/g, '</@>');
+	data = data.replace(/["]+<\/@>nti/g, '”</@> ”nti');
+	data = data.replace(/['’]+<\/@>nti/g, '’</@> ’nti');
+	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
+	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
 	data = data.replace(/\^a\^\"/g, ' z');
 	data = data.replace(/\"\^ea\^/g, 'z ');
 	data = data.replace(/\^a\^/g, ' z');
 	data = data.replace(/\^ea\^/g, 'z ');
-	data = data.replace(/\^v/g, '');
-	data = data.replace(/v\^/g, '');
+	//data = data.replace(/\^v/g, '');
+	//data = data.replace(/v\^/g, '');
 	data = data.replace(/\}/g, '} ');
-	data = data.replace(/ +/g, ' ');
+	data = data.replace(/   */g, ' ');
 	var uniouta = replaceunistandard(data).split(' ');
 	//data = data.replace(/\"/g, '\u00B4');
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
-    
 	//document.getElementById('mafa').innerHTML = data;	
+	var wb;
+	var b = 0;
 
-	for (var b = 0; b < wordbyword.length; b++)
+   //alert(data);
+
+	for (var a = 0; a < wordbyword.length; a++)
 	{
+		wb = wordbyword[a];
 		if (altread == 1) {
-			endpt = wordbyword[b].length-1;
-			if (wordbyword[b].charAt(endpt) == '}') {
-				altplus += wordbyword[b].substring(0,endpt);
+			endpt = wb.length-1;
+			if (wb.charAt(endpt) == '}') {
+				altplus += wb.substring(0,endpt);
 				altread = 0;
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
-			else altplus += wordbyword[b] + ' ';
+			else altplus += wb + ' ';
 		}
-		else if (wordbyword[b].charAt(0) == '{') {
-			if (wordbyword[b].charAt(wordbyword[b].length-1) == '}') { 
-				altplus = wordbyword[b].substring(1,wordbyword[b].length-1) + ' ';
+		else if (wb.charAt(0) == '{') {
+			if (wb.charAt(wb.length-1) == '}') { 
+				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
 			else {
 				altread = 1;
-				altplus = wordbyword[b].substring(1) + ' ';
+				altplus = wb.substring(1) + ' ';
 			}
 		}
-		else if (wordbyword[b+1] == '-') { // connect first part to search
-			if (wordbyword[b+5] == '_') { // single word search embedded on both sides
-				addpre = wordbyword[b];
-				b++;
+
+
+		else if (cp = wb.search('<c') >= 0) {
+			while (cp = wb.search('<c') > 0) {
+				
+				if(cp > 0) {
+					if (which) {  
+						finout += translit(replaceunistandard(wb.substring(0,cp))); b++;
+					}
+					else {
+						finout += '<a id="W' + b + '" href="javascript:postout(\'' + wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '\',' + b + ')">' +  translit(replaceunistandard(wb.substring(0,cp))) + '</a>'; b++;
+					}
+					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
+				}
+								
+				finout += wb.substring(cp,cp+4);
+				
+				wb = wb.substring(cp+4);
+				
+				var cm = wb.search('<xc>');
+
+				if (which) {  
+					finout += translit(replaceunistandard(wb.substring(0,cm))); b++;
+				}
+				else {
+					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb.substring(0,cm))) + '</a><xc>'; b++;
+				}
+
+				convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
+
+				wb = wb.substring(cm+4);
 			}
-			else { // word search embedded left side
-				convout += wordbyword[b] + wordbyword[b+3] + ' ';
-				unioutb = translit(replaceunistandard(wordbyword[b])) + ' - <' + wordbyword[b+2].substring(1,3) + '>' + translit(uniouta[b+3]) + '<xc>';
-				finout += '<a id="' + b + '" href="javascript:postout(&#39;' + wordbyword[b] + wordbyword[b+3] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
-				b = b + 4;
-			}				
-		}
-		else if (!which && wordbyword[b].substring(0,2) == '<c' && wordbyword[b+3] == '_') { // word search embedded right side
-			convout += addpre + wordbyword[b+1] +  wordbyword[b+4] + ' ';
-			unioutb = (translit(replaceunistandard(addpre)) + ' - <' + wordbyword[b].substring(1,3) + '>' + translit(uniouta[b+1]) + '<xc> - ' + translit(uniouta[b+4]));
+			if(wb.length > 0) { // anything left?
+				if (which) {  
+					finout += translit(replaceunistandard(wb)); b++;
+				}
+				else {
+					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb)) + '</a><xc>'; b++;
+				}
 
-			finout += '<a id="' + b + '" href="javascript:postout(&#39;' + addpre + wordbyword[b+1] +  wordbyword[b+4] +  '&#39;,' + b + ')">' +  unioutb + '</a> ';
-			b = b + 4;
-			addpre = '';
+				convout += wb.replace(/<[^>]*>/g, '');
+			}
+			finout += ' ';
+			convout += ' ';
 		}		
 
-		else if (wordbyword[b].substring(0,2) == '<f') {
-			finout += wordbyword[b] + ' ';
+		else if (wb.substring(0,2) == '<f') {
+			finout += wb + ' ';
 		}		
-		else if (wordbyword[b] == '<p>') {
+		else if (wb == '<p>') {
 			finout += '<p id="para'+paran+'">' + ' ';
             paran++;
 		}		
-		else if (!which && wordbyword[b].charAt(0) == '<')		{
-			finout += wordbyword[b];
-		}
-		else if (wordbyword[b].charAt(0) == 'z') // pesky page numbers
+		else if (wb.charAt(0) == 'z') // pesky page numbers
 		{
-			indexpage = wordbyword[b].charAt(1);
-			pageno = wordbyword[b].substring(2,8);
+			indexpage = wb.charAt(1);
+			pageno = wb.substring(2,8);
 			switch (indexpage) {
 				case 'M':
 					pagetitle = 'Myanmar';
@@ -164,46 +193,39 @@ function formatuniout(data,which) { // prepare without links
 		}
 		else if (which)
 		{
-			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b];
+			convout += wb + ' ';
+			unioutb = uniouta[a];
 			unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
 			finout += unioutb + '  ';
 		}
 		else
 		{
-			convout += wordbyword[b] + ' ';
-			unioutb = uniouta[b];
+			convout += wb.replace(/<[^>]*>/g, '') + ' ';
+			unioutb = uniouta[a];
 			//unioutb = unioutb.replace(/0/g, '.');
-			if (unioutb.search(/[<>]/) == -1) unioutb = translit(unioutb);
-			finout += '<a id="' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wordbyword[b].replace(/"n/g,'xn') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			unioutb = translit(unioutb);
+			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			b++;
 		}
 	}
-	finout = finout.replace(/ <b> /g, '<b>');
-	finout = finout.replace(/ <\/b> /g, '</b>');
-	finout = finout.replace(/<b1>/g, '<b style="color:'+colorcfg['colped']+'">');
-	finout = finout.replace(/<b2>/g, '<b style="color:'+colorcfg['coldppn']+'">');
-	finout = finout.replace(/<b3>/g, '<b style="color:'+colorcfg['colcpd']+'">');
-	if (!which) {
-		outarray[0] = finout;
-		outarray[1] = convout;
-		return outarray;
-	}
-	return finout;
+	finout = finout.replace(/<@>/g, '<b>');
+	finout = finout.replace(/<\/@>/g, '</b>');
+	outarray[0] = finout;
+	outarray[1] = replaceunistandard(convout);
+	return outarray;
 }
 
-function preparepali(data) { // standard text prep for algorithm
+function preparepali(data,which) { // standard text prep for algorithm
 	
-	var finout = formatuniout(data);
+	var finout = formatuniout(data,which);
 	
 	// add search markers
-	
-	finout[0] = finout[0].replace(/<c0> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk1']+'">');
-	finout[0] = finout[0].replace(/<c1> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk2']+'">');
-	finout[0] = finout[0].replace(/<c2> */g, ' <span style="BACKGROUND-COLOR: '+colorcfg['colbk3']+'">');
-	finout[0] = finout[0].replace(/ *<xc>/g, '</span> ');
-	finout[0] = finout[0].replace(/ *- */g, '');
-	finout[0] = finout[0].replace(/BACKGROUNDCOLOR/g, 'BACKGROUND-COLOR');
+
+	finout[0] = finout[0].replace(/<c0>/g, '<font style="color:'+colorcfg['colped']+'">');
+	finout[0] = finout[0].replace(/<c1>/g, '<font style="color:'+colorcfg['coldppn']+'">');
+	finout[0] = finout[0].replace(/<c2>/g, '<font style="color:'+colorcfg['colcpd']+'">');
+	finout[0] = finout[0].replace(/<xc>/g, '</font>');
 
 	return finout;
 }

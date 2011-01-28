@@ -60,7 +60,7 @@ function outputDef(which,first)
 			osout += '<td><b>-</b><br><font size=2>&nbsp;</font></td>';	
 		}	
 
-		osout += '<td align="center">';
+		osout += '<td valign=top align="center">';
 		
 		for (var d = 0; d < partvars.length; d++) { // per variant for each part
 			var data = partvars[d].split('^');
@@ -81,7 +81,7 @@ function outputDef(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] +','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
 					break;
 				case '2':
-					osout += '<b>' + convoutput(data[1]) + '</b>';
+					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + convoutput(data[1]) + '</b>';
 					break;
 				case '3':
 					osout += '<b style="color:' + colorcfg['coltext'] + '">' + convoutput(data[1]) + '</b>';
@@ -107,7 +107,7 @@ function outputDef(which,first)
 			osout += '</font>';
 		}
 		else {
-			osout += '<br><font size=2>&nbsp;</font>';
+			//osout += '<br><font size=2>&nbsp;</font>';
 		}		
 		osout += '</td>';
 		

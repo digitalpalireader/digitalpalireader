@@ -2,7 +2,6 @@ var getsutta = 0;
 var prevyes = 0;
 var searchsect = 0;
 var stop = 0;
-var labelsearch = null;
 
 var unnamed = '(unnamed)';
 
@@ -11,7 +10,7 @@ var versecheck = 0;
 var versestop = 0;
 var hier = 'm'; // m = mula, a = atthakatha
 
-function importXML(manxml,labelsearchtemp)
+function importXML(labelsearch,para)
 {
 	moves(0); // close search
 	
@@ -29,18 +28,8 @@ function importXML(manxml,labelsearchtemp)
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-	if (manxml == 's') {
-		labelsearch = labelsearchtemp;
-	}
-	else if (manxml)
-	{
-		customfile = 1;
-		bookload = 'xml/1.xml';
-		if (manxml == 3) document.getElementById('manrem').value--;
-		else if (manxml == 2) document.getElementById('manrem').value++;
-		else document.getElementById('manrem').value = 0;
-	}
-	else document.getElementById('manrem').value = 0;
+
+	document.getElementById('manrem').value = 0;
 
 
 	var xmlhttp = new window.XMLHttpRequest();
@@ -54,11 +43,7 @@ function importXML(manxml,labelsearchtemp)
 	var vagga = document.form.vagga.selectedIndex;
 	var sutta = document.form.sutta.selectedIndex;
 	var section = document.form.section.selectedIndex;
-	if (document.getElementById('manrem').value > 0)
-	{
-		section = document.getElementById('manrem').value;
-		sutta = 0;
-	}
+
 	var book = document.form.book.value;
 	
 	var u = xmlDoc.getElementsByTagName("h0");
@@ -102,42 +87,36 @@ function importXML(manxml,labelsearchtemp)
 	historyBox();
 
 	var theData = '';
-	var onepar;
-	var quit = 0;
-	var tmpdata;
 	
 	// check if there is a search going on and add the labels
 	
 	if (labelsearch) {
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			quit = 0;
-			onepar = z[tmp].childNodes[0].nodeValue.substring(4);
+			var quit = 0;
+			var onepar = z[tmp].childNodes[0].nodeValue.substring(4);
 			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
 			{
 				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
 			}	
 			if (quit == 1) {
-				theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
+				theData += ' <p> ' + onepar;
 			}
 			else {
 				theData += ' <p> ';
-				tmpdata = onepar;
-				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+				var tmpdata = onepar;
+				for (var i = 0; i < labelsearch.length; i++)
 				{
+					var lt = labelsearch[i];
+					if (!lt) continue;
 					onepar = tmpdata;
 					tmpdata = '';
-					while (onepar.search(labelsearch[tmpl]) > -1) {
-						opp = onepar.search(labelsearch[tmpl]);
+					while (onepar.match(lt)) {
+						var matched = onepar.match(lt)[0];
+						var opp = onepar.search(lt);
 						tmpdata += onepar.substring(0,opp);
-						if (onepar.charAt(opp - 1) != ' ') {
-							tmpdata += ' - ';
-						}
-						tmpdata += ' <c' + tmpl  + '> ' + labelsearch[tmpl].replace(/ /g, ' <xc> <c' + tmpl  + '> ') + ' <xc> ';
-						if (onepar.charAt(opp + labelsearch[tmpl].length) != ' ') {
-							tmpdata += ' _ ';
-						}
-						onepar = onepar.substring(opp + labelsearch[tmpl].length);
+						tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
+						onepar = onepar.substring(opp + matched.length);
 					}
 					tmpdata += onepar;
 				}
@@ -151,15 +130,12 @@ function importXML(manxml,labelsearchtemp)
 			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
 		}
 	}
-	
 	preout(theData);
-	if (document.getElementById('manrem').value < 0)
-	{
-		document.getElementById('manrem').value = 0;
-		alert('beginning of file');
+	
+	document.textpad.pad.value=theData;
+	if(para) { 
+        document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
 	}
-	customfile = 0;
-	labelsearch = null;
 }
 
 var maxlength = 20;  // change for display purposes, will affect history as well.
@@ -709,50 +685,7 @@ function importXMLraw()
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
 }
-var customfile = 0;
 
-function createTableman(type)
-{
-	document.form.manual.value = replacevelstandard(document.form.dictin.value);
-	if (type) {
-		switch (document.form.sped.selectedIndex) {
-			case 0:
-				var TheData = document.form.manual.value;
-				postout(TheData,0,1);
-				break;
-			case 1:
-				moveframey('dif');
-				moveframex(3);
-				pedsearchstart();
-				break;
-			case 2:
-				moveframey('dif');
-				moveframex(3);
-				epdsearchstart();
-				break;
-			case 3:
-				moveframey('dif');
-				moveframex(3);
-				dppnsearchstart();
-				break;
-			case 4:
-				moveframey('dif');
-				moveframex(3);
-				mlsearchstart();
-				break;
-			case 5:
-				moveframey('dif');
-				moveframex(3);
-				attsearchstart();
-				break;
-		}
-	}
-	else {
-		var TheData = document.form.manual.value;
-		postout(TheData);
-		if(document.getElementById('autoalg').checked == false) moveframex(2);
-	}
-}
 
 function xmlrefget()
 {
@@ -1068,12 +1001,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	sectionlist += '</select>'
 	document.getElementById('section').innerHTML=sectionlist
-    
-    if (setplace[8]) { // coming from Att search
-        importXML();
-        document.getElementById('maf').scrollTop = document.getElementById('para'+setplace[8]).offsetTop;
-    }
-    
+        
 	setplace = new Array();
 	setplace.length = 0;
 }
@@ -1102,10 +1030,17 @@ function helpXML(file)
 }
 
 
-function getatt(num) { // get atthakatha word 
+function getatt(num,type) { // get atthakatha or tika word 
     moveframex(2);
-    var word = attlist[num].split('#')[0];
-    var loc = attlist[num].substring(attlist[num].indexOf('#')+1);
+    if(type == 'a') {
+		var word = attlist[num].split('#')[0];
+		var loc = attlist[num].substring(attlist[num].indexOf('#')+1);
+	}
+	else {
+		var word = tiklist[num].split('#')[0];
+		var loc = tiklist[num].substring(tiklist[num].indexOf('#')+1);
+	}
+		
     var loca = loc.split('#');
 	document.getElementById('mafb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
     var finout = '';
@@ -1114,7 +1049,7 @@ function getatt(num) { // get atthakatha word
         var nikaya = pca[0];
         var book = pca[1];
         
-        var bookload = 'xml/' + nikaya + book + 'a.xml';
+        var bookload = 'xml/' + nikaya + book + type + '.xml';
 
         var xmlhttp = new window.XMLHttpRequest();
         xmlhttp.open("GET", bookload, false);
@@ -1147,11 +1082,16 @@ function getatt(num) { // get atthakatha word
         if (x.length > 1) placen += '.' + (parseInt(sutta)+1);
         var y = x[sutta].getElementsByTagName("h4");
         if (y.length > 1) placen += '.' + (parseInt(section)+1);
-        var z = y[section].getElementsByTagName("p")[para].childNodes[0].nodeValue;
+        var z = y[section].getElementsByTagName("p")[para].childNodes[0].nodeValue.substring(4);
+        
+        var wordr = new RegExp('\\^b\\^\([^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\)\\^eb\\^','gi');
+        var wordr2 = new RegExp('\\^b\\^[^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\\^eb\\^','gi');
+        z = z.replace(wordr, "<c0>$1<xc>");
+        
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><a href="javascript:void(0)" onclick="getplace(Array(\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1])-1)+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\'m\',\''+pca[7]+'\'));" class="yellow"><b>'+placen+'</b></a> '+preparepali(z)[0]+'<br /><input type="button" value="Convert Text" onclick="sendtoconvert(\'' + preparepali(z)[1] + '\')"></p>';
+        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1])-1)+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafb').innerHTML = '<b style="text-size:24px">'+replaceunistandard(word)+'</b>';
+    document.getElementById('mafb').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'Aṭṭhakathā:' : 'Ṭīka:');
     document.getElementById('mafb').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }

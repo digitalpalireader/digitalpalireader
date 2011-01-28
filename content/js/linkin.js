@@ -9,6 +9,8 @@ function postout(input,divclicked,frombox)
 	shortdefpre = [];
 	shortdefpost = [];
 	
+	divclicked = 'W'+divclicked;
+	
 	input = replacevelstandard(input);
 	document.form.lastsearch.value=input;
 	document.form.sped.selectedIndex=0;
