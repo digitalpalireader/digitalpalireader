@@ -2153,17 +2153,17 @@ var out = [];
 var dup = [];
 
 function noahs() {
-for (i in filearrayt) {
+for (i in filearraya) {
 
 	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", 'xml/'+filearrayt[i]+'t.xml', false);
+    xmlhttp.open("GET", 'xml/'+filearraya[i]+'a.xml', false);
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var u = xmlDoc.getElementsByTagName("h0");
 	
-	var iw = filearrayt[i].charAt(0);
-	var ino = filearrayt[i].charAt(1);	
+	var iw = filearraya[i].charAt(0);
+	var ino = filearraya[i].substring(1);	
 
 	for (var sx = 0; sx < u.length; sx++) // per h0
 	{							
@@ -2192,9 +2192,11 @@ for (i in filearrayt) {
 							while (qus > -1) {
 								var que = text.search(/\^eb\^/);
 								var term = text.substring(qus+3,que);
-								term = term.replace(/^[^a-zA-Z\.~]*/g,'').replace(/^[^a-zA-Z]  */g,'').replace(/   */g,' ').replace(/[^a-zA-Z]*$/g,'').toLowerCase();
-								if(dup[term]) dup[term] += '#'+iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
-								else dup[term] = iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
+								term = term.replace(/^\.\.\.pe0\.\.\. */g,'').replace(/``/g,'“').replace(/''/g,'“').replace(/'/g,'’').replace(/`/g,'‘').replace(/^[^a-zA-Z\.~]*/g,'').replace(/^[^a-zA-Z]  */g,'').replace(/   */g,' ').replace(/[^a-zA-Z]*$/g,'').toLowerCase();
+								if (term != '') {
+									if(dup[term]) dup[term] += '#'+iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
+									else dup[term] = iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp;
+								}
 								text = text.substring(que+4);
 								qus = text.search(/\^b\^/);
 							}
@@ -2210,5 +2212,5 @@ for (j in dup) {
 }
 out=sortaz(out);
 
-document.textpad.pad.value=out.join('\n');
+document.textpad.pad.value=out.join("');\nattlist.push('");
 }

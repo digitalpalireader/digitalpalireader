@@ -323,6 +323,23 @@ nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><optio
 nikvoladi['ga'] = '<select size="7" name="book"></select>';
 nikvoladi['gt'] = '<select size="7" name="book"></select>';
 
+var kudvala = [];
+
+kudvala['k1'] = 0;
+kudvala['k2'] = 1;
+kudvala['k3'] = 2;
+kudvala['k4'] = 3;
+kudvala['k5'] = 4;
+kudvala['k6'] = 5;
+kudvala['k7'] = 6;
+kudvala['k8'] = 7;
+kudvala['k9'] = 8;
+kudvala['k10'] = 9;
+kudvala['k12'] = 10;
+kudvala['k13'] = 11;
+kudvala['k14'] = 12;
+kudvala['k15'] = 13;
+
 var knames = [];
 
 knames.push('KhP');

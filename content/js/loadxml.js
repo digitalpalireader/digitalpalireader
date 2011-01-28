@@ -159,7 +159,6 @@ function gettitles(altget,stop,prev,ssect)
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-    
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
     xmlhttp.send(null);
@@ -443,8 +442,8 @@ function importXMLindex() {
 	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
-	var book = document.form.book.selectedIndex;
-	var bookload = 'xml/' + nikaya + (book+1) + hier + '.xml';
+	var book = document.form.book.value;
+	var bookload = 'xml/' + nikaya + book + hier + '.xml';
 
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
@@ -461,8 +460,7 @@ function importXMLindex() {
 	var theData = "";
 	var theDatao = "";
 
-	var bookn = document.form.book.value;
-	bookfile = nikaya + bookn;
+	bookfile = nikaya + book;
 	
 	document.getElementById('mafb').innerHTML = '';
 	
@@ -733,7 +731,9 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	var nik = document.form.nik.value;
 	var booknumber = setplace[1];
 	if (nikvoladi[nik]) {document.getElementById('book').innerHTML=nikvoladi[nik]; }
+	
 	else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
+	
 	document.form.book.selectedIndex = setplace[1];
 	var book = document.form.book.value;
 
@@ -1040,7 +1040,6 @@ function getatt(num,type) { // get atthakatha or tika word
 		var word = tiklist[num].split('#')[0];
 		var loc = tiklist[num].substring(tiklist[num].indexOf('#')+1);
 	}
-		
     var loca = loc.split('#');
 	document.getElementById('mafb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
     var finout = '';
@@ -1069,7 +1068,11 @@ function getatt(num,type) { // get atthakatha or tika word
         var suttalist = '';
         var sectionlist = '';
         
-        if (nikaya == 'k') book = knames[book];
+        if (nikaya == 'k') {
+			book = knames[book];
+			 pca[1] = kudvala['k'+(pca[1])];
+		}
+		else pca[1] = parseInt(pca[1])-1;
         var placen = nikname[nikaya] + ' ' + book;
 
         var u = xmlDoc.getElementsByTagName("h0");
@@ -1089,7 +1092,7 @@ function getatt(num,type) { // get atthakatha or tika word
         z = z.replace(wordr, "<c0><@>$1</@><xc>");
         
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1])-1)+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1]))+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
     }
     document.getElementById('mafb').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'Aṭṭhakathā:' : 'Ṭīka:');
     document.getElementById('mafb').innerHTML += finout;
