@@ -132,7 +132,7 @@ function importXML(labelsearch,para)
 	}
 	preout(theData);
 	
-	document.textpad.pad.value=theData;
+	//document.textpad.pad.value=theData;
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
 	}
@@ -729,16 +729,11 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	document.form.nik.selectedIndex = sp0;
 
 	var nik = document.form.nik.value;
-	var booknumber = setplace[1]; // the xml number, one more than the selIndex, unless k#a
+	var booknumber = setplace[1]; 
 	if (nikvoladi[nik]) {document.getElementById('book').innerHTML=nikvoladi[nik]; }
 	
 	else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
-        
-	if (nik == 'k' && hier == 'a') { // fudge, missing some k#a
-		 booknumber = kudvala['k'+booknumber];
-	}
-	else booknumber = parseInt(booknumber)-1;
-	
+        	
 	document.form.book.selectedIndex = booknumber;
 
 	var book = document.form.book.value;
@@ -1061,6 +1056,11 @@ function getatt(num,type) { // get atthakatha or tika word
         xmlhttp.send(null);
         var xmlDoc = xmlhttp.responseXML.documentElement;
 
+		if (type == 'a' && nikaya == 'k') {
+			var bookno = kudvala['k'+pca[1]];
+		}
+		else var bookno = parseInt(pca[1])-1;
+
         var meta = pca[2];
         var volume = pca[3];
         var vagga = pca[4];
@@ -1093,7 +1093,7 @@ function getatt(num,type) { // get atthakatha or tika word
         z = z.replace(wordr, "<c0><@>$1</@><xc>");
         
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+(parseInt(pca[1]))+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
     }
     document.getElementById('mafb').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'Aṭṭhakathā:' : 'Ṭīka:');
     document.getElementById('mafb').innerHTML += finout;

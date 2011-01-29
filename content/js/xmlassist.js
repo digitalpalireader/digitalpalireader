@@ -27,7 +27,9 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
 	}
-	document.textpad.pad.value = inarray[1];
+	
+	//document.textpad.pad.value = inarray[0];
+	
 	document.getElementById('mafb').innerHTML += '<div id="convi">'+convout+'</div><hr />' + finout; // convi contains text for convertor
     
 	document.getElementById('maf').scrollTop = 0; 
@@ -79,6 +81,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/   */g, ' ');
 	var uniouta = replaceunistandard(data).split(' ');
 	//data = data.replace(/\"/g, '\u00B4');
+	document.textpad.pad.value = data;
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
@@ -116,9 +119,9 @@ function formatuniout(data,which) { // prepare without links
 		}
 
 
-		else if (cp = wb.search('<c') >= 0) {
-			while (cp = wb.search('<c') > 0) {
-				
+		else if (wb.indexOf('<c') >= 0) {
+			while (wb.indexOf('<c') >= 0) {
+				cp = wb.indexOf('<c');
 				if(cp > 0) {
 					if (which) {  
 						finout += translit(replaceunistandard(wb.substring(0,cp))); b++;
@@ -128,18 +131,18 @@ function formatuniout(data,which) { // prepare without links
 					}
 					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
 				}
-								
-				finout += wb.substring(cp,cp+4);
+
+				var cno = wb.substring(cp,cp+4); // <c1>
 				
 				wb = wb.substring(cp+4);
 				
 				var cm = wb.search('<xc>');
 
 				if (which) {  
-					finout += translit(replaceunistandard(wb.substring(0,cm))); b++;
+					finout += cno + translit(replaceunistandard(wb.substring(0,cm)))+'<xc>'; b++;
 				}
 				else {
-					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb.substring(0,cm))) + '</a><xc>'; b++;
+					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' + cno + translit(replaceunistandard(wb.substring(0,cm))) + '<xc></a>'; b++;
 				}
 
 				convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
@@ -151,7 +154,7 @@ function formatuniout(data,which) { // prepare without links
 					finout += translit(replaceunistandard(wb)); b++;
 				}
 				else {
-					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb)) + '</a><xc>'; b++;
+					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb)) + '</a>'; b++;
 				}
 
 				convout += wb.replace(/<[^>]*>/g, '');
@@ -220,14 +223,18 @@ function preparepali(data,which) { // standard text prep for algorithm
 	
 	var finout = formatuniout(data,which);
 	
+	
 	// add search markers
 
-	finout[0] = finout[0].replace(/<c0>/g, '<font style="color:'+colorcfg['colped']+'">');
-	finout[0] = finout[0].replace(/<c1>/g, '<font style="color:'+colorcfg['coldppn']+'">');
-	finout[0] = finout[0].replace(/<c2>/g, '<font style="color:'+colorcfg['colcpd']+'">');
-	finout[0] = finout[0].replace(/<xc>/g, '</font>');
+	finout[0] = finout[0].replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">');
+	finout[0] = finout[0].replace(/<c1>/g, '<span style="color:'+colorcfg['coldppn']+'">');
+	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+colorcfg['colcpd']+'">');
+	finout[0] = finout[0].replace(/<xc>/g, '</span>');
+
+	document.textpad.pad.value = finout[0];
 
 	return finout;
+
 }
 
 function convtitle(nikaya,book,vna,wna,xna,yna,zna)
