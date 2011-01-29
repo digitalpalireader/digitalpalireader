@@ -1,5 +1,5 @@
 pref("extensions.digitalpalireader.sizes.SearchH", 50);
-pref("extensions.digitalpalireader.sizes.AnalyzeH", 45);
+pref("extensions.digitalpalireader.sizes.AnalyzeH", 44);
 pref("extensions.digitalpalireader.sizes.DictH", 220);
 pref("extensions.digitalpalireader.sizes.ControlW", 254);
 

@@ -206,6 +206,8 @@ function dppnsearchstart()
 function mlsearchstart()
 {
 	document.getElementById('difb').innerHTML='';
+	document.getElementById('anfs').innerHTML='';
+	document.getElementById('anfsd').innerHTML='';
 	document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
 	
 	var getstring = document.form.manual.value;
@@ -233,7 +235,7 @@ function mlsearchstart()
 			ud = replaceunistandard(yt[yg[x]].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
 			ud = ud.replace(/#(.*)/, " ($1)");
 			
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="document.getElementById(\'anfc\').innerHTML = \'<font class=white>' + us + '</font> = <font class=brown>' + ud +'</font>\'" onmouseover="document.getElementById(\'anfd\').innerHTML = \'' + ud +'\'" onmouseout="document.getElementById(\'anfd\').innerHTML = \'\'">' + us + '</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" onclick="document.getElementById(\'anfc\').innerHTML = \'<font style=\&quot;color:'+colorcfg['colsel']+'\&quot;>' + us + '</font> = <font style=\&quot;color:'+colorcfg['coltext']+'\&quot;>' + ud +'</font>\'" onmouseover="document.getElementById(\'anfd\').innerHTML = \'' + ud +'\'" onmouseout="document.getElementById(\'anfd\').innerHTML = \'\'">' + us + '</a><br>';
 			y++;
 		}
 	}
@@ -280,6 +282,8 @@ function epdsearchstart()
 	}
 
 	document.getElementById('difb').innerHTML='';
+	document.getElementById('anfs').innerHTML='';
+	document.getElementById('anfsd').innerHTML='';
 	document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
 	
 	var getstring = document.form.manual.value;

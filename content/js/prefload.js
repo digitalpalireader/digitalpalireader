@@ -7,7 +7,7 @@ var mPrefs = [];
 var mPrefVals = [];
 
 sPrefs.push("SearchH"); sPrefVals.push(50);
-sPrefs.push("AnalyzeH"); sPrefVals.push(45);
+sPrefs.push("AnalyzeH"); sPrefVals.push(44);
 sPrefs.push("DictH"); sPrefVals.push(220);
 sPrefs.push("ControlW"); sPrefVals.push(254);
 
