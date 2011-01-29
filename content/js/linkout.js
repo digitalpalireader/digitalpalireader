@@ -42,7 +42,7 @@ function outputDef(which,first)
 	
 	
 	if (outwords.length > 1 && first) {
-		document.getElementById('anfs').innerHTML = '<form name="forma"><select size="1" id="anfout" name="out" style="font-family: sans; font-size:12px" onmouseover="if(this.length < 20) { this.size = this.length; }" onmouseout="this.size=1;" onclick="this.size=1;" onchange="this.size=1; outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
+		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="small" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	
@@ -57,10 +57,10 @@ function outputDef(which,first)
 		
 		var partvars = owparts[c].split('#');
 		if (c > 0) {
-			osout += '<td><b>-</b><br><font size=2>&nbsp;</font></td>';	
+			osout += '<td valign="top"><b>-</b></td>';	
 		}	
 
-		osout += '<td valign=top align="center">';
+		osout += '<td valign="top" align="center">';
 		
 		for (var d = 0; d < partvars.length; d++) { // per variant for each part
 			var data = partvars[d].split('^');
@@ -114,7 +114,7 @@ function outputDef(which,first)
 	}
 	osout += '</tr></table>';
 	
-	osout += '</td><td align=center id=c></td><td align=right>';
+	osout += '</td><td valign=top align=center id=c></td><td valign=top align=right>';
 
 // add concise definitions
 	
@@ -124,7 +124,7 @@ function outputDef(which,first)
 	if (shortdefpost[which]) {
 		thisconcise = shortdefpost[which].split('$'); 
 		
-		if (thisconcise.length > 1) conciseoutput += '<select size="1" style="font-size:12px" onmouseover="this.size=this.length;" onmouseout="this.size=1;" onclick="this.size=1; var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
+		if (thisconcise.length > 1) conciseoutput += '<select class="small" onchange="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
 				
 		var concisedups = [];
 		for (x = 0; x < thisconcise.length; x++)

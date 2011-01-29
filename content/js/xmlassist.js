@@ -101,7 +101,7 @@ function formatuniout(data,which) { // prepare without links
 				altread = 0;
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
 			else altplus += wb + ' ';
 		}
@@ -110,7 +110,7 @@ function formatuniout(data,which) { // prepare without links
 				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="small" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
 			}
 			else {
 				altread = 1;
@@ -192,7 +192,7 @@ function formatuniout(data,which) { // prepare without links
 			volandpage = pageno.split('.');
 			
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
-			finout += ' <a class="small" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a> ';
+			finout += ' <a class="tiny" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a> ';
 		}
 		else if (which)
 		{

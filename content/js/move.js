@@ -27,7 +27,7 @@ function moveframex(a,temp) //read, etc
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'none';
-            document.getElementById('maf').style.bottom = (parseInt(confmove[0])+16) + 'px';
+            document.getElementById('maf').style.bottom = (parseInt(confmove[0])-4) + 'px';
             document.getElementById('anf').style.bottom = '-4px';
             document.getElementById('anf').style.top = '';
             break;
@@ -44,7 +44,7 @@ function moveframex(a,temp) //read, etc
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'block';
 
-            document.getElementById('maf').style.bottom = (parseInt(confmove[0]) + parseInt(confmove[1]) + 16) + 'px';
+            document.getElementById('maf').style.bottom = (parseInt(confmove[0]) + parseInt(confmove[1])-4) + 'px';
             document.getElementById('rightbot').style.bottom = '0px';
             document.getElementById('rightbot').style.height = parseInt(confmove[1]) + 'px';
             document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
@@ -63,7 +63,7 @@ function moveframex(a,temp) //read, etc
             document.getElementById('rightbot').style.display = 'block';
 
             document.getElementById('rightbot').style.height = 'auto';
-            document.getElementById('rightbot').style.top = (parseInt(confmove[0])+16) + 'px';
+            document.getElementById('rightbot').style.top = (parseInt(confmove[0])-4) + 'px';
             document.getElementById('rightbot').style.bottom = '0px';
             
 
@@ -162,6 +162,18 @@ function moves(a) // search open / close
 	else { // close search
 		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
 		document.getElementById('search').style.display="none";
+	}
+}
+
+function moveanf(which) {
+	if (which == 1) {
+		//alert(document.getElementById('anfb').offsetHeight + ' ' + document.getElementById('anf').offsetHeight);
+		var anfh = document.getElementById('anfb').offsetHeight+24;
+		if (anfh > confmove[0]) document.getElementById('anf').style.height = (anfh) + 'px';
+	}
+	else {
+		document.getElementById('anf').style.height = confmove[0] + 'px';
+		document.getElementById('anft').scrollTop = 0;
 	}
 }
 

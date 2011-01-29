@@ -113,8 +113,9 @@ function getconfig() {
 	document.styleSheets[0]['cssRules'][0].style.color = colorcfg['coltext']; 
 	document.styleSheets[0]['cssRules'][0].style.fontFamily = colorcfg['colfont']; 
 	document.styleSheets[0]['cssRules'][1].style.fontSize = colorcfg['colsize'] + 'px'; 
-	document.styleSheets[0]['cssRules'][2].style.fontSize = (parseInt(colorcfg['colsize']) - 2) + 'px'; 
-	document.styleSheets[0]['cssRules'][3].style.fontSize = (parseInt(colorcfg['colsize']) - 6) + 'px'; 
+	document.styleSheets[0]['cssRules'][2].style.fontSize = (parseInt(colorcfg['colsize']) - 2) + 'px';  // select, etc.
+	document.styleSheets[0]['cssRules'][3].style.fontSize = (parseInt(colorcfg['colsize']) - 4) + 'px';  // small
+	document.styleSheets[0]['cssRules'][4].style.fontSize = (parseInt(colorcfg['colsize']) - 6) + 'px';  // tiny
 
 	// update script
 	
@@ -189,14 +190,14 @@ function loadOptions() {
     mafaout += '<tr><td valign=top><p align=center><b>Size</b></p><p><form id="sizeform">';
 		mafaout += '<table align=center border=1 height="' + (winH/2.5) + '">';
 		mafaout += '<tr>';
+			mafaout += '<td id="confcpf" bgcolor="'+colorcfg['colbkcp']+'" align=center rowspan=3 width="' + (confmove[2]/2.5) + '">W<br><input onBlur="confmove[2] = checksizes(\'ControlW\',this.value); this.value = confmove[2]; moveframex(2,1);" id="ControlW" value="'+confmove[2]+'" type=input maxlength=4 size=4 title="Enter desired width"></td>';
 			mafaout += '<td width="' + ((winW-confmove[2])/2.5) + '" align=center>(<i>auto</i>)</td>';
-			mafaout += '<td id="confanf" bgcolor="'+colorcfg['colbkcp']+'" align=center rowspan=3 width="' + (confmove[2]/2.5) + '">W<br><input onBlur="confmove[2] = checksizes(\'ControlW\',this.value); this.value = confmove[2]; moveframex(2,1);" id="ControlW" value="'+confmove[2]+'" type=input maxlength=4 size=4 title="Enter desired width"></td>';
 		mafaout += '</tr>';
 		mafaout += '<tr>';
-			mafaout += '<td id="confcpf" bgcolor="'+colorcfg['colbkcp']+'" align=center height="' + (confmove[0]/2.5) + '">H <input onBlur="confmove[0] = checksizes(\'AnalyzeH\',this.value); this.value = confmove[0]; moveframex(2,1);" id="AnalyzeH" value="'+confmove[0]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
+			mafaout += '<td id="confanf" bgcolor="'+colorcfg['colbkcp']+'" align=center height="' + (confmove[0]/2.5) + '">H <input onBlur="confmove[0] = checksizes(\'AnalyzeH\',this.value); this.value = confmove[0]; moveframex(2,1);" id="AnalyzeH" value="'+confmove[0]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
 		mafaout += '</tr>';
 		mafaout += '<tr>';
-			mafaout += '<td align=center height="' + (confmove[1]/2.5) + '">H <input onBlur="confmove[1] = checksizes(\'DictH\',this.value); this.value = confmove[1]; moveframex(2,1);" id="DictH" value="'+confmove[1]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
+			mafaout += '<td id="confdictf" align=center height="' + (confmove[1]/2.5) + '">H <input onBlur="confmove[1] = checksizes(\'DictH\',this.value); this.value = confmove[1]; moveframex(2,1);" id="DictH" value="'+confmove[1]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
 		mafaout += '</tr>';
 		mafaout += '</table>';
     mafaout += '</p></form></td>';
