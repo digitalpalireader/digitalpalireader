@@ -729,12 +729,18 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	document.form.nik.selectedIndex = sp0;
 
 	var nik = document.form.nik.value;
-	var booknumber = setplace[1];
+	var booknumber = setplace[1]; // the xml number, one more than the selIndex, unless k#a
 	if (nikvoladi[nik]) {document.getElementById('book').innerHTML=nikvoladi[nik]; }
 	
 	else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
+        
+	if (nik == 'k' && hier == 'a') { // fudge, missing some k#a
+		 booknumber = kudvala['k'+booknumber];
+	}
+	else booknumber = parseInt(booknumber)-1;
 	
-	document.form.book.selectedIndex = setplace[1];
+	document.form.book.selectedIndex = booknumber;
+
 	var book = document.form.book.value;
 
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
@@ -1067,12 +1073,7 @@ function getatt(num,type) { // get atthakatha or tika word
         var vaggalist = '';
         var suttalist = '';
         var sectionlist = '';
-        
-        if (nikaya == 'k') {
-			book = knames[book];
-			 pca[1] = kudvala['k'+(pca[1])];
-		}
-		else pca[1] = parseInt(pca[1])-1;
+
         var placen = nikname[nikaya] + ' ' + book;
 
         var u = xmlDoc.getElementsByTagName("h0");
