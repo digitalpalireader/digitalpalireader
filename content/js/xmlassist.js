@@ -280,14 +280,15 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 
 
 var nikname = new Array();
+nikname['v'] = "Vin";
 nikname['d'] = "DN";
 nikname['m'] = "MN";
 nikname['s'] = "SN";
 nikname['a'] = "AN";
 nikname['k'] = "KN";
-nikname['v'] = "Vin";
-nikname['x'] = "Vism";
 nikname['y'] = "Abhi";
+nikname['x'] = "Vism";
+nikname['b'] = "AbhiS";
 nikname['g'] = "Gram";
 
 var niknumber = new Array();
@@ -299,7 +300,8 @@ niknumber['a'] = "4";
 niknumber['k'] = "5";
 niknumber['y'] = "6";
 niknumber['x'] = "7";
-niknumber['g'] = "8";
+niknumber['b'] = "8";
+niknumber['g'] = "9";
 
 var numbernik = new Array();
 numbernik.push('v');
@@ -310,6 +312,7 @@ numbernik.push('a');
 numbernik.push('k');
 numbernik.push('y');
 numbernik.push('x');
+numbernik.push('b');
 numbernik.push('g');
 
 
@@ -326,6 +329,7 @@ nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><optio
 nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
 nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
 nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
+nikvoladi['b'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Mūla</option><option value="2">Ṭīkā</option></select>';
 nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
 nikvoladi['ga'] = '<select size="7" name="book"></select>';
 nikvoladi['gt'] = '<select size="7" name="book"></select>';
@@ -1224,8 +1228,8 @@ function switchhier(htmp,stop) {
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}
-	if (htmp == 'a' && document.form.nik.value == 'g') {
-		alert('Atthakatha not available for Gram.');
+	if (htmp == 'a' && document.form.nik.selectedIndex > 7) {
+		alert('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.');
 		return;
 	}
 	hier = htmp;

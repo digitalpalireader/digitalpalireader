@@ -2214,3 +2214,77 @@ out=sortaz(out);
 
 document.textpad.pad.value="attlist.push('"+out.join("');\nattlist.push('") + "');";
 }
+
+function noahsb() {
+
+var fiat = [];
+
+for (i in filearraya) {
+	fiat.push('a'+filearraya[i]);
+}
+for (i in filearrayt) {
+	fiat.push('t'+filearrayt[i]);
+}
+
+for (i in fiat) {
+	var fi = fiat[i];
+	
+	var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", 'xml/'+fi+'a.xml', false);
+    xmlhttp.send(null);
+    var xmlDoc = xmlhttp.responseXML.documentElement;
+
+	var u = xmlDoc.getElementsByTagName("h0");
+	var type = fi.charAt(0);
+	var iw = fi.charAt(1);
+	var ino = parseInt(fi.substring(2));		
+	
+	for (var sx = 0; sx < u.length; sx++) // per h0
+	{							
+		var v = u[sx].getElementsByTagName("h1");
+			
+		for (var sy = 0; sy < v.length; sy++) // per h1
+		{			
+			var w = v[sy].getElementsByTagName("h2");
+		
+			for (var sz = 0; sz < w.length; sz++) // per h2
+			{
+				var x = w[sz].getElementsByTagName("h3");
+				
+				for (var s = 0; s < x.length; s++) // per h3
+				{
+					var y = x[s].getElementsByTagName("h4");
+					
+					for (var se = 0; se < y.length; se++) // per h4
+					{
+						var z = y[se].getElementsByTagName("p");		
+
+						for (var tmp = 0; tmp < z.length; tmp++) // per paragraph
+						{
+							var text = z[tmp].childNodes[0].nodeValue;
+							var qus = text.search(/\^b\^/);
+							while (qus > -1) {
+								var que = text.search(/\^eb\^/);
+								var term = text.substring(qus+3,que);
+								term = term.replace(/^\.+pe0*[^a-zA-Z]+ */g,'').replace(/``/g,'“').replace(/''/g,'“').replace(/'/g,'’').replace(/`/g,'‘').replace(/^[^a-zA-Z\.~]*/g,'').replace(/^[^a-zA-Z]  */g,'').replace(/   */g,' ').replace(/[^a-zA-Z]*$/g,'').toLowerCase();
+								if (term != '') {
+									if(dup[term]) dup[term] += '#'+iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp+'^'+type;
+									else dup[term] = iw+'^'+ino+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+tmp+'^'+type;
+								}
+								text = text.substring(que+4);
+								qus = text.search(/\^b\^/);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+for (j in dup) {
+	out.push(j+'#'+dup[j]);
+}
+out=sortaz(out);
+
+document.textpad.pad.value="attlist.push('"+out.join("');\nattlist.push('") + "');";
+}

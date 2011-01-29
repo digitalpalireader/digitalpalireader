@@ -340,27 +340,25 @@ function thaiconv(input) {
 		i5 = input.charAt(i+4);
 		
 		if (vowel[i1]) {
-			cons = 0;
 			if (i1 == 'o' || i1 == 'e') {
 				output += thair[i1] + thair['a'];
 				i++;
 			}
 			else {
-				if (i == 0 || i0 == 'a') {
+				if (cons == 0) {
 					output += thair['a'];
-					if (i1 != 'a') { output += thair[i1]; }
 				}	
-				else if (i1 == 'i' && i2 == 'ṃ') { // special i.m character
+				if (i1 == 'i' && i2 == 'ṃ') { // special i.m character
 					output += thair[i1+i2];
 					i++;				
 				}
 				else if (i1 != 'a') { output += thair[i1]; }
 				i++;
 			}
+			cons = 0;
 		}		
 		else if (thair[i1+i2] && i2 == 'h') {		// two character match
 			cons++;
-			if (i2 == 'm') cons = 0 // exception for .m
 			if (cons > 1) output += 'ฺ';
 			if (i3 == 'o' || i3 == 'e') {
 				output += thair[i3];
@@ -372,6 +370,7 @@ function thaiconv(input) {
 		}					
 		else if (thair[i1] && i1 != 'a') {		// one character match except a
 			cons++;
+			if (i1 == 'ṃ') cons = 0;
 			if (cons > 1) output += 'ฺ';
 			if (i2 == 'o' || i2 == 'e') {
 				output += thair[i2];
@@ -382,6 +381,7 @@ function thaiconv(input) {
 			i++;
 		}					
 		else if (!thair[i1]) {
+			if (cons > 0) output += 'ฺ';
 			cons = 0;
 			output += i1;
 			i++;				
@@ -399,6 +399,7 @@ function thaiconv(input) {
 			i++;
 		}
 	}
+	if (cons > 0) output += 'ฺ';
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	

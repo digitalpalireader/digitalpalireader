@@ -444,6 +444,7 @@ function importXMLindex() {
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+	var bookno = document.form.book.selectedIndex;
 
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
@@ -461,6 +462,7 @@ function importXMLindex() {
 	var theDatao = "";
 
 	bookfile = nikaya + book;
+	
 	
 	document.getElementById('mafb').innerHTML = '';
 	
@@ -484,7 +486,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+book+',0,0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
+			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -496,7 +498,7 @@ function importXMLindex() {
 				wcs = whichcol[0]; // either 0 or 1
 				whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
 				
-				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+',0,0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -520,7 +522,7 @@ function importXMLindex() {
 					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
 					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 				
-					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+',0,0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -544,7 +546,7 @@ function importXMLindex() {
 						wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
 						whichcol[3] = 1; // bump
 						
-                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -568,7 +570,7 @@ function importXMLindex() {
 							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
 							whichcol[4] = 1; // bump
 
-                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -593,7 +595,7 @@ function importXMLindex() {
 								wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
 								if (wcs == 5) wcs = 0;
 
-                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+book+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font color="'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
