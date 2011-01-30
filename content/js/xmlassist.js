@@ -22,7 +22,8 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 	if (hier == "m") { 
 		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
-			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
+			var atiurl = (cfg['catioff'] == 'checked' ? 'file://'+getHomePath()+'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
 			transout += transin.join('');
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
@@ -574,6 +575,9 @@ function createTablep()
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
     if (getMiscPref("ctrans") != "checked" || typeof(atiD) == 'undefined') return;
+    
+    var atiurl = (cfg['catioff'] == 'checked' ? 'file://'+getHomePath()+'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+    
     var cnt = 0;
     var output = [];
     var a,b,c,d,e,j,k,l,m,w,x,y,z;
@@ -688,12 +692,15 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
             }
             var mysn = book+vagga;
             mys = mysn + "";
-            while (mys.length < 2) { mys = '0'+mys; }
+            if (mys.length < 2) { mys = '0'+mys; }
             var atid = 'dn/dn.'+mys;
             for (var x = 0;x < atiD.length; x++) {
-                var auth = atiD[x].split('.')[3];
-                if (autha[auth]) {auth = autha[auth];}
-                if (atiD[x].indexOf(atid)==0) {output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiD[x]+'\');" value="'+auth+'" title="Translation of DN '+mysn+' by '+auth+'">');cnt++;}
+                if (atiD[x].indexOf(atid)==0) {
+					var auth = atiD[x].split('.')[3];
+					if (autha[auth]) {auth = autha[auth];}
+					output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiD[x]+'\');" value="'+auth+'" title="Translation of DN '+mysn+' by '+auth+'">');
+					cnt++;
+				}
             }
             if (mysn == 16) {
                 if (which > 0) {
@@ -847,39 +854,33 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
             for (var x = 0;x < atiM.length; x++) {
                 var auth = atiM[x].split('.')[2];
                 if (autha[auth]) {auth = autha[auth];}
-                if (atiM[x].indexOf(atim)==0) {output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiM[x]+'\');" value="'+auth+'" title="Translation of MN '+mysn+' by '+auth+'">');cnt++;}
+                if (atiM[x].indexOf(atim)==0) {output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiM[x]+'\');" value="'+auth+'" title="Translation of MN '+mysn+' by '+auth+'">');cnt++;}
             }
         break;
         case 'a':
-            var file = 'xml/listam.xml';
             var bookn = book+1;
-            if (which > 0) return null;
+            if (which > 1) return null;
             if (!section) section = 0;
-            var xmlhttp = new window.XMLHttpRequest();
-            xmlhttp.open("GET", file, false);
-            xmlhttp.send(null);
-            var xmlDoc = xmlhttp.responseXML.documentElement;
-            w = xmlDoc.getElementsByTagName('a'+bookn+'v');
-            x = w[vagga].getElementsByTagName('a'+bookn+'s');
-            y = x[sutta].getElementsByTagName('a'+bookn+'c');
-            z = y[section].getElementsByTagName('a'+bookn+'p');
-            //alert(z[0].childNodes[0].nodeValue);
+            document.getElementById('difb').innerHTML+=book+' ' +vagga+' ' +sutta+' ' +section+' <br>';
+			var z = amlist[book][vagga][sutta][section]
             out:
             for (a = 0;a < atiA.length; a++) {
                 if(parseInt(atiA[a].split('/')[1].substring(2),10) == bookn) {
-                    if(atiA[a].split('.')[1].indexOf('-')>=0) b=atiA[a].split('.')[1].split('-');
+					var atiAs = atiA[a].split('.');
+                    if(atiAs[1].indexOf('-')>=0) b=atiAs[1].split('-');
                     else {b=null;}
                     for (var aa = 0;aa < z.length; aa++) {
-                        var bb = z[aa].childNodes[0].nodeValue;
+                        var bb = z[aa];
                         c=parseInt(bb,10);
                         d=''+bb;
                         while (d.length < 3) { d = '0'+d; }
-                        if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiA[a].split('.')[1].indexOf(d)==0) {
+                        if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiAs[1].indexOf(d)==0) {
                             if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
                             else {var sno = c;}
-                            var auth = atiA[a].split('.')[2];
+                            if(atiAs[4] == 'html') { var auth = atiAs[3]; }
+                            else { var auth = atiAs[2]; }
                             if (autha[auth]) {auth = autha[auth];}
-                            output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiA[a]+'\');" value="'+auth+'" title="Translation of AN '+bookn+'.'+sno+' by '+auth+'">');cnt++;
+                            output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiA[a]+'\');" value="'+auth+'" title="Translation of AN '+bookn+'.'+sno+' by '+auth+'">');cnt++;
                             continue out;
                         }
                     }
@@ -887,8 +888,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
             }		
         break;
         case 's':
-            if (which > 0) return null;
-            var file = 'xml/listsm.xml';
+            if (which > 1) return null;
+
             var bookn = book+1;
             
             if (bookn > 1) {vagga+=11;}
@@ -896,42 +897,27 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
             if (bookn > 3) {vagga+=13;}
             if (bookn > 4) {vagga+=10;}
             
-            var xmlhttp = new window.XMLHttpRequest();
-            xmlhttp.open("GET", file, false);
-            xmlhttp.send(null);
-            var xmlDoc = xmlhttp.responseXML.documentElement;
-            w = xmlDoc.getElementsByTagName('sv');
-            x = w[vagga].getElementsByTagName('s'+bookn+'s');
+            var countc = smlist[vagga][sutta][section];
+            
+            document.getElementById('difb').innerHTML += countc;
 
-            var cnt2 = 0;
-
-            for (b = 0;b < sutta; b++) {
-                y = x[b].getElementsByTagName('s'+bookn+'c');
-                cnt2+=y.length;
-            }
-            cnt2+=section;
-            y = x[sutta].getElementsByTagName('s'+bookn+'c');
-            z = y[section].getElementsByTagName('s'+bookn+'p');
-            //alert (cnt2);
             out:
             for (a = 0;a < atiS.length; a++) {
                 if(parseInt(atiS[a].split('/')[1].substring(2),10) == (vagga+1)) {
                     if(atiS[a].split('.')[1].indexOf('-')>=0) b=atiS[a].split('.')[1].split('-');
                     else {b=null;}
-                    for (var aa = 0;aa < z.length; aa++) {
-                        var bb = cnt2+1;
-                        c=parseInt(bb,10);
-                        d=bb+"";
-                        while (d.length < 3) { d = '0'+d; }
-                        if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiS[a].split('.')[1].indexOf(d)==0) {
-                            if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-                            else {var sno = c;}
-                            var auth = atiS[a].split('.')[2];
-                            if (autha[auth]) {auth = autha[auth];}
-                            output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiS[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
-                            continue out;
-                        }
-                    }
+					var bb = countc;
+					c=parseInt(bb,10);
+					d=bb+"";
+					while (d.length < 3) { d = '0'+d; }
+					if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiS[a].split('.')[1].indexOf(d)==0) {
+						if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+						else {var sno = c;}
+						var auth = atiS[a].split('.')[2];
+						if (autha[auth]) {auth = autha[auth];}
+						output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiS[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+						continue out;
+					}
                 }
             }		
         break;
@@ -953,7 +939,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 else {var sno = c;}
                                 var auth = atiK[a].split('.')[2];
                                 if (autha[auth]) {auth = autha[auth];}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -972,7 +958,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var sno = vagga+1;
                                 var auth = atiK[a].split('.')[2];
                                 if (autha[auth]) {auth = autha[auth];}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Dhp. '+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Dhp. '+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -994,7 +980,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
                                 if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1067,7 +1053,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 else {var sno = c;}
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1091,7 +1077,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 else {var sno = c;}
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1115,7 +1101,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
                                 if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1137,7 +1123,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
                                 if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1161,7 +1147,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
                                 if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thag '+vagga+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thag '+vagga+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }
@@ -1184,7 +1170,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
                                 var auth = atiK[a].split('.')[3];
                                 if (autha[auth]) {auth = autha[auth];}
                                 if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-                                output.push('<input type=button class="btn" onclick="window.open(\'http://www.accesstoinsight.org/tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+                                output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
                                 continue out;
                             }
                         }

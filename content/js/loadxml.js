@@ -462,10 +462,7 @@ function importXMLindex() {
 	var theDatao = "";
 
 	bookfile = nikaya + book;
-	
-	
-	document.getElementById('mafb').innerHTML = '';
-	
+		
 	var tmp = 0;
 	var tmp1 = 0;
 	var tmp2 = 0;
@@ -503,7 +500,7 @@ function importXMLindex() {
 				var transin;
 				var transout='';
 				if (hier == "m") { 
-					transin = addtrans(5,nikaya,book,tmp2);
+					transin = addtrans(5,nikaya,bookno,tmp2);
 					if (transin) {
 						if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
 						transout += transin.join('');
@@ -527,7 +524,7 @@ function importXMLindex() {
 					var transin;
 					var transout='';
 					if (hier == "m") { 
-						transin = addtrans(4,nikaya,book,tmp2,tmp3);
+						transin = addtrans(4,nikaya,bookno,tmp2,tmp3);
 						if (transin) {
 							if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
 							transout += transin.join('');
@@ -550,7 +547,7 @@ function importXMLindex() {
                         var transin;
                         var transout='';
                         if (hier == "m") { 
-                            transin = addtrans(3,nikaya,book,tmp2,tmp3,tmp4);
+                            transin = addtrans(3,nikaya,bookno,tmp2,tmp3,tmp4);
                             if (transin) {
                                 if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                 transout += transin.join('');
@@ -574,7 +571,7 @@ function importXMLindex() {
                             var transin;
                             var transout='';
                             if (hier == "m") { 
-                                transin = addtrans(2,nikaya,book,tmp2,tmp3,tmp4,tmp5);
+                                transin = addtrans(2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
                                 if (transin) {
                                     if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                     transout += transin.join('');
@@ -599,7 +596,7 @@ function importXMLindex() {
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
-                                    transin = addtrans(1,nikaya,book,tmp2,tmp3,tmp4,tmp5,tmp6);
+                                    transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
                                     if (transin) {
                                         if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                         transout += transin.join('');

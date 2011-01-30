@@ -31,8 +31,10 @@ pref("extensions.digitalpalireader.colors.red", "red");
 
 pref("extensions.digitalpalireader.colors.blueh", "powderblue");
 
-pref("extensions.digitalpalireader.misc.ctrans", "");
-pref("extensions.digitalpalireader.misc.autodict", "");
+pref("extensions.digitalpalireader.misc.ctrans", "unchecked");
+pref("extensions.digitalpalireader.misc.catioff", "unchecked");
+pref("extensions.digitalpalireader.misc.catiloc", "<none>");
+pref("extensions.digitalpalireader.misc.autodict", "unchecked");
 pref("extensions.digitalpalireader.misc.bkgimg", "checked");
 
 pref("extensions.digitalpalireader.misc.script", "0");

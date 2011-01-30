@@ -82,6 +82,29 @@ function writeFile(aFileKey, aContent, aChars)
     }
 }
 
+function getHomePath() {
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+    var dir = DIR.get("Home", Components.interfaces.nsIFile);
+    return dir.path;
+}
+function fileExists(aDir,aFileKey)
+{
+    var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+    var dir = DIR.get("Home", Components.interfaces.nsIFile);
+	aDir = aDir.replace(/\\/g,'/');
+	var dirs = aDir.split('/');
+	for (i in dirs) {
+		dir.append(dirs[i]);
+		if ( !dir.exists() )
+		{
+			return false;
+		}
+	}
+	dir.append(aFileKey);
+    if ( dir.exists() ) return true;
+    return false;
+}
+
 function readDir() {
     var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
     var dir = DIR.get("ProfD", Components.interfaces.nsIFile);

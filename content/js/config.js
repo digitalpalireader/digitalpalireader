@@ -37,6 +37,8 @@ colorcfg['red'] = getColPref('red');
 colorcfg['blueh'] = getColPref('blueh');
 
 cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
+cfg['catioff'] = (getMiscPref("catioff") == "checked"?"checked":"");
+cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
 cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 cfg['script'] = getMiscPref('script');
@@ -84,6 +86,8 @@ function getconfig() {
 	colorcfg['blueh'] = getColPref('blueh');
 
     cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
+	cfg['catioff'] = (getMiscPref("catioff") == "checked"?"checked":"");
+	cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
 	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 	cfg['script'] = getMiscPref('script');
@@ -91,11 +95,15 @@ function getconfig() {
 	
     // Add ATI translations if preferred
     if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
+		if (cfg['catioff'] == "checked") { 
+			var nsrc = 'file://' + getHomePath() +'/'+ cfg['catiloc'] + '/html/tech/digital_pali_reader_suttas.js';
+		}
+		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
 		atiIns = 1;
         var headID = document.getElementsByTagName("head")[0];         
         var newScript = document.createElement('script');
         newScript.type = 'text/javascript';
-        newScript.src = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php';
+        newScript.src = nsrc;
         headID.appendChild(newScript);
     }
 	
@@ -212,10 +220,11 @@ function loadOptions() {
     mafaout += '<p><b id="col7" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">BKGD: </b><input name="color7" id="colbk" value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"><br /><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1);" '+cfg['bkgimg']+'>Add parchment texture</input>';
     mafaout += '<p><b id="col8">Font: </b><input name="color8" id="colfont" value="'+colorcfg['colfont']+'" type=input size=7 title="Enter desired font family" onkeyup="document.getElementById(\'col8\').style.fontFamily=this.value">';
     mafaout += '<p><b id="col9">Size (px): </b><input name="color9" id="colsize" value="'+colorcfg['colsize']+'" type=input size=7 title="Enter desired font size in pixels" onkeyup="document.getElementById(\'col9\').style.fontSize=this.value + \'px\'">';
-    mafaout += '</form></td></tr><tr><td colspan=2><hr /><p><b>Misc. Options:</b></p>';
-    mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+'>';
+    mafaout += '</form></td></tr><tr><td colspan=2><hr /><form name="miscform"><p><b>Misc. Options:</b></p>';
+    mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+' onclick="this.checked==true ? document.getElementById(\'catiul\').style.display = \'block\' : document.getElementById(\'catiul\').style.display = \'none\';">';
+    mafaout += '<ul id="catiul" '+(cfg['ctrans'] == 'checked' ? '': 'style="display:none"')+' ><li><input type="checkbox" name="catioff" id="catioff" '+cfg['catioff']+'> Use <a href="http://www.accesstoinsight.org/tech/download/bulk/bulk.html" target="_blank">offline version</a> of <a href="http://www.accesstoinsight.org/" target="_blank">accesstoinsight.org</a> - location: <b>'+getHomePath()+'/</b><input type="text" name="catiloc" id="catiloc" value="'+cfg['catiloc']+'" onkeyup="if(fileExists(this.value,\'start.html\')) { document.getElementById(\'atilocx\').style.color=\'green\'; document.getElementById(\'atilocx\').innerHTML=\'ok\'; } else{document.getElementById(\'atilocx\').style.color=\'red\'; document.getElementById(\'atilocx\').innerHTML=\'x\';}"><b>/start.html <font id="atilocx" size="5" style="color:'+(fileExists(cfg['catiloc'],'start.html') ? 'green">ok' : 'red">x' )+'</font></b></li></ul></p>';
     mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
-    mafaout += '</td></tr></table>';
+    mafaout += '</form></td></tr></table>';
     mafaout += '<p align=center>';
 		mafaout += '<button class="btn" onclick="saveOptions()">Save</button>';
 		mafaout += '<button class="btn" onclick="moveframex(2); refreshit()">Cancel</button>';
@@ -225,6 +234,12 @@ function loadOptions() {
 }
 
 function saveOptions() {
+	
+	if(document.miscform.catioff.checked && !fileExists(document.miscform.catiloc.value,'start.html')) {
+		alert('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.'); 
+		return; 
+	}
+	
     var Val;
     var Pref;
     for (i = 0; i < cPrefs.length; i++) {
@@ -249,14 +264,18 @@ function saveOptions() {
     for (i = 0; i < mPrefs.length; i++) {
         Pref = mPrefs[i];
         if (document.getElementById(Pref)) {
-            Val = document.getElementById(Pref).checked;
-            if (Val == true) Val = 'checked';
-            else Val = 'unchecked';
+			if (document.getElementById(Pref).type=='checkbox') {
+				Val = document.getElementById(Pref).checked;
+				if (Val == true) Val = 'checked';
+				if (Val == false) Val = 'unchecked';
+			}
+			else Val = document.getElementById(Pref).value;
             setMiscPref(Pref,Val);
         }
     }
     document.getElementById('message').innerHTML = " Options saved."
     moveframex(2);
+    atiIns = 0; // in case we have to load a new ATI - it will still check for atiD
     getconfig();
 }
 
@@ -305,3 +324,4 @@ function eraseOptions(which) {
 	}
 	else { refreshit(1); }
 }
+

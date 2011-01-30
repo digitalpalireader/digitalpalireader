@@ -39,8 +39,10 @@ cPrefs.push("red"); cPrefVals.push("red");
 
 cPrefs.push("blueh"); cPrefVals.push("powderblue");
 
-mPrefs.push("ctrans"); mPrefVals.push("checked");
-mPrefs.push("autodict"); mPrefVals.push("checked");
+mPrefs.push("ctrans"); mPrefVals.push("unchecked");
+mPrefs.push("catioff"); mPrefVals.push("unchecked");
+mPrefs.push("catiloc"); mPrefVals.push("<none>");
+mPrefs.push("autodict"); mPrefVals.push("unchecked");
 mPrefs.push("bkgimg"); mPrefVals.push("checked");
 mPrefs.push("script"); mPrefVals.push("0");
 mPrefs.push("cpanel"); mPrefVals.push("1");
