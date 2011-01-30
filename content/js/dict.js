@@ -218,7 +218,6 @@ function mlsearchstart()
 	
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
-	var y = 0;
 	var finout = '';
 	var yg = [];
 	
@@ -235,39 +234,17 @@ function mlsearchstart()
 			ud = replaceunistandard(yt[yg[x]].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
 			ud = ud.replace(/#(.*)/, " ($1)");
 			
-			finouta[y] = '<a href="javascript:void(0)" onclick="document.getElementById(\'anfc\').innerHTML = \'<font style=\&quot;color:'+colorcfg['colsel']+'\&quot;>' + us + '</font> = <font style=\&quot;color:'+colorcfg['coltext']+'\&quot;>' + ud +'</font>\'" onmouseover="document.getElementById(\'anfd\').innerHTML = \'' + ud +'\'" onmouseout="document.getElementById(\'anfd\').innerHTML = \'\'">' + us + '</a><br>';
-			y++;
+			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + us + '</font></b> '+ud +'<br>');
+
 		}
 	}
 	
-	var findiv = (y/3);
-	var ctab = 0;
-	var flag1 = 0;
-	var flag2 = 0;
-	
 	finout = '<table width=100%><tr><td valign="top">';
 	
-	for (z = 0; z < findiv; z++)
+	for (var z = 0; z < finouta.length; z++)
 	{
-		
 		finout += finouta[z];
-		ctab++;
-	}
-	finout += '</td><td valign="top">';
-	if(y > 1)
-	{
-		for (z = ctab; z < (ctab*2); z++)
-		{
-			finout += finouta[z];
-		}	
-		
-		finout += '</td><td valign="top">';
-		for (z = (ctab*2); z < y; z++)
-		{
-			finout += finouta[z];
-		}	
-	}
-	
+	}	
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
     document.getElementById('difb').scrollTop=0;
@@ -305,39 +282,17 @@ function epdsearchstart()
 		{
 			gsplit = epd[x].split('^');
 			
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="document.getElementById(\'anfc\').innerHTML = \'<font class=white>' + gsplit[0] + '</font> = <font class=brown>' + gsplit[1] +'</font>\'" onmouseover="document.getElementById(\'anfd\').innerHTML = \'' + gsplit[1] +'\'" onmouseout="document.getElementById(\'anfd\').innerHTML = \'\'">' + gsplit[0] + '</a><br>';
-			y++;
+			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + gsplit[0] + '</font></b> '+gsplit[1] +'<br>');
+
 		}
 	}
 	
-	var findiv = (y/3);
-	var ctab = 0;
-	var flag1 = 0;
-	var flag2 = 0;
-	
 	finout = '<table width=100%><tr><td valign="top">';
 	
-	for (z = 0; z < findiv; z++)
+	for (var z = 0; z < finouta.length; z++)
 	{
-		
 		finout += finouta[z];
-		ctab++;
-	}
-	finout += '</td><td valign="top">';
-	if(y > 1)
-	{
-		for (z = ctab; z < (ctab*2); z++)
-		{
-			finout += finouta[z];
-		}	
-		
-		finout += '</td><td valign="top">';
-		for (z = (ctab*2); z < y; z++)
-		{
-			finout += finouta[z];
-		}	
-	}
-	
+	}	
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
     document.getElementById('difb').scrollTop=0;

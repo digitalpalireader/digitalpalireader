@@ -248,30 +248,21 @@ position:absolute;
 bottom:152px;
 right:0px;
 left:-1px;
-height:60px; 
 z-index:3;
 }
 #anft {
-padding-top:0px; 
+position:relative;
+padding-top:4px; 
 padding-bottom:4px; 
 padding-right:4px; 
 padding-left:4px;
-position:absolute;
-top:0px;
-right:0px;
-left:0px;
-bottom:4px;
 overflow:auto;
 }
 #anfs {
-position:absolute; 
-top:0px; 
-left:0px
+float:left;
 }
 #anfsd {
-position:absolute; 
-top:0px; 
-right:0px
+float:right;
 }
 
 #corb {

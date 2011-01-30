@@ -189,7 +189,7 @@ function outputDef(which,first)
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
 		if(moveat == 2) { moveframey('dif'); }
 	}
-	return;
+	moveframex(moveat);
 }
 
 function noah()

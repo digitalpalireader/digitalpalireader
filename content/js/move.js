@@ -10,7 +10,7 @@ function moveframex(a,temp) //read, etc
     else {document.getElementById('right').style.left = '0px'; }
 
     document.getElementById('left').style.width = confmove[2] + 'px';
-    document.getElementById('anf').style.height = confmove[0] + 'px';
+//    document.getElementById('anf').style.height = confmove[0] + 'px';
     document.getElementById('searcht').style.height = confmove[3] + 'px';
     moves(0);
     switch (a) {
@@ -27,9 +27,8 @@ function moveframex(a,temp) //read, etc
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'none';
-            document.getElementById('maf').style.bottom = (parseInt(confmove[0])-4) + 'px';
             document.getElementById('anf').style.bottom = '-4px';
-            document.getElementById('anf').style.top = '';
+            document.getElementById('anf').style.top = 'auto';
             break;
         case 2:  //normal view
 
@@ -44,11 +43,11 @@ function moveframex(a,temp) //read, etc
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'block';
 
-            document.getElementById('maf').style.bottom = (parseInt(confmove[0]) + parseInt(confmove[1])-4) + 'px';
+            document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
+            document.getElementById('anf').style.top = 'auto';
+
             document.getElementById('rightbot').style.bottom = '0px';
             document.getElementById('rightbot').style.height = parseInt(confmove[1]) + 'px';
-            document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
-            document.getElementById('anf').style.top = '';
 
             document.getElementById('rightbot').style.top = '';
             break;
@@ -62,16 +61,17 @@ function moveframex(a,temp) //read, etc
             document.getElementById('maf').style.display = 'none';
             document.getElementById('rightbot').style.display = 'block';
 
-            document.getElementById('rightbot').style.height = 'auto';
-            document.getElementById('rightbot').style.top = (parseInt(confmove[0])-4) + 'px';
-            document.getElementById('rightbot').style.bottom = '0px';
+            document.getElementById('anf').style.top = '-1px';
+            document.getElementById('anf').style.bottom = 'auto';
             
+            document.getElementById('rightbot').style.height = 'auto';
+            document.getElementById('rightbot').style.top = (document.getElementById('anf').offsetTop + document.getElementById('anf').offsetHeight)+ 'px';
+            document.getElementById('rightbot').style.bottom = '0px';
 
             
-            document.getElementById('anf').style.top = '-1px';
-            document.getElementById('anf').style.bottom = '';
             break;
     }
+	document.getElementById('maf').style.bottom = (window.innerHeight-document.getElementById('anf').offsetTop) + 'px';
 }
 
 function moveframey(a) //dict, conv, or scratch
@@ -166,14 +166,13 @@ function moves(a) // search open / close
 }
 
 function moveanf(which) {
+return;
+	document.getElementById('anf').style.height = confmove[0] + 'px';
+	document.getElementById('anft').scrollTop = 0;
 	if (which == 1) {
 		//alert(document.getElementById('anfb').offsetHeight + ' ' + document.getElementById('anf').offsetHeight);
-		var anfh = document.getElementById('anfb').offsetHeight+24;
+		var anfh = document.getElementById('anfb').offsetHeight+32;
 		if (anfh > confmove[0]) document.getElementById('anf').style.height = (anfh) + 'px';
-	}
-	else {
-		document.getElementById('anf').style.height = confmove[0] + 'px';
-		document.getElementById('anft').scrollTop = 0;
 	}
 }
 

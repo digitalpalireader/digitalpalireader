@@ -615,6 +615,7 @@ function importXMLindex() {
 	document.getElementById('mafb').innerHTML = theDatao;  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
+	if(moveat == 3) { moveframex(2); }
 }
 
 function importXMLraw()
