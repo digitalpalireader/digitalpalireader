@@ -34,8 +34,6 @@ overflow: hidden;
 
 hr {
 margin:4px;
-margin-right:12px;
-margin-left:12px;
 color: #FFF;
 background-color: #FFF;
 }
@@ -425,6 +423,25 @@ background-image:url('../images/rb0.png');
 .sbut {
 background-image:url('../images/mats.png');
 height:30px;
+}
+.cp-d {
+position:absolute;
+right:4px;
+top:-4px;
+width:10px;
+height:10px;
+background-color:#F5F5F5;
+border:1px solid #FFF
+}
+.cpsp {
+	position:absolute;
+	left:0;
+	top:0;
+	height:20px;
+}
+.cpcont {
+	position:relative;
+	min-height:4px;
 }
 
 .hide { display: none; }

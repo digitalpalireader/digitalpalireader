@@ -1280,7 +1280,7 @@ function historyBox() {
 	var hout = '';
 	var theHistory = getHistory();
 	if (theHistory) {
-		hout = '<select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); if (thisv != \'0\'){ getplace(thisv); importXML() }">';
+		hout = '<a style="visibility:hidden">x&nbsp;</a><select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); if (thisv != \'0\'){ getplace(thisv); importXML() }">';
 		hout += '<option value="0">History</option>';
 		var isclear = '';
 		for (i in theHistory) {
@@ -1289,7 +1289,7 @@ function historyBox() {
 			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
 			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
 		}
-		hout += '</select> <a href="javascript:void(0)" title="Clear History" onclick="clearHistory(1);">x</a>';
+		hout += '</select>&nbsp;<a href="javascript:void(0)" title="Clear History" onclick="clearHistory(1);" onmouseover="this.style.color=\'#F5F5F5\'" onmouseout="this.style.color=\'inherit\';">x</a>';
 	}
 		
 	document.getElementById('history').innerHTML = hout;

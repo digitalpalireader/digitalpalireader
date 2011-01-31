@@ -40,5 +40,14 @@ pref("extensions.digitalpalireader.misc.bkgimg", "checked");
 pref("extensions.digitalpalireader.misc.script", "0");
 pref("extensions.digitalpalireader.misc.cpanel", "1");
 
+pref("extensions.digitalpalireader.misc.cp1", "1");
+pref("extensions.digitalpalireader.misc.cp2", "1");
+pref("extensions.digitalpalireader.misc.cp3", "1");
+pref("extensions.digitalpalireader.misc.cp4", "1");
+pref("extensions.digitalpalireader.misc.cp5", "1");
+pref("extensions.digitalpalireader.misc.cp6", "1");
+pref("extensions.digitalpalireader.misc.cp7", "1");
+pref("extensions.digitalpalireader.misc.cp8", "1");
+
 // See http://kb.mozillazine.org/Localize_extension_descriptions
 pref("extensions.digitalpalireader@noah.yuttadhammo.description", "chrome://digitalpalireader/locale/digitalpalireader.properties");

@@ -152,6 +152,17 @@ function openCP(wR) {
 		}
 }
 
+function cpFlatten(cpin) {
+	var cpt = document.getElementById(cpin);
+	if(cpt.style.display=='none') {
+		cpt.style.display='block';
+		setMiscPref(cpin,'1');
+	}
+	else {
+		cpt.style.display='none';
+		setMiscPref(cpin,'0');
+	}
+}
 
 function moves(a) // search open / close
 {

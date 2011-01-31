@@ -44,6 +44,15 @@ cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 cfg['script'] = getMiscPref('script');
 cfg['cpanel'] = getMiscPref('cpanel');
 
+cfg['cp1'] = getMiscPref('cp1');
+cfg['cp2'] = getMiscPref('cp2');
+cfg['cp3'] = getMiscPref('cp3');
+cfg['cp4'] = getMiscPref('cp4');
+cfg['cp5'] = getMiscPref('cp5');
+cfg['cp6'] = getMiscPref('cp6');
+cfg['cp7'] = getMiscPref('cp7');
+cfg['cp8'] = getMiscPref('cp8');
+
 
 var colchanges = document.getElementsByName('changecolor');
 for(var i=0;i < colchanges.length;i++)
@@ -92,7 +101,16 @@ function getconfig() {
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 	cfg['script'] = getMiscPref('script');
 	cfg['cpanel'] = getMiscPref('cpanel');
-	
+
+	cfg['cp1'] = getMiscPref('cp1');
+	cfg['cp2'] = getMiscPref('cp2');
+	cfg['cp3'] = getMiscPref('cp3');
+	cfg['cp4'] = getMiscPref('cp4');
+	cfg['cp5'] = getMiscPref('cp5');
+	cfg['cp6'] = getMiscPref('cp6');
+	cfg['cp7'] = getMiscPref('cp7');
+	cfg['cp8'] = getMiscPref('cp8');
+
     // Add ATI translations if preferred
     if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
 		if (cfg['catioff'] == "checked") { 
@@ -110,6 +128,10 @@ function getconfig() {
 	// Control Panel
 	
 	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
+
+	for (var i = 1; i <= 8; i++) {
+		cfg['cp'+i] == '0' ? document.getElementById('cp'+i).style.display='none':'';
+	}
 
 	// update backgrounds
 		
