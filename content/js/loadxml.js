@@ -1027,6 +1027,7 @@ function helpXML(file)
 		if(data[ippp].childNodes) outputit += data[ippp].childNodes[0].nodeValue;
 	}		
 	document.getElementById('mafbc').innerHTML = outputit;
+	document.getElementById('mafbc').innerHTML += '<hr/><div><i>DPR version number: <b>'+version+'</b></i></div>';
     document.getElementById('maf').scrollTop = 0;
 }
 
