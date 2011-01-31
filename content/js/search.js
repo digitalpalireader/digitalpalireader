@@ -2086,7 +2086,7 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	moves(0);
 	if (stringra) document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
 	var ssect = se;
-	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 	var hierb = hier;
 	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierb);
 	getplace(temp);

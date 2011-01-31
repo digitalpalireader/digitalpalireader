@@ -18,7 +18,7 @@ function feedbackform() {
 	+ '<textarea cols=40 rows=10 name="message"></textarea>'
 	+ '<p><input type="submit" value=" Send ">'
 	+ '</form>';
-	document.getElementById('mafb').innerHTML=mafbout;
+	document.getElementById('mafbc').innerHTML=mafbout;
 }
 
 /*

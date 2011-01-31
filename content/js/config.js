@@ -259,7 +259,7 @@ function loadOptions() {
 		mafaout += '<button class="btn" onclick="moveframex(2); refreshit()">Cancel</button>';
 		mafaout += '<button class="btn" onclick="eraseOptions(1)">Restore defaults</button><b style="color:'+colorcfg['colsel']+'" id=message> </b>';
     mafaout += '</p>';
-    document.getElementById('mafb').innerHTML = mafaout;
+    document.getElementById('mafbc').innerHTML = mafaout;
 }
 
 function saveOptions() {

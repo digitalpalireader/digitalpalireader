@@ -121,7 +121,7 @@ function showmeallthecookies()
 		}
 	if (cookietotalno == 1)  allcookies += '<hr><b>' + cookietotalno + ' Bookmark Stored</b>';
 	else allcookies += '<hr><b>' + cookietotalno + ' Bookmarks Stored</b>';
-	document.getElementById('mafb').innerHTML = allcookies;
+	document.getElementById('mafbc').innerHTML = allcookies;
 }
 
 function updatecookielist()
@@ -203,7 +203,7 @@ function bookmarkframe(refresh)
     ca = ca.sort();
 	if (ca.length < 2)
 	{
-		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
 	}
 	else
 	{
@@ -245,7 +245,7 @@ function bookmarkframe(refresh)
 		else allcookies += '<hr><b>' + cookietotalno + ' Bookmarks Stored</b>';
 		allcookies += ' - <input type="button" value="erase all" title="erase all stored bookmarks" onclick="erasecookies(\'go\')">';
 		
-		document.getElementById('mafb').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
 		
 		// now add the descriptions
 		

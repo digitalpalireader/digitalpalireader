@@ -23,7 +23,7 @@ function importXML(labelsearch,para)
 		return;
 	}		
 
-	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -67,7 +67,7 @@ function importXML(labelsearch,para)
 	var yna = (yn[0].childNodes[0] ? yn[0].childNodes[0].nodeValue : ' ');
 	var zna = (zn[0].childNodes[0] ? zn[0].childNodes[0].nodeValue : ' ');
 
-	document.getElementById('mafb').innerHTML = '';
+	document.getElementById('mafbc').innerHTML = '';
 	
 	convtitle(nikaya,book,vna,wna,xna,yna,zna);
 
@@ -439,7 +439,7 @@ function importXMLindex() {
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}	
-	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -612,7 +612,7 @@ function importXMLindex() {
 		}
 	}
 
-	document.getElementById('mafb').innerHTML = theDatao;  // ---------- return output ----------
+	document.getElementById('mafbc').innerHTML = theDatao;  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
 	if(moveat == 3) { moveframex(2); }
@@ -624,7 +624,7 @@ function importXMLraw()
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}
-	document.getElementById('mafb').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -668,7 +668,7 @@ function importXMLraw()
 	
 	var theData = "";
 	
-	document.getElementById('mafb').innerHTML = '';
+	document.getElementById('mafbc').innerHTML = '';
 
 
 	for (tmp = 0; tmp < z.length; tmp++)
@@ -678,7 +678,7 @@ function importXMLraw()
 		theData = theData.replace(/\^eb\^/g, ' </b> ');
 		theData = theData.replace(/\^a\^/g, '<!--');
 		theData = theData.replace(/\^ea\^/g, '-->');
-		document.getElementById('mafb').innerHTML += '<p>' + theData + '</p>';  // ---------- return output ----------
+		document.getElementById('mafbc').innerHTML += '<p>' + theData + '</p>';  // ---------- return output ----------
 	}
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
@@ -1020,13 +1020,13 @@ function helpXML(file)
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var outputit = '';
-	document.getElementById('mafb').setAttribute('align','justify');
-	document.getElementById('mafb').innerHTML = '';
+	document.getElementById('mafbc').setAttribute('align','justify');
+	document.getElementById('mafbc').innerHTML = '';
 	var data = xmlDoc.getElementsByTagName('data')
 	for (ippp in data) {
 		if(data[ippp].childNodes) outputit += data[ippp].childNodes[0].nodeValue;
 	}		
-	document.getElementById('mafb').innerHTML = outputit;
+	document.getElementById('mafbc').innerHTML = outputit;
     document.getElementById('maf').scrollTop = 0;
 }
 
@@ -1042,7 +1042,7 @@ function getatt(num,type) { // get atthakatha or tika word
 		var loc = tiklist[num].substring(tiklist[num].indexOf('#')+1);
 	}
     var loca = loc.split('#');
-	document.getElementById('mafb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
     var finout = '';
     for (i in loca) {
         var pca = loca[i].split('^');
@@ -1095,8 +1095,8 @@ function getatt(num,type) { // get atthakatha or tika word
         placen += ' Para. ' + (parseInt(para)+1);
         finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafb').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'Aṭṭhakathā:' : 'Ṭīka:');
-    document.getElementById('mafb').innerHTML += finout;
+    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'Aṭṭhakathā:' : 'Ṭīka:');
+    document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }
  

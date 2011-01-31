@@ -1,6 +1,11 @@
 function refreshit(which)
 {
-	document.getElementById('mafb').innerHTML='<div id = "c" align=center><h1>Welcome to the Digital Pali Reader</h1><p>To start, simply choose a book, section and passage on the right side of the screen.</p><p>If you encounter any problems, simply press the "*" button to restart the reader.</p><p>For detailed instructions, click on the "?" button for the help page.</p><p>For information on updates, visit <b><a href="http://pali.sirimangalo.org/" target="_blank">the project site</a></b>.</p><p>If you have questions or feedback, you can try to contact me at <b><a href="mailto:yuttadhammo@gmail.com">yuttadhammo@gmail.com</a></b></p></div><div id="mafd" align=center>&nbsp;</div><div id="mafe" align=center>&nbsp;</div>';
+	document.getElementById('mafbc').innerHTML='<div id="mafrefresh" align=center><h1>Welcome&nbsp;to&nbsp;the&nbsp;Digital&nbsp;Pali&nbsp;Reader</h1><p>To&nbsp;start,&nbsp;simply&nbsp;choose&nbsp;a&nbsp;book,&nbsp;section&nbsp;and&nbsp;passage&nbsp;on&nbsp;the&nbsp;right&nbsp;side&nbsp;of&nbsp;the&nbsp;screen.</p><p>If&nbsp;you&nbsp;encounter&nbsp;any&nbsp;problems,&nbsp;simply&nbsp;press&nbsp;the&nbsp;"*"&nbsp;button&nbsp;to&nbsp;restart&nbsp;the&nbsp;reader.</p><p>For&nbsp;detailed&nbsp;instructions,&nbsp;click&nbsp;on&nbsp;the&nbsp;"?"&nbsp;button&nbsp;for&nbsp;the&nbsp;help&nbsp;page.</p><p>For&nbsp;information&nbsp;on&nbsp;updates,&nbsp;visit&nbsp;<b><a href="http://pali.sirimangalo.org/" target="_blank">the&nbsp;project&nbsp;site</a></b>.</p><p>If&nbsp;you&nbsp;have&nbsp;questions&nbsp;or&nbsp;feedback,&nbsp;you&nbsp;can&nbsp;try&nbsp;to&nbsp;contact&nbsp;me&nbsp;at&nbsp;<b><a href="mailto:yuttadhammo@gmail.com">yuttadhammo@gmail.com</a></b></p></div><div id="mafd" align=center></div><div id="mafe" align=center></div>';
+	document.getElementById('mafrefresh').style.height = document.getElementById('mafrefresh').offsetHeight + 'px';
+	document.getElementById('mafrefresh').style.marginTop = (document.getElementById('mafrefresh').offsetHeight/(-2)) + 'px';
+	document.getElementById('mafrefresh').style.width = document.getElementById('mafrefresh').offsetWidth + 'px';
+	document.getElementById('mafrefresh').style.marginLeft = (document.getElementById('mafrefresh').offsetWidth/(-2)) + 'px';
+	//document.getElementById('mafrefresh').style.marginBottom = document.getElementById('mafrefresh').offsetHeight/(-2);
 	bv();
     changenikaya(1);
     if (which == 1) { // coming from reset options.

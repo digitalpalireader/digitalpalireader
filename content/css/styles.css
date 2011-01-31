@@ -219,10 +219,18 @@ bottom:0px;
 width:100%;
 }
 #mafb {
-min-height:100%;
-padding:20px;
-margin-bottom:-35px;
+	position:relative;
+	min-height:100%;
 }
+#mafbc {
+	padding:20px;
+}
+#mafrefresh {
+	position:absolute;
+	top:50%;
+	left:50%;
+}
+
 #convi {
 display:none;
 }
