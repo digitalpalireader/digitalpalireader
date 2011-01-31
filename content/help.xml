@@ -15,8 +15,8 @@
   <data> &lt;hr&gt;</data>
   <data> &lt;h2&gt;What is it?&lt;/h2&gt;</data>
   <data> &lt;p&gt;The Digital Pali Reader (DPR) is a tool, much like a hard-copy language reader, facilitating study of the Pali language at an</data>
-  <data> advanced level. Rather than offering a translation for the text being</data>
-  <data> read, a reader usually includes a dictionary with all of the difficult words</data>
+  <data> advanced level. It contains the entire Myanmar version of the Pali tipitaka, as well as commentaries and sub-commentaries where available.  It also includes the Visuddhimagga, Abhidhammatthasangaha and several ancient grammatical texts composed in Pali, all available for analysis and translation.  Rather than offering a translation for the text being</data>
+  <data> read, the DPR is like an ordinary text reader, which will normally include a dictionary with all of the difficult words</data>
   <data> found in the reader. The DPR differs from an ordinary reader in several</data>
   <data> respects:&lt;/p&gt;</data>
   <data> &lt;ol&gt;</data>
@@ -28,13 +28,15 @@
   <data> purpose at hand, and of course word-to-definition matches are sometimes incorrect</data>
   <data> due to imperfect</data>
   <data> analysis.&lt;/li&gt;</data>
-  <data> &lt;li&gt;The DPR includes several dictionaries: Pali-English, English-Pali, Pali proper names, and Concise Pali Dictionary, as well as a searchable compilation of terms discussed in the commentaries. These can be directly accessed from the control panel under the "Dictionary" section. &lt;/li&gt;</data>
+  <data> &lt;li&gt;The DPR includes several dictionaries: Pali-English, English-Pali, Pali proper names, and Concise Pali Dictionary, as well as a searchable compilation of terms discussed in the commentaries and sub-commentaries. These can be directly accessed from the control panel under the "Dictionary" section. &lt;/li&gt;</data>
   <data> &lt;li&gt;The DPR has several useful auxiliary utilities, including:</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;li&gt;bookmark and quote clipboard for keeping important passages&lt;/li&gt;</data>
-  <data> &lt;li&gt;A Pali conversion utility that converts to and from Velthius, Unicode, CSCD, and Thai scripts&lt;/li&gt;</data>
-  <data> &lt;li&gt;transliteration of Pali into Thai and Devanagari scripts &lt;/li&gt;</data>
-  <data> &lt;li&gt;a Pali language quiz to test your vocabulary and random English quotes from Buddhavacana, by S. Dhammika&lt;/li&gt;</data>
+  <data> &lt;li&gt;a Pali conversion utility that converts to and from Velthius and Unicode scripts&lt;/li&gt;</data>
+  <data> &lt;li&gt;transliteration of Pali into Thai, Devanagari and Myanmar scripts &lt;/li&gt;</data>
+  <data> &lt;li&gt;a Pali language quiz to test your vocabulary and a declension quiz to test your grammar&lt;/li&gt;</data>
+  <data> &lt;li&gt; random English quotes from Buddhavacana, by S. Dhammika&lt;/li&gt;</data>
+  
   <data> &lt;/ul&gt;</data>
   <data> &lt;/li&gt;</data>
   <data> &lt;/ol&gt;</data>
@@ -42,10 +44,10 @@
   <data> who wish to advance their studies to a higher level.&lt;br&gt; &lt;/p&gt;</data>
   <data> &lt;hr&gt;</data>
   <data> &lt;h2&gt;How to Use:&lt;/h2&gt;</data>
-  <data> &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; If any problem arises in the functioning of the reader, just press CTRL+F5 to reset the reader&lt;/p&gt;</data>
+  <data> &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; If any problem arises in the functioning of the reader, just press F5 to reset the reader&lt;/p&gt;</data>
   <data> &lt;p&gt;&lt;b&gt;Note:&lt;/b&gt; Many common tasks are now mapped to keys, which may be used instead of the buttons themselves, as follows:&lt;br&gt;</data>
   <data> &lt;ul&gt;</data>
-  <data> &lt;li&gt;&lt;b&gt;1,2,3&lt;/b&gt; for the three views (RAD)&lt;/li&gt;&lt;li&gt;&lt;b&gt;d,c,t&lt;/b&gt; for the three tools in the bottom frame &lt;/li&gt;&lt;li&gt; &lt;b&gt;x&lt;/b&gt; to open/close the control panel &lt;/li&gt;&lt;li&gt; &lt;b&gt;s&lt;/b&gt; to send selected text to the convertor, or the entire section if no text is selected.&lt;/li&gt;&lt;li&gt; &lt;b&gt;, and .&lt;/b&gt; to go back and forth between dictionary entries (PED and DPPN).&lt;/li&gt;&lt;li&gt; &lt;b&gt;%,!,#,*,?,@&lt;/b&gt; for each of the six buttons at the bottom (see below).&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</data>
+  <data> &lt;li&gt;&lt;b&gt;1,2,3&lt;/b&gt; for the three views (RAD)&lt;/li&gt;&lt;li&gt;&lt;b&gt;p,g,n&lt;/b&gt; for opening the previous, current (g) and next sections &lt;/li&gt;&lt;li&gt;&lt;b&gt;d,c,t&lt;/b&gt; for the three tools in the bottom frame &lt;/li&gt;&lt;li&gt; &lt;b&gt;x&lt;/b&gt; to open/close the control panel &lt;/li&gt;&lt;li&gt; &lt;b&gt;s&lt;/b&gt; to send selected text to the convertor, or the entire section if no text is selected.&lt;/li&gt;&lt;li&gt; &lt;b&gt;,&lt;/b&gt; and &lt;b&gt;.&lt;/b&gt; to go back and forth between dictionary entries (PED and DPPN).&lt;/li&gt;&lt;li&gt; &lt;b&gt;%,!,#,*,?,@&lt;/b&gt; for each of the six buttons at the bottom (see below).&lt;/li&gt;&lt;/ul&gt;&lt;/p&gt;</data>
   <data> &lt;p&gt;The right side of the screen contains the main controls. Basic use should require little explanation. What follows is a brief explanation of all of the controls in the control panel:&lt;/p&gt;</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;li&gt;At the top, there is the list of nikayas, books and sub-sections for </data>
@@ -99,7 +101,7 @@
   <data> no search function. Special thanks also to Alan McClure, Ven. Gavesako, Peter</data>
   <data> Masefield, Lin Qian, and Leland George for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on &lt;a href="http://www.accesstoinsight.org/outsources/pali.html"&gt;www.accesstoinsight.org&lt;/a&gt; as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:&lt;br&gt;</data>
   <data> &lt;ul&gt;</data>
-  <data> &lt;li&gt;The Sixth(?) Council Tipitaka&lt;/li&gt;</data>
+  <data> &lt;li&gt;The Myanmar Pali Tipitaka&lt;/li&gt;</data>
   <data> &lt;li&gt;The Pali English Dictionary&lt;/li&gt;</data>
   <data> &lt;li&gt;Concise Pali English Dictionary&lt;/li&gt;</data>
   <data> &lt;li&gt;Concise English Pali Dictionary&lt;/li&gt;</data>
@@ -116,5 +118,5 @@
   <data> &lt;a href="http://pali.sirimangalo.org/blog/"&gt;weblog&lt;/a&gt; for new updates.&lt;/p&gt;</data>
   <data> &lt;p&gt;Best wishes and good luck,&lt;/p&gt;</data>
   <data> &lt;p&gt;Yuttadhammo&lt;/p&gt;</data>
-  <data> &lt;p&gt;Last Updated: Jan. 21, 2011 C.E.&lt;/p&gt;</data>
+  <data> &lt;p&gt;Last Updated: Jan. 31, 2011 C.E.&lt;/p&gt;</data>
 </top>
