@@ -33,7 +33,8 @@ overflow: hidden;
 }
 
 hr {
-margin:4px;
+margin-top:4px;
+margin-bottom:4px;
 color: #FFF;
 background-color: #FFF;
 }
@@ -426,10 +427,11 @@ height:30px;
 }
 .cp-d {
 position:absolute;
-right:4px;
+right:0px;
 top:-4px;
-width:10px;
-height:10px;
+width:8px;
+height:8px;
+border-bottom-left-radius:8px;
 background-color:#F5F5F5;
 border:1px solid #FFF
 }
