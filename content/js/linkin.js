@@ -168,6 +168,7 @@ var fm = 0;
 
 function findmatch(oneword,lastpart,nextpart,trick)
 {
+	
 	fm++;
 
 	if (notpart[oneword]) { 
@@ -238,11 +239,15 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	var res = [];
 	var resn = [];
 	var resy;
+
 // exact maches
 
-	if (pedda[oneword])
+	if (mainda[oneword])
 	{
-		res.push(pedda[oneword]); 
+		res.push(mainda[oneword]); 
+	}
+	else if (irregda[oneword]) {
+		res.push(mainda[irregda[oneword]]);
 	}
 	
 // multiple exacts
@@ -252,9 +257,9 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		for (var a = 1; a < 10; a++) // loop through z1 - z6
 		{				
 			var temp = oneword + 'z' + a;
-			if (pedda[temp]) 
+			if (mainda[temp]) 
 			{
-				res.push(pedda[temp]);
+				res.push(mainda[temp]);
 			}
 			else break;
 		}
@@ -268,9 +273,9 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	{					
 		resy = oneword; // for matching the dictionary entry in the output
 	}
-
-
-
+	else if (irregda[oneword] && yt[irregda[oneword]]) {
+		resy = irregda[oneword];
+	}
 
 	if(nextpart) { 
 
@@ -305,9 +310,9 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
 			{			
 				var temp = wtr[b];
-				if (pedda[temp] != null && indeclinable[temp] == null) 
+				if (mainda[temp] != null && indeclinable[temp] == null) 
 				{			
-					res.push(pedda[temp]);				
+					res.push(mainda[temp]);				
 				}
 			}
 		}
@@ -320,9 +325,9 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				{				
 					var temp = wtr[b] + 'z' + c;
 
-					if (pedda[temp]) 
+					if (mainda[temp]) 
 					{
-						res.push(pedda[temp]);
+						res.push(mainda[temp]);
 					}
 					else { break; }
 				}

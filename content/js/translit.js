@@ -124,7 +124,7 @@ function toSin(input,type) {
 		else if (sinhala[i1] && i1 != 'a') {		// one character match except a
 			output += sinhala[i1];
 			i++;
-			if(cons[i2]) output += '්';
+			if(cons[i2] && i1 != 'ṃ') output += '්';
 		}					
 		else if (!sinhala[i1]) {
 			output += i1;
@@ -271,7 +271,7 @@ function toMyanmar(input,type) {
 		else if (myanr[i1] && i1 != 'a') {		// one character match except a
 			output += myanr[i1];
 			i++;
-			if(cons[i2]) output += '္';
+			if(cons[i2] && i1 != 'ṃ') output += '္';
 		}					
 		else if (!myanr[i1]) {
 			output += i1;

@@ -107,8 +107,8 @@ function sendtoconvert(data)
 
 	moveframex(2)
 	moveframey('cof');
-	document.convertor.R1[1].checked = true;
-	document.convertor.R2[2].checked = true;
+	document.convertor.R1[0].checked = true;
+	document.convertor.R2[1].checked = true;
 	document.convertor.outputc.value = '';
 	document.convertor.inputc.value = data;
 	convert();
