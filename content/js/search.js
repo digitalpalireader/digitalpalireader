@@ -1796,6 +1796,19 @@ function createTables(xmlDoc)
 								}
 								if (yesall == stringra.length)
 								{								
+									for(var t=0; t<tempexword.length; t++) {
+
+										l = tempexword[t].length;
+										for(var i=0; i<l; i++) {
+											while (tempexword[t][i].charAt(0).search(/[a-zA-Z.~]/) == -1) {
+												tempexword[t][i] = tempexword[t][i].substring(1);
+											}
+											while (tempexword[t][i].charAt(tempexword[t][i].length-1).search(/[a-zA-Z]/) == -1) {
+												tempexword[t][i] = tempexword[t][i].substring(0,tempexword[t][i].length-1);
+											}
+										}
+									}
+
 									texnodups = [];
 									for(var t=0; t<tempexword.length; t++) {
 										texnodups[t] = [];

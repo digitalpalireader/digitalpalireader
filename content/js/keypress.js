@@ -57,6 +57,7 @@ function keyPressed(e) {
 		if (e.charCode == 99) { moveframey('cof'); return; } // c
 		if (e.charCode == 116) { moveframey('scf'); return; } // t
 
+		if (e.charCode == 33) { eraseOptions(); return; } // !
 		if (e.charCode == 35) { newquiz(); return; } // #
 		if (e.charCode == 37) { loadOptions(); return; } // %
 		if (e.charCode == 42) { bv(); return; } // *

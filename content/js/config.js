@@ -351,6 +351,11 @@ function checksizes(pref,size) {
 }
 
 function eraseOptions(which) {
+	
+	var yes = confirm('Are you sure you want to reset all options?');
+	
+	if(!yes) return;
+	
     for (i = 0; i < cPrefs.length; i++) {
         var Pref = cPrefs[i];
         var Val = cPrefVals[i];
