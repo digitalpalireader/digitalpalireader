@@ -1,16 +1,14 @@
 <top>
   <data> &lt;h1&gt;Digital Pali Reader - Help File&lt;/h1&gt;</data>
-  <data> &lt;p&gt;If you are reading this, you have most likely got the Pali Reader up and</data>
-  <data> running on your computer. If it is up but not running, maybe this document</data>
-  <data> will help.&lt;/p&gt;</data>
   <data> &lt;h2&gt;&lt;b&gt;Notes:&lt;/b&gt;&lt;/h2&gt;</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;li&gt;The reader was created for my own personal use, but anyone is welcome to use</data>
   <data> or distribute what I have made for their own benefit or the benefit of others.</data>
-  <data> &lt;br&gt;</data>
   <data> &lt;/li&gt;</data>
   <data> &lt;li&gt;Some of the words 'recognized' by the reader are still incorrectly so, and many more are not yet recognized.</data>
   <data> Please bear with me, I will try to correct this as I have time.&lt;/li&gt;</data>
+  <data> &lt;li&gt;For the latest version of the reader, please visit &lt;a style="color:blue" href="http://pali.sirimangalo.org/"&gt;pali.sirimangalo.org&lt;/a&gt;</data>
+  <data> &lt;/li&gt;</data>
   <data> &lt;/ul&gt;</data>
   <data> &lt;hr&gt;</data>
   <data> &lt;h2&gt;What is it?&lt;/h2&gt;</data>
@@ -99,7 +97,7 @@
   <data> Without his later advice we would still be accessing one paragraph at a time and</data>
   <data> the data would be pre-analyzed and thus difficult to read. There would also be</data>
   <data> no search function. Special thanks also to Alan McClure, Ven. Gavesako, Peter</data>
-  <data> Masefield, Lin Qian, and Leland George for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on &lt;a href="http://www.accesstoinsight.org/outsources/pali.html"&gt;www.accesstoinsight.org&lt;/a&gt; as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:&lt;br&gt;</data>
+  <data> Masefield, Lin Qian, and Leland George for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on &lt;a href="http://www.accesstoinsight.org/outsources/pali.html"&gt;www.accesstoinsight.org&lt;/a&gt; as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR, as well as a way to link the DPR to the offline ATI archive. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:&lt;br&gt;</data>
   <data> &lt;ul&gt;</data>
   <data> &lt;li&gt;The Myanmar Pali Tipitaka&lt;/li&gt;</data>
   <data> &lt;li&gt;The Pali English Dictionary&lt;/li&gt;</data>
@@ -115,7 +113,7 @@
   <data>  &lt;a href="mailto:yuttadhammo@gmail.com"&gt;yuttadhammo@gmail.com&lt;/a&gt;.</data>
   <data> &lt;/p&gt;</data>
   <data> &lt;p&gt;2) Please check our </data>
-  <data> &lt;a href="http://pali.sirimangalo.org/blog/"&gt;weblog&lt;/a&gt; for new updates.&lt;/p&gt;</data>
+  <data> &lt;a href="http://pali.sirimangalo.org/"&gt;weblog&lt;/a&gt; for new updates.&lt;/p&gt;</data>
   <data> &lt;p&gt;Best wishes and good luck,&lt;/p&gt;</data>
   <data> &lt;p&gt;Yuttadhammo&lt;/p&gt;</data>
   <data> &lt;p&gt;Last Updated: Jan. 31, 2011 C.E.&lt;/p&gt;</data>

@@ -422,6 +422,67 @@ function tiksearchstart()
 }
 
 
+function titlesearchstart()
+{
+	if(typeof(titlelist) == 'undefined') {
+		return;
+	}
+	document.getElementById('difb').innerHTML='';
+	
+	var getstring = document.form.manual.value;
+	
+	var gslength = getstring.length;
+	var gsplit = new Array();	
+	var hsplit = [];
+	var gletter = getstring.charAt(0);
+	var foldersw = new Array();
+	var f0 = 0;
+	var f1 = 0;
+
+	var finouta = new Array();
+	var y = 0;
+	var finout = '';
+
+	for (x = 0; x < titlelist.length; x++)
+	{
+        var yesstring = titlelist[x].substring(0,gslength);
+		if(yesstring == getstring || (getstring.charAt(0) == "*" && titlelist[x].search(getstring.substring(1)) > -1))
+		{
+            gsplit = titlelist[x].split('#')[0];
+			uniout = replaceunistandard(gsplit);
+                        
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +')">' + uniout + ' (' + (titlelist[x].split('#').length-1) + ')</a><br>';
+			y++;
+		}
+	}
+	var findiv = (y/2);
+	var ctab = 0;
+	var flag1 = 0;
+	var flag2 = 0;
+	
+	finout = '<table width=100%><tr><td valign="top">';
+	
+	for (z = 0; z < findiv; z++)
+	{
+		
+		finout += finouta[z];
+		ctab++;
+	}
+	finout += '</td><td valign="top">';
+	if(y > 1)
+	{
+		for (z = ctab; z < y; z++)
+		{
+			finout += finouta[z];
+		}	
+	}
+	
+	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
+    document.getElementById('difb').scrollTop=0;
+	yut = 0;
+}
+
+
 
 var pedfileget = '';
 function paliXML(file)
@@ -557,7 +618,14 @@ namecount = [];
 
 function dictLoad() {
 	var which = document.form.sped.selectedIndex;
-	if(which == 6 && typeof(tiklist) == 'undefined') {
+	if(which == 7 && typeof(titlelist) == 'undefined') {
+        var headID = document.getElementsByTagName("head")[0];         
+        var newScript = document.createElement('script');
+        newScript.type = 'text/javascript';
+        newScript.src = 'js/titles.js';
+        headID.appendChild(newScript);
+	}
+	else if(which == 6 && typeof(tiklist) == 'undefined') {
         var headID = document.getElementsByTagName("head")[0];         
         var newScript = document.createElement('script');
         newScript.type = 'text/javascript';
@@ -616,6 +684,11 @@ function dictType() {
 			moveframey('dif');
 			moveframex(3);
 			tiksearchstart();
+			break;
+		case 7:
+			moveframey('dif');
+			moveframex(3);
+			titlesearchstart();
 			break;
 	}
 }

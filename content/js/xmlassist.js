@@ -238,13 +238,13 @@ function preparepali(data,which) { // standard text prep for algorithm
 
 }
 
-function convtitle(nikaya,book,vna,wna,xna,yna,zna)
+function convtitle(nikaya,book,vna,wna,xna,yna,zna,hiert)
 {
 	if (nikaya == 'k') book = knames[book-1];
 	if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
 	var col = ['colped','coldppn','colcpd'];
 	var w = 1;
-	var title='<table width=100%><tr><td align=center><b style="color:'+colorcfg['colped']+'">' + nikaya + '&nbsp;' + book + '</b>';
+	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
 		vna = translit(replaceunistandard(vna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
@@ -273,10 +273,9 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna)
 		zna = translit(replaceunistandard(zna));
 				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
 	}
-	title += '</td><td id="maftrans" align="right"></td></tr></table>';
 	
 	title = replaceunistandard(title);
-	document.getElementById('mafbc').innerHTML = title;
+	return title;
 }
 
 

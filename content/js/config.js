@@ -60,6 +60,8 @@ for(var i=0;i < colchanges.length;i++)
     colchanges[i].style.color=colorcfg['coltext'];
 } 
 
+var script = 0;
+
 function getconfig() {
 	confmove[0] = getSizePref('AnalyzeH'); // used for the height of the analysis bar in the middle of the screen
 	confmove[1] = getSizePref('DictH'); // used for the height of the bottom box containing the dictionary, scratchpad and convertpad
@@ -100,6 +102,7 @@ function getconfig() {
 	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 	cfg['script'] = getMiscPref('script');
+	script = parseInt(cfg['script']); 
 	cfg['cpanel'] = getMiscPref('cpanel');
 
 	cfg['cp1'] = getMiscPref('cp1');
@@ -129,7 +132,7 @@ function getconfig() {
 	
 	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
 
-	for (var i = 1; i <= 8; i++) {
+	for (var i = 1; i <= 7; i++) {
 		cfg['cp'+i] == '0' ? document.getElementById('cp'+i).style.display='none':'';
 	}
 
@@ -149,8 +152,8 @@ function getconfig() {
 
 	// update script
 	
-	script = parseInt(cfg['script']);
-	document.form.translits.selectedIndex = script;
+	//script = parseInt(cfg['script']);
+	//document.form.translits.selectedIndex = script;
 }
 
 function changecss(myclass,element,value) {
@@ -216,11 +219,8 @@ function loadOptions() {
 
     document.getElementById('mafa').innerHTML = '';
     var mafaout = '<table style="width:100%">';
-    mafaout += '<tr>';
-		mafaout += '<td valign="top" align="center"><b>Size</b>';
-		mafaout += '<td style="border-left:grey 1px solid" colspan="2" valign="top" align="center"><b>Text</b>';
-	mafaout += '</tr><tr>';
-			mafaout += '<td valign="top" align="center"><form id="sizeform"><table align=center border=1 height="' + (winH/3) + '">';
+		mafaout += '<tr>';
+			mafaout += '<td valign="top" align="center"><div align="center"><b>Layout</b><br /><br /></div><form id="sizeform"><table align=center border=1 height="' + (winH/3) + '">';
 			mafaout += '<tr>';
 				mafaout += '<td id="confcpf" bgcolor="'+colorcfg['colbkcp']+'" align=center rowspan=3 width="' + (confmove[2]/2.5) + '">W<br><input onBlur="confmove[2] = checksizes(\'ControlW\',this.value); this.value = confmove[2]; moveframex(2,1);" id="ControlW" value="'+confmove[2]+'" type=input maxlength=4 size=4 title="Enter desired width"></td>';
 				mafaout += '<td width="' + ((winW-confmove[2])/3) + '" align=center>(<i>auto</i>)</td>';
@@ -231,18 +231,33 @@ function loadOptions() {
 			mafaout += '<tr>';
 				mafaout += '<td id="confdictf" align=center height="' + (confmove[1]/3) + '">H <input onBlur="confmove[1] = checksizes(\'DictH\',this.value); this.value = confmove[1]; moveframex(2,1);" id="DictH" value="'+confmove[1]+'" type=input maxlength=4 size=4 title="Enter desired height"></td>';
 			mafaout += '</tr>';
-			mafaout += '</table>';
+		mafaout += '</table>';
+		mafaout += '<table><tr>';
+				mafaout += '<td align="right"><b id="col6" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">Main Background: </b></td>';
+				mafaout += '<td><input name="color6" id="colbk" value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkbackground(1)"> <input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1);" '+cfg['bkgimg']+'>Add texture</input>';
+			mafaout += '</tr><tr>';
+				mafaout += '<td align="right"><b id="col7" style="color:'+colorcfg['coltext']+'; background-color:'+colorcfg['colbkcp']+'">Panel Background: </b></td>';
+				mafaout += '<td><input name="color7" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkcpbkg(1)">';
+			mafaout += '</tr>';
+		mafaout += '</table>';
 		mafaout += '</p></form></td>';
-		mafaout += '<td style="border-left:grey 1px solid" align=center valign="top"><form id="colorform">';
+		mafaout += '<td style="border-left:grey 1px solid" align=center valign="top"><div align=center><b>Text</b><br /><br /></div>';
+			mafaout += '<form id="colorform">';
 			mafaout += '<table><tr>';
 				mafaout += '<td align="right"><font style="color:'+colorcfg['coltext']+'" id="col1">Text: </font></td>';
 				mafaout += '<td><input name="color1" id="coltext" value="'+colorcfg['coltext']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col1\').style.color=this.value;"></td>';
+				mafaout += '<td align="right"><b id="col8">Font: </b></td>';
+				mafaout += '<td><input name="color8" id="colfont" value="'+colorcfg['colfont']+'" type=input size=7 title="Enter desired font family" onkeyup="document.getElementById(\'col8\').style.fontFamily=this.value">';
 			mafaout += '</tr><tr>';
 				mafaout += '<td align="right"><b style="color:'+colorcfg['colsel']+'" id="col2">Selected: </b></td>';
 				mafaout += '<td><input name="color2" id="colsel" value="'+colorcfg['colsel']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col2\').style.color=this.value;"><br>';
+				mafaout += '<td align="right"><b id="col9">Size: </b></td>';
+				mafaout += '<td><input name="color9" id="colsize" value="'+colorcfg['colsize']+'" type=input size=7 title="Enter desired font size in pixels" onkeyup="document.getElementById(\'col9\').style.fontSize=this.value + \'px\'">px';
 			mafaout += '</tr><tr>';
 				mafaout += '<td align="right"><b style="color:'+colorcfg['colped']+'" id="col3">PED: </b></td>';
 				mafaout += '<td><input name="color3" id="colped" value="'+colorcfg['colped']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col3\').style.color=this.value;">';
+				mafaout += '<td align="right"><b id="col9">Script: </b></td>';
+				mafaout += '<td><select class="sel" size="1" name="color10" id="translits" selectedIndex="'+cfg['script']+'" title="Select desired script" onchange="changeScript(1);"><option selected>Roman</option><option>Thai</option><option>Devanagari</option><option>Myanmar</option><option>Sinhala</option></select>';
 			mafaout += '</tr><tr>';
 				mafaout += '<td align="right"><b style="color:'+colorcfg['coldppn']+'" id="col4">DPPN: </b></td>';
 				mafaout += '<td><input name="color4" id="coldppn" value="'+colorcfg['coldppn']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col4\').style.color=this.value;">';
@@ -250,27 +265,10 @@ function loadOptions() {
 				mafaout += '<td align="right"><b style="color:'+colorcfg['colcpd']+'" id="col5">CPD: </b></td>';
 				mafaout += '<td><input name="color5" id="colcpd" value="'+colorcfg['colcpd']+'" type=input size=7 title="Enter desired color" onkeyup="document.getElementById(\'col5\').style.color=this.value;">';
 			mafaout += '</tr></table>';
-		mafaout += '</td>';
-		mafaout += '<td valign="top" align="center">';
-			mafaout += '<table><tr>';
-				mafaout += '<td align="right"><b id="col6" style="color:'+colorcfg['coltext']+'; background-color:'+colorcfg['colbkcp']+'">Panel: </b></td>';
-				mafaout += '<td><input name="color6" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col6\').style.backgroundColor=this.value; checkcpbkg(1)">';
-			mafaout += '</tr><tr>';
-				mafaout += '<td align="right"><b id="col7" style="background-color:'+colorcfg['colbk']+'; color:'+colorcfg['coltext']+'">BKGD: </b></td>';
-				mafaout += '<td><input name="color7" id="colbk" value="'+colorcfg['colbk']+'" type=input size=7 title="Enter desired background color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkbackground(1)"></td>';
-			mafaout += '</tr><tr>';
-				mafaout += '<td colspan=2 align=right><input type="checkbox" id="bkgimg" ' + (cfg['bkgimg']=='checked' ? 'checked':'') + ' onclick="checkbackground(1);" '+cfg['bkgimg']+'>Add texture</input>';
-			mafaout += '</tr><tr>';
-				mafaout += '<td align="right"><b id="col8">Font: </b></td>';
-				mafaout += '<td><input name="color8" id="colfont" value="'+colorcfg['colfont']+'" type=input size=7 title="Enter desired font family" onkeyup="document.getElementById(\'col8\').style.fontFamily=this.value">';
-			mafaout += '</tr><tr>';
-				mafaout += '<td align="right"><b id="col9">Size (px): </b></td>';
-				mafaout += '<td><input name="color9" id="colsize" value="'+colorcfg['colsize']+'" type=input size=7 title="Enter desired font size in pixels" onkeyup="document.getElementById(\'col9\').style.fontSize=this.value + \'px\'">';
-			mafaout += '</tr></table>';
 		mafaout += '</form></td>';
     mafaout += '</tr><tr>';
 		mafaout += '<td colspan=3><hr /><form name="miscform">';
-			mafaout += '<p><b>Misc. Options:</b></p>';
+			mafaout += '<p><b>Options:</b></p>';
 			mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+' onclick="this.checked==true ? document.getElementById(\'catiul\').style.display = \'block\' : document.getElementById(\'catiul\').style.display = \'none\';">';
 			mafaout += '<ul id="catiul" '+(cfg['ctrans'] == 'checked' ? '': 'style="display:none"')+' ><li><input type="checkbox" name="catioff" id="catioff" '+cfg['catioff']+'> Use <a href="http://www.accesstoinsight.org/tech/download/bulk/bulk.html" style="color:blue" target="_blank">offline version</a> of <a href="http://www.accesstoinsight.org/" style="color:blue" target="_blank">accesstoinsight.org</a> - location: <b>'+getHomePath()+'/</b><input type="text" name="catiloc" id="catiloc" value="'+cfg['catiloc']+'" onkeyup="if(fileExists(this.value,\'start.html\')) { document.getElementById(\'atilocx\').style.color=\'green\'; document.getElementById(\'atilocx\').innerHTML=\'ok\'; } else{document.getElementById(\'atilocx\').style.color=\'red\'; document.getElementById(\'atilocx\').innerHTML=\'x\';}"><b>/start.html <font id="atilocx" size="5" style="color:'+(fileExists(cfg['catiloc'],'start.html') ? 'green">ok' : 'red">x' )+'</font></b></li></ul></p>';
 			mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
@@ -282,6 +280,7 @@ function loadOptions() {
 		mafaout += '<button class="btn" onclick="eraseOptions(1)">Restore defaults</button><b style="color:'+colorcfg['colsel']+'" id=message> </b>';
     mafaout += '</p>';
     document.getElementById('mafbc').innerHTML = mafaout;
+    document.getElementById('translits').selectedIndex = parseInt(cfg['script']);
 }
 
 function saveOptions() {
