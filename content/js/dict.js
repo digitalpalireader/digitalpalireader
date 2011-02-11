@@ -27,14 +27,24 @@ function pedsearchstart()
 	var y = 0;
 	var finout = '';
 	if (ped.length == 0) {
-        for (a in mainda) {
-                ped.push(a + '^' + mainda[a]);
-        }
+        
+        if(document.form.sofulltext.checked) { // full text search
+			if(typeof(pedFull) == 'undefined') { return; }
+			for (a in pedFull) {
+				ped.push(pedFull[a].split('#')[0] + '^' + pedFull[a].substring(pedFull[a].indexOf('#')+1));
+			}			
+		}
+		else {
+			for (a in mainda) {
+				ped.push(a + '^' + mainda[a]);
+			}
+		}
     }
     var pedl = ped.length;
         
 	for (x = 0; x < pedl; x++)
 	{
+        
         var yesstring = ped[x].substring(0,gslength);
 		if(yesstring == getstring || (getstring.charAt(0) == "*" && ped[x].search(getstring.substring(1)) > -1))
 		{
@@ -63,8 +73,12 @@ function pedsearchstart()
 			uniout = uniout.replace(/,L/g, '\u1E36');
 			uniout = uniout.replace(/z/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
-					
-			finouta[y] = '<a href="#" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + gsplit[1] + '\')">' + uniout + '</a><br>';
+			
+			if(document.form.sofulltext.checked) { 
+				finouta[y] = '<span><a href="javascript:void(0)" onclick="paliFullXML(\'' + gsplit[0].replace(/'/g,'`') + '\',\'' + gsplit[1] + '\')">' + uniout + ' ('+gsplit[1].split('#').length + ')</a></span><br>';
+			}
+			else finouta[y] = '<a href="#" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + gsplit[1] + '\')">' + uniout + '</a><br>';
+
 			y++;
 		}
 	}
@@ -498,11 +512,7 @@ function paliXML(file)
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 	
-	var dataa = xmlDoc.getElementsByTagName('data')[t2].getElementsByTagName('sdata');
-	var data = '';
-	for (j=0; j<dataa.length; j++) {
-		data += dataa[j].childNodes[0].nodeValue;
-	}		
+	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
 	
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
@@ -523,6 +533,36 @@ function paliXML(file)
 	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
+}
+
+function paliFullXML(word,loc)
+{
+    moveframex(2);
+
+    var loca = loc.split('#');
+	
+	document.getElementById('mafbc').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+
+    var finout = '';
+
+	for (i = 0; i < loca.length; i++) {
+		var pfa = loca[i].split('/');
+		
+        var xmlget = 'etc/XML1/' + pfa[0] + '/ped.xml';
+
+        var xmlhttp = new window.XMLHttpRequest();
+        xmlhttp.open("GET", xmlget, false);
+        xmlhttp.send(null);
+        var xmlDoc = xmlhttp.responseXML.documentElement;
+
+		var u = xmlDoc.getElementsByTagName("data");
+		var v = u[parseInt(pfa[1])].textContent;
+
+        finout +=  v + '<hr />';
+    }
+    document.getElementById('mafbc').innerHTML = '<p>PED Full Text Search for <b>' + word.replace(/`/g,"'") + '</b></p><hr />';
+    document.getElementById('mafbc').innerHTML += finout;
+    document.getElementById('maf').scrollTop = 0;
 }
 
 var dppnhist = [];
@@ -564,16 +604,12 @@ function DPPNXML(file,which)
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
-	var dataa = xmlDoc.getElementsByTagName('entry')[tloc[2]].getElementsByTagName('data');
-	var data = '';
-	for (j=0; j<dataa.length; j++) {
-		data += ' ' + dataa[j].childNodes[0].nodeValue.replace(/\.  /g, '.&nbsp; ');
-	}		
+	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 	
 	// output
 
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data.replace(/href/g, 'style="color:blue" href');
+	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data;
     document.getElementById('cdif').scrollTop=0;
 	var showing = '<select title="show history" onchange="dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);">';
 	
@@ -618,36 +654,68 @@ namecount = [];
 
 function dictLoad() {
 	var which = document.form.sped.selectedIndex;
-	if(which == 7 && typeof(titlelist) == 'undefined') {
-        var headID = document.getElementsByTagName("head")[0];         
-        var newScript = document.createElement('script');
-        newScript.type = 'text/javascript';
-        newScript.src = 'js/titles.js';
-        headID.appendChild(newScript);
-	}
-	else if(which == 6 && typeof(tiklist) == 'undefined') {
-        var headID = document.getElementsByTagName("head")[0];         
-        var newScript = document.createElement('script');
-        newScript.type = 'text/javascript';
-        newScript.src = 'js/tiklist.js';
-        headID.appendChild(newScript);
-	}
-	else if(which == 5 && typeof(attlist) == 'undefined') {
-        var headID = document.getElementsByTagName("head")[0];         
-        var newScript = document.createElement('script');
-        newScript.type = 'text/javascript';
-        newScript.src = 'js/attlist.js';
-        headID.appendChild(newScript);
-	}
-	else if(which == 4 && typeof(epd) == 'undefined') {
-        var headID = document.getElementsByTagName("head")[0];         
-        var newScript = document.createElement('script');
-        newScript.type = 'text/javascript';
-        newScript.src = 'js/epd.js';
-        headID.appendChild(newScript);
+	document.getElementById('soFT').style.display = 'none';
+	switch (which) {
+		case 0:
+		break;
+		case 1:
+			document.getElementById('soFT').style.display = 'block';
+		break;
+		case 2:
+		break;
+		case 3:
+		break;
+		case 4:
+			if(typeof(epd) == 'undefined') {
+				var headID = document.getElementsByTagName("head")[0];         
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = 'js/epd.js';
+				headID.appendChild(newScript);
+			}
+		break;
+		case 5:
+			if(typeof(attlist) == 'undefined') {
+				var headID = document.getElementsByTagName("head")[0];         
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = 'js/attlist.js';
+				headID.appendChild(newScript);
+			}
+		break;
+		case 6:
+			if(typeof(tiklist) == 'undefined') {
+				var headID = document.getElementsByTagName("head")[0];         
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = 'js/tiklist.js';
+				headID.appendChild(newScript);
+			}
+		break;
+		case 7:
+			if(typeof(titlelist) == 'undefined') {
+				var headID = document.getElementsByTagName("head")[0];         
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = 'js/titles.js';
+				headID.appendChild(newScript);
+			}
+		break;
 	}
 }
 
+function loadFullText() {
+	if (document.form.sped.selectedIndex == 1) {
+			ped = [];
+			if(typeof(pedFull) == 'undefined') {
+				var headID = document.getElementsByTagName("head")[0];         
+				var newScript = document.createElement('script');
+				newScript.type = 'text/javascript';
+				newScript.src = 'js/pedfull.js';
+				headID.appendChild(newScript);
+			}
+	}		
+}
 function dictType() {
 	document.form.manual.value = replacevelstandard(document.form.dictin.value);
 	switch (document.form.sped.selectedIndex) {

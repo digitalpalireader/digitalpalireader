@@ -21,11 +21,12 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/dev.js"></script>
 
 </head>
 
 
-<body onload="//noahs(); ">
+<body onload="//getWordList(); ">
 <div id="content">
 	<div id="left">
 		<div id="brleft"></div>
@@ -230,8 +231,25 @@
 										<option>ATTH</option>
 										<option>TIKA</option>
 										<option>TITLE</option>
-									</select> 
-									<br><input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
+									</select> <a href="javascript:void(0)" onclick="toggleSearchOpts()">v</a>
+									<br />
+									<div id="searchopts">
+										<table align="center">
+											<tr>
+												<td>
+													<div align="left">
+														<div id="soRX" style="display:none">
+															<input type="checkbox" name="soregexp"> Reg. Exp.
+														</div>
+														<div id="soFT" style="display:none">
+															<input type="checkbox" name="sofulltext" onclick="loadFullText();"> Full Text
+														</div>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
 
 					<!--<td>
 							<div align=center id="rright">

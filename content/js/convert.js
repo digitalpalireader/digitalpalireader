@@ -96,6 +96,8 @@ function clearboth()
 
 function sendtoconvert(data)
 {
+	data = data.replace(/” ”/g, '”');
+	data = data.replace(/’ ’/g, '’');
 	data = data.replace(/\u00B7/g, '\'');
 	data = data.replace(/\u00B4/g, '\"');
 	data = data.replace(/ M /g, ' ');

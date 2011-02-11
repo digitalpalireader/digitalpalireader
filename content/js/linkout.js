@@ -216,7 +216,7 @@ function noah()
 				var dataa = xmlDoc.getElementsByTagName('data')[e].getElementsByTagName('sdata');
 				var data = '';
 				for (j=0; j<dataa.length; j++) {
-					data += dataa[j].childNodes[0].nodeValue;
+					data += dataa[j].textContent;
 				}
 				nocdo = nocd.replace(/aa/g, 'ā');
 				nocdo = nocdo.replace(/ii/g, 'ī');
@@ -256,7 +256,7 @@ function noah2()
 			var da = en[j].getElementsByTagName('data');
 			for (k = 0; k < da.length; k++) {
 				if(da[k].childNodes[0]) {
-					var data = da[k].childNodes[0].nodeValue;
+					var data = da[k].textContent;
 					out += data;
 				}
 			}

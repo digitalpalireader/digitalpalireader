@@ -82,7 +82,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/   */g, ' ');
 	var uniouta = replaceunistandard(data).split(' ');
 	//data = data.replace(/\"/g, '\u00B4');
-	document.textpad.pad.value = data;
+	//document.textpad.pad.value = data;
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
@@ -232,7 +232,7 @@ function preparepali(data,which) { // standard text prep for algorithm
 	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+colorcfg['colcpd']+'">');
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
 
-	document.textpad.pad.value = finout[0];
+	//document.textpad.pad.value = finout[0];
 
 	return finout;
 

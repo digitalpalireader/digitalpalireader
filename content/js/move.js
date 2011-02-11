@@ -164,6 +164,16 @@ function cpFlatten(cpin) {
 	}
 }
 
+function toggleSearchOpts() {
+	var sopts = document.getElementById('searchopts');
+	if(sopts.style.display=='block') {
+		sopts.style.display='none';
+	}
+	else {
+		sopts.style.display='block';
+	}
+}
+
 function moves(a) // search open / close
 {
 	if (a == 1) { // open search

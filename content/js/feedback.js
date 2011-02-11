@@ -21,38 +21,3 @@ function feedbackform() {
 	document.getElementById('mafbc').innerHTML=mafbout;
 }
 
-/*
-            var file = 'xml/listam.xml';
-            
-            var xmlhttp = new window.XMLHttpRequest();
-            xmlhttp.open("GET", file, false);
-            xmlhttp.send(null);
-            var xmlDoc = xmlhttp.responseXML.documentElement;
-            var w = xmlDoc.getElementsByTagName('ab');
-            
-            var out = 'var amlist = [];\n';
-            var countv = -1;
-            var countc = 0;
-            
-            for (a = 0; a < w.length; a++) {
-				out+='amlist['+a+'] = [];\n';
-				var x = w[a].getElementsByTagName('av');
-				for(b = 0; b < x.length; b++) {
-					out+='amlist['+a+']['+b+'] = [];\n';
-					countc = 0;
-					var y = x[b].getElementsByTagName('as');
-					for(c = 0; c < y.length; c++) {
-						out+='amlist['+a+']['+b+']['+c+'] = [];\n';
-						var z = y[c].getElementsByTagName('ac');
-						for(d = 0; d < z.length; d++) {
-							out+='amlist['+a+']['+b+']['+c+']['+d+'] = [];\n';
-							var zz = z[d].getElementsByTagName('ap');
-							for(e = 0; e < zz.length; e++) {
-								out+='amlist['+a+']['+b+']['+c+']['+d+']['+e+'] = '+zz[e].childNodes[0].nodeValue+';\n';
-							}
-						}
-					}
-				}
-			}
-document.textpad.pad.value = out;						
-*/

@@ -61,11 +61,11 @@ function importXML(labelsearch,para)
 	var xn = w[vagga].getElementsByTagName("h2n");
 	var yn = x[sutta].getElementsByTagName("h3n");
 	var zn = y[section].getElementsByTagName("h4n");
-	var vna = (vn[0].childNodes[0] ? vn[0].childNodes[0].nodeValue : ' ');
-	var wna = (wn[0].childNodes[0] ? wn[0].childNodes[0].nodeValue : ' ');
-	var xna = (xn[0].childNodes[0] ? xn[0].childNodes[0].nodeValue : ' ');
-	var yna = (yn[0].childNodes[0] ? yn[0].childNodes[0].nodeValue : ' ');
-	var zna = (zn[0].childNodes[0] ? zn[0].childNodes[0].nodeValue : ' ');
+	var vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
+	var wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
+	var xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
+	var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
+	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	document.getElementById('mafbc').innerHTML = '';
 	
@@ -95,7 +95,7 @@ function importXML(labelsearch,para)
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
 			var quit = 0;
-			var onepar = z[tmp].childNodes[0].nodeValue.substring(4);
+			var onepar = z[tmp].textContent.substring(4);
 			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
 			{
 				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
@@ -128,7 +128,7 @@ function importXML(labelsearch,para)
 	else {
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			theData += ' <p> ' + z[tmp].childNodes[0].nodeValue.substring(4);
+			theData += ' <p> ' + z[tmp].textContent.substring(4);
 		}
 	}
 	preout(theData);
@@ -193,7 +193,7 @@ function gettitles(altget,stop,prev,ssect)
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0]) var tnamea = tname[0].childNodes[0].nodeValue; else tnamea = unnamed;
+	if (tname[0].childNodes[0]) var tnamea = tname[0].textContent; else tnamea = unnamed;
 	var countt = tnamea;
 	countt = countt.replace(/aa/g, 'a');
 	countt = countt.replace(/ii/g, 'i');
@@ -236,7 +236,7 @@ function gettitles(altget,stop,prev,ssect)
 		{
 			ap = a + 1;
 			uname = u[a].getElementsByTagName("h0n");
-			if (uname[0].childNodes[0]) unamea = uname[0].childNodes[0].nodeValue; else unamea = unnamed;
+			if (uname[0].childNodes[0]) unamea = uname[0].textContent; else unamea = unnamed;
 			countu = unamea;
 			countu = countu.replace(/aa/g, 'a');
 			countu = countu.replace(/ii/g, 'i');
@@ -277,7 +277,7 @@ function gettitles(altget,stop,prev,ssect)
 		{
 			ap = a + 1;
 			vname = v[a].getElementsByTagName("h1n");
-			if (vname[0].childNodes[0]) vnamea = vname[0].childNodes[0].nodeValue; else vnamea = unnamed;
+			if (vname[0].childNodes[0]) vnamea = vname[0].textContent; else vnamea = unnamed;
 			countv = vnamea;
 			countv = countv.replace(/aa/g, 'a');
 			countv = countv.replace(/ii/g, 'i');
@@ -314,7 +314,7 @@ function gettitles(altget,stop,prev,ssect)
 		for (var a = 0; a < w.length; a++)
 		{
 			wname = w[a].getElementsByTagName("h2n");
-			if (wname[0].childNodes[0]) wnamea = wname[0].childNodes[0].nodeValue; else wnamea = unnamed;
+			if (wname[0].childNodes[0]) wnamea = wname[0].textContent; else wnamea = unnamed;
 			countw = wnamea;
 			countw = countw.replace(/aa/g, 'a');
 			countw = countw.replace(/ii/g, 'i');
@@ -353,7 +353,7 @@ function gettitles(altget,stop,prev,ssect)
 		{
 			ap = a + 1;
 			xname = x[a].getElementsByTagName("h3n");
-			if (xname[0].childNodes[0]) xnamea = xname[0].childNodes[0].nodeValue; else xnamea = unnamed;
+			if (xname[0].childNodes[0]) xnamea = xname[0].textContent; else xnamea = unnamed;
 			countx = xnamea;
 			countx = countx.replace(/aa/g, 'a');
 			countx = countx.replace(/ii/g, 'i');
@@ -390,7 +390,7 @@ function gettitles(altget,stop,prev,ssect)
 	{
 		bp = d + 1;
 		yname = y[d].getElementsByTagName("h4n");
-		if (yname[0].childNodes[0]) ynamea = yname[0].childNodes[0].nodeValue; else ynamea = unnamed;
+		if (yname[0].childNodes[0]) ynamea = yname[0].textContent; else ynamea = unnamed;
 		
 			county = ynamea;
 			county = county.replace(/aa/g, 'a');
@@ -478,7 +478,7 @@ function importXMLindex() {
 	
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
-		if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].childNodes[0].nodeValue; else theData = ' ';
+		if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].textContent; else theData = ' ';
 		if (z.length > 1 && theData == ' ') { theData = unnamed; } 
 		if (theData != ' ') {
 
@@ -489,7 +489,7 @@ function importXMLindex() {
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
-			if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].childNodes[0].nodeValue; else theData = ' ';
+			if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent; else theData = ' ';
 			if (y.length > 1 && theData == ' ') { theData = unnamed; }
 			if (theData != ' ') {
 				
@@ -513,7 +513,7 @@ function importXMLindex() {
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
-				if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].childNodes[0].nodeValue; else theData = ' ';
+				if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent; else theData = ' ';
 				if (x.length > 1 && theData == ' ') { theData = unnamed; }
 				if (theData != ' ') {
 					
@@ -537,7 +537,7 @@ function importXMLindex() {
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
-					if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].childNodes[0].nodeValue; else theData = ' ';
+					if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent; else theData = ' ';
 					if (w.length > 1 && theData == ' ') { theData = unnamed; }
 					if (theData != ' ') {
 						
@@ -561,7 +561,7 @@ function importXMLindex() {
 					v = w[tmp4].getElementsByTagName("h3");
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
-						if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].childNodes[0].nodeValue; else theData = ' ';
+						if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent; else theData = ' ';
 						if (v.length > 1 && theData == ' ') { theData = unnamed; }
 						if (theData != ' ') {
 
@@ -586,7 +586,7 @@ function importXMLindex() {
 						u = v[tmp5].getElementsByTagName("h4");
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
-							if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].childNodes[0].nodeValue; else theData = ' ';
+							if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent; else theData = ' ';
 							if (z.length > 1 && theData == ' ') { theData = unnamed; }
 							if (theData != ' ') {
 
@@ -659,11 +659,11 @@ function importXMLraw()
 	var xn = w[vagga].getElementsByTagName("h2n");
 	var yn = x[sutta].getElementsByTagName("h3n");
 	var zn = y[section].getElementsByTagName("h4n");
-	var vna = vn[0].childNodes[0].nodeValue;
-	var wna = wn[0].childNodes[0].nodeValue;
-	var xna = xn[0].childNodes[0].nodeValue;
-	var yna = yn[0].childNodes[0].nodeValue;
-	var zna = zn[0].childNodes[0].nodeValue;
+	var vna = vn[0].textContent;
+	var wna = wn[0].textContent;
+	var xna = xn[0].textContent;
+	var yna = yn[0].textContent;
+	var zna = zn[0].textContent;
 
 	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
 	
@@ -675,7 +675,7 @@ function importXMLraw()
 
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
-		theData = z[tmp].childNodes[0].nodeValue;
+		theData = z[tmp].textContent;
 		theData = theData.replace(/\^b\^/g, ' <b> ');
 		theData = theData.replace(/\^eb\^/g, ' </b> ');
 		theData = theData.replace(/\^a\^/g, '<!--');
@@ -701,7 +701,7 @@ function xmlrefget()
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var precode = xmlDoc.getElementsByTagName("xml"); 	
-	var lumpcode = precode[0].childNodes[0].nodeValue;
+	var lumpcode = precode[0].textContent;
 	var codea = lumpcode.split(',');
 	var nik = codea[0];
 	var book = codea[1];
@@ -771,7 +771,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0]) var tnamea = tname[0].childNodes[0].nodeValue; else tnamea = unnamed;
+	if (tname[0].childNodes[0]) var tnamea = tname[0].textContent; else tnamea = unnamed;
 	var countt = tnamea;
 
 	var maxlength = 15;  // change for display purposes
@@ -812,7 +812,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		uname = u[a].getElementsByTagName("h0n");
-		if (uname[0].childNodes[0]) unamea = uname[0].childNodes[0].nodeValue; else unamea = unnamed;
+		if (uname[0].childNodes[0]) unamea = uname[0].textContent; else unamea = unnamed;
 		countu = unamea;
 		countu = countu.replace(/aa/g, 'a');
 		countu = countu.replace(/ii/g, 'i');
@@ -851,7 +851,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		vname = v[a].getElementsByTagName("h1n");
-		if (vname[0].childNodes[0]) vnamea = vname[0].childNodes[0].nodeValue; else vnamea = unnamed;
+		if (vname[0].childNodes[0]) vnamea = vname[0].textContent; else vnamea = unnamed;
 		countv = vnamea;
 		countv = countv.replace(/aa/g, 'a');
 		countv = countv.replace(/ii/g, 'i');
@@ -890,7 +890,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		wname = w[a].getElementsByTagName("h2n");
-		if (wname[0].childNodes[0]) wnamea = wname[0].childNodes[0].nodeValue; else wnamea = unnamed;
+		if (wname[0].childNodes[0]) wnamea = wname[0].textContent; else wnamea = unnamed;
 		countw = wnamea;
 		countw = countw.replace(/aa/g, 'a');
 		countw = countw.replace(/ii/g, 'i');
@@ -930,7 +930,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		xname = x[a].getElementsByTagName("h3n");
-		if (xname[0].childNodes[0]) xnamea = xname[0].childNodes[0].nodeValue; else xnamea = unnamed;
+		if (xname[0].childNodes[0]) xnamea = xname[0].textContent; else xnamea = unnamed;
 		countx = xnamea;
 		countx = countx.replace(/aa/g, 'a');
 		countx = countx.replace(/ii/g, 'i');
@@ -969,7 +969,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		bp = d + 1;
 		yname = y[d].getElementsByTagName("h4n");
-		if (yname[0].childNodes[0]) ynamea = yname[0].childNodes[0].nodeValue; else ynamea = unnamed;
+		if (yname[0].childNodes[0]) ynamea = yname[0].textContent; else ynamea = unnamed;
 		
 			county = ynamea;
 			county = county.replace(/aa/g, 'a');
@@ -1026,7 +1026,7 @@ function helpXML(file)
 	document.getElementById('mafbc').innerHTML = '';
 	var data = xmlDoc.getElementsByTagName('data')
 	for (ippp in data) {
-		if(data[ippp].childNodes) outputit += data[ippp].childNodes[0].nodeValue;
+		if(data[ippp].childNodes) outputit += data[ippp].textContent;
 	}		
 	document.getElementById('mafbc').innerHTML = outputit;
 	document.getElementById('mafbc').innerHTML += '<hr/><div><i>DPR version number: <b>'+version+'</b></i></div>';
@@ -1089,7 +1089,7 @@ function getatt(num,type) { // get atthakatha or tika word
         if (x.length > 1) placen += '.' + (parseInt(sutta)+1);
         var y = x[sutta].getElementsByTagName("h4");
         if (y.length > 1) placen += '.' + (parseInt(section)+1);
-        var z = y[section].getElementsByTagName("p")[para].childNodes[0].nodeValue.substring(4);
+        var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
         
         var wordr = new RegExp('\\^b\\^\([^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\)\\^eb\\^','gi');
         var wordr2 = new RegExp('\\^b\\^[^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\\^eb\\^','gi');
@@ -1153,31 +1153,31 @@ function gettitle(num) { // get titles
 			var u = xmlDoc.getElementsByTagName("h0");
 			if (u.length > 1) {
 				var vn = u[meta].getElementsByTagName("h0n");
-				vna = (vn[0].childNodes[0] ? vn[0].childNodes[0].nodeValue : ' ');
+				vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
 			}
 			if(depth > 1) {
 				var v = u[meta].getElementsByTagName("h1");
 				if (v.length > 1) {
 					var wn = v[volume].getElementsByTagName("h1n");
-					wna = (wn[0].childNodes[0] ? wn[0].childNodes[0].nodeValue : ' ');
+					wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
 				}
 				if(depth > 2) {
 					var w = v[volume].getElementsByTagName("h2");
 					if (w.length > 1) {
 						var xn = w[vagga].getElementsByTagName("h2n");
-						xna = (xn[0].childNodes[0] ? xn[0].childNodes[0].nodeValue : ' ');
+						xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
 					}
 					if(depth > 3) {
 						var x = w[vagga].getElementsByTagName("h3");
 						if (x.length > 1) {
 							var yn = x[sutta].getElementsByTagName("h3n");
-							yna = (yn[0].childNodes[0] ? yn[0].childNodes[0].nodeValue : ' ');
+							yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
 						}
 						if(depth > 4) {
 							var y = x[sutta].getElementsByTagName("h4");
 							if (y.length > 1) {
 								var zn = y[section].getElementsByTagName("h4n");
-								zna = (zn[0].childNodes[0] ? zn[0].childNodes[0].nodeValue : ' ');
+								zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 							}
 						}
 					}

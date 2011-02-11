@@ -445,6 +445,14 @@ border:1px solid #FFF
 	position:relative;
 	min-height:4px;
 }
+#searchopts {
+	display:none;
+	text-align:center;
+}
+
+
+
+/* misc */
 
 .hide { display: none; }
 .green        { color: #00B900 }
