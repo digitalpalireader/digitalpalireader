@@ -1,6 +1,6 @@
 function newquiz() {
 	moveframex(1);
-	document.getElementById('mafbc').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'" class="quizb"><button disabled>Pali Vocab Quiz</button> <button onclick="newDquiz()">Pali Declension Quiz</button></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr></table><p>Total Right Answers: <b id="Qrights"></b> <input type="button" class="btn" value="clear" onclick="clearrights()"></div>';
+	document.getElementById('mafbc').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'" class="quizb"><button disabled>Pali Vocab Quiz</button> <button onclick="newDquiz()">Pali Declension Quiz</button></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><input type="button" class="btn" value="clear" onclick="clearrights()"></td></tr></table></div>';
 	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
 	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
 	quizme();
@@ -40,6 +40,7 @@ function quizme() {
 	for (quizcpd in yt){
 		quiza.push(quizcpd);
 	}
+	document.getElementById('Qlefts').innerHTML = quiza.length - rights.length;
 	for (qtmp = 0; qtmp < 3; qtmp++) {
 		quizeachwrong[qtmp]=Math.floor(Math.random()*20926);
 		while (quizeachwrong[qtmp] == quizrandomright) { // in case we got the same one again!
@@ -73,7 +74,7 @@ function quizme() {
 function answerquiz(right,answer,numb) {
 	document.getElementById('qn').innerHTML = ++document.getElementById('qno').value;
 	if (right == 1) {
-		document.getElementById('Qchecka').innerHTML = '<font color=green>Right! &nbsp;' + answer + '</font>';
+		document.getElementById('Qchecka').innerHTML = '<span style="color:green">Right! &nbsp;' + answer + '</span>';
 		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
 		
 		// add right to list of rights
@@ -87,7 +88,7 @@ function answerquiz(right,answer,numb) {
         }
 	}	
 	else {
-		document.getElementById('Qchecka').innerHTML ='<font color=red>Wrong! &nbsp;' + answer + '</font>';
+		document.getElementById('Qchecka').innerHTML ='<span style="color:red">Wrong! &nbsp;' + answer + '</span>';
 		document.getElementById('Qwa').innerHTML = '&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;';
 	}
 
