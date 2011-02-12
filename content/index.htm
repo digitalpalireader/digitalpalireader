@@ -222,34 +222,40 @@
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='#F9F9F9';"> </div>
 							<div class="cpt" id="cp6">
 									<b>Dictionary</b>&nbsp;
-									<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; EPD = English-Pali Dictionary; ATTH = Aṭṭhakathā Terms; TIKA = Ṭīka Terms; TITLE = Title Search" name="sped" onchange="dictLoad()">
+									<select class="sel" size="1" title="DPR = All; PED = Pali-English Dictionary; DPN = Dict. of Pali Names; CPD = Concise Pali Dictionary; CEPD = Concise English-Pali Dictionary; Aṭṭh = Aṭṭhakathā Terms; Ṭīka = Ṭīka Terms; TITLE = Title Search" name="sped" onchange="dictLoad()">
 										<option selected>DPR</option>
 										<option>PED</option>
 										<option>DPPN</option>
 										<option>CPED</option>
 										<option>CEPD</option>
-										<option>ATTH</option>
-										<option>TIKA</option>
-										<option>TITLE</option>
-									</select> <a href="javascript:void(0)" onclick="toggleSearchOpts()">v</a>
+										<option>Aṭṭh</option>
+										<option>Ṭīka</option>
+										<option>Title</option>
+									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts()"><b>adv</b></a>
 									<br />
 									<div id="searchopts">
 										<table align="center">
 											<tr>
 												<td>
 													<div align="left">
+														<div id="soNO">
+															<span class="small">no advanced options available</span>
+														</div>
 														<div id="soRX" style="display:none">
-															<input type="checkbox" name="soregexp"> Reg. Exp.
+															<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
 														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" name="sofulltext" onclick="loadFullText();"> Full Text
+															<input type="checkbox" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false; loadFullText();"><span class="small"> Full Text</span>
+														</div>
+														<div id="soSW" style="display:none">
+															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
 														</div>
 													</div>
 												</td>
 											</tr>
 										</table>
 									</div>
-									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked') {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
+									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
 
 					<!--<td>
 							<div align=center id="rright">

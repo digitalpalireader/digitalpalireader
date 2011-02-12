@@ -10,7 +10,12 @@ function pedsearchstart()
 	var getstring = document.form.manual.value;
 	
 	getstring = getstring.replace(/"n/g, '`n');
-	getstring = getstring.replace(/\./g, ',');
+	if (document.form.soregexp.checked) {
+		getstring = getstring.replace(/\\\./g, ',');
+	}
+	else {
+		getstring = getstring.replace(/\./g, ',');
+	}
 
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -44,9 +49,13 @@ function pedsearchstart()
         
 	for (x = 0; x < pedl; x++)
 	{
-        
-        var yesstring = ped[x].substring(0,gslength);
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && ped[x].search(getstring.substring(1)) > -1))
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (ped[x].search(getstring) == 0 || (!document.form.sostartword.checked && ped[x].search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (ped[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && ped[x].indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
             gsplit = ped[x].split('^');
 			
@@ -111,6 +120,7 @@ function pedsearchstart()
 	}
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -123,7 +133,12 @@ function dppnsearchstart()
 	var getstring = document.form.manual.value;
 	
 	getstring = getstring.replace(/"n/g, '`n');
-	getstring = getstring.replace(/\./g, ',');
+	if (document.form.soregexp.checked) {
+		getstring = getstring.replace(/\\\./g, ',');
+	}
+	else {
+		getstring = getstring.replace(/\./g, ',');
+	}
 
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -143,9 +158,13 @@ function dppnsearchstart()
 
     for (x = 0; x < dppn.length; x++)
 	{
-		var yesstring = dppn[x].substring(0,gslength);
-	
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && dppn[x].search(getstring.substring(1)) > -1))
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (dppn[x].search(getstring) == 0 || (!document.form.sostartword.checked && dppn[x].search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (dppn[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && dppn[x].indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
 			gsplit = dppn[x].split('^');
 			
@@ -213,9 +232,11 @@ function dppnsearchstart()
 	
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
+
+var yg = [];
 
 function mlsearchstart()
 {
@@ -233,19 +254,35 @@ function mlsearchstart()
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var finout = '';
-	var yg = [];
-	
-	for (a in yt) yg.push(a);
-	
+	if( yg = []) {
+		for (a in yt) yg.push(a+'^'+yt[a]);
+	}
+		
+		
 	for (x = 0; x < yg.length; x++)
 	{
-		var yesstring = yg[x].substring(0,gslength);
 		var us = '';
 		var ud = '';
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && yg[x].search(getstring.substring(1)) > -1))
+
+		var gsplit = yg[x].split('^');
+
+		if(!document.form.sofulltext.checked) {
+			var tosearch = gsplit[0];
+		}
+		else {
+			var tosearch = yg[x];
+		}
+        
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!document.form.sostartword.checked && tosearch.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tosearch.indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
-			us = replaceunistandard(yg[x].replace(/,/g, ".").replace(/`n/g, "\"n"));
-			ud = replaceunistandard(yt[yg[x]].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
+			us = replaceunistandard(gsplit[0].replace(/,/g, ".").replace(/`n/g, "\"n"));
+			ud = replaceunistandard(gsplit[1].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
 			ud = ud.replace(/#(.*)/, " ($1)");
 			
 			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + us + '</font></b> '+ud +'<br>');
@@ -261,7 +298,7 @@ function mlsearchstart()
 	}	
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -290,11 +327,23 @@ function epdsearchstart()
 	
 	for (x = 0; x < epd.length; x++)
 	{
-		var yesstring = epd[x].substring(0,gslength);
-	
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && epd[x].search(getstring.substring(1)) > -1))
+		gsplit = epd[x].split('^');
+		
+		if(!document.form.sofulltext.checked) {
+			var tosearch = gsplit[0];
+		}
+		else {
+			var tosearch = epd[x];
+		}
+        
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!document.form.sostartword.checked && tosearch.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tosearch.indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
-			gsplit = epd[x].split('^');
 			
 			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + gsplit[0] + '</font></b> '+gsplit[1] +'<br>');
 
@@ -309,7 +358,7 @@ function epdsearchstart()
 	}	
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -337,8 +386,13 @@ function attsearchstart()
 
 	for (x = 0; x < attlist.length; x++)
 	{
-        var yesstring = attlist[x].substring(0,gslength);
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && attlist[x].search(getstring.substring(1)) > -1))
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (attlist[x].search(getstring) == 0 || (!document.form.sostartword.checked && attlist[x].search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (attlist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && attlist[x].indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
             gsplit = attlist[x].split('#')[0];
 			uniout = replaceunistandard(gsplit);
@@ -370,7 +424,7 @@ function attsearchstart()
 	}
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -398,8 +452,13 @@ function tiksearchstart()
 
 	for (x = 0; x < tiklist.length; x++)
 	{
-        var yesstring = tiklist[x].substring(0,gslength);
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && tiklist[x].search(getstring.substring(1)) > -1))
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (tiklist[x].search(getstring) == 0 || (!document.form.sostartword.checked && tiklist[x].search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tiklist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && tiklist[x].indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
             gsplit = tiklist[x].split('#')[0];
 			uniout = replaceunistandard(gsplit);
@@ -431,7 +490,7 @@ function tiksearchstart()
 	}
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -459,8 +518,13 @@ function titlesearchstart()
 
 	for (x = 0; x < titlelist.length; x++)
 	{
-        var yesstring = titlelist[x].substring(0,gslength);
-		if(yesstring == getstring || (getstring.charAt(0) == "*" && titlelist[x].search(getstring.substring(1)) > -1))
+        if (document.form.soregexp.checked) { // reg exp
+			var yessir = (titlelist[x].search(getstring) == 0 || (!document.form.sostartword.checked && titlelist[x].search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (titlelist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && titlelist[x].indexOf(getstring) > -1));
+		}
+		if(yessir)
 		{
             gsplit = titlelist[x].split('#')[0];
 			uniout = replaceunistandard(gsplit);
@@ -492,7 +556,7 @@ function titlesearchstart()
 	}
 	
 	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('difb').scrollTop=0;
+    document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -533,11 +597,14 @@ function paliXML(file)
 	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
+    document.getElementById('cdif').scrollTop=0;
 }
 
 function paliFullXML(word,loc)
 {
     moveframex(2);
+
+	word = word.replace(/`/g,"'");
 
     var loca = loc.split('#');
 	
@@ -558,9 +625,20 @@ function paliFullXML(word,loc)
 		var u = xmlDoc.getElementsByTagName("data");
 		var v = u[parseInt(pfa[1])].textContent;
 
-        finout +=  v + '<hr />';
+		var onepar = v;
+		var vv = '';
+		while (onepar.toLowerCase().indexOf(word) > -1) {
+			var opp = onepar.toLowerCase().indexOf(word);
+			vv += onepar.substring(0,opp);
+			vv += '<span style="color:'+colorcfg['colped']+'">' + onepar.substring(opp,opp + word.length) + '</span>';
+			onepar = onepar.substring(opp + word.length);
+		}
+		vv += onepar;
+
+
+        finout +=  vv + '<hr />';
     }
-    document.getElementById('mafbc').innerHTML = '<p>PED Full Text Search for <b>' + word.replace(/`/g,"'") + '</b></p><hr />';
+    document.getElementById('mafbc').innerHTML = '<p>PED Full Text Search for <b>' + word + '</b></p><hr />';
     document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }
@@ -648,24 +726,39 @@ function DPPNXML(file,which)
 	if (tnum != namecount.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + namecount[tnum+1][0] + ',' + namecount[tnum+1][1] + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
+    document.getElementById('cdif').scrollTop=0;
 }
 
 namecount = [];
 
 function dictLoad() {
 	var which = document.form.sped.selectedIndex;
+	document.getElementById('soNO').style.display = 'none';
 	document.getElementById('soFT').style.display = 'none';
+	document.getElementById('soSW').style.display = 'none';
+	document.getElementById('soRX').style.display = 'none';
 	switch (which) {
-		case 0:
+		case 0: //dpr
+			document.getElementById('soNO').style.display = 'block';
 		break;
-		case 1:
+		case 1: // ped
+			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 2:
+		case 2: // dppn
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 3:
+		case 3: // CPED
+			document.getElementById('soFT').style.display = 'block';
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 4:
+		case 4: // CEPD
+			document.getElementById('soFT').style.display = 'block';
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 			if(typeof(epd) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -674,7 +767,9 @@ function dictLoad() {
 				headID.appendChild(newScript);
 			}
 		break;
-		case 5:
+		case 5: // ATTH
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 			if(typeof(attlist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -683,7 +778,9 @@ function dictLoad() {
 				headID.appendChild(newScript);
 			}
 		break;
-		case 6:
+		case 6: // TIKA
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 			if(typeof(tiklist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -692,7 +789,9 @@ function dictLoad() {
 				headID.appendChild(newScript);
 			}
 		break;
-		case 7:
+		case 7: // Title
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
 			if(typeof(titlelist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -700,7 +799,6 @@ function dictLoad() {
 				newScript.src = 'js/titles.js';
 				headID.appendChild(newScript);
 			}
-		break;
 	}
 }
 
