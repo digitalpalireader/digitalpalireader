@@ -13,7 +13,7 @@ document.onkeydown=function(e){
 }
 
 function keyPressed(e) {
-	if(document.activeElement.type && document.activeElement.type != "button" || isCtrl == true || isAlt == true) { return; }
+	if((document.activeElement.type && document.activeElement.type != "button" && document.activeElement.type != "submit") || isCtrl == true || isAlt == true) { return; }
 		if (e.charCode == 49) { // 1
 			if(document.getElementById('Qa1')) { f = document.getElementById('Qa1').onclick; f(); }
 			else if(document.getElementById('QcheckAns')) { f = document.getElementById('QcheckAns').onclick; f(); }

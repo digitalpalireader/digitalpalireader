@@ -17,16 +17,9 @@ function convert()
 {
 	var spell = document.convertor.inputc.value;
 
-	for (Count = 0; Count < 4; Count++) 
-	{
-		if (document.convertor.R1[Count].checked)
-		break;
-	}
-	for (Counta = 0; Counta < 4; Counta++) 
-	{
-		if (document.convertor.R2[Counta].checked)
-		break;
-	}
+	var Count = document.convertor.conversion1.selectedIndex
+	var Counta = document.convertor.conversion2.selectedIndex
+
 	if (Count == 0)
 	{
 		if (Counta == 1) // Unicode to velthius
@@ -47,6 +40,10 @@ function convert()
 
 			spell = toMyanmar(spell);
 		}
+		else if (Counta == 5) // Unicode to Sinhala
+		{
+			spell = toSin(spell);
+		}			
 	}
 	else if (Count == 1)
 	{
@@ -66,25 +63,29 @@ function convert()
 		{
 			spell = toMyanmar(replaceunistandard(spell));
 		}			
+		else if (Counta == 5) // Velthius to Sinhala
+		{
+			spell = toSin(replaceunistandard(spell));
+		}			
 	}
 	document.convertor.outputc.value = spell;	
 }
 
 
 
-function changeit(what,which)
+function changeConversion(what,which)
 {
-	if (what == 'u')
+	if (what == 0)
 	{
 		
-		if (which == 1 && document.convertor.R2[0].checked) document.convertor.R2[1].checked = true;
-		else if (which == 2 && document.convertor.R1[0].checked) document.convertor.R1[1].checked = true;
+		if (which == 1 && document.convertor.conversion2.selectedIndex == 0) document.convertor.conversion2.selectedIndex = 1;
+		else if (which == 2 && document.convertor.conversion1.selectedIndex == 0) document.convertor.conversion1.selectedIndex = 1;
 	}
-	else if (what == 'v')
+	else if (what == 1)
 	{
 		
-		if (which == 1 && document.convertor.R2[1].checked) document.convertor.R2[0].checked = true;
-		else if (which == 2 && document.convertor.R1[1].checked) document.convertor.R1[0].checked = true;
+		if (which == 1 && document.convertor.conversion2.selectedIndex == 1) document.convertor.conversion2.selectedIndex = 0;
+		else if (which == 2 && document.convertor.conversion1.selectedIndex == 1) document.convertor.conversion1.selectedIndex = 0;
 	}
 	convert();
 }
@@ -109,8 +110,8 @@ function sendtoconvert(data)
 
 	moveframex(2)
 	moveframey('cof');
-	document.convertor.R1[0].checked = true;
-	document.convertor.R2[1].checked = true;
+	document.convertor.conversion1.selectedIndex = 0;
+	document.convertor.conversion2.selectedIndex = 1;
 	document.convertor.outputc.value = '';
 	document.convertor.inputc.value = data;
 	convert();

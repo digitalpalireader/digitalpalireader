@@ -348,17 +348,14 @@
 					<table align="center">
 						<tr>
 							<td align="center">Input</td>
-							<td align="center">
-								<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
-								<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
-							</td>
+							<td></td>
 							<td align="center">Output</td>
 						</tr>
 						<tr>
 							<td align=left id="inputtd">
 								<textarea id="inputc" rows="8" cols="35" onkeyup="convert()"></textarea>
 							</td>
-							<td>	
+							<td valign="top">	
 								<table id="table1">
 									<tr>
 										<td align="center">from</td>
@@ -366,29 +363,32 @@
 										<td align="center">to</td>
 									</tr>
 									<tr>
-										<td align="center"><input type="radio" value="V2" name="R1" onclick="javascript:changeit('u',1)"></td>
-										<td align="center">Uni</td>
-										<td align="center"><input type="radio" value="V2" checked name="R2" onclick="javascript:changeit('u',2)"></td>
+										<td align="center" valign="top">
+											<select name="conversion1" onclick="changeConversion(this.selectedIndex,1)">
+												<option>Unicode</option>
+												<option>Velthuis</option>
+											</select>
+										</td>
+										<td></td>
+										<td align="center" valign="top">
+											<select name="conversion2" onclick="changeConversion(this.selectedIndex,2)">
+												<option>Unicode</option>
+												<option selected>Velthuis</option>
+												<option>Thai</option>
+												<option>Devanagari</option>
+												<option>Myanmar</option>
+												<option>Sinhala</option>
+											</select>
+										</td>
 									</tr>
 									<tr>
-										<td align="center"><input type="radio" value="V3" checked name="R1" onclick="javascript:changeit('v',1)"></td>
-										<td align="center">Velth</td>
-										<td align="center"><input type="radio" value="V3" name="R2" onclick="javascript:changeit('v',2)"></td>
-									</tr>
-									<tr>
-										<td align="center"><input type="radio" disabled=yes value="V4" name="R1" onclick="javascript:changeit('t',1)"></td>
-										<td align="center">Thai</td>
-										<td align="center"><input type="radio" value="V4" name="R2" onclick="javascript:changeit('t',2)"></td>
-									</tr>
-									<tr>
-										<td align="center"><input type="radio" disabled=yes value="V5" name="R1" onclick="javascript:changeit('d',1)"></td>
-										<td align="center">Deva</td>
-										<td align="center"><input type="radio" value="V5" name="R2" onclick="javascript:changeit('d',2)"></td>
-									</tr>
-									<tr>
-										<td align="center"><input type="radio" disabled=yes value="V6" name="R1" onclick="javascript:changeit('m',1)"></td>
-										<td align="center">Myan</td>
-										<td align="center"><input type="radio" value="V6" name="R2" onclick="javascript:changeit('m',2)"></td>
+										<td align="center">
+											<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
+										</td>
+										<td></td>
+										<td align="center">
+											<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
+										</td>
 									</tr>
 								</table>
 							</td>

@@ -104,6 +104,7 @@ function toSin(input,type) {
 		else if (sinhala[i1+i2] && i2 == 'h') {		// two character match
 			output += sinhala[i1+i2];
 			i += 2;
+			if(cons[i3]) output += '්';
 		}					
 		else if (sinhala[i1] && i1 != 'a') {		// one character match except a
 			output += sinhala[i1];
@@ -111,6 +112,7 @@ function toSin(input,type) {
 			if(cons[i2] && i1 != 'ṃ') output += '්';
 		}					
 		else if (!sinhala[i1]) {
+			if (cons[i0] || (i0 == 'h' && cons[im])) output += '්'; // end word consonant
 			output += i1;
 			i++;				
 			if (vowel[i2]) {  // word-beginning vowel marker
@@ -120,13 +122,17 @@ function toSin(input,type) {
 		}
 		else i++;
 	}
+	if (cons[i1]) output += '්';
 
 	// fudges
+	
+	// "‍" zero-width joiner inside of quotes
 	
 	output = output.replace(/ඤ්ජ/g, 'ඦ');
 	output = output.replace(/ණ්ඩ/g, 'ඬ');
 	output = output.replace(/න්ද/g, 'ඳ');
 	output = output.replace(/ම්බ/g, 'ඹ');
+	output = output.replace(/්ර/g, '්‍ර');
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
@@ -249,8 +255,8 @@ function toMyanmar(input,type) {
 		}		
 		else if (myanr[i1+i2] && i2 == 'h') {		// two character match
 			output += myanr[i1+i2];
-			i += 2;
 			if(cons[i3]) output += '္';
+			i += 2;
 		}					
 		else if (myanr[i1] && i1 != 'a') {		// one character match except a
 			output += myanr[i1];
@@ -370,19 +376,20 @@ function todeva(input,type) {
 		}		
 		else if (i2 == 'h' && devar[i1+i2]) {		// two character match
 			output += devar[i1+i2];
-			if (i3 != '' && !vowel[i3] && i2 != 'ṃ') {
+			if (i3 && !vowel[i3] && i2 != 'ṃ') {
 				output += '्';
 			}
 			i += 2;
 		}					
 		else if (devar[i1]) {	// one character match except a
 			output += devar[i1];
-			if (i2 != '' && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
+			if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
 				output += '्';
 			}
 			i++;
 		}
 		else if (i1 != 'a') {
+			if (cons[i0] || (i0 == 'h' && cons[im])) output += '्'; // end word consonant
 			output += i1;
 			i++;
 			if(vowel[i2]) {
@@ -392,6 +399,7 @@ function todeva(input,type) {
 		}
 		else i++; // a
 	}
+	if (cons[i1]) output += '्';
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
@@ -453,6 +461,31 @@ function thaiconv(input) {
 	thair['s'] = 'ส';
 	thair['h'] = 'ห';
 
+	var cons = [];
+	
+	cons['k'] = '1';
+	cons['g'] = '1';
+	cons['ṅ'] = '1';
+	cons['c'] = '1';
+	cons['j'] = '1';
+	cons['ñ'] = '1';
+	cons['ṭ'] = '1';
+	cons['ḍ'] = '1';
+	cons['ṇ'] = '1';
+	cons['t'] = '1';
+	cons['d'] = '1';
+	cons['n'] = '1';
+	cons['p'] = '1';
+	cons['b'] = '1';
+	cons['m'] = '1';
+	cons['y'] = '1';
+	cons['r'] = '1';
+	cons['l'] = '1';
+	cons['ḷ'] = '1';
+	cons['v'] = '1';
+	cons['s'] = '1';
+	cons['h'] = '1';
+
 	var i0 = '';
 	var i1 = '';
 	var i2 = '';
@@ -466,6 +499,7 @@ function thaiconv(input) {
 	input = input.replace(/\&quot;/g, '`');
 
 	while (i < input.length) {
+		im = input.charAt(i-2);
 		i0 = input.charAt(i-1);
 		i1 = input.charAt(i);
 		i2 = input.charAt(i+1);
@@ -479,7 +513,7 @@ function thaiconv(input) {
 				i++;
 			}
 			else {
-				if (cons == 0) {
+				if (i == 0) {
 					output += thair['a'];
 				}	
 				if (i1 == 'i' && i2 == 'ṃ') { // special i.m character
@@ -489,51 +523,42 @@ function thaiconv(input) {
 				else if (i1 != 'a') { output += thair[i1]; }
 				i++;
 			}
-			cons = 0;
 		}		
 		else if (thair[i1+i2] && i2 == 'h') {		// two character match
-			cons++;
-			if (cons > 1) output += 'ฺ';
 			if (i3 == 'o' || i3 == 'e') {
 				output += thair[i3];
 				i++;
-				cons = 0;
 			}	
+			if (cons[i3]) output += 'ฺ';
 			output += thair[i1+i2];
 			i = i + 2;
 		}					
 		else if (thair[i1] && i1 != 'a') {		// one character match except a
-			cons++;
-			if (i1 == 'ṃ') cons = 0;
-			if (cons > 1) output += 'ฺ';
+			if (cons[i2] && i1 != 'ṃ') output += 'ฺ';
 			if (i2 == 'o' || i2 == 'e') {
 				output += thair[i2];
 				i++;
-				cons = 0;
 			}	
 			output += thair[i1];
 			i++;
 		}					
 		else if (!thair[i1]) {
-			if (cons > 0) output += 'ฺ';
-			cons = 0;
+			if (cons[i0] || (i0 == 'h' && cons[im])) output += 'ฺ';
 			output += i1;
 			i++;				
 			if (i2 == 'o' || i2 == 'e') {  // long vowel first
 				output += thair[i2];
 				i++;
-				cons = 0;
 			}
 			if (vowel[i2]) {  // word-beginning vowel marker
 				output += thair['a']; 
 			}
 		}
 		else { // a
-			cons = 0;
 			i++;
 		}
 	}
-	if (cons > 0) output += 'ฺ';
+	if (cons[i1]) output += 'ฺ';
 	output = output.replace(/\`+/g, '"');
 	return output;
 }	
