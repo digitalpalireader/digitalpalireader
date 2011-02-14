@@ -117,7 +117,7 @@ function getconfig() {
     // Add ATI translations if preferred
     if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
 		if (cfg['catioff'] == "checked") { 
-			var nsrc = 'file://' + getHomePath() +'/'+ cfg['catiloc'] + '/html/tech/digital_pali_reader_suttas.js';
+			var nsrc = 'file://' + getHomePath().replace(/\\/g, '/') +'/'+ cfg['catiloc'] + '/html/tech/digital_pali_reader_suttas.js';
 		}
 		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
 		atiIns = 1;
