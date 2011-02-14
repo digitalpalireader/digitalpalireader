@@ -296,6 +296,7 @@ bottom:0px;
 right:0px;
 left:0px;
 height:160px;
+overflow:auto;
 }
 #cdif {
 position:absolute;
@@ -323,13 +324,13 @@ width:100%;
 padding-right:10px; 
 padding-left:10px;
 display:none;
+overflow:auto;
 }
 #scf {
 min-height:100%;
 width:100%;
 padding-right:10px; 
 padding-left:10px;
- 
 display:none;
 }
 #difb {

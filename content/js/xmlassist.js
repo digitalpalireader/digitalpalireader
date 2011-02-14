@@ -58,14 +58,14 @@ function formatuniout(data,which) { // prepare without links
 	
 
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-	data = data.replace(/[”"]ti/g, '” ”ti');
-	data = data.replace(/['’]+ti/g, '’ ’ti');
-	data = data.replace(/[”"]nti/g, '” ”nti');
-	data = data.replace(/['’]+nti/g, '’ ’nti');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
 	data = data.replace(/''/g, '”');
 	data = data.replace(/'/g, '’');
+	data = data.replace(/[”"]ti/g, '” ”ti');
+	data = data.replace(/['’]+ti/g, '’ ’ti');
+	data = data.replace(/[”"]nti/g, '” ”nti');
+	data = data.replace(/['’]+nti/g, '’ ’nti');
 	data = data.replace(/\^b\^/g, '<@>');
 	data = data.replace(/\^eb\^/g, '</@>');
 	data = data.replace(/["]+<\/@>nti/g, '”</@> ”nti');
@@ -95,6 +95,9 @@ function formatuniout(data,which) { // prepare without links
 	for (var a = 0; a < wordbyword.length; a++)
 	{
 		wb = wordbyword[a];
+		
+		// VAR readings
+		
 		if (altread == 1) {
 			endpt = wb.length-1;
 			if (wb.charAt(endpt) == '}') {
@@ -119,6 +122,7 @@ function formatuniout(data,which) { // prepare without links
 			}
 		}
 
+		// search term coloured text
 
 		else if (wb.indexOf('<c') >= 0) {
 			while (wb.indexOf('<c') >= 0) {
@@ -232,7 +236,6 @@ function preparepali(data,which) { // standard text prep for algorithm
 	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+colorcfg['colcpd']+'">');
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
 
-	//document.textpad.pad.value = finout[0];
 
 	return finout;
 

@@ -65,7 +65,7 @@ function moveframex(a,temp) //read, etc
             document.getElementById('anf').style.bottom = 'auto';
             
             document.getElementById('rightbot').style.height = 'auto';
-            document.getElementById('rightbot').style.top = (document.getElementById('anf').offsetTop + document.getElementById('anf').offsetHeight)+ 'px';
+            document.getElementById('rightbot').style.top = (document.getElementById('anf').offsetTop + document.getElementById('anf').offsetHeight - 4)+ 'px';
             document.getElementById('rightbot').style.bottom = '0px';
 
             
