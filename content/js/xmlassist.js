@@ -440,6 +440,7 @@ function replacevelstandard(input) {
 	input = input.replace(/\u1E45/g, '\"n');
 	input = input.replace(/\u1E47/g, '\.n');
 	input = input.replace(/\u1E43/g, '\.m');
+	input = input.replace(/\u1E41/g, '\.m'); // m with over-dot
 	input = input.replace(/\u00F1/g, '\~n');
 	input = input.replace(/\u1E37/g, '\.l');
 	input = input.replace(/\u0100/g, 'AA');
