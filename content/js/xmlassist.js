@@ -577,7 +577,7 @@ function createTablep()
 }
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
-	if (getMiscPref("ctrans") != "checked" || typeof(atiD) == 'undefined') return;
+	if (cfg["ctrans"] != "checked" || typeof(atiD) == 'undefined') return;
 	
 	var atiurl = (cfg['catioff'] == 'checked' ? 'file://'+getHomePath().replace(/\\/g, '/')+'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 	

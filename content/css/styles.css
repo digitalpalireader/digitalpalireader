@@ -21,6 +21,35 @@ select, input, textarea {
 	font-size: 10px;
 }
 
+.abut {
+text-align:center;
+vertical-align:middle;
+height:30px;
+background-size:100% 100%;
+-moz-background-size:100% 100%;
+}
+
+.tbut {
+width:24px;
+}
+
+.mbut {
+background-image:url('../images/mb0.png');
+}
+
+.lbut {
+background-image:url('../images/lb0.png');
+}
+
+
+.rbut {
+background-image:url('../images/rb0.png');
+}
+
+.sbut {
+background-image:url('../images/mats.png');
+}
+
 /* end static */
 
 html, body {
@@ -321,16 +350,12 @@ padding-bottom:10px;
 #cof {
 min-height:100%;
 width:100%;
-padding-right:10px; 
-padding-left:10px;
 display:none;
 overflow:auto;
 }
 #scf {
 min-height:100%;
 width:100%;
-padding-right:10px; 
-padding-left:10px;
 display:none;
 }
 #difb {
@@ -401,31 +426,6 @@ font-size:14px;
 border-collapse:collapse;
 border-spacing:0px;
 }
-.lbut {
-text-align:center;
-vertical-align:middle;
-height:30px;
-width:24px;
-background-image:url('../images/lb0.png');
-}
-.mbut {
-vertical-align:middle;
-text-align:center;
-height:30px;
-width:22px;
-background-image:url('../images/mb0.png');
-}
-.rbut {
-vertical-align:middle;
-text-align:center;
-height:30px;
-width:24px;
-background-image:url('../images/rb0.png');
-}
-.sbut {
-background-image:url('../images/mats.png');
-height:30px;
-}
 .cp-d {
 position:absolute;
 right:0px;
@@ -433,6 +433,7 @@ top:-4px;
 width:8px;
 height:8px;
 border-bottom-left-radius:8px;
+-moz-border-bottom-left-radius:8px;
 background-color:#F5F5F5;
 border:1px solid #FFF
 }

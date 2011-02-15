@@ -84,8 +84,10 @@ function importXML(labelsearch,para)
 	document.form.bmname.value = bknameme;
 	var hierb = hier;
 	
-	addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
-	historyBox();
+	if(ioCheck) {
+		addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+		historyBox();
+	}
 
 	var theData = '';
 	

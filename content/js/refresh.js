@@ -11,5 +11,4 @@ function refreshit(which)
     if (which == 1) { // coming from reset options.
 		document.getElementById('mafe').innerHTML='<b style="color:'+colorcfg['colsel']+'">Options reset.</b>';
 	}
-	historyBox();
 }

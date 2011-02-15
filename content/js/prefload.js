@@ -6,10 +6,10 @@ var cPrefVals = [];
 var mPrefs = [];
 var mPrefVals = [];
 
-sPrefs.push("SearchH"); sPrefVals.push(50);
 sPrefs.push("AnalyzeH"); sPrefVals.push(44);
-sPrefs.push("DictH"); sPrefVals.push(220);
+sPrefs.push("DictH"); sPrefVals.push(250);
 sPrefs.push("ControlW"); sPrefVals.push(254);
+sPrefs.push("SearchH"); sPrefVals.push(50);
 
 cPrefs.push("coltext"); cPrefVals.push("#111");
 cPrefs.push("colsel"); cPrefVals.push("#550");
@@ -47,16 +47,18 @@ mPrefs.push("bkgimg"); mPrefVals.push("checked");
 mPrefs.push("script"); mPrefVals.push("0");
 mPrefs.push("cpanel"); mPrefVals.push("1");
 
-for (i in sPrefs) {
-	if (!getSizePref(sPrefs[i])) { setSizePref(sPrefs[i],sPrefVals[i]); }
-}
+if (ioCheck) {
+	for (i in sPrefs) {
+		if (!getSizePref(sPrefs[i])) { setSizePref(sPrefs[i],sPrefVals[i]); }
+	}
 
-for (i in cPrefs) {
-	if (!getColPref(cPrefs[i])) { setColPref(cPrefs[i],cPrefVals[i]); }
-}
+	for (i in cPrefs) {
+		if (!getColPref(cPrefs[i])) { setColPref(cPrefs[i],cPrefVals[i]); }
+	}
 
-/*
-for (i in mPrefs) {
-	if (!getMiscPref(mPrefs[i])) { setMiscPref(mPrefs[i],mPrefVals[i]); }
+	/*
+	for (i in mPrefs) {
+		if (!getMiscPref(mPrefs[i])) { setMiscPref(mPrefs[i],mPrefVals[i]); }
+	}
+	*/
 }
-*/

@@ -1,3 +1,4 @@
+var devCheck = 1;
 
 var xmall = [];
 
