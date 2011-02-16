@@ -12,6 +12,9 @@ var hier = 'm'; // m = mula, a = atthakatha
 
 function importXML(labelsearch,para)
 {
+
+	document.activeElement.blur();
+
 	moves(0); // close search
 	
 	if (hier == 't' && limitt()) { 
@@ -146,6 +149,9 @@ var maxlength = 20;  // change for display purposes, will affect history as well
 
 function gettitles(altget,stop,prev,ssect)
 {
+
+	document.activeElement.blur();
+
 	var newload = 0;
 	
 	if (altget == 3) getsutta = 4; // only remake section lists
@@ -438,6 +444,9 @@ function gettitles(altget,stop,prev,ssect)
 
 
 function importXMLindex() {
+
+	document.activeElement.blur();
+
 	if (hier == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
@@ -623,6 +632,7 @@ function importXMLindex() {
 
 function importXMLraw()
 {
+	document.activeElement.blur();
 	if (hier == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
@@ -723,6 +733,8 @@ function xmlrefget()
 var setplace = new Array();
 
 function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section,7=hier
+
+	document.activeElement.blur();
 
 	setplace = temp;
 

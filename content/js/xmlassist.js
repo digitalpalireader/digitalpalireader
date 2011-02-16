@@ -508,7 +508,7 @@ function createTablen()
 
 function createTablep()
 {
-
+//	alert(section + ' ' + sutta + ' ' + vagga + ' ' + volume + ' ' + meta);
 	var section = document.form.section.selectedIndex - 1;
 	if (section >= 0)
 	{
