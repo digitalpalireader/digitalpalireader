@@ -1228,13 +1228,15 @@ function limitt() {
 	else { return false };
 }
 
+var htitle = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
+
+
 function switchhier(htmp,stop) {
 
+	if(hier == htmp) return;
+	
 	var himg = ['l','m','r'];
-	
-	var htitle = [];
-	htitle = ['Change to Mūla', 'Change to Aṭṭhakathā', 'Change to Ṭīkā'];
-	
+		
 
 	if (htmp == 't' && limitt()) { 
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
@@ -1257,7 +1259,7 @@ function switchhier(htmp,stop) {
 			document.getElementById('dhier'+ha[i]).onmouseout=function() {
 				return;
 			};
-			document.getElementById('dhier'+ha[i]).title = '';
+			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+htitle[i];
 
 			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b1.png)';
 		}
@@ -1268,6 +1270,8 @@ function switchhier(htmp,stop) {
 			document.getElementById('dhier'+ha[i]).onmouseout=function() {
 				document.body.style.cursor='auto';
 			};
+
+			document.getElementById('dhier'+ha[i]).title = 'Change to '+htitle[i];
 
 			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b0.png)';
 		}

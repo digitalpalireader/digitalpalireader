@@ -14,8 +14,8 @@
 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/loadxml.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/xmlassist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/xml.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/misc.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
@@ -25,7 +25,7 @@
 </head>
 
 
-<body onload="//getWordList(); ">
+<body onload="//noahq(); ">
 <div id="content">
 	<div id="left">
 		<div id="brleft"></div>
@@ -244,7 +244,7 @@
 															<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
 														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false; loadFullText();"><span class="small"> Full Text</span>
+															<input type="checkbox" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false;"><span class="small"> Full Text</span>
 														</div>
 														<div id="soSW" style="display:none">
 															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
@@ -254,7 +254,7 @@
 											</tr>
 										</table>
 									</div>
-									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && this.value.charAt(0) != '*' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word - start with '*' for inner-word matches (requires clicking the '>' button)"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
+									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType()">
 
 					<!--<td>
 							<div align=center id="rright">
@@ -458,6 +458,10 @@
 			headID.appendChild(newScript);
 		}
 	</script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/relatt.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/reltik.js"></script>
+
 	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>

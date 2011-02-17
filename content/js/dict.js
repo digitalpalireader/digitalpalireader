@@ -6,15 +6,10 @@ var ped = [];
 function pedsearchstart()
 {
        
-	document.getElementById('difb').innerHTML='<div><a name="diftop"></div>';
+	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
 	
 	var getstring = document.form.manual.value;
 
-	if(document.form.sofulltext.checked) { // full text search
-		
-		pedFullTextSearch(getstring);
-		return;
-	}
 	
 	getstring = getstring.replace(/"n/g, '`n');
 	if (document.form.soregexp.checked) {
@@ -22,6 +17,12 @@ function pedsearchstart()
 	}
 	else {
 		getstring = getstring.replace(/\./g, ',');
+	}
+
+	if(document.form.sofulltext.checked) { // full text search
+		
+		pedFullTextSearch(getstring);
+		return;
 	}
 
 	var gslength = getstring.length;
@@ -97,7 +98,7 @@ function pedsearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML = listoutf + '</table><hr />';
 
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
@@ -121,7 +122,7 @@ function pedFullTextSearch(getstring) {
 		var allp = xmlDoc.getElementsByTagName('data');
 		
 		for (j =0; j < allp.length; j++) {
-			var texttomatch = allp[j].textContent
+			var texttomatch = allp[j].textContent;
 			startmatch = texttomatch.search(getstring);
 			postpara = '';
 			if (startmatch >= 0)
@@ -152,13 +153,14 @@ function pedFullTextSearch(getstring) {
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	var listoutf = '<hr /><table width="100%">';
 	
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table>';
+	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
+	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
 	document.getElementById('difb').innerHTML += finalout;
 	document.getElementById('cdif').scrollTop=0;
 }
@@ -168,7 +170,8 @@ var dppn = new Array();
 
 function dppnsearchstart()
 {
-	document.getElementById('difb').innerHTML='';
+	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+;
 	
 	var getstring = document.form.manual.value;
 	
@@ -179,6 +182,13 @@ function dppnsearchstart()
 	else {
 		getstring = getstring.replace(/\./g, ',');
 	}
+
+	if(document.form.sofulltext.checked) { // full text search
+		
+		dppnFullTextSearch(getstring);
+		return;
+	}
+
 
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -241,6 +251,8 @@ function dppnsearchstart()
 			y++;
 		}
 	}
+
+
 	
 	var y = finouta.length;
 
@@ -252,10 +264,83 @@ function dppnsearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML =  listoutf + '</table><hr />';
     document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
+
+function dppnFullTextSearch(getstring) {
+	
+	var finalouta = [];
+	
+	var listouta = [];
+	
+	getstring = replaceunistandard(getstring);
+	
+	for (i = 1; i < 9; i++) {
+		
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		document.getElementById('mafbc').innerHTML = '';		
+		
+		var allp = xmlDoc.getElementsByTagName('entry');
+		
+		for (j =0; j < allp.length; j++) {
+			var texttomatch = allp[j].textContent;
+			if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
+			var ttitle = texttomatch.substring(texttomatch.indexOf('<h2>')+4,texttomatch.indexOf('</h2>'));
+			texttomatch = texttomatch.replace(/<\/*a[^>]*>/g, '');
+			startmatch = texttomatch.search(getstring);
+			postpara = '';
+			if (startmatch >= 0)
+			{
+				listouta.push(ttitle+'###<a href="#dppno'+i+'/'+j+'" style="color:'+colorcfg['colped']+'">' + ttitle + '</a><br>');
+				while (startmatch >= 0)
+				{				
+					gotstring = texttomatch.match(getstring)[0];
+					endmatch = startmatch + gotstring.length;
+					beforem = texttomatch.substring(0,startmatch);
+					afterm = texttomatch.substring(endmatch,texttomatch.length);
+					postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
+					texttomatch = texttomatch.substring(endmatch);
+					startmatch = texttomatch.search(getstring);
+				}
+				postpara += afterm;
+
+				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+				
+				finalouta.push(ttitle+'###<a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="#diftop" class="small" style="color:'+colorcfg['colped']+'">top</a></div>' + postpara + '</b></div>');
+			}
+		}
+	}
+
+	// word list
+
+	listouta = sortaz(listouta);
+
+	var y = listouta.length;
+
+	var findiv = Math.ceil(y/3);
+	
+	var listoutf = '<hr /><table width="100%">';
+	
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
+	}
+	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
+	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
+	
+	var finalout = sortaz(finalouta).join('');
+	
+	document.getElementById('difb').innerHTML += finalout;
+	document.getElementById('cdif').scrollTop=0;
+}
+
+
 
 var yg = [];
 
@@ -733,6 +818,7 @@ function dictLoad() {
 		break;
 		case 2: // dppn
 			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
 		case 3: // CPED

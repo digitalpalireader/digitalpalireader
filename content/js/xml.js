@@ -34,20 +34,19 @@ function importXML(labelsearch,para)
 
 	document.getElementById('manrem').value = 0;
 
-
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 
+	var bookno = document.form.book.selectedIndex;
 	var meta = document.form.meta.selectedIndex;
 	var volume = document.form.volume.selectedIndex;
 	var vagga = document.form.vagga.selectedIndex;
 	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;
+	var section = document.form.section.selectedIndex;	
 
-	var book = document.form.book.value;
 	
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -71,9 +70,27 @@ function importXML(labelsearch,para)
 	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	document.getElementById('mafbc').innerHTML = '';
+
+	// relative mat
+	
+	var relout = '';
+	var relwhere = nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^"+section;
+	var relhere = eval('rel'+hier+"['"+relwhere+"']");
+	if (relhere) {
+		var hi = ['m','a','t'];
+		var hic = 0;
+		for (ht = 0; ht < hi.length; ht++) {
+			if(hi[ht] == hier) continue;
+			if (relhere.split('#')[hic] != '') {
+				var relherea = relhere.split('#')[hic].split('^');
+				relout+='<input type="button" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+htitle[ht]+'" value="'+hi[ht]+'"> ';
+			}
+			hic++;
+		}
+	}
 	
 	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }
@@ -142,6 +159,7 @@ function importXML(labelsearch,para)
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
 	}
+
 }
 
 var maxlength = 20;  // change for display purposes, will affect history as well.

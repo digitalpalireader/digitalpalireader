@@ -134,8 +134,9 @@ function sortaz(mydata){  // sort velthius pali array
 	var wordval = 0;
 	var badarray = new Array();
 	var badis = 0;
-	
+
 	for (var a = 0; a < mydata.length; a++) {
+		
 		wordval = '';
 
 		onestring = replaceunistandard(mydata[a].toLowerCase());
@@ -143,6 +144,7 @@ function sortaz(mydata){  // sort velthius pali array
 			badis = 0;
 			for (var b = 0; b < onestring.length; b++) {
 				onechar = onestring.charAt(b);
+				if(onechar == '#') break;
 				if (neworder[onechar]) {
 					wordval+=neworder[onechar];
 				}
@@ -163,7 +165,7 @@ function sortaz(mydata){  // sort velthius pali array
 	var sVal = '';
 	for (var sKey in keys) {
 		sVal = keys[sKey];
-		outdata.push(outarray[sVal]);
+		outdata.push(outarray[sVal].substring(outarray[sVal].indexOf('###')+3)); // ### will mean to cut the term and return the rest
 	}
 	return outdata;
 }

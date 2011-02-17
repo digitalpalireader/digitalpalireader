@@ -1,5 +1,616 @@
 var devCheck = 1;
 
+function noahq() {
+	
+	relmul = [];
+	relatt = [];
+	reltik = [];
+
+relmul.push('d^2^0^0^0^0^0');
+relmul.push('d^2^0^0^0^0^1');
+relmul.push('d^2^0^0^0^0^2');
+relmul.push('d^2^0^0^0^0^3');
+relmul.push('d^2^0^0^0^0^4');
+relmul.push('d^2^0^0^0^0^5');
+relmul.push('d^2^0^0^1^0^0');
+relmul.push('d^2^0^0^1^0^1');
+relmul.push('d^2^0^0^1^0^2');
+relmul.push('d^2^0^0^1^0^3');
+relmul.push('d^2^0^0^1^0^4');
+relmul.push('d^2^0^0^1^0^5');
+relmul.push('d^2^0^0^1^0^6');
+relmul.push('d^2^0^0^1^0^7');
+relmul.push('d^2^0^0^1^0^8');
+relmul.push('d^2^0^0^1^0^9');
+relmul.push('d^2^0^0^2^0^0');
+relmul.push('d^2^0^0^2^0^1');
+relmul.push('d^2^0^0^2^0^2');
+relmul.push('d^2^0^0^2^0^3');
+relmul.push('d^2^0^0^2^0^4');
+relmul.push('d^2^0^0^2^0^5');
+relmul.push('d^2^0^0^2^0^6');
+relmul.push('d^2^0^0^2^0^7');
+relmul.push('d^2^0^0^2^0^8');
+relmul.push('d^2^0^0^2^0^9');
+relmul.push('d^2^0^0^2^0^10');
+relmul.push('d^2^0^0^3^0^0');
+relmul.push('d^2^0^0^3^0^1');
+relmul.push('d^2^0^0^3^0^2');
+relmul.push('d^2^0^0^3^0^3');
+relmul.push('d^2^0^0^3^0^4');
+relmul.push('d^2^0^0^3^0^5');
+relmul.push('d^2^0^0^3^0^6');
+relmul.push('d^2^0^0^3^0^7');
+relmul.push('d^2^0^0^3^0^8');
+relmul.push('d^2^0^0^3^0^9');
+relmul.push('d^2^0^0^3^0^10');
+relmul.push('d^2^0^0^3^0^11');
+relmul.push('d^2^0^0^3^0^12');
+relmul.push('d^2^0^0^3^0^13');
+relmul.push('d^2^0^0^3^0^14');
+relmul.push('d^2^0^0^3^0^15');
+relmul.push('d^2^0^0^4^0^0');
+relmul.push('d^2^0^0^4^0^1');
+relmul.push('d^2^0^0^4^0^2');
+relmul.push('d^2^0^0^4^0^3');
+relmul.push('d^2^0^0^4^0^4');
+relmul.push('d^2^0^0^4^0^5');
+relmul.push('d^2^0^0^4^0^6');
+relmul.push('d^2^0^0^4^0^7');
+relmul.push('d^2^0^0^4^0^8');
+relmul.push('d^2^0^0^4^0^9');
+relmul.push('d^2^0^0^4^0^10');
+relmul.push('d^2^0^0^4^0^11');
+relmul.push('d^2^0^0^4^0^12');
+relmul.push('d^2^0^0^4^0^13');
+relmul.push('d^2^0^0^4^0^14');
+relmul.push('d^2^0^0^4^0^15');
+relmul.push('d^2^0^0^4^0^16');
+relmul.push('d^2^0^0^4^0^17');
+relmul.push('d^2^0^0^4^0^17');
+relmul.push('d^2^0^0^4^0^17');
+relmul.push('d^2^0^0^4^0^18');
+relmul.push('d^2^0^0^5^0^1');
+relmul.push('');
+relmul.push('d^2^0^0^5^0^2');
+relmul.push('d^2^0^0^5^0^3');
+relmul.push('d^2^0^0^5^0^4');
+relmul.push('d^2^0^0^5^0^5');
+relmul.push('d^2^0^0^5^0^6');
+relmul.push('d^2^0^0^5^0^7');
+relmul.push('d^2^0^0^5^0^8');
+relmul.push('d^2^0^0^5^0^9');
+relmul.push('d^2^0^0^5^0^10');
+relmul.push('d^2^0^0^5^0^11');
+relmul.push('d^2^0^0^5^0^12');
+relmul.push('d^2^0^0^5^0^13');
+relmul.push('d^2^0^0^5^0^14');
+relmul.push('d^2^0^0^5^0^15');
+relmul.push('d^2^0^0^5^0^16');
+relmul.push('d^2^0^0^6^0^0');
+relmul.push('d^2^0^0^6^0^1');
+relmul.push('d^2^0^0^6^0^2');
+relmul.push('d^2^0^0^6^0^3');
+relmul.push('d^2^0^0^6^0^4');
+relmul.push('d^2^0^0^6^0^5');
+relmul.push('d^2^0^0^6^0^6');
+relmul.push('d^2^0^0^6^0^7');
+relmul.push('d^2^0^0^6^0^8');
+relmul.push('d^2^0^0^6^0^9');
+relmul.push('d^2^0^0^6^0^10');
+relmul.push('d^2^0^0^6^0^11');
+relmul.push('d^2^0^0^6^0^12');
+relmul.push('d^2^0^0^6^0^13');
+relmul.push('d^2^0^0^6^0^14');
+relmul.push('d^2^0^0^6^0^15');
+relmul.push('d^2^0^0^6^0^16');
+relmul.push('d^2^0^0^6^0^17');
+relmul.push('d^2^0^0^6^0^18');
+relmul.push('d^2^0^0^6^0^19');
+relmul.push('d^2^0^0^6^0^20');
+relmul.push('');
+relmul.push('d^2^0^0^7^0^1');
+relmul.push('d^2^0^0^7^0^2');
+relmul.push('d^2^0^0^7^0^3');
+relmul.push('d^2^0^0^7^0^4');
+relmul.push('d^2^0^0^7^0^5');
+relmul.push('d^2^0^0^7^0^6');
+relmul.push('d^2^0^0^7^0^7');
+relmul.push('d^2^0^0^7^0^8');
+relmul.push('d^2^0^0^7^0^9');
+relmul.push('d^2^0^0^7^0^10');
+relmul.push('d^2^0^0^7^0^11');
+relmul.push('d^2^0^0^7^0^12');
+relmul.push('d^2^0^0^7^0^13');
+relmul.push('d^2^0^0^8^0^0');
+relmul.push('d^2^0^0^8^0^1');
+relmul.push('d^2^0^0^9^0^1');
+relmul.push('d^2^0^0^9^0^2');
+relmul.push('d^2^0^0^9^0^3');
+relmul.push('d^2^0^0^9^0^4');
+relmul.push('d^2^0^0^9^0^5');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^6');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^7');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^8');
+relmul.push('d^2^0^0^9^0^9');
+relmul.push('d^2^0^0^9^0^9');
+relmul.push('d^2^0^0^9^0^10');
+relmul.push('d^2^0^0^9^0^11');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^9^0^12');
+relmul.push('d^2^0^0^10^0^1');
+relmul.push('d^2^0^0^10^0^2');
+relmul.push('d^2^0^0^10^0^3');
+relmul.push('d^2^0^0^10^0^4');
+relmul.push('d^2^0^0^10^0^5');
+relmul.push('d^2^0^0^10^0^6');
+relmul.push('d^2^0^0^10^0^7');
+relmul.push('d^2^0^0^10^0^8');
+relmul.push('d^2^0^0^10^0^9');
+relmul.push('d^2^0^0^10^0^10');
+relmul.push('');
+
+relatt.push('d^2^0^0^0^0^0');
+relatt.push('d^2^0^0^0^1^0');
+relatt.push('d^2^0^0^0^2^0');
+relatt.push('d^2^0^0^0^3^0');
+relatt.push('d^2^0^0^0^4^0');
+relatt.push('d^2^0^0^0^5^0');
+relatt.push('d^2^1^0^0^0^0');
+relatt.push('d^2^1^0^0^1^0');
+relatt.push('d^2^1^0^0^2^0');
+relatt.push('d^2^1^0^0^3^0');
+relatt.push('d^2^1^0^0^4^0');
+relatt.push('d^2^1^0^0^4^0');
+relatt.push('d^2^1^0^0^4^0');
+relatt.push('d^2^1^0^0^5^0');
+relatt.push('d^2^1^0^0^6^0');
+relatt.push('d^2^1^0^0^6^0');
+relatt.push('d^2^2^0^0^0^0');
+relatt.push('d^2^2^0^0^1^0');
+relatt.push('d^2^2^0^0^2^0');
+relatt.push('');
+relatt.push('');
+relatt.push('d^2^2^0^0^3^0');
+relatt.push('d^2^2^0^0^4^0');
+relatt.push('d^2^2^0^0^5^0');
+relatt.push('d^2^2^0^0^6^0');
+relatt.push('');
+relatt.push('d^2^2^0^0^7^0');
+relatt.push('d^2^3^0^0^0^0');
+relatt.push('d^2^3^0^0^1^0');
+relatt.push('d^2^3^0^0^2^0');
+relatt.push('d^2^3^0^0^3^0');
+relatt.push('d^2^3^0^0^4^0');
+relatt.push('d^2^3^0^0^4^0');
+relatt.push('d^2^3^0^0^4^0');
+relatt.push('d^2^3^0^0^5^0');
+relatt.push('');
+relatt.push('');
+relatt.push('d^2^3^0^0^6^0');
+relatt.push('d^2^3^0^0^7^0');
+relatt.push('d^2^3^0^0^7^0');
+relatt.push('d^2^3^0^0^7^0');
+relatt.push('d^2^3^0^0^8^0');
+relatt.push('d^2^3^0^0^9^0');
+relatt.push('d^2^4^0^0^0^0');
+relatt.push('d^2^4^0^0^1^0');
+relatt.push('d^2^4^0^0^2^0');
+relatt.push('d^2^4^0^0^3^0');
+relatt.push('d^2^4^0^0^4^0');
+relatt.push('d^2^4^0^0^5^0');
+relatt.push('d^2^4^0^0^6^0');
+relatt.push('d^2^4^0^0^7^0');
+relatt.push('d^2^4^0^0^8^0');
+relatt.push('d^2^4^0^0^9^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^10^0');
+relatt.push('d^2^4^0^0^11^0');
+relatt.push('d^2^4^0^0^12^0');
+relatt.push('d^2^4^0^0^13^0');
+relatt.push('d^2^4^0^0^14^0');
+relatt.push('d^2^4^0^0^15^0');
+relatt.push('d^2^5^0^0^0^0');
+relatt.push('d^2^5^0^0^1^0');
+relatt.push('d^2^5^0^0^2^0');
+relatt.push('d^2^5^0^0^3^0');
+relatt.push('d^2^5^0^0^3^0');
+relatt.push('d^2^5^0^0^3^0');
+relatt.push('d^2^5^0^0^3^0');
+relatt.push('d^2^5^0^0^4^0');
+relatt.push('d^2^5^0^0^5^0');
+relatt.push('d^2^5^0^0^6^0');
+relatt.push('d^2^5^0^0^6^0');
+relatt.push('d^2^5^0^0^6^0');
+relatt.push('d^2^5^0^0^7^0');
+relatt.push('d^2^5^0^0^8^0');
+relatt.push('');
+relatt.push('d^2^5^0^0^9^0');
+relatt.push('');
+relatt.push('d^2^6^0^0^0^0');
+relatt.push('d^2^6^0^0^1^0');
+relatt.push('d^2^6^0^0^2^0');
+relatt.push('d^2^6^0^0^3^0');
+relatt.push('d^2^6^0^0^4^0');
+relatt.push('d^2^6^0^0^5^0');
+relatt.push('d^2^6^0^0^6^0');
+relatt.push('d^2^6^0^0^7^0');
+relatt.push('d^2^6^0^0^8^0');
+relatt.push('d^2^6^0^0^9^0');
+relatt.push('d^2^6^0^0^10^0');
+relatt.push('d^2^6^0^0^11^0');
+relatt.push('d^2^6^0^0^12^0');
+relatt.push('d^2^6^0^0^13^0');
+relatt.push('d^2^6^0^0^14^0');
+relatt.push('d^2^6^0^0^15^0');
+relatt.push('d^2^6^0^0^16^0');
+relatt.push('d^2^6^0^0^17^0');
+relatt.push('d^2^6^0^0^18^0');
+relatt.push('d^2^6^0^0^19^0');
+relatt.push('d^2^6^0^0^20^0');
+relatt.push('d^2^7^0^0^0^0');
+relatt.push('d^2^7^0^0^1^0');
+relatt.push('d^2^7^0^0^1^0');
+relatt.push('d^2^7^0^0^2^0');
+relatt.push('d^2^7^0^0^3^0');
+relatt.push('d^2^7^0^0^4^0');
+relatt.push('d^2^7^0^0^4^0');
+relatt.push('d^2^7^0^0^4^0');
+relatt.push('d^2^7^0^0^4^0');
+relatt.push('d^2^7^0^0^5^0');
+relatt.push('d^2^7^0^0^5^0');
+relatt.push('d^2^7^0^0^6^0');
+relatt.push('d^2^7^0^0^7^0');
+relatt.push('d^2^7^0^0^8^0');
+relatt.push('d^2^8^0^0^0^0');
+relatt.push('d^2^8^0^0^1^0');
+relatt.push('d^2^9^0^0^1^0');
+relatt.push('d^2^9^0^0^2^0');
+relatt.push('d^2^9^0^0^3^0');
+relatt.push('d^2^9^0^0^4^0');
+relatt.push('d^2^9^0^0^5^0');
+relatt.push('d^2^9^0^0^6^0');
+relatt.push('d^2^9^0^0^7^0');
+relatt.push('d^2^9^0^0^8^0');
+relatt.push('d^2^9^0^0^9^0');
+relatt.push('d^2^9^0^0^10^0');
+relatt.push('d^2^9^0^0^11^0');
+relatt.push('d^2^9^0^0^12^0');
+relatt.push('d^2^9^0^0^13^0');
+relatt.push('d^2^9^0^0^14^0');
+relatt.push('d^2^9^0^0^15^0');
+relatt.push('d^2^9^0^0^16^0');
+relatt.push('d^2^9^0^0^17^0');
+relatt.push('d^2^9^0^0^18^0');
+relatt.push('d^2^9^0^0^19^0');
+relatt.push('d^2^9^0^0^20^0');
+relatt.push('d^2^9^0^0^21^0');
+relatt.push('d^2^9^0^0^22^0');
+relatt.push('d^2^9^0^0^23^0');
+relatt.push('d^2^9^0^0^24^0');
+relatt.push('d^2^9^0^0^25^0');
+relatt.push('d^2^9^0^0^26^0');
+relatt.push('d^2^9^0^0^27^0');
+relatt.push('d^2^9^0^0^28^0');
+relatt.push('d^2^9^0^0^29^0');
+relatt.push('d^2^9^0^0^30^0');
+relatt.push('d^2^9^0^0^31^0');
+relatt.push('d^2^9^0^0^32^0');
+relatt.push('d^2^9^0^0^33^0');
+relatt.push('d^2^9^0^0^34^0');
+relatt.push('d^2^9^0^0^35^0');
+relatt.push('d^2^9^0^0^36^0');
+relatt.push('d^2^10^0^0^1^0');
+relatt.push('d^2^10^0^0^2^0');
+relatt.push('d^2^10^0^0^3^0');
+relatt.push('d^2^10^0^0^4^0');
+relatt.push('d^2^10^0^0^5^0');
+relatt.push('d^2^10^0^0^6^0');
+relatt.push('d^2^10^0^0^7^0');
+relatt.push('d^2^10^0^0^8^0');
+relatt.push('d^2^10^0^0^9^0');
+relatt.push('d^2^10^0^0^10^0');
+relatt.push('d^2^10^0^0^11^0');
+
+reltik.push('d^2^0^0^0^0^0');
+reltik.push('d^2^0^0^1^0^0');
+reltik.push('d^2^0^0^2^0^0');
+reltik.push('d^2^0^0^3^0^0');
+reltik.push('d^2^0^0^4^0^0');
+reltik.push('d^2^0^0^5^0^0');
+reltik.push('d^2^1^0^0^0^0');
+reltik.push('d^2^1^0^1^0^0');
+reltik.push('d^2^1^0^2^0^0');
+reltik.push('d^2^1^0^3^0^0');
+reltik.push('d^2^1^0^4^0^0');
+reltik.push('d^2^1^0^4^0^0');
+reltik.push('d^2^1^0^4^0^0');
+reltik.push('d^2^1^0^5^0^0');
+reltik.push('d^2^1^0^6^0^0');
+reltik.push('d^2^1^0^6^0^0');
+reltik.push('d^2^2^0^0^0^0');
+reltik.push('d^2^2^0^1^0^0');
+reltik.push('d^2^2^0^2^0^0');
+reltik.push('d^2^2^0^3^0^0');
+reltik.push('d^2^2^0^4^0^0');
+reltik.push('d^2^2^0^5^0^0');
+reltik.push('d^2^2^0^6^0^0');
+reltik.push('d^2^2^0^7^0^0');
+reltik.push('d^2^2^0^8^0^0');
+reltik.push('d^2^2^0^9^0^0');
+reltik.push('d^2^2^0^10^0^0');
+reltik.push('d^2^3^0^0^0^0');
+reltik.push('d^2^3^0^1^0^0');
+reltik.push('d^2^3^0^2^0^0');
+reltik.push('d^2^3^0^3^0^0');
+reltik.push('d^2^3^0^4^0^0');
+reltik.push('d^2^3^0^4^0^0');
+reltik.push('d^2^3^0^4^0^0');
+reltik.push('d^2^3^0^5^0^0');
+reltik.push('d^2^3^0^6^0^0');
+reltik.push('d^2^3^0^7^0^0');
+reltik.push('d^2^3^0^8^0^0');
+reltik.push('d^2^3^0^9^0^0');
+reltik.push('d^2^3^0^9^0^0');
+reltik.push('d^2^3^0^9^0^0');
+reltik.push('d^2^3^0^10^0^0');
+reltik.push('d^2^3^0^11^0^0');
+reltik.push('d^2^4^0^0^0^0');
+reltik.push('d^2^4^0^1^0^0');
+reltik.push('d^2^4^0^2^0^0');
+reltik.push('d^2^4^0^3^0^0');
+reltik.push('d^2^4^0^4^0^0');
+reltik.push('d^2^4^0^5^0^0');
+reltik.push('d^2^4^0^6^0^0');
+reltik.push('d^2^4^0^7^0^0');
+reltik.push('d^2^4^0^8^0^0');
+reltik.push('d^2^4^0^9^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^10^0^0');
+reltik.push('d^2^4^0^11^0^0');
+reltik.push('d^2^4^0^12^0^0');
+reltik.push('d^2^4^0^13^0^0');
+reltik.push('d^2^4^0^14^0^0');
+reltik.push('d^2^4^0^15^0^0');
+reltik.push('d^2^5^0^0^0^0');
+reltik.push('d^2^5^0^1^0^0');
+reltik.push('d^2^5^0^2^0^0');
+reltik.push('d^2^5^0^3^0^0');
+reltik.push('d^2^5^0^3^0^0');
+reltik.push('d^2^5^0^3^0^0');
+reltik.push('d^2^5^0^3^0^0');
+reltik.push('d^2^5^0^4^0^0');
+reltik.push('d^2^5^0^5^0^0');
+reltik.push('d^2^5^0^6^0^0');
+reltik.push('d^2^5^0^6^0^0');
+reltik.push('d^2^5^0^6^0^0');
+reltik.push('d^2^5^0^7^0^0');
+reltik.push('d^2^5^0^8^0^0');
+reltik.push('d^2^5^0^8^0^0');
+reltik.push('d^2^5^0^9^0^0');
+reltik.push('d^2^5^0^10^0^0');
+reltik.push('d^2^6^0^0^0^0');
+reltik.push('d^2^6^0^1^0^0');
+reltik.push('d^2^6^0^2^0^0');
+reltik.push('d^2^6^0^3^0^0');
+reltik.push('d^2^6^0^4^0^0');
+reltik.push('d^2^6^0^5^0^0');
+reltik.push('d^2^6^0^6^0^0');
+reltik.push('d^2^6^0^7^0^0');
+reltik.push('d^2^6^0^8^0^0');
+reltik.push('d^2^6^0^9^0^0');
+reltik.push('d^2^6^0^10^0^0');
+reltik.push('d^2^6^0^11^0^0');
+reltik.push('d^2^6^0^12^0^0');
+reltik.push('d^2^6^0^13^0^0');
+reltik.push('d^2^6^0^14^0^0');
+reltik.push('d^2^6^0^15^0^0');
+reltik.push('d^2^6^0^16^0^0');
+reltik.push('d^2^6^0^17^0^0');
+reltik.push('d^2^6^0^18^0^0');
+reltik.push('d^2^6^0^19^0^0');
+reltik.push('d^2^6^0^20^0^0');
+reltik.push('d^2^7^0^0^0^0');
+reltik.push('d^2^7^0^1^0^0');
+reltik.push('d^2^7^0^1^0^0');
+reltik.push('d^2^7^0^2^0^0');
+reltik.push('d^2^7^0^3^0^0');
+reltik.push('d^2^7^0^4^0^0');
+reltik.push('d^2^7^0^4^0^0');
+reltik.push('d^2^7^0^4^0^0');
+reltik.push('d^2^7^0^4^0^0');
+reltik.push('d^2^7^0^5^0^0');
+reltik.push('d^2^7^0^5^0^0');
+reltik.push('d^2^7^0^6^0^0');
+reltik.push('d^2^7^0^7^0^0');
+reltik.push('d^2^7^0^8^0^0');
+reltik.push('d^2^8^0^0^0^0');
+reltik.push('d^2^8^0^1^0^0');
+reltik.push('d^2^9^0^1^0^0');
+reltik.push('d^2^9^0^2^0^0');
+reltik.push('d^2^9^0^3^0^0');
+reltik.push('d^2^9^0^4^0^0');
+reltik.push('d^2^9^0^5^0^0');
+reltik.push('d^2^9^0^6^0^0');
+reltik.push('d^2^9^0^7^0^0');
+reltik.push('d^2^9^0^8^0^0');
+reltik.push('d^2^9^0^9^0^0');
+reltik.push('d^2^9^0^10^0^0');
+reltik.push('d^2^9^0^11^0^0');
+reltik.push('d^2^9^0^12^0^0');
+reltik.push('d^2^9^0^13^0^0');
+reltik.push('d^2^9^0^14^0^0');
+reltik.push('d^2^9^0^15^0^0');
+reltik.push('d^2^9^0^16^0^0');
+reltik.push('d^2^9^0^17^0^0');
+reltik.push('d^2^9^0^18^0^0');
+reltik.push('d^2^9^0^19^0^0');
+reltik.push('d^2^9^0^20^0^0');
+reltik.push('d^2^9^0^21^0^0');
+reltik.push('d^2^9^0^22^0^0');
+reltik.push('d^2^9^0^23^0^0');
+reltik.push('d^2^9^0^24^0^0');
+reltik.push('d^2^9^0^25^0^0');
+reltik.push('d^2^9^0^26^0^0');
+reltik.push('d^2^9^0^27^0^0');
+reltik.push('d^2^9^0^28^0^0');
+reltik.push('d^2^9^0^29^0^0');
+reltik.push('d^2^9^0^30^0^0');
+reltik.push('d^2^9^0^31^0^0');
+reltik.push('d^2^9^0^32^0^0');
+reltik.push('d^2^9^0^33^0^0');
+reltik.push('d^2^9^0^34^0^0');
+reltik.push('d^2^9^0^35^0^0');
+reltik.push('d^2^9^0^36^0^0');
+reltik.push('d^2^10^0^1^0^0');
+reltik.push('d^2^10^0^2^0^0');
+reltik.push('d^2^10^0^3^0^0');
+reltik.push('d^2^10^0^4^0^0');
+reltik.push('d^2^10^0^5^0^0');
+reltik.push('d^2^10^0^6^0^0');
+reltik.push('d^2^10^0^7^0^0');
+reltik.push('d^2^10^0^8^0^0');
+reltik.push('d^2^10^0^9^0^0');
+reltik.push('d^2^10^0^10^0^0');
+reltik.push('d^2^10^0^11^0^0');
+	
+	document.getElementById('mafbc').innerHTML = '<table><tr><td><textarea id="rel1"></textarea></td><td><textarea id="rel2"></textarea></td><td><textarea id="rel3"></textarea></td></tr></table>';
+	var fin = '';
+	var relm = [];
+	var rela = [];
+	var relt = [];
+	for (i in relmul) {
+		if(relm[relmul[i]]) continue;
+		relm[relmul[i]] = 1;
+		fin += "relm['"+relmul[i]+"'] = '"+relatt[i]+'#'+reltik[i]+"';\n";
+	}
+	
+	document.getElementById('rel1').value = fin;
+
+	fin = '';
+	for (i in relatt) {
+		if(rela[relatt[i]]) continue;
+		rela[relatt[i]] = 1;
+		fin += "rela['"+relatt[i]+"'] = '"+relmul[i]+'#'+reltik[i]+"';\n";
+	}
+	document.getElementById('rel2').value = fin;
+
+	fin = '';
+	for (i in reltik) {
+		if(relt[reltik[i]]) continue;
+		relt[reltik[i]] = 1;
+		fin += "relt['"+reltik[i]+"'] = '"+relmul[i]+'#'+relatt[i]+"';\n";
+	}
+	document.getElementById('rel3').value = fin;
+}
+function noahs() {
+	var hi = ['m','a','t'];
+	var nik = 'd';
+	var finalout = '<table>';
+	var out = [];
+	
+	for (i=0; i < 3; i++) {
+		finalout +='<tr>';
+		
+		for (h = 0; h < hi.length; h++) {
+			
+			var xmlhttp = new window.XMLHttpRequest();
+			xmlhttp.open("GET", 'xml/'+nik+(i+1)+hi[h]+'.xml', false);
+			xmlhttp.send(null);
+			var xmlDoc = xmlhttp.responseXML.documentElement;
+
+			var u = xmlDoc.getElementsByTagName("h0");
+			
+			out[hi[h]+i] = [];
+			for (var sx = 0; sx < u.length; sx++) // per h0
+			{							
+				name = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ /g, '');
+				if(name && name != ' ') {
+					//out[hi[h]+i].push(name+'^'+nik+'^'+i+'^'+sx+'^0^0^0^0^1');
+				}
+				var v = u[sx].getElementsByTagName("h1");
+					
+				for (var sy = 0; sy < v.length; sy++) // per h1
+				{			
+					name = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ /g, '');
+					if(name && name != ' ') {
+						out[hi[h]+i].push(name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^0^0^0^2');
+					}
+					var w = v[sy].getElementsByTagName("h2");
+				
+					for (var sz = 0; sz < w.length; sz++) // per h2
+					{
+						name = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ /g, '');
+						if(h !=0 && name && name != ' ') {
+							out[hi[h]+i].push(name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^0^0^3');
+						}
+						var x = w[sz].getElementsByTagName("h3");
+						
+						for (var s = 0; s < x.length; s++) // per h3
+						{
+							name = x[s].getElementsByTagName("h3n")[0].textContent.replace(/ /g, '');
+							if(name && name != ' ') {
+								out[hi[h]+i].push(name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^4');
+							}
+							var y = x[s].getElementsByTagName("h4");
+							
+							for (var se = 0; se < y.length; se++) // per h4
+							{
+								name = y[se].getElementsByTagName("h4n")[0].textContent.replace(/ /g, '');
+								if(name && name != ' ') {
+									out[hi[h]+i].push(name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^5');
+								}
+							}
+						}
+					}
+				}
+			}
+			finalout += '<td><textarea  id="'+hi[h]+i+'"></textarea></td>';
+		}
+		finalout += '</tr>';
+	}
+	finalout += '</table>';
+	document.getElementById('mafbc').innerHTML = finalout;
+	for (i=1; i < 4; i++) {
+		for (h = 0; h < hi.length; h++) {
+			document.getElementById(hi[h]+i).value=out[hi[h]+i].join('\n');
+		}
+	}
+}
+		
+function noahsx() {
+
+
 var xmall = [];
 
 xmall.push('a10a');
@@ -161,8 +772,6 @@ xmall.push('s5a');
 xmall.push('v6a');
 xmall.push('y3a');
 
-
-function noahs() {
 	var out = [];
 	var dup = [];
 	for (i in xmall) {
