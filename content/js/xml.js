@@ -83,7 +83,7 @@ function importXML(labelsearch,para)
 			if(hi[ht] == hier) continue;
 			if (relhere.split('#')[hic] != '') {
 				var relherea = relhere.split('#')[hic].split('^');
-				relout+='<input type="button" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+htitle[ht]+'" value="'+hi[ht]+'"> ';
+				relout+='<input type="button" class="btn" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+htitle[ht]+'" value="'+hi[ht]+'"> ';
 			}
 			hic++;
 		}
@@ -627,6 +627,7 @@ function importXMLindex() {
                                 var transout='';
                                 if (hier == "m") { 
                                     transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+                           			//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
                                     if (transin) {
                                         if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
                                         transout += transin.join('');

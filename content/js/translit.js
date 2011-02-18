@@ -231,6 +231,8 @@ function toMyanmar(input,type) {
 
 	input = input.replace(/\&quot;/g, '`');
 
+	var longa = false; // special character for long a
+
 	while (i < input.length) {
 		im = input.charAt(i-2);
 		i0 = input.charAt(i-1);
@@ -241,27 +243,32 @@ function toMyanmar(input,type) {
 		if (vowel[i1]) {
 			if (i == 0 || i0 == 'a') output += vowel[i1];
 			else if (i1 == 'ā') {
-				if (spec[i0] || spec[im+i0]) { output += 'ါ'; }
+				if (spec[longa]) { output += 'ါ'; }
 				else { output += 'ာ'; };
 			}
 			else if (i1 == 'o') {
-				if (spec[i0] || spec[im+i0]) { output += 'ေါ'; }
+				if (spec[longa]) { output += 'ေါ'; }
 				else { output += 'ော'; };
 			}
 			else if (i1 != 'a') {
 				output += myanr[i1];
 			}
 			i++;
+			longa = false;
 		}		
-		else if (myanr[i1+i2] && i2 == 'h') {		// two character match
+		else if (myanr[i1+i2] && i2 == 'h') {	// two character match
 			output += myanr[i1+i2];
+			if (i3 != 'y' && !longa) longa = i1+i2; // gets first letter in conjunct for special long a check
 			if(cons[i3]) output += '္';
 			i += 2;
 		}					
-		else if (myanr[i1] && i1 != 'a') {		// one character match except a
+		else if (myanr[i1] && i1 != 'a') {	// one character match except a
 			output += myanr[i1];
 			i++;
-			if(cons[i2] && i1 != 'ṃ') output += '္';
+			if (i2 != 'y' && !longa) longa = i1; // gets first letter in conjunct for special long a check
+			if(cons[i2] && i1 != 'ṃ') {
+				output += '္';
+			}
 		}					
 		else if (!myanr[i1]) {
 			output += i1;
@@ -276,8 +283,12 @@ function toMyanmar(input,type) {
 					i++;
 				}
 			}
+			longa = false;
 		}
-		else i++;
+		else {
+			longa = false;
+			i++;
+		}
 	}
 
 	// fudges

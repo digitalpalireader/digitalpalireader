@@ -900,7 +900,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							if(atiNo.length == 2) atiNo='0'+atiNo;
 						}
 						
-						if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiNo.indexOf(d)==0) {
+						if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiNo.indexOf(d)==0)) {
 							if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 							else {var sno = c;}
 							if(atiAs[4] == 'html') { var auth = atiAs[3]; }
@@ -918,12 +918,14 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 			var bookn = book+1;
 			
+			
 			if (bookn > 1) {vagga+=11;}
 			if (bookn > 2) {vagga+=10;}
 			if (bookn > 3) {vagga+=13;}
 			if (bookn > 4) {vagga+=10;}
-			
 			var countc = smlist[vagga][sutta][section];
+			
+			//if(bookn == 5) document.getElementById('mafbc').innerHTML += vagga+' '+sutta+'|';
 			
 			//document.getElementById('difb').innerHTML += countc;
 
@@ -936,7 +938,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					c=parseInt(bb,10);
 					d=bb+"";
 					while (d.length < 3) { d = '0'+d; }
-					if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiS[a].split('.')[1].indexOf(d)==0) {
+					if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiS[a].split('.')[1].indexOf(d)==0)) {
 						if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 						else {var sno = c;}
 						var auth = atiS[a].split('.')[2];
@@ -960,7 +962,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							if(atiK[a].split('.')[1].indexOf('-')>=0) b=atiK[a].split('.')[1].split('-');
 							else {b=null;}
 							c=section+1;
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[1].indexOf(c)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[1].indexOf(c)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[2];
@@ -1000,7 +1002,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1065,7 +1067,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						case 3:
 							section += 99;
 							break;
-						}
+					}
 					out:
 					for (a = 0;a < atiK.length; a++) {
 						if(atiK[a].split('/')[1] == 'iti' && (vagga+1) == atiK[a].split('.')[1]) {
@@ -1073,8 +1075,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							else {b=null;}
 							c=section+1;
 							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if (d.length < 3) { d = '0'+d; }
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1098,7 +1100,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0/g,'') +"-"+ b[1].replace(/^0/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1121,7 +1123,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1143,7 +1145,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1167,7 +1169,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
@@ -1190,7 +1192,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							c=section+1;
 							d=c+"";
 							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || atiK[a].split('.')[2].indexOf(d)==0) {
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
 								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
