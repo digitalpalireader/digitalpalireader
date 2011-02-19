@@ -83,7 +83,7 @@ function importXML(labelsearch,para)
 			if(hi[ht] == hier) continue;
 			if (relhere.split('#')[hic] != '') {
 				var relherea = relhere.split('#')[hic].split('^');
-				relout+='<input type="button" class="btn" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+htitle[ht]+'" value="'+hi[ht]+'"> ';
+				relout+='<input type="button" class="btn" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
 			}
 			hic++;
 		}

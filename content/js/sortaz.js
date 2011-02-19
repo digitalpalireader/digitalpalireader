@@ -165,7 +165,8 @@ function sortaz(mydata){  // sort velthius pali array
 	var sVal = '';
 	for (var sKey in keys) {
 		sVal = keys[sKey];
-		outdata.push(outarray[sVal].substring(outarray[sVal].indexOf('###')+3)); // ### will mean to cut the term and return the rest
+		if (outarray[sVal].indexOf('###') > -1) outdata.push(outarray[sVal].substring(outarray[sVal].indexOf('###')+3)); // ### will mean to cut the term and return the rest
+		else outdata.push(outarray[sVal]);
 	}
 	return outdata;
 }

@@ -758,16 +758,16 @@ function createTables(xmlDoc)
 										startmatch = texttomatch.search(getstring);
 										
 										// get words
-										spaceb = beforem.search(' ');
+										spaceb = beforem.indexOf(' ');
 										if (gotstring.charAt(0) != ' ') {
 											while (spaceb > -1) {
 												beforem = beforem.substring(spaceb+1);
-												spaceb = beforem.search(' ');
+												spaceb = beforem.indexOf(' ');
 											}
 										}
 										else { beforem = ''; }
 										if (gotstring.charAt(gotstring.length-1) != ' ') {
-											spacea = afterm.search(' ');
+											spacea = afterm.indexOf(' ');
 											aftermex = spacea == -1 ? afterm : afterm.substring(0,spacea);
 										}
 										else { 

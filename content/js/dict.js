@@ -5,10 +5,10 @@ var ped = [];
 
 function pedsearchstart()
 {
-       
+	var getstring = document.form.manual.value;
+      
 	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
 	
-	var getstring = document.form.manual.value;
 
 	
 	getstring = getstring.replace(/"n/g, '`n');
@@ -170,10 +170,12 @@ var dppn = new Array();
 
 function dppnsearchstart()
 {
-	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
-;
-	
+
 	var getstring = document.form.manual.value;
+
+	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+
+	
 	
 	getstring = getstring.replace(/"n/g, '`n');
 	if (document.form.soregexp.checked) {
@@ -274,7 +276,6 @@ function dppnFullTextSearch(getstring) {
 	var finalouta = [];
 	
 	var listouta = [];
-	
 	getstring = replaceunistandard(getstring);
 	
 	for (i = 1; i < 9; i++) {
@@ -672,6 +673,7 @@ function paliXML(file)
 
 function paliFullXML(word,loc)
 {
+	if (word == '') return;
     moveframex(2);
 
 	word = word.replace(/`/g,"'");
@@ -801,6 +803,13 @@ function DPPNXML(file,which)
 
 namecount = [];
 
+function clickSearchOption() {
+	if (document.form.dictin.value != '') {
+		document.form.lastsearch.value = document.form.dictin.value;
+		dictType();
+	}
+}
+
 function dictLoad() {
 	var which = document.form.sped.selectedIndex;
 	document.getElementById('soNO').style.display = 'none';
@@ -874,6 +883,8 @@ function dictLoad() {
 }
 
 function dictType() {
+	var getstring = document.form.manual.value;
+ 	if ((document.form.sofulltext.checked || !document.form.sostartword.checked) && getstring == '') return;
 	document.form.manual.value = replacevelstandard(document.form.dictin.value);
 	switch (document.form.sped.selectedIndex) {
 		case 0:

@@ -1230,7 +1230,11 @@ function limitt() {
 	else { return false };
 }
 
-var htitle = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
+var hNumbers = [];
+hNumbers['m'] = 0;
+hNumbers['a'] = 1;
+hNumbers['t'] = 2;
+var hTitle = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
 
 
 function switchhier(htmp,stop) {
@@ -1248,20 +1252,25 @@ function switchhier(htmp,stop) {
 		alert('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.');
 		return;
 	}
+	if (document.form.nik.value == 'k' && htmp !='m' && !kudvala['k'+document.form.book.value]) {
+		alert(hTitle[hNumbers[htmp]] + ' not available for '+knames[document.form.book.value]+'.');
+		return;
+	}
+
+
 	hier = htmp;
-	
 
 	var ha = ['m','a','t'];
 
 	for(i=0; i<ha.length; i++) {
-		if (ha[i] == hier) {
+		if (ha[i] == htmp) {
 			document.getElementById('dhier'+ha[i]).onmouseover=function() {
 				return;
 			};
 			document.getElementById('dhier'+ha[i]).onmouseout=function() {
 				return;
 			};
-			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+htitle[i];
+			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+hTitle[i];
 
 			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b1.png)';
 		}
@@ -1273,13 +1282,26 @@ function switchhier(htmp,stop) {
 				document.body.style.cursor='auto';
 			};
 
-			document.getElementById('dhier'+ha[i]).title = 'Change to '+htitle[i];
+			document.getElementById('dhier'+ha[i]).title = 'Change to '+hTitle[i];
 
 			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b0.png)';
 		}
 	}
-		
-	changenikaya(stop);
+
+	if (document.form.nik.value == 'k') {
+		var book = document.form.book.value;
+		if (htmp == 'm') {
+			book = parseInt(book) - 1;
+			changenikaya(1);
+			document.form.book.selectedIndex = book;
+		}
+		else {
+			book = kudvala['k'+book];
+			changenikaya(1);
+			document.form.book.selectedIndex = book;
+		}
+	}
+	gettitles(0,stop);
 }	
 
 function historyBox() {

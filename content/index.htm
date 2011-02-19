@@ -25,7 +25,7 @@
 </head>
 
 
-<body onload="dev(); ">
+<body onload="if(devCheck == 1) dev(); ">
 <div id="content">
 	<div id="left">
 		<div id="brleft"></div>
@@ -163,17 +163,17 @@
 										<td>
 											<table class="butc">
 												<tr>
-													<td style="background-image:url(images/lb1.png)" onclick="switchhier('m')" id="dhierm" class="abut tbut lbut">
+													<td style="background-image:url(images/lb1.png)" onclick="switchhier('m',2)" id="dhierm" class="abut tbut lbut">
 															M
 													</td>
 													<td class="abut sbut">
 													</td>
-													<td id="dhiera" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" onclick="switchhier('a')">
+													<td id="dhiera" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">
 															A
 													</td>
 													<td class="abut sbut">
 													</td>
-													<td id="dhiert" class="abut tbut rbut"  title="Change to Ṭīkā" onclick="switchhier('t')" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
+													<td id="dhiert" class="abut tbut rbut"  title="Change to Ṭīkā" onclick="switchhier('t',2)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
 															T
 													</td>
 												</tr>
@@ -241,13 +241,13 @@
 															<span class="small">no advanced options available</span>
 														</div>
 														<div id="soRX" style="display:none">
-															<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
+															<input type="checkbox" onclick="clickSearchOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
 														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false;"><span class="small"> Full Text</span>
+															<input type="checkbox" onclick="clickSearchOption();" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false;"><span class="small"> Full Text</span>
 														</div>
 														<div id="soSW" style="display:none">
-															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
+															<input type="checkbox" onclick="clickSearchOption();" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
 														</div>
 													</div>
 												</td>
