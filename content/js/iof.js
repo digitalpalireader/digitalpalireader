@@ -57,7 +57,7 @@ else {
 		}
 	}
 
-	function writeFile(aFileKey, aContent, aChars)
+	function writeFile(aFileKey, aContent, aChars) // aChars isn't used
 	{
 		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 		var dir = DIR.get("ProfD", Components.interfaces.nsIFile);

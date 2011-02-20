@@ -407,6 +407,8 @@ function changenikaya(noget)
 	}
 }
 
+// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ
+
 function replaceunistandard(input) {
 	input = input.replace(/aa/g, 'ā');
 	input = input.replace(/ii/g, 'ī');
@@ -416,6 +418,7 @@ function replaceunistandard(input) {
 	input = input.replace(/\"n/g, 'ṅ');
 	input = input.replace(/\.n/g, 'ṇ');
 	input = input.replace(/\.m/g, 'ṃ');
+	input = input.replace(/\u1E41/g, 'ṃ'); // m with over-dot
 	input = input.replace(/\~n/g, 'ñ');
 	input = input.replace(/\.l/g, 'ḷ');
 	input = input.replace(/AA/g, 'Ā');

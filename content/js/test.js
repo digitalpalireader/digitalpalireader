@@ -54,16 +54,19 @@ function quizme() {
 	document.getElementById('qn').innerHTML = document.getElementById('qno').value;
 	document.getElementById('qq').innerHTML = questionout;
 	
+	var ytthis = yt[quiza[quizrandomright]];
+	
 	var formatanswerwrong = '';
-	var formatanswer = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\'');
-	var formatanswerout = yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\\\'');
-	if (yt[quiza[quizrandomright]].split('#').length > 1) formatanswerout += ' (' + yt[quiza[quizrandomright]].replace(/\&comma/g, ',').split('#')[1].replace(/,/g, '.') + ')';
+	var formatanswer = ytthis[3];
+	var formatanswerout = ytthis[3];
+	if (ytthis[2].length > 0) formatanswerout += ' (' + ytthis[2] + ')';
 	for (qtmp = 0; qtmp < 4; qtmp++) {
 		if (qtmp == quizrightorder) {
 			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="'+(qtmp+1)+'"> '+formatanswer+'</p>';
 		}
 		else {
-			formatanswerwrong = yt[quiza[quizeachwrong[qtmp2]]].replace(/\&comma/g, ',').split('#')[0].replace(/,$/, "").replace(/,/g, '.').replace(/\'/g, '\'');
+			ytthis = yt[quiza[quizeachwrong[qtmp2]]];
+			formatanswerwrong = ytthis[3];
 			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="'+(qtmp+1)+'"> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}

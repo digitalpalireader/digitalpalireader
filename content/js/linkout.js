@@ -42,7 +42,7 @@ function outputDef(which,first)
 	
 	
 	if (outwords.length > 1 && first) {
-		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="small" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
+		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	
@@ -124,7 +124,7 @@ function outputDef(which,first)
 	if (shortdefpost[which]) {
 		thisconcise = shortdefpost[which].split('$'); 
 		
-		if (thisconcise.length > 1) conciseoutput += '<select class="small" onchange="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
+		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
 				
 		var concisedups = [];
 		for (x = 0; x < thisconcise.length; x++)
@@ -154,21 +154,27 @@ function outputDef(which,first)
 			conciseword = conciseword.replace(/`$/g, '-');
 
 			var concisedefa = yt[thisconcise[x]];
-			concisedefa = concisedefa.replace(/,/g, '.');
-			concisedefa = concisedefa.replace(/\&comma;/g, ',');
-			concisedefa = replaceunistandard(concisedefa);
+
+			var condefnotype = concisedefa[3];
+			if (condefnotype.length > 100) {
+					condefnotype = condefnotype.substring(0,100);
+				condefnotype += '...'
+			}
+
+			var concisedef = concisedefa[3] + ' (' + concisedefa[2] + ')';
+
+
+						
+			concisedef = concisedef.replace(/,/g, '.');
+			concisedef = concisedef.replace(/\&comma;/g, ',');
+			concisedef = replaceunistandard(concisedef);
 			
-			var concisedef = concisedefa.split('#');
+			
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b style="color:'+colorcfg['colcpd']+'">' + conciseword + ': </b>' + concisedef[0] + ' (' + concisedef[1] + ')'; } 
+				if (x == 0) { var sdfirst = '<b style="color:'+colorcfg['colcpd']+'">' + conciseword + ': </b> ' + concisedef; } 
 				if (thisconcise.length > 1) {
-					var condefnotype = concisedef[0];
-					if (concisedef[0].length > 100) {
-							condefnotype = condefnotype.substring(0,100);
-						condefnotype += '...'
-					}
 					
-					conciseoutput += '<option value="' + conciseword + ': ' + concisedef[0] + ' (' + concisedef[1] + ')">' + conciseword + ': ' + condefnotype + ' (' + concisedef[1] + ')</option>'; 
+					conciseoutput += '<option value="' + conciseword + ': ' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[2] + ')</option>'; 
 						
 				}
 				concisedups[conciseword] = 1;
@@ -190,79 +196,4 @@ function outputDef(which,first)
 		if(moveat == 2) { moveframey('dif'); }
 	}
 	moveframex(moveat);
-}
-
-function noah()
-{
-	var dataout = '';
-	for (i = 0; i <= 4; i++) {
-	
-		var pedp = 'etc/XML1/'+ i +'/ped.xml';
-
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", pedp, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		var cntx = xmlDoc.getElementsByTagName('data').length;
-		var noc = ''; 
-		var nocd = 'x';
-		var nocdo;
-		for (e = 0; e < cntx; e++) {
-			noc = i+'/'+e;
-			if ( noahda[noc]) {
-				if ( noahda[noc].charAt(0) != nocd.charAt(0)) { dataout += '<h1>' + noahda[noc].charAt(0) + '</h1>\n'; }
-				nocd = noahda[noc];
-				var dataa = xmlDoc.getElementsByTagName('data')[e].getElementsByTagName('sdata');
-				var data = '';
-				for (j=0; j<dataa.length; j++) {
-					data += dataa[j].textContent;
-				}
-				nocdo = nocd.replace(/aa/g, 'ā');
-				nocdo = nocdo.replace(/ii/g, 'ī');
-				nocdo = nocdo.replace(/uu/g, 'ū');
-				nocdo = nocdo.replace(/,t/g, 'ṭ');
-				nocdo = nocdo.replace(/,d/g, 'ḍ');
-				nocdo = nocdo.replace(/`n/g, 'ṅ');
-				nocdo = nocdo.replace(/,n/g, 'ṇ');
-				nocdo = nocdo.replace(/,m/g, 'ṃ');
-				nocdo = nocdo.replace(/\~n/g, 'ñ');
-				nocdo = nocdo.replace(/,l/g, 'ḷ');				
-				nocdo = nocdo.replace(/`/g, '-');
-				nocdo = nocdo.replace(/z/g, ' ');
-				dataout	+= '<h2>' + nocdo + '</h2>\n<p>' + data + '\n';
-			}
-		}
-	}
-	
-	writeFile('PEDdata.html', dataout, 'UTF-8')
-}
-
-function noah2()
-{
-	var dataout = '';
-	for (i = 1; i <= 8; i++) {
-	
-		var dn = 'etc/XML2/'+ i +'.xml';
-
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", dn, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		var en = xmlDoc.getElementsByTagName('entry');
-		for (j = 0; j < en.length; j++) { 
-			var out = '';
-			var da = en[j].getElementsByTagName('data');
-			for (k = 0; k < da.length; k++) {
-				if(da[k].childNodes[0]) {
-					var data = da[k].textContent;
-					out += data;
-				}
-			}
-			writeFile(i+'.'+j+'.html', out, 'UTF-8')
-		}
-		out = out.replace(/\&lt;/g, '\n<');
-		out = out.replace(/\&gt;/g, '>');
-	}
 }

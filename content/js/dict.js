@@ -362,7 +362,7 @@ function mlsearchstart()
 	var finouta = new Array();
 	var finout = '';
 	if( yg = []) {
-		for (a in yt) yg.push(a+'^'+yt[a]);
+		for (a in yt) yg.push([a].concat(yt[a]));
 	}
 		
 		
@@ -371,13 +371,13 @@ function mlsearchstart()
 		var us = '';
 		var ud = '';
 
-		var gsplit = yg[x].split('^');
+		var gsplit = [yg[x][0],yg[x][4],yg[x][3]];
 
 		if(!document.form.sofulltext.checked) {
 			var tosearch = gsplit[0];
 		}
 		else {
-			var tosearch = yg[x];
+			var tosearch = yg[x][0]+' '+yg[x][4]+' '+yg[x][3];
 		}
         
         if (document.form.soregexp.checked) { // reg exp
@@ -389,8 +389,7 @@ function mlsearchstart()
 		if(yessir)
 		{
 			us = replaceunistandard(gsplit[0].replace(/,/g, ".").replace(/`n/g, "\"n"));
-			ud = replaceunistandard(gsplit[1].replace(/,/g, ".").replace(/`n/g, "\"n").replace(/\&comma;/g, ",").replace(/'/g, "&#92;&#39;"));
-			ud = ud.replace(/#(.*)/, " ($1)");
+			ud = replaceunistandard((gsplit[1] + ' (' + gsplit[2] + ')').replace(/`n/g, "\"n"));
 			
 			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + us + '</font></b> '+ud +'<br>');
 
