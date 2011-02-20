@@ -3,12 +3,15 @@ var prevyes = 0;
 var searchsect = 0;
 var stop = 0;
 
-var unnamed = '(unnamed)';
+var unnamed = '[unnamed]';
 
+var hier = 'm'; // m = mula, a = atthakatha, t = tika
 
-var versecheck = 0;
-var versestop = 0;
-var hier = 'm'; // m = mula, a = atthakatha
+var matButton = 0; // tells us we've clicked an in-section mat button.
+var matValue = []; // for storing values from section after clicking mat button in section
+matValue['m'] = '';
+matValue['a'] = '';
+matValue['t'] = '';
 
 function importXML(labelsearch,para)
 {
@@ -73,7 +76,17 @@ function importXML(labelsearch,para)
 
 	// relative mat
 	
-	var relout = '';
+	var matButtonCount = 0;
+	if (matButton == 1) {  // mat button pushed already, remember the place
+		matButtonCount = '1';
+		matButton = 0;
+	}
+	else {
+		matValue['m'] = '';
+		matValue['a'] = '';
+		matValue['t'] = '';
+	}
+	var relout = '<input type="hidden" id="matButtonCount" value="'+matButtonCount+'">';
 	var relwhere = nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^"+section;
 	var relhere = eval('rel'+hier+"['"+relwhere+"']");
 	if (relhere) {
@@ -83,7 +96,9 @@ function importXML(labelsearch,para)
 			if(hi[ht] == hier) continue;
 			if (relhere.split('#')[hic] != '') {
 				var relherea = relhere.split('#')[hic].split('^');
-				relout+='<input type="button" class="btn" onclick="getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
+				relout+='<input type="button" class="btn" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
+				matButton = 0;
+
 			}
 			hic++;
 		}
@@ -751,12 +766,30 @@ function xmlrefget()
 
 var setplace = new Array();
 
-function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section,7=hier
-
+function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section (all sIndex),7=hier(mat) 
 	document.activeElement.blur();
 
 	setplace = temp;
 
+	if (matButton == 1) { // mat button pushed (in section)
+		var matButtonCount = document.getElementById('matButtonCount').value; // number of times in a row we've pushed the button, if first time, we clear the old values.
+		if (matButtonCount > 0 && matValue[setplace[7]] != '') {
+			setplace = matValue[setplace[7]].split('^').concat(setplace[7]);
+			setplace[0] = niknumber[setplace[0]];
+		}
+		else {
+			matValue['m'] == '';
+			matValue['a'] == '';
+			matValue['t'] == '';
+		}
+		matValue[hier] = document.form.nik.value+'^'+document.form.book.selectedIndex+'^'+document.form.meta.selectedIndex+'^'+document.form.volume.selectedIndex+'^'+document.form.vagga.selectedIndex+'^'+document.form.sutta.selectedIndex+'^'+document.form.section.selectedIndex;
+	}
+	else { // clear stored values
+		matValue['m'] == '';
+		matValue['a'] == '';
+		matValue['t'] == '';
+	}
+	
 	switchhier(setplace[7],1);
 
 	var sp0 = setplace[0];
