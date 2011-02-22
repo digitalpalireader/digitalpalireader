@@ -104,6 +104,8 @@ function importXML(labelsearch,para)
 		}
 	}
 	
+	// titles
+	
 	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
@@ -119,8 +121,10 @@ function importXML(labelsearch,para)
 	document.form.bmname.value = bknameme;
 	var hierb = hier;
 	
+	// add to history
+	
 	if(ioCheck) {
-		addHistory(nikname[nikaya]+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+		addHistory(nikname[nikaya]+(hier!='m'?hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 		historyBox();
 	}
 
@@ -131,36 +135,69 @@ function importXML(labelsearch,para)
 	if (labelsearch) {
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			var quit = 0;
-			var onepar = z[tmp].textContent.substring(4);
-			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
-			{
-				if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
-			}	
-			if (quit == 1) {
-				theData += ' <p> ' + onepar;
-			}
-			else {
-				theData += ' <p> ';
-				var tmpdata = onepar;
-				for (var i = 0; i < labelsearch.length; i++)
+			if(typeof(labelsearch[0]) == 'object') { // regexp search
+				var quit = 0;
+				var onepar = z[tmp].textContent.substring(4);
+				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
 				{
-					var lt = labelsearch[i];
-					if (!lt) continue;
-					onepar = tmpdata;
-					tmpdata = '';
-					while (onepar.match(lt)) {
-						var matched = onepar.match(lt)[0];
-						var opp = onepar.search(lt);
-						tmpdata += onepar.substring(0,opp);
-						tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
-						onepar = onepar.substring(opp + matched.length);
-					}
-					tmpdata += onepar;
+					if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
+				}	
+				if (quit == 1) {
+					theData += ' <p> ' + onepar;
 				}
-				theData += tmpdata;
-			} 
-		}		
+				else {
+					theData += ' <p> ';
+					var tmpdata = onepar;
+					for (var i = 0; i < labelsearch.length; i++)
+					{
+						var lt = labelsearch[i];
+						if (!lt) continue;
+						onepar = tmpdata;
+						tmpdata = '';
+						while (onepar.match(lt)) {
+							var matched = onepar.match(lt)[0];
+							var opp = onepar.search(lt);
+							tmpdata += onepar.substring(0,opp);
+							tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
+							onepar = onepar.substring(opp + matched.length);
+						}
+						tmpdata += onepar;
+					}
+					theData += tmpdata;
+				} 
+			}		
+			else { // ordinary search
+				var quit = 0;
+				var onepar = z[tmp].textContent.substring(4);
+				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+				{
+					if (onepar.indexOf(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
+				}	
+				if (quit == 1) {
+					theData += ' <p> ' + onepar;
+				}
+				else {
+					theData += ' <p> ';
+					var tmpdata = onepar;
+					for (var i = 0; i < labelsearch.length; i++)
+					{
+						var lt = labelsearch[i];
+						if (!lt) continue;
+						onepar = tmpdata;
+						tmpdata = '';
+						while (onepar.indexOf(lt) > -1) {
+							var matched = lt;
+							var opp = onepar.indexOf(lt);
+							tmpdata += onepar.substring(0,opp);
+							tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
+							onepar = onepar.substring(opp + matched.length);
+						}
+						tmpdata += onepar;
+					}
+					theData += tmpdata;
+				} 
+			}		
+		}
 	}	
 	else {
 		for (tmp = 0; tmp < z.length; tmp++)
@@ -179,6 +216,37 @@ function importXML(labelsearch,para)
 
 var maxlength = 20;  // change for display purposes, will affect history as well.
 
+function makeTitleSelect(xml,tag) { // output select tag with titles in options
+	var name, namea, count;
+	var outlist = [];
+	for (var a = 0; a < xml.length; a++)
+	{
+		name = xml[a].getElementsByTagName(tag);
+		if (name[0].childNodes[0] && name[0].textContent.length > 1) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else {
+			namea = unnamed;
+			outlist.push(namea);
+			continue;
+		}
+		namea = replaceunistandard(namea);
+		
+		if (namea.length > maxlength + 3) 
+		{
+			namea = namea.substring(0,maxlength);
+			namea += '...';
+		}
+		namea = translit(shortenTitle(namea));
+
+		outlist.push(namea);
+	}
+	return outlist;
+}
+
+function shortenTitle(name) {
+	if(name.length < maxlength) return name;
+	name = name.substring(0,maxlength);
+	name += '...';
+	return name;
+}
 
 function gettitles(altget,stop,prev,ssect)
 {
@@ -212,46 +280,23 @@ function gettitles(altget,stop,prev,ssect)
 	if (pos < 0) pos = 0;
 	document.getElementById('botdiv').setAttribute('style','position:absolute; left:50%; margin-left:-75px; top:' + pos + 'px');*/
 
-	var unamea = 0;
-	var vnamea = 0;
-	var xnamea = 0;
-	var ynamea = 0;
 	
 	var meta = (getsutta > 0  ? document.form.meta.selectedIndex : 0);
 	var volume = (getsutta > 1 ? document.form.volume.selectedIndex : 0);
 	var vagga = (getsutta > 2 ? document.form.vagga.selectedIndex : 0);
 	var sutta = (getsutta > 3 ? document.form.sutta.selectedIndex : 0);
 
-	var metalist = '';
-	var volumelist = '';
-	var vaggalist = '';
-	var suttalist = '';
-	var sectionlist = '';
 
 	var nik = document.form.nik.value;
 	var book = document.form.book.value;
 
-
-	var t = xmlDoc.getElementsByTagName("ha");
-	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0]) var tnamea = tname[0].textContent; else tnamea = unnamed;
-	var countt = tnamea;
-	countt = countt.replace(/aa/g, 'a');
-	countt = countt.replace(/ii/g, 'i');
-	countt = countt.replace(/uu/g, 'u');
-	countt = countt.replace(/\./g, '');
-	countt = countt.replace(/\~/g, '');
-	countt = countt.replace(/\"/g, '');
-
-	var difft = tnamea.length - countt.length;
-
-	if (countt.length > maxlength + 3) 
-	{
-	tnamea = tnamea.substring(0,maxlength+difft);
-	tnamea += '...';
-	}
-	tnamea = replaceunistandard(tnamea);
-	document.getElementById('title').innerHTML = '<input type="button" value="'+translit(tnamea)+'" title="click to return to index" onclick="importXMLindex();">';
+	var xml,axml,lista,list,name,namea;
+	
+	axml = xmlDoc.getElementsByTagName("ha");
+	namea = axml[0].getElementsByTagName("han");
+	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else name = unnamed;
+	name = shortenTitle(name);
+	document.getElementById('title').innerHTML = '<input type="button" value="'+name+'" title="click to return to index" onclick="importXMLindex();">';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -259,212 +304,61 @@ function gettitles(altget,stop,prev,ssect)
 	var x = w[vagga].getElementsByTagName("h3");
 	var y = x[sutta].getElementsByTagName("h4");
 	
-	var ap = 0;
-	var bp = 0;
-	var countu = '';
-	var countv = '';
-	var countx = '';
-	var county = '';
-	
-	var uname = new Array();
-	var vname = new Array();
-	var xname = new Array();
-	var yname = new Array();
-
 	if (getsutta == 0) // remake meta list
 	{
-		for (var a = 0; a < u.length; a++)
-		{
-			ap = a + 1;
-			uname = u[a].getElementsByTagName("h0n");
-			if (uname[0].childNodes[0]) unamea = uname[0].textContent; else unamea = unnamed;
-			countu = unamea;
-			countu = countu.replace(/aa/g, 'a');
-			countu = countu.replace(/ii/g, 'i');
-			countu = countu.replace(/uu/g, 'u');
-			countu = countu.replace(/\./g, '');
-			countu = countu.replace(/\~/g, '');
-			countu = countu.replace(/\"/g, '');
-			
-			var diffu = unamea.length - countu.length;
-			
-			if (countu.length > maxlength + 3) 
-			{
-				unamea = unamea.substring(0,maxlength+diffu);
-				unamea += '...';
-			}
-			unamea = replaceunistandard(unamea);
-			unamea = translit(unamea);
-
-			metalist += '<option';
-			if (a == 0) metalist += ' selected';
-			metalist += '>' + unamea + '</option>'
-		}
-		if (u.length < 2 && (unamea == ' ' || unamea == unnamed)) {
-			metalist = '<select size="1" name="meta" class="hide">' + metalist;
-
+		lista = makeTitleSelect(u,'h0n');
+		if (lista.length == 1 && lista[0] == unnamed ) {
+			list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			metalist = '<select size="1" name="meta" onChange="gettitles(6)">' + metalist;
-
+			list = '<select size="1" name="meta" onChange="gettitles(6)"><option>' + lista.join('</option><option>')+'</option></select>';
 		}	
-		metalist += '</select>'
-		document.getElementById('meta').innerHTML=metalist;
+		document.getElementById('meta').innerHTML = list;
 	}
 	
 	if (getsutta < 2) // remake volume list
 	{
-		for (var a = 0; a < v.length; a++)
-		{
-			ap = a + 1;
-			vname = v[a].getElementsByTagName("h1n");
-			if (vname[0].childNodes[0]) vnamea = vname[0].textContent; else vnamea = unnamed;
-			countv = vnamea;
-			countv = countv.replace(/aa/g, 'a');
-			countv = countv.replace(/ii/g, 'i');
-			countv = countv.replace(/uu/g, 'u');
-			countv = countv.replace(/\./g, '');
-			countv = countv.replace(/\~/g, '');
-			countv = countv.replace(/\"/g, '');
-			
-			var diffv = vnamea.length - countv.length;
-			
-			if (countv.length > maxlength + 3) 
-			{
-				vnamea = vnamea.substring(0,maxlength+diffv);
-				vnamea += '...';
-			}
-			vnamea = replaceunistandard(vnamea);
-			vnamea = translit(vnamea);
-
-			volumelist += '<option';
-			if (a == 0) volumelist += ' selected';
-			volumelist += '>' + vnamea + '</option>'
-		}
-		if (v.length < 2 && (vnamea == ' ' || vnamea == unnamed)) {
-			volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
+		lista = makeTitleSelect(v,'h1n');
+		if (lista.length == 1 && lista[0] == unnamed ) {
+			list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			volumelist = '<select size="1" name="volume" onChange="gettitles(5)">' + volumelist;
+			list = '<select size="1" name="volume" onChange="gettitles(5)"><option>' + lista.join('</option><option>')+'</option></select>';
 		}	
-		volumelist += '</select>'
-		document.getElementById('volume').innerHTML=volumelist;
+		document.getElementById('volume').innerHTML = list;
 	}
 	if (getsutta < 3) // remake vaggalist
 	{
-		for (var a = 0; a < w.length; a++)
-		{
-			wname = w[a].getElementsByTagName("h2n");
-			if (wname[0].childNodes[0]) wnamea = wname[0].textContent; else wnamea = unnamed;
-			countw = wnamea;
-			countw = countw.replace(/aa/g, 'a');
-			countw = countw.replace(/ii/g, 'i');
-			countw = countw.replace(/uu/g, 'u');
-			countw = countw.replace(/\./g, '');
-			countw = countw.replace(/\~/g, '');
-			countw = countw.replace(/\"/g, '');
-			
-			var diffw = wnamea.length - countw.length;
-			
-			if (countw.length > maxlength + 3) 
-			{
-				wnamea = wnamea.substring(0,maxlength+diffw);
-				wnamea += '...';
-			}
-			wnamea = replaceunistandard(wnamea);
-			wnamea = translit(wnamea);
-
-			vaggalist += '<option';
-			if (a == 0) vaggalist += ' selected';
-			vaggalist += '>' + wnamea + '</option>'
-		}
-		if (w.length < 2 && (wnamea == ' ' || wnamea == unnamed)) {
-			vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
+		lista = makeTitleSelect(w,'h2n');
+		if (lista.length == 1 && lista[0] == unnamed ) {
+			list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			vaggalist = '<select size="1" name="vagga" onChange="gettitles(4)">' + vaggalist;
-		}
-		vaggalist += '</select>'
-		document.getElementById('vagga').innerHTML=vaggalist;
+			list = '<select size="1" name="vagga" onChange="gettitles(4)"><option>' + lista.join('</option><option>')+'</option></select>';
+		}	
+		document.getElementById('vagga').innerHTML = list;
 	}
 
 	if (getsutta < 4) // remake sutta list on getsutta = 0, 2, or 3
 	{
-		for (var a = 0; a < x.length; a++)
-		{
-			ap = a + 1;
-			xname = x[a].getElementsByTagName("h3n");
-			if (xname[0].childNodes[0]) xnamea = xname[0].textContent; else xnamea = unnamed;
-			countx = xnamea;
-			countx = countx.replace(/aa/g, 'a');
-			countx = countx.replace(/ii/g, 'i');
-			countx = countx.replace(/uu/g, 'u');
-			countx = countx.replace(/\./g, '');
-			countx = countx.replace(/\~/g, '');
-			countx = countx.replace(/\"/g, '');
-			
-			var diffx = xnamea.length - countx.length;
-			
-			if (countx.length > maxlength + 3) 
-			{
-				xnamea = xnamea.substring(0,maxlength+diffx);
-				xnamea += '...';
-			}
-			xnamea = replaceunistandard(xnamea);
-			xnamea = translit(xnamea);
-
-		
-			suttalist += '<option';
-			if (a == 0) suttalist += ' selected';
-			suttalist += '>' + xnamea + '</option>'
-		}
-		if (x.length < 2 && (xnamea == ' ' || xnamea == unnamed)) {
-			suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
+		lista = makeTitleSelect(x,'h3n');
+		if (lista.length == 1 && lista[0] == unnamed ) {
+			list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			suttalist = '<select size="1" name="sutta" onChange="gettitles(3)">' + suttalist;
-		}
-		suttalist += '</select>'
-		document.getElementById('sutta').innerHTML=suttalist;
+			list = '<select size="1" name="sutta" onChange="gettitles(3)"><option>' + lista.join('</option><option>')+'</option></select>';
+		}	
+		document.getElementById('sutta').innerHTML = list;
 	}
-	for (var d = 0; d < y.length; d++)
-	{
-		bp = d + 1;
-		yname = y[d].getElementsByTagName("h4n");
-		if (yname[0].childNodes[0]) ynamea = yname[0].textContent; else ynamea = unnamed;
-		
-			county = ynamea;
-			county = county.replace(/aa/g, 'a');
-			county = county.replace(/ii/g, 'i');
-			county = county.replace(/uu/g, 'u');
-			county = county.replace(/\./g, '');
-			county = county.replace(/\~/g, '');
-			county = county.replace(/\"/g, '');
-			
-			var diffy = ynamea.length - county.length;
-			
-			if (county.length > maxlength+3) 
-			{
-				ynamea = ynamea.substring(0,maxlength+diffy);
-				ynamea += '...';
-			}
-			
-			ynamea = replaceunistandard(ynamea);
-			ynamea = translit(ynamea);
-	
-		sectionlist += '<option';
-		if (d == 0) sectionlist += ' selected';
-		sectionlist += '>' + ynamea + '</option>';
-	}
-	if (y.length < 2 && (ynamea == ' ' || ynamea == unnamed)) {
-		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
+	lista = makeTitleSelect(y,'h4n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		sectionlist = '<select size="1" name="section" onChange="importXML()">' + sectionlist;
-	}
+		list = '<select size="1" name="section" onChange="importXML()"><option>' + lista.join('</option><option>')+'</option></select>';
+	}	
+	document.getElementById('section').innerHTML = list;
 
-	sectionlist += '</select>'
-	document.getElementById('section').innerHTML=sectionlist
 	if (prevyes == 1) document.form.section.selectedIndex = y.length - 1;
 	if (searchsect > 0) document.form.section.selectedIndex = searchsect;
 	if (newload == 0) importXML();
@@ -519,12 +413,11 @@ function importXMLindex() {
 	var col = ['coltext','colsel','colped','coldppn','colcpd'];
 	var whichcol = [0,0,0,0,0];
 	var wcs = 0;
-	
 	for (tmp = 0; tmp < z.length; tmp++)
 	{
-		if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].textContent; else theData = ' ';
-		if (z.length > 1 && theData == ' ') { theData = unnamed; } 
-		if (theData != ' ') {
+		if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+		if (z.length > 1 && theData == '') { theData = unnamed; } 
+		if (theData != '') {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
@@ -533,14 +426,18 @@ function importXMLindex() {
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
 		{
-			if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent; else theData = ' ';
-			if (y.length > 1 && theData == ' ') { theData = unnamed; }
-			if (theData != ' ') {
+			if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+			if (y.length > 1 && theData == '') { theData = unnamed; }
+			if (theData != '') {
 				
 				wcs = whichcol[0]; // either 0 or 1
 				whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
+				var spaces = '';
+				for(f = 0; f < wcs; f++) {
+					spaces += '&nbsp;&nbsp;';
+				}
 				
-				theDatao += '&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+				theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -557,14 +454,19 @@ function importXMLindex() {
 			x = y[tmp2].getElementsByTagName("h1");
 			for (tmp3 = 0; tmp3 < x.length; tmp3++)
 			{
-				if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent; else theData = ' ';
-				if (x.length > 1 && theData == ' ') { theData = unnamed; }
-				if (theData != ' ') {
+				if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+				if (x.length > 1 && theData == '') { theData = unnamed; }
+				if (theData != '') {
 					
 					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
 					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 				
-					theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+					spaces = '';
+					for(f = 0; f < wcs; f++) {
+						spaces += '&nbsp;&nbsp;';
+					}
+
+					theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -581,14 +483,19 @@ function importXMLindex() {
 				w = x[tmp3].getElementsByTagName("h2");
 				for (tmp4 = 0; tmp4 < w.length; tmp4++)
 				{
-					if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent; else theData = ' ';
-					if (w.length > 1 && theData == ' ') { theData = unnamed; }
-					if (theData != ' ') {
+					if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+					if (w.length > 1 && theData == '') { theData = unnamed; }
+					if (theData != '') {
 						
 						wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
 						whichcol[3] = 1; // bump
 						
-                        theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+						spaces = '';
+						for(f = 0; f < wcs; f++) {
+							spaces += '&nbsp;&nbsp;';
+						}
+
+						theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -605,14 +512,19 @@ function importXMLindex() {
 					v = w[tmp4].getElementsByTagName("h3");
 					for (tmp5 = 0; tmp5 < v.length; tmp5++)
 					{
-						if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent; else theData = ' ';
-						if (v.length > 1 && theData == ' ') { theData = unnamed; }
-						if (theData != ' ') {
+						if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+						if (v.length > 1 && theData == '') { theData = unnamed; }
+						if (theData != '') {
 
 							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
 							whichcol[4] = 1; // bump
 
-                            theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+							spaces = '';
+							for(f = 0; f < wcs; f++) {
+								spaces += '&nbsp;&nbsp;';
+							}
+
+							theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -630,14 +542,17 @@ function importXMLindex() {
 						u = v[tmp5].getElementsByTagName("h4");
 						for (tmp6 = 0; tmp6 < u.length; tmp6++)
 						{
-							if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent; else theData = ' ';
-							if (z.length > 1 && theData == ' ') { theData = unnamed; }
-							if (theData != ' ') {
+							if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+							if (u.length > 1 && theData == '') { theData = unnamed; }
+							if (theData != '') {
 
 								wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
-								if (wcs == 5) wcs = 0;
+								spaces = '';
+								for(f = 0; f < wcs; f++) {
+									spaces += '&nbsp;&nbsp;';
+								}
 
-                                theDatao += '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+								theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
@@ -771,6 +686,8 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	setplace = temp;
 
+	// for changing mat buttons
+
 	if (matButton == 1) { // mat button pushed (in section)
 		var matButtonCount = document.getElementById('matButtonCount').value; // number of times in a row we've pushed the button, if first time, we clear the old values.
 		if (matButtonCount > 0 && matValue[setplace[7]] != '') {
@@ -837,7 +754,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0]) var tnamea = tname[0].textContent; else tnamea = unnamed;
+	if (tname[0].childNodes[0] && tname[0].textContent.length > 1) var tnamea = tname[0].textContent; else tnamea = unnamed;
 	var countt = tnamea;
 
 	var maxlength = 15;  // change for display purposes
@@ -878,7 +795,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		uname = u[a].getElementsByTagName("h0n");
-		if (uname[0].childNodes[0]) unamea = uname[0].textContent; else unamea = unnamed;
+		if (uname[0].childNodes[0] && uname[0].textContent.length > 1) unamea = uname[0].textContent; else unamea = unnamed;
 		countu = unamea;
 		countu = countu.replace(/aa/g, 'a');
 		countu = countu.replace(/ii/g, 'i');
@@ -900,7 +817,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == meta) metalist += ' selected';
 		metalist += '>' + translit(unamea) + '</option>'
 	}
-	if (ap == 1 && (unamea == ' ' || unamea == unnamed)) {
+	if (ap == 1 && (unamea == unnamed)) {
 		metalist = '<select size="1" name="meta" class="hide">' + metalist;
 
 	}
@@ -917,7 +834,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		vname = v[a].getElementsByTagName("h1n");
-		if (vname[0].childNodes[0]) vnamea = vname[0].textContent; else vnamea = unnamed;
+		if (vname[0].childNodes[0] && vname[0].textContent.length > 1) vnamea = vname[0].textContent; else vnamea = unnamed;
 		countv = vnamea;
 		countv = countv.replace(/aa/g, 'a');
 		countv = countv.replace(/ii/g, 'i');
@@ -939,7 +856,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == volume) volumelist += ' selected';
 		volumelist += '>' + translit(vnamea) + '</option>'
 	}
-	if (ap == 1 && (vnamea == ' ' || vnamea == unnamed)) {
+	if (ap == 1 && (vnamea == unnamed)) {
 		volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
 
 	}
@@ -956,7 +873,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		wname = w[a].getElementsByTagName("h2n");
-		if (wname[0].childNodes[0]) wnamea = wname[0].textContent; else wnamea = unnamed;
+		if (wname[0].childNodes[0] && wname[0].textContent.length > 1) wnamea = wname[0].textContent; else wnamea = unnamed;
 		countw = wnamea;
 		countw = countw.replace(/aa/g, 'a');
 		countw = countw.replace(/ii/g, 'i');
@@ -978,7 +895,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == vagga) vaggalist += ' selected';
 		vaggalist += '>' + translit(wnamea) + '</option>'
 	}
-	if (ap == 1 && (wnamea == ' ' || wnamea == unnamed)) {
+	if (ap == 1 && (wnamea == unnamed)) {
 		vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
 
 	}
@@ -996,7 +913,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		ap = a + 1;
 		xname = x[a].getElementsByTagName("h3n");
-		if (xname[0].childNodes[0]) xnamea = xname[0].textContent; else xnamea = unnamed;
+		if (xname[0].childNodes[0] && xname[0].textContent.length > 1) xnamea = xname[0].textContent; else xnamea = unnamed;
 		countx = xnamea;
 		countx = countx.replace(/aa/g, 'a');
 		countx = countx.replace(/ii/g, 'i');
@@ -1019,7 +936,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (a == sutta) suttalist += ' selected';
 		suttalist += '>' + translit(xnamea) + '</option>'
 	}
-	if (ap == 1 && (xnamea == ' ' || xnamea == unnamed)) {
+	if (ap == 1 && (xnamea == unnamed)) {
 		suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
 
 	}
@@ -1035,7 +952,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	{
 		bp = d + 1;
 		yname = y[d].getElementsByTagName("h4n");
-		if (yname[0].childNodes[0]) ynamea = yname[0].textContent; else ynamea = unnamed;
+		if (yname[0].childNodes[0] && yname[0].textContent.length > 1) ynamea = yname[0].textContent; else ynamea = unnamed;
 		
 			county = ynamea;
 			county = county.replace(/aa/g, 'a');
@@ -1060,7 +977,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		if (d == section) sectionlist += ' selected';
 		sectionlist += '>' + translit(ynamea) + '</option>';
 	}
-	if (bp == 1 && (ynamea == ' ' || ynamea == unnamed)) {
+	if (bp == 1 && (ynamea == unnamed)) {
 		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
 
 	}

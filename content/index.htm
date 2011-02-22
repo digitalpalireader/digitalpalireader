@@ -210,7 +210,24 @@
 
 										<tr>
 											<td align=center valign=middle>
-												<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>
+												<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausesall()', 10);"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('pausetwo()', 10)"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=replacevelstandard(document.form.isearch.value); moves(1); setTimeout('importXMLs(3)', 10)"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>  <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('tsearchopts')"><b>adv</b></a>
+											</td>
+										</tr>
+										<tr>
+											<td>
+									<div id="tsearchopts">
+										<table align="center">
+											<tr>
+												<td>
+													<div align="left">
+														<div id="tsoRX">
+															<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp"><span class="small"> Reg. Exp.</span>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
 											</td>
 										</tr>
 									</table>
@@ -230,7 +247,7 @@
 										<option>Aṭṭh</option>
 										<option>Ṭīka</option>
 										<option>Title</option>
-									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts()"><b>adv</b></a>
+									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
 									<br />
 									<div id="searchopts">
 										<table align="center">
@@ -450,7 +467,8 @@
 			updatecookielist();
 			historyBox();
 		}
-		if(ioCheck == true && fileExists('Extensions','ff.sh') && typeof(devCheck) == 'undefined') {
+		var devCheck = 0;
+		if(ioCheck == true && fileExists('Extensions','ff.sh')) {
 			var headID = document.getElementsByTagName("head")[0];         
 			var newScript = document.createElement('script');
 			newScript.type = 'text/javascript';

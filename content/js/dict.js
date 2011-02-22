@@ -615,7 +615,7 @@ function titlesearchstart()
 			y++;
 		}
 	}
-	var y = finouta.length;
+	y = finouta.length;
 
 	var findiv = Math.ceil(y/2);
 	

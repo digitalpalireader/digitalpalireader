@@ -125,14 +125,18 @@ function formatuniout(data,which) { // prepare without links
 		// search term coloured text
 
 		else if (wb.indexOf('<c') >= 0) {
+			var fullwordout = [];
+			fullwordout[0] = '';
+			fullwordout[1] = '';
 			while (wb.indexOf('<c') >= 0) {
 				cp = wb.indexOf('<c');
-				if(cp > 0) {
+				if(cp > 0) { // something before
 					if (which) {  
 						finout += translit(replaceunistandard(wb.substring(0,cp))); b++;
 					}
 					else {
-						finout += '<a id="W' + b + '" href="javascript:postout(\'' + wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '\',' + b + ')">' +  translit(replaceunistandard(wb.substring(0,cp))) + '</a>'; b++;
+						fullwordout[0] = wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
+						fullwordout[1] = translit(replaceunistandard(wb.substring(0,cp)));
 					}
 					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
 				}
@@ -147,7 +151,8 @@ function formatuniout(data,which) { // prepare without links
 					finout += cno + translit(replaceunistandard(wb.substring(0,cm)))+'<xc>'; b++;
 				}
 				else {
-					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' + cno + translit(replaceunistandard(wb.substring(0,cm))) + '<xc></a>'; b++;
+					fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
+					fullwordout[1] += cno + translit(replaceunistandard(wb.substring(0,cm))) + '<xc>';
 				}
 
 				convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
@@ -159,10 +164,14 @@ function formatuniout(data,which) { // prepare without links
 					finout += translit(replaceunistandard(wb)); b++;
 				}
 				else {
-					finout += '<a id="W' + b + '" href="javascript:postout(&#39;' + wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '') +  '&#39;,' + b + ')">' +  translit(replaceunistandard(wb)) + '</a>'; b++;
+					fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
+					fullwordout[1] += translit(replaceunistandard(wb));
 				}
 
 				convout += wb.replace(/<[^>]*>/g, '');
+			}
+			if(!which) {// put it together as one link
+				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
 			}
 			finout += ' ';
 			convout += ' ';
@@ -247,34 +256,34 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna,hiert)
 	if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
 	var col = ['colped','coldppn','colcpd'];
 	var w = 1;
-	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + book + '</b>';
+	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : hiert) + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
 		vna = translit(replaceunistandard(vna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (wna != ' ') {
 		wna = translit(replaceunistandard(wna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (xna != ' ') {
 		xna = translit(replaceunistandard(xna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (yna != ' ') {
 		yna = translit(replaceunistandard(yna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (zna != ' ') {
 		zna = translit(replaceunistandard(zna));
-				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/^ */, '').replace(/ *$/,'') + '</b>';
+				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 	}
 	
 	title = replaceunistandard(title);
@@ -896,6 +905,24 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								atiNo++; 
 							} 
 							if (atiNo == 102 && atiAs[2] == '11-15' || atiNo > 102) { // nimitta sutta
+								atiNo++; 
+							}
+
+							atiNo = atiNo+'';
+							if(atiNo.length == 2) atiNo='0'+atiNo;
+						}
+						if (bookn == 7) {
+							atiNo = parseInt(atiNo,10);
+							if(atiNo >= 31) { // parābhava sutta
+								atiNo++; 
+							} 
+							if(atiNo >= 41) { // paṭhamaniddasasuttaṃ
+								atiNo++; 
+							} 
+							if(atiNo >= 42) { // dutiyaniddasasuttaṃ 
+								atiNo++; 
+							} 
+							if (atiNo == 62 && atiAs[2] == 'b' || atiNo > 62) { // bhariyā sutta
 								atiNo++; 
 							}
 

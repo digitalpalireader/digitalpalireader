@@ -66,7 +66,9 @@
 
 	prem.push('assa^1^0'); 
 	prem.push('ebhi^0^0^a');
-	prem.push('aani^1^0');
+	prem.push('aani^1^2');
+	prem.push('iini^1^2');
+	prem.push('uuni^1^2');
 	prem.push('ino^1^0');
 	prem.push('inaa^1^0');
 	prem.push('iyaa^1^0');

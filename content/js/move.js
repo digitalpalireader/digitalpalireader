@@ -164,8 +164,8 @@ function cpFlatten(cpin) {
 	}
 }
 
-function toggleSearchOpts() {
-	var sopts = document.getElementById('searchopts');
+function toggleSearchOpts(a) {
+	var sopts = document.getElementById(a);
 	if(sopts.style.display=='block') {
 		sopts.style.display='none';
 	}
