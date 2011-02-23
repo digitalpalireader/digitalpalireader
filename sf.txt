@@ -1,0 +1,6 @@
+This is the SourceForge archive for the Digital Pali Reader.  You will find the latest release in the "DPR" folder.
+
+The latest version is 1.0b7pre and the latest commit message is:
+
+added tag
+
