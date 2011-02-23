@@ -1043,7 +1043,7 @@ function getatt(num,type) { // get atthakatha or tika word
         var xmlDoc = xmlhttp.responseXML.documentElement;
 
 		if (type == 'a' && nikaya == 'k') {
-			var bookno = kudvala['k'+pca[1]];
+			var bookno = kudvala[pca[1]];
 		}
 		else var bookno = parseInt(pca[1])-1;
 
@@ -1109,7 +1109,10 @@ function gettitle(num) { // get titles
         var xmlDoc = xmlhttp.responseXML.documentElement;
 
 		if (type != 'm' && nikaya == 'k') {
-			var bookno = kudvala['k'+pca[1]];
+			var bookno = kudvala[pca[1]];
+		}
+		else if (type != 'm' && nikaya == 'k') {
+			var bookno = abhivala[pca[1]];
 		}
 		else var bookno = parseInt(pca[1])-1;
 

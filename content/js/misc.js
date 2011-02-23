@@ -252,11 +252,11 @@ function preparepali(data,which) { // standard text prep for algorithm
 
 function convtitle(nikaya,book,vna,wna,xna,yna,zna,hiert)
 {
-	if (nikaya == 'k') book = knames[book-1];
+	book = getBookName(nikaya,hiert,book-1);
 	if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
 	var col = ['colped','coldppn','colcpd'];
 	var w = 1;
-	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : hiert) + '&nbsp;' + book + '</b>';
+	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
 		vna = translit(replaceunistandard(vna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
@@ -338,8 +338,8 @@ nikvoladi['ka'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><optio
 nikvoladi['kt'] = '<select size="7" name="book"></select>';
 nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Para</option><option value="2">Paci</option><option value="3">BhV</option><option value="4">MV</option><option value="5">CV</option><option value="6">Pari</option></select>';
 nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option></select>';
-nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
-nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=7>Paṭ</option></select>';
+nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=9>Paṭ</option></select>';
+nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=9>Paṭ</option></select>';
 nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
 nikvoladi['b'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Mūla</option><option value="2">Ṭīkā</option></select>';
 nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
@@ -348,44 +348,88 @@ nikvoladi['gt'] = '<select size="7" name="book"></select>';
 
 var kudvala = [];
 
-kudvala['k1'] = 0;
-kudvala['k2'] = 1;
-kudvala['k3'] = 2;
-kudvala['k4'] = 3;
-kudvala['k5'] = 4;
-kudvala['k6'] = 5;
-kudvala['k7'] = 6;
-kudvala['k8'] = 7;
-kudvala['k9'] = 8;
-kudvala['k10'] = 9;
-kudvala['k12'] = 10;
-kudvala['k13'] = 11;
-kudvala['k14'] = 12;
-kudvala['k15'] = 13;
+kudvala['1'] = 0;
+kudvala['2'] = 1;
+kudvala['3'] = 2;
+kudvala['4'] = 3;
+kudvala['5'] = 4;
+kudvala['6'] = 5;
+kudvala['7'] = 6;
+kudvala['8'] = 7;
+kudvala['9'] = 8;
+kudvala['10'] = 9;
+kudvala['12'] = 10;
+kudvala['13'] = 11;
+kudvala['14'] = 12;
+kudvala['15'] = 13;
 
-var knames = [];
+var abhivala = [];
 
-knames.push('KhP');
-knames.push('Dhp');
-knames.push('Uda');
-knames.push('Iti');
-knames.push('SN');
-knames.push('ViV');
-knames.push('PeV');
-knames.push('Thera');
-knames.push('Theri');
-knames.push('Ap.1');
-knames.push('Ap.2');
-knames.push('BdV');
-knames.push('Car');
-knames.push('Jat.1');
-knames.push('Jat.2');
-knames.push('MNid');
-knames.push('CNid');
-knames.push('PsM');
-knames.push('Mil');
-knames.push('Net');
-knames.push('Pet');
+abhivala['1'] = 0;
+abhivala['2'] = 1;
+abhivala['3'] = 2;
+abhivala['4'] = 3;
+abhivala['5'] = 4;
+abhivala['6'] = 5;
+abhivala['7'] = 5;
+abhivala['8'] = 5;
+abhivala['9'] = 6;
+abhivala['10'] = 6;
+abhivala['11'] = 6;
+abhivala['12'] = 6;
+abhivala['13'] = 6;
+abhivala['14'] = 6;
+
+function getBookName(nik, ht, no) { // no will be xml no - 1
+
+	var knames = [];
+
+	knames.push('Khp');
+	knames.push('Dhp');
+	knames.push('Ud');
+	knames.push('It');
+	knames.push('Sn');
+	knames.push('Vv');
+	knames.push('Pv');
+	knames.push('Th');
+	knames.push('Thī');
+	knames.push('Ap.1');
+	knames.push('Ap.2');
+	knames.push('Bv');
+	knames.push('Cp');
+	knames.push('Ja 1');
+	knames.push('Ja 2');
+	knames.push('Nidd I');
+	knames.push('Nidd II');
+	knames.push('Paṭis');
+	knames.push('Mil');
+	knames.push('Nett');
+	knames.push('Peṭ');
+
+	var ynames = []; // abhi names
+
+	ynames.push('Dhs');
+	ynames.push('Vibh');
+	ynames.push('Dhk');
+	ynames.push('Pugg');
+	ynames.push('Kv');
+	ynames.push('Yam 1');
+	ynames.push('Yam 2');
+	ynames.push('Yam 3');
+	ynames.push('Paṭ 1');
+	ynames.push('Paṭ 2');
+	ynames.push('Paṭ 3');
+	ynames.push('Paṭ 4');
+	ynames.push('Paṭ 5');
+	ynames.push('Paṭ 6');
+
+	if (nik == 'k' || nik == 'y') {
+		eval('no = '+nik+'names[\''+no+'\'];');
+		if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
+	}
+	else no++;
+	return no.toString();
+}
 
 var oldnikaya = 0;
 
@@ -1282,11 +1326,10 @@ function switchhier(htmp,stop) {
 		alert('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.');
 		return;
 	}
-	if (document.form.nik.value == 'k' && htmp !='m' && !kudvala['k'+document.form.book.value]) {
-		alert(hTitle[hNumbers[htmp]] + ' not available for '+knames[document.form.book.value]+'.');
+	if (document.form.nik.value == 'k' && htmp == 'a' && kudvala[document.form.book.value] == undefined) {
+		alert(hTitle[hNumbers[htmp]] + ' not available for '+getBookName(document.form.nik.value,htmp,document.form.book.selectedIndex)+'.');
 		return;
 	}
-
 
 	hier = htmp;
 
@@ -1326,7 +1369,20 @@ function switchhier(htmp,stop) {
 			document.form.book.selectedIndex = book;
 		}
 		else {
-			book = kudvala['k'+book];
+			book = kudvala[book];
+			changenikaya(1);
+			document.form.book.selectedIndex = book;
+		}
+	}
+	else if (document.form.nik.value == 'y') {
+		var book = document.form.book.value;
+		if (htmp == 'm') {
+			book = parseInt(book) - 1;
+			changenikaya(1);
+			document.form.book.selectedIndex = book;
+		}
+		else {
+			book = abhivala[book];
 			changenikaya(1);
 			document.form.book.selectedIndex = book;
 		}

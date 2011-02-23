@@ -113,7 +113,7 @@ filearraya.push("y3");
 filearraya.push("y4");
 filearraya.push("y5");
 filearraya.push("y6");
-filearraya.push("y7");
+filearraya.push("y9");
 
 var filearrayt = [];
 
@@ -151,7 +151,7 @@ filearrayt.push("y3");
 filearrayt.push("y4");
 filearrayt.push("y5");
 filearrayt.push("y6");
-filearrayt.push("y7");
+filearrayt.push("y9");
 
 var nikletter = new Array();
 nikletter[0] = 'd';
@@ -183,7 +183,7 @@ var nikcount =0;
 var qz = 0;
 
 var nikperm = 0;
-var bookperm = 0;
+var bookperm = 1;
 
 var exword = new Array();
 var countmatch = 0;
@@ -191,7 +191,7 @@ var countmatch = 0;
 function resetvalues() {
 	exword.length=0;
 	stopsearch = 0;	
-	bookperm = 0;
+	bookperm = 1;
 	rescount = -1;
 	qz = 0;
 	nikayaat = '';
@@ -213,8 +213,7 @@ function pausesall()
 
 	var getstring = document.form.usearch.value;
 	var stringra = new Array();
-		
-	var yesplus = getstring.indexof('+');
+	var yesplus = getstring.indexOf('+');
 	if (yesplus >= 0)
 	{
 		stringra = getstring.split('+');
@@ -394,14 +393,17 @@ function importXMLs(cnt)
 		else if (nikaya == 'g') bookno = 5; 
 		
 		if (nikaya == 'k' && hier == 'a' && qz == 10) qz++;
-		
+		if (nikaya == 'y' && hier != 'm' && qz == 6) qz = 8;
+
+		var bookname = getBookName(nikaya,hier,qz);
+		bookperm = qz+1;
 		if (qz == 0) {
 			document.getElementById('sbfab').innerHTML = '';
 			document.getElementById('sbfb').innerHTML = '<hr>';
 			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 		}
-
-		document.getElementById('sbfb').innerHTML += '<div name="xyz"><h1>' + nikname[nikaya] + ' ' + (qz + 1) + '</h1><hr></div>';
+				
+		document.getElementById('sbfb').innerHTML += '<div name="xyz"><h1>' + nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + bookname + '</h1><hr></div>';
 
 		// loop through the books - now loops through bounce function
 
@@ -417,12 +419,13 @@ function importXMLs(cnt)
 
 		document.getElementById('stfx').innerHTML = thiscount;
 		if (nikaya == 'k' && hier == 'a' && qz == 14) { qz = bookno - 1; }
+		else if (nikaya == 'y' && hier != 'm' && qz == 8) { qz = bookno - 1; }
 		if (qz < bookno - 1) 
 		{
 			qz++;
 			bounce2();
 		}
-		else {
+		else { // finished
 			qz = 0;
 			bookperm = 0;
 			thiscount = 0;
@@ -467,26 +470,18 @@ function createTables(xmlDoc)
 	
 	var getstring = document.form.usearch.value;
 
-
-
 	var gotstring;
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
-	if (count == 2) book = bookperm + 1;
-	else if (count == 1)
-	{
-		nikaya = nikperm;
+
+	if (count == 1 || count == 2) {
 		book = bookperm;
 	}
-	
-	var bookname = book;
-	if (nikaya == 'k') {
-		if (hier == 'a') {
-			bookname = kudvala['k'+book];
-		}
-		else bookname = parseInt(book)-1;
-		bookname = knames[bookname];
+	if (count == 1)
+	{
+		nikaya = nikperm;
 	}
+	var bookname = getBookName(nikaya,hier,parseInt(book)-1);
 	
 	var postpara ='';
 	var theData = '';
@@ -892,22 +887,6 @@ function createTables(xmlDoc)
 	else document.getElementById('sbfb').innerHTML += finalout + '</div>';
 	
 	match = 0;
-
-	
-
-	if (count == 2) // forward to next book
-	{
-		if (nikaya == 'd' || nikaya == 'm') bookno = 3;
-		else if (nikaya == 's') bookno = 5;
-		else if (nikaya == 'v') bookno = 6;
-		else if (nikaya == 'a') bookno = 11; 
-		else if (nikaya == 'k') bookno = 21; 
-		else if (nikaya == 'x') bookno = 2; 
-		else if (nikaya == 'y') bookno = 14; 
-		else if (nikaya == 'g') bookno = 5; 
-		bookperm++;
-	}
-
 }
 
 function showonly(string) {

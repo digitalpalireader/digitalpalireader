@@ -131,28 +131,7 @@ function outputDef(which,first)
 		{
 			if (thisconcise[x].length == 0) { continue; }
 			
-			var conciseword = thisconcise[x];
-			conciseword = conciseword.replace(/aa/g, '&#257;');
-			conciseword = conciseword.replace(/ii/g, '&#299;');
-			conciseword = conciseword.replace(/uu/g, '&#363;');
-			conciseword = conciseword.replace(/\,t/g, '&#7789;');
-			conciseword = conciseword.replace(/\,d/g, '&#7693;');
-			conciseword = conciseword.replace(/\`n/g, '&#7749;');
-			conciseword = conciseword.replace(/\,n/g, '&#7751;');
-			conciseword = conciseword.replace(/\,m/g, '&#7747;');
-			conciseword = conciseword.replace(/\~n/g, '&ntilde;');
-			conciseword = conciseword.replace(/\,l/g, '&#7735;');
-			conciseword = conciseword.replace(/AA/g, '&#256;');
-			conciseword = conciseword.replace(/II/g, '&#298;');
-			conciseword = conciseword.replace(/UU/g, '&#362;');
-			conciseword = conciseword.replace(/\,T/g, '&#7788;');
-			conciseword = conciseword.replace(/\,D/g, '&#7692;');
-			conciseword = conciseword.replace(/\,N/g, '&#7750;');
-			conciseword = conciseword.replace(/\,M/g, '&#7746;');
-			conciseword = conciseword.replace(/\~N/g, '&Ntilde;');
-			conciseword = conciseword.replace(/\,L/g, '&#7734;');
-			conciseword = conciseword.replace(/`$/g, '-');
-
+			
 			var concisedefa = yt[thisconcise[x]];
 
 			var condefnotype = concisedefa[3];
@@ -163,11 +142,15 @@ function outputDef(which,first)
 
 			var concisedef = concisedefa[3] + ' (' + concisedefa[2] + ')';
 
-
-						
 			concisedef = concisedef.replace(/,/g, '.');
 			concisedef = concisedef.replace(/\&comma;/g, ',');
 			concisedef = replaceunistandard(concisedef);
+
+			var conciseword = thisconcise[x];
+			conciseword = conciseword.replace(/\`/g, '"');
+			conciseword = conciseword.replace(/,/g, '.');
+			if(concisedefa[6].search(/\.[āīū],/) > -1 || concisedefa[6].search(/\.[āīū]$/) > -1) conciseword = conciseword+conciseword.charAt(conciseword.length-1);
+			conciseword = replaceunistandard(conciseword);
 			
 			
 			if (!concisedups[conciseword]) {
