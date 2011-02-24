@@ -82,7 +82,7 @@ function pedsearchstart()
 			uniout = uniout.replace(/z/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
 			
-			finouta[y] = '<a href="#" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + gsplit[1] + '\')">' + uniout + '</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + gsplit[1] + '\')">' + uniout + '</a><br>';
 
 			y++;
 		}
@@ -103,68 +103,6 @@ function pedsearchstart()
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
-
-function pedFullTextSearch(getstring) {
-	
-	var finalout = '';
-	
-	var listouta = [];
-	
-	for (i = 0; i < 4; i++) {
-		
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		document.getElementById('mafbc').innerHTML = '';		
-		
-		var allp = xmlDoc.getElementsByTagName('data');
-		
-		for (j =0; j < allp.length; j++) {
-			var texttomatch = allp[j].textContent;
-			startmatch = texttomatch.search(getstring);
-			postpara = '';
-			if (startmatch >= 0)
-			{
-				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+colorcfg['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>'); 
-				while (startmatch >= 0)
-				{				
-					gotstring = texttomatch.match(getstring)[0];
-					endmatch = startmatch + gotstring.length;
-					beforem = texttomatch.substring(0,startmatch);
-					afterm = texttomatch.substring(endmatch,texttomatch.length);
-					postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
-					texttomatch = texttomatch.substring(endmatch);
-					startmatch = texttomatch.search(getstring);
-				}
-				postpara += afterm;
-
-				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
-				
-				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+colorcfg['colped']+'">top</a>' + postpara + '</p><hr>';
-			}
-		}
-	}
-
-	// word list
-
-	var y = listouta.length;
-
-	var findiv = Math.ceil(y/3);
-	
-	var listoutf = '<hr /><table width="100%">';
-	
-	for (z = 0; z < findiv; z++)
-	{
-		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
-	}
-	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
-	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
-	document.getElementById('difb').innerHTML += finalout;
-	document.getElementById('cdif').scrollTop=0;
-}
-
 
 var dppn = new Array();
 
@@ -313,7 +251,7 @@ function dppnFullTextSearch(getstring) {
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalouta.push(ttitle+'###<a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="#diftop" class="small" style="color:'+colorcfg['colped']+'">top</a></div>' + postpara + '</b></div>');
+				finalouta.push(ttitle+'###<a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a></div>' + postpara + '</b></div>');
 			}
 		}
 	}
@@ -670,49 +608,6 @@ function paliXML(file)
     document.getElementById('cdif').scrollTop=0;
 }
 
-function paliFullXML(word,loc)
-{
-	if (word == '') return;
-    moveframex(2);
-
-	word = word.replace(/`/g,"'");
-
-    var loca = loc.split('#');
-	
-	document.getElementById('mafbc').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
-
-    var finout = '';
-
-	for (i = 0; i < loca.length; i++) {
-		var pfa = loca[i].split('/');
-		
-        var xmlget = 'etc/XML1/' + pfa[0] + '/ped.xml';
-
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", xmlget, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
-
-		var u = xmlDoc.getElementsByTagName("data");
-		var v = u[parseInt(pfa[1])].textContent;
-
-		var onepar = v;
-		var vv = '';
-		while (onepar.toLowerCase().indexOf(word) > -1) {
-			var opp = onepar.toLowerCase().indexOf(word);
-			vv += onepar.substring(0,opp);
-			vv += '<span style="color:'+colorcfg['colped']+'">' + onepar.substring(opp,opp + word.length) + '</span>';
-			onepar = onepar.substring(opp + word.length);
-		}
-		vv += onepar;
-
-
-        finout +=  vv + '<hr />';
-    }
-    document.getElementById('mafbc').innerHTML = '<p>PED Full Text Search for <b>' + word + '</b></p><hr />';
-    document.getElementById('mafbc').innerHTML += finout;
-    document.getElementById('maf').scrollTop = 0;
-}
 
 var dppnhist = [];
 var dhmark = 0;
@@ -800,6 +695,84 @@ function DPPNXML(file,which)
     document.getElementById('cdif').scrollTop=0;
 }
 
+function atiSearchStart() {
+
+	var getstring = document.form.manual.value;
+
+	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+	document.getElementById('difb').innerHTML='<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>';
+	
+	getstring = getstring.replace(/^  */g, '').replace(/  *$/g, '').replace(/  */g, '%2B');
+	
+	var outNode = document.createElement('iframe');
+	outNode.setAttribute('width','100%');
+	outNode.setAttribute('height',document.getElementById('cdif').offsetHeight);
+	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
+	document.getElementById('difb').appendChild(outNode);
+}
+
+function atiSearchOffline(getstring) {
+	
+	var finalout = '';
+	
+	var listouta = [];
+	
+	for (i = 0; i < atiD.length; i++) {
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", getHomePath().replace(/\\/g, '/') +'/Extensions/digitalpalireader/content/'+atiD[i], false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		document.getElementById('mafbc').innerHTML = '';		
+		
+		var title = xmlDoc.getElementsByTagName('title')[0].textContent;
+		var data = xmlDoc.getElementsByTagName('div');
+		for (j in data) {
+			if(data[j].id == 'H_content') {
+			var texttomatch = data[j].textContent;
+				startmatch = texttomatch.search(getstring);
+				postpara = '';
+				if (startmatch >= 0)
+				{
+					listouta.push('<a href="#atio'+i+'" style="color:'+colorcfg['colped']+'">' + title + '</a><br>'); 
+					while (startmatch >= 0)
+					{				
+						gotstring = texttomatch.match(getstring)[0];
+						endmatch = startmatch + gotstring.length;
+						beforem = texttomatch.substring(0,startmatch);
+						afterm = texttomatch.substring(endmatch,texttomatch.length);
+						postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
+						texttomatch = texttomatch.substring(endmatch);
+						startmatch = texttomatch.search(getstring);
+					}
+					postpara += afterm;
+
+					postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+					
+					finalout += '<a name="atio'+i+'"><p><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a>' + postpara + '</p><hr>';
+				}
+			}
+		}
+	}		
+
+	// word list
+
+	var y = listouta.length;
+
+	var findiv = Math.ceil(y/3);
+	
+	var listoutf = '<hr /><table width="100%">';
+	
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
+	}
+	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
+	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML += finalout;
+	document.getElementById('cdif').scrollTop=0;
+
+}
 namecount = [];
 
 function clickSearchOption() {
@@ -924,6 +897,11 @@ function dictType() {
 			moveframey('dif');
 			moveframex(3);
 			titlesearchstart();
+			break;
+		case 8: // ATI
+			moveframey('dif');
+			moveframex(3);
+			atiSearchStart();
 			break;
 	}
 }

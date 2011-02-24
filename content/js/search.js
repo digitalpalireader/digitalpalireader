@@ -513,9 +513,14 @@ function createTables(xmlDoc)
 	var texnodups = [];
 	var exnodups = [];
 	var l = 0;
+
+	var exwordNode = document.createElement('div');
+	exwordNode.setAttribute("id",'searchres');
 	
 	var finalout = '';
-	
+
+	var outNode = document.createElement('div');
+
 	var match = 0;
 	var nummatch = 0;
 	var extranummatch = -1;
@@ -821,22 +826,26 @@ function createTables(xmlDoc)
 
 									findiv = Math.ceil((exnodups.length)/2);
 									
-									exwordout = '<hr><div id="searchres"><table width=100%>';
+									exwordout = '<table width=100%>';
 
 									for (ex = 0; ex < findiv; ex++)
 									{
-										exwordout += '<tr><td><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="#" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+										exwordout += '<tr><td><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 									}
 									exwordout += '</table>';
 									
-									document.getElementById('sbfab').innerHTML = exwordout;
+									exwordNode.innerHTML = exwordout;
+									
+									document.getElementById('sbfab').innerHTML = '';
+									document.getElementById('sbfab').appendChild(exwordNode);									
 									
 									postpara += afterm;
 
 									// titles
 									
-																
-									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
+									outNode.setAttribute("id", countmatch + tagtitle);
+							
+									finalout += '<p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -863,7 +872,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr>';
 									
 									// mumble mumble
 									
@@ -884,7 +893,10 @@ function createTables(xmlDoc)
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
 	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + bookname + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
-	else document.getElementById('sbfb').innerHTML += finalout + '</div>';
+	else {
+		outNode.innerHTML = finalout;
+		document.getElementById('sbfb').appendChild(outNode);
+	}
 	
 	match = 0;
 }

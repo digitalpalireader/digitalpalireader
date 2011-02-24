@@ -23,7 +23,7 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
 			var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
+			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
 			transout += transin.join('');
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
