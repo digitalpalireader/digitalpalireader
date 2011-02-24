@@ -1009,7 +1009,7 @@ function helpXML(file)
 	document.getElementById('mafbc').innerHTML = '';
 	var data = xmlDoc.getElementsByTagName('data')
 	for (ippp in data) {
-		if(data[ippp].childNodes) outputit += data[ippp].textContent;
+		if(data[ippp].childNodes) outputit += data[ippp].textContent.replace(/\[/g,'<').replace(/\]/g,'>');
 	}		
 	document.getElementById('mafbc').innerHTML = outputit;
 	document.getElementById('mafbc').innerHTML += '<hr/><div><i>DPR version number: <b>'+version+'</b></i></div>';

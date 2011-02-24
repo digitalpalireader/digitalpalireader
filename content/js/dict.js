@@ -851,10 +851,13 @@ function dictLoad() {
 				newScript.src = 'js/titles.js';
 				headID.appendChild(newScript);
 			}
+		case 8: // ATI
+			document.getElementById('soNO').style.display = 'block';
+		break;
 	}
 }
 
-function dictType() {
+function dictType(hard) {
 	var getstring = document.form.manual.value;
  	if ((document.form.sofulltext.checked || !document.form.sostartword.checked) && getstring == '') return;
 	document.form.manual.value = replacevelstandard(document.form.dictin.value);
@@ -899,6 +902,7 @@ function dictType() {
 			titlesearchstart();
 			break;
 		case 8: // ATI
+			if(!hard) break; // only on button press
 			moveframey('dif');
 			moveframex(3);
 			atiSearchStart();
