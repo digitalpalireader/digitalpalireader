@@ -1,9 +1,36 @@
 var devCheck = 1;
 
 function dev() {
-// noahs();
-	moveframey('scf')
+	document.textpad.pad.value = '';
+//makeInflect();
+//	moveframey('scf')
 }
+
+function makeInflect() {
+var DinfN = [];
+
+var n = ['','1st','2nd','3rd'];
+
+	var x = DinfN[0];
+
+	var out = "DinfN['"+x[5]+"'] = [];\n";
+	out+= "DinfN['"+x[5]+"']['"+x[0]+"'] = [];\n";
+	out+= "DinfN['"+x[5]+"']['"+x[0]+"']['"+(x[1] == 's' ? 0 : 1)+"'] = [];\n";
+	out+= "DinfN['"+x[5]+"']['"+x[0]+"']['"+(x[1] == 's' ? 0 : 1)+"']['"+x[2]+"'] = ['"+x[7]+"'";
+	for (i = 1; i < DinfN.length; i++) {
+		if(x[5] != DinfN[i][5]) out+= "];\nDinfN['"+DinfN[i][5]+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"']['"+DinfN[i][2]+"'] = ['"+DinfN[i][7]+"'";
+		else if(x[0] != DinfN[i][0]) out+= "];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"']['"+DinfN[i][2]+"'] = ['"+DinfN[i][7]+"'";
+		else if(x[1] != DinfN[i][1]) out+= "];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"'] = [];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"']['"+DinfN[i][2]+"'] = ['"+DinfN[i][7]+"'";
+		else if(x[2] != DinfN[i][2]) out+= "];\nDinfN['"+DinfN[i][5]+"']['"+DinfN[i][0]+"']['"+(DinfN[i][1] == 's' ? 0 : 1)+"']['"+DinfN[i][2]+"'] = ['"+DinfN[i][7]+"'";
+ 		else {
+			out+= ",'"+DinfN[i][7]+"'";
+		}
+		x = DinfN[i];
+	}
+	document.textpad.pad.value = out;
+}	
+
+
 
 function noahq() {
 	

@@ -15,13 +15,12 @@ resetTable();
 function quizme() {
 	
 	// remember rights
-	var rights = readFile("DPTEST");
-	if(rights) {
-		rights=rights.split(',');
-		if (rights.length == 1 && rights[0] == "") rights = [];
+	var rights = [];
+	if(ioCheck == 1) var srights = readFile("DPTEST");
+	if(srights) {
+		rights=srights.split(',');
 		document.getElementById('Qrights').innerHTML = rights.length;
 	}
-	else { rights = []; }
     
 	var quiza = new Array();
 	var quizeachwrong = new Array();
@@ -57,16 +56,16 @@ function quizme() {
 	var ytthis = yt[quiza[quizrandomright]];
 	
 	var formatanswerwrong = '';
-	var formatanswer = ytthis[3];
-	var formatanswerout = ytthis[3];
-	if (ytthis[2].length > 0) formatanswerout += ' (' + ytthis[2] + ')';
+	var formatanswer = ytthis[2];
+	var formatanswerout = ytthis[2];
+	if (ytthis[1].length > 0) formatanswerout += ' (' + ytthis[1] + ')';
 	for (qtmp = 0; qtmp < 4; qtmp++) {
 		if (qtmp == quizrightorder) {
 			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="'+(qtmp+1)+'"> '+formatanswer+'</p>';
 		}
 		else {
 			ytthis = yt[quiza[quizeachwrong[qtmp2]]];
-			formatanswerwrong = ytthis[3];
+			formatanswerwrong = ytthis[2];
 			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="'+(qtmp+1)+'"> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}

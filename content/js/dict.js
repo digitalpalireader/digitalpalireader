@@ -346,7 +346,6 @@ function mlsearchstart()
 	yut = 0;
 }
 
-
 function epdsearchstart()
 {
 	if(typeof(epd) == 'undefined') {
@@ -858,6 +857,7 @@ function dictLoad() {
 }
 
 function dictType(hard) {
+	clearDivs('dif');
 	var getstring = document.form.manual.value;
  	if ((document.form.sofulltext.checked || !document.form.sostartword.checked) && getstring == '') return;
 	document.form.manual.value = replacevelstandard(document.form.dictin.value);

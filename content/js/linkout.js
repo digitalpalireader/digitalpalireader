@@ -124,7 +124,7 @@ function outputDef(which,first)
 	if (shortdefpost[which]) {
 		thisconcise = shortdefpost[which].split('$'); 
 		
-		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="var spdouts = this.value;  var spdcol = spdouts.split(\':\'); document.getElementById(\'spdout\').innerHTML = \'<b style=\&quot;color:' + colorcfg['colcpd'] + '\&quot;>\' + spdcol[0] + \':</b> \' + spdcol[1];">';
+		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
 				
 		var concisedups = [];
 		for (x = 0; x < thisconcise.length; x++)
@@ -134,13 +134,13 @@ function outputDef(which,first)
 			
 			var concisedefa = yt[thisconcise[x]];
 
-			var condefnotype = concisedefa[3];
+			var condefnotype = concisedefa[2];
 			if (condefnotype.length > 100) {
 					condefnotype = condefnotype.substring(0,100);
 				condefnotype += '...'
 			}
 
-			var concisedef = concisedefa[3] + ' (' + concisedefa[2] + ')';
+			var concisedef = concisedefa[2] + ' (' + concisedefa[1] + ')';
 
 			concisedef = concisedef.replace(/,/g, '.');
 			concisedef = concisedef.replace(/\&comma;/g, ',');
@@ -149,15 +149,15 @@ function outputDef(which,first)
 			var conciseword = thisconcise[x];
 			conciseword = conciseword.replace(/\`/g, '"');
 			conciseword = conciseword.replace(/,/g, '.');
-			if(concisedefa[6].search(/\.[āīū],/) > -1 || concisedefa[6].search(/\.[āīū]$/) > -1) conciseword = conciseword+conciseword.charAt(conciseword.length-1);
+			if(concisedefa[5].search(/\.[āīū],/) > -1 || concisedefa[5].search(/\.[āīū]$/) > -1) conciseword = conciseword+conciseword.charAt(conciseword.length-1);
 			conciseword = replaceunistandard(conciseword);
 			
 			
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b style="color:'+colorcfg['colcpd']+'">' + conciseword + ': </b> ' + concisedef; } 
+				if (x == 0) { var sdfirst = '<a href="javascript:void(0);" onclick="conjugate(\''+thisconcise[x]+'\')"><b style="color:' + colorcfg['colcpd'] + '";>' + conciseword + '</b></a>: ' + concisedef; } 
 				if (thisconcise.length > 1) {
 					
-					conciseoutput += '<option value="' + conciseword + ': ' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[2] + ')</option>'; 
+					conciseoutput += '<option value="' + thisconcise[x] + ':' + conciseword + ':' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[1] + ')</option>'; 
 						
 				}
 				concisedups[conciseword] = 1;
@@ -179,4 +179,10 @@ function outputDef(which,first)
 		if(moveat == 2) { moveframey('dif'); }
 	}
 	moveframex(moveat);
+}
+
+function conciseChange(value) {
+	var spdouts = value;  
+	var spdcol = spdouts.split(':'); 
+	document.getElementById('spdout').innerHTML = '<a href="javascript:void(0);" onclick="conjugate(\''+replacevelstandard(spdcol[0])+'\')"><b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b></a> ' + spdcol[2];
 }

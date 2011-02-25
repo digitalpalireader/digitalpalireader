@@ -222,3 +222,10 @@ function changelang(lang) {
 function go_anchor(mydiv,n){
     document.getElementById(mydiv).scrollTop = document.getElementById(n).offsetTop;
 }
+
+function clearDivs(which) { // place divs to be cleared here
+	if (which == 'dif') { // dictionary frame stuff
+		document.getElementById('lt').innerHTML = '';
+		document.getElementById('lb').innerHTML = '';
+	}
+}

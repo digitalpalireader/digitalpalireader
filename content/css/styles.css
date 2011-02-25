@@ -533,8 +533,6 @@ table.dec {  margin: auto;
 			}
 			
 td.dec {
-	font-size: 14pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-weight: normal;
 	text-align: right;
 	padding-left: 4pt;
@@ -545,8 +543,6 @@ td.dec {
 	}
 			
 td.decr {
-	font-size: 14pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-weight: normal;
 	text-align: right;
 	padding-left: 4pt;
@@ -556,21 +552,17 @@ td.decr {
 		border-left:none;
 	}
 	
-th.dec {
-	font-size: 14pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
-	font-weight: bold;
-	text-align: center;
-	background-color: #9F9F9F;
+th.dec, .decb {
+	font-weight: normal;
+	text-align: left;
+	padding-left: 4pt;
 		border-style: ridge;
-		border-width: medium;
 		border-color: #3F3F3F;
+		border-width: medium;
 	
 	}
 	
-th.toprow {
-	font-size: 14pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+.toprow, .sidecol {
 	font-weight: bold;
 	text-align: center;
 	background-color: #9F9F9F;
@@ -578,6 +570,15 @@ th.toprow {
 		border-width: medium;
 		border-color: #3F3F3F;
 	}
+
+td.greyb {
+	background-color: #EEE;	
+	background: rgba(200,200,200, 0.3);
+}
+td.whiteb {
+	background-color: #FFF;
+	background: rgba(255,255,255, 0.3);
+}
 			
 table.decMenu {
 }
@@ -585,8 +586,6 @@ table.decMenu {
 
 
 button.control {background-color: #FFE7B9;
-						font-size: 10pt;
-				 font-family: Gentium;
 				 font-weight: bold;
 				 border-style: inset;
 				
