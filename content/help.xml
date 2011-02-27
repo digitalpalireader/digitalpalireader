@@ -2,10 +2,11 @@
 <data>[h2][b]Notes:[/b][/h2]</data>
 <data>[ul]</data>
 <data>[li]The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. [/li]</data>
-<data>[li]You will need at least a basic unicode font to view the Pāḷi characters properly.  If the word Pāḷi in this sentence shows up correctly, you are probably okay.  Otherwise, you'll have to do a search for "Unicode Font" on the Internet, and probably tell the DPR to use that font in the settings screen (press the "%" button).  For alternative scripts, it gets a little bit more difficult, and YMMV.  I use [a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk"]the Padauk font[/a] for Burmese and it works well.  The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.).  There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.[/li]</data>
-<data>[li]The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. [/li]</data>
+<data>[li]You will need at least a basic unicode font to view the Pāḷi characters properly.  If the word Pāḷi in this sentence shows up correctly, you are probably okay.  Otherwise, you'll have to do a search for "Unicode Font" on the Internet, and probably tell the DPR to use that font in the settings screen (press the "%" button).  For alternative scripts, it gets a little bit more difficult, and YMMV.  I use [a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color:green"]the Padauk font[/a] for Burmese and it works well.  The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.).  There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.[/li]</data>
 <data>[li]You will also need a recent version of Firefox, unless you are using the stand-alone version.  I am currently working with Firefox 4, so there may be some problems with Firefox 3 that I am not aware of.[/li]</data>
-<data>[li]For the latest version of the reader, please visit [a style="color:blue" href="http://pali.sirimangalo.org/"]pali.sirimangalo.org[/a][/li]</data>
+<data>[li]Text entry fields accept either unicode Pali characters or characters based on the [a style="color:green" href="javascript:void(0)" onclick="helpXML('velthuis.xml')"]Velthuis[/a] scheme. [/li]</data>
+<data>[li]The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. [/li]</data>
+<data>[li]For the latest version of the reader, please visit [a style="color:green" href="http://pali.sirimangalo.org/"]pali.sirimangalo.org[/a][/li]</data>
 <data>[/ul]</data>
 <data>[hr]</data>
 <data>[h2]What is it?[/h2]</data>
@@ -110,24 +111,25 @@
 <data>[/ul]</data>
 <data>[p]Once you have retrieved a section, click on any word as you read through to bring up an analysis of the word and hopefully at least one (hopefully correct) definition from one of the three dictionaries.  If a CPED entry is found (blue words on the right side of the analysis bar), clicking on them gives basic conjugation information about the word.[/p]</data>
 <data>[p]Finally, there are some hidden tools in the DPR; hidden because I didn't kow where to put them. Links to them will be placed here:[br][br]</data>
-<data>[a href="etc/grammar/GMD/index.html" style="color:blue" target="_blank"]A Practical Grammar of the Pali Language by Charles Duroiselle[/a][br][br]</data>
-<data>[a href="etc/grammar/cheet.html" style="color:blue" target="_blank"]Pali Cheet Sheet by Alan McClure[/a]</data>
+<data>[a href="etc/grammar/GMD/index.html" style="color:green" target="_blank"]A Practical Grammar of the Pali Language by Charles Duroiselle[/a][br][br]</data>
+<data>[a href="etc/grammar/cheet.html" style="color:green" target="_blank"]Pali Cheet Sheet by Alan McClure[/a]</data>
 <data>[/p]</data>
 <data>[hr]</data>
 <data>[h2]Gratitude:[/h2]</data>
-<data>[p]Thanks first and foremost to Alexander Genaud, without whom I would still be pulling my hair out (figuratively) waiting for the script to load a single section. Without his initial help there would be no DPR. Without his later advice we would still be accessing one paragraph at a time and the data would be pre-analyzed and thus difficult to read. There would also be no search function. Special thanks also to Alan McClure, Ven. Gavesako, Peter Masefield, Lin Qian, Leland George, and Ven. Khemaratana for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on [a href="http://www.accesstoinsight.org/outsources/pali.html"]www.accesstoinsight.org[/a] as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR, as well as a way to link the DPR to the offline ATI archive. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:[br]</data>
+<data>[p]Thanks first and foremost to Alexander Genaud, without whom I would still be pulling my hair out (figuratively) waiting for the script to load a single section. Without his initial help there would be no DPR. Without his later advice we would still be accessing one paragraph at a time and the data would be pre-analyzed and thus difficult to read. There would also be no search function. Special thanks also to Alan McClure, Ven. Gavesako, Peter Masefield, Lin Qian, Leland George, and Ven. Khemaratana for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on [a href="http://www.accesstoinsight.org/outsources/pali.html" style="color:green"]www.accesstoinsight.org[/a] as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR, as well as a way to link the DPR to the offline ATI archive. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:[br]</data>
 <data>[ul]</data>
 <data>[li]The Myanmar Pali Tipitaka[/li]</data>
 <data>[li]The Pali English Dictionary[/li]</data>
 <data>[li]Concise Pali English Dictionary[/li]</data>
 <data>[li]Concise English Pali Dictionary[/li]</data>
 <data>[li]Dictionary of Pali Proper Names[/li]</data>
+<data>[li]PaliLookup[/li]</data>
 <data>[li]Buddha Vacana[/li]</data>
 <data>[/ul]</data>
 <data>[p]Should this software infringe upon anyone's felt right to forbid the copying of any of the above or other materials, I apologize for the felt violation. I am sorry to know that some people feel this way about generally useful things that benefit the public immensely when distributed freely. May all be happy and well. [hr]</data>
 <data>[h2]Final Words:[/h2]</data>
-<data>[p]1) Please write to me with errors, bugs, spiders, etc. My email is [a href="mailto:yuttadhammo@gmail.com"]yuttadhammo@gmail.com[/a]. [/p]</data>
-<data>[p]2) Please check our [a href="http://pali.sirimangalo.org/"]weblog[/a] for new updates.[/p]</data>
+<data>[p]1) Please write to me with errors, bugs, spiders, etc. My email is [a style="color:green" href="mailto:yuttadhammo@gmail.com"]yuttadhammo@gmail.com[/a]. [/p]</data>
+<data>[p]2) Please check our [a style="color:green" href="http://pali.sirimangalo.org/"]weblog[/a] for new updates.[/p]</data>
 <data>[p]Best wishes and good luck,[/p]</data>
 <data>[p]Yuttadhammo[/p]</data>
-<data>[p]Last Updated: Feb 17, 2011 C.E.[/p]</data> </top> 
+<data>[p]Last Updated: Feb 27, 2011 C.E.[/p]</data> </top> 

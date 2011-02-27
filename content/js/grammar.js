@@ -1,9 +1,9 @@
 // uses inflect.js, english.js
 
-function conjugate(word) {
+function conjugate(word, dif) {
 
 	moveframey('dif');
-
+	moveframex(3);
 	var yto = yt[word];
 	
 	if(yto == undefined) {
@@ -11,16 +11,26 @@ function conjugate(word) {
 		return;
 	}
 
-	clearDivs('dif');
+	
+	var out;
 	
 	if(yto[4] == 'V') { // verb
-		if(yto[9] == 'N') conjugateIrrVerb(word);
-		else conjugateVerb(word);
+		if(yto[9] == 'N') out = conjugateIrrVerb(word);
+		else out = conjugateVerb(word);
 	}
 	else {
-		if(yto[9] == 'N') conjugateIrrNoun(word);
-		else conjugateNoun(word);
+		if(yto[9] == 'N') out = conjugateIrrNoun(word);
+		else out = conjugateNoun(word);
 	}
+	if(dif == 'dif') {
+		clearDivs('dif');
+		document.getElementById('cdif').scrollTop = 0;
+		document.getElementById('cdif').scrollTop = 0;
+		document.getElementById('difb').innerHTML = out;
+	}
+	else {
+		document.getElementById(dif).innerHTML = '<div class="x" onclick="this.parentNode.innerHTML=null">x</div><div class="conj">'+out+'</div>';
+	}	
 }
 
 var decNames = ['nom','voc','acc','ins','dat','abl','gen','loc'];
@@ -127,8 +137,8 @@ function conjugateNoun(word) {
 		}
 	}
 	out += '</table>';
-	document.getElementById('difb').innerHTML = out;
-	document.getElementById('cdif').scrollTop = 0;
+	return out;
+
 }
 
 var personNames = ['3rd','2nd','1st'];
@@ -152,20 +162,48 @@ function conjugateVerb(word) {
 	}
 	
 	out += '<div align=center><b>' + outword + ': ' + type2[0] + '</b></div>'; // description
-	out += '<table class="dec"><tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
-	var verb = infV[yto[5]];
-	//alert(verb['3rd'][0]);
+	
+	
+
+	var verb = [infV[yto[5]]];
+	switch(yto[5]) {
+		case 'ac.pres.a_':
+			verb.push(infV['ac.impv.a_']);
+		break;
+	}
+	verb.push(infV['ac.opt']);
+	verb.push(infV['ac.fut']);
+	verb.push(infV['ac.cond']);
+
+	// first table (present, imperative, optative)
+	out += '<table class="dec"><tr><td class="toprow"></td><td class="toprow" colspan="2">Present</td><td class="toprow" colspan="2">Imperative</td><td class="toprow" colspan="2">Optative</td></tr><tr><td class="toprow"></td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 	for(j =0; j < 3; j++) { // 3 persons
 		var pi = personNames[j];
 		out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
-		for (i = 0; i <= 1; i++) {
-			out+='<td class="decb small">'+ (verb[pi] == undefined ? '-' : stem+verb[pi][i]) + '</td>';
+		for (k = 0; k <= 2; k++) {
+			for (i = 0; i <= 1; i++) {
+				out+='<td class="decb small'+ (k != 1 ? '' : ' whiteb') + '">'+ (verb[k][pi] == undefined ? '-' : stem + ( k == 2 ? 'eyy' : '' ) + verb[k][pi][i]) + '</td>';
+			}
 		}
 		out += '</tr>';
 	}
 	out += '</table>';
-	document.getElementById('difb').innerHTML = out;
-	document.getElementById('cdif').scrollTop = 0;
+
+	// second table (future, conditional)
+	
+	out += '<br><table class="dec"><tr><td class="toprow"></td><td class="toprow" colspan="2">Future</td><td class="toprow" colspan="2">Conditional</td></tr><tr><td class="toprow"></td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
+	for(j =0; j < 3; j++) { // 3 persons
+		var pi = personNames[j];
+		out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
+		for (k = 3; k <= 4; k++) {
+			for (i = 0; i <= 1; i++) {
+				out+='<td class="decb small'+ (k != 4 ? '' : ' whiteb') + '">'+ (verb[k][pi] == undefined ? '-' : stem + 'iss' + verb[k][pi][i]) + '</td>';
+			}
+		}
+		out += '</tr>';
+	}
+	out += '</table>';
+	return out;
 }
 
 function conjugateIrrNoun(word) {
@@ -213,8 +251,8 @@ function conjugateIrrNoun(word) {
 	}
 	out += outt;
 	out += '</table>';
-	document.getElementById('difb').innerHTML = out;
-	document.getElementById('cdif').scrollTop = 0;
+	return out;
+
 	
 }
 
@@ -254,7 +292,7 @@ function conjugateIrrVerb(word) {
 		out += '</tr>';
 	}
 	out += '</table>';
-	document.getElementById('difb').innerHTML = out;
-	document.getElementById('cdif').scrollTop = 0;
+	return out;
+
 }
 

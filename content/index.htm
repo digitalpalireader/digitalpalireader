@@ -28,8 +28,8 @@
 <body onload="if(devCheck == 1) dev(); ">
 <div id="content">
 	<div id="left">
+	<form name="form">
 		<div id="brleft"></div>
-		<form name="form">
 		<div id="cleft">
 			<table width=100%>
 				<tr>
@@ -51,15 +51,15 @@
 										<td align=center>
 											<select class="sel" size="7" name="nik" onclick="changenikaya()">
 												<option value="v">Vinaya</option>
-												<option selected value="d">D&#299;gha</option>
+												<option selected value="d">Dīgha</option>
 												<option value="m">Majjhima</option>
-												<option class="sel" value="s">Sa&#7747;yutta</option>
-												<option value="a">A&#7749;guttara</option>
+												<option class="sel" value="s">Saṃyutta</option>
+												<option value="a">Aṅguttara</option>
 												<option value="k">Khuddaka</option>
 												<option value="y">Abhidhamma</option>
-												<option value="x">VisuddhiM</option>
-												<option value="b">AbhiSa&#7749;gaha</option>
-												<option value="g">By&#257;kara&#7751;a</option>
+												<option value="x">Vism</option>
+												<option value="b">Abhidh-s</option>
+												<option value="g">Byākaraṇa</option>
 											</select>
 										</td>
 										<td>&nbsp;</td>
@@ -72,7 +72,6 @@
 										</td>
 									</tr>
 								</table>
-								
 							</div>
 						</div>
 					<hr />
@@ -81,18 +80,18 @@
 							<div class="cpt" id="cp2">
 								<div align="center" id="title">title</div>
 
-								<div align="center" style="padding-top:2px" id="meta"><select class="sel" size="1" name="meta"><option selected>a</option></select></div>
+								<div align="center" style="padding-top:2px" id="meta"><select class="sel hide" size="1" name="meta"><option selected>a</option></select></div>
 
-								<div align="center" style="padding-top:2px" id="volume"><select class="sel" size="1" name="volume"><option selected>a</option></select></div>
+								<div align="center" style="padding-top:2px" id="volume"><select class="sel hide" size="1" name="volume"><option selected>a</option></select></div>
 						
 
-								<div align="center" style="padding-top:2px" id="vagga"><select class="sel" size="1" name="vagga"><option selected>b</option></select></div>
+								<div align="center" style="padding-top:2px" id="vagga"><select class="sel hide" size="1" name="vagga"><option selected>b</option></select></div>
 
 
-								<div align="center" style="padding-top:2px" id="sutta"><select class="sel" size="1" name="sutta"><option></option></select></div>
+								<div align="center" style="padding-top:2px" id="sutta"><select class="sel hide" size="1" name="sutta"><option></option></select></div>
 
 
-								<div align="center" style="padding-top:2px" id="section"><select class="sel" size="1" name="section"><option></option></select></div>
+								<div align="center" style="padding-top:2px" id="section"><select class="sel hide" size="1" name="section"><option></option></select></div>
 							</div>
 						</div>
 					<hr />
@@ -194,7 +193,8 @@
 									<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
 									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
 									<br>
-									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
+									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
+									<input type="text" style="display:none">
 							</div>
 						</div>
 					<hr name="ioDep" />
@@ -233,6 +233,7 @@
 									</table>
 							</div>
 						</div>
+					<input type="text" style="display:none">
 					<hr />
 						<div class="cpcont">
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='#F9F9F9';"> </div>
@@ -259,21 +260,22 @@
 															<span class="small">no advanced options available</span>
 														</div>
 														<div id="soRX" style="display:none">
-															<input type="checkbox" onclick="clickSearchOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
+															<input type="checkbox" onclick="clickDictOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
 														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" onclick="clickSearchOption();" name="sofulltext" title="Search dictionary definitions, not only entry names" onclick="if(this.checked) document.form.sostartword.checked = false;"><span class="small"> Full Text</span>
+															<input type="checkbox" onclick="clickDictOption(); if(this.checked) document.form.sostartword.checked = false;" name="sofulltext" title="Search dictionary definitions, not only entry names"><span class="small"> Full Text</span>
 														</div>
 														<div id="soSW" style="display:none">
-															<input type="checkbox" onclick="clickSearchOption();" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
+															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="clickDictOption(); if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
 														</div>
 													</div>
 												</td>
 											</tr>
 										</table>
 									</div>
-									<input type="text" value="" name="dictin" size="15" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
 
+					<input type="text" style="display:none">
 					<!--<td>
 							<div align=center id="rright">
 									<div style="padding-top:10px">
@@ -329,8 +331,8 @@
 				</tr>
 		
 			</table>
-			</form>
 		</div>
+	</form>
 	</div>
 	<div id="cpc">
 		<div id="cpopen">

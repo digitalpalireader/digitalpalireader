@@ -154,7 +154,7 @@ function outputDef(which,first)
 			
 			
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<a href="javascript:void(0);" onclick="conjugate(\''+thisconcise[x]+'\')"><b style="color:' + colorcfg['colcpd'] + '";>' + conciseword + '</b></a>: ' + concisedef; } 
+				if (x == 0) { var sdfirst = '<a href="javascript:void(0);" onclick="conjugate(\''+thisconcise[x]+'\',\'dif\')"><b style="color:' + colorcfg['colcpd'] + '";>' + conciseword + '</b></a>: ' + concisedef; } 
 				if (thisconcise.length > 1) {
 					
 					conciseoutput += '<option value="' + thisconcise[x] + ':' + conciseword + ':' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[1] + ')</option>'; 
@@ -184,5 +184,5 @@ function outputDef(which,first)
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
-	document.getElementById('spdout').innerHTML = '<a href="javascript:void(0);" onclick="conjugate(\''+replacevelstandard(spdcol[0])+'\')"><b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b></a> ' + spdcol[2];
+	document.getElementById('spdout').innerHTML = '<a href="javascript:void(0);" onclick="conjugate(\''+replacevelstandard(spdcol[0])+'\',\'dif\');"><b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b></a> ' + spdcol[2];
 }

@@ -465,6 +465,30 @@ border:1px solid #FFF
 	text-align:center;
 }
 
+.conjc {
+	margin:auto;
+	position:relative;
+}
+.conj {
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding:20px;
+	border-radius:24px;
+	-moz-border-radius:24px;
+	background-color: silver;
+	background-color: RGBa(200,200,200,0.5);
+}
+.x{
+	padding:5px;
+	position:absolute;
+	top:15px;
+	left:15px;
+	background-color: white;
+	background-color: RGBa(255,255,255,0.5);
+	border-radius:8px;
+	-moz-border-radius:8px;
+}
 
 
 /* misc */
@@ -527,11 +551,12 @@ p.cite  {
 	}
 		
 table.dec {  margin: auto;
-			margin-top: 14pt;
-			border-collapse: collapse;
-			
-			}
-			
+	padding:4px;
+	margin-top: 14pt;
+	border-collapse: collapse;
+
+}
+
 td.dec {
 	font-weight: normal;
 	text-align: right;
@@ -565,7 +590,7 @@ th.dec, .decb {
 .toprow, .sidecol {
 	font-weight: bold;
 	text-align: center;
-	background-color: #9F9F9F;
+	background-color: silver;
 		border-style: ridge;
 		border-width: medium;
 		border-color: #3F3F3F;
@@ -600,4 +625,3 @@ button.control:focus::-moz-focus-inner { border:none}
 .controls, #corrects {
 text-align:center;
 }
-

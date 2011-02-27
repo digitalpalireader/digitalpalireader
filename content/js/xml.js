@@ -29,7 +29,8 @@ function importXML(labelsearch,para)
 		return;
 	}		
 
-	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -378,7 +379,8 @@ function importXMLindex() {
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}	
-	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -572,10 +574,12 @@ function importXMLindex() {
 			}
 		}
 	}
+	var theDataDiv = document.createElement('div');
+	theDataDiv.innerHTML = theDatao;
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
-	document.getElementById('mafbc').innerHTML = theDatao;  // ---------- return output ----------
-
-	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
+	document.getElementById('maf').scrollTop = 0;
 	if(moveat == 3) { moveframex(2); }
 }
 
@@ -586,7 +590,8 @@ function importXMLraw()
 		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
 		return; 
 	}
-	document.getElementById('mafbc').innerHTML='<div align = center><br><br><br><br><br><h1>please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
@@ -995,6 +1000,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 function helpXML(file)
 {
+	moveframex(1);
 	if (!file) file = 'help.xml';
 	moves(0);
 	if(moveat == 3) { moveframex(2); }
@@ -1028,7 +1034,8 @@ function getatt(num,type) { // get atthakatha or tika word
 		var loc = tiklist[num].substring(tiklist[num].indexOf('#')+1);
 	}
     var loca = loc.split('#');
-	document.getElementById('mafbc').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
     var finout = '';
     for (i in loca) {
         var pca = loca[i].split('^');
@@ -1094,7 +1101,9 @@ function gettitle(num) { // get titles
 	var loc = titlelist[num].substring(titlelist[num].indexOf('#')+1);
     var loca = loc.split('#');
 	
-	document.getElementById('mafbc').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
+    
     var finout = '';
     for (i in loca) {
         var pca = loca[i].split('^');

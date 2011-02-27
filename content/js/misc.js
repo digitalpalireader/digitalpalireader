@@ -1,4 +1,3 @@
-
 function preout(data,which) // calls text prep, then outputs it to preFrame
 {
 
@@ -30,8 +29,14 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 	}
 	
 	//document.textpad.pad.value = inarray[0];
-	
-	document.getElementById('mafbc').innerHTML += '<div id="convi">'+convout+'</div><hr />' + finout; // convi contains text for convertor
+	var convDiv = document.createElement('div');
+	convDiv.setAttribute('id','convi');
+	convDiv.innerHTML = convout;
+	var outDiv =  document.createElement('div');
+	outDiv.innerHTML = finout;
+	document.getElementById('mafbc').appendChild(convDiv);
+	document.getElementById('mafbc').appendChild(document.createElement('hr'));
+	document.getElementById('mafbc').appendChild(outDiv);
 	
 	document.getElementById('maf').scrollTop = 0; 
 	if (moveat == 3) {moveframex(2);}
@@ -328,23 +333,6 @@ numbernik.push('b');
 numbernik.push('g');
 
 
-var nikvoladi = new Array();
-nikvoladi['d'] = '<select size="7" name="book" onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
-nikvoladi['m'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
-nikvoladi['s'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>';
-nikvoladi['a'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>';
-nikvoladi['km'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">KhP</option><option value="2">Dhp</option><option value="3">Uda</option><option value="4">Iti</option><option value="5">SN</option><option value="6">ViV</option><option value="7">PeV</option><option value="8">Thera</option><option value="9">Theri</option><option value="10">Ap.1</option><option value="11">Ap.2</option><option value="12">BdV</option><option value="13">Car</option><option value="14">Jat.1</option><option value="15">Jat.2</option><option value="16">MNid</option><option value="17">CNid</option><option value="18">PsM</option><option value="19">Mil</option><option value="20">Net</option><option value="21">Pet</option></select>';
-nikvoladi['ka'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">KhP</option><option value="2">Dhp</option><option value="3">Uda</option><option value="4">Iti</option><option value="5">SN</option><option value="6">ViV</option><option value="7">PeV</option><option value="8">Thera</option><option value="9">Theri</option><option value="10">Apa</option><option value="12">BdV</option><option value="13">Car</option><option value="14">Jat.1</option><option value="15">Jat.2</option></select>';
-nikvoladi['kt'] = '<select size="7" name="book"></select>';
-nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Para</option><option value="2">Paci</option><option value="3">BhV</option><option value="4">MV</option><option value="5">CV</option><option value="6">Pari</option></select>';
-nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam1</option><option value=7>Yam2</option><option value=8>Yam3</option><option value=9>Paṭ1</option><option value=10>Paṭ2</option><option value=11>Paṭ3</option><option value=12>Paṭ4</option><option value=13>Paṭ5</option><option value=14>Paṭ6</option></select>';
-nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=9>Paṭ</option></select>';
-nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>DhS</option><option value=2>Vibh</option><option value=3>DhK</option><option value=4>Pugg</option><option value=5>KV</option><option value=6>Yam</option><option value=9>Paṭ</option></select>';
-nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
-nikvoladi['b'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Mūla</option><option value="2">Ṭīkā</option></select>';
-nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
-nikvoladi['ga'] = '<select size="7" name="book"></select>';
-nikvoladi['gt'] = '<select size="7" name="book"></select>';
 
 var kudvala = [];
 
@@ -380,48 +368,67 @@ abhivala['12'] = 6;
 abhivala['13'] = 6;
 abhivala['14'] = 6;
 
+var knames = [];
+
+knames.push('Khp');
+knames.push('Dhp');
+knames.push('Ud');
+knames.push('It');
+knames.push('Sn');
+knames.push('Vv');
+knames.push('Pv');
+knames.push('Th');
+knames.push('Thī');
+knames.push('Ap.1');
+knames.push('Ap.2');
+knames.push('Bv');
+knames.push('Cp');
+knames.push('Ja 1');
+knames.push('Ja 2');
+knames.push('Nidd I');
+knames.push('Nidd II');
+knames.push('Paṭis');
+knames.push('Mil');
+knames.push('Nett');
+knames.push('Peṭ');
+
+var ynames = []; // abhi names
+
+ynames.push('Dhs');
+ynames.push('Vibh');
+ynames.push('Dhātuk');
+ynames.push('Pp');
+ynames.push('Kv');
+ynames.push('Yam 1');
+ynames.push('Yam 2');
+ynames.push('Yam 3');
+ynames.push('Paṭṭh 1');
+ynames.push('Paṭṭh 2');
+ynames.push('Paṭṭh 3');
+ynames.push('Paṭṭh 4');
+ynames.push('Paṭṭh 5');
+ynames.push('Paṭṭh 6');
+
+var nikvoladi = new Array();
+nikvoladi['d'] = '<select size="7" name="book" onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
+nikvoladi['m'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
+nikvoladi['s'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>';
+nikvoladi['a'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>';
+nikvoladi['km'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">'+knames[0]+'</option><option value="2">'+knames[1]+'</option><option value="3">'+knames[2]+'</option><option value="4">'+knames[3]+'</option><option value="5">'+knames[4]+'</option><option value="6">'+knames[5]+'</option><option value="7">'+knames[6]+'</option><option value="8">'+knames[7]+'</option><option value="9">'+knames[8]+'</option><option value="10">'+knames[9]+'</option><option value="11">'+knames[10]+'</option><option value="12">'+knames[11]+'</option><option value="13">'+knames[12]+'</option><option value="14">'+knames[13]+'</option><option value="15">'+knames[14]+'</option><option value="16">'+knames[15]+'</option><option value="17">'+knames[16]+'</option><option value="18">'+knames[17]+'</option><option value="19">'+knames[18]+'</option><option value="20">'+knames[19]+'</option><option value="21">'+knames[20]+'</option></select>';
+nikvoladi['ka'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">'+knames[0]+'</option><option value="2">'+knames[1]+'</option><option value="3">'+knames[2]+'</option><option value="4">'+knames[3]+'</option><option value="5">'+knames[4]+'</option><option value="6">'+knames[5]+'</option><option value="7">'+knames[6]+'</option><option value="8">'+knames[7]+'</option><option value="9">'+knames[8]+'</option><option value="10">'+knames[9]+'</option><option value="12">'+knames[11]+'</option><option value="13">'+knames[12]+'</option><option value="14">'+knames[13]+'</option><option value="15">'+knames[14]+'</option></select>';
+nikvoladi['kt'] = '<select size="7" name="book"></select>';
+nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Pārā</option><option value="2">Pāci</option><option value="3">BhīV</option><option value="4">Mv</option><option value="5">Cv</option><option value="6">Pariv</option></select>';
+nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5]+'</option><option value=7>'+ynames[6]+'</option><option value=8>'+ynames[7]+'</option><option value=9>'+ynames[8]+'</option><option value=10>'+ynames[9]+'</option><option value=11>'+ynames[10]+'</option><option value=12>'+ynames[11]+'</option><option value=13>'+ynames[12]+'</option><option value=14>'+ynames[13]+'</option></select>';
+nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5].replace(/ 1$/,'')+'</option><option value=9>'+ynames[8].replace(/ 1$/,'')+'</option></select>';
+nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5].replace(/ 1$/,'')+'</option><option value=9>'+ynames[8].replace(/ 1$/,'')+'</option></select>';
+nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
+nikvoladi['b'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Mūla</option><option value="2">Ṭīkā</option></select>';
+nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
+nikvoladi['ga'] = '<select size="7" name="book"></select>';
+nikvoladi['gt'] = '<select size="7" name="book"></select>';
+
 function getBookName(nik, ht, no) { // no will be xml no - 1
 
-	var knames = [];
-
-	knames.push('Khp');
-	knames.push('Dhp');
-	knames.push('Ud');
-	knames.push('It');
-	knames.push('Sn');
-	knames.push('Vv');
-	knames.push('Pv');
-	knames.push('Th');
-	knames.push('Thī');
-	knames.push('Ap.1');
-	knames.push('Ap.2');
-	knames.push('Bv');
-	knames.push('Cp');
-	knames.push('Ja 1');
-	knames.push('Ja 2');
-	knames.push('Nidd I');
-	knames.push('Nidd II');
-	knames.push('Paṭis');
-	knames.push('Mil');
-	knames.push('Nett');
-	knames.push('Peṭ');
-
-	var ynames = []; // abhi names
-
-	ynames.push('Dhs');
-	ynames.push('Vibh');
-	ynames.push('Dhk');
-	ynames.push('Pugg');
-	ynames.push('Kv');
-	ynames.push('Yam 1');
-	ynames.push('Yam 2');
-	ynames.push('Yam 3');
-	ynames.push('Paṭ 1');
-	ynames.push('Paṭ 2');
-	ynames.push('Paṭ 3');
-	ynames.push('Paṭ 4');
-	ynames.push('Paṭ 5');
-	ynames.push('Paṭ 6');
 
 	if (nik == 'k' || nik == 'y') {
 		eval('no = '+nik+'names[\''+no+'\'];');
@@ -1412,3 +1419,7 @@ function historyBox() {
 	document.getElementById('history').innerHTML = hout;
 	
 }
+
+var pleasewait =  document.createElement('div');
+pleasewait.setAttribute('align','center');
+pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';

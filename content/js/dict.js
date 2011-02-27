@@ -7,7 +7,8 @@ function pedsearchstart()
 {
 	var getstring = document.form.manual.value;
       
-	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+	document.getElementById('difb').innerHTML='';
+document.getElementById('difb').appendChild(pleasewait);
 	
 
 	
@@ -98,10 +99,74 @@ function pedsearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML = listoutf + '</table><hr />';
 
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
+}
+
+function pedFullTextSearch(getstring) {
+	var finalout = '';
+	
+	var listouta = [];
+	
+	for (i = 0; i < 4; i++) {
+		
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		document.getElementById('mafbc').innerHTML = '';		
+		
+		var allp = xmlDoc.getElementsByTagName('data');
+		
+		for (j =0; j < allp.length; j++) {
+			var texttomatch = allp[j].textContent;
+			startmatch = texttomatch.search(getstring);
+			postpara = '';
+			if (startmatch >= 0)
+			{
+				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+colorcfg['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>'); 
+				while (startmatch >= 0)
+				{				
+					gotstring = texttomatch.match(getstring)[0];
+					endmatch = startmatch + gotstring.length;
+					beforem = texttomatch.substring(0,startmatch);
+					afterm = texttomatch.substring(endmatch,texttomatch.length);
+					postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
+					texttomatch = texttomatch.substring(endmatch);
+					startmatch = texttomatch.search(getstring);
+				}
+				postpara += afterm;
+
+				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+				
+				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+colorcfg['colped']+'">top</a>' + postpara + '</p><hr>';
+			}
+		}
+	}
+
+	// word list
+
+	var y = listouta.length;
+
+	var findiv = Math.ceil(y/3);
+	
+	var listoutf = '<hr /><table width="100%">';
+	
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
+	}
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 }
 
 var dppn = new Array();
@@ -111,7 +176,8 @@ function dppnsearchstart()
 
 	var getstring = document.form.manual.value;
 
-	document.getElementById('difb').innerHTML='<div align=center><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1></div>';
+	document.getElementById('difb').innerHTML='';
+	document.getElementById('difb').appendChild(pleasewait);
 
 	
 	
@@ -204,8 +270,11 @@ function dppnsearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML =  listoutf + '</table><hr />';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -270,12 +339,10 @@ function dppnFullTextSearch(getstring) {
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
-	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
-	
-	var finalout = sortaz(finalouta).join('');
-	
-	document.getElementById('difb').innerHTML += finalout;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
 }
 
@@ -285,10 +352,7 @@ var yg = [];
 
 function mlsearchstart()
 {
-	document.getElementById('difb').innerHTML='';
-	document.getElementById('anfs').innerHTML='';
-	document.getElementById('anfsd').innerHTML='';
-	document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
+	clearDivs();
 	
 	var getstring = document.form.manual.value;
 	
@@ -303,19 +367,19 @@ function mlsearchstart()
 		for (a in yt) yg.push([a].concat(yt[a]));
 	}
 		
-		
+	var cnt = 0;
 	for (x = 0; x < yg.length; x++)
 	{
 		var us = '';
 		var ud = '';
 
-		var gsplit = [yg[x][0],yg[x][4],yg[x][3]];
+		var gsplit = [yg[x][0],yg[x][3],yg[x][2]];
 
 		if(!document.form.sofulltext.checked) {
 			var tosearch = gsplit[0];
 		}
 		else {
-			var tosearch = yg[x][0]+' '+yg[x][4]+' '+yg[x][3];
+			var tosearch = yg[x][0]+' '+yg[x][3]+' '+yg[x][2];
 		}
         
         if (document.form.soregexp.checked) { // reg exp
@@ -326,10 +390,11 @@ function mlsearchstart()
 		}
 		if(yessir)
 		{
+			cnt++;
 			us = replaceunistandard(gsplit[0].replace(/,/g, ".").replace(/`n/g, "\"n"));
 			ud = replaceunistandard((gsplit[1] + ' (' + gsplit[2] + ')').replace(/`n/g, "\"n"));
 			
-			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + us + '</font></b> '+ud +'<br>');
+			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')">' + us + '</a></b> '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
@@ -341,8 +406,11 @@ function mlsearchstart()
 		finout += finouta[z];
 	}	
 	
-	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = finout + '</td></tr></table>';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -352,10 +420,7 @@ function epdsearchstart()
 		return;
 	}
 
-	document.getElementById('difb').innerHTML='';
-	document.getElementById('anfs').innerHTML='';
-	document.getElementById('anfsd').innerHTML='';
-	document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
+	clearDivs();
 	
 	var getstring = document.form.manual.value;
 	
@@ -399,9 +464,11 @@ function epdsearchstart()
 	{
 		finout += finouta[z];
 	}	
-	
-	document.getElementById('difb').innerHTML += finout + '</td></tr></table>';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = finout + '</td></tr></table>';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -411,7 +478,7 @@ function attsearchstart()
 	if(typeof(attlist) == 'undefined') {
 		return;
 	}
-	document.getElementById('difb').innerHTML='';
+	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
 	
@@ -454,8 +521,11 @@ function attsearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table>';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table>';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -465,7 +535,8 @@ function tiksearchstart()
 	if(typeof(tiklist) == 'undefined') {
 		return;
 	}
-	document.getElementById('difb').innerHTML='';
+
+	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
 	
@@ -508,8 +579,11 @@ function tiksearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table>';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table>';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -519,7 +593,8 @@ function titlesearchstart()
 	if(typeof(titlelist) == 'undefined') {
 		return;
 	}
-	document.getElementById('difb').innerHTML='';
+
+	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
 	
@@ -562,8 +637,11 @@ function titlesearchstart()
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td></tr>';
 	}
-	document.getElementById('difb').innerHTML += listoutf + '</table>';
-    document.getElementById('cdif').scrollTop=0;
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table>';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
@@ -572,6 +650,9 @@ function titlesearchstart()
 var pedfileget = '';
 function paliXML(file)
 {
+	
+	clearDivs('dif');
+
 	var tloc = file.split('/');
 	var t1 = tloc[1];	
 	var t2 = tloc[2];
@@ -585,8 +666,10 @@ function paliXML(file)
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
 	
+	var dataNode = document.createElement('<div>');
+	dataNode.innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
+	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
 
 	var pedln = []; // limit in folders
@@ -613,8 +696,8 @@ var dhmark = 0;
 
 function DPPNXML(file,which)
 {
-	document.getElementById('lt').innerHTML = '';
-	document.getElementById('lb').innerHTML = '';
+
+	clearDivs('dif');
 	
 	if(!which) { // not from select
 		var dppnhistt = [];
@@ -651,9 +734,13 @@ function DPPNXML(file,which)
 	
 	// output
 
+	var dataNode = document.createElement('<div>');
+	dataNode.innerHTML = '<div class="label" id="dppnl"></div><br/>' + data;
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = '<div class="label" id="dppnl"></div><br/>' + data;
+	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
+
+
 	var showing = '<select title="show history" onchange="dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);">';
 	
 	if (dppnhist.length > 1) { // show select
@@ -696,14 +783,20 @@ function DPPNXML(file,which)
 
 function atiSearchStart() {
 
+	clearDivs('dif');
+	
 	var getstring = document.form.manual.value;
 
 	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-	document.getElementById('difb').innerHTML='<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>';
+	var bannerDiv = document.createElement('div');
+	bannerDiv.innerHTML = '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>:<br><br>';
+	
+	document.getElementById('difb').appendChild(bannerDiv);
 	
 	getstring = getstring.replace(/^  */g, '').replace(/  *$/g, '').replace(/  */g, '%2B');
 	
 	var outNode = document.createElement('iframe');
+	outNode.setAttribute('frameBorder','0');
 	outNode.setAttribute('width','100%');
 	outNode.setAttribute('height',document.getElementById('cdif').offsetHeight);
 	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
@@ -774,7 +867,7 @@ function atiSearchOffline(getstring) {
 }
 namecount = [];
 
-function clickSearchOption() {
+function clickDictOption() {
 	if (document.form.dictin.value != '') {
 		document.form.lastsearch.value = document.form.dictin.value;
 		dictType();
@@ -858,8 +951,7 @@ function dictLoad() {
 
 function dictType(hard) {
 	clearDivs('dif');
-	var getstring = document.form.manual.value;
- 	if ((document.form.sofulltext.checked || !document.form.sostartword.checked) && getstring == '') return;
+	var getstring = document.form.dictin.value;
 	document.form.manual.value = replacevelstandard(document.form.dictin.value);
 	switch (document.form.sped.selectedIndex) {
 		case 0:
