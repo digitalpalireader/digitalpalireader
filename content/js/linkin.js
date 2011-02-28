@@ -1,6 +1,7 @@
 var outwords = new Array();  // the raw output
 var shortdefpost = new Array();
 
+
 var lastcolour = 0;
 
 function postout(input,divclicked,frombox)
@@ -46,10 +47,10 @@ function postout(input,divclicked,frombox)
 	//~ input = input.replace(/ii['"`]/g, 'i');
 	//~ input = input.replace(/uu['"`]/g, 'u');
 	input = input.replace(/[‘’“”`',{}?;!"-]/g, '');
-	input = input.replace(/xn/g, '`n');
+	input = input.replace(/xn/g, '"n');
 	input = input.toLowerCase();
-	input = input.replace(/\.([nmltd])/g, ",$1");
-	input = input.replace(/\./g, '');
+	input = input.replace(/\.([^nmltd])/g, "$1");
+	input = input.replace(/\.$/g, "");
 	input = input.replace(/ .+/g, '');
 		
 	
@@ -94,10 +95,12 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart); }  // check for an ending match
 	
 	if (matchedword) {
-		fullmatch = parts.concat(Array(matchedword[1])); // each part is a fake array of alt part defs, seperated by "#"
-		fullnames = partnames.concat(Array(matchedword[0]));
+		fullnames = partnames.concat([matchedword[0]]);
+		fullmatch = parts.concat([matchedword[1]]); // each part is a fake array of alt part defs, seperated by "#"
 		outwords.push(fullnames.join('-') + '$' + fullmatch.join('@')); // only when we match the end of the compound do we add results, making a fake array of partnames and one of parts (if any).  Arrays are seperated by $
-		if (matchedword[2]) {shortdefpost.push(shortdefpre.concat(matchedword[2]).join('$')); }
+		if (matchedword[2]) {
+			shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
+		}
 		else { shortdefpost.push(shortdefpre.join('$')); }
 	}
 	
@@ -434,8 +437,8 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		altarray.push('0^' + oneword.replace(/`$/,'') + '^2^' + resy);
 	}
 	else {
-		if (res.length != 0) { for (var i in res) { altarray.push(res[i] + '^' + oneword.replace(/`$/,'') + '^0'); } }
-		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j] + '^' + oneword + '^1'); } }
+		if (res.length != 0) { for (var i in res) { altarray.push(res[i] + '^' + oneword.replace(/`$/,'') + '^0'+(resy ? '^'+resy:'')); } }
+		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j] + '^' + oneword + '^1'+(resy ? '^'+resy:'')); } }
 	}
 	if(res.length == 0 && resn.length == 0 && !resy) { return null; }
 	return(Array(oneword.replace(/`$/,''),altarray.join('#'),resy));  // add oneword to the beginning to let us put the word together later

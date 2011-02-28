@@ -466,11 +466,11 @@ border:1px solid #FFF
 }
 
 .conjc {
-	margin:auto;
 	position:relative;
+	clear:both;
 }
 .conj {
-	margin:auto;
+	position:relative;
 	margin-top:20px;
 	margin-bottom:20px;
 	padding:20px;
@@ -483,15 +483,55 @@ border:1px solid #FFF
 	padding:5px;
 	position:absolute;
 	top:15px;
-	left:15px;
+	right:15px;
 	background-color: white;
 	background-color: RGBa(255,255,255,0.5);
 	border-radius:8px;
 	-moz-border-radius:8px;
 }
 
-
+#conjc {
+	text-align:center;
+	vertical-align:top;
+}
 /* misc */
+
+.leftalign {
+	text-align:left;
+}
+
+.rel {
+	position:relative;
+}
+.conjtable {
+margin-top:20px;
+margin-bottom:20px;
+border-collapse:collapse;
+padding:10px;
+}
+
+
+
+#matrelc {
+position:absolute;
+right:-18px;
+top:0;
+}
+.matrel {
+border-style: outset;
+width:18px;
+height:18px;
+font-weight: bold;
+font-family: 'courier new';
+}
+.matrels {
+width:18px;
+height:18px;
+border-style: inset;
+font-weight: bold;
+font-family: 'courier new';
+}
+
 
 .hide { display: none; }
 .green        { color: #00B900 }
@@ -550,7 +590,8 @@ p.cite  {
 	text-align: center;
 	}
 		
-table.dec {  margin: auto;
+table.dec {  
+	margin: auto;
 	padding:4px;
 	margin-top: 14pt;
 	border-collapse: collapse;

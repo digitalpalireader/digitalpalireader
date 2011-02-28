@@ -1,32 +1,3 @@
-function convoutput(spell) {
-	spell = spell.replace(/aa/g, '&#257;');
-	spell = spell.replace(/ii/g, '&#299;');
-	spell = spell.replace(/uu/g, '&#363;');
-	spell = spell.replace(/\,t/g, '&#7789;');
-	spell = spell.replace(/\,d/g, '&#7693;');
-	spell = spell.replace(/\`n/g, '&#7749;');
-	spell = spell.replace(/\,n/g, '&#7751;');
-	spell = spell.replace(/\,m/g, '&#7747;');
-	spell = spell.replace(/\~n/g, '&ntilde;');
-	spell = spell.replace(/\,l/g, '&#7735;');
-	spell = spell.replace(/AA/g, '&#256;');
-	spell = spell.replace(/II/g, '&#298;');
-	spell = spell.replace(/UU/g, '&#362;');
-	spell = spell.replace(/\,T/g, '&#7788;');
-	spell = spell.replace(/\,D/g, '&#7692;');
-	spell = spell.replace(/\,N/g, '&#7750;');
-	spell = spell.replace(/\,M/g, '&#7746;');
-	spell = spell.replace(/\~N/g, '&Ntilde;');
-	spell = spell.replace(/\,L/g, '&#7734;');
-
-	// periods are regular expressions
-	// so we changed them to commas
-	// for velthius match - here we change them back
-	
-	spell = spell.replace(/,/g, '.');
-	spell = spell.replace(/q/g, ',');
-	return spell;
-}
 
 function outputDef(which,first)
 {
@@ -40,6 +11,7 @@ function outputDef(which,first)
 
 	var hotlink;
 	
+	var conjWord = [] // word to pass to conjugate
 	
 	if (outwords.length > 1 && first) {
 		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
@@ -52,7 +24,13 @@ function outputDef(which,first)
 	}
 	
 	var owparts = outwords[which].split('$')[1].split('@');
-		
+	
+	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
+	if(myConj[3]) { // if root form is found, set up conjugation
+		conjWord.form = replaceunistandard(myConj[1].replace(/,/g, '.'));
+		conjWord.root = myConj[3];
+	}
+	
 	for (c in owparts) { // per part (with many variants)
 		
 		var partvars = owparts[c].split('#');
@@ -69,22 +47,22 @@ function outputDef(which,first)
 				// data[2] = category
 				// data[3] = concise definition (if any)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-
-			if (d == 0) { // first match (will go on top)
+			var dataout = replaceunistandard(data[1].replace(/,/g, '.').replace(/`/g, '"'));
+			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':
 					if (!hotlink) { hotlink = 'PED/' + data[0]; } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + convoutput(data[1]) + '</b></a>';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + '\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + dataout + '</b></a>';
 					break;
 				case '1':
 					if (!hotlink) { hotlink = 'dppn/' + data[0] +','+ data[1]; } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] +','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + convoutput(data[1]) + '</b></a>';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + data[0] +','+ data[1] + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + dataout + '</b></a>';
 					break;
 				case '2':
-					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + convoutput(data[1]) + '</b>';
+					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + dataout + '</b>';
 					break;
 				case '3':
-					osout += '<b style="color:' + colorcfg['coltext'] + '">' + convoutput(data[1]) + '</b>';
+					osout += '<b style="color:' + colorcfg['coltext'] + '">' + dataout + '</b>';
 					break;
 				}
 			}
@@ -112,9 +90,9 @@ function outputDef(which,first)
 		osout += '</td>';
 		
 	}
-	osout += '</tr></table>';
+	osout += (conjWord.root?'<td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate(\''+conjWord.root+'\',\'dif\',\''+conjWord.form+'\')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td>':'')+'</tr></table>';
 	
-	osout += '</td><td valign=top align=center id=c></td><td valign=top align=right>';
+	osout += '</td><td valign=top align=center id="anfcenter"></td><td valign=top align=right>';
 
 // add concise definitions
 	
@@ -154,7 +132,7 @@ function outputDef(which,first)
 			
 			
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<a href="javascript:void(0);" onclick="conjugate(\''+thisconcise[x]+'\',\'dif\')"><b style="color:' + colorcfg['colcpd'] + '";>' + conciseword + '</b></a>: ' + concisedef; } 
+				if (x == 0) { var sdfirst = '<b style="color:' + colorcfg['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef; } 
 				if (thisconcise.length > 1) {
 					
 					conciseoutput += '<option value="' + thisconcise[x] + ':' + conciseword + ':' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[1] + ')</option>'; 
@@ -184,5 +162,5 @@ function outputDef(which,first)
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
-	document.getElementById('spdout').innerHTML = '<a href="javascript:void(0);" onclick="conjugate(\''+replacevelstandard(spdcol[0])+'\',\'dif\');"><b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b></a> ' + spdcol[2];
+	document.getElementById('spdout').innerHTML = '<b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
 }

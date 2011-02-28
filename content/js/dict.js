@@ -12,14 +12,6 @@ document.getElementById('difb').appendChild(pleasewait);
 	
 
 	
-	getstring = getstring.replace(/"n/g, '`n');
-	if (document.form.soregexp.checked) {
-		getstring = getstring.replace(/\\\./g, ',');
-	}
-	else {
-		getstring = getstring.replace(/\./g, ',');
-	}
-
 	if(document.form.sofulltext.checked) { // full text search
 		
 		pedFullTextSearch(getstring);
@@ -61,25 +53,7 @@ document.getElementById('difb').appendChild(pleasewait);
 			
 			uniout = gsplit[0];
 			
-			uniout = uniout.replace(/aa/g, '\u0101');
-			uniout = uniout.replace(/ii/g, '\u012B');
-			uniout = uniout.replace(/uu/g, '\u016B');
-			uniout = uniout.replace(/,t/g, '\u1E6D');
-			uniout = uniout.replace(/,d/g, '\u1E0D');
-			uniout = uniout.replace(/`n/g, '\u1E45');
-			uniout = uniout.replace(/,n/g, '\u1E47');
-			uniout = uniout.replace(/,m/g, '\u1E43');
-			uniout = uniout.replace(/~n/g, '\u00F1');
-			uniout = uniout.replace(/,l/g, '\u1E37');
-			uniout = uniout.replace(/AA/g, '\u0100');
-			uniout = uniout.replace(/II/g, '\u012A');
-			uniout = uniout.replace(/UU/g, '\u016A');
-			uniout = uniout.replace(/,T/g, '\u1E6C');
-			uniout = uniout.replace(/,D/g, '\u1E0C');
-			uniout = uniout.replace(/,N/g, '\u1E46');
-			uniout = uniout.replace(/,M/g, '\u1E42');
-			uniout = uniout.replace(/~N/g, '\u00D1');
-			uniout = uniout.replace(/,L/g, '\u1E36');
+			uniout = replaceunistandard(uniout);
 			uniout = uniout.replace(/z/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
 			
@@ -120,7 +94,6 @@ function pedFullTextSearch(getstring) {
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 		
-		document.getElementById('mafbc').innerHTML = '';		
 		
 		var allp = xmlDoc.getElementsByTagName('data');
 		
@@ -181,13 +154,6 @@ function dppnsearchstart()
 
 	
 	
-	getstring = getstring.replace(/"n/g, '`n');
-	if (document.form.soregexp.checked) {
-		getstring = getstring.replace(/\\\./g, ',');
-	}
-	else {
-		getstring = getstring.replace(/\./g, ',');
-	}
 
 	if(document.form.sofulltext.checked) { // full text search
 		
@@ -230,25 +196,7 @@ function dppnsearchstart()
 				uniout = uniout.substring(0,uniout.length-2);
 			}
 
-			uniout = uniout.replace(/aa/g, '\u0101');
-			uniout = uniout.replace(/ii/g, '\u012B');
-			uniout = uniout.replace(/uu/g, '\u016B');
-			uniout = uniout.replace(/,t/g, '\u1E6D');
-			uniout = uniout.replace(/,d/g, '\u1E0D');
-			uniout = uniout.replace(/`n/g, '\u1E45');
-			uniout = uniout.replace(/,n/g, '\u1E47');
-			uniout = uniout.replace(/,m/g, '\u1E43');
-			uniout = uniout.replace(/~n/g, '\u00F1');
-			uniout = uniout.replace(/,l/g, '\u1E37');
-			uniout = uniout.replace(/AA/g, '\u0100');
-			uniout = uniout.replace(/II/g, '\u012A');
-			uniout = uniout.replace(/UU/g, '\u016A');
-			uniout = uniout.replace(/,T/g, '\u1E6C');
-			uniout = uniout.replace(/,D/g, '\u1E0C');
-			uniout = uniout.replace(/,N/g, '\u1E46');
-			uniout = uniout.replace(/,M/g, '\u1E42');
-			uniout = uniout.replace(/~N/g, '\u00D1');
-			uniout = uniout.replace(/,L/g, '\u1E36');
+			uniout = replaceunistandard(uniout);
 			uniout = uniout.replace(/f/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
 			
@@ -292,7 +240,6 @@ function dppnFullTextSearch(getstring) {
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 		
-		document.getElementById('mafbc').innerHTML = '';		
 		
 		var allp = xmlDoc.getElementsByTagName('entry');
 		
@@ -352,7 +299,7 @@ var yg = [];
 
 function mlsearchstart()
 {
-	clearDivs();
+	clearDivs('difanf');
 	
 	var getstring = document.form.manual.value;
 	
@@ -391,10 +338,10 @@ function mlsearchstart()
 		if(yessir)
 		{
 			cnt++;
-			us = replaceunistandard(gsplit[0].replace(/,/g, ".").replace(/`n/g, "\"n"));
-			ud = replaceunistandard((gsplit[1] + ' (' + gsplit[2] + ')').replace(/`n/g, "\"n"));
+			us = replaceunistandard(gsplit[0]);
+			ud = replaceunistandard(gsplit[1] + ' (' + gsplit[2] + ')');
 			
-			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')">' + us + '</a></b> '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
+			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b> '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
@@ -420,7 +367,7 @@ function epdsearchstart()
 		return;
 	}
 
-	clearDivs();
+	clearDivs('difanf');
 	
 	var getstring = document.form.manual.value;
 	
@@ -666,7 +613,7 @@ function paliXML(file)
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
 	
-	var dataNode = document.createElement('<div>');
+	var dataNode = document.createElement('div');
 	dataNode.innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
@@ -734,7 +681,7 @@ function DPPNXML(file,which)
 	
 	// output
 
-	var dataNode = document.createElement('<div>');
+	var dataNode = document.createElement('div');
 	dataNode.innerHTML = '<div class="label" id="dppnl"></div><br/>' + data;
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
@@ -814,8 +761,6 @@ function atiSearchOffline(getstring) {
 		xmlhttp.open("GET", getHomePath().replace(/\\/g, '/') +'/Extensions/digitalpalireader/content/'+atiD[i], false);
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		document.getElementById('mafbc').innerHTML = '';		
 		
 		var title = xmlDoc.getElementsByTagName('title')[0].textContent;
 		var data = xmlDoc.getElementsByTagName('div');

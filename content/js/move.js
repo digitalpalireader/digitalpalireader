@@ -224,14 +224,19 @@ function go_anchor(mydiv,n){
 }
 
 function clearDivs(which) { // place divs to be cleared here
-	if (!which || which == 'dif') { // dictionary frame stuff
+	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
 		document.getElementById('difb').innerHTML = '';
 		document.getElementById('lt').innerHTML = '';
 		document.getElementById('lb').innerHTML = '';
 	}
-	if (!which || which == 'anf') { // analyze frame stuff
+	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
 		document.getElementById('anfs').innerHTML='';
 		document.getElementById('anfsd').innerHTML='';
 		document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
+		moveframex(moveat);
+	}
+	if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
+		document.getElementById('mafbc').innerHTML='';
+		document.getElementById('matrelc').innerHTML='';
 	}
 }
