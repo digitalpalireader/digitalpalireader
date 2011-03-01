@@ -65,6 +65,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
+	data = data.replace(/'''/g, '’”');
 	data = data.replace(/''/g, '”');
 	data = data.replace(/'/g, '’');
 	data = data.replace(/[”"]ti/g, '” ”ti');
@@ -94,12 +95,20 @@ function formatuniout(data,which) { // prepare without links
 	//document.getElementById('mafa').innerHTML = data;	
 	var wb;
 	var b = 0;
-
+	var space = ' ';
    //alert(data);
 
 	for (var a = 0; a < wordbyword.length; a++)
 	{
 		wb = wordbyword[a];
+
+		// remove extra quotes
+		space = ' ';
+		if(/[”’]/.exec(wb.charAt(wb.length-1)) && wb.charAt(wb.length-1) == wordbyword[a+1].charAt(0)) {
+			wb = wb.substring(0,wb.length-1);
+			uniouta[a] = uniouta[a].substring(0,uniouta[a].length-1);
+			space = '';
+		}
 		
 		// VAR readings
 		
@@ -110,7 +119,7 @@ function formatuniout(data,which) { // prepare without links
 				altread = 0;
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
 			else altplus += wb + ' ';
 		}
@@ -119,11 +128,11 @@ function formatuniout(data,which) { // prepare without links
 				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(replaceunistandard(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a> ';
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
 			else {
 				altread = 1;
-				altplus = wb.substring(1) + ' ';
+				altplus = wb.substring(1) + space;
 			}
 		}
 
@@ -178,15 +187,15 @@ function formatuniout(data,which) { // prepare without links
 			if(!which) {// put it together as one link
 				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
 			}
-			finout += ' ';
-			convout += ' ';
+			finout += space;
+			convout += space;
 		}		
 
 		else if (wb.substring(0,2) == '<f') {
-			finout += wb + ' ';
+			finout += wb + space;
 		}		
 		else if (wb == '<p>') {
-			finout += '<p id="para'+paran+'">' + ' ';
+			finout += '<p id="para'+paran+'">' + space;
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -211,23 +220,23 @@ function formatuniout(data,which) { // prepare without links
 			volandpage = pageno.split('.');
 			
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
-			finout += ' <a class="tiny" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a> ';
+			finout += ' <a class="tiny" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a>' + space;
 		}
 		else if (which)
 		{
-			convout += wb + ' ';
+			convout += wb + space;
 			unioutb = uniouta[a];
 			unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
-			finout += unioutb + '  ';
+			finout += unioutb + space;
 		}
 		else
 		{
-			convout += wb.replace(/<[^>]*>/g, '') + ' ';
+			convout += wb.replace(/<[^>]*>/g, '') + space;
 			unioutb = uniouta[a];
 			//unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
-			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a> ';
+			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a>' + space;
 			b++;
 		}
 	}
