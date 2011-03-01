@@ -11,10 +11,10 @@
 	prem.push('e^0^0^a');
 	prem.push('i^0^3^ati');
 	prem.push('a^1^0^a');
-	prem.push('a,m^1^0');
-	prem.push('a,m^1^0^a');
-	prem.push('i,m^1^0');
-	prem.push('u,m^1^0'); 
+	prem.push('a.m^1^0');
+	prem.push('a.m^1^0^a');
+	prem.push('i.m^1^0');
+	prem.push('u.m^1^0'); 
 	prem.push('yo^0^1'); 
 	prem.push('to^0^1');
 	prem.push('aa^1^3^nt');
@@ -28,9 +28,9 @@
 	prem.push('si^0^3^ti');
 	prem.push('ahi^1^1');
 	prem.push('asu^1^1');
-	prem.push('anna,m^1^1');
-	prem.push('unna,m^1^1');
-	prem.push('inna,m^1^1');
+	prem.push('anna.m^1^1');
+	prem.push('unna.m^1^1');
+	prem.push('inna.m^1^1');
 	prem.push('avo^0^0^u');
 	prem.push('ato^1^2^nt');
 	prem.push('ato^1^2^ti');
@@ -50,10 +50,10 @@
 	prem.push('oma^0^0^ti');
 	prem.push('smaa^0^2'); 
 	prem.push('mhaa^0^0');
-	prem.push('smi,m^0^0');
+	prem.push('smi.m^0^0');
 
 	prem.push('ataa^1^0^nt');
-	prem.push('anta,m^3^0');
+	prem.push('anta.m^3^0');
 	prem.push('aaya^1^0'); 
 	prem.push('aahi^1^0');
 	prem.push('aasu^1^0');
@@ -104,35 +104,35 @@
 	
 	prem.push('maano^0^2^ti');
 	prem.push('maanaa^0^2^ti');
-	prem.push('maana,m^0^2^ti');
+	prem.push('maana.m^0^2^ti');
 	prem.push('maane^0^2^ti');
 	prem.push('maanena^0^2^ti');
 	prem.push('maanehi^0^2^ti');
 	prem.push('maanassa^0^2^ti');
-	prem.push('maanaana,m^0^2^ti');
-	prem.push('maanasmi,m^0^2^ti');
+	prem.push('maanaana.m^0^2^ti');
+	prem.push('maanasmi.m^0^2^ti');
 	prem.push('maanesu^0^2^ti');
 	
-	prem.push('iya,m^0^0');
-	prem.push('uya,m^0^0');
+	prem.push('iya.m^0^0');
+	prem.push('uya.m^0^0');
 	prem.push('asmaa^0^0');
 	prem.push('amhaa^0^0');
 	prem.push('itvaa^0^0^ati'); 
 	prem.push('tvaa^0^0^ti'); 
-	prem.push('itu,m^0^0^ati');
+	prem.push('itu.m^0^0^ati');
 	prem.push('eyya^0^0^ati');
-	prem.push('eyyu,m^0^0^ati');
+	prem.push('eyyu.m^0^0^ati');
 	prem.push('imhaa^0^0'); // aorist
-	prem.push('i,msu^0^1^ati'); // aorist
+	prem.push('i.msu^0^1^ati'); // aorist
 	prem.push('ittha^0^0'); // aorist
-	prem.push('aana,m^1^0'); 
-	prem.push('aaya,m^1^0'); 
-	prem.push('iina,m^1^0'); 
-	prem.push('iiya,m^1^0'); 
-	prem.push('uuna,m^1^0'); 
-	prem.push('uuya,m^1^0'); 
-	prem.push('abba,m^1^1');
-	prem.push('anta,m^0^0');
+	prem.push('aana.m^1^0'); 
+	prem.push('aaya.m^1^0'); 
+	prem.push('iina.m^1^0'); 
+	prem.push('iiya.m^1^0'); 
+	prem.push('uuna.m^1^0'); 
+	prem.push('uuya.m^1^0'); 
+	prem.push('abba.m^1^1');
+	prem.push('anta.m^0^0');
 	prem.push('eyya^1^0^ti');
 	prem.push('eyyati^0^0^ati');
 	prem.push('eyyasi^0^0^ati');
@@ -156,4 +156,4 @@
 
 	prem.push('aapetvaa^1^0^ti');
 
-	prem.push('iya,m^1^7');
+	prem.push('iya.m^1^7');
