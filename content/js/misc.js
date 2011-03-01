@@ -969,9 +969,14 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							}
 
 							atiNo = atiNo+'';
-							if(atiNo.length == 2) atiNo='0'+atiNo;
+							while(atiNo.length < 3) { atiNo='0'+atiNo; }
 						}
-						if (bookn == 7) {
+						else if (bookn == 4) {
+							atiNo = parseInt(atiNo,10);
+							atiNo = atiNo+'';
+							while(atiNo.length < 3) { atiNo='0'+atiNo; }
+						}
+						else if (bookn == 7) {
 							atiNo = parseInt(atiNo,10);
 							if(atiNo >= 31) { // parābhava sutta
 								atiNo++; 
@@ -987,7 +992,19 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							}
 
 							atiNo = atiNo+'';
-							if(atiNo.length == 2) atiNo='0'+atiNo;
+							while(atiNo.length < 3) { atiNo='0'+atiNo; }
+						}
+						else if (bookn == 11) {
+							atiNo = parseInt(atiNo,10);
+							if(atiNo == 7 || atiNo == 8) { // saññāsutta - DPR has both in one sutta, ATI (PTS) split them
+								atiNo = 7;
+							} 
+							if(atiNo > 8) { // saññāsutta
+								atiNo--;
+							} 
+
+							atiNo = atiNo+'';
+							while(atiNo.length < 3) { atiNo='0'+atiNo; }
 						}
 						
 						if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiNo.indexOf(d)==0)) {
