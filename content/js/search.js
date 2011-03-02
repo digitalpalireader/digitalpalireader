@@ -205,6 +205,7 @@ function resetvalues() {
     document.getElementById('stfb').innerHTML = '';
     document.getElementById('stfc').innerHTML = '';
     document.getElementById('showing').innerHTML = '';
+	document.getElementById('searchb').scrollTop = 0;
 }
 
 function pausesall() 
@@ -286,6 +287,14 @@ function bounce2()
 	setTimeout('importXMLs(2)', 10)
 }
 
+function bounce3() {
+	importXMLs(3);
+}
+
+function finishSearch() {
+	document.getElementById('stfstop').setAttribute('style','display:none');
+	document.getElementById('sbfbc').scrollTop = 0;
+}
 
 function importXMLs(cnt)
 {
@@ -373,7 +382,7 @@ function importXMLs(cnt)
 				qz = 0;
 				bookperm = 0;
 				document.getElementById('stf'+nikletter[rescount]).style.color=colorcfg['colsel'];
-				document.getElementById('stfstop').setAttribute('style','display:none');
+				finishSearch();
 			}			
 	}	
 	else if (cnt == 2) // nikaya
@@ -428,7 +437,7 @@ function importXMLs(cnt)
 			qz = 0;
 			bookperm = 0;
 			thiscount = 0;
-			document.getElementById('stfstop').setAttribute('style','display:none');
+			finishSearch();
 		}
 	}
 	else if (cnt == 3) // this book
@@ -452,7 +461,7 @@ function importXMLs(cnt)
         createTables(xmlDoc);
 
         
-        document.getElementById('stfstop').setAttribute('style','display:none');
+		finishSearch();
 	}
 	document.getElementById('searchb').scrollTop = 0; //vertical scroll
 	buffer = '';
@@ -516,9 +525,9 @@ function createTables(xmlDoc)
 	var exwordNode = document.createElement('div');
 	exwordNode.setAttribute("id",'searchres');
 	
+	var outNode = document.createElement('div');
 	var finalout = '';
 
-	var outNode = document.createElement('div');
 
 	var match = 0;
 	var nummatch = 0;
@@ -569,6 +578,8 @@ function createTables(xmlDoc)
 
 						for (var tmp = 0; tmp < z.length; tmp++) // per paragraph
 						{
+
+
 							texttomatch = z[tmp].textContent.substring(4);
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 							if (document.form.usearch.value.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
@@ -693,11 +704,9 @@ function createTables(xmlDoc)
 											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
-									}
-									document.getElementById('sbfab').innerHTML = exwordout + '</tr></table>';
-								
+									}								
 																
-									finalout += '<div id="' + countmatch + tagtitle + '"><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -729,6 +738,7 @@ function createTables(xmlDoc)
 									match = 1;
 									thiscount++;									
 									countmatch++;
+
 								}
 								yesall = 0;
 							}
@@ -829,22 +839,15 @@ function createTables(xmlDoc)
 
 									for (ex = 0; ex < findiv; ex++)
 									{
-										exwordout += '<tr><td><a href="#" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+										exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 									}
 									exwordout += '</table>';
-									
-									exwordNode.innerHTML = exwordout;
-									
-									document.getElementById('sbfab').innerHTML = '';
-									document.getElementById('sbfab').appendChild(exwordNode);									
-									
+																		
 									postpara += afterm;
 
 									// titles
-									
-									outNode.setAttribute("id", countmatch + tagtitle);
-							
-									finalout += '<p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
+																
+									finalout += '<div id='+countmatch + tagtitle+'><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -871,7 +874,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -880,6 +883,7 @@ function createTables(xmlDoc)
 									thiscount++;
 									countmatch++;
 									cmval = '';
+
 								}
 							}
 							if (count == 3) document.getElementById('num').innerHTML = '<font style="color:' + colorcfg['colsel'] + '">' + thiscount + '</font>';
@@ -891,22 +895,32 @@ function createTables(xmlDoc)
 		}
 	}
 	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
-	if (match == 0) document.getElementById('sbfb').innerHTML += '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + bookname + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
-	else {
+	if (match == 0) {
+		finalout = '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + bookname + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
 		outNode.innerHTML = finalout;
 		document.getElementById('sbfb').appendChild(outNode);
 	}
-	
+	else {
+		exwordNode.innerHTML = exwordout;
+		document.getElementById('sbfab').innerHTML = '';
+		document.getElementById('sbfab').appendChild(exwordNode);									
+		outNode.innerHTML = finalout;
+		document.getElementById('sbfb').appendChild(outNode);
+	}
 	match = 0;
 }
 
 function showonly(string) {
 
 	var da = document.getElementById('sbfb').getElementsByTagName('div');
-	for (x = 0; x < da.length; x++) {
-		if (string == 'xyz') da[x].style.display = "block";
-		else {		
-			if (da[x].id.indexOf('q' + string + 'q') > -1) da[x].style.display = "block";
+	if (string == 'xyz') {
+		for (x = 0; x < da.length; x++) {
+			da[x].style.display = "block";
+		}
+	}
+	else {	
+		for (x = 0; x < da.length; x++) {
+			if (da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
 	}
@@ -926,7 +940,6 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierb);
 	getplace(temp);
 	if (stringra) {
-		alert
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');
 		if(document.form.tsoregexp.checked) {
