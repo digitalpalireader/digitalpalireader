@@ -170,15 +170,3 @@ function sortaz(mydata){  // sort velthius pali array
 	}
 	return outdata;
 }
-
-function loaded() {
-
-	var x = [];
-
-	for (i in nameda) {
-		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+nameda[i]);
-	}
-	var y = sortaz(x);
-			
-	document.getElementById('pad').innerHTML = y.join('\n');
-}

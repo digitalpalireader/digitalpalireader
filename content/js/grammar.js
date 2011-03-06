@@ -25,7 +25,7 @@ function conjugate(word, dif, which) {
 		return;
 	}
 
-	moveframex(3);
+	//moveframex(3);
 	moveframey('dif');
 	
 	var whichR = new RegExp('([> ])'+which+'([<,])','gi');

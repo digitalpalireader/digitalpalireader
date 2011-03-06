@@ -5,8 +5,72 @@ function dev() {
 	document.textpad.pad.value = '';
 	
 //DcompareMAT();
-//moveframey('scf')
+moveframey('scf')
 }
+
+function DcheckWords() {
+	var nik = 'd';
+	var h = 'm';
+	var books = 3;
+	var out = [];
+	var out2 = [];
+	
+	for (i=2; i < books; i++) {		
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'xml/'+nik+(i+1)+h+'.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+
+		var u = xmlDoc.getElementsByTagName("h0");
+		
+		for (var a = 0; a < u.length; a++) // per h0
+		{							
+			var v = u[a].getElementsByTagName("h1");
+				
+			for (var b = 0; b < v.length; b++) // per h1
+			{			
+				var w = v[b].getElementsByTagName("h2");
+			
+				for (var c = 0; c < w.length; c++) // per h2
+				{
+					var x = w[c].getElementsByTagName("h3");
+					
+					for (var d = 0; d < x.length; d++) // per h3
+					{
+						var y = x[d].getElementsByTagName("h4");
+						
+						for (var e = 0; e < y.length; e++) // per h4
+						{
+							var z = y[e].getElementsByTagName("p");
+							for (var f = 0; f < z.length; f++) // per p
+							{
+								var text = z[f].textContent.replace(/\[[0-9]*\]/g,'').replace(/\^[be]b*\^/g, '').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\{[^}]*\}/g, '').replace(/[‘’“”`',{}?;!-]/g, '').replace(/\.([^nmltd])/g, "$1").replace(/"([^n])/g, "$1").replace(/ "/g, " ").toLowerCase().split(' ');
+								for (zz in text) {
+									outwords = [];
+									var input = text[zz].replace(/\.$/g, "")
+									if (input.length < 2) continue;
+									analyzeword(input);
+									if (outwords.length == 0) {
+										if(out[input]) {
+											out[input]++;
+										}
+										else out[input] = 1;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	for (i in out) {
+		out2.push(out[i] + ' ' + i);
+	}
+	out2.sort();
+	document.textpad.pad.value = out2.join('\n');
+}
+
 
 function makeInflect() {
 
@@ -663,4 +727,18 @@ function noahd() {
 		out += 'yt['+replacevelstandard(x.shift()).replace(/"n/g, '`n').replace(/\./g, ',')+'] = ['+x.join(',')+'];\n';
 	}
 	writeFile('english1.js', out);
+}
+
+
+
+function Dloaded() {
+
+	var x = [];
+
+	for (i in nameda) {
+		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+nameda[i]);
+	}
+	var y = sortaz(x);
+			
+	document.getElementById('pad').innerHTML = y.join('\n');
 }

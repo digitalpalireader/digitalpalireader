@@ -813,7 +813,7 @@ function atiSearchOffline(getstring) {
 namecount = [];
 
 function clickDictOption() {
-	if (document.form.dictin.value != '') {
+	if (document.form.dictin.value != '' && cfg['autodict'] == 'checked') {
 		document.form.lastsearch.value = document.form.dictin.value;
 		dictType();
 	}
@@ -888,6 +888,7 @@ function dictLoad() {
 				newScript.src = 'js/titles.js';
 				headID.appendChild(newScript);
 			}
+		break;
 		case 8: // ATI
 			document.getElementById('soNO').style.display = 'block';
 		break;

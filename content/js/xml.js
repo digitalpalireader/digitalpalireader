@@ -218,23 +218,18 @@ function importXML(labelsearch,para)
 var maxlength = 20;  // change for display purposes, will affect history as well.
 
 function makeTitleSelect(xml,tag) { // output select tag with titles in options
-	var name, namea, count;
+	var name, namea;
 	var outlist = [];
 	for (var a = 0; a < xml.length; a++)
 	{
 		name = xml[a].getElementsByTagName(tag);
-		if (name[0].childNodes[0] && name[0].textContent.length > 1) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else {
+		if (name[0].childNodes[0] && name[0].textContent.length > 1) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
+		else {
 			namea = unnamed;
 			outlist.push(namea);
 			continue;
 		}
-		namea = replaceunistandard(namea);
 		
-		if (namea.length > maxlength + 3) 
-		{
-			namea = namea.substring(0,maxlength);
-			namea += '...';
-		}
 		namea = translit(shortenTitle(namea));
 
 		outlist.push(namea);
@@ -243,6 +238,7 @@ function makeTitleSelect(xml,tag) { // output select tag with titles in options
 }
 
 function shortenTitle(name) {
+	name = replaceunistandard(name);
 	if(name.length < maxlength) return name;
 	name = name.substring(0,maxlength);
 	name += '...';
@@ -295,7 +291,8 @@ function gettitles(altget,stop,prev,ssect)
 	
 	axml = xmlDoc.getElementsByTagName("ha");
 	namea = axml[0].getElementsByTagName("han");
-	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else name = unnamed;
+	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
+	else name = unnamed;
 	name = shortenTitle(name);
 	document.getElementById('title').innerHTML = '<input type="button" value="'+name+'" title="click to return to index" onclick="importXMLindex();">';
 		
