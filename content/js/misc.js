@@ -70,12 +70,12 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/'/g, '’');
 	data = data.replace(/[”"]ti/g, '” ”ti');
 	data = data.replace(/['’]+ti/g, '’ ’ti');
-	data = data.replace(/[”"]nti/g, '” ”nti');
-	data = data.replace(/['’]+nti/g, '’ ’nti');
+	data = data.replace(/[”"]nti/g, '.m” ”ti');
+	data = data.replace(/['’]+nti/g, '.m’ ’ti');
 	data = data.replace(/\^b\^/g, '<@>');
 	data = data.replace(/\^eb\^/g, '</@>');
-	data = data.replace(/["]+<\/@>nti/g, '”</@> ”nti');
-	data = data.replace(/['’]+<\/@>nti/g, '’</@> ’nti');
+	data = data.replace(/["]+<\/@>nti/g, '.m”</@> ”ti');
+	data = data.replace(/['’]+<\/@>nti/g, '.m’</@> ’ti');
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
 	data = data.replace(/\^a\^\"/g, ' z');
@@ -86,7 +86,8 @@ function formatuniout(data,which) { // prepare without links
 	//data = data.replace(/v\^/g, '');
 	data = data.replace(/\}/g, '} ');
 	data = data.replace(/   */g, ' ');
-	var uniouta = replaceunistandard(data).split(' ');
+	var uniouta = replaceunistandard(data).replace(/[”’] ([”’])/g, " $1").split(' ');
+
 	//data = data.replace(/\"/g, '\u00B4');
 	//document.textpad.pad.value = data;
 	var wordbyword = data.split(' ');
@@ -101,14 +102,13 @@ function formatuniout(data,which) { // prepare without links
 	for (var a = 0; a < wordbyword.length; a++)
 	{
 		wb = wordbyword[a];
-
-		// remove extra quotes
+		
+		// remove space where extra quotes were
 		space = ' ';
 		if(/[”’]/.exec(wb.charAt(wb.length-1)) && wb.charAt(wb.length-1) == wordbyword[a+1].charAt(0)) {
-			wb = wb.substring(0,wb.length-1);
-			uniouta[a] = uniouta[a].substring(0,uniouta[a].length-1);
 			space = '';
 		}
+
 		
 		// VAR readings
 		

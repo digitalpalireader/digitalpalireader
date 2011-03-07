@@ -89,6 +89,36 @@ else {
 		}
 	}
 
+	function readExtFile(myDir)
+	{
+		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+		var dir = DIR.get("Home", Components.interfaces.nsIFile);
+		var dirs = myDir.split('/');
+		for (i in dirs) {
+			dir.append(dirs[i]);
+			if ( !dir.exists() )
+			{
+				return false;
+			}
+		}
+		var aFile = dir.clone();
+		try {
+			var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
+			istream.init(aFile, 1, 0, false);
+			var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
+			sstream.init(istream);
+			var content = sstream.read(sstream.available());
+			sstream.close();
+			istream.close();
+			return content;
+		}
+		catch(ex)
+		{
+			return false;
+		}
+	}
+
+
 	function getHomePath() {
 		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 		var dir = DIR.get("Home", Components.interfaces.nsIFile);

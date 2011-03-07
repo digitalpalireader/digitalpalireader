@@ -239,6 +239,9 @@ function conjugateVerb(word) {
 	out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br/><br/></div>'; // description
 	
 	var verbCTense = yto[5].split('.')[1];
+	
+	// if not present tense, only output the current tense
+	
 	if(verbCTense != 'pres') {
 		out += '<table class="conjtable"><tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 		var verb = infV[yto[5]];
@@ -271,12 +274,12 @@ function conjugateVerb(word) {
 	var verbVoice = yto[5].split('.')[0];
 	var verbType = yto[5].replace(/.+\..+\./,'.'); 
 	
-	var verbAdd = ['','','eyy','iss','iss'];
+	var verbAdd = [];
+	verbAdd[0] = ['','','eyy','iss','iss'];
+	verbAdd[1] = ['','','eyy','ess','ess'];
 	
 	if(verbType == '.') verbType = '';		
 
-	// first table (present, imperative, optative)
-	
 	for (m in verbName) {
 		
 		out += '<table class="butc"><tr><td class="toprow"></td><td class="toprow" colspan="4">'+verbName[m]+'</td></tr><tr><td class="toprow"></td><td class="toprow" colspan="2">Parassapada</td><td class="toprow" colspan="2">Attanopada</td></tr><tr><td class="toprow"></td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
@@ -286,7 +289,7 @@ function conjugateVerb(word) {
 			for (n = 0; n < 2; n++) { // per voice
 				for (k = 0; k < 2; k++) { // per number
 					out+='<td class="decb small'+ (n != 1 ? '' : ' whiteb') + '">'
-					var verb = infV[(n == 0 ? verbVoice : 'md') + '.' + verbTense[m]+((verbTense[m] == 'pres' || verbTense[m] == 'impv' || (verbTense[m] == 'opt' && n == 1)) ? verbType : '')];
+					var verb = infV[(n == 0 ? verbVoice : 'md') + '.' + verbTense[m]+(((verbTense[m] == 'pres' || verbTense[m] == 'impv' || (verbTense[m] == 'opt' && n == 1)) && verbVoice == 'ac') ? verbType : '')];
 					if(verb == undefined || verb[pi][k] == undefined) {
 						out += '-';
 					}
@@ -294,7 +297,7 @@ function conjugateVerb(word) {
 						var splitverb = verb[pi][k];
 						var allthis = [];
 						for (l in splitverb) {
-							allthis.push(stem + verbAdd[m] + splitverb[l]);
+							allthis.push(stem + (verbVoice != 'ca' ? verbAdd[0][m] : verbAdd[1][m]) + splitverb[l]);
 						}
 						out += allthis.join(', ');
 					}

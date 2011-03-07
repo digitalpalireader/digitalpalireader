@@ -46,7 +46,8 @@ function postout(input,divclicked,frombox)
 	//~ input = input.replace(/aa['"`]/g, 'a');
 	//~ input = input.replace(/ii['"`]/g, 'i');
 	//~ input = input.replace(/uu['"`]/g, 'u');
-	input = input.replace(/[‘’“”`',{}?;!"-]/g, '');
+	input = input.replace(/([aiu])[aiu][’”]/g, "$1");
+	input = input.replace(/[‘“’”`',{}?;!"-]/g, '');
 	input = input.replace(/xn/g, '"n');
 	input = input.toLowerCase();
 	input = input.replace(/\.([^nmltd])/g, "$1");
@@ -132,9 +133,11 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 
 var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning;
 notpart["ko"] = 1;
+notpart["ka"] = 2;
+notpart["ya"] = 2;
+notpart["ta"] = 2;
 notpart["va"] = 1;
 notpart["vaa"] = 1;
-notpart["ya"] = 1;
 notpart["da"] = 1;
 notpart["hi"] = 1;
 notpart["ha"] = 1;
@@ -158,13 +161,16 @@ indeclinable["na"] = 1;
 //indeclinable["ca"] = 1;
 
 var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.
-specsuf["~nca"] = '1/1501^~nca^0#ca';
-specsuf["iiti"] = '0/3190^iiti^0#iti';
-specsuf["pi"] = '2/2866^pi^0#pi';
-specsuf["~nhi"] = '4/1234^~nhi^0#hi';
-specsuf["va"] = '3/1047^va^0#va';
-specsuf["eva"] = '0/4338^eva^0#eva';
-specsuf["idha"] = '0/3208^idha^0#idha';
+specsuf["~nca"] = '1/1501^~nca^0#ca#';
+specsuf["iiti"] = '0/3190^ti^0#iti#ii';  // these won't work...
+specsuf["aati"] = '0/3190^ti^0#iti#aa';
+specsuf["uuti"] = '0/3190^ti^0#iti#uu';
+specsuf["oti"] = '0/3190^ti^0#iti#o';
+specsuf["pi"] = '2/2866^pi^0#pi#';
+specsuf["~nhi"] = '4/1234^~nhi^0#hi#';
+specsuf["va"] = '3/1047^va^0#va#';
+specsuf["eva"] = '0/4338^eva^0#eva#';
+specsuf["idha"] = '0/3208^idha^0#idha#';
 
 var fm = 0;
 
@@ -209,7 +215,6 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		pre = preach[3]; // new ending if any
 		prf = preach[4]; // is a verb?
 
-		if (prd == 0) prd = 1; // minimum one length
 
 		if (cwt[prb] == pra && oneword.length > (prb + prd)) 
 		{
@@ -218,7 +223,6 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		}
 		
 	}
-
 
 	var res = [];
 	var resn = [];
@@ -341,26 +345,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				}
 			}
 		}
-		
-	// special suffixes
-
-		if (res.length == 0 && resn.length == 0 && !resy)
-		{
-
-			for (var tempsuf = 5; tempsuf > 0; tempsuf--) {
-				var cutsuf = oneword.substring(oneword.length - tempsuf);
-				//
-				if (specsuf[cutsuf]) {
-					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)); // run find function on desuffixed word
-					if (desuf) {
-						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+'-'+cutsuf, desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
-						return outsuf;
-					}
-				}
-			}			
-		}
 	}
-
 
 	if(nextpart) { 
 
@@ -387,7 +372,24 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	else { 
 		
 // do this if compound end or non-compound
-		
+
+	// special suffixes
+
+		if (res.length == 0 && resn.length == 0 && !resy)
+		{
+
+			for (var tempsuf = 5; tempsuf > 0; tempsuf--) {
+				var cutsuf = oneword.substring(oneword.length - tempsuf);
+				//
+				if (specsuf[cutsuf]) {
+					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2]); // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
+					if (desuf) {
+						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+'-'+cutsuf, desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
+						return outsuf;
+					}
+				}
+			}			
+		}		
 			
 	}
 	

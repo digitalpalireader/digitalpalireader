@@ -65,10 +65,18 @@ document.getElementById('difb').appendChild(pleasewait);
 
 	var y = finouta.length;
 
+
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<p>PED entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -130,6 +138,14 @@ function pedFullTextSearch(getstring) {
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<hr /><table width="100%">';
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
 	
 	for (z = 0; z < findiv; z++)
 	{
@@ -213,6 +229,14 @@ function dppnsearchstart()
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<p>DPPN entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
 	
 	for (z = 0; z < findiv; z++)
 	{
@@ -281,6 +305,14 @@ function dppnFullTextSearch(getstring) {
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<hr /><table width="100%">';
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
 	
 	for (z = 0; z < findiv; z++)
 	{
@@ -347,6 +379,14 @@ function mlsearchstart()
 	}
 	
 	finout = '<table width=100%><tr><td valign="top">';
+	if(finouta.length == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = finout + 'No results</td></tr></table>';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
 	
 	for (var z = 0; z < finouta.length; z++)
 	{
@@ -406,7 +446,14 @@ function epdsearchstart()
 	}
 	
 	finout = '<table width=100%><tr><td valign="top">';
-	
+	if(finouta.length == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = finout + 'No results</td></tr></table>';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}		
 	for (var z = 0; z < finouta.length; z++)
 	{
 		finout += finouta[z];
@@ -463,7 +510,15 @@ function attsearchstart()
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<p>Aṭṭhakathā term search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
+		
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -521,7 +576,15 @@ function tiksearchstart()
 	var findiv = Math.ceil(y/3);
 	
 	var listoutf = '<p>Ṭīka term search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
+		
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -579,7 +642,15 @@ function titlesearchstart()
 	var findiv = Math.ceil(y/2);
 	
 	var listoutf = '<p>Title search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
+		
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td></tr>';
@@ -734,6 +805,11 @@ function atiSearchStart() {
 	
 	var getstring = document.form.manual.value;
 
+	if(cfg['catioff'] == 'checked') {
+		atiSearchOffline(getstring);
+		return;
+	}
+
 	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 	var bannerDiv = document.createElement('div');
 	bannerDiv.innerHTML = '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>:<br><br>';
@@ -754,61 +830,80 @@ function atiSearchOffline(getstring) {
 	
 	var finalout = '';
 	
-	var listouta = [];
+	var listout = '';
 	
-	for (i = 0; i < atiD.length; i++) {
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", getHomePath().replace(/\\/g, '/') +'/Extensions/digitalpalireader/content/'+atiD[i], false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		var title = xmlDoc.getElementsByTagName('title')[0].textContent;
-		var data = xmlDoc.getElementsByTagName('div');
-		for (j in data) {
-			if(data[j].id == 'H_content') {
-			var texttomatch = data[j].textContent;
-				startmatch = texttomatch.search(getstring);
-				postpara = '';
-				if (startmatch >= 0)
-				{
-					listouta.push('<a href="#atio'+i+'" style="color:'+colorcfg['colped']+'">' + title + '</a><br>'); 
-					while (startmatch >= 0)
-					{				
-						gotstring = texttomatch.match(getstring)[0];
-						endmatch = startmatch + gotstring.length;
-						beforem = texttomatch.substring(0,startmatch);
-						afterm = texttomatch.substring(endmatch,texttomatch.length);
-						postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
-						texttomatch = texttomatch.substring(endmatch);
-						startmatch = texttomatch.search(getstring);
-					}
-					postpara += afterm;
+	var buffer = 30; // number of letters to add before and after the match
 
-					postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
-					
-					finalout += '<a name="atio'+i+'"><p><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a>' + postpara + '</p><hr>';
+	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />ATI full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line):<br><br><div id="dictList"></div></div><hr><hr>';
+	
+	var nik = ['D','M','S','A','K'];
+	for (d in nik) {
+		if(!document.getElementById('soNS'+nik[d]).checked) continue;
+		var titleNode = document.createElement('div');
+		titleNode.innerHTML = '<hr><h1>'+nik[d]+'</h1>';
+		document.getElementById('difb').appendChild(titleNode);
+
+		var titleNode2 = document.createElement('div');
+		titleNode2.innerHTML = '<hr><b>'+nik[d]+'</b><br><br>';
+		document.getElementById('dictList').appendChild(titleNode2);
+		
+		eval('var anik = ati'+nik[d]+';');
+		for (var c = 0; c < anik.length; c++) {
+			var cont = readExtFile(cfg['catiloc']+'/html/tipitaka/'+anik[c]);
+			var parser=new DOMParser();
+			var xmlDoc = parser.parseFromString(cont,'text/xml');
+
+			var title = replaceunistandard(xmlDoc.getElementsByTagName('title')[0].textContent);
+			var data = xmlDoc.getElementsByTagName('div');
+			for (j in data) {
+				if(data[j].id == 'H_content') {
+				var texttomatch = data[j].textContent;
+					startmatch = texttomatch.search(getstring);
+					postpara = '';
+					if (startmatch >= 0)
+					{
+						var outNode = document.createElement('div');
+						outNode.setAttribute('style','position:relative')
+						listout = '<a href="#atio'+c+'" style="color:'+colorcfg['colsel']+'">' + title + '</a>'; 
+						while (startmatch >= 0)
+						{				
+							var gotstring = texttomatch.match(getstring)[0];
+							var endmatch = startmatch + gotstring.length;
+
+							var buffers = buffer;
+							var buffere = buffer;
+							
+							while(startmatch-buffers > 0) { // get first space before buffer
+								if(texttomatch.charAt(startmatch-buffers-1) == ' ') break;
+								buffers--;
+							}
+							while(endmatch+buffere < texttomatch.length) { // get first space before buffer
+								if(texttomatch.charAt(endmatch+buffere) == ' ') break;
+								buffere++;
+							}
+							beforem = '... '+texttomatch.substring(startmatch-buffers,startmatch);
+							afterm = texttomatch.substring(endmatch,endmatch+buffere) + ' ...';
+							postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + afterm + '<br/>';
+							texttomatch = texttomatch.substring(endmatch);
+							startmatch = texttomatch.search(getstring);
+						}
+
+						postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+						
+						outNode.innerHTML = '<b><a href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a name="atio'+c+'" href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['coldppn']+'">top</a><p>' + postpara + '</p>';
+
+						document.getElementById('difb').appendChild(outNode);
+
+						// word list
+						var listNode = document.createElement('div');
+						listNode.innerHTML = listout;
+						document.getElementById('dictList').appendChild(listNode);
+					}
 				}
 			}
-		}
-	}		
-
-	// word list
-
-	var y = listouta.length;
-
-	var findiv = Math.ceil(y/3);
-	
-	var listoutf = '<hr /><table width="100%">';
-	
-	for (z = 0; z < findiv; z++)
-	{
-		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
+		}		
 	}
-	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>';
-	document.getElementById('difb').innerHTML += listoutf + '</table><hr />';
-	document.getElementById('difb').innerHTML += finalout;
 	document.getElementById('cdif').scrollTop=0;
-
 }
 namecount = [];
 
@@ -825,6 +920,7 @@ function dictLoad() {
 	document.getElementById('soFT').style.display = 'none';
 	document.getElementById('soSW').style.display = 'none';
 	document.getElementById('soRX').style.display = 'none';
+	document.getElementById('soNS').style.display = 'none';  // Nikaya Select
 	switch (which) {
 		case 0: //dpr
 			document.getElementById('soNO').style.display = 'block';
@@ -890,7 +986,8 @@ function dictLoad() {
 			}
 		break;
 		case 8: // ATI
-			document.getElementById('soNO').style.display = 'block';
+			if(cfg['catioff'] == 'checked') document.getElementById('soNS').style.display = 'block';
+			else document.getElementById('soNO').style.display = 'block';
 		break;
 	}
 }

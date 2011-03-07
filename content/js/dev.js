@@ -3,7 +3,7 @@ var devCheck = 1;
 function dev() {
 
 	document.textpad.pad.value = '';
-	
+//DcheckWords();
 //DcompareMAT();
 moveframey('scf')
 }
@@ -14,8 +14,10 @@ function DcheckWords() {
 	var books = 3;
 	var out = [];
 	var out2 = [];
+	var fc = 0;
+	var sc = 0;
 	
-	for (i=2; i < books; i++) {		
+	for (i=0; i < books; i++) {		
 		var xmlhttp = new window.XMLHttpRequest();
 		xmlhttp.open("GET", 'xml/'+nik+(i+1)+h+'.xml', false);
 		xmlhttp.send(null);
@@ -44,13 +46,15 @@ function DcheckWords() {
 							var z = y[e].getElementsByTagName("p");
 							for (var f = 0; f < z.length; f++) // per p
 							{
-								var text = z[f].textContent.replace(/\[[0-9]*\]/g,'').replace(/\^[be]b*\^/g, '').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\{[^}]*\}/g, '').replace(/[‘’“”`',{}?;!-]/g, '').replace(/\.([^nmltd])/g, "$1").replace(/"([^n])/g, "$1").replace(/ "/g, " ").toLowerCase().split(' ');
+								var text = z[f].textContent.replace(/\^[be]b*\^/g, ' ').replace(/\^a\^[^^]*\^ea\^/g, ' ').replace(/\{[^}]*\}/g, ' ').replace(/[0-9\[\]()‘’“”`',{}?;!-]/g, ' ').replace(/\.([^nmltd])/g, "$1").replace(/"([^n])/g, "$1").replace(/ "/g, " ").replace(/   */g, ' ').toLowerCase().split(' ');
 								for (zz in text) {
 									outwords = [];
 									var input = text[zz].replace(/\.$/g, "")
 									if (input.length < 2) continue;
+									fc++;
 									analyzeword(input);
 									if (outwords.length == 0) {
+										sc++;
 										if(out[input]) {
 											out[input]++;
 										}
@@ -68,7 +72,7 @@ function DcheckWords() {
 		out2.push(out[i] + ' ' + i);
 	}
 	out2.sort();
-	document.textpad.pad.value = out2.join('\n');
+	document.textpad.pad.value = out2.join('\n')+'\n\ntotal: '+fc+'\nnot recognized: '+sc;
 }
 
 
@@ -741,4 +745,12 @@ function Dloaded() {
 	var y = sortaz(x);
 			
 	document.getElementById('pad').innerHTML = y.join('\n');
+}
+
+function DloadFileAsXML() {
+	var cont = readExtFile('Desktop/ati_website/html/tipitaka/dn','dn.01.0.bodh.html');
+	document.textpad.pad.value = cont;
+	var parser=new DOMParser();
+	var doc = parser.parseFromString(cont,'text/xml');
+	alert(doc.documentElement.getElementsByTagName('div').length);
 }
