@@ -105,10 +105,20 @@ function importXML(labelsearch,para)
 		}
 	}
 	
+	// permalink
+	
+	var permalink = document.form.nik.selectedIndex+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	
+	try {
+		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink);
+	}
+	catch(ex) {
+	}
+	
 	// titles
 	
 	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center><a href="chrome://digitalpalireader/content/index.htm?'+permalink+'" title="Permalink to this section">'+titleout+'</a></td><td id="maftrans" align="right"></td></tr></table>';
 		
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }
@@ -420,7 +430,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
+			theDatao += '<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -436,7 +446,7 @@ function importXMLindex() {
 					spaces += '&nbsp;&nbsp;';
 				}
 				
-				theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+				theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -465,7 +475,7 @@ function importXMLindex() {
 						spaces += '&nbsp;&nbsp;';
 					}
 
-					theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+					theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -494,7 +504,7 @@ function importXMLindex() {
 							spaces += '&nbsp;&nbsp;';
 						}
 
-						theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+						theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -523,7 +533,7 @@ function importXMLindex() {
 								spaces += '&nbsp;&nbsp;';
 							}
 
-							theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+							theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -551,7 +561,7 @@ function importXMLindex() {
 									spaces += '&nbsp;&nbsp;';
 								}
 
-								theDatao += spaces+'<a href="#" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+								theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
@@ -685,7 +695,6 @@ var setplace = new Array();
 
 function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section (all sIndex),7=hier(mat) 
 	document.activeElement.blur();
-
 	setplace = temp;
 
 	// for changing mat buttons

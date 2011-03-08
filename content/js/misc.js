@@ -1449,3 +1449,18 @@ function historyBox() {
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
+
+
+function getLinkPlace() {
+	var place = document.location.href.split('?')[1];
+	if (place.search(/[^a-z0-9.]/) > -1) return;
+	place = place.split('.');
+	if (place.length != 8) return;
+	getplace(place);
+	importXML();
+}
+
+function onDocLoad() {
+	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
+	if(devCheck == 1) dev(); 
+}
