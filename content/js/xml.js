@@ -107,10 +107,10 @@ function importXML(labelsearch,para)
 	
 	// permalink
 	
-	var permalink = document.form.nik.selectedIndex+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	var permalink = nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 	
 	try {
-		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink);
+		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&' + (para+1) : ''));
 	}
 	catch(ex) {
 	}
@@ -213,11 +213,10 @@ function importXML(labelsearch,para)
 	else {
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			theData += ' <p> ' + z[tmp].textContent.substring(4);
+			theData += ' <p'+permalink+'&'+(tmp+1)+'> ' + z[tmp].textContent.substring(4);
 		}
 	}
 	preout(theData);
-	
 	//document.textpad.pad.value=theData;
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
@@ -280,14 +279,7 @@ function gettitles(altget,stop,prev,ssect)
     xmlhttp.open("GET", bookload, false);
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
- 
-	/*var divh = document.getElementById('topdiv').offsetHeight;
-	var toth = window.innerHeight;
-	var pos = (toth - divh)/2 - 25; 
-	if (pos < 0) pos = 0;
-	document.getElementById('botdiv').setAttribute('style','position:absolute; left:50%; margin-left:-75px; top:' + pos + 'px');*/
 
-	
 	var meta = (getsutta > 0  ? document.form.meta.selectedIndex : 0);
 	var volume = (getsutta > 1 ? document.form.volume.selectedIndex : 0);
 	var vagga = (getsutta > 2 ? document.form.vagga.selectedIndex : 0);
@@ -793,212 +785,84 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	var x = w[vagga].getElementsByTagName("h3");
 	var y = x[sutta].getElementsByTagName("h4");
 	
-	var ap = 0;
-	var bp = 0;
-	var countu = '';
-	var countv = '';
-	var countx = '';
-	var county = '';
+	var lista = [];
+	var list = '';
 	
 	// meta
 
-	for (var a = 0; a < u.length; a++)
-	{
-		ap = a + 1;
-		uname = u[a].getElementsByTagName("h0n");
-		if (uname[0].childNodes[0] && uname[0].textContent.length > 1) unamea = uname[0].textContent; else unamea = unnamed;
-		countu = unamea;
-		countu = countu.replace(/aa/g, 'a');
-		countu = countu.replace(/ii/g, 'i');
-		countu = countu.replace(/uu/g, 'u');
-		countu = countu.replace(/\./g, '');
-		countu = countu.replace(/\~/g, '');
-		countu = countu.replace(/\"/g, '');
-		
-		var diffu = unamea.length - countu.length;
-		
-		if (countu.length > maxlength + 3) 
-		{
-			unamea = unamea.substring(0,maxlength+diffu);
-			unamea += '...';
-		}
-		unamea = replaceunistandard(unamea);
-
-		metalist += '<option';
-		if (a == meta) metalist += ' selected';
-		metalist += '>' + translit(unamea) + '</option>'
-	}
-	if (ap == 1 && (unamea == unnamed)) {
-		metalist = '<select size="1" name="meta" class="hide">' + metalist;
-
+	lista = makeTitleSelect(u,'h0n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		metalist = '<select size="1" name="meta" onChange="gettitles(6)">' + metalist;
-
+		list = '<select size="1" name="meta" onChange="gettitles(6)">';
+		for (a in lista) {
+			list += '<option'+(a == meta ? ' selected' : '')+'>' + lista[a]+'</option>';
+		}
+		list += '</select>';
 	}	
-	metalist += '</select>'
-	document.getElementById('meta').innerHTML=metalist;
+	document.getElementById('meta').innerHTML = list;
 
 	// volume
 
-	for (var a = 0; a < v.length; a++)
-	{
-		ap = a + 1;
-		vname = v[a].getElementsByTagName("h1n");
-		if (vname[0].childNodes[0] && vname[0].textContent.length > 1) vnamea = vname[0].textContent; else vnamea = unnamed;
-		countv = vnamea;
-		countv = countv.replace(/aa/g, 'a');
-		countv = countv.replace(/ii/g, 'i');
-		countv = countv.replace(/uu/g, 'u');
-		countv = countv.replace(/\./g, '');
-		countv = countv.replace(/\~/g, '');
-		countv = countv.replace(/\"/g, '');
-		
-		var diffv = vnamea.length - countv.length;
-		
-		if (countv.length > maxlength + 3) 
-		{
-			vnamea = vnamea.substring(0,maxlength+diffv);
-			vnamea += '...';
-		}
-		vnamea = replaceunistandard(vnamea);
-
-		volumelist += '<option';
-		if (a == volume) volumelist += ' selected';
-		volumelist += '>' + translit(vnamea) + '</option>'
-	}
-	if (ap == 1 && (vnamea == unnamed)) {
-		volumelist = '<select size="1" name="volume" class="hide">' + volumelist;
-
+	lista = makeTitleSelect(v,'h1n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		volumelist = '<select size="1" name="volume" onChange="gettitles(5)">' + volumelist;
-
+		list = '<select size="1" name="volume" onChange="gettitles(5)">';
+		for (a in lista) {
+			list += '<option'+(a == volume ? ' selected' : '')+'>' + lista[a]+'</option>';
+		}
+		list += '</select>';
 	}	
-	volumelist += '</select>'
-	document.getElementById('volume').innerHTML=volumelist;
+	document.getElementById('volume').innerHTML = list;
 
 	// vagga
 
-	for (var a = 0; a < w.length; a++)
-	{
-		ap = a + 1;
-		wname = w[a].getElementsByTagName("h2n");
-		if (wname[0].childNodes[0] && wname[0].textContent.length > 1) wnamea = wname[0].textContent; else wnamea = unnamed;
-		countw = wnamea;
-		countw = countw.replace(/aa/g, 'a');
-		countw = countw.replace(/ii/g, 'i');
-		countw = countw.replace(/uu/g, 'u');
-		countw = countw.replace(/\./g, '');
-		countw = countw.replace(/\~/g, '');
-		countw = countw.replace(/\"/g, '');
-		
-		var diffw = wnamea.length - countw.length;
-		
-		if (countw.length > maxlength + 3) 
-		{
-			wnamea = wnamea.substring(0,maxlength+diffw);
-			wnamea += '...';
-		}
-		wnamea = replaceunistandard(wnamea);
-
-		vaggalist += '<option';
-		if (a == vagga) vaggalist += ' selected';
-		vaggalist += '>' + translit(wnamea) + '</option>'
-	}
-	if (ap == 1 && (wnamea == unnamed)) {
-		vaggalist = '<select size="1" name="vagga" class="hide">' + vaggalist;
-
+	lista = makeTitleSelect(w,'h2n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		vaggalist = '<select size="1" name="vagga" onChange="gettitles(4)">' + vaggalist;
-
-
-	}
-	vaggalist += '</select>'
-	document.getElementById('vagga').innerHTML=vaggalist;
+		list = '<select size="1" name="vagga" onChange="gettitles(4)">';
+		for (a in lista) {
+			list += '<option'+(a == vagga ? ' selected' : '')+'>' + lista[a]+'</option>';
+		}
+		list += '</select>';
+	}	
+	document.getElementById('vagga').innerHTML = list;
 
 	// sutta
 
-	for (var a = 0; a < x.length; a++)
-	{
-		ap = a + 1;
-		xname = x[a].getElementsByTagName("h3n");
-		if (xname[0].childNodes[0] && xname[0].textContent.length > 1) xnamea = xname[0].textContent; else xnamea = unnamed;
-		countx = xnamea;
-		countx = countx.replace(/aa/g, 'a');
-		countx = countx.replace(/ii/g, 'i');
-		countx = countx.replace(/uu/g, 'u');
-		countx = countx.replace(/\./g, '');
-		countx = countx.replace(/\~/g, '');
-		countx = countx.replace(/\"/g, '');
-		
-		var diffx = xnamea.length - countx.length;
-		
-		if (countx.length > maxlength + 3) 
-		{
-			xnamea = xnamea.substring(0,maxlength+diffx);
-			xnamea += '...';
-		}
-		xnamea = replaceunistandard(xnamea);
-
-	
-		suttalist += '<option';
-		if (a == sutta) suttalist += ' selected';
-		suttalist += '>' + translit(xnamea) + '</option>'
-	}
-	if (ap == 1 && (xnamea == unnamed)) {
-		suttalist = '<select size="1" name="sutta" class="hide">' + suttalist;
-
+	lista = makeTitleSelect(x,'h3n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		suttalist = '<select size="1" name="sutta" onChange="gettitles(3)">' + suttalist;
-	}
-	suttalist += '</select>'
-	document.getElementById('sutta').innerHTML=suttalist;
+		list = '<select size="1" name="sutta" onChange="gettitles(3)">';
+		for (a in lista) {
+			list += '<option'+(a == sutta ? ' selected' : '')+'>' + lista[a]+'</option>';
+		}
+		list += '</select>';
+	}	
+	document.getElementById('sutta').innerHTML = list;
 
 	// section
 
-	for (var d = 0; d < y.length; d++)
-	{
-		bp = d + 1;
-		yname = y[d].getElementsByTagName("h4n");
-		if (yname[0].childNodes[0] && yname[0].textContent.length > 1) ynamea = yname[0].textContent; else ynamea = unnamed;
-		
-			county = ynamea;
-			county = county.replace(/aa/g, 'a');
-			county = county.replace(/ii/g, 'i');
-			county = county.replace(/uu/g, 'u');
-			county = county.replace(/\./g, '');
-			county = county.replace(/\~/g, '');
-			county = county.replace(/\"/g, '');
-			
-			var diffy = ynamea.length - county.length;
-			
-			if (county.length > maxlength+3) 
-			{
-				ynamea = ynamea.substring(0,maxlength+diffy);
-				ynamea += '...';
-			}
-			
-			ynamea = replaceunistandard(ynamea);
-
-	
-		sectionlist += '<option';
-		if (d == section) sectionlist += ' selected';
-		sectionlist += '>' + translit(ynamea) + '</option>';
-	}
-	if (bp == 1 && (ynamea == unnamed)) {
-		sectionlist = '<select size="1" name="section" class="hide">' + sectionlist;
-
+	lista = makeTitleSelect(y,'h4n');
+	if (lista.length == 1 && lista[0] == unnamed ) {
+		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		sectionlist = '<select size="1" name="section" onChange="importXML()">' + sectionlist;
-	}
-
-	sectionlist += '</select>'
-	document.getElementById('section').innerHTML=sectionlist
-        
+		list = '<select size="1" name="section" onChange="loadXML()">';
+		for (a in lista) {
+			list += '<option'+(a == section ? ' selected' : '')+'>' + lista[a]+'</option>';
+		}
+		list += '</select>';
+	}	
+	document.getElementById('section').innerHTML = list;
+       
 	setplace = new Array();
 	setplace.length = 0;
 }
@@ -1055,8 +919,11 @@ function getatt(num,type) { // get atthakatha or tika word
         xmlhttp.send(null);
         var xmlDoc = xmlhttp.responseXML.documentElement;
 
-		if (type == 'a' && nikaya == 'k') {
+		if (nikaya == 'k') {
 			var bookno = kudvala[pca[1]];
+		}
+		else if(nikaya == 'y') {
+			var bookno = abhivala[pca[1]];
 		}
 		else var bookno = parseInt(pca[1])-1;
 

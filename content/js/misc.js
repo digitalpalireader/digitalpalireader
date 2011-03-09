@@ -194,8 +194,9 @@ function formatuniout(data,which) { // prepare without links
 		else if (wb.substring(0,2) == '<f') {
 			finout += wb + space;
 		}		
-		else if (wb == '<p>') {
-			finout += '<p id="para'+paran+'">' + space;
+		else if (wb.indexOf('<p') == 0) {
+			var permalink = wb.substring(2,wb.length-1);
+			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this place" onmouseover="this.style.backgroundColor=\'white\'" onmouseout="this.style.backgroundColor=\'\'">&nbsp;&nbsp;&nbsp;</a>';
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -1453,11 +1454,22 @@ pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" />
 
 function getLinkPlace() {
 	var place = document.location.href.split('?')[1];
+	var para = null;
+	if(place.indexOf('&') > -1) {
+		para = place.split('&')[1];
+		if (para.search(/[^0-9]/) > -1) para = null;
+		place = place.split('&')[0];
+	}
 	if (place.search(/[^a-z0-9.]/) > -1) return;
+	
 	place = place.split('.');
+
+	var nikaya = place[0];
+	place[0] = niknumber[nikaya];
+
 	if (place.length != 8) return;
 	getplace(place);
-	importXML();
+	importXML(null,parseInt(para)-1);
 }
 
 function onDocLoad() {
