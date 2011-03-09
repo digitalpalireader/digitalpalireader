@@ -701,7 +701,7 @@ function createTables(xmlDoc)
 										for (ex = 0; ex < exnodups[t].length; ex++)
 										{
 											
-											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+											exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 										}
 										exwordout += '</td>';
 									}								
@@ -710,26 +710,26 @@ function createTables(xmlDoc)
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(v.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(w.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 
 									if(x.length>1) {
 										if(colt == 3) colt = 0;
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(y.length>1) {
 										if(colt == 3) colt = 0;
-										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
@@ -839,7 +839,7 @@ function createTables(xmlDoc)
 
 									for (ex = 0; ex < findiv; ex++)
 									{
-										exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + replaceunistandard(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+										exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 									}
 									exwordout += '</table>';
 																		
@@ -851,25 +851,25 @@ function createTables(xmlDoc)
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(v.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(w.length>1) {
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(x.length>1) {
 										if(colt == 3) colt = 0;
-										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(y.length>1) {
 										if(colt == 3) colt = 0;
-										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + replaceunistandard(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 									 }
 									
 									// paragraph
@@ -925,7 +925,7 @@ function showonly(string) {
 		}
 	}
 	if (string == 'xyz') { document.getElementById('showing').innerHTML = ''; }
-	else { document.getElementById('showing').innerHTML = '<b style="background-color:'+colorcfg['colbkcp']+'; color:'+colorcfg['colped']+'">' + replaceunistandard(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; }
+	else { document.getElementById('showing').innerHTML = '<b style="background-color:'+colorcfg['colbkcp']+'; color:'+colorcfg['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; }
 }
 
 function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
@@ -966,7 +966,7 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 var TRange=null
 
 function findString (strx,nummatch) {
- var str = replaceunistandard(strx)
+ var str = toUni(strx)
  if (parseInt(navigator.appVersion)<4) return;
  var strFound;
  if (navigator.appName.indexOf("Microsoft")!=-1) {

@@ -86,7 +86,7 @@ function formatuniout(data,which) { // prepare without links
 	//data = data.replace(/v\^/g, '');
 	data = data.replace(/\}/g, '} ');
 	data = data.replace(/   */g, ' ');
-	var uniouta = replaceunistandard(data).replace(/[”’] ([”’])/g, " $1").split(' ');
+	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
 
 	//data = data.replace(/\"/g, '\u00B4');
 	//document.textpad.pad.value = data;
@@ -117,7 +117,7 @@ function formatuniout(data,which) { // prepare without links
 			if (wb.charAt(endpt) == '}') {
 				altplus += wb.substring(0,endpt);
 				altread = 0;
-				altplus = translit(replaceunistandard(altplus));
+				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
@@ -126,7 +126,7 @@ function formatuniout(data,which) { // prepare without links
 		else if (wb.charAt(0) == '{') {
 			if (wb.charAt(wb.length-1) == '}') { 
 				altplus = wb.substring(1,wb.length-1) + ' ';
-				altplus = translit(replaceunistandard(altplus));
+				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.');
 				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
@@ -146,11 +146,11 @@ function formatuniout(data,which) { // prepare without links
 				cp = wb.indexOf('<c');
 				if(cp > 0) { // something before
 					if (which) {  
-						finout += translit(replaceunistandard(wb.substring(0,cp))); b++;
+						finout += translit(toUni(wb.substring(0,cp))); b++;
 					}
 					else {
 						fullwordout[0] = wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-						fullwordout[1] = translit(replaceunistandard(wb.substring(0,cp)));
+						fullwordout[1] = translit(toUni(wb.substring(0,cp)));
 					}
 					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
 				}
@@ -162,11 +162,11 @@ function formatuniout(data,which) { // prepare without links
 				var cm = wb.search('<xc>');
 
 				if (which) {  
-					finout += cno + translit(replaceunistandard(wb.substring(0,cm)))+'<xc>'; b++;
+					finout += cno + translit(toUni(wb.substring(0,cm)))+'<xc>'; b++;
 				}
 				else {
 					fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-					fullwordout[1] += cno + translit(replaceunistandard(wb.substring(0,cm))) + '<xc>';
+					fullwordout[1] += cno + translit(toUni(wb.substring(0,cm))) + '<xc>';
 				}
 
 				convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
@@ -175,11 +175,11 @@ function formatuniout(data,which) { // prepare without links
 			}
 			if(wb.length > 0) { // anything left?
 				if (which) {  
-					finout += translit(replaceunistandard(wb)); b++;
+					finout += translit(toUni(wb)); b++;
 				}
 				else {
 					fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-					fullwordout[1] += translit(replaceunistandard(wb));
+					fullwordout[1] += translit(toUni(wb));
 				}
 
 				convout += wb.replace(/<[^>]*>/g, '');
@@ -244,7 +244,7 @@ function formatuniout(data,which) { // prepare without links
 	finout = finout.replace(/<@>/g, '<b>');
 	finout = finout.replace(/<\/@>/g, '</b>');
 	outarray[0] = finout;
-	outarray[1] = replaceunistandard(convout);
+	outarray[1] = toUni(convout);
 	return outarray;
 }
 
@@ -273,35 +273,35 @@ function convtitle(nikaya,book,vna,wna,xna,yna,zna,hiert)
 	var w = 1;
 	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + book + '</b>';
 	if (vna != ' ') {
-		vna = translit(replaceunistandard(vna));
+		vna = translit(toUni(vna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (wna != ' ') {
-		wna = translit(replaceunistandard(wna));
+		wna = translit(toUni(wna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (xna != ' ') {
-		xna = translit(replaceunistandard(xna));
+		xna = translit(toUni(xna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (yna != ' ') {
-		yna = translit(replaceunistandard(yna));
+		yna = translit(toUni(yna));
 		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 		w++;
 		if(w == 3) { w = 0; }
 	}
 	if (zna != ' ') {
-		zna = translit(replaceunistandard(zna));
+		zna = translit(toUni(zna));
 				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
 	}
 	
-	title = replaceunistandard(title);
+	title = toUni(title);
 	return title;
 }
 
@@ -479,7 +479,7 @@ function changenikaya(noget)
 
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ
 
-function replaceunistandard(input) {
+function toUni(input) {
 	input = input.replace(/aa/g, 'ā');
 	input = input.replace(/ii/g, 'ī');
 	input = input.replace(/uu/g, 'ū');
@@ -504,7 +504,7 @@ function replaceunistandard(input) {
 	return input;
 }
 
-function replacevelstandard(input) {
+function toVel(input) {
 	input = input.replace(/\u0101/g, 'aa');
 	input = input.replace(/\u012B/g, 'ii');
 	input = input.replace(/\u016B/g, 'uu');
@@ -526,6 +526,11 @@ function replacevelstandard(input) {
 	input = input.replace(/\u1E42/g, '\.M');
 	input = input.replace(/\u00D1/g, '\~N');
 	input = input.replace(/\u1E36/g, '\.L');
+	return input;
+}
+
+function toFuzzy(input){
+	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u");
 	return input;
 }
 
@@ -1436,7 +1441,7 @@ function historyBox() {
 		var isclear = '';
 		for (i in theHistory) {
 			var thist = theHistory[i].split('@');
-			var thist0 = replaceunistandard(thist[0]);
+			var thist0 = toUni(thist[0]);
 			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
 			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
 		}
@@ -1450,7 +1455,6 @@ function historyBox() {
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
-
 
 function getLinkPlace() {
 	var place = document.location.href.split('?')[1];

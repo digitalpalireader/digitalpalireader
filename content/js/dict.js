@@ -8,14 +8,16 @@ function pedsearchstart()
 	var getstring = document.form.manual.value;
       
 	document.getElementById('difb').innerHTML='';
-document.getElementById('difb').appendChild(pleasewait);
-	
-
+	document.getElementById('difb').appendChild(pleasewait);
 	
 	if(document.form.sofulltext.checked) { // full text search
 		
 		pedFullTextSearch(getstring);
 		return;
+	}
+
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
 	}
 
 	var gslength = getstring.length;
@@ -41,11 +43,17 @@ document.getElementById('difb').appendChild(pleasewait);
         
 	for (x = 0; x < pedl; x++)
 	{
+		var pedt = ped[x].split('^')[0];
+		
+		if(document.form.sofuzzy.checked) {
+			pedt = toFuzzy(pedt);
+		}
+
         if (document.form.soregexp.checked) { // reg exp
-			var yessir = (ped[x].search(getstring) == 0 || (!document.form.sostartword.checked && ped[x].search(getstring) > -1));
+			var yessir = (pedt.search(getstring) == 0 || (!document.form.sostartword.checked && pedt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (ped[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && ped[x].indexOf(getstring) > -1));
+			var yessir = (pedt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && pedt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -53,7 +61,7 @@ document.getElementById('difb').appendChild(pleasewait);
 			
 			uniout = gsplit[0];
 			
-			uniout = replaceunistandard(uniout);
+			uniout = toUni(uniout);
 			uniout = uniout.replace(/z/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
 			
@@ -169,14 +177,15 @@ function dppnsearchstart()
 	document.getElementById('difb').appendChild(pleasewait);
 
 	
-	
-
 	if(document.form.sofulltext.checked) { // full text search
 		
 		dppnFullTextSearch(getstring);
 		return;
 	}
 
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -196,11 +205,18 @@ function dppnsearchstart()
 
     for (x = 0; x < dppn.length; x++)
 	{
+
+		var dppnt = dppn[x].split('^')[0];
+		
+		if(document.form.sofuzzy.checked) {
+			dppnt = toFuzzy(dppnt);
+		}
+
         if (document.form.soregexp.checked) { // reg exp
-			var yessir = (dppn[x].search(getstring) == 0 || (!document.form.sostartword.checked && dppn[x].search(getstring) > -1));
+			var yessir = (dppnt.search(getstring) == 0 || (!document.form.sostartword.checked && dppnt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (dppn[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && dppn[x].indexOf(getstring) > -1));
+			var yessir = (dppnt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && dppnt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -212,7 +228,7 @@ function dppnsearchstart()
 				uniout = uniout.substring(0,uniout.length-2);
 			}
 
-			uniout = replaceunistandard(uniout);
+			uniout = toUni(uniout);
 			uniout = uniout.replace(/f/g, ' ');
 			uniout = uniout.replace(/`/g, '\u00B0');
 			
@@ -255,7 +271,7 @@ function dppnFullTextSearch(getstring) {
 	var finalouta = [];
 	
 	var listouta = [];
-	getstring = replaceunistandard(getstring);
+	getstring = toUni(getstring);
 	
 	for (i = 1; i < 9; i++) {
 		
@@ -334,6 +350,9 @@ function mlsearchstart()
 	clearDivs('difanf');
 	
 	var getstring = document.form.manual.value;
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();
@@ -360,6 +379,10 @@ function mlsearchstart()
 		else {
 			var tosearch = yg[x][0]+' '+yg[x][3]+' '+yg[x][2];
 		}
+		
+		if(document.form.sofuzzy.checked) {
+			tosearch = toFuzzy(tosearch);
+		}
         
         if (document.form.soregexp.checked) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!document.form.sostartword.checked && tosearch.search(getstring) > -1));
@@ -370,8 +393,8 @@ function mlsearchstart()
 		if(yessir)
 		{
 			cnt++;
-			us = replaceunistandard(gsplit[0]);
-			ud = replaceunistandard(gsplit[1] + ' (' + gsplit[2] + ')');
+			us = toUni(gsplit[0]);
+			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 			
 			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b> '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
@@ -410,6 +433,9 @@ function epdsearchstart()
 	clearDivs('difanf');
 	
 	var getstring = document.form.manual.value;
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();
@@ -429,6 +455,9 @@ function epdsearchstart()
 		}
 		else {
 			var tosearch = epd[x];
+		}
+		if(document.form.sofuzzy.checked) {
+			tosearch = toFuzzy(tosearch);
 		}
         
         if (document.form.soregexp.checked) { // reg exp
@@ -475,6 +504,9 @@ function attsearchstart()
 	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -490,16 +522,22 @@ function attsearchstart()
 
 	for (x = 0; x < attlist.length; x++)
 	{
+		var attt = attlist[x].split('#')[0];
+		
+		if(document.form.sofuzzy.checked) {
+			attt = toFuzzy(attt);
+		}
+
         if (document.form.soregexp.checked) { // reg exp
-			var yessir = (attlist[x].search(getstring) == 0 || (!document.form.sostartword.checked && attlist[x].search(getstring) > -1));
+			var yessir = (attt.search(getstring) == 0 || (!document.form.sostartword.checked && attt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (attlist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && attlist[x].indexOf(getstring) > -1));
+			var yessir = (attt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && attt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
             gsplit = attlist[x].split('#')[0];
-			uniout = replaceunistandard(gsplit);
+			uniout = toUni(gsplit);
                         
 			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'a\')">' + uniout + ' (' + (attlist[x].split('#').length-1) + ')</a><br>';
 			y++;
@@ -541,6 +579,9 @@ function tiksearchstart()
 	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -556,16 +597,21 @@ function tiksearchstart()
 
 	for (x = 0; x < tiklist.length; x++)
 	{
+		var tikt = tiklist[x].split('#')[0];
+		
+		if(document.form.sofuzzy.checked) {
+			tikt = toFuzzy(tikt);
+		}
         if (document.form.soregexp.checked) { // reg exp
-			var yessir = (tiklist[x].search(getstring) == 0 || (!document.form.sostartword.checked && tiklist[x].search(getstring) > -1));
+			var yessir = (tikt.search(getstring) == 0 || (!document.form.sostartword.checked && tikt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tiklist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && tiklist[x].indexOf(getstring) > -1));
+			var yessir = (tikt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tikt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
             gsplit = tiklist[x].split('#')[0];
-			uniout = replaceunistandard(gsplit);
+			uniout = toUni(gsplit);
                         
 			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'t\')">' + uniout + ' (' + (tiklist[x].split('#').length-1) + ')</a><br>';
 			y++;
@@ -607,6 +653,9 @@ function titlesearchstart()
 	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -622,18 +671,32 @@ function titlesearchstart()
 
 	for (x = 0; x < titlelist.length; x++)
 	{
+		var titt = titlelist[x].split('#')[0];
+		
+		if(document.form.sofuzzy.checked) {
+			titt = toFuzzy(titt);
+		}
         if (document.form.soregexp.checked) { // reg exp
-			var yessir = (titlelist[x].search(getstring) == 0 || (!document.form.sostartword.checked && titlelist[x].search(getstring) > -1));
+			var yessir = (titt.search(getstring) == 0 || (!document.form.sostartword.checked && titt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (titlelist[x].indexOf(getstring) == 0 || (!document.form.sostartword.checked && titlelist[x].indexOf(getstring) > -1));
+			var yessir = (titt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && titt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
             gsplit = titlelist[x].split('#')[0];
-			uniout = replaceunistandard(gsplit);
-                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +')">' + uniout + ' (' + (titlelist[x].split('#').length-1) + ')</a><br>';
+			uniout = toUni(gsplit);
+			
+			// separate mat
+			var entries = titlelist[x].split('#');
+			entries.shift();
+			for(a = 0; a < entries.length; a++) {
+				if((entries[a].charAt(entries[a].length-3) == 'm' && !document.getElementById('soMATM').checked) || (entries[a].charAt(entries[a].length-3) == 'a' && !document.getElementById('soMATA').checked) || (entries[a].charAt(entries[a].length-3) == 't' && !document.getElementById('soMATT').checked)) {
+					entries.splice(a--,1);
+				}
+			}
+			if (entries.length == 0) continue;
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+(document.getElementById('soMATM').checked ? true : false)+','+(document.getElementById('soMATA').checked ? true : false)+','+(document.getElementById('soMATT').checked ? true : false)+')">' + uniout + ' (' + entries.length + ')</a><br>';
 			y++;
 		}
 	}
@@ -785,7 +848,7 @@ function DPPNXML(file,which)
 			if (ncfull == 1) break; // no need to make the array
 		}
 		nnc++;
-		if (ncfull == 0) namecount.push([nameda[i],replaceunistandard(i.replace("f", " "))]);
+		if (ncfull == 0) namecount.push([nameda[i],toUni(i.replace("f", " "))]);
 	}
 
 	// buttons
@@ -853,7 +916,7 @@ function atiSearchOffline(getstring) {
 			var parser=new DOMParser();
 			var xmlDoc = parser.parseFromString(cont,'text/xml');
 
-			var title = replaceunistandard(xmlDoc.getElementsByTagName('title')[0].textContent);
+			var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
 			var data = xmlDoc.getElementsByTagName('div');
 			for (j in data) {
 				if(data[j].id == 'H_content') {
@@ -920,27 +983,33 @@ function dictLoad() {
 	document.getElementById('soFT').style.display = 'none';
 	document.getElementById('soSW').style.display = 'none';
 	document.getElementById('soRX').style.display = 'none';
+	document.getElementById('soFZ').style.display = 'none';
 	document.getElementById('soNS').style.display = 'none';  // Nikaya Select
+	document.getElementById('soMAT').style.display = 'none';  // MAT Select
 	switch (which) {
 		case 0: //dpr
 			document.getElementById('soNO').style.display = 'block';
 		break;
 		case 1: // ped
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
 		case 2: // dppn
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
 		case 3: // CPED
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
 		case 4: // CEPD
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
@@ -953,6 +1022,7 @@ function dictLoad() {
 			}
 		break;
 		case 5: // ATTH
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 			if(typeof(attlist) == 'undefined') {
@@ -964,6 +1034,7 @@ function dictLoad() {
 			}
 		break;
 		case 6: // TIKA
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 			if(typeof(tiklist) == 'undefined') {
@@ -975,8 +1046,10 @@ function dictLoad() {
 			}
 		break;
 		case 7: // Title
+			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
+			document.getElementById('soMAT').style.display = 'block';
 			if(typeof(titlelist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -995,7 +1068,7 @@ function dictLoad() {
 function dictType(hard) {
 	clearDivs('dif');
 	var getstring = document.form.dictin.value;
-	document.form.manual.value = replacevelstandard(document.form.dictin.value);
+	document.form.manual.value = toVel(document.form.dictin.value);
 	switch (document.form.sped.selectedIndex) {
 		case 0:
 			var TheData = document.form.manual.value;

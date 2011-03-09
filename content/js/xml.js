@@ -247,7 +247,7 @@ function makeTitleSelect(xml,tag) { // output select tag with titles in options
 }
 
 function shortenTitle(name) {
-	name = replaceunistandard(name);
+	name = toUni(name);
 	if(name.length < maxlength) return name;
 	name = name.substring(0,maxlength);
 	name += '...';
@@ -422,7 +422,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(replaceunistandard(theData)) + '</b></font></a><br />';
+			theDatao += '<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -438,7 +438,7 @@ function importXMLindex() {
 					spaces += '&nbsp;&nbsp;';
 				}
 				
-				theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+				theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -467,7 +467,7 @@ function importXMLindex() {
 						spaces += '&nbsp;&nbsp;';
 					}
 
-					theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+					theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -496,7 +496,7 @@ function importXMLindex() {
 							spaces += '&nbsp;&nbsp;';
 						}
 
-						theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+						theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -525,7 +525,7 @@ function importXMLindex() {
 								spaces += '&nbsp;&nbsp;';
 							}
 
-							theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+							theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -553,7 +553,7 @@ function importXMLindex() {
 									spaces += '&nbsp;&nbsp;';
 								}
 
-								theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(replaceunistandard(theData)) + '</font></a>';
+								theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
@@ -776,7 +776,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	tnamea = tnamea.substring(0,maxlength+difft);
 	tnamea += '...';
 	}
-	tnamea = replaceunistandard(tnamea);
+	tnamea = toUni(tnamea);
 	document.getElementById('title').innerHTML = '<input type="button" onclick="importXMLindex();" value="' + translit(tnamea) + '" title="click to return to index">';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
@@ -961,24 +961,32 @@ function getatt(num,type) { // get atthakatha or tika word
         placen += ' Para. ' + (parseInt(para)+1);
         finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+replaceunistandard(word)+'</b> in the '+(type == 'a' ? 'aṭṭhakathā:' : 'ṭīka:');
+    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+(type == 'a' ? 'aṭṭhakathā:' : 'ṭīka:');
     document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }
  
-function gettitle(num) { // get titles 
+function gettitle(num,mul,att,tik) { // get titles 
 
     moveframex(2);
 
 	var word = titlelist[num].split('#')[0];
 	var loc = titlelist[num].substring(titlelist[num].indexOf('#')+1);
     var loca = loc.split('#');
+
 	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
     
     var finout = '';
     for (i in loca) {
+		// separate mat
+		var entries = loca[i].split('#');
+		for(a in entries) {
+			if((entries[a].charAt(entries[a].length-3) == 'm' && !mul) || (entries[a].charAt(entries[a].length-3) == 'a' && !att) || (entries[a].charAt(entries[a].length-3) == 't' && !tik)) entries.splice(a,1);
+		}
+		if (entries.length == 0) continue;
+
         var pca = loca[i].split('^');
         var nikaya = pca[0];
         var book = pca[1];
@@ -1057,7 +1065,7 @@ function gettitle(num) { // get titles
 
         finout += '<p>'+placen+' <input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()" value="go" /></p>';
     }
-    document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+replaceunistandard(word)+'</b></p><hr />';
+    document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
     document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }

@@ -19,7 +19,7 @@ function outputDef(which,first)
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	
 			var outword = outwords[b].split('$');
-			document.forma.out.innerHTML += '<option>' + replaceunistandard(outword[0].replace(/,/g, '.').replace(/`n/g, '"n')) + '</option>'; 
+			document.forma.out.innerHTML += '<option>' + toUni(outword[0].replace(/,/g, '.').replace(/`n/g, '"n')) + '</option>'; 
 		}
 	}
 	
@@ -27,7 +27,7 @@ function outputDef(which,first)
 	
 	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
 	if(myConj[3]) { // if root form is found, set up conjugation
-		conjWord.form = replaceunistandard(myConj[1].replace(/,/g, '.'));
+		conjWord.form = toUni(myConj[1].replace(/,/g, '.'));
 		conjWord.root = myConj[3];
 	}
 	
@@ -47,7 +47,7 @@ function outputDef(which,first)
 				// data[2] = category
 				// data[3] = concise definition (if any)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-			var dataout = replaceunistandard(data[1].replace(/,/g, '.').replace(/`/g, '"'));
+			var dataout = toUni(data[1].replace(/,/g, '.').replace(/`/g, '"'));
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':
@@ -122,13 +122,13 @@ function outputDef(which,first)
 
 			concisedef = concisedef.replace(/,/g, '.');
 			concisedef = concisedef.replace(/\&comma;/g, ',');
-			concisedef = replaceunistandard(concisedef);
+			concisedef = toUni(concisedef);
 
 			var conciseword = thisconcise[x];
 			conciseword = conciseword.replace(/\`/g, '"');
 			conciseword = conciseword.replace(/,/g, '.');
 			if(concisedefa[5].search(/\.[āīū],/) > -1 || concisedefa[5].search(/\.[āīū]$/) > -1) conciseword = conciseword+conciseword.charAt(conciseword.length-1);
-			conciseword = replaceunistandard(conciseword);
+			conciseword = toUni(conciseword);
 			
 			
 			if (!concisedups[conciseword]) {

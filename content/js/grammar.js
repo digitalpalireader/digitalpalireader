@@ -58,7 +58,7 @@ function conjugateNoun(word) {
 	var outword = word.replace(/\`/g, '"');
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-	outword = replaceunistandard(outword);
+	outword = toUni(outword);
 	
 
 	var stem = yto[8]; 
@@ -226,7 +226,7 @@ function conjugateVerb(word) {
 	var outword = word.replace(/\`/g, '"');
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-	outword = replaceunistandard(outword);
+	outword = toUni(outword);
 	
 	var stem = yto[8]; 
 
@@ -318,7 +318,7 @@ function conjugateIrrNoun(word) {
 	var outword = word.replace(/\`/g, '"');
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-	outword = replaceunistandard(outword);
+	outword = toUni(outword);
 	
 	var stem = yto[8]; 
 
@@ -378,7 +378,7 @@ function conjugateIrrVerb(word) {
 	var outword = word.replace(/\`/g, '"');
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-	outword = replaceunistandard(outword);
+	outword = toUni(outword);
 	
 	var stem = yto[8]; 
 

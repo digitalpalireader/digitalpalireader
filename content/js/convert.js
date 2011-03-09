@@ -24,7 +24,7 @@ function convert()
 	{
 		if (Counta == 1) // Unicode to velthius
 		{
-            spell = replacevelstandard(spell);
+            spell = toVel(spell);
 		}
 		else if (Counta == 2) // Unicode to Thai
 		{
@@ -49,23 +49,23 @@ function convert()
 	{
 		if (Counta == 0) // Velthius to unicode
 		{
-            spell = replaceunistandard(spell);
+            spell = toUni(spell);
 		}
 		else if (Counta == 2) // Velthius to Thai
 		{
-			spell = thaiconv(replaceunistandard(spell));
+			spell = thaiconv(toUni(spell));
 		}			
 		else if (Counta == 3) // Velthius to Deva
 		{
-			spell = todeva(replaceunistandard(spell));
+			spell = todeva(toUni(spell));
 		}			
 		else if (Counta == 4) // Velthius to Myan
 		{
-			spell = toMyanmar(replaceunistandard(spell));
+			spell = toMyanmar(toUni(spell));
 		}			
 		else if (Counta == 5) // Velthius to Sinhala
 		{
-			spell = toSin(replaceunistandard(spell));
+			spell = toSin(toUni(spell));
 		}			
 	}
 	document.convertor.outputc.value = spell;	

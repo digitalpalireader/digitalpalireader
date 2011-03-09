@@ -263,11 +263,14 @@
 														<div id="soRX" style="display:none">
 															<input type="checkbox" onclick="clickDictOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
 														</div>
+														<div id="soFZ" style="display:none">
+															<input type="checkbox" onclick=" if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" title="Enable fuzzy search (removes diacritics)" name="sofuzzy"><span class="small"> Fuzzy</span>
+														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" onclick="clickDictOption(); if(this.checked) document.form.sostartword.checked = false;" name="sofulltext" title="Search dictionary definitions, not only entry names"><span class="small"> Full Text</span>
+															<input type="checkbox" onclick="if(this.checked) { document.form.sostartword.checked = false; document.form.sofuzzy.checked = false; } clickDictOption(); " name="sofulltext" title="Search dictionary definitions, not only entry names"><span class="small"> Full Text</span>
 														</div>
 														<div id="soSW" style="display:none">
-															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="clickDictOption(); if(this.checked) document.form.sofulltext.checked = false;" checked><span class="small"> Start of Word Only</span>
+															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" checked><span class="small"> Start of Word Only</span>
 														</div>
 														<div id="soNS" style="display:none">
 															<input type="checkbox" id="soNSD" title="Include in search" checked><span class="small"> DN</span>
@@ -275,6 +278,11 @@
 															<input type="checkbox" id="soNSM" title="Include in search" checked><span class="small"> MN</span>
 															<input type="checkbox" id="soNSK" title="Include in search" checked><span class="small"> KN</span><br>
 															<input type="checkbox" id="soNSS" title="Include in search" checked><span class="small"> SN</span>
+														</div>
+														<div id="soMAT" style="display:none">
+															<input type="checkbox" id="soMATM" title="Include in search" checked><span class="small"> Mula</span><br/>
+															<input type="checkbox" id="soMATA" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
+															<input type="checkbox" id="soMATT" title="Include in search" checked><span class="small"> Ṭīka</span>
 														</div>
 													</div>
 												</td>

@@ -89,7 +89,7 @@ function bookmarks(let)
 		writeFile('DPS'+nameadd, cookscroll+"", "UTF-8");
 		
 		// create third cookie for description 
-		var desquote = replacevelstandard(window.getSelection().toString());
+		var desquote = toVel(window.getSelection().toString());
 		
 		desquote = desquote.replace(/;/g, "::");
 		if (desquote) writeFile('DPD'+nameadd,desquote, "UTF-8");
@@ -194,7 +194,7 @@ function bookmarkframe(refresh)
 		var thist = theHistory[i].split('@');
 		var tt1 = thist[1].length-1;
 		thist[1] = thist[1].substring(0,tt1) + "'" + thist[1].charAt(tt1) + "'";
-		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + replaceunistandard(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
+		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + toUni(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
 	}
 	if(!hout) { hout = '<b style="color:'+colorcfg['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
@@ -258,7 +258,7 @@ function bookmarkframe(refresh)
             if (ca[i].substring(0,3) == 'DPD')
             {
 				name = ca[i].substring(3);
-				desc = replaceunistandard(readFile(ca[i]));
+				desc = toUni(readFile(ca[i]));
 				desc = desc.replace(/::/g, ";");
 
 				html = 'html' + name;

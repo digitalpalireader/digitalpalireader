@@ -3,6 +3,7 @@ var devCheck = 1;
 function dev() {
 
 	document.textpad.pad.value = '';
+//	DtitleSearchCreate();
 //DcheckWords();
 //DcompareMAT();
 moveframey('scf')
@@ -220,7 +221,7 @@ function DcompareMAT() {
 	}
 }
 		
-function noahsx() {
+function DtitleSearchCreate() {
 
 
 var xmall = [];
@@ -331,7 +332,7 @@ xmall.push('k8m');
 xmall.push('s3a');
 xmall.push('v4a');
 xmall.push('y1a');
-xmall.push('y7a');
+xmall.push('y9a');
 xmall.push('a3a');
 xmall.push('a9a');
 xmall.push('g3m');
@@ -349,7 +350,7 @@ xmall.push('k9m');
 xmall.push('s3t');
 xmall.push('v4t');
 xmall.push('y1t');
-xmall.push('y7t');
+xmall.push('y9t');
 xmall.push('a3t');
 xmall.push('a9t');
 xmall.push('g5m');
@@ -393,9 +394,9 @@ xmall.push('y3a');
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 
-		var name = xmlDoc.getElementsByTagName("han")[0].childNodes[0];
+		var name = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 		
-		out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^0^0^0^0^0^'+fi.charAt(fi.length-1)+'^0';
+		out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^0^0^0^0^0^'+fi.charAt(fi.length-1)+'^0';
 		
 		var u = xmlDoc.getElementsByTagName("h0");
 		
@@ -404,46 +405,46 @@ xmall.push('y3a');
 		
 		for (var sx = 0; sx < u.length; sx++) // per h0
 		{							
-			name = u[sx].getElementsByTagName("h0n")[0].childNodes[0];
-			if(name && name.nodeValue != ' ') {
-				if(out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')]) out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^0^0^0^0^'+fi.charAt(fi.length-1)+'^1';
-				else out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^0^0^0^0^'+fi.charAt(fi.length-1)+'^1';
+			name = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+			if(name && name != ' ') {
+				if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^0^0^0^0^'+fi.charAt(fi.length-1)+'^1';
+				else out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^0^0^0^0^'+fi.charAt(fi.length-1)+'^1';
 			}
 			var v = u[sx].getElementsByTagName("h1");
 				
 			for (var sy = 0; sy < v.length; sy++) // per h1
 			{			
-				name = v[sy].getElementsByTagName("h1n")[0].childNodes[0];
-				if(name && name.nodeValue != ' ') {
-					if(out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')]) out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^0^0^0^'+fi.charAt(fi.length-1)+'^2';
-					else out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^0^0^0^'+fi.charAt(fi.length-1)+'^2';
+				name = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+				if(name && name != ' ') {
+					if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^0^0^0^'+fi.charAt(fi.length-1)+'^2';
+					else out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^0^0^0^'+fi.charAt(fi.length-1)+'^2';
 				}
 				var w = v[sy].getElementsByTagName("h2");
 			
 				for (var sz = 0; sz < w.length; sz++) // per h2
 				{
-					name = w[sz].getElementsByTagName("h2n")[0].childNodes[0];
-					if(name && name.nodeValue != ' ') {
-						if(out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')]) out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+fi.charAt(fi.length-1)+'^3';
-						else out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+fi.charAt(fi.length-1)+'^3';
+					name = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+					if(name && name != ' ') {
+						if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+fi.charAt(fi.length-1)+'^3';
+						else out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+fi.charAt(fi.length-1)+'^3';
 					}
 					var x = w[sz].getElementsByTagName("h3");
 					
 					for (var s = 0; s < x.length; s++) // per h3
 					{
-						name = x[s].getElementsByTagName("h3n")[0].childNodes[0];
-						if(name && name.nodeValue != ' ') {
-							if(out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')]) out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+fi.charAt(fi.length-1)+'^4';
-							else out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+fi.charAt(fi.length-1)+'^4';
+						name = x[s].getElementsByTagName("h3n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+						if(name && name != ' ') {
+							if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+fi.charAt(fi.length-1)+'^4';
+							else out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+fi.charAt(fi.length-1)+'^4';
 						}
 						var y = x[s].getElementsByTagName("h4");
 						
 						for (var se = 0; se < y.length; se++) // per h4
 						{
-							name = y[se].getElementsByTagName("h4n")[0].childNodes[0];
-							if(name && name.nodeValue != ' ') {
-								if(out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')]) out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+fi.charAt(fi.length-1)+'^5';
-								else out[name.nodeValue.replace(/^[()0-9-. ]*[)0-9-. ]+/,'')] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+fi.charAt(fi.length-1)+'^5';
+							name = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+							if(name && name != ' ') {
+								if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+fi.charAt(fi.length-1)+'^5';
+								else out[name] = fi.charAt(0)+'^'+fi.substring(1,fi.length-1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+fi.charAt(fi.length-1)+'^5';
 							}
 						}
 					}
@@ -456,7 +457,7 @@ xmall.push('y3a');
 	}
 	dup=sortaz(dup);
 
-	document.textpad.pad.value="titlelist.push('"+dup.join("');\ntitlelist.push('") + "');";
+	document.textpad.pad.value="var titlelist = ['"+dup.join("',\n'") + "'];";
 }
 
 function noahsb() {
@@ -728,7 +729,7 @@ function noahd() {
 	out = '';
 	for (i in engN) {
 		var x = engN[i].split(',');
-		out += 'yt['+replacevelstandard(x.shift()).replace(/"n/g, '`n').replace(/\./g, ',')+'] = ['+x.join(',')+'];\n';
+		out += 'yt['+toVel(x.shift()).replace(/"n/g, '`n').replace(/\./g, ',')+'] = ['+x.join(',')+'];\n';
 	}
 	writeFile('english1.js', out);
 }
