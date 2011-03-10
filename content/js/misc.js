@@ -1457,7 +1457,7 @@ pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" />
 
 function getLinkPlace() {
 
-	var options = document.location.href.split('?')[1].split('&');
+	var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
 	var place = options.shift();
 	var para = null;

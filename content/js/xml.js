@@ -118,7 +118,7 @@ function importXML(labelsearch,para)
 	// titles
 	
 	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center><a href="chrome://digitalpalireader/content/index.htm?'+permalink+'" title="Permalink to this section">'+titleout+'</a></td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td>'+relout+'</td><td align=center><a href="chrome://digitalpalireader/content/index.htm?'+permalink+(labelsearch ? '&query=' + labelsearch.join('+') : '')+'" title="Permalink to this section">'+titleout+'</a></td><td id="maftrans" align="right"></td></tr></table>';
 		
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }
