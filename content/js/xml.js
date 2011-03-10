@@ -135,7 +135,7 @@ function importXML(labelsearch,para)
 	// add to history
 	
 	if(ioCheck) {
-		addHistory(nikname[nikaya]+(hier!='m'?hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+		addHistory(nikname[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 		historyBox();
 	}
 
