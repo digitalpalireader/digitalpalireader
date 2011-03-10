@@ -178,10 +178,9 @@ function formatuniout(data,which) { // prepare without links
 					finout += translit(toUni(wb)); b++;
 				}
 				else {
-					fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
+					fullwordout[0] += wb.replace(/"/g, 'x').replace(/<[^>]*>/g, '');
 					fullwordout[1] += translit(toUni(wb));
 				}
-
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
 			if(!which) {// put it together as one link
@@ -1457,11 +1456,14 @@ pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 function getLinkPlace() {
-	var place = document.location.href.split('?')[1];
+
+	var options = document.location.href.split('?')[1].split('&');
+
+	var place = options.shift();
 	var para = null;
+	var query = null;
+	
 	if(place.indexOf('&') > -1) {
-		para = place.split('&')[1];
-		if (para.search(/[^0-9]/) > -1) para = null;
 		place = place.split('&')[0];
 	}
 	if (place.search(/[^a-z0-9.]/) > -1) return;
@@ -1473,7 +1475,15 @@ function getLinkPlace() {
 
 	if (place.length != 8) return;
 	getplace(place);
-	importXML(null,parseInt(para)-1);
+	
+	// parse options
+	
+	for (i in options) {
+		var option = options[i].split('=');
+		if (option[0] == 'para') para = parseInt(option[1])-1;
+		else if (option[0] == 'query') query = option[1].split('+');
+	}
+	importXML(query,para);
 }
 
 function onDocLoad() {

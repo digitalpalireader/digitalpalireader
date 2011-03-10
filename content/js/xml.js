@@ -110,7 +110,7 @@ function importXML(labelsearch,para)
 	var permalink = nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 	
 	try {
-		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&' + (para+1) : ''));
+		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&para=' + (para+1) : '')+(labelsearch ? '&query=' + labelsearch.join('+') : ''));
 	}
 	catch(ex) {
 	}
@@ -154,10 +154,10 @@ function importXML(labelsearch,para)
 					if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
 				}	
 				if (quit == 1) {
-					theData += ' <p> ' + onepar;
+					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
 				}
 				else {
-					theData += ' <p> ';
+					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+')+'> ';
 					var tmpdata = onepar;
 					for (var i = 0; i < labelsearch.length; i++)
 					{
@@ -185,10 +185,10 @@ function importXML(labelsearch,para)
 					if (onepar.indexOf(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
 				}	
 				if (quit == 1) {
-					theData += ' <p> ' + onepar;
+					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
 				}
 				else {
-					theData += ' <p> ';
+					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+')+'> ';
 					var tmpdata = onepar;
 					for (var i = 0; i < labelsearch.length; i++)
 					{
@@ -213,7 +213,7 @@ function importXML(labelsearch,para)
 	else {
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			theData += ' <p'+permalink+'&'+(tmp+1)+'> ' + z[tmp].textContent.substring(4);
+			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.substring(4);
 		}
 	}
 	preout(theData);
