@@ -1,20 +1,19 @@
 <top> <data> [h1]Digital Pali Reader - Help File[/h1]</data>
 <data>[h2][b]Contents:[/b][/h2]</data>
 <data>[ol]</data>
-<data>[li][a href="#intro"]Introduction[/a][/li]</data>
-<data>[li][a href="#notes"]Notes[/a][/li]</data>
-<data>[li][a href="#usage"]Usage[/a][ul]</data>
-<data>[li][a href="#basic"]Basic Usage[/a][/li]</data>
-<data>[li][a href="#tipitaka"]Tipitaka Lookup[/a][/li]</data>
-<data>[li][a href="#bookmarks"]Bookmarking[/a][/li]</data>
-<data>[li][a href="#search"]Text Search[/a][/li]</data>
-<data>[li][a href="#dict"]Dictionary[/a][/li]</data>
-<data>[li][a href="#tech"]Technical[/a][/li][/ul]</data>
-<data>[li][a href="#misc"]Miscellany[/a][/li][ul]</data>
-<data>[li][a href="#permalinks"]Permalinks[/a][/li]</data>
-<data>[li][a href="#tools"]Other Tools[/a][/li][/ul]</data>
-<data>[li][a href="#gratitude"]Gratitude[/a][/li]</data>
-<data>[li][a href="#final"]Final Words[/a][/li]</data>
+<data>[li][a class="green" href="#intro"]Introduction[/a][/li]</data>
+<data>[li][a class="green" href="#notes"]Notes[/a][/li]</data>
+<data>[li][a class="green" href="#usage"]Usage[/a][ul]</data>
+<data>[li][a class="green" href="#tipitaka"]Tipitaka Lookup[/a][/li]</data>
+<data>[li][a class="green" href="#bookmarks"]Bookmarking[/a][/li]</data>
+<data>[li][a class="green" href="#search"]Text Search[/a][/li]</data>
+<data>[li][a class="green" href="#dict"]Dictionary[/a][/li]</data>
+<data>[li][a class="green" href="#tech"]Technical[/a][/li][/ul]</data>
+<data>[li][a class="green" href="#misc"]Miscellany[/a][/li][ul]</data>
+<data>[li][a class="green" href="#permalinks"]Permalinks[/a][/li]</data>
+<data>[li][a class="green" href="#tools"]Other Tools[/a][/li][/ul]</data>
+<data>[li][a class="green" href="#gratitude"]Gratitude[/a][/li]</data>
+<data>[li][a class="green" href="#final"]Final Words[/a][/li]</data>
 <data>[/ol]</data>
 <data>[hr]</data>
 <data>[a name="intro" /][h2][b]Introduction[/b][/h2]</data>
@@ -44,14 +43,10 @@
 <data>[li]Text entry fields accept either unicode Pali characters or characters based on the [a style="color:green" href="javascript:void(0)" onclick="helpXML('velthuis.xml')"]Velthuis[/a] scheme. [/li]</data>
 <data>[li]The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. [/li]</data>
 <data>[li]For the latest version of the reader, please visit [a style="color:green" href="http://pali.sirimangalo.org/"]pali.sirimangalo.org[/a][/li]</data>
-<data>[/ul]</data>
-<data>[hr]</data>
-<data>[a name="usage" /][h2]Usage[/h2]</data>
-<data>[a name="basic" /][h3]Basic Usage[/h3]</data>
-<data>[p]</data>
-<data>[b]Note:[/b] If any problem arises in the functioning of the reader, just press F5 to reset the reader[/p]</data>
-<data>[p]</data>
-<data>[b]Note:[/b] Many common tasks are now mapped to keys, which may be used instead of the buttons themselves, as follows:[br]</data>
+<data>[li]</data>
+<data>If any problem arises in the functioning of the reader, just press F5 to reset the reader[/li]</data>
+<data>[li]</data>
+<data>Many common tasks are now mapped to keys, which may be used instead of the buttons themselves, as follows:[br]</data>
 <data>[ul]</data>
 <data>[li]</data>
 <data>[b]1,2,3[/b] for the three views (RAD)[/li]</data>
@@ -68,7 +63,10 @@
 <data>[li]</data>
 <data>[b]%,!,#,*,?,@[/b] for each of the six buttons at the bottom (see below).[/li]</data>
 <data>[/ul]</data>
-<data>[/p]</data>
+<data>[/li]</data>
+<data>[/ul]</data>
+<data>[hr]</data>
+<data>[a name="usage" /][h2]Usage[/h2]</data>
 <data>[p]The left side of the screen contains the main controls. Basic use should require little explanation. What follows is a brief explanation of all of the controls in the control panel, by section:[/p]</data>
 <data>[a name="tipitaka" /][h3]Tipitaka Lookup[/h3]</data>
 <data>[p]The top three sections on the control panel are for browsing through the tipitaka and ancillary works.  At the top, there is the list of collections and books.  Below that is a set of hierarchical lists of the sections for the current book.  Below that, there are four sets of buttons: [table class="butc"]</data>
@@ -146,7 +144,7 @@
 <data>[hr]</data>
 <data>[a name="misc" /][h2]Miscellany[/h2]</data>
 <data>[a name="permalinks" /][h3]Permalinks:[/h3]</data>
-<data>[p]The permalink to a section is found in up to three places: the address bar (requires Firefox 4 or higher), the title of the current section, and the space to the left of each paragraph (which turns white when you hover over it).  An example permalink is [a href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave[/a]  The link is made up of up to four parts, depending on the information it contains: first, everything before the question mark is the actual location of the DPR itself; second, the information between the question mark and the first ampersand (&amp;) is the location of the section in DPR syntax, in this case the first section of the Digha Nikaya; third, "para=4" tells the DPR to scroll to the fourth paragraph; fourth, "query=bhagavaa+bhikkhave" tells the DPR to highlight the words "bhagavaa" and "bhikkhave".  This link can be shared with other DPR users for easy reference, or even placed on a website or forum, as in the following example: [a href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]link to paribbājakakathā[/a]</data>
+<data>[p]The permalink to a section is found in up to three places: the address bar (requires Firefox 4 or higher), the title of the current section, and the space to the left of each paragraph (which turns white when you hover over it).  An example permalink is[br][br][a class="green" href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave[/a][br][br]  The link is made up of up to four parts, depending on the information it contains: first, everything before the question mark is the actual location of the DPR itself; second, the information between the question mark and the first ampersand (&amp;) is the location of the section in DPR syntax, in this case the first section of the Digha Nikaya (d), mula (m); third, "para=4" tells the DPR to scroll to the fourth paragraph; fourth, "query=bhagavaa+bhikkhave" tells the DPR to highlight the words "bhagavaa" and "bhikkhave".  This link can be shared with other DPR users for easy reference, or even placed on a website or forum, as in the following example: [br][br]([a class="green" href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]Link to paribbājakakathā[/a])[br][br][/p]</data>
 <data>[a name="tools" /][h3]Other Tools:[/h3]</data>
 <data>[p]Finally, there are some hidden tools in the DPR; hidden because I didn't kow where to put them. Links to them will be placed here:[br][br]</data>
 <data>[a href="etc/grammar/GMD/index.html" style="color:green" target="_blank"]A Practical Grammar of the Pali Language by Charles Duroiselle[/a][br][br]</data>

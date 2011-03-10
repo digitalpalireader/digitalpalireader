@@ -533,7 +533,7 @@ font-family: 'courier new';
 
 
 .hide { display: none; }
-.green        { color: #00B900 }
+.green        { color: green }
 .white        { color: #7F4C00 }
 .yellow        { color: #FFFF00; font-weight:bold }
 .blue        { color: #5353D5 }
