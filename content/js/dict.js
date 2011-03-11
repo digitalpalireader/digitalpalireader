@@ -519,9 +519,11 @@ function attsearchstart()
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
+	var outnik = '';
 
 	for (x = 0; x < attlist.length; x++)
 	{
+		outnik = '';
 		var attt = attlist[x].split('#')[0];
 		
 		if(document.form.sofuzzy.checked) {
@@ -536,10 +538,19 @@ function attsearchstart()
 		}
 		if(yessir)
 		{
-            gsplit = attlist[x].split('#')[0];
+			var entries = attlist[x].split('#');
+			gsplit = entries.shift();
 			uniout = toUni(gsplit);
-                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'a\')">' + uniout + ' (' + (attlist[x].split('#').length-1) + ')</a><br>';
+			
+			// nikayas
+			for(a = 0; a < entries.length; a++) {
+				var tnik = entries[a].charAt(0);
+				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
+			}
+			if (entries.length == 0) continue;
+                       
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -594,9 +605,11 @@ function tiksearchstart()
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
+	var outnik = '';
 
 	for (x = 0; x < tiklist.length; x++)
 	{
+		outnik = '';
 		var tikt = tiklist[x].split('#')[0];
 		
 		if(document.form.sofuzzy.checked) {
@@ -610,10 +623,20 @@ function tiksearchstart()
 		}
 		if(yessir)
 		{
-            gsplit = tiklist[x].split('#')[0];
+
+			var entries = tiklist[x].split('#');
+			gsplit = entries.shift();
 			uniout = toUni(gsplit);
-                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'t\')">' + uniout + ' (' + (tiklist[x].split('#').length-1) + ')</a><br>';
+			
+			// nikayas
+			for(a = 0; a < entries.length; a++) {
+				var tnik = entries[a].charAt(0);
+				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
+			}
+			if (entries.length == 0) continue;
+
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -669,8 +692,13 @@ function titlesearchstart()
 	var y = 0;
 	var finout = '';
 
+	var outnik = '';
+
 	for (x = 0; x < titlelist.length; x++)
 	{
+		
+		outnik = '';
+		
 		var titt = titlelist[x].split('#')[0];
 		
 		if(document.form.sofuzzy.checked) {
@@ -684,19 +712,28 @@ function titlesearchstart()
 		}
 		if(yessir)
 		{
-            gsplit = titlelist[x].split('#')[0];
-			uniout = toUni(gsplit);
 			
 			// separate mat
 			var entries = titlelist[x].split('#');
-			entries.shift();
+			gsplit = entries.shift();
+			uniout = toUni(gsplit);
+
 			for(a = 0; a < entries.length; a++) {
 				if((entries[a].charAt(entries[a].length-3) == 'm' && !document.getElementById('soMATM').checked) || (entries[a].charAt(entries[a].length-3) == 'a' && !document.getElementById('soMATA').checked) || (entries[a].charAt(entries[a].length-3) == 't' && !document.getElementById('soMATT').checked)) {
 					entries.splice(a--,1);
 				}
 			}
 			if (entries.length == 0) continue;
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+(document.getElementById('soMATM').checked ? true : false)+','+(document.getElementById('soMATA').checked ? true : false)+','+(document.getElementById('soMATT').checked ? true : false)+')">' + uniout + ' (' + entries.length + ')</a><br>';
+			
+			// nikayas
+			for(a = 0; a < entries.length; a++) {
+				var tnik = entries[a].charAt(0);
+				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
+			}
+			if (entries.length == 0) continue;
+
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+document.getElementById('soMATM').checked+','+document.getElementById('soMATA').checked+','+document.getElementById('soMATT').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a><br>';
 			y++;
 		}
 	}
@@ -899,7 +936,7 @@ function atiSearchOffline(getstring) {
 
 	document.getElementById('difb').innerHTML = '<div><a name="diftop"><br />ATI full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line):<br><br><div id="dictList"></div></div><hr><hr>';
 	
-	var nik = ['D','M','S','A','K'];
+	var nik = ['d','m','s','a','k'];
 	for (d in nik) {
 		if(!document.getElementById('soNS'+nik[d]).checked) continue;
 		var titleNode = document.createElement('div');
@@ -984,7 +1021,9 @@ function dictLoad() {
 	document.getElementById('soSW').style.display = 'none';
 	document.getElementById('soRX').style.display = 'none';
 	document.getElementById('soFZ').style.display = 'none';
+	document.getElementById('soNSV').style.display = 'none';  // Vinaya Select
 	document.getElementById('soNS').style.display = 'none';  // Nikaya Select
+	document.getElementById('soNSA').style.display = 'none';  // Abhi Select
 	document.getElementById('soMAT').style.display = 'none';  // MAT Select
 	switch (which) {
 		case 0: //dpr
@@ -1025,6 +1064,9 @@ function dictLoad() {
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
+			document.getElementById('soNSV').style.display = 'block';
+			document.getElementById('soNS').style.display = 'block';
+			document.getElementById('soNSA').style.display = 'block';
 			if(typeof(attlist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -1037,6 +1079,9 @@ function dictLoad() {
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
+			document.getElementById('soNSV').style.display = 'block';
+			document.getElementById('soNS').style.display = 'block';
+			document.getElementById('soNSA').style.display = 'block';
 			if(typeof(tiklist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');
@@ -1050,6 +1095,9 @@ function dictLoad() {
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 			document.getElementById('soMAT').style.display = 'block';
+			document.getElementById('soNSV').style.display = 'block';
+			document.getElementById('soNS').style.display = 'block';
+			document.getElementById('soNSA').style.display = 'block';
 			if(typeof(titlelist) == 'undefined') {
 				var headID = document.getElementsByTagName("head")[0];         
 				var newScript = document.createElement('script');

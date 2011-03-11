@@ -531,6 +531,9 @@ font-weight: bold;
 font-family: 'courier new';
 }
 
+.bottomb {
+	border-bottom: grey 1px solid;
+}
 
 .hide { display: none; }
 .green        { color: green }

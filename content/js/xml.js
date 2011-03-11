@@ -893,23 +893,29 @@ function helpXML(file)
 }
 
 
-function getatt(num,type) { // get atthakatha or tika word 
+function getatt(num,type,niklist) { // get atthakatha or tika word 
     moveframex(2);
     if(type == 'a') {
-		var word = attlist[num].split('#')[0];
-		var loc = attlist[num].substring(attlist[num].indexOf('#')+1);
+		var loca = attlist[num].split('#');
+		var word = loca.shift();
 	}
 	else {
-		var word = tiklist[num].split('#')[0];
-		var loc = tiklist[num].substring(tiklist[num].indexOf('#')+1);
+		var loca = tiklist[num].split('#');
+		var word = loca.shift();
 	}
-    var loca = loc.split('#');
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
     var finout = '';
+    
+    location:
     for (i in loca) {
         var pca = loca[i].split('^');
         var nikaya = pca[0];
+        
+        // specify nikayas 
+        
+		if(niklist.indexOf(nikaya) == -1) continue;
+
         var book = pca[1];
         
         var bookload = 'xml/' + nikaya + book + type + '.xml';
@@ -940,7 +946,7 @@ function getatt(num,type) { // get atthakatha or tika word
         var suttalist = '';
         var sectionlist = '';
 
-        var placen = nikname[nikaya] + ' ' + book;
+        var placen = nikname[nikaya] + '-'+type+' ' + book;
 
         var u = xmlDoc.getElementsByTagName("h0");
         if (u.length > 1) placen += '.' + (parseInt(meta)+1);
@@ -966,29 +972,31 @@ function getatt(num,type) { // get atthakatha or tika word
     document.getElementById('maf').scrollTop = 0;
 }
  
-function gettitle(num,mul,att,tik) { // get titles 
+function gettitle(num,mul,att,tik,niklist) { // get titles 
 
     moveframex(2);
 
-	var word = titlelist[num].split('#')[0];
-	var loc = titlelist[num].substring(titlelist[num].indexOf('#')+1);
-    var loca = loc.split('#');
-
+	var loca = titlelist[num].split('#');
+	var word = loca.shift();
 	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
     
     var finout = '';
+    
+    location:
     for (i in loca) {
-		// separate mat
-		var entries = loca[i].split('#');
-		for(a in entries) {
-			if((entries[a].charAt(entries[a].length-3) == 'm' && !mul) || (entries[a].charAt(entries[a].length-3) == 'a' && !att) || (entries[a].charAt(entries[a].length-3) == 't' && !tik)) entries.splice(a,1);
-		}
-		if (entries.length == 0) continue;
-
         var pca = loca[i].split('^');
+
+		// separate mat
+		if((pca[7] == 'm' && !mul) || (pca[7] == 'a' && !att) || (pca[7] == 't' && !tik)) continue;
+        
+        // specify nikayas 
         var nikaya = pca[0];
+        
+		if(niklist.indexOf(nikaya) == -1) continue;
+
+
         var book = pca[1];
         var type = pca[7];
         var bookload = 'xml/' + nikaya + book + type + '.xml';
