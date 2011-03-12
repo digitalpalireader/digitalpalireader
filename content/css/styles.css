@@ -21,6 +21,16 @@ select, input, textarea {
 	font-size: 10px;
 }
 
+.large {
+	font-size: 20px;
+}
+
+
+.huge {
+	font-size: 24px;
+}
+
+
 .abut {
 text-align:center;
 vertical-align:middle;
@@ -55,6 +65,7 @@ background-image:url('../images/mats.png');
 .mybut {
 	border-style: outset;
 }
+
 html, body {
  
 width: 100%;
@@ -97,6 +108,18 @@ img {
 margin-left:auto; 
 margin-right:auto; 
 }
+
+
+.bottomb {
+	border-bottom: grey 1px solid;
+}
+.bordered {
+	border: grey 1px solid;
+}
+.topb {
+	border-top: grey 1px solid;
+}
+
 
 #content {
 position:absolute;
@@ -265,6 +288,10 @@ width:100%;
 	position:absolute;
 	top:50%;
 	left:50%;
+	padding:10px;
+	background-color: RGBa(255,255,255,0.2);
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 }
 
 #convi {
@@ -529,10 +556,6 @@ height:18px;
 border-style: inset;
 font-weight: bold;
 font-family: 'courier new';
-}
-
-.bottomb {
-	border-bottom: grey 1px solid;
 }
 
 .hide { display: none; }

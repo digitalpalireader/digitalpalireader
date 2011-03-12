@@ -199,9 +199,11 @@ else {
 		document.styleSheets[0]['cssRules'][2].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.9) + 'px';  // select, etc.
 		document.styleSheets[0]['cssRules'][3].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.8) + 'px';  // small
 		document.styleSheets[0]['cssRules'][4].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.7) + 'px';  // tiny
+		document.styleSheets[0]['cssRules'][5].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.25) + 'px';  // large
+		document.styleSheets[0]['cssRules'][6].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.5) + 'px';  // huge
 		
-		document.styleSheets[0]['cssRules'][5].style.height = Math.round(30/16*parseInt(colorcfg['colsize'])) + 'px';  // abut - all buttons
-		document.styleSheets[0]['cssRules'][6].style.width = Math.round(24/16*parseInt(colorcfg['colsize'])) + 'px';  // tbut - text buttons
+		document.styleSheets[0]['cssRules'][7].style.height = Math.round(30/16*parseInt(colorcfg['colsize'])) + 'px';  // abut - all buttons
+		document.styleSheets[0]['cssRules'][8].style.width = Math.round(24/16*parseInt(colorcfg['colsize'])) + 'px';  // tbut - text buttons
 
 		// update script
 		

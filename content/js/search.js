@@ -1,166 +1,209 @@
-var filearray = new Array();
-filearray.push("d1"); 
-filearray.push("d2");
-filearray.push("d3");
-filearray.push("m1");
-filearray.push("m2");
-filearray.push("m3");
-filearray.push("s1");
-filearray.push("s2");
-filearray.push("s3");
-filearray.push("s4");
-filearray.push("s5");
-filearray.push("a1");
-filearray.push("a2");
-filearray.push("a3");
-filearray.push("a4");
-filearray.push("a5");
-filearray.push("a6");
-filearray.push("a7");
-filearray.push("a8");
-filearray.push("a9");
-filearray.push("a10");
-filearray.push("a11");
-filearray.push("k1");
-filearray.push("k2");
-filearray.push("k3");
-filearray.push("k4");
-filearray.push("k5");
-filearray.push("k6");
-filearray.push("k7");
-filearray.push("k8");
-filearray.push("k9");
-filearray.push("k10");
-filearray.push("k11");
-filearray.push("k12");
-filearray.push("k13");
-filearray.push("k14");
-filearray.push("k15");
-filearray.push("k16");
-filearray.push("k17");
-filearray.push("k18");
-filearray.push("k19");
-filearray.push("k20");
-filearray.push("k21");
-filearray.push("v1");
-filearray.push("v2");
-filearray.push("v3");
-filearray.push("v4");
-filearray.push("v5");
-filearray.push("v6");
-filearray.push("y1");
-filearray.push("y2");
-filearray.push("y3");
-filearray.push("y4");
-filearray.push("y5");
-filearray.push("y6");
-filearray.push("y7");
-filearray.push("y8");
-filearray.push("y9");
-filearray.push("y10");
-filearray.push("y11");
-filearray.push("y12");
-filearray.push("y13");
-filearray.push("y14");
+var starttime;
+
+function checkGetstring(getstring) {
+	var stringra = [];
+	
+	var yesplus = getstring.indexOf('+');
+	if (yesplus >= 0)
+	{
+		stringra = getstring.split('+');
+	}
+	if (getstring.length < 3)
+	{
+		alert("Minimum three letter search length")
+		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
+		document.getElementById('sbfa').innerHTML='';
+		document.getElementById('sbfab').innerHTML='';
+		return false;
+	}
+	if (stringra.length > 3)
+	{
+		alert("maximum three strings per search")
+		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
+		document.getElementById('sbfa').innerHTML='';
+		return false;
+	}
+	for (var s = 0; s < stringra.length; s++)
+	{
+		if (stringra[s].length < 3 && stringra.length > 0)
+		{
+			alert("Minimum three letter search length")
+			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
+			document.getElementById('sbfa').innerHTML='';
+			document.getElementById('sbfab').innerHTML='';
+			return false;
+		}
+	}
+	return true;
+}
+
+function searchTipitaka() {
+
+	starttime = new Date;
+	starttime = starttime.getTime();
+
+	if(!checkGetstring(document.form.isearch.value)) return;
+	
+	var which = document.getElementById('tipType').selectedIndex;
+	
+	if(which == 3 || which == 6 || which == 10) return;
+
+	document.form.usearch.value = toVel(document.form.isearch.value); 
+	moves(1);
+		switch(which) {
+		case 0:
+		case 4:
+		case 7:
+		case 11:
+			pausesall();
+		break;
+		case 1:
+		case 5:
+		case 8:
+		case 12:
+			pausetwo();
+		break;
+		case 2:
+		case 9:
+			pausethree();
+		break;
+	}
+
+}
+
+function tipitakaOptions() {
+	
+	document.getElementById('tsoMAT').style.display = 'none';
+	document.getElementById('tsoCO').style.display = 'none';
+	document.getElementById('tsoBO').style.display = 'none';
+	
+	var which = document.getElementById('tipType').selectedIndex;
+	switch(which) {
+		case 4:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoCO').style.display = 'block';
+		break;
+		case 5:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoBO').style.display = 'block';
+		break;
+		case 7:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoMAT').style.display = 'block';
+		break;
+		case 8:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoMAT').style.display = 'block';
+		break;
+		case 9:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoMAT').style.display = 'block';
+		break;
+		case 11:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoMAT').style.display = 'block';
+			document.getElementById('tsoCO').style.display = 'block';
+		break;
+		case 12:
+			document.getElementById('tsearchopts').style.display = 'block';
+			document.getElementById('tsoMAT').style.display = 'block';
+			document.getElementById('tsoBO').style.display = 'block';
+		default:
+		break;
+	}
+}
+/*
+<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausesall();"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausetwo();"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); bounce3()"> 
+*/
 
 
-var filearraya = new Array();
-filearraya.push("d1"); 
-filearraya.push("d2");
-filearraya.push("d3");
-filearraya.push("m1");
-filearraya.push("m2");
-filearraya.push("m3");
-filearraya.push("s1");
-filearraya.push("s2");
-filearraya.push("s3");
-filearraya.push("s4");
-filearraya.push("s5");
-filearraya.push("a1");
-filearraya.push("a2");
-filearraya.push("a3");
-filearraya.push("a4");
-filearraya.push("a5");
-filearraya.push("a6");
-filearraya.push("a7");
-filearraya.push("a8");
-filearraya.push("a9");
-filearraya.push("a10");
-filearraya.push("a11");
-filearraya.push("k1");
-filearraya.push("k2");
-filearraya.push("k3");
-filearraya.push("k4");
-filearraya.push("k5");
-filearraya.push("k6");
-filearraya.push("k7");
-filearraya.push("k8");
-filearraya.push("k9");
-filearraya.push("k10");
-filearraya.push("k12");
-filearraya.push("k13");
-filearraya.push("k14");
-filearraya.push("k15");
-filearraya.push("v1");
-filearraya.push("v2");
-filearraya.push("v3");
-filearraya.push("v4");
-filearraya.push("v5");
-filearraya.push("v6");
-filearraya.push("y1");
-filearraya.push("y2");
-filearraya.push("y3");
-filearraya.push("y4");
-filearraya.push("y5");
-filearraya.push("y6");
-filearraya.push("y9");
+var filearrayf = []; // [nik+book] = [m,a,t]
+filearrayf["v1"] = [1,1,1];
+filearrayf['v2'] = [1,1,1];
+filearrayf['v3'] = [1,1,1];
+filearrayf['v4'] = [1,1,1];
+filearrayf['v5'] = [1,1,1];
+filearrayf['v6'] = [1,1,1];
+filearrayf['d1'] = [1,1,1];
+filearrayf['d2'] = [1,1,1];
+filearrayf['d3'] = [1,1,1];
+filearrayf['m1'] = [1,1,1];
+filearrayf['m2'] = [1,1,1];
+filearrayf['m3'] = [1,1,1];
+filearrayf['s1'] = [1,1,1];
+filearrayf['s2'] = [1,1,1];
+filearrayf['s3'] = [1,1,1];
+filearrayf['s4'] = [1,1,1];
+filearrayf['s5'] = [1,1,1];
+filearrayf['a1'] = [1,1,1];
+filearrayf['a2'] = [1,1,1];
+filearrayf['a3'] = [1,1,1];
+filearrayf['a4'] = [1,1,1];
+filearrayf['a5'] = [1,1,1];
+filearrayf['a6'] = [1,1,1];
+filearrayf['a7'] = [1,1,1];
+filearrayf['a8'] = [1,1,1];
+filearrayf['a9'] = [1,1,1];
+filearrayf['a10'] = [1,1,1];
+filearrayf['a11'] = [1,1,1];
+filearrayf['k1'] = [1,1,0];
+filearrayf['k2'] = [1,1,0];
+filearrayf['k3'] = [1,1,0];
+filearrayf['k4'] = [1,1,0];
+filearrayf['k5'] = [1,1,0];
+filearrayf['k6'] = [1,1,0];
+filearrayf['k7'] = [1,1,0];
+filearrayf['k8'] = [1,1,0];
+filearrayf['k9'] = [1,1,0];
+filearrayf['k10'] = [1,1,0];
+filearrayf['k11'] = [1,0,0];
+filearrayf['k12'] = [1,1,0];
+filearrayf['k13'] = [1,1,0];
+filearrayf['k14'] = [1,1,0];
+filearrayf['k15'] = [1,1,0];
+filearrayf['k16'] = [1,0,0];
+filearrayf['k17'] = [1,0,0];
+filearrayf['k18'] = [1,0,0];
+filearrayf['k19'] = [1,0,0];
+filearrayf['k20'] = [1,0,0];
+filearrayf['k21'] = [1,0,0];
+filearrayf['y1'] = [1,1,1];
+filearrayf['y2'] = [1,1,1];
+filearrayf['y3'] = [1,1,1];
+filearrayf['y4'] = [1,1,1];
+filearrayf['y5'] = [1,1,1];
+filearrayf['y6'] = [1,1,1];
+filearrayf['y7'] = [1,0,0];
+filearrayf['y8'] = [1,0,0];
+filearrayf['y9'] = [1,1,1];
+filearrayf['y10'] = [1,0,0];
+filearrayf['y11'] = [1,0,0];
+filearrayf['y12'] = [1,0,0];
+filearrayf['y13'] = [1,0,0];
+filearrayf['y14'] = [1,0,0];
+filearrayf['x1'] = [1,1,0];
+filearrayf['x2'] = [1,1,0];
+filearrayf['b1'] = [1,0,0];
+filearrayf['b2'] = [1,0,0];
+filearrayf['g1'] = [1,0,0];
+filearrayf['g2'] = [1,0,0];
+filearrayf['g3'] = [1,0,0];
+filearrayf['g4'] = [1,0,0];
+filearrayf['g5'] = [1,0,0];
 
-var filearrayt = [];
-
-filearrayt.push("d1"); 
-filearrayt.push("d2");
-filearrayt.push("d3");
-filearrayt.push("m1");
-filearrayt.push("m2");
-filearrayt.push("m3");
-filearrayt.push("s1");
-filearrayt.push("s2");
-filearrayt.push("s3");
-filearrayt.push("s4");
-filearrayt.push("s5");
-filearrayt.push("a1");
-filearrayt.push("a2");
-filearrayt.push("a3");
-filearrayt.push("a4");
-filearrayt.push("a5");
-filearrayt.push("a6");
-filearrayt.push("a7");
-filearrayt.push("a8");
-filearrayt.push("a9");
-filearrayt.push("a10");
-filearrayt.push("a11");
-filearrayt.push("v1");
-filearrayt.push("v2");
-filearrayt.push("v3");
-filearrayt.push("v4");
-filearrayt.push("v5");
-filearrayt.push("v6");
-filearrayt.push("y1");
-filearrayt.push("y2");
-filearrayt.push("y3");
-filearrayt.push("y4");
-filearrayt.push("y5");
-filearrayt.push("y6");
-filearrayt.push("y9");
+var filearray = [];
 
 var nikletter = new Array();
-nikletter[0] = 'd';
-nikletter[1] = 'm';
-nikletter[2] = 's';
-nikletter[3] = 'a';
-nikletter[4] = 'k';
-nikletter[5] = 'v';
+nikletter[0] = 'v';
+nikletter[1] = 'd';
+nikletter[2] = 'm';
+nikletter[3] = 's';
+nikletter[4] = 'a';
+nikletter[5] = 'k';
 nikletter[6] = 'y';
+nikletter[7] = 'x';
+nikletter[8] = 'b';
+nikletter[9] = 'g';
 
 var bookfile = '';
 var count = 0;
@@ -189,6 +232,7 @@ var exword = new Array();
 var countmatch = 0;
 
 function resetvalues() {
+	filearray = [];
 	exword.length=0;
 	stopsearch = 0;	
 	bookperm = 1;
@@ -202,6 +246,7 @@ function resetvalues() {
 	countmatch = 0;
     document.getElementById('sbfa').innerHTML = '';
     document.getElementById('sbfb').innerHTML = '';
+    document.getElementById('sbfab').innerHTML = '';
     document.getElementById('stfb').innerHTML = '';
     document.getElementById('stfc').innerHTML = '';
     document.getElementById('showing').innerHTML = '';
@@ -211,93 +256,174 @@ function resetvalues() {
 function pausesall() 
 {
 	resetvalues();
+	// make filearray
+	var which = document.getElementById('tipType').selectedIndex;
 
-	var getstring = document.form.usearch.value;
-	var stringra = new Array();
-	var yesplus = getstring.indexOf('+');
-	if (yesplus >= 0)
-	{
-		stringra = getstring.split('+');
-	}
-	if (getstring.length < 3)
-	{
-		alert("Minimum three letter search length")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		document.getElementById('sbfab').innerHTML='';
-		return;
-	}
-	if (stringra.length > 3)
-	{
-		alert("maximum three strings per search")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		return;
-	}
-	for (var s = 0; s < stringra.length; s++)
-	{
-		if (stringra[s].length < 3 && stringra.length > 0)
-		{
-			alert("Minimum three letter search length")
-			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-			document.getElementById('sbfa').innerHTML='';
-			document.getElementById('sbfab').innerHTML='';
-			return;
+	for(w in filearrayf) {
+		if ((which == 0 || which == 7) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
+		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+w.charAt(0)).checked) continue; // don't add unchecked collections
+
+		if(which > 6) { // multiple hier
+			for (x = 0; x < 3; x++) {
+				if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[w][x] == 1) { // this hier is checked and the file exists in this hier
+					filearray.push(w+hLetters[x]);
+				}
+			}
+		}
+		else { // single hier
+			if (hier == "m" && filearrayf[w][0] == 1 || hier == "a" && filearrayf[w][1] == 1 || hier == "t" && filearrayf[w][2] == 1) filearray.push(w+hier);
 		}
 	}
 
-	
-	
-		document.getElementById('sbfab').innerHTML = '';
-		document.getElementById('sbfb').innerHTML = '<hr>';
-	
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> <a href="#sbfDN">DN:</a> <font id="stfd"></font>, <a href="#sbfMN">MN:</a> <font id="stfm"></font>, <a href="#sbfSN">SN:</a> <font id="stfs"></font>, <a href="#sbfAN">AN:</a> <font id="stfa"></font>, <a href="#sbfKN">KN:</a> <font id="stfk"></font>, <a href="#sbfVin">Vin:</a> <font id="stfv"></font>, <a href="#sbfAbhi">Abhi:</a> <font id="stfy"></font></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
-	
+	if(filearray.length == 0) {
+		alert('No books in selection');
+		return;
+	}
+
+	var getstring = document.form.usearch.value;
 
 	
-	var tableout = '<table width=100% id="stftb"><tr>';
-	if (hier == "a") var fal = filearraya.length;
-	else if (hier == "t") var fal = filearrayt.length;
-	else var fal = filearray.length;
+	
+	document.getElementById('sbfab').innerHTML = '';
+	document.getElementById('sbfb').innerHTML = '<hr>';
+	
+	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
+	
+	var toplista = [];
+	
+	for (i = 0; i < nikletter.length; i++) {
+		if ((which == 0 || which == 7) && /[xbg]/.exec(nikletter[i])) continue; // don't add extracanonical texts for tipitaka match 
+		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+nikletter[i]).checked) continue; // don't add unchecked collections
+		toplista.push('<span id="sdf'+nikletter[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+nikletter[i]+'\').offsetTop;">'+nikname[nikletter[i]]+':</a> <span id="stf'+nikletter[i]+'"></span></span>');
+	}
+	
+	toplist += toplista.join(', ');
+	
+	toplist += '</td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
+	
+	document.getElementById('stfb').innerHTML = toplist;
+
+	// progress table
+	
+	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
+	var fal = filearray.length;
 	for (q2 = 0; q2 < fal; q2++)
 	{
-		tableout += '<td bgcolor=grey width=1%></td>';
+		tableout += '<td bgcolor="'+colorcfg['colbkcp']+'" width=1 class="bordered"></td>';
 	}
 	tableout += '</tr></table>';
 	document.getElementById('stfc').innerHTML = tableout;
+
+
 	
 	bounce();
 }
-function pausetwo() {
+function pausetwo() { // init function for single collection
 	resetvalues();
+	// make filearray
+	var which = document.getElementById('tipType').selectedIndex;
+	var nikaya = document.form.nik.value;
+	
+	for(w in filearrayf) {
+		if (w.charAt(0) != nikaya) continue; // only this collection
+		if ((which == 5 || which == 12) && !document.getElementById('tsoBObook' + w.substring(1)).checked) continue; // skip unchecked books 
+
+		if(which > 6) { // multiple hier
+			for (x = 0; x < 3; x++) {
+				if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[w][x] == 1) { // this hier is checked and the file exists in this hier
+					filearray.push(w+hLetters[x]);
+				}
+			}
+		}
+		else { // single hier
+			if (hier == "m" && filearrayf[w][0] == 1 || hier == "a" && filearrayf[w][1] == 1 || hier == "t" && filearrayf[w][2] == 1) filearray.push(w+hier);
+		}
+	}
+
+	if(filearray.length == 0) {
+		alert('No books in selection');
+		return;
+	}
+
+
+	var getstring = document.form.usearch.value;
+
+
+	document.getElementById('sbfab').innerHTML = '';
+	document.getElementById('sbfb').innerHTML = '<hr>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+
 	importXMLs(2);
 }
+
+function pausethree() {
+	
+	resetvalues();
+	var which = document.getElementById('tipType').selectedIndex;
+	var nikbook = document.form.nik.value+document.form.book.value
+	var getstring = document.form.usearch.value;
+
+	if(which == 9) { // single book, multiple hier
+		for (x = 0; x < 3; x++) {
+			if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[nikbook][x] == 1) { // this hier is checked and the current book in the current nikaya exists in this hier
+				filearray.push(nikbook+hLetters[x]);
+			}
+		}
+	}		
+	else { // single book
+		filearray = [nikbook+hier];
+	}
+	
+	if(filearray.length == 0) {
+		alert('No books in selection');
+		return;
+	}
+
+
+	var nikaya = document.form.nik.value;
+	var book = document.form.book.value;
+
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+
+	bounce3();
+}
+
 function bounce()
 {
-	if (stopsearch==1) {
-        document.getElementById('stfstop').setAttribute('style','display:none');       
-        return;
-    }	
-	document.getElementById('stftb').getElementsByTagName('td')[qz].setAttribute('bgcolor','lime');
+	document.getElementById('stftb').getElementsByTagName('td')[qz].setAttribute('bgcolor','#2F2');
+
 	setTimeout('importXMLs(1)', 10)
 }
 
 function bounce2()
 {
+
 	setTimeout('importXMLs(2)', 10)
 }
 
 function bounce3() {
-	importXMLs(3);
+	setTimeout('importXMLs(3)', 10)
 }
 
 function finishSearch() {
 	document.getElementById('stfstop').setAttribute('style','display:none');
 	document.getElementById('sbfbc').scrollTop = 0;
+
+	var endtime = new Date;
+	var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+
+	document.getElementById('stfc').innerHTML = '&nbsp;&nbsp;<span class="small"><b><i>'+(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's</b></i>';
 }
 
 function importXMLs(cnt)
 {
+	if (stopsearch==1) {
+		finishSearch();
+		return;
+    }	
+	
+	var which = document.getElementById('tipType').selectedIndex;
+
 	count = cnt;
 	var bookno = 0;
 	var endloop = 0;
@@ -308,170 +434,128 @@ function importXMLs(cnt)
 	
 	document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0)">';
 
-	if (count == 3) document.getElementById('sbfb').innerHTML = '';
-	var yesplus = getstring.indexOf('+');
-	if (yesplus >= 0)
+	if (cnt == 1) // whole tipitaka or multiple collections
 	{
-		stringra = getstring.split('+');
-	}
-	if (getstring.length < 3)
-	{
-		alert("Minimum three letter search length")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		document.getElementById('sbfab').innerHTML='';
-		return;
-	}
-	if (stringra.length > 3)
-	{
-		alert("maximum three strings per search")
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		return;
-	}
-	for (var s = 0; s < stringra.length; s++)
-	{
-		if (stringra[s].length < 3 && stringra.length > 0)
+		bookfile = filearray[qz];
+		newnikaya = bookfile.charAt(0);
+		if (nikayaat != newnikaya)
 		{
-			alert("Minimum three letter search length")
-			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-			document.getElementById('sbfa').innerHTML='';
-			document.getElementById('sbfab').innerHTML='';
-			return;
+			var headingNode = document.createElement('div');
+			headingNode.setAttribute('id', 'sbfN' + newnikaya);
+			headingNode.setAttribute('name', 'xyz');
+			headingNode.setAttribute('class', 'huge');
+			headingNode.innerHTML = nikname[newnikaya] + '<hr>';
+			document.getElementById('sbfb').appendChild(headingNode);
+			thiscount = 0;
+			rescount++;
 		}
-	}
+		nikayaat = bookfile.charAt(0);
+		bookat = bookfile.substring(1,bookfile.length-1);
+		bookperm = bookat;
+		nikperm = nikayaat;
+		hiert = bookfile.charAt(bookfile.length-1);
+		
+		bookload = 'xml/' + bookfile + '.xml';
 
-	if (cnt == 1) // whole tipitaka
-	{
-			if (hier == "a") bookfile = filearraya[qz];
-			else if (hier == "t") bookfile = filearrayt[qz];
-			else bookfile = filearray[qz];
-			newnikaya = bookfile.charAt(0);
-			if (nikayaat != newnikaya)
-			{
-				document.getElementById('sbfb').innerHTML += '<div id="sbf' + nikname[newnikaya] + '" name="xyz"><h1>' + nikname[newnikaya] + '</h1><hr></div>';
-				thiscount = 0;
-				rescount++;
-			}
-			nikayaat = bookfile.charAt(0);
-			bookat = bookfile.substring(1);
-			bookperm = bookat;
-			nikperm = nikayaat;
-			
-			bookload = 'xml/' + bookfile + hier + '.xml';
-	
-            var xmlhttp = new window.XMLHttpRequest();
-            xmlhttp.open("GET", bookload, false);
-            xmlhttp.send(null);
-            var xmlDoc = xmlhttp.responseXML.documentElement;
-            createTables(xmlDoc);
-			            
-			nikcount = nikletter[rescount];
-            if (rescount < 0) document.getElementById('stf'+nikletter[0]).innerHTML = thiscount;
-            else document.getElementById('stf'+nikcount).innerHTML = thiscount;
-			if ((hier == "m" && qz < filearray.length-1) || (hier == "a" && qz < filearraya.length-1) || (hier == "t" && qz < filearrayt.length-1)) 
-			{
-				if (hier == "a") nextbookfile = filearraya[qz+1];
-				else if (hier == "t") nextbookfile = filearrayt[qz+1];
-				else nextbookfile = filearray[qz+1];
-				if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikletter[rescount]).style.color=colorcfg['colsel'];
-				qz++;
-				bounce();
-			}
-			else {
-				qz = 0;
-				bookperm = 0;
-				document.getElementById('stf'+nikletter[rescount]).style.color=colorcfg['colsel'];
-				finishSearch();
-			}			
+		//devO(bookload);
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", bookload, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		createTables(xmlDoc,hiert);
+					
+		document.getElementById('stf'+nikayaat).innerHTML = thiscount;
+		if (qz < filearray.length-1) 
+		{
+			nextbookfile = filearray[qz+1];
+			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikayaat).style.color=colorcfg['colsel'];
+			qz++;
+			bounce();
+		}
+		else {
+			qz = 0;
+			bookperm = 0;
+			document.getElementById('stf'+nikayaat).style.color=colorcfg['colsel'];
+			finishSearch();
+		}			
 	}	
 	else if (cnt == 2) // nikaya
 	{
-		
 		var nikaya = document.form.nik.value;
 
-		// define number of books in the nikaya at hand
-		if (nikaya == 'd' || nikaya == 'm') bookno = 3;
-		else if (nikaya == 's') bookno = 5;
-		else if (nikaya == 'v') bookno = 6;
-		else if (nikaya == 'a') bookno = 11; 
-		else if (nikaya == 'k') bookno = 21; 
-		else if (nikaya == 'x') bookno = 2; 
-		else if (nikaya == 'y') bookno = 14; 
-		else if (nikaya == 'g') bookno = 5; 
 		
-		if (nikaya == 'k' && hier == 'a' && qz == 10) qz++;
-		if (nikaya == 'y' && hier != 'm' && qz == 6) qz = 8;
+		bookfile = filearray[qz];
+		bookat = bookfile.substring(1,bookfile.length-1);
+		bookperm = bookat;
+		hiert = bookfile.charAt(bookfile.length-1);
 
-		var bookname = getBookName(nikaya,hier,qz);
-		bookperm = qz+1;
-		if (qz == 0) {
-			document.getElementById('sbfab').innerHTML = '';
-			document.getElementById('sbfb').innerHTML = '<hr>';
-			document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><font id="stfx"></font> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
-		}
-				
-		document.getElementById('sbfb').innerHTML += '<div name="xyz"><h1>' + nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + bookname + '</h1><hr></div>';
+/*		var headingNode = document.createElement('div');
+		headingNode.setAttribute('name', 'xyz');
+		headingNode.setAttribute('id', 'xyz');
+		headingNode.setAttribute('class', 'large');
+		headingNode.innerHTML = nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + getBookName(nikaya, hiert, parseInt(bookat)-1) + '<hr>';
+		document.getElementById('sbfb').appendChild(headingNode);
+*/		
+		bookload = 'xml/' + bookfile + '.xml';
 
-		// loop through the books - now loops through bounce function
-
-		bookfile = nikaya + (qz + 1); // create the name of the xml file without the "
-		bookload = 'xml/' + bookfile + hier + '.xml';
-		
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
-        createTables(xmlDoc);
-		//alert(bookload);
-
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", bookload, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		createTables(xmlDoc,hiert);
+					
 		document.getElementById('stfx').innerHTML = thiscount;
-		if (nikaya == 'k' && hier == 'a' && qz == 14) { qz = bookno - 1; }
-		else if (nikaya == 'y' && hier != 'm' && qz == 8) { qz = bookno - 1; }
-		if (qz < bookno - 1) 
+		
+		if (qz < filearray.length-1) 
 		{
 			qz++;
 			bounce2();
 		}
-		else { // finished
+		else {
 			qz = 0;
 			bookperm = 0;
 			thiscount = 0;
 			finishSearch();
-		}
+		}			
 	}
 	else if (cnt == 3) // this book
 	{
-		resetvalues();
 		var nikaya = document.form.nik.value;
 		var book = document.form.book.value;
-		bookfile = nikaya + book;
 		
-		document.getElementById('sbfab').innerHTML = '';
-		//document.getElementById('sbfb').innerHTML = '<hr><div title="xyz"><h1>' + nikname[nikaya] + ' ' + book + '</h1><hr></div>';
+		bookfile = filearray[qz];
+		hiert = bookfile.charAt(bookfile.length-1);
 
-		document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <b id="num">' + countmatch + '</b></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+		bookload = 'xml/' + bookfile + '.xml';
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", bookload, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		createTables(xmlDoc,hiert);
+					
+		document.getElementById('stfx').innerHTML = thiscount;
 		
-		bookload = 'xml/' + bookfile + hier + '.xml';
-
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
-        createTables(xmlDoc);
-
-        
-		finishSearch();
+		if (qz < filearray.length-1) 
+		{
+			qz++;
+			bounce3();
+		}
+		else {
+			qz = 0;
+			thiscount = 0;
+			finishSearch();
+		}		
 	}
 	document.getElementById('searchb').scrollTop = 0; //vertical scroll
 	buffer = '';
 	first = 0;
 	nikperm = 0;
-	if (count == 3) thiscount = 0;
 	
 }
 
-function createTables(xmlDoc)
+function createTables(xmlDoc,hiert)
 {
 	//alert(bookload);
 	var u = xmlDoc.getElementsByTagName("h0");
@@ -706,7 +790,7 @@ function createTables(xmlDoc)
 										exwordout += '</td>';
 									}								
 																
-									finalout += '<div id='+countmatch + tagtitle+'><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -732,7 +816,7 @@ function createTables(xmlDoc)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</font>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -847,7 +931,7 @@ function createTables(xmlDoc)
 
 									// titles
 																
-									finalout += '<div id='+countmatch + tagtitle+'><p><font size=4><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -874,7 +958,7 @@ function createTables(xmlDoc)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></font></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -886,7 +970,6 @@ function createTables(xmlDoc)
 
 								}
 							}
-							if (count == 3) document.getElementById('num').innerHTML = '<font style="color:' + colorcfg['colsel'] + '">' + thiscount + '</font>';
 						}
 						nummatch = 0;
 					}
@@ -894,9 +977,11 @@ function createTables(xmlDoc)
 			}
 		}
 	}
-	if (count == 3) document.getElementById('sbfb').innerHTML += '<hr>';
+	if (count == 3) {
+		document.getElementById('sbfb').appendChild(document.createElement('hr'));
+	}
 	if (match == 0) {
-		finalout = '<div name="xyz"><p><font size=4 style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + ' ' + bookname + '</font> - <font style="color:' + colorcfg['colsel'] + '" size=3><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></font><hr></div>';
+		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + colorcfg['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
 		outNode.innerHTML = finalout;
 		document.getElementById('sbfb').appendChild(outNode);
 	}
@@ -920,7 +1005,7 @@ function showonly(string) {
 	}
 	else {	
 		for (x = 0; x < da.length; x++) {
-			if (da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) da[x].style.display = "block";
+			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
 	}

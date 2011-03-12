@@ -718,9 +718,8 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var nik = document.form.nik.value;
 	var booknumber = setplace[1]; 
-	if (nikvoladi[nik]) {document.getElementById('book').innerHTML=nikvoladi[nik]; }
 	
-	else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
+	setBookList(nik); 
         	
 	document.form.book.selectedIndex = booknumber;
 

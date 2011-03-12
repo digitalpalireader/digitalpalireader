@@ -1,3 +1,6 @@
+// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ
+
+
 function preout(data,which) // calls text prep, then outputs it to preFrame
 {
 
@@ -408,10 +411,10 @@ ynames.push('Vibh');
 ynames.push('Dhātuk');
 ynames.push('Pp');
 ynames.push('Kv');
-ynames.push('Yam 1');
+ynames.push('Yam');
 ynames.push('Yam 2');
 ynames.push('Yam 3');
-ynames.push('Paṭṭh 1');
+ynames.push('Paṭṭh');
 ynames.push('Paṭṭh 2');
 ynames.push('Paṭṭh 3');
 ynames.push('Paṭṭh 4');
@@ -419,24 +422,24 @@ ynames.push('Paṭṭh 5');
 ynames.push('Paṭṭh 6');
 
 var nikvoladi = new Array();
-nikvoladi['d'] = '<select size="7" name="book" onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
-nikvoladi['m'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option></select>';
-nikvoladi['s'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option></select>';
-nikvoladi['a'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option></select>';
-nikvoladi['km'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">'+knames[0]+'</option><option value="2">'+knames[1]+'</option><option value="3">'+knames[2]+'</option><option value="4">'+knames[3]+'</option><option value="5">'+knames[4]+'</option><option value="6">'+knames[5]+'</option><option value="7">'+knames[6]+'</option><option value="8">'+knames[7]+'</option><option value="9">'+knames[8]+'</option><option value="10">'+knames[9]+'</option><option value="11">'+knames[10]+'</option><option value="12">'+knames[11]+'</option><option value="13">'+knames[12]+'</option><option value="14">'+knames[13]+'</option><option value="15">'+knames[14]+'</option><option value="16">'+knames[15]+'</option><option value="17">'+knames[16]+'</option><option value="18">'+knames[17]+'</option><option value="19">'+knames[18]+'</option><option value="20">'+knames[19]+'</option><option value="21">'+knames[20]+'</option></select>';
-nikvoladi['ka'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">'+knames[0]+'</option><option value="2">'+knames[1]+'</option><option value="3">'+knames[2]+'</option><option value="4">'+knames[3]+'</option><option value="5">'+knames[4]+'</option><option value="6">'+knames[5]+'</option><option value="7">'+knames[6]+'</option><option value="8">'+knames[7]+'</option><option value="9">'+knames[8]+'</option><option value="10">'+knames[9]+'</option><option value="12">'+knames[11]+'</option><option value="13">'+knames[12]+'</option><option value="14">'+knames[13]+'</option><option value="15">'+knames[14]+'</option></select>';
-nikvoladi['kt'] = '<select size="7" name="book"></select>';
-nikvoladi['v'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Pārā</option><option value="2">Pāci</option><option value="3">BhīV</option><option value="4">Mv</option><option value="5">Cv</option><option value="6">Pariv</option></select>';
-nikvoladi['ym'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5]+'</option><option value=7>'+ynames[6]+'</option><option value=8>'+ynames[7]+'</option><option value=9>'+ynames[8]+'</option><option value=10>'+ynames[9]+'</option><option value=11>'+ynames[10]+'</option><option value=12>'+ynames[11]+'</option><option value=13>'+ynames[12]+'</option><option value=14>'+ynames[13]+'</option></select>';
-nikvoladi['ya'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5].replace(/ 1$/,'')+'</option><option value=9>'+ynames[8].replace(/ 1$/,'')+'</option></select>';
-nikvoladi['yt'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value=1 selected>'+ynames[0]+'</option><option value=2>'+ynames[1]+'</option><option value=3>'+ynames[2]+'</option><option value=4>'+ynames[3]+'</option><option value=5>'+ynames[4]+'</option><option value=6>'+ynames[5].replace(/ 1$/,'')+'</option><option value=9>'+ynames[8].replace(/ 1$/,'')+'</option></select>';
-nikvoladi['x'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>1</option><option value="2">2</option></select>';
-nikvoladi['b'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option value="1" selected>Mūla</option><option value="2">Ṭīkā</option></select>';
-nikvoladi['gm'] = '<select size="7" name="book"  onclick="gettitles(0,2)"><option selected value="1">Mog</option><option value="2">Kac</option><option value="3">SPM</option><option value="4">SDhM</option><option value="5">PRS</option></select>';
-nikvoladi['ga'] = '<select size="7" name="book"></select>';
-nikvoladi['gt'] = '<select size="7" name="book"></select>';
+nikvoladi['d'] = [1,2,3];
+nikvoladi['m'] = [1,2,3];
+nikvoladi['s'] = [1,2,3,4,5];
+nikvoladi['a'] = [1,2,3,4,5,6,7,8,9,10,11];
+nikvoladi['km'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+nikvoladi['ka'] = [0,1,2,3,4,5,6,7,8,9,11,12,13,14];
+nikvoladi['kt'] = [];
+nikvoladi['v'] = ['Pārā','Pāci','BhīV','Mv','Cv','Pariv'];
+nikvoladi['ym'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
+nikvoladi['ya'] = [0,1,2,3,4,5,8];
+nikvoladi['yt'] = [0,1,2,3,4,5,8];
+nikvoladi['x'] = [1,2];
+nikvoladi['b'] = ['Mūla','Ṭīkā'];
+nikvoladi['gm'] = ['Mog','Kac','SPM','SDhM','PRS'];
+nikvoladi['ga'] = [];
+nikvoladi['gt'] = [];
 
-function getBookName(nik, ht, no) { // no will be xml no - 1
+function getBookName(nik, ht, no) { // nik is nikaya, ht is a hier, no will be xml no - 1
 
 
 	if (nik == 'k' || nik == 'y') {
@@ -446,6 +449,24 @@ function getBookName(nik, ht, no) { // no will be xml no - 1
 	else no++;
 	return no.toString();
 }
+
+function setBookList(nik) {
+	var selectNikaya = '';
+	var checkNikaya = '<table><tr><td valign="top">';
+	
+	if (nikvoladi[nik]) var titles = nikvoladi[nik];
+	else var titles = nikvoladi[nik+hier];
+	for (i = 0; i < titles.length; i++) {
+		selectNikaya += '<option value="'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)) +'" '+(i==0?'selected':'')+'>'+((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i])+'</option>';
+		if(i == Math.ceil(titles.length/2)) checkNikaya += '</td><td valign="top">';
+		checkNikaya += '<input type="checkbox" id="tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)) +'" title="Include in search" checked> <span class="tiny">'+((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i])+'</span><br/>';
+	}
+	checkNikaya += '</td></tr></table>';
+	document.getElementById('bookSel').innerHTML = selectNikaya;
+	document.getElementById('tsoBO').innerHTML = checkNikaya;
+	
+}
+
 
 var oldnikaya = 0;
 
@@ -465,18 +486,13 @@ function changenikaya(noget)
 			return;
 		}
 		oldnikaya = document.form.nik.selectedIndex;
-		if (nikvoladi[nik]) {
-			document.getElementById('book').innerHTML=nikvoladi[nik];
-		}
-		else { document.getElementById('book').innerHTML=nikvoladi[nik+hier]; }
-
 		
+		setBookList(nik);
+
 		if (noget) gettitles(0,1); // don't load the passage
 		else gettitles(0,2);
 	}
 }
-
-// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ
 
 function toUni(input) {
 	input = input.replace(/aa/g, 'ā');
@@ -1348,6 +1364,8 @@ hNumbers['a'] = 1;
 hNumbers['t'] = 2;
 var hTitle = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
 
+var hLetters = ['m','a','t'];
+
 
 function switchhier(htmp,stop) {
 
@@ -1370,8 +1388,7 @@ function switchhier(htmp,stop) {
 	}
 
 	hier = htmp;
-
-	var ha = ['m','a','t'];
+	ha = hLetters;
 
 	for(i=0; i<ha.length; i++) {
 		if (ha[i] == htmp) {

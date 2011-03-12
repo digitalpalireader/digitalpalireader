@@ -719,7 +719,7 @@ function titlesearchstart()
 			uniout = toUni(gsplit);
 
 			for(a = 0; a < entries.length; a++) {
-				if((entries[a].charAt(entries[a].length-3) == 'm' && !document.getElementById('soMATM').checked) || (entries[a].charAt(entries[a].length-3) == 'a' && !document.getElementById('soMATA').checked) || (entries[a].charAt(entries[a].length-3) == 't' && !document.getElementById('soMATT').checked)) {
+				if(!document.getElementById('soMAT'+entries[a].charAt(entries[a].length-3)).checked) {
 					entries.splice(a--,1);
 				}
 			}
@@ -733,7 +733,7 @@ function titlesearchstart()
 			}
 			if (entries.length == 0) continue;
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+document.getElementById('soMATM').checked+','+document.getElementById('soMATA').checked+','+document.getElementById('soMATT').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+document.getElementById('soMATm').checked+','+document.getElementById('soMATa').checked+','+document.getElementById('soMATt').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a><br>';
 			y++;
 		}
 	}

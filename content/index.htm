@@ -54,7 +54,7 @@
 												<option value="v">Vinaya</option>
 												<option selected value="d">Dīgha</option>
 												<option value="m">Majjhima</option>
-												<option class="sel" value="s">Saṃyutta</option>
+												<option value="s">Saṃyutta</option>
 												<option value="a">Aṅguttara</option>
 												<option value="k">Khuddaka</option>
 												<option value="y">Abhidhamma</option>
@@ -65,7 +65,7 @@
 										</td>
 										<td>&nbsp;</td>
 										<td align=center>
-											<b id="book"><select class="sel" size="7" name="book" onclick="gettitles(0,2)">
+											<b id="book"><select class="sel" size="7" id="bookSel" name="book" onclick="gettitles(0,2)">
 											<option selected value="1">1</option>
 											<option value="2">2</option>
 											<option value="3">3</option>
@@ -205,30 +205,64 @@
 
 									<table align=center>
 										<tr>
-											<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> 
+											<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> <input type="button" class="go" value=">" title="Look up term" onClick="searchTipitaka()"> 
 											</td>
 										</tr>
 
 										<tr>
 											<td align=center valign=middle>
-												<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausesall();"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausetwo();"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); bounce3()"> <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>  <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('tsearchopts')"><b>adv</b></a>
+												<select class="sel" size="1" title="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
+													<option title="Search all three nikayas" selected>Tipitaka</option>
+													<option title="Search current collection">Collection</option>
+													<option title="Search current book">Book</option>
+													<option>---</option>
+													<option title="Search multiple collections">Collections</option>
+													<option title="Search multiple books in the current collection">Books</option>
+													<option>---</option>
+													<option title="Search all three nikayas, choose MAT">Tip. MAT</option>
+													<option title="Search current collection, choose MAT">Coll. MAT</option>
+													<option title="Search current book, choose MAT">Book MAT</option>
+													<option>---</option>
+													<option title="Search multiple collections, choose MAT">Colls MAT</option>
+													<option title="Search multiple books in the current collection, choose MAT">Books MAT</option>
+												</select>
+												 <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>  <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('tsearchopts')"><b>adv</b></a>
 											</td>
 										</tr>
 										<tr>
 											<td>
-									<div id="tsearchopts">
-										<table align="center">
-											<tr>
-												<td>
-													<div align="left">
-														<div id="tsoRX">
-															<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp"><span class="small"> Reg. Exp.</span>
-														</div>
-													</div>
-												</td>
-											</tr>
-										</table>
-									</div>
+												<div id="tsearchopts">
+													<table align="center">
+														<tr>
+															<td>
+																<div align="left">
+																	<div id="tsoRX">
+																		<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp"><span class="small"> Reg. Exp.</span>
+																	</div>
+																	<div id="tsoMAT" class="topb" style="display:none">
+																		<input type="checkbox" id="tsoMATm" title="Include in search" checked><span class="small"> Mūla</span><br/>
+																		<input type="checkbox" id="tsoMATa" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
+																		<input type="checkbox" id="tsoMATt" title="Include in search" checked><span class="small"> Ṭīka</span>
+																	</div>
+																	<div id="tsoCO" class="topb" style="display:none">
+																		<input type="checkbox" id="tsoCOv"> <span class="tiny">Vinaya</span><br />
+																		<input type="checkbox" id="tsoCOd" checked> <span class="tiny">Dīgha</span><br />
+																		<input type="checkbox" id="tsoCOm" checked> <span class="tiny">Majjhima</span><br />
+																		<input type="checkbox" id="tsoCOs" checked> <span class="tiny">Saṃyutta</span><br />
+																		<input type="checkbox" id="tsoCOa" checked> <span class="tiny">Aṅguttara</span><br />
+																		<input type="checkbox" id="tsoCOk" checked> <span class="tiny">Khuddaka</span><br />
+																		<input type="checkbox" id="tsoCOy"> <span class="tiny">Abhidhamma</span><br />
+																		<input type="checkbox" id="tsoCOx"> <span class="tiny">Vism</span><br />
+																		<input type="checkbox" id="tsoCOb"> <span class="tiny">Abhidh-s</span><br />
+																		<input type="checkbox" id="tsoCOg"> <span class="tiny">Byākaraṇa</span>
+																	</div>
+																	<div id="tsoBO" class="topb" style="display:none">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													</table>
+												</div>
 											</td>
 										</tr>
 									</table>
@@ -252,6 +286,8 @@
 										<option title="AccessToInsight Sutta Search (on-line only)">ATI</option>
 									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
 									<br />
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
+									<br />
 									<div id="searchopts">
 										<table align="center">
 											<tr>
@@ -273,9 +309,9 @@
 															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" checked><span class="small"> Start of Word Only</span>
 														</div>
 														<div id="soMAT" class="bottomb" style="display:none">
-															<input type="checkbox" id="soMATM" title="Include in search" checked><span class="small"> Mula</span><br/>
-															<input type="checkbox" id="soMATA" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
-															<input type="checkbox" id="soMATT" title="Include in search" checked><span class="small"> Ṭīka</span>
+															<input type="checkbox" id="soMATm" title="Include in search" checked><span class="small"> Mula</span><br/>
+															<input type="checkbox" id="soMATa" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
+															<input type="checkbox" id="soMATt" title="Include in search" checked><span class="small"> Ṭīka</span>
 														</div>
 														<div id="soNSV" style="display:none">
 															<input type="checkbox" id="soNSv" title="Include in search" checked><span class="small"> Vin</span>
@@ -295,7 +331,6 @@
 											</tr>
 										</table>
 									</div>
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
 
 					<input type="text" style="display:none">
 					<!--<td>

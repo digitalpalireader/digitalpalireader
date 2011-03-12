@@ -6,7 +6,12 @@ function dev() {
 //	DtitleSearchCreate();
 //DcheckWords();
 //DcompareMAT();
-moveframey('scf')
+}
+
+function devO(data) {
+	document.textpad.pad.value = data;
+	moveframey('scf')
+
 }
 
 function DcheckWords() {
