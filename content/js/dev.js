@@ -3,16 +3,65 @@ var devCheck = 1;
 function dev() {
 
 	document.textpad.pad.value = '';
-//	DtitleSearchCreate();
+//Ddppn4();
 //DcheckWords();
 //DcompareMAT();
 }
 
 function devO(data) {
-	document.textpad.pad.value = data;
+	document.textpad.pad.value += data;
 	moveframey('scf')
 
 }
+
+function Ddppn4() {
+	var matched = [];
+	var unmatched = [];
+	var x, y;
+	out:
+	for (i in dppng) {
+		 x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
+		if (nameda[x]) {
+			matched.push("nameno['"+dppng[i][0]+"'] = '"+x+"';");
+			continue out;
+		}
+		y = dppng[i][1].toLowerCase();
+		for (j in nameda) {
+			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0 || nameda[j][0].indexOf(y) == 0) {
+				matched.push("nameno['"+dppng[i][0]+"'] = '"+j+"';");
+				continue out;
+			}
+		}
+		unmatched.push("nameno['"+dppng[i][0]+"'] = '';");;
+		//if(unmatched.length > 10) break;
+	}
+	devO(matched.join('\n') + '\n\n// unmatched\n' + unmatched.join('\n'));
+}			
+
+function Ddppn3() {
+	var sorta = [];
+	for (i in Ddppn) {
+		var j = Ddppn[i].split('#');
+		var k = j[0].split('^');
+		for (x in k) {
+			var m = k[x].toLowerCase().replace(/^  */,'').replace(/  *$/,'');
+			if (k[x].length > 0) {
+				var l = toVel(k[x].toLowerCase().replace(/\(no\..+\)/g,'').replace(/[^ñāīūa-z]/g,''));
+				sorta.push(l+'^'+m+'#'+j[1]);
+			}
+		}
+	}
+//	alert(sorta.length);
+	var sorta2 = sortaz(sorta);
+	var out = 'var nameda = [];\n';
+	for (i in sorta2) {
+		var z = sorta2[i].split('^');
+		var j = z[1].split('#');
+		out +="nameda['"+z[0]+"'] = ['"+j[0]+"','"+j[1]+"'];\n";
+	}
+	devO(out);
+}	
+	
 
 function DcheckWords() {
 	var nik = 'd';
@@ -759,4 +808,128 @@ function DloadFileAsXML() {
 	var parser=new DOMParser();
 	var doc = parser.parseFromString(cont,'text/xml');
 	alert(doc.documentElement.getElementsByTagName('div').length);
+}
+
+function Dnda() {
+	var out = '';
+	var na = [];
+	for (i in nameda) {
+		var s = nameda[i].split('#');
+		var f = 1;
+		while(na[s[0]+'f'+f]) { f++; }
+		na[s[0]+'f' + f] = s[1];
+	}
+	for (j in na) {
+		out += "nameda['"+j+"'] = '"+na[j]+"';"; 
+	}
+	document.getElementById('pad').innerHTML = out + '];';
+}
+
+function DnameDa () {
+
+	var oldda = [];
+	var longda = [];
+	var newda = [];
+	var noneda = [];
+	
+	for (i in nameda) {
+		var s = nameda[i].split('/');
+		var t = toUni(i.split('f')[0]);
+		var u = t.charAt(t.length-1);
+		
+		var n = new RegExp(t,'i');
+		
+		
+		var o = new RegExp(t+u,'i');
+
+		var dppnf = 'etc/XML2/'+s[0]+'.xml';
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", dppnf, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var data = xmlDoc.getElementsByTagName('entry')[parseInt(s[1])].textContent.match(/\&lt;h2\&gt;[^&]*&lt;\/h2\&gt;/);
+		if(data) data = data[0].replace(/\&lt;\/*h2\&gt;/g,'');
+		else {
+			noneda.push(i+' // ' + nameda[i]);
+			continue;
+		}
+		if(n.exec(data)) {
+			oldda.push(t);
+		}
+		else if(o.exec(data)) {
+			longda.push(t+u);
+		}
+		else if(data) {
+			newda.push(data);
+		}
+		else {
+			noneda.push(i+' // ' + nameda[i]);
+		}
+		
+		devO('\n// old\n'+oldda.join('\n')+'\n// long\n'+longda.join('\n')+'\n// new\n'+newda.join('\n')+'\n// none\n'+noneda.join('\n'));
+	}
+}
+
+function DnameDa2 () {
+
+	var oldda = [];
+	var longda = [];
+	var newda = [];
+	var noneda = [];
+	
+	for (i = 1; i < 10; i++) {
+
+		var dppnf = 'etc/XML2/'+i+'.xml';
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", dppnf, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var dataa = xmlDoc.getElementsByTagName('entry');
+		
+		for (j = 0; j < dataa.length; j++) {
+			
+			var data = dataa[j].textContent.replace(/huge"\]/);
+			if(data) data = data[0].replace(/\&lt;\/*h2\&gt;/g,'');
+			else {
+				noneda.push(i+' // ' + nameda[i]);
+				continue;
+			}
+			if(n.exec(data)) {
+				oldda.push(t);
+			}
+			else if(o.exec(data)) {
+				longda.push(t+u);
+			}
+			else if(data) {
+				newda.push(data);
+			}
+			else {
+				noneda.push(i+' // ' + nameda[i]);
+			}
+		}
+	}
+	devO('\n// old\n'+oldda.join('\n')+'\n// long\n'+longda.join('\n')+'\n// new\n'+newda.join('\n')+'\n// none\n'+noneda.join('\n'));
+}
+
+
+function DdppnNameNo() {
+
+	var out = '';
+	var t=0;
+	for (i in nameno) {
+		t=0;
+		for (j in nn) {
+			if (nn[j].search(nameno[i]+'/') == 0) {
+				out += "nameno['"+i+"'] = '"+nn[j]+"';\n";
+				t=1;
+				break;
+			}
+		}
+		if(t == 0) { out += "nameno['"+i+"'] = '"+nameno[i]+"';\n"; }
+	}
+	document.getElementById('pad').innerHTML = out;
 }

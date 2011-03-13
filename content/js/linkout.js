@@ -18,8 +18,8 @@ function outputDef(which,first)
 
 		for (var b = 0; b < outwords.length; b++)  // get the word names
 		{	
-			var outword = outwords[b].split('$');
-			document.forma.out.innerHTML += '<option>' + toUni(outword[0].replace(/,/g, '.').replace(/`n/g, '"n')) + '</option>'; 
+			var outword = outwords[b].split('$')[0];
+			document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>'; 
 		}
 	}
 	
@@ -47,7 +47,7 @@ function outputDef(which,first)
 				// data[2] = category
 				// data[3] = concise definition (if any)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-			var dataout = toUni(data[1].replace(/,/g, '.').replace(/`/g, '"'));
+			var dataout = toUni(outwords[which].split('$')[0].split('-')[c]); // get the part name from the names part :)
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':
@@ -127,7 +127,6 @@ function outputDef(which,first)
 			var conciseword = thisconcise[x];
 			conciseword = conciseword.replace(/\`/g, '"');
 			conciseword = conciseword.replace(/,/g, '.');
-			if(concisedefa[5].search(/\.[āīū],/) > -1 || concisedefa[5].search(/\.[āīū]$/) > -1) conciseword = conciseword+conciseword.charAt(conciseword.length-1);
 			conciseword = toUni(conciseword);
 			
 			
@@ -151,16 +150,17 @@ function outputDef(which,first)
 	document.getElementById('anfb').innerHTML = osout;
 	document.getElementById('anfsd').innerHTML = conciseoutput;
 	
+	moveframex(moveat);
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else if (hotlink.search('dppn') >= 0) DPPNXML(hotlink);
 		if(moveat == 2) { moveframey('dif'); }
 	}
-	moveframex(moveat);
 }
 
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
 	document.getElementById('spdout').innerHTML = '<b style="color:' + colorcfg['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
+	moveframex(moveat);
 }

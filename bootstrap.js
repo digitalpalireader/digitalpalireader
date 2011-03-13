@@ -10,6 +10,26 @@ function loadIntoWindow(window) {
   if (!window) return;
 
 
+// 1
+
+	var doc = window.document;
+
+	// Get the add-on bar for that window
+
+	var addonBar = doc.getElementById("addon-bar");
+
+	// Construct the new toolbar item
+
+	var newItem = doc.createElement("toolbaritem");
+	var itemLabel = doc.createElement("label");
+
+	// Add the item to the toolbar and set its text label
+
+	newItem.appendChild(itemLabel);
+	addonBar.appendChild(newItem);
+	itemLabel.value = "Hello world!";
+
+// 2
 
 	let anchor = window.document.getElementById("status-bar");
 

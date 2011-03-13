@@ -199,14 +199,13 @@ function dppnsearchstart()
 	var dict = '../DPPN/';
 	
 	var finouta = new Array();
-	var y = 0;
 	var finout = '';
-	if (dppn.length == 0) { for (a in nameda) { dppn.push(a + '^' + nameda[a]); } }
+	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
 
     for (x = 0; x < dppn.length; x++)
 	{
 
-		var dppnt = dppn[x].split('^')[0];
+		var dppnt = dppn[x][0];
 		
 		if(document.form.sofuzzy.checked) {
 			dppnt = toFuzzy(dppnt);
@@ -220,21 +219,11 @@ function dppnsearchstart()
 		}
 		if(yessir)
 		{
-			gsplit = dppn[x].split('^');
+			gsplit = dppn[x][1];
 			
 			uniout = gsplit[0];
-			
-			if (gsplit[0].charAt(gsplit[0].length-1) == '1' && !nameda[gsplit[0].substring(0,gsplit[0].length-1)+'2']) { // no second, so drop the f1
-				uniout = uniout.substring(0,uniout.length-2);
-			}
-
-			uniout = toUni(uniout);
-			uniout = uniout.replace(/f/g, ' ');
-			uniout = uniout.replace(/`/g, '\u00B0');
-			
-			
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + gsplit[1] + ',' + uniout + '\')">' + uniout + '</a><br>';
-			y++;
+				
+			finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + gsplit[1] + ',' + uniout + '\')">' + uniout + '</a><br>');
 		}
 	}
 
@@ -814,7 +803,21 @@ var dhmark = 0;
 
 function DPPNXML(file,which)
 {
-
+	var filea = file.split(',');
+	var tloc = filea[0].split('/');
+	
+	if (nameno[tloc[2]]) { // fudge
+		if (nameno[tloc[2]] == '') {
+			alert('Link not found');
+			return;
+		}
+		var ttmp = nameda[nameno[tloc[2]]][1].split('/');
+		tloc[0] = 'dppn';
+		tloc[1] = ttmp[0];
+		tloc[2] = ttmp[1];
+		
+	}
+	
 	clearDivs('dif');
 	
 	if(!which) { // not from select
@@ -828,16 +831,7 @@ function DPPNXML(file,which)
 	}
 	
 	
-	var filea = file.split(',');
-	var tloc = filea[0].split('/');
-	
-	if (nameno[tloc[1]+'/'+tloc[2]]) { // fudge
-		var ttmp = nameno[tloc[1]+'/'+tloc[2]].split('/');
-		tloc[0] = 'dppn';
-		tloc[1] = ttmp[0];
-		tloc[2] = ttmp[1];
-		tloc[3] = ttmp[2];
-	}
+
 	
 	// xml
 	
@@ -848,7 +842,7 @@ function DPPNXML(file,which)
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
-	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
+	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 	
 	// output
 
@@ -874,26 +868,29 @@ function DPPNXML(file,which)
 	}
 
 	// get number
+	var lnum, tnum, nnum;
 
-	var ncfull = 0;
-	if (namecount.length != 0) ncfull = 1;  // tell us no to make the array
-	
-	nnc = 0;
-	for (i in nameda) {
-		if (nameda[i] == tloc[1]+'/'+tloc[2]) {
-			tnum = nnc;
-			if (ncfull == 1) break; // no need to make the array
+	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
+
+	for (i =0; i < dppn.length; i++) {
+		if (dppn[i][1][1] == tloc[1]+'/'+tloc[2]) {
+			tnum = i;
+			lnum = (i-1);
+			
+			while(dppn[i+1][1][1] == dppn[i][1][1]) {
+				i++;
+			}
+			nnum = (i+1);
+			break;
 		}
-		nnc++;
-		if (ncfull == 0) namecount.push([nameda[i],toUni(i.replace("f", " "))]);
 	}
 
 	// buttons
 	
 	var tout = '';
 	var bout = '';
-	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + namecount[tnum-1][0] + ',' + namecount[tnum-1][1] + '\')" /></div>';
-	if (tnum != namecount.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + namecount[tnum+1][0] + ',' + namecount[tnum+1][1] + '\')"></div>';
+	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + dppn[lnum][1][1] + ',' + dppn[lnum][1][0] + '\')" /></div>';
+	if (tnum != dppn.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + dppn[nnum][1][1] + ',' + dppn[nnum][1][0] + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
     document.getElementById('cdif').scrollTop=0;

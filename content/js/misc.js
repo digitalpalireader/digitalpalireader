@@ -494,61 +494,6 @@ function changenikaya(noget)
 	}
 }
 
-function toUni(input) {
-	input = input.replace(/aa/g, 'ā');
-	input = input.replace(/ii/g, 'ī');
-	input = input.replace(/uu/g, 'ū');
-	input = input.replace(/\.t/g, 'ṭ');
-	input = input.replace(/\.d/g, 'ḍ');
-	input = input.replace(/\"n/g, 'ṅ');
-	input = input.replace(/\.n/g, 'ṇ');
-	input = input.replace(/\.m/g, 'ṃ');
-	input = input.replace(/\u1E41/g, 'ṃ'); // m with over-dot
-	input = input.replace(/\~n/g, 'ñ');
-	input = input.replace(/\.l/g, 'ḷ');
-	input = input.replace(/AA/g, 'Ā');
-	input = input.replace(/II/g, 'Ī');
-	input = input.replace(/UU/g, 'Ū');
-	input = input.replace(/\.T/g, 'Ṭ');
-	input = input.replace(/\.D/g, 'Ḍ');
-	input = input.replace(/\"N/g, 'Ṅ');
-	input = input.replace(/\.N/g, 'Ṇ');
-	input = input.replace(/\.M/g, 'Ṃ');
-	input = input.replace(/\~N/g, 'Ñ');
-	input = input.replace(/\.L/g, 'Ḷ');
-	return input;
-}
-
-function toVel(input) {
-	input = input.replace(/\u0101/g, 'aa');
-	input = input.replace(/\u012B/g, 'ii');
-	input = input.replace(/\u016B/g, 'uu');
-	input = input.replace(/\u1E6D/g, '\.t');
-	input = input.replace(/\u1E0D/g, '\.d');
-	input = input.replace(/\u1E45/g, '\"n');
-	input = input.replace(/\u1E47/g, '\.n');
-	input = input.replace(/\u1E43/g, '\.m');
-	input = input.replace(/\u1E41/g, '\.m'); // m with over-dot
-	input = input.replace(/\u00F1/g, '\~n');
-	input = input.replace(/\u1E37/g, '\.l');
-	input = input.replace(/\u0100/g, 'AA');
-	input = input.replace(/\u012A/g, 'II');
-	input = input.replace(/\u016A/g, 'UU');
-	input = input.replace(/\u1E6C/g, '\.T');
-	input = input.replace(/\u1E0C/g, '\.D');
-	input = input.replace(/\u1E44/g, '\"N');
-	input = input.replace(/\u1E46/g, '\.N');
-	input = input.replace(/\u1E42/g, '\.M');
-	input = input.replace(/\u00D1/g, '\~N');
-	input = input.replace(/\u1E36/g, '\.L');
-	return input;
-}
-
-function toFuzzy(input){
-	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u");
-	return input;
-}
-
 
 function createTablen()
 {

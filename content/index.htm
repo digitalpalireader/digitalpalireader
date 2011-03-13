@@ -205,7 +205,7 @@
 
 									<table align=center>
 										<tr>
-											<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16"><input type="hidden" name="usearch" value=""> <input type="button" class="go" value=">" title="Look up term" onClick="searchTipitaka()"> 
+											<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""> <input type="button" class="go" value=">" title="Look up term" onClick="searchTipitaka()"> 
 											</td>
 										</tr>
 
@@ -534,6 +534,16 @@
 			newScript.type = 'text/javascript';
 			newScript.src = 'js/dev.js';
 			headID.appendChild(newScript);
+			
+			// external dev data
+			
+			var headID2 = document.getElementsByTagName("head")[0];         
+			var newScript2 = document.createElement('script');
+			newScript2.type = 'text/javascript';
+			newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+			headID2.appendChild(newScript2);
+		}
+		else {function devO() {}
 		}
 	</script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
@@ -546,9 +556,9 @@
 	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/main_data.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/name_data.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/declension.js"></script>
