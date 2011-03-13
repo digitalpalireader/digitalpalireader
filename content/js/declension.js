@@ -49,6 +49,7 @@
 	prem.push(['uubhi',1,0,'']);
 	prem.push(['uno',1,0,'']);
 	prem.push(['uuna.m',1,0,'']); 
+	prem.push(['uusu',1,0,'']); 
 
 	// masc uu
 
@@ -68,13 +69,14 @@
 	prem.push(['aaya.m',1,0,'']); 
 	prem.push(['aasu',1,0,'']);
 	// f. i
+	prem.push(['iyo',1,0,'']);
 	prem.push(['iyaa',1,0,'']);
 	prem.push(['iya.m',1,0,3,'']); 
 	// f. ii
 	// f. u
+	prem.push(['uyo',1,0,'']);
 	prem.push(['uyaa',1,0,'']);
 	prem.push(['uya.m',1,0,'']); 
-	prem.push(['uusu',1,0,'']);
 	// f. uu
 
 
@@ -131,12 +133,27 @@
 
 	// mano
 
-	prem.push(['asaa',1,0,'']);
-	prem.push(['aso',1,0,'']);
-	prem.push(['asaa',1,0,'']);
-	prem.push(['aso',1,0,'']);
-	prem.push(['asi',1,0,'']);
+	prem.push(['asaa',0,0,'o']);
+	prem.push(['aso',0,0,'o']);
+	prem.push(['asaa',0,0,'o']);
+	prem.push(['aso',0,0,'o']);
+	prem.push(['asi',0,0,'o']);
 
+	prem.push(['aa',0,0,'o']);
+	prem.push(['a.m',0,0,'o']);
+	prem.push(['e',0,0,'o']);
+	prem.push(['ena',0,0,'o']);
+	prem.push(['ehi',0,0,'o']);
+	prem.push(['ebhi',0,0,'o']);
+	prem.push(['aaya',0,0,'o']); 
+	prem.push(['assa',0,0,'o']); 
+	prem.push(['aana.m',0,0,'o']); 
+	prem.push(['asmaa',0,0,'o']);
+	prem.push(['amhaa',0,0,'o']);
+	prem.push(['asmi.m',0,0,'o']);
+	prem.push(['amhi',0,0,'o']);
+	prem.push(['esu',0,0,'o']);
+	
 	// unsorted
 
 	prem.push(['ahi',1,1,'']);

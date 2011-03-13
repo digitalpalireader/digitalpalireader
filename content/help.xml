@@ -1,22 +1,22 @@
 <top> <data> [h1]Digital Pali Reader - Help File[/h1]</data>
 <data>[h2][b]Contents:[/b][/h2]</data>
 <data>[ol]</data>
-<data>[li][a class="green" href="#intro"]Introduction[/a][/li]</data>
-<data>[li][a class="green" href="#notes"]Notes[/a][/li]</data>
-<data>[li][a class="green" href="#usage"]Usage[/a][ul]</data>
-<data>[li][a class="green" href="#tipitaka"]Tipitaka Lookup[/a][/li]</data>
-<data>[li][a class="green" href="#bookmarks"]Bookmarking[/a][/li]</data>
-<data>[li][a class="green" href="#search"]Text Search[/a][/li]</data>
-<data>[li][a class="green" href="#dict"]Dictionary[/a][/li]</data>
-<data>[li][a class="green" href="#tech"]Technical[/a][/li][/ul]</data>
-<data>[li][a class="green" href="#misc"]Miscellany[/a][/li][ul]</data>
-<data>[li][a class="green" href="#permalinks"]Permalinks[/a][/li]</data>
-<data>[li][a class="green" href="#tools"]Other Tools[/a][/li][/ul]</data>
-<data>[li][a class="green" href="#gratitude"]Gratitude[/a][/li]</data>
-<data>[li][a class="green" href="#final"]Final Words[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNintro').offsetTop;"]Introduction[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNnotes').offsetTop;"]Notes[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNusage').offsetTop;"]Usage[/a][ul]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNtipitaka').offsetTop;"]Tipitaka Lookup[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNbookmarks').offsetTop;"]Bookmarking[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNsearch').offsetTop;"]Text Search[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNdict').offsetTop;"]Dictionary[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNtech').offsetTop;"]Technical[/a][/li][/ul]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNmisc').offsetTop;"]Miscellany[/a][/li][ul]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNpermalinks').offsetTop;"]Permalinks[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNtools').offsetTop;"]Other Tools[/a][/li][/ul]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNgratitude').offsetTop;"]Gratitude[/a][/li]</data>
+<data>[li][a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNfinal').offsetTop;"]Final Words[/a][/li]</data>
 <data>[/ol]</data>
 <data>[hr]</data>
-<data>[a name="intro" /][h2][b]Introduction[/b][/h2]</data>
+<data>[div id="helpNintro" class="huge"]Introduction[/div]</data>
 <data>[p]The Digital Pali Reader (DPR) is a tool, much like a hard-copy language reader, facilitating study of the Pali language at an advanced level. It contains the entire Myanmar version of the Pali tipitaka, as well as commentaries and sub-commentaries where available. It also includes the Visuddhimagga, Abhidhammatthasangaha and several ancient grammatical texts composed in Pali, all available for analysis and translation. Rather than offering a translation for the text being read, the DPR is like an ordinary text reader, which will normally include a dictionary with all of the difficult words found in the reader. The DPR differs from an ordinary reader in several respects:[/p]</data>
 <data>[ol]</data>
 <data>[li]The DPR allows for instant lookup of words, simply by clicking on a word in the passage being read. This avoids time spent looking for the word in a hard-copy dictionary or in another place on one's computer.[/li]</data>
@@ -35,7 +35,7 @@
 <data>[p]While the DPR is far from perfect, it is sure to be useful for intermediate Pali students who wish to advance their studies to a higher level.[br]</data>
 <data>[/p]</data>
 <data>[hr]</data>
-<data>[a name="notes" /][h2][b]Notes:[/b][/h2]</data>
+<data>[div id="helpNnotes" class="huge"]Notes:[/div]</data>
 <data>[ul]</data>
 <data>[li]The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. [/li]</data>
 <data>[li]You will need at least a basic unicode font to view the Pāḷi characters properly.  If the word Pāḷi in this sentence shows up correctly, you are probably okay.  Otherwise, you'll have to do a search for "Unicode Font" on the Internet, and probably tell the DPR to use that font in the settings screen (press the "%" button).  For alternative scripts, it gets a little bit more difficult, and YMMV.  I use [a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color:green"]the Padauk font[/a] for Burmese and it works well.  The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.).  There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.[/li]</data>
@@ -66,9 +66,9 @@
 <data>[/li]</data>
 <data>[/ul]</data>
 <data>[hr]</data>
-<data>[a name="usage" /][h2]Usage[/h2]</data>
+<data>[div id="helpNusage" class="huge"]Usage[/div]</data>
 <data>[p]The left side of the screen contains the main controls. Basic use should require little explanation. What follows is a brief explanation of all of the controls in the control panel, by section:[/p]</data>
-<data>[a name="tipitaka" /][h3]Tipitaka Lookup[/h3]</data>
+<data>[div id="helpNtipitaka" class="large"]Tipitaka Lookup[/div]</data>
 <data>[p]The top three sections on the control panel are for browsing through the tipitaka and ancillary works.  At the top, there is the list of collections and books.  Below that is a set of hierarchical lists of the sections for the current book.  Below that, there are four sets of buttons: [table class="butc"]</data>
 <data>[tr]</data>
 <data>[td class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/lb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/lb0.png)';" title="Retrieve previous section (p)" ]</data>
@@ -84,44 +84,44 @@
 <data>[/table] These buttons load the actual text. "Go" brings up the current section, and the others bring up the previous and next sections in the current book.[br][br]</data>
 <data>[table class="butc"]</data>
 <data>[tr]</data>
-<data>[td style="background-image:url(images/lb1.png)" id="dhierm" class="abut tbut lbut"]M[/td]</data>
+<data>[td style="background-image:url(images/lb1.png)" id="helpNdhierm" class="abut tbut lbut"]M[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="dhiera" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" ]A[/td]</data>
+<data>[td id="helpNdhiera" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" ]A[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="dhiert" class="abut tbut rbut" title="Change to Ṭīkā" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]T[/td]</data>
+<data>[td id="helpNdhiert" class="abut tbut rbut" title="Change to Ṭīkā" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]T[/td]</data>
 <data>[/tr]</data>
-<data>[/table] These buttons change the set of texts to be studied. "M" switches to the root canonical text, "A" to the commentary, and "T" to the subcommentary.  Note that once a section has been retrieved, there will be buttons to the left of the title for the corresponding section in the other two sets, if available.</data>
+<data>[/table] These buttons change the hierarchy of texts to be studied. "M" switches to the root canonical text, "A" to the commentary, and "T" to the subcommentary.  Note that once a section has been retrieved, there will be buttons to the left of the title for the corresponding section in the other two hierarchies, if available.</data>
 <data>[table class="butc"]</data>
 <data>[tr]</data>
-<data>[td style="background-image:url(images/lb1.png)" id="cdifM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Dictionary Frame (d)" ]D[/td]</data>
+<data>[td style="background-image:url(images/lb1.png)" id="helpNcdifM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Dictionary Frame (d)" ]D[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="cofM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Convertor Frame (c)" ]C[/td]</data>
+<data>[td id="helpNcofM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Convertor Frame (c)" ]C[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="scfM" class="abut tbut rbut" title="Show Textpad Frame (t)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]T[/td]</data>
+<data>[td id="helpNscfM" class="abut tbut rbut" title="Show Textpad Frame (t)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]T[/td]</data>
 <data>[/tr]</data>
 <data>[/table] These buttons switch what is shown in the bottom left frame. "D" shows the dictionary frame, "C" shows the text converter, and "T" shows the text pad.[br][br]</data>
 <data>[table class="butc"]</data>
 <data>[tr]</data>
-<data>[td id="RM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Maximize Read Frame (1)" ]R[/td]</data>
+<data>[td id="helpNRM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Maximize Read Frame (1)" ]R[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="AM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Restore Frames (2)" ]A[/td]</data>
+<data>[td id="helpNAM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Restore Frames (2)" ]A[/td]</data>
 <data>[td class="abut sbut"]</data>
 <data>[/td]</data>
-<data>[td id="DM" class="abut tbut rbut" title="Maximize Dictionary Frame (3)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]D[/td]</data>
+<data>[td id="helpNDM" class="abut tbut rbut" title="Maximize Dictionary Frame (3)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'"]D[/td]</data>
 <data>[/tr]</data>
 <data>[/table] These buttons change the layout of the reader. "R" shows only the section being read with the small panel at the bottom, "A" shows the standard analysis view, and "D" maximizes the dictionary frame.[/p]</data>
 <data>[p]Once you have retrieved a section, it will display in the main window.  The title is at the top, with related sections in Mula, Atthakatha and Tika, to the left and translations (if enabled) to the right.  The title itself is a hyperlink, containing the permalink to this page.  If you are using Firefox 4 or higher, this will also show in the address bar.  See the section on [a href="#permalinks"]permalinks[/a] for more information.  Clicking on any word in the text brings up an analysis of the word and hopefully at least one (hopefully correct) definition from one of the three dictionaries.[/p]</data>
 <data>[p]Below the buttons is a drop-down box with a history of previously viewed sections (max. 100).  Clicking on an entry retrieves that section, moving it to the top of the history list.[/p]</data>
-<data>[a name="bookmarks" /][h3]Bookmarking[/h3]</data>
+<data>[div id="helpNbookmarks" class="large"]Bookmarking[/div]</data>
 <data>[p]The DPR allows saving bookmarks for later reference.  All bookmark files are saved in your firefox profile folder under "DPR".  The ""Bookmarks" section of the control panel allows access to and manipulation of stored sections.  Clicking on the title "Bookmarks" opens up an advanced bookmark manager where you can view/add descriptions, change names, and delete bookmarks, as well as edit or clear the history (see above).  Below the title there is a drop-down list of saved bookmarks and a button [input type="button" class="btn" value=">" title="Load this bookmark"]. To open a saved bookmark, including the scrolled distance, select a bookmark from the list and click on the [input type="button" class="btn" value=">" title="Load this bookmark"] button.[br][br] The second row contains a text field and a button [input type="button" class="btn" value="S" title="Set Bookmark"]. To create a bookmark for the current page and scrolled distance, type in a name for the bookmark and click on the button [input type="button" class="btn" value="S" title="Set Bookmark"]. As an option, if you first select some text, that text will be added to the bookmark in the bookmark list.[/p]</data>
-<data>[a name="search" /][h3]Text Search[/h3]</data>
-<data>[p]The DPR has a built-in search function that allows flexible search of the tipitaka and ancillary texts, view the "Text Search" section of the control panel.  To use the search function, first select a nikaya and book (optionally) at the top (changing the other fields doesn't affect the search), switch to Mula, Aṭṭhakathā, or Ṭīkā, enter the string for which to search (or multiple strings seperated by the "+" sign) and then click on either [input type="button" class="btn" value="T" title="Search through the entire mul or att filelist"], [input type="button" class="btn" value="N" title="Search through the entire Nikāya"], or [input type="button" class="btn" value="B" title="Search through the entire book"] buttons under "Text Search". [input type="button" class="btn" value="T" title="Search through the entire mul or att filelist"] searches the entire mula or atthakatha filelist, [input type="button" class="btn" value="N" title="Search through the entire Nikāya"] searches an entire Nikaya, and [input type="button" class="btn" value="B" title="Search through the entire book"] searches an entire book.[/p][p]The "adv" button displays advanced options, currently a checkbox allowing javascript regular expressions to be used in the search (use with care!).[/p][p] To search for a page number, use the following syntax: P1.0001, P1.0002, etc., where "P" (or V, M, T) is the PTS pagination set, the first "1" is the volume, and the following (must be four digits) is the page number. After entering the page code, click "B" to search the current book, or "N" for the current nikāya.[/p]</data>
-<data>[a name="dict" /][h3]Dictionary[/h3]</data>
+<data>[div id="helpNsearch" class="large"]Text Search[/div]</data>
+<data>[p]The DPR has a built-in text search function that allows flexible search of the tipitaka and ancillary texts, via the "Text Search" section of the control panel.  There are many search options available, based on two variables: 1) whether you wish to search multiple sets, multiple books in the current collection, or the current book; and 2) whether you wish to search the current hierarchy or multiple hierarchies.  If you wish to search within the current set, book, or hierarchy, first navigate to the appropriate place using the corresponding lists and buttons.  If you are searching multiple collections or the Tipitaka, they will have no effect. [/p][p] Next, enter the string for which to search (or multiple strings seperated by the "+" sign) and then select a search type from the dropdown (set at "Tipitaka" by default).  You will notice that various options appear based on the type of search you choose.  Check the appropriate boxes, and then click the [input class="btn" type="button" title="Search for word" value=">"].  The search window will open (use the [input type="button" title="Minimize search frame" value="-" class="btn"] / [input class="btn" type="button" title="Maximize search frame" value="+"] button to minimize / maximize the search frame) and search results will begin to appear, with words containing the search term(s) at the top, followed by a list of paragraphs with the matched search term(s) highlighted.  There is a stop button [img src="images/stop.png" width=24] that allows you to interrupt the search if necessary. [/p][p]Once the search is complete, clicking on a search term will cause the reader to show only paragraphs containing that term.  To show all results again, click the "x" beside the current word (in a box on the top right of the search frame, when viewing a single matched word).  Clicking on the [input type="button" class="btn" value="go"] button beside a paragraph will open the containing section, minimizing the search frame (which can be opened again via the [input class="btn" type="button" title="Maximize search frame" value="+"] button).[/p][p]The "RegEx" checkbox allows javascript regular expressions to be used in the search (use with care!).[/p][p] To search for a page number, use the following syntax: P1.0001, P1.0002, etc., where "P" (or V, M, T) is the PTS pagination set, the first "1" is the volume, and the following (must be four digits) is the page number.[/p]</data>
+<data>[div id="helpNdict" class="large"]Dictionary[/div]</data>
 <data>[p]The dictionary lookup has nine options, some with advanced options available by clicking "adv". "DPR" runs an analysis on the word or passage at hand as it normally would. This only works for full words and phrases. "PED" searches the Pali-English Dictionary, "DPPN" the Dictionary of Pali Proper Names, "CPED" the Concise Pali-English Dictionary, and "CEPD" the Concise English-Pali Dictionary.  "Aṭṭha" (Aṭṭhakathā) and "Ṭīkā", search through words or phrases explained in the commentaries and sub-commentaries respectively.  "Title" gives a list of matching titles in all books, and ATI access the AccessToInsight.org Google custom search, or the off-line archive (if installed and linked via the options page) to search their English translations.[/p][p]  [a name="advdict" /][b]Advanced Dictionary options:[/b][p]Each dictionary has its own set of advanced options, some in common, some unique.  All are explained here:[/p][ul]</data>
 <data>[li][b]Reg. Exp.:[/b]  Allows javascript regular expressions to be used in the dictionary search.[/li] </data>
 <data>[li][b]Fuzzy:[/b] This option allows you to ignore diacritics in your search.  This equates long and short vowels, and ignores dots and the tilde.[/li] </data>
@@ -129,7 +129,7 @@
 <data>[li][b]Start of Word Only:[/b] Enabled by default for the dictionaries, this limits the search to matches at the beginning of the word.  To search within entries, uncheck this.[/li] </data>
 <data>[li][b]DN, etc.:[/b] When using the off-line ATI search, you can specify which nikayas to search in.[/li][/ul] </data>
 <data>[p]If search-as-you-type is enabled in the option screen (see below), the results will be shown as you type (except for ATI).  Otherwise, you will have to press the [input type="button" class="btn" value=">" title="Edit or look up a word"] button to execute the search. If you choose "PED" and type "aa" into the box, for example, it will come up with a list of Pali-English Dictionary entries starting with a long "ā".  All lookup functions except DPR and ATI allow inner-word search and javascript-type regular expressions (wildcards) in advanced options.  Note that these disable search-as-you-type.[/p]</data>
-<data>[a name="tech" /][h3]Technical[/h3]</data>
+<data>[div id="helpNtech" class="large"]Technical[/div]</data>
 <data>[p] The last set of buttons on the control panel has some technical buttons:[/p][p]</data>
 <data>[input type="button" class="btn" value="%" title="Set configuration"]</data>
 <data>[input type="button" class="btn" value="!" title="Reset configuration"] These buttons allow one to adjust the layout and colors of the reader as well as other misc. options, as follows:[/p][ul]</data>
@@ -142,16 +142,16 @@
 <data>[input type="button" class="btn" value="?" title="Help (New Window)"]</data>
 <data>[input type="button" class="btn" value="@" title="Send Feedback"] "?" shows this help file and "@" allows you to contact me via email.[/p]</data>
 <data>[hr]</data>
-<data>[a name="misc" /][h2]Miscellany[/h2]</data>
-<data>[a name="permalinks" /][h3]Permalinks:[/h3]</data>
+<data>[div id="helpNmisc" class="huge"]Miscellany[/div]</data>
+<data>[div id="helpNpermalinks" class="large"]Permalinks:[/div]</data>
 <data>[p]The permalink to a section is found in up to three places: the address bar (requires Firefox 4 or higher), the title of the current section, and the space to the left of each paragraph (which turns white when you hover over it).  An example permalink is[br][br][a class="green" href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave[/a][br][br]  The link is made up of up to four parts, depending on the information it contains: first, everything before the question mark is the actual location of the DPR itself; second, the information between the question mark and the first ampersand (&amp;) is the location of the section in DPR syntax, in this case the first section of the Digha Nikaya (d), mula (m); third, "para=4" tells the DPR to scroll to the fourth paragraph; fourth, "query=bhagavaa+bhikkhave" tells the DPR to highlight the words "bhagavaa" and "bhikkhave".  This link can be shared with other DPR users for easy reference, or even placed on a website or forum, as in the following example: [br][br]([a class="green" href="chrome://digitalpalireader/content/index.htm?d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave"]Link to paribbājakakathā[/a])[br][br][/p]</data>
-<data>[a name="tools" /][h3]Other Tools:[/h3]</data>
+<data>[div id="helpNtools" class="large"]Other Tools:[/div]</data>
 <data>[p]Finally, there are some hidden tools in the DPR; hidden because I didn't kow where to put them. Links to them will be placed here:[br][br]</data>
 <data>[a href="etc/grammar/GMD/index.html" style="color:green" target="_blank"]A Practical Grammar of the Pali Language by Charles Duroiselle[/a][br][br]</data>
 <data>[a href="etc/grammar/cheet.html" style="color:green" target="_blank"]Pali Cheet Sheet by Alan McClure[/a]</data>
 <data>[/p]</data>
 <data>[hr]</data>
-<data>[a name="gratitude" /][h2]Gratitude:[/h2]</data>
+<data>[div id="helpNgratitude" class="huge"]Gratitude:[/div]</data>
 <data>[p]Thanks first and foremost to Alexander Genaud, without whom I would still be pulling my hair out (figuratively) waiting for the script to load a single section. Without his initial help there would be no DPR. Without his later advice we would still be accessing one paragraph at a time and the data would be pre-analyzed and thus difficult to read. There would also be no search function. Special thanks also to Alan McClure, Ven. Gavesako, Peter Masefield, Lin Qian, Leland George, and Ven. Khemaratana for spotting errors in the script and offering encouragement and suggestions. Thanks to Upaasako, our first team member who helped with the bookmarking system among other things. Thanks to John Bullit for his link on [a href="http://www.accesstoinsight.org/outsources/pali.html" style="color:green"]www.accesstoinsight.org[/a] as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR, as well as a way to link the DPR to the offline ATI archive. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu. Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:[br]</data>
 <data>[ul]</data>
 <data>[li]The Myanmar Pali Tipitaka[/li]</data>
@@ -163,7 +163,7 @@
 <data>[li]Buddha Vacana[/li]</data>
 <data>[/ul]</data>
 <data>[p]Should this software infringe upon anyone's felt right to forbid the copying of any of the above or other materials, I apologize for the felt violation. I am sorry to know that some people feel this way about generally useful things that benefit the public immensely when distributed freely. May all be happy and well. [hr]</data>
-<data>[a name="final" /][h2]Final Words:[/h2]</data>
+<data>[div id="helpNfinal" class="huge"]Final Words:[/div]</data>
 <data>[p]1) Please write to me with errors, bugs, spiders, etc. My email is [a style="color:green" href="mailto:yuttadhammo@gmail.com"]yuttadhammo@gmail.com[/a]. [/p]</data>
 <data>[p]2) Please check our [a style="color:green" href="http://pali.sirimangalo.org/"]weblog[/a] for new updates.[/p]</data>
 <data>[p]Best wishes and good luck,[/p]</data>

@@ -41,7 +41,7 @@
 								<table width="1px">
 									<tr>
 										<td align=center>
-											<b>Collection</b>
+											<b>Set</b>
 										</td>
 										<td>&nbsp;</td>
 										<td align=center>
@@ -205,39 +205,43 @@
 
 									<table align=center>
 										<tr>
-											<td align=center colspan=2><b>Text Search</b></td></tr><tr><td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""> <input type="button" class="go" value=">" title="Look up term" onClick="searchTipitaka()"> 
-											</td>
+											<td align=center><b>Text Search</b></td>
+											<td><span id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></span></td>
+										</tr>
+										<tr>
+											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
+											<td><input type="button" class="go" value=">" title="Search for word" onClick="searchTipitaka()"></td>
 										</tr>
 
 										<tr>
-											<td align=center valign=middle>
+											<td align=center valign=top colspan=2>
 												<select class="sel" size="1" title="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
-													<option title="Search all three nikayas" selected>Tipitaka</option>
-													<option title="Search current collection">Collection</option>
-													<option title="Search current book">Book</option>
+													<option title="Search all three nikayas" selected>The Tipitaka</option>
+													<option title="Search current set">This Set</option>
+													<option title="Search current book">This Book</option>
 													<option>---</option>
-													<option title="Search multiple collections">Collections</option>
-													<option title="Search multiple books in the current collection">Books</option>
+													<option title="Search multiple sets">Multi. Sets</option>
+													<option title="Search multiple books in the current set">Multi. Books</option>
 													<option>---</option>
-													<option title="Search all three nikayas, choose MAT">Tip. MAT</option>
-													<option title="Search current collection, choose MAT">Coll. MAT</option>
-													<option title="Search current book, choose MAT">Book MAT</option>
+													<option title="Search all three nikayas, choose MAT">Tipitaka M,A,T</option>
+													<option title="Search current set, choose MAT">This Set M,A,T</option>
+													<option title="Search current book, choose MAT">This Book M,A,T</option>
 													<option>---</option>
-													<option title="Search multiple collections, choose MAT">Colls MAT</option>
-													<option title="Search multiple books in the current collection, choose MAT">Books MAT</option>
+													<option title="Search multiple sets, choose MAT">Multi. Sets M,A,T</option>
+													<option title="Search multiple books in the current set, choose MAT">Multi. Books MAT</option>
 												</select>
-												 <b id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></b>  <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('tsearchopts')"><b>adv</b></a>
+												   <input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp"><span class="tiny"> RegEx</span>
 											</td>
 										</tr>
 										<tr>
-											<td>
+											<td colspan=2>
 												<div id="tsearchopts">
 													<table align="center">
 														<tr>
 															<td>
 																<div align="left">
 																	<div id="tsoRX">
-																		<input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp"><span class="small"> Reg. Exp.</span>
+																		
 																	</div>
 																	<div id="tsoMAT" class="topb" style="display:none">
 																		<input type="checkbox" id="tsoMATm" title="Include in search" checked><span class="small"> Mūla</span><br/>

@@ -50,7 +50,11 @@ function searchTipitaka() {
 
 	document.form.usearch.value = toVel(document.form.isearch.value); 
 	moves(1);
-		switch(which) {
+	resetvalues();
+
+
+
+	switch(which) {
 		case 0:
 		case 4:
 		case 7:
@@ -253,9 +257,20 @@ function resetvalues() {
 	document.getElementById('searchb').scrollTop = 0;
 }
 
+function makeProgressTable() {
+
+	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
+	var fal = filearray.length;
+	for (q2 = 0; q2 < fal; q2++)
+	{
+		tableout += '<td bgcolor="'+colorcfg['colbkcp']+'" width=1 class="bordered"></td>';
+	}
+	tableout += '</tr></table>';
+	document.getElementById('stfc').innerHTML = tableout;
+}
+
 function pausesall() 
 {
-	resetvalues();
 	// make filearray
 	var which = document.getElementById('tipType').selectedIndex;
 
@@ -303,23 +318,13 @@ function pausesall()
 	
 	document.getElementById('stfb').innerHTML = toplist;
 
-	// progress table
-	
-	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
-	var fal = filearray.length;
-	for (q2 = 0; q2 < fal; q2++)
-	{
-		tableout += '<td bgcolor="'+colorcfg['colbkcp']+'" width=1 class="bordered"></td>';
-	}
-	tableout += '</tr></table>';
-	document.getElementById('stfc').innerHTML = tableout;
-
+	makeProgressTable();
 
 	
-	bounce();
+	importXMLs(1);
 }
 function pausetwo() { // init function for single collection
-	resetvalues();
+
 	// make filearray
 	var which = document.getElementById('tipType').selectedIndex;
 	var nikaya = document.form.nik.value;
@@ -345,9 +350,9 @@ function pausetwo() { // init function for single collection
 		return;
 	}
 
+	makeProgressTable();
 
 	var getstring = document.form.usearch.value;
-
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
@@ -358,7 +363,6 @@ function pausetwo() { // init function for single collection
 
 function pausethree() {
 	
-	resetvalues();
 	var which = document.getElementById('tipType').selectedIndex;
 	var nikbook = document.form.nik.value+document.form.book.value
 	var getstring = document.form.usearch.value;
@@ -379,31 +383,23 @@ function pausethree() {
 		return;
 	}
 
+	makeProgressTable();
 
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 
 	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
 
-	bounce3();
+	importXMLs(3);
 }
 
-function bounce()
+function bounce(sct)
 {
-	document.getElementById('stftb').getElementsByTagName('td')[qz].setAttribute('bgcolor','#2F2');
+	document.getElementById('stftb').getElementsByTagName('td')[qz-1].setAttribute('bgcolor','#2F2');
 
-	setTimeout('importXMLs(1)', 10)
+	setTimeout('importXMLs('+sct+')', 10)
 }
 
-function bounce2()
-{
-
-	setTimeout('importXMLs(2)', 10)
-}
-
-function bounce3() {
-	setTimeout('importXMLs(3)', 10)
-}
 
 function finishSearch() {
 	document.getElementById('stfstop').setAttribute('style','display:none');
@@ -471,7 +467,7 @@ function importXMLs(cnt)
 			nextbookfile = filearray[qz+1];
 			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikayaat).style.color=colorcfg['colsel'];
 			qz++;
-			bounce();
+			bounce(1);
 		}
 		else {
 			qz = 0;
@@ -510,7 +506,7 @@ function importXMLs(cnt)
 		if (qz < filearray.length-1) 
 		{
 			qz++;
-			bounce2();
+			bounce(2);
 		}
 		else {
 			qz = 0;
@@ -540,7 +536,7 @@ function importXMLs(cnt)
 		if (qz < filearray.length-1) 
 		{
 			qz++;
-			bounce3();
+			bounce(3);
 		}
 		else {
 			qz = 0;
@@ -816,7 +812,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -958,7 +954,7 @@ function createTables(xmlDoc,hiert)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
