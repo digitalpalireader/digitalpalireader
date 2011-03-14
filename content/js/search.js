@@ -569,7 +569,7 @@ function createTables(xmlDoc,hiert)
 	{
 		nikaya = nikperm;
 	}
-	var bookname = getBookName(nikaya,hier,parseInt(book)-1);
+	var bookname = getBookName(nikaya,hiert,parseInt(book)-1);
 	
 	var postpara ='';
 	var theData = '';
@@ -812,7 +812,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									nummatch += extranummatch; // add extra matches in this paragraph for next count.
 									extranummatch = -1; 					
 									match = 1;
@@ -954,7 +954,7 @@ function createTables(xmlDoc,hiert)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\',' + nummatch + ')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1005,11 +1005,16 @@ function showonly(string) {
 			else da[x].style.display = "none";
 		}
 	}
-	if (string == 'xyz') { document.getElementById('showing').innerHTML = ''; }
-	else { document.getElementById('showing').innerHTML = '<b style="background-color:'+colorcfg['colbkcp']+'; color:'+colorcfg['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; }
+	if (string == 'xyz') { document.getElementById('showing').innerHTML = '';
+		scrollToId('search',0);
+	}
+	else { 
+		document.getElementById('showing').innerHTML = '<b style="background-color:'+colorcfg['colbkcp']+'; color:'+colorcfg['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
+		scrollToId('search','sbfb');
+	}
 }
 
-function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
+function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra)
 {
 
 	moves(0);
@@ -1017,9 +1022,8 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra,nummatch)
 	var ssect = se;
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
-	var hierb = hier;
-	var temp = Array(niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hierb);
-	getplace(temp);
+	var hiert = xml.charAt(xml.length-1);
+	getplace([niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hiert]);
 	if (stringra) {
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');

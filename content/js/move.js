@@ -244,5 +244,5 @@ function clearDivs(which) { // place divs to be cleared here
 function scrollToId(a,b) {
 	if(a=='search') a = 'sbfbc';
 	if(a=='dif') a = 'cdif';
-	document.getElementById(a).scrollTop=document.getElementById(b).offsetTop;
+	document.getElementById(a).scrollTop=(typeof(b) == 'number' ? b : document.getElementById(b).offsetTop);
 }
