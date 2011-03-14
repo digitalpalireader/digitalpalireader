@@ -2,5 +2,5 @@ This is the SourceForge archive for the Digital Pali Reader.  You will find the 
 
 The latest version is 1.0b14 and the latest commit message is:
 
-updated help file, search function, fixed mano group for cped
+fixed ATI search
 

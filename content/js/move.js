@@ -240,3 +240,9 @@ function clearDivs(which) { // place divs to be cleared here
 		document.getElementById('matrelc').innerHTML='';
 	}
 }
+
+function scrollToId(a,b) {
+	if(a=='search') a = 'sbfbc';
+	if(a=='dif') a = 'cdif';
+	document.getElementById(a).scrollTop=document.getElementById(b).offsetTop;
+}
