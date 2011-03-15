@@ -2223,3 +2223,6 @@ irregda['upapajjanta'] = 'upapajjati';
 irregda['vedayati'] = 'vedeti'; 
 irregda['nti'] = 'iti'; 
 irregda['ahu'] = 'bhavati'; 
+irregda['kalevara'] = 'ka.lebara'; 
+irregda['ka.levara'] = 'ka.lebara'; 
+irregda['kalebara'] = 'ka.lebara'; 

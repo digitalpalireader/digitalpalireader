@@ -239,6 +239,16 @@ function clearDivs(which) { // place divs to be cleared here
 		document.getElementById('mafbc').innerHTML='';
 		document.getElementById('matrelc').innerHTML='';
 	}
+	
+	if (!which || which.indexOf('search') > -1) { // search frame stuff
+		document.getElementById('sbfa').innerHTML = '';
+		document.getElementById('sbfb').innerHTML = '';
+		document.getElementById('sbfab').innerHTML = '';
+		document.getElementById('stfb').innerHTML = '';
+		document.getElementById('stfc').innerHTML = '';
+		document.getElementById('showing').innerHTML = '';
+		document.getElementById('searchb').scrollTop = 0;
+	}
 }
 
 function scrollToId(a,b) {

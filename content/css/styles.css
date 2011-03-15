@@ -120,6 +120,9 @@ margin-right:auto;
 	border-top: grey 1px solid;
 }
 
+.relative {
+position:relative;
+}
 
 #content {
 position:absolute;

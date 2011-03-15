@@ -50,6 +50,8 @@ function searchTipitaka() {
 
 	document.form.usearch.value = toVel(document.form.isearch.value); 
 	moves(1);
+	scrollToId('search',0);
+	clearDivs('search');
 	resetvalues();
 
 
@@ -254,13 +256,6 @@ function resetvalues() {
 	thiscount = 0;
 	bookfile = '';
 	countmatch = 0;
-    document.getElementById('sbfa').innerHTML = '';
-    document.getElementById('sbfb').innerHTML = '';
-    document.getElementById('sbfab').innerHTML = '';
-    document.getElementById('stfb').innerHTML = '';
-    document.getElementById('stfc').innerHTML = '';
-    document.getElementById('showing').innerHTML = '';
-	document.getElementById('searchb').scrollTop = 0;
 }
 
 function makeProgressTable() {
@@ -1074,34 +1069,34 @@ function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra)
 
 function atiSearchStart() {
 
-	clearDivs('dif');
-	document.getElementById('difb').appendChild(pleasewait);
-	moveframey('dif');
-	moveframex(3);
+	document.getElementById('sbfb').appendChild(pleasewait);
 	
 	var getstring = document.form.usearch.value;
 
+	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+
 	if(cfg['catioff'] == 'checked') {
-		G_atiNik = 0;
-		document.getElementById('difb').innerHTML = '<p>ATI full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line):</p><table><tr id="atiNiks"><td></td></tr></table><div id="dictList"></div><hr>';
+		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+		document.getElementById('stfc').innerHTML = '';
+		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr>';
+		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
 		atiSearchOffline(0,getstring);
 		return;
 	}
 
-	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 	var bannerDiv = document.createElement('div');
 	bannerDiv.innerHTML = '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>:<br><br>';
 	
-	document.getElementById('difb').appendChild(bannerDiv);
+	document.getElementById('stfb').appendChild(bannerDiv);
 	
 	getstring = getstring.replace(/^  */g, '').replace(/  *$/g, '').replace(/  */g, '%2B');
 	
 	var outNode = document.createElement('iframe');
 	outNode.setAttribute('frameBorder','0');
 	outNode.setAttribute('width','100%');
-	outNode.setAttribute('height',document.getElementById('cdif').offsetHeight);
+	outNode.setAttribute('height',document.getElementById('sbfbc').offsetHeight);
 	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
-	document.getElementById('difb').appendChild(outNode);
+	document.getElementById('sbfb').appendChild(outNode);
 }
 
 
@@ -1112,13 +1107,11 @@ function atiSearchOffline(d, getstring) {
 	while (!document.getElementById('tsoCO'+nikA[d]).checked) {	
 		d++;
 		if(d == nikA.length) {
-			document.getElementById('cdif').scrollTop=0;
+			scrollToId('search',0);
 			var endtime = new Date;
 			var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-			var timeNode = document.createElement('td');
-			timeNode.innerHTML = '&nbsp;&nbsp;<span class="small"><b><i>finished in ' + totaltime + 's</b></i>';
-			document.getElementById('atiNiks').appendChild(timeNode);
-			
+			var outtime = '<span class="small"><b><i>finished in ' + totaltime + 's</b></i></span>';
+			document.getElementById('stfc').innerHTML = outtime;
 			return;
 		}
 	}
@@ -1130,18 +1123,8 @@ function atiSearchOffline(d, getstring) {
 	
 	var counta = [];
 
-	var titleNode = document.createElement('div');
-	titleNode.innerHTML = '<hr><h1>'+nik+'</h1>';
-	document.getElementById('difb').appendChild(titleNode);
-
-	var titleNode2 = document.createElement('div');
-	titleNode2.setAttribute('id','atiT'+nik);
-	titleNode2.innerHTML = '<hr><b>'+nik+'</b>';
-	document.getElementById('dictList').appendChild(titleNode2);
-
 	
-	var outNode = document.createElement('div');
-
+	var finalout = '';
 	var listout = '';
 	var count = 0;
 	var buffer = 30; // number of letters to add before and after the match
@@ -1161,7 +1144,7 @@ function atiSearchOffline(d, getstring) {
 				postpara = '';
 				if (startmatch >= 0)
 				{
-					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'dif\',\'atio'+nik+c+'\')" style="color:'+colorcfg['colsel']+'">' + title + '</a><br/>'; 
+					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+colorcfg['colsel']+'">' + title + '</a><br/>'; 
 					while (startmatch >= 0)
 					{				
 						count++;
@@ -1188,23 +1171,48 @@ function atiSearchOffline(d, getstring) {
 					}
 
 					postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
-					outNode.innerHTML += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['coldppn']+'">top</a></p><p>' + postpara + '</p><div>';
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['coldppn']+'">top</a></p><p>' + postpara + '</p><div>';
 				}
 			}
 		}
 	}
+	
+	var titleNode = document.createElement('div');
+	titleNode.setAttribute('id','atiT'+nik);
+	titleNode.innerHTML = '<hr><span class="huge">'+nik+'</span>';
+	document.getElementById('sbfb').appendChild(titleNode);
+
+	var titleNode2 = document.createElement('div');
+	titleNode2.setAttribute('id','atiL'+nik);
+	titleNode2.innerHTML = '<hr><b>'+nik+'</b>';
+	document.getElementById('dictList').appendChild(titleNode2);
+
+	
 	// word list
 	var listNode = document.createElement('div');
-	listNode.innerHTML = listout;
+	listNode.innerHTML = (count > 0 ? listout : '<i>no match</i>');
 	document.getElementById('dictList').appendChild(listNode);
 	
 	var cellNode = document.createElement('td');
-	cellNode.innerHTML = '<a class="green" href="javascript:void(0)" onclick="scrollToId(\'dif\',\'atiT'+nik+'\')">'+nikname[nik] + '</a>: ' + count + '; ';
+	cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+nikname[nik] + '</a>: ' + count + '; ';
+	
 	document.getElementById('atiNiks').appendChild(cellNode);
 	
 	
+	var outNode = document.createElement('div');
+	outNode.innerHTML = (count > 0 ? finalout : '<i>no match</i>');
 	document.getElementById('atiT'+nik).appendChild(outNode);
-	setTimeout(function () { atiSearchOffline(++d,getstring) }, 10);
+
+	if(++d == nikA.length) {
+		scrollToId('search',0);
+		var endtime = new Date;
+		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;finished in ' + totaltime + 's</b></i></span>';
+		document.getElementById('stfc').innerHTML = outtime;
+		return;
+	}
+
+	setTimeout(function () { atiSearchOffline(d,getstring) }, 10);
 }
 
 

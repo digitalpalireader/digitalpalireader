@@ -254,17 +254,17 @@
 																		<input type="checkbox" id="tsoCOv"> <span class="tiny">Vinaya</span><br />
 																	</div>
 																	<div id="tsoCO2" class="" style="display:none">
-																		<input type="checkbox" id="tsoCOd" checked> <span class="tiny">Dīgha</span><br />
-																		<input type="checkbox" id="tsoCOm" checked> <span class="tiny">Majjhima</span><br />
-																		<input type="checkbox" id="tsoCOs" checked> <span class="tiny">Saṃyutta</span><br />
-																		<input type="checkbox" id="tsoCOa" checked> <span class="tiny">Aṅguttara</span><br />
-																		<input type="checkbox" id="tsoCOk" checked> <span class="tiny">Khuddaka</span><br />
+																		<input type="checkbox" id="tsoCOd" checked title="Include in search"> <span class="tiny">Dīgha</span><br />
+																		<input type="checkbox" id="tsoCOm" checked title="Include in search"> <span class="tiny">Majjhima</span><br />
+																		<input type="checkbox" id="tsoCOs" checked title="Include in search"> <span class="tiny">Saṃyutta</span><br />
+																		<input type="checkbox" id="tsoCOa" checked title="Include in search"> <span class="tiny">Aṅguttara</span><br />
+																		<input type="checkbox" id="tsoCOk" checked title="Include in search"> <span class="tiny">Khuddaka</span><br />
 																	</div>
 																	<div id="tsoCO3" class="" style="display:none">
-																		<input type="checkbox" id="tsoCOy"> <span class="tiny">Abhidhamma</span><br />
-																		<input type="checkbox" id="tsoCOx"> <span class="tiny">Vism</span><br />
-																		<input type="checkbox" id="tsoCOb"> <span class="tiny">Abhidh-s</span><br />
-																		<input type="checkbox" id="tsoCOg"> <span class="tiny">Byākaraṇa</span>
+																		<input type="checkbox" id="tsoCOy" title="Include in search"> <span class="tiny">Abhidhamma</span><br />
+																		<input type="checkbox" id="tsoCOx" title="Include in search"> <span class="tiny">Vism</span><br />
+																		<input type="checkbox" id="tsoCOb" title="Include in search"> <span class="tiny">Abhidh-s</span><br />
+																		<input type="checkbox" id="tsoCOg" title="Include in search"> <span class="tiny">Byākaraṇa</span>
 																	</div>
 																	<div id="tsoBO" class="topb" style="display:none">
 																	</div>
@@ -293,7 +293,6 @@
 										<option title="Aṭṭhakathā Term Search">Aṭṭh</option>
 										<option title="Ṭīka Term Search">Ṭīka</option>
 										<option title="Title Search">Title</option>
-										<option title="AccessToInsight Sutta Search (on-line only)">ATI</option>
 									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
 									<br />
 									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
@@ -520,9 +519,9 @@
 				<div class="label" align="justify" id="showing"></div>
 			</div>
 			<div id="searcht">
-				<div align="justify" id="stfb">
+				<div align="justify" class="relative" id="stfb">
 				</div>
-				<div align="justify" id="stfc">
+				<div align="justify" class="relative" id="stfc">
 				</div>
 				<div id="searchtb"></div>
 			</div>
