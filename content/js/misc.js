@@ -1443,7 +1443,7 @@ function getLinkPlace() {
 	for (i in options) {
 		var option = options[i].split('=');
 		if (option[0] == 'para') para = parseInt(option[1])-1;
-		else if (option[0] == 'query') query = option[1].split('+');
+		else if (option[0] == 'query') query = option[1].replace(/_/g,' ').split('+');
 	}
 	importXML(query,para);
 }

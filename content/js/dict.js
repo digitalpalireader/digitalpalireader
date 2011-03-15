@@ -894,112 +894,6 @@ function DPPNXML(file,which)
     document.getElementById('cdif').scrollTop=0;
 }
 
-function atiSearchStart() {
-
-	clearDivs('dif');
-	
-	var getstring = document.form.manual.value;
-
-	if(cfg['catioff'] == 'checked') {
-		atiSearchOffline(getstring);
-		return;
-	}
-
-	var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-	var bannerDiv = document.createElement('div');
-	bannerDiv.innerHTML = '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Search courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;<a href="http://www.accesstoinsight.org/" target="_blank" style="color:blue">AccessToInsight.org</a> search for <b>'+getstring+'</b>:<br><br>';
-	
-	document.getElementById('difb').appendChild(bannerDiv);
-	
-	getstring = getstring.replace(/^  */g, '').replace(/  *$/g, '').replace(/  */g, '%2B');
-	
-	var outNode = document.createElement('iframe');
-	outNode.setAttribute('frameBorder','0');
-	outNode.setAttribute('width','100%');
-	outNode.setAttribute('height',document.getElementById('cdif').offsetHeight);
-	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
-	document.getElementById('difb').appendChild(outNode);
-}
-
-function atiSearchOffline(getstring) {
-	
-	var finalout = '';
-	
-	var listout = '';
-	
-	var buffer = 30; // number of letters to add before and after the match
-
-	document.getElementById('difb').innerHTML = '<p>ATI full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line):</p><div id="dictList"></div><hr><hr>';
-	
-	var nik = ['d','m','s','a','k'];
-	for (d in nik) {
-		if(!document.getElementById('soNS'+nik[d]).checked) continue;
-		var titleNode = document.createElement('div');
-		titleNode.innerHTML = '<hr><h1>'+nik[d]+'</h1>';
-		document.getElementById('difb').appendChild(titleNode);
-
-		var titleNode2 = document.createElement('div');
-		titleNode2.innerHTML = '<hr><b>'+nik[d]+'</b><br><br>';
-		document.getElementById('dictList').appendChild(titleNode2);
-		
-		eval('var anik = ati'+nik[d].toUpperCase()+';');
-		for (var c = 0; c < anik.length; c++) {
-			var cont = readExtFile(cfg['catiloc']+'/html/tipitaka/'+anik[c]);
-			var parser=new DOMParser();
-			var xmlDoc = parser.parseFromString(cont,'text/xml');
-
-			var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
-			var data = xmlDoc.getElementsByTagName('div');
-			for (j in data) {
-				if(data[j].id == 'H_content') {
-				var texttomatch = data[j].textContent;
-					startmatch = texttomatch.search(getstring);
-					postpara = '';
-					if (startmatch >= 0)
-					{
-						var outNode = document.createElement('div');
-						outNode.setAttribute('style','position:relative')
-						listout = '<a href="javascript:void(0)" onclick="scrollToId(\'dif\',\'atio'+nik[d]+c+'\')" style="color:'+colorcfg['colsel']+'">' + title + '</a>'; 
-						while (startmatch >= 0)
-						{				
-							var gotstring = texttomatch.match(getstring)[0];
-							var endmatch = startmatch + gotstring.length;
-
-							var buffers = buffer;
-							var buffere = buffer;
-							
-							while(startmatch-buffers > 0) { // get first space before buffer
-								if(texttomatch.charAt(startmatch-buffers-1) == ' ') break;
-								buffers--;
-							}
-							while(endmatch+buffere < texttomatch.length) { // get first space before buffer
-								if(texttomatch.charAt(endmatch+buffere) == ' ') break;
-								buffere++;
-							}
-							beforem = '... '+texttomatch.substring(startmatch-buffers,startmatch);
-							afterm = texttomatch.substring(endmatch,endmatch+buffere) + ' ...';
-							postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + afterm + '<br/>';
-							texttomatch = texttomatch.substring(endmatch);
-							startmatch = texttomatch.search(getstring);
-						}
-
-						postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
-						outNode.setAttribute('id', 'atio'+nik[d]+c);
-						outNode.innerHTML = '<p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['coldppn']+'">top</a></p><p>' + postpara + '</p>';
-
-						document.getElementById('difb').appendChild(outNode);
-
-						// word list
-						var listNode = document.createElement('div');
-						listNode.innerHTML = listout;
-						document.getElementById('dictList').appendChild(listNode);
-					}
-				}
-			}
-		}		
-	}
-	document.getElementById('cdif').scrollTop=0;
-}
 namecount = [];
 
 function clickDictOption() {
@@ -1110,11 +1004,12 @@ function dictLoad() {
 
 function dictType(hard) {
 	var which = document.form.sped.selectedIndex;
-	if(!hard && (which == 8)) return; // only on button press
-	clearDivs('dif');
-
-	document.getElementById('difb').appendChild(pleasewait);
-
+	
+	if(which != 0) {
+		clearDivs('dif');
+		document.getElementById('difb').appendChild(pleasewait);
+	}
+	
 	var getstring = document.form.dictin.value;
 	document.form.manual.value = toVel(document.form.dictin.value);
 	switch (which) {
@@ -1156,11 +1051,6 @@ function dictType(hard) {
 			moveframey('dif');
 			moveframex(3);
 			titlesearchstart();
-			break;
-		case 8: // ATI
-			moveframey('dif');
-			moveframex(3);
-			atiSearchStart();
 			break;
 	}
 }

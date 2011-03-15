@@ -188,7 +188,7 @@ function importXML(labelsearch,para)
 					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
 				}
 				else {
-					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+')+'> ';
+					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+').replace(/ /g,'_')+'> ';
 					var tmpdata = onepar;
 					for (var i = 0; i < labelsearch.length; i++)
 					{
