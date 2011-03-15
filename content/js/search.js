@@ -310,7 +310,7 @@ function pausesall()
 	for (i = 0; i < nikletter.length; i++) {
 		if ((which == 0 || which == 7) && /[xbg]/.exec(nikletter[i])) continue; // don't add extracanonical texts for tipitaka match 
 		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+nikletter[i]).checked) continue; // don't add unchecked collections
-		toplista.push('<span id="sdf'+nikletter[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+nikletter[i]+'\').offsetTop;">'+nikname[nikletter[i]]+':</a> <span id="stf'+nikletter[i]+'"></span></span>');
+		toplista.push('<span id="sdf'+nikletter[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+nikletter[i]+'\').offsetTop;">'+nikname[nikletter[i]]+':</a> <span id="stfH'+nikletter[i]+'"></span></span>');
 	}
 	
 	toplist += toplista.join(', ');
@@ -397,7 +397,6 @@ function pausethree() {
 function bounce(sct)
 {
 	document.getElementById('stftb').getElementsByTagName('td')[qz-1].setAttribute('bgcolor','#2F2');
-
 	setTimeout('importXMLs('+sct+')', 10)
 }
 
@@ -462,11 +461,11 @@ function importXMLs(cnt)
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 		createTables(xmlDoc,hiert);
 					
-		document.getElementById('stf'+nikayaat).innerHTML = thiscount;
+		document.getElementById('stfH'+nikayaat).innerHTML = thiscount;
 		if (qz < filearray.length-1) 
 		{
 			nextbookfile = filearray[qz+1];
-			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stf'+nikayaat).style.color=colorcfg['colsel'];
+			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stfH'+nikayaat).style.color=colorcfg['colsel'];
 			qz++;
 			bounce(1);
 		}
