@@ -472,7 +472,7 @@ function importXMLs(cnt)
 		else {
 			qz = 0;
 			bookperm = 0;
-			document.getElementById('stf'+nikayaat).style.color=colorcfg['colsel'];
+			document.getElementById('stfH'+nikayaat).style.color=colorcfg['colsel'];
 			finishSearch();
 		}			
 	}	
