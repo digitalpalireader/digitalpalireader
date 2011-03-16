@@ -1,9 +1,9 @@
 var devCheck = 1;
 
 function dev() {
-
+	document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
 	document.textpad.pad.value = '';
-Ddppn4();
+//Ddppn4();
 //DcheckWords();
 //DcompareMAT();
 }
@@ -12,6 +12,10 @@ function devO(data) {
 	document.textpad.pad.value = data;
 	//moveframey('scf')
 
+}
+
+function DevInput(string) {
+	Ddppnsearchstart(string);
 }
 
 function Ddppn4() {
@@ -953,10 +957,10 @@ function DdppnNameNo() {
 
 
 
-function Ddppnsearchstart()
+function Ddppnsearchstart(getstring)
 {
-
-	var getstring = document.form.manual.value;
+	moveframey('dif');
+	moveframex(3);
 
 	document.getElementById('difb').innerHTML='';
 	document.getElementById('difb').appendChild(pleasewait);
@@ -1003,46 +1007,47 @@ function Ddppnsearchstart()
 			
 			uniout = gsplit[0];
 				
-			finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + gsplit[1] + ',' + uniout + '\')">'+dppnt+'</a><input type="input" id="DevD'+dppnt+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="button" value="save" onClick="DdppnSave(\''+dppnt+'\')"><br>');
+			finout += '<div id="DevX'+dppnt.replace(/"/g,'x')+'"><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + gsplit[1] + ',' + uniout + '\')">'+dppnt+'</a><input type="input" id="DevD'+dppnt.replace(/"/g,'x')+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="checkbox" onclick="DdppnReplace(\'t\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'d\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'n\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'l\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></div>';
 		}
 	}
 
 
 	
-	var y = finouta.length;
-
-	var findiv = Math.ceil(y/2);
-	
-	var listoutf = '<p>DPPN entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	if(y == 0) {
-		var outDiv = document.createElement('div');
-		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('difb').innerHTML = '';
-		document.getElementById('difb').appendChild(outDiv);
-		document.getElementById('cdif').scrollTop=0;
-		return;
-	}	
-	
-	for (z = 0; z < findiv; z++)
-	{
-		listoutf += '<tr><td align="right">'+finouta[z]+'</td><td align="right">'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td></tr>';
-	}
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = listoutf + '</table><hr />';
+	outDiv.setAttribute('align','right');
+	outDiv.innerHTML = finout;
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
 
-function DdppnSave(term) {
-	nameda[document.getElementById('DevD'+term).value] = nameda[term];
-	delete nameda[term];
-
-	var outs = 'var nameda = [];\n\n';
-	for (i in nameda) {
-		outs+= 'nameda[\''+i+'\'] = [\''+nameda[i][0]+'\',\''+nameda[i][1]+'\'];\n';
+function DdppnReplace(ltr, id, ck) {
+	var val = document.getElementById(id).value;
+	if(ck) {
+		var rx = new RegExp(ltr,'g');
+		document.getElementById(id).value = val.replace(rx, '.'+ltr);
 	}
+	else {
+		var rx = new RegExp('\\.'+ltr,'g');
+		document.getElementById(id).value = val.replace(rx, ltr);
+	}
+}
+function DdppnSave(terma) {
+	term = terma.replace(/x/g,'"')
+	nameda[document.getElementById('DevD'+terma).value] = nameda[term];
+	delete nameda[term];
+	var sorta = [];
+	for (i in nameda) {
+		sorta.push(i+'#'+nameda[i][0]+'#'+nameda[i][1]);
+	}
+	var sorta2 = sortaz(sorta);
+	var outs = 'var nameda = [];\n\n';
+	for (i in sorta2) {
+		var sa = sorta2[i].split('#');
+		outs+= 'nameda[\''+sa[0]+'\'] = [\''+sa[1]+'\',\''+sa[2]+'\'];\n';
+	}
+	document.getElementById('DevX'+terma).style.display = 'none';
 	devO(outs);
 }
 

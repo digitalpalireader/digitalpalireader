@@ -168,10 +168,6 @@ var dppn = new Array();
 
 function dppnsearchstart()
 {
-	if(devCheck == 1) {
-		Ddppnsearchstart();
-		return;
-	}
 	var getstring = document.form.manual.value;
 
 	document.getElementById('difb').innerHTML='';
@@ -1005,6 +1001,7 @@ function dictLoad() {
 }
 
 function dictType(hard) {
+
 	var which = document.form.sped.selectedIndex;
 	
 	if(which != 0) {
@@ -1014,44 +1011,36 @@ function dictType(hard) {
 	
 	var getstring = document.form.dictin.value;
 	document.form.manual.value = toVel(document.form.dictin.value);
+
+	if (which != 0) {
+		moveframey('dif');
+		moveframex(3);
+	}
+
 	switch (which) {
 		case 0:
 			var TheData = document.form.manual.value;
 			postout(TheData,0,1);
 			break;
 		case 1:
-			moveframey('dif');
-			moveframex(3);
 			pedsearchstart();
 			break;
 		case 2:
-			moveframey('dif');
-			moveframex(3);
 			dppnsearchstart();
 			break;
 		case 3:
-			moveframey('dif');
-			moveframex(3);
 			mlsearchstart();
 			break;
 		case 4:
-			moveframey('dif');
-			moveframex(3);
 			epdsearchstart();
 			break;
 		case 5:
-			moveframey('dif');
-			moveframex(3);
 			attsearchstart();
 			break;
 		case 6:
-			moveframey('dif');
-			moveframex(3);
 			tiksearchstart();
 			break;
 		case 7:
-			moveframey('dif');
-			moveframex(3);
 			titlesearchstart();
 			break;
 	}

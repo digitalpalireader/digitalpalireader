@@ -1,6 +1,7 @@
 var starttime;
 
 function checkGetstring(getstring) {
+
 	var stringra = [];
 	
 	var yesplus = getstring.indexOf('+');
@@ -38,15 +39,21 @@ function checkGetstring(getstring) {
 }
 
 function searchTipitaka() {
-
-	starttime = new Date;
-	starttime = starttime.getTime();
-
+	
 	if(!checkGetstring(document.form.isearch.value)) return;
 	
 	var which = document.getElementById('tipType').selectedIndex;
 	
 	if(which == 3 || which == 6 || which == 10 || which == 13) return;
+	
+	if(which == 15) { // Dev
+		DevInput(document.form.isearch.value);
+		return;
+	}
+
+	starttime = new Date;
+	starttime = starttime.getTime();
+
 
 	document.form.usearch.value = toVel(document.form.isearch.value); 
 	moves(1);
