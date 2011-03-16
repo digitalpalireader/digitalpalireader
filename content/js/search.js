@@ -792,7 +792,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -904,7 +904,7 @@ function createTables(xmlDoc,hiert)
 									
 									// paragraph
 									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\'' + bookfile + '\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1030,41 +1030,6 @@ function showonly(string) {
 		scrollToId('search','sbfb');
 	}
 }
-
-function searchgo(xml,book,sx,sy,sz,s,se,tmp,stringra)
-{
-
-	moves(0);
-	if (stringra) document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
-	var ssect = se;
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-	var hiert = xml.charAt(xml.length-1);
-	getplace([niknumber[xml.charAt(0)],book,sx,sy,sz,s,se,hiert]);
-	if (stringra) {
-		stringra = stringra.replace(/`/g, '"');
-		stringra = stringra.split('#');
-		if(document.form.tsoregexp.checked) {
-			for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
-		}
-		importXML(stringra,tmp);
-
-	}
-	else importXML();
-				
-	getstring = '';
-	postpara ='';
-	theData = '';
-	
-	beforem = '';
-	afterm = '';
-	
-	
-	texttomatch = '';
-	startmatch = 0;
-	endmatch = 0;
-}
-
 
 function atiSearchStart() {
 
@@ -1251,4 +1216,38 @@ function findString (strx,nummatch) {
   }
  }
  //if (!strFound) alert ("String '"+str+"' not found!")
+}
+
+
+function searchgo(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
+{
+
+	moves(0);
+	if (stringra) document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
+	var ssect = se;
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
+	getplace([niknumber[nikaya],book,sx,sy,sz,s,se,hiert]);
+	if (stringra) {
+		stringra = stringra.replace(/`/g, '"');
+		stringra = stringra.split('#');
+		if(document.form.tsoregexp.checked) {
+			for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
+		}
+		importXML(stringra,tmp);
+
+	}
+	else importXML();
+				
+	getstring = '';
+	postpara ='';
+	theData = '';
+	
+	beforem = '';
+	afterm = '';
+	
+	
+	texttomatch = '';
+	startmatch = 0;
+	endmatch = 0;
 }

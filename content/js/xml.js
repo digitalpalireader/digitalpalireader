@@ -422,7 +422,7 @@ function importXMLindex() {
 
 			whichcol[0] = 1; // bump up to let the second color know
 
-			theDatao += '<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a><br />';
+			theDatao += '<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a><br />';
 		}
 		y = z[tmp].getElementsByTagName("h0");
 		for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -438,7 +438,7 @@ function importXMLindex() {
 					spaces += '&nbsp;&nbsp;';
 				}
 				
-				theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
+				theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
 
 				var transin;
 				var transout='';
@@ -467,7 +467,7 @@ function importXMLindex() {
 						spaces += '&nbsp;&nbsp;';
 					}
 
-					theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
+					theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
 
 					var transin;
 					var transout='';
@@ -496,7 +496,7 @@ function importXMLindex() {
 							spaces += '&nbsp;&nbsp;';
 						}
 
-						theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
+						theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -525,7 +525,7 @@ function importXMLindex() {
 								spaces += '&nbsp;&nbsp;';
 							}
 
-							theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
+							theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -553,7 +553,7 @@ function importXMLindex() {
 									spaces += '&nbsp;&nbsp;';
 								}
 
-								theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+bookfile+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + '</font></a>';
+								theDatao += spaces+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + '</font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
