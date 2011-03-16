@@ -3,7 +3,7 @@ var devCheck = 1;
 function dev() {
 
 	document.textpad.pad.value = '';
-//Ddppn4();
+Ddppn4();
 //DcheckWords();
 //DcompareMAT();
 }
@@ -21,7 +21,7 @@ function Ddppn4() {
 	out:
 	for (i in dppng) {
 		 x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
-		 w = toVel(dppng[i][1].toLowerCase()).replace(/ /g, '');
+		 w = toVel(dppng[i][1].toLowerCase()).replace(/[ -]/g, '');
 		if (nameda[x]) {
 			matched[dppng[i][0]+'^'+dppng[i][1]] = x;
 			continue out;
