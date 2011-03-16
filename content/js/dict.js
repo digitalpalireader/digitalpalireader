@@ -168,7 +168,10 @@ var dppn = new Array();
 
 function dppnsearchstart()
 {
-
+	if(devCheck == 1) {
+		Ddppnsearchstart();
+		return;
+	}
 	var getstring = document.form.manual.value;
 
 	document.getElementById('difb').innerHTML='';
@@ -803,13 +806,12 @@ function DPPNXML(file,which)
 {
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
-	
-	if (nameno[tloc[2]]) { // fudge
-		if (nameno[tloc[2]] == '') {
+	if (nameno[tloc[2]+','+filea[1]]) { // fudge
+		if (nameno[tloc[2]+','+filea[1]] == '') {
 			alert('Link not found');
 			return;
 		}
-		var ttmp = nameda[nameno[tloc[2]]][1].split('/');
+		var ttmp = nameda[nameno[tloc[2]+','+filea[1]]][1].split('/');
 		tloc[0] = 'dppn';
 		tloc[1] = ttmp[0];
 		tloc[2] = ttmp[1];

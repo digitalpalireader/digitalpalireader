@@ -9,33 +9,50 @@ function dev() {
 }
 
 function devO(data) {
-	document.textpad.pad.value += data;
-	moveframey('scf')
+	document.textpad.pad.value = data;
+	//moveframey('scf')
 
 }
 
 function Ddppn4() {
 	var matched = [];
 	var unmatched = [];
-	var x, y;
+	var w,x, y;
 	out:
 	for (i in dppng) {
 		 x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
+		 w = toVel(dppng[i][1].toLowerCase()).replace(/ /g, '');
 		if (nameda[x]) {
-			matched.push("nameno['"+dppng[i][0]+"'] = '"+x+"';");
+			matched[dppng[i][0]+'^'+dppng[i][1]] = x;
+			continue out;
+		}
+		if (nameda[w]) {
+			matched[dppng[i][0]+'^'+dppng[i][1]] = w;
 			continue out;
 		}
 		y = dppng[i][1].toLowerCase();
 		for (j in nameda) {
-			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0 || nameda[j][0].indexOf(y) == 0) {
-				matched.push("nameno['"+dppng[i][0]+"'] = '"+j+"';");
+			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0  || toFuzzy(j).indexOf(toFuzzy(w)) == 0 || nameda[j][0].indexOf(y) == 0) {
+				matched[dppng[i][0]+'^'+dppng[i][1]] = j;
 				continue out;
 			}
 		}
-		unmatched.push("nameno['"+dppng[i][0]+"'] = '';");;
+		unmatched[dppng[i][0]+'^'+dppng[i][1]] = '';
 		//if(unmatched.length > 10) break;
 	}
-	devO(matched.join('\n') + '\n\n// unmatched\n' + unmatched.join('\n'));
+	
+	var outs = 'var nameno = [];\n// matched\n';
+	
+	for (i in matched) {
+		outs += "nameno['"+i+"'] = '"+matched[i]+"';\n";
+	}
+	
+	outs += '\n\n\n// unmatched\n\n';
+	
+	for (i in unmatched) {
+		outs += "nameno['"+i+"'] = '';\n";
+	}
+	devO(outs);
 }			
 
 function Ddppn3() {
@@ -932,4 +949,140 @@ function DdppnNameNo() {
 		if(t == 0) { out += "nameno['"+i+"'] = '"+nameno[i]+"';\n"; }
 	}
 	document.getElementById('pad').innerHTML = out;
+}
+
+
+
+function Ddppnsearchstart()
+{
+
+	var getstring = document.form.manual.value;
+
+	document.getElementById('difb').innerHTML='';
+	document.getElementById('difb').appendChild(pleasewait);
+
+	
+	if(document.form.sofulltext.checked) { // full text search
+		
+		dppnFullTextSearch(getstring);
+		return;
+	}
+
+	if(document.form.sofuzzy.checked) {
+		getstring = toFuzzy(getstring);
+	}
+
+	var gslength = getstring.length;
+	var gsplit = new Array();	
+	
+	var gletter = getstring.charAt(0);
+
+	var foldersw = new Array();
+	var f0 = 0;
+	var f1 = 0;
+
+	var dict = '../DPPN/';
+	
+	var finouta = new Array();
+	var finout = '';
+	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
+
+    for (x = 0; x < dppn.length; x++)
+	{
+
+		var dppnt = dppn[x][0];
+		
+		if(document.form.sofuzzy.checked) {
+			dppnt = toFuzzy(dppnt);
+		}
+
+		var yessir = (dppnt.search(getstring) > -1);
+		if(yessir && dppnt.search(/[tdnl]/) > -1)
+		{
+			gsplit = dppn[x][1];
+			
+			uniout = gsplit[0];
+				
+			finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + gsplit[1] + ',' + uniout + '\')">'+dppnt+'</a><input type="input" id="DevD'+dppnt+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="button" value="save" onClick="DdppnSave(\''+dppnt+'\')"><br>');
+		}
+	}
+
+
+	
+	var y = finouta.length;
+
+	var findiv = Math.ceil(y/2);
+	
+	var listoutf = '<p>DPPN entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	if(y == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
+		document.getElementById('difb').innerHTML = '';
+		document.getElementById('difb').appendChild(outDiv);
+		document.getElementById('cdif').scrollTop=0;
+		return;
+	}	
+	
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td align="right">'+finouta[z]+'</td><td align="right">'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td></tr>';
+	}
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
+	yut = 0;
+}
+
+function DdppnSave(term) {
+	nameda[document.getElementById('DevD'+term).value] = nameda[term];
+	delete nameda[term];
+
+	var outs = 'var nameda = [];\n\n';
+	for (i in nameda) {
+		outs+= 'nameda[\''+i+'\'] = [\''+nameda[i][0]+'\',\''+nameda[i][1]+'\'];\n';
+	}
+	devO(outs);
+}
+
+function DdppnShow(file,which) {
+	var filea = file.split(',');
+	var tloc = filea[0].split('/');
+	if (nameno[tloc[2]+','+filea[1]]) { // fudge
+		if (nameno[tloc[2]+','+filea[1]] == '') {
+			alert('Link not found');
+			return;
+		}
+		var ttmp = nameda[nameno[tloc[2]+','+filea[1]]][1].split('/');
+		tloc[0] = 'dppn';
+		tloc[1] = ttmp[0];
+		tloc[2] = ttmp[1];
+		
+	}
+	
+	if(!which) { // not from select
+		var dppnhistt = [];
+		dppnhist = dppnhist.slice(0,dhmark+1); // cut old future
+		for (i in dppnhist) {
+			if (dppnhist[i] != file) { dppnhistt.push(dppnhist[i]); }
+		}
+		dppnhist = dppnhistt.concat([file]); // add latest 
+		dhmark = dppnhist.length; // set mark to latest
+	}
+	
+	
+
+	
+	// xml
+	
+	var dppnf = 'etc/XML2/'+tloc[1]+'.xml';
+
+	var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", dppnf, false);
+    xmlhttp.send(null);
+    var xmlDoc = xmlhttp.responseXML.documentElement;
+
+	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
+	window.alert(file+' | ' +data);
 }

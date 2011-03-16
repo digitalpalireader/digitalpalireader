@@ -2,5 +2,5 @@ This is the SourceForge archive for the Digital Pali Reader.  You will find the 
 
 The latest version is 1.0b17pre and the latest commit message is:
 
-stopped looking for impossible compounds, added ability to find some declensions in compounds
+started fixing dppn, some bugfixes
 
