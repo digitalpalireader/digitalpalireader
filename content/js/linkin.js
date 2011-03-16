@@ -81,6 +81,8 @@ function postout(input,divclicked,frombox)
 
 var aw = 0;
 
+var G_illegalCompoundBreak = /[^aiueom][^aiueo]/; // this assumes that a compound has to break at a vowel or nigahita.
+
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	aw++;
 	var matchedword;
@@ -116,7 +118,13 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		partword = oneword.substring(0,oneword.length-j);
 		restword = oneword.substring(oneword.length-j,oneword.length);
 
-		if (partword.length == 1 && (lastpart || partword != 'a')) { continue; } // no single letters, please
+		switch (true) { 
+			case (partword.length == 1 && (lastpart || partword != 'a')): // single letters
+			case (G_illegalCompoundBreak.exec(partword.charAt(partword.length-1)+restword.charAt(0)) != null): // illegal break
+				continue;
+			default:
+			break;
+		}
 
 		var newpart = findmatch(partword,lastpart,restword); // check for matched part
 		if (newpart) {
@@ -132,6 +140,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 // --------------------------- match finding function  ---------------------------------
 
 var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning;
+notpart["a"] = 2;
 notpart["ko"] = 1;
 notpart["ka"] = 2;
 notpart["ya"] = 2;
@@ -370,12 +379,18 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,1);
 				if (trickmatch) { return trickmatch; }
 				
-				// removing the 'm'
+
+				// removing conjugations
 				
-				if (oneword.charAt(oneword.length-1) == 'm' && oneword.length > 2) 
+				if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
+				{
+					var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,1);
+					if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+				}
+				else if (oneword.charAt(oneword.length-1) == 'm' && oneword.length > 2) 
 				{
 					var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,1);
-					if (trickmatch) { return Array(trickmatch[0] + '-m', trickmatch[1] + '@0^m^3', (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+					if (trickmatch) { return Array(trickmatch[0] + 'm', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
 				}
 			}
 		}
