@@ -3,7 +3,7 @@ var devCheck = 1;
 function dev() {
 	document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
 	document.textpad.pad.value = '';
-//Ddppn4();
+//Ddppn5();
 //DcheckWords();
 //DcompareMAT();
 }
@@ -16,6 +16,20 @@ function devO(data) {
 
 function DevInput(string) {
 	Ddppnsearchstart(string);
+}
+
+function Ddppn5() {
+	var finout = '';
+
+    for (x in DnameDa)
+	{
+		var y = DnameDa[x][0].replace(/, /g, ',').split(',');
+		for (z in y) {
+			finout +="nameda['"+toVel(y[z].replace(/[-(). ]/g,''))+"'] = '"+DnameDa[x][1]+"';\n"; 
+		}
+	}
+	devO(finout);
+	return;
 }
 
 function Ddppn4() {
@@ -988,12 +1002,12 @@ function Ddppnsearchstart(getstring)
 	var dict = '../DPPN/';
 	
 	var finouta = new Array();
-	var finout = '';
+	var finout = '<table>';
+
 	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
 
-    for (x = 0; x < dppn.length; x++)
+    for (x in dppn)
 	{
-
 		var dppnt = dppn[x][0];
 		
 		if(document.form.sofuzzy.checked) {
@@ -1003,14 +1017,26 @@ function Ddppnsearchstart(getstring)
 		var yessir = (dppnt.search(getstring) > -1);
 		if(yessir && dppnt.search(/[tdnl]/) > -1)
 		{
-			gsplit = dppn[x][1];
+			var loc = dppn[x][1];
 			
-			uniout = gsplit[0];
-				
-			finout += '<div id="DevX'+dppnt.replace(/"/g,'x')+'"><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + gsplit[1] + ',' + uniout + '\')">'+dppnt+'</a><input type="input" id="DevD'+dppnt.replace(/"/g,'x')+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="checkbox" onclick="DdppnReplace(\'t\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'d\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'n\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'l\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></div>';
+			
+			var dppntb = dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka");
+			var dppntc = '';
+			for (y = 0; y < dppntb.length; y++) {
+				var th = dppntb[y];
+				if (/[."~]/.exec(th)) {
+					th += dppntb[++y];
+				}
+				if(/[tdnl]/.exec(th) && !/["~]/.exec(th)) dppntc += '<a href="javascript:void(0)" onclick="if(this.innerHTML.charAt(0) != \'.\') this.innerHTML = \'.\'+this.innerHTML; else this.innerHTML=this.innerHTML.substring(1)">'+th+'</a>';
+				else dppntc += th;
+			}
+			
+			finout += '<tr id="DevX'+dppnt.replace(/"/g,'x')+'"><td><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + loc + ',' + dppnt + '\')">'+dppnt+'</a></td><td id="DevD'+dppnt.replace(/"/g,'x')+'">' + dppntc + '</td><td><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></td></tr>';
+			
+			// <input type="input" id="DevD'+dppnt.replace(/"/g,'x')+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="checkbox" onclick="DdppnReplace(\'t\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'d\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'n\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'l\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></div>';
 		}
 	}
-
+	finout += '</table>';
 
 	
 	var outDiv = document.createElement('div');
@@ -1034,18 +1060,19 @@ function DdppnReplace(ltr, id, ck) {
 	}
 }
 function DdppnSave(terma) {
-	term = terma.replace(/x/g,'"')
-	nameda[document.getElementById('DevD'+terma).value] = nameda[term];
+	var term = terma.replace(/x/g,'"')
+	var termn = document.getElementById('DevD'+terma).innerHTML.replace(/<[^>]*>/g, '');
+	nameda[termn] = nameda[term];
 	delete nameda[term];
 	var sorta = [];
 	for (i in nameda) {
-		sorta.push(i+'#'+nameda[i][0]+'#'+nameda[i][1]);
+		sorta.push(i+'#'+nameda[i]);
 	}
 	var sorta2 = sortaz(sorta);
 	var outs = 'var nameda = [];\n\n';
 	for (i in sorta2) {
 		var sa = sorta2[i].split('#');
-		outs+= 'nameda[\''+sa[0]+'\'] = [\''+sa[1]+'\',\''+sa[2]+'\'];\n';
+		outs+= 'nameda[\''+sa[0]+'\'] = '+sa[1]+';\n';
 	}
 	document.getElementById('DevX'+terma).style.display = 'none';
 	devO(outs);

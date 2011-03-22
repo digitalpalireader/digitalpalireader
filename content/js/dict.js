@@ -170,6 +170,11 @@ function dppnsearchstart()
 {
 	var getstring = document.form.manual.value;
 
+	if(!/[^0-9\/]/.exec(getstring)) { // dev link
+		DPPNXML('dppn/'+getstring);
+		return;
+	}
+
 	document.getElementById('difb').innerHTML='';
 	document.getElementById('difb').appendChild(pleasewait);
 
@@ -185,7 +190,7 @@ function dppnsearchstart()
 	}
 
 	var gslength = getstring.length;
-	var gsplit = new Array();	
+	var loc = '';	
 	
 	var gletter = getstring.charAt(0);
 
@@ -216,11 +221,11 @@ function dppnsearchstart()
 		}
 		if(yessir)
 		{
-			gsplit = dppn[x][1];
+			loc = dppn[x][1];
 			
-			uniout = gsplit[0];
+			uniout = toUni(dppnt);
 				
-			finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + gsplit[1] + ',' + uniout + '\')">' + uniout + '</a><br>');
+			finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + loc + ',' + uniout + '\')">' + uniout + '</a><br>');
 		}
 	}
 
@@ -802,12 +807,12 @@ function DPPNXML(file,which)
 {
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
-	if (nameno[tloc[2]+','+filea[1]]) { // fudge
+	if (nameno[tloc[2]+'^'+filea[1]]) { // fudge
 		if (nameno[tloc[2]+','+filea[1]] == '') {
 			alert('Link not found');
 			return;
 		}
-		var ttmp = nameda[nameno[tloc[2]+','+filea[1]]][1].split('/');
+		var ttmp = nameda[nameno[tloc[2]+'^'+filea[1]]].split('/');
 		tloc[0] = 'dppn';
 		tloc[1] = ttmp[0];
 		tloc[2] = ttmp[1];
@@ -869,11 +874,11 @@ function DPPNXML(file,which)
 	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
 
 	for (i =0; i < dppn.length; i++) {
-		if (dppn[i][1][1] == tloc[1]+'/'+tloc[2]) {
+		if (dppn[i][1] == tloc[1]+'/'+tloc[2]) {
 			tnum = i;
 			lnum = (i-1);
 			
-			while(dppn[i+1][1][1] == dppn[i][1][1]) {
+			while(dppn[i+1][1] == dppn[i][1]) {
 				i++;
 			}
 			nnum = (i+1);
@@ -885,8 +890,8 @@ function DPPNXML(file,which)
 	
 	var tout = '';
 	var bout = '';
-	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + dppn[lnum][1][1] + ',' + dppn[lnum][1][0] + '\')" /></div>';
-	if (tnum != dppn.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + dppn[nnum][1][1] + ',' + dppn[nnum][1][0] + '\')"></div>';
+	if (tnum && tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + dppn[lnum][1] + ',' + dppn[lnum][0] + '\')" /></div>';
+	if (tnum && tnum != dppn.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + dppn[nnum][1]+ ',' + dppn[nnum][0] + '\')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
     document.getElementById('cdif').scrollTop=0;

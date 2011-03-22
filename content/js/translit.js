@@ -278,6 +278,7 @@ function toMyanmar(input,type) {
 	var spec = []; // takes special aa
 	spec['kh'] = 1;
 	spec['g'] = 1;
+	spec['d'] = 1;
 	spec['dh'] = 1;
 	spec['p'] = 1;
 	spec['v'] = 1; 
@@ -561,7 +562,6 @@ function thaiconv(input) {
 	var i4 = '';
 	var i5 = '';
 	var output = '';
-	var cons = 0;
 	var i = 0;
 	
 	input = input.replace(/\&quot;/g, '`');
@@ -597,22 +597,22 @@ function thaiconv(input) {
 				output += thair[i3];
 				i++;
 			}	
-			if (cons[i3]) output += 'ฺ';
 			output += thair[i1+i2];
+			if (cons[i3]) output += 'ฺ';
 			i = i + 2;
 		}					
 		else if (thair[i1] && i1 != 'a') {		// one character match except a
-			if (cons[i2] && i1 != 'ṃ') output += 'ฺ';
 			if (i2 == 'o' || i2 == 'e') {
 				output += thair[i2];
 				i++;
 			}	
 			output += thair[i1];
+			if (cons[i2] && i1 != 'ṃ') output += 'ฺ';
 			i++;
 		}					
 		else if (!thair[i1]) {
-			if (cons[i0] || (i0 == 'h' && cons[im])) output += 'ฺ';
 			output += i1;
+			if (cons[i0] || (i0 == 'h' && cons[im])) output += 'ฺ';
 			i++;				
 			if (i2 == 'o' || i2 == 'e') {  // long vowel first
 				output += thair[i2];

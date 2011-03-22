@@ -467,11 +467,17 @@
 										</td>
 									</tr>
 									<tr>
-										<td align="center">
+										<td align="center" colspan="3">
 											<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
 										</td>
-										<td></td>
-										<td align="center">
+									</tr>
+									<tr>
+										<td align="center" colspan="3">
+											<input type="button" class="btn" value="sort" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">
+										</td>
+									</tr>
+									<tr>
+										<td align="center" colspan="3">
 											<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
 										</td>
 									</tr>
