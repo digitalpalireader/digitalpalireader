@@ -170,7 +170,7 @@ function dppnsearchstart()
 {
 	var getstring = document.form.manual.value;
 
-	if(!/[^0-9\/]/.exec(getstring)) { // dev link
+	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
 		DPPNXML('dppn/'+getstring);
 		return;
 	}
@@ -277,8 +277,8 @@ function dppnFullTextSearch(getstring) {
 		for (j =0; j < allp.length; j++) {
 			var texttomatch = allp[j].textContent;
 			if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
-			var ttitle = texttomatch.substring(texttomatch.indexOf('<h2>')+4,texttomatch.indexOf('</h2>'));
-			texttomatch = texttomatch.replace(/<\/*a[^>]*>/g, '');
+			var ttitle = texttomatch.substring(texttomatch.indexOf('"huge"]')+7,texttomatch.indexOf('[/div]'));
+			texttomatch = texttomatch.replace(/\[\/*a[^>]*\]/g, '');
 			startmatch = texttomatch.search(getstring);
 			postpara = '';
 			if (startmatch >= 0)
@@ -298,7 +298,7 @@ function dppnFullTextSearch(getstring) {
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalouta.push(ttitle+'###<a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a></div>' + postpara + '</b></div>');
+				finalouta.push(ttitle+'###<a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + '</b></div>');
 			}
 		}
 	}
@@ -325,8 +325,12 @@ function dppnFullTextSearch(getstring) {
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
+
+	var finout = sortaz(finalouta).join('\n');
+
+
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
+	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finout;
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;

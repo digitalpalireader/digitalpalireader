@@ -1,4 +1,4 @@
-var devCheck = 1;
+devCheck = 1;
 
 function dev() {
 	document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
@@ -979,16 +979,6 @@ function Ddppnsearchstart(getstring)
 	document.getElementById('difb').innerHTML='';
 	document.getElementById('difb').appendChild(pleasewait);
 
-	
-	if(document.form.sofulltext.checked) { // full text search
-		
-		dppnFullTextSearch(getstring);
-		return;
-	}
-
-	if(document.form.sofuzzy.checked) {
-		getstring = toFuzzy(getstring);
-	}
 
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -1009,29 +999,24 @@ function Ddppnsearchstart(getstring)
     for (x in dppn)
 	{
 		var dppnt = dppn[x][0];
-		
-		if(document.form.sofuzzy.checked) {
-			dppnt = toFuzzy(dppnt);
-		}
-
 		var yessir = (dppnt.search(getstring) > -1);
 		if(yessir && dppnt.search(/[tdnl]/) > -1)
 		{
 			var loc = dppn[x][1];
 			
 			
-			var dppntb = dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka");
+			var dppntb = dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/\.thera$/, "thera").replace(/\.therii$/, "therii").replace(/va\.t\.thu$/, "vatthu").replace(/jaa\.taka$/, "jaataka");
 			var dppntc = '';
 			for (y = 0; y < dppntb.length; y++) {
 				var th = dppntb[y];
 				if (/[."~]/.exec(th)) {
 					th += dppntb[++y];
 				}
-				if(/[tdnl]/.exec(th) && !/["~]/.exec(th)) dppntc += '<a href="javascript:void(0)" onclick="if(this.innerHTML.charAt(0) != \'.\') this.innerHTML = \'.\'+this.innerHTML; else this.innerHTML=this.innerHTML.substring(1)">'+th+'</a>';
+				if(/[tdnlm]/.exec(th) && !/["~]/.exec(th)) dppntc += '<a href="javascript:void(0)" onclick="if(this.innerHTML.charAt(0) != \'.\') this.innerHTML = \'.\'+this.innerHTML; else this.innerHTML=this.innerHTML.substring(1)">'+th+'</a>';
 				else dppntc += th;
 			}
 			
-			finout += '<tr id="DevX'+dppnt.replace(/"/g,'x')+'"><td><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + loc + ',' + dppnt + '\')">'+dppnt+'</a></td><td id="DevD'+dppnt.replace(/"/g,'x')+'">' + dppntc + '</td><td><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></td></tr>';
+			finout += '<tr id="DevX'+dppnt.replace(/"/g,'x')+'"><td><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + loc + ',' + dppnt + '\')">'+dppnt+'</a></td><td id="DevD'+dppnt.replace(/"/g,'x')+'">' + dppntc + '</td><td><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"><input type="button" value="dup" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\',true)"></td></tr>';
 			
 			// <input type="input" id="DevD'+dppnt.replace(/"/g,'x')+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="checkbox" onclick="DdppnReplace(\'t\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'d\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'n\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'l\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></div>';
 		}
@@ -1059,11 +1044,11 @@ function DdppnReplace(ltr, id, ck) {
 		document.getElementById(id).value = val.replace(rx, ltr);
 	}
 }
-function DdppnSave(terma) {
+function DdppnSave(terma,dup) {
 	var term = terma.replace(/x/g,'"')
 	var termn = document.getElementById('DevD'+terma).innerHTML.replace(/<[^>]*>/g, '');
 	nameda[termn] = nameda[term];
-	delete nameda[term];
+	if(!dup) delete nameda[term];
 	var sorta = [];
 	for (i in nameda) {
 		sorta.push(i+'#'+nameda[i]);
@@ -1072,7 +1057,7 @@ function DdppnSave(terma) {
 	var outs = 'var nameda = [];\n\n';
 	for (i in sorta2) {
 		var sa = sorta2[i].split('#');
-		outs+= 'nameda[\''+sa[0]+'\'] = '+sa[1]+';\n';
+		outs+= 'nameda[\''+sa[0]+'\'] = \''+sa[1]+'\';\n';
 	}
 	document.getElementById('DevX'+terma).style.display = 'none';
 	devO(outs);
