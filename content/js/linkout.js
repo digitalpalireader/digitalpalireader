@@ -2,28 +2,28 @@
 function outputDef(which,first)
 {
 
-	//alert(outwords);
+	//alert(G_outwords);
 
 // create option dropdown
 	
 	var osout = '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr>';
-	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + outwords.join(' | ');
+	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + G_outwords.join(' | ');
 
 	var hotlink;
 	
 	var conjWord = [] // word to pass to conjugate
 	
-	if (outwords.length > 1 && first) {
+	if (G_outwords.length > 1 && first) {
 		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
-		for (var b = 0; b < outwords.length; b++)  // get the word names
+		for (var b = 0; b < G_outwords.length; b++)  // get the word names
 		{	
-			var outword = outwords[b].split('$')[0];
+			var outword = G_outwords[b].split('$')[0];
 			document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>'; 
 		}
 	}
 	
-	var owparts = outwords[which].split('$')[1].split('@');
+	var owparts = G_outwords[which].split('$')[1].split('@');
 	
 	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
 	if(myConj[3]) { // if root form is found, set up conjugation
@@ -47,7 +47,7 @@ function outputDef(which,first)
 				// data[2] = category
 				// data[3] = concise definition (if any)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-			var dataout = toUni(outwords[which].split('$')[0].split('-')[c]); // get the part name from the names part :)
+			var dataout = toUni(G_outwords[which].split('$')[0].split('-')[c]); // get the part name from the names part :)
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':
@@ -99,8 +99,8 @@ function outputDef(which,first)
 	var thisconcise = [];
 	var conciseoutput = '';
 
-	if (shortdefpost[which]) {
-		thisconcise = shortdefpost[which].split('$'); 
+	if (G_shortdefpost[which]) {
+		thisconcise = G_shortdefpost[which].split('$'); 
 		
 		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
 				

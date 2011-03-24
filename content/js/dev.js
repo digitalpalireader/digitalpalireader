@@ -3,6 +3,7 @@ devCheck = 1;
 function dev() {
 	document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
 	document.textpad.pad.value = '';
+//DdppnFix();
 //Ddppn5();
 //DcheckWords();
 //DcompareMAT();
@@ -10,12 +11,106 @@ function dev() {
 
 function devO(data) {
 	document.textpad.pad.value = data;
-	//moveframey('scf')
+	moveframey('scf')
 
 }
 
 function DevInput(string) {
 	Ddppnsearchstart(string);
+}
+
+
+
+
+
+
+function DdppnFixx() {
+	var fout = '';
+	for (i in nameno) {
+		var x = nameno[i];
+		if(x == '') {
+			fout += "nameno['"+i+"'] = [''];\n";
+			continue;
+		}
+		if(nameda[x]) fout += "nameno['"+i+"'] = ['" + nameda[x].join("','") + "'];\n";
+		else {
+			for (z in nameda) {
+				var q = toFuzzy(z);
+				if(x == q) {
+					fout += "nameno['"+i+"'] = ['" + nameda[z].join("','") + "'];\n";
+					break;
+				}
+			}
+		}
+	}
+	devO(fout);
+}
+
+function DdppnFix() {
+	var finalouta = [];
+	var matchout = [];
+	
+	var listouta = [];
+	for (i = 1; i < 10; i++) {
+		
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		
+		var allp = xmlDoc.getElementsByTagName('entry');
+		
+		for (j =0; j < allp.length; j++) {
+			var texttomatch = allp[j].textContent;
+			if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
+			if(texttomatch.indexOf('"huge"]') > -1) var ttitle = toVel(texttomatch.substring(texttomatch.indexOf('"huge"]')+7,texttomatch.indexOf('[/div]')));
+			else if(texttomatch.indexOf('[b]') > -1) {
+				var ttitle = toVel(texttomatch.substring(texttomatch.indexOf('[b]')+3,texttomatch.indexOf('[/b]')));
+			}
+			else continue;
+			
+			ttitle = ttitle.replace(/[- .,]/g,'').toLowerCase();
+
+			if(finalouta[ttitle] && finalouta[ttitle][1] != texttomatch) {
+				if(!listouta[ttitle]) {
+					listouta[ttitle] = [finalouta[ttitle][0],i+'/'+j];
+					matchout.push(ttitle);
+				}
+				else listouta[ttitle].push(i+'/'+j);
+			}
+			else finalouta[ttitle] = [i+'/'+j,texttomatch];
+			
+		}
+	}
+	var fout = '';
+	
+	matchout = sortaz(matchout);
+	
+	for (q in matchout) {
+		var y = matchout[q];
+		fout += "nameda['"+y+"'] = ['" + listouta[y].join("','") + "']; " + (nameda[y] ? '// '+nameda[y] : '') + "\n";
+	}
+	devO(fout);
+}
+
+function DpedFix() {
+	var out = [];
+	var fout = [];
+	for (i in mainda) {
+		var x = i.replace(/z[0-9]$/,'');
+		
+		if(x != i) {
+			if(!out[x]) out[x] = [mainda[i]];
+			else out[x].push(mainda[i]);
+		}
+		else out[i] = [mainda[i]];
+	}
+	
+	for (y in out) {
+		fout += "mainda['"+y+"'] = ['" + out[y].join("','") + "'];\n";
+	}
+	devO(fout);
 }
 
 function Ddppn5() {
@@ -138,12 +233,12 @@ function DcheckWords() {
 							{
 								var text = z[f].textContent.replace(/\^[be]b*\^/g, ' ').replace(/\^a\^[^^]*\^ea\^/g, ' ').replace(/\{[^}]*\}/g, ' ').replace(/[0-9\[\]()‘’“”`',{}?;!-]/g, ' ').replace(/\.([^nmltd])/g, "$1").replace(/"([^n])/g, "$1").replace(/ "/g, " ").replace(/   */g, ' ').toLowerCase().split(' ');
 								for (zz in text) {
-									outwords = [];
+									G_outwords = [];
 									var input = text[zz].replace(/\.$/g, "")
 									if (input.length < 2) continue;
 									fc++;
 									analyzeword(input);
-									if (outwords.length == 0) {
+									if (G_outwords.length == 0) {
 										sc++;
 										if(out[input]) {
 											out[input]++;
@@ -969,6 +1064,17 @@ function DdppnNameNo() {
 	document.getElementById('pad').innerHTML = out;
 }
 
+	var Dev_tl = [];
+	Dev_tl['t'] = 'ṭ';
+	Dev_tl['d'] = 'ḍ';
+	Dev_tl['n'] = 'ṇ';
+	Dev_tl['l'] = 'ḷ';
+	Dev_tl['m'] = 'ṃ';
+	Dev_tl['ṭ'] = 't';
+	Dev_tl['ḍ'] = 'd';
+	Dev_tl['ṇ'] = 'n';
+	Dev_tl['ḷ'] = 'l';
+	Dev_tl['ṃ'] = 'm';
 
 
 function Ddppnsearchstart(getstring)
@@ -994,29 +1100,33 @@ function Ddppnsearchstart(getstring)
 	var finouta = new Array();
 	var finout = '<table>';
 
-	if (dppn.length == 0) { for (a in nameda) { dppn.push([a,nameda[a]]); } }
 
+	if (dppn.length == 0) { 
+		for (a in nameda) { 
+			for (b in nameda[a]) {
+				dppn.push([a,nameda[a][b]]); 
+			} 
+		}
+	}
+	
     for (x in dppn)
 	{
 		var dppnt = dppn[x][0];
 		var yessir = (dppnt.search(getstring) > -1);
-		if(yessir && dppnt.search(/[tdnl]/) > -1)
+		if(yessir && dppnt.replace(/sutta$/, "").replace(/thera$/, "").replace(/therii$/, "").replace(/vatthu$/, "").replace(/jaataka$/, "").search(/[tdnlm]/) > -1)
 		{
 			var loc = dppn[x][1];
-			
-			
-			var dppntb = dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/\.thera$/, "thera").replace(/\.therii$/, "therii").replace(/va\.t\.thu$/, "vatthu").replace(/jaa\.taka$/, "jaataka");
+			var dppntb = dppnt;
+			if (!/[tdn]/.exec(dppntb)) dppntb = dppntb.replace(/l/g, '.l');
+			dppntb = toUni(dppntb.replace(/([tdn])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/\.thera$/, "thera").replace(/\.therii$/, "therii").replace(/va\.t\.thu$/, "vatthu").replace(/jaa\.taka$/, "jaataka"));
 			var dppntc = '';
 			for (y = 0; y < dppntb.length; y++) {
 				var th = dppntb[y];
-				if (/[."~]/.exec(th)) {
-					th += dppntb[++y];
-				}
-				if(/[tdnlm]/.exec(th) && !/["~]/.exec(th)) dppntc += '<a href="javascript:void(0)" onclick="if(this.innerHTML.charAt(0) != \'.\') this.innerHTML = \'.\'+this.innerHTML; else this.innerHTML=this.innerHTML.substring(1)">'+th+'</a>';
+				if(Dev_tl[th]) dppntc += '<a class="huge" href="javascript:void(0)" onclick="this.blur(); this.innerHTML = Dev_tl[this.innerHTML]">'+th+'</a>';
 				else dppntc += th;
 			}
 			
-			finout += '<tr id="DevX'+dppnt.replace(/"/g,'x')+'"><td><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + loc + ',' + dppnt + '\')">'+dppnt+'</a></td><td id="DevD'+dppnt.replace(/"/g,'x')+'">' + dppntc + '</td><td><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"><input type="button" value="dup" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\',true)"></td></tr>';
+			finout += '<tr id="DevX'+dppnt.replace(/"/g,'x')+'"><td><a class="tiny" href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="DdppnShow(\'dppn/' + loc + ',' + dppnt + '\')">'+dppnt+'</a></td><td class="huge" id="DevD'+dppnt.replace(/"/g,'x')+'">' + dppntc + '</td><td><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"><input type="button" value="dup" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\',true)"></td></tr>';
 			
 			// <input type="input" id="DevD'+dppnt.replace(/"/g,'x')+'" value="'+dppnt.replace(/([tdnl])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/jaa\.taka$/, "jaataka").replace(/"/g,'&quot;')+'"> <input type="checkbox" onclick="DdppnReplace(\'t\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'d\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'n\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="checkbox" onclick="DdppnReplace(\'l\',\'DevD'+dppnt.replace(/"/g,'x')+'\',this.checked)" checked><input type="button" value="save" onClick="DdppnSave(\''+dppnt.replace(/"/g,'x')+'\')"></div>';
 		}
@@ -1046,18 +1156,18 @@ function DdppnReplace(ltr, id, ck) {
 }
 function DdppnSave(terma,dup) {
 	var term = terma.replace(/x/g,'"')
-	var termn = document.getElementById('DevD'+terma).innerHTML.replace(/<[^>]*>/g, '');
+	var termn = toVel(document.getElementById('DevD'+terma).innerHTML.replace(/<[^>]*>/g, ''));
 	nameda[termn] = nameda[term];
 	if(!dup) delete nameda[term];
 	var sorta = [];
 	for (i in nameda) {
-		sorta.push(i+'#'+nameda[i]);
+		sorta.push(i);
 	}
 	var sorta2 = sortaz(sorta);
 	var outs = 'var nameda = [];\n\n';
 	for (i in sorta2) {
-		var sa = sorta2[i].split('#');
-		outs+= 'nameda[\''+sa[0]+'\'] = \''+sa[1]+'\';\n';
+		var sa = sorta2[i];
+		outs+= 'nameda[\''+sa+'\'] = [\''+nameda[sa].join("','")+'\'];\n';
 	}
 	document.getElementById('DevX'+terma).style.display = 'none';
 	devO(outs);

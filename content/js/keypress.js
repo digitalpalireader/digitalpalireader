@@ -64,13 +64,13 @@ function keyPressed(e) {
 		if (e.charCode == 63) { helpXML(); return; } // ?
 
 		if (e.charCode == 44) { // ,
-			if(document.getElementById('tout')) { f = document.getElementById('tout').onclick; f(); }
+			if(document.getElementById('tout') || document.getElementById('bout')) { f = document.getElementById('tout').onclick; f(); }
 			else createTablep();
 			return; 
 		} 
 		
 		if (e.charCode == 46) { // .
-			if(document.getElementById('tout')) { f = document.getElementById('bout').onclick; f(); } 
+			if(document.getElementById('tout') || document.getElementById('bout')) { f = document.getElementById('bout').onclick; f(); } 
 			else createTablen(); 
 			return; 
 		} 

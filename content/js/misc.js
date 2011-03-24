@@ -4,7 +4,7 @@
 function preout(data,which) // calls text prep, then outputs it to preFrame
 {
 
-	lastcolour = 0; // reset colour changing
+	G_lastcolour = 0; // reset colour changing
 
 	var inarray = preparepali(data,which);
 		
@@ -198,7 +198,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.indexOf('<p') == 0) {
 			var permalink = wb.substring(2,wb.length-1);
-			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this place" onmouseover="this.style.backgroundColor=\'white\'" onmouseout="this.style.backgroundColor=\'\'">&nbsp;&nbsp;&nbsp;</a>';
+			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this place" class="hoverShow">☸&nbsp;</a>';
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers

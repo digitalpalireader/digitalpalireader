@@ -104,6 +104,8 @@ img {
 	border-style: none;
 }
 
+/* multipurpose */
+
 .tabl {
 margin-left:auto; 
 margin-right:auto; 
@@ -122,6 +124,21 @@ margin-right:auto;
 
 .relative {
 position:relative;
+}
+
+.hoverShow {
+-moz-opacity:0.1;
+opacity:0.1
+}
+.hoverShow:hover {
+-moz-opacity:1.0;
+opacity:1.0
+}
+
+.thick {
+	height:3px;
+	color:black;
+	background-color: black;
 }
 
 #content {

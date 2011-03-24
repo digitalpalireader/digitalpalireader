@@ -35,9 +35,9 @@ function bookmarkc(let)
 	}
 	else 
 	{
-		var nameno = document.form.bmlist.selectedIndex;
-		var name = document.form.bmlist.getElementsByTagName('option')[nameno].value;
-		if (nameno == 0) return;
+		var nno = document.form.bmlist.selectedIndex;
+		var name = document.form.bmlist.getElementsByTagName('option')[nno].value;
+		if (nno == 0) return;
 	}
 	document.form.bmname.value = name;
 	var bmx = '';
@@ -154,8 +154,8 @@ function erasecookie(name)
 	}
 	else
 	{
-		var nameno = document.form.bmlist.selectedIndex;
-		name = document.form.bmlist.getElementsByTagName('option')[nameno].value;
+		var nno = document.form.bmlist.selectedIndex;
+		name = document.form.bmlist.getElementsByTagName('option')[nno].value;
 	}	
 	var answer = confirm('Are you sure you want to erase the bookmark "' + name + '"?')
 	if(answer) 

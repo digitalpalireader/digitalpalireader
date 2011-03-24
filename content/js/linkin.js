@@ -1,14 +1,14 @@
-var outwords = new Array();  // the raw output
-var shortdefpost = new Array();
+var G_outwords = new Array();  // the raw output
+var G_shortdefpost = new Array();
 
 
-var lastcolour = 0;
+var G_lastcolour = 0;
 
 function postout(input,divclicked,frombox)
 {
-	outwords = [];
+	G_outwords = [];
 	shortdefpre = [];
-	shortdefpost = [];
+	G_shortdefpost = [];
 	
 	divclicked = 'W'+divclicked;
 	
@@ -19,14 +19,14 @@ function postout(input,divclicked,frombox)
 
 	if (document.getElementById(divclicked))
 	{
-		if (document.getElementById(lastcolour))
+		if (document.getElementById(G_lastcolour))
 		{
-			document.getElementById(lastcolour).style.color = colorcfg['coltext'];
-			document.getElementById(lastcolour).style.fontWeight = 'normal';
+			document.getElementById(G_lastcolour).style.color = colorcfg['coltext'];
+			document.getElementById(G_lastcolour).style.fontWeight = 'normal';
 		}
 		document.getElementById(divclicked).style.color = colorcfg['colsel'];
 		document.getElementById(divclicked).style.fontWeight = 'bold';
-		lastcolour = divclicked;
+		G_lastcolour = divclicked;
 	}
 
 	var inputm = input.replace(/\u00B4/g, '"').replace(/xn/g, '"n');
@@ -56,35 +56,31 @@ function postout(input,divclicked,frombox)
 		
 	
 	var manadd = [];
-	
-	manadd["devamanussaana,m"] = 'deva#1#manussaana,m';
-	manadd["ukkaasitasaddo"] = 'ukkaasita#1#saddo';
-	manadd["yaava~ncida,m"] = 'yaava#1#~nc#1#ida,m';
-
+	/* broken
+	manadd["devamanussaana.m"] = 'deva#1#manussaana.m';
+	manadd["yaava~ncida.m"] = 'yaava#1#~nc#1#ida.m';
+	*/
 	shortdefpre = [];
 
 	if (input.length > 1)  // ---------- dont waste time with periods and commas ----------
 	{
 		// ---------- Manual Add Routine ----------
 		
-		if (manadd[input]) { outwords.push(input + '$' + manadd[input]); }
-		else { analyzeword(input); } // will populate outwords, which is nested array - 1) full alternative compounds/words seperated by array entry "space", 2) parts of the alt. compounds seperated by "@", 3) alt. defs of the parts, seperated by "#", 4) info for each alt. def. seperated by "^" 
+		if (manadd[input]) { G_outwords.push(input + '$' + manadd[input]); }
+		else { analyzeword(input); } // will populate G_outwords, which is nested array - 1) full alternative compounds/words seperated by array entry "space", 2) parts of the alt. compounds seperated by "@", 3) alt. defs of the parts, seperated by "#", 4) info for each alt. def. seperated by "^" 
 	}
-	if (outwords.length == 0)
+	if (G_outwords.length == 0)
 	{
-		outwords.push(input + '$0^' + input + '^3');
+		G_outwords.push(input + '$0^' + input + '^3');
 	}
 	outputDef(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
-	aw = 0;
 	fm = 0;
 }
 
-var aw = 0;
 
 var G_illegalCompoundBreak = /[^aiueom][^aiueo]/; // this assumes that a compound has to break at a vowel or nigahita.
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
-	aw++;
 	var matchedword;
 	var fullmatch;
 	var fullnames;
@@ -100,11 +96,11 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	if (matchedword) {
 		fullnames = partnames.concat([matchedword[0]]);
 		fullmatch = parts.concat([matchedword[1]]); // each part is a fake array of alt part defs, seperated by "#"
-		outwords.push(fullnames.join('-') + '$' + fullmatch.join('@')); // only when we match the end of the compound do we add results, making a fake array of partnames and one of parts (if any).  Arrays are seperated by $
+		G_outwords.push(fullnames.join('-') + '$' + fullmatch.join('@')); // only when we match the end of the compound do we add results, making a fake array of partnames and one of parts (if any).  Arrays are seperated by $
 		if (matchedword[2]) {
-			shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
+			G_shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
 		}
-		else { shortdefpost.push(shortdefpre.join('$')); }
+		else { G_shortdefpost.push(shortdefpre.join('$')); }
 	}
 	
 	var partword;
@@ -134,7 +130,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		}
 		
 	}
-	// alert(parts + ' | ' + partnames + ' | ' + outwords);
+	// alert(parts + ' | ' + partnames + ' | ' + G_outwords);
 }
 
 // --------------------------- match finding function  ---------------------------------
@@ -169,14 +165,14 @@ var indeclinable = [];
 indeclinable["na"] = 1;
 //indeclinable["ca"] = 1;
 
-var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.
-specsuf["~nca"] = '1/1501^~nca^0#ca#';
-specsuf["iiti"] = '0/3190^ti^0#iti#ii';  // these won't work...
-specsuf["aati"] = '0/3190^ti^0#iti#aa';
-specsuf["uuti"] = '0/3190^ti^0#iti#uu';
-specsuf["oti"] = '0/3190^ti^0#iti#o';
+var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.  Seperated by #, 0=suff def., 1=suf to add, 2=ending to add for analysis, 3 = ending to add for output
+specsuf["~nca"] = '1/1501^ca^0#ca#.m#~n';
+specsuf["iiti"] = '0/3190^ti^0#iti#ii#ii';  // these won't work...
+specsuf["aati"] = '0/3190^ti^0#iti#aa#aa';
+specsuf["uuti"] = '0/3190^ti^0#iti#uu#uu';
+specsuf["oti"] = '0/3190^ti^0#iti#o#o';
 specsuf["pi"] = '2/2866^pi^0#pi#';
-specsuf["~nhi"] = '4/1234^~nhi^0#hi#';
+specsuf["~nhi"] = '4/1234^hi^0#hi#.m#~n';
 specsuf["va"] = '3/1047^va^0#va#';
 specsuf["eva"] = '0/4338^eva^0#eva#';
 specsuf["idha"] = '0/3208^idha^0#idha#';
@@ -245,24 +241,13 @@ function findmatch(oneword,lastpart,nextpart,trick)
 
 	if (mainda[oneword])
 	{
-		res.push(mainda[oneword]); 
+		for (i in mainda[oneword]) {
+			res.push(mainda[oneword][i]); 
+		}
 	}
 	else if (irregda[oneword]) {
-		res.push(mainda[irregda[oneword]]);
-	}
-	
-// multiple exacts
-	
-	if (res.length == 0) // no exact match, so we try exact matches that have a z# on the end
-	{
-		for (var a = 1; a < 10; a++) // loop through z1 - z6
-		{				
-			var temp = oneword + 'z' + a;
-			if (mainda[temp]) 
-			{
-				res.push(mainda[temp]);
-			}
-			else break;
+		for (i in mainda[irregda[oneword]]) {
+			res.push(mainda[irregda[oneword]][i]); 
 		}
 	}
 
@@ -291,30 +276,15 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
 			{			
 				var temp = wtr[b];
-				if (mainda[temp] != null && indeclinable[temp] == null) 
+				if (mainda[temp] && !indeclinable[temp]) 
 				{			
-					res.push(mainda[temp]);				
+					for (i in mainda[temp]) {
+						res.push(mainda[temp][i]); 
+					}
 				}
 			}
 		}
 			
-		if (res.length == 0) // if still no match, look for numbered variants
-		{
-			for (b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{							
-				for (var c = 1; c < 10; c++) // c for numbers one to six
-				{				
-					var temp = wtr[b] + 'z' + c;
-
-					if (mainda[temp]) 
-					{
-						res.push(mainda[temp]);
-					}
-					else { break; }
-				}
-			}
-		}
-
 	// concise variants
 
 		if (!resy)
@@ -336,7 +306,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 
 		if (nameda[oneword]) 
 		{					
-			resn.push(nameda[oneword][1]);
+			resn.push(nameda[oneword]);
 		}
 
 		if (resn.length == 0)
@@ -345,7 +315,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			{				
 				if (nameda[wtr[b]]) 
 				{					
-					resn.push(nameda[wtr[b]][1]);
+					resn.push(nameda[wtr[b]]);
 				}
 			}
 		}
@@ -408,9 +378,9 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				var cutsuf = oneword.substring(oneword.length - tempsuf);
 				//
 				if (specsuf[cutsuf]) {
-					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2]); // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
+					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2]);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
 					if (desuf) {
-						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+'-'+cutsuf, desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
+						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[3]+'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
 						return outsuf;
 					}
 				}
@@ -430,26 +400,11 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			for (var b = 0; b < wtrN.length; b++) // check through wtrN variants that we set at the beginning
 			{			
 				var temp = wtrN[b];
-				if (mainda[temp] != null && indeclinable[temp] == null) 
+				if (mainda[temp] && !indeclinable[temp]) 
 				{			
-					res.push(mainda[temp]);				
-				}
-			}
-		}
-			
-		if (res.length == 0) // if still no match, look for numbered variants
-		{
-			for (b = 0; b < wtrN.length; b++) // b for alternative types wtrN
-			{							
-				for (var c = 1; c < 10; c++) // c for numbers one to six
-				{				
-					var temp = wtrN[b] + 'z' + c;
-
-					if (mainda[temp]) 
-					{
-						res.push(mainda[temp]);
+					for (i in mainda[temp]) {
+						res.push(mainda[temp][i]); 
 					}
-					else { break; }
 				}
 			}
 		}
