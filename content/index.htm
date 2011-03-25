@@ -542,15 +542,17 @@
 			updatecookielist();
 			historyBox();
 		}
+
+		// external dev data
+
 		var devCheck = 0;
 		if(ioCheck == true && fileExists('Extensions','ff.sh')) {
 			var headID = document.getElementsByTagName("head")[0];         
 			var newScript = document.createElement('script');
 			newScript.type = 'text/javascript';
-			newScript.src = 'js/dev.js';
+			newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
 			headID.appendChild(newScript);
 			
-			// external dev data
 			
 			var headID2 = document.getElementsByTagName("head")[0];         
 			var newScript2 = document.createElement('script');

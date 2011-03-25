@@ -208,7 +208,7 @@ function dppnsearchstart()
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\'dppn/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\''+dppnt+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -801,12 +801,15 @@ function DPPNXML(file,which)
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
 	if (nameno[tloc[2]+'^'+filea[1]]) { // fudge
-		if (nameno[tloc[2]+','+filea[1]] == '') {
+		var tt = nameno[tloc[2]+'^'+filea[1]];
+		if (tt == '' || !nameda[tt]) {
 			alert('Link not found');
 			return;
 		}
-		var ttmp = ['dppn'].concat(nameno[tloc[2]+'^'+filea[1]][0].split('/'));
+		tloc = [tt].concat(nameda[tt][0].split('/'));
 	}
+	
+	tloc[0] = toVel(tloc[0]);
 	
 	clearDivs('dif');
 	
@@ -858,36 +861,33 @@ function DPPNXML(file,which)
 	}
 
 	// get number
-	var lnum, tnum, nnum;
-
-	if (dppn.length == 0) { 
-		for (a in nameda) { 
-			for (b in nameda[a]) {
-				dppn.push([a,nameda[a][b]]); 
-			} 
+	var tname, lname, nname;
+	
+	if(dppn.length == 0) {
+		for (i in nameda) {
+			for (j in nameda[i]) {
+				dppn.push([i,nameda[i][j]]);
+			}
 		}
 	}
-	for (i=0; i < dppn.length; i++) {
-		if (dppn[i][1] == tloc[1]+'/'+tloc[2]) {
-			tnum = i;
-			if(i > 0) lnum = (i-1);
-			
-			if(dppn[i+1]) {
-				while(dppn[i+1][1] == dppn[i][1]) {
-					i++;
-				}
-				nnum = (i+1);
-			}
+	
+	for (i in dppn) {
+		if(tname) {
+			nname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
 			break;
 		}
+		if (dppn[i][0] == tloc[0] && dppn[i][1] == tloc[1]+'/'+tloc[2]) {
+			tname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
+		}
+		else lname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
 	}
 
 	// buttons
 	
 	var tout = '';
 	var bout = '';
-	if (tnum && tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML(\'dppn/' + dppn[lnum][1] + ',' + dppn[lnum][0] + '\')" /></div>';
-	if (nnum && nnum != dppn.length) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML(\'dppn/' + dppn[nnum][1]+ ',' + dppn[nnum][0] + '\')"></div>';
+	if (lname) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML('+lname+')" /></div>';
+	if (nname) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML('+nname+')"></div>';
 	document.getElementById('lt').innerHTML = tout;
 	document.getElementById('lb').innerHTML = bout;
     document.getElementById('cdif').scrollTop=0;

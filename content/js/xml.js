@@ -88,20 +88,28 @@ function importXML(labelsearch,para)
 		matValue['t'] = '';
 	}
 	var relout = '<input type="hidden" id="matButtonCount" value="'+matButtonCount+'">';
-	var relwhere = nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^"+section;
-	var relhere = eval('rel'+hier+"['"+relwhere+"']");
-	if (relhere) {
-		var hi = ['m','a','t'];
-		var hic = 0;
-		for (ht = 0; ht < hi.length; ht++) {
-			if(hi[ht] == hier) continue;
-			if (relhere.split('#')[hic] != '') {
-				var relherea = relhere.split('#')[hic].split('^');
-				relout+='<input type="button" class="btn" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
-				matButton = 0;
+	var relwhere = [nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^"+section,
+	nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^*",
+	nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^*^*",
+	nikaya+"^"+bookno+"^"+meta+"^"+volume+"^*^*^*",
+	nikaya+"^"+bookno+"^"+meta+"^*^*^*^*",
+	nikaya+"^"+bookno+"^*^*^*^*^*"];
+	for (i in relwhere) {
+		var relhere = eval('rel'+hier+"['"+relwhere[i]+"']");
+		if (relhere) {
+			var hi = ['m','a','t'];
+			var hic = 0;
+			for (ht = 0; ht < hi.length; ht++) {
+				if(hi[ht] == hier) continue;
+				if (relhere.split('#')[hic] != '') {
+					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
+					relout+='<input type="button" class="btn" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
+					matButton = 0;
 
+				}
+				hic++;
 			}
-			hic++;
+			break;
 		}
 	}
 	
@@ -232,7 +240,7 @@ function makeTitleSelect(xml,tag) { // output select tag with titles in options
 	for (var a = 0; a < xml.length; a++)
 	{
 		name = xml[a].getElementsByTagName(tag);
-		if (name[0].childNodes[0] && name[0].textContent.length > 1) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
+		if (name[0].childNodes[0] && name[0].textContent.replace(/ /g,'').length > 0) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
 		else {
 			namea = unnamed;
 			outlist.push(namea);
@@ -854,7 +862,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		list = '<select size="1" name="section" onChange="loadXML()">';
+		list = '<select size="1" name="section" onChange="importXML()">';
 		for (a in lista) {
 			list += '<option'+(a == section ? ' selected' : '')+'>' + lista[a]+'</option>';
 		}
