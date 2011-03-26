@@ -1049,7 +1049,7 @@ function atiSearchStart() {
 	if(cfg['catioff'] == 'checked') {
 		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
 		document.getElementById('stfc').innerHTML = '';
-		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr>';
+		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
 		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
 		atiSearchOffline(0,getstring);
 		return;
@@ -1077,7 +1077,7 @@ function atiSearchOffline(d, getstring) {
 
 	while (!document.getElementById('tsoCO'+nikA[d]).checked) {	
 		d++;
-		if(d == nikA.length) {
+		if(d == nikA.length) { // end
 			scrollToId('search',0);
 			var endtime = new Date;
 			var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
@@ -1142,7 +1142,7 @@ function atiSearchOffline(d, getstring) {
 					}
 
 					postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
-					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['coldppn']+'">top</a></p><p>' + postpara + '</p><div>';
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+colorcfg['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
 				}
 			}
 		}
