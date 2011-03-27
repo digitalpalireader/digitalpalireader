@@ -9,7 +9,7 @@
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://www.sourceforge.net/projects/digitalpali</em:homepageURL>
     <em:optionsURL>chrome://digitalpalireader/content/options.xul</em:optionsURL>
-    <em:updateURL>https://capslock.accountservergroup.com/~sirimang/pali/digitalpalireader.rdf</em:updateURL>
+    <em:updateURL>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
