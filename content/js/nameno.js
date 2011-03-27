@@ -872,6 +872,7 @@ nameno['isigili_s^Isigili Sutta'] = 'isigilisutta';
 nameno['isipatana^Isipatana'] = 'isipatana';
 nameno['itivuttaka^Itivuttaka'] = 'itivuttaka';
 nameno['itthiya^Itthiya'] = 'itthiya';
+nameno['jataa_s^Jatā Sutta'] = 'ja.taasutta';
 nameno['jaalinii^Jālinī'] = 'jaalinii';
 nameno['jaanussonii^Jānussoni'] = 'jaanussonii';
 nameno['jaataka^Jātaka'] = 'jaataka';

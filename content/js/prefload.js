@@ -23,6 +23,8 @@ cPrefs.push("colsize"); cPrefVals.push("16");
 
 cPrefs.push("colbk"); cPrefVals.push("#FFB");
 cPrefs.push("colbkcp"); cPrefVals.push("#DDC");
+cPrefs.push("colinput"); cPrefVals.push("#FFF");
+cPrefs.push("colbutton"); cPrefVals.push("#FFF");
 cPrefs.push("colbk1"); cPrefVals.push("yellow");
 cPrefs.push("colbk2"); cPrefVals.push("aqua");
 cPrefs.push("colbk3"); cPrefVals.push("green");

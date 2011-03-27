@@ -41,10 +41,8 @@ function pedsearchstart()
 				uniout = pedt;
 				
 				uniout = toUni(uniout);
-				uniout = uniout.replace(/z/g, ' ');
-				uniout = uniout.replace(/`/g, '\u00B0');
 				
-				finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + loc + '\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+				finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + loc + ','+uniout+'\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
 			}
@@ -146,7 +144,7 @@ function pedFullTextSearch(getstring) {
 	document.getElementById('cdif').scrollTop=0;
 }
 
-var dppn = new Array();
+var G_dppn = [];
 
 function dppnsearchstart()
 {
@@ -747,14 +745,32 @@ function titlesearchstart()
 	yut = 0;
 }
 
+var G_peda = [];
 
+var G_pedhist = [];
+var G_phmark = 0;
 
 var pedfileget = '';
-function paliXML(file)
+function paliXML(file,which)
 {
 	
 	clearDivs('dif');
 
+	
+	if(!which) { // not from select
+		var G_pedhistt = [];
+		G_pedhist = G_pedhist.slice(0,G_phmark+1); // cut old future
+		for (i in G_pedhist) {
+			if (G_pedhist[i] != file) { G_pedhistt.push(G_pedhist[i]); }
+		}
+		G_pedhist = G_pedhistt.concat([file]); // add latest 
+		G_phmark = G_pedhist.length; // set mark to latest
+	}
+	
+	var filea = file.split(',');
+	var ttit = filea[1];
+	var file = filea[0];
+	
 	var tloc = file.split('/');
 	var t1 = tloc[1];	
 	var t2 = tloc[2];
@@ -767,34 +783,69 @@ function paliXML(file)
     var xmlDoc = xmlhttp.responseXML.documentElement;
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
-	
+	var dataa = data.split(' ');
+	var datat = '';
+	for (i in dataa) {
+		var tda = toVel(dataa[i].toLowerCase().replace(/<[^>]*>/g, '')).replace(/[^a-z.~"]/g, '').replace(/[.~"]$/g, '');
+		if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+		else datat += ' ' + dataa[i];
+	}
+	data = datat.substring(1);
 	var dataNode = document.createElement('div');
-	dataNode.innerHTML = data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:"+colorcfg['colped']+"\">$1</em>]");
+	dataNode.innerHTML = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]");
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
 
-	var pedln = []; // limit in folders
-	pedln.push(4446);
-	pedln.push(2932);
-	pedln.push(3907);
-	pedln.push(3687);
-	pedln.push(1304);
-	
-	var tnum = parseFloat(t2);
 	var tout = '';
-	var bout = '';
 
-	if (tnum != 0) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="paliXML(\'PED/' + t1 + '/' + (tnum - 1) + '\')" /></div>';
-	if (tnum != pedln[t2]) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="paliXML(\'PED/' + t1 + '/' + (tnum + 1) + '\')"></div>';
-	document.getElementById('lt').innerHTML = tout;
-	document.getElementById('lb').innerHTML = bout;
+	// get number
+	var tname, lname, nname;
+	
+	if(G_peda.length == 0) {
+		for (i in mainda) {
+			for (j in mainda[i]) {
+				G_peda.push([i,mainda[i][j]]);
+			}
+		}
+	}
+	for (i in G_peda) {
+		if(tname) {
+			nname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+			break;
+		}
+		if (G_peda[i][0] == toVel(ttit) && G_peda[i][1] == pedfileget) {
+			tname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+		}
+		else lname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+	}
+
+
+	if (lname) tout += '<span class="abut lbut tiny" onclick="paliXML(\'PED/'+lname+'\')" />&lt;</span>';
+	if (nname) tout += '<span class="abut rbut tiny" onclick="paliXML(\'PED/'+nname+'\')" />&gt;</span>';
+
+
+	
+	if (G_pedhist.length > 1) { // show select
+		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+		for (i = G_pedhist.length-1; i >= 0; i--) {
+			showing += '<option value="'+G_pedhist[i]+'"';
+			if (i == G_phmark) { showing += ' selected'; }
+			var dhs = G_pedhist[i].split(',');
+			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
+		}
+		showing += '</select>';
+		tout += (tout.length > 0 ? ' ' : '') + showing;
+	}
+
+
+	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
     document.getElementById('cdif').scrollTop=0;
 }
 
 
-var dppnhist = [];
-var dhmark = 0;
+var G_dppnhist = [];
+var G_dhmark = 0;
 
 function DPPNXML(file,which)
 {
@@ -815,12 +866,12 @@ function DPPNXML(file,which)
 	
 	if(!which) { // not from select
 		var dppnhistt = [];
-		dppnhist = dppnhist.slice(0,dhmark+1); // cut old future
-		for (i in dppnhist) {
-			if (dppnhist[i] != file) { dppnhistt.push(dppnhist[i]); }
+		G_dppnhist = G_dppnhist.slice(0,G_dhmark+1); // cut old future
+		for (i in G_dppnhist) {
+			if (G_dppnhist[i] != file) { dppnhistt.push(G_dppnhist[i]); }
 		}
-		dppnhist = dppnhistt.concat([file]); // add latest 
-		dhmark = dppnhist.length; // set mark to latest
+		G_dppnhist = dppnhistt.concat([file]); // add latest 
+		G_dhmark = G_dppnhist.length; // set mark to latest
 	}
 	
 	
@@ -840,56 +891,53 @@ function DPPNXML(file,which)
 	// output
 
 	var dataNode = document.createElement('div');
-	dataNode.innerHTML = '<div class="label" id="dppnl"></div><br/>' + data;
+	dataNode.innerHTML = '<p>'+data;
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
 
-
-	var showing = '<select title="show history" onchange="dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);">';
-	
-	if (dppnhist.length > 1) { // show select
-		for (i = dppnhist.length-1; i >= 0; i--) {
-			showing += '<option value="'+dppnhist[i]+'"';
-			if (i == dhmark) { showing += ' selected'; }
-			var dhs = dppnhist[i].split(',');
-			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
-		}
-		showing += '</select>';
-		document.getElementById('dppnl').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'">' + showing + '</div>';
-
-	}
-
 	// get number
 	var tname, lname, nname;
 	
-	if(dppn.length == 0) {
+	if(G_dppn.length == 0) {
 		for (i in nameda) {
 			for (j in nameda[i]) {
-				dppn.push([i,nameda[i][j]]);
+				G_dppn.push([i,nameda[i][j]]);
 			}
 		}
 	}
-	
-	for (i in dppn) {
+	for (i in G_dppn) {
 		if(tname) {
-			nname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
+			nname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
 			break;
 		}
-		if (dppn[i][0] == tloc[0] && dppn[i][1] == tloc[1]+'/'+tloc[2]) {
-			tname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
+		if (G_dppn[i][0] == tloc[0] && G_dppn[i][1] == tloc[1]+'/'+tloc[2]) {
+			tname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
 		}
-		else lname = "'"+toUni(dppn[i][0])+'/'+dppn[i][1]+"','"+toUni(dppn[i][0])+"'";
+		else lname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
 	}
-
+	if (!tname) lname = null;
 	// buttons
 	
 	var tout = '';
-	var bout = '';
-	if (lname) tout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="tout" src="images/toolsin.png" onclick="DPPNXML('+lname+')" /></div>';
-	if (nname) bout += '<div style="background-color:'+colorcfg['colbkcp']+'"><img id="bout" src="images/tools.png"  onclick="DPPNXML('+nname+')"></div>';
-	document.getElementById('lt').innerHTML = tout;
-	document.getElementById('lb').innerHTML = bout;
+	if (lname) tout += '<span class="abut lbut tiny" onclick="DPPNXML('+lname+')" />&lt;</span>';
+	if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
+	
+	
+	if (G_dppnhist.length > 1) { // show select
+		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+		for (i = G_dppnhist.length-1; i >= 0; i--) {
+			showing += '<option value="'+G_dppnhist[i]+'"';
+			if (i == G_dhmark) { showing += ' selected'; }
+			var dhs = G_dppnhist[i].split(',');
+			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
+		}
+		showing += '</select>';
+		tout += (tout.length > 0 ? ' ' : '') + showing;
+
+	}
+
+	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
     document.getElementById('cdif').scrollTop=0;
 }
 

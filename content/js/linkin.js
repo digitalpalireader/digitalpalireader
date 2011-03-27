@@ -242,12 +242,12 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	if (mainda[oneword])
 	{
 		for (i in mainda[oneword]) {
-			res.push(mainda[oneword][i]); 
+			res.push([oneword,mainda[oneword][i]]); 
 		}
 	}
 	else if (irregda[oneword]) {
 		for (i in mainda[irregda[oneword]]) {
-			res.push(mainda[irregda[oneword]][i]); 
+			res.push([oneword,mainda[irregda[oneword]][i]]); 
 		}
 	}
 
@@ -268,7 +268,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 // do this if non-compound
 
 		// verbal & nominal declensions			
-		//devO(wtrN.join('\n'));
+
 		var wtr = wtrN.concat(wtrV);
 
 		if (res.length == 0) 
@@ -279,7 +279,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				if (mainda[temp] && !indeclinable[temp]) 
 				{			
 					for (i in mainda[temp]) {
-						res.push(mainda[temp][i]); 
+						res.push([temp,mainda[temp][i]]); 
 					}
 				}
 			}
@@ -306,7 +306,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 
 		if (nameda[oneword]) 
 		{					
-			resn.push(nameda[oneword]);
+			resn.push([oneword,nameda[oneword]]);
 		}
 
 		if (resn.length == 0)
@@ -315,7 +315,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			{				
 				if (nameda[wtr[b]]) 
 				{					
-					resn.push(nameda[wtr[b]]);
+					resn.push([wtr[b],nameda[wtr[b]]]);
 				}
 			}
 		}
@@ -380,7 +380,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				if (specsuf[cutsuf]) {
 					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2]);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
 					if (desuf) {
-						var outsuf =  Array(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[3]+'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]); // manually add the two part "compound"
+						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(specsuf[cutsuf].split('#')[3] ? specsuf[cutsuf].split('#')[3] : '') +'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]]; // manually add the two part "compound"
 						return outsuf;
 					}
 				}
@@ -403,7 +403,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				if (mainda[temp] && !indeclinable[temp]) 
 				{			
 					for (i in mainda[temp]) {
-						res.push(mainda[temp][i]); 
+						res.push([temp,mainda[temp][i]]); 
 					}
 				}
 			}
@@ -463,8 +463,8 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		altarray.push('0^' + oneword.replace(/`$/,'') + '^2^' + resy);
 	}
 	else {
-		if (res.length != 0) { for (var i in res) { altarray.push(res[i] + '^' + oneword.replace(/`$/,'') + '^0'+(resy ? '^'+resy:'')); } }
-		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j] + '^' + oneword + '^1'+(resy ? '^'+resy:'')); } }
+		if (res.length != 0) { for (var i in res) { altarray.push(res[i][1] + '^' + res[i][0] + '^0'+(resy ? '^'+resy:'')); } }
+		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j][1] + '^' + resn[j][0] + '^1'+(resy ? '^'+resy:'')); } }
 	}
 	if(res.length == 0 && resn.length == 0 && !resy) { return null; }
 	return(Array(oneword.replace(/`$/,''),altarray.join('#'),resy));  // add oneword to the beginning to let us put the word together later

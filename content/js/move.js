@@ -15,15 +15,10 @@ function moveframex(a,temp) //read, etc
     moves(0);
     switch (a) {
         case 1: //read
-			
-			if (document.getElementById('toolframebutton')) { 
-				document.getElementById('toolframebutton').value = 'A'; 
-				document.getElementById('toolframebutton').title = 'Restore Frames';
-			}
 
-			document.getElementById('RM').style.backgroundImage='url(images/lb1.png)';
-			document.getElementById('AM').style.backgroundImage='url(images/mb0.png)';
-			document.getElementById('DM').style.backgroundImage='url(images/rb0.png)';
+			document.getElementById('RM').className='abut lbut sbut';
+			document.getElementById('AM').className='abut mbut';
+			document.getElementById('DM').className='abut rbut';
             moveat = 1;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'none';
@@ -32,13 +27,9 @@ function moveframex(a,temp) //read, etc
             break;
         case 2:  //normal view
 
-			if (document.getElementById('toolframebutton')) { 
-				document.getElementById('toolframebutton').value = 'R'; 
-				document.getElementById('toolframebutton').title = 'Maximize Read Frame';
-			}
-			document.getElementById('RM').style.backgroundImage='url(images/lb0.png)';
-			document.getElementById('AM').style.backgroundImage='url(images/mb1.png)';
-			document.getElementById('DM').style.backgroundImage='url(images/rb0.png)';
+			document.getElementById('RM').className='abut lbut';
+			document.getElementById('AM').className='abut mbut sbut';
+			document.getElementById('DM').className='abut rbut';
             moveat = 2;
             document.getElementById('maf').style.display = 'block';
             document.getElementById('rightbot').style.display = 'block';
@@ -52,9 +43,9 @@ function moveframex(a,temp) //read, etc
             document.getElementById('rightbot').style.top = '';
             break;
         case 3: // dict
-			document.getElementById('RM').style.backgroundImage='url(images/lb0.png)';
-			document.getElementById('AM').style.backgroundImage='url(images/mb0.png)';
-			document.getElementById('DM').style.backgroundImage='url(images/rb1.png)';
+			document.getElementById('RM').className='abut lbut';
+			document.getElementById('AM').className='abut mbut';
+			document.getElementById('DM').className='abut rbut sbut';
             moveat = 3;
            // moveframey('dif'); // switch to dict
             
@@ -76,28 +67,23 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a) //dict, conv, or scratch
 {
-	if(a == 'dif') a = 'cdif';
+	if(a == 'dif' || a == 'cdif') a = 'difout';
 	moves(0); // close search
 
 	if (moveat == 1) moveframex(2);
 	
 	var fimg = [];
-	fimg['cdif'] = 'l';
+	fimg['difout'] = 'l';
 	fimg['cof'] = 'm';
 	fimg['scf'] = 'r';
 	
-	var fa = ['cdif','cof','scf'];
+	var fa = ['difout','cof','scf'];
 
 	for (i in fa) {
-		if (a == fa[i]) {
-			document.getElementById(a+'M').style.backgroundImage='url(images/'+fimg[a]+'b1.png)';
-		}
-		else {
-			document.getElementById(fa[i]+'M').style.backgroundImage='url(images/'+fimg[fa[i]]+'b0.png)';
-		}
+		document.getElementById(fa[i]+'M').className='abut' + (a == fa[i] ? ' sbut' : '' ) + ' ' + fimg[fa[i]] + 'but';
 	}
 
-    document.getElementById('cdif').style.display="none";
+    document.getElementById('difout').style.display="none";
 	document.getElementById('cof').style.display="none";
 	document.getElementById('scf').style.display="none";
 
@@ -122,10 +108,10 @@ function moveframec() // open close control panel
 		openCP(0);
 	}
 }
-
+G_cpspeed = 50;
 function closeCP(wR) {
-		if(wR > 30) {
-			wR-=30;
+		if(wR > G_cpspeed) {
+			wR-=G_cpspeed;
 			document.getElementById('right').style.left=wR+'px';
 			document.getElementById('left').style.left=(0-(parseInt(confmove[2])-wR))+'px';
 			setTimeout(function () { closeCP(wR); },10);
@@ -138,8 +124,8 @@ function closeCP(wR) {
 		}
 }
 function openCP(wR) {
-		if(wR < (parseInt(confmove[2]) - 30)) {
-			wR+=30;
+		if(wR < (parseInt(confmove[2]) - G_cpspeed)) {
+			wR+=G_cpspeed;
 			document.getElementById('right').style.left=wR+'px';
 			document.getElementById('left').style.left=(0-(parseInt(confmove[2])-wR))+'px';
 			setTimeout(function () { openCP(wR); },10);
@@ -177,11 +163,15 @@ function toggleSearchOpts(a) {
 function moves(a) // search open / close
 {
 	if (a == 1) { // open search
-		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="-" title="minimize search frame" onClick="moves(0)">';
+		document.getElementById('plus').innerHTML = '-';
+		document.getElementById('plus').title = 'minimize search frame';
+		document.getElementById('plus').onclick = function() { moves(0) };
 		document.getElementById('search').style.display="block";
 	}
 	else { // close search
-		document.getElementById('plus').innerHTML = '<input type="button" class="btn" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
+		document.getElementById('plus').innerHTML = '+';
+		document.getElementById('plus').title = 'maximize search frame';
+		document.getElementById('plus').onclick = function() { moves(1) };
 		document.getElementById('search').style.display="none";
 	}
 }
@@ -225,9 +215,8 @@ function go_anchor(mydiv,n){
 
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
+		document.getElementById('difhist').innerHTML = '';
 		document.getElementById('difb').innerHTML = '';
-		document.getElementById('lt').innerHTML = '';
-		document.getElementById('lb').innerHTML = '';
 	}
 	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
 		document.getElementById('anfs').innerHTML='';

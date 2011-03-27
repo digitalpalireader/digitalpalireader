@@ -101,83 +101,20 @@
 							<div class="cpt" id="cp3">
 								<table>
 									<tr>
-										<td>
-											<table class="butc">
-												<tr>
-													<td id="RM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">
-															R
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="AM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">
-															A
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="DM" class="abut tbut rbut"  title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
-															D
-													</td>
-												</tr>
-											</table>
+										<td class="buttont">
+											<span id="RM" class="abut lbut" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">R</span><span id="AM" class="abut mbut" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">A</span><span id="DM" class="abut rbut" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)">D</span>
 										</td>
-										<td>
-											<table class="butc">
-												<tr>
-													<td class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/lb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/lb0.png)';" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">
-														&lt;
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/mb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/mb0.png)';" title="Retrieve current section (g)" onclick="this.blur(); importXML()">
-														go
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td class="abut tbut rbut" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundImage='url(images/rb1.png)';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundImage='url(images/rb0.png)';" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">
-														&gt;
-													</td>
-												</tr>
-											</table>
+										<td class="buttont">
+											<span class="abut lbut" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">&lt;</span><span class="abut mbut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">go</span><span class="abut rbut" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">&gt;</span>
 										</td>
 									</tr>
 									<tr>
-										<td>
-											<table class="butc">
-												<tr>
-													<td style="background-image:url(images/lb1.png)" id="cdifM" class="abut tbut lbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">
-															D
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="cofM" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Show Convertor Frame (c)" onclick="moveframey('cof')">
-															C
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="scfM" class="abut tbut rbut"  title="Show Textpad Frame (t)" onclick="moveframey('scf')" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
-															T
-													</td>
-												</tr>
-											</table>
+										<td class="buttont">
+											<span id="difoutM" class="abut lbut sbut" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span>
 										</td>
-										<td>
-											<table class="butc">
-												<tr>
-													<td style="background-image:url(images/lb1.png)" onclick="switchhier('m',2)" id="dhierm" class="abut tbut lbut">
-															M
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="dhiera" class="abut tbut mbut" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">
-															A
-													</td>
-													<td class="abut sbut">
-													</td>
-													<td id="dhiert" class="abut tbut rbut"  title="Change to Ṭīkā" onclick="switchhier('t',2)" onmouseover="document.body.style.cursor='pointer'" onmouseout="document.body.style.cursor='auto'">
-															T
-													</td>
-												</tr>
-											</table>
+										<td class="buttont">
+
+											<span onclick="switchhier('m',2)" id="dhierm" class="abut lbut sbut">M</span><span id="dhiera" class="abut mbut" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">A</span><span id="dhiert" class="abut rbut" title="Change to Ṭīkā" onclick="switchhier('t',2)">T</span>
 										</td>
 									</tr>
 
@@ -191,11 +128,14 @@
 						<div name="ioDep" class="cpcont">
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
 							<div class="cpt" id="cp4">
+									<div style="margin-bottom:4px;">
 									<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
-									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<input type="button" class="btn" value=">" onClick="bookmarkc()" title="Load this bookmark">
-									<br>
-									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12"><input type="button" class="go" value="S" onClick="bookmarks()" title="Set Bookmark">
+									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<span class="abut obut small" onClick="bookmarkc()" title="Load this bookmark">&gt;</span>
+									</div>
+									<div>
+									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12">&nbsp;<span class="abut obut small" onClick="bookmarks()" title="Set Bookmark">S</span>
 									<input type="text" style="display:none">
+									</div>
 							</div>
 						</div>
 					<hr name="ioDep" />
@@ -203,18 +143,18 @@
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
 							<div class="cpt" id="cp5">
 
-									<table align=center>
+									<table class="butc" align=center>
 										<tr>
-											<td align=center><b>Text Search</b></td>
-											<td><span id="plus"><input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)"></span></td>
+											<td align="center" colspan="3"><b>Text Search</b></td>
 										</tr>
 										<tr>
+											<td class="buttont"><span class="abut obut small" title="maximize search frame" id="plus" onclick="moves(1)">+</span></td>
 											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
-											<td><input type="button" class="go" value=">" title="Search for word" onClick="searchTipitaka()"></td>
+											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="searchTipitaka()">&gt;</span></td>
 										</tr>
 
 										<tr>
-											<td align=center valign=top colspan=2>
+											<td align=center valign=top colspan=3>
 												<select class="sel" size="1" title="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
 													<option title="Search all three nikayas" selected>The Tipitaka</option>
 													<option title="Search current set">This Set</option>
@@ -283,20 +223,22 @@
 						<div class="cpcont">
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
 							<div class="cpt" id="cp6">
-									<b>Dictionary</b>&nbsp;
-									<select class="sel" size="1" title="Choose a dictionary type - hover over the name for description" name="sped" onchange="dictLoad()">
-										<option title="Analyze Word" selected>DPR</option>
-										<option title="Pali-English Dictionary">PED</option>
-										<option title="Dict. of Pali Names">DPPN</option>
-										<option title="Concise Pali-English Dictionary">CPED</option>
-										<option title="Concise English-Pali Dictionary">CEPD</option>
-										<option title="Aṭṭhakathā Term Search">Aṭṭh</option>
-										<option title="Ṭīka Term Search">Ṭīka</option>
-										<option title="Title Search">Title</option>
-									</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
-									<br />
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""><input type="button" class="go" value=">" title="Look up entry" onClick="dictType(1)">
-									<br />
+									<div style="margin-bottom:4px;">
+										<b>Dictionary</b>&nbsp;
+										<select class="sel" size="1" title="Choose a dictionary type - hover over the name for description" name="sped" onchange="dictLoad()">
+											<option title="Analyze Word" selected>DPR</option>
+											<option title="Pali-English Dictionary">PED</option>
+											<option title="Dict. of Pali Names">DPPN</option>
+											<option title="Concise Pali-English Dictionary">CPED</option>
+											<option title="Concise English-Pali Dictionary">CEPD</option>
+											<option title="Aṭṭhakathā Term Search">Aṭṭh</option>
+											<option title="Ṭīka Term Search">Ṭīka</option>
+											<option title="Title Search">Title</option>
+										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
+									</div>
+									<div>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">&gt;</span>
+									</div>
 									<div id="searchopts">
 										<table align="center">
 											<tr>
@@ -366,7 +308,19 @@
 						<div class="cpcont">
 							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
 							<div class="cpt" id="cp7">
-								<span name="ioDep"><input type="button" class="btn" value="%" title="Set configuration (%)" onclick="loadOptions()"><input type="button" class="btn" value="!" title="Reset configuration (!)" onclick="eraseOptions();"></span> <input type="button" class="btn" value="#" title="Pali Quiz (#)" onClick="newquiz();"><input type="button" class="btn" value="*" title="Quote of the Moment (*)" onClick="bv();"> <input type="button" class="btn" value="?" title="Help (?)" onClick="helpXML('help.xml');"><input type="button" class="btn" value="@" title="Send Feedback (@)" onClick="feedbackform();"><!--<input type="button" class="btn" value="*" title="Restart the reader." onClick="location.replace('index.htm')">-->
+								<table>
+									<tr>
+										<td class="buttont">
+											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">%</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">!</span>
+										</td>
+										<td class="buttont">
+											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">#</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">*</span>
+										</td>
+										<td class="buttont">
+											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">@</span>
+										</td>
+									</tr>
+								</table>			
 							</div>
 						</div>
 					<hr />
@@ -401,8 +355,8 @@
 	</form>
 	</div>
 	<div id="cpc">
-		<div id="cpopen">
-			<a id="cpa" href="javascript:void(0)" onmouseover="this.style.color='white'" onmouseout="this.style.color='black'" onclick="moveframec();" title="close control panel (x)">x</a>
+		<div>
+			<span class="abut obut" id="cpa" onclick="moveframec();" title="close control panel (x)">x</span>
 		</div>
 	</div>
 	<div id="right" onmouseover="document.body.style.cursor='auto'">
@@ -420,14 +374,15 @@
 			</div>
 		</div>
 		<div id="rightbot">
-			<div id="cdif">
-				<div id="dif">
-					<div id="difb">
+			<div id="difout">
+				<div id="cdif">
+					<div id="dif">
+						<div id="difb">
+						</div>
 					</div>
 				</div>
+				<div id="difhist"></div>
 			</div>
-			<div id="lt"></div>
-			<div id="lb"></div>
 			<div id="cof">
 				<form name="convertor">
 					<table align="center">
@@ -467,18 +422,18 @@
 										</td>
 									</tr>
 									<tr>
-										<td align="center" colspan="3">
-											<input type="button" class="btn" value="convert" title="convert the text" onClick="convert()"> 
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="convert the text" onClick="convert()">convert</span> 
 										</td>
 									</tr>
 									<tr>
-										<td align="center" colspan="3">
-											<input type="button" class="btn" value="sort" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">sort</span>
 										</td>
 									</tr>
 									<tr>
-										<td align="center" colspan="3">
-											<input type="button" class="btn" value="clear" title="Clear both text boxes" onClick="clearboth()">
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="Clear both text boxes" onClick="clearboth()">clear</span>
 										</td>
 									</tr>
 								</table>
@@ -493,7 +448,7 @@
 			<div id="scf" align=center>
 				<form name="textpad">
 				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-				<input type=button value="Analyze" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">
+				<p><span class="abut obut" onclick="convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' '); preout('&lt;p&gt; '+document.getElementById('pad').value + ' &lt;/p&gt;',1); moveframex(2);">Analyze</span></p>
 				</form>
 			</div>
 		</div>

@@ -131,9 +131,6 @@ function tipitakaOptions() {
 		break;
 	}
 }
-/*
-<input type="button" class="btn" value="T" title="Search through the entire mul or att filelist" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausesall();"> <input type="button" class="btn" value="N" title="Search through the entire Nik&#x0101;ya" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); pausetwo();"> <input type="button" class="btn" value="B" title="Search through the entire book" onClick="document.form.usearch.value=toVel(document.form.isearch.value); moves(1); bounce3()"> 
-*/
 
 
 var filearrayf = []; // [nik+book] = [m,a,t]
@@ -322,7 +319,7 @@ function pausesall()
 	
 	toplist += toplista.join(', ');
 	
-	toplist += '</td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;"></td></tr></table>';
+	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">-</span></td></tr></table>';
 	
 	document.getElementById('stfb').innerHTML = toplist;
 
@@ -364,7 +361,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><input type="button" class="btn" value="-" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">-</span></td></tr></table>';
 
 	importXMLs(2);
 }
@@ -396,7 +393,7 @@ function pausethree() {
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><input type="button" class="btn" value="-" title="minimize search frame" onClick="this.blur(); stopsearch = 1; moves(0)"></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">-</span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -435,7 +432,9 @@ function importXMLs(cnt)
 	var getstring = document.form.usearch.value;
 	var stringra = new Array();
 	
-	document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="-" title="minimize search frame" onClick="moves(0)">';
+	document.getElementById('plus').innerHTML = '-';
+	document.getElementById('plus').title = 'minimize search frame';
+	document.getElementById('plus').onclick = 'moves(0)';
 
 	if (cnt == 1) // whole tipitaka or multiple collections
 	{
@@ -799,7 +798,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -828,7 +827,7 @@ function createTables(xmlDoc,hiert)
                                             endmatch += 4;
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
-										postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
+										postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
 										texttomatch = texttomatch.substring(endmatch);
 										
 										if(document.form.tsoregexp.checked) startmatch = texttomatch.search(getstring);
@@ -910,8 +909,9 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									
-									finalout += ', para. ' + (tmp + 1) + ' <input type="button" class="btn" value="go" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')"> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									alert(postpara);
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									alert(preparepali(postpara,1)[0]);
 									
 									// mumble mumble
 									
@@ -1230,7 +1230,7 @@ function searchgo(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
 {
 
 	moves(0);
-	if (stringra) document.getElementById('plus').innerHTML = '<input type="button" class="btn" value="+" title="maximize search frame" onClick="moves(1)">';
+	if (stringra) document.getElementById('plus').innerHTML = '<span class="abut obut" title="maximize search frame" onClick="moves(1)">+</span>';
 	var ssect = se;
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);

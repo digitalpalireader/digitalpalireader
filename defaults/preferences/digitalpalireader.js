@@ -15,6 +15,8 @@ pref("extensions.digitalpalireader.colors.colsize", "16");
 
 pref("extensions.digitalpalireader.colors.colbk", "#FFB");
 pref("extensions.digitalpalireader.colors.colbkcp", "#DDC");
+pref("extensions.digitalpalireader.colors.colinput", "#FFF");
+pref("extensions.digitalpalireader.colors.colbutton", "#FFF");
 pref("extensions.digitalpalireader.colors.colbk1", "yellow");
 pref("extensions.digitalpalireader.colors.colbk2", "aqua");
 pref("extensions.digitalpalireader.colors.colbk3", "green");

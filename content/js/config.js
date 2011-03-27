@@ -75,6 +75,9 @@ else {
 
 	colorcfg['colbk'] = getColPref('colbk');
 	colorcfg['colbkcp'] = getColPref('colbkcp');
+	colorcfg['colinput'] = getColPref('colinput');
+	colorcfg['colbutton'] = getColPref('colbutton');
+	
 	colorcfg['colbk1'] = getColPref('colbk1');
 	colorcfg['colbk2'] = getColPref('colbk2');
 	colorcfg['colbk3'] = getColPref('colbk3');
@@ -130,6 +133,8 @@ else {
 
 		colorcfg['colbk'] = getColPref('colbk');
 		colorcfg['colbkcp'] = getColPref('colbkcp');
+		colorcfg['colinput'] = getColPref('colinput');
+		colorcfg['colbutton'] = getColPref('colbutton');
 		colorcfg['colbk1'] = getColPref('colbk1');
 		colorcfg['colbk1'] = getColPref('colbk1');
 		colorcfg['colbk3'] = getColPref('colbk3');
@@ -163,7 +168,7 @@ else {
 		// change colors
 
 		changeStyleByName('changecolor','color',colorcfg['coltext']);
-
+		
 		// Add ATI translations if preferred
 		if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
 			if (cfg['catioff'] == "checked") { 
@@ -191,24 +196,21 @@ else {
 		checkbackground();
 		checkcpbkg();
 
-		// update fonts
+		// update fonts, colors
 
 		document.styleSheets[0]['cssRules'][0].style.color = colorcfg['coltext']; 
 		document.styleSheets[0]['cssRules'][0].style.fontFamily = colorcfg['colfont']; 
 		document.styleSheets[0]['cssRules'][1].style.fontSize = colorcfg['colsize'] + 'px'; 
+		
 		document.styleSheets[0]['cssRules'][2].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.9) + 'px';  // select, etc.
+		document.styleSheets[0]['cssRules'][2].style.backgroundColor = colorcfg['colinput'];  // select, etc.
+		
 		document.styleSheets[0]['cssRules'][3].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.8) + 'px';  // small
 		document.styleSheets[0]['cssRules'][4].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*.7) + 'px';  // tiny
 		document.styleSheets[0]['cssRules'][5].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.25) + 'px';  // large
 		document.styleSheets[0]['cssRules'][6].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.5) + 'px';  // huge
 		
-		document.styleSheets[0]['cssRules'][7].style.height = Math.round(30/16*parseInt(colorcfg['colsize'])) + 'px';  // abut - all buttons
-		document.styleSheets[0]['cssRules'][8].style.width = Math.round(24/16*parseInt(colorcfg['colsize'])) + 'px';  // tbut - text buttons
-
-		// update script
-		
-		//script = parseInt(cfg['script']);
-		//document.form.translits.selectedIndex = script;
+		document.styleSheets[0]['cssRules'][7].style.backgroundColor = colorcfg['colbutton'];  // buttons
 	}
 
 	function changecss(myclass,element,value) {
@@ -235,8 +237,7 @@ else {
 			var colort = colorcfg['colbk']; 
 			var bkgimg = cfg['bkgimg']; 
 		}
-		if (bkgimg == 'checked' || bkgimg == true) var bkgurl = 'url(images/background.png)';
-		else bkgurl = '';
+		var bkgurl = bkgimg == 'checked' || bkgimg == true ? 'url(images/background.png)' : '';
 
 		document.getElementById('mafa').style.backgroundImage = bkgurl;
 		document.getElementById('mafb').style.backgroundImage = bkgurl;
@@ -252,6 +253,9 @@ else {
 		document.getElementById('scf').style.backgroundColor = colort;
 		document.getElementById('searchb').style.backgroundColor = colort;
 		document.body.style.backgroundColor = colort;
+
+
+
 	}
 
 	function checkcpbkg(x) {
@@ -293,6 +297,12 @@ else {
 				mafaout += '</tr><tr>';
 					mafaout += '<td align="right"><b id="col7" style="color:'+colorcfg['coltext']+'; background-color:'+colorcfg['colbkcp']+'">Panel Background: </b></td>';
 					mafaout += '<td><input name="color7" id="colbkcp" value="'+colorcfg['colbkcp']+'" type=input size=7 title="Enter desired control panel color" onkeyup="document.getElementById(\'col7\').style.backgroundColor=this.value; checkcpbkg(1)">';
+				mafaout += '</tr><tr>';
+					mafaout += '<td align="right"><b id="col10" style="color:'+colorcfg['coltext']+'">Input Background: </b></td>';
+					mafaout += '<td><input name="color10" id="colinput" value="'+colorcfg['colinput']+'" type=input size=7 title="Enter desired input color" onkeyup="this.style.backgroundColor=this.value">';
+				mafaout += '</tr><tr>';
+					mafaout += '<td align="right"><span class="abut obut" id="col11" style="color:'+colorcfg['coltext']+'">Button Background:</span> </td>';
+					mafaout += '<td><input name="color11" id="colbutton" value="'+colorcfg['colbutton']+'" type=input size=7 title="Enter desired button color" onkeyup="document.getElementById(\'col11\').style.backgroundColor=this.value">';
 				mafaout += '</tr>';
 			mafaout += '</table>';
 			mafaout += '</p></form></td>';
@@ -325,14 +335,14 @@ else {
 			mafaout += '<td colspan=3><hr /><form name="miscform">';
 				mafaout += '<p><b>Options:</b></p>';
 				mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+' onclick="this.checked==true ? document.getElementById(\'catiul\').style.display = \'block\' : document.getElementById(\'catiul\').style.display = \'none\';">';
-				mafaout += '<ul id="catiul" '+(cfg['ctrans'] == 'checked' ? '': 'style="display:none"')+' ><li><input type="checkbox" name="catioff" id="catioff" '+cfg['catioff']+'> Use <a href="http://www.accesstoinsight.org/tech/download/bulk/bulk.html" style="color:blue" target="_blank">offline version</a> of <a href="http://www.accesstoinsight.org/" style="color:blue" target="_blank">accesstoinsight.org</a> - location: <b>'+getHomePath()+'/</b><input type="text" name="catiloc" id="catiloc" value="'+cfg['catiloc']+'" onkeyup="if(fileExists(this.value,\'start.html\')) { document.getElementById(\'atilocx\').style.color=\'green\'; document.getElementById(\'atilocx\').innerHTML=\'ok\'; } else{document.getElementById(\'atilocx\').style.color=\'red\'; document.getElementById(\'atilocx\').innerHTML=\'x\';}"><b>/start.html <font id="atilocx" size="5" style="color:'+(fileExists(cfg['catiloc'],'start.html') ? 'green">ok' : 'red">x' )+'</font></b></li></ul></p>';
+				mafaout += '<ul id="catiul" '+(cfg['ctrans'] == 'checked' ? '': 'style="display:none"')+' ><li><input type="checkbox" name="catioff" id="catioff" '+cfg['catioff']+'> Use <a href="http://www.accesstoinsight.org/tech/download/bulk/bulk.html" style="color:'+colorcfg['colcpd']+'" target="_blank">offline version</a> of <a href="http://www.accesstoinsight.org/" style="color:'+colorcfg['colcpd']+'" target="_blank">accesstoinsight.org</a> - location: <b>'+getHomePath()+'/</b><input type="text" name="catiloc" id="catiloc" value="'+cfg['catiloc']+'" onkeyup="if(fileExists(this.value,\'start.html\')) { document.getElementById(\'atilocx\').style.color=\'green\'; document.getElementById(\'atilocx\').innerHTML=\'ok\'; } else{document.getElementById(\'atilocx\').style.color=\'red\'; document.getElementById(\'atilocx\').innerHTML=\'x\';}"><b>/start.html <font id="atilocx" size="5" style="color:'+(fileExists(cfg['catiloc'],'start.html') ? colorcfg['coldppn']+'">ok' : colorcfg['colped']+'">x' )+'</font></b></li></ul></p>';
 				mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
 			mafaout += '</form></td>';
 		mafaout += '</tr></table>';
 		mafaout += '<p align=center>';
-			mafaout += '<button class="btn" onclick="saveOptions()">Save</button>';
-			mafaout += '<button class="btn" onclick="moveframex(2); refreshit()">Cancel</button>';
-			mafaout += '<button class="btn" onclick="eraseOptions(1)">Restore defaults</button><b style="color:'+colorcfg['colsel']+'" id=message> </b>';
+			mafaout += '<span class="abut obut" onclick="saveOptions()">Save</span>';
+			mafaout += '&nbsp;<span class="abut obut" onclick="moveframex(2); refreshit()">Cancel</span>';
+			mafaout += '&nbsp;<span class="abut obut" onclick="eraseOptions(1)">Restore defaults</span><b style="color:'+colorcfg['colsel']+'" id=message> </b>';
 		mafaout += '</p>';
 		document.getElementById('mafbc').innerHTML = mafaout;
 		document.getElementById('translits').selectedIndex = parseInt(cfg['script']);

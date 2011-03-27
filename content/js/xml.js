@@ -103,7 +103,7 @@ function importXML(labelsearch,para)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relout+='<input type="button" class="btn" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'" value="'+hi[ht]+'"> ';
+					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'">'+hi[ht]+'</span> ';
 					matButton = 0;
 
 				}
@@ -232,7 +232,7 @@ function importXML(labelsearch,para)
 
 }
 
-var maxlength = 20;  // change for display purposes, will affect history as well.
+var maxlength = 21;  // change for display purposes, will affect history as well.
 
 function makeTitleSelect(xml,tag) { // output select tag with titles in options
 	var name, namea;
@@ -242,12 +242,12 @@ function makeTitleSelect(xml,tag) { // output select tag with titles in options
 		name = xml[a].getElementsByTagName(tag);
 		if (name[0].childNodes[0] && name[0].textContent.replace(/ /g,'').length > 0) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
 		else {
-			namea = unnamed;
+			namea = '>'+ unnamed;
 			outlist.push(namea);
 			continue;
 		}
 		
-		namea = translit(shortenTitle(namea));
+		namea = ' title="'+toUni(namea)+'">'+ translit(shortenTitle(namea));
 
 		outlist.push(namea);
 	}
@@ -256,7 +256,7 @@ function makeTitleSelect(xml,tag) { // output select tag with titles in options
 
 function shortenTitle(name) {
 	name = toUni(name);
-	if(name.length < maxlength) return name;
+	if(name.length <= maxlength) return name;
 	name = name.substring(0,maxlength);
 	name += '...';
 	return name;
@@ -303,8 +303,8 @@ function gettitles(altget,stop,prev,ssect)
 	namea = axml[0].getElementsByTagName("han");
 	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
 	else name = unnamed;
-	name = shortenTitle(name);
-	document.getElementById('title').innerHTML = '<input type="button" value="'+name+'" title="click to return to index" onclick="importXMLindex();">';
+	var outname = translit(shortenTitle(name));
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex();">'+outname+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -315,11 +315,11 @@ function gettitles(altget,stop,prev,ssect)
 	if (getsutta == 0) // remake meta list
 	{
 		lista = makeTitleSelect(u,'h0n');
-		if (lista.length == 1 && lista[0] == unnamed ) {
+		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 			list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			list = '<select size="1" name="meta" onChange="gettitles(6)"><option>' + lista.join('</option><option>')+'</option></select>';
+			list = '<select size="1" name="meta" onChange="gettitles(6)"><option' + lista.join('</option><option')+'</option></select>';
 		}	
 		document.getElementById('meta').innerHTML = list;
 	}
@@ -327,22 +327,22 @@ function gettitles(altget,stop,prev,ssect)
 	if (getsutta < 2) // remake volume list
 	{
 		lista = makeTitleSelect(v,'h1n');
-		if (lista.length == 1 && lista[0] == unnamed ) {
+		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 			list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			list = '<select size="1" name="volume" onChange="gettitles(5)"><option>' + lista.join('</option><option>')+'</option></select>';
+			list = '<select size="1" name="volume" onChange="gettitles(5)"><option' + lista.join('</option><option')+'</option></select>';
 		}	
 		document.getElementById('volume').innerHTML = list;
 	}
 	if (getsutta < 3) // remake vaggalist
 	{
 		lista = makeTitleSelect(w,'h2n');
-		if (lista.length == 1 && lista[0] == unnamed ) {
+		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 			list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			list = '<select size="1" name="vagga" onChange="gettitles(4)"><option>' + lista.join('</option><option>')+'</option></select>';
+			list = '<select size="1" name="vagga" onChange="gettitles(4)"><option' + lista.join('</option><option')+'</option></select>';
 		}	
 		document.getElementById('vagga').innerHTML = list;
 	}
@@ -350,20 +350,20 @@ function gettitles(altget,stop,prev,ssect)
 	if (getsutta < 4) // remake sutta list on getsutta = 0, 2, or 3
 	{
 		lista = makeTitleSelect(x,'h3n');
-		if (lista.length == 1 && lista[0] == unnamed ) {
+		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 			list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
 		}
 		else {
-			list = '<select size="1" name="sutta" onChange="gettitles(3)"><option>' + lista.join('</option><option>')+'</option></select>';
+			list = '<select size="1" name="sutta" onChange="gettitles(3)"><option' + lista.join('</option><option')+'</option></select>';
 		}	
 		document.getElementById('sutta').innerHTML = list;
 	}
 	lista = makeTitleSelect(y,'h4n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
-		list = '<select size="1" name="section" onChange="importXML()"><option>' + lista.join('</option><option>')+'</option></select>';
+		list = '<select size="1" name="section" onChange="importXML()"><option' + lista.join('</option><option')+'</option></select>';
 	}	
 	document.getElementById('section').innerHTML = list;
 
@@ -453,9 +453,7 @@ function importXMLindex() {
 				if (hier == "m") { 
 					transin = addtrans(5,nikaya,bookno,tmp2);
 					if (transin) {
-						if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-						transout += transin.join('');
-						theDatao += transout; 
+						theDatao += transin.join(''); 
 					}
 				}
 				theDatao += '<br />';
@@ -482,9 +480,7 @@ function importXMLindex() {
 					if (hier == "m") { 
 						transin = addtrans(4,nikaya,bookno,tmp2,tmp3);
 						if (transin) {
-							if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-							transout += transin.join('');
-							theDatao += transout; 
+							theDatao += transin.join(''); 
 						}
 					}
 					theDatao += '<br />';
@@ -510,9 +506,7 @@ function importXMLindex() {
                         if (hier == "m") { 
                             transin = addtrans(3,nikaya,bookno,tmp2,tmp3,tmp4);
                             if (transin) {
-                                if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-                                transout += transin.join('');
-                                theDatao += transout; 
+								theDatao += transin.join(''); 
                             }
                         }
                         theDatao += '<br />';
@@ -539,9 +533,7 @@ function importXMLindex() {
                             if (hier == "m") { 
                                 transin = addtrans(2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
                                 if (transin) {
-                                    if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-                                    transout += transin.join('');
-                                    theDatao += transout; 
+                                    theDatao += transin.join('');  
                                 }
                             }
                             theDatao += '<br />';
@@ -568,9 +560,7 @@ function importXMLindex() {
                                     transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
                            			//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
                                     if (transin) {
-                                        if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="http://www.accesstoinsight.org/favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;'
-                                        transout += transin.join('');
-                                        theDatao += transout; 
+										theDatao += transin.join('');  
                                     }
                                 }
                                 theDatao += '<br />';
@@ -764,27 +754,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var t = xmlDoc.getElementsByTagName("ha");
 	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0] && tname[0].textContent.length > 1) var tnamea = tname[0].textContent; else tnamea = unnamed;
+	if (tname[0].childNodes[0] && tname[0].textContent.length > 1) var tnamea = tname[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else tnamea = unnamed;
 	var countt = tnamea;
 
-	var maxlength = 15;  // change for display purposes
+	var titlen = toUni(tnamea);
 
-	countt = countt.replace(/aa/g, 'a');
-	countt = countt.replace(/ii/g, 'i');
-	countt = countt.replace(/uu/g, 'u');
-	countt = countt.replace(/\./g, '');
-	countt = countt.replace(/\~/g, '');
-	countt = countt.replace(/\"/g, '');
-
-	var difft = tnamea.length - countt.length;
-
-	if (countt.length > maxlength + 3) 
-	{
-	tnamea = tnamea.substring(0,maxlength+difft);
-	tnamea += '...';
-	}
-	tnamea = toUni(tnamea);
-	document.getElementById('title').innerHTML = '<input type="button" onclick="importXMLindex();" value="' + translit(tnamea) + '" title="click to return to index">';
+	tnamea = translit(shortenTitle(tnamea));
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex();">'+tnamea+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -798,13 +774,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	// meta
 
 	lista = makeTitleSelect(u,'h0n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
 		list = '<select size="1" name="meta" onChange="gettitles(6)">';
 		for (a in lista) {
-			list += '<option'+(a == meta ? ' selected' : '')+'>' + lista[a]+'</option>';
+			list += '<option'+(a == meta ? ' selected' : '') + lista[a]+'</option>';
 		}
 		list += '</select>';
 	}	
@@ -813,13 +789,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	// volume
 
 	lista = makeTitleSelect(v,'h1n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
 		list = '<select size="1" name="volume" onChange="gettitles(5)">';
 		for (a in lista) {
-			list += '<option'+(a == volume ? ' selected' : '')+'>' + lista[a]+'</option>';
+			list += '<option'+(a == volume ? ' selected' : '') + lista[a]+'</option>';
 		}
 		list += '</select>';
 	}	
@@ -828,13 +804,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	// vagga
 
 	lista = makeTitleSelect(w,'h2n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
 		list = '<select size="1" name="vagga" onChange="gettitles(4)">';
 		for (a in lista) {
-			list += '<option'+(a == vagga ? ' selected' : '')+'>' + lista[a]+'</option>';
+			list += '<option'+(a == vagga ? ' selected' : '') + lista[a]+'</option>';
 		}
 		list += '</select>';
 	}	
@@ -843,13 +819,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	// sutta
 
 	lista = makeTitleSelect(x,'h3n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
 		list = '<select size="1" name="sutta" onChange="gettitles(3)">';
 		for (a in lista) {
-			list += '<option'+(a == sutta ? ' selected' : '')+'>' + lista[a]+'</option>';
+			list += '<option'+(a == sutta ? ' selected' : '') + lista[a]+'</option>';
 		}
 		list += '</select>';
 	}	
@@ -858,13 +834,13 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	// section
 
 	lista = makeTitleSelect(y,'h4n');
-	if (lista.length == 1 && lista[0] == unnamed ) {
+	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
 		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
 	}
 	else {
 		list = '<select size="1" name="section" onChange="importXML()">';
 		for (a in lista) {
-			list += '<option'+(a == section ? ' selected' : '')+'>' + lista[a]+'</option>';
+			list += '<option'+(a == section ? ' selected' : '') + lista[a]+'</option>';
 		}
 		list += '</select>';
 	}	
@@ -972,7 +948,7 @@ function getatt(num,type,niklist) { // get atthakatha or tika word
         z = z.replace(wordr, "<c0><@>"+word.replace(/ /g,'</@><xc> <c0><@>')+"</@><xc>");
         
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')" value="'+placen+'" /> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
     document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+(type == 'a' ? 'aṭṭhakathā:' : 'ṭīka:');
     document.getElementById('mafbc').innerHTML += finout;
@@ -1078,7 +1054,7 @@ function gettitle(num,mul,att,tik,niklist) { // get titles
 
 		var placen = convtitle(nikaya,book,vna,wna,xna,yna,zna,type);
 
-        finout += '<p>'+placen+' <input type="button" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()" value="go" /></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()">go</span></p>';
     }
     document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
     document.getElementById('mafbc').innerHTML += finout;

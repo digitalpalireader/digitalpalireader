@@ -25,7 +25,7 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
 			var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-			if (transin[0].charAt(0) != '&') transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
+			if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
 			transout += transin.join('');
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
@@ -614,6 +614,18 @@ function createTablep()
 
 }
 
+function transLink(which,auth,url,title) {
+	if(which == 0) {
+		if(auth == 'Anandajoti') {
+			var images = 'images/abt.gif';
+			var imaget = 'Translations courtesy of http://www.ancient-buddhist-texts.net/';
+			var imageu = 'http://www.ancient-buddhist-texts.net/';
+		}
+		return (auth == 'Anandajoti' ? '&nbsp;<img width="16" style="vertical-align:middle" src="'+images+'" title="'+imaget+'" onclick="window.open(\''+imageu+'\')">&nbsp;' : '') + '<span class="abut obut tiny" onclick="window.open(\''+url+'\');" title="'+title+'">'+auth+'</span>';
+	}
+	return '&nbsp;<img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onclick="window.open(\''+url+'\')">';
+}
+
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 	if (cfg["ctrans"] != "checked" || typeof(atiD) == 'undefined') return;
 	
@@ -713,7 +725,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								break;
 						}
 					}
-					if (surl) {	output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahakhandhako/'+surl+'\');" value="Anandajoti" title="Translation of Mahakhandhako by Anandajoti">');cnt++; }
+					if (surl) {	
+						output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahakhandhako/'+surl,'Translation of Mahakhandhako by Anandajoti'));
+						cnt++; 
+					}
 					break;			
 				break;
 			}
@@ -739,7 +754,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 				if (atiD[x].indexOf(atid)==0) {
 					var auth = atiD[x].split('.')[3];
 					if (autha[auth]) {auth = autha[auth];}
-					output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiD[x]+'\');" value="'+auth+'" title="Translation of DN '+mysn+' by '+auth+'">');
+					output.push(transLink(which,auth,atiurl+'tipitaka/'+atiD[x],'Translation of DN '+mysn+' by '+auth));
 					cnt++;
 				}
 			}
@@ -861,7 +876,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							break;
 					}
 				}
-				output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/'+surl+'\');" value="Anandajoti" title="Translation of DN 16'+ssect+' by Anandajoti">');cnt++;
+				output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/'+surl,'Translation of DN 16'+ssect+' by Anandajoti'));
+				cnt++;
 			}
 			if (mysn == 22) {
 				if (which > 0) {
@@ -882,7 +898,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 					surl += sect0 + '.htm'; 
 				}
-				output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Satipatthana/'+surl+'\');" value="Anandajoti" title="Translation of DN 22'+ssect+' by Anandajoti">');cnt++;
+				output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Satipatthana/'+surl,'Translation of DN 22'+ssect+' by Anandajoti'));
+				cnt++;
 			}
 			break;
 		case 'm':
@@ -895,7 +912,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			for (var x = 0;x < atiM.length; x++) {
 				var auth = atiM[x].split('.')[2];
 				if (autha[auth]) {auth = autha[auth];}
-				if (atiM[x].indexOf(atim)==0) {output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiM[x]+'\');" value="'+auth+'" title="Translation of MN '+mysn+' by '+auth+'">');cnt++;}
+				if (atiM[x].indexOf(atim)==0) {
+					output.push(transLink(which,auth,atiurl+'tipitaka/'+atiM[x],'Translation of MN '+mysn+' by '+auth));
+					cnt++;
+				}
 			}
 		break;
 		case 'a':
@@ -979,7 +999,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							if(atiAs[4] == 'html') { var auth = atiAs[3]; }
 							else { var auth = atiAs[2]; }
 							if (autha[auth]) {auth = autha[auth];}
-							output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiA[a]+'\');" value="'+auth+'" title="Translation of AN '+bookn+'.'+sno+' by '+auth+'">');cnt++;
+							output.push(transLink(which,auth,atiurl+'tipitaka/'+atiA[a],'Translation of AN '+mysn+' by '+auth));
+							cnt++;
 							continue out;
 						}
 					}
@@ -1016,7 +1037,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						else {var sno = c;}
 						var auth = atiS[a].split('.')[2];
 						if (autha[auth]) {auth = autha[auth];}
-						output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiS[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+mysn+' by '+auth));
+						cnt++;
 						continue out;
 					}
 				}
@@ -1040,12 +1062,14 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[2];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Khp '+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
 					}
-					output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Khuddakapatha/Khuddakapatha.htm\');" value="Anandajoti" title="Translation of KhP by Anandajoti">');cnt++;		 
+					output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Khuddakapatha/Khuddakapatha.htm','Translation of KhP by Anandajoti'));
+					cnt++;		 
 				break;
 				case 2: // dhp
 				// kn/dhp/dhp.24.budd.html
@@ -1059,7 +1083,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var sno = vagga+1;
 								var auth = atiK[a].split('.')[2];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Dhp. '+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Dhp '+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1081,7 +1106,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1125,7 +1151,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						if (sect0 < 10) { sect0 = '0'+sect0; }
 						surl += sect0 + '.htm';
 					}
-					output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Udana/'+surl+'\');" value="Anandajoti" title="Translation of Udana '+ssect+' by Anandajoti">');cnt++;		 
+					output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Udana/'+surl,'Translation of Udana '+ssect+' by Anandajoti'));
+					cnt++;		 
 				break;
 				case 4: // iti
 					// kn/iti/iti.1.001-027.than.html
@@ -1154,7 +1181,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of KhP '+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Iti '+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1178,12 +1206,16 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of SN '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Sn '+(vagga+1)+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
 					}
-					if (vagga == 4) {output.push('&nbsp;<img width="16" style="vertical-align:middle" src="http://www.ancient-buddhist-texts.net/favicon.gif" title="Translations courtesy of http://www.ancient-buddhist-texts.net/" onclick="window.open(\'www.ancient-buddhist-texts.net/\')">&nbsp;<input type=button class="btn" onclick="window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm\');" value="Anandajoti" title="Translation of SN 5 by Anandajoti">');cnt++;}
+					if (vagga == 4) {
+						output.push(transLink(which,'Anandajoti','http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm','Translation of Sn 5 by Anandajoti'));
+						cnt++;
+					}
 				break;
 				case 6: // Vv
 					// kn/ud/ud.2.01.irel.html
@@ -1202,7 +1234,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1224,7 +1257,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1248,7 +1282,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thag '+vagga+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Thag '+vagga+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1271,7 +1306,8 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push('<input type=button class="btn" onclick="window.open(\''+atiurl+'tipitaka/'+atiK[a]+'\');" value="'+auth+'" title="Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth+'">');cnt++;
+								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth));
+								cnt++;
 								continue out;
 							}
 						}
@@ -1333,31 +1369,20 @@ function switchhier(htmp,stop) {
 	}
 
 	hier = htmp;
+
+	// style
+
 	ha = hLetters;
 
 	for(i=0; i<ha.length; i++) {
 		if (ha[i] == htmp) {
-			document.getElementById('dhier'+ha[i]).onmouseover=function() {
-				return;
-			};
-			document.getElementById('dhier'+ha[i]).onmouseout=function() {
-				return;
-			};
 			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+hTitle[i];
 
-			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b1.png)';
+			document.getElementById('dhier'+ha[i]).className = 'abut sbut '+himg[i]+'but';
 		}
 		else {
-			document.getElementById('dhier'+ha[i]).onmouseover=function() {
-				document.body.style.cursor='pointer';
-			};
-			document.getElementById('dhier'+ha[i]).onmouseout=function() {
-				document.body.style.cursor='auto';
-			};
-
 			document.getElementById('dhier'+ha[i]).title = 'Change to '+hTitle[i];
-
-			document.getElementById('dhier'+ha[i]).style.backgroundImage = 'url(images/'+himg[i]+'b0.png)';
+			document.getElementById('dhier'+ha[i]).className = 'abut '+himg[i]+'but';
 		}
 	}
 
@@ -1406,7 +1431,7 @@ function historyBox() {
 			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
 			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
 		}
-		hout += '</select>&nbsp;<a href="javascript:void(0)" title="Clear History" onclick="clearHistory(1);" onmouseover="this.style.color=\'#F5F5F5\'" onmouseout="this.style.color=\'inherit\';">x</a>';
+		hout += '</select>&nbsp;<span class="abut obut tiny" title="Clear History" onclick="clearHistory(1);">x</span>';
 	}
 		
 	document.getElementById('history').innerHTML = hout;

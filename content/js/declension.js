@@ -231,6 +231,12 @@
 	prem.push(['issatha',0,0,'ati',1]);
 	prem.push(['issaami',0,0,'ati',1]);
 	prem.push(['issaama',0,0,'ati',1]);
+	prem.push(['issati',0,0,'aati',1]);
+	prem.push(['issasi',0,0,'aati',1]);
+	prem.push(['issanti',0,0,'aati',1]);
+	prem.push(['issatha',0,0,'aati',1]);
+	prem.push(['issaami',0,0,'aati',1]);
+	prem.push(['issaama',0,0,'aati',1]);
 	prem.push(['ssasi',0,0,'ti',1]);
 	prem.push(['ssati',0,0,'ti',1]);
 	prem.push(['ssanti',0,0,'ti',1]);
