@@ -627,10 +627,11 @@ position:absolute;
 margin-right:auto;
 margin-left:auto;
 top:0;
-padding: 2px;
-border:1px solid grey;
+padding: 4px;
 }
 .quizc {
+border-radius: 4px;
+-moz-border-radius: 4px;
 border:1px grey solid; 
 padding-left: 10px;
 padding-right: 10px;

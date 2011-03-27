@@ -1,6 +1,6 @@
 function newquiz() {
 	moveframex(1);
-	document.getElementById('mafbc').innerHTML = '<div style="background-color:'+colorcfg['colbkcp']+'" class="quizb"><button disabled>Pali Vocab Quiz</button> <button onclick="newDquiz()">Pali Declension Quiz</button></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><input type="button" class="btn" value="clear" onclick="clearrights()"></td></tr></table></div>';
+	document.getElementById('mafbc').innerHTML = '<div class="quizb"><span class="abut obut tiny sbut">Pali Vocab Quiz</span> <span class="abut obut tiny" onclick="newDquiz()">Pali Declension Quiz</span></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+colorcfg['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+colorcfg['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+colorcfg['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
 	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
 	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
 	quizme();
@@ -61,12 +61,12 @@ function quizme() {
 	if (ytthis[1].length > 0) formatanswerout += ' (' + ytthis[1] + ')';
 	for (qtmp = 0; qtmp < 4; qtmp++) {
 		if (qtmp == quizrightorder) {
-			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')" value="'+(qtmp+1)+'"> '+formatanswer+'</p>';
+			quizanswersout += '<p><span class="abut obut" id="Qa'+(qtmp+1)+'" onclick="answerquiz(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')">'+(qtmp+1)+'</span> '+formatanswer+'</p>';
 		}
 		else {
 			ytthis = yt[quiza[quizeachwrong[qtmp2]]];
 			formatanswerwrong = ytthis[2];
-			quizanswersout += '<p><input type="button" id="Qa'+(qtmp+1)+'" class="btn" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')" value="'+(qtmp+1)+'"> '+formatanswerwrong+'</p>';
+			quizanswersout += '<p><span class="abut obut id="Qa'+(qtmp+1)+'" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')">'+(qtmp+1)+'</span> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}
 	}
@@ -500,7 +500,7 @@ function showRights() {
 	for (i in Drights) {
 		document.getElementById('Qcorrects').innerHTML += stems[i]+'-<br />';
 	}
-	if (document.getElementById('Qcorrects').innerHTML != '') document.getElementById('Qcorrects').innerHTML += '<br /><button title="Reset right answers" onclick="rights = []; showRights();" class="control" id="resetRights" type="button">Reset</button>';
+	if (document.getElementById('Qcorrects').innerHTML != '') document.getElementById('Qcorrects').innerHTML += '<br /><span class="abut obut tiny" title="Reset right answers" onclick="rights = []; showRights();" id="resetRights">Reset</span>';
 }
 
 function clearAnswers() {
