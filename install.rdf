@@ -17,6 +17,10 @@
         <em:maxVersion>4.*</em:maxVersion>
       </Description>
     </em:targetApplication>
+	<em:updateKey>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYNSjf+JtD4JROYAa9oYxuam7r
+1Byc2zyjDRXIALsb6yGHcDEEFfH8eIPtQscdkqRlNqosXAQ51UQ6WfZIOaU19lGm
+MtvTsqDoFYZouJASFaYaRZVBl3TZs8WnrBPf+bD6UXkJYzvXWIESKMB1Ol/xOrRC
+aYshae6MTHAn5NDGMQIDAQAB</em:updateKey>
     <em:bootstrap>false</em:bootstrap>
   </Description>
 </RDF>
