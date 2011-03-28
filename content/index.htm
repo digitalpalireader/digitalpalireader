@@ -515,7 +515,9 @@
 			newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
 			headID2.appendChild(newScript2);
 		}
-		else {function devO() {}
+		else { // null functions
+			function devO() {}
+			function dalert(a) {}
 		}
 	</script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>

@@ -909,9 +909,7 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									alert(postpara);
 									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
-									alert(preparepali(postpara,1)[0]);
 									
 									// mumble mumble
 									

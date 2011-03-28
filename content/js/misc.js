@@ -31,7 +31,6 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 		}
 	}
 	
-	//document.textpad.pad.value = inarray[0];
 	var convDiv = document.createElement('div');
 	convDiv.setAttribute('id','convi');
 	convDiv.innerHTML = convout;
@@ -92,7 +91,6 @@ function formatuniout(data,which) { // prepare without links
 	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
 
 	//data = data.replace(/\"/g, '\u00B4');
-	//document.textpad.pad.value = data;
 	var wordbyword = data.split(' ');
 	var addpre = '';
 	var paran=0;
@@ -152,8 +150,8 @@ function formatuniout(data,which) { // prepare without links
 						finout += translit(toUni(wb.substring(0,cp))); b++;
 					}
 					else {
-						fullwordout[0] = wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-						fullwordout[1] = translit(toUni(wb.substring(0,cp)));
+						fullwordout[0] += wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
+						fullwordout[1] += translit(toUni(wb.substring(0,cp)));
 					}
 					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
 				}
@@ -261,8 +259,8 @@ function preparepali(data,which) { // standard text prep for algorithm
 	finout[0] = finout[0].replace(/<c1>/g, '<span style="color:'+colorcfg['coldppn']+'">');
 	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+colorcfg['colcpd']+'">');
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
-
-
+	
+	
 	return finout;
 
 }

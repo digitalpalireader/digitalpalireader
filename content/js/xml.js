@@ -118,7 +118,7 @@ function importXML(labelsearch,para)
 	var permalink = nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 	
 	try {
-		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&para=' + (para+1) : '')+(labelsearch ? '&query=' + labelsearch.join('+') : ''));
+		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&para=' + (para+1) : '')+(labelsearch ? '&query=' + labelsearch.join('+').replace(/ /g, '_') : ''));
 	}
 	catch(ex) {
 	}
@@ -150,72 +150,79 @@ function importXML(labelsearch,para)
 	var theData = '';
 	
 	// check if there is a search going on and add the labels
-	
 	if (labelsearch) {
+		var obj = (obj);
+		atlabel:
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
-			if(typeof(labelsearch[0]) == 'object') { // regexp search
-				var quit = 0;
-				var onepar = z[tmp].textContent.substring(4);
-				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
-				{
-					if (onepar.search(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
-				}	
-				if (quit == 1) {
+			var quit = 0;
+			var onepar = z[tmp].textContent.substring(4).replace(/   */g, ' ');
+			var onepars = onepar.replace(/ *\{[^}]*\} */g, ' ').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/   */g, ' ');
+			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+			{
+				if ((obj ? onepars.search(labelsearch[tmpl]) : onepars.indexOf(labelsearch[tmpl])) == -1) { // at least one of the strings was not found -> no match
 					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
+					continue atlabel;
 				}
-				else {
-					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+')+'> ';
-					var tmpdata = onepar;
-					for (var i = 0; i < labelsearch.length; i++)
-					{
-						var lt = labelsearch[i];
-						if (!lt) continue;
-						onepar = tmpdata;
-						tmpdata = '';
-						while (onepar.match(lt)) {
-							var matched = onepar.match(lt)[0];
-							var opp = onepar.search(lt);
-							tmpdata += onepar.substring(0,opp);
-							tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
-							onepar = onepar.substring(opp + matched.length);
+			}
+			theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+').replace(/ /g,'_')+'> ';
+			var tmpdata = onepar;
+			for (var i = 0; i < labelsearch.length; i++)
+			{
+				var lt = labelsearch[i];
+				var ltrg = (obj ? lt : new RegExp(lt, 'g'));
+				if (!lt) continue;
+				onepar = tmpdata;
+				tmpdata = '';
+				while ((obj ? onepars.search(lt) : onepars.indexOf(lt)) > -1) {
+					var matched = (obj ? onepars.match(lt)[0] : lt);
+					var matchat = (obj ? onepars.search(lt) : onepars.indexOf(lt));
+					if(!onepar.match(ltrg) || (onepars.match(ltrg).length != onepar.match(ltrg).length && (obj ? onepar.search(lt) : onepar.indexOf(lt)) != matchat)) { // something in the way
+						var opp = onepar.search(/[{^]/);
+						if(opp <= matchat) { // something before the match
+							tmpdata += onepar.substring(0,opp+1); // add before thing and first part of thing
+							onepar = onepar.substring(opp+1); 
+							tmpdata += onepar.substring(0,onepar.search(/[}^]/)+1); // add rest of thing
+							onepar = onepar.substring(onepar.search(/[}^]/)+1); // after rest of thing
 						}
-						tmpdata += onepar;
+						else { // something inside, maybe two...
+							tmpdata += onepar.substring(0,matchat); // add before start of match
+							
+							onepar = onepar.substring(matchat); // from start of match on
+							
+							var lss = lt.split(' ').length;
+							var ops = onepar.replace(/ *\{[^}]*\}/g,'x').replace(/\^e*b\^/g,'x').replace(/ *\^a\^[^^]*\^ea\^/g, 'x').replace(/   */g, ' ').split(' ',lss).join(' '); // same number of words, this one has x's
+							var opsm = ops.match(/x/g);
+							var xlt = lt;
+							var getit;
+							for (j = 0; j < opsm.length; j++) {
+								var getit1 = onepar.search(/\{/);
+								var getit2 = onepar.search(/\^/);
+								if(getit1 < 0) getit = onepar.match(/( *\^a\^[^^]*\^ea\^|\^e*b\^)/)[0];
+								else if (getit2 < 0) getit = onepar.match(/ *\{[^}]*\} */)[0];
+								else getit = (getit1 < getit2 ? onepar.match(/ *\{[^}]*\} */)[0] : onepar.match(/( *\^a\^[^^]*\^ea\^|\^e*b\^)/)[0]);
+								tmpdata += '<c' + i  + '>' + onepar.substring(0,(xlt.length < ops.indexOf('x') ? xlt.length : ops.indexOf('x'))).replace(/ /g,'<xc> <c' + i  + '>') + '<xc>' + (xlt.length < ops.indexOf('x') ? onepar.substring(xlt.length,ops.indexOf('x')) : '') + getit;
+								onepar = onepar.substring(ops.indexOf('x')+getit.length);
+								xlt = (xlt.substring(ops.indexOf('x')).length > 0 ? xlt.substring(ops.indexOf('x')) : '');
+								ops = ops.substring(ops.indexOf('x')+1);
+							}
+							tmpdata += (xlt.length > 0 ? '<c' + i  + '>' + xlt.replace(/ /g,'<xc> <c' + i  + '>') + '<xc>' : '') + ops.substring(xlt.length) + ' ';
+
+							onepar = onepar.substring(ops.length); // after last x
+						}
 					}
-					theData += tmpdata;
-				} 
-			}		
-			else { // ordinary search
-				var quit = 0;
-				var onepar = z[tmp].textContent.substring(4);
-				for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
-				{
-					if (onepar.indexOf(labelsearch[tmpl]) == -1) quit = 1; // at least one of the strings was not found -> no match
-				}	
-				if (quit == 1) {
-					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
+					else { // nothing blocking
+						matchat = obj ? onepar.search(lt) : onepar.indexOf(lt);
+						tmpdata += onepar.substring(0,matchat);
+						tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
+						onepar = onepar.substring(matchat + matched.length);
+					}
+					onepars = onepar.replace(/ *\{[^}]*\}/g, '').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/   */g, ' ');
 				}
-				else {
-					theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+').replace(/ /g,'_')+'> ';
-					var tmpdata = onepar;
-					for (var i = 0; i < labelsearch.length; i++)
-					{
-						var lt = labelsearch[i];
-						if (!lt) continue;
-						onepar = tmpdata;
-						tmpdata = '';
-						while (onepar.indexOf(lt) > -1) {
-							var matched = lt;
-							var opp = onepar.indexOf(lt);
-							tmpdata += onepar.substring(0,opp);
-							tmpdata += '<c' + i  + '>' + matched.replace(/  */g, '<xc> <c' + i  + '>') + '<xc>';
-							onepar = onepar.substring(opp + matched.length);
-						}
-						tmpdata += onepar;
-					}
-					theData += tmpdata;
-				} 
-			}		
+				tmpdata += onepar;
+			}
+			
+			theData += tmpdata;
 		}
 	}	
 	else {

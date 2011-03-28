@@ -4,12 +4,12 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>digitalpalireader@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader</em:name>
-    <em:version>1.0b19pre</em:version>
+    <em:version>1.0b19</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://www.sourceforge.net/projects/digitalpali</em:homepageURL>
     <em:optionsURL>chrome://digitalpalireader/content/options.xul</em:optionsURL>
-    <em:updateURL>https://capslock.accountservergroup.com/~sirimang/pali/digitalpalireader.rdf</em:updateURL>
+    <em:updateURL>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
@@ -17,6 +17,12 @@
         <em:maxVersion>4.*</em:maxVersion>
       </Description>
     </em:targetApplication>
+    <em:updateKey>
+    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDYNSjf+JtD4JROYAa9oYxuam7r
+	1Byc2zyjDRXIALsb6yGHcDEEFfH8eIPtQscdkqRlNqosXAQ51UQ6WfZIOaU19lGm
+	MtvTsqDoFYZouJASFaYaRZVBl3TZs8WnrBPf+bD6UXkJYzvXWIESKMB1Ol/xOrRC
+	aYshae6MTHAn5NDGMQIDAQAB
+	</em:updateKey>
     <em:bootstrap>false</em:bootstrap>
   </Description>
 </RDF>
