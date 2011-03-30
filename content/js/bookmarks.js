@@ -193,7 +193,7 @@ function bookmarkframe(refresh)
 		var thist = theHistory[i].split('@');
 		var tt1 = thist[1].length-1;
 		thist[1] = thist[1].substring(0,tt1) + "'" + thist[1].charAt(tt1) + "'";
-		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + toUni(thist[0].replace(/ /g, '&nbsp;')) + '</a><br />';
+		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="getplace([' + thist[1] + ']);importXML();">' + shortenTitle(thist[0],30).replace(/ /g, '&nbsp;') + '</a><br />';
 	}
 	if(!hout) { hout = '<b style="color:'+colorcfg['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
@@ -202,7 +202,7 @@ function bookmarkframe(refresh)
     ca = ca.sort();
 	if (ca.length < 2)
 	{
-		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>';
 	}
 	else
 	{
@@ -233,18 +233,22 @@ function bookmarkframe(refresh)
 				else if (cloc[7] == 'a') cloc[7] = 'att';
 				else {cloc[7] = 'ṭīkā';}
 				
-				allcookies +=  '<tr><td><table width=100%><tr><td class="blueh"><a href="javascript:void(0)" onclick="bookmarkc(\'' + name + '\')"><b>' + cookietotalno + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + '</b>&nbsp;('+ niknoname[cloc[0]] + '.' + cloc[1] + '.' + cloc[2] + '.' + cloc[3] + '.' + cloc[4] + '.' + cloc[5] + '.' + cloc[6] + '&nbsp;-&nbsp;' + cloc[7] + ')</a></td><td class="blueh"><span class="abut obut" title="click here to edit this bookmark" id="hiderbutton' + name + '" onClick="hiddenout(\'' + name + '\')">+</span></td><td class="blueh"><span class="abut obut" onClick="erasecookie(\'' + name + '\')">x</span></td></tr><tr><td><i><font id="title' + name + '">&nbsp;</font></i></td></tr></table></td></tr>';
-				allcookies +=  '<tr><td><div class="hide" id="'+ name + '"><table width=100%><tr bgcolor="chartreuse"><td align=center><b>Old Name</b></td><td align=center><b>New Name</b></td><td></td></tr><tr><td align=center>' + name + '</td><td align=center><input type=text value="" id="newname' + name + '" title="Enter a new name for this bookmark (max. 10 chars)" size=12></td><td align=center><span class="abut obut" onClick="bookmarkxn(\'' + name + '\')" title="Change Name">change</span></td></tr></table></div></td></tr>';
-				allcookies += '<tr><td align=center><div class="hide" id="html' + name + '"></div></td></tr>';
+				allcookies +=  '<tr><td><div class="round">';
+					allcookies += '<table width=100%><tr><td><a href="javascript:void(0)" onclick="bookmarkc(\'' + name + '\')"><b>' + cookietotalno + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + '</b>&nbsp;('+ niknoname[cloc[0]] + '.' + cloc[1] + '.' + cloc[2] + '.' + cloc[3] + '.' + cloc[4] + '.' + cloc[5] + '.' + cloc[6] + '&nbsp;-&nbsp;' + cloc[7] + ')</a></td><td><span class="abut obut" title="click here to edit this bookmark" id="hiderbutton' + name + '" onClick="hiddenout(\'' + name + '\')">+</span></td><td><span class="abut obut" onClick="erasecookie(\'' + name + '\')">x</span></td></tr><tr><td><i><font id="title' + name + '">&nbsp;</font></i></td></tr></table>';
+					
+					allcookies +=  '<div class="hide" id="'+ name + '"><hr>';
+						allcookies +=  '<table width=100%><tr><td><b>Old Name</b></td><td align=center><b>New Name</b></td><td></td></tr><tr><td align=center>' + name + '</td><td align=center><input type=text value="" id="newname' + name + '" title="Enter a new name for this bookmark (max. 10 chars)" size=12></td><td align=center><span class="abut obut" onClick="bookmarkxn(\'' + name + '\')" title="Change Name">change</span></td></tr></table><hr>';
+					allcookies += '<table width=100%><tr><td align=center><div class="hide" id="html' + name + '"></td></tr></table></div>';
+				allcookies += '</div></td></tr>';
 					
 			}	
 		}
 		allcookies += '</table></form>';
 		if (cookietotalno == 1)  allcookies += '<hr><b>' + cookietotalno + ' Bookmark Stored</b>';
-		else allcookies += '<hr><b>' + cookietotalno + ' Bookmarks Stored</b>';
-		allcookies += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="erasecookies(\'go\')">erase all</span>';
+		else allcookies += '<hr><div class="obutc"><b>' + cookietotalno + ' Bookmarks Stored</b>';
+		allcookies += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="erasecookies(\'go\')">erase all</span></div>';
 		
-		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" valign=top>'+hout+'</td></tr></table>';
+		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td width=25%><font size=5>Bookmarks</font></td><td>&nbsp;</td><td><font size=5>History</font> '+isclear+'</td></tr><tr><td valign=top>'+allcookies+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>';
 		
 		// now add the descriptions
 		
@@ -263,7 +267,7 @@ function bookmarkframe(refresh)
 				html = 'html' + name;
 				title = 'title' + name;
 				
-				document.getElementById(html).innerHTML = '<table width=100%><tr bgcolor="yellow"><td><b>Old Description</b><td align=center><b>New Description</b><td><tr><td align=center id="olddesc' + name + '">' + desc + '<td align=center><textarea id="newdesc' + name + '" title="Enter a new description for this bookmark" value="' + desc + '"></textarea><td><span class="abut obut" onClick="bookmarkxd(\'' + name + '\')" title="Change Description">change</span></td></tr></table>';
+				document.getElementById(html).innerHTML = '<table width=100%><tr><td><b>Old Description</b><td align=center><b>New Description</b><td><tr><td align=center id="olddesc' + name + '">' + desc + '<td align=center><textarea id="newdesc' + name + '" title="Enter a new description for this bookmark" value="' + desc + '"></textarea><td><span class="abut obut" onClick="bookmarkxd(\'' + name + '\')" title="Change Description">change</span></td></tr></table>';
 				document.getElementById(title).innerHTML = desc;
 			}		
 		}

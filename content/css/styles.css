@@ -75,6 +75,9 @@ select, input, textarea {
 .obutc {
 	margin:10px 5px;
 }
+.obutc2 {
+	padding:1011px 5px;
+}
 .obut {
 	padding:2px 5px;
 	border-radius:4px;
@@ -171,6 +174,14 @@ opacity:1.0
 	height:3px;
 	color:black;
 	background-color: black;
+}
+
+.round {
+	margin-bottom:5px;
+	padding:10px;
+	background-color: RGBa(255,255,255,0.5);
+	border-radius:16px;
+	-moz-border-radius:16px;
 }
 
 #content {

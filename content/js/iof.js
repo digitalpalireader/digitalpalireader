@@ -247,10 +247,10 @@ else {
 			var ca = [];
 			
 			while (entries.hasMoreElements()) {
-			  var file        = entries.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+			  var file = entries.getNext().QueryInterface(Components.interfaces.nsILocalFile);
 			  var isException = false;
 
-			  if (file.exists()) {
+			  if (file.exists() && /^DP[BSD]/.exec(file.leafName)) {
 				file.remove(false);
 			  }
 			}

@@ -242,36 +242,6 @@ function importXML(labelsearch,para)
 
 }
 
-var maxlength = 21;  // change for display purposes, will affect history as well.
-
-function makeTitleSelect(xml,tag) { // output select tag with titles in options
-	var name, namea;
-	var outlist = [];
-	for (var a = 0; a < xml.length; a++)
-	{
-		name = xml[a].getElementsByTagName(tag);
-		if (name[0].childNodes[0] && name[0].textContent.replace(/ /g,'').length > 0) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
-		else {
-			namea = '>'+ unnamed;
-			outlist.push(namea);
-			continue;
-		}
-		
-		namea = ' title="'+toUni(namea)+'">'+ translit(shortenTitle(namea));
-
-		outlist.push(namea);
-	}
-	return outlist;
-}
-
-function shortenTitle(name) {
-	name = toUni(name);
-	if(name.length <= maxlength) return name;
-	name = name.substring(0,maxlength);
-	name += '...';
-	return name;
-}
-
 function gettitles(altget,stop,prev,ssect)
 {
 
