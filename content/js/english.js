@@ -3237,6 +3237,7 @@ yt['itthidhutta'] = [1,"m.","one who indulges in women.","oo","N","m.a","",,"itt
 yt['itthinimitta'] = [1,"nt.","female organ.","oo","N","nt.a","",,"itthinimitt","Y"];
 yt['itthili"nga'] = [1,"nt.","female organ; feminine quality or gender.","oo","N","nt.a","",,"itthiliṅg","Y"];
 yt['itthii'] = [1,"f.","woman; female.","os","N","f.ī","",,"itth","Y"];
+yt['ida'] = [1,"(Nom. and Acc. sing. of ima) nt.","this thing.","oo","N","pro.x","",,"","N"];
 yt['ida.m'] = [1,"(Nom. and Acc. sing. of ima) nt.","this thing.","oo","N","pro.x","",,"","N"];
 yt['idappaccayataa'] = [1,"f.","having its foundation on this, i.e., causally connected.","oo","N","f.ā","",,"idappaccayat","Y"];
 yt['idaani'] = [1,"adv.","now.","oo","I","adv","",,"idāni","Y"];

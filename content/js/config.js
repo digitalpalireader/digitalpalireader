@@ -188,7 +188,10 @@ else {
 		if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
 
 		for (var i = 1; i <= 7; i++) {
-			cfg['cp'+i] == '0' ? document.getElementById('cp'+i).style.display='none':'';
+			if(cfg['cp'+i] == '0'){
+				document.getElementById('cp'+i).style.display='none';
+				document.getElementById('cp'+i+'t').style.display='block';
+			}
 		}
 
 		// update backgrounds

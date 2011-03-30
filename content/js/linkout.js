@@ -45,7 +45,6 @@ function outputDef(which,first)
 				// data[0] = reference
 				// data[1] = pali word
 				// data[2] = category
-				// data[3] = concise definition (if any)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
 			var dataout = toUni(G_outwords[which].split('$')[0].split('-')[c]); // get the part name from the names part :)
 			if (d == 0) { // first match (will go on top)		

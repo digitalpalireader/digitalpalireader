@@ -71,23 +71,74 @@ else {
 		aFile.append(aFileKey);
 		if ( aFile.exists() ) aFile.remove(false);
 
-		var UNICODE = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-
 		try {
-			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
-			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
-			ostream.init(aFile, 0x02, 0666, 0);
-			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);  
-			converter.init(ostream, "UTF-8", 0, 0);  
-			converter.writeString(aContent);  
-			converter.close();
-			ostream.close();
+			// file is nsIFile, data is a string
+			var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+						   createInstance(Components.interfaces.nsIFileOutputStream);
+
+			// use 0x02 | 0x10 to open file for appending.
+			foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0); 
+			// write, create, truncate
+			// In a c file operation, we have no need to set file mode with or operation,
+			// directly using "r" or "w" usually.
+
+			// if you are sure there will never ever be any non-ascii text in data you can 
+			// also call foStream.writeData directly
+			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+							createInstance(Components.interfaces.nsIConverterOutputStream);
+			converter.init(foStream, "UTF-8", 0, 0);
+			converter.writeString(aContent);
+			converter.close(); // this closes foStream
 		}
 		catch(ex)
 		{
 			alert("ERROR: Failed to write file: " + aFile.leafName);
 		}
 	}
+
+	function writeExtFile(aLoc, aFileKey, aContent) // aChars isn't used
+	{
+		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+		var dir = DIR.get("Home", Components.interfaces.nsIFile);
+		var dirs = aLoc.split('/');
+		for (i in dirs) {
+			dir.append(dirs[i]);
+			if ( !dir.exists() )
+			{
+				return false;
+			}
+		}
+		var aFile = dir.clone();
+		aFile.append(aFileKey);
+		if ( aFile.exists() ) aFile.remove(false);
+
+		try {
+			// file is nsIFile, data is a string
+			var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+						   createInstance(Components.interfaces.nsIFileOutputStream);
+
+			// use 0x02 | 0x10 to open file for appending.
+			foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0); 
+			// write, create, truncate
+			// In a c file operation, we have no need to set file mode with or operation,
+			// directly using "r" or "w" usually.
+
+			// if you are sure there will never ever be any non-ascii text in data you can 
+			// also call foStream.writeData directly
+			var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].
+							createInstance(Components.interfaces.nsIConverterOutputStream);
+			converter.init(foStream, "UTF-8", 0, 0);
+			converter.writeString(aContent);
+			converter.close(); // this closes foStream
+			return true;
+		}
+		catch(ex)
+		{
+			alert("ERROR: Failed to write file: " + aFile.leafName);
+			return false;
+		}
+	}
+
 
 	function readExtFile(myDir)
 	{

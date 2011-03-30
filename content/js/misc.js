@@ -26,7 +26,7 @@ function preout(data,which) // calls text prep, then outputs it to preFrame
 		if (transin) {
 			var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 			if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
-			transout += transin.join('');
+			transout += transin.join('&nbsp;');
 			document.getElementById('maftrans').innerHTML += transout; 
 		}
 	}
@@ -196,7 +196,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.indexOf('<p') == 0) {
 			var permalink = wb.substring(2,wb.length-1);
-			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this place" class="hoverShow">☸&nbsp;</a>';
+			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this line" class="hoverShow">☸&nbsp;</a>';
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -265,40 +265,77 @@ function preparepali(data,which) { // standard text prep for algorithm
 
 }
 
-function convtitle(nikaya,book,vna,wna,xna,yna,zna,hiert)
+function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 {
+	var lmt = 60;
+	var lgt = una.length;
+	
 	book = getBookName(nikaya,hiert,book-1);
 	if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
-	var col = ['colped','coldppn','colcpd'];
-	var w = 1;
-	var title='<b style="color:'+colorcfg['colped']+'">' + nikaya + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + book + '</b>';
+	var col = ['colped','coldppn','colcpd','colped','coldppn','colcpd','colped','coldppn','colcpd'];
+	var w = 0;
+	var title='<b style="color:'+colorcfg[col[w++]]+'">' + translit(toUni(una)).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
+
+
 	if (vna != ' ') {
 		vna = translit(toUni(vna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + vna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
+		if(lgt > lmt) {
+			title += ',<br/>';
+			lgt = 0;
+		}
+		else {
+			title += ', ';
+			lgt += vna.length;
+		}
+		title += '<b style="color:'+colorcfg[col[w++]]+'">' + vna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
 	}
 	if (wna != ' ') {
 		wna = translit(toUni(wna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' + wna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
+		if(lgt > lmt) {
+			title += ',<br/>';
+			lgt = 0;
+		}
+		else {
+			title += ', ';
+			lgt += wna.length;
+		}
+		title += '<b style="color:'+colorcfg[col[w++]]+'">' + wna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
 	}
 	if (xna != ' ') {
 		xna = translit(toUni(xna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  xna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
+		if(lgt > lmt) {
+			title += ',<br/>';
+			lgt = 0;
+		}
+		else {
+			title += ', ';
+			lgt += xna.length;
+		}
+		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  xna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
 	}
 	if (yna != ' ') {
 		yna = translit(toUni(yna));
-		title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  yna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
-		w++;
-		if(w == 3) { w = 0; }
+		if(lgt > lmt) {
+			title += ',<br/>';
+			lgt = 0;
+		}
+		else {
+			title += ', ';
+			lgt += yna.length;
+		}
+		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  yna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
 	}
 	if (zna != ' ') {
 		zna = translit(toUni(zna));
-				title += '&nbsp;-&nbsp;<b style="color:'+colorcfg[col[w]]+'">' +  zna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'') + '</b>';
+		if(lgt > lmt) {
+			title += ',<br/>';
+			lgt = 0;
+		}
+		else {
+			title += ', ';
+			lgt += zna.length;
+		}
+		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  zna.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>';
 	}
 	
 	title = toUni(title);
@@ -621,7 +658,7 @@ function transLink(which,auth,url,title) {
 		}
 		return (auth == 'Anandajoti' ? '&nbsp;<img width="16" style="vertical-align:middle" src="'+images+'" title="'+imaget+'" onclick="window.open(\''+imageu+'\')">&nbsp;' : '') + '<span class="abut obut tiny" onclick="window.open(\''+url+'\');" title="'+title+'">'+auth+'</span>';
 	}
-	return '&nbsp;<img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onclick="window.open(\''+url+'\')">';
+	return '&nbsp;<span class="hoverShow"><img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onclick="window.open(\''+url+'\')"></span>';
 }
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
@@ -636,35 +673,35 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 	var autha = [];
 	autha['amar'] = "Amaravati";
 	autha['bodh'] = "Bodhi";
-	autha['bpit'] = "Burma Pitaka Assoc.";
+	autha['bpit'] = "Burma&nbsp;Pitaka&nbsp;Assoc.";
 	autha['budd'] = "Buddharakkhita";
 	autha['harv'] = "Harvey";
-	autha['hekh'] = "Hecker and Khema";
+	autha['hekh'] = "Hecker&nbsp;and&nbsp;Khema";
 	autha['horn'] = "Horner";
 	autha['irel'] = "Ireland";
 	autha['kell'] = "Kelly";
 	autha['khan'] = "Khantipalo";
-	autha['ksw0'] = "Kelly, et al";
+	autha['ksw0'] = "Kelly,&nbsp;et&nbsp;al";
 	autha['kuma'] = "Kumara";
 	autha['mend'] = "Mendis";
 	autha['nana'] = "Ñanananda";
 	autha['nara'] = "Narada";
 	autha['norm'] = "Norman";
-	autha['ntbb'] = "Ñanamoli & Bodhi";
+	autha['ntbb'] = "Ñanamoli&nbsp;&&nbsp;Bodhi";
 	autha['nymo'] = "Ñanamoli";
 	autha['nypo'] = "Nyanaponika";
 	autha['nysa'] = "Nyanasatta";
 	autha['olen'] = "Olendzki";
 	autha['piya'] = "Piyadassi";
-	autha['rhyc'] = "C. Rhys-Davids";
+	autha['rhyc'] = "C.&nbsp;Rhys-Davids";
 	autha['soma'] = "Soma";
 	autha['soni'] = "Soni";
 	autha['than'] = "Thanissaro";
-	autha['vaji'] = "Vajira & Story";
-	autha['vaka'] = "Ñanavara and Kantasilo";
+	autha['vaji'] = "Vajira&nbsp;&&nbsp;Story";
+	autha['vaka'] = "Ñanavara&nbsp;and&nbsp;Kantasilo";
 	autha['wlsh'] = "Walshe";
 	autha['wood'] = "Woodward";
-	autha['yaho'] = "Yahoo! Pali";
+	autha['yaho'] = "Yahoo!&nbsp;Pali";
 
 	switch (nikaya) {
 		case 'v':
@@ -921,7 +958,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			if (which > 1) return null;
 			if (!section) section = 0;
 			//document.getElementById('difb').innerHTML+=book+' ' +vagga+' ' +sutta+' ' +section+' <br>';
-			var z = amlist[book][vagga][sutta][section]
+			var z = amlist[book][vagga][sutta][section];
 			out:
 			for (a = 0;a < atiA.length; a++) {
 				if(parseInt(atiA[a].split('/')[1].substring(2),10) == bookn) {
@@ -997,7 +1034,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							if(atiAs[4] == 'html') { var auth = atiAs[3]; }
 							else { var auth = atiAs[2]; }
 							if (autha[auth]) {auth = autha[auth];}
-							output.push(transLink(which,auth,atiurl+'tipitaka/'+atiA[a],'Translation of AN '+mysn+' by '+auth));
+							output.push(transLink(which,auth,atiurl+'tipitaka/'+atiA[a],'Translation of AN '+ (book+1) +'.'+bb+' by '+auth));
 							cnt++;
 							continue out;
 						}
@@ -1035,7 +1072,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						else {var sno = c;}
 						var auth = atiS[a].split('.')[2];
 						if (autha[auth]) {auth = autha[auth];}
-						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+mysn+' by '+auth));
+						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+ (book+1) +'.'+bb+' by '+auth));
 						cnt++;
 						continue out;
 					}
@@ -1440,34 +1477,70 @@ var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
+function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, vagga, sutta should be -1 (0,1,2...)
+
+	var no;
+	
+	switch (nik) {
+		case 'd':
+			no = vagga + 1;
+			switch (true) {
+				case (book == 2):
+					no += 10;
+				case (book > 0):
+					no += 13;
+				break;
+			}
+			if(sectlength > 1) no += '.' + (section+1)
+		break;
+		case 'm':
+			no = (sutta + 1) + (book*50) + (vagga*10);
+			if (book == 2 && vagga == 4) no += 2;
+			if(sectlength > 1) no += '.' + (section+1)
+		break;
+		case 'a':
+			no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
+		break;
+		case 's':
+			no = (book+1) + '.' + smlist[vagga][sutta][section];
+		break;
+	}
+	return no;
+}
+
 function getLinkPlace() {
 
 	var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
-	var place = options.shift();
+	var place = null;
 	var para = null;
 	var query = null;
 	
-	if(place.indexOf('&') > -1) {
-		place = place.split('&')[0];
-	}
-	if (place.search(/[^a-z0-9.]/) > -1) return;
-	
-	place = place.split('.');
-
-	var nikaya = place[0];
-	place[0] = niknumber[nikaya];
-
-	if (place.length != 8) return;
-	getplace(place);
-	
 	// parse options
+	if(/^thai/.exec(options[0])) {
+		DgetThaiBook(options[0].split('=')[1]);
+		return;
+	}
 	
 	for (i in options) {
+
 		var option = options[i].split('=');
-		if (option[0] == 'para') para = parseInt(option[1])-1;
+		if (option.length == 1 || option[0] == 'loc') {
+			place = (option[1] ? option[1]: option[0]);
+			if (place.search(/[^a-z0-9.]/) > -1) return;
+			
+			place = place.split('.');
+
+			var nikaya = place[0];
+			place[0] = niknumber[nikaya];
+
+			if (place.length != 8) return;
+			getplace(place);
+		}
+		else if (option[0] == 'para') para = parseInt(option[1])-1;
 		else if (option[0] == 'query') query = option[1].replace(/_/g,' ').split('+');
 	}
+	if(!place) return;
 	importXML(query,para);
 }
 

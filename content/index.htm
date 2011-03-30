@@ -36,7 +36,8 @@
 				<tr>
 					<td align=center>
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp1');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp1');"> </div>
+							<div class="pointer hide tiny" id="cp1t" title="toggle section" onclick="cpFlatten('cp1');">Location</div>
 							<div class="cpt" id="cp1">
 								<table width="1px">
 									<tr>
@@ -77,27 +78,31 @@
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp2');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp2');"> </div>
+							<div class="pointer hide tiny" id="cp2t" title="toggle section" onclick="cpFlatten('cp2');">Location</div>
 							<div class="cpt" id="cp2">
-								<div align="center" id="title">title</div>
+								<table>
+									<tr><td align="center" id="title">title</td></tr>
 
-								<div align="center" style="padding-top:2px" id="meta"><select class="sel hide" size="1" name="meta"><option selected>a</option></select></div>
+									<tr><td align="center" style="padding-top:2px" id="meta"><select class="sel hide" size="1" name="meta"><option selected>a</option></select></td></tr>
 
-								<div align="center" style="padding-top:2px" id="volume"><select class="sel hide" size="1" name="volume"><option selected>a</option></select></div>
-						
+									<tr><td align="center" style="padding-top:2px" id="volume"><select class="sel hide" size="1" name="volume"><option selected>a</option></select></td></tr>
+							
 
-								<div align="center" style="padding-top:2px" id="vagga"><select class="sel hide" size="1" name="vagga"><option selected>b</option></select></div>
-
-
-								<div align="center" style="padding-top:2px" id="sutta"><select class="sel hide" size="1" name="sutta"><option></option></select></div>
+									<tr><td align="center" style="padding-top:2px" id="vagga"><select class="sel hide" size="1" name="vagga"><option selected>b</option></select></td></tr>
 
 
-								<div align="center" style="padding-top:2px" id="section"><select class="sel hide" size="1" name="section"><option></option></select></div>
+									<tr><td align="center" style="padding-top:2px" id="sutta"><select class="sel hide" size="1" name="sutta"><option></option></select></td></tr>
+
+
+									<tr><td align="center" style="padding-top:2px" id="section"><select class="sel hide" size="1" name="section"><option></option></select></td></tr>
+								</table>
 							</div>
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');"> </div>
+							<div class="pointer hide tiny" id="cp3t" title="toggle section" onclick="cpFlatten('cp3');">Navigation</div>
 							<div class="cpt" id="cp3">
 								<table>
 									<tr>
@@ -126,7 +131,8 @@
 						</div>
 					<hr />
 						<div name="ioDep" class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');"> </div>
+							<div class="pointer hide tiny" id="cp4t" title="toggle section" onclick="cpFlatten('cp4');">Bookmarks</div>
 							<div class="cpt" id="cp4">
 									<div style="margin-bottom:4px;">
 									<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
@@ -140,7 +146,8 @@
 						</div>
 					<hr name="ioDep" />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');"> </div>
+							<div class="pointer hide tiny" id="cp5t" title="toggle section" onclick="cpFlatten('cp5');">Text Search</div>
 							<div class="cpt" id="cp5">
 
 									<table class="butc" align=center>
@@ -186,25 +193,25 @@
 																		
 																	</div>
 																	<div id="tsoMAT" class="bottomb" style="display:none">
-																		<input type="checkbox" id="tsoMATm" title="Include in search" checked><span class="small"> Mūla</span><br/>
-																		<input type="checkbox" id="tsoMATa" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
-																		<input type="checkbox" id="tsoMATt" title="Include in search" checked><span class="small"> Ṭīka</span>
+																		<input type="checkbox" id="tsoMATm" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATm').checked = (document.getElementById('tsoMATm').checked ? false : true)" href="javascript:void(0)">Mūla</a><br/>
+																		<input type="checkbox" id="tsoMATa" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATa').checked = (document.getElementById('tsoMATa').checked ? false : true)" href="javascript:void(0)">Aṭṭhakathā</a><br/>
+																		<input type="checkbox" id="tsoMATt" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATt').checked = (document.getElementById('tsoMATt').checked ? false : true)" href="javascript:void(0)">Ṭīka</a>
 																	</div>
 																	<div id="tsoCO1" class="" style="display:none">
-																		<input type="checkbox" id="tsoCOv"> <span class="tiny">Vinaya</span><br />
+																		<input type="checkbox" id="tsoCOv" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOd').checked = (document.getElementById('tsoCOd').checked ? false : true)" href="javascript:void(0)">Vinaya</a><br />
 																	</div>
 																	<div id="tsoCO2" class="" style="display:none">
-																		<input type="checkbox" id="tsoCOd" checked title="Include in search"> <span class="tiny">Dīgha</span><br />
-																		<input type="checkbox" id="tsoCOm" checked title="Include in search"> <span class="tiny">Majjhima</span><br />
-																		<input type="checkbox" id="tsoCOs" checked title="Include in search"> <span class="tiny">Saṃyutta</span><br />
-																		<input type="checkbox" id="tsoCOa" checked title="Include in search"> <span class="tiny">Aṅguttara</span><br />
-																		<input type="checkbox" id="tsoCOk" checked title="Include in search"> <span class="tiny">Khuddaka</span><br />
+																		<input type="checkbox" id="tsoCOd" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOd').checked = (document.getElementById('tsoCOd').checked ? false : true)" href="javascript:void(0)">Dīgha</a><br />
+																		<input type="checkbox" id="tsoCOm" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOm').checked = (document.getElementById('tsoCOm').checked ? false : true)" href="javascript:void(0)">Majjhima</a><br />
+																		<input type="checkbox" id="tsoCOs" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOs').checked = (document.getElementById('tsoCOs').checked ? false : true)" href="javascript:void(0)">Saṃyutta</a><br />
+																		<input type="checkbox" id="tsoCOa" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOa').checked = (document.getElementById('tsoCOa').checked ? false : true)" href="javascript:void(0)">Aṅguttara</a><br />
+																		<input type="checkbox" id="tsoCOk" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOk').checked = (document.getElementById('tsoCOk').checked ? false : true)" href="javascript:void(0)">Khuddaka</a><br />
 																	</div>
 																	<div id="tsoCO3" class="" style="display:none">
-																		<input type="checkbox" id="tsoCOy" title="Include in search"> <span class="tiny">Abhidhamma</span><br />
-																		<input type="checkbox" id="tsoCOx" title="Include in search"> <span class="tiny">Vism</span><br />
-																		<input type="checkbox" id="tsoCOb" title="Include in search"> <span class="tiny">Abhidh-s</span><br />
-																		<input type="checkbox" id="tsoCOg" title="Include in search"> <span class="tiny">Byākaraṇa</span>
+																		<input type="checkbox" id="tsoCOy" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOy').checked = (document.getElementById('tsoCOy').checked ? false : true)" href="javascript:void(0)">Abhidhamma</a><br />
+																		<input type="checkbox" id="tsoCOx" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOx').checked = (document.getElementById('tsoCOx').checked ? false : true)" href="javascript:void(0)">Vism</a><br />
+																		<input type="checkbox" id="tsoCOb" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOb').checked = (document.getElementById('tsoCOb').checked ? false : true)" href="javascript:void(0)">Abhidh-s</a><br />
+																		<input type="checkbox" id="tsoCOg" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOg').checked = (document.getElementById('tsoCOg').checked ? false : true)" href="javascript:void(0)">Byākaraṇa</a>
 																	</div>
 																	<div id="tsoBO" class="topb" style="display:none">
 																	</div>
@@ -221,7 +228,8 @@
 					<input type="text" style="display:none">
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');"> </div>
+							<div class="pointer hide tiny" id="cp6t" title="toggle section" onclick="cpFlatten('cp6');">Dictionary</div>
 							<div class="cpt" id="cp6">
 									<div style="margin-bottom:4px;">
 										<b>Dictionary</b>&nbsp;
@@ -248,34 +256,34 @@
 															<span class="small">no advanced options available</span>
 														</div>
 														<div id="soRX" style="display:none">
-															<input type="checkbox" onclick="clickDictOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"><span class="small"> Reg. Exp.</span>
+															<input type="checkbox" onclick="clickDictOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"> <a class="small" onclick="document.form.soregexp.checked = (document.form.soregexp.checked ? false : true)" href="javascript:void(0)">Reg. Exp.</a>
 														</div>
 														<div id="soFZ" style="display:none">
-															<input type="checkbox" onclick=" if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" title="Enable fuzzy search (removes diacritics)" name="sofuzzy"><span class="small"> Fuzzy</span>
+															<input type="checkbox" onclick=" if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" title="Enable fuzzy search (removes diacritics)" name="sofuzzy"> <a class="small" onclick="document.form.sofuzzy.checked = (document.form.sofuzzy.checked ? false : true)" href="javascript:void(0)">Fuzzy</a>
 														</div>
 														<div id="soFT" style="display:none">
-															<input type="checkbox" onclick="if(this.checked) { document.form.sostartword.checked = false; document.form.sofuzzy.checked = false; } clickDictOption(); " name="sofulltext" title="Search dictionary definitions, not only entry names"><span class="small"> Full Text</span>
+															<input type="checkbox" onclick="if(this.checked) { document.form.sostartword.checked = false; document.form.sofuzzy.checked = false; } clickDictOption(); " name="sofulltext" title="Search dictionary definitions, not only entry names"> <a class="small" onclick="document.form.sofulltext.checked = (document.form.sofulltext.checked ? false : true)" href="javascript:void(0)">Full Text</a>
 														</div>
 														<div id="soSW" class="bottomb" style="display:none">
-															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" checked><span class="small"> Start of Word Only</span>
+															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" checked> <a class="small" onclick="document.form.sostartword.checked = (document.form.sostartword.checked ? false : true)" href="javascript:void(0)">Start of Word Only</a>
 														</div>
 														<div id="soMAT" class="bottomb" style="display:none">
-															<input type="checkbox" id="soMATm" title="Include in search" checked><span class="small"> Mula</span><br/>
-															<input type="checkbox" id="soMATa" title="Include in search" checked><span class="small"> Aṭṭhakathā</span><br/>
-															<input type="checkbox" id="soMATt" title="Include in search" checked><span class="small"> Ṭīka</span>
+															<input type="checkbox" id="soMATm" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATm').checked = (document.getElementById('soMATm').checked ? false : true)" href="javascript:void(0)">Mula</a><br/>
+															<input type="checkbox" id="soMATa" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATa').checked = (document.getElementById('soMATa').checked ? false : true)" href="javascript:void(0)">Aṭṭhakathā</a><br/>
+															<input type="checkbox" id="soMATt" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATt').checked = (document.getElementById('soMATt').checked ? false : true)" href="javascript:void(0)">Ṭīka</a>
 														</div>
 														<div id="soNSV" style="display:none">
-															<input type="checkbox" id="soNSv" title="Include in search" checked><span class="small"> Vin</span>
+															<input type="checkbox" id="soNSv" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSv').checked = (document.getElementById('soNSv').checked ? false : true)" href="javascript:void(0)">Vin</a>
 														</div>
 														<div id="soNS" style="display:none">
-															<input type="checkbox" id="soNSd" title="Include in search" checked><span class="small"> DN</span>
-															<input type="checkbox" id="soNSa" title="Include in search" checked><span class="small"> AN</span><br>
-															<input type="checkbox" id="soNSm" title="Include in search" checked><span class="small"> MN</span>
-															<input type="checkbox" id="soNSk" title="Include in search" checked><span class="small"> KN</span><br>
-															<input type="checkbox" id="soNSs" title="Include in search" checked><span class="small"> SN</span>
+															<input type="checkbox" id="soNSd" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSd').checked = (document.getElementById('soNSd').checked ? false : true)" href="javascript:void(0)">DN</a>
+															<input type="checkbox" id="soNSa" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSa').checked = (document.getElementById('soNSa').checked ? false : true)" href="javascript:void(0)">AN</a><br>
+															<input type="checkbox" id="soNSm" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSm').checked = (document.getElementById('soNSm').checked ? false : true)" href="javascript:void(0)">MN</a>
+															<input type="checkbox" id="soNSk" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSk').checked = (document.getElementById('soNSk').checked ? false : true)" href="javascript:void(0)">KN</a><br>
+															<input type="checkbox" id="soNSs" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSs').checked = (document.getElementById('soNSs').checked ? false : true)" href="javascript:void(0)">SN</a>
 														</div>
 														<div id="soNSA" style="display:none">
-															<input type="checkbox" id="soNSy" title="Include in search" checked><span class="small"> Abhi</span>
+															<input type="checkbox" id="soNSy" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSy').checked = (document.getElementById('soNSy').checked ? false : true)" href="javascript:void(0)">Abhi</a>
 														</div>
 													</div>
 												</td>
@@ -306,7 +314,8 @@
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');"> </div>
+							<div class="pointer hide tiny" id="cp7t" title="toggle section" onclick="cpFlatten('cp7');">Miscellany</div>
 							<div class="cpt" id="cp7">
 								<table>
 									<tr>
@@ -324,29 +333,7 @@
 							</div>
 						</div>
 					<hr />
-	<!--		
-						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp8');" onmouseover="document.body.style.cursor='pointer'; this.style.backgroundColor='#555';" onmouseout="document.body.style.cursor='auto'; this.style.backgroundColor='RGBa(255,255,255,0.5)';"> </div>
-							<div class="cpt" id="cp8">
-								<div align="center" style="padding-top:2px" id="translits">Script: 
-									<select class="sel" size="1" name="translits" onchange="changeScript();">
-										<option selected>Roman</option>
-										<option>Thai</option>
-										<option>Devanagari</option>
-										<option>Myanmar</option>
-										<option>Sinhala</option>
-									</select>
-								</div>
-							</div>
-						</div>
-					<hr />
-			<div align="left" id="langtr" style="clear:both">
-				<select id="cpdlanglist" class="sel" size=1 id="lang" title="Choose a language" onchange="changelang()">
-					<option value="xy">English</option>
-				</select>
-			</div>
-	-->
-			<input id="manrem" type="hidden" value="0">
+				<input id="manrem" type="hidden" value="0">
 					</td>
 				</tr>
 		
@@ -501,7 +488,7 @@
 		// external dev data
 
 		var devCheck = 0;
-		if(ioCheck == true && fileExists('Extensions','ff.sh')) {
+		if(ioCheck == true && fileExists('Extensions/work','dev.js')) {
 			var headID = document.getElementsByTagName("head")[0];         
 			var newScript = document.createElement('script');
 			newScript.type = 'text/javascript';

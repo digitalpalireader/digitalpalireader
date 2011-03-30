@@ -72,11 +72,13 @@ select, input, textarea {
 	border-radius:0 4px 4px 0;
 	-moz-border-radius:0 4px 4px 0;
 }
-
+.obutc {
+	margin:10px 5px;
+}
 .obut {
-	padding:2px 5px 2px 5px;
-	border-radius:4px 4px 4px 4px;
-	-moz-border-radius:4px 4px 4px 4px;
+	padding:2px 5px;
+	border-radius:4px;
+	-moz-border-radius:4px;
 }
 
 .buttont {
@@ -99,8 +101,8 @@ overflow: hidden;
 }
 
 hr {
-margin-top:4px;
-margin-bottom:4px;
+margin-top:2px;
+margin-bottom:2px;
 color: #FFF;
 background-color: #FFF;
 }
@@ -148,6 +150,12 @@ margin-right:auto;
 
 .relative {
 position:relative;
+}
+
+.hide { display: none; }
+
+.pointer:hover{
+	cursor:pointer;
 }
 
 .hoverShow {
@@ -504,16 +512,29 @@ font-size:14px;
 border-collapse:collapse;
 border-spacing:0px;
 }
+.pointer:hover{
+	cursor:pointer;
+}
+.cp-d:hover {
+cursor:pointer;
+opacity: 0.8;
+-moz-opacity: 0.8;
+}
+
 .cp-d {
 position:absolute;
 right:0px;
 top:-4px;
-width:8px;
-height:8px;
-border-bottom-left-radius:8px;
--moz-border-bottom-left-radius:8px;
-background-color: RGBa(255,255,255,0.5);
+width:12px;
+height:12px;
+border-bottom-left-radius:5px;
+-moz-border-bottom-left-radius:5px;
+border:1px solid silver;
+background-color: white;
+opacity: 0.3;
+-moz-opacity: 0.3;
 }
+
 .cpsp {
 	position:absolute;
 	left:0;
@@ -600,7 +621,6 @@ font-weight: bold;
 font-family: 'courier new';
 }
 
-.hide { display: none; }
 .green        { color: green }
 .white        { color: #7F4C00 }
 .yellow        { color: #FFFF00; font-weight:bold }

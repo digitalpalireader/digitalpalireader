@@ -140,12 +140,15 @@ function openCP(wR) {
 
 function cpFlatten(cpin) {
 	var cpt = document.getElementById(cpin);
+	var cptt = document.getElementById(cpin+'t');
 	if(cpt.style.display=='none') {
 		cpt.style.display='block';
+		cptt.style.display='none';
 		setMiscPref(cpin,'1');
 	}
 	else {
 		cpt.style.display='none';
+		cptt.style.display='block';
 		setMiscPref(cpin,'0');
 	}
 }
