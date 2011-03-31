@@ -46,8 +46,12 @@ mPrefs.push("catioff"); mPrefVals.push("unchecked");
 mPrefs.push("catiloc"); mPrefVals.push("<none>");
 mPrefs.push("autodict"); mPrefVals.push("unchecked");
 mPrefs.push("bkgimg"); mPrefVals.push("checked");
-mPrefs.push("script"); mPrefVals.push("0");
-mPrefs.push("cpanel"); mPrefVals.push("1");
+mPrefs.push("translits"); mPrefVals.push("0");
+mPrefs.push("showPages"); mPrefVals.push("unchecked");
+mPrefs.push("showVariants"); mPrefVals.push("checked");
+mPrefs.push("showPermalinks"); mPrefVals.push("checked");
+
+
 
 if (ioCheck) {
 	for (i in sPrefs) {

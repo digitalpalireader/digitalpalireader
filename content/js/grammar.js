@@ -1,7 +1,10 @@
 // uses inflect.js, english.js
 
 function conjugate(word, dif, which) {
-
+	
+	word = word.replace(/x/g,'"');
+	which = toUni(which.replace(/x/g,'"'));
+	
 	var yto = yt[word];
 	
 	if(yto == undefined) {
@@ -13,7 +16,7 @@ function conjugate(word, dif, which) {
 	var out;
 	
 	if(yto[4] == 'V') { // verb
-		if(yto[9] == 'N') out = conjugateIrrVerb(word);
+		if(yto[9] == 'N') out = conjugateIrrVerb(word,which);
 		else out = conjugateVerb(word);
 	}
 	else {
@@ -97,7 +100,7 @@ function conjugateNoun(word) {
 								var anoun = noun[j][di];
 								var allnoun = [];
 								for (l in anoun) {
-									allnoun.push(stem+anoun[l]);
+									allnoun.push(stem+anoun[l].replace(/[()]/g,''));
 								}
 								out += allnoun.join(', ');
 							}
@@ -129,7 +132,7 @@ function conjugateNoun(word) {
 								var anoun = noun[j][di];
 								var allnoun = [];
 								for (l in anoun) {
-									allnoun.push(stem+anoun[l]);
+									allnoun.push(stem+anoun[l].replace(/[()]/g,''));
 								}
 								out += allnoun.join(', ');
 							}
@@ -161,7 +164,7 @@ function conjugateNoun(word) {
 								var anoun = noun[j][di];
 								var allnoun = [];
 								for (l in anoun) {
-									allnoun.push(stem+anoun[l]);
+									allnoun.push(stem+anoun[l].replace(/[()]/g,''));
 								}
 								out += allnoun.join(', ');
 							}
@@ -197,7 +200,7 @@ function conjugateNoun(word) {
 									var anoun = noun[j][di];
 									var allnoun = [];
 									for (l in anoun) {
-										allnoun.push(stem+anoun[l]);
+										allnoun.push(stem+anoun[l].replace(/[()]/g,''));
 									}
 									outt += allnoun.join(', ');
 								}
@@ -257,7 +260,7 @@ function conjugateVerb(word) {
 						var splitverb = verb[pi][i];
 						var averb = [];
 						for (l in splitverb) {
-							averb.push(stem+splitverb[l]);
+							averb.push(stem+splitverb[l].replace(/[()]/g,''));
 						}
 						out += averb.join(', ');
 					}
@@ -297,7 +300,7 @@ function conjugateVerb(word) {
 						var splitverb = verb[pi][k];
 						var allthis = [];
 						for (l in splitverb) {
-							allthis.push(stem + (verbVoice != 'ca' ? verbAdd[0][m] : verbAdd[1][m]) + splitverb[l]);
+							allthis.push(stem + (verbVoice != 'ca' ? verbAdd[0][m] : verbAdd[1][m]) + splitverb[l]).replace(/[()]/g,'');
 						}
 						out += allthis.join(', ');
 					}
@@ -339,7 +342,7 @@ function conjugateIrrNoun(word) {
 	var cnt = 0;
 	var outt = '';
 	out += '<table class="conjtable"><tr><td class="toprow">Case</td>';
-	for (i in decNames) { // per number
+	for (i in decNames) { // per vibhatti
 		var di = decNames[i];
 		outt += '<tr><td class="sidecol"><b>'+di + '</b></td>';
 		cnt = 0;
@@ -354,10 +357,8 @@ function conjugateIrrNoun(word) {
 					outt += '-';
 				}
 				else {
-					var splitnoun = noun[gendNames[h]][j][di].split(',');
-					for (l in splitnoun) {
-						outt += stem+splitnoun[l];
-					}
+					outt += stem+noun[gendNames[h]][j][di].join(', '+stem);
+					if(stem.length > 0) outt = outt.replace(/[()]/g,'');
 				}
 				outt += '</td>';
 			}
@@ -371,7 +372,7 @@ function conjugateIrrNoun(word) {
 	
 }
 
-function conjugateIrrVerb(word) {
+function conjugateIrrVerb(word,which) {
 	var yto = yt[word];
 	var out = '';
 
@@ -403,9 +404,30 @@ function conjugateIrrVerb(word) {
 	}
 	var verb;
 	for (k in verbNumbers) {
-		verb = verbC[outword];
+		verb = verbC[outword]; // try general conjugation first
 		var verbno = verbNumbers[k];
-		if(verb == undefined || verb[verbNumbers[k]] == undefined) {
+		if(verb == undefined || verb[verbno] == undefined) {
+			verb = verbC[which]; // try specific conjugation next
+		}
+		if(verb == undefined || verb[verbno] == undefined) {
+			out:
+			for (v in verbC) { // try to find the exact conjugation, get general conjugation from that
+				for (w in verbC[v]) {
+					for (x in verbC[v][w]) {
+						for (y in verbC[v][w][x]) {
+							for (z in verbC[v][w][x][y]) {
+								if(verbC[v][w][x][y][z] == which) {
+									alert(verbC[v][w][x][y][z] + ' ' + which);
+									verb = verbC[v]; 
+									break out;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		if(verb == undefined || verb[verbno] == undefined) {
 			if(yto[6] != outword || verbC['def'] == undefined || verbC['def'][verbno] == undefined) continue;
 			else verb = verbC['def']; 
 		}

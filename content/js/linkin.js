@@ -455,8 +455,8 @@ function findmatch(oneword,lastpart,nextpart,trick)
 		altarray.push('0^' + oneword.replace(/`$/,'') + '^2^' + resy);
 	}
 	else {
-		if (res.length != 0) { for (var i in res) { altarray.push(res[i][1] + '^' + res[i][0] + '^0'); } }
-		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j][1] + '^' + resn[j][0] + '^1'); } }
+		if (res.length != 0) { for (var i in res) { altarray.push(res[i][1] + '^' + res[i][0] + '^0' + (resy ? '^'+resy : '')); } }
+		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j][1] + '^' + resn[j][0] + '^1' + (resy ? '^'+resy : '')); } }
 	}
 	if(res.length == 0 && resn.length == 0 && !resy) { return null; }
 	return(Array(oneword.replace(/`$/,''),altarray.join('#'),resy));  // add oneword to the beginning to let us put the word together later
@@ -465,6 +465,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 var G_manualCompound = [];
 G_manualCompound["yaava~ncida.m"] = [['yaava~n','yaava'],['c','ca'],['ida.m','ida']]; // first is what appears, second is the dict entry
 G_manualCompound['ceva'] = [['c','ca'],['eva','eva']]; 
+G_manualCompound['khvaaha.m'] = [['khv','kho'],['aaha.m','aha.m']];
 
 function manualCompound(fullword) {
 	var i = G_manualCompound[fullword];
@@ -475,11 +476,11 @@ function manualCompound(fullword) {
 		var da = [];
 		var oneword = i[j][1];
 		for (k in mainda[oneword]) {
-			da.push(mainda[oneword][k] + '^' + oneword + '^0');
+			da.push(mainda[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
 		}
 		if(typeof(nameda[oneword]) == 'object') {
 			for (k in nameda[oneword]) {
-				da.push(nameda[oneword][k] + '^' + oneword + '^0');
+				da.push(nameda[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
 			}
 		}
 		parta.push(i[j][0]);

@@ -27,8 +27,8 @@ function outputDef(which,first)
 	
 	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
 	if(myConj[3]) { // if root form is found, set up conjugation
-		conjWord.form = toUni(myConj[1].replace(/,/g, '.'));
-		conjWord.root = myConj[3];
+		conjWord.form = G_outwords[which].split('$')[0].split('-').pop().replace(/"/g, 'x');
+		conjWord.root = myConj[3].replace(/"/g, 'x');
 	}
 	
 	for (c in owparts) { // per part (with many variants)

@@ -634,13 +634,14 @@ function thaiconv(input) {
 
 
 function changeScript() {
-	script = document.getElementById('translits').selectedIndex;
-	setMiscPref('script',script);
+	var script = document.getElementById('translits').selectedIndex;
+	var oscript = cfg['script'];
+	cfg['translits'] = script;
 	changenikaya(1);
 }
 
 function translit(data) {
-
+	var script = cfg['translits'];
 	var out = '';
 
 	switch (script) {

@@ -38,8 +38,11 @@ pref("extensions.digitalpalireader.misc.catioff", "unchecked");
 pref("extensions.digitalpalireader.misc.catiloc", "<none>");
 pref("extensions.digitalpalireader.misc.autodict", "unchecked");
 pref("extensions.digitalpalireader.misc.bkgimg", "checked");
+pref("extensions.digitalpalireader.misc.translits", "0");
+pref("extensions.digitalpalireader.misc.showPages", "unchecked");
+pref("extensions.digitalpalireader.misc.showVariants", "checked");
+pref("extensions.digitalpalireader.misc.showPermalinks", "checked");
 
-pref("extensions.digitalpalireader.misc.script", "0");
 pref("extensions.digitalpalireader.misc.cpanel", "1");
 
 pref("extensions.digitalpalireader.misc.cp1", "1");

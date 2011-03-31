@@ -96,10 +96,10 @@ function importXML(labelsearch,para)
 	relout = relout.slice(0,-1);
 	// permalink
 	
-	var permalink = nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + labelsearch.join('+').replace(/ /g, '_') : '');
 	
 	try {
-		window.history.replaceState('Object', 'Title', 'chrome://digitalpalireader/content/index.htm' + '?'+permalink+(para ? '&para=' + (para+1) : '')+(labelsearch ? '&query=' + labelsearch.join('+').replace(/ /g, '_') : ''));
+		window.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
 	}
 	catch(ex) {
 	}
@@ -129,7 +129,7 @@ function importXML(labelsearch,para)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center><a href="chrome://digitalpalireader/content/index.htm?'+permalink+(labelsearch ? '&query=' + labelsearch.join('+') : '')+'" title="Permalink to this section">'+titleout+modt+'</a></td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center><a href="chrome://digitalpalireader/content/index.htm?'+permalink+'" title="Permalink to this section">'+titleout+modt+'</a>'+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="copyToClipboard(\''+permalink+'\'); alert(\'Permalink copied to clipboard\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }

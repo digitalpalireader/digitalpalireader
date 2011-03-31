@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
-<script language="JavaScript1.3" type="text/javascript" src="js/ioc.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
@@ -480,15 +479,13 @@
 	<script>
 		if (document.getElementById('mafa').innerHTML == '') refreshit();
 		moveframex(2);
-		if(ioCheck == true) {
-			updatecookielist();
-			historyBox();
-		}
+		updatecookielist();
+		historyBox();
 
 		// external dev data
 
 		var devCheck = 0;
-		if(ioCheck == true && fileExists('Extensions/work','dev.js')) {
+		if(fileExists('Extensions/work','dev.js')) {
 			var headID = document.getElementsByTagName("head")[0];         
 			var newScript = document.createElement('script');
 			newScript.type = 'text/javascript';

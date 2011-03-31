@@ -80,13 +80,21 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/['’]+<\/@>nti/g, '.m’</@> ’ti');
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
-	data = data.replace(/\^a\^\"/g, ' z');
-	data = data.replace(/\"\^ea\^/g, 'z ');
-	data = data.replace(/\^a\^/g, ' z');
-	data = data.replace(/\^ea\^/g, 'z ');
+
+	if(cfg['showPages'] == 'unchecked') data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
+	else {
+		data = data.replace(/\^a\^\"/g, ' z');
+		data = data.replace(/\"\^ea\^/g, 'z ');
+		data = data.replace(/\^a\^/g, ' z');
+		data = data.replace(/\^ea\^/g, 'z ');
+	}
+	
 	//data = data.replace(/\^v/g, '');
 	//data = data.replace(/v\^/g, '');
-	data = data.replace(/\}/g, '} ');
+
+	if(cfg['showVariants'] == 'unchecked') data = data.replace(/ *\{[^}]*\} */g,' ');
+	else data = data.replace(/\}/g, '} ');
+	
 	data = data.replace(/   */g, ' ');
 	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
 
@@ -99,7 +107,8 @@ function formatuniout(data,which) { // prepare without links
 	var b = 0;
 	var space = ' ';
    //alert(data);
-
+	
+	
 	for (var a = 0; a < wordbyword.length; a++)
 	{
 		wb = wordbyword[a];
@@ -125,7 +134,7 @@ function formatuniout(data,which) { // prepare without links
 			else altplus += wb + ' ';
 		}
 		else if (wb.charAt(0) == '{') {
-			if (wb.charAt(wb.length-1) == '}') { 
+			if (wb.charAt(wb.length-1) == '}') {
 				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.');
@@ -196,7 +205,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.indexOf('<p') == 0) {
 			var permalink = wb.substring(2,wb.length-1);
-			finout += '<p id="para'+paran+'"><a href="chrome://digitalpalireader/content/index.htm' + '?'+permalink+'" title="Permalink to this line" class="hoverShow">☸&nbsp;</a>';
+			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="copyToClipboard(\''+permalink+'\'); alert(\'Permalink copied to clipboard\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -1539,6 +1548,12 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { /
 	}
 	return no;
 }
+
+function copyToClipboard(text) {
+	const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);  
+        clipboardHelper.copyString(text);
+}
+
 
 function getLinkPlace() {
 
