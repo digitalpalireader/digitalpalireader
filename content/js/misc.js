@@ -205,7 +205,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.indexOf('<p') == 0) {
 			var permalink = wb.substring(2,wb.length-1);
-			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="copyToClipboard(\''+permalink+'\'); alert(\'Permalink copied to clipboard\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
+			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -552,12 +552,17 @@ function changenikaya(noget)
 	if (nik != '') 
 	{
 		if (hier == 't' && limitt()) { 
-			alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+			alertFlash('Ṭīkā not available for '+nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 			document.form.nik.selectedIndex = oldnikaya;
 			return; 
 		} 
 		if (hier == 'a' && document.form.nik.value == 'g') {
-			alert('Atthakatha not available for Gram.');
+			alertFlash('Atthakatha not available for Gram.','RGBa(255,0,0,0.8)');
+			document.form.nik.selectedIndex = oldnikaya;
+			return;
+		}
+		if (hier == 'a' && document.form.nik.value == 'b') {
+			alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
 			document.form.nik.selectedIndex = oldnikaya;
 			return;
 		}
@@ -1432,15 +1437,15 @@ function switchhier(htmp,stop) {
 		
 
 	if (htmp == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
 	if (htmp == 'a' && document.form.nik.selectedIndex > 7) {
-		alert('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.');
+		alertFlash('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return;
 	}
 	if (document.form.nik.value == 'k' && htmp == 'a' && kudvala[document.form.book.value] == undefined) {
-		alert(hTitle[hNumbers[htmp]] + ' not available for '+getBookName(document.form.nik.value,htmp,document.form.book.selectedIndex)+'.');
+			alertFlash(hTitle[hNumbers[htmp]] + ' not available for '+getBookName(document.form.nik.value,htmp,document.form.book.selectedIndex)+'.','RGBa(255,0,0,0.8)');
 		return;
 	}
 
@@ -1519,7 +1524,7 @@ pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, vagga, sutta should be -1 (0,1,2...)
-
+	
 	var no;
 	
 	switch (nik) {
@@ -1540,18 +1545,65 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { /
 			if(sectlength > 1) no += '.' + (section+1)
 		break;
 		case 'a':
+			if(hier != 'm') return;
 			no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
 		break;
 		case 's':
+			if(hier != 'm') return;
 			no = (book+1) + '.' + smlist[vagga][sutta][section];
 		break;
 	}
 	return no;
 }
-
+function permalinkClick(link) {
+	copyToClipboard(link);
+	try {
+		window.history.replaceState('Object', 'Title', link);
+	}
+	catch(ex) {
+	}
+	alertFlash("Permalink copied to clipboard.",'RGBa(0,255,0,0.8)');
+}
+	
 function copyToClipboard(text) {
 	const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);  
-        clipboardHelper.copyString(text);
+	clipboardHelper.copyString(text);
+}
+
+var G_alertFlashStart = 0;
+
+function alertFlash(text,color) {
+	G_alertFlashStart++; // give us an alert Id 
+	if(color) document.getElementById('alert').style.backgroundColor = color;
+	document.getElementById('alert').innerHTML = text;
+	document.getElementById('alert').style.opacity = '0';
+	document.getElementById('alert').style.display='block';
+	fadeInOut(G_alertFlashStart,'alert',10,Math.sqrt(text.length)*500,100);
+}
+
+function fadeInOut(AID,id, sIn, L, sOut) {
+	if(AID != G_alertFlashStart) return;
+	fadeIn(AID,id,sIn,L,sOut);
+}
+function fadeIn(AID,id,speed,L,sOut) {
+	if(AID != G_alertFlashStart) return;
+	if(parseFloat(document.getElementById(id).style.opacity) < 1) {
+		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)+0.1;  
+		setTimeout(function() { fadeIn(AID,id,speed*0.9,L,sOut); }, speed*0.9);
+	}
+	else {
+		document.getElementById(id).style.display='block'; 
+		if(L) setTimeout(function() { fadeOut(AID,id,sOut); }, L);
+	}
+}
+
+function fadeOut(AID,id,speed) {
+	if(AID != G_alertFlashStart) return;
+	if(parseFloat(document.getElementById(id).style.opacity) > 0.1) {
+		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)-0.1;  
+		setTimeout(function() { fadeOut(AID,id,speed*0.9); }, speed*0.9);
+	}
+	else document.getElementById(id).style.display='none'; 
 }
 
 

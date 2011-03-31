@@ -317,7 +317,7 @@ function loadOptions() {
 function saveOptions() {
 	
 	if(document.miscform.catioff.checked && !fileExists(document.miscform.catiloc.value,'start.html')) {
-		alert('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.'); 
+		alertFlash('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.','RGBa(255,0,0,0.8)'); 
 		return; 
 	}
 	
@@ -354,7 +354,7 @@ function saveOptions() {
 			setMiscPref(Pref,Val);
 		}
 	}
-	document.getElementById('message').innerHTML = " Options saved."
+	alertFlash("Options saved.",'RGBa(0,255,0,0.8)');
 	moveframex(2);
 	atiIns = 0; // in case we have to load a new ATI - it will still check for atiD
 	getconfig();
@@ -405,7 +405,7 @@ function eraseOptions(which) {
 	getconfig();
 	if (which) {
 		loadOptions();
-		document.getElementById('message').innerHTML = " Options reset."
+		alertFlash("Options reset.",'RGBa(0,255,0,0.8)');
 		moveframex(2);
 	}
 	else { refreshit(1); }

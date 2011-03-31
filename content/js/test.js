@@ -27,7 +27,7 @@ function quizme() {
 	var quizanswersout = '';
 	var quizrandomright=Math.floor(Math.random()*20926);
 	if (rights.length > 20925) {
-		alert('Congratulations, you\'ve completed the entire dictionary!');
+		alertFlash('Congratulations, you\'ve completed the entire dictionary!','RGBa(0,255,0,0.8)');
 		clearrights();
 	}
 	else while (("|" + rights.join("|") + "|").indexOf('|'+quizrandomright+'|') > -1) { // in case we got it right before
@@ -66,7 +66,7 @@ function quizme() {
 		else {
 			ytthis = yt[quiza[quizeachwrong[qtmp2]]];
 			formatanswerwrong = ytthis[2];
-			quizanswersout += '<p><span class="abut obut id="Qa'+(qtmp+1)+'" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')">'+(qtmp+1)+'</span> '+formatanswerwrong+'</p>';
+			quizanswersout += '<p><span class="abut obut" id="Qa'+(qtmp+1)+'" onclick="answerquiz(0,\'' + questionout + ' = ' + formatanswerout + '\')">'+(qtmp+1)+'</span> '+formatanswerwrong+'</p>';
 			qtmp2++;
 		}
 	}

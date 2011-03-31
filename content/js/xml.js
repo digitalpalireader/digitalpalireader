@@ -12,11 +12,15 @@ matValue['t'] = '';
 function importXML(labelsearch,para)
 {
 	if (hier == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
 	if (hier == 'a' && document.form.nik.value == 'g') {
-		alert('Atthakatha not available for grammar.');
+		alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
+		return;
+	}		
+	if (hier == 'a' && document.form.nik.value == 'b') {
+		alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
 		return;
 	}		
 
@@ -361,7 +365,7 @@ function importXMLindex() {
 	document.activeElement.blur();
 
 	if (hier == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}	
 	document.getElementById('mafbc').innerHTML = '';
@@ -478,7 +482,7 @@ function importXMLindex() {
 							spaces += '&nbsp;&nbsp;';
 						}
 
-						theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,0) + ')' : '') + '</d></font></a>';
+						theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' && hier == 'm' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,0) + ')' : '') + '</d></font></a>';
                         var transin;
                         var transout='';
                         if (hier == "m") { 
@@ -505,7 +509,7 @@ function importXMLindex() {
 								spaces += '&nbsp;&nbsp;';
 							}
 
-							theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,0) + ')' : '') + '</d></font></a>';
+							theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,0) + ')' : '') + '</d></font></a>';
                             var transin;
                             var transout='';
                             if (hier == "m") { 
@@ -531,7 +535,7 @@ function importXMLindex() {
 									spaces += '&nbsp;&nbsp;';
 								}
 
-								theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) ? '&nbsp;<d class="small">('+nikname[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>';
+								theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+'<a href="javascript:void(0)" onclick="searchgo(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+nikname[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>';
                                 var transin;
                                 var transout='';
                                 if (hier == "m") { 
@@ -562,7 +566,7 @@ function importXMLraw()
 {
 	document.activeElement.blur();
 	if (hier == 't' && limitt()) { 
-		alert('Ṭīkā not available for '+nikname[document.form.nik.value]+'.');
+		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
 	document.getElementById('mafbc').innerHTML = '';

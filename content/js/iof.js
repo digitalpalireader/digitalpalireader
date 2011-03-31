@@ -331,6 +331,7 @@ else {
 		if ( aFile.exists() ) aFile.remove(false);
 		if(!cp) { bookmarkframe(1); }
 		historyBox();
+		alertFlash("History Erased.",'RGBa(255,255,0,0.8)');
 	}	
 
 	function getHistory() {
