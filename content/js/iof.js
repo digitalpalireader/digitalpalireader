@@ -39,20 +39,35 @@ else {
 		{
 			return false;
 		}
-		var aFile = dir.clone();
-		aFile.append(aFileKey);
+		var file = dir.clone();
 		try {
-			var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
-			istream.init(aFile, 1, 0, false);
-			var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
-			sstream.init(istream);
-			var content = sstream.read(sstream.available());
-			sstream.close();
-			istream.close();
-			return content;
+			var charset = "UTF-8";
+			var data = "";
+			var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+						  createInstance(Components.interfaces.nsIFileInputStream);
+			var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+						  createInstance(Components.interfaces.nsIConverterInputStream);
+			fstream.init(file, -1, 0, 0);
+			is.init(fstream, charset, 1024, 0xFFFD);
+
+			is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+			 
+			if (is instanceof Components.interfaces.nsIUnicharLineInputStream) {
+			  var line = {};
+			  var cont;
+			  do {
+				cont = is.readLine(line);
+				data += line.value + '\n';
+			  } while (cont);
+			}
+			is.close(); // this closes fstream
+			
+			return (data);
+
 		}
 		catch(ex)
 		{
+			alert("ERROR: Failed to read file: " + file.leafName);
 			return false;
 		}
 	}
@@ -152,19 +167,34 @@ else {
 				return false;
 			}
 		}
-		var aFile = dir.clone();
+		var file = dir.clone();
 		try {
-			var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
-			istream.init(aFile, 1, 0, false);
-			var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
-			sstream.init(istream);
-			var content = sstream.read(sstream.available());
-			sstream.close();
-			istream.close();
-			return content;
+			var charset = "UTF-8";
+			var data = "";
+			var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
+						  createInstance(Components.interfaces.nsIFileInputStream);
+			var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
+						  createInstance(Components.interfaces.nsIConverterInputStream);
+			fstream.init(file, -1, 0, 0);
+			is.init(fstream, charset, 1024, 0xFFFD);
+
+			is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+			 
+			if (is instanceof Components.interfaces.nsIUnicharLineInputStream) {
+			  var line = {};
+			  var cont;
+			  do {
+				cont = is.readLine(line);
+				data += line.value + '\n';
+			  } while (cont);
+			}
+			is.close(); // this closes fstream
+			
+			return (data);
 		}
 		catch(ex)
 		{
+			alert("ERROR: Failed to read file: " + file.leafName);
 			return false;
 		}
 	}

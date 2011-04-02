@@ -31,7 +31,7 @@
 	prem.push(['inaa',1,2,'']);
 	prem.push(['iihi',1,2,'']);
 	prem.push(['iibhi',1,2,'']);
-	prem.push(['ino',0,2,'']);
+	prem.push(['ino',1,2,'']);
 	prem.push(['iina.m',1,2,'']); 
 	prem.push(['iisu',1,2,'']);
 
@@ -154,6 +154,54 @@
 	prem.push(['amhi',0,0,'o']);
 	prem.push(['esu',0,0,'o']);
 	
+	// participles
+
+	prem.push(['anto',1,2,'ti',0]);
+	prem.push(['antaa',1,2,'ti',0]);
+	prem.push(['anta.m',1,2,'ti',0]);
+	prem.push(['ante',1,2,'ti',0]);
+	prem.push(['antena',1,2,'ti',0]);
+	prem.push(['antehi',1,2,'ti',0]);
+	prem.push(['antassa',1,2,'ti',0]);
+	prem.push(['antaana.m',1,2,'ti',0]);
+	prem.push(['antasmi.m',1,2,'ti',0]);
+	prem.push(['antesu',1,2,'ti',0]);
+
+	prem.push(['ento',1,2,'ti',0]);
+	prem.push(['entaa',1,2,'ti',0]);
+	prem.push(['enta.m',1,2,'ti',0]);
+	prem.push(['ente',1,2,'ti',0]);
+	prem.push(['entena',1,2,'ti',0]);
+	prem.push(['entehi',1,2,'ti',0]);
+	prem.push(['entassa',1,2,'ti',0]);
+	prem.push(['entaana.m',1,2,'ti',0]);
+	prem.push(['entasmi.m',1,2,'ti',0]);
+	prem.push(['entesu',1,2,'ti',0]);
+
+	prem.push(['onto',1,2,'ti',0]);
+	prem.push(['ontaa',1,2,'ti',0]);
+	prem.push(['onta.m',1,2,'ti',0]);
+	prem.push(['onte',1,2,'ti',0]);
+	prem.push(['ontena',1,2,'ti',0]);
+	prem.push(['ontehi',1,2,'ti',0]);
+	prem.push(['ontassa',1,2,'ti',0]);
+	prem.push(['ontaana.m',1,2,'ti',0]);
+	prem.push(['ontasmi.m',1,2,'ti',0]);
+	prem.push(['ontesu',1,2,'ti',0]);
+	
+	prem.push(['maano',0,2,'ti',0]);
+	prem.push(['maanaa',0,2,'ti',0]);
+	prem.push(['maana.m',0,2,'ti',0]);
+	prem.push(['maane',0,2,'ti',0]);
+	prem.push(['maanena',0,2,'ti',0]);
+	prem.push(['maanehi',0,2,'ti',0]);
+	prem.push(['maanassa',0,2,'ti',0]);
+	prem.push(['maanaana.m',0,2,'ti',0]);
+	prem.push(['maanasmi.m',0,2,'ti',0]);
+	prem.push(['maanesu',0,2,'ti',0]);
+	
+	prem.push(['vaana',3,2,'',0]);
+
 	// unsorted
 
 	prem.push(['ahi',1,1,'']);
@@ -165,6 +213,8 @@
 	prem.push(['iya.m',0,0,'']);
 	prem.push(['uya.m',0,0,'']);
 	prem.push(['abba.m',1,1,'']);
+	
+	
 
 	// verbs
 
@@ -202,17 +252,7 @@
 	prem.push(['etha',0,6,'ati',1]);
 	prem.push(['entu',0,6,'ati',1]);
 
-	
-	prem.push(['maano',0,2,'ti',1]);
-	prem.push(['maanaa',0,2,'ti',1]);
-	prem.push(['maana.m',0,2,'ti',1]);
-	prem.push(['maane',0,2,'ti',1]);
-	prem.push(['maanena',0,2,'ti',1]);
-	prem.push(['maanehi',0,2,'ti',1]);
-	prem.push(['maanassa',0,2,'ti',1]);
-	prem.push(['maanaana.m',0,2,'ti',1]);
-	prem.push(['maanasmi.m',0,2,'ti',1]);
-	prem.push(['maanesu',0,2,'ti',1]);
+
 	
 	prem.push(['itvaa',0,0,'ati',1]); 
 	prem.push(['tvaa',0,0,'ti',1]); 

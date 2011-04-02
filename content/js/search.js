@@ -670,14 +670,16 @@ function createTables(xmlDoc,hiert)
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 							if (document.form.usearch.value.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
-							texttomatch = texttomatch.replace(/\^b\^/g, ' <b> ');
-							texttomatch = texttomatch.replace(/\^eb\^/g, ' </b> ');
+							texttomatch = texttomatch.replace(/\^b\^/g, '');
+							texttomatch = texttomatch.replace(/\^eb\^/g, '');
 
 							texttomatch = texttomatch.replace(/  */g, ' ');
-							texttomatch = texttomatch.replace(/"ti/g, '” ”ti');
-							texttomatch = texttomatch.replace(/''ti/g, '” ”ti');
-							texttomatch = texttomatch.replace(/''nti/g, '” ”nti');
-							texttomatch = texttomatch.replace(/’ti/g, '’ ’ti');
+							texttomatch = texttomatch.replace(/''nti/g, 'n”ti');
+							texttomatch = texttomatch.replace(/"nti/g, 'n”ti');
+							texttomatch = texttomatch.replace(/'nti/g, 'n’ti');							
+							texttomatch = texttomatch.replace(/"ti/g, '”ti');
+							texttomatch = texttomatch.replace(/''ti/g, '”ti');
+							texttomatch = texttomatch.replace(/'ti/g, '’ti');
 							texttomatch = texttomatch.replace(/``/g, '“');
 							texttomatch = texttomatch.replace(/`/g, '‘');
 							texttomatch = texttomatch.replace(/''/g, '”');

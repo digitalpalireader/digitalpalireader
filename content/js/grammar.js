@@ -3,7 +3,7 @@
 function conjugate(word, dif, which) {
 	
 	word = word.replace(/x/g,'"');
-	which = toUni(which.replace(/x/g,'"'));
+	if(which) which = toUni(which.replace(/x/g,'"'));
 	
 	var yto = yt[word];
 	
@@ -30,9 +30,10 @@ function conjugate(word, dif, which) {
 
 	//moveframex(3);
 	moveframey('dif');
-	
-	var whichR = new RegExp('([> ])'+which+'([<,])','gi');
-	out = out.replace(whichR, "$1<span style=\"color:"+colorcfg['colped']+"\">"+which+"</span>$2");
+	if(which) {
+		var whichR = new RegExp('([> ])'+which+'([<,])','gi');
+		out = out.replace(whichR, "$1<span style=\"color:"+colorcfg['colped']+"\">"+which+"</span>$2");
+	}
 	
 	var outNode = document.createElement('div');
 	
@@ -399,14 +400,14 @@ function conjugateIrrVerb(word,which) {
 		
 	var verbC = infVI[yto[6]];
 	if(verbC == undefined) {
-		alert('Verb not found');
+		alertFlash('Verb not found','yellow');
 		return;
 	}
 	var verb;
 	for (k in verbNumbers) {
 		verb = verbC[outword]; // try general conjugation first
 		var verbno = verbNumbers[k];
-		if(verb == undefined || verb[verbno] == undefined) {
+		if(verb == undefined || verb[verbno] == undefined && which) {
 			verb = verbC[which]; // try specific conjugation next
 		}
 		if(verb == undefined || verb[verbno] == undefined) {
@@ -417,7 +418,6 @@ function conjugateIrrVerb(word,which) {
 						for (y in verbC[v][w][x]) {
 							for (z in verbC[v][w][x][y]) {
 								if(verbC[v][w][x][y][z] == which) {
-									alert(verbC[v][w][x][y][z] + ' ' + which);
 									verb = verbC[v]; 
 									break out;
 								}

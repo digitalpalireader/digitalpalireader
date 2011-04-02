@@ -153,7 +153,7 @@ function cpFlatten(cpin) {
 	}
 }
 
-function toggleSearchOpts(a) {
+function showHideId(a) {
 	var sopts = document.getElementById(a);
 	if(sopts.style.display=='block') {
 		sopts.style.display='none';

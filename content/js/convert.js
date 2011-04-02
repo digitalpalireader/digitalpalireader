@@ -105,6 +105,7 @@ function sendtoconvert(data)
 	data = data.replace(/ V /g, ' ');
 	data = data.replace(/ P /g, ' ');
 	data = data.replace(/ T /g, ' ');
+	data = data.replace(/☸ */g, '');
 	data = data.replace(/ VAR /g, ' ');
 	data = data.replace(/  *,/g, ',')
 

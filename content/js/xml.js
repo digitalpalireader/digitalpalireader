@@ -125,9 +125,11 @@ function importXML(labelsearch,para)
 	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	// "modern" reference
-	
-	var modno = getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,y.length);	
-	var modt = 	(modno ? ' (<b class="small" style="color:'+colorcfg['colsel']+'">' + nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
+	var modt = '';
+	if(hier == 'm') {
+		var modno = getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,y.length);	
+		var modt = 	(modno ? ' (<b class="small" style="color:'+colorcfg['colsel']+'">' + nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
+	}
 
 	// output header
 	
@@ -359,8 +361,14 @@ function gettitles(altget,stop,prev,ssect)
 
 function importXMLindex() {
 	
+	
 	var DshowH = false; // dev tool
 	//DshowH = true; // dev tool
+
+	if(devCheck == 1 && DshowH) {
+		DXMLThai();
+		return;
+	}
 	
 	document.activeElement.blur();
 

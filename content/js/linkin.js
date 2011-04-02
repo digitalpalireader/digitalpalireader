@@ -47,18 +47,18 @@ function postout(input,divclicked,frombox)
 	//~ input = input.replace(/ii['"`]/g, 'i');
 	//~ input = input.replace(/uu['"`]/g, 'u');
 	input = input.replace(/([aiu])[aiu][’”]/g, "$1");
+	input = input.replace(/n[’”]/g, ".m");
 	input = input.replace(/[‘“’”`',{}?;!"-]/g, '');
 	input = input.replace(/xn/g, '"n');
 	input = input.toLowerCase();
 	input = input.replace(/\.([^nmltd])/g, "$1");
 	input = input.replace(/\.$/g, "");
 	input = input.replace(/ .+/g, '');
-		
 	shortdefpre = [];
 
 	if (input.length > 1)  // ---------- dont waste time with periods and commas ----------
 	{
-		if(typeof(G_manualCompound[input]) == 'object') manualCompound(input); // let it tell us what is the match
+		if(typeof(G_manualCompoundInd[input]) == 'object' || typeof(G_manualCompoundDec[input]) == 'object') manualCompound(input); // let it tell us what is the match
 		else analyzeword(input);  // will populate G_outwords, which is nested array - 1) full alternative compounds/words seperated by array entry "space", 2) parts of the alt. compounds seperated by "@", 3) alt. defs of the parts, seperated by "#", 4) info for each alt. def. seperated by "^" 
 	}
 	if (G_outwords.length == 0)
@@ -66,11 +66,10 @@ function postout(input,divclicked,frombox)
 		G_outwords.push(input + '$0^' + input + '^3');
 	}
 	outputDef(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
-	fm = 0;
 }
 
 
-var G_illegalCompoundBreak = /[^aiueom][^aiueo]/; // this assumes that a compound has to break at a vowel or nigahita.
+var G_illegalCompoundBreak = /[^aiueomn][^aiueo]/; // this assumes that a compound has to break at a vowel, nigahita or n.
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	var matchedword;
@@ -83,7 +82,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		shortdefpre = [];
 		matchedword = findmatch(oneword); // check for a single match
 	}
-	else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart); }  // check for an ending match
+	else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart,null,parts.length); }  // check for an ending match
 	
 	if (matchedword) {
 		fullnames = partnames.concat([matchedword[0]]);
@@ -100,21 +99,15 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 	
 	var nextparts;
 	var nextpartnames;
-	
+	out:
 	for (var j = 1; j < oneword.length; j++)
 	{
 		partword = oneword.substring(0,oneword.length-j);
 		restword = oneword.substring(oneword.length-j,oneword.length);
 
-		switch (true) { 
-			case (partword.length == 1 && (lastpart || partword != 'a')): // single letters
-			case (G_illegalCompoundBreak.exec(partword.charAt(partword.length-1)+restword.charAt(0)) != null): // illegal break
-				continue;
-			default:
-			break;
-		}
+		if ((partword.length == 1 && (lastpart || !/[anh]/.exec(partword))) || G_illegalCompoundBreak.exec(partword.charAt(partword.length-1)+restword.charAt(0)) != null) continue out;
 
-		var newpart = findmatch(partword,lastpart,restword); // check for matched part
+		var newpart = findmatch(partword,lastpart,restword,parts.length); // check for matched part
 		if (newpart) {
 			nextparts = parts.concat(Array(newpart[1])); // add the part to our list of matched parts
 			nextpartnames = partnames.concat(Array(newpart[0])); // add the part name to our list of matched part names
@@ -127,34 +120,34 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 
 // --------------------------- match finding function  ---------------------------------
 
-var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning;
-notpart["a"] = 2;
-notpart["ko"] = 1;
-notpart["ka"] = 2;
-notpart["ya"] = 2;
-notpart["ta"] = 2;
-notpart["va"] = 1;
-notpart["vaa"] = 1;
-notpart["da"] = 1;
-notpart["hi"] = 1;
-notpart["ha"] = 1;
-notpart["ca"] = 2;
-notpart["ma"] = 1;
-notpart["la"] = 1;
-notpart["nu"] = 1;
-notpart["saa"] = 1;
-notpart["saz1"] = 1;
-notpart["saz2"] = 1;
-notpart["saz4"] = 1;
-notpart["suz1"] = 1;
-notpart["suz2"] = 2;
-notpart["suz3"] = 2;
-notpart["aa"] = 2;
-notpart["na"] = 1;
-notpart["maa"] = 1;
+var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning, 3 means allowed only at the end;
+notpart['a'] = 2;
+notpart['ko'] = 1;
+notpart['ka'] = 2;
+notpart['ya'] = 2;
+notpart['ta'] = 2;
+notpart['va'] = 1;
+notpart['vaa'] = 1;
+notpart['da'] = 1;
+notpart['hi'] = 1;
+notpart['ha'] = 1;
+//notpart['ca'] = 2;
+notpart['ma'] = 1;
+notpart['la'] = 1;
+notpart['nu'] = 3;
+notpart['saa'] = 1;
+notpart['saz1'] = 1;
+notpart['saz2'] = 1;
+notpart['saz4'] = 1;
+notpart['suz1'] = 1;
+notpart['suz2'] = 2;
+notpart['suz3'] = 2;
+notpart['aa'] = 2;
+notpart['na'] = 2;
+notpart['maa'] = 2;
 
 var indeclinable = [];
-indeclinable["na"] = 1;
+indeclinable['na'] = 1;
 //indeclinable["ca"] = 1;
 
 var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.  Seperated by #, 0=suff def., 1=suf to add, 2=ending to add for analysis, 3 = ending to add for output
@@ -169,60 +162,60 @@ specsuf["va"] = '3/1047^va^0#va#';
 specsuf["eva"] = '0/4338^eva^0#eva#';
 specsuf["idha"] = '0/3208^idha^0#idha#';
 
-var fm = 0;
 
-
-function findmatch(oneword,lastpart,nextpart,trick)
+function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
-	var pra,prb,prc,prd,pre,prf;
-	fm++;
 
-	if ((notpart[oneword] == 2 && lastpart) || (notpart[oneword] == 1 && (lastpart || nextpart))) { return null; }
+	if ((notpart[oneword] == 2 && lastpart) || (notpart[oneword] == 1 && (lastpart || nextpart)) || (notpart[oneword] == 3 && nextpart)) { return null; }
 
-	var cwt = [];
+	if(!nextpart) { // don't do stem matching on compound parts
 
+		var pra,prb,prc,prd,pre,prf;
+		var cwt = [];
+
+			
+		// ---------- create wtr variables for alternative stem matching ----------
 		
-	// ---------- create wtr variables for alternative stem matching ----------
-	
-	
-	for (var k = 0; k < oneword.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
-	{		
-		cwt[k] = oneword.substring(oneword.length-k,oneword.length);				
-	}
-	
-	
-	// ---------- stem matching and converting ----------
-	// this stuff is defined in declension.js
-	
-	var wtrN = []; // nouns, can be in compound
-	var wtrV = []; // verbs, can't
-	
-	for (var pr = 0;pr < prem.length; pr++)
-	{
-		preach = prem[pr];
-		pra = preach[0]; // ending to replace
-		prb = pra.length; // size of ending
-		prc = preach[1]; // find offset (positive means smaller cut)
-		prd = preach[2]; // min. length for change
-		pre = preach[3]; // new ending if any
-		prf = preach[4]; // is a verb?
-
-
-		if (cwt[prb] == pra && oneword.length > (prb + prd)) 
-		{
-			var wtrone = oneword.substring(0, oneword.length-(prb-prc)) + pre;
-
-			if ((notpart[wtrone] == 2 && lastpart) || (notpart[wtrone] == 1 && (lastpart || nextpart))) { continue; }
-
-			if (prf) { wtrV.push(wtrone); }
-			else { 
-				wtrN.push(wtrone); 
-				if(/[aiu]/.exec(wtrone.charAt(wtrone.length-1))) { // long vowels
-					wtrN.push(wtrone+wtrone.charAt(wtrone.length-1));
-				}
-			}
+		
+		for (var k = 0; k < oneword.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
+		{		
+			cwt[k] = oneword.substring(oneword.length-k,oneword.length);				
 		}
 		
+		
+		// ---------- stem matching and converting ----------
+		// this stuff is defined in declension.js
+		
+		var wtrN = []; // nouns, can be in compound
+		var wtrV = []; // verbs, can't
+		
+		for (var pr = 0;pr < prem.length; pr++)
+		{
+			preach = prem[pr];
+			pra = preach[0]; // ending to replace
+			prb = pra.length; // size of ending
+			prc = preach[1]; // find offset (positive means smaller cut)
+			prd = preach[2]; // min. length for change
+			pre = preach[3]; // new ending if any
+			prf = preach[4]; // is a verb?
+
+
+			if (cwt[prb] == pra && oneword.length > (prb + prd)) 
+			{
+				var wtrone = oneword.substring(0, oneword.length-(prb-prc)) + pre;
+
+				if ((notpart[wtrone] == 2 && lastpart) || (notpart[wtrone] == 1 && (lastpart || nextpart))) { continue; }
+
+				if (prf) { wtrV.push(wtrone); }
+				else { 
+					wtrN.push(wtrone); 
+					if(/[aiu]/.exec(wtrone.charAt(wtrone.length-1))) { // long vowels
+						wtrN.push(wtrone+wtrone.charAt(wtrone.length-1));
+					}
+				}
+			}
+			
+		}
 	}
 
 	var res = [];
@@ -311,51 +304,82 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				}
 			}
 		}
+		if(res.length == 0 && resn.length == 0 && !resy) {
+			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+			{				
+				if (G_manualCompoundDec[wtr[b]]) 
+				{					
+					manualCompound(wtr[b]);
+					return;
+				}
+			}
+		}
 	}
 
 	if(nextpart) { 
 
 // do this if compound part (not end)
-	
-		if (!lastpart) { // do this if first compound part
-		
+
 		// tricks
-		
-			if (res.length == 0 && resn.length == 0 && !resy && !trick) {
-				var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
-				var aiu3 = /[aiu]/.exec(nextpart.charAt(0));
-				
-				if (aiu1 && !aiu3) // check for shortened vowels, lengthen
-				{
-					if (!notpart[oneword+aiu1]) {
-						var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,1);
-						if (trickmatch) { 
-							return Array(trickmatch[0].substring(0,trickmatch[0].length-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); 
-						} 
-					}
-				}
 
-				
-				// adding the ` for special prefix only words
-				
-				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,1);
-				if (trickmatch) { return trickmatch; }
-				
-
-				// removing conjugations
-				
-				if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
-				{
-					var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,1);
-					if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+		if (res.length == 0 && resn.length == 0 && !resy && !trick) {
+			var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
+			var aiu3 = /[aiu]/.exec(nextpart.charAt(0));
+			
+			if (aiu1 && !aiu3) // check for shortened vowels, lengthen
+			{
+				if (!notpart[oneword+aiu1]) {
+					var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,partslength,1);
+					if (trickmatch) { 
+						return Array(trickmatch[0].substring(0,trickmatch[0].length-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); 
+					} 
 				}
-				else if (oneword.charAt(oneword.length-1) == 'm' && oneword.length > 2) 
-				{
-					var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,1);
-					if (trickmatch) { return Array(trickmatch[0] + 'm', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+			}				
+
+			// compounded conjugations, sandhi
+			
+			if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
+			{
+				var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
+				if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+			}
+			else if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) != '.' && oneword.length > 2) 
+			{
+				var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
+				if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')); } 
+			}
+			else if (oneword.substring(oneword.length-2,oneword.length) == '~n') 
+			{
+				var trickmatch = findmatch(oneword.substring(0,oneword.length-2),lastpart,nextpart,partslength,1);
+				if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
+				else { // try indeclinables
+					trickmatch = findmatch(oneword.substring(0,oneword.length-2)+'.m',lastpart,nextpart,partslength,1);
+					if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
 				}
 			}
+			
 		}
+		
+	
+		if (!lastpart) { 
+		
+		// do this if first compound part
+		
+			if (res.length == 0 && !trick) {
+				// adding the ` for special prefix only words
+				
+				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,partslength,1);
+				if (trickmatch) { return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : ''))];  }
+
+			}
+		}
+		else { 
+			
+		// do this if not first compound part
+
+
+		}
+		
 	}
 	else { 
 		
@@ -370,7 +394,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				var cutsuf = oneword.substring(oneword.length - tempsuf);
 				//
 				if (specsuf[cutsuf]) {
-					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2]);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
+					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2],lastpart,null,partslength);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
 					if (desuf) {
 						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(specsuf[cutsuf].split('#')[3] ? specsuf[cutsuf].split('#')[3] : '') +'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]]; // manually add the two part "compound"
 						return outsuf;
@@ -416,6 +440,38 @@ function findmatch(oneword,lastpart,nextpart,trick)
 				}						
 			}
 		}
+		
+		if(partslength == 1 && !nextpart) { // verbs in "compounds"
+			if (res.length == 0) 
+			{				
+				for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
+				{			
+					var temp = wtrV[b];
+					if (mainda[temp] && !indeclinable[temp]) 
+					{			
+						for (i in mainda[temp]) {
+							res.push([temp,mainda[temp][i]]); 
+						}
+					}
+				}
+			}
+
+		// concise variants
+
+			if (!resy)
+			{
+				for (var b = 0; b < wtrV.length; b++) // b for alternative types wtrV
+				{				
+
+					var temp = wtrV[b];
+					
+					if (yt[temp] && !resy && !indeclinable[temp]) 
+					{					
+						resy = temp; // for matching the dictionary entry in the output
+					}						
+				}
+			}
+		}
 
 	
 	}	
@@ -434,7 +490,7 @@ function findmatch(oneword,lastpart,nextpart,trick)
 			if (aiu3 && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1) // check for shortened vowels, lengthen
 			{
 				if (!notpart[aiu3 + oneword]) {
-					var trickmatch = findmatch(aiu3 + oneword,lastpart,nextpart,1);
+					var trickmatch = findmatch(aiu3 + oneword,lastpart,nextpart,partslength,1);
 					if (trickmatch) { 
 						return Array(trickmatch[0].substring(1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); 
 					}
@@ -443,11 +499,12 @@ function findmatch(oneword,lastpart,nextpart,trick)
 						
 			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
 			{
-				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,1); // the 'pa.tipanno' in our example
+				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
 				if (trickmatch) { return Array(oneword.charAt(0) + '-' + trickmatch[0], '0^' + oneword.charAt(0) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); } 
 			}
 		}
 	}
+
 	
 	var altarray = [];
 
@@ -462,13 +519,18 @@ function findmatch(oneword,lastpart,nextpart,trick)
 	return(Array(oneword.replace(/`$/,''),altarray.join('#'),resy));  // add oneword to the beginning to let us put the word together later
 }		
 
-var G_manualCompound = [];
-G_manualCompound["yaava~ncida.m"] = [['yaava~n','yaava'],['c','ca'],['ida.m','ida']]; // first is what appears, second is the dict entry
-G_manualCompound['ceva'] = [['c','ca'],['eva','eva']]; 
-G_manualCompound['khvaaha.m'] = [['khv','kho'],['aaha.m','aha.m']];
+var G_manualCompoundInd = [];
+G_manualCompoundInd["yaava~ncida.m"] = [['yaava~n','yaava'],['c','ca'],['ida.m','ida']]; // first is what appears, second is the dict entry
+G_manualCompoundInd['ceva'] = [['c','ca'],['eva','eva']]; 
+G_manualCompoundInd['meta.m'] = [['m','me'],['eta.m','eta']];
+G_manualCompoundInd['paneta.m'] = [['pan','pana'],['eta.m','eta']];
+G_manualCompoundInd['sabbeheva'] = [['sabbeh','sabba'],['eva','eva']];
+
+var G_manualCompoundDec = [];
+G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];
 
 function manualCompound(fullword) {
-	var i = G_manualCompound[fullword];
+	var i = (G_manualCompoundInd[fullword] ? G_manualCompoundInd[fullword] : G_manualCompoundDec[fullword]);
 	var parta = []
 	var infoa = [];
 	var shorta = [];

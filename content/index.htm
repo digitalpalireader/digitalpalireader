@@ -241,7 +241,7 @@
 											<option title="Aṭṭhakathā Term Search">Aṭṭh</option>
 											<option title="Ṭīka Term Search">Ṭīka</option>
 											<option title="Title Search">Title</option>
-										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); toggleSearchOpts('searchopts')"><b>adv</b></a>
+										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); showHideId('searchopts')"><b>adv</b></a>
 									</div>
 									<div>
 									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">&gt;</span>

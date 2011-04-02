@@ -2205,12 +2205,21 @@ irregda["bhotaa"] = "bhavanta";
 irregda["bhoto"] = "bhavanta";
 irregda["bhoti"] = "bhavanta";
 
+irregda['avoca'] = 'vatti';
+irregda['avocu.m'] = 'vatti';
+irregda['avoca'] = 'vatti';
+irregda['avaca'] = 'vatti';
+irregda['avocuttha'] = 'vatti';
+irregda['avacuttha'] = 'vatti';
+irregda['avoca.m'] = 'vatti';
+irregda['avocumha'] = 'vatti';
+irregda['avocumhaa'] = 'vatti';
+
 // added
 
 irregda['idam`'] = 'ida';
 irregda['yida.m'] = 'ida';
 irregda['nibbe.theta'] = 'nibbe.thita';
-irregda['sa~njaanaati'] = '3/3128';
 irregda['kaasaava'] = 'kaasaaya'; // added
 irregda['najja'] = 'nadii'; // added
 irregda['pahaatabba'] = 'pahaana';
@@ -2226,3 +2235,11 @@ irregda['ahu'] = 'bhavati';
 irregda['kalevara'] = 'ka.lebara'; 
 irregda['ka.levara'] = 'ka.lebara'; 
 irregda['kalebara'] = 'ka.lebara'; 
+irregda['eta'] = 'etad';
+irregda['sammukhii'] = 'sammukha';
+
+irregda['keci'] = 'koci';
+irregda['kaaci'] = 'koci';
+irregda['ki~nci'] = 'koci';
+irregda['kenaci'] = 'koci';
+irregda['kassaci'] = 'koci';

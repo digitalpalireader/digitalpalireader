@@ -1,4 +1,4 @@
-// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ
+// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 
 function preout(data,which) // calls text prep, then outputs it to preFrame
@@ -72,12 +72,12 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/'/g, '’');
 	data = data.replace(/[”"]ti/g, '” ”ti');
 	data = data.replace(/['’]+ti/g, '’ ’ti');
-	data = data.replace(/[”"]nti/g, '.m” ”ti');
-	data = data.replace(/['’]+nti/g, '.m’ ’ti');
+	data = data.replace(/[”"]nti/g, 'n” ”ti');
+	data = data.replace(/['’]+nti/g, 'n’ ’ti');
 	data = data.replace(/\^b\^/g, '<@>');
 	data = data.replace(/\^eb\^/g, '</@>');
-	data = data.replace(/["]+<\/@>nti/g, '.m”</@> ”ti');
-	data = data.replace(/['’]+<\/@>nti/g, '.m’</@> ’ti');
+	data = data.replace(/["]+<\/@>nti/g, 'n”</@> ”ti');
+	data = data.replace(/['’]+<\/@>nti/g, 'n’</@> ’ti');
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
 
@@ -1574,7 +1574,22 @@ var G_alertFlashStart = 0;
 
 function alertFlash(text,color) {
 	G_alertFlashStart++; // give us an alert Id 
-	if(color) document.getElementById('alert').style.backgroundColor = color;
+	if(color) {
+		
+		switch (color) {
+			case 'red':
+			color = 'RGBa(255,0,0,0.8)';
+			break;
+			case 'green':
+			color = 'RGBa(0,255,0,0.8)';
+			break;
+			case 'yellow':
+			color = 'RGBa(255,255,0,0.8)';
+			break;
+		}
+		document.getElementById('alert').style.backgroundColor = color;
+	
+	}
 	document.getElementById('alert').innerHTML = text;
 	document.getElementById('alert').style.opacity = '0';
 	document.getElementById('alert').style.display='block';
