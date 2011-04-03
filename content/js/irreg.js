@@ -2236,6 +2236,7 @@ irregda['ka.levara'] = 'ka.lebara';
 irregda['kalebara'] = 'ka.lebara'; 
 irregda['eta'] = 'etad';
 irregda['sammukhii'] = 'sammukha';
+irregda['viisa'] = 'viisati';
 
 irregda['keci'] = 'koci';
 irregda['kaaci'] = 'koci';
@@ -2251,3 +2252,6 @@ irregda['khv`'] = 'kho';
 irregda['khva`'] = 'kho';
 irregda['sva`'] = 'ta';
 irregda['yva`'] = 'ya';
+
+irregda['`mhi'] = 'atthi';
+irregda['`gaaminii'] = '`gaamii';

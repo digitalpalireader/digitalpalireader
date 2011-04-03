@@ -132,6 +132,7 @@ notpart['da'] = 1;
 notpart['hi'] = 1;
 notpart['ha'] = 3;
 //notpart['ca'] = 2;
+notpart['ba'] = 1;
 notpart['ma'] = 1;
 notpart['la'] = 1;
 notpart['nu'] = 3;
@@ -158,6 +159,7 @@ specsuf["aati"] = '0/3190^ti^0#ti#a#aa';
 specsuf["uuti"] = '0/3190^ti^0#ti#u#uu';
 specsuf["oti"] = '0/3190^ti^0#ti#o#o';
 specsuf["pi"] = '2/2866^pi^0#pi#';
+specsuf["mpi"] = '2/2866^pi^0#pi#.m#m';
 specsuf["~nhi"] = '4/1234^hi^0#hi#.m#~n';
 specsuf["va"] = '3/1047^va^0#va#';
 specsuf["eva"] = '0/4338^eva^0#eva#';
@@ -224,13 +226,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 // exact maches
 
-	if (mainda[oneword])
+	if (typeof(mainda[oneword]) == 'object')
 	{
 		for (i in mainda[oneword]) {
 			res.push([oneword,mainda[oneword][i]]); 
 		}
 	}
-	else if (irregda[oneword]) {
+	else if (typeof(irregda[oneword]) == 'string') {
 		for (i in mainda[irregda[oneword]]) {
 			res.push([oneword,mainda[irregda[oneword]][i]]); 
 		}
@@ -324,22 +326,50 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 		if (res.length == 0 && resn.length == 0 && !resy && !trick) {
 			var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
-			var aiu3 = /[aiu]/.exec(nextpart.charAt(0));
+			var aiu2 = /[aiu]/.exec(nextpart.charAt(0));
 			
-			if (aiu1 && !aiu3) // check for shortened vowels, lengthen
+			var aiu3 = /[aiu]/.exec(oneword.charAt(0));
+			var aiu4 = /[aiu]/.exec(oneword.charAt(1));
+
+			var aiueo1 = /[aiueo]/.exec(oneword.charAt(oneword.length-1));
+			
+			if (aiu1 && !aiu2) // check for shortened vowels, lengthen
 			{
 				if (!notpart[oneword+aiu1]) {
 					var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,partslength,1);
 					if (trickmatch) { 
-						return Array(trickmatch[0].substring(0,trickmatch[0].length-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); 
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
 					} 
 				}
 			}				
 
+			if (aiueo1 && !aiu2) 
+			{
+				// check for lost this vowel because next vowel, add 'a,i,u' (bhaddekarattassa, pa~ncupaadaanakkhandhaa)
+				
+				if (!notpart[oneword.slice(0,-1)+'a']) {
+					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+					} 
+				}
+				if (!notpart[oneword.slice(0,-1)+'i']) {
+					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+					} 
+				}
+				if (!notpart[oneword.slice(0,-1)+'u']) {
+					var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+					} 
+				}
+			}
 			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u') // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
 			{
 				if (!notpart[oneword.slice(0,-1)+'a']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,1);
+					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,2);
 					if (trickmatch) { 
 						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
 					} 
@@ -349,14 +379,14 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a') // check for doubled nextpart, removed this part (vuccata-avuso)
 			{
 				if (!notpart[oneword.slice(0,-1)+'i']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,1);
+					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,2);
 					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
 					} 
 					if (!notpart[oneword.slice(0,-1)+'u']) {
-						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,1);
+						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,2);
 						if (trickmatch) { 
-							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
 						} 
 					}
 
@@ -432,6 +462,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			
 	}
 	
+	if(!lastpart && nextpart) {
+
+// do this if compound beginning
+	
+
+	}
+	
 	if(lastpart && !nextpart) {
 
 // do this if compound end
@@ -468,7 +505,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			}
 		}
 		
-		if(partslength == 1 && !nextpart) { // verbs in "compounds"
+		if(partslength == 1) { // verbs in "compounds"
 			if (res.length == 0) 
 			{				
 				for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
@@ -499,6 +536,17 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}
 		}
+		
+		// do this if first compound part
+		
+			if (res.length == 0 && !trick) {
+				// adding the ` for special suffix only words
+				var trickmatch = findmatch('`'+oneword,lastpart,nextpart,partslength,1);
+				if (trickmatch) { 
+					return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')) + '$'];  
+				}
+
+			}
 
 	
 	}	
@@ -508,22 +556,53 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 // do this if compound part or end
 
 	// tricks
+		if (res.length == 0 && resn.length == 0 && !resy && trick != 1) { // allow from certain tricks
+			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
+			if (aiu1 && oneword.charAt(0) == oneword.charAt(1)) // check for lengthened vowels, shorten
+			{
+				if (!notpart[oneword.substring(1)]) {
+					var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1);
+					if (trickmatch) {
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
+					} 
+				}
+			}				
+		}
+
 		if (res.length == 0 && resn.length == 0 && !resy && !trick) {
+
 			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
 			var aiu2 = /[aiu]/.exec(oneword.charAt(1));
 			var aiu3 = /[aiu]/.exec(lastpart.charAt(lastpart.length-1));
 			
 
-			if (aiu3 && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1) // check for shortened vowels, lengthen
+			if (aiu3 && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1)
 			{
-				if (!notpart[aiu3 + oneword]) {
-					var trickmatch = findmatch(aiu3 + oneword,lastpart,nextpart,partslength,1);
-					if (trickmatch) { 
-						return Array(trickmatch[0].substring(1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); 
-					}
-				}
-			}
 						
+				// check for lost this vowel because of last vowel, add 'a,i,u' (cakkhundriya.m)
+				
+				if (!notpart['a'+oneword]) {
+					var trickmatch = findmatch('a'+oneword,lastpart,nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+					} 
+				}
+				if (!notpart['i'+oneword]) {
+					var trickmatch = findmatch('i'+oneword,lastpart,nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+					} 
+				}
+				if (!notpart['u'+oneword]) {
+					var trickmatch = findmatch('u'+oneword,lastpart,nextpart,partslength,2);
+					if (trickmatch) { 
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+					} 
+				}
+			}				
+
+
+
 			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
 			{
 				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
@@ -554,6 +633,7 @@ G_manualCompoundInd['paneta.m'] = [['pan','pana'],['eta.m','eta']];
 G_manualCompoundInd['sabbeheva'] = [['sabbeh','sabba'],['eva','eva']];
 G_manualCompoundInd['esohamasmi'] = [['eso','eta'],['ham','aha.m'],['asmi','atthi']];
 G_manualCompoundInd['nesohamasmi'] = [['n','na'],['eso','eta'],['ham','aha.m'],['asmi','atthi']];
+G_manualCompoundInd['mayha.mpatthi'] = [['mayha.m','aha.m'],['p','pi'],['atthi','atthi']];
 
 var G_manualCompoundDec = [];
 G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];
