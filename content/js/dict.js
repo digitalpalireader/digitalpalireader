@@ -210,7 +210,7 @@ function dppnsearchstart()
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\''+dppnt+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -718,6 +718,9 @@ function titlesearchstart()
 				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
 			}
 			if (entries.length == 0) continue;
+
+			// add DPPN title entries
+
 			var dppnEntry = [];
 			if(nameda[gsplit]) {
 				dppnEntry = nameda[gsplit];
@@ -735,17 +738,8 @@ function titlesearchstart()
 			if(dppnEntry.length > 0) {
 				for(d in dppnEntry) {
 
-					var dppnf = 'etc/XML2/'+dppnEntry[d].split('/')[0]+'.xml';
-
-					var xmlhttp = new window.XMLHttpRequest();
-					xmlhttp.open("GET", dppnf, false);
-					xmlhttp.send(null);
-					var xmlDoc = xmlhttp.responseXML.documentElement;
-
-					var data = ' ' + xmlDoc.getElementsByTagName('entry')[parseInt(dppnEntry[d].split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
-			
-					dEI += '&nbsp;<span class="pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="showHideId(\'titleS'+x+'^'+d+'\');">n</span>';
-					dEO += '<div class="hide round" id="titleS'+x+'^'+d+'">'+data+'</div>'
+					dEI += '&nbsp;<span class="pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
+					dEO += '<div class="hide round" id="titleS'+x+'^'+d+'"></div>'
 				}
 			}
 
@@ -783,6 +777,20 @@ function titlesearchstart()
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
+
+function toggleDppnTitle(link,id) {
+	if(document.getElementById(id).innerHTML.length > 0) {
+		document.getElementById(id).style.display = 'none';
+		document.getElementById(id).innerHTML = '';
+		return;
+	}
+
+	var data = getDppnData(link);
+
+	document.getElementById(id).style.display = 'block';
+	document.getElementById(id).innerHTML =  data;
+}
+
 
 var G_peda = [];
 

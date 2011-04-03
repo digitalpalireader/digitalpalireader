@@ -54,8 +54,8 @@ function outputDef(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + dataout + '</b></a>';
 					break;
 				case '1':
-					if (!hotlink) { hotlink = data[1]+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+data[1]+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + dataout + '</b></a>';
+					if (!hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + dataout + '</b></a>';
 					break;
 				case '2':
 					osout += '<b style="color:' + colorcfg['colcpd'] + '">' + dataout + '</b>';
@@ -74,7 +74,7 @@ function outputDef(which,first)
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
 					break;
 				case '1':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+data[1]+'/' + data[0]+','+ toUni(data[1]) + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
 					break;
 				}
 			}

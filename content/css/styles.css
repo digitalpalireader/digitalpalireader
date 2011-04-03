@@ -162,8 +162,8 @@ position:relative;
 }
 
 .hoverShow {
--moz-opacity:0.1;
-opacity:0.1
+-moz-opacity:0.2;
+opacity:0.2
 }
 .hoverShow:hover {
 -moz-opacity:1.0;
@@ -182,6 +182,10 @@ opacity:1.0
 	background-color: RGBa(255,255,255,0.5);
 	border-radius:16px;
 	-moz-border-radius:16px;
+}
+
+.super {
+	vertical-align:super;
 }
 
 #content {
