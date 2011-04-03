@@ -13214,6 +13214,7 @@ yt['potthanikaa'] = [1,"f.","a dagger.","oo","N","f.ā","",,"potthanik","Y"];
 yt['potthalikaa'] = [1,"f.","a modelled figure; a doll made of canvas.","oo","N","f.ā","",,"potthalik","Y"];
 yt['pothujjanika'] = [1,"adj.","belonging to an ordinary man.","oo","N","adj.a","",,"pothujjanik","Y"];
 yt['ponobhavika'] = [1,"adj.","leading to rebirth.","oo","N","adj.a","",,"ponobhavik","Y"];
+yt['ponobbhavika'] = [1,"adj.","leading to rebirth.","oo","N","adj.a","",,"ponobbhavik","Y"];
 yt['poraa.na'] = [1,"adj.","ancient; old; former.","oo","N","adj.a","",,"porāṇ","Y"];
 yt['poraa.naka'] = [1,"adj.","ancient; old; former.","oo","N","adj.a","",,"porāṇak","Y"];
 yt['porisa'] = [1,"nt.","manliness; the height of man (with up stretched hand).","oo","N","nt.a","",,"poris","Y"];

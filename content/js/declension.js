@@ -256,13 +256,18 @@
 
 	
 	prem.push(['itvaa',0,0,'ati',1]); 
+	prem.push(['etvaa',0,0,'ati',1]); 
 	prem.push(['tvaa',0,0,'ti',1]); 
 	prem.push(['itu.m',0,0,'ati',1]);
 	prem.push(['eyya',0,0,'ati',1]);
+	prem.push(['eyya.m',0,0,'ati',1]);
 	prem.push(['eyyu.m',0,0,'ati',1]);
+
 	prem.push(['imhaa',0,0,'',1]); // aorist
 	prem.push(['i.msu',0,1,'ati',1]); // aorist
 	prem.push(['ittha',0,0,'',1]); // aorist
+	prem.push(['u.m',0,0,'ati',1]); // aorist
+
 	prem.push(['eyya',1,0,'ti',1]);
 	prem.push(['eyyati',0,0,'ati',1]);
 	prem.push(['eyyasi',0,0,'ati',1]);

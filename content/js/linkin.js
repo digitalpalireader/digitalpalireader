@@ -111,7 +111,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		if (newpart) {
 			nextparts = parts.concat(Array(newpart[1])); // add the part to our list of matched parts
 			nextpartnames = partnames.concat(Array(newpart[0])); // add the part name to our list of matched part names
-			analyzeword(restword, nextparts, nextpartnames, (newpart[2] ? shortdefpre.concat(newpart[2]) : shortdefpre), partword); // repeat passing the old parts to be added;
+			analyzeword((newpart[3] ? newpart[3] : restword), nextparts, nextpartnames, (newpart[2] ? shortdefpre.concat(newpart[2]) : shortdefpre), partword); // repeat passing the old parts to be added;  newpart[3] is a modified version of the rest of the word
 		}
 		
 	}
@@ -130,7 +130,7 @@ notpart['va'] = 1;
 notpart['vaa'] = 1;
 notpart['da'] = 1;
 notpart['hi'] = 1;
-notpart['ha'] = 1;
+notpart['ha'] = 3;
 //notpart['ca'] = 2;
 notpart['ma'] = 1;
 notpart['la'] = 1;
@@ -152,10 +152,11 @@ indeclinable['na'] = 1;
 
 var specsuf = new Array(); // once there is no match, we will cut off some suffixes and try again.  Seperated by #, 0=suff def., 1=suf to add, 2=ending to add for analysis, 3 = ending to add for output
 specsuf["~nca"] = '1/1501^ca^0#ca#.m#~n';
-specsuf["iiti"] = '0/3190^ti^0#iti#ii#ii';  // these won't work...
-specsuf["aati"] = '0/3190^ti^0#iti#aa#aa';
-specsuf["uuti"] = '0/3190^ti^0#iti#uu#uu';
-specsuf["oti"] = '0/3190^ti^0#iti#o#o';
+specsuf["nti"] = '0/3190^ti^0#ti#.m#n'; 
+specsuf["iiti"] = '0/3190^ti^0#ti#i#ii';  // these won't work with verb conjugations...
+specsuf["aati"] = '0/3190^ti^0#ti#a#aa';
+specsuf["uuti"] = '0/3190^ti^0#ti#u#uu';
+specsuf["oti"] = '0/3190^ti^0#ti#o#o';
 specsuf["pi"] = '2/2866^pi^0#pi#';
 specsuf["~nhi"] = '4/1234^hi^0#hi#.m#~n';
 specsuf["va"] = '3/1047^va^0#va#';
@@ -165,7 +166,6 @@ specsuf["idha"] = '0/3208^idha^0#idha#';
 
 function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
-
 	if ((notpart[oneword] == 2 && lastpart) || (notpart[oneword] == 1 && (lastpart || nextpart)) || (notpart[oneword] == 3 && nextpart)) { return null; }
 
 	if(!nextpart) { // don't do stem matching on compound parts
@@ -336,17 +336,44 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}				
 
+			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u') // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
+			{
+				if (!notpart[oneword.slice(0,-1)+'a']) {
+					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,1);
+					if (trickmatch) { 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+					} 
+				}
+			}				
+
+			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a') // check for doubled nextpart, removed this part (vuccata-avuso)
+			{
+				if (!notpart[oneword.slice(0,-1)+'i']) {
+					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,1);
+					if (trickmatch) { 
+						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+					} 
+					if (!notpart[oneword.slice(0,-1)+'u']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,1);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+						} 
+					}
+
+				}
+			}				
+
 			// compounded conjugations, sandhi
 			
-			if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
-			{
-				var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
-				if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
-			}
-			else if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) != '.' && oneword.length > 2) 
+			if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) != '.' && oneword.length > 2) 
 			{
 				var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
 				if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')); } 
+			}
+			else if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
+			{
+				var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
+				if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
 			}
 			else if (oneword.substring(oneword.length-2,oneword.length) == '~n') 
 			{
@@ -525,6 +552,8 @@ G_manualCompoundInd['ceva'] = [['c','ca'],['eva','eva']];
 G_manualCompoundInd['meta.m'] = [['m','me'],['eta.m','eta']];
 G_manualCompoundInd['paneta.m'] = [['pan','pana'],['eta.m','eta']];
 G_manualCompoundInd['sabbeheva'] = [['sabbeh','sabba'],['eva','eva']];
+G_manualCompoundInd['esohamasmi'] = [['eso','eta'],['ham','aha.m'],['asmi','atthi']];
+G_manualCompoundInd['nesohamasmi'] = [['n','na'],['eso','eta'],['ham','aha.m'],['asmi','atthi']];
 
 var G_manualCompoundDec = [];
 G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];

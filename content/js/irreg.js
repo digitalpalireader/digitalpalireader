@@ -2217,7 +2217,6 @@ irregda['avocumhaa'] = 'vatti';
 
 // added
 
-irregda['idam`'] = 'ida';
 irregda['yida.m'] = 'ida';
 irregda['nibbe.theta'] = 'nibbe.thita';
 irregda['kaasaava'] = 'kaasaaya'; // added
@@ -2243,3 +2242,12 @@ irregda['kaaci'] = 'koci';
 irregda['ki~nci'] = 'koci';
 irregda['kenaci'] = 'koci';
 irregda['kassaci'] = 'koci';
+
+// compounds
+
+irregda['idam`'] = 'ida';
+irregda['etad`'] = 'eta';
+irregda['khv`'] = 'kho';
+irregda['khva`'] = 'kho';
+irregda['sva`'] = 'ta';
+irregda['yva`'] = 'ya';

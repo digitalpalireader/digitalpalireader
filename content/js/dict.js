@@ -839,11 +839,17 @@ function paliXML(file,which)
     var xmlDoc = xmlhttp.responseXML.documentElement;
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
-
 	// add links
 	var dataa = data.split(' ');
 	var datat = '';
 	for (i = 0; i < dataa.length; i++) {
+		var tda = toVel(dataa[i].replace(/^[^<>]*>/, '').replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
+		if(!tda || tda.length < 2) {
+			datat += ' ' + dataa[i];
+		}
+		else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+		else datat += ' ' + dataa[i];
+		
 		if(/<[^>]*$/.exec(dataa[i])) {
 			while(dataa[i] && !/^[^<>]*>/.exec(dataa[i])) {
 				datat += ' ' + dataa[i++];
@@ -852,14 +858,6 @@ function paliXML(file,which)
 				datat += ' ' + dataa[i].match(/^[^<>]*>/)[0];
 				dataa[i] = dataa[i].replace(/^[^<>]*>/,'');
 			}
-		}
-		if(dataa[i]) {
-			var tda = toVel(dataa[i].replace(/^[^<>]*>/, '').replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
-			if(tda.length == 1) {
-				datat += ' ' + dataa[i];
-			}
-			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
-			else { datat += ' ' + dataa[i]; }
 		}
 	}
 	data = datat.substring(1);
