@@ -175,7 +175,7 @@ function importXML(labelsearch,para)
 					continue atlabel;
 				}
 			}
-			theData += ' <p'+permalink+'&para='+(tmp+1)+'&query='+labelsearch.join('+').replace(/ /g,'_')+'> ';
+			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ';
 			var tmpdata = onepar;
 			for (var i = 0; i < labelsearch.length; i++)
 			{
@@ -385,7 +385,7 @@ function importXMLindex() {
 	var permalink = 'chrome://digitalpalireader/content/index.htm?';
 	
 	try {
-		window.history.replaceState('Object', 'Title', permalink + 'index='+niknumber[nikaya]+'.'+bookno+'.'+hier);
+		window.history.replaceState('Object', 'Title', permalink + 'loc='+niknumber[nikaya]+'.'+bookno+'.'+hier);
 	}
 	catch(ex) {
 	}

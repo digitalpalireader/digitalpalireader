@@ -2,5 +2,5 @@ This is the SourceForge archive for the Digital Pali Reader.  You will find the 
 
 The latest version is 1.0b23pre and the latest commit message is:
 
-index permalinks, DPPN in titles, indexes
+fixed permalinks for paragraphs
 

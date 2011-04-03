@@ -1666,7 +1666,7 @@ function getLinkPlace() {
 
 	var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
-	var place = null;
+	var place = [];
 	var para = null;
 	var query = null;
 	
@@ -1688,20 +1688,18 @@ function getLinkPlace() {
 			place[0] = niknumber[place[0]];
 
 			if (place.length == 8) getplace(place);
-		}
-		else if (option[0] == 'index')	{
-			var index = option[1].split('.');
-			if (index.length == 2) {
-				getplace([index[0],parseInt(index[1]),0,0,0,0,0,index[2]]);
+			else if (place.length == 3) {
+				var index = option[1].split('.');
+				if (index.length == 2) {
+					getplace([index[0],parseInt(index[1]),0,0,0,0,0,index[2]]);
+				}
+				importXMLindex();
 			}
-			importXMLindex();
-			
 		}
 		else if (option[0] == 'para') para = parseInt(option[1])-1;
 		else if (option[0] == 'query') query = option[1].replace(/_/g,' ').split('+');
 	}
-	if(!place) return;
-	importXML(query,para);
+	if(place.length == 8) importXML(query,para);
 }
 
 function onDocLoad() {
