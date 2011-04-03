@@ -1,5 +1,5 @@
 
-function outputDef(which,first)
+function outputDef(which,first,frombox)
 {
 
 	//alert(G_outwords);
@@ -50,11 +50,11 @@ function outputDef(which,first)
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':
-					if (!hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
+					if (!frombox && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + colorcfg['colped'] + '">' + dataout + '</b></a>';
 					break;
 				case '1':
-					if (!hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
+					if (!frombox && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
 					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + colorcfg['coldppn'] + '">' + dataout + '</b></a>';
 					break;
 				case '2':

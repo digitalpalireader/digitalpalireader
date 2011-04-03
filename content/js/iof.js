@@ -111,7 +111,7 @@ else {
 		}
 	}
 
-	function writeExtFile(aLoc, aFileKey, aContent) // aChars isn't used
+	function writeExtFile(aLoc, aFileKey, aContent) 
 	{
 		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 		var dir = DIR.get("Home", Components.interfaces.nsIFile);

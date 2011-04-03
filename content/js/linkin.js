@@ -10,14 +10,14 @@ function postout(input,divclicked,frombox)
 	shortdefpre = [];
 	G_shortdefpost = [];
 	
-	divclicked = 'W'+divclicked;
+	if(divclicked) divclicked = 'W'+divclicked;
 	
 	input = toVel(input);
 	document.form.lastsearch.value=input;
 	document.form.sped.selectedIndex=0;
 	document.getElementById('anfs').innerHTML = '';
 
-	if (document.getElementById(divclicked))
+	if (divclicked && document.getElementById(divclicked))
 	{
 		if (document.getElementById(G_lastcolour))
 		{
@@ -65,7 +65,7 @@ function postout(input,divclicked,frombox)
 	{
 		G_outwords.push(input + '$0^' + input + '^3');
 	}
-	outputDef(0,1); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box
+	outputDef(0,1,frombox); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box,frombox tells the output that we're coming from the input box.
 }
 
 

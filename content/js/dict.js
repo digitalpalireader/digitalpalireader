@@ -81,6 +81,9 @@ function pedsearchstart()
 }
 
 function pedFullTextSearch(getstring) {
+	
+	getstring = toUni(getstring);
+	
 	var finalout = '';
 	
 	var listouta = [];
@@ -845,17 +848,19 @@ function paliXML(file,which)
 			while(dataa[i] && !/^[^<>]*>/.exec(dataa[i])) {
 				datat += ' ' + dataa[i++];
 			}
-			if(!data[i]) break;
-			datat += ' ' + dataa[i].match(/^[^<>]*>/)[0];
-			dataa[i] = dataa[i].replace(/^[^<>]*>/,'');
+			if(dataa[i]) {
+				datat += ' ' + dataa[i].match(/^[^<>]*>/)[0];
+				dataa[i] = dataa[i].replace(/^[^<>]*>/,'');
+			}
 		}
-		if(!data[i]) break;
-		var tda = toVel(dataa[i].replace(/^[^<>]*>/, '').replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
-		if(tda.length == 1) {
-			datat += ' ' + dataa[i];
+		if(dataa[i]) {
+			var tda = toVel(dataa[i].replace(/^[^<>]*>/, '').replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
+			if(tda.length == 1) {
+				datat += ' ' + dataa[i];
+			}
+			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			else { datat += ' ' + dataa[i]; }
 		}
-		else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
-		else { datat += ' ' + dataa[i]; }
 	}
 	data = datat.substring(1);
 

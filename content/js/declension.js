@@ -84,6 +84,7 @@
 
 	// vant, mant
 	prem.push(['aa',1,3,'nt']);
+	prem.push(['a',1,3,'nt']);
 	prem.push(['anta.m',1,3,'nt']);
 	prem.push(['anto',1,3,'nt']);
 	prem.push(['antaa',1,3,'nt']);
