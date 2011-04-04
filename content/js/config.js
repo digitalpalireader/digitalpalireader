@@ -57,6 +57,8 @@ cfg['translits'] = parseInt(getMiscPref('translits'));
 cfg['showPages'] = getMiscPref('showPages');
 cfg['showVariants'] = getMiscPref('showVariants');
 cfg['showPermalinks'] = getMiscPref('showPermalinks');
+cfg['showNames'] = getMiscPref('showNames');
+cfg['showPedLinks'] = getMiscPref('showPedLinks');
 
 cfg['cpanel'] = getMiscPref('cpanel');
 cfg['cp1'] = getMiscPref('cp1');
@@ -115,6 +117,8 @@ function getconfig() {
 	cfg['showPages'] = getMiscPref('showPages');
 	cfg['showVariants'] = getMiscPref('showVariants');	
 	cfg['showPermalinks'] = getMiscPref('showPermalinks');	
+	cfg['showNames'] = getMiscPref('showNames');
+	cfg['showPedLinks'] = getMiscPref('showPedLinks');
 
 	cfg['cpanel'] = getMiscPref('cpanel');
 	cfg['cp1'] = getMiscPref('cp1');
@@ -298,10 +302,10 @@ function loadOptions() {
 	mafaout += '</tr><tr>';
 		mafaout += '<td colspan=3><hr /><form name="miscform">';
 			mafaout += '<p><b>Options:</b></p>';
+			mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
+			mafaout += '<p>Show: <input type=checkbox id="showPages" '+cfg['showPages']+'> page numbers&nbsp; <input type=checkbox id="showVariants" '+cfg['showVariants']+'> variant readings&nbsp; <input type=checkbox id="showPermalinks" '+cfg['showPermalinks']+'> permalinks (<span class="hovershow pointer">☸</span>)&nbsp; <input type=checkbox id="showNames" '+cfg['showNames']+'> DPPN title links&nbsp; <input type=checkbox id="showPedLinks" '+cfg['showPedLinks']+'> links in PED entries';
 			mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+' onclick="this.checked==true ? document.getElementById(\'catiul\').style.display = \'block\' : document.getElementById(\'catiul\').style.display = \'none\';">';
 			mafaout += '<ul id="catiul" '+(cfg['ctrans'] == 'checked' ? '': 'style="display:none"')+' ><li><input type="checkbox" name="catioff" id="catioff" '+cfg['catioff']+'> Use <a href="http://www.accesstoinsight.org/tech/download/bulk/bulk.html" style="color:'+colorcfg['colcpd']+'" target="_blank">offline version</a> of <a href="http://www.accesstoinsight.org/" style="color:'+colorcfg['colcpd']+'" target="_blank">accesstoinsight.org</a> - location: <b>'+getHomePath()+'/</b><input type="text" name="catiloc" id="catiloc" value="'+cfg['catiloc']+'" onkeyup="if(fileExists(this.value,\'start.html\')) { document.getElementById(\'atilocx\').style.color=\'green\'; document.getElementById(\'atilocx\').innerHTML=\'ok\'; } else{document.getElementById(\'atilocx\').style.color=\'red\'; document.getElementById(\'atilocx\').innerHTML=\'x\';}"><b>/start.html <font id="atilocx" size="5" style="color:'+(fileExists(cfg['catiloc'],'start.html') ? colorcfg['coldppn']+'">ok' : colorcfg['colped']+'">x' )+'</font></b></li></ul></p>';
-			mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
-			mafaout += '<p>Show in text: <input type=checkbox id="showPages" '+cfg['showPages']+'> page numbers&nbsp; <input type=checkbox id="showVariants" '+cfg['showVariants']+'> variant readings&nbsp; <input type=checkbox id="showPermalinks" '+cfg['showPermalinks']+'> permalinks (<span class="hovershow pointer">☸</span>)';
 		mafaout += '</form></td>';
 	mafaout += '</tr></table>';
 	mafaout += '<p align=center>';

@@ -42,6 +42,8 @@ pref("extensions.digitalpalireader.misc.translits", "0");
 pref("extensions.digitalpalireader.misc.showPages", "unchecked");
 pref("extensions.digitalpalireader.misc.showVariants", "checked");
 pref("extensions.digitalpalireader.misc.showPermalinks", "checked");
+pref("extensions.digitalpalireader.misc.showNames", "checked");
+pref("extensions.digitalpalireader.misc.showPedLinks", "checked");
 
 pref("extensions.digitalpalireader.misc.cpanel", "1");
 

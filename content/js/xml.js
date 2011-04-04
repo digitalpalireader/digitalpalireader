@@ -136,7 +136,7 @@ function importXML(labelsearch,para)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center>'+titleout+modt+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center>'+titleout+modt+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }
@@ -364,7 +364,7 @@ function importXMLindex() {
 	
 	
 	var DshowH = false; // dev tool
-	DshowH = true; // dev tool
+	//DshowH = true; // dev tool
 	
 	document.activeElement.blur();
 
@@ -427,14 +427,16 @@ function importXMLindex() {
 		if (z.length > 1 && theData == '') { theData = unnamed; } 
 		if (theData != '') {
 			
-			// dppn title 'n'
-			
-			tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-			if(tt.length < 2) continue;
-			dEI = getDppnEntry(tt);
 			namen = '';
-			if (dEI.length > 0) {
-				namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+			if (cfg['showNames'] == 'checked') {
+				// dppn title 'n'
+
+				tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+				if(tt.length < 2) continue;
+				dEI = getDppnEntry(tt);
+				if (dEI.length > 0) {
+					namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+				}
 			}
 			
 			whichcol[0] = 1; // bump up to let the second color know
@@ -448,14 +450,17 @@ function importXMLindex() {
 			if (y.length > 1 && theData == '') { theData = unnamed; }
 			if (theData != '') {
 
-				// dppn title 'n'
-				
-				tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-				if(tt.length < 2) continue;
-				dEI = getDppnEntry(tt);
 				namen = '';
-				if (dEI.length > 0) {
-					namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+				if (cfg['showNames'] == 'checked') {
+
+					// dppn title 'n'
+					
+					tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+					if(tt.length < 2) continue;
+					dEI = getDppnEntry(tt);
+					if (dEI.length > 0) {
+						namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+					}
 				}
 								
 				wcs = whichcol[0]; // either 0 or 1
@@ -484,16 +489,18 @@ function importXMLindex() {
 				if (x.length > 1 && theData == '') { theData = unnamed; }
 				if (theData != '') {
 
-					// dppn title 'n'
-					
-					tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-					if(tt.length < 2) continue;
-					dEI = getDppnEntry(tt);
 					namen = '';
-					if (dEI.length > 0) {
-						namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-					}
-									
+					if (cfg['showNames'] == 'checked') {
+
+						// dppn title 'n'
+						
+						tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+						if(tt.length < 2) continue;
+						dEI = getDppnEntry(tt);
+						if (dEI.length > 0) {
+							namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+						}
+					}					
 						
 					wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
 					whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
@@ -522,14 +529,17 @@ function importXMLindex() {
 					if (w.length > 1 && theData == '') { theData = unnamed; }
 					if (theData != '') {
 
-						// dppn title 'n'
-						
-						tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-						if(tt.length < 2) continue;
-						dEI = getDppnEntry(tt);
+
 						namen = '';
-						if (dEI.length > 0) {
-							namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+						if (cfg['showNames'] == 'checked') {
+							// dppn title 'n'
+							
+							tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+							if(tt.length < 2) continue;
+							dEI = getDppnEntry(tt);
+							if (dEI.length > 0) {
+								namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+							}
 						}
 										
 							
@@ -561,16 +571,17 @@ function importXMLindex() {
 						if (v.length > 1 && theData == '') { theData = unnamed; }
 						if (theData != '') {
 
-							// dppn title 'n'
-							
-							tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-							if(tt.length < 2) continue;
-							dEI = getDppnEntry(tt);
 							namen = '';
-							if (dEI.length > 0) {
-								namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-							}
-											
+							if (cfg['showNames'] == 'checked') {
+								// dppn title 'n'
+								
+								tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+								if(tt.length < 2) continue;
+								dEI = getDppnEntry(tt);
+								if (dEI.length > 0) {
+									namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+								}
+							}			
 								
 
 							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
@@ -601,14 +612,16 @@ function importXMLindex() {
 							if (u.length > 1 && theData == '') { theData = unnamed; }
 							if (theData != '') {
 
-								// dppn title 'n'
-								
-								tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-								if(tt.length < 2) continue;
-								dEI = getDppnEntry(tt);
 								namen = '';
-								if (dEI.length > 0) {
-									namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+								if (cfg['showNames'] == 'checked') {
+									// dppn title 'n'
+									
+									tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+									if(tt.length < 2) continue;
+									dEI = getDppnEntry(tt);
+									if (dEI.length > 0) {
+										namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+									}
 								}
 												
 									
@@ -941,200 +954,3 @@ function helpXML(file)
     document.getElementById('maf').scrollTop = 0;
 }
 
-
-function getatt(num,type,niklist) { // get atthakatha or tika word 
-    moveframex(2);
-    if(type == 'a') {
-		var loca = attlist[num].split('#');
-		var word = loca.shift();
-	}
-	else {
-		var loca = tiklist[num].split('#');
-		var word = loca.shift();
-	}
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-    var finout = '';
-    
-    location:
-    for (i in loca) {
-        var pca = loca[i].split('^');
-        var nikaya = pca[0];
-        
-        // specify nikayas 
-        
-		if(niklist.indexOf(nikaya) == -1) continue;
-
-        var book = pca[1];
-        
-        var bookload = 'xml/' + nikaya + book + type + '.xml';
-
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
-
-		if (nikaya == 'k') {
-			var bookno = kudvala[pca[1]];
-		}
-		else if(nikaya == 'y') {
-			var bookno = abhivala[pca[1]];
-		}
-		else var bookno = parseInt(pca[1])-1;
-
-        var meta = pca[2];
-        var volume = pca[3];
-        var vagga = pca[4];
-        var sutta = pca[5];	
-        var section = pca[6];	
-        var para = pca[7];	
-
-        var metalist = '';
-        var volumelist = '';
-        var vaggalist = '';
-        var suttalist = '';
-        var sectionlist = '';
-
-        var placen = nikname[nikaya] + '-'+type+' ' + book;
-
-        var u = xmlDoc.getElementsByTagName("h0");
-        if (u.length > 1) placen += '.' + (parseInt(meta)+1);
-        var v = u[meta].getElementsByTagName("h1");
-        if (v.length > 1) placen += '.' + (parseInt(volume)+1);
-        var w = v[volume].getElementsByTagName("h2");
-        if (w.length > 1) placen += '.' + (parseInt(vagga)+1);
-        var x = w[vagga].getElementsByTagName("h3");
-        if (x.length > 1) placen += '.' + (parseInt(sutta)+1);
-        var y = x[sutta].getElementsByTagName("h4");
-        if (y.length > 1) placen += '.' + (parseInt(section)+1);
-        var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
-        
-        var wordr = new RegExp('\\^b\\^\([^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\)\\^eb\\^','gi');
-        var wordr2 = new RegExp('\\^b\\^[^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\\^eb\\^','gi');
-        z = z.replace(wordr, "<c0><@>"+word.replace(/ /g,'</@><xc> <c0><@>')+"</@><xc>");
-        
-        placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
-    }
-    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+(type == 'a' ? 'aṭṭhakathā:' : 'ṭīka:');
-    document.getElementById('mafbc').innerHTML += finout;
-    document.getElementById('maf').scrollTop = 0;
-}
- 
-function gettitle(num,mul,att,tik,niklist) { // get titles 
-
-    moveframex(2);
-
-	var loca = titlelist[num].split('#');
-	var word = loca.shift();
-	
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-    
-    var finout = '';
-    
-    location:
-    for (i in loca) {
-        var pca = loca[i].split('^');
-
-		// separate mat
-		if((pca[7] == 'm' && !mul) || (pca[7] == 'a' && !att) || (pca[7] == 't' && !tik)) continue;
-        
-        // specify nikayas 
-        var nikaya = pca[0];
-        
-		if(niklist.indexOf(nikaya) == -1) continue;
-
-
-        var book = pca[1];
-        var type = pca[7];
-        var bookload = 'xml/' + nikaya + book + type + '.xml';
-
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
-
-		if (type != 'm' && nikaya == 'k') {
-			var bookno = kudvala[pca[1]];
-		}
-		else if (type != 'm' && nikaya == 'k') {
-			var bookno = abhivala[pca[1]];
-		}
-		else var bookno = parseInt(pca[1])-1;
-
-        var meta = pca[2];
-        var volume = pca[3];
-        var vagga = pca[4];
-        var sutta = pca[5];	
-        var section = pca[6];
-        var depth = pca[8];	
-
-        var metalist = '';
-        var volumelist = '';
-        var vaggalist = '';
-        var suttalist = '';
-        var sectionlist = '';
-
-		var vna = ' ';
-		var wna = ' ';
-		var xna = ' ';
-		var yna = ' ';
-		var zna = ' ';
-		
-		if(depth > 0) {
-			var u = xmlDoc.getElementsByTagName("h0");
-			if (u.length > 1) {
-				var vn = u[meta].getElementsByTagName("h0n");
-				vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
-			}
-			if(depth > 1) {
-				var v = u[meta].getElementsByTagName("h1");
-				if (v.length > 1) {
-					var wn = v[volume].getElementsByTagName("h1n");
-					wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
-				}
-				if(depth > 2) {
-					var w = v[volume].getElementsByTagName("h2");
-					if (w.length > 1) {
-						var xn = w[vagga].getElementsByTagName("h2n");
-						xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
-					}
-					if(depth > 3) {
-						var x = w[vagga].getElementsByTagName("h3");
-						if (x.length > 1) {
-							var yn = x[sutta].getElementsByTagName("h3n");
-							yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
-						}
-						if(depth > 4) {
-							var y = x[sutta].getElementsByTagName("h4");
-							if (y.length > 1) {
-								var zn = y[section].getElementsByTagName("h4n");
-								zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
-							}
-						}
-					}
-				}
-			}
-		}
-
-		var placen = convtitle(nikaya,book,vna,wna,xna,yna,zna,type);
-
-        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()">go</span></p>';
-    }
-    document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
-    document.getElementById('mafbc').innerHTML += finout;
-    document.getElementById('maf').scrollTop = 0;
-}
- 
-function getDppnData(link){
-	var dppnf = 'etc/XML2/'+link.split('/')[0]+'.xml';
-
-	var xmlhttp = new window.XMLHttpRequest();
-	xmlhttp.open("GET", dppnf, false);
-	xmlhttp.send(null);
-	var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var data = ' ' + xmlDoc.getElementsByTagName('entry')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
-	return data;
-}

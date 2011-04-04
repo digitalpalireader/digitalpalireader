@@ -2,5 +2,5 @@ This is the SourceForge archive for the Digital Pali Reader.  You will find the 
 
 The latest version is 1.0b23 and the latest commit message is:
 
-fixed SN bug stopping indexing and giving wrong shorthand refs
+fixed help, permalinks, added options for PED links, DPPN in titles, fixed DPR as-you-type for only when typing (not on button or enter)
 
