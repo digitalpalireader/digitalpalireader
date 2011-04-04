@@ -1565,7 +1565,18 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { /
 		break;
 		case 's':
 			if(hier != 'm') return;
-			no = (book+1) + '.' + smlist[vagga][sutta][section];
+			switch (true) {
+				case (book > 3):
+					vagga += 10;
+				case (book > 2):
+					vagga += 13;
+				case (book > 1):
+					vagga += 10;
+				case (book > 0):
+					vagga += 11;
+				break;
+			}
+			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
 		break;
 	}
 	return no;

@@ -364,7 +364,7 @@ function importXMLindex() {
 	
 	
 	var DshowH = false; // dev tool
-	//DshowH = true; // dev tool
+	DshowH = true; // dev tool
 	
 	document.activeElement.blur();
 
