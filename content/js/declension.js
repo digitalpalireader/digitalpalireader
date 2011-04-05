@@ -37,7 +37,7 @@
 
 	// masc ii
 
-	prem.push(['i',1,0,'i']);
+	prem.push(['i',0,0,'i']);
 	prem.push(['ina.m',1,0,'']);
 
 	// masc u
@@ -53,7 +53,7 @@
 
 	// masc uu
 
-	prem.push(['u',1,0,'u']);
+	prem.push(['u',0,0,'u']);
 
 	// nt. a
 	prem.push(['aani',1,2,'']);
@@ -63,6 +63,7 @@
 	prem.push(['uuni',1,2,'']);
 	
 	// f. aa
+	prem.push(['a',0,0,'a']);
 	prem.push(['aayo',1,0,'']);
 	prem.push(['aahi',1,0,'']);
 	prem.push(['aabhi',1,0,'']);

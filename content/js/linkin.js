@@ -72,6 +72,8 @@ function postout(input,divclicked,frombox)
 var G_illegalCompoundBreak = /[^aiueomn][^aiueo]/; // this assumes that a compound has to break at a vowel, nigahita or n.
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
+	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
+
 	var matchedword;
 	var fullmatch;
 	var fullnames;
@@ -81,6 +83,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		partnames = [];
 		shortdefpre = [];
 		matchedword = findmatch(oneword); // check for a single match
+		if(devCheck == 2 && matchedword) return true;
 	}
 	else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart,null,parts.length); }  // check for an ending match
 	
@@ -92,6 +95,9 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 			G_shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
 		}
 		else { G_shortdefpost.push(shortdefpre.join('$')); }
+		if(devCheck == 2) {
+			if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
+			else window.dump('*');
 	}
 	
 	var partword;
@@ -115,6 +121,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		}
 		
 	}
+	return false;
 	// alert(parts + ' | ' + partnames + ' | ' + G_outwords);
 }
 
@@ -122,6 +129,11 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 
 var notpart = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning, 3 means allowed only at the end;
 notpart['a'] = 2;
+notpart['aa'] = 2;
+notpart['i'] = 1;
+notpart['ii'] = 1;
+notpart['u'] = 1;
+notpart['uu'] = 1;
 notpart['ko'] = 1;
 notpart['ka'] = 2;
 notpart['ya'] = 2;
@@ -133,9 +145,11 @@ notpart['hi'] = 1;
 notpart['ha'] = 3;
 //notpart['ca'] = 2;
 notpart['ba'] = 1;
+notpart['bha'] = 1;
 notpart['ma'] = 1;
 notpart['la'] = 1;
 notpart['nu'] = 3;
+notpart['se'] = 1;
 notpart['saa'] = 1;
 notpart['saz1'] = 1;
 notpart['saz2'] = 1;
@@ -143,7 +157,6 @@ notpart['saz4'] = 1;
 notpart['suz1'] = 1;
 notpart['suz2'] = 2;
 notpart['suz3'] = 2;
-notpart['aa'] = 2;
 notpart['na'] = 2;
 notpart['maa'] = 2;
 
@@ -168,8 +181,9 @@ specsuf["idha"] = '0/3208^idha^0#idha#';
 
 function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
+	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
 	if ((notpart[oneword] == 2 && lastpart) || (notpart[oneword] == 1 && (lastpart || nextpart)) || (notpart[oneword] == 3 && nextpart)) { return null; }
-
+	//if((lastpart || nextpart) && oneword.length == 1 && !/[na]/.exec(oneword)) return null;
 	if(!nextpart) { // don't do stem matching on compound parts
 
 		var pra,prb,prc,prd,pre,prf;
@@ -333,7 +347,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			var aiueo1 = /[aiueo]/.exec(oneword.charAt(oneword.length-1));
 			
-			if (aiu1 && !aiu2) // check for shortened vowels, lengthen
+			if (aiu1 && !aiu2 && oneword.length > 2) // check for shortened vowels, lengthen
 			{
 				if (!notpart[oneword+aiu1]) {
 					var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,partslength,1);
@@ -343,7 +357,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}				
 
-			if (aiueo1 && !aiu2) 
+			if (aiueo1 && !aiu2 && oneword.length > 2) 
 			{
 				// check for lost this vowel because next vowel, add 'a,i,u' (bhaddekarattassa, pa~ncupaadaanakkhandhaa)
 				
@@ -366,7 +380,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					} 
 				}
 			}
-			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u') // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
+			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u' && oneword.length > 2) // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
 			{
 				if (!notpart[oneword.slice(0,-1)+'a']) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,2);
@@ -376,7 +390,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}				
 
-			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a') // check for doubled nextpart, removed this part (vuccata-avuso)
+			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a' && oneword.length > 2) // check for doubled nextpart, removed this part (vuccata-avuso)
 			{
 				if (!notpart[oneword.slice(0,-1)+'i']) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,2);
@@ -405,7 +419,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
 				if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
 			}
-			else if (oneword.substring(oneword.length-2,oneword.length) == '~n') 
+			else if (oneword.substring(oneword.length-2,oneword.length) == '~n' && oneword.length > 3) 
 			{
 				var trickmatch = findmatch(oneword.substring(0,oneword.length-2),lastpart,nextpart,partslength,1);
 				if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
@@ -556,7 +570,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 // do this if compound part or end
 
 	// tricks
-		if (res.length == 0 && resn.length == 0 && !resy && trick != 1) { // allow from certain tricks
+		if (res.length == 0 && resn.length == 0 && !resy && trick != 1 && oneword.length > 2) { // allow from certain tricks
 			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
 			if (aiu1 && oneword.charAt(0) == oneword.charAt(1)) // check for lengthened vowels, shorten
 			{
@@ -569,7 +583,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			}				
 		}
 
-		if (res.length == 0 && resn.length == 0 && !resy && !trick) {
+		if (res.length == 0 && resn.length == 0 && !resy && !trick && oneword.length > 2) {
 
 			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
 			var aiu2 = /[aiu]/.exec(oneword.charAt(1));
@@ -621,7 +635,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		if (res.length != 0) { for (var i in res) { altarray.push(res[i][1] + '^' + res[i][0] + '^0' + (resy ? '^'+resy : '')); } }
 		if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j][1] + '^' + resn[j][0] + '^1' + (resy ? '^'+resy : '')); } }
 	}
-	if(res.length == 0 && resn.length == 0 && !resy) { return null; }
+	if(res.length == 0 && resn.length == 0 && !resy) { return; }
 	return(Array(oneword.replace(/`$/,''),altarray.join('#'),resy));  // add oneword to the beginning to let us put the word together later
 }		
 

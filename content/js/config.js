@@ -54,11 +54,14 @@ cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
 cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
 cfg['translits'] = parseInt(getMiscPref('translits'));
+
 cfg['showPages'] = getMiscPref('showPages');
 cfg['showVariants'] = getMiscPref('showVariants');
 cfg['showPermalinks'] = getMiscPref('showPermalinks');
 cfg['showNames'] = getMiscPref('showNames');
 cfg['showPedLinks'] = getMiscPref('showPedLinks');
+
+cfg['altlimit'] = getMiscPref('altlimit');
 
 cfg['cpanel'] = getMiscPref('cpanel');
 cfg['cp1'] = getMiscPref('cp1');
@@ -113,13 +116,16 @@ function getconfig() {
 	cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
 	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
 	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-	cfg['translits'] = parseInt(cfg['translits']); 
+	cfg['translits'] = parseInt(cfg['translits']);
+	 
 	cfg['showPages'] = getMiscPref('showPages');
 	cfg['showVariants'] = getMiscPref('showVariants');	
 	cfg['showPermalinks'] = getMiscPref('showPermalinks');	
 	cfg['showNames'] = getMiscPref('showNames');
 	cfg['showPedLinks'] = getMiscPref('showPedLinks');
 
+	cfg['altlimit'] = getMiscPref('altlimit');
+	
 	cfg['cpanel'] = getMiscPref('cpanel');
 	cfg['cp1'] = getMiscPref('cp1');
 	cfg['cp2'] = getMiscPref('cp2');
@@ -302,6 +308,7 @@ function loadOptions() {
 	mafaout += '</tr><tr>';
 		mafaout += '<td colspan=3><hr /><form name="miscform">';
 			mafaout += '<p><b>Options:</b></p>';
+			mafaout += '<p>Maximum number of alternatives to show in compound analysis:  <input type=input size=3 id="altlimit" value="'+cfg['altlimit']+'">';
 			mafaout += '<p>Dictionary search as you type <input type=checkbox id="autodict" '+cfg['autodict']+'>';
 			mafaout += '<p>Show: <input type=checkbox id="showPages" '+cfg['showPages']+'> page numbers&nbsp; <input type=checkbox id="showVariants" '+cfg['showVariants']+'> variant readings&nbsp; <input type=checkbox id="showPermalinks" '+cfg['showPermalinks']+'> permalinks (<span class="hovershow pointer">☸</span>)&nbsp; <input type=checkbox id="showNames" '+cfg['showNames']+'> DPPN title links&nbsp; <input type=checkbox id="showPedLinks" '+cfg['showPedLinks']+'> links in PED entries';
 			mafaout += '<p>Show translations <input type=checkbox id="ctrans" '+cfg['ctrans']+' onclick="this.checked==true ? document.getElementById(\'catiul\').style.display = \'block\' : document.getElementById(\'catiul\').style.display = \'none\';">';

@@ -47,12 +47,14 @@ mPrefs.push("catiloc"); mPrefVals.push("<none>");
 mPrefs.push("autodict"); mPrefVals.push("unchecked");
 mPrefs.push("bkgimg"); mPrefVals.push("checked");
 mPrefs.push("translits"); mPrefVals.push("0");
+
 mPrefs.push("showPages"); mPrefVals.push("unchecked");
 mPrefs.push("showVariants"); mPrefVals.push("checked");
 mPrefs.push("showPermalinks"); mPrefVals.push("checked");
 mPrefs.push("showNames"); mPrefVals.push("checked");
 mPrefs.push("showPedLinks"); mPrefVals.push("checked");
 
+mPrefs.push('altlimit'); mPrefVals.push("altlimit");
 
 
 if (ioCheck) {
