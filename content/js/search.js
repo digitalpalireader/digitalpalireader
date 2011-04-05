@@ -1,4 +1,6 @@
-var starttime;
+var G_searchStartTime;
+
+var G_uniRegExp = /[aiueokgcjtdnpbmyrlvshāīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶ]/;
 
 function checkGetstring(getstring) {
 
@@ -55,7 +57,7 @@ function searchTipitaka() {
 	starttime = starttime.getTime();
 
 
-	document.form.usearch.value = toVel(document.form.isearch.value); 
+	document.form.usearch.value = toUni(document.form.isearch.value); 
 	moves(1);
 	scrollToId('search',0);
 	clearDivs('search');
@@ -747,11 +749,11 @@ function createTables(xmlDoc,hiert)
 
 										l = tempexword[t].length;
 										for(var i=0; i<l; i++) {
-											while (tempexword[t][i].charAt(0).search(/[a-zA-Z.~]/) == -1) {
-												tempexword[t][i] = tempexword[t][i].substring(1);
+											while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
+											tempexword[t][i] = tempexword[t][i].substring(1);
 											}
-											while (tempexword[t][i].charAt(tempexword[t][i].length-1).search(/[a-zA-Z]/) == -1) {
-												tempexword[t][i] = tempexword[t][i].substring(0,tempexword[t][i].length-1);
+											while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
+												tempexword[t][i] = tempexword[t][i].slice(0,-1);
 											}
 										}
 									}
@@ -852,6 +854,7 @@ function createTables(xmlDoc,hiert)
 											aftermex = ''; 
 											postpara += ' ';
 										}
+	                                    //window.dump(beforem+gotstring+aftermex);
 										tempexword.push((beforem+gotstring+aftermex).replace(/[‘’“”]/g,''));
 									}
 
@@ -862,11 +865,11 @@ function createTables(xmlDoc,hiert)
 									l = tempexword.length;
 									
 									for(var i=0; i<l; i++) {
-										while (tempexword[i].charAt(0).search(/[a-zA-Z.~]/) == -1) {
+										while (!G_uniRegExp.exec(tempexword[i].charAt(0))) {
 											tempexword[i] = tempexword[i].substring(1);
 										}
-										while (tempexword[i].charAt(tempexword[i].length-1).search(/[a-zA-Z]/) == -1) {
-											tempexword[i] = tempexword[i].substring(0,tempexword[i].length-1);
+										while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1))) {
+											tempexword[i] = tempexword[i].slice(0,-1);
 										}
 									}
 									

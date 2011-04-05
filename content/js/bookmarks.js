@@ -45,13 +45,13 @@ function bookmarkc(let)
 	// first move to the file using the DPR file
 	
     var dpr = readFile('DPB'+name);
-	var bmwa = dpr.split('#');
+	var bmwa = dpr[0].split('#');
 	getplace(bmwa);
 	importXML();
 
 	// next scroll using the DSC file
 	
-    var dsc = readFile('DPS'+name);
+    var dsc = readFile('DPS'+name)[0];
 	document.getElementById('maf').scrollTop = dsc;
 }
 
@@ -222,7 +222,7 @@ function bookmarkframe(refresh)
 				cookietotalno++;
 				name = ca[i].substring(3);
 				name = name.replace(/"/g, '`');
-				cloc = readFile(ca[i]).split('#');
+				cloc = readFile(ca[i])[0].split('#');
 				cloc[1]++;
 				cloc[2]++;
 				cloc[3]++;
@@ -261,7 +261,7 @@ function bookmarkframe(refresh)
             if (ca[i].substring(0,3) == 'DPD')
             {
 				name = ca[i].substring(3);
-				desc = toUni(readFile(ca[i]));
+				desc = toUni(readFile(ca[i])[0]);
 				desc = desc.replace(/::/g, ";");
 
 				html = 'html' + name;

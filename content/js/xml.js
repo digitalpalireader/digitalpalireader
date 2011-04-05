@@ -153,10 +153,8 @@ function importXML(labelsearch,para,isPL)
 	
 	// add to history
 	
-	if(ioCheck) {
-		addHistory(nikname[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
-		historyBox();
-	}
+	addHistory(nikname[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+	historyBox();
 
 	var theData = '';
 	
@@ -432,7 +430,7 @@ function importXMLindex() {
 			if (cfg['showNames'] == 'checked') {
 				// dppn title 'n'
 
-				tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+				tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 				if(tt.length < 2) continue;
 				dEI = getDppnEntry(tt);
 				if (dEI.length > 0) {
@@ -456,7 +454,7 @@ function importXMLindex() {
 
 					// dppn title 'n'
 					
-					tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+					tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 					if(tt.length < 2) continue;
 					dEI = getDppnEntry(tt);
 					if (dEI.length > 0) {
@@ -495,7 +493,7 @@ function importXMLindex() {
 
 						// dppn title 'n'
 						
-						tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+						tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 						if(tt.length < 2) continue;
 						dEI = getDppnEntry(tt);
 						if (dEI.length > 0) {
@@ -535,7 +533,7 @@ function importXMLindex() {
 						if (cfg['showNames'] == 'checked') {
 							// dppn title 'n'
 							
-							tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+							tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 							if(tt.length < 2) continue;
 							dEI = getDppnEntry(tt);
 							if (dEI.length > 0) {
@@ -576,7 +574,7 @@ function importXMLindex() {
 							if (cfg['showNames'] == 'checked') {
 								// dppn title 'n'
 								
-								tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+								tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 								if(tt.length < 2) continue;
 								dEI = getDppnEntry(tt);
 								if (dEI.length > 0) {
@@ -617,7 +615,7 @@ function importXMLindex() {
 								if (cfg['showNames'] == 'checked') {
 									// dppn title 'n'
 									
-									tt = theData.replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+									tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
 									if(tt.length < 2) continue;
 									dEI = getDppnEntry(tt);
 									if (dEI.length > 0) {

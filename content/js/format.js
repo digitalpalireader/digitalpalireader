@@ -290,7 +290,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 	var namen = [null,null,null,null,null,null];
 	if (cfg['showNames'] == 'checked') {
 		for (i in namea) {
-			var tt = namea[i].replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
+			var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
 			if(tt.length < 2) continue;
 			var dEI = getDppnEntry(tt);
 			if (dEI.length > 0) {

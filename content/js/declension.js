@@ -72,7 +72,7 @@
 	// f. i
 	prem.push(['iyo',1,0,'']);
 	prem.push(['iyaa',1,0,'']);
-	prem.push(['iya.m',1,0,3,'']); 
+	prem.push(['iya.m',1,0,'']); 
 	// f. ii
 	// f. u
 	prem.push(['uyo',1,0,'']);

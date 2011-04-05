@@ -1,7 +1,6 @@
 
 function outputDef(which,first,frombox)
 {
-
 	//alert(G_outwords);
 
 // create option dropdown

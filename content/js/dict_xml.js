@@ -76,7 +76,7 @@ function paliXML(file,which)
 			if(!tda || tda.length < 2) {
 				datat += ' ' + dataa[i];
 			}
-			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(toUni(tda), ' <a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
 			else datat += ' ' + dataa[i];
 			
 		}
@@ -377,7 +377,10 @@ function gettitle(num,mul,att,tik,niklist) { // get titles
 		var xna = ' ';
 		var yna = ' ';
 		var zna = ' ';
-		
+		var un = xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("han");
+
+		var una = (un[0].childNodes[0] ? un[0].textContent : ' ');
+
 		if(depth > 0) {
 			var u = xmlDoc.getElementsByTagName("h0");
 			if (u.length > 1) {
@@ -414,7 +417,7 @@ function gettitle(num,mul,att,tik,niklist) { // get titles
 			}
 		}
 
-		var placen = convtitle(nikaya,book,vna,wna,xna,yna,zna,type);
+		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,type);
 
         finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()">go</span></p>';
     }

@@ -98,6 +98,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart) {
 		if(devCheck == 2) {
 			if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
 			else window.dump('*');
+		}
 	}
 	
 	var partword;
@@ -139,6 +140,7 @@ notpart['ka'] = 2;
 notpart['ya'] = 2;
 notpart['ta'] = 2;
 notpart['va'] = 1;
+notpart['ve'] = 1;
 notpart['vaa'] = 1;
 notpart['da'] = 1;
 notpart['hi'] = 1;
@@ -183,62 +185,19 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
 	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
 	if ((notpart[oneword] == 2 && lastpart) || (notpart[oneword] == 1 && (lastpart || nextpart)) || (notpart[oneword] == 3 && nextpart)) { return null; }
+
 	//if((lastpart || nextpart) && oneword.length == 1 && !/[na]/.exec(oneword)) return null;
-	if(!nextpart) { // don't do stem matching on compound parts
 
-		var pra,prb,prc,prd,pre,prf;
-		var cwt = [];
-
-			
-		// ---------- create wtr variables for alternative stem matching ----------
-		
-		
-		for (var k = 0; k < oneword.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
-		{		
-			cwt[k] = oneword.substring(oneword.length-k,oneword.length);				
-		}
-		
-		
-		// ---------- stem matching and converting ----------
-		// this stuff is defined in declension.js
-		
-		var wtrN = []; // nouns, can be in compound
-		var wtrV = []; // verbs, can't
-		
-		for (var pr = 0;pr < prem.length; pr++)
-		{
-			preach = prem[pr];
-			pra = preach[0]; // ending to replace
-			prb = pra.length; // size of ending
-			prc = preach[1]; // find offset (positive means smaller cut)
-			prd = preach[2]; // min. length for change
-			pre = preach[3]; // new ending if any
-			prf = preach[4]; // is a verb?
-
-
-			if (cwt[prb] == pra && oneword.length > (prb + prd)) 
-			{
-				var wtrone = oneword.substring(0, oneword.length-(prb-prc)) + pre;
-
-				if ((notpart[wtrone] == 2 && lastpart) || (notpart[wtrone] == 1 && (lastpart || nextpart))) { continue; }
-
-				if (prf) { wtrV.push(wtrone); }
-				else { 
-					wtrN.push(wtrone); 
-					if(/[aiu]/.exec(wtrone.charAt(wtrone.length-1))) { // long vowels
-						wtrN.push(wtrone+wtrone.charAt(wtrone.length-1));
-					}
-				}
-			}
-			
-		}
-	}
 
 	var res = [];
 	var resn = [];
 	var resy;
 
+
+
 // exact maches
+
+	// PED matches
 
 	if (typeof(mainda[oneword]) == 'object')
 	{
@@ -252,7 +211,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		}
 	}
 
-// concise matches
+	// concise matches
 	
 	var resy = '';
 
@@ -264,267 +223,141 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		resy = irregda[oneword];
 	}
 
-	if(!lastpart && !nextpart) {
-		 
-// do this if non-compound
-
-		// verbal & nominal declensions			
-
-		var wtr = wtrN.concat(wtrV);
-
-		if (res.length == 0) 
-		{				
-			for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
-			{			
-				var temp = wtr[b];
-				if (mainda[temp] && !indeclinable[temp]) 
-				{			
-					for (i in mainda[temp]) {
-						res.push([temp,mainda[temp][i]]); 
-					}
-				}
-			}
-		}
-			
-	// concise variants
-
-		if (!resy)
-		{
-			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{				
-
-				var temp = wtr[b];
-				
-				if (yt[temp] && !resy && !indeclinable[temp]) 
-				{					
-					resy = temp; // for matching the dictionary entry in the output
-				}						
-			}
-		}
-
-
 	// DPPN matches
 
-		if (nameda[oneword]) 
-		{					
-			resn.push([oneword,nameda[oneword]]);
-		}
-
-		if (resn.length == 0)
-		{
-			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{				
-				if (nameda[wtr[b]]) 
-				{					
-					resn.push([wtr[b],nameda[wtr[b]]]);
-				}
-			}
-		}
-		if(res.length == 0 && resn.length == 0 && !resy) {
-			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
-			{				
-				if (G_manualCompoundDec[wtr[b]]) 
-				{					
-					manualCompound(wtr[b]);
-					return;
-				}
-			}
-		}
+	if (nameda[oneword]) 
+	{					
+		resn.push([oneword,nameda[oneword]]);
 	}
 
-	if(nextpart) { 
+	if(res.length == 0 && resn.length == 0 && !resy) {
 
-// do this if compound part (not end)
+	// declensions
 
-		// tricks
+		if(!nextpart) { // don't do stem matching on compound parts
 
-		if (res.length == 0 && resn.length == 0 && !resy && !trick) {
-			var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
-			var aiu2 = /[aiu]/.exec(nextpart.charAt(0));
-			
-			var aiu3 = /[aiu]/.exec(oneword.charAt(0));
-			var aiu4 = /[aiu]/.exec(oneword.charAt(1));
+			var pra,prb,prc,prd,pre,prf;
+			var cwt = [];
 
-			var aiueo1 = /[aiueo]/.exec(oneword.charAt(oneword.length-1));
-			
-			if (aiu1 && !aiu2 && oneword.length > 2) // check for shortened vowels, lengthen
-			{
-				if (!notpart[oneword+aiu1]) {
-					var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,partslength,1);
-					if (trickmatch) { 
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
-					} 
-				}
-			}				
-
-			if (aiueo1 && !aiu2 && oneword.length > 2) 
-			{
-				// check for lost this vowel because next vowel, add 'a,i,u' (bhaddekarattassa, pa~ncupaadaanakkhandhaa)
 				
-				if (!notpart[oneword.slice(0,-1)+'a']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
-					} 
-				}
-				if (!notpart[oneword.slice(0,-1)+'i']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
-					} 
-				}
-				if (!notpart[oneword.slice(0,-1)+'u']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
-					} 
-				}
-			}
-			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u' && oneword.length > 2) // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
-			{
-				if (!notpart[oneword.slice(0,-1)+'a']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
-					} 
-				}
-			}				
-
-			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a' && oneword.length > 2) // check for doubled nextpart, removed this part (vuccata-avuso)
-			{
-				if (!notpart[oneword.slice(0,-1)+'i']) {
-					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
-					} 
-					if (!notpart[oneword.slice(0,-1)+'u']) {
-						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,2);
-						if (trickmatch) { 
-							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
-						} 
-					}
-
-				}
-			}				
-
-			// compounded conjugations, sandhi
+			// ---------- create wtr variables for alternative stem matching ----------
 			
-			if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) != '.' && oneword.length > 2) 
-			{
-				var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
-				if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')); } 
-			}
-			else if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
-			{
-				var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
-				if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
-			}
-			else if (oneword.substring(oneword.length-2,oneword.length) == '~n' && oneword.length > 3) 
-			{
-				var trickmatch = findmatch(oneword.substring(0,oneword.length-2),lastpart,nextpart,partslength,1);
-				if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
-				else { // try indeclinables
-					trickmatch = findmatch(oneword.substring(0,oneword.length-2)+'.m',lastpart,nextpart,partslength,1);
-					if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
-				}
+			
+			for (var k = 0; k < oneword.length; k++) //define sub-cut for analysis (length-k,wt[i].length) and remaining string (0,length-k)
+			{		
+				cwt[k] = oneword.substring(oneword.length-k,oneword.length);				
 			}
 			
-		}
-		
-	
-		if (!lastpart) { 
-		
-		// do this if first compound part
-		
-			if (res.length == 0 && !trick) {
-				// adding the ` for special prefix only words
-				
-				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,partslength,1);
-				if (trickmatch) { return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : ''))];  }
-
-			}
-		}
-		else { 
 			
-		// do this if not first compound part
+			// ---------- stem matching and converting ----------
+			// this stuff is defined in declension.js
+			
+			var wtrN = []; // nouns, can be in compound
+			var wtrV = []; // verbs, can't
+			
+			for (var pr = 0;pr < prem.length; pr++)
+			{
+				preach = prem[pr];
+				pra = preach[0]; // ending to replace
+				prb = pra.length; // size of ending
+				prc = preach[1]; // find offset (positive means smaller cut)
+				prd = preach[2]; // min. length for change
+				pre = preach[3]; // new ending if any
+				prf = preach[4]; // is a verb?
 
 
-		}
-		
-	}
-	else { 
-		
-// do this if compound end or non-compound
+				if (cwt[prb] == pra && oneword.length > (prb + prd)) 
+				{
+					var wtrone = oneword.substring(0, oneword.length-(prb-prc)) + pre;
 
-	// special suffixes
+					if ((notpart[wtrone] == 2 && lastpart) || (notpart[wtrone] == 1 && (lastpart || nextpart))) { continue; }
 
-		if (res.length == 0 && resn.length == 0 && !resy)
-		{
-
-			for (var tempsuf = 5; tempsuf > 0; tempsuf--) {
-				var cutsuf = oneword.substring(oneword.length - tempsuf);
-				//
-				if (specsuf[cutsuf]) {
-					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2],lastpart,null,partslength);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
-					if (desuf) {
-						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(specsuf[cutsuf].split('#')[3] ? specsuf[cutsuf].split('#')[3] : '') +'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]]; // manually add the two part "compound"
-						return outsuf;
+					if (prf) { wtrV.push(wtrone); }
+					else { 
+						wtrN.push(wtrone); 
+						if(/[aiu]/.exec(wtrone.charAt(wtrone.length-1))) { // long vowels
+							wtrN.push(wtrone+wtrone.charAt(wtrone.length-1));
+						}
 					}
 				}
-			}			
-		}		
-			
-	}
-	
-	if(!lastpart && nextpart) {
-
-// do this if compound beginning
-	
-
-	}
-	
-	if(lastpart && !nextpart) {
-
-// do this if compound end
-	
-		// nominal declensions			
-
-		if (res.length == 0) 
-		{				
-			for (var b = 0; b < wtrN.length; b++) // check through wtrN variants that we set at the beginning
-			{			
-				var temp = wtrN[b];
-				if (mainda[temp] && !indeclinable[temp]) 
-				{			
-					for (i in mainda[temp]) {
-						res.push([temp,mainda[temp][i]]); 
-					}
-				}
-			}
-		}
-
-	// concise variants
-
-		if (!resy)
-		{
-			for (var b = 0; b < wtrN.length; b++) // b for alternative types wtrN
-			{				
-
-				var temp = wtrN[b];
 				
-				if (yt[temp] && !resy && !indeclinable[temp]) 
-				{					
-					resy = temp; // for matching the dictionary entry in the output
-				}						
 			}
 		}
-		
-		if(partslength == 1) { // verbs in "compounds"
+
+		if(!lastpart && !nextpart) {
+			 
+	// verbal & nominal declensions			
+
+			var wtr = wtrN.concat(wtrV);
+			
+		// PED declensions
+
 			if (res.length == 0) 
 			{				
-				for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
+				for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
 				{			
-					var temp = wtrV[b];
+					var temp = wtr[b];
+					if (mainda[temp] && !indeclinable[temp]) 
+					{			
+						for (i in mainda[temp]) {
+							res.push([temp,mainda[temp][i]]); 
+						}
+					}
+				}
+			}
+				
+		// concise declensions
+
+			if (!resy)
+			{
+				for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+				{				
+
+					var temp = wtr[b];
+					
+					if (yt[temp] && !resy && !indeclinable[temp]) 
+					{					
+						resy = temp; // for matching the dictionary entry in the output
+					}						
+				}
+			}
+
+		// DPPN declensions
+
+			if (resn.length == 0)
+			{
+				for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+				{				
+					if (nameda[wtr[b]]) 
+					{					
+						resn.push([wtr[b],nameda[wtr[b]]]);
+					}
+				}
+			}
+			
+		// check for declinable manual compounds
+			
+			if(res.length == 0 && resn.length == 0 && !resy) {
+				for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
+				{				
+					if (G_manualCompoundDec[wtr[b]]) 
+					{					
+						manualCompound(wtr[b]);
+						return;
+					}
+				}
+			}
+		}
+		else if(!nextpart) {
+		
+	// compound endings only get nominal declensions
+
+
+			if (res.length == 0) 
+			{				
+				for (var b = 0; b < wtrN.length; b++) // check through wtrN variants that we set at the beginning
+				{			
+					var temp = wtrN[b];
 					if (mainda[temp] && !indeclinable[temp]) 
 					{			
 						for (i in mainda[temp]) {
@@ -538,10 +371,10 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (!resy)
 			{
-				for (var b = 0; b < wtrV.length; b++) // b for alternative types wtrV
+				for (var b = 0; b < wtrN.length; b++) // b for alternative types wtrN
 				{				
 
-					var temp = wtrV[b];
+					var temp = wtrN[b];
 					
 					if (yt[temp] && !resy && !indeclinable[temp]) 
 					{					
@@ -549,82 +382,267 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					}						
 				}
 			}
-		}
-		
-		// do this if first compound part
-		
-			if (res.length == 0 && !trick) {
-				// adding the ` for special suffix only words
-				var trickmatch = findmatch('`'+oneword,lastpart,nextpart,partslength,1);
-				if (trickmatch) { 
-					return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')) + '$'];  
-				}
-
-			}
-
-	
-	}	
-	
-	if(lastpart) { 
-
-// do this if compound part or end
-
-	// tricks
-		if (res.length == 0 && resn.length == 0 && !resy && trick != 1 && oneword.length > 2) { // allow from certain tricks
-			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
-			if (aiu1 && oneword.charAt(0) == oneword.charAt(1)) // check for lengthened vowels, shorten
-			{
-				if (!notpart[oneword.substring(1)]) {
-					var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1);
-					if (trickmatch) {
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
-					} 
-				}
-			}				
-		}
-
-		if (res.length == 0 && resn.length == 0 && !resy && !trick && oneword.length > 2) {
-
-			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
-			var aiu2 = /[aiu]/.exec(oneword.charAt(1));
-			var aiu3 = /[aiu]/.exec(lastpart.charAt(lastpart.length-1));
 			
+			if(partslength == 1) { // verbs in "compounds"
+				if (res.length == 0) 
+				{				
+					for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
+					{			
+						var temp = wtrV[b];
+						if (mainda[temp] && !indeclinable[temp]) 
+						{			
+							for (i in mainda[temp]) {
+								res.push([temp,mainda[temp][i]]); 
+							}
+						}
+					}
+				}
 
-			if (aiu3 && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1)
-			{
+			// concise variants
+
+				if (!resy)
+				{
+					for (var b = 0; b < wtrV.length; b++) // b for alternative types wtrV
+					{				
+
+						var temp = wtrV[b];
 						
-				// check for lost this vowel because of last vowel, add 'a,i,u' (cakkhundriya.m)
-				
-				if (!notpart['a'+oneword]) {
-					var trickmatch = findmatch('a'+oneword,lastpart,nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
-					} 
+						if (yt[temp] && !resy && !indeclinable[temp]) 
+						{					
+							resy = temp; // for matching the dictionary entry in the output
+						}						
+					}
 				}
-				if (!notpart['i'+oneword]) {
-					var trickmatch = findmatch('i'+oneword,lastpart,nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
-					} 
-				}
-				if (!notpart['u'+oneword]) {
-					var trickmatch = findmatch('u'+oneword,lastpart,nextpart,partslength,2);
-					if (trickmatch) { 
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
-					} 
-				}
-			}				
-
-
-
-			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
-			{
-				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
-				if (trickmatch) { return Array(oneword.charAt(0) + '-' + trickmatch[0], '0^' + oneword.charAt(0) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); } 
 			}
 		}
 	}
 
+// special suffixes
+
+	if (res.length == 0 && resn.length == 0 && !resy && !nextpart)
+	{
+
+		for (var tempsuf = 5; tempsuf > 0; tempsuf--) {
+			var cutsuf = oneword.substring(oneword.length - tempsuf);
+			//
+			if (specsuf[cutsuf]) {
+				var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+specsuf[cutsuf].split('#')[2],lastpart,null,partslength);  // run find function on desuffixed word, with optional addition (specsuf[cutsuf].split('#')[2])
+				if (desuf) {
+					var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(specsuf[cutsuf].split('#')[3] ? specsuf[cutsuf].split('#')[3] : '') +'-'+specsuf[cutsuf].split('#')[1], desuf[1] + '@'+ specsuf[cutsuf].split('#')[0], (desuf[2] ? desuf[2] + '$' : '') + specsuf[cutsuf].split('#')[1]]; // manually add the two part "compound"
+					return outsuf;
+				}
+			}
+		}			
+	}		
+
+
+
+// tricks
+	if(res.length == 0 && resn.length == 0 && !resy) {
+		if(nextpart) { 
+
+		// do this if compound part (not end)
+
+			if (res.length == 0 && resn.length == 0 && !resy && !trick) {
+				var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
+				var aiu2 = /[aiu]/.exec(nextpart.charAt(0));
+				
+				var aiu3 = /[aiu]/.exec(oneword.charAt(0));
+				var aiu4 = /[aiu]/.exec(oneword.charAt(1));
+
+				var aiueo1 = /[aiueo]/.exec(oneword.charAt(oneword.length-1));
+				
+				if (aiu1 && !aiu2 && oneword.length > 2) // check for shortened vowels, lengthen
+				{
+					if (!notpart[oneword+aiu1]) {
+						var trickmatch = findmatch(oneword+aiu1,lastpart,nextpart,partslength,1);
+						if (trickmatch) { 
+							return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
+						} 
+					}
+				}				
+
+				if (aiueo1 && !aiu2 && oneword.length > 2) 
+				{
+					// check for lost this vowel because next vowel, add 'a,i,u' (bhaddekarattassa, pa~ncupaadaanakkhandhaa)
+					
+					if (!notpart[oneword.slice(0,-1)+'a']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+						} 
+					}
+					if (!notpart[oneword.slice(0,-1)+'i']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+						} 
+					}
+					if (!notpart[oneword.slice(0,-1)+'u']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,oneword.charAt(oneword.length-1)+nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',oneword.charAt(oneword.length-1)+nextpart]; 
+						} 
+					}
+				}
+				if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u' && oneword.length > 2) // check for doubled nextpart, removed this part (mohu-upasa.mhitaapi)
+				{
+					if (!notpart[oneword.slice(0,-1)+'a']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,'u'+nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','u'+nextpart]; 
+						} 
+					}
+				}				
+
+				if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a' && oneword.length > 2) // check for doubled nextpart, removed this part (vuccata-avuso)
+				{
+					if (!notpart[oneword.slice(0,-1)+'i']) {
+						var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
+						} 
+						if (!notpart[oneword.slice(0,-1)+'u']) {
+							var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,2);
+							if (trickmatch) { 
+								return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart]; 
+							} 
+						}
+
+					}
+				}				
+
+				// compounded conjugations, sandhi
+				
+				if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) != '.' && oneword.length > 2) 
+				{
+					var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
+					if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')); } 
+				}
+				else if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
+				{
+					var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
+					if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+				}
+				else if (oneword.substring(oneword.length-2,oneword.length) == '~n' && oneword.length > 3) 
+				{
+					var trickmatch = findmatch(oneword.substring(0,oneword.length-2),lastpart,nextpart,partslength,1);
+					if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
+					else { // try indeclinables
+						trickmatch = findmatch(oneword.substring(0,oneword.length-2)+'.m',lastpart,nextpart,partslength,1);
+						if (trickmatch) { return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')]; } 
+					}
+				}
+				
+			}
+			
+		
+			if (!lastpart) { 
+			
+			// do this if first compound part
+			
+				if (res.length == 0 && !trick) {
+					// adding the ` for special prefix only words
+					
+					var trickmatch = findmatch(oneword+'`',lastpart,nextpart,partslength,1);
+					if (trickmatch) { return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : ''))];  }
+
+				}
+			}
+			else { 
+				
+			// do this if not first compound part
+
+
+			}
+			
+		}
+		else {  // not nextpart, compound end or non-compound
+
+			if(lastpart) {
+
+			// do this if compound end
+			
+				if (res.length == 0 && !trick) {
+					// adding the ` for special suffix only words
+					var trickmatch = findmatch('`'+oneword,lastpart,nextpart,partslength,1);
+					if (trickmatch) { 
+						return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')) + '$'];  
+					}
+
+				}
+			}	
+		}
+	
+		if(!lastpart && nextpart) {
+
+	// do this if compound beginning
+		
+
+		}
+		
+
+		
+		if(lastpart) { 
+
+	// do this if compound part or end
+
+		// tricks
+			if (res.length == 0 && resn.length == 0 && !resy && trick != 1 && oneword.length > 2) { // allow from certain tricks
+				var aiu1 = /[aiu]/.exec(oneword.charAt(0));
+				if (aiu1 && oneword.charAt(0) == oneword.charAt(1)) // check for lengthened vowels, shorten
+				{
+					if (!notpart[oneword.substring(1)]) {
+						var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1);
+						if (trickmatch) {
+							return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$']; 
+						} 
+					}
+				}				
+			}
+
+			if (res.length == 0 && resn.length == 0 && !resy && !trick && oneword.length > 2) {
+
+				var aiu1 = /[aiu]/.exec(oneword.charAt(0));
+				var aiu2 = /[aiu]/.exec(oneword.charAt(1));
+				var aiu3 = /[aiu]/.exec(lastpart.charAt(lastpart.length-1));
+				
+
+				if (aiu3 && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1)
+				{
+							
+					// check for lost this vowel because of last vowel, add 'a,i,u' (cakkhundriya.m)
+					
+					if (!notpart['a'+oneword]) {
+						var trickmatch = findmatch('a'+oneword,lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+						} 
+					}
+					if (!notpart['i'+oneword]) {
+						var trickmatch = findmatch('i'+oneword,lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+						} 
+					}
+					if (!notpart['u'+oneword]) {
+						var trickmatch = findmatch('u'+oneword,lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart]; 
+						} 
+					}
+				}				
+
+
+
+				if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y') // check for consonant doubling - for maggappa.tipanno, gives magga-p-pa.tipanno
+				{
+					var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
+					if (trickmatch) { return Array(oneword.charAt(0) + '-' + trickmatch[0], '0^' + oneword.charAt(0) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); } 
+				}
+			}
+		}
+	}
 	
 	var altarray = [];
 
