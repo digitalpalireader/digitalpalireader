@@ -9,7 +9,7 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-function importXML(labelsearch,para)
+function importXML(labelsearch,para,isPL)
 {
 	if (hier == 't' && limitt()) { 
 		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
@@ -102,11 +102,12 @@ function importXML(labelsearch,para)
 	// permalink
 	
 	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + labelsearch.join('+').replace(/ /g, '_') : '');
-	
-	try {
-		window.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
-	}
-	catch(ex) {
+	if(!isPL) { //not coming from a permalink
+		try {
+			window.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
+		}
+		catch(ex) {
+		}
 	}
 	
 	// titles
@@ -364,7 +365,7 @@ function importXMLindex() {
 	
 	
 	var DshowH = false; // dev tool
-	//DshowH = true; // dev tool
+	DshowH = true; // dev tool
 	
 	document.activeElement.blur();
 
@@ -385,7 +386,7 @@ function importXMLindex() {
 	var permalink = 'chrome://digitalpalireader/content/index.htm?';
 	
 	try {
-		window.history.replaceState('Object', 'Title', permalink + 'loc='+niknumber[nikaya]+'.'+bookno+'.'+hier);
+		window.history.replaceState('Object', 'Title', permalink + 'loc='+nikaya+'.'+bookno+'.'+hier);
 	}
 	catch(ex) {
 	}

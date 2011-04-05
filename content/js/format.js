@@ -406,51 +406,6 @@ pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 
-function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, vagga, sutta should be -1 (0,1,2...)
-	
-	var no;
-	
-	switch (nik) {
-		case 'd':
-			no = vagga + 1;
-			switch (true) {
-				case (book == 2):
-					no += 10;
-				case (book > 0):
-					no += 13;
-				break;
-			}
-			if(sectlength > 1) no += '.' + (section+1)
-		break;
-		case 'm':
-			no = (sutta + 1) + (book*50) + (vagga*10);
-			if (book == 2 && vagga == 4) no += 2;
-			if(sectlength > 1) no += '.' + (section+1)
-		break;
-		case 'a':
-			if(hier != 'm') return;
-			no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
-		break;
-		case 's':
-			if(hier != 'm') return;
-			switch (true) {
-				case (book > 3):
-					vagga += 10;
-				case (book > 2):
-					vagga += 13;
-				case (book > 1):
-					vagga += 10;
-				case (book > 0):
-					vagga += 11;
-				break;
-			}
-			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
-		break;
-	}
-	return no;
-}
-
-
 function permalinkClick(link,url) {
 	copyToClipboard(link);
 	if(url) {

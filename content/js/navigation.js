@@ -11,6 +11,14 @@ nikname['x'] = "Vism";
 nikname['b'] = "AbhiS";
 nikname['g'] = "Gram";
 
+
+var G_nikShortName = [];
+G_nikShortName['DN'] = "d";
+G_nikShortName['MN'] = "m";
+G_nikShortName['SN'] = "s";
+G_nikShortName['AN'] = "a";
+G_nikShortName['KN'] = "k";
+
 var niknumber = new Array();
 niknumber['v'] = "0";
 niknumber['d'] = "1";
@@ -448,13 +456,13 @@ function getDppnEntry(term) {
 }
 
 
-function getLinkPlace() {
+function getLinkPlace() { // permalinks
 
 	var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
-	var place = [];
-	var para = null;
-	var query = null;
+	var place;
+	var para;
+	var query;
 	
 	// parse options
 	if(/^thai/.exec(options[0])) {
@@ -467,23 +475,180 @@ function getLinkPlace() {
 		var option = options[i].split('=');
 		if (option.length == 1 || option[0] == 'loc') {
 			place = (option[1] ? option[1]: option[0]);
-			if (place.search(/[^a-z0-9.]/) > -1) return;
+			if (/[^-a-zA-Z0-9.]/.exec(place)) return;
 			
 			place = place.split('.');
-
-			place[0] = niknumber[place[0]];
-
-			if (place.length == 8) getplace(place);
-			else if (place.length == 3) {
-				var index = option[1].split('.');
-				if (index.length == 2) {
-					getplace([index[0],parseInt(index[1]),0,0,0,0,0,index[2]]);
-				}
+			
+			if (place.length == 8) {
+				place[0] = niknumber[place[0]];
+				getplace(place);
+			}
+			else if (/[vdmaskyxbg]\.[0-9]+\.[mat]/.exec(option[1])) { // index
+				getplace([niknumber[place[0]],parseInt(place[1]),0,0,0,0,0,place[2]]);
 				importXMLindex();
+				return;
+			}
+			else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.exec(option[1])) { // shorthand
+				var outplace = getSuttaFromNumber(place);
+				if(!outplace) return;
+				getplace(outplace);
 			}
 		}
 		else if (option[0] == 'para') para = parseInt(option[1])-1;
 		else if (option[0] == 'query') query = option[1].replace(/_/g,' ').split('+');
 	}
-	if(place.length == 8) importXML(query,para);
+	if(place) importXML(query,para,1);
+}
+
+
+function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, vagga, sutta should be -1 (0,1,2...)
+	
+	var no;
+	
+	switch (nik) {
+		case 'd':
+			no = vagga + 1;
+			switch (true) {
+				case (book == 2):
+					no += 10;
+				case (book > 0):
+					no += 13;
+				break;
+			}
+			if(sectlength > 1) no += '.' + (section+1)
+		break;
+		case 'm':
+			no = (sutta + 1) + (book*50) + (vagga*10);
+			if (book == 2 && vagga == 4) no += 2;
+			if(sectlength > 1) no += '.' + (section+1)
+		break;
+		case 'a':
+			if(hier != 'm') return;
+			no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
+		break;
+		case 's':
+			if(hier != 'm') return;
+			switch (true) {
+				case (book > 3):
+					vagga += 10;
+				case (book > 2):
+					vagga += 13;
+				case (book > 1):
+					vagga += 10;
+				case (book > 0):
+					vagga += 11;
+				break;
+			}
+			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
+		break;
+	}
+	return no;
+}
+
+
+function getSuttaFromNumber(is) { // should be in format SN.1.1
+	
+	var nik,book,meta,volume,vagga,sutta,section,hiert;
+
+	// get att, tik
+	
+	if(/-[at]$/.exec(is[0])) {
+		hiert = is[0].split('-')[1];
+		is[0] = is[0].split('-')[0];
+	}
+	else hiert = 'm';
+	
+	nik = G_nikShortName[is[0]];
+	
+	var a1 = parseInt(is[1]);
+	var a2 = (is[2] ? parseInt(is[2]) : 1);
+	
+	book = 0;
+	
+	switch (nik) {
+		case 'd': // sutta.section to book.vagga.section
+			vagga = a1 - 1;
+			switch (true) {
+				case (a1 > 13):
+					vagga -= 13;
+					book++;
+				case (a1 > 23):
+					vagga -= 10;
+					book++;
+				break;
+			}
+			meta = 0;
+			volume = 0;
+			sutta = 0;
+			section = a2-1;
+		break;
+		case 'm': // sutta.section to book.vagga.sutta.section
+			sutta = a1 - 1;
+			vagga = Math.floor((sutta > 139 ? sutta-2 : sutta)/10);
+			sutta -= (vagga*10)
+			if (a1 > 142) sutta -= 2;
+			
+			book = Math.floor(vagga/5);
+			vagga -= book*5
+			
+			meta = 0;
+			volume = 0;
+			section = a2-1;
+		break;
+		case 'a':  // book.sutta to book.vagga.sutta.section
+			if(hiert != 'm') return;
+			book = a1 - 1;
+			var found = 0;
+			out:
+			for (vagga in amlist[book]) {
+				for(sutta in amlist[book][vagga]) {
+					for(section in amlist[book][vagga][sutta]) {
+						if (parseInt(amlist[book][vagga][sutta][section][0]) == a2 || (parseInt(amlist[book][vagga][sutta][section][0]) < a2 && parseInt(amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]) > a2)) {
+							found = 1;
+							break out;
+						}
+					}
+				}
+			}
+			if(found == 0) return;
+			meta = 0;
+			volume = 0;
+		break;
+		case 's':
+			if(hiert != 'm') return;
+			vagga = a1 - 1;
+			switch (true) {
+				case (a1 > 11):
+					vagga -= 11;
+					book++;
+				case (a1 > 21):
+					vagga -= 10;
+					book++;
+				case (a1 > 34):
+					vagga -= 13;
+					book++;
+				case (a1 > 44):
+					vagga -= 10;
+					book++;
+				break;
+			}
+			var found = 0;
+			out:
+			for(sutta in smlist[vagga]) {
+				for(section in smlist[vagga][sutta]) {
+					if (parseInt(smlist[vagga][sutta][section]) == a2) {
+						found = 1;
+						break out;
+					}
+				}
+			}
+			if(found == 0) return;
+			meta = 0;
+			volume = 0;
+		break;
+		default:
+			return;
+		break;
+	}
+	return [niknumber[nik],book,meta,volume,vagga,sutta,section,hiert];
 }
