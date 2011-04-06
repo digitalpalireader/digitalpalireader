@@ -495,7 +495,7 @@ function getLinkPlace() { // permalinks
 			}
 		}
 		else if (option[0] == 'para') para = parseInt(option[1])-1;
-		else if (option[0] == 'query') query = option[1].replace(/_/g,' ').split('+');
+		else if (option[0] == 'query') query = toUni(option[1]).replace(/_/g,' ').split('+');
 	}
 	if(place) importXML(query,para,1);
 }

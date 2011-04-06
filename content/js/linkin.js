@@ -519,10 +519,15 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
 					if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '')); } 
 				}
+				else if (/..ass$/.exec(oneword)) // assa as in dukkhassantakaaro
+				{
+					var trickmatch = findmatch(oneword.replace(/ss$/,''),lastpart,nextpart,partslength,1);
+					if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+				}
 				else if (/..[aiu][aiu]nam$/.exec(oneword)) // aana.m as in devaanamindo
 				{
 					var trickmatch = findmatch(oneword.replace(/[aiu]nam$/,''),lastpart,nextpart,partslength,1);
-					if (trickmatch) { return Array(trickmatch[0] + trickmatch[0].charAt(trickmatch[0].length-1)+'nam', trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
+					if (trickmatch) { return Array(oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$'); } 
 				}
 				else if (oneword.substring(oneword.length-2,oneword.length) == '~n' && oneword.length > 3) 
 				{

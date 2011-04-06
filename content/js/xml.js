@@ -101,7 +101,7 @@ function importXML(labelsearch,para,isPL)
 	
 	// permalink
 	
-	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + labelsearch.join('+').replace(/ /g, '_') : '');
+	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '');
 	if(!isPL) { //not coming from a permalink
 		try {
 			window.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
