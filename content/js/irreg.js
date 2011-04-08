@@ -442,6 +442,7 @@ irregda["hotha"] = "bhavati";
 irregda["homi"] = "bhavati";
 irregda["homa"] = "bhavati";
 irregda["hupeyya"] = "bhavati";
+
 irregda["jaaneyya"] = "jaanaati";
 irregda["ja~n~naa"] = "jaanaati";
 irregda["jaaneyyu.m"] = "jaanaati";
@@ -452,6 +453,11 @@ irregda["jaaneyyaami"] = "jaanaati";
 irregda["jaaneyyaama"] = "jaanaati";
 irregda["jaaniyaama"] = "jaanaati";
 irregda["jaanemu"] = "jaanaati";
+
+irregda["a~n~naasi"] = "jaanaati";
+irregda["~nassati"] = "jaanaati";
+irregda["~nassasi"] = "jaanaati";
+
 // removed: jaanaati = jaanaati
 irregda["jaananti"] = "jaanaati";
 irregda["jaanaasi"] = "jaanaati";
@@ -2217,31 +2223,20 @@ irregda['avocumhaa'] = 'vatti';
 // added
 
 irregda['yida.m'] = 'ida';
-irregda['nibbe.theta'] = 'nibbe.thita';
-irregda['kaasaava'] = 'kaasaaya'; // added
-irregda['najja'] = 'nadii'; // added
-irregda['pahaatabba'] = 'pahaana';
-irregda['braahma.nii'] = 'braahma.naz1';
-irregda['viiriya'] = 'viriya';
-irregda['vedaniiya'] = 'vedeti';
-irregda['paa.li'] = 'paali';
 irregda['yamaamase'] = 'yamati';
-irregda['upapajjanta'] = 'upapajjati';
-irregda['vedayati'] = 'vedeti'; 
 irregda['nti'] = 'iti'; 
 irregda['ahu'] = 'bhavati'; 
-irregda['kalevara'] = 'ka.lebara'; 
-irregda['ka.levara'] = 'ka.lebara'; 
 irregda['kalebara'] = 'ka.lebara'; 
-irregda['eta'] = 'etad';
-irregda['sammukhii'] = 'sammukha';
 irregda['viisa'] = 'viisati';
+irregda['eta'] = 'etad';
+irregda['raaja'] = 'raajaa';
 
 irregda['keci'] = 'koci';
 irregda['kaaci'] = 'koci';
 irregda['ki~nci'] = 'koci';
 irregda['kenaci'] = 'koci';
 irregda['kassaci'] = 'koci';
+irregda['abhinivissa'] = 'abhinivesa';
 
 // compounds
 
@@ -2251,6 +2246,28 @@ irregda['khv`'] = 'kho';
 irregda['khva`'] = 'kho';
 irregda['sva`'] = 'ta';
 irregda['yva`'] = 'ya';
+irregda['byanti`'] = 'vyanta';
+irregda['byantii`'] = 'vyanta';
 
 irregda['`mhi'] = 'atthi';
 irregda['`gaaminii'] = '`gaamii';
+
+// declinable irregular forms
+
+var irregdaDec = [];
+
+irregdaDec['upapajjanta'] = 'upapajjati';
+irregdaDec['vedayati'] = 'vedeti'; 
+irregdaDec['kalevara'] = 'ka.lebara'; 
+irregdaDec['ka.levara'] = 'ka.lebara'; 
+irregdaDec['sammukhii'] = 'sammukha';
+irregdaDec['nibbe.theta'] = 'nibbe.thita';
+irregdaDec['kaasaava'] = 'kaasaaya'; // added
+irregdaDec['najja'] = 'nadii'; // added
+irregdaDec['pahaatabba'] = 'pahaana';
+irregdaDec['braahma.nii'] = 'braahma.na0';
+irregdaDec['viiriya'] = 'viriya';
+irregdaDec['vedaniiya'] = 'vedeti';
+irregdaDec['paa.li'] = 'paali';
+irregdaDec['opaneyyika'] = 'opanayika';
+irregdaDec['da.t.thabba'] = 'dassati0';

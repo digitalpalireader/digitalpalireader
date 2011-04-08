@@ -1,7 +1,7 @@
 
 function outputDef(which,first,frombox)
 {
-	//alert(G_outwords);
+	//dalert(G_outwords + ' ' + G_shortdefpost);
 
 // create option dropdown
 	
@@ -96,17 +96,16 @@ function outputDef(which,first,frombox)
 	
 	var thisconcise = [];
 	var conciseoutput = '';
-
+	
 	if (G_shortdefpost[which]) {
-		thisconcise = G_shortdefpost[which].split('$'); 
-		
+		thisconcise = G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$'); 
+		//dalert(thisconcise);
 		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
 				
 		var concisedups = [];
 		for (x = 0; x < thisconcise.length; x++)
 		{
 			if (thisconcise[x].length == 0) { continue; }
-			
 			
 			var concisedefa = yt[thisconcise[x]];
 

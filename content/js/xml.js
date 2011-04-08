@@ -406,7 +406,8 @@ function importXMLindex() {
 	
 	var theData = "";
 	var theDatao = "";
-
+	var tmpData = '';
+	
 	bookfile = nikaya + book;
 		
 	var tmp = 0;

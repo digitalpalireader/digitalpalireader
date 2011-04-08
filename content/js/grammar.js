@@ -1,6 +1,6 @@
 // uses inflect.js, english.js
 
-function conjugate(word, dif, which) {
+function conjugate(word, id, which) {
 	
 	word = word.replace(/x/g,'"');
 	if(which) which = toUni(which.replace(/x/g,'"'));
@@ -37,7 +37,7 @@ function conjugate(word, dif, which) {
 	
 	var outNode = document.createElement('div');
 	
-	if(dif == 'dif') {
+	if(id == 'dif') {
 		clearDivs('dif');
 		document.getElementById('cdif').scrollTop = 0;
 		document.getElementById('cdif').scrollTop = 0;
@@ -46,7 +46,7 @@ function conjugate(word, dif, which) {
 	}
 	else {
 		outNode.innerHTML = '<div class="conj">'+out+'</div><div class="x" onclick="this.parentNode.innerHTML=null">x</div>';
-		document.getElementById(dif).appendChild(outNode);
+		document.getElementById(id).appendChild(outNode);
 	}	
 }
 

@@ -1,6 +1,6 @@
 var G_searchStartTime;
 
-var G_uniRegExp = /[aiueokgcjtdnpbmyrlvshāīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶ]/;
+var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶ]/;
 
 function checkGetstring(getstring) {
 
@@ -672,8 +672,8 @@ function createTables(xmlDoc,hiert)
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 							if (document.form.usearch.value.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
-							texttomatch = texttomatch.replace(/\^b\^/g, '');
-							texttomatch = texttomatch.replace(/\^eb\^/g, '');
+							//texttomatch = texttomatch.replace(/\^b\^/g, '');
+							//texttomatch = texttomatch.replace(/\^eb\^/g, '');
 
 							texttomatch = texttomatch.replace(/  */g, ' ');
 							texttomatch = texttomatch.replace(/''nti/g, 'n”ti');
@@ -749,6 +749,7 @@ function createTables(xmlDoc,hiert)
 
 										l = tempexword[t].length;
 										for(var i=0; i<l; i++) {
+											tempexword[t][i] = tempexword[i].replace(/\^e*b\^/g,'');
 											while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
 											tempexword[t][i] = tempexword[t][i].substring(1);
 											}
@@ -865,6 +866,7 @@ function createTables(xmlDoc,hiert)
 									l = tempexword.length;
 									
 									for(var i=0; i<l; i++) {
+										tempexword[i] = tempexword[i].replace(/\^e*b\^/g,'');
 										while (!G_uniRegExp.exec(tempexword[i].charAt(0))) {
 											tempexword[i] = tempexword[i].substring(1);
 										}
