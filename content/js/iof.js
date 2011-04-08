@@ -46,7 +46,6 @@ function readFile(aFileKey)
 		var data = [];
 		var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
 					  createInstance(Components.interfaces.nsIFileInputStream);
-		var charset = /* Need to find out what the character encoding is. Using UTF-8 for this example: */ "UTF-8";
 		var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
 						   .createInstance(Components.interfaces.nsIConverterInputStream);
 		fstream.init(file, -1, 0, 0);
@@ -137,23 +136,22 @@ function readExtFile(myDir)
 		var data = [];
 		var fstream = Components.classes["@mozilla.org/network/file-input-stream;1"].
 					  createInstance(Components.interfaces.nsIFileInputStream);
-		var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"].
-					  createInstance(Components.interfaces.nsIConverterInputStream);
+		var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
+						   .createInstance(Components.interfaces.nsIConverterInputStream);
 		fstream.init(file, -1, 0, 0);
 		is.init(fstream, charset, 1024, 0xFFFD);
-
 		is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
-		 
+
 		if (is instanceof Components.interfaces.nsIUnicharLineInputStream) {
 		  var line = {};
 		  var cont;
-		  while (cont) {
+		  do {
 			cont = is.readLine(line);
+
 			data.push(line.value);
-		  }
+		  } while (cont);
 		}
 		is.close(); // this closes fstream
-		
 		return (data);
 	}
 	catch(ex)
