@@ -16,43 +16,43 @@ function outputDef(which,first,frombox)
 
 		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
-		// sort compounds, first by number of parts (ascending), then by size of first part (descending) 
+		// sort compounds, first by number of parts (ascending), then by number of tricks (ascending), then by size of first part (descending) 
 
 		var sorta = [];
 		var sortb = [];
 		for (var b = 0; b < G_outwords.length; b++) 
 		{	
-			var lg = '0' + G_outwords[b].split('$')[0].split('-').length;
-			var left = '0' + G_outwords[b].split('$')[0].length - G_outwords[b].split('$')[0].split('-')[0].length;
+			var lg = '0' + G_outwords[b][0].split('-').length;
+			var left = '0' + G_outwords[b][0].length - G_outwords[b][0].split('-')[0].length;
 			while(lg.length < 5) lg = '0' + lg;
 			while(left.length < 5) left = '0' + left;
-			sorta.push(lg + ' ' + left + ' ' + G_outwords[b]);
+			sorta.push(lg + ' ' + G_outwords[b][2] + ' ' + left + ' ' + G_outwords[b][0]+'$'+G_outwords[b][1]+'!'+G_shortdefpost[b]);
 		}
 
 		sorta.sort();
-		
 		for (var b = 0; b < sorta.length; b++)
 		{	
 			var s = sorta[b].split(' ');
-			s.shift();
-			s.shift();
-			G_outwords[b] = s.join(' ');
+			s.splice(0,3);
+			G_outwords[b] = s.join(' ').split('!')[0].split('$');
+			G_shortdefpost[b] = s.join(' ').split('!')[1]
 		}
 		
 		// get the word names
 
 		for (var b = 0; b < G_outwords.length; b++)
 		{	
-			var outword = G_outwords[b].split('$')[0];
+			var outword = G_outwords[b][0];
 			document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>'; 
 		}
 	}
+	dalert(G_outwords);
 	
-	var owparts = G_outwords[which].split('$')[1].split('@');
+	var owparts = G_outwords[which][1].split('@');
 	
 	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
 	if(myConj[3]) { // if root form is found, set up conjugation
-		conjWord.form = G_outwords[which].split('$')[0].split('-').pop().replace(/"/g, 'x');
+		conjWord.form = G_outwords[which][0].split('-').pop().replace(/"/g, 'x');
 		conjWord.root = myConj[3].replace(/"/g, 'x');
 	}
 	
@@ -71,7 +71,7 @@ function outputDef(which,first,frombox)
 				// data[1] = pali word
 				// data[2] = category
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-			var dataout = toUni(G_outwords[which].split('$')[0].split('-')[c]); // get the part name from the names part :)
+			var dataout = toUni(G_outwords[which][0].split('-')[c]); // get the part name from the names part :)
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
 				case '0':

@@ -260,6 +260,7 @@ G_endings.push(['entu',0,6,'ati',1]);
 G_endings.push(['itvaa',0,0,'ati',1]); 
 G_endings.push(['etvaa',0,0,'ati',1]); 
 G_endings.push(['tvaa',0,0,'ti',1]); 
+G_endings.push(['aaya',1,0,'ti',1]); 
 G_endings.push(['tu.m',0,0,'ti',1]);
 
 G_endings.push(['imhaa',0,0,'',1]); // aorist
