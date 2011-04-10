@@ -436,7 +436,6 @@ function importXMLs(cnt)
 	
 	document.getElementById('plus').innerHTML = '-';
 	document.getElementById('plus').title = 'minimize search frame';
-	document.getElementById('plus').onclick = 'moves(0)';
 
 	if (cnt == 1) // whole tipitaka or multiple collections
 	{
@@ -1235,7 +1234,6 @@ function searchgo(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
 {
 
 	moves(0);
-	if (stringra) document.getElementById('plus').innerHTML = '<span class="abut obut" title="maximize search frame" onClick="moves(1)">+</span>';
 	var ssect = se;
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);

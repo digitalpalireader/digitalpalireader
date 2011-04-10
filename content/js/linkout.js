@@ -13,9 +13,35 @@ function outputDef(which,first,frombox)
 	var conjWord = [] // word to pass to conjugate
 	
 	if (G_outwords.length > 1 && first) {
+
 		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
 
-		for (var b = 0; b < G_outwords.length; b++)  // get the word names
+		// sort compounds, first by number of parts (ascending), then by size of first part (descending) 
+
+		var sorta = [];
+		var sortb = [];
+		for (var b = 0; b < G_outwords.length; b++) 
+		{	
+			var lg = '0' + G_outwords[b].split('$')[0].split('-').length;
+			var left = '0' + G_outwords[b].split('$')[0].length - G_outwords[b].split('$')[0].split('-')[0].length;
+			while(lg.length < 5) lg = '0' + lg;
+			while(left.length < 5) left = '0' + left;
+			sorta.push(lg + ' ' + left + ' ' + G_outwords[b]);
+		}
+
+		sorta.sort();
+		
+		for (var b = 0; b < sorta.length; b++)
+		{	
+			var s = sorta[b].split(' ');
+			s.shift();
+			s.shift();
+			G_outwords[b] = s.join(' ');
+		}
+		
+		// get the word names
+
+		for (var b = 0; b < G_outwords.length; b++)
 		{	
 			var outword = G_outwords[b].split('$')[0];
 			document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>'; 
@@ -150,7 +176,7 @@ function outputDef(which,first,frombox)
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else DPPNXML(hotlink);
-		if(moveat == 2) { moveframey('dif'); }
+		//if(moveat == 2) { moveframey('dif'); }
 	}
 }
 

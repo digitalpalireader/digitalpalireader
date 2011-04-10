@@ -139,7 +139,7 @@ function dictType(hard) {
 	switch (which) {
 		case 0:
 			var TheData = document.form.manual.value;
-			postout(TheData,0,(hard ? null : 1));
+			sendAnalysisToOutput(TheData,0,(hard ? null : 1));
 			break;
 		case 1:
 			pedsearchstart();

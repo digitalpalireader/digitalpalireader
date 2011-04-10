@@ -1,42 +1,46 @@
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 
-function preout(data,which) // calls text prep, then outputs it to preFrame
+function outputFormattedData(data,which) // calls text prep, then outputs it to preFrame
 {
 
 	G_lastcolour = 0; // reset colour changing
 
-	var inarray = preparepali(data,which);
+	var inarray = preparepali(data);
 		
 	var finout = inarray[0];
-	var convout = inarray[1].replace(/  *,/g, ',');
 
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.selectedIndex;
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;
-	
-	var transin;
-	var transout='';
-	if (hier == "m") { 
-		transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
-		if (transin) {
-			var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-			if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
-			transout += transin.join('&nbsp;');
-			document.getElementById('maftrans').innerHTML += transout; 
+	if(!which) { // not from textpad
+		var convout = inarray[1].replace(/  *,/g, ',');
+
+		var nikaya = document.form.nik.value;
+		var book = document.form.book.selectedIndex;
+		var meta = document.form.meta.selectedIndex;
+		var volume = document.form.volume.selectedIndex;
+		var vagga = document.form.vagga.selectedIndex;
+		var sutta = document.form.sutta.selectedIndex;
+		var section = document.form.section.selectedIndex;
+		
+		var transin;
+		var transout='';
+		if (hier == "m") { 
+			transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
+			if (transin) {
+				var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+				if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
+				transout += transin.join('&nbsp;');
+				document.getElementById('maftrans').innerHTML += transout; 
+			}
 		}
+		
+		var convDiv = document.createElement('div');
+		convDiv.setAttribute('id','convi');
+		convDiv.innerHTML = convout;
+		document.getElementById('mafbc').appendChild(convDiv);
 	}
 	
-	var convDiv = document.createElement('div');
-	convDiv.setAttribute('id','convi');
-	convDiv.innerHTML = convout;
 	var outDiv =  document.createElement('div');
 	outDiv.innerHTML = finout;
-	document.getElementById('mafbc').appendChild(convDiv);
 	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
 	
@@ -194,7 +198,7 @@ function formatuniout(data,which) { // prepare without links
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
 			if(!which) {// put it together as one link
-				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
+				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
 			}
 			finout += space;
 			convout += space;
@@ -246,7 +250,7 @@ function formatuniout(data,which) { // prepare without links
 			unioutb = uniouta[a];
 			//unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
-			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="postout(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a>' + space;
+			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a>' + space;
 			b++;
 		}
 	}
@@ -400,6 +404,11 @@ function shortenTitle(name,no) {
 	return name;
 }
 
+function analyzeTextPad() {
+	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
+	outputFormattedData('<p> '+document.getElementById('pad').value.replace(/\n/g,' ') + ' </p>',1); 
+}
 
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
@@ -473,3 +482,4 @@ function fadeOut(AID,id,speed) {
 	}
 	else document.getElementById(id).style.display='none'; 
 }
+

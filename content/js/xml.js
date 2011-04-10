@@ -240,7 +240,7 @@ function importXML(labelsearch,para,isPL)
 			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 		}
 	}
-	preout(theData);
+	outputFormattedData(theData);
 	//document.textpad.pad.value=theData;
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
@@ -656,6 +656,7 @@ function importXMLindex() {
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0;
+	moves(0);
 	if(moveat == 3) { moveframex(2); }
 }
 
@@ -726,6 +727,7 @@ function importXMLraw()
 	}
 
 	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
+
 }
 
 

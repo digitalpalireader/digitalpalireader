@@ -168,14 +168,24 @@ function moves(a) // search open / close
 	if (a == 1) { // open search
 		document.getElementById('plus').innerHTML = '-';
 		document.getElementById('plus').title = 'minimize search frame';
-		document.getElementById('plus').onclick = function() { moves(0) };
 		document.getElementById('search').style.display="block";
 	}
-	else { // close search
+	else if (a == 0) { // close search
 		document.getElementById('plus').innerHTML = '+';
 		document.getElementById('plus').title = 'maximize search frame';
-		document.getElementById('plus').onclick = function() { moves(1) };
 		document.getElementById('search').style.display="none";
+	}
+	else { // if open, close, if closed, open
+		if(document.getElementById('search').style.display == 'block') {
+			document.getElementById('plus').innerHTML = '+';
+			document.getElementById('plus').title = 'maximize search frame';
+			document.getElementById('search').style.display="none";
+		}
+		else { 
+			document.getElementById('plus').innerHTML = '-';
+			document.getElementById('plus').title = 'minimize search frame';
+			document.getElementById('search').style.display="block";
+		}
 	}
 }
 

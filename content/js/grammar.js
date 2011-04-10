@@ -301,7 +301,7 @@ function conjugateVerb(word) {
 						var splitverb = verb[pi][k];
 						var allthis = [];
 						for (l in splitverb) {
-							allthis.push(stem + (verbVoice != 'ca' ? verbAdd[0][m] : verbAdd[1][m]) + splitverb[l]).replace(/[()]/g,'');
+							allthis.push((stem + (verbVoice != 'ca' ? verbAdd[0][m] : verbAdd[1][m]) + splitverb[l]).replace(/[()]/g,''));
 						}
 						out += allthis.join(', ');
 					}
@@ -324,7 +324,7 @@ function conjugateIrrNoun(word) {
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
 	outword = toUni(outword);
 	
-	var stem = yto[8]; 
+	var stem = ''; 
 
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = infI[type1];

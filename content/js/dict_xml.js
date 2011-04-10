@@ -26,8 +26,11 @@ function paliXML(file,which)
 	var file = filea[0];
 
 	if(!mainda[toVel(ttit)]) {
-		if(irregda[toVel(ttit)]) {
-			ttit = irregda[toVel(ttit)];
+		if(G_irregNoun[toVel(ttit)]) {
+			ttit = G_irregNoun[toVel(ttit)];
+		}
+		else if(G_irregVerb[toVel(ttit)]) {
+			ttit = G_irregVerb[toVel(ttit)];
 		}
 	}
 	
@@ -51,7 +54,7 @@ function paliXML(file,which)
 		var datat = '';
 		for (i = 0; i < dataa.length; i++) {
 			if(/<[^>]*$/.exec(dataa[i])) { // pesky broken up links
-				var tda = toVel(dataa[i].replace(/<[^>]*$/,'').replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
+				var tda = toVel(dataa[i].replace(/<[^>]*$/,'').replace(/<[^>]*>/g, '').replace(/ŋ/g, 'ṃ').toLowerCase().replace(/[^āīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
 				if(!tda || tda.length < 2) {
 					datat += ' ' + dataa[i];
 				}

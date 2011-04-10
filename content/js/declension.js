@@ -94,6 +94,7 @@ G_endings.push(['antesu',1,3,'nt']);
 
 // kattar
 
+G_endings.push(['aa',0,2,'ar']);
 G_endings.push(['aara.m',0,2,'ar']);
 G_endings.push(['aaraa',0,2,'ar']);
 G_endings.push(['u',0,2,'ar']);
@@ -165,6 +166,8 @@ G_endings.push(['antasmi.m',1,2,'ti',0]);
 G_endings.push(['antesu',1,2,'ti',0]);
 G_endings.push(['ato',1,2,'ti']);
 G_endings.push(['oto',1,2,'ti']);
+G_endings.push(['ataa',1,2,'ti']);
+G_endings.push(['otaa',1,2,'ti']);
 
 G_endings.push(['ento',1,2,'ti',0]);
 G_endings.push(['entaa',1,2,'ti',0]);
@@ -217,6 +220,7 @@ G_endings.push(['abba.m',1,1,'']);
 
 // verbs
 
+G_endings.push(['a',0,3,'ati',1]);
 G_endings.push(['i',0,3,'ati',1]);
 G_endings.push(['tu',0,3,'ti',1]);
 G_endings.push(['si',0,3,'ti',1]);
@@ -256,7 +260,7 @@ G_endings.push(['entu',0,6,'ati',1]);
 G_endings.push(['itvaa',0,0,'ati',1]); 
 G_endings.push(['etvaa',0,0,'ati',1]); 
 G_endings.push(['tvaa',0,0,'ti',1]); 
-G_endings.push(['itu.m',0,0,'ati',1]);
+G_endings.push(['tu.m',0,0,'ti',1]);
 
 G_endings.push(['imhaa',0,0,'',1]); // aorist
 G_endings.push(['i.msu',0,1,'ati',1]); // aorist
@@ -311,4 +315,6 @@ var G_altStem = []; //[i][0] is the replacement ending, [i][1] tells us it's a v
 
 G_altStem['iy'] = ['a',0];
 G_altStem['itabb'] = ['ati',1];
+G_altStem['etabb'] = ['eti',1];
+G_altStem['atabb'] = ['ati',1];
 G_altStem['.niiy'] = ['ti',1,1];

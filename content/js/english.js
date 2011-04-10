@@ -18811,6 +18811,7 @@ yt['sapaaka'] = [1,"m.","an outcast; a dog-eater.","oo","N","m.a","",,"sapāk","
 yt['sapi'] = [1,"aor. of sapati","sweared; cursed.","oo","V","ac.past.i","sapati",1,"sap","Y"];
 yt['sapita'] = [1,"pp. of sapati","sweared; cursed.","oo","P","pa.pp","sapati",1,"sapit","Y"];
 yt['sapitvaa'] = [1,"abs. of sapati","having sweared; having cursed.","oo","P","ac.ger","sapati",1,"sapitvā","Y"];
+yt['sariisapa'] = [1,"nt.","a reptile.","oo","N","nt.a","",,"siri.msap","Y"];
 yt['sappa'] = [1,"m.","a snake.","oo","N","m.a","",,"sapp","Y"];
 yt['sappaccaya'] = [1,"adj.","having a cause; conditioned.","oo","N","adj.a","",,"sappaccay","Y"];
 yt['sappa~n~na'] = [1,"adj.","wise.","oo","N","adj.a","",,"sappaññ","Y"];

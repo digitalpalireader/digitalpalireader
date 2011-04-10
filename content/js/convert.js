@@ -108,6 +108,7 @@ function sendtoconvert(data)
 	data = data.replace(/☸ */g, '');
 	data = data.replace(/ VAR /g, ' ');
 	data = data.replace(/  *,/g, ',')
+	data = data.replace(/\.\.+/g, '.')
 
 	moveframex(2)
 	moveframey('cof');
