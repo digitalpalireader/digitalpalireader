@@ -46,7 +46,6 @@ function outputDef(which,first,frombox)
 			document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>'; 
 		}
 	}
-	dalert(G_outwords);
 	
 	var owparts = G_outwords[which][1].split('@');
 	

@@ -2245,6 +2245,7 @@ G_irregNoun['viisa'] = 'viisati';
 G_irregNoun['kalebara'] = 'ka.lebara'; 
 G_irregNoun['eta'] = 'etad';
 G_irregNoun['raaja'] = 'raajaa';
+G_irregNoun['saayanha'] = 'saaya.nha';
 
 G_irregNoun['keci'] = 'ka';
 G_irregNoun['kaaci'] = 'ka';
@@ -2291,6 +2292,7 @@ G_irregDec['bhojaniiya'] = ['bhojaniya','N'];
 G_irregDec['bhojaneyya'] = ['bhojaniya','N'];
 G_irregDec['sari.msapa'] = ['sariisapa','N'];
 G_irregDec['sa.mkhitta'] = ['sa"nkhitta','N'];
+G_irregDec['kiiva'] = ['kiivant','N'];
 
 G_irregDec['~naatati'] = ['jaanaati','V'];  // fake verb
 G_irregDec['da.t.thati'] = ['dassati0','V']; // fake verb

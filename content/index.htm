@@ -115,7 +115,7 @@ function onDocLoad() {
 											<span id="RM" class="abut lbut" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">R</span><span id="AM" class="abut mbut" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">A</span><span id="DM" class="abut rbut" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)">D</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">&lt;</span><span class="abut mbut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">go</span><span class="abut rbut" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">&gt;</span>
+											<span class="abut lbut" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">⇦</span><span class="abut mbut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">go</span><span class="abut rbut" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">⇨</span>
 										</td>
 									</tr>
 									<tr>
@@ -141,7 +141,7 @@ function onDocLoad() {
 							<div class="cpt" id="cp4">
 									<div style="margin-bottom:4px;">
 									<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
-									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<span class="abut obut small" onClick="bookmarkc()" title="Load this bookmark">&gt;</span>
+									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<span class="abut obut small" onClick="bookmarkc()" title="Load this bookmark">➤</span>
 									</div>
 									<div>
 									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12">&nbsp;<span class="abut obut small" onClick="bookmarks()" title="Set Bookmark">S</span>
@@ -162,7 +162,7 @@ function onDocLoad() {
 										<tr>
 											<td class="buttont"><span class="abut obut small" title="maximize search frame" id="plus" onclick="moves()">+</span></td>
 											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
-											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="searchTipitaka()">&gt;</span></td>
+											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="searchTipitaka()">➤</span></td>
 										</tr>
 
 										<tr>
@@ -250,7 +250,7 @@ function onDocLoad() {
 										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); showHideId('searchopts')"><b>adv</b></a>
 									</div>
 									<div>
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">&gt;</span>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">➤</span>
 									</div>
 									<div id="searchopts">
 										<table align="center">
@@ -325,13 +325,13 @@ function onDocLoad() {
 								<table>
 									<tr>
 										<td class="buttont">
-											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">%</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">!</span>
+											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">x</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">#</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">*</span>
+											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">☯</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">@</span>
+											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
 										</td>
 										<script>
 										// external dev function
@@ -351,7 +351,7 @@ function onDocLoad() {
 											headID2.appendChild(newScript2);
 
 											document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
-											document.write('<td class="buttont" id="devButton"><span class="abut obut" title="Help (?)" onClick="devMode();">Dev</span></td>');
+											document.write('<td class="buttont" id="devButton"><span class="abut obut" title="Dev - dont touch!" onClick="devMode();">Dev</span></td>');
 										}
 										else { // null functions
 											function devO() {}
