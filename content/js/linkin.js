@@ -313,19 +313,20 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		
 		var wtrDup = []; // sort duplicates
 		
+		var endings = [];
+		
 		for (var k = 1; k < oneword.length; k++) //define sub-cut for analysis (length-k,oneword.length) and remaining string (0,length-k)
 		{		
-			var ending = oneword.substring(k);
-			
-			for(i in G_endings) {
-				var gend = G_endings[i];  // gend[0] is ending, [1] is offset, [2] is min length of stem, [3] is new ending to add, [4] says is a verb	
-				if(gend[0] == ending && k > gend[2]) {
-					var dec = oneword.substring(0, k+gend[1]) + gend[3];
+			endings[oneword.substring(k)] = k;
+		}
+		
+		for(i in G_endings) {
+			var gend = G_endings[i];  // gend[0] is ending, [1] is offset, [2] is min length of stem, [3] is new ending to add, [4] says is a verb	
+			if(endings[gend[0]] && endings[gend[0]] > gend[2]) {
+				var dec = oneword.substring(0, endings[gend[0]]+gend[1]) + gend[3];
 
-					if ((notpart[dec] == 2 && lastpart) || (notpart[dec] == 1 && (lastpart || nextpart))) { continue; }
-					
-					if(wtrDup[dec]) continue;
-					else wtrDup[dec] = 1;
+				if ((notpart[dec] != 2 || !lastpart) && (notpart[dec] != 1 || (!lastpart && !nextpart)) && !wtrDup[dec]) {
+					wtrDup[dec] = 1;
 
 					if (gend[4]) { wtrV.push(dec); }
 					else { 
@@ -333,37 +334,32 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 						if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
 							wtrN.push(dec+dec.charAt(dec.length-1));
 						}
-					}					
-				}
-				else { // try alternative stems (see declension.js)
-					for (stem in G_altStem) {
-						if(ending.indexOf(stem) != 0) continue;
-						if(!lastpart) ddump('try ' +oneword + ' ' +stem+ ' ' + ending.substring(stem.length) + ' ' + gend);
-						if (gend[0] == ending.substring(stem.length) && k+stem.length > gend[2]) 
-						{
-							if(!lastpart) ddump('-- got ' +oneword + ' ' +stem+ ' ' + ending.substring(stem.length) + ' ' + gend);
-							var dec = oneword.substring(0, k+gend[1]) + G_altStem[stem][0];
-							if(G_altStem[stem][2]) {
-								dec = dec.replace(/([kgncjtdpbmyrlvsh.~"]{0,2}[aiu])[aiu]/,"$1");
-							}
-							if ((notpart[dec] == 2 && lastpart) || (notpart[dec] == 1 && (lastpart || nextpart))) { continue; }
-
-							if(wtrDup[dec]) continue;
-							else wtrDup[dec] = 1;
-
-							if (G_altStem[stem][1]) { wtrV.push(dec); }
-							else { 
-								wtrN.push(dec); 
-								if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
-									wtrN.push(dec+dec.charAt(dec.length-1));
-								}
-							}	
-						}
 					}
-				}			
-			}				
-		}
+				}					
+			}
+			for (stem in G_altStem) {
+				if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2]) 
+				{
+					var dec = oneword.substring(0, endings[stem + gend[0]]) + G_altStem[stem][0];
+					if(G_altStem[stem][2]) {
+						dec = dec.replace(/([kgncjtdpbmyrlvsh.~"]{0,2}[aiu])[aiu]/,"$1");
+					}
+					if(!lastpart) ddump('-- got ' +dec + ' ' +stem+ ' ' + gend[0]);
+					if ((notpart[dec] == 2 && lastpart) || (notpart[dec] == 1 && (lastpart || nextpart))) { continue; }
 
+					if(wtrDup[dec]) continue;
+					else wtrDup[dec] = 1;
+
+					if (G_altStem[stem][1]) { wtrV.push(dec); }
+					else { 
+						wtrN.push(dec); 
+						if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
+							wtrN.push(dec+dec.charAt(dec.length-1));
+						}
+					}	
+				}
+			}
+		}				
 		//devO(wtrN);
 	}
 	if(!lastpart && !nextpart) {

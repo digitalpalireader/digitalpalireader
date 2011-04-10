@@ -214,7 +214,7 @@ G_endings.push(['inna.m',1,1,'']);
 G_endings.push(['ataa',2,1,'i']);
 G_endings.push(['iya',0,2,'a']);
 G_endings.push(['uya.m',0,0,'']);
-G_endings.push(['abba.m',1,1,'']);
+//G_endings.push(['abba.m',1,1,'']);
 
 
 
@@ -317,4 +317,5 @@ G_altStem['iy'] = ['a',0];
 G_altStem['itabb'] = ['ati',1];
 G_altStem['etabb'] = ['eti',1];
 G_altStem['atabb'] = ['ati',1];
+G_altStem['abb'] = ['ati',1];
 G_altStem['.niiy'] = ['ti',1,1];
