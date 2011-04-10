@@ -321,7 +321,7 @@ function pausesall()
 	
 	toplist += toplista.join(', ');
 	
-	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">-</span></td></tr></table>';
+	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">↙</span></td></tr></table>';
 	
 	document.getElementById('stfb').innerHTML = toplist;
 
@@ -363,7 +363,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">-</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(2);
 }
@@ -395,7 +395,7 @@ function pausethree() {
 	var nikaya = document.form.nik.value;
 	var book = document.form.book.value;
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">-</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -434,9 +434,6 @@ function importXMLs(cnt)
 	var getstring = document.form.usearch.value;
 	var stringra = new Array();
 	
-	document.getElementById('plus').innerHTML = '-';
-	document.getElementById('plus').title = 'minimize search frame';
-
 	if (cnt == 1) // whole tipitaka or multiple collections
 	{
 		bookfile = filearray[qz];

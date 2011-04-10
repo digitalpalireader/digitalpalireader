@@ -407,7 +407,7 @@ function shortenTitle(name,no) {
 function analyzeTextPad() {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
-	outputFormattedData('<p> '+document.getElementById('pad').value.replace(/\n/g,' ') + ' </p>',1); 
+	outputFormattedData('<p> '+document.getElementById('pad').value.replace(/(\n|\t)/g,' ') + ' </p>',1); 
 }
 
 var pleasewait =  document.createElement('div');

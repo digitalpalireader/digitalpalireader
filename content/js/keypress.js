@@ -47,7 +47,20 @@ function keyPressed(e) {
 			else {
 				if(document.getElementById('convi')) { sendtoconvert(document.getElementById('convi').innerHTML); }
 			}
-			return; } // .
+			return; 
+		}
+
+		if (e.charCode == 101) {  // e
+			if(getSelected() != '') {
+				sendtoPad(getSelected()+'');
+			} 
+			else {
+				alertFlash('You must select some text to send to the textpad','yellow');
+			}
+			return; 
+		}
+
+		if (e.charCode == 108) { if(confirm('Reset the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // l
 
 		if (e.charCode == 103) { importXML(); return; } // g
 		if (e.charCode == 112) { createTablep(); return; } // p
@@ -75,5 +88,5 @@ function keyPressed(e) {
 			return; 
 		} 
 
-		//document.getElementById('mafb').innerHTML += e.charCode + '<br/>';
+		//devO(e.charCode);
 }

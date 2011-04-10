@@ -97,8 +97,8 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 		}
 		else { G_shortdefpost.push(shortdefpre.join('$')); }
 		if(devCheck == 2) {
-			if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
-			else window.dump('*');
+			//if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
+			window.dump('*');
 		}
 	}
 	
@@ -126,7 +126,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 		
 	}
 	return false;
-	// alert(parts + ' | ' + partnames + ' | ' + G_outwords);
+	// dalert(parts + ' | ' + partnames + ' | ' + G_outwords);
 }
 
 // --------------------------- match finding function  ---------------------------------
@@ -361,7 +361,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					if(G_altStem[stem][2]) {
 						dec = dec.replace(/([kgncjtdpbmyrlvsh.~"]{0,2}[aiu])[aiu]/,"$1");
 					}
-					if(!lastpart) ddump('-- got ' +dec + ' ' +stem+ ' ' + gend[0]);
+//					if(!lastpart) ddump('-- got ' +dec + ' ' +stem+ ' ' + gend[0]);
 					if ((G_uncompoundable[dec] == 2 && lastpart) || (G_uncompoundable[dec] == 1 && (lastpart || nextpart))) { continue; }
 
 					if(wtrDup[dec]) continue;
@@ -555,6 +555,52 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		}
 	}
 
+// alternative stems in compounds (see declension.js)
+
+	for (b in G_altStem) 
+	{			
+		var asrx = new RegExp(b.replace(/\./,'\\.')+G_altStem[b][3]+'$');
+		if(!asrx.exec(oneword)) continue;
+		var temp = oneword.replace(asrx,G_altStem[b][0]);
+		//if(!lastpart) dalert(temp);
+		if (res.length == 0) 
+		{				
+			if (mainda[temp]) 
+			{			
+				for (i in mainda[temp]) {
+					res.push([temp,mainda[temp][i]]); 
+				}
+			}
+			else if (typeof(G_irregDec[temp]) == 'object') {
+				var irregword = G_irregDec[temp][0];
+				if(/[0-9]$/.exec(irregword)) { // specific
+					res.push([oneword,mainda[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]); 
+				}
+				else {
+					for (i in mainda[irregword]) {
+						res.push([oneword,mainda[irregword]]); 
+					}
+				}
+			}
+		}
+
+	// concise 
+
+		if (!resy)
+		{
+			if (yt[temp] && !resy && !isIndec(temp)) 
+			{					
+				resy = temp; // for matching the dictionary entry in the output
+			}	
+			else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'string') {
+				resy = G_irregDec[temp][0];
+			}
+			
+		}
+	}
+
+
+
 // suffixes
 
 	if(lastpart && !nextpart) {
@@ -590,7 +636,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	// special suffixes
 
-		if (!nextpart)
+		if (!nextpart && !trick)
 		{
 
 			for (var tempsuf = oneword.length-1; tempsuf > 0; tempsuf--) {
@@ -609,7 +655,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 							sufadefs.push(sufa[0][i][0]);
 							if(yt[sufa[0][i][1]]) sufashorts.push(sufa[0][i][1]);
 						}
-						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$')]; // manually add the multi part "compound"
+						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$'),nextpart,1]; // manually add the multi part "compound"
 						return outsuf;
 					}
 				}

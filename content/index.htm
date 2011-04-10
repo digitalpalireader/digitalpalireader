@@ -144,7 +144,7 @@ function onDocLoad() {
 									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<span class="abut obut small" onClick="bookmarkc()" title="Load this bookmark">➤</span>
 									</div>
 									<div>
-									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12">&nbsp;<span class="abut obut small" onClick="bookmarks()" title="Set Bookmark">S</span>
+									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12">&nbsp;<span class="abut obut small" onClick="bookmarks()" title="Set Bookmark">✎</span>
 									<input type="text" style="display:none">
 									</div>
 							</div>
@@ -328,7 +328,7 @@ function onDocLoad() {
 											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">x</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">☯</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
+											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
 										</td>
 										<td class="buttont">
 											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
@@ -466,7 +466,7 @@ function onDocLoad() {
 			<div id="scf" align=center>
 				<form name="textpad">
 				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-				<p><span class="abut obut" onclick="analyzeTextPad()">Analyze</span></p>
+				<p><span class="abut lbut" onclick="cleanPad()" title="Remove page references, var, and permalinks from text">Clean</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
 				</form>
 			</div>
 		</div>

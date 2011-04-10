@@ -118,3 +118,50 @@ function sendtoconvert(data)
 	document.convertor.inputc.value = data;
 	convert();
 }
+
+function sendtoPad(data)
+{
+	moveframex(2)
+	moveframey('scf');
+	document.textpad.pad.value = data;
+}
+
+function cleanPad() {
+	var data = document.textpad.pad.value;
+	data = data.replace(/” ”/g, '”');
+	data = data.replace(/’ ’/g, '’');
+	data = data.replace(/\u00B7/g, '\'');
+	data = data.replace(/\u00B4/g, '\"');
+	data = data.replace(/ M /g, ' ');
+	data = data.replace(/ V /g, ' ');
+	data = data.replace(/ P /g, ' ');
+	data = data.replace(/ T /g, ' ');
+	data = data.replace(/☸ */g, '');
+	data = data.replace(/ VAR /g, ' ');
+	data = data.replace(/  *,/g, ',')
+	data = data.replace(/\.\.+/g, '.')
+	document.textpad.pad.value = data;
+}
+
+function savePad() {
+	var data = document.textpad.pad.value;
+	var file = document.textpad.file.value;
+	file = file.replace(/\\/g,'/');
+	var dir = '';
+	if(/\//.exec(file)) {
+		dir = '/'+file.replace(/\/[^\/]+$/,'');
+		file = file.replace(/.+\//,'');
+	}
+	if(/[:%&]/.exec(file)) {
+		alertFlash('File contains illegal characters', 'red');
+		return;
+	}
+	if(file == '') {
+		alertFlash('You must enter a file name', 'red');
+		return;
+	}
+	if(writeExtFile('Desktop'+dir,file,data)) alertFlash('Data saved to Desktop'+dir+'/'+file, 'green');
+	else {
+		alertFlash('Error saving file', 'red');
+	}
+}

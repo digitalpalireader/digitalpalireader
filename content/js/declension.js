@@ -69,6 +69,8 @@ G_endings.push(['iyo',1,0,'']);
 G_endings.push(['iyaa',1,0,'']);
 G_endings.push(['iya.m',1,0,'']); 
 // f. ii
+G_endings.push(['ii',0,0,'a']);
+G_endings.push(['inii',0,0,'a']);
 // f. u
 G_endings.push(['uyo',1,0,'']);
 G_endings.push(['uyaa',1,0,'']);
@@ -267,6 +269,8 @@ G_endings.push(['imhaa',0,0,'',1]); // aorist
 G_endings.push(['i.msu',0,1,'ati',1]); // aorist
 G_endings.push(['ittha',0,0,'',1]); // aorist
 G_endings.push(['u.m',0,0,'ati',1]); // aorist
+G_endings.push(['su.m',0,0,'ti',1]); // aorist
+G_endings.push(['si.m',0,0,'ti',1]); // aorist
 
 G_endings.push(['eyya',0,0,'ati',1]);
 G_endings.push(['eyya.m',0,0,'ati',1]);
@@ -312,11 +316,15 @@ G_endings.push(['ssaama',0,0,'ti',1]);
 G_endings.push(['aapetvaa',1,0,'ti',1]);
 
 
-var G_altStem = []; //[i][0] is the replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels
+var G_altStem = []; //[i][0] is the replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels, [i][3] tells us what sort of ending to expect from the original word (for compounds)
 
-G_altStem['iy'] = ['a',0];
-G_altStem['itabb'] = ['ati',1];
-G_altStem['etabb'] = ['eti',1];
-G_altStem['atabb'] = ['ati',1];
-G_altStem['abb'] = ['ati',1];
-G_altStem['.niiy'] = ['ti',1,1];
+G_altStem['iy'] = ['a',0,0,'a'];
+G_altStem['itabb'] = ['ati',1,0,'a'];
+G_altStem['itabb'] = ['aati',1,0,'a'];
+G_altStem['etabb'] = ['eti',1,0,'a'];
+G_altStem['atabb'] = ['ati',1,0,'a'];
+G_altStem['abb'] = ['ati',1,0,'a'];
+G_altStem['.niiy'] = ['ti',1,1,'a'];
+G_altStem['.niiy'] = ['ti',1,1,'a'];
+G_altStem['niiy'] = ['niya',0,0,'a'];
+G_altStem['niiy'] = ['niya',0,0,'a'];
