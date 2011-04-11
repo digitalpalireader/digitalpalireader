@@ -567,6 +567,7 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 	
 	switch (nik) {
 		case 'd': // sutta.section to book.vagga.section
+			if(a1 > 34) return;
 			vagga = a1 - 1;
 			switch (true) {
 				case (a1 > 13):
@@ -583,6 +584,7 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			section = a2-1;
 		break;
 		case 'm': // sutta.section to book.vagga.sutta.section
+			if(a1 > 152) return;
 			sutta = a1 - 1;
 			vagga = Math.floor((sutta > 139 ? sutta-2 : sutta)/10);
 			sutta -= (vagga*10)
@@ -596,6 +598,7 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			section = a2-1;
 		break;
 		case 'a':  // book.sutta to book.vagga.sutta.section
+			if(a1 > 11) return;
 			if(hiert != 'm') return;
 			book = a1 - 1;
 			var found = 0;
@@ -615,6 +618,7 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			volume = 0;
 		break;
 		case 's':
+			if(a1 > 5) return;
 			if(hiert != 'm') return;
 			vagga = a1 - 1;
 			switch (true) {

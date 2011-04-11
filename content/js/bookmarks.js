@@ -76,7 +76,7 @@ function bookmarks(let)
 		//if (nameadd.length > 20) nameadd = nameadd.substring(0,20);
 		if (nameadd.length == 0)
 		{
-			alert('Please enter a name for the bookmark');
+			alertFlash('You must enter a name for the bookmark','yellow');
 			return null;
 		}
 		writeFile('DPB'+nameadd,bookmarktemp, "UTF-8");

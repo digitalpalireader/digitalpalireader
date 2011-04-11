@@ -458,9 +458,9 @@ function alertFlash(text,color) {
 	
 	}
 	document.getElementById('alert').innerHTML = text;
-	document.getElementById('alert').style.opacity = '0';
-	document.getElementById('alert').style.display='block';
-	fadeInOut(G_alertFlashStart,'alert',10,Math.sqrt(text.length)*500,100);
+	document.getElementById('alertc').style.opacity = '0';
+	document.getElementById('alertc').style.display='block';
+	fadeInOut(G_alertFlashStart,'alertc',10,Math.sqrt(text.length)*500,100);
 }
 
 var G_prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]

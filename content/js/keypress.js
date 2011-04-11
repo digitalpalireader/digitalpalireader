@@ -99,7 +99,7 @@ function keyPressed(e) {
 		place = place.replace(/[ .]/g,',');
 		
 		var outplace = getSuttaFromNumber(place.split(','));
-		if(!outplace) return alertFlash('Syntax Error','yellow');
+		if(!outplace) return alertFlash('Link not found','yellow');
 		
 		getplace(outplace);
 		importXML();

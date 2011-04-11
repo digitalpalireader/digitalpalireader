@@ -561,15 +561,20 @@ opacity: 0.3;
 	min-height:4px;
 }
 
-#alert {
+#alertc {
 	display:none;
+	position:absolute;
+	text-align:center;
+	top:0;
+	left:0;
+	right:0;
+}
+#alert {
 	background-color:RGBa(0,255,0,0.8);
 	padding:5px 10px;
-	position:absolute;
-	top:0;
-	right:0;
-	border-bottom-left-radius:12px;
-	-moz-border-bottom-left-radius:12px;
+	text-align:center;
+	border-radius:4px;
+	-moz-border-radius:4px;
 }
 
 #searchopts {
