@@ -1993,7 +1993,6 @@ mainda['amma.na'] = ['0/2046'];
 mainda['ammaa'] = ['0/2047'];
 mainda['amha'] = ['0/2048','0/2049'];
 mainda['amhaa'] = ['0/2050'];
-mainda['amhaaka.m'] = ['0/2051'];
 mainda['amho'] = ['0/2052'];
 mainda['aya'] = ['0/2053','0/2054'];
 mainda['aya.m'] = ['0/2055'];

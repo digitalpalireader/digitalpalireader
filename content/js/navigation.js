@@ -546,7 +546,7 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { /
 }
 
 
-function getSuttaFromNumber(is) { // should be in format SN.1.1
+function getSuttaFromNumber(is) { // should be in array format SN,1,1
 	
 	var nik,book,meta,volume,vagga,sutta,section,hiert;
 

@@ -67,7 +67,6 @@ function formatuniout(data,which) { // prepare without links
 	var finout = '';
 	var outarray = new Array();
 	
-
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
@@ -76,6 +75,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/'/g, '’');
 	data = data.replace(/[”"]ti/g, '” ”ti');
 	data = data.replace(/['’]+ti/g, '’ ’ti');
+	data = data.replace(/['’][”"]nti/g, 'n’” ”ti');
 	data = data.replace(/[”"]nti/g, 'n” ”ti');
 	data = data.replace(/['’]+nti/g, 'n’ ’ti');
 	data = data.replace(/\^b\^/g, '<@>');
@@ -84,7 +84,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/['’]+<\/@>nti/g, 'n’</@> ’ti');
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
-
+	
 	if(cfg['showPages'] == 'unchecked') data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
 	else {
 		data = data.replace(/\^a\^\"/g, ' z');
@@ -100,6 +100,10 @@ function formatuniout(data,which) { // prepare without links
 	else data = data.replace(/\}/g, '} ');
 	
 	data = data.replace(/   */g, ' ');
+	data = data.replace(/ +([,;])/g, "$1");
+
+	data = data.replace(/([^.])\.\.(?!\.)/g, "$1."); // double periods
+
 	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
 
 	//data = data.replace(/\"/g, '\u00B4');
@@ -209,6 +213,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.indexOf('<p') == 0) {
 			var permalink = wb.substring(2,wb.length-1);
+			convout += '\n\n';
 			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
 			paran++;
 		}		
@@ -457,6 +462,9 @@ function alertFlash(text,color) {
 	document.getElementById('alert').style.display='block';
 	fadeInOut(G_alertFlashStart,'alert',10,Math.sqrt(text.length)*500,100);
 }
+
+var G_prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+                        .getService(Components.interfaces.nsIPromptService);
 
 function fadeInOut(AID,id, sIn, L, sOut) {
 	if(AID != G_alertFlashStart) return;

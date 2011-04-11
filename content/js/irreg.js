@@ -1280,72 +1280,18 @@ G_irregNoun['asmaakam'] = 'aha.m';
 G_irregNoun['amhesu'] = 'aha.m';
 
 G_irregNoun['tumha'] = 'tuva.m';
-G_irregNoun['tayaa'] = 'tuva.m';
-G_irregNoun['te'] = 'tuva.m';
-G_irregNoun['tava'] = 'tuva.m';
-G_irregNoun['te'] = 'tuva.m';
-G_irregNoun['tayaa'] = 'tuva.m';
-G_irregNoun['tava'] = 'tuva.m';
-G_irregNoun['te'] = 'tuva.m';
-G_irregNoun['tayi'] = 'tuva.m';
 G_irregNoun['tumhe'] = 'tuva.m';
-G_irregNoun['tumhe'] = 'tuva.m';
-G_irregNoun['vo'] = 'tuva.m';
+G_irregNoun['tumha.m'] = 'tuva.m';
 G_irregNoun['tumhehi'] = 'tuva.m';
+G_irregNoun['tumhaaka.m'] = 'tuva.m';
+G_irregNoun['tumhesu'] = 'tuva.m';
+G_irregNoun['tava'] = 'tuva.m';
+G_irregNoun['tayaa'] = 'tuva.m';
 G_irregNoun['tuyha.m'] = 'tuva.m';
-
-G_irregNoun['tumhaaka.m'] = 'tumha';
-
-
-G_irregNoun['tumhehi'] = 'tumha';
-
-G_irregNoun['tumha.m'] = 'tumha';
-
-
-G_irregNoun['tumhesu'] = 'tumha';
-G_irregNoun['ta.m'] = 'tumha';
-G_irregNoun['tayaa'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tava'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tayaa'] = 'tumha';
-G_irregNoun['tava'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tayi'] = 'tumha';
-G_irregNoun['tumhe'] = 'tumha';
-G_irregNoun['tumhe'] = 'tumha';
-
-G_irregNoun['tumhehi'] = 'tumha';
-
-
-
-
-G_irregNoun['tumhehi'] = 'tumha';
-
-
-
-G_irregNoun['tumhesu'] = 'tumha';
-G_irregNoun['tayaa'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tava'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tayaa'] = 'tumha';
-G_irregNoun['tava'] = 'tumha';
-G_irregNoun['te'] = 'tumha';
-G_irregNoun['tayi'] = 'tumha';
-G_irregNoun['tumhe'] = 'tumha';
-G_irregNoun['tumhe'] = 'tumha';
-
-G_irregNoun['tumhehi'] = 'tumha';
-
-
-
-
-G_irregNoun['tumhehi'] = 'tumha';
-
-
-
-G_irregNoun['tumhesu'] = 'tumha';
+G_irregNoun['te'] = 'tuva.m';
+G_irregNoun['vo'] = 'tuva.m';
+G_irregNoun['ta.m'] = 'tuva.m';
+G_irregNoun['tayi'] = 'tuva.m';
 
 G_irregNoun['asu'] = 'amu';
 G_irregNoun['amunaa'] = 'amu';
@@ -1359,7 +1305,6 @@ G_irregNoun['amuuhi'] = 'amu';
 G_irregNoun['amuusa.m'] = 'amu';
 G_irregNoun['amuuhi'] = 'amu';
 G_irregNoun['amuusa.m'] = 'amu';
-G_irregNoun['adu.m'] = 'amu';
 G_irregNoun['adu.m'] = 'amu';
 G_irregNoun['amunaa'] = 'amu';
 G_irregNoun['amussa'] = 'amu';

@@ -8,7 +8,7 @@ function conjugate(word, id, which) {
 	var yto = yt[word];
 	
 	if(yto == undefined) {
-		alert('Word not found!');
+		alertFlash('Word not found','yellow');
 		return;
 	}
 
@@ -71,8 +71,7 @@ function conjugateNoun(word) {
 		var type1 = yto[4]+'#'+yto5[q];
 		var type2 = infI[type1];
 		if(type2 == undefined) {
-			alert('No declension available.');
-			return;
+			continue;
 		}
 		
 		var descript = (q > 0 ? '<hr>':'')+'<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
@@ -84,8 +83,14 @@ function conjugateNoun(word) {
 
 					out += descript; // description
 
-					out += '<table class="conjtable"><tr><td class="toprow">Case</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
+					out += '<table class="conjtable"><tr><td class="toprow">Case</td>';
 					var noun = infN[type2[1]];
+
+					if(noun[0] != undefined) out += '<td class="toprow">s.</td>';
+					if(noun[1] != undefined) out += '<td class="toprow">pl.</td>';
+
+					out += '</tr>';
+
 					for (i in decNames) { // per number
 						
 						var di = decNames[i];
@@ -116,8 +121,14 @@ function conjugateNoun(word) {
 
 					out += descript; // description
 
-					out += '<table class="conjtable"><tr><td class="toprow">Case</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
+					out += '<table class="conjtable"><tr><td class="toprow">Case</td>';
 					var noun = infN[type2[2]];
+
+					if(noun[0] != undefined) out += '<td class="toprow">s.</td>';
+					if(noun[1] != undefined) out += '<td class="toprow">pl.</td>';
+
+					out += '</tr>';
+					
 					for (i in decNames) { // per number
 						
 						var di = decNames[i];
@@ -144,12 +155,19 @@ function conjugateNoun(word) {
 				}
 			break;
 			case 'f.':
-				out += '<table class="conjtable"><tr><td class="toprow">Case</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 				if(type2[3] != '') {
 
 					out += descript; // description
 
+					out += '<table class="conjtable"><tr><td class="toprow">Case</td>';
+
 					var noun = infN[type2[3]];
+
+					if(noun[0] != undefined) out += '<td class="toprow">s.</td>';
+					if(noun[1] != undefined) out += '<td class="toprow">pl.</td>';
+
+					out += '</tr>';
+
 					for (i in decNames) { // per number
 						
 						var di = decNames[i];
@@ -189,8 +207,13 @@ function conjugateNoun(word) {
 					for (k = 1; k <= 3; k++) {
 						if(type2[k] != '') {
 							cnt++;
-							if(i==0)out += '<td class="toprow">'+gendNames[k-1]+'.s.</td><td class="toprow">'+gendNames[k-1]+'.pl.</td>';
+
 							var noun = infN[type2[k]];
+
+							if(i==0) {
+								if(noun[0] != undefined) out += '<td class="toprow">'+gendNames[k-1]+'.s.</td>';
+								if(noun[1] != undefined) out += '<td class="toprow">'+gendNames[k-1]+'.pl.</td>';
+							}
 							
 							for(j in noun) {
 								outt+='<td class="decb small '+ ((cnt == 1 || cnt == 3) ? '' : 'whiteb') + '">'
@@ -211,7 +234,7 @@ function conjugateNoun(word) {
 					}
 					outt += '</tr>';
 				}
-				out += outt;
+				out += '</tr>' + outt;
 			break;
 		}
 		out += '</table>';
@@ -237,6 +260,7 @@ function conjugateVerb(word) {
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = infI[type1];
 	if(type2 == undefined) {
+		alertFlash('Verb not found','yellow');
 		return;
 	}
 	
@@ -329,7 +353,7 @@ function conjugateIrrNoun(word) {
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = infI[type1];
 	if(type2 == undefined) {
-		alert('Verb not found');
+		alertFlash('Noun not found','yellow');
 		return;
 	}
 	
@@ -337,7 +361,7 @@ function conjugateIrrNoun(word) {
 	
 	var noun = infNI[outword];
 	if(noun == undefined) {
-		alert('Noun not found');
+		alertFlash('Noun not found','yellow');
 		return;
 	}
 	var cnt = 0;
@@ -350,8 +374,10 @@ function conjugateIrrNoun(word) {
 		for (h = 0; h < gendNames.length; h++) {
 			if(noun[gendNames[h]] == undefined) continue;
 			cnt++;
-			if(i==0)out += '<td class="toprow">'+gendNames[h]+'.s.</td><td class="toprow">'+gendNames[h]+'.pl.</td>';
-
+			if(i==0) {
+				if(noun[gendNames[h]][0] != undefined) out += '<td class="toprow">'+gendNames[h]+'.s.</td>';
+				if(noun[gendNames[h]][1] != undefined) out += '<td class="toprow">'+gendNames[h]+'.pl.</td>';
+			}
 			for(j = 0; j <=1; j++) {
 				outt+='<td class="decb small '+ ((cnt == 1 || cnt == 3) ? '' : 'whiteb') + '">'
 				if(noun[gendNames[h]][j][di] == undefined) {
@@ -387,7 +413,7 @@ function conjugateIrrVerb(word,which) {
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = infI[type1];
 	if(type2 == undefined) {
-		alert('Verb not found');
+		alert('Noun not found');
 		return;
 	}
 	

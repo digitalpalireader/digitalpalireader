@@ -299,15 +299,15 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	}
 	else if (typeof(G_irregNoun[oneword]) == 'string') {
 		var irregword = G_irregNoun[oneword].replace(/[0-9]$/,'');
-		if(typeof(yt[irregword]) == 'string') resy = irregword;
+		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
 	else if (typeof(G_irregDec[oneword]) == 'object') {
 		var irregword = G_irregDec[oneword][0].replace(/[0-9]$/,'');
-		if(typeof(yt[irregword]) == 'string') resy = irregword;
+		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
 	else if (!nextpart && typeof(G_irregVerb[oneword]) == 'string') {
 		var irregword = G_irregVerb[oneword].replace(/[0-9]$/,'');
-		if(typeof(yt[irregword]) == 'string') resy = irregword;
+		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
 
 	// DPPN matches
@@ -418,7 +418,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		{
 			for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
 			{				
-
 				var temp = wtr[b];
 				
 				if (yt[temp] && !resy && !isIndec(temp)) 
