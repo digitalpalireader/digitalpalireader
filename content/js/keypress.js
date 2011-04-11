@@ -1,20 +1,7 @@
 document.onkeypress = keyPressed;
 
-var isCtrl = false;
-var isAlt = false;
-
-document.onkeyup=function(e){
-	if(e.which == 17) isCtrl=false;
-	if(e.which == 18) isAlt=false;
-}
-document.onkeydown=function(e){
-	if(e.which == 17) isCtrl=true;
-	if(e.which == 18) isAlt=true;
-}
-
 function keyPressed(e) {
-	//dalert(e.charCode);
-	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || isCtrl == true || isAlt == true) { return; }
+	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 
 	if (e.charCode == 49) { // 1
 		if(document.getElementById('Qa1')) { f = document.getElementById('Qa1').onclick; f(); }
