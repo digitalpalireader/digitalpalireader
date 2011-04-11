@@ -13,6 +13,7 @@ document.onkeydown=function(e){
 }
 
 function keyPressed(e) {
+	//dalert(e.charCode);
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || isCtrl == true || isAlt == true) { return; }
 
 	if (e.charCode == 49) { // 1
@@ -106,12 +107,12 @@ function keyPressed(e) {
 
 		var place = input.value;
 		
-		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} [0-9]+\.{0,1}[0-9]*$/.exec(place)) return alert('Syntax Error');
+		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} [0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
 		
 		place = place.replace(/[ .]/g,',');
 		
 		var outplace = getSuttaFromNumber(place.split(','));
-		if(!outplace) return alert('Syntax Error');
+		if(!outplace) return alertFlash('Syntax Error','yellow');
 		
 		getplace(outplace);
 		importXML();
