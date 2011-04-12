@@ -321,7 +321,7 @@ function pausesall()
 	
 	toplist += toplista.join(', ');
 	
-	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">↙</span></td></tr></table>';
+	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">‒</span></td></tr></table>';
 	
 	document.getElementById('stfb').innerHTML = toplist;
 

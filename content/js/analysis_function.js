@@ -7,6 +7,7 @@ var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input,divclicked,frombox)
 {
+	devO('',1,1);
 	G_outwords = [];
 	shortdefpre = [];
 	G_shortdefpost = [];
@@ -51,7 +52,7 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 	input = input.toLowerCase();
 	input = input.replace(/\.([^nmltd])/g, "$1");
 	input = input.replace(/\.$/g, "");
-	input = input.replace(/ .+/g, '');
+	input = input.replace(/ .*/g, '');
 	shortdefpre = [];
 
 	if (input.length > 1)  // ---------- dont waste time with periods and commas ----------
@@ -114,7 +115,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 		partword = oneword.substring(0,oneword.length-j);
 		restword = oneword.substring(oneword.length-j,oneword.length);
 
-		if ((partword.length == 1 && (lastpart || !/[anh]/.exec(partword))) || G_illegalCompoundBreak.exec(partword.charAt(partword.length-1)+restword.charAt(0)) != null) continue out;
+		if ((partword.length == 1 && (lastpart || !/[anhc]/.exec(partword))) || G_illegalCompoundBreak.exec(partword.charAt(partword.length-1)+restword.charAt(0)) != null) continue out;
 
 		var newpart = findmatch(partword,lastpart,restword,parts.length); // check for matched part
 		if (newpart) {
@@ -135,10 +136,9 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	//devDump = 1;
 	//if(!lastpart && !nextpart) devO(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	//if(devCheck > 0 && devDump == 1) devO(oneword);
-
 		
 	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
-	if ((G_uncompoundable[oneword] == 2 && lastpart) || (G_uncompoundable[oneword] == 1 && (lastpart || nextpart)) || (G_uncompoundable[oneword] == 3 && nextpart)) { return null; }
+	if (isUncomp(oneword,lastpart,nextpart)) return;
 
 // fudges
 
@@ -176,11 +176,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	if (typeof(mainda[oneword]) == 'object')
 	{
+		if(devDump > 0) devO('added PED exact: ' + oneword);
 		for (i in mainda[oneword]) {
 			res.push([oneword,mainda[oneword][i]]); 
 		}
 	}
 	else if (typeof(G_irregNoun[oneword]) == 'string') {
+		if(devDump > 0) devO('added IrregN exact: ' + oneword);
 		var irregword = G_irregNoun[oneword].replace(/[0-9]$/,'');
 		if(irregword != G_irregNoun[oneword]) {
 			var irregno = parseInt(G_irregNoun[oneword].charAt(G_irregNoun[oneword].length-1));
@@ -193,6 +195,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		}
 	}
 	else if (typeof(G_irregDec[oneword]) == 'object') {
+		if(devDump > 0) devO('added IrregDec exact: ' + oneword);
 		var irregword = G_irregDec[oneword][0].replace(/[0-9]$/,'');
 		if(irregword != G_irregDec[oneword][0]) {
 			var irregno = parseInt(G_irregDec[oneword][0].charAt(G_irregDec[oneword][0].length-1));
@@ -205,6 +208,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		}
 	}
 	else if (!nextpart && typeof(G_irregVerb[oneword]) == 'string') {
+		if(devDump > 0) devO('added IrregVerb exact: ' + oneword);
 		var irregword = G_irregVerb[oneword].replace(/[0-9]$/,'');
 		if(irregword != G_irregVerb[oneword]) {
 			var irregno = parseInt(G_irregVerb[oneword].charAt(G_irregVerb[oneword].length-1));
@@ -223,17 +227,21 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	if (yt[oneword] && (!nextpart || yt[oneword][4] != 'V')) 
 	{					
+		if(devDump > 0) devO('added CPED exact: ' + oneword);
 		resy = oneword; // for matching the dictionary entry in the output
 	}
 	else if (typeof(G_irregNoun[oneword]) == 'string') {
+		if(devDump > 0) devO('added CPED Irreg exact: ' + oneword);
 		var irregword = G_irregNoun[oneword].replace(/[0-9]$/,'');
 		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
 	else if (typeof(G_irregDec[oneword]) == 'object') {
+		if(devDump > 0) devO('added CPED Irreg exact: ' + oneword);
 		var irregword = G_irregDec[oneword][0].replace(/[0-9]$/,'');
 		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
 	else if (!nextpart && typeof(G_irregVerb[oneword]) == 'string') {
+		if(devDump > 0) devO('added CPED Irreg exact: ' + oneword);
 		var irregword = G_irregVerb[oneword].replace(/[0-9]$/,'');
 		if(typeof(yt[irregword]) == 'object') resy = irregword;
 	}
@@ -242,6 +250,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	if (nameda[oneword]) 
 	{					
+		if(devDump > 0) devO('added DPPN exact: ' + oneword);
 		resn.push([oneword,nameda[oneword]]);
 	}
 
@@ -270,7 +279,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			if(endings[gend[0]] && endings[gend[0]] > gend[2]) {
 				var dec = oneword.substring(0, endings[gend[0]]+gend[1]) + gend[3];
 
-				if ((G_uncompoundable[dec] != 2 || !lastpart) && (G_uncompoundable[dec] != 1 || (!lastpart && !nextpart)) && !wtrDup[dec]) {
+				if (!isUncomp(oneword,lastpart,nextpart) && !wtrDup[dec]) {
 					wtrDup[dec] = 1;
 
 					if (gend[4] == 'v') { wtrV.push(dec); }
@@ -283,16 +292,16 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}					
 			}
 			for (stem in G_altStem) {
-				//if(!lastpart) devO('-- try ' + endings[stem + gend[0]] +  ' ' +stem+ ' ' + gend[0]);
+				//if(/^ga/.exec(oneword)) devO('-- try ' + oneword +  ' ' +stem+ ' ' + gend[0]);
 				if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2]) 
 				{
 					for(gas0 in G_altStem[stem][0]) {
 						var dec = oneword.substring(0, endings[stem + gend[0]]) + G_altStem[stem][0][gas0];
-						//if(!lastpart) devO('-- got ' +dec + ' ' +stem+ ' ' + gend[0]);
+						//if(/^ga/.exec(oneword)) devO('-- got ' + dec + ' ' +stem+ ' ' + gend[0]);
 						if(G_altStem[stem][2]) {
 							dec = dec.replace(/([kgncjtdpbmyrlvsh.~"]{0,2}[aiu])[aiu]/,"$1");
 						}
-						if ((G_uncompoundable[dec] == 2 && lastpart) || (G_uncompoundable[dec] == 1 && (lastpart || nextpart))) { continue; }
+						if (isUncomp(oneword,lastpart,nextpart)) { continue; }
 
 						if(wtrDup[dec]) continue;
 						else wtrDup[dec] = 1;
@@ -308,7 +317,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}
 		}				
-		//devO(wtrN);
+		devO(wtrV);
 	}
 	if(!lastpart && !nextpart) {
 		 
@@ -451,10 +460,10 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}
 		}
-		
 		if(partslength == 1) { // verbs in "compounds"
 			if (res.length == 0) 
 			{				
+				//devO([lastpart,oneword].concat(wtrV)); 
 				for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
 				{			
 					var temp = wtrV[b];
@@ -489,7 +498,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	for (b in G_altStemComp) 
 	{			
-		var asrx = new RegExp(b.replace(/\./,'\\.')+G_altStemComp[b][3]+'$');
+		var asrx = new RegExp(b.replace(/\./,'\\.')+'$');
 		if(!asrx.exec(oneword)) continue;
 		var temp = oneword.replace(asrx,G_altStemComp[b][0]);
 		//if(!lastpart) dalert(temp);
@@ -574,16 +583,30 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				//
 				if (G_indeclinableEnding[cutsuf]) {
 					var sufa = G_indeclinableEnding[cutsuf];
-					var desuf = findmatch(oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][0] : ''),lastpart,null,partslength);  // run find function on desuffixed word, with optional addition 
+					var desuf = findmatch((oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][0] : '')).replace(/([^.])m$/,"$1.m"),lastpart,null,partslength,1);  // run find function on desuffixed word, with optional addition 
 					if (desuf) {
 						var sufanames = [];
 						var sufadefs = [];
 						var sufashorts = [];
 						
 						for (i in sufa[0]) {
-							sufanames.push(sufa[0][i][1]);
-							sufadefs.push(sufa[0][i][0]);
-							if(yt[sufa[0][i][1]]) sufashorts.push(sufa[0][i][1]);
+							sufanames.push(sufa[0][i][0]);
+							
+							var tw = sufa[0][i][1].replace(/[0-9]$/,'');
+							if(tw != sufa[0][i][1]) {
+								oneno = parseInt(sufa[0][i][1].match(/[0-9]$/)[0]);
+								sufadefs.push(mainda[tw][oneno] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+							}
+							else {
+								for (k in mainda[tw]) {
+									sufadefs.push(mainda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+								}
+							}
+							if(typeof(nameda[tw]) == 'object') {
+								for (k in nameda[tw]) {
+									sufadefs.push(nameda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+								}
+							}
 						}
 						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$'),nextpart,1]; // manually add the multi part "compound"
 						return outsuf;
@@ -593,7 +616,18 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		}		
 
 	}
-
+	
+	// inner replacements	
+	
+	if (res.length == 0 && resn.length == 0 && !resy) {
+		for(i in G_altInnerStem) {
+			if(oneword.indexOf(i) > 0 && oneword.indexOf(i) < oneword.length - i.length) {
+				var ist = G_altInnerStem[i][0];
+				var trickmatch = findmatch(oneword.replace(i,ist),lastpart,nextpart,partslength);
+				if (trickmatch) { return [oneword, trickmatch[1], ((trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  }
+			}
+		}
+	}
 
 	if(nextpart) { 
 	// do this if compound part (not end)
@@ -614,14 +648,47 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		// verb + ukaam words (khu.msetukaamo, etc.)
 
 			if(!lastpart && oneword.charAt(oneword.length-1) == 'u' && /^kaam/.exec(nextpart) && !aiueom) {
-				if(oneword.charAt(oneword.length-2) == 't' && !G_uncompoundable[oneword.slice(0,-1)+'i']) {
+				if(/itu$/.exec(oneword) && oneword.length > 3) {
+					var oa = [];
+					oa[0] = [];
+					oa[1] = [];
+					
+					if (!isUncomp(oneword.slice(0,-3)+'ati',lastpart,nextpart)) {
+						var trickmatch = findmatch(oneword.slice(0,-3)+'ati',lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							if(devCheck > 0 && devDump == 2) devO('trick00 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+							oa[0].push(trickmatch[1]);
+							oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
+						} 
+					}
+					if (!isUncomp(oneword.slice(0,-3)+'eti',lastpart,nextpart)) {
+						var trickmatch = findmatch(oneword.slice(0,-3)+'aati',lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							if(devCheck > 0 && devDump == 2) devO('trick01 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+							oa[0].push(trickmatch[1]);
+							oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
+						} 
+					}
+					if (!isUncomp(oneword.slice(0,-3)+'aati',lastpart,nextpart)) {
+						var trickmatch = findmatch(oneword.slice(0,-3)+'aati',lastpart,nextpart,partslength,2);
+						if (trickmatch) { 
+							if(devCheck > 0 && devDump == 2) devO('trick02 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+							oa[0].push(trickmatch[1]);
+							oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
+						} 
+					}
+					if(oa[0].length > 0) {
+						return [oneword,oa[0].join('#'),oa[1].join('$')]; 
+					}
+				}
+				if(oneword.charAt(oneword.length-2) == 't' && !isUncomp(oneword.slice(0,-1)+'i',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,nextpart,partslength,1);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 1) devO('trick0');
 						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
 					} 
 				}
-				if (!G_uncompoundable[oneword.slice(0,-1)+'a']) {
+				if (!isUncomp(oneword.slice(0,-1)+'a',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,nextpart,partslength,1);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 1) devO('trick0');
@@ -635,7 +702,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			
 			if (aiu1 && !aiu2 && oneword.length > 2) 
 			{
-				if (!G_uncompoundable[oneword+aiu1]) {
+				if (!isUncomp(oneword+aiu1,lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword+oneword.charAt(oneword.length-1),lastpart,nextpart,partslength,1);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 1) devO('trick1');
@@ -644,35 +711,48 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}				
 
+		// `h as in chah-a"ngehi 
+			
+			if (oneword.charAt(oneword.length-1) == 'h' && aiu2 && oneword.length > 2) 
+			{
+				if (!isUncomp(oneword.slice(0,-1),lastpart,nextpart)) {
+					var trickmatch = findmatch(oneword.slice(0,-1),lastpart,nextpart,partslength,1);
+					if (trickmatch) { 
+						if(devCheck > 0 && devDump == 1) devO('trick1a');
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
+					} 
+				}
+			}				
+
 
 		// lost this vowel because next vowel, add 'a,i,u' (bhadd-ekarattassa, pa~nc-upaadaanakkhandhaa)
 
-			if (!aiueo1 && aiueo2 && !aiueo3 && oneword.length > 2) 
+			if (!aiueo1 && aiueo2 && !aiueo3) 
 			{
 				var oa = [];
 				oa[0] = [];
 				oa[1] = [];
 				
-				if (!G_uncompoundable[oneword+'a']) {
+				if (!isUncomp(oneword+'a',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword+'a',lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
-						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+						if(devCheck > 0 && devDump == 2) devO('trick2 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
 						oa[0].push(trickmatch[1]);
 						oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
 					} 
 				}
-				if (!G_uncompoundable[oneword+'i']) {
+				if (!isUncomp(oneword+'i',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword+'u',lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
-						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+						if(devCheck > 0 && devDump == 2) devO('trick3 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
 						oa[0].push(trickmatch[1]);
 						oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
 					} 
 				}
-				if (!G_uncompoundable[oneword+'u']) {
+				if (!isUncomp(oneword+'u',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword+'u',lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
-						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
+						if(devCheck > 0 && devDump == 2) devO('trick4 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
 						oa[0].push(trickmatch[1]);
 						oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
 					} 
@@ -688,7 +768,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			if (oneword.charAt(oneword.length-1) == 'u' && nextpart.charAt(0) == 'u' && oneword.length > 3) 
 			{
 			
-				if (!G_uncompoundable[oneword.slice(0,-1)+'a']) {
+				if (!isUncomp(oneword.slice(0,-1)+'a',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'a',lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 1) devO('trick5');
@@ -701,13 +781,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) == 'a' && oneword.length > 3)
 			{
-				if (!G_uncompoundable[oneword.slice(0,-1)+'i']) {
+				if (!isUncomp(oneword.slice(0,-1)+'i',lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.slice(0,-1)+'i',lastpart,'a'+nextpart,partslength,2);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 1) devO('trick6');
 						return [oneword.slice(0,-1), trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$','a'+nextpart,1]; 
 					} 
-					if (!G_uncompoundable[oneword.slice(0,-1)+'u']) {
+					if (!isUncomp(oneword.slice(0,-1)+'u',lastpart,nextpart)) {
 						var trickmatch = findmatch(oneword.slice(0,-1)+'u',lastpart,'a'+nextpart,partslength,2);
 						if (trickmatch) { 
 							if(devCheck > 0 && devDump == 1) devO('trick7');
@@ -837,7 +917,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			var aiu1 = /[aiu]/.exec(oneword.charAt(0));
 			if (aiu1 && oneword.charAt(0) == oneword.charAt(1)) // check for lengthened vowels, shorten
 			{
-				if (!G_uncompoundable[oneword.substring(1)]) {
+				if (!isUncomp(oneword.substring(1),lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1);
 					if (trickmatch) {
 						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
@@ -890,7 +970,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				oa[0] = [];
 				oa[1] = [];
 				
-				if (!G_uncompoundable['a'+oneword]) {
+				if (!isUncomp('a'+oneword,lastpart,nextpart)) {
 					var trickmatch = findmatch('a'+oneword,lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
@@ -898,7 +978,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 						oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
 					} 
 				}
-				if (!G_uncompoundable['i'+oneword]) {
+				if (!isUncomp('i'+oneword,lastpart,nextpart)) {
 					var trickmatch = findmatch('i'+oneword,lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
@@ -906,7 +986,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 						oa[1].push((trickmatch[2] ? trickmatch[2] : '') + '$');
 					} 
 				}
-				if (!G_uncompoundable['u'+oneword]) {
+				if (!isUncomp('u'+oneword,lastpart,nextpart)) {
 					var trickmatch = findmatch('u'+oneword,lastpart,nextpart,partslength,2);
 					if (trickmatch) { 
 						if(devCheck > 0 && devDump == 2) devO('trick12 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
@@ -979,7 +1059,33 @@ function manualCompound(fullword) {
 	G_shortdefpost = [shorta.join('$')]; 
 }
 
-function isIndec(word) {
+function isIndec(word) { // indeclinible
 	if(typeof(yt[word]) != 'object' || yt[word][1] != 'ind.') return false;
 	else return true;
 }
+
+function isUncomp(word,lp,np) { // uncompoundable
+	if(typeof(G_uncompoundable[word]) != 'number') return false;
+	
+	var uct = G_uncompoundable[word];
+	
+	switch(uct) {
+		case 1:
+			return true;
+		break;
+		case 2:
+			if(lp) return true;
+		break;
+		case 3:
+			if(np) return true;
+		break;
+		case 4:
+			if(!lp) return true;
+		break;
+		case 5:
+			if(!np) return true;
+		break;
+	}
+	return false;
+}
+

@@ -1,26 +1,48 @@
 
 // for conjugations
 
-var G_altStem = []; //[i][0] is the replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels, [i][3] tells us what sort of ending to expect from the original word (for compounds)
+var G_altStem = []; //[i][0][j] is a replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels, [i][3] tells us what sort of ending to expect from the original word (for compounds)
 
 G_altStem['iy'] = [['a'],0,0,'a'];
+G_altStem['ik'] = [['aka','a'],0,0,'a'];
+G_altStem['in'] = [['i'],0,0,'ii'];
+
+G_altStem['aap'] = [['ati','aati','eti'],1,0,'eti'];
+G_altStem['aapess'] = [['ati','aati','eti'],1,0,'eti'];
+G_altStem['iiy'] = [['ati','aati','oti','eti'],1,0,'ati'];
+G_altStem['iiyiss'] = [['ati','aati','oti','eti'],1,0,'ati'];
+G_altStem['iss'] = [['ati','aati','oti'],1,0,'ati'];
+G_altStem['ess'] = [['ati','eti'],1,0,'ati'];
+G_altStem['iiyamaan'] = [['ati','aati','oti','eti'],1,0,'a'];
+G_altStem['iyamaan'] = [['ati','aati','oti','eti'],1,0,'a'];
+G_altStem['maan'] = [['ti','ati'],1,0,'a'];
+G_altStem['ant'] = [['ati','aati'],1,0,'a'];
+G_altStem['ent'] = [['eti','ati'],1,0,'a'];
+G_altStem['ont'] = [['oti'],1,0,'a'];
 G_altStem['itabb'] = [['ati','aati'],1,0,'a'];
-G_altStem['etabb'] = [['eti'],1,0,'a'];
-G_altStem['atabb'] = [['ati'],1,0,'a'];
+G_altStem['etabb'] = [['eti','ati'],1,0,'a'];
+G_altStem['atabb'] = [['ati','aati'],1,0,'a'];
 G_altStem['abb'] = [['ati'],1,0,'a'];
 G_altStem['.niiy'] = [['ti'],1,1,'a'];
-G_altStem['.niiy'] = [['ti'],1,1,'a'];
+G_altStem['niiy'] = [['ti'],1,1,'a'];
 
 // for compounds
 
-var G_altStemComp = []; //[i][0] is the replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels, [i][3] tells us what sort of ending to expect from the original word (for compounds)
-G_altStemComp['niiy'] = ['niya',0,0,'a'];
-G_altStemComp['niiy'] = ['niya',0,0,'a'];
+var G_altStemComp = []; //[i][0] is the replacement ending, [i][1] tells us it's a verb, [i][2] tells us we have to shorten long vowels
+G_altStemComp['.niiya'] = ['.niya',0,0];
+G_altStemComp['niiya'] = ['niya',0,0];
+G_altStemComp['aa'] = ['',0,0];
+G_altStemComp['ii'] = ['a',0,0];
+
+var G_altInnerStem = [];  // inner replacements i = existing part, [i][0] = replacement, [i][1] = Noun, Verb 
+G_altInnerStem['gaah'] = ['gah','N'];
+G_altInnerStem['.mk'] = ['"nk','N'];
+G_altInnerStem['.mg'] = ['"ng','N'];
 
 
 // match blocking
 
-var G_uncompoundable = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning, 3 means allowed only at the end;
+var G_uncompoundable = []; // disallowed compound words - 1 means totally, 2 means allowed only at the beginning, 3 means allowed only at the end, 4 means not allowed at the beginning, 5 means not allowed at the end - not implemented;
 G_uncompoundable['a'] = 2;
 G_uncompoundable['asa'] = 2;
 G_uncompoundable['aa'] = 2;
@@ -44,6 +66,7 @@ G_uncompoundable['na.m'] = 1;
 G_uncompoundable['nu'] = 3;
 G_uncompoundable['ne'] = 1;
 G_uncompoundable['pha'] = 1;
+G_uncompoundable['pi'] = 4;
 G_uncompoundable['ba'] = 1;
 G_uncompoundable['bha'] = 1;
 G_uncompoundable['ma'] = 1;
@@ -70,31 +93,41 @@ G_uncompoundable['aadi'] = 3;
 
 var G_indeclinableEnding = new Array(); 
 /* endings
- * [0][x][0]=definition info, [1]=suf to add
+ * [0][x][0]=suffix to add, [1]=suf in dictionary
  * [1][0] =ending to add for analysis, [1] = ending to add for output
  */
-G_indeclinableEnding["nti"] = [[['0/3190^ti^0','ti']],['.m','n']]; 
-G_indeclinableEnding["iiti"] = [[['0/3190^ti^0','ti']],['i','ii']];  // these won't work with verb conjugations...
-G_indeclinableEnding["aati"] = [[['0/3190^ti^0','ti']],['a','aa']];
-G_indeclinableEnding["uuti"] = [[['0/3190^ti^0','ti']],['u','uu']];
-G_indeclinableEnding["oti"] = [[['0/3190^ti^0','ti']],['o','o']];
-G_indeclinableEnding["pi"] = [[['2/2866^pi^0','pi']]];
-G_indeclinableEnding["mpi"] = [[['2/2866^pi^0','pi']],['.m','m']];
-G_indeclinableEnding["~nhi"] = [[['4/1234^hi^0','hi']],['.m','~n']];
-G_indeclinableEnding["va"] = [[['3/1047^va^0','va']]];
-G_indeclinableEnding["eva"] = [[['0/4338^eva^0','eva']]];
-G_indeclinableEnding["idha"] = [[['0/3208^idha^0','idha']]];
-G_indeclinableEnding["yeva"] = [[['0^y^3','y'],['0/4338^eva^0','eva']]];
-G_indeclinableEnding["ya.m"] = [[['0/2055^aya.m^0','ya.m']]];
-G_indeclinableEnding["me"] = [[['0/2055^aya.m^0','me']]];
-G_indeclinableEnding["maa"] = [[['0/2055^aya.m^0','maa']]];
-G_indeclinableEnding["osi"] = [[['0/549^atthi^0','si']],['a','o']];
-G_indeclinableEnding["vevassa"] = [[['0/4338^eva^0','ev'],['0/2055^aya.m^0','assa']],['u','v']];
-//G_indeclinableEnding["~nca"] = [[['1/1501^ca^0','ca']],['.m','~n']];
+G_indeclinableEnding["nti"] = [[['ti','ti']],['.m','n']]; 
+G_indeclinableEnding["iiti"] = [[['ti','ti']],['i','ii']];  // these won't work with verb conjugations...
+G_indeclinableEnding["aati"] = [[['ti','ti']],['a','aa']];
+G_indeclinableEnding["uuti"] = [[['ti','ti']],['u','uu']];
+G_indeclinableEnding["oti"] = [[['ti','ti']],['o','o']];
+G_indeclinableEnding["pi"] = [[['pi','pi']]];
+G_indeclinableEnding["~nhi"] = [[['hi','hi']],['.m','~n']];
+G_indeclinableEnding["va"] = [[['va','va']]];
+G_indeclinableEnding["~n~neva"] = [[['eva','eva']],['.m','~n~n']];
+G_indeclinableEnding["~n~nevettha"] = [[['ev','eva'],['ettha','ettha']],['.m','~n~n']];
+G_indeclinableEnding["eva"] = [[['eva','eva']]];
+G_indeclinableEnding["idha"] = [[['idha','idha']]];
+G_indeclinableEnding["yeva"] = [[['y','ya'],['eva','eva']]];
+G_indeclinableEnding["ya.m"] = [[['ya.m','aya.m']]];
+G_indeclinableEnding["me"] = [[['me','aya.m']]];
+G_indeclinableEnding["maa"] = [[['maa','aya.m']]];
+G_indeclinableEnding["osi"] = [[['si','atthi']],['a','o']];
+G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']]];
+G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']],['i','']];
+G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']],['a','']];
+G_indeclinableEnding["vevassa"] = [[['ev','eva'],['assa','assa']],['u','v']];
+G_indeclinableEnding["paaha.m"] = [[['p','pi'],['aha.m','aaha.m']]];
+G_indeclinableEnding["oha.m"] = [[['ha.m','aha.m']],['o','o']];
+G_indeclinableEnding["~ncida.m"] = [[['c','ca'],['ida.m','aya.m']],['.m','~n']];
+G_indeclinableEnding["pissa"] = [[['p','pi'],['ssa','assa']]];
+G_indeclinableEnding["hamasmi"] = [[['ham','aha.m'],['asmi','atthi']]];
+G_indeclinableEnding["asmi"] = [[['asmi','atthi']]];
+G_indeclinableEnding["mhi"] = [[['mhi','atthi']]];
+
 
 var G_manualCompoundInd = [];
-G_manualCompoundInd["yaava~ncida.m"] = [['yaava~n','yaava'],['c','ca'],['ida.m','ida']]; // first is what appears, second is the dict entry
-G_manualCompoundInd['ceva'] = [['c','ca'],['eva','eva']]; 
+
 G_manualCompoundInd['meta.m'] = [['m','me'],['eta.m','eta']];
 G_manualCompoundInd['paneta.m'] = [['pan','pana'],['eta.m','eta']];
 G_manualCompoundInd['sabbeheva'] = [['sabbeh','sabba'],['eva','eva']];
@@ -102,11 +135,13 @@ G_manualCompoundInd['esohamasmi'] = [['eso','eta'],['ham','aha.m'],['asmi','atth
 G_manualCompoundInd['nesohamasmi'] = [['n','na'],['eso','eta'],['ham','aha.m'],['asmi','atthi']];
 G_manualCompoundInd['mayha.mpatthi'] = [['mayha.m','aha.m'],['p','pi'],['atthi','atthi']];
 G_manualCompoundInd['yampida.m'] = [['yam','ya'],['p','pi'],['ida.m','aya.m']];
-G_manualCompoundInd['yampissa'] = [['yam','ya'],['pi','pi'],['ssa','assa3']];
 G_manualCompoundInd['idhevima.m'] = [['idh','idha'],['ev','eva'],['ima.m','aya.m']];
-G_manualCompoundInd['idampissa'] = [['idam','aya.m'],['pi','pi'],['ssa','assa3']];
 G_manualCompoundInd['tvamasi'] = [['tvam','tuva.m'],['asi','atthi']];
 G_manualCompoundInd['kutettha'] = [['kut','ku'],['ettha','ettha']];
+G_manualCompoundInd['cevida.m'] = [['c','ca'],['ev','eva'],['ida.m','aya.m']];
+G_manualCompoundInd['natveva'] = [['na','na'],['tv','tu'],['eva','eva']];
+G_manualCompoundInd['tu.nhassa'] = [['tu.nh','tu.nhii'],['assa','assa4']];
+G_manualCompoundInd['svassa'] = [['sv','su'],['assa','assa4']];
 
 var G_manualCompoundDec = [];
 G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];

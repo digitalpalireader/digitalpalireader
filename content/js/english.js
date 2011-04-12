@@ -20982,3 +20982,4 @@ yt['horaayanta'] = [1,"nt.","any device showing the time; a clock.","oo","N","nt
 yt['horaalocana'] = [1,"nt.","a watch; a clock.","oo","N","nt.a","",,"horālocan","Y"];
 
 var xyt = yt;
+

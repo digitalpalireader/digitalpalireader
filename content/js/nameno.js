@@ -2596,3 +2596,17 @@ nameno['s8_suy^Sukhindriya Vagga'] = '';
 nameno['sasa_jat_316^Sasa Jātaka'] = '';
 nameno['t1_th^Tālacchiggala Sutta'] = '';
 nameno['verhacaani^Verehaccānigotta'] = '';
+
+// temp nameda
+
+nameda['kaalaama'] = ['6/161'];
+nameda['susima'] = ['5/233'];
+nameda['maalukyaa'] = ['9/5707'];
+nameda['maalukyaaputta'] = ['7/269'];
+nameda['maalukyaaputtasutta'] = ['7/269'];
+nameda['maalukyaputta'] = ['7/269'];
+nameda['maalukyaputtasutta'] = ['7/269'];
+nameda['paa.tikasutta'] = ['4/173'];
+nameda['paathika'] = ['4/173'];
+nameda['paathikasutta'] = ['4/173'];
+
