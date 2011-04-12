@@ -57,7 +57,7 @@ function searchTipitaka() {
 	starttime = starttime.getTime();
 
 
-	document.form.usearch.value = toUni(document.form.isearch.value); 
+	document.form.usearch.value = toUni(document.form.isearch.value).toLowerCase(); 
 	moves(1);
 	scrollToId('search',0);
 	clearDivs('search');
@@ -684,7 +684,6 @@ function createTables(xmlDoc,hiert)
 							texttomatch = texttomatch.replace(/'/g, '’');
 							texttomatch = texttomatch.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 							texttomatch = texttomatch.replace(/\.\./g, '.');
-							
 							if (yesplus >= 0) // multiple search terms		
 							{
 								tagtitle = '';

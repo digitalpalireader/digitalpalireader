@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Digital Pali Reader</title>
-<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
@@ -466,7 +466,7 @@ function onDocLoad() {
 			<div id="scf" align=center>
 				<form name="textpad">
 				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-				<p><span class="abut lbut" onclick="cleanPad()" title="Remove page references, var, and permalinks from text">Clean</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
+				<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
 				</form>
 			</div>
 		</div>
@@ -532,13 +532,13 @@ function onDocLoad() {
 	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/declension.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/linkin.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/PaliWord.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/linkout.js"></script>
+	
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/feedback.js"></script>

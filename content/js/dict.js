@@ -746,7 +746,7 @@ function titlesearchstart()
 				}
 			}
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="gettitle('+ x +','+document.getElementById('soMATm').checked+','+document.getElementById('soMATa').checked+','+document.getElementById('soMATt').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getSearchTitles('+ x +','+document.getElementById('soMATm').checked+','+document.getElementById('soMATa').checked+','+document.getElementById('soMATt').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
 			y++;
 		}
 	}

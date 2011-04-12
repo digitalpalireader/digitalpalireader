@@ -97,15 +97,13 @@ function formatuniout(data,which) { // prepare without links
 	//data = data.replace(/v\^/g, '');
 
 	if(cfg['showVariants'] == 'unchecked') data = data.replace(/ *\{[^}]*\} */g,' ');
-	else data = data.replace(/\}/g, '} ');
+	else data = data.replace(/\}/g, '} ').replace(/\{/g, ' {');
 	
 	data = data.replace(/   */g, ' ');
-	data = data.replace(/ +([,;])/g, "$1");
 
 	data = data.replace(/([^.])\.\.(?!\.)/g, "$1."); // double periods
 
 	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
-
 	//data = data.replace(/\"/g, '\u00B4');
 	var wordbyword = data.split(' ');
 	var addpre = '';
@@ -208,10 +206,10 @@ function formatuniout(data,which) { // prepare without links
 			convout += space;
 		}		
 
-		else if (wb.substring(0,2) == '<f') {
+		else if (/^<f/.exec(wb)) {
 			finout += wb + space;
 		}		
-		else if (wb.indexOf('<p') == 0) {
+		else if (/^<p/.exec(wb)) {
 			var permalink = wb.substring(2,wb.length-1);
 			convout += '\n\n';
 			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
@@ -261,6 +259,7 @@ function formatuniout(data,which) { // prepare without links
 	}
 	finout = finout.replace(/<@>/g, '<b>');
 	finout = finout.replace(/<\/@>/g, '</b>');
+	finout = finout.replace(/ +([,;])/g, "$1");
 	outarray[0] = finout;
 	outarray[1] = toUni(convout);
 	return outarray;
@@ -283,7 +282,7 @@ function preparepali(data,which) { // standard text prep for algorithm
 
 }
 
-function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
+function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 {
 	var lmt = 60;
 	var lgt = una.length;
@@ -314,7 +313,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 
 	if (namea[1] != ' ') {
 		namea[1] = translit(toUni(namea[1]));
-		if(lgt > lmt) {
+		if(lgt > lmt && !oneline) {
 			title += ',<br/>';
 			lgt = 0;
 		}
@@ -326,7 +325,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 	}
 	if (namea[2] != ' ') {
 		namea[2] = translit(toUni(namea[2]));
-		if(lgt > lmt) {
+		if(lgt > lmt && !oneline) {
 			title += ',<br/>';
 			lgt = 0;
 		}
@@ -338,7 +337,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 	}
 	if (namea[3] != ' ') {
 		namea[3] = translit(toUni(namea[3]));
-		if(lgt > lmt) {
+		if(lgt > lmt && !oneline) {
 			title += ',<br/>';
 			lgt = 0;
 		}
@@ -350,7 +349,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 	}
 	if (namea[4] != ' ') {
 		namea[4] = translit(toUni(namea[4]));
-		if(lgt > lmt) {
+		if(lgt > lmt && !oneline) {
 			title += ',<br/>';
 			lgt = 0;
 		}
@@ -362,7 +361,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert)
 	}
 	if (namea[5] != ' ') {
 		namea[5] = translit(toUni(namea[5]));
-		if(lgt > lmt) {
+		if(lgt > lmt && !oneline) {
 			title += ',<br/>';
 			lgt = 0;
 		}
@@ -429,7 +428,7 @@ function permalinkClick(link,url) {
 		catch(ex) {
 		}
 	}
-	alertFlash("Permalink copied to clipboard.",'RGBa(0,255,0,0.8)');
+	alertFlash("Permalink copied to clipboard.",'green');
 }
 	
 function copyToClipboard(text) {
@@ -445,13 +444,13 @@ function alertFlash(text,color) {
 		
 		switch (color) {
 			case 'red':
-			color = 'RGBa(255,0,0,0.8)';
+			color = 'RGBa(255,64,64,1)';
 			break;
 			case 'green':
-			color = 'RGBa(0,255,0,0.8)';
+			color = 'RGBa(64,255,64,1)';
 			break;
 			case 'yellow':
-			color = 'RGBa(255,255,0,0.8)';
+			color = 'RGBa(255,255,64,1)';
 			break;
 		}
 		document.getElementById('alert').style.backgroundColor = color;

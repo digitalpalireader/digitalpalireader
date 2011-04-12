@@ -320,7 +320,7 @@ function getatt(num,type,niklist) { // get atthakatha or tika word
     document.getElementById('maf').scrollTop = 0;
 }
  
-function gettitle(num,mul,att,tik,niklist) { // get titles 
+function getSearchTitles(num,mul,att,tik,niklist) { // get titles for title search 
 
     moveframex(2);
 
@@ -346,18 +346,18 @@ function gettitle(num,mul,att,tik,niklist) { // get titles
 
 
         var book = pca[1];
-        var type = pca[7];
-        var bookload = 'xml/' + nikaya + book + type + '.xml';
+        var hiert = pca[7];
+        var bookload = 'xml/' + nikaya + book + hiert + '.xml';
 
         var xmlhttp = new window.XMLHttpRequest();
         xmlhttp.open("GET", bookload, false);
         xmlhttp.send(null);
         var xmlDoc = xmlhttp.responseXML.documentElement;
 
-		if (type != 'm' && nikaya == 'k') {
+		if (hiert != 'm' && nikaya == 'k') {
 			var bookno = kudvala[pca[1]];
 		}
-		else if (type != 'm' && nikaya == 'k') {
+		else if (hiert != 'm' && nikaya == 'k') {
 			var bookno = abhivala[pca[1]];
 		}
 		else var bookno = parseInt(pca[1])-1;
@@ -419,10 +419,10 @@ function gettitle(num,mul,att,tik,niklist) { // get titles
 				}
 			}
 		}
-
-		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,type);
-
-        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML()">go</span></p>';
+		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,pca[2],pca[3],pca[4],pca[5],pca[6],(y ? y.length : 1)) : null);
+		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + nikname[nikaya] + ' ' + sn + ')' : '');
+		
+        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\']); importXML()">go</span></p>';
     }
     document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
     document.getElementById('mafbc').innerHTML += finout;

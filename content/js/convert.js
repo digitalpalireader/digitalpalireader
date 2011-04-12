@@ -123,11 +123,8 @@ function sendtoPad(data)
 {
 	moveframex(2)
 	moveframey('scf');
-	document.textpad.pad.value = data;
-}
-
-function cleanPad() {
-	var data = document.textpad.pad.value;
+	
+	data = data.replace(/\t/g, ' ');
 	data = data.replace(/” ”/g, '”');
 	data = data.replace(/’ ’/g, '’');
 	data = data.replace(/\u00B7/g, '\'');
@@ -140,7 +137,13 @@ function cleanPad() {
 	data = data.replace(/ VAR /g, ' ');
 	data = data.replace(/  *,/g, ',')
 	data = data.replace(/\.\.+/g, '.')
-	document.textpad.pad.value = data;
+	
+	document.textpad.pad.value += data + '\n';
+}
+
+function clearPad() {
+
+	if(confirm('Are you sure you want to erase all text from the text pad?')) document.textpad.pad.value = '';
 }
 
 function savePad() {

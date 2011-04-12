@@ -501,7 +501,7 @@ function getLinkPlace() { // permalinks
 }
 
 
-function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, vagga, sutta should be -1 (0,1,2...)
+function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
 	
 	var no;
 	
@@ -558,6 +558,8 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 	}
 	else hiert = 'm';
 	
+	is[0] = is[0].toUpperCase();
+	
 	nik = G_nikShortName[is[0]];
 	
 	var a1 = parseInt(is[1]);
@@ -570,11 +572,11 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			if(a1 > 34) return;
 			vagga = a1 - 1;
 			switch (true) {
-				case (a1 > 13):
-					vagga -= 13;
-					book++;
 				case (a1 > 23):
 					vagga -= 10;
+					book++;
+				case (a1 > 13):
+					vagga -= 13;
 					book++;
 				break;
 			}

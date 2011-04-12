@@ -47,7 +47,6 @@ function keyPressed(e) {
 		return; 
 	}
 
-	if (e.charCode == 108) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // l
 
 	if (e.charCode == 103) { importXML(); return; } // g
 	if (e.charCode == 112) { createTablep(); return; } // p
@@ -94,20 +93,22 @@ function keyPressed(e) {
 
 		var place = input.value;
 		
-		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} [0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
+		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
 		
-		place = place.replace(/[ .]/g,',');
+		place = place.replace(/^([DMASKdmask][Nn]-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 		
 		var outplace = getSuttaFromNumber(place.split(','));
 		if(!outplace) return alertFlash('Link not found','yellow');
-		
+		//dalert(outplace);
 		getplace(outplace);
 		importXML();
 				
 		return; 
 	} 
+
+	if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // r
 		
-		//devO(e.charCode);
+	//devO(e.charCode);
 }
 
 function showShortcutKeys() {
@@ -160,7 +161,7 @@ G_keysList.push('@\tdisplay feedback form');
 
 G_keysList.push(''); 
 
-G_keysList.push('l\treload the reader'); 
+G_keysList.push('r\treload the reader'); 
 
 G_keysList.push(''); 
 

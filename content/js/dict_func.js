@@ -129,7 +129,7 @@ function dictType(hard) {
 	}
 	
 	var getstring = document.form.dictin.value;
-	document.form.manual.value = toVel(document.form.dictin.value);
+	document.form.manual.value = toVel(document.form.dictin.value).toLowerCase();
 
 	if (which != 0) {
 		moveframey('dif');
