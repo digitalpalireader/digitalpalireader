@@ -293,7 +293,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			}
 			for (stem in G_altStem) {
 				//if(/^ga/.exec(oneword)) devO('-- try ' + oneword +  ' ' +stem+ ' ' + gend[0]);
-				if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2]) 
+				if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2] && (G_altStem[stem][1] && gend[4] == 'v' || !G_altStem[stem][1] && gend[4] == 'n')) 
 				{
 					for(gas0 in G_altStem[stem][0]) {
 						var dec = oneword.substring(0, endings[stem + gend[0]]) + G_altStem[stem][0][gas0];
@@ -306,7 +306,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 						if(wtrDup[dec]) continue;
 						else wtrDup[dec] = 1;
 
-						if (G_altStem[stem][1]) { wtrV.push(dec); }
+						if (G_altStem[stem][2]) { wtrV.push(dec); }
 						else { 
 							wtrN.push(dec); 
 							if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
@@ -317,7 +317,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}
 		}				
-		devO(wtrV);
+		//devO(wtrV);
 	}
 	if(!lastpart && !nextpart) {
 		 
@@ -590,23 +590,28 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 						var sufashorts = [];
 						
 						for (i in sufa[0]) {
+							var sufdefs = [];
 							sufanames.push(sufa[0][i][0]);
 							
 							var tw = sufa[0][i][1].replace(/[0-9]$/,'');
 							if(tw != sufa[0][i][1]) {
 								oneno = parseInt(sufa[0][i][1].match(/[0-9]$/)[0]);
-								sufadefs.push(mainda[tw][oneno] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+								sufdefs.push(mainda[tw][oneno] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
 							}
 							else {
 								for (k in mainda[tw]) {
-									sufadefs.push(mainda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+									sufdefs.push(mainda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
 								}
 							}
 							if(typeof(nameda[tw]) == 'object') {
 								for (k in nameda[tw]) {
-									sufadefs.push(nameda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+									sufdefs.push(nameda[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
 								}
 							}
+							if(typeof(yt[tw]) == 'object') {
+								sufashorts.push(tw);
+							}
+							sufadefs.push(sufdefs.join('#'));
 						}
 						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$'),nextpart,1]; // manually add the multi part "compound"
 						return outsuf;

@@ -371,27 +371,26 @@ G_endings.push(['eyyanti',0,0,'oti','v']);
 
 // conditional
 
-G_endings.push(['issa',1,0,'ati','v']);
-G_endings.push(['issaa',1,0,'ati','v']);
-G_endings.push(['issa.msu',1,0,'ati','v']);
-G_endings.push(['issa',1,0,'ati','v']);
-G_endings.push(['issatha',1,0,'ati','v']);
-G_endings.push(['issa.m',1,0,'ati','v']);
-G_endings.push(['issaama',1,0,'ati','v']);
+G_endings.push(['issa',1,2,'ati','v']);
+G_endings.push(['issaa',1,2,'ati','v']);
+G_endings.push(['issa.msu',1,2,'ati','v']);
+G_endings.push(['issatha',1,2,'ati','v']);
+G_endings.push(['issa.m',1,2,'ati','v']);
+G_endings.push(['issaama',1,2,'ati','v']);
 
-G_endings.push(['issa',1,0,'aati','v']);
-G_endings.push(['issaa',1,0,'aati','v']);
-G_endings.push(['issa.msu',1,0,'aati','v']);
-G_endings.push(['issa',1,0,'aati','v']);
-G_endings.push(['issatha',1,0,'aati','v']);
-G_endings.push(['issa.m',1,0,'aati','v']);
-G_endings.push(['issaama',1,0,'aati','v']);
+G_endings.push(['issa',1,2,'aati','v']);
+G_endings.push(['issaa',1,2,'aati','v']);
+G_endings.push(['issa.msu',1,2,'aati','v']);
+G_endings.push(['issa',1,2,'aati','v']);
+G_endings.push(['issatha',1,2,'aati','v']);
+G_endings.push(['issa.m',1,2,'aati','v']);
+G_endings.push(['issaama',1,2,'aati','v']);
 
-G_endings.push(['essa',1,0,'ti','v']);
-G_endings.push(['essaa',1,0,'ti','v']);
-G_endings.push(['essa.msu',1,0,'ti','v']);
-G_endings.push(['essa',1,0,'ti','v']);
-G_endings.push(['essatha',1,0,'ti','v']);
-G_endings.push(['essa.m',1,0,'ti','v']);
-G_endings.push(['essaama',1,0,'ti','v']);
+G_endings.push(['essa',1,2,'ti','v']);
+G_endings.push(['essaa',1,2,'ti','v']);
+G_endings.push(['essa.msu',1,2,'ti','v']);
+G_endings.push(['essa',1,2,'ti','v']);
+G_endings.push(['essatha',1,2,'ti','v']);
+G_endings.push(['essa.m',1,2,'ti','v']);
+G_endings.push(['essaama',1,2,'ti','v']);
 

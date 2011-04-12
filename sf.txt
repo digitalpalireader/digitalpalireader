@@ -2,5 +2,5 @@ This is the SourceForge archive for the Digital Pali Reader.  You will find the 
 
 The latest version is 1.0RC1 and the latest commit message is:
 
-DPPN diacritics completed, huge improvement in word recognition, bug fixes, Practical Grammar converted to single file 
+fixed stem problem
 
