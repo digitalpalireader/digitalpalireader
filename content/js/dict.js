@@ -668,6 +668,9 @@ function titlesearchstart()
 	if(document.form.sofuzzy.checked) {
 		getstring = toFuzzy(getstring);
 	}
+	else {
+		getstring = toUni(getstring);
+	}
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();	

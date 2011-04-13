@@ -134,82 +134,7 @@ function tipitakaOptions() {
 	}
 }
 
-
-var filearrayf = []; // [nik+book] = [m,a,t]
-filearrayf["v1"] = [1,1,1];
-filearrayf['v2'] = [1,1,1];
-filearrayf['v3'] = [1,1,1];
-filearrayf['v4'] = [1,1,1];
-filearrayf['v5'] = [1,1,1];
-filearrayf['v6'] = [1,1,1];
-filearrayf['d1'] = [1,1,1];
-filearrayf['d2'] = [1,1,1];
-filearrayf['d3'] = [1,1,1];
-filearrayf['m1'] = [1,1,1];
-filearrayf['m2'] = [1,1,1];
-filearrayf['m3'] = [1,1,1];
-filearrayf['s1'] = [1,1,1];
-filearrayf['s2'] = [1,1,1];
-filearrayf['s3'] = [1,1,1];
-filearrayf['s4'] = [1,1,1];
-filearrayf['s5'] = [1,1,1];
-filearrayf['a1'] = [1,1,1];
-filearrayf['a2'] = [1,1,1];
-filearrayf['a3'] = [1,1,1];
-filearrayf['a4'] = [1,1,1];
-filearrayf['a5'] = [1,1,1];
-filearrayf['a6'] = [1,1,1];
-filearrayf['a7'] = [1,1,1];
-filearrayf['a8'] = [1,1,1];
-filearrayf['a9'] = [1,1,1];
-filearrayf['a10'] = [1,1,1];
-filearrayf['a11'] = [1,1,1];
-filearrayf['k1'] = [1,1,0];
-filearrayf['k2'] = [1,1,0];
-filearrayf['k3'] = [1,1,0];
-filearrayf['k4'] = [1,1,0];
-filearrayf['k5'] = [1,1,0];
-filearrayf['k6'] = [1,1,0];
-filearrayf['k7'] = [1,1,0];
-filearrayf['k8'] = [1,1,0];
-filearrayf['k9'] = [1,1,0];
-filearrayf['k10'] = [1,1,0];
-filearrayf['k11'] = [1,0,0];
-filearrayf['k12'] = [1,1,0];
-filearrayf['k13'] = [1,1,0];
-filearrayf['k14'] = [1,1,0];
-filearrayf['k15'] = [1,1,0];
-filearrayf['k16'] = [1,0,0];
-filearrayf['k17'] = [1,0,0];
-filearrayf['k18'] = [1,0,0];
-filearrayf['k19'] = [1,0,0];
-filearrayf['k20'] = [1,0,0];
-filearrayf['k21'] = [1,0,0];
-filearrayf['y1'] = [1,1,1];
-filearrayf['y2'] = [1,1,1];
-filearrayf['y3'] = [1,1,1];
-filearrayf['y4'] = [1,1,1];
-filearrayf['y5'] = [1,1,1];
-filearrayf['y6'] = [1,1,1];
-filearrayf['y7'] = [1,0,0];
-filearrayf['y8'] = [1,0,0];
-filearrayf['y9'] = [1,1,1];
-filearrayf['y10'] = [1,0,0];
-filearrayf['y11'] = [1,0,0];
-filearrayf['y12'] = [1,0,0];
-filearrayf['y13'] = [1,0,0];
-filearrayf['y14'] = [1,0,0];
-filearrayf['x1'] = [1,1,0];
-filearrayf['x2'] = [1,1,0];
-filearrayf['b1'] = [1,0,0];
-filearrayf['b2'] = [1,0,0];
-filearrayf['g1'] = [1,0,0];
-filearrayf['g2'] = [1,0,0];
-filearrayf['g3'] = [1,0,0];
-filearrayf['g4'] = [1,0,0];
-filearrayf['g5'] = [1,0,0];
-
-var filearray = [];
+var G_searchG_searchFileArray = [];
 
 var nikletter = new Array();
 nikletter[0] = 'v';
@@ -250,7 +175,7 @@ var exword = new Array();
 var countmatch = 0;
 
 function resetvalues() {
-	filearray = [];
+	G_searchG_searchFileArray = [];
 	exword.length=0;
 	stopsearch = 0;	
 	bookperm = 1;
@@ -267,7 +192,7 @@ function resetvalues() {
 function makeProgressTable() {
 
 	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
-	var fal = filearray.length;
+	var fal = G_searchG_searchFileArray.length;
 	for (q2 = 0; q2 < fal; q2++)
 	{
 		tableout += '<td bgcolor="'+colorcfg['colbkcp']+'" width=1 class="bordered"></td>';
@@ -278,26 +203,26 @@ function makeProgressTable() {
 
 function pausesall() 
 {
-	// make filearray
+	// make G_searchG_searchFileArray
 	var which = document.getElementById('tipType').selectedIndex;
 
-	for(w in filearrayf) {
+	for(w in G_XMLG_searchFileArray) {
 		if ((which == 0 || which == 7) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
 		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+w.charAt(0)).checked) continue; // don't add unchecked collections
 
 		if(which > 6) { // multiple hier
 			for (x = 0; x < 3; x++) {
-				if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[w][x] == 1) { // this hier is checked and the file exists in this hier
-					filearray.push(w+hLetters[x]);
+				if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+					G_searchG_searchFileArray.push(w+G_hLetters[x]);
 				}
 			}
 		}
 		else { // single hier
-			if (hier == "m" && filearrayf[w][0] == 1 || hier == "a" && filearrayf[w][1] == 1 || hier == "t" && filearrayf[w][2] == 1) filearray.push(w+hier);
+			if (hier == "m" && G_XMLG_searchFileArray[w][0] == 1 || hier == "a" && G_XMLG_searchFileArray[w][1] == 1 || hier == "t" && G_XMLG_searchFileArray[w][2] == 1) G_searchG_searchFileArray.push(w+hier);
 		}
 	}
 
-	if(filearray.length == 0) {
+	if(G_searchG_searchFileArray.length == 0) {
 		alert('No books in selection');
 		return;
 	}
@@ -332,27 +257,27 @@ function pausesall()
 }
 function pausetwo() { // init function for single collection
 
-	// make filearray
+	// make G_searchG_searchFileArray
 	var which = document.getElementById('tipType').selectedIndex;
 	var nikaya = document.form.nik.value;
 	
-	for(w in filearrayf) {
+	for(w in G_XMLG_searchFileArray) {
 		if (w.charAt(0) != nikaya) continue; // only this collection
 		if ((which == 5 || which == 12) && !document.getElementById('tsoBObook' + w.substring(1)).checked) continue; // skip unchecked books 
 
 		if(which > 6) { // multiple hier
 			for (x = 0; x < 3; x++) {
-				if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[w][x] == 1) { // this hier is checked and the file exists in this hier
-					filearray.push(w+hLetters[x]);
+				if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+					G_searchFileArray.push(w+G_hLetters[x]);
 				}
 			}
 		}
 		else { // single hier
-			if (hier == "m" && filearrayf[w][0] == 1 || hier == "a" && filearrayf[w][1] == 1 || hier == "t" && filearrayf[w][2] == 1) filearray.push(w+hier);
+			if (hier == "m" && G_XMLG_searchFileArray[w][0] == 1 || hier == "a" && G_XMLG_searchFileArray[w][1] == 1 || hier == "t" && G_XMLG_searchFileArray[w][2] == 1) G_searchFileArray.push(w+hier);
 		}
 	}
 
-	if(filearray.length == 0) {
+	if(G_searchFileArray.length == 0) {
 		alert('No books in selection');
 		return;
 	}
@@ -376,16 +301,16 @@ function pausethree() {
 
 	if(which == 9) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
-			if(document.getElementById('tsoMAT'+hLetters[x]).checked && filearrayf[nikbook][x] == 1) { // this hier is checked and the current book in the current nikaya exists in this hier
-				filearray.push(nikbook+hLetters[x]);
+			if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[nikbook][x] == 1) { // this hier is checked and the current book in the current nikaya exists in this hier
+				G_searchFileArray.push(nikbook+G_hLetters[x]);
 			}
 		}
 	}		
 	else { // single book
-		filearray = [nikbook+hier];
+		G_searchFileArray = [nikbook+hier];
 	}
 	
-	if(filearray.length == 0) {
+	if(G_searchFileArray.length == 0) {
 		alert('No books in selection');
 		return;
 	}
@@ -436,7 +361,7 @@ function importXMLs(cnt)
 	
 	if (cnt == 1) // whole tipitaka or multiple collections
 	{
-		bookfile = filearray[qz];
+		bookfile = G_searchFileArray[qz];
 		newnikaya = bookfile.charAt(0);
 		if (nikayaat != newnikaya)
 		{
@@ -466,9 +391,9 @@ function importXMLs(cnt)
 		createTables(xmlDoc,hiert);
 					
 		document.getElementById('stfH'+nikayaat).innerHTML = thiscount;
-		if (qz < filearray.length-1) 
+		if (qz < G_searchFileArray.length-1) 
 		{
-			nextbookfile = filearray[qz+1];
+			nextbookfile = G_searchFileArray[qz+1];
 			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stfH'+nikayaat).style.color=colorcfg['colsel'];
 			qz++;
 			bounce(1);
@@ -485,7 +410,7 @@ function importXMLs(cnt)
 		var nikaya = document.form.nik.value;
 
 		
-		bookfile = filearray[qz];
+		bookfile = G_searchFileArray[qz];
 		bookat = bookfile.substring(1,bookfile.length-1);
 		bookperm = bookat;
 		hiert = bookfile.charAt(bookfile.length-1);
@@ -507,7 +432,7 @@ function importXMLs(cnt)
 					
 		document.getElementById('stfx').innerHTML = thiscount;
 		
-		if (qz < filearray.length-1) 
+		if (qz < G_searchFileArray.length-1) 
 		{
 			qz++;
 			bounce(2);
@@ -524,7 +449,7 @@ function importXMLs(cnt)
 		var nikaya = document.form.nik.value;
 		var book = document.form.book.value;
 		
-		bookfile = filearray[qz];
+		bookfile = G_searchFileArray[qz];
 		hiert = bookfile.charAt(bookfile.length-1);
 
 		bookload = 'xml/' + bookfile + '.xml';
@@ -537,7 +462,7 @@ function importXMLs(cnt)
 					
 		document.getElementById('stfx').innerHTML = thiscount;
 		
-		if (qz < filearray.length-1) 
+		if (qz < G_searchFileArray.length-1) 
 		{
 			qz++;
 			bounce(3);

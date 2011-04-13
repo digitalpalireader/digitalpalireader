@@ -1,4 +1,90 @@
 
+
+var G_XMLFileArray = []; // [nik+book] = [m,a,t]
+G_XMLFileArray["v1"] = [1,1,1];
+G_XMLFileArray['v2'] = [1,1,1];
+G_XMLFileArray['v3'] = [1,1,1];
+G_XMLFileArray['v4'] = [1,1,1];
+G_XMLFileArray['v5'] = [1,1,1];
+G_XMLFileArray['v6'] = [1,1,1];
+G_XMLFileArray['d1'] = [1,1,1];
+G_XMLFileArray['d2'] = [1,1,1];
+G_XMLFileArray['d3'] = [1,1,1];
+G_XMLFileArray['m1'] = [1,1,1];
+G_XMLFileArray['m2'] = [1,1,1];
+G_XMLFileArray['m3'] = [1,1,1];
+G_XMLFileArray['s1'] = [1,1,1];
+G_XMLFileArray['s2'] = [1,1,1];
+G_XMLFileArray['s3'] = [1,1,1];
+G_XMLFileArray['s4'] = [1,1,1];
+G_XMLFileArray['s5'] = [1,1,1];
+G_XMLFileArray['a1'] = [1,1,1];
+G_XMLFileArray['a2'] = [1,1,1];
+G_XMLFileArray['a3'] = [1,1,1];
+G_XMLFileArray['a4'] = [1,1,1];
+G_XMLFileArray['a5'] = [1,1,1];
+G_XMLFileArray['a6'] = [1,1,1];
+G_XMLFileArray['a7'] = [1,1,1];
+G_XMLFileArray['a8'] = [1,1,1];
+G_XMLFileArray['a9'] = [1,1,1];
+G_XMLFileArray['a10'] = [1,1,1];
+G_XMLFileArray['a11'] = [1,1,1];
+G_XMLFileArray['k1'] = [1,1,0];
+G_XMLFileArray['k2'] = [1,1,0];
+G_XMLFileArray['k3'] = [1,1,0];
+G_XMLFileArray['k4'] = [1,1,0];
+G_XMLFileArray['k5'] = [1,1,0];
+G_XMLFileArray['k6'] = [1,1,0];
+G_XMLFileArray['k7'] = [1,1,0];
+G_XMLFileArray['k8'] = [1,1,0];
+G_XMLFileArray['k9'] = [1,1,0];
+G_XMLFileArray['k10'] = [1,1,0];
+G_XMLFileArray['k11'] = [1,0,0];
+G_XMLFileArray['k12'] = [1,1,0];
+G_XMLFileArray['k13'] = [1,1,0];
+G_XMLFileArray['k14'] = [1,1,0];
+G_XMLFileArray['k15'] = [1,1,0];
+G_XMLFileArray['k16'] = [1,0,0];
+G_XMLFileArray['k17'] = [1,0,0];
+G_XMLFileArray['k18'] = [1,0,0];
+G_XMLFileArray['k19'] = [1,0,0];
+G_XMLFileArray['k20'] = [1,0,0];
+G_XMLFileArray['k21'] = [1,0,0];
+G_XMLFileArray['y1'] = [1,1,1];
+G_XMLFileArray['y2'] = [1,1,1];
+G_XMLFileArray['y3'] = [1,1,1];
+G_XMLFileArray['y4'] = [1,1,1];
+G_XMLFileArray['y5'] = [1,1,1];
+G_XMLFileArray['y6'] = [1,1,1];
+G_XMLFileArray['y7'] = [1,0,0];
+G_XMLFileArray['y8'] = [1,0,0];
+G_XMLFileArray['y9'] = [1,1,1];
+G_XMLFileArray['y10'] = [1,0,0];
+G_XMLFileArray['y11'] = [1,0,0];
+G_XMLFileArray['y12'] = [1,0,0];
+G_XMLFileArray['y13'] = [1,0,0];
+G_XMLFileArray['y14'] = [1,0,0];
+G_XMLFileArray['x1'] = [1,1,0];
+G_XMLFileArray['x2'] = [1,1,0];
+G_XMLFileArray['b1'] = [1,0,0];
+G_XMLFileArray['b2'] = [1,0,0];
+G_XMLFileArray['g1'] = [1,0,0];
+G_XMLFileArray['g2'] = [1,0,0];
+G_XMLFileArray['g3'] = [1,0,0];
+G_XMLFileArray['g4'] = [1,0,0];
+G_XMLFileArray['g5'] = [1,0,0];
+
+
+var G_hNumbers = [];
+G_hNumbers['m'] = 0;
+G_hNumbers['a'] = 1;
+G_hNumbers['t'] = 2;
+
+var G_hTitles = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
+
+var G_hLetters = ['m','a','t'];
+
+
 var nikname = new Array();
 nikname['v'] = "Vin";
 nikname['d'] = "DN";
@@ -334,15 +420,6 @@ function limitt() {
 	else { return false };
 }
 
-var hNumbers = [];
-hNumbers['m'] = 0;
-hNumbers['a'] = 1;
-hNumbers['t'] = 2;
-var hTitle = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
-
-var hLetters = ['m','a','t'];
-
-
 function switchhier(htmp,stop) {
 
 	if(hier == htmp) return;
@@ -359,7 +436,7 @@ function switchhier(htmp,stop) {
 		return;
 	}
 	if (document.form.nik.value == 'k' && htmp == 'a' && kudvala[document.form.book.value] == undefined) {
-			alertFlash(hTitle[hNumbers[htmp]] + ' not available for '+getBookName(document.form.nik.value,htmp,document.form.book.selectedIndex)+'.','RGBa(255,0,0,0.8)');
+			alertFlash(G_hTitles[G_hNumbers[htmp]] + ' not available for '+getBookName(document.form.nik.value,htmp,document.form.book.selectedIndex)+'.','RGBa(255,0,0,0.8)');
 		return;
 	}
 
@@ -367,16 +444,16 @@ function switchhier(htmp,stop) {
 
 	// style
 
-	ha = hLetters;
+	ha = G_hLetters;
 
 	for(i=0; i<ha.length; i++) {
 		if (ha[i] == htmp) {
-			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+hTitle[i];
+			document.getElementById('dhier'+ha[i]).title = 'Currently viewing '+G_hTitles[i];
 
 			document.getElementById('dhier'+ha[i]).className = 'abut sbut '+himg[i]+'but';
 		}
 		else {
-			document.getElementById('dhier'+ha[i]).title = 'Change to '+hTitle[i];
+			document.getElementById('dhier'+ha[i]).title = 'Change to '+G_hTitles[i];
 			document.getElementById('dhier'+ha[i]).className = 'abut '+himg[i]+'but';
 		}
 	}
@@ -504,6 +581,13 @@ function getLinkPlace() { // permalinks
 function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
 	
 	var no;
+	book = parseInt(book);
+	meta = parseInt(meta);
+	volume = parseInt(volume);
+	vagga = parseInt(vagga);
+	sutta = parseInt(sutta);
+	section = parseInt(section);
+	sectlength = parseInt(sectlength);
 	
 	switch (nik) {
 		case 'd':
@@ -539,6 +623,7 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { /
 					vagga += 11;
 				break;
 			}
+			if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
 			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
 		break;
 	}

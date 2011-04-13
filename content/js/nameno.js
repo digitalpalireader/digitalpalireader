@@ -2609,4 +2609,6 @@ nameda['maalukyaputtasutta'] = ['7/269'];
 nameda['paa.tikasutta'] = ['4/173'];
 nameda['paathika'] = ['4/173'];
 nameda['paathikasutta'] = ['4/173'];
+nameda['bhesaka.laavana'] = ['1/272'];
+
 

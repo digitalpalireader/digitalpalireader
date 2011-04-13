@@ -9,7 +9,7 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-function importXML(labelsearch,para,isPL)
+function loadXMLSection(labelsearch,para,isPL)
 {
 	if (hier == 't' && limitt()) { 
 		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
@@ -88,7 +88,7 @@ function importXML(labelsearch,para,isPL)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+hTitle[ht]+'">'+hi[ht]+'</span> ';
+					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
 					matButton = 0;
 
 				}

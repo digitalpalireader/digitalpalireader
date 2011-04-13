@@ -419,7 +419,8 @@ function getSearchTitles(num,mul,att,tik,niklist) { // get titles for title sear
 				}
 			}
 		}
-		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,pca[2],pca[3],pca[4],pca[5],pca[6],(y ? y.length : 1)) : null);
+		//dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
+		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,(y ? y.length : 1)) : null);
 		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + nikname[nikaya] + ' ' + sn + ')' : '');
 		
         finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\']); importXML()">go</span></p>';
