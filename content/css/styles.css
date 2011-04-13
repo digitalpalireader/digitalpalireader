@@ -30,27 +30,28 @@ select, input, textarea {
 	font-size: 24px;
 }
 
+.paperback {
+}
+
+.chromeback {
+}
 
 .abut {
 	border:silver 2px solid;
 	background-color: white;
 	padding:3px 6px 3px 6px;
-	opacity: 0.8;
-	-moz-opacity: 0.8;
 	
-}
-/* end static */
-
-.abut:hover {
-	cursor:pointer;
-	opacity: 1;
-	-moz-opacity: 1;
 }
 
 .sbut {
-	opacity: 1;
-	-moz-opacity: 1;
 }
+
+.abut:hover {
+	cursor:pointer;
+}
+
+
+/* end static */
 
 
 .tbut {
@@ -59,6 +60,11 @@ select, input, textarea {
 
 .mbut {
 	border-left:none;
+}
+
+.cbut {
+	border-top:none;
+	border-bottom:none;
 }
 
 .lbut {
@@ -72,6 +78,18 @@ select, input, textarea {
 	border-radius:0 4px 4px 0;
 	-moz-border-radius:0 4px 4px 0;
 }
+
+.tbut {
+	border-radius:4px 4px 0 0;
+	-moz-border-radius:4px 4px 0 0;
+}
+
+.bbut {
+	border-radius:0 0 4px 4px;
+	-moz-border-radius:0 0 4px 4px;
+}
+
+
 .obutc {
 	margin:10px 5px;
 }
@@ -307,7 +325,7 @@ position:absolute;
 right:0px;
 left:0px;
 top:0px;
-bottom:228px;
+bottom:0px;
 overflow:auto;
 }
 #maft {

@@ -1,4 +1,6 @@
-// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
+// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh  
+
+//«»
 
 
 function outputFormattedData(data,which,place) // calls text prep, then outputs it to preFrame

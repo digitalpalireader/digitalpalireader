@@ -15,15 +15,19 @@ function onDocLoad() {
 
 
 </script>
-<script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/receive.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/xml.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
@@ -38,8 +42,8 @@ function onDocLoad() {
 	<div id="matrelc"></div>
 	<div id="right" onmouseover="document.body.style.cursor='auto'">
 		<div id="maf">
-			<div align="left" id="mafa"></div>
-			<div align="justify" id="mafb">
+			<div align="left" id="mafa" class="paperback"></div>
+			<div align="justify" id="mafb" class="paperback">
 				<div id="mafbc">
 					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
 					<div id="mafe" align=center>
@@ -49,19 +53,19 @@ function onDocLoad() {
 					<div id="mafdebug"></div>
 				</div>
 			</div>
+<!--		<div id="closebot" class="pointer" onclick="moveframex()">⟱</div> -->
 		</div>
-		<div id="closebot" class="pointer" onclick="moveframex()">x</div>
 		<div id="rightbot">
 			<div id="difout">
 				<div id="cdif">
-					<div id="dif">
+					<div id="dif" class="paperback">
 						<div id="difb">
 						</div>
 					</div>
 				</div>
 				<div id="difhist"></div>
 			</div>
-			<div id="cof">
+			<div id="cof" class="paperback">
 				<form name="convertor">
 					<table align="center">
 						<tr>
@@ -123,7 +127,7 @@ function onDocLoad() {
 					<div align="center">Use the "s" key to send a selection or entire section to this convertor.</div>
 				</form>
 			</div>
-			<div id="scf" align=center>
+			<div id="scf" class="paperback" align=center>
 				<form name="textpad">
 				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
 				<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
@@ -132,7 +136,7 @@ function onDocLoad() {
 		</div>
 		<div id="anf" align=right>
 			<div id="brtop"></div>
-			<div id="brmid"></div>
+			<div id="brmid" class="chromeback"></div>
 			<div id="brbot"></div>
 			<div id="anft">
 				<div align="center" id="anfa"></div>
@@ -163,6 +167,9 @@ function onDocLoad() {
 	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/tiklist.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/titles.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>

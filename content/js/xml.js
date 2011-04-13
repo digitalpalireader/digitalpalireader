@@ -11,6 +11,8 @@ matValue['t'] = '';
 
 function loadXMLSection(labelsearch,para,place,isPL)
 { 
+	moveframex(2);
+	
 	hier = place[7];
 	if (hier == 't' && limitt()) { 
 		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
@@ -24,9 +26,6 @@ function loadXMLSection(labelsearch,para,place,isPL)
 		alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
 		return;
 	}		
-
-	// change title
-	
 
 
 	document.getElementById('mafbc').appendChild(pleasewait);
@@ -57,8 +56,6 @@ function loadXMLSection(labelsearch,para,place,isPL)
 
 
 
-
-	
 	var t = xmlDoc.getElementsByTagName("ha");
 	var u = t[0].getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -95,7 +92,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+G_nikToNumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
+					relout+='<span class="abut obut small" onclick="matButton = 1; openPlace(\''+hi[ht] + "','"+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',null,null,(event.ctrlKey?1:null));importXML();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
 					matButton = 0;
 
 				}
@@ -104,7 +101,70 @@ function loadXMLSection(labelsearch,para,place,isPL)
 			break;
 		}
 	}
-	relout = relout.slice(0,-1);
+	
+	
+	// prev and next
+	var prev, next;
+	
+	if(section > 0) {
+	}
+	else if(sutta > 0) var ym = x[sutta-1].getElementsByTagName("h4"); 
+	else if(vagga > 0) {
+		var xm = w[vagga-1].getElementsByTagName("h3"); 
+		var ym = xm[xm.length-1].getElementsByTagName("h4"); 
+	}
+	else if(volume > 0)  {
+		var wm = v[volume-1].getElementsByTagName("h2"); 
+		var xm = wm[wm.length-1].getElementsByTagName("h3"); 
+		var ym = xm[xm.length-1].getElementsByTagName("h4"); 
+	}
+	else if(meta > 0) {
+		var vm = u[meta-1].getElementsByTagName("h1"); 
+		var wm = vm[vm.length-1].getElementsByTagName("h2"); 
+		var xm = wm[wm.length-1].getElementsByTagName("h3"); 
+		var ym = xm[xm.length-1].getElementsByTagName("h4"); 
+	}
+	else var prevnext = false;
+	
+	switch(true) {
+		case (prevnext == false):
+		break;
+		case (section > 0):
+			prev = [hier,nikaya,bookno,meta,volume,vagga,sutta,section-1];
+		break;
+		case (sutta > 0):
+			prev = [hier,nikaya,bookno,meta,volume,vagga,sutta-1,ym.length-1];
+		break;
+		case (vagga > 0):
+			prev = [hier,nikaya,bookno,meta,volume,vagga-1,xm.length-1,ym.length-1];
+		break;
+		case (volume > 0):
+			prev = [hier,nikaya,bookno,meta,volume-1,wm.length-1,xm.length-1,ym.length-1];
+		break;
+		case (meta > 0):
+			prev = [hier,nikaya,bookno,meta-1,vm.length-1,wm.length-1,xm.length-1,ym.length-1];
+		break;
+	}
+	
+	switch(true) {
+		case (section < y.length-1):
+			next = [hier,nikaya,bookno,meta,volume,vagga,sutta,section+1];
+		break;
+		case (sutta < x.length-1):
+			next = [hier,nikaya,bookno,meta,volume,vagga,sutta+1,0];
+		break;
+		case (vagga < w.length-1):
+			next = [hier,nikaya,bookno,meta,volume,vagga+1,0,0];
+		break;
+		case (volume < v.length-1):
+			next = [hier,nikaya,bookno,meta,volume+1,0,0,0];
+		break;
+		case (meta < u.length-1):
+			next = [hier,nikaya,bookno,meta+1,0,0,0,0];
+		break;
+	}
+	
+	var nextprev = (prev ? '<span class="lbut abut small" onclick="openPlace(\''+prev.join("\',\'")+'\');">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span class="rbut abut small" onclick="openPlace(\''+next.join("\',\'")+'\');">»</span>':'<span class="rbut abut small">&nbsp;</span>');
 	
 	// permalink
 	
@@ -146,7 +206,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center>'+titleout+modt+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+ nextprev+ ' ' +relout+'</td><td align=center>'+titleout+modt+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
 	var hierb = hier;
 	
@@ -163,7 +223,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 
 	// tab title
 
-	var tabT = G_nikLongName[nikaya] +  (modno ? modno : (hier !='m' ? '-'+hier:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hier !='m' ? '-'+hier:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	
@@ -261,6 +321,322 @@ function loadXMLSection(labelsearch,para,place,isPL)
 
 }
 
+function loadXMLindex(place) {
+	
+	moveframex(1);
+	
+	var DshowH = false; // dev tool
+	DshowH = true; // dev tool
+	
+	document.activeElement.blur();
+	
+	if (place[2] == 't' && limitt()) { 
+		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+		return; 
+	}	
+	
+	hier = place[2];
+	
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(pleasewait);
+
+	var nikaya = place[0];
+	var bookno = parseInt(place[1]);
+	var book = bookno+1;
+	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+
+	var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", bookload, false);
+    xmlhttp.send(null);
+    var xmlDoc = xmlhttp.responseXML.documentElement;
+
+	var z = xmlDoc.getElementsByTagName("ha");
+	var y = '';
+	var x = '';
+	var w = '';
+	var v = '';
+	var u = '';
+	
+	var tt, dEI,namen;
+	
+	var theData = "";
+	var theDatao = "";
+	var tmpData = '';
+	
+	bookfile = nikaya + book;
+
+
+	// permalink
+
+	var permalink = 'chrome://digitalpalireader/content/index.htm?';
+	
+	try {
+		window.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
+	}
+	catch(ex) {
+	}
+	
+	var tmp = 0;
+	var tmp1 = 0;
+	var tmp2 = 0;
+	var tmp3 = 0;
+	var tmp4 = 0;
+	var tmp5 = 0;
+	var tmp6 = 0;
+
+	var col = ['coltext','colsel','colped','coldppn','colcpd'];
+	var whichcol = [0,0,0,0,0];
+	var wcs = 0;
+
+	var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
+	document.getElementsByTagName('title')[0].innerHTML = tabT;
+
+	
+	if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) {
+		theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); 
+
+	}
+	else theData = '';
+	if (z.length > 1 && theData == '') { theData = unnamed; } 
+	if (theData != '') {
+		
+		namen = '';
+		if (cfg['showNames'] == 'checked') {
+			// dppn title 'n'
+
+			tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+			if(tt.length > 1) {
+				dEI = getDppnEntry(tt);
+				if (dEI.length > 0) {
+					namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+				}
+			}
+		}
+		
+		whichcol[0] = 1; // bump up to let the second color know
+
+		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.0.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+',0,0,0,0,0,null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a>'+namen+'<br />';
+	}
+	y = z[tmp].getElementsByTagName("h0");
+	for (tmp2 = 0; tmp2 < y.length; tmp2++)
+	{
+		if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+		if (y.length > 1 && theData == '') { theData = unnamed; }
+		if (theData != '') {
+
+			namen = '';
+			if (cfg['showNames'] == 'checked') {
+
+				// dppn title 'n'
+				
+				tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+				if(tt.length > 1) {
+					dEI = getDppnEntry(tt);
+					if (dEI.length > 0) {
+						namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+					}
+				}
+			}
+							
+			wcs = whichcol[0]; // either 0 or 1
+			whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
+			var spaces = '';
+			for(f = 0; f < wcs; f++) {
+				spaces += '&nbsp;&nbsp;';
+			}
+			
+			theDatao += spaces+(devCheck == 1 && DshowH ? '[0]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+',0,0,0,0,null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>'+namen;
+
+			var transin;
+			var transout='';
+			if (hier == "m") { 
+				transin = addtrans(5,nikaya,bookno,tmp2);
+				if (transin) {
+					theDatao += transin.join('&nbsp;'); 
+				}
+			}
+			theDatao += '<br />';
+		}
+		x = y[tmp2].getElementsByTagName("h1");
+		for (tmp3 = 0; tmp3 < x.length; tmp3++)
+		{
+			if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+			if (x.length > 1 && theData == '') { theData = unnamed; }
+			if (theData != '') {
+
+				namen = '';
+				if (cfg['showNames'] == 'checked') {
+
+					// dppn title 'n'
+					
+					tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+					if(tt.length > 1) {
+						dEI = getDppnEntry(tt);
+						if (dEI.length > 0) {
+							namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+						}
+					}
+				}					
+					
+				wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
+				whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
+			
+				spaces = '';
+				for(f = 0; f < wcs; f++) {
+					spaces += '&nbsp;&nbsp;';
+				}
+
+				theDatao += spaces+(devCheck == 1 && DshowH ? '[1]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+',0,0,0,null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>'+namen;
+
+				var transin;
+				var transout='';
+				if (hier == "m") { 
+					transin = addtrans(4,nikaya,bookno,tmp2,tmp3);
+					if (transin) {
+						theDatao += transin.join('&nbsp;'); 
+					}
+				}
+				theDatao += '<br />';
+			}
+			w = x[tmp3].getElementsByTagName("h2");
+			for (tmp4 = 0; tmp4 < w.length; tmp4++)
+			{
+				if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+				if (w.length > 1 && theData == '') { theData = unnamed; }
+				if (theData != '') {
+
+
+					namen = '';
+					if (cfg['showNames'] == 'checked') {
+						// dppn title 'n'
+						
+						tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+						if(tt.length > 1) {
+							dEI = getDppnEntry(tt);
+							if (dEI.length > 0) {
+								namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+							}
+						}
+					}
+									
+						
+						
+					wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
+					whichcol[3] = 1; // bump
+					
+					spaces = '';
+					for(f = 0; f < wcs; f++) {
+						spaces += '&nbsp;&nbsp;';
+					}
+
+					theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0,null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' && hier == 'm' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,0) + ')' : '') + '</d></font></a>'+namen;
+					var transin;
+					var transout='';
+					if (hier == "m") { 
+						transin = addtrans(3,nikaya,bookno,tmp2,tmp3,tmp4);
+						if (transin) {
+							theDatao += transin.join('&nbsp;'); 
+						}
+					}
+					theDatao += '<br />';
+				}
+
+				v = w[tmp4].getElementsByTagName("h3");
+				for (tmp5 = 0; tmp5 < v.length; tmp5++)
+				{
+					if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+					if (v.length > 1 && theData == '') { theData = unnamed; }
+					if (theData != '') {
+
+						namen = '';
+						if (cfg['showNames'] == 'checked') {
+							// dppn title 'n'
+							
+							tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+							if(tt.length > 1) {
+								dEI = getDppnEntry(tt);
+								if (dEI.length > 0) {
+									namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+								}
+							}
+						}			
+							
+
+						wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
+						whichcol[4] = 1; // bump
+
+						spaces = '';
+						for(f = 0; f < wcs; f++) {
+							spaces += '&nbsp;&nbsp;';
+						}
+
+						theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0,null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,0) + ')' : '') + '</d></font></a>'+namen;
+						var transin;
+						var transout='';
+						if (hier == "m") { 
+							transin = addtrans(2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
+							if (transin) {
+								theDatao += transin.join('&nbsp;');  
+							}
+						}
+						theDatao += '<br />';
+					}
+
+
+					u = v[tmp5].getElementsByTagName("h4");
+					for (tmp6 = 0; tmp6 < u.length; tmp6++)
+					{
+						if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
+						if (u.length > 1 && theData == '') { theData = unnamed; }
+						if (theData != '') {
+
+							namen = '';
+							if (cfg['showNames'] == 'checked') {
+								// dppn title 'n'
+								
+								tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
+								if(tt.length > 1) {
+									dEI = getDppnEntry(tt);
+									if (dEI.length > 0) {
+										namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+									}
+								}
+							}
+											
+								
+
+							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
+							spaces = '';
+							for(f = 0; f < wcs; f++) {
+								spaces += '&nbsp;&nbsp;';
+							}
+
+							theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',null,null,(event.ctrlKey?1:\'\'));"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>'+namen;
+							var transin;
+							var transout='';
+							if (hier == "m") { 
+								transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+								//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
+								if (transin) {
+									theDatao += transin.join('&nbsp;');  
+								}
+							}
+							theDatao += '<br />';
+						}
+					}
+				}
+			}
+		}
+	}
+	var theDataDiv = document.createElement('div');
+	theDataDiv.innerHTML = theDatao;
+	document.getElementById('mafbc').innerHTML = '';
+	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
+
+	document.getElementById('maf').scrollTop = 0;
+}
+
+
 function gettitles(altget,stop,prev,ssect)
 {
 
@@ -301,7 +677,7 @@ function gettitles(altget,stop,prev,ssect)
 	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
 	else name = unnamed;
 	var outname = translit(shortenTitle(name));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex(1);">'+outname+'</span>';
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex((event.ctrlKey?1:\'\'));">'+outname+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -367,317 +743,11 @@ function gettitles(altget,stop,prev,ssect)
 	if (prev) document.form.section.selectedIndex = y.length - 1;
 	if (ssect && ssect > 0) document.form.section.selectedIndex = searchsect;
 	if (newload == 0) importXML();
-	else if (newload == 2) importXMLindex(1);
+	else if (newload == 2) importXMLindex();
 	getsutta = 0;
 }
 
 
-function loadXMLindex(place) {
-	
-	moveframex(1);
-	
-	var DshowH = false; // dev tool
-	DshowH = true; // dev tool
-	
-	document.activeElement.blur();
-	
-	if (place[2] == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
-		return; 
-	}	
-	
-	hier = place[2];
-	
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-
-	var nikaya = place[0];
-	var bookno = parseInt(place[1]);
-	var book = bookno+1;
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var z = xmlDoc.getElementsByTagName("ha");
-	var y = '';
-	var x = '';
-	var w = '';
-	var v = '';
-	var u = '';
-	
-	var tt, dEI,namen;
-	
-	var theData = "";
-	var theDatao = "";
-	var tmpData = '';
-	
-	bookfile = nikaya + book;
-
-
-	var permalink = 'chrome://digitalpalireader/content/index.htm?';
-
-	var tmp = 0;
-	var tmp1 = 0;
-	var tmp2 = 0;
-	var tmp3 = 0;
-	var tmp4 = 0;
-	var tmp5 = 0;
-	var tmp6 = 0;
-
-	var col = ['coltext','colsel','colped','coldppn','colcpd'];
-	var whichcol = [0,0,0,0,0];
-	var wcs = 0;
-
-	var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
-	document.getElementsByTagName('title')[0].innerHTML = tabT;
-
-	
-	if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) {
-		theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); 
-
-	}
-	else theData = '';
-	if (z.length > 1 && theData == '') { theData = unnamed; } 
-	if (theData != '') {
-		
-		namen = '';
-		if (cfg['showNames'] == 'checked') {
-			// dppn title 'n'
-
-			tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-			if(tt.length > 1) {
-				dEI = getDppnEntry(tt);
-				if (dEI.length > 0) {
-					namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-				}
-			}
-		}
-		
-		whichcol[0] = 1; // bump up to let the second color know
-
-		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.0.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+',0,0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a>'+namen+'<br />';
-	}
-	y = z[tmp].getElementsByTagName("h0");
-	for (tmp2 = 0; tmp2 < y.length; tmp2++)
-	{
-		if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-		if (y.length > 1 && theData == '') { theData = unnamed; }
-		if (theData != '') {
-
-			namen = '';
-			if (cfg['showNames'] == 'checked') {
-
-				// dppn title 'n'
-				
-				tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-				if(tt.length > 1) {
-					dEI = getDppnEntry(tt);
-					if (dEI.length > 0) {
-						namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-					}
-				}
-			}
-							
-			wcs = whichcol[0]; // either 0 or 1
-			whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
-			var spaces = '';
-			for(f = 0; f < wcs; f++) {
-				spaces += '&nbsp;&nbsp;';
-			}
-			
-			theDatao += spaces+(devCheck == 1 && DshowH ? '[0]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+',0,0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>'+namen;
-
-			var transin;
-			var transout='';
-			if (hier == "m") { 
-				transin = addtrans(5,nikaya,bookno,tmp2);
-				if (transin) {
-					theDatao += transin.join('&nbsp;'); 
-				}
-			}
-			theDatao += '<br />';
-		}
-		x = y[tmp2].getElementsByTagName("h1");
-		for (tmp3 = 0; tmp3 < x.length; tmp3++)
-		{
-			if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-			if (x.length > 1 && theData == '') { theData = unnamed; }
-			if (theData != '') {
-
-				namen = '';
-				if (cfg['showNames'] == 'checked') {
-
-					// dppn title 'n'
-					
-					tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-					if(tt.length > 1) {
-						dEI = getDppnEntry(tt);
-						if (dEI.length > 0) {
-							namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-						}
-					}
-				}					
-					
-				wcs = whichcol[0] + whichcol[1]; // 0, 1 or 2 - if 0,1 are still 0, this will get 0
-				whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
-			
-				spaces = '';
-				for(f = 0; f < wcs; f++) {
-					spaces += '&nbsp;&nbsp;';
-				}
-
-				theDatao += spaces+(devCheck == 1 && DshowH ? '[1]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+',0,0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + '</font></a>'+namen;
-
-				var transin;
-				var transout='';
-				if (hier == "m") { 
-					transin = addtrans(4,nikaya,bookno,tmp2,tmp3);
-					if (transin) {
-						theDatao += transin.join('&nbsp;'); 
-					}
-				}
-				theDatao += '<br />';
-			}
-			w = x[tmp3].getElementsByTagName("h2");
-			for (tmp4 = 0; tmp4 < w.length; tmp4++)
-			{
-				if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-				if (w.length > 1 && theData == '') { theData = unnamed; }
-				if (theData != '') {
-
-
-					namen = '';
-					if (cfg['showNames'] == 'checked') {
-						// dppn title 'n'
-						
-						tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-						if(tt.length > 1) {
-							dEI = getDppnEntry(tt);
-							if (dEI.length > 0) {
-								namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-							}
-						}
-					}
-									
-						
-						
-					wcs = whichcol[0] + whichcol[1] + whichcol[2]; // 0, 1, 2, or 3
-					whichcol[3] = 1; // bump
-					
-					spaces = '';
-					for(f = 0; f < wcs; f++) {
-						spaces += '&nbsp;&nbsp;';
-					}
-
-					theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' && hier == 'm' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,0) + ')' : '') + '</d></font></a>'+namen;
-					var transin;
-					var transout='';
-					if (hier == "m") { 
-						transin = addtrans(3,nikaya,bookno,tmp2,tmp3,tmp4);
-						if (transin) {
-							theDatao += transin.join('&nbsp;'); 
-						}
-					}
-					theDatao += '<br />';
-				}
-
-				v = w[tmp4].getElementsByTagName("h3");
-				for (tmp5 = 0; tmp5 < v.length; tmp5++)
-				{
-					if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-					if (v.length > 1 && theData == '') { theData = unnamed; }
-					if (theData != '') {
-
-						namen = '';
-						if (cfg['showNames'] == 'checked') {
-							// dppn title 'n'
-							
-							tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-							if(tt.length > 1) {
-								dEI = getDppnEntry(tt);
-								if (dEI.length > 0) {
-									namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-								}
-							}
-						}			
-							
-
-						wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3]; // 0, 1, 2, 3, or 4
-						whichcol[4] = 1; // bump
-
-						spaces = '';
-						for(f = 0; f < wcs; f++) {
-							spaces += '&nbsp;&nbsp;';
-						}
-
-						theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0);"/><font style="color:'+colorcfg[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,0) + ')' : '') + '</d></font></a>'+namen;
-						var transin;
-						var transout='';
-						if (hier == "m") { 
-							transin = addtrans(2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
-							if (transin) {
-								theDatao += transin.join('&nbsp;');  
-							}
-						}
-						theDatao += '<br />';
-					}
-
-
-					u = v[tmp5].getElementsByTagName("h4");
-					for (tmp6 = 0; tmp6 < u.length; tmp6++)
-					{
-						if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-						if (u.length > 1 && theData == '') { theData = unnamed; }
-						if (theData != '') {
-
-							namen = '';
-							if (cfg['showNames'] == 'checked') {
-								// dppn title 'n'
-								
-								tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
-								if(tt.length > 1) {
-									dEI = getDppnEntry(tt);
-									if (dEI.length > 0) {
-										namen = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
-									}
-								}
-							}
-											
-								
-
-							wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
-							spaces = '';
-							for(f = 0; f < wcs; f++) {
-								spaces += '&nbsp;&nbsp;';
-							}
-
-							theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<a href="javascript:void(0)" onclick="openPlace(\''+hier+'\',\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+');"/><font style="color:'+colorcfg[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>'+namen;
-							var transin;
-							var transout='';
-							if (hier == "m") { 
-								transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
-								//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
-								if (transin) {
-									theDatao += transin.join('&nbsp;');  
-								}
-							}
-							theDatao += '<br />';
-						}
-					}
-				}
-			}
-		}
-	}
-	var theDataDiv = document.createElement('div');
-	theDataDiv.innerHTML = theDatao;
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
-
-	document.getElementById('maf').scrollTop = 0;
-}
 
 function importXMLraw()
 {
@@ -860,7 +930,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	var titlen = toUni(tnamea);
 
 	tnamea = translit(shortenTitle(tnamea));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex(1);">'+tnamea+'</span>';
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex((event.ctrlKey?1:\'\'));">'+tnamea+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");

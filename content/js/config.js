@@ -136,10 +136,6 @@ function getconfig() {
 	cfg['cp7'] = getMiscPref('cp7');
 	cfg['cp8'] = getMiscPref('cp8');
 
-	// change colors
-
-	changeStyleByName('changecolor','color',colorcfg['coltext']);
-	
 	// Add ATI translations if preferred
 	if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
 		if (cfg['catioff'] == "checked") { 
@@ -154,16 +150,6 @@ function getconfig() {
 		headID.appendChild(newScript);
 	}
 	
-	// Control Panel
-	
-	if(cfg['cpanel'] == '0' && cpout == 1) { moveframec(); };
-
-	for (var i = 1; i <= 7; i++) {
-		if(cfg['cp'+i] == '0'){
-			document.getElementById('cp'+i).style.display='none';
-			document.getElementById('cp'+i+'t').style.display='block';
-		}
-	}
 
 	// update backgrounds
 		
@@ -184,7 +170,9 @@ function getconfig() {
 	document.styleSheets[0]['cssRules'][5].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.25) + 'px';  // large
 	document.styleSheets[0]['cssRules'][6].style.fontSize = Math.round(parseInt(colorcfg['colsize'])*1.5) + 'px';  // huge
 	
-	document.styleSheets[0]['cssRules'][7].style.backgroundColor = colorcfg['colbutton'];  // buttons
+	document.styleSheets[0]['cssRules'][9].style.backgroundColor = colorcfg['colbkcp'];  // buttons
+	document.styleSheets[0]['cssRules'][10].style.backgroundImage = '-moz-radial-gradient('+colorcfg['colbutton']+','+colorcfg['colbkcp']+')';  // buttons
+	document.styleSheets[0]['cssRules'][11].style.backgroundImage = '-moz-radial-gradient('+colorcfg['colbutton']+','+colorcfg['colbkcp']+')';  // buttons
 }
 
 function changecss(myclass,element,value) {
@@ -211,26 +199,11 @@ function checkbackground(x) {
 		var colort = colorcfg['colbk']; 
 		var bkgimg = cfg['bkgimg']; 
 	}
-	var bkgurl = bkgimg == 'checked' || bkgimg == true ? 'url(images/background.png)' : '';
-	if(document.getElementById('mafa')) {
-		document.getElementById('mafa').style.backgroundImage = bkgurl;
-		document.getElementById('mafb').style.backgroundImage = bkgurl;
-		document.getElementById('dif').style.backgroundImage = bkgurl;
-		document.getElementById('cof').style.backgroundImage = bkgurl;
-		document.getElementById('scf').style.backgroundImage = bkgurl;
+	var bkgurl = (bkgimg == 'checked' || bkgimg == true ? 'url(chrome://digitalpalireader/content/images/background.png)' : '');
 
-		document.getElementById('mafa').style.backgroundColor = colort;
-		document.getElementById('mafb').style.backgroundColor = colort;
-		document.getElementById('dif').style.backgroundColor = colort;
-		document.getElementById('cof').style.backgroundColor = colort;
-		document.getElementById('scf').style.backgroundColor = colort;
-	}
+	document.styleSheets[0]['cssRules'][7].style.backgroundImage = bkgurl;  // paperback
+	document.styleSheets[0]['cssRules'][7].style.backgroundColor = colort;  // paperback
 
-	if(document.getElementById('searchb')) {
-		document.getElementById('searchb').style.backgroundImage = bkgurl;
-		document.getElementById('searchb').style.backgroundColor = colort;
-	}
-	
 	document.body.style.backgroundColor = colort;
 
 
@@ -245,15 +218,7 @@ function checkcpbkg(x) {
 	}
 	else { var colort = colorcfg['colbkcp'] }
 
-	if(document.getElementById('searcht')) {
-		document.getElementById('searcht').style.backgroundColor = colort;
-	}
-	if(document.getElementById('brmid')) {
-		document.getElementById('brmid').style.backgroundColor = colort;
-	}
-	if(document.getElementById('brleft')) {
-		document.getElementById('brleft').style.backgroundImage = '-moz-linear-gradient(top,'+colort+',white,'+colort+')';
-	}
+	document.styleSheets[0]['cssRules'][8].style.backgroundImage = '-moz-linear-gradient(left,'+colort+',white,'+colort+')';  // chromeback
 }
 
 function loadOptions() {

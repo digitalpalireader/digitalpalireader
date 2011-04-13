@@ -3,6 +3,10 @@ document.onkeypress = keyPressed;
 function keyPressed(e) {
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 
+	if(document.form) { // sidebar
+		if (e.charCode == 103) { importXML(); return; } // g
+	}
+	
 	if (e.charCode == 49) { // 1
 		if(document.getElementById('Qa1')) { f = document.getElementById('Qa1').onclick; f(); }
 		else if(document.getElementById('QcheckAns')) { f = document.getElementById('QcheckAns').onclick; f(); }
@@ -48,7 +52,6 @@ function keyPressed(e) {
 	}
 
 
-	if (e.charCode == 103) { importXML(); return; } // g
 	if (e.charCode == 112) { createTablep(); return; } // p
 	if (e.charCode == 110) { createTablen(); return; } // n
 

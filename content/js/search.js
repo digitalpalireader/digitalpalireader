@@ -9,36 +9,55 @@ var G_searchSet;
 var G_searchBook;
 var G_searchRX;
 
-function searchTipitaka() {
-
-	// get options from URL
+function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchRX) {
 	
-	var options = document.location.href.split('?')[1].split('#')[0].split('&');
+	clearDivs('search');
 
-	// parse options
+	if(searchType) { // update url
+		G_searchType = searchType;
+		G_searchString = searchString;
+		G_searchMAT = searchMAT;
+		G_searchSet = searchSet;
+		G_searchBook = ','+searchBook+',';
+		G_searchRX = searchRX;	
 
-	for (i in options) {
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + searchString + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&rx=' + searchRX;
+		try {
+			window.history.replaceState('Object', 'Title', permalink);
+		}
+		catch(ex) {
+		}
+	}
+	else {
+		// get options from URL
+		
+		var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
-		var option = options[i].split('=');
-		switch(option[0]) {
-			case 'type':
-				G_searchType = parseInt(option[1]);
-			break;
-			case 'query':
-				G_searchString = toUni(option[1]);
-			break;
-			case 'MAT':
-				G_searchMAT = option[1];
-			break;
-			case 'set':
-				G_searchSet = option[1];
-			break;
-			case 'book':
-				G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
-			break;
-			case 'rx':
-				G_searchRX = option[1];
-			break;
+		// parse options
+
+		for (i in options) {
+
+			var option = options[i].split('=');
+			switch(option[0]) {
+				case 'type':
+					G_searchType = parseInt(option[1]);
+				break;
+				case 'query':
+					G_searchString = toUni(option[1]);
+				break;
+				case 'MAT':
+					G_searchMAT = option[1];
+				break;
+				case 'set':
+					G_searchSet = option[1];
+				break;
+				case 'book':
+					G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
+				break;
+				case 'rx':
+					G_searchRX = (option[1] == 'false' ? false : true);
+				break;
+			}
 		}
 	}
 
@@ -48,14 +67,14 @@ function searchTipitaka() {
 	
 	st[0] = 'The Tipitaka';
 	st[1] = G_nikLongName[G_searchSet];
-	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook;
+	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1);
 	st[3] = '---';
 	st[4] = 'Multiple Sets (' + G_hTitles[G_searchMAT] + ')';
 	st[5] = 'Multiple Books (' + G_hTitles[G_searchMAT] + ')';
 	st[6] = '---';
 	st[7] = 'The Tipitaka (' + matst.join(',') + ')';
 	st[8] = G_nikLongName[G_searchSet] + ' (' + matst.join(',') + ')';
-	st[9] = G_nikLongName[G_searchSet] + ' ' + G_searchBook + ' (' + matst.join(',') + ')';
+	st[9] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (' + matst.join(',') + ')';
 	st[10] = '---';
 	st[11] = 'Multiple Sets (' + matst.join(',') + ')';
 	st[12] = 'Multiple Books (' + matst.join(',') + ')';
@@ -65,7 +84,7 @@ function searchTipitaka() {
 
 	// tab title
 
-	var tabT = G_searchString + ' in ' + st[G_searchType].toLowerCase();
+	var tabT = 'Search: \'' + G_searchString + '\' in ' + st[G_searchType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	
@@ -248,7 +267,7 @@ function pausethree() {
 	
 	var which = G_searchType;
 	var nikaya = G_searchSet;
-	var book = G_searchBook;
+	var book = G_searchBook.slice(1,-1);
 
 	var nikbook = nikaya+book;
 	var getstring = G_searchString;
@@ -399,7 +418,7 @@ function importXMLs(cnt)
 	else if (cnt == 3) // this book
 	{
 		var nikaya = G_searchSet;
-		var book = G_searchBook;
+		var book = G_searchBook.slice(1,-1);
 		
 		bookfile = G_searchFileArray[qz];
 		hiert = bookfile.charAt(bookfile.length-1);
@@ -441,7 +460,7 @@ function createTables(xmlDoc,hiert)
 
 	var gotstring;
 	var nikaya = G_searchSet;
-	var book = G_searchBook;
+	var book = G_searchBook.slice(1,-1);
 
 	if (count == 1 || count == 2) {
 		book = bookperm;

@@ -377,7 +377,7 @@ function bv() {
 	while(!dbv[rverse]) {
 		rverse = Math.floor(Math.random()*dbv.length);
 	}
-	document.getElementById('difb').innerHTML = '<b name="changecolor" class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + dbv[rverse][0] + '</p>'+(dbv[rverse][1] == "null" ? '' : '<p>' + dbv[rverse][1] +'</p>');
+	document.getElementById('difb').innerHTML = '<b class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + dbv[rverse][0] + '</p>'+(dbv[rverse][1] == "null" ? '' : '<p>' + dbv[rverse][1] +'</p>');
     document.getElementById('cdif').scrollTop=0;
 }
 

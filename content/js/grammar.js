@@ -28,8 +28,6 @@ function conjugate(word, id, which) {
 		return;
 	}
 
-	//moveframex(3);
-	moveframey('dif');
 	if(which) {
 		var whichR = new RegExp('([> ])'+which+'([<,])','gi');
 		out = out.replace(whichR, "$1<span style=\"color:"+colorcfg['colped']+"\">"+which+"</span>$2");
@@ -38,6 +36,7 @@ function conjugate(word, id, which) {
 	var outNode = document.createElement('div');
 	
 	if(id == 'dif') {
+		moveframey('dif');
 		clearDivs('dif');
 		document.getElementById('cdif').scrollTop = 0;
 		document.getElementById('cdif').scrollTop = 0;

@@ -1,22 +1,80 @@
-var yut = 0;
-var remote = true;
+var G_dictType = '';
+var G_dictQuery = '';
+var G_dictOpts = []; // 
+
+function startDictLookup(dictType,dictQuery,dictOpts) {
+
+	if(!dictType) { // make opt list from url
+		var options = document.location.href.split('?')[1].split('#')[0].split('&');
+		G_dictType = parseInt(options[0].split('=')[1]);
+		G_dictQuery = options[1].split('=')[1];
+		G_dictOpts = options[2].split('=')[1].split(',');
+
+	}
+	else { // replace url
+		G_dictType = dictType;
+		G_dictQuery = dictQuery;
+		G_dictOpts = dictOpts;
+
+		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',');
+		try {
+			window.history.replaceState('Object', 'Title', permalink);
+		}
+		catch(ex) {
+		}
+	}
+
+	var st = ['','PED','DPPN','CPED','CEPD','Atth','Tika','Titles'];
+
+	// tab title
+
+	var tabT = "Dict: '"+G_dictQuery + '\' in ' + st[G_dictType];
+	
+	document.getElementsByTagName('title')[0].innerHTML = tabT;
+
+	
+
+	switch (G_dictType) {
+		case 1:
+			pedsearchstart();
+			break;
+		case 2:
+			dppnsearchstart();
+			break;
+		case 3:
+			mlsearchstart();
+			break;
+		case 4:
+			epdsearchstart();
+			break;
+		case 5:
+			attsearchstart();
+			break;
+		case 6:
+			tiksearchstart();
+			break;
+		case 7:
+			titlesearchstart();
+			break;
+	}
+}
 
 function pedsearchstart()
 {
-	var getstring = document.form.manual.value;
-      
+	var getstring = G_dictQuery;
+
 	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
-		paliXML('dev/'+getstring+',dev');
+		sendPaliXML('dev/'+getstring+',dev');
 		return;
 	}
 	
-	if(document.form.sofulltext.checked) { // full text search
+	if(/ft/.exec(G_dictOpts)) { // full text search
 		
 		pedFullTextSearch(getstring);
 		return;
 	}
 
-	if(document.form.sofuzzy.checked) {
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 
@@ -26,15 +84,15 @@ function pedsearchstart()
 
 	for (pedt in mainda)
 	{
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			pedt = toFuzzy(pedt);
 		}
 
-		if (document.form.soregexp.checked) { // reg exp
-			var yessir = (pedt.search(getstring) == 0 || (!document.form.sostartword.checked && pedt.search(getstring) > -1));
+		if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (pedt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (pedt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && pedt.indexOf(getstring) > -1));
+			var yessir = (pedt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -46,7 +104,7 @@ function pedsearchstart()
 				
 				uniout = toUni(uniout).replace(/`/g,'˚');
 				
-				finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="paliXML(\'PED/' + loc + ','+uniout+'\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+				finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
 			}
@@ -155,10 +213,10 @@ var G_dppn = [];
 
 function dppnsearchstart()
 {
-	var getstring = document.form.manual.value;
+	var getstring = G_dictQuery;
 
 	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
-		DPPNXML('dppn/'+getstring);
+		sendDPPNXML('dppn/'+getstring);
 		return;
 	}
 
@@ -166,13 +224,13 @@ function dppnsearchstart()
 	document.getElementById('difb').appendChild(pleasewait);
 
 	
-	if(document.form.sofulltext.checked) { // full text search
+	if(/ft/.exec(G_dictOpts)) { // full text search
 		
 		dppnFullTextSearch(getstring);
 		return;
 	}
 
-	if(document.form.sofuzzy.checked) {
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 
@@ -195,15 +253,15 @@ function dppnsearchstart()
 
 		var dppnt = x;
 		
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			dppnt = toFuzzy(dppnt);
 		}
 
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (dppnt.search(getstring) == 0 || (!document.form.sostartword.checked && dppnt.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (dppnt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (dppnt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && dppnt.indexOf(getstring) > -1));
+			var yessir = (dppnt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -213,7 +271,7 @@ function dppnsearchstart()
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="moveframey(\'dif\'); DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -336,10 +394,9 @@ var yg = [];
 
 function mlsearchstart()
 {
-	clearDivs('difanf');
-	
-	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) {
+	clearDivs('dif');
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	
@@ -362,22 +419,22 @@ function mlsearchstart()
 
 		var gsplit = [yg[x][0],yg[x][3],yg[x][2]];
 
-		if(!document.form.sofulltext.checked) {
+		if(!/ft/.exec(G_dictOpts)) {
 			var tosearch = gsplit[0];
 		}
 		else {
 			var tosearch = yg[x][0]+' '+yg[x][3]+' '+yg[x][2];
 		}
 		
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
         
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (tosearch.search(getstring) == 0 || (!document.form.sostartword.checked && tosearch.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tosearch.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tosearch.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -419,10 +476,10 @@ function epdsearchstart()
 		return;
 	}
 
-	clearDivs('difanf');
+	clearDivs('dif');
 	
-	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) {
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	
@@ -439,21 +496,21 @@ function epdsearchstart()
 	{
 		gsplit = epd[x].split('^');
 		
-		if(!document.form.sofulltext.checked) {
+		if(!/ft/.exec(G_dictOpts)) {
 			var tosearch = gsplit[0];
 		}
 		else {
 			var tosearch = epd[x];
 		}
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
         
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (tosearch.search(getstring) == 0 || (!document.form.sostartword.checked && tosearch.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tosearch.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tosearch.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -492,8 +549,8 @@ function attsearchstart()
 	}
 	clearDivs('dif');
 	
-	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) {
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	
@@ -515,15 +572,15 @@ function attsearchstart()
 		outnik = '';
 		var attt = attlist[x].split('#')[0];
 		
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			attt = toFuzzy(attt);
 		}
 
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (attt.search(getstring) == 0 || (!document.form.sostartword.checked && attt.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (attt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && attt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (attt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && attt.indexOf(getstring) > -1));
+			var yessir = (attt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && attt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -534,12 +591,12 @@ function attsearchstart()
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
-				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
 				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
 			}
 			if (entries.length == 0) continue;
                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendAtt('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -578,8 +635,8 @@ function tiksearchstart()
 
 	clearDivs('dif');
 	
-	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) {
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	
@@ -601,14 +658,14 @@ function tiksearchstart()
 		outnik = '';
 		var tikt = tiklist[x].split('#')[0];
 		
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			tikt = toFuzzy(tikt);
 		}
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (tikt.search(getstring) == 0 || (!document.form.sostartword.checked && tikt.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tikt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tikt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tikt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && tikt.indexOf(getstring) > -1));
+			var yessir = (tikt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tikt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -620,12 +677,12 @@ function tiksearchstart()
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
-				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
 				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
 			}
 			if (entries.length == 0) continue;
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getatt('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendAtt('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -664,8 +721,8 @@ function titlesearchstart()
 
 	clearDivs('dif');
 	
-	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) { 
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) { 
 		getstring = toFuzzy(getstring);
 	}
 	else {
@@ -693,14 +750,14 @@ function titlesearchstart()
 		
 		var titt = titlelist[x].split('#')[0];
 		
-		if(document.form.sofuzzy.checked) {
+		if(/fz/.exec(G_dictOpts)) {
 			titt = toFuzzy(titt);
 		}
-        if (document.form.soregexp.checked) { // reg exp
-			var yessir = (titt.search(getstring) == 0 || (!document.form.sostartword.checked && titt.search(getstring) > -1));
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (titt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && titt.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (titt.indexOf(getstring) == 0 || (!document.form.sostartword.checked && titt.indexOf(getstring) > -1));
+			var yessir = (titt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && titt.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -711,7 +768,7 @@ function titlesearchstart()
 			uniout = toUni(gsplit);
 
 			for(a = 0; a < entries.length; a++) {
-				if(!document.getElementById('soMAT'+entries[a].charAt(entries[a].length-3)).checked) {
+				if(!G_dictOpts.indexOf('m'+entries[a].charAt(entries[a].length-3))) {
 					entries.splice(a--,1);
 				}
 			}
@@ -720,7 +777,7 @@ function titlesearchstart()
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
-				if(!document.getElementById('soNS'+tnik) || !document.getElementById('soNS'+tnik).checked) entries.splice(a--,1);
+				if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
 				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
 			}
 			if (entries.length == 0) continue;
@@ -749,7 +806,7 @@ function titlesearchstart()
 				}
 			}
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="getSearchTitles('+ x +','+document.getElementById('soMATm').checked+','+document.getElementById('soMATa').checked+','+document.getElementById('soMATt').checked+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendTitle('+ x +','+ (G_dictOpts.indexOf('mm') > -1) +','+(G_dictOpts.indexOf('ma') > -1)+','+(G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
 			y++;
 		}
 	}

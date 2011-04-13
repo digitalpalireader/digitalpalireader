@@ -285,125 +285,6 @@ function changenikaya(noget)
 }
 
 
-function createTablen()
-{
-	var section = document.form.section.selectedIndex + 1;
-	if (section < document.form.section.options.length)
-	{
-		document.form.section.selectedIndex++;
-		importXML();			
-	}
-	else 
-	{
-		var sutta = document.form.sutta.selectedIndex + 1;
-		if (sutta < document.form.sutta.options.length)
-		{
-			document.form.sutta.selectedIndex++;
-			gettitles(3);					
-		}
-		else {
-			var vagga = document.form.vagga.selectedIndex + 1;
-			if (vagga < document.form.vagga.options.length)
-			{
-				document.form.vagga.selectedIndex++;
-				gettitles(4);	
-			}
-			else 
-			{
-				var volume = document.form.volume.selectedIndex + 1;
-				if (volume < document.form.volume.options.length)
-				{
-					document.form.volume.selectedIndex++;
-					gettitles(5);	
-				}
-				else {
-					var meta = document.form.meta.selectedIndex + 1;
-					if (meta < document.form.meta.options.length)
-					{
-						document.form.meta.selectedIndex++;
-						gettitles(6);	
-					}
-					else
-					{
-						window.alert('End of Book');
-						return;
-					}
-				}
-			}
-		}
-	}
-}
-
-function createTablep()
-{
-//	alert(section + ' ' + sutta + ' ' + vagga + ' ' + volume + ' ' + meta);
-	var section = document.form.section.selectedIndex - 1;
-	if (section >= 0)
-	{
-		document.form.section.selectedIndex--;
-		importXML();			
-	}
-	else 
-	{
-		var sutta = document.form.sutta.selectedIndex - 1;
-		if (sutta >= 0)
-		{
-			document.form.sutta.selectedIndex--;
-			gettitles(3,1);	
-			document.form.section.selectedIndex = document.form.section.options.length - 1;
-			importXML();			
-		}
-		else {
-			var vagga = document.form.vagga.selectedIndex - 1;
-			if (vagga >= 0) {
-				document.form.vagga.selectedIndex--;
-				gettitles(4,1);	
-				document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-				gettitles(3,1);	
-				document.form.section.selectedIndex = document.form.section.options.length - 1;
-				importXML();
-			}
-			else 
-			{
-				var volume = document.form.volume.selectedIndex - 1;
-				if (volume >= 0)
-				{
-					document.form.volume.selectedIndex--;
-					gettitles(5,1);	
-					document.form.vagga.selectedIndex = document.form.vagga.options.length - 1;
-					gettitles(4,1);	
-					document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-					gettitles(3,1);	
-					document.form.section.selectedIndex = document.form.section.options.length - 1;
-					importXML();
-
-				}
-				else {
-					var meta = document.form.meta.selectedIndex - 1;
-					if (meta >= 0)
-					{
-						document.form.meta.selectedIndex--;
-						gettitles(6,1);	
-						document.form.volume.selectedIndex = document.form.volume.options.length - 1;
-						gettitles(5,1);	
-						document.form.vagga.selectedIndex = document.form.vagga.options.length - 1;
-						gettitles(4,1);	
-						document.form.sutta.selectedIndex = document.form.sutta.options.length - 1;
-						gettitles(3,1);	
-						document.form.section.selectedIndex = document.form.section.options.length - 1;
-						importXML();
-					}
-					else
-					{
-						window.alert('Beginning of Book');
-					}
-				}
-			}
-		}
-	}
-
-}
-
 
 function xmlrefer()
 {
@@ -415,8 +296,8 @@ function xmlrefer()
 	document.form.xmlref.value = ref;
 }
 
-function limitt() {
-	if (document.form.nik.selectedIndex == 5 || document.form.nik.selectedIndex > 6) { return true; }
+function limitt(nikn) {
+	if (nikn == 5 || nikn > 6) { return true; }
 	else { return false };
 }
 
@@ -427,7 +308,7 @@ function switchhier(htmp,stop) {
 	var himg = ['l','m','r'];
 		
 
-	if (htmp == 't' && limitt()) { 
+	if (htmp == 't' && limitt(document.form.nik.selectedIndex)) { 
 		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
@@ -443,7 +324,9 @@ function switchhier(htmp,stop) {
 	hier = htmp;
 
 	// style
-
+	
+	var himg = ['t','c','b'];
+	
 	ha = G_hLetters;
 
 	for(i=0; i<ha.length; i++) {
@@ -530,53 +413,6 @@ function getDppnEntry(term) {
 		}
 	}
 	return dEI;
-}
-
-
-function getLinkPlace() { // permalinks
-
-	var options = document.location.href.split('?')[1].split('#')[0].split('&');
-
-	var place;
-	var para;
-	var query;
-	
-	// parse options
-	if(/^thai/.exec(options[0])) {
-		DgetThaiBook(options[0].split('=')[1]);
-		return;
-	}
-	var outplace;
-	for (i in options) {
-
-		var option = options[i].split('=');
-		if (option.length == 1 || option[0] == 'loc') {
-			place = (option[1] ? option[1]: option[0]);
-			if (/[^-a-zA-Z0-9.]/.exec(place)) return;
-
-			if(option[1] == 'help') {
-				helpXML();
-				return;
-			}
-			
-			place = place.split('.');
-			
-			if (place.length == 8) {
-				outplace = place;
-			}
-			else if (/[vdmaskyxbg]\.[0-9]+\.[mat]/.exec(option[1])) { // index
-				loadXMLindex(option[1].split('.'));
-				return;
-			}
-			else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.exec(option[1])) { // shorthand
-				outplace = getSuttaFromNumber(place);
-				if(!outplace) return;
-			}
-		}
-		else if (option[0] == 'para') para = parseInt(option[1])-1;
-		else if (option[0] == 'query') query = toUni(option[1]).replace(/_/g,' ').split('+');
-	}
-	if(place) loadXMLSection(query,para,outplace,true);
 }
 
 
@@ -744,74 +580,4 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 		break;
 	}
 	return [nik,book,meta,volume,vagga,sutta,section,hiert];
-}
-
-function importXML(labelsearch,para,isPL) {
-
-	var nikaya = document.form.nik.value;
-	var bookno = document.form.book.selectedIndex;
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;	
-
-	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '');
-
-	openDPRTab(permalink);
-
-}
-
-
-function openPlace(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
-{
-
-	if (stringra) {
-		stringra = stringra.replace(/`/g, '"');
-		stringra = stringra.split('#');
-		if(G_searchRX == 'true') {
-			for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
-		}
-	}
-	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+sx+'.'+sy+'.'+sz+'.'+s+'.'+se+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(tmp ? '&para=' + (tmp+1) : '');
-
-	openDPRTab(permalink);
-}
-
-
-function importXMLindex(reuse) {
-
-	var nikaya = document.form.nik.value;
-	var bookno = document.form.book.selectedIndex;
-
-	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIWebNavigation)
-                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-                   .rootTreeItem
-                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                   .getInterface(Components.interfaces.nsIDOMWindow); 
-                   
-	if(reuse) { // reuse old index
-		for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser;
-			index < tabbrowser.tabContainer.childNodes.length && !found;
-			index++) {
-
-			// Get the next tab
-			var currentTab = tabbrowser.tabContainer.childNodes[index];
-
-			// Does this tab contain our custom attribute?
-			if (currentTab.getAttribute('id') == 'DPR index') {
-				mainWindow.gBrowser.selectedTab = currentTab;
-				var currentTabBrowser = mainWindow.gBrowser.getBrowserForTab(currentTab);
-				currentTabBrowser.contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,hier]);
-				found = true;
-			}
-		}
-	}
-
-	if (!found) {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
-
-		openDPRTab(permalink,'DPR index');
-	}
 }

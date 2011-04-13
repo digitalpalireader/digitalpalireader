@@ -9,6 +9,7 @@
 <script>
 function onDocLoad() {
 	getconfig();
+	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.htm','DPR-main');
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
@@ -24,6 +25,7 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
@@ -38,7 +40,7 @@ function onDocLoad() {
 	<div id="matrelc"></div>
 	<div id="DPRLogo"><img src="images/logo.png" onclick="aboutPrompt();" ></div>
 	<form name="form">
-		<div id="brleft"></div>
+		<div id="brleft" class="chromeback"></div>
 		<div id="cleft">
 			<table width=100%>
 				<tr>
@@ -55,6 +57,25 @@ function onDocLoad() {
 										<td>&nbsp;</td>
 										<td align=center>
 											<b>Book</b><br>
+										</td>
+										<td align="center" rowspan=2>
+											<table class="butc">
+												<tr>
+													<td id="dhierm" class="abut tbut sbut" onclick="switchhier('m',2)">M</span></td>
+												</tr>
+												<tr>
+													<td id="dhiera" class="abut cbut" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">A</td>
+												</tr>
+												<tr>
+													<td id="dhiert" class="abut bbut" title="Change to Ṭīkā" onclick="switchhier('t',2)">T</td>
+												</tr>
+												<tr>
+													&nbsp;
+												</tr>
+												<tr>
+													<td class="abut obut" title="Retrieve current section (g)" onclick="this.blur(); importXML(null,null,null,(event.ctrlKey?'1':''))">➤</td>
+												</tr>
+											</table>
 										</td>
 									</tr>
 									<tr>
@@ -105,25 +126,8 @@ function onDocLoad() {
 
 									<tr><td align="center" style="padding-top:2px" id="section"><select class="sel hide" size="1" name="section"><option></option></select></td></tr>
 								</table>
-							</div>
-						</div>
-					<hr />
-						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');">x</div>
-							<div class="pointer hide tiny" id="cp3t" title="toggle section" onclick="cpFlatten('cp3');">Navigation</div>
-							<div class="cpt" id="cp3">
-								<table>
-									<tr>
-										<td class="buttont">
 
-											<span onclick="switchhier('m',2)" id="dhierm" class="abut lbut sbut">M</span><span id="dhiera" class="abut mbut" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">A</span><span id="dhiert" class="abut rbut" title="Change to Ṭīkā" onclick="switchhier('t',2)">T</span>
-											<span class="abut obut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">➤</span>
-										</td>
-									</tr>
-
-								</table>			
-
-								<div name="ioDep" align="center" style="padding-top:2px" id="history"></div>
+								<div align="center" style="padding-top:2px" id="history"></div>
 
 							</div>
 						</div>
@@ -153,13 +157,12 @@ function onDocLoad() {
 											<td align="center" colspan="3"><b>Text Search</b></td>
 										</tr>
 										<tr>
-											<td class="buttont"><span class="abut obut small" title="maximize search frame" id="plus" onclick="moves()">◳</span></td>
 											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) sendSearch(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
 											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="sendSearch()">➤</span></td>
 										</tr>
 
 										<tr>
-											<td align=center valign=top colspan=3>
+											<td align=center valign=top colspan=2>
 												<select class="sel" size="1" title="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
 													<option title="Search all three nikayas" selected>The Tipitaka</option>
 													<option title="Search current set">This Set</option>
@@ -181,7 +184,7 @@ function onDocLoad() {
 											</td>
 										</tr>
 										<tr>
-											<td colspan=2>
+											<td colspan=1>
 												<div id="tsearchopts">
 													<table align="center">
 														<tr>
@@ -243,7 +246,7 @@ function onDocLoad() {
 										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); showHideId('searchopts')"><b>adv</b></a>
 									</div>
 									<div>
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">➤</span>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) sendDict(event.ctrlKey?1:''); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; sendDict(event.ctrlKey?1:'');};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="sendDict(event.ctrlKey?1:'')">➤</span>
 									</div>
 									<div id="searchopts">
 										<table align="center">
@@ -321,10 +324,10 @@ function onDocLoad() {
 											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">⚠</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
+											<span class="abut lbut" title="Pali Quiz (#)" onClick="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPRq);">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Help (?)" onClick="openDPRTab('chrome://digitalpalireader/content/index.htm?loc=help')">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
+											<span class="abut lbut" title="Help (?)" onClick="openDPRTab('chrome://digitalpalireader/content/index.htm?loc=help')">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPRc');">✉</span>
 										</td>
 										<script>
 										// external dev function

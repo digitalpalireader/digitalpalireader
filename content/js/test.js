@@ -16,11 +16,14 @@ function quizme() {
 	
 	// remember rights
 	var rights = [];
-	if(ioCheck == 1) var srights = readFile("DPTEST");
-	if(srights) {
-		if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
-		else rights = srights;
-		document.getElementById('Qrights').innerHTML = rights.length;
+	var srights;
+	if(fileExists('DPTEST')) {
+		srights = readFile("DPTEST");
+		if(srights) {
+			if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
+			else rights = srights;
+			document.getElementById('Qrights').innerHTML = rights.length;
+		}
 	}
     
 	var quiza = new Array();
@@ -81,8 +84,8 @@ function answerquiz(right,answer,numb) {
 		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
 		
 		// add right to list of rights
-        var rightfile = readFile('DPTEST');
-        if (rightfile) {
+		if(fileExists('DPTEST')) {
+			var rightfile = readFile('DPTEST');
             rightfile.push(numb);
             var outfile = rightfile.join('\n');
             if(/,/.exec(outfile)) outfile = outfile.split(',').join('\n');
