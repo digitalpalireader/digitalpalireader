@@ -11,7 +11,7 @@ function onDocLoad() {
 	getconfig();
 }
 </script>
-<script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
@@ -20,6 +20,8 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/search_func.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
@@ -328,7 +330,7 @@ function onDocLoad() {
 										// external dev function
 
 										var devCheck = 0;
-										if(fileExists('Extensions/work','dev.js')) {
+										if(extFileExists('Extensions/work','dev.js')) {
 											var headID = document.getElementsByTagName("head")[0];         
 											var newScript = document.createElement('script');
 											newScript.type = 'text/javascript';
