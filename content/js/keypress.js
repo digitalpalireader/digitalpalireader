@@ -75,7 +75,7 @@ function keyPressed(e) {
 	} 
 	
 	if (e.charCode == 107) { // k
-		showShortcutKeys();
+		promptData("DPR Keyboard Shortcuts", G_keysList.join('\n'));
 		return; 
 	} 
 	
@@ -109,10 +109,6 @@ function keyPressed(e) {
 	if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // r
 		
 	//devO(e.charCode);
-}
-
-function showShortcutKeys() {
-	G_prompts.alert(null, "DPR Keyboard Shortcuts", G_keysList.join('\n'));
 }
 
 var G_keysList = [];

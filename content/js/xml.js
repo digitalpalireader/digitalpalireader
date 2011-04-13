@@ -16,11 +16,11 @@ function loadXMLSection(labelsearch,para,place,isPL)
 		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
-	if (hier == 'a' && document.form.nik.value == 'g') {
+	if (hier == 'a' && place[0] == 'g') {
 		alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
 		return;
 	}		
-	if (hier == 'a' && document.form.nik.value == 'b') {
+	if (hier == 'a' && place[0] == 'b') {
 		alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
 		return;
 	}		
@@ -133,7 +133,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	// "modern" reference
-	var modt;
+	var modt = '';
 	var modn;
 	if(hier == 'm') {
 		var modno = getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,y.length);	
@@ -163,7 +163,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 
 	// tab title
 
-	var tabT = G_nikLongName[nikaya] + ' ' + (modno ? modno : (hier !='m' ? '-'+hier:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+	var tabT = G_nikLongName[nikaya] +  (modno ? modno : (hier !='m' ? '-'+hier:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	
@@ -301,7 +301,7 @@ function gettitles(altget,stop,prev,ssect)
 	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
 	else name = unnamed;
 	var outname = translit(shortenTitle(name));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex();">'+outname+'</span>';
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex(1);">'+outname+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -367,23 +367,27 @@ function gettitles(altget,stop,prev,ssect)
 	if (prev) document.form.section.selectedIndex = y.length - 1;
 	if (ssect && ssect > 0) document.form.section.selectedIndex = searchsect;
 	if (newload == 0) importXML();
-	else if (newload == 2) importXMLindex();
+	else if (newload == 2) importXMLindex(1);
 	getsutta = 0;
 }
 
 
 function loadXMLindex(place) {
 	
+	moveframex(1);
 	
 	var DshowH = false; // dev tool
 	DshowH = true; // dev tool
 	
 	document.activeElement.blur();
-
-	if (hier == 't' && limitt()) { 
+	
+	if (place[2] == 't' && limitt()) { 
 		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}	
+	
+	hier = place[2];
+	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
@@ -673,7 +677,6 @@ function loadXMLindex(place) {
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0;
-	moveframex(1);
 }
 
 function importXMLraw()
@@ -857,7 +860,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 	var titlen = toUni(tnamea);
 
 	tnamea = translit(shortenTitle(tnamea));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex();">'+tnamea+'</span>';
+	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex(1);">'+tnamea+'</span>';
 		
 	var u = xmlDoc.getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -952,8 +955,6 @@ function helpXML(file)
 {
 	moveframex(1);
 	if (!file) file = 'help.xml';
-	moves(0);
-	if(moveat == 3) { moveframex(2); }
 	
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", file, false);

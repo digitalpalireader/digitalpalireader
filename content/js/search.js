@@ -41,6 +41,34 @@ function searchTipitaka() {
 			break;
 		}
 	}
+
+	var st = [];
+	var matst = [];
+	for (i in G_searchMAT) matst.push(G_searchMAT[i]);
+	
+	st[0] = 'The Tipitaka';
+	st[1] = G_nikLongName[G_searchSet];
+	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook;
+	st[3] = '---';
+	st[4] = 'Multiple Sets (' + G_hTitles[G_searchMAT] + ')';
+	st[5] = 'Multiple Books (' + G_hTitles[G_searchMAT] + ')';
+	st[6] = '---';
+	st[7] = 'The Tipitaka (' + matst.join(',') + ')';
+	st[8] = G_nikLongName[G_searchSet] + ' (' + matst.join(',') + ')';
+	st[9] = G_nikLongName[G_searchSet] + ' ' + G_searchBook + ' (' + matst.join(',') + ')';
+	st[10] = '---';
+	st[11] = 'Multiple Sets (' + matst.join(',') + ')';
+	st[12] = 'Multiple Books (' + matst.join(',') + ')';
+	st[13] = '---';
+	st[14] = 'ATI Translations';
+
+
+	// tab title
+
+	var tabT = G_searchString + ' in ' + st[G_searchType].toLowerCase();
+	
+	document.getElementsByTagName('title')[0].innerHTML = tabT;
+	
 	
 	// start timer
 
@@ -115,7 +143,7 @@ function resetvalues() {
 }
 
 function makeProgressTable() {
-
+	
 	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
 	var fal = G_searchFileArray.length;
 	for (q2 = 0; q2 < fal; q2++)
@@ -148,7 +176,7 @@ function pausesall()
 	}
 
 	if(G_searchFileArray.length == 0) {
-		alert('No books in selection');
+		alertFlash('No books in selection');
 		return;
 	}
 
@@ -162,10 +190,9 @@ function pausesall()
 	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+colorcfg['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
 	
 	var toplista = [];
-	
 	for (i = 0; i < G_numberToNik.length; i++) {
 		if ((which == 0 || which == 7) && /[xbg]/.exec(G_numberToNik[i])) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
+		if ((which == 4 || which == 11) && G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
 		toplista.push('<span id="sdf'+G_numberToNik[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+G_numberToNik[i]+'\').offsetTop;">'+G_nikLongName[G_numberToNik[i]]+':</a> <span id="stfH'+G_numberToNik[i]+'"></span></span>');
 	}
 	
@@ -174,7 +201,6 @@ function pausesall()
 	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">‒</span></td></tr></table>';
 	
 	document.getElementById('stfb').innerHTML = toplist;
-
 	makeProgressTable();
 
 	

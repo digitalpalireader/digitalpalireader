@@ -34,7 +34,7 @@ function onDocLoad() {
 <div id="content">
 	<div id="left">
 	<div id="matrelc"></div>
-	<div id="DPRLogo"><img src="images/logo.png" onclick="window.alert('Digital Pali Reader ' + version)" ></div>
+	<div id="DPRLogo"><img src="images/logo.png" onclick="aboutPrompt();" ></div>
 	<form name="form">
 		<div id="brleft"></div>
 		<div id="cleft">
@@ -42,7 +42,7 @@ function onDocLoad() {
 				<tr>
 					<td align=center>
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp1');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp1');">x</div>
 							<div class="pointer hide tiny" id="cp1t" title="toggle section" onclick="cpFlatten('cp1');">Location</div>
 							<div class="cpt" id="cp1">
 								<table width="1px">
@@ -84,7 +84,7 @@ function onDocLoad() {
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp2');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp2');">x</div>
 							<div class="pointer hide tiny" id="cp2t" title="toggle section" onclick="cpFlatten('cp2');">Location</div>
 							<div class="cpt" id="cp2">
 								<table>
@@ -107,25 +107,15 @@ function onDocLoad() {
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');">x</div>
 							<div class="pointer hide tiny" id="cp3t" title="toggle section" onclick="cpFlatten('cp3');">Navigation</div>
 							<div class="cpt" id="cp3">
 								<table>
 									<tr>
 										<td class="buttont">
-											<span id="RM" class="abut lbut" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">R</span><span id="AM" class="abut mbut" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">A</span><span id="DM" class="abut rbut" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)">D</span>
-										</td>
-										<td class="buttont">
-											<span class="abut lbut" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">⇦</span><span class="abut mbut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">go</span><span class="abut rbut" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">⇨</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont">
-											<span id="difoutM" class="abut lbut sbut" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span>
-										</td>
-										<td class="buttont">
 
 											<span onclick="switchhier('m',2)" id="dhierm" class="abut lbut sbut">M</span><span id="dhiera" class="abut mbut" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">A</span><span id="dhiert" class="abut rbut" title="Change to Ṭīkā" onclick="switchhier('t',2)">T</span>
+											<span class="abut obut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">➤</span>
 										</td>
 									</tr>
 
@@ -137,7 +127,7 @@ function onDocLoad() {
 						</div>
 					<hr />
 						<div name="ioDep" class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');">x</div>
 							<div class="pointer hide tiny" id="cp4t" title="toggle section" onclick="cpFlatten('cp4');">Bookmarks</div>
 							<div class="cpt" id="cp4">
 									<div style="margin-bottom:4px;">
@@ -152,7 +142,7 @@ function onDocLoad() {
 						</div>
 					<hr name="ioDep" />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');">x</div>
 							<div class="pointer hide tiny" id="cp5t" title="toggle section" onclick="cpFlatten('cp5');">Text Search</div>
 							<div class="cpt" id="cp5">
 
@@ -234,7 +224,7 @@ function onDocLoad() {
 					<input type="text" style="display:none">
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');">x</div>
 							<div class="pointer hide tiny" id="cp6t" title="toggle section" onclick="cpFlatten('cp6');">Dictionary</div>
 							<div class="cpt" id="cp6">
 									<div style="margin-bottom:4px;">
@@ -320,7 +310,7 @@ function onDocLoad() {
 						</div>
 					<hr />
 						<div class="cpcont">
-							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');"> </div>
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');">x</div>
 							<div class="pointer hide tiny" id="cp7t" title="toggle section" onclick="cpFlatten('cp7');">Miscellany</div>
 							<div class="cpt" id="cp7">
 								<table>
@@ -332,7 +322,7 @@ function onDocLoad() {
 											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
+											<span class="abut lbut" title="Help (?)" onClick="openDPRTab('chrome://digitalpalireader/content/index.htm?loc=help')">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
 										</td>
 										<script>
 										// external dev function
@@ -387,6 +377,7 @@ function onDocLoad() {
 	<script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/misc_func.js"></script>
 
 
 	<!--<script> 
@@ -398,6 +389,7 @@ function onDocLoad() {
 		if(tt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="t">Thai</option>';
 		if (document.getElementById('lang').length > 1) document.getElementById('langtr').style.display = 'block';
 	</script> -->
+	<div id="alertc"><span id="alert" class="tiny"></span></div>
 </div>
 </body>
 </html>

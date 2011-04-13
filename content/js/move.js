@@ -12,7 +12,7 @@ function moveframex(a,temp) //read, etc
 
 	document.getElementById('rightbot').style.top = '';
 	
-	if(a == 1) {
+	if(a == 1 || !a && moveat == 2) {
 		document.getElementById('anf').style.display = 'none';
 		document.getElementById('rightbot').style.display = 'none';
 		document.getElementById('maf').style.bottom = '0px';

@@ -465,6 +465,10 @@ function alertFlash(text,color) {
 var G_prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Components.interfaces.nsIPromptService);
 
+function promptData(title,data) {
+	G_prompts.alert(null, title, data);
+}
+
 function fadeInOut(AID,id, sIn, L, sOut) {
 	if(AID != G_alertFlashStart) return;
 	fadeIn(AID,id,sIn,L,sOut);

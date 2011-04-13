@@ -553,6 +553,11 @@ function getLinkPlace() { // permalinks
 		if (option.length == 1 || option[0] == 'loc') {
 			place = (option[1] ? option[1]: option[0]);
 			if (/[^-a-zA-Z0-9.]/.exec(place)) return;
+
+			if(option[1] == 'help') {
+				helpXML();
+				return;
+			}
 			
 			place = place.split('.');
 			
@@ -774,18 +779,44 @@ function openPlace(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
 }
 
 
-function importXMLindex() {
+function importXMLindex(reuse) {
 
 	var nikaya = document.form.nik.value;
 	var bookno = document.form.book.selectedIndex;
 
-	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
+	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIWebNavigation)
+                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                   .rootTreeItem
+                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIDOMWindow); 
+                   
+	if(reuse) { // reuse old index
+		for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser;
+			index < tabbrowser.tabContainer.childNodes.length && !found;
+			index++) {
 
-	openDPRTab(permalink);
+			// Get the next tab
+			var currentTab = tabbrowser.tabContainer.childNodes[index];
 
+			// Does this tab contain our custom attribute?
+			if (currentTab.getAttribute('id') == 'DPR index') {
+				mainWindow.gBrowser.selectedTab = currentTab;
+				var currentTabBrowser = mainWindow.gBrowser.getBrowserForTab(currentTab);
+				currentTabBrowser.contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,hier]);
+				found = true;
+			}
+		}
+	}
+
+	if (!found) {
+		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
+
+		openDPRTab(permalink,'DPR index');
+	}
 }
 
-function openDPRTab(permalink) {
+function openDPRTab(permalink,id) {
 	
 	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIWebNavigation)
@@ -793,8 +824,12 @@ function openDPRTab(permalink) {
                    .rootTreeItem
                    .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIDOMWindow); 
-   var newTab = mainWindow.gBrowser.addTab(permalink);
-   mainWindow.gBrowser.moveTabTo(newTab, 0)
-   mainWindow.gBrowser.selectedTab = newTab;
+
+	var newTab = mainWindow.gBrowser.addTab(permalink);
+
+	if(id) newTab.setAttribute('id', id);
+	mainWindow.gBrowser.moveTabTo(newTab, mainWindow.gBrowser.selectedTab.tabIndex+1)
+	mainWindow.gBrowser.selectedTab = newTab;
+
 }
 

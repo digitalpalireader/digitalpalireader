@@ -529,24 +529,21 @@ border-spacing:0px;
 .pointer:hover{
 	cursor:pointer;
 }
+
 .cp-d:hover {
-cursor:pointer;
-opacity: 0.8;
--moz-opacity: 0.8;
+	cursor:pointer;
+	opacity: 0.8;
+	-moz-opacity: 0.8;
 }
 
 .cp-d {
-position:absolute;
-right:0px;
-top:-4px;
-width:12px;
-height:12px;
-border-bottom-left-radius:5px;
--moz-border-bottom-left-radius:5px;
-border:1px solid silver;
-background-color: white;
-opacity: 0.3;
--moz-opacity: 0.3;
+	position:absolute;
+	right:0px;
+	top:-4px;
+	width:12px;
+	height:12px;
+	opacity: 0.3;
+	-moz-opacity: 0.3;
 }
 
 .cpsp {
@@ -586,6 +583,13 @@ opacity: 0.3;
 	text-align:center;
 }
 
+#closebot {
+	position:absolute;
+	bottom:0;
+	left:0;
+	z-index:5;
+}
+
 #DPRLogo {
 	border-radius:8px;
 	-moz-border-radius:8px;
@@ -595,7 +599,7 @@ opacity: 0.3;
 	z-index:4;
 	top:-8px;
 	left:-8px;
-	background-image: -moz-radial-gradient(white,silver,white);
+	background-image: -moz-linear-gradient(left top,silver,white);
 }
 
 #DPRLogo:hover {
