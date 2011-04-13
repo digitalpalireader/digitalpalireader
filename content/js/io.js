@@ -213,7 +213,17 @@ function getHomePath() {
 	var dir = DIR.get("Home", Components.interfaces.nsIFile);
 	return dir.path;
 }
-function fileExists(aDir,aFileKey)
+function fileExists(aFileKey)
+{
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("ProfD", Components.interfaces.nsIFile);
+	dir.append("DPR");
+	dir.append(aFileKey);
+	if ( dir.exists() ) return true;
+	return false;
+}
+
+function extFileExists(aDir,aFileKey)
 {
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 	var dir = DIR.get("Home", Components.interfaces.nsIFile);
@@ -229,8 +239,8 @@ function fileExists(aDir,aFileKey)
 	dir.append(aFileKey);
 	if ( dir.exists() ) return true;
 	return false;
-}
-
+} 
+  
 function readDir() {
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 	var dir = DIR.get("ProfD", Components.interfaces.nsIFile);
