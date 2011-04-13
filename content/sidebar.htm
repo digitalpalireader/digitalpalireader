@@ -8,18 +8,18 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
-	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
+	getconfig();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
-<script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/xml.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/search_func.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
@@ -34,6 +34,7 @@ function onDocLoad() {
 <div id="content">
 	<div id="left">
 	<div id="matrelc"></div>
+	<div id="DPRLogo"><img src="images/logo.png" onclick="window.alert('Digital Pali Reader ' + version)" ></div>
 	<form name="form">
 		<div id="brleft"></div>
 		<div id="cleft">
@@ -161,8 +162,8 @@ function onDocLoad() {
 										</tr>
 										<tr>
 											<td class="buttont"><span class="abut obut small" title="maximize search frame" id="plus" onclick="moves()">◳</span></td>
-											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
-											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="searchTipitaka()">➤</span></td>
+											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) sendSearch(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
+											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="sendSearch()">➤</span></td>
 										</tr>
 
 										<tr>
@@ -372,179 +373,18 @@ function onDocLoad() {
 		</div>
 	</form>
 	</div>
-	<div id="cpc">
-		<div>
-			<span class="abut obut" id="cpa" onclick="moveframec();" title="close control panel (x)">x</span>
-		</div>
-	</div>
-	<div id="right" style="display:none" onmouseover="document.body.style.cursor='auto'">
-		<div id="maf">
-			<div align="left" id="mafa"></div>
-			<div align="justify" id="mafb">
-				<div id="mafbc">
-					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
-					<div id="mafe" align=center>
-					</div>
-					<div id="mafd" align=center>
-					</div>
-					<div id="mafdebug"></div>
-				</div>
-			</div>
-		</div>
-		<div id="rightbot">
-			<div id="difout">
-				<div id="cdif">
-					<div id="dif">
-						<div id="difb">
-						</div>
-					</div>
-				</div>
-				<div id="difhist"></div>
-			</div>
-			<div id="cof">
-				<form name="convertor">
-					<table align="center">
-						<tr>
-							<td align="center">Input</td>
-							<td></td>
-							<td align="center">Output</td>
-						</tr>
-						<tr>
-							<td align=left id="inputtd">
-								<textarea id="inputc" rows="8" cols="35" onkeyup="convert()"></textarea>
-							</td>
-							<td valign="top">	
-								<table id="table1">
-									<tr>
-										<td align="center">from</td>
-										<td></td>
-										<td align="center">to</td>
-									</tr>
-									<tr>
-										<td align="center" valign="top">
-											<select name="conversion1" onclick="changeConversion(this.selectedIndex,1)">
-												<option>Unicode</option>
-												<option selected>Velthuis</option>
-											</select>
-										</td>
-										<td></td>
-										<td align="center" valign="top">
-											<select name="conversion2" onclick="changeConversion(this.selectedIndex,2)">
-												<option selected>Unicode</option>
-												<option>Velthuis</option>
-												<option>Thai</option>
-												<option>Devanagari</option>
-												<option>Myanmar</option>
-												<option>Sinhala</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="convert the text" onClick="convert()">convert</span> 
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">sort</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="Clear both text boxes" onClick="clearboth()">clear</span>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td align=right><textarea name="outputc" rows="8" cols="35"></textarea>
-							</td>
-						</tr>
-					</table>
-					<div align="center">Use the "s" key to send a selection or entire section to this convertor.</div>
-				</form>
-			</div>
-			<div id="scf" align=center>
-				<form name="textpad">
-				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-				<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
-				</form>
-			</div>
-		</div>
-		<div id="anf" align=right>
-			<div id="brtop"></div>
-			<div id="brmid"></div>
-			<div id="brbot"></div>
-			<div id="anft">
-				<div align="center" id="anfa"></div>
-				<div align="center" id="anfb"></div>
-				<div style="position:relative">
-					<div id="anfs"></div>
-					<div id="anfsd"></div>
-				</div>
-			</div>
-			<div id="cort"><img src="images/cort.png" /></div>
-			<div id="corb"><img src="images/corb.png" /></div>
-			
-		</div>
-		<div id="search">
-			<div id="searchb">
-				<div align="left" id="sbfa"></div>
-				<a name="sbftop"></a>
-				<div id="sbfbc">
-					<div align="justify" id="sbfab"></div>
-					<div align="justify" id="sbfb"></div>
-				</div>
-				<div id="sbr"></div>		
-				<div class="label" align="justify" id="showing"></div>
-			</div>
-			<div id="searcht">
-				<div align="justify" class="relative" id="stfb">
-				</div>
-				<div align="justify" class="relative" id="stfc">
-				</div>
-				<div id="searchtb"></div>
-			</div>
-			<div id="cors"><img src="images/corb.png" /></div>
-		</div>
-	</div>
+
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 	<script>
 		changenikaya(1);
 		updatecookielist();
 		historyBox();
 	</script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/relatt.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/reltik.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/dict_func.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
-	
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
-
 	<script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/feedback.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
 
@@ -558,7 +398,6 @@ function onDocLoad() {
 		if(tt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="t">Thai</option>';
 		if (document.getElementById('lang').length > 1) document.getElementById('langtr').style.display = 'block';
 	</script> -->
-	<div id="alertc"><span id="alert">sadf</span></div>
 </div>
 </body>
 </html>

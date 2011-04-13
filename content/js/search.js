@@ -2,70 +2,52 @@ var G_searchStartTime;
 
 var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶ]/;
 
-function checkGetstring(getstring) {
-
-	var stringra = [];
-	
-	var yesplus = getstring.indexOf('+');
-	if (yesplus >= 0)
-	{
-		stringra = getstring.split('+');
-	}
-	if (getstring.length < 3)
-	{
-		alertFlash("Minimum three letter search length",'RGBa(255,255,0,0.8)');
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		document.getElementById('sbfab').innerHTML='';
-		return false;
-	}
-	if (stringra.length > 3)
-	{
-		alertFlash("Maximum three strings per search",'RGBa(255,255,0,0.8)');
-		document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-		document.getElementById('sbfa').innerHTML='';
-		return false;
-	}
-	for (var s = 0; s < stringra.length; s++)
-	{
-		if (stringra[s].length < 3 && stringra.length > 0)
-		{
-			alertFlash("Minimum three letter search length",'RGBa(255,255,0,0.8)');
-			document.getElementById('sbfb').innerHTML='<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>';
-			document.getElementById('sbfa').innerHTML='';
-			document.getElementById('sbfab').innerHTML='';
-			return false;
-		}
-	}
-	return true;
-}
+var G_searchType;
+var G_searchString;
+var G_searchMAT;
+var G_searchSet;
+var G_searchBook;
+var G_searchRX;
 
 function searchTipitaka() {
+
+	// get options from URL
 	
-	if(!checkGetstring(document.form.isearch.value)) return;
-	
-	var which = document.getElementById('tipType').selectedIndex;
-	
-	if(which == 3 || which == 6 || which == 10 || which == 13) return;
-	
-	if(which == 15) { // Dev
-		DevInput(document.form.isearch.value);
-		return;
+	var options = document.location.href.split('?')[1].split('#')[0].split('&');
+
+	// parse options
+
+	for (i in options) {
+
+		var option = options[i].split('=');
+		switch(option[0]) {
+			case 'type':
+				G_searchType = parseInt(option[1]);
+			break;
+			case 'query':
+				G_searchString = toUni(option[1]);
+			break;
+			case 'MAT':
+				G_searchMAT = option[1];
+			break;
+			case 'set':
+				G_searchSet = option[1];
+			break;
+			case 'book':
+				G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
+			break;
+			case 'rx':
+				G_searchRX = option[1];
+			break;
+		}
 	}
+	
+	// start timer
 
 	starttime = new Date;
 	starttime = starttime.getTime();
 
-
-	document.form.usearch.value = toUni(document.form.isearch.value).toLowerCase(); 
-	moves(1);
-	scrollToId('search',0);
-	clearDivs('search');
-	resetvalues();
-
-
-
-	switch(which) {
+	switch(G_searchType) {
 		case 0:
 		case 4:
 		case 7:
@@ -89,64 +71,7 @@ function searchTipitaka() {
 
 }
 
-function tipitakaOptions() {
-	
-	document.getElementById('tsoMAT').style.display = 'none';
-	document.getElementById('tsoCO1').style.display = 'none';
-	document.getElementById('tsoCO2').style.display = 'none';
-	document.getElementById('tsoCO3').style.display = 'none';
-	document.getElementById('tsoBO').style.display = 'none';
-	
-	var which = document.getElementById('tipType').selectedIndex;
-	switch(which) {
-		case 4:
-			document.getElementById('tsoCO1').style.display = 'block';
-			document.getElementById('tsoCO2').style.display = 'block';
-			document.getElementById('tsoCO3').style.display = 'block';
-		break;
-		case 5:
-			document.getElementById('tsoBO').style.display = 'block';
-		break;
-		case 7:
-			document.getElementById('tsoMAT').style.display = 'block';
-		break;
-		case 8:
-			document.getElementById('tsoMAT').style.display = 'block';
-		break;
-		case 9:
-			document.getElementById('tsoMAT').style.display = 'block';
-		break;
-		case 11:
-			document.getElementById('tsoMAT').style.display = 'block';
-			document.getElementById('tsoCO1').style.display = 'block';
-			document.getElementById('tsoCO2').style.display = 'block';
-			document.getElementById('tsoCO3').style.display = 'block';
-		break;
-		case 12:
-			document.getElementById('tsoMAT').style.display = 'block';
-			document.getElementById('tsoBO').style.display = 'block';
-		break;
-		case 14:
-			document.getElementById('tsoCO2').style.display = 'block';
-		break;
-		default:
-		break;
-	}
-}
-
-var G_searchG_searchFileArray = [];
-
-var nikletter = new Array();
-nikletter[0] = 'v';
-nikletter[1] = 'd';
-nikletter[2] = 'm';
-nikletter[3] = 's';
-nikletter[4] = 'a';
-nikletter[5] = 'k';
-nikletter[6] = 'y';
-nikletter[7] = 'x';
-nikletter[8] = 'b';
-nikletter[9] = 'g';
+var G_searchFileArray = [];
 
 var bookfile = '';
 var count = 0;
@@ -175,7 +100,7 @@ var exword = new Array();
 var countmatch = 0;
 
 function resetvalues() {
-	G_searchG_searchFileArray = [];
+	G_searchFileArray = [];
 	exword.length=0;
 	stopsearch = 0;	
 	bookperm = 1;
@@ -192,7 +117,7 @@ function resetvalues() {
 function makeProgressTable() {
 
 	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
-	var fal = G_searchG_searchFileArray.length;
+	var fal = G_searchFileArray.length;
 	for (q2 = 0; q2 < fal; q2++)
 	{
 		tableout += '<td bgcolor="'+colorcfg['colbkcp']+'" width=1 class="bordered"></td>';
@@ -203,31 +128,31 @@ function makeProgressTable() {
 
 function pausesall() 
 {
-	// make G_searchG_searchFileArray
-	var which = document.getElementById('tipType').selectedIndex;
+	// make G_searchFileArray
+	var which = G_searchType;
 
-	for(w in G_XMLG_searchFileArray) {
+	for(w in G_XMLFileArray) {
 		if ((which == 0 || which == 7) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+w.charAt(0)).checked) continue; // don't add unchecked collections
+		if ((which == 4 || which == 11) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
 		if(which > 6) { // multiple hier
 			for (x = 0; x < 3; x++) {
-				if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
-					G_searchG_searchFileArray.push(w+G_hLetters[x]);
+				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+					G_searchFileArray.push(w+G_hLetters[x]);
 				}
 			}
 		}
 		else { // single hier
-			if (hier == "m" && G_XMLG_searchFileArray[w][0] == 1 || hier == "a" && G_XMLG_searchFileArray[w][1] == 1 || hier == "t" && G_XMLG_searchFileArray[w][2] == 1) G_searchG_searchFileArray.push(w+hier);
+			if (G_searchMAT == "m" && G_XMLFileArray[w][0] == 1 || G_searchMAT == "a" && G_XMLFileArray[w][1] == 1 || G_searchMAT == "t" && G_XMLFileArray[w][2] == 1) G_searchFileArray.push(w+G_searchMAT);
 		}
 	}
 
-	if(G_searchG_searchFileArray.length == 0) {
+	if(G_searchFileArray.length == 0) {
 		alert('No books in selection');
 		return;
 	}
 
-	var getstring = document.form.usearch.value;
+	var getstring = G_searchString;
 
 	
 	
@@ -238,10 +163,10 @@ function pausesall()
 	
 	var toplista = [];
 	
-	for (i = 0; i < nikletter.length; i++) {
-		if ((which == 0 || which == 7) && /[xbg]/.exec(nikletter[i])) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && !document.getElementById('tsoCO'+nikletter[i]).checked) continue; // don't add unchecked collections
-		toplista.push('<span id="sdf'+nikletter[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+nikletter[i]+'\').offsetTop;">'+nikname[nikletter[i]]+':</a> <span id="stfH'+nikletter[i]+'"></span></span>');
+	for (i = 0; i < G_numberToNik.length; i++) {
+		if ((which == 0 || which == 7) && /[xbg]/.exec(G_numberToNik[i])) continue; // don't add extracanonical texts for tipitaka match 
+		if ((which == 4 || which == 11) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
+		toplista.push('<span id="sdf'+G_numberToNik[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+G_numberToNik[i]+'\').offsetTop;">'+G_nikLongName[G_numberToNik[i]]+':</a> <span id="stfH'+G_numberToNik[i]+'"></span></span>');
 	}
 	
 	toplist += toplista.join(', ');
@@ -257,23 +182,23 @@ function pausesall()
 }
 function pausetwo() { // init function for single collection
 
-	// make G_searchG_searchFileArray
-	var which = document.getElementById('tipType').selectedIndex;
-	var nikaya = document.form.nik.value;
+	// make G_searchFileArray
+	var which = G_searchType;
+	var nikaya = G_searchSet;
 	
-	for(w in G_XMLG_searchFileArray) {
+	for(w in G_XMLFileArray) {
 		if (w.charAt(0) != nikaya) continue; // only this collection
-		if ((which == 5 || which == 12) && !document.getElementById('tsoBObook' + w.substring(1)).checked) continue; // skip unchecked books 
+		if ((which == 5 || which == 12) && G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books 
 
 		if(which > 6) { // multiple hier
 			for (x = 0; x < 3; x++) {
-				if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 					G_searchFileArray.push(w+G_hLetters[x]);
 				}
 			}
 		}
 		else { // single hier
-			if (hier == "m" && G_XMLG_searchFileArray[w][0] == 1 || hier == "a" && G_XMLG_searchFileArray[w][1] == 1 || hier == "t" && G_XMLG_searchFileArray[w][2] == 1) G_searchFileArray.push(w+hier);
+			if (G_searchMAT == "m" && G_XMLFileArray[w][0] == 1 || G_searchMAT == "a" && G_XMLFileArray[w][1] == 1 || G_searchMAT == "t" && G_XMLFileArray[w][2] == 1) G_searchFileArray.push(w+G_searchMAT);
 		}
 	}
 
@@ -284,30 +209,33 @@ function pausetwo() { // init function for single collection
 
 	makeProgressTable();
 
-	var getstring = document.form.usearch.value;
+	var getstring = G_searchString;
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + nikname[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(2);
 }
 
 function pausethree() {
 	
-	var which = document.getElementById('tipType').selectedIndex;
-	var nikbook = document.form.nik.value+document.form.book.value
-	var getstring = document.form.usearch.value;
+	var which = G_searchType;
+	var nikaya = G_searchSet;
+	var book = G_searchBook;
+
+	var nikbook = nikaya+book;
+	var getstring = G_searchString;
 
 	if(which == 9) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
-			if(document.getElementById('tsoMAT'+G_hLetters[x]).checked && G_XMLG_searchFileArray[nikbook][x] == 1) { // this hier is checked and the current book in the current nikaya exists in this hier
+			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 				G_searchFileArray.push(nikbook+G_hLetters[x]);
 			}
 		}
 	}		
 	else { // single book
-		G_searchFileArray = [nikbook+hier];
+		G_searchFileArray = [nikbook+G_searchMAT];
 	}
 	
 	if(G_searchFileArray.length == 0) {
@@ -317,10 +245,8 @@ function pausethree() {
 
 	makeProgressTable();
 
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + nikname[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+colorcfg['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -349,14 +275,14 @@ function importXMLs(cnt)
 		return;
     }	
 	
-	var which = document.getElementById('tipType').selectedIndex;
+	var which = G_searchType;
 
 	count = cnt;
 	var bookno = 0;
 	var endloop = 0;
 	var yellowcount = 0;
 
-	var getstring = document.form.usearch.value;
+	var getstring = G_searchString;
 	var stringra = new Array();
 	
 	if (cnt == 1) // whole tipitaka or multiple collections
@@ -369,7 +295,7 @@ function importXMLs(cnt)
 			headingNode.setAttribute('id', 'sbfN' + newnikaya);
 			headingNode.setAttribute('name', 'xyz');
 			headingNode.setAttribute('class', 'huge');
-			headingNode.innerHTML = nikname[newnikaya] + '<hr>';
+			headingNode.innerHTML = G_nikLongName[newnikaya] + '<hr>';
 			document.getElementById('sbfb').appendChild(headingNode);
 			thiscount = 0;
 			rescount++;
@@ -407,7 +333,7 @@ function importXMLs(cnt)
 	}	
 	else if (cnt == 2) // nikaya
 	{
-		var nikaya = document.form.nik.value;
+		var nikaya = G_searchSet;
 
 		
 		bookfile = G_searchFileArray[qz];
@@ -419,7 +345,7 @@ function importXMLs(cnt)
 		headingNode.setAttribute('name', 'xyz');
 		headingNode.setAttribute('id', 'xyz');
 		headingNode.setAttribute('class', 'large');
-		headingNode.innerHTML = nikname[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + getBookName(nikaya, hiert, parseInt(bookat)-1) + '<hr>';
+		headingNode.innerHTML = G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + getBookName(nikaya, hiert, parseInt(bookat)-1) + '<hr>';
 		document.getElementById('sbfb').appendChild(headingNode);
 */		
 		bookload = 'xml/' + bookfile + '.xml';
@@ -446,8 +372,8 @@ function importXMLs(cnt)
 	}
 	else if (cnt == 3) // this book
 	{
-		var nikaya = document.form.nik.value;
-		var book = document.form.book.value;
+		var nikaya = G_searchSet;
+		var book = G_searchBook;
 		
 		bookfile = G_searchFileArray[qz];
 		hiert = bookfile.charAt(bookfile.length-1);
@@ -485,11 +411,11 @@ function createTables(xmlDoc,hiert)
 	//alert(bookload);
 	var u = xmlDoc.getElementsByTagName("h0");
 	
-	var getstring = document.form.usearch.value;
+	var getstring = G_searchString;
 
 	var gotstring;
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
+	var nikaya = G_searchSet;
+	var book = G_searchBook;
 
 	if (count == 1 || count == 2) {
 		book = bookperm;
@@ -554,7 +480,7 @@ function createTables(xmlDoc,hiert)
 	}
 	else {
 		stringra[0] = getstring;
-		if(document.form.tsoregexp.checked) getstring = new RegExp(getstring);
+		if(G_searchRX == 'true') getstring = new RegExp(getstring);
 	}
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
@@ -591,7 +517,7 @@ function createTables(xmlDoc,hiert)
 
 							texttomatch = z[tmp].textContent.substring(4);
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
-							if (document.form.usearch.value.search(/[0-9]/g) == -1) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
+							if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
 							//texttomatch = texttomatch.replace(/\^b\^/g, '');
 							//texttomatch = texttomatch.replace(/\^eb\^/g, '');
@@ -616,9 +542,9 @@ function createTables(xmlDoc,hiert)
 								for (d = 0; d < stringra.length; d++)
 								{
 									perstring = stringra[d];
-									if(document.form.tsoregexp.checked) perstring = new RegExp(perstring);
+									if(G_searchRX == 'true') perstring = new RegExp(perstring);
 
-									if(document.form.tsoregexp.checked) startmatch = texttomatch.search(perstring);
+									if(G_searchRX == 'true') startmatch = texttomatch.search(perstring);
 									else startmatch = texttomatch.indexOf(perstring)
 									postpara = '';
 									tempexword[d] = [];
@@ -629,7 +555,7 @@ function createTables(xmlDoc,hiert)
 
 										while (startmatch >= 0)
 										{				
-											if(document.form.tsoregexp.checked) gotstring = texttomatch.match(perstring)[0];
+											if(G_searchRX == 'true') gotstring = texttomatch.match(perstring)[0];
 											else gotstring = perstring;
 
 
@@ -653,7 +579,7 @@ function createTables(xmlDoc,hiert)
 											else postpara += beforem+gotstring;
 											
 											texttomatch = texttomatch.substring(endmatch);
-											if(document.form.tsoregexp.checked) startmatch = texttomatch.search(perstring);
+											if(G_searchRX == 'true') startmatch = texttomatch.search(perstring);
 											else startmatch = texttomatch.indexOf(perstring)
 
 										}
@@ -697,7 +623,7 @@ function createTables(xmlDoc,hiert)
 										exword[t] = exword[t].concat(texnodups[t]);
 									}
 				
-									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -723,7 +649,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + colorcfg[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -735,7 +661,7 @@ function createTables(xmlDoc,hiert)
 							else // single search term
 							{
 								tempexword = [];
-								if(document.form.tsoregexp.checked) startmatch = texttomatch.search(getstring);
+								if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
 								else startmatch = texttomatch.indexOf(getstring)
 								postpara = '';
 								if (startmatch >= 0)
@@ -743,11 +669,11 @@ function createTables(xmlDoc,hiert)
 									while (startmatch >= 0)
 									{				
 										match = 1;
-                                        if(document.form.tsoregexp.checked) gotstring = texttomatch.match(getstring)[0];
+                                        if(G_searchRX == 'true') gotstring = texttomatch.match(getstring)[0];
                                         else gotstring = getstring;
 										endmatch = startmatch + gotstring.length;
 										beforem = texttomatch.substring(0,startmatch);
-										if (document.form.usearch.value.search(/^[PVMT][0-9]+\.[0-9]+$/) == 0) {  // page search
+										if (/[0-9]/.exec(G_searchString)) {  // page search
                                             beforem = beforem.substring(0,beforem.length - 3);
                                             endmatch += 4;
                                         }
@@ -755,7 +681,7 @@ function createTables(xmlDoc,hiert)
 										postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
 										texttomatch = texttomatch.substring(endmatch);
 										
-										if(document.form.tsoregexp.checked) startmatch = texttomatch.search(getstring);
+										if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
 										else startmatch = texttomatch.indexOf(getstring)
 										
 										// get words
@@ -810,7 +736,7 @@ function createTables(xmlDoc,hiert)
 
 									// titles
 																
-									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + colorcfg['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
@@ -836,7 +762,7 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="searchgo(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace(\''+hiert+'\',\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -857,7 +783,7 @@ function createTables(xmlDoc,hiert)
 		document.getElementById('sbfb').appendChild(document.createElement('hr'));
 	}
 	if (match == 0) {
-		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + colorcfg['colped'] + '">' + nikname[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + colorcfg['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
+		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + colorcfg['colped'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + colorcfg['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
 		outNode.innerHTML = finalout;
 		document.getElementById('sbfb').appendChild(outNode);
 	}
@@ -1035,7 +961,7 @@ function atiSearchOffline(d, getstring) {
 		for (j in data) {
 			if(data[j].id == 'H_content') {
 			var texttomatch = data[j].textContent;
-				if(document.form.tsoregexp.checked) startmatch = texttomatch.search(getstring);
+				if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
 				else startmatch = texttomatch.indexOf(getstring)
 				postpara = '';
 				if (startmatch >= 0)
@@ -1044,7 +970,7 @@ function atiSearchOffline(d, getstring) {
 					while (startmatch >= 0)
 					{				
 						count++;
-						if(document.form.tsoregexp.checked) gotstring = texttomatch.match(getstring)[0];
+						if(G_searchRX == 'true') gotstring = texttomatch.match(getstring)[0];
 						else gotstring = getstring;
 						var endmatch = startmatch + gotstring.length;
 
@@ -1090,7 +1016,7 @@ function atiSearchOffline(d, getstring) {
 	document.getElementById('dictList').appendChild(listNode);
 	
 	var cellNode = document.createElement('td');
-	cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+nikname[nik] + '</a>: ' + count + '; ';
+	cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+G_nikLongName[nik] + '</a>: ' + count + '; ';
 	
 	document.getElementById('atiNiks').appendChild(cellNode);
 	
@@ -1109,76 +1035,4 @@ function atiSearchOffline(d, getstring) {
 	}
 
 	setTimeout(function () { atiSearchOffline(d,getstring) }, 10);
-}
-
-
-var TRange=null
-
-function findString (strx,nummatch) {
- var str = toUni(strx)
- if (parseInt(navigator.appVersion)<4) return;
- var strFound;
- if (navigator.appName.indexOf("Microsoft")!=-1) {
-
-  // EXPLORER-SPECIFIC CODE
-
-  if (TRange!=null) {
-   TRange.collapse(false)
-   strFound=TRange.findText(str)
-   if (strFound) TRange.select()
-  }
-  if (TRange==null || strFound==0) {
-   TRange=self.document.body.createTextRange()
-   strFound=TRange.findText(str)
-   if (strFound) TRange.select()
-  }
- }
- else {
-
-  // NAVIGATOR-SPECIFIC CODE
-
-	for (var xz = 0; xz < nummatch; xz ++)
-	{
-		strFound=find(str);
-	}
-	
-  if (!strFound) {
-   strFound=find(str,0,1)
-   while (find(str,0,1)) continue
-  }
- }
- //if (!strFound) alert ("String '"+str+"' not found!")
-}
-
-
-function searchgo(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
-{
-
-	moves(0);
-	var ssect = se;
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-	getplace([G_nikToNumber[nikaya],book,sx,sy,sz,s,se,hiert]);
-	if (stringra) {
-		stringra = stringra.replace(/`/g, '"');
-		stringra = stringra.split('#');
-		if(document.form.tsoregexp.checked) {
-			for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
-		}
-		importXML(stringra,tmp);
-
-	}
-	else importXML();
-				
-	getstring = '';
-	postpara ='';
-	theData = '';
-	
-	beforem = '';
-	afterm = '';
-	
-	
-	texttomatch = '';
-	startmatch = 0;
-	endmatch = 0;
 }

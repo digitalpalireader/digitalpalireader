@@ -6,11 +6,6 @@
 <link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<script>
-function onDocLoad() {
-	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
-}
-</script>
 <script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 
@@ -18,6 +13,35 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script>
+function onDocLoad() {
+
+	getconfig();
+	if(document.location.href.indexOf('?') > -1) searchTipitaka();		
+}
+
+// external dev function
+
+var devCheck = 0;
+if(fileExists('Extensions/work','dev.js')) {
+	var headID = document.getElementsByTagName("head")[0];         
+	var newScript = document.createElement('script');
+	newScript.type = 'text/javascript';
+	newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
+	headID.appendChild(newScript);
+	
+	var headID2 = document.getElementsByTagName("head")[0];         
+	var newScript2 = document.createElement('script');
+	newScript2.type = 'text/javascript';
+	newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+	headID2.appendChild(newScript2);
+}
+else { // null functions
+	function devO() {}
+	function dalert(a) {}
+	function ddump(a) {}
+}
+</script>
 
 </head>
 

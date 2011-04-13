@@ -85,17 +85,17 @@ var G_hTitles = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
 var G_hLetters = ['m','a','t'];
 
 
-var nikname = new Array();
-nikname['v'] = "Vin";
-nikname['d'] = "DN";
-nikname['m'] = "MN";
-nikname['s'] = "SN";
-nikname['a'] = "AN";
-nikname['k'] = "KN";
-nikname['y'] = "Abhi";
-nikname['x'] = "Vism";
-nikname['b'] = "AbhiS";
-nikname['g'] = "Gram";
+var G_nikLongName = new Array();
+G_nikLongName['v'] = "Vin";
+G_nikLongName['d'] = "DN";
+G_nikLongName['m'] = "MN";
+G_nikLongName['s'] = "SN";
+G_nikLongName['a'] = "AN";
+G_nikLongName['k'] = "KN";
+G_nikLongName['y'] = "Abhi";
+G_nikLongName['x'] = "Vism";
+G_nikLongName['b'] = "AbhiS";
+G_nikLongName['g'] = "Gram";
 
 
 var G_nikShortName = [];
@@ -117,7 +117,7 @@ G_nikToNumber['x'] = "7";
 G_nikToNumber['b'] = "8";
 G_nikToNumber['g'] = "9";
 
-var G_numberToNik = new Array();
+var G_numberToNik = [];
 G_numberToNik.push('v');
 G_numberToNik.push('d');
 G_numberToNik.push('m');
@@ -261,7 +261,7 @@ function changenikaya(noget)
 	if (nik != '') 
 	{
 		if (hier == 't' && limitt()) { 
-			alertFlash('Ṭīkā not available for '+nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+			alertFlash('Ṭīkā not available for '+G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 			document.form.nik.selectedIndex = oldnikaya;
 			return; 
 		} 
@@ -428,11 +428,11 @@ function switchhier(htmp,stop) {
 		
 
 	if (htmp == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
 	if (htmp == 'a' && document.form.nik.selectedIndex > 7) {
-		alertFlash('Aṭṭhakathā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+		alertFlash('Aṭṭhakathā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return;
 	}
 	if (document.form.nik.value == 'k' && htmp == 'a' && kudvala[document.form.book.value] == undefined) {
@@ -560,8 +560,7 @@ function getLinkPlace() { // permalinks
 				outplace = place;
 			}
 			else if (/[vdmaskyxbg]\.[0-9]+\.[mat]/.exec(option[1])) { // index
-				getplace([G_nikToNumber[place[0]],parseInt(place[1]),0,0,0,0,0,place[2]]);
-				importXMLindex();
+				loadXMLindex(option[1].split('.'));
 				return;
 			}
 			else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.exec(option[1])) { // shorthand
@@ -754,7 +753,40 @@ function importXML(labelsearch,para,isPL) {
 
 	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '');
 
+	openDPRTab(permalink);
 
+}
+
+
+function openPlace(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
+{
+
+	if (stringra) {
+		stringra = stringra.replace(/`/g, '"');
+		stringra = stringra.split('#');
+		if(G_searchRX == 'true') {
+			for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
+		}
+	}
+	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+sx+'.'+sy+'.'+sz+'.'+s+'.'+se+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(tmp ? '&para=' + (tmp+1) : '');
+
+	openDPRTab(permalink);
+}
+
+
+function importXMLindex() {
+
+	var nikaya = document.form.nik.value;
+	var bookno = document.form.book.selectedIndex;
+
+	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
+
+	openDPRTab(permalink);
+
+}
+
+function openDPRTab(permalink) {
+	
 	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
                    .getInterface(Components.interfaces.nsIWebNavigation)
                    .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -764,5 +796,5 @@ function importXML(labelsearch,para,isPL) {
    var newTab = mainWindow.gBrowser.addTab(permalink);
    mainWindow.gBrowser.moveTabTo(newTab, 0)
    mainWindow.gBrowser.selectedTab = newTab;
-
 }
+

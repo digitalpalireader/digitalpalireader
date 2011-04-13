@@ -288,7 +288,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 	var lgt = una.length;
 	
 	book = getBookName(nikaya,hiert,book-1);
-	if (nikname[nikaya]) { nikaya = nikname[nikaya]; }
+	if (G_nikLongName[nikaya]) { nikaya = G_nikLongName[nikaya]; }
 	var col = ['colped','coldppn','colcpd','colped','coldppn','colcpd','colped','coldppn','colcpd'];
 	var w = 0;
 	

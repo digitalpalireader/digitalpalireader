@@ -235,7 +235,6 @@ height:20px;
 
 #search {
 border-left: grey 1px solid;
-display:none; 
 position:absolute;
 bottom:0px;
 right:0px;
@@ -300,7 +299,7 @@ position:absolute;
 bottom:0px;
 top:0px;
 right:0px;
-left:254px;
+left:0px;
 }
 
 #maf {
@@ -587,6 +586,22 @@ opacity: 0.3;
 	text-align:center;
 }
 
+#DPRLogo {
+	border-radius:8px;
+	-moz-border-radius:8px;
+	padding:10px 5px 5px 10px;
+	border: 1px silver solid;
+	position:absolute;
+	z-index:4;
+	top:-8px;
+	left:-8px;
+	background-image: -moz-radial-gradient(white,silver,white);
+}
+
+#DPRLogo:hover {
+	opacity:1;
+	-moz-opacity:1;
+}
 .conjc {
 	position:relative;
 	clear:both;

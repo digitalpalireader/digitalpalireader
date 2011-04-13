@@ -252,7 +252,7 @@ function checkcpbkg(x) {
 		document.getElementById('brmid').style.backgroundColor = colort;
 	}
 	if(document.getElementById('brleft')) {
-		document.getElementById('brleft').style.backgroundColor = colort;
+		document.getElementById('brleft').style.backgroundImage = '-moz-linear-gradient(top,'+colort+',white,'+colort+')';
 	}
 }
 
