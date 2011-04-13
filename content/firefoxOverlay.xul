@@ -7,8 +7,7 @@
     <stringbundleset id="stringbundleset">
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>
-
-    <menupopup id="menu_ToolsDPR">
+    <menupopup id="menu_ToolsPopup">
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
 	</menupopup>
     <toolbarpalette  id="BrowserToolbarPalette">
