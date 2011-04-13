@@ -14,7 +14,7 @@ function removeHistory(value) {
 	bookmarkframe(1);
 }
 //clearHistory();
-
+ 
 function clearHistory(cp) {
 	var answer = confirm('Are you sure you want to erase the history?');
 	if(!answer) { return; }
@@ -25,13 +25,15 @@ function clearHistory(cp) {
 }	
 
 function getHistory() {
+	if(!fileExists('History_List_DPR')) return [];
 	var content = readFile('History_List_DPR');
 	return content.join('#').split('#');
 }
 
 function addHistory(value) {
 	var storeHistory = [value];
-	var data = readFile('History_List_DPR').join('#').split('#');
+	if(!fileExists('History_List_DPR')) var data = [];
+	else var data = readFile('History_List_DPR').join('#').split('#');
 	for (j in data) {
 		if (data[j] != value) { storeHistory.push(data[j]); }
 		if (j > 99) { break; }
