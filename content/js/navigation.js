@@ -105,29 +105,29 @@ G_nikShortName['SN'] = "s";
 G_nikShortName['AN'] = "a";
 G_nikShortName['KN'] = "k";
 
-var niknumber = new Array();
-niknumber['v'] = "0";
-niknumber['d'] = "1";
-niknumber['m'] = "2";
-niknumber['s'] = "3";
-niknumber['a'] = "4";
-niknumber['k'] = "5";
-niknumber['y'] = "6";
-niknumber['x'] = "7";
-niknumber['b'] = "8";
-niknumber['g'] = "9";
+var G_nikToNumber = new Array();
+G_nikToNumber['v'] = "0";
+G_nikToNumber['d'] = "1";
+G_nikToNumber['m'] = "2";
+G_nikToNumber['s'] = "3";
+G_nikToNumber['a'] = "4";
+G_nikToNumber['k'] = "5";
+G_nikToNumber['y'] = "6";
+G_nikToNumber['x'] = "7";
+G_nikToNumber['b'] = "8";
+G_nikToNumber['g'] = "9";
 
-var numbernik = new Array();
-numbernik.push('v');
-numbernik.push('d');
-numbernik.push('m');
-numbernik.push('s');
-numbernik.push('a');
-numbernik.push('k');
-numbernik.push('y');
-numbernik.push('x');
-numbernik.push('b');
-numbernik.push('g');
+var G_numberToNik = new Array();
+G_numberToNik.push('v');
+G_numberToNik.push('d');
+G_numberToNik.push('m');
+G_numberToNik.push('s');
+G_numberToNik.push('a');
+G_numberToNik.push('k');
+G_numberToNik.push('y');
+G_numberToNik.push('x');
+G_numberToNik.push('b');
+G_numberToNik.push('g');
 
 
 
@@ -546,7 +546,7 @@ function getLinkPlace() { // permalinks
 		DgetThaiBook(options[0].split('=')[1]);
 		return;
 	}
-	
+	var outplace;
 	for (i in options) {
 
 		var option = options[i].split('=');
@@ -557,24 +557,22 @@ function getLinkPlace() { // permalinks
 			place = place.split('.');
 			
 			if (place.length == 8) {
-				place[0] = niknumber[place[0]];
-				getplace(place);
+				outplace = place;
 			}
 			else if (/[vdmaskyxbg]\.[0-9]+\.[mat]/.exec(option[1])) { // index
-				getplace([niknumber[place[0]],parseInt(place[1]),0,0,0,0,0,place[2]]);
+				getplace([G_nikToNumber[place[0]],parseInt(place[1]),0,0,0,0,0,place[2]]);
 				importXMLindex();
 				return;
 			}
 			else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.exec(option[1])) { // shorthand
-				var outplace = getSuttaFromNumber(place);
+				outplace = getSuttaFromNumber(place);
 				if(!outplace) return;
-				getplace(outplace);
 			}
 		}
 		else if (option[0] == 'para') para = parseInt(option[1])-1;
 		else if (option[0] == 'query') query = toUni(option[1]).replace(/_/g,' ').split('+');
 	}
-	if(place) importXML(query,para,1);
+	if(place) loadXMLSection(query,para,outplace,true);
 }
 
 
@@ -741,5 +739,30 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			return;
 		break;
 	}
-	return [niknumber[nik],book,meta,volume,vagga,sutta,section,hiert];
+	return [nik,book,meta,volume,vagga,sutta,section,hiert];
+}
+
+function importXML(labelsearch,para,isPL) {
+
+	var nikaya = document.form.nik.value;
+	var bookno = document.form.book.selectedIndex;
+	var meta = document.form.meta.selectedIndex;
+	var volume = document.form.volume.selectedIndex;
+	var vagga = document.form.vagga.selectedIndex;
+	var sutta = document.form.sutta.selectedIndex;
+	var section = document.form.section.selectedIndex;	
+
+	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '');
+
+
+	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIWebNavigation)
+                   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+                   .rootTreeItem
+                   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+                   .getInterface(Components.interfaces.nsIDOMWindow); 
+   var newTab = mainWindow.gBrowser.addTab(permalink);
+   mainWindow.gBrowser.moveTabTo(newTab, 0)
+   mainWindow.gBrowser.selectedTab = newTab;
+
 }

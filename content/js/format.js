@@ -1,7 +1,7 @@
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 
-function outputFormattedData(data,which) // calls text prep, then outputs it to preFrame
+function outputFormattedData(data,which,place) // calls text prep, then outputs it to preFrame
 {
 
 	G_lastcolour = 0; // reset colour changing
@@ -13,14 +13,14 @@ function outputFormattedData(data,which) // calls text prep, then outputs it to 
 	if(!which) { // not from textpad
 		var convout = inarray[1].replace(/  *,/g, ',');
 
-		var nikaya = document.form.nik.value;
-		var book = document.form.book.selectedIndex;
-		var meta = document.form.meta.selectedIndex;
-		var volume = document.form.volume.selectedIndex;
-		var vagga = document.form.vagga.selectedIndex;
-		var sutta = document.form.sutta.selectedIndex;
-		var section = document.form.section.selectedIndex;
-		
+		var nikaya = place[0];
+		var book = place[1];
+		var meta = place[2];
+		var volume = place[3];
+		var vagga = place[4];
+		var sutta = place[5];
+		var section = place[6]
+
 		var transin;
 		var transout='';
 		if (hier == "m") { 

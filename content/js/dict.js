@@ -665,7 +665,7 @@ function titlesearchstart()
 	clearDivs('dif');
 	
 	var getstring = document.form.manual.value;
-	if(document.form.sofuzzy.checked) {
+	if(document.form.sofuzzy.checked) { 
 		getstring = toFuzzy(getstring);
 	}
 	else {

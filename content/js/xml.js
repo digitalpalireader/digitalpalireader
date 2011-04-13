@@ -9,8 +9,9 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-function loadXMLSection(labelsearch,para,isPL)
-{
+function loadXMLSection(labelsearch,para,place,isPL)
+{ 
+	hier = place[7];
 	if (hier == 't' && limitt()) { 
 		alertFlash('Ṭīkā not available for ' + nikname[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
 		return; 
@@ -32,11 +33,23 @@ function loadXMLSection(labelsearch,para,isPL)
 
 	document.getElementById('mafbc').appendChild(pleasewait);
 
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
+	var nikaya = place[0];
+	place[1]= parseInt(place[1]);
+	place[2]= parseInt(place[2]);
+	place[3]= parseInt(place[3]);
+	place[4]= parseInt(place[4]);
+	place[5]= parseInt(place[5]);
+	place[6]= parseInt(place[6]);
+	
+	var bookno = place[1];
+	var book = place[1]+1;
+	var meta = place[2];
+	var volume = place[3];
+	var vagga = place[4];
+	var sutta = place[5];
+	var section = place[6]
+	
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-
-	document.getElementById('manrem').value = 0;
 
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
@@ -44,12 +57,7 @@ function loadXMLSection(labelsearch,para,isPL)
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
 
-	var bookno = document.form.book.selectedIndex;
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;	
+
 
 	
 	var t = xmlDoc.getElementsByTagName("ha");
@@ -88,7 +96,7 @@ function loadXMLSection(labelsearch,para,isPL)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+niknumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
+					relout+='<span class="abut obut small" onclick="matButton = 1; getplace(['+G_nikToNumber[relherea[0]]+","+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+",'"+hi[ht]+'\']);importXML()" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
 					matButton = 0;
 
 				}
@@ -112,7 +120,6 @@ function loadXMLSection(labelsearch,para,isPL)
 	
 	// titles
 	
-	var nikaya = document.form.nik.value;
 	var un = t[0].getElementsByTagName("han");
 	var vn = u[meta].getElementsByTagName("h0n");
 	var wn = v[volume].getElementsByTagName("h1n");
@@ -139,6 +146,10 @@ function loadXMLSection(labelsearch,para,isPL)
 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+relout+'</td><td align=center>'+titleout+modt+(cfg['showPermalinks'] == 'checked' ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
 		
+	var hierb = hier;
+	
+	// add to history
+
 	if (zna.length > 1) { var bknameme = zna }
 	else if (yna.length > 1) { var bknameme  = yna }
 	else if (xna.length > 1) { var bknameme  = xna }
@@ -148,13 +159,8 @@ function loadXMLSection(labelsearch,para,isPL)
 	
 	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 	
-	document.form.bmname.value = bknameme;
-	var hierb = hier;
 	
-	// add to history
-	
-	addHistory(nikname[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+document.form.nik.selectedIndex+','+document.form.book.selectedIndex+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
-	historyBox();
+	addHistory(nikname[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+G_nikToNumber[nikaya]+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
 	var theData = '';
 	
@@ -240,7 +246,7 @@ function loadXMLSection(labelsearch,para,isPL)
 			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 		}
 	}
-	outputFormattedData(theData);
+	outputFormattedData(theData,place);
 	//document.textpad.pad.value=theData;
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
@@ -774,7 +780,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 		var matButtonCount = document.getElementById('matButtonCount').value; // number of times in a row we've pushed the button, if first time, we clear the old values.
 		if (matButtonCount > 0 && matValue[setplace[7]] != '') {
 			setplace = matValue[setplace[7]].split('^').concat(setplace[7]);
-			setplace[0] = niknumber[setplace[0]];
+			setplace[0] = G_nikToNumber[setplace[0]];
 		}
 		else {
 			matValue['m'] == '';

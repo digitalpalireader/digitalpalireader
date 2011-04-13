@@ -15,8 +15,6 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 	if(divclicked) divclicked = 'W'+divclicked;
 	
 	input = toVel(input);
-	document.form.lastsearch.value=input;
-	document.form.sped.selectedIndex=0;
 	document.getElementById('anfs').innerHTML = '';
 
 	if (divclicked && document.getElementById(divclicked))
@@ -32,10 +30,6 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 	}
 
 	var inputm = input.replace(/\u00B4/g, '"').replace(/xn/g, '"n');
-	if(!frombox) { 
-		document.form.dictin.value = toUni(inputm); // add to search box for editing
-		document.form.manual.value = inputm; // add to search box for editing
-	}
 
 	// ---------- housekeeping ----------
 	

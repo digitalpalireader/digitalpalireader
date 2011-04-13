@@ -11,19 +11,34 @@
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>
 
-    <menupopup id="menu_ToolsPopup">
-        <menuitem id="digitalpalireader-load" label="DPR" 
-              oncommand="loadDPR();"/>
-    </menupopup>
+    <menupopup id="menu_ToolsDPR">
+		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
+	</menupopup>
     <toolbarpalette  id="BrowserToolbarPalette">
-        <toolbarbutton id="dpr-button"     label="DPR"       oncommand="loadDPR()" onclick="if (event.button == 1) loadDPR()"
-                   class="toolbarbutton-1" tooltiptext="DPR"/>
+        <toolbarbutton id="dpr-button"     label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
     </toolbarpalette>
     <statusbar id="status-bar">
         <statusbarpanel id="DPRStatusBar" role="button"
-                        onmouseup="loadDPR();"
+                        observes="viewDPR"
                         tooltiptext="Digital Pali Reader">
             <image id="dpr-button" />
         </statusbarpanel>
     </statusbar>
+  
+  <keyset id="mainKeyset">
+    <key id="key_openDPR" command="viewDPR"
+         key="&openDPR.commandkey;" 
+         modifiers="&openDPR.modifierskey;" />
+  </keyset>
+  
+  <broadcasterset id="mainBroadcasterSet"> 
+    <broadcaster id="viewDPR" 
+                 label="&digitalpalireader.title;"
+                 autoCheck="false"
+                 type="checkbox"
+                 group="sidebar"
+                 sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
+                 sidebartitle="&digitalpalireader.title;"
+                 oncommand="toggleSidebar('viewDPR');" />
+  </broadcasterset>
 </overlay>

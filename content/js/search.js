@@ -1158,7 +1158,7 @@ function searchgo(hiert,nikaya,book,sx,sy,sz,s,se,tmp,stringra)
 	var ssect = se;
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
-	getplace([niknumber[nikaya],book,sx,sy,sz,s,se,hiert]);
+	getplace([G_nikToNumber[nikaya],book,sx,sy,sz,s,se,hiert]);
 	if (stringra) {
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');

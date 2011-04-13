@@ -1,0 +1,564 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Digital Pali Reader</title>
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+function onDocLoad() {
+	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
+}
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/iof.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/xml.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="left">
+	<div id="matrelc"></div>
+	<form name="form">
+		<div id="brleft"></div>
+		<div id="cleft">
+			<table width=100%>
+				<tr>
+					<td align=center>
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp1');"> </div>
+							<div class="pointer hide tiny" id="cp1t" title="toggle section" onclick="cpFlatten('cp1');">Location</div>
+							<div class="cpt" id="cp1">
+								<table width="1px">
+									<tr>
+										<td align=center>
+											<b>Set</b>
+										</td>
+										<td>&nbsp;</td>
+										<td align=center>
+											<b>Book</b><br>
+										</td>
+									</tr>
+									<tr>
+										<td align=center>
+											<select class="sel" size="7" name="nik" onclick="changenikaya()">
+												<option value="v">Vinaya</option>
+												<option selected value="d">Dīgha</option>
+												<option value="m">Majjhima</option>
+												<option value="s">Saṃyutta</option>
+												<option value="a">Aṅguttara</option>
+												<option value="k">Khuddaka</option>
+												<option value="y">Abhidhamma</option>
+												<option value="x">Vism</option>
+												<option value="b">Abhidh-s</option>
+												<option value="g">Byākaraṇa</option>
+											</select>
+										</td>
+										<td>&nbsp;</td>
+										<td align=center>
+											<b id="book"><select class="sel" size="7" id="bookSel" name="book" onclick="gettitles(0,2)">
+											<option selected value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											</select></b>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					<hr />
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp2');"> </div>
+							<div class="pointer hide tiny" id="cp2t" title="toggle section" onclick="cpFlatten('cp2');">Location</div>
+							<div class="cpt" id="cp2">
+								<table>
+									<tr><td align="center" id="title">title</td></tr>
+
+									<tr><td align="center" style="padding-top:2px" id="meta"><select class="sel hide" size="1" name="meta"><option selected>a</option></select></td></tr>
+
+									<tr><td align="center" style="padding-top:2px" id="volume"><select class="sel hide" size="1" name="volume"><option selected>a</option></select></td></tr>
+							
+
+									<tr><td align="center" style="padding-top:2px" id="vagga"><select class="sel hide" size="1" name="vagga"><option selected>b</option></select></td></tr>
+
+
+									<tr><td align="center" style="padding-top:2px" id="sutta"><select class="sel hide" size="1" name="sutta"><option></option></select></td></tr>
+
+
+									<tr><td align="center" style="padding-top:2px" id="section"><select class="sel hide" size="1" name="section"><option></option></select></td></tr>
+								</table>
+							</div>
+						</div>
+					<hr />
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp3');"> </div>
+							<div class="pointer hide tiny" id="cp3t" title="toggle section" onclick="cpFlatten('cp3');">Navigation</div>
+							<div class="cpt" id="cp3">
+								<table>
+									<tr>
+										<td class="buttont">
+											<span id="RM" class="abut lbut" title="Maximize Read Frame (1)" onclick="this.blur(); moveframex(1)">R</span><span id="AM" class="abut mbut" title="Restore Frames (2)" onclick="this.blur(); moveframex(2)">A</span><span id="DM" class="abut rbut" title="Maximize Dictionary Frame (3)" onclick="this.blur(); moveframex(3)">D</span>
+										</td>
+										<td class="buttont">
+											<span class="abut lbut" title="Retrieve previous section (p)" onclick="this.blur(); createTablep()">⇦</span><span class="abut mbut" title="Retrieve current section (g)" onclick="this.blur(); importXML()">go</span><span class="abut rbut" title="Retrieve next section (n)" onclick="this.blur(); createTablen()">⇨</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="buttont">
+											<span id="difoutM" class="abut lbut sbut" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span>
+										</td>
+										<td class="buttont">
+
+											<span onclick="switchhier('m',2)" id="dhierm" class="abut lbut sbut">M</span><span id="dhiera" class="abut mbut" title="Change to Aṭṭhakathā" onclick="switchhier('a',2)">A</span><span id="dhiert" class="abut rbut" title="Change to Ṭīkā" onclick="switchhier('t',2)">T</span>
+										</td>
+									</tr>
+
+								</table>			
+
+								<div name="ioDep" align="center" style="padding-top:2px" id="history"></div>
+
+							</div>
+						</div>
+					<hr />
+						<div name="ioDep" class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp4');"> </div>
+							<div class="pointer hide tiny" id="cp4t" title="toggle section" onclick="cpFlatten('cp4');">Bookmarks</div>
+							<div class="cpt" id="cp4">
+									<div style="margin-bottom:4px;">
+									<a href="javascript:bookmarkframe()" title="Show bookmarks & history"><b>Bookmarks</b></a><br>
+									<select class="sel" name="bmlist" title="Select a bookmark from the list" size=1></select>&nbsp;<span class="abut obut small" onClick="bookmarkc()" title="Load this bookmark">➤</span>
+									</div>
+									<div>
+									<input type="text" value="" name="bmname" title="Enter a name for this bookmark" onkeydown="if(event.keyCode==13) bookmarks()" size="12">&nbsp;<span class="abut obut small" onClick="bookmarks()" title="Set Bookmark">✎</span>
+									<input type="text" style="display:none">
+									</div>
+							</div>
+						</div>
+					<hr name="ioDep" />
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp5');"> </div>
+							<div class="pointer hide tiny" id="cp5t" title="toggle section" onclick="cpFlatten('cp5');">Text Search</div>
+							<div class="cpt" id="cp5">
+
+									<table class="butc" align=center>
+										<tr>
+											<td align="center" colspan="3"><b>Text Search</b></td>
+										</tr>
+										<tr>
+											<td class="buttont"><span class="abut obut small" title="maximize search frame" id="plus" onclick="moves()">◳</span></td>
+											<td align=center><input type="text" value="" name="isearch" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" size="16" onkeydown="if(event.keyCode==13) searchTipitaka(); event.keyCode=0;" ><input type="hidden" name="usearch" value=""></td>
+											<td class="buttont"><span class="abut obut small" title="Search for word" onClick="searchTipitaka()">➤</span></td>
+										</tr>
+
+										<tr>
+											<td align=center valign=top colspan=3>
+												<select class="sel" size="1" title="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
+													<option title="Search all three nikayas" selected>The Tipitaka</option>
+													<option title="Search current set">This Set</option>
+													<option title="Search current book">This Book</option>
+													<option>---</option>
+													<option title="Search multiple sets">Multi. Sets</option>
+													<option title="Search multiple books in the current set">Multi. Books</option>
+													<option>---</option>
+													<option title="Search all three nikayas, choose MAT">Tipitaka M,A,T</option>
+													<option title="Search current set, choose MAT">This Set M,A,T</option>
+													<option title="Search current book, choose MAT">This Book M,A,T</option>
+													<option>---</option>
+													<option title="Search multiple sets, choose MAT">Multi. Sets M,A,T</option>
+													<option title="Search multiple books in the current set, choose MAT">Multi. Books MAT</option>
+													<option>---</option>
+													<option title="Search English suttas from Access To Insight">ATI Translations</option>
+												</select>
+												   <input type="checkbox" title="Use Regular Expressions for wildcards in search" name="tsoregexp">&nbsp;<a href="javascript:" onclick="var rx = document.form.tsoregexp;  if(rx.checked) rx.checked = false; else rx.checked = true;" class="tiny">RegEx</span>
+											</td>
+										</tr>
+										<tr>
+											<td colspan=2>
+												<div id="tsearchopts">
+													<table align="center">
+														<tr>
+															<td>
+																<div align="left">
+																	<div id="tsoRX">
+																		
+																	</div>
+																	<div id="tsoMAT" class="bottomb" style="display:none">
+																		<input type="checkbox" id="tsoMATm" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATm').checked = (document.getElementById('tsoMATm').checked ? false : true)" href="javascript:void(0)">Mūla</a><br/>
+																		<input type="checkbox" id="tsoMATa" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATa').checked = (document.getElementById('tsoMATa').checked ? false : true)" href="javascript:void(0)">Aṭṭhakathā</a><br/>
+																		<input type="checkbox" id="tsoMATt" title="Include in search" checked> <a class="small" onclick="document.getElementById('tsoMATt').checked = (document.getElementById('tsoMATt').checked ? false : true)" href="javascript:void(0)">Ṭīka</a>
+																	</div>
+																	<div id="tsoCO1" class="" style="display:none">
+																		<input type="checkbox" id="tsoCOv" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOd').checked = (document.getElementById('tsoCOd').checked ? false : true)" href="javascript:void(0)">Vinaya</a><br />
+																	</div>
+																	<div id="tsoCO2" class="" style="display:none">
+																		<input type="checkbox" id="tsoCOd" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOd').checked = (document.getElementById('tsoCOd').checked ? false : true)" href="javascript:void(0)">Dīgha</a><br />
+																		<input type="checkbox" id="tsoCOm" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOm').checked = (document.getElementById('tsoCOm').checked ? false : true)" href="javascript:void(0)">Majjhima</a><br />
+																		<input type="checkbox" id="tsoCOs" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOs').checked = (document.getElementById('tsoCOs').checked ? false : true)" href="javascript:void(0)">Saṃyutta</a><br />
+																		<input type="checkbox" id="tsoCOa" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOa').checked = (document.getElementById('tsoCOa').checked ? false : true)" href="javascript:void(0)">Aṅguttara</a><br />
+																		<input type="checkbox" id="tsoCOk" title="Include in search" checked> <a class="tiny" onclick="document.getElementById('tsoCOk').checked = (document.getElementById('tsoCOk').checked ? false : true)" href="javascript:void(0)">Khuddaka</a><br />
+																	</div>
+																	<div id="tsoCO3" class="" style="display:none">
+																		<input type="checkbox" id="tsoCOy" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOy').checked = (document.getElementById('tsoCOy').checked ? false : true)" href="javascript:void(0)">Abhidhamma</a><br />
+																		<input type="checkbox" id="tsoCOx" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOx').checked = (document.getElementById('tsoCOx').checked ? false : true)" href="javascript:void(0)">Vism</a><br />
+																		<input type="checkbox" id="tsoCOb" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOb').checked = (document.getElementById('tsoCOb').checked ? false : true)" href="javascript:void(0)">Abhidh-s</a><br />
+																		<input type="checkbox" id="tsoCOg" title="Include in search"> <a class="tiny" onclick="document.getElementById('tsoCOg').checked = (document.getElementById('tsoCOg').checked ? false : true)" href="javascript:void(0)">Byākaraṇa</a>
+																	</div>
+																	<div id="tsoBO" class="topb" style="display:none">
+																	</div>
+																</div>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</td>
+										</tr>
+									</table>
+							</div>
+						</div>
+					<input type="text" style="display:none">
+					<hr />
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp6');"> </div>
+							<div class="pointer hide tiny" id="cp6t" title="toggle section" onclick="cpFlatten('cp6');">Dictionary</div>
+							<div class="cpt" id="cp6">
+									<div style="margin-bottom:4px;">
+										<b>Dictionary</b>&nbsp;
+										<select class="sel" size="1" title="Choose a dictionary type - hover over the name for description" name="sped" onchange="dictLoad()">
+											<option title="Analyze Word" selected>DPR</option>
+											<option title="Pali-English Dictionary">PED</option>
+											<option title="Dict. of Pali Names">DPPN</option>
+											<option title="Concise Pali-English Dictionary">CPED</option>
+											<option title="Concise English-Pali Dictionary">CEPD</option>
+											<option title="Aṭṭhakathā Term Search">Aṭṭh</option>
+											<option title="Ṭīka Term Search">Ṭīka</option>
+											<option title="Title Search">Title</option>
+										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); showHideId('searchopts')"><b>adv</b></a>
+									</div>
+									<div>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) dictType(1); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; dictType();};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="dictType(1)">➤</span>
+									</div>
+									<div id="searchopts">
+										<table align="center">
+											<tr>
+												<td>
+													<div align="left">
+														<div id="soNO">
+															<span class="small">no advanced options available</span>
+														</div>
+														<div id="soRX" style="display:none">
+															<input type="checkbox" onclick="clickDictOption();" title="Use Regular Expressions for wildcards in search" name="soregexp"> <a class="small" onclick="document.form.soregexp.checked = (document.form.soregexp.checked ? false : true)" href="javascript:void(0)">Reg. Exp.</a>
+														</div>
+														<div id="soFZ" style="display:none">
+															<input type="checkbox" onclick=" if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" title="Enable fuzzy search (removes diacritics)" name="sofuzzy"> <a class="small" onclick="document.form.sofuzzy.checked = (document.form.sofuzzy.checked ? false : true)" href="javascript:void(0)">Fuzzy</a>
+														</div>
+														<div id="soFT" style="display:none">
+															<input type="checkbox" onclick="if(this.checked) { document.form.sostartword.checked = false; document.form.sofuzzy.checked = false; } clickDictOption(); " name="sofulltext" title="Search dictionary definitions, not only entry names"> <a class="small" onclick="document.form.sofulltext.checked = (document.form.sofulltext.checked ? false : true)" href="javascript:void(0)">Full Text</a>
+														</div>
+														<div id="soSW" class="bottomb" style="display:none">
+															<input type="checkbox" name="sostartword" title="Search only from the beginning of the word" onclick="if(this.checked) document.form.sofulltext.checked = false; clickDictOption();" checked> <a class="small" onclick="document.form.sostartword.checked = (document.form.sostartword.checked ? false : true)" href="javascript:void(0)">Start of Word Only</a>
+														</div>
+														<div id="soMAT" class="bottomb" style="display:none">
+															<input type="checkbox" id="soMATm" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATm').checked = (document.getElementById('soMATm').checked ? false : true)" href="javascript:void(0)">Mula</a><br/>
+															<input type="checkbox" id="soMATa" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATa').checked = (document.getElementById('soMATa').checked ? false : true)" href="javascript:void(0)">Aṭṭhakathā</a><br/>
+															<input type="checkbox" id="soMATt" title="Include in search" checked> <a class="small" onclick="document.getElementById('soMATt').checked = (document.getElementById('soMATt').checked ? false : true)" href="javascript:void(0)">Ṭīka</a>
+														</div>
+														<div id="soNSV" style="display:none">
+															<input type="checkbox" id="soNSv" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSv').checked = (document.getElementById('soNSv').checked ? false : true)" href="javascript:void(0)">Vin</a>
+														</div>
+														<div id="soNS" style="display:none">
+															<input type="checkbox" id="soNSd" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSd').checked = (document.getElementById('soNSd').checked ? false : true)" href="javascript:void(0)">DN</a>
+															<input type="checkbox" id="soNSa" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSa').checked = (document.getElementById('soNSa').checked ? false : true)" href="javascript:void(0)">AN</a><br>
+															<input type="checkbox" id="soNSm" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSm').checked = (document.getElementById('soNSm').checked ? false : true)" href="javascript:void(0)">MN</a>
+															<input type="checkbox" id="soNSk" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSk').checked = (document.getElementById('soNSk').checked ? false : true)" href="javascript:void(0)">KN</a><br>
+															<input type="checkbox" id="soNSs" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSs').checked = (document.getElementById('soNSs').checked ? false : true)" href="javascript:void(0)">SN</a>
+														</div>
+														<div id="soNSA" style="display:none">
+															<input type="checkbox" id="soNSy" title="Include in search" checked> <a class="small" onclick="document.getElementById('soNSy').checked = (document.getElementById('soNSy').checked ? false : true)" href="javascript:void(0)">Abhi</a>
+														</div>
+													</div>
+												</td>
+											</tr>
+										</table>
+									</div>
+
+					<input type="text" style="display:none">
+					<!--<td>
+							<div align=center id="rright">
+									<div style="padding-top:10px">
+										<input type="button" class="btn" value="v" title="Scroll to bookmark" onClick="scrolldown(scrollmuch)">
+										<input type="button" class="btn" value="#" title="Get current location for bookmark" onClick="scrolldown('alert')">
+										<input type="button" class="btn" value="^" title="Go to top" onClick="scrolldown(0)">
+									</div>
+									<div style="padding-top:10px">
+										<input title="Run the analysis algorithm automatically" type="hidden" id="autoalg">
+										<input type="button" class="btn" value="G" title="Open Grammar (New Window)" onClick="moveit('etc/grammar/GMD/index.html','grammar');">
+										<input type="button" class="btn" value="C" title="Open Cheat Sheet (New Window)" onClick="moveit('etc/grammar/cheet.html','cheat');">
+										<input type="button" class="btn" value="T" title="Open Grammar Tools (New Window)" onClick="moveit('etc/grammar/index.htm','grammartools');">
+										<input type="button" class="btn" value="L" title="Open Links (New Window)" onClick="moveit('etc/links.htm','links');">
+									</div>
+							</div>
+
+						</td>-->
+
+							</div>
+						</div>
+					<hr />
+						<div class="cpcont">
+							<div class="cp-d small" title="toggle section" onclick="cpFlatten('cp7');"> </div>
+							<div class="pointer hide tiny" id="cp7t" title="toggle section" onclick="cpFlatten('cp7');">Miscellany</div>
+							<div class="cpt" id="cp7">
+								<table>
+									<tr>
+										<td class="buttont">
+											<span class="abut lbut" title="Set configuration (%)" onclick="loadOptions()">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">⚠</span>
+										</td>
+										<td class="buttont">
+											<span class="abut lbut" title="Pali Quiz (#)" onClick="newquiz();">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>
+										</td>
+										<td class="buttont">
+											<span class="abut lbut" title="Help (?)" onClick="helpXML('help.xml');">?</span><span class="abut rbut" title="Send Feedback (@)" onClick="feedbackform();">✉</span>
+										</td>
+										<script>
+										// external dev function
+
+										var devCheck = 0;
+										if(fileExists('Extensions/work','dev.js')) {
+											var headID = document.getElementsByTagName("head")[0];         
+											var newScript = document.createElement('script');
+											newScript.type = 'text/javascript';
+											newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
+											headID.appendChild(newScript);
+											
+											var headID2 = document.getElementsByTagName("head")[0];         
+											var newScript2 = document.createElement('script');
+											newScript2.type = 'text/javascript';
+											newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+											headID2.appendChild(newScript2);
+
+											document.getElementById('tipType').innerHTML+='<option title="Dev Input (don\'t touch)">Dev Input</option>';
+											document.write('<td class="buttont" id="devButton"><span class="abut obut" title="Dev - dont touch!" onClick="devMode();">Dev</span></td>');
+										}
+										else { // null functions
+											function devO() {}
+											function dalert(a) {}
+											function ddump(a) {}
+										}
+										</script>
+									</tr>
+								</table>			
+							</div>
+						</div>
+					<hr />
+				<input id="manrem" type="hidden" value="0">
+					</td>
+				</tr>
+		
+			</table>
+		</div>
+	</form>
+	</div>
+	<div id="cpc">
+		<div>
+			<span class="abut obut" id="cpa" onclick="moveframec();" title="close control panel (x)">x</span>
+		</div>
+	</div>
+	<div id="right" style="display:none" onmouseover="document.body.style.cursor='auto'">
+		<div id="maf">
+			<div align="left" id="mafa"></div>
+			<div align="justify" id="mafb">
+				<div id="mafbc">
+					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
+					<div id="mafe" align=center>
+					</div>
+					<div id="mafd" align=center>
+					</div>
+					<div id="mafdebug"></div>
+				</div>
+			</div>
+		</div>
+		<div id="rightbot">
+			<div id="difout">
+				<div id="cdif">
+					<div id="dif">
+						<div id="difb">
+						</div>
+					</div>
+				</div>
+				<div id="difhist"></div>
+			</div>
+			<div id="cof">
+				<form name="convertor">
+					<table align="center">
+						<tr>
+							<td align="center">Input</td>
+							<td></td>
+							<td align="center">Output</td>
+						</tr>
+						<tr>
+							<td align=left id="inputtd">
+								<textarea id="inputc" rows="8" cols="35" onkeyup="convert()"></textarea>
+							</td>
+							<td valign="top">	
+								<table id="table1">
+									<tr>
+										<td align="center">from</td>
+										<td></td>
+										<td align="center">to</td>
+									</tr>
+									<tr>
+										<td align="center" valign="top">
+											<select name="conversion1" onclick="changeConversion(this.selectedIndex,1)">
+												<option>Unicode</option>
+												<option selected>Velthuis</option>
+											</select>
+										</td>
+										<td></td>
+										<td align="center" valign="top">
+											<select name="conversion2" onclick="changeConversion(this.selectedIndex,2)">
+												<option selected>Unicode</option>
+												<option>Velthuis</option>
+												<option>Thai</option>
+												<option>Devanagari</option>
+												<option>Myanmar</option>
+												<option>Sinhala</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="convert the text" onClick="convert()">convert</span> 
+										</td>
+									</tr>
+									<tr>
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">sort</span>
+										</td>
+									</tr>
+									<tr>
+										<td class="buttont" align="center" colspan="3">
+											<span class="abut obut" title="Clear both text boxes" onClick="clearboth()">clear</span>
+										</td>
+									</tr>
+								</table>
+							</td>
+							<td align=right><textarea name="outputc" rows="8" cols="35"></textarea>
+							</td>
+						</tr>
+					</table>
+					<div align="center">Use the "s" key to send a selection or entire section to this convertor.</div>
+				</form>
+			</div>
+			<div id="scf" align=center>
+				<form name="textpad">
+				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
+				<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
+				</form>
+			</div>
+		</div>
+		<div id="anf" align=right>
+			<div id="brtop"></div>
+			<div id="brmid"></div>
+			<div id="brbot"></div>
+			<div id="anft">
+				<div align="center" id="anfa"></div>
+				<div align="center" id="anfb"></div>
+				<div style="position:relative">
+					<div id="anfs"></div>
+					<div id="anfsd"></div>
+				</div>
+			</div>
+			<div id="cort"><img src="images/cort.png" /></div>
+			<div id="corb"><img src="images/corb.png" /></div>
+			
+		</div>
+		<div id="search">
+			<div id="searchb">
+				<div align="left" id="sbfa"></div>
+				<a name="sbftop"></a>
+				<div id="sbfbc">
+					<div align="justify" id="sbfab"></div>
+					<div align="justify" id="sbfb"></div>
+				</div>
+				<div id="sbr"></div>		
+				<div class="label" align="justify" id="showing"></div>
+			</div>
+			<div id="searcht">
+				<div align="justify" class="relative" id="stfb">
+				</div>
+				<div align="justify" class="relative" id="stfc">
+				</div>
+				<div id="searchtb"></div>
+			</div>
+			<div id="cors"><img src="images/corb.png" /></div>
+		</div>
+	</div>
+	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+	<script>
+		changenikaya(1);
+		updatecookielist();
+		historyBox();
+	</script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/relatt.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/reltik.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/search.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dict_func.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
+	
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/bookmarkpre.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/feedback.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+
+
+	<!--<script> 
+		if(ft.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="f">French</option>';
+		if(gt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="g">German</option>';
+		if(it.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="i">Italian</option>';
+		if(rt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="r">Russian</option>';
+		if(st.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="s">Spanish</option>';
+		if(tt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="t">Thai</option>';
+		if (document.getElementById('lang').length > 1) document.getElementById('langtr').style.display = 'block';
+	</script> -->
+	<div id="alertc"><span id="alert">sadf</span></div>
+</div>
+</body>
+</html>

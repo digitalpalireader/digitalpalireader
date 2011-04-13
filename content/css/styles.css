@@ -468,7 +468,7 @@ top:4px
 position:absolute; 
 top:0; 
 left:0; 
-width:254px;
+right:0; 
 height:100%;
 z-index:2;
 }
@@ -600,6 +600,9 @@ opacity: 0.3;
 	-moz-border-radius:24px;
 	background-color: silver;
 	background-color: RGBa(200,200,200,0.5);
+}
+#cpa {
+	display:none;
 }
 .x{
 	padding:5px;

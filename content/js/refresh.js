@@ -7,7 +7,7 @@ function refreshit(which)
 	document.getElementById('mafrefresh').style.marginLeft = (document.getElementById('mafrefresh').offsetWidth/(-2)) + 'px';
 	//document.getElementById('mafrefresh').style.marginBottom = document.getElementById('mafrefresh').offsetHeight/(-2);
 	bv();
-    changenikaya(1);
+    
     if (which == 1) { // coming from reset options.
 		document.getElementById('mafe').innerHTML='<b style="color:'+colorcfg['colsel']+'">Options reset.</b>';
 	}

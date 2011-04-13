@@ -313,7 +313,7 @@ function getatt(num,type,niklist) { // get atthakatha or tika word
         z = z.replace(wordr, "<c0><@>"+word.replace(/ /g,'</@><xc> <c0><@>')+"</@><xc>");
         
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut" onclick="getplace([\''+G_nikToNumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+type+'\']); importXML(['+wordr2+'],'+pca[7]+')">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
     document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(colorcfg['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+(type == 'a' ? 'aṭṭhakathā:' : 'ṭīka:');
     document.getElementById('mafbc').innerHTML += finout;
@@ -423,7 +423,7 @@ function getSearchTitles(num,mul,att,tik,niklist) { // get titles for title sear
 		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,(y ? y.length : 1)) : null);
 		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + nikname[nikaya] + ' ' + sn + ')' : '');
 		
-        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+niknumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\']); importXML()">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+G_nikToNumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\']); importXML()">go</span></p>';
     }
     document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
     document.getElementById('mafbc').innerHTML += finout;

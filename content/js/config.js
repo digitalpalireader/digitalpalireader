@@ -212,20 +212,25 @@ function checkbackground(x) {
 		var bkgimg = cfg['bkgimg']; 
 	}
 	var bkgurl = bkgimg == 'checked' || bkgimg == true ? 'url(images/background.png)' : '';
+	if(document.getElementById('mafa')) {
+		document.getElementById('mafa').style.backgroundImage = bkgurl;
+		document.getElementById('mafb').style.backgroundImage = bkgurl;
+		document.getElementById('dif').style.backgroundImage = bkgurl;
+		document.getElementById('cof').style.backgroundImage = bkgurl;
+		document.getElementById('scf').style.backgroundImage = bkgurl;
 
-	document.getElementById('mafa').style.backgroundImage = bkgurl;
-	document.getElementById('mafb').style.backgroundImage = bkgurl;
-	document.getElementById('dif').style.backgroundImage = bkgurl;
-	document.getElementById('cof').style.backgroundImage = bkgurl;
-	document.getElementById('scf').style.backgroundImage = bkgurl;
-	document.getElementById('searchb').style.backgroundImage = bkgurl;
+		document.getElementById('mafa').style.backgroundColor = colort;
+		document.getElementById('mafb').style.backgroundColor = colort;
+		document.getElementById('dif').style.backgroundColor = colort;
+		document.getElementById('cof').style.backgroundColor = colort;
+		document.getElementById('scf').style.backgroundColor = colort;
+	}
 
-	document.getElementById('mafa').style.backgroundColor = colort;
-	document.getElementById('mafb').style.backgroundColor = colort;
-	document.getElementById('dif').style.backgroundColor = colort;
-	document.getElementById('cof').style.backgroundColor = colort;
-	document.getElementById('scf').style.backgroundColor = colort;
-	document.getElementById('searchb').style.backgroundColor = colort;
+	if(document.getElementById('searchb')) {
+		document.getElementById('searchb').style.backgroundImage = bkgurl;
+		document.getElementById('searchb').style.backgroundColor = colort;
+	}
+	
 	document.body.style.backgroundColor = colort;
 
 
@@ -239,9 +244,16 @@ function checkcpbkg(x) {
 		document.getElementById('confcpf').style.backgroundColor = colort;
 	}
 	else { var colort = colorcfg['colbkcp'] }
-	document.getElementById('searcht').style.backgroundColor = colort;
-	document.getElementById('brmid').style.backgroundColor = colort;
-	document.getElementById('brleft').style.backgroundColor = colort;
+
+	if(document.getElementById('searcht')) {
+		document.getElementById('searcht').style.backgroundColor = colort;
+	}
+	if(document.getElementById('brmid')) {
+		document.getElementById('brmid').style.backgroundColor = colort;
+	}
+	if(document.getElementById('brleft')) {
+		document.getElementById('brleft').style.backgroundColor = colort;
+	}
 }
 
 function loadOptions() {
@@ -328,7 +340,7 @@ function loadOptions() {
 function saveOptions() {
 	
 	if(document.miscform.catioff.checked && !fileExists(document.miscform.catiloc.value,'start.html')) {
-		alertFlash('Unrecognized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations befoized local directory for ATI.  Please disable offline translations before saving preferences.','red'); 
+		alertFlash('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.','red'); 
 		return; 
 	}
 	
