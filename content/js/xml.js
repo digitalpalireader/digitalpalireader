@@ -221,13 +221,23 @@ function loadXMLSection(labelsearch,para,place,isPL)
 	
 	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 
+	addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+G_nikToNumber[nikaya]+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentWindow;
+	// Verify that our sidebar is open at this moment:
+	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+		sidebarWindow.browser.wrappedJSObject.historyBox();
+	} 
+
+
+	historyBox
+
 	// tab title
 
 	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hier !='m' ? '-'+hier:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	
-	addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+G_nikToNumber[nikaya]+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
 	var theData = '';
 	

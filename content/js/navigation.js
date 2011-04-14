@@ -370,28 +370,6 @@ function switchhier(htmp,stop) {
 	gettitles(0,stop);
 }	
 
-function historyBox() {
-	
-	// history
-	
-	var hout = '';
-	var theHistory = getHistory();
-	if (theHistory) {
-		hout = '<a style="visibility:hidden">x&nbsp;</a><select title="History" onchange="var thisv = this.options[this.selectedIndex].value.replace(/\'/g,\'\').split(\',\'); if (thisv != \'0\'){ getplace(thisv); importXML() }">';
-		hout += '<option value="0">History</option>';
-		var isclear = '';
-		for (i in theHistory) {
-			var thist = theHistory[i].split('@');
-			var thist0 = toUni(thist[0]);
-			if (thist0.length > (maxlength - 3)) thist0 = thist0.substring(0,(maxlength-3)) + '...';
-			hout += '<option value="'+thist[1]+'">' + thist0  + '</option>';
-		}
-		hout += '</select>&nbsp;<span class="abut obut tiny" title="Clear History" onclick="clearHistory(1);">x</span>';
-	}
-		
-	document.getElementById('history').innerHTML = hout;
-	
-}
 
 function getDppnEntry(term) {
 	var dppnEntry = [];
