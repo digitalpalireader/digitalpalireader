@@ -21,10 +21,10 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 	{
 		if (document.getElementById(G_lastcolour))
 		{
-			document.getElementById(G_lastcolour).style.color = colorcfg['coltext'];
+			document.getElementById(G_lastcolour).style.color = G_prefs['coltext'];
 			document.getElementById(G_lastcolour).style.fontWeight = 'normal';
 		}
-		document.getElementById(divclicked).style.color = colorcfg['colsel'];
+		document.getElementById(divclicked).style.color = G_prefs['colsel'];
 		document.getElementById(divclicked).style.fontWeight = 'bold';
 		G_lastcolour = divclicked;
 	}
@@ -65,7 +65,7 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 var G_illegalCompoundBreak = /[^aiueomn][^aiueo]/; // this assumes that a compound has to break at a vowel, nigahita or n.
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttrick) {
-	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
+	if(G_prefs['altlimit'] != '' && G_outwords.length >= G_prefs['altlimit']) return;
 
 	var matchedword;
 	var fullmatch;
@@ -131,7 +131,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	//if(!lastpart && !nextpart) devO(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	//if(devCheck > 0 && devDump == 1) devO(oneword);
 		
-	if(cfg['altlimit'] != '' && G_outwords.length >= cfg['altlimit']) return;
+	if(G_prefs['altlimit'] != '' && G_outwords.length >= G_prefs['altlimit']) return;
 	if (isUncomp(oneword,lastpart,nextpart)) return;
 
 // fudges

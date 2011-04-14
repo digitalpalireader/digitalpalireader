@@ -1,146 +1,103 @@
 
-var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader");
+var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
-function init() {
+function loadPrefs() {
 		
-	try {
-		var checkboxes = ["percentDisplay", "speedDisplay", "sizeDisplay", "timeDisplay",
-					  "removeOnOpen", "removeOnShow", "askOnDelete", "clearOnClose", 
-					  "trimHistory", "shouldScan", "supressAlert", 
-					  "gradientsCheck", "launchOnClose", "animateCheck", "keepHistory", 
-					  "showMainButton", "showClearButton", "showToMiniButton"]; // "queEnable", 
-		for (var i = 0; i < checkboxes.length; ++i) {
-			var checkbox = document.getElementById(checkboxes[i]);
-			checkbox.checked = pref.getBoolPref(checkbox.getAttribute("prefstring"));
+		var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
+		for (var i = 0; i < cks.length; ++i) {
+			var ck = document.getElementById(cks[i]);
+			ck.checked = prefs.getBoolPref(ck.getAttribute("prefstring"));
 		}
-	
-		var INTtextboxes = ["clearSec", "trimNum"]; //, "queNum"
-		for (var i = 0; i < INTtextboxes.length; ++i) {
-			var textbox = document.getElementById(INTtextboxes[i]);
-			var prefstring = textbox.getAttribute("prefstring");
-			textbox.value = pref.getIntPref(prefstring);
+		var ints = ['altlimit'];
+		for (var i = 0; i < ints.length; ++i) {
+			var box = document.getElementById(ints[i]);
+			var prefstring = box.getAttribute("prefstring");
+			box.value = prefs.getIntPref(prefstring);
 		}
-		var STRtextboxes = ["exclude", "AVLoc", "ArgsBox", "clearFiletypes", "ignoreFiletypes", "soundIgnoreFiletypes"];
-		for (var i = 0; i < STRtextboxes.length; ++i) {
-			var textbox = document.getElementById(STRtextboxes[i]);
-			var prefstring = textbox.getAttribute("prefstring");
-			textbox.value = pref.getCharPref(prefstring);
+		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colinput','colbutton','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+		for (var i = 0; i < strings.length; ++i) {
+			var box = document.getElementById(strings[i]);
+			var prefstring = box.getAttribute("prefstring");
+			box.value = prefs.getCharPref(prefstring);
 		}
 		
-		var miniMode = pref.getBoolPref("downbar.function.miniMode");
-		if(miniMode)
-			document.getElementById("selectMode").selectedIndex = 1;
+		// backgrounds
 		
-		var soundPref = pref.getIntPref("downbar.function.soundOnComplete");
-		if(soundPref > 0) {  // default or custom sound
-			document.getElementById("playSound").checked = true;
-		}
-		else {
-			document.getElementById("soundSelect").setAttribute("disabled", "true");
-			document.getElementById("soundExcludeLabel").setAttribute("disabled", "true");
-			document.getElementById("soundIgnoreFiletypes").setAttribute("disabled", "true");
-		}
-		if(soundPref == 2)  // default 1 is already set
-			document.getElementById("soundSelect").selectedIndex = 1;
-			
-		document.getElementById("customSoundHolder").value = pref.getCharPref("downbar.function.soundCustomComplete").substr(7);	
+		var wbk = prefs.getCharPref('Char.bktype');
 		
+		document.getElementById('p'+wbk).setAttribute('selected', 'true');
+		document.getElementById(wbk == 'colbk'?'pimgbk':'pcolbk').setAttribute('selected', 'false');
+		document.getElementById(wbk == 'colbk'?'imgbk':'colbk').setAttribute('disabled', 'true');
+
+		var sbk = prefs.getCharPref('Char.bkcptype');
+
+		document.getElementById('p'+sbk).setAttribute('selected', 'true');
+		document.getElementById(sbk == 'colbkcp'?'pimgbkcp':'pcolbkcp').setAttribute('selected', 'false');		
+		document.getElementById(sbk == 'colbkcp'?'imgbkcp':'colbkcp').setAttribute('disabled', 'true');		
 		
-	} catch (e) {}
-	
-	KHistCheck();
-	VDispCheck();
-	getCustomStyles();
-	//QueCheck();
-	
+		if(!prefs.getBoolPref('Bool.catioff')) document.getElementById('catiloc').setAttribute('disabled', 'true');
+
+		
+		document.getElementById('translits').selectedIndex = prefs.getIntPref('Int.translits');
+		
 }
 
-function saveSettings() {
+function fileDialog(id, titleIn) {
+	
+	var stringBundle = document.getElementById("digitalpalireader-strings");
+	
+	var output = document.getElementById(id);   // Where the result will be stored
+	var title = stringBundle.getString(titleIn);  // title of the picker window
+	
+	const nsIFilePicker = Components.interfaces.nsIFilePicker;
+	const nsILocalFile = Components.interfaces.nsILocalFile;
+	var fp = Components.classes["@mozilla.org/filepicker;1"]
+	                 .createInstance(nsIFilePicker);
 
-	var checkboxes = ["percentDisplay", "speedDisplay", "sizeDisplay", "timeDisplay",
-					"removeOnOpen", "removeOnShow", "askOnDelete", "clearOnClose", 
-					"trimHistory", "shouldScan", "supressAlert", 
-					"gradientsCheck", "launchOnClose", "animateCheck", "keepHistory",
-					"showMainButton", "showClearButton", "showToMiniButton"]; // "queEnable", 
-	
-	var db_stringsPref = document.getElementById("prefdownbarbundle");
-	
-	// only let the user select 2 or less display items
-	/* var count = 0;
-	for (var j = 0; j < 4; ++j) {
-		var checkbox = document.getElementById(checkboxes[j]);
-		if (checkbox.checked) ++count;
-	}
-	if (count > 2) {
-		var db_selectAlert = db_stringsPref.getString("selectTwo");
-		alert(db_selectAlert);
-		return false;
-	}*/
-	
-	for (var i = 0; i < checkboxes.length; ++i) {
-		var checkbox = document.getElementById(checkboxes[i]);
-		pref.setBoolPref(checkbox.getAttribute("prefstring"), checkbox.checked);
-	}
-	
-	var INTtextboxes = ["clearSec", "trimNum"]; //, "queNum"
-	for (var i = 0; i < INTtextboxes.length; ++i) {
-		var textbox = document.getElementById(INTtextboxes[i]);
-		pref.setIntPref(textbox.getAttribute("prefstring"), textbox.value);
-	}
-	
-	var STRtextboxes = ["exclude", "AVLoc", "ArgsBox", "clearFiletypes", "ignoreFiletypes", "soundIgnoreFiletypes"];
-	for (var i = 0; i < STRtextboxes.length; ++i) {
-		var textbox = document.getElementById(STRtextboxes[i]);
-		pref.setCharPref(textbox.getAttribute("prefstring"), textbox.value);
-	}
-	
-	setCustomStyles();
-	
-	// Minimode pref
-	if(document.getElementById("fullMode").selected)
-		pref.setBoolPref("downbar.function.miniMode", false);
-	else
-		pref.setBoolPref("downbar.function.miniMode", true);
-	
-	//Style pref
-	if(document.getElementById("defaultStyle").selected)
-		pref.setBoolPref("downbar.style.default", true);
-	else
-		pref.setBoolPref("downbar.style.default", false);
-	
-	// Speed Colors pref
-	var scEnabled = document.getElementById("speedColorsCheck").checked;
-	pref.setBoolPref("downbar.style.speedColorsEnabled", scEnabled);
-	
-	// Sound prefs
-	if(!document.getElementById("playSound").checked)
-		pref.setIntPref("downbar.function.soundOnComplete", 0);
-	else {
-		if(document.getElementById("defaultSound").getAttribute("selected") == "true")
-			pref.setIntPref("downbar.function.soundOnComplete", 1);
-		else
-			pref.setIntPref("downbar.function.soundOnComplete", 2);
-	}
-	pref.setCharPref("downbar.function.soundCustomComplete", "file://" + document.getElementById("customSoundHolder").value); 
-	
-	
-	// Now get a reference to the main browser windows and reset the new display
-	try {
-		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-		var e = wm.getEnumerator("navigator:browser");
-		var win;
-	
-		while (e.hasMoreElements()) {
-			win = e.getNext();
-			win._dlbar_readPrefs();
-			win._dlbar_setStyles();
-			win._dlbar_populateDownloads();
-			//win._dlbar_startInProgress();
-			win._dlbar_checkMiniMode();
-		}
-	} catch (e){}
+	fp.init(window, title, nsIFilePicker.modeOpen);
+	fp.appendFilters(nsIFilePicker.filterAll);
+	var result = fp.show();
 
-	return true;
+	if (result == nsIFilePicker.returnOK) {
+		var fileOut = fp.file.QueryInterface(nsILocalFile);
+		var fileName = fp.file.path;
+		output.value = fileName;
+	}
+	else if (result == nsIFilePicker.returnCancel) {
+		return null;
+	}
+}
+
+
+
+function savePrefs() {
+
+	if(document.getElementById('catioff').checked && !extFileExists(document.miscform.catiloc.value,'start.html')) {
+		alertFlash('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.','red'); 
+		return; 
+	}
+
+	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
+
+	for (var i = 0; i < cks.length; ++i) {
+		var ck = document.getElementById(cks[i]);
+		prefs.setBoolPref(cks.getAttribute("prefstring"), checkbox.checked);
+	}
+	
+	var ints = ['altlimit'];
+	for (var i = 0; i < ints.length; ++i) {
+		var box = document.getElementById(ints[i]);
+		pref.setIntPref(box.getAttribute("prefstring"), box.value);
+	}
+	
+	var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colinput','colbutton','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+	for (var i = 0; i < strings.length; ++i) {
+		var box = document.getElementById(strings[i]);
+		pref.setCharPref(box.getAttribute("prefstring"), box.value);
+	}
+	
+	
+	
 }
 
 function confirmAVenable() {
@@ -477,31 +434,6 @@ function QueCheck() {
 
 }
 
-function selectFile(id, titleIn) {
-	
-	var stringBundle = document.getElementById("digitalpalireader-strings");
-	
-	var output = document.getElementById(id);   // Where the result will be stored
-	var title = stringBundle.getString(titleIn);  // title of the picker window
-	
-	const nsIFilePicker = Components.interfaces.nsIFilePicker;
-	const nsILocalFile = Components.interfaces.nsILocalFile;
-	var fp = Components.classes["@mozilla.org/filepicker;1"]
-	                 .createInstance(nsIFilePicker);
-
-	fp.init(window, db_selectTxt, nsIFilePicker.modeOpen);
-	fp.appendFilters(nsIFilePicker.filterAll);
-	var result = fp.show();
-
-	if (result == nsIFilePicker.returnOK) {
-		var fileOut = fp.file.QueryInterface(nsILocalFile);
-		var fileName = fp.file.path;
-		output.value = fileName;
-	}
-	else if (result == nsIFilePicker.returnCancel) {
-		return null;
-	}
-}
 
 var gColorObj = {elemCurrColor:"", cancel:false};
 

@@ -14,7 +14,7 @@ function toggleDppnTitle(link,id) {
 
 
 function clickDictOption() {
-	if (document.form.dictin.value != '' && cfg['autodict'] == 'checked') {
+	if (document.form.dictin.value != '' && G_prefs['autodict']) {
 		document.form.lastsearch.value = document.form.dictin.value;
 		dictType();
 	}
@@ -85,7 +85,7 @@ function dictLoad() {
 			document.getElementById('soNSA').style.display = 'block';
 		break;
 		case 8: // ATI
-			if(cfg['catioff'] == 'checked') document.getElementById('soNS').style.display = 'block';
+			if(G_prefs['catioff']) document.getElementById('soNS').style.display = 'block';
 			else document.getElementById('soNO').style.display = 'block';
 		break;
 	}

@@ -12,9 +12,9 @@ function transLink(which,auth,url,title) {
 }
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
-	if (cfg["ctrans"] != "checked" || typeof(atiD) == 'undefined') return;
+	if (!G_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
 	
-	var atiurl = (cfg['catioff'] == 'checked' ? 'file://'+getHomePath().replace(/\\/g, '/')+'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+	var atiurl = (G_prefs['catioff'] ? 'file://'+getHomePath().replace(/\\/g, '/')+'/'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 	
 	var cnt = 0;
 	var output = [];

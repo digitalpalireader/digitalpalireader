@@ -6,72 +6,161 @@
 <page id="digitalpalireader" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	persist="screenX screenY"
-	title="&pTitle.label;" onload="//init();">
+	title="&pTitle.label;" onload="loadPrefs();">
 
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
 
-    <stringbundleset id="stringbundleset">
-        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
-    </stringbundleset>
+  	<stringbundleset id="stringbundleset">
+  			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+  	</stringbundleset>
   
   <separator class="thin"/>
-  <tabbox>
-    <tabs>
-      <tab label="&pGeneral.label;"/>
-      <tab label="&pLayout.label;"/>
-      <tab label="&pText.label;"/>
-    </tabs>
-    <tabpanels>
-      <tabpanel id="generalTab">
-        <vbox>
-          <hbox>
-            <groupbox>
-                <caption label="&pShow.label;"/>
-                
-                <box orient="vertical">
-                    <checkbox id="showPages" label="&pShowPages.label;" prefstring="check.showPages"/>
-					<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="check.showVariants"/>
-					<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="check.showPermalinks"/>
-					<checkbox id="showNames" label="&pShowNames.label;" prefstring="check.showNames"/>
-					<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="check.showPedLinks"/>
-                </box>
-           </groupbox>
-           <groupbox>
-                <caption label="&pMiscPrefs.label;"/>
-                <box orient="vertical">
-					<checkbox id="ctrans" label="&pctrans.label;" prefstring="check.ctrans"/>
-					<checkbox id="autodict" label="&pautodict.label;" prefstring="check.autodict"/>
-                </box>
-            </groupbox>
-          </hbox>
-          
-          <groupbox>
-            <caption label="&pATI.label;"/>
-            <box orient="vertical">
-				<checkbox id="catioff" label="&pcatioff.label;" prefstring="check.catioff"/>
-				<hbox align="end">
+  <tabbox flex="1">
+  	<tabs>
+  		<tab label="&pGeneral.label;"/>
+  		<tab label="&pLayout.label;"/>
+  		<tab label="&pText.label;"/>
+  	</tabs>
+  	<tabpanels flex="1">
+  		<tabpanel id="generalTab">
+  			<vbox flex="1">
+  				<hbox flex="1">
+  					<groupbox flex="1">
+  							<caption label="&pShow.label;"/>
+  							
+  							<box orient="vertical">
+  									<checkbox id="showPages" label="&pShowPages.label;" prefstring="Bool.showPages"/>
+					<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="Bool.showVariants"/>
+					<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="Bool.showPermalinks"/>
+					<checkbox id="showNames" label="&pShowNames.label;" prefstring="Bool.showNames"/>
+					<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="Bool.showPedLinks"/>
+  							</box>
+ 					</groupbox>
+ 					<groupbox flex="1">
+  							<caption label="&pMiscPrefs.label;"/>
+  							<box orient="vertical">
+								<checkbox id="ctrans" label="&pctrans.label;" prefstring="Bool.ctrans"/>
+								<checkbox id="autodict" label="&pautodict.label;" prefstring="Bool.autodict"/>
+								<hbox align="center"><label id="paltlimit" value="&paltlimit.label;" selected="true" /><spacer flex="1"/><textbox id="altlimit" size="3" prefstring="Int.altlimit"/></hbox>
+  							</box>
+  					</groupbox>
+  				</hbox>
+  				
+  				<groupbox flex="1">
+  					<caption label="&pATI.label;"/>
+  					<box orient="vertical">
+				<checkbox id="catioff" label="&pcatioff.label;" prefstring="Bool.catioff"/>
+				<hbox align="center">
 					<label id="ATILocLabel" value="&pATILoc.label;" />
-					<textbox id="catiloc" style="min-width:180px;" prefstring="string.catiloc" flex="1"/>
+					<textbox id="catiloc" style="min-width:180px;" prefstring="Char.catiloc" flex="1"/>
 					<button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
 				</hbox>
-            </box>
-          </groupbox>
-        </vbox>
-      </tabpanel>
-      
-      <tabpanel id="layoutTab">
+  					</box>
+  				</groupbox>
+  			</vbox>
+  		</tabpanel>
+  		
+  		<tabpanel id="layoutTab" flex="1">
+			<grid>
+				<rows>
+					<row flex="1" />
+					<row flex="1" />
+				</rows>
+				<columns>
+					<column align="center">
+						<groupbox flex="1">
 
-      </tabpanel>
-    </tabpanels>
+							<caption label="&pWinBackground.label;"/>
+
+								<radiogroup id="WinImgCol" orient="vertical">
+									<hbox align="center"><radio id="pcolbk" label="&pcolbk.label;" onclick="document.getElementById('colbk').disabled=false; document.getElementById('imgbk').disabled=true;"/><spacer flex="1"/><textbox id="colbk" prefstring="Char.colbk"/></hbox>
+									<hbox align="center"><radio id="pimgbk" label="&pimgbk.label;" onclick="document.getElementById('colbk').disabled=true; document.getElementById('imgbk').disabled=false;"/><spacer flex="1"/><textbox id="imgbk" prefstring="Char.imgbk"/></hbox>
+								</radiogroup>
+
+					   </groupbox>
+					   <groupbox flex="1">
+
+							<caption label="&pSidebarBackground.label;"/>
+
+								<radiogroup id="SBImgCol" orient="vertical">
+									<hbox align="center"><radio id="pcolbkcp" label="&pcolbkcp.label;" onclick="document.getElementById('colbkcp').disabled=false; document.getElementById('imgbkcp').disabled=true;"/><spacer flex="1"/><textbox id="colbkcp" prefstring="Char.colbkcp"/></hbox>
+									<hbox align="center"><radio id="pimgbkcp" label="&pimgbkcp.label;" onclick="document.getElementById('colbkcp').disabled=true; document.getElementById('imgbkcp').disabled=false;"/><spacer flex="1"/><textbox id="imgbkcp" prefstring="Char.imgbkcp"/></hbox>
+								</radiogroup>
+					   </groupbox>
+					</column>
+					<column flex="1">
+						<groupbox flex="1">
+							<caption label="&pWidgetColors.label;"/>
+
+								<hbox align="center"><label id="pcolinput" value="&pcolinput.label;" selected="true" /><spacer flex="1"/><textbox id="colinput" prefstring="Char.colinput"/></hbox>
+								<hbox align="center"><label id="pcolbutton" value="&pcolbutton.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colbutton"/></hbox>
+					   </groupbox>
+					</column>
+				</columns>
+			</grid>
+		</tabpanel>
+ 	
+  		
+  		<tabpanel id="textTab">
+  			<vbox flex="1">
+  				<hbox flex="1">
+  					<groupbox flex="1">
+  							<caption label="&pColors.label;"/>
+  							
+  							<box orient="vertical">
+					<hbox align="center"><label id="pcoltext" value="&pcoltext.label;" /><spacer flex="1"/><textbox id="coltext" prefstring="Char.coltext"/></hbox>
+					<hbox align="center"><label id="pcolsel" value="&pcolsel.label;" /><spacer flex="1"/><textbox id="colsel" prefstring="Char.colsel"/></hbox>
+					<hbox align="center"><label id="pcoldppn" value="&pcoldppn.label;" /><spacer flex="1"/><textbox id="coldppn" prefstring="Char.coldppn"/></hbox>
+					<hbox align="center"><label id="pcolped" value="&pcolped.label;" /><spacer flex="1"/><textbox id="colped" prefstring="Char.colped"/></hbox>
+					<hbox align="center"><label id="pcolcpd" value="&pcolcpd.label;" /><spacer flex="1"/><textbox id="colcpd" prefstring="Char.colcpd"/></hbox>
+  							</box>
+ 					</groupbox>
+ 					<groupbox flex="1">
+  							<caption label="&pFont.label;"/>
+  							<box orient="vertical">
+					<hbox align="center"><label id="pcolfont" value="&pcolfont.label;" /><spacer flex="1"/><textbox id="colfont" prefstring="Char.colfont"/></hbox>
+					<hbox align="center"><label id="pcolsize" value="&pcolsize.label;" /><spacer flex="1"/><textbox id="colsize" prefstring="Char.colsize"/></hbox>
+					<hbox align="center"><label id="ptranslits" value="&ptranslits.label;" />
+					<menulist flex="1" id="translits">
+						<menupopup>
+							<menuitem id="pRoman" label="&pRoman.label;" selected="true"/>
+							<menuitem id="pThai" label="&pThai.label;"/>
+							<menuitem id="pDeva" label="&pDeva.label;"/>
+							<menuitem id="pMyan" label="&pMyan.label;"/>
+							<menuitem id="pSiha" label="&pSiha.label;"/>
+						</menupopup>
+					</menulist>
+					</hbox>
+  							</box>
+  					</groupbox>
+  				</hbox>
+  				
+  			</vbox>
+
+  		</tabpanel>
+  	</tabpanels>
   </tabbox>
-   
+ 	
 	<separator class="thin"/>
-   
+ 	
 	<hbox>
+		<spacer flex="1"/>
 		<hbox pack="end">
-			<button label="&pOK.label;" oncommand="savePrefs(); window.close();"/>
 			<button label="&pCancel.label;" oncommand="window.close();"/>
+			<button label="&pOK.label;" oncommand="savePrefs(); window.close();"/>
 		</hbox>
 	</hbox>
 	<separator class="thin"/>  
 </page>
+
+<!--
+  					<groupbox>
+  						<caption label="&pStatusMode.label;"/>
+  						
+  						<radiogroup id="selectMode" orient="horizontal">
+  											<radio id="fullMode" label="&pFullMode.label;" selected="true"/>
+  											<radio id="miniMode" label="&pMiniMode.label;"/>
+  						</radiogroup>
+  					</groupbox>
+  					
+-->

@@ -4,11 +4,11 @@ function moveframex(a,temp) //read, etc
 {
     if(!temp) getconfig();
 	if(document.getElementById('anf')) {
-		document.getElementById('anf').style.bottom = (parseInt(confmove[1])-4) + 'px';
+		document.getElementById('anf').style.bottom = G_prefs['DictH'] + 'px';
 		document.getElementById('anf').style.top = 'auto';
 
 		document.getElementById('rightbot').style.bottom = '0px';
-		document.getElementById('rightbot').style.height = parseInt(confmove[1]) + 'px';
+		document.getElementById('rightbot').style.height = G_prefs['DictH'] + 'px';
 
 		document.getElementById('rightbot').style.top = '';
 		

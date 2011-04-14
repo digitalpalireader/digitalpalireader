@@ -1,73 +1,95 @@
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-var G_BoolPrefs = prefs.getBranch("extensions.digitalpalireader.boolean.");
-var G_CharPrefs = prefs.getBranch("extensions.digitalpalireader.string.");
-var G_IntPrefs = prefs.getBranch("extensions.digitalpalireader.number.");
+var G_BoolPrefs = prefs.getBranch("extensions.digitalpalireader.Bool.");
+var G_CharPrefs = prefs.getBranch("extensions.digitalpalireader.Char.");
+var G_IntPrefs = prefs.getBranch("extensions.digitalpalireader.Int.");
 
-function getPref(type,name) {
+var G_prefTypes = [];
+G_prefTypes['number'] = 'Int';
+G_prefTypes['string'] = 'Char';
+G_prefTypes['boolean'] = 'Bool';
 
-	eval('return G_'+type+'Prefs.get'+type+'Pref(\''+name+'\');');
-
+function getPref(name) {
+	var type = G_prefTypes[typeof(name)];
+	var ret; 
+	try{
+		eval('ret = G_'+type+'Prefs.get'+type+'Pref(\''+name+'\');');
+	}
+	catch(ex) {
+	}
+	return ret;
 }
 
-function setPref(type,name,val) {
-
-	eval('return G_'+type+'Prefs.set'+type+'Pref(\''+name+'\',\''+val+'\');');
-
+function setPref(name,val) {
+	var type = G_prefTypes[typeof(name)];
+	var ret; 
+	try{
+		eval('ret = G_'+type+'Prefs.set'+type+'Pref(\''+name+'\',\''+val+'\');');
+	}
+	catch(ex) {
+	}
+	return ret;
+	
 }
 
 
 var G_prefs = [];
 
-G_prefs['DictH'] = ['Int',250];
+G_prefs['DictH'] = 250;
 
-G_prefs['coltext'] = ['Char','#111'];
-G_prefs['colsel'] = ['Char','#550'];
+G_prefs['coltext'] = '#111';
+G_prefs['colsel'] = '#550';
 
-G_prefs['coldppn'] = ['Char','#0B0'];
-G_prefs['colped'] = ['Char','#C40'];
-G_prefs['colcpd'] = ['Char','#44D'];
+G_prefs['coldppn'] = '#0B0';
+G_prefs['colped'] = '#C40';
+G_prefs['colcpd'] = '#44D';
 
-G_prefs['colfont'] = ['Char','Sans'];
-G_prefs['colsize'] = ['Char','16'];
+G_prefs['colfont'] = 'Sans';
+G_prefs['colsize'] = '16';
 
-G_prefs['colbk'] = ['Char','#FFB'];
-G_prefs['colbkcp'] = ['Char','#DDC'];
-G_prefs['colinput'] = ['Char','#FFF'];
-G_prefs['colbutton'] = ['Char','#FFF'];
-G_prefs['colbk1'] = ['Char','yellow'];
-G_prefs['colbk2'] = ['Char','aqua'];
-G_prefs['colbk3'] = ['Char','green'];
+G_prefs['bktype'] = 'colbk';
+G_prefs['colbk'] = '#FFB';
+G_prefs['imgbk'] = '#FFB';
 
-G_prefs['colsearch0'] = ['Char','yellow'];
-G_prefs['colsearch1'] = ['Char','blue'];
-G_prefs['colsearch2'] = ['Char','green'];
+G_prefs['bkcptype'] = 'imgbkcp';
+G_prefs['colbkcp'] = '#DDC';
+G_prefs['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
 
-G_prefs['green'] = ['Char','#00B900'];
-G_prefs['blue'] = ['Char','#5353D5'];
-G_prefs['brown'] = ['Char','#000000'];
-G_prefs['grey'] = ['Char','grey'];
-G_prefs['red'] = ['Char','red'];
+G_prefs['colinput'] = '#FFF';
+G_prefs['colbutton'] = '#FFF';
+G_prefs['colbk1'] = 'yellow';
+G_prefs['colbk2'] = 'aqua';
+G_prefs['colbk3'] = 'green';
 
-G_prefs['blueh'] = ['Char','powderblue'];
+G_prefs['colsearch0'] = 'yellow';
+G_prefs['colsearch1'] = 'blue';
+G_prefs['colsearch2'] = 'green';
 
-G_prefs['ctrans'] = ['Bool',false];
-G_prefs['catioff'] = ['Bool',false];
-G_prefs['catiloc'] = ['Char','<none>'];
-G_prefs['autodict'] = ['Bool',false];
-G_prefs['bkgimg'] = ['Bool',true];
-G_prefs['translits'] = ['Int',0];
+G_prefs['green'] = '#00B900';
+G_prefs['blue'] = '#5353D5';
+G_prefs['brown'] = '#000000';
+G_prefs['grey'] = 'grey';
+G_prefs['red'] = 'red';
 
-G_prefs['showPages'] = ['Bool',false];
-G_prefs['showVariants'] = ['Bool',true];
-G_prefs['showPermalinks'] = ['Bool',true];
-G_prefs['showNames'] = ['Bool',true];
-G_prefs['showPedLinks'] = ['Bool',true];
+G_prefs['blueh'] = 'powderblue';
 
-G_prefs['altlimit'] = ['Int',20];
+G_prefs['ctrans'] = false;
+G_prefs['catioff'] = false;
+G_prefs['catiloc'] = '<none>';
+G_prefs['autodict'] = false;
+G_prefs['bkgimg'] = true;
+G_prefs['translits'] = 0;
+
+G_prefs['showPages'] = false;
+G_prefs['showVariants'] = true;
+G_prefs['showPermalinks'] = true;
+G_prefs['showNames'] = true;
+G_prefs['showPedLinks'] = true;
+
+G_prefs['altlimit'] = 20;
 
 
 for (i in G_prefs) {
-	if (!getPref(i,G_prefs[i][0])) { setPref(i,G_prefs[i][0],G_prefs[i][1]); }
-	else G_prefs[i][1] = getPref(i,G_prefs[i][0]);
+	if (!getPref(i)) { setPref(i,G_prefs[i]); }
+	else G_prefs[i] = getPref(i);
 }

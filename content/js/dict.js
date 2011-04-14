@@ -104,7 +104,7 @@ function pedsearchstart()
 				
 				uniout = toUni(uniout).replace(/`/g,'˚');
 				
-				finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+				finouta[y] = '<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
 			}
@@ -116,7 +116,7 @@ function pedsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>PED entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	var listoutf = '<p>PED entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -162,7 +162,7 @@ function pedFullTextSearch(getstring) {
 			postpara = '';
 			if (startmatch >= 0)
 			{
-				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+colorcfg['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>'); 
+				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+G_prefs['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>'); 
 				while (startmatch >= 0)
 				{				
 					gotstring = texttomatch.match(getstring)[0];
@@ -175,9 +175,9 @@ function pedFullTextSearch(getstring) {
 				}
 				postpara += afterm;
 
-				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+				postpara = postpara.replace(/<c0>/g, '<span style="color:'+G_prefs['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+colorcfg['colped']+'">top</a>' + postpara + '</p><hr>';
+				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+G_prefs['colped']+'">top</a>' + postpara + '</p><hr>';
 			}
 		}
 	}
@@ -203,7 +203,7 @@ function pedFullTextSearch(getstring) {
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
+	outDiv.innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
@@ -271,7 +271,7 @@ function dppnsearchstart()
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push('<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onClick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onClick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -282,7 +282,7 @@ function dppnsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>DPPN entry search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	var listoutf = '<p>DPPN entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -335,7 +335,7 @@ function dppnFullTextSearch(getstring) {
 			postpara = '';
 			if (startmatch >= 0)
 			{
-				listouta.push(ttitle+'###<a href="#dppno'+i+'/'+j+'" style="color:'+colorcfg['colped']+'">' + ttitle + '</a><br>');
+				listouta.push(ttitle+'###<a href="#dppno'+i+'/'+j+'" style="color:'+G_prefs['colped']+'">' + ttitle + '</a><br>');
 				while (startmatch >= 0)
 				{				
 					gotstring = texttomatch.match(getstring)[0];
@@ -348,9 +348,9 @@ function dppnFullTextSearch(getstring) {
 				}
 				postpara += afterm;
 
-				postpara = postpara.replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">').replace(/<xc>/g, '</span>');
+				postpara = postpara.replace(/<c0>/g, '<span style="color:'+G_prefs['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+colorcfg['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
+				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'cdif\').scrollTop = 0;" class="small" style="color:'+G_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
 			}
 		}
 	}
@@ -382,7 +382,7 @@ function dppnFullTextSearch(getstring) {
 
 
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finout;
+	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finout;
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
@@ -442,12 +442,12 @@ function mlsearchstart()
 			us = toUni(gsplit[0]);
 			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 			
-			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
+			finouta.push('<div><b><a style="color:'+G_prefs['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
 	
-	finout = '<p>CPED search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	finout = '<p>CPED search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = finout + 'No results</td></tr></table>';
@@ -515,12 +515,12 @@ function epdsearchstart()
 		if(yessir)
 		{
 			
-			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
+			finouta.push('<b><font style="color:'+G_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
 
 		}
 	}
 	
-	finout = '<p>CEPD search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	finout = '<p>CEPD search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = finout + 'No results</td></tr></table>';
@@ -596,7 +596,7 @@ function attsearchstart()
 			}
 			if (entries.length == 0) continue;
                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendAtt('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendAtt('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -604,7 +604,7 @@ function attsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>Aṭṭhakathā term search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	var listoutf = '<p>Aṭṭhakathā term search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -682,7 +682,7 @@ function tiksearchstart()
 			}
 			if (entries.length == 0) continue;
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendAtt('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendAtt('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
 			y++;
 		}
 	}
@@ -690,7 +690,7 @@ function tiksearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>Ṭīka term search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	var listoutf = '<p>Ṭīka term search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -801,12 +801,12 @@ function titlesearchstart()
 			if(dppnEntry.length > 0) {
 				for(d in dppnEntry) {
 
-					dEI += '&nbsp;<span class="pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
+					dEI += '&nbsp;<span class="pointer" style="color:'+G_prefs['coldppn']+'" title="DPPN entry" onclick="toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
 					dEO += '<div class="hide round" id="titleS'+x+'^'+d+'"></div>'
 				}
 			}
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+colorcfg['coltext']+'" onclick="sendTitle('+ x +','+ (G_dictOpts.indexOf('mm') > -1) +','+(G_dictOpts.indexOf('ma') > -1)+','+(G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
+			finouta[y] = '<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendTitle('+ x +','+ (G_dictOpts.indexOf('mm') > -1) +','+(G_dictOpts.indexOf('ma') > -1)+','+(G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
 			y++;
 		}
 	}
@@ -814,7 +814,7 @@ function titlesearchstart()
 
 	var findiv = Math.ceil(y/2);
 	
-	var listoutf = '<p>Title search for <b style="color:'+colorcfg['colped']+'">'+getstring+'</b>:<hr />';
+	var listoutf = '<p>Title search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr />';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';

@@ -28,7 +28,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		if (hier == "m") { 
 			transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 			if (transin) {
-				var atiurl = (cfg['catioff'] == 'checked' ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+cfg['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+				var atiurl = (G_prefs['catioff'] ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
 				if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
 				transout += transin.join('&nbsp;');
 				document.getElementById('maftrans').innerHTML += transout; 
@@ -87,7 +87,7 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
 	
-	if(cfg['showPages'] == 'unchecked') data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
+	if(!G_prefs['showPages']) data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
 	else {
 		data = data.replace(/\^a\^\"/g, ' z');
 		data = data.replace(/\"\^ea\^/g, 'z ');
@@ -98,7 +98,7 @@ function formatuniout(data,which) { // prepare without links
 	//data = data.replace(/\^v/g, '');
 	//data = data.replace(/v\^/g, '');
 
-	if(cfg['showVariants'] == 'unchecked') data = data.replace(/ *\{[^}]*\} */g,' ');
+	if(!G_prefs['showVariants']) data = data.replace(/ *\{[^}]*\} */g,' ');
 	else data = data.replace(/\}/g, '} ').replace(/\{/g, ' {');
 	
 	data = data.replace(/   */g, ' ');
@@ -137,7 +137,7 @@ function formatuniout(data,which) { // prepare without links
 				altread = 0;
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+G_prefs['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
 			else altplus += wb + ' ';
 		}
@@ -146,7 +146,7 @@ function formatuniout(data,which) { // prepare without links
 				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+colorcfg['grey']+'" title="' + altplus + '">VAR</a>' + space;
+				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+G_prefs['grey']+'" title="' + altplus + '">VAR</a>' + space;
 			}
 			else {
 				altread = 1;
@@ -214,7 +214,7 @@ function formatuniout(data,which) { // prepare without links
 		else if (/^<p/.exec(wb)) {
 			var permalink = wb.substring(2,wb.length-1);
 			convout += '\n\n';
-			finout += '<p id="para'+paran+'">'+(cfg['showPermalinks'] == 'checked' ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
+			finout += '<p id="para'+paran+'">'+(G_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -274,9 +274,9 @@ function preparepali(data,which) { // standard text prep for algorithm
 	
 	// add search markers
 
-	finout[0] = finout[0].replace(/<c0>/g, '<span style="color:'+colorcfg['colped']+'">');
-	finout[0] = finout[0].replace(/<c1>/g, '<span style="color:'+colorcfg['coldppn']+'">');
-	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+colorcfg['colcpd']+'">');
+	finout[0] = finout[0].replace(/<c0>/g, '<span style="color:'+G_prefs['colped']+'">');
+	finout[0] = finout[0].replace(/<c1>/g, '<span style="color:'+G_prefs['coldppn']+'">');
+	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+G_prefs['colcpd']+'">');
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
 	
 	
@@ -298,19 +298,19 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 	
 	var namea = [una,vna,wna,xna,yna,zna];
 	var namen = [null,null,null,null,null,null];
-	if (cfg['showNames'] == 'checked') {
+	if (G_prefs['showNames']) {
 		for (i in namea) {
 			var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
 			if(tt.length < 2) continue;
 			var dEI = getDppnEntry(tt);
 			if (dEI.length > 0) {
-				namen[i] = '<span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+colorcfg['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+				namen[i] = '<span class="super tiny pointer" style="color:'+G_prefs['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\');">&nbsp;n</span><span class="super tiny pointer" style="color:'+G_prefs['coldppn']+'" title="DPPN entry" onclick="DPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
 			}
 		}
 	}
 	
 	
-	var title='<b style="color:'+colorcfg[col[w++]]+'">' + translit(toUni(namea[0])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[0] ? namen[0] :'');
+	var title='<b style="color:'+G_prefs[col[w++]]+'">' + translit(toUni(namea[0])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[0] ? namen[0] :'');
 
 
 	if (namea[1] != ' ') {
@@ -323,7 +323,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			title += ', ';
 			lgt += namea[1].length;
 		}
-		title += '<b style="color:'+colorcfg[col[w++]]+'">' + namea[1].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[1] ? namen[1] :'');
+		title += '<b style="color:'+G_prefs[col[w++]]+'">' + namea[1].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[1] ? namen[1] :'');
 	}
 	if (namea[2] != ' ') {
 		namea[2] = translit(toUni(namea[2]));
@@ -335,7 +335,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			title += ', ';
 			lgt += namea[2].length;
 		}
-		title += '<b style="color:'+colorcfg[col[w++]]+'">' + namea[2].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[2] ? namen[2] :'');
+		title += '<b style="color:'+G_prefs[col[w++]]+'">' + namea[2].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[2] ? namen[2] :'');
 	}
 	if (namea[3] != ' ') {
 		namea[3] = translit(toUni(namea[3]));
@@ -347,7 +347,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			title += ', ';
 			lgt += namea[3].length;
 		}
-		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  namea[3].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[3] ? namen[3] :'');
+		title += '<b style="color:'+G_prefs[col[w++]]+'">' +  namea[3].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[3] ? namen[3] :'');
 	}
 	if (namea[4] != ' ') {
 		namea[4] = translit(toUni(namea[4]));
@@ -359,7 +359,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			title += ', ';
 			lgt += namea[4].length;
 		}
-		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  namea[4].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[4] ? namen[4] :'');
+		title += '<b style="color:'+G_prefs[col[w++]]+'">' +  namea[4].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[4] ? namen[4] :'');
 	}
 	if (namea[5] != ' ') {
 		namea[5] = translit(toUni(namea[5]));
@@ -371,7 +371,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			title += ', ';
 			lgt += namea[5].length;
 		}
-		title += '<b style="color:'+colorcfg[col[w++]]+'">' +  namea[5].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+colorcfg['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[5] ? namen[5] :'');
+		title += '<b style="color:'+G_prefs[col[w++]]+'">' +  namea[5].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+G_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[5] ? namen[5] :'');
 	}
 	
 	title = toUni(title);

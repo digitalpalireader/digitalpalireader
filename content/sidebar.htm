@@ -7,7 +7,6 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
-	alert(typeof('test'));
 function onDocLoad() {
 	getconfig();
 	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.htm','DPR-main');
@@ -322,7 +321,7 @@ function onDocLoad() {
 								<table>
 									<tr>
 										<td class="buttont">
-											<span class="abut lbut" title="Set configuration (%)" onclick="openDPRTab('chrome://digitalpalireader/content/preferences.htm','DPR-prefs',1)">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">⚠</span>
+											<span class="abut lbut" title="Set configuration (%)" onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">⚙</span><span class="abut rbut" title="Reset configuration (!)" onclick="eraseOptions();">⚠</span>
 										</td>
 										<td class="buttont">
 											<span class="abut lbut" title="Pali Quiz (#)" onClick="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onClick="bv();">☸</span>

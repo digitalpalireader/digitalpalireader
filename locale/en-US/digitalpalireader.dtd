@@ -1,3 +1,4 @@
+
 <!ENTITY digitalpalireader.title "Digital Pali Reader">
 <!ENTITY openDPR.commandkey "D">
 <!ENTITY openDPR.modifierskey "alt shift">
@@ -7,6 +8,8 @@
 <!ENTITY pLayout.label "Layout">
 <!ENTITY pText.label "Text">
 
+<!-- General Tab -->
+
 <!ENTITY pShow.label "Show in Text:">
 <!ENTITY pShowPages.label "Page Numbers">
 <!ENTITY pShowVariants.label "Variant Readings">
@@ -15,16 +18,72 @@
 <!ENTITY pShowPedLinks.label "Add Word Links to PED Entries">
 
 <!ENTITY pMiscPrefs.label "Misc. Preferences">
+
 <!ENTITY pctrans.label "Show Translations">
-<!ENTITY pFileDialog.label "Browse...">
+
+<!ENTITY paltlimit.label "Maximum Definitions Per Compound:">
 <!ENTITY pautodict.label "Enable Dictionary search-as-you-type">
 
 <!ENTITY pATI.label "Access To Insight Off-Line Archive:">
 <!ENTITY pcatioff.label "Use Off-line ATI Archive">
 <!ENTITY pATILoc.label "Location:">
+<!ENTITY pFileDialog.label "Browse...">
+
+<!-- Layout Tab -->
+
+<!ENTITY pDictH.label "Bottom Frame Height">
+
+<!ENTITY pWinBackground.label "Page Background">
+
+<!ENTITY pcolbk.label "Color">
+<!ENTITY pimgbk.label "Image">
+
+<!ENTITY pSidebarBackground.label "Sidebar Background">
+
+<!ENTITY pcolbkcp.label "Color">
+<!ENTITY pimgbkcp.label "Image">
+
+<!ENTITY pWidgetColors.label "Other Colors:">
+
+<!ENTITY pcolinput.label "Input Boxes">
+<!ENTITY pcolbutton.label "Buttons">
+
+<!-- Text Tab -->
+
+<!ENTITY pColors.label "Text Colors">
+
+<!ENTITY pcoltext.label "Normal">
+<!ENTITY pcolsel.label "Selected">
+<!ENTITY pcoldppn.label "DPPN">
+<!ENTITY pcolped.label "PED">
+<!ENTITY pcolcpd.label "CPED">
+
+<!ENTITY pFont.label "Text Formatting">
+
+<!ENTITY pcolfont.label "Font Family">
+<!ENTITY pcolsize.label "Text Size">
+
+<!ENTITY ptranslits.label "Text Script">
+<!ENTITY pRoman.label "Roman">
+<!ENTITY pThai.label "Thai">
+<!ENTITY pDeva.label "Devanagari">
+<!ENTITY pMyan.label "Myanmar">
+<!ENTITY pSiha.label "Sinhala">
+
+<!ENTITY pcolbk1.label "zxvxz">
+<!ENTITY pcolbk2.label "zxvxz">
+<!ENTITY pcolbk3.label "zxvxz">
+<!ENTITY pcolsearch0.label "zxvxz">
+<!ENTITY pcolsearch1.label "zxvxz">
+<!ENTITY pcolsearch2.label "zxvxz">
+<!ENTITY pgreen.label "zxvxz">
+<!ENTITY pblue.label "zxvxz">
+<!ENTITY pbrown.label "zxvxz">
+<!ENTITY pgrey.label "zxvxz">
+<!ENTITY pred.label "zxvxz">
+<!ENTITY pblueh.label "zxvxz">
+
+
 
 <!ENTITY pOK.label "Ok">
 <!ENTITY pCancel.label "Cancel">
-
-<!ENTITY pbkgimg.label "Add Parchment Texture">
-

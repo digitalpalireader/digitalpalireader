@@ -13,8 +13,14 @@ pref("extensions.digitalpalireader.Char.colcpd", "#44D");
 pref("extensions.digitalpalireader.Char.colfont", "Tahoma");
 pref("extensions.digitalpalireader.Char.colsize", "16");
 
+pref("extensions.digitalpalireader.Char.bktype", "colbk");
 pref("extensions.digitalpalireader.Char.colbk", "#FFB");
+pref("extensions.digitalpalireader.Char.imgbk", "#FFB");
+
+pref("extensions.digitalpalireader.Char.bkcptype", "imgbkcp");
 pref("extensions.digitalpalireader.Char.colbkcp", "#DDC");
+pref("extensions.digitalpalireader.Char.imgbkcp", "-moz-linear-gradient(left,#DDC,#FFF,#DDC)");
+
 pref("extensions.digitalpalireader.Char.colinput", "#FFF");
 pref("extensions.digitalpalireader.Char.colbutton", "#FFF");
 pref("extensions.digitalpalireader.Char.colbk1", "yellow");

@@ -598,13 +598,12 @@ function thaiconv(input) {
 
 function changeScript() {
 	var script = document.getElementById('translits').selectedIndex;
-	var oscript = cfg['script'];
-	cfg['translits'] = script;
+	var oscript = G_prefs['translits'];
+	G_prefs['translits'] = script;
 	changenikaya(1);
 }
-
 function translit(data) {
-	var script = cfg['translits'];
+	var script = parseInt(G_prefs['translits']);
 	var out = '';
 
 	switch (script) {

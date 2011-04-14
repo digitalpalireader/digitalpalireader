@@ -9,6 +9,6 @@ function refreshit(which)
 	bv();
     
     if (which == 1) { // coming from reset options.
-		document.getElementById('mafe').innerHTML='<b style="color:'+colorcfg['colsel']+'">Options reset.</b>';
+		document.getElementById('mafe').innerHTML='<b style="color:'+G_prefs['colsel']+'">Options reset.</b>';
 	}
 }
