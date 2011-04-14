@@ -222,7 +222,6 @@ function checkcpbkg(x) {
 }
 
 function loadOptions() {
-	moveframex(2);
 
 	var winW = window.innerWidth;
 	var winH = window.innerHeight;
