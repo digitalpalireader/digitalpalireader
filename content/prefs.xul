@@ -9,6 +9,8 @@
 	title="&pTitle.label;" onload="loadPrefs();">
 
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
 
   	<stringbundleset id="stringbundleset">
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
@@ -49,7 +51,7 @@
   				<groupbox flex="1">
   					<caption label="&pATI.label;"/>
   					<box orient="vertical">
-				<checkbox id="catioff" label="&pcatioff.label;" prefstring="Bool.catioff"/>
+				<checkbox id="catioff" onclick="if(this.checked) document.getElementById('catiloc').disabled = true;  else document.getElementById('catiloc').disabled = false" label="&pcatioff.label;" prefstring="Bool.catioff"/>
 				<hbox align="center">
 					<label id="ATILocLabel" value="&pATILoc.label;" />
 					<textbox id="catiloc" style="min-width:180px;" prefstring="Char.catiloc" flex="1"/>
@@ -72,20 +74,20 @@
 
 							<caption label="&pWinBackground.label;"/>
 
-								<radiogroup id="WinImgCol" orient="vertical">
-									<hbox align="center"><radio id="pcolbk" label="&pcolbk.label;" onclick="document.getElementById('colbk').disabled=false; document.getElementById('imgbk').disabled=true;"/><spacer flex="1"/><textbox id="colbk" prefstring="Char.colbk"/></hbox>
-									<hbox align="center"><radio id="pimgbk" label="&pimgbk.label;" onclick="document.getElementById('colbk').disabled=true; document.getElementById('imgbk').disabled=false;"/><spacer flex="1"/><textbox id="imgbk" prefstring="Char.imgbk"/></hbox>
-								</radiogroup>
+								<box orient="vertical">
+									<hbox align="center"><checkbox id="pcolbk" label="&pcolbk.label;" onclick="if(!this.checked) { document.getElementById('colbk').disabled=false;} else { document.getElementById('colbk').disabled=true;}"/><spacer flex="1"/><textbox id="colbk" prefstring="Char.colbk"/></hbox>
+									<hbox align="center"><checkbox id="pimgbk" label="&pimgbk.label;" onclick="if(!this.checked) { document.getElementById('imgbk').disabled=false;} else { document.getElementById('imgbk').disabled=true;}"/><spacer flex="1"/><textbox id="imgbk" prefstring="Char.imgbk"/></hbox>
+								</box>
 
 					   </groupbox>
 					   <groupbox flex="1">
 
 							<caption label="&pSidebarBackground.label;"/>
 
-								<radiogroup id="SBImgCol" orient="vertical">
-									<hbox align="center"><radio id="pcolbkcp" label="&pcolbkcp.label;" onclick="document.getElementById('colbkcp').disabled=false; document.getElementById('imgbkcp').disabled=true;"/><spacer flex="1"/><textbox id="colbkcp" prefstring="Char.colbkcp"/></hbox>
-									<hbox align="center"><radio id="pimgbkcp" label="&pimgbkcp.label;" onclick="document.getElementById('colbkcp').disabled=true; document.getElementById('imgbkcp').disabled=false;"/><spacer flex="1"/><textbox id="imgbkcp" prefstring="Char.imgbkcp"/></hbox>
-								</radiogroup>
+								<box orient="vertical">
+									<hbox align="center"><checkbox id="pcolbkcp" label="&pcolbkcp.label;" onclick="if(!this.checked) { document.getElementById('colbkcp').disabled=false;} else { document.getElementById('colbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="colbkcp" prefstring="Char.colbkcp"/></hbox>
+									<hbox align="center"><checkbox id="pimgbkcp" label="&pimgbkcp.label;" onclick="if(!this.checked) { document.getElementById('imgbkcp').disabled=false;} else { document.getElementById('imgbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="imgbkcp" prefstring="Char.imgbkcp"/></hbox>
+								</box>
 					   </groupbox>
 					</column>
 					<column flex="1">
@@ -144,10 +146,12 @@
 	<separator class="thin"/>
  	
 	<hbox>
-		<spacer flex="1"/>
+			<button label="&pDefaults.label;" oncommand="loadDefaults();"/>
+			<spacer flex="1"/>
 		<hbox pack="end">
 			<button label="&pCancel.label;" oncommand="window.close();"/>
-			<button label="&pOK.label;" oncommand="savePrefs(); window.close();"/>
+			<button label="&pApply.label;" oncommand="savePrefs();"/>
+			<button label="&pOK.label;" oncommand="savePrefs(1); "/>
 		</hbox>
 	</hbox>
 	<separator class="thin"/>  

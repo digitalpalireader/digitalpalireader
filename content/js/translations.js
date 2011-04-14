@@ -14,7 +14,7 @@ function transLink(which,auth,url,title) {
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 	if (!G_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
 	
-	var atiurl = (G_prefs['catioff'] ? 'file://'+getHomePath().replace(/\\/g, '/')+'/'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+	var atiurl = (G_prefs['catioff'] ? 'file://'+G_prefs['catiloc']+'html/' : 'http://www.accesstoinsight.org/');
 	
 	var cnt = 0;
 	var output = [];

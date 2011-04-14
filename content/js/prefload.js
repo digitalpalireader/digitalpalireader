@@ -1,8 +1,8 @@
-var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+var prefStem = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-var G_BoolPrefs = prefs.getBranch("extensions.digitalpalireader.Bool.");
-var G_CharPrefs = prefs.getBranch("extensions.digitalpalireader.Char.");
-var G_IntPrefs = prefs.getBranch("extensions.digitalpalireader.Int.");
+var G_BoolPrefs = prefStem.getBranch("extensions.digitalpalireader.Bool.");
+var G_CharPrefs = prefStem.getBranch("extensions.digitalpalireader.Char.");
+var G_IntPrefs = prefStem.getBranch("extensions.digitalpalireader.Int.");
 
 var G_prefTypes = [];
 G_prefTypes['number'] = 'Int';
@@ -32,64 +32,68 @@ function setPref(name,val) {
 	
 }
 
+// default prefs
+
+var D_prefs = [];
+
+D_prefs['DictH'] = 250;
+
+D_prefs['coltext'] = '#111';
+D_prefs['colsel'] = '#550';
+
+D_prefs['coldppn'] = '#0B0';
+D_prefs['colped'] = '#C40';
+D_prefs['colcpd'] = '#44D';
+
+D_prefs['colfont'] = 'Sans';
+D_prefs['colsize'] = '16';
+
+D_prefs['bktype'] = 'colimg';
+D_prefs['colbk'] = '#FFB';
+D_prefs['imgbk'] = 'url(chrome://digitalpalireader/content/images/background.png)';
+
+D_prefs['bkcptype'] = 'img';
+D_prefs['colbkcp'] = '#DDC';
+D_prefs['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
+
+D_prefs['colinput'] = '#FFF';
+D_prefs['colbutton'] = '#FFF';
+D_prefs['colbk1'] = 'yellow';
+D_prefs['colbk2'] = 'aqua';
+D_prefs['colbk3'] = 'green';
+
+D_prefs['colsearch0'] = 'yellow';
+D_prefs['colsearch1'] = 'blue';
+D_prefs['colsearch2'] = 'green';
+
+D_prefs['green'] = '#00B900';
+D_prefs['blue'] = '#5353D5';
+D_prefs['brown'] = '#000000';
+D_prefs['grey'] = 'grey';
+D_prefs['red'] = 'red';
+
+D_prefs['blueh'] = 'powderblue';
+
+D_prefs['ctrans'] = false;
+D_prefs['catioff'] = false;
+D_prefs['catiloc'] = '<none>';
+D_prefs['autodict'] = false;
+D_prefs['bkgimg'] = true;
+D_prefs['translits'] = 0;
+
+D_prefs['showPages'] = false;
+D_prefs['showVariants'] = true;
+D_prefs['showPermalinks'] = true;
+D_prefs['showNames'] = true;
+D_prefs['showPedLinks'] = true;
+
+D_prefs['altlimit'] = 20;
 
 var G_prefs = [];
 
-G_prefs['DictH'] = 250;
-
-G_prefs['coltext'] = '#111';
-G_prefs['colsel'] = '#550';
-
-G_prefs['coldppn'] = '#0B0';
-G_prefs['colped'] = '#C40';
-G_prefs['colcpd'] = '#44D';
-
-G_prefs['colfont'] = 'Sans';
-G_prefs['colsize'] = '16';
-
-G_prefs['bktype'] = 'colbk';
-G_prefs['colbk'] = '#FFB';
-G_prefs['imgbk'] = '#FFB';
-
-G_prefs['bkcptype'] = 'imgbkcp';
-G_prefs['colbkcp'] = '#DDC';
-G_prefs['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
-
-G_prefs['colinput'] = '#FFF';
-G_prefs['colbutton'] = '#FFF';
-G_prefs['colbk1'] = 'yellow';
-G_prefs['colbk2'] = 'aqua';
-G_prefs['colbk3'] = 'green';
-
-G_prefs['colsearch0'] = 'yellow';
-G_prefs['colsearch1'] = 'blue';
-G_prefs['colsearch2'] = 'green';
-
-G_prefs['green'] = '#00B900';
-G_prefs['blue'] = '#5353D5';
-G_prefs['brown'] = '#000000';
-G_prefs['grey'] = 'grey';
-G_prefs['red'] = 'red';
-
-G_prefs['blueh'] = 'powderblue';
-
-G_prefs['ctrans'] = false;
-G_prefs['catioff'] = false;
-G_prefs['catiloc'] = '<none>';
-G_prefs['autodict'] = false;
-G_prefs['bkgimg'] = true;
-G_prefs['translits'] = 0;
-
-G_prefs['showPages'] = false;
-G_prefs['showVariants'] = true;
-G_prefs['showPermalinks'] = true;
-G_prefs['showNames'] = true;
-G_prefs['showPedLinks'] = true;
-
-G_prefs['altlimit'] = 20;
-
-
-for (i in G_prefs) {
-	if (!getPref(i)) { setPref(i,G_prefs[i]); }
-	else G_prefs[i] = getPref(i);
+for (i in D_prefs) {
+	if (!getPref(i)) { 
+		setPref(i,D_prefs[i]); 
+	}
+	G_prefs[i] = getPref(i);
 }

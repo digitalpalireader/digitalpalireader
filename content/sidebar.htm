@@ -8,7 +8,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
-	getconfig();
+	updatePrefs();
 	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.htm','DPR-main');
 }
 </script>
@@ -333,7 +333,7 @@ function onDocLoad() {
 										// external dev function
 
 										var devCheck = 0;
-										if(extFileExists('Extensions/work','dev.js')) {
+										if(extFileExists('/home/noah/Extensions/work/dev.js')) {
 											var headID = document.getElementsByTagName("head")[0];         
 											var newScript = document.createElement('script');
 											newScript.type = 'text/javascript';

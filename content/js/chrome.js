@@ -49,3 +49,24 @@ function findDPRTab(id) {
 	}
 	return false;
 }
+
+function findDPRSidebar() {
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+
+	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+		return sidebarWindow.getElementById('dpr-browser').contentWindow;
+	} 
+	else return false
+}
+
+function updatePrefs() {
+	getconfig();
+	for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+
+		// Get the next tab
+		var currentTab = tabbrowser.tabContainer.childNodes[index];
+		if (/^DPR/.exec(currentTab.getAttribute('id'))) { // a dpr tab
+			currentTab.linkedBrowser.contentWindow.getconfig();
+		}
+	}
+}

@@ -12,14 +12,14 @@ function changeStyleByName(name,attrib,value) {
 function getconfig() {
 
 	for (i in G_prefs) {
-		if (!getPref(i,G_prefs[i][0])) setPref(i,G_prefs[i][0],G_prefs[i][1]);
-		else G_prefs[i][1] = getPref(i,G_prefs[i][0]);
+		if (!getPref(i)) setPref(i,G_prefs[i]);
+		else G_prefs[i] = getPref(i);
 	}
 
 	// Add ATI translations if preferred
 	if (G_prefs['ctrans'] && typeof(atiD) == 'undefined' && atiIns == 0) {
 		if (G_prefs['catioff']) { 
-			var nsrc = 'file://' + getHomePath().replace(/\\/g, '/') +'/'+ G_prefs['catiloc'] + '/html/tech/digital_pali_reader_suttas.js';
+			var nsrc = 'file://'+ G_prefs['catiloc'] + 'html/tech/digital_pali_reader_suttas.js';
 		}
 		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
 		atiIns = 1;
@@ -34,7 +34,6 @@ function getconfig() {
 	// update backgrounds
 		
 	checkbackground();
-	checkcpbkg();
 
 	// update fonts, colors
 
@@ -70,35 +69,37 @@ function changecss(myclass,element,value) {
 	}	
 }
 
-function checkbackground(x) {
-	if (x==1) { 
-		var colort = document.getElementById('colbk').value; 
-		var bkgimg = document.getElementById('bkgimg').checked; 
+function checkbackground() {
+	var wbk = G_prefs['bktype'];
+	
+	if(/col/.exec(wbk)) {
+		document.styleSheets[0]['cssRules'][7].style.backgroundColor = G_prefs['colbk'];  // paperback
+		document.body.style.backgroundColor = G_prefs['colbk'];
 	}
-	else { 
-		var colort = G_prefs['colbk']; 
-		var bkgimg = G_prefs['bkgimg']; 
+	else {
+		document.styleSheets[0]['cssRules'][7].style.backgroundColor = '';  // paperback
 	}
-	var bkgurl = (bkgimg ? 'url(chrome://digitalpalireader/content/images/background.png)' : '');
-
-	document.styleSheets[0]['cssRules'][7].style.backgroundImage = bkgurl;  // paperback
-	document.styleSheets[0]['cssRules'][7].style.backgroundColor = colort;  // paperback
-
-	document.body.style.backgroundColor = colort;
-
-
-
-}
-
-function checkcpbkg(x) {
-	if (x==1) { 
-		var colort = document.getElementById('colbkcp').value 
-		document.getElementById('confanf').style.backgroundColor = colort;
-		document.getElementById('confcpf').style.backgroundColor = colort;
+	if(/img/.exec(wbk)) {
+		document.styleSheets[0]['cssRules'][7].style.backgroundImage = G_prefs['imgbk'];  // paperback
 	}
-	else { var colort = G_prefs['colbkcp'] }
+	else {
+		document.styleSheets[0]['cssRules'][7].style.backgroundImage = '';  // paperback
+	}
 
-	document.styleSheets[0]['cssRules'][8].style.backgroundImage = '-moz-linear-gradient(left,'+colort+',white,'+colort+')';  // chromeback
+	var sbk = G_prefs['bkcptype'];
+
+	if(/col/.exec(sbk)) {
+		document.styleSheets[0]['cssRules'][8].style.backgroundColor = G_prefs['colbkcp'];  // paperback
+	}
+	else {
+		document.styleSheets[0]['cssRules'][8].style.backgroundColor = '';  // paperback
+	}
+	if(/img/.exec(sbk)) {
+		document.styleSheets[0]['cssRules'][8].style.backgroundImage = G_prefs['imgbkcp'];  // paperback
+	}
+	else {
+		document.styleSheets[0]['cssRules'][8].style.backgroundImage = '';  // paperback
+	}
 }
 
 function saveOptions() {
@@ -168,33 +169,16 @@ function checksizes(pref,size) {
 	return parseInt(size);
 }
 
-function eraseOptions(which) {
+function eraseOptions() {
 	
-	var yes = confirm('Are you sure you want to reset all options?');
+	var yes = confirm('Are you sure you want to reset all preferences?');
 	
 	if(!yes) return;
 	
-	for (i = 0; i < cPrefs.length; i++) {
-		var Pref = cPrefs[i];
-		var Val = cPrefVals[i];
-		setColPref(Pref,Val);
+	for (i in D_prefs) {
+		setPref(i,D_prefs[i]);
 	}
-	for (i = 0; i < sPrefs.length; i++) {
-		var Pref = sPrefs[i];
-		var Val = sPrefVals[i];
-		setSizePref(Pref,Val);
-	}
-	for (i = 0; i < mPrefs.length; i++) {
-		var Pref = mPrefs[i];
-		var Val = mPrefVals[i];
-		setMiscPref(Pref,Val);
-	}
-	getconfig();
-	if (which) {
-		loadOptions();
-		alertFlash("Options reset.",'green');
-		moveframex(2);
-	}
-	else { refreshit(1); }
+
+	updatePrefs();
 }
 

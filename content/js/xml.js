@@ -223,10 +223,12 @@ function loadXMLSection(labelsearch,para,place,isPL)
 
 	addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' - '+bknameme+"@"+G_nikToNumber[nikaya]+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
-	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
-	// Verify that our sidebar is open at this moment:
-	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-		sidebarWindow.getElementById('dpr-browser').contentWindow.historyBox();
+	// refresh history box
+
+	var sidebar = findDPRSidebar();
+
+	if (sidebar) {
+		sidebar.historyBox();
 	} 
 	
 	// tab title

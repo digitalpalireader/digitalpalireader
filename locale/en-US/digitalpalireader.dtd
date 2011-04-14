@@ -85,5 +85,7 @@
 
 
 
-<!ENTITY pOK.label "Ok">
+<!ENTITY pDefaults.label "Defaults">
 <!ENTITY pCancel.label "Cancel">
+<!ENTITY pApply.label "Apply">
+<!ENTITY pOK.label "Ok">
