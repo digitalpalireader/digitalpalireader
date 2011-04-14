@@ -39,15 +39,20 @@ function bookmarkc(let)
 		var name = document.form.bmlist.getElementsByTagName('option')[nno].value;
 		if (nno == 0) return;
 	}
-	document.form.bmname.value = name;
 	var bmx = '';
 	
 	// first move to the file using the DPR file
 	
     var dpr = readFile('DPB'+name);
 	var bmwa = dpr[0].split('#');
-	getplace(bmwa);
-	importXML();
+
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+	// Verify that our sidebar is open at this moment:
+	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+		sidebarWindow.getElementById('dpr-browser').contentWindow.getplace(bmwa);
+		sidebarWindow.getElementById('dpr-browser').contentWindow.importXML();
+	} 
+
 
 	// next scroll using the DSC file
 	

@@ -442,7 +442,7 @@ function mlsearchstart()
 			us = toUni(gsplit[0]);
 			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 			
-			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b> '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
+			finouta.push('<div><b><a style="color:'+colorcfg['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+gsplit[0]+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
@@ -515,7 +515,7 @@ function epdsearchstart()
 		if(yessir)
 		{
 			
-			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + gsplit[0] + '</font></b> '+gsplit[1] +'<br>');
+			finouta.push('<b><font style="color:'+colorcfg['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
 
 		}
 	}
