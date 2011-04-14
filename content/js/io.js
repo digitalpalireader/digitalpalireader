@@ -1,34 +1,7 @@
 
-if(document.location.href.search(/^chrome/) != 0) {
-	ioCheck = false;
-}
-else {
-	ioCheck = true;
-}
-var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+ioCheck = true;
 
-var sizeprefs = prefs.getBranch("extensions.digitalpalireader.sizes.");
-var colorprefs = prefs.getBranch("extensions.digitalpalireader.colors.");
-var miscprefs = prefs.getBranch("extensions.digitalpalireader.misc.");
 
-function getColPref(name) {
-	return colorprefs.getCharPref(name);
-}
-function getSizePref(name) {
-	return sizeprefs.getIntPref(name);
-}
-function getMiscPref(name) {
-	return miscprefs.getCharPref(name);
-}
-function setColPref(name,val) {
-	return colorprefs.setCharPref(name,val);
-}
-function setSizePref(name,val) {
-	return sizeprefs.setIntPref(name,val);
-}
-function setMiscPref(name,val) {
-	return miscprefs.setCharPref(name,val);
-}
 
 function readFile(aFileKey)
 {

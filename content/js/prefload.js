@@ -1,74 +1,73 @@
-var sPrefs = [];
-var sPrefVals = [];
-var cPrefs = [];
-var cPrefVals = [];
+var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-var mPrefs = [];
-var mPrefVals = [];
+var G_BoolPrefs = prefs.getBranch("extensions.digitalpalireader.boolean.");
+var G_CharPrefs = prefs.getBranch("extensions.digitalpalireader.string.");
+var G_IntPrefs = prefs.getBranch("extensions.digitalpalireader.number.");
 
-sPrefs.push("AnalyzeH"); sPrefVals.push(44);
-sPrefs.push("DictH"); sPrefVals.push(250);
-sPrefs.push("ControlW"); sPrefVals.push(254);
-sPrefs.push("SearchH"); sPrefVals.push(50);
+function getPref(type,name) {
 
-cPrefs.push("coltext"); cPrefVals.push("#111");
-cPrefs.push("colsel"); cPrefVals.push("#550");
+	eval('return G_'+type+'Prefs.get'+type+'Pref(\''+name+'\');');
 
-cPrefs.push("coldppn"); cPrefVals.push("#0B0");
-cPrefs.push("colped"); cPrefVals.push("#C40");
-cPrefs.push("colcpd"); cPrefVals.push("#44D");
+}
 
-cPrefs.push("colfont"); cPrefVals.push("Sans");
-cPrefs.push("colsize"); cPrefVals.push("16");
+function setPref(type,name,val) {
 
-cPrefs.push("colbk"); cPrefVals.push("#FFB");
-cPrefs.push("colbkcp"); cPrefVals.push("#DDC");
-cPrefs.push("colinput"); cPrefVals.push("#FFF");
-cPrefs.push("colbutton"); cPrefVals.push("#FFF");
-cPrefs.push("colbk1"); cPrefVals.push("yellow");
-cPrefs.push("colbk2"); cPrefVals.push("aqua");
-cPrefs.push("colbk3"); cPrefVals.push("green");
+	eval('return G_'+type+'Prefs.set'+type+'Pref(\''+name+'\',\''+val+'\');');
 
-cPrefs.push("colsearch0"); cPrefVals.push("yellow");
-cPrefs.push("colsearch1"); cPrefVals.push("blue");
-cPrefs.push("colsearch2"); cPrefVals.push("green");
-
-cPrefs.push("green"); cPrefVals.push("#00B900");
-cPrefs.push("blue"); cPrefVals.push("#5353D5");
-cPrefs.push("brown"); cPrefVals.push("#000000");
-cPrefs.push("grey"); cPrefVals.push("grey");
-cPrefs.push("red"); cPrefVals.push("red");
-
-cPrefs.push("blueh"); cPrefVals.push("powderblue");
-
-mPrefs.push("ctrans"); mPrefVals.push("unchecked");
-mPrefs.push("catioff"); mPrefVals.push("unchecked");
-mPrefs.push("catiloc"); mPrefVals.push("<none>");
-mPrefs.push("autodict"); mPrefVals.push("unchecked");
-mPrefs.push("bkgimg"); mPrefVals.push("checked");
-mPrefs.push("translits"); mPrefVals.push("0");
-
-mPrefs.push("showPages"); mPrefVals.push("unchecked");
-mPrefs.push("showVariants"); mPrefVals.push("checked");
-mPrefs.push("showPermalinks"); mPrefVals.push("checked");
-mPrefs.push("showNames"); mPrefVals.push("checked");
-mPrefs.push("showPedLinks"); mPrefVals.push("checked");
-
-mPrefs.push('altlimit'); mPrefVals.push("altlimit");
+}
 
 
-if (ioCheck) {
-	for (i in sPrefs) {
-		if (!getSizePref(sPrefs[i])) { setSizePref(sPrefs[i],sPrefVals[i]); }
-	}
+var G_prefs = [];
 
-	for (i in cPrefs) {
-		if (!getColPref(cPrefs[i])) { setColPref(cPrefs[i],cPrefVals[i]); }
-	}
+G_prefs['DictH'] = ['Int',250];
 
-	/*
-	for (i in mPrefs) {
-		if (!getMiscPref(mPrefs[i])) { setMiscPref(mPrefs[i],mPrefVals[i]); }
-	}
-	*/
+G_prefs['coltext'] = ['Char','#111'];
+G_prefs['colsel'] = ['Char','#550'];
+
+G_prefs['coldppn'] = ['Char','#0B0'];
+G_prefs['colped'] = ['Char','#C40'];
+G_prefs['colcpd'] = ['Char','#44D'];
+
+G_prefs['colfont'] = ['Char','Sans'];
+G_prefs['colsize'] = ['Char','16'];
+
+G_prefs['colbk'] = ['Char','#FFB'];
+G_prefs['colbkcp'] = ['Char','#DDC'];
+G_prefs['colinput'] = ['Char','#FFF'];
+G_prefs['colbutton'] = ['Char','#FFF'];
+G_prefs['colbk1'] = ['Char','yellow'];
+G_prefs['colbk2'] = ['Char','aqua'];
+G_prefs['colbk3'] = ['Char','green'];
+
+G_prefs['colsearch0'] = ['Char','yellow'];
+G_prefs['colsearch1'] = ['Char','blue'];
+G_prefs['colsearch2'] = ['Char','green'];
+
+G_prefs['green'] = ['Char','#00B900'];
+G_prefs['blue'] = ['Char','#5353D5'];
+G_prefs['brown'] = ['Char','#000000'];
+G_prefs['grey'] = ['Char','grey'];
+G_prefs['red'] = ['Char','red'];
+
+G_prefs['blueh'] = ['Char','powderblue'];
+
+G_prefs['ctrans'] = ['Bool',false];
+G_prefs['catioff'] = ['Bool',false];
+G_prefs['catiloc'] = ['Char','<none>'];
+G_prefs['autodict'] = ['Bool',false];
+G_prefs['bkgimg'] = ['Bool',true];
+G_prefs['translits'] = ['Int',0];
+
+G_prefs['showPages'] = ['Bool',false];
+G_prefs['showVariants'] = ['Bool',true];
+G_prefs['showPermalinks'] = ['Bool',true];
+G_prefs['showNames'] = ['Bool',true];
+G_prefs['showPedLinks'] = ['Bool',true];
+
+G_prefs['altlimit'] = ['Int',20];
+
+
+for (i in G_prefs) {
+	if (!getPref(i,G_prefs[i][0])) { setPref(i,G_prefs[i][0],G_prefs[i][1]); }
+	else G_prefs[i][1] = getPref(i,G_prefs[i][0]);
 }

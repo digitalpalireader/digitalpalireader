@@ -1,6 +1,3 @@
-var colorcfg = [];
-var confmove = [];
-var cfg = [];
 var atiIns = 0;
 
 function changeStyleByName(name,attrib,value) {
@@ -12,133 +9,16 @@ function changeStyleByName(name,attrib,value) {
 }
 
 
-confmove[0] = getSizePref('AnalyzeH'); // used for the height of the analysis bar in the middle of the screen
-confmove[1] = getSizePref('DictH'); // used for the height of the bottom box containing the dictionary, scratchpad and convertpad
-confmove[2] = getSizePref('ControlW'); // used for the width of the control box on the right side of the screen.
-confmove[3] = getSizePref('SearchH'); // used for the height of the search box (hidden)
-
-colorcfg['coltext'] = getColPref('coltext');
-colorcfg['colsel'] = getColPref('colsel');
-
-colorcfg['coldppn'] = getColPref('coldppn');
-colorcfg['colped'] = getColPref('colped');
-colorcfg['colcpd'] = getColPref('colcpd');
-
-colorcfg['colfont'] = getColPref('colfont');
-colorcfg['colsize'] = getColPref('colsize');
-
-colorcfg['colsearch0'] = getColPref('colsearch0');
-colorcfg['colsearch1'] = getColPref('colsearch1');
-colorcfg['colsearch2'] = getColPref('colsearch2');
-
-colorcfg['colbk'] = getColPref('colbk');
-colorcfg['colbkcp'] = getColPref('colbkcp');
-colorcfg['colinput'] = getColPref('colinput');
-colorcfg['colbutton'] = getColPref('colbutton');
-
-colorcfg['colbk1'] = getColPref('colbk1');
-colorcfg['colbk2'] = getColPref('colbk2');
-colorcfg['colbk3'] = getColPref('colbk3');
-
-colorcfg['green'] = getColPref('green');
-colorcfg['blue'] = getColPref('blue');
-colorcfg['brown'] = getColPref('brown');
-colorcfg['grey'] = getColPref('grey');
-colorcfg['red'] = getColPref('red');
-
-colorcfg['blueh'] = getColPref('blueh');
-
-cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
-cfg['catioff'] = (getMiscPref("catioff") == "checked"?"checked":"");
-cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
-cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
-cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-cfg['translits'] = parseInt(getMiscPref('translits'));
-
-cfg['showPages'] = getMiscPref('showPages');
-cfg['showVariants'] = getMiscPref('showVariants');
-cfg['showPermalinks'] = getMiscPref('showPermalinks');
-cfg['showNames'] = getMiscPref('showNames');
-cfg['showPedLinks'] = getMiscPref('showPedLinks');
-
-cfg['altlimit'] = getMiscPref('altlimit');
-
-cfg['cpanel'] = getMiscPref('cpanel');
-cfg['cp1'] = getMiscPref('cp1');
-cfg['cp2'] = getMiscPref('cp2');
-cfg['cp3'] = getMiscPref('cp3');
-cfg['cp4'] = getMiscPref('cp4');
-cfg['cp5'] = getMiscPref('cp5');
-cfg['cp6'] = getMiscPref('cp6');
-cfg['cp7'] = getMiscPref('cp7');
-cfg['cp8'] = getMiscPref('cp8');
-
-
-
 function getconfig() {
-	confmove[0] = getSizePref('AnalyzeH'); // used for the height of the analysis bar in the middle of the screen
-	confmove[1] = getSizePref('DictH'); // used for the height of the bottom box containing the dictionary, scratchpad and convertpad
-	confmove[2] = getSizePref('ControlW'); // used for the width of the control box on the right side of the screen.
-	confmove[3] = getSizePref('SearchH'); // used for the height of the search box (hidden)
 
-	colorcfg['coltext'] = getColPref('coltext');
-	colorcfg['colsel'] = getColPref('colsel');
-
-	colorcfg['coldppn'] = getColPref('coldppn');
-	colorcfg['colped'] = getColPref('colped');
-	colorcfg['colcpd'] = getColPref('colcpd');
-
-	colorcfg['colfont'] = getColPref('colfont');
-	colorcfg['colsize'] = getColPref('colsize');
-
-	colorcfg['colsearch0'] = getColPref('colsearch0');
-	colorcfg['colsearch1'] = getColPref('colsearch1');
-	colorcfg['colsearch2'] = getColPref('colsearch2');
-
-	colorcfg['colbk'] = getColPref('colbk');
-	colorcfg['colbkcp'] = getColPref('colbkcp');
-	colorcfg['colinput'] = getColPref('colinput');
-	colorcfg['colbutton'] = getColPref('colbutton');
-	colorcfg['colbk1'] = getColPref('colbk1');
-	colorcfg['colbk1'] = getColPref('colbk1');
-	colorcfg['colbk3'] = getColPref('colbk3');
-
-	colorcfg['green'] = getColPref('green');
-	colorcfg['blue'] = getColPref('blue');
-	colorcfg['brown'] = getColPref('brown');
-	colorcfg['grey'] = getColPref('grey');
-	colorcfg['red'] = getColPref('red');
-
-	colorcfg['blueh'] = getColPref('blueh');
-
-	cfg['ctrans'] = (getMiscPref("ctrans") == "checked"?"checked":"");
-	cfg['catioff'] = (getMiscPref("catioff") == "checked"?"checked":"");
-	cfg['catiloc'] = getMiscPref("catiloc").replace(/\\/g, '/');
-	cfg['autodict'] = (getMiscPref('autodict') == "checked"?"checked":"");
-	cfg['bkgimg'] = (getMiscPref('bkgimg') == "checked"?"checked":"");
-	cfg['translits'] = parseInt(cfg['translits']);
-	 
-	cfg['showPages'] = getMiscPref('showPages');
-	cfg['showVariants'] = getMiscPref('showVariants');	
-	cfg['showPermalinks'] = getMiscPref('showPermalinks');	
-	cfg['showNames'] = getMiscPref('showNames');
-	cfg['showPedLinks'] = getMiscPref('showPedLinks');
-
-	cfg['altlimit'] = getMiscPref('altlimit');
-	
-	cfg['cpanel'] = getMiscPref('cpanel');
-	cfg['cp1'] = getMiscPref('cp1');
-	cfg['cp2'] = getMiscPref('cp2');
-	cfg['cp3'] = getMiscPref('cp3');
-	cfg['cp4'] = getMiscPref('cp4');
-	cfg['cp5'] = getMiscPref('cp5');
-	cfg['cp6'] = getMiscPref('cp6');
-	cfg['cp7'] = getMiscPref('cp7');
-	cfg['cp8'] = getMiscPref('cp8');
+	for (i in G_prefs) {
+		if (!getPref(i,G_prefs[i][0])) setPref(i,G_prefs[i][0],G_prefs[i][1]);
+		else G_prefs[i][1] = getPref(i,G_prefs[i][0]);
+	}
 
 	// Add ATI translations if preferred
-	if (cfg['ctrans'] == "checked" && typeof(atiD) == 'undefined' && atiIns == 0) {
-		if (cfg['catioff'] == "checked") { 
+	if (cfg['ctrans'] && typeof(atiD) == 'undefined' && atiIns == 0) {
+		if (cfg['catioff']) { 
 			var nsrc = 'file://' + getHomePath().replace(/\\/g, '/') +'/'+ cfg['catiloc'] + '/html/tech/digital_pali_reader_suttas.js';
 		}
 		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }

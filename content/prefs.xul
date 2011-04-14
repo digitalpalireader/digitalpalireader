@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/"?>
+<!DOCTYPE page SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+
+
+<page id="digitalpalireader" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	persist="screenX screenY"
+	title="&pTitle.label;" onload="//init();">
+
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
+
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+    </stringbundleset>
+  
+  <separator class="thin"/>
+  <tabbox>
+    <tabs>
+      <tab label="&pGeneral.label;"/>
+      <tab label="&pLayout.label;"/>
+      <tab label="&pText.label;"/>
+    </tabs>
+    <tabpanels>
+      <tabpanel id="generalTab">
+        <vbox>
+          <hbox>
+            <groupbox>
+                <caption label="&pShow.label;"/>
+                
+                <box orient="vertical">
+                    <checkbox id="showPages" label="&pShowPages.label;" prefstring="check.showPages"/>
+					<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="check.showVariants"/>
+					<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="check.showPermalinks"/>
+					<checkbox id="showNames" label="&pShowNames.label;" prefstring="check.showNames"/>
+					<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="check.showPedLinks"/>
+                </box>
+           </groupbox>
+           <groupbox>
+                <caption label="&pMiscPrefs.label;"/>
+                <box orient="vertical">
+					<checkbox id="ctrans" label="&pctrans.label;" prefstring="check.ctrans"/>
+					<checkbox id="autodict" label="&pautodict.label;" prefstring="check.autodict"/>
+                </box>
+            </groupbox>
+          </hbox>
+          
+          <groupbox>
+            <caption label="&pATI.label;"/>
+            <box orient="vertical">
+				<checkbox id="catioff" label="&pcatioff.label;" prefstring="check.catioff"/>
+				<hbox align="end">
+					<label id="ATILocLabel" value="&pATILoc.label;" />
+					<textbox id="catiloc" style="min-width:180px;" prefstring="string.catiloc" flex="1"/>
+					<button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
+				</hbox>
+            </box>
+          </groupbox>
+        </vbox>
+      </tabpanel>
+      
+      <tabpanel id="layoutTab">
+
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
+   
+	<separator class="thin"/>
+   
+	<hbox>
+		<hbox pack="end">
+			<button label="&pOK.label;" oncommand="savePrefs(); window.close();"/>
+			<button label="&pCancel.label;" oncommand="window.close();"/>
+		</hbox>
+	</hbox>
+	<separator class="thin"/>  
+</page>

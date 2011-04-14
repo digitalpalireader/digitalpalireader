@@ -1,3 +1,30 @@
 <!ENTITY digitalpalireader.title "Digital Pali Reader">
 <!ENTITY openDPR.commandkey "D">
-<!ENTITY openDPR.modifierskey "shift ctrl">
+<!ENTITY openDPR.modifierskey "alt shift">
+
+<!ENTITY pTitle.label "Digital Pali Reader Preferences">
+<!ENTITY pGeneral.label "General">
+<!ENTITY pLayout.label "Layout">
+<!ENTITY pText.label "Text">
+
+<!ENTITY pShow.label "Show in Text:">
+<!ENTITY pShowPages.label "Page Numbers">
+<!ENTITY pShowVariants.label "Variant Readings">
+<!ENTITY pShowPermalinks.label "Permalinks">
+<!ENTITY pShowNames.label "DPPN Links">
+<!ENTITY pShowPedLinks.label "Add Word Links to PED Entries">
+
+<!ENTITY pMiscPrefs.label "Misc. Preferences">
+<!ENTITY pctrans.label "Show Translations">
+<!ENTITY pFileDialog.label "Browse...">
+<!ENTITY pautodict.label "Enable Dictionary search-as-you-type">
+
+<!ENTITY pATI.label "Access To Insight Off-Line Archive:">
+<!ENTITY pcatioff.label "Use Off-line ATI Archive">
+<!ENTITY pATILoc.label "Location:">
+
+<!ENTITY pOK.label "Ok">
+<!ENTITY pCancel.label "Cancel">
+
+<!ENTITY pbkgimg.label "Add Parchment Texture">
+
