@@ -59,7 +59,7 @@ function loadDefaults() {
 		}
 
 		if(!D_prefs['catioff']) document.getElementById('catiloc').setAttribute('disabled', 'true');
-		
+
 		document.getElementById('translits').selectedIndex = D_prefs['translits'];
 		
 }
@@ -155,25 +155,29 @@ function savePrefs(close) {
 		prefs.setCharPref(box.getAttribute("prefstring"), box.value);
 	}
 
-		var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
-		var e = wm.getEnumerator("navigator:browser");
-		var win;
+	// translit
 	
-		while (e.hasMoreElements()) {
-			win = e.getNext();
-			var mainWindow = win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-						   .getInterface(Components.interfaces.nsIWebNavigation)
-						   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-						   .rootTreeItem
-						   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-						   .getInterface(Components.interfaces.nsIDOMWindow); 
-			var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+	prefs.setIntPref('Int.translits',document.getElementById('translits').selectedIndex);
 
-			if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-				sidebarWindow.getElementById('dpr-browser').contentWindow.updatePrefs();
-			} 
-		}
-	
+	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
+	var e = wm.getEnumerator("navigator:browser");
+	var win;
+
+	while (e.hasMoreElements()) {
+		win = e.getNext();
+		var mainWindow = win.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+					   .getInterface(Components.interfaces.nsIWebNavigation)
+					   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+					   .rootTreeItem
+					   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+					   .getInterface(Components.interfaces.nsIDOMWindow); 
+		var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+
+		if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+			sidebarWindow.getElementById('dpr-browser').contentWindow.updatePrefs();
+		} 
+	}
+
 	if (close == 1) window.close();
 }
 

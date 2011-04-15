@@ -22,7 +22,7 @@ function onDocLoad() {
 </head>
 
 
-<body onload="onDocLoad();">
+<body onunload="checkLastTab()" onload="onDocLoad();">
 <div id="content">
 	<div id="matrelc"></div>
 	<div id="right" onmouseover="document.body.style.cursor='auto'">

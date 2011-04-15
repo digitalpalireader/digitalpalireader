@@ -91,19 +91,15 @@ function writeFile(aFileKey, aContent)
 
 
 
-function readExtFile(myDir)
+function readExtFile(fileLoc)
 {
-	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-	var dir = DIR.get("Home", Components.interfaces.nsIFile);
-	var dirs = myDir.split('/');
-	for (i in dirs) {
-		dir.append(dirs[i]);
-		if ( !dir.exists() )
-		{
-			return false;
-		}
+	var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+	file.initWithPath(fileLoc);
+	if ( !file.exists() )
+	{
+		dalert("ERROR: Failed to read file: " + file.leafName);
+		return false;
 	}
-	var file = dir.clone();
 	try {
 		var charset = "UTF-8";
 		var data = [];
@@ -133,20 +129,10 @@ function readExtFile(myDir)
 		return false;
 	}
 }
-function writeExtFile(aLoc, aFileKey, aContent) 
+function writeExtFile(fileLoc, aContent) 
 {
-	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-	var dir = DIR.get("Home", Components.interfaces.nsIFile);
-	var dirs = aLoc.split('/');
-	for (i in dirs) {
-		dir.append(dirs[i]);
-		if ( !dir.exists() )
-		{
-			return false;
-		}
-	}
-	var aFile = dir.clone();
-	aFile.append(aFileKey);
+	var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+	aFile.initWithPath(fileLoc);
 	if ( aFile.exists() ) aFile.remove(false);
 
 	try {

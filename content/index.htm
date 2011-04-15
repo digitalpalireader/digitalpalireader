@@ -8,6 +8,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
+	openDPRSidebar();
 	refreshit();
 	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
 }
@@ -37,7 +38,7 @@ function onDocLoad() {
 </head>
 
 
-<body onload="onDocLoad();">
+<body onunload="checkLastTab()" onload="onDocLoad();">
 <div id="content">
 	<div id="matrelc"></div>
 	<div id="right" onmouseover="document.body.style.cursor='auto'">

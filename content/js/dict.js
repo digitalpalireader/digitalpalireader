@@ -59,7 +59,7 @@ function startDictLookup(dictType,dictQuery,dictOpts) {
 	}
 }
 
-function pedsearchstart()
+function pedsearchstart(hard)
 {
 	var getstring = G_dictQuery;
 
@@ -77,7 +77,7 @@ function pedsearchstart()
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-
+	
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
@@ -111,27 +111,53 @@ function pedsearchstart()
 		}
 	}
 
-	var y = finouta.length;
 
 
-	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>PED entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	if(y == 0) {
-		var outDiv = document.createElement('div');
-		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('difb').innerHTML = '';
-		document.getElementById('difb').appendChild(outDiv);
-		document.getElementById('cdif').scrollTop=0;
-		return;
-	}	
+	var outDiv = document.createElement('div');
+	
+	outDiv.innerHTML += '<p>PED entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr />';
+
+	if(finouta.length == 0) {
+		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
+
+		
+		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
+			var simlist = findSimilarWords(toFuzzy(getstring),mainda,80,1);
+			if(simlist) {
+				outDiv.innerHTML += '<p>Did you mean:</p>';
+				for (i in simlist) {
+					pedt = simlist[i].replace(/^.+\^/,'');
+					for (z = 0; z < mainda[pedt].length; z++) {
+					
+						var loc = mainda[pedt][z];
+						
+						uniout = pedt;
+						
+						uniout = toUni(uniout).replace(/`/g,'˚');
+						
+						finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+
+						y++;
+					}
+				}
+			}
+			else outDiv.innerHTML += '<p>No suggestions.</p>';
+		}
+		else {
+			finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+
+		}
+	}
+
+	var findiv = Math.ceil(finouta.length/3);
+	var listoutf = '<table width="100%">';
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 
-	var outDiv = document.createElement('div');
-	outDiv.innerHTML = listoutf + '</table><hr />';
+	outDiv.innerHTML += listoutf + '</table><hr />';
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
@@ -211,7 +237,7 @@ function pedFullTextSearch(getstring) {
 
 var G_dppn = [];
 
-function dppnsearchstart()
+function dppnsearchstart(hard)
 {
 	var getstring = G_dictQuery;
 
@@ -277,24 +303,49 @@ function dppnsearchstart()
 	}
 
 
+
+	var listoutf = '';
 	
+	listoutf += '<p>DPPN entry search for <b style="color:'+G_prefs['coldppn']+'">'+getstring+'</b>:<hr />';
+
+	if(finouta.length == 0) {
+		listoutf += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
+
+		
+		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
+			var simlist = findSimilarWords(toFuzzy(getstring),nameda,80,1);
+			if(simlist) {
+				listoutf += '<p>Did you mean:</p>';
+				for (i in simlist) {
+					pedt = simlist[i].replace(/^.+\^/,'');
+					for (z = 0; z < nameda[pedt].length; z++) {
+					
+						var loc = nameda[pedt][z];
+						
+						uniout = pedt;
+						
+						uniout = toUni(uniout).replace(/`/g,'˚');
+						
+						finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onClick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+
+					}
+				}
+			}
+			else listoutf += '<p>No suggestions.</p>';
+		}
+		else {
+			finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['colped']+'" onclick="dppnsearchstart(1)">Show Suggestions</a><br>');
+
+		}
+	}
+
 	var y = finouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
-	var listoutf = '<p>DPPN entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
-	if(y == 0) {
-		var outDiv = document.createElement('div');
-		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('difb').innerHTML = '';
-		document.getElementById('difb').appendChild(outDiv);
-		document.getElementById('cdif').scrollTop=0;
-		return;
-	}	
-	
+		
 	for (z = 0; z < findiv; z++)
 	{
-		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
+		listoutf += '<table><tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table><hr />';
@@ -392,7 +443,7 @@ function dppnFullTextSearch(getstring) {
 
 var yg = [];
 
-function mlsearchstart()
+function mlsearchstart(hard)
 {
 	clearDivs('dif');
 	var getstring = G_dictQuery;
@@ -448,22 +499,41 @@ function mlsearchstart()
 	}
 	
 	finout = '<p>CPED search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+
 	if(finouta.length == 0) {
-		var outDiv = document.createElement('div');
-		outDiv.innerHTML = finout + 'No results</td></tr></table>';
-		document.getElementById('difb').innerHTML = '';
-		document.getElementById('difb').appendChild(outDiv);
-		document.getElementById('cdif').scrollTop=0;
-		return;
-	}	
-	
-	for (var z = 0; z < finouta.length; z++)
+		finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
+
+		
+		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
+			var simlist = findSimilarWords(toFuzzy(getstring),yt,80,1);
+			if(simlist) {
+				finout += '<p>Did you mean:</p>';
+				for (i in simlist) {
+					pedt = simlist[i].replace(/^.+\^/,'');
+					
+					var loc = yt[pedt];
+					
+					us = toUni(pedt);
+					ud = toUni(yt[pedt][2] + ' (' + yt[pedt][1] + ')');
+					
+					finouta.push('<div><b><a style="color:'+G_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+us+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
+
+				}
+			}
+			else finout += '<p>No suggestions.</p>';
+		}
+		else {
+			finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['colcpd']+'" onclick="mlsearchstart(1)">Show Suggestions</a><br>');
+
+		}
+	}
+	finout += '<table>'
+	for (z = 0; z < finouta.length; z++)
 	{
-		finout += finouta[z];
-	}	
-	
+		finout += '<tr><td>'+finouta[z]+'</td></tr>';
+	}
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = finout + '</td></tr></table>';
+	outDiv.innerHTML = finout + '</table><hr />';
 	document.getElementById('difb').innerHTML = '';
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;

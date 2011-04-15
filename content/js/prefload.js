@@ -10,7 +10,7 @@ G_prefTypes['string'] = 'Char';
 G_prefTypes['boolean'] = 'Bool';
 
 function getPref(name) {
-	var type = G_prefTypes[typeof(name)];
+	var type = G_prefTypes[typeof(D_prefs[name])];
 	var ret; 
 	try{
 		eval('ret = G_'+type+'Prefs.get'+type+'Pref(\''+name+'\');');
@@ -21,7 +21,7 @@ function getPref(name) {
 }
 
 function setPref(name,val) {
-	var type = G_prefTypes[typeof(name)];
+	var type = G_prefTypes[typeof(val)];
 	var ret; 
 	try{
 		eval('ret = G_'+type+'Prefs.set'+type+'Pref(\''+name+'\',\''+val+'\');');
@@ -90,10 +90,6 @@ D_prefs['showPedLinks'] = true;
 D_prefs['altlimit'] = 20;
 
 var G_prefs = [];
-
 for (i in D_prefs) {
-	if (!getPref(i)) { 
-		setPref(i,D_prefs[i]); 
-	}
 	G_prefs[i] = getPref(i);
 }

@@ -5,6 +5,6 @@
 <page onunload="unloadDPR()" id="sbDPR" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
   <script type="application/x-javascript" src="overlay.js" />
-	<browser id="dpr-browser" src="sidebar.htm" flex="1" persist="height"/>
+	<browser type="content" id="dpr-browser" src="sidebar.htm" flex="1" persist="height"/>
 </page>
 

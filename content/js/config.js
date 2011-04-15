@@ -10,10 +10,8 @@ function changeStyleByName(name,attrib,value) {
 
 
 function getconfig() {
-
 	for (i in G_prefs) {
-		if (!getPref(i)) setPref(i,G_prefs[i]);
-		else G_prefs[i] = getPref(i);
+		G_prefs[i] = getPref(i);
 	}
 
 	// Add ATI translations if preferred
@@ -100,85 +98,5 @@ function checkbackground() {
 	else {
 		document.styleSheets[0]['cssRules'][8].style.backgroundImage = '';  // paperback
 	}
-}
-
-function saveOptions() {
-	
-	if(document.miscform.catioff.checked && !fileExists(document.miscform.catiloc.value,'start.html')) {
-		alertFlash('Unrecognized local directory for ATI.  Please disable offline translations before saving preferences.','red'); 
-		return; 
-	}
-	
-	var Val;
-	var Pref;
-	for (i = 0; i < cPrefs.length; i++) {
-		Pref = cPrefs[i];
-		if (document.getElementById(Pref)) {
-			Val = document.getElementById(Pref).value;
-			if (Val) {
-				setColPref(Pref,Val);
-			}
-		}
-	}
-	for (i = 0; i < sPrefs.length; i++) {
-		Pref = sPrefs[i];
-		if (document.getElementById(Pref)) {
-			Val = document.getElementById(Pref).value;
-			if (Val) {
-				Val = checksizes(Pref,Val);
-				setSizePref(Pref,Val);
-			}
-		}
-	}
-	for (i = 0; i < mPrefs.length; i++) {
-		Pref = mPrefs[i];
-		if (document.getElementById(Pref)) {
-			if (document.getElementById(Pref).type=='checkbox') {
-				Val = document.getElementById(Pref).checked;
-				if (Val == true) Val = 'checked';
-				if (Val == false) Val = 'unchecked';
-			}
-			else Val = document.getElementById(Pref).value;
-			setMiscPref(Pref,Val);
-		}
-	}
-	alertFlash("Options saved.",'green');
-	moveframex(2);
-	atiIns = 0; // in case we have to load a new ATI - it will still check for atiD
-	getconfig();
-}
-
-function checksizes(pref,size) {
-
-	var winW = window.innerWidth;
-	var winH = window.innerHeight;
-	switch (pref) {
-		case 'ControlW':
-			if (size < 80) { return 80; }
-			if (size > (winW - 200)) { return (winW-200); }
-			break;
-		case 'AnalyzeH':
-			if (size < 20) { return 20; }
-			if (size > (winH - parseInt(confmove[1])-200)) { return (winH - parseInt(confmove[1]) - 200); }
-			break;
-		case 'DictH':
-			if (size < 40) { return 40; }
-			if (size > (winH - parseInt(confmove[0])-200)) { return (winH - parseInt(confmove[0]) - 200); }
-			break;
-		}
-	return parseInt(size);
-}
-
-function eraseOptions() {
-	
-	var yes = confirm('Are you sure you want to reset all preferences?');
-	
-	if(!yes) return;
-	
-	for (i in D_prefs) {
-		setPref(i,D_prefs[i]);
-	}
-
-	updatePrefs();
 }
 

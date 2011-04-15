@@ -9,6 +9,12 @@ function importXML(labelsearch,para,isPL,add) {
 	var section = document.form.section.selectedIndex;	
 
 	if(!add) { // reuse old tab
+		var thisTab = isDPRTab('DPRm');
+		if(thisTab) {  
+			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+			thisTabBrowser.contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,hier]);
+			return;
+		}
 		var oldTab = findDPRTab('DPR-main');
 		if (!oldTab) {
 			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '');
@@ -28,7 +34,7 @@ function importXML(labelsearch,para,isPL,add) {
 }
 
 
-function openPlace(hiert,nikaya,book,meta,volume,vagga,sutta,section,para,stringra,add)
+function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stringra,add)
 {
 
 	if (stringra) {
@@ -40,9 +46,15 @@ function openPlace(hiert,nikaya,book,meta,volume,vagga,sutta,section,para,string
 	}
 
 	if(!add) { // reuse old tab
+		var thisTab = isDPRTab('DPRm');
+		if(thisTab) {  
+			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+			thisTabBrowser.contentWindow.wrappedJSObject.loadXMLSection(stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert]);
+			return;
+		}
 		var oldTab = findDPRTab('DPR-main');
-		if (!oldTab) {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
+		if (!oldTab) {		
+			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
 			openDPRTab(permalink,'DPR-main');
 		}
 		else {
@@ -64,6 +76,12 @@ function importXMLindex(add) {
 	var bookno = document.form.book.selectedIndex;
 
 	if(!add) { // reuse old tab
+		var thisTab = isDPRTab('DPRm');
+		if(thisTab) {  
+			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+			thisTabBrowser.contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,hier]);
+			return;
+		}
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
@@ -84,6 +102,12 @@ function importXMLindex(add) {
 
 function sendTextToAnalyze(text,frombox,add) {
 	if(!add) { // reuse old tab
+		var thisTab = isDPRTab('DPRm');
+		if(thisTab) {  
+			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+			thisTabBrowser.contentWindow.wrappedJSObject.sendAnalysisToOutput(text,0,frombox);
+			return;
+		}
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
@@ -186,7 +210,6 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendDict(hard,add) {
-
 	var which = document.form.sped.selectedIndex;
 	
 	var getstring = document.form.dictin.value;
@@ -211,6 +234,7 @@ function sendDict(hard,add) {
 	if(document.form.sofuzzy.checked) opts.push('fz');
 	if(document.form.sofulltext.checked) opts.push('ft');
 	if(document.form.sostartword.checked) opts.push('sw');
+	if(hard) opts.push('hd');
 
 	if(!add) { // reuse old tab
 		var oldTab = findDPRTab('DPR-dict');

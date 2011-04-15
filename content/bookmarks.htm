@@ -31,7 +31,7 @@ function onDocLoad() {
 </head>
 
 
-<body onload="onDocLoad();">
+<body onunload="checkLastTab()" onload="onDocLoad();">
 <div id="content">
 	<div id="right" onmouseover="document.body.style.cursor='auto'">
 		<div id="maf">

@@ -103,8 +103,7 @@ function keyPressed(e) {
 		var outplace = getSuttaFromNumber(place.split(','));
 		if(!outplace) return alertFlash('Link not found','yellow');
 		//dalert(outplace);
-		getplace(outplace);
-		importXML();
+		openPlace(outplace);
 				
 		return; 
 	} 

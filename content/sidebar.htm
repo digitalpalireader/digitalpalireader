@@ -27,6 +27,7 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bookmarks.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
@@ -246,7 +247,7 @@ function onDocLoad() {
 										</select> <a class="tiny" href="javascript:void(0)" onclick="this.blur(); showHideId('searchopts')"><b>adv</b></a>
 									</div>
 									<div>
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) sendDict(event.ctrlKey?1:''); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && cfg['autodict'] == 'checked' && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; sendDict(event.ctrlKey?1:'');};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="sendDict(event.ctrlKey?1:'')">➤</span>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) sendDict(1,event.ctrlKey?1:''); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && G_prefs['autodict'] && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; sendDict(event.ctrlKey?1:'');};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onClick="sendDict(1,event.ctrlKey?1:'')">➤</span>
 									</div>
 									<div id="searchopts">
 										<table align="center">

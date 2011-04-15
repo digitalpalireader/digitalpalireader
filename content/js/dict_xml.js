@@ -313,7 +313,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         z = z.replace(wordr, "<c0><@>"+word.replace(/ /g,'</@><xc> <c0><@>')+"</@><xc>");
         
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace(\''+type+'\',\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+','+pca[7]+',['+wordr2+'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',['+wordr2+'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
     document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(G_prefs['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+G_hLetters[type];
     document.getElementById('mafbc').innerHTML += finout;

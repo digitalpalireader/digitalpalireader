@@ -4,12 +4,11 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>digitalpalireader@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader</em:name>
-    <em:version>2.0a2</em:version>
+    <em:version>2.0a3</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateURL>
-	<em:optionsURL>chrome://digitalpalireader/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
