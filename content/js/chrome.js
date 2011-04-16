@@ -17,7 +17,7 @@ function openDPRTab(permalink,id,reuse) {
 
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 		if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
 			if (start == 1) { // prev was a DPR tab
 				newIdx = index;
@@ -31,9 +31,17 @@ function openDPRTab(permalink,id,reuse) {
 	}
 	var newTab = mainWindow.gBrowser.addTab(permalink);
 	if(id) newTab.setAttribute('id', id);
+	
+	
+
 	mainWindow.gBrowser.moveTabTo(newTab, newIdx)
 	mainWindow.gBrowser.selectedTab = newTab;
 
+
+}
+
+function openFirstDPRTab() {
+	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.htm','DPR-main');
 }
 
 function findDPRTab(id) {
@@ -101,7 +109,7 @@ var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocumen
 }
 function openDPRSidebar() {
 var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
-
+	dalert(sidebarWindow.location.href);
 	if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return mainWindow.toggleSidebar('viewDPR');
 	} 
