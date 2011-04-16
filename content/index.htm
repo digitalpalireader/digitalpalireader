@@ -38,7 +38,7 @@ function onDocLoad() {
 </head>
 
 
-<body onunload="this.id='closing';" onload="onDocLoad();">
+<body onload="onDocLoad();">
 <div id="content">
 	<div id="matrelc"></div>
 	<div id="right" onmouseover="document.body.style.cursor='auto'">
@@ -54,100 +54,6 @@ function onDocLoad() {
 					<div id="mafdebug"></div>
 				</div>
 			</div>
-<!--		<div id="closebot" class="pointer" onclick="moveframex()">⟱</div> -->
-		</div>
-		<div id="rightbot">
-			<div id="difout">
-				<div id="cdif">
-					<div id="dif" class="paperback">
-						<div id="difb">
-						</div>
-					</div>
-				</div>
-				<div id="difhist"></div>
-			</div>
-			<div id="cof" class="paperback">
-				<form name="convertor">
-					<table align="center">
-						<tr>
-							<td align="center">Input</td>
-							<td></td>
-							<td align="center">Output</td>
-						</tr>
-						<tr>
-							<td align=left id="inputtd">
-								<textarea id="inputc" rows="8" cols="35" onkeyup="convert()"></textarea>
-							</td>
-							<td valign="top">	
-								<table id="table1">
-									<tr>
-										<td align="center">from</td>
-										<td></td>
-										<td align="center">to</td>
-									</tr>
-									<tr>
-										<td align="center" valign="top">
-											<select name="conversion1" onclick="changeConversion(this.selectedIndex,1)">
-												<option>Unicode</option>
-												<option selected>Velthuis</option>
-											</select>
-										</td>
-										<td></td>
-										<td align="center" valign="top">
-											<select name="conversion2" onclick="changeConversion(this.selectedIndex,2)">
-												<option selected>Unicode</option>
-												<option>Velthuis</option>
-												<option>Thai</option>
-												<option>Devanagari</option>
-												<option>Myanmar</option>
-												<option>Sinhala</option>
-											</select>
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="convert the text" onClick="convert()">convert</span> 
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="sort words in by pali alphabetical order" onClick="document.convertor.outputc.value=sortaz(document.convertor.inputc.value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');">sort</span>
-										</td>
-									</tr>
-									<tr>
-										<td class="buttont" align="center" colspan="3">
-											<span class="abut obut" title="Clear both text boxes" onClick="clearboth()">clear</span>
-										</td>
-									</tr>
-								</table>
-							</td>
-							<td align=right><textarea name="outputc" rows="8" cols="35"></textarea>
-							</td>
-						</tr>
-					</table>
-					<div align="center">Use the "s" key to send a selection or entire section to this convertor.</div>
-				</form>
-			</div>
-			<div id="scf" class="paperback" align=center>
-				<form name="textpad">
-				<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-				<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
-				</form>
-			</div>
-		</div>
-		<div id="anf" align=right>
-			<div id="brtop"></div>
-			<div id="brmid" class="chromeback"></div>
-			<div id="brbot"></div>
-			<div id="anft">
-				<div align="center" id="anfa"></div>
-				<div align="center" id="anfb"></div>
-				<div style="position:relative">
-					<div id="anfs"></div>
-					<div id="anfsd"></div>
-				</div>
-			</div>
-			
 		</div>
 	</div>
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>

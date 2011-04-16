@@ -36,12 +36,7 @@ function conjugate(word, id, which) {
 	var outNode = document.createElement('div');
 	
 	if(id == 'dif') {
-		moveframey('dif');
-		clearDivs('dif');
-		document.getElementById('cdif').scrollTop = 0;
-		document.getElementById('cdif').scrollTop = 0;
-		outNode.innerHTML = out;
-		document.getElementById('difb').appendChild(outNode);
+		
 	}
 	else {
 		outNode.innerHTML = '<div class="conj">'+out+'</div><div class="x" onclick="this.parentNode.innerHTML=null">x</div>';

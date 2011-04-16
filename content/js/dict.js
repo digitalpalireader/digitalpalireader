@@ -24,7 +24,15 @@ function startDictLookup(dictType,dictQuery,dictOpts) {
 		}
 	}
 
-	var st = ['','PED','DPPN','CPED','CEPD','Atth','Tika','Titles'];
+	var st = [];
+	st['PED'] = 'PED';
+	st['DPPN'] = 'DPPN';
+	st['CPED'] = 'CPED';
+	st['MULTI'] = 'Multi';
+	st['CEPD'] = 'CEPD';
+	st['ATT'] = 'Atth';
+	st['TIK'] = 'Tika';
+	st['TIT'] = 'Titles';
 
 	// tab title
 

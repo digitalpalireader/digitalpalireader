@@ -40,8 +40,39 @@ function openDPRTab(permalink,id,reuse) {
 
 }
 
+function openDPRMain(id,link,place) {
+	// get last DPR tab
+
+	var start = 0;  // no DPR tabs yet
+	var newIdx = 0;
+	
+	for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+
+		// Get the next tab
+		var currentTab = tabbrowser.tabContainer.childNodes[index];
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+		if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
+			if (start == 1) { // prev was a DPR tab
+				newIdx = index;
+				break;
+			}
+		}
+		else {
+			start = 1; // got a DPR tab
+			newIdx = index+1;
+		}
+	}
+	var opts = link.match(/\?.+/)[0];
+	var newTab = mainWindow.gBrowser.addTab('chrome://digitalpalireader/content/index.xul'+opts);
+	newTab.setAttribute('id', id);
+	newTab.getElementById('dpr-index-'+place).contentDocument.location.href = link;
+	mainWindow.gBrowser.moveTabTo(newTab, newIdx)
+	mainWindow.gBrowser.selectedTab = newTab;
+}
+
+
 function openFirstDPRTab() {
-	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.htm','DPR-main');
+	if(!findDPRTab('DPR-main')) openDPRTab('chrome://digitalpalireader/content/index.xul','DPR-main');
 }
 
 function findDPRTab(id) {

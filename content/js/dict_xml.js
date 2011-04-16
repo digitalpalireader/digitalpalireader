@@ -143,6 +143,7 @@ function paliXML(file,which)
 }
 
 
+var G_dppn = [];
 var G_dppnhist = [];
 var G_dhmark = 0;
 

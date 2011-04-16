@@ -3,34 +3,7 @@ var moveat = 2;
 function moveframex(a,temp) //read, etc
 {
     if(!temp) getconfig();
-	if(document.getElementById('anf')) {
-		document.getElementById('anf').style.bottom = G_prefs['DictH'] + 'px';
-		document.getElementById('anf').style.top = 'auto';
 
-		document.getElementById('rightbot').style.bottom = '0px';
-		document.getElementById('rightbot').style.height = G_prefs['DictH'] + 'px';
-
-		document.getElementById('rightbot').style.top = '';
-		
-		if(a == 1 || !a && moveat == 2) {
-			document.getElementById('anf').style.display = 'none';
-			document.getElementById('rightbot').style.display = 'none';
-			document.getElementById('maf').style.bottom = '0px';
-			moveat = 1;
-			//document.getElementById('closebot').innerHTML = '⟰';
-		}
-		else {
-			document.getElementById('anf').style.display = 'block';
-			document.getElementById('rightbot').style.display = 'block';
-			document.getElementById('maf').style.bottom = (window.innerHeight-document.getElementById('anf').offsetTop) + 'px';
-			//document.getElementById('closebot').innerHTML = '⟱';
-			moveat = 2;
-		}
-	}
-	else {
-			document.getElementById('maf').style.bottom = '0px';
-	
-	}
 }
 
 function moveframey(a) //dict, conv, or scratch

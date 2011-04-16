@@ -373,27 +373,9 @@ width:100%;
 display:none;
 }
 
-#brmid {
-position:absolute;
-top:0px;
-bottom:4px;
-width:100%;
-background-color:#d9d4cc;
-}
-#brbot {
-position:absolute; 
-right:0;
-bottom:0;
-height:4px;
-width:100%;
-background-image:url('../images/bottomtrans.png'); 
-}
 #anf {
-border-top: grey 1px solid;
-position:absolute;
-bottom:152px;
-right:0px;
-left:-1px;
+width:100%;
+height:auto;
 z-index:3;
 }
 #anft {
@@ -430,11 +412,7 @@ z-index:3;
 }
 
 #rightbot {  
-position:absolute; 
-bottom:0px;
-right:0px;
-left:0px;
-height:160px;
+height:100%;
 }
 #difout {
 	position:relative;

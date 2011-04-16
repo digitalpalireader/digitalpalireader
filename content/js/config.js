@@ -87,16 +87,16 @@ function checkbackground() {
 	var sbk = G_prefs['bkcptype'];
 
 	if(/col/.exec(sbk)) {
-		document.styleSheets[0]['cssRules'][8].style.backgroundColor = G_prefs['colbkcp'];  // paperback
+		document.styleSheets[0]['cssRules'][8].style.backgroundColor = G_prefs['colbkcp'];  // chromeback
 	}
 	else {
-		document.styleSheets[0]['cssRules'][8].style.backgroundColor = '';  // paperback
+		document.styleSheets[0]['cssRules'][8].style.backgroundColor = '';  // chromeback
 	}
 	if(/img/.exec(sbk)) {
-		document.styleSheets[0]['cssRules'][8].style.backgroundImage = G_prefs['imgbkcp'];  // paperback
+		document.styleSheets[0]['cssRules'][8].style.backgroundImage = G_prefs['imgbkcp'];  // chromeback
 	}
 	else {
-		document.styleSheets[0]['cssRules'][8].style.backgroundImage = '';  // paperback
+		document.styleSheets[0]['cssRules'][8].style.backgroundImage = '';  // chromeback
 	}
 }
 

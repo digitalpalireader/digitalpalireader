@@ -3,31 +3,17 @@ var G_shortdefpost = new Array();
 
 var devDump = 0;
 
-var G_lastcolour = 0;
 
-function sendAnalysisToOutput(input,divclicked,frombox)
+function outputAnalysis(input,frombox)
 {
 	devO('',1,1);
 	G_outwords = [];
 	shortdefpre = [];
 	G_shortdefpost = [];
-	
-	if(divclicked) divclicked = 'W'+divclicked;
-	
+		
 	input = toVel(input);
 	document.getElementById('anfs').innerHTML = '';
 
-	if (divclicked && document.getElementById(divclicked))
-	{
-		if (document.getElementById(G_lastcolour))
-		{
-			document.getElementById(G_lastcolour).style.color = G_prefs['coltext'];
-			document.getElementById(G_lastcolour).style.fontWeight = 'normal';
-		}
-		document.getElementById(divclicked).style.color = G_prefs['colsel'];
-		document.getElementById(divclicked).style.fontWeight = 'bold';
-		G_lastcolour = divclicked;
-	}
 
 	var inputm = input.replace(/\u00B4/g, '"').replace(/xn/g, '"n');
 
@@ -58,7 +44,7 @@ function sendAnalysisToOutput(input,divclicked,frombox)
 	{
 		G_outwords.push([input,'0^' + input + '^3']);
 	}
-	outputDef(0,1,frombox); // perform the function in linkout.js; 0 means first match, 1 means this is coming from linkin.js as opposed to the select box,frombox tells the output that we're coming from the input box.
+	outputDef(0,1,frombox); // perform the function in send.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
 }
 
 

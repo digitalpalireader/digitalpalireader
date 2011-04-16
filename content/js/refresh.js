@@ -6,7 +6,6 @@ function refreshit(which)
 	document.getElementById('mafrefresh').style.width = document.getElementById('mafrefresh').offsetWidth + 'px';
 	document.getElementById('mafrefresh').style.marginLeft = (document.getElementById('mafrefresh').offsetWidth/(-2)) + 'px';
 	//document.getElementById('mafrefresh').style.marginBottom = document.getElementById('mafrefresh').offsetHeight/(-2);
-	bv();
     
     if (which == 1) { // coming from reset options.
 		document.getElementById('mafe').innerHTML='<b style="color:'+G_prefs['colsel']+'">Options reset.</b>';

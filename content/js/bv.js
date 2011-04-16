@@ -372,7 +372,6 @@ dbv.push(["And the Lord said to Magandiya: &quot;It is like a man born blind who
 // this is the function that displays a random quote.
 
 function bv() {
-	moveframex(2);
 	var rverse = -1;
 	while(!dbv[rverse]) {
 		rverse = Math.floor(Math.random()*dbv.length);
