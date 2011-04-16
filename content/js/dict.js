@@ -6,7 +6,7 @@ function startDictLookup(dictType,dictQuery,dictOpts) {
 
 	if(!dictType) { // make opt list from url
 		var options = document.location.href.split('?')[1].split('#')[0].split('&');
-		G_dictType = parseInt(options[0].split('=')[1]);
+		G_dictType = options[0].split('=')[1];
 		G_dictQuery = options[1].split('=')[1];
 		G_dictOpts = options[2].split('=')[1].split(',');
 
@@ -35,25 +35,28 @@ function startDictLookup(dictType,dictQuery,dictOpts) {
 	
 
 	switch (G_dictType) {
-		case 1:
+		case 'PED':
 			pedsearchstart();
 			break;
-		case 2:
+		case 'DPPN':
 			dppnsearchstart();
 			break;
-		case 3:
+		case 'CPED':
 			mlsearchstart();
 			break;
-		case 4:
+		case 'MULTI':
+			multisearchstart();
+			break;
+		case 'CEPD':
 			epdsearchstart();
 			break;
-		case 5:
+		case 'ATT':
 			attsearchstart();
 			break;
-		case 6:
+		case 'TIK':
 			tiksearchstart();
 			break;
-		case 7:
+		case 'TIT':
 			titlesearchstart();
 			break;
 	}
@@ -441,7 +444,7 @@ function dppnFullTextSearch(getstring) {
 
 
 
-var yg = [];
+var G_cpedAlt = [];
 
 function mlsearchstart(hard)
 {
@@ -458,23 +461,23 @@ function mlsearchstart(hard)
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var finout = '';
-	if( yg = []) {
-		for (a in yt) yg.push([a].concat(yt[a]));
+	if( G_cpedAlt = []) {
+		for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
 	}
 		
 	var cnt = 0;
-	for (x = 0; x < yg.length; x++)
+	for (x = 0; x < G_cpedAlt.length; x++)
 	{
 		var us = '';
 		var ud = '';
 
-		var gsplit = [yg[x][0],yg[x][3],yg[x][2]];
+		var gsplit = [G_cpedAlt[x][0],G_cpedAlt[x][3],G_cpedAlt[x][2]];
 
 		if(!/ft/.exec(G_dictOpts)) {
 			var tosearch = gsplit[0];
 		}
 		else {
-			var tosearch = yg[x][0]+' '+yg[x][3]+' '+yg[x][2];
+			var tosearch = G_cpedAlt[x][0]+' '+G_cpedAlt[x][3]+' '+G_cpedAlt[x][2];
 		}
 		
 		if(/fz/.exec(G_dictOpts)) {
@@ -539,6 +542,173 @@ function mlsearchstart(hard)
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
 }
+
+// multi dictionary PED, DPPN, CPED
+
+
+function multisearchstart(hard)
+{
+	var getstring = G_dictQuery;
+
+	if(/fz/.exec(G_dictOpts)) {
+		getstring = toFuzzy(getstring);
+	}
+	
+	var finouta = new Array();
+	var y = 0;
+	var finout = '';
+
+	// get ped
+
+	for (pedt in mainda)
+	{
+		if(/fz/.exec(G_dictOpts)) {
+			pedt = toFuzzy(pedt);
+		}
+
+		if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (pedt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (pedt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.indexOf(getstring) > -1));
+		}
+		if(yessir)
+		{
+			for (z = 0; z < mainda[pedt].length; z++) {
+			
+				var loc = mainda[pedt][z];
+				
+				uniout = pedt;
+				
+				uniout = toUni(uniout).replace(/`/g,'˚');
+				
+				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+G_prefs['colped']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+			}
+		}
+	}
+
+    for (x in nameda)
+	{
+		var dppnt = x;
+		if(/fz/.exec(G_dictOpts)) {
+			dppnt = toFuzzy(dppnt);
+		}
+
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (dppnt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (dppnt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.indexOf(getstring) > -1));
+		}
+		if(yessir)
+		{
+			for (z = 0; z < nameda[x].length; z++) {
+			
+				loc = nameda[x][z];
+				
+				uniout = toUni(dppnt);
+					
+				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+G_prefs['coldppn']+'" onClick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+			}
+		}
+	}
+
+	// get cped
+	
+		if( G_cpedAlt = []) {
+		for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
+	}
+		
+	var cnt = 0;
+	for (x = 0; x < G_cpedAlt.length; x++)
+	{
+		var us = '';
+		var ud = '';
+
+		var gsplit = [G_cpedAlt[x][0],G_cpedAlt[x][3],G_cpedAlt[x][2]];
+
+		if(!/ft/.exec(G_dictOpts)) {
+			var tosearch = gsplit[0];
+		}
+		else {
+			var tosearch = G_cpedAlt[x][0]+' '+G_cpedAlt[x][3]+' '+G_cpedAlt[x][2];
+		}
+		
+		if(/fz/.exec(G_dictOpts)) {
+			tosearch = toFuzzy(tosearch);
+		}
+        
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
+		}
+		if(yessir)
+		{
+			cnt++;
+			us = toUni(gsplit[0]);
+			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
+			
+			finouta.push(us+'###<div><a style="color:'+G_prefs['colcpd']+'" href="javascript:void(0)" onclick=" conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
+
+		}
+	}
+	
+	
+	var outDiv = document.createElement('div');
+	
+	outDiv.innerHTML += '<p>PED entry search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b>:<hr />';
+
+	if(finouta.length == 0) {
+		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
+
+		
+		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
+			var simlist = findSimilarWords(toFuzzy(getstring),mainda,80,1);
+			if(simlist) {
+				outDiv.innerHTML += '<p>Did you mean:</p>';
+				for (i in simlist) {
+					pedt = simlist[i].replace(/^.+\^/,'');
+					for (z = 0; z < mainda[pedt].length; z++) {
+					
+						var loc = mainda[pedt][z];
+						
+						uniout = pedt;
+						
+						uniout = toUni(uniout).replace(/`/g,'˚');
+						
+						finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+G_prefs['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+
+						y++;
+					}
+				}
+			}
+			else outDiv.innerHTML += '<p>No suggestions.</p>';
+		}
+		else {
+			finouta.push('<a href="javascript:void(0)" style="color:'+G_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+
+		}
+	}
+	
+	finouta = sortaz(finouta);
+	
+	var findiv = Math.ceil(finouta.length/3);
+	var listoutf = '<table width="100%">';
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
+	}
+
+	outDiv.innerHTML += listoutf + '</table><hr />';
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(outDiv);
+	document.getElementById('cdif').scrollTop=0;
+	yut = 0;
+}
+
+
 
 function epdsearchstart()
 {

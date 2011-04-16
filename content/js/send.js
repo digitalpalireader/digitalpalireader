@@ -210,12 +210,12 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendDict(hard,add) {
-	var which = document.form.sped.selectedIndex;
+	var which = document.form.sped.value;
 	
 	var getstring = document.form.dictin.value;
 	document.form.manual.value = toVel(document.form.dictin.value).toLowerCase();
 
-	if (which == 0) {
+	if (which == 'DPR') {
 		var text = document.form.manual.value;
 		sendTextToAnalyze(text,(hard ? null : 1));
 		return;

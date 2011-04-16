@@ -21,7 +21,7 @@ function clickDictOption() {
 }
 
 function dictLoad() {
-	var which = document.form.sped.selectedIndex;
+	var which = document.form.sped.value;
 	document.getElementById('soNO').style.display = 'none';
 	document.getElementById('soFT').style.display = 'none';
 	document.getElementById('soSW').style.display = 'none';
@@ -32,34 +32,40 @@ function dictLoad() {
 	document.getElementById('soNSA').style.display = 'none';  // Abhi Select
 	document.getElementById('soMAT').style.display = 'none';  // MAT Select
 	switch (which) {
-		case 0: //dpr
+		case 'DPR': //dpr
 			document.getElementById('soNO').style.display = 'block';
 		break;
-		case 1: // ped
+		case 'PED': // ped
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 2: // dppn
+		case 'DPPN': // dppn
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 3: // CPED
+		case 'CPED': // CPED
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 4: // CEPD
+		case 'CEPD': // CEPD
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soFT').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
 		break;
-		case 5: // ATTH
+		case 'MULTI': // Multi
+			document.getElementById('soFZ').style.display = 'block';
+			//document.getElementById('soFT').style.display = 'block';
+			document.getElementById('soRX').style.display = 'block';
+			document.getElementById('soSW').style.display = 'block';
+		break;
+		case 'ATT': // ATTH
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
@@ -67,7 +73,7 @@ function dictLoad() {
 			document.getElementById('soNS').style.display = 'block';
 			document.getElementById('soNSA').style.display = 'block';
 		break;
-		case 6: // TIKA
+		case 'TIK': // TIKA
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
@@ -75,7 +81,7 @@ function dictLoad() {
 			document.getElementById('soNS').style.display = 'block';
 			document.getElementById('soNSA').style.display = 'block';
 		break;
-		case 7: // Title
+		case 'TIT': // Title
 			document.getElementById('soFZ').style.display = 'block';
 			document.getElementById('soRX').style.display = 'block';
 			document.getElementById('soSW').style.display = 'block';
@@ -84,9 +90,6 @@ function dictLoad() {
 			document.getElementById('soNS').style.display = 'block';
 			document.getElementById('soNSA').style.display = 'block';
 		break;
-		case 8: // ATI
-			if(G_prefs['catioff']) document.getElementById('soNS').style.display = 'block';
-			else document.getElementById('soNO').style.display = 'block';
-		break;
+
 	}
 }
