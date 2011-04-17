@@ -76,12 +76,15 @@ function checkbackground() {
 	}
 	else {
 		document.styleSheets[0]['cssRules'][7].style.backgroundColor = '';  // paperback
+		document.body.style.backgroundColor = '';
 	}
 	if(/img/.exec(wbk)) {
 		document.styleSheets[0]['cssRules'][7].style.backgroundImage = G_prefs['imgbk'];  // paperback
+		document.body.style.backgroundImage = G_prefs['imgbk'];
 	}
 	else {
 		document.styleSheets[0]['cssRules'][7].style.backgroundImage = '';  // paperback
+		document.body.style.backgroundImage = '';
 	}
 
 	var sbk = G_prefs['bkcptype'];

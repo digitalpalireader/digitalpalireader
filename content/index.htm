@@ -31,6 +31,7 @@ function onDocLoad() {
 
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/misc_func.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
 
@@ -55,7 +56,13 @@ function onDocLoad() {
 			</div>
 		</div>
 	</div>
-	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('mainToolbar').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('mainToolbar').style.display='none';"><div id="tbOpener" class="tiny">⚙</div><div id="mainToolbar" class="tiny">⚙</div></div>
+	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
+		<div id="tbOpener" class="tiny">⚙</div>
+		<div id="tbContainer2">
+
+			<div id="auxToolbar" class="obutc"></div>
+		</div>
+	</div>
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 	<script>
 		moveframex(2);

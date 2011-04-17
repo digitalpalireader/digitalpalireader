@@ -11,7 +11,12 @@ function onDocLoad() {
 	getconfig();
 	//openDPRSidebar();
 	if(document.location.href.indexOf('?') > -1) getLinkPlaceBottom();
-	bv();	
+	
+	var abv = bv();
+	
+	document.getElementById('difb').innerHTML = '<b class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
+    document.getElementById('cdif').scrollTop=0;
+
 }
 
 
@@ -128,8 +133,17 @@ function onDocLoad() {
 			<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="analyzeTextPad()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
 			</form>
 		</div>
+		<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
+			<div id="tbOpener" class="tiny">⚙</div>
+			<div id="tbContainer2">
+				<div id="mainToolbar" class="obutc">
+					<span id="difoutM" class="abut lbut sbut tiny" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut tiny" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut tiny"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span>
+				</div>
+				<div id="auxToolbar" class="obutc"></div>
+			</div>
+		</div>	
 	</div>
-	
+
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
@@ -137,6 +151,7 @@ function onDocLoad() {
 	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
 
+	<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>

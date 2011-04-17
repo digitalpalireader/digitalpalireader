@@ -325,7 +325,7 @@ function onDocLoad() {
 											<span class="abut lbut" title="Set configuration (%)" onmouseup="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">⚙</span><span class="abut rbut" title="Reset configuration (!)" onmouseup="eraseOptions();">⚠</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Pali Quiz (#)" onmouseup="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onmouseup="bv();">☸</span>
+											<span class="abut lbut" title="Pali Quiz (#)" onmouseup="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onmouseup="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));">☸</span>
 										</td>
 										<td class="buttont">
 											<span class="abut lbut" title="Help (?)" onmouseup="openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1)">?</span><span class="abut rbut" title="Send Feedback (@)" onmouseup="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);">✉</span>

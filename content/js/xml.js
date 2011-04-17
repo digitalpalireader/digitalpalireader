@@ -237,7 +237,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 
 	// output toolbar data
 
-	document.getElementById('mainToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + '</td><td id="maftrans" align="right"></td></tr><table>'
+	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + '</td><td id="maftrans" align="right"></td></tr><table>'
 	
 
 	// output header

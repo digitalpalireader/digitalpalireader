@@ -94,6 +94,17 @@ function paliXML(file,which)
     document.getElementById('cdif').scrollTop=0;
 
 	var tout = '';
+	if (G_pedhist.length > 1) { // show select
+		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+		for (i = G_pedhist.length-1; i >= 0; i--) {
+			showing += '<option value="'+G_pedhist[i]+'"';
+			if (i == G_phmark) { showing += ' selected'; }
+			var dhs = G_pedhist[i].split(',');
+			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
+		}
+		showing += '</select>';
+		tout += (tout.length > 0 ? ' ' : '') + showing;
+	}
 
 
 	// get number
@@ -125,17 +136,6 @@ function paliXML(file,which)
 
 
 	
-	if (G_pedhist.length > 1) { // show select
-		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
-		for (i = G_pedhist.length-1; i >= 0; i--) {
-			showing += '<option value="'+G_pedhist[i]+'"';
-			if (i == G_phmark) { showing += ' selected'; }
-			var dhs = G_pedhist[i].split(',');
-			showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
-		}
-		showing += '</select>';
-		tout += (tout.length > 0 ? ' ' : '') + showing;
-	}
 
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
@@ -220,9 +220,6 @@ function DPPNXML(file,which)
 	// buttons
 	
 	var tout = '';
-	if (lname) tout += '<span class="abut lbut tiny" onclick="DPPNXML('+lname+')" />&lt;</span>';
-	if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
-	
 	
 	if (G_dppnhist.length > 1) { // show select
 		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
@@ -236,6 +233,10 @@ function DPPNXML(file,which)
 		tout += (tout.length > 0 ? ' ' : '') + showing;
 
 	}
+	
+	if (lname) tout += '<span class="abut lbut tiny" onclick="DPPNXML('+lname+')" />&lt;</span>';
+	if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
+	
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
     document.getElementById('cdif').scrollTop=0;

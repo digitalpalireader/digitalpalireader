@@ -342,3 +342,4 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		openDPRMain('DPRm',permalink,'bottom');
 	}	
 }
+
