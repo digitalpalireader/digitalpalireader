@@ -93,7 +93,7 @@ G_uncompoundable['suz3'] = 2;
 G_uncompoundable['hi'] = 1;
 //G_uncompoundable['ca'] = 2;
 G_uncompoundable['a.na'] = 1;
-G_uncompoundable['aadi'] = 3;
+//G_uncompoundable['aadi'] = 3;
 
 var G_indeclinableEnding = new Array(); 
 /* endings
