@@ -10,6 +10,7 @@
 
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
 
   	<stringbundleset id="stringbundleset">
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
@@ -94,8 +95,8 @@
 							<caption label="&pWidgetColors.label;"/>
 
 								<hbox align="center"><label id="pcolInput" value="&pcolInput.label;" selected="true" /><spacer flex="1"/><textbox id="colInput" prefstring="Char.colInput"/></hbox>
-								<hbox align="center"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colButton"/></hbox>
-								<hbox align="center"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colButtonSel"/></hbox>
+								<hbox align="center"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colButton" prefstring="Char.colButton"/></hbox>
+								<hbox align="center"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colButtonSel" prefstring="Char.colButtonSel"/></hbox>
 					   </groupbox>
 					</column>
 				</columns>

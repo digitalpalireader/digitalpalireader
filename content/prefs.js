@@ -2,65 +2,65 @@
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
 function loadDefaults() {
-		var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
-		for (var i = 0; i < cks.length; ++i) {
-			var ck = document.getElementById(cks[i]);
-			ck.checked = D_prefs[cks[i]];
-		}
-		var ints = ['altlimit'];
-		for (var i = 0; i < ints.length; ++i) {
-			var box = document.getElementById(ints[i]);
-			box.value = D_prefs[ints[i]];
-		}
-		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
-		for (var i = 0; i < strings.length; ++i) {
-			var box = document.getElementById(strings[i]);
-			box.value = D_prefs[strings[i]];
-		}
-		
-		// backgrounds
-		
-		var wbk = D_prefs['bktype'];
-		
-		if(/col/.exec(wbk)) {
-			document.getElementById('pcolbk').checked = true;
-			document.getElementById('colbk').setAttribute('disabled', 'false');
-		}
-		else {
-			document.getElementById('pcolbk').checked = false;
-			document.getElementById('colbk').setAttribute('disabled', 'true');
-		}
-		if(/img/.exec(wbk)) {
-			document.getElementById('pimgbk').checked = true;
-			document.getElementById('imgbk').setAttribute('disabled', 'false');
-		}
-		else {
-			document.getElementById('pimgbk').checked = false;
-			document.getElementById('imgbk').setAttribute('disabled', 'true');
-		}
+	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
+	for (var i = 0; i < cks.length; ++i) {
+		var ck = document.getElementById(cks[i]);
+		ck.checked = D_prefs[cks[i]];
+	}
+	var ints = ['altlimit'];
+	for (var i = 0; i < ints.length; ++i) {
+		var box = document.getElementById(ints[i]);
+		box.value = D_prefs[ints[i]];
+	}
+	var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+	for (var i = 0; i < strings.length; ++i) {
+		var box = document.getElementById(strings[i]);
+		box.value = D_prefs[strings[i]];
+	}
+	
+	// backgrounds
+	
+	var wbk = D_prefs['bktype'];
+	
+	if(/col/.exec(wbk)) {
+		document.getElementById('pcolbk').checked = true;
+		document.getElementById('colbk').removeAttribute('disabled');
+	}
+	else {
+		document.getElementById('pcolbk').checked = false;
+		document.getElementById('colbk').setAttribute('disabled', true);
+	}
+	if(/img/.exec(wbk)) {
+		document.getElementById('pimgbk').checked = true;
+		document.getElementById('imgbk').removeAttribute('disabled');
+	}
+	else {
+		document.getElementById('pimgbk').checked = false;
+		document.getElementById('imgbk').setAttribute('disabled', true);
+	}
 
-		var sbk = D_prefs['bkcptype'];
+	var sbk = D_prefs['bkcptype'];
 
-		if(/col/.exec(sbk)) {
-			document.getElementById('pcolbkcp').checked = true;
-			document.getElementById('colbkcp').setAttribute('disabled', 'false');
-		}
-		else {
-			document.getElementById('pcolbkcp').checked = false;
-			document.getElementById('colbkcp').setAttribute('disabled', 'true');
-		}
-		if(/img/.exec(sbk)) {
-			document.getElementById('pimgbkcp').checked = true;
-			document.getElementById('imgbkcp').setAttribute('disabled', 'false');
-		}
-		else { 
-			document.getElementById('pimgbkcp').checked = false;
-			document.getElementById('imgbkcp').setAttribute('disabled', 'true');
-		}
+	if(/col/.exec(sbk)) {
+		document.getElementById('pcolbkcp').checked = true;
+		document.getElementById('colbkcp').removeAttribute('disabled');
+	}
+	else {
+		document.getElementById('pcolbkcp').checked = false;
+		document.getElementById('colbkcp').setAttribute('disabled', true);
+	}
+	if(/img/.exec(sbk)) {
+		document.getElementById('pimgbkcp').checked = true;
+		document.getElementById('imgbkcp').removeAttribute('disabled');
+	}
+	else { 
+		document.getElementById('pimgbkcp').checked = false;
+		document.getElementById('imgbkcp').setAttribute('disabled', true);
+	}
 
-		if(!D_prefs['catioff']) document.getElementById('catiloc').setAttribute('disabled', 'true');
+	if(!D_prefs['catioff']) document.getElementById('catiloc').setAttribute('disabled', true);
 
-		document.getElementById('translits').selectedIndex = D_prefs['translits'];
+	document.getElementById('translits').selectedIndex = D_prefs['translits'];
 		
 }
 
@@ -76,7 +76,7 @@ function loadPrefs() {
 			var prefstring = box.getAttribute("prefstring");
 			box.value = prefs.getIntPref(prefstring);
 		}
-		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colinput','colbutton','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 		for (var i = 0; i < strings.length; ++i) {
 			var box = document.getElementById(strings[i]);
 			var prefstring = box.getAttribute("prefstring");
@@ -147,7 +147,7 @@ function savePrefs(close) {
 	
 	prefs.setCharPref('Char.bkcptype', bkcptype);
 	
-	var strings = ['colbk','imgbk','colbkcp','imgbkcp','colinput','colbutton','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+	var strings = ['colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 	
 	for (var i = 0; i < strings.length; ++i) {
 		if(strings[i] == 'colbk' && !document.getElementById('pcolbk').checked || strings[i] == 'imgbk' && !document.getElementById('pimgbk').checked || strings[i] == 'colbkcp' && !document.getElementById('pcolbkcp').checked || strings[i] == 'imgbkcp' && !document.getElementById('pimgbkcp').checked) continue; 
@@ -159,6 +159,15 @@ function savePrefs(close) {
 	
 	prefs.setIntPref('Int.translits',document.getElementById('translits').selectedIndex);
 
+	updatePrefs(close);
+}
+
+
+function resetPrefs() {
+	
+}
+
+function updatePrefs(close) {
 	var wm = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator);
 	var e = wm.getEnumerator("navigator:browser");
 	var win;
@@ -180,7 +189,6 @@ function savePrefs(close) {
 
 	if (close == 1) window.close();
 }
-
 
 function fileDialog(id, titleIn) {
 	

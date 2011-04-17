@@ -2,24 +2,28 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
-<window id="DPR-index" onload="tranferLinkPlace()" title="&digitalpalireader.title;"
+<window id="DPR-index" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script>
-var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-			   .getInterface(Components.interfaces.nsIWebNavigation)
-			   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-			   .rootTreeItem
-			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-			   .getInterface(Components.interfaces.nsIDOMWindow); 
-mainWindow.gBrowser.setIcon(mainWindow.gBrowser.selectedTab, "chrome://digitalpalireader/skin/icons/logo.png");
+function onLoad() {
+	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow); 
+	mainWindow.gBrowser.setIcon(mainWindow.gBrowser.selectedTab, "chrome://digitalpalireader/skin/icons/logo.png");
 
-function tranferLinkPlace() {
 	var link = document.location.href.match(/\?.+/);
 	if (link) {
 		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm'+link[0];
 	}
 	else document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
 	document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+}
+function getconfig() {
+	document.getElementById('dpr-index-top').contentWindow.getconfig();
+	document.getElementById('dpr-index-bottom').contentWindow.getconfig();
 }
   
 </script>

@@ -57,7 +57,7 @@ D_prefs['colbkcp'] = '#DDC';
 D_prefs['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
 
 D_prefs['colInput'] = '#FFF';
-D_prefs['colButton'] = '#DDC';
+D_prefs['colButton'] = 'RGBa(200,200,200,0.1)';
 D_prefs['imgButton'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
 D_prefs['colButtonSel'] = '#FFF';
 D_prefs['colbk1'] = 'yellow';
