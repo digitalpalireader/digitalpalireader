@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
-<!DOCTYPE page SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
-<page onunload="digitalpalireader.onUnload()" onload="digitalpalireader.onLoad()" id="sbDPR" title="&digitalpalireader.title;"
+<!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<window onunload="digitalpalireader.onUnload()" onload="digitalpalireader.onLoad()" id="sbDPR" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
   <script type="application/x-javascript" src="overlay.js" />
 	<browser type="content" id="dpr-browser" src="sidebar.htm" flex="1" persist="height"/>
-</page>
+</window>
 

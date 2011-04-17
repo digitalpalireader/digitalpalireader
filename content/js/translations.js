@@ -1,13 +1,13 @@
 
 function transLink(which,auth,url,title) {
-	if(which == 0) {
+	/*if(which == 0) {
 		if(auth == 'Anandajoti') {
 			var images = 'images/abt.gif';
 			var imaget = 'Translations courtesy of http://www.ancient-buddhist-texts.net/';
 			var imageu = 'http://www.ancient-buddhist-texts.net/';
 		}
 		return (auth == 'Anandajoti' ? '&nbsp;<img width="16" style="vertical-align:middle" src="'+images+'" title="'+imaget+'" onclick="window.open(\''+imageu+'\')">&nbsp;' : '') + '<span class="abut obut tiny" onclick="window.open(\''+url+'\');" title="'+title+'">'+auth+'</span>';
-	}
+	}*/
 	return '&nbsp;<span class="hoverShow"><img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onclick="window.open(\''+url+'\')"></span>';
 }
 

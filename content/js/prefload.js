@@ -56,8 +56,10 @@ D_prefs['bkcptype'] = 'img';
 D_prefs['colbkcp'] = '#DDC';
 D_prefs['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
 
-D_prefs['colinput'] = '#FFF';
-D_prefs['colbutton'] = '#FFF';
+D_prefs['colInput'] = '#FFF';
+D_prefs['colButton'] = '#DDC';
+D_prefs['imgButton'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
+D_prefs['colButtonSel'] = '#FFF';
 D_prefs['colbk1'] = 'yellow';
 D_prefs['colbk2'] = 'aqua';
 D_prefs['colbk3'] = 'green';

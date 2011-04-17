@@ -22,14 +22,15 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		var vagga = place[4];
 		var sutta = place[5];
 		var section = place[6]
+		var hier = place[7];
 
 		var transin;
 		var transout='';
 		if (hier == "m") { 
 			transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 			if (transin) {
-				var atiurl = (G_prefs['catioff'] ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-				if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
+				var atiurl = (G_prefs['catioff'] ? 'file://'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+				//if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
 				transout += transin.join('&nbsp;');
 				document.getElementById('maftrans').innerHTML += transout; 
 			}
@@ -448,7 +449,7 @@ function permalinkClick(link,url) {
 	copyToClipboard(link);
 	if(url) {
 		try {
-			window.history.replaceState('Object', 'Title', link);
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
 		}
 		catch(ex) {
 		}

@@ -46,18 +46,19 @@ function bookmarkc(let)
     var dpr = readFile('DPB'+name);
 	var bmwa = dpr[0].split('#');
 
+	// get scrollOffset
+
+	var dsc = readFile('DPS'+name)[0];
+
 	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
 	// Verify that our sidebar is open at this moment:
 	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		sidebarWindow.getElementById('dpr-browser').contentWindow.getplace(bmwa);
-		sidebarWindow.getElementById('dpr-browser').contentWindow.importXML();
+		sidebarWindow.getElementById('dpr-browser').contentWindow.importXML(null,null,null,null,dsc);
 	} 
 
 
-	// next scroll using the DSC file
-	
-    var dsc = readFile('DPS'+name)[0];
-	document.getElementById('maf').scrollTop = dsc;
+
 }
 
 function bookmarks(let)

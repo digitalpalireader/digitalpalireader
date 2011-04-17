@@ -45,8 +45,9 @@
 
 <!ENTITY pWidgetColors.label "Other Colors:">
 
-<!ENTITY pcolinput.label "Input Boxes">
-<!ENTITY pcolbutton.label "Buttons">
+<!ENTITY pcolInput.label "Input Boxes">
+<!ENTITY pcolButton.label "Buttons (normal)">
+<!ENTITY pcolButtonSel.label "Buttons (on hover)">
 
 <!-- Text Tab -->
 

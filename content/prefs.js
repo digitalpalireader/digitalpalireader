@@ -12,7 +12,7 @@ function loadDefaults() {
 			var box = document.getElementById(ints[i]);
 			box.value = D_prefs[ints[i]];
 		}
-		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colinput','colbutton','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 		for (var i = 0; i < strings.length; ++i) {
 			var box = document.getElementById(strings[i]);
 			box.value = D_prefs[strings[i]];

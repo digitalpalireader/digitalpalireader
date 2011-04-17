@@ -9,7 +9,6 @@
 	title="&pTitle.label;" onload="loadPrefs();">
 
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
 
   	<stringbundleset id="stringbundleset">
@@ -94,8 +93,9 @@
 						<groupbox flex="1">
 							<caption label="&pWidgetColors.label;"/>
 
-								<hbox align="center"><label id="pcolinput" value="&pcolinput.label;" selected="true" /><spacer flex="1"/><textbox id="colinput" prefstring="Char.colinput"/></hbox>
-								<hbox align="center"><label id="pcolbutton" value="&pcolbutton.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colbutton"/></hbox>
+								<hbox align="center"><label id="pcolInput" value="&pcolInput.label;" selected="true" /><spacer flex="1"/><textbox id="colInput" prefstring="Char.colInput"/></hbox>
+								<hbox align="center"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colButton"/></hbox>
+								<hbox align="center"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colbutton" prefstring="Char.colButtonSel"/></hbox>
 					   </groupbox>
 					</column>
 				</columns>

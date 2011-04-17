@@ -173,7 +173,6 @@ function outputDef(which,first,frombox)
 	osout += '</td></tr></table>';
 	document.getElementById('anfb').innerHTML = osout;
 	document.getElementById('anfsd').innerHTML = conciseoutput;
-	moveframex(moveat);
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else DPPNXML(hotlink);

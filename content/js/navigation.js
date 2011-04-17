@@ -278,9 +278,9 @@ function changenikaya(noget)
 		oldnikaya = document.form.nik.selectedIndex;
 		
 		setBookList(nik);
-
-		if (noget) gettitles(0,1); // don't load the passage
-		else gettitles(0,2);
+		gettitles(0,1);
+		//if (noget) gettitles(0,1); // don't load the passage
+		//else gettitles(0,2);
 	}
 }
 

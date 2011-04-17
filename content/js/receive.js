@@ -1,10 +1,10 @@
 function getLinkPlace() { // permalinks
 
-	var options = document.location.href.split('?')[1].split('#')[0].split('&');
+	var options = document.location.href.split('?')[1].split('#')[0]
+	
+	options = options.split('&');
 
-	var place;
-	var para;
-	var query;
+	var place,para,query,scroll;
 	
 	// parse options
 	if(/^thai/.exec(options[0])) {
@@ -58,8 +58,9 @@ function getLinkPlace() { // permalinks
 				if(!outplace) return;
 			}
 		}
-		else if (option[0] == 'para') para = parseInt(option[1])-1;
+		else if (option[0] == 'para') para = parseInt(option[1]);
 		else if (option[0] == 'query') query = toUni(option[1]).replace(/_/g,' ').split('+');
+		else if (option[0] == 'scroll') scroll = parseInt(option[1]);
 	}
 	if(place) loadXMLSection(query,para,outplace,true);
 }

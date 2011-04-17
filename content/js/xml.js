@@ -9,7 +9,7 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-function loadXMLSection(labelsearch,para,place,isPL)
+function loadXMLSection(labelsearch,para,place,isPL,scroll)
 { 
 	moveframex(2);
 	
@@ -92,6 +92,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 		matValue['t'] = '';
 	}
 	var relout = '<input type="hidden" id="matButtonCount" value="'+matButtonCount+'">';
+	var relouta = [];
 	var relwhere = [nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^"+section,
 	nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^"+sutta+"^*",
 	nikaya+"^"+bookno+"^"+meta+"^"+volume+"^"+vagga+"^*^*",
@@ -107,7 +108,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relout+='<span class="abut obut small" onclick="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,(event.ctrlKey?1:null));importXML();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span> ';
+					relouta.push('<span class="abut obut small" onclick="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,(event.ctrlKey?1:null));importXML();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 					matButton = 0;
 
 				}
@@ -117,6 +118,7 @@ function loadXMLSection(labelsearch,para,place,isPL)
 		}
 	}
 	
+	relout += relouta.join(' ');
 	
 	// prev and next
 	var prev, next;
@@ -214,12 +216,13 @@ function loadXMLSection(labelsearch,para,place,isPL)
 	
 	// permalink
 	
-	var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '');
+	var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '');
 	if(!isPL) { //not coming from a permalink
 		try {
-			window.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
 		}
 		catch(ex) {
+		dalert();
 		}
 	}
 	
@@ -232,15 +235,17 @@ function loadXMLSection(labelsearch,para,place,isPL)
 		var modt = 	(modno ? ' (<b class="small" style="color:'+G_prefs['colsel']+'">' + G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
 	}
 
+	// output toolbar data
 
+	document.getElementById('mainToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + '</td><td id="maftrans" align="right"></td></tr><table>'
+	
 
 	// output header
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left>'+ nextprev+ ' ' +relout+'</td><td align=center>'+titleout+modt+(G_prefs['showPermalinks'] ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+modt+(G_prefs['showPermalinks'] ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td></tr></table>';
 		
-
 
 	var theData = '';
 	
@@ -326,12 +331,14 @@ function loadXMLSection(labelsearch,para,place,isPL)
 			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 		}
 	}
-	outputFormattedData(theData,place);
+	outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(para) { 
-        document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
+        document.getElementById('maf').scrollTop = document.getElementById('para'+(para-1)).offsetTop;
 	}
-
+	else if(scroll) {
+		document.getElementById('maf').scrollTop = scroll;
+	}
 }
 
 function loadXMLindex(place) {
@@ -381,10 +388,10 @@ function loadXMLindex(place) {
 
 	// permalink
 
-	var permalink = 'chrome://digitalpalireader/content/index.htm?';
+	var permalink = 'chrome://digitalpalireader/content/index.xul?';
 	
 	try {
-		window.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentmainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
 	}
 	catch(ex) {
 	}
@@ -755,8 +762,8 @@ function gettitles(altget,stop,prev,ssect)
 
 	if (prev) document.form.section.selectedIndex = y.length - 1;
 	if (ssect && ssect > 0) document.form.section.selectedIndex = searchsect;
-	if (newload == 0) importXML();
-	else if (newload == 2) importXMLindex();
+//	if (newload == 0) importXML();
+//	else if (newload == 2) importXMLindex();
 	getsutta = 0;
 }
 

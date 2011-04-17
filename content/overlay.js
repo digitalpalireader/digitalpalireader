@@ -4,7 +4,6 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .rootTreeItem
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
-
 var digitalpalireader =
 {
 

@@ -3,7 +3,6 @@
 <html>
 <head>
 <title>Digital Pali Reader</title>
-<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
@@ -56,6 +55,7 @@ function onDocLoad() {
 			</div>
 		</div>
 	</div>
+	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('mainToolbar').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('mainToolbar').style.display='none';"><div id="tbOpener" class="tiny">⚙</div><div id="mainToolbar" class="tiny">⚙</div></div>
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 	<script>
 		moveframex(2);
@@ -63,28 +63,10 @@ function onDocLoad() {
 	<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/relatt.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/reltik.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/tiklist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/titles.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
 	
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
