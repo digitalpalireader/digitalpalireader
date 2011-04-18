@@ -10,8 +10,11 @@ function keyPressed(e) {
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 
 	if (e.charCode == 115) {  // s
-		if(getSelected() != '') {
-			wBot.sendtoconvert(getSelected()+'');
+		if(wTop.getSelection().toString() != '') {
+			wBot.sendtoconvert(wTop.getSelection().toString()+'');
+		} 
+		else if(wBot.getSelection().toString() != '') {
+			wBot.sendtoconvert(wBot.getSelection().toString()+'');
 		} 
 		else if(dTop.getElementById('convi')) { wBot.sendtoconvert(dTop.getElementById('convi').innerHTML); }
 		else alertFlash('You must select some text to send to the convertor','yellow');
@@ -19,8 +22,11 @@ function keyPressed(e) {
 	}
 
 	if (e.charCode == 101) {  // e
-		if(getSelected() != '') {
-			wBot.sendtoPad(getSelected()+'');
+		if(wTop.getSelection().toString() != '') {
+			wBot.sendtoPad(wTop.getSelection().toString()+'');
+		} 
+		else if(wBot.getSelection().toString() != '') {
+			wBot.sendtoPad(wBot.getSelection().toString()+'');
 		} 
 		else if(dTop.getElementById('convi')) { wBot.sendtoPad(dTop.getElementById('convi').innerHTML); }
 		else alertFlash('You must select some text to send to the textpad','yellow');
@@ -38,8 +44,9 @@ function keyPressed(e) {
 //	if (e.charCode == 35) { newquiz(); return; } // #
 //	if (e.charCode == 33) { eraseOptions(); return; } // !
 	if (e.charCode == 37) {  window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome'); return; } // %
-	if (e.charCode == 98) { wBot.showBv(); return; } // b
+	if (e.charCode == 118) { wBot.showBv(); return; } // v
 	if (e.charCode == 63) { openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1); return; } // ?
+	if (e.charCode == 98) { dTop.getElementById('bkButton').onmousedown(); return; } // b
 
 	if (e.charCode == 44) { // ,
 		if(dBot.getElementById('tout') || dBot.getElementById('bout')) { dBot.getElementById('tout').onclick(); }

@@ -3,6 +3,44 @@
 <!ENTITY openDPR.commandkey "D">
 <!ENTITY openDPR.modifierskey "alt shift">
 
+<!-- Sidebar -->
+
+<!ENTITY close.tip "Close section">
+
+	<!-- nav -->
+
+<!ENTITY sSet.label "Set">
+<!ENTITY sBook.label "Book">
+<!ENTITY mul_text "Switch to Mūla">
+<!ENTITY att_text "Switch to Aṭṭhakathā">
+<!ENTITY tik_text "Switch to Ṭīkā">
+<!ENTITY go_text "Load current section">
+
+	<!-- search -->
+
+<!ENTITY searchHead "Text Search">
+<!ENTITY searchGo.text "Search for word or phrase in selected volumes">
+
+	<!-- dict -->
+
+<!ENTITY dictHead "Dictionary">
+<!ENTITY dict_go "Lookup word in selected dictionary">
+<!ENTITY dictGo.text "Lookup word in selected dictionary">
+<!ENTITY dictAdv "adv">
+<!ENTITY dictAdv.text "advanced lookup options">
+
+	<!-- buttons -->
+
+<!ENTITY bookmark.label "Show Bookmarks">
+<!ENTITY quiz.label "Open Quiz">
+<!ENTITY bv.label "Show Buddha Vacana Quote">
+
+<!ENTITY openPrefs.label "Preferences">
+<!ENTITY help.label "Help">
+<!ENTITY contact.label "Feedback Form">
+
+<!-- Preferences -->
+
 <!ENTITY pTitle.label "Digital Pali Reader Preferences">
 <!ENTITY pGeneral.label "General">
 <!ENTITY pLayout.label "Layout">
@@ -90,3 +128,4 @@
 <!ENTITY pCancel.label "Cancel">
 <!ENTITY pApply.label "Apply">
 <!ENTITY pOK.label "Ok">
+

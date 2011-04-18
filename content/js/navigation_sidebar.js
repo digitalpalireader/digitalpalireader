@@ -1,3 +1,36 @@
+var G_hier = 'm';
+
+var oldnikaya = 0;
+
+function changeSet(noget)
+{
+	var nik = document.getElementById('set').value;
+	if (nik != '') 
+	{
+		if (G_hier == 't' && limitt(document.getElementById('set').selectedIndex)) { 
+			alert('Ṭīkā not available for '+G_nikLongName[document.getElementById('set').value]+'.');
+			document.getElementById('set').selectedIndex = oldnikaya;
+			return; 
+		} 
+		if (G_hier == 'a' && document.getElementById('set').value == 'g') {
+			alert('Atthakatha not available for Gram.');
+			document.getElementById('set').selectedIndex = oldnikaya;
+			return;
+		}
+		if (G_hier == 'a' && document.getElementById('set').value == 'b') {
+			alert('Atthakatha not available for Abhidh-s.');
+			document.getElementById('set').selectedIndex = oldnikaya;
+			return;
+		}
+		oldnikaya = document.getElementById('set').selectedIndex;
+		
+		setBookList(nik);
+		updateHierarchy(0,1);
+		//if (noget) gettitles(0,1); // don't load the passage
+		//else gettitles(0,2);
+	}
+}
+
 
 
 var G_XMLFileArray = []; // [nik+book] = [m,a,t]
@@ -235,192 +268,110 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be
 	return no.toString();
 }
 
-
-function getDppnEntry(term) {
-	var dppnEntry = [];
-	if(typeof(nameda[term]) == 'object') {
-		dppnEntry = nameda[term];
+function setBookList(nik) {
+	var checkNikaya = '<table><tr><td valign="top">';
+	
+	if (nikvoladi[nik]) var titles = nikvoladi[nik];
+	else var titles = nikvoladi[nik+G_hier];
+	
+	var bookNode = document.getElementById('book');
+	while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
+	
+	for (i = 0; i < titles.length; i++) {
+		bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+		if(i == Math.ceil(titles.length/2)) checkNikaya += '</td><td valign="top">';
+		checkNikaya += '<input type="checkbox" id="tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)) +'" title="Include in search" checked> <span class="tiny">'+((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i])+'</span><br/>';
 	}
-	else {
-		if(typeof(nameda[term.replace(/\.m$/,'')]) == 'object') {
-			dppnEntry = nameda[term.replace(/\.m$/,'')];
-		}
-		else if(typeof(nameda[term.replace(/o$/,'a')]) == 'object') {
-			dppnEntry = nameda[term.replace(/o$/,'a')];
-		}
-	}
-	var dEI = [];
-	if(dppnEntry.length > 0) {
-		for(d in dppnEntry) {
-			dEI.push(dppnEntry[d]);
-		}
-	}
-	return dEI;
+	bookNode.selectedIndex = 0;
+	checkNikaya += '</td></tr></table>';
+//	document.getElementById('tsoBO').innerHTML = checkNikaya;
+	
 }
 
 
-function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
-	
-	var no;
-	book = parseInt(book);
-	meta = parseInt(meta);
-	volume = parseInt(volume);
-	vagga = parseInt(vagga);
-	sutta = parseInt(sutta);
-	section = parseInt(section);
-	sectlength = parseInt(sectlength);
-	
-	switch (nik) {
-		case 'd':
-			no = vagga + 1;
-			switch (true) {
-				case (book == 2):
-					no += 10;
-				case (book > 0):
-					no += 13;
-				break;
-			}
-			if(sectlength > 1) no += '.' + (section+1)
-		break;
-		case 'm':
-			no = (sutta + 1) + (book*50) + (vagga*10);
-			if (book == 2 && vagga == 4) no += 2;
-			if(sectlength > 1) no += '.' + (section+1)
-		break;
-		case 'a':
-			if(hier != 'm') return;
-			no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
-		break;
-		case 's':
-			if(hier != 'm') return;
-			switch (true) {
-				case (book > 3):
-					vagga += 10;
-				case (book > 2):
-					vagga += 13;
-				case (book > 1):
-					vagga += 10;
-				case (book > 0):
-					vagga += 11;
-				break;
-			}
-			if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
-			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
-		break;
-	}
-	return no;
+
+
+function xmlrefer()
+{
+	var nik = document.getElementById('set').selectedIndex;
+	var book = document.getElementById('book').selectedIndex;
+	var sutta = document.form.sutta.selectedIndex;
+	var sect = document.form.section.selectedIndex;
+	var ref = '<xml>' + nik + ',' + book + ',' + sutta + ',' + sect + '</xml>'
+	document.form.xmlref.value = ref;
 }
 
-
-function getSuttaFromNumber(is) { // should be in array format SN,1,1
-	
-	var nik,book,meta,volume,vagga,sutta,section,hiert;
-
-	// get att, tik
-	
-	if(/-[at]$/.exec(is[0])) {
-		hiert = is[0].split('-')[1];
-		is[0] = is[0].split('-')[0];
-	}
-	else hiert = 'm';
-	
-	is[0] = is[0].toUpperCase();
-	
-	nik = G_nikShortName[is[0]];
-	
-	var a1 = parseInt(is[1]);
-	var a2 = (is[2] ? parseInt(is[2]) : 1);
-	
-	book = 0;
-	
-	switch (nik) {
-		case 'd': // sutta.section to book.vagga.section
-			if(a1 > 34) return;
-			vagga = a1 - 1;
-			switch (true) {
-				case (a1 > 23):
-					vagga -= 10;
-					book++;
-				case (a1 > 13):
-					vagga -= 13;
-					book++;
-				break;
-			}
-			meta = 0;
-			volume = 0;
-			sutta = 0;
-			section = a2-1;
-		break;
-		case 'm': // sutta.section to book.vagga.sutta.section
-			if(a1 > 152) return;
-			sutta = a1 - 1;
-			vagga = Math.floor((sutta > 139 ? sutta-2 : sutta)/10);
-			sutta -= (vagga*10)
-			if (a1 > 142) sutta -= 2;
-			
-			book = Math.floor(vagga/5);
-			vagga -= book*5
-			
-			meta = 0;
-			volume = 0;
-			section = a2-1;
-		break;
-		case 'a':  // book.sutta to book.vagga.sutta.section
-			if(a1 > 11) return;
-			if(hiert != 'm') return;
-			book = a1 - 1;
-			var found = 0;
-			out:
-			for (vagga in amlist[book]) {
-				for(sutta in amlist[book][vagga]) {
-					for(section in amlist[book][vagga][sutta]) {
-						if (parseInt(amlist[book][vagga][sutta][section][0]) == a2 || (parseInt(amlist[book][vagga][sutta][section][0]) < a2 && parseInt(amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]) > a2)) {
-							found = 1;
-							break out;
-						}
-					}
-				}
-			}
-			if(found == 0) return;
-			meta = 0;
-			volume = 0;
-		break;
-		case 's':
-			if(a1 > 5) return;
-			if(hiert != 'm') return;
-			vagga = a1 - 1;
-			switch (true) {
-				case (a1 > 11):
-					vagga -= 11;
-					book++;
-				case (a1 > 21):
-					vagga -= 10;
-					book++;
-				case (a1 > 34):
-					vagga -= 13;
-					book++;
-				case (a1 > 44):
-					vagga -= 10;
-					book++;
-				break;
-			}
-			var found = 0;
-			out:
-			for(sutta in smlist[vagga]) {
-				for(section in smlist[vagga][sutta]) {
-					if (parseInt(smlist[vagga][sutta][section]) == a2) {
-						found = 1;
-						break out;
-					}
-				}
-			}
-			if(found == 0) return;
-			meta = 0;
-			volume = 0;
-		break;
-		default:
-			return;
-		break;
-	}
-	return [nik,book,meta,volume,vagga,sutta,section,hiert];
+function limitt(nikn) {
+	if (nikn == 5 || nikn > 6) { return true; }
+	else { return false };
 }
+
+function switchhier(htmp,stop) {
+
+	if(G_hier == htmp) return;
+	
+	var himg = ['l','m','r'];
+		
+
+	if (htmp == 't' && limitt(document.getElementById('set').selectedIndex)) { 
+		alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
+		document.getElementById((G_hier=='m'?'mul':'att')).checked=true;
+		document.getElementById((G_hier=='m'?'mul':'att')).disabled=true;
+		document.getElementById('tik').removeAttribute('checked');
+		document.getElementById('tik').removeAttribute('disabled');
+		return; 
+	}
+	if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
+		alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
+		document.getElementById('mul').checked=true;
+		document.getElementById('mul').disabled=true;
+		document.getElementById('att').removeAttribute('checked');
+		document.getElementById('att').removeAttribute('disabled');
+		return;
+	}
+	if (document.getElementById('set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('book').value] == undefined) {
+			alert('Aṭṭhakathā not available for '+getBookName(document.getElementById('set').value,htmp,document.getElementById('book').selectedIndex)+'.');
+			document.getElementById('mul').checked=true;
+			document.getElementById('mul').disabled=true;
+			document.getElementById('att').removeAttribute('checked');
+			document.getElementById('att').removeAttribute('disabled');
+		return;
+	}
+
+	G_hier = htmp;
+
+	// style
+	
+	var himg = ['t','c','b'];
+	
+	ha = G_hLetters;
+
+	if (document.getElementById('set').value == 'k') {
+		var book = document.getElementById('book').value;
+		if (htmp == 'm') {
+			book = parseInt(book) - 1;
+			changeSet(1);
+			document.getElementById('book').selectedIndex = book;
+		}
+		else {
+			book = kudvala[book];
+			changeSet(1);
+			document.getElementById('book').selectedIndex = book;
+		}
+	}
+	else if (document.getElementById('set').value == 'y') {
+		var book = document.getElementById('book').value;
+		if (htmp == 'm') {
+			book = parseInt(book) - 1;
+			changeSet(1);
+			document.getElementById('book').selectedIndex = book;
+		}
+		else {
+			book = abhivala[book];
+			changeSet(1);
+			document.getElementById('book').selectedIndex = book;
+		}
+	}
+	updateHierarchy(0,stop);
+	return true;
+}	

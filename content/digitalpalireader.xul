@@ -1,10 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
 <?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://digitalpalireader/content/css/sidebar.css" type="text/css" ?>
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
-<window onunload="digitalpalireader.onUnload()" onload="digitalpalireader.onLoad()" id="sbDPR" title="&digitalpalireader.title;"
+<window style="min-width:250px" onunload="digitalpalireader.onUnload()" onload="digitalpalireader.onLoad()" id="sbDPR" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" >
-  <script type="application/x-javascript" src="overlay.js" />
-	<browser type="content" id="dpr-browser" src="sidebar.htm" flex="1" persist="height"/>
+  	<stringbundleset id="stringbundleset">
+  			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+  	</stringbundleset>
+	<script type="application/x-javascript" src="overlay.js" />
+	<script type="application/x-javascript" src="js/sidebarConfig.js"/>
+	<script type="application/x-javascript" src="js/io.js"/>
+	<script type="application/x-javascript" src="js/prefload.js"/>
+
+	<script type="application/x-javascript" src="js/translit.js"/>
+	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
+	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
+	<script type="application/x-javascript" src="js/format.js"/>
+	<script type="application/x-javascript" src="js/search_func.js"/>
+
+	<script type="application/x-javascript" src="js/chrome.js"/>
+
+	<script type="application/x-javascript" src="js/move.js"/>
+	<script type="application/x-javascript" src="js/send.js"/>
+	<script type="application/x-javascript" src="js/bookmarks.js"/>
+	<script type="application/x-javascript" src="js/sortaz.js"/>
+
+	<script type="application/x-javascript" src="js/history.js"/>
+	<script type="application/x-javascript" src="js/bv.js"/>
+	<script>
+		function devO() {}
+		function dalert(a) {}
+		function ddump(a) {}
+	</script>
+
+	<vbox id="outer" style="background-image:-moz-linear-gradient(left,#DDC,white,#DDC)" flex="1" align="stretch">
+		<spacer id="flexspace" flex="1"/>
+		<hbox persist="height" flex="1" id="container">
+			<hbox flex="1" pack="center" id="cp1">
+				<spacer id="flexspace" flex="1"/>
+				<vbox pack="center" align="center">
+					<caption label="&sSet.label;" />
+					<listbox id="set" rows="7" onclick="changeSet()">
+						<listitem value="v" label="Vinaya"/>
+						<listitem value="d" selected="true" label="Dīgha"/>
+						<listitem value="m" label="Majjhima"/>
+						<listitem value="s" label="Saṃyutta"/>
+						<listitem value="a" label="Aṅguttara"/>
+						<listitem value="k" label="Khuddaka"/>
+						<listitem value="y" label="Abhidhamma"/>
+						<listitem value="x" label="Vism"/>
+						<listitem value="b" label="Abhidh-s"/>
+						<listitem value="g" label="Byākaraṇa"/>
+					</listbox>			
+				</vbox>
+				<vbox pack="center" align="center">
+					<caption label="&sBook.label;" />
+					<listbox rows="7" id="book" onclick="updateHierarchy()">
+						<listitem value="1" label="1" selected="true"/>
+						<listitem value="2" label="2"/>
+						<listitem value="3" label="3"/>
+					</listbox>			
+				</vbox>
+				<vbox pack="center" align="center">
+					<toolbarbutton id="mul" type="radio" group="mat" checked="true" onclick="switchhier('m');" tooltiptext="&mul_text;" role="button">
+						<label value="M" />
+					</toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton id="att" type="radio" group="mat" onclick=" switchhier('a');" tooltiptext="&att_text;" role="button">
+						<label value="A" />
+					</toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton id="tik" group="mat" onclick="switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
+						<label value="T" />
+					</toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton onclick="importXML()" id="go" tooltiptext="&go_text;" role="button">
+						<label value="➤" />
+					</toolbarbutton>
+				</vbox>
+			</hbox>
+			<hbox flex="1" pack="end">
+					<label class="x" tooltip="&close.tip;" onclick="var cp = document.getElementById('cp1'); cp.collapsed=(cp.collapsed==true?false:true)" value="x" />
+			</hbox>
+		</hbox>
+		<splitter id="s1"/>
+		<hbox flex="1" id="container">
+			<spacer id="flexspace" flex="2"/>
+			<hbox pack="center" id="cp2">
+				<vbox>
+					<groupbox orient="vertical">
+						<button id="title" label="title" oncommand="importXMLindex((event.ctrlKey?1:''));"/>
+						<menulist flex="1" class="sel" id="meta" onchange="updateHierarchy(6)">
+							<menupopup>
+							</menupopup>
+						</menulist>
+						<menulist flex="1" class="sel" id="volume" onchange="updateHierarchy(5)">
+							<menupopup>
+							</menupopup>
+						</menulist>
+						<menulist flex="1" class="sel" id="vagga" onchange="updateHierarchy(4)">
+							<menupopup>
+							</menupopup>
+						</menulist>
+						<menulist flex="1" class="sel" id="sutta" onchange="updateHierarchy(3)">
+							<menupopup>
+							</menupopup>
+						</menulist>
+						<menulist flex="1" class="sel" id="section">
+							<menupopup>
+							</menupopup>
+						</menulist>
+					</groupbox>
+				</vbox>
+			</hbox>
+			<spacer id="flexspace" flex="2"/>
+			<hbox align="start" pack="end">
+					<label class="x" tooltip="&close.tip;" onclick="var cp = document.getElementById('cp2'); cp.collapsed=(cp.collapsed==true?false:true)" value="x" />
+			</hbox>
+		</hbox>
+		<splitter id="s2"/>
+		<hbox flex="1" id="container" pack="stretch" persist="height">
+			<spacer id="flexspace" flex="1"/>
+			<vbox>
+				<hbox pack="center">
+					<spacer id="flexspace" flex="1"/>
+					<form id="searchForm">
+						<vbox align="center" id="cp3">
+							<caption label="&searchHead;"/>
+							<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" id="searchin"/>
+							<hbox>
+								<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button">
+									<label value="&dictAdv;" />
+								</toolbarbutton>
+								<menulist flex="1" class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
+									<menupopup>
+										<menuitem tooltip="Search all three nikayas" selected="true" label="The Tipitaka"/>
+										<menuitem tooltip="Search current set" label="This Set"/>
+										<menuitem tooltip="Search current book" label="This Book"/>
+										<menuitem label="---"/>
+										<menuitem tooltip="Search multiple sets" label="Multi. Sets"/>
+										<menuitem tooltip="Search multiple books in the current set" label="Multi. Books"/>
+										<menuitem label="---"/>
+										<menuitem tooltip="Search all three nikayas, choose MAT" label="Tipitaka M,A,T"/>
+										<menuitem tooltip="Search current set, choose MAT" label="This Set M,A,T"/>
+										<menuitem tooltip="Search current book, choose MAT" label="This Book M,A,T"/>
+										<menuitem label="---"/>
+										<menuitem tooltip="Search multiple sets, choose MAT" label="Multi. Sets M,A,T"/>
+										<menuitem tooltip="Search multiple books in the current set, choose MAT" label="Multi. Books MAT"/>
+										<menuitem label="---"/>
+										<menuitem tooltip="Search English suttas from Access To Insight" label="ATI Translations"/>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="mul" tooltiptext="&dict_go;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
+						</vbox>
+					</form>
+					<spacer id="flexspace" flex="1"/>
+
+				</hbox>			
+			</vbox>						
+			<hbox flex="1" align="start" pack="end">
+				<label class="x" tooltip="&close.tip;" onclick="var cp = document.getElementById('cp3'); cp.collapsed=(cp.collapsed==true?false:true)" value="x" />
+			</hbox>
+		</hbox>
+		<splitter id="s3"/>
+		<hbox flex="1" id="container" pack="stretch" persist="height">
+			<spacer id="flexspace" flex="1"/>
+			<form id="dictForm">
+			<vbox align="center" id="cp4">
+				<caption label="&dictHead;"/>
+				<groupbox orient="vertical" align="center">
+					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" id="dictin"/>
+					<hbox>
+						<toolbarbutton class="tiny" tooltiptext="&dictGo.text;" role="button">
+							<label value="adv" />
+						</toolbarbutton>
+						<menulist class="sel" tooltip="Choose a dictionary type - hover over the name for description" name="sped" onchange="dictLoad()">
+							<menupopup>
+								<menuitem tooltip="Analyze Word" selected="true" label="DPR" />
+								<menuitem tooltip="Pali-English Dictionary" label="PED" />
+								<menuitem tooltip="Dict. of Pali Names" label="DPPN" />
+								<menuitem tooltip="Concise Pali-English Dictionary" label="CPED" />
+								<menuitem tooltip="PED, DPPN and CPED combined" value="MULTI" label="Multi" />
+								<menuitem tooltip="Concise English-Pali Dictionary" label="CEPD" />
+								<menuitem tooltip="Aṭṭhakathā Term Search" value="ATT" label="Aṭṭh" />
+								<menuitem tooltip="Ṭīka Term Search" value="TIK" label="Ṭīka" />
+								<menuitem tooltip="Title Search" value="TIT" label="Title" />
+							</menupopup>
+						</menulist>
+						<toolbarbutton id="mul" tooltiptext="&dict_go;" role="button">
+							<label value="➤" />
+						</toolbarbutton>
+					</hbox>
+				</groupbox>
+			</vbox>
+			</form>
+			<spacer id="flexspace" flex="1"/>
+			<hbox align="start" pack="end" onclick="var cp = document.getElementById('cp4'); cp.collapsed=(cp.collapsed==true?false:true)">
+					<label class="x" tooltip="&close.tip;" value="x" />
+			</hbox>
+		</hbox>
+		<splitter id="s4"/>
+		<hbox persist="height" flex="1" id="container" pack="stretch" align="start">
+			<spacer id="flexspace" flex="1"/>
+			<hbox flex="1" id="cp5" align="center" pack="stretch">
+				<spacer id="flexspace" flex="1"/>
+				<hbox>
+					<toolbarbutton onclick="openBookmarkFrame();" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
+						<label value="☆" />
+					</toolbarbutton>
+					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
+						<label value="#" />
+					</toolbarbutton>
+					<toolbarbutton onclick="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));" id="bv" tooltiptext="&bv.label;" role="button">
+						<label value="☸" />
+					</toolbarbutton>
+				</hbox>
+				<spacer id="flexspace" flex="1"/>
+				<hbox>
+					<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
+						<label value="⚙" />
+					</toolbarbutton>
+					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
+						<label value="?" />
+					</toolbarbutton>
+					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
+						<label value="✉" />
+					</toolbarbutton>
+				</hbox>
+				<spacer id="flexspace" flex="1"/>
+			</hbox>
+			<hbox flex="1" pack="end">
+				<label class="x" tooltip="&close.tip;" onclick="var cp = document.getElementById('cp5'); cp.collapsed=(cp.collapsed==true?false:true)" value="x" />
+			</hbox>
+		</hbox>
+		<spacer id="flexspace" flex="1"/>
+	</vbox>
 </window>
 

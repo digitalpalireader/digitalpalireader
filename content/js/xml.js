@@ -11,23 +11,9 @@ matValue['t'] = '';
 
 function loadXMLSection(labelsearch,para,place,isPL,scroll)
 { 
-	moveframex(2);
 	
-	hier = place[7];
-	if (hier == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
-		return; 
-	}
-	if (hier == 'a' && place[0] == 'g') {
-		alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
-		return;
-	}		
-	if (hier == 'a' && place[0] == 'b') {
-		alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
-		return;
-	}		
 
-
+	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = place[0];
@@ -200,7 +186,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 
 	// refresh history box
 
-	var sidebar = findDPRSidebar();
+	var sidebar = DPRSidebarWindow();
 
 	if (sidebar) {
 		sidebar.historyBox();
@@ -237,7 +223,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 
 	// bookmark button
 	
-	var bkbut = '<span class="abut obut small" onclick="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\')">☆</span>';
+	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
 
 	// output toolbar data
 
@@ -347,15 +333,13 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 
 function loadXMLindex(place) {
 	
-	moveframex(1);
-	
 	var DshowH = false; // dev tool
 	DshowH = true; // dev tool
 	
 	document.activeElement.blur();
 	
 	if (place[2] == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}	
 	
@@ -395,7 +379,7 @@ function loadXMLindex(place) {
 	var permalink = 'chrome://digitalpalireader/content/index.xul?';
 	
 	try {
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentmainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
 	}
 	catch(ex) {
 	}
@@ -661,115 +645,9 @@ function loadXMLindex(place) {
 }
 
 
-function gettitles(altget,stop,prev,ssect)
-{
-
-	document.activeElement.blur();
-	var getsutta = 0; // fix this...
-	var newload = 0;
-	
-	if (altget == 3) getsutta = 4; // only remake section lists
-	if (altget == 4) getsutta = 3; // remake section and sutta lists only, not vagga, volume or meta lists
-	if (altget == 5) getsutta = 2; // remake section, sutta and vagga lists only, not volume or meta lists
-	if (altget == 6) getsutta = 1; // remake all but meta lists
-	if (stop == 0) newload = 0; // load xml data
-	if (stop == 1) newload = 1; // don't load xml data
-	if (stop == 2) newload = 2; // don't load xml data, load index instead
-	if (stop == 3) { switchhier(prev); newload = 2 };
-	   
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var meta = (getsutta > 0  ? document.form.meta.selectedIndex : 0);
-	var volume = (getsutta > 1 ? document.form.volume.selectedIndex : 0);
-	var vagga = (getsutta > 2 ? document.form.vagga.selectedIndex : 0);
-	var sutta = (getsutta > 3 ? document.form.sutta.selectedIndex : 0);
 
 
-	var nik = document.form.nik.value;
-	var book = document.form.book.value;
 
-	var xml,axml,lista,list,name,namea;
-	
-	axml = xmlDoc.getElementsByTagName("ha");
-	namea = axml[0].getElementsByTagName("han");
-	if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
-	else name = unnamed;
-	var outname = translit(shortenTitle(name));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+toUni(name)+'" onclick="this.blur; importXMLindex((event.ctrlKey?1:\'\'));">'+outname+'</span>';
-		
-	var u = xmlDoc.getElementsByTagName("h0");
-	var v = u[meta].getElementsByTagName("h1");
-	var w = v[volume].getElementsByTagName("h2");
-	var x = w[vagga].getElementsByTagName("h3");
-	var y = x[sutta].getElementsByTagName("h4");
-	
-	if (getsutta == 0) // remake meta list
-	{
-		lista = makeTitleSelect(u,'h0n');
-		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-			list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
-		}
-		else {
-			list = '<select size="1" name="meta" onChange="gettitles(6)"><option' + lista.join('</option><option')+'</option></select>';
-		}	
-		document.getElementById('meta').innerHTML = list;
-	}
-	
-	if (getsutta < 2) // remake volume list
-	{
-		lista = makeTitleSelect(v,'h1n');
-		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-			list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
-		}
-		else {
-			list = '<select size="1" name="volume" onChange="gettitles(5)"><option' + lista.join('</option><option')+'</option></select>';
-		}	
-		document.getElementById('volume').innerHTML = list;
-	}
-	if (getsutta < 3) // remake vaggalist
-	{
-		lista = makeTitleSelect(w,'h2n');
-		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-			list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
-		}
-		else {
-			list = '<select size="1" name="vagga" onChange="gettitles(4)"><option' + lista.join('</option><option')+'</option></select>';
-		}	
-		document.getElementById('vagga').innerHTML = list;
-	}
-
-	if (getsutta < 4) // remake sutta list on getsutta = 0, 2, or 3
-	{
-		lista = makeTitleSelect(x,'h3n');
-		if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-			list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
-		}
-		else {
-			list = '<select size="1" name="sutta" onChange="gettitles(3)"><option' + lista.join('</option><option')+'</option></select>';
-		}	
-		document.getElementById('sutta').innerHTML = list;
-	}
-	lista = makeTitleSelect(y,'h4n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
-	}
-	else {
-		list = '<select size="1" name="section" onChange="importXML()"><option' + lista.join('</option><option')+'</option></select>';
-	}	
-	document.getElementById('section').innerHTML = list;
-
-	if (prev) document.form.section.selectedIndex = y.length - 1;
-	if (ssect && ssect > 0) document.form.section.selectedIndex = searchsect;
-//	if (newload == 0) importXML();
-//	else if (newload == 2) importXMLindex();
-	getsutta = 0;
-}
 
 
 
@@ -777,14 +655,14 @@ function importXMLraw()
 {
 	document.activeElement.blur();
 	if (hier == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.form.nik.value]+'.','RGBa(255,0,0,0.8)');
+		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
 		return; 
 	}
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
-	var nikaya = document.form.nik.value;
-	var book = document.form.book.value;
+	var nikaya = document.getElementById('set').value;
+	var book = document.getElementById('book').value;
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
 	//alert(bookload);
 
@@ -793,7 +671,7 @@ function importXMLraw()
     xmlhttp.send(null);
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
-	var book = document.form.book.value;
+	var book = document.getElementById('book').value;
 	
 	var meta = document.form.meta.selectedIndex;
 	var volume = document.form.volume.selectedIndex;
@@ -809,7 +687,7 @@ function importXMLraw()
 
 	//titles
 
-	var nikaya = document.form.nik.value;
+	var nikaya = document.getElementById('set').value;
 	var vn = u[meta].getElementsByTagName("h0n");
 	var wn = v[volume].getElementsByTagName("h1n");
 	var xn = w[vagga].getElementsByTagName("h2n");
@@ -844,37 +722,6 @@ function importXMLraw()
 }
 
 
-function xmlrefget()
-{
-	var mark = document.form.selref.value;
-
-	var bookload = 'marks/' + mark + '.xml';
-	xmlDoc.async = false;
-	xmlDoc.load(bookload);
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var precode = xmlDoc.getElementsByTagName("xml"); 	
-	var lumpcode = precode[0].textContent;
-	var codea = lumpcode.split(',');
-	var nik = codea[0];
-	var book = codea[1];
-	var sutta = codea[2];
-	var sect = codea[3];
-	document.form.nik.selectedIndex = nik
-	changenikaya(1);
-	document.form.book.selectedIndex = book;
-	if (document.form.nik.value == 'k') kudpreXML(1);
-	else gettitles(0,1);
-	document.form.sutta.selectedIndex = sutta;
-	gettitles(1,1);
-	document.form.section.selectedIndex = sect;
-	importXML();
-}
-
 var setplace = new Array();
 
 function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section (all sIndex),7=hier(mat) 
@@ -894,7 +741,7 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 			matValue['a'] == '';
 			matValue['t'] == '';
 		}
-		matValue[hier] = document.form.nik.value+'^'+document.form.book.selectedIndex+'^'+document.form.meta.selectedIndex+'^'+document.form.volume.selectedIndex+'^'+document.form.vagga.selectedIndex+'^'+document.form.sutta.selectedIndex+'^'+document.form.section.selectedIndex;
+		matValue[hier] = document.getElementById('set').value+'^'+document.getElementById('book').selectedIndex+'^'+document.form.meta.selectedIndex+'^'+document.form.volume.selectedIndex+'^'+document.form.vagga.selectedIndex+'^'+document.form.sutta.selectedIndex+'^'+document.form.section.selectedIndex;
 	}
 	else { // clear stored values
 		matValue['m'] == '';
@@ -906,16 +753,16 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	var sp0 = setplace[0];
 	var nikaya = document.form.nik[sp0].value;
-	document.form.nik.selectedIndex = sp0;
+	document.getElementById('set').selectedIndex = sp0;
 
-	var nik = document.form.nik.value;
+	var nik = document.getElementById('set').value;
 	var booknumber = setplace[1]; 
 	
 	setBookList(nik); 
         	
-	document.form.book.selectedIndex = booknumber;
+	document.getElementById('book').selectedIndex = booknumber;
 
-	var book = document.form.book.value;
+	var book = document.getElementById('book').value;
 
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
 
@@ -969,10 +816,10 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	lista = makeTitleSelect(u,'h0n');
 	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="meta" class="hide"><option>' + unnamed + '</option></select>';
+		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
 	}
 	else {
-		list = '<select size="1" name="meta" onChange="gettitles(6)">';
+		list = '<menupopup onChange="updateHierarchy(6)">';
 		for (a in lista) {
 			list += '<option'+(a == meta ? ' selected' : '') + lista[a]+'</option>';
 		}
@@ -984,10 +831,10 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	lista = makeTitleSelect(v,'h1n');
 	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="volume" class="hide"><option>' + unnamed + '</option></select>';
+		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
 	}
 	else {
-		list = '<select size="1" name="volume" onChange="gettitles(5)">';
+		list = '<menupopup onChange="updateHierarchy(5)">';
 		for (a in lista) {
 			list += '<option'+(a == volume ? ' selected' : '') + lista[a]+'</option>';
 		}
@@ -999,10 +846,10 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	lista = makeTitleSelect(w,'h2n');
 	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="vagga" class="hide"><option>' + unnamed + '</option></select>';
+		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
 	}
 	else {
-		list = '<select size="1" name="vagga" onChange="gettitles(4)">';
+		list = '<menupopup onChange="updateHierarchy(4)">';
 		for (a in lista) {
 			list += '<option'+(a == vagga ? ' selected' : '') + lista[a]+'</option>';
 		}
@@ -1014,10 +861,10 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	lista = makeTitleSelect(x,'h3n');
 	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="sutta" class="hide"><option>' + unnamed + '</option></select>';
+		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
 	}
 	else {
-		list = '<select size="1" name="sutta" onChange="gettitles(3)">';
+		list = '<menupopup onChange="updateHierarchy(3)">';
 		for (a in lista) {
 			list += '<option'+(a == sutta ? ' selected' : '') + lista[a]+'</option>';
 		}
@@ -1029,10 +876,10 @@ function getplace(temp) { // standard function to get a place from an array 0=ni
 
 	lista = makeTitleSelect(y,'h4n');
 	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<select size="1" name="section" class="hide"><option>' + unnamed + '</option></select>';
+		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
 	}
 	else {
-		list = '<select size="1" name="section" onChange="importXML()">';
+		list = '<menupopup onChange="importXML()">';
 		for (a in lista) {
 			list += '<option'+(a == section ? ' selected' : '') + lista[a]+'</option>';
 		}

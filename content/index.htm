@@ -6,6 +6,12 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
+var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onDocLoad() {
 	//openDPRSidebar();
 	getconfig();
@@ -26,10 +32,23 @@ function onDocLoad() {
 	refreshit();
 	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
 	document.onkeypress = function(e){
+		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);
 	};
 }
 
+function sendTextToConvertor() {
+		if(window.getSelection().toString() != '') {
+			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(window.getSelection().toString()+'');
+		} 
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(document.getElementById('convi').innerHTML); }
+}
+function sendTextToTextpad() {
+		if(window.getSelection().toString() != '') {
+			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(window.getSelection().toString()+'');
+		} 
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML); }
+}
 
 
 </script>
@@ -77,7 +96,7 @@ function onDocLoad() {
 	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
 		<div id="tbOpener" class="tiny">⚙</div>
 		<div id="tbContainer2">
-
+			<div id="MainToolbar" class="obutc"><span class="abut obut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span> <span class="abut obut small" onmousedown="sendTextToTextpad()" title="send text to textpad (e)">export</span></div>
 			<div id="auxToolbar" class="obutc"></div>
 		</div>
 	</div>

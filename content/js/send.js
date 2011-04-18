@@ -1,33 +1,48 @@
 function importXML(labelsearch,para,isPL,add,scroll) {
 
-	var nikaya = document.form.nik.value;
-	var bookno = document.form.book.selectedIndex;
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;	
+	var nikaya = document.getElementById('set').value;
+	var bookno = document.getElementById('book').selectedIndex;
+	var meta = document.getElementById('meta').selectedIndex;
+	var volume = document.getElementById('volume').selectedIndex;
+	var vagga = document.getElementById('vagga').selectedIndex;
+	var sutta = document.getElementById('sutta').selectedIndex;
+	var section = document.getElementById('section').selectedIndex;	
+
+	if (G_hier == 't' && limitt()) { 
+		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
+		return; 
+	}
+	if (G_hier == 'a' && place[0] == 'g') {
+		alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
+		return;
+	}		
+	if (G_hier == 'a' && place[0] == 'b') {
+		alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
+		return;
+	}		
+
+
 
 	if(!add) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-			thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,hier]);
+			thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,G_hier]);
 			return;
 		}
 		var oldTab = findDPRTab('DPR-main');
 		if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
 			openDPRTab('DPR-main',permalink);
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-			oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,hier]);
+			oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,G_hier]);
 		}
 	}
 	else {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
 		openDPRTab('DPRm',permalink);
 	}
 
@@ -72,30 +87,30 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stri
 
 function importXMLindex(add) {
 
-	var nikaya = document.form.nik.value;
-	var bookno = document.form.book.selectedIndex;
+	var nikaya = document.getElementById('set').value;
+	var bookno = document.getElementById('book').selectedIndex;
 
 	if(!add) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-			thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,hier]);
+			thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,G_hier]);
 			return;
 		}
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
+			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
 			openDPRTab('DPR-main',permalink);
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-			oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,hier]);
+			oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,G_hier]);
 		}
 	}
 	else {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+hier;
+		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
 		openDPRTab('DPRm',permalink);
 	}
 }
@@ -255,11 +270,11 @@ function sendSearch(add) {
 			if(document.getElementById('tsoCO'+i).checked) set += i;
 		}
 	}
-	else var set = document.form.nik.value;
+	else var set = document.getElementById('set').value;
 	
 	if(which == 5 || which == 12) {
 		var book = [];
-		for (i = 0; i < nikvoladi[document.form.nik.value]; i++) {
+		for (i = 0; i < nikvoladi[document.getElementById('set').value]; i++) {
 			if(document.getElementById('tsoBObook' + i).checked) book.push(i);
 		}
 		book = book.join(',');
@@ -350,4 +365,3 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		openDPRTab('DPRm',permalink);
 	}	
 }
-

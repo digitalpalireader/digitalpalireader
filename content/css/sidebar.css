@@ -1,0 +1,32 @@
+
+.pointer:hover{
+	cursor:pointer;
+}
+
+.x:hover {
+	cursor:pointer;
+	opacity: 0.8;
+	-moz-opacity: 0.8;
+}
+
+.x {
+	opacity: 0.3;
+	-moz-opacity: 0.3;
+}
+
+caption {
+	font-weight:bold;
+	font-size:16px;
+}
+
+splitter {
+	margin:5px;
+}
+
+listbox {
+	width:auto;
+}
+
+.hide {
+display:none;
+}

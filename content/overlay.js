@@ -10,6 +10,7 @@ var digitalpalireader =
     onLoad: function()
     {
 		window.dump("Load\n");
+		openFirstDPRTab();
 		this.updatePrefs();
 		mainWindow.document.getElementById('sidebar-header').hidden = true;
 	},
@@ -59,8 +60,8 @@ var digitalpalireader =
 		return true;
 	},
 	updatePrefs: function() {
-		findDPRSidebar().getconfig();
-		findDPRSidebar().changenikaya(1);
+		sidebarConfig();
+		changeSet(1);
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];

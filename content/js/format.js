@@ -380,41 +380,10 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 }
 
 
-var maxlength = 21;  // change for display purposes, will affect history as well.
-
-function makeTitleSelect(xml,tag) { // output select tag with titles in options
-	var name, namea;
-	var outlist = [];
-	for (var a = 0; a < xml.length; a++)
-	{
-		name = xml[a].getElementsByTagName(tag);
-		if (name[0].childNodes[0] && name[0].textContent.replace(/ /g,'').length > 0) namea = name[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
-		else {
-			namea = '>'+ unnamed;
-			outlist.push(namea);
-			continue;
-		}
-		
-		namea = ' title="'+toUni(namea)+'">'+ translit(shortenTitle(namea));
-
-		outlist.push(namea);
-	}
-	return outlist;
-}
-
-function shortenTitle(name,no) {
-	var lth = (no ? no : maxlength)
-	name = toUni(name);
-	if(name.length <= lth) return name;
-	name = name.substring(0,lth);
-	name += '...';
-	return name;
-}
-
 function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
-	outputFormattedData('<p> '+text.replace(/(\n|\t)/g,' ') + ' </p>',1); 
+	outputFormattedData('<p> '+text.replace(/\n/g,'<br/>').replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') + ' </p>',1); 
 }
 
 var pleasewait =  document.createElement('div');
@@ -422,7 +391,7 @@ pleasewait.setAttribute('align','center');
 pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 function historyBox() {
-	
+	return;
 	// history
 	
 	var hout = '';

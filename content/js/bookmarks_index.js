@@ -1,4 +1,4 @@
-function bookmarkSavePrompt(loc,name){
+function bookmarkSavePrompt(loc,name,desc){
 
 	var check = {value: false};                  // default the checkbox to false
 
@@ -13,8 +13,6 @@ function bookmarkSavePrompt(loc,name){
 	name = input.value;
 	
 	var scroll = document.getElementById('maf').scrollTop;
-	var desc = window.getSelection().toString();
-		
 
 	var cont = readFile('DPR_Bookmarks');
 	cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');

@@ -2,7 +2,6 @@
 ioCheck = true;
 
 
-
 function readFile(aFileKey)
 {
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
