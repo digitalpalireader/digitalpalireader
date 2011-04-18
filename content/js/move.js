@@ -95,32 +95,6 @@ function go_anchor(mydiv,n){
     document.getElementById(mydiv).scrollTop = document.getElementById(n).offsetTop;
 }
 
-function clearDivs(which) { // place divs to be cleared here
-	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
-		document.getElementById('difhist').innerHTML = '';
-		document.getElementById('difb').innerHTML = '';
-	}
-	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
-		document.getElementById('anfs').innerHTML='';
-		document.getElementById('anfsd').innerHTML='';
-		document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
-		moveframex(moveat);
-	}
-	if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
-		document.getElementById('mafbc').innerHTML='';
-		document.getElementById('matrelc').innerHTML='';
-	}
-	
-	if (!which || which.indexOf('search') > -1) { // search frame stuff
-		document.getElementById('sbfa').innerHTML = '';
-		document.getElementById('sbfb').innerHTML = '';
-		document.getElementById('sbfab').innerHTML = '';
-		document.getElementById('stfb').innerHTML = '';
-		document.getElementById('stfc').innerHTML = '';
-		document.getElementById('showing').innerHTML = '';
-		document.getElementById('searchb').scrollTop = 0;
-	}
-}
 
 function scrollToId(a,b) {
 	if(a=='search') a = 'sbfbc';

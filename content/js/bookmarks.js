@@ -148,7 +148,7 @@ function updatecookielist()
 			allcookies +=  '<option value="' + name + '">' + name2 + '</option>';
 		}
 	}
-	document.form.bmlist.innerHTML = allcookies;	
+	//document.form.bmlist.innerHTML = allcookies;	
 }
 
 function erasecookie(name)

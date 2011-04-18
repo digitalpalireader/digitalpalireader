@@ -20,9 +20,13 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
 <script>
 function onDocLoad() {
-
 	getconfig();
 	if(document.location.href.indexOf('?') > -1) searchTipitaka();		
+}
+function scrollToId(a,b) {
+	if(a=='search') a = 'sbfbc';
+	if(a=='dif') a = 'cdif';
+	document.getElementById(a).scrollTop=(typeof(b) == 'number' ? b : document.getElementById(b).offsetTop);
 }
 
 // external dev function
@@ -81,10 +85,6 @@ else { // null functions
 	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
-
-
 	<!--<script> 
 		if(ft.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="f">French</option>';
 		if(gt.length != 0) document.getElementById('cpdlanglist').innerHTML+='<option value="g">German</option>';
@@ -96,5 +96,16 @@ else { // null functions
 	</script> -->
 	<div id="alertc"><span id="alert"></span></div>
 </div>
+<script>
+if (G_prefs['catioff']) { 
+	var nsrc = 'file://'+ G_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
+}
+else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
+
+var newScript = document.createElement('script');
+newScript.type = 'text/javascript';
+newScript.src = nsrc;
+headID.appendChild(newScript);
+</script>
 </body>
 </html>

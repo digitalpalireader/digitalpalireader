@@ -14,21 +14,6 @@ function getconfig() {
 		G_prefs[i] = getPref(i);
 	}
 
-	// Add ATI translations if preferred
-	if (G_prefs['ctrans'] && typeof(atiD) == 'undefined' && atiIns == 0) {
-		if (G_prefs['catioff']) { 
-			var nsrc = 'file://'+ G_prefs['catiloc'] + 'html/tech/digital_pali_reader_suttas.js';
-		}
-		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
-		atiIns = 1;
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = nsrc;
-		headID.appendChild(newScript);
-	}
-	
-
 	// update backgrounds
 		
 	checkbackground();

@@ -249,7 +249,7 @@ function sendSearch(add) {
 	}
 	else var MAT = hier;
 
-	if(which == 0 || which == 4 || which == 7 || which == 11) {
+	if(which == 0 || which == 4 || which == 7 || which == 11 || which == 14) {
 		var set = ''
 		for (i in G_nikToNumber) {
 			if(document.getElementById('tsoCO'+i).checked) set += i;

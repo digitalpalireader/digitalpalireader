@@ -937,10 +937,10 @@ function showonly(string) {
 function atiSearchStart() {
 
 	document.getElementById('sbfb').appendChild(pleasewait);
-	
-	var getstring = document.form.usearch.value;
 
-	var atiurl = (G_prefs['catioff'] ? 'file://' + getHomePath().replace(/\\/g, '/') +'/'+G_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
+	var getstring = G_searchString;
+
+	var atiurl = (G_prefs['catioff'] ? 'file://' + G_prefs['catioff']+'html/' : 'http://www.accesstoinsight.org/');
 
 	if(G_prefs['catioff']) {
 		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
@@ -968,10 +968,10 @@ function atiSearchStart() {
 
 
 function atiSearchOffline(d, getstring) {
-
+	
 	var nikA = ['d','m','s','a','k'];
 
-	while (!document.getElementById('tsoCO'+nikA[d]).checked) {	
+	while (G_searchSet.indexOf(nikA[d]) == -1) {	
 		d++;
 		if(d == nikA.length) { // end
 			scrollToId('search',0);
@@ -998,7 +998,7 @@ function atiSearchOffline(d, getstring) {
 	
 	eval('var anik = ati'+nik.toUpperCase()+';');
 	for (var c = 0; c < anik.length; c++) {
-		var cont = readExtFile(G_prefs['catiloc']+'/html/tipitaka/'+anik[c]);
+		var cont = readExtFile(G_prefs['catiloc']+'html/tipitaka/'+anik[c]).join('\n');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
 		var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
@@ -1038,7 +1038,7 @@ function atiSearchOffline(d, getstring) {
 					}
 
 					postpara = postpara.replace(/<c0>/g, '<span style="color:'+G_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://' + getHomePath().replace(/\\/g, '/') +'/'+G_prefs['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+G_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+G_prefs['catiloc']+'html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+G_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
 				}
 			}
 		}
