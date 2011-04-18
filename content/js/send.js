@@ -303,6 +303,14 @@ function openBookmarkFrame() {
 	}
 }
 
+function sendUpdateBookmarks() {
+	var oldTab = findDPRTab('DPR-bm');
+	if (oldTab) {
+		var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+		oldTabBrowser.contentWindow.bookmarkframe();
+	}
+}
+
 var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){

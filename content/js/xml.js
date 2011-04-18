@@ -235,9 +235,13 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 		var modt = 	(modno ? ' (<b class="small" style="color:'+G_prefs['colsel']+'">' + G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
 	}
 
+	// bookmark button
+	
+	var bkbut = '<span class="abut obut small" onclick="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\')">☆</span>';
+
 	// output toolbar data
 
-	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + '</td><td id="maftrans" align="right"></td></tr><table>'
+	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + '</td><td id="maftrans" align="right"></td></tr><table>'
 	
 
 	// output header

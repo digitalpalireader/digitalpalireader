@@ -27,7 +27,9 @@ function getconfig() {
 	document.getElementById('dpr-index-top').contentWindow.getconfig();
 	document.getElementById('dpr-index-bottom').contentWindow.getconfig();
 }
-  
+function devO() {}
+function dalert(a) {}
+function ddump(a) {} 
 </script>
 	<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
                     <splitter id="PanelSplitter"/>
