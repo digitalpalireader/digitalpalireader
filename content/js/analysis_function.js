@@ -783,6 +783,26 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}				
 
+		// `ar ending words in compounds
+
+			if (oneword.charAt(oneword.length-1) == 'a' && nextpart.charAt(0) != 'a' && oneword.length > 3)
+			{
+				if (!isUncomp(oneword+'r',lastpart,nextpart)) { // feminine aa > ar
+					var trickmatch = findmatch(oneword+'r',lastpart,nextpart,partslength,1);
+					if (trickmatch) { 
+						if(devCheck > 0 && devDump == 1) devO('trick7a');
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
+					} 
+				}
+				if (!isUncomp(oneword.slice(0,-1)+'r',lastpart,nextpart)) { // feminine aa > ar
+					var trickmatch = findmatch(oneword.slice(0,-1)+'r',lastpart,nextpart,partslength,2);
+					if (trickmatch) { 
+						if(devCheck > 0 && devDump == 1) devO('trick7b');
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
+					} 
+				}
+			}				
+
 	// compounded conjugations, sandhi
 
 		// m as in ...

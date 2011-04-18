@@ -5,7 +5,7 @@ var G_altStem = []; //[i][0][j] is a replacement ending, [i][1] tells us it was 
 
 // n to n
 G_altStem['iy'] = [['a'],0,0,0,'a'];
-G_altStem['ik'] = [['aka','a'],0,0,0,'a'];
+G_altStem['iik'] = [['aka','a'],0,0,0,'a'];
 G_altStem['in'] = [['i'],0,0,0,'ii'];
 
 // v to v
@@ -106,6 +106,7 @@ G_indeclinableEnding["aati"] = [[['ti','ti']],['a','aa']];
 G_indeclinableEnding["uuti"] = [[['ti','ti']],['u','uu']];
 G_indeclinableEnding["oti"] = [[['ti','ti']],['o','o']];
 G_indeclinableEnding["pi"] = [[['pi','pi']]];
+G_indeclinableEnding["api"] = [[['api','api']]];
 G_indeclinableEnding["~nhi"] = [[['hi','hi']],['.m','~n']];
 G_indeclinableEnding["va"] = [[['va','va']]];
 G_indeclinableEnding["~n~neva"] = [[['eva','eva']],['.m','~n~n']];
@@ -120,9 +121,11 @@ G_indeclinableEnding["osi"] = [[['si','atthi']],['a','o']];
 G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']]];
 G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']],['i','']];
 G_indeclinableEnding["aavuso"] = [[['aavuso','aavuso']],['a','']];
+G_indeclinableEnding["tveva"] = [[['tv','tu'],['eva','eva']]];
 G_indeclinableEnding["vevassa"] = [[['ev','eva'],['assa','assa4']],['u','v']];
 G_indeclinableEnding["paaha.m"] = [[['p','pi'],['aha.m','aaha.m']]];
 G_indeclinableEnding["oha.m"] = [[['ha.m','aha.m']],['o','o']];
+G_indeclinableEnding["~nca"] = [[['ca','ca']],['.m','~n']];
 G_indeclinableEnding["~ncida.m"] = [[['c','ca'],['ida.m','aya.m']],['.m','~n']];
 G_indeclinableEnding["pissa"] = [[['pi','pi'],['ssa','assa4']]];
 G_indeclinableEnding["hamasmi"] = [[['ham','aha.m'],['asmi','atthi']]];

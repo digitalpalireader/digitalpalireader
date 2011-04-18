@@ -6,7 +6,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
-function openDPRTab(permalink,id,reuse) {
+function openDPRTab(permalink,id) {
 
 	// get last DPR tab
 
@@ -37,7 +37,7 @@ function openDPRTab(permalink,id,reuse) {
 
 }
 
-function openDPRMain(id,link,place) {
+function openDPRMain(id,link) {
 	// get last DPR tab
 
 	var start = 0;  // no DPR tabs yet

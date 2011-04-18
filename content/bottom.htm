@@ -12,14 +12,18 @@ function onDocLoad() {
 	//openDPRSidebar();
 	if(document.location.href.indexOf('?') > -1) getLinkPlaceBottom();
 	
-	var abv = bv();
-	
-	document.getElementById('difb').innerHTML = '<b class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
-    document.getElementById('cdif').scrollTop=0;
-
+	document.onkeypress = function(e){
+		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);
+	};
+	showBv();
 }
 
-
+function showBv() {
+	var abv = bv();
+    document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+	document.getElementById('difb').innerHTML = '<b class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
+    document.getElementById('cdif').scrollTop=0;
+}
 
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
@@ -55,7 +59,7 @@ function onDocLoad() {
 		
 	</div>
 
-	<div id="rightbot">
+	<div id="bottom">
 		<div id="difout">
 			<div id="cdif">
 				<div id="dif" class="paperback">
@@ -143,38 +147,37 @@ function onDocLoad() {
 			</div>
 		</div>	
 	</div>
-
-	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/tiklist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/titles.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
-	
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
-
 	<div id="alertc"><span id="alert"></span></div>
 </div>
+
+<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/convert.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/nameno.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/tiklist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/titles.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/analysis_output.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
+
+
 <script>
 	
 	var devCheck = 0;

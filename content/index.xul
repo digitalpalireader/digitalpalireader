@@ -4,6 +4,8 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="js/keypress_index.js" />
+  <script type="application/x-javascript" src="js/prompt.js" />
 <script>
 function onLoad() {
 	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)

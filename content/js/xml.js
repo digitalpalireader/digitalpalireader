@@ -181,7 +181,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 		break;
 	}
 	
-	var nextprev = (prev ? '<span class="lbut abut small" onclick="openPlace([\''+prev.join("\',\'")+'\']);">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span class="rbut abut small" onclick="openPlace([\''+next.join("\',\'")+'\']);">»</span>':'<span class="rbut abut small">&nbsp;</span>');
+	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onclick="openPlace([\''+prev.join("\',\'")+'\']);">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onclick="openPlace([\''+next.join("\',\'")+'\']);">»</span>':'<span class="rbut abut small">&nbsp;</span>');
 
 	var hierb = hier;
 	

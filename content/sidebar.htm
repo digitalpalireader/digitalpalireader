@@ -132,6 +132,7 @@ function onDocLoad() {
 							</div>
 						</div>
 					<hr />
+<!--
 						<div name="ioDep" class="cpcont">
 							<div class="cp-d small" title="toggle section" onmouseup="cpFlatten('cp4');">x</div>
 							<div class="pointer hide tiny" id="cp4t" title="toggle section" onmouseup="cpFlatten('cp4');">Bookmarks</div>
@@ -146,7 +147,8 @@ function onDocLoad() {
 									</div>
 							</div>
 						</div>
-					<hr name="ioDep" />
+					<hr />
+-->
 						<div class="cpcont">
 							<div class="cp-d small" title="toggle section" onmouseup="cpFlatten('cp5');">x</div>
 							<div class="pointer hide tiny" id="cp5t" title="toggle section" onmouseup="cpFlatten('cp5');">Text Search</div>
@@ -321,14 +323,12 @@ function onDocLoad() {
 							<div class="cpt" id="cp7">
 								<table>
 									<tr>
+										<!-- ⚠✔ -->
 										<td class="buttont">
-											<span class="abut lbut" title="Set configuration (%)" onmouseup="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">⚙</span><span class="abut rbut" title="Reset configuration (!)" onmouseup="eraseOptions();">⚠</span>
+											<span class="abut lbut" title="Bookmarks" onmouseup="openBookmarkFrame();">☆</span><span class="abut mbut" title="Pali Quiz (#)" onmouseup="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);">#</span><span class="abut rbut" title="Quote of the Moment (*)" onmouseup="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));">☸</span>
 										</td>
 										<td class="buttont">
-											<span class="abut lbut" title="Pali Quiz (#)" onmouseup="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);">✔</span><span class="abut rbut" title="Quote of the Moment (*)" onmouseup="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));">☸</span>
-										</td>
-										<td class="buttont">
-											<span class="abut lbut" title="Help (?)" onmouseup="openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1)">?</span><span class="abut rbut" title="Send Feedback (@)" onmouseup="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);">✉</span>
+											<span class="abut lbut" title="Set configuration (%)" onmouseup="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">⚙</span><span class="abut mbut" title="Help (?)" onmouseup="openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1)">?</span><span class="abut rbut" title="Send Feedback (@)" onmouseup="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);">✉</span>
 										</td>
 										<script>
 										// external dev function
@@ -360,7 +360,6 @@ function onDocLoad() {
 								</table>			
 							</div>
 						</div>
-					<hr />
 				<input id="manrem" type="hidden" value="0">
 					</td>
 				</tr>

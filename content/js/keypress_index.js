@@ -3,80 +3,53 @@ document.onkeypress = keyPressed;
 function keyPressed(e) {
 	var dTop = document.getElementById('dpr-index-top').contentDocument;
 	var dBot = document.getElementById('dpr-index-bottom').contentDocument;
+
+	var wTop = document.getElementById('dpr-index-top').contentWindow;
+	var wBot = document.getElementById('dpr-index-bottom').contentWindow;
 	
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 
-	if(document.form) { // sidebar
-		if (e.charCode == 103) { importXML(); return; } // g
-	}
-	
-	if (e.charCode == 49) { // 1
-		if(document.getElementById('Qa1')) { f = document.getElementById('Qa1').onclick; f(); }
-		else if(document.getElementById('QcheckAns')) { f = document.getElementById('QcheckAns').onclick; f(); }
-		else moveframex(1); 
-		return; 
-	} 
-	if (e.charCode == 50) { // 2
-		if(document.getElementById('Qa2')) { f = document.getElementById('Qa2').onclick; f(); }
-		else if(document.getElementById('Qclear')) { f = document.getElementById('Qclear').onclick; f(); }
-		else moveframex(2); 
-		return; 
-	} 
-	if (e.charCode == 51) { // 3
-		if(document.getElementById('Qa3')) { f = document.getElementById('Qa3').onclick; f(); }
-		else if(document.getElementById('Qshow')) { f = document.getElementById('Qshow').onclick; f(); }
-		else moveframex(3); 
-		return; 
-	} 
-	if (e.charCode == 52) { // 4
-		if(document.getElementById('Qa4')) { f = document.getElementById('Qa4').onclick; f(); }
-		else if(document.getElementById('Qnew')) { f = document.getElementById('Qnew').onclick; f(); }
-		return; 
-	} 
-
-	if (e.charCode == 120) { moveframec(); return; } // x
-
 	if (e.charCode == 115) {  // s
 		if(getSelected() != '') {
-			sendtoconvert(getSelected()+'');
+			wBot.sendtoconvert(getSelected()+'');
 		} 
-		else if(document.getElementById('convi')) { sendtoconvert(document.getElementById('convi').innerHTML); }
+		else if(dTop.getElementById('convi')) { wBot.sendtoconvert(dTop.getElementById('convi').innerHTML); }
 		else alertFlash('You must select some text to send to the convertor','yellow');
 		return; 
 	}
 
 	if (e.charCode == 101) {  // e
 		if(getSelected() != '') {
-			sendtoPad(getSelected()+'');
+			wBot.sendtoPad(getSelected()+'');
 		} 
-		else if(document.getElementById('convi')) { sendtoPad(document.getElementById('convi').innerHTML); }
+		else if(dTop.getElementById('convi')) { wBot.sendtoPad(dTop.getElementById('convi').innerHTML); }
 		else alertFlash('You must select some text to send to the textpad','yellow');
 		return; 
 	}
 
 
-	if (e.charCode == 112) { createTablep(); return; } // p
-	if (e.charCode == 110) { createTablen(); return; } // n
+	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onclick(); return }  // p
+	if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onclick(); return } // n
 
-	if (e.charCode == 100) { moveframey('cdif'); return; } // d
-	if (e.charCode == 99) { moveframey('cof'); return; } // c
-	if (e.charCode == 116) { moveframey('scf'); return; } // t
+	if (e.charCode == 100) { wBot.moveframey('cdif'); return; } // d
+	if (e.charCode == 99) { wBot.moveframey('cof'); return; } // c
+	if (e.charCode == 116) { wBot.moveframey('scf'); return; } // t
 
-	if (e.charCode == 33) { eraseOptions(); return; } // !
-	if (e.charCode == 35) { newquiz(); return; } // #
-	if (e.charCode == 37) { loadOptions(); return; } // %
-	if (e.charCode == 42) { bv(); return; } // *
-	if (e.charCode == 63) { helpXML(); return; } // ?
+//	if (e.charCode == 35) { newquiz(); return; } // #
+//	if (e.charCode == 33) { eraseOptions(); return; } // !
+	if (e.charCode == 37) {  window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome'); return; } // %
+	if (e.charCode == 98) { wBot.showBv(); return; } // b
+	if (e.charCode == 63) { openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1); return; } // ?
 
 	if (e.charCode == 44) { // ,
-		if(document.getElementById('tout') || document.getElementById('bout')) { f = document.getElementById('tout').onclick; f(); }
-		else createTablep();
+		if(dBot.getElementById('tout') || dBot.getElementById('bout')) { dBot.getElementById('tout').onclick(); }
+		else if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onclick();
 		return; 
 	} 
 	
 	if (e.charCode == 46) { // .
-		if(document.getElementById('tout') || document.getElementById('bout')) { f = document.getElementById('bout').onclick; f(); } 
-		else createTablen(); 
+		if(dBot.getElementById('tout') || dBot.getElementById('bout')) dBot.getElementById('bout').onclick(); 
+		else if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onclick();
 		return; 
 	} 
 	
@@ -103,17 +76,17 @@ function keyPressed(e) {
 		
 		place = place.replace(/^([DMASKdmask][Nn]-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 		
-		var outplace = getSuttaFromNumber(place.split(','));
-		if(!outplace) return alertFlash('Link not found','yellow');
+		var outplace = wTop.getSuttaFromNumber(place.split(','));
+		if(!outplace) return wTop.alertFlash('Link not found','yellow');
 		//dalert(outplace);
-		openPlace(outplace);
+		wTop.openPlace(outplace);
 				
 		return; 
 	} 
 
-	if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // r
+	if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.xul'; return;} // r
 		
-	//devO(e.charCode);
+	//alert(e.charCode);
 }
 
 var G_keysList = [];

@@ -1564,6 +1564,7 @@ G_irregDec['saayanha'] = ['saaya.nha','N'];
 G_irregDec['udosita'] = ['uddosita','N'];
 G_irregDec['bassa'] = ['vassa','N'];
 G_irregDec['paahuneyya'] = ['paahu.neyya','N'];
+G_irregDec['balibadda'] = ['balivadda','N'];
 G_irregDec['baliibadda'] = ['balivadda','N'];
 G_irregDec['kha.lu"nka'] = ['khalu"nka','N'];
 G_irregDec['adhippayaasa'] = ['adhippaayosa','N'];

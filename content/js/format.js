@@ -411,10 +411,10 @@ function shortenTitle(name,no) {
 	return name;
 }
 
-function analyzeTextPad() {
+function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
-	outputFormattedData('<p> '+document.getElementById('pad').value.replace(/(\n|\t)/g,' ') + ' </p>',1); 
+	outputFormattedData('<p> '+text.replace(/(\n|\t)/g,' ') + ' </p>',1); 
 }
 
 var pleasewait =  document.createElement('div');
