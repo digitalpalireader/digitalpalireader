@@ -1,8 +1,6 @@
 document.onkeypress = keyPressed;
 
 function keyPressed(e) {
-	var dTop = document.getElementById('dpr-index-top').contentDocument;
-	var dBot = document.getElementById('dpr-index-bottom').contentDocument;
 	
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 

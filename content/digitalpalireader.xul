@@ -61,7 +61,7 @@
 		<grippy/>
     </splitter>
    		<vbox id="container" align="stretch">
-			<button id="title" label="title" oncommand="importXMLindex(DPRSend.eventSend(event));"/>
+			<button id="title" label="title" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
 			<menulist flex="1" class="sel" id="meta" onchange="DPRNav.updateHierarchy(6)">
 				<menupopup>
 				</menupopup>

@@ -5,6 +5,7 @@ padding:10px;
 }
 
 menulist {
+	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
 	min-height:28px;
 	max-height:34px;
 }

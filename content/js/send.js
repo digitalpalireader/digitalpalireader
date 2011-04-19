@@ -20,8 +20,8 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stri
 		}
 		var oldTab = findDPRTab('DPR-main');
 		if (!oldTab) {		
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
-			openDPRTab('DPR-main',permalink);
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
+			openDPRTab(permalink,'DPR-main');
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
@@ -30,8 +30,8 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stri
 		}
 	}
 	else {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
-		openDPRTab('DPRm',permalink);
+		var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
+		openDPRTab(permalink,'DPRm');
 	}
 }
 
@@ -51,8 +51,8 @@ function importXMLindex(add) {
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
-			openDPRTab('DPR-main',permalink);
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+			openDPRTab(permalink,'DPR-main');
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
@@ -61,8 +61,8 @@ function importXMLindex(add) {
 		}
 	}
 	else {
-		var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
-		openDPRTab('DPRm',permalink);
+		var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+		openDPRTab(permalink,'DPRm');
 	}
 }
 

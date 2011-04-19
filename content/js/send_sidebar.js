@@ -16,7 +16,7 @@ var DPRSend = {
 		var sutta = document.getElementById('sutta').selectedIndex;
 		var section = document.getElementById('section').selectedIndex;	
 
-		if (G_hier == 't' && limitt()) { 
+		if (G_hier == 't' && DPRNav.limitt()) { 
 			alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
 			return; 
 		}
@@ -54,6 +54,36 @@ var DPRSend = {
 			DPRChrome.openDPRTab('DPRm',permalink);
 		}
 
+	},
+
+	importXMLindex:function(add) {
+
+		var nikaya = document.getElementById('set').value;
+		var bookno = document.getElementById('book').selectedIndex;
+
+		if(!add) { // reuse old tab
+			var thisTab = DPRChrome.isThisDPRTab('DPRm');
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,G_hier]);
+				return;
+			}
+			var oldTab = DPRChrome.findDPRTab('DPR-main');
+
+			if (!oldTab) {
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+				DPRChrome.openDPRTab(permalink,'DPR-main');
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,G_hier]);
+			}
+		}
+		else {
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+			DPRChrome.openDPRTab(permalink,'DPRm');
+		}
 	},
 
 	openPlace:function([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stringra,add) {
@@ -173,8 +203,6 @@ var DPRSend = {
 		
 		var which = document.getElementById('tipType').selectedIndex;
 		
-		if(which == 3 || which == 6 || which == 10 || which == 13) return;
-		
 		if(which == 15) { // Dev
 			DevInput(document.getElementById('isearch').value);
 			return;
@@ -208,7 +236,7 @@ var DPRSend = {
 		var rx = document.getElementById('tsoRx').checked;
 
 		if(!add) { // reuse old tab
-			var oldTab = findDPRTab('DPR-search');
+			var oldTab = DPRChrome.findDPRTab('DPR-search');
 
 			if (!oldTab) {
 				var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.getElementById('isearch').value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;

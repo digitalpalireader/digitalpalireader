@@ -10,7 +10,7 @@ var digitalpalireader =
     onLoad: function()
     {
 		window.dump("Load\n");
-		DPRChrome.openFirstDPRTab();
+		if(!DPRChrome.giveIDtoTabs()) DPRChrome.openFirstDPRTab();
 		this.updatePrefs();
 		mainWindow.document.getElementById('sidebar-header').hidden = true;
 	},
@@ -25,6 +25,8 @@ var digitalpalireader =
 	onPageLoad: function(e)
 	{
         window.dump("onLoad\n");
+		
+
 		var tab = e.target;
 
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
@@ -33,6 +35,7 @@ var digitalpalireader =
 
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
 			if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+				if(currentTab == tab) mainWindow.gBrowser.setIcon(tab, "chrome://digitalpalireader/skin/icons/logo.png");
 				return false; // still one open tab
 			}
 		}

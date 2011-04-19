@@ -183,7 +183,7 @@ function updatePrefs(close) {
 		var sidebarWindow = mainWindow.document.getElementById("sidebar").contentWindow;
 
 		if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-			sidebarWindow.updatePrefs();
+			sidebarWindow.digitalpalireader.updatePrefs();
 		} 
 	}
 

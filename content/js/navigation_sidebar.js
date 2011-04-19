@@ -282,11 +282,12 @@ var DPRNav = {
 			
 			var newCheck = document.createElement('checkbox');
 			newCheck.setAttribute('checked',true);
+			newCheck.setAttribute('class','tiny');
 			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
 			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			if(i == Math.ceil(titles.length/2)) {
 				bookNode2 = document.getElementById('tsoBOB');
-				while(bookNode2.itemCount > 0) bookNode2.removeItemAt(0);
+				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
 			}
 			bookNode2.appendChild(newCheck);
 		}

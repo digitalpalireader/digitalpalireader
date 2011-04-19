@@ -1,5 +1,27 @@
 
 var DPRChrome = {
+	giveIDtoTabs:function() { // startup function, give ids to 
+		
+		var main = 0; //no main dpr tabs
+		var dict = 0; // no dict tabs
+		var search = 0; // no dict tabs
+		var etc = 0;
+		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+
+			// Get the next tab
+			var currentTab = tabbrowser.tabContainer.childNodes[index];
+			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && !/^DPR/.exec(currentTab.getAttribute('id'))) { // not a dpr tab
+				mainWindow.gBrowser.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
+				if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
+				else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
+				else if(/search\.htm/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
+				else currentTab.setAttribute('id',(etc++==0?'DPR-x':'DPRx'));
+			}
+		}	
+		if(main > 0) return true;
+		return false;	
+	},
 	openDPRTab:function(permalink,id,reuse) {
 
 

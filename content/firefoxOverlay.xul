@@ -14,10 +14,15 @@
         <toolbarbutton id="dpr-button"     label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
     </toolbarpalette>
     <statusbar id="status-bar">
-        <statusbarpanel id="DPRStatusBar" role="button"
+        <statusbarpanel id="DPRStatusBar" 
+						role="button" 
+						context="_child"
                         observes="viewDPR"
                         tooltiptext="Digital Pali Reader">
-            <image id="dpr-button" />
+			<toolbarbutton id="dpr-statusbar-button"
+			  	class="toolbarbutton-1"
+				image="chrome://digitalpalireader/skin/icons/logo.png"
+				orient="horizontal"/>
         </statusbarpanel>
     </statusbar>
   
