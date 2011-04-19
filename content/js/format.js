@@ -8,7 +8,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 	G_lastcolour = 0; // reset colour changing
 
-	var inarray = preparepali(data);
+	var inarray = preparepali(data,which);
 		
 	var finout = inarray[0];
 
@@ -180,7 +180,7 @@ function formatuniout(data,which) { // prepare without links
 				
 				var cm = wb.search('<xc>');
 
-				if (which) {  
+				if (which == 1) {  
 					finout += cno + translit(toUni(wb.substring(0,cm)))+'<xc>'; b++;
 				}
 				else {
@@ -193,7 +193,7 @@ function formatuniout(data,which) { // prepare without links
 				wb = wb.substring(cm+4);
 			}
 			if(wb.length > 0) { // anything left?
-				if (which) {  
+				if (which == 1) {  
 					finout += translit(toUni(wb)); b++;
 				}
 				else {
@@ -202,7 +202,7 @@ function formatuniout(data,which) { // prepare without links
 				}
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
-			if(!which) {// put it together as one link
+			if(!which == 1) {// put it together as one link
 				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
 			}
 			finout += space;
@@ -212,7 +212,7 @@ function formatuniout(data,which) { // prepare without links
 		else if (/^<f/.exec(wb)) {
 			finout += wb + space;
 		}		
-		else if (/^<p/.exec(wb)) {
+		else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
 			var permalink = wb.substring(2,wb.length-1);
 			convout += '\n\n';
 			finout += '<p id="para'+paran+'">'+(G_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
@@ -242,7 +242,7 @@ function formatuniout(data,which) { // prepare without links
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
 			finout += ' <a class="tiny" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a>' + space;
 		}
-		else if (which)
+		else if (which == 1)
 		{
 			convout += wb + space;
 			unioutb = uniouta[a];
@@ -383,7 +383,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
-	outputFormattedData('<p> '+text.replace(/\n/g,'<br/>').replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') + ' </p>',1); 
+	outputFormattedData('<p> '+text.replace(/\n/g,'<br/>').replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') + ' </p>',2); 
 }
 
 var pleasewait =  document.createElement('div');

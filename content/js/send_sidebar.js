@@ -6,8 +6,58 @@ var DPRSend = {
 		return false;
 	},
 
+	importXML:function(labelsearch,para,isPL,add,scroll) {
 
-	sendAnalysisToOutput: function (input, divclicked, frombox, add) {
+		var nikaya = document.getElementById('set').value;
+		var bookno = document.getElementById('book').selectedIndex;
+		var meta = document.getElementById('meta').selectedIndex;
+		var volume = document.getElementById('volume').selectedIndex;
+		var vagga = document.getElementById('vagga').selectedIndex;
+		var sutta = document.getElementById('sutta').selectedIndex;
+		var section = document.getElementById('section').selectedIndex;	
+
+		if (G_hier == 't' && limitt()) { 
+			alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
+			return; 
+		}
+		if (G_hier == 'a' && place[0] == 'g') {
+			alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
+			return;
+		}		
+		if (G_hier == 'a' && place[0] == 'b') {
+			alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
+			return;
+		}		
+
+
+
+		if(!add) { // reuse old tab
+			var thisTab = DPRChrome.isThisDPRTab('DPRm');
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,G_hier]);
+				return;
+			}
+			var oldTab = DPRChrome.findDPRTab('DPR-main');
+			if (!oldTab) {
+				var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+				openDPRTab('DPR-main',permalink);
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,G_hier]);
+			}
+		}
+		else {
+			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+			DPRChrome.openDPRTab('DPRm',permalink);
+		}
+
+	},
+
+
+	sendAnalysisToOutput: function (input, frombox, add) {
 
 		if(!add) { // reuse old tab
 			var thisTab = DPRChrome.isThisDPRTab('DPRm');
@@ -18,8 +68,8 @@ var DPRSend = {
 			}
 			var oldTab = DPRChrome.findDPRTab('DPR-main');
 			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&options='+frombox;
-				DPRChrome.openDPRTab('DPR-main',permalink);
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox;
+				DPRChrome.openDPRTab(permalink,'DPR-main');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
@@ -28,14 +78,13 @@ var DPRSend = {
 			}
 		}
 		else {
-			var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
-			DPRChrome.openDPRTab('DPRm',permalink);
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&frombox='+frombox;
+			DPRChrome.openDPRTab(permalink,'DPRm');
 		}	
 	},
 
 
 	sendDict: function (hard,add) {
-
 		var getstring = document.getElementById('dictin').value;
 
 		if(!hard) {
@@ -45,10 +94,9 @@ var DPRSend = {
 		this.G_lastsearch = this.value;
 
 		var which = document.getElementById('dictType').value;
-
 		if (which == 'DPR') {
 			var text = toVel(getstring);
-			this.sendAnalysisToOutput(text,null,(hard ? null : 1),add);
+			this.sendAnalysisToOutput(text,(hard ? null : 1),add);
 			return;
 		}
 		
@@ -68,7 +116,7 @@ var DPRSend = {
 		if(hard) opts.push('hd');
 
 		if(!add) { // reuse old tab
-			var oldTab = findDPRTab('DPR-dict');
+			var oldTab = DPRChrome.findDPRTab('DPR-dict');
 			if (!oldTab) {
 			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + toVel(getstring) + '&opts=' + opts.join(',');
 				DPRChrome.openDPRTab(permalink,'DPR-dict');

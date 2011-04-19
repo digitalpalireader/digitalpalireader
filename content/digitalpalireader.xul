@@ -8,27 +8,6 @@
   	<stringbundleset id="stringbundleset">
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
   	</stringbundleset>
-	<script type="application/x-javascript" src="overlay.js" />
-	<script type="application/x-javascript" src="js/sidebarConfig.js"/>
-	<script type="application/x-javascript" src="js/io.js"/>
-	<script type="application/x-javascript" src="js/prefload.js"/>
-
-	<script type="application/x-javascript" src="js/translit.js"/>
-	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
-	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
-	<script type="application/x-javascript" src="js/format.js"/>
-
-	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
-	<script type="application/x-javascript" src="js/send_sidebar.js"/>
-	<script type="application/x-javascript" src="js/opts_sidebar.js"/>
-
-	<script type="application/x-javascript" src="js/history.js"/>
-	<script type="application/x-javascript" src="js/bv.js"/>
-	<script>
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	</script>
 
 	<vbox id="outer" flex="1" pack="start" align="center" persist="height">
 		<vbox id="container">
@@ -70,7 +49,7 @@
 						<label value="T" />
 					</toolbarbutton>
 					<toolbarseparator orient="horizontal" class="groove"/>
-					<toolbarbutton onclick="importXML()" id="go" tooltiptext="&go_text;" role="button">
+					<toolbarbutton onclick="DPRSend.importXML(eventSend())" id="go" tooltiptext="&go_text;" role="button">
 						<label value="➤" />
 					</toolbarbutton>
 				</vbox>
@@ -183,7 +162,7 @@
 		<vbox align="center" id="cp4">
 			<caption label="&dictHead;"/>
 			<groupbox orient="vertical" align="center">
-				<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,DPRSend.eventSend(event));" size="18" flex="1" id="dictin"/>
+				<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" size="18" flex="1" id="dictin"/>
 				<hbox>
 					<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
 						<label value="adv" />
@@ -201,7 +180,7 @@
 							<menuitem tooltip="Title Search" value="TIT" label="Title" />
 						</menupopup>
 					</menulist>
-					<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(DPRSend.eventSend(event));" role="button">
+					<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
 						<label value="➤" />
 					</toolbarbutton>
 				</hbox>
@@ -252,10 +231,10 @@
 			<hbox persist="height" id="container" pack="stretch" align="start">
 				<spacer id="flexspace" flex="1"/>
 				<hbox>
-					<toolbarbutton onclick="openBookmarkFrame();" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
+					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
 						<label value="☆" />
 					</toolbarbutton>
-					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
+					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
 						<label value="#" />
 					</toolbarbutton>
 					<toolbarbutton onclick="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));" id="bv" tooltiptext="&bv.label;" role="button">
@@ -267,10 +246,10 @@
 					<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
 						<label value="⚙" />
 					</toolbarbutton>
-					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
+					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
 						<label value="?" />
 					</toolbarbutton>
-					<toolbarbutton onclick="openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
+					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
 						<label value="✉" />
 					</toolbarbutton>
 				</hbox>
@@ -282,5 +261,27 @@
     </splitter>
 	<spacer id="flexspace" flex="1"/>
 	</vbox>
+	<script type="application/x-javascript" src="overlay.js" />
+	<script type="application/x-javascript" src="js/sidebarConfig.js"/>
+	<script type="application/x-javascript" src="js/io.js"/>
+	<script type="application/x-javascript" src="js/prefload.js"/>
+
+	<script type="application/x-javascript" src="js/translit.js"/>
+	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
+	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
+	<script type="application/x-javascript" src="js/format.js"/>
+
+	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
+	<script type="application/x-javascript" src="js/send_sidebar.js"/>
+	<script type="application/x-javascript" src="js/opts_sidebar.js"/>
+
+	<script type="application/x-javascript" src="js/history.js"/>
+	<script type="application/x-javascript" src="js/bv.js"/>
+	<script>
+		function devO() {}
+		function dalert(a) {}
+		function ddump(a) {}
+	</script>
+
 </window>
 

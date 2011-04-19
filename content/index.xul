@@ -16,12 +16,23 @@ function onLoad() {
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
 	mainWindow.gBrowser.setIcon(mainWindow.gBrowser.selectedTab, "chrome://digitalpalireader/skin/icons/logo.png");
 
-	var link = document.location.href.match(/\?.+/);
+	var link = document.location.href.split('?')[1];
 	if (link) {
-		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm'+link[0];
+		switch(link.split('=')[0]) {
+			case 'analysis':
+				document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
+				document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm?'+link;
+				break;
+			default:
+				document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm?'+link;
+				document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+				break;
+		}
 	}
-	else document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
-	document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+	else {
+		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
+		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+	}
 }
 function getconfig() {
 	document.getElementById('dpr-index-top').contentWindow.getconfig();

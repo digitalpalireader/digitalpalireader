@@ -4,7 +4,7 @@ function removeHistory(value) {
 	var storeHistory = [];
 	var content = readFile('History_List_DPR');
 	
-	var oldHistory = content.join('#').split('#');
+	var oldHistory = content.join('#').split('#'); // legacy support
 	for (j in oldHistory) {
 		if (oldHistory[j] != value) { storeHistory.push(oldHistory[j]); }
 		if (j > 99) { break; }

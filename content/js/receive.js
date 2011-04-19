@@ -15,7 +15,7 @@ function getLinkPlace() { // permalinks
 	for (i in options) {
 
 		var option = options[i].split('=');
-		if(option[0] == 'parse') {
+		if(option[0] == 'analysis') {
 			sendAnalysisToOutput(option[1]);
 			return;
 		}

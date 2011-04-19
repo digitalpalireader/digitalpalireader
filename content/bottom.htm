@@ -16,8 +16,10 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 function onDocLoad() {
 	getconfig();
 	//openDPRSidebar();
-	if(document.location.href.indexOf('?') > -1) getLinkPlaceBottom();
-	
+
+	if(/\?/.exec(document.location.href)) {
+		 getLinkPlaceBottom();
+	}
 	document.onkeypress = function(e){
 		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);

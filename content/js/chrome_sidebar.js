@@ -1,6 +1,16 @@
 
 var DPRChrome = {
-	openDPRTab:function(permalink,id) {
+	openDPRTab:function(permalink,id,reuse) {
+
+
+		if(reuse) { // reuse old tab
+			var oldTab = this.findDPRTab(id);
+
+			if (!oldTab) {
+				DPRChrome.openDPRTab(permalink,id);
+				return true;
+			}
+		}
 
 		// get last DPR tab
 
@@ -27,7 +37,6 @@ var DPRChrome = {
 		if(id) newTab.setAttribute('id', id);
 		mainWindow.gBrowser.moveTabTo(newTab, newIdx)
 		mainWindow.gBrowser.selectedTab = newTab;
-		
 
 	},
 	openFirstDPRTab:function() {

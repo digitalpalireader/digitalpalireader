@@ -1,5 +1,4 @@
 function getLinkPlaceBottom() { // permalinks
-
 	var options = document.location.href.split('?')[1].split('#')[0].split('&');
 
 	var place;
@@ -10,7 +9,7 @@ function getLinkPlaceBottom() { // permalinks
 	for (i in options) {
 
 		var option = options[i].split('=');
-		if(option[0] == 'parse') {
+		if(option[0] == 'analysis') {
 			outputAnalysis(option[1]);
 			return;
 		}
