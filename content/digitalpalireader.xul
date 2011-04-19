@@ -9,224 +9,211 @@
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
   	</stringbundleset>
 
-	<vbox id="outer" pack="start">
-		<vbox id="container">
-			<hbox id="cp1">
+	<vbox id="outer" pack="start" flex="1">
+	
+		<hbox persist="height" id="cp1">
+			<vbox flex="1" align="stretch" pack="stretch">
+				<hbox pack="center"><caption label="&sSet.label;" /></hbox>
+				<listbox flex="1" id="set" onclick="DPRNav.changeSet()">
+					<listitem value="v" label="Vinaya"/>
+					<listitem value="d" selected="true" label="Dīgha"/>
+					<listitem value="m" label="Majjhima"/>
+					<listitem value="s" label="Saṃyutta"/>
+					<listitem value="a" label="Aṅguttara"/>
+					<listitem value="k" label="Khuddaka"/>
+					<listitem value="y" label="Abhidhamma"/>
+					<listitem value="x" label="Vism"/>
+					<listitem value="b" label="Abhidh-s"/>
+					<listitem value="g" label="Byākaraṇa"/>
+				</listbox>			
+			</vbox>
+			<vbox align="stretch" pack="stretch" flex="1">
+				<hbox pack="center"><caption label="&sBook.label;" /></hbox>
+				<listbox flex="1" style="min-width:20px" id="book" onclick="DPRXML.updateHierarchy()">
+					<listitem value="1" label="1" selected="true"/>
+					<listitem value="2" label="2"/>
+					<listitem value="3" label="3"/>
+				</listbox>			
+			</vbox>
+			<vbox pack="center" align="center">
 				<spacer id="flexspace" flex="1"/>
-				<vbox align="center">
-					<caption label="&sSet.label;" />
-					<listbox width="120" id="set" rows="7" onclick="DPRNav.changeSet()">
-						<listitem value="v" label="Vinaya"/>
-						<listitem value="d" selected="true" label="Dīgha"/>
-						<listitem value="m" label="Majjhima"/>
-						<listitem value="s" label="Saṃyutta"/>
-						<listitem value="a" label="Aṅguttara"/>
-						<listitem value="k" label="Khuddaka"/>
-						<listitem value="y" label="Abhidhamma"/>
-						<listitem value="x" label="Vism"/>
-						<listitem value="b" label="Abhidh-s"/>
-						<listitem value="g" label="Byākaraṇa"/>
-					</listbox>			
-				</vbox>
-				<vbox align="stretch" flex="1">
-					<hbox pack="center"><caption label="&sBook.label;" /></hbox>
-					<listbox flex="1" style="min-width:20px" rows="7" id="book" onclick="DPRXML.updateHierarchy()">
-						<listitem value="1" label="1" selected="true"/>
-						<listitem value="2" label="2"/>
-						<listitem value="3" label="3"/>
-					</listbox>			
-				</vbox>
-				<vbox pack="center" align="center">
-					<radiogroup>
-						<toolbarbutton id="mul" type="radio" group="mat" checked="true" onclick="DPRNav.switchhier('m');" tooltiptext="&mul_text;" role="button">
-							<label value="M" />
-						</toolbarbutton>
-						<toolbarseparator id=""/>
-						<toolbarbutton id="att" type="radio" group="mat" onclick="DPRNav.switchhier('a');" tooltiptext="&att_text;" role="button">
-							<label value="A" />
-						</toolbarbutton>
-						<toolbarseparator id=""/>
-						<toolbarbutton id="tik" group="mat" onclick="DPRNav.switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
-							<label value="T" />
-						</toolbarbutton>
-						<toolbarseparator orient="horizontal" class="groove"/>
-						<toolbarbutton onclick="DPRSend.importXML(DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
-							<label value="➤" />
-						</toolbarbutton>
-					</radiogroup>
-				</vbox>
+				<radiogroup flex="1">
+					<toolbarbutton flex="1" id="mul" type="radio" group="mat" checked="true" onclick="DPRNav.switchhier('m');" tooltiptext="&mul_text;" role="button">
+						<label value="M" />
+					</toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton flex="1" id="att" type="radio" group="mat" onclick="DPRNav.switchhier('a');" tooltiptext="&att_text;" role="button">
+						<label value="A" />
+					</toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton flex="1" id="tik" group="mat" onclick="DPRNav.switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
+						<label value="T" />
+					</toolbarbutton>
+					<toolbarseparator orient="horizontal" class="groove"/>
+					<toolbarbutton flex="1" onclick="DPRSend.importXML(DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
+						<label value="➤" />
+					</toolbarbutton>
+				</radiogroup>
 				<spacer id="flexspace" flex="1"/>
-			</hbox>
-		</vbox>
+			</vbox>
+		</hbox>
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Set &amp; Book Display">
 		<grippy/>
     </splitter>
-   		<vbox id="container" align="center">
-			<groupbox orient="vertical">
-				<button id="title" label="title" oncommand="importXMLindex(DPRSend.eventSend(event));"/>
-				<menulist flex="1" class="sel" id="meta" onchange="DPRNav.updateHierarchy(6)">
-					<menupopup>
-					</menupopup>
-				</menulist>
-				<menulist flex="1" class="sel" id="volume" oncommand="DPRNav.updateHierarchy(5)">
-					<menupopup>
-					</menupopup>
-				</menulist>
-				<menulist flex="1" class="sel" id="vagga" oncommand="DPRNav.updateHierarchy(4)">
-					<menupopup>
-					</menupopup>
-				</menulist>
-				<menulist flex="1" class="sel" id="sutta" oncommand="DPRNav.updateHierarchy(3)">
-					<menupopup>
-					</menupopup>
-				</menulist>
-				<menulist flex="1" class="sel" id="section">
-					<menupopup>
-					</menupopup>
-				</menulist>
-				<separator />
-				<menulist flex="1" class="sel" id="history" oncommand="DPRChrome.openPlace(this.value.split(','))">
-					<menupopup>
-					</menupopup>
-				</menulist>
-			</groupbox>
+   		<vbox id="container" align="stretch">
+			<button id="title" label="title" oncommand="importXMLindex(DPRSend.eventSend(event));"/>
+			<menulist flex="1" class="sel" id="meta" onchange="DPRNav.updateHierarchy(6)">
+				<menupopup>
+				</menupopup>
+			</menulist>
+			<menulist flex="1" class="sel" id="volume" oncommand="DPRNav.updateHierarchy(5)">
+				<menupopup>
+				</menupopup>
+			</menulist>
+			<menulist flex="1" class="sel" id="vagga" oncommand="DPRNav.updateHierarchy(4)">
+				<menupopup>
+				</menupopup>
+			</menulist>
+			<menulist flex="1" class="sel" id="sutta" oncommand="DPRNav.updateHierarchy(3)">
+				<menupopup>
+				</menupopup>
+			</menulist>
+			<menulist flex="1" class="sel" id="section">
+				<menupopup>
+				</menupopup>
+			</menulist>
+			<separator />
+			<menulist flex="1" class="sel" id="history" oncommand="DPRSend.openPlace(this.value.split(','))">
+				<menupopup>
+				</menupopup>
+			</menulist>
 		</vbox>
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Hierarchy Display">
 		<grippy/>
     </splitter>
-		<form pack="stretch" id="searchForm">
-			<spacer id="flexspace" flex="1"/>
-			<vbox align="center">
-				<caption label="&searchHead;"/>
-				<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
-				<hbox align="start">
-					<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
-					<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="DPROpts.tipitakaOptions()">
-						<menupopup>
-							<menuitem tooltip="Search all three nikayas" selected="true" label="The Tipitaka"/>
-							<menuitem tooltip="Search current set" label="This Set"/>
-							<menuitem tooltip="Search current book" label="This Book"/>
-							<menuseparator/>
-							<menuitem tooltip="Search multiple sets" label="Multi. Sets"/>
-							<menuitem tooltip="Search multiple books in the current set" label="Multi. Books"/>
-							<menuseparator/>
-							<menuitem tooltip="Search all three nikayas, choose MAT" label="Tipitaka M,A,T"/>
-							<menuitem tooltip="Search current set, choose MAT" label="This Set M,A,T"/>
-							<menuitem tooltip="Search current book, choose MAT" label="This Book M,A,T"/>
-							<menuseparator/>
-							<menuitem tooltip="Search multiple sets, choose MAT" label="Multi. Sets M,A,T"/>
-							<menuitem tooltip="Search multiple books in the current set, choose MAT" label="Multi. Books MAT"/>
-							<menuseparator/>
-							<menuitem tooltip="Search English suttas from Access To Insight" label="ATI Translations"/>
-						</menupopup>
-					</menulist>
-					<toolbarbutton flex="1" id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
-						<label value="➤" />
-					</toolbarbutton>
-				</hbox>
-				<vbox align="start">
-					<vbox collapsed="true" align="start" id="tsoMAT">
-						<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
-						<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>
-						<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" checked="true"/>
-					</vbox>
+		<form orient="vertical" pack="stretch" align="stretch" id="searchForm">
+			<hbox pack="center"><caption label="&searchHead;"/></hbox>
+			<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
+			<hbox flex="1" pack="stretch" align="stretch">
+				<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
+				<menulist flex="1" class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="DPROpts.tipitakaOptions()">
+					<menupopup>
+						<menuitem tooltip="Search all three nikayas" selected="true" label="The Tipitaka"/>
+						<menuitem tooltip="Search current set" label="This Set"/>
+						<menuitem tooltip="Search current book" label="This Book"/>
+						<menuseparator/>
+						<menuitem tooltip="Search multiple sets" label="Multi. Sets"/>
+						<menuitem tooltip="Search multiple books in the current set" label="Multi. Books"/>
+						<menuseparator/>
+						<menuitem tooltip="Search all three nikayas, choose MAT" label="Tipitaka M,A,T"/>
+						<menuitem tooltip="Search current set, choose MAT" label="This Set M,A,T"/>
+						<menuitem tooltip="Search current book, choose MAT" label="This Book M,A,T"/>
+						<menuseparator/>
+						<menuitem tooltip="Search multiple sets, choose MAT" label="Multi. Sets M,A,T"/>
+						<menuitem tooltip="Search multiple books in the current set, choose MAT" label="Multi. Books MAT"/>
+						<menuseparator/>
+						<menuitem tooltip="Search English suttas from Access To Insight" label="ATI Translations"/>
+					</menupopup>
+				</menulist>
+				<toolbarbutton id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
+					<label value="➤" />
+				</toolbarbutton>
+			</hbox>
+			<vbox pack="stretch" align="center">
+				<vbox collapsed="true" align="start" id="tsoMAT">
+					<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
+					<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>
+					<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" checked="true"/>
 					<separator class=""/>
-					<vbox orient="vertical" collapsed="true" align="start" id="tsoCO1">
-						<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
+				</vbox>
+				<vbox orient="vertical" collapsed="true" align="start" id="tsoCO1">
+					<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
+				</vbox>
+				<vbox orient="vertical" collapsed="true" align="start" id="tsoCO2" class="">
+					<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
+					<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
+					<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
+					<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
+					<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
+				</vbox>
+				<vbox orient="vertical" collapsed="true" align="start" id="tsoCO3" class="">
+					<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
+					<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
+					<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
+					<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+				</vbox>
+				<vbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
+					<vbox align="start" id="tsoBOA">
 					</vbox>
-					<vbox orient="vertical" collapsed="true" align="start" id="tsoCO2" class="">
-						<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
-						<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
-						<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
-						<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
-						<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
-					</vbox>
-					<vbox orient="vertical" collapsed="true" align="start" id="tsoCO3" class="">
-						<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
-						<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
-						<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
-						<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
-					</vbox>
-					<vbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
-						<vbox align="start" id="tsoBOA">
-						</vbox>
-						<vbox align="start" id="tsoBOB">
-						</vbox>
+					<vbox align="start" id="tsoBOB">
 					</vbox>
 				</vbox>
 			</vbox>
-			<spacer id="flexspace" flex="1"/>
 		</form>
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Search Display">
 		<grippy/>
     </splitter>
-		<form id="dictForm">
-			<spacer id="flexspace" flex="1"/>
-			<vbox align="center" id="cp4">
-				<caption label="&dictHead;"/>
-				<groupbox orient="vertical" align="center">
-					<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" size="18" flex="1" id="dictin"/>
-					<hbox>
-						<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
-							<label value="adv" />
-						</toolbarbutton>
-						<menulist class="sel" tooltip="Choose a dictionary type - hover over the name for description" id="dictType" oncommand="DPROpts.dictOptions()">
-							<menupopup>
-								<menuitem tooltip="Analyze Word" selected="true" value="DPR" label="DPR" />
-								<menuitem tooltip="Pali-English Dictionary" value="PED" label="PED" />
-								<menuitem tooltip="Dict. of Pali Names" value="DPPN" label="DPPN" />
-								<menuitem tooltip="Concise Pali-English Dictionary" value="CPED" label="CPED" />
-								<menuitem tooltip="PED, DPPN and CPED combined" value="MULTI" label="Multi" />
-								<menuitem tooltip="Concise English-Pali Dictionary" label="CEPD" />
-								<menuitem tooltip="Aṭṭhakathā Term Search" value="ATT" label="Aṭṭh" />
-								<menuitem tooltip="Ṭīka Term Search" value="TIK" label="Ṭīka" />
-								<menuitem tooltip="Title Search" value="TIT" label="Title" />
-							</menupopup>
-						</menulist>
-						<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
-							<label value="➤" />
-						</toolbarbutton>
-					</hbox>
-					<groupbox align="start" id="dictAdvOpts" collapsed="true">
-					
-						<vbox id="soNO">
-							<label value="no advanced options available"/>
-						</vbox>
-						<vbox id="soRX" collapsed="true">
-							<checkbox class="tiny" id="soregexp" label="Reg. Exp." tooltiptext="Use Regular Expressions for wildcards in search"/>
-						</vbox>
-						<vbox id="soFZ" collapsed="true">
-							<checkbox class="tiny" id="sofuzzy" label="Fuzzy" tooltiptext="Enable fuzzy search (removes diacritics)"/>
-						</vbox>
-						<vbox id="soFT" collapsed="true">
-							<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
-						</vbox>
-						<vbox id="soSW" class="bottomb" collapsed="true">
-							<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
-						</vbox>
-						<separator/>
-						<vbox id="soMAT" class="bottomb" collapsed="true">
-							<checkbox class="tiny" id="soMATm" label="Mula" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soMATa" label="Aṭṭhakathā" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soMATt" label="Ṭīka" tooltiptext="Include in search" checked="true"/>
-						</vbox>
-						<vbox id="soNSV" collapsed="true">
-							<checkbox class="tiny" id="soNSv" label="Vin" tooltiptext="Include in search" checked="true"/>
-						</vbox>
-						<vbox id="soNS" collapsed="true">
-							<checkbox class="tiny" id="soNSd" label="DN" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soNSa" label="AN" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soNSm" label="MN" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soNSk" label="KN" tooltiptext="Include in search" checked="true"/>
-							<checkbox class="tiny" id="soNSs" label="SN" tooltiptext="Include in search" checked="true"/>
-						</vbox>
-						<vbox id="soNSA" collapsed="true">
-							<checkbox class="tiny" id="soNSy" label="Abhi" tooltiptext="Include in search" checked="true"/>
-						</vbox>
-					</groupbox>
-				</groupbox>
-			</vbox>
-			<spacer id="flexspace" flex="1"/>
+		<form orient="vertical" align="stretch" flex="1" persist="height" id="dictForm">
+			<hbox pack="center"><caption label="&dictHead;"/></hbox>
+			<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
+			<hbox flex="1" pack="stretch">
+				<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
+					<label value="adv" />
+				</toolbarbutton>
+				<menulist flex="1" class="sel" tooltip="Choose a dictionary type - hover over the name for description" id="dictType" oncommand="DPROpts.dictOptions()">
+					<menupopup>
+						<menuitem tooltip="Analyze Word" selected="true" value="DPR" label="DPR" />
+						<menuitem tooltip="Pali-English Dictionary" value="PED" label="PED" />
+						<menuitem tooltip="Dict. of Pali Names" value="DPPN" label="DPPN" />
+						<menuitem tooltip="Concise Pali-English Dictionary" value="CPED" label="CPED" />
+						<menuitem tooltip="PED, DPPN and CPED combined" value="MULTI" label="Multi" />
+						<menuitem tooltip="Concise English-Pali Dictionary" label="CEPD" />
+						<menuitem tooltip="Aṭṭhakathā Term Search" value="ATT" label="Aṭṭh" />
+						<menuitem tooltip="Ṭīka Term Search" value="TIK" label="Ṭīka" />
+						<menuitem tooltip="Title Search" value="TIT" label="Title" />
+					</menupopup>
+				</menulist>
+				<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
+					<label value="➤" />
+				</toolbarbutton>
+			</hbox>
+			<groupbox align="start" id="dictAdvOpts" collapsed="true">
+			
+				<vbox id="soNO">
+					<label value="no advanced options available"/>
+				</vbox>
+				<vbox id="soRX" collapsed="true">
+					<checkbox class="tiny" id="soregexp" label="Reg. Exp." tooltiptext="Use Regular Expressions for wildcards in search"/>
+				</vbox>
+				<vbox id="soFZ" collapsed="true">
+					<checkbox class="tiny" id="sofuzzy" label="Fuzzy" tooltiptext="Enable fuzzy search (removes diacritics)"/>
+				</vbox>
+				<vbox id="soFT" collapsed="true">
+					<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
+				</vbox>
+				<vbox id="soSW" class="bottomb" collapsed="true">
+					<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
+				</vbox>
+				<separator/>
+				<vbox id="soMAT" class="bottomb" collapsed="true">
+					<checkbox class="tiny" id="soMATm" label="Mula" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soMATa" label="Aṭṭhakathā" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soMATt" label="Ṭīka" tooltiptext="Include in search" checked="true"/>
+				</vbox>
+				<vbox id="soNSV" collapsed="true">
+					<checkbox class="tiny" id="soNSv" label="Vin" tooltiptext="Include in search" checked="true"/>
+				</vbox>
+				<vbox id="soNS" collapsed="true">
+					<checkbox class="tiny" id="soNSd" label="DN" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soNSa" label="AN" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soNSm" label="MN" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soNSk" label="KN" tooltiptext="Include in search" checked="true"/>
+					<checkbox class="tiny" id="soNSs" label="SN" tooltiptext="Include in search" checked="true"/>
+				</vbox>
+				<vbox id="soNSA" collapsed="true">
+					<checkbox class="tiny" id="soNSy" label="Abhi" tooltiptext="Include in search" checked="true"/>
+				</vbox>
+			</groupbox>
 		</form>
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Dictionary Display">
 		<grippy/>

@@ -1,8 +1,21 @@
 #outer {
 background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
 overflow:auto;
+padding:10px;
 }
 
+menulist {
+	min-height:28px;
+	max-height:34px;
+}
+textbox {
+	min-height:20px;
+	max-height:25px;
+}
+toolbarbutton {
+	min-height:30px;
+	max-height:40px;
+}
 grippy {
 	height:8px;
 	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
