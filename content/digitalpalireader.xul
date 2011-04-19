@@ -15,7 +15,7 @@
 				<spacer id="flexspace" flex="1"/>
 				<vbox pack="center" align="center">
 					<caption label="&sSet.label;" />
-					<listbox id="set" rows="7" oncommand="changeSet()">
+					<listbox id="set" rows="7" oncommand="DPRNav.changeSet()">
 						<listitem value="v" label="Vinaya"/>
 						<listitem value="d" selected="true" label="Dīgha"/>
 						<listitem value="m" label="Majjhima"/>
@@ -30,26 +30,26 @@
 				</vbox>
 				<vbox pack="center" align="center">
 					<caption label="&sBook.label;" />
-					<listbox rows="7" id="book" oncommand="updateHierarchy()">
+					<listbox rows="7" id="book" oncommand="DPRNav.updateHierarchy()">
 						<listitem value="1" label="1" selected="true"/>
 						<listitem value="2" label="2"/>
 						<listitem value="3" label="3"/>
 					</listbox>			
 				</vbox>
 				<vbox pack="center" align="center">
-					<toolbarbutton id="mul" type="radio" group="mat" checked="true" onclick="switchhier('m');" tooltiptext="&mul_text;" role="button">
+					<toolbarbutton id="mul" type="radio" group="mat" checked="true" onclick="DPRNav.switchhier('m');" tooltiptext="&mul_text;" role="button">
 						<label value="M" />
 					</toolbarbutton>
 					<toolbarseparator id=""/>
-					<toolbarbutton id="att" type="radio" group="mat" onclick=" switchhier('a');" tooltiptext="&att_text;" role="button">
+					<toolbarbutton id="att" type="radio" group="mat" onclick="DPRNav.switchhier('a');" tooltiptext="&att_text;" role="button">
 						<label value="A" />
 					</toolbarbutton>
 					<toolbarseparator id=""/>
-					<toolbarbutton id="tik" group="mat" onclick="switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
+					<toolbarbutton id="tik" group="mat" onclick="DPRNav.switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
 						<label value="T" />
 					</toolbarbutton>
 					<toolbarseparator orient="horizontal" class="groove"/>
-					<toolbarbutton onclick="DPRSend.importXML(eventSend())" id="go" tooltiptext="&go_text;" role="button">
+					<toolbarbutton onclick="DPRSend.importXML(DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
 						<label value="➤" />
 					</toolbarbutton>
 				</vbox>
@@ -61,20 +61,20 @@
     </splitter>
    		<vbox id="container" align="center" persist="height">
 			<groupbox orient="vertical">
-				<button id="title" label="title" oncommand="importXMLindex((event.ctrlKey?1:''));"/>
-				<menulist flex="1" class="sel" id="meta" onchange="updateHierarchy(6)">
+				<button id="title" label="title" oncommand="importXMLindex(DPRSend.eventSend(event));"/>
+				<menulist flex="1" class="sel" id="meta" onchange="DPRNav.updateHierarchy(6)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="volume" oncommand="updateHierarchy(5)">
+				<menulist flex="1" class="sel" id="volume" oncommand="DPRNav.updateHierarchy(5)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="vagga" oncommand="updateHierarchy(4)">
+				<menulist flex="1" class="sel" id="vagga" oncommand="DPRNav.updateHierarchy(4)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="sutta" oncommand="updateHierarchy(3)">
+				<menulist flex="1" class="sel" id="sutta" oncommand="DPRNav.updateHierarchy(3)">
 					<menupopup>
 					</menupopup>
 				</menulist>
@@ -83,7 +83,7 @@
 					</menupopup>
 				</menulist>
 				<separator />
-				<menulist flex="1" class="sel" id="history" oncommand="openPlace(this.value.split(','))">
+				<menulist flex="1" class="sel" id="history" oncommand="DPRChrome.openPlace(this.value.split(','))">
 					<menupopup>
 					</menupopup>
 				</menulist>
@@ -96,7 +96,7 @@
 			<form id="searchForm">
 				<vbox align="center" id="cp3">
 					<caption label="&searchHead;"/>
-					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" oninput="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
+					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
 					<hbox flex="1">
 						<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
 						<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="DPROpts.tipitakaOptions()">
@@ -118,7 +118,7 @@
 								<menuitem tooltip="Search English suttas from Access To Insight" label="ATI Translations"/>
 							</menupopup>
 						</menulist>
-						<toolbarbutton flex="1" id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch();" role="button">
+						<toolbarbutton flex="1" id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
 							<label value="➤" />
 						</toolbarbutton>
 					</hbox>
@@ -237,7 +237,7 @@
 					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
 						<label value="#" />
 					</toolbarbutton>
-					<toolbarbutton onclick="var abv = bv();promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));" id="bv" tooltiptext="&bv.label;" role="button">
+					<toolbarbutton onclick="DPRSend.bvAlert()" id="bv" tooltiptext="&bv.label;" role="button">
 						<label value="☸" />
 					</toolbarbutton>
 				</hbox>

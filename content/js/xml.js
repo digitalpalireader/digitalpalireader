@@ -1,8 +1,6 @@
 
 var unnamed = '[unnamed]';
 
-var hier = 'm'; // m = mula, a = atthakatha, t = tika
-
 var matButton = 0; // tells us we've clicked an in-section mat button.
 var matValue = []; // for storing values from section after clicking mat button in section
 matValue['m'] = '';
@@ -12,7 +10,6 @@ matValue['t'] = '';
 function loadXMLSection(labelsearch,para,place,isPL,scroll)
 { 
 	
-
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
@@ -23,6 +20,8 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	place[4]= parseInt(place[4]);
 	place[5]= parseInt(place[5]);
 	place[6]= parseInt(place[6]);
+
+	var hier=place[7];
 	
 	var bookno = place[1];
 	var book = place[1]+1;
@@ -32,7 +31,6 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	var sutta = place[5];
 	var section = place[6]
 
-	
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
@@ -188,7 +186,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	var sidebar = DPRSidebarWindow();
 
 	if (sidebar) {
-		sidebar.historyBox();
+		sidebar.DPRNav.historyBox();
 	} 
 
 	// tab title
@@ -342,7 +340,7 @@ function loadXMLindex(place) {
 		return; 
 	}	
 	
-	hier = place[2];
+	var hier = place[2];
 	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
@@ -641,275 +639,5 @@ function loadXMLindex(place) {
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0;
-}
-
-
-
-
-
-
-
-
-function importXMLraw()
-{
-	document.activeElement.blur();
-	if (hier == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
-		return; 
-	}
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-
-	var nikaya = document.getElementById('set').value;
-	var book = document.getElementById('book').value;
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-	//alert(bookload);
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var book = document.getElementById('book').value;
-	
-	var meta = document.form.meta.selectedIndex;
-	var volume = document.form.volume.selectedIndex;
-	var vagga = document.form.vagga.selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var section = document.form.section.selectedIndex;
-	var u = xmlDoc.getElementsByTagName("h0");
-	var v = u[meta].getElementsByTagName("h1");
-	var w = v[volume].getElementsByTagName("h2");
-	var x = w[vagga].getElementsByTagName("h3");
-	var y = x[sutta].getElementsByTagName("h4");
-	var z = y[section].getElementsByTagName("p");
-
-	//titles
-
-	var nikaya = document.getElementById('set').value;
-	var vn = u[meta].getElementsByTagName("h0n");
-	var wn = v[volume].getElementsByTagName("h1n");
-	var xn = w[vagga].getElementsByTagName("h2n");
-	var yn = x[sutta].getElementsByTagName("h3n");
-	var zn = y[section].getElementsByTagName("h4n");
-	var vna = vn[0].textContent;
-	var wna = wn[0].textContent;
-	var xna = xn[0].textContent;
-	var yna = yn[0].textContent;
-	var zna = zn[0].textContent;
-
-	var titleout = convtitle(nikaya,book,vna,wna,xna,yna,zna,hier);
-	
-	document.getElementById('mafbc').innerHTML = titleout;
-
-	var theData = "";
-	
-
-
-	for (tmp = 0; tmp < z.length; tmp++)
-	{
-		theData = z[tmp].textContent;
-		theData = theData.replace(/\^b\^/g, ' <b> ');
-		theData = theData.replace(/\^eb\^/g, ' </b> ');
-		theData = theData.replace(/\^a\^/g, '<!--');
-		theData = theData.replace(/\^ea\^/g, '-->');
-		document.getElementById('mafbc').innerHTML += '<p>' + theData + '</p>';  // ---------- return output ----------
-	}
-
-	document.getElementById('maf').scrollTop = 0; // horizontal and vertical scroll targets
-
-}
-
-
-var setplace = new Array();
-
-function getplace(temp) { // standard function to get a place from an array 0=nik,1=book,2=meta,3=vol,4=vagga,5=sutta,6=section (all sIndex),7=hier(mat) 
-	document.activeElement.blur();
-	setplace = temp;
-
-	// for changing mat buttons
-
-	if (matButton == 1) { // mat button pushed (in section)
-		var matButtonCount = document.getElementById('matButtonCount').value; // number of times in a row we've pushed the button, if first time, we clear the old values.
-		if (matButtonCount > 0 && matValue[setplace[7]] != '') {
-			setplace = matValue[setplace[7]].split('^').concat(setplace[7]);
-			setplace[0] = G_nikToNumber[setplace[0]];
-		}
-		else {
-			matValue['m'] == '';
-			matValue['a'] == '';
-			matValue['t'] == '';
-		}
-		matValue[hier] = document.getElementById('set').value+'^'+document.getElementById('book').selectedIndex+'^'+document.form.meta.selectedIndex+'^'+document.form.volume.selectedIndex+'^'+document.form.vagga.selectedIndex+'^'+document.form.sutta.selectedIndex+'^'+document.form.section.selectedIndex;
-	}
-	else { // clear stored values
-		matValue['m'] == '';
-		matValue['a'] == '';
-		matValue['t'] == '';
-	}
-	
-	switchhier(setplace[7],1);
-
-	var sp0 = setplace[0];
-	var nikaya = document.form.nik[sp0].value;
-	document.getElementById('set').selectedIndex = sp0;
-
-	var nik = document.getElementById('set').value;
-	var booknumber = setplace[1]; 
-	
-	setBookList(nik); 
-        	
-	document.getElementById('book').selectedIndex = booknumber;
-
-	var book = document.getElementById('book').value;
-
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var uname = new Array();
-	var vname = new Array();
-	var xname = new Array();
-	var yname = new Array();
-
-	var unamea = 0;
-	var vnamea = 0;
-	var xnamea = 0;
-	var ynamea = 0;
-	
-	var meta = setplace[2];
-	var volume = setplace[3];
-	var vagga = setplace[4];
-	var sutta = setplace[5];	
-	var section = setplace[6];	
-
-	var metalist = '';
-	var volumelist = '';
-	var vaggalist = '';
-	var suttalist = '';
-	var sectionlist = '';
-
-	var t = xmlDoc.getElementsByTagName("ha");
-	var tname = t[0].getElementsByTagName("han");
-	if (tname[0].childNodes[0] && tname[0].textContent.length > 1) var tnamea = tname[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); else tnamea = unnamed;
-	var countt = tnamea;
-
-	var titlen = toUni(tnamea);
-
-	tnamea = translit(shortenTitle(tnamea));
-	document.getElementById('title').innerHTML = '<span class="abut obut small" title="click to return to index of '+titlen+'" onclick="this.blur; importXMLindex((event.ctrlKey?1:\'\'));">'+tnamea+'</span>';
-		
-	var u = xmlDoc.getElementsByTagName("h0");
-	var v = u[meta].getElementsByTagName("h1");
-	var w = v[volume].getElementsByTagName("h2");
-	var x = w[vagga].getElementsByTagName("h3");
-	var y = x[sutta].getElementsByTagName("h4");
-	
-	var lista = [];
-	var list = '';
-	
-	// meta
-
-	lista = makeTitleSelect(u,'h0n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
-	}
-	else {
-		list = '<menupopup onChange="updateHierarchy(6)">';
-		for (a in lista) {
-			list += '<option'+(a == meta ? ' selected' : '') + lista[a]+'</option>';
-		}
-		list += '</select>';
-	}	
-	document.getElementById('meta').innerHTML = list;
-
-	// volume
-
-	lista = makeTitleSelect(v,'h1n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
-	}
-	else {
-		list = '<menupopup onChange="updateHierarchy(5)">';
-		for (a in lista) {
-			list += '<option'+(a == volume ? ' selected' : '') + lista[a]+'</option>';
-		}
-		list += '</select>';
-	}	
-	document.getElementById('volume').innerHTML = list;
-
-	// vagga
-
-	lista = makeTitleSelect(w,'h2n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
-	}
-	else {
-		list = '<menupopup onChange="updateHierarchy(4)">';
-		for (a in lista) {
-			list += '<option'+(a == vagga ? ' selected' : '') + lista[a]+'</option>';
-		}
-		list += '</select>';
-	}	
-	document.getElementById('vagga').innerHTML = list;
-
-	// sutta
-
-	lista = makeTitleSelect(x,'h3n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
-	}
-	else {
-		list = '<menupopup onChange="updateHierarchy(3)">';
-		for (a in lista) {
-			list += '<option'+(a == sutta ? ' selected' : '') + lista[a]+'</option>';
-		}
-		list += '</select>';
-	}	
-	document.getElementById('sutta').innerHTML = list;
-
-	// section
-
-	lista = makeTitleSelect(y,'h4n');
-	if (lista.length == 1 && lista[0] == '>'+ unnamed ) {
-		list = '<menupopup class="hide"><menuitem label="' + unnamed + '"/></menupopup>';
-	}
-	else {
-		list = '<menupopup onChange="importXML()">';
-		for (a in lista) {
-			list += '<option'+(a == section ? ' selected' : '') + lista[a]+'</option>';
-		}
-		list += '</select>';
-	}	
-	document.getElementById('section').innerHTML = list;
-       
-	setplace = new Array();
-	setplace.length = 0;
-}
-
-
-function helpXML(file)
-{
-	moveframex(1);
-	if (!file) file = 'help.xml';
-	
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", file, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-	var outputit = '';
-	document.getElementById('mafbc').setAttribute('align','justify');
-	document.getElementById('mafbc').innerHTML = '';
-	var data = xmlDoc.getElementsByTagName('data')
-	for (ippp in data) {
-		if(data[ippp].childNodes) outputit += data[ippp].textContent.replace(/\[/g,'<').replace(/\]/g,'>');
-	}		
-	document.getElementById('mafbc').innerHTML = outputit;
-	document.getElementById('mafbc').innerHTML += '<hr/><div><i>DPR version number: <b>'+version+'</b></i></div>';
-    document.getElementById('maf').scrollTop = 0;
 }
 

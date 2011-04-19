@@ -77,6 +77,10 @@ var DPRChrome = {
 		}
 		return false;
 	},
+	G_prompts: Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService),
+	promptData:function(title,data) {
+		this.G_prompts.alert(null, title, data);
+	}
 }
 
 mainWindow.gBrowser.addEventListener("load", digitalpalireader.onPageLoad, true);

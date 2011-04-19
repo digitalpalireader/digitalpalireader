@@ -233,4 +233,7 @@ var DPRSend = {
 		return true;
 	},
 
+	bvAlert:function() {
+		var abv = bv();DPRChrome.promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));
+	}
 };

@@ -60,8 +60,8 @@ var digitalpalireader =
 		return true;
 	},
 	updatePrefs: function() {
-		sidebarConfig();
-		changeSet(1);
+		this.sidebarConfig();
+		DPRNav.changeSet(1);
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];
@@ -72,6 +72,14 @@ var digitalpalireader =
 			}
 		}
 	},
-
+	sidebarConfig:function() {
+		for (i in G_prefs) {
+			G_prefs[i] = getPref(i);
+		}
+		DPRNav.historyBox();
+		// update backgrounds
+			
+		//checkbackground();
+	},
 
 };

@@ -180,10 +180,10 @@ function updatePrefs(close) {
 					   .rootTreeItem
 					   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 					   .getInterface(Components.interfaces.nsIDOMWindow); 
-		var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+		var sidebarWindow = mainWindow.document.getElementById("sidebar").contentWindow;
 
 		if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-			sidebarWindow.getElementById('dpr-browser').contentWindow.updatePrefs();
+			sidebarWindow.updatePrefs();
 		} 
 	}
 

@@ -2,36 +2,6 @@ var G_hier = 'm';
 
 var oldnikaya = 0;
 
-function changeSet(noget)
-{
-	var nik = document.getElementById('set').value;
-	if (nik != '') 
-	{
-		if (G_hier == 't' && limitt(document.getElementById('set').selectedIndex)) { 
-			alert('Ṭīkā not available for '+G_nikLongName[document.getElementById('set').value]+'.');
-			document.getElementById('set').selectedIndex = oldnikaya;
-			return; 
-		} 
-		if (G_hier == 'a' && document.getElementById('set').value == 'g') {
-			alert('Atthakatha not available for Gram.');
-			document.getElementById('set').selectedIndex = oldnikaya;
-			return;
-		}
-		if (G_hier == 'a' && document.getElementById('set').value == 'b') {
-			alert('Atthakatha not available for Abhidh-s.');
-			document.getElementById('set').selectedIndex = oldnikaya;
-			return;
-		}
-		oldnikaya = document.getElementById('set').selectedIndex;
-		
-		setBookList(nik);
-		updateHierarchy(0,1);
-		//if (noget) gettitles(0,1); // don't load the passage
-		//else gettitles(0,2);
-	}
-}
-
-
 
 var G_XMLFileArray = []; // [nik+book] = [m,a,t]
 G_XMLFileArray["v1"] = [1,1,1];
@@ -257,151 +227,169 @@ nikvoladi['gm'] = ['Mog','Kac','SPM','SDhM','PRS'];
 nikvoladi['ga'] = [];
 nikvoladi['gt'] = [];
 
-function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
-
-
-	if (nik == 'k' || nik == 'y') {
-		eval('no = '+nik+'names[\''+no+'\'];');
-		if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
-	}
-	else no++;
-	return no.toString();
-}
-
-function setBookList(nik) {
-	var checkNikaya = '<table><tr><td valign="top">';
-	
-	if (nikvoladi[nik]) var titles = nikvoladi[nik];
-	else var titles = nikvoladi[nik+G_hier];
-	
-	var bookNode = document.getElementById('book');
-	while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
-
-	var bookNode2 = document.getElementById('tsoBOa');
-	while(bookNode2.childNodes.length > 0) bookNode2.removeNode(bookNode2.firstNode);
-	
-	for (i = 0; i < titles.length; i++) {
-		bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-		
-		var newCheck = document.createElement('checkbox');
-		newCheck.setAttribute('checked',true);
-		newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
-		newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-		if(i == Math.ceil(titles.length/2)) {
-			bookNode2 = document.getElementById('tsoBOb');
-			while(bookNode2.itemCount > 0) bookNode2.removeItemAt(0);
+var DPRNav = {
+	changeSet:function(noget){
+		var nik = document.getElementById('set').value;
+		if (nik != '') 
+		{
+			if (G_hier == 't' && limitt(document.getElementById('set').selectedIndex)) { 
+				alert('Ṭīkā not available for '+G_nikLongName[document.getElementById('set').value]+'.');
+				document.getElementById('set').selectedIndex = oldnikaya;
+				return; 
+			} 
+			if (G_hier == 'a' && document.getElementById('set').value == 'g') {
+				alert('Atthakatha not available for Gram.');
+				document.getElementById('set').selectedIndex = oldnikaya;
+				return;
+			}
+			if (G_hier == 'a' && document.getElementById('set').value == 'b') {
+				alert('Atthakatha not available for Abhidh-s.');
+				document.getElementById('set').selectedIndex = oldnikaya;
+				return;
+			}
+			oldnikaya = document.getElementById('set').selectedIndex;
+			
+			this.setBookList(nik);
+			DPRXML.updateHierarchy(0,1);
+			//if (noget) gettitles(0,1); // don't load the passage
+			//else gettitles(0,2);
 		}
-		bookNode2.appendChild(newCheck);
-	}
-	bookNode.selectedIndex = 0;
-	checkNikaya += '</td></tr></table>';
-	
-}
+	},
 
 
+	getBookName:function (nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
 
 
-function xmlrefer()
-{
-	var nik = document.getElementById('set').selectedIndex;
-	var book = document.getElementById('book').selectedIndex;
-	var sutta = document.form.sutta.selectedIndex;
-	var sect = document.form.section.selectedIndex;
-	var ref = '<xml>' + nik + ',' + book + ',' + sutta + ',' + sect + '</xml>'
-	document.form.xmlref.value = ref;
-}
+		if (nik == 'k' || nik == 'y') {
+			eval('no = '+nik+'names[\''+no+'\'];');
+			if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
+		}
+		else no++;
+		return no.toString();
+	},
 
-function limitt(nikn) {
-	if (nikn == 5 || nikn > 6) { return true; }
-	else { return false };
-}
-
-function switchhier(htmp,stop) {
-
-	if(G_hier == htmp) return;
-	
-	var himg = ['l','m','r'];
+	setBookList:function(nik) {
+		var checkNikaya = '<table><tr><td valign="top">';
 		
+		if (nikvoladi[nik]) var titles = nikvoladi[nik];
+		else var titles = nikvoladi[nik+G_hier];
+		
+		var bookNode = document.getElementById('book');
+		while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
 
-	if (htmp == 't' && limitt(document.getElementById('set').selectedIndex)) { 
-		alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
-		document.getElementById((G_hier=='m'?'mul':'att')).checked=true;
-		document.getElementById((G_hier=='m'?'mul':'att')).disabled=true;
-		document.getElementById('tik').removeAttribute('checked');
-		document.getElementById('tik').removeAttribute('disabled');
-		return; 
-	}
-	if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
-		alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
-		document.getElementById('mul').checked=true;
-		document.getElementById('mul').disabled=true;
-		document.getElementById('att').removeAttribute('checked');
-		document.getElementById('att').removeAttribute('disabled');
-		return;
-	}
-	if (document.getElementById('set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('book').value] == undefined) {
-			alert('Aṭṭhakathā not available for '+getBookName(document.getElementById('set').value,htmp,document.getElementById('book').selectedIndex)+'.');
+		var bookNode2 = document.getElementById('tsoBOa');
+		while(bookNode2.childNodes.length > 0) bookNode2.removeNode(bookNode2.firstNode);
+		
+		for (i = 0; i < titles.length; i++) {
+			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			
+			var newCheck = document.createElement('checkbox');
+			newCheck.setAttribute('checked',true);
+			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			if(i == Math.ceil(titles.length/2)) {
+				bookNode2 = document.getElementById('tsoBOb');
+				while(bookNode2.itemCount > 0) bookNode2.removeItemAt(0);
+			}
+			bookNode2.appendChild(newCheck);
+		}
+		bookNode.selectedIndex = 0;
+		
+	},
+
+	 limitt:function(nikn) {
+		if (nikn == 5 || nikn > 6) { return true; }
+		else { return false };
+	},
+	
+
+	switchhier:function(htmp,stop) {
+
+		if(G_hier == htmp) return;
+		
+		var himg = ['l','m','r'];
+			
+
+		if (htmp == 't' && limitt(document.getElementById('set').selectedIndex)) { 
+			alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
+			document.getElementById((G_hier=='m'?'mul':'att')).checked=true;
+			document.getElementById((G_hier=='m'?'mul':'att')).disabled=true;
+			document.getElementById('tik').removeAttribute('checked');
+			document.getElementById('tik').removeAttribute('disabled');
+			return; 
+		}
+		if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
+			alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
 			document.getElementById('mul').checked=true;
 			document.getElementById('mul').disabled=true;
 			document.getElementById('att').removeAttribute('checked');
 			document.getElementById('att').removeAttribute('disabled');
-		return;
-	}
-
-	G_hier = htmp;
-
-	// style
-	
-	var himg = ['t','c','b'];
-	
-	ha = G_hLetters;
-
-	if (document.getElementById('set').value == 'k') {
-		var book = document.getElementById('book').value;
-		if (htmp == 'm') {
-			book = parseInt(book) - 1;
-			changeSet(1);
-			document.getElementById('book').selectedIndex = book;
+			return;
 		}
-		else {
-			book = kudvala[book];
-			changeSet(1);
-			document.getElementById('book').selectedIndex = book;
+		if (document.getElementById('set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('book').value] == undefined) {
+				alert('Aṭṭhakathā not available for '+this.getBookName(document.getElementById('set').value,htmp,document.getElementById('book').selectedIndex)+'.');
+				document.getElementById('mul').checked=true;
+				document.getElementById('mul').disabled=true;
+				document.getElementById('att').removeAttribute('checked');
+				document.getElementById('att').removeAttribute('disabled');
+			return;
 		}
-	}
-	else if (document.getElementById('set').value == 'y') {
-		var book = document.getElementById('book').value;
-		if (htmp == 'm') {
-			book = parseInt(book) - 1;
-			changeSet(1);
-			document.getElementById('book').selectedIndex = book;
-		}
-		else {
-			book = abhivala[book];
-			changeSet(1);
-			document.getElementById('book').selectedIndex = book;
-		}
-	}
-	updateHierarchy(0,stop);
-	return true;
-}	
 
-function historyBox() {
+		G_hier = htmp;
 
-	// history
-	
-	var hout = '';
-	var theHistory = getHistory();
-	if (theHistory) {
-		var histNode = document.getElementById('history');
-		while(histNode.itemCount > 0) histNode.removeItemAt(0);
-		histNode.appendItem('-- History --',null);
-		var isclear = '';
-		for (i in theHistory) {
-			var thist = theHistory[i].split('@');
-			var thist0 = toUni(thist[0]);
-			histNode.appendItem(thist0,thist[1]);
+		// style
+		
+		var himg = ['t','c','b'];
+		
+		ha = G_hLetters;
+
+		if (document.getElementById('set').value == 'k') {
+			var book = document.getElementById('book').value;
+			if (htmp == 'm') {
+				book = parseInt(book) - 1;
+				changeSet(1);
+				document.getElementById('book').selectedIndex = book;
+			}
+			else {
+				book = kudvala[book];
+				changeSet(1);
+				document.getElementById('book').selectedIndex = book;
+			}
 		}
-		histNode.selectedIndex = 0;
-	}
+		else if (document.getElementById('set').value == 'y') {
+			var book = document.getElementById('book').value;
+			if (htmp == 'm') {
+				book = parseInt(book) - 1;
+				changeSet(1);
+				document.getElementById('book').selectedIndex = book;
+			}
+			else {
+				book = abhivala[book];
+				changeSet(1);
+				document.getElementById('book').selectedIndex = book;
+			}
+		}
+		DPRXML.updateHierarchy(0,stop);
+		return true;
+	},
+
+	historyBox:function() {
+
+		// history
+		
+		var hout = '';
+		var theHistory = getHistory();
+		if (theHistory) {
+			var histNode = document.getElementById('history');
+			while(histNode.itemCount > 0) histNode.removeItemAt(0);
+			histNode.appendItem('-- History --',null);
+			var isclear = '';
+			for (i in theHistory) {
+				var thist = theHistory[i].split('@');
+				var thist0 = toUni(thist[0]);
+				histNode.appendItem(thist0,thist[1]);
+			}
+			histNode.selectedIndex = 0;
+		}
+	},
 }
