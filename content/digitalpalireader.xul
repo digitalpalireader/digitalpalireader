@@ -15,7 +15,7 @@
 				<spacer id="flexspace" flex="1"/>
 				<vbox pack="center" align="center">
 					<caption label="&sSet.label;" />
-					<listbox id="set" rows="7" oncommand="DPRNav.changeSet()">
+					<listbox id="set" rows="7" onclick="DPRNav.changeSet()">
 						<listitem value="v" label="Vinaya"/>
 						<listitem value="d" selected="true" label="Dīgha"/>
 						<listitem value="m" label="Majjhima"/>
@@ -30,7 +30,7 @@
 				</vbox>
 				<vbox pack="center" align="center">
 					<caption label="&sBook.label;" />
-					<listbox rows="7" id="book" oncommand="DPRNav.updateHierarchy()">
+					<listbox style="min-width:30px" rows="7" id="book" onclick="DPRXML.updateHierarchy()">
 						<listitem value="1" label="1" selected="true"/>
 						<listitem value="2" label="2"/>
 						<listitem value="3" label="3"/>
@@ -146,9 +146,9 @@
 							<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
 						</vbox>
 						<vbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
-							<vbox align="start" id="tsoBOa">
+							<vbox align="start" id="tsoBOA">
 							</vbox>
-							<vbox align="start" id="tsoBOb">
+							<vbox align="start" id="tsoBOB">
 							</vbox>
 						</vbox>
 					</vbox>
@@ -227,35 +227,29 @@
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Dictionary Display">
 		<grippy/>
     </splitter>
-		<vbox>
-			<hbox persist="height" id="container" pack="stretch" align="start">
-				<spacer id="flexspace" flex="1"/>
-				<hbox>
-					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
-						<label value="☆" />
-					</toolbarbutton>
-					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
-						<label value="#" />
-					</toolbarbutton>
-					<toolbarbutton onclick="DPRSend.bvAlert()" id="bv" tooltiptext="&bv.label;" role="button">
-						<label value="☸" />
-					</toolbarbutton>
-				</hbox>
-				<spacer id="flexspace" flex="1"/>
-				<hbox>
-					<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
-						<label value="⚙" />
-					</toolbarbutton>
-					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
-						<label value="?" />
-					</toolbarbutton>
-					<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
-						<label value="✉" />
-					</toolbarbutton>
-				</hbox>
-				<spacer id="flexspace" flex="1"/>
-			</hbox>
-		</vbox>
+		<hbox flex="1" pack="stretch">
+			<spacer flex="1"/>
+			<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
+				<label value="☆" />
+			</toolbarbutton>
+			<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
+				<label value="#" />
+			</toolbarbutton>
+			<toolbarbutton onclick="DPRSend.bvAlert()" id="bv" tooltiptext="&bv.label;" role="button">
+				<label value="☸" />
+			</toolbarbutton>
+			<spacer flex="1" orient="vertical"/>
+			<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
+				<label value="⚙" />
+			</toolbarbutton>
+			<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
+				<label value="?" />
+			</toolbarbutton>
+			<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
+				<label value="✉" />
+			</toolbarbutton>
+			<spacer flex="1"/>
+		</hbox>
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Buttons Display">
 		<grippy pack="center"></grippy>
     </splitter>

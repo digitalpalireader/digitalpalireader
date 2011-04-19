@@ -277,8 +277,8 @@ var DPRNav = {
 		var bookNode = document.getElementById('book');
 		while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
 
-		var bookNode2 = document.getElementById('tsoBOa');
-		while(bookNode2.childNodes.length > 0) bookNode2.removeNode(bookNode2.firstNode);
+		var bookNode2 = document.getElementById('tsoBOA');
+		while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
 		
 		for (i = 0; i < titles.length; i++) {
 			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
@@ -288,7 +288,7 @@ var DPRNav = {
 			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
 			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			if(i == Math.ceil(titles.length/2)) {
-				bookNode2 = document.getElementById('tsoBOb');
+				bookNode2 = document.getElementById('tsoBOB');
 				while(bookNode2.itemCount > 0) bookNode2.removeItemAt(0);
 			}
 			bookNode2.appendChild(newCheck);
