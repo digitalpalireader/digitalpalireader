@@ -10,7 +10,7 @@ var digitalpalireader =
     onLoad: function()
     {
 		window.dump("Load\n");
-		openFirstDPRTab();
+		DPRChrome.openFirstDPRTab();
 		this.updatePrefs();
 		mainWindow.document.getElementById('sidebar-header').hidden = true;
 	},
@@ -36,7 +36,7 @@ var digitalpalireader =
 				return false; // still one open tab
 			}
 		}
-		closeDPRSidebar();
+		mainWindow.toggleSidebar();
 		return true;		
 	},
 	onPageUnload: function(e)
@@ -56,7 +56,7 @@ var digitalpalireader =
 				return false; // still one open tab
 			}
 		}
-		closeDPRSidebar();
+		mainWindow.toggleSidebar();
 		return true;
 	},
 	updatePrefs: function() {
@@ -73,122 +73,5 @@ var digitalpalireader =
 		}
 	},
 
-	openDPRTab: function (permalink,id,reuse) {
-
-		// get last DPR tab
-
-		var start = 0;  // no DPR tabs yet
-		var newIdx = 0;
-		
-		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
-
-			// Get the next tab
-			var currentTab = tabbrowser.tabContainer.childNodes[index];
-			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-			if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
-				if (start == 1) { // prev was a DPR tab
-					newIdx = index;
-					break;
-				}
-			}
-			else {
-				start = 1; // got a DPR tab
-				newIdx = index+1;
-			}
-		}
-		var newTab = mainWindow.gBrowser.addTab(permalink);
-		if(id) newTab.setAttribute('id', id);
-		
-		
-
-		mainWindow.gBrowser.moveTabTo(newTab, newIdx)
-		mainWindow.gBrowser.selectedTab = newTab;
-
-
-	},
-
-	
-	tipitakaOptions: function () {
-		document.getElementById('tsoMAT').setAttribute('collapsed',true);
-		document.getElementById('tsoCO1').setAttribute('collapsed',true);
-		document.getElementById('tsoCO2').setAttribute('collapsed',true);
-		document.getElementById('tsoCO3').setAttribute('collapsed',true);
-		document.getElementById('tsoBO').setAttribute('collapsed',true);
-		
-		var which = document.getElementById('tipType').selectedIndex;
-		switch(which) {
-			case 4:
-				document.getElementById('tsoCO1').removeAttribute('collapsed');
-				document.getElementById('tsoCO2').removeAttribute('collapsed');
-				document.getElementById('tsoCO3').removeAttribute('collapsed');
-			break;
-			case 5:
-				document.getElementById('tsoBO').removeAttribute('collapsed');
-			break;
-			case 7:
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 8:
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 9:
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 11:
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-				document.getElementById('tsoCO1').removeAttribute('collapsed');
-				document.getElementById('tsoCO2').removeAttribute('collapsed');
-				document.getElementById('tsoCO3').removeAttribute('collapsed');
-			break;
-			case 12:
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-				document.getElementById('tsoBO').removeAttribute('collapsed');
-			break;
-			case 14:
-				document.getElementById('tsoCO2').removeAttribute('collapsed');
-			break;
-			default:
-			break;
-		}
-
-	},
-
-	
 
 };
-mainWindow.gBrowser.addEventListener("load", digitalpalireader.onPageLoad, true);
-mainWindow.gBrowser.tabContainer.addEventListener("TabClose", digitalpalireader.onPageUnload, true);
-
-
-
-function closeDPRSidebar() {
-	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
-
-	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-		mainWindow.toggleSidebar();
-	} 
-}
-
-function findDPRSidebar() {
-	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
-
-	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-		return sidebarWindow.getElementById('dpr-browser').contentWindow;
-	} 
-	else return false
-}
-function findDPRTab(id) {
-	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
-
-		// Get the next tab
-		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-
-		// Does this tab contain our custom attribute?
-		if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
-
-			return currentTab;
-		}
-	}
-	return false;
-}

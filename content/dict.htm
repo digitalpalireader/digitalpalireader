@@ -27,7 +27,6 @@ function onDocLoad() {
 
 <script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
 
-<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
@@ -37,8 +36,7 @@ function onDocLoad() {
 
 <body onunload="checkLastTab()" onload="onDocLoad();">
 <div id="content">
-	<div id="matrelc"></div>
-	<div id="right" onmouseover="document.body.style.cursor='auto'">
+	<div id="bottom">
 		<div id="difout">
 			<div id="cdif">
 				<div id="dif" class="paperback">
@@ -46,7 +44,7 @@ function onDocLoad() {
 					</div>
 				</div>
 			</div>
-			<div id="difhist"></div>
+			<div id="difhist" class="hoverShow"></div>
 		</div>
 	</div>
 	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>

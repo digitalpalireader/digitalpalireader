@@ -142,6 +142,18 @@ function paliXML(file,which)
     document.getElementById('cdif').scrollTop=0;
 }
 
+function toggleDppnTitle(link,id) {
+	if(document.getElementById(id).innerHTML.length > 0) {
+		document.getElementById(id).style.display = 'none';
+		document.getElementById(id).innerHTML = '';
+		return;
+	}
+
+	var data = getDppnData(link);
+
+	document.getElementById(id).style.display = 'block';
+	document.getElementById(id).innerHTML =  data;
+}
 
 var G_dppn = [];
 var G_dppnhist = [];

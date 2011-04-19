@@ -17,14 +17,10 @@
 	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
 	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
 	<script type="application/x-javascript" src="js/format.js"/>
-	<script type="application/x-javascript" src="js/search_func.js"/>
 
-	<script type="application/x-javascript" src="js/chrome.js"/>
-
-	<script type="application/x-javascript" src="js/move.js"/>
-	<script type="application/x-javascript" src="js/send.js"/>
-	<script type="application/x-javascript" src="js/bookmarks.js"/>
-	<script type="application/x-javascript" src="js/sortaz.js"/>
+	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
+	<script type="application/x-javascript" src="js/send_sidebar.js"/>
+	<script type="application/x-javascript" src="js/opts_sidebar.js"/>
 
 	<script type="application/x-javascript" src="js/history.js"/>
 	<script type="application/x-javascript" src="js/bv.js"/>
@@ -121,10 +117,10 @@
 			<form id="searchForm">
 				<vbox align="center" id="cp3">
 					<caption label="&searchHead;"/>
-					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" id="searchin"/>
+					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" oninput="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
 					<hbox flex="1">
 						<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
-						<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="digitalpalireader.tipitakaOptions()">
+						<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="DPROpts.tipitakaOptions()">
 							<menupopup>
 								<menuitem tooltip="Search all three nikayas" selected="true" label="The Tipitaka"/>
 								<menuitem tooltip="Search current set" label="This Set"/>
@@ -143,38 +139,39 @@
 								<menuitem tooltip="Search English suttas from Access To Insight" label="ATI Translations"/>
 							</menupopup>
 						</menulist>
-						<toolbarbutton flex="1" id="mul" tooltiptext="&dict_go;" role="button">
+						<toolbarbutton flex="1" id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch();" role="button">
 							<label value="➤" />
 						</toolbarbutton>
 					</hbox>
-					<vbox>
-					<groupbox collapsed="true" align="start" id="tsoMAT">
-						<checkbox id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
-						<checkbox id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>
-						<checkbox id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" checked="true"/>
-					</groupbox>
-					<groupbox collapsed="true" align="start" id="tsoCO1">
-						<checkbox id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
-					</groupbox>
-					<groupbox collapsed="true" align="start" id="tsoCO2" class="">
-						<checkbox id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
-						<checkbox id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
-						<checkbox id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
-						<checkbox id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
-						<checkbox id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
-					</groupbox>
-					<groupbox collapsed="true" align="start" id="tsoCO3" class="">
-						<checkbox id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
-						<checkbox id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
-						<checkbox id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
-						<checkbox id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
-					</groupbox>
-					<groupbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
-						<vbox align="start" id="tsoBOa">
+					<vbox align="start">
+						<vbox collapsed="true" align="start" id="tsoMAT">
+							<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
+							<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>
+							<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" checked="true"/>
 						</vbox>
-						<vbox align="start" id="tsoBOb">
+						<separator class=""/>
+						<vbox orient="vertical" collapsed="true" align="start" id="tsoCO1">
+							<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
 						</vbox>
-					</groupbox>
+						<vbox orient="vertical" collapsed="true" align="start" id="tsoCO2" class="">
+							<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
+							<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
+							<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
+							<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
+							<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
+						</vbox>
+						<vbox orient="vertical" collapsed="true" align="start" id="tsoCO3" class="">
+							<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
+							<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
+							<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
+							<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+						</vbox>
+						<vbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
+							<vbox align="start" id="tsoBOa">
+							</vbox>
+							<vbox align="start" id="tsoBOb">
+							</vbox>
+						</vbox>
 					</vbox>
 				</vbox>
 			</form>
@@ -186,17 +183,17 @@
 		<vbox align="center" id="cp4">
 			<caption label="&dictHead;"/>
 			<groupbox orient="vertical" align="center">
-				<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" id="dictin"/>
+				<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,DPRSend.eventSend(event));" size="18" flex="1" id="dictin"/>
 				<hbox>
-					<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button">
+					<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
 						<label value="adv" />
 					</toolbarbutton>
-					<menulist class="sel" tooltip="Choose a dictionary type - hover over the name for description" name="sped" onchange="dictLoad()">
+					<menulist class="sel" tooltip="Choose a dictionary type - hover over the name for description" id="dictType" oncommand="DPROpts.dictOptions()">
 						<menupopup>
-							<menuitem tooltip="Analyze Word" selected="true" label="DPR" />
-							<menuitem tooltip="Pali-English Dictionary" label="PED" />
-							<menuitem tooltip="Dict. of Pali Names" label="DPPN" />
-							<menuitem tooltip="Concise Pali-English Dictionary" label="CPED" />
+							<menuitem tooltip="Analyze Word" selected="true" value="DPR" label="DPR" />
+							<menuitem tooltip="Pali-English Dictionary" value="PED" label="PED" />
+							<menuitem tooltip="Dict. of Pali Names" value="DPPN" label="DPPN" />
+							<menuitem tooltip="Concise Pali-English Dictionary" value="CPED" label="CPED" />
 							<menuitem tooltip="PED, DPPN and CPED combined" value="MULTI" label="Multi" />
 							<menuitem tooltip="Concise English-Pali Dictionary" label="CEPD" />
 							<menuitem tooltip="Aṭṭhakathā Term Search" value="ATT" label="Aṭṭh" />
@@ -204,10 +201,47 @@
 							<menuitem tooltip="Title Search" value="TIT" label="Title" />
 						</menupopup>
 					</menulist>
-					<toolbarbutton id="mul" tooltiptext="&dict_go;" role="button">
+					<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(DPRSend.eventSend(event));" role="button">
 						<label value="➤" />
 					</toolbarbutton>
 				</hbox>
+				<groupbox align="start" id="dictAdvOpts" collapsed="true">
+				
+					<vbox id="soNO">
+						<label value="no advanced options available"/>
+					</vbox>
+					<vbox id="soRX" collapsed="true">
+						<checkbox class="tiny" id="soregexp" label="Reg. Exp." tooltiptext="Use Regular Expressions for wildcards in search"/>
+					</vbox>
+					<vbox id="soFZ" collapsed="true">
+						<checkbox class="tiny" id="sofuzzy" label="Fuzzy" tooltiptext="Enable fuzzy search (removes diacritics)"/>
+					</vbox>
+					<vbox id="soFT" collapsed="true">
+						<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
+					</vbox>
+					<vbox id="soSW" class="bottomb" collapsed="true">
+						<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
+					</vbox>
+					<separator/>
+					<vbox id="soMAT" class="bottomb" collapsed="true">
+						<checkbox class="tiny" id="soMATm" label="Mula" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soMATa" label="Aṭṭhakathā" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soMATt" label="Ṭīka" tooltiptext="Include in search" checked="true"/>
+					</vbox>
+					<vbox id="soNSV" collapsed="true">
+						<checkbox class="tiny" id="soNSv" label="Vin" tooltiptext="Include in search" checked="true"/>
+					</vbox>
+					<vbox id="soNS" collapsed="true">
+						<checkbox class="tiny" id="soNSd" label="DN" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soNSa" label="AN" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soNSm" label="MN" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soNSk" label="KN" tooltiptext="Include in search" checked="true"/>
+						<checkbox class="tiny" id="soNSs" label="SN" tooltiptext="Include in search" checked="true"/>
+					</vbox>
+					<vbox id="soNSA" collapsed="true">
+						<checkbox class="tiny" id="soNSy" label="Abhi" tooltiptext="Include in search" checked="true"/>
+					</vbox>
+				</groupbox>
 			</groupbox>
 		</vbox>
 		</form>

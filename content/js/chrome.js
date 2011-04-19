@@ -6,36 +6,6 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
-function openDPRTab(permalink,id) {
-
-	// get last DPR tab
-
-	var start = 0;  // no DPR tabs yet
-	var newIdx = 0;
-	
-	for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
-
-		// Get the next tab
-		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-		if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
-			if (start == 1) { // prev was a DPR tab
-				newIdx = index;
-				break;
-			}
-		}
-		else {
-			start = 1; // got a DPR tab
-			newIdx = index+1;
-		}
-	}
-	var newTab = mainWindow.gBrowser.addTab(permalink);
-	if(id) newTab.setAttribute('id', id);
-	mainWindow.gBrowser.moveTabTo(newTab, newIdx)
-	mainWindow.gBrowser.selectedTab = newTab;
-	
-
-}
 
 function openDPRMain(id,link) {
 	// get last DPR tab
