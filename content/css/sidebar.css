@@ -4,8 +4,13 @@ overflow:auto;
 }
 
 grippy {
-	height:10px;
-
+	height:8px;
+	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
+	border-radius:6px;
+	border:1px #EEE solid;
+}
+grippy:hover{
+	border:2px #FFF solid;
 }
 .pointer:hover{
 	cursor:pointer;

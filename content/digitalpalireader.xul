@@ -81,7 +81,7 @@
 			</hbox>
 		<spacer id="flexspace" flex="1"/>
 		</vbox>
-	<splitter id="identifier" collapse="before">
+	<splitter id="identifier" collapse="before" tooltiptext="Toggle Set &amp; Book Display">
 		<grippy/>
     </splitter>
    		<vbox id="container" align="center" persist="height">
@@ -107,14 +107,14 @@
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<separator class="groove"/>
+				<separator />
 				<menulist flex="1" class="sel" id="history" oncommand="openPlace(this.value.split(','))">
 					<menupopup>
 					</menupopup>
 				</menulist>
 			</groupbox>
 		</vbox>
-	<splitter id="identifier" collapse="before">
+	<splitter id="identifier" collapse="before" tooltiptext="Toggle Hierarchy Display">
 		<grippy/>
     </splitter>
 		<vbox>
@@ -179,7 +179,7 @@
 				</vbox>
 			</form>
 		</vbox>						
-	<splitter id="identifier" collapse="before">
+	<splitter id="identifier" collapse="before" tooltiptext="Toggle Search Display">
 		<grippy/>
     </splitter>
 		<form id="dictForm">
@@ -211,7 +211,7 @@
 			</groupbox>
 		</vbox>
 		</form>
-	<splitter id="identifier" collapse="before">
+	<splitter id="identifier" collapse="before" tooltiptext="Toggle Dictionary Display">
 		<grippy/>
     </splitter>
 		<vbox>
@@ -243,8 +243,8 @@
 				<spacer id="flexspace" flex="1"/>
 			</hbox>
 		</vbox>
-	<splitter id="identifier" collapse="before">
-		<grippy tooltip="Buttons" pack="center"></grippy>
+	<splitter id="identifier" collapse="before" tooltiptext="Toggle Buttons Display">
+		<grippy pack="center"></grippy>
     </splitter>
 	<spacer id="flexspace" flex="1"/>
 	</vbox>
