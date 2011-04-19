@@ -20,11 +20,11 @@ var DPRSend = {
 			alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
 			return; 
 		}
-		if (G_hier == 'a' && place[0] == 'g') {
+		if (G_hier == 'a' && nikaya == 'g') {
 			alertFlash('Atthakatha not available for grammar.','RGBa(255,0,0,0.8)');
 			return;
 		}		
-		if (G_hier == 'a' && place[0] == 'b') {
+		if (G_hier == 'a' && nikaya == 'b') {
 			alertFlash('Atthakatha not available for Abhidh-s.','RGBa(255,0,0,0.8)');
 			return;
 		}		
