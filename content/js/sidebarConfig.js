@@ -12,7 +12,7 @@ function sidebarConfig() {
 	for (i in G_prefs) {
 		G_prefs[i] = getPref(i);
 	}
-
+	historyBox();
 	// update backgrounds
 		
 	//checkbackground();

@@ -68,18 +68,14 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	st[0] = 'The Tipitaka';
 	st[1] = G_nikLongName[G_searchSet];
 	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1);
-	st[3] = '---';
-	st[4] = 'Multiple Sets (' + G_hTitles[G_searchMAT] + ')';
-	st[5] = 'Multiple Books (' + G_hTitles[G_searchMAT] + ')';
-	st[6] = '---';
-	st[7] = 'The Tipitaka (' + matst.join(',') + ')';
-	st[8] = G_nikLongName[G_searchSet] + ' (' + matst.join(',') + ')';
-	st[9] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (' + matst.join(',') + ')';
-	st[10] = '---';
-	st[11] = 'Multiple Sets (' + matst.join(',') + ')';
-	st[12] = 'Multiple Books (' + matst.join(',') + ')';
-	st[13] = '---';
-	st[14] = 'ATI Translations';
+	st[3] = 'Multiple Sets (' + G_hTitles[G_searchMAT] + ')';
+	st[4] = 'Multiple Books (' + G_hTitles[G_searchMAT] + ')';
+	st[5] = 'The Tipitaka (' + matst.join(',') + ')';
+	st[6] = G_nikLongName[G_searchSet] + ' (' + matst.join(',') + ')';
+	st[7] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (' + matst.join(',') + ')';
+	st[8] = 'Multiple Sets (' + matst.join(',') + ')';
+	st[9] = 'Multiple Books (' + matst.join(',') + ')';
+	st[10] = 'ATI Translations';
 
 
 	// tab title
@@ -96,22 +92,22 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	switch(G_searchType) {
 		case 0:
-		case 4:
-		case 7:
-		case 11:
+		case 3:
+		case 5:
+		case 8:
 			pausesall();
 		break;
 		case 1:
-		case 5:
-		case 8:
-		case 12:
+		case 4:
+		case 6:
+		case 9:
 			pausetwo();
 		break;
 		case 2:
-		case 9:
+		case 7:
 			pausethree();
 		break;
-		case 14: // ATI
+		case 10: // ATI
 			atiSearchStart();
 		break;
 	}
@@ -179,10 +175,10 @@ function pausesall()
 	var which = G_searchType;
 
 	for(w in G_XMLFileArray) {
-		if ((which == 0 || which == 7) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
+		if ((which == 0 || which == 5) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
+		if ((which == 3 || which == 8) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
-		if(which > 6) { // multiple hier
+		if(which > 4) { // multiple hier
 			for (x = 0; x < 3; x++) {
 				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 					G_searchFileArray.push(w+G_hLetters[x]);
@@ -210,8 +206,8 @@ function pausesall()
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
-		if ((which == 0 || which == 7) && /[xbg]/.exec(G_numberToNik[i])) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
+		if ((which == 0 || which == 5) && /[xbg]/.exec(G_numberToNik[i])) continue; // don't add extracanonical texts for tipitaka match 
+		if ((which == 3 || which == 8) && G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
 		toplista.push('<span id="sdf'+G_numberToNik[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+G_numberToNik[i]+'\').offsetTop;">'+G_nikLongName[G_numberToNik[i]]+':</a> <span id="stfH'+G_numberToNik[i]+'"></span></span>');
 	}
 	
@@ -233,9 +229,9 @@ function pausetwo() { // init function for single collection
 	
 	for(w in G_XMLFileArray) {
 		if (w.charAt(0) != nikaya) continue; // only this collection
-		if ((which == 5 || which == 12) && G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books 
+		if ((which == 4 || which == 9) && G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books 
 
-		if(which > 6) { // multiple hier
+		if(which > 4) { // multiple hier
 			for (x = 0; x < 3; x++) {
 				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 					G_searchFileArray.push(w+G_hLetters[x]);
@@ -272,7 +268,7 @@ function pausethree() {
 	var nikbook = nikaya+book;
 	var getstring = G_searchString;
 
-	if(which == 9) { // single book, multiple hier
+	if(which == 7) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
 			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 				G_searchFileArray.push(nikbook+G_hLetters[x]);
@@ -320,8 +316,6 @@ function importXMLs(cnt)
 		return;
     }	
 	
-	var which = G_searchType;
-
 	count = cnt;
 	var bookno = 0;
 	var endloop = 0;

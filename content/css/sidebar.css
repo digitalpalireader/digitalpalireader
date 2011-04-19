@@ -1,4 +1,13 @@
+#outer {
+background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC)
+}
 
+grippy {
+	height:10px;
+	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
+	border-radius:3px;
+	border:1px #EEE solid;
+}
 .pointer:hover{
 	cursor:pointer;
 }
@@ -29,4 +38,8 @@ listbox {
 
 .hide {
 display:none;
+}
+
+.tiny {
+font-size:12px;
 }

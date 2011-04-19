@@ -34,7 +34,6 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 
 	
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
-
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
     xmlhttp.send(null);
@@ -182,7 +181,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	
 	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 
-	addHistory(G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+G_nikToNumber[nikaya]+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+	addHistory(G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+nikaya+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
 	// refresh history box
 

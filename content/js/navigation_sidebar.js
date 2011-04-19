@@ -375,3 +375,23 @@ function switchhier(htmp,stop) {
 	updateHierarchy(0,stop);
 	return true;
 }	
+
+function historyBox() {
+
+	// history
+	
+	var hout = '';
+	var theHistory = getHistory();
+	if (theHistory) {
+		var histNode = document.getElementById('history');
+		while(histNode.itemCount > 0) histNode.removeItemAt(0);
+		histNode.appendItem('-- History --',null);
+		var isclear = '';
+		for (i in theHistory) {
+			var thist = theHistory[i].split('@');
+			var thist0 = toUni(thist[0]);
+			histNode.appendItem(thist0,thist[1]);
+		}
+		histNode.selectedIndex = 0;
+	}
+}
