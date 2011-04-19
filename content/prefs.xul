@@ -31,11 +31,11 @@
   							<caption label="&pShow.label;"/>
   							
   							<box orient="vertical">
-  									<checkbox id="showPages" label="&pShowPages.label;" prefstring="Bool.showPages"/>
-					<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="Bool.showVariants"/>
-					<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="Bool.showPermalinks"/>
-					<checkbox id="showNames" label="&pShowNames.label;" prefstring="Bool.showNames"/>
-					<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="Bool.showPedLinks"/>
+								<checkbox id="showPages" label="&pShowPages.label;" prefstring="Bool.showPages"/>
+								<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="Bool.showVariants"/>
+								<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="Bool.showPermalinks"/>
+								<checkbox id="showNames" label="&pShowNames.label;" prefstring="Bool.showNames"/>
+								<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="Bool.showPedLinks"/>
   							</box>
  					</groupbox>
  					<groupbox flex="1">

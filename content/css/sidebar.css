@@ -1,12 +1,11 @@
 #outer {
-background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC)
+background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
+overflow:auto;
 }
 
 grippy {
 	height:10px;
-	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
-	border-radius:3px;
-	border:1px #EEE solid;
+
 }
 .pointer:hover{
 	cursor:pointer;

@@ -40,7 +40,7 @@
 				<spacer id="flexspace" flex="1"/>
 				<vbox pack="center" align="center">
 					<caption label="&sSet.label;" />
-					<listbox id="set" rows="7" onclick="changeSet()">
+					<listbox id="set" rows="7" oncommand="changeSet()">
 						<listitem value="v" label="Vinaya"/>
 						<listitem value="d" selected="true" label="Dīgha"/>
 						<listitem value="m" label="Majjhima"/>
@@ -55,7 +55,7 @@
 				</vbox>
 				<vbox pack="center" align="center">
 					<caption label="&sBook.label;" />
-					<listbox rows="7" id="book" onclick="updateHierarchy()">
+					<listbox rows="7" id="book" oncommand="updateHierarchy()">
 						<listitem value="1" label="1" selected="true"/>
 						<listitem value="2" label="2"/>
 						<listitem value="3" label="3"/>
@@ -121,10 +121,10 @@
 			<form id="searchForm">
 				<vbox align="center" id="cp3">
 					<caption label="&searchHead;"/>
-					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" id="searchin"/>
+					<textbox type="autocomplete" autocompletesearch="form-history" size="18" flex="1" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" id="searchin"/>
 					<hbox flex="1">
-						<checkbox tooltiptext="&searchRx.text;" class="tiny" label="&searchRx.label;" id="searchRx"/>
-						<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType" onchange="tipitakaOptions()">
+						<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
+						<menulist class="sel" tooltip="Choose a search type - hover over the name for description" id="tipType"  oncommand="digitalpalireader.tipitakaOptions()">
 							<menupopup>
 								<menuitem tooltip="Search all three nikayas" selected="true" label="The Tipitaka"/>
 								<menuitem tooltip="Search current set" label="This Set"/>
@@ -147,6 +147,35 @@
 							<label value="➤" />
 						</toolbarbutton>
 					</hbox>
+					<vbox>
+					<groupbox collapsed="true" align="start" id="tsoMAT">
+						<checkbox id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
+						<checkbox id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>
+						<checkbox id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" checked="true"/>
+					</groupbox>
+					<groupbox collapsed="true" align="start" id="tsoCO1">
+						<checkbox id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
+					</groupbox>
+					<groupbox collapsed="true" align="start" id="tsoCO2" class="">
+						<checkbox id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
+						<checkbox id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
+						<checkbox id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
+						<checkbox id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
+						<checkbox id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
+					</groupbox>
+					<groupbox collapsed="true" align="start" id="tsoCO3" class="">
+						<checkbox id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
+						<checkbox id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
+						<checkbox id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
+						<checkbox id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+					</groupbox>
+					<groupbox orient="horizontal" collapsed="true" pack="center" id="tsoBO">
+						<vbox align="start" id="tsoBOa">
+						</vbox>
+						<vbox align="start" id="tsoBOb">
+						</vbox>
+					</groupbox>
+					</vbox>
 				</vbox>
 			</form>
 		</vbox>						

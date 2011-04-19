@@ -245,14 +245,14 @@ function sendDict(hard,add) {
 
 function sendSearch(add) {
 
-	if(!checkGetstring(document.form.isearch.value)) return;
+	if(!checkGetstring(document.getElementById('isearch').value)) return;
 	
 	var which = document.getElementById('tipType').selectedIndex;
 	
 	if(which == 3 || which == 6 || which == 10 || which == 13) return;
 	
 	if(which == 15) { // Dev
-		DevInput(document.form.isearch.value);
+		DevInput(document.getElementById('isearch').value);
 		return;
 	}
 
@@ -279,27 +279,25 @@ function sendSearch(add) {
 		}
 		book = book.join(',');
 	}
-	else book = document.form.book.value;
+	else book = document.getElementById('book').value;
 
-	document.form.usearch.value = toUni(document.form.isearch.value).toLowerCase(); 
-
-	var rx = document.form.tsoregexp.checked;
+	var rx = document.getElementById('tsoRx').checked;
 
 	if(!add) { // reuse old tab
 		var oldTab = findDPRTab('DPR-search');
 
 		if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.form.isearch.value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+			var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.getElementById('isearch').value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
 			openDPRTab(permalink,'DPR-search');
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-			oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(document.form.isearch.value).toLowerCase(),MAT,set,book,rx,1);
+			oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(document.getElementById('isearch').value).toLowerCase(),MAT,set,book,rx,1);
 		}
 	}
 	else {
-	var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.form.isearch.value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+	var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.getElementById('isearch').value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
 		openDPRTab(permalink,'DPRs');
 	}
 

@@ -276,15 +276,25 @@ function setBookList(nik) {
 	
 	var bookNode = document.getElementById('book');
 	while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
+
+	var bookNode2 = document.getElementById('tsoBOa');
+	while(bookNode2.childNodes.length > 0) bookNode2.removeNode(bookNode2.firstNode);
 	
 	for (i = 0; i < titles.length; i++) {
 		bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-		if(i == Math.ceil(titles.length/2)) checkNikaya += '</td><td valign="top">';
-		checkNikaya += '<input type="checkbox" id="tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)) +'" title="Include in search" checked> <span class="tiny">'+((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i])+'</span><br/>';
+		
+		var newCheck = document.createElement('checkbox');
+		newCheck.setAttribute('checked',true);
+		newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+		newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+		if(i == Math.ceil(titles.length/2)) {
+			bookNode2 = document.getElementById('tsoBOb');
+			while(bookNode2.itemCount > 0) bookNode2.removeItemAt(0);
+		}
+		bookNode2.appendChild(newCheck);
 	}
 	bookNode.selectedIndex = 0;
 	checkNikaya += '</td></tr></table>';
-//	document.getElementById('tsoBO').innerHTML = checkNikaya;
 	
 }
 

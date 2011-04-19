@@ -107,6 +107,54 @@ var digitalpalireader =
 
 	},
 
+	
+	tipitakaOptions: function () {
+		document.getElementById('tsoMAT').setAttribute('collapsed',true);
+		document.getElementById('tsoCO1').setAttribute('collapsed',true);
+		document.getElementById('tsoCO2').setAttribute('collapsed',true);
+		document.getElementById('tsoCO3').setAttribute('collapsed',true);
+		document.getElementById('tsoBO').setAttribute('collapsed',true);
+		
+		var which = document.getElementById('tipType').selectedIndex;
+		switch(which) {
+			case 4:
+				document.getElementById('tsoCO1').removeAttribute('collapsed');
+				document.getElementById('tsoCO2').removeAttribute('collapsed');
+				document.getElementById('tsoCO3').removeAttribute('collapsed');
+			break;
+			case 5:
+				document.getElementById('tsoBO').removeAttribute('collapsed');
+			break;
+			case 7:
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+			break;
+			case 8:
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+			break;
+			case 9:
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+			break;
+			case 11:
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				document.getElementById('tsoCO1').removeAttribute('collapsed');
+				document.getElementById('tsoCO2').removeAttribute('collapsed');
+				document.getElementById('tsoCO3').removeAttribute('collapsed');
+			break;
+			case 12:
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				document.getElementById('tsoBO').removeAttribute('collapsed');
+			break;
+			case 14:
+				document.getElementById('tsoCO2').removeAttribute('collapsed');
+			break;
+			default:
+			break;
+		}
+
+	},
+
+	
+
 };
 mainWindow.gBrowser.addEventListener("load", digitalpalireader.onPageLoad, true);
 mainWindow.gBrowser.tabContainer.addEventListener("TabClose", digitalpalireader.onPageUnload, true);

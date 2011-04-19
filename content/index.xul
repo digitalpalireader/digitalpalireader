@@ -29,25 +29,10 @@ function getconfig() {
 }
 
 var devCheck = 0;
-if(extFileExists('/home/noah/Extensions/work/dev.js')) {
-	var headID = document.getElementsByTagName("head")[0];         
-	var newScript = document.createElement('script');
-	newScript.type = 'text/javascript';
-	newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
-	headID.appendChild(newScript);
-	
-	var headID2 = document.getElementsByTagName("head")[0];         
-	var newScript2 = document.createElement('script');
-	newScript2.type = 'text/javascript';
-	newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
-	headID2.appendChild(newScript2);
 
-}
-else { // null functions
-	function devO() {}
-	function dalert(a) {}
-	function ddump(a) {}
-}
+function devO() {}
+function dalert(a) {}
+function ddump(a) {}
 
 </script>
 	<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>

@@ -21,7 +21,7 @@
 <!ENTITY searchHead "Text Search">
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
-<!ENTITY searchRx.label "ReEx">
+<!ENTITY searchRx.label "Rx">
 
 	<!-- dict -->
 
