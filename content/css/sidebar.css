@@ -1,8 +1,48 @@
+/* static - don't move these */
+
+body, p, table, div, a, font, select, input, textarea, span {
+	font-family: Tahoma;
+	color: #111;
+}
+
+body, p, table, div, a, font, span {
+	font-size: 16px;
+}
+
+select, input, textarea {
+	font-size: 14px;
+}
+
+.small {
+	font-size: 12px;
+}
+
+.tiny {
+	font-size: 10px;
+}
+
+.large {
+	font-size: 20px;
+}
+
+
+.huge {
+	font-size: 24px;
+}
+
+.paperback {
+}
+
+.chromeback {
+}
+
+
 #outer {
-background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
 overflow:auto;
 padding:10px;
 }
+
+/* end static */
 
 menulist {
 	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
@@ -43,7 +83,6 @@ grippy:hover{
 
 caption {
 	font-weight:bold;
-	font-size:16px;
 }
 
 splitter {
@@ -58,6 +97,3 @@ listbox {
 display:none;
 }
 
-.tiny {
-font-size:12px;
-}
