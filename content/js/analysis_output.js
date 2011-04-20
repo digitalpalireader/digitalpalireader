@@ -52,8 +52,8 @@ function outputDef(which,first,frombox)
 	var myConj = owparts[owparts.length-1].split('#')[0].split('^');
 	if(myConj[3]) { // if root form is found, set up conjugation
 		if(yt[myConj[3]][4] != 'I') {
-			conjWord.form = G_outwords[which][0].split('-').pop().replace(/"/g, 'x');
-			conjWord.root = myConj[3].replace(/"/g, 'x');
+			conjWord.form = toUni(G_outwords[which][0].split('-').pop());
+			conjWord.root = toUni(myConj[3]);
 		}
 	}
 	

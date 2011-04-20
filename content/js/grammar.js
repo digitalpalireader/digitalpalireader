@@ -2,8 +2,7 @@
 
 function conjugate(word, id, which) {
 	
-	word = word.replace(/x/g,'"');
-	if(which) which = toUni(which.replace(/x/g,'"'));
+	word = toVel(word);
 	
 	var yto = yt[word];
 	

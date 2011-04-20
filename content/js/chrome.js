@@ -6,8 +6,22 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
+function openFirstDPRTab() {
+	if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
+}
 
-function openDPRMain(id,link) {
+function openDPRTab(permalink,id,reuse) {
+
+
+	if(reuse) { // reuse old tab
+		var oldTab = findDPRTab(id);
+
+		if (!oldTab) {
+			openDPRTab(permalink,id);
+			return true;
+		}
+	}
+
 	// get last DPR tab
 
 	var start = 0;  // no DPR tabs yet
@@ -29,17 +43,13 @@ function openDPRMain(id,link) {
 			newIdx = index+1;
 		}
 	}
-	var opts = link.match(/\?.+/);
-	var newTab = mainWindow.gBrowser.addTab('chrome://digitalpalireader/content/index.xul'+(opts?opts[0]:''));
-	newTab.setAttribute('id', id);
+	var newTab = mainWindow.gBrowser.addTab(permalink);
+	if(id) newTab.setAttribute('id', id);
 	mainWindow.gBrowser.moveTabTo(newTab, newIdx)
 	mainWindow.gBrowser.selectedTab = newTab;
+
 }
 
-
-function openFirstDPRTab() {
-	if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
-}
 
 function findDPRTab(id) {
 	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {

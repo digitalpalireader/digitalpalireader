@@ -26,7 +26,6 @@ var digitalpalireader =
 	{
         window.dump("onLoad\n");
 		
-
 		var tab = e.target;
 
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
@@ -39,7 +38,6 @@ var digitalpalireader =
 				return false; // still one open tab
 			}
 		}
-		mainWindow.toggleSidebar();
 		return true;		
 	},
 	onPageUnload: function(e)
@@ -63,6 +61,7 @@ var digitalpalireader =
 		return true;
 	},
 	updatePrefs: function() {
+		window.dump('updatePrefs');
 		this.sidebarConfig();
 		DPRNav.changeSet(1);
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {

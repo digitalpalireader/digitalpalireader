@@ -2,7 +2,6 @@
 	
 function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stringra,add)
 {
-
 	if (stringra) {
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');
