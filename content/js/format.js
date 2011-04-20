@@ -107,20 +107,25 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/([^.])\.\.(?!\.)/g, "$1."); // double periods
 
 	var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
-	//data = data.replace(/\"/g, '\u00B4');
+
 	var wordbyword = data.split(' ');
 	var addpre = '';
-	var paran=0;
-	//document.getElementById('mafa').innerHTML = data;	
+	var paran=1;
+
 	var wb;
 	var b = 0;
 	var space = ' ';
-   //alert(data);
-	
 	
 	for (var a = 0; a < wordbyword.length; a++)
 	{
+		
 		wb = wordbyword[a];
+		
+		if (/^[,;.!?]$/.exec(wb)) {
+			convout += wb + ' ';
+			finout += wb + ' ';
+			continue;
+		}
 		
 		// remove space where extra quotes were
 		space = ' ';
@@ -279,6 +284,8 @@ function preparepali(data,which) { // standard text prep for algorithm
 	finout[0] = finout[0].replace(/<c1>/g, '<span style="color:'+DPR_prefs['coldppn']+'">');
 	finout[0] = finout[0].replace(/<c2>/g, '<span style="color:'+DPR_prefs['colcpd']+'">');
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
+
+	finout[0] = finout[0].replace(/> +([,;.!?] )/g, ">$1");
 	
 	
 	return finout;

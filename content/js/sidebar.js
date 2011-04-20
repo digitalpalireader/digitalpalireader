@@ -10,7 +10,7 @@ var digitalpalireader =
     onLoad: function()
     {
 		window.dump("Load\n");
-		if(!DPRChrome.giveIDtoTabs()) DPRChrome.openFirstDPRTab();
+		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
 		mainWindow.document.getElementById('sidebar-header').hidden = true;
 	},
@@ -45,19 +45,7 @@ var digitalpalireader =
         window.dump('onUnload\n');
 		var tab = e.target;
 
-		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
-			// Get the next tab
-			var currentTab = tabbrowser.tabContainer.childNodes[index];
-			if(currentTab == tab) {
-				dump('match');
-				continue;
-			}
-			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
-			if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
-				return false; // still one open tab
-			}
-		}
-		mainWindow.toggleSidebar();
+
 		return true;
 	},
 	updatePrefs: function() {

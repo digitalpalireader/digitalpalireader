@@ -54,11 +54,11 @@ DPR_prefsD['imgbk'] = 'url(chrome://digitalpalireader/content/images/background.
 
 DPR_prefsD['bkcptype'] = 'img';
 DPR_prefsD['colbkcp'] = '#DDC';
-DPR_prefsD['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
+DPR_prefsD['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)';
 
 DPR_prefsD['colInput'] = '#FFF';
 DPR_prefsD['colButton'] = 'RGBa(200,200,200,0.1)';
-DPR_prefsD['imgButton'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC)';
+DPR_prefsD['imgButton'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)';
 DPR_prefsD['colButtonSel'] = '#FFF';
 DPR_prefsD['colbk1'] = 'yellow';
 DPR_prefsD['colbk2'] = 'aqua';

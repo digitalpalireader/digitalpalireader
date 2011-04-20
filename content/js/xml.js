@@ -202,7 +202,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '');
 	if(!isPL) { //not coming from a permalink
 		try {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + (para+1) : ''));
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+(para ? '&para=' + para : ''));
 		}
 		catch(ex) {
 		dalert();
@@ -321,7 +321,7 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(para) { 
-        document.getElementById('maf').scrollTop = document.getElementById('para'+(para-1)).offsetTop;
+        document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
 	}
 	else if(scroll) {
 		document.getElementById('maf').scrollTop = scroll;

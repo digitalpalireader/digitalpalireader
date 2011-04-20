@@ -35,7 +35,9 @@ function conjugate(word, id, which) {
 	var outNode = document.createElement('div');
 	
 	if(id == 'dif') {
-		
+		clearDivs('dif');
+		outNode.innerHTML = '<div class="conj">'+out+'</div>';
+		document.getElementById('difb').appendChild(outNode);
 	}
 	else {
 		outNode.innerHTML = '<div class="conj">'+out+'</div><div class="x" onclick="this.parentNode.innerHTML=null">x</div>';

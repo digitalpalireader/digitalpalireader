@@ -40,8 +40,8 @@ var DPRSend = {
 			}
 			var oldTab = DPRChrome.findDPRTab('DPR-main');
 			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
-				openDPRTab('DPR-main',permalink);
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+				DPRChrome.openDPRTab(permalink,'DPR-main');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
@@ -50,8 +50,8 @@ var DPRSend = {
 			}
 		}
 		else {
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
-			DPRChrome.openDPRTab('DPRm',permalink);
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
+			DPRChrome.openDPRTab(permalink,'DPRm');
 		}
 
 	},
@@ -105,8 +105,8 @@ var DPRSend = {
 			}
 			var oldTab = DPRChrome.findDPRTab('DPR-main');
 			if (!oldTab) {		
-				var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
-				DPRChrome.openDPRTab('DPR-main',permalink);
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
+				DPRChrome.openDPRTab(permalink,'DPR-main');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
@@ -115,8 +115,8 @@ var DPRSend = {
 			}
 		}
 		else {
-			var permalink = 'chrome://digitalpalireader/content/index.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
-			DPRChrome.openDPRTab('DPRm',permalink);
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '');
+			DPRChrome.openDPRTab(permalink,'DPRm');
 		}
 	},
 
@@ -202,7 +202,6 @@ var DPRSend = {
 		if(!this.checkGetstring(document.getElementById('isearch').value)) return;
 		
 		var which = document.getElementById('tipType').selectedIndex;
-		
 		if(which == 15) { // Dev
 			DevInput(document.getElementById('isearch').value);
 			return;
@@ -216,17 +215,20 @@ var DPRSend = {
 		}
 		else var MAT = G_hier;
 
-		if(which == 0 || which == 4 || which == 7 || which == 11 || which == 14) {
+		if(which == 4 || which == 11 || which == 14) { // get sets
 			var set = ''
 			for (i in G_nikToNumber) {
 				if(document.getElementById('tsoCO'+i).checked) set += i;
 			}
 		}
+		else if (which == 0 || which == 7) { // tipitaka
+			var set = 'vdmsaky';
+		}
 		else var set = document.getElementById('set').value;
 		
-		if(which == 5 || which == 12) {
+		if(which == 5 || which == 12) { // get books
 			var book = [];
-			for (i = 0; i < nikvoladi[document.getElementById('set').value]; i++) {
+			for (i = 1; i <= nikvoladi[document.getElementById('set').value].length; i++) {
 				if(document.getElementById('tsoBObook' + i).checked) book.push(i);
 			}
 			book = book.join(',');
@@ -245,7 +247,7 @@ var DPRSend = {
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(document.getElementById('isearch').value).toLowerCase(),MAT,set,book,rx,1);
+				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(document.getElementById('isearch').value).toLowerCase(),MAT,set,book,rx);
 			}
 		}
 		else {

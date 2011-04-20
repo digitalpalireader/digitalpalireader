@@ -252,7 +252,7 @@
     </splitter>
 	<spacer id="flexspace" flex="1"/>
 	</vbox>
-	<script type="application/x-javascript" src="overlay.js" />
+	<script type="application/x-javascript" src="js/sidebar.js" />
 	<script type="application/x-javascript" src="js/config_sidebar.js"/>
 	<script type="application/x-javascript" src="js/io.js"/>
 	<script type="application/x-javascript" src="js/prefload.js"/>

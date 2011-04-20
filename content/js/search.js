@@ -12,8 +12,8 @@ var G_searchRX;
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchRX) {
 	
 	clearDivs('search');
-
-	if(searchType) { // update url
+	resetvalues();
+	if(searchString) { // update url
 		G_searchType = searchType;
 		G_searchString = searchString;
 		G_searchMAT = searchMAT;
@@ -688,7 +688,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -801,7 +801,7 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									

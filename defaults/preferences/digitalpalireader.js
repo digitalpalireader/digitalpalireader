@@ -19,11 +19,11 @@ pref("extensions.digitalpalireader.Char.imgbk", "url(chrome://digitalpalireader/
 
 pref("extensions.digitalpalireader.Char.bkcptype", "img");
 pref("extensions.digitalpalireader.Char.colbkcp", "#DDC");
-pref("extensions.digitalpalireader.Char.imgbkcp", "-moz-linear-gradient(left,#DDC,#FFF,#DDC)");
+pref("extensions.digitalpalireader.Char.imgbkcp", "-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)");
 
 pref("extensions.digitalpalireader.Char.colInput", "#FFF");
 pref("extensions.digitalpalireader.Char.colButton", "RGBa(200,200,200,0.1)");
-pref("extensions.digitalpalireader.Char.imgButton", "-moz-linear-gradient(left,#DDC,#FFF,#DDC)");
+pref("extensions.digitalpalireader.Char.imgButton", "-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)");
 pref("extensions.digitalpalireader.Char.colButtonSel", "#FFF");
 pref("extensions.digitalpalireader.Char.colbk1", "yellow");
 pref("extensions.digitalpalireader.Char.colbk2", "aqua");
