@@ -163,7 +163,7 @@ function makeProgressTable() {
 	var fal = G_searchFileArray.length;
 	for (q2 = 0; q2 < fal; q2++)
 	{
-		tableout += '<td bgcolor="'+G_prefs['colbkcp']+'" width=1 class="bordered"></td>';
+		tableout += '<td bgcolor="'+DPR_prefs['colbkcp']+'" width=1 class="bordered"></td>';
 	}
 	tableout += '</tr></table>';
 	document.getElementById('stfc').innerHTML = tableout;
@@ -202,7 +202,7 @@ function pausesall()
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
 	
-	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+G_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+G_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
+	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
@@ -254,7 +254,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+G_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(2);
 }
@@ -287,7 +287,7 @@ function pausethree() {
 	makeProgressTable();
 
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+G_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -359,14 +359,14 @@ function importXMLs(cnt)
 		if (qz < G_searchFileArray.length-1) 
 		{
 			nextbookfile = G_searchFileArray[qz+1];
-			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stfH'+nikayaat).style.color=G_prefs['colsel'];
+			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stfH'+nikayaat).style.color=DPR_prefs['colsel'];
 			qz++;
 			bounce(1);
 		}
 		else {
 			qz = 0;
 			bookperm = 0;
-			document.getElementById('stfH'+nikayaat).style.color=G_prefs['colsel'];
+			document.getElementById('stfH'+nikayaat).style.color=DPR_prefs['colsel'];
 			finishSearch();
 		}			
 	}	
@@ -662,30 +662,30 @@ function createTables(xmlDoc,hiert)
 										exword[t] = exword[t].concat(texnodups[t]);
 									}
 				
-									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + G_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(v.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(w.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 
 									if(x.length>1) {
 										if(colt == 3) colt = 0;
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(y.length>1) {
 										if(colt == 3) colt = 0;
-										finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + tmp + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
@@ -775,29 +775,29 @@ function createTables(xmlDoc,hiert)
 
 									// titles
 																
-									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + G_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+									finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
 									var colt = 0;
 									var cola = ['colped', 'coldppn', 'colsel'];
 									if(u.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(v.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(w.length>1) {
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(x.length>1) {
 										if(colt == 3) colt = 0;
-										 finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										 finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
 									if(y.length>1) {
 										if(colt == 3) colt = 0;
-										finalout += ', <b style="color:' + G_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 									 }
 									
 									// paragraph
@@ -822,7 +822,7 @@ function createTables(xmlDoc,hiert)
 		document.getElementById('sbfb').appendChild(document.createElement('hr'));
 	}
 	if (match == 0) {
-		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + G_prefs['colped'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + G_prefs['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
+		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + DPR_prefs['colped'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + DPR_prefs['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
 		outNode.innerHTML = finalout;
 		document.getElementById('sbfb').appendChild(outNode);
 	}
@@ -923,7 +923,7 @@ function showonly(string) {
 		scrollToId('search',0);
 	}
 	else { 
-		document.getElementById('showing').innerHTML = '<b style="background-color:'+G_prefs['colbkcp']+'; color:'+G_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
+		document.getElementById('showing').innerHTML = '<b style="background-color:'+DPR_prefs['colbkcp']+'; color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
 		scrollToId('search','sbfb');
 	}
 }
@@ -934,10 +934,10 @@ function atiSearchStart() {
 
 	var getstring = G_searchString;
 
-	var atiurl = (G_prefs['catioff'] ? 'file://' + G_prefs['catioff']+'html/' : 'http://www.accesstoinsight.org/');
+	var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catioff']+'html/' : 'http://www.accesstoinsight.org/');
 
-	if(G_prefs['catioff']) {
-		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+G_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+	if(DPR_prefs['catioff']) {
+		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
 		document.getElementById('stfc').innerHTML = '';
 		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
 		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
@@ -992,7 +992,7 @@ function atiSearchOffline(d, getstring) {
 	
 	eval('var anik = ati'+nik.toUpperCase()+';');
 	for (var c = 0; c < anik.length; c++) {
-		var cont = readExtFile(G_prefs['catiloc']+'html/tipitaka/'+anik[c]).join('\n');
+		var cont = readExtFile(DPR_prefs['catiloc']+'html/tipitaka/'+anik[c]).join('\n');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
 		var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
@@ -1005,7 +1005,7 @@ function atiSearchOffline(d, getstring) {
 				postpara = '';
 				if (startmatch >= 0)
 				{
-					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+G_prefs['colsel']+'">' + title + '</a><br/>'; 
+					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'">' + title + '</a><br/>'; 
 					while (startmatch >= 0)
 					{				
 						count++;
@@ -1031,8 +1031,8 @@ function atiSearchOffline(d, getstring) {
 						startmatch = texttomatch.search(getstring);
 					}
 
-					postpara = postpara.replace(/<c0>/g, '<span style="color:'+G_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+G_prefs['catiloc']+'html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+G_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
+					postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_prefs['catiloc']+'html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
 				}
 			}
 		}

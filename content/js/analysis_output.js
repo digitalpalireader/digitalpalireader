@@ -77,17 +77,17 @@ function outputDef(which,first,frombox)
 				switch (data[2]) {
 				case '0':
 					if (!frombox && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + G_prefs['colped'] + '">' + dataout + '</b></a>';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></a>';
 					break;
 				case '1':
 					if (!frombox && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + G_prefs['coldppn'] + '">' + dataout + '</b></a>';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></a>';
 					break;
 				case '2':
-					osout += '<b style="color:' + G_prefs['colcpd'] + '">' + dataout + '</b>';
+					osout += '<b style="color:' + DPR_prefs['colcpd'] + '">' + dataout + '</b>';
 					break;
 				case '3':
-					osout += '<b style="color:' + G_prefs['coltext'] + '">' + dataout + '</b>';
+					osout += '<b style="color:' + DPR_prefs['coltext'] + '">' + dataout + '</b>';
 					break;
 				}
 			}
@@ -97,10 +97,10 @@ function outputDef(which,first,frombox)
 				}
 				switch (data[2]) {
 				case '0':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + G_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
 					break;
 				case '1':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\')"><b style="color:' + G_prefs['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
+					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\')"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
 					break;
 				}
 			}
@@ -155,7 +155,7 @@ function outputDef(which,first,frombox)
 			
 			
 			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b style="color:' + G_prefs['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef; } 
+				if (x == 0) { var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef; } 
 				if (thisconcise.length > 1) {
 					
 					conciseoutput += '<option value="' + thisconcise[x] + ':' + conciseword + ':' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[1] + ')</option>'; 
@@ -184,6 +184,6 @@ function outputDef(which,first,frombox)
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
-	document.getElementById('spdout').innerHTML = '<b style="color:' + G_prefs['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
+	document.getElementById('spdout').innerHTML = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
 	moveframex(moveat);
 }

@@ -597,7 +597,7 @@ function thaiconv(input) {
 
 
 function translit(data) {
-	var script = G_prefs['translits'];
+	var script = DPR_prefs['translits'];
 	var out = '';
 
 	switch (script) {

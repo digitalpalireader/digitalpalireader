@@ -48,8 +48,8 @@ function bookmarkframe(refresh)
 		thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
 		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="openPlace(['+thist[1]+'])">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
 	}
-	if(!hout) { hout = '<b style="color:'+G_prefs['colsel']+'">no&nbsp;history</b>'; }
-	else { isclear = '&nbsp;<a style="color:'+G_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
+	if(!hout) { hout = '<b style="color:'+DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
+	else { isclear = '&nbsp;<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
 	var xmlDoc = bookmarkXML();
 	

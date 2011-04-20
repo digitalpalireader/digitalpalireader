@@ -51,7 +51,7 @@ function outputAnalysis(input,frombox)
 var G_illegalCompoundBreak = /[^aiueomn][^aiueo]/; // this assumes that a compound has to break at a vowel, nigahita or n.
 
 function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttrick) {
-	if(G_prefs['altlimit'] != '' && G_outwords.length >= G_prefs['altlimit']) return;
+	if(DPR_prefs['altlimit'] != '' && G_outwords.length >= DPR_prefs['altlimit']) return;
 
 	var matchedword;
 	var fullmatch;
@@ -117,7 +117,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	//if(!lastpart && !nextpart) devO(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	//if(devCheck > 0 && devDump == 1) devO(oneword);
 		
-	if(G_prefs['altlimit'] != '' && G_outwords.length >= G_prefs['altlimit']) return;
+	if(DPR_prefs['altlimit'] != '' && G_outwords.length >= DPR_prefs['altlimit']) return;
 	if (isUncomp(oneword,lastpart,nextpart)) return;
 
 // fudges

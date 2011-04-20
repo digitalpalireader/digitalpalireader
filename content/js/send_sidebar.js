@@ -152,7 +152,7 @@ var DPRSend = {
 		var getstring = document.getElementById('dictin').value;
 
 		if(!hard) {
-			if (getstring == this.G_lastsearch || getstring == '' || !G_prefs['autodict'] || document.getElementById('soregexp').checked || document.getElementById('sofulltext').checked) return;
+			if (getstring == this.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || document.getElementById('soregexp').checked || document.getElementById('sofulltext').checked) return;
 		}
 		
 		this.G_lastsearch = this.value;

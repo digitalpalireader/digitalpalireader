@@ -1,51 +1,45 @@
 /* static - don't move these */
 
-body, p, table, div, a, font, select, input, textarea, span {
-	font-family: Tahoma;
-	color: #111;
+caption,listbox,checkbox,button,toolbarbutton, input, textarea {
+}
+caption {
 }
 
-body, p, table, div, a, font, span {
-	font-size: 16px;
+listbox, input, textarea, textarea {
 }
 
-select, input, textarea {
-	font-size: 14px;
+button,toolbarbutton {
 }
 
 .small {
-	font-size: 12px;
 }
 
-.tiny {
-	font-size: 10px;
+.tiny  {
 }
 
 .large {
-	font-size: 20px;
 }
 
 
 .huge {
-	font-size: 24px;
 }
 
-.paperback {
-}
 
 .chromeback {
 }
 
+/* end static */
+
+.bold {
+	font-weight:bold;
+}
 
 #outer {
 overflow:auto;
 padding:10px;
 }
 
-/* end static */
-
 menulist {
-	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
 	min-height:28px;
 	max-height:34px;
 }
@@ -58,8 +52,8 @@ toolbarbutton {
 	max-height:40px;
 }
 grippy {
-	height:8px;
 	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
+	height:8px;
 	border-radius:6px;
 	border:1px #EEE solid;
 }
@@ -70,21 +64,6 @@ grippy:hover{
 	cursor:pointer;
 }
 
-.x:hover {
-	cursor:pointer;
-	opacity: 0.8;
-	-moz-opacity: 0.8;
-}
-
-.x {
-	opacity: 0.3;
-	-moz-opacity: 0.3;
-}
-
-caption {
-	font-weight:bold;
-}
-
 splitter {
 	margin:5px;
 }
@@ -92,8 +71,3 @@ splitter {
 listbox {
 	width:auto;
 }
-
-.hide {
-display:none;
-}
-

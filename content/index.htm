@@ -16,9 +16,9 @@ function onDocLoad() {
 	//openDPRSidebar();
 	getconfig();
 
-	if (G_prefs['ctrans']) {
-		if (G_prefs['catioff']) { 
-			var nsrc = 'file://'+ G_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
+	if (DPR_prefs['ctrans']) {
+		if (DPR_prefs['catioff']) { 
+			var nsrc = 'file://'+ DPR_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
 		}
 		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
 		atiIns = 1;

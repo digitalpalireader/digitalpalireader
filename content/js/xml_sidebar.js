@@ -22,10 +22,10 @@ var DPRXML = {
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 
-		var meta = (getsutta > 0  ? document.form.meta.selectedIndex : 0);
-		var volume = (getsutta > 1 ? document.form.volume.selectedIndex : 0);
-		var vagga = (getsutta > 2 ? document.form.vagga.selectedIndex : 0);
-		var sutta = (getsutta > 3 ? document.form.sutta.selectedIndex : 0);
+		var meta = (getsutta > 0  ? document.getElementById('meta').selectedIndex : 0);
+		var volume = (getsutta > 1 ? document.getElementById('volume').selectedIndex : 0);
+		var vagga = (getsutta > 2 ? document.getElementById('vagga').selectedIndex : 0);
+		var sutta = (getsutta > 3 ? document.getElementById('sutta').selectedIndex : 0);
 
 
 		var nik = document.getElementById('set').value;

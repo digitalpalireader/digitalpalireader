@@ -10,8 +10,8 @@ function changeStyleByName(name,attrib,value) {
 
 
 function getconfig() {
-	for (i in G_prefs) {
-		G_prefs[i] = getPref(i);
+	for (i in DPR_prefs) {
+		DPR_prefs[i] = getPref(i);
 	}
 
 	// update backgrounds
@@ -20,21 +20,21 @@ function getconfig() {
 
 	// update fonts, colors
 
-	document.styleSheets[0]['cssRules'][0].style.color = G_prefs['coltext']; 
-	document.styleSheets[0]['cssRules'][0].style.fontFamily = G_prefs['colfont']; 
-	document.styleSheets[0]['cssRules'][1].style.fontSize = G_prefs['colsize'] + 'px'; 
+	document.styleSheets[0]['cssRules'][0].style.color = DPR_prefs['coltext']; 
+	document.styleSheets[0]['cssRules'][0].style.fontFamily = DPR_prefs['colfont']; 
+	document.styleSheets[0]['cssRules'][1].style.fontSize = DPR_prefs['colsize'] + 'px'; 
 	
-	document.styleSheets[0]['cssRules'][2].style.fontSize = Math.round(parseInt(G_prefs['colsize'])*.9) + 'px';  // select, etc.
-	document.styleSheets[0]['cssRules'][2].style.backgroundColor = G_prefs['colInput'];  // select, etc.
+	document.styleSheets[0]['cssRules'][2].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.9) + 'px';  // select, etc.
+	document.styleSheets[0]['cssRules'][2].style.backgroundColor = DPR_prefs['colInput'];  // select, etc.
 	
-	document.styleSheets[0]['cssRules'][3].style.fontSize = Math.round(parseInt(G_prefs['colsize'])*.8) + 'px';  // small
-	document.styleSheets[0]['cssRules'][4].style.fontSize = Math.round(parseInt(G_prefs['colsize'])*.7) + 'px';  // tiny
-	document.styleSheets[0]['cssRules'][5].style.fontSize = Math.round(parseInt(G_prefs['colsize'])*1.25) + 'px';  // large
-	document.styleSheets[0]['cssRules'][6].style.fontSize = Math.round(parseInt(G_prefs['colsize'])*1.5) + 'px';  // huge
+	document.styleSheets[0]['cssRules'][3].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // small
+	document.styleSheets[0]['cssRules'][4].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.7) + 'px';  // tiny
+	document.styleSheets[0]['cssRules'][5].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.25) + 'px';  // large
+	document.styleSheets[0]['cssRules'][6].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.5) + 'px';  // huge
 	
-	document.styleSheets[0]['cssRules'][9].style.backgroundColor = G_prefs['colButton'];  // buttons
-	document.styleSheets[0]['cssRules'][10].style.backgroundImage = '-moz-radial-gradient('+G_prefs['colButtonSel']+','+G_prefs['colbkcp']+')';  // buttons
-	document.styleSheets[0]['cssRules'][11].style.backgroundImage = '-moz-radial-gradient('+G_prefs['colButtonSel']+','+G_prefs['colbkcp']+')';  // buttons
+	document.styleSheets[0]['cssRules'][9].style.backgroundColor = DPR_prefs['colButton'];  // buttons
+	document.styleSheets[0]['cssRules'][10].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
+	document.styleSheets[0]['cssRules'][11].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
 }
 
 function changecss(myclass,element,value) {
@@ -53,35 +53,35 @@ function changecss(myclass,element,value) {
 }
 
 function checkbackground() {
-	var wbk = G_prefs['bktype'];
+	var wbk = DPR_prefs['bktype'];
 	
 	if(/col/.exec(wbk)) {
-		document.styleSheets[0]['cssRules'][7].style.backgroundColor = G_prefs['colbk'];  // paperback
-		document.body.style.backgroundColor = G_prefs['colbk'];
+		document.styleSheets[0]['cssRules'][7].style.backgroundColor = DPR_prefs['colbk'];  // paperback
+		document.body.style.backgroundColor = DPR_prefs['colbk'];
 	}
 	else {
 		document.styleSheets[0]['cssRules'][7].style.backgroundColor = '';  // paperback
 		document.body.style.backgroundColor = '';
 	}
 	if(/img/.exec(wbk)) {
-		document.styleSheets[0]['cssRules'][7].style.backgroundImage = G_prefs['imgbk'];  // paperback
-		document.body.style.backgroundImage = G_prefs['imgbk'];
+		document.styleSheets[0]['cssRules'][7].style.backgroundImage = DPR_prefs['imgbk'];  // paperback
+		document.body.style.backgroundImage = DPR_prefs['imgbk'];
 	}
 	else {
 		document.styleSheets[0]['cssRules'][7].style.backgroundImage = '';  // paperback
 		document.body.style.backgroundImage = '';
 	}
 
-	var sbk = G_prefs['bkcptype'];
+	var sbk = DPR_prefs['bkcptype'];
 
 	if(/col/.exec(sbk)) {
-		document.styleSheets[0]['cssRules'][8].style.backgroundColor = G_prefs['colbkcp'];  // chromeback
+		document.styleSheets[0]['cssRules'][8].style.backgroundColor = DPR_prefs['colbkcp'];  // chromeback
 	}
 	else {
 		document.styleSheets[0]['cssRules'][8].style.backgroundColor = '';  // chromeback
 	}
 	if(/img/.exec(sbk)) {
-		document.styleSheets[0]['cssRules'][8].style.backgroundImage = G_prefs['imgbkcp'];  // chromeback
+		document.styleSheets[0]['cssRules'][8].style.backgroundImage = DPR_prefs['imgbkcp'];  // chromeback
 	}
 	else {
 		document.styleSheets[0]['cssRules'][8].style.backgroundImage = '';  // chromeback

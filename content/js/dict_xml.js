@@ -47,7 +47,7 @@ function paliXML(file,which)
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
 	
-	if(G_prefs['showPedLinks']) {
+	if(DPR_prefs['showPedLinks']) {
 	
 		// add links
 		var dataa = data.split(' ');
@@ -58,7 +58,7 @@ function paliXML(file,which)
 				if(!tda || tda.length < 2) {
 					datat += ' ' + dataa[i];
 				}
-				else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+G_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+				else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
 				else datat += ' ' + dataa[i];
 				i++
 				
@@ -79,7 +79,7 @@ function paliXML(file,which)
 			if(!tda || tda.length < 2) {
 				datat += ' ' + dataa[i];
 			}
-			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+G_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
 			else datat += ' ' + dataa[i];
 			
 		}
@@ -329,7 +329,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         placen += ' Para. ' + (parseInt(para)+1);
         finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',['+wordr2+'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(G_prefs['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+G_hLetters[type];
+    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(DPR_prefs['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+G_hLetters[type];
     document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
 }

@@ -5,22 +5,22 @@ function loadDefaults() {
 	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
 	for (var i = 0; i < cks.length; ++i) {
 		var ck = document.getElementById(cks[i]);
-		ck.checked = D_prefs[cks[i]];
+		ck.checked = DPR_prefsD[cks[i]];
 	}
 	var ints = ['altlimit'];
 	for (var i = 0; i < ints.length; ++i) {
 		var box = document.getElementById(ints[i]);
-		box.value = D_prefs[ints[i]];
+		box.value = DPR_prefsD[ints[i]];
 	}
 	var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 	for (var i = 0; i < strings.length; ++i) {
 		var box = document.getElementById(strings[i]);
-		box.value = D_prefs[strings[i]];
+		box.value = DPR_prefsD[strings[i]];
 	}
 	
 	// backgrounds
 	
-	var wbk = D_prefs['bktype'];
+	var wbk = DPR_prefsD['bktype'];
 	
 	if(/col/.exec(wbk)) {
 		document.getElementById('pcolbk').checked = true;
@@ -39,7 +39,7 @@ function loadDefaults() {
 		document.getElementById('imgbk').setAttribute('disabled', true);
 	}
 
-	var sbk = D_prefs['bkcptype'];
+	var sbk = DPR_prefsD['bkcptype'];
 
 	if(/col/.exec(sbk)) {
 		document.getElementById('pcolbkcp').checked = true;
@@ -58,9 +58,9 @@ function loadDefaults() {
 		document.getElementById('imgbkcp').setAttribute('disabled', true);
 	}
 
-	if(!D_prefs['catioff']) document.getElementById('catiloc').setAttribute('disabled', true);
+	if(!DPR_prefsD['catioff']) document.getElementById('catiloc').setAttribute('disabled', true);
 
-	document.getElementById('translits').selectedIndex = D_prefs['translits'];
+	document.getElementById('translits').selectedIndex = DPR_prefsD['translits'];
 		
 }
 
@@ -96,7 +96,7 @@ function loadPrefs() {
 			document.getElementById('imgbk').setAttribute('disabled', 'true');
 		}
 
-		var sbk = D_prefs['bkcptype'];
+		var sbk = DPR_prefsD['bkcptype'];
 
 		if(/col/.exec(sbk)) document.getElementById('pcolbkcp').checked = true;
 		else document.getElementById('colbkcp').setAttribute('disabled', 'true');

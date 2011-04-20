@@ -30,6 +30,15 @@
 <!ENTITY dictGo.text "Lookup word in selected dictionary">
 <!ENTITY dictAdv "adv">
 <!ENTITY dictAdv.text "advanced lookup options">
+<!ENTITY DPR "DPR Analysis">
+<!ENTITY PED "Pali-English (PED)">
+<!ENTITY DPPN "Pali Proper Names (DPPN)">
+<!ENTITY CPED "Concise Pali-English (CPED)">
+<!ENTITY Multi "PED, DPPN &amp; CPED">
+<!ENTITY CEPD "Concise English-Pali (CEPD)">
+<!ENTITY Aṭṭh "Aṭṭhakathā Terms">
+<!ENTITY Ṭīka "Ṭīka Terms">
+<!ENTITY Title "Title Search">
 
 	<!-- buttons -->
 

@@ -29,7 +29,7 @@ function conjugate(word, id, which) {
 
 	if(which) {
 		var whichR = new RegExp('([> ])'+which+'([<,])','gi');
-		out = out.replace(whichR, "$1<span style=\"color:"+G_prefs['colped']+"\">"+which+"</span>$2");
+		out = out.replace(whichR, "$1<span style=\"color:"+DPR_prefs['colped']+"\">"+which+"</span>$2");
 	}
 	
 	var outNode = document.createElement('div');

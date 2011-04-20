@@ -249,7 +249,7 @@ function onDocLoad() {
 										</select> <a class="tiny" href="javascript:void(0)" onmouseup="this.blur(); showHideId('searchopts')"><b>adv</b></a>
 									</div>
 									<div>
-									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) sendDict(1,event.ctrlKey || event.button == 1?1:''); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && G_prefs['autodict'] && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; sendDict(event.ctrlKey || event.button == 1?1:'');};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onmouseup="sendDict(1,event.ctrlKey || event.button == 1?1:'')">➤</span>
+									<input type="text" value="" name="dictin" size="15"  onkeydown="if(event.keyCode==13) sendDict(1,event.ctrlKey || event.button == 1?1:''); event.keyCode=0;" onkeyup="if (document.form.lastsearch.value != this.value && this.value != '' && DPR_prefs['autodict'] && !document.form.soregexp.checked && !document.form.sofulltext.checked) {document.form.lastsearch.value = this.value; sendDict(event.ctrlKey || event.button == 1?1:'');};" title="Edit or look up a word"><input type="hidden" name="lastsearch" value=""><input type="hidden" name="manual" value=""> <span class="abut obut small" title="Look up entry" onmouseup="sendDict(1,event.ctrlKey || event.button == 1?1:'')">➤</span>
 									</div>
 									<div id="searchopts">
 										<table align="center">

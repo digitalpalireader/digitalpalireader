@@ -8,6 +8,6 @@ function refreshit(which)
 	//document.getElementById('mafrefresh').style.marginBottom = document.getElementById('mafrefresh').offsetHeight/(-2);
     
     if (which == 1) { // coming from reset options.
-		document.getElementById('mafe').innerHTML='<b style="color:'+G_prefs['colsel']+'">Options reset.</b>';
+		document.getElementById('mafe').innerHTML='<b style="color:'+DPR_prefs['colsel']+'">Options reset.</b>';
 	}
 }
