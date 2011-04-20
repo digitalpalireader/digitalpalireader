@@ -69,7 +69,7 @@ function bookmarkframe(refresh)
 			var loc = bNodes[i].getElementsByTagName('location')[0].textContent.split('#');
 			
 			if(loc[7] = 'm') {
-				var sname = getSuttaNumber(loc[0],loc[1],loc[2],loc[3],loc[4],loc[5],loc[6]);
+				var sname = getSuttaNumber(loc[0],loc[1],loc[2],loc[3],loc[4],loc[5],loc[6],loc[7],0);
 				if(sname) sname = ' ('+G_nikLongName[loc[0]]+' '+sname+')';
 				else sname = '';
 			}

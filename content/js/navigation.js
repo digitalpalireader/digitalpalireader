@@ -259,7 +259,7 @@ function getDppnEntry(term) {
 }
 
 
-function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
+function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
 	
 	var no;
 	book = parseInt(book);
@@ -386,25 +386,26 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			volume = 0;
 		break;
 		case 's':
-			if(a1 > 5) return;
+			if(a1 > 56) return;
 			if(hiert != 'm') return;
 			vagga = a1 - 1;
 			switch (true) {
-				case (a1 > 11):
-					vagga -= 11;
-					book++;
-				case (a1 > 21):
+				case (a1 > 44):
 					vagga -= 10;
 					book++;
 				case (a1 > 34):
 					vagga -= 13;
 					book++;
-				case (a1 > 44):
+				case (a1 > 21):
 					vagga -= 10;
+					book++;
+				case (a1 > 11):
+					vagga -= 11;
 					book++;
 				break;
 			}
 			var found = 0;
+
 			out:
 			for(sutta in smlist[vagga]) {
 				for(section in smlist[vagga][sutta]) {

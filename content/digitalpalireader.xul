@@ -62,19 +62,19 @@
     </splitter>
    		<vbox id="container" align="stretch">
 			<button id="title" label="title" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
-			<menulist flex="1" class="sel" id="meta" onchange="DPRNav.updateHierarchy(6)">
+			<menulist flex="1" class="sel" id="meta" onchange="DPRXML.updateHierarchy(6)">
 				<menupopup>
 				</menupopup>
 			</menulist>
-			<menulist flex="1" class="sel" id="volume" oncommand="DPRNav.updateHierarchy(5)">
+			<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(5)">
 				<menupopup>
 				</menupopup>
 			</menulist>
-			<menulist flex="1" class="sel" id="vagga" oncommand="DPRNav.updateHierarchy(4)">
+			<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(4)">
 				<menupopup>
 				</menupopup>
 			</menulist>
-			<menulist flex="1" class="sel" id="sutta" oncommand="DPRNav.updateHierarchy(3)">
+			<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(3)">
 				<menupopup>
 				</menupopup>
 			</menulist>
