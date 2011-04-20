@@ -50,7 +50,7 @@
 						<label value="T" />
 					</toolbarbutton>
 					<toolbarseparator orient="horizontal" class="groove"/>
-					<toolbarbutton flex="1" onclick="DPRSend.importXML(DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
+					<toolbarbutton flex="1" onclick="DPRSend.importXML(null,null,null,DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
 						<label value="➤" />
 					</toolbarbutton>
 				</radiogroup>

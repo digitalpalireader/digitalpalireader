@@ -1,11 +1,15 @@
 /* static - don't move these */
 
-caption,listbox,checkbox,button,toolbarbutton, input, textarea {
+caption,listbox,menulist,listitem,menuitem,checkbox,button,toolbarbutton, input, textarea {
 }
+
 caption {
 }
 
-listbox, input, textarea, textarea {
+listbox,listitem, menulist,menuitem, textbox {
+}
+
+listbox, menubox, textbox {
 }
 
 button,toolbarbutton {

@@ -256,7 +256,6 @@ function DPPNXML(file,which)
 
 
 function getAtthXML(num,type,niklist) { // get atthakatha or tika word 
-    moveframex(2);
     if(type == 'a') {
 		var loca = attlist[num].split('#');
 		var word = loca.shift();
@@ -321,17 +320,14 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var y = x[sutta].getElementsByTagName("h4");
         if (y.length > 1) placen += '.' + (parseInt(section)+1);
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
-        
-        var wordr = new RegExp('\\^b\\^\([^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\)\\^eb\\^','gi');
-        var wordr2 = new RegExp('\\^b\\^[^a-zA-Z\\.~^]*' + word + '[^a-zA-Z^]*\\^eb\\^','gi');
-        z = z.replace(wordr, "<c0><@>"+word.replace(/ /g,'</@><xc> <c0><@>')+"</@><xc>");
-        
+                
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',['+wordr2+'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',[\''+toUni(word)+'\'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafbc').innerHTML = '<b style="text-size:'+(parseInt(DPR_prefs['colsize'])*2)+'px">'+toUni(word)+'</b> in the '+G_hLetters[type];
+    document.getElementById('mafbc').innerHTML = '<b>'+toUni(word)+'</b> in the '+G_hTitles[G_hNumbers[type]];
     document.getElementById('mafbc').innerHTML += finout;
     document.getElementById('maf').scrollTop = 0;
+    setCurrentTitle(toUni(word)+' in the '+G_hTitles[G_hNumbers[type]]);
 }
  
 function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search 

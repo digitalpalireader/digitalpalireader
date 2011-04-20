@@ -6,13 +6,13 @@ var DPRChrome = {
 		var dict = 0; // no dict tabs
 		var search = 0; // no dict tabs
 		var etc = 0;
-		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+		for (index = 0, tb = mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
 
 			// Get the next tab
-			var currentTab = tabbrowser.tabContainer.childNodes[index];
-			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && !/^DPR/.exec(currentTab.getAttribute('id'))) { // not a dpr tab
-				mainWindow.gBrowser.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
+			var currentTab = tb.tabContainer.childNodes[index];
+			var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
+			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+				tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
 				if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
 				else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
 				else if(/search\.htm/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
@@ -104,9 +104,5 @@ var DPRChrome = {
 		this.G_prompts.alert(null, title, data);
 	}
 }
-
-mainWindow.gBrowser.addEventListener("load", digitalpalireader.onPageLoad, true);
-mainWindow.gBrowser.tabContainer.addEventListener("TabClose", digitalpalireader.onPageUnload, true);
-
 
 

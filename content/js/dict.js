@@ -134,7 +134,7 @@ function pedsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),mainda,80,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),mainda,70,1);
 			if(simlist) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -324,7 +324,7 @@ function dppnsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),nameda,80,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),nameda,70,1);
 			if(simlist) {
 				listoutf += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -353,10 +353,12 @@ function dppnsearchstart(hard)
 	var y = finouta.length;
 
 	var findiv = Math.ceil(y/3);
-		
+	
+	listoutf += '<table width="100%">';
+	
 	for (z = 0; z < findiv; z++)
 	{
-		listoutf += '<table><tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
+		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table><hr />';
@@ -516,7 +518,7 @@ function mlsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),yt,80,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),yt,70,1);
 			if(simlist) {
 				finout += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -538,6 +540,7 @@ function mlsearchstart(hard)
 
 		}
 	}
+	
 	finout += '<table>'
 	for (z = 0; z < finouta.length; z++)
 	{
@@ -666,18 +669,21 @@ function multisearchstart(hard)
 	
 	var outDiv = document.createElement('div');
 	
-	outDiv.innerHTML += '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr />';
+	outDiv.innerHTML += '<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />';
 
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),mainda,80,1);
-			if(simlist) {
+			var simlistp = findSimilarWords(toFuzzy(getstring),mainda,70,1);
+			var simlistd = findSimilarWords(toFuzzy(getstring),nameda,70,1);
+			var simlistc = findSimilarWords(toFuzzy(getstring),yt,70,1);
+			
+			if(simlistp || simlistd || simlistc) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
-				for (i in simlist) {
-					pedt = simlist[i].replace(/^.+\^/,'');
+				for (i in simlistp) {
+					pedt = simlistp[i].replace(/^.+\^/,'');
 					for (z = 0; z < mainda[pedt].length; z++) {
 					
 						var loc = mainda[pedt][z];
@@ -686,10 +692,36 @@ function multisearchstart(hard)
 						
 						uniout = toUni(uniout).replace(/`/g,'˚');
 						
-						finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="sendPaliXML([\'PED\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
 					}
+				}
+				for (i in simlistd) {
+					pedt = simlistd[i].replace(/^.+\^/,'');
+					for (z = 0; z < nameda[pedt].length; z++) {
+					
+						var loc = nameda[pedt][z];
+						
+						uniout = pedt;
+						
+						uniout = toUni(uniout).replace(/`/g,'˚');
+						
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onclick="sendDPPNXML([\''+uniout+'\',\'' + loc.replace('/','\',\'') + '\',\'' + uniout + '\'])">' + uniout + (nameda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+
+						y++;
+					}
+				}
+				for (i in simlistc) {
+					pedt = simlistc[i].replace(/^.+\^/,'');
+					
+					var loc = yt[pedt];
+					
+					us = toUni(pedt);
+					ud = toUni(yt[pedt][2] + ' (' + yt[pedt][1] + ')');
+					
+					finouta.push('<div><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cpedsim'+i+'\').innerHTML == \'\') { document.getElementById(\'cpedsim'+i+'\').innerHTML = \''+ud +'\'} else { document.getElementById(\'cpedsim'+i+'\').innerHTML = \'\';}">' + us + '</a><br><div class="conjc" id="cpedsim'+i+'"></div></div>');
+
 				}
 			}
 			else outDiv.innerHTML += '<p>No suggestions.</p>';
@@ -699,8 +731,7 @@ function multisearchstart(hard)
 
 		}
 	}
-	
-	finouta = sortaz(finouta);
+	else finouta = sortaz(finouta);
 	
 	var findiv = Math.ceil(finouta.length/3);
 	var listoutf = '<table width="100%">';

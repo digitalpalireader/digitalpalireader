@@ -13,6 +13,8 @@ function onLoad() {
 	if (link) {
 		switch(link.split('=')[0]) {
 			case 'analysis':
+			case 'ped':
+			case 'dppn':
 				document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
 				document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm?'+link;
 				break;

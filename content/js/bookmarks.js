@@ -81,7 +81,7 @@ function bookmarkframe(refresh)
 			var desc = bNodes[i].getElementsByTagName('description')[0].textContent;
 						
 			outputList +=  '<tr><td><div class="round">';
-				outputList += '<table width=100%><tr><td><span class="pointer" href="javascript:void(0)" onclick="openPlace(['+loc.join(',')+'],null,null,null,'+scroll+')"><b>' + (i+1) + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + sname + '</b></span></td><td><span class="abut obut" title="click here to edit this bookmark" id="hiderbutton' + i + '" onClick="hiddenout(\'' + i + '\')">+</span></td><td><span class="abut obut" onClick="eraseBookmark(\'' + i + '\')">x</span></td></tr><tr><td><i><font id="title' + i + '">'+desc+'</font></i></td></tr></table>';
+				outputList += '<table width=100%><tr><td width="100%"><span class="pointer" href="javascript:void(0)" onclick="openPlace(['+loc.join(',')+'],null,null,null,'+scroll+')"><b>' + (i+1) + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + sname + '</b></span></td><td width="1"><span class="abut obut" title="click here to edit this bookmark" id="hiderbutton' + i + '" onClick="hiddenout(\'' + i + '\')">+</span></td><td width="1"><span class="abut obut" onClick="eraseBookmark(\'' + i + '\')">x</span></td></tr><tr><td colspan=3><i><font id="title' + i + '">'+desc+'</font></i></td></tr></table>';
 				
 				outputList +=  '<div class="hide" id="'+ i + '"><hr>';
 					outputList +=  '<table width=100%><tr><td><b>Edit Name</b></td></tr><tr><td align=center><input type=text value="'+name+'" id="newname' + i + '" title="Enter a new name for this bookmark" size=12></td><td align=center><span class="abut obut" onClick="bookmarkxn(document.getElementById(\'newname'+i+'\').value,\'' + i + '\')" title="Change Name">change</span></td></tr></table><hr>';

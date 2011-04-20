@@ -67,6 +67,23 @@ function findDPRTab(id) {
 	return false;
 }
 
+function findDPRTabByLoc(loc) {
+	loc = new RegExp(loc);
+	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
+
+		// Get the next tab
+		var currentTab = tabbrowser.tabContainer.childNodes[index];
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+
+		// Does this tab contain our custom attribute?
+		if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && loc.exec(ctloc)) {
+
+			return currentTab;
+		}
+	}
+	return false;
+}
+
 function updatePrefs() {
 	getconfig();
 	changeSet(1);
@@ -124,9 +141,13 @@ var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocumen
 	} 
 }
 function openDPRSidebar() {
-var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
 	if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return mainWindow.toggleSidebar('viewDPR');
 	} 
+}
+
+function setCurrentTitle(title) {
+	mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 }
 
