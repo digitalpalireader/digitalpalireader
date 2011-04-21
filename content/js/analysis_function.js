@@ -8,8 +8,6 @@ var G_stopAnalyzing = 0;
 function outputAnalysis(input,frombox)
 {
 	
-	
-	
 	//devO('',1,1);
 	G_outwords = [];
 	shortdefpre = [];
@@ -397,6 +395,15 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				{					
 					resn.push([wtr[b],nameda[wtr[b]]]);
 				}
+				else {
+					for (i in G_dppnEnd) {
+						if (nameda[wtr[b]+G_dppnEnd[i]]) 
+						{					
+							if(devDump > 0) devO('added DPPN declension (ending added): ' + wtr[b]);
+							resn.push([wtr[b]+G_dppnEnd[i],nameda[wtr[b]+G_dppnEnd[i]]]);
+						}
+					}
+				}
 			}
 		}
 		
@@ -453,6 +460,15 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				if (nameda[wtrN[b]]) 
 				{					
 					resn.push([wtrN[b],nameda[wtrN[b]]]);
+				}
+				else {
+					for (i in G_dppnEnd) {
+						if (nameda[wtrN[b]+G_dppnEnd[i]]) 
+						{					
+							if(devDump > 0) devO('added DPPN compound end declension (ending added): ' + wtrN[b]+G_dppnEnd[i]);
+							resn.push([wtrN[b]+G_dppnEnd[i],nameda[oneword+G_dppnEnd[i]]]);
+						}
+					}
 				}
 			}
 		}

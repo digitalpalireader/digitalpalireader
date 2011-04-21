@@ -29,7 +29,7 @@
 			</vbox>
 			<vbox align="stretch" pack="stretch" flex="1">
 				<hbox pack="center"><label class="large bold" value="&sBook.label;" /></hbox>
-				<listbox flex="1" style="min-width:20px" id="book" onclick="DPRXML.updateHierarchy()">
+				<listbox flex="1" style="min-width:20px" id="book" onclick="DPRXML.updateHierarchy(0)">
 					<listitem value="1" label="1" selected="true"/>
 					<listitem value="2" label="2"/>
 					<listitem value="3" label="3"/>
@@ -62,24 +62,24 @@
     </splitter>
    		<vbox id="container" persist="height">
 			<groupbox>
-				<button id="title" class="small" label="title" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
-				<menulist flex="1" class="sel" id="meta" onchange="DPRXML.updateHierarchy(6)">
+				<button id="title" label="title" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
+				<menulist flex="1" class="sel" id="meta" onchange="DPRXML.updateHierarchy(1)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(5)">
+				<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(4)">
+				<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(3)">
+				<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="section">
+				<menulist flex="1" class="sel" id="section" oncommand="DPRSend.importXML()">
 					<menupopup>
 					</menupopup>
 				</menulist>

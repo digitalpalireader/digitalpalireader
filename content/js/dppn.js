@@ -7441,6 +7441,7 @@ nameda['moriyaa'] = ['4/396'];
 nameda['molinii'] = ['9/5523'];
 nameda['moliyagaama'] = ['9/5524'];
 nameda['moliyaphaggunathera'] = ['4/402'];
+nameda['mo.liyaphaggunathera'] = ['4/402'];
 nameda['moliyasiivaka'] = ['4/342'];
 nameda['mohavicchedanii'] = ['9/5522'];
 nameda['yakkha'] = ['1/537'];

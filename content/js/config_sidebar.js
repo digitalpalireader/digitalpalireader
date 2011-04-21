@@ -16,7 +16,7 @@ var DPRConfig = {
 
 		document.styleSheets[2]['cssRules'][++x].style.backgroundColor = DPR_prefs['colInput'];  // select, etc.
 
-		document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.9) + 'px';  // buttons
+		document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // buttons
 		
 		
 		document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.7) + 'px';  // small

@@ -42,9 +42,9 @@
 
 	<!-- buttons -->
 
-<!ENTITY bookmark.label "Show Bookmarks">
-<!ENTITY quiz.label "Open Quiz">
-<!ENTITY bv.label "Show Buddha Vacana Quote">
+<!ENTITY bookmark.label "Bookmarks">
+<!ENTITY quiz.label "Pali Quiz">
+<!ENTITY bv.label "Buddha Vacana Quote">
 
 <!ENTITY openPrefs.label "Preferences">
 <!ENTITY help.label "Help">

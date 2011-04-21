@@ -248,9 +248,7 @@ var DPRNav = {
 		oldnikaya = document.getElementById('set').selectedIndex;
 		
 		this.setBookList(nik);
-		DPRXML.updateHierarchy(0,1);
-		//if (noget) gettitles(0,1); // don't load the passage
-		//else gettitles(0,2);
+		DPRXML.updateHierarchy(0);
 	},
 
 
@@ -301,7 +299,7 @@ var DPRNav = {
 	},
 	
 
-	switchhier:function(htmp,stop) {
+	switchhier:function(htmp) {
 
 		if(G_hier == htmp) return;
 		
@@ -358,7 +356,7 @@ var DPRNav = {
 				document.getElementById('book').selectedIndex = book;
 			}
 		}
-		DPRXML.updateHierarchy(0,stop);
+		DPRXML.updateHierarchy(0);
 		return true;
 	},
 
