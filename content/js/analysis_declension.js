@@ -333,6 +333,7 @@ G_endings.push(['i',0,3,'eti','v']);
 G_endings.push(['imha',0,0,'eti','v']); 
 G_endings.push(['imhaa',0,0,'eti','v']); 
 G_endings.push(['i.msu',0,1,'eti','v']); 
+G_endings.push(['ayi.msu',0,1,'eti','v']); 
 G_endings.push(['ittha',0,0,'eti','v']); 
 G_endings.push(['u.m',0,0,'eti','v']); 
 G_endings.push(['i.m',0,0,'eti','v']); 

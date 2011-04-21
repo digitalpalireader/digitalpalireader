@@ -20,6 +20,7 @@ function onLoad() {
 				case 'analysis':
 				case 'ped':
 				case 'dppn':
+					opts[i] = opts[i].replace(/\%22/g,'"');
 					linkb+=(linkb == ''?'?':'&amp;')+opts[i]
 					break;
 				default:

@@ -8,6 +8,8 @@ function getLinkPlaceBottom() { // permalinks
 	for (i in options) {
 
 		var option = options[i].split('=');
+		option[1] = option[1].replace(/\%22/g,'"');
+		 
 		if(option[0] == 'analysis') {
 			outputAnalysis(option[1]);
 			return;

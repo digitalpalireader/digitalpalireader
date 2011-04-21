@@ -160,7 +160,7 @@ var DPRSend = {
 		var which = document.getElementById('dictType').value;
 		if (which == 'DPR') {
 			var text = toVel(getstring);
-			this.sendAnalysisToOutput(text,(hard ? null : 1),add);
+			this.sendAnalysisToOutput(text,(hard ? 1 : 2),add);
 			return;
 		}
 		

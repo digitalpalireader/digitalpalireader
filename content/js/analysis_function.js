@@ -17,15 +17,6 @@ function outputAnalysis(input,frombox)
 
 	// update permalink
 
-	try {
-		var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
-		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);
-		else var newurl = oldurl + '&analysis='+input;
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
-	}
-	catch(ex) {
-	}
-
 	document.getElementById('anfs').innerHTML = '';
 
 
@@ -47,6 +38,22 @@ function outputAnalysis(input,frombox)
 	input = input.replace(/\.([^nmltd])/g, "$1");
 	input = input.replace(/\.$/g, "");
 	input = input.replace(/ .*/g, '');
+
+	try {
+		var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);
+		else var newurl = oldurl + '&analysis='+input;
+		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+frombox);
+		else newurl = newurl + '&frombox='+frombox;
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
+	}
+	catch(ex) {
+	}
+
+	// send input to sidebar
+	
+	if(!frombox) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
+
 	shortdefpre = [];
 
 	if (input.length > 1)  // ---------- dont waste time with periods and commas ----------
@@ -607,7 +614,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	// special suffixes
 
-		if (!nextpart && !trick)
+		if (!nextpart && trick != 1)
 		{
 
 			for (var tempsuf = oneword.length-1; tempsuf > 0; tempsuf--) {
@@ -763,9 +770,9 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			}				
 
 
-		// lost this vowel because next vowel, add 'a,i,u' (bhadd-ekarattassa, pa~nc-upaadaanakkhandhaa)
+		// lost this vowel because next vowel, add 'a,i,u' (bhadd-ekarattassa, pa~nc-upaadaanakkhandhaa, ekāsanabhojanaṃ)
 
-			if (!aiueo1 && aiueo2 && !aiueo3) 
+			if (!aiueo1 && aiueo2) 
 			{
 				var oa = [];
 				oa[0] = [];
@@ -883,11 +890,22 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			
 		// .m as in vassa.mvu.t.thaa
 			
-			if (oneword.charAt(oneword.length-1) == 'm' && oneword.charAt(oneword.length-2) == '.' && oneword.length > 3) 
+			if (oneword.substring(oneword.length-2) == '.m' && oneword.length > 3) 
 			{
 				var trickmatch = findmatch(oneword.slice(0,-2),lastpart,nextpart,partslength,1);
 				if (trickmatch) { 
 					if(devCheck > 0 && devDump == 1) devO('trick8a');
+					return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : ''),nextpart,1]; 
+				} 
+			}
+			
+		// .n as in ...
+			
+			if (oneword.substring(oneword.length-2) == '"n' && oneword.length > 3) 
+			{
+				var trickmatch = findmatch(oneword.slice(0,-2),lastpart,nextpart,partslength,1);
+				if (trickmatch) { 
+					if(devCheck > 0 && devDump == 1) devO('trick8b');
 					return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : ''),nextpart,1]; 
 				} 
 			}
@@ -990,7 +1008,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				if (!isUncomp(oneword.substring(1),lastpart,nextpart)) {
 					var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1);
 					if (trickmatch) {
-						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1]; 
+						return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,2]; 
 					} 
 				}
 			}				
@@ -1002,7 +1020,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (oneword.charAt(0) == oneword.charAt(1) && oneword.length > 3 && !aiu1 && oneword.charAt(0) != 'y')
 			{
-				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
+				var trickmatch = findmatch(oneword.substring(1),lastpart,nextpart,partslength,2); // the 'pa.tipanno' in our example
 				if (trickmatch) { 
 					if(devCheck > 0 && devDump == 1) devO('trick15');
 					return Array(oneword.charAt(0) + '-' + trickmatch[0], '0^' + oneword.charAt(0) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); 
@@ -1013,7 +1031,8 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (/\.[tdn]/.exec(oneword.substring(0,2)) && /\.[tdn]/.exec(oneword.substring(2,4)) && oneword.charAt(1) == oneword.charAt(3) && oneword.length > 5)
 			{
-				var trickmatch = findmatch(oneword.substring(2),lastpart,nextpart,partslength,1); // the 'pa.tipanno' in our example
+				//alert(oneword.substring(2));
+				var trickmatch = findmatch(oneword.substring(2),lastpart,nextpart,partslength,2); // the 'pa.tipanno' in our example
 				if (trickmatch) { 
 					if(devCheck > 0 && devDump == 1) devO('trick15');
 					return Array(oneword.substring(0,2) + '-' + trickmatch[0], '0^' + oneword.substring(0,2) + '^3@' + trickmatch[1], '$' + (trickmatch[2] ? trickmatch[2] : '')); 
@@ -1033,7 +1052,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (aiueo3 && (!aiu4 || lastpart.charAt(lastpart.length-1) == lastpart.charAt(lastpart.length-2)) && (!aiu1 || oneword.charAt(0) == lastpart.charAt(lastpart.length-1)) && lastpart.length > 1)
 			{
-						
 				// check for lost this vowel because of last vowel, add 'a,i,u' (cakkhundriya.m,ceda.m)
 				
 				var oa = [];
