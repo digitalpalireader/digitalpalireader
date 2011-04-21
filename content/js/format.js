@@ -390,7 +390,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
 	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
-	outputFormattedData('<p> '+text.replace(/\n/g,'<br/>').replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;') + ' </p>',2); 
+	outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2); 
 }
 
 var pleasewait =  document.createElement('div');

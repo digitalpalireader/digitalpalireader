@@ -7336,6 +7336,7 @@ nameda['musaavagga'] = ['9/5589'];
 nameda['musaavaadasutta'] = ['9/5590'];
 nameda['musaasutta'] = ['9/5588'];
 nameda['musiila'] = ['9/5591'];
+nameda['musila'] = ['9/5591'];
 nameda['muhunnaruggaama'] = ['9/5555'];
 nameda['muuasaalaa'] = ['9/5539'];
 nameda['muugapakkha'] = ['9/5551'];
@@ -10193,4 +10194,7 @@ nameda['ho.na'] = ['9/4798'];
 nameda['ho.naka'] = ['9/4798'];
 nameda['homagaama'] = ['9/4797'];
 nameda['hsuantsang'] = ['6/507'];
+
+
+var G_dppnEnd = ['thera','therii','putta','maa.nava','tissa','braahma.na','se.t.thi'];
 

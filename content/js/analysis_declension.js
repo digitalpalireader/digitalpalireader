@@ -50,14 +50,14 @@ G_endings.push(['ina.m',1,0,'','n']);
 
 // masc u
 
-G_endings.push(['avo',0,0,'u','n']);
-G_endings.push(['uu',1,0,'','n']);
-G_endings.push(['unaa',1,0,'','n']);
-G_endings.push(['uuhi',1,0,'','n']);
-G_endings.push(['uubhi',1,0,'','n']);
-G_endings.push(['uno',1,0,'','n']);
-G_endings.push(['uuna.m',1,0,'','n']); 
-G_endings.push(['uusu',1,0,'','n']); 
+G_endings.push(['avo',0,1,'u','n']);
+G_endings.push(['uu',1,1,'','n']);
+G_endings.push(['unaa',1,1,'','n']);
+G_endings.push(['uuhi',1,1,'','n']);
+G_endings.push(['uubhi',1,1,'','n']);
+G_endings.push(['uno',1,1,'','n']);
+G_endings.push(['uuna.m',1,1,'','n']); 
+G_endings.push(['uusu',1,1,'','n']); 
 
 // masc uu
 
@@ -194,8 +194,6 @@ G_endings.push(['otaa',1,2,'ti','n']);
 
 // unsorted
 
-G_endings.push(['vaana',3,2,'','n']);
-G_endings.push(['aapetvaa',1,0,'ti','v']);
 G_endings.push(['ahi',1,1,'','n']);
 G_endings.push(['to',0,2,'','n']);
 G_endings.push(['anna.m',1,1,'','n']);
@@ -280,8 +278,20 @@ G_endings.push(['ema',0,2,'aati','v']);
 G_endings.push(['entu',0,2,'ati','v']);
 
 
+// verb participles
+
+G_endings.push(['ayitvaa',0,2,'eti','v']);
+G_endings.push(['ayitvaana',0,2,'eti','v']);
+G_endings.push(['vaana',0,2,'i','v']);
+G_endings.push(['aapetvaa',1,0,'ti','v']);
+G_endings.push(['itvaana',0,0,'ati','v']); 
+G_endings.push(['itvaana',0,0,'aati','v']); 
+G_endings.push(['itvaana',0,0,'eti','v']); 
+G_endings.push(['etvaana',0,0,'ati','v']); 
+G_endings.push(['tvaana',0,0,'ti','v']); 
 G_endings.push(['itvaa',0,0,'ati','v']); 
 G_endings.push(['itvaa',0,0,'aati','v']); 
+G_endings.push(['itvaa',0,0,'eti','v']); 
 G_endings.push(['etvaa',0,0,'ati','v']); 
 G_endings.push(['tvaa',0,0,'ti','v']); 
 G_endings.push(['aaya',1,0,'ti','v']); 
@@ -382,20 +392,20 @@ G_endings.push(['eyyanti',0,0,'oti','v']);
 
 // conditional
 
-G_endings.push(['issa',1,2,'ati','v']);
-G_endings.push(['issaa',1,2,'ati','v']);
-G_endings.push(['issa.msu',1,2,'ati','v']);
-G_endings.push(['issatha',1,2,'ati','v']);
-G_endings.push(['issa.m',1,2,'ati','v']);
-G_endings.push(['issaama',1,2,'ati','v']);
+G_endings.push(['issa',0,2,'ati','v']);
+G_endings.push(['issaa',0,2,'ati','v']);
+G_endings.push(['issa.msu',0,2,'ati','v']);
+G_endings.push(['issatha',0,2,'ati','v']);
+G_endings.push(['issa.m',0,2,'ati','v']);
+G_endings.push(['issaama',0,2,'ati','v']);
 
-G_endings.push(['issa',1,2,'aati','v']);
-G_endings.push(['issaa',1,2,'aati','v']);
-G_endings.push(['issa.msu',1,2,'aati','v']);
-G_endings.push(['issa',1,2,'aati','v']);
-G_endings.push(['issatha',1,2,'aati','v']);
-G_endings.push(['issa.m',1,2,'aati','v']);
-G_endings.push(['issaama',1,2,'aati','v']);
+G_endings.push(['issa',0,2,'aati','v']);
+G_endings.push(['issaa',0,2,'aati','v']);
+G_endings.push(['issa.msu',0,2,'aati','v']);
+G_endings.push(['issa',0,2,'aati','v']);
+G_endings.push(['issatha',0,2,'aati','v']);
+G_endings.push(['issa.m',0,2,'aati','v']);
+G_endings.push(['issaama',0,2,'aati','v']);
 
 G_endings.push(['essa',1,2,'ti','v']);
 G_endings.push(['essaa',1,2,'ti','v']);

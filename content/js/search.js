@@ -21,7 +21,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchBook = ','+searchBook+',';
 		G_searchRX = searchRX;	
 
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + searchString + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&rx=' + searchRX;
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString).replace(/ /g,'_') + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&rx=' + searchRX;
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -43,7 +43,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 					G_searchType = parseInt(option[1]);
 				break;
 				case 'query':
-					G_searchString = toUni(option[1]);
+					G_searchString = toUni(option[1]).replace(/_/g,' ');
 				break;
 				case 'MAT':
 					G_searchMAT = option[1];
@@ -655,7 +655,7 @@ function createTables(xmlDoc,hiert)
 												}
 											texnodups[t].push(tempexword[t][i]);
 										}
-										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x') + 'q');
+										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x').replace(/ /g,'_') + 'q');
 									}
 									for(var t=0; t<texnodups.length; t++) {
 										if(!exword[t]) exword[t] = [];
@@ -768,8 +768,8 @@ function createTables(xmlDoc,hiert)
 										texnodups.push(tempexword[i]);
 									}
 									tagtitle = 'q' + texnodups.join('q') + 'q';
-									tagtitle = tagtitle.replace(/\"/g, 'x');
-									
+									tagtitle = tagtitle.replace(/\"/g, 'x').replace(/ /g,'_');
+
 									exword = exword.concat(texnodups);
 
 
@@ -859,7 +859,7 @@ function createTables(xmlDoc,hiert)
 				for (ex = 0; ex < exnodups[t].length; ex++)
 				{
 					
-					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 				}
 				exwordout += '</td>';
 			}								
@@ -891,7 +891,7 @@ function createTables(xmlDoc,hiert)
 
 			for (ex = 0; ex < findiv; ex++)
 			{
-				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + toUni(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 			}
 			exwordout += '</table>';
 		}
@@ -923,7 +923,7 @@ function showonly(string) {
 		scrollToId('search',0);
 	}
 	else { 
-		document.getElementById('showing').innerHTML = '<b style="background-color:'+DPR_prefs['colbkcp']+'; color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
+		document.getElementById('showing').innerHTML = '<b style="background-color:'+DPR_prefs['colbkcp']+'; color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
 		scrollToId('search','sbfb');
 	}
 }

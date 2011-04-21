@@ -9,7 +9,7 @@ function paliXML(file,which)
 {
 	
 	clearDivs('dif');
-
+	moveframey('dif');
 	
 	if(!which) { // not from select
 		var G_pedhistt = [];
@@ -175,6 +175,7 @@ function DPPNXML(file,which)
 	tloc[0] = toVel(tloc[0]);
 	
 	clearDivs('dif');
+	moveframey('dif');
 	
 	if(!which) { // not from select
 		var dppnhistt = [];

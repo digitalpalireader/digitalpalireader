@@ -4,7 +4,6 @@ function getLinkPlaceBottom() { // permalinks
 	var place;
 	var para;
 	var query;
-	
 	var outplace;
 	for (i in options) {
 

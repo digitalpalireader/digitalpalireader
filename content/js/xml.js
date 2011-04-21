@@ -7,7 +7,7 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-function loadXMLSection(labelsearch,para,place,isPL,scroll)
+function loadXMLSection(query,para,place,isPL,scroll)
 { 
 	
 	document.getElementById('mafbc').innerHTML = '';
@@ -199,12 +199,37 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	// permalink
 	
 	var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	
 	if(!isPL) { //not coming from a permalink
+
 		try {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : ''));
+
+			// update loc
+
+			var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+			if(/loc=/.exec(oldurl)) var newurl = oldurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
+			else if(/\?./.exec(oldurl)) var newurl = oldurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+			else var newurl = oldurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+
+			// update query
+			
+			if(query) {
+				if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
+				else var newurl = oldurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+			}
+
+			// update query
+
+			if(para) {
+				if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
+				else var newurl = oldurl + '&para='+para;
+			}
+
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 		}
 		catch(ex) {
 		}
+
 	}
 	
 
@@ -229,13 +254,13 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+modt+(DPR_prefs['showPermalinks'] ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+modt+(DPR_prefs['showPermalinks'] ? ' <span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'')+'</td></tr></table>';
 		
 
 	var theData = '';
 	
 	// check if there is a search going on and add the labels
-	if (labelsearch) {
+	if (query) {
 		atlabel:
 		for (tmp = 0; tmp < z.length; tmp++)
 		{
@@ -243,21 +268,21 @@ function loadXMLSection(labelsearch,para,place,isPL,scroll)
 			var quit = 0;
 			var onepar = z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ').toLowerCase();
 			var onepars = onepar.replace(/ *\{[^}]*\} */g, ' ').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/  +/g, ' ').toLowerCase();
-			for (tmpl = 0; tmpl < labelsearch.length; tmpl++)
+			for (tmpl = 0; tmpl < query.length; tmpl++)
 			{
-				var obj = (typeof(labelsearch[tmpl]) == 'object');
-				if ((obj ? onepars.search(labelsearch[tmpl]) : onepars.indexOf(labelsearch[tmpl])) == -1) { // at least one of the strings was not found -> no match
+				var obj = (typeof(query[tmpl]) == 'object');
+				if ((obj ? onepars.search(query[tmpl]) : onepars.indexOf(query[tmpl])) == -1) { // at least one of the strings was not found -> no match
 					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
 					alert(theData);
 					continue atlabel;
 				}
 			}
-			theData += ' <p'+permalink+'&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_')+'&para='+(tmp+1)+'> ';
+			theData += ' <p'+permalink+'&query=' + toVel(query.join('+')).replace(/ /g, '_')+'&para='+(tmp+1)+'> ';
 			var tmpdata = onepar;
-			for (var i = 0; i < labelsearch.length; i++)
+			for (var i = 0; i < query.length; i++)
 			{
-				var obj = (typeof(labelsearch[i]) == 'object');
-				var lt = labelsearch[i];
+				var obj = (typeof(query[i]) == 'object');
+				var lt = query[i];
 				var ltrg = (obj ? lt : new RegExp(lt, 'g'));
 				if (!lt) continue;
 				onepar = tmpdata;

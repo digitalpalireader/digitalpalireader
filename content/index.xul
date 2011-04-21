@@ -6,26 +6,32 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="js/keypress_index.js" />
   <script type="application/x-javascript" src="js/prompt.js" />
+  <script type="application/x-javascript" src="js/io.js" />
 <script>
 function onLoad() {
 	
 	var link = document.location.href.split('?')[1];
 	if (link) {
-		switch(link.split('=')[0]) {
-			case 'analysis':
-			case 'ped':
-			case 'dppn':
-				document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
-				document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm?'+link;
-				break;
-			default:
-				document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm?'+link;
-				document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
-				break;
+		var opts = link.split('&amp;');
+		var linkt = '';
+		var linkb = '';
+		for (i in opts) {
+			switch(opts[i].split('=')[0]) {
+				case 'analysis':
+				case 'ped':
+				case 'dppn':
+					linkb+=(linkb == ''?'?':'&amp;')+opts[i]
+					break;
+				default:
+					linkt+=(linkt == ''?'?':'&amp;')+opts[i]
+					break;
+			}
 		}
+		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
+		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
 	}
 	else {
-		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/index.htm';
+		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm';
 		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
 	}
 }
@@ -35,11 +41,14 @@ function getconfig() {
 }
 
 var devCheck = 0;
-
-function devO() {}
-function dalert(a) {}
-function ddump(a) {}
-
+</script>
+<script type="application/x-javascript" src="dev.js"/>
+<script>
+	if(!devCheck) {
+		function devO() {}
+		function dalert(a) {}
+		function ddump(a) {}
+	}
 </script>
 	<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
                     <splitter id="PanelSplitter"/>

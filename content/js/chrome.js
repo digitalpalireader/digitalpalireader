@@ -111,7 +111,7 @@ function checkLastTab() {
 			return false; // still one open tab
 		}
 	}
-	closeDPRSidebar();
+	//closeDPRSidebar();
 	return false;
 }
 

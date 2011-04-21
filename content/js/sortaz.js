@@ -222,7 +222,7 @@ function groupBySimilarity(list,minsim) {
 	var listloc = [];
 	
 	for (f = 0; f < list.length; f++) {
-		ddump([f+1,'of',list.length,'groups:',simlist.length]);
+		if(devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
 		var thisword = list[f]
 
 		var thislist = findSimilarWords(thisword,list.slice(f+1));

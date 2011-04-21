@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<window id="DPR" title="&digitalpalireader.title;"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="js/prompt.js" />
+<script type="application/x-javascript" src="dev.js"/>
+<script type="application/x-javascript" src="js/io.js"></script>
+<script type="application/x-javascript" src="js/prefload.js"></script>
+<script type="application/x-javascript" src="js/receive_bottom.js"></script>
+
+<script type="application/x-javascript" src="js/config.js"></script>
+<script type="application/x-javascript" src="js/translit.js"></script>
+<script type="application/x-javascript" src="js/navigation.js"></script>
+<script type="application/x-javascript" src="js/format.js"></script>
+
+<script type="application/x-javascript" src="js/chrome.js"></script>
+
+<script type="application/x-javascript" src="js/bv.js"></script>
+<script type="application/x-javascript" src="version.js"></script>
+
+<script type="application/x-javascript" src="js/english.js"></script>
+<script type="application/x-javascript" src="js/convert.js"></script>
+<script type="application/x-javascript" src="js/sortaz.js"></script>
+<script type="application/x-javascript" src="js/dict_xml.js"></script>
+
+<script type="application/x-javascript" src="js/move.js"></script>
+<script type="application/x-javascript" src="js/ped.js"></script>
+<script type="application/x-javascript" src="js/irreg.js"></script>
+<script type="application/x-javascript" src="js/dppn.js"></script>
+<script type="application/x-javascript" src="js/nameno.js"></script>
+<script type="application/x-javascript" src="js/attlist.js"></script>
+<script type="application/x-javascript" src="js/tiklist.js"></script>
+<script type="application/x-javascript" src="js/titles.js"></script>
+
+<script type="application/x-javascript" src="js/inflect.js"></script>
+<script type="application/x-javascript" src="js/grammar.js"></script>
+
+<script type="application/x-javascript" src="js/analysis_declension.js"></script>
+<script type="application/x-javascript" src="js/analysis_arrays.js"></script>
+<script type="application/x-javascript" src="js/analysis_function.js"></script>
+<script type="application/x-javascript" src="js/analysis_output.js"></script>
+
+<script type="application/x-javascript" src="js/listsm.js"></script>
+<script type="application/x-javascript" src="js/listam.js"></script>
+<vbox>
+<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode"/>
+</vbox>
+
+</window>
+

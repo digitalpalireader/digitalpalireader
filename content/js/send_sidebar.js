@@ -199,11 +199,12 @@ var DPRSend = {
 	},
 
 	sendSearch: function (add) {
-		if(!this.checkGetstring(document.getElementById('isearch').value)) return;
+		var getstring = document.getElementById('isearch').value;
+		if(!this.checkGetstring(getstring)) return;
 		
 		var which = document.getElementById('tipType').selectedIndex;
-		if(which == 15) { // Dev
-			DevInput(document.getElementById('isearch').value);
+		if(getstring == '_dev' && devCheck) { // Dev
+			DPRChrome.openDPRTab('chrome://digitalpalireader/content/dev.xul','DPRd');
 			return;
 		}
 
@@ -241,17 +242,17 @@ var DPRSend = {
 			var oldTab = DPRChrome.findDPRTab('DPR-search');
 
 			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.getElementById('isearch').value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+				var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
 				DPRChrome.openDPRTab(permalink,'DPR-search');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(document.getElementById('isearch').value).toLowerCase(),MAT,set,book,rx);
+				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(getstring).toLowerCase(),MAT,set,book,rx);
 			}
 		}
 		else {
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(document.getElementById('isearch').value).toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
 			DPRChrome.openDPRTab(permalink,'DPRs');
 		}
 

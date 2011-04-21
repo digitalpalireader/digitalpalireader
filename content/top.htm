@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Digital Pali Reader</title>
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow); 
+function onDocLoad() {
+	//openDPRSidebar();
+	getconfig();
+
+	if (DPR_prefs['ctrans']) {
+		if (DPR_prefs['catioff']) { 
+			var nsrc = 'file://'+ DPR_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
+		}
+		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
+		atiIns = 1;
+		var headID = document.getElementsByTagName("head")[0];         
+		var newScript = document.createElement('script');
+		newScript.type = 'text/javascript';
+		newScript.src = nsrc;
+		headID.appendChild(newScript);
+	}
+
+	refreshit();
+	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
+	document.onkeypress = function(e){
+		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
+		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);
+	};
+}
+
+function sendTextToConvertor() {
+		if(window.getSelection().toString() != '') {
+			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(window.getSelection().toString()+'');
+		} 
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(document.getElementById('convi').innerHTML); }
+}
+function sendTextToTextpad() {
+		if(window.getSelection().toString() != '') {
+			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(window.getSelection().toString()+'');
+		} 
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML); }
+}
+
+
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/refresh.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/receive.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/xml.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/history.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/misc_func.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/bv.js"></script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="matrelc"></div>
+	<div id="right" onmouseover="document.body.style.cursor='auto'">
+		<div id="maf">
+			<div align="left" id="mafa" class="paperback"></div>
+			<div align="justify" id="mafb" class="paperback">
+				<div id="mafbc">
+					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
+					<div id="mafe" align=center>
+					</div>
+					<div id="mafd" align=center>
+					</div>
+					<div id="mafdebug"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
+		<div id="tbOpener" class="tiny">⚙</div>
+		<div id="tbContainer2">
+			<div id="MainToolbar" class="obutc"><span class="abut obut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span> <span class="abut obut small" onmousedown="sendTextToTextpad()" title="send text to textpad (e)">export</span></div>
+			<div id="auxToolbar" class="obutc"></div>
+		</div>
+	</div>
+
+
+	<div id="alertc"><span id="alert"></span></div>
+</div>
+<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/relmul.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/relatt.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/reltik.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/dppn.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/attlist.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/tiklist.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prompt.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/bookmarks_index.js"></script>
+
+<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
+<script>
+	
+	var devCheck = 0;
+	if(extFileExists('/home/noah/Extensions/work/dev.js')) {
+		var headID = document.getElementsByTagName("head")[0];         
+		var newScript = document.createElement('script');
+		newScript.type = 'text/javascript';
+		newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
+		headID.appendChild(newScript);
+		
+		var headID2 = document.getElementsByTagName("head")[0];         
+		var newScript2 = document.createElement('script');
+		newScript2.type = 'text/javascript';
+		newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+		headID2.appendChild(newScript2);
+
+	}
+	else { // null functions
+		function devO() {}
+		function dalert(a) {}
+		function ddump(a) {}
+	}
+
+</script>
+</body>
+</html>
