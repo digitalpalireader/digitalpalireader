@@ -2,11 +2,15 @@
 var devCheck = 1;
 //window.alert('dev mode');
 function devMode(string) {
+	if(string) {
+		eval(string);
+		return;
+	}
 //document.textpad.pad.value = '';
 //DconvertMATtoReal();
 //DdppnSort();
 //DcheckWords();
-DgroupBySimilarity();
+//DgroupBySimilarity();
 //DtestSort();
 }
 
