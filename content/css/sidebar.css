@@ -1,9 +1,13 @@
 /* static - don't move these */
 
-caption,listbox,menulist,listitem,menuitem,checkbox,button,toolbarbutton, input, textarea {
+/*font*/
+
+caption,listbox,menulist,listitem,menuitem, input, textarea,checkbox,button,toolbarbutton { 
 }
 
-caption {
+/*color & normal size */
+
+caption,checkbox,button,toolbarbutton,listbox,menulist {
 }
 
 listbox,listitem, menulist,menuitem, textbox {

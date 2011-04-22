@@ -7,10 +7,10 @@ var DPRConfig = {
 				
 		var x = 0;
 		
-		document.styleSheets[2]['cssRules'][x].style.color = DPR_prefs['coltext']; 
 		document.styleSheets[2]['cssRules'][x].style.fontFamily = DPR_prefs['colfont']; 
 
-		document.styleSheets[2]['cssRules'][++x].style.fontSize = DPR_prefs['colsize'] + 'px'; 
+		document.styleSheets[2]['cssRules'][++x].style.color = DPR_prefs['coltext']; 
+		document.styleSheets[2]['cssRules'][x].style.fontSize = DPR_prefs['colsize'] + 'px'; 
 		
 		document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // select, etc.
 
