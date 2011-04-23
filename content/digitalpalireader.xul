@@ -272,7 +272,9 @@
 	<script>
 		var devCheck = 0;
 	</script>
+	<!--
 	<script type="application/x-javascript" src="dev.js"/>
+	-->
 	<script>
 		if(!devCheck) {
 			function devO() {}
