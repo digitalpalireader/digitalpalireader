@@ -44,9 +44,58 @@
 
 <script type="application/x-javascript" src="js/listsm.js"></script>
 <script type="application/x-javascript" src="js/listam.js"></script>
-<vbox>
-<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode"/>
+<vbox flex="1" pack="stretch">
+	<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode"/>
+	<hbox>
+		<tree
+			id="urlList"
+			flex="1"
+			context="popup"
+			seltype="multiple"
+			enableColumnDrag="true"
+			style="margin:0px;"
+			editable="true"
+			autostretch="always"
+		>
+			<treecols>
+				<treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
+				<treecol id="colURL" label="xyz" flex="35" crop="right" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colResname" label="xyz" flex="15" crop="right" hidden="true" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colDesc" label="xyz" flex="9" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colMask" label="xyz" flex="5" persist="width hidden"/>
+			</treecols>
+			
+			<treechildren/>
+		</tree>
+		<tree
+			id="urlList"
+			flex="1"
+			context="popup"
+			seltype="multiple"
+			enableColumnDrag="true"
+			style="margin:0px;"
+			editable="true"
+			autostretch="always"
+		>
+			<treecols>
+				<treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
+				<treecol id="colURL" label="xyz" flex="35" crop="right" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colResname" label="xyz" flex="15" crop="right" hidden="true" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colDesc" label="xyz" flex="9" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol id="colMask" label="xyz" flex="5" persist="width hidden"/>
+			</treecols>
+			
+			<treechildren/>
+		</tree>
+	</hbox>
+                    <splitter id="PanelSplitter"/>
+	<browser persist="height" flex="1" disablehistory="true" type="content" id="dpr-dev" src="dev.htm"/>
 </vbox>
-
 </window>
 
