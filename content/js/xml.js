@@ -273,7 +273,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 				var obj = (typeof(query[tmpl]) == 'object');
 				if ((obj ? onepars.search(query[tmpl]) : onepars.indexOf(query[tmpl])) == -1) { // at least one of the strings was not found -> no match
 					theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + onepar;
-					alert(theData);
+					//alert(theData);
 					continue atlabel;
 				}
 			}
