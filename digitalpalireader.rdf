@@ -7,14 +7,14 @@
       <RDF:Seq>
         <RDF:li>
           <RDF:Description>
-            <em:version>2.0a7</em:version>
+            <em:version>2.0a8</em:version>
             <em:targetApplication>
               <RDF:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>1.5</em:minVersion>
                 <em:maxVersion>4.*</em:maxVersion>
-                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateLink>
-                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader2.xhtml</em:updateInfoURL>
+                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateLink>
+                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>
           </RDF:Description>
