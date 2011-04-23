@@ -62,7 +62,7 @@ var DPRChrome = {
 
 	},
 	openFirstDPRTab:function() {
-		if(!this.findDPRTab('DPR-main')) this.openDPRTab('chrome://digitalpalireader/content/index.xul','DPR-main');
+		if(!this.findDPRTab()) this.openDPRTab('chrome://digitalpalireader/content/index.xul','DPR-main');
 	},
 
 	findDPRTab:function(id) {
@@ -73,7 +73,7 @@ var DPRChrome = {
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 			// Does this tab contain our custom attribute?
-			if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if ((id && currentTab.getAttribute('id') == id || !id && /^DPR/.exec(currentTab.getAttribute('id'))) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
 
 				return currentTab;
 			}

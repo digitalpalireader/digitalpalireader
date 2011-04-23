@@ -7,6 +7,8 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
+var G_thaiVols = 'v1m,v2m';
+
 function loadXMLSection(query,para,place,isPL,scroll)
 { 
 	
@@ -30,8 +32,8 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	var vagga = place[4];
 	var sutta = place[5];
 	var section = place[6]
-
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+	var nikbookhier = nikaya + book + hier;
+	var bookload = 'xml/' + nikbookhier + (place[8]?'.t.xml':'.xml');
 	var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", bookload, false);
     xmlhttp.send(null);
@@ -91,7 +93,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relouta.push('<span class="abut obut small" onclick="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,(event.ctrlKey||event.button==1?1:null));importXML();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+					relouta.push('<span class="abut obut small" onclick="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,(event.ctrlKey||event.button==1?1:null));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 					matButton = 0;
 
 				}
@@ -245,9 +247,13 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	
 	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
 
+	// Thai alt button
+	
+	var thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,(event.ctrlKey||event.button==1?1:\'\'))">VRI</span>':(G_thaiVols.search(nikbookhier) > -1? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,(event.ctrlKey||event.button==1?1:\'\'))">Thai</span>':''));
+
 	// output toolbar data
 
-	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + '</td><td id="maftrans" align="right"></td></tr><table>'
+	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>'
 	
 
 	// output header
@@ -339,9 +345,15 @@ function loadXMLSection(query,para,place,isPL,scroll)
 		}
 	}	
 	else {
-		for (tmp = 0; tmp < z.length; tmp++)
-		{
-			theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
+		if(place[8]) { // thai
+			for (tmp = 0; tmp < z.length; tmp++){
+				theData += ' <p> ' + z[tmp].textContent.replace(/^ *\^c\^[0-9]+\^ec\^ */g,'').replace(/  +/g, ' ');
+			}
+		}
+		else {
+			for (tmp = 0; tmp < z.length; tmp++) {
+				theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
+			}
 		}
 	}
 	outputFormattedData(theData,0,place);

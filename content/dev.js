@@ -1,4 +1,6 @@
 //window.alert('dev mode');
+var devCheck = 0;
+
 function devMode(string) {
  devCheck = 1;
 	if(string) {
@@ -1780,7 +1782,7 @@ var DAh = [];
 var DAp = [];
 /* 
 
-DXMLThai('v',1,'m',[[1],[2,152]]);
+htm.DXMLThai('v',2,'m',[[2,152,null]]);
 
 thaibook [x][1] is last page to load
 
@@ -1791,7 +1793,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 		
 	document.activeElement.blur();
 
-	document.getElementById('mafbc').innerHTML = '<div id="Dl" style="position:absolute; width:50%; left:0; top:0; bottom:0; overflow:auto"></div><div style="position:absolute; width:50%; right:0; top:0; bottom:0; overflow:auto"><div id="Dr" style="position:relative;width:100%;height:100%;"></div>';
+	document.getElementById('content').innerHTML = '<div id="maf"><div id="mafbc"><div id="Dl" style="position:absolute; width:50%; left:0; top:0; bottom:0; overflow:auto"></div><div style="position:absolute; width:50%; right:0; top:0; bottom:0; overflow:auto"><div id="Dr" style="position:relative;width:100%;height:100%;"></div></div></div>';
 
 	var bookload = 'xml/' + nikaya + book + hier + '.xml';
 	var bookno = book-1;
@@ -1973,7 +1975,8 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 		out += '<div id="Dcbl'+i+'"><input type="checkbox" name="Dcbx" onclick="DaddThaiH('+i+',this.checked)" value="'+i+'"><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'"></div>';
 		var t = DAp[i];
 		t = t.replace(/\^e*b\^/g, '');
-		t = t.replace(/\^e*a\^/g, '');
+		t = t.replace(/\^a\^/g, '<span style="color:red">');
+		t = t.replace(/\^ea\^/g, '</span>');
 		t = t.replace(/\{[^}]*\}/g, ' ');
 		t = t.replace(/^\[[^\]]*\]/g, ' ');
 		t = t.replace(/ṁ/g, 'ṃ');
@@ -2006,10 +2009,11 @@ function DthaiOut2(booka) {
 		
 		
 		var pages = xmlDoc.getElementsByTagName('page');
-		for (i = 0; i < pages.length; i++) {
+		var firstpage = (booka[e][1]?booka[e][1]:0); // first page (pageno - 1)
+		for (i = firstpage; i < pages.length; i++) {
 			var pageno = pages[i].getElementsByTagName('pageno')[0].textContent;
 			
-			if(booka[e][1] && parseInt(pageno) > booka[e][1]) break out; // hit page limit
+			if(booka[e][2] && parseInt(pageno) > booka[e][2]) break out; // hit page limit
 			
 			Ax.push('-- ^a^Thai '+book+'.'+pageno+'^ea^ --');
 
@@ -2017,12 +2021,14 @@ function DthaiOut2(booka) {
 
 			var fnotesa = pages[i].getElementsByTagName('fnote');
 			var fnotes = '';
+			var nfloc = 0; // next fn location
+			
 			for (j = 0; j < fnotesa.length; j++) {
 				fnotes += fnotesa[j].textContent + (j < fnotesa.length-1 ? ' ' : '');
 			}
 			
 			fnotes = fnotes.replace(/\*/g,'~');
-			
+		
 			var fna = [];
 			var fns = '';
 			var fncount = 1;
@@ -2041,7 +2047,7 @@ function DthaiOut2(booka) {
 					}
 	
 
-					var nfloc = fnotes.substring(l.length).search(/ [0-9~]{1,2}[ -]/);  // next fn location
+					nfloc = fnotes.substring(l.length).search(/ [0-9~]{1,2}[ -]/);  // next fn location
 					
 					nfloc = (nfloc>-1?nfloc + l.length:fnotes.length);
 
@@ -2049,13 +2055,11 @@ function DthaiOut2(booka) {
 					for (qq=0; qq < tempfna.length;qq++) {
 						fna[tempfna[qq]+'-'] = ' ' + tempfna[qq] + ' ' + tf;
 					}
-
-					fncount = nfn;
 				}
 				else if(/^ ~ /.exec(fnotes)) {
 					try{l = fnotes.match(/ ~ /)[0];}catch(ex){dalert([2,i,fnotes])}
 
-					var nfloc = fnotes.substring(l.length).search(/ [0-9~]{1,2}[ -]/);  // next fn location
+					nfloc = fnotes.substring(l.length).search(/ [0-9~]{1,2}[ -]/);  // next fn location
 					
 					nfloc = (nfloc>-1?nfloc + l.length:fnotes.length);
 
@@ -2069,15 +2073,14 @@ function DthaiOut2(booka) {
 					var nfloc = fnotes.substring(l.length).search(/ [0-9~]{1,2}[ -]/);  // next fn location
 					nfloc = (nfloc>-1?nfloc + l.length:fnotes.length);
 
-					var tf = fnotes.substring(l.length,nfloc);
+					var tf = fnotes.substring(0,nfloc);
 
-					fna[fncount+'-'] = ' '+fncount+' ' + tf;
+					fna[parseInt(l.replace(/ /g,''))+'-'] = tf;
 
-					fncount++;
 				}
-				fnotes = fnotes.substring(l.length+tf.length);
+				fnotes = fnotes.substring(nfloc);
+				//if(i == 39) dalert(fnotes);
 			}
-
 			var linesa = pages[i].getElementsByTagName('line');
 			for (j = 0; j < linesa.length; j++) {
 				var tl = linesa[j].textContent;
@@ -2086,12 +2089,12 @@ function DthaiOut2(booka) {
 					var fn = tl.match(/[0-9]+-/);
 					for (k=0;k<fn.length;k++) {
 						tl = tl.replace(fn[k], '{'+fna[fn] + '}');
-						footnotelist +=i+', '+j+', '+fna[fn]+'\n';
+						footnotelist +=(i+1)+', '+(j+1)+', '+fna[fn]+'\n';
 					}
 				}
 				if(/\*-/.exec(tl)) { // footnote replacing
 					tl = tl.replace('*-', '{' + fns + '}');
-					footnotelist +=i+', '+j+', '+fns+'\n';
+					footnotelist +=(i+1)+', '+(j+1)+', '+fns+'\n';
 				}
 				var t = '#' + j + '^' + tl.replace(/%/g,'^a^').replace(/@/g,'^ea^');
 				Ax.push(t);
@@ -2099,7 +2102,6 @@ function DthaiOut2(booka) {
 		}
 	}
 	writeExtFile('/home/noah/Desktop/footnotes',footnotelist);
-	return;
 	return Ax;
 }
 
@@ -2232,7 +2234,7 @@ function DsaveXML2(name) {
 									outfile +='<h3><h3n> </h3n><h4><h4n>'+DAt[j][2] + '</h4n>';
 								break;
 								case 3:
-									outfile +='<h4><h4n>xyz'+DAt[j][2] + '</h4n>';
+									outfile +='<h4><h4n>'+DAt[j][2] + '</h4n>';
 								break;
 							}
 						}

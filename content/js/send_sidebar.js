@@ -203,7 +203,7 @@ var DPRSend = {
 		if(!this.checkGetstring(getstring)) return;
 		
 		var which = document.getElementById('tipType').selectedIndex;
-		if(getstring == '_dev' && devCheck) { // Dev
+		if(getstring == '_dev') { // Dev
 			DPRChrome.openDPRTab('chrome://digitalpalireader/content/dev.xul','DPRd');
 			return;
 		}

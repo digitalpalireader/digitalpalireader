@@ -10,6 +10,7 @@ var digitalpalireader =
     onLoad: function()
     {
 		window.dump("Load\n");
+		DPRChrome.openFirstDPRTab();
 		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
 		mainWindow.document.getElementById('sidebar-header').hidden = true;

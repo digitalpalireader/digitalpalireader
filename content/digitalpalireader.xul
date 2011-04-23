@@ -60,32 +60,32 @@
 	<splitter id="identifier" collapse="before" tooltiptext="Toggle Set &amp; Book Display">
 		<grippy/>
     </splitter>
-   		<vbox id="container" persist="height">
+   		<vbox id="container">
 			<groupbox>
 				<button id="title" label="title" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
-				<menulist flex="1" class="sel" id="meta" onchange="DPRXML.updateHierarchy(1)">
+				<menulist class="sel" id="meta" onchange="DPRXML.updateHierarchy(1)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
+				<menulist class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
+				<menulist class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
+				<menulist class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
 					<menupopup>
 					</menupopup>
 				</menulist>
-				<menulist flex="1" class="sel" id="section" oncommand="DPRSend.importXML()">
+				<menulist class="sel" id="section" oncommand="DPRSend.importXML()">
 					<menupopup>
 					</menupopup>
 				</menulist>
 			</groupbox>
 			<groupbox>
-				<menulist flex="1" class="sel" id="history" oncommand="DPRSend.openPlace(this.value.split(','))">
+				<menulist class="sel" id="history" oncommand="DPRSend.openPlace(this.value.split(','))">
 					<menupopup>
 					</menupopup>
 				</menulist>
