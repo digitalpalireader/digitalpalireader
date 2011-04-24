@@ -189,6 +189,19 @@ function extFileExists(fileLoc)
 	return true;
 } 
 
+function intFileExists(fileLoc) // in extension package
+{
+	var req = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
+	try {
+		req.open('HEAD', "chrome://digitalpalireader/"+fileLoc);           
+		req.send();
+	}
+	catch(ex) {
+		return false;
+	}
+	return true;
+} 
+
 function readDir() {
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 	var dir = DIR.get("ProfD", Components.interfaces.nsIFile);

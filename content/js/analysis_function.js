@@ -44,7 +44,8 @@ function outputAnalysis(input,frombox)
 		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);
 		else var newurl = oldurl + '&analysis='+input;
 		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+frombox);
-		else newurl = newurl + '&frombox='+frombox;
+		else if(frombox) newurl = newurl + '&frombox='+frombox;
+		else newurl = newurl.replace(/\&frombox=[^&]+/,'');
 		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 	}
 	catch(ex) {
