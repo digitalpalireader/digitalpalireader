@@ -216,7 +216,10 @@ function formatuniout(data,which) { // prepare without links
 
 		else if (/^<f/.exec(wb)) {
 			finout += wb + space;
-		}		
+		}
+		else if (/^<p>$/.exec(wb)) {
+			finout += wb + space;
+		}
 		else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
 			var permalink = wb.substring(2,wb.length-1);
 			convout += '\n\n';
@@ -470,6 +473,11 @@ function fadeOut(AID,id,speed) {
 
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
+		document.getElementById('difhist').innerHTML = '';
+		document.getElementById('difb').innerHTML = '';
+	}
+	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
+		document.getElementById('dict').innerHTML = '';
 		document.getElementById('difhist').innerHTML = '';
 		document.getElementById('difb').innerHTML = '';
 	}

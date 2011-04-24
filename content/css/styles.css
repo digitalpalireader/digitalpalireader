@@ -445,6 +445,17 @@ z-index:3;
 	right:0;
 overflow:auto;
 }
+#dictc {
+	position:relative;
+	height:100%; 
+	width:100%; 
+	overflow:auto;
+}
+#odif {
+	position:relative;
+	width:100%; 
+	overflow:auto;
+}
 #difout {
 	position:absolute;
 	height:100%; 

@@ -7,7 +7,6 @@ matValue['m'] = '';
 matValue['a'] = '';
 matValue['t'] = '';
 
-var G_thaiVols = 'v1m,v2m';
 
 function loadXMLSection(query,para,place,isPL,scroll)
 { 
@@ -166,7 +165,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 		break;
 	}
 	
-	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onclick="openPlace([\''+prev.join("\',\'")+'\']);">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onclick="openPlace([\''+next.join("\',\'")+'\']);">»</span>':'<span class="rbut abut small">&nbsp;</span>');
+	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onclick="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+']);">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onclick="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+']);">»</span>':'<span class="rbut abut small">&nbsp;</span>');
 
 	var hierb = hier;
 	
@@ -217,15 +216,32 @@ function loadXMLSection(query,para,place,isPL,scroll)
 			
 			if(query) {
 				if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
-				else var newurl = oldurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+				else var newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
 			}
+			else newurl = newurl.replace(/\&query=[^&]+/,'');
 
-			// update query
+			// update para
 
 			if(para) {
 				if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
-				else var newurl = oldurl + '&para='+para;
+				else var newurl = newurl + '&para='+para;
 			}
+			else newurl = newurl.replace(/\&para=[^&]+/,'');
+			
+			// update scroll
+
+			if(scroll) {
+				if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
+				else var newurl = newurl + '&scroll='+scroll;
+			}
+			else newurl = newurl.replace(/\&scroll=[^&]+/,'');
+			// update alt
+
+			if(place[8]) {
+				if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
+				else var newurl = newurl + '&alt=1';
+			}
+			else newurl = newurl.replace(/\&alt=[^&]+/,'');
 
 			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 		}
@@ -248,8 +264,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
 
 	// Thai alt button
-	
-	var thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,(event.ctrlKey||event.button==1?1:\'\'))">VRI</span>':(G_thaiVols.search(nikbookhier) > -1? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,(event.ctrlKey||event.button==1?1:\'\'))">Thai</span>':''));
+	var thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,(event.ctrlKey||event.button==1?1:\'\'))">VRI</span>':(intFileExists('content/xml/'+nikbookhier+'.t.xml')? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,(event.ctrlKey||event.button==1?1:\'\'))">Thai</span>':''));
 
 	// output toolbar data
 
@@ -347,7 +362,10 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	else {
 		if(place[8]) { // thai
 			for (tmp = 0; tmp < z.length; tmp++){
-				theData += ' <p> ' + z[tmp].textContent.replace(/^ *\^c\^[0-9]+\^ec\^ */g,'').replace(/  +/g, ' ');
+				if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.exec(z[tmp].textContent) && !DPR_prefs['showPages']) {
+					continue;
+				}
+				theData += ' <p> ' + z[tmp].textContent.replace(/^#[0-9]+#/,'').replace(/  +/g, ' ');
 			}
 		}
 		else {
