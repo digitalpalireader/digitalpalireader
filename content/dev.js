@@ -18,6 +18,7 @@ function devMode(string) {
 //DtestSort();
 }
 
+
 function devO(data,sw,clear) {
 //	if(clear) document.textpad.pad.value = '';
 	//if(typeof(data) == "object") data = data.join('\n');
@@ -2101,7 +2102,6 @@ function DthaiOut2(booka) {
 			}
 		}
 	}
-	writeExtFile('/home/noah/Desktop/footnotes',footnotelist);
 	return Ax;
 }
 
@@ -2271,7 +2271,7 @@ function DsaveXML2(name) {
 		outfile+='<p>' + DAp[i] + '</p>'; 
 	}
 	outfile += '</h4></h3></h2></h1></h0></ha></body>';
-	if(writeExtFile('/home/noah/Desktop/'+name+'.xml', outfile)) dalert('File Saved');
+	if(writeToDesktop(name+'.xml', outfile)) dalert('File Saved');
 	else dalert('File Not Saved');
 }
 

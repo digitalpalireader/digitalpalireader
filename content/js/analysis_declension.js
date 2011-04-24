@@ -96,6 +96,7 @@ G_endings.push(['uya.m',1,0,'','n']);
 // vant, mant
 G_endings.push(['aa',1,3,'nt','n']);
 G_endings.push(['a',1,3,'nt','n']);
+G_endings.push(['ata.m',1,3,'nt','n']);
 G_endings.push(['anta.m',1,3,'nt','n']);
 G_endings.push(['anto',1,3,'nt','n']);
 G_endings.push(['antaa',1,3,'nt','n']);
@@ -106,6 +107,22 @@ G_endings.push(['ato',1,3,'nt','n']);
 G_endings.push(['antaana.m',1,3,'nt','n']);
 G_endings.push(['ati',1,3,'nt','n']);
 G_endings.push(['antesu',1,3,'nt','n']);
+
+// anta (CPED)
+G_endings.push(['aa',1,3,'nta','n']);
+G_endings.push(['a',1,3,'nta','n']);
+G_endings.push(['ata.m',1,3,'nta','n']);
+G_endings.push(['ata.m',1,3,'ti','n']); // fudge to verb
+G_endings.push(['anta.m',1,3,'nta','n']);
+G_endings.push(['anto',1,3,'nta','n']);
+G_endings.push(['antaa',1,3,'nta','n']);
+G_endings.push(['ante',1,3,'nta','n']);
+G_endings.push(['ataa',1,3,'nta','n']);
+G_endings.push(['antehi',1,3,'nta','n']);
+G_endings.push(['ato',1,3,'nta','n']);
+G_endings.push(['antaana.m',1,3,'nta','n']);
+G_endings.push(['ati',1,3,'nta','n']);
+G_endings.push(['antesu',1,3,'nta','n']);
 
 // kattar
 

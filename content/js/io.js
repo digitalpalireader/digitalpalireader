@@ -227,6 +227,53 @@ function eraseFile(name) {
 		
 		return true;
 }
+
+function writeToDesktop(aFileKey, aContent)
+{
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
+	dir.append("DPR_dev");
+	if ( !dir.exists() )
+	{
+		dir.create(dir.DIRECTORY_TYPE, 0700);
+	}
+
+	var aFile = dir.clone();
+	aFile.append(aFileKey);
+	if ( aFile.exists() ) aFile.remove(false);
+
+	try {
+		// file is nsIFile, data is a string
+		var foStream = Components.classes["@mozilla.org/network/file-output-stream;1"].
+					   createInstance(Components.interfaces.nsIFileOutputStream);
+
+		// use 0x02 | 0x10 to open file for appending.
+		foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0); 
+		// write, create, truncate
+		// In a c file operation, we have no need to set file mode with or operation,
+		// directly using "r" or "w" usually.
+
+		var charset = "UTF-8"; // Can be any character encoding name that Mozilla supports
+
+		var os = Components.classes["@mozilla.org/intl/converter-output-stream;1"]
+						   .createInstance(Components.interfaces.nsIConverterOutputStream);
+
+		// This assumes that fos is the Interface("nsIOutputStream") you want to write to
+		os.init(foStream, charset, 0, 0x0000);
+
+		os.writeString(aContent);
+
+		os.close();
+		return true;
+	}
+	catch(ex)
+	{
+		dalert("ERROR: Failed to write file: " + aFile.leafName);
+	}
+}
+
+
+
 function eraseItem(name) {
 		var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 		var dir = DIR.get("ProfD", Components.interfaces.nsIFile);

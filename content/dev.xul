@@ -45,7 +45,35 @@
 <script type="application/x-javascript" src="js/listsm.js"></script>
 <script type="application/x-javascript" src="js/listam.js"></script>
 <vbox flex="1" pack="stretch">
-<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode"/>
+	<hbox>
+		<vbox flex="1">
+			<spacer flex="1"/>
+			<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode" value="htm.DXMLThai('v',3,'m',[[3,0,null]]);"/>
+		</vbox>
+			<vbox>
+				<hbox pack="center"><label class="large bold" value="&sSet.label;" /></hbox>
+				<menulist flex="1" id="set" onclick="DPRNav.changeSet()">
+					<menupopup>
+						<menuitem value="v" selected="true" label="Vinaya"/>
+						<menuitem value="d" label="Dīgha"/>
+						<menuitem value="m" label="Majjhima"/>
+						<menuitem value="s" label="Saṃyutta"/>
+						<menuitem value="a" label="Aṅguttara"/>
+						<menuitem value="k" label="Khuddaka"/>
+						<menuitem value="y" label="Abhidhamma"/>
+					</menupopup>
+				</menulist>			
+			</vbox>
+			<vbox >
+				<hbox pack="center"><label class="large bold" value="&sBook.label;" /></hbox>
+				<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" id="book"/>
+				
+			</vbox>		
+			<vbox>
+			<spacer flex="1"/>
+			<button id="title" label="go" oncommand="devMode('htm.DXMLThai(document.getElementById(\'set\').value,document.getElementById(\'book\').value,\'m\',eval(document.getElementById([[2,152,null]])')"/>
+			</vbox>		
+	</hbox>
         <splitter id="PanelSplitter"/>
 	<browser disablehistory="true" type="content" id="dpr-dev" src="dev.htm" flex="1" persist="height"/>
 

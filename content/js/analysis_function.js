@@ -338,7 +338,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				}
 			}
 		}				
-		//dalert(wtrV);
+		//alert(wtrV);
 	}
 	if(!lastpart && !nextpart) {
 		 
