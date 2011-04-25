@@ -263,8 +263,11 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	
 	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
 
+	var thaibut = '';
+	/*
 	// Thai alt button
-	var thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,(event.ctrlKey||event.button==1?1:\'\'))">VRI</span>':(intFileExists('content/xml/'+nikbookhier+'.t.xml')? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,(event.ctrlKey||event.button==1?1:\'\'))">Thai</span>':''));
+	thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,(event.ctrlKey||event.button==1?1:\'\'))">VRI</span>':(intFileExists('content/xml/'+nikbookhier+'.t.xml')? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,(event.ctrlKey||event.button==1?1:\'\'))">Thai</span>':''));
+	*/
 
 	// output toolbar data
 
