@@ -15,7 +15,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	resetvalues();
 	if(searchString) { // update url
 		G_searchType = searchType;
-		G_searchString = searchString;
+		G_searchString = toUni(searchString);
 		G_searchMAT = searchMAT;
 		G_searchSet = searchSet;
 		G_searchBook = ','+searchBook+',';
@@ -634,7 +634,7 @@ function createTables(xmlDoc,hiert)
 
 										l = tempexword[t].length;
 										for(var i=0; i<l; i++) {
-											tempexword[t][i] = tempexword[i].replace(/\^e*b\^/g,'');
+											tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
 											while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
 											tempexword[t][i] = tempexword[t][i].substring(1);
 											}
