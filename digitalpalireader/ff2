@@ -2,6 +2,7 @@
 
 cd ~/dpr/digitalpalireader
 
+git checkout 2
 git status
 
 oldv=`cat version`
