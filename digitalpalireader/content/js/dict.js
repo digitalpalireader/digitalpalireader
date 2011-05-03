@@ -118,7 +118,7 @@ function pedsearchstart(hard)
 				
 				uniout = toUni(uniout).replace(/`/g,'˚');
 				
-				finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+				finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
 			}
@@ -127,11 +127,10 @@ function pedsearchstart(hard)
 
 
 
+	document.getElementById('dicthead').innerHTML = '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr />';
 	
 	var outDiv = document.createElement('div');
 	
-	outDiv.innerHTML += '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr />';
-
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
@@ -317,10 +316,10 @@ function dppnsearchstart(hard)
 	}
 
 
+	document.getElementById('dicthead').innerHTML = '<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+getstring+'</b>:<hr />';
 
 	var listoutf = '';
 	
-	listoutf += '<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+getstring+'</b>:<hr />';
 
 	if(finouta.length == 0) {
 		listoutf += '<table width="100%"><tr><td>No results</td></tr></table><hr />';

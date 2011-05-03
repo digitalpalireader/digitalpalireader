@@ -42,3 +42,7 @@ function promptDataEx(title,data) {
 	G_prompts.confirmEx(null, title, data,flags,"","Ok","",null,check);
 }
 
+function DPR_restartFirefox() {
+	var boot = Components.classes["@mozilla.org/toolkit/app-startup;1"].getService(Components.interfaces.nsIAppStartup);
+	boot.quit(Components.interfaces.nsIAppStartup.eForceQuit|Components.interfaces.nsIAppStartup.eRestart);
+}

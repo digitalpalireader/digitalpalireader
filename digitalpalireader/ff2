@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ~/Extensions/digitalpalireader
+cd ~/dpr/digitalpalireader
 
 git status
 
