@@ -189,11 +189,11 @@ function extFileExists(fileLoc)
 	return true;
 } 
 
-function intFileExists(fileLoc) // in extension package
+function chromeFileExists(fileLoc) // in extension package
 {
 	var req = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
 	try {
-		req.open('HEAD', "chrome://digitalpalireader/"+fileLoc);           
+		req.open('HEAD', "chrome://"+fileLoc);           
 		req.send();
 	}
 	catch(ex) {

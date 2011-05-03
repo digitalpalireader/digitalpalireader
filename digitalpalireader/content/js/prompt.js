@@ -25,7 +25,7 @@ function aboutPrompt() {
 }
 
 function promptConfirm(title, question) {
-	return prompts.confirm(null, title, question);
+	return G_prompts.confirm(null, title, question);
 
 // returns true if OK was clicked, and false if cancel was clicked
 }
