@@ -24,6 +24,12 @@ function aboutPrompt() {
 	}
 }
 
+function promptConfirm(title, question) {
+	return prompts.confirm(null, title, question);
+
+// returns true if OK was clicked, and false if cancel was clicked
+}
+
 function promptData(title,data) {
 	G_prompts.alert(null, title, data);
 }
@@ -36,3 +42,7 @@ function promptDataEx(title,data) {
 	G_prompts.confirmEx(null, title, data,flags,"","Ok","",null,check);
 }
 
+function DPR_restartFirefox() {
+	var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
+	Application.restart();
+}

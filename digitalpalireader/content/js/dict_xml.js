@@ -22,7 +22,7 @@ function paliXML(file,which)
 	}
 	
 	var filea = file.split(',');
-	var ttit = filea[1];
+	var ttit = filea[1].replace(/˚/g,'`');
 	var file = filea[0];
 
 	if(!mainda[toVel(ttit)]) {
@@ -88,7 +88,7 @@ function paliXML(file,which)
 
 
 	var dataNode = document.createElement('div');
-	dataNode.innerHTML = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]");
+	dataNode.innerHTML = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]")+'<hr/>';
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
@@ -140,6 +140,7 @@ function paliXML(file,which)
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
     document.getElementById('cdif').scrollTop=0;
+    document.getElementById('dictc').scrollTop=0;
 }
 
 function toggleDppnTitle(link,id) {
@@ -204,7 +205,7 @@ function DPPNXML(file,which)
 	// output
 
 	var dataNode = document.createElement('div');
-	dataNode.innerHTML = '<p>'+data;
+	dataNode.innerHTML = '<p>'+data+'<hr/>';
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
     document.getElementById('cdif').scrollTop=0;
@@ -253,6 +254,7 @@ function DPPNXML(file,which)
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
     document.getElementById('cdif').scrollTop=0;
+    document.getElementById('dictc').scrollTop=0;
 }
 
 

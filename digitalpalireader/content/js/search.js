@@ -345,14 +345,10 @@ function importXMLs(cnt)
 		nikperm = nikayaat;
 		hiert = bookfile.charAt(bookfile.length-1);
 		
-		bookload = 'xml/' + bookfile + '.xml';
-
 		//devO(bookload);
 
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", bookload, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
+		var xmlDoc = loadXMLFile(bookfile,0);
+
 		createTables(xmlDoc,hiert);
 					
 		document.getElementById('stfH'+nikayaat).innerHTML = thiscount;

@@ -13,7 +13,7 @@ var digitalpalireader =
 		DPRChrome.openFirstDPRTab();
 		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
-		mainWindow.document.getElementById('sidebar-header').hidden = true;
+		//mainWindow.document.getElementById('sidebar-header').hidden = true;
 		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
 		mainWindow.gBrowser.tabContainer.addEventListener("TabClose", this.onPageUnload, true);
 	},
@@ -22,7 +22,7 @@ var digitalpalireader =
     {
         window.dump("unLoad\n");
 		mainWindow.gBrowser.removeEventListener("load", this.onPageLoad, true);
-		mainWindow.document.getElementById('sidebar-header').hidden = false;
+		//mainWindow.document.getElementById('sidebar-header').hidden = false;
 	},
 	
 	onPageLoad: function(e)

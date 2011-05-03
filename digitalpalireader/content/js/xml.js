@@ -1,4 +1,3 @@
-
 var unnamed = '[unnamed]';
 
 var matButton = 0; // tells us we've clicked an in-section mat button.
@@ -32,14 +31,11 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	var sutta = place[5];
 	var section = place[6]
 	var nikbookhier = nikaya + book + hier;
-	var bookload = 'xml/' + nikbookhier + (place[8]?'.t.xml':'.xml');
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
-
-
+	
+    var xmlDoc = loadXMLFile(nikbookhier,place[8]?place[8]:0);
+	
+	if(xmlDoc == null) return refreshit();
+	
 	var t = xmlDoc.getElementsByTagName("ha");
 	var u = t[0].getElementsByTagName("h0");
 	var v = u[meta].getElementsByTagName("h1");
@@ -407,12 +403,9 @@ function loadXMLindex(place) {
 	var nikaya = place[0];
 	var bookno = parseInt(place[1]);
 	var book = bookno+1;
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+	var nikbookhier = nikaya + book + hier;
 
-	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
+    var xmlDoc = loadXMLFile(nikbookhier,0);
 
 	var z = xmlDoc.getElementsByTagName("ha");
 	var y = '';

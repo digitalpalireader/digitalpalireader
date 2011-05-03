@@ -9,6 +9,7 @@
 
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/xml_load.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
@@ -96,16 +97,6 @@ else { // null functions
 	</script> -->
 	<div id="alertc"><span id="alert"></span></div>
 </div>
-<script>
-if (DPR_prefs['catioff']) { 
-	var nsrc = 'file://'+ DPR_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
-}
-else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
 
-var newScript = document.createElement('script');
-newScript.type = 'text/javascript';
-newScript.src = nsrc;
-headID.appendChild(newScript);
-</script>
 </body>
 </html>
