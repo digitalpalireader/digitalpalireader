@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cd ~/dpr/digitalpalireader
-
+git commit -a
 git checkout 2
+git merge master
 git status
+
+cd digitalpalireader
 
 oldv=`cat version`
 rdfv=`zenity --entry --title="Version Number" --entry-text="$oldv" --text="Enter Version Number"`
@@ -128,3 +130,6 @@ git commit -m "$xhtmlu" -a
 fi
 git push
 cd ..
+
+git checkout master
+git merge 2

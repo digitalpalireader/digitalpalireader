@@ -9,20 +9,26 @@ var digitalpalireader =
 
     onLoad: function()
     {
-		if(!chromeFileExists('DPRMyanmar/content/version')) {
+
+		window.dump("Load\n");
+		this.checkTipitaka();
+
+		DPRChrome.openFirstDPRTab();
+		DPRChrome.giveIDtoTabs();
+		this.updatePrefs();
+
+		//mainWindow.document.getElementById('sidebar-header').hidden = true;
+		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
+		mainWindow.gBrowser.tabContainer.addEventListener("TabClose", this.onPageUnload, true);
+	},
+	
+	checkTipitaka:function() {
+		if(!chromeFileExists('DPRMyanmar/content/exists')) {
 			if(promptConfirm('Tipitaka Archive Not Found', "It looks like you don't have the DPR tipitaka archive installed.\n\nAs of DPR 2.0, the tipitaka files are in a seperate extension package that must be downloaded in addition to the main archive in order to use the reader.  This is done in order to save you from having to re-download the tipitaka every time you upgrade the DPR.  \n\nWith your permission, you will now be directed to the tipitaka extension URL.  Once it is downloaded, restart Firefox, and the DPR should work properly.  After that, you shouldn't see this dialogue again.")) {
 				DPRChrome.openDPRTab('http://pali.sirimangalo.org/DPRMyanmar.xpi', 'DPR-xpi',false);
 			}
 			return mainWindow.toggleSidebar();
 		}
-		
-		window.dump("Load\n");
-		DPRChrome.openFirstDPRTab();
-		DPRChrome.giveIDtoTabs();
-		this.updatePrefs();
-		//mainWindow.document.getElementById('sidebar-header').hidden = true;
-		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
-		mainWindow.gBrowser.tabContainer.addEventListener("TabClose", this.onPageUnload, true);
 	},
    
     onUnload: function()

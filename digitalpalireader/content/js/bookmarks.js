@@ -35,7 +35,7 @@ function eraseBookmarks(gofrom)
 function bookmarkframe(refresh)
 {
 
-	convertOldBookmarks();
+	if(!fileExists('DPR_Bookmarks')) convertOldBookmarks();
 
 	// get history
 
@@ -140,17 +140,14 @@ function convertOldBookmarks() {
 			var nik = ba[name]['loc'].match(/^[0-9]+/)[0];
 			ba[name]['loc'] = ba[name]['loc'].replace(/^([0-9]+)/,G_numberToNik[nik]);
 
-			eraseFile(ca[i]);
 		}
 		else if (/^DPD/.exec(ca[i])) {
 			if(!ba[toUni(ca[i].substring(3))]) continue;
 			ba[toUni(ca[i].substring(3))]['desc'] = readFile(ca[i])[0];
-			eraseFile(ca[i]);
 		}
 		else if (/^DPS/.exec(ca[i])) {
 			if(!ba[toUni(ca[i].substring(3))]) continue;
 			ba[toUni(ca[i].substring(3))]['scroll'] = readFile(ca[i])[0];
-			eraseFile(ca[i]);
 		}
 	}
 	

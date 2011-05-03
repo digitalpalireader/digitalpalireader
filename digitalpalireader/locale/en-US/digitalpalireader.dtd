@@ -31,11 +31,11 @@
 <!ENTITY dictAdv "adv">
 <!ENTITY dictAdv.text "advanced lookup options">
 <!ENTITY DPR "DPR Analysis">
-<!ENTITY PED "Pali-English (PED)">
-<!ENTITY DPPN "Pali Proper Names (DPPN)">
-<!ENTITY CPED "Concise Pali-English (CPED)">
+<!ENTITY PED "PED - Pali-English">
+<!ENTITY DPPN "DPPN - Pali Proper Names">
+<!ENTITY CPED "CPED - Concise Pali-English">
 <!ENTITY Multi "PED, DPPN &amp; CPED">
-<!ENTITY CEPD "Concise English-Pali (CEPD)">
+<!ENTITY CEPD "CEPD - Concise English-Pali">
 <!ENTITY Aṭṭh "Aṭṭhakathā Terms">
 <!ENTITY Ṭīka "Ṭīka Terms">
 <!ENTITY Title "Title Search">

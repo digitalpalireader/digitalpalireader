@@ -139,8 +139,12 @@ function paliXML(file,which)
 
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
-    document.getElementById('cdif').scrollTop=0;
-    document.getElementById('dictc').scrollTop=0;
+
+	if(document.getElementById('bottom')) {
+		document.getElementById('cdif').scrollTop=0;
+		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+	}
+	else document.getElementById('dictc').scrollTop=0;
 }
 
 function toggleDppnTitle(link,id) {
@@ -253,8 +257,11 @@ function DPPNXML(file,which)
 	
 
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
-    document.getElementById('cdif').scrollTop=0;
-    document.getElementById('dictc').scrollTop=0;
+	if(document.getElementById('bottom')) {
+		document.getElementById('cdif').scrollTop=0;
+		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+	}
+	else document.getElementById('dictc').scrollTop=0;
 }
 
 
