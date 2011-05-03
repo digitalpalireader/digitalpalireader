@@ -1,7 +1,7 @@
 
 <!ENTITY digitalpalireader.title "Digital Pali Reader">
 <!ENTITY openDPR.commandkey "D">
-<!ENTITY openDPR.modifierskey "alt shift">
+<!ENTITY openDPR.modifierskey "control shift">
 
 <!-- Sidebar -->
 

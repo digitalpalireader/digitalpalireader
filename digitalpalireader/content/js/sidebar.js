@@ -9,8 +9,8 @@ var digitalpalireader =
 
     onLoad: function()
     {
-		if(!chromeFileExists('DPRMyanmar/version')) {
-			if(promptConfirm('Tipitaka Archive Not Found', "You don't have the required tipitaka archive installed.  As of DPR 2.0, the tipitaka files are in a seperate extension package that must be downloaded seperately.  This is done in order to save you from having to re-download the tipitaka every time you upgrade the DPR.  With your permission, you will now be directed to the tipitaka extension URL.  Once it is downloaded, restart Firefox, and the DPR should work properly.  After that, you shouldn't see this dialogue again.")) {
+		if(!chromeFileExists('DPRMyanmar/content/version')) {
+			if(promptConfirm('Tipitaka Archive Not Found', "It looks like you don't have the DPR tipitaka archive installed.\n\nAs of DPR 2.0, the tipitaka files are in a seperate extension package that must be downloaded in addition to the main archive in order to use the reader.  This is done in order to save you from having to re-download the tipitaka every time you upgrade the DPR.  \n\nWith your permission, you will now be directed to the tipitaka extension URL.  Once it is downloaded, restart Firefox, and the DPR should work properly.  After that, you shouldn't see this dialogue again.")) {
 				DPRChrome.openDPRTab('http://pali.sirimangalo.org/DPRMyanmar.xpi', 'DPR-xpi',false);
 			}
 			return mainWindow.toggleSidebar();
