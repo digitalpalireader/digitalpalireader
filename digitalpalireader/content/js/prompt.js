@@ -43,6 +43,6 @@ function promptDataEx(title,data) {
 }
 
 function DPR_restartFirefox() {
-	var boot = Components.classes["@mozilla.org/toolkit/app-startup;1"].getService(Components.interfaces.nsIAppStartup);
-	boot.quit(Components.interfaces.nsIAppStartup.eForceQuit|Components.interfaces.nsIAppStartup.eRestart);
+	var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
+	Application.restart();
 }
