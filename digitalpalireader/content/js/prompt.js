@@ -24,6 +24,12 @@ function aboutPrompt() {
 	}
 }
 
+function promptConfirm(title, question) {
+	return prompts.confirm(null, title, question);
+
+// returns true if OK was clicked, and false if cancel was clicked
+}
+
 function promptData(title,data) {
 	G_prompts.alert(null, title, data);
 }

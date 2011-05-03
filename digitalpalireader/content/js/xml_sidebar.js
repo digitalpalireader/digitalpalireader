@@ -5,11 +5,10 @@ var DPRXML = {
 		
 		var nikaya = document.getElementById('set').value;
 		var book = document.getElementById('book').value;
-		var bookload = 'xml/' + nikaya + book + G_hier + '.xml';
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", bookload, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
+		var nikbookhier = nikaya + book + G_hier;
+
+		var xmlDoc = loadXMLFile(nikbookhier,0);
+
 
 		var meta = (depth > 0  ? document.getElementById('meta').selectedIndex : 0);
 		var volume = (depth > 1 ? document.getElementById('volume').selectedIndex : 0);
