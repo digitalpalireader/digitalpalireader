@@ -3,7 +3,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <overlay id="digitalpalireader-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
+	<script type="application/x-javascript" src="js/chrome_overlay.js"/>
     <stringbundleset id="stringbundleset">
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>

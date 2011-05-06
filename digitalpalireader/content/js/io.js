@@ -191,11 +191,11 @@ function extFileExists(fileLoc)
 
 function chromeFileExists(fileLoc) // in extension package
 {
-	var req = Components.classes["@mozilla.org/xmlextras/xmlhttprequest;1"].createInstance();
+	var xmlhttp = new window.XMLHttpRequest();
 	try {
-		req.open('HEAD', "chrome://"+fileLoc);
-		if (req.readyState == 2) return true;
-		req.send();
+		xmlhttp.open("GET", "chrome://"+fileLoc, false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
 	}
 	catch(ex) {
 		return false;
