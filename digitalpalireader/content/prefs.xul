@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://global/skin/"?>
+<?xml-stylesheet href="chrome://digitalpalireader/content/css/prefs.css" type="text/css" ?>
 <!DOCTYPE page SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 
 
@@ -9,6 +10,7 @@
 	title="&pTitle.label;" onload="loadPrefs();">
 
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prompt.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
 
@@ -22,6 +24,7 @@
   		<tab label="&pGeneral.label;"/>
   		<tab label="&pLayout.label;"/>
   		<tab label="&pText.label;"/>
+  		<tab label="&pSets.label;"/>
   	</tabs>
   	<tabpanels flex="1">
   		<tabpanel id="generalTab">
@@ -140,6 +143,34 @@
   				
   			</vbox>
 
+  		</tabpanel>
+ 	
+  		
+  		<tabpanel id="setsTab">
+  			<vbox flex="1">
+				<richlistbox>
+					<grid id="setsGrid" flex="1">
+						<columns>
+							<column label="Name"/>
+							<column label="Installed"/>
+						</columns>
+						<rows id="setsRows">
+							<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+								<row flex="1" align="center">
+									<label flex="1" value="Myanmar Tipitaka"/>
+									<label id="myanmarInstalled" value="&setInstalled;"/>
+								</row>
+							</richlistitem>
+							<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+								<row flex="1" align="center">
+									<label flex="1" value="Thai Tipitaka"/>
+									<label id="thaiInstalled" class="link" value="&setInstall;"/>
+								</row>
+							</richlistitem>
+						</rows>
+					</grid>
+				</richlistbox>
+  			</vbox>
   		</tabpanel>
   	</tabpanels>
   </tabbox>

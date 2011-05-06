@@ -46,3 +46,9 @@ function DPR_restartFirefox() {
 	var Application = Components.classes["@mozilla.org/fuel/application;1"].getService(Components.interfaces.fuelIApplication);
 	Application.restart();
 }
+
+function installSetPrompt(set, setName) {
+	if(promptConfirm('Install ' + setName, "Please confirm that you would like to install the "+ setName +" extension.\n\nWith your permission, you will now be directed to the extension URL.  Once it is downloaded, restart Firefox, and the set will be available as an alternative via a button in the toolbar in the main window.")) {
+		window.open('http://pali.sirimangalo.org/'+set+'.xpi', 'DPR-xpi',false);
+	}
+}

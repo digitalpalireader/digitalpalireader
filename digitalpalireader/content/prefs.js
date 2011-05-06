@@ -109,6 +109,16 @@ function loadPrefs() {
 		
 		document.getElementById('translits').selectedIndex = prefs.getIntPref('Int.translits');
 		
+		// sets
+		
+		if(chromeFileExists('DPRThai/content/exists')) {
+			document.getElementById('thaiInstalled').className="normal";
+			document.getElementById('thaiInstalled').value="Installed";
+		}
+		else {
+			document.getElementById('thaiInstalled').onmousedown = function() {installSetPrompt('DPRThai','Thai Tipitaka')};
+		}
+		
 }
 
 

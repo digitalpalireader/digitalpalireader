@@ -1,3 +1,7 @@
+function eventSend(event) {
+	if(event.ctrlKey || event.button == 1) return true;
+	return false;
+}
 
 	
 function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add)

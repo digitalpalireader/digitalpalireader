@@ -50,12 +50,16 @@
 <!ENTITY help.label "Help">
 <!ENTITY contact.label "Feedback Form">
 
+
+
+
 <!-- Preferences -->
 
 <!ENTITY pTitle.label "Digital Pali Reader Preferences">
 <!ENTITY pGeneral.label "General">
 <!ENTITY pLayout.label "Layout">
 <!ENTITY pText.label "Text">
+<!ENTITY pSets.label "Sets">
 
 <!-- General Tab -->
 
@@ -133,7 +137,13 @@
 <!ENTITY pred.label "zxvxz">
 <!ENTITY pblueh.label "zxvxz">
 
+<!-- Sets Tab -->
 
+<!ENTITY setName.label "Name">
+<!ENTITY setInstalled "Installed">
+<!ENTITY setInstall "Install">
+
+<!-- Pref Buttons -->
 
 <!ENTITY pDefaults.label "Defaults">
 <!ENTITY pCancel.label "Cancel">

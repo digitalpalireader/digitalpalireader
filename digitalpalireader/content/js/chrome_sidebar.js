@@ -1,3 +1,9 @@
+var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+			   .getInterface(Components.interfaces.nsIWebNavigation)
+			   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+			   .rootTreeItem
+			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
 var DPRChrome = {
 	giveIDtoTabs:function() { // startup function, give ids to 
@@ -102,7 +108,18 @@ var DPRChrome = {
 	G_prompts: Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService),
 	promptData:function(title,data) {
 		this.G_prompts.alert(null, title, data);
-	}
+	},
+	DPRSidebarDocument: function() {
+		var sidebar = mainWindow.document.getElementById("sidebar").contentDocument;
+
+		if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+			return sidebar;
+		} 
+		else return false
+	},
+	openSidebar: function() {
+		toggleSidebar('viewDPR');
+	},
 }
 
 

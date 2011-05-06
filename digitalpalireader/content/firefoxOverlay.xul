@@ -3,6 +3,7 @@
 <!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <overlay id="digitalpalireader-overlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
     <stringbundleset id="stringbundleset">
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>
@@ -39,6 +40,6 @@
                  group="sidebar"
                  sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
                  sidebartitle="&digitalpalireader.title;"
-                 oncommand="toggleSidebar('viewDPR');" />
+                 oncommand="if(!DPRChrome.DPRSidebarDocument()) {DPRChrome.openFirstDPRTab();} DPRChrome.openSidebar();" />
   </broadcasterset>
 </overlay>

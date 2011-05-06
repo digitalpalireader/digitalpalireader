@@ -1,19 +1,19 @@
-var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-			   .getInterface(Components.interfaces.nsIWebNavigation)
-			   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-			   .rootTreeItem
-			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-			   .getInterface(Components.interfaces.nsIDOMWindow); 
 var digitalpalireader =
 {
 
     onLoad: function()
     {
-
 		window.dump("Load\n");
+		
+		var url = DPRChrome.DPRSidebarDocument();
+		if(url) url = url.location.href;
+		
+		//var init = /digitalpalireader\.xul\?init=true/.exec(url);
+		//alert(url);
+		//if(!init) return mainWindow.toggleSidebar();
+		
 		this.checkTipitaka();
 
-		DPRChrome.openFirstDPRTab();
 		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
 

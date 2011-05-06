@@ -46,7 +46,7 @@ function bookmarkframe(refresh)
 		var thist = theHistory[i].split('@');
 		var tt1 = thist[1].length-1;
 		thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onclick="openPlace(['+thist[1]+'])">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmousedown="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
 	}
 	if(!hout) { hout = '<b style="color:'+DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
 	else { isclear = '&nbsp;<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
@@ -85,7 +85,7 @@ function bookmarkframe(refresh)
 				
 				outputList +=  '<div class="hide" id="'+ i + '"><hr>';
 					outputList +=  '<table width=100%><tr><td><b>Edit Name</b></td></tr><tr><td align=center><input type=text value="'+name+'" id="newname' + i + '" title="Enter a new name for this bookmark" size=12></td><td align=center><span class="abut obut" onClick="bookmarkxn(document.getElementById(\'newname'+i+'\').value,\'' + i + '\')" title="Change Name">change</span></td></tr></table><hr>';
-				outputList += '<table width=100%><tr><td align=center><div class="hide" id="html' + i + '"><table width=100%><tr><td><b>Edit Description</b></td></tr><tr><td align=center><textarea id="newdesc' + i + '" title="Enter a new description for this bookmark" value="' + desc + '">' + desc + '</textarea></td><td><span class="abut obut" onClick="bookmarkxd(document.getElementById(\'newdesc'+i+'\').value,\'' + i + '\')" title="Change Description">change</span></td></tr></table></td></tr></table></div>';
+				outputList += '<table width=100%><tr><td align=center><div class="hide" id="html' + i + '"><table width=100%><tr><td><b>Edit Text</b></td></tr><tr><td align=center><textarea id="newdesc' + i + '" title="Enter new text for this bookmark" value="' + desc + '">' + desc + '</textarea></td><td><span class="abut obut" onClick="bookmarkxd(document.getElementById(\'newdesc'+i+'\').value,\'' + i + '\')" title="Change Description">change</span></td></tr></table></td></tr></table></div>';
 			outputList += '</div></td></tr>';
 				
 		}
