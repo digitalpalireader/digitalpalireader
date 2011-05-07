@@ -10,7 +10,6 @@ function conjugate(word, id, which) {
 		alertFlash('Word not found','yellow');
 		return;
 	}
-
 	
 	var out;
 	
@@ -70,7 +69,12 @@ function conjugateNoun(word) {
 		}
 		
 		var descript = (q > 0 ? '<hr>':'')+'<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
-
+		
+		if (type2[1] == '' && type2[2] == '' && type2[3] == '') {
+			out += descript;
+			continue;
+		}
+			
 		var gender = yto[1];
 		switch(gender) {
 			case 'm.':

@@ -259,10 +259,17 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	
 	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
 
-	var thaibut = '';
 
 	// Thai alt button
-	thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event))">VRI</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event))">Thai</span>':''));
+	
+	var thaibut = '';
+
+	if(!chromeFileExists('DPRThai/content/exists')) {
+		thaibut = ' <span id="thaiButton" class="abut obut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')">Thai</span>';
+	}
+	else {
+		thaibut = (place[8]?' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event))">VRI</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="thaiButton" class="abut obut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event))">Thai</span>':''));
+	}
 
 	// output toolbar data
 

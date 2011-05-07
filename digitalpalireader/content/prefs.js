@@ -116,7 +116,7 @@ function loadPrefs() {
 			document.getElementById('thaiInstalled').value="Installed";
 		}
 		else {
-			document.getElementById('thaiInstalled').onmousedown = function() {installSetPrompt('DPRThai','Thai Tipitaka')};
+			document.getElementById('thaiInstalled').onmousedown = function() {installSetPrompt('DPRThai','Thai Tipitaka','setBrowser')};
 		}
 		
 }

@@ -61,6 +61,7 @@ infI['P#ac.prp.na'] = ['Present participle, active','A1','B1','C1'];
 infI['P#ac.prp.nt'] = ['Present participle, active','V1','W1','X1'];
 infI['P#ac.prp.nte'] = ['Present participle, active','V2','W2','X2'];
 infI['P#ac.prp.nto'] = ['Present participle, active','V3','W3','X3'];
+infI['P#ac.ger'] = ['Gerund, active','','',''];
 infI['P#ca.fpp'] = ['Fut. passive part., causitive','A1','B1','C1'];
 infI['P#ca.pp'] = ['Past participle, causitive','A1','B1','C1'];
 infI['P#ca.prp.na'] = ['Present participle, causitive','A1','B1','C1'];

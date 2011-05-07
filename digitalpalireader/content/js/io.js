@@ -181,6 +181,19 @@ function fileExists(aFileKey)
 	return false;
 }
 
+function profFileExists(file)
+{
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("ProfD", Components.interfaces.nsIFile);
+	
+	var dirs = file.split('/');
+	for (i in dirs) {
+		dir.append(dirs[i]);
+		if (!dir.exists()) return false;
+	}
+	return true;
+}
+
 function extFileExists(fileLoc)
 {
 	var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);

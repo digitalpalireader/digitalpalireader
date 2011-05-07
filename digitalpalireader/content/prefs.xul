@@ -170,6 +170,7 @@
 						</rows>
 					</grid>
 				</richlistbox>
+				<hbox flex="1" pack="stretch"><browser flex="1" id="setBrowser" src="" disablehistory="true" type="content"/></hbox>
   			</vbox>
   		</tabpanel>
   	</tabpanels>
