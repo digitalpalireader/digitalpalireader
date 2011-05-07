@@ -1,5 +1,5 @@
 //window.alert('dev mode');
-//var devCheck = 0;
+var devCheck = 0;
 
 function devMode(string) {
  devCheck = 1;
