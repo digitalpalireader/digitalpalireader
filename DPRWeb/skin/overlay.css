@@ -1,0 +1,6 @@
+#dpr-button {
+  list-style-image    : url("chrome://digitalpalireader/skin/icons/logo24.png");
+}
+toolbar[iconsize="small"] #dpr-button {
+  list-style-image    : url("chrome://digitalpalireader/skin/icons/logo.png");
+}

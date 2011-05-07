@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/"?>
+<?xml-stylesheet href="chrome://digitalpalireader/content/css/prefs.css" type="text/css" ?>
+<!DOCTYPE page SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+
+
+<page id="digitalpalireader" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	persist="screenX screenY"
+	onload="window.setInterval('checkInstalled',1000)"
+	>
+	<vbox id="content"></vbox>
+	<script type="application/x-javascript" src="js.js"/>
+</page>

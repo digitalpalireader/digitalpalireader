@@ -1,0 +1,134 @@
+#!/bin/bash
+
+git commit -a
+git checkout 2
+git merge master
+git status
+
+
+oldv=`cat version`
+rdfv=`zenity --entry --title="Version Number" --entry-text="$oldv" --text="Enter Version Number"`
+if [ "$rdfv" == "" ]
+then
+rdfv=$oldv
+fi
+
+xhtmlu=`gdialog --title "Update Notes" --inputbox "Enter Update Notes" 300 450 2>&1`
+if [ "$xhtmlu" == "" ]
+then
+echo "no update notes"
+exit 0
+fi
+
+update=""
+if [ "$oldv" != "$rdfv" ] 
+then git tag $rdfv
+update=`gdialog --title "New Version Description" --inputbox "Enter Version Info" 300 450 2>&1`
+fi
+
+
+
+# Firefox
+
+echo $rdfv > version
+
+echo "var version = '$rdfv';" > content/version.js
+
+echo '<?xml version="1.0" encoding="UTF-8"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <Description about="urn:mozilla:install-manifest">
+    <em:id>digitalpalireader@noah.yuttadhammo</em:id>
+    <em:name>Digital Pali Reader</em:name>
+    <em:version>'$rdfv'</em:version>
+    <em:creator>Noah Yuttadhammo</em:creator>
+    <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
+    <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
+    <em:updateURL>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateURL>
+    <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
+        <em:minVersion>3.5</em:minVersion>
+        <em:maxVersion>4.*</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+    <em:updateKey>
+    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdroA7ONVpoCaPoYilrW++MPgq
+	p7EWBn1q1xfuZ0kwu/5KJU1SSB/9x3Oh/6KWKkQ3shW4Ux+yoBi78xtWkZmQqUyW
+	eWHqHhdma5A09gtMv8eIVNaM21+7HHXqhKLYAcRp0qfaLfK8LWj9oRS2xjXSHTlp
+	50wghuHGEe67058qfQIDAQAB
+	</em:updateKey>
+    <em:bootstrap>false</em:bootstrap>
+  </Description>
+</RDF>' > install.rdf
+
+echo '<?xml version="1.0" encoding="UTF-8"?>
+
+<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+  <RDF:Description about="urn:mozilla:extension:digitalpalireader@noah.yuttadhammo">
+    <em:updates>
+      <RDF:Seq>
+        <RDF:li>
+          <RDF:Description>
+            <em:version>'$rdfv'</em:version>
+            <em:targetApplication>
+              <RDF:Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>1.5</em:minVersion>
+                <em:maxVersion>4.*</em:maxVersion>
+                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateLink>
+                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader2.xhtml</em:updateInfoURL>
+              </RDF:Description>
+            </em:targetApplication>
+          </RDF:Description>
+        </RDF:li>
+      </RDF:Seq>
+    </em:updates>
+  </RDF:Description>
+</RDF:RDF>' > digitalpalireader.rdf
+
+if [ "$update" != "" ]
+then
+echo "$update" > digitalpalireader.xhtml
+else
+echo "$xhtmlu" > digitalpalireader.xhtml
+fi
+
+
+#echo '<?xml version="1.0"?>
+#<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+#<window id            = "digitalpalireader-main-window"
+        #title         = "Digital Pali Reader '$rdfv'"
+        #width         = "800"
+        #height        = "600"
+        #orient        = "vertical"
+        #xmlns         = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        #xmlns:html    = "http://www.w3.org/1999/xhtml"
+        #persist       = "width height screenX screenY sizemode">
+
+#<browser id="cmdlog" src="index.htm" flex="1" persist="height"/>
+
+#</window>
+#' > content/digitalpalireader.xul
+
+echo 'This is the SourceForge archive for the Digital Pali Reader.  You will find the latest release in the "DPR" folder.
+
+The latest version is '$rdfv' and the latest commit message is:
+
+'$xhtmlu'
+' > sf.txt
+
+# git
+
+if [ "$xhtmlu" != "none" ]
+then
+git add .
+git commit -m "$xhtmlu" -a
+fi
+git push
+cd ..
+
+git checkout master
+git merge 2

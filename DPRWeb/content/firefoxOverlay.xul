@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://digitalpalireader/skin/overlay.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<overlay id="digitalpalireader-overlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+    </stringbundleset>
+    <menupopup id="menu_ToolsPopup">
+		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
+	</menupopup>
+    <toolbarpalette  id="BrowserToolbarPalette">
+        <toolbarbutton id="dpr-button"     label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
+    </toolbarpalette>
+    <statusbar id="status-bar">
+        <statusbarpanel id="DPRStatusBar" 
+						role="button" 
+						context="_child"
+                        observes="viewDPR"
+                        tooltiptext="Digital Pali Reader">
+			<toolbarbutton id="dpr-statusbar-button"
+			  	class="toolbarbutton-1"
+				image="chrome://digitalpalireader/skin/icons/logo.png"
+				orient="horizontal"/>
+        </statusbarpanel>
+    </statusbar>
+  
+  <keyset id="mainKeyset">
+    <key id="key_openDPR" command="viewDPR"
+         key="&openDPR.commandkey;" 
+         modifiers="&openDPR.modifierskey;" />
+  </keyset>
+  
+  <broadcasterset id="mainBroadcasterSet"> 
+    <broadcaster id="viewDPR" 
+                 label="&digitalpalireader.title;"
+                 autoCheck="false"
+                 type="checkbox"
+                 group="sidebar"
+		 oncommand="var mB = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsIDocShellTreeItem).rootTreeItem.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindow).gBrowser; mB.addTab('chrome://digitalpalireader/content/loading.xul')"/>
+	 
+  </broadcasterset>
+</overlay>

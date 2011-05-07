@@ -1,0 +1,5 @@
+content	digitalpalireader	content/
+locale	digitalpalireader	en-US	locale/en-US/
+skin	digitalpalireader	classic/1.0	skin/
+overlay	chrome://browser/content/browser.xul	chrome://digitalpalireader/content/firefoxOverlay.xul
+style chrome://global/content/customizeToolbar.xul	chrome://digitalpalireader/skin/overlay.css
