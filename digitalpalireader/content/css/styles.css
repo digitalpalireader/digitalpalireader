@@ -158,7 +158,6 @@ margin-left:auto;
 margin-right:auto; 
 }
 
-
 .bottomb {
 	border-bottom: grey 1px solid;
 }
@@ -177,6 +176,10 @@ position:relative;
 
 .pointer:hover{
 	cursor:pointer;
+}
+
+.text:hover{
+	cursor:text;
 }
 
 .hoverShow {
@@ -205,6 +208,22 @@ opacity:1.0
 .super {
 	vertical-align:super;
 }
+
+.varc {
+position:relative;
+}
+
+.var {
+position:absolute;
+display:none;
+border:silver solid 1px;
+padding:4px;
+border-radius:4px;
+-moz-border-radius:4px;
+bottom:-16px;
+left:20px;
+}
+
 
 #content {
 position:absolute;

@@ -5,7 +5,6 @@ git checkout 2
 git merge master
 git status
 
-cd digitalpalireader
 
 oldv=`cat version`
 rdfv=`zenity --entry --title="Version Number" --entry-text="$oldv" --text="Enter Version Number"`

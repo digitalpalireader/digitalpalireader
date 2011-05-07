@@ -94,7 +94,6 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 	else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart,null,parts.length); }  // check for an ending match
 	
 	if (matchedword) {
-		if(devCheck > 0 && devDump == 1) ddump('-- matched --');
 		fullnames = partnames.concat([matchedword[0]]);
 		fullmatch = parts.concat([matchedword[1]]); // each part is a fake array of alt part defs, seperated by "#"
 		parttrick += matchedword[4];
@@ -103,6 +102,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 			G_shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
 		}
 		else { G_shortdefpost.push(shortdefpre.join('$')); }
+		if(devCheck > 0 && devDump == 1) ddump('-- matched ' +fullnames.join('-')+ ' --');
 		if(devCheck == 2) {
 			//if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
 			window.dump('*');
@@ -145,7 +145,6 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 
 function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
-	//ddump(oneword);
 	devDump = 1;
 	//if(!lastpart && !nextpart) ddump(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	if(devCheck > 0 && devDump == 1) ddump(oneword);
@@ -615,7 +614,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	// special suffixes
 
-		if (!nextpart && trick != 1)
+		if (!nextpart && !trick)
 		{
 
 			for (var tempsuf = oneword.length-1; tempsuf > 0; tempsuf--) {
@@ -655,7 +654,8 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 							}
 							sufadefs.push(sufdefs.join('#'));
 						}
-						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$'),nextpart,1]; // manually add the multi part "compound"
+						if(devCheck > 0 && devDump == 1) ddump('match for special suffix '+cutsuf + ' with ' + oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : ''));
+						var outsuf =  [oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : '') +'-'+sufanames.join('-'), desuf[1] + '@'+ sufadefs.join('@'), (desuf[2] ? desuf[2] + '$' : '') + sufashorts.join('$'),null,1]; // manually add the multi part "compound"
 						return outsuf;
 					}
 				}

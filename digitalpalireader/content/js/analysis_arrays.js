@@ -128,6 +128,7 @@ G_indeclinableEnding["oha.m"] = [[['ha.m','aha.m']],['o','o']];
 G_indeclinableEnding["~nca"] = [[['ca','ca']],['.m','~n']];
 G_indeclinableEnding["~ncida.m"] = [[['c','ca'],['ida.m','aya.m']],['.m','~n']];
 G_indeclinableEnding["pissa"] = [[['pi','pi'],['ssa','assa4']]];
+G_indeclinableEnding["mpi"] = [[['pi','pi']],['.m','m']];
 G_indeclinableEnding["mpeta.m"] = [[['p','pi'],['eta.m','eta']],['.m','m']];
 G_indeclinableEnding["hamasmi"] = [[['ham','aha.m'],['asmi','atthi']]];
 G_indeclinableEnding["aha.m"] = [[['aha.m','aha.m']]];

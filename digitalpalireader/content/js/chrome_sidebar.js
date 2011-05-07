@@ -78,8 +78,7 @@ var DPRChrome = {
 			var currentTab = tabbrowser.tabContainer.childNodes[index];
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
-			// Does this tab contain our custom attribute?
-			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
 
 				return currentTab;
 			}

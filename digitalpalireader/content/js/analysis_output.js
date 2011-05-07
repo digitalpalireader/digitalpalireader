@@ -178,6 +178,7 @@ function outputDef(which,first,frombox)
 		else DPPNXML(hotlink);
 		//if(moveat == 2) { moveframey('dif'); }
 	}
+	else clearDivs('dif');
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 

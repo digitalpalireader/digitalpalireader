@@ -18,7 +18,7 @@ function loadXMLFile(file,set) {
 		return xmlDoc;
 	}
 	catch(ex) {
-		alert('You don\'t have the archive installed');
+		alert('');
 		return null;
 	}
 }

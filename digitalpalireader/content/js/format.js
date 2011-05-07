@@ -142,8 +142,8 @@ function formatuniout(data,which) { // prepare without links
 				altplus += wb.substring(0,endpt);
 				altread = 0;
 				altplus = translit(toUni(altplus));
-				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+DPR_prefs['grey']+'" title="' + altplus + '">VAR</a>' + space;
+				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
+				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="this.getElementsByTagName(\'span\')[0].style.display=\'block\'" onmouseout="this.getElementsByTagName(\'span\')[0].style.display=\'none\'">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
 			}
 			else altplus += wb + ' ';
 		}
@@ -151,8 +151,8 @@ function formatuniout(data,which) { // prepare without links
 			if (wb.charAt(wb.length-1) == '}') {
 				altplus = wb.substring(1,wb.length-1) + ' ';
 				altplus = translit(toUni(altplus));
-				altplus = altplus.replace(/0/g, '.');
-				finout += ' <a href="javascript:void(0)" class="tiny" style="color:'+DPR_prefs['grey']+'" title="' + altplus + '">VAR</a>' + space;
+				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
+				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="this.getElementsByTagName(\'span\')[0].style.display=\'block\'" onmouseout="this.getElementsByTagName(\'span\')[0].style.display=\'none\'">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
 			}
 			else {
 				altread = 1;
