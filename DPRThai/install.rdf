@@ -6,7 +6,7 @@
     <em:name>Thai Tipitaka DPR Plugin</em:name>
     <em:version>0.1</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
-    <em:description>Thai Tipitaka for use with the Digital Pali Reader.</em:description>
+    <em:description>Thai Tipitaka (optional) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/DPRThai.rdf</em:updateURL>
     <em:iconURL>chrome://DPRThai/content/images/logo64.png</em:iconURL>

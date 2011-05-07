@@ -6,10 +6,10 @@
     <em:name>Myanmar Tipitaka DPR Plugin</em:name>
     <em:version>1.0</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
-    <em:description>Myanmar Tipitaka for use with the Digital Pali Reader.</em:description>
+    <em:description>Myanmar Tipitaka (required) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/DPRMyanmar.rdf</em:updateURL>
-    <em:iconURL>chrome://DPRMyanmar/content/images/logo64.png</em:iconURL>
+    <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
