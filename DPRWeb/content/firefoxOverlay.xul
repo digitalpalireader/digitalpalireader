@@ -37,7 +37,7 @@
                  autoCheck="false"
                  type="checkbox"
                  group="sidebar"
-		 oncommand="var mB = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsIDocShellTreeItem).rootTreeItem.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindow).gBrowser; mB.addTab('chrome://digitalpalireader/content/loading.xul')"/>
+		 oncommand="var mB = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsIDocShellTreeItem).rootTreeItem.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIDOMWindow).gBrowser; var mTab = mB.addTab('chrome://digitalpalireader/content/loading.xul'); mB.selectedTab = mTab"/>
 	 
   </broadcasterset>
 </overlay>

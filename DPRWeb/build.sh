@@ -38,7 +38,7 @@ ROOT_DIRS=         # ...and these directories       (space separated list)
 BEFORE_BUILD=      # run this before building       (bash command)
 AFTER_BUILD=       # ...and this after the build    (bash command)
 
-APP_NAME=digitalpalireader
+APP_NAME=DPRWeb
 CHROME_PROVIDERS="content locale skin"
 CLEAN_UP=1
 ROOT_FILES=

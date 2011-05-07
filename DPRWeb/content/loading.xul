@@ -7,6 +7,7 @@
 <page id="" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	xmlns:html="http://www.w3.org/1999/xhtml"
 	persist="screenX screenY"
+	title="Digital Pali Reader Web Installer"
 	onload="var intId = window.setInterval(function(){checkInstalled()},1000)">
 	<script type="application/x-javascript" src="js.js"/>
 	<vbox pack="center" align="center">
