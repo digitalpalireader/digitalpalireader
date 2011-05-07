@@ -79,7 +79,7 @@ var DPRChrome = {
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 			// Does this tab contain our custom attribute?
-			if ((id && currentTab.getAttribute('id') == id || !id && /^DPR/.exec(currentTab.getAttribute('id'))) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
 
 				return currentTab;
 			}
@@ -98,7 +98,7 @@ var DPRChrome = {
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 			// Does this tab contain our custom attribute?
-			if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
 
 				return currentTab;
 			}
