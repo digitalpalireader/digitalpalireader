@@ -206,9 +206,12 @@ function chromeFileExists(fileLoc) // in extension package
 {
 	var xmlhttp = new window.XMLHttpRequest();
 	try {
-		xmlhttp.open("GET", "chrome://"+fileLoc, false);
+		xmlhttp.open("GET", "chrome://"+fileLoc, true);
+		xmlhttp.onreadystatechange=function() {	
+			xmlhttp.abort();
+			return true;
+		}
 		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
 	}
 	catch(ex) {
 		return false;

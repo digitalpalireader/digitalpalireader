@@ -9,7 +9,7 @@
     <em:description>Thai Tipitaka (optional) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/DPRThai.rdf</em:updateURL>
-    <em:iconURL>chrome://DPRThai/content/images/logo64.png</em:iconURL>
+    <em:iconURL>chrome://digitalapalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->

@@ -111,12 +111,30 @@ function loadPrefs() {
 		
 		// sets
 		
-		if(chromeFileExists('DPRThai/content/exists')) {
-			document.getElementById('thaiInstalled').className="normal";
-			document.getElementById('thaiInstalled').value="Installed";
+		if(chromeFileExists('DPRMyanmar/content/exists')) {
+			document.getElementById('myanmarInstalled').className="installed";
+			document.getElementById('myanmarInstalled').value=document.getElementById('installed').value;
+		}
+		else if(profFileExists('extensions/staged/DPRMyanmar@noah.yuttadhammo.xpi')) {
+			document.getElementById('myanmarInstalled').className="restart";
+			document.getElementById('myanmarInstalled').value=document.getElementById('restart').value;
+			document.getElementById('myanmarInstalled').onmousedown = function (){confirmRestart('Are you sure you want to restart?')};
 		}
 		else {
-			document.getElementById('thaiInstalled').onmousedown = function() {installSetPrompt('DPRThai','Thai Tipitaka','setBrowser')};
+			document.getElementById('myanmarInstalled').onmousedown = function() {installSetPref('DPRMyanmar','Myanmar Tipitaka','setBrowser')};
+		}
+		
+		if(chromeFileExists('DPRThai/content/exists')) {
+			document.getElementById('thaiInstalled').className="installed";
+			document.getElementById('thaiInstalled').value=document.getElementById('installed').value;
+		}
+		else if(profFileExists('extensions/staged/DPRThai@noah.yuttadhammo.xpi')) {
+			document.getElementById('thaiInstalled').className="restart";
+			document.getElementById('thaiInstalled').value=document.getElementById('restart').value;
+			document.getElementById('thaiInstalled').onmousedown = function (){confirmRestart('Are you sure you want to restart?')};
+		}
+		else {
+			document.getElementById('thaiInstalled').onmousedown = function() {installSetPref('DPRThai','Thai Tipitaka','setBrowser')};
 		}
 		
 }
@@ -229,4 +247,27 @@ function fileDialog(id, titleIn) {
 	else if (result == nsIFilePicker.returnCancel) {
 		return false;
 	}
+}
+
+var G_interval = [];
+
+function installSetPref(set,setName,id) {
+	if(!installSetPrompt(set,setName,id)) return;
+	var loadNode = document.createElement('image');
+	loadNode.setAttribute('src',"chrome://digitalpalireader/content/images/ajax-loader-bar.gif");
+	document.getElementById(set).removeChild(document.getElementById(set).firstChild);
+	document.getElementById(set).appendChild(loadNode);
+	G_interval[set] = window.setInterval(function(){ checkInstalled(set) },1000);
+}
+
+function checkInstalled(set) {
+	if(!profFileExists('extensions/staged/'+set+'@noah.yuttadhammo.xpi')) return;
+	window.clearInterval(G_interval[set]);
+	var loadNode = document.createElement('label');
+	loadNode.setAttribute('value', document.getElementById('restart').value);
+	loadNode.setAttribute('id', set+'Restart');
+	loadNode.setAttribute('class', 'restart');
+	document.getElementById(set).removeChild(document.getElementById(set).firstChild);
+	document.getElementById(set).appendChild(loadNode);
+	document.getElementById(set+'Restart').onmousedown = function (){confirmRestart('Are you sure you want to restart?')};
 }

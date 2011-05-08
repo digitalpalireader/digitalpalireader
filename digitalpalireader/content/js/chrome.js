@@ -150,4 +150,3 @@ function openDPRSidebar() {
 function setCurrentTitle(title) {
 	mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 }
-

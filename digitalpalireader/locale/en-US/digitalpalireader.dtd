@@ -141,6 +141,7 @@
 
 <!ENTITY setName.label "Name">
 <!ENTITY setInstalled "Installed">
+<!ENTITY setStaged "Restart to Install">
 <!ENTITY setInstall "Install">
 
 <!-- Pref Buttons -->

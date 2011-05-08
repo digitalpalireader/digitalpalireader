@@ -157,20 +157,22 @@
 						<rows id="setsRows">
 							<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
 								<row flex="1" align="center">
-									<label flex="1" value="Myanmar Tipitaka"/>
-									<label id="myanmarInstalled" value="&setInstalled;"/>
+									<label flex="1" value="Myanmar Tipitaka (required)"/>
+									<hbox id="DPRMyanmar" style="padding-right:10px"><label id="myanmarInstalled" class="link" value="&setInstall;"/></hbox>
 								</row>
 							</richlistitem>
 							<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
 								<row flex="1" align="center">
-									<label flex="1" value="Thai Tipitaka"/>
-									<label id="thaiInstalled" class="link" value="&setInstall;"/>
+									<label flex="1" value="Thai Tipitaka (optional)"/>
+									<hbox id="DPRThai" style="padding-right:10px"><label id="thaiInstalled" class="link" value="&setInstall;"/></hbox>
 								</row>
 							</richlistitem>
 						</rows>
 					</grid>
 				</richlistbox>
 				<hbox flex="1" pack="stretch"><browser flex="1" id="setBrowser" src="" disablehistory="true" type="content"/></hbox>
+				<label id="installed" collapsed="true" value="&setInstalled;" />
+				<label id="restart" collapsed="true" value="&setStaged;" />
   			</vbox>
   		</tabpanel>
   	</tabpanels>

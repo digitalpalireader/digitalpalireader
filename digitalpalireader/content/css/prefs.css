@@ -5,3 +5,14 @@
 	cursor:pointer;
 }
 	
+.restart {
+	color:red;
+}
+.restart:hover {
+	cursor:pointer;
+}
+
+.installed {
+	color:green;
+}
+	

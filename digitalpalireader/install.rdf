@@ -9,6 +9,7 @@
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateURL>
+    <em:optionsURL>chrome://digitalpalireader/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>

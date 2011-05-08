@@ -55,6 +55,53 @@ function confirmRestart(message) {
 function installSetPrompt(set, setName,id) {
 	if(promptConfirm('Install ' + setName, "Please confirm that you would like to install the "+ setName +" extension.\n\nWith your permission, you will now be directed to the extension URL.  Once it is downloaded, restart Firefox, and the set will be available as an alternative via a button in the toolbar in the main window.")) {
 		if(!id) document.location.href = 'http://pali.sirimangalo.org/'+set+'.xpi';
-		else document.getElementById(id).contentDocument.location.href='loading.xul?href=http://pali.sirimangalo.org/'+set+'.xpi&set='+set;
+		else document.getElementById(id).contentDocument.location.href = 'http://pali.sirimangalo.org/'+set+'.xpi';
+		return true;
 	}
+	else return false;
 }
+
+
+var G_keysList = [];
+
+G_keysList.push('The following is a current list of all shortcut keys available to the DPR.  Note that these keys will not function if the cursor is located in an input field.'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('p\tdisplay previous section'); 
+G_keysList.push('g\tdisplay current section'); 
+G_keysList.push('n\tdisplay next section'); 
+G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('d\tshow dictionary'); 
+G_keysList.push('c\tshow convertor'); 
+G_keysList.push('t\tshow textpad'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('s\tsend selected text to convertor'); 
+G_keysList.push('e\tsend selected text to textpad'); 
+
+G_keysList.push(''); 
+
+G_keysList.push(',\tdisplay previous PED or DPPN entry'); 
+G_keysList.push('.\tdisplay next PED or DPPN entry'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('%\tdisplay options configuration'); 
+G_keysList.push('!\treset options'); 
+G_keysList.push('#\tdisplay Pali quiz'); 
+G_keysList.push('*\tdisplay Pali quote'); 
+G_keysList.push('?\tdisplay help'); 
+G_keysList.push('@\tdisplay feedback form'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('r\treload the reader'); 
+
+G_keysList.push(''); 
+
+G_keysList.push('k\tshow this list of shortcuts'); 

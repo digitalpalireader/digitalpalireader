@@ -45,6 +45,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
     <em:updateURL>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateURL>
+    <em:optionsURL>chrome://digitalpalireader/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
@@ -118,7 +119,10 @@ echo 'This is the SourceForge archive for the Digital Pali Reader.  You will fin
 The latest version is '$rdfv' and the latest commit message is:
 
 '$xhtmlu'
-' > sf.txt
+
+Note that as of version 2.0, the Tipitaka archives must be downloaded seperately, either via the DPR interface itself, or by visiting http://pali.sirimangalo.org/
+
+' > ../sf.txt
 
 # git
 
