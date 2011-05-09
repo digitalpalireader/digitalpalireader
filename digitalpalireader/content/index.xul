@@ -5,11 +5,12 @@
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="js/keypress_index.js" />
+  <script type="application/x-javascript" src="js/chrome.js" />
   <script type="application/x-javascript" src="js/prompt.js" />
   <script type="application/x-javascript" src="js/io.js" />
 <script>
 function onLoad() {
-	
+	giveIDtoTabs();
 	var link = document.location.href.split('?')[1];
 	if (link) {
 		var opts = link.split('&amp;');

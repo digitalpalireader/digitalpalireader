@@ -53,7 +53,7 @@ function outputAnalysis(input,frombox)
 
 	// send input to sidebar
 	
-	if(!frombox) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
+	if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
 
 	shortdefpre = [];
 
