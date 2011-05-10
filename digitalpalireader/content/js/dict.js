@@ -1,25 +1,28 @@
 var G_dictType = '';
 var G_dictQuery = '';
 var G_dictOpts = []; // 
+var G_dictEntry = '';
 
 function moveframey() {
 } // fake
 
-function startDictLookup(dictType,dictQuery,dictOpts) {
+function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
 	if(!dictType) { // make opt list from url
 		var options = document.location.href.split('?')[1].split('#')[0].split('&');
 		G_dictType = options[0].split('=')[1];
 		G_dictQuery = options[1].split('=')[1];
 		G_dictOpts = options[2].split('=')[1].split(',');
+		G_dictEntry = (options[3]?options[3].split('=')[1]:null);
 
 	}
 	else { // replace url
 		G_dictType = dictType;
 		G_dictQuery = dictQuery;
 		G_dictOpts = dictOpts;
-
-		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',');
+		G_dictEntry = dictEntry;
+		
+		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:null);
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -174,6 +177,9 @@ function pedsearchstart(hard)
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
+	
+	if(G_dictEntry) paliXML(toUni(G_dictEntry));
+	
 	yut = 0;
 }
 
@@ -368,6 +374,10 @@ function dppnsearchstart(hard)
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
+	
+	if(G_dictEntry) DPPNXML(toUni(G_dictEntry));
+
+	
 }
 
 function dppnFullTextSearch(getstring) {

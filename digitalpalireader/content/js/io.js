@@ -39,7 +39,6 @@ function readFile(aFileKey)
 	}
 	catch(ex)
 	{
-		dalert("ERROR: Failed to read file: " + file.leafName);
 		return false;
 	}
 }
@@ -197,8 +196,13 @@ function profFileExists(file)
 function extFileExists(fileLoc)
 {
 	var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-	file.initWithPath(fileLoc);
-	if(!file.exists()) return false;
+	try {
+		file.initWithPath(fileLoc);
+		if(!file.exists()) return false;
+	}
+	catch(ex) {
+		return false;
+	}
 	return true;
 } 
 
@@ -206,10 +210,9 @@ function chromeFileExists(fileLoc) // in extension package
 {
 	var xmlhttp = new window.XMLHttpRequest();
 	try {
-		xmlhttp.open("GET", "chrome://"+fileLoc, true);
-		xmlhttp.onreadystatechange=function() {	
+		xmlhttp.open("GET", "chrome://"+fileLoc, false);
+		xmlhttp.onreadystatechange=function() {
 			xmlhttp.abort();
-			return true;
 		}
 		xmlhttp.send(null);
 	}

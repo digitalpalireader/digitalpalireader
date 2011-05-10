@@ -388,7 +388,8 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 		case 's':
 			if(a1 > 56) return;
 			if(hiert != 'm') return;
-			vagga = a1 - 1;
+			a1--;
+			vagga = a1;
 			switch (true) {
 				case (a1 > 44):
 					vagga -= 10;
@@ -405,11 +406,10 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 				break;
 			}
 			var found = 0;
-
 			out:
-			for(sutta in smlist[vagga]) {
-				for(section in smlist[vagga][sutta]) {
-					if (parseInt(smlist[vagga][sutta][section]) == a2) {
+			for(sutta in smlist[a1]) {
+				for(section in smlist[a1][sutta]) {
+					if (parseInt(smlist[a1][sutta][section]) == a2) {
 						found = 1;
 						break out;
 					}

@@ -142,13 +142,13 @@ function loadPrefs() {
 
 
 function savePrefs(close) {
-	var atiloc = document.getElementById('catiloc').value.replace(/start\.html$/,'');
-	if(document.getElementById('catioff').checked && !extFileExists(atiloc+'html/_dpr/digital_pali_reader_suttas.js')) {
-		alert('Unable to find file: "'+atiloc+'html/_dpr/digital_pali_reader_suttas.js".  Please disable offline translations before saving preferences.'); 
+	var atiloc = document.getElementById('catiloc').value;
+	if(document.getElementById('catioff').checked && !extFileExists(atiloc+'/html/_dpr/digital_pali_reader_suttas.js')) {
+		alert('Unable to find file: "'+atiloc+'/html/_dpr/digital_pali_reader_suttas.js".  Please disable offline translations before saving preferences.'); 
 		return false; 
 	}
 	else {
-		prefs.setCharPref('Char.catiloc',atiloc.replace(/\\/g,'/').replace(/start\.html$/,''));
+		prefs.setCharPref('Char.catiloc',atiloc);
 	}
 
 	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
@@ -230,13 +230,12 @@ function fileDialog(id, titleIn) {
 	var fp = Components.classes["@mozilla.org/filepicker;1"]
 	                 .createInstance(nsIFilePicker);
 
-	fp.init(window, title, nsIFilePicker.modeOpen);
-	fp.appendFilters(nsIFilePicker.filterAll);
+	fp.init(window, title, nsIFilePicker.modeGetFolder);
 	var result = fp.show();
 
 	if (result == nsIFilePicker.returnOK) {
 		var fileOut = fp.file.QueryInterface(nsILocalFile);
-		var fileName = fp.file.path.replace(/\\/g,'/').replace(/start\.html$/,'');
+		var fileName = fp.file.path;
 		if(!extFileExists(fileName)) {
 			alert('Unable to find directory: "'+fileName+'".  Please confirm that you have selected the correct directory and that you have an up to date copy of the ATI archive.'); 
 			return false; 

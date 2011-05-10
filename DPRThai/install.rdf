@@ -3,7 +3,7 @@
  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
     <em:id>DPRThai@noah.yuttadhammo</em:id>
-    <em:name>Thai Tipitaka DPR Plugin</em:name>
+    <em:name>Digital Pali Reader Thai Tipitaka Plugin</em:name>
     <em:version>0.1</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Thai Tipitaka (optional) for use with the Digital Pali Reader.</em:description>

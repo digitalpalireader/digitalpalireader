@@ -59,17 +59,12 @@ toolbarbutton {
 	min-height:30px;
 	max-height:40px;
 }
-grippy {
-	background-image:-moz-linear-gradient(left,#DDC,white,#DDC,#DDC);
-	height:8px;
-	border-radius:6px;
-	border:1px #EEE solid;
-}
-grippy:hover{
-	border:2px #FFF solid;
-}
+
 .pointer:hover{
 	cursor:pointer;
+}
+separator {
+	border:silver 1px solid;
 }
 
 splitter {

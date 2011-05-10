@@ -374,12 +374,12 @@ function conjugateIrrNoun(word) {
 			if(noun[gendNames[h]] == undefined) continue;
 			cnt++;
 			if(i==0) {
-				if(noun[gendNames[h]][0] != undefined) out += '<td class="toprow">'+gendNames[h]+'.s.</td>';
-				if(noun[gendNames[h]][1] != undefined) out += '<td class="toprow">'+gendNames[h]+'.pl.</td>';
+				out += '<td class="toprow">'+gendNames[h]+'.s.</td>';
+				out += '<td class="toprow">'+gendNames[h]+'.pl.</td>';
 			}
 			for(j = 0; j <=1; j++) {
 				outt+='<td class="decb small '+ ((cnt == 1 || cnt == 3) ? '' : 'whiteb') + '">'
-				if(noun[gendNames[h]][j][di] == undefined) {
+				if(noun[gendNames[h]][j] == undefined || noun[gendNames[h]][j][di] == undefined) {
 					outt += '-';
 				}
 				else {

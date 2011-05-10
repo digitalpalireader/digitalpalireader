@@ -5,8 +5,9 @@ var G_pedhist = [];
 var G_phmark = 0;
 
 var pedfileget = '';
-function paliXML(file,which)
+function paliXML(filein,which)
 {
+	var file = filein;
 	
 	clearDivs('dif');
 	moveframey('dif');
@@ -23,7 +24,7 @@ function paliXML(file,which)
 	
 	var filea = file.split(',');
 	var ttit = filea[1].replace(/˚/g,'`');
-	var file = filea[0];
+	file = filea[0];
 
 	if(!mainda[toVel(ttit)]) {
 		if(G_irregNoun[toVel(ttit)]) {
@@ -135,9 +136,6 @@ function paliXML(file,which)
 	if (nname) tout += '<span class="abut rbut tiny" onclick="paliXML(\'PED/'+nname+'\')" />&gt;</span>';
 
 
-	
-
-
 	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
 
 	if(document.getElementById('bottom')) {
@@ -145,6 +143,21 @@ function paliXML(file,which)
 		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 	}
 	else document.getElementById('dictc').scrollTop=0;
+
+	// permalink
+	
+	if(/dict\.htm/.exec(document.location.href)) {
+		var permalink = document.location.href;
+		if(/\&entry=/.exec(permalink)) {
+			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
+		}
+		else permalink += '&entry='+toVel(filein);
+	}
+	try {
+		window.history.replaceState('Object', 'Title', permalink);
+	}
+	catch(ex) {
+	}
 }
 
 function toggleDppnTitle(link,id) {
@@ -164,8 +177,10 @@ var G_dppn = [];
 var G_dppnhist = [];
 var G_dhmark = 0;
 
-function DPPNXML(file,which)
+function DPPNXML(filein,which)
 {
+	var file = filein;
+	
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
 	if (nameno[tloc[2]+'^'+filea[1]]) { // fudge
@@ -262,6 +277,22 @@ function DPPNXML(file,which)
 		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 	}
 	else document.getElementById('dictc').scrollTop=0;
+	
+	// permalink
+	
+	if(/dict\.htm/.exec(document.location.href)) {
+		var permalink = document.location.href;
+		if(/\&entry=/.exec(permalink)) {
+			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
+		}
+		else permalink += '&entry='+toVel(filein);
+	}
+	try {
+		window.history.replaceState('Object', 'Title', permalink);
+	}
+	catch(ex) {
+	}
+	
 }
 
 

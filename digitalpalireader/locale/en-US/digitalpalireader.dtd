@@ -79,7 +79,7 @@
 
 <!ENTITY pATI.label "Access To Insight Off-Line Archive:">
 <!ENTITY pcatioff.label "Use Off-line ATI Archive">
-<!ENTITY pATILoc.label "Location:">
+<!ENTITY pATILoc.label "Location (ati_website):">
 <!ENTITY pFileDialog.label "Browse...">
 
 <!-- Layout Tab -->

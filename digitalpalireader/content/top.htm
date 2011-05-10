@@ -18,9 +18,9 @@ function onDocLoad() {
 
 	if (DPR_prefs['ctrans']) {
 		if (DPR_prefs['catioff']) { 
-			var nsrc = 'file://'+ DPR_prefs['catiloc'] + 'html/_dpr/digital_pali_reader_suttas.js';
+			var nsrc = 'file://'+ DPR_prefs['catiloc'] + '/html/_dpr/digital_pali_reader_suttas.js';
 		}
-		else { var nsrc = 'http://www.accesstoinsight.org/tech/digital_pali_reader_suttas.php'; }
+		else { var nsrc = 'http://www.accesstoinsight.org/_dpr/digital_pali_reader_suttas.php'; }
 		atiIns = 1;
 		var headID = document.getElementsByTagName("head")[0];         
 		var newScript = document.createElement('script');
