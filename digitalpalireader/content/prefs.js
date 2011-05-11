@@ -143,8 +143,10 @@ function loadPrefs() {
 
 function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
-	if(document.getElementById('catioff').checked && !extFileExists(atiloc+'/html/_dpr/digital_pali_reader_suttas.js')) {
-		alert('Unable to find file: "'+atiloc+'/html/_dpr/digital_pali_reader_suttas.js".  Please disable offline translations before saving preferences.'); 
+	var atiFile = (/\\/.exec(atiloc)?atiloc + '\html\_dpr\digital_pali_reader_suttas.js':atiloc + '/html/_dpr/digital_pali_reader_suttas.js');
+	
+	if(document.getElementById('catioff').checked && !extFileExists(atiFile)) {
+		alert('Unable to find file: "'+atiFile+'".  Please disable offline translations before saving preferences.'); 
 		return false; 
 	}
 	else {

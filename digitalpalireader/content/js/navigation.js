@@ -391,16 +391,16 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			a1--;
 			vagga = a1;
 			switch (true) {
-				case (a1 > 44):
+				case (a1 > 43):
 					vagga -= 10;
 					book++;
-				case (a1 > 34):
+				case (a1 > 33):
 					vagga -= 13;
 					book++;
-				case (a1 > 21):
+				case (a1 > 20):
 					vagga -= 10;
 					book++;
-				case (a1 > 11):
+				case (a1 > 10):
 					vagga -= 11;
 					book++;
 				break;

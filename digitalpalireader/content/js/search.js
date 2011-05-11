@@ -673,7 +673,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">➤</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -786,7 +786,7 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">➤</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -913,20 +913,35 @@ function showonly(string) {
 	}
 }
 
+function atiPause(getstring) {
+	if(typeof(atiD) != 'undefined') {
+		atiSearchOffline(0,getstring);
+	}
+	else {
+		setTimeout(function(){atiPause(getstring)},10);
+	}
+}
+
 function atiSearchStart() {
 
 	document.getElementById('sbfb').appendChild(pleasewait);
 
 	var getstring = G_searchString;
 
-	var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catioff']+'html/' : 'http://www.accesstoinsight.org/');
+	var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');
 
 	if(DPR_prefs['catioff']) {
+		var headID = document.getElementsByTagName("head")[0];         
+		var newScript = document.createElement('script');
+		newScript.type = 'text/javascript';
+		newScript.src = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
+		headID.appendChild(newScript);
+
 		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
 		document.getElementById('stfc').innerHTML = '';
 		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
 		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
-		atiSearchOffline(0,getstring);
+		atiPause(getstring);
 		return;
 	}
 
@@ -977,7 +992,8 @@ function atiSearchOffline(d, getstring) {
 	
 	eval('var anik = ati'+nik.toUpperCase()+';');
 	for (var c = 0; c < anik.length; c++) {
-		var cont = readExtFile(DPR_prefs['catiloc']+'/html/tipitaka/'+anik[c]).join('\n');
+		var atiFile = (/\\/.exec(DPR_prefs['catiloc'])?DPR_prefs['catiloc'] + '\\html\\tipitaka\\':DPR_prefs['catiloc'] + '/html/tipitaka/');
+		var cont = readExtFile(atiFile+anik[c]).join('\n');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
 		var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
@@ -990,7 +1006,7 @@ function atiSearchOffline(d, getstring) {
 				postpara = '';
 				if (startmatch >= 0)
 				{
-					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'">' + title + '</a><br/>'; 
+					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_prefs['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">➤</a><br/>'; 
 					while (startmatch >= 0)
 					{				
 						count++;
@@ -1017,7 +1033,7 @@ function atiSearchOffline(d, getstring) {
 					}
 
 					postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_prefs['catiloc']+'html/tipitaka/'+anik[c]+'" target="_blank">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_prefs['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
 				}
 			}
 		}

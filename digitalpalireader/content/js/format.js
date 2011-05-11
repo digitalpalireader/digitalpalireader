@@ -29,8 +29,6 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		if (hier == "m") { 
 			transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
 			if (transin) {
-				var atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc']+'/html/' : 'http://www.accesstoinsight.org/');
-				//if (transin[0].indexOf('Anandajoti') == -1) transout += '<img style="vertical-align:middle" src="'+atiurl+'favicon.ico" title="Translations courtesy of http://www.accesstoinsight.org/" onclick="window.open(\'http://www.accesstoinsight.org/\')">&nbsp;';
 				transout += transin.join('&nbsp;');
 				document.getElementById('maftrans').innerHTML += transout; 
 			}
