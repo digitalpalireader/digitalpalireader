@@ -213,8 +213,6 @@ function pausesall()
 	
 	toplist += toplista.join(', ');
 	
-	toplist += '</td><td width=1><span class="abut obut" title="minimize search frame" onClick="moves(0); this.blur(); stopsearch = 1;">‒</span></td></tr></table>';
-	
 	document.getElementById('stfb').innerHTML = toplist;
 	makeProgressTable();
 
@@ -254,7 +252,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td></tr></table>';
 
 	importXMLs(2);
 }
@@ -287,7 +285,7 @@ function pausethree() {
 	makeProgressTable();
 
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td><td width=1><span class="abut obut" title="stop search" onClick="this.blur(); stopsearch = 1; moves(0)">↙</span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -383,12 +381,7 @@ function importXMLs(cnt)
 		headingNode.innerHTML = G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + getBookName(nikaya, hiert, parseInt(bookat)-1) + '<hr>';
 		document.getElementById('sbfb').appendChild(headingNode);
 */		
-		bookload = 'xml/' + bookfile + '.xml';
-
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", bookload, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
+		var xmlDoc = loadXMLFile(bookfile,0);
 		createTables(xmlDoc,hiert);
 					
 		document.getElementById('stfx').innerHTML = thiscount;
@@ -413,12 +406,8 @@ function importXMLs(cnt)
 		bookfile = G_searchFileArray[qz];
 		hiert = bookfile.charAt(bookfile.length-1);
 
-		bookload = 'xml/' + bookfile + '.xml';
+		var xmlDoc = loadXMLFile(bookfile,0);
 
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", bookload, false);
-		xmlhttp.send(null);
-		var xmlDoc = xmlhttp.responseXML.documentElement;
 		createTables(xmlDoc,hiert);
 					
 		document.getElementById('stfx').innerHTML = thiscount;
@@ -684,7 +673,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">go</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -797,7 +786,7 @@ function createTables(xmlDoc,hiert)
 									 }
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\')">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">go</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									

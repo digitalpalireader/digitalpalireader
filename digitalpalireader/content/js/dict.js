@@ -13,7 +13,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		G_dictType = options[0].split('=')[1];
 		G_dictQuery = options[1].split('=')[1];
 		G_dictOpts = options[2].split('=')[1].split(',');
-		G_dictEntry = (options[3]?options[3].split('=')[1]:null);
+		G_dictEntry = (options[3]?options[3].split('=')[1]:'');
 
 	}
 	else { // replace url
@@ -22,7 +22,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		G_dictOpts = dictOpts;
 		G_dictEntry = dictEntry;
 		
-		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:null);
+		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -523,7 +523,7 @@ function mlsearchstart(hard)
 		}
 	}
 	
-	finout = '<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	document.getElementById('dicthead').innerHTML = '<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
 
 	if(finouta.length == 0) {
 		finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -673,7 +673,7 @@ function multisearchstart(hard)
 			us = toUni(gsplit[0]);
 			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 			
-			finouta.push(us+'###<div><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick=" conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+' title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
+			finouta.push(us+'###<div><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick=" conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}

@@ -478,6 +478,7 @@ overflow:auto;
 	height:100%; 
 	width:100%; 
 	overflow:auto;
+	padding:0 10px 0 10px;
 }
 #odif {
 	position:relative;

@@ -59,7 +59,7 @@
 		<separator onmouseup="var id = document.getElementById('nav'); if(id.collapsed == true) id.removeAttribute('collapsed'); else id.collapsed = true;" class="pointer chromeback thin" tooltiptext="navigation" />
    		<vbox id="hier">
 			<groupbox>
-				<button flex="1" id="title" label="" oncommand="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
+				<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
 				<menulist class="sel" id="meta" onchange="DPRXML.updateHierarchy(1)">
 					<menupopup>
 					</menupopup>

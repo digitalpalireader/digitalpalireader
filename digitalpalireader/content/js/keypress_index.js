@@ -71,7 +71,7 @@ function keyPressed(e) {
 
 		var input = {value: ""};           
 
-		var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, null, check);
+		var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
 
 		// result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
 		
@@ -85,8 +85,8 @@ function keyPressed(e) {
 		
 		var outplace = wTop.getSuttaFromNumber(place.split(','));
 		if(!outplace) return wTop.alertFlash('Link not found','yellow');
-		//dalert(outplace);
-		wTop.openPlace(outplace);
+		
+		wTop.openPlace(outplace,null,null,check.value);
 				
 		return; 
 	} 

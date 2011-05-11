@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>DPRThai@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader Thai Tipitaka Plugin</em:name>
-    <em:version>0.1</em:version>
+    <em:version>0.22</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Thai Tipitaka (optional) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
