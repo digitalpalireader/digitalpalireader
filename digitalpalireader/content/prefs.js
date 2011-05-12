@@ -143,7 +143,7 @@ function loadPrefs() {
 
 function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
-	var atiFile = (/\\/.exec(atiloc)?atiloc + '\html\_dpr\digital_pali_reader_suttas.js':atiloc + '/html/_dpr/digital_pali_reader_suttas.js');
+	var atiFile = atiloc.replace(/\\/g, '/') + '/html/_dpr/digital_pali_reader_suttas.js');
 	
 	if(document.getElementById('catioff').checked && !extFileExists(atiFile)) {
 		alert('Unable to find file: "'+atiFile+'".  Please disable offline translations before saving preferences.'); 
