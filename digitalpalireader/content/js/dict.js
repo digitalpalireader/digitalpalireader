@@ -227,6 +227,8 @@ function pedFullTextSearch(getstring) {
 		}
 	}
 
+	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>';
+
 	// word list
 
 	var y = listouta.length;
@@ -248,7 +250,7 @@ function pedFullTextSearch(getstring) {
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finalout;
+	outDiv.innerHTML = listoutf + '</table><hr />' + finalout;
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
@@ -431,6 +433,8 @@ function dppnFullTextSearch(getstring) {
 		}
 	}
 
+	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf;
+
 	// word list
 
 	listouta = sortaz(listouta);
@@ -458,7 +462,7 @@ function dppnFullTextSearch(getstring) {
 
 
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf + '</table><hr />' + finout;
+	outDiv.innerHTML = '</table><hr />' + finout;
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
@@ -681,7 +685,7 @@ function multisearchstart(hard)
 	
 	var outDiv = document.createElement('div');
 	
-	outDiv.innerHTML += '<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />';
+	document.getElementById('dicthead').innerHTML = '<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />';
 
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -811,7 +815,9 @@ function epdsearchstart()
 		}
 	}
 	
-	finout = '<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	document.getElementById('dicthead').innerHTML = '<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	
+	finout = '<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = finout + 'No results</td></tr></table>';
@@ -895,7 +901,9 @@ function attsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	document.getElementById('dicthead').innerHTML = '<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:'
+	
+	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -981,7 +989,9 @@ function tiksearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	var listoutf = '<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width="100%">';
+	document.getElementById('dicthead').innerHTML = '<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	
+	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -1105,7 +1115,9 @@ function titlesearchstart()
 
 	var findiv = Math.ceil(y/2);
 	
-	var listoutf = '<p>Title search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr />';
+	document.getElementById('dicthead').innerHTML = '<p>Title search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	
+	var listoutf = '<hr />';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
