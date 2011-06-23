@@ -14,7 +14,7 @@ pref("extensions.digitalpalireader.Char.colfont", "Tahoma");
 pref("extensions.digitalpalireader.Char.colsize", "16");
 
 pref("extensions.digitalpalireader.Char.bktype", "colimg");
-pref("extensions.digitalpalireader.Char.colbk", "#FFB");
+pref("extensions.digitalpalireader.Char.colbk", "#FFD");
 pref("extensions.digitalpalireader.Char.imgbk", "url(chrome://digitalpalireader/content/images/background.png)");
 
 pref("extensions.digitalpalireader.Char.bkcptype", "img");

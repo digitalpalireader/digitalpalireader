@@ -328,6 +328,12 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						
 						if (bookn == 3) {
 							atiNo = parseInt(atiNo,10);
+							if(atiNo >= 33) { // sāriputtasutta
+								atiNo++; 
+							} 
+							if(atiNo >= 40) { // sāriputtasutta
+								atiNo--; 
+							} 
 							if(atiNo >= 48) { // asankhata sutta
 								atiNo++; 
 							} 

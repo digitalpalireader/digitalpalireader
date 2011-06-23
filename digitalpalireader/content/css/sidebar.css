@@ -63,13 +63,7 @@ toolbarbutton {
 .pointer:hover{
 	cursor:pointer;
 }
-separator {
-	border:silver 1px solid;
-}
 
-splitter {
-	margin:5px;
-}
 
 listbox {
 	width:auto;

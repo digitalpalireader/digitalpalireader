@@ -9,6 +9,7 @@
 
 	<!-- nav -->
 
+<!ENTITY sNav.label "Navigation">
 <!ENTITY sSet.label "Set">
 <!ENTITY sBook.label "Book">
 <!ENTITY mul_text "Switch to Mūla">
@@ -18,6 +19,7 @@
 
 	<!-- search -->
 
+<!ENTITY sSearch.label "Search">
 <!ENTITY searchHead "Text Search">
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
@@ -25,6 +27,7 @@
 
 	<!-- dict -->
 
+<!ENTITY sTools.label "Tools">
 <!ENTITY dictHead "Dictionary">
 <!ENTITY dict_go "Lookup word in selected dictionary">
 <!ENTITY dictGo.text "Lookup word in selected dictionary">
@@ -41,6 +44,14 @@
 <!ENTITY Title "Title Search">
 
 	<!-- buttons -->
+
+<!ENTITY bBookmarks "Bookmarks ➤">
+<!ENTITY bQuiz "Pali Quiz ➤">
+<!ENTITY bQuote "Dhamma Quote ➤">
+
+<!ENTITY bPreferences "Preferences ➤">
+<!ENTITY bHelp "Help ➤">
+<!ENTITY bContact "Feedback Form ➤">
 
 <!ENTITY bookmark.label "Bookmarks">
 <!ENTITY quiz.label "Pali Quiz">
