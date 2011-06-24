@@ -1,1 +1,1 @@
-var version = '2.0b17';
+var version = '2.0b18';
