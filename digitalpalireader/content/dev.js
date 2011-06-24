@@ -1779,6 +1779,8 @@ htm.DXMLThai('v',1,'m',[[1,0,null],[2,0,152]]);
 htm.DXMLThai('v',2,'m',[[2,152,null]]);
 htm.DXMLThai('v',3,'m',[[3,0,null]]);
 htm.DXMLThai('v',4,'m',[[4,0,null],[5,0,null]]);
+htm.DXMLThai('v',5,'m',[[6,0,null],[7,0,null]]);
+htm.DXMLThai('v',6,'m',[[8,0,null]]);
 
 thaibook [x][1] is last page to load
 
@@ -1792,7 +1794,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 	document.activeElement.blur();
 
 	document.getElementById('content').innerHTML = '<div id="maf"><div id="mafbc"><div id="Dl" style="position:absolute; width:50%; left:0; top:0; bottom:0; overflow:auto"></div><div style="position:absolute; width:50%; right:0; top:0; bottom:0; overflow:auto"><div id="Dr" style="position:relative;width:100%;height:100%;"></div></div></div>';
-	var bookload = 'xml/' + nikaya + book + hier + '.xml';
+	var bookload = 'chrome://DPRMyanmar/content/xml/' + nikaya + book + hier + '.xml';
 	//dalert(bookload);
 	var bookno = book-1;
 	
@@ -1939,7 +1941,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 
                                 theDatao += '<br />';
                             }
-							try{t = u[tmp6].getElementsByTagName("p")[0].textContent;}catch(ex){dalert([hier,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6]); }
+							try{t = u[tmp6].getElementsByTagName("p")[0].textContent;}catch(ex){dalert(['alert1',hier,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6]); }
 							
 							t = t.replace(/\^e*b\^/g, '');
 							t = t.replace(/\^e*a\^[^^]*\^ea\^/g, '');

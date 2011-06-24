@@ -8,14 +8,14 @@
   	<stringbundleset id="stringbundleset">
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
   	</stringbundleset>
-	<tabbox flex="1">
-		<tabs>
-			<tab label="&sNav.label;"/>
-			<tab label="&sSearch.label;"/>
-			<tab label="&sTools.label;"/>
+	<tabbox class="chromeback" flex="1">
+		<tabs class="chromeback">
+			<tab class="chromeback" label="&sNav.label;"/>
+			<tab class="chromeback" label="&sSearch.label;"/>
+			<tab class="chromeback" label="&sTools.label;"/>
 		</tabs>
-		<tabpanels flex="1">
-			<tabpanel id="navTab">
+		<tabpanels class="chromeback" flex="1">
+			<tabpanel class="chromeback" id="navTab">
 				<vbox flex="1">
 					<hbox id="nav">
 						<vbox flex="1" align="stretch" pack="stretch">
@@ -66,7 +66,7 @@
 					<vbox id="hier">
 						<groupbox>
 							<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
-							<menulist class="sel" id="meta" onchange="DPRXML.updateHierarchy(1)">
+							<menulist class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 								<menupopup>
 								</menupopup>
 							</menulist>
@@ -97,7 +97,7 @@
 				</vbox>
 			</tabpanel>
 			
-			<tabpanel id="searchTab" flex="1">
+			<tabpanel class="chromeback" id="searchTab" flex="1">
 
 				<form orient="vertical" flex="1" id="sForm">
 					<hbox pack="center"><label class="large bold" value="&searchHead;"/></hbox>
@@ -164,7 +164,7 @@
 					</vbox>
 				</form>
 			</tabpanel>
-			<tabpanel id="toolsTab" flex="1">
+			<tabpanel class="chromeback" id="toolsTab" flex="1">
 				<vbox>
 					<form orient="vertical" align="stretch" id="dForm">
 						<hbox pack="center"><label class="large bold" value="&dictHead;"/></hbox>
