@@ -1781,6 +1781,7 @@ htm.DXMLThai('v',3,'m',[[3,0,null]]);
 htm.DXMLThai('v',4,'m',[[4,0,null],[5,0,null]]);
 htm.DXMLThai('v',5,'m',[[6,0,null],[7,0,null]]);
 htm.DXMLThai('v',6,'m',[[8,0,null]]);
+htm.DXMLThai('d',1,'m',[[9,0,null]]);
 
 thaibook [x][1] is last page to load
 
@@ -1949,7 +1950,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 							t = t.replace(/^\[[^\]]*\]/g, ' ');
 							t = t.replace(/[".,;`']/g,'');
 							
-							var tw = t.split(' ',20);
+							var tw = t.split(' ',40);
 							for (i in tw) {
 								tw[i] = '<a href="javascript:void(0)" onclick="window.find(\''+tw[i]+'\', false, false)">'+tw[i]+'</a> ';
 							}
