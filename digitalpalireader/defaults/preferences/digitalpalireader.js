@@ -17,8 +17,8 @@ pref("extensions.digitalpalireader.Char.bktype", "colimg");
 pref("extensions.digitalpalireader.Char.colbk", "#FFD");
 pref("extensions.digitalpalireader.Char.imgbk", "url(chrome://digitalpalireader/content/images/background.png)");
 
-pref("extensions.digitalpalireader.Char.bkcptype", "img");
-pref("extensions.digitalpalireader.Char.colbkcp", "#DDC");
+pref("extensions.digitalpalireader.Char.bkcptype", "col");
+pref("extensions.digitalpalireader.Char.colbkcp", "#F4F4F4");
 pref("extensions.digitalpalireader.Char.imgbkcp", "-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)");
 
 pref("extensions.digitalpalireader.Char.colInput", "#FFF");

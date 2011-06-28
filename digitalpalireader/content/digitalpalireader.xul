@@ -168,11 +168,13 @@
 				<vbox>
 					<form orient="vertical" align="stretch" id="dForm">
 						<hbox pack="center"><label class="large bold" value="&dictHead;"/></hbox>
-						<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
-						<hbox flex="1" pack="stretch">
-							<toolbarbutton class="tiny" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
-								<label value="adv" />
+						<hbox pack="stretch" flex="1">
+							<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
+							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
+								<label value="➤" />
 							</toolbarbutton>
+						</hbox>
+						<hbox flex="1" pack="stretch">
 							<menulist flex="1" class="sel" tooltiptext="Choose a dictionary type - hover over the name for description" id="dictType" oncommand="DPROpts.dictOptions()">
 								<menupopup>
 									<menuitem tooltiptext="Analyze Word" selected="true" value="DPR" label="&DPR;" />
@@ -186,8 +188,8 @@
 									<menuitem tooltiptext="Title Search" value="TIT" label="&Title;" />
 								</menupopup>
 							</menulist>
-							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
-								<label value="➤" />
+							<toolbarbutton class="small" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">
+								<label value="adv" />
 							</toolbarbutton>
 						</hbox>
 						<vbox align="center" id="dictAdvOpts" collapsed="true">

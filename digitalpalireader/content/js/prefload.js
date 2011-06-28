@@ -49,11 +49,11 @@ DPR_prefsD['colfont'] = 'Tahoma';
 DPR_prefsD['colsize'] = '16';
 
 DPR_prefsD['bktype'] = 'colimg';
-DPR_prefsD['colbk'] = '#FFB';
+DPR_prefsD['colbk'] = '#FFD';
 DPR_prefsD['imgbk'] = 'url(chrome://digitalpalireader/content/images/background.png)';
 
-DPR_prefsD['bkcptype'] = 'img';
-DPR_prefsD['colbkcp'] = '#DDC';
+DPR_prefsD['bkcptype'] = 'col';
+DPR_prefsD['colbkcp'] = '#F4F4F4';
 DPR_prefsD['imgbkcp'] = '-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)';
 
 DPR_prefsD['colInput'] = '#FFF';
