@@ -30,13 +30,6 @@
 #
 # default configuration file is ./config_build.sh, unless another file is 
 # specified in command-line. Available config variables:
-APP_NAME=          # short-name, jar and xpi files name. Must be lowercase with no spaces
-CHROME_PROVIDERS=  # which chrome providers we have (space-separated list)
-CLEAN_UP=          # delete the jar / "files" when done?       (1/0)
-ROOT_FILES=        # put these files in root of xpi (space separated list of leaf filenames)
-ROOT_DIRS=         # ...and these directories       (space separated list)
-BEFORE_BUILD=      # run this before building       (bash command)
-AFTER_BUILD=       # ...and this after the build    (bash command)
 
 APP_NAME=DPRThai
 CHROME_PROVIDERS="content locale skin"
@@ -132,5 +125,4 @@ fi
 # remove the working files
 rm -rf $TMP_DIR
 
-notify-send "Done!" "Extension Updated"
 

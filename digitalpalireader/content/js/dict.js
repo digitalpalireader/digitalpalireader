@@ -45,7 +45,8 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	var tabT = "Dict: '"+G_dictQuery + '\' in ' + st[G_dictType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
-
+	document.getElementById('difb').innerHTML = '';
+	
 	
 
 	switch (G_dictType) {

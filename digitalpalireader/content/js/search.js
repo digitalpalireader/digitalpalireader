@@ -803,16 +803,12 @@ function createTables(xmlDoc,hiert)
 			}
 		}
 	}
-	if (count == 3) {
-		document.getElementById('sbfb').appendChild(document.createElement('hr'));
-	}
 	if (match == 0) {
-		finalout = '<div name="xyz" id="xyz"><p><span style="color:' + DPR_prefs['colped'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</span> - <span style="color:' + DPR_prefs['colsel'] + '"><i>No Match</i> <a href="javascript:void(0)" onclick="document.getElementById(\'searchb\').scrollTop = 0;"></span><hr></div>';
-		outNode.innerHTML = finalout;
-		document.getElementById('sbfb').appendChild(outNode);
 	}
 	else {
-		
+		if (count == 3) {
+			document.getElementById('sbfb').appendChild(document.createElement('hr'));
+		}
 		// make word table
 		
 		if(yesplus >= 0) { // multiple words 

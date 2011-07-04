@@ -53,6 +53,9 @@
 <!ENTITY bHelp "Help ➤">
 <!ENTITY bContact "Feedback Form ➤">
 
+<!ENTITY bGram "Grammar ➤">
+<!ENTITY bCheat "Cheat Sheet ➤">
+
 <!ENTITY bookmark.label "Bookmarks">
 <!ENTITY quiz.label "Pali Quiz">
 <!ENTITY bv.label "Buddha Vacana Quote">
@@ -60,6 +63,9 @@
 <!ENTITY openPrefs.label "Preferences">
 <!ENTITY help.label "Help">
 <!ENTITY contact.label "Feedback Form">
+
+<!ENTITY gram.label "A Practical Grammar of the Pali Language by Charles Duroiselle">
+<!ENTITY cheat.label "Pali Cheet Sheet by Alan McClure">
 
 
 
