@@ -21,6 +21,7 @@
 
 <!ENTITY sSearch.label "Search">
 <!ENTITY searchHead "Text Search">
+<!ENTITY searchSET "Set: ">
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
 <!ENTITY searchRx.label "Rx">

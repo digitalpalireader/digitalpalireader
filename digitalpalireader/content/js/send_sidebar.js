@@ -225,7 +225,7 @@ var DPRSend = {
 		else if (which == 0 || which == 7) { // tipitaka
 			var set = 'vdmsaky';
 		}
-		else var set = document.getElementById('set').value;
+		else var set = document.getElementById('tsoSETm').value;
 		
 		if(which == 5 || which == 12) { // get books
 			var book = [];
@@ -234,7 +234,10 @@ var DPRSend = {
 			}
 			book = book.join(',');
 		}
-		else book = document.getElementById('book').value;
+		else if (which == 2) { // one set
+			book = document.getElementById('tsoBOOKm').value;
+		}
+		else book == ''; // not worrying about books
 
 		var rx = document.getElementById('tsoRx').checked;
 

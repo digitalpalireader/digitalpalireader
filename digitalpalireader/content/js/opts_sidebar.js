@@ -2,6 +2,8 @@ var DPROpts = {
 	tipitakaOptions: function () {
 		document.getElementById('tsoContainer').setAttribute('collapsed',true);
 		document.getElementById('tsoSetContainer').setAttribute('collapsed',true);
+		document.getElementById('tsoSET').setAttribute('collapsed',true);
+		document.getElementById('tsoBOOK').setAttribute('collapsed',true);
 		document.getElementById('tsoMAT').setAttribute('collapsed',true);
 		document.getElementById('tsoCO1').setAttribute('collapsed',true);
 		document.getElementById('tsoCO2').setAttribute('collapsed',true);
@@ -10,6 +12,15 @@ var DPROpts = {
 		
 		var which = document.getElementById('tipType').selectedIndex;
 		switch(which) {
+			case 1:
+				document.getElementById('tsoContainer').removeAttribute('collapsed');
+				document.getElementById('tsoSET').removeAttribute('collapsed');
+			break;
+			case 2:
+				document.getElementById('tsoContainer').removeAttribute('collapsed');
+				document.getElementById('tsoSET').removeAttribute('collapsed');
+				document.getElementById('tsoBOOK').removeAttribute('collapsed');
+			break;
 			case 4:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
 				document.getElementById('tsoSetContainer').removeAttribute('collapsed');

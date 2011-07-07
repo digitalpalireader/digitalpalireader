@@ -17,6 +17,8 @@ var digitalpalireader =
 		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
 
+		DPRNav.setSearchBookList(); // populate books (lazy)
+
 		//mainWindow.document.getElementById('sidebar-header').hidden = true;
 		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
 		mainWindow.gBrowser.tabContainer.addEventListener("TabClose", this.onPageUnload, true);

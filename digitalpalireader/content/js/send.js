@@ -1,11 +1,13 @@
 function eventSend(event) {
-	if(event.ctrlKey || event.button == 1) return true;
-	return false;
+	if(event.ctrlKey || event.which == 2) return true;
+	else if (event.which == 1) return false;
+	return 'right';
 }
 
 	
 function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add)
 {
+	if(add == 'right') return;
 	if (typeof(stringra) == 'string') {
 		stringra = stringra.replace(/`/g, '"');
 		stringra = stringra.split('#');

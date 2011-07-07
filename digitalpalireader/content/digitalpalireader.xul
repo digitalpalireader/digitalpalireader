@@ -111,8 +111,8 @@
 						<menulist flex="1" class="sel" tooltiptext="Choose a search type - hover over the name for description" id="tipType"  oncommand="DPROpts.tipitakaOptions()">
 							<menupopup>
 								<menuitem tooltiptext="Search all three nikayas" selected="true" label="The Tipitaka"/>
-								<menuitem tooltiptext="Search current set" label="This Set"/>
-								<menuitem tooltiptext="Search current book" label="This Book"/>
+								<menuitem tooltiptext="Search single set" label="One Set"/>
+								<menuitem tooltiptext="Search single book" label="One Book"/>
 								<menuseparator/>
 								<menuitem tooltiptext="Search multiple sets" label="Multi. Sets"/>
 								<menuitem tooltiptext="Search multiple books in the current set" label="Multi. Books"/>
@@ -131,6 +131,28 @@
 					</hbox>
 					<vbox flex="1" align="start" id="tsoContainer" collapsed="true">
 						<vbox align="stretch">
+							<groupbox collapsed="true" id="tsoSET" flex="1" orient="horizontal" pack="start">
+								<menulist class="sel" tooltiptext="Choose which set to search" id="tsoSETm" oncommand="DPRNav.setSearchBookList()">
+									<menupopup>
+										<menuitem value="v" label="Vinaya"/>
+										<menuitem value="d" selected="true" label="Dīgha"/>
+										<menuitem value="m" label="Majjhima"/>
+										<menuitem value="s" label="Saṃyutta"/>
+										<menuitem value="a" label="Aṅguttara"/>
+										<menuitem value="k" label="Khuddaka"/>
+										<menuitem value="y" label="Abhidhamma"/>
+										<menuitem value="x" label="Vism"/>
+										<menuitem value="b" label="Abhidh-s"/>
+										<menuitem value="g" label="Byākaraṇa"/>
+									</menupopup>
+								</menulist>
+							</groupbox>
+							<groupbox collapsed="true" id="tsoBOOK" flex="1" align="start">
+								<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm">
+									<menupopup>
+									</menupopup>
+								</menulist>
+							</groupbox>
 							<groupbox collapsed="true" id="tsoMAT" flex="1" align="start">
 								<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true"/>
 								<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" checked="true"/>

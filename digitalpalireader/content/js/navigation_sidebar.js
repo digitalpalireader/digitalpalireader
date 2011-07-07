@@ -274,9 +274,14 @@ var DPRNav = {
 
 		var bookNode2 = document.getElementById('tsoBOA');
 		while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
-		
+
 		for (i = 0; i < titles.length; i++) {
+			
+			// nav box
+
 			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			
+			// check boxes
 			
 			var newCheck = document.createElement('checkbox');
 			newCheck.setAttribute('checked',true);
@@ -288,7 +293,9 @@ var DPRNav = {
 				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
 			}
 			bookNode2.appendChild(newCheck);
+			
 		}
+
 		bookNode.selectedIndex = 0;
 		
 	},
@@ -296,6 +303,21 @@ var DPRNav = {
 	 limitt:function(nikn) {
 		if (nikn == 5 || nikn > 6) { return true; }
 		else { return false };
+	},
+
+	setSearchBookList:function() {
+		var nik = document.getElementById('tsoSETm').value;
+
+		if (nikvoladi[nik]) var titles = nikvoladi[nik];
+		else var titles = nikvoladi[nik+G_hier];
+
+		
+		var bookNode = document.getElementById('tsoBOOKm');
+		bookNode.removeAllItems();	
+		for (i = 0; i < titles.length; i++) {
+			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			bookNode.selectedIndex = 0;		
+		}
 	},
 	
 
