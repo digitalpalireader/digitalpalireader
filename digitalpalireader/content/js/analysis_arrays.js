@@ -39,7 +39,7 @@ G_altStemComp['aa'] = ['',0,0];
 G_altStemComp['ii'] = ['a',0,0];
 
 var G_altInnerStem = [];  // inner replacements i = existing part, [i][0] = replacement, [i][1] = Noun, Verb 
-G_altInnerStem['gaah'] = ['gah','N'];
+//G_altInnerStem['gaah'] = ['gah','N'];
 G_altInnerStem['.mk'] = ['"nk','N'];
 G_altInnerStem['.mg'] = ['"ng','N'];
 

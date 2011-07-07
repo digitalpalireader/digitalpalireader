@@ -78,7 +78,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 	if(devCheck == 2 && G_stopAnalyzing) {
 		return false;
 	}
-
+	
 	var matchedword;
 	var fullmatch;
 	var fullnames;
@@ -102,7 +102,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 			G_shortdefpost.push(shortdefpre.concat([matchedword[2]]).join('$')); 
 		}
 		else { G_shortdefpost.push(shortdefpre.join('$')); }
-		if(devCheck > 0 && devDump == 1) ddump('-- matched ' +fullnames.join('-')+ ' --');
+		 ddump('-- matched ' +fullnames.join('-')+ ' --');
 		if(devCheck == 2) {
 			//if(G_outwords.length > 100) window.dump(G_outwords[G_outwords.length-1]);
 			window.dump('*');
@@ -145,7 +145,7 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 
 function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
-	devDump = 1;
+	devDump = 2;
 	//if(!lastpart && !nextpart) ddump(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	if(devCheck > 0 && devDump == 1) ddump(oneword);
 		
@@ -492,9 +492,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 				
 				if (yt[temp] && !resy && !isIndec(temp)) 
 				{					
+					if(devDump > 0) ddump('added CPED compound end declension noun: ' + temp);
 					resy = temp; // for matching the dictionary entry in the output
 				}						
 				else if (G_irregDec[temp] && G_irregDec[temp][1] == 'N' && typeof(yt[G_irregDec[temp][0]]) == 'object') {
+					if(devDump > 0) ddump('added CPED compound end declension (irreg): ' + temp + ' -> ' +G_irregDec[temp][0]);
 					resy = G_irregDec[temp][0];
 				}
 			}
@@ -508,6 +510,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					var temp = wtrV[b];
 					if (mainda[temp] && !isIndec(temp)) 
 					{			
+						if(devDump > 0) ddump('added compound verb: ' + temp + ' -> '+mainda[temp][i]);
 						for (i in mainda[temp]) {
 							res.push([temp,mainda[temp][i]]); 
 						}
@@ -526,6 +529,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					
 					if (yt[temp] && !resy && !isIndec(temp)) 
 					{					
+						if(devDump > 0) ddump('added CPED compound end declension noun: ' + temp);
 						resy = temp; // for matching the dictionary entry in the output
 					}						
 				}
@@ -545,6 +549,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		{				
 			if (mainda[temp]) 
 			{			
+				if(devDump > 0) ddump('added alt stem in compound: ' + temp);
 				for (i in mainda[temp]) {
 					res.push([temp,mainda[temp][i]]); 
 				}
@@ -555,6 +560,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 					res.push([oneword,mainda[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]); 
 				}
 				else {
+					if(devDump > 0) ddump('added alt stem in compound (irreg): ' + temp);
 					for (i in mainda[irregword]) {
 						res.push([oneword,mainda[irregword]]); 
 					}
@@ -568,9 +574,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		{
 			if (yt[temp] && !resy && !isIndec(temp)) 
 			{					
+				if(devDump > 0) ddump('added alt stem in compound (CPED): ' + temp);
 				resy = temp; // for matching the dictionary entry in the output
 			}	
 			else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'object') {
+				if(devDump > 0) ddump('added alt stem in compound (CPED irreg): ' + temp);
 				resy = G_irregDec[temp][0];
 			}
 			
@@ -588,6 +596,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		if (res.length == 0 && !trick) {
 			var trickmatch = findmatch('`'+oneword,lastpart,nextpart,partslength,1);
 			if (trickmatch) { 
+				if(devDump > 0) ddump('added suffix: ' + trickmatch[1]);
 				return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')) + '$',nextpart,1];  
 			}
 
@@ -605,7 +614,10 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 			if (res.length == 0 && !trick) {
 				var trickmatch = findmatch(oneword+'`',lastpart,nextpart,partslength,1);
-				if (trickmatch) { return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  }
+				if (trickmatch) { 
+					if(devDump > 0) ddump('added prefix: ' + trickmatch[1]);
+					return [oneword, trickmatch[1], (resy ? resy : (trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  
+				}
 
 			}
 		}
@@ -666,12 +678,15 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	
 	// inner replacements	
 	
-	if (res.length == 0 && resn.length == 0 && !resy) {
+	if (res.length == 0 && resn.length == 0 && !resy && !trick) {
 		for(i in G_altInnerStem) {
 			if(oneword.indexOf(i) > 0 && oneword.indexOf(i) < oneword.length - i.length) {
 				var ist = G_altInnerStem[i][0];
 				var trickmatch = findmatch(oneword.replace(i,ist),lastpart,nextpart,partslength);
-				if (trickmatch) { return [oneword, trickmatch[1], ((trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  }
+				if (trickmatch) { 
+					if(devDump > 0) ddump('added inner replacement: ' + trickmatch[2]);
+					return [oneword, trickmatch[1], ((trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  
+				}
 			}
 		}
 	}
