@@ -145,7 +145,7 @@ function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
 	var atiFile;
 	if(/\\/.exec(atiloc)) {
-		atiFile = atiloc + '\html\_dpr\digital_pali_reader_suttas.js';
+		atiFile = atiloc + '\\html\\_dpr\\digital_pali_reader_suttas.js';
 		atiloc = atiloc.replace(/\\/g,'/');
 	}		
 	else atiFile = atiloc + '/html/_dpr/digital_pali_reader_suttas.js';
