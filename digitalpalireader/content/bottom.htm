@@ -20,11 +20,11 @@ function onDocLoad() {
 	if(/\?/.exec(document.location.href)) {
 		 getLinkPlaceBottom();
 	}
+    else showBv();
 	document.onkeypress = function(e){
 		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
 		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);
 	};
-	showBv();
 }
 
 function showBv() {
@@ -34,15 +34,13 @@ function showBv() {
     document.getElementById('cdif').scrollTop=0;
 }
 
-function sendTextpadToAnalyze(){
-	var text = document.getElementById('pad').value;
-	mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(text);
-}
 
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/receive_bottom.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/send.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/send_bottom.js"></script>
 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
@@ -148,7 +146,7 @@ function sendTextpadToAnalyze(){
 		<div id="scf" class="paperback" align=center>
 			<form name="textpad">
 			<table><tr><td colspan=2><textarea name="pad" id="pad" rows="9" cols="110"></textarea></td></tr></table>
-			<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onclick="sendTextpadToAnalyze()">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
+			<p><span class="abut lbut" onclick="clearPad()" title="Erase all text">Clear</span><span class="abut rbut" title="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))">Analyze</span>&nbsp;&nbsp; <span class="abut obut" title="save data as file" onclick="savePad()">Save to:</span>&nbsp;Desktop/<input type="text" title="enter location and name of file (seperate folders with '/' or '\') name="file"></p>
 			</form>
 		</div>
 		<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">

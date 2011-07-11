@@ -51,7 +51,7 @@ function openDPRTab(permalink,id,reuse) {
 }
 
 
-function findDPRTab(id) {
+function findDPRTab(id,loc) {
 	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
 		// Get the next tab

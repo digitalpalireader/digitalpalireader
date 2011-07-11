@@ -9,7 +9,6 @@ matValue['t'] = '';
 
 function loadXMLSection(query,para,place,isPL,scroll)
 { 
-	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
@@ -200,19 +199,24 @@ function loadXMLSection(query,para,place,isPL,scroll)
 	if(!isPL) { //not coming from a permalink
 
 		try {
+	
+			var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+
+			// remove custom text link
+			
+			var newurl = oldurl.replace(/\&*text=[^&]*/,'');
 
 			// update loc
 
-			var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
-			if(/loc=/.exec(oldurl)) var newurl = oldurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
-			else if(/\?./.exec(oldurl)) var newurl = oldurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
-			else var newurl = oldurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+			if(/loc=/.exec(oldurl)) newurl = newurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
+			else if(/\?./.exec(oldurl)) newurl = newurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+			else newurl = newurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
 			// update query
 			
 			if(query) {
 				if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
-				else var newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+				else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
 			}
 			else newurl = newurl.replace(/\&query=[^&]+/,'');
 
@@ -220,7 +224,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 
 			if(para) {
 				if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
-				else var newurl = newurl + '&para='+para;
+				else newurl = newurl + '&para='+para;
 			}
 			else newurl = newurl.replace(/\&para=[^&]+/,'');
 			
@@ -228,7 +232,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 
 			if(scroll) {
 				if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
-				else var newurl = newurl + '&scroll='+scroll;
+				else newurl = newurl + '&scroll='+scroll;
 			}
 			else newurl = newurl.replace(/\&scroll=[^&]+/,'');
 			
@@ -236,7 +240,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 
 			if(place[8]) {
 				if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
-				else var newurl = newurl + '&alt=1';
+				else newurl = newurl + '&alt=1';
 			}
 			else newurl = newurl.replace(/\&alt=[^&]+/,'');
 

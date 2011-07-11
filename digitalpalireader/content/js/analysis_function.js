@@ -43,7 +43,7 @@ function outputAnalysis(input,frombox)
 		var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);
 		else var newurl = oldurl + '&analysis='+input;
-		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+frombox);
+		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+(frombox?frombox:0));
 		else if(frombox) newurl = newurl + '&frombox='+frombox;
 		else newurl = newurl.replace(/\&frombox=[^&]+/,'');
 		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
@@ -66,7 +66,7 @@ function outputAnalysis(input,frombox)
 	{
 		G_outwords.push([input,'0^' + input + '^3']);
 	}
-	outputDef(0,1,frombox); // perform the function in send.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
+	outputDef(0,1,frombox); // perform the function in analysis_output.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
 }
 
 

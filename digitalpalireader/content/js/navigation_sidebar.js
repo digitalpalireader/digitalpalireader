@@ -393,12 +393,20 @@ var DPRNav = {
 			while(histNode.itemCount > 0) histNode.removeItemAt(0);
 			histNode.appendItem('-- History --',null);
 			var isclear = '';
-			for (i in theHistory) {
+			for (i=0;i<theHistory.length;i++) {
 				var thist = theHistory[i].split('@');
 				var thist0 = toUni(thist[0]);
 				histNode.appendItem(thist0,thist[1]);
+				
+				var ch = histNode.childNodes[0].childNodes;
+				var x=thist[1].split(',');
+				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
 			}
 			histNode.selectedIndex = 0;
 		}
+	},
+
+	bookmarkBox:function() {
+
 	},
 }

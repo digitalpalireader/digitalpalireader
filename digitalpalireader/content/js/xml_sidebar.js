@@ -118,8 +118,10 @@ var DPRXML = {
 					listNode.collapsed = true;
 				}
 				else {
-					for(idx in lista){
+					for(idx = 0; idx < lista.length; idx++){
 						listNode.appendItem(lista[idx]);
+						var ch = listNode.childNodes[0].childNodes;
+						ch[idx].setAttribute('onmouseup',"DPRSend.importXML("+idx+",null,null,null,DPRSend.eventSend(event))");						
 					}	
 					listNode.collapsed = false;
 				}
@@ -131,16 +133,16 @@ var DPRXML = {
 	
 		switch(true) {
 			case (depth == 1): 
-				if(v.length == 1 && w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML();
+				if(v.length == 1 && w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
 			break;
 			case  (depth == 2): 
-				if(w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML();
+				if(w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
 			break;
 			case  (depth == 3): 
-				if(x.length == 1 && y.length == 1) DPRSend.importXML();
+				if(x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
 			break;
 			case  (depth == 4): 
-				if(y.length == 1) DPRSend.importXML();
+				if(y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
 			break;
 		}
 	},

@@ -19,6 +19,7 @@ var DPRChrome = {
 			var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
 			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
 				tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
+				if(/^DPR/.exec(currentTab.id)) continue;
 				if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
 				else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
 				else if(/search\.htm/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));

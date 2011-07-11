@@ -206,7 +206,7 @@ function formatuniout(data,which) { // prepare without links
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
 			if(!which == 1) {// put it together as one link
-				finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ')">' +  fullwordout[1] + '</a>'; b++;
+				finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</a>'; b++;
 			}
 			finout += space;
 			convout += space;
@@ -246,7 +246,7 @@ function formatuniout(data,which) { // prepare without links
 			volandpage = pageno.split('.');
 			
 			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
-			finout += ' <a class="tiny" style="color:blue" href="javascript:void(0)" title="' + pagetitle + '">' + indexpage + '</a>' + space;
+			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}
 		else if (which == 1)
 		{
@@ -262,7 +262,7 @@ function formatuniout(data,which) { // prepare without links
 			unioutb = uniouta[a];
 			//unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
-			finout += '<a id="W' + b + '" href="javascript:void(0)" onclick="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ')">' +  unioutb + '</a>' + space;
+			finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
 			b++;
 		}
 	}

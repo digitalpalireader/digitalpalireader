@@ -6,7 +6,7 @@ var DPRSend = {
 		return false;
 	},
 
-	importXML:function(labelsearch,para,isPL,add,scroll) {
+	importXML:function(section,labelsearch,para,isPL,add,scroll) {
 
 		var nikaya = document.getElementById('set').value;
 		var bookno = parseInt(document.getElementById('book').value)-1;
@@ -14,7 +14,9 @@ var DPRSend = {
 		var volume = document.getElementById('volume').selectedIndex;
 		var vagga = document.getElementById('vagga').selectedIndex;
 		var sutta = document.getElementById('sutta').selectedIndex;
-		var section = document.getElementById('section').selectedIndex;	
+		if(section === false) {
+			section = document.getElementById('section').selectedIndex;
+		}	
 		
 		if (G_hier == 't' && DPRNav.limitt()) { 
 			alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
@@ -87,7 +89,7 @@ var DPRSend = {
 	},
 
 	openPlace:function([nikaya,book,meta,volume,vagga,sutta,section,hiert],para,stringra,add) {
-
+		if(!nikaya) return;
 		if (stringra) {
 			stringra = stringra.replace(/`/g, '"');
 			stringra = stringra.split('#');

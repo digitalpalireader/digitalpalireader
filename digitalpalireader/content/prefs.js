@@ -143,16 +143,24 @@ function loadPrefs() {
 
 function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
-	var atiFile = atiloc.replace(/\\/g, '/') + '/html/_dpr/digital_pali_reader_suttas.js';
+	var atiFile;
+	if(/\\/.exec(atiloc)) {
+		atiFile = atiloc + '\html\_dpr\digital_pali_reader_suttas.js';
+		atiloc = atiloc.replace(/\\/g,'/');
+	}		
+	else atiFile = atiloc + '/html/_dpr/digital_pali_reader_suttas.js';
 	
-	if(document.getElementById('catioff').checked && !extFileExists(atiFile)) {
-		alert('Unable to find file: "'+atiFile+'".  Please disable offline translations before saving preferences.'); 
-		return false; 
-	}
-	else {
-		prefs.setCharPref('Char.catiloc',atiloc);
+	if(document.getElementById('catioff').checked) {
+		if(!extFileExists(atiFile)) {
+			alert('Unable to find file: "'+atiFile+'".  Please disable offline translations before saving preferences.'); 
+			return false; 
+		}
+		else {
+			prefs.setCharPref('Char.catiloc',atiloc);
+		}
 	}
 
+	
 	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff']; 
 
 	for (var i = 0; i < cks.length; ++i) {
@@ -242,7 +250,6 @@ function fileDialog(id, titleIn) {
 			alert('Unable to find directory: "'+fileName+'".  Please confirm that you have selected the correct directory and that you have an up to date copy of the ATI archive.'); 
 			return false; 
 		}
-		prefs.setCharPref('Char.catiloc',fileName);
 		output.value = fileName;
 	}
 	else if (result == nsIFilePicker.returnCancel) {

@@ -8,12 +8,27 @@ function moveframey() {
 
 function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
+    G_dictEntry = '';
+
 	if(!dictType) { // make opt list from url
 		var options = document.location.href.split('?')[1].split('#')[0].split('&');
-		G_dictType = options[0].split('=')[1];
-		G_dictQuery = options[1].split('=')[1];
-		G_dictOpts = options[2].split('=')[1].split(',');
-		G_dictEntry = (options[3]?options[3].split('=')[1]:'');
+        for(i = 0; i < options.length; i++) {
+            var option = options[i].split('=');
+            switch(option[0]) {
+                case 'type':
+                G_dictType = option[1];
+                break;
+                case 'query':
+                G_dictQuery = option[1];
+                break;
+                case 'opts':
+                G_dictOpts = option[1].split(',');
+                break;
+                case 'entry':
+                G_dictEntry = option[1];
+                break;
+            }
+        }
 
 	}
 	else { // replace url
@@ -22,7 +37,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		G_dictOpts = dictOpts;
 		G_dictEntry = dictEntry;
 		
-		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+'&query=' + G_dictQuery + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
+		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -42,7 +57,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
 	// tab title
 
-	var tabT = "Dict: '"+G_dictQuery + '\' in ' + st[G_dictType];
+	var tabT = "Dict: '" + (G_dictQuery != ''?G_dictQuery:toUni(G_dictEntry.split(',')[1])) + '\' in ' + st[G_dictType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	document.getElementById('difb').innerHTML = '';
@@ -80,6 +95,11 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 function pedsearchstart(hard)
 {
 	var getstring = G_dictQuery;
+
+    if(getstring == '') {
+        paliXML(toUni(G_dictEntry));
+        return;
+    }
 
 	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
 		sendPaliXML('dev/'+getstring+',dev');
@@ -262,7 +282,12 @@ var G_dppn = [];
 function dppnsearchstart(hard)
 {
 	var getstring = G_dictQuery;
-
+    
+    if(getstring == '') {
+        DPPNXML(toUni(G_dictEntry));
+        return;
+    }
+    
 	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
 		sendDPPNXML('dppn/'+getstring);
 		return;

@@ -1,5 +1,6 @@
 
-function sendTextPad(input, add){
+function sendTextPad(add){
+	var input = document.getElementById('pad').value;
 
 	if(!add) { // reuse old tab
 		var thisTab = mainWindow.gBrowser.selectedTab;
@@ -8,9 +9,8 @@ function sendTextPad(input, add){
 		return;
 	}
 	else {
-		var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
-		openDPRMain('DPRm',permalink,'bottom');
+		var permalink = 'chrome://digitalpalireader/content/index.xul?text='+toVel(input).replace(/ /g,'_');
+		openDPRTab(permalink,'DPRm');
 	}	
 }
-
 

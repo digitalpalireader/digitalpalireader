@@ -4,6 +4,7 @@ var DPRConfig = {
 			DPR_prefs[i] = getPref(i);
 		}
 		DPRNav.historyBox();
+		DPRNav.bookmarkBox();
 				
 		var x = 0;
 		

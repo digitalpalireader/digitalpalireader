@@ -5,10 +5,15 @@ var G_pedhist = [];
 var G_phmark = 0;
 
 var pedfileget = '';
-function paliXML(filein,which)
+function paliXML(filein,which,add)
 {
-	var file = filein;
-	
+	if(add == 'right') return;
+	if(add == true) {
+		sendPaliXML(toVel(filein),true);
+		return;
+	}
+	moveframey('dif');
+	var file = toUni(filein);
 	clearDivs('dif');
 	moveframey('dif');
 	
@@ -40,11 +45,10 @@ function paliXML(filein,which)
 	var t2 = tloc[2];
 	pedfileget = t1 + '/' + t2;
 	var pedp = 'etc/XML1/'+ t1+'/ped.xml';
-
 	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", pedp, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
+	xmlhttp.open("GET", pedp, false);
+	xmlhttp.send(null);
+	var xmlDoc = xmlhttp.responseXML.documentElement;
 	
 	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
 	
@@ -92,7 +96,7 @@ function paliXML(filein,which)
 	dataNode.innerHTML = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]")+'<hr/>';
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
-    document.getElementById('cdif').scrollTop=0;
+	document.getElementById('cdif').scrollTop=0;
 
 	var tout = '';
 	if (G_pedhist.length > 1) { // show select
@@ -152,11 +156,11 @@ function paliXML(filein,which)
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
 		}
 		else permalink += '&entry='+toVel(filein);
-	}
-	try {
-		window.history.replaceState('Object', 'Title', permalink);
-	}
-	catch(ex) {
+		try {
+			window.history.replaceState('Object', 'Title', permalink);
+		}
+		catch(ex) {
+		}
 	}
 }
 
@@ -177,8 +181,15 @@ var G_dppn = [];
 var G_dppnhist = [];
 var G_dhmark = 0;
 
-function DPPNXML(filein,which)
+function DPPNXML(filein,which,add)
 {
+	if(add == 'right') return;
+	if(add == true) {
+		sendDPPNXML(toVel(filein),true);
+		return;
+	}
+
+	moveframey('dif');
 	var file = filein;
 	
 	var filea = file.split(',');
@@ -213,11 +224,10 @@ function DPPNXML(filein,which)
 	// xml
 	
 	var dppnf = 'etc/XML2/'+tloc[1]+'.xml';
-
 	var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", dppnf, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
+	xmlhttp.open("GET", dppnf, false);
+	xmlhttp.send(null);
+	var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 	
@@ -286,11 +296,11 @@ function DPPNXML(filein,which)
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
 		}
 		else permalink += '&entry='+toVel(filein);
-	}
-	try {
-		window.history.replaceState('Object', 'Title', permalink);
-	}
-	catch(ex) {
+		try {
+			window.history.replaceState('Object', 'Title', permalink);
+		}
+		catch(ex) {
+		}
 	}
 	
 }

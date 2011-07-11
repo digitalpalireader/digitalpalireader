@@ -14,6 +14,8 @@ function getconfig() {
 		DPR_prefs[i] = getPref(i);
 	}
 
+	if (/top\.htm/.exec(document.location.href) && DPR_prefs["ctrans"] && typeof(atiD) == 'undefined') addATIJS();
+
 	// update backgrounds
 		
 	checkbackground();
@@ -88,3 +90,15 @@ function checkbackground() {
 	}
 }
 
+function addATIJS() {
+	if (DPR_prefs['catioff']) { 
+		var nsrc = 'file://'+ DPR_prefs['catiloc'] + '/html/_dpr/digital_pali_reader_suttas.js';
+	}
+	else { var nsrc = 'http://www.accesstoinsight.org/_dpr/digital_pali_reader_suttas.php'; }
+	atiIns = 1;
+	var headID = document.getElementsByTagName("head")[0];         
+	var newScript = document.createElement('script');
+	newScript.type = 'text/javascript';
+	newScript.src = nsrc;
+	headID.appendChild(newScript);	
+}

@@ -77,11 +77,11 @@ function outputDef(which,first,frombox)
 				switch (data[2]) {
 				case '0':
 					if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></a>';
+					osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></span>';
 					break;
 				case '1':
 					if (frombox !=2 && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\')"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></a>';
+					osout += '<span class="pointer" onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
 					break;
 				case '2':
 					osout += '<b style="color:' + DPR_prefs['colcpd'] + '">' + dataout + '</b>';
@@ -97,10 +97,10 @@ function outputDef(which,first,frombox)
 				}
 				switch (data[2]) {
 				case '0':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\')" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></a>&nbsp;';
+					osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
 					break;
 				case '1':
-					osout += '<a href="javascript:void(0)" onClick="moveframey(\'dif\'); DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\')"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></a>&nbsp;';
+					osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
 					break;
 				}
 			}

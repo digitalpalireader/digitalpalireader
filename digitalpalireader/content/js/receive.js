@@ -15,8 +15,8 @@ function getLinkPlace() { // permalinks
 	for (i in options) {
 
 		var option = options[i].split('=');
-		if(option[0] == 'analysis') {
-			sendAnalysisToOutput(option[1]);
+		if(option[0] == 'text') {
+			analyzeTextPad(option[1].replace(/_/g,' '));
 			return;
 		}
 		if(option[0] == 'ped') {

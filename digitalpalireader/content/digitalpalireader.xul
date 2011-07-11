@@ -57,7 +57,7 @@
 								<label value="T" />
 							</toolbarbutton>
 							<toolbarseparator orient="horizontal" class="groove"/>
-							<toolbarbutton flex="1" onclick="DPRSend.importXML(null,null,null,DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
+							<toolbarbutton flex="1" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
 								<label value="➤" />
 							</toolbarbutton>
 						</radiogroup>
@@ -65,7 +65,7 @@
 					</hbox>
 					<vbox id="hier">
 						<groupbox>
-							<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
+							<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(false,null,null,null,DPRSend.eventSend(event));"/>
 							<menulist class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 								<menupopup>
 								</menupopup>
@@ -82,13 +82,13 @@
 								<menupopup>
 								</menupopup>
 							</menulist>
-							<menulist class="sel" id="section" oncommand="DPRSend.importXML()">
+							<menulist class="sel" id="section">
 								<menupopup>
 								</menupopup>
 							</menulist>
 						</groupbox>
 						<groupbox>
-							<menulist class="sel" id="history" oncommand="DPRSend.openPlace(this.value.split(','))">
+							<menulist class="sel" id="history">
 								<menupopup>
 								</menupopup>
 							</menulist>
@@ -263,6 +263,13 @@
 							<label value="&bQuote;" />
 						</toolbarbutton>
 						<separator />
+						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/GMD/index.html', 'DPR-gram', 1);" id="gram" tooltiptext="&gram.label;" role="button">
+							<label value="&bGram;" />
+						</toolbarbutton>
+						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/cheat.htm','DPR-cheat',1);" id="cheat" tooltiptext="&cheat.label;" role="button">
+							<label value="&bCheat;" />
+						</toolbarbutton>
+						<separator />
 						<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
 							<label value="&bPreferences;" />
 						</toolbarbutton>
@@ -271,13 +278,6 @@
 						</toolbarbutton>
 						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">
 							<label value="&bHelp;" />
-						</toolbarbutton>
-						<separator />
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/GMD/index.html', 'DPR-gram', 1);" id="gram" tooltiptext="&gram.label;" role="button">
-							<label value="&bGram;" />
-						</toolbarbutton>
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/cheat.htm','DPR-cheat',1);" id="cheat" tooltiptext="&cheat.label;" role="button">
-							<label value="&bCheat;" />
 						</toolbarbutton>
 						<spacer flex="1"/>
 					</vbox>
