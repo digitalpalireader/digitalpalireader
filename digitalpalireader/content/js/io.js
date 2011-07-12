@@ -195,6 +195,10 @@ function profFileExists(file)
 
 function extFileExists(fileLoc)
 {
+	var osString = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime).OS;
+	if(osString == "WINNT") {
+		fileLoc = fileLoc.replace(/\//g,'\\');
+	}
 	var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 	try {
 		file.initWithPath(fileLoc);

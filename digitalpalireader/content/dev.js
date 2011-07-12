@@ -1938,7 +1938,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 									spaces += '&nbsp;&nbsp;';
 								}
 
-								theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+'<a href="javascript:void(0)" class="tiny" onclick="window.find(\''+toUni(theData)+'\', false, false)"/><font style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+nikname[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>';
+								theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+'<a href="javascript:void(0)" class="tiny" onclick="window.find(\''+toUni(theData)+'\', false, false)"/><font style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">(AN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6) + ')' : '') + '</d></font></a>';
 
                                 theDatao += '<br />';
                             }
@@ -2014,7 +2014,7 @@ function DthaiOut2(booka) {
 		for (i = firstpage; i < pages.length; i++) {
 			var pageno = pages[i].getElementsByTagName('pageno')[0].textContent;
 			
-			if(booka[e][2] && parseInt(pageno) > booka[e][2]) break out; // hit page limit
+			if(booka[e][2] && parseInt(pageno,10) > booka[e][2]) break out; // hit page limit
 			
 			Ax.push('-- ^a^Thai '+book+'.'+pageno+'^ea^ --');
 

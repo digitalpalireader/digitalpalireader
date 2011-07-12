@@ -6,7 +6,14 @@
 #
 # Please see the README file for more information.
 
-git commit -a
+xhtmlu=`gdialog --title "Update Notes" --inputbox "Enter Update Notes" 300 450 2>&1`
+if [ "$xhtmlu" == "" ]
+then
+echo "no update notes"
+exit 0
+fi
+
+git commit -a -m "$xhtmlu"
 git checkout 2
 git merge master
 git status
@@ -18,13 +25,6 @@ rdfv=`zenity --entry --title="Version Number" --entry-text="$oldv" --text="Enter
 if [ "$rdfv" == "" ]
 then
 rdfv=$oldv
-fi
-
-xhtmlu=`gdialog --title "Update Notes" --inputbox "Enter Update Notes" 300 450 2>&1`
-if [ "$xhtmlu" == "" ]
-then
-echo "no update notes"
-exit 0
 fi
 
 update=""
