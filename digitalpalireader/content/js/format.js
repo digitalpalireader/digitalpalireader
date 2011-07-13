@@ -206,7 +206,7 @@ function formatuniout(data,which) { // prepare without links
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
 			if(!which == 1) {// put it together as one link
-				finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</a>'; b++;
+				finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
 			}
 			finout += space;
 			convout += space;
