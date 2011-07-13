@@ -388,10 +388,10 @@ var DPRNav = {
 		
 		var hout = '';
 		var theHistory = getHistory();
-		if (theHistory) {
+		if (theHistory.length > 0) {
+			document.getElementById('hist-box').collapsed = false;
 			var histNode = document.getElementById('history');
 			while(histNode.itemCount > 0) histNode.removeItemAt(0);
-			histNode.appendItem('-- History --',null);
 			var isclear = '';
 			for (i=0;i<theHistory.length;i++) {
 				var thist = theHistory[i].split('@');
@@ -400,13 +400,45 @@ var DPRNav = {
 				
 				var ch = histNode.childNodes[0].childNodes;
 				var x=thist[1].split(',');
-				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
+				ch[i].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
 			}
 			histNode.selectedIndex = 0;
 		}
+		else document.getElementById('hist-box').collapsed = true;
+	},
+
+	bookmarkXML:function(){
+		var cont = readFile('DPR_Bookmarks');
+		cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
+		var parser=new DOMParser();
+		var xmlDoc = parser.parseFromString(cont,'text/xml');
+		return xmlDoc;
 	},
 
 	bookmarkBox:function() {
+		var xmlDoc = this.bookmarkXML();
+	
+		var bNodes = xmlDoc.getElementsByTagName('bookmark');
+		if (bNodes.length > 0) {
+			document.getElementById('bm-box').collapsed = false;
+			var bList = document.getElementById('bookmarks');
+			while(bList.itemCount > 0) bList.removeItemAt(0);
+			for(var i=0; i < bNodes.length; i++) {
 
+				var name = bNodes[i].getElementsByTagName('name')[0].textContent;
+				var loc = bNodes[i].getElementsByTagName('location')[0].textContent.split('#');
+				var scroll = bNodes[i].getElementsByTagName('scroll')[0].textContent;
+				var desc = bNodes[i].getElementsByTagName('description')[0].textContent;
+			
+				bList.appendItem(name);
+
+				var ch = bList.childNodes[0].childNodes;
+				ch[i].setAttribute('onclick',"DPRSend.openPlace(['"+loc[0]+"',"+loc[1]+","+loc[2]+","+loc[3]+","+loc[4]+","+loc[5]+","+loc[6]+",'"+loc[7]+"'],null,null,DPRSend.eventSend(event),"+scroll+");");
+				ch[i].setAttribute('tooltiptext',desc);
+			}
+			bList.selectedIndex = 0;
+			
+		}
+		else document.getElementById('bm-box').collapsed = true;
 	},
 }

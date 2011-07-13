@@ -157,11 +157,17 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendUpdateBookmarks() {
-	var oldTab = findDPRTab('DPR-bm');
-	if (oldTab) {
-		var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+	var oldTabs = findDPRTabs('DPR-bm');
+	for (i = 0; i < oldTabs.length; i++) {
+		var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTabs[i]);
 		oldTabBrowser.contentWindow.bookmarkframe();
 	}
+
+	var sidebar = DPRSidebarWindow();
+	if (sidebar) {
+		sidebar.DPRNav.bookmarkBox();
+	}
+	
 }
 
 var G_lastcolour = 0;

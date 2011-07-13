@@ -17,7 +17,10 @@ function eraseBookmark(idx)
 
 		var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 		writeFile('DPR_Bookmarks', outfile);        
-
+		var sidebar = DPRSidebarWindow();
+		if (sidebar) {
+			sidebar.DPRNav.bookmarkBox();
+		} 
         bookmarkframe(1);
 	}
 }
@@ -28,13 +31,16 @@ function eraseBookmarks(gofrom)
 	if(answer) 
 	{	
         eraseFile('DPR_Bookmarks');
+		var sidebar = DPRSidebarWindow();
+		if (sidebar) {
+			sidebar.DPRNav.bookmarkBox();
+		} 
 		bookmarkframe();
 	}
 }
 
 function bookmarkframe(refresh)
 {
-
 	if(!fileExists('DPR_Bookmarks')) convertOldBookmarks();
 
 	// get history
@@ -91,7 +97,7 @@ function bookmarkframe(refresh)
 		}
 		outputList += '</table></form>';
 		outputList += '<hr><div class="obutc"><b>' + bNodes.length + ' Bookmark'+(bNodes.length == 1?'':'s')+' Stored</b>';
-		outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="erasecookies(\'go\')">erase&nbsp;all</span></div>';
+		outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="eraseBookmarks(\'go\')">erase&nbsp;all</span></div>';
 		
 		document.getElementById('mafbc').innerHTML='<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width=100>&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>'+outputList+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>';
 	}
@@ -190,5 +196,9 @@ function saveBookmark(name,loc,desc,scroll,supress) {
 
 	if(writeFile('DPR_Bookmarks', outfile)) {
 		if(!supress) alertFlash('Bookmark Saved','green');
+	}
+	var sidebar = DPRSidebarWindow();
+	if (sidebar) {
+		sidebar.DPRNav.bookmarkBox();
 	}
 }

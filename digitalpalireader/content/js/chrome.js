@@ -67,6 +67,23 @@ function findDPRTab(id,loc) {
 	return false;
 }
 
+function findDPRTabs(id,loc) {
+	var tabs = [];
+	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
+
+		// Get the next tab
+		var currentTab = tabbrowser.tabContainer.childNodes[index];
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+
+		// Does this tab contain our custom attribute?
+		if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+
+			tabs.push(currentTab);
+		}
+	}
+	return tabs;
+}
+
 function findDPRTabByLoc(loc) {
 	loc = new RegExp(loc);
 	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {

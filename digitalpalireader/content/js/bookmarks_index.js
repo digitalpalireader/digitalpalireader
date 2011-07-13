@@ -48,6 +48,6 @@ function bookmarkSavePrompt(loc,name,desc){
 	
 	var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 	if(writeFile('DPR_Bookmarks', outfile)) alertFlash('Bookmark Saved','green');
-	
+
 	sendUpdateBookmarks();
 }

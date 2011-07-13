@@ -20,7 +20,7 @@ function clearHistory(cp) {
 	if(!answer) { return; }
 	if(!eraseFile('History_List_DPR')) return false;
 	if(!cp) { bookmarkframe(1); }
-	historyBox();
+	DPRSidebarWindow.DPRNav.historyBox();
 	alertFlash("History Erased.",'RGBa(255,255,0,0.8)');
 }	
 
