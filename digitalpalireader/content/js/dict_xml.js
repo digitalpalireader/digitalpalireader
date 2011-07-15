@@ -237,7 +237,6 @@ function DPPNXML(filein,which,add)
 	dataNode.innerHTML = '<p>'+data+'<hr/>';
 	document.getElementById('difb').setAttribute('align','left');
 	document.getElementById('difb').appendChild(dataNode);
-    document.getElementById('cdif').scrollTop=0;
 
 	// get number
 	var tname, lname, nname;
@@ -315,8 +314,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 		var loca = tiklist[num].split('#');
 		var word = loca.shift();
 	}
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
+	
     var finout = '';
     
     location:
@@ -328,22 +326,18 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         
 		if(niklist.indexOf(nikaya) == -1) continue;
 
-        var book = pca[1];
+        var book = parseInt(pca[1])+1;
         
-        var bookload = 'xml/' + nikaya + book + type + '.xml';
-
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
+        var bookload = nikaya + book + type;
+        var xmlDoc = loadXMLFile(bookload,0);
 
 		if (nikaya == 'k') {
-			var bookno = kudvala[pca[1]];
+			var bookno = kudvala[book];
 		}
 		else if(nikaya == 'y') {
-			var bookno = abhivala[pca[1]];
+			var bookno = abhivala[book];
 		}
-		else var bookno = parseInt(pca[1])-1;
+		else var bookno = pca[1];
 
         var meta = pca[2];
         var volume = pca[3];
@@ -373,24 +367,25 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
                 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',[\''+toUni(word)+'\'],(event.ctrlKey?1:\'\'))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+pca[7]+',[\''+toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
-    document.getElementById('mafbc').innerHTML = '<b>'+toUni(word)+'</b> in the '+G_hTitles[G_hNumbers[type]];
-    document.getElementById('mafbc').innerHTML += finout;
-    document.getElementById('maf').scrollTop = 0;
+
+	var dataNode = document.createElement('div');
+	dataNode.innerHTML = finout;
+	document.getElementById('difb').setAttribute('align','left');
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(dataNode);
+	document.getElementById('dictc').scrollTop=0;
+
     setCurrentTitle(toUni(word)+' in the '+G_hTitles[G_hNumbers[type]]);
 }
  
 function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search 
 
-    moveframex(2);
 
 	var loca = titlelist[num].split('#');
 	var word = loca.shift();
 	
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
-    
     var finout = '';
     
     location:
@@ -408,12 +403,10 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
         var book = pca[1];
         var hiert = pca[7];
-        var bookload = 'xml/' + nikaya + book + hiert + '.xml';
+        var bookload = nikaya + book + hiert;
 
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", bookload, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
+        var xmlDoc = loadXMLFile(bookload,0);
+
 
 		if (hiert != 'm' && nikaya == 'k') {
 			var bookno = kudvala[pca[1]];
@@ -484,11 +477,14 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
 		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 		
-        finout += '<p>'+placen+' <span class="abut obut" onclick="getplace([\''+G_nikToNumber[nikaya]+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\']); importXML()">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
-    document.getElementById('mafbc').innerHTML = '<p>Title Search for <b>'+toUni(word)+'</b></p><hr />';
-    document.getElementById('mafbc').innerHTML += finout;
-    document.getElementById('maf').scrollTop = 0;
+	var dataNode = document.createElement('div');
+	dataNode.innerHTML = finout;
+	document.getElementById('difb').setAttribute('align','left');
+	document.getElementById('difb').innerHTML = '';
+	document.getElementById('difb').appendChild(dataNode);
+	document.getElementById('dictc').scrollTop=0;
 }
  
 function getDppnData(link){

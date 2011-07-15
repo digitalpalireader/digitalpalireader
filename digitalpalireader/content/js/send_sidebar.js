@@ -213,33 +213,33 @@ var DPRSend = {
 
 		// get options
 		
-		if(which > 6) {
+		if(which != 3) {
 			var MAT = (document.getElementById('tsoMATm').checked ? 'm' : '') + (document.getElementById('tsoMATa').checked ? 'a' : '') + (document.getElementById('tsoMATt').checked ? 't' : '');
 		}
-		else var MAT = G_hier;
+		else var MAT = document.getElementById('tsoMAT2m').value;
 
-		if(which == 4 || which == 11 || which == 14) { // get sets
+		if(which == 0) { // get sets
 			var set = ''
 			for (i in G_nikToNumber) {
 				if(document.getElementById('tsoCO'+i).checked) set += i;
 			}
 		}
-		else if (which == 0 || which == 7) { // tipitaka
-			var set = 'vdmsaky';
-		}
 		else var set = document.getElementById('tsoSETm').value;
 		
-		if(which == 5 || which == 12) { // get books
+		if(which == 1) { // get books
 			var book = [];
-			for (i = 1; i <= nikvoladi[document.getElementById('set').value].length; i++) {
+			for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
 				if(document.getElementById('tsoBObook' + i).checked) book.push(i);
 			}
 			book = book.join(',');
 		}
-		else if (which == 2) { // one set
-			book = document.getElementById('tsoBOOKm').value;
+		else book = document.getElementById('tsoBOOKm').value;
+
+		if(which == 3) { // get parts
+			var part = document.getElementById('tsoPR').selectedIndex+'.'+document.getElementById('tsoPmeta').selectedIndex+'.'+document.getElementById('tsoPvolume').selectedIndex+'.'+document.getElementById('tsoPvagga').selectedIndex+'.'+document.getElementById('tsoPsutta').selectedIndex+'.'+document.getElementById('tsoPsection').selectedIndex;
 		}
-		else book == ''; // not worrying about books
+		else part = 1;
+
 
 		var rx = document.getElementById('tsoRx').checked;
 
@@ -247,17 +247,17 @@ var DPRSend = {
 			var oldTab = DPRChrome.findDPRTab('DPR-search');
 
 			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+				var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&part=' + part + '&rx=' + rx;
 				DPRChrome.openDPRTab(permalink,'DPR-search');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(getstring).toLowerCase(),MAT,set,book,rx);
+				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(getstring).toLowerCase(),MAT,set,book,part,rx);
 			}
 		}
 		else {
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&rx=' + rx;
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + toVel(getstring).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&part=' + part + '&rx=' + rx;
 			DPRChrome.openDPRTab(permalink,'DPRs');
 		}
 

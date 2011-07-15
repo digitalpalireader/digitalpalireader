@@ -2321,3 +2321,148 @@ function DgroupBySimilarity() {
 javascript:writeExtFile('/home/noah/Extensions/work/unmatched','test');
 
 */
+
+
+// ATT & TIK Creation
+
+function DMakeAttArray(h) {
+	var outa = [];
+	var getstring = /\^b\^[^^]+\^eb\^/;
+	for (i in G_XMLFileArray) {
+		if(i.charAt(0) == 'x') continue;
+		if (G_XMLFileArray[i][h] == 1) {
+			var a = Dsearch(i+(h==1?'a':'t'),getstring);
+			for(c = 0; c < a.length; c++) {
+
+				var b = '#'+i.charAt(0)+'^'+(parseInt(i.substring(1))-1)+'^'+a[c][0]+'^'+a[c][1]+'^'+a[c][2]+'^'+a[c][3]+'^'+a[c][4]+'^'+a[c][5];
+				if(typeof(outa[a[c][6]]) == 'string') outa[a[c][6]] += b;
+				else outa[a[c][6]] = b;
+			}
+		}
+	}
+	
+	var a2 = [];
+	
+	
+	for (i in outa) {
+		a2.push(i+outa[i]);
+	}
+	a2 = sortaz(a2);
+		
+	var out = h==1?"var attlist = [":"tiklist[";
+
+	for (i = 0; i < a2.length-1; i++) {
+		out+="'"+a2[i]+"',\n";
+	}
+	out+="'"+a2[i]+"',\n";
+	
+	var theDataDiv = document.createElement('div');
+	theDataDiv.innerHTML = '<textarea>'+out+'];</textarea>';
+	document.getElementById('content').innerHTML = '';
+	document.getElementById('content').appendChild(theDataDiv);
+}
+
+function Dsearch(file,getstring)
+{
+	var xmlDoc = loadXMLFile(file,0);
+	var u = xmlDoc.getElementsByTagName("h0");
+	
+	var gotstring;
+
+	var outa = [];
+	
+	var intext = '';
+
+	var finalout = '';
+
+	var match = 0;
+	
+	for (var a = 0; a < u.length; a++) // per h0
+	{
+		var v = u[a].getElementsByTagName("h1");
+			
+		for (var b = 0; b < v.length; b++) // per h1
+		{
+			var w = v[b].getElementsByTagName("h2");
+		
+			for (var c = 0; c < w.length; c++) // per h2
+			{
+
+				
+				var x = w[c].getElementsByTagName("h3");
+				
+	
+				for (var d = 0; d < x.length; d++) // per h3
+				{
+
+					
+					var y = x[d].getElementsByTagName("h4");
+					
+					for (var e = 0; e < y.length; e++) // per h4
+					{
+						window.dump(a+','+b+','+c+','+d+','+e+'\n');
+
+						var z = y[e].getElementsByTagName("p");		
+
+						for (var f = 0; f < z.length; f++) // per paragraph
+						{
+
+
+							intext = z[f].textContent.substring(4);
+							intext = intext.replace(/\{[^}]+\}/g, '');
+							intext = intext.replace(/\^a\^[^^]*\^ea\^/g, ''); 
+							intext = intext.replace(/[-‘’“”)(,;`'"0-9]/g, ' ');
+							intext = intext.replace(/…/g, ' ');
+							intext = intext.replace(/ +/g, ' ');
+							intext = intext.replace(/Ñ/g, 'ñ');
+							intext = intext.replace(/Ā/g, 'ā');
+							intext = intext.replace(/Ū/g, 'ū');
+							intext = intext.replace(/Ṭ/g, 'ṭ');
+							intext = intext.toLowerCase();
+							
+							startmatch = intext.search(getstring);
+
+							if (startmatch >= 0)
+							{
+								while (startmatch >= 0)
+								{				
+									match = 1;
+									gotstring = intext.match(getstring)[0];
+									
+									var os = gotstring.replace(/\^e*b\^/g,'');
+									os = os.replace(/\.\.\.* *pe0* *\.*\.\./g, ' pe ');
+									os = os.replace(/\.\./g, '.');
+									os = os.replace(/^ +/g, '');
+									os = os.replace(/ +$/g, '');
+									os = os.replace(/\.$/g, '');
+									os = os.replace(/ +/g, ' ');
+
+									if(os.length > 1) {
+										if(/\. /.exec(os)) {
+											var ss = os.split(/ *\. /);
+											for (q=0;q<ss.length;q++) {
+												ss[q] = ss[q].replace(/^ +/g, '');
+												ss[q] = ss[q].replace(/ +$/g, '');
+												ss[q] = ss[q].replace(/\.$/g, '');
+												ss[q] = ss[q].replace(/ +/g, ' ');
+												if(ss[q].length == 0) continue;
+												outa.push([a,b,c,d,e,f,ss[q]]);
+											}
+										}
+										else outa.push([a,b,c,d,e,f,os]);
+
+									}
+									intext = intext.substring(intext.indexOf(gotstring)+gotstring.length);
+									startmatch = intext.search(getstring);
+								}
+							
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return outa;
+}
+

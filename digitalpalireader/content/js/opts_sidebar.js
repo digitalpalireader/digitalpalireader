@@ -4,7 +4,9 @@ var DPROpts = {
 		document.getElementById('tsoSetContainer').setAttribute('collapsed',true);
 		document.getElementById('tsoSET').setAttribute('collapsed',true);
 		document.getElementById('tsoBOOK').setAttribute('collapsed',true);
+		document.getElementById('tsoPart').setAttribute('collapsed',true);
 		document.getElementById('tsoMAT').setAttribute('collapsed',true);
+		document.getElementById('tsoMAT2').setAttribute('collapsed',true);
 		document.getElementById('tsoCO1').setAttribute('collapsed',true);
 		document.getElementById('tsoCO2').setAttribute('collapsed',true);
 		document.getElementById('tsoCO3').setAttribute('collapsed',true);
@@ -12,54 +14,36 @@ var DPROpts = {
 		
 		var which = document.getElementById('tipType').selectedIndex;
 		switch(which) {
+			case 0:
+				document.getElementById('tsoContainer').removeAttribute('collapsed');
+				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				document.getElementById('tsoCO1').removeAttribute('collapsed');
+				document.getElementById('tsoCO2').removeAttribute('collapsed');
+				document.getElementById('tsoCO3').removeAttribute('collapsed');
+			break;
 			case 1:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
 				document.getElementById('tsoSET').removeAttribute('collapsed');
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				document.getElementById('tsoBO').removeAttribute('collapsed');
 			break;
 			case 2:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
 				document.getElementById('tsoSET').removeAttribute('collapsed');
 				document.getElementById('tsoBOOK').removeAttribute('collapsed');
+				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				DPRNav.setSearchBookList(); // populate books
 			break;
-			case 4:
+			case 3:
+				document.getElementById('tsoPart').removeAttribute('collapsed');
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
-				document.getElementById('tsoCO1').removeAttribute('collapsed');
-				document.getElementById('tsoCO2').removeAttribute('collapsed');
-				document.getElementById('tsoCO3').removeAttribute('collapsed');
+				document.getElementById('tsoSET').removeAttribute('collapsed');
+				document.getElementById('tsoBOOK').removeAttribute('collapsed');
+				document.getElementById('tsoMAT2').removeAttribute('collapsed');
+				DPRXML.updateSearchHierarchy(0); // populate sections
 			break;
 			case 5:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
-				document.getElementById('tsoBO').removeAttribute('collapsed');
-			break;
-			case 7:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 8:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 9:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-			break;
-			case 11:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-				document.getElementById('tsoCO1').removeAttribute('collapsed');
-				document.getElementById('tsoCO2').removeAttribute('collapsed');
-				document.getElementById('tsoCO3').removeAttribute('collapsed');
-			break;
-			case 12:
-				document.getElementById('tsoContainer').removeAttribute('collapsed');
-				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
-				document.getElementById('tsoBO').removeAttribute('collapsed');
-			break;
-			case 14:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
 				document.getElementById('tsoSetContainer').removeAttribute('collapsed');
 				document.getElementById('tsoCO2').removeAttribute('collapsed');
@@ -150,6 +134,42 @@ var DPROpts = {
 			break;
 
 		}
+	},
+	chooseSearchHier:function(depth) { // deactivate lower hierarchy in partial search
+		if(!depth) depth = document.getElementById('tsoPR').selectedIndex+1;
+		switch(depth) {
+			case 1:
+				document.getElementById('tsoPvolume').setAttribute('disabled',true);
+				document.getElementById('tsoPvagga').setAttribute('disabled',true);
+				document.getElementById('tsoPsutta').setAttribute('disabled',true);
+				document.getElementById('tsoPsection').setAttribute('disabled',true);
+			break;
+			case 2:
+				document.getElementById('tsoPvolume').removeAttribute('disabled');
+				document.getElementById('tsoPvagga').setAttribute('disabled',true);
+				document.getElementById('tsoPsutta').setAttribute('disabled',true);
+				document.getElementById('tsoPsection').setAttribute('disabled',true);
+			break;
+			case 3:
+				document.getElementById('tsoPvolume').removeAttribute('disabled');
+				document.getElementById('tsoPvagga').removeAttribute('disabled');
+				document.getElementById('tsoPsutta').setAttribute('disabled',true);
+				document.getElementById('tsoPsection').setAttribute('disabled',true);
+			break;
+			case 4:
+				document.getElementById('tsoPvolume').removeAttribute('disabled');
+				document.getElementById('tsoPvagga').removeAttribute('disabled');
+				document.getElementById('tsoPsutta').removeAttribute('disabled');
+				document.getElementById('tsoPsection').setAttribute('disabled',true);
+			break;
+			case 5:
+				document.getElementById('tsoPvolume').removeAttribute('disabled');
+				document.getElementById('tsoPvagga').removeAttribute('disabled');
+				document.getElementById('tsoPsutta').removeAttribute('disabled');
+				document.getElementById('tsoPsection').removeAttribute('disabled');
+			break;
+		}
+
 	},
 	
 }

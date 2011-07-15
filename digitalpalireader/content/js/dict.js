@@ -37,7 +37,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		G_dictOpts = dictOpts;
 		G_dictEntry = dictEntry;
 		
-		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
+		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -876,6 +876,7 @@ function attsearchstart()
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
+	else getstring = toUni(getstring);
 	
 	var gslength = getstring.length;
 	var gsplit = new Array();	
@@ -919,7 +920,7 @@ function attsearchstart()
 			}
 			if (entries.length == 0) continue;
                        
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<span class="pointer style="color:'+DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
 			y++;
 		}
 	}
@@ -927,7 +928,7 @@ function attsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	document.getElementById('dicthead').innerHTML = '<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:'
+	document.getElementById('dicthead').innerHTML = '<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:'
 	
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
@@ -1007,7 +1008,7 @@ function tiksearchstart()
 			}
 			if (entries.length == 0) continue;
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</a><br>';
+			finouta[y] = '<span class="pointer" style="color:'+DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
 			y++;
 		}
 	}
@@ -1015,7 +1016,7 @@ function tiksearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	document.getElementById('dicthead').innerHTML = '<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	document.getElementById('dicthead').innerHTML = '<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:';
 	
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
@@ -1132,9 +1133,8 @@ function titlesearchstart()
 					dEO += '<div class="hide round" id="titleS'+x+'^'+d+'"></div>'
 				}
 			}
+			finouta.push('<span class="pointer" style="color:'+DPR_prefs['coltext']+'" onclick="getTitleXML('+ x +','+ (G_dictOpts.indexOf('mm') > -1) +','+(G_dictOpts.indexOf('ma') > -1)+','+(G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</span>' + dEI + '<br>' + dEO);
 
-			finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="getTitleXML('+ x +','+ (G_dictOpts.indexOf('mm') > -1) +','+(G_dictOpts.indexOf('ma') > -1)+','+(G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</a>' + dEI + '<br>' + dEO;
-			y++;
 		}
 	}
 	y = finouta.length;

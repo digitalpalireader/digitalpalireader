@@ -17,7 +17,10 @@ var digitalpalireader =
 		DPRChrome.giveIDtoTabs();
 		this.updatePrefs();
 
-		DPRNav.setSearchBookList(); // populate books (lazy)
+		DPRNav.changeSet(1);
+		DPRNav.setSearchBookList();
+
+
 
 		//mainWindow.document.getElementById('sidebar-header').hidden = true;
 		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
@@ -58,7 +61,6 @@ var digitalpalireader =
 	updatePrefs: function() {
 		window.dump('updatePrefs');
 		DPRConfig.sidebarConfig();
-		DPRNav.changeSet(1);
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];

@@ -272,27 +272,9 @@ var DPRNav = {
 		var bookNode = document.getElementById('book');
 		while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
 
-		var bookNode2 = document.getElementById('tsoBOA');
-		while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
-
 		for (i = 0; i < titles.length; i++) {
 			
-			// nav box
-
 			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-			
-			// check boxes
-			
-			var newCheck = document.createElement('checkbox');
-			newCheck.setAttribute('checked',true);
-			newCheck.setAttribute('class','tiny');
-			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
-			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-			if(i == Math.ceil(titles.length/2)) {
-				bookNode2 = document.getElementById('tsoBOB');
-				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
-			}
-			bookNode2.appendChild(newCheck);
 			
 		}
 
@@ -314,10 +296,32 @@ var DPRNav = {
 		
 		var bookNode = document.getElementById('tsoBOOKm');
 		bookNode.removeAllItems();	
+
+		var bookNode2 = document.getElementById('tsoBOA');
+		while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
+
 		for (i = 0; i < titles.length; i++) {
+
+			// menu			
+
 			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			bookNode.selectedIndex = 0;		
+
+			// check boxes
+			
+			var newCheck = document.createElement('checkbox');
+			newCheck.setAttribute('checked',true);
+			newCheck.setAttribute('class','tiny');
+			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			if(i == Math.ceil(titles.length/2)) {
+				bookNode2 = document.getElementById('tsoBOB');
+				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
+			}
+			bookNode2.appendChild(newCheck);
+
 		}
+		DPRXML.updateSearchHierarchy(0)
 	},
 	
 

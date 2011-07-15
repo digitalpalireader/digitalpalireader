@@ -7,9 +7,10 @@ var G_searchString;
 var G_searchMAT;
 var G_searchSet;
 var G_searchBook;
+var G_searchPart;
 var G_searchRX;
 
-function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchRX) {
+function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
 	
 	clearDivs('search');
 	resetvalues();
@@ -19,9 +20,10 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchMAT = searchMAT;
 		G_searchSet = searchSet;
 		G_searchBook = ','+searchBook+',';
+		G_searchPart = searchPart;	
 		G_searchRX = searchRX;	
 
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString).replace(/ /g,'_') + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&rx=' + searchRX;
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString).replace(/ /g,'_') + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -54,6 +56,9 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 				case 'book':
 					G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
 				break;
+				case 'part':
+					G_searchPart = option[1];
+				break;
 				case 'rx':
 					G_searchRX = (option[1] == 'false' ? false : true);
 				break;
@@ -65,17 +70,11 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	var matst = [];
 	for (i in G_searchMAT) matst.push(G_searchMAT[i]);
 	
-	st[0] = 'The Tipitaka';
-	st[1] = G_nikLongName[G_searchSet];
+	st[0] = 'Multiple Sets';
+	st[1] = G_nikLongName[G_searchSet] + ' Books';
 	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1);
-	st[4] = 'Multiple Sets (' + G_hTitles[G_searchMAT] + ')';
-	st[5] = 'Multiple Books (' + G_hTitles[G_searchMAT] + ')';
-	st[7] = 'The Tipitaka (' + matst.join(',') + ')';
-	st[8] = G_nikLongName[G_searchSet] + ' (' + matst.join(',') + ')';
-	st[9] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (' + matst.join(',') + ')';
-	st[11] = 'Multiple Sets (' + matst.join(',') + ')';
-	st[12] = 'Multiple Books (' + matst.join(',') + ')';
-	st[14] = 'ATI Translations';
+	st[3] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (partial)';
+	st[5] = 'ATI Translations';
 
 
 	// tab title
@@ -92,22 +91,16 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	switch(G_searchType) {
 		case 0:
-		case 4:
-		case 7:
-		case 11:
 			pausesall();
 		break;
 		case 1:
-		case 5:
-		case 8:
-		case 12:
 			pausetwo();
 		break;
 		case 2:
-		case 9:
+		case 3:
 			pausethree();
 		break;
-		case 14: // ATI
+		case 5: // ATI
 			atiSearchStart();
 		break;
 	}
@@ -175,29 +168,21 @@ function pausesall()
 	var which = G_searchType;
 
 	for(w in G_XMLFileArray) {
-		if ((which == 0 || which == 7) && /[xbg]/.exec(w.charAt(0))) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
+		if (G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
-		if(which > 6) { // multiple hier
-			for (x = 0; x < 3; x++) {
-				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
-					G_searchFileArray.push(w+G_hLetters[x]);
-				}
+		for (x = 0; x < 3; x++) {
+			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+				G_searchFileArray.push(w+G_hLetters[x]);
 			}
-		}
-		else { // single hier
-			if (G_searchMAT == "m" && G_XMLFileArray[w][0] == 1 || G_searchMAT == "a" && G_XMLFileArray[w][1] == 1 || G_searchMAT == "t" && G_XMLFileArray[w][2] == 1) G_searchFileArray.push(w+G_searchMAT);
 		}
 	}
 
 	if(G_searchFileArray.length == 0) {
-		alertFlash('No books in selection');
+		alert('No books in selection');
 		return;
 	}
 
 	var getstring = G_searchString;
-
-	
 	
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
@@ -206,8 +191,7 @@ function pausesall()
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
-		if ((which == 0 || which == 7) && /[xbg]/.exec(G_numberToNik[i])) continue; // don't add extracanonical texts for tipitaka match 
-		if ((which == 4 || which == 11) && G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
+		if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
 		toplista.push('<span id="sdf'+G_numberToNik[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+G_numberToNik[i]+'\').offsetTop;">'+G_nikLongName[G_numberToNik[i]]+':</a> <span id="stfH'+G_numberToNik[i]+'"></span></span>');
 	}
 	
@@ -227,17 +211,12 @@ function pausetwo() { // init function for single collection
 	
 	for(w in G_XMLFileArray) {
 		if (w.charAt(0) != nikaya) continue; // only this collection
-		if ((which == 5 || which == 12) && G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books 
+		if (G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books 
 
-		if(which > 6) { // multiple hier
-			for (x = 0; x < 3; x++) {
-				if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
-					G_searchFileArray.push(w+G_hLetters[x]);
-				}
+		for (x = 0; x < 3; x++) {
+			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+				G_searchFileArray.push(w+G_hLetters[x]);
 			}
-		}
-		else { // single hier
-			if (G_searchMAT == "m" && G_XMLFileArray[w][0] == 1 || G_searchMAT == "a" && G_XMLFileArray[w][1] == 1 || G_searchMAT == "t" && G_XMLFileArray[w][2] == 1) G_searchFileArray.push(w+G_searchMAT);
 		}
 	}
 
@@ -266,14 +245,14 @@ function pausethree() {
 	var nikbook = nikaya+book;
 	var getstring = G_searchString;
 
-	if(which == 9) { // single book, multiple hier
+	if(which == 2) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
 			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
 				G_searchFileArray.push(nikbook+G_hLetters[x]);
 			}
 		}
 	}		
-	else { // single book
+	else { // single book (partial)
 		G_searchFileArray = [nikbook+G_searchMAT];
 	}
 	
@@ -285,7 +264,7 @@ function pausethree() {
 	makeProgressTable();
 
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + '</b>: <span id="stfx"></span></td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + (G_searchPart != '1'?' (partial)':'')+'</b>: <span id="stfx"></span></td></tr></table>';
 
 	importXMLs(3);
 }
@@ -509,17 +488,27 @@ function createTables(xmlDoc,hiert)
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
 	
+	var part;
+	if(G_searchPart != '1') part = G_searchPart.split('.');
+	
 	for (var sx = 0; sx < u.length; sx++) // per h0
 	{
+
+		if(G_searchType == 3 && part[0] >= 0 && sx != parseInt(part[1])) continue;
+
 		var v = u[sx].getElementsByTagName("h1");
 			
 		for (var sy = 0; sy < v.length; sy++) // per h1
 		{
+
+			if(G_searchType == 3 && part[0] >= 1 && sy != parseInt(part[2])) continue;
+
 			var w = v[sy].getElementsByTagName("h2");
 		
 			for (var sz = 0; sz < w.length; sz++) // per h2
 			{
 
+				if(G_searchType == 3 && part[0] >= 2 && sz != parseInt(part[3])) continue;
 				
 				var x = w[sz].getElementsByTagName("h3");
 				
@@ -527,12 +516,15 @@ function createTables(xmlDoc,hiert)
 				for (var s = 0; s < x.length; s++) // per h3
 				{
 
+					if(G_searchType == 3 && part[0] >= 3 && s != parseInt(part[4])) continue;
 					
 					var y = x[s].getElementsByTagName("h4");
 					
 					for (var se = 0; se < y.length; se++) // per h4
 					{
 
+						if(G_searchType == 3 && part[0] >= 4 && se != parseInt(part[5])) continue;
+						
 						var z = y[se].getElementsByTagName("p");		
 
 						for (var tmp = 0; tmp < z.length; tmp++) // per paragraph
