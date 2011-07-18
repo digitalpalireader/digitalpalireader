@@ -65,7 +65,7 @@
 					</hbox>
 					<vbox id="hier">
 						<groupbox>
-							<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(false,null,null,null,DPRSend.eventSend(event));"/>
+							<button flex="1" id="title" label="" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));"/>
 							<menulist class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 								<menupopup>
 								</menupopup>
@@ -142,8 +142,8 @@
 					<vbox flex="1" align="start" id="tsoContainer">
 						<vbox align="stretch">
 							<hbox>
-								<groupbox collapsed="true" id="tsoSET" flex="1" orient="horizontal" pack="start">
-									<menulist class="sel" tooltiptext="Choose which set to search" id="tsoSETm" oncommand="DPRNav.setSearchBookList()">
+								<box collapsed="true" id="tsoSET" flex="1" orient="horizontal" pack="start">
+									<menulist flex="1" class="sel" tooltiptext="Choose which set to search" id="tsoSETm" oncommand="DPRNav.setSearchBookList()">
 										<menupopup>
 											<menuitem value="v" selected="true" label="Vinaya"/>
 											<menuitem value="d" label="Dīgha"/>
@@ -157,16 +157,16 @@
 											<menuitem value="g" label="Byākaraṇa"/>
 										</menupopup>
 									</menulist>
-								</groupbox>
-								<groupbox collapsed="true" id="tsoMAT2" flex="1" align="start" oncommand="DPRXML.updateSearchHierarchy(0)">
-									<menulist class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m">
+								</box>
+								<box collapsed="true" id="tsoMAT2" flex="1" align="start" oncommand="DPRXML.updateSearchHierarchy(0)">
+									<menulist flex="1" class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m">
 										<menupopup>
 											<menuitem value="m" selected="true" label="Mūla"/>
 											<menuitem value="a" label="Aṭṭhakathā"/>
 											<menuitem value="t" label="Ṭīka"/>
 										</menupopup>
 									</menulist>
-								</groupbox>
+								</box>
 							</hbox>
 							<groupbox collapsed="true" id="tsoBOOK" flex="1" align="start" oncommand="DPRXML.updateSearchHierarchy(0)">
 								<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm">
@@ -175,38 +175,38 @@
 								</menulist>
 							</groupbox>
 							<groupbox collapsed="true" id="tsoPart" flex="1" align="start">
-								<radiogroup id="tsoPR">
-									<hbox id="tsoP1" collapsed="true">
+								<radiogroup id="tsoPR" flex="1">
+									<hbox id="tsoP1" collapsed="true" flex="1">
 										<radio id="tsoH1" selected="true" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(1)" />
 										<menulist class="sel tiny" id="tsoPmeta" oncommand="DPRXML.updateSearchHierarchy(1)">
 											<menupopup>
 											</menupopup>
 										</menulist>
 									</hbox>
-									<hbox id="tsoP2" collapsed="true">
+									<hbox id="tsoP2" collapsed="true" flex="1">
 										<radio id="tsoH2" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(2)" />
-										<menulist class="sel tiny" id="tsoPvolume" oncommand="DPRXML.updateSearchHierarchy(2)">
+										<menulist flex="1" class="sel tiny" id="tsoPvolume" oncommand="DPRXML.updateSearchHierarchy(2)">
 											<menupopup>
 											</menupopup>
 										</menulist>
 									</hbox>
-									<hbox id="tsoP3" collapsed="true">
+									<hbox id="tsoP3" collapsed="true" flex="1">
 										<radio id="tsoH3" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(3)" />
-										<menulist class="sel tiny" id="tsoPvagga" oncommand="DPRXML.updateSearchHierarchy(3)">
+										<menulist flex="1" class="sel tiny" id="tsoPvagga" oncommand="DPRXML.updateSearchHierarchy(3)">
 											<menupopup>
 											</menupopup>
 										</menulist>
 									</hbox>
-									<hbox id="tsoP4" collapsed="true">
+									<hbox id="tsoP4" collapsed="true" flex="1">
 										<radio id="tsoH4" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(4)" />
-										<menulist class="sel tiny" id="tsoPsutta" oncommand="DPRXML.updateSearchHierarchy(4)">
+										<menulist flex="1" class="sel tiny" id="tsoPsutta" oncommand="DPRXML.updateSearchHierarchy(4)">
 											<menupopup>
 											</menupopup>
 										</menulist>
 									</hbox>
-									<hbox id="tsoP5" collapsed="true">
+									<hbox id="tsoP5" collapsed="true" flex="1">
 										<radio id="tsoH5" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(5)" />
-										<menulist class="sel tiny" id="tsoPsection">
+										<menulist flex="1" class="sel tiny" id="tsoPsection">
 											<menupopup>
 											</menupopup>
 										</menulist>							

@@ -7,6 +7,7 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8"> 
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script> 
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script> 
+<script language="JavaScript1.3" type="text/javascript" src="js/chrome.js"></script> 
 <script language="JavaScript1.3" type="text/javascript" src="js/prompt.js"></script> 
 <script language="JavaScript1.3" type="text/javascript" src="version.js"></script> 
 </head> 
@@ -31,7 +32,7 @@
 <li><a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNbookmarks').offsetTop;">bookmarks</a> and quote clipboard for keeping important passages, and a history to keep track of recently viewed passages.</li> 
 <li>permalinks to each paragraph and search query for referencing passages and terms for other DPR users.</li> 
 <li>links to and searching of <a class="green" href="http://www.accesstoinsight.org/">AccessToInsight.org</a>'s list of translations</li> 
-<li>a Pali conversion utility that converts to and from Velthius and Unicode scripts</li> 
+<li>a Pali conversion utility that converts to and from <a style="color: green;" href="javascript:void(0)" onclick="openDPRTab('chrome://digitalpalireader/content/velthuis.htm','DPR-help',1);">Velthuis</a> and Unicode scripts</li> 
 <li>transliteration of Pali into Thai, Devanagari, Myanmar and Sinhala scripts </li> 
 <li>conjugation tables via the CPED and analysis bar</li> 
 <li>a Pali language quiz to test your vocabulary and a declension quiz to test your grammar</li> 
@@ -68,7 +69,7 @@
 <ul> 
 <li>You will need at least a basic unicode font to view the Pāḷi characters properly. If the word Pāḷi in this sentence shows up correctly, you are probably okay. Otherwise, you'll have to do a search for "Unicode Font" on the Internet, and probably tell the DPR to use that font in the settings screen (press the "%" button). The default font is "Tahoma", which should display the characters correctly. For alternative scripts, it gets a little bit more difficult, and YMMV. I use <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color: green;">the Padauk font</a> for Burmese and it works well. The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.). There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.</li> 
 <li>You will also need a recent version of <a href="http://www.getfirefox.com/">Mozilla Firefox</a>. I am currently working with Firefox 4, so there may be some problems with Firefox 3 that I am not aware of. Many stylistic elements will not display properly in Firefox 3, for example.</li> 
-<li>Text entry fields accept either unicode Pali characters or characters based on the <a style="color: green;" href="javascript:void(0)" onclick="helpXML('velthuis.xml')">Velthuis</a> scheme. </li> 
+<li>Text entry fields accept either unicode Pali characters or characters based on the <a style="color: green;" href="javascript:void(0)" onclick="openDPRTab('chrome://digitalpalireader/content/velthuis.htm','DPR-help',1);">Velthuis</a> scheme. </li> 
 <li>The reader was created for my own personal use, but anyone is welcome to use or distribute what I have made for their own benefit or the benefit of others. </li> 
 <li>For the latest version of the reader, please visit <a style="color: green;" href="http://pali.sirimangalo.org/">pali.sirimangalo.org</a></li> 
 <li>As of 2.0, the Myanmar Tipitaka is installed as an individual extension, in order to reduce the size of the main archive.  Since the Tipitaka files are less frequently updated, this should improve the upgrade experience.  The Thai Tipitaka is also available as an extra extension, and may be installed via the <span class="pointer green" onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">preferences dialog</span>.  Switching between the sets is accomplished via the main window's toolbar (see below).</li> 
@@ -156,7 +157,7 @@
 </ol>  Clicking on a dhamma wheel causes the link to be copied to the clipboard for further use. The dhamma wheel at the beginning or each paragraph adds the paragraph number to the link. An example permalink is:<br> 
 <br> 
 </a><a class="green" href="chrome://digitalpalireader/content/index.xul?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">chrome://digitalpalireader/content/index.xul?loc=d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave</a><br> 
-<br> An ordinary permalink is made up of up to four parts, depending on the information it contains: first, everything before the question mark is the actual location of the DPR itself; second, the information between the "loc=" and the first ampersand (&amp;) is the location of the section in DPR syntax, in this case the first section of the Digha Nikaya (d), mula (m); third, "para=4" tells the DPR to scroll to the fourth paragraph; fourth, "query=bhagavaa+bhikkhave" tells the DPR to highlight the words "bhagavaa" and "bhikkhave" (note, this must be in velthuis form, since unicode doesn't play nice in the address bar). This link can be shared with other DPR users for easy reference, or even placed on a website or forum, as in the following example: <br> 
+<br> An ordinary permalink is made up of up to four parts, depending on the information it contains: first, everything before the question mark is the actual location of the DPR itself; second, the information between the "loc=" and the first ampersand (&amp;) is the location of the section in DPR syntax, in this case the first section of the Digha Nikaya (d), mula (m); third, "para=4" tells the DPR to scroll to the fourth paragraph; fourth, "query=bhagavaa+bhikkhave" tells the DPR to highlight the words "bhagavaa" and "bhikkhave" (note, this must be in <a style="color: green;" href="javascript:void(0)" onclick="openDPRTab('chrome://digitalpalireader/content/velthuis.htm','DPR-help',1);">Velthuis</a> form, since unicode doesn't play nice in the address bar). This link can be shared with other DPR users for easy reference, or even placed on a website or forum, as in the following example: <br> 
 <br> (<a class="green" href="chrome://digitalpalireader/content/index.xul?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">Link to paribbājakakathā</a>)<br> 
 <br> There are several other types of permalinks that may be used with the DPR: <ol> 
 <li>book indexes have a shorter permalink, of the format:<br> 

@@ -16,7 +16,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	resetvalues();
 	if(searchString) { // update url
 		G_searchType = searchType;
-		G_searchString = toUni(searchString);
+		G_searchString = searchString;
 		G_searchMAT = searchMAT;
 		G_searchSet = searchSet;
 		G_searchBook = ','+searchBook+',';
@@ -45,7 +45,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 					G_searchType = parseInt(option[1]);
 				break;
 				case 'query':
-					G_searchString = toUni(option[1]).replace(/_/g,' ');
+					G_searchString = option[1].replace(/_/g,' ');
 				break;
 				case 'MAT':
 					G_searchMAT = option[1];
@@ -65,7 +65,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 			}
 		}
 	}
-
+	
 	var st = [];
 	var matst = [];
 	for (i in G_searchMAT) matst.push(G_searchMAT[i]);
@@ -79,7 +79,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	// tab title
 
-	var tabT = 'Search: \'' + G_searchString + '\' in ' + st[G_searchType];
+	var tabT = 'Search: \'' + G_searchRX?G_searchString:toUni(G_searchString) + '\' in ' + st[G_searchType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	
@@ -187,7 +187,7 @@ function pausesall()
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
 	
-	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
+	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
@@ -231,7 +231,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td></tr></table>';
+	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td></tr></table>';
 
 	importXMLs(2);
 }
@@ -483,7 +483,7 @@ function createTables(xmlDoc,hiert)
 	}
 	else {
 		stringra[0] = getstring;
-		if(G_searchRX == 'true') getstring = new RegExp(getstring);
+		if(G_searchRX) getstring = new RegExp(getstring);
 	}
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
@@ -558,9 +558,9 @@ function createTables(xmlDoc,hiert)
 								for (d = 0; d < stringra.length; d++)
 								{
 									perstring = stringra[d];
-									if(G_searchRX == 'true') perstring = new RegExp(perstring);
+									if(G_searchRX) perstring = new RegExp(perstring);
 
-									if(G_searchRX == 'true') startmatch = texttomatch.search(perstring);
+									if(G_searchRX) startmatch = texttomatch.search(perstring);
 									else startmatch = texttomatch.indexOf(perstring)
 									postpara = '';
 									tempexword[d] = [];
@@ -571,7 +571,7 @@ function createTables(xmlDoc,hiert)
 
 										while (startmatch >= 0)
 										{				
-											if(G_searchRX == 'true') gotstring = texttomatch.match(perstring)[0];
+											if(G_searchRX) gotstring = texttomatch.match(perstring)[0];
 											else gotstring = perstring;
 
 
@@ -595,7 +595,7 @@ function createTables(xmlDoc,hiert)
 											else postpara += beforem+gotstring;
 											
 											texttomatch = texttomatch.substring(endmatch);
-											if(G_searchRX == 'true') startmatch = texttomatch.search(perstring);
+											if(G_searchRX) startmatch = texttomatch.search(perstring);
 											else startmatch = texttomatch.indexOf(perstring)
 
 										}
@@ -677,7 +677,7 @@ function createTables(xmlDoc,hiert)
 							else // single search term
 							{
 								tempexword = [];
-								if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
+								if(G_searchRX) startmatch = texttomatch.search(getstring);
 								else startmatch = texttomatch.indexOf(getstring)
 								postpara = '';
 								if (startmatch >= 0)
@@ -685,7 +685,7 @@ function createTables(xmlDoc,hiert)
 									while (startmatch >= 0)
 									{				
 										match = 1;
-                                        if(G_searchRX == 'true') gotstring = texttomatch.match(getstring)[0];
+                                        if(G_searchRX) gotstring = texttomatch.match(getstring)[0];
                                         else gotstring = getstring;
 										endmatch = startmatch + gotstring.length;
 										beforem = texttomatch.substring(0,startmatch);
@@ -697,7 +697,7 @@ function createTables(xmlDoc,hiert)
 										postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
 										texttomatch = texttomatch.substring(endmatch);
 										
-										if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
+										if(G_searchRX) startmatch = texttomatch.search(getstring);
 										else startmatch = texttomatch.indexOf(getstring)
 										
 										// get words
@@ -776,6 +776,13 @@ function createTables(xmlDoc,hiert)
 										if(colt == 3) colt = 0;
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 									 }
+									if(hiert == 'm') {
+										var modt = '';
+										var modn;
+										var modno = getSuttaNumber(nikaya,(parseInt(book)-1),sx,sy,sz,s,se,hiert,z.length);	
+										finalout +=	(modno ? ' (<b class="small" style="color:'+DPR_prefs['colsel']+'">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + modno + '</b>)' : '');
+									}
+
 									
 									// paragraph
 									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">➤</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
@@ -989,7 +996,7 @@ function atiSearchOffline(d, getstring) {
 		for (j in data) {
 			if(data[j].id == 'H_content') {
 			var texttomatch = data[j].textContent;
-				if(G_searchRX == 'true') startmatch = texttomatch.search(getstring);
+				if(G_searchRX) startmatch = texttomatch.search(getstring);
 				else startmatch = texttomatch.indexOf(getstring)
 				postpara = '';
 				if (startmatch >= 0)
@@ -998,7 +1005,7 @@ function atiSearchOffline(d, getstring) {
 					while (startmatch >= 0)
 					{				
 						count++;
-						if(G_searchRX == 'true') gotstring = texttomatch.match(getstring)[0];
+						if(G_searchRX) gotstring = texttomatch.match(getstring)[0];
 						else gotstring = getstring;
 						var endmatch = startmatch + gotstring.length;
 

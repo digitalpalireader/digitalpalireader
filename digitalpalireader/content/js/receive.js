@@ -39,7 +39,7 @@ function getLinkPlace() { // permalinks
 			if (/[^-a-zA-Z0-9.]/.exec(place)) return;
 
 			if(option[1] == 'help') {
-				helpXML();
+				openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);
 				return;
 			}
 

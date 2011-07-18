@@ -96,7 +96,7 @@ function sendDPPNXML(link,add) {
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
-            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+link;
+            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+toVel(link);
 			openDPRTab(permalink,'DPR-main');
 		}
 		else {
@@ -106,7 +106,7 @@ function sendDPPNXML(link,add) {
 		}
 	}
 	else {
-        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+link;
+        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+toVel(link);
 		openDPRTab(permalink,'DPRd');
 	}	
 }

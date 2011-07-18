@@ -25,7 +25,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
                 G_dictOpts = option[1].split(',');
                 break;
                 case 'entry':
-                G_dictEntry = option[1];
+                G_dictEntry = option[1].replace(/\%60/g,'`');
                 break;
             }
         }
