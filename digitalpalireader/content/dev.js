@@ -1973,8 +1973,14 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 	DAp = DthaiOut2(thaibook);
 	var out = '';
 	for (i=0; i < DAp.length; i++) {
-		out += '<div id="Dcbl'+i+'"><input type="checkbox" name="Dcbx" onclick="DaddThaiH('+i+',this.checked)" value="'+i+'"><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'"></div>';
 		var t = DAp[i];
+		var cx = '';
+		var ac = '';
+		if(/[\]^0-9] +Sāvatthiyaṁ/.exec(t) || /[\]^0-9] +] +Taññeva nidānaṁ\./.exec(t) || /[\]^0-9] +Sāvatthī\./.exec(t) || /[\]^0-9] +Sāvatthīnidānaṁ/.exec(t) || /[\]^0-9] +Evamme/.exec(t) || /[\]^0-9] +] Ekaṁ samayaṁ/.exec(t)) {
+			cx = 'checked';
+			ac = '<div><input type="checkbox" onclick="DaddThaiH('+i+',this.checked)" name="Dcbx" value="'+i+'"><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'"></div>';
+		}
+		out += '<div id="Dcbl'+i+'"><input type="checkbox" name="Dcbx" onclick="DaddThaiH('+i+',this.checked)" value="'+i+'" '+cx+'><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'">'+ac+'</div>';
 		t = t.replace(/\^e*b\^/g, '');
 		t = t.replace(/\^a\^/g, '<span style="color:red">');
 		t = t.replace(/\^ea\^/g, '</span>');
@@ -1990,7 +1996,21 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 	document.getElementById('Dr').appendChild(theDataDiv2);  // ---------- return output ----------
 	
 	document.getElementById('maf').scrollTop = 0;
+
+	var w = 0;
+	var cbxs = document.getElementsByName('Dcbx');
+	for (j=0;j<cbxs.length;j++) {
+		if(typeof(DAv[w]) == 'undefined') break;
+		if(document.getElementsByName('Dcbx')[j].checked) {
+			document.getElementsByName('Dtxt')[j].value = DAv[w][1];
+			document.getElementsByName('Dhead')[j].innerHTML = DAv[w++][0];
+		}
+		else {
+			document.getElementsByName('Dtxt')[j].value = '';
+		}
+	}
 	moveframex(1);
+
 }
 
 function DthaiOut2(booka) {
@@ -2122,6 +2142,7 @@ function DaddThaiH(i,checked) {
 	var w = 0;
 	var cbxs = document.getElementsByName('Dcbx');
 	for (j=0;j<cbxs.length;j++) {
+		if(typeof(DAv[w]) == 'undefined') break;
 		if(document.getElementsByName('Dcbx')[j].checked) {
 			document.getElementsByName('Dtxt')[j].value = DAv[w][1];
 			document.getElementsByName('Dhead')[j].innerHTML = DAv[w++][0];

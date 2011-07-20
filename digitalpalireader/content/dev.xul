@@ -49,7 +49,7 @@
 	<hbox>
 		<vbox flex="1">
 			<spacer flex="1"/>
-			<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode" value="htm.DMakeAttArray(1);//htm.DXMLThai('v',3,'m',[[3,0,null]]);"/>
+			<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode" value="htm.DXMLThai('v',3,'m',[[3,0,null]]);"/>
 		</vbox>
 			<vbox>
 				<hbox pack="center"><label class="large bold" value="&sSet.label;" /></hbox>

@@ -479,11 +479,12 @@ function createTables(xmlDoc,hiert)
 
 	var yesplus = getstring.indexOf('+'); // look for multi matches
 	if (yesplus >= 0) {
-		stringra = getstring.split('+');
+		stringra = toUni(getstring).split('+');
 	}
 	else {
 		stringra[0] = getstring;
 		if(G_searchRX) getstring = new RegExp(getstring);
+		else getstring = toUni(getstring);
 	}
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
