@@ -25,6 +25,7 @@
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
 <!ENTITY searchRx.label "Rx">
+<!ENTITY selAll.text "Select All/None">
 
 	<!-- dict -->
 

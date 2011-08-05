@@ -893,18 +893,16 @@ function showonly(string) {
 		for (x = 0; x < da.length; x++) {
 			da[x].style.display = "block";
 		}
+		document.getElementById('showing').style.display = 'none';
+		scrollToId('search',0);
 	}
 	else {	
 		for (x = 0; x < da.length; x++) {
 			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
-	}
-	if (string == 'xyz') { document.getElementById('showing').innerHTML = '';
-		scrollToId('search',0);
-	}
-	else { 
-		document.getElementById('showing').innerHTML = '<b style="background-color:'+DPR_prefs['colbkcp']+'; color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;<a href="javascript:void(0)" onclick="showonly(\'xyz\');">x</a></b>'; 
+		document.getElementById('showing').innerHTML = '<b style="color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;</b><b>x</b>'; 
+		document.getElementById('showing').style.display = 'block';
 		scrollToId('search','sbfb');
 	}
 }

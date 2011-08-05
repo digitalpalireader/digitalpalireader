@@ -345,6 +345,11 @@ right:0px;
 border:grey 1px solid;
 }
 
+#showing {
+	padding:4px;
+	margin-right:16px;
+}
+
 #sbfbc {
 padding-right:10px; 
 padding-left:10px; 

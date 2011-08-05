@@ -214,35 +214,60 @@
 								</radiogroup>
 							</groupbox>
 							<groupbox id="tsoSetContainer" flex="1" align="start">
-								<vbox orient="vertical" collapsed="true" align="start" id="tsoCO1">
-									<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
-								</vbox>
-								<vbox orient="vertical" align="start" id="tsoCO2" class="">
-									<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
-									<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
-									<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
-									<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
-									<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
-								</vbox>
-								<vbox orient="vertical" align="start" id="tsoCO3" class="">
-									<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
-									<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
-									<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
-									<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
-								</vbox>
-							</groupbox>
-							<groupbox collapsed="true" id="tsoBO" flex="1" align="start">
-								<hbox pack="center">
-									<vbox align="start" id="tsoBOA">
+								<hbox>
+									<vbox align="center" pack="center">
+										<toolbarbutton id="selAllS" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoSetContainer');" role="button">
+											<label value="*" />
+										</toolbarbutton>
 									</vbox>
-									<vbox align="start" id="tsoBOB">
+									<vbox>
+										<vbox orient="vertical" align="start" id="tsoCO1">
+											<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
+										</vbox>
+										<vbox orient="vertical" align="start" id="tsoCO2" class="">
+											<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
+											<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
+											<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
+											<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
+											<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
+										</vbox>
+										<vbox orient="vertical" align="start" id="tsoCO3" class="">
+											<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
+											<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
+											<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
+											<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+										</vbox>
 									</vbox>
 								</hbox>
 							</groupbox>
+							<groupbox collapsed="true" id="tsoBO" flex="1" align="start">
+								<hbox>
+									<vbox align="center" pack="center">
+										<toolbarbutton id="selAllB" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoBO');" role="button">
+											<label value="*" />
+										</toolbarbutton>
+									</vbox>
+									<hbox pack="center">
+										<vbox align="start" id="tsoBOA">
+										</vbox>
+										<vbox align="start" id="tsoBOB">
+										</vbox>
+									</hbox>
+								</hbox>
+							</groupbox>
 							<groupbox id="tsoMAT" flex="1" align="start">
-								<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true" />
-								<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" />
-								<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" />
+								<hbox>
+									<vbox align="center" pack="center">
+										<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoMAT');" role="button">
+											<label value="*" />
+										</toolbarbutton>
+									</vbox>
+									<vbox>
+										<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true" />
+										<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" />
+										<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" />
+									</vbox>
+								</hbox>
 							</groupbox>
 						</vbox>
 					</vbox>
@@ -282,32 +307,59 @@
 									<label value="no advanced options available"/>
 								</vbox>
 								<groupbox collapsed="true" flex="1" align="start" id="dictAdvOpts1" >
-									<vbox id="soRX" collapsed="true">
-										<checkbox class="tiny" id="soregexp" label="Reg. Exp." tooltiptext="Use Regular Expressions for wildcards in search"/>
-									</vbox>
-									<vbox id="soFZ" collapsed="true">
-										<checkbox class="tiny" id="sofuzzy" label="Fuzzy" tooltiptext="Enable fuzzy search (removes diacritics)"/>
-									</vbox>
-									<vbox id="soFT" collapsed="true">
-										<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
-									</vbox>
-									<vbox id="soSW" class="bottomb" collapsed="true">
-										<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
-									</vbox>
+									<hbox>
+										<vbox align="center" pack="center">
+											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts1');" role="button">
+												<label value="*" />
+											</toolbarbutton>
+										</vbox>
+										<vbox>
+											<vbox id="soRX" collapsed="true">
+												<checkbox class="tiny" id="soregexp" label="Reg. Exp." tooltiptext="Use Regular Expressions for wildcards in search"/>
+											</vbox>
+											<vbox id="soFZ" collapsed="true">
+												<checkbox class="tiny" id="sofuzzy" label="Fuzzy" tooltiptext="Enable fuzzy search (removes diacritics)"/>
+											</vbox>
+											<vbox id="soFT" collapsed="true">
+												<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
+											</vbox>
+											<vbox id="soSW" class="bottomb" collapsed="true">
+												<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
+											</vbox>
+										</vbox>
+									</hbox>
 								</groupbox>
 								<groupbox collapsed="true" flex="1" align="start" id="dictAdvOpts2" >
-									<checkbox class="tiny" id="soMATm" label="Mula" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soMATa" label="Aṭṭhakathā" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soMATt" label="Ṭīka" tooltiptext="Include in search" checked="true"/>
+									<hbox>
+										<vbox align="center" pack="center">
+											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts2');" role="button">
+												<label value="*" />
+											</toolbarbutton>
+										</vbox>
+										<vbox>
+											<checkbox class="tiny" id="soMATm" label="Mula" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soMATa" label="Aṭṭhakathā" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soMATt" label="Ṭīka" tooltiptext="Include in search" checked="true"/>
+										</vbox>
+									</hbox>
 								</groupbox>
 								<groupbox collapsed="true" flex="1" align="start" id="dictAdvOpts3" >
-									<checkbox class="tiny" id="soNSv" label="Vin" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSd" label="DN" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSa" label="AN" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSm" label="MN" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSk" label="KN" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSs" label="SN" tooltiptext="Include in search" checked="true"/>
-									<checkbox class="tiny" id="soNSy" label="Abhi" tooltiptext="Include in search" checked="true"/>
+									<hbox>
+										<vbox align="center" pack="center">
+											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts3');" role="button">
+												<label value="*" />
+											</toolbarbutton>
+										</vbox>
+										<vbox>
+											<checkbox class="tiny" id="soNSv" label="Vin" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSd" label="DN" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSa" label="AN" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSm" label="MN" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSk" label="KN" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSs" label="SN" tooltiptext="Include in search" checked="true"/>
+											<checkbox class="tiny" id="soNSy" label="Abhi" tooltiptext="Include in search" checked="true"/>
+										</vbox>
+									</hbox>
 								</groupbox>
 							</vbox>
 						</vbox>

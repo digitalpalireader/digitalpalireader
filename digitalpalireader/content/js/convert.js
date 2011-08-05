@@ -129,10 +129,7 @@ function sendtoPad(data)
 	data = data.replace(/’ ’/g, '’');
 	data = data.replace(/\u00B7/g, '\'');
 	data = data.replace(/\u00B4/g, '\"');
-	data = data.replace(/ M /g, ' ');
-	data = data.replace(/ V /g, ' ');
-	data = data.replace(/ P /g, ' ');
-	data = data.replace(/ T /g, ' ');
+	data = data.replace(/[MVPT][ ,]/g, ' ');
 	data = data.replace(/☸ */g, '');
 	data = data.replace(/VAR/g, ' ');
 	data = data.replace(/  *,/g, ',')

@@ -22,7 +22,8 @@ function quizme() {
 		if(srights) {
 			if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
 			else rights = srights;
-			document.getElementById('Qrights').innerHTML = rights.length;
+			if(srights.join('') == '') document.getElementById('Qrights').innerHTML = 0;
+			else document.getElementById('Qrights').innerHTML = rights.length;
 		}
 	}
     
@@ -86,7 +87,8 @@ function answerquiz(right,answer,numb) {
 		// add right to list of rights
 		if(fileExists('DPTEST')) {
 			var rightfile = readFile('DPTEST');
-            rightfile.push(numb);
+			if(rightfile.join('') == '') rightfile = [numb];
+            else rightfile.push(numb);
             var outfile = rightfile.join('\n');
             if(/,/.exec(outfile)) outfile = outfile.split(',').join('\n');
             writeFile('DPTEST', outfile , "UTF-8");

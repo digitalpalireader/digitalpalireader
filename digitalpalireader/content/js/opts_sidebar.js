@@ -53,6 +53,23 @@ var DPROpts = {
 		}
 
 	},
+
+	selAll:function(id) {
+		var box = document.getElementById(id);
+		var sels = box.getElementsByTagName('checkbox');
+		
+		var cnt = 0;
+		
+		// check if all selected
+		for(x=0; x < sels.length; x++) {
+			if(sels[x].getAttribute('checked') == 'true') cnt++;
+		}
+
+		// if all selected, deselect, otherwise, select
+		for(x=0; x < sels.length; x++) {
+			sels[x].setAttribute('checked',(cnt != sels.length));
+		}
+	},
 	
 	dictAdvToggle:function() {
 		var ao = document.getElementById('dictAdvOpts');
