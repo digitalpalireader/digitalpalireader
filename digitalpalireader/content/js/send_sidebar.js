@@ -224,6 +224,12 @@ var DPRSend = {
 				if(document.getElementById('tsoCO'+i).checked) set += i;
 			}
 		}
+		else if(which == 5) {
+			var set = ''
+			for (i in 'dmsak') {
+				if(document.getElementById('tsoCO'+'dmsak'[i]).checked) set += 'dmsak'[i];
+			}
+		}
 		else var set = document.getElementById('tsoSETm').value;
 		
 		if(which == 1) { // get books
