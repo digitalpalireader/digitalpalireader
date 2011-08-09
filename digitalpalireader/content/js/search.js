@@ -951,6 +951,7 @@ function atiSearchStart() {
 	outNode.setAttribute('width','100%');
 	outNode.setAttribute('height',document.getElementById('sbfbc').offsetHeight);
 	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
+	document.getElementById('sbfb').innerHTML = '';
 	document.getElementById('sbfb').appendChild(outNode);
 }
 
