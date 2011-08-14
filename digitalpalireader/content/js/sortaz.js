@@ -129,11 +129,16 @@ function sortaz(mydata){  // sort pali array
 	return mydata;
 }
 
+function sortStrip(word) {
+	word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ]/g,'');
+	return word;
+}
+
 function comparePaliAlphabet(a,b) {
 	
 	if (a.length == 0 || b.length == 0) return;
 
-	var two = [toUni(a),toUni(b)];
+	var two = [sortStrip(a),sortStrip(b)];
 	var nwo = [];
 	for(i = 0; i < two.length; i++) {
 		var wordval = '';
