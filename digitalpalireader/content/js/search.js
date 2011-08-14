@@ -987,7 +987,13 @@ function atiSearchOffline(d, getstring) {
 	
 	eval('var anik = ati'+nik.toUpperCase()+';');
 	for (var c = 0; c < anik.length; c++) {
-		var atiFile = (DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/tipitaka/');
+		var atiloc = DPR_prefs['catiloc'];
+		if(/\\/.exec(atiloc)) { // windows
+			var atiFile = atiloc + '\\html\\tipitaka\\';
+		}
+		else { // the rest of us
+			 var atiFile = atiloc + '/html/tipitaka/';
+		 }
 		var cont = readExtFile(atiFile+anik[c]).join('\n');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
