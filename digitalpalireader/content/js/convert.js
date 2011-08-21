@@ -129,8 +129,8 @@ function sendtoPad(data)
 	data = data.replace(/’ ’/g, '’');
 	data = data.replace(/\u00B7/g, '\'');
 	data = data.replace(/\u00B4/g, '\"');
-	data = data.replace(/[MVPT]([ ,.])/g, "$1");
-	data = data.replace(/[MVPT]$/g, "");
+	data = data.replace(/ *[MVPT]([ ,.])/g, "$1");
+	data = data.replace(/ *[MVPT]$/g, "");
 	data = data.replace(/☸ */g, '');
 	data = data.replace(/VAR/g, ' ');
 	data = data.replace(/  *,/g, ',')
