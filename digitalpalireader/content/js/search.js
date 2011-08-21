@@ -936,7 +936,7 @@ function atiSearchStart() {
 		newScript.src = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
 		headID.appendChild(newScript);
 
-		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
 		document.getElementById('stfc').innerHTML = '';
 		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
 		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
@@ -1070,6 +1070,16 @@ function atiSearchOffline(d, getstring) {
 	var outNode = document.createElement('div');
 	outNode.innerHTML = (count > 0 ? finalout : '<i>no match</i>');
 	document.getElementById('atiT'+nik).appendChild(outNode);
+
+	if(stopsearch == 1) {
+		scrollToId('search',0);
+		var endtime = new Date;
+		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;stopped in ' + totaltime + 's</b></i></span>';
+		document.getElementById('stfc').innerHTML = outtime;
+		return;
+	}
+
 
 	if(++d == nikA.length) {
 		scrollToId('search',0);
