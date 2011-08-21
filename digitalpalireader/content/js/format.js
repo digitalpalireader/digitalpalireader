@@ -68,6 +68,7 @@ function formatuniout(data,which) { // prepare without links
 	var finout = '';
 	var outarray = new Array();
 	
+	data = data.replace(/ -- /g, ' — ');
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');

@@ -491,6 +491,10 @@ function createTables(xmlDoc,hiert)
 	
 	var part;
 	if(G_searchPart != '1') part = G_searchPart.split('.');
+
+	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
+		G_searchString = G_searchString.toUpperCase();
+	}
 	
 	for (var sx = 0; sx < u.length; sx++) // per h0
 	{
@@ -678,6 +682,7 @@ function createTables(xmlDoc,hiert)
 							else // single search term
 							{
 								tempexword = [];
+
 								if(G_searchRX) startmatch = texttomatch.search(getstring);
 								else startmatch = texttomatch.indexOf(getstring)
 								postpara = '';
@@ -690,7 +695,7 @@ function createTables(xmlDoc,hiert)
                                         else gotstring = getstring;
 										endmatch = startmatch + gotstring.length;
 										beforem = texttomatch.substring(0,startmatch);
-										if (/[0-9]/.exec(G_searchString)) {  // page search
+										if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
                                             beforem = beforem.substring(0,beforem.length - 3);
                                             endmatch += 4;
                                         }
@@ -993,7 +998,7 @@ function atiSearchOffline(d, getstring) {
 		}
 		else { // the rest of us
 			 var atiFile = atiloc + '/html/tipitaka/';
-		 }
+		}
 		var cont = readExtFile(atiFile+anik[c]).join('\n');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
