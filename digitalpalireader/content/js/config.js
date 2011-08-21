@@ -92,7 +92,7 @@ function checkbackground() {
 
 function addATIJS() {
 	if (DPR_prefs['catioff']) { 
-		var nsrc = 'file://'+ DPR_prefs['catiloc'] + '/html/_dpr/digital_pali_reader_suttas.js';
+		var nsrc = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
 	}
 	else { var nsrc = 'http://www.accesstoinsight.org/_dpr/digital_pali_reader_suttas.php'; }
 	atiIns = 1;

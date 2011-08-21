@@ -1012,7 +1012,7 @@ function atiSearchOffline(d, getstring) {
 				postpara = '';
 				if (startmatch >= 0)
 				{
-					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_prefs['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">➤</a><br/>'; 
+					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">➤</a><br/>'; 
 					while (startmatch >= 0)
 					{				
 						count++;
@@ -1039,7 +1039,7 @@ function atiSearchOffline(d, getstring) {
 					}
 
 					postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_prefs['catiloc']+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
+					finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
 				}
 			}
 		}
