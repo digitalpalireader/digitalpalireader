@@ -244,10 +244,10 @@ function pausethree() {
 
 	var nikbook = nikaya+book;
 	var getstring = G_searchString;
-
+	alert(G_nikToNumber[G_searchSet]);
 	if(which == 2) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
-			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[nikbook][x] == 1) { // this hier is checked and the file exists in this hier
 				G_searchFileArray.push(nikbook+G_hLetters[x]);
 			}
 		}

@@ -16,6 +16,7 @@
 <!ENTITY att_text "Switch to Aṭṭhakathā">
 <!ENTITY tik_text "Switch to Ṭīkā">
 <!ENTITY go_text "Load current section">
+<!ENTITY go_bookmark "Open bookmarks and history window">
 
 	<!-- search -->
 
