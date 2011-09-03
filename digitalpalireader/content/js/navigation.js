@@ -165,46 +165,46 @@ abhivala['12'] = 6;
 abhivala['13'] = 6;
 abhivala['14'] = 6;
 
-var knames = [];
+var G_kynames = [];
+G_kynames['k'] = [];
+G_kynames['y'] = [];
 
-knames.push('Khp');
-knames.push('Dhp');
-knames.push('Ud');
-knames.push('It');
-knames.push('Sn');
-knames.push('Vv');
-knames.push('Pv');
-knames.push('Th');
-knames.push('Thī');
-knames.push('Ap.1');
-knames.push('Ap.2');
-knames.push('Bv');
-knames.push('Cp');
-knames.push('Ja 1');
-knames.push('Ja 2');
-knames.push('Nidd I');
-knames.push('Nidd II');
-knames.push('Paṭis');
-knames.push('Mil');
-knames.push('Nett');
-knames.push('Peṭ');
+G_kynames['k'].push('Khp');
+G_kynames['k'].push('Dhp');
+G_kynames['k'].push('Ud');
+G_kynames['k'].push('It');
+G_kynames['k'].push('Sn');
+G_kynames['k'].push('Vv');
+G_kynames['k'].push('Pv');
+G_kynames['k'].push('Th');
+G_kynames['k'].push('Thī');
+G_kynames['k'].push('Ap.1');
+G_kynames['k'].push('Ap.2');
+G_kynames['k'].push('Bv');
+G_kynames['k'].push('Cp');
+G_kynames['k'].push('Ja 1');
+G_kynames['k'].push('Ja 2');
+G_kynames['k'].push('Nidd I');
+G_kynames['k'].push('Nidd II');
+G_kynames['k'].push('Paṭis');
+G_kynames['k'].push('Mil');
+G_kynames['k'].push('Nett');
+G_kynames['k'].push('Peṭ');
 
-var ynames = []; // abhi names
-
-ynames.push('Dhs');
-ynames.push('Vibh');
-ynames.push('Dhātuk');
-ynames.push('Pp');
-ynames.push('Kv');
-ynames.push('Yam');
-ynames.push('Yam 2');
-ynames.push('Yam 3');
-ynames.push('Paṭṭh');
-ynames.push('Paṭṭh 2');
-ynames.push('Paṭṭh 3');
-ynames.push('Paṭṭh 4');
-ynames.push('Paṭṭh 5');
-ynames.push('Paṭṭh 6');
+G_kynames['y'].push('Dhs');
+G_kynames['y'].push('Vibh');
+G_kynames['y'].push('Dhātuk');
+G_kynames['y'].push('Pp');
+G_kynames['y'].push('Kv');
+G_kynames['y'].push('Yam');
+G_kynames['y'].push('Yam 2');
+G_kynames['y'].push('Yam 3');
+G_kynames['y'].push('Paṭṭh');
+G_kynames['y'].push('Paṭṭh 2');
+G_kynames['y'].push('Paṭṭh 3');
+G_kynames['y'].push('Paṭṭh 4');
+G_kynames['y'].push('Paṭṭh 5');
+G_kynames['y'].push('Paṭṭh 6');
 
 var nikvoladi = new Array();
 nikvoladi['d'] = [1,2,3];
@@ -228,7 +228,7 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be
 
 
 	if (nik == 'k' || nik == 'y') {
-		eval('no = '+nik+'names[\''+no+'\'];');
+		no = G_kynames[nik][no];
 		if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
 	}
 	else no++;

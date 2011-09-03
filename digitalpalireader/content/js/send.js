@@ -182,10 +182,10 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		if (document.getElementById(G_lastcolour))
 		{
 			document.getElementById(G_lastcolour).style.color = DPR_prefs['coltext'];
-			document.getElementById(G_lastcolour).style.fontWeight = 'normal';
+			document.getElementById(G_lastcolour).style.textDecoration = 'none';
 		}
 		document.getElementById(divclicked).style.color = DPR_prefs['colsel'];
-		document.getElementById(divclicked).style.fontWeight = 'bold';
+		document.getElementById(divclicked).style.textDecoration = 'underline';
 		G_lastcolour = divclicked;
 	}
 	if(add != true) { // reuse old tab

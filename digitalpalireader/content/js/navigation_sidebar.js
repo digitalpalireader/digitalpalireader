@@ -168,46 +168,46 @@ abhivala['12'] = 6;
 abhivala['13'] = 6;
 abhivala['14'] = 6;
 
-var knames = [];
+var G_kynames = [];
+G_kynames['k'] = [];
+G_kynames['y'] = [];
 
-knames.push('Khp');
-knames.push('Dhp');
-knames.push('Ud');
-knames.push('It');
-knames.push('Sn');
-knames.push('Vv');
-knames.push('Pv');
-knames.push('Th');
-knames.push('Thī');
-knames.push('Ap.1');
-knames.push('Ap.2');
-knames.push('Bv');
-knames.push('Cp');
-knames.push('Ja 1');
-knames.push('Ja 2');
-knames.push('Nidd I');
-knames.push('Nidd II');
-knames.push('Paṭis');
-knames.push('Mil');
-knames.push('Nett');
-knames.push('Peṭ');
+G_kynames['k'].push('Khp');
+G_kynames['k'].push('Dhp');
+G_kynames['k'].push('Ud');
+G_kynames['k'].push('It');
+G_kynames['k'].push('Sn');
+G_kynames['k'].push('Vv');
+G_kynames['k'].push('Pv');
+G_kynames['k'].push('Th');
+G_kynames['k'].push('Thī');
+G_kynames['k'].push('Ap.1');
+G_kynames['k'].push('Ap.2');
+G_kynames['k'].push('Bv');
+G_kynames['k'].push('Cp');
+G_kynames['k'].push('Ja 1');
+G_kynames['k'].push('Ja 2');
+G_kynames['k'].push('Nidd I');
+G_kynames['k'].push('Nidd II');
+G_kynames['k'].push('Paṭis');
+G_kynames['k'].push('Mil');
+G_kynames['k'].push('Nett');
+G_kynames['k'].push('Peṭ');
 
-var ynames = []; // abhi names
-
-ynames.push('Dhs');
-ynames.push('Vibh');
-ynames.push('Dhātuk');
-ynames.push('Pp');
-ynames.push('Kv');
-ynames.push('Yam');
-ynames.push('Yam 2');
-ynames.push('Yam 3');
-ynames.push('Paṭṭh');
-ynames.push('Paṭṭh 2');
-ynames.push('Paṭṭh 3');
-ynames.push('Paṭṭh 4');
-ynames.push('Paṭṭh 5');
-ynames.push('Paṭṭh 6');
+G_kynames['y'].push('Dhs');
+G_kynames['y'].push('Vibh');
+G_kynames['y'].push('Dhātuk');
+G_kynames['y'].push('Pp');
+G_kynames['y'].push('Kv');
+G_kynames['y'].push('Yam');
+G_kynames['y'].push('Yam 2');
+G_kynames['y'].push('Yam 3');
+G_kynames['y'].push('Paṭṭh');
+G_kynames['y'].push('Paṭṭh 2');
+G_kynames['y'].push('Paṭṭh 3');
+G_kynames['y'].push('Paṭṭh 4');
+G_kynames['y'].push('Paṭṭh 5');
+G_kynames['y'].push('Paṭṭh 6');
 
 var nikvoladi = new Array();
 nikvoladi['d'] = [1,2,3];
@@ -228,7 +228,7 @@ nikvoladi['ga'] = [];
 nikvoladi['gt'] = [];
 
 var DPRNav = {
-	changeSet:function(noget){
+	changeSet:function(noget,book){
 		var nik = document.getElementById('set').value;
 		if (G_hier == 't' && this.limitt(document.getElementById('set').selectedIndex)) { 
 			alert('Ṭīkā not available for '+G_nikLongName[document.getElementById('set').value]+'.');
@@ -247,7 +247,7 @@ var DPRNav = {
 		}
 		oldnikaya = document.getElementById('set').selectedIndex;
 		
-		this.setBookList(nik);
+		this.setBookList(nik,book);
 		DPRXML.updateHierarchy(0);
 	},
 
@@ -256,30 +256,33 @@ var DPRNav = {
 
 
 		if (nik == 'k' || nik == 'y') {
-			eval('no = '+nik+'names[\''+no+'\'];');
+			no = G_kynames[nik][no];
 			if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
 		}
 		else no++;
 		return no.toString();
 	},
 
-	setBookList:function(nik) {
+	setBookList:function(nik,book) {
 		var checkNikaya = '<table><tr><td valign="top">';
 		
 		if (nikvoladi[nik]) var titles = nikvoladi[nik];
 		else var titles = nikvoladi[nik+G_hier];
-		
 		var bookNode = document.getElementById('book');
 		while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
-
 		for (i = 0; i < titles.length; i++) {
-			
-			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
-			
+			if(nik == 'k' || nik == 'y') {
+				var title = G_kynames[nik][titles[i]];
+				var val = titles[i]+1;
+			}
+			else {
+				var title = titles[i];
+				var val = i+1;
+			}
+			bookNode.appendItem(title);
+			bookNode.getItemAtIndex(i).value = val;
 		}
-
-		bookNode.selectedIndex = 0;
-		
+		bookNode.selectedIndex = book?book:0;
 	},
 
 	 limitt:function(nikn) {
@@ -304,7 +307,7 @@ var DPRNav = {
 
 			// menu			
 
-			bookNode.appendItem(((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			bookNode.appendItem(((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			bookNode.selectedIndex = 0;		
 
 			// check boxes
@@ -312,7 +315,7 @@ var DPRNav = {
 			var newCheck = document.createElement('checkbox');
 			newCheck.setAttribute('checked',true);
 			newCheck.setAttribute('class','tiny');
-			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? eval(nik+'names['+titles[i]+']') : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
 			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			if(i == Math.ceil(titles.length/2)) {
 				bookNode2 = document.getElementById('tsoBOB');
@@ -350,40 +353,30 @@ var DPRNav = {
 
 		G_hier = htmp;
 
-		// style
-		
-		var himg = ['t','c','b'];
-		
-		ha = G_hLetters;
 
 		if (document.getElementById('set').value == 'k') {
 			var book = document.getElementById('book').value;
 			if (htmp == 'm') {
 				book = parseInt(book) - 1;
-				this.changeSet(1);
-				document.getElementById('book').selectedIndex = book;
+				this.changeSet(1,book);
 			}
 			else {
 				book = kudvala[book];
-				this.changeSet(1);
-				document.getElementById('book').selectedIndex = book;
+				this.changeSet(1,book);
 			}
 		}
 		else if (document.getElementById('set').value == 'y') {
 			var book = document.getElementById('book').value;
 			if (htmp == 'm') {
 				book = parseInt(book) - 1;
-				this.changeSet(1);
-				document.getElementById('book').selectedIndex = book;
+				this.changeSet(1,book);
 			}
 			else {
 				book = abhivala[book];
-				this.changeSet(1);
-				document.getElementById('book').selectedIndex = book;
+				this.changeSet(1,book);
 			}
 		}
-		DPRXML.updateHierarchy(0);
-		return true;
+		else DPRXML.updateHierarchy(0);
 	},
 
 	historyBox:function() {

@@ -45,7 +45,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 					G_searchType = parseInt(option[1]);
 				break;
 				case 'query':
-					G_searchString = option[1].replace(/_/g,' ');
+					G_searchString = decodeURIComponent(option[1]).replace(/_/g,' ');
 				break;
 				case 'MAT':
 					G_searchMAT = option[1];
@@ -79,9 +79,13 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	// tab title
 
-	var tabT = 'Search: \'' + G_searchRX?G_searchString:toUni(G_searchString) + '\' in ' + st[G_searchType];
+	var tabT = 'Search: \'' + G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString) + '\' in ' + st[G_searchType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
+
+	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
+		G_searchString = G_searchString.toUpperCase();
+	}
 	
 	
 	// start timer
@@ -187,7 +191,7 @@ function pausesall()
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
 	
-	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
+	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
@@ -244,7 +248,6 @@ function pausethree() {
 
 	var nikbook = nikaya+book;
 	var getstring = G_searchString;
-	alert(G_nikToNumber[G_searchSet]);
 	if(which == 2) { // single book, multiple hier
 		for (x = 0; x < 3; x++) {
 			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[nikbook][x] == 1) { // this hier is checked and the file exists in this hier
@@ -479,11 +482,11 @@ function createTables(xmlDoc,hiert)
 
 	var yesplus = getstring.indexOf('+'); // look for multi matches
 	if (yesplus >= 0) {
-		stringra = toUni(getstring).split('+');
+		stringra = (G_searchRX?toUniRegEx(getstring):toUni(getstring)).split('+');
 	}
 	else {
 		stringra[0] = getstring;
-		if(G_searchRX) getstring = new RegExp(getstring);
+		if(G_searchRX) getstring = new RegExp(toUniRegEx(getstring));
 		else getstring = toUni(getstring);
 	}
 	var sraout = stringra.join('#');
@@ -491,10 +494,6 @@ function createTables(xmlDoc,hiert)
 	
 	var part;
 	if(G_searchPart != '1') part = G_searchPart.split('.');
-
-	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
-		G_searchString = G_searchString.toUpperCase();
-	}
 	
 	for (var sx = 0; sx < u.length; sx++) // per h0
 	{
@@ -681,6 +680,7 @@ function createTables(xmlDoc,hiert)
 							}
 							else // single search term
 							{
+								
 								tempexword = [];
 
 								if(G_searchRX) startmatch = texttomatch.search(getstring);
@@ -695,7 +695,7 @@ function createTables(xmlDoc,hiert)
                                         else gotstring = getstring;
 										endmatch = startmatch + gotstring.length;
 										beforem = texttomatch.substring(0,startmatch);
-										if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
+										if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(getstring)) {  // page search
                                             beforem = beforem.substring(0,beforem.length - 3);
                                             endmatch += 4;
                                         }

@@ -427,7 +427,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						else {var sno = c;}
 						var auth = atiS[a].split('.')[2];
 						if (autha[auth]) {auth = autha[auth];}
-						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+ (book+1) +'.'+bb+' by '+auth));
+						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+ (vagga+1) +'.'+bb+' by '+auth));
 						cnt++;
 						continue out;
 					}
