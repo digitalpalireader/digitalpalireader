@@ -17,6 +17,12 @@ function toVel(input) {
 	return input;
 }
 
+function toVelRegEx(input) {
+	if(!input || input == '') return input;
+	input = input.replace(/\u0101/g, 'aa').replace(/\u012B/g, 'ii').replace(/\u016B/g, 'uu').replace(/\u1E6D/g, '\\.t').replace(/\u1E0D/g, '\\.d').replace(/\u1E45/g, '"n').replace(/\u1E47/g, '\\.n').replace(/\u1E43/g, '\\.m').replace(/\u1E41/g, '\\.m').replace(/\u00F1/g, '~n').replace(/\u1E37/g, '\\.l').replace(/\u0100/g, 'AA').replace(/\u012A/g, 'II').replace(/\u016A/g, 'UU').replace(/\u1E6C/g, '\\.T').replace(/\u1E0C/g, '\\.D').replace(/\u1E44/g, '"N').replace(/\u1E46/g, '\\.N').replace(/\u1E42/g, '\\.M').replace(/\u00D1/g, '~N').replace(/\u1E36/g, '\\.L');
+	return input;
+}
+
 function toFuzzy(input){
 	if(!input) return;
 	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u");
