@@ -87,7 +87,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 				if(hi[ht] == hier) continue;
 				if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relouta.push('<span class="abut obut small" onclick="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,(event.ctrlKey||event.button==1?1:null));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+					relouta.push('<span class="abut obut small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 					matButton = 0;
 
 				}
@@ -160,7 +160,7 @@ function loadXMLSection(query,para,place,isPL,scroll)
 		break;
 	}
 	
-	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onclick="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+']);">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onclick="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+']);">»</span>':'<span class="rbut abut small">&nbsp;</span>');
+	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event));">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event));">»</span>':'<span class="rbut abut small">&nbsp;</span>');
 
 	var hierb = hier;
 	
