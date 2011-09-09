@@ -25,7 +25,7 @@ var DPROpts = {
 			case 1:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
 				document.getElementById('tsoSET').removeAttribute('collapsed');
-				document.getElementById('tsoMAT').removeAttribute('collapsed');
+				document.getElementById('tsoMAT2').removeAttribute('collapsed');
 				document.getElementById('tsoBO').removeAttribute('collapsed');
 			break;
 			case 2:

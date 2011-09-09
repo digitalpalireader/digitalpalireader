@@ -234,8 +234,15 @@ var DPRSend = {
 		
 		if(which == 1) { // get books
 			var book = [];
-			for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
-				if(document.getElementById('tsoBObook' + i).checked) book.push(i);
+			if(nikvoladi[document.getElementById('tsoSETm').value]) {
+				for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
+					if(document.getElementById('tsoBObook' + i).checked) book.push(i);
+				}
+			}
+			else {
+				for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value+document.getElementById('tsoMAT2m').value].length; i++) {
+					if(document.getElementById('tsoBObook' + i).checked) book.push(document.getElementById('tsoBObook' + i).getAttribute('value'));
+				}				
 			}
 			book = book.join(',');
 		}

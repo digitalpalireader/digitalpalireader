@@ -116,9 +116,9 @@
 				</vbox>
 			</tabpanel>
 			
-			<tabpanel class="chromeback" id="searchTab" flex="1">
+			<tabpanel class="chromeback" id="searchTab">
 
-				<form orient="vertical" flex="1" id="sForm">
+				<form orient="vertical" id="sForm" flex="1">
 					<hbox pack="center"><label class="large bold" value="&searchHead;"/></hbox>
 					<hbox flex="1" pack="stretch" align="center">
 						<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
@@ -139,137 +139,135 @@
 						</menulist>
 						<checkbox tooltiptext="Use Regular Expressions for wildcards in search" class="tiny" label="&searchRx.label;" id="tsoRx"/>
 					</hbox>
-					<vbox flex="1" align="start" id="tsoContainer">
-						<vbox align="stretch">
-							<hbox>
-								<box collapsed="true" id="tsoSET" flex="1" orient="horizontal" pack="start">
-									<menulist flex="1" class="sel" tooltiptext="Choose which set to search" id="tsoSETm" oncommand="DPRNav.setSearchBookList()">
-										<menupopup>
-											<menuitem value="v" selected="true" label="Vinaya"/>
-											<menuitem value="d" label="Dīgha"/>
-											<menuitem value="m" label="Majjhima"/>
-											<menuitem value="s" label="Saṃyutta"/>
-											<menuitem value="a" label="Aṅguttara"/>
-											<menuitem value="k" label="Khuddaka"/>
-											<menuitem value="y" label="Abhidhamma"/>
-											<menuitem value="x" label="Vism"/>
-											<menuitem value="b" label="Abhidh-s"/>
-											<menuitem value="g" label="Byākaraṇa"/>
-										</menupopup>
-									</menulist>
-								</box>
-								<box collapsed="true" id="tsoMAT2" flex="1" align="start" oncommand="DPRXML.updateSearchHierarchy(0)">
-									<menulist flex="1" class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m">
-										<menupopup>
-											<menuitem value="m" selected="true" label="Mūla"/>
-											<menuitem value="a" label="Aṭṭhakathā"/>
-											<menuitem value="t" label="Ṭīka"/>
-										</menupopup>
-									</menulist>
-								</box>
-							</hbox>
-							<groupbox collapsed="true" id="tsoBOOK" flex="1" align="start" oncommand="DPRXML.updateSearchHierarchy(0)">
-								<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm">
+					<vbox align="stretch" pack="start" id="tsoContainer">
+						<hbox pack="stretch">
+							<box flex="1" collapsed="true" id="tsoSET" orient="horizontal" pack="start">
+								<menulist flex="1" class="sel" tooltiptext="Choose which set to search" id="tsoSETm" oncommand="DPRNav.setSearchBookList()">
 									<menupopup>
+										<menuitem value="v" selected="true" label="Vinaya"/>
+										<menuitem value="d" label="Dīgha"/>
+										<menuitem value="m" label="Majjhima"/>
+										<menuitem value="s" label="Saṃyutta"/>
+										<menuitem value="a" label="Aṅguttara"/>
+										<menuitem value="k" label="Khuddaka"/>
+										<menuitem value="y" label="Abhidhamma"/>
+										<menuitem value="x" label="Vism"/>
+										<menuitem value="b" label="Abhidh-s"/>
+										<menuitem value="g" label="Byākaraṇa"/>
 									</menupopup>
 								</menulist>
-							</groupbox>
-							<groupbox collapsed="true" id="tsoPart" flex="1" align="start">
-								<radiogroup id="tsoPR" flex="1">
-									<hbox id="tsoP1" collapsed="true" flex="1">
-										<radio id="tsoH1" selected="true" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(1)" />
-										<menulist class="sel tiny" id="tsoPmeta" oncommand="DPRXML.updateSearchHierarchy(1)">
-											<menupopup>
-											</menupopup>
-										</menulist>
-									</hbox>
-									<hbox id="tsoP2" collapsed="true" flex="1">
-										<radio id="tsoH2" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(2)" />
-										<menulist flex="1" class="sel tiny" id="tsoPvolume" oncommand="DPRXML.updateSearchHierarchy(2)">
-											<menupopup>
-											</menupopup>
-										</menulist>
-									</hbox>
-									<hbox id="tsoP3" collapsed="true" flex="1">
-										<radio id="tsoH3" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(3)" />
-										<menulist flex="1" class="sel tiny" id="tsoPvagga" oncommand="DPRXML.updateSearchHierarchy(3)">
-											<menupopup>
-											</menupopup>
-										</menulist>
-									</hbox>
-									<hbox id="tsoP4" collapsed="true" flex="1">
-										<radio id="tsoH4" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(4)" />
-										<menulist flex="1" class="sel tiny" id="tsoPsutta" oncommand="DPRXML.updateSearchHierarchy(4)">
-											<menupopup>
-											</menupopup>
-										</menulist>
-									</hbox>
-									<hbox id="tsoP5" collapsed="true" flex="1">
-										<radio id="tsoH5" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(5)" />
-										<menulist flex="1" class="sel tiny" id="tsoPsection">
-											<menupopup>
-											</menupopup>
-										</menulist>							
-									</hbox>
-								</radiogroup>
-							</groupbox>
-							<groupbox id="tsoSetContainer" flex="1" align="start">
-								<hbox>
-									<vbox align="center" pack="center">
-										<toolbarbutton id="selAllS" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoSetContainer');" role="button">
-											<label value="*" />
-										</toolbarbutton>
+							</box>
+							<box flex="1" collapsed="true" id="tsoMAT2" align="start" oncommand="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
+								<menulist flex="1" class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m">
+									<menupopup>
+										<menuitem value="m" selected="true" label="Mūla"/>
+										<menuitem value="a" label="Aṭṭhakathā"/>
+										<menuitem value="t" label="Ṭīka"/>
+									</menupopup>
+								</menulist>
+							</box>
+						</hbox>
+						<groupbox collapsed="true" id="tsoBOOK" pack="start" align="stretch" oncommand="DPRXML.updateSearchHierarchy(0)">
+							<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm">
+								<menupopup>
+								</menupopup>
+							</menulist>
+						</groupbox>
+						<groupbox collapsed="true" id="tsoPart" pack="start" align="stretch">
+							<radiogroup id="tsoPR" flex="1">
+								<hbox id="tsoP1" collapsed="true" flex="1">
+									<radio id="tsoH1" selected="true" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(1)" />
+									<menulist class="sel tiny" id="tsoPmeta" oncommand="DPRXML.updateSearchHierarchy(1)">
+										<menupopup>
+										</menupopup>
+									</menulist>
+								</hbox>
+								<hbox id="tsoP2" collapsed="true" flex="1">
+									<radio id="tsoH2" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(2)" />
+									<menulist flex="1" class="sel tiny" id="tsoPvolume" oncommand="DPRXML.updateSearchHierarchy(2)">
+										<menupopup>
+										</menupopup>
+									</menulist>
+								</hbox>
+								<hbox id="tsoP3" collapsed="true" flex="1">
+									<radio id="tsoH3" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(3)" />
+									<menulist flex="1" class="sel tiny" id="tsoPvagga" oncommand="DPRXML.updateSearchHierarchy(3)">
+										<menupopup>
+										</menupopup>
+									</menulist>
+								</hbox>
+								<hbox id="tsoP4" collapsed="true" flex="1">
+									<radio id="tsoH4" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(4)" />
+									<menulist flex="1" class="sel tiny" id="tsoPsutta" oncommand="DPRXML.updateSearchHierarchy(4)">
+										<menupopup>
+										</menupopup>
+									</menulist>
+								</hbox>
+								<hbox id="tsoP5" collapsed="true" flex="1">
+									<radio id="tsoH5" tooltiptext="Search this part" onclick="DPROpts.chooseSearchHier(5)" />
+									<menulist flex="1" class="sel tiny" id="tsoPsection">
+										<menupopup>
+										</menupopup>
+									</menulist>							
+								</hbox>
+							</radiogroup>
+						</groupbox>
+						<groupbox id="tsoSetContainer" pack="start" align="stretch">
+							<hbox flex="1">
+								<vbox align="center" pack="center">
+									<toolbarbutton id="selAllS" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoSetContainer');" role="button">
+										<label value="*" />
+									</toolbarbutton>
+								</vbox>
+								<vbox>
+									<vbox orient="vertical" align="start" id="tsoCO1">
+										<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
 									</vbox>
-									<vbox>
-										<vbox orient="vertical" align="start" id="tsoCO1">
-											<checkbox class="tiny" id="tsoCOv" tooltiptext="Include in search" label="Vinaya"/>
-										</vbox>
-										<vbox orient="vertical" align="start" id="tsoCO2" class="">
-											<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
-											<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
-											<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
-											<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
-											<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
-										</vbox>
-										<vbox orient="vertical" align="start" id="tsoCO3" class="">
-											<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
-											<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
-											<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
-											<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
-										</vbox>
+									<vbox orient="vertical" align="start" id="tsoCO2" class="">
+										<checkbox class="tiny" id="tsoCOd" tooltiptext="Include in search" label="Dīgha" checked="true"/>
+										<checkbox class="tiny" id="tsoCOm" tooltiptext="Include in search" label="Majjhima" checked="true"/>
+										<checkbox class="tiny" id="tsoCOs" tooltiptext="Include in search" label="Saṃyutta" checked="true"/>
+										<checkbox class="tiny" id="tsoCOa" tooltiptext="Include in search" label="Aṅguttara" checked="true"/>
+										<checkbox class="tiny" id="tsoCOk" tooltiptext="Include in search" label="Khuddaka" checked="true"/>
+									</vbox>
+									<vbox orient="vertical" align="start" id="tsoCO3" class="">
+										<checkbox class="tiny" id="tsoCOy" tooltiptext="Include in search" label="Abhidhamma"/>
+										<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
+										<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
+										<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+									</vbox>
+								</vbox>
+							</hbox>
+						</groupbox>
+						<groupbox collapsed="true" id="tsoBO" pack="start" align="stretch">
+							<hbox flex="1">
+								<vbox align="center" pack="center">
+									<toolbarbutton id="selAllB" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoBO');" role="button">
+										<label value="*" />
+									</toolbarbutton>
+								</vbox>
+								<hbox pack="center">
+									<vbox align="start" id="tsoBOA">
+									</vbox>
+									<vbox align="start" id="tsoBOB">
 									</vbox>
 								</hbox>
-							</groupbox>
-							<groupbox collapsed="true" id="tsoBO" flex="1" align="start">
-								<hbox>
-									<vbox align="center" pack="center">
-										<toolbarbutton id="selAllB" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoBO');" role="button">
-											<label value="*" />
-										</toolbarbutton>
-									</vbox>
-									<hbox pack="center">
-										<vbox align="start" id="tsoBOA">
-										</vbox>
-										<vbox align="start" id="tsoBOB">
-										</vbox>
-									</hbox>
-								</hbox>
-							</groupbox>
-							<groupbox id="tsoMAT" flex="1" align="start">
-								<hbox>
-									<vbox align="center" pack="center">
-										<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoMAT');" role="button">
-											<label value="*" />
-										</toolbarbutton>
-									</vbox>
-									<vbox>
-										<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true" />
-										<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" />
-										<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" />
-									</vbox>
-								</hbox>
-							</groupbox>
-						</vbox>
+							</hbox>
+						</groupbox>
+						<groupbox id="tsoMAT" flex="1" pack="start" align="stretch">
+							<hbox flex="1">
+								<vbox align="center" pack="center">
+									<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoMAT');" role="button">
+										<label value="*" />
+									</toolbarbutton>
+								</vbox>
+								<vbox>
+									<checkbox class="tiny" id="tsoMATm" tooltiptext="Include in search" label="Mūla" checked="true" />
+									<checkbox class="tiny" id="tsoMATa" tooltiptext="Include in search" label="Aṭṭhakathā" />
+									<checkbox class="tiny" id="tsoMATt" tooltiptext="Include in search" label="Ṭīka" />
+								</vbox>
+							</hbox>
+						</groupbox>
 					</vbox>
 				</form>
 			</tabpanel>

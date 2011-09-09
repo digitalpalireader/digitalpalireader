@@ -294,7 +294,7 @@ var DPRNav = {
 		var nik = document.getElementById('tsoSETm').value;
 
 		if (nikvoladi[nik]) var titles = nikvoladi[nik];
-		else var titles = nikvoladi[nik+G_hier];
+		else var titles = nikvoladi[nik+document.getElementById('tsoMAT2m').value];
 
 		
 		var bookNode = document.getElementById('tsoBOOKm');
@@ -316,7 +316,8 @@ var DPRNav = {
 			newCheck.setAttribute('checked',true);
 			newCheck.setAttribute('class','tiny');
 			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
-			newCheck.setAttribute('id','tsoBObook'+((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			newCheck.setAttribute('id','tsoBObook'+(i+1));
+			newCheck.setAttribute('value',((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			if(i == Math.ceil(titles.length/2)) {
 				bookNode2 = document.getElementById('tsoBOB');
 				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
