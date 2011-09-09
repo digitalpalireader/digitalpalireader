@@ -1,4 +1,5 @@
 function eventSend(event) {
+	if(!event) return;
 	if(event.ctrlKey || event.which == 2) return true;
 	else if (event.which == 1) return false;
 	return 'right';

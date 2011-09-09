@@ -34,8 +34,8 @@ function keyPressed(e) {
 	}
 
 
-	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onclick(); return }  // p
-	if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onclick(); return } // n
+	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(); return }  // p
+	if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onmouseup(); return } // n
 
 	if (e.charCode == 100) { wBot.moveframey('cdif'); return; } // d
 	if (e.charCode == 99) { wBot.moveframey('cof'); return; } // c
@@ -50,13 +50,13 @@ function keyPressed(e) {
 
 	if (e.charCode == 44) { // ,
 		if(dBot.getElementById('tout') || dBot.getElementById('bout')) { dBot.getElementById('tout').onclick(); }
-		else if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onclick();
+		else if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup();
 		return; 
 	} 
 	
 	if (e.charCode == 46) { // .
 		if(dBot.getElementById('tout') || dBot.getElementById('bout')) dBot.getElementById('bout').onclick(); 
-		else if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onclick();
+		else if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onmouseup();
 		return; 
 	} 
 	

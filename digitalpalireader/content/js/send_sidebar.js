@@ -266,7 +266,7 @@ var DPRSend = {
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,toVel(getstring).toLowerCase(),MAT,set,book,part,rx);
+				oldTabBrowser.contentWindow.wrappedJSObject.searchTipitaka(which,(rx?toVelRegEx(getstring):toVel(getstring)).toLowerCase(),MAT,set,book,part,rx);
 			}
 		}
 		else {
