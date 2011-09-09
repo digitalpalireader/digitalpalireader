@@ -79,7 +79,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	// tab title
 
-	var tabT = 'Search: \'' + G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString) + '\' in ' + st[G_searchType];
+	var tabT = 'Search: \'' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + '\' in ' + st[G_searchType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 

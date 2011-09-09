@@ -122,7 +122,7 @@
 					<hbox pack="center"><label class="large bold" value="&searchHead;"/></hbox>
 					<hbox flex="1" pack="stretch" align="center">
 						<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
-						<toolbarbutton id="searchGo" tooltiptext="&searchGo.text;" oncommand="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
+						<toolbarbutton id="searchGo" tooltiptext="&searchGo.text;" onmouseup="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
 							<label value="➤" />
 						</toolbarbutton>
 					</hbox>
@@ -277,7 +277,7 @@
 						<hbox pack="center"><label class="large bold" value="&dictHead;"/></hbox>
 						<hbox pack="stretch" flex="1">
 							<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
-							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" oncommand="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
+							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" onmouseup="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
 								<label value="➤" />
 							</toolbarbutton>
 						</hbox>

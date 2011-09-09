@@ -270,7 +270,6 @@ var DPRSend = {
 			}
 		}
 		else {
-			alert(toVelRegEx(getstring));
 			var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+which+'&query=' + (rx?toVelRegEx(getstring):toVel(getstring)).replace(/ /g,'_').toLowerCase() + '&MAT=' + MAT + '&set=' + set + '&book=' + book + '&part=' + part + '&rx=' + rx;
 			DPRChrome.openDPRTab(permalink,'DPRs');
 		}
