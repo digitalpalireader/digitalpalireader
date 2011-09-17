@@ -163,7 +163,7 @@ function convertOldBookmarks() {
 }
 
 function saveBookmark(name,loc,desc,scroll,supress) {
-
+	var xmlDoc = bookmarkXML();
 	var newNode = xmlDoc.createElement('bookmark');
 	var newNodeName = xmlDoc.createElement('name');
 	var newNodeLoc = xmlDoc.createElement('location');
