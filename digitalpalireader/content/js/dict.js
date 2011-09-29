@@ -1077,11 +1077,10 @@ function titlesearchstart()
 		outnik = '';
 		
 		var titt = titlelist[x].split('#')[0];
-		
 		if(/fz/.exec(G_dictOpts)) {
 			titt = toFuzzy(titt);
 		}
-        if (/rx/.exec(G_dictOpts)) { // reg exp
+		if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (titt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && titt.search(getstring) > -1));
 		}
 		else { // non reg exp

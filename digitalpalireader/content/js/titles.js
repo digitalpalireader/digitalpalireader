@@ -1,5 +1,4 @@
-var titlelist = ['#y^4^0^0^0^0^0^t^0',
-'akaṭṭhapākasālipātubhāvo#d^3^0^0^3^0^6^m^5',
+var titlelist = ['akaṭṭhapākasālipātubhāvo#d^3^0^0^3^0^6^m^5',
 'akataññujātakaṃ#k^14^0^0^0^8^9^m^5',
 'akataññutāsuttaṃ#a^4^0^0^4^1^2^m^5#a^4^0^0^4^2^2^m^5',
 'akataññutāsuttavaṇṇanā#a^4^0^4^1^2^0^a^4',
