@@ -2,6 +2,7 @@ var G_dictType = '';
 var G_dictQuery = '';
 var G_dictOpts = []; // 
 var G_dictEntry = '';
+var G_dictUnicode = false;
 
 function moveframey() {
 } // fake
@@ -19,13 +20,13 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
                 G_dictType = option[1];
                 break;
                 case 'query':
-                G_dictQuery = option[1];
+                G_dictQuery = decodeURIComponent(option[1]);
                 break;
                 case 'opts':
                 G_dictOpts = option[1].split(',');
                 break;
                 case 'entry':
-                G_dictEntry = option[1].replace(/\%60/g,'`');
+                G_dictEntry = decodeURIComponent(option[1]);
                 break;
             }
         }
@@ -44,6 +45,8 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		catch(ex) {
 		}
 	}
+
+	G_dictUnicode = /[āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ]/.test(G_dictQuery);
 
 	var st = [];
 	st['PED'] = 'PED';
@@ -125,12 +128,14 @@ function pedsearchstart(hard)
 		if(/fz/.exec(G_dictOpts)) {
 			pedt = toFuzzy(pedt);
 		}
+		var totest = pedt;
+		if(G_dictUnicode) totest = toUni(totest);
 
 		if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (pedt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.search(getstring) > -1));
+			var yessir = (totest.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (pedt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.indexOf(getstring) > -1));
+			var yessir = (totest.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -151,7 +156,7 @@ function pedsearchstart(hard)
 
 
 
-	document.getElementById('dicthead').innerHTML = '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr />';
+	document.getElementById('dicthead').innerHTML = '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />';
 	
 	var outDiv = document.createElement('div');
 	
@@ -248,7 +253,7 @@ function pedFullTextSearch(getstring) {
 		}
 	}
 
-	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>';
+	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:</div>';
 
 	// word list
 
@@ -329,12 +334,15 @@ function dppnsearchstart(hard)
 		if(/fz/.exec(G_dictOpts)) {
 			dppnt = toFuzzy(dppnt);
 		}
-
+		
+		var totest = dppnt;
+		if(G_dictUnicode) totest = toUni(totest);
+		
         if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (dppnt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.search(getstring) > -1));
+			var yessir = (totest.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (dppnt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.indexOf(getstring) > -1));
+			var yessir = (totest.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -350,7 +358,7 @@ function dppnsearchstart(hard)
 	}
 
 
-	document.getElementById('dicthead').innerHTML = '<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+getstring+'</b>:<hr />';
+	document.getElementById('dicthead').innerHTML = '<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />';
 
 	var listoutf = '';
 	
@@ -535,12 +543,14 @@ function mlsearchstart(hard)
 		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
+
+		if(G_dictUnicode) tosearch = toUni(tosearch);
         
         if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -553,7 +563,7 @@ function mlsearchstart(hard)
 		}
 	}
 	
-	document.getElementById('dicthead').innerHTML = '<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	document.getElementById('dicthead').innerHTML = '<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr /><table width=100%><tr><td valign="top">';
 
 	if(finouta.length == 0) {
 		finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -619,11 +629,14 @@ function multisearchstart(hard)
 			pedt = toFuzzy(pedt);
 		}
 
+		var tosearch = pedt;
+		if(G_dictUnicode) tosearch = toUni(tosearch);
+
 		if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (pedt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (pedt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && pedt.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -646,12 +659,15 @@ function multisearchstart(hard)
 		if(/fz/.exec(G_dictOpts)) {
 			dppnt = toFuzzy(dppnt);
 		}
+		
+		var tosearch = dppnt;
+		if(G_dictUnicode) tosearch = toUni(tosearch);
 
         if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (dppnt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (dppnt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && dppnt.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -668,7 +684,7 @@ function multisearchstart(hard)
 
 	// get cped
 	
-		if( G_cpedAlt = []) {
+	if( G_cpedAlt = []) {
 		for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
 	}
 		
@@ -690,6 +706,8 @@ function multisearchstart(hard)
 		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
+		
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);       
         
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
@@ -826,7 +844,9 @@ function epdsearchstart()
 		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
-        
+
+  		if(G_dictUnicode) tosearch = toUni(tosearch);       
+       
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
@@ -841,7 +861,7 @@ function epdsearchstart()
 		}
 	}
 	
-	document.getElementById('dicthead').innerHTML = '<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	document.getElementById('dicthead').innerHTML = '<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:';
 	
 	finout = '<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
@@ -899,12 +919,15 @@ function attsearchstart()
 		if(/fz/.exec(G_dictOpts)) {
 			attt = toFuzzy(attt);
 		}
+		
+		var tosearch = attt;
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);       
 
         if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (attt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && attt.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (attt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && attt.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -987,11 +1010,15 @@ function tiksearchstart()
 		if(/fz/.exec(G_dictOpts)) {
 			tikt = toFuzzy(tikt);
 		}
+
+		var tosearch = tikt;
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (tikt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tikt.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tikt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tikt.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
@@ -1080,11 +1107,15 @@ function titlesearchstart()
 		if(/fz/.exec(G_dictOpts)) {
 			titt = toFuzzy(titt);
 		}
+
+		var tosearch = titt;
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);
+
 		if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (titt.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && titt.search(getstring) > -1));
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (titt.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && titt.indexOf(getstring) > -1));
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{

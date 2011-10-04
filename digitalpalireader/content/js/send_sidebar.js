@@ -184,17 +184,17 @@ var DPRSend = {
 		if(!add) { // reuse old tab
 			var oldTab = DPRChrome.findDPRTab('DPR-dict');
 			if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + toVel(getstring) + '&opts=' + opts.join(',');
+			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
 				DPRChrome.openDPRTab(permalink,'DPR-dict');
 			}
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.startDictLookup(which,toVel(getstring),opts);
+				oldTabBrowser.contentWindow.wrappedJSObject.startDictLookup(which,getstring,opts);
 			}
 		}
 		else {
-			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + toVel(getstring) + '&opts=' + opts.join(',');
+			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
 			DPRChrome.openDPRTab(permalink,'DPRd');
 		}
 
