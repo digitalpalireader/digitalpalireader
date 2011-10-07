@@ -248,7 +248,7 @@ function pedFullTextSearch(getstring) {
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+DPR_prefs['colped']+'">top</a>' + postpara + '</p><hr>';
+				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+DPR_prefs['colped']+'">top</a></p><p>' + postpara + '</p><hr>';
 			}
 		}
 	}
@@ -462,12 +462,11 @@ function dppnFullTextSearch(getstring) {
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
 				
-				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'odif\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
+				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'dictc\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
 			}
 		}
 	}
 
-	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf;
 
 	// word list
 
@@ -491,6 +490,8 @@ function dppnFullTextSearch(getstring) {
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
+
+	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf;
 
 	var finout = sortaz(finalouta).join('\n');
 
