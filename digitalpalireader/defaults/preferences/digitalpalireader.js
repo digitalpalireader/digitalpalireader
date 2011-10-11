@@ -52,6 +52,8 @@ pref("extensions.digitalpalireader.Bool.showPermalinks", true);
 pref("extensions.digitalpalireader.Bool.showNames", true);
 pref("extensions.digitalpalireader.Bool.showPedLinks", true);
 
+pref("extensions.digitalpalireader.Bool.nigahita", false);
+
 pref("extensions.digitalpalireader.Char.catiloc", "<none>");
 
 pref("extensions.digitalpalireader.Int.translits", 0);

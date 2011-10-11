@@ -87,6 +87,11 @@ function formatuniout(data,which) { // prepare without links
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
 	
+	if(DPR_prefs['nigahita']) {
+		data = data.replace(/ṃ/g, 'ṁ');
+		data = data.replace(/Ṃ/g, 'Ṁ');
+	}
+	
 	if(!DPR_prefs['showPages']) data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
 	else {
 		data = data.replace(/\^a\^\"/g, ' z');

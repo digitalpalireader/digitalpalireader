@@ -44,6 +44,7 @@
  					<groupbox flex="1">
   							<caption label="&pMiscPrefs.label;"/>
   							<box orient="vertical">
+								<checkbox id="nigahita" label="&pnigahita.label;" prefstring="Bool.nigahita"/>
 								<checkbox id="ctrans" label="&pctrans.label;" prefstring="Bool.ctrans"/>
 								<checkbox id="autodict" label="&pautodict.label;" prefstring="Bool.autodict"/>
 								<hbox align="center"><label id="paltlimit" value="&paltlimit.label;" selected="true" /><spacer flex="1"/><textbox id="altlimit" size="3" prefstring="Int.altlimit"/></hbox>

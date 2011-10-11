@@ -97,6 +97,8 @@
 <!ENTITY paltlimit.label "Maximum Definitions Per Compound:">
 <!ENTITY pautodict.label "Enable Dictionary search-as-you-type">
 
+<!ENTITY pnigahita.label "Use ṁ instead of ṃ">
+
 <!ENTITY pATI.label "Access To Insight Off-Line Archive:">
 <!ENTITY pcatioff.label "Use Off-line ATI Archive">
 <!ENTITY pATILoc.label "Location (ati_website):">

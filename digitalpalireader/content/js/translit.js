@@ -1,13 +1,15 @@
 
 function toUni(input) {
 	if(!input || input == '') return input;
-	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\.t/g, 'ṭ').replace(/\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\.n/g, 'ṇ').replace(/\.m/g, 'ṃ').replace(/\u1E41/g, 'ṃ').replace(/\~n/g, 'ñ').replace(/\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\.T/g, 'Ṭ').replace(/\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\.N/g, 'Ṇ').replace(/\.M/g, 'Ṃ').replace(/\~N/g, 'Ñ').replace(/\.L/g, 'Ḷ');
+	var nigahita = (DPR_prefs['nigahita']?'ṁ':'ṃ'); 
+	var Nigahita = (DPR_prefs['nigahita']?'Ṁ':'Ṃ'); 
+	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\.t/g, 'ṭ').replace(/\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\.n/g, 'ṇ').replace(/\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\.T/g, 'Ṭ').replace(/\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\.N/g, 'Ṇ').replace(/\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\.L/g, 'Ḷ');
 	return input;
 }
 
 function toUniRegEx(input) {
 	if(!input || input == '') return input;
-	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\\\.t/g, 'ṭ').replace(/\\\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\\\.n/g, 'ṇ').replace(/\\\.m/g, 'ṃ').replace(/\u1E41/g, 'ṃ').replace(/\~n/g, 'ñ').replace(/\\\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\\\.T/g, 'Ṭ').replace(/\\\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\\\.N/g, 'Ṇ').replace(/\\\.M/g, 'Ṃ').replace(/\~N/g, 'Ñ').replace(/\\\.L/g, 'Ḷ');
+	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\\\.t/g, 'ṭ').replace(/\\\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\\\.n/g, 'ṇ').replace(/\\\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\\\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\\\.T/g, 'Ṭ').replace(/\\\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\\\.N/g, 'Ṇ').replace(/\\\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\\\.L/g, 'Ḷ');
 	return input;
 }
 
