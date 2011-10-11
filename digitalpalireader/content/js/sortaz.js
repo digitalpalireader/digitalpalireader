@@ -122,7 +122,7 @@ for(var w = 0; w < reorder.length; w++) {
 
 function sortaz(mydata){  // sort pali array
 
-	var mydata = mydata.sort(comparePaliAlphabet);
+	mydata = mydata.sort(comparePaliAlphabet);
 	for (i in mydata) {
 		mydata[i] = mydata[i].replace(/^.*###/,''); // remove sorted words, return the rest
 	} 
@@ -130,7 +130,11 @@ function sortaz(mydata){  // sort pali array
 }
 
 function sortStrip(word) {
-	word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ]/g,'');
+	if(DPR_prefs['nigahita']) {
+		word = word.replace(/ṁ/g, 'ṃ');
+		word = word.replace(/Ṁ/g, 'Ṃ');
+	}
+	word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ#]/g,'');
 	return word;
 }
 

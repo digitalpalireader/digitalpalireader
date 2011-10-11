@@ -1,6 +1,6 @@
 var G_searchStartTime;
 
-var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶ]/;
+var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
 
 var G_searchType;
 var G_searchString;
@@ -534,8 +534,13 @@ function createTables(xmlDoc,hiert)
 						for (var tmp = 0; tmp < z.length; tmp++) // per paragraph
 						{
 
-
 							texttomatch = z[tmp].textContent.substring(4);
+
+							if(DPR_prefs['nigahita']) {
+								texttomatch = texttomatch.replace(/ṃ/g, 'ṁ');
+								texttomatch = texttomatch.replace(/Ṃ/g, 'Ṁ');
+							}
+							
 							texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 							if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
@@ -815,7 +820,7 @@ function createTables(xmlDoc,hiert)
 			document.getElementById('sbfb').appendChild(document.createElement('hr'));
 		}
 		// make word table
-		
+
 		if(yesplus >= 0) { // multiple words 
 		
 			exnodups = [];
@@ -845,7 +850,7 @@ function createTables(xmlDoc,hiert)
 				for (ex = 0; ex < exnodups[t].length; ex++)
 				{
 					
-					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[t][ex]) + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[t][ex] + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 				}
 				exwordout += '</td>';
 			}								
@@ -877,7 +882,7 @@ function createTables(xmlDoc,hiert)
 
 			for (ex = 0; ex < findiv; ex++)
 			{
-				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[ex]) + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + toUni(exnodups[findiv+ex]) + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[findiv+ex] + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 			}
 			exwordout += '</table>';
 		}

@@ -1,7 +1,10 @@
 // uses inflect.js, english.js
 
 function conjugate(word, id, which) {
-	
+	if(DPR_prefs['nigahita']) {
+		which = which.replace(/ṁ/g, 'ṃ');
+		which = which.replace(/Ṁ/g, 'Ṃ');
+	}	
 	word = toVel(word);
 	
 	var yto = yt[word];
@@ -25,11 +28,16 @@ function conjugate(word, id, which) {
 	if (out == undefined) {
 		return;
 	}
-
+	
 	if(which) {
 		var whichR = new RegExp('([> ])'+which+'([<,])','gi');
 		out = out.replace(whichR, "$1<span style=\"color:"+DPR_prefs['colped']+"\">"+which+"</span>$2");
 	}
+
+	if(DPR_prefs['nigahita']) {
+		out = out.replace(/ṃ/g, 'ṁ');
+		out = out.replace(/Ṃ/g, 'Ṁ');
+	}	
 	
 	var outNode = document.createElement('div');
 	

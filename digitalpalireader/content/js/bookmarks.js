@@ -50,6 +50,12 @@ function bookmarkframe(refresh)
 	var isclear = '';
 	for (i in theHistory) {
 		var thist = theHistory[i].split('@');
+
+		if(DPR_prefs['nigahita']) {
+			thist[0] = thist[0].replace(/ṃ/g, 'ṁ');
+			thist[0] = thist[0].replace(/Ṃ/g, 'Ṁ');
+		}
+
 		var tt1 = thist[1].length-1;
 		thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
 		hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
@@ -72,6 +78,12 @@ function bookmarkframe(refresh)
 		for(var i=0; i < bNodes.length; i++) 
 		{
 			var name = bNodes[i].getElementsByTagName('name')[0].textContent;
+
+			if(DPR_prefs['nigahita']) {
+				name = name.replace(/ṃ/g, 'ṁ');
+				name = name.replace(/Ṃ/g, 'Ṁ');
+			}
+
 			var loc = bNodes[i].getElementsByTagName('location')[0].textContent.split('#');
 			
 			if(loc[7] = 'm') {

@@ -28,7 +28,7 @@ function convert()
 		}
 		else if (Counta == 2) // Unicode to Thai
 		{
-			spell = thaiconv(spell);
+			spell = toThai(spell);
 		}
 		else if (Counta == 3) // Unicode to Deva
 		{
@@ -53,7 +53,7 @@ function convert()
 		}
 		else if (Counta == 2) // Velthius to Thai
 		{
-			spell = thaiconv(toUni(spell));
+			spell = toThai(toUni(spell));
 		}			
 		else if (Counta == 3) // Velthius to Deva
 		{

@@ -33,7 +33,7 @@ function toFuzzy(input){
 
 
 function toSin(input,type) {
-	input = input.toLowerCase();
+	input = input.toLowerCase().replace('ṁ','ṃ');
 	var vowel = [];
 
 	vowel['a'] = 'අ';
@@ -173,7 +173,7 @@ function toSin(input,type) {
 	
 
 function toMyanmar(input,type) {
-	input = input.toLowerCase();
+	input = input.toLowerCase().replace('ṁ','ṃ');
 	var vowel = [];
 	vowel['a'] = "အ";
 	vowel['i'] = "ဣ";
@@ -345,7 +345,7 @@ function toMyanmar(input,type) {
 
 function todeva(input,type) {
 
-	input = input.toLowerCase();
+	input = input.toLowerCase().replace('ṁ','ṃ');
 
 	var vowel = [];
 	vowel['a'] = " अ";
@@ -454,9 +454,9 @@ function todeva(input,type) {
 	return output;
 }	
 
-function thaiconv(input) {
+function toThai(input) {
 
-	input = input.toLowerCase();
+	input = input.toLowerCase().replace('ṁ','ṃ');
 
 	var vowel = [];
 	vowel['a'] = '1';
@@ -625,7 +625,7 @@ function translit(data) {
 			out = data;
 		break;
 		case 1:
-			out = thaiconv(data);
+			out = toThai(data);
 		break;
 		case 2:
 			out = todeva(data);
