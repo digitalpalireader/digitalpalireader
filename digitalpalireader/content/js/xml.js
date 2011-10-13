@@ -696,6 +696,12 @@ function loadXMLindex(place) {
 			}
 		}
 	}
+	
+	if(DPR_prefs['nigahita']) {
+		theDatao = theDatao.replace(/ṃ/g, 'ṁ');
+		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
+	}	
+	
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = theDatao;
 	document.getElementById('mafbc').innerHTML = '';
