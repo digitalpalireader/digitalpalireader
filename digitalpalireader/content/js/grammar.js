@@ -1,7 +1,7 @@
 // uses inflect.js, english.js
 
 function conjugate(word, id, which) {
-	if(DPR_prefs['nigahita']) {
+	if(DPR_prefs['nigahita'] && which) {
 		which = which.replace(/ṁ/g, 'ṃ');
 		which = which.replace(/Ṁ/g, 'Ṃ');
 	}	
