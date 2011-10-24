@@ -150,11 +150,6 @@ function savePad() {
 	var data = document.textpad.pad.value;
 	var file = document.textpad.file.value;
 	file = file.replace(/\\/g,'/');
-	var dir = '';
-	if(/\//.exec(file)) {
-		dir = '/'+file.replace(/\/[^\/]+$/,'');
-		file = file.replace(/.+\//,'');
-	}
 	if(/[:%&]/.exec(file)) {
 		alertFlash('File contains illegal characters', 'red');
 		return;
@@ -163,7 +158,11 @@ function savePad() {
 		alertFlash('You must enter a file name', 'red');
 		return;
 	}
-	if(writeExtFile('Desktop'+dir,file,data)) alertFlash('Data saved to Desktop'+dir+'/'+file, 'green');
+
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
+	
+	if(writeExtFile(dir.path+'/'+file,data)) alertFlash('Data saved to Desktop/'+file, 'green');
 	else {
 		alertFlash('Error saving file', 'red');
 	}

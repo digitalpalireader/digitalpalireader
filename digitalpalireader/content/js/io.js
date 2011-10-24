@@ -131,6 +131,7 @@ function readExtFile(fileLoc)
 }
 function writeExtFile(fileLoc, aContent) 
 {
+	alert(fileLoc);
 	var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 	aFile.initWithPath(fileLoc);
 	if ( aFile.exists() ) aFile.remove(false);
