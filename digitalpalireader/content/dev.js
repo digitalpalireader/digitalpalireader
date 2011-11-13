@@ -879,6 +879,72 @@ function getWordList(){
 
 }
 
+function PEDcat() {
+	
+	var dataout = '';
+	var ma = [];
+	for (a in mainda) {
+		for (b in mainda[a]) {
+			var entry = mainda[a][b].split('/');
+			var i = parseInt(entry[0],10);
+			var j = parseInt(entry[1],10);
+			if(!ma[i]) ma[i] = [];
+			ma[i][j]=a+(mainda[a].length > 1?'^'+(parseInt(b)+1):'');
+		}
+	}
+	
+	for (a in ma) {
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'etc/XML1/'+a+'/ped.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var allp = xmlDoc.getElementsByTagName('data');
+
+		for (b in ma[a]) {
+			
+			var alld = allp[b].textContent; //.replace(/<[^>]*>/g, '').replace(/   */g, ' ');
+			
+			dataout += '\n'+ma[a][b]+'###'+alld;
+		}
+	}
+	writeFile('ped',dataout, 'UTF-8');
+}
+
+function DPPNcat() {
+	
+	var dataout = '';
+	var ma = [];
+	for (a in nameda) {
+		for (b in nameda[a]) {
+			var entry = nameda[a][b].split('/');
+			var i = parseInt(entry[0],10);
+			var j = parseInt(entry[1],10);
+			if(!ma[i]) ma[i] = [];
+			ma[i][j]=a+(nameda[a].length > 1?'^'+(parseInt(b)+1):'');
+		}
+	}
+	
+	for (a in ma) {
+
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", 'etc/XML2/'+a+'.xml', false);
+		xmlhttp.send(null);
+		var xmlDoc = xmlhttp.responseXML.documentElement;
+		
+		var allp = xmlDoc.getElementsByTagName('entry');
+
+		for (b in ma[a]) {
+			
+			var alld = allp[b].textContent; //.replace(/<[^>]*>/g, '').replace(/   */g, ' ');
+			
+			dataout += '\n'+ma[a][b]+'###'+alld;
+		}
+	}
+	writeFile('dppn',dataout, 'UTF-8');
+}
+
 
 function noah11()
 {

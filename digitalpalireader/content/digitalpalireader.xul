@@ -90,27 +90,25 @@
 					<separator class="groove" />
 						<groupbox id="hist-box" collapsed="true">
 							<hbox flex="1" pack="stretch" align="center">
-								<label flex="1" id="hist-label" value="History" />
+								<menulist flex="1" class="sel" id="history">
+									<menupopup>
+									</menupopup>
+								</menulist>
 								<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="go" tooltiptext="&go_bookmark;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<menulist class="sel" id="history">
-								<menupopup>
-								</menupopup>
-							</menulist>
 						</groupbox>
 						<groupbox id="bm-box" collapsed="true">
 							<hbox flex="1" pack="stretch" align="center">
-								<label flex="1" id="bm-label" value="Bookmarks" />
+								<menulist flex="1" class="sel" id="bookmarks">
+									<menupopup>
+									</menupopup>
+								</menulist>
 								<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="go" tooltiptext="&go_bookmark;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<menulist class="sel" id="bookmarks">
-								<menupopup>
-								</menupopup>
-							</menulist>
 						</groupbox>
 					</vbox>
 				</vbox>

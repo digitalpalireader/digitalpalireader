@@ -391,6 +391,7 @@ var DPRNav = {
 			var histNode = document.getElementById('history');
 			while(histNode.itemCount > 0) histNode.removeItemAt(0);
 			var isclear = '';
+			histNode.appendItem('-- History --','0');
 			for (i=0;i<theHistory.length;i++) {
 				var thist = theHistory[i].split('@');
 				var thist0 = toUni(thist[0]);
@@ -398,7 +399,7 @@ var DPRNav = {
 				
 				var ch = histNode.childNodes[0].childNodes;
 				var x=thist[1].split(',');
-				ch[i].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
+				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
 			}
 			histNode.selectedIndex = 0;
 		}
@@ -421,6 +422,7 @@ var DPRNav = {
 			document.getElementById('bm-box').collapsed = false;
 			var bList = document.getElementById('bookmarks');
 			while(bList.itemCount > 0) bList.removeItemAt(0);
+			bList.appendItem('-- Bookmarks --');
 			for(var i=0; i < bNodes.length; i++) {
 
 				var name = bNodes[i].getElementsByTagName('name')[0].textContent;
@@ -431,8 +433,8 @@ var DPRNav = {
 				bList.appendItem(name);
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[i].setAttribute('onclick',"DPRSend.openPlace(['"+loc[0]+"',"+loc[1]+","+loc[2]+","+loc[3]+","+loc[4]+","+loc[5]+","+loc[6]+",'"+loc[7]+"'],null,null,DPRSend.eventSend(event),"+scroll+");");
-				ch[i].setAttribute('tooltiptext',desc);
+				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+loc[0]+"',"+loc[1]+","+loc[2]+","+loc[3]+","+loc[4]+","+loc[5]+","+loc[6]+",'"+loc[7]+"'],null,null,DPRSend.eventSend(event),"+scroll+");");
+				ch[i+1].setAttribute('tooltiptext',desc);
 			}
 			bList.selectedIndex = 0;
 			
