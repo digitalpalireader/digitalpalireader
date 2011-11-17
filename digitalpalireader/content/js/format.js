@@ -232,6 +232,7 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
 		{
+			alert(wb);
 			indexpage = wb.charAt(1);
 			pageno = wb.substring(2,8);
 			switch (indexpage) {
