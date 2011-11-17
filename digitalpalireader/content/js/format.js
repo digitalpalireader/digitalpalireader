@@ -59,7 +59,6 @@ function formatuniout(data,which) { // prepare without links
 	var indexpage = '';
 	var pageno = '';
 	var pagetitle = '';
-	var volandpage = '';
 	
 	var altread = 0;
 	var altplus = '';	
@@ -232,9 +231,8 @@ function formatuniout(data,which) { // prepare without links
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
 		{
-			alert(wb);
 			indexpage = wb.charAt(1);
-			pageno = wb.substring(2,8);
+			pageno = wb.substring(2,wb.length-1);
 			switch (indexpage) {
 				case 'M':
 					pagetitle = 'Myanmar';
@@ -250,9 +248,21 @@ function formatuniout(data,which) { // prepare without links
 					break;
 			}
 			
-			volandpage = pageno.split('.');
 			
-			pagetitle += ': vol. ' + volandpage[0] + ', p. ' + volandpage[1].replace(/^0*/,"");
+			var ref = pageno.split('.');
+		
+			if(!ref[1])
+				pagetitle += ' '+pageno;
+			else if(/[^0-9]/.exec(ref[0])) { // Thai
+				var vp = ref[1].split(',');
+				if(vp.length < 2)
+					pagetitle += ' '+pageno;
+				else 
+					pagetitle += ' '+ref[0]+'. ' + vp[0] + ', p. ' + vp[1].replace(/^0+/,"");
+			}
+			else {
+				pagetitle += ': vol. ' + ref[0] + ', p. ' + ref[1].replace(/^0+/,"");
+			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}
 		else if (which == 1)
