@@ -1,6 +1,6 @@
-function loadXMLFile(file,set) {
+function loadXMLFile(file,setNo) {
 	var setName;
-	switch(set) {
+	switch(setNo) {
 		case 0:
 			var setPack = 'dprmyanmar';
 			var setName = 'Myanmar';

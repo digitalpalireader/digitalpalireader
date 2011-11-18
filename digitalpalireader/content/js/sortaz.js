@@ -176,14 +176,19 @@ function comparePaliAlphabet(a,b) {
 
 
 function findSimilarWords(word,list,min,fuzzy) {
-
+	
 	var simlist = [];
 	var count = 0;
 	for (i in list) {
 //		if(word == list[i]) continue; // don't duplicate
 
-		if(list.length == 0) var inthisword = i; // for associative arrays
+		if(list.length == 0) {
+			var inthisword = i; // for associative arrays
+		}
 		else var inthisword = list[i];
+		
+		if(!inthisword) continue;
+		
 		if(fuzzy) var thisword = toFuzzy(inthisword);
 		else var thisword = inthisword;
 		
@@ -212,8 +217,10 @@ function findSimilarWords(word,list,min,fuzzy) {
 		}
 		var ld = thisword.length-word.length;
 		if (ld < 0) ld = ld*(-1);
-		if(!min || Math.round((sim-ld)/word.length*100) > min) {
-			simlist.push(Math.round((sim-ld)/word.length*100)+'^'+inthisword);
+		var percent = Math.round((sim-ld)/word.length*100);
+		if(!min || percent > min) {
+			if(percent < 0) percent = 0;
+			simlist.push([percent,inthisword]);
 			count++;
 		}
 		//ddump([word,thisword,ld,Math.round((sim-ld)/word.length*100) + '%']);
@@ -237,10 +244,10 @@ function groupBySimilarity(list,minsim) {
 		var thislist = findSimilarWords(thisword,list.slice(f+1));
 
 		for (j in thislist) {
-			var oneword = thislist[j].split('^')[1];
+			var oneword = thislist[j][1];
 			if(listloc[oneword] == -1) continue;
 			//if(f==0) ddump([simpc,'similar ' + thislist[j].split('^')[1] + ' & ' + list[i]]);
-			var simpc =thislist[j].split('^')[0];
+			var simpc =thislist[j][0];
 			if(simpc > minsim) {
 				if(listloc[thisword] && !listloc[oneword]) {
 					simlist[listloc[thisword]].push(oneword);

@@ -192,3 +192,10 @@ function openDPRSidebar() {
 function setCurrentTitle(title) {
 	mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 }
+
+function closeBrowser(id) {
+	var thisTab = mainWindow.gBrowser.selectedTab;
+	var thisDocument = mainWindow.gBrowser.getBrowserForTab(thisTab).contentDocument;
+	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id+'-splitter'));
+	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id));
+}

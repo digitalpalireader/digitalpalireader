@@ -169,7 +169,7 @@ function pedsearchstart(hard)
 			if(simlist) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlist) {
-					pedt = simlist[i].replace(/^.+\^/,'');
+					pedt = simlist[i][1];
 					for (z = 0; z < mainda[pedt].length; z++) {
 					
 						var loc = mainda[pedt][z];
@@ -372,7 +372,7 @@ function dppnsearchstart(hard)
 			if(simlist) {
 				listoutf += '<p>Did you mean:</p>';
 				for (i in simlist) {
-					pedt = simlist[i].replace(/^.+\^/,'');
+					pedt = simlist[i][1];
 					for (z = 0; z < nameda[pedt].length; z++) {
 					
 						var loc = nameda[pedt][z];
@@ -575,7 +575,7 @@ function mlsearchstart(hard)
 			if(simlist) {
 				finout += '<p>Did you mean:</p>';
 				for (i in simlist) {
-					pedt = simlist[i].replace(/^.+\^/,'');
+					pedt = simlist[i][1];
 					
 					var loc = yt[pedt];
 					
@@ -744,7 +744,7 @@ function multisearchstart(hard)
 			if(simlistp || simlistd || simlistc) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlistp) {
-					pedt = simlistp[i].replace(/^.+\^/,'');
+					pedt = simlistp[i][1];
 					for (z = 0; z < mainda[pedt].length; z++) {
 					
 						var loc = mainda[pedt][z];
@@ -759,7 +759,7 @@ function multisearchstart(hard)
 					}
 				}
 				for (i in simlistd) {
-					pedt = simlistd[i].replace(/^.+\^/,'');
+					pedt = simlistd[i][1];
 					for (z = 0; z < nameda[pedt].length; z++) {
 					
 						var loc = nameda[pedt][z];
@@ -774,7 +774,7 @@ function multisearchstart(hard)
 					}
 				}
 				for (i in simlistc) {
-					pedt = simlistc[i].replace(/^.+\^/,'');
+					pedt = simlistc[i][1];
 					
 					var loc = yt[pedt];
 					

@@ -53,7 +53,9 @@ var devCheck = 0;
 		function ddump(a) {}
 	}
 </script>
-	<browser disablehistory="true" type="content" id="dpr-index-top" src="" style="max-height:99%" flex="1" persist="height"/>
+	<hbox id="dpr-tops" flex="1">
+		<browser disablehistory="true" type="content" id="dpr-index-top" src="" style="max-height:99%" flex="1" persist="height"/>
+	</hbox>
                     <splitter id="PanelSplitter"/>
 	<browser disablehistory="true" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="1" persist="height"/>
 </window>

@@ -4,7 +4,7 @@ function getLinkPlace() { // permalinks
 	
 	options = options.split('&');
 
-	var place,para,query,scroll;
+	var place,index,para,query,scroll,compare;
 	
 	// parse options
 	if(/^thai/.exec(options[0])) {
@@ -50,8 +50,7 @@ function getLinkPlace() { // permalinks
 				outplace = place;
 			}
 			else if (/[vdmaskyxbg]\.[0-9]+\.[mat]/.exec(option[1])) { // index
-				loadXMLindex(option[1].split('.'));
-				return;
+				index = option[1].split('.');
 			}
 			else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.exec(option[1])) { // shorthand
 				outplace = getSuttaFromNumber(place);
@@ -65,6 +64,8 @@ function getLinkPlace() { // permalinks
 		else if (option[0] == 'para') para = parseInt(option[1]);
 		else if (option[0] == 'scroll') scroll = parseInt(option[1]);
 		else if (option[0] == 'alt') outplace.push(1);
+		else if (option[0] == 'compare') compare = option[1];
 	}
-	if(place) loadXMLSection(query,para,outplace,true,scroll);
+	if(index) loadXMLindex(index,compare);
+	else if(place) loadXMLSection(query,para,outplace,true,scroll,compare);
 }

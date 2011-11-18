@@ -703,6 +703,13 @@ border-spacing:0px;
 }
 /* misc */
 
+.compareContainer {
+	position:absolute;
+	top:4px;
+	right:2px;
+}
+
+
 .leftalign {
 	text-align:left;
 }
@@ -872,3 +879,5 @@ button.control:focus::-moz-focus-inner { border:none}
 .controls, #corrects {
 text-align:center;
 }
+
+
