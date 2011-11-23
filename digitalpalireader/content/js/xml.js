@@ -185,70 +185,72 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		sidebar.DPRNav.historyBox();
 	} 
 
-	// tab title
-
-	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
-	setCurrentTitle(tabT);
-	
-	
-	
-	// permalink
-	
 	var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+
+	if(!compare) {
+
+		// tab title
+
+		var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+		setCurrentTitle(tabT);
+
+		// permalink
 	
-	if(!isPL) { //not coming from a permalink
+		
+		if(!isPL) { //not coming from a permalink
 
-		try {
-	
-			var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+			try {
+		
+				var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 
-			// remove custom text link
-			
-			var newurl = oldurl.replace(/\&*text=[^&]*/,'');
+				// remove custom text link
+				
+				var newurl = oldurl.replace(/\&*text=[^&]*/,'');
 
-			// update loc
+				// update loc
 
-			if(/loc=/.exec(oldurl)) newurl = newurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
-			else if(/\?./.exec(oldurl)) newurl = newurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
-			else newurl = newurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+				if(/loc=/.exec(oldurl)) newurl = newurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
+				else if(/\?./.exec(oldurl)) newurl = newurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+				else newurl = newurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
-			// update query
-			
-			if(query) {
-				if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
-				else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+				// update query
+				
+				if(query) {
+					if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
+					else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+				}
+				else newurl = newurl.replace(/\&query=[^&]+/,'');
+
+				// update para
+
+				if(para) {
+					if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
+					else newurl = newurl + '&para='+para;
+				}
+				else newurl = newurl.replace(/\&para=[^&]+/,'');
+				
+				// update scroll
+
+				if(scroll) {
+					if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
+					else newurl = newurl + '&scroll='+scroll;
+				}
+				else newurl = newurl.replace(/\&scroll=[^&]+/,'');
+				
+				// update alt
+
+				if(place[8]) {
+					if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
+					else newurl = newurl + '&alt=1';
+				}
+				else newurl = newurl.replace(/\&alt=[^&]+/,'');
+
+				mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 			}
-			else newurl = newurl.replace(/\&query=[^&]+/,'');
-
-			// update para
-
-			if(para) {
-				if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
-				else newurl = newurl + '&para='+para;
+			catch(ex) {
 			}
-			else newurl = newurl.replace(/\&para=[^&]+/,'');
-			
-			// update scroll
 
-			if(scroll) {
-				if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
-				else newurl = newurl + '&scroll='+scroll;
-			}
-			else newurl = newurl.replace(/\&scroll=[^&]+/,'');
-			
-			// update alt
-
-			if(place[8]) {
-				if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
-				else newurl = newurl + '&alt=1';
-			}
-			else newurl = newurl.replace(/\&alt=[^&]+/,'');
-
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 		}
-		catch(ex) {
-		}
-
 	}
 	
 
@@ -262,7 +264,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// bookmark button
 	
-	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())">☆</span>';
+	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())" title="bookmark section">☆</span>';
 
 
 	// Thai alt button
@@ -278,14 +280,15 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// output toolbar data
 
-	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>'
+	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut tiny" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&larr;</span><span id="indexButton" class="abut rbut tiny" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>';
+	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
 
 	// output header
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center><span id="sidebarButton" class="abut lbut tiny" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lt;</span><span id="indexButton" class="abut rbut tiny" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">^</span></td><td align=center>'+titleout+modt+'</td>'+(place[8]?'<td><span class="tiny">Thai</span></td>':'')+(DPR_prefs['showPermalinks'] ? '<td width=1><span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="Click to copy permalink to clipboard">☸&nbsp;</span></td>' :'')+'</tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout+modt+'</td>'+(place[8]?'<td><span class="tiny">Thai</span></td>':'')+(DPR_prefs['showPermalinks'] ? '<td width=1><span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="Click to copy permalink to clipboard">☸&nbsp;</span></td>' :'')+'</tr></table>';
 		
 
 	var theData = '';
@@ -401,11 +404,6 @@ function loadXMLindex(place,compare) {
 	
 	document.activeElement.blur();
 	
-	if (place[2] == 't' && limitt()) { 
-		alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.','RGBa(255,0,0,0.8)');
-		return; 
-	}	
-	
 	var hier = place[2];
 	
 	document.getElementById('mafbc').innerHTML = '';
@@ -434,14 +432,17 @@ function loadXMLindex(place,compare) {
 	bookfile = nikaya + book;
 
 
-	// permalink
+	if(!compare) {
+		
+		// permalink
 
-	var permalink = 'chrome://digitalpalireader/content/index.xul?';
-	
-	try {
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
-	}
-	catch(ex) {
+		var permalink = 'chrome://digitalpalireader/content/index.xul?';
+		
+		try {
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+nikaya+'.'+bookno+'.'+hier);
+		}
+		catch(ex) {
+		}
 	}
 	
 	var tmp = 0;

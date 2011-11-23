@@ -43,6 +43,8 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
 		loadXMLSection(stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],null,null,compare);
 	}
 	else if (add == 'shift') {
+		if (window.getSelection)
+			window.getSelection().removeAllRanges();
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
@@ -106,12 +108,15 @@ function openXMLindex(nikaya,bookno,hier,add) {
 		loadXMLindex([nikaya,bookno,hier]);
 	}
 	else if (add == 'shift') {
+		if (window.getSelection)
+			window.getSelection().removeAllRanges();
+
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
 			var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
 			var count = elem.getElementsByTagName('browser').length;
-			var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier;
+			var permalink = 'chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier+'&compare='+count;
 			
 			var node = createBrowser(thisTabBrowser.contentDocument,permalink,count);
 
@@ -129,7 +134,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
 			var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
 			var count = elem.getElementsByTagName('browser').length;
-			var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier;
+			var permalink = 'chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier+'&compare='+count;
 
 			var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
 
@@ -325,6 +330,8 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 function openTranslation(url,add) {
 	if(add == 'right') return;
 	else if (add == 'shift') {
+		if (window.getSelection)
+			window.getSelection().removeAllRanges();
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
