@@ -131,16 +131,16 @@ var DPRXML = {
 	
 		switch(true) {
 			case (depth == 1): 
-				if(v.length == 1 && w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+				if(v.length == 1 && w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
 			break;
 			case  (depth == 2): 
-				if(w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+				if(w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
 			break;
 			case  (depth == 3): 
-				if(x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+				if(x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
 			break;
 			case  (depth == 4): 
-				if(y.length == 1) DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+				if(y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
 			break;
 		}
 	},
@@ -169,7 +169,6 @@ var DPRXML = {
 		if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
 		else name = this.unnamed;
 		var outname = translit(toUni(name));
-		document.getElementById('title').label = outname;
 			
 		var u = xmlDoc.getElementsByTagName("h0");
 		var v = u[meta].getElementsByTagName("h1");

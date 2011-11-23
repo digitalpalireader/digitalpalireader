@@ -86,6 +86,10 @@ G_hNumbers['t'] = 2;
 var G_hTitles = ['Mūla', 'Aṭṭhakathā', 'Ṭīkā'];
 
 var G_hLetters = ['m','a','t'];
+var G_hshort = [];
+G_hshort['m'] = 'mul';
+G_hshort['a'] = 'att';
+G_hshort['t'] = 'tik';
 
 
 var G_nikLongName = new Array();
@@ -441,4 +445,28 @@ var DPRNav = {
 		}
 		else document.getElementById('bm-box').collapsed = true;
 	},
+	
+	gotoPlace:function([nikaya,book,meta,volume,vagga,sutta,section,hiert]) {
+		document.getElementById('set').value = nikaya;
+		for(i in G_hshort) {
+			if(i == hiert)
+				document.getElementById(G_hshort[i]).setAttribute('checked',true);
+			else 
+				document.getElementById(G_hshort[i]).checked = false;
+		}
+		this.changeSet(1,book);
+		this.switchhier(hiert);
+		document.getElementById('book').selectedIndex = book;
+		DPRXML.updateHierarchy(0);
+		document.getElementById('meta').selectedIndex = meta;
+		DPRXML.updateHierarchy(1);
+		document.getElementById('volume').selectedIndex = volume;
+		DPRXML.updateHierarchy(2);
+		document.getElementById('vagga').selectedIndex = vagga;
+		DPRXML.updateHierarchy(3);
+		document.getElementById('sutta').selectedIndex = sutta;
+		DPRXML.updateHierarchy(4);
+		document.getElementById('section').selectedIndex = section;
+		
+	}
 }
