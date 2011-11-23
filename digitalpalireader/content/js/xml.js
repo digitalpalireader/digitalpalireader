@@ -280,7 +280,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// output toolbar data
 
-	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut tiny" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&larr;</span><span id="indexButton" class="abut rbut tiny" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>';
+	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut tiny" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&larr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut mbut tiny" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+'<span id="indexButton" class="abut rbut tiny" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>';
 	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
 
@@ -288,7 +288,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout+modt+'</td>'+(place[8]?'<td><span class="tiny">Thai</span></td>':'')+(DPR_prefs['showPermalinks'] ? '<td width=1><span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="Click to copy permalink to clipboard">☸&nbsp;</span></td>' :'')+'</tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>';
 		
 
 	var theData = '';
