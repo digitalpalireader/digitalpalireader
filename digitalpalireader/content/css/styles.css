@@ -191,6 +191,10 @@ position:relative;
 	cursor:text;
 }
 
+.b {
+	font-weight:bold;
+}
+
 .hoverShow {
 -moz-opacity:0.2;
 opacity:0.2

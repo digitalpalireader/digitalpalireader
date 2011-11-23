@@ -14,9 +14,9 @@
 <body onload="getconfig()"> 
 <div id="maf" style="overflow: auto; height: 100%;"> 
 <div style="padding: 10px;"> 
-<div class="heading huge underline">Welcome to the Digital Pali Reader</div> 
+<div class="heading huge underline b">Welcome to the Digital Pali Reader</div> 
 <p>This is the help file, to help you get started using the Digital Pali Reader for the first time.</p> 
-<div id="helpNintro" class="large">Introduction</div> 
+<div id="helpNintro" class="large b">Introduction</div> 
 <p>The Digital Pali Reader (DPR) is a tool, much like a hard-copy language reader, facilitating study of the Pali language at an advanced level. It contains the entire Myanmar version of the Pali Tipitaka as found on the Vipassana Research Institue's CSCD 3, as well as commentaries and sub-commentaries where available.  It also includes the Visuddhimagga, Abhidhammatthasangaha and several ancient grammatical texts composed in Pali, all available for analysis and translation.  Additionally, it is possible to  install the Thai Tipitaka and commentaries (a work in progress) as an alternative to the VRI tipitaka.  <br> 
 </p> 
 <p>Rather than offering a translation for the text being read, the DPR is like an ordinary text reader, in that it presents the untranslated texts and offers tools to assist in reading the original language. The idea is that it it is better to learn the language than to read translations, and better to learn the language by actively reading the original texts than by simply memorizing charts or vocabulary. <br> 
@@ -43,7 +43,7 @@
 <p>While the DPR is far from perfect, it is sure to be useful for intermediate Pali students who wish to advance their studies to a higher level. Below is a brief explanation of the various parts of the DPR.<br> 
 </p> 
 <hr> 
-<div class="large"><b>Contents:</b></div> 
+<div class="large b"><b>Contents:</b></div> 
 <ol> 
 <li><a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNintro').offsetTop;">Introduction</a></li> 
 <li><a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNnotes').offsetTop;">Notes</a></li> 
@@ -65,7 +65,7 @@
 <li><a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop = document.getElementById('helpNfinal').offsetTop;">Final Words</a></li> 
 </ol> 
 <hr> 
-<div id="helpNnotes" class="heading huge">Notes:</div> 
+<div id="helpNnotes" class="heading huge b">Notes:</div> 
 <ul> 
 <li>You will need at least a basic unicode font to view the Pāḷi characters properly. If the word Pāḷi in this sentence shows up correctly, you are probably okay. Otherwise, you'll have to do a search for "Unicode Font" on the Internet, and probably tell the DPR to use that font in the settings screen (press the "%" button). The default font is "Tahoma", which should display the characters correctly. For alternative scripts, it gets a little bit more difficult, and YMMV. I use <a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color: green;">the Padauk font</a> for Burmese and it works well. The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.). There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.</li> 
 <li>You will also need a recent version of <a href="http://www.getfirefox.com/">Mozilla Firefox</a>. I am currently working with Firefox 4, so there may be some problems with Firefox 3 that I am not aware of. Many stylistic elements will not display properly in Firefox 3, for example.</li> 
@@ -78,16 +78,17 @@
 <li>I reserve no copyright over any work that I have done, and offer no warranty of any kind for this software.&nbsp; If it break, you get to keep both pieces.</li> 
 </ul> 
 <hr> 
-<div id="helpNusage" class="heading huge">Usage</div> 
+<div id="helpNusage" class="heading huge b">Usage</div> 
 <p>As of 2.0, the DPR is split up into tabs and a proper sidebar.&nbsp; The sidebar contains the main controls, and opens other windows as needed.&nbsp; Most buttons that interact with existing windows can also open new windows by CTRL+click or middle-clicking on them.&nbsp; For instance, to open a section in a new window, rather than the existing DPR Pali window, middle-click (or CTRL+click) on the ➤ button. &nbsp; Text search and dictionary lookup now have their own tabs, and can be opened in multiple instances in the same way. <br> 
+<p>As of 2.1, <b>SHIFT+click</b> opens content into a new panel in the current window, if appropriate, allowing for side-by-side comparison of text. <br> 
 </p> 
 <p>Basic use of the DPR should require little explanation. What follows is a brief explanation of all of the controls in the sidebar, by section:</p> 
-<div id="helpNtipitaka" class="large">Tipitaka Lookup</div> 
+<div id="helpNtipitaka" class="large b">Tipitaka Lookup</div> 
 <p>The top two sections on the control panel are for browsing through the tipitaka and ancillary works. At the top, there are two lists,&nbsp; of sets and books in each set.&nbsp; To the right of these, there are four buttons; three (M,A,T) for changing the hierarchy of texts to be studied. "M" switches to the root canonical text, "A" to the commentary, and "T" to the subcommentary. Note that once a section has been retrieved, there will be buttons to the left of the title for the corresponding section in the other two hierarchies, if available.&nbsp; The fourth button is simply for retrieving the currently selected section.<br> 
 </p> 
 <p>Below this group, there is a set of hierarchical lists of the sections for the current book. These are another way to navigate to a specific section.&nbsp; The first in this set is actually a button, and clicking on it opens a linked index of the selected set and book, links to each section.&nbsp; As for the rest, changing each will result in changes to the ones below, and selecting an entry from the bottom list will open that section in the main window.</p> 
 <p>Below these lists is another list (-- History --), spaced a bit apart with a history of previously viewed sections (max. 100). Clicking on an entry retrieves that section, moving it to the top of the history list.</p> 
-<div id="helpNreading" class="large">Text View<br> 
+<div id="helpNreading" class="large b">Text View<br> 
 </div> 
 <p>Once you have retrieved a section of the text, it will display in the main window, which is split into two frames. The top frame holds the actual text, the bottom serves as a dictionary frame, as well as providing access to the convertor and text pad.&nbsp; Both sections have their own toolbar, which is found by hovering over the almost invisible "⚙" in the top-left corner of the frame.&nbsp; The toolbar for the top window may contain any of the following tools:</p> 
 <ul> 
@@ -111,26 +112,26 @@
 <ul> 
 <li><b>Dictionary</b> - this frame is the default to be shown, and contains a random quote from Buddhavacana at the outset. It is here dictionary entries and search output will appear.</li> 
 <li><b>Convertor</b> - this frame contains two text boxes, the left one for input, the right one for output. Chosing the scripts to convert from and to, this tool allows you to convert Pali text into a variety of scripts. The "sort" button sorts the input by Pali alphabet order and puts the results in the output box. Pressing the 's' key allows you to transfer the current section (or selection) to the convertor.</li> 
-<li><b>Textpad</b> - this frame contains a single text box that functions as a simple text editor. It also allows you to analyze arbitrary text, via the <span class="abut rbut tiny" title="analyze text as Pali passage">Analyze</span> button, and save text as a file on the Desktop (or subfolder using "/" or "\" in the file name) via the <span class="abut obut tiny" title="save data as file">Save to:</span> button. Pressing the <span class="abut lbut tiny" title="Remove page references, var, and permalinks from text">Clear</span> button removes all text from the textpad.</li> 
+<li><b>Textpad</b> - this frame contains a single text box that functions as a simple text editor.  Pressing the <span class="abut lbut tiny" title="Erase all text">Clear</span> button removes all text from the textpad.  This editor also allows you to analyze arbitrary text, via the <span class="abut rbut tiny" title="analyze text as Pali passage">Analyze</span> button, and you can copy text to the clipboard or save text as a file on the Desktop (or subfolder using "/" in the file name) via the <span class="abut lbut tiny" title="Copy text to clipboard">Copy</span> and <span class="abut rbut tiny" title="save data as file">Save to:</span> buttons.</li> 
 </ul> 
 <p> The main function of the DPR is to analyze individual words and give appropriate definitions to each word or word part.&nbsp; Clicking on any word in the text brings up an analysis of the word in the top part of the bottom frame (the analysis bar) and hopefully at least one (hopefully correct) definition from one of the three dictionaries.&nbsp; If there are alternative ways of splitting up a compound, they can be accessed via a menu at the bottom left of the analysis bar, below the current analysis.&nbsp; The right side of the analysis bar shows a definition from the CPED of the first part of the analysis; the rest can be accessed via a menu at the bottom right of the analysis bar, below the current CPED definition. <br> 
 </p> 
-<div id="helpNbookmarks" class="large">Bookmarking</div> 
+<div id="helpNbookmarks" class="large b">Bookmarking</div> 
 <p>The DPR allows saving bookmarks for later reference. All bookmark files are saved in an XML file in your firefox profile folder under "DPR".&nbsp; Clicking on the ☆ button opens up an advanced bookmark manager where you can view/add descriptions, change names, and delete bookmarks, as well as edit or clear the history box (see above).&nbsp;</p> 
-<div id="helpNsearch" class="large">Text Search</div> 
+<div id="helpNsearch" class="large b">Text Search</div> 
 <p>The DPR has a built-in text search function that allows flexible search of the tipitaka and ancillary texts, via the "Text Search" section of the control panel. There are many search options available, based on two variables: 1) whether you wish to search multiple sets, multiple books in the current collection, or the current book; and 2) whether you wish to search the current hierarchy or multiple hierarchies. There is also an option ("Translations" in the drop-down menu) to access the <a class="green" href="http://www.accesstoinsight.org/">AccessToInsight.org</a> Google custom search, or the off-line archive (if installed and linked via the options page) to search their English translations.</p> 
 <p>If you wish to search within the current set, book, or hierarchy, first navigate to the appropriate place using the corresponding lists and buttons. If you are searching multiple collections or the Tipitaka, they will have no effect. </p> 
 <p> Next, enter the string for which to search (or multiple strings seperated by the "+" sign) and then select a search type from the dropdown (set at "Tipitaka" by default). You will notice that various options appear based on the type of search you choose. Check the appropriate boxes, and then click the ➤ button.&nbsp; A search tab will open once you click this button (or press enter while focus is on the text box) and search results will begin to appear, with words containing the search term(s) at the top, followed by a list of paragraphs with the matched search term(s) highlighted. There is a stop button <img style="width: 16px; height: 16px;" alt="stop" src="images/stop.png"> that allows you to interrupt the search if necessary. </p> 
 <p>Once the search is complete, clicking on a search term will hide all other paragraphs, showing only paragraphs containing the selected term. To show all results again, click the "x" beside the current word (in a box on the top right of the search frame, when viewing a single matched word). Clicking on the <span class="abut obut tiny">go</span> button beside a paragraph will open the containing section in the Pali tab (or open a new tab, on middle-click or CTRL+click).</p> 
 <p>The "RegEx" checkbox allows javascript regular expressions to be used in the search (use with care!).</p> 
 <p> To search for a page number, use the following syntax: P1.0001, P1.0002, etc., where "P" (or V, M, T) is the PTS pagination set, the first "1" is the volume, and the following (must be four digits) is the page number.</p> 
-<div id="helpNdict" class="large">Dictionary</div> 
+<div id="helpNdict" class="large b">Dictionary</div> 
 <p>The dictionary lookup has nine options, some with advanced options available by clicking "adv". "DPR" runs an analysis on the word or passage at hand as it normally would. This only works for full words and phrases. "PED" searches the Pali-English Dictionary, "DPPN" the Dictionary of Pali Proper Names, "CPED" the Concise Pali-English Dictionary, and "CEPD" the Concise English-Pali Dictionary. "Aṭṭha" (Aṭṭhakathā) and "Ṭīkā", search through words or phrases explained in the commentaries and sub-commentaries respectively. "Title" gives a list of matching titles in all books.</p> 
 <p><b>Advanced Dictionary options:</b></p> 
 <p>Each dictionary has its own set of advanced options, some in common, some unique. All are explained here:</p> 
 <ul> 
 <li><b>Reg. Exp.:</b> Allows javascript regular expressions to be used in the dictionary search.</li>   <li><b>Fuzzy:</b> This option allows you to ignore diacritics in your search. This equates long and short vowels, and ignores dots and the tilde.</li>   <li><b>Full Text:</b> Only for the dictionaries (PED, DPPN, CPED, CEPD), this allows full-text search, rather than searching just the entry titles.</li>   <li><b>Start of Word Only:</b> Enabled by default for the dictionaries, this limits the search to matches at the beginning of the word. To search within entries, uncheck this.</li> 
-</ul>   <p>If search-as-you-type is enabled in the option screen (see below), the results will be shown as you type. Otherwise, you will have to press the <span class="abut obut tiny" title="Edit or look up a word">➤</span> button to execute the search. If you choose "PED" and type "aa" into the box, for example, it will come up with a list of Pali-English Dictionary entries starting with a long "ā". All lookup functions except DPR allow inner-word search and javascript-type regular expressions (wildcards) in advanced options. Note that these disable search-as-you-type.</p>   <div id="helpNtech" class="large">Technical</div> 
+</ul>   <p>If search-as-you-type is enabled in the option screen (see below), the results will be shown as you type. Otherwise, you will have to press the <span class="abut obut tiny" title="Edit or look up a word">➤</span> button to execute the search. If you choose "PED" and type "aa" into the box, for example, it will come up with a list of Pali-English Dictionary entries starting with a long "ā". All lookup functions except DPR allow inner-word search and javascript-type regular expressions (wildcards) in advanced options. Note that these disable search-as-you-type.</p>   <div id="helpNtech" class="large b">Technical</div> 
 <p> The last set of buttons on the control panel has some technical buttons:</p> 
 <p>☆ - as mentioned, this opens the bookmark window.</p> 
 <p># - this button opens a set of Pali quizes to test your vocabulary and grammar.</p> ☸ - this button displays a random quote from the book, Buddhavacana.</p>   <p>⚙ - this button opens the <span class="pointer green" onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');">preferences dialog</span>, allowing one to adjust the layout and colors of the reader as well as other misc. options, via three tabs as follows:</p> 
@@ -146,8 +147,8 @@
 <p>? - this button shows this help file</p> 
 <p>✉ - this button allows you to contact me via email.</p> 
 <hr> 
-<div id="helpNmisc" class="heading huge">Miscellany</div> 
-<div id="helpNpermalinks" class="large">Permalinks:</div> 
+<div id="helpNmisc" class="heading huge b">Miscellany</div> 
+<div id="helpNpermalinks" class="large b">Permalinks:</div> 
 <p>A permalink is a special URL that, when entered in the Firefox address bar or clicked from a hyperlink (provided the DPR is installed), goes directly to the place it refers to, showing the results of a search, if specified. The standard permalink to a given section may be accessed four ways: </p> 
 <ol> 
 <li>via the address bar URL, which changes (requires Firefox 4 or higher) based on the current location,</li> 
@@ -178,7 +179,7 @@
 </ol> 
 
 <hr> 
-<div id="helpNgratitude" class="heading huge">Gratitude:</div> 
+<div id="helpNgratitude" class="heading huge b">Gratitude:</div> 
 <p>Thanks first and foremost to Alexander Genaud, without whose initial help there would be no DPR. Special thanks also to Ven. Khemaratana for pointing out numerous bugs, offering useful suggestions and helping greatly with the DPPN, among other things. Thanks also to Alan McClure, Ven. Gavesako, Peter Masefield, Lin Qian, and Leland George for spotting errors in the script and offering encouragement and suggestions. Thanks to John Bullit for his link on <a href="http://www.accesstoinsight.org/outsources/pali.html" style="color: green;">www.accesstoinsight.org</a> as well as for graciously hosting a PHP script providing the list of sutta translations used by the DPR and a means of allowing the DPR's offline ATI search. And thanks to everyone else who helped out in the project in any small or large way - sotthi vo hotu.</p>
 <p> Special impersonal credit is due to all of those people involved in creating and providing publicly-available electronic versions of the following resources:<br> 
 </p> 
@@ -194,13 +195,13 @@
 </ul> 
 <p>Should this software infringe upon anyone's felt right to forbid the copying of any of the above or other materials, I apologize for the felt violation. I am sorry to know that some people feel this way about generally useful things that benefit the public immensely when distributed freely. May all be happy and well. </p> 
 <hr> 
-<div id="helpNfinal" class="heading huge">Final Words:</div> 
+<div id="helpNfinal" class="heading huge b">Final Words:</div> 
 <p>1) Please write to me any errors you may find, big or small. My email is <a style="color: green;" href="mailto:yuttadhammo@gmail.com">yuttadhammo@gmail.com</a>. </p> 
 <p>2) Please check the <a style="color: green;" href="http://pali.sirimangalo.org/">DPR Homepage</a> for updates.</p> 
 <p>Best wishes and good luck,</p> 
 <p>Yuttadhammo</p> 
 <hr> 
-<p><em>Last Updated: May 8, 2011 C.E.</em></p>
+<p><em>Last Updated: Nov 19, 2011 C.E.</em></p>
 <p><em>You are using DPR version <b><script>document.write(version)</script></b>.</em></p>
 <hr> 
 </div> 
