@@ -82,22 +82,24 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		var relhere = eval('rel'+hier+"['"+relwhere[i]+"']");
 		if (relhere) {
 			var hi = ['m','a','t'];
+			var button_order = ['l','m','r'];
 			var hic = 0;
 			for (ht = 0; ht < hi.length; ht++) {
-				if(hi[ht] == hier) continue;
-				if (relhere.split('#')[hic] != '') {
-					var relherea = relhere.split('#')[hic].replace(/\*/g,'0').split('^');
-					relouta.push('<span class="abut obut small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+				if(hi[ht] == hier)
+					relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+				else if (relhere.split('#')[hic] != '') {
+					var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
+					relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 					matButton = 0;
-
 				}
-				hic++;
+				else
+					relouta.push('<span class="abut dbut '+button_order[ht]+'but small" title="no relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 			}
 			break;
 		}
 	}
 	
-	relout += relouta.join(' ');
+	relout += relouta.join('');
 	
 	// prev and next
 	var prev, next;
@@ -160,7 +162,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		break;
 	}
 	
-	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');">«</span>':'<span class="lbut abut small">&nbsp;</span>') + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');">»</span>':'<span class="rbut abut small">&nbsp;</span>');
+	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
 
 	var hierb = hier;
 	
@@ -278,9 +280,12 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+')" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event,1)'+(compare?','+compare:'')+')" title="Switch to Thai Tipitaka">T</span>':''));
 	}
 
-	// output toolbar data
+	// first toolbar row
+	
+	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+' <span class="abut obut small" onclick="closePanel(\''+(compare ? compare :0)+'\')" title="close panel">x</span>';
+	
+	// second toolbar row
 
-	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut tiny" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&larr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut mbut tiny" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+'<span id="indexButton" class="abut rbut tiny" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>';
 	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
 
@@ -703,6 +708,9 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}	
 	
+	if(compare) 
+		document.getElementById('mainTBAdd').innerHTML = '<span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>';
+		
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = theDatao;
 	document.getElementById('mafbc').innerHTML = '';

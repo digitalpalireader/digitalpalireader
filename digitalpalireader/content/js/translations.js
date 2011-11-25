@@ -8,7 +8,7 @@ function transLink(which,auth,url,title) {
 		}
 		return (auth == 'Anandajoti' ? '&nbsp;<img width="16" style="vertical-align:middle" src="'+images+'" title="'+imaget+'" onclick="window.open(\''+imageu+'\')">&nbsp;' : '') + '<span class="abut obut tiny" onclick="window.open(\''+url+'\');" title="'+title+'">'+auth+'</span>';
 	}*/
-	return '&nbsp;<span class="hoverShow"><img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onmouseup="openTranslation(\''+url+'\',eventSend(event))"></span>';
+	return '&nbsp;<span class="hoverShow pointer"><img width="16" style="vertical-align:middle" src="' + (auth == 'Anandajoti' ? 'images/abt.gif' : 'images/ati.ico') +'" title="'+title+'" onmouseup="openTranslation(\''+url+'\',eventSend(event))"></span>';
 }
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {

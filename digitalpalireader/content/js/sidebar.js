@@ -19,9 +19,7 @@ var digitalpalireader =
 
 		DPRNav.changeSet(1);
 		DPRNav.setSearchBookList();
-
-
-
+		
 		//mainWindow.document.getElementById('sidebar-header').hidden = true;
 		mainWindow.gBrowser.addEventListener("load", this.onPageLoad, true);
 		mainWindow.gBrowser.tabContainer.addEventListener("TabClose", this.onPageUnload, true);

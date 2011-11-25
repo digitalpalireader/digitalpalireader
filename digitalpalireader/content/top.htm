@@ -14,6 +14,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onDocLoad() {
 	//openDPRSidebar();
+
 	getconfig();
 
 	refreshit();
@@ -37,6 +38,12 @@ function sendTextToTextpad() {
 		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML); }
 }
 
+function closePanel(idx) {
+	var doc = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument;
+	var elem = doc.getElementById('dpr-tops');
+	elem.removeChild(doc.getElementById('dpr-index-top-'+idx));
+
+}
 
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
@@ -85,7 +92,7 @@ function sendTextToTextpad() {
 	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
 		<div id="tbOpener" class="tiny">⚙</div>
 		<div id="tbContainer2">
-			<div id="MainToolbar" class="obutc"><span class="abut obut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span> <span class="abut obut small" onmousedown="sendTextToTextpad()" title="send text to textpad (e)">export</span> <span id="mainTBAdd"></span></div>
+			<div id="MainToolbar" class="obutc"><span class="abut lbut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span><span class="abut rbut small" onmousedown="sendTextToTextpad()" title="send text to textpad (e)">export</span> <span id="mainTBAdd"></span></div>
 			<div id="auxToolbar" class="obutc"></div>
 		</div>
 	</div>

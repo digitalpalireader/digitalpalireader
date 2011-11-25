@@ -42,7 +42,7 @@ function getconfig() {
 	document.getElementById('dpr-index-top').contentWindow.getconfig();
 	document.getElementById('dpr-index-bottom').contentWindow.getconfig();
 }
-
+var G_count_browsers = 1;
 var devCheck = 0;
 </script>
 <script type="application/x-javascript" src="dev.js"/>
@@ -54,9 +54,11 @@ var devCheck = 0;
 	}
 </script>
 	<hbox id="dpr-tops" flex="1">
-		<browser disablehistory="true" type="content" id="dpr-index-top" src="" style="max-height:99%" flex="1" persist="height"/>
+		<hbox flex="1" id="dpr-index-top-0">
+			<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
+		</hbox>
 	</hbox>
-                    <splitter id="PanelSplitter"/>
-	<browser disablehistory="true" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="1" persist="height"/>
+	<splitter id="PanelSplitter"/>
+	<browser disablehistory="true" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="0" persist="height"/>
 </window>
 

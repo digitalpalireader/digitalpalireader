@@ -61,7 +61,7 @@ var DPRSend = {
 			if(thisTab) {  
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
 				var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = thisTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '')+'&compare='+count;
 
 				var node = this.createBrowser(thisTabBrowser.contentDocument,permalink,count);
@@ -80,7 +80,7 @@ var DPRSend = {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
 				var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = oldTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '')+'&compare='+count;
 
 				var node = this.createBrowser(oldTabBrowser.contentDocument,permalink,count);
@@ -126,7 +126,7 @@ var DPRSend = {
 			if(thisTab) {  
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
 				var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = thisTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier+'&compare='+count;
 
 				var node = this.createBrowser(thisTabBrowser.contentDocument,permalink,count);
@@ -144,7 +144,7 @@ var DPRSend = {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
 				var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = oldTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+bookno+'.'+G_hier+'&compare='+count;
 
 				var node = this.createBrowser(oldTabBrowser.contentDocument,permalink,count);
@@ -191,7 +191,7 @@ var DPRSend = {
 			if(thisTab) {  
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
 				var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = thisTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '')+'&compare='+count;
 
 				var node = this.createBrowser(thisTabBrowser.contentDocument,permalink,count);
@@ -209,7 +209,7 @@ var DPRSend = {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
 				var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
-				var count = elem.getElementsByTagName('browser').length;
+				var count = oldTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
 				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '')+'&compare='+count;
 				var node = this.createBrowser(oldTabBrowser.contentDocument,permalink,count);
 
@@ -432,12 +432,12 @@ var DPRSend = {
 		var subnode = thisDocument.createElement('vbox');
 		subnode.setAttribute('id','dpr-index-top-'+count+'-sub');
 		subnode.setAttribute('flex','1');
-		
+/*		
 		var tab = thisDocument.createElement('tab');
 		tab.setAttribute('label','x');
 		tab.setAttribute('tooltiptext','close panel');
 		tab.setAttribute('oncommand','this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)');
-		
+*/	
 		var browser = thisDocument.createElement('browser');
 		browser.setAttribute('disablehistory','true');
 		browser.setAttribute('type','content');
@@ -446,7 +446,7 @@ var DPRSend = {
 		browser.setAttribute('flex','1');
 		browser.setAttribute('persist','height');
 			
-		subnode.appendChild(tab);
+//		subnode.appendChild(tab);
 		subnode.appendChild(browser);
 
 		node.appendChild(splitter);
