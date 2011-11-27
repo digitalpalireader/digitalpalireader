@@ -51,6 +51,14 @@ function keyPressed(e) {
 		else alertFlash('You must select some text to send to the textpad','yellow');
 		return; 
 	}
+	if (e.charCode == 69) {  // E
+		if(getSelected() != '') {
+			sendtoPad(getSelected()+'',true);
+		} 
+		else if(document.getElementById('convi')) { sendtoPad(document.getElementById('convi').innerHTML,true); }
+		else alertFlash('You must select some text to send to the textpad','yellow');
+		return; 
+	}
 
 
 	if (e.charCode == 112) { createTablep(); return; } // p

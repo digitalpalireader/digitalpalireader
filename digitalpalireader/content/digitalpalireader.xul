@@ -17,7 +17,6 @@
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="navTab">
 				<vbox flex="1">
-
 					<hbox id="nav">
 						<vbox flex="1" align="stretch" pack="stretch">
 							<hbox pack="center"><label class="large bold" value="&sSet.label;" /></hbox>

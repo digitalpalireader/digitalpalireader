@@ -32,6 +32,17 @@ function keyPressed(e) {
 		else alertFlash('You must select some text to send to the textpad','yellow');
 		return; 
 	}
+	if (e.charCode == 69) {  // E
+		if(wTop.getSelection().toString() != '') {
+			wBot.sendtoPad(wTop.getSelection().toString()+'',true);
+		} 
+		else if(wBot.getSelection().toString() != '') {
+			wBot.sendtoPad(wBot.getSelection().toString()+'',true);
+		} 
+		else if(dTop.getElementById('convi')) { wBot.sendtoPad(dTop.getElementById('convi').innerHTML,true); }
+		else alertFlash('You must select some text to send to the textpad','yellow');
+		return; 
+	}
 
 
 	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(); return }  // p
@@ -125,6 +136,7 @@ G_keysList.push('');
 
 G_keysList.push('s\tsend selected text to convertor'); 
 G_keysList.push('e\tsend selected text to textpad'); 
+G_keysList.push('E\tappend selected text to textpad'); 
 
 G_keysList.push(''); 
 

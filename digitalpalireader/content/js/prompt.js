@@ -83,6 +83,7 @@ G_keysList.push('');
 
 G_keysList.push('s\tsend selected text to convertor'); 
 G_keysList.push('e\tsend selected text to textpad'); 
+G_keysList.push('E\tappend selected text to textpad'); 
 
 G_keysList.push(''); 
 

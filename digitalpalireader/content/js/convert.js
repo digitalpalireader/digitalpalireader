@@ -95,7 +95,7 @@ function clearboth()
 	document.convertor.outputc.value = '';
 }
 
-function sendtoconvert(data)
+function sendtoconvert(data,shift)
 {
 	data = data.replace(/” ”/g, '”');
 	data = data.replace(/’ ’/g, '’');
@@ -119,8 +119,9 @@ function sendtoconvert(data)
 	convert();
 }
 
-function sendtoPad(data)
+function sendtoPad(data,shift)
 {
+	alert(shift);
 	moveframex(2)
 	moveframey('scf');
 	
@@ -138,7 +139,7 @@ function sendtoPad(data)
 	data = data.replace(/\.\.+/g, '.')
 	data = data.replace(/  +/g, ' ')
 	
-	document.textpad.pad.value += data + '\n';
+	document.textpad.pad.value = (shift?document.textpad.pad.value:'') + data + '\n';
 }
 
 function clearPad() {

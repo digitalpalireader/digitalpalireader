@@ -31,11 +31,11 @@ function sendTextToConvertor() {
 		} 
 		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(document.getElementById('convi').innerHTML); }
 }
-function sendTextToTextpad() {
+function sendTextToTextpad(event) {
 		if(window.getSelection().toString() != '') {
-			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(window.getSelection().toString()+'');
+			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(window.getSelection().toString()+'',event.shiftKey);
 		} 
-		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML); }
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
 }
 
 function closePanel(idx) {
@@ -92,7 +92,7 @@ function closePanel(idx) {
 	<div id="tbContainer" class="hoverShow chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
 		<div id="tbOpener" class="tiny">⚙</div>
 		<div id="tbContainer2">
-			<div id="MainToolbar" class="obutc"><span class="abut lbut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span><span class="abut rbut small" onmousedown="sendTextToTextpad()" title="send text to textpad (e)">export</span> <span id="mainTBAdd"></span></div>
+			<div id="MainToolbar" class="obutc"><span class="abut lbut small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span><span class="abut rbut small" onmousedown="sendTextToTextpad(event)" title="send text to textpad (e)">export</span> <span id="mainTBAdd"></span></div>
 			<div id="auxToolbar" class="obutc"></div>
 		</div>
 	</div>

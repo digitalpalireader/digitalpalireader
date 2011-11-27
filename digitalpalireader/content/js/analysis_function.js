@@ -690,7 +690,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 			}
 		}
 	}
-
+	
 	if(nextpart) { 
 	// do this if compound part (not end)
 

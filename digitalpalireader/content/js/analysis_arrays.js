@@ -42,6 +42,7 @@ var G_altInnerStem = [];  // inner replacements i = existing part, [i][0] = repl
 //G_altInnerStem['gaah'] = ['gah','N'];
 G_altInnerStem['.mk'] = ['"nk','N'];
 G_altInnerStem['.mg'] = ['"ng','N'];
+G_altInnerStem['nn'] = ['.n.n','N'];
 
 
 // match blocking

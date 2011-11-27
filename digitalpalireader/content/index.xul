@@ -59,6 +59,6 @@ var devCheck = 0;
 		</hbox>
 	</hbox>
 	<splitter id="PanelSplitter"/>
-	<browser disablehistory="true" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="0" persist="height"/>
+	<browser disablehistory="true" height="300" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="0" persist="height"/>
 </window>
 
