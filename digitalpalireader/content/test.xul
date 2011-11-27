@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
+	xmlns:html    = "http://www.w3.org/1999/xhtml"
+	disablefastfind="true"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script>
+	function onLoad() {
+		var panel = document.getElementById('myp')
+		var canClose = false;
+		panel.addEventListener("popuphiding", function(event)
+		{
+			event.preventDefault();
+		}, false);
+		setTimeout(function(){panel.openPopup();},100);
+	}
+
+</script>
+  	<stringbundleset id="stringbundleset">
+  			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+  	</stringbundleset>
+	<tabbox class="chromeback" flex="1">
+		<tabs class="chromeback">
+			<tab class="chromeback" label="&sNav.label;"/>
+		</tabs>
+		<tabpanels class="chromeback" flex="1">
+			<tabpanel class="chromeback" id="navTab">
+				<vbox>
+					<panel id="myp" noautohide="true">
+						<label value="true"/>
+					</panel>
+				</vbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</window>
+
