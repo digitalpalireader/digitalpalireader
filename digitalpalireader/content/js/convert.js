@@ -121,7 +121,6 @@ function sendtoconvert(data,shift)
 
 function sendtoPad(data,shift)
 {
-	alert(shift);
 	moveframex(2)
 	moveframey('scf');
 	
