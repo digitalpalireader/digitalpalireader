@@ -267,6 +267,17 @@
 							</hbox>
 						</groupbox>
 					</vbox>
+
+					<separator class="groove" />
+					
+					<groupbox id="sh-box" collapsed="true">
+						<hbox flex="1" pack="stretch" align="center">
+							<menulist flex="1" class="sel" id="searches">
+								<menupopup>
+								</menupopup>
+							</menulist>
+						</hbox>
+					</groupbox>
 				</form>
 			</tabpanel>
 			<tabpanel class="chromeback" id="toolsTab" flex="1">
@@ -412,7 +423,8 @@
 	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
 	<script type="application/x-javascript" src="js/send_sidebar.js"/>
 	<script type="application/x-javascript" src="js/opts_sidebar.js"/>
-
+	
+	<script type="application/x-javascript" src="js/search_history.js"/>
 	<script type="application/x-javascript" src="js/history.js"/>
 	<script type="application/x-javascript" src="js/bv.js"/>
 	<script>

@@ -1580,6 +1580,7 @@ G_irregDec['parikkha.ta'] = ['parikkhata','N'];
 G_irregDec['viru.lha'] = ['viruu.lha','N'];
 G_irregDec['viru.lhi'] = ['viruu.lhi','N'];
 G_irregDec['mahaa'] = ['mahant','N'];
+G_irregDec['naana'] = ['naanaa','N'];
 
 G_irregDec['~naatati'] = ['jaanaati','V'];  // fake verb
 G_irregDec['da.t.thati'] = ['dassati0','V']; // fake verb

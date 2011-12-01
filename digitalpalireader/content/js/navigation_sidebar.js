@@ -410,16 +410,51 @@ var DPRNav = {
 		else document.getElementById('hist-box').collapsed = true;
 	},
 
-	bookmarkXML:function(){
-		var cont = readFile('DPR_Bookmarks');
+	readXML:function(file){
+		var cont = readFile(file);
 		cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
 		var parser=new DOMParser();
 		var xmlDoc = parser.parseFromString(cont,'text/xml');
 		return xmlDoc;
 	},
 
+	searchHistoryBox:function() {
+		var xmlDoc = this.readXML('DPR_Search_History');
+	
+		var bNodes = xmlDoc.getElementsByTagName('search');
+		if (bNodes.length > 0) {
+			document.getElementById('sh-box').collapsed = false;
+			var bList = document.getElementById('searches');
+			while(bList.itemCount > 0) bList.removeItemAt(0);
+			bList.appendItem('-- History --');
+			
+			var types = ['sets','books','book','part'];
+			
+			for(var i=0; i < bNodes.length; i++) {
+
+				var searchType = bNodes[i].getElementsByTagName('searchType')[0].textContent;
+				var searchString = bNodes[i].getElementsByTagName('query')[0].textContent;
+				var searchMAT = bNodes[i].getElementsByTagName('MAT')[0].textContent;
+				var searchSet = bNodes[i].getElementsByTagName('sets')[0].textContent;
+				var searchBook = bNodes[i].getElementsByTagName('book')[0].textContent;
+				var searchPart = bNodes[i].getElementsByTagName('part')[0].textContent;
+				var searchRX = bNodes[i].getElementsByTagName('rx')[0].textContent;
+				
+				bList.appendItem(searchString+' ('+types[parseInt(searchType)]+')');
+
+				var ch = bList.childNodes[0].childNodes;
+				ch[i+1].setAttribute('onclick',"DPRSend.sendSearch(DPRSend.eventSend(event),"+searchType+",'"+searchString+"','"+searchMAT+"','"+searchSet+"','"+searchBook+"','"+searchPart+"',"+searchRX+");");
+				ch[i+1].setAttribute('tooltiptext','run search');
+			}
+			bList.selectedIndex = 0;
+			
+		}
+		else document.getElementById('sh-box').collapsed = true;
+	},
+	
+
 	bookmarkBox:function() {
-		var xmlDoc = this.bookmarkXML();
+		var xmlDoc = this.readXML('DPR_Bookmarks');
 	
 		var bNodes = xmlDoc.getElementsByTagName('bookmark');
 		if (bNodes.length > 0) {
