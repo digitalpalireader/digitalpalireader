@@ -271,11 +271,14 @@
 					<separator class="groove" />
 					
 					<groupbox id="sh-box" collapsed="true">
-						<hbox flex="1" pack="stretch" align="center">
-							<menulist flex="1" class="sel" id="searches">
-								<menupopup>
-								</menupopup>
-							</menulist>
+						<menulist flex="1" class="sel" id="searches">
+							<menupopup>
+							</menupopup>
+						</menulist>
+						<hbox pack="end" flex="1">
+							<toolbarbutton onclick="eraseSearchHistory()" id="clear_history" tooltiptext="&clear_history;" role="button">
+								<label value="&clear_history.label;" />
+							</toolbarbutton>
 						</hbox>
 					</groupbox>
 				</form>

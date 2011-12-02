@@ -12,11 +12,7 @@ function eraseSearchHistory(gofrom)
 	if(answer) 
 	{	
         eraseFile('DPR_Search_History');
-		var sidebar = DPRSidebarWindow();
-		if (sidebar) {
-			sidebar.DPRNav.searchHistoryBox();
-		} 
-		bookmarkframe();
+		DPRNav.searchHistoryBox();
 	}
 }
 

@@ -28,6 +28,9 @@
 <!ENTITY searchRx.label "Rx">
 <!ENTITY selAll.text "Select All/None">
 
+<!ENTITY clear_history "clear all history entries">
+<!ENTITY clear_history.label "clear">
+
 	<!-- dict -->
 
 <!ENTITY sTools.label "Tools">
