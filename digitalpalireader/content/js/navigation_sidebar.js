@@ -429,8 +429,11 @@ var DPRNav = {
 			bList.appendItem('-- History --');
 			
 			var types = ['Sets','Books','Book','Part'];
+
+			var cnt = 0; 
 			
-			for(var i=0; i < bNodes.length; i++) {
+			for(var i=bNodes.length-1; i >= 0; i--) { // backwards
+				cnt++;
 
 				var searchType = bNodes[i].getElementsByTagName('searchType')[0].textContent;
 				var searchString = bNodes[i].getElementsByTagName('query')[0].textContent;
@@ -443,8 +446,8 @@ var DPRNav = {
 				bList.appendItem(searchString+' ('+types[parseInt(searchType)]+')');
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[i+1].setAttribute('onclick',"DPRSend.sendSearch(DPRSend.eventSend(event),"+searchType+",'"+searchString+"','"+searchMAT+"','"+searchSet+"','"+searchBook+"','"+searchPart+"',"+searchRX+");");
-				ch[i+1].setAttribute('tooltiptext','run search');
+				ch[cnt].setAttribute('onclick',"DPRSend.sendSearch(DPRSend.eventSend(event),"+searchType+",'"+searchString+"','"+searchMAT+"','"+searchSet+"','"+searchBook+"','"+searchPart+"',"+searchRX+");");
+				ch[cnt].setAttribute('tooltiptext','run search');
 			}
 			bList.selectedIndex = 0;
 			
@@ -462,7 +465,10 @@ var DPRNav = {
 			while(bList.itemCount > 0) bList.removeItemAt(0);
 			bList.appendItem('-- History --');
 			
-			for(var i=0; i < bNodes.length; i++) {
+			var cnt = 0;
+			
+			for(var i=bNodes.length-1; i >= 0; i--) {
+				cnt++;
 
 				var query = bNodes[i].getElementsByTagName('query')[0].textContent;
 				var type = bNodes[i].getElementsByTagName('type')[0].textContent;
@@ -471,8 +477,8 @@ var DPRNav = {
 				bList.appendItem(query+' ('+type+')');
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[i+1].setAttribute('onclick',"DPRSend.sendDict(true,DPRSend.eventSend(event),'"+type+"','"+query+"',['"+opts+"']);");
-				ch[i+1].setAttribute('tooltiptext','run lookup');
+				ch[cnt].setAttribute('onclick',"DPRSend.sendDict(true,DPRSend.eventSend(event),'"+type+"','"+query+"',['"+opts+"']);");
+				ch[cnt].setAttribute('tooltiptext','run lookup');
 			}
 			bList.selectedIndex = 0;
 			
