@@ -28,6 +28,7 @@
 <!ENTITY searchRx.label "Rx">
 <!ENTITY selAll.text "Select All/None">
 
+<!ENTITY search_history "list of previous searches">
 <!ENTITY clear_history "clear all history entries">
 <!ENTITY clear_history.label "clear">
 
@@ -48,6 +49,10 @@
 <!ENTITY Aṭṭh "Aṭṭhakathā Terms">
 <!ENTITY Ṭīka "Ṭīka Terms">
 <!ENTITY Title "Title Search">
+
+<!ENTITY dict_history "list of previous dictionary searches">
+<!ENTITY clear_dict "clear all history entries">
+<!ENTITY clear_dict.label "clear">
 
 	<!-- buttons -->
 

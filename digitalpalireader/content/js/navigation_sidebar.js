@@ -428,7 +428,7 @@ var DPRNav = {
 			while(bList.itemCount > 0) bList.removeItemAt(0);
 			bList.appendItem('-- History --');
 			
-			var types = ['sets','books','book','part'];
+			var types = ['Sets','Books','Book','Part'];
 			
 			for(var i=0; i < bNodes.length; i++) {
 
@@ -450,6 +450,34 @@ var DPRNav = {
 			
 		}
 		else document.getElementById('sh-box').collapsed = true;
+	},
+	
+	dictHistoryBox:function() {
+		var xmlDoc = this.readXML('DPR_Dict_History');
+	
+		var bNodes = xmlDoc.getElementsByTagName('dict');
+		if (bNodes.length > 0) {
+			document.getElementById('dh-box').collapsed = false;
+			var bList = document.getElementById('dicts');
+			while(bList.itemCount > 0) bList.removeItemAt(0);
+			bList.appendItem('-- History --');
+			
+			for(var i=0; i < bNodes.length; i++) {
+
+				var query = bNodes[i].getElementsByTagName('query')[0].textContent;
+				var type = bNodes[i].getElementsByTagName('type')[0].textContent;
+				var opts = bNodes[i].getElementsByTagName('opts')[0].textContent.replace(/,/g,"','");
+				
+				bList.appendItem(query+' ('+type+')');
+
+				var ch = bList.childNodes[0].childNodes;
+				ch[i+1].setAttribute('onclick',"DPRSend.sendDict(true,DPRSend.eventSend(event),'"+type+"','"+query+"',['"+opts+"']);");
+				ch[i+1].setAttribute('tooltiptext','run lookup');
+			}
+			bList.selectedIndex = 0;
+			
+		}
+		else document.getElementById('dh-box').collapsed = true;
 	},
 	
 

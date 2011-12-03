@@ -270,8 +270,8 @@
 
 					<separator class="groove" />
 					
-					<groupbox id="sh-box" collapsed="true">
-						<menulist flex="1" class="sel" id="searches">
+					<vbox id="sh-box" collapsed="true">
+						<menulist flex="1" class="sel" id="searches" tooltiptext="&search_history;">
 							<menupopup>
 							</menupopup>
 						</menulist>
@@ -280,7 +280,7 @@
 								<label value="&clear_history.label;" />
 							</toolbarbutton>
 						</hbox>
-					</groupbox>
+					</vbox>
 				</form>
 			</tabpanel>
 			<tabpanel class="chromeback" id="toolsTab" flex="1">
@@ -373,6 +373,19 @@
 								</groupbox>
 							</vbox>
 						</vbox>
+					
+						<vbox id="dh-box" collapsed="true">
+							<separator class="groove" />
+							<menulist flex="1" class="sel" id="dicts" tooltiptext="&dict_history;">
+								<menupopup>
+								</menupopup>
+							</menulist>
+							<hbox pack="end" flex="1">
+								<toolbarbutton onclick="eraseDictHistory()" id="clear_dict" tooltiptext="&clear_dict;" role="button">
+									<label value="&clear_dict.label;" />
+								</toolbarbutton>
+							</hbox>
+						</vbox>	
 					</form>
 					<separator class="groove" />
 					<vbox pack="stretch" align="left" id="buttons">

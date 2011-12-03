@@ -251,64 +251,68 @@ var DPRSend = {
 	},
 
 
-	sendDict: function (hard,add) {
-		var getstring = document.getElementById('dictin').value;
+	sendDict: function (hard,add,which,getstring,opts) {
+		if(!getstring) {
+			var getstring = document.getElementById('dictin').value;
 
-		if(!hard) {
-			if (getstring == this.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || document.getElementById('soregexp').checked || document.getElementById('sofulltext').checked) return;
+			if(!hard) {
+				if (getstring == this.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || document.getElementById('soregexp').checked || document.getElementById('sofulltext').checked) return;
+			}
+			
+			this.G_lastsearch = this.value;
+
+			var which = document.getElementById('dictType').value;
+			
+			var opts = []; 
+			
+			for (i in G_nikToNumber) {
+				if(document.getElementById('soNS'+i) && document.getElementById('soNS'+i).checked) opts.push('x'+i);
+			} 
+			for (i in G_hNumbers) {
+				if(document.getElementById('soMAT'+i).checked) opts.push('m'+i);
+			} 
+
+			if(document.getElementById('soregexp').checked) opts.push('rx');
+			if(document.getElementById('sofuzzy').checked) opts.push('fz');
+			if(document.getElementById('sofulltext').checked) opts.push('ft');
+			if(document.getElementById('sostartword').checked) opts.push('sw');
+			if(hard) opts.push('hd');
+			saveDictHistory(getstring,which,opts.join(','));
 		}
-		
-		this.G_lastsearch = this.value;
-
-		var which = document.getElementById('dictType').value;
 		if (which == 'DPR') {
 			var text = toVel(getstring);
 			this.sendAnalysisToOutput(text,(hard ? 1 : 2),add);
-			return;
-		}
-		
-		var opts = []; 
-		
-		for (i in G_nikToNumber) {
-			if(document.getElementById('soNS'+i) && document.getElementById('soNS'+i).checked) opts.push('x'+i);
-		} 
-		for (i in G_hNumbers) {
-			if(document.getElementById('soMAT'+i).checked) opts.push('m'+i);
-		} 
-
-		if(document.getElementById('soregexp').checked) opts.push('rx');
-		if(document.getElementById('sofuzzy').checked) opts.push('fz');
-		if(document.getElementById('sofulltext').checked) opts.push('ft');
-		if(document.getElementById('sostartword').checked) opts.push('sw');
-		if(hard) opts.push('hd');
-
-		if(!add) { // reuse old tab
-			var oldTab = DPRChrome.findDPRTab('DPR-dict');
-			if (!oldTab) {
-			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
-				DPRChrome.openDPRTab(permalink,'DPR-dict');
-			}
-			else {
-				mainWindow.gBrowser.selectedTab = oldTab;
-				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentWindow.wrappedJSObject.startDictLookup(which,getstring,opts);
-			}
 		}
 		else {
-			var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
-			DPRChrome.openDPRTab(permalink,'DPRd');
+			if(!add) { // reuse old tab
+				var oldTab = DPRChrome.findDPRTab('DPR-dict');
+				if (!oldTab) {
+				var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
+					DPRChrome.openDPRTab(permalink,'DPR-dict');
+				}
+				else {
+					mainWindow.gBrowser.selectedTab = oldTab;
+					var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+					oldTabBrowser.contentWindow.wrappedJSObject.startDictLookup(which,getstring,opts);
+				}
+			}
+			else {
+				var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+ which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
+				DPRChrome.openDPRTab(permalink,'DPRd');
+			}
 		}
 
 	},
 
 	sendSearch: function (add,searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
 		
-		if(typeof(searchType) == 'undefined') { // not direct from box
+		if(!searchString) { // not direct from box
 			
 			var getstring = document.getElementById('isearch').value;
 			if(!this.checkGetstring(getstring)) return;
 			
 			var which = document.getElementById('tipType').selectedIndex;
+			
 			if(getstring == '_dev') { // Dev
 				DPRChrome.openDPRTab('chrome://digitalpalireader/content/dev.xul','DPRd');
 				return;
