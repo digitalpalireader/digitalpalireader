@@ -71,7 +71,9 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
 			var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + toVel(stringra.join('+')).replace(/ /g, '_') : '')+(para ? '&para=' + (para+1) : '')+(alt ? '&alt='+alt : '')+'&compare='+count;
 
 			var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
+			var splitter = createSplitter(oldTabBrowser.contentDocument,count);
 
+			elem.appendChild(splitter);
 			elem.appendChild(node);
 			return;
 		}
@@ -137,7 +139,9 @@ function openXMLindex(nikaya,bookno,hier,add) {
 			var permalink = 'chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier+'&compare='+count;
 
 			var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
+			var splitter = createSplitter(oldTabBrowser.contentDocument,count);
 
+			elem.appendChild(splitter);
 			elem.appendChild(node);
 			return;
 		}
@@ -353,15 +357,10 @@ function openTranslation(url,add) {
 			var elem = doc.getElementById('dpr-tops');
 			var count = getBrowserCount();
 			var node = createBrowser(doc,url,count,true);
+			var splitter = createSplitter(doc,count);
+
+			elem.appendChild(splitter);
 			elem.appendChild(node);
-			
-			var newB = elem.getElementsByTagName('browser')[count];
-			
-			newB.contentWindow.onload = function() {
-				//alert('');
-			}
-			
-			// = '';//appendChild(addToolbar(newB.contentDocument));
 			
 			return;
 		}
@@ -370,26 +369,9 @@ function openTranslation(url,add) {
 }
 
 function createBrowser(thisDocument,url,count,close){
-	var node = thisDocument.createElement('hbox');
-	node.setAttribute('id','dpr-index-top-'+count);
-	node.setAttribute('flex','1');
 	
-	var splitter = thisDocument.createElement('splitter');
-	splitter.setAttribute('id','dpr-index-top-'+count+'-splitter');
-	
-	var subnode = thisDocument.createElement('vbox');
-	subnode.setAttribute('id','dpr-index-top-'+count+'-sub');
-	subnode.setAttribute('flex','1');
-
-	if(close) {
-		var tab = thisDocument.createElement('tab');
-		tab.setAttribute('label','x');
-		tab.setAttribute('tooltiptext','close panel');
-		tab.setAttribute('oncommand','this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode)');
-		subnode.appendChild(tab);
-	}
-
 	var browser = thisDocument.createElement('browser');
+	browser.setAttribute('id','dpr-index-top-'+count);
 	browser.setAttribute('disablehistory','true');
 	browser.setAttribute('type','content');
 	browser.setAttribute('src',url);
@@ -397,12 +379,26 @@ function createBrowser(thisDocument,url,count,close){
 	browser.setAttribute('flex','1');
 	browser.setAttribute('persist','height');
 		
-	subnode.appendChild(browser);
-
-	node.appendChild(splitter);
-	node.appendChild(subnode);
+	if(close) {
+		var subnode = thisDocument.createElement('vbox');
+		subnode.setAttribute('id','dpr-index-top-'+count+'-sub');
+		subnode.setAttribute('flex','1');
+		var tab = thisDocument.createElement('tab');
+		tab.setAttribute('label','x');
+		tab.setAttribute('tooltiptext','close panel');
+		tab.setAttribute('oncommand','this.parentNode.parentNode.removeChild(this.parentNode)');
+		subnode.appendChild(tab);
+		subnode.appendChild(browser);
+		return subnode;
+	}
 	
-	return node;
+	return browser;
+}
+
+function createSplitter(thisDocument,count){
+	var splitter = thisDocument.createElement('splitter');
+	splitter.setAttribute('id','dpr-index-top-'+count+'-splitter');
+	return splitter;
 }
 
 function addToolbar(doc,count) {

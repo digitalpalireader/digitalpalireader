@@ -54,11 +54,9 @@ var devCheck = 0;
 	}
 </script>
 	<hbox id="dpr-tops" flex="1">
-		<hbox flex="1" id="dpr-index-top-0">
-			<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
-		</hbox>
+		<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
 	</hbox>
 	<splitter id="PanelSplitter"/>
-	<browser disablehistory="true" height="300" type="content" id="dpr-index-bottom" src=""  style="max-height:99%" flex="0" persist="height"/>
+	<browser disablehistory="true" height="300" type="content" id="dpr-index-bottom" src=""  style="max-width:50%;max-height:99%" flex="0" persist="height"/>
 </window>
 

@@ -41,6 +41,7 @@ function sendTextToTextpad(event) {
 function closePanel(idx) {
 	var doc = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument;
 	var elem = doc.getElementById('dpr-tops');
+	elem.removeChild(doc.getElementById('dpr-index-top-'+idx+'-splitter'));
 	elem.removeChild(doc.getElementById('dpr-index-top-'+idx));
 
 }

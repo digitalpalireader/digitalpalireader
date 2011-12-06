@@ -24,7 +24,7 @@ var DPRXML = {
 		if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,''); 
 		else name = this.unnamed;
 		var outname = translit(toUni(name));
-		document.getElementById('title').label = outname;
+		document.getElementById('title').value = outname;
 			
 		var u = xmlDoc.getElementsByTagName("h0");
 		var v = u[meta].getElementsByTagName("h1");
