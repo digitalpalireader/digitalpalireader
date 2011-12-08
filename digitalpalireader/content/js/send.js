@@ -146,7 +146,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
 			return;
 		}
 	}
-	else {
+	else if(add != 'right'){
 		var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier;
 		openDPRTab(permalink,'DPRm');
 	}
@@ -176,7 +176,7 @@ function importXMLindex(add) {
 			oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,bookno,G_hier]);
 		}
 	}
-	else {
+	else if(add != 'right') {
 		var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+G_hier;
 		openDPRTab(permalink,'DPRm');
 	}

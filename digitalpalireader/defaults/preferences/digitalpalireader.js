@@ -47,6 +47,7 @@ pref("extensions.digitalpalireader.Bool.autodict", false);
 pref("extensions.digitalpalireader.Bool.bkgimg", true);
 
 pref("extensions.digitalpalireader.Bool.showPages", false);
+pref("extensions.digitalpalireader.Bool.showPagesFull", false);
 pref("extensions.digitalpalireader.Bool.showVariants", true);
 pref("extensions.digitalpalireader.Bool.showPermalinks", true);
 pref("extensions.digitalpalireader.Bool.showNames", true);

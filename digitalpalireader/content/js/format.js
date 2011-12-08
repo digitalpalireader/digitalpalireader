@@ -258,9 +258,13 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 					pagetitle += ' '+pageno;
 				else 
 					pagetitle += ' '+ref[0]+'. ' + vp[0] + ', p. ' + vp[1].replace(/^0+/,"");
+				if(DPR_prefs['showPagesFull'])
+					indexpage = ref[0]+'.' + vp[0] + ',' + vp[1].replace(/^0+/,"");
 			}
 			else {
-				pagetitle += ': vol. ' + ref[0] + ', p. ' + ref[1].replace(/^0+/,"");
+				pagetitle += ' vol. ' + ref[0] + ', p. ' + ref[1].replace(/^0+/,"");
+				if(DPR_prefs['showPagesFull'])
+					indexpage = indexpage+' '+ref[0]+'.'+ref[1].replace(/^0+/,"");
 			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}

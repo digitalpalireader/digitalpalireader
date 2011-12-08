@@ -67,7 +67,7 @@
 					<vbox id="hier">
 						<separator class="groove" />
 							<hbox pack="center"><label class="large bold" value="&hier.label;" /></hbox>
-							<toolbarbutton flex="1" onclick="DPRSend.importXMLindex(DPRSend.eventSend(event));">
+							<toolbarbutton flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
 								<label id="title" value="" />
 							</toolbarbutton>
 							<hbox id="metac" pack="stretch" align="center" flex="1">
@@ -75,7 +75,7 @@
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="meta-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="meta-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
@@ -84,7 +84,7 @@
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="volume-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="volume-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
@@ -93,7 +93,7 @@
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="vagga-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="vagga-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
@@ -102,7 +102,7 @@
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="sutta-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="sutta-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
@@ -111,7 +111,7 @@
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="section-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,5)" tooltiptext="&go_text;" role="button">
+								<toolbarbutton id="section-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))" tooltiptext="&go_text;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>

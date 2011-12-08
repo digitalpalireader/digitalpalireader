@@ -9,34 +9,27 @@ matValue['t'] = '';
 
 function loadXMLSection(query,para,place,isPL,scroll,compare)
 { 
-	for(i=0;i<place.length;i++) {
+	for(i=1;i<7;i++) {
 		if(place[i] == 'x') {
-			loadXMLindex(place);
+			loadXMLindex(place,compare);
 			return;
 		}
+		else place[i] = parseInt(place[i]);
 	}
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = place[0];
-	
-	place[1]= parseInt(place[1]);
-	place[2]= parseInt(place[2]);
-	place[3]= parseInt(place[3]);
-	place[4]= parseInt(place[4]);
-	place[5]= parseInt(place[5]);
-	place[6]= parseInt(place[6]);
-
+	var book = place[1]+1;
 	var hier=place[7];
+	var nikbookhier = nikaya + book + hier;
 	
 	var bookno = place[1];
-	var book = place[1]+1;
 	var meta = place[2];
 	var volume = place[3];
 	var vagga = place[4];
 	var sutta = place[5];
 	var section = place[6]
-	var nikbookhier = nikaya + book + hier;
 	
     var xmlDoc = loadXMLFile(nikbookhier,place[8]?place[8]:0);
 	
@@ -501,14 +494,13 @@ function loadXMLindex(place,compare) {
 		
 		whichcol[0] = 1; // bump up to let the second color know
 
-		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.0.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+',0,0,0,0,0,\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen+'<br />';
+		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.x.x.x.x.x.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+',\'x\',\'x\',\'x\',\'x\',\'x\',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen+'<br />';
 	}
-	if(isPlace && place[2] != 'x')
-		y = [z[tmp].getElementsByTagName("h0")[place[2]]];
-	else 
-		y = z[tmp].getElementsByTagName("h0");
+	y = z[tmp].getElementsByTagName("h0");
 	for (tmp2 = 0; tmp2 < y.length; tmp2++)
 	{
+		if(isPlace && place[2] != 'x' && tmp2 != place[2])
+			continue;
 		if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 		if (y.length > 1 && theData == '') { theData = unnamed; }
 		if (theData != '') {
@@ -534,7 +526,7 @@ function loadXMLindex(place,compare) {
 				spaces += '&nbsp;&nbsp;';
 			}
 			
-			theDatao += spaces+(devCheck == 1 && DshowH ? '[0]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.0.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+',0,0,0,0,\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
+			theDatao += spaces+(devCheck == 1 && DshowH ? '[0]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.x.x.x.x.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+',\'x\',\'x\',\'x\',\'x\',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
 
 			var transin;
 			var transout='';
@@ -546,12 +538,11 @@ function loadXMLindex(place,compare) {
 			}
 			theDatao += '<br />';
 		}
-		if(isPlace && place[3] != 'x')
-			x = [y[tmp2].getElementsByTagName("h1")[place[3]]];
-		else 
-			x = y[tmp2].getElementsByTagName("h1");
+		x = y[tmp2].getElementsByTagName("h1");
 		for (tmp3 = 0; tmp3 < x.length; tmp3++)
 		{
+			if(isPlace && place[3] != 'x' && tmp3 != place[3])
+				continue;
 			if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 			if (x.length > 1 && theData == '') { theData = unnamed; }
 			if (theData != '') {
@@ -578,7 +569,7 @@ function loadXMLindex(place,compare) {
 					spaces += '&nbsp;&nbsp;';
 				}
 
-				theDatao += spaces+(devCheck == 1 && DshowH ? '[1]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.0.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+',0,0,0,\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
+				theDatao += spaces+(devCheck == 1 && DshowH ? '[1]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.x.x.x.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+',\'x\',\'x\',\'x\',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
 
 				var transin;
 				var transout='';
@@ -590,13 +581,11 @@ function loadXMLindex(place,compare) {
 				}
 				theDatao += '<br />';
 			}
-			if(isPlace && place[4] != 'x')
-				w = [x[tmp3].getElementsByTagName("h2")[place[4]]];
-			else 
-				w = x[tmp3].getElementsByTagName("h2");
-
+			w = x[tmp3].getElementsByTagName("h2");
 			for (tmp4 = 0; tmp4 < w.length; tmp4++)
 			{
+				if(isPlace && place[4] != 'x' && tmp4 != place[4])
+					continue;
 				if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 				if (w.length > 1 && theData == '') { theData = unnamed; }
 				if (theData != '') {
@@ -625,7 +614,7 @@ function loadXMLindex(place,compare) {
 						spaces += '&nbsp;&nbsp;';
 					}
 
-					theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.0.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',0,0,\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' && hier == 'm' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+					theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.x.x.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+',\'x\',\'x\',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData))+(nikaya == 'd' && hier == 'm' ? '&nbsp;<d class="small">(DN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0) + ')</d>' : '') + '</span>'+namen;
 					var transin;
 					var transout='';
 					if (hier == "m") { 
@@ -636,12 +625,11 @@ function loadXMLindex(place,compare) {
 					}
 					theDatao += '<br />';
 				}
-				if(isPlace && place[5] != 'x')
-					v = [w[tmp4].getElementsByTagName("h3")[place[5]]];
-				else 
-					v = w[tmp4].getElementsByTagName("h3");
+				v = w[tmp4].getElementsByTagName("h3");
 				for (tmp5 = 0; tmp5 < v.length; tmp5++)
 				{
+					if(isPlace && place[5] != 'x' && tmp5 != place[5])
+						continue;
 					if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 					if (v.length > 1 && theData == '') { theData = unnamed; }
 					if (theData != '') {
@@ -668,7 +656,7 @@ function loadXMLindex(place,compare) {
 							spaces += '&nbsp;&nbsp;';
 						}
 
-						theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.0.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',0,\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+						theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.x.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+',\'x\',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
 						var transin;
 						var transout='';
 						if (hier == "m") { 
@@ -680,13 +668,12 @@ function loadXMLindex(place,compare) {
 						theDatao += '<br />';
 					}
 
-					if(isPlace && place[6] != 'x')
-						u = [v[tmp5].getElementsByTagName("h4")[place[6]]];
-					else 
-						u = v[tmp5].getElementsByTagName("h4");
+					u = v[tmp5].getElementsByTagName("h4");
 
 					for (tmp6 = 0; tmp6 < u.length; tmp6++)
 					{
+						if(isPlace && place[6] != 'x' && tmp6 != place[6])
+							continue;
 						if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 						if (u.length > 1 && theData == '') { theData = unnamed; }
 						if (theData != '') {
@@ -712,7 +699,7 @@ function loadXMLindex(place,compare) {
 								spaces += '&nbsp;&nbsp;';
 							}
 
-							theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span'+(isPlace?'':' onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');"')+' class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,u.length) + ')</d>' : '') + '</span>'+namen;
+							theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (/[sa]/.exec(nikaya) && hier == 'm' ? '&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,u.length) + ')</d>' : '') + '</span>'+namen;
 							var transin;
 							var transout='';
 							if (hier == "m") { 
@@ -723,14 +710,14 @@ function loadXMLindex(place,compare) {
 								}
 							}
 							theDatao += '<br />';
-							if(isPlace) {
-								var link = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
-								var t = u[tmp6].getElementsByTagName("p");
-								for (tmp7 = 0; tmp7 < t.length; tmp7++) {
-									var para = formatuniout(' <p'+link+'&para='+(tmp7+1)+'> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
-									theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
-									convout += para[1].replace(/  *,/g, ',');
-								}
+						}
+						if(isPlace) {
+							var link = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
+							var t = u[tmp6].getElementsByTagName("p");
+							for (tmp7 = 0; tmp7 < t.length; tmp7++) {
+								var para = formatuniout(' <p'+link+'&para='+(tmp7+1)+'> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+								theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
+								convout += para[1].replace(/  *,/g, ',');
 							}
 						}
 					}

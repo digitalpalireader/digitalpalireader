@@ -94,6 +94,7 @@
 
 <!ENTITY pShow.label "Show in Text:">
 <!ENTITY pShowPages.label "Page Numbers">
+<!ENTITY showPagesFull.label "Full Page Numbers">
 <!ENTITY pShowVariants.label "Variant Readings">
 <!ENTITY pShowPermalinks.label "Permalinks">
 <!ENTITY pShowNames.label "DPPN Links">

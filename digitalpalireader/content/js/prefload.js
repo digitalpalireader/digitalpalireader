@@ -84,6 +84,7 @@ DPR_prefsD['bkgimg'] = true;
 DPR_prefsD['translits'] = 0;
 
 DPR_prefsD['showPages'] = false;
+DPR_prefsD['showPagesFull'] = false;
 DPR_prefsD['showVariants'] = true;
 DPR_prefsD['showPermalinks'] = true;
 DPR_prefsD['showNames'] = true;

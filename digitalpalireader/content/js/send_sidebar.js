@@ -118,7 +118,6 @@ var DPRSend = {
 	},
 
 	importXMLindex:function(add) {
-
 		var nikaya = document.getElementById('set').value;
 		var bookno = document.getElementById('book').value-1;
 

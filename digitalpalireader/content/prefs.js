@@ -2,7 +2,7 @@
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
 function loadDefaults() {
-	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
+	var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 	for (var i = 0; i < cks.length; ++i) {
 		var ck = document.getElementById(cks[i]);
 		ck.checked = DPR_prefsD[cks[i]];
@@ -65,7 +65,7 @@ function loadDefaults() {
 }
 
 function loadPrefs() {
-		var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
+		var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 		for (var i = 0; i < cks.length; ++i) {
 			var ck = document.getElementById(cks[i]);
 			ck.checked = prefs.getBoolPref(ck.getAttribute("prefstring"));
@@ -162,7 +162,7 @@ function savePrefs(close) {
 	}
 
 	
-	var cks = ['showPages', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
+	var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 
 	for (var i = 0; i < cks.length; ++i) {
 		var ck = document.getElementById(cks[i]);

@@ -120,23 +120,6 @@ var DPRXML = {
 				listNode.selectedIndex = 0;
 			break;
 		}
-
-	// decide whether to load section
-	
-		switch(true) {
-			case (depth == 1): 
-				if(v.length == 1 && w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
-			break;
-			case  (depth == 2): 
-				if(w.length == 1 && x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
-			break;
-			case  (depth == 3): 
-				if(x.length == 1 && y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
-			break;
-			case  (depth == 4): 
-				if(y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
-			break;
-		}
 	
 	// buttons
 	
