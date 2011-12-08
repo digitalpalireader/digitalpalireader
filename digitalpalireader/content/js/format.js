@@ -52,7 +52,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 }
 
 
-function formatuniout(data,which) { // prepare without links
+function formatuniout(data,which) { // which = 1 prepare without links, 2 with links
 	
 	var convout = '';
 	
@@ -216,11 +216,10 @@ function formatuniout(data,which) { // prepare without links
 			finout += space;
 			convout += space;
 		}		
-
-		else if (/^<f/.exec(wb)) {
+		else if (/^&nbsp;/.exec(wb)) {
 			finout += wb + space;
 		}
-		else if (/^<p>$/.exec(wb)) {
+		else if (/^<\/*[fp]>$/.exec(wb)) {
 			finout += wb + space;
 		}
 		else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
@@ -265,15 +264,15 @@ function formatuniout(data,which) { // prepare without links
 			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}
-		else if (which == 1)
+		else if (which == 1) // without links
 		{
 			convout += wb + space;
 			unioutb = uniouta[a];
 			unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
 			finout += unioutb + space;
-		}
-		else
+		} 
+		else  // with links
 		{
 			convout += wb.replace(/<[^>]*>/g, '') + space;
 			unioutb = uniouta[a];

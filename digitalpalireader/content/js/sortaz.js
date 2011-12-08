@@ -226,7 +226,7 @@ function findSimilarWords(word,list,min,fuzzy) {
 		//ddump([word,thisword,ld,Math.round((sim-ld)/word.length*100) + '%']);
 	}
 	if(count > 0) {
-		simlist.sort(function(a,b){ return parseInt(b.replace(/\^.+/,'')) - parseInt(a.replace(/\^.+/,''))});
+		simlist.sort(function(a,b){ return parseInt(b[0]) - parseInt(a[0])});
 		return simlist;
 	}
 	return null;

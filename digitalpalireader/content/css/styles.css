@@ -303,6 +303,12 @@ background-color:transparent;
 height:20px;
 }
 
+.index1{
+	font-weight:bold;
+}
+.placeIndex{
+	font-weight:bold;
+}
 
 #search {
 border-left: grey 1px solid;

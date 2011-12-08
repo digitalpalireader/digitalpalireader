@@ -12,10 +12,13 @@
 <!ENTITY sNav.label "Navigation">
 <!ENTITY sSet.label "Set">
 <!ENTITY sBook.label "Book">
+<!ENTITY hier.label "Book Hierarchy">
+<!ENTITY index_button.label "View Index">
 <!ENTITY mul_text "Switch to Mūla">
 <!ENTITY att_text "Switch to Aṭṭhakathā">
 <!ENTITY tik_text "Switch to Ṭīkā">
-<!ENTITY go_text "Load current section">
+<!ENTITY go_cat "View all sub-sections">
+<!ENTITY go_text "View this section">
 <!ENTITY go_bookmark "Open bookmarks and history window">
 
 	<!-- search -->

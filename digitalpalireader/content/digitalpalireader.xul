@@ -56,39 +56,65 @@
 							<toolbarbutton flex="1" id="tik" group="mat" onclick="DPRNav.switchhier('t');" type="radio" tooltiptext="&tik_text;" role="button">
 								<label value="T" />
 							</toolbarbutton>
-							<toolbarseparator orient="horizontal" class="groove"/>
+<!--
 							<toolbarbutton flex="1" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
 								<label value="➤" />
 							</toolbarbutton>
+-->
 						</radiogroup>
 						<spacer id="flexspace" flex="1"/>
 					</hbox>
 					<vbox id="hier">
-						<separator/>
+						<separator class="groove" />
+							<hbox pack="center"><label class="large bold" value="&hier.label;" /></hbox>
 							<toolbarbutton flex="1" onclick="DPRSend.importXMLindex(DPRSend.eventSend(event));">
 								<label id="title" value="" />
 							</toolbarbutton>
-							<menulist class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
-								<menupopup>
-								</menupopup>
-							</menulist>
-							<menulist class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
-								<menupopup>
-								</menupopup>
-							</menulist>
-							<menulist class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
-								<menupopup>
-								</menupopup>
-							</menulist>
-							<menulist class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
-								<menupopup>
-								</menupopup>
-							</menulist>
-							<menulist class="sel" id="section">
-								<menupopup>
-								</menupopup>
-							</menulist>
-						<separator/>
+							<hbox id="metac" pack="stretch" align="center" flex="1">
+								<menulist flex="1" class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
+									<menupopup>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="meta-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)" tooltiptext="&go_cat;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
+							<hbox id="volumec" pack="stretch" align="center" flex="1">
+								<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
+									<menupopup>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="volume-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)" tooltiptext="&go_cat;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
+							<hbox id="vaggac" pack="stretch" align="center" flex="1">
+								<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
+									<menupopup>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="vagga-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)" tooltiptext="&go_cat;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
+							<hbox id="suttac" pack="stretch" align="center" flex="1">
+								<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
+									<menupopup>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="sutta-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)" tooltiptext="&go_cat;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
+							<hbox id="sectionc" pack="stretch" align="center" flex="1">
+								<menulist flex="1" class="sel" id="section">
+									<menupopup>
+									</menupopup>
+								</menulist>
+								<toolbarbutton id="section-b" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,5)" tooltiptext="&go_text;" role="button">
+									<label value="➤" />
+								</toolbarbutton>
+							</hbox>
 						<separator class="groove" />
 						<hbox id="hist-box" collapsed="true" flex="1" pack="stretch" align="center">
 							<menulist flex="1" class="sel" id="history">

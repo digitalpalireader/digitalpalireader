@@ -1,5 +1,5 @@
 var DPRXML = {
-	updateHierarchy:function (depth){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+	updateHierarchy:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
 		document.activeElement.blur();
 		
@@ -42,14 +42,13 @@ var DPRXML = {
 				
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.appendItem(this.unnamed);
-					listNode.collapsed = true;
+					listNode.parentNode.collapsed = true;
 				}
-				
 				else {
 					for(idx in lista){
 						listNode.appendItem(lista[idx]);
 					}	
-					listNode.collapsed = false;
+					listNode.parentNode.collapsed = false;
 				}
 				listNode.selectedIndex = 0;
 			case  (depth < 2): // remake volume list
@@ -59,14 +58,13 @@ var DPRXML = {
 				
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.appendItem(this.unnamed);
-					listNode.collapsed = true;
+					listNode.parentNode.collapsed = true;
 				}
-				
 				else {
 					for(idx in lista){
 						listNode.appendItem(lista[idx]);
 					}	
-					listNode.collapsed = false;
+					listNode.parentNode.collapsed = false;
 				}
 				listNode.selectedIndex = 0;
 
@@ -77,14 +75,13 @@ var DPRXML = {
 				
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.appendItem(this.unnamed);
-					listNode.collapsed = true;
+					listNode.parentNode.collapsed = true;
 				}
-				
 				else {
 					for(idx in lista){
 						listNode.appendItem(lista[idx]);
 					}	
-					listNode.collapsed = false;
+					listNode.parentNode.collapsed = false;
 				}
 				listNode.selectedIndex = 0;
 			case  (depth < 4): // remake sutta list on depth = 0, 2, or 3
@@ -94,14 +91,13 @@ var DPRXML = {
 				
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.appendItem(this.unnamed);
-					listNode.collapsed = true;
+					listNode.parentNode.collapsed = true;
 				}
-				
 				else {
 					for(idx in lista){
 						listNode.appendItem(lista[idx]);
 					}	
-					listNode.collapsed = false;
+					listNode.parentNode.collapsed = false;
 				}
 				listNode.selectedIndex = 0;
 			default: // remake section list
@@ -113,15 +109,13 @@ var DPRXML = {
 				
 				if (lista.length == 1 && lista[0] == this.unnamed ) {
 					listNode.appendItem(this.unnamed);
-					listNode.collapsed = true;
+					listNode.parentNode.collapsed = true;
 				}
 				else {
 					for(idx = 0; idx < lista.length; idx++){
 						listNode.appendItem(lista[idx]);
-						var ch = listNode.childNodes[0].childNodes;
-						ch[idx].setAttribute('onmouseup',"DPRSend.importXML("+idx+",null,null,null,DPRSend.eventSend(event))");						
 					}	
-					listNode.collapsed = false;
+					listNode.parentNode.collapsed = false;
 				}
 				listNode.selectedIndex = 0;
 			break;
@@ -143,6 +137,75 @@ var DPRXML = {
 				if(y.length == 1) DPRSend.importXML(false,null,null,null,event?DPRSend.eventSend(event):null);
 			break;
 		}
+	
+	// buttons
+	
+		if(document.getElementById('section').parentNode.collapsed == true) {
+			if(document.getElementById('sutta').parentNode.collapsed == true) {
+				if(document.getElementById('vagga').parentNode.collapsed == true) {
+					if(document.getElementById('volume').parentNode.collapsed == true) {
+						if(document.getElementById('meta').parentNode.collapsed == false) {
+							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
+							document.getElementById('meta-b').childNodes[0].setAttribute('value',"➤");
+						}			
+					}
+					else {
+						document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+
+						document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"View this section");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"➤");
+					}			
+				}
+				else {
+					document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+						
+					document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
+						
+					document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
+						document.getElementById('vagga-b').setAttribute('tooltiptext',"View this section");
+						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"➤");
+				}
+			}
+			else {
+				document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+				document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
+				document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
+						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"+");
+				document.getElementById('sutta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
+						document.getElementById('sutta-b').setAttribute('tooltiptext',"View this section");
+						document.getElementById('sutta-b').childNodes[0].setAttribute('value',"➤");
+			}
+		}
+		else {
+			document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+			document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
+			document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
+						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"+");
+			document.getElementById('sutta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)");
+						document.getElementById('sutta-b').setAttribute('tooltiptext',"Combine all subsections");
+						document.getElementById('sutta-b').childNodes[0].setAttribute('value',"+");
+			document.getElementById('section-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
+						document.getElementById('section-b').setAttribute('tooltiptext',"View this section");
+						document.getElementById('section-b').childNodes[0].setAttribute('value',"➤");
+		}
+
 	},
 	
 	updateSearchHierarchy:function (depth){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
