@@ -67,9 +67,14 @@
 					<vbox id="hier">
 						<separator class="groove" />
 							<hbox pack="center"><label class="large bold" value="&hier.label;" /></hbox>
-							<toolbarbutton flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
-								<label id="title" value="" />
-							</toolbarbutton>
+							<hbox id="basec" pack="stretch" align="center" flex="1" collapsed="false">
+								<toolbarbutton flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
+									<label id="title" value="" />
+								</toolbarbutton>
+								<toolbarbutton id="base-b" tooltiptext="Combine all sub-sections" role="button" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
+									<label value="*" />
+								</toolbarbutton>
+							</hbox>
 							<hbox id="metac" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 									<menupopup>

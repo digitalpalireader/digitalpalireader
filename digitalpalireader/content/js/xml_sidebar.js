@@ -128,7 +128,7 @@ var DPRXML = {
 				if(document.getElementById('vagga').parentNode.collapsed == true) {
 					if(document.getElementById('volume').parentNode.collapsed == true) {
 						if(document.getElementById('meta').parentNode.collapsed == true) {
-							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
 						}
 						else {
 							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
@@ -136,9 +136,9 @@ var DPRXML = {
 						}			
 					}
 					else {
-						document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
-						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+						document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"*");
 
 						document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
 						document.getElementById('volume-b').setAttribute('tooltiptext',"View this section");
@@ -146,13 +146,13 @@ var DPRXML = {
 					}			
 				}
 				else {
-					document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
-						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
+					document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"*");
 						
-					document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
-						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
+					document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"*");
 						
 					document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
 						document.getElementById('vagga-b').setAttribute('tooltiptext',"View this section");
@@ -160,33 +160,33 @@ var DPRXML = {
 				}
 			}
 			else {
-				document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
-						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
-				document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
-						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
-				document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
-						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"+");
+				document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"*");
+				document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"*");
+				document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)");
+						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"*");
 				document.getElementById('sutta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
 						document.getElementById('sutta-b').setAttribute('tooltiptext',"View this section");
 						document.getElementById('sutta-b').childNodes[0].setAttribute('value',"➤");
 			}
 		}
 		else {
-			document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
-						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('meta-b').childNodes[0].setAttribute('value',"+");
-			document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
-						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('volume-b').childNodes[0].setAttribute('value',"+");
-			document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
-						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"+");
-			document.getElementById('sutta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)");
-						document.getElementById('sutta-b').setAttribute('tooltiptext',"Combine all subsections");
-						document.getElementById('sutta-b').childNodes[0].setAttribute('value',"+");
+			document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)");
+						document.getElementById('meta-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('meta-b').childNodes[0].setAttribute('value',"*");
+			document.getElementById('volume-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)");
+						document.getElementById('volume-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('volume-b').childNodes[0].setAttribute('value',"*");
+			document.getElementById('vagga-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)");
+						document.getElementById('vagga-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('vagga-b').childNodes[0].setAttribute('value',"*");
+			document.getElementById('sutta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,5)");
+						document.getElementById('sutta-b').setAttribute('tooltiptext',"Combine all sub-sections");
+						document.getElementById('sutta-b').childNodes[0].setAttribute('value',"*");
 			document.getElementById('section-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
 						document.getElementById('section-b').setAttribute('tooltiptext',"View this section");
 						document.getElementById('section-b').childNodes[0].setAttribute('value',"➤");

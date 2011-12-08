@@ -23,20 +23,20 @@ var DPRSend = {
 		
 		//alert(cat);
 		
-		if(!cat) cat = 5;
+		if(!cat) cat = 6;
 				
 		switch(cat) {
-			case 5:
+			case 6:
 				if(section == 'x') {
 					section = document.getElementById('section').selectedIndex;
 				}
-			case 4:
+			case 5:
 				sutta = document.getElementById('sutta').selectedIndex;
-			case 3:
+			case 4:
 				vagga = document.getElementById('vagga').selectedIndex;
-			case 2:
+			case 3:
 				volume = document.getElementById('volume').selectedIndex;
-			case 1:
+			case 2:
 				meta = document.getElementById('meta').selectedIndex;
 				break;
 			default:
