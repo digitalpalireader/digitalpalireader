@@ -127,7 +127,10 @@ var DPRXML = {
 			if(document.getElementById('sutta').parentNode.collapsed == true) {
 				if(document.getElementById('vagga').parentNode.collapsed == true) {
 					if(document.getElementById('volume').parentNode.collapsed == true) {
-						if(document.getElementById('meta').parentNode.collapsed == false) {
+						if(document.getElementById('meta').parentNode.collapsed == true) {
+							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)");
+						}
+						else {
 							document.getElementById('meta-b').setAttribute('onmouseup',"DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
 							document.getElementById('meta-b').childNodes[0].setAttribute('value',"➤");
 						}			

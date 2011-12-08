@@ -20,7 +20,9 @@ var DPRSend = {
 		var sutta = 'x', vagga = 'x', volume = 'x', meta = 'x';
 		
 		if(section === false) section = 'x';
-
+		
+		//alert(cat);
+		
 		if(!cat) cat = 5;
 				
 		switch(cat) {

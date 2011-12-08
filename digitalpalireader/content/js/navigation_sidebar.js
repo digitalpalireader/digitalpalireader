@@ -381,7 +381,7 @@ var DPRNav = {
 				this.changeSet(1,book);
 			}
 		}
-		else DPRXML.updateHierarchy(0);
+		DPRXML.updateHierarchy(0);
 	},
 
 	historyBox:function() {

@@ -70,48 +70,48 @@
 							<toolbarbutton flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
 								<label id="title" value="" />
 							</toolbarbutton>
-							<hbox id="metac" pack="stretch" align="center" flex="1">
+							<hbox id="metac" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="meta-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="meta-b" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<hbox id="volumec" pack="stretch" align="center" flex="1">
+							<hbox id="volumec" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="volume-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="volume-b" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<hbox id="vaggac" pack="stretch" align="center" flex="1">
+							<hbox id="vaggac" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="vagga-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="vagga-b" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<hbox id="suttac" pack="stretch" align="center" flex="1">
+							<hbox id="suttac" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="sutta-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)" tooltiptext="&go_cat;" role="button">
+								<toolbarbutton id="sutta-b" tooltiptext="&go_cat;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
-							<hbox id="sectionc" pack="stretch" align="center" flex="1">
+							<hbox id="sectionc" pack="stretch" align="center" flex="1" collapsed="false">
 								<menulist flex="1" class="sel" id="section">
 									<menupopup>
 									</menupopup>
 								</menulist>
-								<toolbarbutton id="section-b" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))" tooltiptext="&go_text;" role="button">
+								<toolbarbutton id="section-b" tooltiptext="&go_text;" role="button">
 									<label value="➤" />
 								</toolbarbutton>
 							</hbox>
