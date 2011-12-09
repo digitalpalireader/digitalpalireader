@@ -100,9 +100,17 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 if [ "$update" != "" ]
 then
 echo "$update" > digitalpalireader.xhtml
+old=`tail -n +3 content/news.xml | head -n 4`
+echo -e '<?xml version="1.0" encoding="UTF-8"?>
+<update>
+    <news>'$update'</news>'$old'
+</update>' > content/news.xml
 else
 echo "$xhtmlu" > digitalpalireader.xhtml
 fi
+
+    
+
 
 
 #echo '<?xml version="1.0"?>
