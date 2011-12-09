@@ -123,7 +123,7 @@ function pedsearchstart(hard)
 	var y = 0;
 	var finout = '';
 
-	for (pedt in mainda)
+	for (pedt in P)
 	{
 		if(/fz/.exec(G_dictOpts)) {
 			pedt = toFuzzy(pedt);
@@ -139,15 +139,15 @@ function pedsearchstart(hard)
 		}
 		if(yessir)
 		{
-			for (z = 0; z < mainda[pedt].length; z++) {
+			for (z = 0; z < P[pedt].length; z++) {
 			
-				var loc = mainda[pedt][z];
+				var loc = P[pedt][z];
 				
 				uniout = pedt;
 				
 				uniout = toUni(uniout).replace(/`/g,'˚');
 				
-				finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+				finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
 			}
@@ -165,20 +165,20 @@ function pedsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),mainda,70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),P,70,1);
 			if(simlist) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlist) {
 					pedt = simlist[i][1];
-					for (z = 0; z < mainda[pedt].length; z++) {
+					for (z = 0; z < P[pedt].length; z++) {
 					
-						var loc = mainda[pedt][z];
+						var loc = P[pedt][z];
 						
 						uniout = pedt;
 						
 						uniout = toUni(uniout).replace(/`/g,'˚');
 						
-						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
 					}
@@ -326,7 +326,7 @@ function dppnsearchstart(hard)
 	var finouta = new Array();
 	var finout = '';
 
-    for (x in nameda)
+    for (x in D)
 	{
 
 		var dppnt = x;
@@ -346,13 +346,13 @@ function dppnsearchstart(hard)
 		}
 		if(yessir)
 		{
-			for (z = 0; z < nameda[x].length; z++) {
+			for (z = 0; z < D[x].length; z++) {
 			
-				loc = nameda[x][z];
+				loc = D[x][z];
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -368,20 +368,20 @@ function dppnsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),nameda,70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),D,70,1);
 			if(simlist) {
 				listoutf += '<p>Did you mean:</p>';
 				for (i in simlist) {
 					pedt = simlist[i][1];
-					for (z = 0; z < nameda[pedt].length; z++) {
+					for (z = 0; z < D[pedt].length; z++) {
 					
-						var loc = nameda[pedt][z];
+						var loc = D[pedt][z];
 						
 						uniout = pedt;
 						
 						uniout = toUni(uniout).replace(/`/g,'˚');
 						
-						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 					}
 				}
@@ -624,13 +624,14 @@ function multisearchstart(hard)
 
 	// get ped
 
-	for (pedt in mainda)
+	for (pedt in P)
 	{
+		var tosearch = pedt;
+
 		if(/fz/.exec(G_dictOpts)) {
-			pedt = toFuzzy(pedt);
+			tosearch = toFuzzy(tosearch);
 		}
 
-		var tosearch = pedt;
 		if(G_dictUnicode) tosearch = toUni(tosearch);
 
 		if (/rx/.exec(G_dictOpts)) { // reg exp
@@ -641,27 +642,27 @@ function multisearchstart(hard)
 		}
 		if(yessir)
 		{
-			for (z = 0; z < mainda[pedt].length; z++) {
+			for (z = 0; z < P[pedt].length; z++) {
 			
-				var loc = mainda[pedt][z];
+				var loc = P[pedt][z];
 				
 				uniout = pedt;
 				
 				uniout = toUni(uniout).replace(/`/g,'˚');
 				
-				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
 
-    for (x in nameda)
+    for (x in D)
 	{
 		var dppnt = x;
 		if(/fz/.exec(G_dictOpts)) {
 			dppnt = toFuzzy(dppnt);
 		}
-		
 		var tosearch = dppnt;
+		
 		if(G_dictUnicode) tosearch = toUni(tosearch);
 
         if (/rx/.exec(G_dictOpts)) { // reg exp
@@ -672,13 +673,13 @@ function multisearchstart(hard)
 		}
 		if(yessir)
 		{
-			for (z = 0; z < nameda[x].length; z++) {
+			for (z = 0; z < D[x].length; z++) {
 			
-				loc = nameda[x][z];
+				loc = D[x][z];
 				
 				uniout = toUni(dppnt);
 					
-				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
@@ -737,38 +738,38 @@ function multisearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlistp = findSimilarWords(toFuzzy(getstring),mainda,70,1);
-			var simlistd = findSimilarWords(toFuzzy(getstring),nameda,70,1);
+			var simlistp = findSimilarWords(toFuzzy(getstring),P,70,1);
+			var simlistd = findSimilarWords(toFuzzy(getstring),D,70,1);
 			var simlistc = findSimilarWords(toFuzzy(getstring),yt,70,1);
 			
 			if(simlistp || simlistd || simlistc) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlistp) {
 					pedt = simlistp[i][1];
-					for (z = 0; z < mainda[pedt].length; z++) {
+					for (z = 0; z < P[pedt].length; z++) {
 					
-						var loc = mainda[pedt][z];
+						var loc = P[pedt][z];
 						
 						uniout = pedt;
 						
 						uniout = toUni(uniout).replace(/`/g,'˚');
 						
-						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (mainda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
 					}
 				}
 				for (i in simlistd) {
 					pedt = simlistd[i][1];
-					for (z = 0; z < nameda[pedt].length; z++) {
+					for (z = 0; z < D[pedt].length; z++) {
 					
-						var loc = nameda[pedt][z];
+						var loc = D[pedt][z];
 						
 						uniout = pedt;
 						
 						uniout = toUni(uniout).replace(/`/g,'˚');
 						
-						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onclick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (nameda[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onclick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
 					}
@@ -1144,15 +1145,15 @@ function titlesearchstart()
 			// add DPPN title entries
 
 			var dppnEntry = [];
-			if(nameda[gsplit]) {
-				dppnEntry = nameda[gsplit];
+			if(D[gsplit]) {
+				dppnEntry = D[gsplit];
 			}
 			else {
-				if(typeof(nameda[gsplit.replace(/\.m$/,'')]) == 'object') {
-					dppnEntry = nameda[gsplit.replace(/\.m$/,'')];
+				if(typeof(D[gsplit.replace(/\.m$/,'')]) == 'object') {
+					dppnEntry = D[gsplit.replace(/\.m$/,'')];
 				}
-				else if(typeof(nameda[gsplit.replace(/o$/,'a')]) == 'object') {
-					dppnEntry = nameda[gsplit.replace(/o$/,'a')];
+				else if(typeof(D[gsplit.replace(/o$/,'a')]) == 'object') {
+					dppnEntry = D[gsplit.replace(/o$/,'a')];
 				}
 			}
 			var dEI = '';

@@ -31,7 +31,7 @@ function paliXML(filein,which,add)
 	var ttit = filea[1].replace(/˚/g,'`');
 	file = filea[0];
 
-	if(!mainda[toVel(ttit)]) {
+	if(!P[toVel(ttit)]) {
 		if(G_irregNoun[toVel(ttit)]) {
 			ttit = G_irregNoun[toVel(ttit)];
 		}
@@ -63,7 +63,7 @@ function paliXML(filein,which,add)
 				if(!tda || tda.length < 2) {
 					datat += ' ' + dataa[i];
 				}
-				else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+				else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
 				else datat += ' ' + dataa[i];
 				i++
 				
@@ -84,7 +84,7 @@ function paliXML(filein,which,add)
 			if(!tda || tda.length < 2) {
 				datat += ' ' + dataa[i];
 			}
-			else if(typeof(mainda[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + mainda[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
 			else datat += ' ' + dataa[i];
 			
 		}
@@ -115,12 +115,12 @@ function paliXML(filein,which,add)
 	// get number
 	var tname, lname, nname;
 
-	if(mainda[toVel(ttit)]) {
+	if(P[toVel(ttit)]) {
 		
 		if(G_peda.length == 0) {
-			for (i in mainda) {
-				for (j in mainda[i]) {
-					G_peda.push([i,mainda[i][j]]);
+			for (i in P) {
+				for (j in P[i]) {
+					G_peda.push([i,P[i][j]]);
 				}
 			}
 		}
@@ -194,13 +194,13 @@ function DPPNXML(filein,which,add)
 	
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
-	if (nameno[tloc[2]+'^'+filea[1]]) { // fudge
-		var tt = nameno[tloc[2]+'^'+filea[1]];
-		if (tt == '' || !nameda[tt]) {
+	if (Dn[tloc[2]+'^'+filea[1]]) { // fudge
+		var tt = Dn[tloc[2]+'^'+filea[1]];
+		if (tt == '' || !D[tt]) {
 			alert('Link not found');
 			return;
 		}
-		tloc = [tt].concat(nameda[tt][0].split('/'));
+		tloc = [tt].concat(D[tt][0].split('/'));
 	}
 	
 	tloc[0] = toVel(tloc[0]);
@@ -242,9 +242,9 @@ function DPPNXML(filein,which,add)
 	var tname, lname, nname;
 	
 	if(G_dppn.length == 0) {
-		for (i in nameda) {
-			for (j in nameda[i]) {
-				G_dppn.push([i,nameda[i][j]]);
+		for (i in D) {
+			for (j in D[i]) {
+				G_dppn.push([i,D[i][j]]);
 			}
 		}
 	}

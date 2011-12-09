@@ -29,7 +29,7 @@ function toVelRegEx(input) {
 
 function toFuzzy(input){
 	if(!input) return;
-	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u");
+	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u").replace(/nn/g,"n").replace(/mm/g,"m").replace(/yy/g,"y").replace(/ll/g,"l").replace(/ss/g,"s").replace(/([kgcjtdpb])[kgcjtdpb]{0,1}h*/g,"$1");
 	return input;
 }
 

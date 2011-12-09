@@ -238,15 +238,15 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be
 
 function getDppnEntry(term) {
 	var dppnEntry = [];
-	if(typeof(nameda[term]) == 'object') {
-		dppnEntry = nameda[term];
+	if(typeof(D[term]) == 'object') {
+		dppnEntry = D[term];
 	}
 	else {
-		if(typeof(nameda[term.replace(/\.m$/,'')]) == 'object') {
-			dppnEntry = nameda[term.replace(/\.m$/,'')];
+		if(typeof(D[term.replace(/\.m$/,'')]) == 'object') {
+			dppnEntry = D[term.replace(/\.m$/,'')];
 		}
-		else if(typeof(nameda[term.replace(/o$/,'a')]) == 'object') {
-			dppnEntry = nameda[term.replace(/o$/,'a')];
+		else if(typeof(D[term.replace(/o$/,'a')]) == 'object') {
+			dppnEntry = D[term.replace(/o$/,'a')];
 		}
 	}
 	var dEI = [];
