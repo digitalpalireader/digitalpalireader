@@ -145,7 +145,8 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
 
 function findmatch(oneword,lastpart,nextpart,partslength,trick)
 {
-	devDump = 2;
+	//devCheck = 2;
+	//devDump = 2;
 	//if(!lastpart && !nextpart) ddump(typeof(G_irregNoun[oneword]) + ' ' + oneword);
 	if(devCheck > 0 && devDump == 1) ddump(oneword);
 		
@@ -682,7 +683,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		for(i in G_altInnerStem) {
 			if(oneword.indexOf(i) > 0 && oneword.indexOf(i) < oneword.length - i.length) {
 				var ist = G_altInnerStem[i][0];
-				var trickmatch = findmatch(oneword.replace(i,ist),lastpart,nextpart,partslength);
+				var trickmatch = findmatch(oneword.replace(i,ist),lastpart,nextpart,partslength,1);
 				if (trickmatch) { 
 					if(devDump > 0) ddump('added inner replacement: ' + trickmatch[2]);
 					return [oneword, trickmatch[1], ((trickmatch[2] ? trickmatch[2] : '')),nextpart,1];  

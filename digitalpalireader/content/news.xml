@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update>
-    <news>added what's new button, jquery library</news> <news>2.3 added ability to view all subsections</news> <news>2.2 added histories to search and dictionary</news> <news>2.1 added ability to view two section side-by-side (SHIFT+click)</news> <news>2.0 completely redesigned, tabbed interface</news>
+    <news>2.3.4 added what's new button, jquery library</news> <news>2.3 added ability to view all subsections</news> <news>2.2 added histories to search and dictionary</news> <news>2.1 added ability to view two section side-by-side (SHIFT+click)</news> <news>2.0 completely redesigned, tabbed interface</news>
 </update>
