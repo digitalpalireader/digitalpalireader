@@ -403,7 +403,12 @@ var DPRNav = {
 				
 				var ch = histNode.childNodes[0].childNodes;
 				var x=thist[1].split(',');
-				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
+				if(x.length>3) {
+					ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+x[0]+"',"+x[1]+","+x[2]+","+x[3]+","+x[4]+","+x[5]+","+x[6]+",'"+x[7]+"'],null,null,DPRSend.eventSend(event));");
+				}
+				else {
+					ch[i+1].setAttribute('onclick',"DPRSend.openIndex(['"+x[0]+"',"+x[1]+",'"+x[2]+"'],DPRSend.eventSend(event));");
+				}
 			}
 			histNode.selectedIndex = 0;
 		}

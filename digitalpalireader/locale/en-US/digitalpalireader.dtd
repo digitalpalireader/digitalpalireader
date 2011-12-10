@@ -11,20 +11,26 @@
 
 <!ENTITY sNav.label "Navigation">
 <!ENTITY sSet.label "Set">
+<!ENTITY set.text "Choose set">
 <!ENTITY sBook.label "Book">
+<!ENTITY book.text "Choose book">
 <!ENTITY hier.label "Book Hierarchy">
-<!ENTITY index_button.label "View Index">
+<!ENTITY base.text "View index for this book">
+<!ENTITY hier.text "Choose section">
 <!ENTITY mul_text "Switch to Mūla">
 <!ENTITY att_text "Switch to Aṭṭhakathā">
 <!ENTITY tik_text "Switch to Ṭīkā">
 <!ENTITY go_cat "View all sub-sections">
 <!ENTITY go_text "View this section">
 <!ENTITY go_bookmark "Open bookmarks and history window">
+<!ENTITY bookmark.text "Choose bookmarked section">
+<!ENTITY history.text "Choose previous section">
 
 	<!-- search -->
 
 <!ENTITY sSearch.label "Search">
 <!ENTITY searchHead "Text Search">
+<!ENTITY search.text "Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
 <!ENTITY searchSET "Set: ">
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
@@ -38,6 +44,7 @@
 
 <!ENTITY sTools.label "Tools">
 <!ENTITY dictHead "Dictionary">
+<!ENTITY dict.text "Enter word or partial word using Velthuis or Unicode.">
 <!ENTITY dict_go "Lookup word in selected dictionary">
 <!ENTITY dictGo.text "Lookup word in selected dictionary">
 <!ENTITY dictAdv "adv">

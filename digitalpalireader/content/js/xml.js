@@ -746,7 +746,37 @@ function loadXMLindex(place,compare) {
 		convDiv.setAttribute('id','convi');
 		convDiv.innerHTML = convout;
 		document.getElementById('mafbc').appendChild(convDiv);	
+
+		// history
+
+		if (place[6] != 'x' && y[place[6]].getElementsByTagName("h4n")[0].childNodes[0]) { var bknameme = u[place6].getElementsByTagName("h4n")[0].childNodes[0].textContent }
+		else if (place[5] != 'x' && y[place[5]].getElementsByTagName("h3n")[0].childNodes[0]) { var bknameme = v[place[5]].getElementsByTagName("h3n")[0].childNodes[0].textContent }
+		else if (place[4] != 'x' && y[place[4]].getElementsByTagName("h2n")[0].childNodes[0]) { var bknameme = w[place[4]].getElementsByTagName("h2n")[0].childNodes[0].textContent }
+		else if (place[3] != 'x' && y[place[3]].getElementsByTagName("h1n")[0].childNodes[0]) { var bknameme = x[place[3]].getElementsByTagName("h1n")[0].childNodes[0].textContent }
+		else if (place[2] != 'x' && y[place[2]].getElementsByTagName("h0n")[0].childNodes[0]) { var bknameme = y[place[2]].getElementsByTagName("h0n")[0].childNodes[0].textContent }
+		else if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
+		else bknameme = '';
+		
+		bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
+		var places = (place[2]+','+place[3]+','+place[4]+','+place[5]+','+place[6]).replace(/x/g,"'x'");
+		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
 	}
+	else {
+		if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
+		else bknameme = '';
+		bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
+		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
+	}
+
+
+	// refresh history box
+
+	var sidebar = DPRSidebarWindow();
+
+	if (sidebar) {
+		sidebar.DPRNav.historyBox();
+	} 
+
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0;

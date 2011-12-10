@@ -249,6 +249,65 @@ var DPRSend = {
 		}
 	},
 
+	openIndex:function([nikaya,book,hiert],add) {
+		if(!nikaya || add == 'right') return;
+		if(!add) { // reuse old tab
+			var thisTab = DPRChrome.isThisDPRTab('DPRm');
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,book,hiert]);
+				return;
+			}
+			var oldTab = DPRChrome.findDPRTab('DPR-main');
+			if (!oldTab) {		
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+hiert;
+				DPRChrome.openDPRTab(permalink,'DPR-main');
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.loadXMLindex([nikaya,book,hiert]);
+			}
+		}
+		else if (add == 'shift') {
+			var thisTab = DPRChrome.isThisDPRTab('DPRm');
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
+				var count = thisTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
+				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count;
+
+				var node = this.createBrowser(thisTabBrowser.contentDocument,permalink,count);
+	
+				elem.appendChild(node);
+				return;
+			}
+			var oldTab = DPRChrome.findDPRTab('DPR-main');
+			if (!oldTab) {		
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count;
+				openDPRTab(permalink,'DPR-main');
+				return;
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
+				var count = oldTabBrowser.contentWindow.wrappedJSObject.G_count_browsers++;
+				var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count;
+				var node = this.createBrowser(oldTabBrowser.contentDocument,permalink,count);
+				var splitter = this.createSplitter(oldTabBrowser.contentDocument,count);
+
+				elem.appendChild(splitter);
+				elem.appendChild(node);
+				return;
+			}
+		}
+		else {
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+hiert;
+			DPRChrome.openDPRTab(permalink,'DPRm');
+		}
+	},
+
 
 	sendAnalysisToOutput: function (input, frombox, add) {
 		if(add == 'right') return;

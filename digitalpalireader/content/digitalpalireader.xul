@@ -20,7 +20,7 @@
 					<hbox id="nav">
 						<vbox flex="1" align="stretch" pack="stretch">
 							<hbox pack="center"><label class="large bold" value="&sSet.label;" /></hbox>
-							<listbox id="set" rows="7" onclick="DPRNav.changeSet()">
+							<listbox tooltiptext="&set.text;" id="set" rows="7" onclick="DPRNav.changeSet()">
 								<listitem value="v" label="Vinaya"/>
 								<listitem value="d" selected="true" label="Dīgha"/>
 								<listitem value="m" label="Majjhima"/>
@@ -35,7 +35,7 @@
 						</vbox>
 						<vbox align="stretch" pack="stretch" flex="1">
 							<hbox pack="center"><label class="large bold" value="&sBook.label;" /></hbox>
-							<listbox rows="7" style="min-width:20px" id="book" onclick="DPRXML.updateHierarchy(0)">
+							<listbox tooltiptext="&book.text;" rows="7" style="min-width:20px" id="book" onclick="DPRXML.updateHierarchy(0)">
 								<listitem value="1" label="1" selected="true"/>
 								<listitem value="2" label="2"/>
 								<listitem value="3" label="3"/>
@@ -68,7 +68,7 @@
 						<separator class="groove" />
 							<hbox pack="center"><label class="large bold" value="&hier.label;" /></hbox>
 							<hbox id="basec" pack="stretch" align="center" flex="1" collapsed="false">
-								<toolbarbutton flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
+								<toolbarbutton tooltiptext="&base.text;" flex="1" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
 									<label id="title" value="" />
 								</toolbarbutton>
 								<toolbarbutton id="base-b" tooltiptext="Combine all sub-sections" role="button" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
@@ -76,7 +76,7 @@
 								</toolbarbutton>
 							</hbox>
 							<hbox id="metac" pack="stretch" align="center" flex="1" collapsed="false">
-								<menulist flex="1" class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
+								<menulist tooltiptext="&hier.text;" flex="1" class="sel" id="meta" oncommand="DPRXML.updateHierarchy(1)">
 									<menupopup>
 									</menupopup>
 								</menulist>
@@ -85,7 +85,7 @@
 								</toolbarbutton>
 							</hbox>
 							<hbox id="volumec" pack="stretch" align="center" flex="1" collapsed="false">
-								<menulist flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
+								<menulist tooltiptext="&hier.text;" flex="1" class="sel" id="volume" oncommand="DPRXML.updateHierarchy(2)">
 									<menupopup>
 									</menupopup>
 								</menulist>
@@ -94,7 +94,7 @@
 								</toolbarbutton>
 							</hbox>
 							<hbox id="vaggac" pack="stretch" align="center" flex="1" collapsed="false">
-								<menulist flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
+								<menulist tooltiptext="&hier.text;" flex="1" class="sel" id="vagga" oncommand="DPRXML.updateHierarchy(3)">
 									<menupopup>
 									</menupopup>
 								</menulist>
@@ -103,7 +103,7 @@
 								</toolbarbutton>
 							</hbox>
 							<hbox id="suttac" pack="stretch" align="center" flex="1" collapsed="false">
-								<menulist flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
+								<menulist tooltiptext="&hier.text;" flex="1" class="sel" id="sutta" oncommand="DPRXML.updateHierarchy(4)">
 									<menupopup>
 									</menupopup>
 								</menulist>
@@ -112,7 +112,7 @@
 								</toolbarbutton>
 							</hbox>
 							<hbox id="sectionc" pack="stretch" align="center" flex="1" collapsed="false">
-								<menulist flex="1" class="sel" id="section">
+								<menulist tooltiptext="&hier.text;" flex="1" class="sel" id="section">
 									<menupopup>
 									</menupopup>
 								</menulist>
@@ -122,7 +122,7 @@
 							</hbox>
 						<separator class="groove" />
 						<hbox id="hist-box" collapsed="true" flex="1" pack="stretch" align="center">
-							<menulist flex="1" class="sel" id="history">
+							<menulist tooltiptext="&history.text;" flex="1" class="sel" id="history">
 								<menupopup>
 								</menupopup>
 							</menulist>
@@ -131,7 +131,7 @@
 							</toolbarbutton>
 						</hbox>
 						<hbox id="bm-box" collapsed="true" flex="1" pack="stretch" align="center">
-							<menulist flex="1" class="sel" id="bookmarks">
+							<menulist tooltiptext="&bookmark.text;" flex="1" class="sel" id="bookmarks">
 								<menupopup>
 								</menupopup>
 							</menulist>
@@ -149,7 +149,7 @@
 				<form orient="vertical" id="sForm" flex="1">
 					<hbox pack="center"><label class="large bold" value="&searchHead;"/></hbox>
 					<hbox flex="1" pack="stretch" align="center">
-						<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
+						<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="&search.text;" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
 						<toolbarbutton id="searchGo" tooltiptext="&searchGo.text;" onmouseup="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
 							<label value="➤" />
 						</toolbarbutton>
@@ -317,7 +317,7 @@
 					<form orient="vertical" align="stretch" id="dForm">
 						<hbox pack="center"><label class="large bold" value="&dictHead;"/></hbox>
 						<hbox pack="stretch" flex="1">
-							<textbox type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
+							<textbox tooltiptext="&dict.text;" type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
 							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" onmouseup="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
 								<label value="➤" />
 							</toolbarbutton>
