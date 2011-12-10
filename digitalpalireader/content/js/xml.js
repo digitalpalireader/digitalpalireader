@@ -749,10 +749,12 @@ function loadXMLindex(place,compare) {
 
 		// history
 
-		if (place[6] != 'x' && y[place[6]].getElementsByTagName("h4n")[0].childNodes[0]) { var bknameme = u[place6].getElementsByTagName("h4n")[0].childNodes[0].textContent }
-		else if (place[5] != 'x' && y[place[5]].getElementsByTagName("h3n")[0].childNodes[0]) { var bknameme = v[place[5]].getElementsByTagName("h3n")[0].childNodes[0].textContent }
-		else if (place[4] != 'x' && y[place[4]].getElementsByTagName("h2n")[0].childNodes[0]) { var bknameme = w[place[4]].getElementsByTagName("h2n")[0].childNodes[0].textContent }
-		else if (place[3] != 'x' && y[place[3]].getElementsByTagName("h1n")[0].childNodes[0]) { var bknameme = x[place[3]].getElementsByTagName("h1n")[0].childNodes[0].textContent }
+		var bknameme = '';
+
+		if (place[6] != 'x' && u[place[6]].getElementsByTagName("h4n")[0].childNodes[0]) { var bknameme = u[place6].getElementsByTagName("h4n")[0].childNodes[0].textContent }
+		else if (place[5] != 'x' && v[place[5]].getElementsByTagName("h3n")[0].childNodes[0]) { var bknameme = v[place[5]].getElementsByTagName("h3n")[0].childNodes[0].textContent }
+		else if (place[4] != 'x' && w[place[4]].getElementsByTagName("h2n")[0].childNodes[0]) { var bknameme = w[place[4]].getElementsByTagName("h2n")[0].childNodes[0].textContent }
+		else if (place[3] != 'x' && x[place[3]].getElementsByTagName("h1n")[0].childNodes[0]) { var bknameme = x[place[3]].getElementsByTagName("h1n")[0].childNodes[0].textContent }
 		else if (place[2] != 'x' && y[place[2]].getElementsByTagName("h0n")[0].childNodes[0]) { var bknameme = y[place[2]].getElementsByTagName("h0n")[0].childNodes[0].textContent }
 		else if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
 		else bknameme = '';
