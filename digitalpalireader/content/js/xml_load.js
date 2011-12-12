@@ -20,7 +20,7 @@ function loadXMLFile(file,setNo) {
 		return xmlDoc;
 	}
 	catch(ex) {
-		alert('XML file '+file+'.xml not found.  Do you have the ' + setName + ' Tipitaka extension installed?');
+		alert('XML file '+file+'.xml not found.  Do you have the latest ' + setName + ' Tipitaka extension installed?');
 		return null;
 	}
 }
