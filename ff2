@@ -98,13 +98,15 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
 </RDF:RDF>' > digitalpalireader.rdf
 
 if [ "$update" != "" ]
-then
-echo "$update" > digitalpalireader.xhtml
-old=`tail -n +3 content/news.xml | head -n 4`
-echo -e '<?xml version="1.0" encoding="UTF-8"?>
-<update>
-    <news>'$update'</news>'$old'
-</update>' > content/news.xml
+    then
+    echo "$update" > digitalpalireader.xhtml
+    IFS=$'\t\n'
+    j=`tail -n +3 content/news.xml | head -n 4`
+    echo -ne '<?xml version="1.0" encoding="UTF-8"?>\n<update>\n<news>'$update'</news>\n' > content/news1.xml
+    for i in $j
+        do echo $i >> content/news1.xml
+    done
+    echo '</update>' >> content/news1.xml
 else
 echo "$xhtmlu" > digitalpalireader.xhtml
 fi
