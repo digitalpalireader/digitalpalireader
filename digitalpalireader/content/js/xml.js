@@ -388,7 +388,8 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		}
 		else {
 			for (tmp = 0; tmp < z.length; tmp++) {
-				theData += ' <p'+permalink+'&para='+(tmp+1)+'> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
+				var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
+				theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'|> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 			}
 		}
 	}
@@ -719,7 +720,8 @@ function loadXMLindex(place,compare) {
 							var link = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
 							var t = u[tmp6].getElementsByTagName("p");
 							for (tmp7 = 0; tmp7 < t.length; tmp7++) {
-								var para = formatuniout(' <p'+link+'&para='+(tmp7+1)+'> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+								var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
+								var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
 								theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
 								convout += para[1].replace(/  *,/g, ',');
 							}

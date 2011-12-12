@@ -1,4 +1,5 @@
-importScripts('js/xml_load.js','js/navigation.js');
+importScripts('js/xml_load.js','js/navigation_common.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/navigation.js');
 
 // ATT & TIK Creation
 

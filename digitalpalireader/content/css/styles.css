@@ -891,3 +891,12 @@ text-align:center;
 }
 
 
+/* paragraph types */
+
+.paratype06 {
+	font-style:italic;
+	opacity:0.5;
+}
+.paratype21,.paratype22,.paratype23,.paratype24,.paratype25,.paratype26,.paratype27,.paratype28,.paratype29 {
+	margin: 0 0 0 24px;
+}

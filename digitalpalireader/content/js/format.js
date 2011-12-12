@@ -223,9 +223,11 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			finout += wb + space;
 		}
 		else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
-			var permalink = wb.substring(2,wb.length-1);
-			convout += '\n\n';
-			finout += '<p id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
+			var parap = wb.split('|');
+			var ptype = parap[1];
+			var permalink = parap[2];
+			if(convout.length>1) convout += '\n\n';
+			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -267,6 +269,9 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 					indexpage = indexpage+'.'+ref[0]+'.'+ref[1].replace(/^0+/,"");
 			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
+		}
+		else if (!wb) {
+			continue;
 		}
 		else if (which == 1) // without links
 		{
