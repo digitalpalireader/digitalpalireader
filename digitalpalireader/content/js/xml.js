@@ -282,7 +282,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// first toolbar row
 	
-	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut lbut small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
+	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
 	
 	// second toolbar row
 

@@ -146,7 +146,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altread = 0;
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
-				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="this.getElementsByTagName(\'span\')[0].style.display=\'block\'" onmouseout="this.getElementsByTagName(\'span\')[0].style.display=\'none\'">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
+				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="$(\'span\', this).show(); if($(\'span\', this).offset().left+$(\'span\', this).width() > $(window).width()){$(\'span\', this).offset({left:($(window).width()-$(\'span\', this).width()-30)})}" onmouseout="$(\'span\', this).hide()">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
 			}
 			else altplus += wb + ' ';
 		}
