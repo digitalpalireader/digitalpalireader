@@ -14,6 +14,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 	if(!which) { // not from textpad
 		var convout = inarray[1].replace(/  *,/g, ',');
+		var saveout = inarray[2].replace(/  *,/g, ',');
 
 		var nikaya = place[0];
 		var book = place[1];
@@ -38,6 +39,9 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		convDiv.setAttribute('id','convi');
 		convDiv.innerHTML = convout;
 		document.getElementById('mafbc').appendChild(convDiv);
+		
+		var saveDiv = $('#savei');
+		saveDiv.html(saveDiv.html()+saveout);
 	}
 	
 	var outDiv =  document.createElement('div');
@@ -55,6 +59,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 function formatuniout(data,which) { // which = 1 prepare without links, 2 with links
 	
 	var convout = '';
+	var saveout = '';
 	
 	var indexpage = '';
 	var pageno = '';
@@ -126,6 +131,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 		
 		if (/^[,;.!?]$/.exec(wb)) {
 			convout += wb + ' ';
+			saveout += wb + ' ';
 			finout += wb + ' ';
 			continue;
 		}
@@ -180,6 +186,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 						fullwordout[1] += translit(toUni(wb.substring(0,cp)));
 					}
 					convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
+					saveout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
 				}
 
 				var cno = wb.substring(cp,cp+4); // <c1>
@@ -197,6 +204,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				}
 
 				convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
+				saveout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
 
 				wb = wb.substring(cm+4);
 			}
@@ -214,13 +222,16 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
 			}
 			finout += space;
+			saveout += space;
 			convout += space;
 		}		
 		else if (/^&nbsp;/.exec(wb)) {
 			finout += wb + space;
+			saveout += wb + space;
 		}
 		else if (/^<\/*[fp]>$/.exec(wb)) {
 			finout += wb + space;
+			saveout += wb + space;
 		}
 		else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
 			var parap = wb.split('|');
@@ -228,6 +239,21 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			var permalink = parap[2];
 			if(convout.length>1) convout += '\n\n';
 			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
+			var saves;
+			if(ptype) {
+				switch(true) {
+					case (ptype == '06'):
+						saves = 'font-style:italic;	color:#999999;';
+						break;
+					case (ptype.charAt(0) == '2'):
+						saves = 'margin: 0 0 0 24px;';
+						break;
+					default:
+						saves = '';
+						break;
+				}
+			}
+			saveout += '<p'+(saves?' style="'+saves+'"':'')+'>';
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // pesky page numbers
@@ -269,6 +295,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 					indexpage = indexpage+'.'+ref[0]+'.'+ref[1].replace(/^0+/,"");
 			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
+			saveout += ' <span style="font-size:60%; color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}
 		else if (!wb) {
 			continue;
@@ -280,6 +307,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
 			finout += unioutb + space;
+			saveout += unioutb + space;
 		} 
 		else  // with links
 		{
@@ -288,14 +316,21 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			//unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
 			finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
+			saveout += unioutb + space;
 			b++;
 		}
 	}
 	finout = finout.replace(/<@>/g, '<b>');
 	finout = finout.replace(/<\/@>/g, '</b>');
 	finout = finout.replace(/ +([,;])/g, "$1");
+	
+	saveout = saveout.replace(/<@>/g, '<b>');
+	saveout = saveout.replace(/<\/@>/g, '</b>');
+	saveout = saveout.replace(/ +([,;])/g, "$1");
+	
 	outarray[0] = finout;
 	outarray[1] = toUni(convout);
+	outarray[2] = toUni(saveout);
 	return outarray;
 }
 
@@ -343,79 +378,39 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 		}
 	}
 	
+	var title = '';
+	var save = '';
 	
-	var title='<b style="color:'+DPR_prefs[col[w++]]+'">' + translit(toUni(namea[0])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[0] ? namen[0] :'');
+	for (i in namea) {
+		var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
+		
+		if (thisname .length <2 )
+			continue;
 
+		if(i != 0){
+			if(lgt > lmt && !oneline) {
+				title += ',<br/>';
+				lgt = 0;
+			}
+			else {
+				title += ', ';
+				lgt += namea[1].length;
+			}
+		}
 
-	if (namea[1] != ' ') {
-		namea[1] = translit(toUni(namea[1]));
-		if(lgt > lmt && !oneline) {
-			title += ',<br/>';
-			lgt = 0;
-		}
-		else {
-			title += ', ';
-			lgt += namea[1].length;
-		}
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' + namea[1].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[1] ? namen[1] :'');
+		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' + thisname + '</b>' + (namen[i] ? namen[i] :'');
+		save += '<h'+w+'>'+thisname+'</h'+w+'>';
 	}
-	if (namea[2] != ' ') {
-		namea[2] = translit(toUni(namea[2]));
-		if(lgt > lmt && !oneline) {
-			title += ',<br/>';
-			lgt = 0;
-		}
-		else {
-			title += ', ';
-			lgt += namea[2].length;
-		}
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' + namea[2].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[2] ? namen[2] :'');
-	}
-	if (namea[3] != ' ') {
-		namea[3] = translit(toUni(namea[3]));
-		if(lgt > lmt && !oneline) {
-			title += ',<br/>';
-			lgt = 0;
-		}
-		else {
-			title += ', ';
-			lgt += namea[3].length;
-		}
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' +  namea[3].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[3] ? namen[3] :'');
-	}
-	if (namea[4] != ' ') {
-		namea[4] = translit(toUni(namea[4]));
-		if(lgt > lmt && !oneline) {
-			title += ',<br/>';
-			lgt = 0;
-		}
-		else {
-			title += ', ';
-			lgt += namea[4].length;
-		}
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' +  namea[4].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[4] ? namen[4] :'');
-	}
-	if (namea[5] != ' ') {
-		namea[5] = translit(toUni(namea[5]));
-		if(lgt > lmt && !oneline) {
-			title += ',<br/>';
-			lgt = 0;
-		}
-		else {
-			title += ', ';
-			lgt += namea[5].length;
-		}
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' +  namea[5].replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;') + '</b>' + (namen[5] ? namen[5] :'');
-	}
+	
 	
 	title = toUni(title);
-	return title;
+	return [title,save];
 }
 
 
 function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout+'</td><td id="maftrans" align="right"></td></tr></table>';
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>';
 	outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2); 
 }
 
@@ -526,3 +521,25 @@ function clearDivs(which) { // place divs to be cleared here
 	}
 }
 
+function makeToolbox(main,aux,conv,ex,save,trans) {
+	if(main === false) {
+		$('#tbContainer').html('');
+		return;
+	}
+	
+	var but = ['l','m','r'];
+	var bn = 0;
+	var pre = '';
+	if(conv) {
+		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span>';
+	}
+	if(ex) {
+		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToTextpad(event)" title="send text to textpad (e)">export</span>';
+	}
+	if(save) {
+		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="saveCompilation()" title="save text to Desktop">save</span>';
+	}
+	main = pre + ' ' + main;
+	
+	$('#tbContainer').html('<div id="tbOpener" class="tiny">⚙</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div><div id="auxToolbar" class="obutc">'+aux+'</div></div>');
+}

@@ -433,7 +433,7 @@ width:100%;
 	border-radius: 20px;
 }
 
-#convi {
+#convi, #savei {
 display:none;
 }
 #brbot {

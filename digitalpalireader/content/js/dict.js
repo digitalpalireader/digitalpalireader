@@ -225,7 +225,7 @@ function pedFullTextSearch(getstring) {
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 		
 		
-		var allp = xmlDoc.getElementsByTagName('data');
+		var allp = xmlDoc.getElementsByTagName('d');
 		
 		for (j =0; j < allp.length; j++) {
 			var texttomatch = allp[j].textContent;
@@ -430,7 +430,7 @@ function dppnFullTextSearch(getstring) {
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 		
 		
-		var allp = xmlDoc.getElementsByTagName('entry');
+		var allp = xmlDoc.getElementsByTagName('e');
 		
 		for (j =0; j < allp.length; j++) {
 			var addend = ''; 

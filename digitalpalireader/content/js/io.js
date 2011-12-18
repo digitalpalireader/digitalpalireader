@@ -87,7 +87,15 @@ function writeFile(aFileKey, aContent)
 	}
 }
 
+function writeFileToDesk(file, data) {
+	file = file.replace(/\\/g,'/');
 
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
+	
+	if(writeExtFile(dir.path+'/'+file,data)) return true;
+	return false
+}
 
 function readExtFile(fileLoc)
 {
@@ -131,7 +139,6 @@ function readExtFile(fileLoc)
 }
 function writeExtFile(fileLoc, aContent) 
 {
-	alert(fileLoc);
 	var aFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 	aFile.initWithPath(fileLoc);
 	if ( aFile.exists() ) aFile.remove(false);

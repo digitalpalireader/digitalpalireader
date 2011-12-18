@@ -158,11 +158,8 @@ function savePad() {
 		alertFlash('You must enter a file name', 'red');
 		return;
 	}
-
-	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
 	
-	if(writeExtFile(dir.path+'/'+file,data)) alertFlash('Data saved to Desktop/'+file, 'green');
+	if(writeFileToDesk(file, data)) alertFlash('Data saved to Desktop/'+file, 'green');
 	else {
 		alertFlash('Error saving file', 'red');
 	}

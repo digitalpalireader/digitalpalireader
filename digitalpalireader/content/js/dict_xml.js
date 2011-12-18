@@ -50,7 +50,7 @@ function paliXML(filein,which,add)
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 	
-	var data = xmlDoc.getElementsByTagName('data')[t2].textContent;
+	var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 	
 	if(DPR_prefs['showPedLinks']) {
 	
@@ -229,7 +229,7 @@ function DPPNXML(filein,which,add)
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 
-	var data = ' ' + xmlDoc.getElementsByTagName('entry')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
+	var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 	
 	// output
 
@@ -477,7 +477,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
 		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 		
-        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
+        finout += '<p>'+placen[0]+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
 	var dataNode = document.createElement('div');
 	dataNode.innerHTML = finout;
@@ -495,7 +495,7 @@ function getDppnData(link){
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 
-	var data = ' ' + xmlDoc.getElementsByTagName('entry')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
+	var data = ' ' + xmlDoc.getElementsByTagName('e')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 	return data;
 }
 

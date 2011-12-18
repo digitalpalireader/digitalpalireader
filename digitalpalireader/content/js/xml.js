@@ -282,19 +282,23 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// first toolbar row
 	
-	document.getElementById('mainTBAdd').innerHTML = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
+	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">☸</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
 	
-	// second toolbar row
-
-	document.getElementById('auxToolbar').innerHTML = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
+	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
+	
+	makeToolbox(main,aux,true,true,true);
 	
 
 	// output header
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>';
-		
+	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>';
+
+	var saveDiv = document.createElement('div');
+	saveDiv.setAttribute('id','savei');
+	saveDiv.innerHTML = titleout[1];
+	document.getElementById('mafbc').appendChild(saveDiv);
 
 	var theData = '';
 	
@@ -393,7 +397,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 			}
 		}
 	}
-	outputFormattedData(theData,0,place);
+	var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(para) { 
         document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
@@ -414,6 +418,8 @@ function loadXMLindex(place,compare) {
 	var x1 = !isPlace?"'x'":0;
 
 	var convout = '';
+	var saveout = '';
+	var headcount = 1;
 	
 	document.activeElement.blur();
 	
@@ -421,8 +427,7 @@ function loadXMLindex(place,compare) {
 	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
-	document.getElementById('mainTBAdd').innerHTML = '';
-	document.getElementById('auxToolbar').innerHTML = '';
+
 
 	var nikaya = place[0];
 	var bookno = parseInt(place[1]);
@@ -478,7 +483,6 @@ function loadXMLindex(place,compare) {
 	
 	if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) {
 		theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); 
-
 	}
 	else theData = '';
 	if (z.length > 1 && theData == '') { theData = unnamed; } 
@@ -500,6 +504,9 @@ function loadXMLindex(place,compare) {
 		whichcol[0] = 1; // bump up to let the second color know
 
 		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">☸&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1)'+(compare?','+compare:'')+');" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen+'<br />';
+		if(isPlace) {
+			saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+		}
 	}
 	y = z[tmp].getElementsByTagName("h0");
 	for (tmp2 = 0; tmp2 < y.length; tmp2++)
@@ -542,6 +549,10 @@ function loadXMLindex(place,compare) {
 				}
 			}
 			theDatao += '<br />';
+			if(isPlace) {
+				saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+			}
+
 		}
 		x = y[tmp2].getElementsByTagName("h1");
 		for (tmp3 = 0; tmp3 < x.length; tmp3++)
@@ -585,6 +596,11 @@ function loadXMLindex(place,compare) {
 					}
 				}
 				theDatao += '<br />';
+
+				if(isPlace) {
+					saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+				}
+
 			}
 			w = x[tmp3].getElementsByTagName("h2");
 			for (tmp4 = 0; tmp4 < w.length; tmp4++)
@@ -629,6 +645,11 @@ function loadXMLindex(place,compare) {
 						}
 					}
 					theDatao += '<br />';
+
+					if(isPlace) {
+						saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+					}
+
 				}
 				v = w[tmp4].getElementsByTagName("h3");
 				for (tmp5 = 0; tmp5 < v.length; tmp5++)
@@ -671,6 +692,11 @@ function loadXMLindex(place,compare) {
 							}
 						}
 						theDatao += '<br />';
+
+						if(isPlace) {
+							saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+						}
+
 					}
 
 					u = v[tmp5].getElementsByTagName("h4");
@@ -715,6 +741,11 @@ function loadXMLindex(place,compare) {
 								}
 							}
 							theDatao += '<br />';
+
+							if(isPlace) {
+								saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
+							}
+
 						}
 						if(isPlace) {
 							var link = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
@@ -724,6 +755,7 @@ function loadXMLindex(place,compare) {
 								var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
 								theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
 								convout += para[1].replace(/  *,/g, ',');
+								saveout += para[2].replace(/  *,/g, ',');
 							}
 						}
 					}
@@ -737,17 +769,26 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}	
 	
+	var main = '';
 	if(compare) 
-		document.getElementById('mainTBAdd').innerHTML = '<span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>';
+		main = '<span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>';
 		
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = theDatao;
 	document.getElementById('mafbc').innerHTML = '';
+	
 	if(isPlace) {
 		var convDiv = document.createElement('div');
 		convDiv.setAttribute('id','convi');
 		convDiv.innerHTML = convout;
 		document.getElementById('mafbc').appendChild(convDiv);	
+
+		var saveDiv = document.createElement('div');
+		saveDiv.setAttribute('id','savei');
+		saveDiv.innerHTML = saveout;
+		document.getElementById('mafbc').appendChild(saveDiv);	
+		
+		makeToolbox(main,'',true,true,true);
 
 		// history
 
@@ -770,6 +811,7 @@ function loadXMLindex(place,compare) {
 		else bknameme = '';
 		bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
+		makeToolbox(false);
 	}
 
 
@@ -784,6 +826,24 @@ function loadXMLindex(place,compare) {
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	document.getElementById('maf').scrollTop = 0;
+}
+
+function saveCompilation() {
+	var data = $('#savei').html();
+	var file = prompt('Enter a file name (will be saved to Desktop)');
+	file = file.replace(/\\/g,'/');
+	if(/[:%&]/.exec(file)) {
+		alertFlash('File contains illegal characters', 'red');
+		return;
+	}
+	if(file == '') {
+		alertFlash('You must enter a file name', 'red');
+		return;
+	}
+	if(writeFileToDesk(file, data)) alertFlash('Data saved to Desktop/'+file, 'green');
+	else {
+		alertFlash('Error saving file', 'red');
+	}
 }
 
 function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
