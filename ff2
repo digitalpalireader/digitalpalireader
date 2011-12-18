@@ -102,11 +102,11 @@ if [ "$update" != "" ]
     echo "$update" > digitalpalireader.xhtml
     IFS=$'\t\n'
     j=`tail -n +3 content/news.xml | head -n 4`
-    echo -ne '<?xml version="1.0" encoding="UTF-8"?>\n<update>\n<news>'$update'</news>\n' > content/news1.xml
+    echo -ne '<?xml version="1.0" encoding="UTF-8"?>\n<update>\n<news>'$update'</news>\n' > content/news.xml
     for i in $j
-        do echo $i >> content/news1.xml
+        do echo $i >> content/news.xml
     done
-    echo '</update>' >> content/news1.xml
+    echo '</update>' >> content/news.xml
 else
 echo "$xhtmlu" > digitalpalireader.xhtml
 fi
