@@ -449,20 +449,6 @@ function loadXMLindex(place,compare) {
 	var tmpData = '';
 	
 	bookfile = nikaya + book;
-
-
-	if(!compare) {
-		
-		// permalink
-
-		var permalink = 'chrome://digitalpalireader/content/index.xul?';
-		
-		try {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+place.slice(0,8).join('.'));
-		}
-		catch(ex) {
-		}
-	}
 	
 	var tmp = 0;
 	var tmp1 = 0;
@@ -476,10 +462,7 @@ function loadXMLindex(place,compare) {
 	var whichcol = [0,0,0,0,0];
 	var wcs = 0;
 
-	var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
-	document.getElementsByTagName('title')[0].innerHTML = tabT;
-	
-	
+
 	if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) {
 		theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); 
 	}
@@ -767,21 +750,15 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/ṃ/g, 'ṁ');
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}	
-	
+
 	var main = '';
 	if(compare) 
 		main = '<span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>';
 		
-	var theDataDiv = document.createElement('div');
-	theDataDiv.innerHTML = theDatao;
-	document.getElementById('mafbc').innerHTML = '';
+	$('#mafbc').html('');
 	
 	if(isPlace) {
 
-		$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');	
-		$('#mafbc').append('<div id="savei">'+saveout+'</div>');	
-		$('#mafbc').append('<div id="convi">'+convout+'</div>');	
-		
 		makeToolbox(main,'',true,true,true);
 
 		// history
@@ -799,6 +776,11 @@ function loadXMLindex(place,compare) {
 		bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 		var places = (place[2]+','+place[3]+','+place[4]+','+place[5]+','+place[6]).replace(/x/g,"'x'");
 		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
+
+		var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
+		$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');	
+		$('#mafbc').append('<div id="savei">'+saveout+'</div>');	
+		$('#mafbc').append('<div id="convi">'+convout+'</div>');	
 	}
 	else {
 		if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
@@ -806,8 +788,32 @@ function loadXMLindex(place,compare) {
 		bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
 		makeToolbox(false);
+
+		var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
+	}
+	
+	// title, tab, link
+	
+	
+	document.getElementsByTagName('title')[0].innerHTML = tabT;
+
+	if(!compare) {
+		
+		// permalink
+
+		var permalink = 'chrome://digitalpalireader/content/index.xul?';
+		
+		try {
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+place.slice(0,8).join('.'));
+			setCurrentTitle(tabT);
+		}
+		catch(ex) {
+		}
 	}
 
+
+	$('#mafbc').append('<div>'+theDatao+'</div>'); 
+	document.getElementById('maf').scrollTop = 0;
 
 	// refresh history box
 
@@ -816,10 +822,7 @@ function loadXMLindex(place,compare) {
 	if (sidebar) {
 		sidebar.DPRNav.historyBox();
 	} 
-
-	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
-
-	document.getElementById('maf').scrollTop = 0;
+	
 }
 
 function saveCompilation() {
