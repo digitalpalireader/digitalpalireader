@@ -293,12 +293,11 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>';
+	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
 
-	var saveDiv = document.createElement('div');
-	saveDiv.setAttribute('id','savei');
-	saveDiv.innerHTML = titleout[1];
-	document.getElementById('mafbc').appendChild(saveDiv);
+	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
+
+	$('#mafbc').append('<div id="savei">'+titleout[1]+'</div>');
 
 	var theData = '';
 	
@@ -778,15 +777,10 @@ function loadXMLindex(place,compare) {
 	document.getElementById('mafbc').innerHTML = '';
 	
 	if(isPlace) {
-		var convDiv = document.createElement('div');
-		convDiv.setAttribute('id','convi');
-		convDiv.innerHTML = convout;
-		document.getElementById('mafbc').appendChild(convDiv);	
 
-		var saveDiv = document.createElement('div');
-		saveDiv.setAttribute('id','savei');
-		saveDiv.innerHTML = saveout;
-		document.getElementById('mafbc').appendChild(saveDiv);	
+		$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');	
+		$('#mafbc').append('<div id="savei">'+saveout+'</div>');	
+		$('#mafbc').append('<div id="convi">'+convout+'</div>');	
 		
 		makeToolbox(main,'',true,true,true);
 
@@ -828,7 +822,8 @@ function loadXMLindex(place,compare) {
 	document.getElementById('maf').scrollTop = 0;
 }
 
-function saveCompilation(title) {
+function saveCompilation() {
+	var title=$('#savetitle').html();
 	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n</head>\n<body>';
 	data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
 	data += '\n</body>\n</html>';
