@@ -191,7 +191,7 @@ function pausesall()
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
 	
-	var toplist = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1 style="color:'+DPR_prefs['colsel']+'">Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left> '
+	var toplist = '<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist"><span style="color:'+DPR_prefs['colsel']+'">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + ':&nbsp;</b></span></div><div class="searchtoplist">'
 	
 	var toplista = [];
 	for (i = 0; i < G_numberToNik.length; i++) {
@@ -200,8 +200,9 @@ function pausesall()
 	}
 	
 	toplist += toplista.join(', ');
+	toplist += '</div>';
 	
-	document.getElementById('stfb').innerHTML = toplist;
+	$('#stfb').html(toplist);
 	makeProgressTable();
 
 	
@@ -235,7 +236,7 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td width=1>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)).replace(/ /g, '&nbsp;') + ':&nbsp;</b></td><td align=left><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</td></tr></table>';
+	$('#stfb').html('<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)) + ':&nbsp;</b></div><div class="searchtoplist"><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</div>');
 
 	importXMLs(2);
 }
@@ -267,7 +268,7 @@ function pausethree() {
 	makeProgressTable();
 
 
-	document.getElementById('stfb').innerHTML = '<table width=100%><tr><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td align=left>Search&nbsp;results&nbsp;for&nbsp;<b style="color:'+DPR_prefs['colsel']+'">' + getstring.replace(/ /g, '&nbsp;') + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + (G_searchPart != '1'?' (partial)':'')+'</b>: <span id="stfx"></span></td></tr></table>';
+	$('#stfb').html('<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)) + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + (G_searchPart != '1'?' (partial)':'')+'</b>: <span id="stfx"></span></div>');
 
 	importXMLs(3);
 }
@@ -331,18 +332,18 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 					
-		document.getElementById('stfH'+nikayaat).innerHTML = thiscount;
+		$('#stfH'+nikayaat).html(thiscount);
 		if (qz < G_searchFileArray.length-1) 
 		{
 			nextbookfile = G_searchFileArray[qz+1];
-			if (nextbookfile.charAt(0) != nikayaat) document.getElementById('stfH'+nikayaat).style.color=DPR_prefs['colsel'];
+			if (nextbookfile.charAt(0) != nikayaat) $('#stfH'+nikayaat).css('color',DPR_prefs['colsel']);
 			qz++;
 			bounce(1);
 		}
 		else {
 			qz = 0;
 			bookperm = 0;
-			document.getElementById('stfH'+nikayaat).style.color=DPR_prefs['colsel'];
+			$('#stfH'+nikayaat).css('color',DPR_prefs['colsel']);
 			finishSearch();
 		}			
 	}	
@@ -356,17 +357,10 @@ function importXMLs(cnt)
 		bookperm = bookat;
 		hiert = bookfile.charAt(bookfile.length-1);
 
-/*		var headingNode = document.createElement('div');
-		headingNode.setAttribute('name', 'xyz');
-		headingNode.setAttribute('id', 'xyz');
-		headingNode.setAttribute('class', 'large');
-		headingNode.innerHTML = G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + ' ' + getBookName(nikaya, hiert, parseInt(bookat)-1) + '<hr>';
-		document.getElementById('sbfb').appendChild(headingNode);
-*/		
 		var xmlDoc = loadXMLFile(bookfile,0);
 		createTables(xmlDoc,hiert);
 					
-		document.getElementById('stfx').innerHTML = thiscount;
+		$('#stfx').html(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -392,7 +386,7 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 					
-		document.getElementById('stfx').innerHTML = thiscount;
+		$('#stfx').html(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{

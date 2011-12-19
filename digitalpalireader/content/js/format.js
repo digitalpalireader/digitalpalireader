@@ -256,7 +256,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			saveout += '<p'+(saves?' style="'+saves+'"':'')+'>';
 			paran++;
 		}		
-		else if (wb.charAt(0) == 'z') // pesky page numbers
+		else if (wb.charAt(0) == 'z') // page numbers
 		{
 			indexpage = wb.charAt(1);
 			pageno = wb.substring(2,wb.length-1);

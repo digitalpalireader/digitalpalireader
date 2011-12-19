@@ -328,12 +328,13 @@ width:100%;
 background-image:url('../images/bottomtrans.png'); 
 }
 #searcht { 
-top:0; 
-right:0;
-left:-1px;
-position:absolute; 
-height:46px;
-background-color:#d9d4cc; 
+	top:0; 
+	right:0;
+	left:-1px;
+	position:absolute; 
+	min-height:46px;
+	padding-top: 4px;
+	background-color:#d9d4cc; 
 }
 #stfab {
 padding-right:10px; 
@@ -342,6 +343,13 @@ padding-left:10px;
 #stfb {
 padding-right:10px; 
 padding-left:10px;
+}
+#stfc {
+	clear:both;
+}
+.searchtoplist {
+	float:left;
+	padding-bottom:4px;
 }
 #searchb {  
 position:absolute;
