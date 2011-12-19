@@ -148,7 +148,7 @@ function clearPad() {
 
 function savePad() {
 	var data = document.textpad.pad.value;
-	var file = document.textpad.file.value;
+	file = fileSaveDialog('Choose a location to export the text');
 	file = file.replace(/\\/g,'/');
 	if(/[:%&]/.exec(file)) {
 		alertFlash('File contains illegal characters', 'red');
@@ -159,7 +159,7 @@ function savePad() {
 		return;
 	}
 	
-	if(writeFileToDesk(file, data)) alertFlash('Data saved to Desktop/'+file, 'green');
+	if(writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
 	else {
 		alertFlash('Error saving file', 'red');
 	}

@@ -87,16 +87,6 @@ function writeFile(aFileKey, aContent)
 	}
 }
 
-function writeFileToDesk(file, data) {
-	file = file.replace(/\\/g,'/');
-
-	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
-	
-	if(writeExtFile(dir.path+'/'+file,data)) return true;
-	return false
-}
-
 function readExtFile(fileLoc)
 {
 	if(/\\/.exec(fileLoc)) fileLoc = fileLoc.replace(/\//g,'\\');
@@ -273,6 +263,36 @@ function eraseFile(name) {
 		if ( aFile.exists() ) aFile.remove(false);
 		
 		return true;
+}
+
+function fileSaveDialog(title) {
+	
+	const nsIFilePicker = Components.interfaces.nsIFilePicker;
+	const nsILocalFile = Components.interfaces.nsILocalFile;
+	var fp = Components.classes["@mozilla.org/filepicker;1"]
+	                 .createInstance(nsIFilePicker);
+
+	fp.init(window, title, nsIFilePicker.modeSave);
+	var result = fp.show();
+
+	if (result != nsIFilePicker.returnCancel) {
+		var fileOut = fp.file.QueryInterface(nsILocalFile);
+		var fileName = fp.file.path;
+		return(fileName);
+	}
+	else if (result == nsIFilePicker.returnCancel) {
+		return false;
+	}
+}
+
+function writeFileToDesk(file, data) {
+	file = file.replace(/\\/g,'/');
+
+	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
+	
+	if(writeExtFile(dir.path+'/'+file,data)) return true;
+	return false
 }
 
 function writeToDesktop(aFileKey, aContent)

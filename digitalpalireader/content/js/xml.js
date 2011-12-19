@@ -828,9 +828,11 @@ function loadXMLindex(place,compare) {
 	document.getElementById('maf').scrollTop = 0;
 }
 
-function saveCompilation() {
-	var data = $('#savei').html();
-	var file = prompt('Enter a file name (will be saved to Desktop)');
+function saveCompilation(title) {
+	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n</head>\n<body>';
+	data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
+	data += '\n</body>\n</html>';
+	var file = fileSaveDialog('Choose a location to export the HTML file');
 	file = file.replace(/\\/g,'/');
 	if(/[:%&]/.exec(file)) {
 		alertFlash('File contains illegal characters', 'red');
@@ -840,11 +842,12 @@ function saveCompilation() {
 		alertFlash('You must enter a file name', 'red');
 		return;
 	}
-	if(writeFileToDesk(file, data)) alertFlash('Data saved to Desktop/'+file, 'green');
+	if(writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
 	else {
 		alertFlash('Error saving file', 'red');
 	}
 }
+
 
 function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
 
