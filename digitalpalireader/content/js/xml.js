@@ -827,7 +827,7 @@ function loadXMLindex(place,compare) {
 
 function saveCompilation() {
 	var title=$('#savetitle').html();
-	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n</head>\n<body>';
+	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n<style>.varc{font-size:60%; color:'+DPR_prefs['grey']+'} .var{display:none; font-size: 100%; color:black; background-color:silver;} .pageno {font-size:60%; color:blue} .paratype06 {font-style:italic;	color:#999999;} p[class*="paratype2"]{ margin: 0 0 0 24px;}</style></head>\n<body>';
 	data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
 	data += '\n</body>\n</html>';
 	var file = fileSaveDialog('Choose a location to export the HTML file');

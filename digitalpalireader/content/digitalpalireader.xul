@@ -8,6 +8,8 @@
   	<stringbundleset id="stringbundleset">
   			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
   	</stringbundleset>
+  	<vbox collapse="collapsed" id="alert">
+  	</vbox>
 	<tabbox class="chromeback" flex="1">
 		<tabs class="chromeback">
 			<tab class="chromeback" label="&sNav.label;"/>

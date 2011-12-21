@@ -153,6 +153,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="$(\'span\', this).show(); if($(\'span\', this).offset().left+$(\'span\', this).width() > $(window).width()){$(\'span\', this).offset({left:($(window).width()-$(\'span\', this).width()-30)})}" onmouseout="$(\'span\', this).hide()">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
+				saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
 			}
 			else altplus += wb + ' ';
 		}
@@ -162,6 +163,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="this.getElementsByTagName(\'span\')[0].style.display=\'block\'" onmouseout="this.getElementsByTagName(\'span\')[0].style.display=\'none\'">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
+				saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
 			}
 			else {
 				altread = 1;
@@ -239,21 +241,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			var permalink = parap[2];
 			if(convout.length>1) convout += '\n\n';
 			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
-			var saves;
-			if(ptype) {
-				switch(true) {
-					case (ptype == '06'):
-						saves = 'font-style:italic;	color:#999999;';
-						break;
-					case (ptype.charAt(0) == '2'):
-						saves = 'margin: 0 0 0 24px;';
-						break;
-					default:
-						saves = '';
-						break;
-				}
-			}
-			saveout += '<p'+(saves?' style="'+saves+'"':'')+'>';
+			saveout += '<p class="paratype'+ptype+'"'+'>';
 			paran++;
 		}		
 		else if (wb.charAt(0) == 'z') // page numbers
@@ -295,7 +283,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 					indexpage = indexpage+'.'+ref[0]+'.'+ref[1].replace(/^0+/,"");
 			}
 			finout += ' <span class="tiny pointer" style="color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
-			saveout += ' <span style="font-size:60%; color:blue" title="' + pagetitle + '">' + indexpage + '</span>' + space;
+			saveout += ' <span class="pageno" title="' + pagetitle + '">' + indexpage + '</span>' + space;
 		}
 		else if (!wb) {
 			continue;
