@@ -581,9 +581,9 @@ function createTables(xmlDoc,hiert)
 											endmatch = startmatch + gotstring.length;
 											beforem = texttomatch.substring(0,startmatch);
 											afterm = texttomatch.substring(endmatch);
-											
 											if(gotstring.indexOf('<c') == -1 && gotstring.indexOf('c>') == -1 ) { // make sure we're not doubling
-												postpara += beforem + '<c'+d+'>' + gotstring + '<xc>';
+												//postpara += beforem + '<c'+d+'>' + gotstring + '<xc>';
+												postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c'+d+'>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c"+d+">$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
 												
 												// get words
 												spaceb = beforem.indexOf(' ');
