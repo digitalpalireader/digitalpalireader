@@ -328,6 +328,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 				var ltrg = (obj ? lt : new RegExp(lt, 'g'));
 				if (!lt) continue;
 				onepar = tmpdata;
+				onepars = onepar.replace(/ *\{[^}]*\}/g, '').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/   */g, ' ');
 				tmpdata = '';
 				while ((obj ? onepars.search(lt) : onepars.indexOf(lt)) > -1) {
 					var matched = (obj ? onepars.match(lt)[0] : lt);

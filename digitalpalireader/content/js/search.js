@@ -614,12 +614,22 @@ function createTables(xmlDoc,hiert)
 
 										l = tempexword[t].length;
 										for(var i=0; i<l; i++) {
-											tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
-											while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
-											tempexword[t][i] = tempexword[t][i].substring(1);
+											if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(getstring)) { // page search
+												while (!/[TPVM]/.exec(tempexword[t][i].charAt(0))) {
+													tempexword[t][i] = tempexword[t][i].substring(1);
+												}
+												while (!/[0-9]/.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
+													tempexword[t][i] = tempexword[t][i].slice(0,-1);
+												}
 											}
-											while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
-												tempexword[t][i] = tempexword[t][i].slice(0,-1);
+											else {
+												tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
+													tempexword[t][i] = tempexword[t][i].substring(1);
+												}
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
+													tempexword[t][i] = tempexword[t][i].slice(0,-1);
+												}
 											}
 										}
 									}
@@ -726,19 +736,32 @@ function createTables(xmlDoc,hiert)
 										tempexword.push((beforem+gotstring+aftermex).replace(/[‘’“”]/g,''));
 									}
 
+
 									postpara += afterm;
 
 									// word add
 									
 									l = tempexword.length;
 									
-									for(var i=0; i<l; i++) {
-										tempexword[i] = tempexword[i].replace(/\^e*b\^/g,'');
-										while (!G_uniRegExp.exec(tempexword[i].charAt(0))) {
-											tempexword[i] = tempexword[i].substring(1);
+									if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(getstring)) { // not page search
+										for(var i=0; i<l; i++) {
+											while (!/[TPVM]/.exec(tempexword[i].charAt(0))) {
+												tempexword[i] = tempexword[i].substring(1);
+											}
+											while (!/[0-9]/.exec(tempexword[i].charAt(tempexword[i].length-1))) {
+												tempexword[i] = tempexword[i].slice(0,-1);
+											}
 										}
-										while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1))) {
-											tempexword[i] = tempexword[i].slice(0,-1);
+									}									
+									else {
+										for(var i=0; i<l; i++) {
+											tempexword[i] = tempexword[i].replace(/\^e*b\^/g,'');
+											while (!G_uniRegExp.exec(tempexword[i].charAt(0))) {
+												tempexword[i] = tempexword[i].substring(1);
+											}
+											while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1))) {
+												tempexword[i] = tempexword[i].slice(0,-1);
+											}
 										}
 									}
 									
@@ -753,6 +776,7 @@ function createTables(xmlDoc,hiert)
 									tagtitle = tagtitle.replace(/\"/g, 'x').replace(/ /g,'_');
 
 									exword = exword.concat(texnodups);
+									
 
 
 									// titles
