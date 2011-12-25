@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <update>
+<news>2.4.6 bug fixes</news>
 <news>2.4.5 bugfixes</news>
 <news>2.4.1 added ability to save texts to desktop</news>
 <news>2.4 added dvematika to vinaya tika</news>
 <news>2.3.4 added what's new list</news>
-<news>2.3 added ability to view all subsections</news>
-<news>2.2 added histories to search and dictionary</news>
-<news>2.1 added ability to view two section side-by-side (SHIFT+click)</news>
-<news>2.0 completely redesigned, tabbed interface</news>
 </update>
