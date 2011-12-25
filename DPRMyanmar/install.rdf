@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>DPRMyanmar@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader Myanmar Tipitaka Plugin</em:name>
-    <em:version>1.3</em:version>
+    <em:version>1.4</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Myanmar Tipitaka (required) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
@@ -13,7 +13,7 @@
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
-        <em:minVersion>3.5</em:minVersion>
+        <em:minVersion>4.0</em:minVersion>
         <em:maxVersion>*</em:maxVersion>
       </Description>
     </em:targetApplication>
