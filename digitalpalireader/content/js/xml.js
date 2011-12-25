@@ -833,10 +833,7 @@ function saveCompilation() {
 	data += '\n</body>\n</html>';
 	var file = fileSaveDialog('Choose a location to export the HTML file');
 	file = file.replace(/\\/g,'/');
-	if(/[:%&]/.exec(file)) {
-		alertFlash('File contains illegal characters', 'red');
-		return;
-	}
+
 	if(file == '') {
 		alertFlash('You must enter a file name', 'red');
 		return;

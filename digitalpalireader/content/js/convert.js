@@ -155,10 +155,6 @@ function savePad() {
 	var data = document.textpad.pad.value;
 	file = fileSaveDialog('Choose a location to export the text');
 	file = file.replace(/\\/g,'/');
-	if(/[:%&]/.exec(file)) {
-		alertFlash('File contains illegal characters', 'red');
-		return;
-	}
 	if(file == '') {
 		alertFlash('You must enter a file name', 'red');
 		return;
