@@ -832,7 +832,7 @@ function saveCompilation() {
 	data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
 	data += '\n</body>\n</html>';
 	var file = fileSaveDialog('Choose a location to export the HTML file');
-	file = file.replace(/\\/g,'/');
+//	file = file.replace(/\\/g,'/');
 
 	if(file == '') {
 		alertFlash('You must enter a file name', 'red');

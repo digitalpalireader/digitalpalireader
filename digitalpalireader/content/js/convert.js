@@ -154,7 +154,7 @@ function clearPad() {
 function savePad() {
 	var data = document.textpad.pad.value;
 	file = fileSaveDialog('Choose a location to export the text');
-	file = file.replace(/\\/g,'/');
+//	file = file.replace(/\\/g,'/');
 	if(file == '') {
 		alertFlash('You must enter a file name', 'red');
 		return;
