@@ -12,13 +12,14 @@ function moveframey(a) //dict, conv, or scratch
 
 	if (moveat == 1) moveframex(2);
 	
-	var fa = ['difout','cof','scf'];
+    $('#difout').hide();
+	$('#cof').hide();
+	$('#scf').hide();
+	
+	$('#mainToolbar span').removeClass('sbut');
+	$('#'+a+'M').addClass('sbut');
 
-    document.getElementById('difout').style.display="none";
-	document.getElementById('cof').style.display="none";
-	document.getElementById('scf').style.display="none";
-
-	document.getElementById(a).style.display="block";
+	$('#'+a).show();
 }
 
 var cpout = 1;
