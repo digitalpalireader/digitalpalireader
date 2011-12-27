@@ -475,9 +475,9 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 		}
 		//dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
 		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
-		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1) + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
+		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1)[0] + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 		
-        finout += '<p>'+placen[0]+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
 	var dataNode = document.createElement('div');
 	dataNode.innerHTML = finout;
