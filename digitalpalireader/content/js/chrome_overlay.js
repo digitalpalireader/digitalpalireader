@@ -145,7 +145,7 @@ var DPROverlay = {
 		else { // single word
 			if(thisTab) {  
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.outputAnalysis(input);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input);
 				return;
 			}
 			var oldTab = this.findDPRTab('DPR-main');
@@ -156,7 +156,7 @@ var DPROverlay = {
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.outputAnalysis(input);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input);
 			}
 		}
 	},
