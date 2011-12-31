@@ -105,7 +105,7 @@ function sendtoconvert(data,shift)
 	data = data.replace(/ V /g, ' ');
 	data = data.replace(/ P /g, ' ');
 	data = data.replace(/ T /g, ' ');
-	data = data.replace(/☸ */g, '');
+	data = data.replace(/♦ */g, '');
 	data = data.replace(/ VAR /g, ' ');
 	data = data.replace(/  *,/g, ',')
 	data = data.replace(/\.\.+/g, '.')
@@ -136,7 +136,7 @@ function sendtoPad(data,shift)
 		data = data.replace(/ *[MVPT]([^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶA-Za-z])/g, "$1");
 		data = data.replace(/ *[MVPT]$/g, "");
 	}
-	data = data.replace(/☸ */g, '');
+	data = data.replace(/♦ */g, '');
 	data = data.replace(/VAR/g, ' ');
 	data = data.replace(/  *,/g, ',')
 	data = data.replace(/\.\.\. pe \.\.\./g, '… pe …')

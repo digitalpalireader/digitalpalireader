@@ -23,7 +23,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchPart = searchPart;	
 		G_searchRX = searchRX;	
 
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString).replace(/ /g,'_') + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
+		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -45,7 +45,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 					G_searchType = parseInt(option[1]);
 				break;
 				case 'query':
-					G_searchString = decodeURIComponent(option[1]).replace(/_/g,' ');
+					G_searchString = decodeURIComponent(option[1]);
 				break;
 				case 'MAT':
 					G_searchMAT = option[1];
@@ -624,10 +624,10 @@ function createTables(xmlDoc,hiert)
 											}
 											else {
 												tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
-												while (!G_uniRegExp.exec(tempexword[t][i].charAt(0))) {
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
 													tempexword[t][i] = tempexword[t][i].substring(1);
 												}
-												while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
 													tempexword[t][i] = tempexword[t][i].slice(0,-1);
 												}
 											}
@@ -678,7 +678,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">➤</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -756,10 +756,10 @@ function createTables(xmlDoc,hiert)
 									else {
 										for(var i=0; i<l; i++) {
 											tempexword[i] = tempexword[i].replace(/\^e*b\^/g,'');
-											while (!G_uniRegExp.exec(tempexword[i].charAt(0))) {
+											while (!G_uniRegExp.exec(tempexword[i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
 												tempexword[i] = tempexword[i].substring(1);
 											}
-											while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1))) {
+											while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
 												tempexword[i] = tempexword[i].slice(0,-1);
 											}
 										}
@@ -814,7 +814,7 @@ function createTables(xmlDoc,hiert)
 
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">➤</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									
@@ -1035,7 +1035,7 @@ function atiSearchOffline(d, getstring) {
 				postpara = '';
 				if (startmatch >= 0)
 				{
-					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">➤</a><br/>'; 
+					listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">&rArr;</a><br/>'; 
 					while (startmatch >= 0)
 					{				
 						count++;

@@ -5,7 +5,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
-var DPRChrome = {
+var DPROverlay = {
 	giveIDtoTabs:function() { // startup function, give ids to 
 		
 		var main = 0; //no main dpr tabs
@@ -119,6 +119,46 @@ var DPRChrome = {
 	},
 	openSidebar: function() {
 		toggleSidebar('viewDPR');
+	},
+	rightClick:function(input) {
+		if(!input || input == '') return;
+		input = input.replace(/<[^>]*>/g,'');
+		input = input.replace(/\u0101/g, 'aa').replace(/\u012B/g, 'ii').replace(/\u016B/g, 'uu').replace(/\u1E6D/g, '\.t').replace(/\u1E0D/g, '\.d').replace(/\u1E45/g, '\"n').replace(/\u1E47/g, '\.n').replace(/\u1E43/g, '\.m').replace(/\u1E41/g, '\.m').replace(/\u00F1/g, '\~n').replace(/\u1E37/g, '\.l').replace(/\u0100/g, 'AA').replace(/\u012A/g, 'II').replace(/\u016A/g, 'UU').replace(/\u1E6C/g, '\.T').replace(/\u1E0C/g, '\.D').replace(/\u1E44/g, '\"N').replace(/\u1E46/g, '\.N').replace(/\u1E42/g, '\.M').replace(/\u00D1/g, '\~N').replace(/\u1E36/g, '\.L');
+		var thisTab = this.isThisDPRTab('DPRm');
+		if(/ /.test(input)) { // multiple words 
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(input);
+				return;
+			}
+			var oldTab = this.findDPRTab('DPR-main');
+			if (!oldTab) {
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?text='+input;
+				this.openDPRTab(permalink,'DPR-main');
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(input);
+			}
+		}
+		else { // single word
+			if(thisTab) {  
+				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.outputAnalysis(input);
+				return;
+			}
+			var oldTab = this.findDPRTab('DPR-main');
+			if (!oldTab) {
+				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+input;
+				this.openDPRTab(permalink,'DPR-main');
+			}
+			else {
+				mainWindow.gBrowser.selectedTab = oldTab;
+				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.outputAnalysis(input);
+			}
+		}
 	},
 }
 

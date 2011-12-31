@@ -1585,6 +1585,7 @@ G_irregDec['naana'] = ['naanaa','N'];
 G_irregDec['~naatati'] = ['jaanaati','V'];  // fake verb
 G_irregDec['da.t.thati'] = ['dassati0','V']; // fake verb
 G_irregDec['gamati'] = ['gacchati','V']; // fake verb
+G_irregDec['abhikiirati'] = ['abhikirati','V'];
 G_irregDec['paavisati'] = ['pavisati','V']; 
 G_irregDec['vedayati'] = ['vedeti','V']; 
 G_irregDec['bhujjati'] = ['bhu~njati','V']; 

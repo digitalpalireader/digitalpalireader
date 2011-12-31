@@ -60,7 +60,7 @@
 							</toolbarbutton>
 <!--
 							<toolbarbutton flex="1" onclick="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))" id="go" tooltiptext="&go_text;" role="button">
-								<label value="➤" />
+								<label value="&rArr;" />
 							</toolbarbutton>
 -->
 						</radiogroup>
@@ -74,7 +74,7 @@
 									<label id="title" value="" />
 								</toolbarbutton>
 								<toolbarbutton id="base-b" tooltiptext="Combine all sub-sections" role="button" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
-									<label value="*" />
+									<label value="≡" />
 								</toolbarbutton>
 							</hbox>
 							<hbox id="metac" pack="stretch" align="center" flex="1" collapsed="false">
@@ -83,7 +83,7 @@
 									</menupopup>
 								</menulist>
 								<toolbarbutton id="meta-b" tooltiptext="&go_cat;" role="button">
-									<label value="➤" />
+									<label value="&rArr;" />
 								</toolbarbutton>
 							</hbox>
 							<hbox id="volumec" pack="stretch" align="center" flex="1" collapsed="false">
@@ -92,7 +92,7 @@
 									</menupopup>
 								</menulist>
 								<toolbarbutton id="volume-b" tooltiptext="&go_cat;" role="button">
-									<label value="➤" />
+									<label value="&rArr;" />
 								</toolbarbutton>
 							</hbox>
 							<hbox id="vaggac" pack="stretch" align="center" flex="1" collapsed="false">
@@ -101,7 +101,7 @@
 									</menupopup>
 								</menulist>
 								<toolbarbutton id="vagga-b" tooltiptext="&go_cat;" role="button">
-									<label value="➤" />
+									<label value="&rArr;" />
 								</toolbarbutton>
 							</hbox>
 							<hbox id="suttac" pack="stretch" align="center" flex="1" collapsed="false">
@@ -110,7 +110,7 @@
 									</menupopup>
 								</menulist>
 								<toolbarbutton id="sutta-b" tooltiptext="&go_cat;" role="button">
-									<label value="➤" />
+									<label value="&rArr;" />
 								</toolbarbutton>
 							</hbox>
 							<hbox id="sectionc" pack="stretch" align="center" flex="1" collapsed="false">
@@ -119,7 +119,7 @@
 									</menupopup>
 								</menulist>
 								<toolbarbutton id="section-b" tooltiptext="&go_text;" role="button">
-									<label value="➤" />
+									<label value="&rArr;" />
 								</toolbarbutton>
 							</hbox>
 						<separator class="groove" />
@@ -129,7 +129,7 @@
 								</menupopup>
 							</menulist>
 							<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="go" tooltiptext="&go_bookmark;" role="button">
-								<label value="➤" />
+								<label value="&rArr;" />
 							</toolbarbutton>
 						</hbox>
 						<hbox id="bm-box" collapsed="true" flex="1" pack="stretch" align="center">
@@ -138,7 +138,7 @@
 								</menupopup>
 							</menulist>
 							<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="go" tooltiptext="&go_bookmark;" role="button">
-								<label value="➤" />
+								<label value="&rArr;" />
 							</toolbarbutton>
 						</hbox>
 						<separator class="groove" />
@@ -153,7 +153,7 @@
 					<hbox flex="1" pack="stretch" align="center">
 						<textbox flex="1" type="autocomplete" autocompletesearch="form-history" tooltiptext="&search.text;" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" id="isearch"/>
 						<toolbarbutton id="searchGo" tooltiptext="&searchGo.text;" onmouseup="DPRSend.sendSearch(DPRSend.eventSend(event));" role="button">
-							<label value="➤" />
+							<label value="&rArr;" />
 						</toolbarbutton>
 					</hbox>
 					<hbox pack="stretch" flex="1">
@@ -246,7 +246,7 @@
 							<hbox flex="1">
 								<vbox align="center" pack="center">
 									<toolbarbutton id="selAllS" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoSetContainer');" role="button">
-										<label value="*" />
+										<label value="√" />
 									</toolbarbutton>
 								</vbox>
 								<vbox>
@@ -273,7 +273,7 @@
 							<hbox flex="1">
 								<vbox align="center" pack="center">
 									<toolbarbutton id="selAllB" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoBO');" role="button">
-										<label value="*" />
+										<label value="√" />
 									</toolbarbutton>
 								</vbox>
 								<hbox pack="center">
@@ -288,7 +288,7 @@
 							<hbox flex="1">
 								<vbox align="center" pack="center">
 									<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('tsoMAT');" role="button">
-										<label value="*" />
+										<label value="√" />
 									</toolbarbutton>
 								</vbox>
 								<vbox>
@@ -321,7 +321,7 @@
 						<hbox pack="stretch" flex="1">
 							<textbox tooltiptext="&dict.text;" type="autocomplete" autocompletesearch="form-history" onkeydown="if(event.keyCode==13) DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" oninput="DPRSend.sendDict(0,false);" flex="1" id="dictin"/>
 							<toolbarbutton id="dictGo" tooltiptext="&dict_go;" onmouseup="DPRSend.sendDict(1,DPRSend.eventSend(event));" role="button">
-								<label value="➤" />
+								<label value="&rArr;" />
 							</toolbarbutton>
 						</hbox>
 						<hbox flex="1" pack="stretch">
@@ -351,7 +351,7 @@
 									<hbox>
 										<vbox align="center" pack="center">
 											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts1');" role="button">
-												<label value="*" />
+												<label value="√" />
 											</toolbarbutton>
 										</vbox>
 										<vbox>
@@ -374,7 +374,7 @@
 									<hbox>
 										<vbox align="center" pack="center">
 											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts2');" role="button">
-												<label value="*" />
+												<label value="√" />
 											</toolbarbutton>
 										</vbox>
 										<vbox>
@@ -388,7 +388,7 @@
 									<hbox>
 										<vbox align="center" pack="center">
 											<toolbarbutton id="selAllM" tooltiptext="&selAll.text;" oncommand="DPROpts.selAll('dictAdvOpts3');" role="button">
-												<label value="*" />
+												<label value="√" />
 											</toolbarbutton>
 										</vbox>
 										<vbox>

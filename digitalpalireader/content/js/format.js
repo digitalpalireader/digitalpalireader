@@ -240,7 +240,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			var ptype = parap[1];
 			var permalink = parap[2];
 			if(convout.length>1) convout += '\n\n';
-			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">☸&nbsp;</span>' :'');
+			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
 			saveout += '<p class="paratype'+ptype+'"'+'>';
 			paran++;
 		}		
@@ -512,8 +512,10 @@ function clearDivs(which) { // place divs to be cleared here
 function makeToolbox(main,aux,conv,ex,save,trans) {
 	if(main === false) {
 		$('#tbContainer').html('');
+		$('#tbContainer').hide();
 		return;
 	}
+	$('#tbContainer').show();
 	
 	var but = ['l','m','r'];
 	var bn = 0;
@@ -529,5 +531,5 @@ function makeToolbox(main,aux,conv,ex,save,trans) {
 	}
 	main = pre + ' ' + main;
 	
-	$('#tbContainer').html('<div id="tbOpener" class="tiny">⚙</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div><div id="auxToolbar" class="obutc">'+aux+'</div></div>');
+	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div><div id="auxToolbar" class="obutc">'+aux+'</div></div>');
 }

@@ -64,16 +64,16 @@
 
 	<!-- buttons -->
 
-<!ENTITY bBookmarks "Bookmarks ➤">
-<!ENTITY bQuiz "Pali Quiz ➤">
-<!ENTITY bQuote "Dhamma Quote ➤">
+<!ENTITY bBookmarks "Bookmarks ⇒">
+<!ENTITY bQuiz "Pali Quiz ⇒">
+<!ENTITY bQuote "Dhamma Quote ⇒">
 
-<!ENTITY bPreferences "Preferences ➤">
-<!ENTITY bHelp "Help ➤">
-<!ENTITY bContact "Feedback Form ➤">
+<!ENTITY bPreferences "Preferences ⇒">
+<!ENTITY bHelp "Help ⇒">
+<!ENTITY bContact "Feedback Form ⇒">
 
-<!ENTITY bGram "Grammar ➤">
-<!ENTITY bCheat "Cheat Sheet ➤">
+<!ENTITY bGram "Grammar ⇒">
+<!ENTITY bCheat "Cheat Sheet ⇒">
 
 <!ENTITY bookmark.label "Bookmarks">
 <!ENTITY quiz.label "Pali Quiz">
@@ -190,3 +190,16 @@
 <!ENTITY pApply.label "Apply">
 <!ENTITY pOK.label "Ok">
 
+<!-- HTML -->
+
+<!ENTITY larr "←">
+<!ENTITY uarr "↑">
+<!ENTITY rarr "→">
+<!ENTITY darr "↓">
+<!ENTITY harr "↔">
+<!ENTITY crarr "↵">
+<!ENTITY lArr "⇐">
+<!ENTITY uArr "⇑">
+<!ENTITY rArr "⇒">
+<!ENTITY dArr "⇓">
+<!ENTITY hArr "⇔">

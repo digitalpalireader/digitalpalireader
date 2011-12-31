@@ -16,7 +16,7 @@ function getLinkPlace() { // permalinks
 
 		var option = options[i].split('=');
 		if(option[0] == 'text') {
-			analyzeTextPad(option[1].replace(/_/g,' '));
+			analyzeTextPad(decodeURIComponent(option[1]));
 			return;
 		}
 		if(option[0] == 'ped') {
