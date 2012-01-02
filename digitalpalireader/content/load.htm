@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>Digital Pali Reader</title>
+<link rel="stylesheet" type="text/css" href="chrome://digitalpalireader/content/css/styles.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+function onDocLoad() {
+	var url = document.location.href.replace(/^dpr:/,'');
+	var urla = url.split('?');
+	var params = urla[1];
+	switch (urla[0]) {
+		case 'index':
+			document.location.href='chrome://digitalpalireader/content/index.xul?'+params;
+			break;
+		case 'search':
+			document.location.href='chrome://digitalpalireader/content/search.htm?'+params;
+			break;
+		case 'dict':
+			document.location.href='chrome://digitalpalireader/content/dict.htm?'+params;
+			break;
+	}
+}
+</script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+
+</body>
+</html>
