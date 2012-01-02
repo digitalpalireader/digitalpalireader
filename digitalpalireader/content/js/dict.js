@@ -63,7 +63,9 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	var tabT = "Dict: '" + (G_dictQuery != ''?G_dictQuery:toUni(G_dictEntry.split(',')[1])) + '\' in ' + st[G_dictType];
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
-	document.getElementById('difb').innerHTML = '';
+	$('#difb').html('');
+	$('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+	
 	
 	
 
@@ -156,7 +158,7 @@ function pedsearchstart(hard)
 
 
 
-	document.getElementById('dicthead').innerHTML = '<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />';
+	$('#dicthead').append('<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
 	
 	var outDiv = document.createElement('div');
 	
@@ -253,7 +255,7 @@ function pedFullTextSearch(getstring) {
 		}
 	}
 
-	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:</div>';
+	$('#dicthead').append('<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:</div>');
 
 	// word list
 
@@ -358,7 +360,7 @@ function dppnsearchstart(hard)
 	}
 
 
-	document.getElementById('dicthead').innerHTML = '<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />';
+	$('#dicthead').append('<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
 
 	var listoutf = '';
 	
@@ -491,7 +493,7 @@ function dppnFullTextSearch(getstring) {
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
 	}
 
-	document.getElementById('dicthead').innerHTML = '<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf;
+	$('#dicthead').append('<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
 
 	var finout = sortaz(finalouta).join('\n');
 
@@ -564,7 +566,7 @@ function mlsearchstart(hard)
 		}
 	}
 	
-	document.getElementById('dicthead').innerHTML = '<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr /><table width=100%><tr><td valign="top">';
+	$('#dicthead').append('<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr /><table width=100%><tr><td valign="top">');
 
 	if(finouta.length == 0) {
 		finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -731,7 +733,7 @@ function multisearchstart(hard)
 	
 	var outDiv = document.createElement('div');
 	
-	document.getElementById('dicthead').innerHTML = '<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />';
+	$('#dicthead').append('<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />');
 
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -863,7 +865,7 @@ function epdsearchstart()
 		}
 	}
 	
-	document.getElementById('dicthead').innerHTML = '<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:';
+	$('#dicthead').append('<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:');
 	
 	finout = '<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
@@ -953,7 +955,7 @@ function attsearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	document.getElementById('dicthead').innerHTML = '<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:'
+	$('#dicthead').append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:');
 	
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
@@ -1045,7 +1047,7 @@ function tiksearchstart()
 
 	var findiv = Math.ceil(y/3);
 	
-	document.getElementById('dicthead').innerHTML = '<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:';
+	$('#dicthead').append('<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:');
 	
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
@@ -1173,7 +1175,7 @@ function titlesearchstart()
 
 	var findiv = Math.ceil(y/2);
 	
-	document.getElementById('dicthead').innerHTML = '<p>Title search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:';
+	$('#dicthead').append('<p>Title search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:');
 	
 	var listoutf = '<hr />';
 	if(y == 0) {

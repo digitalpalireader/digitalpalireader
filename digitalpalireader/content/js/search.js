@@ -9,6 +9,7 @@ var G_searchSet;
 var G_searchBook;
 var G_searchPart;
 var G_searchRX;
+var G_searchLink;
 
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
 	
@@ -24,6 +25,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchRX = searchRX;	
 
 		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
+		
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
 		}
@@ -65,7 +67,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 			}
 		}
 	}
-	
+
 	var st = [];
 	var matst = [];
 	for (i in G_searchMAT) matst.push(G_searchMAT[i]);
@@ -288,6 +290,9 @@ function finishSearch() {
 	var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
 
 	document.getElementById('stfc').innerHTML = '&nbsp;&nbsp;<span class="small"><b><i>'+(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's</b></i>';
+
+	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook + '&part=' + G_searchPart + '&rx=' + G_searchRX;
+	$('#stfb').prepend('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+G_searchLink+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 }
 
 function importXMLs(cnt)
@@ -624,10 +629,10 @@ function createTables(xmlDoc,hiert)
 											}
 											else {
 												tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
-												while (!G_uniRegExp.exec(tempexword[t][i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(0)) && !/[0-9]/.exec(tempexword[t][i].charAt(0))) {
 													tempexword[t][i] = tempexword[t][i].substring(1);
 												}
-												while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
+												while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1)) && !/[0-9]/.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
 													tempexword[t][i] = tempexword[t][i].slice(0,-1);
 												}
 											}
@@ -759,7 +764,7 @@ function createTables(xmlDoc,hiert)
 											while (!G_uniRegExp.exec(tempexword[i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
 												tempexword[i] = tempexword[i].substring(1);
 											}
-											while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
+											while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(tempexword[i].length-1))) {
 												tempexword[i] = tempexword[i].slice(0,-1);
 											}
 										}

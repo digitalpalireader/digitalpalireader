@@ -187,7 +187,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		sidebar.DPRNav.historyBox();
 	} 
 
-	var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	var permalink = 'dpr:index?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 	
 	// get string from query
 	
@@ -813,7 +813,7 @@ function loadXMLindex(place,compare) {
 		
 		// permalink
 
-		var permalink = 'chrome://digitalpalireader/content/index.xul?';
+		var permalink = 'dpr:index?';
 		
 		try {
 			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', permalink+'loc='+place.slice(0,8).join('.'));

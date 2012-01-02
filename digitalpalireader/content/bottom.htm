@@ -30,7 +30,7 @@ function onDocLoad() {
 function showBv() {
 	var abv = bv();
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
-	document.getElementById('difb').innerHTML = '<b class="text">Quote of the Moment:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
+	document.getElementById('difb').innerHTML = '<b class="text">Daily Buddha Vacana:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
     document.getElementById('cdif').scrollTop=0;
 }
 

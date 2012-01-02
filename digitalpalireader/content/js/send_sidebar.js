@@ -523,7 +523,7 @@ var DPRSend = {
 	},
 
 	bvAlert:function() {
-		var abv = bv();DPRChrome.promptData('Buddhavacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));
+		var abv = bv(true);DPRChrome.promptData('Random Buddha Vacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));
 	},
 	
 	createBrowser:function(thisDocument,url,count){
