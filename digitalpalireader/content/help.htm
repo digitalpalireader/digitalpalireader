@@ -156,20 +156,25 @@
 <hr> 
 <div id="helpNmisc" class="heading huge b">Miscellany</div> 
 <div id="helpNpermalinks" class="large b">Permalinks:</div> 
-<p>A permalink is a special URL that, when entered in the Firefox address bar or clicked from a hyperlink (provided the DPR is installed), goes directly to the place it refers to, showing the results of a search, if specified. The structure for DPR permalinks is currently: <b>dpr:[type]?[params]</b>, where [type] is one of three, "index" (for tipitaka sections), "search" (for tipitaka searches) or "dict" (for dictionary lookups).  The [params] part is everything in the page's url string after the "?".  The "&diams;" button signifies a permalink, and is found in several places:</p> 
+<p>A permalink is a special URL that, when entered in the Firefox address bar or clicked from a hyperlink (provided the DPR is installed), goes directly to the place it refers to, showing the results of a search, if specified. The structure for DPR permalinks is currently: <b>dpr:type[?params]</b>, where "type" is either one of "index" (for tipitaka sections), "search" (for tipitaka searches) or "dict" (for dictionary lookups), each of which has associated parameters which should be added after the "?", or else any htm file in the chrome://digitalpalireader/content/ directory, in which case there will be no parameters (or "?").  The parameters refer to everything in the page's url string after the "?".
+<p>The "&diams;" button signifies a permalink, and is found in several places:</p> 
 <ul> 
 <li> in the index for a given book, </li> 
 <li>in the main window toolbox, </li> 
 <li>to the left of each paragraph. </li> 
 <li>in the top-left corner of the search and dict windows. </li> 
 </ul>  
-Clicking on a "&diams;" button causes the link to be copied to the clipboard for further use. The "&diams;" button at the beginning or each paragraph adds the paragraph number to the link. Some example permalinks are:<br> 
-<br> 
-An index permalink: <a class="green" href="dpr:index?loc=d.0.m">dpr:index?loc=d.0.m</a><br> 
-A section permalink: <a class="green" href="dpr:index?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">dpr:index?loc=d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave</a><br> 
-A search query permalink: <a class="green" href="dpr:search?type=0&query=bhagavaa+bhikkhave&MAT=m&set=dmsak&book=1&part=1&rx=false">dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=dmsak&amp;book=1&amp;part=1&amp;rx=false</a><br> 
-A dictionary lookup permalink: <a class="green" href="dpr:dict?type=PED&query=bhaga&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd">dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd</a><br> 
-<br> 
+<p>Clicking on a "&diams;" button causes the link to be copied to the clipboard for further use. The "&diams;" button at the beginning or each paragraph adds the paragraph number to the link. Some example permalinks are:
+<p><b>An index permalink:</b><p><a class="green" href="dpr:index?loc=d.0.m">DN 1 Index</a><br/><i>(dpr:index?loc=d.0.m)</i>
+<p><b>A section permalink:</b> <p><a class="green" href="dpr:index?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">DN 1, paragraph 4, with "bhagavaa" and "bhikkhave" highlighted</a><br/>
+<i>(dpr:index?loc=d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave)</i>
+<p><b>A search query permalink:</b> <p><a class="green" href="dpr:search?type=0&query=bhagavaa+bhikkhave&MAT=m&set=d&book=1&part=1&rx=false">Search DN for "bhagavaa" and "bhikkhave"</a><br/>
+<i>(dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=d&amp;book=1&amp;part=1&amp;rx=false)</i>
+<p><b>A dictionary lookup permalink: </b><p><a class="green" href="dpr:dict?type=PED&query=bhaga&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd">Lookup words starting with "bhaga" in PED</a><br/>
+<i>(dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd)</i>
+<p><b>A permalink to this help file: </b><p><a class="green" href="dpr:help">Help</a><br/>
+<i>(dpr:help)</i>
+
 <p><b>Note:</b> Shorthand sutta references of the sort found on accesstoinsight.org or suttacentral.net, of the form "DN 1.1", etc., may be used to replace the standard "loc=" notation, replacing the space with a dot, e.g. "DN.1.1". For example:<br> 
 <br> 
 <a class="green" href="dpr:index?loc=DN.1.1&amp;para=4&amp;query=bhagavaa+bhikkhave">dpr:index?loc=DN.1.1&amp;amp;para=4&amp;query=bhagavaa+bhikkhave</a><br> 

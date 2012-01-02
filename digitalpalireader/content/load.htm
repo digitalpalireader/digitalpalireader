@@ -14,11 +14,8 @@ function onDocLoad() {
 		case 'index':
 			document.location.href='chrome://digitalpalireader/content/index.xul?'+params;
 			break;
-		case 'search':
-			document.location.href='chrome://digitalpalireader/content/search.htm?'+params;
-			break;
-		case 'dict':
-			document.location.href='chrome://digitalpalireader/content/dict.htm?'+params;
+		default:
+			document.location.href='chrome://digitalpalireader/content/'+urla[0]+'.htm'+(params?'?'+params:'');
 			break;
 	}
 }

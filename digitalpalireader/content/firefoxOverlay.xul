@@ -8,7 +8,10 @@
         <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
     </stringbundleset>
     <popup id="contentAreaContextMenu">  
-      <menuitem id="dpr-show" label="Send to DPR" oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString()); else DPROverlay.rightClick(gContextMenu.target.innerHTML);"/>  
+		<menuitem id="dpr-context-item" 
+		    class="menuitem-iconic" 
+		    label="Send to DPR" 
+		    oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString()); else DPROverlay.rightClick(gContextMenu.target.innerHTML);"/>  
     </popup> 
     <menupopup id="menu_ToolsPopup">
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
