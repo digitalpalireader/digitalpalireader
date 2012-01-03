@@ -1,8 +1,8 @@
 This is the SourceForge archive for the Digital Pali Reader.  You will find the latest release in the "DPR" folder.
 
-The latest version is 2.5.2 and the latest commit message is:
+The latest version is 2.5.3 and the latest commit message is:
 
-fixed shortlinks, added image to right-click
+fixed permalinks
 
 Note that as of version 2.0, the Tipitaka archives must be downloaded seperately, either via the DPR interface itself, or by visiting http://pali.sirimangalo.org/
 
