@@ -42,7 +42,7 @@ APP_NAME=digitalpalireader
 CHROME_PROVIDERS="content locale skin"
 CLEAN_UP=1
 ROOT_FILES=
-ROOT_DIRS="defaults"
+ROOT_DIRS="components defaults"
 BEFORE_BUILD=
 AFTER_BUILD=
 
