@@ -433,8 +433,8 @@ words.push(['nad','nad','Feminine Nouns with "-Ī" Stem','nadī; noun fem.; "riv
 words.push(['dhamm','dhamm','Masculine Nouns with "-A" Stem','dhamma; noun masc.; "the teaching"']);
 words.push(['mun','mun','Masculine Nouns with "-I" Stem','muni; noun masc.; "sage"']);
 words.push(['bandh','bandh','Masc Nouns with "-U" Stem','bandhu; noun masc.; "kinsman, relative"']);
-words.push(['rūp','rūp','Neuter Nouns with "-A" Stem','rūpa; noun masc.; "material form"']);
-words.push(['cakkh','cakkh','Neuter Nouns with "-U" Stem','cakkhu; noun neut..; "eye"']);
+words.push(['rūp','rūp','Neuter Nouns with "-A" Stem','rūpa; noun neut.; "material form"']);
+words.push(['cakkh','cakkh','Neuter Nouns with "-U" Stem','cakkhu; noun neut.; "eye"']);
 words.push(['ma','','1st Person Pronoun','1st Person Pronoun']);
 words.push(['tva','','2nd Person Pronoun','2nd Person Pronoun']);
 words.push(['sa','','Demonstrative Pronoun','3rd person feminine']);
@@ -594,7 +594,7 @@ function showAnswer2(cnt){
 	if(!cnt)
 		cnt = 0;
 	if(cnt == 3)
-		return;
+		return getDeclension();
 		
 	setTimeout(function(){showAnswerBounce(cnt)},500);
 }
