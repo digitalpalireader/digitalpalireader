@@ -807,7 +807,7 @@ p.txt {
 	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-weight: bold;
 	text-align: center;
-	}
+}
 		
 p.cite  {
 	padding-bottom: 12pt;
@@ -816,7 +816,20 @@ p.cite  {
 	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-style: italic;
 	text-align: center;
-	}
+}
+
+p#answer{
+	text-align:center;
+}
+	
+p.oneDec  {
+	padding-bottom: 12pt;
+	margin: auto;
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-style: italic;
+	text-align: center;
+}
 		
 table.dec {  
 	margin: auto;

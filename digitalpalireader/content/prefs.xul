@@ -48,6 +48,14 @@
 								<checkbox id="nigahita" label="&pnigahita.label;" prefstring="Bool.nigahita"/>
 								<checkbox id="ctrans" label="&pctrans.label;" prefstring="Bool.ctrans"/>
 								<checkbox id="autodict" label="&pautodict.label;" prefstring="Bool.autodict"/>
+								<caption label="&context.label;"/>
+
+								<radiogroup id="selectMode" orient="horizontal">
+									<radio id="allContext" label="&allContext.label;" selected="true" prefstring="Bool.allContext"/>
+									<radio id="contextSelected" label="&contextSelected.label;" prefstring="Bool.contextSelected"/>
+									<radio id="noContext" label="&noContext.label;" prefstring="Bool.noContext"/>
+								</radiogroup>
+
 								<hbox align="center"><label id="paltlimit" value="&paltlimit.label;" selected="true" /><spacer flex="1"/><textbox id="altlimit" size="3" prefstring="Int.altlimit"/></hbox>
   							</box>
   					</groupbox>

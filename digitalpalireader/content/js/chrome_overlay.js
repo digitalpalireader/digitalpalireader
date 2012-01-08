@@ -5,7 +5,16 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
+
 var DPROverlay = {
+	init:function() {
+		window.dump('init DPR Overlay\n');
+		if(document.getElementById("contentAreaContextMenu"))
+			document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function(e){DPROverlay.showHideDPRItem(e)}, false);  
+		window.dump('init DPR Overlay finished\n');
+	},
+	
+
 	giveIDtoTabs:function() { // startup function, give ids to 
 		
 		var main = 0; //no main dpr tabs
@@ -160,6 +169,31 @@ var DPROverlay = {
 			}
 		}
 	},
+	
+	showHideDPRItem:function() {
+		window.dump('DPR popup showing\n');
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
+		var dpritem = document.getElementById("dpr-context-item");
+
+		if(prefs.getBoolPref('Bool.allContext'))
+			dpritem.hidden = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && !dgContextMenu.isTextSelected);
+		else if(prefs.getBoolPref('Bool.noContext'))
+			dpritem.hidden = true;
+		else if(prefs.getBoolPref('Bool.contextSelected')) {
+				dpritem.hidden = !gContextMenu.isTextSelected;
+		}
+		window.dump('DPR context item:'+dpritem.hidden+'\n');
+	},
+	
+	mouseMove:function(e) {
+		if(e && e.rangeParent && e.rangeParent.nodeType == e.rangeParent.TEXT_NODE && e.rangeParent.parentNode == e.target) {
+			var range = HTTparent.ownerDocument.createRange();
+			range.selectNode(e.rangeParent);
+			var str = range.toString();
+			range.detach();
+		}
+
+	}
 }
 
-
+window.addEventListener("load", function(){ DPROverlay.init()}, false);

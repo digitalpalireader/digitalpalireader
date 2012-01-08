@@ -1,18 +1,27 @@
 
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
+var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
+var radio = ['noContext','contextSelected','allContext']; 
+var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+var ints = ['altlimit'];
+
 function loadDefaults() {
-	var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 	for (var i = 0; i < cks.length; ++i) {
 		var ck = document.getElementById(cks[i]);
 		ck.checked = DPR_prefsD[cks[i]];
 	}
-	var ints = ['altlimit'];
+	for (var i = 0; i < radio.length; ++i) {
+		var ck = document.getElementById(radio[i]);
+		if(DPR_prefsD[radio[i]])
+			ck.setAttribute('selected','true');
+		else 
+			ck.setAttribute('selected','false');
+	}
 	for (var i = 0; i < ints.length; ++i) {
 		var box = document.getElementById(ints[i]);
 		box.value = DPR_prefsD[ints[i]];
 	}
-	var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 	for (var i = 0; i < strings.length; ++i) {
 		var box = document.getElementById(strings[i]);
 		box.value = DPR_prefsD[strings[i]];
@@ -65,24 +74,27 @@ function loadDefaults() {
 }
 
 function loadPrefs() {
-		var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 		for (var i = 0; i < cks.length; ++i) {
 			var ck = document.getElementById(cks[i]);
 			ck.checked = prefs.getBoolPref(ck.getAttribute("prefstring"));
 		}
-		var ints = ['altlimit'];
 		for (var i = 0; i < ints.length; ++i) {
 			var box = document.getElementById(ints[i]);
 			var prefstring = box.getAttribute("prefstring");
 			box.value = prefs.getIntPref(prefstring);
 		}
-		var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 		for (var i = 0; i < strings.length; ++i) {
 			var box = document.getElementById(strings[i]);
 			var prefstring = box.getAttribute("prefstring");
 			box.value = prefs.getCharPref(prefstring);
 		}
-		
+		for (var i = 0; i < radio.length; ++i) {
+			var ck = document.getElementById(radio[i]);
+			if(prefs.getBoolPref(ck.getAttribute("prefstring")))
+				ck.setAttribute('selected','true');
+			else 
+				ck.setAttribute('selected','false');
+		}		
 		// backgrounds
 		
 		var wbk = prefs.getCharPref('Char.bktype');
@@ -139,8 +151,6 @@ function loadPrefs() {
 		
 }
 
-
-
 function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
 	var atiFile;
@@ -162,15 +172,16 @@ function savePrefs(close) {
 	}
 
 	
-	var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 
 	for (var i = 0; i < cks.length; ++i) {
 		var ck = document.getElementById(cks[i]);
 		prefs.setBoolPref(ck.getAttribute("prefstring"), ck.checked);
 	}
+	for (var i = 0; i < radio.length; ++i) {
+		var ck = document.getElementById(radio[i]);
+		prefs.setBoolPref(ck.getAttribute("prefstring"), ck.getAttribute('selected'));
+	}
 	
-	var ints = ['altlimit'];
-
 	for (var i = 0; i < ints.length; ++i) {
 		var box = document.getElementById(ints[i]);
 		prefs.setIntPref(box.getAttribute("prefstring"), box.value);
@@ -186,7 +197,6 @@ function savePrefs(close) {
 	
 	prefs.setCharPref('Char.bkcptype', bkcptype);
 	
-	var strings = ['colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 	
 	for (var i = 0; i < strings.length; ++i) {
 		if(strings[i] == 'colbk' && !document.getElementById('pcolbk').checked || strings[i] == 'imgbk' && !document.getElementById('pimgbk').checked || strings[i] == 'colbkcp' && !document.getElementById('pcolbkcp').checked || strings[i] == 'imgbkcp' && !document.getElementById('pimgbkcp').checked) continue; 

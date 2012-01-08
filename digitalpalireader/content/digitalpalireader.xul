@@ -421,7 +421,7 @@
 						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/bookmarks.htm','DPR-bm',1);" id="bookmarks" tooltiptext="&bookmark.label;" role="button">
 							<label value="&bBookmarks;" />
 						</toolbarbutton>
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.htm','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
+						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.xul','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
 							<label value="&bQuiz;" />
 						</toolbarbutton>
 						<toolbarbutton onclick="DPRSend.bvAlert()" id="bv" tooltiptext="&bv.label;" role="button">

@@ -57,6 +57,10 @@ pref("extensions.digitalpalireader.Bool.nigahita", false);
 
 pref("extensions.digitalpalireader.Char.catiloc", "<none>");
 
+pref("extensions.digitalpalireader.Bool.allContext", true);
+pref("extensions.digitalpalireader.Bool.contextSelected", false);
+pref("extensions.digitalpalireader.Bool.noContext", false);
+
 pref("extensions.digitalpalireader.Int.translits", 0);
 pref("extensions.digitalpalireader.Int.altlimit", 20);
 

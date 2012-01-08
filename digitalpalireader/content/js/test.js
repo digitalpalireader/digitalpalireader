@@ -1,15 +1,25 @@
 function newquiz() {
 	moveframex(1);
-	document.getElementById('mafbc').innerHTML = '<div class="quizb"><span class="abut obut tiny sbut">Pali Vocab Quiz</span> <span class="abut obut tiny" onclick="newDquiz()">Pali Declension Quiz</span></div><input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
+	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
 	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
 	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
 	quizme();
 
 }
 
+// full declension
+
 function newDquiz() {
-document.getElementById('mafbc').innerHTML = '<div class="quizb"><span class="abut obut tiny" onclick="newquiz()">Pali Vocab Quiz</span> <span class="abut obut tiny sbut">Pali Declension Quiz</span></div><input type="hidden" id="QwhichS"><p class="txt" id="QwhichT">Masculine Nouns with "-A" Stem</p><p class="cite" id="QwhichC">dhamma; noun masc.; "the teaching"</p><table class="dec" id="Qdeclension"><tr><th class="dec"></th><th colspan=2 class = "toprow">SINGULAR</th><th colspan=2 class = "toprow">PLURAL</th></tr><tr><th class="dec">NOM</th><td class="dec"><span id="nomSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="nomPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomPlt" onfocus="this.value=this.value;" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">ACC</th><td class="dec"><span id="accSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="accSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="accPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="accPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">INST</th><td class="dec"><span id="instSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="instSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="instPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="instPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">DAT</th><td class="dec"><span id="datSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="datSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="datPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="datPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">ABL</th><td class="dec"><span id="ablSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="ablPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">GEN</th><td class="dec"><span id="genSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="genSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="genPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="genPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">LOC</th><td class="dec"><span id="locSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="locSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="locPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="locPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">VOC</th><td class="dec"><span id="vocSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="vocPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocPlt" onkeyup="this.value=toUni(this.value);"></td></tr></table><p class="controls"><button title="Check your answers (1)" onclick="checkAnswers()" class="control" id="QcheckAns" type="button">Check</button><button title="Clear table (2)" onclick="clearAnswers()" class="control" id="Qclear" type="button">Clear</button><button title="Show correct answers (3)" onclick="showAnswers()" class="control" id="Qshow" type="button">Show</button><button title="Get a new declension (4)" onclick="resetTable()" class="control" id="Qnew" type="button">New</button></p><hr /><h2 align=center>Correct Answers:</h2><p id="Qcorrects"></p>';
-resetTable();
+	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="QwhichS"><p class="txt" id="QwhichT">Masculine Nouns with "-A" Stem</p><p class="cite" id="QwhichC">dhamma; noun masc.; "the teaching"</p><table class="dec" id="Qdeclension"><tr><th class="dec"></th><th colspan=2 class = "toprow">SINGULAR</th><th colspan=2 class = "toprow">PLURAL</th></tr><tr><th class="dec">NOM</th><td class="dec"><span id="nomSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="nomPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="nomPlt" onfocus="this.value=this.value;" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">ACC</th><td class="dec"><span id="accSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="accSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="accPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="accPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">INST</th><td class="dec"><span id="instSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="instSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="instPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="instPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">DAT</th><td class="dec"><span id="datSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="datSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="datPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="datPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">ABL</th><td class="dec"><span id="ablSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="ablPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="ablPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">GEN</th><td class="dec"><span id="genSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="genSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="genPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="genPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">LOC</th><td class="dec"><span id="locSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="locSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="locPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="locPlt" onkeyup="this.value=toUni(this.value);"></td></tr><tr><th class="dec">VOC</th><td class="dec"><span id="vocSins"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocSint" onkeyup="this.value=toUni(this.value);"></td><td class="dec"><span id="vocPls"></span></td><td class="decr"><input class="dect" type="text" value="" id="vocPlt" onkeyup="this.value=toUni(this.value);"></td></tr></table><p class="controls"><button title="Check your answers (1)" onclick="checkAnswers()" class="control" id="QcheckAns" type="button">Check</button><button title="Clear table (2)" onclick="clearAnswers()" class="control" id="Qclear" type="button">Clear</button><button title="Show correct answers (3)" onclick="showAnswers()" class="control" id="Qshow" type="button">Show</button><button title="Get a new declension (4)" onclick="resetTable()" class="control" id="Qnew" type="button">New</button></p>';//<hr /><h2 align=center>Correct Answers:</h2><p id="Qcorrects"></p>';
+	resetTable();
+}
+
+
+// single declension
+
+function newDOnequiz() {
+	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="QwhichS"><p class="txt" id="QwhichT">Masculine Nouns with "-A" Stem</p><p class="cite" id="QwhichC">dhamma; noun masc.; "the teaching"</p><p id="answer"></p><p class="oneDec">Which declension is <span id="oneDec" class="red"></span>?</p><table class="dec" id="Qdeclension"><tr><th class="toprow">Declension</th><th class="toprow">Number</th></tr><tr><td class="dec"><select size="8" id="declension"><option>Nominative</option><option>Accusative</option><option>Instrumental</option><option>Dative</option><option>Ablative</option><option>Genative</option><option>Locative</option><option>Vocative</option></select></td><td class="decr"><select size="2" id="number"><option>Singular</option><option>Plural</option></select></td></tr></table><p class="controls"><button title="Check your answers (1)" onclick="checkAnswer2()" class="control" id="QcheckAns" type="button">Check</button><button title="Show correct answer (3)" onclick="showAnswer2()" class="control" id="Qshow" type="button">Show</button><button title="Get a new declension (4)" onclick="getDeclension()" class="control" id="Qnew" type="button">New</button></p>'; //<hr /><h2 align=center>Correct Answers:</h2><p id="Qcorrects"></p>';
+	getDeclension();
 }
 
 function quizme() {
@@ -293,8 +303,8 @@ correctDec['ma']['genSin'] = ['mama','mayhaṃ','mamaṃ','amhaṃ'];
 correctDec['ma']['genPl'] = ['amhākaṃ','asmākaṃ','amhaṃ'];
 correctDec['ma']['locSin'] = ['mayi'];
 correctDec['ma']['locPl'] = ['amhesu'];
-correctDec['ma']['vocSin'] = ['N/A'];
-correctDec['ma']['vocPl'] = ['N/A'];
+correctDec['ma']['vocSin'] = [''];
+correctDec['ma']['vocPl'] = [''];
 
 correctDec['tva'] = [];
 correctDec['tva']['nomSin'] = ['tvaṃ','tuvaṃ'];
@@ -311,8 +321,8 @@ correctDec['tva']['genSin'] = ['tava','tuyhaṃ','tavaṃ','tumhaṃ'];
 correctDec['tva']['genPl'] = ['tumhākaṃ','tumhaṃ'];
 correctDec['tva']['locSin'] = ['tvayi','tayi'];
 correctDec['tva']['locPl'] = ['tumhesu'];
-correctDec['tva']['vocSin'] = ['N/A'];
-correctDec['tva']['vocPl'] = ['N/A'];
+correctDec['tva']['vocSin'] = [''];
+correctDec['tva']['vocPl'] = [''];
 
 correctDec['sa'] = [];
 correctDec['sa']['nomSin'] = ['sā'];
@@ -329,8 +339,8 @@ correctDec['sa']['genSin'] = ['tāya','tassā','tissā','tissāya'];
 correctDec['sa']['genPl'] = ['tāsaṃ','tāsānaṃ'];
 correctDec['sa']['locSin'] = ['tāya','tayaṃ','tissaṃ'];
 correctDec['sa']['locPl'] = ['tāsu'];
-correctDec['sa']['vocSin'] = ['N/A'];
-correctDec['sa']['vocPl'] = ['N/A'];
+correctDec['sa']['vocSin'] = [''];
+correctDec['sa']['vocPl'] = [''];
 
 correctDec['so'] = [];
 correctDec['so']['nomSin'] = ['so','sa'];
@@ -347,8 +357,8 @@ correctDec['so']['genSin'] = ['tassa'];
 correctDec['so']['genPl'] = ['tesaṃ','tesānaṃ'];
 correctDec['so']['locSin'] = ['tasmiṃ','tamhi'];
 correctDec['so']['locPl'] = ['tesu'];
-correctDec['so']['vocSin'] = ['N/A'];
-correctDec['so']['vocPl'] = ['N/A'];
+correctDec['so']['vocSin'] = [''];
+correctDec['so']['vocPl'] = [''];
 
 correctDec['ta'] = [];
 correctDec['ta']['nomSin'] = ['taṃ'];
@@ -365,8 +375,8 @@ correctDec['ta']['genSin'] = ['tassa'];
 correctDec['ta']['genPl'] = ['tesaṃ','tesānaṃ'];
 correctDec['ta']['locSin'] = ['tasmiṃ','tamhi'];
 correctDec['ta']['locPl'] = ['tesu'];
-correctDec['ta']['vocSin'] = ['N/A'];
-correctDec['ta']['vocPl'] = ['N/A'];
+correctDec['ta']['vocSin'] = [''];
+correctDec['ta']['vocPl'] = [''];
 
 
 var decls = [];
@@ -387,69 +397,62 @@ decls.push('locPl');
 decls.push('vocSin');
 decls.push('vocPl');
 
+var declsToNo = [];
+declsToNo['nomSin'] = [0,0];
+declsToNo['nomPl'] = [0,1];
+declsToNo['accSin'] = [1,0];
+declsToNo['accPl'] = [1,1];
+declsToNo['instSin'] = [2,];
+declsToNo['instPl'] = [2,1];
+declsToNo['datSin'] = [3,0];
+declsToNo['datPl'] = [3,1];
+declsToNo['ablSin'] = [4,0];
+declsToNo['ablPl'] = [4,1];
+declsToNo['genSin'] = [5,0];
+declsToNo['genPl'] = [5,1];
+declsToNo['locSin'] = [6,0];
+declsToNo['locPl'] = [6,1];
+declsToNo['vocSin'] = [7,0];
+declsToNo['vocPl'] = [7,1];
 
-var stems = [];
-stems.push('ratt');
-stems.push('sāl');
-stems.push('nad');
-stems.push('dhamm');
-stems.push('mun');
-stems.push('bandh');
-stems.push('rūp');
-stems.push('cakkh');
-stems.push('ma');
-stems.push('tva');
-stems.push('sa');
-stems.push('so');
-stems.push('ta');
+var declNo = [];
+declNo.push(['nomSin','nomPl']);
+declNo.push(['accSin','accPl']);
+declNo.push(['instSin','instPl']);
+declNo.push(['datSin','datPl']);
+declNo.push(['ablSin','ablPl']);
+declNo.push(['genSin','genPl']);
+declNo.push(['locSin','locPl']);
+declNo.push(['vocSin','vocPl']);
 
-var rstems = [];
-rstems['ratt'] = 'ratt';
-rstems['sāl'] = 'sāl';
-rstems['nad'] = 'nad';
-rstems['dhamm'] = 'dhamm';
-rstems['mun'] = 'mun';
-rstems['bandh'] = 'bandh';
-rstems['rūp'] = 'rūp';
-rstems['cakkh'] = 'cakkh';
-rstems['ma'] = '';
-rstems['tva'] = '';
-rstems['sa'] = '';
-rstems['so'] = '';
-rstems['ta'] = '';
 
-var allT = [];
-var allC = [];
+var words = [];
+words.push(['ratt','ratt','Feminine Nouns with "-I" Stem','ratti; noun fem.; "night"']);
+words.push(['sāl','sāl','Feminine Nouns with "-Ā" Stem','sāla; noun fem.; "public hall"']);
+words.push(['nad','nad','Feminine Nouns with "-Ī" Stem','nadī; noun fem.; "river"']);
+words.push(['dhamm','dhamm','Masculine Nouns with "-A" Stem','dhamma; noun masc.; "the teaching"']);
+words.push(['mun','mun','Masculine Nouns with "-I" Stem','muni; noun masc.; "sage"']);
+words.push(['bandh','bandh','Masc Nouns with "-U" Stem','bandhu; noun masc.; "kinsman, relative"']);
+words.push(['rūp','rūp','Neuter Nouns with "-A" Stem','rūpa; noun masc.; "material form"']);
+words.push(['cakkh','cakkh','Neuter Nouns with "-U" Stem','cakkhu; noun neut..; "eye"']);
+words.push(['ma','','1st Person Pronoun','1st Person Pronoun']);
+words.push(['tva','','2nd Person Pronoun','2nd Person Pronoun']);
+words.push(['sa','','Demonstrative Pronoun','3rd person feminine']);
+words.push(['so','','Demonstrative Pronoun','3rd person masculine']);
+words.push(['ta','','Demonstrative Pronoun','3rd person neuter']);
 
-allT.push('Feminine Nouns with "-I" Stem');
-allC.push('ratti; noun fem.; "night"');
-allT.push('Feminine Nouns with "-Ā" Stem');
-allC.push('sāla; noun fem.; "public hall"');
-allT.push('Feminine Nouns with "-Ī" Stem');
-allC.push('nadī; noun fem.; "river"');
-allT.push('Masculine Nouns with "-A" Stem');
-allC.push('dhamma; noun masc.; "the teaching"');
-allT.push('Masculine Nouns with "-I" Stem');
-allC.push('muni; noun masc.; "sage"');
-allT.push('Masc Nouns with "-U" Stem');
-allC.push('bandhu; noun masc.; "kinsman, relative"');
-allT.push('Neuter Nouns with "-A" Stem');
-allC.push('rūpa; noun masc.; "material form"');
-allT.push('Neuter Nouns with "-U" Stem');
-allC.push('cakkhu; noun neut..; "eye"');
-allT.push('1st Person Pronoun');
-allC.push('1st Person Pronoun');
-allT.push('2nd Person Pronoun');
-allC.push('2nd Person Pronoun');
-allT.push('Demonstrative Pronoun');
-allC.push('3rd person feminine');
-allT.push('Demonstrative Pronoun');
-allC.push('3rd person masculine');
-allT.push('Demonstrative Pronoun');
-allC.push('3rd person neuter');
+/*
+
+var out='';
+
+for (i in words) {
+	out+= "words.push(['"+words[i][0]+"','"+words[i][1]+"','"+allT[i]+"','"+allC[i]+"']);<br/>";
+}
+*/
 
 function resetTable()  {
-	if(Drights.length == stems.length) {
+
+	if(Drights.length == words.length) {
 		alert('done'); 
 		rights = [];
 	}
@@ -459,16 +462,20 @@ function resetTable()  {
 		rn=Math.floor(Math.random()*12);
 	}
 	document.getElementById('QwhichS').value = rn
-	document.getElementById('QwhichT').innerHTML = allT[rn];
-	document.getElementById('QwhichC').innerHTML = allC[rn];
-	var stem = stems[rn];
-	for (i in decls) {
-		document.getElementById(decls[i]+'s').innerHTML = rstems[stem];
-		if (correctDec[stem][decls[i]][0] == 'N/A') document.getElementById(decls[i]+'t').disabled = 'true';
-		else document.getElementById(decls[i]+'t').disabled = ''; 
-	}
+	document.getElementById('QwhichT').innerHTML = words[rn][2];
+	document.getElementById('QwhichC').innerHTML = words[rn][3];
+	var stem = words[rn][0];
+	addStems(stem,rn);
 	clearAnswers();
 	showRights();
+}
+
+function addStems(stem,rn) {
+	for (i in decls) {
+		document.getElementById(decls[i]+'s').innerHTML = words[rn][1];
+		if (correctDec[stem][decls[i]][0] == '') document.getElementById(decls[i]+'t').disabled = 'true';
+		else document.getElementById(decls[i]+'t').disabled = ''; 
+	}
 }
 
 var Drights = [];
@@ -478,10 +485,10 @@ function checkAnswers() {
 	for (i in decls) {
 		var right = 0;
 		var rn = document.getElementById('QwhichS').value;
-		var stem = stems[rn];
+		var stem = words[rn][0];
 		var thisa = document.getElementById(decls[i]+'t');
 		for (j in correctDec[stem][decls[i]]) {
-			if (correctDec[stem][decls[i]][j] == 'N/A') {
+			if (correctDec[stem][decls[i]][j] == '') {
 				thisa.style.backgroundColor = '';
 				right = 1;
 				break;
@@ -506,14 +513,14 @@ function checkAnswers() {
 function showRights() {
 	document.getElementById('Qcorrects').innerHTML = '';
 	for (i in Drights) {
-		document.getElementById('Qcorrects').innerHTML += stems[i]+'-<br />';
+		document.getElementById('Qcorrects').innerHTML += words[i][0]+'-<br />';
 	}
 	if (document.getElementById('Qcorrects').innerHTML != '') document.getElementById('Qcorrects').innerHTML += '<br /><span class="abut obut tiny" title="Reset right answers" onclick="rights = []; showRights();" id="resetRights">Reset</span>';
 }
 
 function clearAnswers() {
 	var rn = document.getElementById('QwhichS').value;
-	var stem = stems[rn];
+	var stem = words[rn][0];
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').value = '';
 		document.getElementById(decls[i]+'t').style.backgroundColor = '';
@@ -525,7 +532,7 @@ function showAnswers() {
 	document.getElementById('Qshow').innerHTML = 'Hide';
 	document.getElementById('Qshow').onclick = function () { hideAnswers() };
 	var rn = document.getElementById('QwhichS').value;
-	var stem = stems[rn];
+	var stem = words[rn][0];
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').style.backgroundColor = '';
 		document.getElementById(decls[i]+'t').style.display = 'none';
@@ -540,4 +547,62 @@ function hideAnswers() {
 		document.getElementById(decls[i]+'t').style.display = 'block';
 		document.getElementById(decls[i]+'s').innerHTML = '';
 	}
-}	
+	var rn = document.getElementById('QwhichS').value;
+	var stem = words[rn][0];
+	addStems(stem,rn);
+}
+
+var G_oneDec = [0,0,0];
+
+function getDeclension() {
+	$('#declension')[0].selectedIndex = -1;
+	$('#number')[0].selectedIndex = -1;
+	var rn=Math.floor(Math.random()*12);
+	var rn2=Math.floor(Math.random()*16);
+	var stem = words[rn][0];
+	var alts = correctDec[stem][decls[rn2]];
+	var rn3=Math.floor(Math.random()*alts.length);
+	var oneWord = alts[rn3];
+	if(!oneWord) {
+		return getDeclension();
+	}
+	G_oneDec = [stem,oneWord,rn2];
+	$('#QwhichT').html(words[rn][2]);
+	$('#QwhichC').html(words[rn][3]);
+	$('#oneDec').html(alts[rn3]);
+}
+
+
+function checkAnswer2() {
+	var dec = $('#declension')[0].selectedIndex;
+	var num = $('#number')[0].selectedIndex;
+	var alts = correctDec[G_oneDec[0]][declNo[dec][num]];
+	for(i in alts) {
+		if(alts[i] == G_oneDec[1]) {
+			$('#answer').html('<span class="green">Right!</span>');
+			getDeclension();
+			return
+		}
+	}
+	$('#answer').html('<span class="red">Wrong!</span>');
+}
+
+function showAnswer2(cnt){
+	$('#declension')[0].selectedIndex = -1;
+	$('#number')[0].selectedIndex = -1;
+
+	if(!cnt)
+		cnt = 0;
+	if(cnt == 3)
+		return;
+		
+	setTimeout(function(){showAnswerBounce(cnt)},500);
+}
+
+function showAnswerBounce(cnt) {
+	cnt++;
+	var d = declsToNo[decls[G_oneDec[2]]];
+	$('#declension')[0].selectedIndex = d[0];
+	$('#number')[0].selectedIndex = d[1];
+	setTimeout(function(){showAnswer2(cnt)},500);
+}

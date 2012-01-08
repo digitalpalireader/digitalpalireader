@@ -35,28 +35,35 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	
 	if(xmlDoc == null) return refreshit();
 	
-	var t = xmlDoc.getElementsByTagName("ha");
-	var u = t[0].getElementsByTagName("h0");
-	var v = u[meta]?u[meta].getElementsByTagName("h1"):[];
-	var w = v[volume]?v[volume].getElementsByTagName("h2"):[];
-	var x = w[vagga]?w[vagga].getElementsByTagName("h3"):[];
-	var y = x[sutta]?x[sutta].getElementsByTagName("h4"):[];
-	var z = y[section]?y[section].getElementsByTagName("p"):[];
+	try {
+		
+		var t = xmlDoc.getElementsByTagName("ha");
+		var u = t[0].getElementsByTagName("h0");
+		var v = u[meta]?u[meta].getElementsByTagName("h1"):[];
+		var w = v[volume]?v[volume].getElementsByTagName("h2"):[];
+		var x = w[vagga]?w[vagga].getElementsByTagName("h3"):[];
+		var y = x[sutta]?x[sutta].getElementsByTagName("h4"):[];
+		var z = y[section]?y[section].getElementsByTagName("p"):[];
 
-	// titles
-	
-	var un = t[0].getElementsByTagName("han");
-	var vn = u[meta].getElementsByTagName("h0n");
-	var wn = v[volume].getElementsByTagName("h1n");
-	var xn = w[vagga].getElementsByTagName("h2n");
-	var yn = x[sutta].getElementsByTagName("h3n");
-	var zn = y[section].getElementsByTagName("h4n");
-	var una = (un[0].childNodes[0] ? un[0].textContent : ' ');
-	var vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
-	var wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
-	var xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
-	var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
-	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
+		// titles
+		
+		var un = t[0].getElementsByTagName("han");
+		var vn = u[meta].getElementsByTagName("h0n");
+		var wn = v[volume].getElementsByTagName("h1n");
+		var xn = w[vagga].getElementsByTagName("h2n");
+		var yn = x[sutta].getElementsByTagName("h3n");
+		var zn = y[section].getElementsByTagName("h4n");
+		var una = (un[0].childNodes[0] ? un[0].textContent : ' ');
+		var vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
+		var wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
+		var xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
+		var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
+		var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
+	}
+	catch(ex) {
+		alert('Something went wrong.  A team of highly-trained monkeys has been dispatched to solve the problem.  If you see them, please show them this:\n\n'+ex);
+		return refreshit();
+	}
 
 	// relative mat
 	

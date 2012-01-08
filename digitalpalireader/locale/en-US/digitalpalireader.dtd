@@ -1,5 +1,6 @@
 
 <!ENTITY digitalpalireader.title "Digital Pali Reader">
+<!ENTITY quiz.title "DPR Quiz">
 <!ENTITY openDPR.commandkey "D">
 <!ENTITY openDPR.modifierskey "control shift">
 
@@ -116,6 +117,11 @@
 
 <!ENTITY pnigahita.label "Use ṁ instead of ṃ">
 
+<!ENTITY context.label "Show context menu item:">
+<!ENTITY allContext.label "always">
+<!ENTITY contextSelected.label "when text selected">
+<!ENTITY noContext.label "never">
+
 <!ENTITY pATI.label "Access To Insight Off-Line Archive:">
 <!ENTITY pcatioff.label "Use Off-line ATI Archive">
 <!ENTITY pATILoc.label "Location (ati_website):">
@@ -203,3 +209,9 @@
 <!ENTITY rArr "⇒">
 <!ENTITY dArr "⇓">
 <!ENTITY hArr "⇔">
+
+<!-- Quiz -->
+
+<!ENTITY quiz1.label "Vocab">
+<!ENTITY quiz2.label "Declensions - Full">
+<!ENTITY quiz3.label "Declensions - Single">
