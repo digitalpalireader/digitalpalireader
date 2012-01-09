@@ -8,13 +8,17 @@
 		<tabs class="chromeback">
 			<tab class="chromeback" label="Paradigms"/>
 			<tab class="chromeback" label="Individual"/>
+			<tab class="chromeback" label="Shuffle"/>
 		</tabs>
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="paradigm">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-grammar.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="individual">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-grammar-two.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="quiz-browser-2" src="quiz-grammar-two.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="move">
+				<browser disablehistory="true" type="content" id="quiz-browser-3" src="quiz-grammar-three.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

@@ -22,6 +22,12 @@ function newquiz() {
 		getDeclension();
 	}
 
+	// moveable declension
+
+	function newDMquiz() {
+		resetMTable();
+	}
+
 // verbs
 
 	// full declension
@@ -34,6 +40,11 @@ function newquiz() {
 
 	function newVOnequiz() {
 		getVDeclension();
+	}
+	// moveable declension
+
+	function newMVquiz() {
+		resetMVTable();
 	}
 
 function quizme() {
@@ -644,6 +655,82 @@ function showAnswerBounce(cnt) {
 	setTimeout(function(){showAnswer2(cnt)},500);
 }
 
+// moveable
+
+
+
+function resetMTable()  {
+	if(Drights.length == words.length) {
+		Drights = [];
+		alertFlash("Congratulations for completing all declensions!",'green');
+	}
+		
+	var rn=Math.floor(Math.random()*words.length);
+	while(Drights[rn] || (G_oneNoun == rn))
+		var rn=Math.floor(Math.random()*words.length);
+	document.getElementById('QwhichT').innerHTML = words[rn][2];
+	document.getElementById('QwhichC').innerHTML = words[rn][3];
+	var stem = words[rn][0];
+
+	G_oneNoun = [rn,stem];
+
+    for (i in decls){
+        $('#drag'+i).html(correctDec[stem][decls[i]].join(', '));
+    }
+
+	var top = decls.length;
+    if(top) while(--top) {
+        current = Math.floor(Math.random() * (top + 1));
+		
+		var src = $('#drag'+top).parent();
+		var dest = $('#drag'+current).parent();
+
+		src.append(
+			$('#drag'+current).remove().clone()
+		);
+
+		dest.append(
+			$('#drag'+top).remove().clone()
+		);
+
+	}
+	init();
+	
+	//showRights();
+}
+
+function checkMAnswers() {
+    var wrong = 0;
+    for (i in decls){
+		var right = 0;
+		var thisa = $('#decr'+i+' div');
+
+        if(thisa.html() == correctDec[G_oneNoun[1]][decls[i]].join(', ')) {
+			thisa.css('background-color','#5F5');
+			right=1;
+		}
+		else {
+			right = 0;
+			thisa.css('background-color','#F55');
+		}
+		if (right == 0) wrong = 1;
+	}
+	if (wrong == 0) {
+		alertFlash("Well done!",'green');
+		//Drights[G_oneNoun[0]] = 1;
+		resetMTable();
+		resetMColors();
+	}
+	else
+		$(".drag").mousedown(function(){resetMColors();});
+}
+
+function resetMColors() {
+    for (i in decls){
+		var thisa = $('#decr'+i+' div');
+		thisa.css('background-color','#EEE');
+	}	
+}
 
 // verbs
 
@@ -893,6 +980,107 @@ function showVAnswerBounce(cnt) {
 	setTimeout(function(){showVAnswer2(cnt)},500);
 }
 
+
+// moveable
+
+function resetMVTable()  {
+	// get rights length
+	
+	var rl = 0;
+	for (i in G_VRights) {
+		rl+=G_VRights[i].length;
+	}
+	
+	if(rl == verbs.length*vdecs.length) {
+		G_VRights = [];
+		alertFlash('Congratulations, you have completed the declension quiz!','green');
+	}
+	var rn=Math.floor(Math.random()*verbs.length);
+	var rn1=Math.floor(Math.random()*vdecs.length);
+	//var rn = 4;
+	if(G_VRights[rn]) {
+		while(G_VRights[rn][rn1] || (G_oneVerb[0] == rn && G_oneVerb[1] == rn1)) {
+			var rn=Math.floor(Math.random()*verbs.length);
+			var rn1=Math.floor(Math.random()*vdecs.length);
+		}
+	}
+	
+
+	var stem = verbs[rn][vdecs[rn1][6]];
+
+	G_oneVerb = [rn,rn1,stem];
+
+	$('#QwhichT').html('√'+verbs[rn][0]);
+	$('#QwhichC').html('in regards to '+verbs[rn][2]);
+
+	$('#oneDec').html(vdecs[rn1][7]);
+
+    for (i in vdtypes){
+		var html = '';
+		for (j in vdecs[rn1][i])
+			html=(html?html+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
+        $('#drag'+i).html(html);
+    }
+
+	var top = vdtypes.length;
+    if(top) while(--top) {
+        current = Math.floor(Math.random() * (top + 1));
+		
+		var src = $('#drag'+top).parent();
+		var dest = $('#drag'+current).parent();
+
+		src.append(
+			$('#drag'+current).remove().clone()
+		);
+
+		dest.append(
+			$('#drag'+top).remove().clone()
+		);
+
+	}
+	init();
+
+	//showVRights();
+}
+
+function checkMVAnswers() {
+    var wrong = 0;
+    var stem = G_oneVerb[2];
+    var rn1 = G_oneVerb[1];
+    for (i in vdtypes){
+		var right = 0;
+		var thisa = $('#decr'+i+' div');
+		
+		var cor = '';
+		for (j in vdecs[rn1][i])
+			cor=(cor?cor+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
+			
+        if(thisa.html() == cor) {
+			thisa.css('background-color','#5F5');
+			right=1;
+		}
+		else {
+			right = 0;
+			thisa.css('background-color','#F55');
+		}
+		if (right == 0) wrong = 1;
+	}
+	if (wrong == 0) {
+		alertFlash("Well done!",'green');
+		//Drights[G_oneNoun[0]] = 1;
+		resetMVTable();
+		resetMVColors();
+	}
+	else
+		$(".drag").mousedown(function(){resetMVColors();});
+}
+
+function resetMVColors() {
+    for (i in vdtypes){
+		var thisa = $('#decr'+i+' div');
+		thisa.css('background-color','#EEE');
+	}	
+}
 
 
 function convertVerb(stem,suf) {

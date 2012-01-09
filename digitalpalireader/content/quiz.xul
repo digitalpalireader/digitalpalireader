@@ -14,10 +14,10 @@
 			<tabpanel class="chromeback" id="vocab">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz.htm" flex="1" persist="height"/>
 			</tabpanel>
-			<tabpanel class="chromeback" id="declension">
+			<tabpanel class="chromeback" id="nouns">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-declensions.xul" flex="1" persist="height"/>
 			</tabpanel>
-			<tabpanel class="chromeback" id="declension">
+			<tabpanel class="chromeback" id="verbs">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-verbs.xul" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
