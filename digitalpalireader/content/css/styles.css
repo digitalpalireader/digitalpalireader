@@ -643,14 +643,15 @@ border-spacing:0px;
 	top:0;
 	left:0;
 	right:0;
+	padding-top:5px;
 }
 #alert {
+	padding:5px 20px;
 	background-color:RGBa(0,255,0,1);
 	color:black;
-	padding:5px 10px;
 	text-align:center;
-	border-radius:8px;
-	-moz-border-radius:8px;
+	border-bottom-right-radius:8px;
+	border-bottom-left-radius:8px;
 }
 
 #searchopts {

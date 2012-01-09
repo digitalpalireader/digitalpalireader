@@ -12,6 +12,7 @@ function onDocLoad() {
 	newDquiz();
 }
 </script>
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
@@ -31,12 +32,147 @@ function onDocLoad() {
 			<div align="left" id="mafa" class="paperback"></div>
 			<div align="justify" id="mafb" class="paperback">
 				<div id="mafbc">
-					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
-					<div id="mafe" align=center>
-					</div>
-					<div id="mafd" align=center>
-					</div>
-					<div id="mafdebug"></div>
+					<input type="hidden" id="QwhichS" value="10" />
+					<p id="QwhichT" class="txt"></p>
+					<p id="QwhichC" class="cite"></p>
+					<table id="Qdeclension" class="dec">
+					  <tbody>
+						<tr>
+						  <th class="dec" />
+						  <th class="toprow" colspan="2">SINGULAR</th>
+						  <th class="toprow" colspan="2">PLURAL</th>
+						</tr>
+						<tr>
+						  <th class="dec">NOM</th>
+						  <td class="dec">
+							<span id="nomSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="nomSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="nomPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" onfocus="this.value=this.value;" id="nomPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">ACC</th>
+						  <td class="dec">
+							<span id="accSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="accSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="accPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="accPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">INST</th>
+						  <td class="dec">
+							<span id="instSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="instSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="instPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="instPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">DAT</th>
+						  <td class="dec">
+							<span id="datSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="datSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="datPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="datPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">ABL</th>
+						  <td class="dec">
+							<span id="ablSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="ablSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="ablPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="ablPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">GEN</th>
+						  <td class="dec">
+							<span id="genSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="genSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="genPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="genPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">LOC</th>
+						  <td class="dec">
+							<span id="locSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="locSint" value="" class="dect" />
+						  </td>
+						  <td class="dec">
+							<span id="locPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="locPlt" value="" class="dect" />
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">VOC</th>
+						  <td class="dec">
+							<span id="vocSins" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="vocSint" value="" class="dect" disabled="" />
+						  </td>
+						  <td class="dec">
+							<span id="vocPls" />
+						  </td>
+						  <td class="decr">
+							<input type="text" onkeyup="this.value=toUni(this.value);" id="vocPlt" value="" class="dect" disabled="" />
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+					<p class="controls">
+					  <button type="button" id="QcheckAns" class="control" onclick="checkAnswers()" title="Check your answers (1)">Check</button>
+					  <button type="button" id="Qclear" class="control" onclick="clearAnswers()" title="Clear table (2)">Clear</button>
+					  <button type="button" id="Qshow" class="control" onclick="showAnswers()" title="Show correct answers (3)">Show</button>
+					  <button type="button" id="Qnew" class="control" onclick="resetTable()" title="Get a new declension (4)">New</button>
+					</p>
+					<hr />
+					<h2 id="corrects" style="display:none" align="center">Correct Answers:</h2>
+					<p id="Qcorrects" align="center"></p>
 				</div>
 			</div>
 		</div>
@@ -49,31 +185,8 @@ function onDocLoad() {
 
 	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
 
-	<div id="alertc"><span id="alert"></span></div>
+	<div id="alertc"><span id="alert" class="large"></span></div>
 </div>
-<script>
-	
-	var devCheck = 0;
-	if(extFileExists('/home/noah/Extensions/work/dev.js')) {
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
-		headID.appendChild(newScript);
-		
-		var headID2 = document.getElementsByTagName("head")[0];         
-		var newScript2 = document.createElement('script');
-		newScript2.type = 'text/javascript';
-		newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
-		headID2.appendChild(newScript2);
 
-	}
-	else { // null functions
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	}
-
-</script>
 </body>
 </html>

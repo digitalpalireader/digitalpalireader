@@ -6,19 +6,19 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<tabbox class="chromeback" flex="1">
 		<tabs class="chromeback">
-			<tab class="chromeback" label="&quiz1.label;"/>
-			<tab class="chromeback" label="&quiz2.label;"/>
-			<tab class="chromeback" label="&quiz3.label;"/>
+			<tab class="chromeback" label="Vocab"/>
+			<tab class="chromeback" label="Nouns"/>
+			<tab class="chromeback" label="Verbs"/>
 		</tabs>
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="vocab">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="declension">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-grammar.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-declensions.xul" flex="1" persist="height"/>
 			</tabpanel>
-			<tabpanel class="chromeback" id="declension2">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-grammar-two.htm" flex="1" persist="height"/>
+			<tabpanel class="chromeback" id="declension">
+				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-verbs.xul" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
