@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>DPR Quiz</title>
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+function onDocLoad() {
+	getconfig();
+	newVOnequiz();
+}
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="matrelc"></div>
+	<div id="right" onmouseover="document.body.style.cursor='auto'">
+		<div id="maf">
+			<div align="left" id="mafa" class="paperback"></div>
+			<div align="justify" id="mafb" class="paperback">
+				<div id="mafbc">
+					<input type="hidden" id="QwhichS" />
+					<p id="QwhichT" class="txt"></p>
+					<p id="QwhichC" class="cite"></p>
+					<p id="answer" />
+					<p class="oneDec">
+					  What form is
+					  <span class="red" id="oneDec"></span>
+					  ?
+					</p>
+					<table id="Qdeclension" class="dec">
+					  <tbody>
+						<tr>
+						  <th class="toprow">Tense</th>
+						  <th class="toprow">Person</th>
+						  <th class="toprow">Number</th>
+						</tr>
+						<tr>
+						  <td class="decr">
+							<select id="tense" size="3">
+							  <option>Present</option>
+							  <option>Imperative</option>
+							  <option>Optative</option>
+							</select>
+						  </td>
+						  <td class="dec">
+							<select id="declension" size="3">
+							  <option>Third</option>
+							  <option>Second</option>
+							  <option>First</option>
+							</select>
+						  </td>
+						  <td class="decr">
+							<select id="number" size="2">
+							  <option>Singular</option>
+							  <option>Plural</option>
+							</select>
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+					<p class="controls">
+					  <button type="button" id="QcheckAns" class="control" onclick="checkVAnswer2()" title="Check your answers (1)">Check</button>
+					  <button type="button" id="Qshow" class="control" onclick="showVAnswer2()" title="Show correct answer (3)">Show</button>
+					  <button type="button" id="Qnew" class="control" onclick="getVDeclension()" title="Get a new declension (4)">New</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+
+	<div id="alertc"><span id="alert"></span></div>
+</div>
+</body>
+</html>
