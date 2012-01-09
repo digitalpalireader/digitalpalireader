@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>DPR Quiz</title>
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/quiz.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery-ui.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/io.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script type="text/javascript">
+
+function onDocLoad() {
+	getconfig();
+	newDMquiz();
+	init();
+}
+function init() {
+
+	src = null;
+	options = {
+		revert:true,
+		/*axis: 'x',*/
+		opacity: 0.8,
+		start: function() {
+				src = $(this).parent();
+		}
+	};
+
+	$(".drag").draggable(options);
+	$(".decr").droppable({
+		drop: function(event, ui) {
+				src.append(
+						$('.drag', this).remove().clone()
+						.removeClass().addClass("drag")
+						.css({"left": '', "opacity": '',"top":''})
+						.draggable(options)
+				);
+				if(src.attr('id') != $(this).attr('id')) {
+					$(this).append(
+							ui.draggable.remove().clone()
+							.removeClass().addClass("drag")
+							.css({"left": '', "opacity": '',"top":''})
+							.draggable(options)
+					);
+				}
+		}
+	});  
+}
+ 
+
+ 
+ 
+</script>
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="matrelc"></div>
+	<div id="right" onmouseover="document.body.style.cursor='auto'">
+		<div id="maf">
+			<div align="left" id="mafa" class="paperback"></div>
+			<div align="justify" id="mafb" class="paperback">
+				<div id="mafbc">
+					<input type="hidden" id="QwhichS" value="10" />
+					<p id="QwhichT" class="txt"></p>
+					<p id="QwhichC" class="cite"></p>
+					<table id="Qdeclension" class="dec">
+					  <tbody>
+						<tr>
+						  <th class="dec" />
+						  <th class="toprow">SINGULAR</th>
+						  <th class="toprow">PLURAL</th>
+						</tr>
+						<tr>
+						  <th class="dec">NOM</th>
+						  
+						  <td class="decr" id="decr0"><div class="drag" id="drag0">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr1"><div class="drag" id="drag1">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">ACC</th>
+						  
+						  <td class="decr" id="decr2"><div class="drag" id="drag2">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr3"><div class="drag" id="drag3">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">INST</th>
+						  
+						  <td class="decr" id="decr4"><div class="drag" id="drag4">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr5"><div class="drag" id="drag5">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">DAT</th>
+						  
+						  <td class="decr" id="decr6"><div class="drag" id="drag6">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr7"><div class="drag" id="drag7">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">ABL</th>
+						  
+						  <td class="decr" id="decr8"><div class="drag" id="drag8">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr9"><div class="drag" id="drag9">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">GEN</th>
+						  
+						  <td class="decr" id="decr10"><div class="drag" id="drag10">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr11"><div class="drag" id="drag11">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">LOC</th>
+						  
+						  <td class="decr" id="decr12"><div class="drag" id="drag12">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr13"><div class="drag" id="drag13">
+							</div>
+						  </td>
+						</tr>
+						<tr>
+						  <th class="dec">VOC</th>
+						  
+						  <td class="decr" id="decr14"><div class="drag" id="drag14">
+							</div>
+						  </td>
+						  
+						  <td class="decr" id="decr15"><div class="drag" id="drag15">
+							</div>
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+					<p class="controls">
+					  <button type="button" id="QcheckAns" class="control" onclick="checkMAnswers()" title="Check your answers (1)">Check</button>
+					  <button type="button" id="Qnew" class="control" onclick="resetMTable()" title="Get a new declension (4)">New</button>
+					</p>
+					<hr />
+					<h2 id="corrects" style="display:none" align="center">Correct Answers:</h2>
+					<p id="Qcorrects" align="center"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+
+	<div id="alertc"><span id="alert" class="large"></span></div>
+</div>
+
+</body>
+</html>

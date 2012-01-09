@@ -1,0 +1,136 @@
+
+/* for quiz */
+
+.quizb {
+position:absolute;
+margin-right:auto;
+margin-left:auto;
+top:0;
+padding: 4px;
+}
+.quizc {
+border-radius: 4px;
+-moz-border-radius: 4px;
+border:1px grey solid; 
+padding-left: 10px;
+padding-right: 10px;
+}
+
+#Qra, #Qwa, #Qpa {
+background-color:black;
+} 
+	
+p.txt {
+	margin: auto;
+	font-size: 22pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-weight: bold;
+	text-align: center;
+}
+		
+p.cite  {
+	padding-bottom: 12pt;
+	margin: auto;
+	font-size: 22pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-style: italic;
+	text-align: center;
+}
+
+p#answer{
+	text-align:center;
+}
+	
+p.oneDec  {
+	padding-bottom: 12pt;
+	margin: auto;
+	font-size: 14pt;
+	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
+	font-style: italic;
+	text-align: center;
+}
+		
+table.dec {  
+	margin: auto;
+	padding:4px;
+	margin-top: 14pt;
+	border-collapse: collapse;
+
+}
+
+td.dec {
+	font-weight: normal;
+	text-align: right;
+	padding-left: 4pt;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+		border-right:none;
+	}
+			
+td.decr {
+	font-weight: normal;
+	text-align: right;
+	padding-left: 4pt;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+		border-left:none;
+	}
+	
+th.dec, .decb {
+	font-weight: normal;
+	text-align: left;
+	padding-left: 4pt;
+		border-style: ridge;
+		border-color: #3F3F3F;
+		border-width: medium;
+	
+	}
+	
+.toprow, .sidecol {
+	font-weight: bold;
+	text-align: center;
+	background-color: silver;
+		border-style: ridge;
+		border-width: medium;
+		border-color: #3F3F3F;
+	}
+
+td.greyb {
+	background-color: #EEE;	
+	background: rgba(200,200,200, 0.3);
+}
+td.whiteb {
+	background-color: #FFF;
+	background: rgba(255,255,255, 0.3);
+}
+			
+table.decMenu {
+}
+				
+
+
+button.control {background-color: #FFE7B9;
+				 font-weight: bold;
+				 border-style: inset;
+				
+				 }
+
+button.control:focus {background-color: #B5FF3F ;
+							border-style: outset;
+						}
+						
+button.control:focus::-moz-focus-inner { border:none}
+								
+.controls, #corrects {
+text-align:center;
+}
+
+.drag {
+	background-color:#eee;
+	text-align:center;
+	border-radius:8px;
+	padding:10px;
+	margin:0px;
+}
