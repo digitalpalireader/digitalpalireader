@@ -23,41 +23,6 @@ function onDocLoad() {
 	newDMquiz();
 	init();
 }
-function init() {
-
-	src = null;
-	options = {
-		revert:true,
-		/*axis: 'x',*/
-		opacity: 0.8,
-		start: function() {
-				src = $(this).parent();
-		}
-	};
-
-	$(".drag").draggable(options);
-	$(".decr").droppable({
-		drop: function(event, ui) {
-				src.append(
-						$('.drag', this).remove().clone()
-						.removeClass().addClass("drag")
-						.css({"left": '', "opacity": '',"top":''})
-						.draggable(options)
-				);
-				if(src.attr('id') != $(this).attr('id')) {
-					$(this).append(
-							ui.draggable.remove().clone()
-							.removeClass().addClass("drag")
-							.css({"left": '', "opacity": '',"top":''})
-							.draggable(options)
-					);
-				}
-		}
-	});  
-}
- 
-
- 
  
 </script>
 </head>

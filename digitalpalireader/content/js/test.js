@@ -1,3 +1,38 @@
+function init() {
+
+	src = null;
+	options = {
+		revert:true,
+		/*axis: 'x',*/
+		start: function() {
+			$(this).css('z-index',100);
+				src = $(this).parent();
+		}
+	};
+
+	$(".drag").draggable(options);
+	$(".decr").droppable({
+		drop: function(event, ui) {
+			src.append(
+					$('.drag', this).remove().clone()
+					.removeClass().addClass("drag")
+					.css({"left": '', "opacity": '',"top":''})
+					.draggable(options)
+			);
+			if(src.attr('id') != $(this).attr('id')) {
+				$(this).append(
+						ui.draggable.remove().clone()
+						.removeClass().addClass("drag")
+						.css({"left": '', "opacity": '',"top":''})
+						.draggable(options)
+				);
+			}
+			$(this).css('z-index',1);
+		}
+	});  
+}
+
+
 function newquiz() {
 	moveframex(1);
 	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
@@ -675,7 +710,8 @@ function resetMTable()  {
 	G_oneNoun = [rn,stem];
 
     for (i in decls){
-        $('#drag'+i).html(correctDec[stem][decls[i]].join(', '));
+		var html = correctDec[stem][decls[i]].join(', ');
+        $('#drag'+i).html(html?html:'&nbsp;');
     }
 
 	var top = decls.length;
@@ -705,7 +741,7 @@ function checkMAnswers() {
 		var right = 0;
 		var thisa = $('#decr'+i+' div');
 
-        if(thisa.html() == correctDec[G_oneNoun[1]][decls[i]].join(', ')) {
+        if(thisa.html().replace(/&nbsp;/g,'') == correctDec[G_oneNoun[1]][decls[i]].join(', ')) {
 			thisa.css('background-color','#5F5');
 			right=1;
 		}
@@ -1019,7 +1055,7 @@ function resetMVTable()  {
 		var html = '';
 		for (j in vdecs[rn1][i])
 			html=(html?html+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
-        $('#drag'+i).html(html);
+        $('#drag'+i).html(html?html:'&nbsp;');
     }
 
 	var top = vdtypes.length;
@@ -1055,7 +1091,7 @@ function checkMVAnswers() {
 		for (j in vdecs[rn1][i])
 			cor=(cor?cor+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
 			
-        if(thisa.html() == cor) {
+        if(thisa.html().replace(/&nbsp;/g,'') == cor) {
 			thisa.css('background-color','#5F5');
 			right=1;
 		}
