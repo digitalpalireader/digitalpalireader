@@ -6,7 +6,8 @@ function init() {
 		/*axis: 'x',*/
 		start: function() {
 			$(this).css('z-index',100);
-				src = $(this).parent();
+			$(this).css('cursor','-moz-grabbing');
+			src = $(this).parent();
 		}
 	};
 
@@ -16,18 +17,17 @@ function init() {
 			src.append(
 					$('.drag', this).remove().clone()
 					.removeClass().addClass("drag")
-					.css({"left": '', "opacity": '',"top":''})
+					.css({"left": '', "opacity": '',"top":'',"cursor":"-moz-grab","z-index":"1"})
 					.draggable(options)
 			);
 			if(src.attr('id') != $(this).attr('id')) {
 				$(this).append(
 						ui.draggable.remove().clone()
 						.removeClass().addClass("drag")
-						.css({"left": '', "opacity": '',"top":''})
+						.css({"left": '', "opacity": '',"top":'',"cursor":"-moz-grab","z-index":"1"})
 						.draggable(options)
 				);
 			}
-			$(this).css('z-index',1);
 		}
 	});  
 }

@@ -128,6 +128,7 @@ text-align:center;
 }
 
 .drag {
+	cursor:-moz-grab;
 	z-index:1;
 	background-color:#eee;
 	text-align:center;
