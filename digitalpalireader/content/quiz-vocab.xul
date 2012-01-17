@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<window id="DPR" title="&quiz.title;"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<tabbox class="chromeback" flex="1">
+		<tabs class="chromeback">
+			<tab class="chromeback" label="Pali-English"/>
+			<tab class="chromeback" label="English-Pali"/>
+		</tabs>
+		<tabpanels class="chromeback" flex="1">
+			<tabpanel class="chromeback" id="pali">
+				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="english">
+				<browser disablehistory="true" type="content" id="quiz-browser-2" src="quiz-two.htm" flex="1" persist="height"/>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+</window>
+
