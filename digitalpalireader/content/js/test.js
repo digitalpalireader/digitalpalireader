@@ -32,13 +32,25 @@ function init() {
 	});  
 }
 
+// vocab
+	
+	// pali > eng
 
 function newquiz() {
-	moveframex(1);
 	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
 	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
 	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
 	quizme();
+
+}
+
+	// eng > pali
+
+function newquizE() {
+	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is "<font id="qq"></font>" in Pali?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
+	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
+	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
+	quizmeE();
 
 }
 
@@ -101,7 +113,7 @@ function quizme() {
 	var quizeachwrong = new Array();
 	var quizanswersout = '';
 	var quizrandomright=Math.floor(Math.random()*20926);
-	if (rights.length > 20925) {
+	if (rights.length >= 20926) {
 		alertFlash('Congratulations, you\'ve completed the entire dictionary!','RGBa(0,255,0,0.8)');
 		clearrights();
 	}
@@ -200,6 +212,124 @@ function clearrights() {
 	document.getElementById('Qrights').innerHTML = 0;
     
 	writeFile("DPTEST","","UTF-8");
+}
+
+
+// eng > pali
+
+function quizmeE() {
+	
+	// remember rights
+	var rights = [];
+	var srights;
+	if(fileExists('DPTESTE')) {
+		srights = readFile("DPTESTE");
+		if(srights) {
+			if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
+			else rights = srights;
+			if(srights.join('') == '') document.getElementById('Qrights').innerHTML = 0;
+			else document.getElementById('Qrights').innerHTML = rights.length;
+		}
+	}
+    
+	var quiza = new Array();
+	var quizeachwrong = new Array();
+	var quizanswersout = '';
+	var quizrandomright=Math.floor(Math.random()*epd.length);
+	if (rights.length >= epd.length) {
+		alertFlash('Congratulations, you\'ve completed the entire dictionary!','RGBa(0,255,0,0.8)');
+		clearrightsE();
+	}
+	else while (("|" + rights.join("|") + "|").indexOf('|'+quizrandomright+'|') > -1) { // in case we got it right before
+		quizrandomright=Math.floor(Math.random()*epd.length);
+	}	
+	var qtmp2 = 0;
+	
+	var quizrightorder=Math.floor(Math.random()*4);
+	document.getElementById('Qlefts').innerHTML = epd.length - rights.length;
+	for (qtmp = 0; qtmp < 3; qtmp++) {
+		quizeachwrong[qtmp]=Math.floor(Math.random()*epd.length);
+		while (quizeachwrong[qtmp] == quizrandomright) { // in case we got the same one again!
+			quizeachwrong[qtmp]=Math.floor(Math.random()*epd.length);
+		}
+	}
+	var ytthis = epd[quizrandomright].split('^');
+	
+	var questionout =  ytthis[0];
+
+	document.getElementById('qn').innerHTML = document.getElementById('qno').value;
+	document.getElementById('qq').innerHTML = questionout;
+	
+	
+	var formatanswerwrong = '';
+	var formatanswer = ytthis[1];
+	var formatanswerout = ytthis[1];
+	for (qtmp = 0; qtmp < 4; qtmp++) {
+		if (qtmp == quizrightorder) {
+			quizanswersout += '<p><span class="abut obut" id="Qa'+(qtmp+1)+'" onclick="answerquizE(1,\'' + questionout + ' = ' + formatanswerout + '\',' + quizrandomright + ')">'+(qtmp+1)+'</span> '+formatanswer+'</p>';
+		}
+		else {
+			var thisyt = epd[quizeachwrong[qtmp2]].split('^');
+			formatanswerwrong = thisyt[1];
+			quizanswersout += '<p><span class="abut obut" id="Qa'+(qtmp+1)+'" onclick="answerquizE(0,\'' + questionout + ' = ' + formatanswerout + '\')">'+(qtmp+1)+'</span> '+formatanswerwrong+'</p>';
+			qtmp2++;
+		}
+	}
+	document.getElementById('answers').innerHTML = quizanswersout;
+}
+
+function answerquizE(right,answer,numb) {
+	document.getElementById('qn').innerHTML = ++document.getElementById('qno').value;
+	if (right == 1) {
+		document.getElementById('Qchecka').innerHTML = '<span style="color:green">Right! &nbsp;' + answer + '</span>';
+		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
+		
+		// add right to list of rights
+		if(fileExists('DPTESTE')) {
+			var rightfile = readFile('DPTESTE');
+			if(rightfile.join('') == '') rightfile = [numb];
+            else rightfile.push(numb);
+            var outfile = rightfile.join('\n');
+            if(/,/.exec(outfile)) outfile = outfile.split(',').join('\n');
+            writeFile('DPTESTE', outfile , "UTF-8");
+        }
+		else {
+            writeFile('DPTESTE', ""+numb + '\n', "UTF-8");
+        }
+	}	
+	else {
+		document.getElementById('Qchecka').innerHTML ='<span style="color:red">Wrong! &nbsp;' + answer + '</span>';
+		document.getElementById('Qwa').innerHTML = '&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;';
+	}
+
+	var percentr = Number(document.getElementById('Qran').value) / (Number(document.getElementById('Qran').value) + Number(document.getElementById('Qwan').value))*100;
+
+	var colorpc = 0;
+	if (percentr <= 50) {
+		colorpc = Math.round(percentr/50*255);
+		colorpc = colorpc.toString(16).toUpperCase();
+		if (colorpc.length == 1) colorpc = '0'+colorpc;
+		document.getElementById('Qpa').style.color = '#'+ 'FF' + colorpc + '00';
+	}
+	else {
+		colorpc = Math.round((percentr - 50)/50*255)*(-1)+255;
+		colorpc = colorpc.toString(16).toUpperCase();
+		if (colorpc.length == 1) colorpc = '0'+colorpc;
+		document.getElementById('Qpa').style.color = '#' + colorpc +'FF' + '00';
+	}
+	document.getElementById('Qpa').innerHTML = '&nbsp;'+Math.round(percentr) + '%&nbsp;';
+	quizmeE();
+}
+
+function clearrightsE() {
+    document.getElementById('Qra').innerHTML = 0;
+    document.getElementById('Qran').value = 0;
+    document.getElementById('Qwa').innerHTML = 0;
+    document.getElementById('Qwan').value = 0;
+    document.getElementById('Qpa').innerHTML = "";
+	document.getElementById('Qrights').innerHTML = 0;
+    
+	writeFile("DPTESTE","","UTF-8");
 }
 
 var correctDec = [];
