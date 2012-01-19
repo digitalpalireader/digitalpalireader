@@ -137,6 +137,9 @@
 
 <!ENTITY pSidebarBackground.label "Sidebar Background">
 
+<!ENTITY pMiscLayout.label "Misc.">
+<!ENTITY psetRows.label "Sidebar Set Rows">
+
 <!ENTITY pcolbkcp.label "Color">
 <!ENTITY pimgbkcp.label "Image">
 

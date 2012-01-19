@@ -88,6 +88,8 @@ DPR_prefsD['noContext'] = false;
 
 DPR_prefsD['translits'] = 0;
 
+DPR_prefsD['setRows'] = 7;
+
 DPR_prefsD['showPages'] = false;
 DPR_prefsD['showPagesFull'] = false;
 DPR_prefsD['showVariants'] = true;

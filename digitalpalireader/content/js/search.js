@@ -1,3 +1,18 @@
+// xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
+
+var MD = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow).gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument; 
+var MW = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow).gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow; 
+				   
 var G_searchStartTime;
 
 var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
@@ -12,6 +27,19 @@ var G_searchRX;
 var G_searchLink;
 
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
+	MD.getElementById('cancel-search').removeAttribute('collapsed');
+	MD.getElementById('search-progress').removeAttribute('collapsed');
+	MD.getElementById('search-progress').setAttribute('value',0);
+
+	var element = MD.getElementById("search-sets");
+	while(element.hasChildNodes()){
+		element.removeChild(element.firstChild);
+	}
+
+	var element = MD.getElementById("finished");
+	while(element.hasChildNodes()){
+		element.removeChild(element.firstChild);
+	}
 	
 	clearDivs('search');
 	resetvalues();
@@ -24,10 +52,10 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchPart = searchPart;	
 		G_searchRX = searchRX;	
 
-		var permalink = 'chrome://digitalpalireader/content/search.htm' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
+		var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
 		
 		try {
-			window.history.replaceState('Object', 'Title', permalink);
+			MW.history.replaceState('Object', 'Title', permalink);
 		}
 		catch(ex) {
 		}
@@ -35,7 +63,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	else {
 		// get options from URL
 		
-		var options = document.location.href.split('?')[1].split('#')[0].split('&');
+		var options = MD.location.href.split('?')[1].split('#')[0].split('&');
 
 		// parse options
 
@@ -83,12 +111,11 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	var tabT = 'Search: \'' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + '\' in ' + st[G_searchType];
 	
-	document.getElementsByTagName('title')[0].innerHTML = tabT;
+	//MD.setAttribute('title',tabT);
 
 	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
 		G_searchString = G_searchString.toUpperCase();
 	}
-	
 	
 	// start timer
 
@@ -112,6 +139,70 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	}
 
 }
+
+function stopSearch() {
+	stopsearch = 1;
+}
+function scrollSearch(what) {
+	document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
+}
+
+function resetvalues() {
+	G_searchFileArray = [];
+	exword.length=0;
+	stopsearch = 0;	
+	bookperm = 1;
+	rescount = -1;
+	qz = 0;
+	nikayaat = '';
+	newnikaya = '';
+	nikcount = 0;
+	thiscount = 0;
+	bookfile = '';
+	countmatch = 0;
+}
+
+function makeProgressTable() {
+	
+	var fal = G_searchFileArray.length;
+	MD.getElementById('search-progress').setAttribute('max',fal-1);
+}
+
+function finishSearch() {
+	document.getElementById('sbfbc').scrollTop = 0;
+
+	var endtime = new Date;
+	var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+
+	MD.getElementById('search-progress').setAttribute('collapsed',true);
+	MD.getElementById('cancel-search').setAttribute('collapsed',true);
+
+	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook + '&part=' + G_searchPart + '&rx=' + G_searchRX;
+
+	var mfin = MD.createElement('label');
+	mfin.setAttribute('value',(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's');
+	mfin.setAttribute('id','search-finished');
+
+	var mlink = MD.createElement('button');
+	mlink.setAttribute('class','search-button');
+	mlink.setAttribute('icon','add');
+	mlink.setAttribute('onmouseup','permalinkClick(\''+G_searchLink+'\',1)');
+	mlink.setAttribute('tooltiptext','Click to copy permalink to clipboard');
+
+	MD.getElementById('search-sets').appendChild(mlink);
+
+	// fix plural
+
+	if(MD.getElementById('inter')) {
+		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
+		if(val == 1) {
+			var str = MD.getElementById('inter').getAttribute('value').replace('matches','match');
+			MD.getElementById('inter').setAttribute('value',str);
+		}
+	}
+
+}
+
 
 var G_searchFileArray = [];
 
@@ -141,32 +232,7 @@ var bookperm = 1;
 var exword = new Array();
 var countmatch = 0;
 
-function resetvalues() {
-	G_searchFileArray = [];
-	exword.length=0;
-	stopsearch = 0;	
-	bookperm = 1;
-	rescount = -1;
-	qz = 0;
-	nikayaat = '';
-	newnikaya = '';
-	nikcount = 0;
-	thiscount = 0;
-	bookfile = '';
-	countmatch = 0;
-}
 
-function makeProgressTable() {
-	
-	var tableout = '<table width=100% height="8px" id="stftb" style="border-collapse:collapse"><tr>';
-	var fal = G_searchFileArray.length;
-	for (q2 = 0; q2 < fal; q2++)
-	{
-		tableout += '<td bgcolor="'+DPR_prefs['colbkcp']+'" width=1 class="bordered"></td>';
-	}
-	tableout += '</tr></table>';
-	document.getElementById('stfc').innerHTML = tableout;
-}
 
 function pausesall() 
 {
@@ -192,21 +258,47 @@ function pausesall()
 	
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
+
+	var thisterm = MD.createElement('toolbarbutton');
+	thisterm.setAttribute('id','search-term');
+	thisterm.setAttribute('onmouseup','scrollSearch()');
+	thisterm.setAttribute('class','search-set');
 	
-	var toplist = '<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist"><span style="color:'+DPR_prefs['colsel']+'">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + ':&nbsp;</b></span></div><div class="searchtoplist">'
+	var setlabel = MD.createElement('label');
+	setlabel.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString)));
+	setlabel.setAttribute('id','search-term');
+	setlabel.setAttribute('crop','center');
+	setlabel.setAttribute('class','search-button-label');
 	
-	var toplista = [];
+	thisterm.appendChild(setlabel);
+
+	var tsep = MD.createElement('toolbarseparator');
+
+	MD.getElementById('search-sets').appendChild(thisterm);
+	MD.getElementById('search-sets').appendChild(tsep);
+
 	for (i = 0; i < G_numberToNik.length; i++) {
 		if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-		toplista.push('<span id="sdf'+G_numberToNik[i]+'"><a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = document.getElementById(\'sbfN'+G_numberToNik[i]+'\').offsetTop;">'+G_nikLongName[G_numberToNik[i]]+':</a> <span id="stfH'+G_numberToNik[i]+'"></span></span>');
+
+		var thisset = MD.createElement('toolbarbutton');
+		thisset.setAttribute('class','search-set');
+		thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+G_numberToNik[i]+'\')');
+		
+		var setlabel = MD.createElement('label');
+		setlabel.setAttribute('value',G_nikLongName[G_numberToNik[i]]+': 0');
+		setlabel.setAttribute('id','matches'+G_numberToNik[i]);
+		setlabel.setAttribute('class','search-button-label');
+		
+		thisset.appendChild(setlabel);
+
+		var sep = MD.createElement('toolbarseparator');
+
+		MD.getElementById('search-sets').appendChild(thisset);
+		if(i < G_searchSet.length)
+			MD.getElementById('search-sets').appendChild(sep);
 	}
 	
-	toplist += toplista.join(', ');
-	toplist += '</div>';
-	
-	$('#stfb').html(toplist);
 	makeProgressTable();
-
 	
 	importXMLs(1);
 }
@@ -238,7 +330,28 @@ function pausetwo() { // init function for single collection
 
 	document.getElementById('sbfab').innerHTML = '';
 	document.getElementById('sbfb').innerHTML = '<hr>';
-	$('#stfb').html('<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)) + ':&nbsp;</b></div><div class="searchtoplist"><span id="stfx"></span> matches in ' + G_nikLongName[nikaya] + '</div>');
+
+	var thisterm = MD.createElement('label');
+	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
+	thisterm.setAttribute('id','search-term');
+	thisterm.setAttribute('class','search-bold');
+	thisterm.setAttribute('crop','center');
+	var thismatches = MD.createElement('label');
+	thismatches.setAttribute('value','0');
+	thismatches.setAttribute('id','search-matches');
+	thismatches.setAttribute('class','search-bold');
+	var thisinter = MD.createElement('label');
+	thisinter.setAttribute('value',' matches in ');
+	thisinter.setAttribute('class','search-label');
+	thisinter.setAttribute('id','inter');
+	var thisset = MD.createElement('label');
+	thisset.setAttribute('value',G_nikLongName[nikaya]);
+	thisset.setAttribute('class','search-bold');
+
+	MD.getElementById('search-sets').appendChild(thisterm);
+	MD.getElementById('search-sets').appendChild(thismatches);
+	MD.getElementById('search-sets').appendChild(thisinter);
+	MD.getElementById('search-sets').appendChild(thisset);
 
 	importXMLs(2);
 }
@@ -268,32 +381,39 @@ function pausethree() {
 	}
 
 	makeProgressTable();
+	
+	var thisterm = MD.createElement('label');
+	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
+	thisterm.setAttribute('id','search-term');
+	thisterm.setAttribute('class','search-bold');
+	thisterm.setAttribute('crop','center');
+	var thismatches = MD.createElement('label');
+	thismatches.setAttribute('value','0');
+	thismatches.setAttribute('id','search-matches');
+	thismatches.setAttribute('class','search-bold');
+	var thisinter = MD.createElement('label');
+	thisinter.setAttribute('value',' matches in ');
+	thisinter.setAttribute('class','search-label');
+	thisinter.setAttribute('id','inter');
+	var thisset = MD.createElement('label');
+	thisset.setAttribute('value',G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
+	thisset.setAttribute('class','search-bold');
 
-
-	$('#stfb').html('<div class="searchtoplist"><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a>&nbsp;</div><div class="searchtoplist">Search results for <b style="color:'+DPR_prefs['colsel']+'">' + (G_searchRX?G_searchString:toUni(G_searchString)) + '</b> in <b>' + G_nikLongName[nikaya] + ' ' + book + (G_searchPart != '1'?' (partial)':'')+'</b>: <span id="stfx"></span></div>');
+	MD.getElementById('search-sets').appendChild(thisterm);
+	MD.getElementById('search-sets').appendChild(thismatches);
+	MD.getElementById('search-sets').appendChild(thisinter);
+	MD.getElementById('search-sets').appendChild(thisset);
 
 	importXMLs(3);
 }
 
 function bounce(sct)
 {
-	document.getElementById('stftb').getElementsByTagName('td')[qz-1].setAttribute('bgcolor','#2F2');
+	var val = parseInt(MD.getElementById('search-progress').getAttribute('value'));
+	MD.getElementById('search-progress').setAttribute('value',val+1);
 	setTimeout('importXMLs('+sct+')', 10)
 }
 
-
-function finishSearch() {
-	document.getElementById('stfstop').setAttribute('style','display:none');
-	document.getElementById('sbfbc').scrollTop = 0;
-
-	var endtime = new Date;
-	var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-
-	document.getElementById('stfc').innerHTML = '&nbsp;&nbsp;<span class="small"><b><i>'+(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's</b></i>';
-
-	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook + '&part=' + G_searchPart + '&rx=' + G_searchRX;
-	$('#stfb').prepend('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+G_searchLink+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
-}
 
 function importXMLs(cnt)
 {
@@ -337,7 +457,9 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 					
-		$('#stfH'+nikayaat).html(thiscount);
+		var val = MD.getElementById('matches'+nikayaat).getAttribute('value').replace(/: .+/,': ');
+		MD.getElementById('matches'+nikayaat).setAttribute('value',val+thiscount);
+
 		if (qz < G_searchFileArray.length-1) 
 		{
 			nextbookfile = G_searchFileArray[qz+1];
@@ -365,7 +487,8 @@ function importXMLs(cnt)
 		var xmlDoc = loadXMLFile(bookfile,0);
 		createTables(xmlDoc,hiert);
 					
-		$('#stfx').html(thiscount);
+		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
+		MD.getElementById('search-matches').setAttribute('value',thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -390,8 +513,9 @@ function importXMLs(cnt)
 		var xmlDoc = loadXMLFile(bookfile,0);
 
 		createTables(xmlDoc,hiert);
-					
-		$('#stfx').html(thiscount);
+
+		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
+		MD.getElementById('search-matches').setAttribute('value',thiscount);					
 		
 		if (qz < G_searchFileArray.length-1) 
 		{

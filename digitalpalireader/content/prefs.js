@@ -4,7 +4,7 @@ var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(
 var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
 var radio = ['noContext','contextSelected','allContext']; 
 var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
-var ints = ['altlimit'];
+var ints = ['setRows','altlimit'];
 
 function loadDefaults() {
 	for (var i = 0; i < cks.length; ++i) {

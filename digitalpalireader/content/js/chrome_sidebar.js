@@ -17,12 +17,12 @@ var DPRChrome = {
 			// Get the next tab
 			var currentTab = tb.tabContainer.childNodes[index];
 			var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+			if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) { // a dpr tab
 				tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
-				if(/^DPR/.exec(currentTab.id)) continue;
-				if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
-				else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
-				else if(/search\.htm/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
+				if(/^DPR/.test(currentTab.id)) continue;
+				if(/index\.xul/.test(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
+				else if(/dict\.htm/.test(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
+				else if(/search\.xul/.test(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
 				else currentTab.setAttribute('id',(etc++==0?'DPR-x':'DPRx'));
 			}
 		}	
@@ -51,7 +51,7 @@ var DPRChrome = {
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-			if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
+			if (!/^DPR/.test(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) { // not a dpr tab
 				if (start == 1) { // prev was a DPR tab
 					newIdx = index;
 					break;
@@ -78,8 +78,7 @@ var DPRChrome = {
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-
-			if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.test(ctloc)) {
 
 				return currentTab;
 			}
@@ -98,7 +97,7 @@ var DPRChrome = {
 			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 			// Does this tab contain our custom attribute?
-			if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+			if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) {
 
 				return currentTab;
 			}

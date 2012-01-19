@@ -76,40 +76,40 @@
   		</tabpanel>
   		
   		<tabpanel id="layoutTab" flex="1">
-			<grid>
+			<grid flex="1">
 				<rows>
 					<row flex="1" />
 					<row flex="1" />
 				</rows>
 				<columns>
-					<column align="center">
+					<column align="left" flex="1">
 						<groupbox flex="1">
-
 							<caption label="&pWinBackground.label;"/>
-
-								<box orient="vertical">
-									<hbox align="center"><checkbox id="pcolbk" label="&pcolbk.label;" onclick="if(!this.checked) { document.getElementById('colbk').disabled=false;} else { document.getElementById('colbk').disabled=true;}"/><spacer flex="1"/><textbox id="colbk" prefstring="Char.colbk"/></hbox>
-									<hbox align="center"><checkbox id="pimgbk" label="&pimgbk.label;" onclick="if(!this.checked) { document.getElementById('imgbk').disabled=false;} else { document.getElementById('imgbk').disabled=true;}"/><spacer flex="1"/><textbox id="imgbk" prefstring="Char.imgbk"/></hbox>
-								</box>
-
+							<vbox>
+								<hbox align="left"><checkbox id="pcolbk" label="&pcolbk.label;" onclick="if(!this.checked) { document.getElementById('colbk').disabled=false;} else { document.getElementById('colbk').disabled=true;}"/><spacer flex="1"/><textbox id="colbk" prefstring="Char.colbk"/></hbox>
+								<hbox align="left"><checkbox id="pimgbk" label="&pimgbk.label;" onclick="if(!this.checked) { document.getElementById('imgbk').disabled=false;} else { document.getElementById('imgbk').disabled=true;}"/><spacer flex="1"/><textbox id="imgbk" prefstring="Char.imgbk"/></hbox>
+							</vbox>
 					   </groupbox>
 					   <groupbox flex="1">
-
 							<caption label="&pSidebarBackground.label;"/>
-
-								<box orient="vertical">
-									<hbox align="center"><checkbox id="pcolbkcp" label="&pcolbkcp.label;" onclick="if(!this.checked) { document.getElementById('colbkcp').disabled=false;} else { document.getElementById('colbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="colbkcp" prefstring="Char.colbkcp"/></hbox>
-									<hbox align="center"><checkbox id="pimgbkcp" label="&pimgbkcp.label;" onclick="if(!this.checked) { document.getElementById('imgbkcp').disabled=false;} else { document.getElementById('imgbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="imgbkcp" prefstring="Char.imgbkcp"/></hbox>
-								</box>
+							<vbox>
+								<hbox align="left"><checkbox id="pcolbkcp" label="&pcolbkcp.label;" onclick="if(!this.checked) { document.getElementById('colbkcp').disabled=false;} else { document.getElementById('colbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="colbkcp" prefstring="Char.colbkcp"/></hbox>
+								<hbox align="left"><checkbox id="pimgbkcp" label="&pimgbkcp.label;" onclick="if(!this.checked) { document.getElementById('imgbkcp').disabled=false;} else { document.getElementById('imgbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="imgbkcp" prefstring="Char.imgbkcp"/></hbox>
+							</vbox>
 					   </groupbox>
 					</column>
 					<column flex="1">
 						<groupbox flex="1">
 							<caption label="&pWidgetColors.label;"/>
-
-								<hbox align="center"><label id="pcolInput" value="&pcolInput.label;" selected="true" /><spacer flex="1"/><textbox id="colInput" prefstring="Char.colInput"/></hbox>
-								<hbox align="center"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colButton" prefstring="Char.colButton"/></hbox>
-								<hbox align="center"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colButtonSel" prefstring="Char.colButtonSel"/></hbox>
+							<hbox align="left"><label id="pcolInput" value="&pcolInput.label;" /><spacer flex="1"/><textbox id="colInput" prefstring="Char.colInput"/></hbox>
+							<hbox align="left"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colButton" prefstring="Char.colButton"/></hbox>
+							<hbox align="left"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colButtonSel" prefstring="Char.colButtonSel"/></hbox>
+					   </groupbox>
+					   <groupbox flex="1">
+							<caption label="&pMiscLayout.label;"/>
+							<vbox>
+								<hbox align="left"><label id="psetRows" value="&psetRows.label;"  /><spacer flex="1"/><textbox id="setRows" prefstring="Int.setRows"/></hbox>
+							</vbox>
 					   </groupbox>
 					</column>
 				</columns>
@@ -121,33 +121,33 @@
   			<vbox flex="1">
   				<hbox flex="1">
   					<groupbox flex="1">
-  							<caption label="&pColors.label;"/>
-  							
-  							<box orient="vertical">
-					<hbox align="center"><label id="pcoltext" value="&pcoltext.label;" /><spacer flex="1"/><textbox id="coltext" prefstring="Char.coltext"/></hbox>
-					<hbox align="center"><label id="pcolsel" value="&pcolsel.label;" /><spacer flex="1"/><textbox id="colsel" prefstring="Char.colsel"/></hbox>
-					<hbox align="center"><label id="pcoldppn" value="&pcoldppn.label;" /><spacer flex="1"/><textbox id="coldppn" prefstring="Char.coldppn"/></hbox>
-					<hbox align="center"><label id="pcolped" value="&pcolped.label;" /><spacer flex="1"/><textbox id="colped" prefstring="Char.colped"/></hbox>
-					<hbox align="center"><label id="pcolcpd" value="&pcolcpd.label;" /><spacer flex="1"/><textbox id="colcpd" prefstring="Char.colcpd"/></hbox>
-  							</box>
+						<caption label="&pColors.label;"/>
+						
+						<box orient="vertical">
+							<hbox align="center"><label id="pcoltext" value="&pcoltext.label;" /><spacer flex="1"/><textbox id="coltext" prefstring="Char.coltext"/></hbox>
+							<hbox align="center"><label id="pcolsel" value="&pcolsel.label;" /><spacer flex="1"/><textbox id="colsel" prefstring="Char.colsel"/></hbox>
+							<hbox align="center"><label id="pcoldppn" value="&pcoldppn.label;" /><spacer flex="1"/><textbox id="coldppn" prefstring="Char.coldppn"/></hbox>
+							<hbox align="center"><label id="pcolped" value="&pcolped.label;" /><spacer flex="1"/><textbox id="colped" prefstring="Char.colped"/></hbox>
+							<hbox align="center"><label id="pcolcpd" value="&pcolcpd.label;" /><spacer flex="1"/><textbox id="colcpd" prefstring="Char.colcpd"/></hbox>
+						</box>
  					</groupbox>
  					<groupbox flex="1">
-  							<caption label="&pFont.label;"/>
-  							<box orient="vertical">
-					<hbox align="center"><label id="pcolfont" value="&pcolfont.label;" /><spacer flex="1"/><textbox id="colfont" prefstring="Char.colfont"/></hbox>
-					<hbox align="center"><label id="pcolsize" value="&pcolsize.label;" /><spacer flex="1"/><textbox id="colsize" prefstring="Char.colsize"/></hbox>
-					<hbox align="center"><label id="ptranslits" value="&ptranslits.label;" />
-					<menulist flex="1" id="translits">
-						<menupopup>
-							<menuitem id="pRoman" label="&pRoman.label;" selected="true"/>
-							<menuitem id="pThai" label="&pThai.label;"/>
-							<menuitem id="pDeva" label="&pDeva.label;"/>
-							<menuitem id="pMyan" label="&pMyan.label;"/>
-							<menuitem id="pSiha" label="&pSiha.label;"/>
-						</menupopup>
-					</menulist>
-					</hbox>
-  							</box>
+						<caption label="&pFont.label;"/>
+						<box orient="vertical">
+							<hbox align="center"><label id="pcolfont" value="&pcolfont.label;" /><spacer flex="1"/><textbox id="colfont" prefstring="Char.colfont"/></hbox>
+							<hbox align="center"><label id="pcolsize" value="&pcolsize.label;" /><spacer flex="1"/><textbox id="colsize" prefstring="Char.colsize"/></hbox>
+							<hbox align="center"><label id="ptranslits" value="&ptranslits.label;" />
+							<menulist flex="1" id="translits">
+								<menupopup>
+									<menuitem id="pRoman" label="&pRoman.label;" selected="true"/>
+									<menuitem id="pThai" label="&pThai.label;"/>
+									<menuitem id="pDeva" label="&pDeva.label;"/>
+									<menuitem id="pMyan" label="&pMyan.label;"/>
+									<menuitem id="pSiha" label="&pSiha.label;"/>
+								</menupopup>
+							</menulist>
+							</hbox>
+						</box>
   					</groupbox>
   				</hbox>
   				

@@ -136,7 +136,7 @@ function giveIDtoTabs() { // startup function, give ids to
 			tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
 			if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
 			else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
-			else if(/search\.htm/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
+			else if(/search\.xul/.exec(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
 			else currentTab.setAttribute('id',(etc++==0?'DPR-x':'DPRx'));
 		}
 	}	

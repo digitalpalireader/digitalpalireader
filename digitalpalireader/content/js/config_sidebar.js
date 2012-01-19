@@ -45,6 +45,11 @@ var DPRConfig = {
 		else {
 			document.styleSheets[2]['cssRules'][x].style.backgroundImage = '';  // chromeback
 		}
+		
+		// list sizes
+
+		document.getElementById('set').setAttribute('rows',DPR_prefs['setRows']);
+		document.getElementById('book').setAttribute('rows',DPR_prefs['setRows']);
 	},
 }
 
