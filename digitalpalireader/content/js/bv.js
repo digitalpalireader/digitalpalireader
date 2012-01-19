@@ -1,10 +1,13 @@
-function bv(rnd) {
+function bv(rnd,static) {
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", 'chrome://digitalpalireader/content/dbv.html', false);
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 	var divs = xmlDoc.getElementsByTagName('div');
-	if(rnd) {
+	if(static) {
+		var no = rnd-1;
+	}
+	else if(rnd) {
 		var no = Math.floor(Math.random()*divs.length);
 	}
 	else {

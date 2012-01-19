@@ -424,15 +424,8 @@
 						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/quiz.xul','DPR-quiz',1);" id="quiz" tooltiptext="&quiz.label;" role="button">
 							<label value="&bQuiz;" />
 						</toolbarbutton>
-						<toolbarbutton onclick="DPRSend.bvAlert()" id="bv" tooltiptext="&bv.label;" role="button">
-							<label value="&bQuote;" />
-						</toolbarbutton>
-						<separator />
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/GMD/index.html', 'DPR-gram', 1);" id="gram" tooltiptext="&gram.label;" role="button">
-							<label value="&bGram;" />
-						</toolbarbutton>
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/etc/grammar/cheat.htm','DPR-cheat',1);" id="cheat" tooltiptext="&cheat.label;" role="button">
-							<label value="&bCheat;" />
+						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/html.xul', 'DPR-html', 1);" id="html" tooltiptext="&HTML.label;" role="button">
+							<label value="&bHTML;" />
 						</toolbarbutton>
 						<separator />
 						<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">

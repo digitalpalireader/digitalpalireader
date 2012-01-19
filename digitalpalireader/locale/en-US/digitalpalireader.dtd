@@ -1,6 +1,7 @@
 
 <!ENTITY digitalpalireader.title "Digital Pali Reader">
 <!ENTITY quiz.title "DPR Quiz">
+<!ENTITY HTML.title "DPR Resources">
 <!ENTITY openDPR.commandkey "D">
 <!ENTITY openDPR.modifierskey "control shift">
 
@@ -73,8 +74,7 @@
 <!ENTITY bHelp "Help ⇒">
 <!ENTITY bContact "Feedback Form ⇒">
 
-<!ENTITY bGram "Grammar ⇒">
-<!ENTITY bCheat "Cheat Sheet ⇒">
+<!ENTITY bHTML "Misc. Resources ⇒">
 
 <!ENTITY bookmark.label "Bookmarks">
 <!ENTITY quiz.label "Pali Quiz">
@@ -84,8 +84,7 @@
 <!ENTITY help.label "Help">
 <!ENTITY contact.label "Feedback Form">
 
-<!ENTITY gram.label "A Practical Grammar of the Pali Language by Charles Duroiselle">
-<!ENTITY cheat.label "Pali Cheet Sheet by Alan McClure">
+<!ENTITY HTML.label "Various Pali resources in HTML format">
 
 
 
