@@ -188,8 +188,8 @@ function sendPaliXML(link,add) {
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
-            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+link;
-			openDPRTab(permalink,'DPR-main');
+            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link;
+			openDPRTab(permalink,'DPRd');
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
@@ -198,7 +198,7 @@ function sendPaliXML(link,add) {
 		}
 	}
 	else {
-        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+link;
+        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link;
 		openDPRTab(permalink,'DPRd');
 	}	
 }
@@ -208,8 +208,8 @@ function sendDPPNXML(link,add) {
 		var oldTab = findDPRTab('DPR-main');
 
 		if (!oldTab) {
-            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+toVel(link);
-			openDPRTab(permalink,'DPR-main');
+            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
+			openDPRTab(permalink,'DPRd');
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
@@ -218,7 +218,7 @@ function sendDPPNXML(link,add) {
 		}
 	}
 	else {
-        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&entry='+toVel(link);
+        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
 		openDPRTab(permalink,'DPRd');
 	}	
 }

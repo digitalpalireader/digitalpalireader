@@ -1,3 +1,8 @@
+function textType(e) {
+	e.value=toUni(e.value);
+	$('.dect').css('background-color','');
+}
+
 function init() {
 
 	src = null;
@@ -339,8 +344,8 @@ correctDec['ratt']['nomSin'] = ['ratti'];
 correctDec['ratt']['nomPl'] = ['rattiyo','rattī'];
 correctDec['ratt']['accSin'] = ['rattiṃ'];
 correctDec['ratt']['accPl'] = ['rattiyo','rattī'];
-correctDec['ratt']['instSin'] = ['rattiyā'];
-correctDec['ratt']['instPl'] = ['rattīhi'];
+correctDec['ratt']['insSin'] = ['rattiyā'];
+correctDec['ratt']['insPl'] = ['rattīhi'];
 correctDec['ratt']['datSin'] = ['rattiyā'];
 correctDec['ratt']['datPl'] = ['rattīnaṃ'];
 correctDec['ratt']['ablSin'] = ['rattiyā'];
@@ -357,8 +362,8 @@ correctDec['sāl']['nomSin'] = ['sālā'];
 correctDec['sāl']['nomPl'] = ['sālā','sālāyo'];
 correctDec['sāl']['accSin'] = ['sālaṃ'];
 correctDec['sāl']['accPl'] = ['sālā','sālāyo'];
-correctDec['sāl']['instSin'] = ['sālāya'];
-correctDec['sāl']['instPl'] = ['sālāhi'];
+correctDec['sāl']['insSin'] = ['sālāya'];
+correctDec['sāl']['insPl'] = ['sālāhi'];
 correctDec['sāl']['datSin'] = ['sālāya'];
 correctDec['sāl']['datPl'] = ['sālānaṃ'];
 correctDec['sāl']['ablSin'] = ['sālāya'];
@@ -375,8 +380,8 @@ correctDec['nad']['nomSin'] = ['nadī'];
 correctDec['nad']['nomPl'] = ['nadiyo','nadī'];
 correctDec['nad']['accSin'] = ['nadiṃ'];
 correctDec['nad']['accPl'] = ['nadiyo','nadī'];
-correctDec['nad']['instSin'] = ['nadiyā'];
-correctDec['nad']['instPl'] = ['nadīhi'];
+correctDec['nad']['insSin'] = ['nadiyā'];
+correctDec['nad']['insPl'] = ['nadīhi'];
 correctDec['nad']['datSin'] = ['nadiyā'];
 correctDec['nad']['datPl'] = ['nadīnaṃ'];
 correctDec['nad']['ablSin'] = ['nadiyā'];
@@ -393,8 +398,8 @@ correctDec['dhamm']['nomSin'] = ['dhammo'];
 correctDec['dhamm']['nomPl'] = ['dhammā'];
 correctDec['dhamm']['accSin'] = ['dhammaṃ'];
 correctDec['dhamm']['accPl'] = ['dhamme'];
-correctDec['dhamm']['instSin'] = ['dhammena'];
-correctDec['dhamm']['instPl'] = ['dhammehi'];
+correctDec['dhamm']['insSin'] = ['dhammena'];
+correctDec['dhamm']['insPl'] = ['dhammehi'];
 correctDec['dhamm']['datSin'] = ['dhammāya','dhammassa'];
 correctDec['dhamm']['datPl'] = ['dhammānaṃ'];
 correctDec['dhamm']['ablSin'] = ['dhammā','dhammasmā','dhammamhā'];
@@ -411,8 +416,8 @@ correctDec['mun']['nomSin'] = ['muni'];
 correctDec['mun']['nomPl'] = ['munayo','munī'];
 correctDec['mun']['accSin'] = ['muniṃ'];
 correctDec['mun']['accPl'] = ['munayo','munī'];
-correctDec['mun']['instSin'] = ['muninā'];
-correctDec['mun']['instPl'] = ['munīhi'];
+correctDec['mun']['insSin'] = ['muninā'];
+correctDec['mun']['insPl'] = ['munīhi'];
 correctDec['mun']['datSin'] = ['munino','munissa'];
 correctDec['mun']['datPl'] = ['munīnaṃ'];
 correctDec['mun']['ablSin'] = ['muninā','munismā','munimhā'];
@@ -429,8 +434,8 @@ correctDec['bandh']['nomSin'] = ['bandhu'];
 correctDec['bandh']['nomPl'] = ['bandhavo','bandhū'];
 correctDec['bandh']['accSin'] = ['bandhuṃ'];
 correctDec['bandh']['accPl'] = ['bandhavo','bandhū'];
-correctDec['bandh']['instSin'] = ['bandhunā'];
-correctDec['bandh']['instPl'] = ['bandhūhi'];
+correctDec['bandh']['insSin'] = ['bandhunā'];
+correctDec['bandh']['insPl'] = ['bandhūhi'];
 correctDec['bandh']['datSin'] = ['bandhuno','bandhussa'];
 correctDec['bandh']['datPl'] = ['bandhūnaṃ'];
 correctDec['bandh']['ablSin'] = ['bandhunā','bandhusmā','bandhumhā'];
@@ -447,8 +452,8 @@ correctDec['rūp']['nomSin'] = ['rūpaṃ'];
 correctDec['rūp']['nomPl'] = ['rūpāni','rūpā'];
 correctDec['rūp']['accSin'] = ['rūpaṃ'];
 correctDec['rūp']['accPl'] = ['rūpāni','rūpe'];
-correctDec['rūp']['instSin'] = ['rūpena'];
-correctDec['rūp']['instPl'] = ['rūpehi'];
+correctDec['rūp']['insSin'] = ['rūpena'];
+correctDec['rūp']['insPl'] = ['rūpehi'];
 correctDec['rūp']['datSin'] = ['rūpāya','rūpassa'];
 correctDec['rūp']['datPl'] = ['rūpānaṃ'];
 correctDec['rūp']['ablSin'] = ['rūpā','rūpasmā','rūpamhā'];
@@ -465,8 +470,8 @@ correctDec['cakkh']['nomSin'] = ['cakkhu','cakkhuṃ'];
 correctDec['cakkh']['nomPl'] = ['cakkhūni','cakkhū'];
 correctDec['cakkh']['accSin'] = ['cakkhu','cakkhuṃ'];
 correctDec['cakkh']['accPl'] = ['cakkhūni','cakkhū'];
-correctDec['cakkh']['instSin'] = ['cakkhunā'];
-correctDec['cakkh']['instPl'] = ['cakkhūhi'];
+correctDec['cakkh']['insSin'] = ['cakkhunā'];
+correctDec['cakkh']['insPl'] = ['cakkhūhi'];
 correctDec['cakkh']['datSin'] = ['cakkhuno','cakkhussa'];
 correctDec['cakkh']['datPl'] = ['cakkhūnaṃ'];
 correctDec['cakkh']['ablSin'] = ['cakkhunā','cakkhusmā','cakkhumhā'];
@@ -483,8 +488,8 @@ correctDec['ma']['nomSin'] = ['ahaṃ'];
 correctDec['ma']['nomPl'] = ['mayaṃ','amhe'];
 correctDec['ma']['accSin'] = ['maṃ','mamaṃ'];
 correctDec['ma']['accPl'] = ['amhe','asme','asmākaṃ','amhākaṃ','amhaṃ'];
-correctDec['ma']['instSin'] = ['mayā'];
-correctDec['ma']['instPl'] = ['amhehi'];
+correctDec['ma']['insSin'] = ['mayā'];
+correctDec['ma']['insPl'] = ['amhehi'];
 correctDec['ma']['datSin'] = ['mama','mayhaṃ','mamaṃ','amhaṃ'];
 correctDec['ma']['datPl'] = ['amhākaṃ','asmākaṃ','amhaṃ'];
 correctDec['ma']['ablSin'] = ['mayā'];
@@ -501,8 +506,8 @@ correctDec['tva']['nomSin'] = ['tvaṃ','tuvaṃ'];
 correctDec['tva']['nomPl'] = ['tumhe'];
 correctDec['tva']['accSin'] = ['tvaṃ','taṃ','tuvaṃ'] ;
 correctDec['tva']['accPl'] = ['tumhe','tumhākaṃ'];
-correctDec['tva']['instSin'] = ['tvayā','tayā'];
-correctDec['tva']['instPl'] = ['tumhehi','tumhebhi'];
+correctDec['tva']['insSin'] = ['tvayā','tayā'];
+correctDec['tva']['insPl'] = ['tumhehi','tumhebhi'];
 correctDec['tva']['datSin'] = ['tava','tuyhaṃ','tavaṃ','tumhaṃ'];
 correctDec['tva']['datPl'] = ['tumhākaṃ','tumhaṃ'];
 correctDec['tva']['ablSin'] = ['tvayā'];
@@ -519,8 +524,8 @@ correctDec['sa']['nomSin'] = ['sā'];
 correctDec['sa']['nomPl'] = ['tā'];
 correctDec['sa']['accSin'] = ['taṃ'];
 correctDec['sa']['accPl'] = ['tā'];
-correctDec['sa']['instSin'] = ['tāya'];
-correctDec['sa']['instPl'] = ['tāhi'];
+correctDec['sa']['insSin'] = ['tāya'];
+correctDec['sa']['insPl'] = ['tāhi'];
 correctDec['sa']['datSin'] = ['tāya','tassā','tissā','tissāya'];
 correctDec['sa']['datPl'] = ['tāsaṃ','tāsānaṃ'];
 correctDec['sa']['ablSin'] = ['tāya'];
@@ -537,8 +542,8 @@ correctDec['so']['nomSin'] = ['so','sa'];
 correctDec['so']['nomPl'] = ['te'];
 correctDec['so']['accSin'] = ['taṃ'];
 correctDec['so']['accPl'] = ['te'];
-correctDec['so']['instSin'] = ['tena'];
-correctDec['so']['instPl'] = ['tehi','tebhi'];
+correctDec['so']['insSin'] = ['tena'];
+correctDec['so']['insPl'] = ['tehi','tebhi'];
 correctDec['so']['datSin'] = ['tassa'];
 correctDec['so']['datPl'] = ['tesaṃ','tesānaṃ'];
 correctDec['so']['ablSin'] = ['tasmā','tamhā'];
@@ -555,8 +560,8 @@ correctDec['ta']['nomSin'] = ['taṃ'];
 correctDec['ta']['nomPl'] = ['tāni'];
 correctDec['ta']['accSin'] = ['taṃ'];
 correctDec['ta']['accPl'] = ['tāni'];
-correctDec['ta']['instSin'] = ['tena'];
-correctDec['ta']['instPl'] = ['tehi','tebhi'];
+correctDec['ta']['insSin'] = ['tena'];
+correctDec['ta']['insPl'] = ['tehi','tebhi'];
 correctDec['ta']['datSin'] = ['tassa'];
 correctDec['ta']['datPl'] = ['tesaṃ','tesānaṃ'];
 correctDec['ta']['ablSin'] = ['tasmā','tamhā'];
@@ -574,8 +579,8 @@ decls.push('nomSin');
 decls.push('nomPl');
 decls.push('accSin');
 decls.push('accPl');
-decls.push('instSin');
-decls.push('instPl');
+decls.push('insSin');
+decls.push('insPl');
 decls.push('datSin');
 decls.push('datPl');
 decls.push('ablSin');
@@ -592,8 +597,8 @@ declsToNo['nomSin'] = [0,0];
 declsToNo['nomPl'] = [0,1];
 declsToNo['accSin'] = [1,0];
 declsToNo['accPl'] = [1,1];
-declsToNo['instSin'] = [2,];
-declsToNo['instPl'] = [2,1];
+declsToNo['insSin'] = [2,0];
+declsToNo['insPl'] = [2,1];
 declsToNo['datSin'] = [3,0];
 declsToNo['datPl'] = [3,1];
 declsToNo['ablSin'] = [4,0];
@@ -608,7 +613,7 @@ declsToNo['vocPl'] = [7,1];
 var declNo = [];
 declNo.push(['nomSin','nomPl']);
 declNo.push(['accSin','accPl']);
-declNo.push(['instSin','instPl']);
+declNo.push(['insSin','insPl']);
 declNo.push(['datSin','datPl']);
 declNo.push(['ablSin','ablPl']);
 declNo.push(['genSin','genPl']);
@@ -631,6 +636,9 @@ words.push(['sa','','Demonstrative Pronoun','3rd person feminine']);
 words.push(['so','','Demonstrative Pronoun','3rd person masculine']);
 words.push(['ta','','Demonstrative Pronoun','3rd person neuter']);
 
+var declb = ['nom','acc','ins','dat','abl','gen','loc','voc'];
+var numba = ['Sin','Pl'];
+
 /*
 
 var out='';
@@ -640,7 +648,8 @@ for (i in words) {
 }
 */
 
-G_oneNoun = -1;
+var G_oneNoun = [];
+var G_quiza = [];
 
 function resetTable()  {
 	if (document.getElementById('Qshow').innerHTML == 'Hide') hideAnswers();
@@ -648,23 +657,64 @@ function resetTable()  {
 		Drights = [];
 		alertFlash("Congratulations for completing all declensions!",'green');
 	}
+	if(!G_quiza.length) {
+		for (j in yt){
+			if(yt[j][4] != 'N' || !/[tmf]\.[aiuāīū]/.test(yt[j][5])) // not nominal or only adjective, or irreg
+				continue;
+			G_quiza.push([yt[j],j]);
+		}
+	}
 		
-	var rn=Math.floor(Math.random()*words.length);
+	var rn=Math.floor(Math.random()*G_quiza.length);
 	while(Drights[rn] || (G_oneNoun == rn))
-		var rn=Math.floor(Math.random()*words.length);
-	G_oneNoun = rn
-	document.getElementById('QwhichT').innerHTML = words[rn][2];
-	document.getElementById('QwhichC').innerHTML = words[rn][3];
-	var stem = words[rn][0];
-	addStems(stem,rn);
+		var rn=Math.floor(Math.random()*G_quiza.length);
+
+	var yto = G_quiza[rn][0];
+	var yto5 = yto[5].split(',');
+	for(i in yto5) {
+		if(/[tmf]\./.test(yto5[i])) {
+			yto[5] = yto5[i];
+			break;
+		}
+	}
+	
+	
+	var type1 = yto[4]+'#'+yto[5];
+	var type2 = iI[type1];
+	if(type2[1])
+		var noun = iN[type2[1]];
+	else if(type2[2])
+		var noun = iN[type2[2]];
+	else if(type2[3])
+		var noun = iN[type2[3]];
+	else {
+		return resetTable();
+	}
+	
+	var outword = yto[2].replace(/\`/g, '"');
+	outword = outword.replace(/,/g, '.');
+	if(/[tmf]\.[aiuāīū]$/.test(yto[5])) outword = outword+outword.charAt(outword.length-1);
+	outword = toUni(outword);
+		
+	var des = [G_quiza[rn][1],outword + ' (' + yto[1] + ')'];
+
+	document.getElementById('QwhichT').innerHTML = des[0];
+	document.getElementById('QwhichC').innerHTML = des[1];
+	var stem = yto[8];
+
+	G_oneNoun = [stem,yto,noun];
+
+	addStems();
 	clearAnswers();
-	showRights();
+	//showRights();
 }
 
-function addStems(stem,rn) {
+function addStems() {
+	var stem = G_oneNoun[0];
+	var noun = G_oneNoun[2];
 	for (i in decls) {
-		document.getElementById(decls[i]+'s').innerHTML = words[rn][1];
-		if (correctDec[stem][decls[i]][0] == '') document.getElementById(decls[i]+'t').disabled = 'true';
+		document.getElementById(decls[i]+'s').innerHTML = stem;
+		if (noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]] == '') document.getElementById(decls[i]+'t').disabled = 'true';
 		else document.getElementById(decls[i]+'t').disabled = ''; 
 	}
 }
@@ -673,18 +723,16 @@ var Drights = [];
 
 function checkAnswers() {
 	var wrong = 0;
-	var rn = G_oneNoun;
-	var stem = words[rn][0];
+	var stem = G_oneNoun[0];
+	var noun = G_oneNoun[2];
 	for (i in decls) {
+		var onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
 		var right = 0;
 		var thisa = document.getElementById(decls[i]+'t');
 
 		if(/,/.test(thisa.value)) {
 			var vals = thisa.value.replace(/ /g,'').split(',');
-			for(k in vals) {
-				vals[k] = words[rn][1]+vals[k];
-			}
-			if(vals.join(',') == correctDec[stem][decls[i]].join(',')) {
+			if(vals.join(',') == onn.join(',')) {
 				thisa.style.backgroundColor = '#5F5';
 				right=1;
 			}
@@ -694,13 +742,19 @@ function checkAnswers() {
 			}
 		}
 		else {
-			for (j in correctDec[stem][decls[i]]) {
-				if (correctDec[stem][decls[i]][j] == '') {
+			if (!onn) {
+				thisa.style.backgroundColor = '';
+				right = 1;
+				break;
+			}
+			for (j in onn) {
+				onn[j] = onn[j].replace(/[()]/g,'');
+				if (onn[j] == '') {
 					thisa.style.backgroundColor = '';
 					right = 1;
 					break;
 				}
-				if (words[rn][1]+thisa.value == correctDec[stem][decls[i]][j]) {
+				if (thisa.value == onn[j]) {
 					thisa.style.backgroundColor = '#5F5';
 					right = 1;
 					break;
@@ -714,16 +768,16 @@ function checkAnswers() {
 	}
 	if (wrong == 0) {
 		alertFlash("Well done!",'green');
-		Drights[rn] = 1;
+		//Drights[rn] = 1;
 		resetTable();
 	}
-	showRights();
+	//showRights();
 }
 
 function showRights() {
 	$('#Qcorrects').html('');
 	for (i in Drights) {
-		document.getElementById('Qcorrects').innerHTML += words[i][0]+'-<br />';
+		document.getElementById('Qcorrects').innerHTML += G_oneNoun[0]+'-<br />';
 	}
 	if ($('#Qcorrects').html() != '') {
 		$('#corrects').show();
@@ -742,27 +796,32 @@ function clearAnswers() {
 
 function showAnswers() {
 	
-	document.getElementById('Qshow').innerHTML = 'Hide';
+	$('#Qshow').html('Hide');
 	document.getElementById('Qshow').onclick = function () { hideAnswers() };
-	var rn = document.getElementById('QwhichS').value;
-	var stem = words[rn][0];
+	var stem = G_oneNoun[0];
+	var noun = G_oneNoun[2];
 	for (i in decls) {
+		var onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
+		if (!onn) {
+			document.getElementById(decls[i]+'t').style.backgroundColor = '';
+			document.getElementById(decls[i]+'t').style.display = 'none';
+			document.getElementById(decls[i]+'s').innerHTML = '';
+			continue;
+		}
 		document.getElementById(decls[i]+'t').style.backgroundColor = '';
 		document.getElementById(decls[i]+'t').style.display = 'none';
-		document.getElementById(decls[i]+'s').innerHTML = correctDec[stem][decls[i]].join(', ');
+		document.getElementById(decls[i]+'s').innerHTML = stem+onn.join(', '+stem);
 	}
 }
 function hideAnswers() {
-	document.getElementById('Qshow').innerHTML = 'Show';
+	$('#Qshow').html('Show');
 	document.getElementById('Qshow').onclick = function() { showAnswers() };
 	for (i in decls) {
 		document.getElementById(decls[i]+'t').style.backgroundColor = 'white';
 		document.getElementById(decls[i]+'t').style.display = 'block';
 		document.getElementById(decls[i]+'s').innerHTML = '';
 	}
-	var rn = G_oneNoun;
-	var stem = words[rn][0];
-	addStems(stem,rn);
+	addStems();
 }
 
 var G_oneDec = [0,0,0];

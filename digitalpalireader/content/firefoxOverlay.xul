@@ -2,50 +2,137 @@
 <?xml-stylesheet href="chrome://digitalpalireader/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <overlay id="digitalpalireader-overlay"
-         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script type="application/x-javascript" src="js/chrome_overlay.js"/>
-    <stringbundleset id="stringbundleset">
-        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
-    </stringbundleset>
-    <menupopup id="contentAreaContextMenu">  
-		<menuitem id="dpr-context-item" 
-		    class="menuitem-iconic" 
-		    label="Send to DPR" 
-		    oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString()); else DPROverlay.rightClick(gContextMenu.target.innerHTML);"/>  
-    </menupopup> 
-    <menupopup id="menu_ToolsPopup">
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+	</stringbundleset>
+	<menupopup id="contentAreaContextMenu">
+		<menu id="dpr-sub-context" 
+			class="menuitem-iconic" 
+			label="Send to DPR">
+			<menupopup>
+				<menuitem id="dpr-context-item" 
+					class="menuitem-iconic" 
+					label="Analyze" 
+					oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'A'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'A');"/>  
+				<menu id="dpr-sub-dict" 
+					class="menuitem-iconic" 
+					label="Dictionary">
+					<menupopup>
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="Pali-English" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'PED'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'PED');"/>  
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="Pali Proper Names" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'DPPN'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'DPPN');"/>  
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="Concise Pali-English" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'CPED'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'CPED');"/>  
+						<menuseparator/>
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="All Above" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'MULTI'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'MULTI');"/>  
+						<menuseparator/>
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="English-Pali" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'CEPD'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'CEPD');"/>  
+					</menupopup> 
+				</menu>
+				<menu id="dpr-sub-search" 
+					class="menuitem-iconic" 
+					label="Search">
+					<menupopup>
+						<menuitem id="dpr-context-item" 
+							class="menuitem-iconic" 
+							label="All Sets" 
+							oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'vdmsakyxbg'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'PED');"/>  
+						<menuseparator/>
+						<menu id="dpr-sub-menu" 
+							class="menuitem-iconic" 
+							label="Choose Set">
+							<menupopup>
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="Vinaya" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'v'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'v');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="DN" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'d'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'d');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="MN" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'m'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'m');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="SN" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'s'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'s');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="AN" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'a'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'a');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="KN" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'k'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'k');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="Abhidhamma" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'y'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'y');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="Vism." 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'x'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'x');"/>  
+								<menuitem id="dpr-context-item" 
+									class="menuitem-iconic" 
+									label="Abhi-s" 
+									oncommand="if(gContextMenu.isTextSelected) DPROverlay.rightClick(document.commandDispatcher.focusedWindow.getSelection().toString(),'b'); else DPROverlay.rightClick(gContextMenu.target.innerHTML,'b');"/>  
+							</menupopup> 
+						</menu>
+					</menupopup> 
+				</menu>
+			</menupopup> 
+		</menu>
+	</menupopup> 
+	<menupopup id="menu_ToolsPopup">
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
 	</menupopup>
-    <toolbarpalette  id="BrowserToolbarPalette">
-        <toolbarbutton id="dpr-button"     label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
-    </toolbarpalette>
-    <statusbar id="status-bar">
-        <statusbarpanel id="DPRStatusBar" 
+	<toolbarpalette  id="BrowserToolbarPalette">
+		<toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
+	</toolbarpalette>
+	<statusbar id="status-bar">
+		<statusbarpanel id="DPRStatusBar" 
 						role="button" 
 						context="_child"
-                        observes="viewDPR"
-                        tooltiptext="Digital Pali Reader">
+						observes="viewDPR"
+						tooltiptext="Digital Pali Reader">
 			<toolbarbutton id="dpr-statusbar-button"
 			  	class="toolbarbutton-1"
 				image="chrome://digitalpalireader/skin/icons/logo.png"
 				orient="horizontal"/>
-        </statusbarpanel>
-    </statusbar>
+		</statusbarpanel>
+	</statusbar>
   
   <keyset id="mainKeyset">
-    <key id="key_openDPR" command="viewDPR"
-         key="&openDPR.commandkey;" 
-         modifiers="&openDPR.modifierskey;" />
+	<key id="key_openDPR" command="viewDPR"
+		 key="&openDPR.commandkey;" 
+		 modifiers="&openDPR.modifierskey;" />
   </keyset>
   
   <broadcasterset id="mainBroadcasterSet"> 
-    <broadcaster id="viewDPR" 
-                 label="&digitalpalireader.title;"
-                 autoCheck="false"
-                 type="checkbox"
-                 group="sidebar"
-                 sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
-                 sidebartitle="&digitalpalireader.title;"
-                 oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
+	<broadcaster id="viewDPR" 
+				 label="&digitalpalireader.title;"
+				 autoCheck="false"
+				 type="checkbox"
+				 group="sidebar"
+				 sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
+				 sidebartitle="&digitalpalireader.title;"
+				 oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
   </broadcasterset>
 </overlay>

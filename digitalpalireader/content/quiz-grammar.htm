@@ -21,6 +21,8 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/move.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
 
 </head>
 
@@ -49,13 +51,13 @@ function onDocLoad() {
 							<span id="nomSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="nomSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="nomSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="nomPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" onfocus="this.value=this.value;" id="nomPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" onfocus="this.value=this.value;" id="nomPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -64,28 +66,28 @@ function onDocLoad() {
 							<span id="accSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="accSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="accSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="accPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="accPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="accPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
 						  <th class="dec">INST</th>
 						  <td class="dec">
-							<span id="instSins" />
+							<span id="insSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="instSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="insSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
-							<span id="instPls" />
+							<span id="insPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="instPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="insPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -94,13 +96,13 @@ function onDocLoad() {
 							<span id="datSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="datSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="datSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="datPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="datPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="datPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -109,13 +111,13 @@ function onDocLoad() {
 							<span id="ablSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="ablSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="ablSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="ablPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="ablPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="ablPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -124,13 +126,13 @@ function onDocLoad() {
 							<span id="genSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="genSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="genSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="genPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="genPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="genPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -139,13 +141,13 @@ function onDocLoad() {
 							<span id="locSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="locSint" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="locSint" value="" class="dect" />
 						  </td>
 						  <td class="dec">
 							<span id="locPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="locPlt" value="" class="dect" />
+							<input type="text" onkeyup="textType(this)" id="locPlt" value="" class="dect" />
 						  </td>
 						</tr>
 						<tr>
@@ -154,13 +156,13 @@ function onDocLoad() {
 							<span id="vocSins" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="vocSint" value="" class="dect" disabled="" />
+							<input type="text" onkeyup="textType(this)" id="vocSint" value="" class="dect" disabled="" />
 						  </td>
 						  <td class="dec">
 							<span id="vocPls" />
 						  </td>
 						  <td class="decr">
-							<input type="text" onkeyup="this.value=toUni(this.value);" id="vocPlt" value="" class="dect" disabled="" />
+							<input type="text" onkeyup="textType(this)" id="vocPlt" value="" class="dect" disabled="" />
 						  </td>
 						</tr>
 					  </tbody>

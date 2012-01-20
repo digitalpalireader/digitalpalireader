@@ -8,10 +8,8 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 
 var DPROverlay = {
 	init:function() {
-		window.dump('init DPR Overlay\n');
 		if(document.getElementById("contentAreaContextMenu"))
 			document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function(e){DPROverlay.showHideDPRItem(e)}, false);  
-		window.dump('init DPR Overlay finished\n');
 	},
 	
 
@@ -129,60 +127,52 @@ var DPROverlay = {
 	openSidebar: function() {
 		toggleSidebar('viewDPR');
 	},
-	rightClick:function(input) {
+	rightClick:function(input,type) {
 		if(!input || input == '') return;
 		input = input.replace(/<[^>]*>/g,'');
 		input = input.replace(/\u0101/g, 'aa').replace(/\u012B/g, 'ii').replace(/\u016B/g, 'uu').replace(/\u1E6D/g, '\.t').replace(/\u1E0D/g, '\.d').replace(/\u1E45/g, '\"n').replace(/\u1E47/g, '\.n').replace(/\u1E43/g, '\.m').replace(/\u1E41/g, '\.m').replace(/\u00F1/g, '\~n').replace(/\u1E37/g, '\.l').replace(/\u0100/g, 'AA').replace(/\u012A/g, 'II').replace(/\u016A/g, 'UU').replace(/\u1E6C/g, '\.T').replace(/\u1E0C/g, '\.D').replace(/\u1E44/g, '\"N').replace(/\u1E46/g, '\.N').replace(/\u1E42/g, '\.M').replace(/\u00D1/g, '\~N').replace(/\u1E36/g, '\.L');
-		var thisTab = this.isThisDPRTab('DPRm');
-		if(/ /.test(input)) { // multiple words 
-			if(thisTab) {  
-				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-				thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(input);
-				return;
-			}
-			var oldTab = this.findDPRTab('DPR-main');
-			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?text='+input;
-				this.openDPRTab(permalink,'DPR-main');
-			}
-			else {
-				mainWindow.gBrowser.selectedTab = oldTab;
-				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(input);
-			}
-		}
-		else { // single word
-			if(thisTab) {  
-				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-				thisTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input);
-				return;
-			}
-			var oldTab = this.findDPRTab('DPR-main');
-			if (!oldTab) {
-				var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+input;
-				this.openDPRTab(permalink,'DPR-main');
-			}
-			else {
-				mainWindow.gBrowser.selectedTab = oldTab;
-				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input);
-			}
+		
+		switch(true) {
+			case (type=='A'):
+				var thisTab = this.isThisDPRTab('DPRm');
+				if(/ /.test(input)) { // multiple words, send as paragraph
+					var permalink = 'dpr:index?text='+input;
+					this.openDPRTab(permalink,'DPR-main');
+				}
+				else { // single word, analyze
+					var permalink = 'dpr:index?analysis='+input;
+					this.openDPRTab(permalink,'DPR-main');
+				}
+				break;
+			case (/^[A-Z]+$/.test(type)):
+				var permalink = 'dpr:dict?type='+type+'&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+input;
+				this.openDPRTab(permalink,'DPRd');
+				break;
+			case (/^[a-z]+$/.test(type)):
+				var permalink = 'dpr:search?type=0&query='+input+'&MAT=m&set='+type+'&book=1&part=1&rx=false';
+				this.openDPRTab(permalink,'DPRs');
+				break;
 		}
 	},
 	
 	showHideDPRItem:function() {
-		window.dump('DPR popup showing\n');
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
-		var dpritem = document.getElementById("dpr-context-item");
+		var dprmenu = document.getElementById("dpr-sub-context");
+		var dprdict = document.getElementById("dpr-sub-dict");
+		var dprsearch = document.getElementById("dpr-sub-search");
 
-		if(prefs.getBoolPref('Bool.allContext'))
-			dpritem.hidden = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && !dgContextMenu.isTextSelected);
+		var nosel = !gContextMenu.isTextSelected;
+		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && nosel);
+		
+		if(prefs.getBoolPref('Bool.allContext')) {
+			dprmenu.hidden = notext;
+			dprdict.hidden = nosel;
+			dprsearch.hidden = nosel;
+		}
 		else if(prefs.getBoolPref('Bool.noContext'))
 			dpritem.hidden = true;
-		else if(prefs.getBoolPref('Bool.contextSelected')) {
-				dpritem.hidden = !gContextMenu.isTextSelected;
-		}
-		window.dump('DPR context item:'+dpritem.hidden+'\n');
+		else if(prefs.getBoolPref('Bool.contextSelected'))
+			dprmenu.hidden = nosel;
 	},
 	
 	mouseMove:function(e) {
