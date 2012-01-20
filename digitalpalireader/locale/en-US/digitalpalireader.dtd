@@ -41,6 +41,8 @@
 
 <!ENTITY search_history "list of previous searches">
 <!ENTITY clear_history "clear all history entries">
+<!ENTITY sim_history "Use these search options with a different query">
+<!ENTITY same_history "Run this search with the same options">
 
 	<!-- dict -->
 

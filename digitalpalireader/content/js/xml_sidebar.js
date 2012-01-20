@@ -225,6 +225,7 @@ var DPRXML = {
 		var x = w[vagga].getElementsByTagName("h3");
 		var y = x[sutta].getElementsByTagName("h4");
 
+		document.getElementById('tsoPR').selectedIndex = 0;
 
 		switch(true) {
 			case (depth == 0): // remake meta list

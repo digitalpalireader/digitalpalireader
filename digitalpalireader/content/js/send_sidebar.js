@@ -409,7 +409,7 @@ var DPRSend = {
 
 			// get options
 			
-			if(which != 3) {
+			if(which == 0 || which == 2) {
 				var MAT = (document.getElementById('tsoMATm').checked ? 'm' : '') + (document.getElementById('tsoMATa').checked ? 'a' : '') + (document.getElementById('tsoMATt').checked ? 't' : '');
 			}
 			else var MAT = document.getElementById('tsoMAT2m').value;

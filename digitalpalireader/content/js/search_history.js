@@ -15,6 +15,71 @@ function eraseSearchHistory(gofrom)
 		DPRNav.searchHistoryBox();
 	}
 }
+function sameSearchHistory(event){
+	if(document.getElementById('searches').selectedIndex == 0)
+		return;
+	var item = document.getElementById('searches').selectedItem.getAttribute('value').split(',');
+	var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
+	DPRSend.sendSearch(DPRSend.eventSend(event),searchType, searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
+}
+function simSearchHistory(event){
+	if(document.getElementById('searches').selectedIndex == 0)
+		return;
+	var item = document.getElementById('searches').selectedItem.getAttribute('value').split(',');
+	var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
+	
+	document.getElementById('tipType').selectedIndex = searchType;
+	DPROpts.tipitakaOptions();
+	document.getElementById('isearch').value = searchString;
+	//part=1&rx=false
+	if(searchType == 0 || searchType == 2) {
+		for(i in G_hLetters){
+			if(searchMAT.search(G_hLetters[i]) > -1)
+				document.getElementById('tsoMAT'+G_hLetters[i]).checked = true;
+			else
+				document.getElementById('tsoMAT'+G_hLetters[i]).checked = false;
+		}
+	}
+	else {
+		document.getElementById('tsoMAT2m').selectedIndex = G_hNumbers[searchMAT];
+		DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0);
+	}
+
+	if(searchType == 0 || searchType == 5) { 
+		for (i in G_nikToNumber) {
+			if(searchSet.search(i) > -1) 
+				document.getElementById('tsoCO'+i).checked = true;
+			else
+				document.getElementById('tsoCO'+i).checked = false;
+		}
+	}
+	else {
+		document.getElementById('tsoSETm').value = searchSet;
+		DPRNav.setSearchBookList();
+	}
+	if(searchType == 1) {
+		for (i=0;i< document.getElementById('tsoBOOKm').itemCount;i++) {
+			if(searchBook.search(i+1) > -1)
+				document.getElementById('tsoBObook' + i).checked = true;
+			else
+				document.getElementById('tsoBObook' + i).checked = false;
+		}
+	}
+	else {
+		document.getElementById('tsoBOOKm').value = searchBook;
+		DPRXML.updateSearchHierarchy(0);
+	}
+
+	if(searchType == 3) {
+		var parts = searchPart.split('.');
+		for(i=1;i<parts.length;i++) {
+			document.getElementById('tsoP'+G_listTitles[i-1]).selectedIndex = parts[i];
+			DPRXML.updateSearchHierarchy(i);
+		}
+		document.getElementById('tsoPR').selectedIndex = parts[0];
+		DPROpts.chooseSearchHier(parseInt(parts[0])+1);
+	}
+}
 
 function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {
 	var xmlDoc = searchHistoryXML();

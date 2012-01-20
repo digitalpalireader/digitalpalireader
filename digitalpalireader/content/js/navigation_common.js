@@ -78,6 +78,7 @@ G_XMLFileArray['g3'] = [1,0,0];
 G_XMLFileArray['g4'] = [1,0,0];
 G_XMLFileArray['g5'] = [1,0,0];
 
+G_listTitles = ['meta','volume','vagga','sutta','section'];
 
 var G_hNumbers = [];
 G_hNumbers['m'] = 0;

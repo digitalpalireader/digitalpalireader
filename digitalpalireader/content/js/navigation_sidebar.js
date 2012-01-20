@@ -201,7 +201,7 @@ var DPRNav = {
 			while(bList.itemCount > 0) bList.removeItemAt(0);
 			bList.appendItem('-- History --');
 			
-			var types = ['Sets','Books','Book','Part'];
+			var types = ['Sets','Books','Book','Part','ATI'];
 
 			var cnt = 0; 
 			
@@ -216,11 +216,28 @@ var DPRNav = {
 				var searchPart = bNodes[i].getElementsByTagName('part')[0].textContent;
 				var searchRX = bNodes[i].getElementsByTagName('rx')[0].textContent;
 				
-				bList.appendItem(searchString+' ('+types[parseInt(searchType)]+')');
+				var place = '';
+				
+				switch(parseInt(searchType)) {
+					case 0:
+					case 5:
+						place = searchSet.split('').join(',');
+						break;
+					case 1:
+						place = G_nikLongName[searchSet];
+						break;
+					case 2:
+					case 3:
+					case 4:
+						place = G_nikLongName[searchSet]+' '+searchBook.split('').join(',');
+						break;
+				}
+				
+				bList.appendItem(searchString+' - '+place+' ('+types[parseInt(searchType)]+')');
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[cnt].setAttribute('onclick',"DPRSend.sendSearch(DPRSend.eventSend(event),"+searchType+",'"+searchString+"','"+searchMAT+"','"+searchSet+"','"+searchBook+"','"+searchPart+"',"+searchRX+");");
-				ch[cnt].setAttribute('tooltiptext','run search');
+				ch[cnt].setAttribute('value',searchType+","+searchString+","+searchMAT+","+searchSet+","+searchBook+","+searchPart+","+searchRX);
+				//ch[cnt].setAttribute('tooltiptext','run search');
 			}
 			bList.selectedIndex = 0;
 			

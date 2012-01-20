@@ -187,8 +187,8 @@
 									</menupopup>
 								</menulist>
 							</box>
-							<box flex="1" collapsed="true" id="tsoMAT2" align="start" oncommand="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
-								<menulist flex="1" class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m">
+							<box flex="1" collapsed="true" id="tsoMAT2" align="start">
+								<menulist flex="1" class="sel" tooltiptext="Choose which heirarchy to search" id="tsoMAT2m" oncommand="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
 									<menupopup>
 										<menuitem value="m" selected="true" label="Mūla"/>
 										<menuitem value="a" label="Aṭṭhakathā"/>
@@ -197,8 +197,8 @@
 								</menulist>
 							</box>
 						</hbox>
-						<groupbox collapsed="true" id="tsoBOOK" pack="start" align="stretch" oncommand="DPRXML.updateSearchHierarchy(0)">
-							<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm">
+						<groupbox collapsed="true" id="tsoBOOK" pack="start" align="stretch">
+							<menulist class="sel" tooltiptext="Choose which book to search" id="tsoBOOKm" oncommand="DPRXML.updateSearchHierarchy(0)">
 								<menupopup>
 								</menupopup>
 							</menulist>
@@ -302,15 +302,23 @@
 
 					<separator class="groove" />
 					
-					<hbox id="sh-box" collapsed="true">
+					<vbox id="sh-box" collapsed="true">
 						<menulist flex="1" class="sel" id="searches" tooltiptext="&search_history;">
 							<menupopup>
 							</menupopup>
 						</menulist>
-						<toolbarbutton onclick="eraseSearchHistory()" id="clear_history" tooltiptext="&clear_history;" role="button">
-							<label value="x" />
-						</toolbarbutton>
-					</hbox>
+						<hbox pack="center" flex="1">
+							<toolbarbutton onclick="eraseSearchHistory()" id="clear_history" tooltiptext="&clear_history;" role="button">
+								<label value="clear" />
+							</toolbarbutton>
+							<toolbarbutton onclick="simSearchHistory()" id="sim_history" tooltiptext="&sim_history;" role="button">
+								<label value="similar" />
+							</toolbarbutton>
+							<toolbarbutton onclick="sameSearchHistory(event)" id="same_history" tooltiptext="&same_history;" role="button">
+								<label value="same" />
+							</toolbarbutton>
+						</hbox>
+					</vbox>
 					<separator class="groove" />
 				</form>
 			</tabpanel>
