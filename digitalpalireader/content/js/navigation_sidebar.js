@@ -236,7 +236,7 @@ var DPRNav = {
 				bList.appendItem(searchString+' - '+place+' ('+types[parseInt(searchType)]+')');
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[cnt].setAttribute('value',searchType+","+searchString+","+searchMAT+","+searchSet+","+searchBook+","+searchPart+","+searchRX);
+				ch[cnt].setAttribute('value',searchType+"|"+searchString+"|"+searchMAT+"|"+searchSet+"|"+searchBook+"|"+searchPart+"|"+searchRX);
 				//ch[cnt].setAttribute('tooltiptext','run search');
 			}
 			bList.selectedIndex = 0;

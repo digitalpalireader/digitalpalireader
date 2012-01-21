@@ -18,20 +18,20 @@ function eraseSearchHistory(gofrom)
 function sameSearchHistory(event){
 	if(document.getElementById('searches').selectedIndex == 0)
 		return;
-	var item = document.getElementById('searches').selectedItem.getAttribute('value').split(',');
-	var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
+	var item = document.getElementById('searches').selectedItem.getAttribute('value').split('|');
+	var searchType = parseInt(item[0]), searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = (item[6]=='true');
 	DPRSend.sendSearch(DPRSend.eventSend(event),searchType, searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
 }
 function simSearchHistory(event){
 	if(document.getElementById('searches').selectedIndex == 0)
 		return;
-	var item = document.getElementById('searches').selectedItem.getAttribute('value').split(',');
+	var item = document.getElementById('searches').selectedItem.getAttribute('value').split('|');
 	var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
 	
 	document.getElementById('tipType').selectedIndex = searchType;
 	DPROpts.tipitakaOptions();
-	document.getElementById('isearch').value = searchString;
-	//part=1&rx=false
+	document.getElementById('isearch').value = '';
+
 	if(searchType == 0 || searchType == 2) {
 		for(i in G_hLetters){
 			if(searchMAT.search(G_hLetters[i]) > -1)
@@ -79,6 +79,8 @@ function simSearchHistory(event){
 		document.getElementById('tsoPR').selectedIndex = parts[0];
 		DPROpts.chooseSearchHier(parseInt(parts[0])+1);
 	}
+
+	document.getElementById('tsoRx').checked = (searchRX == 'true');
 }
 
 function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {

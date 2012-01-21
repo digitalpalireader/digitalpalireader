@@ -42,10 +42,12 @@
 		}
 	</script>
 	<vbox id="search-bar">
-		<hbox id="upper" pack="start">
+		<hbox id="upper" pack="start" flex="1">
 			<button class="search-button" id="cancel-search" icon="cancel" onmouseup="stopSearch()"/>
 			<label value="Search Results for " class="search-label" />
 			<hbox id="search-sets" pack="start">
+			</hbox>
+			<hbox id="search-link" pack="end" flex="1">
 			</hbox>
 		</hbox>
 		<hbox id="lower">

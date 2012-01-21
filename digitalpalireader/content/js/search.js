@@ -1,17 +1,7 @@
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
-var MD = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIWebNavigation)
-				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-				   .rootTreeItem
-				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIDOMWindow).gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument; 
-var MW = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIWebNavigation)
-				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-				   .rootTreeItem
-				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIDOMWindow).gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow; 
+var MD = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument; 
+var MW = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow; 
 				   
 var G_searchStartTime;
 
@@ -32,6 +22,11 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	MD.getElementById('search-progress').setAttribute('value',0);
 
 	var element = MD.getElementById("search-sets");
+	while(element.hasChildNodes()){
+		element.removeChild(element.firstChild);
+	}
+	
+	var element = MD.getElementById("search-link");
 	while(element.hasChildNodes()){
 		element.removeChild(element.firstChild);
 	}
@@ -183,13 +178,13 @@ function finishSearch() {
 	mfin.setAttribute('value',(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's');
 	mfin.setAttribute('id','search-finished');
 
-	var mlink = MD.createElement('button');
+	var mlink = MD.createElement('toolbarbutton');
 	mlink.setAttribute('class','search-button');
-	mlink.setAttribute('icon','add');
+	mlink.setAttribute('label','♦');
 	mlink.setAttribute('onmouseup','permalinkClick(\''+G_searchLink+'\',1)');
 	mlink.setAttribute('tooltiptext','Click to copy permalink to clipboard');
 
-	MD.getElementById('search-sets').appendChild(mlink);
+	MD.getElementById('search-link').appendChild(mlink);
 
 	// fix plural
 

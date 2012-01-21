@@ -7,10 +7,18 @@
 	<tabbox class="chromeback" flex="1">
 		<tabs class="chromeback" id="tabs">
 			<tab class="chromeback" label="Buddha Vacana Guide"/>
+			<tab class="chromeback" label="PED Abbreviations"/>
+			<tab class="chromeback" label="CPED Abbreviations"/>
 		</tabs>
 		<tabpanels id="panels" class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="bv">
 				<browser disablehistory="true" type="content" id="etc-1-browser" src="bv.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="ped">
+				<browser disablehistory="true" type="content" id="etc-2-browser" src="ped-abbv.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="cped">
+				<browser disablehistory="true" type="content" id="etc-3-browser" src="cped-abbv.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

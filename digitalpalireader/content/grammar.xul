@@ -5,9 +5,10 @@
 <window id="DPR"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<tabbox class="chromeback" flex="1">
-		<tabs class="chromeback">
+		<tabs class="chromeback" id="tabs">
 			<tab class="chromeback" label="Duroiselle's Grammar"/>
-			<tab class="chromeback" label="Pali Cheat Sheet"/>
+			<tab class="chromeback" id="cheet" label="Pali Cheat Sheet"/>
+			<tab class="chromeback" id="compound" label="Pali Compound Sheet"/>
 		</tabs>
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="grammar">
@@ -15,6 +16,9 @@
 			</tabpanel>
 			<tabpanel class="chromeback" id="cheat">
 				<browser disablehistory="true" type="content" id="quiz-browser" src="etc/grammar/cheat.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="cheat">
+				<browser disablehistory="true" type="content" id="quiz-browser" src="etc/grammar/compound.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

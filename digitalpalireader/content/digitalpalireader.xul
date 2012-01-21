@@ -311,9 +311,11 @@
 							<toolbarbutton onclick="eraseSearchHistory()" id="clear_history" tooltiptext="&clear_history;" role="button">
 								<label value="clear" />
 							</toolbarbutton>
+							<toolbarseparator id=""/>
 							<toolbarbutton onclick="simSearchHistory()" id="sim_history" tooltiptext="&sim_history;" role="button">
 								<label value="similar" />
 							</toolbarbutton>
+							<toolbarseparator id=""/>
 							<toolbarbutton onclick="sameSearchHistory(event)" id="same_history" tooltiptext="&same_history;" role="button">
 								<label value="same" />
 							</toolbarbutton>
