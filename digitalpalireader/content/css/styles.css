@@ -148,7 +148,6 @@ div {
 }
 a:link       {  text-decoration:none }
 a:visited    {  text-decoration:none }
-a:hover    {  cursor:pointer }
 
 img {  
 	border-style: none;
@@ -486,6 +485,10 @@ position:relative;
 width:100%;
 height:auto;
 z-index:3;
+}
+#anfright {
+	width:100%;
+	max-width:75%;
 }
 #anft {
 position:relative;

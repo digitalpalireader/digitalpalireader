@@ -15,10 +15,10 @@
 				<browser disablehistory="true" type="content" id="etc-1-browser" src="bv.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="ped">
-				<browser disablehistory="true" type="content" id="etc-2-browser" src="ped-abbv.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="etc-2-browser" src="etc/grammar/ped-abbv.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="cped">
-				<browser disablehistory="true" type="content" id="etc-3-browser" src="cped-abbv.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="etc-3-browser" src="etc/grammar/cped-abbv.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

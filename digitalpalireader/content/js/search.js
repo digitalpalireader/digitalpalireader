@@ -106,7 +106,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	var tabT = 'Search: \'' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + '\' in ' + st[G_searchType];
 	
-	//MD.setAttribute('title',tabT);
+	MD.getElementById('DPR').setAttribute('title',tabT);
 
 	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
 		G_searchString = G_searchString.toUpperCase();

@@ -5,7 +5,7 @@ function outputDef(which,first,frombox)
 
 // create option dropdown
 	
-	var osout = '<table cellspacing="0" cellpadding="0" width=100%><tr><td align=left valign="top"><table cellspacing="0" cellpadding="0"><tr>';
+	var osout = '<table cellspacing="0" cellpadding="0"><tr>';
 	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + G_outwords.join(' | ');
 
 	var hotlink;
@@ -14,7 +14,7 @@ function outputDef(which,first,frombox)
 	
 	if (G_outwords.length > 1 && first) {
 
-		document.getElementById('anfs').innerHTML = '<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>';
+		$('#anfs').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
 
 		// sort compounds, first by number of parts (ascending), then by number of tricks (ascending), then by size of first part (descending) 
 
@@ -71,24 +71,26 @@ function outputDef(which,first,frombox)
 				// data[0] = reference
 				// data[1] = pali word
 				// data[2] = category
+				// data[3] = short def (if avail)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
 			var dataout = toUni(G_outwords[which][0].split('-')[c]); // get the part name from the names part :)
+			var conciseCode = (data[3]?'onmouseover="showShortDef(\''+toUni(data[3])+'\')" ':'');
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
-				case '0':
-					if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
-					osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></span>';
-					break;
-				case '1':
-					if (frombox !=2 && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-					osout += '<span class="pointer" onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
-					break;
-				case '2':
-					osout += '<b style="color:' + DPR_prefs['colcpd'] + '">' + dataout + '</b>';
-					break;
-				case '3':
-					osout += '<b style="color:' + DPR_prefs['coltext'] + '">' + dataout + '</b>';
-					break;
+					case '0':
+						if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
+						osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></span>';
+						break;
+					case '1':
+						if (frombox !=2 && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
+						osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
+						break;
+					case '2':
+						osout += '<b '+conciseCode+'style="color:' + DPR_prefs['colcpd'] + '">' + dataout + '</b>';
+						break;
+					case '3':
+						osout += '<b style="color:' + DPR_prefs['coltext'] + '">' + dataout + '</b>';
+						break;
 				}
 			}
 			else { // lower match
@@ -96,12 +98,12 @@ function outputDef(which,first,frombox)
 					osout += '<br><font size="2">';
 				}
 				switch (data[2]) {
-				case '0':
-					osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
-					break;
-				case '1':
-					osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
-					break;
+					case '0':
+						osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
+						break;
+					case '1':
+						osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
+						break;
 				}
 			}
 		}
@@ -116,9 +118,8 @@ function outputDef(which,first,frombox)
 		
 	}
 	osout += (conjWord.root?'<td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate(\''+conjWord.root+'\',\'dif\',\''+conjWord.form+'\')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td>':'')+'</tr></table>';
+	$('#anfleft').html(osout);
 	
-	osout += '</td><td valign=top align=center id="anfcenter"></td><td valign=top align=right>';
-
 // add concise definitions
 	
 	var thisconcise = [];
@@ -126,10 +127,11 @@ function outputDef(which,first,frombox)
 	
 	if (G_shortdefpost[which]) {
 		thisconcise = G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$'); 
-		//dalert(thisconcise);
-		if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
+		//alert(G_outwords[which]+' '+thisconcise);
+		
+		//if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
 				
-		var concisedups = [];
+		//var concisedups = [];
 		for (x = 0; x < thisconcise.length; x++)
 		{
 			if (thisconcise[x].length == 0) { continue; }
@@ -153,26 +155,16 @@ function outputDef(which,first,frombox)
 			conciseword = conciseword.replace(/,/g, '.');
 			conciseword = toUni(conciseword);
 			
-			
-			if (!concisedups[conciseword]) {
-				if (x == 0) { var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef; } 
-				if (thisconcise.length > 1) {
-					
-					conciseoutput += '<option value="' + thisconcise[x] + ':' + conciseword + ':' + concisedef + '">' + conciseword + ': ' + condefnotype + ' (' + concisedefa[1] + ')</option>'; 
-						
-				}
-				concisedups[conciseword] = 1;
-			}		
+			G_thisConcise[conciseword] = concisedef;
+			if(x== 0) 
+				var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef;	
 		}
 		
 	}
-	//document.getElementById('difb').innerHTML += '<br>|' + thisconcise + '|';
-	if (thisconcise.length > 1) conciseoutput += '</select>';
-	if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0)) osout += '<span id=spdout>'+sdfirst+'</span>';
+	if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0)) 
+		$('#anfright').html(sdfirst);
 
-	osout += '</td></tr></table>';
-	document.getElementById('anfb').innerHTML = osout;
-	document.getElementById('anfsd').innerHTML = conciseoutput;
+	//alert(G_thisConcise);
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else DPPNXML(hotlink);
@@ -180,6 +172,12 @@ function outputDef(which,first,frombox)
 	}
 	else clearDivs('dif');
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+}
+
+var G_thisConcise = [];
+
+function showShortDef(word) {
+	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + word + '</b>: ' + G_thisConcise[word]);
 }
 
 function conciseChange(value) {
