@@ -203,7 +203,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		for (i in query) {
 			querystring=(querystring?querystring+'+':'')+query[i];
 		}
-		querystring=toVel(querystring).replace(/ /g, '_');
+		//querystring=toVel(querystring).replace(/ /g, '_');
 	}
 	
 	if(!compare) {

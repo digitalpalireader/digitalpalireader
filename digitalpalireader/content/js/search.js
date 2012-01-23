@@ -61,7 +61,6 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		var options = MD.location.href.split('?')[1].split('#')[0].split('&');
 
 		// parse options
-
 		for (i in options) {
 
 			var option = options[i].split('=');
@@ -172,7 +171,7 @@ function finishSearch() {
 	MD.getElementById('search-progress').setAttribute('collapsed',true);
 	MD.getElementById('cancel-search').setAttribute('collapsed',true);
 
-	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook + '&part=' + G_searchPart + '&rx=' + G_searchRX;
+	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook.slice(1,-1) + '&part=' + G_searchPart + '&rx=' + G_searchRX;
 
 	var mfin = MD.createElement('label');
 	mfin.setAttribute('value',(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's');
