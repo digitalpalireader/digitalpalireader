@@ -30,8 +30,27 @@ function onDocLoad() {
 
 function showBv() {
 	var abv = bv();
+	var date = new Date();
+	var day = date.getDate().toString();
+	switch (day.charAt(day.length-1)) {
+		case '1':
+			day+='st';
+			break;
+		case '2':
+			day+='nd';
+			break;
+		case '3':
+			day+='rd';
+			break;
+		default:
+			day+='th';
+			break;
+	}
+	var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December' ];
+	var today = monthNames[date.getMonth()] + ' ' + day;
+
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
-	document.getElementById('difb').innerHTML = '<b class="text">Daily Buddha Vacana:</b><p name="changecolor" valign=middle>' + abv[0].replace(/\n/g,'<br/>') + '</p>'+(!abv[1] ? '' : '<p>' + abv[1] +'</p>');
+	document.getElementById('difb').innerHTML = '<p><b class="text">Daily Buddha Vacana</b></p><p style="font-style:italic" name="changecolor">'+today+'</p><p name="changecolor">' + abv[1].join('</p><p name="changecolor">').replace(/\n/g,'<br/>') + '</p>'+(abv[2] ? '<p>-- ' + abv[2] +'</p>':'');
     document.getElementById('cdif').scrollTop=0;
 }
 
