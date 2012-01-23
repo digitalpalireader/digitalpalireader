@@ -28,30 +28,37 @@ function onDocLoad() {
 	};
 }
 
-function showBv() {
-	var abv = bv();
-	var date = new Date();
-	var day = date.getDate().toString();
-	switch (day.charAt(day.length-1)) {
-		case '1':
-			day+='st';
-			break;
-		case '2':
-			day+='nd';
-			break;
-		case '3':
-			day+='rd';
-			break;
-		default:
-			day+='th';
-			break;
+function showBv(rnd) {
+	var abv = bv(rnd);
+	var today = '';
+	if(!rnd) {
+		var date = new Date();
+		var day = date.getDate().toString();
+		switch (day.charAt(day.length-1)) {
+			case '1':
+				day+='st';
+				break;
+			case '2':
+				day+='nd';
+				break;
+			case '3':
+				day+='rd';
+				break;
+			default:
+				day+='th';
+				break;
+		}
+		var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December' ];
+		var today = monthNames[date.getMonth()] + ' ' + day;
 	}
-	var monthNames = [ 'January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December' ];
-	var today = monthNames[date.getMonth()] + ' ' + day;
 
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
-	document.getElementById('difb').innerHTML = '<p><b class="text">Daily Buddha Vacana</b></p><p style="font-style:italic" name="changecolor">'+today+'</p><p name="changecolor">' + abv[1].join('</p><p name="changecolor">').replace(/\n/g,'<br/>') + '</p>'+(abv[2] ? '<p>-- ' + abv[2] +'</p>':'');
+	document.getElementById('difb').innerHTML = '<p><b class="text">'+(rnd?'Random':'Daily')+' Buddha Vacana</b></p><p style="font-style:italic" name="changecolor">'+today+'</p><p name="changecolor">' + abv[1].join('</p><p name="changecolor">').replace(/\n/g,'<br/>') + '</p>'+(abv[2] ? '<p>-- '+(abv[3]?'<a class="green" href="javascript:void(0)" onclick="citation(\''+abv[3].replace(/^[^?]+\?/,'')+'\')">' + abv[2] +'</a>':abv[2])+'</p>':'');
     document.getElementById('cdif').scrollTop=0;
+}
+
+function citation(cite) {
+	mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.citation(cite);
 }
 
 
@@ -174,10 +181,10 @@ function showBv() {
 		<div id="tbContainer" class="chromeback" onmouseover="document.getElementById('tbOpener').style.display='none'; document.getElementById('tbContainer2').style.display='block';" onmouseout="document.getElementById('tbOpener').style.display='block'; document.getElementById('tbContainer2').style.display='none';">
 			<div id="tbOpener" class="tiny">&there4;</div>
 			<div id="tbContainer2">
-				<div id="mainToolbar" class="obutc">
-					<span id="difoutM" class="abut lbut sbut tiny" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut tiny" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut tiny"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span>
+				<div id="mainToolbar">
+					<span id="difoutM" class="abut lbut sbut tiny" title="Show Dictionary Frame (d)" onclick="moveframey('cdif')">D</span><span id="cofM" class="abut mbut tiny" title="Show Convertor Frame (c)" onclick="moveframey('cof')">C</span><span id="scfM" class="abut rbut tiny"  title="Show Textpad Frame (t)" onclick="moveframey('scf')">T</span> <span id="bvB" class="abut obut tiny"  title="Random Buddha Vacana (*)" onclick="moveframey('cdif');showBv(true)">&#8220;&#8221;</span>
 				</div>
-				<div id="auxToolbar" class="obutc"></div>
+				<div id="auxToolbar"></div>
 			</div>
 		</div>	
 	</div>

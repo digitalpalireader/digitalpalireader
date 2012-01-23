@@ -1,7 +1,9 @@
 function getLinkPlace() { // permalinks
 
 	var options = document.location.href.split('?')[1].split('#')[0]
-	
+	makeLinkPlace(options,true);
+}
+function makeLinkPlace(options,PL) {	
 	options = options.split('&');
 
 	var place,index,para,query,scroll,compare;
@@ -67,5 +69,5 @@ function getLinkPlace() { // permalinks
 		else if (option[0] == 'compare') compare = option[1];
 	}
 	if(index) loadXMLindex(index,compare);
-	else if(place) loadXMLSection(query,para,outplace,true,scroll,compare);
+	else if(place) loadXMLSection(query,para,outplace,PL,scroll,compare);
 }

@@ -21,15 +21,17 @@ function bv(rnd,static) {
 	var head = verse.getElementsByTagName('h2')[0].textContent;
 	var text = [];
 	var cite = '';
-
+	var link = '';
 	var ps = verse.getElementsByTagName('p');
 	for(i in ps) {
 		if (ps[i].className == 'text') {
 			text.push(ps[i].textContent);
 		}
 		else if (ps[i].className == 'citation') {
+			if(ps[i].getElementsByTagName('a')[0])
+				link = ps[i].getElementsByTagName('a')[0].href;
 			cite = ps[i].textContent;
 		}
 	}
-	return [head,text,cite];
+	return [head,text,cite,link];
 }

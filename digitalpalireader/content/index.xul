@@ -42,6 +42,9 @@ function getconfig() {
 	document.getElementById('dpr-index-top').contentWindow.getconfig();
 	document.getElementById('dpr-index-bottom').contentWindow.getconfig();
 }
+function citation(cite) {
+	document.getElementById('dpr-index-top').contentWindow.makeLinkPlace(cite,false);
+}
 var G_count_browsers = 1;
 var devCheck = 0;
 </script>

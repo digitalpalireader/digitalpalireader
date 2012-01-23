@@ -1,5 +1,7 @@
 
-/* for quiz */
+input:disabled {
+	background-color: #DDDDDD !important;
+}
 
 .quizb {
 position:absolute;
@@ -23,7 +25,6 @@ background-color:black;
 p.txt {
 	margin: auto;
 	font-size: 22pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-weight: bold;
 	text-align: center;
 }
@@ -32,7 +33,6 @@ p.cite  {
 	padding-bottom: 12pt;
 	margin: auto;
 	font-size: 22pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-style: italic;
 	text-align: center;
 }
@@ -45,7 +45,6 @@ p.oneDec  {
 	padding-bottom: 12pt;
 	margin: auto;
 	font-size: 14pt;
-	font-family: Gentium,  Palatino, "Times New Roman", Times,  serif;
 	font-style: italic;
 	text-align: center;
 }

@@ -648,28 +648,38 @@ for (i in words) {
 }
 */
 
-var G_oneNoun = [];
-var G_quiza = [];
+// noun common function
 
-function resetTable()  {
-	if (document.getElementById('Qshow').innerHTML == 'Hide') hideAnswers();
-	if(Drights.length == words.length) {
-		Drights = [];
-		alertFlash("Congratulations for completing all declensions!",'green');
+function getRandomNoun() {
+	$('.dect').css('background-color','');
+	$('.drag').css('background-color','');
+	G_quiza = [];
+	
+	var reg = $('#reg').prop('checked');
+	var irreg = $('#irreg').prop('checked');
+
+	for (j in yt){
+		if(yt[j][4] != 'N')
+			continue;
+		if(!reg && yt[j][9] == 'Y')
+			continue;
+		if(!irreg && yt[j][9] == 'N')
+			continue;
+		if(!/[tmf]\./.test(yt[j][5]))
+			continue;
+		G_quiza.push([yt[j],j]);
 	}
-	if(!G_quiza.length) {
-		for (j in yt){
-			if(yt[j][4] != 'N' || !/[tmf]\.[aiuāīū]/.test(yt[j][5])) // not nominal or only adjective, or irreg
-				continue;
-			G_quiza.push([yt[j],j]);
-		}
-	}
+	if(!G_quiza.length)
+		return;
 		
 	var rn=Math.floor(Math.random()*G_quiza.length);
-	while(Drights[rn] || (G_oneNoun == rn))
+	while(G_oneNoun[3] == rn)
 		var rn=Math.floor(Math.random()*G_quiza.length);
 
 	var yto = G_quiza[rn][0];
+	var word = G_quiza[rn][1];
+	var stem = yto[8];
+
 	var yto5 = yto[5].split(',');
 	for(i in yto5) {
 		if(/[tmf]\./.test(yto5[i])) {
@@ -681,28 +691,48 @@ function resetTable()  {
 	
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = iI[type1];
-	if(type2[1])
+	if(type2[1] == '--') { // irreg
+		yto[8] = '';
+		var noun = iNI[toUni(word)][yto[5].replace(/\..+/,'')];
+	}
+	else if(type2[1])
 		var noun = iN[type2[1]];
 	else if(type2[2])
 		var noun = iN[type2[2]];
 	else if(type2[3])
 		var noun = iN[type2[3]];
 	else {
-		return resetTable();
+		return getRandomNoun();
 	}
 	
-	var outword = yto[2].replace(/\`/g, '"');
-	outword = outword.replace(/,/g, '.');
-	if(/[tmf]\.[aiuāīū]$/.test(yto[5])) outword = outword+outword.charAt(outword.length-1);
-	outword = toUni(outword);
+
+	G_oneNoun = [word,yto,noun,rn];
+
+}
+
+
+// noun declension
+
+var G_oneNoun = [];
+var G_quiza = [];
+
+function resetTable()  {
+	if (document.getElementById('Qshow').innerHTML == 'Hide') hideAnswers();
+
+	getRandomNoun();
+	
+	var word = G_oneNoun[0];
+	var yto = G_oneNoun[1];
+	
+	var meaning = yto[2].replace(/\`/g, '"');
+	meaning = meaning + ' (' + yto[1] + ')';
+	meaning = toUni(meaning);
+
+	//if(/[tmf]\.[aiuāīū]$/.test(yto[5])) word = word+word.charAt(word.length-1);
 		
-	var des = [G_quiza[rn][1],outword + ' (' + yto[1] + ')'];
 
-	document.getElementById('QwhichT').innerHTML = des[0];
-	document.getElementById('QwhichC').innerHTML = des[1];
-	var stem = yto[8];
-
-	G_oneNoun = [stem,yto,noun];
+	document.getElementById('QwhichT').innerHTML = toUni(word);
+	document.getElementById('QwhichC').innerHTML = meaning;
 
 	addStems();
 	clearAnswers();
@@ -710,12 +740,14 @@ function resetTable()  {
 }
 
 function addStems() {
-	var stem = G_oneNoun[0];
+	var stem = G_oneNoun[1][8];
 	var noun = G_oneNoun[2];
 	for (i in decls) {
 		document.getElementById(decls[i]+'s').innerHTML = stem;
-		if (noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]] == '') document.getElementById(decls[i]+'t').disabled = 'true';
-		else document.getElementById(decls[i]+'t').disabled = ''; 
+		if (!noun[declsToNo[decls[i]][1]] || !noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]]) {
+			$('#'+decls[i]+'t').attr('disabled','true');
+		}
+		else $('#'+decls[i]+'t').removeAttr('disabled');
 	}
 }
 
@@ -723,45 +755,34 @@ var Drights = [];
 
 function checkAnswers() {
 	var wrong = 0;
-	var stem = G_oneNoun[0];
+	var stem = G_oneNoun[1][8];
 	var noun = G_oneNoun[2];
 	for (i in decls) {
-		var onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
+		var onn = null;
+		if(noun[declsToNo[decls[i]][1]])
+			onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
 		var right = 0;
-		var thisa = document.getElementById(decls[i]+'t');
+		var thisa =$('#'+decls[i]+'t');
 
-		if(/,/.test(thisa.value)) {
-			var vals = thisa.value.replace(/ /g,'').split(',');
-			if(vals.join(',') == onn.join(',')) {
-				thisa.style.backgroundColor = '#5F5';
-				right=1;
-			}
-			else {
-				right = 0;
-				thisa.style.backgroundColor = '#F55';
-			}
+		if (!onn) {
+			thisa.css('background-color','');
+			right = 1;
+			continue;
 		}
-		else {
-			if (!onn) {
-				thisa.style.backgroundColor = '';
+		for (j in onn) {
+			onn[j] = onn[j].replace(/[()]/g,'');
+			if (onn[j] == '') {
+				thisa.css('background-color','');
 				right = 1;
 				break;
 			}
-			for (j in onn) {
-				onn[j] = onn[j].replace(/[()]/g,'');
-				if (onn[j] == '') {
-					thisa.style.backgroundColor = '';
-					right = 1;
-					break;
-				}
-				if (thisa.value == onn[j]) {
-					thisa.style.backgroundColor = '#5F5';
-					right = 1;
-					break;
-				}
-				else {
-					thisa.style.backgroundColor = '#F55';
-				}
+			if (thisa.val() == onn[j]) {
+				thisa.css('background-color','#5F5');
+				right = 1;
+				break;
+			}
+			else {
+				thisa.css('background-color','#F55');
 			}
 		}
 		if (right == 0) wrong = 1;
@@ -777,7 +798,7 @@ function checkAnswers() {
 function showRights() {
 	$('#Qcorrects').html('');
 	for (i in Drights) {
-		document.getElementById('Qcorrects').innerHTML += G_oneNoun[0]+'-<br />';
+		document.getElementById('Qcorrects').innerHTML += G_oneNoun[1][8]+'-<br />';
 	}
 	if ($('#Qcorrects').html() != '') {
 		$('#corrects').show();
@@ -798,10 +819,12 @@ function showAnswers() {
 	
 	$('#Qshow').html('Hide');
 	document.getElementById('Qshow').onclick = function () { hideAnswers() };
-	var stem = G_oneNoun[0];
+	var stem = G_oneNoun[1][8];
 	var noun = G_oneNoun[2];
 	for (i in decls) {
-		var onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
+		var onn = null;
+		if(noun[declsToNo[decls[i]][1]])
+			onn = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
 		if (!onn) {
 			document.getElementById(decls[i]+'t').style.backgroundColor = '';
 			document.getElementById(decls[i]+'t').style.display = 'none';
@@ -829,26 +852,40 @@ var G_oneDec = [0,0,0];
 function getDeclension() {
 	$('#declension')[0].selectedIndex = -1;
 	$('#number')[0].selectedIndex = -1;
-	var rn=Math.floor(Math.random()*words.length);
-	var rn2=Math.floor(Math.random()*decls.length);
-	var stem = words[rn][0];
-	var alts = correctDec[stem][decls[rn2]];
+
+	getRandomNoun();
+	
+	var yto = G_oneNoun[1];
+	var stem = yto[8];
+	var noun = G_oneNoun[2];
+
+	var rn=Math.floor(Math.random()*declb.length);
+	var rn2=Math.floor(Math.random()*2);
+	var alts = noun[rn2][declb[rn]];
 	var rn3=Math.floor(Math.random()*alts.length);
 	var oneWord = alts[rn3];
 	if(!oneWord) {
 		return getDeclension();
 	}
-	G_oneDec = [stem,oneWord,rn2];
-	$('#QwhichT').html(words[rn][2]);
-	$('#QwhichC').html(words[rn][3]);
-	$('#oneDec').html(alts[rn3]);
+	G_oneDec = [stem,oneWord,rn,rn2];
+
+	var word = G_oneNoun[0];
+	var meaning = yto[2].replace(/\`/g, '"');
+	meaning = meaning + ' (' + yto[1] + ')';
+	meaning = toUni(meaning);
+
+	$('#QwhichT').html(toUni(word));
+	$('#QwhichC').html(meaning);
+
+	$('#oneDec').html(stem+alts[rn3]);
 }
 
 
 function checkAnswer2() {
 	var dec = $('#declension')[0].selectedIndex;
 	var num = $('#number')[0].selectedIndex;
-	var alts = correctDec[G_oneDec[0]][declNo[dec][num]];
+	var noun = G_oneNoun[2];
+	var alts = noun[num][declb[dec]];
 	for(i in alts) {
 		if(alts[i] == G_oneDec[1]) {
 			alertFlash("That's correct!",'green');
@@ -881,27 +918,32 @@ function showAnswerBounce(cnt) {
 
 // moveable
 
-
-
 function resetMTable()  {
-	if(Drights.length == words.length) {
-		Drights = [];
-		alertFlash("Congratulations for completing all declensions!",'green');
-	}
+	
+	getRandomNoun();
+	var word = G_oneNoun[0];
+	var stem = G_oneNoun[1][8];
+	var noun = G_oneNoun[2];
+	var yto = G_oneNoun[1];
+
+	var meaning = yto[2].replace(/\`/g, '"');
+	meaning = meaning + ' (' + yto[1] + ')';
+	meaning = toUni(meaning);
+
+	document.getElementById('QwhichT').innerHTML = toUni(word);
+	document.getElementById('QwhichC').innerHTML = meaning;
 		
-	var rn=Math.floor(Math.random()*words.length);
-	while(Drights[rn] || (G_oneNoun == rn))
-		var rn=Math.floor(Math.random()*words.length);
-	document.getElementById('QwhichT').innerHTML = words[rn][2];
-	document.getElementById('QwhichC').innerHTML = words[rn][3];
-	var stem = words[rn][0];
-
-	G_oneNoun = [rn,stem];
-
-    for (i in decls){
-		var html = correctDec[stem][decls[i]].join(', ');
-        $('#drag'+i).html(html?html:'&nbsp;');
-    }
+	for (i in decls) {
+		if(noun[declsToNo[decls[i]][1]] && noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]])
+			var alts = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
+		else {
+			$('#drag'+i).html('&nbsp;');
+			continue;
+		}
+		if(alts)
+			var rn=Math.floor(Math.random()*alts.length);
+		$('#drag'+i).html(alts?stem+alts[rn].replace(/[()]/g,''):'&nbsp;');
+	}
 
 	var top = decls.length;
     if(top) while(--top) {
@@ -926,19 +968,32 @@ function resetMTable()  {
 
 function checkMAnswers() {
     var wrong = 0;
-    for (i in decls){
-		var right = 0;
-		var thisa = $('#decr'+i+' div');
+	var stem = G_oneNoun[1][8];
+	var noun = G_oneNoun[2];
 
-        if(thisa.html().replace(/&nbsp;/g,'') == correctDec[G_oneNoun[1]][decls[i]].join(', ')) {
-			thisa.css('background-color','#5F5');
-			right=1;
-		}
+	loop:
+    for (i in decls){
+		var thisa = $('#decr'+i+' div');
+		
+		if(noun[declsToNo[decls[i]][1]] && noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]])
+			var narr = noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]];
 		else {
-			right = 0;
-			thisa.css('background-color','#F55');
+			thisa.css('background-color','');
+			continue loop;
 		}
-		if (right == 0) wrong = 1;
+		if(!narr) {
+				thisa.css('background-color','');
+				continue loop;
+		}
+		for(j in narr) {
+			var thisRight = (narr?stem+narr[j].replace(/[()]/g,''):'&nbsp;');
+			if(thisa.html() === thisRight) {
+				thisa.css('background-color','#5F5');
+				continue loop;
+			}
+		}
+		thisa.css('background-color','#F55');
+		wrong = 1;
 	}
 	if (wrong == 0) {
 		alertFlash("Well done!",'green');
@@ -957,7 +1012,128 @@ function resetMColors() {
 	}	
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
 // verbs
+
+// verb common function
+
+function getRandomVerb() {
+	$('.dect').css('background-color','');
+	$('.drag').css('background-color','');
+	G_quiza = [];
+	
+	var reg = $('#reg').prop('checked');
+	var irreg = $('#irreg').prop('checked');
+	var pres = $('#pres').prop('checked');
+	var imp = $('#imp').prop('checked');
+	var opt = $('#opt').prop('checked');
+	var fut = $('#fut').prop('checked');
+	
+	if(!reg && !irreg)
+		return;
+	if(!pres && !imp && !opt)
+		return;
+	
+	for (j in yt){
+		if(yt[j][4] != 'V')
+			continue;
+		if(!/^ac\.pres/.test(yt[j][5]))
+			continue;
+		if(!reg && yt[j][9] == 'Y')
+			continue;
+		if(!irreg && yt[j][9] == 'N')
+			continue;
+		G_quiza.push([yt[j],j]);
+	}
+	if(!G_quiza.length)
+		return;
+		
+	var rn=Math.floor(Math.random()*G_quiza.length);
+	while(G_oneVerb[3] == rn)
+		var rn=Math.floor(Math.random()*G_quiza.length);
+
+	var yto = G_quiza[rn][0];
+	var word = G_quiza[rn][1];
+	var stem = yto[8];
+/*
+	var yto5 = yto[5].split(',');
+	for(i in yto5) {
+		if(/^ac\.pres/.test(yto5[i])) {
+			yto[5] = yto5[i];
+			break;
+		}
+	}
+*/	
+	G_verbTenses = [];
+	if(pres) G_verbTenses.push('pres');
+	if(imp) G_verbTenses.push('imp');
+	if(opt) G_verbTenses.push('opt');
+	if(opt) G_verbTenses.push('fut');
+
+	var rn2=Math.floor(Math.random()*G_verbTenses.length);
+	
+	var type = yto[5].replace(/.+\./,'');
+	if(type.charAt(0) == 'x') { // irreg
+		yto[8] = '';
+		var verb = getRandomIVerbTense(toUni(word),iVI[toUni(word)],rn2);
+		if(!verb)
+			return getRandomVerb();
+	}
+	else {
+		var verb = getRandomVerbTense(type,rn2);
+		if(!verb)
+			return getRandomVerb();
+	}
+	
+
+	G_oneVerb = [word,yto,verb,rn,rn2];
+
+}
+
+var G_verbTenses = [];
+
+function getRandomVerbTense(type,rn) {
+	switch(G_verbTenses[rn]) {
+		case 'pres':
+			if(iV['ac.pres.'+type])
+				return iV['ac.pres.'+type];
+		case 'imp':
+			if(iV['ac.impv.'+type])
+				return iV['ac.impv.'+type];
+		default:
+			if(iV['ac.'+G_verbTenses[rn]+'.'+type])
+				return iV['ac.'+G_verbTenses[rn]+'.'+type];
+	}
+}
+function getRandomIVerbTense(word,verb,rn) {
+	switch(G_verbTenses[rn]) {
+		case 'pres':
+			if(verb[word]['65535'])
+				return verb[word]['65535'];
+			else if(verb['def']['65535'])
+				return verb['def']['65535'];
+		case 'imp':
+			if(verb['def']['1'])
+				return verb['def']['1'];
+		case 'opt':
+			if(verb['def']['4'])
+				return verb['def']['4'];
+		case 'fut':
+			if(verb['def']['3'])
+				return verb['def']['3'];
+	}
+}
 
 var verbs = [];
 verbs.push(['bhū','bhava','being']);
@@ -974,12 +1150,12 @@ verbs.push(['cur','core','stealing']);
 var vdtypes = ['thirds','thirdp','seconds','secondp','firsts','firstp'];
 
 var vdtypesNo = [];
-vdtypesNo.push([0,0]);
-vdtypesNo.push([0,1]);
-vdtypesNo.push([1,0]);
-vdtypesNo.push([1,1]);
-vdtypesNo.push([2,0]);
-vdtypesNo.push([2,1]);
+vdtypesNo.push(['3rd',0]);
+vdtypesNo.push(['3rd',1]);
+vdtypesNo.push(['2nd',0]);
+vdtypesNo.push(['2nd',1]);
+vdtypesNo.push(['1st',0]);
+vdtypesNo.push(['1st',1]);
 
 var vdecs = [];
 vdecs.push([['ti'],['nti'],['si'],['tha'],['ami'],['ama'],1,'present']);  // last one is 0 for non-present system, 1 for pres system
@@ -993,38 +1169,16 @@ var G_VRights = [];
 
 function resetVTable()  {
 	if ($('#Qshow').html() == 'Hide') hideVAnswers();
-	
-	// get rights length
-	
-	var rl = 0;
-	for (i in G_VRights) {
-		rl+=G_VRights[i].length;
-	}
-	
-	if(rl == verbs.length*vdecs.length) {
-		G_VRights = [];
-		alertFlash('Congratulations, you have completed the declension quiz!','green');
-	}
-	var rn=Math.floor(Math.random()*verbs.length);
-	var rn1=Math.floor(Math.random()*vdecs.length);
-	//var rn = 4;
-	if(G_VRights[rn]) {
-		while(G_VRights[rn][rn1] || (G_oneVerb[0] == rn && G_oneVerb[1] == rn1)) {
-			var rn=Math.floor(Math.random()*verbs.length);
-			var rn1=Math.floor(Math.random()*vdecs.length);
-		}
-	}
+	getRandomVerb();
 
-	var stem = verbs[rn][vdecs[rn1][6]];
+	var stem = G_oneVerb[1][8];
 
-	G_oneVerb = [rn,rn1,stem];
+	$('#QwhichT').html(G_oneVerb[1][1]);
+	$('#QwhichC').html(G_oneVerb[1][2]);
 
-	$('#QwhichT').html('√'+verbs[rn][0]);
-	$('#QwhichC').html('in regards to '+verbs[rn][2]);
+	$('#oneDec').html(vdecs[G_oneVerb[4]][7]);
 
-	$('#oneDec').html(vdecs[rn1][7]);
-
-	//addVStems(stem,rn);
+	addVStems(stem);
 
 	clearVAnswers();
 	//showVRights();
@@ -1037,25 +1191,25 @@ function clearVAnswers() {
 }			
 function addVStems() {
 	for (i in vdtypes) {
-		document.getElementById(vdtypes[i]).innerHTML = G_oneVerb[2];
+		$('#'+vdtypes[i]).html(G_oneVerb[1][8]);
 	}
 }
 function showVAnswers() {
 	
 	$('#Qshow').html('Hide');
 	document.getElementById('Qshow').onclick = function () { hideVAnswers() };
-	var rn = G_oneVerb[0];
-	var rn1 = G_oneVerb[1];
-	var stem = G_oneVerb[2];
+
+	var stem = G_oneVerb[1][8];
 	for (i in vdtypes) {
 		$('#'+vdtypes[i]+'t').css('background-color','');
 		$('#'+vdtypes[i]+'t').hide();
 		
-		var stems = '';
-		for (j in vdecs[rn1][i])
-			stems = (stems?stems+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
-			
-		$('#'+vdtypes[i]).html(stems);
+		var forms = '';
+		if( G_oneVerb[2][vdtypesNo[i][0]] && G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]]) {
+			var alts = G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]];
+			forms = stem+alts.join(', '+stem);
+		}
+		$('#'+vdtypes[i]).html(forms);
 	}
 }
 
@@ -1067,80 +1221,48 @@ function hideVAnswers() {
 		$('#'+vdtypes[i]+'t').show();
 		$('#'+vdtypes[i]).html('');
 	}
+	addVStems();
 }
 
 function checkVAnswers() {
 	var wrong = 0;
-	
-	var rn = G_oneVerb[0];
-	var rn1 = G_oneVerb[1];
-	var stem = G_oneVerb[2];
 
 	for (i in vdtypes) {
 		var right = 0;
 		var thisa = $('#'+vdtypes[i]+'t');
-		if(/,/.test(thisa.val())) {
-			if(vdecs[rn1][i].length == 1)
-				right = 0;
-			else {
-				var vals = thisa.val().replace(/ /g,'').split(',');
-				var rvals = vdecs[rn1][i];
-				for(k in rvals) {
-					rvals[k] = convertVerb(stem,rvals[k]);
-				}
-				if(vals.join(',') == rvals.join(',')) {
-					thisa.css('background-color','#5F5');
-					right=1;
-				}
-				else {
-					right = 0;
-					thisa.css('background-color','#F55');
-				}
-			}
+		var onn = null;
+		if( G_oneVerb[2][vdtypesNo[i][0]] && G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]])
+			onn = G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]];
+		if (!onn) {
+			thisa.css('background-color','');
+			right = 1;
+			continue;
 		}
-		else {
-			for (j in vdecs[rn1][i]) {
-				if (thisa.val() == convertVerb(stem,vdecs[rn1][i][j])) {
-					thisa.css('background-color','#5F5');
-					right = 1;
-					break;
-				}
-				else {
-					thisa.css('background-color','#F55');
-				}
+		for (j in onn) {
+			onn[j] = onn[j].replace(/[()]/g,'');
+			if (onn[j] == '') {
+				thisa.css('background-color','');
+				right = 1;
+				break;
+			}
+			if (thisa.val() == onn[j]) {
+				thisa.css('background-color','#5F5');
+				right = 1;
+				break;
+			}
+			else {
+				thisa.css('background-color','#F55');
 			}
 		}
 		if (right == 0) wrong = 1;
 	}
 	if (wrong == 0) {
-		if(!G_VRights[rn]) G_VRights[rn] = [];
-		G_VRights[rn][rn1] = 1;
 		alertFlash("Well done!",'green');
 		resetVTable();
 	}	
-	showVRights();
 }
 
-function showVRights() {
-	$('#Qcorrects').html('');
-	if(G_VRights.length == 0) {
-		$('#corrects').hide();
-		return;
-	}
-	for (i in G_VRights) {
-		var rn = i;
-		for (j in G_VRights[i]) {
-			var rn1 = j;
-			$('#Qcorrects').html($('#Qcorrects').html()+ '√'+verbs[rn][0]+' - '+vdecs[rn1][7]+'<br />');
-		}
-	}
-	if ($('#Qcorrects').html() != '') {
-		$('#corrects').show();
-		$('#Qcorrects').html($('#Qcorrects').html()+'<br /><span class="abut obut tiny" title="Reset right answers" onclick="rights = []; showRights();" id="resetRights">Reset</span>');
-		return;
-	}
-	$('#corrects').hide();
-}
+
 
 var G_oneVDec = [];
 
