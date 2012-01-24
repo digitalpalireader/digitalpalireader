@@ -6,19 +6,23 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<tabbox class="chromeback" flex="1">
 		<tabs class="chromeback">
-			<tab class="chromeback" label="Paradigms"/>
-			<tab class="chromeback" label="Individual"/>
-			<tab class="chromeback" label="Shuffle"/>
+			<tab class="chromeback" onmouseup="document.getElementById('quiz-browser-1').contentDocument.getElementById('thirdst').focus()" label="Paradigms"/>
+			<tab class="chromeback" onmouseup="document.getElementById('quiz-browser-2').contentDocument.getElementById('QcheckAns').focus()" label="Individual"/>
+			<tab class="chromeback" onmouseup="document.getElementById('quiz-browser-3').contentDocument.getElementById('QcheckAns').focus()" label="Shuffle"/>
+			<tab class="chromeback" onmouseup="document.getElementById('quiz-browser-4').contentDocument.getElementById('answert').focus()" label="English"/>
 		</tabs>
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="paradigms">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-verb.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="quiz-browser-1" src="quiz-verb.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="individual">
 				<browser disablehistory="true" type="content" id="quiz-browser-2" src="quiz-verb-two.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="shuffle">
 				<browser disablehistory="true" type="content" id="quiz-browser-3" src="quiz-verb-three.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="english">
+				<browser disablehistory="true" type="content" id="quiz-browser-4" src="quiz-verb-four.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

@@ -99,6 +99,12 @@ function newquizE() {
 		resetMVTable();
 	}
 
+	// english verbs
+
+	function newVEquiz() {
+		resetVETable();
+	}
+
 function quizme() {
 	
 	// remember rights
@@ -337,243 +343,6 @@ function clearrightsE() {
 	writeFile("DPTESTE","","UTF-8");
 }
 
-var correctDec = [];
-
-correctDec['ratt'] = [];
-correctDec['ratt']['nomSin'] = ['ratti'];
-correctDec['ratt']['nomPl'] = ['rattiyo','rattī'];
-correctDec['ratt']['accSin'] = ['rattiṃ'];
-correctDec['ratt']['accPl'] = ['rattiyo','rattī'];
-correctDec['ratt']['insSin'] = ['rattiyā'];
-correctDec['ratt']['insPl'] = ['rattīhi'];
-correctDec['ratt']['datSin'] = ['rattiyā'];
-correctDec['ratt']['datPl'] = ['rattīnaṃ'];
-correctDec['ratt']['ablSin'] = ['rattiyā'];
-correctDec['ratt']['ablPl'] = ['rattīhi'];
-correctDec['ratt']['genSin'] = ['rattiyā'];
-correctDec['ratt']['genPl'] = ['rattīnaṃ'];
-correctDec['ratt']['locSin'] = ['rattiyā','rattiyaṃ'];
-correctDec['ratt']['locPl'] = ['rattīsu'];
-correctDec['ratt']['vocSin'] = ['ratti'];
-correctDec['ratt']['vocPl'] = ['rattiyo','rattī'];
-	
-correctDec['sāl'] = [];
-correctDec['sāl']['nomSin'] = ['sālā'];
-correctDec['sāl']['nomPl'] = ['sālā','sālāyo'];
-correctDec['sāl']['accSin'] = ['sālaṃ'];
-correctDec['sāl']['accPl'] = ['sālā','sālāyo'];
-correctDec['sāl']['insSin'] = ['sālāya'];
-correctDec['sāl']['insPl'] = ['sālāhi'];
-correctDec['sāl']['datSin'] = ['sālāya'];
-correctDec['sāl']['datPl'] = ['sālānaṃ'];
-correctDec['sāl']['ablSin'] = ['sālāya'];
-correctDec['sāl']['ablPl'] = ['sālāhi'];
-correctDec['sāl']['genSin'] = ['sālāya'];
-correctDec['sāl']['genPl'] = ['sālānaṃ'];
-correctDec['sāl']['locSin'] = ['sālāya','sālāyaṃ'];
-correctDec['sāl']['locPl'] = ['sālāsu'];
-correctDec['sāl']['vocSin'] = ['sāle'];
-correctDec['sāl']['vocPl'] = ['sālā','sālāyo'];
-
-correctDec['nad'] = [];
-correctDec['nad']['nomSin'] = ['nadī'];
-correctDec['nad']['nomPl'] = ['nadiyo','nadī'];
-correctDec['nad']['accSin'] = ['nadiṃ'];
-correctDec['nad']['accPl'] = ['nadiyo','nadī'];
-correctDec['nad']['insSin'] = ['nadiyā'];
-correctDec['nad']['insPl'] = ['nadīhi'];
-correctDec['nad']['datSin'] = ['nadiyā'];
-correctDec['nad']['datPl'] = ['nadīnaṃ'];
-correctDec['nad']['ablSin'] = ['nadiyā'];
-correctDec['nad']['ablPl'] = ['nadīhi'];
-correctDec['nad']['genSin'] = ['nadiyā'];
-correctDec['nad']['genPl'] = ['nadīnaṃ'];
-correctDec['nad']['locSin'] = ['nadiyā','nadiyaṃ'];
-correctDec['nad']['locPl'] = ['nadīsu'];
-correctDec['nad']['vocSin'] = ['nadi'];
-correctDec['nad']['vocPl'] = ['nadiyo','nadī'];
-
-correctDec['dhamm'] = [];
-correctDec['dhamm']['nomSin'] = ['dhammo'];
-correctDec['dhamm']['nomPl'] = ['dhammā'];
-correctDec['dhamm']['accSin'] = ['dhammaṃ'];
-correctDec['dhamm']['accPl'] = ['dhamme'];
-correctDec['dhamm']['insSin'] = ['dhammena'];
-correctDec['dhamm']['insPl'] = ['dhammehi'];
-correctDec['dhamm']['datSin'] = ['dhammāya','dhammassa'];
-correctDec['dhamm']['datPl'] = ['dhammānaṃ'];
-correctDec['dhamm']['ablSin'] = ['dhammā','dhammasmā','dhammamhā'];
-correctDec['dhamm']['ablPl'] = ['dhammehi'];
-correctDec['dhamm']['genSin'] = ['dhammassa'];
-correctDec['dhamm']['genPl'] = ['dhammānaṃ'];
-correctDec['dhamm']['locSin'] = ['dhamme','dhammasmiṃ','dhammamhi'];
-correctDec['dhamm']['locPl'] = ['dhammesu'];
-correctDec['dhamm']['vocSin'] = ['dhamma'];
-correctDec['dhamm']['vocPl'] = ['dhammā'];
-
-correctDec['mun'] = [];
-correctDec['mun']['nomSin'] = ['muni'];
-correctDec['mun']['nomPl'] = ['munayo','munī'];
-correctDec['mun']['accSin'] = ['muniṃ'];
-correctDec['mun']['accPl'] = ['munayo','munī'];
-correctDec['mun']['insSin'] = ['muninā'];
-correctDec['mun']['insPl'] = ['munīhi'];
-correctDec['mun']['datSin'] = ['munino','munissa'];
-correctDec['mun']['datPl'] = ['munīnaṃ'];
-correctDec['mun']['ablSin'] = ['muninā','munismā','munimhā'];
-correctDec['mun']['ablPl'] = ['munīhi'];
-correctDec['mun']['genSin'] = ['munino','munissa'];
-correctDec['mun']['genPl'] = ['munīnaṃ'];
-correctDec['mun']['locSin'] = ['munismiṃ','munimhi'];
-correctDec['mun']['locPl'] = ['munīsu'];
-correctDec['mun']['vocSin'] = ['muni'];
-correctDec['mun']['vocPl'] = ['munayo','munī'];
-
-correctDec['bandh'] = [];
-correctDec['bandh']['nomSin'] = ['bandhu'];
-correctDec['bandh']['nomPl'] = ['bandhavo','bandhū'];
-correctDec['bandh']['accSin'] = ['bandhuṃ'];
-correctDec['bandh']['accPl'] = ['bandhavo','bandhū'];
-correctDec['bandh']['insSin'] = ['bandhunā'];
-correctDec['bandh']['insPl'] = ['bandhūhi'];
-correctDec['bandh']['datSin'] = ['bandhuno','bandhussa'];
-correctDec['bandh']['datPl'] = ['bandhūnaṃ'];
-correctDec['bandh']['ablSin'] = ['bandhunā','bandhusmā','bandhumhā'];
-correctDec['bandh']['ablPl'] = ['bandhūhi'];
-correctDec['bandh']['genSin'] = ['bandhuno','bandhussa'];
-correctDec['bandh']['genPl'] = ['bandhūnaṃ'];
-correctDec['bandh']['locSin'] = ['bandhusmiṃ','bandhumhi'];
-correctDec['bandh']['locPl'] = ['bandhūsu'];
-correctDec['bandh']['vocSin'] = ['bandhu'];
-correctDec['bandh']['vocPl'] = ['bandhavo','bandhū'];
-
-correctDec['rūp'] = [];
-correctDec['rūp']['nomSin'] = ['rūpaṃ'];
-correctDec['rūp']['nomPl'] = ['rūpāni','rūpā'];
-correctDec['rūp']['accSin'] = ['rūpaṃ'];
-correctDec['rūp']['accPl'] = ['rūpāni','rūpe'];
-correctDec['rūp']['insSin'] = ['rūpena'];
-correctDec['rūp']['insPl'] = ['rūpehi'];
-correctDec['rūp']['datSin'] = ['rūpāya','rūpassa'];
-correctDec['rūp']['datPl'] = ['rūpānaṃ'];
-correctDec['rūp']['ablSin'] = ['rūpā','rūpasmā','rūpamhā'];
-correctDec['rūp']['ablPl'] = ['rūpehi'];
-correctDec['rūp']['genSin'] = ['rūpassa'];
-correctDec['rūp']['genPl'] = ['rūpānaṃ'];
-correctDec['rūp']['locSin'] = ['rūpe','rūpasmiṃ','rūpamhi'];
-correctDec['rūp']['locPl'] = ['rūpesu'];
-correctDec['rūp']['vocSin'] = ['rūpa'];
-correctDec['rūp']['vocPl'] = ['rūpāni','rūpā'];
-
-correctDec['cakkh'] = [];
-correctDec['cakkh']['nomSin'] = ['cakkhu','cakkhuṃ'];
-correctDec['cakkh']['nomPl'] = ['cakkhūni','cakkhū'];
-correctDec['cakkh']['accSin'] = ['cakkhu','cakkhuṃ'];
-correctDec['cakkh']['accPl'] = ['cakkhūni','cakkhū'];
-correctDec['cakkh']['insSin'] = ['cakkhunā'];
-correctDec['cakkh']['insPl'] = ['cakkhūhi'];
-correctDec['cakkh']['datSin'] = ['cakkhuno','cakkhussa'];
-correctDec['cakkh']['datPl'] = ['cakkhūnaṃ'];
-correctDec['cakkh']['ablSin'] = ['cakkhunā','cakkhusmā','cakkhumhā'];
-correctDec['cakkh']['ablPl'] = ['cakkhūhi'];
-correctDec['cakkh']['genSin'] = ['cakkhuno','cakkhussa'];
-correctDec['cakkh']['genPl'] = ['cakkhūnaṃ'];
-correctDec['cakkh']['locSin'] = ['cakkhusmiṃ','cakkhumhi'];
-correctDec['cakkh']['locPl'] = ['cakkhūsu'];
-correctDec['cakkh']['vocSin'] = ['cakkhu','cakkhuṃ'];
-correctDec['cakkh']['vocPl'] = ['cakkhūni','cakkhū'];
-
-correctDec['ma'] = [];
-correctDec['ma']['nomSin'] = ['ahaṃ'];
-correctDec['ma']['nomPl'] = ['mayaṃ','amhe'];
-correctDec['ma']['accSin'] = ['maṃ','mamaṃ'];
-correctDec['ma']['accPl'] = ['amhe','asme','asmākaṃ','amhākaṃ','amhaṃ'];
-correctDec['ma']['insSin'] = ['mayā'];
-correctDec['ma']['insPl'] = ['amhehi'];
-correctDec['ma']['datSin'] = ['mama','mayhaṃ','mamaṃ','amhaṃ'];
-correctDec['ma']['datPl'] = ['amhākaṃ','asmākaṃ','amhaṃ'];
-correctDec['ma']['ablSin'] = ['mayā'];
-correctDec['ma']['ablPl'] = ['amhehi'];
-correctDec['ma']['genSin'] = ['mama','mayhaṃ','mamaṃ','amhaṃ'];
-correctDec['ma']['genPl'] = ['amhākaṃ','asmākaṃ','amhaṃ'];
-correctDec['ma']['locSin'] = ['mayi'];
-correctDec['ma']['locPl'] = ['amhesu'];
-correctDec['ma']['vocSin'] = [''];
-correctDec['ma']['vocPl'] = [''];
-
-correctDec['tva'] = [];
-correctDec['tva']['nomSin'] = ['tvaṃ','tuvaṃ'];
-correctDec['tva']['nomPl'] = ['tumhe'];
-correctDec['tva']['accSin'] = ['tvaṃ','taṃ','tuvaṃ'] ;
-correctDec['tva']['accPl'] = ['tumhe','tumhākaṃ'];
-correctDec['tva']['insSin'] = ['tvayā','tayā'];
-correctDec['tva']['insPl'] = ['tumhehi','tumhebhi'];
-correctDec['tva']['datSin'] = ['tava','tuyhaṃ','tavaṃ','tumhaṃ'];
-correctDec['tva']['datPl'] = ['tumhākaṃ','tumhaṃ'];
-correctDec['tva']['ablSin'] = ['tvayā'];
-correctDec['tva']['ablPl'] = ['tumhehi','tumhebhi'];
-correctDec['tva']['genSin'] = ['tava','tuyhaṃ','tavaṃ','tumhaṃ'];
-correctDec['tva']['genPl'] = ['tumhākaṃ','tumhaṃ'];
-correctDec['tva']['locSin'] = ['tvayi','tayi'];
-correctDec['tva']['locPl'] = ['tumhesu'];
-correctDec['tva']['vocSin'] = [''];
-correctDec['tva']['vocPl'] = [''];
-
-correctDec['sa'] = [];
-correctDec['sa']['nomSin'] = ['sā'];
-correctDec['sa']['nomPl'] = ['tā'];
-correctDec['sa']['accSin'] = ['taṃ'];
-correctDec['sa']['accPl'] = ['tā'];
-correctDec['sa']['insSin'] = ['tāya'];
-correctDec['sa']['insPl'] = ['tāhi'];
-correctDec['sa']['datSin'] = ['tāya','tassā','tissā','tissāya'];
-correctDec['sa']['datPl'] = ['tāsaṃ','tāsānaṃ'];
-correctDec['sa']['ablSin'] = ['tāya'];
-correctDec['sa']['ablPl'] = ['tāhi'];
-correctDec['sa']['genSin'] = ['tāya','tassā','tissā','tissāya'];
-correctDec['sa']['genPl'] = ['tāsaṃ','tāsānaṃ'];
-correctDec['sa']['locSin'] = ['tāya','tayaṃ','tissaṃ'];
-correctDec['sa']['locPl'] = ['tāsu'];
-correctDec['sa']['vocSin'] = [''];
-correctDec['sa']['vocPl'] = [''];
-
-correctDec['so'] = [];
-correctDec['so']['nomSin'] = ['so','sa'];
-correctDec['so']['nomPl'] = ['te'];
-correctDec['so']['accSin'] = ['taṃ'];
-correctDec['so']['accPl'] = ['te'];
-correctDec['so']['insSin'] = ['tena'];
-correctDec['so']['insPl'] = ['tehi','tebhi'];
-correctDec['so']['datSin'] = ['tassa'];
-correctDec['so']['datPl'] = ['tesaṃ','tesānaṃ'];
-correctDec['so']['ablSin'] = ['tasmā','tamhā'];
-correctDec['so']['ablPl'] = ['tehi','tebhi'];
-correctDec['so']['genSin'] = ['tassa'];
-correctDec['so']['genPl'] = ['tesaṃ','tesānaṃ'];
-correctDec['so']['locSin'] = ['tasmiṃ','tamhi'];
-correctDec['so']['locPl'] = ['tesu'];
-correctDec['so']['vocSin'] = [''];
-correctDec['so']['vocPl'] = [''];
-
-correctDec['ta'] = [];
-correctDec['ta']['nomSin'] = ['taṃ'];
-correctDec['ta']['nomPl'] = ['tāni'];
-correctDec['ta']['accSin'] = ['taṃ'];
-correctDec['ta']['accPl'] = ['tāni'];
-correctDec['ta']['insSin'] = ['tena'];
-correctDec['ta']['insPl'] = ['tehi','tebhi'];
-correctDec['ta']['datSin'] = ['tassa'];
-correctDec['ta']['datPl'] = ['tesaṃ','tesānaṃ'];
-correctDec['ta']['ablSin'] = ['tasmā','tamhā'];
-correctDec['ta']['ablPl'] = ['tehi','tebhi'];
-correctDec['ta']['genSin'] = ['tassa'];
-correctDec['ta']['genPl'] = ['tesaṃ','tesānaṃ'];
-correctDec['ta']['locSin'] = ['tasmiṃ','tamhi'];
-correctDec['ta']['locPl'] = ['tesu'];
-correctDec['ta']['vocSin'] = [''];
-correctDec['ta']['vocPl'] = [''];
-
-
 var decls = [];
 decls.push('nomSin');
 decls.push('nomPl');
@@ -620,21 +389,6 @@ declNo.push(['genSin','genPl']);
 declNo.push(['locSin','locPl']);
 declNo.push(['vocSin','vocPl']);
 
-
-var words = [];
-words.push(['ratt','ratt','Feminine Nouns with "-I" Stem','ratti; noun fem.; "night"']);
-words.push(['sāl','sāl','Feminine Nouns with "-Ā" Stem','sāla; noun fem.; "public hall"']);
-words.push(['nad','nad','Feminine Nouns with "-Ī" Stem','nadī; noun fem.; "river"']);
-words.push(['dhamm','dhamm','Masculine Nouns with "-A" Stem','dhamma; noun masc.; "the teaching"']);
-words.push(['mun','mun','Masculine Nouns with "-I" Stem','muni; noun masc.; "sage"']);
-words.push(['bandh','bandh','Masc Nouns with "-U" Stem','bandhu; noun masc.; "kinsman, relative"']);
-words.push(['rūp','rūp','Neuter Nouns with "-A" Stem','rūpa; noun neut.; "material form"']);
-words.push(['cakkh','cakkh','Neuter Nouns with "-U" Stem','cakkhu; noun neut.; "eye"']);
-words.push(['ma','','1st Person Pronoun','1st Person Pronoun']);
-words.push(['tva','','2nd Person Pronoun','2nd Person Pronoun']);
-words.push(['sa','','Demonstrative Pronoun','3rd person feminine']);
-words.push(['so','','Demonstrative Pronoun','3rd person masculine']);
-words.push(['ta','','Demonstrative Pronoun','3rd person neuter']);
 
 var declb = ['nom','acc','ins','dat','abl','gen','loc','voc'];
 var numba = ['Sin','Pl'];
@@ -1041,23 +795,24 @@ function getRandomVerb() {
 	var fut = $('#fut').prop('checked');
 	
 	if(!reg && !irreg)
-		return;
-	if(!pres && !imp && !opt)
-		return;
+		return alert('No verbs in list!');
+	if(!pres && !imp && !opt && !fut)
+		return alert('No verbs in list!');
 	
 	for (j in yt){
 		if(yt[j][4] != 'V')
 			continue;
 		if(!/^ac\.pres/.test(yt[j][5]))
 			continue;
-		if(!reg && yt[j][9] == 'Y')
+		if(!reg && yt[j][9] != 'N')
 			continue;
 		if(!irreg && yt[j][9] == 'N')
 			continue;
 		G_quiza.push([yt[j],j]);
 	}
+
 	if(!G_quiza.length)
-		return;
+		return alert('No verbs in list!');
 		
 	var rn=Math.floor(Math.random()*G_quiza.length);
 	while(G_oneVerb[3] == rn)
@@ -1079,32 +834,34 @@ function getRandomVerb() {
 	if(pres) G_verbTenses.push('pres');
 	if(imp) G_verbTenses.push('imp');
 	if(opt) G_verbTenses.push('opt');
-	if(opt) G_verbTenses.push('fut');
+	if(fut) G_verbTenses.push('fut');
 
 	var rn2=Math.floor(Math.random()*G_verbTenses.length);
+
+	$('#QwhichT').html(toUni(G_quiza[rn][1])+(yto[1]?' ('+yto[1]+')':''));
+	$('#QwhichC').html(yto[2]);	
 	
 	var type = yto[5].replace(/.+\./,'');
-	if(type.charAt(0) == 'x') { // irreg
+	if(yto[9] == 'N') { // irreg
 		yto[8] = '';
-		var verb = getRandomIVerbTense(toUni(word),iVI[toUni(word)],rn2);
+		var verb = getRandomIVerbTense(G_verbTenses[rn2],toUni(word),iVI[toUni(G_quiza[rn][1])]?iVI[toUni(G_quiza[rn][1])]:iVI[yto[6]]);
 		if(!verb)
 			return getRandomVerb();
 	}
 	else {
-		var verb = getRandomVerbTense(type,rn2);
+		var verb = getRandomVerbTense(G_verbTenses[rn2],type);
 		if(!verb)
 			return getRandomVerb();
 	}
-	
 
-	G_oneVerb = [word,yto,verb,rn,rn2];
 
+	G_oneVerb = [word,yto,verb,rn,rn2,type];
 }
 
 var G_verbTenses = [];
 
-function getRandomVerbTense(type,rn) {
-	switch(G_verbTenses[rn]) {
+function getRandomVerbTense(tense,type) {
+	switch(tense) {
 		case 'pres':
 			if(iV['ac.pres.'+type])
 				return iV['ac.pres.'+type];
@@ -1112,25 +869,25 @@ function getRandomVerbTense(type,rn) {
 			if(iV['ac.impv.'+type])
 				return iV['ac.impv.'+type];
 		default:
-			if(iV['ac.'+G_verbTenses[rn]+'.'+type])
-				return iV['ac.'+G_verbTenses[rn]+'.'+type];
+			if(iV['ac.'+tense])
+				return iV['ac.'+tense];
 	}
 }
-function getRandomIVerbTense(word,verb,rn) {
-	switch(G_verbTenses[rn]) {
+function getRandomIVerbTense(tense,word,verb) {
+	switch(tense) {
 		case 'pres':
 			if(verb[word]['65535'])
 				return verb[word]['65535'];
 			else if(verb['def']['65535'])
 				return verb['def']['65535'];
 		case 'imp':
-			if(verb['def']['1'])
+			if(verb['def'] && verb['def']['1'])
 				return verb['def']['1'];
 		case 'opt':
-			if(verb['def']['4'])
+			if(verb['def'] && verb['def']['4'])
 				return verb['def']['4'];
 		case 'fut':
-			if(verb['def']['3'])
+			if(verb['def'] && verb['def']['3'])
 				return verb['def']['3'];
 	}
 }
@@ -1150,18 +907,20 @@ verbs.push(['cur','core','stealing']);
 var vdtypes = ['thirds','thirdp','seconds','secondp','firsts','firstp'];
 
 var vdtypesNo = [];
-vdtypesNo.push(['3rd',0]);
-vdtypesNo.push(['3rd',1]);
-vdtypesNo.push(['2nd',0]);
-vdtypesNo.push(['2nd',1]);
-vdtypesNo.push(['1st',0]);
-vdtypesNo.push(['1st',1]);
+vdtypesNo.push([0,0]);
+vdtypesNo.push([0,1]);
+vdtypesNo.push([1,0]);
+vdtypesNo.push([1,1]);
+vdtypesNo.push([2,0]);
+vdtypesNo.push([2,1]);
 
-var vdecs = [];
-vdecs.push([['ti'],['nti'],['si'],['tha'],['ami'],['ama'],1,'present']);  // last one is 0 for non-present system, 1 for pres system
-vdecs.push([['tu'],['ntu'],['','hi'],['tha'],['ami'],['ama'],1,'imperative']);
-vdecs.push([['eyya'],['eyyu.m'],['eyyaasi'],['eyyaatha'],['eyyaami'],['eyyaama'],1,'optative']);
-//vdecs.push([['issati'],['issanti'],['issasi'],['issatha'],['issaami'],['issaama'],0,'future']);
+var vPersons = ['3rd','2nd','1st'];
+
+var vdNames = [];
+vdNames['pres'] = 'present';  
+vdNames['imp'] = 'imperative';  
+vdNames['opt'] = 'optative';  
+vdNames['fut'] = 'future';  
 
 var G_oneVerb = [];
 
@@ -1172,16 +931,13 @@ function resetVTable()  {
 	getRandomVerb();
 
 	var stem = G_oneVerb[1][8];
-
-	$('#QwhichT').html(G_oneVerb[1][1]);
-	$('#QwhichC').html(G_oneVerb[1][2]);
-
-	$('#oneDec').html(vdecs[G_oneVerb[4]][7]);
+		
+	$('#oneDec').html(vdNames[G_verbTenses[G_oneVerb[4]]]);
 
 	addVStems(stem);
 
 	clearVAnswers();
-	//showVRights();
+
 }
 function clearVAnswers() {
 	for (i in vdtypes) {
@@ -1200,13 +956,20 @@ function showVAnswers() {
 	document.getElementById('Qshow').onclick = function () { hideVAnswers() };
 
 	var stem = G_oneVerb[1][8];
+	if(yto[9] != 'N') { // not irreg
+		if(G_verbTenses[G_oneVerb[4]] == 'opt')
+			stem += 'eyy';
+		else if(G_verbTenses[G_oneVerb[4]] == 'fut')
+			stem += 'iss';
+	}
+		
 	for (i in vdtypes) {
 		$('#'+vdtypes[i]+'t').css('background-color','');
 		$('#'+vdtypes[i]+'t').hide();
 		
 		var forms = '';
-		if( G_oneVerb[2][vdtypesNo[i][0]] && G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]]) {
-			var alts = G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]];
+		if( G_oneVerb[2][vPersons[vdtypesNo[i][0]]] && G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]]) {
+			var alts = G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]];
 			forms = stem+alts.join(', '+stem);
 		}
 		$('#'+vdtypes[i]).html(forms);
@@ -1226,13 +989,19 @@ function hideVAnswers() {
 
 function checkVAnswers() {
 	var wrong = 0;
-
+	var suff = '';
+	if(yto[9] != 'N') { // not irreg
+		if(G_verbTenses[G_oneVerb[4]] == 'opt')
+			suff = 'eyy';
+		else if(G_verbTenses[G_oneVerb[4]] == 'fut')
+			suff = 'iss';
+	}
 	for (i in vdtypes) {
 		var right = 0;
 		var thisa = $('#'+vdtypes[i]+'t');
 		var onn = null;
-		if( G_oneVerb[2][vdtypesNo[i][0]] && G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]])
-			onn = G_oneVerb[2][vdtypesNo[i][0]][vdtypesNo[i][1]];
+		if( G_oneVerb[2][vPersons[vdtypesNo[i][0]]] && G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]])
+			onn = G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]];
 		if (!onn) {
 			thisa.css('background-color','');
 			right = 1;
@@ -1245,7 +1014,7 @@ function checkVAnswers() {
 				right = 1;
 				break;
 			}
-			if (thisa.val() == onn[j]) {
+			if (thisa.val() == onn[j]+suff) {
 				thisa.css('background-color','#5F5');
 				right = 1;
 				break;
@@ -1262,28 +1031,37 @@ function checkVAnswers() {
 	}	
 }
 
-
-
-var G_oneVDec = [];
+var G_oneVDec = -1;
 
 function getVDeclension() {
 	$('#tense')[0].selectedIndex = -1;
 	$('#declension')[0].selectedIndex = -1;
 	$('#number')[0].selectedIndex = -1;
-	var rn=Math.floor(Math.random()*verbs.length);
-	var rn1=Math.floor(Math.random()*vdecs.length);
-	var rn2=Math.floor(Math.random()*vdtypes.length);
-	var stem = verbs[rn][vdecs[rn1][6]];
+
+	getRandomVerb();
+
+	var stem = G_oneVerb[1][8];
+
+	if(G_oneVerb[1][9] != 'N') { // not irreg
+		if(G_verbTenses[G_oneVerb[4]] == 'opt')
+			stem += 'eyy';
+		else if(G_verbTenses[G_oneVerb[4]] == 'fut')
+			stem += 'iss';	
+	}
+	var verb = G_oneVerb[2];
+
+	var rn3=Math.floor(Math.random()*vdtypesNo.length);
+
+	var alts = verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]];
+
+	var rn4=Math.floor(Math.random()*alts.length);
 	
-	var alts = vdecs[rn1][rn2];
-	var rn3=Math.floor(Math.random()*alts.length);
-	var oneWord = convertVerb(stem,alts[rn3]);
+	var oneWord = stem+alts[rn4].replace(/[()]/g,'');
 	if(!oneWord) {
 		return getVDeclension();
 	}
-	G_oneVDec = [rn,rn1,rn2,stem,oneWord,alts[rn3]];
-	$('#QwhichT').html('√'+verbs[rn][0]);
-	$('#QwhichC').html('in regards to '+verbs[rn][2]);
+	
+	G_oneVDec = [alts[rn4],rn3];
 
 	$('#oneDec').html(oneWord);
 }
@@ -1292,10 +1070,19 @@ function checkVAnswer2() {
 	var tense = $('#tense')[0].selectedIndex;
 	var dec = $('#declension')[0].selectedIndex;
 	var num = $('#number')[0].selectedIndex;
-	
-	var alts = vdecs[tense][(dec*2+num)];
+	if(tense < 0 || dec < 0 || num < 0)
+		return alertFlash("You must select all three fields.",'red');
+		
+	if(G_oneVerb[5].charAt(0) == 'x') { // irreg
+		var verb = getRandomIVerbTense(G_verbTenses[tense],toUni(word),iVI[toUni(word)]);
+	}
+	else {
+		var verb = getRandomVerbTense(G_verbTenses[tense],G_oneVerb[5]);
+	}
+		
+	var alts = verb[vPersons[dec]][num];
 	for(i in alts) {
-		if(alts[i] == G_oneVDec[5]) {
+		if(alts[i] == G_oneVDec[0]) {
 			alertFlash("That's correct!",'green');
 			getVDeclension();
 			return
@@ -1320,10 +1107,10 @@ function showVAnswer2(cnt){
 
 function showVAnswerBounce(cnt) {
 	cnt++;
-	
-	$('#tense')[0].selectedIndex = G_oneVDec[1];
-	$('#declension')[0].selectedIndex = vdtypesNo[G_oneVDec[2]][0];
-	$('#number')[0].selectedIndex = vdtypesNo[G_oneVDec[2]][1];
+
+	$('#tense')[0].value = G_verbTenses[G_oneVerb[4]];
+	$('#declension')[0].selectedIndex = vdtypesNo[G_oneVDec[1]][0];
+	$('#number')[0].selectedIndex = vdtypesNo[G_oneVDec[1]][1];
 	setTimeout(function(){showVAnswer2(cnt)},500);
 }
 
@@ -1331,43 +1118,30 @@ function showVAnswerBounce(cnt) {
 // moveable
 
 function resetMVTable()  {
-	// get rights length
+	getRandomVerb();
+
+	var stem = G_oneVerb[1][8];
+		
+	$('#oneDec').html(vdNames[G_verbTenses[G_oneVerb[4]]]);
 	
-	var rl = 0;
-	for (i in G_VRights) {
-		rl+=G_VRights[i].length;
+	if(G_oneVerb[1][9] != 'N') { // not irreg
+		if(G_verbTenses[G_oneVerb[4]] == 'opt')
+			stem += 'eyy';
+		else if(G_verbTenses[G_oneVerb[4]] == 'fut')
+			stem += 'iss';
 	}
-	
-	if(rl == verbs.length*vdecs.length) {
-		G_VRights = [];
-		alertFlash('Congratulations, you have completed the declension quiz!','green');
-	}
-	var rn=Math.floor(Math.random()*verbs.length);
-	var rn1=Math.floor(Math.random()*vdecs.length);
-	//var rn = 4;
-	if(G_VRights[rn]) {
-		while(G_VRights[rn][rn1] || (G_oneVerb[0] == rn && G_oneVerb[1] == rn1)) {
-			var rn=Math.floor(Math.random()*verbs.length);
-			var rn1=Math.floor(Math.random()*vdecs.length);
+		
+	for (i in vdtypes) {
+		if( G_oneVerb[2][vPersons[vdtypesNo[i][0]]] && G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]])
+			var alts = G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]];
+		else {
+			$('#drag'+i).html('&nbsp;');
+			continue;
 		}
-	}
-	
-
-	var stem = verbs[rn][vdecs[rn1][6]];
-
-	G_oneVerb = [rn,rn1,stem];
-
-	$('#QwhichT').html('√'+verbs[rn][0]);
-	$('#QwhichC').html('in regards to '+verbs[rn][2]);
-
-	$('#oneDec').html(vdecs[rn1][7]);
-
-    for (i in vdtypes){
-		var html = '';
-		for (j in vdecs[rn1][i])
-			html=(html?html+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
-        $('#drag'+i).html(html?html:'&nbsp;');
-    }
+		if(alts)
+			var rn=Math.floor(Math.random()*alts.length);
+		$('#drag'+i).html(alts?stem+alts[rn].replace(/[()]/g,''):'&nbsp;');
+	}	
 
 	var top = vdtypes.length;
     if(top) while(--top) {
@@ -1392,25 +1166,39 @@ function resetMVTable()  {
 
 function checkMVAnswers() {
     var wrong = 0;
-    var stem = G_oneVerb[2];
-    var rn1 = G_oneVerb[1];
+
+	var stem = G_oneVerb[1][8];
+		
+	if(G_oneVerb[1][9] != 'N') { // not irreg
+		if(G_verbTenses[G_oneVerb[4]] == 'opt')
+			stem += 'eyy';
+		else if(G_verbTenses[G_oneVerb[4]] == 'fut')
+			stem += 'iss';
+	}
+
+	loop:
     for (i in vdtypes){
-		var right = 0;
 		var thisa = $('#decr'+i+' div');
 		
-		var cor = '';
-		for (j in vdecs[rn1][i])
-			cor=(cor?cor+', ':'')+convertVerb(stem,vdecs[rn1][i][j]);
-			
-        if(thisa.html().replace(/&nbsp;/g,'') == cor) {
-			thisa.css('background-color','#5F5');
-			right=1;
-		}
+		if( G_oneVerb[2][vPersons[vdtypesNo[i][0]]] && G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]])
+			var narr = G_oneVerb[2][vPersons[vdtypesNo[i][0]]][vdtypesNo[i][1]];
 		else {
-			right = 0;
-			thisa.css('background-color','#F55');
+			thisa.css('background-color','');
+			continue loop;
 		}
-		if (right == 0) wrong = 1;
+		if(!narr) {
+				thisa.css('background-color','');
+				continue loop;
+		}
+		for(j in narr) {
+			var thisRight = (narr?stem+narr[j].replace(/[()]/g,''):'&nbsp;');
+			if(thisa.html() === thisRight) {
+				thisa.css('background-color','#5F5');
+				continue loop;
+			}
+		}
+		thisa.css('background-color','#F55');
+		wrong = 1;
 	}
 	if (wrong == 0) {
 		alertFlash("Well done!",'green');
@@ -1430,31 +1218,169 @@ function resetMVColors() {
 }
 
 
-function convertVerb(stem,suf) {
-	var e = stem.charAt(stem.length-1);
-	var e1 = stem.charAt(stem.length-2);
-	var s = suf.charAt(0);
-	var s1 = suf.charAt(1);
-	if(/[aiu]/.test(e) && e==e1 && s && s1 && !/[aiueo]/.test(s) && !/[aiueoh]/.test(s1)) {
-		return toUni(stem.substring(0,stem.length-1)+suf);
+
+
+
+var engVDec = ['he/she/it','they','you','you all','I','we'];
+var ises = ['is','are','are','are','am','are'];
+var tenseAdd = [];
+tenseAdd['pres'] = '';
+tenseAdd['imp'] = 'should';
+tenseAdd['opt'] = 'may';
+tenseAdd['fut'] = 'will';
+
+function resetVETable() {
+	clearVEAnswers();
+	G_quiza = [];
+	G_oneVerb = [];
+	
+	//~ var reg = $('#reg').prop('checked');
+	//~ var irreg = $('#irreg').prop('checked');
+	//~ var pres = $('#pres').prop('checked');
+	//~ var imp = $('#imp').prop('checked');
+	//~ var opt = $('#opt').prop('checked');
+	//~ var fut = $('#fut').prop('checked');
+	//~ 
+	//~ if(!reg && !irreg)
+		//~ return alert('No verbs in list!');
+	//~ if(!pres && !imp && !opt && !fut)
+		//~ return alert('No verbs in list!');
+	//~ 
+	//~ for (j in yt){
+		//~ if(yt[j][4] != 'V')
+			//~ continue;
+		//~ if(!/^ac\.pres/.test(yt[j][5]))
+			//~ continue;
+		//~ G_quiza.push([yt[j],j]);
+	//~ }
+//~ 
+	//~ if(!G_quiza.length)
+		//~ return;
+	//~ var out = '', out2 = '',outa = [], outa2 = [];
+	//~ for (i in G_quiza) {
+		//~ out2 = '';
+		//~ out = 'engVerbs[\''+toUni(G_quiza[i][1]) +'\'] = \'';
+		//~ if(/^is [a-zA-Z ]+’[a-zA-Z ]+/.test(G_quiza[i][0][2]))
+			//~ out+=G_quiza[i][0][2].replace(/^(is [a-zA-Z]+)\b([ a-zA-Z]*’[a-zA-Z ]+).*/,"$1$2");
+		//~ else if(/^[a-zA-Z]+s\b[a-zA-Z ]+’[a-zA-Z ]+/.test(G_quiza[i][0][2]) && !/this/.test(G_quiza[i][0][2]))
+			//~ out+=G_quiza[i][0][2].replace(/(^[a-zA-Z]+s)\b([a-zA-Z ]+’[ a-zA-Z]+).*/,"$1$2");
+		//~ else if(/^to be [a-zA-Z ]+’[a-zA-Z ]+/.test(G_quiza[i][0][2]))
+			//~ out+=G_quiza[i][0][2].replace(/^to be ([a-zA-Z ]+)\b([ a-zA-Z]+’[a-zA-Z ]+).*/,"is $1$2");
+		//~ else if(/\b[a-zA-Z]+ing\b[a-zA-Z ]+’[a-zA-Z ]+/.test(G_quiza[i][0][2]))
+			//~ out+=G_quiza[i][0][2].replace(/.*(\b[a-zA-Z]+)ing\b([ a-zA-Z]+’[a-zA-Z ]+).*/,"$1$2");
+		//~ else
+			//~ continue;
+		//~ out +='\';<br/>';
+		//~ if(out2)
+			//~ outa2.push(out2);
+		//~ else
+			//~ outa.push(out);
+	//~ }
+	//~ $('#mafbc').html(outa.join("\n")+'<hr/><hr/><hr/>'+outa2.join("\n"));
+//~ return;
+	var reg = $('#reg').prop('checked');
+	var irreg = $('#irreg').prop('checked');
+	var pres = $('#pres').prop('checked');
+	var imp = $('#imp').prop('checked');
+	var opt = $('#opt').prop('checked');
+	var fut = $('#fut').prop('checked');
+	if(!reg && !irreg)
+		return alert('No verbs in list!');
+	if(!pres && !imp && !opt && !fut)
+		return alert('No verbs in list!');
+
+	for (i in engVerbs){
+		var j = toVel(i);
+		if(yt[j][4] != 'V')
+			continue;
+		if(!/^ac\.pres/.test(yt[j][5]))
+			continue;
+		if(!reg && yt[j][9] != 'N')
+			continue;
+		if(!irreg && yt[j][9] == 'N')
+			continue;
+		
+		G_quiza.push(i);
+	}
+	if(!G_quiza.length)
+		return alert('No verbs in list!');
+
+	var rn = Math.floor(Math.random()*G_quiza.length);
+	while(G_oneVerb[3] == rn)
+		var rn=Math.floor(Math.random()*G_quiza.length);
+
+	var ev = engVerbs[G_quiza[rn]];
+	
+	var yto = yt[toVel(G_quiza[rn])];
+	$('#QwhichT').html(G_quiza[rn]+(yto[1]?' ('+yto[1]+')':''));
+	$('#QwhichC').html(yto[2]);	
+
+	G_verbTenses = [];
+	if(pres) G_verbTenses.push('pres');
+	if(imp) G_verbTenses.push('imp');
+	if(opt) G_verbTenses.push('opt');
+	if(fut) G_verbTenses.push('fut');
+
+	var rn2=Math.floor(Math.random()*G_verbTenses.length);
+
+	var tense = G_verbTenses[rn2];
+
+	var type = yto[5].replace(/.+\./,'');
+	if(yto[9] == 'N') { // irreg
+		yto[8] = '';
+		var verb = getRandomIVerbTense(tense,G_quiza[rn],iVI[G_quiza[rn]]?iVI[G_quiza[rn]]:iVI[yto[6]]);
+	}
+	else {
+		var verb = getRandomVerbTense(tense,type);
+	}
+	if(!verb)
+		return resetVETable();
+
+	var stem = yto[8];
+	if(yto[9] != 'N') { // not irreg
+		if(G_verbTenses[rn2] == 'opt')
+			stem += 'eyy';
+		else if(G_verbTenses[rn2] == 'fut')
+			stem += 'iss';
 	}
 	
-	if(!/[aiueo]/.test(s) || !/[aiueo]/.test(e))
-		return toUni(stem+suf);
-	if(e==e1) {
-		if(s=='e')
-			return toUni(stem.substring(0,stem.length-2)+suf);
-		return toUni(stem+suf.substring(1));
+	var rn3 = Math.floor(Math.random()*engVDec.length);
+	
+	if(!verb[vPersons[vdtypesNo[rn3][0]]] || !verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]])
+		return resetVETable();
+
+	G_oneVerb = [stem,verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]]];
+	
+	if(/^is /.test(ev)) {
+		if(tense != 'pres')
+			ev = ev.replace(/^is/,'be');
+		else
+			ev = ev.replace(/^is/,ises[rn3]);
 	}
-	if(e==s) {
-		if(s=='e')
-			return toUni(stem.substring(0,stem.length-1)+suf);
-		return toUni(stem+suf);
+	if(tense != 'pres' || rn3 !=0) {
+		ev = ev.replace(/^(\S\S+)ies\b/,"$1y");
+		ev = ev.replace(/^(\S+)(ss|[sc]h|zz|[xo])es\b/,"$1$2");
+		ev = ev.replace(/^(\S+)s\b/,"$1");
 	}
-	if(e=='a' || s=='e')
-		return toUni(stem.substring(0,stem.length-1)+suf);
-	if(s=='a')
-		return toUni(stem+suf.substring(1));
-		
-	return toUni(stem+suf);
+	
+	$('#oneDec').html(engVDec[rn3]+' '+tenseAdd[G_verbTenses[rn2]]+' '+ev);
+}
+function checkVEAnswers(){
+	var val = $('#answert').val();
+	for (i in G_oneVerb[1]) {
+		if(val == G_oneVerb[0]+G_oneVerb[1][i]) {
+			alertFlash("That's correct!",'green');
+			return resetVETable();
+		}
+	}
+	alertFlash("That is incorrect.",'red');
+}
+function clearVEAnswers(){
+	$('#answert').val('');
+}
+function showVEAnswers(){
+	var right = G_oneVerb[0]+G_oneVerb[1].join(', '+G_oneVerb[0]);
+	$('#answert').hide();
+	$('#answer').append('<span id="righta" class="red">'+right+'</span>');
+	setTimeout(function(){$('#righta').remove(); $('#answert').show('fast');},3000);
 }

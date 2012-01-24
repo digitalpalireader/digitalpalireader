@@ -110,18 +110,7 @@ table.decMenu {
 				
 
 
-button.control {background-color: #FFE7B9;
-				 font-weight: bold;
-				 border-style: inset;
-				
-				 }
-
-button.control:focus {background-color: #B5FF3F ;
-							border-style: outset;
-						}
-						
-button.control:focus::-moz-focus-inner { border:none}
-								
+							
 .controls, #corrects {
 text-align:center;
 }

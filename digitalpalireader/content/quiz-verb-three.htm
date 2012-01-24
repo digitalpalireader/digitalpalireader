@@ -33,70 +33,80 @@ function onDocLoad() {
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="matrelc"></div>
-	<div id="right" onmouseover="document.body.style.cursor='auto'">
-		<div id="maf">
-			<div align="left" id="mafa" class="paperback"></div>
-			<div align="justify" id="mafb" class="paperback">
-				<div id="mafbc">
-					<input type="hidden" id="QwhichS" value="10" />
-					<p id="QwhichT" class="txt"></p>
-					<p id="QwhichC" class="cite"></p>
-					<p class="oneDec">
-					  Declension for 
-					  <span class="red" id="oneDec"></span> 
-					  tense:
-					</p>
-					<table id="Qdeclension" class="dec">
-					  <tbody>
-						<tr>
-						  <th class="dec" />
-						  <th class="toprow">SINGULAR</th>
-						  <th class="toprow">PLURAL</th>
-						</tr>
-						<tr>
-						  <th class="dec">3rd</th>
-						  
-						  <td class="decr" id="decr0"><div class="drag" id="drag0">
-							</div>
-						  </td>
-						  
-						  <td class="decr" id="decr1"><div class="drag" id="drag1">
-							</div>
-						  </td>
-						</tr>
-						<tr>
-						  <th class="dec">2nd</th>
-						  
-						  <td class="decr" id="decr2"><div class="drag" id="drag2">
-							</div>
-						  </td>
-						  
-						  <td class="decr" id="decr3"><div class="drag" id="drag3">
-							</div>
-						  </td>
-						</tr>
-						<tr>
-						  <th class="dec">1st</th>
-						  
-						  <td class="decr" id="decr4"><div class="drag" id="drag4">
-							</div>
-						  </td>
-						  
-						  <td class="decr" id="decr5"><div class="drag" id="drag5">
-							</div>
-						  </td>
-						</tr>
-					  </tbody>
-					</table>
-					<p class="controls">
-					  <button type="button" id="QcheckAns" class="control" onclick="checkMVAnswers()" title="Check your answers (1)">Check</button>
-					  <button type="button" id="Qnew" class="control" onclick="resetMVTable()" title="Get a new declension (4)">New</button>
-					</p>
-					<hr />
-					<h2 id="corrects" style="display:none" align="center">Correct Answers:</h2>
-					<p id="Qcorrects" align="center"></p>
-				</div>
+	<div id="maf">
+		<div id="mafbc">
+			<p></p>
+			<input type="hidden" id="QwhichS" value="10" />
+			<p id="QwhichT" class="txt"></p>
+			<p id="QwhichC" class="cite"></p>
+			<p class="oneDec">
+			  Declension for 
+			  <span class="red" id="oneDec"></span> 
+			  tense:
+			</p>
+			<table id="Qdeclension" class="dec">
+			  <tbody>
+				<tr>
+				  <th class="dec" />
+				  <th class="toprow">SINGULAR</th>
+				  <th class="toprow">PLURAL</th>
+				</tr>
+				<tr>
+				  <th class="dec">3rd</th>
+				  
+				  <td class="decr" id="decr0"><div class="drag" id="drag0">
+					</div>
+				  </td>
+				  
+				  <td class="decr" id="decr1"><div class="drag" id="drag1">
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <th class="dec">2nd</th>
+				  
+				  <td class="decr" id="decr2"><div class="drag" id="drag2">
+					</div>
+				  </td>
+				  
+				  <td class="decr" id="decr3"><div class="drag" id="drag3">
+					</div>
+				  </td>
+				</tr>
+				<tr>
+				  <th class="dec">1st</th>
+				  
+				  <td class="decr" id="decr4"><div class="drag" id="drag4">
+					</div>
+				  </td>
+				  
+				  <td class="decr" id="decr5"><div class="drag" id="drag5">
+					</div>
+				  </td>
+				</tr>
+			  </tbody>
+			</table>
+			<p class="controls">
+			  <button type="button" id="QcheckAns" class="control" onclick="checkMVAnswers()" title="Check your answers (1)">Check</button>
+			  <button type="button" id="Qnew" class="control" onclick="resetMVTable()" title="Get a new declension (4)">New</button>
+			</p>
+			<hr/>
+			<div align="center">
+				<table>
+					<tr>
+						<td>
+							<b>Types:</b><br/>
+							<input type="checkbox" id="reg" checked> Regular Verbs<br/>
+							<input type="checkbox" id="irreg"> Irregular Verbs<br/>
+							<p></p>
+							<b>Tenses:</b><br/>
+							<input type="checkbox" id="pres" checked> Present<br/>
+							<input type="checkbox" id="imp" checked> Imperative<br/>
+							<input type="checkbox" id="opt" checked> Optative<br/>
+							<input type="checkbox" id="fut" checked> Future<br/>
+						</td>
+					</tr>
+				</table>
 			</div>
 		</div>
 	</div>
