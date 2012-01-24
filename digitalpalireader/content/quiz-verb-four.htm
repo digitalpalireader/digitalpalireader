@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>DPR Quiz</title>
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/quiz.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+function onDocLoad() {
+	getconfig();
+	newVEquiz();
+}
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/test.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/eng_verbs.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="maf">
+		<div id="mafbc">
+			<p></p>
+			<input type="hidden" id="QwhichS" value="10" />
+			<p id="QwhichT" class="txt"></p>
+			<p id="QwhichC" class="cite"></p>
+			<p class="oneDec">
+			  What is the word for "<b class="red" id="oneDec"></b>" in Pali?
+			</p>
+			<p id="answer">
+				<input type="text" onclick="textType(this);" onkeyup="textType(this);" id="answert" value="" class="dect" />
+			</p>
+			<p class="controls">
+			  <button type="button" id="QcheckAns" class="control" onclick="checkVEAnswers()" title="Check your answers (1)">Check</button>
+			  <button type="button" id="Qclear" class="control" onclick="clearVEAnswers()" title="Clear table (2)">Clear</button>
+			  <button type="button" id="Qshow" class="control" onclick="showVEAnswers()" title="Show correct answers (3)">Show</button>
+			  <button type="button" id="Qnew" class="control" onclick="resetVETable()" title="Get a new declension (4)">New</button>
+			</p>
+			<hr/>
+			<div align="center">
+				<table>
+					<tr>
+						<td>
+							<b>Types:</b><br/>
+							<input type="checkbox" id="reg" checked> Regular Verbs<br/>
+							<input type="checkbox" id="irreg"> Irregular Verbs<br/>
+							<p></p>
+							<b>Tenses:</b><br/>
+							<input type="checkbox" id="pres" checked> Present<br/>
+							<input type="checkbox" id="imp" checked> Imperative<br/>
+							<input type="checkbox" id="opt" checked> Optative<br/>
+							<input type="checkbox" id="fut" checked> Future<br/>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+
+	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+
+	<div id="alertc"><span id="alert" class="large"></span></div>
+</div>
+
+</body>
+</html>
