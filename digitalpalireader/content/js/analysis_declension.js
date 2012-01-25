@@ -1,6 +1,3 @@
-var nTypes = ['m','nt','f']; //binary
-var vTypes = ['pres','imp','opt','fut','past','caus']; // binary
-
 var G_endings = new Array();
 
 // in the following: 0=to be found, 1=cut offset, 2=length of stem must be greater than this, 3=whattoadd, 4= noun, verb, participle, 5=type&declension
@@ -19,7 +16,7 @@ G_endings.push(['oti',2,0,'','v']);
 // masc a
 G_endings.push(['o',0,0,'a','n',[[1,1,1]]]);
 G_endings.push(['aa',1,0,'','n',[[7,1,2],[4,2,2],[4,1,1],[3,5,1]]]);
-G_endings.push(['a.m',1,0,'','n',[[7,2,1],[2,1,1]]]);
+G_endings.push(['a.m',1,0,'','n',[[2,1,1],[7,2,1]]]);
 G_endings.push(['.m',0,0,'','n',[[7,2,1],[2,1,1]]]);
 G_endings.push(['e',0,0,'a','n',[[1,2,2],[3,7,1],[4,8,1]]]);
 G_endings.push(['ena',0,0,'a','n',[[3,3,1]]]);
@@ -97,35 +94,36 @@ G_endings.push(['uya.m',1,0,'','n']);
 //	// irreg nouns
 
 // vant, mant
-G_endings.push(['aa',1,3,'nt','n']);
-G_endings.push(['a',1,3,'nt','n']);
-G_endings.push(['ata.m',1,3,'nt','n']);
-G_endings.push(['anta.m',1,3,'nt','n']);
-G_endings.push(['anto',1,3,'nt','n']);
-G_endings.push(['antaa',1,3,'nt','n']);
-G_endings.push(['ante',1,3,'nt','n']);
-G_endings.push(['ataa',1,3,'nt','n']);
-G_endings.push(['antehi',1,3,'nt','n']);
-G_endings.push(['ato',1,3,'nt','n']);
-G_endings.push(['antaana.m',1,3,'nt','n']);
-G_endings.push(['ati',1,3,'nt','n']);
-G_endings.push(['antesu',1,3,'nt','n']);
+G_endings.push(['aa',1,3,'nt','n',[[3,1,1]]]);
+G_endings.push(['a',1,3,'nt','n',[[3,8,1]]]);
+G_endings.push(['ata.m',1,3,'nt','n',[[3,2,1]]]);
+G_endings.push(['anta.m',1,3,'nt','n',[[3,2,1]]]);
+G_endings.push(['anto',1,3,'nt','n',[[3,1,2],[3,2,2],[3,8,2]]]);
+G_endings.push(['antaa',1,3,'nt','n',[[3,1,2],[3,2,2]]]);
+G_endings.push(['ante',1,3,'nt','n'],[[3,8,2]]);
+G_endings.push(['ataa',1,3,'nt','n',[[3,3,1],[3,5,1]]]);
+G_endings.push(['antehi',1,3,'nt','n',[[3,3,2],[3,5,2]]]);
+G_endings.push(['ato',1,3,'nt','n',[[3,4,1],[3,6,1]]]);
+G_endings.push(['antaana.m',1,3,'nt','n',[[3,4,2],[3,6,2]]]);
+G_endings.push(['ati',1,3,'nt','n',[[3,7,1]]]);
+G_endings.push(['antesu',1,3,'nt','n',[[3,7,2]]]);
 
 // anta (CPED)
-G_endings.push(['aa',1,3,'nta','n']);
-G_endings.push(['a',1,3,'nta','n']);
-G_endings.push(['ata.m',1,3,'nta','n']);
-G_endings.push(['ata.m',1,3,'ti','n']); // fudge to verb
-G_endings.push(['anta.m',1,3,'nta','n']);
-G_endings.push(['anto',1,3,'nta','n']);
-G_endings.push(['antaa',1,3,'nta','n']);
-G_endings.push(['ante',1,3,'nta','n']);
-G_endings.push(['ataa',1,3,'nta','n']);
-G_endings.push(['antehi',1,3,'nta','n']);
-G_endings.push(['ato',1,3,'nta','n']);
-G_endings.push(['antaana.m',1,3,'nta','n']);
-G_endings.push(['ati',1,3,'nta','n']);
-G_endings.push(['antesu',1,3,'nta','n']);
+G_endings.push(['aa',1,3,'nta','n',[[3,1,1]]]);
+G_endings.push(['a',1,3,'nta','n',[[3,8,1]]]);
+G_endings.push(['ata.m',1,3,'nta','n',[[3,2,1]]]);
+G_endings.push(['ata.m',1,3,'ti','n']);
+G_endings.push(['anta.m',1,3,'nta','n',[[3,2,1]]]);
+G_endings.push(['anto',1,3,'nta','n',[[3,1,2],[3,2,2],[3,8,2]]]);
+G_endings.push(['antaa',1,3,'nta','n',[[3,1,2],[3,2,2]]]);
+G_endings.push(['ante',1,3,'nta','n'],[[3,8,2]]);
+G_endings.push(['ataa',1,3,'nta','n',[[3,3,1],[3,5,1]]]);
+G_endings.push(['antehi',1,3,'nta','n',[[3,3,2],[3,5,2]]]);
+G_endings.push(['ato',1,3,'nta','n',[[3,4,1],[3,6,1]]]);
+G_endings.push(['antaana.m',1,3,'nta','n',[[3,4,2],[3,6,2]]]);
+G_endings.push(['ati',1,3,'nta','n',[[3,7,1]]]);
+G_endings.push(['antesu',1,3,'nta','n',[[3,7,2]]]);
+
 
 // kattar
 
@@ -240,29 +238,29 @@ G_endings.push(['anti',1,0,'ti','v',[[1,1,2]]]);
 G_endings.push(['si',0,3,'ti','v',[[1,2,1]]]);
 G_endings.push(['asi',1,0,'ti','v',[[1,2,1]]]); 
 G_endings.push(['atha',1,0,'ti','v',[[1,2,2]]]);
-G_endings.push(['aami',1,0,'ti','v',[[1,3,1]]]);
-G_endings.push(['aama',1,0,'ti','v',[[1,3,2]]]);
+G_endings.push(['aami',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
+G_endings.push(['aama',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 	// aa stem pres.
 
-G_endings.push(['aami',2,0,'ti','v',[[1,3,1]]]);
-G_endings.push(['aama',2,0,'ti','v',[[1,3,2]]]);
+G_endings.push(['aami',2,0,'ti','v',[[1,3,1],[2,3,1]]]);
+G_endings.push(['aama',2,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 	// o stem pres.
 
 G_endings.push(['onti',1,0,'ti','v',[[1,1,2]]]);
 G_endings.push(['osi',1,0,'ti','v',[[1,2,1]]]);
 G_endings.push(['otha',1,0,'ti','v',[[1,2,2]]]);
-G_endings.push(['omi',1,0,'ti','v',[[1,3,1]]]);
-G_endings.push(['oma',1,0,'ti','v',[[1,3,2]]]);
+G_endings.push(['omi',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
+G_endings.push(['oma',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 	// e stem pres.
 
 G_endings.push(['enti',1,0,'ti','v',[[1,1,2]]]);
 G_endings.push(['esi',1,0,'ti','v',[[1,2,1]]]);
 G_endings.push(['etha',1,0,'ti','v',[[1,2,2]]]);
-G_endings.push(['emi',1,0,'ti','v',[[1,3,1]]]);
-G_endings.push(['ema',1,0,'ti','v',[[1,3,2]]]);
+G_endings.push(['emi',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
+G_endings.push(['ema',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 
 	// a stem impv.

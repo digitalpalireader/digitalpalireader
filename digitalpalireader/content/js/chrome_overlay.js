@@ -161,6 +161,9 @@ var DPROverlay = {
 				var permalink = 'dpr:translate?phrase='+input;
 				this.openDPRTab(permalink,'DPRx');
 				break;
+			case (type == 'Qk'):
+				this.quickDic(input);
+				break;
 		}
 	},
 	
@@ -196,6 +199,11 @@ var DPROverlay = {
 			range.detach();
 		}
 
+	},
+	quickDic:function(input) {
+		input = input.replace(/ .*/,'');
+		output = DPRTrans.simpleWordTranslation(input);
+		alert(output.split('\n'));
 	}
 }
 

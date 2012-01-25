@@ -205,71 +205,65 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		}
 		//querystring=toVel(querystring).replace(/ /g, '_');
 	}
-	
+
+	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 	if(!compare) {
-
 		// tab title
-
-		var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 		setCurrentTitle(tabT);
+	}
 
-		// permalink
+	// permalink
+
+	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+
+	// remove custom text link
 	
-		
-		if(!isPL) { //not coming from a permalink
+	var newurl = oldurl.replace(/\&*text=[^&]*/,'');
+	var bareurl = 'dpr:index?';
+	// update loc
+	
+	var newloc = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	if(/loc=/.exec(oldurl)) newurl = newurl.replace(/loc=[^&]+/,newloc);
+	else if(/\?./.exec(oldurl)) newurl = newurl + '&'+newloc;
+	else newurl = newurl + '?'+newloc;
+	bareurl += newloc;
+	// update query
+	
+	if(query) {
+		if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
+		else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+	}
+	else newurl = newurl.replace(/\&query=[^&]+/,'');
 
-			try {
-		
-				var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+	// update para
 
-				// remove custom text link
-				
-				var newurl = oldurl.replace(/\&*text=[^&]*/,'');
+	if(para) {
+		if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
+		else newurl = newurl + '&para='+para;
+	}
+	else newurl = newurl.replace(/\&para=[^&]+/,'');
+	
+	// update scroll
 
-				// update loc
+	if(scroll) {
+		if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
+		else newurl = newurl + '&scroll='+scroll;
+	}
+	else newurl = newurl.replace(/\&scroll=[^&]+/,'');
+	
+	// update alt
 
-				if(/loc=/.exec(oldurl)) newurl = newurl.replace(/loc=[^&]+/,'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier);
-				else if(/\?./.exec(oldurl)) newurl = newurl + '&loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
-				else newurl = newurl + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	if(place[8]) {
+		if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
+		else newurl = newurl + '&alt=1';
+		bareurl +='&alt=1';
+	}
+	else newurl = newurl.replace(/\&alt=[^&]+/,'');
+	
+	if(!isPL) { //not coming from a permalink
 
-				// update query
-				
-				if(query) {
-					if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
-					else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
-				}
-				else newurl = newurl.replace(/\&query=[^&]+/,'');
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
 
-				// update para
-
-				if(para) {
-					if(/para=/.exec(newurl)) newurl = newurl.replace(/para=[^&]+/,'para='+para);
-					else newurl = newurl + '&para='+para;
-				}
-				else newurl = newurl.replace(/\&para=[^&]+/,'');
-				
-				// update scroll
-
-				if(scroll) {
-					if(/scroll=/.exec(newurl)) newurl = newurl.replace(/scroll=[^&]+/,'scroll='+scroll);
-					else newurl = newurl + '&scroll='+scroll;
-				}
-				else newurl = newurl.replace(/\&scroll=[^&]+/,'');
-				
-				// update alt
-
-				if(place[8]) {
-					if(/alt=/.exec(newurl)) newurl = newurl.replace(/alt=[^&]+/,'alt=1');
-					else newurl = newurl + '&alt=1';
-				}
-				else newurl = newurl.replace(/\&alt=[^&]+/,'');
-
-				mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
-			}
-			catch(ex) {
-			}
-
-		}
 	}
 	
 
@@ -307,7 +301,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// paragraph range
 	if(para) {
-		para = para.replace(/[^-0-9]/g,'');
+		para = para.toString().replace(/[^-0-9]/g,'');
 		
 		if(/-/.test(para)) {
 			var range = para.split('-');
@@ -315,11 +309,14 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		else var opara = parseInt(para);
 	}
 
-	// output header
+
+
+
+// output header
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+(range?'<td><span class="tiny">para. '+range.join('-')+'</span></td>':'')+'</tr></table>');
+	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center><a href="javascript:void(0)" onclick="mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'">'+titleout[0]+'</a> '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 

@@ -154,3 +154,12 @@ td.trans td {
 .other-row-2 td.other {
 	background-color:#DDF;
 }
+
+/* conjugations */
+
+.decl-grammar {
+	font-style:italic;
+}
+.decl-english {
+	font-weight:bold;
+}
