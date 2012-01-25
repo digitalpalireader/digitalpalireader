@@ -34,7 +34,7 @@ function onDocLoad() {
 function insertConj() {
 	var word = $('#word').val();
 	var form = $('#form').val();
-	history.pushState({}, 'Title', 'chrome://digitalpalireader/content/translate.htm'+(word?'?word='+toVel(word):'')+(form?(word?'&':'?')+'form='+toVel(form)));
+	history.pushState({}, 'Title', 'chrome://digitalpalireader/content/translate.htm'+(word?'?word='+toVel(word):'')+(form?(word?'&':'?')+'form='+toVel(form):''));
 	$('#word').val(toUni(word));
 	$('#form').val(toUni(form));
 	var out = conjugateWord(word,form);
