@@ -125,3 +125,32 @@ text-align:center;
 	padding:10px;
 	margin:0px;
 }
+
+/* translations */
+
+td.trans-table {
+	border-collapse:collapse;
+}
+td.trans {
+	vertical-align:top;
+	padding:0;
+	margin:0;
+}
+td.trans td {
+	text-align:center;
+	padding:0;
+	margin:0;
+}
+
+.sub-row-2 td.sub {
+	background-color:#FFD;
+}
+.obj-row-2 td.obj {
+	background-color:#FDF;
+}
+.verb-row-2 td.verb {
+	background-color:#FDD;
+}
+.other-row-2 td.other {
+	background-color:#DDF;
+}

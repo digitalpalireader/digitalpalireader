@@ -127,7 +127,8 @@ var DPROverlay = {
 	openSidebar: function() {
 		toggleSidebar('viewDPR');
 	},
-	rightClick:function(input,type) {
+	rightClick:function(type) {
+		var input = (gContextMenu.isTextSelected?document.commandDispatcher.focusedWindow.getSelection().toString():gContextMenu.target.innerHTML);
 		if(!input || input == '') return;
 		input = input.replace(/<[^>]*>/g,'');
 		input = input.replace(/\u0101/g, 'aa').replace(/\u012B/g, 'ii').replace(/\u016B/g, 'uu').replace(/\u1E6D/g, '\.t').replace(/\u1E0D/g, '\.d').replace(/\u1E45/g, '\"n').replace(/\u1E47/g, '\.n').replace(/\u1E43/g, '\.m').replace(/\u1E41/g, '\.m').replace(/\u00F1/g, '\~n').replace(/\u1E37/g, '\.l').replace(/\u0100/g, 'AA').replace(/\u012A/g, 'II').replace(/\u016A/g, 'UU').replace(/\u1E6C/g, '\.T').replace(/\u1E0C/g, '\.D').replace(/\u1E44/g, '\"N').replace(/\u1E46/g, '\.N').replace(/\u1E42/g, '\.M').replace(/\u00D1/g, '\~N').replace(/\u1E36/g, '\.L');
@@ -152,12 +153,22 @@ var DPROverlay = {
 				var permalink = 'dpr:search?type=0&query='+input+'&MAT=m&set='+type+'&book=1&part=1&rx=false';
 				this.openDPRTab(permalink,'DPRs');
 				break;
+			case (type == 'Cj'):
+				var permalink = 'dpr:conjugate?word='+input;
+				this.openDPRTab(permalink,'DPRx');
+				break;
+			case (type == 'Tr'):
+				var permalink = 'dpr:translate?phrase='+input;
+				this.openDPRTab(permalink,'DPRx');
+				break;
 		}
 	},
 	
 	showHideDPRItem:function() {
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 		var dprmenu = document.getElementById("dpr-sub-context");
+		var dprconj = document.getElementById("dpr-conj-item");
+		var dprtrans = document.getElementById("dpr-trans-item");
 		var dprdict = document.getElementById("dpr-sub-dict");
 		var dprsearch = document.getElementById("dpr-sub-search");
 
@@ -168,9 +179,11 @@ var DPROverlay = {
 			dprmenu.hidden = notext;
 			dprdict.hidden = nosel;
 			dprsearch.hidden = nosel;
+			dprconj.hidden = nosel;
+			dprtrans.hidden = nosel;
 		}
 		else if(prefs.getBoolPref('Bool.noContext'))
-			dpritem.hidden = true;
+			dprmenu.hidden = true;
 		else if(prefs.getBoolPref('Bool.contextSelected'))
 			dprmenu.hidden = nosel;
 	},

@@ -63,7 +63,7 @@ function makeLinkPlace(options,PL) {
 			if(/^\//.exec(option[1])) eval('query = ['+toUni(option[1]).replace(/_/g,' ')+']');
 			else query = toUni(option[1]).replace(/_/g,' ').split('+');
 		}
-		else if (option[0] == 'para') para = parseInt(option[1]);
+		else if (option[0] == 'para') para = option[1];
 		else if (option[0] == 'scroll') scroll = parseInt(option[1]);
 		else if (option[0] == 'alt') outplace.push(1);
 		else if (option[0] == 'compare') compare = option[1];

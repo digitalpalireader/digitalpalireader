@@ -10,6 +10,23 @@
 <script>
 function onDocLoad() {
 	getconfig();
+	var link = document.location.href.split('?')[1];
+	if (link) {
+		var opts = link.split('&amp;');
+		var linkt = '';
+		var linkb = '';
+		for (i in opts) {
+			option = opts[i].split('=');
+			switch(option[0]) {
+				case 'phrase':
+					var phrase = decodeURIComponent(option[1]);
+			}
+		}
+		if(phrase) {
+			$('#input').val(phrase);
+			translateText();
+		}
+	}
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
@@ -22,7 +39,9 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/eglossary.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/eng_verbs.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
 
@@ -38,7 +57,7 @@ function onDocLoad() {
 			<p id="QwhichT" class="txt"></p>
 			<p id="QwhichC" class="cite"></p>
 			<p class="oneDec">
-			  Enter a single sentence below:
+			  Enter a single Pali sentence below (Velthuis or Unicode):
 			</p>
 			<div align="center">
 				<textarea type="text" id="input" value="" class="dect" rows="3" cols="50"></textarea>

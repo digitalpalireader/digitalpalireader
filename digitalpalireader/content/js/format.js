@@ -539,3 +539,16 @@ function makeToolbox(main,aux,conv,ex,save,trans) {
 	
 	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div><div id="auxToolbar" class="obutc">'+aux+'</div></div>');
 }
+
+function makeTable(text,cls) {
+	var out = '<table class="'+cls+'-table">';
+	for(i in text) {
+		out += '<tr class="'+cls+'-row-'+(parseInt(i)+1)+'">';
+		for(j in text[i]) {
+			out += '<td class="'+cls+'">'+text[i][j]+'</td>';
+		}
+		out += '</tr>';
+	}
+	out += '</table>';
+	return out;
+}

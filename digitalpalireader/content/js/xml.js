@@ -304,13 +304,22 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
 	makeToolbox(main,aux,true,true,true);
-	
+
+	// paragraph range
+	if(para) {
+		para = para.replace(/[^-0-9]/g,'');
+		
+		if(/-/.test(para)) {
+			var range = para.split('-');
+		}
+		else var opara = parseInt(para);
+	}
 
 	// output header
 	
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
 
-	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
+	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+modt+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+(range?'<td><span class="tiny">para. '+range.join('-')+'</span></td>':'')+'</tr></table>');
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
@@ -321,7 +330,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	// check if there is a search going on and add the labels
 	if (query) {
 		atlabel:
-		for (tmp = 0; tmp < z.length; tmp++)
+		for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++)
 		{
 			var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
 
@@ -401,7 +410,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	}	
 	else {
 		if(place[8]) { // thai
-			for (tmp = 0; tmp < z.length; tmp++){
+			for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++) {
 				if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.exec(z[tmp].textContent) && !DPR_prefs['showPages']) {
 					continue;
 				}
@@ -409,7 +418,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 			}
 		}
 		else {
-			for (tmp = 0; tmp < z.length; tmp++) {
+			for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++) {
 				var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
 				theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'|> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 			}
@@ -417,8 +426,8 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	}
 	var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
-	if(para) { 
-        document.getElementById('maf').scrollTop = document.getElementById('para'+para).offsetTop;
+	if(opara) {
+        document.getElementById('maf').scrollTop = document.getElementById('para'+opara).offsetTop;
 	}
 	else if(scroll) {
 		document.getElementById('maf').scrollTop = scroll;

@@ -41,6 +41,9 @@ function conjugate(word, id, which) {
 	
 	var outNode = document.createElement('div');
 	
+	if (!id) {
+		return out;
+	}
 	if(id == 'dif') {
 		clearDivs('dif');
 		outNode.innerHTML = '<div class="conj">'+out+'</div>';
@@ -76,7 +79,7 @@ function conjugateNoun(word) {
 			continue;
 		}
 		
-		var descript = (q > 0 ? '<hr>':'')+'<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
+		var descript = (q > 0 ? '<hr>':'')+'<div><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
 		
 		if (type2[1] == '' && type2[2] == '' && type2[3] == '') {
 			out += descript;
@@ -492,3 +495,34 @@ function conjugateIrrVerb(word,which) {
 
 }
 
+function conjugateWord(word,form) {
+	if(!word && !form)
+		return;
+	if(yt[toVel(word)])
+		return conjugate(word,null,form);
+	else if(form){
+		var oneConj = getConjugation(form);
+		return oneConj?oneConj:null;
+	}
+	else {
+		var oneConj = getConjugation(word);
+		return oneConj?oneConj:null;
+	}
+}
+
+//[trans,type,deca,word,meta];
+
+function getConjugation(form) {
+	var word = translateWord(form);
+	var out = '';
+	if(word[4]['decs']) {
+		out = '<ol>';
+		var decs = word[4]['decs'];
+		for(i in decs) {
+			var type = G_endings[decs[i][1]][4];
+			out += '('+type+'.)'+word[2][1]+'-'+word[2][2]+' form of '+word[4]['orig']+': '+word[0];
+		}
+	}
+	else out = '('+word[1]+'.)'+word[2][1]+'-'+word[2][2]+' form of '+word[4]['orig']+': '+word[0];
+	$
+}
