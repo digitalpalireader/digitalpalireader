@@ -244,7 +244,8 @@ function arrangeWords(wordst) {
 					chosen[compat[0][i][0]] = ['v',compat[0][i][1]];
 			}
 			inter['v'] = [];
-			G_verbDecl = words[compat[0][0][0]][compat[0][0][1]][2];
+			if(compat[0][0])
+				G_verbDecl = words[compat[0][0][0]][compat[0][0][1]][2];
 		}
 		else { // punting
 			inter['v'] = [];
@@ -388,7 +389,7 @@ function checkCompatibleNoun(input,chosen,words) {
 		// first, check for words that are already chosen for this array, use their gender
 		for(i in chosen) {
 			var ww = words[i];
-			if(ww[0][2][0]!=7) {
+			if(ww[0][2] && ww[0][2][0]!=7) {
 				var og = ww[0][2][0];
 			}
 		}
@@ -440,7 +441,7 @@ function checkCompatibleNoun(input,chosen,words) {
 		}
 		
 	}
-	else {
+	else if(input[0]){
 		outerb.push(input[0]);
 		input = [];
 	}
@@ -460,8 +461,10 @@ function checkCompatibleVerb(input,chosen,words) {
 		
 		// first, check for words that are only this array, use their tense
 		for(i in chosen) {
-			var ww = words[i][0][2][0];
-			break; // only one verb per sentence...
+			if(words[i][0][2]) {
+				var ww = words[i][0][2][0];
+				break; // only one verb per sentence...
+			}
 		}
 		
 		// if forced tense, filter out other tenses
@@ -505,7 +508,7 @@ function checkCompatibleVerb(input,chosen,words) {
 		}
 		
 	}
-	else {
+	else if(input[0]){
 		outerb.push(input[0]);
 		input = [];
 	}
@@ -613,7 +616,7 @@ function translateWord(word) {
 				if(yt[temp] && yt[temp][4] != 'I') {
 					var gender = yt[temp][1];
 					for(c in declt) {
-						if(type=='v' || (1 & declt[c][0] && G_nTx[0].test(gender)) || (2 & declt[c][0] && G_nTx[1].test(gender)) || (4 & declt[c][0] && G_nTx[2].test(gender))) {
+						if(type=='v' || /adj\./.test(yt[temp][1]) || (1 & declt[c][0] && G_nTx[0].test(gender)) || (2 & declt[c][0] && G_nTx[1].test(gender)) || (4 & declt[c][0] && G_nTx[2].test(gender))) {
 							decls.push(declt[c]);
 						}
 					}
@@ -675,7 +678,7 @@ function translateWord(word) {
 		}
 		//alert(dups);
 		for(j=0;j<dups.length;j++) { 
-			if(dups[j][1] == outs[i][1] && dups[j][2][0] == outs[i][2][0] && dups[j][2][1] == outs[i][2][1] && dups[j][2][2] == outs[i][2][2]) {
+			if(dups[j][1] == outs[i][1] && ((!dups[j][2] && !outs[i][2]) || (dups[j][2] && outs[i][2] && dups[j][2][0] == outs[i][2][0] && dups[j][2][1] == outs[i][2][1] && dups[j][2][2] == outs[i][2][2]))) {
 				continue dupsl;
 			}
 		}
@@ -731,7 +734,7 @@ function addPhrasePreps(words,i,type) {
 	if(!i)
 		var i = words[0][2][1]-1;
 	var joined = '';
-	for(j in words) {
+	for(j = 0;j < words.length;j++) {
 		if(j == 0) {
 			joined += (G_joints[type][i]?G_joints[type][i]+' ':'');
 		}
