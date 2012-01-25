@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+<title>DPR Translation</title>
+<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+<link rel="stylesheet" type="text/css" href="css/styles.css">
+<link rel="stylesheet" type="text/css" href="css/quiz.css">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script>
+function onDocLoad() {
+	getconfig();
+	var link = document.location.href.split('?')[1];
+	if (link) {
+		var opts = link.split('&amp;');
+		var linkt = '';
+		var linkb = '';
+		for (i in opts) {
+			option = opts[i].split('=');
+			switch(option[0]) {
+				case 'word':
+					var word = option[1];
+				case 'form':
+					var form = option[1];
+			}
+		}
+		if(word) {
+			$('#word').val(word);
+			$('#form').val(form);
+			insertConj(word,form);
+		}
+	}
+}
+function insertConj() {
+	var word = $('#word').val();
+	var form = $('#form').val();
+	history.pushState({}, 'Title', 'chrome://digitalpalireader/content/translate.htm'+(word?'?word='+toVel(word):'')+(form?(word?'&':'?')+'form='+toVel(form)));
+	$('#word').val(toUni(word));
+	$('#form').val(toUni(form));
+	var out = conjugateWord(word,form);
+	$('#conjugation').html(out?out:'<span class="red">no conjugation found</span>');
+}
+</script>
+<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+
+</head>
+
+
+<body onload="onDocLoad();">
+<div id="content">
+	<div id="maf">
+		<div id="mafbc">
+			<p></p>
+			<input type="hidden" id="QwhichS" value="10" />
+			<p id="QwhichT" class="txt"></p>
+			<p id="QwhichC" class="cite"></p>
+			<p class="oneDec">
+			  Enter a word to conjugate, and/or declension form:
+			</p>
+			<div align="center">
+				word: <input type="text" id="word" value="" class="dect" /><br/>
+				form: <input type="text" id="form" value="" class="dect" />
+				<p id="conjugation"/>
+			</div>
+			<p class="controls">
+			  <button type="button" id="conjugate" class="control" onclick="conjugateWord()" title="Translate the text">Conjugate</button>
+			  <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
+			</p>
+			<hr/>
+		</div>
+	</div>
+	<div id="alertc"><span id="alert" class="large"></span></div>
+</div>
+
+</body>
+</html>
