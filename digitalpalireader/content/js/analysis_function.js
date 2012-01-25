@@ -180,7 +180,9 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 	var res = [];
 	var resn = [];
 	var resy;
-
+	var wtr = [];
+	var wtrN = [];
+	var wtrV = [];
 
 
 // exact maches
@@ -281,71 +283,20 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 	if(!nextpart) { // don't do stem matching on compound parts
 		
-		// ---------- stem matching and converting ----------
-		// this stuff is defined in declension.js
+		var wtrBoth = makeDeclensions(oneword,lastpart,nextpart);
 		
-		var wtrN = []; // nouns, can be in compound
-		var wtrV = []; // verbs, can't
+		for (i in wtrBoth[0])
+			wtrN.push(wtrBoth[0][i][0]);
+		for (i in wtrBoth[1])
+			wtrV.push(wtrBoth[1][i][0]);
 		
-		var wtrDup = []; // sort duplicates
-		
-		var endings = [];
-		
-		for (var k = 1; k < oneword.length; k++) //define sub-cut for analysis (length-k,oneword.length) and remaining string (0,length-k)
-		{		
-			endings[oneword.substring(k)] = k;
-		}
-		
-		for(i in G_endings) {
-			var gend = G_endings[i];  // gend[0] is ending, [1] is offset, [2] is min length of stem, [3] is new ending to add, [4] says is a verb	
-			if(endings[gend[0]] && endings[gend[0]] > gend[2]) {
-				var dec = oneword.substring(0, endings[gend[0]]+gend[1]) + gend[3];
-
-				if (!isUncomp(oneword,lastpart,nextpart) && !wtrDup[dec]) {
-					wtrDup[dec] = 1;
-
-					if (gend[4] == 'v') { wtrV.push(dec); }
-					else { 
-						wtrN.push(dec); 
-						if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
-							wtrN.push(dec+dec.charAt(dec.length-1));
-						}
-					}
-				}					
-			}
-			for (stem in G_altStem) {
-				//if(/^ga/.exec(oneword)) ddump('-- try ' + oneword +  ' ' +stem+ ' ' + gend[0]);
-				if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2] && (G_altStem[stem][1] && gend[4] == 'v' || !G_altStem[stem][1] && gend[4] == 'n')) 
-				{
-					for(gas0 in G_altStem[stem][0]) {
-						var dec = oneword.substring(0, endings[stem + gend[0]]) + G_altStem[stem][0][gas0];
-						//if(/^ga/.exec(oneword)) ddump('-- got ' + dec + ' ' +stem+ ' ' + gend[0]);
-						if(G_altStem[stem][2]) {
-							//dec = dec.replace(/^([kgncjtdpbmyrlvsh.~"]{0,2}[aiu])[aiu]/,"$1");
-						}
-						if (isUncomp(oneword,lastpart,nextpart)) { continue; }
-
-						if(wtrDup[dec]) continue;
-						else wtrDup[dec] = 1;
-
-						if (G_altStem[stem][2]) { wtrV.push(dec); }
-						else { 
-							wtrN.push(dec); 
-							if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
-								wtrN.push(dec+dec.charAt(dec.length-1));
-							}
-						}	
-					}
-				}
-			}
-		}				
 		//alert(wtrV);
 	}
 	if(!lastpart && !nextpart) {
 		 
 // verbal & nominal declensions			
 
-		var wtr = wtrN.concat(wtrV);
+		wtr = wtrN.concat(wtrV);
 
 	// PED declensions
 

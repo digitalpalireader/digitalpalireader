@@ -5,8 +5,6 @@ var MW = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).c
 				   
 var G_searchStartTime;
 
-var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
-
 var G_searchType;
 var G_searchString;
 var G_searchMAT;

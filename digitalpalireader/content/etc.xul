@@ -9,6 +9,7 @@
 			<tab class="chromeback" label="Buddha Vacana Guide"/>
 			<tab class="chromeback" label="PED Abbreviations"/>
 			<tab class="chromeback" label="CPED Abbreviations"/>
+			<tab class="chromeback" label="Translation"/>
 		</tabs>
 		<tabpanels id="panels" class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="bv">
@@ -19,6 +20,9 @@
 			</tabpanel>
 			<tabpanel class="chromeback" id="cped">
 				<browser disablehistory="true" type="content" id="etc-3-browser" src="etc/grammar/cped-abbv.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="translate">
+				<browser disablehistory="true" type="content" id="etc-4-browser" src="translate.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

@@ -182,7 +182,7 @@ position:relative;
 }
 
 .underline { 	
-	text-decoration:underline;
+	text-decoration:underline !important;
 }
 
 .pointer:hover{
