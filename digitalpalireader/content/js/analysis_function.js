@@ -46,6 +46,8 @@ function outputAnalysis(input,frombox)
 		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+(frombox?frombox:0));
 		else if(frombox) newurl = newurl + '&frombox='+frombox;
 		else newurl = newurl.replace(/\&frombox=[^&]+/,'');
+		if(/^[^?]+\&/.test(newurl))
+			newurl = newurl.replace(/\&/,'?');
 		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 	}
 	catch(ex) {
@@ -285,11 +287,20 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 		
 		var wtrBoth = makeDeclensions(oneword,lastpart,nextpart);
 		
-		for (i in wtrBoth[0])
+		var wtrDN = [];
+		var wtrDV = [];
+		for (i in wtrBoth[0]) {
+			if(wtrDN[wtrBoth[0][i][0]])
+				continue;
+			wtrDN[wtrBoth[0][i][0]] = true;
 			wtrN.push(wtrBoth[0][i][0]);
-		for (i in wtrBoth[1])
+		}
+		for (i in wtrBoth[1]) {
+			if(wtrDV[wtrBoth[1][i][0]])
+				continue;
+			wtrDV[wtrBoth[1][i][0]] = true;
 			wtrV.push(wtrBoth[1][i][0]);
-		
+		}		
 		//alert(wtrV);
 	}
 	if(!lastpart && !nextpart) {

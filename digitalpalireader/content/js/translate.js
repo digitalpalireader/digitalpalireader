@@ -1,16 +1,26 @@
 function translateText() {
+	var words = [];
+	var subject = '';
+
 	var input = toUni($('#input').val()).replace(G_uniRegExpNSG,'');
+
 	$('#input').val(input);
 	input=input.split(' ');
-	var words = [];
 	for (i in input) {
 		var trans = translateWord(input[i]);
 		words.push(trans);
 	}
 	var out = arrangeWords(words);
-	var subject = out.subject.join(' ').replace(/^ *(.+) */,"$1");
-	var fL = subject.replace(/<[^>]+>/g,'').charAt(0);
-	subject = subject.replace('>'+fL,'>'+fL.toUpperCase());
+
+	if(!out.subject.length) {
+		if(G_verbDecl.length)
+			subject = G_subjects[G_verbDecl[1]-1][G_verbDecl[2]-1];
+	}
+	else {
+		subject = out.subject.join(' ').replace(/^ *(.+) */,"$1");
+		var fL = subject.replace(/<[^>]+>/g,'').charAt(0);
+		subject = subject.replace('>'+fL,'>'+fL.toUpperCase());
+	}
 	$('#translation').html(subject+' '+(G_verbDecl.length?G_joints['v'][G_verbDecl[0]-1]+' ':'')+out.bverb.join(' ')+' '+out.verb.join(' ')+' '+out.object.join(' ')+' '+out.other.join(' ')+(G_verbDecl[0]==2?'!':'.'));
 }
 
@@ -191,7 +201,7 @@ function arrangeWords(words) {
 }
 
 function makeWord(word) {
-	return '<a class="green underline" href="dpr:index?analysis='+toVel(word[3])+'" title="translation of '+word[3]+'">'+word[0]+'</a>';
+	return '<a class="green underline" href="dpr:index?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+word[0]+'</a>';
 }
 
 function sortLongerDec(a,b) {
@@ -235,3 +245,5 @@ var ises = [];
 ises.push(['is','are']);
 ises.push(['are','are']);
 ises.push(['am','are']);
+
+var G_subjects = [['He/She/It','They'],['You','You all'],['I','We']];
