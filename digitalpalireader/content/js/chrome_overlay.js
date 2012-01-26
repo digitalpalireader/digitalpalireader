@@ -127,8 +127,13 @@ var DPROverlay = {
 	openSidebar: function() {
 		toggleSidebar('viewDPR');
 	},
-	rightClick:function(type) {
-		var input = (gContextMenu.isTextSelected?document.commandDispatcher.focusedWindow.getSelection().toString():gContextMenu.target.innerHTML);
+	rightClick:function(type,params) {
+		if(gContextMenu.target.tagName!="TEXTAREA"&&gContextMenu.target.tagName!="INPUT"){
+			var input = (gContextMenu.isTextSelected?document.commandDispatcher.focusedWindow.getSelection().toString():gContextMenu.target.innerHTML);
+		}
+		else{
+			var input=gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd);
+		}
 		if(!input || input == '') return;
 		input = input.replace(/<[^>]*>/g,'');
 		input = input.replace(/\u0101/g, 'aa').replace(/\u012B/g, 'ii').replace(/\u016B/g, 'uu').replace(/\u1E6D/g, '\.t').replace(/\u1E0D/g, '\.d').replace(/\u1E45/g, '\"n').replace(/\u1E47/g, '\.n').replace(/\u1E43/g, '\.m').replace(/\u1E41/g, '\.m').replace(/\u00F1/g, '\~n').replace(/\u1E37/g, '\.l').replace(/\u0100/g, 'AA').replace(/\u012A/g, 'II').replace(/\u016A/g, 'UU').replace(/\u1E6C/g, '\.T').replace(/\u1E0C/g, '\.D').replace(/\u1E44/g, '\"N').replace(/\u1E46/g, '\.N').replace(/\u1E42/g, '\.M').replace(/\u00D1/g, '\~N').replace(/\u1E36/g, '\.L');
@@ -153,6 +158,9 @@ var DPROverlay = {
 				var permalink = 'dpr:search?type=0&query='+input+'&MAT=m&set='+type+'&book=1&part=1&rx=false';
 				this.openDPRTab(permalink,'DPRs');
 				break;
+			case (type == 'Cv'):
+				this.convertText(input,params);
+				break;
 			case (type == 'Cj'):
 				var permalink = 'dpr:conjugate?word='+input;
 				this.openDPRTab(permalink,'DPRx');
@@ -175,7 +183,7 @@ var DPROverlay = {
 		var dprdict = document.getElementById("dpr-sub-dict");
 		var dprsearch = document.getElementById("dpr-sub-search");
 
-		var nosel = !gContextMenu.isTextSelected;
+		var nosel = (!gContextMenu.isTextSelected && !gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd));
 		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && nosel);
 		
 		if(prefs.getBoolPref('Bool.allContext')) {
@@ -204,6 +212,41 @@ var DPROverlay = {
 		input = input.replace(/ .*/,'');
 		output = DPRTrans.simpleWordTranslation(input);
 		alert(output.split('\n'));
+	},
+	convertText:function(text,type) {
+		switch(type) {
+			case 'u':
+				text = DPRTranslit.toUni(text);
+				break;
+			case 'v':
+				text = DPRTranslit.toVel(text);
+				break;
+			case 'd':
+				text = DPRTranslit.toDeva(text);
+				break;
+			case 'm':
+				text = DPRTranslit.toMyan(text);
+				break;
+			case 's':
+				text = DPRTranslit.toSin(text);
+				break;
+			case 't':
+				text = DPRTranslit.toThai(text);
+				break;
+		}
+		if(gContextMenu.target.tagName!="TEXTAREA"&&gContextMenu.target.tagName!="INPUT") {
+			const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);  
+			clipboardHelper.copyString(text);
+			alert('The following text has been copied to the clipboard:\n\n'+text);
+		}
+		else {
+			var el = gContextMenu.target;
+			var val = el.value;
+			var start = el.selectionStart
+			var end = el.selectionEnd
+			el.value = val.slice(0, start) + text + val.slice(end );
+			gContextMenu.target.setSelectionRange(start,start+text.length);
+		}
 	}
 }
 
