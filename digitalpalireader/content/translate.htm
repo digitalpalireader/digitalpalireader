@@ -44,6 +44,7 @@ function onDocLoad() {
 <script language="JavaScript1.3" type="text/javascript" src="js/eglossary.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/eng_verbs.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
 
 </head>
 
@@ -62,12 +63,16 @@ function onDocLoad() {
 			<div align="center">
 				<textarea type="text" id="input" value="" class="dect" rows="3" cols="50"></textarea>
 				<p id="translation"/>
+				<p id="altTable"/>
 			</div>
 			<p class="controls">
 			  <button type="button" id="translate" class="control" onclick="translateText()" title="Translate the text">Translate</button>
 			  <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
 			</p>
 			<hr/>
+			<p align="center"><i>Notes: this translation tool is highly experimental.  <br/>Most actual Pali sentences found in the Tipitaka probably won't translate completely, if it all.  <br/>For an example of a sentence that does work, try clicking on this one:<br/><br/>
+			<a class="green" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">dhammikā upāsakā pāpakehi manussehi mā carantu</a>
+			</p>
 		</div>
 	</div>
 	<div id="alertc"><span id="alert" class="large"></span></div>

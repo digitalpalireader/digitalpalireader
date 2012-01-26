@@ -766,7 +766,7 @@ function createTables(xmlDoc,hiert)
 												}
 											texnodups[t].push(tempexword[t][i]);
 										}
-										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x').replace(/ /g,'_') + 'q');
+										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x') + 'q');
 									}
 									for(var t=0; t<texnodups.length; t++) {
 										if(!exword[t]) exword[t] = [];
@@ -894,7 +894,7 @@ function createTables(xmlDoc,hiert)
 										texnodups.push(tempexword[i]);
 									}
 									tagtitle = 'q' + texnodups.join('q') + 'q';
-									tagtitle = tagtitle.replace(/\"/g, 'x').replace(/ /g,'_');
+									tagtitle = tagtitle.replace(/\"/g, 'x');
 
 									exword = exword.concat(texnodups);
 									
@@ -989,7 +989,7 @@ function createTables(xmlDoc,hiert)
 				for (ex = 0; ex < exnodups[t].length; ex++)
 				{
 					
-					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[t][ex] + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + exnodups[t][ex] + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
 				}
 				exwordout += '</td>';
 			}								
@@ -1021,7 +1021,7 @@ function createTables(xmlDoc,hiert)
 
 			for (ex = 0; ex < findiv; ex++)
 			{
-				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x').replace(/ /g,'_') + '\')">' + exnodups[findiv+ex] + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + exnodups[findiv+ex] + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
 			}
 			exwordout += '</table>';
 		}

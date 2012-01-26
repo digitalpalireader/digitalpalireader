@@ -203,7 +203,6 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 		for (i in query) {
 			querystring=(querystring?querystring+'+':'')+query[i];
 		}
-		//querystring=toVel(querystring).replace(/ /g, '_');
 	}
 
 	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
@@ -230,8 +229,8 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	// update query
 	
 	if(query) {
-		if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')).replace(/ /g, '_'));
-		else newurl = newurl + '&query='+toVel(query.join('+')).replace(/ /g, '_');
+		if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')));
+		else newurl = newurl + '&query='+toVel(query.join('+'));
 	}
 	else newurl = newurl.replace(/\&query=[^&]+/,'');
 
@@ -293,7 +292,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// first toolbar row
 	
-	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')).replace(/ /g, '_') : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
+	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')) : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
 	
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	

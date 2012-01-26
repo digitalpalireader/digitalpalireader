@@ -1349,7 +1349,7 @@ function resetVETable() {
 	if(!verb[vPersons[vdtypesNo[rn3][0]]] || !verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]])
 		return resetVETable();
 
-	G_oneVerb = [stem,verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]]];
+	G_oneVerb = [stem,verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]].replace(/[()]/g,'')];
 	
 	if(/^is /.test(ev)) {
 		if(tense != 'pres')

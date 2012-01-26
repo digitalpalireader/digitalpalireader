@@ -42,7 +42,7 @@ function translateTextx() {
 	
 	$('#translation').html(x+'<hr/><hr/><hr/>'+y);
 }
-function translateText() {
+function translateText(alts) {
 	if(/^zzz/.test($('#input').val()))
 		return translateTextx();
 	var words = [];
@@ -55,10 +55,10 @@ function translateText() {
 	$('#input').val(input);
 	input=input.split(' ');
 	for (i in input) {
-		var trans = translateWord(input[i]);
+		var trans = translateWord(input[i],i);
 		words.push(trans);
 	}
-	var out = arrangeWords(words);
+	var out = arrangeWords(words,alts);
 
 	if(!out.subject.length) {
 		if(G_verbDecl.length)
@@ -85,15 +85,15 @@ function translateText() {
 	$('#translation').html(makeTable([outparts.concat([(G_verbDecl[0]==2?'!':'.')])],'trans'));
 }
 
-function arrangeWords(wordst) {
+var G_altChoices = []; // this is for later, when we offer alternatives
+
+function arrangeWords(wordst,alts) {
 	G_subDecl = [];
 	G_verbDecl = [];
 	G_objDecl = [];
 
 	var pendG = [];
 	var pendI = [];
-	
-	var altChoices = []; // this is for later, when we offer alternatives
 	
 	var out = {
 		subject:[],
@@ -137,6 +137,8 @@ function arrangeWords(wordst) {
 	
 	var words = [];
 	
+	// perform filters
+	
 	for(i in wordst) {
 		// remove second ca, vaa
 		if(wordst[i][0][3] == 'ca' && ca++) {
@@ -151,6 +153,9 @@ function arrangeWords(wordst) {
 	}
 	for(i in words) {
 		for (j in words[i]) {
+			if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative
+				continue;
+			
 			if(!words[i][j][1] && !words[i][j][2])
 				tint = 'o';
 			else if(words[i][j][1] == 'bv')
@@ -287,6 +292,8 @@ function arrangeWords(wordst) {
 
 	for(i in words) {
 		if(chosen[i]) {
+			if(!alts) // don't recreate if we are using it
+				G_altChoices[i] = [words[i],j];
 			if(words[i][chosen[i][1]][2] && words[i][chosen[i][1]][2][1] == 6) { // genitive, keep with next
 				pendG.push(words[i][chosen[i][1]]);
 				continue;
@@ -302,7 +309,6 @@ function arrangeWords(wordst) {
 				pendI = [];
 			}
 			outer[chosen[i][0]].push(words[i][chosen[i][1]]);
-			altChoices.push([words[i],chosen[i][0]]);
 			if(pendG.length) {
 				outer[chosen[i][0]].push(G_joints['n'][5]);
 				for (k in pendG) {
@@ -313,6 +319,9 @@ function arrangeWords(wordst) {
 			continue;
 		}
 		for(j in words[i]) {  // for the rest, choose first, then alt the rest
+		
+			if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative
+				continue;
 			var w = words[i][j];
 			var vib = w[2]?w[2][1]:null;
 			var type = w[1];
@@ -320,14 +329,15 @@ function arrangeWords(wordst) {
 			if(vib == 1 || vib == 2 || type == 'v') // we've chosen them already;
 				continue;
 
+			if(!alts) // don't recreate if we are using it
+				G_altChoices[i] = [words[i],j];
+				
 			if(w[2] && vib == 6) { // genitive, keep with next
 				pendG.push(w);
-				altChoices.push([words[i],j]);
 				break;
 			}	
 			if(w[1] == 'i') { // indec, keep with next
 				pendI.push(w);
-				altChoices.push([words[i],j]);
 				break;
 			}	
 			if(!w[1] && !w[2])
@@ -336,18 +346,17 @@ function arrangeWords(wordst) {
 				tint = w[2][1]-1;
 			else
 				tint = 'o';
-			if (pendI.length) { // add genatives
+			if (pendI.length) { // add indeclinables
 				for (k in pendI)
 					outer[tint].push(pendI[k]);
 				pendI = [];
 			}
-			if (pendG.length) { // add genatives
+			if (pendG.length) { // add genitives
 				for (k in pendG)
 					outer[tint].push(pendG[k]);
 				pendG = [];
 			}
 			outer[tint].push(w);
-			altChoices.push([words[i],j]);
 			break;
 		}
 	}
@@ -356,12 +365,12 @@ function arrangeWords(wordst) {
 		if(outer[i].length > 1 || (outer[i].length == 1 && outer[i][0].length > 1)) {
 			var joined = '';
 			if(i != 'v' && i != 'o') // nominal, add prepositions, plural
-				joined = addPhrasePreps(outer[i],i,'n');
+				joined = addPhrasePreps(outer[i],i,'n',true);
 			else if(i == 'v') // verbal, add prepositions
-				joined = addPhrasePreps(outer[i],G_verbDecl[0]-1,'v');
+				joined = addPhrasePreps(outer[i],G_verbDecl[0]-1,'v',true);
 			else
 				for(j=0;j<outer[i].length;j++) {
-					joined += (j>0?' ':'')+makeWord(outer[i][j]);
+					joined += (j>0?' ':'')+makeWord(outer[i][j],false,true);
 				}
 				
 			if(i == 0)
@@ -519,11 +528,11 @@ function checkCompatibleVerb(input,chosen,words) {
 
 }
 
-function makeWord(word,pl) {
-	return '<a class="green underline" href="dpr:index?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
+function makeWord(word,pl,alts) {
+	return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href="dpr:index?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
-function translateWord(word) {
+function translateWord(word,i) {
 	G_thisWord = word;
 	var decls = [];
 	var yto = [];
@@ -539,25 +548,25 @@ function translateWord(word) {
 		trans = G_specWords[word][1];
 		deca = G_specWords[word][2];
 		meta = [];
-		meta['orig'] = word;
-		outs.push([trans,type,deca,word,meta]);
+		meta['orig'] = vword;
+		outs.push([trans,type,deca,word,meta,i]);
 	}
 	if(eg[vword]) {
 		meta = [];
 		type = yt[vword][4].toLowerCase();
 		trans = eg[vword];
 		if(type == 'i' || type == 'p') {
-			meta['orig'] = word;
+			meta['orig'] = vword;
 			deca = null;
-			outs.push([trans,type,deca,word,meta]);
+			outs.push([trans,type,deca,word,meta,i]);
 		}
 		else{
 			for(i in G_defDecl[type]) {
 				if(G_defDecl[type][i][0].test(vword)){
 					deca = G_defDecl[type][i][1][0];
 					meta = [];
-					meta['orig'] = word;
-					outs.push([trans,type,deca,word,meta]);
+					meta['orig'] = vword;
+					outs.push([trans,type,deca,word,meta,i]);
 				}
 			}
 		}
@@ -569,8 +578,8 @@ function translateWord(word) {
 			if(G_defDecl['v'][i][0].test(vword)){
 				deca = G_defDecl['v'][i][1][0];
 				meta = [];
-				meta['orig'] = word;
-				outs.push([trans,type,deca,word,meta]);
+				meta['orig'] = vword;
+				outs.push([trans,type,deca,word,meta,i]);
 			}
 		}
 	}
@@ -582,8 +591,8 @@ function translateWord(word) {
 				trans = stripEnglish(yt[vword][2]);
 				deca = null;
 				meta = [];
-				meta['orig'] = word;
-				outs.push([trans,type,deca,word,meta]);
+				meta['orig'] = vword;
+				outs.push([trans,type,deca,word,meta,i]);
 			}
 			else {
 				first:
@@ -594,8 +603,8 @@ function translateWord(word) {
 							trans = stripEnglish(yt[vword][2]);
 							deca = decls[c];
 							meta = [];
-							meta['orig'] = word;
-							outs.push([trans,type,deca,word,meta]);
+							meta['orig'] = vword;
+							outs.push([trans,type,deca,word,meta,i]);
 						}
 					}
 				}
@@ -629,7 +638,7 @@ function translateWord(word) {
 							deca = decls[c];
 							meta = [];
 							meta['orig'] = temp;
-							outs.push([trans,type,deca,word,meta]);
+							outs.push([trans,type,deca,word,meta,i]);
 						}
 					}
 					if (engVerbs[toUni(temp)]) {
@@ -638,7 +647,7 @@ function translateWord(word) {
 							deca = decls[c];
 							meta = [];
 							meta['orig'] = temp;
-							outs.push([trans,type,deca,word,meta]);
+							outs.push([trans,type,deca,word,meta,i]);
 						}
 					}	
 					for(c in decls) {
@@ -646,7 +655,7 @@ function translateWord(word) {
 						deca = decls[c];
 						meta = [];
 						meta['orig'] = temp;
-						outs.push([trans,type,deca,word,meta]);
+						outs.push([trans,type,deca,word,meta,i]);
 					}
 				}
 				else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'object') {
@@ -657,14 +666,14 @@ function translateWord(word) {
 						deca = decls[c];
 						meta = [];
 						meta['orig'] = temp;
-						outs.push([trans,type,deca,word,meta]);
+						outs.push([trans,type,deca,word,meta,i]);
 					}
 				}
 			}
 		}
 		if(!trans) {
-			meta['orig'] = word;
-			outs.push([word,null,null,word,meta]);
+			meta['orig'] = vword;
+			outs.push([word,null,null,word,meta,i]);
 		}
 	}
 		
@@ -717,18 +726,18 @@ function addPlural(word,type) {
 		return word.replace(/\bone\b/,'ones');
 	else if(/man\b/.test(word))
 		word = word.replace(/man\b/,"men");
-	else if(/(\S\S+)y$/.test(word))
+	else if(/(\S\S+)y$/.test(word) && type != 'v')
 		word = word.replace(/y$/,"ies");
 	else if(/(\S\S+)f$/.test(word))
 		word = word.replace(/f$/,"ves");
-	else if(/(\S+)(ss|[sc]h|zz|[xo])$/.test(word))
+	else if(/(\S+)(s|[sc]h|zz|[xo])$/.test(word))
 		word += 'es';
 	else
 		word += 's';
 	return word;
 }
 
-function addPhrasePreps(words,i,type) {
+function addPhrasePreps(words,i,type,alts) {
 	if(!type)
 		var type = words[0][1];
 	if(!i)
@@ -741,9 +750,9 @@ function addPhrasePreps(words,i,type) {
 		if(j > 0)
 			joined += ' ';
 		if(words[j+1])
-			joined += makeWord(words[j]);
+			joined += makeWord(words[j],false,alts);
 		else // last word, check plural
-			joined += makeWord(words[j],(type == 'n' && words[j][2] && words[j][2][2] == 2));
+			joined += makeWord(words[j],(type == 'n' && words[j][2] && words[j][2][2] == 2),alts);
 	}
 	return joined;
 }
@@ -770,6 +779,27 @@ function simpleWordTranslation(word) {
 		words[i] = addPhrasePreps(words[i]);
 	}
 	return words;
+}
+
+
+function showAltTable(idx) {
+	var w = G_altChoices[idx][0];
+	if(w.length < 2)
+		return;
+	var out = '<select onchange="changeAlt(this,'+idx+')">';
+	for(i in w) {
+		out+='<option>'+makeGrammarTerms(w[i])+'</option>';
+	}
+	out+='</select>';
+	$('#altTable').hide();
+	$('#altTable').html(out);
+	$('#altTable').show('fast');
+}
+
+function changeAlt(e,i) {
+	var alt = e.selectedIndex;
+	G_altChoices[i][1] = alt;
+	translateText(G_altChoices);
 }
 
 var G_subDecl = [];

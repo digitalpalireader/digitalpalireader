@@ -533,16 +533,30 @@ function getConjugation(form) {
 	return out;
 }
 
-function makeGrammarTerms(word) {
-	switch(word[1]) {
+function makeGrammarTerms([trans,type,deca,word,meta]) {
+	switch(type) {
 		case 'n':
-			return '(n.) '+G_vibhatti[word[2][1]]+' '+G_vacana[word[2][2]];
+		case 'p':
+			return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+G_vibhatti[deca[1]]+' '+G_vacana[deca[2]];
 		case 'v':
-			return '(v.) '+G_tenses[word[2][0]]+' '+G_persons[word[2][1]]+' person '+G_vacana[word[2][2]];
+			return '(v.) '+G_tenses[deca[0]]+' '+G_persons[deca[1]]+' person '+G_vacana[deca[2]];
 		default:
-			return '';
+			return (yt[meta['orig']]?yt[meta['orig']][1]:'');
 	}
 			
+}
+
+function typeAndGender(t) {
+	if(t == 7)
+		return 'adj.';
+	var out = [];
+	if (t & 1)
+		out.push('m.');
+	if (t & 2)
+		out.push('nt.');
+	if (t & 4)
+		out.push('f.');
+	return 'noun, '+out.join (', ');
 }
 
 G_persons = ['','3rd','2nd','1st'];
