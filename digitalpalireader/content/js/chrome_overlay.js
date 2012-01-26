@@ -179,11 +179,12 @@ var DPROverlay = {
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 		var dprmenu = document.getElementById("dpr-sub-context");
 		var dprconj = document.getElementById("dpr-conj-item");
+		var dprconv = document.getElementById("dpr-conv-context");
 		var dprtrans = document.getElementById("dpr-trans-item");
 		var dprdict = document.getElementById("dpr-sub-dict");
 		var dprsearch = document.getElementById("dpr-sub-search");
 
-		var nosel = (!gContextMenu.isTextSelected && !gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd));
+		var nosel = (!gContextMenu.isTextSelected && (!gContextMenu.target.value || !gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd)));
 		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && nosel);
 		
 		if(prefs.getBoolPref('Bool.allContext')) {

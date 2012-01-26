@@ -16,7 +16,7 @@ function loadDefaults() {
 		if(DPR_prefsD[radio[i]])
 			ck.setAttribute('selected','true');
 		else 
-			ck.setAttribute('selected','false');
+			ck.removeAttribute('selected');
 	}
 	for (var i = 0; i < ints.length; ++i) {
 		var box = document.getElementById(ints[i]);
@@ -90,10 +90,11 @@ function loadPrefs() {
 		}
 		for (var i = 0; i < radio.length; ++i) {
 			var ck = document.getElementById(radio[i]);
-			if(prefs.getBoolPref(ck.getAttribute("prefstring")))
+			if(prefs.getBoolPref(ck.getAttribute("prefstring"))) {
 				ck.setAttribute('selected','true');
+			}
 			else 
-				ck.setAttribute('selected','false');
+				ck.removeAttribute('selected');
 		}		
 		// backgrounds
 		

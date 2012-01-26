@@ -16,7 +16,8 @@
 			class="menu-iconic" 
 			label="DPR">
 			<menupopup>
-				<menu label="Convert">
+				<menu id="dpr-conv-context"
+					label="Convert">
 					<menupopup>
 						<menuitem label="to Unicode" 
 							oncommand="DPROverlay.rightClick('Cv','u');"/>  
