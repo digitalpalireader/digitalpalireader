@@ -120,7 +120,6 @@ width: 100%;
 height: 100%;
 margin:0;
 padding:0;
-overflow: hidden;
 }
 
 hr {
@@ -598,13 +597,17 @@ position:relative;
 height:100%;
 width:100%;
 }
-#dif,#bvb {
+#dif {
 position:absolute;
 left:0px;
 right:0px;
 top:0px;
 padding:0 20px;
  
+}
+#bvb {
+padding:0 20px;
+overflow:auto; 
 }
 
 .bframe {
