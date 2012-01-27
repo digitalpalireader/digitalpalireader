@@ -562,4 +562,4 @@ function typeAndGender(t) {
 G_persons = ['','3rd','2nd','1st'];
 G_vibhatti = ['','nominative','accusative','instrumental','dative','ablative','genitive','locative','vocative'];
 G_vacana = ['','singular','plural'];
-G_tenses = ['','present','imperative','optative','future'];
+G_tenses = ['','present','imperative','optative','future','past','causative'];

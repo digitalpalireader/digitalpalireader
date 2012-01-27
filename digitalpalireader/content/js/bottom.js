@@ -5,7 +5,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onDocLoad() {
-	getconfig();
+	//getconfig();
 	//openDPRSidebar();
 
 	var link = document.location.href.split('?')[1];
@@ -24,12 +24,17 @@ function onDocLoad() {
 					break;
 			}
 		}
+		var title = mainWindow.gBrowser.selectedTab.getAttribute('label',title);
 		document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
+		mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 	}
-	else moveFrame(6);
+	else {
+		moveFrame(6);
+		document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+	}
 	document.onkeypress = function(e){
 		if(document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.wrappedJSObject.keyPressed(e);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
 	};
 }
 function getconfig() {

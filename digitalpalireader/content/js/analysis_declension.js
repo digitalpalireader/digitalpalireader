@@ -22,9 +22,9 @@ G_endings.push(['e',0,0,'a','n',[[1,2,2],[3,7,1],[4,8,1]]]);
 G_endings.push(['ena',0,0,'a','n',[[3,3,1]]]);
 G_endings.push(['ehi',0,0,'a','n',[[3,3,2],[3,5,2]]]);
 G_endings.push(['ebhi',0,0,'a','n',[[3,3,2],[3,5,2]]]);
-G_endings.push(['aaya',1,0,'','n',[[4,3,1],[3,4,1],[4,4,1],[4,5,1],[4,6,1],[4,7,1]]]); 
-G_endings.push(['ssa',0,0,'','n',[[3,4,1],[3,6,1]]]); 
-G_endings.push(['aana.m',1,0,'','n',[[3,4,2],[3,6,2]]]); 
+G_endings.push(['aaya',1,0,'','n',[[4,3,1],[7,4,1],[4,5,1],[4,6,1],[4,7,1]]]);
+G_endings.push(['ssa',0,0,'','n',[[3,4,1],[3,6,1]]]);
+G_endings.push(['aana.m',1,0,'','n',[[3,4,2],[3,6,2]]]);
 G_endings.push(['smaa',0,0,'','n',[[3,5,1]]]);
 G_endings.push(['mhaa',0,0,'','n',[[3,5,1]]]);
 G_endings.push(['smi.m',0,0,'','n',[[3,7,1]]]);
@@ -32,62 +32,63 @@ G_endings.push(['mhi',0,1,'','n',[[3,7,1]]]);
 G_endings.push(['esu',0,0,'a','n',[[3,7,2]]]);
 
 // masc i
-G_endings.push(['ayo',0,1,'i','n']);
-G_endings.push(['ii',1,1,'','n']);
-G_endings.push(['inaa',1,1,'','n']);
-G_endings.push(['iihi',1,1,'','n']);
-G_endings.push(['hi',0,2,'','n']);
-G_endings.push(['iibhi',1,1,'','n']);
-G_endings.push(['bhi',0,1,'','n']);
-G_endings.push(['ino',1,1,'','n']);
-G_endings.push(['iina.m',1,1,'','n']); 
-G_endings.push(['iisu',1,1,'','n']);
+G_endings.push(['ayo',0,1,'i','n',[[1,1,2],[1,2,2],[1,8,2]]]);
+G_endings.push(['ii',1,1,'','n',[[5,1,1],[7,1,2],[7,2,2]]]);
+G_endings.push(['inaa',1,1,'','n',[[3,3,1],[3,5,1]]]);
+G_endings.push(['iihi',1,1,'','n',[[7,3,2],[7,5,2]]]);
+G_endings.push(['hi',0,2,'','n',[[7,3,2],[7,5,2]]]);
+G_endings.push(['iibhi',1,1,'','n',[[7,3,2],[7,5,2]]]);
+G_endings.push(['bhi',0,1,'','n',[[7,3,2],[7,5,2]]]);
+G_endings.push(['ino',1,1,'','n',[[3,4,1],[3,6,1]]]);
+G_endings.push(['iina.m',1,1,'','n',[[ 7,4,2,7,6,2]]]);
+G_endings.push(['iisu',1,1,'','n',[[7,7,2]]]);
 
 // masc ii
 
-G_endings.push(['i',1,2,'i','n']);
-G_endings.push(['ina.m',1,0,'','n']);
+G_endings.push(['i',1,2,'i','n',[[7,1,1],[7,8,1]]]);
+G_endings.push(['ina.m',1,0,'','n',[[3,2,1]]]);
 
 // masc u
 
-G_endings.push(['avo',0,1,'u','n']);
-G_endings.push(['uu',1,1,'','n']);
-G_endings.push(['unaa',1,1,'','n']);
-G_endings.push(['uuhi',1,1,'','n']);
-G_endings.push(['uubhi',1,1,'','n']);
-G_endings.push(['uno',1,1,'','n']);
-G_endings.push(['uuna.m',1,1,'','n']); 
-G_endings.push(['uusu',1,1,'','n']); 
+G_endings.push(['avo',0,1,'u','n',[[1,1,2],[1,2,2]]]);
+G_endings.push(['ave',0,1,'u','n',[[1,8,2]]]);
+G_endings.push(['uu',1,1,'','n',[[5,1,1],[5,1,2],[5,2,2],[5,8,2]]]);
+G_endings.push(['unaa',1,1,'','n',[[3,3,1],[3,5,1]]]);
+G_endings.push(['uuhi',1,1,'','n',[[3,3,2],[3,5,2]]]);
+G_endings.push(['uubhi',1,1,'','n',[[3,3,2],[3,5,2]]]);
+G_endings.push(['uno',1,1,'','n',[[3,4,1],[3,6,1]]]);
+G_endings.push(['uuna.m',1,1,'','n',[[7,4,2],[7,6,2]]]);
+G_endings.push(['uusu',1,1,'','n',[[7,7,2]]]);
 
 // masc uu
 
-G_endings.push(['u',1,2,'u','n']);
+G_endings.push(['u',1,2,'u','n',[[5,8,1]]]);
 
 // nt. a
-G_endings.push(['aani',1,2,'','n']);
+G_endings.push(['aani',1,2,'','n',[[2,1,2],[2,2,2]]]);
 // nt. i
-G_endings.push(['iini',1,2,'','n']);
+G_endings.push(['iini',1,2,'','n',[[2,1,2],[2,2,2]]]);
 // nt. u
-G_endings.push(['uuni',1,2,'','n']);
+G_endings.push(['uuni',1,2,'','n',[[2,1,2],[2,2,2]]]);
 
 // f. aa
 G_endings.push(['a',1,2,'a','n']);
-G_endings.push(['aayo',1,0,'','n']);
-G_endings.push(['aahi',1,0,'','n']);
-G_endings.push(['aabhi',1,0,'','n']);
-G_endings.push(['aaya.m',1,0,'','n']); 
-G_endings.push(['aasu',1,0,'','n']);
+G_endings.push(['aayo',1,0,'','n',[[4,1,2],[4,2,2],[4,8,2]]]);
+G_endings.push(['aahi',1,0,'','n',[[4,3,2],[4,5,2]]]);
+G_endings.push(['aabhi',1,0,'','n',[[4,3,2],[4,5,2]]]);
+G_endings.push(['aaya.m',1,0,'','n',[[4,7,1]]]);
+G_endings.push(['aasu',1,0,'','n',[[4,7,2]]]);
 // f. i
-G_endings.push(['iyo',1,0,'','n']);
-G_endings.push(['iyaa',1,0,'','n']);
-G_endings.push(['iya.m',1,0,'','n']); 
+G_endings.push(['iyo',1,0,'','n',[[4,1,2],[4,2,2]]]);
+G_endings.push(['iyaa',1,0,'','n',[[4,3,1],[4,4,1],[4,5,1],[4,6,1],[4,7,1]]]);
+G_endings.push(['iya.m',1,0,'','n',[[4,7,1]]]);
 // f. ii
-G_endings.push(['ii',0,0,'a','n']);
-G_endings.push(['inii',0,0,'a','n']);
+G_endings.push(['ii',0,0,'a','n',[[4,1,1]]]);
+G_endings.push(['inii',0,0,'a','n',[[4,1,1]]]);
 // f. u
-G_endings.push(['uyo',1,0,'','n']);
-G_endings.push(['uyaa',1,0,'','n']);
-G_endings.push(['uya.m',1,0,'','n']); 
+G_endings.push(['uyo',1,0,'','n',[[4,1,2],[4,2,2]]]);
+G_endings.push(['uyaa',1,0,'','n',[[4,3,1],[4,4,1],[4,5,1],[4,6,1],[4,7,1]]]);
+G_endings.push(['uya.m',1,0,'','n',[[4,7,1]]]);
 // f. uu
 
 
@@ -177,9 +178,9 @@ G_endings.push(['e',0,0,'o','n']);
 G_endings.push(['ena',0,0,'o','n']);
 G_endings.push(['ehi',0,0,'o','n']);
 G_endings.push(['ebhi',0,0,'o','n']);
-G_endings.push(['aaya',0,0,'o','n']); 
-G_endings.push(['assa',0,0,'o','n']); 
-G_endings.push(['aana.m',0,0,'o','n']); 
+G_endings.push(['aaya',0,0,'o','n']);
+G_endings.push(['assa',0,0,'o','n']);
+G_endings.push(['aana.m',0,0,'o','n']);
 G_endings.push(['asmaa',0,0,'o','n']);
 G_endings.push(['amhaa',0,0,'o','n']);
 G_endings.push(['asmi.m',0,0,'o','n']);
@@ -236,7 +237,7 @@ G_endings.push(['oti',3,0,'','v',[[1,1,1]]]);
 
 G_endings.push(['anti',1,0,'ti','v',[[1,1,2]]]);
 G_endings.push(['si',0,3,'ti','v',[[1,2,1]]]);
-G_endings.push(['asi',1,0,'ti','v',[[1,2,1]]]); 
+G_endings.push(['asi',1,0,'ti','v',[[1,2,1]]]);
 G_endings.push(['atha',1,0,'ti','v',[[1,2,2]]]);
 G_endings.push(['aami',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
 G_endings.push(['aama',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
@@ -311,20 +312,20 @@ G_endings.push(['ayitvaa',0,2,'eti','v']);
 G_endings.push(['ayitvaana',0,2,'eti','v']);
 G_endings.push(['vaana',0,2,'i','v']);
 G_endings.push(['aapetvaa',1,0,'ti','v']);
-G_endings.push(['itvaana',0,0,'ati','v']); 
-G_endings.push(['itvaana',0,0,'aati','v']); 
-G_endings.push(['itvaana',0,0,'eti','v']); 
-G_endings.push(['etvaana',0,0,'ati','v']); 
-G_endings.push(['tvaana',0,0,'ti','v']); 
-G_endings.push(['itvaa',0,0,'ati','v']); 
-G_endings.push(['itvaa',0,0,'aati','v']); 
-G_endings.push(['itvaa',0,0,'eti','v']); 
-G_endings.push(['etvaa',0,0,'ati','v']); 
-G_endings.push(['tvaa',0,0,'ti','v']); 
-G_endings.push(['aaya',1,0,'ti','v']); 
-G_endings.push(['aaya',1,0,'ati','v']); 
-G_endings.push(['aaya',1,0,'aati','v']); 
-G_endings.push(['aaya',1,0,'eti','v']); 
+G_endings.push(['itvaana',0,0,'ati','v']);
+G_endings.push(['itvaana',0,0,'aati','v']);
+G_endings.push(['itvaana',0,0,'eti','v']);
+G_endings.push(['etvaana',0,0,'ati','v']);
+G_endings.push(['tvaana',0,0,'ti','v']);
+G_endings.push(['itvaa',0,0,'ati','v']);
+G_endings.push(['itvaa',0,0,'aati','v']);
+G_endings.push(['itvaa',0,0,'eti','v']);
+G_endings.push(['etvaa',0,0,'ati','v']);
+G_endings.push(['tvaa',0,0,'ti','v']);
+G_endings.push(['aaya',1,0,'ti','v']);
+G_endings.push(['aaya',1,0,'ati','v']);
+G_endings.push(['aaya',1,0,'aati','v']);
+G_endings.push(['aaya',1,0,'eti','v']);
 G_endings.push(['tu.m',0,0,'ti','v']);
 G_endings.push(['itu.m',0,0,'ati','v']);
 G_endings.push(['itu.m',0,0,'aati','v']);
@@ -333,37 +334,37 @@ G_endings.push(['itu.m',0,0,'aati','v']);
 
 G_endings.push(['a',0,3,'ati','v']);
 G_endings.push(['i',0,3,'ati','v']);
-G_endings.push(['imha',0,0,'ati','v']); 
-G_endings.push(['imhaa',0,0,'ati','v']); 
-G_endings.push(['i.msu',0,1,'ati','v']); 
-G_endings.push(['ittha',0,0,'ati','v']); 
-G_endings.push(['u.m',0,0,'ati','v']); 
-G_endings.push(['su.m',0,0,'ti','v']); 
-G_endings.push(['si.m',0,0,'ti','v']); 
-G_endings.push(['i.m',0,0,'ati','v']); 
+G_endings.push(['imha',0,0,'ati','v']);
+G_endings.push(['imhaa',0,0,'ati','v']);
+G_endings.push(['i.msu',0,1,'ati','v']);
+G_endings.push(['ittha',0,0,'ati','v']);
+G_endings.push(['u.m',0,0,'ati','v']);
+G_endings.push(['su.m',0,0,'ti','v']);
+G_endings.push(['si.m',0,0,'ti','v']);
+G_endings.push(['i.m',0,0,'ati','v']);
 
 // past aa
 
 G_endings.push(['a',0,3,'aati','v']);
 G_endings.push(['i',0,3,'aati','v']);
-G_endings.push(['imha',0,0,'aati','v']); 
-G_endings.push(['imhaa',0,0,'aati','v']); 
-G_endings.push(['i.msu',0,1,'aati','v']); 
-G_endings.push(['ittha',0,0,'aati','v']); 
-G_endings.push(['u.m',0,0,'aati','v']); 
-G_endings.push(['i.m',0,0,'aati','v']); 
+G_endings.push(['imha',0,0,'aati','v']);
+G_endings.push(['imhaa',0,0,'aati','v']);
+G_endings.push(['i.msu',0,1,'aati','v']);
+G_endings.push(['ittha',0,0,'aati','v']);
+G_endings.push(['u.m',0,0,'aati','v']);
+G_endings.push(['i.m',0,0,'aati','v']);
 
 // past e
 
 G_endings.push(['a',0,3,'eti','v']);
 G_endings.push(['i',0,3,'eti','v']);
-G_endings.push(['imha',0,0,'eti','v']); 
-G_endings.push(['imhaa',0,0,'eti','v']); 
-G_endings.push(['i.msu',0,1,'eti','v']); 
-G_endings.push(['ayi.msu',0,1,'eti','v']); 
-G_endings.push(['ittha',0,0,'eti','v']); 
-G_endings.push(['u.m',0,0,'eti','v']); 
-G_endings.push(['i.m',0,0,'eti','v']); 
+G_endings.push(['imha',0,0,'eti','v']);
+G_endings.push(['imhaa',0,0,'eti','v']);
+G_endings.push(['i.msu',0,1,'eti','v']);
+G_endings.push(['ayi.msu',0,1,'eti','v']);
+G_endings.push(['ittha',0,0,'eti','v']);
+G_endings.push(['u.m',0,0,'eti','v']);
+G_endings.push(['i.m',0,0,'eti','v']);
 
 // optative a
 
@@ -469,10 +470,10 @@ function makeDeclensions(oneword,lastpart,nextpart) {
 				//wtrDup[dec] = 1;
 
 				if (gend[4] == 'v') { 
-					wtrV.push([dec,i]); 
+					wtrV.push([dec,i]);
 				}
 				else { 
-					wtrN.push([dec,i]); 
+					wtrN.push([dec,i]);
 					if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
 						wtrN.push([dec+dec.charAt(dec.length-1),i]);
 					}
@@ -495,7 +496,7 @@ function makeDeclensions(oneword,lastpart,nextpart) {
 
 					if (G_altStem[stem][2]) { wtrV.push([dec,i]); }
 					else { 
-						wtrN.push([dec,i]); 
+						wtrN.push([dec,i]);
 						if(/[aiu]/.exec(dec.charAt(dec.length-1))) { // long vowels
 							wtrN.push([dec+dec.charAt(dec.length-1),i]);
 						}

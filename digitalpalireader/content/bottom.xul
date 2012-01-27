@@ -15,7 +15,7 @@
 		</menupopup>
 		<hbox flex="1" id="f1">
 			<vbox flex="1">
-				<browser disablehistory="true" height="300" type="content" id="dict" src="bottom.htm"  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
+				<browser disablehistory="true" height="300" type="content" id="dict" src=""  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
 			</vbox>
 		</hbox>
 		<hbox flex="1" id="f2" collapsed="true">

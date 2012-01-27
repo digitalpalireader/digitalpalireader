@@ -139,23 +139,41 @@ function arrangeWords(wordst,alts) {
 	
 	// perform filters
 	
-	for(i in wordst) {
+	for(i=0;i<wordst.length;i++) {
 		// remove second ca, vaa
-		if(wordst[i][0][3] == 'ca' && ca++) {
+		if(wordst[i][0] && wordst[i][0][3] == 'ca' && ca++) {
 			ca = 0;
 			continue;
 		}
-		else if(wordst[i][0][3] == 'vaa' && va++) {
+		else if(wordst[i][0] && wordst[i][0][3] == 'vaa' && va++) {
 			va = 0;
 			continue;
 		}
-		words.push(wordst[i]);	
+		
+		var wgtemp = [];
+
+		// prefer genitives
+		
+		for(j=0;j<wordst[i].length;j++) {
+			if(wordst[i][j][2] && wordst[i][j][2][1] == 6) {
+				wgtemp.push(wordst[i][j]);
+			}
+		}
+		if(wgtemp.length) {
+			for(j=0;j<wordst[i].length;j++) {
+				if(wordst[i][j][2][1] != 6)
+					wgtemp.push = wordst[i][j];
+			}
+			wordst[i] = wgtemp;
+		}
+		words.push(wordst[i]);
+		
 	}
-	for(i in words) {
-		for (j in words[i]) {
+	for(i=0;i<words.length;i++) {
+
+		for(j=0;j<words[i].length;j++) {
 			if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative
 				continue;
-			
 			if(!words[i][j][1] && !words[i][j][2])
 				tint = 'o';
 			else if(words[i][j][1] == 'bv')
@@ -177,7 +195,7 @@ function arrangeWords(wordst,alts) {
 
 				chosen[i] = [tint,j];
 			}
-			else // collect
+			if(!chosen[i])
 				inter[tint].push([i,j]);
 		}
 	}
@@ -310,7 +328,7 @@ function arrangeWords(wordst,alts) {
 			}
 			outer[chosen[i][0]].push(words[i][chosen[i][1]]);
 			if(pendG.length) {
-				outer[chosen[i][0]].push(G_joints['n'][5]);
+				outer[chosen[i][0]].push(G_joints['n'][5]); // push preposition
 				for (k in pendG) {
 					outer[chosen[i][0]].push(pendG[k]);
 				}
@@ -361,6 +379,8 @@ function arrangeWords(wordst,alts) {
 		}
 	}
 	
+	// now put it all together
+	
 	for (i in outer) {
 		if(outer[i].length > 1 || (outer[i].length == 1 && outer[i][0].length > 1)) {
 			var joined = '';
@@ -370,7 +390,11 @@ function arrangeWords(wordst,alts) {
 				joined = addPhrasePreps(outer[i],G_verbDecl[0]-1,'v',true);
 			else
 				for(j=0;j<outer[i].length;j++) {
-					joined += (j>0?' ':'')+makeWord(outer[i][j],false,true);
+					if(typeof(outer[i][j]) == 'string') {
+						joined += (j>0?' ':'')+outer[i][j];
+					}
+					else
+						joined += (j>0?' ':'')+makeWord(outer[i][j],false,true);
 				}
 				
 			if(i == 0)
@@ -532,7 +556,7 @@ function makeWord(word,pl,alts) {
 	return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href="dpr:index?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
-function translateWord(word,i) {
+function translateWord(word,idx) {
 	G_thisWord = word;
 	var decls = [];
 	var yto = [];
@@ -549,7 +573,7 @@ function translateWord(word,i) {
 		deca = G_specWords[word][2];
 		meta = [];
 		meta['orig'] = vword;
-		outs.push([trans,type,deca,word,meta,i]);
+		outs.push([trans,type,deca,word,meta,idx]);
 	}
 	if(eg[vword]) {
 		meta = [];
@@ -558,7 +582,7 @@ function translateWord(word,i) {
 		if(type == 'i' || type == 'p') {
 			meta['orig'] = vword;
 			deca = null;
-			outs.push([trans,type,deca,word,meta,i]);
+			outs.push([trans,type,deca,word,meta,idx]);
 		}
 		else{
 			for(i in G_defDecl[type]) {
@@ -566,7 +590,7 @@ function translateWord(word,i) {
 					deca = G_defDecl[type][i][1][0];
 					meta = [];
 					meta['orig'] = vword;
-					outs.push([trans,type,deca,word,meta,i]);
+					outs.push([trans,type,deca,word,meta,idx]);
 				}
 			}
 		}
@@ -579,7 +603,7 @@ function translateWord(word,i) {
 				deca = G_defDecl['v'][i][1][0];
 				meta = [];
 				meta['orig'] = vword;
-				outs.push([trans,type,deca,word,meta,i]);
+				outs.push([trans,type,deca,word,meta,idx]);
 			}
 		}
 	}
@@ -592,7 +616,7 @@ function translateWord(word,i) {
 				deca = null;
 				meta = [];
 				meta['orig'] = vword;
-				outs.push([trans,type,deca,word,meta,i]);
+				outs.push([trans,type,deca,word,meta,idx]);
 			}
 			else {
 				first:
@@ -600,92 +624,199 @@ function translateWord(word,i) {
 					if(G_defDecl[type][i][0].test(vword)){
 						decls = G_defDecl[type][i][1];
 						for(c in decls) { // just get the first one for now
+							var deft = true;
 							trans = stripEnglish(yt[vword][2]);
 							deca = decls[c];
 							meta = [];
 							meta['orig'] = vword;
-							outs.push([trans,type,deca,word,meta,i]);
+							outs.push([trans,type,deca,word,meta,idx]);
 						}
 					}
 				}
+				if(!deft) {
+					trans = stripEnglish(yt[vword][2]);
+					outs.push([trans,type,null,word,meta,idx]);
+					meta = [];
+					meta['orig'] = vword;
+				}
 			}
 		}
+		else if (typeof(P[vword]) == 'object') {
+			for(p in P[temp]) {
+				var tloc = P[vword][p].split('/');
+				var t1 = tloc[0];
+				var t2 = tloc[1];
+				var pedfileget = t1 + '/' + t2;
+				var pedp = 'etc/XML1/'+ t1+'/ped.xml';
+				var xmlhttp = new window.XMLHttpRequest();
+				xmlhttp.open("GET", pedp, false);
+				xmlhttp.send(null);
+				var xmlDoc = xmlhttp.responseXML.documentElement;
+				
+				var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
+				
+				trans = data.replace(/^[^\[]+\[[^\]]*\]([a-zA-Z ]).*/g, "$1").replace(/^ +/,'').replace(/ +$/,'');
+				type = data.replace(/^[^\[(]+\(([^)]+)\).*/,"$1");
+				
+				if(/adj\./.test(type))
+					type = 'p';
+				else if(/indecl\./.test(type))
+					type = 'i';
+				else if(/(adj|nt|m|f)\./.test(type))
+					type = 'n';
+				else if(/^to /.test(trans))
+					type = 'v';
+				else
+					type = 'n';
 
-		if(!trans) {
-			type = '';
-			var endings = makeDeclensions(vword);
-			wtr = endings[0].concat(endings[1]);
-			wtr = wtr.sort(sortLongerDec);
-			second:
-			for (a in wtr) {
-				type = G_endings[wtr[a][1]][4];
-				var temp = wtr[a][0];
-				var declt = G_endings[wtr[a][1]][5];
-				decls = [];
-				if(yt[temp] && yt[temp][4] != 'I') {
-					var gender = yt[temp][1];
+				for(i in G_defDecl[type]) {
+					if(G_defDecl[type][i][0].test(vword)){
+						decls = G_defDecl[type][i][1];
+						for(c in decls) { // just get the first one for now
+							var deft = true;
+							deca = decls[c];
+							meta = [];
+							meta['orig'] = vword;
+							outs.push([trans,type,deca,word,meta,idx]);
+						}
+					}
+				}
+				if(!deft) {
+					meta = [];
+					meta['orig'] = vword;
+					outs.push([trans,type,null,word,meta,idx]);
+				}
+			}
+		}
+		trans = '';
+		type = '';
+		var endings = makeDeclensions(vword);
+		wtr = endings[0].concat(endings[1]);
+		wtr = wtr.sort(sortLongerDec);
+		second:
+		for (a in wtr) {
+			type = G_endings[wtr[a][1]][4];
+			var temp = wtr[a][0];
+			var declt = G_endings[wtr[a][1]][5];
+			decls = [];
+			if(yt[temp] && yt[temp][4] != 'I') {
+				var gender = yt[temp][1];
+				for(c in declt) {
+					if(type=='v' || /adj\./.test(yt[temp][1]) || (1 & declt[c][0] && G_nTx[0].test(gender)) || (2 & declt[c][0] && G_nTx[1].test(gender)) || (4 & declt[c][0] && G_nTx[2].test(gender))) {
+						decls.push(declt[c]);
+					}
+				}
+
+				if(yt[temp][4] == 'P' || yt[temp][1] == 'adj.')
+					type = 'p';
+				if(eg[temp]) {
+					for(c in decls) {
+						trans = eg[temp];
+						deca = decls[c];
+						meta = [];
+						meta['orig'] = temp;
+						outs.push([trans,type,deca,word,meta,idx]);
+					}
+				}
+				if (engVerbs[toUni(temp)]) {
+					for(c in decls) {
+						trans = engVerbs[toUni(temp)];
+						deca = decls[c];
+						meta = [];
+						meta['orig'] = temp;
+						outs.push([trans,type,deca,word,meta,idx]);
+					}
+				}	
+				for(c in decls) {
+					trans = stripEnglish(yt[temp][2]);
+					deca = decls[c];
+					meta = [];
+					meta['orig'] = temp;
+					outs.push([trans,type,deca,word,meta,idx]);
+				}
+			}
+			else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'object') {
+				if(yt[G_irregDec[temp][0]][4] == 'P' || yt[G_irregDec[temp][0]][1] == 'adj.')
+					type = 'p';
+				for(c in decls) {
+					trans = stripEnglish(yt[G_irregDec[temp][0]][2]);
+					deca = decls[c];
+					meta = [];
+					meta['orig'] = temp;
+					outs.push([trans,type,deca,word,meta,idx]);
+				}
+			}
+			else if (typeof(P[temp]) == 'object') {
+				for(p in P[temp]) {
+					var tloc = P[temp][p].split('/');
+					var t1 = tloc[0];
+					var t2 = tloc[1];
+					var pedfileget = t1 + '/' + t2;
+					var pedp = 'etc/XML1/'+ t1+'/ped.xml';
+					var xmlhttp = new window.XMLHttpRequest();
+					xmlhttp.open("GET", pedp, false);
+					xmlhttp.send(null);
+					var xmlDoc = xmlhttp.responseXML.documentElement;
+					
+					var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
+					
+					if(!/^[^\[]+\[[^\]]*\][a-zA-Z ]+/.test(data))
+						continue;
+					trans = data.replace(/^[^\[]+\[[^\]]*\]([a-zA-Z ]+).*/g, "$1").replace(/^ +/,'').replace(/ +$/,'');
+
+					if(/^[^\[(]+\([^)]+\)/.test(data)) {
+						type = data.replace(/^[^\[(]+\(([^)]+)\).*/,"$1");
+						if(/adj\./.test(type))
+							type = 'p';
+						else if(/indecl\./.test(type))
+							type = 'i';
+						else if(/(adj|nt|m|f)\./.test(type))
+							type = 'n';
+						else if(/^to /.test(trans))
+							type = 'v';
+						else
+							type = 'n';
+					}
+					else
+						type = G_endings[wtr[a][1]][4];
+						
 					for(c in declt) {
-						if(type=='v' || /adj\./.test(yt[temp][1]) || (1 & declt[c][0] && G_nTx[0].test(gender)) || (2 & declt[c][0] && G_nTx[1].test(gender)) || (4 & declt[c][0] && G_nTx[2].test(gender))) {
-							decls.push(declt[c]);
-						}
-					}
-
-					if(yt[temp][4] == 'P' || yt[temp][1] == 'adj.')
-						type = 'p';
-					if(eg[temp]) {
-						for(c in decls) {
-							trans = eg[temp];
-							deca = decls[c];
-							meta = [];
-							meta['orig'] = temp;
-							outs.push([trans,type,deca,word,meta,i]);
-						}
-					}
-					if (engVerbs[toUni(temp)]) {
-						for(c in decls) {
-							trans = engVerbs[toUni(temp)];
-							deca = decls[c];
-							meta = [];
-							meta['orig'] = temp;
-							outs.push([trans,type,deca,word,meta,i]);
-						}
-					}	
-					for(c in decls) {
-						trans = stripEnglish(yt[temp][2]);
-						deca = decls[c];
+						deca = declt[c];
 						meta = [];
 						meta['orig'] = temp;
-						outs.push([trans,type,deca,word,meta,i]);
-					}
-				}
-				else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'object') {
-					if(yt[G_irregDec[temp][0]][4] == 'P' || yt[G_irregDec[temp][0]][1] == 'adj.')
-						type = 'p';
-					for(c in decls) {
-						trans = stripEnglish(yt[G_irregDec[temp][0]][2]);
-						deca = decls[c];
-						meta = [];
-						meta['orig'] = temp;
-						outs.push([trans,type,deca,word,meta,i]);
+						outs.push([trans,type,deca,word,meta,idx]);
 					}
 				}
 			}
 		}
-		if(!trans) {
-			meta['orig'] = vword;
-			outs.push([word,null,null,word,meta,i]);
+		if(!trans.replace(/ /g,'')) {
+			if(wtr.length) {
+				for (a in wtr) {
+					var temp = wtr[a][0];
+					var declt = G_endings[wtr[a][1]][5];
+					for (c in declt) {
+						type = G_endings[wtr[a][1]][4];
+						deca = declt[c];
+						meta = [];
+						meta['orig'] = vword;
+						outs.push([toUni(temp),type,deca,word,meta,idx]);
+					}
+				}
+			}
+			else {
+				meta = [];
+				meta['orig'] = vword;
+				outs.push([word,null,null,word,meta,idx]);
+			}
 		}
 	}
-		
 	var dups = [];
 	var outfin = [];
-	//alert(outs);
 	dupsl:
 	for (i=0;i<outs.length;i++) {
 		if(outs[i][0] != outs[i][3]) {
 			outs[i][0] = transMod(outs[i]);
 		}
-		//alert(dups);
 		for(j=0;j<dups.length;j++) { 
 			if(dups[j][1] == outs[i][1] && ((!dups[j][2] && !outs[i][2]) || (dups[j][2] && outs[i][2] && dups[j][2][0] == outs[i][2][0] && dups[j][2][1] == outs[i][2][1] && dups[j][2][2] == outs[i][2][2]))) {
 				continue dupsl;
@@ -700,7 +831,7 @@ function translateWord(word,i) {
 function transMod([trans,type,deca,word,meta]) {
 	if(type == 'n')
 		trans = trans.replace(/^(an*|the) /,'');
-	if(type == 'n' && deca[1] == 1) // noun subject
+	if(type == 'n' && deca && deca[1] == 1) // noun subject
 		G_subDecl = deca;
 	if(type == 'v' && deca) {
 		G_verbDecl = deca;
@@ -738,21 +869,26 @@ function addPlural(word,type) {
 }
 
 function addPhrasePreps(words,i,type,alts) {
-	if(!type)
-		var type = words[0][1];
-	if(!i)
-		var i = words[0][2][1]-1;
 	var joined = '';
 	for(j = 0;j < words.length;j++) {
-		if(j == 0) {
-			joined += (G_joints[type][i]?G_joints[type][i]+' ':'');
+		if(typeof(words[j]) == 'string') {
+			joined += (j>0?' ':'')+words[j];
 		}
-		if(j > 0)
-			joined += ' ';
-		if(words[j+1])
-			joined += makeWord(words[j],false,alts);
-		else // last word, check plural
-			joined += makeWord(words[j],(type == 'n' && words[j][2] && words[j][2][2] == 2),alts);
+		else {
+			if(type === null)
+				 type = words[j][1];
+			if(i === null)
+				i = words[j][2][1]-1;
+			if(j == 0) {
+				joined += (G_joints[type][i]?G_joints[type][i]+' ':'');
+			}
+			if(j > 0)
+				joined += ' ';
+			if(words[j+1])
+				joined += makeWord(words[j],false,alts);
+			else // last word, check plural
+				joined += makeWord(words[j],(type == 'n' && words[j][2] && words[j][2][2] == 2),alts);
+		}
 	}
 	return joined;
 }
@@ -784,10 +920,11 @@ function simpleWordTranslation(word) {
 
 function showAltTable(idx) {
 	var w = G_altChoices[idx][0];
+	var out = '<b>'+w[0][3]+'</b> ';
 	if(w.length == 1)
-		var out = makeGrammarTerms(w[0]);
+		out += makeGrammarTerms(w[0]);
 	else if(w.length > 1) {
-		var out = '<select onchange="changeAlt(this,'+idx+')">';
+		out += '<select onchange="changeAlt(this,'+idx+')">';
 		for(i in w) {
 			out+='<option>'+makeGrammarTerms(w[i])+'</option>';
 		}
@@ -821,6 +958,7 @@ G_defDecl['v'] = [];
 G_defDecl['v'].push([/ati$/,[[1,1,1]]]);
 G_defDecl['v'].push([/eti$/,[[1,1,1]]]);
 G_defDecl['v'].push([/oti$/,[[1,1,1]]]);
+G_defDecl['v'].push([/si$/,[[5,1,1]]]);
 G_defDecl['n'] = [];
 G_defDecl['n'].push([/aa$/,[[4,1,1]]]);
 G_defDecl['n'].push([/a$/,[[3,8,1]]]);
