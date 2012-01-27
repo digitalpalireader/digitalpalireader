@@ -15,10 +15,10 @@ function getSelected() {
 
 function convert()
 {
-	var spell = document.convertor.inputc.value;
+	var spell = document.getElementById('cinput').value;
 
-	var Count = document.convertor.conversion1.selectedIndex
-	var Counta = document.convertor.conversion2.selectedIndex
+	var Count = document.getElementById('cinform').selectedIndex
+	var Counta = document.getElementById('coutform').selectedIndex
 
 	if (Count == 0)
 	{
@@ -68,7 +68,7 @@ function convert()
 			spell = toSin(toUni(spell));
 		}			
 	}
-	document.convertor.outputc.value = spell;	
+	document.getElementById('coutput').value = spell;	
 }
 
 
@@ -78,21 +78,21 @@ function changeConversion(what,which)
 	if (what == 0)
 	{
 		
-		if (which == 1 && document.convertor.conversion2.selectedIndex == 0) document.convertor.conversion2.selectedIndex = 1;
-		else if (which == 2 && document.convertor.conversion1.selectedIndex == 0) document.convertor.conversion1.selectedIndex = 1;
+		if (which == 1 && document.getElementById('coutform').selectedIndex == 0) document.getElementById('coutform').selectedIndex = 1;
+		else if (which == 2 && document.getElementById('cinform').selectedIndex == 0) document.getElementById('cinform').selectedIndex = 1;
 	}
 	else if (what == 1)
 	{
 		
-		if (which == 1 && document.convertor.conversion2.selectedIndex == 1) document.convertor.conversion2.selectedIndex = 0;
-		else if (which == 2 && document.convertor.conversion1.selectedIndex == 1) document.convertor.conversion1.selectedIndex = 0;
+		if (which == 1 && document.getElementById('coutform').selectedIndex == 1) document.getElementById('coutform').selectedIndex = 0;
+		else if (which == 2 && document.getElementById('cinform').selectedIndex == 1) document.getElementById('cinform').selectedIndex = 0;
 	}
 	convert();
 }
 function clearboth()
 {
-	document.convertor.inputc.value = '';
-	document.convertor.outputc.value = '';
+	document.getElementById('cinput').value = '';
+	document.getElementById('coutput').value = '';
 }
 
 function sendtoconvert(data,shift)
@@ -110,19 +110,17 @@ function sendtoconvert(data,shift)
 	data = data.replace(/  *,/g, ',')
 	data = data.replace(/\.\.+/g, '.')
 
-	moveframex(2)
-	moveframey('cof');
-	document.convertor.conversion1.selectedIndex = 0;
-	document.convertor.conversion2.selectedIndex = 1;
-	document.convertor.outputc.value = '';
-	document.convertor.inputc.value = data;
+	moveFrame(2)
+	document.getElementById('cinform').selectedIndex = 0;
+	document.getElementById('coutform').selectedIndex = 1;
+	document.getElementById('coutput').value = '';
+	document.getElementById('cinput').value = data;
 	convert();
 }
 
 function sendtoPad(data,shift)
 {
-	moveframex(2)
-	moveframey('scf');
+	moveFrame(3)
 	
 	data = data.replace(/\t/g, ' ');
 	data = data.replace(/” ”/g, '”');
@@ -143,25 +141,26 @@ function sendtoPad(data,shift)
 	data = data.replace(/\.\.+/g, '.')
 	data = data.replace(/  +/g, ' ')
 	
-	document.textpad.pad.value = (shift?document.textpad.pad.value:'') + data + '\n';
+	document.getElementById('pad').value = (shift?document.getElementById('pad').value:'') + data + '\n';
 }
 
 function clearPad() {
 
-	if(confirm('Are you sure you want to erase all text from the text pad?')) document.textpad.pad.value = '';
+	if(confirm('Are you sure you want to erase all text from the text pad?')) document.getElementById('pad').value = '';
 }
 
 function savePad() {
-	var data = document.textpad.pad.value;
+	var data = document.getElementById('pad').value;
 	file = fileSaveDialog('Choose a location to export the text');
 //	file = file.replace(/\\/g,'/');
 	if(file == '') {
-		alertFlash('You must enter a file name', 'red');
+		sendAlertFlash('You must enter a file name', 'red');
 		return;
 	}
 	
-	if(writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
+	if(writeExtFile(file, data)) 
+		sendAlertFlash('Data saved to '+file, 'green');
 	else {
-		alertFlash('Error saving file', 'red');
+		sendAlertFlash('Error saving file', 'red');
 	}
 }

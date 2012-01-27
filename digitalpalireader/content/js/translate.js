@@ -784,16 +784,21 @@ function simpleWordTranslation(word) {
 
 function showAltTable(idx) {
 	var w = G_altChoices[idx][0];
-	if(w.length < 2)
-		return;
-	var out = '<select onchange="changeAlt(this,'+idx+')">';
-	for(i in w) {
-		out+='<option>'+makeGrammarTerms(w[i])+'</option>';
+	if(w.length == 1)
+		var out = makeGrammarTerms(w[0]);
+	else if(w.length > 1) {
+		var out = '<select onchange="changeAlt(this,'+idx+')">';
+		for(i in w) {
+			out+='<option>'+makeGrammarTerms(w[i])+'</option>';
+		}
+		out+='</select>';
 	}
-	out+='</select>';
+	else
+		return;
+		
 	$('#altTable').hide();
 	$('#altTable').html(out);
-	$('#altTable').show('fast');
+	$('#altTable').fadeIn('fast');
 }
 
 function changeAlt(e,i) {

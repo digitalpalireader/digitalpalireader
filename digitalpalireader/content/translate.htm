@@ -8,6 +8,12 @@
 <link rel="stylesheet" type="text/css" href="css/quiz.css">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
+var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIWebNavigation)
+				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+				   .rootTreeItem
+				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onDocLoad() {
 	getconfig();
 	var link = document.location.href.split('?')[1];
@@ -27,6 +33,9 @@ function onDocLoad() {
 			translateText();
 		}
 	}
+}
+function showMenu() {
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentDocument.getElementById('menu').showPopup();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
@@ -51,12 +60,12 @@ function onDocLoad() {
 
 <body onload="onDocLoad();">
 <div id="content">
+	<div onmouseover="showMenu()" class="bButton small">&there4;</div>
 	<div id="maf">
 		<div id="mafbc">
 			<p></p>
 			<input type="hidden" id="QwhichS" value="10" />
 			<p id="QwhichT" class="txt"></p>
-			<p id="QwhichC" class="cite"></p>
 			<p class="oneDec">
 			  Enter a single Pali sentence below (Velthuis or Unicode):
 			</p>
@@ -70,9 +79,14 @@ function onDocLoad() {
 			  <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
 			</p>
 			<hr/>
-			<p align="center"><i>Notes: this translation tool is highly experimental.  <br/>Most actual Pali sentences found in the Tipitaka probably won't translate completely, if it all.  <br/>For an example of a sentence that does work, try clicking on this one:<br/><br/>
-			<a class="green" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">dhammikā upāsakā pāpakehi manussehi mā carantu</a>
-			</p>
+			<div align="center">
+				<div align="justify" class="center tiny" style="width:600px;">
+					<i>Notes: this translation tool is highly experimental.  &nbsp;Most actual Pali sentences found in the Tipitaka probably won't translate completely, if it all. &nbsp;For an example of a sentence that does work, try clicking on this one:<br/><br/>
+				</div>
+				<div align="center" class="center tiny" style="width:600px;">
+					<a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">dhammikā upāsakā pāpakehi manussehi mā carantu</a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div id="alertc"><span id="alert" class="large"></span></div>

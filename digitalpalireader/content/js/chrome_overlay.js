@@ -131,8 +131,15 @@ var DPROverlay = {
 		if(gContextMenu.target.tagName!="TEXTAREA"&&gContextMenu.target.tagName!="INPUT"){
 			var input = (gContextMenu.isTextSelected?document.commandDispatcher.focusedWindow.getSelection().toString():gContextMenu.target.innerHTML);
 		}
-		else{
-			var input=gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd);
+		else {
+			var el = gContextMenu.target;
+			var val = el.value;
+			var start = el.selectionStart
+			var end = el.selectionEnd
+			if(end-start)
+				var input=val.substring(start, end);
+			else 
+				var input=val;
 		}
 		if(!input || input == '') return;
 		input = input.replace(/<[^>]*>/g,'');
@@ -185,7 +192,7 @@ var DPROverlay = {
 		var dprsearch = document.getElementById("dpr-sub-search");
 
 		var nosel = (!gContextMenu.isTextSelected && (!gContextMenu.target.value || !gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd)));
-		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && nosel);
+		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && !gContextMenu.target.value && nosel);
 		
 		if(prefs.getBoolPref('Bool.allContext')) {
 			dprmenu.hidden = notext;
@@ -245,8 +252,12 @@ var DPROverlay = {
 			var val = el.value;
 			var start = el.selectionStart
 			var end = el.selectionEnd
-			el.value = val.slice(0, start) + text + val.slice(end );
-			gContextMenu.target.setSelectionRange(start,start+text.length);
+			if(end-start) {
+				el.value = val.slice(0, start) + text + val.slice(end );
+				gContextMenu.target.setSelectionRange(start,start+text.length);
+			}
+			else
+				gContextMenu.target.value = text;
 		}
 	}
 }

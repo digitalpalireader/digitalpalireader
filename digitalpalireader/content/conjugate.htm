@@ -8,40 +8,49 @@
 	<link rel="stylesheet" type="text/css" href="css/quiz.css">
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<script>
-	function onDocLoad() {
-		getconfig();
-		var link = document.location.href.split('?')[1];
-		if (link) {
-			var opts = link.split('&amp;');
-			var linkt = '';
-			var linkb = '';
-			for (i in opts) {
-				option = opts[i].split('=');
-				switch(option[0]) {
-					case 'word':
-						var word = option[1];
-						break;
-					case 'form':
-						var form = option[1];
-						break;
+		var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+						   .getInterface(Components.interfaces.nsIWebNavigation)
+						   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+						   .rootTreeItem
+						   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+						   .getInterface(Components.interfaces.nsIDOMWindow); 
+		function onDocLoad() {
+			getconfig();
+			var link = document.location.href.split('?')[1];
+			if (link) {
+				var opts = link.split('&amp;');
+				var linkt = '';
+				var linkb = '';
+				for (i in opts) {
+					option = opts[i].split('=');
+					switch(option[0]) {
+						case 'word':
+							var word = option[1];
+							break;
+						case 'form':
+							var form = option[1];
+							break;
+					}
 				}
+				if(word)
+					$('#word').val(word);
+				if(form)
+					$('#form').val(form);
+				insertConj();
 			}
-			if(word)
-				$('#word').val(word);
-			if(form)
-				$('#form').val(form);
-			insertConj();
 		}
-	}
-	function insertConj() {
-		var word = $('#word').val();
-		var form = $('#form').val();
-		history.pushState({}, 'Title', 'chrome://digitalpalireader/content/conjugate.htm'+(word.length?'?word='+toVel(word):'')+(form.length?(word?'&':'?')+'form='+toVel(form):''));
-		$('#word').val(toUni(word));
-		$('#form').val(toUni(form));
-		var out = conjugateWord(word,form);
-		$('#conjugation').html(out?out:'<span class="red">no conjugation found</span>');
-	}
+		function insertConj() {
+			var word = $('#word').val();
+			var form = $('#form').val();
+			history.pushState({}, 'Title', 'chrome://digitalpalireader/content/conjugate.htm'+(word.length?'?word='+toVel(word):'')+(form.length?(word?'&':'?')+'form='+toVel(form):''));
+			$('#word').val(toUni(word));
+			$('#form').val(toUni(form));
+			var out = conjugateWord(word,form);
+			$('#conjugation').html(out?out:'<span class="red">no conjugation found</span>');
+		}
+		function showMenu() {
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentDocument.getElementById('menu').showPopup();
+		}
 	</script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
@@ -64,6 +73,7 @@
 
 <body onload="onDocLoad();">
 <div id="content">
+	<div onmouseover="showMenu()" class="bButton small">&there4;</div>
 	<div id="maf">
 		<div id="mafbc">
 			<form onsubmit="insertConj(); return false">

@@ -31,11 +31,11 @@ function onLoad() {
 			}
 		}
 		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
-		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
+		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.xul'+linkb;
 	}
 	else {
 		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm';
-		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.xul';
 	}
 }
 function getconfig() {

@@ -313,9 +313,9 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 // output header
 	
-	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier);
+	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');
 
-	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center><a href="javascript:void(0)" onclick="mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'">'+titleout[0]+'</a> '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
+	$('#mafbc').html('<table width=100%><tr><td align=center></td><td align=center>'+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 

@@ -6,20 +6,26 @@ function moveframex(a,temp) //read, etc
 
 }
 
-function moveframey(a) //dict, conv, or scratch
+function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
 {
 	if(a == 'dif' || a == 'cdif') a = 'difout';
+
+	if(!b)
+		b = a;
 
 	if (moveat == 1) moveframex(2);
 	
     $('#difout').hide();
 	$('#cof').hide();
 	$('#scf').hide();
+	$('#transf').hide();
+	$('#conjf').hide();
+	$('#bvf').hide();
 	
-	$('#mainToolbar span').removeClass('sbut');
-	$('#'+a+'M').addClass('sbut');
+	$('.bbart td').removeClass('sbarb');
+	$('#'+a+'M').addClass('sbarb');
 
-	$('#'+a).show();
+	$('#'+b).show();
 }
 
 var cpout = 1;

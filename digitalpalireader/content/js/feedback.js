@@ -1,7 +1,4 @@
 function feedbackform() {
-	moveframex(1);
-	moves(0);
-
 	var outNode = document.createElement('iframe');
 	outNode.setAttribute('frameBorder','0');
 	outNode.setAttribute('width','100%');

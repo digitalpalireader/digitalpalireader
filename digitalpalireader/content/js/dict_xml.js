@@ -12,10 +12,10 @@ function paliXML(filein,which,add)
 		sendPaliXML(toVel(filein),true);
 		return;
 	}
-	moveframey('dif');
+	moveFrame(1);
 	var file = toUni(filein);
 	clearDivs('dif');
-	moveframey('dif');
+	moveFrame(1);
 	
 	if(!which) { // not from select
 		var G_pedhistt = [];
@@ -189,7 +189,7 @@ function DPPNXML(filein,which,add)
 		return;
 	}
 
-	moveframey('dif');
+	moveFrame(1);
 	var file = filein;
 	
 	var filea = file.split(',');
@@ -206,7 +206,7 @@ function DPPNXML(filein,which,add)
 	tloc[0] = toVel(tloc[0]);
 	
 	clearDivs('dif');
-	moveframey('dif');
+	moveFrame(1);
 	
 	if(!which) { // not from select
 		var dppnhistt = [];

@@ -168,7 +168,7 @@ function outputDef(which,first,frombox)
 	if (hotlink) {
 		if (hotlink.search('PED') >= 0) paliXML(hotlink);
 		else DPPNXML(hotlink);
-		//if(moveat == 2) { moveframey('dif'); }
+		//if(moveat == 2) { moveFrame(1); }
 	}
 	else clearDivs('dif');
     document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
@@ -184,5 +184,4 @@ function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
 	document.getElementById('spdout').innerHTML = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
-	moveframex(moveat);
 }

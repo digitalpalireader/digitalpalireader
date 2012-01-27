@@ -513,12 +513,12 @@ function conjugateWord(word,form) {
 //[trans,type,deca,word,meta];
 
 function getConjugation(form) {
-	var word = DPRTrans.translateWord(form);
+	var word = translateWord(form);
 	var out = '';
 	if(word.length > 1) {
 		for(i in word) {
 			var grammar = makeGrammarTerms(word[i]);
-			var trans = DPRTrans.addPhrasePreps([word[i]]);
+			var trans = addPhrasePreps([word[i]]);
 			if(grammar)
 				out += '<li><span class="decl-grammar">'+grammar+' form of '+word[i][4]['orig']+'</span><br/><span class="decl-english">'+trans+'</span></li>';
 		}
@@ -526,7 +526,7 @@ function getConjugation(form) {
 	}
 	else { 
 		var grammar = makeGrammarTerms(word[0]);
-		var trans = DPRTrans.addPhrasePreps([word[0]]);
+		var trans = addPhrasePreps([word[0]]);
 		if(grammar)
 			out = '<span class="decl-grammar">'+grammar+' form of '+word[0][4]['orig']+'</span><br/><span class="decl-english">'+word[0][0]+'</span>';
 	}

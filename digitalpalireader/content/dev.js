@@ -23,7 +23,7 @@ function devO(data,sw,clear) {
 //	if(clear) document.textpad.pad.value = '';
 	//if(typeof(data) == "object") data = data.join('\n');
 	//document.textpad.pad.value += data + '\n';
-	//if(!sw) moveframey('scf');
+	//if(!sw) moveFrame(3);
 	
 }
 function dalert(a) {

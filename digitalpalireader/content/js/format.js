@@ -56,8 +56,6 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 	document.getElementById('mafbc').appendChild(outDiv);
 	
 	document.getElementById('maf').scrollTop = 0; 
-	if (moveat == 3) {moveframex(2);}
-	moves(0);
 	
 }
 
@@ -347,7 +345,11 @@ function preparepali(data,which) { // standard text prep for algorithm
 
 }
 
-function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
+function wrapLink(text,click,url) {
+	return '<'+(url?'a href="'+url+'"':'span class="pointer"')+(click?' onclick="'+click+'"':'')+'>'+text+'</'+(url?'a':'span')+'>';
+}
+
+function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 {
 	var lmt = 60;
 	var lgt = una.length;
@@ -378,7 +380,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 	for (i in namea) {
 		var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
 		
-		if (thisname .length <2 )
+		if (thisname.length <2 )
 			continue;
 
 		if(i != 0){
@@ -392,12 +394,11 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline)
 			}
 		}
 
-		title += '<b style="color:'+DPR_prefs[col[w++]]+'">' + thisname + '</b>' + (namen[i] ? namen[i] :'');
+		var onet = '<b style="color:'+DPR_prefs[col[w++]]+'">' + translit(toUni(thisname)) + '</b>';
+		title += (click?wrapLink(onet,click):onet) + (namen[i] ? namen[i] :'');
 		save += '<h'+w+'>'+thisname+'</h'+w+'>';
 	}
 	
-	
-	title = toUni(title);
 	return [title,save];
 }
 
@@ -448,13 +449,13 @@ function alertFlash(text,color) {
 			color = 'RGBa(255,255,64,1)';
 			break;
 		}
-		document.getElementById('alert').style.backgroundColor = color;
+		$('#alert').css('background-color',color);
 	
 	}
-	document.getElementById('alert').innerHTML = text;
-	document.getElementById('alertc').style.opacity = '0';
-	document.getElementById('alertc').style.display='block';
-	fadeInOut(G_alertFlashStart,'alertc',10,Math.sqrt(text.length)*500,100);
+	$('#alert').html(text);
+	$('#alertc').fadeIn('fast').delay(2000).fadeOut('fast');
+		
+	//fadeInOut(G_alertFlashStart,'alertc',10,Math.sqrt(text.length)*500,100);
 }
 
 
@@ -497,7 +498,6 @@ function clearDivs(which) { // place divs to be cleared here
 		document.getElementById('anfs').innerHTML='';
 		document.getElementById('anfsd').innerHTML='';
 		document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
-		moveframex(moveat);
 	}
 	if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
 		document.getElementById('mafbc').innerHTML='';

@@ -21,29 +21,33 @@ function onDocLoad() {
 	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
 	document.onkeypress = function(e){
 		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
-		mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow.wrappedJSObject.keyPressed(e);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
 	};
 }
 
 function sendTextToConvertor() {
 		if(window.getSelection().toString() != '') {
-			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(window.getSelection().toString()+'');
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.sendtoconvert(window.getSelection().toString()+'');
 		} 
-		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoconvert(document.getElementById('convi').innerHTML); }
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.sendtoconvert(document.getElementById('convi').innerHTML); }
 }
 function sendTextToTextpad(event) {
 		if(window.getSelection().toString() != '') {
-			mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(window.getSelection().toString()+'',event.shiftKey);
+			mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.sendtoPad(window.getSelection().toString()+'',event.shiftKey);
 		} 
-		else if(document.getElementById('convi')) { mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
+		else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
 }
 
 function closePanel(idx) {
-	var doc = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument;
+	var doc = mainWindow.gBrowser.linkedBrowser.contentDocument;
 	var elem = doc.getElementById('dpr-tops');
 	elem.removeChild(doc.getElementById('dpr-index-top-'+idx+'-splitter'));
 	elem.removeChild(doc.getElementById('dpr-index-top-'+idx));
 
+}
+
+function moveFrame(idx) {
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.moveFrame(idx);
 }
 
 </script>

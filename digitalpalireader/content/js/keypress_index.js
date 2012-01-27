@@ -6,8 +6,7 @@ function keyPressed(e) {
 
 	var wTop = document.getElementById('dpr-index-top').contentWindow;
 	var wBot = document.getElementById('dpr-index-bottom').contentWindow;
-	
-	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
+	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || document.activeElement.tagName == "textbox" || e.altKey || e.ctrlKey) { return; }
 
 	if (e.charCode == 115) {  // s
 		if(wTop.getSelection().toString() != '') {
@@ -48,9 +47,9 @@ function keyPressed(e) {
 	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(); return }  // p
 	if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onmouseup(); return } // n
 
-	if (e.charCode == 100) { wBot.moveframey('cdif'); return; } // d
-	if (e.charCode == 99) { wBot.moveframey('cof'); return; } // c
-	if (e.charCode == 116) { wBot.moveframey('scf'); return; } // t
+	if (e.charCode == 100) { wBot.moveFrame(1); return; } // d
+	if (e.charCode == 99) { wBot.moveFrame(2); return; } // c
+	if (e.charCode == 116) { wBot.moveFrame(3); return; } // t
 
 //	if (e.charCode == 35) { newquiz(); return; } // #
 //	if (e.charCode == 33) { eraseOptions(); return; } // !
