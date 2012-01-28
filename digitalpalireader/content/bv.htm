@@ -21,7 +21,7 @@ function onDocLoad() {
 	showBv();
 }
 function showMenu() {
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentDocument.getElementById('menu').showPopup();
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>

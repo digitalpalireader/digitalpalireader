@@ -30,11 +30,11 @@ function onDocLoad() {
 var bbarTimeout;
 var bbarHover;
 function showMenu() {
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentDocument.getElementById('menu').showPopup();
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
 }
 
 function moveFrame(idx) {
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.moveFrame(idx);
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.moveFrame(idx);
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>

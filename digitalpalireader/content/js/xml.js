@@ -332,6 +332,10 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 			var quit = 0;
 			var onepar = z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
+			if(DPR_prefs['nigahita']) {
+				onepar = onepar.replace(/ṃ/g, 'ṁ');
+				onepar = onepar.replace(/Ṃ/g, 'Ṁ');
+			}
 			var onepars = onepar.replace(/ *\{[^}]*\} */g, ' ').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/  +/g, ' ').toLowerCase();
 			for (tmpl = 0; tmpl < query.length; tmpl++)
 			{

@@ -2,10 +2,10 @@ document.onkeypress = keyPressed;
 
 function keyPressed(e) {
 	var dTop = document.getElementById('dpr-index-top').contentDocument;
-	var dBot = document.getElementById('dpr-index-bottom').contentDocument;
+	var dBot = document;
 
 	var wTop = document.getElementById('dpr-index-top').contentWindow;
-	var wBot = document.getElementById('dpr-index-bottom').contentWindow;
+	var wBot = window;
 	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || document.activeElement.tagName == "textbox" || e.altKey || e.ctrlKey) { return; }
 
 	if (e.charCode == 115) {  // s

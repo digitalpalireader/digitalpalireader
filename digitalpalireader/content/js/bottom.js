@@ -4,7 +4,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .rootTreeItem
 				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
-function onDocLoad() {
+function onDocLoadx() {
 	//getconfig();
 	//openDPRSidebar();
 
@@ -24,9 +24,7 @@ function onDocLoad() {
 					break;
 			}
 		}
-		var title = mainWindow.gBrowser.selectedTab.getAttribute('label',title);
 		document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
-		mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 	}
 	else {
 		moveFrame(6);
@@ -34,10 +32,10 @@ function onDocLoad() {
 	}
 	document.onkeypress = function(e){
 		if(document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
+		keyPressed(e);
 	};
 }
-function getconfig() {
+function getconfigx() {
 	document.getElementById('dict').contentWindow.getconfig();
 }
 
@@ -50,6 +48,10 @@ function moveFrame(e) {
 	document.getElementById('f6').setAttribute('collapsed','true');
 	document.getElementById('f'+e).removeAttribute('collapsed');
 }			
+
+function openBottomMenu() {
+	document.getElementById('menu').openPopup(document.getElementById('bottom-box'));
+}
 
 // transfer functions
 
@@ -71,5 +73,5 @@ function getAtthXML(opt,opt2,opt3) {
 }
 
 function sendAlertFlash(opt,opt2) {
-	return mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.alertFlash(opt,opt2);
+	return document.getElementById('dpr-index-top').contentWindow.alertFlash(opt,opt2);
 }

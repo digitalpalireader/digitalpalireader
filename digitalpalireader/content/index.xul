@@ -4,18 +4,14 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/x-javascript" src="js/keypress_index.js" />
-  <script type="application/x-javascript" src="js/chrome.js" />
-  <script type="application/x-javascript" src="js/prompt.js" />
-  <script type="application/x-javascript" src="js/io.js" />
 <script>
 function onLoad() {
 	giveIDtoTabs();
 	var link = document.location.href.split('?')[1];
+	var linkt = '';
+	var linkb = '';
 	if (link) {
 		var opts = link.split('&amp;');
-		var linkt = '';
-		var linkb = '';
 		for (i in opts) {
 			switch(opts[i].split('=')[0]) {
 				case 'analysis':
@@ -30,17 +26,14 @@ function onLoad() {
 					break;
 			}
 		}
-		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
-		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.xul'+linkb;
 	}
-	else {
-		document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm';
-		document.getElementById('dpr-index-bottom').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.xul';
-	}
+	document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
+	document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
+	if(!linkb) moveFrame(6);
 }
 function getconfig() {
 	document.getElementById('dpr-index-top').contentWindow.getconfig();
-	document.getElementById('dpr-index-bottom').contentWindow.getconfig();
+	document.getElementById('dict').contentWindow.getconfig();
 }
 function citation(cite) {
 	document.getElementById('dpr-index-top').contentWindow.makeLinkPlace(cite,false);
@@ -60,6 +53,91 @@ var devCheck = 0;
 		<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
 	</hbox>
 	<splitter id="PanelSplitter"/>
-	<browser disablehistory="true" height="300" type="content" id="dpr-index-bottom" src=""  style="max-width:50%;max-height:99%" flex="0" persist="height"/>
+	<hbox flex="1" style="max-height:250px" id="bottom-box">
+		<menupopup id="menu" onclick="document.getElementById('menu').hidePopup(); moveFrame(event.target.value)">
+			<menuitem value="1" label="Dictionary" selected="true"/>
+			<menuitem value="2" label="Conversion"/>
+			<menuitem value="3" label="Text Pad"/>
+			<menuitem value="4" label="Translation"/>
+			<menuitem value="5" label="Conjugation"/>
+			<menuitem value="6" label="Buddha Vacana"/>
+		</menupopup>
+		<hbox flex="1" id="f1">
+			<vbox flex="1">
+				<browser disablehistory="true" height="300" type="content" id="dict" src=""  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
+			</vbox>
+		</hbox>
+		<hbox flex="1" id="f2" collapsed="true">
+			<label value="∴" onmouseover="openBottomMenu()" popup="menu"/>
+			<hbox flex="1" pack="center" align="center">
+				<textbox id="cinput" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
+				<hbox>
+					<vbox pack="top">
+						<label value="From"/>
+						<listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,1)">
+							<listitem label="Unicode" selected="true"/>
+							<listitem label="Velthuis"/>
+						</listbox>
+					</vbox>
+					<vbox pack="center">
+						<toolbarbutton  onclick="convert()" tooltiptext="Convert from one format to another"><label value="Convert"/></toolbarbutton>
+						<toolbarbutton  onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');" tooltiptext="Sort input by Pali word order"><label value="Sort"/></toolbarbutton>
+						<toolbarbutton onclick="clearboth()" tooltiptext="clear both boxes"><label value="Clear"/></toolbarbutton>
+					</vbox>
+					<vbox pack="top">
+						<label value="To"/>
+						<listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,2)">
+							<listitem label="Unicode"/>
+							<listitem label="Velthuis" selected="true"/>
+							<listitem label="Thai"/>
+							<listitem label="Devanagari"/>
+							<listitem label="Myanmar"/>
+							<listitem label="Sinhalese"/>
+						</listbox>
+					</vbox>
+				</hbox>
+				<textbox id="coutput" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
+			</hbox>
+		</hbox>
+		<hbox flex="1" collapsed="true" id="f3">
+			<label value="∴" onmouseover="openBottomMenu();" popup="menu"/>
+			<vbox flex="1" pack="center" align="center">
+				<textbox id="pad" multiline="true" cols="400" rows="10" resizable="true" flex="1"></textbox>
+				<hbox pack="center">
+					<toolbarbutton  onclick="clearPad()" tooltiptext="Erase all text"><label value="Clear"/></toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton  tooltiptext="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))"><label value="Analyze"/></toolbarbutton>
+					<toolbarseparator id=""/>
+					<toolbarbutton  onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');" tooltiptext="Copy text to clipboard"><label value="Copy"/></toolbarbutton>
+					<toolbarbutton onclick="savePad()" tooltiptext="save textpad content to file"><label value="Save"/></toolbarbutton>
+
+				</hbox>
+			</vbox>
+		</hbox>
+		<hbox flex="1" collapsed="true" id="f4">
+			<vbox flex="1">
+				<browser disablehistory="true" height="300" type="content" id="trans" src="translate.htm" flex="1" persist="height"/>
+			</vbox>
+		</hbox>
+		<hbox flex="1" collapsed="true" id="f5">
+			<vbox flex="1">
+				<browser disablehistory="true" height="300" type="content" id="conj" src="conjugate.htm" flex="1" persist="height"/>
+			</vbox>
+		</hbox>
+		<hbox flex="1" collapsed="true" id="f6">
+			<vbox flex="1">
+				<browser disablehistory="true" height="300" type="content" id="bv" src="bv.htm" flex="1" persist="height"/>
+			</vbox>
+		</hbox>
+	</hbox>
+	<script type="application/x-javascript" src="js/io.js" />
+	<script type="application/x-javascript" src="js/keypress_index.js" />
+	<script type="application/x-javascript" src="js/chrome.js" />
+	<script type="application/x-javascript" src="js/prompt.js" />
+	<script type="application/x-javascript" src="js/bottom.js" />
+	<script type="application/x-javascript" src="js/convert.js"/>
+	<script type="application/x-javascript" src="js/send_bottom.js"/>
+	<script type="application/x-javascript" src="js/translit.js"/>
+	<script type="application/x-javascript" src="js/sortaz.js"/>
 </window>
 

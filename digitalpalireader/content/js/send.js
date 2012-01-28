@@ -187,7 +187,7 @@ function sendPaliXML(link,add) {
 	if(!add) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
-			mainWindow.gBrowser.getBrowserForTab(thisTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.paliXML(link);
+			mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.paliXML(link);
 			return;
 		}
 		var oldTab = findDPRTab('DPR-main');
@@ -199,7 +199,7 @@ function sendPaliXML(link,add) {
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-			oldTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.paliXML(link);
+			oldTabBrowser.contentWindow.paliXML(link);
 		}
 	}
 	else if(add!='right') {
@@ -212,7 +212,7 @@ function sendDPPNXML(link,add) {
 	if(!add) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
-			mainWindow.gBrowser.getBrowserForTab(thisTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.DPPNXML(link);
+			mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.DPPNXML(link);
 			return;
 		}
 		var oldTab = findDPRTab('DPR-main');
@@ -223,7 +223,7 @@ function sendDPPNXML(link,add) {
 		}
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
-			mainWindow.gBrowser.getBrowserForTab(oldTab).contentDocument.getElementById('dpr-index-bottom').contentWindow.DPPNXML(link);
+			mainWindow.gBrowser.getBrowserForTab(oldTab).contentWindow.DPPNXML(link);
 		}
 	}
 	else if(add!='right') {
@@ -320,7 +320,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {  
 			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-			thisTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.outputAnalysis(input,frombox);
+			thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
 			return;
 		}
 		var oldTab = findDPRTab('DPR-main');
@@ -331,7 +331,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		else {
 			mainWindow.gBrowser.selectedTab = oldTab;
 			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-			oldTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.outputAnalysis(input,frombox);
+			oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
 		}
 	}
 	else {

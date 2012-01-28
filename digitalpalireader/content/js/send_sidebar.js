@@ -316,7 +316,7 @@ var DPRSend = {
 			var thisTab = DPRChrome.isThisDPRTab('DPRm');
 			if(thisTab) {  
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-				thisTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input,frombox);
+				thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
 				return;
 			}
 			var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -327,7 +327,7 @@ var DPRSend = {
 			else {
 				mainWindow.gBrowser.selectedTab = oldTab;
 				var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
-				oldTabBrowser.contentDocument.getElementById('dpr-index-bottom').contentWindow.wrappedJSObject.outputAnalysis(input,frombox);
+				oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
 			}
 		}
 		else {
