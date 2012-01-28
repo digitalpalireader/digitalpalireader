@@ -35,7 +35,7 @@ var DPRTranslit = {
 
 
 	toSin:function(input,type) {
-		input = input.toLowerCase().replace('ṁ','ṃ');
+		input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 		var vowel = [];
 
 		vowel['a'] = 'අ';
@@ -175,7 +175,7 @@ var DPRTranslit = {
 		
 
 	toMyanmar:function(input,type) {
-		input = input.toLowerCase().replace('ṁ','ṃ');
+		input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 		var vowel = [];
 		vowel['a'] = "အ";
 		vowel['i'] = "ဣ";
@@ -347,7 +347,7 @@ var DPRTranslit = {
 
 	toDeva:function(input,type) {
 
-		input = input.toLowerCase().replace('ṁ','ṃ');
+		input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 
 		var vowel = [];
 		vowel['a'] = " अ";
@@ -458,7 +458,7 @@ var DPRTranslit = {
 
 	toThai:function(input) {
 
-		input = input.toLowerCase().replace('ṁ','ṃ');
+		input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 
 		var vowel = [];
 		vowel['a'] = '1';

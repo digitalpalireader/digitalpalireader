@@ -70,13 +70,13 @@ var devCheck = 0;
 		<hbox flex="1" id="f2" collapsed="true">
 			<label value="∴" onmouseover="openBottomMenu()" popup="menu"/>
 			<hbox flex="1" pack="center" align="center">
-				<textbox id="cinput" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
+				<textbox id="cinput" onkeyup="convert(true)" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
 				<hbox>
 					<vbox pack="top">
 						<label value="From"/>
 						<listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,1)">
-							<listitem label="Unicode" selected="true"/>
-							<listitem label="Velthuis"/>
+							<listitem label="Unicode"/>
+							<listitem label="Velthuis" selected="true"/>
 						</listbox>
 					</vbox>
 					<vbox pack="center">
@@ -87,8 +87,8 @@ var devCheck = 0;
 					<vbox pack="top">
 						<label value="To"/>
 						<listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,2)">
-							<listitem label="Unicode"/>
-							<listitem label="Velthuis" selected="true"/>
+							<listitem label="Unicode" selected="true"/>
+							<listitem label="Velthuis"/>
 							<listitem label="Thai"/>
 							<listitem label="Devanagari"/>
 							<listitem label="Myanmar"/>
@@ -131,6 +131,7 @@ var devCheck = 0;
 		</hbox>
 	</hbox>
 	<script type="application/x-javascript" src="js/io.js" />
+	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/keypress_index.js" />
 	<script type="application/x-javascript" src="js/chrome.js" />
 	<script type="application/x-javascript" src="js/prompt.js" />
@@ -139,5 +140,6 @@ var devCheck = 0;
 	<script type="application/x-javascript" src="js/send_bottom.js"/>
 	<script type="application/x-javascript" src="js/translit.js"/>
 	<script type="application/x-javascript" src="js/sortaz.js"/>
+	<script type="application/x-javascript" src="js/format.js"/>
 </window>
 

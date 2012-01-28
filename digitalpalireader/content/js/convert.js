@@ -12,10 +12,15 @@ function getSelected() {
 	return txt;
 }
 
+var G_oldConvert = '';
 
-function convert()
+function convert(check)
 {
 	var spell = document.getElementById('cinput').value;
+
+	if (check && spell == G_oldConvert)
+		return;
+	G_oldConvert = spell;
 
 	var Count = document.getElementById('cinform').selectedIndex
 	var Counta = document.getElementById('coutform').selectedIndex
@@ -33,7 +38,7 @@ function convert()
 		else if (Counta == 3) // Unicode to Deva
 		{
 
-			spell = todeva(spell);
+			spell = toDeva(spell);
 		}
 		else if (Counta == 4) // Unicode to Myan
 		{
@@ -57,7 +62,7 @@ function convert()
 		}			
 		else if (Counta == 3) // Velthius to Deva
 		{
-			spell = todeva(toUni(spell));
+			spell = toDeva(toUni(spell));
 		}			
 		else if (Counta == 4) // Velthius to Myan
 		{

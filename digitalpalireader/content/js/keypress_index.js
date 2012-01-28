@@ -6,7 +6,7 @@ function keyPressed(e) {
 
 	var wTop = document.getElementById('dpr-index-top').contentWindow;
 	var wBot = window;
-	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || document.activeElement.tagName == "textbox" || e.altKey || e.ctrlKey) { return; }
+	if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
 
 	if (e.charCode == 115) {  // s
 		if(wTop.getSelection().toString() != '') {
