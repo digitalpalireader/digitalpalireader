@@ -55,12 +55,12 @@ var devCheck = 0;
 	<splitter id="PanelSplitter"/>
 	<hbox flex="1" style="max-height:250px" id="bottom-box">
 		<menupopup id="menu" onclick="document.getElementById('menu').hidePopup(); moveFrame(event.target.value)">
-			<menuitem value="1" label="Dictionary" selected="true"/>
-			<menuitem value="2" label="Conversion"/>
-			<menuitem value="3" label="Text Pad"/>
-			<menuitem value="4" label="Translation"/>
-			<menuitem value="5" label="Conjugation"/>
-			<menuitem value="6" label="Buddha Vacana"/>
+			<menuitem id="bmenu1" value="1" label="Dictionary" selected="true"/>
+			<menuitem id="bmenu2" value="2" label="Conversion"/>
+			<menuitem id="bmenu3" value="3" label="Text Pad"/>
+			<menuitem id="bmenu4" value="4" label="Translation"/>
+			<menuitem id="bmenu5" value="5" label="Conjugation"/>
+			<menuitem id="bmenu6" value="6" label="Buddha Vacana"/>
 		</menupopup>
 		<hbox flex="1" id="f1">
 			<vbox flex="1">
@@ -130,6 +130,7 @@ var devCheck = 0;
 			</vbox>
 		</hbox>
 	</hbox>
+	<script type="application/x-javascript" src="js/jquery.js" />
 	<script type="application/x-javascript" src="js/io.js" />
 	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/keypress_index.js" />

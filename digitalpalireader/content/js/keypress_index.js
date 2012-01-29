@@ -47,9 +47,9 @@ function keyPressed(e) {
 	if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(); return }  // p
 	if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onmouseup(); return } // n
 
-	if (e.charCode == 100) { wBot.moveFrame(1); return; } // d
-	if (e.charCode == 99) { wBot.moveFrame(2); return; } // c
-	if (e.charCode == 116) { wBot.moveFrame(3); return; } // t
+	if(e.charCode > 48 && e.charCode < 55) { // 1-6 
+		wBot.moveFrame(e.charCode - 48); return; 
+	}
 
 //	if (e.charCode == 35) { newquiz(); return; } // #
 //	if (e.charCode == 33) { eraseOptions(); return; } // !
@@ -89,9 +89,9 @@ function keyPressed(e) {
 
 		var place = input.value;
 		
-		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
+		if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
 		
-		place = place.replace(/^([DMASKdmask][Nn]-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
+		place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 		
 		var outplace = wTop.getSuttaFromNumber(place.split(','));
 		if(!outplace) return wTop.alertFlash('Link not found','yellow');
@@ -112,24 +112,17 @@ G_keysList.push('The following is a current list of all shortcut keys available 
 
 G_keysList.push(''); 
 
-G_keysList.push('1,2,3\tchange layout for reading, analysis, or dictionary'); 
-
-G_keysList.push(''); 
-
 G_keysList.push('p\tdisplay previous section'); 
 G_keysList.push('g\tdisplay current section'); 
 G_keysList.push('n\tdisplay next section'); 
+
+G_keysList.push(''); 
+
 G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)'); 
 
 G_keysList.push(''); 
 
-G_keysList.push('d\tshow dictionary'); 
-G_keysList.push('c\tshow convertor'); 
-G_keysList.push('t\tshow textpad'); 
-
-G_keysList.push(''); 
-
-G_keysList.push('x\topen/close control panel'); 
+G_keysList.push('1-6\tswitch between bottom frames'); 
 
 G_keysList.push(''); 
 

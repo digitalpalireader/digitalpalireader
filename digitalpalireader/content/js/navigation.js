@@ -34,7 +34,7 @@ function getDppnEntry(term) {
 }
 
 
-function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength) { // book, meta, etc. should be -1 (0,1,2...)
+function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength,which) { // book, meta, etc. should be -1 (0,1,2...)
 	
 	var no;
 	book = parseInt(book);
@@ -82,10 +82,52 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
 			if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
 			no = (vagga+1) + '.' + smlist[vagga][sutta][section];
 		break;
+		case 'k':
+			var kv = G_kVaggas[book+1];
+			if(hier != 'm' || !kv || (which && kv[2] != which)) return;
+			var osec = 0;
+			var osut = 0;
+			if(kv[1].length) {
+				if(vagga > 0)
+					sutta+=kv[1][vagga-1];
+				for(i = 0; i < sutta; i++) {
+					section+=kv[0][i];
+				}
+			}
+			else {
+				if(kv[3])
+					vagga = sutta;
+				for(i = 0; i < vagga; i++) {
+					section+=kv[0][i];
+				}
+			}
+				
+			no = (book+1) +'.' + (section+1);
+		break;
 	}
 	return no;
 }
 
+var G_kVaggas = []
+//G_kVaggas[1] = 9;
+//G_kVaggas[2] = 26;
+G_kVaggas[3] = [[10,10,10,10,10,10,10,10],[],6];
+G_kVaggas[4] = [[10,10,7,10,12,10,10,10,10,10,13],[3,5,10],6];
+G_kVaggas[5] = [[12,14,12,16,19],[],6];
+G_kVaggas[6] = [[17,11,10,12,14,10,11],[4],6];
+G_kVaggas[7] = [[12,13,10,16],[],6];
+G_kVaggas[8] = [[0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,9,16,12,12,14,5,3,1,7,1,2,1,2,2,10,3,1,1,1,1],[1,13,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],6];
+G_kVaggas[9] = [[18,10,8,1,12,8,3,1,1,1,1,1,5,1,1,1],[],6];
+G_kVaggas[10] = [[12],[42,56],6];
+for(i=0;i<54;i++)
+	G_kVaggas[10][0].push(10);
+G_kVaggas[10][0].push(11);
+G_kVaggas[11] = [[10,10,10,10],[],6,true]; // true means shift from vagga to sutta
+G_kVaggas[13] = [[10,10,15],[],6];
+G_kVaggas[14] = [[],[15,25,30,35,38,40,42,43,44,45,46,47,48,49,50,51],-1];
+for(i=0;i<37;i++)
+	G_kVaggas[14][0].push(10);
+G_kVaggas[14][0] = G_kVaggas[14][0].concat([5,10,10,10,11,10,12,16,9,10,10,13,14,10]);
 
 function getSuttaFromNumber(is) { // should be in array format SN,1,1
 	
@@ -98,13 +140,15 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 		is[0] = is[0].split('-')[0];
 	}
 	else hiert = 'm';
-	
 	is[0] = is[0].toUpperCase();
 	
-	nik = G_nikShortName[is[0]];
+	if(is[0].length == 1)
+		is[0] = is[0]+'N';
+
+	nik = G_nikShortName[is[0]]; // letter
 	
-	var a1 = parseInt(is[1]);
-	var a2 = (is[2] ? parseInt(is[2]) : 1);
+	var a1 = parseInt(is[1]); // number first part
+	var a2 = (is[2] ? parseInt(is[2]) : 1); // second part, if exists
 	
 	book = 0;
 	
@@ -121,9 +165,6 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 					book++;
 				break;
 			}
-			meta = 0;
-			volume = 0;
-			sutta = 0;
 			section = a2-1;
 		break;
 		case 'm': // sutta.section to book.vagga.sutta.section
@@ -136,8 +177,6 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 			book = Math.floor(vagga/5);
 			vagga -= book*5
 			
-			meta = 0;
-			volume = 0;
 			section = a2-1;
 		break;
 		case 'a':  // book.sutta to book.vagga.sutta.section
@@ -157,8 +196,6 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 				}
 			}
 			if(found == 0) return;
-			meta = 0;
-			volume = 0;
 		break;
 		case 's':
 			if(a1 > 56) return;
@@ -190,13 +227,111 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 					}
 				}
 			}
-			if(found == 0) return;
-			meta = 0;
-			volume = 0;
+		break;
+		case 'k':
+			if(hiert != 'm') return;
+			book = a1-1;
+			switch(a1) {
+				case 1:
+					if(a2 <0 || a2 > 9)
+						return;
+					vagga = a2-1;
+				break;
+				case 2:
+					if(a2 <0 || a2 > 26)
+						return;
+					vagga = a2-1;
+				break;
+				default:
+					var vss = vssCalc(a1,a2);
+					if(!vss)
+						return;
+						alert(vss);
+					vagga = vss[0];
+					sutta = vss[1];
+					section = vss[2];
+				break;
+			}
 		break;
 		default:
 			return;
 		break;
 	}
-	return [nik,book,meta,volume,vagga,sutta,section,hiert];
+	return [nik,book,meta?meta:0,volume?volume:0,vagga?vagga:0,sutta?sutta:0,section?section:0,hiert];
+}
+
+//~ function vsCalc(a1,a2) { // calculate a two dimensional hierarchy
+	//~ var cnt = 0;
+	//~ var vagga = 0;
+	//~ var section = 0;
+	//~ for (i in ss) {
+		//~ cnt+=ss[i];
+	//~ }
+	//~ if(a2>cnt)
+		//~ return;
+		//~ 
+	//~ cnt =0;
+//~ 
+	//~ for (i in ss) {
+		//~ cnt+=ss[i];
+		//~ if(a2 > cnt) {
+			//~ vagga++;
+		//~ }
+		//~ else {
+			//~ section = a2 - 1;
+			//~ for(j=0;j<vagga; j++) {
+				//~ section -= ss[j];
+			//~ }
+			//~ break;
+		//~ }
+			//~ 
+	//~ }
+	//~ return [vagga,section];
+//~ }
+
+function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
+	var vss = G_kVaggas[a1];
+	if(!vss)
+		return;
+	var ss = vss[0];
+	
+	var cnt = 0;
+	for (i in ss) {
+		cnt+=ss[i];
+	}
+	if(a2>cnt)
+		return;
+
+	var vs = vss[1];
+	
+	cnt = 0;
+	var cnt2 = 0;
+	var vagga = 0;
+	var sutta = 0;
+	var section = 0;
+	
+	for (i in ss) {
+		cnt+=ss[i];
+		if(a2 > cnt) {
+			cnt2++;
+			sutta++;
+			if(vs.length && cnt2 >= vs[vagga]) {
+				sutta = 0;
+				vagga++;
+			}
+		}
+		else {
+			section = a2 - 1;
+			for(j=0;j<cnt2; j++) {
+				section -= ss[j];
+			}
+			break;
+		}
+			
+	}
+
+	if(vs.length || vss[3])
+		return [vagga,sutta,section];
+	else
+		return [sutta,0,section];
 }

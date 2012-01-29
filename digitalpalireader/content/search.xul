@@ -21,14 +21,14 @@
 			document.getElementById('dpr-search-browser').contentWindow.getconfig();
 		}
 		function stopSearch() {
-			document.getElementById('dpr-search-browser').contentWindow.wrappedJSObject.stopSearch();
+			document.getElementById('dpr-search-browser').contentWindow.stopSearch();
 
 		}
 		function scrollSearch(what) {
-			document.getElementById('dpr-search-browser').contentWindow.wrappedJSObject.scrollSearch(what);
+			document.getElementById('dpr-search-browser').contentWindow.scrollSearch(what);
 		}
 		function permalinkClick(a,b) {
-			document.getElementById('dpr-search-browser').contentWindow.wrappedJSObject.permalinkClick(a,b);
+			document.getElementById('dpr-search-browser').contentWindow.permalinkClick(a,b);
 		}
 		var G_count_browsers = 1;
 		var devCheck = 0;

@@ -152,6 +152,20 @@ function arrangeWords(wordst,alts) {
 		
 		var wgtemp = [];
 
+		// prefer special words
+		
+		for(j=0;j<wordst[i].length;j++) {
+			if(wordst[i][j][5] && wordst[i][j][4]['special']) {
+				wgtemp.push(wordst[i][j]);
+			}
+		}
+		if(wgtemp.length) {
+			for(j=0;j<wordst[i].length;j++) {
+				if(!wordst[i][j][5] || wordst[i][j][4]['special'])
+					wgtemp.push = wordst[i][j];
+			}
+			wordst[i] = wgtemp;
+		}
 		// prefer genitives
 		
 		for(j=0;j<wordst[i].length;j++) {
@@ -161,7 +175,7 @@ function arrangeWords(wordst,alts) {
 		}
 		if(wgtemp.length) {
 			for(j=0;j<wordst[i].length;j++) {
-				if(wordst[i][j][2][1] != 6)
+				if(!wordst[i][j][2] || wordst[i][j][2][1] != 6)
 					wgtemp.push = wordst[i][j];
 			}
 			wordst[i] = wgtemp;
@@ -573,6 +587,7 @@ function translateWord(word,idx) {
 		deca = G_specWords[word][2];
 		meta = [];
 		meta['orig'] = vword;
+		meta['special'] = true;
 		outs.push([trans,type,deca,word,meta,idx]);
 	}
 	if(eg[vword]) {

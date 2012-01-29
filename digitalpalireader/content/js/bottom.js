@@ -40,12 +40,13 @@ function getconfigx() {
 }
 
 function moveFrame(e) {
-	document.getElementById('f1').setAttribute('collapsed','true');
-	document.getElementById('f2').setAttribute('collapsed','true');
-	document.getElementById('f3').setAttribute('collapsed','true');
-	document.getElementById('f4').setAttribute('collapsed','true');
-	document.getElementById('f5').setAttribute('collapsed','true');
-	document.getElementById('f6').setAttribute('collapsed','true');
+	
+	for(i=1;i<7;i++) {
+		document.getElementById('f'+i).setAttribute('collapsed','true');
+		document.getElementById('bmenu'+i).removeAttribute('checked');
+	}
+	
+	document.getElementById('bmenu'+e).setAttribute('checked',true);
 	document.getElementById('f'+e).removeAttribute('collapsed');
 }			
 

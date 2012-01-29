@@ -336,9 +336,38 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 	}
 	else {
 		var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
-		openDPRTab(permalink,'DPRm');
+		openDPRTab(permalink,'DPRx');
 	}	
 }
+
+function sendTranslate(input, add){
+	
+	if(add == 'right') return;
+
+	if(add != true) { // reuse old tab
+		var thisTab = isDPRTab('DPRm');
+		if(thisTab) {  
+			var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+			thisTabBrowser.contentWindow.getTranslate(input);
+			return;
+		}
+		var oldTab = findDPRTab('DPR-main');
+		if (!oldTab) {
+			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox;
+			openDPRTab(permalink,'DPR-main');
+		}
+		else {
+			mainWindow.gBrowser.selectedTab = oldTab;
+			var oldTabBrowser = mainWindow.gBrowser.getBrowserForTab(oldTab);
+			oldTabBrowser.contentWindow.getTranslate(input);
+		}
+	}
+	else {
+		var permalink = 'chrome://digitalpalireader/content/translate.htm' + '?phrase='+toVel(input);
+		openDPRTab(permalink,'DPRx');
+	}	
+}
+
 
 function openTranslation(url,add) {
 	if(add == 'right') return;

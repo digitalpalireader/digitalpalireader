@@ -34,12 +34,12 @@ function promptData(title,data) {
 	G_prompts.alert(null, title, data);
 }
 
-function promptDataEx(title,data) {
+function promptThreeButton(title,data,one,two,three) {
 	var check = {value: false};                  // default the checkbox to false
-	var flags = G_prompts.BUTTON_POS_0 * G_prompts.BUTTON_TITLE_SAVE +
+	var flags = G_prompts.BUTTON_POS_0 * G_prompts.BUTTON_TITLE_IS_STRING +
             G_prompts.BUTTON_POS_1 * G_prompts.BUTTON_TITLE_IS_STRING  +
-            G_prompts.BUTTON_POS_2 * G_prompts.BUTTON_TITLE_CANCEL;
-	G_prompts.confirmEx(null, title, data,flags,"","Ok","",null,check);
+            G_prompts.BUTTON_POS_2 * G_prompts.BUTTON_TITLE_IS_STRING;
+	return G_prompts.confirmEx(null, title, data,flags,one,two,three,null,check);
 }
 
 function DPR_restartFirefox() {

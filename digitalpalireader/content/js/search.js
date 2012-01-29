@@ -87,7 +87,18 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 			}
 		}
 	}
-
+	
+	if(!G_searchString) {
+		var check = {value: false};                  // default the checkbox to false
+		var input = {value: ''};           
+		var result = G_prompts.prompt(null, "Enter Query", "Enter query for custom search:", input, null, check);
+		if(!result)
+			return;
+		if(!input.value)
+			return;
+		G_searchString = input.value;
+	}
+	
 	var st = [];
 	var matst = [];
 	for (i in G_searchMAT) matst.push(G_searchMAT[i]);
@@ -97,6 +108,9 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1);
 	st[3] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (partial)';
 	st[5] = 'ATI Translations';
+	
+	if(G_searchType == 0 && /\|/.test(G_searchBook)) // custom search
+		st[0]+=' (custom)';
 
 
 	// tab title
@@ -231,11 +245,22 @@ function pausesall()
 	// make G_searchFileArray
 	var which = G_searchType;
 
+	if(/\|/.test(G_searchBook)) { // custom search
+		G_searchBook = G_searchBook.replace(/\|/g,',|,');
+		var cbooks = G_searchBook.split('|');
+		var cniks = [];
+		for(i in G_searchSet) {
+			cniks[G_searchSet[i]] = i;
+		}
+	}
+
 	for(w in G_XMLFileArray) {
 		if (G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
 		for (x = 0; x < 3; x++) {
 			if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+				if(cbooks && cbooks[cniks[w.charAt(0)]] && cbooks[cniks[w.charAt(0)]].indexOf(','+w.substring(1)+',') == -1) continue; // skip unspecified books for custom search
+					
 				G_searchFileArray.push(w+G_hLetters[x]);
 			}
 		}
@@ -799,7 +824,7 @@ function createTables(xmlDoc,hiert)
 										finalout += ', <b style="color:' + DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
 										 colt++;
 									 }
-									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span> <a href="javascript:void(0)" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;" class="small green">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 
 									match = 1;
 									thiscount++;									
@@ -935,7 +960,7 @@ function createTables(xmlDoc,hiert)
 
 									
 									// paragraph
-									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span> <a href="javascript:void(0)" class="small green" onclick="document.getElementById(\'sbfbc\').scrollTop = 0;">top</a></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+									finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
 									
 									// mumble mumble
 									

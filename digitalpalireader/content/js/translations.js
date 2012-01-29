@@ -12,6 +12,7 @@ function transLink(which,auth,url,title) {
 }
 
 function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
+
 	if (!DPR_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
 	
 	var atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');

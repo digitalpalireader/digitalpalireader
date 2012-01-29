@@ -14,7 +14,9 @@ function getconfig() {
 		DPR_prefs[i] = getPref(i);
 	}
 
-	if (/top\.htm/.exec(document.location.href) && DPR_prefs["ctrans"] && typeof(atiD) == 'undefined') addATIJS();
+	if (/top\.htm/.exec(document.location.href) && DPR_prefs["ctrans"] && typeof(atiD) == 'undefined') {
+		 addATIJS();
+	 }
 
 	// update backgrounds
 		
