@@ -87,21 +87,27 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
 			if(hier != 'm' || !kv || (which && kv[2] != which)) return;
 			var osec = 0;
 			var osut = 0;
-			if(kv[1].length) {
-				if(vagga > 0)
+
+			if(!kv[0].length) { // vaggas only
+				section = vagga;
+			}
+			else if(kv[1].length) {
+				if(vagga > 0) {
 					sutta+=kv[1][vagga-1];
+				}
 				for(i = 0; i < sutta; i++) {
 					section+=kv[0][i];
 				}
 			}
 			else {
-				if(kv[3])
+				if(kv[3] == 1)
 					vagga = sutta;
 				for(i = 0; i < vagga; i++) {
 					section+=kv[0][i];
 				}
 			}
-				
+			if(kv[4]) // jataka 2
+				section+=kv[4];
 			no = (book+1) +'.' + (section+1);
 		break;
 	}
@@ -109,8 +115,8 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
 }
 
 var G_kVaggas = []
-//G_kVaggas[1] = 9;
-//G_kVaggas[2] = 26;
+G_kVaggas[1] = [[],[9],-1]; // don't show in indexes
+G_kVaggas[2] = [[],[26],-1]; 
 G_kVaggas[3] = [[10,10,10,10,10,10,10,10],[],6];
 G_kVaggas[4] = [[10,10,7,10,12,10,10,10,10,10,13],[3,5,10],6];
 G_kVaggas[5] = [[12,14,12,16,19],[],6];
@@ -123,11 +129,15 @@ for(i=0;i<54;i++)
 	G_kVaggas[10][0].push(10);
 G_kVaggas[10][0].push(11);
 G_kVaggas[11] = [[10,10,10,10],[],6,true]; // true means shift from vagga to sutta
+G_kVaggas[12] = [[],[29],-1];
 G_kVaggas[13] = [[10,10,15],[],6];
 G_kVaggas[14] = [[],[15,25,30,35,38,40,42,43,44,45,46,47,48,49,50,51],-1];
 for(i=0;i<37;i++)
 	G_kVaggas[14][0].push(10);
 G_kVaggas[14][0] = G_kVaggas[14][0].concat([5,10,10,10,11,10,12,16,9,10,10,13,14,10]);
+G_kVaggas[15] = [[],[5,8,10,12,17,27],-1,false,520];
+for(i=0;i<27;i++)
+	G_kVaggas[15][0].push(1);
 
 function getSuttaFromNumber(is) { // should be in array format SN,1,1
 	
@@ -246,7 +256,6 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
 					var vss = vssCalc(a1,a2);
 					if(!vss)
 						return;
-						alert(vss);
 					vagga = vss[0];
 					sutta = vss[1];
 					section = vss[2];
@@ -294,22 +303,27 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 	if(!vss)
 		return;
 	var ss = vss[0];
-	
+	var vs = vss[1];
+
+	if(!ss.length) { // vaggas only
+		return (a2 > vs[0]?null:[a2-1,0,0]);
+	}	
 	var cnt = 0;
 	for (i in ss) {
 		cnt+=ss[i];
 	}
+	if(vss[4])
+		a2-=vss[4];
 	if(a2>cnt)
 		return;
 
-	var vs = vss[1];
 	
 	cnt = 0;
 	var cnt2 = 0;
 	var vagga = 0;
 	var sutta = 0;
 	var section = 0;
-	
+
 	for (i in ss) {
 		cnt+=ss[i];
 		if(a2 > cnt) {
