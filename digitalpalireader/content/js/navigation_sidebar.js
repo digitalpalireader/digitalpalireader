@@ -327,5 +327,6 @@ var DPRNav = {
 		DPRXML.updateHierarchy(4);
 		document.getElementById('section').selectedIndex = section;
 		
-	}
+	},
+	
 }

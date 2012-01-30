@@ -76,3 +76,6 @@ function getAtthXML(opt,opt2,opt3) {
 function sendAlertFlash(opt,opt2) {
 	return document.getElementById('dpr-index-top').contentWindow.alertFlash(opt,opt2);
 }
+function getSuttaFromNumber(opt) {
+	return document.getElementById('dpr-index-top').contentWindow.getSuttaFromNumber(opt);
+}

@@ -82,7 +82,7 @@ function keyPressed(e) {
 		var input = {value: ""};           
 
 		var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
-
+		
 		// result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
 		
 		if(!result) return;
@@ -91,6 +91,9 @@ function keyPressed(e) {
 		outplace = convertShortLink(place);
 		
 		if(!outplace) return;
+		
+		if(outplace[0] === false)
+			return wTop.alertFlash(outplace[1],outplace[2]);
 		
 		wTop.openPlace(outplace,null,null,check.value);
 				
@@ -148,51 +151,3 @@ G_keysList.push('');
 
 G_keysList.push('k\tshow this list of shortcuts'); 
 
-
-function convertShortLink(place) {
-	var wTop = document.getElementById('dpr-index-top').contentWindow;
-	// kn subs
-	var arr = [];
-	arr['khp'] = 1;
-	arr['dhp'] = 2;
-	arr['ud'] = 3;
-	arr['it'] = 4;
-	arr['sn'] = 5;
-	arr['vv'] = 6;
-	arr['pv'] = 7;
-	arr['th'] = 8;
-	arr['thi'] = 9;
-	arr['apa'] = 10;
-	arr['api'] = 11;
-	arr['bv'] = 12;
-	arr['cp'] = 13;
-	arr['ja'] = [14,520];
-
-	if(!/^[A-Za-z]{1,3}-{0,1}[atAT]{0,1} {0,1}[0-9]*\.{0,1}[0-9]*$/.test(place)) return wTop.alertFlash('Syntax Error','yellow');  // loose syntax
-	
-	if(/^[A-Za-z]+\.*([\d]+)$/.test(place)) {
-		for(i in arr) {
-			var ai = new RegExp('^'+i);
-			if(ai.test(place)) {
-				var no = place.replace(/^[A-Za-z]+\.*([\d]+)$/,"$1");
-				if(typeof(arr[i]) == 'object') { // multiple
-					if(parseInt(no) > arr[i][1]) {
-						no = parseInt(no) - arr[i][1];
-						place = place.replace(/^([A-Za-z]+\.*)[\d]+$/,"$1"+no);
-					}
-					place = place.replace(/^[A-Za-z]+/,'kn'+arr[i][0]+'.'+no);
-				}
-				else
-					place = 'kn'+arr[i]+'.'+no;
-			}
-		}
-	}
-
-	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return wTop.alertFlash('Syntax Error','yellow');
-	
-	place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
-	
-	var outplace = wTop.getSuttaFromNumber(place.split(','));
-	if(!outplace) return wTop.alertFlash('Link not found','yellow');
-	return outplace;
-}
