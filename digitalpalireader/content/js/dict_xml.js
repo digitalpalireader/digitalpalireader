@@ -9,7 +9,7 @@ function paliXML(filein,which,add)
 {
 	if(add == 'right') return;
 	if(add == true) {
-		sendPaliXML(toVel(filein),true);
+		sendPaliXML(toVel(filein.split(',')[1]),true);
 		return;
 	}
 	moveFrame(1);

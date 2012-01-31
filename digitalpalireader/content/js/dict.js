@@ -156,8 +156,6 @@ function pedsearchstart(hard)
 		}
 	}
 
-
-
 	$('#dicthead').append('<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
 	
 	var outDiv = document.createElement('div');
@@ -193,6 +191,8 @@ function pedsearchstart(hard)
 
 		}
 	}
+	else if(finouta.length == 1)
+		paliXML('PED/' + loc+','+uniout);
 
 	var findiv = Math.ceil(finouta.length/3);
 	var listoutf = '<table width="100%">';

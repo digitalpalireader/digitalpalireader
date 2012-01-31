@@ -1,6 +1,7 @@
 
 function outputDef(which,first,frombox)
 {
+	$('#anfright').html('');
 	//dalert(G_outwords + ' ' + G_shortdefpost);
 
 // create option dropdown
@@ -157,7 +158,7 @@ function outputDef(which,first,frombox)
 			
 			G_thisConcise[conciseword] = concisedef;
 			if(x== 0) 
-				var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + conciseword + '</b>: ' + concisedef;	
+				var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + conciseword + '</b>: ' + concisedef;	
 		}
 		
 	}
@@ -183,5 +184,5 @@ function showShortDef(word) {
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
-	document.getElementById('spdout').innerHTML = '<b style="color:' + DPR_prefs['colcpd'] + '";>' + spdcol[1] + ':</b> ' + spdcol[2];
+	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + spdcol[1] + ':</b> ' + spdcol[2]);
 }
