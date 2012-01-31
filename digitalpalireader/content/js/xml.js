@@ -341,12 +341,12 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 			{
 				var obj = (typeof(query[tmpl]) == 'object');
 				if ((obj ? onepars.search(query[tmpl]) : onepars.indexOf(query[tmpl])) == -1) { // at least one of the strings was not found -> no match
-					theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring+'|> ' + onepar;
+					theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'%20')+'|> ' + onepar;
 					//alert(theData);
 					continue atlabel;
 				}
 			}
-			theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&query=' + querystring+'&para='+(tmp+1)+'&query='+querystring+'|> ';
+			theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'%20')+'|> ';
 			var tmpdata = onepar;
 			for (var i = 0; i < query.length; i++)
 			{

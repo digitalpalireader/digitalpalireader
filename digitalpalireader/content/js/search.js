@@ -122,12 +122,15 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
 		G_searchString = G_searchString.toUpperCase();
 	}
+	else if(G_searchType != 5) {
+		G_searchString = G_searchString.toLowerCase();
+	}
 	
 	// start timer
 
 	starttime = new Date;
 	starttime = starttime.getTime();
-
+	
 	switch(G_searchType) {
 		case 0:
 			pausesall();
@@ -1105,10 +1108,51 @@ function atiSearchStart() {
 		newScript.src = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
 		headID.appendChild(newScript);
 
-		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+//		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+		MD.getElementById('search-progress').setAttribute('max',G_searchSet.length);
+	
+		var thisterm = MD.createElement('toolbarbutton');
+		thisterm.setAttribute('id','search-term');
+		thisterm.setAttribute('onmouseup','scrollSearch()');
+		thisterm.setAttribute('class','search-set');
+		
+		var setlabel = MD.createElement('label');
+		setlabel.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString)));
+		setlabel.setAttribute('id','search-term');
+		setlabel.setAttribute('crop','center');
+		setlabel.setAttribute('class','search-button-label');
+		
+		thisterm.appendChild(setlabel);
+
+		var tsep = MD.createElement('toolbarseparator');
+
+		MD.getElementById('search-sets').appendChild(thisterm);
+		MD.getElementById('search-sets').appendChild(tsep);
+		for (i = 0; i < G_numberToNik.length; i++) {
+			if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
+
+			var thisset = MD.createElement('toolbarbutton');
+			thisset.setAttribute('class','search-set');
+			thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+G_numberToNik[i]+'\')');
+			
+			var setlabel = MD.createElement('label');
+			setlabel.setAttribute('value',G_nikLongName[G_numberToNik[i]]+': 0');
+			setlabel.setAttribute('id','matches'+G_numberToNik[i]);
+			setlabel.setAttribute('class','search-button-label');
+			
+			thisset.appendChild(setlabel);
+
+			var sep = MD.createElement('toolbarseparator');
+
+			MD.getElementById('search-sets').appendChild(thisset);
+			if(i < G_searchSet.length)
+				MD.getElementById('search-sets').appendChild(sep);
+		}
+		
 		document.getElementById('stfc').innerHTML = '';
 		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
 		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
+
 		atiPause(getstring);
 		return;
 	}
@@ -1131,7 +1175,9 @@ function atiSearchStart() {
 
 
 function atiSearchOffline(d, getstring) {
-	
+	var val = parseInt(MD.getElementById('search-progress').getAttribute('value'));
+	MD.getElementById('search-progress').setAttribute('value',val+1);
+		
 	var nikA = ['d','m','s','a','k'];
 
 	while (G_searchSet.indexOf(nikA[d]) == -1) {	
@@ -1232,8 +1278,10 @@ function atiSearchOffline(d, getstring) {
 	
 	var cellNode = document.createElement('td');
 	cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+G_nikLongName[nik] + '</a>: ' + count + '; ';
+
+	var val = MD.getElementById('matches'+nikA[d]).getAttribute('value').replace(/: .+/,': ');
+	MD.getElementById('matches'+nikA[d]).setAttribute('value',val+count);
 	
-	document.getElementById('atiNiks').appendChild(cellNode);
 	
 	
 	var outNode = document.createElement('div');

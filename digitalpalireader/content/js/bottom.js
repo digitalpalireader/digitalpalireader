@@ -51,7 +51,7 @@ function moveFrame(e) {
 }			
 
 function openBottomMenu() {
-	document.getElementById('menu').openPopup(document.getElementById('bottom-box'));
+	document.getElementById('menu').openPopup(document.getElementById('bottom-box'),'start_before',20,20);
 }
 
 // transfer functions
