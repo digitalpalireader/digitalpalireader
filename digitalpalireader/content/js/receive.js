@@ -60,8 +60,8 @@ function makeLinkPlace(options,PL) {
 			}
 		}
 		else if (option[0] == 'query') {
-			if(/^\//.exec(option[1])) query = [toUni(option[1]).replace(/_/g,' ')];
-			else query = [toUni(decodeURIComponent(option[1]))];
+			if(/^\//.exec(option[1])) query = toUni(option[1]);
+			else query = toUni(decodeURIComponent(option[1]));
 		}
 		else if (option[0] == 'para') para = option[1];
 		else if (option[0] == 'scroll') scroll = parseInt(option[1]);

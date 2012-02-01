@@ -1,3 +1,10 @@
+window.onerror = function(message, file, lineNumber) {
+    var error = message + "\n\nFile:"+file+"\n\nLine:"+lineNumber;
+	alert('a single hand claps\ncan you hear the sound it makes?\n'+error);
+	refreshit();
+    return true;
+}
+
 var atiIns = 0;
 
 function changeStyleByName(name,attrib,value) {

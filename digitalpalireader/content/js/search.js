@@ -634,6 +634,7 @@ function createTables(xmlDoc,hiert)
 	}
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
+	if(G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
 	
 	var part;
 	if(G_searchPart != '1') part = G_searchPart.split('.');

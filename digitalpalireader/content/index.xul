@@ -5,6 +5,7 @@
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script>
+
 function onLoad() {
 	giveIDtoTabs();
 	var link = document.location.href.split('?')[1];

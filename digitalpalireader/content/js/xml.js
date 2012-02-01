@@ -7,7 +7,7 @@ matValue['a'] = '';
 matValue['t'] = '';
 
 
-function loadXMLSection(query,para,place,isPL,scroll,compare)
+function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 { 
 	for(i=1;i<7;i++) {
 		if(place[i] == 'x') {
@@ -35,35 +35,28 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	
 	if(xmlDoc == null) return refreshit();
 	
-	try {
-		
-		var t = xmlDoc.getElementsByTagName("ha");
-		var u = t[0].getElementsByTagName("h0");
-		var v = u[meta]?u[meta].getElementsByTagName("h1"):[];
-		var w = v[volume]?v[volume].getElementsByTagName("h2"):[];
-		var x = w[vagga]?w[vagga].getElementsByTagName("h3"):[];
-		var y = x[sutta]?x[sutta].getElementsByTagName("h4"):[];
-		var z = y[section]?y[section].getElementsByTagName("p"):[];
+	var t = xmlDoc.getElementsByTagName("ha");
+	var u = t[0].getElementsByTagName("h0");
+	var v = u[meta]?u[meta].getElementsByTagName("h1"):[];
+	var w = v[volume]?v[volume].getElementsByTagName("h2"):[];
+	var x = w[vagga]?w[vagga].getElementsByTagName("h3"):[];
+	var y = x[sutta]?x[sutta].getElementsByTagName("h4"):[];
+	var z = y[section]?y[section].getElementsByTagName("p"):[];
 
-		// titles
-		
-		var un = t[0].getElementsByTagName("han");
-		var vn = u[meta].getElementsByTagName("h0n");
-		var wn = v[volume].getElementsByTagName("h1n");
-		var xn = w[vagga].getElementsByTagName("h2n");
-		var yn = x[sutta].getElementsByTagName("h3n");
-		var zn = y[section].getElementsByTagName("h4n");
-		var una = (un[0].childNodes[0] ? un[0].textContent : ' ');
-		var vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
-		var wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
-		var xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
-		var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
-		var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
-	}
-	catch(ex) {
-		alert('Something went wrong.  A team of highly-trained monkeys has been dispatched to solve the problem.  If you see them, please show them this:\n\n'+ex);
-		return refreshit();
-	}
+	// titles
+	
+	var un = t[0].getElementsByTagName("han");
+	var vn = u[meta].getElementsByTagName("h0n");
+	var wn = v[volume].getElementsByTagName("h1n");
+	var xn = w[vagga].getElementsByTagName("h2n");
+	var yn = x[sutta].getElementsByTagName("h3n");
+	var zn = y[section].getElementsByTagName("h4n");
+	var una = (un[0].childNodes[0] ? un[0].textContent : ' ');
+	var vna = (vn[0].childNodes[0] ? vn[0].textContent : ' ');
+	var wna = (wn[0].childNodes[0] ? wn[0].textContent : ' ');
+	var xna = (xn[0].childNodes[0] ? xn[0].textContent : ' ');
+	var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
+	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	// relative mat
 	
@@ -198,11 +191,16 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	
 	// get string from query
 	
-	if(query) {
-		var querystring = '';
-		for (i in query) {
-			querystring=(querystring?querystring+'+':'')+query[i];
+	if(querystring) {
+		if(/^\/.+\/$/.test(querystring)) {
+			var queryt = querystring.substring(1,querystring.length-1).split('+');
+			var query = [];
+			for(i in queryt) {
+				query[i] = new RegExp(queryt[i].replace(/\\/g,'\\'));
+			}
 		}
+		else
+			var query = querystring.split('+');
 	}
 
 	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
@@ -228,9 +226,9 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	bareurl += newloc;
 	// update query
 	
-	if(query) {
-		if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+toVel(query.join('+')));
-		else newurl = newurl + '&query='+toVel(query.join('+'));
+	if(querystring) {
+		if(/query=/.exec(newurl)) newurl = newurl.replace(/query=[^&]+/,'query='+querystring);
+		else newurl = newurl + '&query='+querystring;
 	}
 	else newurl = newurl.replace(/\&query=[^&]+/,'');
 
@@ -292,7 +290,7 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 
 	// first toolbar row
 	
-	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(query ? '&query=' + toVel(query.join('+')) : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
+	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+(compare ? ' <span class="abut obut small" onclick="closePanel(\''+compare+'\')" title="close panel">x</span>':'');
 	
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
@@ -322,7 +320,6 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 	$('#mafbc').append('<div id="savei">'+titleout[1]+'</div>');
 
 	var theData = '';
-	
 	// check if there is a search going on and add the labels
 	if (query) {
 		atlabel:
@@ -341,12 +338,12 @@ function loadXMLSection(query,para,place,isPL,scroll,compare)
 			{
 				var obj = (typeof(query[tmpl]) == 'object');
 				if ((obj ? onepars.search(query[tmpl]) : onepars.indexOf(query[tmpl])) == -1) { // at least one of the strings was not found -> no match
-					theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'%20')+'|> ' + onepar;
+					theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'_')+'|> ' + onepar;
 					//alert(theData);
 					continue atlabel;
 				}
 			}
-			theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'%20')+'|> ';
+			theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'&query='+querystring.replace(/ /g,'_')+'|> ';
 			var tmpdata = onepar;
 			for (var i = 0; i < query.length; i++)
 			{
