@@ -28,8 +28,10 @@ function onLoad() {
 			}
 		}
 	}
+	
 	document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
 	document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
+
 	if(!linkb) moveFrame(6);
 }
 function getconfig() {
@@ -135,6 +137,9 @@ var devCheck = 0;
 	<script type="application/x-javascript" src="js/io.js" />
 	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/keypress_index.js" />
+	<script type="application/x-javascript" src="js/keypress_index.js" />
+	<script type="application/x-javascript" src="js/navigation_common.js"/>
+	<script type="application/x-javascript" src="js/navigation.js"/>
 	<script type="application/x-javascript" src="js/chrome.js" />
 	<script type="application/x-javascript" src="js/prompt.js" />
 	<script type="application/x-javascript" src="js/bottom.js" />

@@ -190,7 +190,7 @@ var DPROverlay = {
 		var dprtrans = document.getElementById("dpr-trans-item");
 		var dprdict = document.getElementById("dpr-sub-dict");
 		var dprsearch = document.getElementById("dpr-sub-search");
-
+		
 		var nosel = (!gContextMenu.isTextSelected && (!gContextMenu.target.value || !gContextMenu.target.value.substring(gContextMenu.target.selectionStart, gContextMenu.target.selectionEnd)));
 		var notext = (!gContextMenu.target.innerHTML.replace(/<[^>]+>/g,'') && !gContextMenu.target.value && nosel);
 		

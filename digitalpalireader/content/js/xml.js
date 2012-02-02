@@ -762,7 +762,7 @@ function loadXMLindex(place,compare) {
 
 						}
 						if(isPlace) {
-							var link = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
+							var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
 							var t = u[tmp6].getElementsByTagName("p");
 							for (tmp7 = 0; tmp7 < t.length; tmp7++) {
 								var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);

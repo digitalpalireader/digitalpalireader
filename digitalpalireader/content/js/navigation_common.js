@@ -549,7 +549,7 @@ function convertShortLink(place) {
 	
 	if(/^[A-Za-z]+\.*([\d]+)$/.test(place)) {
 		for(i in arr) {
-			var ai = new RegExp('^'+i);
+			var ai = new RegExp('^'+i+'[.0-9]');
 			if(ai.test(place)) {
 				var no = place.replace(/^[A-Za-z]+\.*([\d]+)$/,"$1");
 				if(typeof(arr[i]) == 'object') { // multiple

@@ -13,7 +13,7 @@
 		</tabs>
 		<tabpanels id="panels" class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="bv">
-				<browser disablehistory="true" type="content" id="etc-1-browser" src="bv.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="etc-1-browser" src="bv2.htm" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="ped">
 				<browser disablehistory="true" type="content" id="etc-2-browser" src="etc/grammar/ped-abbv.htm" flex="1" persist="height"/>
