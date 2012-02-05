@@ -9,16 +9,20 @@
 			<tab class="chromeback" label="Duroiselle's Grammar"/>
 			<tab class="chromeback" id="cheet" label="Pali Cheat Sheet"/>
 			<tab class="chromeback" id="compound" label="Pali Compound Sheet"/>
+			<tab class="chromeback" id="skt" label="Sanskrit Roots"/>
 		</tabs>
 		<tabpanels class="chromeback" flex="1">
 			<tabpanel class="chromeback" id="grammar">
 				<browser disablehistory="true" type="content" id="grammar-1-browser" src="etc/grammar/GMD/index.html" flex="1" persist="height"/>
 			</tabpanel>
 			<tabpanel class="chromeback" id="cheat">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="etc/grammar/cheat.htm" flex="1" persist="height"/>
+				<browser disablehistory="true" type="content" id="grammar-2-browser" src="etc/grammar/cheat.htm" flex="1" persist="height"/>
 			</tabpanel>
-			<tabpanel class="chromeback" id="cheat">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="etc/grammar/compound.htm" flex="1" persist="height"/>
+			<tabpanel class="chromeback" id="compound">
+				<browser disablehistory="true" type="content" id="grammar-3-browser" src="etc/grammar/compound.htm" flex="1" persist="height"/>
+			</tabpanel>
+			<tabpanel class="chromeback" id="skt-roots">
+				<browser disablehistory="true" type="content" id="grammar-4-browser" src="etc/grammar/skt-roots/index.htm" flex="1" persist="height"/>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

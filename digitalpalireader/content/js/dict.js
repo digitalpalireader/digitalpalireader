@@ -45,6 +45,21 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		catch(ex) {
 		}
 	}
+	
+	var js =[];
+	
+	js['PED'] = ['ped'];
+	js['CPED'] = ['english'];
+	js['DPPN'] = ['dppn','nameno'];
+	js['CEPD'] = ['epd'];
+	js['SKT'] = ['skt'];
+	js['TIK'] = ['tiklist'];
+	js['ATT'] = ['attlist'];
+	js['TIT'] = ['titles'];
+	
+	//addJS(js[G_dictType]);
+
+
 
 	G_dictUnicode = /[āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ]/.test(G_dictQuery);
 
@@ -57,6 +72,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	st['ATT'] = 'Atth';
 	st['TIK'] = 'Tika';
 	st['TIT'] = 'Titles';
+	st['SKT'] = 'Sanskrit';
 
 	// tab title
 
@@ -93,6 +109,9 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 			break;
 		case 'TIT':
 			titlesearchstart();
+			break;
+		case 'SKT':
+			sktsearchstart();
 			break;
 	}
 }
@@ -1198,6 +1217,75 @@ function titlesearchstart()
 	
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf;
+	document.getElementById('dict').innerHTML = '';
+	document.getElementById('dict').appendChild(outDiv);
+	document.getElementById('odif').scrollTop=0;
+	yut = 0;
+}
+
+
+function sktsearchstart()
+{
+	if(typeof(skt) == 'undefined') {
+		return;
+	}
+
+	clearDivs('dict');
+	
+	var getstring = toSkt(G_dictQuery);
+	
+	var gslength = getstring.length;
+	var gsplit = new Array();
+	
+	var gletter = getstring.charAt(0);
+	var finouta = new Array();
+	var y = 0;
+	var finout = '';
+	
+	for (x in skt)
+	{
+		var test = skt[x];
+		test = test.replace(/[^a-z]/g,'');
+		if(!test || test == 'infor' || test == 'in' || test == 'for')
+			continue;
+		if(!/ft/.exec(G_dictOpts)) {
+			var tosearch = x;
+		}
+		else {
+			var tosearch = x+': '+skt[x];
+		}
+
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
+		}
+		if(yessir)
+		{
+			
+			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + toUni(toSkt(x,true)) + '</font></b>: '+skt[x] +'<br>');
+
+		}
+	}
+	
+	$('#dicthead').append('<p>Sanskrit search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictQuery):toUni(G_dictQuery))+'</b>:');
+	
+	finout = '<hr /><table width=100%><tr><td valign="top">';
+	if(finouta.length == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = finout + 'No results</td></tr></table>';
+		document.getElementById('dict').innerHTML = '';
+		document.getElementById('dict').appendChild(outDiv);
+		document.getElementById('odif').scrollTop=0;
+		return;
+	}		
+	for (var z = 0; z < finouta.length; z++)
+	{
+		finout += finouta[z];
+	}	
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = finout + '</td></tr></table>';
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;

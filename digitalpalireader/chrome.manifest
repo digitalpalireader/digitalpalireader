@@ -1,4 +1,5 @@
-content	digitalpalireader	content/
+content	digitalpalireader	content/ contentaccessible=yes
+chrome	digitalpalireader	chrome/ contentaccessible=yes
 locale	digitalpalireader	en-US	locale/en-US/
 skin	digitalpalireader	classic/1.0	skin/
 overlay	chrome://browser/content/browser.xul	chrome://digitalpalireader/content/firefoxOverlay.xul

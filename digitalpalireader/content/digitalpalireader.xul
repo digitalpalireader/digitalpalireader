@@ -351,14 +351,19 @@
 							<menulist flex="1" class="sel" tooltiptext="Choose a dictionary type - hover over the name for description" id="dictType" oncommand="DPROpts.dictOptions()">
 								<menupopup>
 									<menuitem tooltiptext="Analyze Word" selected="true" value="DPR" label="&DPR;" />
+									<menuseparator/>
 									<menuitem tooltiptext="Pali-English Dictionary" value="PED" label="&PED;" />
 									<menuitem tooltiptext="Dict. of Pali Names" value="DPPN" label="&DPPN;" />
 									<menuitem tooltiptext="Concise Pali-English Dictionary" value="CPED" label="&CPED;" />
+									<menuseparator/>
 									<menuitem tooltiptext="PED, DPPN and CPED combined" value="MULTI" label="&Multi;" />
+									<menuseparator/>
 									<menuitem tooltiptext="Concise English-Pali Dictionary" value="CEPD" label="&CEPD;" />
 									<menuitem tooltiptext="Aṭṭhakathā Term Search" value="ATT" label="&Aṭṭh;" />
 									<menuitem tooltiptext="Ṭīka Term Search" value="TIK" label="&Ṭīka;" />
 									<menuitem tooltiptext="Title Search" value="TIT" label="&Title;" />
+									<menuseparator/>
+									<menuitem tooltiptext="Sanskrit Dictionary" value="SKT" label="Sanskrit" />
 								</menupopup>
 							</menulist>
 							<toolbarbutton class="small" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">

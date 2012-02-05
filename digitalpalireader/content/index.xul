@@ -109,6 +109,9 @@ var devCheck = 0;
 				<hbox pack="center">
 					<toolbarbutton  onclick="clearPad()" tooltiptext="Erase all text"><label value="Clear"/></toolbarbutton>
 					<toolbarseparator id=""/>
+					<toolbarbutton  tooltiptext="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)"><label value="Velthuis"/></toolbarbutton>
+					<toolbarbutton  tooltiptext="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)"><label value="Unicode"/></toolbarbutton>
+					<toolbarseparator id=""/>
 					<toolbarbutton  tooltiptext="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))"><label value="Analyze"/></toolbarbutton>
 					<toolbarseparator id=""/>
 					<toolbarbutton  onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');" tooltiptext="Copy text to clipboard"><label value="Copy"/></toolbarbutton>

@@ -3,7 +3,39 @@ function toUni(input) {
 	if(!input || input == '') return input;
 	var nigahita = (DPR_prefs['nigahita']?'ṁ':'ṃ'); 
 	var Nigahita = (DPR_prefs['nigahita']?'Ṁ':'Ṃ'); 
-	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\.t/g, 'ṭ').replace(/\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\.n/g, 'ṇ').replace(/\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\.T/g, 'Ṭ').replace(/\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\.N/g, 'Ṇ').replace(/\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\.L/g, 'Ḷ');
+	var rep = [];
+
+	rep['aa'] = 'ā';
+	rep['ii'] = 'ī';
+	rep['uu'] = 'ū';
+	rep['.t'] = 'ṭ';
+	rep['.d'] = 'ḍ';
+	rep['"n'] = 'ṅ';
+	rep['.n'] = 'ṇ';
+	rep['.m'] = nigahita;
+	rep['~n'] = 'ñ';
+	rep['.l'] = 'ḷ';
+	rep['.ll'] = 'ḹ';
+	rep['.r'] = 'ṛ';
+	rep['.rr'] = 'ṝ';
+	rep['.s'] = 'ṣ';
+	rep['"s'] = 'ś';
+	rep['.h'] = 'ḥ';
+	rep['AA'] = 'Ā';
+	rep['II'] = 'Ī';
+	rep['UU'] = 'Ū';
+	rep['.T'] = 'Ṭ';
+	rep['.D'] = 'Ḍ';
+	rep['"N'] = 'Ṅ';
+	rep['.N'] = 'Ṇ';
+	rep['.M'] = Nigahita;
+	rep['~N'] = 'Ñ';
+	rep['.L'] = 'Ḷ';
+
+	for (i in rep) {
+		var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
+		input = input.replace(rx,rep[i]);
+	}
 	return input;
 }
 
@@ -30,6 +62,52 @@ function toVelRegEx(input) {
 function toFuzzy(input){
 	if(!input) return;
 	input = toVel(input).replace(/\.([tdnlmTDNLM])/g,"$1").replace(/~([nN])/g,"$1").replace(/"([nN])/g,"$1").replace(/aa/g,"a").replace(/ii/g,"i").replace(/uu/g,"u").replace(/nn/g,"n").replace(/mm/g,"m").replace(/yy/g,"y").replace(/ll/g,"l").replace(/ss/g,"s").replace(/([kgcjtdpb])[kgcjtdpb]{0,1}h*/g,"$1");
+	return input;
+}
+
+function toSkt(input,rv) {
+	if(!input || input == '') return input;
+
+	var rep = [];
+	rep['aa'] = 'A';
+	rep['ii'] = 'I';
+	rep['uu'] = 'U';
+	rep['.r'] = 'f';
+	rep['.rr'] = 'F';
+	rep['.l'] = 'x';
+	rep['.ll'] = 'X';
+	rep['ai'] = 'E';
+	rep['au'] = 'O';
+	rep['kh'] = 'K';
+	rep['gh'] = 'G';
+	rep['"n'] = 'N';
+	rep['ch'] = 'C';
+	rep['jh'] = 'J';
+	rep['~n'] = 'Y';
+	rep['.t'] = 'w';
+	rep['.d'] = 'q';
+	rep['.th'] = 'W';
+	rep['.dh'] = 'Q';
+	rep['.n'] = 'R';
+	rep['th'] = 'T';
+	rep['dh'] = 'D';
+	rep['ph'] = 'P';
+	rep['bh'] = 'B';
+	rep['"s'] = 'S';
+	rep['.s'] = 'z';
+	rep['.m'] = 'M';
+	rep['.h'] = 'H';
+	
+	for (i in rep) {
+		if(rv) {
+			var rx = new RegExp(rep[i],'g');
+			input = input.replace(rx,i);
+		}
+		else {
+			var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
+			input = input.replace(rx,rep[i]);
+		}
+	}
 	return input;
 }
 
