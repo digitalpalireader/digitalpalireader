@@ -32,7 +32,7 @@ function toUni(input) {
 	rep['~N'] = 'Ñ';
 	rep['.L'] = 'Ḷ';
 
-	for (var i=0;i<rep.length;i++) {
+	for (i in rep) {
 		var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
 		input = input.replace(rx,rep[i]);
 	}

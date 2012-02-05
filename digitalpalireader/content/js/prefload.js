@@ -102,6 +102,11 @@ DPR_prefsD['nigahita'] = false;
 DPR_prefsD['altlimit'] = 20;
 
 var DPR_prefs = [];
-for (i in DPR_prefsD) {
-	DPR_prefs[i] = getPref(i);
+
+function setDefPrefs() {
+	var i;
+	for (i in DPR_prefsD) {
+		DPR_prefs[i] = getPref(i);
+	}
 }
+setDefPrefs();
