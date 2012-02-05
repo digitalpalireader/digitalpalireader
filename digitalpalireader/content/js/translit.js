@@ -32,7 +32,7 @@ function toUni(input) {
 	rep['~N'] = 'Ñ';
 	rep['.L'] = 'Ḷ';
 
-	for (i in rep) {
+	for (var i=0;i<rep.length;i++) {
 		var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
 		input = input.replace(rx,rep[i]);
 	}
@@ -98,7 +98,7 @@ function toSkt(input,rv) {
 	rep['.m'] = 'M';
 	rep['.h'] = 'H';
 	
-	for (i in rep) {
+	for (i=0;i<rep.length;i++) {
 		if(rv) {
 			var rx = new RegExp(rep[i],'g');
 			input = input.replace(rx,i);
