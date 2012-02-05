@@ -52,11 +52,11 @@ var devCheck = 0;
 		function ddump(a) {}
 	}
 </script>
-	<hbox id="dpr-tops" flex="1">
+	<hbox id="dpr-tops" style="height:600px" flex="1" persist="height">
 		<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
 	</hbox>
 	<splitter id="PanelSplitter"/>
-	<hbox flex="1" style="max-height:250px" id="bottom-box">
+	<hbox flex="1" id="bottom-box" persist="height">
 		<menupopup id="menu" onclick="document.getElementById('menu').hidePopup(); moveFrame(event.target.value)">
 			<menuitem id="bmenu1" value="1" label="Dictionary" selected="true"/>
 			<menuitem id="bmenu2" value="2" label="Conversion"/>
