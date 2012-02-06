@@ -71,7 +71,7 @@ var devCheck = 0;
 			</vbox>
 		</hbox>
 		<hbox flex="1" id="f2" collapsed="true">
-			<label value="∴" onmouseover="openBottomMenu()" popup="menu"/>
+			<label value="∴" onclick="openBottomMenu()" style="cursor:pointer"/>
 			<hbox flex="1" pack="center" align="center">
 				<textbox id="cinput" onkeyup="convert(true)" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
 				<hbox>
@@ -103,7 +103,7 @@ var devCheck = 0;
 			</hbox>
 		</hbox>
 		<hbox flex="1" collapsed="true" id="f3">
-			<label value="∴" onmouseover="openBottomMenu();" popup="menu"/>
+			<label value="∴" onclick="openBottomMenu()" style="cursor:pointer"/>
 			<vbox flex="1" pack="center" align="center">
 				<textbox id="pad" multiline="true" cols="400" rows="10" resizable="true" flex="1"></textbox>
 				<hbox pack="center">
@@ -140,7 +140,6 @@ var devCheck = 0;
 	<script type="application/x-javascript" src="js/io.js" />
 
 	<script type="application/x-javascript" src="js/prefload.js"/>
-	<script type="application/x-javascript" src="js/keypress_index.js" />
 	<script type="application/x-javascript" src="js/keypress_index.js" />
 	<script type="application/x-javascript" src="js/navigation_common.js"/>
 	<script type="application/x-javascript" src="js/navigation.js"/>

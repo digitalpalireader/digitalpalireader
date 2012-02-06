@@ -364,6 +364,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 	var namea = [una,vna,wna,xna,yna,zna];
 	var namen = [null,null,null,null,null,null];
 	if (DPR_prefs['showNames']) {
+		addJS(['dppn']);
 		for (i in namea) {
 			var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
 			if(tt.length < 2) continue;

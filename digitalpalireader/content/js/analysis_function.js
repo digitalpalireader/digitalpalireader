@@ -7,6 +7,7 @@ var G_stopAnalyzing = 0;
 
 function outputAnalysis(input,frombox)
 {
+	addJS(['ped','dppn','nameno','english','irreg','attlist','tiklist','titles']);
 	
 	//ddump('',1,1);
 	G_outwords = [];

@@ -59,6 +59,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
 	// relative mat
+
+	addJS(['relmul','relatt','reltik']);
 	
 	var matButtonCount = 0;
 	if (matButton == 1) {  // mat button pushed already, remember the place

@@ -1,3 +1,5 @@
+var EXPORTED_SYMBOLS = ["rela"];  
+
 var rela = [];
 
 rela['d^0^1^0^0^0^0'] = '#d^0^1^0^0^0^0';

@@ -1,3 +1,5 @@
+var EXPORTED_SYMBOLS = ["relm"];  
+
 var relm=[];
 
 relm['d^0^0^0^0^0^0']='d^0^2^0^0^0^0#d^0^3^0^0^0^0';

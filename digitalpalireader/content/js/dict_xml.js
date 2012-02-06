@@ -7,6 +7,9 @@ var G_phmark = 0;
 var pedfileget = '';
 function paliXML(filein,which,add)
 {
+
+	addJS(['ped']);
+
 	if(add == 'right') return;
 	if(add == true) {
 		sendPaliXML(toVel(filein.split(',')[1]),true);
@@ -185,6 +188,8 @@ var G_dhmark = 0;
 
 function DPPNXML(filein,which,add)
 {
+	addJS(['dppn','nameno']);
+
 	if(add == 'right') return;
 	if(add == true) {
 		sendDPPNXML(toVel(filein),true);
@@ -379,11 +384,15 @@ function sktRXML(no,add)
 
 
 function getAtthXML(num,type,niklist) { // get atthakatha or tika word 
+
+
     if(type == 'a') {
+		addJS(['attlist']);
 		var loca = attlist[num].split('#');
 		var word = loca.shift();
 	}
 	else {
+		addJS(['tiklist']);
 		var loca = tiklist[num].split('#');
 		var word = loca.shift();
 	}
@@ -454,6 +463,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 }
  
 function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search 
+	addJS(['titles']);
 
 
 	var loca = titlelist[num].split('#');

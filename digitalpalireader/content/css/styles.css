@@ -316,6 +316,7 @@ height:20px;
 /* bottom button */
 
 .bButton {
+	cursor:pointer;
 	position:absolute;
 	top:0;
 	left:0;
