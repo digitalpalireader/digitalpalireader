@@ -323,7 +323,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	// check if there is a search going on and add the labels
 	if (query) {
 		atlabel:
-		for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++)
+		for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++)
 		{
 			var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
 
@@ -407,7 +407,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}	
 	else {
 		if(place[8]) { // thai
-			for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++) {
+			for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
 				if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.exec(z[tmp].textContent) && !DPR_prefs['showPages']) {
 					continue;
 				}
@@ -415,7 +415,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			}
 		}
 		else {
-			for (tmp = (range?range[0]:0); tmp < (range?range[1]:z.length); tmp++) {
+			for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
 				var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
 				theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'|> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
 			}
