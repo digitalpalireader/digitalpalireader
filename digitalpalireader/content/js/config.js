@@ -117,7 +117,7 @@ function addATIJS() {
 }
 
 function addJS(files) {
-	for (i in files) {
+	for (var i = 0; i<files.length; i++) {
 		Components.utils.import('chrome://digitalpalireader/content/js/'+files[i]+'.js');
 	}
 }

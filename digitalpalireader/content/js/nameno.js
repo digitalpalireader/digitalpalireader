@@ -2601,17 +2601,17 @@ Dn['t1_th^Tālacchiggala Sutta']='';
 Dn['verhacaani^Verehaccānigotta']='';
 
 // temp
-
-D['kaalaama']=['6/161'];
-D['susima']=['5/233'];
-D['maalukyaa']=['9/5707'];
-D['maalukyaaputta']=['7/269'];
-D['maalukyaaputtasutta']=['7/269'];
-D['maalukyaputta']=['7/269'];
-D['maalukyaputtasutta']=['7/269'];
-D['paa.tikasutta']=['4/173'];
-D['paathika']=['4/173'];
-D['paathikasutta']=['4/173'];
-D['bhesaka.laavana']=['1/272'];
-
+//~ if(typeof(D) != 'undefined') {
+	//~ D['kaalaama']=['6/161'];
+	//~ D['susima']=['5/233'];
+	//~ D['maalukyaa']=['9/5707'];
+	//~ D['maalukyaaputta']=['7/269'];
+	//~ D['maalukyaaputtasutta']=['7/269'];
+	//~ D['maalukyaputta']=['7/269'];
+	//~ D['maalukyaputtasutta']=['7/269'];
+	//~ D['paa.tikasutta']=['4/173'];
+	//~ D['paathika']=['4/173'];
+	//~ D['paathikasutta']=['4/173'];
+	//~ D['bhesaka.laavana']=['1/272'];
+//~ }
 

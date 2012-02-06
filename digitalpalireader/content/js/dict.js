@@ -49,18 +49,17 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	var js =[];
 	
 	js['PED'] = ['ped'];
-	js['CPED'] = ['english'];
 	js['DPPN'] = ['dppn','nameno'];
+	js['CPED'] = ['english'];
+	js['MULTI'] = ['ped','dppn','nameno','english'];
 	js['CEPD'] = ['epd'];
-	js['SKT'] = ['skt'];
-	js['TIK'] = ['tiklist'];
 	js['ATT'] = ['attlist'];
+	js['TIK'] = ['tiklist'];
 	js['TIT'] = ['titles'];
+	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
 	
 	addJS(js[G_dictType]);
-
-
 
 	G_dictUnicode = /[āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ]/.test(G_dictQuery);
 
