@@ -9,7 +9,7 @@ matValue['t'] = '';
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 { 
-	for(i=1;i<7;i++) {
+	for(var i=1;i<7;i++) {
 		if(place[i] == 'x') {
 			loadXMLindex(place,compare);
 			return;

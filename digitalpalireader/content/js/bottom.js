@@ -41,7 +41,7 @@ function getconfigx() {
 
 function moveFrame(e) {
 	
-	for(i=1;i<7;i++) {
+	for(var i=1;i<7;i++) {
 		document.getElementById('f'+i).setAttribute('collapsed','true');
 		document.getElementById('bmenu'+i).removeAttribute('checked');
 	}

@@ -139,7 +139,7 @@ function arrangeWords(wordst,alts) {
 	
 	// perform filters
 	
-	for(i=0;i<wordst.length;i++) {
+	for(var i=0;i<wordst.length;i++) {
 		// remove second ca, vaa
 		if(wordst[i][0] && wordst[i][0][3] == 'ca' && ca++) {
 			ca = 0;
@@ -183,7 +183,7 @@ function arrangeWords(wordst,alts) {
 		words.push(wordst[i]);
 		
 	}
-	for(i=0;i<words.length;i++) {
+	for(var i=0;i<words.length;i++) {
 
 		for(j=0;j<words[i].length;j++) {
 			if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative

@@ -327,14 +327,14 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
 				if(vagga > 0) {
 					sutta+=kv[1][vagga-1];
 				}
-				for(i = 0; i < sutta; i++) {
+				for(var i = 0; i < sutta; i++) {
 					section+=kv[0][i];
 				}
 			}
 			else {
 				if(kv[3] == 1)
 					vagga = sutta;
-				for(i = 0; i < vagga; i++) {
+				for(var i = 0; i < vagga; i++) {
 					section+=kv[0][i];
 				}
 			}
