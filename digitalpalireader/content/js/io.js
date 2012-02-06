@@ -1,3 +1,6 @@
+function setI() {
+	i = 1;
+}
 
 ioCheck = true;
 

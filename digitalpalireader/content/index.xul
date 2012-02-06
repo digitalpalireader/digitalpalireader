@@ -138,6 +138,7 @@ var devCheck = 0;
 	</hbox>
 	<script type="application/x-javascript" src="js/jquery.js" />
 	<script type="application/x-javascript" src="js/io.js" />
+
 	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/keypress_index.js" />
 	<script type="application/x-javascript" src="js/keypress_index.js" />

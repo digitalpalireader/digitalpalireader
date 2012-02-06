@@ -57,7 +57,7 @@ function paliXML(filein,which,add)
 		// add links
 		var dataa = data.split(' ');
 		var datat = '';
-		for (i = 0; i < dataa.length; i++) {
+		for (var i = 0; i < dataa.length; i++) {
 			if(/<[^>]*$/.exec(dataa[i])) { // pesky broken up links
 				var tda = toVel(dataa[i].replace(/<[^>]*$/,'').replace(/<[^>]*>/g, '').replace(/ŋ/g, 'ṃ').toLowerCase().replace(/[^āīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
 				if(!tda || tda.length < 2) {
@@ -84,7 +84,9 @@ function paliXML(filein,which,add)
 			if(!tda || tda.length < 2) {
 				datat += ' ' + dataa[i];
 			}
-			else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) {
+				datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+			}
 			else datat += ' ' + dataa[i];
 			
 		}
@@ -101,7 +103,7 @@ function paliXML(filein,which,add)
 	var tout = '';
 	if (G_pedhist.length > 1) { // show select
 		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
-		for (i = G_pedhist.length-1; i >= 0; i--) {
+		for (var i = G_pedhist.length-1; i >= 0; i--) {
 			showing += '<option value="'+G_pedhist[i]+'"';
 			if (i == G_phmark) { showing += ' selected'; }
 			var dhs = G_pedhist[i].split(',');
