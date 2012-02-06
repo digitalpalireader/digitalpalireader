@@ -304,6 +304,77 @@ function DPPNXML(filein,which,add)
 	
 }
 
+var G_skt = [];
+var G_skthist = [];
+var G_shmark = 0;
+
+function sktRXML(no,add)
+{
+	if(add == 'right') return;
+	if(add == true) {
+		//sendDPPNXML(toVel(filein),true);
+		//return;
+	}
+	
+	//moveFrame(1);
+
+	clearDivs('dif');
+	
+	if(/[^0-9]/.test(no)) {
+		for(var i = 0; i < sktR.length;i++) {
+			if (sktR[i] == no) {
+				no = i;
+				break;
+			}
+		}
+		if(/[^0-9]/.test(no))
+			return;
+	}
+	
+	// xml
+	
+	var file = 'etc/grammar/skt-roots/'+sktR[no]+'.htm';
+	var xmlhttp = new window.XMLHttpRequest();
+	xmlhttp.open("GET", file, false);
+	xmlhttp.send(null);
+	var xmlDoc = xmlhttp.responseXML.documentElement;
+	var s = new XMLSerializer();  
+	var data = s.serializeToString(xmlDoc);
+	
+	data = data.replace(/<p><a href="index.htm">Index<\/a><\/p>/,'').replace(/<a href="([^.]+)[^>]+/g,"<a class=\"green\" href=\"javascript:void(0)\" onclick=\"sktRXML('$1')\"");
+	
+	// output
+
+	var dataNode = document.createElement('div');
+	dataNode.innerHTML = data+'<hr/>';
+	document.getElementById('difb').setAttribute('align','left');
+	document.getElementById('difb').appendChild(dataNode);
+
+	// scroll
+
+	if(document.getElementById('bottom')) {
+		document.getElementById('cdif').scrollTop=0;
+		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+	}
+	else document.getElementById('dictc').scrollTop=0;
+	
+	// permalink
+	
+	if(/dict\.htm/.exec(document.location.href)) {
+		var permalink = document.location.href;
+		if(/\&entry=/.exec(permalink)) {
+			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+no);
+		}
+		else permalink += '&entry='+no;
+		try {
+			window.history.replaceState({}, 'Title', permalink);
+		}
+		catch(ex) {
+		}
+	}
+	
+}
+
 
 function getAtthXML(num,type,niklist) { // get atthakatha or tika word 
     if(type == 'a') {
@@ -486,7 +557,9 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 	document.getElementById('difb').appendChild(dataNode);
 	document.getElementById('dictc').scrollTop=0;
 }
- 
+
+
+
 function getDppnData(link){
 	var dppnf = 'etc/XML2/'+link.split('/')[0]+'.xml';
 

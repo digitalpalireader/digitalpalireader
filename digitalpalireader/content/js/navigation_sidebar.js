@@ -164,7 +164,7 @@ var DPRNav = {
 			while(histNode.itemCount > 0) histNode.removeItemAt(0);
 			var isclear = '';
 			histNode.appendItem('-- History --','0');
-			for (i=0;i<theHistory.length;i++) {
+			for (var i=0;i<theHistory.length;i++) {
 				var thist = theHistory[i].split('@');
 				var thist0 = toUni(thist[0]);
 				histNode.appendItem(thist0,thist[1]);

@@ -1,3 +1,6 @@
+var EXPORTED_SYMBOLS = ["Dn"];
+
+
 var Dn=[];
 // matched
 Dn['a1_ad^Abbhāhata Sutta']='abbhaahatasutta';

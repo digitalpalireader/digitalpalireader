@@ -1,3 +1,5 @@
+var EXPORTED_SYMBOLS = ["P"];  
+
 var P=[];
 
 //original

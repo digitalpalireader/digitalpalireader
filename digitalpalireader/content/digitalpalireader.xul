@@ -363,7 +363,8 @@
 									<menuitem tooltiptext="Ṭīka Term Search" value="TIK" label="&Ṭīka;" />
 									<menuitem tooltiptext="Title Search" value="TIT" label="&Title;" />
 									<menuseparator/>
-									<menuitem tooltiptext="Sanskrit Dictionary" value="SKT" label="Sanskrit" />
+									<menuitem tooltiptext="M.W. Sanskrit Dictionary" value="SKT" label="Sanskrit Dictionary" />
+									<menuitem tooltiptext="Whitney's Sanskrit Roots" value="SKR" label="Sanskrit Roots" />
 								</menupopup>
 							</menulist>
 							<toolbarbutton class="small" tooltiptext="&dictAdv.text;" role="button" oncommand="DPROpts.dictAdvToggle()">

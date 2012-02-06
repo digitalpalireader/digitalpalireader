@@ -118,11 +118,6 @@ function addATIJS() {
 
 function addJS(files) {
 	for (i in files) {
-		var nsrc = 'chrome://digitalpalireader/content/js/'+files[i]+'.js';
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = nsrc;
-		headID.appendChild(newScript);	
+		Components.utils.import('chrome://digitalpalireader/content/js/'+files[i]+'.js');
 	}
 }

@@ -98,7 +98,7 @@ function toSkt(input,rv) {
 	rep['.m'] = 'M';
 	rep['.h'] = 'H';
 	
-	for (i=0;i<rep.length;i++) {
+	for (i in rep) {
 		if(rv) {
 			var rx = new RegExp(rep[i],'g');
 			input = input.replace(rx,i);
