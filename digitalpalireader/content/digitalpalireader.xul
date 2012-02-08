@@ -74,7 +74,7 @@
 								<description>Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:</description><description>1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.</description><description>2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc., comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are, in order:</description><description>'khp','dhp','ud','it','sn','vv','pv','th','thi','apa','api','bv','cp','ja'</description><description>Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15 (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'</description>
 							</panel>
 						</button>
-						<textbox flex="1" tooltiptext="Enter quick link of the form 'DN1.1, etc. - see the help page for more information on this feature" onkeydown="if(event.keyCode==13) DPRSend.sendQuickLink(); event.keyCode=0;" id="iquick"/>
+						<textbox flex="1" tooltiptext="Enter quick link of the form 'DN1.1, etc. - see the help page for more information on this feature" onkeydown="if(event.keyCode==13) DPRSend.sendQuickLink(DPRSend.eventSend(event)); event.keyCode=0;" id="iquick"/>
 						<toolbarbutton id="quickgo" tooltiptext="Open Quick Link" onmouseup="DPRSend.sendQuickLink(DPRSend.eventSend(event));" role="button">
 							<label value="&rArr;" />
 						</toolbarbutton>
