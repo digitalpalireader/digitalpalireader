@@ -55,6 +55,7 @@ function paliXML(filein,which,add)
 	
 	var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 	
+	
 	if(DPR_prefs['showPedLinks']) {
 	
 		// add links
@@ -121,15 +122,14 @@ function paliXML(filein,which,add)
 	var tname, lname, nname;
 
 	if(P[toVel(ttit)]) {
-		
 		if(G_peda.length == 0) {
-			for (i in P) {
-				for (j in P[i]) {
+			for (var i in P) {
+				for (var j in P[i]) {
 					G_peda.push([i,P[i][j]]);
 				}
 			}
 		}
-		for (i in G_peda) {
+		for (var i=0; i < G_peda.length;i++) {
 			if(tname) {
 				nname = G_peda[i][1]+","+toUni(G_peda[i][0]);
 				break;
@@ -167,6 +167,8 @@ function paliXML(filein,which,add)
 		catch(ex) {
 		}
 	}
+
+
 }
 
 function toggleDppnTitle(link,id) {

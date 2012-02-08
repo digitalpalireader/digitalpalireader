@@ -128,7 +128,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	
 	// start timer
 
-	starttime = new Date;
+	var starttime = new Date;
 	starttime = starttime.getTime();
 	
 	switch(G_searchType) {

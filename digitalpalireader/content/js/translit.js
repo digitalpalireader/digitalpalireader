@@ -3,39 +3,9 @@ function toUni(input) {
 	if(!input || input == '') return input;
 	var nigahita = (DPR_prefs['nigahita']?'ṁ':'ṃ'); 
 	var Nigahita = (DPR_prefs['nigahita']?'Ṁ':'Ṃ'); 
-	var rep = [];
 
-	rep['aa'] = 'ā';
-	rep['ii'] = 'ī';
-	rep['uu'] = 'ū';
-	rep['.t'] = 'ṭ';
-	rep['.d'] = 'ḍ';
-	rep['"n'] = 'ṅ';
-	rep['.n'] = 'ṇ';
-	rep['.m'] = nigahita;
-	rep['~n'] = 'ñ';
-	rep['.l'] = 'ḷ';
-	rep['.ll'] = 'ḹ';
-	rep['.r'] = 'ṛ';
-	rep['.rr'] = 'ṝ';
-	rep['.s'] = 'ṣ';
-	rep['"s'] = 'ś';
-	rep['.h'] = 'ḥ';
-	rep['AA'] = 'Ā';
-	rep['II'] = 'Ī';
-	rep['UU'] = 'Ū';
-	rep['.T'] = 'Ṭ';
-	rep['.D'] = 'Ḍ';
-	rep['"N'] = 'Ṅ';
-	rep['.N'] = 'Ṇ';
-	rep['.M'] = Nigahita;
-	rep['~N'] = 'Ñ';
-	rep['.L'] = 'Ḷ';
-
-	for (i in rep) {
-		var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
-		input = input.replace(rx,rep[i]);
-	}
+	input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\.t/g, 'ṭ').replace(/\.d/g, 'ḍ').replace(/\"n/g, 'ṅ').replace(/\.n/g, 'ṇ').replace(/\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\.T/g, 'Ṭ').replace(/\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\.N/g, 'Ṇ').replace(/\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\.L/g, 'Ḷ').replace(/\.ll/g,'ḹ').replace(/\.r/g,'ṛ').replace(/\.rr/g,'ṝ').replace(/\.s/g,'ṣ').replace(/"s/g,'ś').replace(/\.h/g,'ḥ');
+		
 	return input;
 }
 
@@ -68,45 +38,11 @@ function toFuzzy(input){
 function toSkt(input,rv) {
 	if(!input || input == '') return input;
 
-	var rep = [];
-	rep['aa'] = 'A';
-	rep['ii'] = 'I';
-	rep['uu'] = 'U';
-	rep['.r'] = 'f';
-	rep['.rr'] = 'F';
-	rep['.l'] = 'x';
-	rep['.ll'] = 'X';
-	rep['ai'] = 'E';
-	rep['au'] = 'O';
-	rep['kh'] = 'K';
-	rep['gh'] = 'G';
-	rep['"n'] = 'N';
-	rep['ch'] = 'C';
-	rep['jh'] = 'J';
-	rep['~n'] = 'Y';
-	rep['.t'] = 'w';
-	rep['.d'] = 'q';
-	rep['.th'] = 'W';
-	rep['.dh'] = 'Q';
-	rep['.n'] = 'R';
-	rep['th'] = 'T';
-	rep['dh'] = 'D';
-	rep['ph'] = 'P';
-	rep['bh'] = 'B';
-	rep['"s'] = 'S';
-	rep['.s'] = 'z';
-	rep['.m'] = 'M';
-	rep['.h'] = 'H';
-	
-	for (i in rep) {
-		if(rv) {
-			var rx = new RegExp(rep[i],'g');
-			input = input.replace(rx,i);
-		}
-		else {
-			var rx = new RegExp(i.replace(/\./g,'\\\.'),'g');
-			input = input.replace(rx,rep[i]);
-		}
+	if(rv) {
+		input = input.replace(/A/g,'aa').replace(/I/g,'ii').replace(/U/g,'uu').replace(/f/g,'.r').replace(/F/g,'.rr').replace(/x/g,'.l').replace(/X/g,'.ll').replace(/E/g,'ai').replace(/O/g,'au').replace(/K/g,'kh').replace(/G/g,'gh').replace(/N/g,'"n').replace(/C/g,'ch').replace(/J/g,'jh').replace(/Y/g,'~n').replace(/w/g,'.t').replace(/q/g,'.d').replace(/W/g,'.th').replace(/Q/g,'.dh').replace(/R/g,'.n').replace(/T/g,'th').replace(/D/g,'dh').replace(/P/g,'ph').replace(/B/g,'bh').replace(/S/g,'"s').replace(/z/g,'.s').replace(/M/g,'.m').replace(/H/g,'.h');
+	}
+	else {
+		input = input.replace(/aa/g,'A').replace(/ii/g,'I').replace(/uu/g,'U').replace(/\.r/g,'f').replace(/\.rr/g,'F').replace(/\.l/g,'x').replace(/\.ll/g,'X').replace(/ai/g,'E').replace(/au/g,'O').replace(/kh/g,'K').replace(/gh/g,'G').replace(/"n/g,'N').replace(/ch/g,'C').replace(/jh/g,'J').replace(/~n/g,'Y').replace(/\.t/g,'w').replace(/\.d/g,'q').replace(/\.th/g,'W').replace(/\.dh/g,'Q').replace(/\.n/g,'R').replace(/th/g,'T').replace(/dh/g,'D').replace(/ph/g,'P').replace(/bh/g,'B').replace(/"s/g,'S').replace(/\.s/g,'z').replace(/\.m/g,'M').replace(/\.h/g,'H');
 	}
 	return input;
 }
