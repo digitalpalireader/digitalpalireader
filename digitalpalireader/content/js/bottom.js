@@ -41,13 +41,7 @@ function getconfigx() {
 
 function moveFrame(e) {
 	
-	for(var i=1;i<7;i++) {
-		document.getElementById('f'+i).setAttribute('collapsed','true');
-		document.getElementById('bmenu'+i).removeAttribute('checked');
-	}
-	
-	document.getElementById('bmenu'+e).setAttribute('checked',true);
-	document.getElementById('f'+e).removeAttribute('collapsed');
+	document.getElementById('tabs').selectedIndex = (parseInt(e)-1);
 }			
 
 function openBottomMenu() {
