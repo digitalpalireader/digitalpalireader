@@ -1305,7 +1305,7 @@ function sktRootsearchstart(hard)
 		return;
 	}
 	
-	var getstring = G_dictQuery;
+	var getstring = toSkt(G_dictQuery);
 
     if(getstring == '') {
         sktRXML(toUni(G_dictEntry));
@@ -1350,7 +1350,7 @@ function sktRootsearchstart(hard)
 		}
 	}
 
-	$('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
+	$('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictEntry):toUni(G_dictEntry))+'</b>:<hr />');
 	
 	var outDiv = document.createElement('div');
 	
