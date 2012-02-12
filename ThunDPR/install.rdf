@@ -8,7 +8,7 @@
     <em:creator>Yuttadhammo</em:creator>
     <em:description>Pali Tools for Thunderbird.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
-    <em:updateURL>http://pali.sirimangalo.org/thunDPR2.rdf</em:updateURL>
+    <em:updateURL>http://pali.sirimangalo.org/ThunDPR2.rdf</em:updateURL>
     <em:optionsURL>chrome://thunDPR/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://thunDPR/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
