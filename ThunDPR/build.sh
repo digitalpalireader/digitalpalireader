@@ -1,4 +1,4 @@
-APP_NAME=thunDPR
+APP_NAME=ThunDPR
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
