@@ -32,10 +32,10 @@
 			<li>
 			The DPR has a built in
 			<span class="green pointer" onclick="moveIt('helpNsearch')">text search</span>
-			function similar to that of the CSCD. Whereas the CSCD allows for only global searches or searches of entire pitakas, the DPR provides great flexibility in searching multiple sets, multiple books, and multiple hierarchies of texts, as well as allowing advanced regular expression searches.
+			function similar to that of the CST4.  The DPR provides great flexibility in searching multiple sets, multiple books, and multiple hierarchies of texts, as well as allowing advanced regular expression searches.  There is also a built-in search of accesstoinsight.org's translations, either via the website or the off-line archive.
 			</li>
 			<li>
-			The DPR includes several dictionaries: Pali-English, Pali proper names, Concise Pali-English Dictionary and Concise English-Pali Dictionary. These may be searched individually or all together using the "Multi" option in the "Dictionary" section. There is also a searchable compilation of terms discussed in the commentaries and sub-commentaries, a title search for all books, and built-in search of accesstoinsight.org, either via the website or the off-line archive. All these can be directly accessed from the control panel under the "Dictionary" section.&nbsp; More information is available in the
+			The DPR includes several dictionaries: Pali-English, Pali Proper Names, Concise Pali-English, Concise English-Pali, Sanskrit, and Sanskrit Roots. These may be searched individually or all together using the "Multi" option in the "Dictionary" section. There is also a searchable compilation of terms discussed in the commentaries and sub-commentaries, a title search for all books. All these can be directly accessed from the control panel under the "Dictionary" section.&nbsp; More information is available in the
 			<span class="green pointer" onclick="moveIt('helpNdict')">Dictionary</span>
 			section below.
 			<br />
@@ -49,7 +49,8 @@
 					document.getElementById('helpNbookmarks').offsetTop;">bookmarks</a>
 				and quote clipboard for keeping important passages, and a history to keep track of recently viewed passages.
 				</li>
-				<li>permalinks to each paragraph and search query for referencing passages and terms for other DPR users.</li>
+				<li><a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop =
+					document.getElementById('helpNpermalinks').offsetTop;">permalinks</a> to each paragraph and search query for referencing passages and terms for other DPR users.</li>
 				<li>
 				links to and searching of
 				<a class="green" href="http://www.accesstoinsight.org/">AccessToInsight.org</a>
@@ -61,9 +62,10 @@
 				and Unicode scripts
 				</li>
 				<li>transliteration of Pali into Thai, Devanagari, Myanmar and Sinhala scripts</li>
-				<li>conjugation tables via the CPED and analysis bar</li>
-				<li>a Pali language quiz to test your vocabulary and a declension quiz to test your grammar</li>
-				<li>random English quotes from Buddhavacana, by S. Dhammika</li>
+				<li>conjugation lookup and tables</li>
+				<li>basic sentence translation</li>
+				<li>multiple Pali language quizzes to test your vocabulary and grammar</li>
+				<li>daily and random English Dhamma quotes from Buddhavacana, by S. Dhammika</li>
 			</ul>
 			</li>
 		</ol>
@@ -139,8 +141,8 @@
 			<span class="pointer green" onclick="window.open('chrome://digitalpalireader/content/prefs.xul',
 				'DPR_prefs', 'chrome');">preferences dialog</span>
 			. The default font is "Tahoma", which should display the characters correctly. For alternative scripts, it gets a little bit more difficult, and YMMV. I use
-			<a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color: green;">the Padauk font</a>
-			for Burmese and it works well. The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.). There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.
+			<a href="http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&amp;id=Padauk" style="color: green;" target="_blank">the Padauk font</a>
+			for Burmese and it works well, and <a href="http://www.locallanguages.lk/sinhala_unicode_converters" target="_blank" style="color:green">Bhashitha</a> seems to be the best for Sinhala. The rest of the scripts should work with any standard unicode font containing that script (google "Thai unicode font", etc.). There may be errors in the conversion still, so please send me (copy and paste in an email) any strange-looking words in regards to the alternative scripts.
 			</li>
 			<li>
 			You will also need a recent version of
@@ -256,56 +258,60 @@
 			.
 			</li>
 		</ul>
-		The toolbar for the bottom contains six items which can be selected by hovering over the "∴" button in the lower half of the reader.&nbsp; They can also be accessed via the 1-6 keys on the keyboard.  Their functions are as follows:
+		The bottom part of the main screen has six tabs on the left-hand side.&nbsp; They can also be accessed via the 1-6 keys on the keyboard.  Their functions are as follows:
 		<br />
 		<ul>
 			<li>
-			<b>Dictionary</b>
+			<b>D: Dictionary</b>
 			- this frame is normally active when viewing a text. Clicking on a word in the text or analysis bar will display a definition from the PED or DPPN if available. Clicking on the small green "c" in the analysis frame will display conjugation or declension information if available.
 			</li>
 			<li>
-			<b>Conversion</b>
+			<b>Cv: Conversion</b>
 			- this frame contains two text boxes, the left one for input, the right one for output. There are three main functions: 1) converting between Unicode and Velthuis; 2) converting from the Unicode Roman alphabet to a variety of Asian alphabets; and 3) sorting all words in a block of text into their Pāḷi alphabetical order. Converst by selecting an option in the "to" list. Sort by pressing the sort button.&nbsp;
 			</li>
 			<li>
-			<b>Textpad</b>
-			- A simple text editor.
-			<br />
-			</li>
-			<ul>
-			<li>
-				&nbsp;
-				<span class="abut rbut tiny" title="analyze text
-				as Pali passage">Analyze</span>
-				sends the texpad text to the top frame as if it were a regular text in the reader with each word being clickable for analysis.
+				<b>Tp: Textpad</b>
+				- A simple text editor, with six buttons, as follows:
 				<br />
+				<ul>
+				<li>
+					<b>Clear</b>
+					removes all text from the textpad.
+				</li>
+				<li>
+					<b>Velthuis</b>
+					converts the text to Velthuis.
+				</li>
+				<li>
+					<b>Unicode</b>
+					converts the text to Unicode.
+				</li>
+				<li>
+					<b>Analyze</b>
+					sends the texpad text to the top frame as if it were a regular text in the reader with each word being clickable for analysis.
+					<br />
+				</li>
+				<li>
+					<b>Copy</b>
+					copies the textpad text to the system's clipboard.
+				</li>
+				<li>
+					<b>Save</b>
+					brings up a file dialog to save the text as a file.
+				</li>
+
+				</ul>
 			</li>
 			<li>
-				<span class="abut lbut tiny" title="Copy text to
-				clipboard">Copy</span>
-				copies the textpad text to the system's clipboard.
-			</li>
-			<li>
-				&nbsp;
-				<span class="abut rbut tiny" title="save data as
-				file">Save to:</span>
-				saves the text as a file on the Desktop (or subfolder using "/" in the file name)
-			</li>
-			<li>
-				<span class="abut lbut tiny" title="Erase all text">Clear</span>
-				removes all text from the textpad.
-			</li>
-			</ul>
-			<li>
-			<span style="font-weight: bold;">Translation</span>
+			<b>Tr: Translation</b>
 			- And experimental sentence translator.
 			</li>
 			<li>
-			<span style="font-weight: bold;">Conjugation</span>
+			<b>Cj: Conjugation</b>
 			- A tool to conjugate or decline individual words
 			</li>
 			<li>
-			<span style="font-weight: bold;">Buddha Vacana</span>
+			<b>Bv: Buddha Vacana</b>
 			- A daily quote from Ven. Dhammika's
 			<span style="font-style:
 				italic;">The Buddha's Words</span>
@@ -531,6 +537,8 @@
 			<li>Concise Pali English Dictionary (Buddhadatta)</li>
 			<li>Concise English Pali Dictionary (Buddhadatta)</li>
 			<li>Dictionary of Pali Proper Names (Malalasekera)</li>
+			<li>Sanskrit-English Dictionary (Monier-Williams)</li>
+			<li>Sanskrit Roots (Whitney)</li>
 			<li>PaliLookup (?)</li>
 			<li>Buddha Vacana (Dhammika)</li>
 		</ul>
@@ -556,7 +564,7 @@
 		<p>Yuttadhammo</p>
 		<hr />
 		<p>
-			<em>Last Updated: Jan 30, 2012 C.E.</em>
+			<em>Last Updated: Feb 12, 2012 C.E.</em>
 		</p>
 		<p>
 			<em>
