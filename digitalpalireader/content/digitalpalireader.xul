@@ -460,7 +460,7 @@
 						<toolbarbutton onclick="window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome');" id="openPrefs" tooltiptext="&openPrefs.label;" role="button">
 							<label value="&bPreferences;" />
 						</toolbarbutton>
-						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/contact.htm','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
+						<toolbarbutton onclick="DPRChrome.openDPRTab('http://pali.sirimangalo.org/contact/','DPR-contact',1);" id="contact" tooltiptext="&contact.label;" role="button">
 							<label value="&bContact;" />
 						</toolbarbutton>
 						<toolbarbutton onclick="DPRChrome.openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);" id="help" tooltiptext="&help.label;" role="button">

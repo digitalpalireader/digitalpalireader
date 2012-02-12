@@ -1,9 +1,0 @@
-#dpr-button {
-  list-style-image: url("chrome://digitalpalireader/content/images/logo24.png");
-}
-toolbar[iconsize="small"] #dpr-button {
-  list-style-image: url("chrome://digitalpalireader/content/images/logo.png");
-}
-#dpr-context, #dpr-sub-context {
-  list-style-image: url("chrome://digitalpalireader/content/images/logo.png");
-}
