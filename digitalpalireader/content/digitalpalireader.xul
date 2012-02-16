@@ -481,6 +481,8 @@
 	<script type="application/x-javascript" src="js/translit.js"/>
 	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
 	<script type="application/x-javascript" src="js/xml_load.js"/>
+	<script type="application/x-javascript" src="js/listsm.js"/>
+	<script type="application/x-javascript" src="js/listam.js"/>
 	<script type="application/x-javascript" src="js/navigation_common.js"/>
 	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
 	<script type="application/x-javascript" src="js/format.js"/>
