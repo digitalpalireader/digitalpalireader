@@ -124,6 +124,10 @@
 				<a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop =
 					document.getElementById('helpNquicklinks').offsetTop;">Quick Links</a>
 				</li>
+				<li>
+				<a class="green" href="javascript:void(0)" onclick="document.getElementById('maf').scrollTop =
+					document.getElementById('helpNrightclick').offsetTop;">Right-Click Menu</a>
+				</li>
 			</ul>
 			</li>
 			<li>
@@ -176,11 +180,10 @@
 		<hr />
 		<div id="helpNusage" class="heading huge b">Usage</div>
 		<p>
-			As of 2.0, the DPR is split up into tabs and a proper sidebar.&nbsp; The sidebar contains the main controls, and opens other windows as needed.&nbsp; Most buttons that interact with existing windows can also open new windows by CTRL+click or middle-clicking on them.&nbsp; For instance, to open a section in a new window, rather than the existing DPR Pali window, middle-click (or CTRL+click) on the » button. &nbsp; Text search and dictionary lookup now have their own tabs, and can be opened in multiple instances in the same way.
+			The DPR is split up into tabs and a proper sidebar.&nbsp; The sidebar contains the main controls, and opens other windows as needed.&nbsp; Most buttons that interact with existing windows can also open new windows by CTRL+click or middle-clicking on them.&nbsp; For instance, to open a section in a new window, rather than the existing DPR Pali window, middle-click (or CTRL+click) on the » button. &nbsp; Text search and dictionary lookup now have their own tabs, and can be opened in multiple instances in the same way.
 			<br />
 		</p>
 		<p>
-			As of 2.1,
 			<b>SHIFT+click</b>
 			opens content into a new panel in the current window, if appropriate, allowing for side-by-side comparison of text.
 			<br />
@@ -256,6 +259,12 @@
 			<span class="pointer green" onclick="window.open('chrome://digitalpalireader/content/prefs.xul',
 				'DPR_prefs', 'chrome');">preferences dialog</span>
 			.
+			<br />
+			<br />
+			</li>
+			<li>
+			<span title="close panel" id="close" class="abut obut small">x</span>
+			- close the current panel in a multi-panel display.
 			</li>
 		</ul>
 		The bottom part of the main screen has six tabs on the left-hand side.&nbsp; They can also be accessed via the 1-6 keys on the keyboard.  Their functions are as follows:
@@ -448,46 +457,68 @@
 			<li>in the top-left corner of the search and dict windows.</li>
 		</ul>
 		<p>Clicking on a "♦" button causes the link to be copied to the clipboard for further use. The "♦" button at the beginning or each paragraph adds the paragraph number to the link. Some example permalinks are:</p>
-		<p>
-			<b>An index permalink:</b>
-		</p>
-		<p>
-			<a class="green" href="dpr:index?loc=d.0.m">DN 1 Index</a>
-			<br />
-			<i>(dpr:index?loc=d.0.m)</i>
-		</p>
-		<p>
-			<b>A section permalink:</b>
-		</p>
-		<p>
-			<a class="green" href="dpr:index?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">DN 1, paragraph 4, with "bhagavaa" and "bhikkhave" highlighted</a>
-			<br />
-			<i>(dpr:index?loc=d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave)</i>
-		</p>
-		<p>
-			<b>A search query permalink:</b>
-		</p>
-		<p>
-			<a class="green" href="dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=d&amp;book=1&amp;part=1&amp;rx=false">Search DN for "bhagavaa" and "bhikkhave"</a>
-			<br />
-			<i>(dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=d&amp;book=1&amp;part=1&amp;rx=false)</i>
-		</p>
-		<p>
-			<b>A dictionary lookup permalink:</b>
-		</p>
-		<p>
-			<a class="green" href="dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd">Lookup words starting with "bhaga" in PED</a>
-			<br />
-			<i>(dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd)</i>
-		</p>
-		<p>
-			<b>A permalink to this help file:</b>
-		</p>
-		<p>
-			<a class="green" href="dpr:help">Help</a>
-			<br />
-			<i>(dpr:help)</i>
-		</p>
+		<ul>
+			<li>
+				<b>An index permalink:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:index?loc=d.0.m">DN 1 Index</a>
+				<br />
+				<i>(dpr:index?loc=d.0.m)</i>
+				<br/>
+				<br/>
+			</li>
+			<li>
+				<b>A section permalink:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:index?loc=d.0.0.0.0.0.0.m&amp;para=4&amp;query=bhagavaa+bhikkhave">DN 1, paragraph 4, with "bhagavaa" and "bhikkhave" highlighted</a>
+				<br />
+				<i>(dpr:index?loc=d.0.0.0.0.0.0.m&amp;amp;para=4&amp;query=bhagavaa+bhikkhave)</i>
+				<br/>
+				<br/>
+			</li>
+			<li>
+				<b>A multi-panel permalink:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:index?loc=d.0.0.0.0.0.0.m&amp;query=bhagavā+bhikkhave&amp;para=4|loc=d.0.2.0.0.0.0.a|ati=dn/dn.01.0.bodh.html">DN 1, paragraph 4, with "bhagavaa" and "bhikkhave" highlighted in the first panel, the commentary in the second panel, and the ATI translation in the third panel.</a>
+				<br />
+				<i>(dpr:index?loc=d.0.0.0.0.0.0.m&amp;query=bhagavā+bhikkhave&amp;para=4|loc=d.0.2.0.0.0.0.a|ati=dn/dn.01.0.bodh.html)</i>
+				<br/>
+				<br/>
+			</li>
+			<li>
+				<b>A search query permalink:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=d&amp;book=1&amp;part=1&amp;rx=false">Search DN for "bhagavaa" and "bhikkhave"</a>
+				<br />
+				<i>(dpr:search?type=0&amp;query=bhagavaa+bhikkhave&amp;MAT=m&amp;set=d&amp;book=1&amp;part=1&amp;rx=false)</i>
+				<br/>
+				<br/>
+			</li>
+			<li>
+				<b>A dictionary lookup permalink:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd">Lookup words starting with "bhaga" in PED</a>
+				<br />
+				<i>(dpr:dict?type=PED&amp;query=bhaga&amp;opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd)</i>
+				<br/>
+				<br/>
+			</li>
+			<li>
+				<b>A permalink to this help file:</b>
+			<br/>
+			<br/>
+				<a class="green" href="dpr:help">Help</a>
+				<br />
+				<i>(dpr:help)</i>
+				<br/>
+				<br/>
+			</li>
+		</ul>
 		<p>
 			<b>Note:</b>
 			Shorthand sutta references of the sort found on accesstoinsight.org or suttacentral.net, of the form "DN 1.1", etc. (see
@@ -518,6 +549,10 @@
                     Note, for the Jataka (ja), this syntax represents the jataka number across books 14 and 15, so 'ja547' will open the last jataka in book 15 (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).
                 </li>
             </ol>
+		</p>
+		<div id="helpNrightclick" class="large b">Right-Click Menu:</div>
+		<p>
+			The DPR adds an entry to Firefox's right-click context menu that allows quick access to many of the DPR's functions from anywhere on the Internet.  Most functions require text to be highlighted, but some allow right-clicking on an entire text box, to convert the contents to/from Unicode, for example.  This behaviour can be tweaked from the preferences menu General tab.
 		</p>
 		<hr />
 		<div id="helpNgratitude" class="heading huge b">Gratitude:</div>
