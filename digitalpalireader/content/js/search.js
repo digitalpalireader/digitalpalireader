@@ -128,8 +128,8 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	
 	// start timer
 
-	var starttime = new Date;
-	starttime = starttime.getTime();
+	//var starttime = new Date;
+	//starttime = starttime.getTime();
 	
 	switch(G_searchType) {
 		case 0:
@@ -180,8 +180,8 @@ function makeProgressTable() {
 function finishSearch() {
 	document.getElementById('sbfbc').scrollTop = 0;
 
-	var endtime = new Date;
-	var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+	//var endtime = new Date;
+	//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
 
 	MD.getElementById('search-progress').setAttribute('collapsed',true);
 	MD.getElementById('cancel-search').setAttribute('collapsed',true);
@@ -971,7 +971,7 @@ function createTables(xmlDoc,hiert)
 									thiscount++;
 									countmatch++;
 									cmval = '';
-
+									
 								}
 							}
 						}
@@ -1103,11 +1103,8 @@ function atiSearchStart() {
 	var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');
 
 	if(DPR_prefs['catioff']) {
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
-		headID.appendChild(newScript);
+		var newScript = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
+		addJS(newscript);
 
 //		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
 		MD.getElementById('search-progress').setAttribute('max',G_searchSet.length);
@@ -1185,10 +1182,10 @@ function atiSearchOffline(d, getstring) {
 		d++;
 		if(d == nikA.length) { // end
 			scrollToId('search',0);
-			var endtime = new Date;
-			var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-			var outtime = '<span class="small"><b><i>finished in ' + totaltime + 's</b></i></span>';
-			document.getElementById('stfc').innerHTML = outtime;
+			//var endtime = new Date;
+			//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+			//var outtime = '<span class="small"><b><i>finished in ' + totaltime + 's</b></i></span>';
+			//document.getElementById('stfc').innerHTML = outtime;
 			return;
 		}
 	}
@@ -1291,20 +1288,20 @@ function atiSearchOffline(d, getstring) {
 
 	if(stopsearch == 1) {
 		scrollToId('search',0);
-		var endtime = new Date;
-		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;stopped in ' + totaltime + 's</b></i></span>';
-		document.getElementById('stfc').innerHTML = outtime;
+		//var endtime = new Date;
+		//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+		//var outtime = '<span class="small"><b><i>&nbsp;&nbsp;stopped in ' + totaltime + 's</b></i></span>';
+		//document.getElementById('stfc').innerHTML = outtime;
 		return;
 	}
 
 
 	if(++d == nikA.length) {
 		scrollToId('search',0);
-		var endtime = new Date;
-		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;finished in ' + totaltime + 's</b></i></span>';
-		document.getElementById('stfc').innerHTML = outtime;
+//		var endtime = new Date;
+//		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
+//		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;finished in ' + totaltime + 's</b></i></span>';
+//		document.getElementById('stfc').innerHTML = outtime;
 		return;
 	}
 

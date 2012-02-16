@@ -4,7 +4,7 @@ function sendTextPad(input, add){
 	if(!add) { // reuse old tab
 		var thisTab = mainWindow.gBrowser.selectedTab;
 		var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
-		thisTabBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.wrappedJSObject.analyzeTextPad(input);
+		thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.wrappedJSObject.analyzeTextPad(input);
 		return;
 	}
 	else {

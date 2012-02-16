@@ -51,7 +51,7 @@ var DPRNav = {
 				var title = titles[i];
 				var val = i+1;
 			}
-			bookNode.appendItem(title);
+			bookNode.appendItem(translit(title));
 			bookNode.getItemAtIndex(i).value = val;
 		}
 		bookNode.selectedIndex = book?book:0;
@@ -78,8 +78,7 @@ var DPRNav = {
 		for (i = 0; i < titles.length; i++) {
 
 			// menu			
-
-			bookNode.appendItem(((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			bookNode.appendItem(translit((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
 			bookNode.selectedIndex = 0;		
 
 			// check boxes
@@ -167,6 +166,9 @@ var DPRNav = {
 			for (var i=0;i<theHistory.length;i++) {
 				var thist = theHistory[i].split('@');
 				var thist0 = toUni(thist[0]);
+				thist0 = thist0.split('-');
+				thist0[thist0.length-1] = translit(thist0[thist0.length-1]);
+				thist0 = thist0.join('-');
 				histNode.appendItem(thist0,thist[1]);
 				
 				var ch = histNode.childNodes[0].childNodes;
@@ -201,7 +203,7 @@ var DPRNav = {
 			while(bList.itemCount > 0) bList.removeItemAt(0);
 			bList.appendItem('-- History --');
 			
-			var types = ['Sets','Books','Book','Part','ATI'];
+			var types = ['Sets','Books','Book','Part','','ATI'];
 
 			var cnt = 0; 
 			
@@ -267,7 +269,7 @@ var DPRNav = {
 				bList.appendItem(query+' ('+type+')');
 
 				var ch = bList.childNodes[0].childNodes;
-				ch[cnt].setAttribute('onclick',"DPRSend.sendDict(true,DPRSend.eventSend(event),'"+type+"','"+query+"',['"+opts+"']);");
+				ch[cnt].setAttribute('onclick',"DPRSend.sendDict(true,DPRSend.eventSend(event),'"+type+"','"+translit(query)+"',['"+opts+"']);");
 				ch[cnt].setAttribute('tooltiptext','run lookup');
 			}
 			bList.selectedIndex = 0;
@@ -293,7 +295,7 @@ var DPRNav = {
 				var scroll = bNodes[i].getElementsByTagName('scroll')[0].textContent;
 				var desc = bNodes[i].getElementsByTagName('description')[0].textContent;
 			
-				bList.appendItem(name);
+				bList.appendItem(translit(name));
 
 				var ch = bList.childNodes[0].childNodes;
 				ch[i+1].setAttribute('onclick',"DPRSend.openPlace(['"+loc[0]+"',"+loc[1]+","+loc[2]+","+loc[3]+","+loc[4]+","+loc[5]+","+loc[6]+",'"+loc[7]+"'],null,null,DPRSend.eventSend(event),"+scroll+");");

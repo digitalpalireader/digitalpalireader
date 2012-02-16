@@ -4,45 +4,9 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script>
-
-function onLoad() {
-	giveIDtoTabs();
-	var link = document.location.href.split('?')[1];
-	var linkt = '';
-	var linkb = '';
-	if (link) {
-		var opts = link.split('&amp;');
-		for (i in opts) {
-			switch(opts[i].split('=')[0]) {
-				case 'analysis':
-				case 'ped':
-				case 'dppn':
-				case 'frombox':
-					opts[i] = opts[i].replace(/\%22/g,'"');
-					linkb+=(linkb == ''?'?':'&amp;')+opts[i]
-					break;
-				default:
-					linkt+=(linkt == ''?'?':'&amp;')+opts[i]
-					break;
-			}
-		}
-	}
-	
-	document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
-	document.getElementById('dpr-index-top').contentDocument.location.href = 'chrome://digitalpalireader/content/top.htm'+linkt;
-
-	if(!linkb) moveFrame(6);
-}
-function getconfig() {
-	document.getElementById('dpr-index-top').contentWindow.getconfig();
-	document.getElementById('dict').contentWindow.getconfig();
-}
-function citation(cite) {
-	document.getElementById('dpr-index-top').contentWindow.makeLinkPlace(cite,false);
-}
-var G_count_browsers = 1;
-var devCheck = 0;
+<script type="application/x-javascript">
+	var G_count_browsers = 1;
+	var devCheck = 0;
 </script>
 <script type="application/x-javascript" src="dev.js"/>
 <script>
@@ -53,7 +17,6 @@ var devCheck = 0;
 	}
 </script>
 	<hbox id="dpr-tops" style="height:600px" flex="1" persist="height">
-		<browser disablehistory="true" type="content" id="dpr-index-top" src="" flex="1" persist="height"/>
 	</hbox>
 	<splitter id="PanelSplitter"/>
 	<hbox flex="1" id="bottom-box" persist="height">
@@ -66,7 +29,7 @@ var devCheck = 0;
 				<tab class="chromeback" label="Cj" tooltiptext="Conjugation"/>
 				<tab class="chromeback" label="Bv" tooltiptext="Buddha Vacana Quote"/>
 			</tabs>
-			<tabpanels id="panels" class="chromeback" flex="1">
+			<tabpanels id="panels" class="chromeback" flex="1" style="margin:0;padding:0">
 				<tabpanel id="tabD">
 					<vbox flex="1">
 						<browser disablehistory="true" height="300" type="content" id="dict" src=""  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
@@ -142,6 +105,7 @@ var devCheck = 0;
 	<script type="application/x-javascript" src="js/io.js" />
 
 	<script type="application/x-javascript" src="js/prefload.js"/>
+	<script type="application/x-javascript" src="js/index.js" />
 	<script type="application/x-javascript" src="js/keypress_index.js" />
 	<script type="application/x-javascript" src="js/navigation_common.js"/>
 	<script type="application/x-javascript" src="js/navigation.js"/>

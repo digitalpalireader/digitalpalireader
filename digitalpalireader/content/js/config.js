@@ -119,6 +119,9 @@ function addATIJS() {
 function addJS(files) {
 	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader); 
 	for (var i = 0; i<files.length; i++) {
-		loader.loadSubScript('chrome://digitalpalireader/content/js/'+files[i]+'.js',null,'UTF-8'); 
+		if(/\.js/.test(files[i]))
+			loader.loadSubScript(files[i],null,'UTF-8'); 
+		else
+			loader.loadSubScript('chrome://digitalpalireader/content/js/'+files[i]+'.js',null,'UTF-8'); 
 	}
 }

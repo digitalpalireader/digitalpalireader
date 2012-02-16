@@ -5,6 +5,7 @@ var cks = ['showPages','showPagesFull', 'showVariants', 'showPermalinks', 'showN
 var radio = ['noContext','contextSelected','allContext']; 
 var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 var ints = ['setRows','altlimit'];
+var colors = ['colbk','colbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel'];
 
 function loadDefaults() {
 	for (var i = 0; i < cks.length; ++i) {
@@ -95,7 +96,8 @@ function loadPrefs() {
 			}
 			else 
 				ck.removeAttribute('selected');
-		}		
+		}	
+		
 		// backgrounds
 		
 		var wbk = prefs.getCharPref('Char.bktype');
@@ -148,6 +150,12 @@ function loadPrefs() {
 		}
 		else {
 			document.getElementById('thaiInstalled').onmousedown = function() {installSetPref('DPRThai','Thai Tipitaka','setBrowser')};
+		}
+		
+		// color pickers
+		
+		for(var i = 1; i < colors.length;i++) {
+			document.getElementById(colors[i]+'c').color = document.getElementById(colors[i]).value;
 		}
 		
 }

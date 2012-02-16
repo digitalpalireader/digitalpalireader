@@ -633,6 +633,8 @@ function toThai(input) {
 
 
 function translit(data) {
+	if(!data || data == '' || typeof(data) != 'string')
+		return data;
 	data = data.replace(/\&nbsp;/g,' ');
 	var script = DPR_prefs['translits'];
 	var out = '';

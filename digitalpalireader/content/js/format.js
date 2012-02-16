@@ -78,6 +78,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 	
 	data = data.replace(/ -- /g, ' — ');
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
+	data = data.replace(/([AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ])0(?!>)/g, "$1.");
 	data = data.replace(/``/g, '“');
 	data = data.replace(/`/g, '‘');
 	data = data.replace(/'''/g, '’”');

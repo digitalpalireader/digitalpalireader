@@ -7,6 +7,7 @@ var DPRConfig = {
 		DPRNav.bookmarkBox();
 		DPRNav.searchHistoryBox();
 		DPRNav.dictHistoryBox();
+		DPRXML.updateHierarchy(0);
 				
 		var x = 0;
 		
@@ -50,6 +51,13 @@ var DPRConfig = {
 
 		document.getElementById('set').setAttribute('rows',DPR_prefs['setRows']);
 		document.getElementById('book').setAttribute('rows',DPR_prefs['setRows']);
+		
+		// translit
+		var sets = document.getElementById('set').childNodes;
+		for(var i = 0; i < sets.length;i++) {
+			sets[i].label = translit(G_nikFullNames[sets[i].value]);
+		}
+		
 	},
 }
 

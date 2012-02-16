@@ -18,11 +18,97 @@ function onDocLoad() {
 
 	getconfig();
 
-	refreshit();
-	if(document.location.href.indexOf('?') > -1) getLinkPlace();		
+	if(document.location.href.indexOf('?') > -1) getLinkPlace();
+	else
+		refreshit();
+
 	document.onkeypress = function(e){
+		var Main = mainWindow.gBrowser.selectedTab.linkedBrowser;
+		var wBot, dBot, wMain, dMain;
+		if(Main.contentDocument.getElementById('dict').contentDocument) {
+			wBot = Main.contentDocument.getElementById('dict').contentWindow;
+			dBot = Main.contentDocument.getElementById('dict').contentDocument;
+		}
+		wMain = Main.contentWindow;
+		dMain = Main.contentDocument;
+		
 		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
+		if (e.charCode == 112) { if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup(e); return }  // p
+		if (e.charCode == 110) { if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup(e); return } // n
+
+		if (e.charCode == 115) {  // s
+			if(window.getSelection().toString() != '') {
+				wMain.sendtoconvert(window.getSelection().toString()+'');
+			} 
+			else if(wBot.getSelection().toString() != '') {
+				wMain.sendtoconvert(wBot.getSelection().toString()+'');
+			} 
+			else if(document.getElementById('convi')) { wMain.sendtoconvert(document.getElementById('convi').innerHTML); }
+			else alertFlash('You must select some text to send to the convertor','yellow');
+			return; 
+		}
+
+		if (e.charCode == 101) {  // e
+			if(window.getSelection().toString() != '') {
+				wMain.sendtoPad(window.getSelection().toString()+'');
+			} 
+			else if(wBot.getSelection().toString() != '') {
+				wMain.sendtoPad(wBot.getSelection().toString()+'');
+			} 
+			else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML); }
+			else alertFlash('You must select some text to send to the textpad','yellow');
+			return; 
+		}
+		if (e.charCode == 69) {  // E
+			if(window.getSelection().toString() != '') {
+				wMain.sendtoPad(window.getSelection().toString()+'',true);
+			} 
+			else if(wBot.getSelection().toString() != '') {
+				wMain.sendtoPad(wBot.getSelection().toString()+'',true);
+			} 
+			else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML,true); }
+			else alertFlash('You must select some text to send to the textpad','yellow');
+			return; 
+		}
+
+		if (e.charCode == 44) { // ,
+			if(dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
+			else if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
+			return; 
+		} 
+		
+		if (e.charCode == 46) { // .
+			if(dBot.getElementById('bout')) dBot.getElementById('bout').onclick(); 
+			else if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
+			return; 
+		} 
+		if (e.charCode == 113) { // q
+			
+			var check = {value: false};                  // default the checkbox to false
+
+			var input = {value: ""};           
+
+			var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
+			
+			// result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
+			
+			if(!result) return;
+
+			var place = input.value;
+			outplace = convertShortLink(place);
+			
+			if(!outplace) return;
+			
+			if(outplace[0] === false)
+				return alertFlash(outplace[1],outplace[2]);
+			
+			openPlace(outplace,null,null,check.value?check.value:'internal',G_compare);
+					
+			return; 
+		} 
 		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
+
+
 	};
 }
 
@@ -39,17 +125,10 @@ function sendTextToTextpad(event) {
 		else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
 }
 
-function closePanel(idx) {
-	var doc = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument;
-	var elem = doc.getElementById('dpr-tops');
-	elem.removeChild(doc.getElementById('dpr-index-top-'+idx+'-splitter'));
-	elem.removeChild(doc.getElementById('dpr-index-top-'+idx));
-
-}
-
 function moveFrame(idx) {
 	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.moveFrame(idx);
 }
+
 
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>

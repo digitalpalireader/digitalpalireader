@@ -12,6 +12,8 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be
 
 
 function getDppnEntry(term) {
+	if(typeof(D) == 'undefined')
+		addJS(['dppn']);
 	var dppnEntry = [];
 	if(typeof(D[term]) == 'object') {
 		dppnEntry = D[term];

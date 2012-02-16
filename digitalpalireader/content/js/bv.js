@@ -79,7 +79,7 @@ function citation(cite,event) {
 	for (i = 1; i < loc.length -1;i++) {
 		loc[i] = parseInt(loc[i]);
 	}
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.openPlace(loc,param['para'],null,eventSend(event));
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
 }
 function eventSend(event,internal) {
 	

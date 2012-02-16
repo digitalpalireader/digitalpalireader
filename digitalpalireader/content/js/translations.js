@@ -15,7 +15,6 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 	if (!DPR_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
 	
-	var atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');
 	var cnt = 0;
 	var output = [];
 	var a,b,c,d,e,j,k,l,m,w,x,y,z;
@@ -139,7 +138,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 				if (atiD[x].indexOf(atid)==0) {
 					var auth = atiD[x].split('.')[3];
 					if (autha[auth]) {auth = autha[auth];}
-					output.push(transLink(which,auth,atiurl+'tipitaka/'+atiD[x],'Translation of DN '+mysn+' by '+auth));
+					output.push(transLink(which,auth,atiD[x],'Translation of DN '+mysn+' by '+auth));
 					cnt++;
 				}
 			}
@@ -298,7 +297,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 				var auth = atiM[x].split('.')[2];
 				if (autha[auth]) {auth = autha[auth];}
 				if (atiM[x].indexOf(atim)==0) {
-					output.push(transLink(which,auth,atiurl+'tipitaka/'+atiM[x],'Translation of MN '+mysn+' by '+auth));
+					output.push(transLink(which,auth,atiM[x],'Translation of MN '+mysn+' by '+auth));
 					cnt++;
 				}
 			}
@@ -390,7 +389,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 							if(atiAs[4] == 'html') { var auth = atiAs[3]; }
 							else { var auth = atiAs[2]; }
 							if (autha[auth]) {auth = autha[auth];}
-							output.push(transLink(which,auth,atiurl+'tipitaka/'+atiA[a],'Translation of AN '+ (book+1) +'.'+bb+' by '+auth));
+							output.push(transLink(which,auth,atiA[a],'Translation of AN '+ (book+1) +'.'+bb+' by '+auth));
 							cnt++;
 							continue out;
 						}
@@ -428,7 +427,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						else {var sno = c;}
 						var auth = atiS[a].split('.')[2];
 						if (autha[auth]) {auth = autha[auth];}
-						output.push(transLink(which,auth,atiurl+'tipitaka/'+atiS[a],'Translation of SN '+ (vagga+1) +'.'+bb+' by '+auth));
+						output.push(transLink(which,auth,atiS[a],'Translation of SN '+ (vagga+1) +'.'+bb+' by '+auth));
 						cnt++;
 						continue out;
 					}
@@ -453,7 +452,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[2];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Khp '+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Khp '+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -474,7 +473,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var sno = vagga+1;
 								var auth = atiK[a].split('.')[2];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Dhp '+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Dhp '+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -497,7 +496,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -572,7 +571,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Iti '+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Iti '+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -597,7 +596,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								else {var sno = c;}
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Sn '+(vagga+1)+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Sn '+(vagga+1)+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -625,7 +624,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -648,7 +647,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -673,7 +672,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Thag '+vagga+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Thag '+vagga+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}
@@ -697,7 +696,7 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 								var auth = atiK[a].split('.')[3];
 								if (autha[auth]) {auth = autha[auth];}
 								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,auth,atiurl+'tipitaka/'+atiK[a],'Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth));
+								output.push(transLink(which,auth,atiK[a],'Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth));
 								cnt++;
 								continue out;
 							}

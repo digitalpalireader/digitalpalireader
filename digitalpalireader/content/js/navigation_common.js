@@ -235,6 +235,18 @@ nikvoladi['gm'] = ['Mog','Kac','SPM','SDhM','PRS'];
 nikvoladi['ga'] = [];
 nikvoladi['gt'] = [];
 
+var G_nikFullNames = [];
+G_nikFullNames['v'] = 'Vinaya';
+G_nikFullNames['d'] = 'Dīgha';
+G_nikFullNames['m'] = 'Majjhima';
+G_nikFullNames['s'] = 'Saṃyutta';
+G_nikFullNames['a'] = 'Aṅguttara';
+G_nikFullNames['k'] = 'Khuddaka';
+G_nikFullNames['y'] = 'Abhidhamma';
+G_nikFullNames['x'] = 'Vism';
+G_nikFullNames['b'] = 'Abhidh-s';
+G_nikFullNames['g'] = 'Byākaraṇa';
+
 var G_kVaggas = []
 
 function makekVaggas() {

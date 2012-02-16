@@ -3,7 +3,7 @@ function sendTextPad(add){
 	var input = document.getElementById('pad').value;
 
 	if(!add) { // reuse old tab
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-index-top').contentWindow.analyzeTextPad(input);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
 		return;
 	}
 	else {
@@ -11,6 +11,7 @@ function sendTextPad(add){
 		openDPRTab(permalink,'DPRm');
 	}	
 }
+
 function eventSend(event,internal) {
 	
 	if(!event) return;

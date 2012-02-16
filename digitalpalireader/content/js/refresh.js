@@ -23,5 +23,5 @@ function refreshit()
 	document.getElementById('mafrefresh').style.marginLeft = (document.getElementById('mafrefresh').offsetWidth/(-2)) + 'px';
 	if($('#newsc').length) $('#newsc').css('width',Math.round(document.getElementById('mafrefresh').offsetWidth*2/3) + 'px');
 	//document.getElementById('mafrefresh').style.marginBottom = document.getElementById('mafrefresh').offsetHeight/(-2);
-    
+
 }

@@ -74,7 +74,7 @@ function outputDef(which,first,frombox)
 				// data[2] = category
 				// data[3] = short def (if avail)
 				// for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-			var dataout = toUni(G_outwords[which][0].split('-')[c]); // get the part name from the names part :)
+			var dataout = translit(toUni(G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
 			var conciseCode = (data[3]?'onmouseover="showShortDef(\''+toUni(data[3])+'\')" ':'');
 			if (d == 0) { // first match (will go on top)		
 				switch (data[2]) {
@@ -158,7 +158,7 @@ function outputDef(which,first,frombox)
 			
 			G_thisConcise[conciseword] = concisedef;
 			if(x== 0) 
-				var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + conciseword + '</b>: ' + concisedef;	
+				var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;	
 		}
 		
 	}
@@ -178,11 +178,11 @@ function outputDef(which,first,frombox)
 var G_thisConcise = [];
 
 function showShortDef(word) {
-	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + word + '</b>: ' + G_thisConcise[word]);
+	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + G_thisConcise[word]);
 }
 
 function conciseChange(value) {
 	var spdouts = value;  
 	var spdcol = spdouts.split(':'); 
-	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + spdcol[1] + ':</b> ' + spdcol[2]);
+	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
 }
