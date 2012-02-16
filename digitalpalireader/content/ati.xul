@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://browser/skin/browser.css" type="text/css" ?>
+<!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
+<window id="DPR" onload="onLoad()"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="application/x-javascript" src="js/prefload.js"/>
+	<script type="application/x-javascript" src="js/ati.js"/>
+	<script type="application/x-javascript">
+		var G_compare = 1;
+
+
+	</script>
+	<stack flex="1">
+		<browser disablehistory="true" height="300" type="content" id="ati" src="" flex="1"/>
+		<label collapsed="true" id="close" value="x" tooltiptext="Close this panel" onclick="closePanel()" class="chromeback" style="background-color:#eee;margin:0;padding:5px;cursor:pointer;min-width:1px;min-height:1px;" top="0" left="0"/>
+	</stack>
+</window>
+
