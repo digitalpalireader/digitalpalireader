@@ -320,9 +320,9 @@ var DPRSend = {
 		
 		var ql = convertShortLink(document.getElementById('iquick').value);
 		if(!ql)
-			reuturn;
+			return;
 		if(ql[0] === false) {
-			//return alert(ql[1]);
+			return alert(ql[1]);
 		}
 		var nikaya = ql[0];
 		var book = ql[1];
