@@ -447,11 +447,30 @@ function closePanel() {
 
 	window.onunload=function(){ cW.reindexPanels() }
 	var url = cD.location.href.split('?');
-	var panels = url[1].split('|');
+	var params = url[1];
+	
+	var bottom = [];
+	
+	if(/analysis=/.test(params)) {
+		bottom.push(/(analysis=[^&]+)/.exec(params)[0]);
+	}
+	if(/ped=/.test(params)) {
+		bottom.push(/(ped=[^&]+)/.exec(params)[0]);
+	}
+	if(/dppn=/.test(params)) {
+		bottom.push(/(dppn=[^&]+)/.exec(params)[0]);
+	}
+	if(/frombox=/.test(params)) {
+		bottom.push(/(frombox=[^&]+)/.exec(params)[0]);
+	}
+	params = params.replace(/\&*(analysis|ped|dppn|frombox)=[^&]+/g,'').replace(/^\&/g,'');
+
+	
+	var panels = params.split('|');
 	panels.splice(G_compare-1,1);
 	panels = panels.join('|');
 	url[1] = panels;
-	var newurl = url.join('?').replace(/\?$/,'');
+	var newurl = url.join('?').replace(/\?$/,'') + (bottom?'&' + bottom.join('&'):'');
 	cW.history.replaceState({}, 'Title', newurl);
 
 	elem.removeChild(elem.getElementsByTagName('splitter')[G_compare-1]);

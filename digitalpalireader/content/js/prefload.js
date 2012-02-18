@@ -45,7 +45,7 @@ DPR_prefsD['coldppn'] = '#0B0';
 DPR_prefsD['colped'] = '#C40';
 DPR_prefsD['colcpd'] = '#44D';
 
-DPR_prefsD['colfont'] = 'Tahoma';
+DPR_prefsD['colfont'] = 'Verdana';
 DPR_prefsD['colsize'] = '16';
 
 DPR_prefsD['bktype'] = 'colimg';

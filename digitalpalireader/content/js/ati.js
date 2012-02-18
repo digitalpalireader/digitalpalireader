@@ -28,10 +28,19 @@ function onLoad() {
 
 			var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
 			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
+
+			// ati kungfu
+	
+			setTimeout(function(){
+				document.getElementById('ati').contentDocument.getElementById('H_content').style.width = 'auto';
+				document.getElementById('ati').contentDocument.getElementById('H_billboard').style.width = 'auto';
+				document.getElementById('ati').contentDocument.getElementById('H_container').style.width = 'auto';
+			},2000);
 		}
 		else
 			mainWindow.gBrowser.selectedTab.setAttribute('label',document.getElementById('ati').contentDocument.getElementsByTagName('title')[0].textContent);
 	}
+	
 }
 function closePanel() {
 	var cW = mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow;

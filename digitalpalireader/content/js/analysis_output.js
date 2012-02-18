@@ -128,11 +128,7 @@ function outputDef(which,first,frombox)
 	
 	if (G_shortdefpost[which]) {
 		thisconcise = G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$'); 
-		//alert(G_outwords[which]+' '+thisconcise);
-		
-		//if (thisconcise.length > 1) conciseoutput += '<select class="tiny" onchange="conciseChange(this.value)">';
-				
-		//var concisedups = [];
+
 		for (x = 0; x < thisconcise.length; x++)
 		{
 			if (thisconcise[x].length == 0) { continue; }
@@ -145,15 +141,11 @@ function outputDef(which,first,frombox)
 				condefnotype += '...'
 			}
 
-			var concisedef = concisedefa[2] + ' (' + concisedefa[1] + ')';
+			var concisedef = concisedefa[2];
 
-			concisedef = concisedef.replace(/,/g, '.');
-			concisedef = concisedef.replace(/\&comma;/g, ',');
-			concisedef = toUni(concisedef);
+			concisedef = toUni(concisedef + ' (' + linkToPED(concisedefa[1]) + ')');
 
 			var conciseword = thisconcise[x];
-			conciseword = conciseword.replace(/\`/g, '"');
-			conciseword = conciseword.replace(/,/g, '.');
 			conciseword = toUni(conciseword);
 			
 			G_thisConcise[conciseword] = concisedef;
@@ -182,7 +174,18 @@ function showShortDef(word) {
 }
 
 function conciseChange(value) {
-	var spdouts = value;  
-	var spdcol = spdouts.split(':'); 
+	var spdcol = value.split(':'); 
 	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
+}
+
+function linkToPED(text,word) {
+	if(!/ of /.test(text))
+		return text;
+		
+	var base = / of ([^;,. ]+)/.exec(text)[1];
+
+	if(typeof(P[base]) == 'object' && toVel(base) != toVel(word)) {
+		text = text.replace(base, '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[base][0] + ','+toUni(base)+'\',true)">'+toUni(base)+'</a>');
+	}
+	return text;
 }

@@ -10,7 +10,7 @@ pref("extensions.digitalpalireader.Char.coldppn", "#0B0");
 pref("extensions.digitalpalireader.Char.colped", "#C40");
 pref("extensions.digitalpalireader.Char.colcpd", "#44D");
 
-pref("extensions.digitalpalireader.Char.colfont", "Tahoma");
+pref("extensions.digitalpalireader.Char.colfont", "Verdana");
 pref("extensions.digitalpalireader.Char.colsize", "16");
 
 pref("extensions.digitalpalireader.Char.bktype", "colimg");

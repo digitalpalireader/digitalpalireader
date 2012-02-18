@@ -54,7 +54,7 @@ function translateText(alts) {
 
 	$('#input').val(input);
 	input=input.split(' ');
-	for (i in input) {
+	for (var i = 0; i < input.length; i++) {
 		var trans = translateWord(input[i],i);
 		words.push(trans);
 	}
@@ -140,6 +140,7 @@ function arrangeWords(wordst,alts) {
 	// perform filters
 	
 	for(var i=0;i<wordst.length;i++) {
+/*
 		// remove second ca, vaa
 		if(wordst[i][0] && wordst[i][0][3] == 'ca' && ca++) {
 			ca = 0;
@@ -149,7 +150,7 @@ function arrangeWords(wordst,alts) {
 			va = 0;
 			continue;
 		}
-		
+*/	
 		var wgtemp = [];
 
 		// prefer special words
@@ -392,7 +393,7 @@ function arrangeWords(wordst,alts) {
 			break;
 		}
 	}
-	
+
 	// now put it all together
 	
 	for (i in outer) {
@@ -939,7 +940,7 @@ function showAltTable(idx) {
 	if(w.length == 1)
 		out += makeGrammarTerms(w[0]);
 	else if(w.length > 1) {
-		out += '<select onchange="changeAlt(this,'+idx+')">';
+		out += '<select onclick="changeAlt(this,'+idx+')">';
 		for(i in w) {
 			out+='<option>'+makeGrammarTerms(w[i])+'</option>';
 		}

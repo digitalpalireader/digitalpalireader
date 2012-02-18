@@ -8,12 +8,10 @@
 	<script type="application/x-javascript" src="js/ati.js"/>
 	<script type="application/x-javascript">
 		var G_compare = 1;
-
-
 	</script>
 	<stack flex="1">
 		<browser disablehistory="true" height="300" type="content" id="ati" src="" flex="1"/>
-		<label collapsed="true" id="close" value="x" tooltiptext="Close this panel" onclick="closePanel()" class="chromeback" style="background-color:#eee;margin:0;padding:5px;cursor:pointer;min-width:1px;min-height:1px;" top="0" left="0"/>
+		<label collapsed="true" id="close" value="x" tooltiptext="Close this panel" onclick="closePanel()" class="chromeback" style="background-color:#eee;margin:0;padding:5px;cursor:pointer;min-width:1px;min-height:1px;" top="0" right="13"/>
 	</stack>
 </window>
 
