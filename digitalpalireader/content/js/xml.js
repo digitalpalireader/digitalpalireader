@@ -116,7 +116,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 
-	var bareurl = 'dpr:index';
+	var bareurl = 'dpr:index?';
 
 
 	var newparams = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
@@ -857,7 +857,7 @@ function loadXMLindex(place,compare) {
 
 	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 
-	var bareurl = 'dpr:index';
+	var bareurl = 'dpr:index?';
 
 	var newparams = 'loc='+place.slice(0,8).join('.');
 

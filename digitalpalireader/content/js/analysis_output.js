@@ -2,12 +2,8 @@
 function outputDef(which,first,frombox)
 {
 	$('#anfright').html('');
-	//dalert(G_outwords + ' ' + G_shortdefpost);
 
-// create option dropdown
-	
-	var osout = '<table cellspacing="0" cellpadding="0"><tr>';
-	//document.getElementById('difb').innerHTML = sdp.join(' | ') + '<br>' + G_outwords.join(' | ');
+	var osout = '<table style="float:left" id="data-table" cellspacing="0" cellpadding="0"><tr><td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div class="green small" style="margin-right:4px;">e</div></td>';
 
 	var hotlink;
 	
@@ -112,13 +108,14 @@ function outputDef(which,first,frombox)
 			osout = osout.substring(0,osout.length-6);
 			osout += '</font>';
 		}
-		else {
-			//osout += '<br><font size=2>&nbsp;</font>';
-		}		
+	
 		osout += '</td>';
 		
 	}
 	osout += (conjWord.root?'<td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate(\''+conjWord.root+'\',\'dif\',\''+conjWord.form+'\')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td>':'')+'</tr></table>';
+	
+	osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+G_outwords[which][0].length+'" id="modify" value="'+G_outwords[which][0].replace(/-/g,'')+'" onkeypress="if(event.keyCode != 13) return; reanalyze(\''+G_outwords[which][0].replace(/-/g,'')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+G_outwords[which][0].replace(/-/g,'')+'\',true)" title="cancel edits">x</span></div>';
+	
 	$('#anfleft').html(osout);
 	
 // add concise definitions
@@ -143,7 +140,7 @@ function outputDef(which,first,frombox)
 
 			var concisedef = concisedefa[2];
 
-			concisedef = toUni(concisedef + ' (' + linkToPED(concisedefa[1]) + ')');
+			concisedef = toUni(concisedef + ' (' + linkToPED(concisedefa[1],thisconcise[x]) + ')');
 
 			var conciseword = thisconcise[x];
 			conciseword = toUni(conciseword);
@@ -183,9 +180,25 @@ function linkToPED(text,word) {
 		return text;
 		
 	var base = / of ([^;,. ]+)/.exec(text)[1];
-
-	if(typeof(P[base]) == 'object' && toVel(base) != toVel(word)) {
-		text = text.replace(base, '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[base][0] + ','+toUni(base)+'\',true)">'+toUni(base)+'</a>');
+	
+	var vbase = toVel(base);
+	
+	if(typeof(P[vbase]) == 'object' &&  base != word) {
+		text = text.replace(base, '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[vbase][0] + ','+base+'\',true)">'+base+'</a>');
 	}
 	return text;
+}
+
+function reanalyze(word,cancel) {
+
+	$('#data-table').show();
+	$('#modify-box').hide();
+	
+	if(cancel) {
+		$('#modify').val(word);
+		return;
+	}
+	
+	if($('#modify').val() != word)
+		outputAnalysis($('#modify').val());
 }
