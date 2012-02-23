@@ -1,4 +1,4 @@
-var G_dictType = '';
+ G_dictType = '';
 var G_dictQuery = '';
 var G_dictOpts = []; // 
 var G_dictEntry = '';
@@ -56,6 +56,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	js['ATT'] = ['attlist'];
 	js['TIK'] = ['tiklist'];
 	js['TIT'] = ['titles'];
+	js['PRT'] = ['roots'];
 	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
 	
@@ -72,6 +73,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	st['ATT'] = 'Atth';
 	st['TIK'] = 'Tika';
 	st['TIT'] = 'Titles';
+	st['PRT'] = 'Pali Roots';
 	st['SKT'] = 'Skt Dict';
 	st['SKR'] = 'Skt Roots';
 
@@ -110,6 +112,9 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 			break;
 		case 'TIT':
 			titlesearchstart();
+			break;
+		case 'PRT':
+			paliRootsearchstart();
 			break;
 		case 'SKT':
 			sktsearchstart();
@@ -1221,6 +1226,87 @@ function titlesearchstart()
 	
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf;
+	document.getElementById('dict').innerHTML = '';
+	document.getElementById('dict').appendChild(outDiv);
+	document.getElementById('odif').scrollTop=0;
+	yut = 0;
+}
+
+
+function paliRootsearchstart(hard)
+{
+	if(typeof(proots) == 'undefined') {
+		return;
+	}
+
+	clearDivs('dict');
+	
+	var getstring = G_dictQuery;
+	if(/fz/.exec(G_dictOpts)) {
+		getstring = toFuzzy(getstring);
+	}
+	
+	var gslength = getstring.length;
+	var gsplit = new Array();
+	
+	
+	var gletter = getstring.charAt(0);
+	var finouta = new Array();
+	var y = 0;
+	var finout = '';
+	
+	for (x = 0; x < proots.length; x++)
+	{
+		gsplit = proots[x].split('^');
+		
+		if(!/ft/.exec(G_dictOpts)) {
+			var tosearch = gsplit[0];
+		}
+		else {
+			var tosearch = proots[x];
+		}
+		if(/fz/.exec(G_dictOpts)) {
+			tosearch = toFuzzy(tosearch);
+		}
+
+  		if(G_dictUnicode) tosearch = toUni(tosearch);       
+       
+        if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
+		}
+		else { // non reg exp
+			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
+		}
+		if(yessir)
+		{
+			var gs1 = gsplit[1].split(' ');
+			for(var i = 0;i<gs1.length;i++) {
+				var base = gs1[i].replace(/e$/,'a').replace(/[āe]su$/,'a').replace(/īsu$/,'i').replace(/yaṃ$/,'').replace(/mhi$/,'');
+				gs1[i] = linkToPED(base,gs1[i]);
+			}
+			gsplit[1] = gs1.join(' ');
+			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
+
+		}
+	}
+	
+	$('#dicthead').append('<p>Pali Roots search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:');
+	
+	finout = '<table width=100%><tr><td valign="top">';
+	if(finouta.length == 0) {
+		var outDiv = document.createElement('div');
+		outDiv.innerHTML = finout + 'No results</td></tr></table>';
+		document.getElementById('dict').innerHTML = '';
+		document.getElementById('dict').appendChild(outDiv);
+		document.getElementById('odif').scrollTop=0;
+		return;
+	}		
+	for (var z = 0; z < finouta.length; z++)
+	{
+		finout += finouta[z];
+	}	
+	var outDiv = document.createElement('div');
+	outDiv.innerHTML = finout + '</td></tr></table>';
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;

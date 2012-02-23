@@ -44,7 +44,9 @@ function onLoad() {
 
 	document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
 
-	if(!linkb) moveFrame(6);
+	if(!linkb.length) {
+		moveFrame(6);
+	}
 }
 function getconfig() {
 	var x = 1;

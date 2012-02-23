@@ -554,3 +554,15 @@ function makeTable(text,cls) {
 	out += '</table>';
 	return out;
 }
+
+
+function linkToPED(base,word) {
+	addJS(['ped']);
+	
+	var vbase = toVel(base);
+	
+	if(typeof(P[vbase]) == 'object') {
+		word = '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
+	}
+	return word;
+}

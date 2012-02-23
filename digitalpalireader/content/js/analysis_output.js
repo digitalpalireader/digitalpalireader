@@ -139,8 +139,13 @@ function outputDef(which,first,frombox)
 			}
 
 			var concisedef = concisedefa[2];
-
-			concisedef = toUni(concisedef + ' (' + linkToPED(concisedefa[1],thisconcise[x]) + ')');
+			
+			if(/ of /.test(concisedefa[1])) {
+				var base = / of ([^;,. ]+)/.exec(concisedefa[1])[1];
+				concisedefa[1] = concisedefa[1].replace(base,linkToPED(base,base));
+			}
+			
+			concisedef = toUni(concisedef + ' (' + concisedefa[1] + ')');
 
 			var conciseword = thisconcise[x];
 			conciseword = toUni(conciseword);
@@ -173,20 +178,6 @@ function showShortDef(word) {
 function conciseChange(value) {
 	var spdcol = value.split(':'); 
 	$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
-}
-
-function linkToPED(text,word) {
-	if(!/ of /.test(text))
-		return text;
-		
-	var base = / of ([^;,. ]+)/.exec(text)[1];
-	
-	var vbase = toVel(base);
-	
-	if(typeof(P[vbase]) == 'object' &&  base != word) {
-		text = text.replace(base, '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[vbase][0] + ','+base+'\',true)">'+base+'</a>');
-	}
-	return text;
 }
 
 function reanalyze(word,cancel) {
