@@ -1322,7 +1322,7 @@ function sktsearchstart()
 
 	clearDivs('dict');
 	
-	var getstring = toSkt(G_dictQuery);
+	var getstring = toSkt(toVel(G_dictQuery));
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}	

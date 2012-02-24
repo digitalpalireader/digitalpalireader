@@ -40,13 +40,18 @@ function onLoad() {
 	else
 		createTopPanel('');
 	
+	// top
+	
 	document.getElementById('dpr-tops').getElementsByTagName('splitter')[0].setAttribute('collapsed','true');
-
+	
+	// bottom
+	
 	document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
 
 	if(!linkb.length) {
 		moveFrame(6);
 	}
+	
 }
 function getconfig() {
 	var x = 1;

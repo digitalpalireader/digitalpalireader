@@ -551,6 +551,10 @@ float:left;
 float:right;
 }
 
+#edit-pencil:hover {
+	background-image:url(../images/pencil.png) !important;
+}
+
 #corb {
 position:absolute; 
 bottom:2px; 

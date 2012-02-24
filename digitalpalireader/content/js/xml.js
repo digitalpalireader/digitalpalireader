@@ -92,8 +92,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	
 	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 	
-	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
-	
+	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
 	setCurrentTitle(tabT);
 
 // permalink
@@ -449,7 +448,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	if (sidebar) {
 		sidebar.DPRNav.historyBox();
 	} 
-	
 }
 
 function loadXMLindex(place,compare) {

@@ -5,7 +5,8 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onLoad() {
-	reindexPanels();
+	if(/index\.xul/.test(mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href))
+		reindexPanels();
 	
 	var compare,atiurl;
 	var url = document.location.href;

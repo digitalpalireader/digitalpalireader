@@ -30,10 +30,6 @@ function onDocLoadx() {
 		moveFrame(6);
 		document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
 	}
-	document.onkeypress = function(e){
-		if(document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
-		keyPressed(e);
-	};
 }
 function getconfigx() {
 	document.getElementById('dict').contentWindow.getconfig();

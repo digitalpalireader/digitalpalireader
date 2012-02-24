@@ -3,7 +3,7 @@ function outputDef(which,first,frombox)
 {
 	$('#anfright').html('');
 
-	var osout = '<table style="float:left" id="data-table" cellspacing="0" cellpadding="0"><tr><td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div class="green small" style="margin-right:4px;">e</div></td>';
+	var osout = '<table style="float:left" id="data-table" cellspacing="0" cellpadding="0"><tr>';
 
 	var hotlink;
 	
@@ -112,9 +112,18 @@ function outputDef(which,first,frombox)
 		osout += '</td>';
 		
 	}
-	osout += (conjWord.root?'<td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate(\''+conjWord.root+'\',\'dif\',\''+conjWord.form+'\')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td>':'')+'</tr></table>';
 	
-	osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+G_outwords[which][0].length+'" id="modify" value="'+G_outwords[which][0].replace(/-/g,'')+'" onkeypress="if(event.keyCode != 13) return; reanalyze(\''+G_outwords[which][0].replace(/-/g,'')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+G_outwords[which][0].replace(/-/g,'')+'\',true)" title="cancel edits">x</span></div>';
+	// conjugation
+	
+	osout += (conjWord.root?'<td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate(\''+conjWord.root+'\',\'dif\',\''+conjWord.form+'\')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td>':'');
+	
+	// editing
+	
+	osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" style="background-image:url(images/pencil-grey.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
+	
+	osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+G_outwords[which][0].length+'" id="modify" value="'+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="if(event.keyCode === 13) reanalyze(\''+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
+	
+	// output
 	
 	$('#anfleft').html(osout);
 	

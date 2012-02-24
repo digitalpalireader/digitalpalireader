@@ -363,8 +363,8 @@ function sendTranslate(input, add){
 
 function openTranslation(url,add) {
 	if(add == 'right') return;
-
-	var url = 'chrome://digitalpalireader/content/ati.xul?ati='+url;
+	if(!/^http/.test(url))
+		url = 'chrome://digitalpalireader/content/ati.xul?ati='+url;
 	
 	if (add == 'shift') {
 		if (window.getSelection)
