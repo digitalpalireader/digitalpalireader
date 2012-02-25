@@ -8,11 +8,16 @@ function onLoad() {
 	if(/index\.xul/.test(mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href))
 		reindexPanels();
 	
-	var compare,atiurl;
+	var compare,atiurl,etcurl;
 	var url = document.location.href;
-	var link = url.split('?')[1];
+	var link = url.split('?')[1].substring(4);
 	if (link) {
-		atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+link.substring(4);
+		if(!/^http/.test(link))
+			atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+link;
+		else {
+			etcurl = true;
+			atiurl = link;
+		}
 	}
 	
 	if(atiurl) {
@@ -32,11 +37,13 @@ function onLoad() {
 
 			// ati kungfu
 	
-			setTimeout(function(){
-				document.getElementById('ati').contentDocument.getElementById('H_content').style.width = 'auto';
-				document.getElementById('ati').contentDocument.getElementById('H_billboard').style.width = 'auto';
-				document.getElementById('ati').contentDocument.getElementById('H_container').style.width = 'auto';
-			},2000);
+			if(!etcurl) {
+				setTimeout(function(){
+					document.getElementById('ati').contentDocument.getElementById('H_content').style.width = 'auto';
+					document.getElementById('ati').contentDocument.getElementById('H_billboard').style.width = 'auto';
+					document.getElementById('ati').contentDocument.getElementById('H_container').style.width = 'auto';
+				},2000);
+			}
 		}
 		else
 			mainWindow.gBrowser.selectedTab.setAttribute('label',document.getElementById('ati').contentDocument.getElementsByTagName('title')[0].textContent);
