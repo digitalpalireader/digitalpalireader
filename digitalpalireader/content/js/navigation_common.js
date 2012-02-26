@@ -359,7 +359,6 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
 }
 
 function getSuttaFromNumber(is) { // should be in array format SN,1,1
-	
 	var nik,book,meta,volume,vagga,sutta,section,hiert;
 
 	// get att, tik
@@ -561,28 +560,26 @@ function convertShortLink(place) {
 	
 	place = place.toLowerCase();
 	
-	if(!/^[A-Za-z]{1,3}-{0,1}[atAT]{0,1} {0,1}[0-9]*\.{0,1}[0-9]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
+	if(!/^[A-Za-z]{1,3}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
 	
-	if(/^[A-Za-z]+\.*([\d]+)$/.test(place)) {
-		for(i in arr) {
-			var ai = new RegExp('^'+i+'[.0-9]');
-			if(ai.test(place)) {
-				var no = place.replace(/^[A-Za-z]+\.*([\d]+)$/,"$1");
+	if(/^[A-Za-z]+ {0,1}([\d]+)$/.test(place)) {
+		for(var i in arr) {
+			if(place.indexOf(i) === 0) {
+				//alert(i);
+				var no = place.replace(/^[A-Za-z]+ *([\d]+)$/,"$1");
 				if(typeof(arr[i]) == 'object') { // multiple
 					if(parseInt(no) > arr[i][1]) {
 						no = parseInt(no) - arr[i][1];
-						place = place.replace(/^([A-Za-z]+\.*)[\d]+$/,"$1"+no);
 					}
-					place = place.replace(/^[A-Za-z]+/,'kn'+arr[i][0]+'.'+no);
+					place = 'kn'+arr[i][0]+'.'+no;
 				}
 				else
 					place = 'kn'+arr[i]+'.'+no;
 			}
 		}
 	}
-
 	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return [false,'Syntax Error','yellow'];
-	
+
 	place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 	
 	var outplace = getSuttaFromNumber(place.split(','));

@@ -126,10 +126,6 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchString = G_searchString.toLowerCase();
 	}
 	
-	// start timer
-
-	//var starttime = new Date;
-	//starttime = starttime.getTime();
 	
 	switch(G_searchType) {
 		case 0:
@@ -180,17 +176,11 @@ function makeProgressTable() {
 function finishSearch() {
 	document.getElementById('sbfbc').scrollTop = 0;
 
-	//var endtime = new Date;
-	//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
 
 	MD.getElementById('search-progress').setAttribute('collapsed',true);
 	MD.getElementById('cancel-search').setAttribute('collapsed',true);
 
 	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook.slice(1,-1) + '&part=' + G_searchPart + '&rx=' + G_searchRX;
-
-	var mfin = MD.createElement('label');
-	mfin.setAttribute('value',(stopsearch == 1 ? 'stopped after' : 'finished in') + ' ' + totaltime + 's');
-	mfin.setAttribute('id','search-finished');
 
 	var mlink = MD.createElement('toolbarbutton');
 	mlink.setAttribute('class','search-button');
@@ -1182,10 +1172,6 @@ function atiSearchOffline(d, getstring) {
 		d++;
 		if(d == nikA.length) { // end
 			scrollToId('search',0);
-			//var endtime = new Date;
-			//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-			//var outtime = '<span class="small"><b><i>finished in ' + totaltime + 's</b></i></span>';
-			//document.getElementById('stfc').innerHTML = outtime;
 			return;
 		}
 	}
@@ -1288,20 +1274,12 @@ function atiSearchOffline(d, getstring) {
 
 	if(stopsearch == 1) {
 		scrollToId('search',0);
-		//var endtime = new Date;
-		//var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-		//var outtime = '<span class="small"><b><i>&nbsp;&nbsp;stopped in ' + totaltime + 's</b></i></span>';
-		//document.getElementById('stfc').innerHTML = outtime;
 		return;
 	}
 
 
 	if(++d == nikA.length) {
 		scrollToId('search',0);
-//		var endtime = new Date;
-//		var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-//		var outtime = '<span class="small"><b><i>&nbsp;&nbsp;finished in ' + totaltime + 's</b></i></span>';
-//		document.getElementById('stfc').innerHTML = outtime;
 		return;
 	}
 

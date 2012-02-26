@@ -539,7 +539,7 @@ function makeToolbox(main,aux,conv,ex,save,trans) {
 	}
 	main = pre + ' ' + main;
 	
-	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div><div id="auxToolbar" class="obutc">'+aux+'</div></div>');
+	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
 }
 
 function makeTable(text,cls) {

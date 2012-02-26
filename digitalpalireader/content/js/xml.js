@@ -817,7 +817,7 @@ function loadXMLindex(place,compare) {
 	
 	if(isPlace) {
 
-		makeToolbox(main,'',true,true,true);
+		makeToolbox(main,'');
 
 		// history
 

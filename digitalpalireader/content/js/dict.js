@@ -55,7 +55,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	js['CEPD'] = ['epd'];
 	js['ATT'] = ['attlist'];
 	js['TIK'] = ['tiklist'];
-	js['TIT'] = ['titles'];
+	js['TIT'] = ['titles','dppn','nameno'];
 	js['PRT'] = ['roots','roots_link'];
 	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
