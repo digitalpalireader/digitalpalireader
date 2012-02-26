@@ -56,7 +56,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	js['ATT'] = ['attlist'];
 	js['TIK'] = ['tiklist'];
 	js['TIT'] = ['titles'];
-	js['PRT'] = ['roots'];
+	js['PRT'] = ['roots','roots_link'];
 	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
 	
@@ -1285,7 +1285,8 @@ function paliRootsearchstart(hard)
 				gs1[i] = linkToPED(base,gs1[i]);
 			}
 			gsplit[1] = gs1.join(' ');
-			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
+			var ln = rootsl[x].split('.');
+			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +' <span class="pointer hoverShow" title="go to entry in Dhātumālā" onclick="openPlace([\'g\',3,'+ln[0]+',0,'+ln[1]+',0,0,\'m\'],'+(parseInt(ln[2])+1)+',null,eventSend(event))">&rarr;</span><br>');
 
 		}
 	}

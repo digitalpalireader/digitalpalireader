@@ -302,11 +302,6 @@ function writeToDesktop(aFileKey, aContent)
 {
 	var DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
 	var dir = DIR.get("Desk", Components.interfaces.nsIFile);
-	dir.append("DPR_dev");
-	if ( !dir.exists() )
-	{
-		dir.create(dir.DIRECTORY_TYPE, 0700);
-	}
 
 	var aFile = dir.clone();
 	aFile.append(aFileKey);

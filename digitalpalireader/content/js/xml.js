@@ -8,9 +8,11 @@ matValue['t'] = '';
 
 
 var G_compare = 1;
+var G_thisPara = null;
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 { 
+	 G_thisPara = null;
 	
 	if(compare)
 		G_compare = compare;
@@ -308,7 +310,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		if(/-/.test(para)) {
 			var range = para.split('-');
 		}
-		else var opara = parseInt(para);
+		else {
+			var opara = parseInt(para);
+			G_thisPara = opara;
+		}
 	}
 
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');

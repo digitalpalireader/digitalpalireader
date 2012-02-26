@@ -295,6 +295,8 @@ var G_lastcolour = 0;
 function sendAnalysisToOutput(input, divclicked, frombox, add){
 	
 	if(add == 'right') return;
+	if(window.getSelection().toString()) 
+		return;
 	
 	if(divclicked) divclicked = 'W'+divclicked;
 	if (divclicked && document.getElementById(divclicked))
