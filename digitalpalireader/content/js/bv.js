@@ -25,12 +25,12 @@ function bv(rnd,static) {
 	var ps = verse.getElementsByTagName('p');
 	for(i in ps) {
 		if (ps[i].className == 'text') {
-			text.push(ps[i].textContent);
+			text.push(ps[i].innerHTML);
 		}
 		else if (ps[i].className == 'citation') {
 			if(ps[i].getElementsByTagName('a')[0])
 				link = ps[i].getElementsByTagName('a')[0].href;
-			cite = ps[i].textContent;
+			cite = ps[i].innerHTML;
 		}
 	}
 	return [head,text,cite,link];
@@ -65,7 +65,7 @@ function showBv(rnd) {
 	if(rnd)
 		dd = '<div style="padding:2px 10px;" title="get today\'s quote" onclick="showBv()" class="green small pointer">Today</div>';
 	
-	document.getElementById('bvb').innerHTML = '<div style="position:absolute;top:0;right:0;">'+rd+dd+'</div>'+'<p><b class="text">'+(rnd?'Random':'Daily')+' Buddha Vacana</b></p>'+today+'<p name="changecolor">' + abv[1].join('</p><p name="changecolor">').replace(/\n/g,'<br/>') + '</p>'+(abv[2] ? '<p>-- '+(abv[3]?'<span class="green pointer" onclick="citation(\''+abv[3].replace(/^[^?]+\?/,'')+'\',event); return false">' + abv[2] +'</span>':abv[2])+'</p>':'');
+	document.getElementById('bvb').innerHTML = '<div style="position:absolute;top:0;right:0;">'+rd+dd+'</div>'+'<p><b class="text">'+(rnd?'Random':'Daily')+' Buddha Vacana</b></p>'+today+'<p name="changecolor">' + abv[1].join('</p><p name="changecolor">') + '</p>'+(abv[2] ? '<p>-- '+(abv[3]?'<span class="green pointer" onclick="citation(\''+abv[3].replace(/^[^?]+\?/,'')+'\',event); return false">' + abv[2] +'</span>':abv[2])+'</p>':'');
 }
 
 function citation(cite,event) {

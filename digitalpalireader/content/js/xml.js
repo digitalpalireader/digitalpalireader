@@ -104,7 +104,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	// get string from query
 	
 	if(querystring) {
-		if(/^\/.+\/$/.test(querystring)) {
+		if(typeof(querystring) == 'object'){}
+		else if(/^\/.+\/$/.test(querystring)) {
 			var queryt = querystring.substring(1,querystring.length-1).split('+');
 			var query = [];
 			for(i in queryt) {

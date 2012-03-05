@@ -85,7 +85,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	$('#difb').html('');
 	$('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 	
-	
+	G_dictQuery = G_dictQuery.toLowerCase();
 	
 
 	switch (G_dictType) {

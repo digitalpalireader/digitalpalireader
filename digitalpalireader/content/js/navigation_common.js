@@ -547,7 +547,7 @@ function convertShortLink(place) {
 	arr['dhp'] = 2;
 	arr['ud'] = 3;
 	arr['it'] = 4;
-	arr['sn'] = 5;
+	arr['snp'] = 5;
 	arr['vv'] = 6;
 	arr['pv'] = 7;
 	arr['th'] = 8;

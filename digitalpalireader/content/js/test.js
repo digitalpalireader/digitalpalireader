@@ -1349,7 +1349,7 @@ function resetVETable() {
 	if(!verb[vPersons[vdtypesNo[rn3][0]]] || !verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]])
 		return resetVETable();
 
-	G_oneVerb = [stem,verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]].replace(/[()]/g,'')];
+	G_oneVerb = [stem,verb[vPersons[vdtypesNo[rn3][0]]][vdtypesNo[rn3][1]]];
 	
 	if(/^is /.test(ev)) {
 		if(tense != 'pres')
@@ -1368,7 +1368,7 @@ function resetVETable() {
 function checkVEAnswers(){
 	var val = $('#answert').val();
 	for (i in G_oneVerb[1]) {
-		if(val == G_oneVerb[0]+G_oneVerb[1][i]) {
+		if(val == G_oneVerb[0]+G_oneVerb[1][i].replace(/[()]/g,'')) {
 			alertFlash("That's correct!",'green');
 			return resetVETable();
 		}
@@ -1379,7 +1379,7 @@ function clearVEAnswers(){
 	$('#answert').val('');
 }
 function showVEAnswers(){
-	var right = G_oneVerb[0]+G_oneVerb[1].join(', '+G_oneVerb[0]);
+	var right = G_oneVerb[0]+G_oneVerb[1].join(', '+G_oneVerb[0]).replace(/[()]/g,'');
 	$('#answert').hide();
 	$('#answer').append('<span id="righta" class="red">'+right+'</span>');
 	setTimeout(function(){$('#righta').remove(); $('#answert').show('fast');},3000);
