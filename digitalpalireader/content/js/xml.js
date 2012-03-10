@@ -478,16 +478,18 @@ function loadXMLindex(place,compare) {
 	
 	var hier = isPlace?place[7]:place[2];
 	
+	var xset = isPlace?(place[8]?place[8]:0):0;
+	
 	document.getElementById('mafbc').innerHTML = '';
 	document.getElementById('mafbc').appendChild(pleasewait);
 
-
+	
 	var nikaya = place[0];
 	var bookno = parseInt(place[1]);
 	var book = bookno+1;
 	var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = loadXMLFile(nikbookhier,0);
+    var xmlDoc = loadXMLFile(nikbookhier,xset);
 
 	var z = xmlDoc.getElementsByTagName("ha");
 	var y = '';
@@ -794,8 +796,20 @@ function loadXMLindex(place,compare) {
 							var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
 							var t = u[tmp6].getElementsByTagName("p");
 							for (tmp7 = 0; tmp7 < t.length; tmp7++) {
-								var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
-								var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+								if(xset) { // thai
+									if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.test(t[tmp7].textContent) && !DPR_prefs['showPages']) {
+										continue;
+									}
+									//~ function replaceme(str,p1) {
+										//~ p1 = parseInt(p1)+1;
+										//~ return p1;
+									//~ }
+									var para = formatuniout('<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
+								}
+								else {
+									var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
+									var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+								}
 								theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
 								convout += para[1].replace(/  *,/g, ',');
 								saveout += para[2].replace(/  *,/g, ',');

@@ -51,13 +51,13 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
-    <em:updateURL>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateURL>
+    <em:updateURL>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateURL>
     <em:optionsURL>chrome://digitalpalireader/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
-        <em:minVersion>3.5</em:minVersion>
+        <em:minVersion>4</em:minVersion>
         <em:maxVersion>*</em:maxVersion>
       </Description>
     </em:targetApplication>
@@ -84,10 +84,10 @@ echo '<?xml version="1.0" encoding="UTF-8"?>
             <em:targetApplication>
               <RDF:Description>
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>1.5</em:minVersion>
+                <em:minVersion>4</em:minVersion>
                 <em:maxVersion>*</em:maxVersion>
-                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader2.rdf</em:updateLink>
-                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader2.xhtml</em:updateInfoURL>
+                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateLink>
+                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader.xhtml</em:updateInfoURL>
               </RDF:Description>
             </em:targetApplication>
           </RDF:Description>
@@ -110,26 +110,6 @@ if [ "$update" != "" ]
 else
 echo "$xhtmlu" > digitalpalireader.xhtml
 fi
-
-    
-
-
-
-#echo '<?xml version="1.0"?>
-#<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
-#<window id            = "digitalpalireader-main-window"
-        #title         = "Digital Pali Reader '$rdfv'"
-        #width         = "800"
-        #height        = "600"
-        #orient        = "vertical"
-        #xmlns         = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        #xmlns:html    = "http://www.w3.org/1999/xhtml"
-        #persist       = "width height screenX screenY sizemode">
-
-#<browser id="cmdlog" src="index.htm" flex="1" persist="height"/>
-
-#</window>
-#' > content/digitalpalireader.xul
 
 echo 'This is the SourceForge archive for the Digital Pali Reader.  You will find the latest release in the "DPR" folder.
 

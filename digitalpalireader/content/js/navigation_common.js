@@ -541,28 +541,35 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 
 
 function convertShortLink(place) {
-	// kn subs
-	var arr = [];
-	arr['khp'] = 1;
-	arr['dhp'] = 2;
-	arr['ud'] = 3;
-	arr['it'] = 4;
-	arr['snp'] = 5;
-	arr['vv'] = 6;
-	arr['pv'] = 7;
-	arr['th'] = 8;
-	arr['thi'] = 9;
-	arr['apa'] = 10;
-	arr['api'] = 11;
-	arr['bv'] = 12;
-	arr['cp'] = 13;
-	arr['ja'] = [14,520];
 	
 	place = place.toLowerCase();
 	
-	if(!/^[A-Za-z]{1,3}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
+	if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
+
+	if(/^dhpv[ .]*[0-9]+$/.test(place)) // dhp verses
+		var dhpno = parseInt(place.replace(/[^0-9]/g,''));
+		var dp = dhpv[dhpno];
+		return ['k',1,0,0,dp[0],0,0,'m',dp[1]+1];
 	
 	if(/^[A-Za-z]+ {0,1}([\d]+)$/.test(place)) {
+
+		// kn subs
+		var arr = [];
+		arr['khp'] = 1;
+		arr['dhp'] = 2;
+		arr['ud'] = 3;
+		arr['it'] = 4;
+		arr['snp'] = 5;
+		arr['vv'] = 6;
+		arr['pv'] = 7;
+		arr['th'] = 8;
+		arr['thi'] = 9;
+		arr['apa'] = 10;
+		arr['api'] = 11;
+		arr['bv'] = 12;
+		arr['cp'] = 13;
+		arr['ja'] = [14,520];
+
 		for(var i in arr) {
 			if(place.indexOf(i) === 0) {
 				//alert(i);
@@ -578,7 +585,7 @@ function convertShortLink(place) {
 			}
 		}
 	}
-	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return [false,'Syntax Error','yellow'];
+	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.test(place)) return [false,'Syntax Error','yellow'];
 
 	place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 	

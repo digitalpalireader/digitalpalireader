@@ -385,6 +385,57 @@ function sktRXML(no,add)
 }
 
 
+function sktXML(entry,idx,which,add)
+{
+	addJS(['skt']);
+
+	if(add == 'right') return;
+	if(add == true) {
+		//sendPaliXML(toVel(filein.split(',')[1]),true);
+		return;
+	}
+
+	clearDivs('dif');
+	
+	var char = entry.charAt(0);
+
+	var xml = 'chrome://sanskrit/content/xml/'+char+'.xml';
+	var xmlhttp = new window.XMLHttpRequest();
+	xmlhttp.open("GET", xml, false);
+	xmlhttp.send(null);
+	var xmlDoc = xmlhttp.responseXML.documentElement;
+	
+	var data = xmlDoc.getElementsByTagName('u')[idx];
+	var ser = new XMLSerializer();
+	data = ser.serializeToString(data);
+	
+	data = data.replace(/<(\/*)d/g,"<$1td").replace(/<(\/*)u/g,"<$1table").replace(/<(\/*)r/g,"<$1tr").replace(/<(\/*)f/g,"<$1font").replace(/ c=["']g/g,' style="color:green').replace(/ c=["']b/g,' style="color:blue').replace(/ c=["']r/g,' style="color:red').replace(/ s=["']-1/g,'  style="font-size:75%').replace(/" style="/g,';');
+
+	var dataNode = document.createElement('div');
+	dataNode.innerHTML = '<p>'+data+'<hr/>';
+	document.getElementById('difb').setAttribute('align','left');
+	document.getElementById('difb').appendChild(dataNode);
+	document.getElementById('cdif').scrollTop=0;
+
+	// permalink
+	
+	if(/dict\.htm/.exec(document.location.href)) {
+		var permalink = document.location.href;
+		if(/\&entry=/.exec(permalink)) {
+			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+entry);
+		}
+		else permalink += '&entry='+entry;
+		try {
+			window.history.replaceState('Object', 'Title', permalink);
+		}
+		catch(ex) {
+		}
+	}
+
+
+}
+
+
 function getAtthXML(num,type,niklist) { // get atthakatha or tika word 
 
 

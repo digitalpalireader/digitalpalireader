@@ -67,6 +67,10 @@ function makeLocPlace(inplace) {
 	if (place.length == 8 || /[vdmaskyxbg]\.[0-9]+\.[mat]/.test(inplace)) {
 		outplace = place;
 	}
+	else if (place.length == 9) {
+		outplace = place;
+		outplace[8] = parseInt(outplace[8]);
+	}
 	else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.test(inplace)) { // shorthand
 		outplace = getSuttaFromNumber(place);
 	}

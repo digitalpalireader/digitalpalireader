@@ -1,5 +1,8 @@
 function loadXMLFile(file,setNo) {
 	var setName;
+	if(typeof(setNo) == 'undefined')
+		setNo = 0;
+		
 	switch(setNo) {
 		case 0:
 			var setPack = 'dprmyanmar';

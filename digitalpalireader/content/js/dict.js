@@ -60,7 +60,10 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
 	
-	addJS(js[G_dictType]);
+	var error = addJS(js[G_dictType]);
+	
+	if(error)
+		return alert('error loading resource: '+error[1]+'\n'+error[0]);
 
 	G_dictUnicode = /[āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ]/.test(G_dictQuery);
 
@@ -1314,6 +1317,7 @@ function paliRootsearchstart(hard)
 	yut = 0;
 }
 
+var G_sktR = [];
 
 function sktsearchstart()
 {
@@ -1323,10 +1327,13 @@ function sktsearchstart()
 
 	clearDivs('dict');
 	
+	var char = G_dictQuery.charAt(0);
+	
 	var getstring = toSkt(toVel(G_dictQuery));
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}	
+	
 	var gslength = getstring.length;
 	var gsplit = new Array();
 	
@@ -1334,54 +1341,88 @@ function sktsearchstart()
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
-	
-	for (x in skt)
-	{
-		var test = skt[x];
-		test = test.replace(/[^a-z]/g,'');
-		if(!test || test == 'infor' || test == 'in' || test == 'for')
-			continue;
-		if(!/ft/.exec(G_dictOpts)) {
-			var tosearch = x;
-		}
-		else {
-			var tosearch = x+': '+skt[x];
-		}
+	var last = 0;
+	var uniout;
 
-        if (/rx/.exec(G_dictOpts)) { // reg exp
-			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
+	if(typeof(G_sktR['a']) == 'undefined') {
+		for (var w in skt) {
+			for (var x = 0; x < skt[w].length; x++)
+				G_sktR[skt[w][x]] = x;
+		}
+	}
+	
+	for (var x = 0; x < skt[char].length; x++)
+	{
+		var sx = skt[char][x];
+		
+		if(/fz/.exec(G_dictOpts)) {
+			sx = toFuzzy(sx);
+		}
+		var totest = sx;
+		if(G_dictUnicode) totest = toUni(totest);
+
+		if (/rx/.exec(G_dictOpts)) { // reg exp
+			var yessir = (totest.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.search(getstring) > -1));
 		}
 		else { // non reg exp
-			var yessir = (tosearch.indexOf(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.indexOf(getstring) > -1));
+			var yessir = (totest.indexOf(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.indexOf(getstring) > -1));
 		}
 		if(yessir)
 		{
-			
-			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + toUni(toSkt(x,true)) + '</font></b>: '+skt[x] +'<br>');
+			uniout = toUni(toSkt(sx,true));
+			last = x;
+			finouta[y] = '<span class="pointer" style="color:'+DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + x +');">' + uniout + '</span><br>';
 
+			y++;
 		}
 	}
 	
 	$('#dicthead').append('<p>Sanskrit search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictQuery):toUni(G_dictQuery))+'</b>:');
 	
-	finout = '<hr /><table width=100%><tr><td valign="top">';
-	if(finouta.length == 0) {
-		var outDiv = document.createElement('div');
-		outDiv.innerHTML = finout + 'No results</td></tr></table>';
-		document.getElementById('dict').innerHTML = '';
-		document.getElementById('dict').appendChild(outDiv);
-		document.getElementById('odif').scrollTop=0;
-		return;
-	}		
-	for (var z = 0; z < finouta.length; z++)
-	{
-		finout += finouta[z];
-	}	
+	
 	var outDiv = document.createElement('div');
-	outDiv.innerHTML = finout + '</td></tr></table>';
+	
+	if(finouta.length == 0) {
+		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
+
+		
+		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
+
+			var simlist = findSimilarWords(toFuzzy(getstring),G_sktR[char],70,1);
+			if(simlist) {
+				outDiv.innerHTML += '<p>Did you mean:</p>';
+				for (var x = 0; x < simlist.length; x++) {
+					sx = simlist[x][1];
+					uniout = toUni(toSkt(sx,true));
+					finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + G_sktR[sx]+');">' + uniout + '</a><br>';
+
+					y++;
+				}
+			}
+			else outDiv.innerHTML += '<p>No suggestions.</p>';
+		}
+		else {
+			finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+
+		}
+	}
+	else if(finouta.length == 1)
+		sktXML(last+','+uniout);
+
+	var findiv = Math.ceil(finouta.length/3);
+	var listoutf = '<table width="100%">';
+	for (z = 0; z < findiv; z++)
+	{
+		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
+	}
+
+	outDiv.innerHTML += listoutf + '</table><hr />';
 	document.getElementById('dict').innerHTML = '';
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
+	
+	if(G_dictEntry) sktXML(G_dictEntry,G_sktR[G_dictEntry]);
+	
 	yut = 0;
 }
 

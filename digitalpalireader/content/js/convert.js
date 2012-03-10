@@ -73,7 +73,7 @@ function convert(check)
 			spell = toSin(toUni(spell));
 		}			
 	}
-	document.getElementById('coutput').value = spell;	
+	document.getElementById('coutput').value = spell;
 }
 
 

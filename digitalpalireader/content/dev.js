@@ -2601,3 +2601,131 @@ function paliCite() {
 	
 	writeToDesktop('dpr_roots_temp.js', 'var rootsl = ['+dataout+'];');
 }
+
+function devXML(file) {
+	var xmlhttp = new window.XMLHttpRequest();
+	xmlhttp.open("GET", file, false);
+	xmlhttp.send(null);
+	var xmlDoc = xmlhttp.responseXML.documentElement;
+	return xmlDoc;
+}
+
+function mwCite() {
+	var dataout = '';
+	var doa = [];
+	var xmlDoc = devXML('etc/mw.xml');
+	
+	var y = xmlDoc.getElementsByTagName('n');
+	
+	for (var b = 0; b < y.length; b++) {
+		dataout+= "'"+y[b].textContent+"'"+(y[b+1]?",":'');
+	}
+	
+	writeToDesktop('dpr_temp.js', 'var skt = ['+dataout+'];');
+}
+
+function dhpVerses() {
+	var dataout = '';
+	var doa = [];
+	var xmlDoc = loadXMLFile('k2m');
+	
+	var u = xmlDoc.getElementsByTagName("h0");
+	
+	for (var a = 0; a < u.length; a++) // per h0
+	{
+		var v = u[a].getElementsByTagName("h1");
+			
+		for (var b = 0; b < v.length; b++) // per h1
+		{
+			var w = v[b].getElementsByTagName("h2");
+		
+			for (var c = 0; c < w.length; c++) // per h2
+			{
+				
+				var x = w[c].getElementsByTagName("h3");
+	
+				for (var d = 0; d < x.length; d++) // per h3
+				{
+					
+					var y = x[d].getElementsByTagName("h4");
+					
+					for (var e = 0; e < y.length; e++) // per h4
+					{
+						window.dump(a+','+b+','+c+','+d+','+e+'\n');
+
+						var z = y[e].getElementsByTagName("p");		
+
+						for (var f = 0; f < z.length; f++) // per paragraph
+						{
+
+							var intext = z[f].textContent;
+							if(!/^\[03\] [0-9]+\^b\^\.\^eb\^/.test(intext))
+								continue;
+								
+							dataout += ',['+c+','+f+']';
+						}
+					}
+				}
+			}
+		}
+	}
+	writeToDesktop('dpr_temp.js', 'var dhpv = [null'+dataout+'];');
+}
+
+function mwsplit() {
+	var xmlDoc = devXML('chrome://sanskrit/content/mw.xml');
+	
+	var n = xmlDoc.getElementsByTagName('n');
+	var last = '';
+	var dout = '';
+	var ser = new XMLSerializer();
+	for(var x=0;x<n.length;x++) {
+		var nx = n[x].textContent;
+
+		var u = xmlDoc.getElementsByTagName('u')[x];
+		u = ser.serializeToString(u);
+
+		writeExtFile('/home/noah/Desktop/DPR_dev/'+nx+'.xml', '<n>'+nx+'</n>\n'+u+'\n');
+	}
+}
+
+function mwIndex() {
+
+	var ar = ['a','A','b','B','c','C','d','D','e','E','f','F','g','G','h','i','I','j','J','k','K','l','m','n','N','o','O','p','P','q','Q','r','R','s','S','t','T','u','U','v','w','W','x','X','y','Y','z'];
+
+	var oar = [];
+
+	for(var i =0;i<ar.length;i++) {
+		oar[ar[i]] = [];
+		var xmlDoc = devXML('chrome://sanskrit/content/xml/'+ar[i]+'.xml');
+		var n = xmlDoc.getElementsByTagName('n');
+		for(var j =0;j<n.length;j++) {
+			oar[ar[i]].push(n[j].textContent);
+		}
+	}
+	
+	var dout = '';
+	for(var i in oar) {
+		dout += "skt['"+i+"'] = [";
+		for(var j =0;j<oar[i].length;j++) {
+			dout += "'"+oar[i][j]+"',";
+		}
+		dout += "];\n";
+	}
+	writeToDesktop('dpr_temp.js', dout);
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
