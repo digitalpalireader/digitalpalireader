@@ -1,0 +1,221 @@
+
+<!ENTITY digitalpalireader.title "Digital Pali Reader">
+<!ENTITY quiz.title "DPR Quiz">
+<!ENTITY HTML.title "DPR Resources">
+<!ENTITY openDPR.commandkey "D">
+<!ENTITY openDPR.modifierskey "control shift">
+
+<!-- Sidebar -->
+
+<!ENTITY close.tip "Close section">
+
+	<!-- nav -->
+
+<!ENTITY sNav.label "Navigation">
+<!ENTITY sSet.label "Set">
+<!ENTITY set.text "Choose set">
+<!ENTITY sBook.label "Book">
+<!ENTITY book.text "Choose book">
+<!ENTITY hier.label "Book Hierarchy">
+<!ENTITY base.text "View index for this book">
+<!ENTITY hier.text "Choose section">
+<!ENTITY mul_text "Switch to Mūla">
+<!ENTITY att_text "Switch to Aṭṭhakathā">
+<!ENTITY tik_text "Switch to Ṭīkā">
+<!ENTITY go_cat "View all sub-sections">
+<!ENTITY go_text "View this section">
+<!ENTITY go_bookmark "Open bookmarks and history window">
+<!ENTITY bookmark.text "Choose bookmarked section">
+<!ENTITY history.text "Choose previous section">
+
+	<!-- search -->
+
+<!ENTITY sSearch.label "Search">
+<!ENTITY searchHead "Text Search">
+<!ENTITY search.text "Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
+<!ENTITY searchSET "Set: ">
+<!ENTITY searchGo.text "Search for word or phrase in selected volumes">
+<!ENTITY searchRx.text "Regular Expression Search">
+<!ENTITY searchRx.label "Rx">
+<!ENTITY selAll.text "Select All/None">
+
+<!ENTITY search_history "list of previous searches">
+<!ENTITY clear_history "clear all history entries">
+<!ENTITY sim_history "Use these search options with a different query">
+<!ENTITY same_history "Run this search with the same options">
+
+	<!-- dict -->
+
+<!ENTITY sTools.label "Tools">
+<!ENTITY dictHead "Dictionary">
+<!ENTITY dict.text "Enter word or partial word using Velthuis or Unicode.">
+<!ENTITY dict_go "Lookup word in selected dictionary">
+<!ENTITY dictGo.text "Lookup word in selected dictionary">
+<!ENTITY dictAdv "adv">
+<!ENTITY dictAdv.text "advanced lookup options">
+<!ENTITY DPR "DPR Analysis">
+<!ENTITY PED "PED - Pali-English">
+<!ENTITY DPPN "DPPN - Pali Proper Names">
+<!ENTITY CPED "CPED - Concise Pali-English">
+<!ENTITY Multi "PED, DPPN &amp; CPED">
+<!ENTITY CEPD "CEPD - Concise English-Pali">
+<!ENTITY Aṭṭh "Aṭṭhakathā Terms">
+<!ENTITY Ṭīka "Ṭīka Terms">
+<!ENTITY Title "Title Search">
+
+<!ENTITY dict_history "list of previous dictionary searches">
+<!ENTITY clear_dict "clear all history entries">
+
+	<!-- buttons -->
+
+<!ENTITY bBookmarks "Bookmarks ⇒">
+<!ENTITY bQuiz "Pali Quiz ⇒">
+<!ENTITY bQuote "Dhamma Quote ⇒">
+
+<!ENTITY bPreferences "Preferences ⇒">
+<!ENTITY bHelp "Help ⇒">
+<!ENTITY bContact "Feedback Form ⇒">
+
+<!ENTITY bHTML "Misc. Resources ⇒">
+
+<!ENTITY bookmark.label "Bookmarks">
+<!ENTITY quiz.label "Pali Quiz">
+<!ENTITY bv.label "Buddha Vacana Quote">
+
+<!ENTITY openPrefs.label "Preferences">
+<!ENTITY help.label "Help">
+<!ENTITY contact.label "Feedback Form">
+
+<!ENTITY HTML.label "Various Pali resources in HTML format">
+
+
+
+
+<!-- Preferences -->
+
+<!ENTITY pTitle.label "Digital Pali Reader Preferences">
+<!ENTITY pGeneral.label "General">
+<!ENTITY pLayout.label "Layout">
+<!ENTITY pText.label "Text">
+<!ENTITY pSets.label "Sets">
+
+<!-- General Tab -->
+
+<!ENTITY pShow.label "Show in Text:">
+<!ENTITY pShowPages.label "Page Numbers">
+<!ENTITY showPagesFull.label "Full Page Numbers">
+<!ENTITY pShowVariants.label "Variant Readings">
+<!ENTITY pShowPermalinks.label "Permalinks">
+<!ENTITY pShowNames.label "DPPN Links">
+<!ENTITY pShowPedLinks.label "Add Word Links to PED Entries">
+
+<!ENTITY pMiscPrefs.label "Misc. Preferences">
+
+<!ENTITY pctrans.label "Show Translations">
+
+<!ENTITY paltlimit.label "Maximum Definitions Per Compound:">
+<!ENTITY pautodict.label "Enable Dictionary search-as-you-type">
+
+<!ENTITY pnigahita.label "Use ṁ instead of ṃ">
+
+<!ENTITY context.label "Show context menu item:">
+<!ENTITY allContext.label "always">
+<!ENTITY contextSelected.label "when text selected">
+<!ENTITY noContext.label "never">
+
+<!ENTITY pATI.label "Access To Insight Off-Line Archive:">
+<!ENTITY pcatioff.label "Use Off-line ATI Archive">
+<!ENTITY pATILoc.label "Location (ati_website):">
+<!ENTITY pFileDialog.label "Browse...">
+
+<!-- Layout Tab -->
+
+<!ENTITY pDictH.label "Bottom Frame Height">
+
+<!ENTITY pWinBackground.label "Page Background">
+
+<!ENTITY pcolbk.label "Color">
+<!ENTITY pimgbk.label "Image">
+
+<!ENTITY pSidebarBackground.label "Sidebar Background">
+
+<!ENTITY pMiscLayout.label "Misc.">
+<!ENTITY psetRows.label "Sidebar Set Rows">
+
+<!ENTITY pcolbkcp.label "Color">
+<!ENTITY pimgbkcp.label "Image">
+
+<!ENTITY pWidgetColors.label "Other Colors:">
+
+<!ENTITY pcolInput.label "Input Boxes">
+<!ENTITY pcolButton.label "Buttons (normal)">
+<!ENTITY pcolButtonSel.label "Buttons (on hover)">
+
+<!-- Text Tab -->
+
+<!ENTITY pColors.label "Text Colors">
+
+<!ENTITY pcoltext.label "Normal">
+<!ENTITY pcolsel.label "Selected">
+<!ENTITY pcoldppn.label "DPPN">
+<!ENTITY pcolped.label "PED">
+<!ENTITY pcolcpd.label "CPED">
+
+<!ENTITY pFont.label "Text Formatting">
+
+<!ENTITY pcolfont.label "Font Family">
+<!ENTITY pcolsize.label "Text Size">
+
+<!ENTITY ptranslits.label "Text Script">
+<!ENTITY pRoman.label "Roman">
+<!ENTITY pThai.label "Thai">
+<!ENTITY pDeva.label "Devanagari">
+<!ENTITY pMyan.label "Myanmar">
+<!ENTITY pSiha.label "Sinhala">
+
+<!ENTITY pcolbk1.label "zxvxz">
+<!ENTITY pcolbk2.label "zxvxz">
+<!ENTITY pcolbk3.label "zxvxz">
+<!ENTITY pcolsearch0.label "zxvxz">
+<!ENTITY pcolsearch1.label "zxvxz">
+<!ENTITY pcolsearch2.label "zxvxz">
+<!ENTITY pgreen.label "zxvxz">
+<!ENTITY pblue.label "zxvxz">
+<!ENTITY pbrown.label "zxvxz">
+<!ENTITY pgrey.label "zxvxz">
+<!ENTITY pred.label "zxvxz">
+<!ENTITY pblueh.label "zxvxz">
+
+<!-- Sets Tab -->
+
+<!ENTITY setName.label "Name">
+<!ENTITY setInstalled "Installed">
+<!ENTITY setStaged "Restart to Install">
+<!ENTITY setInstall "Install">
+
+<!-- Pref Buttons -->
+
+<!ENTITY pDefaults.label "Defaults">
+<!ENTITY pCancel.label "Cancel">
+<!ENTITY pApply.label "Apply">
+<!ENTITY pOK.label "Ok">
+
+<!-- HTML -->
+
+<!ENTITY larr "←">
+<!ENTITY uarr "↑">
+<!ENTITY rarr "→">
+<!ENTITY darr "↓">
+<!ENTITY harr "↔">
+<!ENTITY crarr "↵">
+<!ENTITY lArr "⇐">
+<!ENTITY uArr "⇑">
+<!ENTITY rArr "⇒">
+<!ENTITY dArr "⇓">
+<!ENTITY hArr "⇔">
+
+<!-- Quiz -->
+
+<!ENTITY quiz1.label "Vocab">
+<!ENTITY quiz2.label "Declensions - Full">
+<!ENTITY quiz3.label "Declensions - Single">
