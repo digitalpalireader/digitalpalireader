@@ -1432,7 +1432,6 @@ function sktRootsearchstart(hard)
 	if(typeof(sktR) == 'undefined') {
 		return;
 	}
-	
 	var getstring = toSkt(G_dictQuery);
 
     if(getstring == '') {
@@ -1478,7 +1477,7 @@ function sktRootsearchstart(hard)
 		}
 	}
 
-	$('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictEntry):toUni(G_dictEntry))+'</b>:<hr />');
+	$('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictQuery):toUni(G_dictQuery))+'</b>:<hr />');
 	
 	var outDiv = document.createElement('div');
 	

@@ -342,7 +342,7 @@ function sktRXML(no,add)
 	
 	// xml
 	
-	var file = 'etc/grammar/skt-roots/'+sktR[no]+'.htm';
+	var file = 'chrome://sanskrit/content/skt-roots/'+sktR[no]+'.htm';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", file, false);
 	xmlhttp.send(null);
