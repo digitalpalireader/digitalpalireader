@@ -1,4 +1,4 @@
-APP_NAME=digitalpalireader
+APP_NAME=DPRSanskrit
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
