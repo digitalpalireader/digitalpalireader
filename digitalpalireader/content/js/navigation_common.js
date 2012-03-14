@@ -546,10 +546,11 @@ function convertShortLink(place) {
 	
 	if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
 
-	if(/^dhpv[ .]*[0-9]+$/.test(place)) // dhp verses
+	if(/^dhpv[ .]*[0-9]+$/.test(place)) { // dhp verses
 		var dhpno = parseInt(place.replace(/[^0-9]/g,''));
 		var dp = dhpv[dhpno];
 		return ['k',1,0,0,dp[0],0,0,'m',dp[1]+1];
+	}
 	
 	if(/^[A-Za-z]+ {0,1}([\d]+)$/.test(place)) {
 
@@ -585,7 +586,8 @@ function convertShortLink(place) {
 			}
 		}
 	}
-	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.test(place)) return [false,'Syntax Error','yellow'];
+	if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.test(place)) 
+		return [false,'Syntax Error','yellow'];
 
 	place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 	
