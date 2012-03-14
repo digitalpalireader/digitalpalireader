@@ -14,6 +14,12 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 	G_lastcolour = 0; // reset colour changing
 
+	// remove sutta bolding
+	
+	if(!which && place[7] == 'm' && 'dmas'.indexOf(place[0]) >= 0) {
+		data = data.replace(/\^e*b\^/g, '');
+	}
+
 	var inarray = preparepali(data,which);
 		
 	var finout = inarray[0];
@@ -30,6 +36,8 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		var sutta = place[5];
 		var section = place[6]
 		var hier = place[7];
+
+
 
 		var transin;
 		var transout='';
