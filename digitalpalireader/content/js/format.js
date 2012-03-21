@@ -16,7 +16,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 	// remove sutta bolding
 	
-	if(!which && place[7] == 'm' && 'dmas'.indexOf(place[0]) >= 0) {
+	if(!which && place[7] == 'm' && ('dmas'.indexOf(place[0]) >= 0 || (place[0] == 'k' && parseInt(place[1]) < 15)) ) {
 		data = data.replace(/\^e*b\^/g, '');
 	}
 
@@ -448,6 +448,9 @@ function copyToClipboard(text) {
 var G_alertFlashStart = 0;
 
 function alertFlash(text,color) {
+	if(!$) // sidebar
+		return alert(text);
+	
 	G_alertFlashStart++; // give us an alert Id 
 	if(color) {
 		

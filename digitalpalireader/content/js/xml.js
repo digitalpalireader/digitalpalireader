@@ -113,7 +113,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			}
 		}
 		else
-			var query = querystring.split('+');
+			var query = toUni(querystring).split('+');
 	}
 
 	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
