@@ -7,6 +7,8 @@ var G_stopAnalyzing = 0;
 
 function outputAnalysis(input,frombox)
 {
+	var start = Date.now();  
+	
 	addJS(['ped','dppn','nameno','english','irreg','attlist','tiklist','titles']);
 	
 	//ddump('',1,1);
@@ -69,7 +71,20 @@ function outputAnalysis(input,frombox)
 	{
 		G_outwords.push([input,'0^' + input + '^3']);
 	}
+
+	var mid = Date.now();  
+	var elapsed = mid - start;
+
+	dump('analysis: '+elapsed+'\n');
+
 	outputDef(0,1,frombox); // perform the function in analysis_output.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
+
+	end = Date.now();  
+	elapsed = end - mid;
+
+	dump('output: '+elapsed+'\n');
+
+
 }
 
 

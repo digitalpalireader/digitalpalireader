@@ -424,6 +424,10 @@ var DPRSend = {
 
 
 	sendDict: function (hard,add,which,getstring,opts) {
+
+		var start = Date.now();  
+		var end, mid, elapsed;  
+
 		if(add == 'right') return;
 		if(!getstring) {
 			var getstring = document.getElementById('dictin').value;
@@ -432,7 +436,7 @@ var DPRSend = {
 				if (getstring == this.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || document.getElementById('soregexp').checked || document.getElementById('sofulltext').checked) return;
 			}
 			
-			this.G_lastsearch = this.value;
+			this.G_lastsearch = getstring;
 
 			var which = document.getElementById('dictType').value;
 			
@@ -450,10 +454,14 @@ var DPRSend = {
 			if(document.getElementById('sofulltext').checked) opts.push('ft');
 			if(document.getElementById('sostartword').checked) opts.push('sw');
 			if(hard) opts.push('hd');
-			saveDictHistory(getstring,which,opts.join(','));
+			
+			if(hard)
+				saveDictHistory(getstring,which,opts.join(','));
+
 		}
 		if (which == 'DPR') {
 			var text = toVel(getstring);
+
 			this.sendAnalysisToOutput(text,(hard ? 1 : 2),add);
 		}
 		else {
@@ -474,6 +482,8 @@ var DPRSend = {
 				DPRChrome.openDPRTab(permalink,'DPRd');
 			}
 		}
+
+
 
 	},
 
