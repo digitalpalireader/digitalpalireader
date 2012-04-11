@@ -7,16 +7,16 @@ function onLoad() {
 		
 		// get bottom stuff out first
 		
-		if(/analysis=/.test(link)) {
+		if(/analysis=[^&]/.test(link)) {
 			linkb.push(/(analysis=[^&]+)/.exec(link)[0]);
 		}
-		if(/ped=/.test(link)) {
+		if(/ped=[^&]/.test(link)) {
 			linkb.push(/(ped=[^&]+)/.exec(link)[0]);
 		}
-		if(/dppn=/.test(link)) {
+		if(/dppn=[^&]/.test(link)) {
 			linkb.push(/(dppn=[^&]+)/.exec(link)[0]);
 		}
-		if(/frombox=/.test(link)) {
+		if(/frombox=[^&]/.test(link)) {
 			linkb.push(/(frombox=[^&]+)/.exec(link)[0]);
 		}
 		if(linkb.length)

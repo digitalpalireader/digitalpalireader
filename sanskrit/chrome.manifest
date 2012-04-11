@@ -1,5 +1,3 @@
 content	sanskrit	content/
 locale	sanskrit	en-US	locale/en-US/
 skin	sanskrit	classic/1.0	skin/
-overlay	chrome://browser/content/browser.xul	chrome://sanskrit/content/firefoxOverlay.xul
-style chrome://global/content/customizeToolbar.xul	chrome://sanskrit/skin/overlay.css

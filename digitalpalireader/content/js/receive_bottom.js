@@ -11,7 +11,7 @@ function getLinkPlaceBottom() { // permalinks
 		option[1] = option[1].replace(/\%22/g,'"');
 		 
 		if(option[0] == 'analysis') {
-			outputAnalysis(option[1]);
+			outputAnalysis(option[1],null);
 			return;
 		}
 		if(option[0] == 'ped') {

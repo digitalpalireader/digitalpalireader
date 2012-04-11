@@ -1,4 +1,4 @@
- G_dictType = '';
+G_dictType = '';
 var G_dictQuery = '';
 var G_dictOpts = []; // 
 var G_dictEntry = '';

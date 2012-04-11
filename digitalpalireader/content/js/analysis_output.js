@@ -200,5 +200,5 @@ function reanalyze(word,cancel) {
 	}
 	
 	if($('#modify').val() != word)
-		outputAnalysis($('#modify').val());
+		outputAnalysis($('#modify').val(),null);
 }

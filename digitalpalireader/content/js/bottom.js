@@ -4,6 +4,12 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .rootTreeItem
 				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
+
+function abcd(a,b,c) {
+	alert([a,b,c]);
+}
+
+
 function onDocLoadx() {
 	//getconfig();
 	//openDPRSidebar();
@@ -46,9 +52,9 @@ function openBottomMenu() {
 
 // transfer functions
 
-function outputAnalysis(opt) {
+function outputAnalysis(opt1,opt2) {
 	moveFrame(1);
-	return document.getElementById('dict').contentWindow.outputAnalysis(opt);
+	return document.getElementById('dict').contentWindow.outputAnalysis(opt1,opt2);
 }
 function DPPNXML(opt) {
 	moveFrame(1);

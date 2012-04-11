@@ -143,16 +143,16 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		// remove bottom stuff
 		
 		var bparams = [];
-		if(/analysis=/.test(oldparams)) {
+		if(/analysis=[^&]/.test(oldparams)) {
 			bparams.push(/(analysis=[^&]+)/.exec(oldparams)[0]);
 		}
-		if(/ped=/.test(oldparams)) {
+		if(/ped=[^&]/.test(oldparams)) {
 			bparams.push(/(ped=[^&]+)/.exec(oldparams)[0]);
 		}
-		if(/dppn=/.test(oldparams)) {
+		if(/dppn=[^&]/.test(oldparams)) {
 			bparams.push(/(dppn=[^&]+)/.exec(oldparams)[0]);
 		}
-		if(/frombox=/.test(oldparams)) {
+		if(/frombox=[^&]/.test(oldparams)) {
 			bparams.push(/(frombox=[^&]+)/.exec(oldparams)[0]);
 		}
 		if(bparams.length)
