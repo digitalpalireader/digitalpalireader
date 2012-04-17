@@ -1167,7 +1167,6 @@ function atiSearchOffline(d, getstring) {
 	MD.getElementById('search-progress').setAttribute('value',val+1);
 		
 	var nikA = ['d','m','s','a','k'];
-
 	while (G_searchSet.indexOf(nikA[d]) == -1) {	
 		d++;
 		if(d == nikA.length) { // end
