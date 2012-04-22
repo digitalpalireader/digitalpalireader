@@ -79,6 +79,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 	
 	var altread = 0;
 	var altplus = '';	
+	var altplusf = '';	
 	var endpt = 0;
 	var unioutb = '';
 	var finout = '';
@@ -166,10 +167,24 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				//finout += '{'+altplus+'}' + space;
-				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="$(\'span\', this).show(); if($(\'span\', this).offset().left+$(\'span\', this).width() > $(window).width()){$(\'span\', this).offset({left:($(window).width()-$(\'span\', this).width()-30)})}" onmouseout="$(\'span\', this).hide()">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
-				saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
+				if(DPR_prefs['showVariantsInline']) {
+					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+					finout += altplusf + space;
+					b++;
+					saveout += ' <span class="varc">'+altplus+'</span>' + space;
+				}
+				else {
+					finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="$(\'span\', this).show(); if($(\'span\', this).offset().left+$(\'span\', this).width() > $(window).width()){$(\'span\', this).offset({left:($(window).width()-$(\'span\', this).width()-30)})}" onmouseout="$(\'span\', this).hide()">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
+					saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
+				}
 			}
-			else altplus += wb + ' ';
+			else {
+				altplus += wb + ' ';
+				if(DPR_prefs['showVariantsInline'] && which  != 1) {
+					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb) + '</span>' + space;
+					b++;
+				}
+			}
 		}
 		else if (wb.charAt(0) == '{') {
 			if (wb.charAt(wb.length-1) == '}') {
@@ -177,12 +192,23 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = translit(toUni(altplus));
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				//finout += '{'+altplus+'}' + space;
-				finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="this.getElementsByTagName(\'span\')[0].style.display=\'block\'" onmouseout="this.getElementsByTagName(\'span\')[0].style.display=\'none\'">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
-				saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
+				if(DPR_prefs['showVariantsInline']) {
+					finout += '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(altplus) + '</span>}' + space;
+					saveout += ' <span class="varc">'+altplus+'</span>' + space;
+					b++;
+				}
+				else {
+					finout += ' <span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" onmouseover="$(\'span\', this).show(); if($(\'span\', this).offset().left+$(\'span\', this).width() > $(window).width()){$(\'span\', this).offset({left:($(window).width()-$(\'span\', this).width()-30)})}" onmouseout="$(\'span\', this).hide()">VAR<span class="tiny var chromeback">'+altplus+'</span></span>' + space;
+					saveout += ' <span class="varc" title="'+altplus+'">VAR</span>' + space;
+				}
 			}
 			else {
 				altread = 1;
 				altplus = wb.substring(1) + space;
+				if(DPR_prefs['showVariantsInline'] && which  != 1) {
+					altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
+					b++;
+				}
 			}
 		}
 
@@ -324,6 +350,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			b++;
 		}
 	}
+	
 	finout = finout.replace(/<@>/g, '<b>');
 	finout = finout.replace(/<\/@>/g, '</b>');
 	finout = finout.replace(/ +([,;])/g, "$1");

@@ -34,7 +34,8 @@
   							<box orient="vertical">
 								<checkbox id="showPages" label="&pShowPages.label;" prefstring="Bool.showPages"/>
 								<checkbox id="showPagesFull" label="&showPagesFull.label;" prefstring="Bool.showPagesFull"/>
-								<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="Bool.showVariants"/>
+								<checkbox id="showVariants" label="&pShowVariants.label;" prefstring="Bool.showVariants" onclick="if(this.checked) document.getElementById('showVariantsInline').disabled = true;  else document.getElementById('showVariantsInline').disabled = false"/>
+								<checkbox id="showVariantsInline" label="&showVariantsInline.label;" prefstring="Bool.showVariantsInline"/>
 								<checkbox id="showPermalinks" label="&pShowPermalinks.label;" prefstring="Bool.showPermalinks"/>
 								<checkbox id="showNames" label="&pShowNames.label;" prefstring="Bool.showNames"/>
 								<checkbox id="showPedLinks" label="&pShowPedLinks.label;" prefstring="Bool.showPedLinks"/>

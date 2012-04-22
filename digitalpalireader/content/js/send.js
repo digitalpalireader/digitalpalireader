@@ -298,17 +298,26 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 	if(window.getSelection().toString()) 
 		return;
 	
-	if(divclicked) divclicked = 'W'+divclicked;
-	if (divclicked && document.getElementById(divclicked))
-	{
-		if (document.getElementById(G_lastcolour))
+	if(divclicked) {
+		divclicked = 'W'+divclicked;
+		var cdiv = document.getElementById(divclicked);
+
+		if (cdiv)
 		{
-			document.getElementById(G_lastcolour).style.color = DPR_prefs['coltext'];
-			document.getElementById(G_lastcolour).style.textDecoration = 'none';
+			var ldiv = document.getElementById(G_lastcolour);
+			if (ldiv)
+			{
+				var lcn = ldiv.className;
+				if(/varc/.test(lcn))
+					ldiv.style.color = DPR_prefs['grey'];
+				else
+					ldiv.style.color = DPR_prefs['coltext'];
+				ldiv.style.textDecoration = 'none';
+			}
+			cdiv.style.color = DPR_prefs['colsel'];
+			cdiv.style.textDecoration = 'underline';
+			G_lastcolour = divclicked;
 		}
-		document.getElementById(divclicked).style.color = DPR_prefs['colsel'];
-		document.getElementById(divclicked).style.textDecoration = 'underline';
-		G_lastcolour = divclicked;
 	}
 	if(add != true) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');

@@ -51,6 +51,7 @@ pref("extensions.digitalpalireader.Int.setRows", 7);
 pref("extensions.digitalpalireader.Bool.showPages", false);
 pref("extensions.digitalpalireader.Bool.showPagesFull", false);
 pref("extensions.digitalpalireader.Bool.showVariants", true);
+pref("extensions.digitalpalireader.Bool.showVariantsInline", false);
 pref("extensions.digitalpalireader.Bool.showPermalinks", true);
 pref("extensions.digitalpalireader.Bool.showNames", true);
 pref("extensions.digitalpalireader.Bool.showPedLinks", true);

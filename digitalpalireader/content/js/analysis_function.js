@@ -40,6 +40,8 @@ function outputAnalysis(input,frombox) {
 	input = input.replace(/\.$/g, "");
 	input = input.replace(/ .*/g, '');
 
+	input = input.replace(/[(\[\])]/g,"");
+
 	try {
 		var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);

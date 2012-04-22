@@ -93,6 +93,7 @@ DPR_prefsD['setRows'] = 7;
 DPR_prefsD['showPages'] = false;
 DPR_prefsD['showPagesFull'] = false;
 DPR_prefsD['showVariants'] = true;
+DPR_prefsD['showVariantsInline'] = true;
 DPR_prefsD['showPermalinks'] = true;
 DPR_prefsD['showNames'] = true;
 DPR_prefsD['showPedLinks'] = true;
