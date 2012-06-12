@@ -22,76 +22,112 @@ function convert(check)
 		return;
 	G_oldConvert = spell;
 
-	var Count = document.getElementById('cinform').selectedIndex
-	var Counta = document.getElementById('coutform').selectedIndex
+	var inScript = document.getElementById('cinform').selectedIndex
+	var outScript = document.getElementById('coutform').selectedIndex
 
-	if (Count == 0)
-	{
-		if (Counta == 1) // Unicode to velthius
-		{
-            spell = toVel(spell);
-		}
-		else if (Counta == 2) // Unicode to Thai
-		{
-			spell = toThai(spell);
-		}
-		else if (Counta == 3) // Unicode to Deva
-		{
-
-			spell = toDeva(spell);
-		}
-		else if (Counta == 4) // Unicode to Myan
-		{
-
-			spell = toMyanmar(spell);
-		}
-		else if (Counta == 5) // Unicode to Sinhala
-		{
-			spell = toSin(spell);
-		}			
+	switch(inScript) {
+		case 0:
+			switch(outScript) {
+				case 1:
+					spell = toVel(spell);
+					break;
+				case 2:
+					spell = toThai(spell);
+					break;
+				case 3:
+					spell = toDeva(spell);
+					break;
+				case 4:
+					spell = toMyanmar(spell);
+					break;
+				case 5:
+					spell = toSin(spell);
+					break;
+			}
+			break;
+		case 1:
+			spell = toUni(spell);
+			switch(outScript) {
+				case 0:
+					break;
+				case 2:
+					spell = toThai(spell);
+					break;
+				case 3:
+					spell = toDeva(spell);
+					break;
+				case 4:
+					spell = toMyanmar(spell);
+					break;
+				case 5:
+					spell = toSin(spell);
+					break;
+			}
+			break;
+		case 2: // from Thai
+			spell = fromThai(spell);
+			switch(outScript) {
+				case 0:
+					break;
+				case 1:
+					spell = toVel(spell);
+					break;
+				case 3:
+					spell = toDeva(spell);
+					break;
+				case 4:
+					spell = toMyanmar(spell);
+					break;
+				case 5:
+					spell = toSin(spell);
+					break;
+			}
+			break;
+		case 5: // from Sinhala
+			spell = fromSin(spell);
+			switch(outScript) {
+				case 0:
+					break;
+				case 1:
+					spell = toVel(spell);
+					break;
+				case 2:
+					spell = toThai(spell);
+					break;
+				case 3:
+					spell = toDeva(spell);
+					break;
+				case 4:
+					spell = toMyanmar(spell);
+					break;
+			}
+			break;
 	}
-	else if (Count == 1)
-	{
-		if (Counta == 0) // Velthius to unicode
-		{
-            spell = toUni(spell);
-		}
-		else if (Counta == 2) // Velthius to Thai
-		{
-			spell = toThai(toUni(spell));
-		}			
-		else if (Counta == 3) // Velthius to Deva
-		{
-			spell = toDeva(toUni(spell));
-		}			
-		else if (Counta == 4) // Velthius to Myan
-		{
-			spell = toMyanmar(toUni(spell));
-		}			
-		else if (Counta == 5) // Velthius to Sinhala
-		{
-			spell = toSin(toUni(spell));
-		}			
-	}
+
 	document.getElementById('coutput').value = spell;
 }
 
 
 
-function changeConversion(what,which)
+function changeConversion(inout)
 {
-	if (what == 0)
-	{
-		
-		if (which == 1 && document.getElementById('coutform').selectedIndex == 0) document.getElementById('coutform').selectedIndex = 1;
-		else if (which == 2 && document.getElementById('cinform').selectedIndex == 0) document.getElementById('cinform').selectedIndex = 1;
+	var ii = document.getElementById('cinform').selectedIndex;
+	var oi = document.getElementById('coutform').selectedIndex;
+	if(ii == oi) {
+		if(inout == 1) {
+			if(ii == 0)
+				document.getElementById('coutform').selectedIndex = 1;
+			else
+				document.getElementById('coutform').selectedIndex = 0;
+		}
+		else {
+			if(oi == 0)
+				document.getElementById('cinform').selectedIndex = 1;
+			else
+				document.getElementById('cinform').selectedIndex = 0;
+		}
 	}
-	else if (what == 1)
-	{
-		
-		if (which == 1 && document.getElementById('coutform').selectedIndex == 1) document.getElementById('coutform').selectedIndex = 0;
-		else if (which == 2 && document.getElementById('cinform').selectedIndex == 1) document.getElementById('cinform').selectedIndex = 0;
-	}
+
 	convert();
 }
 function clearboth()

@@ -46,14 +46,14 @@ function DdppnFixzz() {
 	var foa = [];
 	var fout = '';
 	for (i in Dna) {
-		if (nameda[i]) {
-			foa.push(i+'#[\''+nameda[i].concat(Dna[i]).join("','")+"'];\n");
+		if (D[i]) {
+			foa.push(i+'#[\''+D[i].concat(Dna[i]).join("','")+"'];\n");
 		}
 		else {
-			for (z in nameda) {
+			for (z in D) {
 				if(!/\./.exec(z)) continue;
 				if(z.replace(/\./g,'') == i.replace(/\./g,'')) {
-					foa.push(z+'#[\''+nameda[z].concat(Dna[i]).join("','")+"'];\n");
+					foa.push(z+'#[\''+D[z].concat(Dna[i]).join("','")+"'];\n");
 					yes = 1;
 					break;
 				}
@@ -64,7 +64,7 @@ function DdppnFixzz() {
 	foa = sortaz(foa);
 	for (q in foa) {
 		var y = foa[q].split('#');
-		fout += "nameda['"+y[0]+"'] = " + y[1];
+		fout += "D['"+y[0]+"'] = " + y[1];
 	}
 	devO(fout);	
 }
@@ -73,25 +73,25 @@ function DdppnFixa() {
 	var fout = '';
 	var listouta = [];
 	
-	for (d in nameda) {
+	for (d in D) {
 		var foa = [];
-		if(nameda[d].length == 1) {
-			fout+="nameda['"+d+"'] = ['" + nameda[d] +"'];\n"
+		if(D[d].length == 1) {
+			fout+="D['"+d+"'] = ['" + D[d] +"'];\n"
 			continue;
 		}
 		var sa = [];
-		for (e = 0; e < nameda[d].length; e++) {
+		for (e = 0; e < D[d].length; e++) {
 			var s = 0;
-			var sb = nameda[d][e].split('/');
-			for (f = 0; f < nameda[d].length; f++) {
+			var sb = D[d][e].split('/');
+			for (f = 0; f < D[d].length; f++) {
 				if (e == f) continue;
-				var sc = nameda[d][f].split('/');
+				var sc = D[d][f].split('/');
 				if(parseInt(sc[0]) < parseInt(sb[0]) || (parseInt(sc[0]) == parseInt(sb[0]) && parseInt(sc[1]) < parseInt(sb[1]))) s++; 
 			}
-			foa['a'+s] = nameda[d][e];
+			foa['a'+s] = D[d][e];
 		}
 		var t = 0;
-		fout+="nameda['"+d+"'] = [";
+		fout+="D['"+d+"'] = [";
 		for (i in foa) {
 			fout += "'" + foa['a'+(t++)] + "',"
 		}
@@ -101,11 +101,11 @@ function DdppnFixa() {
 	devO(fout);
 }
 
-function DdppnFixConcat() { // concat unlisted (namedad) with nameda
+function DdppnFixConcat() { // concat unlisted (Dd) with D
 	var fo = [];
-	for (i in namedad) {
-		if (nameda[i]) fo.push("nameda['"+i+"'] = ['"+nameda[i].join("','")+"','"+namedad[i][0]+"']; // joined");
-		else fo.push("nameda['"+i+"'] = ['"+namedad[i][0]+"']; // new");
+	for (i in Dd) {
+		if (D[i]) fo.push("D['"+i+"'] = ['"+D[i].join("','")+"','"+Dd[i][0]+"']; // joined");
+		else fo.push("D['"+i+"'] = ['"+Dd[i][0]+"']; // new");
 	}
 	devO(fo);
 }
@@ -116,9 +116,9 @@ function DdppnFixy() { // find unlisted entries
 	
 	var listouta = [];
 	
-	for (d in nameda) {
-		for(e in nameda[d]) {
-			dup[nameda[d][e]] = d;
+	for (d in D) {
+		for(e in D[d]) {
+			dup[D[d][e]] = d;
 		}
 	} 
 	
@@ -154,7 +154,7 @@ function DdppnFixy() { // find unlisted entries
 
 	for (q in foa) {
 		var y = foa[q].split('#');
-		fout += "nameda['"+y[0]+"'] = ['" + y[1] +"'];\n";
+		fout += "D['"+y[0]+"'] = ['" + y[1] +"'];\n";
 	}
 	devO(fout);
 }
@@ -168,13 +168,13 @@ function DdppnFixx() {
 			fout += "nameno['"+i+"'] = [''];\n";
 			continue;
 		}
-		if(nameda[x]) fout += "nameno['"+i+"'] = ['" + nameda[x].join("','") + "'];\n";
+		if(D[x]) fout += "nameno['"+i+"'] = ['" + D[x].join("','") + "'];\n";
 		else {
 			var yes = 0;
-			for (z in nameda) {
+			for (z in D) {
 				if(!/\./.exec(z)) continue;
 				if(toFuzzy(z) == toFuzzy(x)) {
-					fout += "nameno['"+i+"'] = ['" + nameda[z].join("','") + "'];\n";
+					fout += "nameno['"+i+"'] = ['" + D[z].join("','") + "'];\n";
 					yes = 1;
 					break;
 				}
@@ -228,7 +228,7 @@ function DdppnFix() {
 	
 	for (q in matchout) {
 		var y = matchout[q];
-		fout += "nameda['"+y+"'] = ['" + listouta[y].join("','") + "']; " + (nameda[y] ? '// '+nameda[y] : '') + "\n";
+		fout += "D['"+y+"'] = ['" + listouta[y].join("','") + "']; " + (D[y] ? '// '+D[y] : '') + "\n";
 	}
 	devO(fout);
 }
@@ -259,14 +259,14 @@ function Ddppn5() {
 	{
 		var y = DnameDa[x][0].replace(/, /g, ',').split(',');
 		for (z in y) {
-			finout +="nameda['"+toVel(y[z].replace(/[-(). ]/g,''))+"'] = '"+DnameDa[x][1]+"';\n"; 
+			finout +="D['"+toVel(y[z].replace(/[-(). ]/g,''))+"'] = '"+DnameDa[x][1]+"';\n"; 
 		}
 	}
 	devO(finout);
 	return;
 }
 
-function Ddppn4() {  // compare nameno with nameda
+function Ddppn4() {  // compare nameno with D
 	var matched = [];
 	var unmatched = [];
 	var w,x, y;
@@ -274,17 +274,17 @@ function Ddppn4() {  // compare nameno with nameda
 	for (i in dppng) {
 		 x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
 		 w = toVel(dppng[i][1].toLowerCase()).replace(/[ -]/g, '');
-		if (nameda[x]) {
+		if (D[x]) {
 			matched[dppng[i][0]+'^'+dppng[i][1]] = x;
 			continue out;
 		}
-		if (nameda[w]) {
+		if (D[w]) {
 			matched[dppng[i][0]+'^'+dppng[i][1]] = w;
 			continue out;
 		}
 		y = dppng[i][1].toLowerCase();
-		for (j in nameda) {
-			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0  || toFuzzy(j).indexOf(toFuzzy(w)) == 0 || nameda[j][0].indexOf(y) == 0) {
+		for (j in D) {
+			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0  || toFuzzy(j).indexOf(toFuzzy(w)) == 0 || D[j][0].indexOf(y) == 0) {
 				matched[dppng[i][0]+'^'+dppng[i][1]] = j;
 				continue out;
 			}
@@ -322,11 +322,11 @@ function Ddppn3() {
 	}
 //	alert(sorta.length);
 	var sorta2 = sortaz(sorta);
-	var out = 'var nameda = [];\n';
+	var out = 'var D = [];\n';
 	for (i in sorta2) {
 		var z = sorta2[i].split('^');
 		var j = z[1].split('#');
-		out +="nameda['"+z[0]+"'] = ['"+j[0]+"','"+j[1]+"'];\n";
+		out +="D['"+z[0]+"'] = ['"+j[0]+"','"+j[1]+"'];\n";
 	}
 	devO(out);
 }	
@@ -916,13 +916,13 @@ function DPPNcat() {
 	
 	var dataout = '';
 	var ma = [];
-	for (a in nameda) {
-		for (b in nameda[a]) {
-			var entry = nameda[a][b].split('/');
+	for (a in D) {
+		for (b in D[a]) {
+			var entry = D[a][b].split('/');
 			var i = parseInt(entry[0],10);
 			var j = parseInt(entry[1],10);
 			if(!ma[i]) ma[i] = [];
-			ma[i][j]=a+(nameda[a].length > 1?'^'+(parseInt(b)+1):'');
+			ma[i][j]=a+(D[a].length > 1?'^'+(parseInt(b)+1):'');
 		}
 	}
 	
@@ -1058,8 +1058,8 @@ function Dloaded() {
 
 	var x = [];
 
-	for (i in nameda) {
-		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+nameda[i]);
+	for (i in D) {
+		x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+D[i]);
 	}
 	var y = sortaz(x);
 			
@@ -1077,14 +1077,14 @@ function DloadFileAsXML() {
 function Dnda() {
 	var out = '';
 	var na = [];
-	for (i in nameda) {
-		var s = nameda[i].split('#');
+	for (i in D) {
+		var s = D[i].split('#');
 		var f = 1;
 		while(na[s[0]+'f'+f]) { f++; }
 		na[s[0]+'f' + f] = s[1];
 	}
 	for (j in na) {
-		out += "nameda['"+j+"'] = '"+na[j]+"';"; 
+		out += "D['"+j+"'] = '"+na[j]+"';"; 
 	}
 	document.getElementById('pad').innerHTML = out + '];';
 }
@@ -1096,8 +1096,8 @@ function DnameDa () {
 	var newda = [];
 	var noneda = [];
 	
-	for (i in nameda) {
-		var s = nameda[i].split('/');
+	for (i in D) {
+		var s = D[i].split('/');
 		var t = toUni(i.split('f')[0]);
 		var u = t.charAt(t.length-1);
 		
@@ -1116,7 +1116,7 @@ function DnameDa () {
 		var data = xmlDoc.getElementsByTagName('entry')[parseInt(s[1])].textContent.match(/\&lt;h2\&gt;[^&]*&lt;\/h2\&gt;/);
 		if(data) data = data[0].replace(/\&lt;\/*h2\&gt;/g,'');
 		else {
-			noneda.push(i+' // ' + nameda[i]);
+			noneda.push(i+' // ' + D[i]);
 			continue;
 		}
 		if(n.exec(data)) {
@@ -1129,7 +1129,7 @@ function DnameDa () {
 			newda.push(data);
 		}
 		else {
-			noneda.push(i+' // ' + nameda[i]);
+			noneda.push(i+' // ' + D[i]);
 		}
 		
 		devO('\n// old\n'+oldda.join('\n')+'\n// long\n'+longda.join('\n')+'\n// new\n'+newda.join('\n')+'\n// none\n'+noneda.join('\n'));
@@ -1159,7 +1159,7 @@ function DnameDa2 () {
 			var data = dataa[j].textContent.replace(/huge"\]/);
 			if(data) data = data[0].replace(/\&lt;\/*h2\&gt;/g,'');
 			else {
-				noneda.push(i+' // ' + nameda[i]);
+				noneda.push(i+' // ' + D[i]);
 				continue;
 			}
 			if(n.exec(data)) {
@@ -1172,7 +1172,7 @@ function DnameDa2 () {
 				newda.push(data);
 			}
 			else {
-				noneda.push(i+' // ' + nameda[i]);
+				noneda.push(i+' // ' + D[i]);
 			}
 		}
 	}
@@ -1237,9 +1237,9 @@ function Ddppnsearchstart(getstring)
 
 
 	if (dppn.length == 0) { 
-		for (a in nameda) { 
-			for (b in nameda[a]) {
-				dppn.push([a,nameda[a][b]]); 
+		for (a in D) { 
+			for (b in D[a]) {
+				dppn.push([a,D[a][b]]); 
 			} 
 		}
 	}
@@ -1292,33 +1292,47 @@ function DdppnReplace(ltr, id, ck) {
 function DdppnSave(terma,dup) {
 	var term = terma.replace(/x/g,'"')
 	var termn = toVel(document.getElementById('DevD'+terma).innerHTML.replace(/<[^>]*>/g, ''));
-	nameda[termn] = nameda[term];
-	if(!dup) delete nameda[term];
+	D[termn] = D[term];
+	if(!dup) delete D[term];
 	var sorta = [];
-	for (i in nameda) {
+	for (i in D) {
 		sorta.push(i);
 	}
 	var sorta2 = sortaz(sorta);
-	var outs = 'var nameda = [];\n\n';
+	var outs = 'var D = [];\n\n';
 	for (i in sorta2) {
 		var sa = sorta2[i];
-		outs+= 'nameda[\''+sa+'\'] = [\''+nameda[sa].join("','")+'\'];\n';
+		outs+= 'D[\''+sa+'\'] = [\''+D[sa].join("','")+'\'];\n';
 	}
 	document.getElementById('DevX'+terma).style.display = 'none';
 	devO(outs,1);
 }
-function DdppnSort() {
+function DdppnSortCSV() {
 	var sorta = [];
-	for (i in nameda) {
+	var outs = '';
+	for (i in D) {
 		sorta.push(i);
 	}
 	var sorta2 = sortaz(sorta);
-	var outs = 'var nameda = [];\n\n';
-	for (i in sorta2) {
-		var sa = sorta2[i];
-		outs+= 'nameda[\''+sa+'\'] = [\''+nameda[sa].join("','")+'\'];\n';
+	var count = 0;
+	for (var i = 0; i < sorta2.length; i++) {
+		var file = D[sorta2[i]];
+		for(var j = 0; j < file.length; j++) {
+			var num = file.length>1?'^'+(j+1):'';
+			//alert(file[j]);
+			var t = file[j].split('/');
+			var pedp = 'etc/XML2/'+ t[0] +'.xml';
+			var xmlhttp = new window.XMLHttpRequest();
+			xmlhttp.open("GET", pedp, false);
+			xmlhttp.send(null);
+			var xmlDoc = xmlhttp.responseXML.documentElement;
+			
+			var data = xmlDoc.getElementsByTagName('e')[t[1]].textContent;
+			outs+=(count++)+'|'+sorta2[i]+num+'|'+data+'\n';
+		} 
 	}
-	devO(outs,1);
+
+	writeToDesktop('dpr_dppn.csv', outs)
 }
 
 function DdppnShow(file,which) {
@@ -1329,7 +1343,7 @@ function DdppnShow(file,which) {
 			alert('Link not found');
 			return;
 		}
-		var ttmp = nameda[nameno[tloc[2]+','+filea[1]]][1].split('/');
+		var ttmp = D[nameno[tloc[2]+','+filea[1]]][1].split('/');
 		tloc[0] = 'dppn';
 		tloc[1] = ttmp[0];
 		tloc[2] = ttmp[1];
@@ -1848,8 +1862,9 @@ htm.DXMLThai('v',4,'m',[[4,0,null],[5,0,null]]);
 htm.DXMLThai('v',5,'m',[[6,0,null],[7,0,null]]);
 htm.DXMLThai('v',6,'m',[[8,0,null]]);
 htm.DXMLThai('d',1,'m',[[9,0,null]]);
+htm.DXMLThai('k',1,'m',[[25,0,14]]);
 
-thaibook [x][1] is last page to load
+thaibook [x][2] is last page to load
 
 */
 function DXMLThai(nikaya,book,hier,thaibook) {
@@ -2716,16 +2731,152 @@ function mwIndex() {
 	
 }
 
+function tipitakaDB() {
 
+//"_id", "volumn", "page", "items", "suts", "content"
 
+	var out = [],out2 = [],out3 = [],out4 = [];
+	var dup = [];
+	
+	var volume = 0;
+	var item = 0;
+	var vin = [], sut = [], abhi = [], etc = [];
+	vin['m'] = [];
+	vin['a'] = [];
+	vin['t'] = [];
+	sut['m'] = [];
+	sut['a'] = [];
+	sut['t'] = [];
+	abhi['m'] = [];
+	abhi['a'] = [];
+	abhi['t'] = [];
+	etc['m'] = [];
+	etc['a'] = [];
+	etc['t'] = [];
 
+	for (i in G_XMLFileArray) {
+		var nik = i.charAt(0);
+		if(nik!='d'&&nik!='m')
+			continue;
+		for (ii = 0; ii < 1; ii++) { // only mul!
+			pages = 0;
+			var name = [];
+			if(!G_XMLFileArray[i][ii]) continue;
+			var fi = i;
 
+			var xmlDoc = loadXMLFile(i+G_hLetters[ii],0);
 
+			name[0] = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+			
+			var u = xmlDoc.getElementsByTagName("h0");
+			
+			var iw = fi.charAt(0);
+			var ino = parseInt(fi.substring(1));		
+			
+			for (var sx = 0; sx < u.length; sx++) // per h0
+			{							
+				name[1] = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+				var v = u[sx].getElementsByTagName("h1");
+					
+				for (var sy = 0; sy < v.length; sy++) // per h1
+				{			
+					name[2] = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+					var w = v[sy].getElementsByTagName("h2");
+				
+					for (var sz = 0; sz < w.length; sz++) // per h2
+					{
+						name[3] = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+						var x = w[sz].getElementsByTagName("h3");
+						
+						for (var s = 0; s < x.length; s++) // per h3
+						{
+							name[4] = x[s].getElementsByTagName("h3n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+							var y = x[s].getElementsByTagName("h4");
+							
+							for (var se = 0; se < y.length; se++) // per h4
+							{
+								name[5] = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+								var z = y[se].getElementsByTagName("p");
+								var paras = [];
+								for (var p = 0; p < z.length; p++) { // per p
+									paras.push(z[p].textContent);
+								}
+								out.push([volume,item++,i,sx,sy,sz,s,se,p,paras.join('<br/><br/>'),pages,[name[1],name[2],name[3],name[4],name[5]]]);
+								//out4.push(name);
+								pages++;
+							}
+						}
+					}
+				}
+			}
+			//out2.push(name[0]);
+			//out3.push(pages);
+			switch(nik) {
+				case 'v':
+					vin[G_hLetters[ii]].push(volume);
+					break;
+				case 'd':
+				case 'm':
+				case 'a':
+				case 's':
+				case 'k':
+					sut[G_hLetters[ii]].push(volume);
+					break;
+				case 'y':
+					abhi[G_hLetters[ii]].push(volume);
+					break;
+				default:
+					etc[G_hLetters[ii]].push(volume);
+					break;
+			}
+			volume++;
+		}
+	}
+	
+	var outr = '',outr2 = '',outr3 = '';
+	for (var j = 0; j<out.length; j++) {
+		outr += out[j][1]+'|'+out[j][2]+'|'+out[j][3]+'|'+out[j][4]+'|'+out[j][5]+'|'+out[j][6]+'|'+out[j][7];
+		//outr += out[j][1]+'|'+out[j][0]+'|'+out[j][10]+'|'+(out[j][11].join('^'))+'|'+out[j][9]+'\n';
+		//outr2 += out[j][1]+'|'+out[j][0]+'|'+out[j][1]+'\n';
+	}
+	writeToDesktop('dpr_temp.csv', outr);
+	return;
+	//writeToDesktop('dpr_temp2.csv', outr2);
+	outr3 = 'vin:\nm\n';
+	outr3 += '<item>'+vin['m'].join('</item>\n<item>')+'</item>\na';
+	outr3 += '<item>'+vin['a'].join('</item>\n<item>')+'</item>\nt';
+	outr3 += '<item>'+vin['t'].join('</item>\n<item>')+'</item>';
+	outr3 += 'suttas:\nm\n';
+	outr3 += '<item>'+sut['m'].join('</item>\n<item>')+'</item>\na';
+	outr3 += '<item>'+sut['a'].join('</item>\n<item>')+'</item>\nt';
+	outr3 += '<item>'+sut['t'].join('</item>\n<item>')+'</item>';
+	outr3 += 'abhi:\nm\n';
+	outr3 += '<item>'+abhi['m'].join('</item>\n<item>')+'</item>\na';
+	outr3 += '<item>'+abhi['a'].join('</item>\n<item>')+'</item>\nt';
+	outr3 += '<item>'+abhi['t'].join('</item>\n<item>')+'</item>';
+	outr3 += 'etc:\nm\n';
+	outr3 += '<item>'+etc['m'].join('</item>\n<item>')+'</item>\na';
+	outr3 += '<item>'+etc['a'].join('</item>\n<item>')+'</item>\nt';
+	outr3 += '<item>'+etc['t'].join('</item>\n<item>')+'</item>';
+	outr3 += 'lengths:\n';
+	outr3 += 'vin:\nm\n';
+	outr3 += '<item>'+vin['m'].length+'</item>\na';
+	outr3 += '<item>'+vin['a'].length+'</item>\nt';
+	outr3 += '<item>'+vin['t'].length+'</item>';
+	outr3 += 'suttas:\nm\n';
+	outr3 += '<item>'+sut['m'].length+'</item>\na';
+	outr3 += '<item>'+sut['a'].length+'</item>\nt';
+	outr3 += '<item>'+sut['t'].length+'</item>';
+	outr3 += 'abhi:\nm\n';
+	outr3 += '<item>'+abhi['m'].length+'</item>\na';
+	outr3 += '<item>'+abhi['a'].length+'</item>\nt';
+	outr3 += '<item>'+abhi['t'].length+'</item>';
+	outr3 += 'etc:\nm\n';
+	outr3 += '<item>'+etc['m'].length+'</item>\na';
+	outr3 += '<item>'+etc['a'].length+'</item>\nt';
+	outr3 += '<item>'+etc['t'].length+'</item>';
 
-
-
-
-
-
-
-
+	//writeToDesktop('dpr_temp.xml', outr3);
+	//outr3 = '<item>" '+out2.join(' "</item>\n<item>" ')+' "</item>';
+	//writeToDesktop('xtip.xml', outr3);
+}

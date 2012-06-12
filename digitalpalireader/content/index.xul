@@ -41,9 +41,13 @@
 						<hbox>
 							<vbox pack="top">
 								<label value="From"/>
-								<listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,1)">
+								<listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(1)">
 									<listitem label="Unicode"/>
 									<listitem label="Velthuis" selected="true"/>
+									<listitem label="Thai"/>
+									<listitem label="Devanagari" disabled="true"/>
+									<listitem label="Myanmar" disabled="true"/>
+									<listitem label="Sinhala"/>
 								</listbox>
 							</vbox>
 							<vbox pack="center">
@@ -53,13 +57,13 @@
 							</vbox>
 							<vbox pack="top">
 								<label value="To"/>
-								<listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(this.selectedIndex,2)">
+								<listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(2)">
 									<listitem label="Unicode" selected="true"/>
 									<listitem label="Velthuis"/>
 									<listitem label="Thai"/>
 									<listitem label="Devanagari"/>
 									<listitem label="Myanmar"/>
-									<listitem label="Sinhalese"/>
+									<listitem label="Sinhala"/>
 								</listbox>
 							</vbox>
 						</hbox>
