@@ -71,8 +71,10 @@ function makeLocPlace(inplace) {
 		outplace = place;
 		outplace[8] = parseInt(outplace[8]);
 	}
-	else if (/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1}\.[0-9]+\.{0,1}[0-9]*$/.test(inplace)) { // shorthand
-		outplace = getSuttaFromNumber(place);
+	else { // shorthand
+		outplace = convertShortLink(inplace);
+		if(outplace[0] === false)
+			outplace = null;
 	}
 	return outplace;
 }

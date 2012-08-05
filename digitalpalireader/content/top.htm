@@ -95,16 +95,13 @@ function onDocLoad() {
 			if(!result) return;
 
 			var place = input.value;
-			outplace = convertShortLink(place);
 			
-			if(!outplace) return;
+			var outplace = convertShortLink(place);
+			if(outplace[0] === false) return alertFlash(outplace[1],outplace[2]);
+			//dalert(outplace);
 			
-			if(outplace[0] === false)
-				return alertFlash(outplace[1],outplace[2]);
-			
-			openPlace(outplace,null,null,check.value?check.value:'internal',G_compare);
-					
-			return; 
+			var para = outplace.pop();
+			openPlace(outplace,para);
 		} 
 		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
 
@@ -145,6 +142,7 @@ function moveFrame(idx) {
 <script language="JavaScript1.3" type="text/javascript" src="js/xml_load.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation_common.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/navigation.js"></script>
+<script language="JavaScript1.3" type="text/javascript" src="js/dhpv.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
 

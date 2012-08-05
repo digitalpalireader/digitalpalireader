@@ -11,6 +11,7 @@ function devMode(string) {
 		else eval(string);
 		return;
 	}
+	//devCommonWords();
 //document.textpad.pad.value = '';
 //DconvertMATtoReal();
 //DdppnSort();
@@ -2879,4 +2880,102 @@ function tipitakaDB() {
 	//writeToDesktop('dpr_temp.xml', outr3);
 	//outr3 = '<item>" '+out2.join(' "</item>\n<item>" ')+' "</item>';
 	//writeToDesktop('xtip.xml', outr3);
+}
+
+function devCommonWords() {
+
+	var out = [],out2 = [],out3 = [],out4 = [];
+	var dup = [];
+	
+	var volume = 0;
+	var item = 0;
+	var vin = [], sut = [], abhi = [], etc = [];
+	vin['m'] = [];
+	vin['a'] = [];
+	vin['t'] = [];
+	sut['m'] = [];
+	sut['a'] = [];
+	sut['t'] = [];
+	abhi['m'] = [];
+	abhi['a'] = [];
+	abhi['t'] = [];
+	etc['m'] = [];
+	etc['a'] = [];
+	etc['t'] = [];
+
+	var words = [];
+
+	for (i in G_XMLFileArray) {
+		var nik = i.charAt(0);
+		if(nik!='d'&&nik!='m')
+			continue;
+		for (ii = 0; ii < 3; ii++) { 
+			pages = 0;
+			var name = [];
+			if(!G_XMLFileArray[i][ii]) continue;
+			var fi = i;
+
+			var xmlDoc = loadXMLFile(i+G_hLetters[ii],0);
+
+			name[0] = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+			
+			var u = xmlDoc.getElementsByTagName("h0");
+			
+			var iw = fi.charAt(0);
+			var ino = parseInt(fi.substring(1));		
+			
+			for (var sx = 0; sx < u.length; sx++) // per h0
+			{							
+				name[1] = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+				var v = u[sx].getElementsByTagName("h1");
+					
+				for (var sy = 0; sy < v.length; sy++) // per h1
+				{			
+					name[2] = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+					var w = v[sy].getElementsByTagName("h2");
+				
+					for (var sz = 0; sz < w.length; sz++) // per h2
+					{
+						name[3] = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+						var x = w[sz].getElementsByTagName("h3");
+						
+						for (var s = 0; s < x.length; s++) // per h3
+						{
+							name[4] = x[s].getElementsByTagName("h3n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+							var y = x[s].getElementsByTagName("h4");
+							
+							for (var se = 0; se < y.length; se++) // per h4
+							{
+								name[5] = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+								var z = y[se].getElementsByTagName("p");
+								var paras = [];
+								for (var p = 0; p < z.length; p++) { // per p
+									var wl = toUni(toVel(z[p].textContent).toLowerCase().replace(/\.\.\.pe0\.\.\./g, ' pe ').replace(/\^b\^/g, '').replace(/\^eb\^/g, '').replace(/['’”"]+nti/g, '.m ti').replace(/([aiu])[aiu]['’”"]+ti\b/g, '$1 ti').replace(/"n/g, 'xn').replace(/[ .]+pe[ .]+/g, ' ').replace(/\^[be]b{0,1}\^/g, ' ').replace(/\^a\^[^^]*\^ea\^/g, ' ').replace(/\{[^}]*\}/g, ' ').replace(/[0-9\[\]()]/g, ' ').replace(/\.+([^nmltd])/g, "$1").replace(/ "/g, " ").replace(/n[’”]/g, ".m").replace(/([aiu])[aiu][’”]/g, "$1").replace(/[‘“’”`',{}?;!"-]/g, '').replace(/xn/g, '"n').replace(/\.+pe/g, "").replace(/\.(?![tdnml])/g, " ")).replace(G_uniRegExpNSG," ").split(' ');
+
+									for (var q = 0; q < wl.length; q++) { // per word
+										if(wl[q].length < 3)
+											continue;
+										if(typeof(words[wl[q]]) == 'number')
+											words[wl[q]]++;
+										else
+											words[wl[q]] = 1;
+									}
+								}
+
+							}
+						}
+					}
+				}
+			}
+
+		}
+	}
+	var outr = '';
+	for (var j in words) {
+		if(words[j] < 3)
+			continue;
+		words[j] = Math.ceil(words[j] / 11078 * 255); // 11078 is kho, highest
+		outr += words[j] + " " + j + "\n";
+	}
+	writeToDesktop('dpr_temp.csv', outr);	
 }

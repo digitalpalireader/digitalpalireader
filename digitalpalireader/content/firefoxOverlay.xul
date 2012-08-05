@@ -110,6 +110,9 @@
 	<menupopup id="menu_ToolsPopup">
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
 	</menupopup>
+	<menupopup id="appmenu-popup">
+		<menuitem id="appmenu_dpr" command="viewDPR" label="DPR"/>
+	</menupopup>
 	<toolbarpalette  id="BrowserToolbarPalette">
 		<toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
 	</toolbarpalette>
@@ -126,20 +129,19 @@
 		</statusbarpanel>
 	</statusbar>
   
-  <keyset id="mainKeyset">
-	<key id="key_openDPR" command="viewDPR"
-		 key="&openDPR.commandkey;" 
-		 modifiers="&openDPR.modifierskey;" />
-  </keyset>
-  
-  <broadcasterset id="mainBroadcasterSet"> 
-	<broadcaster id="viewDPR" 
-				 label="&digitalpalireader.title;"
-				 autoCheck="false"
-				 type="checkbox"
-				 group="sidebar"
-				 sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
-				 sidebartitle="&digitalpalireader.title;"
-				 oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
-  </broadcasterset>
+	<keyset id="mainKeyset">
+		<key id="key_openDPR" command="viewDPR"
+			key="&openDPR.commandkey;" 
+			modifiers="&openDPR.modifierskey;" />
+	</keyset>
+	<broadcasterset id="mainBroadcasterSet"> 
+		<broadcaster id="viewDPR" 
+			label="&digitalpalireader.title;"
+			autoCheck="false"
+			type="checkbox"
+			group="sidebar"
+			sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
+			sidebartitle="&digitalpalireader.title;"
+			oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
+	</broadcasterset>
 </overlay>

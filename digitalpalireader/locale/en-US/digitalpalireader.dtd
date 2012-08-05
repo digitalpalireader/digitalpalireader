@@ -3,7 +3,7 @@
 <!ENTITY quiz.title "DPR Quiz">
 <!ENTITY HTML.title "DPR Resources">
 <!ENTITY openDPR.commandkey "D">
-<!ENTITY openDPR.modifierskey "control shift">
+<!ENTITY openDPR.modifierskey "alt shift">
 
 <!-- Sidebar -->
 

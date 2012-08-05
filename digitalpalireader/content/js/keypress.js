@@ -89,7 +89,6 @@ function keyPressed(e) {
 	} 
 	
 	if (e.charCode == 113) { // q
-
 		var check = {value: false};                  // default the checkbox to false
 
 		var input = {value: ""};           
@@ -102,14 +101,10 @@ function keyPressed(e) {
 
 		var place = input.value;
 		
-		if(!/^[DMASKdmask][Nn]-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.exec(place)) return alertFlash('Syntax Error','yellow');
-		
-		place = place.replace(/^([DMASKdmask][Nn]-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
-		
-		var outplace = getSuttaFromNumber(place.split(','));
-		if(!outplace) return alertFlash('Link not found','yellow');
-		//dalert(outplace);
-		openPlace(outplace);
+		var outplace = convertShortLink(place);
+		if(outplace[0] === false) return alertFlash(outplace[1],outplace[2]);
+		var para = outplace.pop();
+		openPlace(outplace,para);
 				
 		return; 
 	} 

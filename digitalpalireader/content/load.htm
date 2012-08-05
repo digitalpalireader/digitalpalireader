@@ -9,6 +9,13 @@
 function onDocLoad() {
 	var url = document.location.href.replace(/^dpr:/,'');
 	var urla = url.split('?');
+	
+	// quick links
+	if(urla.length == 1) {
+		document.location.href='chrome://digitalpalireader/content/index.xul?loc='+urla[0];
+		return;
+	}
+		
 	var params = urla[1]?'?'+urla[1]:'';
 	switch (urla[0]) {
 		case 'index':
