@@ -110,11 +110,12 @@
 	<menupopup id="menu_ToolsPopup">
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
 	</menupopup>
-	<menupopup id="appmenu-popup">
-		<menuitem id="appmenu_dpr" command="viewDPR" label="DPR"/>
-	</menupopup>
+	<vbox id="appmenuSecondaryPane">
+		<spacer id="appmenuSecondaryPane-spacer-dpr" height="10"/>
+		<menuitem id="appmenu_dpr" command="viewDPR" key="key_openDPR" label="Digital Pali Reader" class="menuitem-iconic menuitem-iconic-tooltip"/>
+	</vbox>
 	<toolbarpalette  id="BrowserToolbarPalette">
-		<toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR"/>
+		<toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR - Alt+Shift+D" key="key_openDPR"/>
 	</toolbarpalette>
 	<statusbar id="status-bar">
 		<statusbarpanel id="DPRStatusBar" 

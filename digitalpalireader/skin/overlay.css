@@ -1,4 +1,4 @@
-#dpr-button {
+#dpr-button,#appmenu_dpr {
   list-style-image: url("chrome://digitalpalireader/content/images/logo24.png");
 }
 toolbar[iconsize="small"] #dpr-button {
@@ -6,4 +6,7 @@ toolbar[iconsize="small"] #dpr-button {
 }
 #dpr-context, #dpr-sub-context {
   list-style-image: url("chrome://digitalpalireader/content/images/logo.png");
+}
+#appmenuSecondaryPane-spacer-dpr {
+	min-height: 1em;
 }
