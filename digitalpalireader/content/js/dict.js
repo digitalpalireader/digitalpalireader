@@ -158,10 +158,10 @@ function pedsearchstart(hard)
 
 	for (pedt in P)
 	{
-		if(/fz/.exec(G_dictOpts)) {
-			pedt = toFuzzy(pedt);
-		}
 		var totest = pedt;
+		if(/fz/.exec(G_dictOpts)) {
+			totest = toFuzzy(totest);
+		}
 		if(G_dictUnicode) totest = toUni(totest);
 
 		if (/rx/.exec(G_dictOpts)) { // reg exp

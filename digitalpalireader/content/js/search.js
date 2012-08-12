@@ -619,12 +619,12 @@ function createTables(xmlDoc,hiert)
 	}
 	else {
 		stringra[0] = getstring;
-		if(G_searchRX) getstring = new RegExp(toUniRegEx(getstring));
+		if(G_searchRX) getstring = toUniRegEx(getstring);
 		else getstring = toUni(getstring);
 	}
 	var sraout = stringra.join('#');
 	sraout = sraout.replace(/"/g, '`');
-	if(G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
+	//if(G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
 	
 	var part;
 	if(G_searchPart != '1') part = G_searchPart.split('.');
@@ -701,10 +701,12 @@ function createTables(xmlDoc,hiert)
 								for (d = 0; d < stringra.length; d++)
 								{
 									perstring = stringra[d];
-									if(G_searchRX) perstring = new RegExp(perstring);
-
-									if(G_searchRX) startmatch = texttomatch.search(perstring);
-									else startmatch = texttomatch.indexOf(perstring)
+									
+									if(G_searchRX)
+										startmatch = findRegEx(texttomatch,perstring);
+									else 
+										startmatch = texttomatch.indexOf(perstring)
+										
 									postpara = '';
 									tempexword[d] = [];
 									if (startmatch >= 0) 
@@ -738,7 +740,7 @@ function createTables(xmlDoc,hiert)
 											else postpara += beforem+gotstring;
 											
 											texttomatch = texttomatch.substring(endmatch);
-											if(G_searchRX) startmatch = texttomatch.search(perstring);
+											if(G_searchRX) startmatch = findRegEx(texttomatch,perstring);
 											else startmatch = texttomatch.indexOf(perstring)
 
 										}
@@ -785,7 +787,7 @@ function createTables(xmlDoc,hiert)
 												}
 											texnodups[t].push(tempexword[t][i]);
 										}
-										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x') + 'q');
+										tagtitle += ('q' + texnodups[t].join('q').replace(/\"/g, 'x') + 'q').replace(/ +/g,'_');
 									}
 									for(var t=0; t<texnodups.length; t++) {
 										if(!exword[t]) exword[t] = [];
@@ -832,7 +834,7 @@ function createTables(xmlDoc,hiert)
 								
 								tempexword = [];
 
-								if(G_searchRX) startmatch = texttomatch.search(getstring);
+								if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
 								else startmatch = texttomatch.indexOf(getstring)
 								postpara = '';
 								if (startmatch >= 0)
@@ -852,7 +854,7 @@ function createTables(xmlDoc,hiert)
 										postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
 										texttomatch = texttomatch.substring(endmatch);
 										
-										if(G_searchRX) startmatch = texttomatch.search(getstring);
+										if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
 										else startmatch = texttomatch.indexOf(getstring)
 										
 										// get words
@@ -913,7 +915,7 @@ function createTables(xmlDoc,hiert)
 										texnodups.push(tempexword[i]);
 									}
 									tagtitle = 'q' + texnodups.join('q') + 'q';
-									tagtitle = tagtitle.replace(/\"/g, 'x');
+									tagtitle = tagtitle.replace(/\"/g, 'x').replace(/ +/g,'_');
 
 									exword = exword.concat(texnodups);
 									
@@ -1065,6 +1067,7 @@ function showonly(string) {
 		scrollToId('search',0);
 	}
 	else {	
+		string = string.replace(/ +/g,'_')
 		for (x = 0; x < da.length; x++) {
 			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
@@ -1283,4 +1286,14 @@ function atiSearchOffline(d, getstring) {
 	}
 
 	setTimeout(function () { atiSearchOffline(d,getstring) }, 10);
+}
+
+function findRegEx(text,string) {
+	rstring = new RegExp(toUniRegEx(string));
+	bstring = new RegExp(toUniRegEx(string.replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)")));
+	match = text.search(rstring);
+	if(match > -1 && string.indexOf("\\b") > -1 && (text.search(bstring) == -1 || text.search(bstring) > match)) {
+		match = -1;
+	}
+	return match
 }

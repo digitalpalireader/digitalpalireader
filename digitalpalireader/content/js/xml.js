@@ -83,20 +83,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	var yna = (yn[0].childNodes[0] ? yn[0].textContent : ' ');
 	var zna = (zn[0].childNodes[0] ? zn[0].textContent : ' ');
 
-// tab title
-
-	if (zna.length > 1) { var bknameme = zna }
-	else if (yna.length > 1) { var bknameme  = yna }
-	else if (xna.length > 1) { var bknameme  = xna }
-	else if (wna.length > 1) { var bknameme  = wna }
-	else if (vna.length > 1) { var bknameme  = vna }
-	else bknameme = '';
-	
-	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
-	
-	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
-	setCurrentTitle(tabT);
-
 // permalink
 
 	var permalink = 'dpr:index?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
@@ -123,9 +109,9 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 	var newparams = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
-	if(querystring)
+	if(querystring) {
 		newparams += '&query='+querystring;
-
+	}
 	if(para)
 		newparams += '&para='+para;
 
@@ -166,8 +152,26 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		oldparams[compare-1] = newparams;
 		newparams = oldparams.join('|')+bparams;
 	}
+	
 	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
 	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
+
+	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');
+
+// tab title
+
+	if (zna.length > 1) { var bknameme = zna }
+	else if (yna.length > 1) { var bknameme  = yna }
+	else if (xna.length > 1) { var bknameme  = xna }
+	else if (wna.length > 1) { var bknameme  = wna }
+	else if (vna.length > 1) { var bknameme  = vna }
+	else var bknameme = '';
+	
+	bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
+	
+	var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+	setCurrentTitle(tabT);
+
 
 // toolbars
 
@@ -302,7 +306,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 	
-	makeToolbox(main,aux,true,true,true);
+	makeToolbox(main,aux,titleout[2],true,true,true);
 
 	// paragraph range
 	if(para) {
@@ -316,10 +320,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			G_thisPara = opara;
 		}
 	}
-
-	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');
-
-
 
 // output header
 	

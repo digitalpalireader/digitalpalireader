@@ -414,10 +414,9 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 		}
 	}
 	
-	var title = '';
-	var save = '';
+	var title = '',save = '',raw = '';
 	
-	for (i in namea) {
+	for (i=0; i < namea.length;i++) {
 		var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
 		
 		if (thisname.length <2 )
@@ -437,9 +436,10 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 		var onet = '<b style="color:'+DPR_prefs[col[w++]]+'">' + translit(toUni(thisname)) + '</b>';
 		title += (click?wrapLink(onet,click):onet) + (namen[i] ? namen[i] :'');
 		save += '<h'+w+'>'+thisname+'</h'+w+'>';
+		raw += thisname+(i < namea.length-1?"<br/>":"");
 	}
 	
-	return [title,save];
+	return [title,save,raw];
 }
 
 
@@ -558,7 +558,7 @@ function clearDivs(which) { // place divs to be cleared here
 	}
 }
 
-function makeToolbox(main,aux,conv,ex,save,trans) {
+function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if(main === false) {
 		$('#tbContainer').html('');
 		$('#tbContainer').hide();
@@ -568,7 +568,7 @@ function makeToolbox(main,aux,conv,ex,save,trans) {
 	
 	var but = ['l','m','r'];
 	var bn = 0;
-	var pre = '';
+	var pre = '<div class="tiny tbtitle">'+title+'</div><hr style="margin-bottom:10px"/>';
 	if(conv) {
 		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span>';
 	}

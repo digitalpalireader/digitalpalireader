@@ -111,7 +111,7 @@
 		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
 	</menupopup>
 	<vbox id="appmenuSecondaryPane">
-		<spacer id="appmenuSecondaryPane-spacer-dpr" height="10"/>
+		<spacer id="appmenuSecondaryPane-spacer-dpr"/>
 		<menuitem id="appmenu_dpr" command="viewDPR" key="key_openDPR" label="Digital Pali Reader" class="menuitem-iconic menuitem-iconic-tooltip"/>
 	</vbox>
 	<toolbarpalette  id="BrowserToolbarPalette">

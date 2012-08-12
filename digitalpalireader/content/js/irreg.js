@@ -1595,3 +1595,4 @@ G_irregDec['khiyyati'] = ['khiiyati','V'];
 G_irregDec['sandiiyati'] = ['sandiyyati','V']; 
 G_irregDec['pa.tiggaheti'] = ['pa.tigga.nhaati','V']; 
 G_irregDec['pa.tisa.mvedayati'] = ['pa.tisa.mvedeti','V'];
+G_irregDec['potheti'] = ['po.theti','V'];
