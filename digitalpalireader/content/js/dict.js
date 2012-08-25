@@ -86,7 +86,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	$('#difb').html('');
-	$('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+	$('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + toUni(G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + toUni(G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 	
 	G_dictQuery = G_dictQuery.toLowerCase();
 	

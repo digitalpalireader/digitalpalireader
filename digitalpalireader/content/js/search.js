@@ -119,7 +119,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	
 	MD.getElementById('DPR').setAttribute('title',tabT);
 
-	if (/^[tpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
+	if (/^[TPVMtpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
 		G_searchString = G_searchString.toUpperCase();
 	}
 	else if(G_searchType != 5) {
