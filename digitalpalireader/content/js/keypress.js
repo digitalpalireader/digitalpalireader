@@ -68,7 +68,7 @@ function keyPressed(e) {
 	if (e.charCode == 33) { eraseOptions(); return; } // !
 	if (e.charCode == 35) { newquiz(); return; } // #
 	if (e.charCode == 37) { loadOptions(); return; } // %
-	if (e.charCode == 42) { bv(); return; } // *
+	if (e.charCode == 42) { bvAlert(bv()); return; } // *
 	if (e.charCode == 63) { helpXML(); return; } // ?
 
 	if (e.charCode == 44) { // ,

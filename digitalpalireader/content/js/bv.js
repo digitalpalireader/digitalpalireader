@@ -30,10 +30,10 @@ function bv(rnd,static) {
 		else if (ps[i].className == 'citation') {
 			if(ps[i].getElementsByTagName('a')[0])
 				link = ps[i].getElementsByTagName('a')[0].href;
-			cite = ps[i].innerHTML;
+			cite = ps[i].getElementsByTagName('a')[0].innerHTML;
 		}
 	}
-	return [head,text,cite,link];
+	return [head,text,cite,link,no];
 }
 
 function showBv(rnd) {
@@ -89,4 +89,20 @@ function eventSend(event,internal) {
 	if(event.which == 1 && internal) return 'internal';
 	if (event.which == 1) return false;
 	return 'right';
+}
+
+function bvAlert(bva) {
+	var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+		.getService(Components.interfaces.nsIPromptService); 
+	
+	var check = {value: false};	// default the checkbox to false 
+	
+	var flags = prompts.BUTTON_POS_0 * prompts.BUTTON_TITLE_IS_STRING 
+		+ prompts.BUTTON_POS_1 * prompts.BUTTON_TITLE_IS_STRING;
+	
+	var button = prompts.confirmEx(null, "Buddhavacana Passage #"+bva[4], bva[1].join('\n').replace(/<br[^>]*>/g,'').replace(/[\t ]+/g,' ').replace(/\n +\n/g,'\n')+'\n\n-- '+bva[2],
+	flags, "Go", "Close", "", null, check); 
+	
+	if(button == 0)
+		openDPRTab(bva[3],"DPR-main",true);
 }

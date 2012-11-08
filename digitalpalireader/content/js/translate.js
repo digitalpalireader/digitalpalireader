@@ -891,11 +891,22 @@ function addPhrasePreps(words,i,type,alts) {
 			joined += (j>0?' ':'')+words[j];
 		}
 		else {
-			if(type === null)
+			if(typeof(type) == "undefined")
 				 type = words[j][1];
-			if(i === null)
+			if(type == 'p')
+				type = 'n';
+				
+			if(typeof(i) == "undefined") {
+				if(words[j][2] == null) {
+					joined += words[j][0];
+					continue;
+				}
 				i = words[j][2][1]-1;
+			}
+				
 			if(j == 0) {
+				if(G_joints[type] == null)
+					return words[j][3];
 				joined += (G_joints[type][i]?G_joints[type][i]+' ':'');
 			}
 			if(j > 0)

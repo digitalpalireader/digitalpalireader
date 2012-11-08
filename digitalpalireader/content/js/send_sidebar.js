@@ -619,10 +619,6 @@ var DPRSend = {
 		}
 		return true;
 	},
-
-	bvAlert:function() {
-		var abv = bv(true);DPRChrome.promptData('Random Buddha Vacana Quote', abv[0]+(abv[1]?'\n\n'+abv[1]:''));
-	},
 	
 	createBrowser:function(thisDocument,url,count){
 		var browser = thisDocument.createElement('browser');

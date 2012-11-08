@@ -55,6 +55,7 @@ function paliXML(filein,which,add)
 	
 	var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 	
+	data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>"); 
 	
 	if(DPR_prefs['showPedLinks']) {
 	

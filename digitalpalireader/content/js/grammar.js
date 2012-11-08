@@ -500,35 +500,40 @@ function conjugateWord(word,form) {
 		return;
 	if(yt[toVel(word)])
 		return conjugate(word,null,form);
-	else if(form){
-		var oneConj = getConjugation(form);
-		return oneConj?oneConj:null;
+	
+	if(form)
+		var oneConj = formatConjugation(form);
+	else
+		var oneConj = formatConjugation(word);
+
+	return oneConj?oneConj:null;
+}
+
+function formatConjugation(word) {
+	var oneConj = getConjugation(word);
+	if(oneConj !== null)
+	{
+		var out = "";
+		for(var i = 0; i < oneConj.length; i++) {
+			out += '<li><span class="decl-grammar">'+oneConj[i][0]+' form of '+oneConj[i][1]+'</span><br/><span class="decl-english">'+oneConj[i][2]+'</span></li>';
+		}
+		if(out.length > 0) {
+			out = '<ol>' + out + '</ol>';
+			return out;
+		}
 	}
-	else {
-		var oneConj = getConjugation(word);
-		return oneConj?oneConj:null;
-	}
+	return null;
 }
 
 //[trans,type,deca,word,meta];
 
-function getConjugation(form) {
-	var word = translateWord(form);
-	var out = '';
-	if(word.length > 1) {
-		for(i in word) {
-			var grammar = makeGrammarTerms(word[i]);
-			var trans = addPhrasePreps([word[i]]);
-			if(grammar)
-				out += '<li><span class="decl-grammar">'+grammar+' form of '+word[i][4]['orig']+'</span><br/><span class="decl-english">'+trans+'</span></li>';
-		}
-		if(out) out = '<ol>' + out + '</ol>';
-	}
-	else { 
-		var grammar = makeGrammarTerms(word[0]);
-		var trans = addPhrasePreps([word[0]]);
-		if(grammar)
-			out = '<span class="decl-grammar">'+grammar+' form of '+word[0][4]['orig']+'</span><br/><span class="decl-english">'+word[0][0]+'</span>';
+function getConjugation(form,bare) {
+	var word = translateWord(form,0);
+	var out = [];
+	for(var i = 0; i < word.length; i++) {
+		var grammar = makeGrammarTerms(word[i]);
+		var trans = bare?word[i][0]:addPhrasePreps([word[i]]);
+		out.push([grammar,word[i][4]['orig'],trans]);
 	}
 	return out;
 }
@@ -536,10 +541,11 @@ function getConjugation(form) {
 function makeGrammarTerms([trans,type,deca,word,meta]) {
 	switch(type) {
 		case 'n':
+			return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':G_vibhatti[deca[1]]+' '+G_vacana[deca[2]]);
 		case 'p':
-			return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+G_vibhatti[deca[1]]+' '+G_vacana[deca[2]];
+			return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':G_vibhatti[deca[1]]+' '+G_vacana[deca[2]]);
 		case 'v':
-			return '(v.) '+G_tenses[deca[0]]+' '+G_persons[deca[1]]+' person '+G_vacana[deca[2]];
+			return '(v.) '+(deca == null?'indeclinable':G_tenses[deca[0]]+' '+G_persons[deca[1]]+' person '+G_vacana[deca[2]]);
 		default:
 			return (yt[meta['orig']]?yt[meta['orig']][1]:'');
 	}
@@ -563,3 +569,20 @@ G_persons = ['','3rd','2nd','1st'];
 G_vibhatti = ['','nominative','accusative','instrumental','dative','ablative','genitive','locative','vocative'];
 G_vacana = ['','singular','plural'];
 G_tenses = ['','present','imperative','optative','future','past','causative'];
+
+
+// used in word-by-word translation
+
+function conjugateWords(input) {
+	var ina = input.split(' ');
+	var outa = [];
+	for(var i = 0; i < ina.length; i++) {
+		var word = getConjugation(ina[i],true);
+		if(typeof(word[0]) != 'undefined')
+			word[0].push(ina[i]); // add form
+		else
+			word[0] = ['','','',ina[i]];
+		outa.push(word);
+	}
+	return outa;
+}

@@ -16,24 +16,24 @@
 			class="menu-iconic" 
 			label="DPR">
 			<menupopup>
+				<menuitem label="Convert to Unicode" 
+					oncommand="DPROverlay.rightClick('Cv','u');"/>  
+				<menuitem label="Convert to Velthuis" 
+					oncommand="DPROverlay.rightClick('Cv','v');"/>  
 				<menu id="dpr-conv-context"
-					label="Convert">
+					label="Convert to...">
 					<menupopup>
-						<menuitem label="to Unicode" 
-							oncommand="DPROverlay.rightClick('Cv','u');"/>  
-						<menuitem label="to Velthuis" 
-							oncommand="DPROverlay.rightClick('Cv','v');"/>  
-						<menuseparator/>
-						<menuitem label="to Devanagari" 
+						<menuitem label="Devanagari" 
 							oncommand="DPROverlay.rightClick('Cv','d');"/>  
-						<menuitem label="to Myanmar" 
+						<menuitem label="Myanmar" 
 							oncommand="DPROverlay.rightClick('Cv','m');"/>  
-						<menuitem label="to Sinhala" 
+						<menuitem label="Sinhala" 
 							oncommand="DPROverlay.rightClick('Cv','s');"/>  
-						<menuitem label="to Thai" 
+						<menuitem label="Thai" 
 							oncommand="DPROverlay.rightClick('Cv','t');"/>  
 					</menupopup> 
 				</menu>
+				<menuseparator/>
 <!--
 				<menu label="Send">
 					<menupopup>

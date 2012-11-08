@@ -617,4 +617,131 @@ var DPRTranslit = {
 		return output;
 	},	
 
+	fromThai: function(input) {
+
+		output = input.replace(/([อกขคฆงจฉชฌญฏฐฑฒณตถทธนปผพภมยรลฬวสห])(?!ฺ)/g, "$1a").replace(/([เโ])([อกขคฆงจฉชฌญฏฐฑฒณตถทธนปผพภมยรลฬวสหฺฺ]+a)/g, "$2$1").replace(/[a]([าิีึุูเโ])/g, "$1").replace(/ฺ/g, "");
+		
+		output = output.replace(/อ/g,'').replace(/า/g,'ā').replace(/ิ/g,'i').replace(/ี/g,'ī').replace(/ึ/g,'iṃ').replace(/ุ/g,'u').replace(/ู/g,'ū').replace(/เ/g,'e').replace(/โ/g,'o').replace(/ํ/g,'ṃ').replace(/ก/g,'k').replace(/ข/g,'kh').replace(/ค/g,'g').replace(/ฆ/g,'gh').replace(/ง/g,'ṅ').replace(/จ/g,'c').replace(/ฉ/g,'ch').replace(/ช/g,'j').replace(/ฌ/g,'jh').replace(//g,'ñ').replace(/ญ/g,'ñ').replace(/ฏ/g,'ṭ').replace(//g,'ṭh').replace(/ฐ/g,'ṭh').replace(/ฑ/g,'ḍ').replace(/ฒ/g,'ḍh').replace(/ณ/g,'ṇ').replace(/ต/g,'t').replace(/ถ/g,'th').replace(/ท/g,'d').replace(/ธ/g,'dh').replace(/น/g,'n').replace(/ป/g,'p').replace(/ผ/g,'ph').replace(/พ/g,'b').replace(/ภ/g,'bh').replace(/ม/g,'m').replace(/ย/g,'y').replace(/ร/g,'r').replace(/ล/g,'l').replace(/ฬ/g,'ḷ').replace(/ว/g,'v').replace(/ส/g,'s').replace(/ห/g,'h').replace(/๐/g,'0').replace(/๑/g,'1').replace(/๒/g,'2').replace(/๓/g,'3').replace(/๔/g,'4').replace(/๕/g,'5').replace(/๖/g,'6').replace(/๗/g,'7').replace(/๘/g,'8').replace(/๙/g,'9').replace(/ฯ/g,'...');
+
+		output = output.replace(//g,'');
+
+		return output;
+	},
+	
+	fromSin: function(input) {
+		var vowel = [];
+
+		vowel['අ'] = 'a';
+		vowel['ආ'] = 'ā';
+		vowel['ඉ'] = 'i';
+		vowel['ඊ'] = 'ī';
+		vowel['උ'] = 'u';
+		vowel['ඌ'] = 'ū';
+		vowel['එ'] = 'e';
+		vowel['ඔ'] = 'o';
+		
+		
+		vowel['ඒ'] = 'ē';
+		vowel['ඇ'] = 'ai';
+		vowel['ඈ'] = 'āi';
+		vowel['ඕ'] = 'ō';
+		vowel['ඖ'] = 'au';
+
+		vowel['ා'] = 'ā';
+		vowel['ි'] = 'i';
+		vowel['ී'] = 'ī';
+		vowel['ු'] = 'u';
+		vowel['ූ'] = 'ū';
+		vowel['ෙ'] = 'e';
+		vowel['ො'] = 'o';
+
+		vowel['ෘ'] = 'ṛ';
+		vowel['ෟ'] = 'ḷ';
+		vowel['ෲ'] = 'ṝ';
+		vowel['ෳ'] = 'ḹ';
+
+		vowel['ේ'] = 'ē';
+		vowel['ැ'] = 'ae';
+		vowel['ෑ'] = 'āe';
+		vowel['ෛ'] = 'ai';
+		vowel['ෝ'] = 'ō';
+		vowel['ෞ'] = 'au';
+
+		var sinhala = [];
+
+		
+		sinhala['ං'] = 'ṃ';
+		sinhala['ක'] = 'k';
+		sinhala['ඛ'] = 'kh';
+		sinhala['ග'] = 'g';
+		sinhala['ඝ'] = 'gh';
+		sinhala['ඞ'] = 'ṅ';
+		sinhala['ච'] = 'c';
+		sinhala['ඡ'] = 'ch';
+		sinhala['ජ'] = 'j';
+		sinhala['ඣ'] = 'jh';
+		sinhala['ඤ'] = 'ñ';
+		sinhala['ට'] = 'ṭ';
+		sinhala['ඨ'] = 'ṭh';
+		sinhala['ඩ'] = 'ḍ';
+		sinhala['ඪ'] = 'ḍh';
+		sinhala['ණ'] = 'ṇ';
+		sinhala['ත'] = 't';
+		sinhala['ථ'] = 'th';
+		sinhala['ද'] = 'd';
+		sinhala['ධ'] = 'dh';
+		sinhala['න'] = 'n';
+		sinhala['ප'] = 'p';
+		sinhala['ඵ'] = 'ph';
+		sinhala['බ'] = 'b';
+		sinhala['භ'] = 'bh';
+		sinhala['ම'] = 'm';
+		sinhala['ය'] = 'y';
+		sinhala['ර'] = 'r';
+
+		sinhala['ල'] = 'l';
+		sinhala['ළ'] = 'ḷ';
+		sinhala['ව'] = 'v';
+		sinhala['ස'] = 's';
+		sinhala['හ'] = 'h';
+
+		sinhala['ෂ'] = 'ṣ';
+		sinhala['ශ'] = 'ś';
+
+		sinhala['ඥ'] = 'jñ';
+		sinhala['ඬ'] = 'ṇḍ';
+		sinhala['ඳ'] = 'nd';
+		sinhala['ඹ'] = 'mb';
+		sinhala['ඟ'] = 'rg';
+		
+		var im, i0, i1, i2, i3
+		var output = '';
+		var i = 0;
+
+		input = input.replace(/\&quot;/g, '`');
+
+		while (i < input.length) {
+			i1 = input.charAt(i);
+			
+			if (vowel[i1]) {
+				if(output.charAt(output.length-1) == 'a')
+					output = output.substring(0,output.length-1);
+				output += vowel[i1];
+			}		
+			else if (sinhala[i1]) {		
+				output += sinhala[i1]+'a';
+			}					
+			else
+				output += i1;
+			i++;
+		}
+
+		// fudges
+		
+		// "‍" zero-width joiner inside of quotes
+		
+		output = output.replace(/a්/g, '');
+		return output;
+	}		
+
 }

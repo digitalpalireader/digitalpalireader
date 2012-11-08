@@ -3,7 +3,7 @@ var G_dictQuery = '';
 var G_dictOpts = []; // 
 var G_dictEntry = '';
 var G_dictUnicode = false;
-
+var G_similar_min = 75;
 function moveframey() {
 } // fake
 
@@ -196,7 +196,7 @@ function pedsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),P,70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),P,G_similar_min,1);
 			if(simlist) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -401,7 +401,7 @@ function dppnsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),D,70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),D,G_similar_min,1);
 			if(simlist) {
 				listoutf += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -604,7 +604,7 @@ function mlsearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlist = findSimilarWords(toFuzzy(getstring),yt,70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),yt,G_similar_min,1);
 			if(simlist) {
 				finout += '<p>Did you mean:</p>';
 				for (i in simlist) {
@@ -771,9 +771,9 @@ function multisearchstart(hard)
 
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
-			var simlistp = findSimilarWords(toFuzzy(getstring),P,70,1);
-			var simlistd = findSimilarWords(toFuzzy(getstring),D,70,1);
-			var simlistc = findSimilarWords(toFuzzy(getstring),yt,70,1);
+			var simlistp = findSimilarWords(toFuzzy(getstring),P,G_similar_min,1);
+			var simlistd = findSimilarWords(toFuzzy(getstring),D,G_similar_min,1);
+			var simlistc = findSimilarWords(toFuzzy(getstring),yt,G_similar_min,1);
 			
 			if(simlistp || simlistd || simlistc) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
@@ -1388,7 +1388,7 @@ function sktsearchstart()
 		
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 
-			var simlist = findSimilarWords(toFuzzy(getstring),G_sktR[char],70,1);
+			var simlist = findSimilarWords(toFuzzy(getstring),G_sktR[char],G_similar_min,1);
 			if(simlist) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (var x = 0; x < simlist.length; x++) {

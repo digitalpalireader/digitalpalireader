@@ -222,6 +222,10 @@ var DPROverlay = {
 		alert(output.split('\n'));
 	},
 	convertText:function(text,type) {
+		if(/[อาิีึุูเโํกขคฆงจฉชฌญฏฐฑฒณตถทธนปผพภมยรลฬวสห๐๑๒๓๔๕๖๗๘๙ฯ]/.test(text))
+			text = DPRTranslit.fromThai(text);
+		if(/[අආඉඊඋඌඑඔඒඇඈඕඖාිීුූෙොෘෟෲෳේැෑෛෝෞංකඛගඝඞචඡජඣඤටඨඩඪණතථදධනපඵබභමයරලළවසහෂශඥඬඳඹඟ]/.test(text))
+			text = DPRTranslit.fromSin(text);
 		switch(type) {
 			case 'u':
 				text = DPRTranslit.toUni(text);
@@ -250,8 +254,8 @@ var DPROverlay = {
 		else {
 			var el = gContextMenu.target;
 			var val = el.value;
-			var start = el.selectionStart
-			var end = el.selectionEnd
+			var start = el.selectionStart;
+			var end = el.selectionEnd;
 			if(end-start) {
 				el.value = val.slice(0, start) + text + val.slice(end );
 				gContextMenu.target.setSelectionRange(start,start+text.length);

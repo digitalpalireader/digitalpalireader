@@ -20,6 +20,7 @@ function openDPRTab(permalink,id,reuse) {
 			openDPRTab(permalink,id);
 			return true;
 		}
+		mainWindow.gBrowser.selectedTab = oldTab;
 		mainWindow.gBrowser.getBrowserForTab(oldTab).contentDocument.location.href = permalink;
 	}
 	else {
