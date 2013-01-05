@@ -1,7 +1,7 @@
 
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
-var cks = ['showPages','showPagesFull', 'showVariants', 'showVariantsInline', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita']; 
+var cks = ['showPages','showPagesFull', 'showVariants', 'showVariantsInline', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita','copyWord']; 
 var radio = ['noContext','contextSelected','allContext']; 
 var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 var ints = ['setRows','altlimit'];

@@ -318,6 +318,8 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 			cdiv.style.textDecoration = 'underline';
 			G_lastcolour = divclicked;
 		}
+		if(DPR_prefs['copyWord'])
+			copyToClipboard(input);
 	}
 	if(add != true) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');

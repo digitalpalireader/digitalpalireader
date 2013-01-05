@@ -7,8 +7,15 @@
 <script type="application/x-javascript">
 	var G_count_browsers = 1;
 	var devCheck = 0;
+	function minDict(){
+		if (document.getElementById('bottom-box').collapsed === true)
+			document.getElementById('bottom-box').collapsed = false;
+		else document.getElementById('bottom-box').collapsed = true;
+	}
 </script>
+<!--
 <script type="application/x-javascript" src="dev.js"/>
+-->
 <script>
 	if(!devCheck) {
 		function devO() {}
@@ -18,7 +25,9 @@
 </script>
 	<hbox id="dpr-tops" style="height:600px" flex="1" persist="height">
 	</hbox>
-	<splitter id="PanelSplitter"/>
+	<splitter id="PanelSplitter" align="left">
+		<label style="height:4px;width:8px;background:black" onclick="minDict()" tooltiptext="Minimize Panel" value=" "/>
+	</splitter>
 	<hbox flex="1" id="bottom-box" persist="height">
 		<tabbox orient="horizontal" class="chromeback" flex="1">
 			<tabs orient="vertical" class="chromeback" id="tabs">
