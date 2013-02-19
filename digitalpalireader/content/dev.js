@@ -1868,6 +1868,23 @@ htm.DXMLThai('k',1,'m',[[25,0,14]]);
 thaibook [x][2] is last page to load
 
 */
+
+var dev_thai_nums = [];
+dev_thai_nums.push('Paṭhamaṁ');
+dev_thai_nums.push('Dutiyaṁ');
+dev_thai_nums.push('Tatiyaṁ');
+dev_thai_nums.push('Catutthaṁ');
+dev_thai_nums.push('Pañcamaṁ');
+dev_thai_nums.push('Chaṭṭhaṁ');
+dev_thai_nums.push('Sattamaṁ');
+dev_thai_nums.push('Aṭṭhamaṁ');
+dev_thai_nums.push('Navamaṁ');
+dev_thai_nums.push('Dasamaṁ');
+dev_thai_nums.push('Ekādasamaṁ');
+dev_thai_nums.push('Dvādasamaṁ');
+dev_thai_nums.push('Terasamaṁ');
+dev_thai_nums.push('Cuddasamaṁ');
+
 function DXMLThai(nikaya,book,hier,thaibook) {
 	DAv = [];
 	DAh = [];
@@ -2054,13 +2071,22 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 
 	DAp = DthaiOut2(thaibook);
 	var out = '';
+	var last = false;
 	for (i=0; i < DAp.length; i++) {
 		var t = DAp[i];
 		var cx = '';
 		var ac = '';
-		if(/[\]^0-9] +Sāvatthiyaṁ/.exec(t) || /[\]^0-9] +] +Taññeva nidānaṁ\./.exec(t) || /[\]^0-9] +Sāvatthī\./.exec(t) || /[\]^0-9] +Sāvatthīnidānaṁ/.exec(t) || /[\]^0-9] +Evamme/.exec(t) || /[\]^0-9] +] Ekaṁ samayaṁ/.exec(t)) {
+		if(last == true || /[\]^0-9] +Sāvatthiyaṁ/.exec(t) || /[\]^0-9] +Taññeva nidānaṁ\./.exec(t) || /[\]^0-9] +Sāvatthī\./.exec(t) || /[\]^0-9] +Sāvatthīnidānaṁ/.exec(t) || /[\]^0-9] +Evamme/.exec(t) || /[\]^0-9] +Ekaṁ samayaṁ/.exec(t)) {
 			cx = 'checked';
 			ac = '<div><input type="checkbox" onclick="DaddThaiH('+i+',this.checked)" name="Dcbx" value="'+i+'"><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'"></div>';
+		}
+		last = false;
+		for (var ii = 0; ii < dev_thai_nums.length; ii++) {
+			var rxi = new RegExp(dev_thai_nums[ii]+'\. *$'');
+			if(rxi.exec(t)){
+				last = true;
+				break;
+			}
 		}
 		out += '<div id="Dcbl'+i+'"><input type="checkbox" name="Dcbx" onclick="DaddThaiH('+i+',this.checked)" value="'+i+'" '+cx+'><span name="Dhead"></span><input type="text" name="Dtxt" id="Dtxt'+i+'">'+ac+'</div>';
 		t = t.replace(/\^e*b\^/g, '');

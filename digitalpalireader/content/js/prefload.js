@@ -100,6 +100,8 @@ DPR_prefsD['showPedLinks'] = true;
 
 DPR_prefsD['nigahita'] = false;
 
+DPR_prefsD['copyWord'] = false;
+
 DPR_prefsD['altlimit'] = 20;
 
 var DPR_prefs = [];

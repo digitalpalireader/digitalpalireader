@@ -47,6 +47,7 @@
 								<checkbox id="nigahita" label="&pnigahita.label;" prefstring="Bool.nigahita"/>
 								<checkbox id="ctrans" label="&pctrans.label;" prefstring="Bool.ctrans"/>
 								<checkbox id="autodict" label="&pautodict.label;" prefstring="Bool.autodict"/>
+								<checkbox id="copyWord" label="&pcopyWord.label;" prefstring="Bool.copyWord"/>
 								<caption label="&context.label;"/>
 
 								<radiogroup id="selectMode" orient="horizontal">

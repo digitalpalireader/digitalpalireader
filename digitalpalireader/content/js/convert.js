@@ -14,7 +14,7 @@ function getSelected() {
 
 var G_oldConvert = '';
 
-function convert(check)
+function convert(check,lower)
 {
 	var spell = document.getElementById('cinput').value;
 
@@ -103,7 +103,8 @@ function convert(check)
 			}
 			break;
 	}
-
+	if(lower)
+		spell = spell.toLowerCase();
 	document.getElementById('coutput').value = spell;
 }
 

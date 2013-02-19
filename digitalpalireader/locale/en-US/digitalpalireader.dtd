@@ -116,6 +116,7 @@
 
 <!ENTITY paltlimit.label "Maximum Definitions Per Compound:">
 <!ENTITY pautodict.label "Enable Dictionary search-as-you-type">
+<!ENTITY pcopyWord.label "Copy words to clipboard on click">
 
 <!ENTITY pnigahita.label "Use ṁ instead of ṃ">
 

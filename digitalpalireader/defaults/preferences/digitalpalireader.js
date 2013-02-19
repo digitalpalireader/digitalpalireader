@@ -58,6 +58,8 @@ pref("extensions.digitalpalireader.Bool.showPedLinks", true);
 
 pref("extensions.digitalpalireader.Bool.nigahita", false);
 
+pref("extensions.digitalpalireader.Bool.copyWord", false);
+
 pref("extensions.digitalpalireader.Char.catiloc", "<none>");
 
 pref("extensions.digitalpalireader.Bool.allContext", true);

@@ -51,9 +51,10 @@
 								</listbox>
 							</vbox>
 							<vbox pack="center">
-								<toolbarbutton  onclick="convert()" tooltiptext="Convert from one format to another"><label value="Convert"/></toolbarbutton>
+								<toolbarbutton  onclick="convert(false,document.getElementById('lower').checked)" tooltiptext="Convert from one format to another"><label value="Convert"/></toolbarbutton>
 								<toolbarbutton  onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');" tooltiptext="Sort input by Pali word order"><label value="Sort"/></toolbarbutton>
 								<toolbarbutton onclick="clearboth()" tooltiptext="clear both boxes"><label value="Clear"/></toolbarbutton>
+								<checkbox id="lower" tooltiptext="convert to lowercase" label="lowercase"/>
 							</vbox>
 							<vbox pack="top">
 								<label value="To"/>
