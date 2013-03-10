@@ -2082,7 +2082,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 		}
 		last = false;
 		for (var ii = 0; ii < dev_thai_nums.length; ii++) {
-			var rxi = new RegExp(dev_thai_nums[ii]+'\. *$'');
+			var rxi = new RegExp(dev_thai_nums[ii]+'\. *$');
 			if(rxi.exec(t)){
 				last = true;
 				break;
@@ -3005,3 +3005,231 @@ function devCommonWords() {
 	}
 	writeToDesktop('dpr_temp.csv', outr);	
 }
+
+
+
+function D_batchOutput() {
+	
+	var nik = window.prompt('Enter nikaya letter:');
+	if(!nik)
+		return;
+	var vols = window.prompt('Enter number of volumes:');
+	if(!vols)
+		return;
+	var hr = window.prompt('Enter heirarchy level (0-4):');
+	if(!hr)
+		return;
+	var mat = window.prompt('Enter text heirarchy (m,a,t):','m');
+	if(!mat)
+		return;
+	var slug = window.prompt('Enter dir/file slug:');
+	if(!slug)
+		return;
+		
+	var wantNames = window.confirm('Add names?');
+	
+	var names = [];
+	var j = 0;
+	for(var i = 0; i < parseInt(vols); i++) {
+		var j1 = D_getAllAtLevel(nik,i+1,mat,hr);
+		for(var h = 0; h < j1.length; h++) {
+			j++;
+			var ar = loadXMLSection(null,null,j1[h]);
+			var data = D_prepareHTML(ar);
+			
+			var file = '/home/noah/POP/assets/'+slug+'/'+slug+'_p_'+j+'.htm';
+			
+			if(writeExtFile(file, data)) {}
+			else {
+				alert('failed');
+			}
+		}
+		if(wantNames)
+			names = names.concat(D_getAllNamesAtLevel(nik,i+1,'m',hr));
+	}
+	if(wantNames)
+		D_outputNames(names);
+}
+
+
+
+function D_batchDHP() {
+	
+	var j = 0;
+	var j1 = D_getAllAtLevel('k',2,'m',2);
+	for(var h = 0; h < j1.length; h++) {
+		j++;
+		var ar = loadXMLSection(null,null,j1[h]);
+		var title = ar[0];
+		var data = D_prepareHTML(ar);
+		
+		var file = '/home/noah/POP/assets/dh/dh_p_'+j+'.htm';
+		
+		if(writeExtFile(file, data)) {}
+		else {
+			alert('failed');
+		}
+	}
+	var j1 = D_getAllNamesAtLevel('k',2,'m',2);
+	D_outputNames(j1);
+}
+
+
+function D_batchJA() {
+	var j = 0;
+	var j1 = D_getAllAtLevel('k',14,'a',3);
+	for(var h = 0; h < j1.length; h++) {
+		j++;
+		var ar = loadXMLSection(null,null,j1[h]);
+		var data = D_prepareHTML(ar);
+		
+		var file = '/home/noah/POP/assets/ja/ja_p_'+j+'.htm';
+		
+		if(writeExtFile(file, data)) {}
+		else {
+			alert('failed');
+		}
+	
+	}
+	var j1 = D_getAllAtLevel('k',15,'a',2);
+	for(var h = 0; h < j1.length; h++) {
+		j++;
+		var ar = loadXMLSection(null,null,j1[h]);
+		var data = D_prepareHTML(ar);
+		
+		var file = '/home/noah/POP/assets/ja/ja_p_'+j+'.htm';
+		
+		if(writeExtFile(file, data)) {}
+		else {
+			alert('failed');
+		}
+	
+	}
+}
+    
+function D_prepareHTML(ar) {
+	var title = ar[0];
+	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n<link rel="stylesheet" type="text/css" href="../pali.css"></head>\n<body>';
+	data += ar[1].replace(/ *(<[dhpc])/g,"\n\t$1");
+	data += '\n</body>\n</html>';
+	return data;
+}
+    
+function D_outputNames(array) {
+
+	var file = '/home/noah/Desktop/dpr_names';
+	var data = array.join('\n');
+	
+	if(writeExtFile(file, data)) {}
+	else {
+		alert('failed');
+	}	
+} 
+    
+
+//k.13.0.2.x.x.x.a
+
+function D_getAllAtLevel(nik,book,ahier,level) {
+
+	var out = [];
+    var xmlDoc = loadXMLFile(nik+book+ahier,0);
+	book = book-1;
+	var z = xmlDoc.getElementsByTagName("ha");
+	y = z[0].getElementsByTagName("h0");
+	for (var y1 = 0; y1 < y.length; y1++) {
+		if(level == 0) {
+			out.push([nik,book,y1,'x','x','x','x',ahier,'d']);
+			continue;
+		}
+		x = y[y1].getElementsByTagName("h1");
+		for (var x1 = 0; x1 < x.length; x1++) {
+			if(level == 1) {
+				out.push([nik,book,y1,x1,'x','x','x',ahier,'d']);
+				continue;
+			}
+
+			w = x[x1].getElementsByTagName("h2");
+			for (var w1 = 0; w1 < w.length; w1++) {
+				if(level == 2) {
+					out.push([nik,book,y1,x1,w1,'x','x',ahier,'d']);
+					continue;
+				}
+
+				v = w[w1].getElementsByTagName("h3");
+				for (var v1 = 0; v1 < v.length; v1++) {
+					if(level == 3) {
+						out.push([nik,book,y1,x1,w1,v1,'x',ahier,'d']);
+						continue;
+					}
+
+					u = v[v1].getElementsByTagName("h4");
+					for (var u1 = 0; u1 < u.length; u1++) {
+						out.push([nik,book,y1,x1,w1,v1,u1,ahier,'d']);
+					}
+				}
+			}
+		}
+	}
+	//alert(out.join("\n").replace(/,/g,'.'));
+	return out;
+}   
+    
+    
+
+function D_getAllNamesAtLevel(nik,book,ahier,level) {
+
+	var out = [];
+    var xmlDoc = loadXMLFile(nik+book+ahier,0);
+	book = book-1;
+	var z = xmlDoc.getElementsByTagName("ha");
+	y = z[0].getElementsByTagName("h0");
+	for (var y1 = 0; y1 < y.length; y1++) {
+		if(level == 0) {
+			out.push(y[y1].getElementsByTagName("h0n")[0].textContent);
+			continue;
+		}
+		x = y[y1].getElementsByTagName("h1");
+		for (var x1 = 0; x1 < x.length; x1++) {
+			if(level == 1) {
+				out.push(x[x1].getElementsByTagName("h1n")[0].textContent);
+				continue;
+			}
+
+			w = x[x1].getElementsByTagName("h2");
+			for (var w1 = 0; w1 < w.length; w1++) {
+				if(level == 2) {
+					out.push(w[w1].getElementsByTagName("h2n")[0].textContent);
+					continue;
+				}
+
+				v = w[w1].getElementsByTagName("h3");
+				for (var v1 = 0; v1 < v.length; v1++) {
+					if(level == 3) {
+						out.push(v[v1].getElementsByTagName("h3n")[0].textContent);
+						continue;
+					}
+
+					u = v[v1].getElementsByTagName("h4");
+					for (var u1 = 0; u1 < u.length; u1++) {
+						out.push(u[u1].getElementsByTagName("h4n")[0].textContent);
+					}
+				}
+			}
+		}
+	}
+	//alert(out.join("\n").replace(/,/g,'.'));
+	return out;
+}   
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

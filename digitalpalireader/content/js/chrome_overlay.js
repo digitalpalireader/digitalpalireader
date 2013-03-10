@@ -8,10 +8,28 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 
 var DPROverlay = {
 	init:function() {
+
+		let firstRunPref = "extensions.xulschoolhello.firstRunDone";
+
+		if (!Application.prefs.getValue(firstRunPref,false)) {
+			this.addToolbarButton();
+			Application.prefs.setValue(firstRunPref, true);
+		}
+
 		if(document.getElementById("contentAreaContextMenu"))
 			document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", function(e){DPROverlay.showHideDPRItem(e)}, false);  
 	},
 	
+	addToolbarButton:function() {
+		if (!document.getElementById('dpr-button')) {
+			var toolbar = document.getElementById('nav-bar');
+	 
+			var before = null;
+			toolbar.insertItem('dpr-button', before);
+			toolbar.setAttribute("currentset", toolbar.currentSet);
+			document.persist(toolbar.id, "currentset");
+		}
+	},
 
 	giveIDtoTabs:function() { // startup function, give ids to 
 		

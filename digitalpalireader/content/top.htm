@@ -186,28 +186,19 @@ function moveFrame(idx) {
 <script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
 
-<script>
-	
-	var devCheck = 0;
-	if(extFileExists('/home/noah/Extensions/work/dev.js')) {
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
-		headID.appendChild(newScript);
-		
-		var headID2 = document.getElementsByTagName("head")[0];         
-		var newScript2 = document.createElement('script');
-		newScript2.type = 'text/javascript';
-		newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
-		headID2.appendChild(newScript2);
 
-	}
-	else { // null functions
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	}
+
+<!--
+<script language="JavaScript1.3" type="text/javascript" src="dev.js"></script>
+-->
+
+
+<script>
+	//D_batchOutput();	
+	var devCheck = 0;
+	function devO() {}
+	function dalert(a) {}
+	function ddump(a) {}
 
 </script>
 </body>

@@ -20,8 +20,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	
 	for(var i=1;i<7;i++) {
 		if(place[i] == 'x') {
-			loadXMLindex(place);
-			return;
+			return loadXMLindex(place);
 		}
 		else place[i] = parseInt(place[i]);
 	}
@@ -457,8 +456,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 }
 
 function loadXMLindex(place,compare) {
+	var isDev = false; // dev tool
 	var DshowH = false; // dev tool
-	//DshowH = true; // dev tool
 	
 	if(compare)
 		G_compare = compare;
@@ -477,11 +476,15 @@ function loadXMLindex(place,compare) {
 	document.activeElement.blur();
 	
 	var hier = isPlace?place[7]:place[2];
+	if(isPlace && place[8] == 'd') {
+		isDev = true;
+		var xset = 0;
+	}
+	else
+		var xset = isPlace?(place[8]?place[8]:0):0;
 	
-	var xset = isPlace?(place[8]?place[8]:0):0;
-	
-	document.getElementById('mafbc').innerHTML = '';
-	document.getElementById('mafbc').appendChild(pleasewait);
+	$('mafbc').html('');
+	$('mafbc').append(pleasewait);
 
 	
 	var nikaya = place[0];
@@ -517,8 +520,12 @@ function loadXMLindex(place,compare) {
 	var col = ['coltext','colsel','colped','coldppn','colcpd'];
 	var whichcol = [0,0,0,0,0];
 	var wcs = 0;
-
-
+	
+	// counting for links
+	var whichheir = [0,0,0,0,0];
+	var saveheader = '';
+	var lowest = 0;
+	
 	if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) {
 		theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); 
 	}
@@ -542,19 +549,23 @@ function loadXMLindex(place,compare) {
 		whichcol[0] = 1; // bump up to let the second color know
 
 		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen+'<br />';
-		if(isPlace) {
-			saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-		}
+
+		if (lowest < wcs)
+			lowest = wcs;
+		
+		saveout += '<h'+(wcs+1)+'><a name="ab" href="#a">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+		saveheader += '<c'+(wcs+1)+'><a name="a" href="#ab">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
+
 	}
 	y = z[tmp].getElementsByTagName("h0");
 	for (tmp2 = 0; tmp2 < y.length; tmp2++) // meta
 	{
 		if(isPlace && place[2] != 'x' && tmp2 != place[2])
 			continue;
+		
 		if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
 		if (y.length > 1 && theData == '') { theData = unnamed; }
 		if (theData != '') {
-
 			namen = '';
 			if (DPR_prefs['showNames']) {
 
@@ -587,9 +598,16 @@ function loadXMLindex(place,compare) {
 				}
 			}
 			theDatao += '<br />';
-			if(isPlace) {
-				saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-			}
+			
+			whichheir[0] = tmp2+1;
+			var whs = whichheir[0];
+			
+			if (lowest < wcs)
+				lowest = wcs;
+				
+			saveout += '<h'+(wcs+1)+'><a name="'+whs+'b" href="#'+whs+'">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+			saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
+			
 
 		}
 		x = y[tmp2].getElementsByTagName("h1");
@@ -635,9 +653,14 @@ function loadXMLindex(place,compare) {
 				}
 				theDatao += '<br />';
 
-				if(isPlace) {
-					saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-				}
+				whichheir[1] = tmp3+1;
+				var whs = whichheir[0]+'.'+whichheir[1];
+
+				if (lowest < wcs)
+					lowest = wcs;
+
+				saveout += '<h'+(wcs+1)+'><a name="'+whs+'b" href="#'+whs+'">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+				saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
 
 			}
 			w = x[tmp3].getElementsByTagName("h2");
@@ -687,10 +710,14 @@ function loadXMLindex(place,compare) {
 					}
 					theDatao += '<br />';
 
-					if(isPlace) {
-						saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-					}
+					whichheir[2] = tmp4+1;
+					var whs = whichheir[0]+'.'+whichheir[1]+'.'+whichheir[2];
 
+					if (lowest < wcs)
+						lowest = wcs;
+
+					saveout += '<h'+(wcs+1)+'><a name="'+whs+'b" href="#'+whs+'">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+					saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
 				}
 				v = w[tmp4].getElementsByTagName("h3");
 				for (tmp5 = 0; tmp5 < v.length; tmp5++) // sutta
@@ -734,9 +761,14 @@ function loadXMLindex(place,compare) {
 						}
 						theDatao += '<br />';
 
-						if(isPlace) {
-							saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-						}
+						whichheir[3] = tmp5+1;
+						var whs = whichheir[0]+'.'+whichheir[1]+'.'+whichheir[2]+'.'+whichheir[3];
+
+						if (lowest < wcs)
+							lowest = wcs;
+
+						saveout += '<h'+(wcs+1)+'><a name="'+whs+'b" href="#'+whs+'">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+						saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
 
 					}
 
@@ -787,10 +819,14 @@ function loadXMLindex(place,compare) {
 							}
 							theDatao += '<br />';
 
-							if(isPlace) {
-								saveout += '<h'+(wcs+1)+'>'+translit(toUni(theData))+'</h'+(wcs+1)+'>';
-							}
+							whichheir[4] = tmp6+1;
+							var whs = whichheir[0]+'.'+whichheir[1]+'.'+whichheir[2]+'.'+whichheir[3]+'.'+whichheir[4];
 
+							if (lowest < wcs)
+								lowest = wcs;
+
+							saveout += '<h'+(wcs+1)+'><a name="'+whs+'b" href="#'+whs+'">'+translit(toUni(theData))+'</a></h'+(wcs+1)+'>';
+							saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
 						}
 						if(isPlace) {
 							var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
@@ -829,12 +865,12 @@ function loadXMLindex(place,compare) {
 	var main = ' <span class="abut obut small" id="close" onclick="closePanel()" title="close panel">x</span>';
 		
 	$('#mafbc').html('');
+
+	// toolbox
 	
 	if(isPlace) {
 
-		makeToolbox(main,'');
-
-		// history
+	// history
 
 		var bknameme = '';
 
@@ -851,9 +887,9 @@ function loadXMLindex(place,compare) {
 		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
 
 		var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
-		$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');	
-		$('#mafbc').append('<div id="savei">'+saveout+'</div>');	
-		$('#mafbc').append('<div id="convi">'+convout+'</div>');	
+	
+		if(!isDev)
+			makeToolbox(main,'',tabT,true,true,true);
 	}
 	else {
 		if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
@@ -862,8 +898,25 @@ function loadXMLindex(place,compare) {
 		addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
 		makeToolbox(main?main:false);
 
-		var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
+		var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").	replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
+		makeToolbox(main,'',tabT,true,true,true);
+
 	}
+	
+	// add header to saveout 
+
+	var clinner = new RegExp('(<\\/c'+(lowest+1)+'>)(<c[^'+(lowest+1)+'])','g');
+	var clfirst = new RegExp('(<\\/c'+(lowest)+'>)(<c'+(lowest+1)+')','g');
+	var cllast = new RegExp('(<\\/c'+(lowest+1)+'>)$');
+
+	saveout = '<div id="menu">'+saveheader.replace(clfirst,"$1<div class=\"csection\">$2").replace(clinner,"$1</div>$2").replace(cllast,"$1</div>")+'</div>'+saveout;
+
+	if(isDev)
+		return [tabT,saveout];
+	
+	$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');	
+	$('#mafbc').append('<div id="savei">'+saveout+'</div>');	
+	$('#mafbc').append('<div id="convi">'+convout+'</div>');	
 	
 	// title, tab, link
 	
@@ -888,12 +941,12 @@ function loadXMLindex(place,compare) {
 		newparams = oldparams.join('|');
 	}
 	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
+
 	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
 
 
 	$('#mafbc').append('<div>'+theDatao+'</div>'); 
 	document.getElementById('maf').scrollTop = 0;
-
 	// refresh history box
 
 	var sidebar = DPRSidebarWindow();
@@ -901,12 +954,11 @@ function loadXMLindex(place,compare) {
 	if (sidebar) {
 		sidebar.DPRNav.historyBox();
 	}
-	
 }
 
 function saveCompilation() {
 	var title=$('#savetitle').html();
-	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n<style>.varc{font-size:60%; color:'+DPR_prefs['grey']+'} .var{display:none; font-size: 100%; color:black; background-color:silver;} .pageno {font-size:60%; color:blue} .paratype06 {font-style:italic;	color:#999999;} p[class*="paratype2"]{ margin: 0 0 0 24px;}</style></head>\n<body>';
+	var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n<style>.varc{font-size:60%; color:'+DPR_prefs['grey']+'} .var{display:none; font-size: 100%; color:black; background-color:silver;} .pageno {font-size:60%; color:blue} .paratype06 {font-style:italic;	color:#999999;} p[class*="paratype2"]{ margin: 0 0 0 24px;} c1,c2,c3,c4,c5 { display:block; font-weight:bold; padding:10px 0 0;} c2 { margin-left:10px; font-size:90% } c3 { margin-left:20px; font-size:80% } c4 { margin-left:30px; font-size:70% } c5 { margin-left:40px; font-size:60% }	</style></head>\n<body>';
 	data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
 	data += '\n</body>\n</html>';
 	var file = fileSaveDialog('Choose a location to export the HTML file');
@@ -1002,7 +1054,6 @@ function iterCompare(p1,p2,iter, one, two) {
 		if (newv == 100)
 			break;
 	}
-	alert('out '+outa);
 	return outa;
 }
 

@@ -607,3 +607,12 @@ function linkToPED(base,word) {
 	}
 	return word;
 }
+
+function joinArray(s,a) {
+	var oa = '';
+	for(var i = 0; i < a.length; i++) {
+		if(a[i])
+			oa += (oa?s:'')+a[i];
+	}
+	return oa;
+}

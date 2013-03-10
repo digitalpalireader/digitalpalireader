@@ -8,7 +8,7 @@
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Sanskrit dictionary used with DPR.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
-    <em:updateURL>http://pali.sirimangalo.org/sanskrit.rdf</em:updateURL>
+    <em:updateURL>http://pali.sirimangalo.org/DPRSanskrit.rdf</em:updateURL>
     <em:optionsURL>chrome://sanskrit/content/prefs.xul</em:optionsURL>
     <em:iconURL>chrome://sanskrit/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
