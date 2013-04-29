@@ -331,4 +331,18 @@ var DPRNav = {
 		
 	},
 	
+	searchBook:function(nik,book,hiert) {
+		document.getElementById("tabbox").selectedIndex = 1;
+		document.getElementById('tipType').selectedIndex = 2;
+		DPROpts.tipitakaOptions();
+		document.getElementById('tsoSETm').selectedIndex = G_nikToNumber[nik];
+		this.setSearchBookList();
+
+		document.getElementById('tsoBOOKm').selectedIndex = book-1;
+		DPRXML.updateSearchHierarchy(0);
+		document.getElementById('tsoMATm').setAttribute('checked',hiert == 'm');
+		document.getElementById('tsoMATa').setAttribute('checked',hiert == 'a');
+		document.getElementById('tsoMATt').setAttribute('checked',hiert == 't');
+	},
+	
 }

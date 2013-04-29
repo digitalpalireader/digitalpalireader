@@ -451,7 +451,7 @@ function analyzeTextPad(text) {
 
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
-pleasewait.innerHTML = '<br><br><br><br><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
+pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 
 
@@ -615,4 +615,9 @@ function joinArray(s,a) {
 			oa += (oa?s:'')+a[i];
 	}
 	return oa;
+}
+
+function getNameHTML(dEI,tt) {
+	var namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+	return namen;
 }

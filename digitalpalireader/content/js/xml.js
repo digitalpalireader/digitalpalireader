@@ -531,6 +531,7 @@ function loadXMLindex(place,compare) {
 	}
 	else theData = '';
 	if (z.length > 1 && theData == '') { theData = unnamed; } 
+
 	if (theData != '') {
 		
 		namen = '';
@@ -541,14 +542,23 @@ function loadXMLindex(place,compare) {
 			if(tt.length > 1) {
 				dEI = getDppnEntry(tt);
 				if (dEI.length > 0) {
-					namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\');">&nbsp;n</span>';
+					namen = getNameHTML(dEI,tt);
 				}
 			}
 		}
 		
 		whichcol[0] = 1; // bump up to let the second color know
 
-		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen+'<br />';
+		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
+
+		if (hier == "m") { 
+			transin = addtrans(6,nikaya,bookno);
+			if (transin) {
+				theDatao += transin.join('&nbsp;'); 
+			}
+		}
+
+		theDatao += '<br />';
 
 		if (lowest < wcs)
 			lowest = wcs;
@@ -575,7 +585,7 @@ function loadXMLindex(place,compare) {
 				if(tt.length > 1) {
 					dEI = getDppnEntry(tt);
 					if (dEI.length > 0) {
-						namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+						namen = getNameHTML(dEI,tt);
 					}
 				}
 			}
@@ -628,7 +638,7 @@ function loadXMLindex(place,compare) {
 					if(tt.length > 1) {
 						dEI = getDppnEntry(tt);
 						if (dEI.length > 0) {
-							namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+							namen = getNameHTML(dEI,tt);
 						}
 					}
 				}					
@@ -681,7 +691,7 @@ function loadXMLindex(place,compare) {
 						if(tt.length > 1) {
 							dEI = getDppnEntry(tt);
 							if (dEI.length > 0) {
-								namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+								namen = getNameHTML(dEI,tt);
 							}
 						}
 					}
@@ -736,7 +746,7 @@ function loadXMLindex(place,compare) {
 							if(tt.length > 1) {
 								dEI = getDppnEntry(tt);
 								if (dEI.length > 0) {
-									namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+									namen = getNameHTML(dEI,tt);
 								}
 							}
 						}			
@@ -792,7 +802,7 @@ function loadXMLindex(place,compare) {
 								if(tt.length > 1) {
 									dEI = getDppnEntry(tt);
 									if (dEI.length > 0) {
-										namen = '<span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+										namen = getNameHTML(dEI,tt);
 									}
 								}
 							}
@@ -862,7 +872,7 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}	
 
-	var main = ' <span class="abut obut small" id="close" onclick="closePanel()" title="close panel">x</span>';
+	var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>&nbsp;<span class="abut obut small" id="close" onclick="closePanel()" title="close panel">x</span>';
 		
 	$('#mafbc').html('');
 
@@ -906,9 +916,9 @@ function loadXMLindex(place,compare) {
 	// add header to saveout 
 
 	var clinner = new RegExp('(<\\/c'+(lowest+1)+'>)(<c[^'+(lowest+1)+'])','g');
-	var clfirst = new RegExp('(<\\/c'+(lowest)+'>)(<c'+(lowest+1)+')','g');
+	var clfirst = new RegExp('(<\\/c[0-9]>)(<c'+(lowest+1)+')','g');
 	var cllast = new RegExp('(<\\/c'+(lowest+1)+'>)$');
-
+	
 	saveout = '<div id="menu">'+saveheader.replace(clfirst,"$1<div class=\"csection\">$2").replace(clinner,"$1</div>$2").replace(cllast,"$1</div>")+'</div>'+saveout;
 
 	if(isDev)

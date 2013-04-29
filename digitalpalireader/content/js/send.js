@@ -411,7 +411,7 @@ function openTranslation(url,add) {
 		}
 	}
 	else {
-		if(!/^http/.test(url))
+		if(!/^http/.test(url) && !/^file:/.test(url))
 			url = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
 
 		openDPRTab(url,'DPRx');
@@ -494,4 +494,21 @@ function closePanel() {
 	// collapse first splitter
 	
 	elem.getElementsByTagName('splitter')[0].setAttribute('collapsed','true');
+}
+
+function sidebarSearch(nik,book,hiert) {
+	var sidebar = DPRSidebarWindow();
+	if (sidebar) {
+		sidebar.DPRNav.searchBook(nik,book,hiert);
+		return;
+	}
+	openDPRSidebar();
+	window.setTimeout(
+		function() {
+			sidebar = DPRSidebarWindow();
+			if (sidebar)
+				sidebar.DPRNav.searchBook(nik,book,hiert);
+		},
+		1000
+	);
 }

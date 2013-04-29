@@ -130,6 +130,11 @@
 <!ENTITY pATILoc.label "Location (ati_website):">
 <!ENTITY pFileDialog.label "Browse...">
 
+<!ENTITY pBT.label "BuddhistTexts Archive:">
+<!ENTITY buddhist_texts.label "Use BuddhistTexts Archive">
+<!ENTITY pBTLoc.label "Directory Location (BuddhistTexts):">
+<!ENTITY btFileDialog.label "Browse...">
+
 <!-- Layout Tab -->
 
 <!ENTITY pDictH.label "Bottom Frame Height">

@@ -46,6 +46,10 @@ pref("extensions.digitalpalireader.Bool.catioff", false);
 pref("extensions.digitalpalireader.Bool.autodict", false);
 pref("extensions.digitalpalireader.Bool.bkgimg", true);
 
+pref("extensions.digitalpalireader.Bool.buddhist_texts", false);
+pref("extensions.digitalpalireader.Char.btloc", "<none>");
+
+
 pref("extensions.digitalpalireader.Int.setRows", 7);
 
 pref("extensions.digitalpalireader.Bool.showPages", false);

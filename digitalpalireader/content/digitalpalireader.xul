@@ -10,7 +10,7 @@
   	</stringbundleset>
   	<vbox collapsed="true" id="alert">
   	</vbox>
-	<tabbox class="chromeback" flex="1">
+	<tabbox class="chromeback" flex="1" id="tabbox">
 		<tabs class="chromeback">
 			<tab class="chromeback" label="&sNav.label;"/>
 			<tab class="chromeback" label="&sSearch.label;"/>

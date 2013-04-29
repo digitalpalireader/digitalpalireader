@@ -64,12 +64,23 @@
   				<groupbox flex="1">
   					<caption label="&pATI.label;"/>
   					<box orient="vertical">
-				<checkbox id="catioff" onclick="if(this.checked) document.getElementById('catiloc').disabled = true;  else document.getElementById('catiloc').disabled = false" label="&pcatioff.label;" prefstring="Bool.catioff"/>
-				<hbox align="center">
-					<label id="ATILocLabel" value="&pATILoc.label;" />
-					<textbox id="catiloc" style="min-width:180px;" prefstring="Char.catiloc" flex="1"/>
-					<button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
-				</hbox>
+						<checkbox id="catioff" onclick="if(this.checked) document.getElementById('catiloc').disabled = true;  else document.getElementById('catiloc').disabled = false" label="&pcatioff.label;" prefstring="Bool.catioff"/>
+						<hbox align="center">
+							<label id="ATILocLabel" value="&pATILoc.label;" />
+							<textbox id="catiloc" style="min-width:180px;" prefstring="Char.catiloc" flex="1"/>
+							<button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
+						</hbox>
+  					</box>
+  				</groupbox>
+  				<groupbox flex="1">
+  					<caption label="&pBT.label;"/>
+  					<box orient="vertical">
+						<checkbox id="buddhist_texts" onclick="if(this.checked) document.getElementById('btloc').disabled = true;  else document.getElementById('btloc').disabled = false" label="&buddhist_texts.label;" prefstring="Bool.buddhist_texts"/>
+						<hbox align="center">
+							<label id="BTLocLabel" value="&pBTLoc.label;" />
+							<textbox id="btloc" style="min-width:180px;" prefstring="Char.btloc" flex="1"/>
+							<button id="btFileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('btloc', 'BTFileDialog');"/>
+						</hbox>
   					</box>
   				</groupbox>
   			</vbox>

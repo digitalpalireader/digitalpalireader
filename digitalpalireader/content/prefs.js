@@ -1,9 +1,9 @@
 
 var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService).getBranch("extensions.digitalpalireader.");
 
-var cks = ['showPages','showPagesFull', 'showVariants', 'showVariantsInline', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','nigahita','copyWord']; 
+var cks = ['showPages','showPagesFull', 'showVariants', 'showVariantsInline', 'showPermalinks', 'showNames', 'showPedLinks','ctrans','autodict','catioff','buddhist_texts','nigahita','copyWord']; 
 var radio = ['noContext','contextSelected','allContext']; 
-var strings = ['catiloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
+var strings = ['catiloc','btloc','colbk','imgbk','colbkcp','imgbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel','colfont','colsize'];
 var ints = ['setRows','altlimit'];
 var colors = ['colbk','colbkcp','colInput','colButton','colButtonSel','colped','coldppn','colcpd','coltext','colsel'];
 
@@ -69,6 +69,7 @@ function loadDefaults() {
 	}
 
 	if(!DPR_prefsD['catioff']) document.getElementById('catiloc').setAttribute('disabled', true);
+	if(!DPR_prefsD['buddhist_texts']) document.getElementById('btloc').setAttribute('disabled', true);
 
 	document.getElementById('translits').selectedIndex = DPR_prefsD['translits'];
 		
@@ -124,6 +125,7 @@ function loadPrefs() {
 	
 		
 		if(!prefs.getBoolPref('Bool.catioff')) document.getElementById('catiloc').setAttribute('disabled', 'true');
+		if(!prefs.getBoolPref('Bool.buddhist_texts')) document.getElementById('btloc').setAttribute('disabled', 'true');
 
 		
 		document.getElementById('translits').selectedIndex = prefs.getIntPref('Int.translits');
@@ -181,6 +183,26 @@ function savePrefs(close) {
 		}
 		else {
 			prefs.setCharPref('Char.catiloc',atiloc);
+		}
+	}
+
+	var btloc = document.getElementById('btloc').value;
+	var btFile;
+	if(/\\/.exec(btloc)) { // windows
+		btFile = btloc + '\\english.css';
+	}
+	else {
+		btFile = btloc + '/english.css';
+	}
+
+
+	if(document.getElementById('buddhist_texts').checked) {
+		if(!extFileExists(btFile)) {
+			alert('Unable to find file: "'+btFile+'".  Please disable BuddhistTexts translations before saving preferences.'); 
+			return false; 
+		}
+		else {
+			prefs.setCharPref('Char.btloc',btloc);
 		}
 	}
 
@@ -271,7 +293,7 @@ function fileDialog(id, titleIn) {
 		var fileOut = fp.file.QueryInterface(nsILocalFile);
 		var fileName = fp.file.path;
 		if(!extFileExists(fileName)) {
-			alert('Unable to find directory: "'+fileName+'".  Please confirm that you have selected the correct directory and that you have an up to date copy of the ATI archive.'); 
+			alert('Unable to find directory: "'+fileName+'".  Please confirm that you have selected the correct directory for the the archive.'); 
 			return false; 
 		}
 		output.value = fileName;

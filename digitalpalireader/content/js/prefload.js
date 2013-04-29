@@ -82,6 +82,10 @@ DPR_prefsD['catiloc'] = '<none>';
 DPR_prefsD['autodict'] = false;
 DPR_prefsD['bkgimg'] = true;
 
+DPR_prefsD['buddhist_texts'] = false;
+DPR_prefsD['btloc'] = '<none>';
+
+
 DPR_prefsD['allContext'] = true;
 DPR_prefsD['contextSelected'] = false;
 DPR_prefsD['noContext'] = false;

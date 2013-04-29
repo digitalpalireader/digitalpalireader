@@ -331,6 +331,12 @@ function dppnsearchstart(hard)
 		return;
 	}
 
+	if(/\//.exec(getstring)) { // direct link
+		var link = toUni(getstring).split(',');
+		DPPNXML(link[0],link[1]);
+		return;
+	}
+
 	document.getElementById('dict').innerHTML='';
 	document.getElementById('dict').appendChild(pleasewait);
 

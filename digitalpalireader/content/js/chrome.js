@@ -177,7 +177,7 @@ function DPRSidebarDocument() {
 }
 
 function closeDPRSidebar() {
-var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
 
 	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return mainWindow.toggleSidebar();
