@@ -52,7 +52,7 @@ function paliXML(filein,which,add)
 	xmlhttp.open("GET", pedp, false);
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
-	
+
 	var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 	
 	data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>"); 
