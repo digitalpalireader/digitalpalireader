@@ -4,7 +4,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>DPRMyanmar@noah.yuttadhammo</em:id>
     <em:name>Digital Pali Reader Myanmar Tipitaka Plugin</em:name>
-    <em:version>1.5</em:version>
+    <em:version>1.6</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Myanmar Tipitaka (required) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
