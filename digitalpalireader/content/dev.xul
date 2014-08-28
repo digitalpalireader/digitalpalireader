@@ -5,7 +5,6 @@
 <window id="DPR" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
   <script type="application/x-javascript" src="js/prompt.js" />
-<script type="application/x-javascript" src="dev.js"/>
 <script type="application/x-javascript" src="js/io.js"></script>
 <script type="application/x-javascript" src="js/prefload.js"></script>
 <script type="application/x-javascript" src="js/receive_bottom.js"></script>

@@ -401,7 +401,7 @@
 												<checkbox class="tiny" id="sofulltext" label="Full Text" tooltiptext="Search dictionary definitions, not only entry names"/>
 											</vbox>
 											<vbox id="soSW" class="bottomb" collapsed="true">
-												<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word" checked="true"/>
+												<checkbox class="tiny" id="sostartword" label="Start of Word Only" tooltiptext="Search only from the beginning of the word"/>
 											</vbox>
 										</vbox>
 									</hbox>

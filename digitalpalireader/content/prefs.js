@@ -189,10 +189,10 @@ function savePrefs(close) {
 	var btloc = document.getElementById('btloc').value;
 	var btFile;
 	if(/\\/.exec(btloc)) { // windows
-		btFile = btloc + '\\english.css';
+		btFile = btloc + '\\index.html';
 	}
 	else {
-		btFile = btloc + '/english.css';
+		btFile = btloc + '/index.html';
 	}
 
 

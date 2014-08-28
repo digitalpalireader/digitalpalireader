@@ -2783,13 +2783,15 @@ function tipitakaDB() {
 
 	for (i in G_XMLFileArray) {
 		var nik = i.charAt(0);
-		if(nik!='d'&&nik!='m')
-			continue;
-		for (ii = 0; ii < 1; ii++) { // only mul!
+		var volume = i.charAt(1);
+		//if(nik!='d'&&nik!='m')
+		//	continue;
+		for (ii = 0; ii < 3; ii++) { 
 			pages = 0;
 			var name = [];
 			if(!G_XMLFileArray[i][ii]) continue;
 			var fi = i;
+			var hier = G_hLetters[ii];
 
 			var xmlDoc = loadXMLFile(i+G_hLetters[ii],0);
 
@@ -2822,13 +2824,32 @@ function tipitakaDB() {
 							
 							for (var se = 0; se < y.length; se++) // per h4
 							{
-								name[5] = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
-								var z = y[se].getElementsByTagName("p");
-								var paras = [];
-								for (var p = 0; p < z.length; p++) { // per p
-									paras.push(z[p].textContent);
+								//~ name[5] = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
+								//~ var z = y[se].getElementsByTagName("p");
+								//~ var paras = [];
+								//~ for (var p = 0; p < z.length; p++) { // per p
+									//~ paras.push(z[p].textContent);
+								//~ }
+								//out.push([volume,item++,i,sx,sy,sz,s,se,p,paras.join('<br/><br/>'),pages,[name[1],name[2],name[3],name[4],name[5]]]);
+								
+								var code = sx+'^'+sy+'^'+sz+'^'+s+'^'+se;
+
+								var rel = "";
+								
+								switch(hier) {
+									case 'm':
+										rel = relm[nik+'^'+(volume-1)+'^'+code];
+										break;
+									case 'a':
+										rel = rela[nik+'^'+(volume-1)+'^'+code];
+										break;
+									case 't':
+										rel = relt[nik+'^'+(volume-1)+'^'+code];
+										break;
 								}
-								out.push([volume,item++,i,sx,sy,sz,s,se,p,paras.join('<br/><br/>'),pages,[name[1],name[2],name[3],name[4],name[5]]]);
+								
+								
+								out.push([item++,nik,(volume-1),hier,code,rel]);
 								//out4.push(name);
 								pages++;
 							}
@@ -2838,31 +2859,31 @@ function tipitakaDB() {
 			}
 			//out2.push(name[0]);
 			//out3.push(pages);
-			switch(nik) {
-				case 'v':
-					vin[G_hLetters[ii]].push(volume);
-					break;
-				case 'd':
-				case 'm':
-				case 'a':
-				case 's':
-				case 'k':
-					sut[G_hLetters[ii]].push(volume);
-					break;
-				case 'y':
-					abhi[G_hLetters[ii]].push(volume);
-					break;
-				default:
-					etc[G_hLetters[ii]].push(volume);
-					break;
-			}
-			volume++;
+			//~ switch(nik) {
+				//~ case 'v':
+					//~ vin[G_hLetters[ii]].push(volume);
+					//~ break;
+				//~ case 'd':
+				//~ case 'm':
+				//~ case 'a':
+				//~ case 's':
+				//~ case 'k':
+					//~ sut[G_hLetters[ii]].push(volume);
+					//~ break;
+				//~ case 'y':
+					//~ abhi[G_hLetters[ii]].push(volume);
+					//~ break;
+				//~ default:
+					//~ etc[G_hLetters[ii]].push(volume);
+					//~ break;
+			//~ }
+			//~ volume++;
 		}
 	}
 	
 	var outr = '',outr2 = '',outr3 = '';
 	for (var j = 0; j<out.length; j++) {
-		outr += out[j][1]+'|'+out[j][2]+'|'+out[j][3]+'|'+out[j][4]+'|'+out[j][5]+'|'+out[j][6]+'|'+out[j][7];
+		outr += out[j].join('|')+'\n';
 		//outr += out[j][1]+'|'+out[j][0]+'|'+out[j][10]+'|'+(out[j][11].join('^'))+'|'+out[j][9]+'\n';
 		//outr2 += out[j][1]+'|'+out[j][0]+'|'+out[j][1]+'\n';
 	}
@@ -3053,24 +3074,24 @@ function D_batchOutput() {
 
 
 
-function D_batchDHP() {
+function D_batchDHPa() {
 	
 	var j = 0;
-	var j1 = D_getAllAtLevel('k',2,'m',2);
+	var j1 = D_getAllAtLevel('k',2,'a',3);
 	for(var h = 0; h < j1.length; h++) {
 		j++;
 		var ar = loadXMLSection(null,null,j1[h]);
 		var title = ar[0];
 		var data = D_prepareHTML(ar);
 		
-		var file = '/home/noah/POP/assets/dh/dh_p_'+j+'.htm';
+		var file = '/home/noah/Desktop/Dhamma/BuddhistTexts/dhpa/dhpa_p_'+j+'.htm';
 		
 		if(writeExtFile(file, data)) {}
 		else {
 			alert('failed');
 		}
 	}
-	var j1 = D_getAllNamesAtLevel('k',2,'m',2);
+	var j1 = D_getAllNamesAtLevel('k',2,'a',3);
 	D_outputNames(j1);
 }
 

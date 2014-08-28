@@ -144,7 +144,7 @@ var DPROverlay = {
 	},
 	openSidebar: function() {
 		toggleSidebar('viewDPR');
-		return DPRSidebarDocument();
+		return this,DPRSidebarDocument();
 	},
 	rightClick:function(type,params) {
 		if(gContextMenu.target.tagName!="TEXTAREA"&&gContextMenu.target.tagName!="INPUT"){

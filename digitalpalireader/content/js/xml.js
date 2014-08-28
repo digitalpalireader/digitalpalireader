@@ -458,6 +458,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 function loadXMLindex(place,compare) {
 	var isDev = false; // dev tool
 	var DshowH = false; // dev tool
+	//var devCheck = 1; // dev tool
 	
 	if(compare)
 		G_compare = compare;
