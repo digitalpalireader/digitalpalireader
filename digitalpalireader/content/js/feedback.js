@@ -4,7 +4,7 @@ function feedbackform() {
 	outNode.setAttribute('width','100%');
 	outNode.setAttribute('height',(document.getElementById('maf').offsetHeight-64)+'px');
 	outNode.setAttribute('src','contact.htm');
-	document.getElementById('mafbc').innerHTML='';
+	$('#mafbc').html('');
 	document.getElementById('mafbc').appendChild(outNode);
 }
 

@@ -527,7 +527,7 @@ var Dreltik = [];
 function DconvertMATtoReal() {
 	
 
-	document.getElementById('mafbc').innerHTML = '<table><tr><td><textarea id="rel1"></textarea></td><td><textarea id="rel2"></textarea></td><td><textarea id="rel3"></textarea></td></tr></table>';
+	$('#mafbc').html('<table><tr><td><textarea id="rel1"></textarea></td><td><textarea id="rel2"></textarea></td><td><textarea id="rel3"></textarea></td></tr></table>');
 	var fin = '';
 	var relm = [];
 	var rela = [];
@@ -634,7 +634,7 @@ function DcompareMAT() {
 	}
 	finalout += '</tr>';
 	finalout += '</table>';
-	document.getElementById('mafbc').innerHTML = finalout;
+	$('#mafbc').html(finalout);
 	for (h = 0; h < hi.length; h++) {
 			document.getElementById(hi[h]).value=out[hi[h]].join('\n');
 	}
@@ -1064,7 +1064,7 @@ function Dloaded() {
 	}
 	var y = sortaz(x);
 			
-	document.getElementById('pad').innerHTML = y.join('\n');
+	$('#pad').html(y.join('\n'));
 }
 
 function DloadFileAsXML() {
@@ -1087,7 +1087,7 @@ function Dnda() {
 	for (j in na) {
 		out += "D['"+j+"'] = '"+na[j]+"';"; 
 	}
-	document.getElementById('pad').innerHTML = out + '];';
+	$('#pad').html(out + '];');
 }
 
 function DnameDa () {
@@ -1196,7 +1196,7 @@ function DdppnNameNo() {
 		}
 		if(t == 0) { out += "nameno['"+i+"'] = '"+nameno[i]+"';\n"; }
 	}
-	document.getElementById('pad').innerHTML = out;
+	$('#pad').html(out);
 }
 
 var Dev_tl = [];
@@ -1273,7 +1273,7 @@ function Ddppnsearchstart(getstring)
 	var outDiv = document.createElement('div');
 	outDiv.setAttribute('align','right');
 	outDiv.innerHTML = finout;
-	document.getElementById('difb').innerHTML = '';
+	$('#difb').html('');
 	document.getElementById('difb').appendChild(outDiv);
 	document.getElementById('cdif').scrollTop=0;
 	yut = 0;
@@ -1604,7 +1604,7 @@ function DthaiOut(){
 	
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = theDatao;
-	document.getElementById('mafbc').innerHTML = '';
+	$('#mafbc').html('');
 	document.getElementById('mafbc').appendChild(theDataDiv);  // ---------- return output ----------
 
 	//document.getElementById('maf').scrollTop = 0;
@@ -1893,7 +1893,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 		
 	document.activeElement.blur();
 
-	document.getElementById('content').innerHTML = '<div id="maf"><div id="mafbc"><div id="Dl" style="position:absolute; width:50%; left:0; top:0; bottom:0; overflow:auto"></div><div style="position:absolute; width:50%; right:0; top:0; bottom:0; overflow:auto"><div id="Dr" style="position:relative;width:100%;height:100%;"></div></div></div>';
+	$('#content').html('<div id="maf"><div id="mafbc"><div id="Dl" style="position:absolute; width:50%; left:0; top:0; bottom:0; overflow:auto"></div><div style="position:absolute; width:50%; right:0; top:0; bottom:0; overflow:auto"><div id="Dr" style="position:relative;width:100%;height:100%;"></div></div></div>');
 	var bookload = 'chrome://DPRMyanmar/content/xml/' + nikaya + book + hier + '.xml';
 	//dalert(bookload);
 	var bookno = book-1;
@@ -2066,7 +2066,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 	}
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = theDatao;
-	document.getElementById('Dl').innerHTML = '';
+	$('#Dl').html('');
 	document.getElementById('Dl').appendChild(theDataDiv);  // ---------- return output ----------
 
 	DAp = DthaiOut2(thaibook);
@@ -2100,7 +2100,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 	out +='<div style="position:absolute;top:0;right:0;"><span class="abut obut" onclick="DsaveXML2(\''+nikaya + book + hier+'\')">save</span></div>';
 	var theDataDiv2 = document.createElement('div');
 	theDataDiv2.innerHTML = out;
-	document.getElementById('Dr').innerHTML = '';
+	$('#Dr').html('');
 	document.getElementById('Dr').appendChild(theDataDiv2);  // ---------- return output ----------
 	
 	document.getElementById('maf').scrollTop = 0;
@@ -2487,7 +2487,7 @@ function DMakeAttArray(h) {
 	
 	var theDataDiv = document.createElement('div');
 	theDataDiv.innerHTML = '<textarea>'+out+'];</textarea>';
-	document.getElementById('content').innerHTML = '';
+	$('#content').html('');
 	document.getElementById('content').appendChild(theDataDiv);
 }
 

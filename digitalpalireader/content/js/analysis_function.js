@@ -18,7 +18,7 @@ function outputAnalysis(input,frombox) {
 
 	// update permalink
 
-	document.getElementById('anfs').innerHTML = '';
+	$('#anfs').html('');
 
 
 	var inputm = input.replace(/\u00B4/g, '"').replace(/xn/g, '"n');

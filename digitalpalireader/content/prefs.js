@@ -170,10 +170,10 @@ function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
 	var atiFile;
 	if(/\\/.exec(atiloc)) { // windows
-		atiFile = atiloc + '\\html\\_dpr\\digital_pali_reader_suttas.js';
+		atiFile = atiloc + '\\start.html';
 	}
 	else {
-		atiFile = atiloc + '/html/_dpr/digital_pali_reader_suttas.js';
+		atiFile = atiloc + '/start.html';
 	}
 
 	if(document.getElementById('catioff').checked) {

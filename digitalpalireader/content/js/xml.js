@@ -26,7 +26,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 	
 	
-	document.getElementById('mafbc').innerHTML = '';
+	$('#mafbc').html('');
 	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = place[0];
@@ -1036,7 +1036,7 @@ function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],
 		}
 	}
 	
-	document.getElementById('mafbc').innerHTML = out;
+	$('#mafbc').html(out);
 }
 
 

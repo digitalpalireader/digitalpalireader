@@ -233,7 +233,7 @@ function pedsearchstart(hard)
 	}
 
 	outDiv.innerHTML += listoutf + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	
@@ -298,7 +298,7 @@ function pedFullTextSearch(getstring) {
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -310,7 +310,7 @@ function pedFullTextSearch(getstring) {
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table><hr />' + finalout;
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 }
@@ -337,7 +337,7 @@ function dppnsearchstart(hard)
 		return;
 	}
 
-	document.getElementById('dict').innerHTML='';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(pleasewait);
 
 	
@@ -445,7 +445,7 @@ function dppnsearchstart(hard)
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -519,7 +519,7 @@ function dppnFullTextSearch(getstring) {
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -537,7 +537,7 @@ function dppnFullTextSearch(getstring) {
 
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = '</table><hr />' + finout;
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 }
@@ -640,7 +640,7 @@ function mlsearchstart(hard)
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = finout + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -842,7 +842,7 @@ function multisearchstart(hard)
 	}
 
 	outDiv.innerHTML += listoutf + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -908,7 +908,7 @@ function epdsearchstart()
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = finout + 'No results</td></tr></table>';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -919,7 +919,7 @@ function epdsearchstart()
 	}	
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = finout + '</td></tr></table>';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -998,7 +998,7 @@ function attsearchstart()
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -1010,7 +1010,7 @@ function attsearchstart()
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table>';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -1090,7 +1090,7 @@ function tiksearchstart()
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -1102,7 +1102,7 @@ function tiksearchstart()
 	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf + '</table>';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -1218,7 +1218,7 @@ function titlesearchstart()
 	if(y == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -1235,7 +1235,7 @@ function titlesearchstart()
 	
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf;
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -1306,7 +1306,7 @@ function paliRootsearchstart(hard)
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
 		outDiv.innerHTML = finout + 'No results</td></tr></table>';
-		document.getElementById('dict').innerHTML = '';
+		$('#dict').html('');
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
@@ -1317,7 +1317,7 @@ function paliRootsearchstart(hard)
 	}	
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = finout + '</td></tr></table>';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
@@ -1423,7 +1423,7 @@ function sktsearchstart()
 	}
 
 	outDiv.innerHTML += listoutf + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	
@@ -1501,7 +1501,7 @@ function sktRootsearchstart(hard)
 	}
 
 	outDiv.innerHTML += listoutf + '</table><hr />';
-	document.getElementById('dict').innerHTML = '';
+	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	

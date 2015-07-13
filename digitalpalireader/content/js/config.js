@@ -105,16 +105,21 @@ function checkbackground() {
 }
 
 function addATIJS() {
-	if (DPR_prefs['catioff']) { 
-		var nsrc = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
+	if (DPR_prefs['catioff']) {
+		addJS(['ati_list']);
+		//var nsrc = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
 	}
-	else { var nsrc = 'http://www.accesstoinsight.org/_dpr/digital_pali_reader_suttas.php'; }
+	else { 
+		//var nsrc = 'http://www.accesstoinsight.org/_dpr/digital_pali_reader_suttas.php'; 
+	}
+	/*
 	atiIns = 1;
 	var headID = document.getElementsByTagName("head")[0];         
 	var newScript = document.createElement('script');
 	newScript.type = 'text/javascript';
 	newScript.src = nsrc;
 	headID.appendChild(newScript);	
+	*/
 }
 
 function addJS(files) {

@@ -42,9 +42,9 @@ function init() {
 	// pali > eng
 
 function newquiz() {
-	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
-	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
-	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
+	$('#mafbc').html('<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is the meaning of "<font id="qq"></font>"?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>');
+	$('#Qra').html('&nbsp;0&nbsp;');
+	$('#Qwa').html('&nbsp;0&nbsp;');
 	quizme();
 
 }
@@ -52,9 +52,9 @@ function newquiz() {
 	// eng > pali
 
 function newquizE() {
-	document.getElementById('mafbc').innerHTML = '<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is "<font id="qq"></font>" in Pali?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>';
-	document.getElementById('Qra').innerHTML = '&nbsp;0&nbsp;';
-	document.getElementById('Qwa').innerHTML = '&nbsp;0&nbsp;';
+	$('#mafbc').html('<input type="hidden" id="qno" value="1"><input type="hidden" id="Qran" value="0"><input type="hidden" id="Qwan" value="0"><p></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><b>Question #<span id="qn"></span>:</b> What is "<font id="qq"></font>" in Pali?</p></div><p><i id="Qchecka">Choose the right answer below (or use number keys (1-4) to select an answer):</i></p><p><font id="answers"></font></p><div class="quizc" style="background-color:'+DPR_prefs['colbkcp']+'"><p><table width=100%><tr><td>Right Answers: <b id="Qra" style="color:'+DPR_prefs['green']+'"></b></td><td>Wrong Answers: <b id="Qwa" style="color:'+DPR_prefs['red']+'"></b></td><td>Percent: <b style="color:white" id="Qpa">&nbsp;--%&nbsp;</b></td></tr><tr><td colspan="3"><hr /></td></tr><tr><td>Total Right Answers: <b id="Qrights"></b></td><td>Left to answer: <b id="Qlefts"></b></td><td><span class="abut obut small" onclick="clearrights()">clear</span></td></tr></table></div>');
+	$('#Qra').html('&nbsp;0&nbsp;');
+	$('#Qwa').html('&nbsp;0&nbsp;');
 	quizmeE();
 
 }
@@ -115,8 +115,8 @@ function quizme() {
 		if(srights) {
 			if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
 			else rights = srights;
-			if(srights.join('') == '') document.getElementById('Qrights').innerHTML = 0;
-			else document.getElementById('Qrights').innerHTML = rights.length;
+			if(srights.join('') == '') $('#Qrights').html(0);
+			else $('#Qrights').html(rights.length);
 		}
 	}
     
@@ -137,7 +137,7 @@ function quizme() {
 	for (quizcpd in yt){
 		quiza.push(quizcpd);
 	}
-	document.getElementById('Qlefts').innerHTML = quiza.length - rights.length;
+	$('#Qlefts').html(quiza.length - rights.length);
 	for (qtmp = 0; qtmp < 3; qtmp++) {
 		quizeachwrong[qtmp]=Math.floor(Math.random()*20926);
 		while (quizeachwrong[qtmp] == quizrandomright) { // in case we got the same one again!
@@ -148,8 +148,8 @@ function quizme() {
 	var questionout =  quiza[quizrandomright].replace(/,/g, '.');
 	questionout =  toUni(questionout.replace(/`n/g, '"n'));
 
-	document.getElementById('qn').innerHTML = document.getElementById('qno').value;
-	document.getElementById('qq').innerHTML = questionout;
+	$('#qn').html(document.getElementById('qno').value);
+	$('#qq').html(questionout);
 	
 	var ytthis = yt[quiza[quizrandomright]];
 	
@@ -168,14 +168,14 @@ function quizme() {
 			qtmp2++;
 		}
 	}
-	document.getElementById('answers').innerHTML = quizanswersout;
+	$('#answers').html(quizanswersout);
 }
 
 function answerquiz(right,answer,numb) {
-	document.getElementById('qn').innerHTML = ++document.getElementById('qno').value;
+	$('#qn').html(++document.getElementById('qno').value);
 	if (right == 1) {
-		document.getElementById('Qchecka').innerHTML = '<span style="color:green">Right! &nbsp;' + answer + '</span>';
-		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
+		$('#Qchecka').html('<span style="color:green">Right! &nbsp;' + answer + '</span>');
+		$('#Qra').html('&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;');
 		
 		// add right to list of rights
 		if(fileExists('DPTEST')) {
@@ -191,8 +191,8 @@ function answerquiz(right,answer,numb) {
         }
 	}	
 	else {
-		document.getElementById('Qchecka').innerHTML ='<span style="color:red">Wrong! &nbsp;' + answer + '</span>';
-		document.getElementById('Qwa').innerHTML = '&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;';
+		$('#Qchecka').html('<span style="color:red">Wrong! &nbsp;' + answer + '</span>');
+		$('#Qwa').html('&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;');
 	}
 
 	var percentr = Number(document.getElementById('Qran').value) / (Number(document.getElementById('Qran').value) + Number(document.getElementById('Qwan').value))*100;
@@ -210,17 +210,17 @@ function answerquiz(right,answer,numb) {
 		if (colorpc.length == 1) colorpc = '0'+colorpc;
 		document.getElementById('Qpa').style.color = '#' + colorpc +'FF' + '00';
 	}
-	document.getElementById('Qpa').innerHTML = '&nbsp;'+Math.round(percentr) + '%&nbsp;';
+	$('#Qpa').html('&nbsp;'+Math.round(percentr) + '%&nbsp;');
 	quizme();
 }
 
 function clearrights() {
-    document.getElementById('Qra').innerHTML = 0;
+    $('#Qra').html(0);
     document.getElementById('Qran').value = 0;
-    document.getElementById('Qwa').innerHTML = 0;
+    $('#Qwa').html(0);
     document.getElementById('Qwan').value = 0;
-    document.getElementById('Qpa').innerHTML = "";
-	document.getElementById('Qrights').innerHTML = 0;
+    $('#Qpa').html("");
+	$('#Qrights').html(0);
     
 	writeFile("DPTEST","","UTF-8");
 }
@@ -238,8 +238,8 @@ function quizmeE() {
 		if(srights) {
 			if(/,/.exec(srights[0])) rights=srights.join(',').split(',');
 			else rights = srights;
-			if(srights.join('') == '') document.getElementById('Qrights').innerHTML = 0;
-			else document.getElementById('Qrights').innerHTML = rights.length;
+			if(srights.join('') == '') $('#Qrights').html(0);
+			else $('#Qrights').html(rights.length);
 		}
 	}
     
@@ -257,7 +257,7 @@ function quizmeE() {
 	var qtmp2 = 0;
 	
 	var quizrightorder=Math.floor(Math.random()*4);
-	document.getElementById('Qlefts').innerHTML = epd.length - rights.length;
+	$('#Qlefts').html(epd.length - rights.length);
 	for (qtmp = 0; qtmp < 3; qtmp++) {
 		quizeachwrong[qtmp]=Math.floor(Math.random()*epd.length);
 		while (quizeachwrong[qtmp] == quizrandomright) { // in case we got the same one again!
@@ -268,8 +268,8 @@ function quizmeE() {
 	
 	var questionout =  ytthis[0];
 
-	document.getElementById('qn').innerHTML = document.getElementById('qno').value;
-	document.getElementById('qq').innerHTML = questionout;
+	$('#qn').html(document.getElementById('qno').value);
+	$('#qq').html(questionout);
 	
 	
 	var formatanswerwrong = '';
@@ -286,14 +286,14 @@ function quizmeE() {
 			qtmp2++;
 		}
 	}
-	document.getElementById('answers').innerHTML = quizanswersout;
+	$('#answers').html(quizanswersout);
 }
 
 function answerquizE(right,answer,numb) {
-	document.getElementById('qn').innerHTML = ++document.getElementById('qno').value;
+	$('#qn').html(++document.getElementById('qno').value);
 	if (right == 1) {
-		document.getElementById('Qchecka').innerHTML = '<span style="color:green">Right! &nbsp;' + answer + '</span>';
-		document.getElementById('Qra').innerHTML = '&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;';
+		$('#Qchecka').html('<span style="color:green">Right! &nbsp;' + answer + '</span>');
+		$('#Qra').html('&nbsp;'+ (++document.getElementById('Qran').value) + '&nbsp;');
 		
 		// add right to list of rights
 		if(fileExists('DPTESTE')) {
@@ -309,8 +309,8 @@ function answerquizE(right,answer,numb) {
         }
 	}	
 	else {
-		document.getElementById('Qchecka').innerHTML ='<span style="color:red">Wrong! &nbsp;' + answer + '</span>';
-		document.getElementById('Qwa').innerHTML = '&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;';
+		$('#Qchecka').html('<span style="color:red">Wrong! &nbsp;' + answer + '</span>');
+		$('#Qwa').html('&nbsp;'+(++document.getElementById('Qwan').value) + '&nbsp;');
 	}
 
 	var percentr = Number(document.getElementById('Qran').value) / (Number(document.getElementById('Qran').value) + Number(document.getElementById('Qwan').value))*100;
@@ -328,17 +328,17 @@ function answerquizE(right,answer,numb) {
 		if (colorpc.length == 1) colorpc = '0'+colorpc;
 		document.getElementById('Qpa').style.color = '#' + colorpc +'FF' + '00';
 	}
-	document.getElementById('Qpa').innerHTML = '&nbsp;'+Math.round(percentr) + '%&nbsp;';
+	$('#Qpa').html('&nbsp;'+Math.round(percentr) + '%&nbsp;');
 	quizmeE();
 }
 
 function clearrightsE() {
-    document.getElementById('Qra').innerHTML = 0;
+    $('#Qra').html(0);
     document.getElementById('Qran').value = 0;
-    document.getElementById('Qwa').innerHTML = 0;
+    $('#Qwa').html(0);
     document.getElementById('Qwan').value = 0;
-    document.getElementById('Qpa').innerHTML = "";
-	document.getElementById('Qrights').innerHTML = 0;
+    $('#Qpa').html("");
+	$('#Qrights').html(0);
     
 	writeFile("DPTESTE","","UTF-8");
 }
@@ -471,7 +471,7 @@ var G_oneNoun = [];
 var G_quiza = [];
 
 function resetTable()  {
-	if (document.getElementById('Qshow').innerHTML == 'Hide') hideAnswers();
+	if ($('#Qshow').html() == 'Hide') hideAnswers());
 
 	getRandomNoun();
 	
@@ -485,8 +485,8 @@ function resetTable()  {
 	//if(/[tmf]\.[aiuāīū]$/.test(yto[5])) word = word+word.charAt(word.length-1);
 		
 
-	document.getElementById('QwhichT').innerHTML = toUni(word);
-	document.getElementById('QwhichC').innerHTML = meaning;
+	$('#QwhichT').html(toUni(word));
+	$('#QwhichC').html(meaning);
 
 	addStems();
 	clearAnswers();
@@ -684,8 +684,8 @@ function resetMTable()  {
 	meaning = meaning + ' (' + yto[1] + ')';
 	meaning = toUni(meaning);
 
-	document.getElementById('QwhichT').innerHTML = toUni(word);
-	document.getElementById('QwhichC').innerHTML = meaning;
+	$('#QwhichT').html(toUni(word));
+	$('#QwhichC').html(meaning);
 		
 	for (i in decls) {
 		if(noun[declsToNo[decls[i]][1]] && noun[declsToNo[decls[i]][1]][declb[declsToNo[decls[i]][0]]])

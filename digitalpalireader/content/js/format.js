@@ -445,7 +445,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 
 function analyzeTextPad(text) {
 	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
-	document.getElementById('mafbc').innerHTML = '<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>';
+	$('#mafbc').html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
 	outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2); 
 }
 
@@ -529,31 +529,31 @@ function fadeOut(AID,id,speed) {
 
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
-		document.getElementById('difhist').innerHTML = '';
-		document.getElementById('difb').innerHTML = '';
+		$('#difhist').html('');
+		$('#difb').html('');
 	}
 	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
-		document.getElementById('dict').innerHTML = '';
-		document.getElementById('difhist').innerHTML = '';
-		document.getElementById('difb').innerHTML = '';
+		$('#dict').html('');
+		$('#difhist').html('');
+		$('#difb').html('');
 	}
 	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
-		document.getElementById('anfs').innerHTML='';
-		document.getElementById('anfsd').innerHTML='';
-		document.getElementById('anfb').innerHTML='<div align=left id="anfc"></div><div align=right id="anfd"></div>';
+		$('#anfs').html('');
+		$('#anfsd').html('');
+		$('#anfb').html('<div align=left id="anfc"></div><div align=right id="anfd"></div>');
 	}
 	if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
-		document.getElementById('mafbc').innerHTML='';
-		document.getElementById('matrelc').innerHTML='';
+		$('#mafbc').html('');
+		$('#matrelc').html('');
 	}
 	
 	if (!which || which.indexOf('search') > -1) { // search frame stuff
-		document.getElementById('sbfa').innerHTML = '';
-		document.getElementById('sbfb').innerHTML = '';
-		document.getElementById('sbfab').innerHTML = '';
-		document.getElementById('stfb').innerHTML = '';
-		document.getElementById('stfc').innerHTML = '';
-		document.getElementById('showing').innerHTML = '';
+		$('#sbfa').html('');
+		$('#sbfb').html('');
+		$('#sbfab').html('');
+		$('#stfb').html('');
+		$('#stfc').html('');
+		$('#showing').html('');
 		document.getElementById('searchb').scrollTop = 0;
 	}
 }

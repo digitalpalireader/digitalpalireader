@@ -146,7 +146,7 @@ function paliXML(filein,which,add)
 	if (nname) tout += '<span class="abut rbut tiny" onclick="paliXML(\'PED/'+nname+'\')" />&gt;</span>';
 
 
-	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
+	$('#difhist').html('<table><tr><td>' + tout + '</td></tr></table>');
 
 	if(document.getElementById('bottom')) {
 		document.getElementById('cdif').scrollTop=0;
@@ -290,7 +290,7 @@ function DPPNXML(filein,which,add)
 	if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
 	
 
-	document.getElementById('difhist').innerHTML = '<table><tr><td>' + tout + '</td></tr></table>';
+	$('#difhist').html('<table><tr><td>' + tout + '</td></tr></table>');
 	if(document.getElementById('bottom')) {
 		document.getElementById('cdif').scrollTop=0;
 		document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
@@ -509,7 +509,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 	var dataNode = document.createElement('div');
 	dataNode.innerHTML = finout;
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = '';
+	$('#difb').html('');
 	document.getElementById('difb').appendChild(dataNode);
 	document.getElementById('dictc').scrollTop=0;
 
@@ -619,7 +619,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 	var dataNode = document.createElement('div');
 	dataNode.innerHTML = finout;
 	document.getElementById('difb').setAttribute('align','left');
-	document.getElementById('difb').innerHTML = '';
+	$('#difb').html('');
 	document.getElementById('difb').appendChild(dataNode);
 	document.getElementById('dictc').scrollTop=0;
 }

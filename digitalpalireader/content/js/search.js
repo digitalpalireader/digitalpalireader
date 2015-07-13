@@ -266,8 +266,8 @@ function pausesall()
 
 	var getstring = G_searchString;
 	
-	document.getElementById('sbfab').innerHTML = '';
-	document.getElementById('sbfb').innerHTML = '<hr>';
+	$('#sbfab').html('');
+	$('#sbfb').html('<hr>');
 
 	var thisterm = MD.createElement('toolbarbutton');
 	thisterm.setAttribute('id','search-term');
@@ -338,8 +338,8 @@ function pausetwo() { // init function for single collection
 
 	var getstring = G_searchString;
 
-	document.getElementById('sbfab').innerHTML = '';
-	document.getElementById('sbfb').innerHTML = '<hr>';
+	$('#sbfab').html('');
+	$('#sbfb').html('<hr>');
 
 	var thisterm = MD.createElement('label');
 	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
@@ -1048,7 +1048,7 @@ function createTables(xmlDoc,hiert)
 		}
 		
 		exwordNode.innerHTML = exwordout;
-		document.getElementById('sbfab').innerHTML = '';
+		$('#sbfab').html('');
 		document.getElementById('sbfab').appendChild(exwordNode);									
 		outNode.innerHTML = finalout;
 		document.getElementById('sbfb').appendChild(outNode);
@@ -1072,7 +1072,7 @@ function showonly(string) {
 			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
-		document.getElementById('showing').innerHTML = '<b style="color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;</b><b>x</b>'; 
+		$('#showing').html('<b style="color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;</b><b>x</b>'); 
 		document.getElementById('showing').style.display = 'block';
 		scrollToId('search','sbfb');
 	}
@@ -1096,10 +1096,11 @@ function atiSearchStart() {
 	var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');
 
 	if(DPR_prefs['catioff']) {
-		var newScript = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
-		addJS([newScript]);
+		//var newScript = 'file://'+ DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
+		//addJS([newScript]);
+		addJS(['ati_list']);
 
-//		document.getElementById('stfb').innerHTML = '<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>';
+//		$('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
 		MD.getElementById('search-progress').setAttribute('max',G_searchSet.length);
 	
 		var thisterm = MD.createElement('toolbarbutton');
@@ -1140,9 +1141,9 @@ function atiSearchStart() {
 				MD.getElementById('search-sets').appendChild(sep);
 		}
 		
-		document.getElementById('stfc').innerHTML = '';
-		document.getElementById('sbfab').innerHTML = '<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">';
-		document.getElementById('sbfb').innerHTML = '<p class="huge">Detailed Results:</p>';
+		$('#stfc').html('');
+		$('#sbfab').html('<div id="dictList"><p class="huge">Matched Suttas:</p></div><hr class="thick">');
+		$('#sbfb').html('<p class="huge">Detailed Results:</p>');
 
 		atiPause(getstring);
 		return;
@@ -1160,7 +1161,7 @@ function atiSearchStart() {
 	outNode.setAttribute('width','100%');
 	outNode.setAttribute('height',document.getElementById('sbfbc').offsetHeight);
 	outNode.setAttribute('src','http://www.google.com/cse?cx=015061908441090246348%3Aal1bklhbjbi&cof=FORID%3A9%3BNB%3A1&ie=UTF-8&q='+getstring+'+more:suttas_only&sa=Search&ad=w9&num=10');
-	document.getElementById('sbfb').innerHTML = '';
+	$('#sbfb').html('');
 	document.getElementById('sbfb').appendChild(outNode);
 }
 
