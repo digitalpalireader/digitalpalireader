@@ -4,7 +4,8 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-  <script type="application/x-javascript" src="js/prompt.js" />
+<script type="application/x-javascript" src="dev.js" />
+<script type="application/x-javascript" src="js/prompt.js" />
 <script type="application/x-javascript" src="js/io.js"></script>
 <script type="application/x-javascript" src="js/prefload.js"></script>
 <script type="application/x-javascript" src="js/receive_bottom.js"></script>
@@ -49,7 +50,7 @@
 	<hbox>
 		<vbox flex="1">
 			<spacer flex="1"/>
-			<textbox type="autocomplete" autocompletesearch="form-history" tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode" value="htm.DXMLThai('v',3,'m',[[3,0,null]]);"/>
+			<textbox tooltiptext="" onkeydown="if(event.keyCode==13) devMode(this.value); event.keyCode=0;" id="devMode" value="htm.DXMLThai('v',3,'m',[[3,0,null]]);"/>
 		</vbox>
 			<vbox>
 				<hbox pack="center"><label class="large bold" value="&sSet.label;" /></hbox>

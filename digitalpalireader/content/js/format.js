@@ -41,12 +41,10 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 		var transin;
 		var transout='';
-		if (hier == "m") { 
-			transin = addtrans(0,nikaya,book,meta,volume,vagga,sutta,section);
-			if (transin) {
-				transout += transin.join('&nbsp;');
-				document.getElementById('maftrans').innerHTML += transout; 
-			}
+		transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
+		if (transin) {
+			transout += transin.join('&nbsp;');
+			document.getElementById('maftrans').innerHTML += transout; 
 		}
 		
 		var convDiv = document.createElement('div');

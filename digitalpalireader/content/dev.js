@@ -1,4 +1,3 @@
-//window.alert('dev mode');
 var devCheck = 0;
 
 function devMode(string) {
@@ -6,6 +5,7 @@ function devMode(string) {
  devCheck = 1;
 	if(string) {
 		if(/^htm/.test(string)) {
+			//alert('document.getElementById("dpr-dev").contentWindow'+string.substring(3));
 			eval('document.getElementById("dpr-dev").contentWindow'+string.substring(3));
 		}
 		else eval(string);
@@ -3241,6 +3241,103 @@ function D_getAllNamesAtLevel(nik,book,ahier,level) {
 	//alert(out.join("\n").replace(/,/g,'.'));
 	return out;
 }   
+
+function D_getChildNumberAtLevel(nik,book,ahier,level) {
+
+	var out = [];
+    var xmlDoc = loadXMLFile(nik+book+ahier,0);
+	book = book-1;
+	var z = xmlDoc.getElementsByTagName("ha");
+	y = z[0].getElementsByTagName("h0");
+	for (var y1 = 0; y1 < y.length; y1++) {
+		if(level == 0) {
+			out.push(y[y1].getElementsByTagName("h1").length);
+			continue;
+		}
+		x = y[y1].getElementsByTagName("h1");
+		for (var x1 = 0; x1 < x.length; x1++) {
+			if(level == 1) {
+				out.push(x[x1].getElementsByTagName("h2").length);
+				continue;
+			}
+
+			w = x[x1].getElementsByTagName("h2");
+			for (var w1 = 0; w1 < w.length; w1++) {
+				if(level == 2) {
+					out.push(w[w1].getElementsByTagName("h3").length);
+					continue;
+				}
+
+				v = w[w1].getElementsByTagName("h3");
+				for (var v1 = 0; v1 < v.length; v1++) {
+					if(level == 3) {
+						out.push(v[v1].getElementsByTagName("h4").length);
+						continue;
+					}
+
+					u = v[v1].getElementsByTagName("h4");
+					for (var u1 = 0; u1 < u.length; u1++) {
+						out.push(u[u1].getElementsByTagName("p").length);
+					}
+				}
+			}
+		}
+	}
+	document.getElementById('content').innerHTML = out.join("<br/>");
+	
+}   
+
+
+    
+
+function D_getLocOfChildNumber(nik,book,ahier,level) {
+
+	var out = [];
+    var xmlDoc = loadXMLFile(nik+book+ahier,0);
+	book = book-1;
+	
+	var number = 1;
+	
+	var z = xmlDoc.getElementsByTagName("ha");
+	y = z[0].getElementsByTagName("h0");
+	for (var y1 = 0; y1 < y.length; y1++) {
+		if(level == 0) {
+			out.push((number++)+' = '+ nik + '.' + book + '.' + ahier + '.' + y1 + '.0.0.0.0');
+			continue;
+		}
+		x = y[y1].getElementsByTagName("h1");
+		for (var x1 = 0; x1 < x.length; x1++) {
+			if(level == 1) {
+				out.push((number++)+' = '+ nik + '.' + book + '.' + ahier + '.' + y1 + '.' + x1 + '.0.0.0');
+				continue;
+			}
+
+			w = x[x1].getElementsByTagName("h2");
+			for (var w1 = 0; w1 < w.length; w1++) {
+				if(level == 2) {
+					out.push((number++)+' = '+ nik + '.' + book + '.' + ahier + '.' + y1 + '.' + x1 + '.' + w1 + '.0.0');
+					continue;
+				}
+
+				v = w[w1].getElementsByTagName("h3");
+				for (var v1 = 0; v1 < v.length; v1++) {
+					if(level == 3) {
+						out.push((number++)+' = '+ nik + '.' + book + '.' + ahier + '.' + y1 + '.' + x1 + '.' + w1 + '.' + v1 + '.0');
+						continue;
+					}
+
+					u = v[v1].getElementsByTagName("h4");
+					for (var u1 = 0; u1 < u.length; u1++) {
+						out.push((number++)+' = '+ nik + '.' + book + '.' + ahier + '.' + y1 + '.' + x1 + '.' + w1 + '.' + v1 + '.' + u1);
+					}
+				}
+			}
+		}
+	}
+	document.getElementById('content').innerHTML = out.join("<br/>");
+	
+}   
+
 
     
     

@@ -552,11 +552,11 @@ function loadXMLindex(place,compare) {
 
 		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
 
-		if (hier == "m") { 
-			transin = addtrans(6,nikaya,bookno);
-			if (transin) {
-				theDatao += transin.join('&nbsp;'); 
-			}
+		// translations
+
+		transin = addtrans(hier,6,nikaya,bookno);
+		if (transin) {
+			theDatao += transin.join('&nbsp;'); 
 		}
 
 		theDatao += '<br />';
@@ -600,13 +600,14 @@ function loadXMLindex(place,compare) {
 			
 			theDatao += spaces+(devCheck == 1 && DshowH ? '[0]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
 
+			// translations
+
 			var transin;
 			var transout='';
-			if (hier == "m") { 
-				transin = addtrans(5,nikaya,bookno,tmp2);
-				if (transin) {
-					theDatao += transin.join('&nbsp;'); 
-				}
+
+			transin = addtrans(hier,5,nikaya,bookno,tmp2);
+			if (transin) {
+				theDatao += transin.join('&nbsp;'); 
 			}
 			theDatao += '<br />';
 			
@@ -654,14 +655,16 @@ function loadXMLindex(place,compare) {
 
 				theDatao += spaces+(devCheck == 1 && DshowH ? '[1]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
 
+				// translations
+
 				var transin;
 				var transout='';
-				if (hier == "m") { 
-					transin = addtrans(4,nikaya,bookno,tmp2,tmp3);
-					if (transin) {
-						theDatao += transin.join('&nbsp;'); 
-					}
+
+				transin = addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
+				if (transin) {
+					theDatao += transin.join('&nbsp;'); 
 				}
+
 				theDatao += '<br />';
 
 				whichheir[1] = tmp3+1;
@@ -711,14 +714,17 @@ function loadXMLindex(place,compare) {
 
 
 					theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData))+(suno?'&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+
+					// translations
+
 					var transin;
 					var transout='';
-					if (hier == "m") { 
-						transin = addtrans(3,nikaya,bookno,tmp2,tmp3,tmp4);
-						if (transin) {
-							theDatao += transin.join('&nbsp;'); 
-						}
+	
+					transin = addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
+					if (transin) {
+						theDatao += transin.join('&nbsp;'); 
 					}
+
 					theDatao += '<br />';
 
 					whichheir[2] = tmp4+1;
@@ -762,14 +768,16 @@ function loadXMLindex(place,compare) {
 						}
 
 						theDatao += spaces+(devCheck == 1 && DshowH ? '[3]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+
+						// translations
+
 						var transin;
 						var transout='';
-						if (hier == "m") { 
-							transin = addtrans(2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
-							if (transin) {
-								theDatao += transin.join('&nbsp;');  
-							}
+						transin = addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
+						if (transin) {
+							theDatao += transin.join('&nbsp;');  
 						}
+
 						theDatao += '<br />';
 
 						whichheir[3] = tmp5+1;
@@ -819,15 +827,18 @@ function loadXMLindex(place,compare) {
 							var suno = getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,0,6);  // short reference
 							
 							theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (suno?'&nbsp;<d class="small">('+G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+
+							// translations
+
 							var transin;
 							var transout='';
-							if (hier == "m") { 
-								transin = addtrans(1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
-								//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
-								if (transin) {
-									theDatao += transin.join('&nbsp;');  
-								}
+
+							transin = addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+							//if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
+							if (transin) {
+								theDatao += transin.join('&nbsp;');  
 							}
+
 							theDatao += '<br />';
 
 							whichheir[4] = tmp6+1;

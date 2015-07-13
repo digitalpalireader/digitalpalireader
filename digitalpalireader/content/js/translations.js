@@ -13,7 +13,7 @@ function transLink(which,where,url,title) {
 	return '&nbsp;<span class="hoverShow pointer"><img width="16" style="vertical-align:middle" src="' + image +'" title="'+title+'" onmouseup="openTranslation(\''+url+'\',eventSend(event))"></span>';
 }
 
-function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
+function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 	if (!DPR_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
 	
@@ -56,6 +56,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 	switch (nikaya) {
 		case 'v':
+
+			if(hier != 'm')
+				break;
+
 			switch (book) {
 				case 3:
 					if (which == 3 && vagga == 0) {
@@ -120,6 +124,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			}
 		break;
 		case 'd':
+
+			if(hier != 'm')
+				break;
+
 			if (which == 1) return null;
 			switch (book) {
 				case 0:
@@ -298,6 +306,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			}
 			break;
 		case 'm':
+
+			if(hier != 'm')
+				break;
+
 			if (which == 3 || which == 1) return null;
 			var mysn = ((book)*50)+(vagga*10)+(sutta+1)
 			if (mysn > 141 && vagga == 4) mysn += 2;
@@ -322,6 +334,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			}
 		break;
 		case 'a':
+
+			if(hier != 'm')
+				break;
+
 			var bookn = book+1;
 			if (!section) section = 0;
 
@@ -329,7 +345,6 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			if(DPR_prefs['buddhist_texts'] && (which == 6 || which == 0)) {
 				output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/an/an_e_'+(book+1)+'.htm','Translation of AN '+(book+1)+' by Bodhi'));
 				cnt++;
-				break;
 			}
 			if (which > 1) return null;
 
@@ -425,6 +440,9 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 		break;
 		case 's':
 
+			if(hier != 'm')
+				break;
+
 			var bookn = book+1;
 			
 			if (bookn > 1) {vagga+=11;}
@@ -438,7 +456,6 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
 				output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
 				cnt++;
-				break;
 			}
 
 			if (which > 1) return null;
@@ -476,6 +493,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 			
 			switch (bookn) {
 				case 1: // kp
+
+					if(hier != 'm')
+						break;
+
 				// kn/khp/khp.1-9.than.html
 					out:
 					for (a = 0;a < atiK.length; a++) {
@@ -498,25 +519,60 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					cnt++;		 
 				break;
 				case 2: // dhp
-				// kn/dhp/dhp.24.budd.html
-					//alert(vagga + ' ' + sutta + ' ' + section);
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'dhp') {
-							d=(vagga+1)+"";
-							if (d.length < 2) { d = '0'+d; }
-							if(atiK[a].split('.')[1].indexOf(d)==0) {
-								var sno = vagga+1;
-								var auth = atiK[a].split('.')[2];
-								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,0,atiK[a],'Translation of Dhp '+sno+' by '+auth));
-								cnt++;
-								continue out;
+
+					if(hier == 'm') {
+						// kn/dhp/dhp.24.budd.html
+						//alert(vagga + ' ' + sutta + ' ' + section);
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'dhp') {
+								d=(vagga+1)+"";
+								if (d.length < 2) { d = '0'+d; }
+								if(atiK[a].split('.')[1].indexOf(d)==0) {
+									var sno = vagga+1;
+									var auth = atiK[a].split('.')[2];
+									if (autha[auth]) {auth = autha[auth];}
+									output.push(transLink(which,0,atiK[a],'Translation of Dhp '+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
+					
+					// BuddhistTexts
+					if(DPR_prefs['buddhist_texts'] && hier == 'a') {
+						
+						var dhpVaggas = [1,14,9,9,12,15,11,10,14]; // stories per vagga (first section)
+						
+						var dhpVaggas2 = [12,11,9,10,11,9,8,9,8,12,10,12,9,9,8,12,12,40,1]; // stories per vagga (second section)
+						
+						var story = 0;
+						
+						if(volume == 1) { // second section
+							for(var i = 0; i < dhpVaggas.length; i++) {
+								story += dhpVaggas[i];
+							}
+							dhpVaggas = dhpVaggas2;
+						}
+						
+						for(var i = 0; i < vagga; i++) {
+							story += dhpVaggas[i];
+						}
+						
+						story += sutta;
+						
+						output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/dhpa/dhpa_e_'+(parseInt(story)+1)+'.htm','Translation of Dhp-A '+story+' by Burlingame'));
+						cnt++;
+					}	
+
+					
 				break;
 				case 3: // uda
+
+					if(hier != 'm')
+						break;
+
 					// kn/ud/ud.2.01.irel.html
 					out:
 					for (a = 0;a < atiK.length; a++) {
@@ -581,6 +637,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					cnt++;		 
 				break;
 				case 4: // iti
+
+					if(hier != 'm')
+						break;
+
 					// kn/iti/iti.1.001-027.than.html
 					section += (sutta*10);
 					switch (vagga) {
@@ -615,6 +675,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 				break;
 				case 5: // sn
+
+					if(hier != 'm')
+						break;
+
 					// kn/snp/snp.4.16.than.html
 					//alert(meta + ' ' + volume + ' ' + vagga + ' ' + sutta + ' ' + section);
 					if (vagga == 4) section--;
@@ -644,6 +708,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 				break;
 				case 6: // Vv
+
+					if(hier != 'm')
+						break;
+
 					// kn/ud/ud.2.01.irel.html
 					if (vagga == 1) {sutta +=4;}
 					out:
@@ -668,6 +736,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 				break;
 				case 7: // Pv
+
+					if(hier != 'm')
+						break;
+
 					// kn/ud/ud.2.01.irel.html
 					out:
 					for (a = 0;a < atiK.length; a++) {
@@ -691,6 +763,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 				break;
 				case 8: // Tha
+
+					if(hier != 'm')
+						break;
+
 					// kn/ud/ud.2.01.irel.html
 					section += (sutta*10);
 					//alert(vagga + ' ' + sutta + ' ' + section);
@@ -716,6 +792,10 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 					}
 				break;
 				case 9: // Thi
+
+					if(hier != 'm')
+						break;
+
 					// kn/ud/ud.2.01.irel.html
 					//alert(vagga + ' ' + sutta + ' ' + section);
 					out:
@@ -739,11 +819,42 @@ function addtrans(which,nikaya,book,meta,volume,vagga,sutta,section) {
 						}
 					}
 				break;
+				case 14: // Jat
+					// BuddhistTexts
+					if(DPR_prefs['buddhist_texts']) {
+						var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
+						output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+						cnt++;
+					}	
+				break
+				case 15: // Jat
+					// BuddhistTexts
+					if(DPR_prefs['buddhist_texts']) {
+						var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
+						output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+						cnt++;
+					}
+				break;
 				case 16: // MNi
 				break;
 				case 19: // Mil
 				break;
 			}
+		break;
+		case 'x': // vism
+
+			if(hier != 'm')
+				break;
+				
+			// BuddhistTexts
+			if(DPR_prefs['buddhist_texts']) {
+				if(book == 1) 
+					meta += 12;
+			
+				output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/vi/vi_e_'+(parseInt(meta)+1)+'.htm','Translation of Vism '+meta+' by Nyanamoli'));
+				cnt++;
+			}
+			
 		break;
 	}
 	if (cnt > 0) { return output; }
