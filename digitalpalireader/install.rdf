@@ -1,22 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
- xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-  <Description about="urn:mozilla:install-manifest">
-    <em:id>digitalpalireader@noah.yuttadhammo</em:id>
-    <em:name>Digital Pali Reader</em:name>
-    <em:version>4.5</em:version>
-    <em:creator>Yuttadhammo Bhikkhu</em:creator>
-    <em:description>Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition.</em:description>
-    <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
-    <em:optionsURL>chrome://digitalpalireader/content/prefs.xul</em:optionsURL>
-    <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
-    <em:targetApplication>
-      <Description>
-        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
-        <em:minVersion>4.0</em:minVersion>
-        <em:maxVersion>*</em:maxVersion>
-      </Description>
-    </em:targetApplication>
-    <em:bootstrap>false</em:bootstrap>
-  </Description>
-</RDF>
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:install-manifest"
+                   em:id="digitalpalireader@noah.yuttadhammo"
+                   em:name="Digital Pali Reader"
+                   em:version="4.5"
+                   em:creator="Yuttadhammo Bhikkhu"
+                   em:description="Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition."
+                   em:homepageURL="http://pali.sirimangalo.org/"
+                   em:optionsURL="chrome://digitalpalireader/content/prefs.xul"
+                   em:iconURL="chrome://digitalpalireader/content/images/logo64.png"
+                   em:bootstrap="false"
+                   em:updateKey="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDOjebCY1DeUhktu6b89y/fNIHZviW5DYGzOy1RatvoJo+w10at+4phW66odSCy3K2mdDmKe+h4Tp8LpVwQm2w/rb355KYacsUyOHaqHsvSYVD3scwQSWg0C/Zz34CtAqQvAZduPRqov3eCar17iLCLOkx0fomw8t1b+e0xmfBd2wIDAQAB">
+    <em:targetApplication RDF:resource="rdf:#$O3wJ1"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$O3wJ1"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="4.0"
+                   em:maxVersion="*" />
+</RDF:RDF>

@@ -1,25 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<RDF:RDF xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xmlns:em="http://www.mozilla.org/2004/em-rdf#">
-  <RDF:Description about="urn:mozilla:extension:digitalpalireader@noah.yuttadhammo">
-    <em:updates>
-      <RDF:Seq>
-        <RDF:li>
-          <RDF:Description>
-            <em:version>4.5</em:version>
-            <em:targetApplication>
-              <RDF:Description>
-                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>4</em:minVersion>
-                <em:maxVersion>*</em:maxVersion>
-                <em:updateLink>http://pali.sirimangalo.org/digitalpalireader.rdf</em:updateLink>
-                <em:updateInfoURL>http://pali.sirimangalo.org/digitalpalireader.xhtml</em:updateInfoURL>
-              </RDF:Description>
-            </em:targetApplication>
-          </RDF:Description>
-        </RDF:li>
-      </RDF:Seq>
-    </em:updates>
+<?xml version="1.0"?>
+<RDF:RDF xmlns:em="http://www.mozilla.org/2004/em-rdf#"
+         xmlns:NC="http://home.netscape.com/NC-rdf#"
+         xmlns:RDF="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <RDF:Description RDF:about="urn:mozilla:extension:digitalpalireader@noah.yuttadhammo"
+                   em:signature="MIGTMA0GCSqGSIb3DQEBDQUAA4GBAC8o09h+GMlSRiY/uawP4yKoiuu47lOmgr63ziXOffJT0yKRB9EBwJsa6DwIJTPUBG+/hI3Cl66QXfjcQB7QaZxlLjQLN9m1MHMDKOAIAbjEd2is/IX14/mFrfSCg1yAAMRZjkLHBtS5lYSKjn5vGTVXFc4pexblU6F6/FSJFW8G">
+    <em:updates RDF:resource="rdf:#$U3wJ1"/>
   </RDF:Description>
+  <RDF:Seq RDF:about="rdf:#$U3wJ1">
+    <RDF:li RDF:resource="rdf:#$V3wJ1"/>
+  </RDF:Seq>
+  <RDF:Description RDF:about="rdf:#$V3wJ1"
+                   em:version="4.5">
+    <em:targetApplication RDF:resource="rdf:#$Y3wJ1"/>
+  </RDF:Description>
+  <RDF:Description RDF:about="rdf:#$Y3wJ1"
+                   em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
+                   em:minVersion="4"
+                   em:maxVersion="*"
+                   em:updateLink="http://pali.sirimangalo.org/digitalpalireader.xpi"
+                   em:updateInfoURL="http://pali.sirimangalo.org/digitalpalireader.xhtml" />
 </RDF:RDF>
