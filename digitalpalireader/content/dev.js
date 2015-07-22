@@ -276,21 +276,21 @@ function Ddppn4() {  // compare nameno with D
 		 x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
 		 w = toVel(dppng[i][1].toLowerCase()).replace(/[ -]/g, '');
 		if (D[x]) {
-			matched[dppng[i][0]+'^'+dppng[i][1]] = x;
+			matched[dppng[i][0]+'x^'+dppng[i][1]] = x;
 			continue out;
 		}
 		if (D[w]) {
-			matched[dppng[i][0]+'^'+dppng[i][1]] = w;
+			matched[dppng[i][0]+'x^'+dppng[i][1]] = w;
 			continue out;
 		}
 		y = dppng[i][1].toLowerCase();
 		for (j in D) {
 			if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0  || toFuzzy(j).indexOf(toFuzzy(w)) == 0 || D[j][0].indexOf(y) == 0) {
-				matched[dppng[i][0]+'^'+dppng[i][1]] = j;
+				matched[dppng[i][0]+'x^'+dppng[i][1]] = j;
 				continue out;
 			}
 		}
-		unmatched[dppng[i][0]+'^'+dppng[i][1]] = '';
+		unmatched[dppng[i][0]+'x^'+dppng[i][1]] = '';
 		//if(unmatched.length > 10) break;
 	}
 	
@@ -312,12 +312,12 @@ function Ddppn3() {
 	var sorta = [];
 	for (i in Ddppn) {
 		var j = Ddppn[i].split('#');
-		var k = j[0].split('^');
+		var k = j[0].split('x^');
 		for (x in k) {
 			var m = k[x].toLowerCase().replace(/^  */,'').replace(/  *$/,'');
 			if (k[x].length > 0) {
 				var l = toVel(k[x].toLowerCase().replace(/\(no\..+\)/g,'').replace(/[^ñāīūa-z]/g,''));
-				sorta.push(l+'^'+m+'#'+j[1]);
+				sorta.push(l+'x^'+m+'#'+j[1]);
 			}
 		}
 	}
@@ -325,7 +325,7 @@ function Ddppn3() {
 	var sorta2 = sortaz(sorta);
 	var out = 'var D = [];\n';
 	for (i in sorta2) {
-		var z = sorta2[i].split('^');
+		var z = sorta2[i].split('x^');
 		var j = z[1].split('#');
 		out +="D['"+z[0]+"'] = ['"+j[0]+"','"+j[1]+"'];\n";
 	}
@@ -557,26 +557,27 @@ function DconvertMATtoReal() {
 	document.getElementById('rel3').value = fin;
 }
 function DcompareMAT() {
-	var hi = ['m','a','t']; //,'t'
-	var nik = 'y';
-	var books = 14;
+	var hi = ['m','a']; //,'t'
+	var nik = 'x';
+	var books = 2;
 	var finalout = '<table><tr>';
 	var out = [];
 	
 	for (h = 0; h < hi.length; h++) {
 		out[hi[h]] = [];
-		for (j=8; j < books; j++) {
+		for (j=0; j < books; j++) {
 			var i = j;
+/*
 			if (h > 0) {
 				if(j == 6 || j == 7 || j > 8) continue;
 				i = abhivala[j+1];
 			}
-			document.textpad.pad.value = 'xml/'+nik+(j+1)+hi[h]+'.xml';
+*/
+			//document.textpad.pad.value = 'xml/'+nik+(j+1)+hi[h]+'.xml';
 			
-			var xmlhttp = new window.XMLHttpRequest();
-			xmlhttp.open("GET", 'xml/'+nik+(j+1)+hi[h]+'.xml', false);
-			xmlhttp.send(null);
-			var xmlDoc = xmlhttp.responseXML.documentElement;
+			var file = nik+(j+1)+hi[h];
+			
+			var xmlDoc = loadXMLFile(file,0);
 
 			var u = xmlDoc.getElementsByTagName("h0");
 			
@@ -585,7 +586,7 @@ function DcompareMAT() {
 				name = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ /g, '');
 				if (u.length > 1 && name == '') { name = 'unnamed'; }
 				if(name && name.length > 1) {
-					out[hi[h]].push(' '+name+'^'+nik+'^'+i+'^'+sx+'^0^0^0^0^1');
+					out[hi[h]].push(' '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^0^0^0^0^1');
 				}
 				var v = u[sx].getElementsByTagName("h1");
 					
@@ -594,7 +595,7 @@ function DcompareMAT() {
 					name = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ /g, '');
 					if (v.length > 1 && name == '') { name = 'unnamed'; }
 					if(name && name.length > 1) {
-						out[hi[h]].push('  '+name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^0^0^0^2');
+						out[hi[h]].push('  '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^'+sy+'x^0^0^0^2');
 					}
 					var w = v[sy].getElementsByTagName("h2");
 				
@@ -603,7 +604,7 @@ function DcompareMAT() {
 						name = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ /g, '');
 						if (w.length > 1 && name == '') { name = 'unnamed'; }
 						if(name && name.length > 1) {
-							out[hi[h]].push('   '+name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^0^0^3');
+							out[hi[h]].push('   '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^3');
 						}
 						var x = w[sz].getElementsByTagName("h3");
 						
@@ -612,17 +613,17 @@ function DcompareMAT() {
 							name = x[s].getElementsByTagName("h3n")[0].textContent.replace(/ /g, '');
 							if (x.length > 1 && name == '') { name = 'unnamed'; }
 							if(name && name.length > 1) {
-								out[hi[h]].push('    '+name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^4');
+								out[hi[h]].push('    '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^4');
 							}
 							var y = x[s].getElementsByTagName("h4");
 							
 							for (var se = 0; se < y.length; se++) // per h4
 							{
-								if(!y[se].getElementsByTagName("h4n")[0]) alert(h+' '+name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se);
+								if(!y[se].getElementsByTagName("h4n")[0]) alert(h+' '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se);
 								name = y[se].getElementsByTagName("h4n")[0].textContent.replace(/ /g, '');
 								if (y.length > 1 && name == '') { name = 'unnamed'; }
 								if(name && name.length > 1) {
-									out[hi[h]].push('     '+name+'^'+nik+'^'+i+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^5');
+									out[hi[h]].push('     '+name+'x^'+nik+'x^'+i+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^5');
 								}
 							}
 						}
@@ -656,7 +657,7 @@ function DtitleSearchCreate() {
 
 			var name = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 			
-			out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^0^0^0^0^0^'+G_hLetters[ii]+'^0';
+			out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^0^0^0^0^0^'+G_hLetters[ii]+'x^0';
 			
 			var u = xmlDoc.getElementsByTagName("h0");
 			
@@ -667,8 +668,8 @@ function DtitleSearchCreate() {
 			{							
 				name = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 				if(name && name != ' ') {
-					if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^0^0^0^0^'+G_hLetters[ii]+'^1';
-					else out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^0^0^0^0^'+G_hLetters[ii]+'^1';
+					if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+G_hLetters[ii]+'x^1';
+					else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+G_hLetters[ii]+'x^1';
 				}
 				var v = u[sx].getElementsByTagName("h1");
 					
@@ -676,8 +677,8 @@ function DtitleSearchCreate() {
 				{			
 					name = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 					if(name && name != ' ') {
-						if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^0^0^0^'+G_hLetters[ii]+'^2';
-						else out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^0^0^0^'+G_hLetters[ii]+'^2';
+						if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+G_hLetters[ii]+'x^2';
+						else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+G_hLetters[ii]+'x^2';
 					}
 					var w = v[sy].getElementsByTagName("h2");
 				
@@ -685,8 +686,8 @@ function DtitleSearchCreate() {
 					{
 						name = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 						if(name && name != ' ') {
-							if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+G_hLetters[ii]+'^3';
-							else out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^0^0^'+G_hLetters[ii]+'^3';
+							if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+G_hLetters[ii]+'x^3';
+							else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+G_hLetters[ii]+'x^3';
 						}
 						var x = w[sz].getElementsByTagName("h3");
 						
@@ -694,8 +695,8 @@ function DtitleSearchCreate() {
 						{
 							name = x[s].getElementsByTagName("h3n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 							if(name && name != ' ') {
-								if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+G_hLetters[ii]+'^4';
-								else out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^0^'+G_hLetters[ii]+'^4';
+								if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+G_hLetters[ii]+'x^4';
+								else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+G_hLetters[ii]+'x^4';
 							}
 							var y = x[s].getElementsByTagName("h4");
 							
@@ -703,8 +704,8 @@ function DtitleSearchCreate() {
 							{
 								name = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 								if(name && name != ' ') {
-									if(out[name]) out[name] += '#'+fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+G_hLetters[ii]+'^5';
-									else out[name] = fi.charAt(0)+'^'+fi.substring(1)+'^'+sx+'^'+sy+'^'+sz+'^'+s+'^'+se+'^'+G_hLetters[ii]+'^5';
+									if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+G_hLetters[ii]+'x^5';
+									else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+G_hLetters[ii]+'x^5';
 								}
 							}
 						}
@@ -865,9 +866,9 @@ function getWordList(){
 				if(thisterms[thisd]) continue;
 				thisterms[thisd] = 1;
 				if(dataout[thisd]) {
-					dataout[thisd] += '#' + i + '^' + j;
+					dataout[thisd] += '#' + i + 'x^' + j;
 				}
-				else dataout[thisd] = i + '^' + j;
+				else dataout[thisd] = i + 'x^' + j;
 			}
 		}
 	}
@@ -890,7 +891,7 @@ function PEDcat() {
 			var i = parseInt(entry[0],10);
 			var j = parseInt(entry[1],10);
 			if(!ma[i]) ma[i] = [];
-			ma[i][j]=a+(mainda[a].length > 1?'^'+(parseInt(b)+1):'');
+			ma[i][j]=a+(mainda[a].length > 1?'x^'+(parseInt(b)+1):'');
 		}
 	}
 	
@@ -923,7 +924,7 @@ function DPPNcat() {
 			var i = parseInt(entry[0],10);
 			var j = parseInt(entry[1],10);
 			if(!ma[i]) ma[i] = [];
-			ma[i][j]=a+(D[a].length > 1?'^'+(parseInt(b)+1):'');
+			ma[i][j]=a+(D[a].length > 1?'x^'+(parseInt(b)+1):'');
 		}
 	}
 	
@@ -1319,7 +1320,7 @@ function DdppnSortCSV() {
 	for (var i = 0; i < sorta2.length; i++) {
 		var file = D[sorta2[i]];
 		for(var j = 0; j < file.length; j++) {
-			var num = file.length>1?'^'+(j+1):'';
+			var num = file.length>1?'x^'+(j+1):'';
 			//alert(file[j]);
 			var t = file[j].split('/');
 			var pedp = 'etc/XML2/'+ t[0] +'.xml';
@@ -1417,7 +1418,7 @@ function DgetThaiBook(book) {
 				
 		var linesa = pages[i].getElementsByTagName('line');
 		if(/^  +/.exec(linesa[0].textContent) && i > 0) xmlo += '</p><p>';
-		xmlo += '^a^Thai '+book+'.'+i+'^ea^ '; 
+		xmlo += 'x^a^Thai '+book+'.'+i+'x^ea^ '; 
 
 		var lines = '';
 		for (j = 0; j < linesa.length; j++) {
@@ -1433,7 +1434,7 @@ function DgetThaiBook(book) {
 			else if(/\*-/.exec(tl)) { // footnote replacing
 				tl = tl.replace('*-', '{' + fna[[0]] + '}');
 			}
-			lines += '#' + j + '^' + tl.replace(/%/g,'^a^').replace(/@/g,'^ea^') + (linesa[j+1] ? ((/^  +/.exec(linesa[j+1].textContent) || (/^ {7,}/.exec(tl) && !/^ *\[/.exec(tl))) ? '</p><p>' : ' ') : '');
+			lines += '#' + j + 'x^' + tl.replace(/%/g,'x^a^').replace(/@/g,'x^ea^') + (linesa[j+1] ? ((/^  +/.exec(linesa[j+1].textContent) || (/^ {7,}/.exec(tl) && !/^ *\[/.exec(tl))) ? '</p><p>' : ' ') : '');
 		}
 		xmlo += lines;
 	}
@@ -2144,7 +2145,7 @@ function DthaiOut2(booka) {
 			
 			if(booka[e][2] && parseInt(pageno,10) > booka[e][2]) break out; // hit page limit
 			
-			Ax.push('-- ^a^Thai '+book+'.'+pageno+'^ea^ --');
+			Ax.push('-- ^a^Thai '+book+'.'+pageno+'x^ea^ --');
 
 			// footnotes
 
@@ -2230,7 +2231,7 @@ function DthaiOut2(booka) {
 					dalert(tl);
 					return;
 				}
-				var t = '#' + j + '#' + tl.replace(/%/g,'^a^').replace(/@/g,'^ea^');
+				var t = '#' + j + '#' + tl.replace(/%/g,'x^a^').replace(/@/g,'x^ea^');
 				Ax.push(t);
 			}
 		}
@@ -2463,7 +2464,7 @@ function DMakeAttArray(h) {
 			var a = Dsearch(i+(h==1?'a':'t'),getstring);
 			for(c = 0; c < a.length; c++) {
 
-				var b = '#'+i.charAt(0)+'^'+(parseInt(i.substring(1))-1)+'^'+a[c][0]+'^'+a[c][1]+'^'+a[c][2]+'^'+a[c][3]+'^'+a[c][4]+'^'+a[c][5];
+				var b = '#'+i.charAt(0)+'x^'+(parseInt(i.substring(1))-1)+'x^'+a[c][0]+'x^'+a[c][1]+'x^'+a[c][2]+'x^'+a[c][3]+'x^'+a[c][4]+'x^'+a[c][5];
 				if(typeof(outa[a[c][6]]) == 'string') outa[a[c][6]] += b;
 				else outa[a[c][6]] = b;
 			}
@@ -2614,7 +2615,7 @@ function paliCite() {
 	
 	outer:
 	for (var b = 0; b < x; b++) {
-		var r = proots[b].split('^');
+		var r = proots[b].split('x^');
 		var ra = [r[0]].concat(r[1].split(' '));
 		for (var c = 0; c < y.length; c++) {
 			var ya = y[c].getElementsByTagName('h2');
@@ -2832,19 +2833,19 @@ function tipitakaDB() {
 								//~ }
 								//out.push([volume,item++,i,sx,sy,sz,s,se,p,paras.join('<br/><br/>'),pages,[name[1],name[2],name[3],name[4],name[5]]]);
 								
-								var code = sx+'^'+sy+'^'+sz+'^'+s+'^'+se;
+								var code = sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se;
 
 								var rel = "";
 								
 								switch(hier) {
 									case 'm':
-										rel = relm[nik+'^'+(volume-1)+'^'+code];
+										rel = relm[nik+'x^'+(volume-1)+'x^'+code];
 										break;
 									case 'a':
-										rel = rela[nik+'^'+(volume-1)+'^'+code];
+										rel = rela[nik+'x^'+(volume-1)+'x^'+code];
 										break;
 									case 't':
-										rel = relt[nik+'^'+(volume-1)+'^'+code];
+										rel = relt[nik+'x^'+(volume-1)+'x^'+code];
 										break;
 								}
 								
@@ -2884,7 +2885,7 @@ function tipitakaDB() {
 	var outr = '',outr2 = '',outr3 = '';
 	for (var j = 0; j<out.length; j++) {
 		outr += out[j].join('|')+'\n';
-		//outr += out[j][1]+'|'+out[j][0]+'|'+out[j][10]+'|'+(out[j][11].join('^'))+'|'+out[j][9]+'\n';
+		//outr += out[j][1]+'|'+out[j][0]+'|'+out[j][10]+'|'+(out[j][11].join('x^'))+'|'+out[j][9]+'\n';
 		//outr2 += out[j][1]+'|'+out[j][0]+'|'+out[j][1]+'\n';
 	}
 	writeToDesktop('dpr_temp.csv', outr);
@@ -3338,11 +3339,111 @@ function D_getLocOfChildNumber(nik,book,ahier,level) {
 	
 }   
 
+var D_xmlConverted = []
 
+function DNewConvertXML() {
+
+	var files = 'vin06t.nrf';
+	var length = 5;
+
+	var xmlstring = '<?xml version="1.0"?><body><ha><han></han><h0><h0n></h0n><h1><h1n></h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n>';
+	
+	var meta = 0;
+	var volume = 0;
+	var vagga = 0;
+	var sutta = 0;
+	var section = 0;
+
+	for(var i = 0; i < length; i++) {
+		
+		var bookload = 'tmp/' + files + i + '.xml';
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", bookload, false);
+		xmlhttp.send(null);
+		//alert(bookload);
+		var xd = xmlhttp.responseXML.documentElement;
+		//alert(xmlDoc.textContent);
+		
+		var x = xd.getElementsByTagName("p");
+		for (var j = 0; j < x.length; j++) {
+			xmlstring += (new XMLSerializer()).serializeToString(x[j]).replace(/ed="([A-Z])" n/g,"$1 asdf").replace(/ asdf="([0-9.]+)"/g,"$1").replace(/<pb ([^ >]+) *\/>/g,"^a^$1^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"").replace(/<p rend="chapter">([^<]*)<\/p>/g,"</h4><h4><h4n>$1</h4n>");
+/*
+			if(x[j].getAttribute('rend') == '' && false) {
+				var h4 = document.createElement("h4");
+				h4.appendChild(document.createElement("h4n"));
+				D_xmlConverted.getElementsByTagName('h3')[sutta].appendChild(h4);
+				section++;
+				D_xmlConverted.getElementsByTagName('h3')[sutta].getElementsByTagName('h4')[section].getElementsByTagName('h4n')[0].textContent = x[j].textContent;
+			}
+			else {
+				
+				var p = document.createElement("p");
+				var txt = (new XMLSerializer()).serializeToString(x[j]).replace(/<pb ed="([A-Z])" n="([0-9.]+)" \/>/g,"^a^$1$2^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"");
+				
+				var tn = document.createTextNode(txt);
+				p.appendChild(tn);
+				
+				D_xmlConverted.getElementsByTagName('h4')[section].appendChild(x[j]);
+			}
+			*/ 
+		}
+/*
+		var h3 = document.createElement("h3");
+		h3.appendChild(document.createElement("h3n"));
+		D_xmlConverted.getElementsByTagName('h2')[0].appendChild(h3);
+		sutta++;
+		section = 0;
+*/
+
+	}
+	xmlstring += '</h4></h3></h2></h1></h0></ha></body>';
+	writeToDesktop('temp.xml',xmlstring);
+	//D_showTempXML();
+}  
     
-    
-    
-    
+function D_showTempXML() {
+	var out = [];
+    var xmlDoc = D_xmlConverted;
+
+	DsaveXML('/home/noah/Desktop/temp.xml',xmlDoc); 
+	
+	var z = xmlDoc.getElementsByTagName("ha");
+	
+	out.push('<div><input id="han" length="100" value="'+z[0].getElementsByTagName("han")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHAN($(\'#han\').val())"></div>');
+	
+	var y = z[0].getElementsByTagName("h0");
+	for (var y1 = 0; y1 < y.length; y1++) {
+		out.push('<div style="margin-left:10px;"><input id="h0n'+y1+'" length="100" value="'+y[y1].getElementsByTagName("h0n")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHN(['+y1+'],$(\'#h0n'+y1+'\').val())"></div>');
+		var x = y[y1].getElementsByTagName("h1");
+		for (var x1 = 0; x1 < x.length; x1++) {
+			out.push('<div style="margin-left:20px;"><input id="h1n'+x1+'" length="100" value="'+x[x1].getElementsByTagName("h1n")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHN(['+y1+','+x1+'],$(\'#h1n'+x1+'\').val())"></div>');
+			var w = x[x1].getElementsByTagName("h2");
+			for (var w1 = 0; w1 < w.length; w1++) {
+				out.push('<div style="margin-left:30px;"><input id="h2n'+w1+'" length="100" value="'+w[w1].getElementsByTagName("h2n")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHN(['+y1+','+x1+','+w1+'],$(\'#h2n'+w1+'\').val())"></div>');
+				var v = w[w1].getElementsByTagName("h3");
+				for (var v1 = 0; v1 < v.length; v1++) {
+					out.push('<div style="margin-left:40px;"><input id="h3n'+v1+'" length="100" value="'+v[v1].getElementsByTagName("h3n")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHN(['+y1+','+x1+','+w1+','+v1+'],$(\'#h3n'+v1+'\').val())"></div>');
+					var u = v[v1].getElementsByTagName("h4");
+					for (var u1 = 0; u1 < u.length; u1++) {
+						out.push('<div style="margin-left:50px;"><input id="h4n'+u1+'" length="100" value="'+u[u1].getElementsByTagName("h4n")[0].textContent+'">&nbsp;<input type="button" value="s" onclick="D_XMLSaveHN(['+y1+','+x1+','+w1+','+v1+','+u1+'],$(\'#h4n'+u1+'\').val())"></div>');
+						var t = u[u1].getElementsByTagName("p");
+						for (var t1 = 0; t1 < t.length; t1++) {
+							out.push('<div style="margin-left:60px;">'+t[t1].textContent+'</div>');
+						}
+					}
+				}
+			}
+		}
+	}
+	document.getElementById('content').innerHTML = out.join("<br/>");
+		
+}
+
+function D_XMLSaveHAN(han) {
+	D_xmlConverted.getElementsByTagName("han")[0].textContent = han;
+	D_showTempXML();
+}
+
     
     
     
