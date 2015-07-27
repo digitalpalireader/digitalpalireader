@@ -5,7 +5,7 @@
   <RDF:Description RDF:about="urn:mozilla:install-manifest"
                    em:id="digitalpalireader@noah.yuttadhammo"
                    em:name="Digital Pali Reader"
-                   em:version="4.5"
+                   em:version="4.7"
                    em:creator="Yuttadhammo Bhikkhu"
                    em:description="Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition."
                    em:homepageURL="http://pali.sirimangalo.org/"
