@@ -13,6 +13,7 @@ G_XMLFileArray['v6'] = [1,1,1];
 G_XMLFileArray['v7'] = [0,0,1];
 G_XMLFileArray['v8'] = [0,0,1];
 G_XMLFileArray['v9'] = [0,0,1];
+G_XMLFileArray['v10'] = [0,0,1];
 G_XMLFileArray['d1'] = [1,1,1];
 G_XMLFileArray['d2'] = [1,1,1];
 G_XMLFileArray['d3'] = [1,1,1];
