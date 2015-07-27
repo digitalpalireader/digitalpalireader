@@ -3343,8 +3343,8 @@ var D_xmlConverted = []
 
 function DNewConvertXML() {
 
-	var files = 'vin06t.nrf';
-	var length = 5;
+	var files = 'vin07t.nrf';
+	var length = 56;
 
 	var xmlstring = '<?xml version="1.0"?><body><ha><han></han><h0><h0n></h0n><h1><h1n></h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n>';
 	
@@ -3354,7 +3354,7 @@ function DNewConvertXML() {
 	var sutta = 0;
 	var section = 0;
 
-	for(var i = 0; i < length; i++) {
+	for(var i = 0; i <= length; i++) {
 		
 		var bookload = 'tmp/' + files + i + '.xml';
 		var xmlhttp = new window.XMLHttpRequest();
