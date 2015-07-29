@@ -471,7 +471,7 @@ var G_oneNoun = [];
 var G_quiza = [];
 
 function resetTable()  {
-	if ($('#Qshow').html() == 'Hide') hideAnswers());
+	if ($('#Qshow').html() == 'Hide') hideAnswers();
 
 	getRandomNoun();
 	
