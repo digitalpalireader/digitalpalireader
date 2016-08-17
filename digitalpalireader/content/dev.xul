@@ -73,7 +73,7 @@
 			</vbox>		
 			<vbox>
 			<spacer flex="1"/>
-			<button id="title" label="go" oncommand="devMode('htm.DXMLThai(document.getElementById(\'set\').value,document.getElementById(\'book\').value,\'m\',eval(document.getElementById([[2,152,null]])')"/>
+			<button id="title" label="go" oncommand="devMode('htm.DXMLThai(document.getElementById(\'set\').value,document.getElementById(\'book\').value,\'m\',document.getElementById([[2,152,null]])"/>
 			</vbox>		
 	</hbox>
         <splitter id="PanelSplitter"/>

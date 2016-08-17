@@ -2,27 +2,21 @@
 <RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
  xmlns:em="http://www.mozilla.org/2004/em-rdf#">
   <Description about="urn:mozilla:install-manifest">
-    <em:id>DPRThai@noah.yuttadhammo</em:id>
+    <em:id>DPRThai@yuttadhammo.bhikkhu</em:id>
     <em:name>Digital Pali Reader Thai Tipitaka Plugin</em:name>
-    <em:version>0.26</em:version>
+    <em:version>0.27</em:version>
     <em:creator>Noah Yuttadhammo</em:creator>
     <em:description>Thai Tipitaka (optional) for use with the Digital Pali Reader.</em:description>
     <em:homepageURL>http://pali.sirimangalo.org/</em:homepageURL>
-    <em:updateURL>http://pali.sirimangalo.org/DPRThai.rdf</em:updateURL>
     <em:iconURL>chrome://digitalpalireader/content/images/logo64.png</em:iconURL>
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id> <!-- firefox -->
         <em:minVersion>3.5</em:minVersion>
-        <em:maxVersion>*</em:maxVersion>
+        <em:maxVersion>46.0</em:maxVersion>
       </Description>
     </em:targetApplication>
-    <em:updateKey>
-    MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDdroA7ONVpoCaPoYilrW++MPgq
-	p7EWBn1q1xfuZ0kwu/5KJU1SSB/9x3Oh/6KWKkQ3shW4Ux+yoBi78xtWkZmQqUyW
-	eWHqHhdma5A09gtMv8eIVNaM21+7HHXqhKLYAcRp0qfaLfK8LWj9oRS2xjXSHTlp
-	50wghuHGEe67058qfQIDAQAB
-	</em:updateKey>
+    <em:type>2</em:type>
     <em:bootstrap>false</em:bootstrap>
   </Description>
 </RDF>

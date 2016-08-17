@@ -12,13 +12,7 @@ window.onerror = function(message, file, lineNumber) {
 
 var atiIns = 0;
 
-function changeStyleByName(name,attrib,value) {
-		var tags = document.getElementsByName(name);
-		for(var i=0;i < tags.length;i++)
-		{
-			eval('tags[i].style.'+attrib+'="'+value+'";');
-		} 
-}
+
 
 
 function getconfig() {

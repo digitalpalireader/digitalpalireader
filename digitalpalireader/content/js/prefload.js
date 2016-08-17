@@ -13,7 +13,17 @@ function getPref(name) {
 	var type = G_prefTypes[typeof(DPR_prefsD[name])];
 	var ret; 
 	try{
-		eval('ret = G_'+type+'Prefs.get'+type+'Pref(\''+name+'\');');
+		switch(type) {
+			case "Int":
+				ret = G_IntPrefs.getIntPref(name);
+				break;
+			case "Char":
+				ret = G_CharPrefs.getCharPref(name);
+				break;
+			case "Bool":
+				ret = G_BoolPrefs.getBoolPref(name);
+				break;
+		}
 	}
 	catch(ex) {
 	}
@@ -24,7 +34,17 @@ function setPref(name,val) {
 	var type = G_prefTypes[typeof(val)];
 	var ret; 
 	try{
-		eval('ret = G_'+type+'Prefs.set'+type+'Pref(\''+name+'\',\''+val+'\');');
+		switch(type) {
+			case "Int":
+				ret = G_IntPrefs.setIntPref(name,val);
+				break;
+			case "Char":
+				ret = G_CharPrefs.setCharPref(name,val);
+				break;
+			case "Bool":
+				ret = G_BoolPrefs.setBoolPref(name,val);
+				break;
+		}
 	}
 	catch(ex) {
 	}

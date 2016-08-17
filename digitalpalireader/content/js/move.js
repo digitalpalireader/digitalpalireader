@@ -93,10 +93,6 @@ function getlink(which)
 	scrollmuch = bookmarklink[which-1];
 }
 
-function changelang(lang) {
-	var langc = document.getElementById('lang').value;
-	parent.mainFrame.yt = eval('parent.mainFrame.'+langc+'t');
-}
 
 function go_anchor(mydiv,n){
     document.getElementById(mydiv).scrollTop = document.getElementById(n).offsetTop;

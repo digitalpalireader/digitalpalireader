@@ -6,9 +6,7 @@ function devMode(string) {
 	if(string) {
 		if(/^htm/.test(string)) {
 			//alert('document.getElementById("dpr-dev").contentWindow'+string.substring(3));
-			eval('document.getElementById("dpr-dev").contentWindow'+string.substring(3));
 		}
-		else eval(string);
 		return;
 	}
 	//devCommonWords();
@@ -3444,7 +3442,14 @@ function D_XMLSaveHAN(han) {
 	D_showTempXML();
 }
 
-    
+function D_makeBV() {
+	var out = "";
+	for(var i = 1; i <= 365; i++) {
+		var abv = bv(i, true);
+		out += abv[0] + '|' + abv[1].join('<br/>').replace(/\n/g,'<br/>') + '|' + abv[2] + '|' + abv[3] + '|' + abv[4] + '\n';
+	}
+	writeToDesktop('temp.csv',out);
+} 
     
     
     

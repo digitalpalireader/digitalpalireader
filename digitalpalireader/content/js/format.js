@@ -392,7 +392,13 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 	var lgt = una.length;
 	
 	book = getBookName(nikaya,hiert,book-1);
-	if (G_nikLongName[nikaya]) { nikaya = G_nikLongName[nikaya]; }
+	var title = '',save = '',raw = '';
+
+	if (G_nikFullFullNames[nikaya]) {
+		var nn = '<b>'+G_nikFullFullNames[nikaya]+'</b>';
+		title += (click?wrapLink(nn,click):nn) + ', ';
+	}
+	
 	var col = ['colped','coldppn','colcpd','colped','coldppn','colcpd','colped','coldppn','colcpd'];
 	var w = 0;
 	
@@ -411,8 +417,6 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 			}
 		}
 	}
-	
-	var title = '',save = '',raw = '';
 	
 	for (i=0; i < namea.length;i++) {
 		var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')

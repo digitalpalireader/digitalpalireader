@@ -1192,7 +1192,25 @@ function atiSearchOffline(d, getstring) {
 	var count = 0;
 	var buffer = 30; // number of letters to add before and after the match
 	
-	eval('var anik = ati'+nik.toUpperCase()+';');
+	var anik;
+	switch(nik) {
+		case "d":
+			anik = atiD;
+			break;
+		case "m":
+			anik = atiM;
+			break;
+		case "s":
+			anik = atiS;
+			break;
+		case "a":
+			anik = atiA;
+			break;
+		case "k":
+			anik = atiK;
+			break;
+	}
+	
 	for (var c = 0; c < anik.length; c++) {
 		var atiloc = DPR_prefs['catiloc'];
 		if(/\\/.exec(atiloc)) { // windows

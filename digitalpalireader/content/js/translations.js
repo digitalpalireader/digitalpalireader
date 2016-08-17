@@ -343,7 +343,9 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 			// BuddhistTexts
 			if(DPR_prefs['buddhist_texts'] && (which == 6 || which == 0)) {
-				output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/an/an_e_'+(book+1)+'.htm','Translation of AN '+(book+1)+' by Bodhi'));
+				var n = which == 0 ? getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
+
+				output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
 				cnt++;
 			}
 			if (which > 1) return null;

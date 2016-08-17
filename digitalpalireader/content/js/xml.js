@@ -197,7 +197,19 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	nikaya+"^"+bookno+"^"+meta+"^*^*^*^*",
 	nikaya+"^"+bookno+"^*^*^*^*^*"];
 	for (i in relwhere) {
-		var relhere = eval('rel'+hier+"['"+relwhere[i]+"']");
+		var relhere;
+		
+		switch(hier) {
+			case "m":
+				relhere = relm[relwhere[i]];
+				break;
+			case "a":
+				relhere = rela[relwhere[i]];
+				break;
+			case "t":
+				relhere = relt[relwhere[i]];
+				break;
+		}
 		if (relhere) {
 			var hi = ['m','a','t'];
 			var button_order = ['l','m','r'];

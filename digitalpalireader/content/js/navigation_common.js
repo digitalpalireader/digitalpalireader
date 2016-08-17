@@ -250,6 +250,18 @@ G_nikFullNames['x'] = 'Vism';
 G_nikFullNames['b'] = 'Abhidh-s';
 G_nikFullNames['g'] = 'Byākaraṇa';
 
+var G_nikFullFullNames = [];
+G_nikFullFullNames['v'] = 'Vinaya Piṭaka';
+G_nikFullFullNames['d'] = 'Dīgha Nikāya';
+G_nikFullFullNames['m'] = 'Majjhima Nikāya';
+G_nikFullFullNames['s'] = 'Saṃyutta Nikāya';
+G_nikFullFullNames['a'] = 'Aṅguttara Nikāya';
+G_nikFullFullNames['k'] = 'Khuddaka Nikāya';
+G_nikFullFullNames['y'] = 'Abhidhamma Piṭaka';
+G_nikFullFullNames['x'] = 'Visuddhimagga';
+G_nikFullFullNames['b'] = 'Abhidhammattha-saṅgaha';
+G_nikFullFullNames['g'] = 'Byākaraṇa';
+
 var G_kVaggas = []
 
 function makekVaggas() {
