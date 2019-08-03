@@ -12,7 +12,7 @@
     <RDF:li RDF:resource="rdf:#$V3wJ1"/>
   </RDF:Seq>
   <RDF:Description RDF:about="rdf:#$V3wJ1"
-                   em:version="4.7">
+                   em:version="4.7.1">
     <em:targetApplication RDF:resource="rdf:#$Y3wJ1"/>
   </RDF:Description>
   <RDF:Description RDF:about="urn:mozilla:extension:digitalpalireader@noah.yuttadhammo"

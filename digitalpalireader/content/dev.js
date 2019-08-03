@@ -3339,10 +3339,17 @@ function D_getLocOfChildNumber(nik,book,ahier,level) {
 
 var D_xmlConverted = []
 
+/*
+ 
+</h4>\n            <h4>\n              <h4n>([^<]+)</h4n>\n              <p rend="subhead">([^<]+)</p>
+</h4>\n          </h3><h3><h3n>\1</h3n>\n            <h4>\n              <h4n>\2</h4n>
+
+*/
+
 function DNewConvertXML() {
 
-	var files = 'vin07t.nrf';
-	var length = 56;
+	var files = 'vin08t.nrf';
+	var length = 35;
 
 	var xmlstring = '<?xml version="1.0"?><body><ha><han></han><h0><h0n></h0n><h1><h1n></h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n>';
 	

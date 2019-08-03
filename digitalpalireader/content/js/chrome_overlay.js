@@ -143,8 +143,8 @@ var DPROverlay = {
 		else return false
 	},
 	openSidebar: function() {
-		toggleSidebar('viewDPR');
-		return this,DPRSidebarDocument();
+		SidebarUI.toggle('viewDPR');
+		return this.DPRSidebarDocument();
 	},
 	rightClick:function(type,params) {
 		if(gContextMenu.target.tagName!="TEXTAREA"&&gContextMenu.target.tagName!="INPUT"){

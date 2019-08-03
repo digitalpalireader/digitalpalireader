@@ -47,7 +47,7 @@ function paliXML(filein,which,add)
 	var t1 = tloc[1];	
 	var t2 = tloc[2];
 	pedfileget = t1 + '/' + t2;
-	var pedp = 'etc/XML1/'+ t1+'/ped.xml';
+	var pedp = 'chrome://digitalpalireader/content/etc/XML1/'+ t1+'/ped.xml';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", pedp, false);
 	xmlhttp.send(null);
@@ -233,7 +233,7 @@ function DPPNXML(filein,which,add)
 	
 	// xml
 	
-	var dppnf = 'etc/XML2/'+tloc[1]+'.xml';
+	var dppnf = 'chrome://digitalpalireader/content/etc/XML2/'+tloc[1]+'.xml';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", dppnf, false);
 	xmlhttp.send(null);
@@ -627,7 +627,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
 
 function getDppnData(link){
-	var dppnf = 'etc/XML2/'+link.split('/')[0]+'.xml';
+	var dppnf = 'chrome://digitalpalireader/content/etc/XML2/'+link.split('/')[0]+'.xml';
 
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", dppnf, false);

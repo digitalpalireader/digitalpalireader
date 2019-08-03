@@ -12,7 +12,6 @@ function onLoad() {
 	var url = document.location.href;
 	var link = url.split('?')[1].substring(4);
 	if (link) {
-		alert('test');
 		if(!/^http/.test(link) && !/^file:/.test(link))
 			atiurl = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+link;
 		else {

@@ -6,7 +6,7 @@
                    em:id="digitalpalireader@yuttadhammo.bhikkhu"
                    em:type="2"
                    em:name="Digital Pali Reader"
-                   em:version="4.76"
+                   em:version="4.7.1"
                    em:creator="Yuttadhammo Bhikkhu"
                    em:description="Tool for reading the Pali Canon and commentaries using dictionary lookup and automatic word recognition."
                    em:homepageURL="http://pali.sirimangalo.org/"
@@ -18,5 +18,5 @@
   <RDF:Description RDF:about="rdf:#$O3wJ1"
                    em:id="{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
                    em:minVersion="4.0"
-                   em:maxVersion="46.0" />
+                   em:maxVersion="*" />
 </RDF:RDF>
