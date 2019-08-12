@@ -9,6 +9,7 @@ function devMode(string) {
 		}
 		return;
 	}
+	DFixXML();
 	//devCommonWords();
 //document.textpad.pad.value = '';
 //DconvertMATtoReal();
@@ -3348,8 +3349,8 @@ var D_xmlConverted = []
 
 function DNewConvertXML() {
 
-	var files = 'vin08t.nrf';
-	var length = 35;
+	var files = 'abh04t.nrf';
+	var length = 7;
 
 	var xmlstring = '<?xml version="1.0"?><body><ha><han></han><h0><h0n></h0n><h1><h1n></h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n>';
 	
@@ -3358,7 +3359,6 @@ function DNewConvertXML() {
 	var vagga = 0;
 	var sutta = 0;
 	var section = 0;
-
 	for(var i = 0; i <= length; i++) {
 		
 		var bookload = 'tmp/' + files + i + '.xml';
@@ -3371,40 +3371,15 @@ function DNewConvertXML() {
 		
 		var x = xd.getElementsByTagName("p");
 		for (var j = 0; j < x.length; j++) {
-			xmlstring += (new XMLSerializer()).serializeToString(x[j]).replace(/ed="([A-Z])" n/g,"$1 asdf").replace(/ asdf="([0-9.]+)"/g,"$1").replace(/<pb ([^ >]+) *\/>/g,"^a^$1^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"").replace(/<p rend="chapter">([^<]*)<\/p>/g,"</h4><h4><h4n>$1</h4n>");
-/*
-			if(x[j].getAttribute('rend') == '' && false) {
-				var h4 = document.createElement("h4");
-				h4.appendChild(document.createElement("h4n"));
-				D_xmlConverted.getElementsByTagName('h3')[sutta].appendChild(h4);
-				section++;
-				D_xmlConverted.getElementsByTagName('h3')[sutta].getElementsByTagName('h4')[section].getElementsByTagName('h4n')[0].textContent = x[j].textContent;
-			}
-			else {
-				
-				var p = document.createElement("p");
-				var txt = (new XMLSerializer()).serializeToString(x[j]).replace(/<pb ed="([A-Z])" n="([0-9.]+)" \/>/g,"^a^$1$2^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"");
-				
-				var tn = document.createTextNode(txt);
-				p.appendChild(tn);
-				
-				D_xmlConverted.getElementsByTagName('h4')[section].appendChild(x[j]);
-			}
-			*/ 
+			xmlstring += (new XMLSerializer()).serializeToString(x[j]).replace(/ed="([A-Z])" n/g,"$1 asdf").replace(/ asdf="([0-9.]+)"/g,"$1").replace(/<pb ([^ >]+) *\/>/g,"^a^$1^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"").replace(/<p rend="title">([^<]*)<\/p>/g,"</h4></h3></h2></h1><h1><h1n>$1</h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n>").replace(/<p rend="subhead">([^<]*)<\/p>/g,"</h4></h3></h2><h2><h2n>$1</h2n><h3><h3n></h3n><h4><h4n></h4n>").replace(/<p rend="subsubhead">([^<]*)<\/p>/g,"</h4></h3><h3><h3n>$1</h3n><h4><h4n></h4n>").replace(/<p rend="chapter">([^<]*)<\/p>/g,"</h4><h4><h4n>$1</h4n>").replace(/<p rend="bodytext">/g,"<p>").replace(/<p rend="bodytext">/g,"<p>");
 		}
-/*
-		var h3 = document.createElement("h3");
-		h3.appendChild(document.createElement("h3n"));
-		D_xmlConverted.getElementsByTagName('h2')[0].appendChild(h3);
-		sutta++;
-		section = 0;
-*/
-
 	}
 	xmlstring += '</h4></h3></h2></h1></h0></ha></body>';
 	writeToDesktop('temp.xml',xmlstring);
 	//D_showTempXML();
 }  
+
+
     
 function D_showTempXML() {
 	var out = [];
@@ -3457,8 +3432,455 @@ function D_makeBV() {
 	}
 	writeToDesktop('temp.csv',out);
 } 
+
+var DFixXMLshowArray = [];
     
-    
+function DFixXML() {
+
+	var files = document.getElementById('input').value;// 'abh04t.nrf';
+	var length = document.getElementById('input2').value; //7;
+
+	DFixXMLshowArray["ps"] = [];
+	DFixXMLshowArray["nikaya"] = "";
+	DFixXMLshowArray["book"] = "";
+	DFixXMLshowArray["h0"] = new Array();
+	DFixXMLshowArray["h0"].push(new Array());
+	DFixXMLshowArray["h0"][0]["h0n"] = "";
+	DFixXMLshowArray["h0"][0]["h1"] = new Array();
+	DFixXMLshowArray["h0"][0]["h1"].push(new Array());
+	DFixXMLshowArray["h0"][0]["h1"][0]["h1n"] = "";
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"] = new Array();
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"].push(new Array());
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h2n"] = "";
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"] = new Array();
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"].push(new Array());
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"][0]["h3n"] = "";
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"][0]["h4"] = new Array();
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"][0]["h4"].push(new Array());
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"][0]["h4"][0]["h4n"] = "";
+	DFixXMLshowArray["h0"][0]["h1"][0]["h2"][0]["h3"][0]["h4"][0]["p"] = new Array();
+
+
+	var h0 = 0;
+	var h1 = 0;
+	var h2 = 0;
+	var h3 = 0;
+	var h4 = 0;
+
+	for(var i = 0; i <= length; i++) {
+		var bookload = 'tmp/' + files + i + '.xml';
+		var xmlhttp = new window.XMLHttpRequest();
+		xmlhttp.open("GET", bookload, false);
+		xmlhttp.send(null);
+		//alert(bookload);
+		var xd = xmlhttp.responseXML.documentElement;
+		//alert(xmlDoc.textContent);
+		
+		var x = xd.getElementsByTagName("p");
+		for (var j = 0; j < x.length; j++) {
+			var string = (new XMLSerializer()).serializeToString(x[j]).replace(/ed="([A-Z])" n/g,"$1 asdf").replace(/ asdf="([0-9.]+)"/g,"$1").replace(/<pb ([^ >]+) *\/>/g,"^a^$1^ea^").replace(/<hi rend="bold">([^<]*)<\/hi>/g,"^b^$1^eb^").replace(/<\/*hi[^<]*>/g,"");
+			if (/"nikaya"/.test(string)) {
+				DFixXMLshowArray["nikaya"] = string.replace(/<[^>]*>/g,"");
+			}
+			else if (/"book"/.test(string)) {
+				DFixXMLshowArray["book"] = string.replace(/<[^>]*>/g,"");
+			}
+			else if (/"subsubhead"/.test(string)) {
+				h4++;
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = string.replace(/<[^>]*>/g,"");
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
+			}
+			else if (/"subhead"/.test(string)) {
+				h3++;
+				h4 = 0;
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h3n"] = string.replace(/<[^>]*>/g,"");
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
+			}
+			else if (/"chapter"/.test(string)) {
+				h2++;
+				h3 = 0;
+				h4 = 0;
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h2n"] = string.replace(/<[^>]*>/g,"");
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h3n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
+			}
+			else if (/"title"/.test(string)) {
+				h1++;
+				h2 = 0;
+				h3 = 0;
+				h4 = 0;
+				DFixXMLshowArray["h0"][h0]["h1"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h1n"] = string.replace(/<[^>]*>/g,"");
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h2n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h3n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"] = new Array();
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"].push(new Array);
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = "";
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
+			}
+			else if (/"bodytext"/.test(string) || /"centre"/.test(string)) {
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"].push(string.replace(/<[^>]*>/g,""));
+			}
+			else {
+				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"].push(string.replace(/<[^>]*>/g,""));
+			}
+		}
+	}
+	
+	DFixXMLshowArrayShow();
+	
+} 
+
+function DFixXMLTweak() {
+	
+	var files = document.getElementById('input').value;// 'abh04t.nrf';
+
+	DFixXMLshowArray["nikaya"] = "";
+	DFixXMLshowArray["book"] = "";
+	DFixXMLshowArray["ps"] = [];
+	DFixXMLshowArray["h0"] = new Array();
+
+
+
+	var h0 = 0;
+	var h1 = 0;
+	var h2 = 0;
+	var h3 = 0;
+	var h4 = 0;
+
+	var bookload = 'tmp/' + files + '.xml';
+	var xmlhttp = new window.XMLHttpRequest();
+	xmlhttp.open("GET", bookload, false);
+	xmlhttp.send(null);
+
+	var xd = xmlhttp.responseXML.documentElement;
+	var nodes = xd.childNodes;
+	for(var i = 0; i < nodes.length; i++) {
+		if(nodes[i].nodeName == "h")
+			DFixXMLshowArray["nikaya"] = nodes[i].innerHTML;
+		else if (nodes[i].nodeName == "p") {
+			DFixXMLshowArray["ps"].push(nodes[i].innerHTML);
+		}
+		else if (nodes[i].nodeName == "ha") {
+			DFixXMLshowArray["book"] = nodes[i].getElementsByTagName('han')[0].innerHTML;
+			var h0s = nodes[i].getElementsByTagName('h0');
+			for(var j = 0; j < h0s.length; j++) {
+				DFixXMLshowArray["h0"].push(new Array());
+				DFixXMLshowArray["h0"][j]["h0n"] = h0s[j].getElementsByTagName('h0n')[0].innerHTML;
+				DFixXMLshowArray["h0"][j]["h1"] = new Array();
+				
+				var h1s = h0s[j].getElementsByTagName('h1');
+				for(var k = 0; k < h1s.length; k++) {
+					DFixXMLshowArray["h0"][j]["h1"].push(new Array());
+					DFixXMLshowArray["h0"][j]["h1"][k]["h1n"] = h1s[k].getElementsByTagName('h1n')[0].innerHTML;
+					DFixXMLshowArray["h0"][j]["h1"][k]["h2"] = new Array();
+					var h2s = h1s[k].getElementsByTagName('h2');
+					for(var l = 0; l < h2s.length; l++) {
+						DFixXMLshowArray["h0"][j]["h1"][k]["h2"].push(new Array());
+						DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h2n"] = h2s[l].getElementsByTagName('h2n')[0].innerHTML;
+						DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"] = new Array();
+						var h3s = h2s[l].getElementsByTagName('h3');
+						for(var m = 0; m < h3s.length; m++) {
+							DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"].push(new Array());
+							DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h3n"] = h3s[m].getElementsByTagName('h3n')[0].innerHTML;
+							DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h4"] = new Array();
+							var h4s = h3s[m].getElementsByTagName('h4');
+							for(var n = 0; n < h4s.length; n++) {
+								DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h4"].push(new Array());
+								DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h4"][n]["h4n"] = h4s[n].getElementsByTagName('h4n')[0].innerHTML;
+								DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h4"][n]["p"] = new Array();
+								var hps = h4s[n].getElementsByTagName('p');
+								for(var o = 0; o < hps.length; o++) {
+									DFixXMLshowArray["h0"][j]["h1"][k]["h2"][l]["h3"][m]["h4"][n]["p"].push(hps[o].innerHTML);
+								}
+							}
+
+						}
+					}
+
+				}
+			}
+		}
+	}	
+	DFixXMLshowArrayShow();
+}
+
+function DFixXMLshowArrayShow() {
+	var out = [];
+	out.push('<div style="color:#955">'+DFixXMLshowArray["nikaya"]+'</div>');
+	out.push('<div style="color:#975">'+DFixXMLshowArray["book"]+'</div>');
+
+	infinitefix:
+	while(true) {
+		for(var i = 0; i < DFixXMLshowArray["h0"].length; i++){
+			if(DFixXMLshowArray["h0"][i]["h0n"].length == 0 && i > 0)
+			{
+				DFixXMLshowArray["h0"][i-1]["h1"] = DFixXMLshowArray["h0"][i-1]["h1"].concat(DFixXMLshowArray["h0"][i]["h1"]);
+				DFixXMLshowArray["h0"].splice(i,1);
+				continue infinitefix;
+			}
+			if(DFixXMLshowArray["h0"][i]["h0n"].length == 0  && DFixXMLshowArray["h0"][i]["h1"].length == 0) {
+				DFixXMLshowArray["h0"].splice(i,1);
+				continue infinitefix;
+			}
+			for(var j = 0; j < DFixXMLshowArray["h0"][i]["h1"].length; j++){
+				if(DFixXMLshowArray["h0"][i]["h1"][j]["h1n"].length == 0 && j > 0)
+				{
+					DFixXMLshowArray["h0"][i]["h1"][j-1]["h2"] = DFixXMLshowArray["h0"][i]["h1"][j-1]["h2"].concat(DFixXMLshowArray["h0"][i]["h1"][j]["h2"]);
+					DFixXMLshowArray["h0"][i]["h1"].splice(j,1);
+					continue infinitefix;
+				}
+				if(DFixXMLshowArray["h0"][i]["h1"][j]["h1n"].length == 0  && DFixXMLshowArray["h0"][i]["h1"][j]["h2"].length == 0) {
+					DFixXMLshowArray["h0"][i]["h1"].splice(j,1);
+					continue infinitefix;
+				}
+				for(var k = 0; k < DFixXMLshowArray["h0"][i]["h1"][j]["h2"].length; k++){
+					if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"].length == 0 && k > 0)
+					{
+						DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k-1]["h3"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k-1]["h3"].concat(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"]);
+						DFixXMLshowArray["h0"][i]["h1"][j]["h2"].splice(k,1);
+						continue infinitefix;
+					}
+					if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"].length == 0  && DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].length == 0) {
+						DFixXMLshowArray["h0"][i]["h1"][j]["h2"].splice(k,1);
+						continue infinitefix;
+					}
+					for(var l = 0; l < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].length; l++){
+						if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"].length == 0 && l > 0)
+						{
+							DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l-1]["h4"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l-1]["h4"].concat(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"]);
+							DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].splice(l,1);
+							continue infinitefix;
+						}
+						if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"].length == 0  && DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].length == 0) {
+							DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].splice(l,1);
+							continue infinitefix;
+						}
+						for(var m = 0; m < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].length; m++){
+							if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"].length == 0 && m > 0)
+							{
+								DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m-1]["p"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m-1]["p"].concat(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"]);
+								DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].splice(m,1);
+								continue infinitefix;
+							}
+							if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"].length == 0  && DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"].length == 0) {
+								DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].splice(m,1);
+								continue infinitefix;
+							}
+						}
+					}
+				}
+			}
+		}
+		break;
+	}
+
+	for(var i = 0; i < DFixXMLshowArray["h0"].length; i++){
+		if(DFixXMLshowArray["h0"][i]["h0n"].length > 0)
+			out.push('<div style="color:#995;padding-left:20px">h0 '+DFixXMLshowArray["h0"][i]["h0n"]+'<input type="button" value="+" onclick="DFixXMLshowArrayMove(0,1,'+i+')"></div>');
+		for(var j = 0; j < DFixXMLshowArray["h0"][i]["h1"].length; j++){
+			if(DFixXMLshowArray["h0"][i]["h1"][j]["h1n"].length > 0)
+				out.push('<div style="color:#795;padding-left:40px">h1 '+DFixXMLshowArray["h0"][i]["h1"][j]["h1n"]+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(1,-1,'+i+','+j+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(1,1,'+i+','+j+')"></div>');
+			for(var k = 0; k < DFixXMLshowArray["h0"][i]["h1"][j]["h2"].length; k++){
+				if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"].length > 0)
+					out.push('<div style="color:#595;padding-left:60px">h2 '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"]+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(2,-1,'+i+','+j+','+k+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(2,1,'+i+','+j+','+k+')"></div>');
+				for(var l = 0; l < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].length; l++){
+					if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"].length > 0)
+						out.push('<div style="color:#597;padding-left:80px">h3 '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"]+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(3,-1,'+i+','+j+','+k+','+l+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(3,1,'+i+','+j+','+k+','+l+')"></div>');
+					for(var m = 0; m < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].length; m++){
+						if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"].length > 0)
+							out.push('<div style="color:#599;padding-left:100px">h4 '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"]+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(4,-1,'+i+','+j+','+k+','+l+','+m+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(4,1,'+i+','+j+','+k+','+l+','+m+')"></div>');
+						for(var n = 0; n < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"].length; n++){
+							out.push('<div style="color:#579;padding-left:120px">p '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"][n].substring(0,100)+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(5,-1,'+i+','+j+','+k+','+l+','+m+','+n+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(4,1,'+i+','+j+','+k+','+l+','+m+','+n+')"></div>');
+						}
+					}
+				}
+			}
+		}
+	}
+	out.push('<div><input type="button" value="save" onclick="DFixXMLshowArraySave()"></div>');
+	document.getElementById('content').innerHTML = out.join("<br/>");
+}
+function DFixXMLshowArrayMove(h,way,i,j,k,l,m,n) {
+	switch(h) {
+		case 0:
+			if(way < 0){
+				
+			}
+			else{
+				DFixXMLshowArray["h0"][i]["h1"][0]["h1n"] = DFixXMLshowArray["h0"][i]["h0n"];
+				DFixXMLshowArray["h0"][i]["h0n"] = "";
+			}
+			break;
+		case 1:
+			if(way < 0){
+				if(j == 0) {
+					DFixXMLshowArray["h0"][i]["h0n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h1n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h1n"] = "";
+				}
+				else {
+					var temp = new Array();
+					temp["h0n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h1n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h1n"] = "";
+					temp["h1"] = DFixXMLshowArray["h0"][i]["h1"].slice(j);
+					DFixXMLshowArray["h0"][i]["h1"] = DFixXMLshowArray["h0"][i]["h1"].slice(0,j);
+					DFixXMLshowArray["h0"].splice(i+1,0,temp);
+				}
+			}
+			else{
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][0]["h2n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h1n"];
+				DFixXMLshowArray["h0"][i]["h1"][j]["h1n"] = "";
+			}
+			break;
+		case 2:
+			if(way < 0){
+				if(k == 0) {
+					DFixXMLshowArray["h0"][i]["h1"][j]["h1n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"] = "";
+				}
+				else {
+					var temp = new Array();
+					temp["h1n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"] = "";
+					temp["h2"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"].slice(k);
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"].slice(0,k);
+					DFixXMLshowArray["h0"][i]["h1"].splice(j+1,0,temp);
+				}
+			}
+			else{
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][0]["h3n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"];
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"] = "";
+			}
+			break;
+		case 3:
+			if(way < 0){
+				if(l == 0) {
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"] = "";
+				}
+				else {
+					var temp = new Array();
+					temp["h2n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"] = "";
+					temp["h3"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].slice(l);
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].slice(0,l);
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"].splice(k+1,0,temp);
+				}
+			}
+			else{
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][0]["h4n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"];
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"] = "";
+			}
+			break;
+		case 4:
+			if(way < 0){
+				if(m == 0) {
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"] = "";
+				}
+				else {
+					var temp = new Array();
+					temp["h3n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"];
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"] = "";
+					temp["h4"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].slice(m);
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].slice(0,m);
+					DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].splice(l+1,0,temp);
+				}
+			}
+			else{
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"].unshift(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"]);
+				DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"] = "";
+			}
+			break;
+		case 5:
+			if(way < 0){
+				//DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"] = DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"];
+			}
+			else{
+			}
+			//DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"] = "";
+			break;
+	}
+	DFixXMLshowArrayShow();
+}
+
+function DFixXMLshowArraySave() {
+	var out = [];
+	out.push('<?xml version="1.0"?>');
+	out.push('<body>');
+	out.push('<h>'+DFixXMLshowArray["nikaya"]+'</h>');
+	if(DFixXMLshowArray["ps"].length > 0) {
+		for(var x = 0; x < DFixXMLshowArray["ps"].length; x++) {
+			out.push('<p>'+DFixXMLshowArray["ps"][x]+'</p>');
+		}
+	}
+	out.push('<ha>');
+	out.push('	<han>'+DFixXMLshowArray["book"]+'</han>');
+	
+	for(var i = 0; i < DFixXMLshowArray["h0"].length; i++){
+		out.push('	<h0>');
+		if(DFixXMLshowArray["h0"][i]["h0n"].length > 0)
+			out.push('		<h0n>'+DFixXMLshowArray["h0"][i]["h0n"]+'</h0n>');
+		else
+			out.push('		<h0n />');
+		for(var j = 0; j < DFixXMLshowArray["h0"][i]["h1"].length; j++){
+			out.push('		<h1>');
+			if(DFixXMLshowArray["h0"][i]["h1"][j]["h1n"].length > 0)
+				out.push('			<h1n>'+DFixXMLshowArray["h0"][i]["h1"][j]["h1n"]+'</h1n>');
+			else
+				out.push('			<h1n />');
+			for(var k = 0; k < DFixXMLshowArray["h0"][i]["h1"][j]["h2"].length; k++){
+				out.push('			<h2>');
+				if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"].length > 0)
+					out.push('				<h2n>'+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h2n"]+'</h2n>');
+				else
+					out.push('				<h2n />');
+				for(var l = 0; l < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"].length; l++){
+					out.push('				<h3>');
+					if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"].length > 0)
+						out.push('					<h3n>'+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h3n"]+'</h3n>');
+					else
+						out.push('					<h3n />');
+					for(var m = 0; m < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"].length; m++){
+						out.push('					<h4>');
+						if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"].length > 0)
+							out.push('						<h4n>'+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"]+'</h4n>');
+						else
+							out.push('						<h4n />');
+						for(var n = 0; n < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"].length; n++){
+							out.push('						<p>'+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"][n]+'</p>');
+						}
+						out.push('					</h4>');
+					}
+					out.push('				</h3>');
+				}
+				out.push('			</h2>');
+			}
+			out.push('		</h1>');
+		}
+		out.push('	</h0>');
+	}
+	out.push('</ha>');
+	out.push('</body>');
+	xmlstring = out.join('\n');
+	writeToDesktop('temp.xml',xmlstring);
+
+}
     
     
     

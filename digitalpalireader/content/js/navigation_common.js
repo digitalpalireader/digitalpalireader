@@ -81,6 +81,7 @@ G_XMLFileArray['g2'] = [1,0,0];
 G_XMLFileArray['g3'] = [1,0,0];
 G_XMLFileArray['g4'] = [1,0,0];
 G_XMLFileArray['g5'] = [1,0,0];
+G_XMLFileArray['n1'] = [1,0,0];
 
 G_listTitles = ['meta','volume','vagga','sutta','section'];
 
@@ -109,6 +110,7 @@ G_nikLongName['y'] = "Abhi";
 G_nikLongName['x'] = "Vism";
 G_nikLongName['b'] = "AbhiS";
 G_nikLongName['g'] = "Gram";
+G_nikLongName['n'] = "Añña";
 
 
 var G_nikShortName = [];
@@ -129,6 +131,7 @@ G_nikToNumber['y'] = "6";
 G_nikToNumber['x'] = "7";
 G_nikToNumber['b'] = "8";
 G_nikToNumber['g'] = "9";
+G_nikToNumber['n'] = "10";
 
 var G_numberToNik = [];
 G_numberToNik.push('v');
@@ -141,6 +144,7 @@ G_numberToNik.push('y');
 G_numberToNik.push('x');
 G_numberToNik.push('b');
 G_numberToNik.push('g');
+G_numberToNik.push('n');
 
 
 
@@ -181,6 +185,7 @@ abhivala['14'] = 6;
 var G_kynames = [];
 G_kynames['k'] = [];
 G_kynames['y'] = [];
+G_kynames['n'] = [];
 
 G_kynames['k'].push('Khp');
 G_kynames['k'].push('Dhp');
@@ -219,6 +224,11 @@ G_kynames['y'].push('Paṭṭh 4');
 G_kynames['y'].push('Paṭṭh 5');
 G_kynames['y'].push('Paṭṭh 6');
 
+G_kynames['n'].push('Dhs-Anu');
+G_kynames['n'].push('Abhi-Anu');
+G_kynames['n'].push('Abhi-Vat');
+
+
 var nikvoladi = new Array();
 nikvoladi['d'] = [1,2,3];
 nikvoladi['m'] = [1,2,3];
@@ -238,6 +248,7 @@ nikvoladi['b'] = ['Mūla','Ṭīkā'];
 nikvoladi['gm'] = ['Mog','Kac','SPM','SDhM','PRS'];
 nikvoladi['ga'] = [];
 nikvoladi['gt'] = [];
+nikvoladi['n'] = [0,1,2];
 
 var G_nikFullNames = [];
 G_nikFullNames['v'] = 'Vinaya';
@@ -250,6 +261,7 @@ G_nikFullNames['y'] = 'Abhidhamma';
 G_nikFullNames['x'] = 'Vism';
 G_nikFullNames['b'] = 'Abhidh-s';
 G_nikFullNames['g'] = 'Byākaraṇa';
+G_nikFullNames['n'] = 'Añña';
 
 var G_nikFullFullNames = [];
 G_nikFullFullNames['v'] = 'Vinaya Piṭaka';
@@ -262,6 +274,7 @@ G_nikFullFullNames['y'] = 'Abhidhamma Piṭaka';
 G_nikFullFullNames['x'] = 'Visuddhimagga';
 G_nikFullFullNames['b'] = 'Abhidhammattha-saṅgaha';
 G_nikFullFullNames['g'] = 'Byākaraṇa';
+G_nikFullFullNames['n'] = 'Añña';
 
 var G_kVaggas = []
 

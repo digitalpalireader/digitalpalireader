@@ -27,7 +27,7 @@ var DPRNav = {
 	getBookName:function (nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
 
 
-		if (nik == 'k' || nik == 'y') {
+		if (nik == 'k' || nik == 'y' || nik == 'n') {
 			no = G_kynames[nik][no];
 			if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
 		}
@@ -43,7 +43,7 @@ var DPRNav = {
 		var bookNode = document.getElementById('book');
 		while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
 		for (i = 0; i < titles.length; i++) {
-			if(nik == 'k' || nik == 'y') {
+			if(nik == 'k' || nik == 'y' || nik == 'n') {
 				var title = G_kynames[nik][titles[i]];
 				var val = titles[i]+1;
 			}
@@ -78,7 +78,7 @@ var DPRNav = {
 		for (i = 0; i < titles.length; i++) {
 
 			// menu			
-			bookNode.appendItem(translit((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			bookNode.appendItem(translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
 			bookNode.selectedIndex = 0;		
 
 			// check boxes
@@ -86,9 +86,9 @@ var DPRNav = {
 			var newCheck = document.createElement('checkbox');
 			newCheck.setAttribute('checked',true);
 			newCheck.setAttribute('class','tiny');
-			newCheck.setAttribute('label',((nik == 'k' || nik == 'y') ? G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+			newCheck.setAttribute('label',((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
 			newCheck.setAttribute('id','tsoBObook'+(i+1));
-			newCheck.setAttribute('value',((nik == 'k' || nik == 'y') ? (titles[i]+1) : (i+1)));
+			newCheck.setAttribute('value',((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
 			if(i == Math.ceil(titles.length/2)) {
 				bookNode2 = document.getElementById('tsoBOB');
 				while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);

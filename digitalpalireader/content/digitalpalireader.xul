@@ -38,6 +38,7 @@
 								<listitem value="x" label="Vism"/>
 								<listitem value="b" label="Abhidh-s"/>
 								<listitem value="g" label="Byākaraṇa"/>
+								<listitem value="n" label="Añña"/>
 							</listbox>			
 						</vbox>
 						<vbox align="stretch" pack="stretch" flex="1">
