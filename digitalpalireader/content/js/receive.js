@@ -64,7 +64,7 @@ function makeLocPlace(inplace) {
 	var outplace;
 	place = inplace.split('.');
 	
-	if (place.length == 8 || /[vdmaskyxbg]\.[0-9]+\.[mat]/.test(inplace)) {
+	if (place.length == 8 || /[vdmaskyxbgn]\.[0-9]+\.[mat]/.test(inplace)) {
 		outplace = place;
 	}
 	else if (place.length == 9) {

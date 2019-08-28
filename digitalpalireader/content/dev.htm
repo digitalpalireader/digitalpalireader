@@ -71,6 +71,7 @@ $('document').ready(function(){
 <body>
 	<div><input id="input" size="30" onkeypress="if(event.keyCode==13) devMode(this.value);"><input type="button" onclick="DFixXML($('#input').val())" value="convert"><input type="button" onclick="DFixXMLTweak($('#input').val())" value="tweak"></div>
 	<div><input id="input2" size="30" onkeypress="if(event.keyCode==13) devMode($('#input').val());"></div>
+	<div><input id="input3" type="button" onclick="DFixXMLtogglePara();"></div>
 	<div id="mafbc"></div>
 	<textarea id="textpad" name="textpad"></textarea>
 	<div id="content" style="position:relative; width:100%;height:100%">

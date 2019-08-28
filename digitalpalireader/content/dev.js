@@ -3436,7 +3436,6 @@ function D_makeBV() {
 var DFixXMLshowArray = [];
     
 function DFixXML() {
-
 	var files = document.getElementById('input').value;// 'abh04t.nrf';
 	var length = document.getElementById('input2').value; //7;
 
@@ -3501,7 +3500,7 @@ function DFixXML() {
 				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = "";
 				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
 			}
-			else if (/"chapter"/.test(string)) {
+			else if (/"title"/.test(string)) {
 				h2++;
 				h3 = 0;
 				h4 = 0;
@@ -3515,7 +3514,7 @@ function DFixXML() {
 				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["h4n"] = "";
 				DFixXMLshowArray["h0"][h0]["h1"][h1]["h2"][h2]["h3"][h3]["h4"][h4]["p"] = new Array();
 			}
-			else if (/"title"/.test(string)) {
+			else if (/"chapter"/.test(string)) {
 				h1++;
 				h2 = 0;
 				h3 = 0;
@@ -3706,7 +3705,7 @@ function DFixXMLshowArrayShow() {
 						if(DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"].length > 0)
 							out.push('<div style="color:#599;padding-left:100px">h4 '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["h4n"]+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(4,-1,'+i+','+j+','+k+','+l+','+m+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(4,1,'+i+','+j+','+k+','+l+','+m+')"></div>');
 						for(var n = 0; n < DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"].length; n++){
-							out.push('<div style="color:#579;padding-left:120px">p '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"][n].substring(0,100)+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(5,-1,'+i+','+j+','+k+','+l+','+m+','+n+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(4,1,'+i+','+j+','+k+','+l+','+m+','+n+')"></div>');
+							out.push('<div style="color:#579;padding-left:120px'+(DFixXMLtoggleParaOn?"":';display:none')+'" class="para">p '+DFixXMLshowArray["h0"][i]["h1"][j]["h2"][k]["h3"][l]["h4"][m]["p"][n].substring(0,100)+'<input type="button" value="-" onclick="DFixXMLshowArrayMove(5,-1,'+i+','+j+','+k+','+l+','+m+','+n+')"><input type="button" value="+" onclick="DFixXMLshowArrayMove(4,1,'+i+','+j+','+k+','+l+','+m+','+n+')"></div>');
 						}
 					}
 				}
@@ -3714,7 +3713,7 @@ function DFixXMLshowArrayShow() {
 		}
 	}
 	out.push('<div><input type="button" value="save" onclick="DFixXMLshowArraySave()"></div>');
-	document.getElementById('content').innerHTML = out.join("<br/>");
+	document.getElementById('content').innerHTML = out.join("");
 }
 function DFixXMLshowArrayMove(h,way,i,j,k,l,m,n) {
 	switch(h) {
@@ -3817,6 +3816,13 @@ function DFixXMLshowArrayMove(h,way,i,j,k,l,m,n) {
 			break;
 	}
 	DFixXMLshowArrayShow();
+}
+
+DFixXMLtoggleParaOn = false;
+
+function DFixXMLtogglePara() {
+	$(".para").toggle();
+	DFixXMLtoggleParaOn = !DFixXMLtoggleParaOn;
 }
 
 function DFixXMLshowArraySave() {
