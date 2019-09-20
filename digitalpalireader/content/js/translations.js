@@ -14,8 +14,7 @@ function transLink(which,where,url,title) {
 }
 
 function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
-
-	if (!DPR_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
+	if (!DPR_prefs["ctrans"]) return;
 	
 	var cnt = 0;
 	var output = [];
@@ -149,18 +148,21 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 			}
 			
 			// ATI
-			
-			mys = mysn + "";
-			if (mys.length < 2) { mys = '0'+mys; }
-			var atid = 'dn/dn.'+mys;
-			for (var x = 0;x < atiD.length; x++) {
-				if (atiD[x].indexOf(atid)==0) {
-					var auth = atiD[x].split('.')[3];
-					if (autha[auth]) {auth = autha[auth];}
-					output.push(transLink(which,0,atiD[x],'Translation of DN '+mysn+' by '+auth));
-					cnt++;
+			if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+				mys = mysn + "";
+				if (mys.length < 2) { mys = '0'+mys; }
+				var atid = 'dn/dn.'+mys;
+				for (var x = 0;x < atiD.length; x++) {
+					if (atiD[x].indexOf(atid)==0) {
+						var auth = atiD[x].split('.')[3];
+						if (autha[auth]) {auth = autha[auth];}
+						output.push(transLink(which,0,atiD[x],'Translation of DN '+mysn+' by '+auth));
+						cnt++;
+					}
 				}
 			}
+			// abt
+			
 			if (mysn == 16) {
 				if (which > 0) {
 						var surl = 'index.htm';
@@ -321,15 +323,17 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 				cnt++;
 			}			
 			
-			mys = mysn + "";
-			while (mys.length < 3) { mys = '0'+mys; }
-			var atim = 'mn/mn.'+mys;
-			for (var x = 0;x < atiM.length; x++) {
-				var auth = atiM[x].split('.')[2];
-				if (autha[auth]) {auth = autha[auth];}
-				if (atiM[x].indexOf(atim)==0) {
-					output.push(transLink(which,0,atiM[x],'Translation of MN '+mysn+' by '+auth));
-					cnt++;
+			if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+				mys = mysn + "";
+				while (mys.length < 3) { mys = '0'+mys; }
+				var atim = 'mn/mn.'+mys;
+				for (var x = 0;x < atiM.length; x++) {
+					var auth = atiM[x].split('.')[2];
+					if (autha[auth]) {auth = autha[auth];}
+					if (atiM[x].indexOf(atim)==0) {
+						output.push(transLink(which,0,atiM[x],'Translation of MN '+mysn+' by '+auth));
+						cnt++;
+					}
 				}
 			}
 		break;
@@ -349,92 +353,98 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 				cnt++;
 			}
 			if (which > 1) return null;
+			
+			//ATI
 
-			var z = amlist[book][vagga][sutta][section];
-			out:
-			for (a = 0;a < atiA.length; a++) {
-				if(parseInt(atiA[a].split('/')[1].substring(2),10) == bookn) {
-					var atiAs = atiA[a].split('.');
-					if(atiAs[1].indexOf('-')>=0) b=atiAs[1].split('-');
-					else {b=null;}
-					for (var aa = 0;aa < z.length; aa++) {
-						
-						var bb = z[aa];
-						
-						var atiNo = atiAs[1];
-						
-						c=parseInt(bb,10);
-						d=''+bb;
-						while (d.length < 3) { d = '0'+d; }
+			if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
 
-						// fudges
-						
-						if (bookn == 3) {
-							atiNo = parseInt(atiNo,10);
-							if(atiNo >= 33) { // sāriputtasutta
-								atiNo++; 
-							} 
-							if(atiNo >= 40) { // sāriputtasutta
-								atiNo--; 
-							} 
-							if(atiNo >= 48) { // asankhata sutta
-								atiNo++; 
-							} 
-							if (atiNo >= 81) { // gadrabha sutta
-								atiNo++; 
-							} 
-							if (atiNo == 102 && atiAs[2] == '11-15' || atiNo > 102) { // nimitta sutta
-								atiNo++; 
+
+				var z = amlist[book][vagga][sutta][section];
+				out:
+				for (a = 0;a < atiA.length; a++) {
+					if(parseInt(atiA[a].split('/')[1].substring(2),10) == bookn) {
+						var atiAs = atiA[a].split('.');
+						if(atiAs[1].indexOf('-')>=0) b=atiAs[1].split('-');
+						else {b=null;}
+						for (var aa = 0;aa < z.length; aa++) {
+							
+							var bb = z[aa];
+							
+							var atiNo = atiAs[1];
+							
+							c=parseInt(bb,10);
+							d=''+bb;
+							while (d.length < 3) { d = '0'+d; }
+
+							// fudges
+							
+							if (bookn == 3) {
+								atiNo = parseInt(atiNo,10);
+								if(atiNo >= 33) { // sāriputtasutta
+									atiNo++; 
+								} 
+								if(atiNo >= 40) { // sāriputtasutta
+									atiNo--; 
+								} 
+								if(atiNo >= 48) { // asankhata sutta
+									atiNo++; 
+								} 
+								if (atiNo >= 81) { // gadrabha sutta
+									atiNo++; 
+								} 
+								if (atiNo == 102 && atiAs[2] == '11-15' || atiNo > 102) { // nimitta sutta
+									atiNo++; 
+								}
+
+								atiNo = atiNo+'';
+								while(atiNo.length < 3) { atiNo='0'+atiNo; }
 							}
-
-							atiNo = atiNo+'';
-							while(atiNo.length < 3) { atiNo='0'+atiNo; }
-						}
-						else if (bookn == 4) {
-							atiNo = parseInt(atiNo,10);
-							atiNo = atiNo+'';
-							while(atiNo.length < 3) { atiNo='0'+atiNo; }
-						}
-						else if (bookn == 7) {
-							atiNo = parseInt(atiNo,10);
-							if(atiNo >= 31) { // parābhava sutta
-								atiNo++; 
-							} 
-							if(atiNo >= 41) { // paṭhamaniddasasuttaṃ
-								atiNo++; 
-							} 
-							if(atiNo >= 42) { // dutiyaniddasasuttaṃ 
-								atiNo++; 
-							} 
-							if (atiNo == 62 && atiAs[2] == 'b' || atiNo > 62) { // bhariyā sutta
-								atiNo++; 
+							else if (bookn == 4) {
+								atiNo = parseInt(atiNo,10);
+								atiNo = atiNo+'';
+								while(atiNo.length < 3) { atiNo='0'+atiNo; }
 							}
+							else if (bookn == 7) {
+								atiNo = parseInt(atiNo,10);
+								if(atiNo >= 31) { // parābhava sutta
+									atiNo++; 
+								} 
+								if(atiNo >= 41) { // paṭhamaniddasasuttaṃ
+									atiNo++; 
+								} 
+								if(atiNo >= 42) { // dutiyaniddasasuttaṃ 
+									atiNo++; 
+								} 
+								if (atiNo == 62 && atiAs[2] == 'b' || atiNo > 62) { // bhariyā sutta
+									atiNo++; 
+								}
 
-							atiNo = atiNo+'';
-							while(atiNo.length < 3) { atiNo='0'+atiNo; }
-						}
-						else if (bookn == 11) {
-							atiNo = parseInt(atiNo,10);
-							if(atiNo == 7 || atiNo == 8) { // saññāsutta - DPR has both in one sutta, ATI (PTS) split them
-								atiNo = 7;
-							} 
-							if(atiNo > 8) { // saññāsutta
-								atiNo--;
-							} 
+								atiNo = atiNo+'';
+								while(atiNo.length < 3) { atiNo='0'+atiNo; }
+							}
+							else if (bookn == 11) {
+								atiNo = parseInt(atiNo,10);
+								if(atiNo == 7 || atiNo == 8) { // saññāsutta - DPR has both in one sutta, ATI (PTS) split them
+									atiNo = 7;
+								} 
+								if(atiNo > 8) { // saññāsutta
+									atiNo--;
+								} 
 
-							atiNo = atiNo+'';
-							while(atiNo.length < 3) { atiNo='0'+atiNo; }
-						}
-						
-						if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiNo.indexOf(d)==0)) {
-							if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-							else {var sno = c;}
-							if(atiAs[4] == 'html') { var auth = atiAs[3]; }
-							else { var auth = atiAs[2]; }
-							if (autha[auth]) {auth = autha[auth];}
-							output.push(transLink(which,0,atiA[a],'Translation of AN '+ (book+1) +'.'+bb+' by '+auth));
-							cnt++;
-							continue out;
+								atiNo = atiNo+'';
+								while(atiNo.length < 3) { atiNo='0'+atiNo; }
+							}
+							
+							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiNo.indexOf(d)==0)) {
+								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+								else {var sno = c;}
+								if(atiAs[4] == 'html') { var auth = atiAs[3]; }
+								else { var auth = atiAs[2]; }
+								if (autha[auth]) {auth = autha[auth];}
+								output.push(transLink(which,0,atiA[a],'Translation of AN '+ (book+1) +'.'+bb+' by '+auth));
+								cnt++;
+								continue out;
+							}
 						}
 					}
 				}
@@ -462,32 +472,37 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 			if (which > 1) return null;
 
-			var countc = smlist[vagga][sutta][section];
-			
-			//if(bookn == 5) document.getElementById('mafbc').innerHTML += vagga+' '+sutta+'|';
-			
-			//document.getElementById('difb').innerHTML += countc;
+			//ATI
 
-			out:
-			for (a = 0;a < atiS.length; a++) {
-				if(parseInt(atiS[a].split('/')[1].substring(2),10) == (vagga+1)) {
-					if(atiS[a].split('.')[1].indexOf('-')>=0) b=atiS[a].split('.')[1].split('-');
-					else {b=null;}
-					var bb = countc;
-					c=parseInt(bb,10);
-					d=bb+"";
-					while (d.length < 3) { d = '0'+d; }
-					if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiS[a].split('.')[1].indexOf(d)==0)) {
-						if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-						else {var sno = c;}
-						var auth = atiS[a].split('.')[2];
-						if (autha[auth]) {auth = autha[auth];}
-						output.push(transLink(which,0,atiS[a],'Translation of SN '+ (vagga+1) +'.'+bb+' by '+auth));
-						cnt++;
-						continue out;
+			if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+				var countc = smlist[vagga][sutta][section];
+				
+				//if(bookn == 5) document.getElementById('mafbc').innerHTML += vagga+' '+sutta+'|';
+				
+				//document.getElementById('difb').innerHTML += countc;
+
+				out:
+				for (a = 0;a < atiS.length; a++) {
+					if(parseInt(atiS[a].split('/')[1].substring(2),10) == (vagga+1)) {
+						if(atiS[a].split('.')[1].indexOf('-')>=0) b=atiS[a].split('.')[1].split('-');
+						else {b=null;}
+						var bb = countc;
+						c=parseInt(bb,10);
+						d=bb+"";
+						while (d.length < 3) { d = '0'+d; }
+						if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiS[a].split('.')[1].indexOf(d)==0)) {
+							if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+							else {var sno = c;}
+							var auth = atiS[a].split('.')[2];
+							if (autha[auth]) {auth = autha[auth];}
+							output.push(transLink(which,0,atiS[a],'Translation of SN '+ (vagga+1) +'.'+bb+' by '+auth));
+							cnt++;
+							continue out;
+						}
 					}
-				}
-			}		
+				}		
+			}
 		break;
 		case 'k':
 			if (which > 0) return null;
@@ -499,21 +514,24 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-				// kn/khp/khp.1-9.than.html
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'khp') {
-							if(atiK[a].split('.')[1].indexOf('-')>=0) b=atiK[a].split('.')[1].split('-');
-							else {b=null;}
-							c=section+1;
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[1].indexOf(c)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[2];
-								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,0,atiK[a],'Translation of Khp '+sno+' by '+auth));
-								cnt++;
-								continue out;
+
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+					// kn/khp/khp.1-9.than.html
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'khp') {
+								if(atiK[a].split('.')[1].indexOf('-')>=0) b=atiK[a].split('.')[1].split('-');
+								else {b=null;}
+								c=section+1;
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[1].indexOf(c)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[2];
+									if (autha[auth]) {auth = autha[auth];}
+									output.push(transLink(which,0,atiK[a],'Translation of Khp '+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -523,20 +541,24 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 				case 2: // dhp
 
 					if(hier == 'm') {
-						// kn/dhp/dhp.24.budd.html
-						//alert(vagga + ' ' + sutta + ' ' + section);
-						out:
-						for (a = 0;a < atiK.length; a++) {
-							if(atiK[a].split('/')[1] == 'dhp') {
-								d=(vagga+1)+"";
-								if (d.length < 2) { d = '0'+d; }
-								if(atiK[a].split('.')[1].indexOf(d)==0) {
-									var sno = vagga+1;
-									var auth = atiK[a].split('.')[2];
-									if (autha[auth]) {auth = autha[auth];}
-									output.push(transLink(which,0,atiK[a],'Translation of Dhp '+sno+' by '+auth));
-									cnt++;
-									continue out;
+
+						if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+							// kn/dhp/dhp.24.budd.html
+							//alert(vagga + ' ' + sutta + ' ' + section);
+							out:
+							for (a = 0;a < atiK.length; a++) {
+								if(atiK[a].split('/')[1] == 'dhp') {
+									d=(vagga+1)+"";
+									if (d.length < 2) { d = '0'+d; }
+									if(atiK[a].split('.')[1].indexOf(d)==0) {
+										var sno = vagga+1;
+										var auth = atiK[a].split('.')[2];
+										if (autha[auth]) {auth = autha[auth];}
+										output.push(transLink(which,0,atiK[a],'Translation of Dhp '+sno+' by '+auth));
+										cnt++;
+										continue out;
+									}
 								}
 							}
 						}
@@ -575,24 +597,30 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/ud/ud.2.01.irel.html
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'ud' && (vagga+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,0,atiK[a],'Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+					// ATI
+
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+
+						// kn/ud/ud.2.01.irel.html
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'ud' && (vagga+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
+									output.push(transLink(which,0,atiK[a],'Translation of Uda '+(vagga+1)+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -643,35 +671,39 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/iti/iti.1.001-027.than.html
-					section += (sutta*10);
-					switch (vagga) {
-						case 1:
-							section += 27;
-							break;
-						case 2:
-							section += 49;
-							break;
-						case 3:
-							section += 99;
-							break;
-					}
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'iti' && (vagga+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 3) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,0,atiK[a],'Translation of Iti '+sno+' by '+auth));
-								cnt++;
-								continue out;
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+
+						// kn/iti/iti.1.001-027.than.html
+						section += (sutta*10);
+						switch (vagga) {
+							case 1:
+								section += 27;
+								break;
+							case 2:
+								section += 49;
+								break;
+							case 3:
+								section += 99;
+								break;
+						}
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'iti' && (vagga+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 3) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									output.push(transLink(which,0,atiK[a],'Translation of Iti '+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -681,29 +713,33 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/snp/snp.4.16.than.html
-					//alert(meta + ' ' + volume + ' ' + vagga + ' ' + sutta + ' ' + section);
-					if (vagga == 4) section--;
-					
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'snp' && (vagga+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) b=atiK[a].split('.')[2].split('-');
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0/g,'') +"-"+ b[1].replace(/^0/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								output.push(transLink(which,0,atiK[a],'Translation of Sn '+(vagga+1)+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+						// kn/snp/snp.4.16.than.html
+						if (vagga == 4) section--;
+						
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'snp' && (vagga+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) b=atiK[a].split('.')[2].split('-');
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0/g,'') +"-"+ b[1].replace(/^0/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									output.push(transLink(which,0,atiK[a],'Translation of Sn '+(vagga+1)+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
+					
 					if (vagga == 4) {
 						output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm','Translation of Sn 5 by Anandajoti'));
 						cnt++;
@@ -714,25 +750,29 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/ud/ud.2.01.irel.html
-					if (vagga == 1) {sutta +=4;}
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'vv' && (sutta+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,0,atiK[a],'Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+
+						// kn/ud/ud.2.01.irel.html
+						if (vagga == 1) {sutta +=4;}
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'vv' && (sutta+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
+									output.push(transLink(which,0,atiK[a],'Translation of Vv '+(sutta+1)+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -742,24 +782,26 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/ud/ud.2.01.irel.html
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'pv' && (vagga+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,0,atiK[a],'Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+						// kn/ud/ud.2.01.irel.html
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'pv' && (vagga+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
+									output.push(transLink(which,0,atiK[a],'Translation of Pv '+(vagga+1)+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -769,26 +811,29 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/ud/ud.2.01.irel.html
-					section += (sutta*10);
-					//alert(vagga + ' ' + sutta + ' ' + section);
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'thag' && vagga == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,0,atiK[a],'Translation of Thag '+vagga+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+
+						// kn/ud/ud.2.01.irel.html
+						section += (sutta*10);
+						//alert(vagga + ' ' + sutta + ' ' + section);
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'thag' && vagga == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
+									output.push(transLink(which,0,atiK[a],'Translation of Thag '+vagga+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}
@@ -798,25 +843,27 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 					if(hier != 'm')
 						break;
 
-					// kn/ud/ud.2.01.irel.html
-					//alert(vagga + ' ' + sutta + ' ' + section);
-					out:
-					for (a = 0;a < atiK.length; a++) {
-						if(atiK[a].split('/')[1] == 'thig' && (vagga+1) == atiK[a].split('.')[1]) {
-							if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
-							else {b=null;}
-							c=section+1;
-							d=c+"";
-							if (d.length < 2) { d = '0'+d; }
-							if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
-								if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
-								else {var sno = c;}
-								var auth = atiK[a].split('.')[3];
-								if (autha[auth]) {auth = autha[auth];}
-								if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
-								output.push(transLink(which,0,atiK[a],'Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth));
-								cnt++;
-								continue out;
+					if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
+						// kn/ud/ud.2.01.irel.html
+						//alert(vagga + ' ' + sutta + ' ' + section);
+						out:
+						for (a = 0;a < atiK.length; a++) {
+							if(atiK[a].split('/')[1] == 'thig' && (vagga+1) == atiK[a].split('.')[1]) {
+								if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
+								else {b=null;}
+								c=section+1;
+								d=c+"";
+								if (d.length < 2) { d = '0'+d; }
+								if((b && c >= parseInt(b[0].replace(/(^0*|x)/g,''),10) && c <= parseInt(b[1].replace(/(^0*|x)/g,''),10)) || (!b && atiK[a].split('.')[2].indexOf(d)==0)) {
+									if (b) {var sno = b[0].replace(/^0*/g,'') +"-"+ b[1].replace(/^0*/g,'');}
+									else {var sno = c;}
+									var auth = atiK[a].split('.')[3];
+									if (autha[auth]) {auth = autha[auth];}
+									if (atiK[a] == 'kn/ud/ud.6.09.olen.html') { atiK[a] = 'kn/ud/ud.6.09-olen.html';}
+									output.push(transLink(which,0,atiK[a],'Translation of Thig '+(vagga+1)+'.'+sno+' by '+auth));
+									cnt++;
+									continue out;
+								}
 							}
 						}
 					}

@@ -170,10 +170,10 @@ function savePrefs(close) {
 	var atiloc = document.getElementById('catiloc').value;
 	var atiFile;
 	if(/\\/.exec(atiloc)) { // windows
-		atiFile = atiloc + '\\start.html';
+		atiFile = atiloc;
 	}
 	else {
-		atiFile = atiloc + '/start.html';
+		atiFile = atiloc;
 	}
 
 	if(document.getElementById('catioff').checked) {

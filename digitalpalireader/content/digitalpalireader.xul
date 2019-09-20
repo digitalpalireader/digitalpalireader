@@ -204,6 +204,7 @@
 										<menuitem value="x" label="Vism"/>
 										<menuitem value="b" label="Abhidh-s"/>
 										<menuitem value="g" label="Byākaraṇa"/>
+										<menuitem value="n" label="Añña"/>
 									</menupopup>
 								</menulist>
 							</box>
@@ -285,6 +286,7 @@
 										<checkbox class="tiny" id="tsoCOx" tooltiptext="Include in search" label="Vism"/>
 										<checkbox class="tiny" id="tsoCOb" tooltiptext="Include in search" label="Abhidh-s"/>
 										<checkbox class="tiny" id="tsoCOg" tooltiptext="Include in search" label="Byākaraṇa"/>
+										<checkbox class="tiny" id="tsoCOn" tooltiptext="Include in search" label="Añña"/>
 									</vbox>
 								</vbox>
 							</hbox>
