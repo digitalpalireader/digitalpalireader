@@ -143,7 +143,10 @@ var DPROverlay = {
 		else return false
 	},
 	openSidebar: function() {
-		SidebarUI.toggle('viewDPR');
+		if(typeof(SidebarUI) != "undefined")
+			SidebarUI.toggle('viewDPR');
+		else
+			toggleSidebar('viewDPR');
 		return this.DPRSidebarDocument();
 	},
 	rightClick:function(type,params) {
