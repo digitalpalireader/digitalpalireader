@@ -119,7 +119,7 @@ function outputDef(which,first,frombox)
 	
 	// editing
 	
-	osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
+	osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(/digitalpalireader/content/images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
 	
 	osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+G_outwords[which][0].length+'" id="modify" value="'+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="if(event.keyCode === 13) reanalyze(\''+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
 	
@@ -175,7 +175,14 @@ function outputDef(which,first,frombox)
 		//if(moveat == 2) { moveFrame(1); }
 	}
 	else clearDivs('dif');
-    document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
+	$('#pref-box').hide();
+
+	if(!$('#bottom').is(':visible')) {
+		$( "#open-bottom" ).click();
+	}
+	if($('#sidebar').is(':visible')) {
+		$( "#close-left" ).click();
+	}	
 }
 
 var G_thisConcise = [];

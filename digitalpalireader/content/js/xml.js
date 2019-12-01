@@ -26,8 +26,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 	
 	
-	$('#mafbc').html('');
-	document.getElementById('mafbc').appendChild(pleasewait);
+	DPR_PAL.showLoadingMarquee();
 
 	var nikaya = place[0];
 	var book = place[1]+1;
@@ -101,7 +100,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			var query = toUni(querystring).split('+');
 	}
 
-	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+	var oldurl = DPR_PAL.contentDocument.location.href;
 
 	var bareurl = 'dpr:index?';
 
@@ -152,10 +151,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		newparams = oldparams.join('|')+bparams;
 	}
 	
-	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
+	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
-	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');
+	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
 
 // tab title
 
@@ -958,9 +957,9 @@ function loadXMLindex(place,compare) {
 
 	// permalink
 
-	var permalink = 'chrome://digitalpalireader/content/index.xul?';
+	var permalink = `${DPR_PAL.dprHomePage}?`;
 
-	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
+	var oldurl = DPR_PAL.contentDocument.location.href;
 
 	var bareurl = 'dpr:index?';
 
@@ -974,9 +973,9 @@ function loadXMLindex(place,compare) {
 		oldparams[compare-1] = newparams;
 		newparams = oldparams.join('|');
 	}
-	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
+	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
+	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
 
 	$('#mafbc').append('<div>'+theDatao+'</div>'); 
