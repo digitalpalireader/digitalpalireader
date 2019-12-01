@@ -215,7 +215,18 @@ function extFileExists(fileLoc)
 
 function chromeFileExists(fileLoc) // in extension package
 {
-	DPR_PAL.chromeFileExists(fileLoc);
+	var xmlhttp = new window.XMLHttpRequest();
+	try {
+		xmlhttp.open("GET", "chrome://"+fileLoc, false);
+		xmlhttp.onreadystatechange=function() {
+			xmlhttp.abort();
+		}
+		xmlhttp.send(null);
+	}
+	catch(ex) {
+		return false;
+	}
+	return true;
 } 
 
 function readDir() {

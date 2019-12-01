@@ -5,16 +5,16 @@ function loadXMLFile(file,setNo) {
 		
 	switch(setNo) {
 		case 0:
-			var setPack = 'DPRMyanmar';
+			var setPack = 'dprmyanmar';
 			var setName = 'Myanmar';
 			break;
 		case 1:
-			var setPack = 'DPRThai';
+			var setPack = 'dprthai';
 			var setName = 'Thai';
 			break;
 	}
 	try {
-		var bookload = DPR_PAL.baseUrl+setPack+'/content/xml/' + file + '.xml';
+		var bookload = 'chrome://'+setPack+'/content/xml/' + file + '.xml';
 		var xmlhttp = new window.XMLHttpRequest();
 		xmlhttp.open("GET", bookload, false);
 		xmlhttp.send(null);

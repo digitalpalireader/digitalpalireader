@@ -14,7 +14,7 @@ function transLink(which,where,url,title) {
 }
 
 function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
-	if (!DPR_prefs["ctrans"] || typeof(atiD) == 'undefined') return;
+	if (!DPR_prefs["ctrans"]) return;
 	
 	var cnt = 0;
 	var output = [];

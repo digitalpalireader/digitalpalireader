@@ -26,7 +26,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 	
 	
-	DPR_PAL.showLoadingMarquee();
+	$('#mafbc').html('');
+	document.getElementById('mafbc').appendChild(pleasewait);
 
 	var nikaya = place[0];
 	var book = place[1]+1;
@@ -100,7 +101,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			var query = toUni(querystring).split('+');
 	}
 
-	var oldurl = DPR_PAL.contentDocument.location.href;
+	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 
 	var bareurl = 'dpr:index?';
 
@@ -151,10 +152,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		newparams = oldparams.join('|')+bparams;
 	}
 	
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
 
-	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
+	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href=\''+bareurl+'\'');
 
 // tab title
 
@@ -957,9 +958,9 @@ function loadXMLindex(place,compare) {
 
 	// permalink
 
-	var permalink = `${DPR_PAL.dprHomePage}?`;
+	var permalink = 'chrome://digitalpalireader/content/index.xul?';
 
-	var oldurl = DPR_PAL.contentDocument.location.href;
+	var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 
 	var bareurl = 'dpr:index?';
 
@@ -973,9 +974,9 @@ function loadXMLindex(place,compare) {
 		oldparams[compare-1] = newparams;
 		newparams = oldparams.join('|');
 	}
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+	var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
 
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
 
 
 	$('#mafbc').append('<div>'+theDatao+'</div>'); 

@@ -43,7 +43,7 @@ function outputAnalysis(input,frombox) {
 	input = input.replace(/[(\[\])]/g,"");
 
 	try {
-		var oldurl = DPR_PAL.contentDocument.location.href;
+		var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 		if(/analysis=/.exec(oldurl)) var newurl = oldurl.replace(/analysis=[^&]+/,'analysis='+input);
 		else var newurl = oldurl + '&analysis='+input;
 		if(/frombox=/.exec(newurl)) newurl = newurl.replace(/frombox=[^&]+/,'frombox='+(frombox?frombox:0));
@@ -51,14 +51,14 @@ function outputAnalysis(input,frombox) {
 		else newurl = newurl.replace(/\&frombox=[^&]+/,'');
 		if(/^[^?]+\&/.test(newurl))
 			newurl = newurl.replace(/\&/,'?');
-		DPR_PAL.contentWindow.history.replaceState('Object', 'Title', newurl);
+		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', newurl);
 	}
 	catch(ex) {
 	}
 
 	// send input to sidebar
 	
-	//if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
+	if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
 
 	shortdefpre = [];
 

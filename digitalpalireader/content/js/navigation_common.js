@@ -1,6 +1,6 @@
 var G_hier = 'm';
 
-var oldnikaya = 'd';
+var oldnikaya = 0;
 
 
 var G_XMLFileArray = []; // [nik+book] = [m,a,t]
@@ -15,6 +15,13 @@ G_XMLFileArray['v8'] = [0,0,1];
 G_XMLFileArray['v9'] = [0,0,1];
 G_XMLFileArray['v10'] = [0,0,1];
 G_XMLFileArray['v11'] = [0,0,1];
+G_XMLFileArray['v12'] = [0,0,1];
+G_XMLFileArray['v13'] = [0,0,1];
+G_XMLFileArray['v14'] = [0,0,1];
+G_XMLFileArray['v15'] = [0,0,1];
+G_XMLFileArray['v16'] = [0,0,1];
+G_XMLFileArray['v17'] = [0,0,1];
+G_XMLFileArray['v18'] = [0,0,1];
 G_XMLFileArray['d1'] = [1,1,1];
 G_XMLFileArray['d2'] = [1,1,1];
 G_XMLFileArray['d3'] = [1,1,1];
@@ -81,6 +88,15 @@ G_XMLFileArray['g2'] = [1,0,0];
 G_XMLFileArray['g3'] = [1,0,0];
 G_XMLFileArray['g4'] = [1,0,0];
 G_XMLFileArray['g5'] = [1,0,0];
+G_XMLFileArray['n1'] = [1,0,0];
+G_XMLFileArray['n2'] = [1,0,0];
+G_XMLFileArray['n3'] = [1,0,0];
+G_XMLFileArray['n4'] = [1,0,0];
+G_XMLFileArray['n5'] = [1,0,0];
+G_XMLFileArray['n6'] = [1,0,0];
+G_XMLFileArray['n7'] = [1,0,0];
+G_XMLFileArray['n8'] = [1,0,0];
+G_XMLFileArray['n9'] = [1,0,0];
 
 G_listTitles = ['meta','volume','vagga','sutta','section'];
 
@@ -109,6 +125,7 @@ G_nikLongName['y'] = "Abhi";
 G_nikLongName['x'] = "Vism";
 G_nikLongName['b'] = "AbhiS";
 G_nikLongName['g'] = "Gram";
+G_nikLongName['n'] = "Añña";
 
 
 var G_nikShortName = [];
@@ -129,6 +146,7 @@ G_nikToNumber['y'] = "6";
 G_nikToNumber['x'] = "7";
 G_nikToNumber['b'] = "8";
 G_nikToNumber['g'] = "9";
+G_nikToNumber['n'] = "10";
 
 var G_numberToNik = [];
 G_numberToNik.push('v');
@@ -141,6 +159,7 @@ G_numberToNik.push('y');
 G_numberToNik.push('x');
 G_numberToNik.push('b');
 G_numberToNik.push('g');
+G_numberToNik.push('n');
 
 
 
@@ -181,6 +200,7 @@ abhivala['14'] = 6;
 var G_kynames = [];
 G_kynames['k'] = [];
 G_kynames['y'] = [];
+G_kynames['n'] = [];
 
 G_kynames['k'].push('Khp');
 G_kynames['k'].push('Dhp');
@@ -219,6 +239,15 @@ G_kynames['y'].push('Paṭṭh 4');
 G_kynames['y'].push('Paṭṭh 5');
 G_kynames['y'].push('Paṭṭh 6');
 
+G_kynames['n'].push('Dhs-Anu');
+G_kynames['n'].push('Abhi-Anu');
+G_kynames['n'].push('Abhi-Vat');
+G_kynames['n'].push('Kaṅkhā-T');
+G_kynames['n'].push('Abhi-Vibh');
+G_kynames['n'].push('Abhi-Vat-pT');
+G_kynames['n'].push('Abhi-Vat-aT');
+G_kynames['n'].push('Abhi-Mat');
+G_kynames['n'].push('Mohavicch');
 
 
 var nikvoladi = new Array();
@@ -231,7 +260,7 @@ nikvoladi['ka'] = [0,1,2,3,4,5,6,7,8,9,11,12,13,14];
 nikvoladi['kt'] = [];
 nikvoladi['vm'] = ['Pārā','Pāci','BhīV','Mv','Cv','Pariv'];
 nikvoladi['va'] = ['Pārā','Pāci','BhīV','Mv','Cv','Pariv'];
-nikvoladi['vt'] = ['Pārā','Pāci','BhīV','Mv','Cv','Pariv','Dvem','VinS-A','VajB-T','Vim-T','VinL-T'];
+nikvoladi['vt'] = ['Pārā','Pāci','BhīV','Mv','Cv','Pariv','Dvem','VinS-A','VajB-T','Vim-T','VinL-T','KvP-T','KvAn-T','VinVin','VinVin-T','UtVin-T','PācYoj','KhudSik '];
 nikvoladi['ym'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
 nikvoladi['ya'] = [0,1,2,3,4,5,8];
 nikvoladi['yt'] = [0,1,2,3,4,5,8];
@@ -240,6 +269,7 @@ nikvoladi['b'] = ['Mūla','Ṭīkā'];
 nikvoladi['gm'] = ['Mog','Kac','SPM','SDhM','PRS'];
 nikvoladi['ga'] = [];
 nikvoladi['gt'] = [];
+nikvoladi['n'] = [0,1,2,3,4,5,6,7,8];
 
 var G_nikFullNames = [];
 G_nikFullNames['v'] = 'Vinaya';
@@ -252,6 +282,7 @@ G_nikFullNames['y'] = 'Abhidhamma';
 G_nikFullNames['x'] = 'Vism';
 G_nikFullNames['b'] = 'Abhidh-s';
 G_nikFullNames['g'] = 'Byākaraṇa';
+G_nikFullNames['n'] = 'Añña';
 
 var G_nikFullFullNames = [];
 G_nikFullFullNames['v'] = 'Vinaya Piṭaka';
@@ -264,6 +295,7 @@ G_nikFullFullNames['y'] = 'Abhidhamma Piṭaka';
 G_nikFullFullNames['x'] = 'Visuddhimagga';
 G_nikFullFullNames['b'] = 'Abhidhammattha-saṅgaha';
 G_nikFullFullNames['g'] = 'Byākaraṇa';
+G_nikFullFullNames['n'] = 'Añña';
 
 var G_kVaggas = []
 

@@ -5,7 +5,7 @@ var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequest
 				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 				   .getInterface(Components.interfaces.nsIDOMWindow); 
 function onLoad() {
-	if(/index\.xul/.test(DPR_PAL.contentDocument.location.href))
+	if(/index\.xul/.test(mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href))
 		reindexPanels();
 	
 	var compare,atiurl,etcurl;
@@ -23,10 +23,10 @@ function onLoad() {
 	if(atiurl) {
 		document.getElementById('ati').contentDocument.location.href = atiurl;
 		
-		if(/index\.xul/.test(DPR_PAL.contentDocument.location.href)) { // panels
+		if(/index\.xul/.test(mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href)) { // panels
 			document.getElementById('close').removeAttribute('collapsed');
 
-			var oldurl = DPR_PAL.contentDocument.location.href;
+			var oldurl = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.location.href;
 			var oldparams = oldurl.split('?')[1];
 			oldparams = oldparams.split('|');
 			oldparams[G_compare-1] = link;
@@ -52,7 +52,7 @@ function onLoad() {
 }
 function closePanel() {
 	var cW = mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow;
-	var cD = DPR_PAL.contentDocument;
+	var cD = mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument;
 	var elem = cD.getElementById('dpr-tops');
 	var browsers = elem.getElementsByTagName('browser');
 	

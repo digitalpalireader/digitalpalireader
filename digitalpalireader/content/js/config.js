@@ -117,5 +117,15 @@ function addATIJS() {
 }
 
 function addJS(files) {
-	DPR_PAL.addJS(files);
+	var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader); 
+	for (var i = 0; i<files.length; i++) {
+		if(!/\.js$/.test(files[i]))
+			files[i] = 'chrome://digitalpalireader/content/js/'+files[i]+'.js';
+		try {
+			loader.loadSubScript(files[i],null,'UTF-8'); 
+		}
+		catch(ex) {
+			return [ex,files[i]];
+		}
+	}
 }

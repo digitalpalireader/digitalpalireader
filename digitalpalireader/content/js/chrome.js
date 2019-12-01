@@ -1,15 +1,16 @@
-function openFirstDPRTab() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
+	
+var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+			   .getInterface(Components.interfaces.nsIWebNavigation)
+			   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+			   .rootTreeItem
+			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+			   .getInterface(Components.interfaces.nsIDOMWindow); 
 
+function openFirstDPRTab() {
 	if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
 }
 
 function openDPRTab(permalink,id,reuse) {
-	if (!DPR_PAL.isXUL) {
-		return false;
-	}
 
 
 	if(reuse) { // reuse old tab
@@ -19,8 +20,8 @@ function openDPRTab(permalink,id,reuse) {
 			openDPRTab(permalink,id);
 			return true;
 		}
-		DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
-		DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab).contentDocument.location.href = permalink;
+		mainWindow.gBrowser.selectedTab = oldTab;
+		mainWindow.gBrowser.getBrowserForTab(oldTab).contentDocument.location.href = permalink;
 	}
 	else {
 		// get last DPR tab
@@ -28,11 +29,11 @@ function openDPRTab(permalink,id,reuse) {
 		var start = 0;  // no DPR tabs yet
 		var newIdx = 0;
 		
-		for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 
 			// Get the next tab
 			var currentTab = tabbrowser.tabContainer.childNodes[index];
-			var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+			var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 			if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
 				if (start == 1) { // prev was a DPR tab
 					newIdx = index;
@@ -44,25 +45,21 @@ function openDPRTab(permalink,id,reuse) {
 				newIdx = index+1;
 			}
 		}
-		var newTab = DPR_PAL.mainWindow.gBrowser.addTab(permalink);
+		var newTab = mainWindow.gBrowser.addTab(permalink);
 		if(id) newTab.setAttribute('id', id);
-		DPR_PAL.mainWindow.gBrowser.moveTabTo(newTab, newIdx)
-		DPR_PAL.mainWindow.gBrowser.selectedTab = newTab;
+		mainWindow.gBrowser.moveTabTo(newTab, newIdx)
+		mainWindow.gBrowser.selectedTab = newTab;
 	}
 
 }
 
 
 function findDPRTab(id,loc) {
-	if (!DPR_PAL.isXUL) {
-		return false;
-	}
-
-	for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
+	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 		// Does this tab contain our custom attribute?
 		if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
@@ -74,16 +71,12 @@ function findDPRTab(id,loc) {
 }
 
 function findDPRTabs(id,loc) {
-	if (!DPR_PAL.isXUL) {
-		return [];
-	}
-
 	var tabs = [];
-	for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
+	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 		// Does this tab contain our custom attribute?
 		if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
@@ -95,16 +88,12 @@ function findDPRTabs(id,loc) {
 }
 
 function findDPRTabByLoc(loc) {
-	if (!DPR_PAL.isXUL) {
-		return false;
-	}
-
 	loc = new RegExp(loc);
-	for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
+	for (var found = false, index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
 		// Does this tab contain our custom attribute?
 		if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && loc.exec(ctloc)) {
@@ -116,16 +105,12 @@ function findDPRTabByLoc(loc) {
 }
 
 function updatePrefs() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
 	getconfig();
 	changeSet(1);
-	for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+	for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 		if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
 			currentTab.linkedBrowser.contentWindow.getconfig();
 		}
@@ -133,24 +118,17 @@ function updatePrefs() {
 }
 
 function isDPRTab(id) {
-	if (!DPR_PAL.isXUL) {
-		return false;
-	}
-
-	if(DPR_PAL.mainWindow.gBrowser.selectedTab.id == id) return DPR_PAL.mainWindow.gBrowser.selectedTab;
+	if(mainWindow.gBrowser.selectedTab.id == id) return mainWindow.gBrowser.selectedTab;
 	else return false;
 }
 
 function giveIDtoTabs() { // startup function, give ids to 
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
 	
 	var main = 0; //no main dpr tabs
 	var dict = 0; // no dict tabs
 	var search = 0; // no dict tabs
 	var etc = 0;
-	for (index = 0, tb = DPR_PAL.mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
+	for (index = 0, tb = mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
 
 		// Get the next tab
 		var currentTab = tb.tabContainer.childNodes[index];
@@ -168,14 +146,10 @@ function giveIDtoTabs() { // startup function, give ids to
 }
 
 function checkLastTab() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+	for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 		// Get the next tab
 		var currentTab = tabbrowser.tabContainer.childNodes[index];
-		var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
+		var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
 		if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
 			return false; // still one open tab
 		}
@@ -185,11 +159,7 @@ function checkLastTab() {
 }
 
 function DPRSidebarWindow() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
+	var sidebar = mainWindow.document.getElementById("sidebar");
 
 	if (sidebar.contentDocument.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return sidebar.contentWindow;
@@ -198,11 +168,7 @@ function DPRSidebarWindow() {
 }
 
 function DPRSidebarDocument() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+	var sidebar = mainWindow.document.getElementById("sidebar").contentDocument;
 
 	if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 		return sidebar;
@@ -211,52 +177,26 @@ function DPRSidebarDocument() {
 }
 
 function closeDPRSidebar() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
 
 	if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-		return DPR_PAL.mainWindow.toggleSidebar();
+		return mainWindow.toggleSidebar();
 	} 
 }
 function openDPRSidebar() {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+	var sidebarWindow = mainWindow.document.getElementById("sidebar").contentDocument;
 	if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
-		return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+		return mainWindow.toggleSidebar('viewDPR');
 	} 
 }
 
 function setCurrentTitle(title) {
-    if (DPR_PAL.isXUL) {
-		DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-	  } else {
-		document.title = title;
-	  }
-  }
-
-function closeBrowser(id) {
-	if (!DPR_PAL.isXUL) {
-		return;
-	}
-
-	var thisTab = DPR_PAL.mainWindow.gBrowser.selectedTab;
-	var thisDocument = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab).contentDocument;
-	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id+'-splitter'));
-	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id));
+	mainWindow.gBrowser.selectedTab.setAttribute('label',title);
 }
 
-function eventSend(event,internal) {
-	if(!event) return;
-	if(event.ctrlKey || event.which == 2) return true;
-	if(event.shiftKey) return 'shift';
-	if(event.which == 1 && internal) return 'internal';
-	if (event.which == 1) return false;
-	if(event.keyCode) return false;
-	return 'right';
+function closeBrowser(id) {
+	var thisTab = mainWindow.gBrowser.selectedTab;
+	var thisDocument = mainWindow.gBrowser.getBrowserForTab(thisTab).contentDocument;
+	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id+'-splitter'));
+	thisDocument.getElementById(id).parentNode.removeChild(thisDocument.getElementById(id));
 }

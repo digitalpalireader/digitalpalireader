@@ -166,7 +166,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				//finout += '{'+altplus+'}' + space;
 				if(DPR_prefs['showVariantsInline']) {
-					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="outputAnalysis(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
 					finout += altplusf + space;
 					b++;
 					saveout += ' <span class="varc">'+altplus+'</span>' + space;
@@ -179,7 +179,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			else {
 				altplus += wb + ' ';
 				if(DPR_prefs['showVariantsInline'] && which  != 1) {
-					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="outputAnalysis(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb) + '</span>' + space;
+					altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb) + '</span>' + space;
 					b++;
 				}
 			}
@@ -191,7 +191,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
 				//finout += '{'+altplus+'}' + space;
 				if(DPR_prefs['showVariantsInline']) {
-					finout += '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="outputAnalysis(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(altplus) + '</span>}' + space;
+					finout += '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(altplus) + '</span>}' + space;
 					saveout += ' <span class="varc">'+altplus+'</span>' + space;
 					b++;
 				}
@@ -204,7 +204,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				altread = 1;
 				altplus = wb.substring(1) + space;
 				if(DPR_prefs['showVariantsInline'] && which  != 1) {
-					altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="outputAnalysis(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
+					altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
 					b++;
 				}
 			}
@@ -260,7 +260,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				convout += wb.replace(/<[^>]*>/g, '');
 			}
 			if(!which == 1) {// put it together as one link
-				finout += '<span id="W' + b + '" class="pointer" onmouseup="outputAnalysis(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
+				finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
 			}
 			finout += space;
 			saveout += space;
@@ -343,7 +343,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			unioutb = uniouta[a];
 			//unioutb = unioutb.replace(/0/g, '.');
 			unioutb = translit(unioutb);
-			finout += '<span class="pointer" id="W' + b + '" onmouseup="outputAnalysis(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
+			finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
 			saveout += unioutb + space;
 			b++;
 		}
@@ -453,7 +453,7 @@ function analyzeTextPad(text) {
 
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
-pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="digitalpalireader/content/images/ajax-loader.gif" /> please wait...</h1>';
+pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
 
 
 
@@ -566,11 +566,11 @@ function makeToolbox(main,aux,title,conv,ex,save,trans) {
 		$('#tbContainer').hide();
 		return;
 	}
-	//$('#tbContainer').show();
+	$('#tbContainer').show();
 	
 	var but = ['l','m','r'];
 	var bn = 0;
-	var pre = '';
+	var pre = '<div class="tiny tbtitle">'+title+'</div><hr style="margin-bottom:10px"/>';
 	if(conv) {
 		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span>';
 	}
@@ -582,7 +582,7 @@ function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	}
 	main = pre + ' ' + main;
 	
-	$('#tbContainer').html('<div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
+	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
 }
 
 function makeTable(text,cls) {
