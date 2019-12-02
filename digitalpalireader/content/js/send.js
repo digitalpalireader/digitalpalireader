@@ -4,8 +4,15 @@ function eventSend(event,internal) {
 	if(!event) return;
 	if(event.ctrlKey || event.which == 2) return true;
 	if(event.shiftKey) return 'shift';
+	if (DPR_PAL.isWeb) {
+		if(event.which == 1 && internal) return 'internal';
+	} else {
 	if((event.which == 1 || event.charCode) && internal) return 'internal';
+	}
 	if (event.which == 1) return false;
+	if (DPR_PAL.isWeb) {
+		if(event.keyCode) return false;
+	}
 	return 'right';
 }
 
@@ -294,6 +301,11 @@ var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
 	
+	if (DPR_PAL.isWeb) {
+		outputAnalysis(input,frombox);
+		return;
+	}
+
 	if(add == 'right') return;
 	if(window.getSelection().toString()) 
 		return;

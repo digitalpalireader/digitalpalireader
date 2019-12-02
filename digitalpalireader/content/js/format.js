@@ -453,7 +453,7 @@ function analyzeTextPad(text) {
 
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
-pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="images/ajax-loader.gif" /> please wait...</h1>';
+pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="'+DPR_PAL.contentFolder+'images/ajax-loader.gif" /> please wait...</h1>';
 
 
 
@@ -561,6 +561,10 @@ function clearDivs(which) { // place divs to be cleared here
 }
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
+	if (DPR_PAL.isWeb) {
+		return;
+	}
+
 	if(main === false) {
 		$('#tbContainer').html('');
 		$('#tbContainer').hide();
