@@ -483,7 +483,12 @@
 			</tabpanel>
 		</tabpanels>
 	</tabbox>		
-	<script type="application/x-javascript" src="js/sidebar.js" />
+	<!-- PAL must be the first script after JQuery. -->
+	<script type="application/x-javascript" src="js/jquery.js" />
+	<script type="application/x-javascript" src="js/jquery-ui.js" />
+	<script type="application/x-javascript" src="js/dpr_pal.js" />
+
+	<script type="application/x-javascript" src="js/xul/sidebar.js" />
 	<script type="application/x-javascript" src="js/config_sidebar.js"/>
 	<script type="application/x-javascript" src="js/io.js"/>
 	<script type="application/x-javascript" src="js/prefload.js"/>
