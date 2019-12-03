@@ -1,0 +1,28 @@
+name: 5.$(Date:yy).$(Date:MMdd)$(Rev:.rr)
+
+trigger:
+  - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+  - task: Bash@3
+    inputs:
+      filePath: 'build.sh'
+      arguments: '$(Build.BinariesDirectory)'
+      workingDirectory: '$(Build.Repository.LocalPath)'
+  
+  - task: ArchiveFiles@2
+    inputs:
+      rootFolderOrFile: '$(Build.BinariesDirectory)\dprweb'
+      includeRootFolder: true
+      archiveType: 'zip'
+      archiveFile: '$(Build.ArtifactStagingDirectory)/dprWeb.$(Build.BuildId).zip'
+      replaceExistingArchive: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish build artifacts'
+    inputs:
+      pathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+    condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/dev')))

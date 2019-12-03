@@ -1,7 +1,7 @@
-APP_NAME=DPRMyanmar
+APP_NAME=dprweb
 OUTDIR="${1:-../..}"
 
-rm $OUTDIR/$APP_NAME.xpi
+rm $OUTDIR/$APP_NAME
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."

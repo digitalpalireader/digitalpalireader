@@ -1,9 +1,11 @@
 cd digitalpalireader
-./build.sh
+./build.sh $1
 cd ../DPRMyanmar
-./build.sh
+./build.sh $1
 cd ../DPRThai
-./build.sh
+./build.sh $1
 cd ../sanskrit
-./build.sh
+./build.sh $1
+cd ../DPRHTML
+./build.sh $1
 cd ..

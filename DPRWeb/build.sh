@@ -39,6 +39,7 @@ BEFORE_BUILD=      # run this before building       (bash command)
 AFTER_BUILD=       # ...and this after the build    (bash command)
 
 APP_NAME=DPRWeb
+OUTDIR="${1:-../..}"
 CHROME_PROVIDERS="content locale skin"
 CLEAN_UP=1
 ROOT_FILES=
@@ -132,5 +133,7 @@ fi
 # remove the working files
 rm -rf $TMP_DIR
 
-notify-send "Done!" "Extension Updated"
+if hash notify-send 2>/dev/null; then
+    notify-send "Done!" "Extension Updated"
+fi
 

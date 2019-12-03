@@ -1,10 +1,13 @@
 APP_NAME=DPRThai
+OUTDIR="${1:-../..}"
 
-rm ../../$APP_NAME.xpi
+rm $OUTDIR/$APP_NAME.xpi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
-zip -r ../../$APP_NAME.xpi * -x build.sh
+zip -r $OUTDIR/$APP_NAME.xpi * -x build.sh
 
-notify-send "Done!" "Extension Updated"
+if hash notify-send 2>/dev/null; then
+    notify-send "Done!" "Extension Updated"
+fi
 
