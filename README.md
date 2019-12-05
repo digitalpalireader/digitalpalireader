@@ -1,4 +1,4 @@
-[![Build Status](https://parthopdas.visualstudio.com/Digital%20Pali%20Reader/_apis/build/status/Digital%20Pali%20Reader%20CI?branchName=master)](https://parthopdas.visualstudio.com/Digital%20Pali%20Reader/_build/latest?definitionId=8&branchName=master) [![Build Status](https://parthopdas.vsrm.visualstudio.com/_apis/public/Release/badge/ab038a3a-b01d-4262-9ab9-32d04d00989a/1/2)](https://parthopdas.visualstudio.com/Digital%20Pali%20Reader/_release)
+[![Build Status](https://yuttadhammo.visualstudio.com/digitalpalireader/_apis/build/status/digitalpalireader%20CI?branchName=master)](https://yuttadhammo.visualstudio.com/digitalpalireader/_build/latest?definitionId=8&branchName=master) [![Build Status](https://yuttadhammo.vsrm.visualstudio.com/_apis/public/Release/badge/ab038a3a-b01d-4262-9ab9-32d04d00989a/1/2)](https://yuttadhammo.visualstudio.com/digitalpalireader/_release)
 
 # Digital Pali Reader
 
