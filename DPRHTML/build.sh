@@ -1,11 +1,14 @@
 APP_NAME=dprweb
-OUTDIR="${1:-../..}"
+OUTDIR="${1:-../../build}"
+SOURCEDIR="${2:-$OUTDIR/..}"
 
-rm $OUTDIR/$APP_NAME
+rm -f $OUTDIR/$APP_NAME.zip
 
-# generate the XPI file
-echo "Generating $APP_NAME.xpi..."
-zip -r $OUTDIR/$APP_NAME.xpi * -x build.sh
+# generate the ZIP file
+echo "Generating $APP_NAME.zip... ($SOURCEDIR -> $OUTDIR)"
+pushd $SOURCEDIR
+zip -r $OUTDIR/$APP_NAME.zip * -x \*.git\* *.zip
+popd
 
 if hash notify-send 2>/dev/null; then
     notify-send "Done!" "Extension Updated"

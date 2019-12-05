@@ -7,10 +7,13 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+  - script: |
+    sudo apt-get install zip
+
   - task: Bash@3
     inputs:
       filePath: 'build.sh'
-      arguments: '$(Build.BinariesDirectory)'
+      arguments: '$(Build.BinariesDirectory)' '$(Build.Repository.LocalPath)'
       workingDirectory: '$(Build.Repository.LocalPath)'
   
   - task: ArchiveFiles@2

@@ -1,5 +1,7 @@
 APP_NAME=DPRSanskrit
-OUTDIR="${1:-../..}"
+OUTDIR="${1:-../../build}"
+
+rm -f $OUTDIR/$APP_NAME.xpi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."

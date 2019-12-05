@@ -1,7 +1,7 @@
 APP_NAME=DPRThai
-OUTDIR="${1:-../..}"
+OUTDIR="${1:-../../build}"
 
-rm $OUTDIR/$APP_NAME.xpi
+rm -f $OUTDIR/$APP_NAME.xpi
 
 # generate the XPI file
 echo "Generating $APP_NAME.xpi..."
