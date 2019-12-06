@@ -15,8 +15,13 @@ steps:
       arguments: $(Build.BinariesDirectory) $(Build.Repository.LocalPath)
       workingDirectory: '$(Build.Repository.LocalPath)'
 
+  - task: CopyFiles@2
+    inputs:
+      contents: '$(Build.BinariesDirectory)/**'
+      targetFolder: $(Build.ArtifactStagingDirectory)
+
   - task: PublishBuildArtifacts@1
     displayName: 'Publish build artifacts'
     inputs:
-      pathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/dev')))
