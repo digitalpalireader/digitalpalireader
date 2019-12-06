@@ -21,4 +21,5 @@ cd ../DPRHTML
 ./build.sh $OUTDIR $SOURCEDIR
 cd ..
 
+echo "Contents of OUTDIR [$OUTDIR]"
 ls -laF $OUTDIR
