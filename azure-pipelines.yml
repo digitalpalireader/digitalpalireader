@@ -14,14 +14,6 @@ steps:
       filePath: 'build.sh'
       arguments: $(Build.BinariesDirectory) $(Build.Repository.LocalPath)
       workingDirectory: '$(Build.Repository.LocalPath)'
-  
-  - task: ArchiveFiles@2
-    inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)\dprweb'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/dprWeb.$(Build.BuildId).zip'
-      replaceExistingArchive: true
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish build artifacts'
