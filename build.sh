@@ -4,6 +4,9 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 OUTDIR="${1:-$DIR/build}"
 SOURCEDIR="${2:-$OUTDIR/..}"
 
+echo "OUTDIR = $OUTDIR"
+echo "SOURCEDIR = $SOURCEDIR"
+
 mkdir -p $OUTDIR
 
 cd digitalpalireader
@@ -17,3 +20,5 @@ cd ../sanskrit
 cd ../DPRHTML
 ./build.sh $OUTDIR $SOURCEDIR
 cd ..
+
+ls -laF $OUTDIR

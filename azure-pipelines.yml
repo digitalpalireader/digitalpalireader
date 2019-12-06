@@ -7,25 +7,21 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-  - script: |
-    sudo apt-get install zip
+  - script: sudo apt-get install zip
 
   - task: Bash@3
     inputs:
       filePath: 'build.sh'
-      arguments: '$(Build.BinariesDirectory)' '$(Build.Repository.LocalPath)'
+      arguments: $(Build.BinariesDirectory) $(Build.Repository.LocalPath)
       workingDirectory: '$(Build.Repository.LocalPath)'
-  
-  - task: ArchiveFiles@2
+
+  - task: CopyFiles@2
     inputs:
-      rootFolderOrFile: '$(Build.BinariesDirectory)\dprweb'
-      includeRootFolder: true
-      archiveType: 'zip'
-      archiveFile: '$(Build.ArtifactStagingDirectory)/dprWeb.$(Build.BuildId).zip'
-      replaceExistingArchive: true
+      contents: '$(Build.BinariesDirectory)/*.*'
+      targetFolder: $(Build.ArtifactStagingDirectory)
 
   - task: PublishBuildArtifacts@1
     displayName: 'Publish build artifacts'
     inputs:
-      pathtoPublish: '$(System.DefaultWorkingDirectory)/build'
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/dev')))
