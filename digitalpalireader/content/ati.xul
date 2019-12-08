@@ -4,6 +4,8 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" onload="onLoad()"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<!-- PAL must be the first script after JQuery. -->
+	<script type="application/x-javascript" src="js/dpr_pal.js"></script>
 	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/ati.js"/>
 	<script type="application/x-javascript">
