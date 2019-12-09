@@ -218,6 +218,7 @@
 		</hbox>
 	</hbox>
 	<separator class="thin"/>  
+	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/dpr_pal.js"></script>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prompt.js"/>
 	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>

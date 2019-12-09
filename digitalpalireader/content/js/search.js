@@ -1,7 +1,7 @@
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
-var MD = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument; 
-var MW = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow; 
+var MD = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(DPR_PAL.mainWindow.gBrowser.selectedTab).contentDocument; 
+var MW = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(DPR_PAL.mainWindow.gBrowser.selectedTab).contentWindow; 
 				   
 var G_searchStartTime;
 
