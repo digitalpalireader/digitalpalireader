@@ -116,6 +116,8 @@
 		</tabbox>
 	</hbox>
 	<script type="application/x-javascript" src="js/jquery.js" />
+	<!-- PAL must be the first script after JQuery. -->
+	<script type="application/x-javascript" src="js/dpr_pal.js" />
 	<script type="application/x-javascript" src="js/io.js" />
 
 	<script type="application/x-javascript" src="js/prefload.js"/>

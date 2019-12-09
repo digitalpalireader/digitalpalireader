@@ -5,6 +5,7 @@
 		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script>
 	</script>
+	<script type="application/x-javascript" src="js/dpr_pal.js"></script>
 	<script type="application/x-javascript" src="js/prefload.js"/>
 	<script type="application/x-javascript" src="js/translit_overlay.js"/>
 	<script type="application/x-javascript" src="js/chrome_overlay.js"/>

@@ -5,6 +5,7 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script type="application/x-javascript" src="js/dpr_pal.js"></script>
   <script type="application/x-javascript" src="js/chrome.js" />
 	<script>
 
