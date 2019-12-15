@@ -159,7 +159,7 @@ function DPR_PAL_Search_AddCopyPermaLinkElement() {
 		MD.getElementById('search-link').appendChild(mlink);
 	} else {
 		const html = `
-<a class="nav-link" href="#" onclick="permalinkClick('${G_searchLink}')" style="padding-right: 0px;" title="Click to copy permalink to clipboard">♦</a>
+<a class="btn btn-outline-secondary btn-small my-2 my-sm-0" onclick="permalinkClick('${G_searchLink}')" title="Click to copy permalink to clipboard">♦</a>
 `;
 		MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
 	}
@@ -316,8 +316,18 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 function stopSearch() {
 	stopsearch = 1;
 }
+
 function scrollSearch(what) {
-	document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
+	DPR_PAL_Search_ScrollSearch(what);
+}
+
+function DPR_PAL_Search_ScrollSearch(what) {
+	if (DPR_PAL.isXUL) {
+		document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;	
+	} else {
+		const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
+		document.getElementById('search').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;	
+	}
 }
 
 function resetvalues() {
@@ -665,6 +675,15 @@ function importXMLs(cnt)
 	nikperm = 0;
 	
 
+}
+
+function createTdForMatch(dups, match) {
+	if (!match) {
+		return '';
+	}
+
+	const linkText = normalizeLongSearchResult(match);
+	return `<a href="javascript:void(0);" title="${match}" onclick="showonly('${match.replace(/\"/g, 'x')}')">${linkText}</a> (${dups[match]})`;
 }
 
 function createTables(xmlDoc,hiert)
@@ -1131,8 +1150,7 @@ function createTables(xmlDoc,hiert)
 				exwordout += '<td valign="top">';
 				for (ex = 0; ex < exnodups[t].length; ex++)
 				{
-					
-					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + exnodups[t][ex] + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+					exwordout += `<div>${createTdForMatch(dups, exnodups[t][ex])}</div>`;
 				}
 				exwordout += '</td>';
 			}								
@@ -1164,7 +1182,7 @@ function createTables(xmlDoc,hiert)
 
 			for (ex = 0; ex < findiv; ex++)
 			{
-				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + exnodups[findiv+ex] + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+				exwordout += `<tr><td>${createTdForMatch(dups, exnodups[ex])}</td><td>${createTdForMatch(dups, exnodups[findiv + ex])}</td></tr>`;
 			}
 			exwordout += '</table>';
 		}
@@ -1176,6 +1194,11 @@ function createTables(xmlDoc,hiert)
 		document.getElementById('sbfb').appendChild(outNode);
 	}
 	match = 0;
+}
+
+function normalizeLongSearchResult(match) {
+	const maxLength = 25;
+	return match.length >= maxLength ? `${match.substring(0, maxLength)}...` : match;
 }
 
 function showonly(string) {
@@ -1194,7 +1217,8 @@ function showonly(string) {
 			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
-		$('#showing').html('<b style="color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;</b><b>x</b>'); 
+		const linkText = normalizeLongSearchResult(toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
+		$('#showing').html('<b style="color:'+DPR_prefs['colped']+'">' + linkText + '&nbsp;</b><b>x</b>'); 
 		document.getElementById('showing').style.display = 'block';
 		scrollToId('search','sbfb');
 	}

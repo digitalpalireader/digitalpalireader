@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="DPRHTML/dpr.appcache">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="dpr.appcache">
 
 <head>
   <title>Digital Pali Reader (alpha)</title>
@@ -89,10 +89,14 @@
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul id="search-sets" class="navbar-nav mr-auto">
       </ul>
-      <div id="search-link" class="my-2 my-lg-0">
+      <div class="form-inline">
+        <a id="showing" class="btn btn-outline-secondary px-2 mr-2" style="display: none; text-align: justify;"
+          onclick="showonly('xyz');" title="Remove search filter"></a>
+        <span id="search-link"></span>
       </div>
     </div>
   </nav>
+
   <div id="search" class="container-fluid" style="overflow-y: auto; height: 100%;">
     <div class="row">
       <div id="lower" class="col-sm-12 px-0 mb-1">
@@ -112,8 +116,8 @@
           <div class="card mb-1">
             <div id="sbfab" class="card-body" style="text-align: justify;">
             </div>
-            <div class="label chromeback pointer" style="display:none" style="text-align: justify;" id="showing"
-              onclick="showonly('xyz');" title="Remove search filter"></div>
+            <!-- <div id="showing" class="label chromeback pointer" style="display:none; text-align: justify;"
+              onclick="showonly('xyz');" title="Remove search filter"></div> -->
           </div>
           <div class="card mb-1">
             <div id="sbfb" class="card-body" style="text-align: justify;">
@@ -128,16 +132,12 @@
 
     <div class="row">
       <div class="col-sm-12">
-        <div class="card mb-1">
-          <div class="card-body">
-            <div id="searcht" class="row chromeback">
-              <div style="text-align: justify;" class="relative" id="stfb">
-              </div>
-              <div style="text-align: justify;" class="relative" id="stfc">
-              </div>
-              <div id="searchtb"></div>
-            </div>
+        <div id="searcht" class="row chromeback">
+          <div style="text-align: justify;" class="relative" id="stfb">
           </div>
+          <div style="text-align: justify;" class="relative" id="stfc">
+          </div>
+          <div id="searchtb"></div>
         </div>
       </div>
     </div>

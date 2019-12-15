@@ -213,7 +213,8 @@ function WEB_setPref(name,value) {
 }
 
 function WEB_getPref(name) {
-	return DPR_prefsD[name]
+	const pref = DPR_prefsD[name];
+	return /(chrome:)/.test(pref) ? '' : pref;
 }
 
 function WEB_getPref_FromStore(name) {
