@@ -14,186 +14,11 @@ var G_searchPart;
 var G_searchRX;
 var G_searchLink;
 
-function DPR_PAL_Search_SetTitle(title) {
-	if (DPR_PAL.isXUL) {
-		MD.getElementById('DPR').setAttribute('title', title);
-	} else {
-		MD.title = title;
-	}
-}
-
-function DPR_PAL_Search_ShowProgressBar() {
-	if (DPR_PAL.isXUL) {
-		MD.getElementById('search-progress').removeAttribute('collapsed');
-		MD.getElementById('search-progress').setAttribute('value',0);
-	} else {
-		$('#search-progress').show();
-		$('#search-progress').data('current', 0);
-		$('#search-current-progress').css('width', '0%');
-	}
-}
-
-function DPR_PAL_Search_ShowCancelButton() {
-	if (DPR_PAL.isXUL) {	
-		MD.getElementById('cancel-search').removeAttribute('collapsed');
-	} else {
-		$('#cancel-search').show();
-	}
-}
-
-function DPR_PAL_Search_MakeProgressTable(maxVal) {
-	if (DPR_PAL.isXUL) {	
-		MD.getElementById('search-progress').setAttribute('max', maxVal);
-	} else {
-		$('#search-progress').data('max', maxVal);
-	}
-}
-
-function DPR_PAL_Search_UpdateProgressBar() {
-	if (DPR_PAL.isXUL) {	
-		const val = parseInt(MD.getElementById('search-progress').getAttribute('value'));
-		MD.getElementById('search-progress').setAttribute('value',val+1);
-	} else {
-		const max = $('#search-progress').data('max');
-		const current = $('#search-progress').data('current') + 1;
-		$('#search-progress').data('current', current);
-		const percentage = Math.round(current / max * 100);
-		if (percentage % 10 === 0) {
-			$('#search-current-progress').css('width', `${percentage + 10}%`);
-		}
-	}
-}
-
-function DPR_PAL_Search_HideProgressBar() {
-	if (DPR_PAL.isXUL) {	
-		MD.getElementById('search-progress').setAttribute('collapsed',true);
-	} else {
-		$('#search-progress').hide();
-	}
-}
-
-function DPR_PAL_Search_HideCancelButton() {
-	if (DPR_PAL.isXUL) {	
-		MD.getElementById('cancel-search').setAttribute('collapsed',true);
-	} else {
-		$('#cancel-search').hide();
-	}
-}
-
-function DPR_PAL_SearchClearSectionLinks() {
-	var element = MD.getElementById("search-sets");
-	while (element.hasChildNodes()) {
-		element.removeChild(element.firstChild);
-	}
-}
-
-function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {
-	if (DPR_PAL.isXUL) {	
-		var thisterm = MD.createElement('toolbarbutton');
-		thisterm.setAttribute('id', 'search-term');
-		thisterm.setAttribute('onmouseup', 'scrollSearch()');
-		thisterm.setAttribute('class', 'search-set');
-
-		var setlabel = MD.createElement('label');
-		setlabel.setAttribute('value', searchTerm);
-		setlabel.setAttribute('id', 'search-term');
-		setlabel.setAttribute('crop', 'center');
-		setlabel.setAttribute('class', 'search-button-label');
-		thisterm.appendChild(setlabel);
-
-		var tsep = MD.createElement('toolbarseparator');
-		MD.getElementById('search-sets').appendChild(thisterm);
-		MD.getElementById('search-sets').appendChild(tsep);
-	} else {
-		const html = `
-<li class="nav-item">
-	<a class="nav-link" href="#" onclick="scrollSearch()">${searchTerm}</a>
-</li>`;
-		MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
-	}
-}
-
-function DPR_PAL_SearchAddSectionLink() {
-	if (DPR_PAL.isXUL) {	
-		var thisset = MD.createElement('toolbarbutton');
-		thisset.setAttribute('class', 'search-set');
-		thisset.setAttribute('onmouseup', 'scrollSearch(\'sbfN' + G_numberToNik[i] + '\')');
-		var setlabel = MD.createElement('label');
-		setlabel.setAttribute('value', G_nikLongName[G_numberToNik[i]] + ': 0');
-		setlabel.setAttribute('id', 'matches' + G_numberToNik[i]);
-		setlabel.setAttribute('class', 'search-button-label');
-		thisset.appendChild(setlabel);
-		var sep = MD.createElement('toolbarseparator');
-		MD.getElementById('search-sets').appendChild(thisset);
-		if (i < G_searchSet.length)
-			MD.getElementById('search-sets').appendChild(sep);
-	} else {
-		const scrollTo = `sbfN${G_numberToNik[i]}`;
-		const id = `matches${G_numberToNik[i]}`;
-		const html = `
-<li class="nav-item">
-	<a id="${id}" class="nav-link" href="#" onclick="scrollSearch('${scrollTo}')">${G_nikLongName[G_numberToNik[i]] + ': 0'}</a>
-</li>`;
-		MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
-	}
-}
-
-function DPR_PAL_SearchUpdateSectionLink(nikayaat, thiscount) {
-	if (DPR_PAL.isXUL) {
-		var val = MD.getElementById('matches' + nikayaat).getAttribute('value').replace(/: .+/, ': ');
-		MD.getElementById('matches' + nikayaat).setAttribute('value', val + thiscount);	
-	} else {
-		var val = $('#matches' + nikayaat).text().replace(/: .+/, ': ');
-		$('#matches' + nikayaat).text(val + thiscount);	
-	}
-}
-
-function DPR_PAL_Search_AddCopyPermaLinkElement() {
-	if (DPR_PAL.isXUL) {
-		var mlink = MD.createElement('toolbarbutton');
-		mlink.setAttribute('class','search-button');
-		mlink.setAttribute('label','♦');
-		mlink.setAttribute('onmouseup','permalinkClick(\''+G_searchLink+'\',1)');
-		mlink.setAttribute('tooltiptext','Click to copy permalink to clipboard');
-	
-		MD.getElementById('search-link').appendChild(mlink);
-	} else {
-		const html = `
-<a class="btn btn-outline-secondary btn-small my-2 my-sm-0" onclick="permalinkClick('${G_searchLink}')" title="Click to copy permalink to clipboard">♦</a>
-`;
-		MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
-	}
-}
-
-function DPR_PAL_Search_RemoveCopyPermaLinkElement() {
-	var element = MD.getElementById("search-link");
-	while(element.hasChildNodes()){
-		element.removeChild(element.firstChild);
-	}
-}
-
-function DPR_PAL_Search_CreateSectionHeader(newnikaya) {
-	if (DPR_PAL.isXUL) {
-		const headingNode = document.createElement('div');
-		headingNode.setAttribute('id', 'sbfN' + newnikaya);
-		headingNode.setAttribute('name', 'xyz');
-		headingNode.setAttribute('class', 'huge');
-		headingNode.innerHTML = G_nikLongName[newnikaya] + '<hr>';
-		return headingNode;	
-	} else {
-		const id = `sbfN${newnikaya}`;
-		const html = `<h4 id='${id}' name='xyz' class="card-title huge">${G_nikLongName[newnikaya]}</h4>`;
-		const headingNode = document.createElement('div');
-		headingNode.innerHTML = html;
-		return headingNode.children[0];
-	}
-}
-
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
 	DPR_PAL_Search_ShowCancelButton();
 	DPR_PAL_Search_ShowProgressBar();
 
-	DPR_PAL_SearchClearSectionLinks();
+	DPR_PAL_Search_ClearSectionLinks();
 	
 	DPR_PAL_Search_RemoveCopyPermaLinkElement();
 
@@ -358,15 +183,10 @@ function finishSearch() {
 	// fix plural
 
 	if(MD.getElementById('inter')) {
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		if(val == 1) {
-			var str = MD.getElementById('inter').getAttribute('value').replace('matches','match');
-			MD.getElementById('inter').setAttribute('value',str);
-		}
+		DPR_PAL_Search_FixPluralInSearchTermSectionInfo()
 	}
 
 }
-
 
 var G_searchFileArray = [];
 
@@ -442,7 +262,7 @@ function pausesall()
 
 	for (i = 0; i < G_numberToNik.length; i++) {
 		if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-		DPR_PAL_SearchAddSectionLink();
+		DPR_PAL_Search_AddSectionLink();
 	}
 	
 	DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
@@ -478,27 +298,7 @@ function pausetwo() { // init function for single collection
 
 	DPR_PAL_Search_ClearSearchResults();
 
-	var thisterm = MD.createElement('label');
-	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
-	thisterm.setAttribute('id','search-term');
-	thisterm.setAttribute('class','search-bold');
-	thisterm.setAttribute('crop','center');
-	var thismatches = MD.createElement('label');
-	thismatches.setAttribute('value','0');
-	thismatches.setAttribute('id','search-matches');
-	thismatches.setAttribute('class','search-bold');
-	var thisinter = MD.createElement('label');
-	thisinter.setAttribute('value',' matches in ');
-	thisinter.setAttribute('class','search-label');
-	thisinter.setAttribute('id','inter');
-	var thisset = MD.createElement('label');
-	thisset.setAttribute('value',G_nikLongName[nikaya]);
-	thisset.setAttribute('class','search-bold');
-
-	MD.getElementById('search-sets').appendChild(thisterm);
-	MD.getElementById('search-sets').appendChild(thismatches);
-	MD.getElementById('search-sets').appendChild(thisinter);
-	MD.getElementById('search-sets').appendChild(thisset);
+	DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]);
 
 	importXMLs(2);
 }
@@ -529,27 +329,7 @@ function pausethree() {
 
 	DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
 	
-	var thisterm = MD.createElement('label');
-	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
-	thisterm.setAttribute('id','search-term');
-	thisterm.setAttribute('class','search-bold');
-	thisterm.setAttribute('crop','center');
-	var thismatches = MD.createElement('label');
-	thismatches.setAttribute('value','0');
-	thismatches.setAttribute('id','search-matches');
-	thismatches.setAttribute('class','search-bold');
-	var thisinter = MD.createElement('label');
-	thisinter.setAttribute('value',' matches in ');
-	thisinter.setAttribute('class','search-label');
-	thisinter.setAttribute('id','inter');
-	var thisset = MD.createElement('label');
-	thisset.setAttribute('value',G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
-	thisset.setAttribute('class','search-bold');
-
-	MD.getElementById('search-sets').appendChild(thisterm);
-	MD.getElementById('search-sets').appendChild(thismatches);
-	MD.getElementById('search-sets').appendChild(thisinter);
-	MD.getElementById('search-sets').appendChild(thisset);
+	DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
 
 	importXMLs(3);
 }
@@ -599,7 +379,7 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 					
-		DPR_PAL_SearchUpdateSectionLink(nikayaat, thiscount);
+		DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount);
 	
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -628,8 +408,7 @@ function importXMLs(cnt)
 		var xmlDoc = loadXMLFile(bookfile,0);
 		createTables(xmlDoc,hiert);
 					
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		MD.getElementById('search-matches').setAttribute('value',thiscount);
+		DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -655,8 +434,7 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		MD.getElementById('search-matches').setAttribute('value',thiscount);					
+		DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
