@@ -12,7 +12,7 @@ Each set is in its own subfolder, and each set has a build.sh script that will c
 
 To do this, create a file for the set, named:
 
-> &lt;directory&gt;@noah.yuttadhammo
+> &lt;directory&gt;@yuttadhammo.bhikkhu
 > 
 > with the location of the directory as the first and only line of the file, i.e.:
 > 
@@ -20,7 +20,7 @@ To do this, create a file for the set, named:
 > 
 > For example, create a file in your profile's "extensions" directory called:
 > 
-> digitalpalireader@noah.yuttadhammo
+> digitalpalireader@yuttadhammo.bhikkhu
 > 
 > and put the following in it:
 > 
