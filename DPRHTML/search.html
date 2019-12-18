@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="dpr.appcache">
+
+<head>
+  <title>Digital Pali Reader (alpha)</title>
+  <link rel="icon" href="./favicon.png" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="/digitalpalireader/content/css/jquery-ui.min.css">
+  <link rel="stylesheet" href="/DPRHTML/index.css">
+  <link rel="stylesheet" href="/DPRHTML/styles.css">
+  <link rel="stylesheet" href="/DPRHTML/search.css">
+
+  <script type="text/javascript">
+    const deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
+    const deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
+    const deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
+    const deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
+
+    const appInsightsInstrumentationKey = deploymentAppInsightsInstrumentationKey.startsWith('#{')
+      ? '00000000-0000-0000-0000-000000000000'
+      : deploymentAppInsightsInstrumentationKey;
+
+    var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+      {
+        instrumentationKey: appInsightsInstrumentationKey
+      }
+    ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+  </script>
+
+  <!-- PAL must be the first script. -->
+  <script type="text/javascript" src="/digitalpalireader/content/js/jquery.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/jquery-ui.js"></script>
+  <script type="text/javascript" src="https://kit.fontawesome.com/c676843ce4.js" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/io.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/prefload.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/xml_load.js"></script>
+
+  <script type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/send.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/receive.js"></script>
+
+  <script type="text/javascript" src="/digitalpalireader/content/js/config.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/translit.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/navigation_common.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/navigation.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/format.js"></script>
+  <!-- <script type="text/javascript" src="/digitalpalireader/content/js/prompt.js"></script> -->
+  <script>
+    function onDocLoad() {
+      giveIDtoTabs();
+      getconfig();
+      if (document.location.href.indexOf('?') > -1) {
+        searchTipitaka();
+      } else {
+        document.location.href += '?type=0&query=arahant&MAT=m&set=dmsak&book=1&part=1&rx=false';
+      }
+    }
+    function scrollToId(a, b) {
+      if (a == 'search') a = 'sbfbc';
+      if (a == 'dif') a = 'cdif';
+      document.getElementById(a).scrollTop = (typeof (b) == 'number' ? b : document.getElementById(b).offsetTop);
+    }
+
+    // external dev function
+
+    var devCheck = 0;
+
+    function devO() { }
+    function dalert(a) { }
+    function ddump(a) { }
+  </script>
+
+</head>
+
+<body onload="onDocLoad();">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="btn btn-danger btn-sm mr-2" id="cancel-search" icon="cancel" onmouseup="stopSearch()"
+      title="Cancel search...">X</button>
+    <span class="navbar-brand mb-0">Search results for </span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+      aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul id="search-sets" class="navbar-nav mr-auto">
+      </ul>
+      <div class="form-inline">
+        <a id="showing" class="btn btn-outline-secondary px-2 mr-2" style="display: none; text-align: justify;"
+          onclick="showonly('xyz');" title="Remove search filter"></a>
+        <span id="search-link"></span>
+      </div>
+    </div>
+  </nav>
+
+  <div id="search" class="container-fluid" style="overflow-y: auto; height: 100%;">
+    <div class="row">
+      <div id="lower" class="col-sm-12 px-0 mb-1">
+        <div id="search-progress" class="progress" style="height: 0.5em; display: none">
+          <div id="search-current-progress" class="progress-bar progress-bar-striped progress-bar-animated"
+            role="progressbar" style="width: 0%;"></div>
+        </div>
+        <div id="finished" pack="start"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div id="searchb" class="col-sm-12 paperback px-0">
+        <div style="text-align: left;" id="sbfa"></div>
+        <div id="sbfbc">
+          <a name="sbftop"></a>
+          <div class="card mb-1">
+            <div id="sbfab" class="card-body" style="text-align: justify;">
+            </div>
+            <!-- <div id="showing" class="label chromeback pointer" style="display:none; text-align: justify;"
+              onclick="showonly('xyz');" title="Remove search filter"></div> -->
+          </div>
+          <div class="card mb-1">
+            <div id="sbfb" class="card-body" style="text-align: justify;">
+            </div>
+          </div>
+        </div>
+        <div id="sbr"></div>
+        <div id="cors"><img src="/digitalpalireader/content/images/corb.png" /></div>
+        <div id="alertc"><span id="alert"></span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="searcht" class="row chromeback">
+          <div style="text-align: justify;" class="relative" id="stfb">
+          </div>
+          <div style="text-align: justify;" class="relative" id="stfc">
+          </div>
+          <div id="searchtb"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="/digitalpalireader/content/js/web/search.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/search.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
+
+  <script type="text/javascript" src="/digitalpalireader/content/js/listsm.js"></script>
+  <script type="text/javascript" src="/digitalpalireader/content/js/listam.js"></script>
+
+</body>
+
+</html>

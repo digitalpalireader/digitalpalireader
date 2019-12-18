@@ -26,7 +26,7 @@ console.log('Loading DPR_PAL...');
 
   defineReadOnlyProperty(
     "dprHomePage", 
-    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/index.html");
+    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/DPRHTML/index.html");
 
   defineReadOnlyProperty(
     "mainWindow", 
