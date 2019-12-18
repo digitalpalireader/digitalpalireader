@@ -26,15 +26,7 @@ console.log('Loading DPR_PAL...');
 
   defineReadOnlyProperty(
     "dprHomePage", 
-    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/index.html");
-
-  defineReadOnlyProperty(
-    "contentWindow", 
-    DPR_PAL.isXUL ? mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow : window);
-
-  defineReadOnlyProperty(
-    "contentDocument", 
-    DPR_PAL.isXUL ? mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument : window.document);
+    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/DPRHTML/index.html");
 
   defineReadOnlyProperty(
     "mainWindow", 
@@ -46,6 +38,14 @@ console.log('Loading DPR_PAL...');
         .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
         .getInterface(Components.interfaces.nsIDOMWindow)
       : null);
+
+  defineReadOnlyProperty(
+    "contentWindow", 
+    DPR_PAL.isXUL ? DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow : window);
+
+  defineReadOnlyProperty(
+    "contentDocument", 
+    DPR_PAL.isXUL ? DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument : window.document);
 
   defineReadOnlyProperty(
     "contentFolder", 

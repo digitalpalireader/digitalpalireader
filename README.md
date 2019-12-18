@@ -1,4 +1,4 @@
-[![Build Status](https://yuttadhammo.visualstudio.com/digitalpalireader/_apis/build/status/digitalpalireader%20CI?branchName=master)](https://yuttadhammo.visualstudio.com/digitalpalireader/_build/latest?definitionId=8&branchName=master) [![Build Status](https://yuttadhammo.vsrm.visualstudio.com/_apis/public/Release/badge/ab038a3a-b01d-4262-9ab9-32d04d00989a/1/2)](https://yuttadhammo.visualstudio.com/digitalpalireader/_release)
+[![Build Status](https://dev.azure.com/yuttadhammo/digitalpalireader/_apis/build/status/digitalpalireader%20-%20build?branchName=master)](https://dev.azure.com/yuttadhammo/digitalpalireader/_build/latest?definitionId=1&branchName=master) [![Release Status](https://vsrm.dev.azure.com/yuttadhammo/_apis/public/Release/badge/5c79c309-a1e5-4a73-b2a5-4faa0c2a2cce/1/2)](https://yuttadhammo.visualstudio.com/digitalpalireader/_release)
 
 # Digital Pali Reader
 

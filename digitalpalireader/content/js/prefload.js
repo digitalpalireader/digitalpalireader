@@ -7,11 +7,11 @@ const getPref = DPR_PAL.isXUL ? XUL_getPref : WEB_getPref;
 const erasePref = DPR_PAL.isXUL ? XUL_erasePref : WEB_erasePref;
 
 if (DPR_PAL.isXUL) {
-var prefStem = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+	var prefStem = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-var G_BoolPrefs = prefStem.getBranch("extensions.digitalpalireader.Bool.");
-var G_CharPrefs = prefStem.getBranch("extensions.digitalpalireader.Char.");
-var G_IntPrefs = prefStem.getBranch("extensions.digitalpalireader.Int.");
+	var G_BoolPrefs = prefStem.getBranch("extensions.digitalpalireader.Bool.");
+	var G_CharPrefs = prefStem.getBranch("extensions.digitalpalireader.Char.");
+	var G_IntPrefs = prefStem.getBranch("extensions.digitalpalireader.Int.");
 }
 
 var G_prefTypes = [];
@@ -160,6 +160,9 @@ function XUL_setDefPrefs() {
 setDefPrefs();
 
 function WEB_setDefPrefs() {
+	for (const i in DPR_prefsD) {
+		DPR_prefs[i] = getPref(i);
+	}
 }
 
 function WEB_setPrefs() {
@@ -210,6 +213,11 @@ function WEB_setPref(name,value) {
 }
 
 function WEB_getPref(name) {
+	const pref = DPR_prefsD[name];
+	return /(chrome:)/.test(pref) ? '' : pref;
+}
+
+function WEB_getPref_FromStore(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {

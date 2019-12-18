@@ -1,7 +1,7 @@
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
-var MD = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentDocument; 
-var MW = mainWindow.gBrowser.getBrowserForTab(mainWindow.gBrowser.selectedTab).contentWindow; 
+var MD = DPR_PAL.contentDocument;
+var MW = DPR_PAL.contentWindow;
 				   
 var G_searchStartTime;
 
@@ -15,19 +15,12 @@ var G_searchRX;
 var G_searchLink;
 
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
-	MD.getElementById('cancel-search').removeAttribute('collapsed');
-	MD.getElementById('search-progress').removeAttribute('collapsed');
-	MD.getElementById('search-progress').setAttribute('value',0);
+	DPR_PAL_Search_ShowCancelButton();
+	DPR_PAL_Search_ShowProgressBar();
 
-	var element = MD.getElementById("search-sets");
-	while(element.hasChildNodes()){
-		element.removeChild(element.firstChild);
-	}
+	DPR_PAL_Search_ClearSectionLinks();
 	
-	var element = MD.getElementById("search-link");
-	while(element.hasChildNodes()){
-		element.removeChild(element.firstChild);
-	}
+	DPR_PAL_Search_RemoveCopyPermaLinkElement();
 
 	var element = MD.getElementById("finished");
 	while(element.hasChildNodes()){
@@ -117,7 +110,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
 	var tabT = 'Search: \'' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + '\' in ' + st[G_searchType];
 	
-	MD.getElementById('DPR').setAttribute('title',tabT);
+	DPR_PAL_Search_SetTitle(tabT);
 
 	if (/^[TPVMtpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
 		G_searchString = G_searchString.toUpperCase();
@@ -148,8 +141,18 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 function stopSearch() {
 	stopsearch = 1;
 }
+
 function scrollSearch(what) {
-	document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
+	DPR_PAL_Search_ScrollSearch(what);
+}
+
+function DPR_PAL_Search_ScrollSearch(what) {
+	if (DPR_PAL.isXUL) {
+		document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;	
+	} else {
+		const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
+		document.getElementById('search').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;	
+	}
 }
 
 function resetvalues() {
@@ -167,41 +170,23 @@ function resetvalues() {
 	countmatch = 0;
 }
 
-function makeProgressTable() {
-	
-	var fal = G_searchFileArray.length;
-	MD.getElementById('search-progress').setAttribute('max',fal-1);
-}
-
 function finishSearch() {
 	document.getElementById('sbfbc').scrollTop = 0;
 
-
-	MD.getElementById('search-progress').setAttribute('collapsed',true);
-	MD.getElementById('cancel-search').setAttribute('collapsed',true);
+	DPR_PAL_Search_HideProgressBar();
+	DPR_PAL_Search_HideCancelButton();
 
 	G_searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook.slice(1,-1) + '&part=' + G_searchPart + '&rx=' + G_searchRX;
 
-	var mlink = MD.createElement('toolbarbutton');
-	mlink.setAttribute('class','search-button');
-	mlink.setAttribute('label','♦');
-	mlink.setAttribute('onmouseup','permalinkClick(\''+G_searchLink+'\',1)');
-	mlink.setAttribute('tooltiptext','Click to copy permalink to clipboard');
-
-	MD.getElementById('search-link').appendChild(mlink);
+	DPR_PAL_Search_AddCopyPermaLinkElement();
 
 	// fix plural
 
 	if(MD.getElementById('inter')) {
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		if(val == 1) {
-			var str = MD.getElementById('inter').getAttribute('value').replace('matches','match');
-			MD.getElementById('inter').setAttribute('value',str);
-		}
+		DPR_PAL_Search_FixPluralInSearchTermSectionInfo()
 	}
 
 }
-
 
 var G_searchFileArray = [];
 
@@ -231,7 +216,12 @@ var bookperm = 1;
 var exword = new Array();
 var countmatch = 0;
 
-
+function DPR_PAL_Search_ClearSearchResults() {
+	$('#sbfab').html('');
+	if (DPR_PAL.isXUL) {
+		$('#sbfb').html('<hr>');
+	}
+}
 
 function pausesall() 
 {
@@ -266,52 +256,20 @@ function pausesall()
 
 	var getstring = G_searchString;
 	
-	$('#sbfab').html('');
-	$('#sbfb').html('<hr>');
+	DPR_PAL_Search_ClearSearchResults();
 
-	var thisterm = MD.createElement('toolbarbutton');
-	thisterm.setAttribute('id','search-term');
-	thisterm.setAttribute('onmouseup','scrollSearch()');
-	thisterm.setAttribute('class','search-set');
-	
-	var setlabel = MD.createElement('label');
-	setlabel.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString)));
-	setlabel.setAttribute('id','search-term');
-	setlabel.setAttribute('crop','center');
-	setlabel.setAttribute('class','search-button-label');
-	
-	thisterm.appendChild(setlabel);
-
-	var tsep = MD.createElement('toolbarseparator');
-
-	MD.getElementById('search-sets').appendChild(thisterm);
-	MD.getElementById('search-sets').appendChild(tsep);
+	DPR_PAL_SearchAddSearchTermSectionLink(G_searchRX ? G_searchString : toUni(G_searchString));
 
 	for (i = 0; i < G_numberToNik.length; i++) {
 		if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-
-		var thisset = MD.createElement('toolbarbutton');
-		thisset.setAttribute('class','search-set');
-		thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+G_numberToNik[i]+'\')');
-		
-		var setlabel = MD.createElement('label');
-		setlabel.setAttribute('value',G_nikLongName[G_numberToNik[i]]+': 0');
-		setlabel.setAttribute('id','matches'+G_numberToNik[i]);
-		setlabel.setAttribute('class','search-button-label');
-		
-		thisset.appendChild(setlabel);
-
-		var sep = MD.createElement('toolbarseparator');
-
-		MD.getElementById('search-sets').appendChild(thisset);
-		if(i < G_searchSet.length)
-			MD.getElementById('search-sets').appendChild(sep);
+		DPR_PAL_Search_AddSectionLink();
 	}
 	
-	makeProgressTable();
+	DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
 	
 	importXMLs(1);
 }
+
 function pausetwo() { // init function for single collection
 
 	// make G_searchFileArray
@@ -334,34 +292,13 @@ function pausetwo() { // init function for single collection
 		return;
 	}
 
-	makeProgressTable();
+	DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
 
 	var getstring = G_searchString;
 
-	$('#sbfab').html('');
-	$('#sbfb').html('<hr>');
+	DPR_PAL_Search_ClearSearchResults();
 
-	var thisterm = MD.createElement('label');
-	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
-	thisterm.setAttribute('id','search-term');
-	thisterm.setAttribute('class','search-bold');
-	thisterm.setAttribute('crop','center');
-	var thismatches = MD.createElement('label');
-	thismatches.setAttribute('value','0');
-	thismatches.setAttribute('id','search-matches');
-	thismatches.setAttribute('class','search-bold');
-	var thisinter = MD.createElement('label');
-	thisinter.setAttribute('value',' matches in ');
-	thisinter.setAttribute('class','search-label');
-	thisinter.setAttribute('id','inter');
-	var thisset = MD.createElement('label');
-	thisset.setAttribute('value',G_nikLongName[nikaya]);
-	thisset.setAttribute('class','search-bold');
-
-	MD.getElementById('search-sets').appendChild(thisterm);
-	MD.getElementById('search-sets').appendChild(thismatches);
-	MD.getElementById('search-sets').appendChild(thisinter);
-	MD.getElementById('search-sets').appendChild(thisset);
+	DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]);
 
 	importXMLs(2);
 }
@@ -390,37 +327,16 @@ function pausethree() {
 		return;
 	}
 
-	makeProgressTable();
+	DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
 	
-	var thisterm = MD.createElement('label');
-	thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
-	thisterm.setAttribute('id','search-term');
-	thisterm.setAttribute('class','search-bold');
-	thisterm.setAttribute('crop','center');
-	var thismatches = MD.createElement('label');
-	thismatches.setAttribute('value','0');
-	thismatches.setAttribute('id','search-matches');
-	thismatches.setAttribute('class','search-bold');
-	var thisinter = MD.createElement('label');
-	thisinter.setAttribute('value',' matches in ');
-	thisinter.setAttribute('class','search-label');
-	thisinter.setAttribute('id','inter');
-	var thisset = MD.createElement('label');
-	thisset.setAttribute('value',G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
-	thisset.setAttribute('class','search-bold');
-
-	MD.getElementById('search-sets').appendChild(thisterm);
-	MD.getElementById('search-sets').appendChild(thismatches);
-	MD.getElementById('search-sets').appendChild(thisinter);
-	MD.getElementById('search-sets').appendChild(thisset);
+	DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
 
 	importXMLs(3);
 }
 
 function bounce(sct)
 {
-	var val = parseInt(MD.getElementById('search-progress').getAttribute('value'));
-	MD.getElementById('search-progress').setAttribute('value',val+1);
+	DPR_PAL_Search_UpdateProgressBar()
 	setTimeout('importXMLs('+sct+')', 10)
 }
 
@@ -446,11 +362,7 @@ function importXMLs(cnt)
 		newnikaya = bookfile.charAt(0);
 		if (nikayaat != newnikaya)
 		{
-			var headingNode = document.createElement('div');
-			headingNode.setAttribute('id', 'sbfN' + newnikaya);
-			headingNode.setAttribute('name', 'xyz');
-			headingNode.setAttribute('class', 'huge');
-			headingNode.innerHTML = G_nikLongName[newnikaya] + '<hr>';
+			const headingNode = DPR_PAL_Search_CreateSectionHeader(newnikaya);
 			document.getElementById('sbfb').appendChild(headingNode);
 			thiscount = 0;
 			rescount++;
@@ -467,9 +379,8 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 					
-		var val = MD.getElementById('matches'+nikayaat).getAttribute('value').replace(/: .+/,': ');
-		MD.getElementById('matches'+nikayaat).setAttribute('value',val+thiscount);
-
+		DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount);
+	
 		if (qz < G_searchFileArray.length-1) 
 		{
 			nextbookfile = G_searchFileArray[qz+1];
@@ -497,8 +408,7 @@ function importXMLs(cnt)
 		var xmlDoc = loadXMLFile(bookfile,0);
 		createTables(xmlDoc,hiert);
 					
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		MD.getElementById('search-matches').setAttribute('value',thiscount);
+		DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -524,8 +434,7 @@ function importXMLs(cnt)
 
 		createTables(xmlDoc,hiert);
 
-		var val = parseInt(MD.getElementById('search-matches').getAttribute('value'));
-		MD.getElementById('search-matches').setAttribute('value',thiscount);					
+		DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 		
 		if (qz < G_searchFileArray.length-1) 
 		{
@@ -543,6 +452,16 @@ function importXMLs(cnt)
 	first = 0;
 	nikperm = 0;
 	
+
+}
+
+function createTdForMatch(dups, match) {
+	if (!match) {
+		return '';
+	}
+
+	const linkText = normalizeLongSearchResult(match);
+	return `<a href="javascript:void(0);" title="${match}" onclick="showonly('${match.replace(/\"/g, 'x')}')">${linkText}</a> (${dups[match]})`;
 }
 
 function createTables(xmlDoc,hiert)
@@ -1009,8 +928,7 @@ function createTables(xmlDoc,hiert)
 				exwordout += '<td valign="top">';
 				for (ex = 0; ex < exnodups[t].length; ex++)
 				{
-					
-					exwordout += '<div><a href="javascript:void(0);" onclick="showonly(\'' + exnodups[t][ex].replace(/\"/g, 'x') + '\')">' + exnodups[t][ex] + '</a> (' + dups[exnodups[t][ex]] + ')</div>';
+					exwordout += `<div>${createTdForMatch(dups, exnodups[t][ex])}</div>`;
 				}
 				exwordout += '</td>';
 			}								
@@ -1042,7 +960,7 @@ function createTables(xmlDoc,hiert)
 
 			for (ex = 0; ex < findiv; ex++)
 			{
-				exwordout += '<tr><td><a href="javascript:void(0)" onclick="showonly(\'' + exnodups[ex].replace(/\"/g, 'x') + '\')">' + exnodups[ex] + '</a> (' + dups[exnodups[ex]] + ')</td><td>'+(exnodups[findiv+ex]?'<a href="javascript:void(0)" onclick="showonly(\'' + exnodups[findiv+ex].replace(/\"/g, 'x') + '\')">' + exnodups[findiv+ex] + '</a> (' + dups[exnodups[findiv+ex]] + ')':'')+'</td></tr>';
+				exwordout += `<tr><td>${createTdForMatch(dups, exnodups[ex])}</td><td>${createTdForMatch(dups, exnodups[findiv + ex])}</td></tr>`;
 			}
 			exwordout += '</table>';
 		}
@@ -1054,6 +972,11 @@ function createTables(xmlDoc,hiert)
 		document.getElementById('sbfb').appendChild(outNode);
 	}
 	match = 0;
+}
+
+function normalizeLongSearchResult(match) {
+	const maxLength = 25;
+	return match.length >= maxLength ? `${match.substring(0, maxLength)}...` : match;
 }
 
 function showonly(string) {
@@ -1072,7 +995,8 @@ function showonly(string) {
 			if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
 			else da[x].style.display = "none";
 		}
-		$('#showing').html('<b style="color:'+DPR_prefs['colped']+'">' + toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')) + '&nbsp;</b><b>x</b>'); 
+		const linkText = normalizeLongSearchResult(toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
+		$('#showing').html('<b style="color:'+DPR_prefs['colped']+'">' + linkText + '&nbsp;</b><b>x</b>'); 
 		document.getElementById('showing').style.display = 'block';
 		scrollToId('search','sbfb');
 	}
@@ -1101,7 +1025,7 @@ function atiSearchStart() {
 		addJS(['ati_list']);
 
 //		$('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
-		MD.getElementById('search-progress').setAttribute('max',G_searchSet.length);
+		DPR_PAL_Search_MakeProgressTable(G_searchSet.length);
 	
 		var thisterm = MD.createElement('toolbarbutton');
 		thisterm.setAttribute('id','search-term');
@@ -1167,8 +1091,7 @@ function atiSearchStart() {
 
 
 function atiSearchOffline(d, getstring) {
-	var val = parseInt(MD.getElementById('search-progress').getAttribute('value'));
-	MD.getElementById('search-progress').setAttribute('value',val+1);
+	DPR_PAL_Search_UpdateProgressBar();
 		
 	var nikA = ['d','m','s','a','k'];
 	while (G_searchSet.indexOf(nikA[d]) == -1) {	

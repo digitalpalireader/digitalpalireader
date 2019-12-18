@@ -215,7 +215,7 @@ function extFileExists(fileLoc)
 
 function chromeFileExists(fileLoc) // in extension package
 {
-	DPR_PAL.chromeFileExists(fileLoc);
+	return DPR_PAL.chromeFileExists(fileLoc);
 } 
 
 function readDir() {
