@@ -1,0 +1,66 @@
+{
+  "name": "@sirimangalo/digital-pali-reader-extensions",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
+    "@microsoft/applicationinsights-react-js": "^2.3.1",
+    "@microsoft/applicationinsights-web": "^2.3.1",
+    "axios": "^0.19.0",
+    "history": "^4.9.0",
+    "luxon": "^1.21.2",
+    "polished": "^3.4.1",
+    "prop-types": "^15.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "@testing-library/jest-dom": "^4.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "citest": "set CI=1 && react-scripts test",
+    "lint": "eslint \"src/**/*.{ts,tsx}\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "@types/jest": "^24.0.25",
+    "@types/node": "^12.12.24",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "@types/history": "^4.7.3",
+    "@types/luxon": "^1.21.0",
+    "@types/react-redux": "^7.1.2",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/recompose": "^0.30.7",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "eslint": "^6.2.2",
+    "eslint-config-blvd": "^1.0.0",
+    "eslint-config-prettier": "^6.1.0",
+    "eslint-plugin-jest": "^22.16.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest-junit": "^9.0.0",
+    "prettier": "^1.18.2",
+    "react-scripts": "3.3.0",
+    "typescript": "^3.7.4"
+  }
+}
