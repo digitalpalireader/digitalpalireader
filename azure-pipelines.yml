@@ -11,16 +11,6 @@ steps:
 
   - script: sudo npm i yarn -g
 
-  - task: CmdLine@2
-    inputs:
-      script: |
-        echo Building dprweb extensions
-        cd DPRHTML/extensions
-        yarn install
-        yarn lint
-        yarn build
-        yarn citest
-
   - task: Bash@3
     inputs:
       filePath: "build.sh"
