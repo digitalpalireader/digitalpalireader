@@ -1,7 +1,6 @@
 import React from 'react';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Sidebar from './sidebar';
 import StubContentPanel from './stubContentPanel';
 
@@ -28,10 +27,10 @@ function StubMainWindow() {
     <Grid container className={classes.root} spacing={0}>
       <Grid container spacing={0}>
         <Grid item xs={9}>
-          <Sidebar></Sidebar>
+          <Sidebar />
         </Grid>
         <Grid item xs={3}>
-          <StubContentPanel></StubContentPanel>
+          <StubContentPanel />
         </Grid>
       </Grid>
     </Grid>

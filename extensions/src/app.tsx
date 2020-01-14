@@ -15,7 +15,7 @@ const theme = createMuiTheme({
 
 const App = () => (
   <MuiThemeProvider theme={theme}>
-    <StubMainWindow></StubMainWindow>
+    <StubMainWindow />
   </MuiThemeProvider>
 );
 
