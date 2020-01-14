@@ -3,7 +3,7 @@ OUTDIR="${1:-../../build}"
 SOURCEDIR="${2:-$OUTDIR/..}"
 
 echo "Building dprweb extensions"
-pushd DPRHTML/extensions
+pushd extensions
 yarn install
 yarn lint
 yarn build
