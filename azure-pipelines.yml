@@ -7,18 +7,19 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - script: echo Installing zip
-      sudo apt-get install zip
+  - script: sudo apt-get install zip
 
-  - script: echo Installing yarn
-      npm i yarn -g
+  - script: npm i yarn -g
 
-  - script: echo Building dprweb extensions
-      cd DPRHTML/extensions
-      yarn install
-      yarn lint
-      yarn build
-      yarn citest
+  - task: CmdLine@2
+    inputs:
+      script: |
+        echo Building dprweb extensions
+        cd DPRHTML/extensions
+        yarn install
+        yarn lint
+        yarn build
+        yarn citest
 
   - task: Bash@3
     inputs:
