@@ -7,9 +7,11 @@ pool:
   vmImage: "ubuntu-latest"
 
 steps:
-  - script: sudo apt-get install zip
-
-  - script: sudo npm i yarn -g
+  - script: |
+      sudo apt-get install zip
+      sudo npm i yarn -g
+      sudo chown -R $USER:$GROUP ~/.npm
+      sudo chown -R $USER:$GROUP ~/.config
 
   - task: Bash@3
     inputs:
