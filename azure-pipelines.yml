@@ -4,27 +4,38 @@ trigger:
   - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-  - script: sudo apt-get install zip
+  - script: echo Installing zip
+      sudo apt-get install zip
+
+  - script: echo Installing yarn
+      npm i yarn -g
+
+  - script: echo Building dprweb extensions
+      cd DPRHTML/extensions
+      yarn install
+      yarn lint
+      yarn build
+      yarn citest
 
   - task: Bash@3
     inputs:
-      filePath: 'build.sh'
+      filePath: "build.sh"
       arguments: $(Build.BinariesDirectory) $(Build.Repository.LocalPath)
-      workingDirectory: '$(Build.Repository.LocalPath)'
+      workingDirectory: "$(Build.Repository.LocalPath)"
 
   - task: CopyFiles@2
     inputs:
-      SourceFolder: '$(Build.BinariesDirectory)'
-      Contents: '**'
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      SourceFolder: "$(Build.BinariesDirectory)"
+      Contents: "**"
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"
       CleanTargetFolder: true
       OverWrite: true
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish build artifacts'
+    displayName: "Publish build artifacts"
     inputs:
       pathtoPublish: $(Build.ArtifactStagingDirectory)
     condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), eq(variables['Build.SourceBranch'], 'refs/heads/dev')))
