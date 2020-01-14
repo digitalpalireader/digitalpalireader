@@ -9,7 +9,7 @@ pool:
 steps:
   - script: sudo apt-get install zip
 
-  - script: npm i yarn -g
+  - script: sudo npm i yarn -g
 
   - task: CmdLine@2
     inputs:
