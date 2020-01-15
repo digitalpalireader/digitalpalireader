@@ -6,10 +6,10 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import HelpIcon from '@material-ui/icons/Help';
-import Navigation from './navigation';
-import Tools from './tools';
-import Search from './search';
-import Help from './help';
+import Navigation from '../components/navigation';
+import Tools from '../components/tools';
+import Search from '../components/search';
+import Help from '../components/help';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -28,7 +28,7 @@ function TabPanel(props: TabPanelProps) {
       id={`scrollable-force-tabpanel-${index}`}
       aria-labelledby={`scrollable-force-tab-${index}`}
     >
-      {value === index && <Box p={3}>{children}</Box>}
+      {value === index && <Box p={0}>{children}</Box>}
     </Typography>
   );
 }

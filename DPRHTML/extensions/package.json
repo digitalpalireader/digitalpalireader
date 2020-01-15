@@ -1,6 +1,7 @@
 {
   "name": "@sirimangalo/digital-pali-reader-extensions",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.8.3",
