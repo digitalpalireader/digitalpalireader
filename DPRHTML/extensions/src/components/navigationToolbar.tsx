@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Divider, Tooltip, makeStyles, createStyles, Theme } from '@material-ui/core';
+import { Button, Divider, Tooltip, makeStyles, createStyles, Theme, Grid } from '@material-ui/core';
 import * as I from '@material-ui/icons';
 
 interface ToolbarItem {
@@ -9,11 +9,11 @@ interface ToolbarItem {
 }
 
 const toolbarItems: Nullable<ToolbarItem>[] = [
-  { text: 'Convert', toolTip: 'Send text to converter (s)', icon: <I.Translate fontSize="small" /> },
-  { text: 'Export', toolTip: 'Send text to textpad (e)', icon: <I.SaveAlt fontSize="small" /> },
-  { text: 'Save', toolTip: 'Save text to desktop', icon: <I.Save fontSize="small" /> },
+  { text: 'Convert', toolTip: 'Send text to converter (s)' },
+  { text: 'Export', toolTip: 'Send text to textpad (e)' },
+  { text: 'Save', toolTip: 'Save text to desktop' },
   null,
-  { text: 'Sync sidebar', toolTip: 'Copy place to sidebar', icon: <I.Sync fontSize="small" /> },
+  { text: 'Sync sidebar', toolTip: 'Copy place to sidebar', icon: <I.SyncAlt fontSize="small" /> },
   { text: 'Copy deep', toolTip: 'Copy permalink to clipboard', icon: <I.Link fontSize="small" /> },
   null,
   { text: 'Previous', toolTip: 'Go to previous section', icon: <I.ChevronLeft fontSize="small" /> },
@@ -32,10 +32,6 @@ const useStyles = makeStyles((theme: Theme) =>
     box: {},
     button: {
       color: theme.palette.text.primary,
-      maxWidth: '32px',
-      maxHeight: '32px',
-      minWidth: '32px',
-      minHeight: '32px',
     },
   }),
 );
@@ -55,5 +51,5 @@ const createToolbarButton = (classes: any) => (tbi: Nullable<ToolbarItem>, i: nu
 export default function NavigationToolbar() {
   const classes = useStyles();
 
-  return <>{toolbarItems.map(createToolbarButton(classes))}</>;
+  return <Grid container>{toolbarItems.map(createToolbarButton(classes))}</Grid>;
 }

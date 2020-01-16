@@ -52,11 +52,18 @@ function Sidebar() {
   return (
     <div className={classes.root}>
       <AppBar position="static" color="default">
-        <Tabs value={value} onChange={handleChange} variant="fullWidth" indicatorColor="primary" textColor="primary">
-          <Tab label="Navigation" />
-          <Tab label="Search" />
-          <Tab label="Tools" />
-          <Tab icon={<HelpIcon />} />
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          variant="fullWidth"
+          indicatorColor="primary"
+          textColor="primary"
+          style={{ minHeight: '0px' }}
+        >
+          <Tab label="Navigation" style={{ padding: '1px', margin: '0px' }} />
+          <Tab label="Search" style={{ padding: '1px', margin: '0px' }} />
+          <Tab label="Tools" style={{ padding: '1px', margin: '0px' }} />
+          <Tab icon={<HelpIcon />} style={{ padding: '1px', margin: '0px' }} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

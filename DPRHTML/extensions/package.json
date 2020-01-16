@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.8.3",
+    "@material-ui/lab": "^4.0.0-alpha.39",
     "@material-ui/icons": "^4.5.1",
     "@microsoft/applicationinsights-react-js": "^2.3.1",
     "@microsoft/applicationinsights-web": "^2.3.1",
