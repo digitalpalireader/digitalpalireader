@@ -118,6 +118,8 @@
       $('.bottomFrame .bottomFrameHandle').on('click', function() {
         $('.bottomFrame .bottomFrameContent').slideToggle();
       });
+
+      $('#sidebar').modal("show");
     });
 	</script>
 </head>
@@ -200,48 +202,67 @@
           </button>
         </div>
         <div class="modal-body">
-          <div id="nav-rel-div">
-            <div id="nav-set-div">
-              <select id="nav-set"></select>
+
+
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-6" id="nav-set-div">
+                <label class="font-weight-bold" for="nav-set">Set</label>
+                <select class="custom-select" size="5" id="nav-set"></select>
+              </div>
+              <div class="form-group col-md-6" id="nav-book-div">
+                <label class="font-weight-bold" for="nav-book">Book</label>
+                <select class="custom-select" size="5" id="nav-book" class="sbut"></select>
+              </div>
             </div>
-            <div id="nav-book-div">
-              <select id="nav-book" class="sbut"></select>
+
+            <div class="form-group" style="text-align: center;">
+              <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
+                <label class="btn btn-outline-primary btn-sm active">
+                  <input type="radio" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
+                </label>
+                <label class="btn btn-outline-primary btn-sm">
+                  <input type="radio" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
+                </label>
+                <label class="btn btn-outline-primary btn-sm">
+                  <input type="radio" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
+                </label>
+              </div>
             </div>
-            <div id="nav-hier-div">
-              <input type="button" class="hierbutton" value="M" onclick="digitalpalireader.changeHier('m')"
-                id="hier-m" /><input type="button" class="hierbutton" value="A"
-                onclick="digitalpalireader.changeHier('a')" id="hier-a" /><input type="button"
-                class="hierbutton" value="T" onclick="digitalpalireader.changeHier('t')" id="hier-t" /></td>
+
+            <div class="form-group">
+              <label class="font-weight-bold">Book Hierarchy</label>
+              <div id="nav-title-div">
+                <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 100%; margin-bottom: 0px;" />
+              </div>
+              <div class="subnav-cont input-group">
+                <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
+                </select>
+                <br class="clear" />
+                <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection()" value="&rArr;" />
+              </div>
+              <div class="subnav-cont input-group">
+                <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
+                <br class="clear" />
+                <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection()" value="&rArr;" />
+              </div>
+              <div class="subnav-cont input-group">
+                <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
+                <br class="clear" />
+                <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection()" value="&rArr;" />
+              </div>
+              <div class="subnav-cont input-group">
+                <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
+                <br class="clear" />
+                <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection()" value="&rArr;" />
+              </div>
+              <div class="subnav-cont input-group">
+                <select id="nav-section" class="custom-select navselect"></select>
+                <br class="clear" />
+                <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection()" value="&rArr;" />
+              </div>
             </div>
-            <div id="nav-title-div">
-              <input id="nav-title" type="button" />
-            </div>
-            <div class="subnav-cont">
-              <select id="nav-meta" class="navselect" onchange="digitalpalireader.updateSubnav(1)"></select><br
-                class="clear" /><input id="nav-meta-button" class="navbutton" type="button"
-                onclick="digitalpalireader.loadSection()" value="&rArr;" />
-            </div>
-            <div class="subnav-cont">
-              <select id="nav-volume" class="navselect" onchange="digitalpalireader.updateSubnav(2)"></select><br
-                class="clear" /><input id="nav-volume-button" class="navbutton" type="button"
-                onclick="digitalpalireader.loadSection()" value="&rArr;" />
-            </div>
-            <div class="subnav-cont">
-              <select id="nav-vagga" class="navselect" onchange="digitalpalireader.updateSubnav(3)"></select><br
-                class="clear" /><input id="nav-vagga-button" class="navbutton" type="button"
-                onclick="digitalpalireader.loadSection()" value="&rArr;" />
-            </div>
-            <div class="subnav-cont">
-              <select id="nav-sutta" class="navselect" onchange="digitalpalireader.updateSubnav(4)"></select><br
-                class="clear" /><input id="nav-sutta-button" class="navbutton" type="button"
-                onclick="digitalpalireader.loadSection()" value="&rArr;" />
-            </div>
-            <div class="subnav-cont">
-              <select id="nav-section" class="navselect"></select><br class="clear" /><input
-                id="nav-section-button" class="navbutton" type="button"
-                onclick="digitalpalireader.loadSection()" value="&rArr;" />
-            </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
