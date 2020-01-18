@@ -106,171 +106,148 @@
 				digitalpalireader.updateSubnav(0);
 			});
 
-			// sliders
-
-			$("#close-bottom").click(function () {
-				$('#divb').slideUp('fast', function () {
-					$("#open-bottom").show();
-				});
-			});
-			$("#open-bottom").click(function () {
-				$("#open-bottom").hide();
-				$('#divb').slideDown('fast');
-			});
-
-			$("#close-left").click(function () {
-				$('#sidebar').hide("slide", { direction: "left" }, "fast", function () {
-					$("#open-left").show();
-				});
-			});
-			$("#open-left").click(function () {
-				$("#open-left").hide();
-				$('#sidebar').show("slide", { direction: "left" }, "fast");
-			});
-
 			setPrefs();
 
 			$(window).resize(function () {
 				setPrefs();
 			});
 
-		});
+    });
+
+    $(document).ready(function() {
+      $('.bottomFrame .bottomFrameHandle').on('click', function() {
+        $('.bottomFrame .bottomFrameContent').slideToggle();
+      });
+    });
 	</script>
 </head>
 
 <body>
-	<div id="sidebar">
-		<div id="div1">
-			<div id="nav-rel-div">
-				<div id="nav-set-div">
-					<select id="nav-set"></select>
-				</div>
-				<div id="nav-book-div">
-					<select id="nav-book" class="sbut"></select>
-				</div>
-				<div id="nav-hier-div">
-					<input type="button" class="hierbutton" value="M" onclick="digitalpalireader.changeHier('m')"
-						id="hier-m" /><input type="button" class="hierbutton" value="A"
-						onclick="digitalpalireader.changeHier('a')" id="hier-a" /><input type="button"
-						class="hierbutton" value="T" onclick="digitalpalireader.changeHier('t')" id="hier-t" /></td>
-				</div>
-				<div id="nav-title-div">
-					<input id="nav-title" type="button" />
-				</div>
-				<div class="subnav-cont">
-					<select id="nav-meta" class="navselect" onchange="digitalpalireader.updateSubnav(1)"></select><br
-						class="clear" /><input id="nav-meta-button" class="navbutton" type="button"
-						onclick="digitalpalireader.loadSection()" value="&rArr;" />
-				</div>
-				<div class="subnav-cont">
-					<select id="nav-volume" class="navselect" onchange="digitalpalireader.updateSubnav(2)"></select><br
-						class="clear" /><input id="nav-volume-button" class="navbutton" type="button"
-						onclick="digitalpalireader.loadSection()" value="&rArr;" />
-				</div>
-				<div class="subnav-cont">
-					<select id="nav-vagga" class="navselect" onchange="digitalpalireader.updateSubnav(3)"></select><br
-						class="clear" /><input id="nav-vagga-button" class="navbutton" type="button"
-						onclick="digitalpalireader.loadSection()" value="&rArr;" />
-				</div>
-				<div class="subnav-cont">
-					<select id="nav-sutta" class="navselect" onchange="digitalpalireader.updateSubnav(4)"></select><br
-						class="clear" /><input id="nav-sutta-button" class="navbutton" type="button"
-						onclick="digitalpalireader.loadSection()" value="&rArr;" />
-				</div>
-				<div class="subnav-cont">
-					<select id="nav-section" class="navselect"></select><br class="clear" /><input
-						id="nav-section-button" class="navbutton" type="button"
-						onclick="digitalpalireader.loadSection()" value="&rArr;" />
-				</div>
-				<div class="subnav-cont" id="tbContainer">
-				</div>
-				<br class="clear" />
-			</div>
-		</div>
-		<div id="close-left">
-			<div class="left-open-close">||</div>
-		</div>
-	</div>
-	<div id="top-div">
-		<div id="content">
-			<div id="div2">
-				<div id="matrelc"></div>
-				<div id="diva" onmouseover="document.body.style.cursor='auto'">
-					<div id="maf">
-						<div align="left" id="mafa" class="paperback"></div>
-						<div align="justify" id="mafb" class="paperback">
-							<div id="mafbc">
+  <div class="containerRoot">
+    <div class="row">
+      <div id="main-window">
+        <div id="content">
+          <div id="top-frame">
+            <div id="matrelc"></div>
+            <div id="diva" onmouseover="document.body.style.cursor='auto'">
+              <div id="maf">
+                <div style="text-align: left" id="mafa" class="paperback"></div>
+                <div style="text-align: justify" id="mafb" class="paperback">
+                  <div id="mafbc">
+                    <a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
+                      <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div id="alertc"><span id="alert"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="bottomFrame">
+          <div class="bottomFrameHandle">open</div>
+          <div class="bottomFrameContent" id="bottom-frame">
+            <div id="anf" style="text-align: right" class="chromeback">
+              <div id="brtop"></div>
+              <div id="brmid"></div>
+              <div id="brbot"></div>
+              <div id="anft">
+                <div style="text-align: center" id="anfa"></div>
+                <div style="text-align: center" id="anfb">
+                  <table cellspacing="0" cellpadding="0" width=100%>
+                    <tr>
+                      <td style="text-align: left" valign="top" id="anfleft"></td>
+                      <td valign=top style="text-align: center" id="anfcenter"></td>
+                      <td valign="top" style="text-align: right" id="anfright"></td>
+                    </tr>
+                  </table>
+                </div>
+                <div style="position:relative">
+                  <div id="anfs"></div>
+                  <div id="anfsd"></div>
+                </div>
+              </div>
+            </div>
+            <div id="bottom-frame-content">
+              <div id="difout" class="difout">
+                <div id="cdif" class="cdif">
+                  <div id="dif" class="dif paperback">
+                    <div id="difb" class="difb">
+                    </div>
+                  </div>
+                </div>
+                <div id="difhist" class="hoverShow"></div>
+              </div>
+            </div>
+            <div id="alertc"><span id="alert"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-							</div>
-						</div>
-					</div>
-				</div>
-				<div id="alertc"><span id="alert"></span></div>
-			</div>
-		</div>
-		<div id="divb" onmouseover="document.body.style.cursor='auto'">
-			<div id="close-bottom">
-				<div class="bottom-open-close">=</div>
-			</div>
-			<div id="prefs-button" onclick="$('#pref-box').slideToggle()"><span>*</span></div>
-			<div id="bottom-content">
-				<div id="anf" align="right" class="chromeback">
-					<div id="brtop"></div>
-					<div id="brmid"></div>
-					<div id="brbot"></div>
-					<div id="anft">
-						<div align="center" id="anfa"></div>
-						<div align="center" id="anfb">
-							<table cellspacing="0" cellpadding="0" width=100%>
-								<tr>
-									<td align="left" valign="top" id="anfleft"></td>
-									<td valign=top align=center id="anfcenter"></td>
-									<td valign="top" align="right" id="anfright"></td>
-								</tr>
-							</table>
-						</div>
-						<div style="position:relative">
-							<div id="anfs"></div>
-							<div id="anfsd"></div>
-						</div>
-					</div>
-				</div>
-				<div id="bottom">
-					<div id="difout" class="difout">
-						<div id="cdif" class="cdif">
-							<div id="dif" class="dif paperback">
-								<div id="difb" class="difb">
-								</div>
-							</div>
-						</div>
-						<div id="difhist" class="hoverShow"></div>
-					</div>
-				</div>
-				<div id="alertc"><span id="alert"></span></div>
-				<div id="pref-box">
-					<table>
-						<tr>
-							<td colspan="" id="pref-header">Preferences</td>
-						</tr>
-						<tr>
-							<td>Text Size:&nbsp;</td>
-							<td><input size="2" id="text-size-input">%</td>
-						</tr>
-						<tr>
-							<td><input type="button" value="Cancel" onclick="setPrefs()"></td>&nbsp;
-							<td><input type="button" value="Save" onclick="savePrefs()"></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="open-left">
-		<div class="left-open-close">||</div>
-	</div>
-	<div id="open-bottom">
-		<div class="bottom-open-close">=</div>
-	</div>
+  <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-slideout" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title" id="sidebarHeader">Navigation</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id="nav-rel-div">
+            <div id="nav-set-div">
+              <select id="nav-set"></select>
+            </div>
+            <div id="nav-book-div">
+              <select id="nav-book" class="sbut"></select>
+            </div>
+            <div id="nav-hier-div">
+              <input type="button" class="hierbutton" value="M" onclick="digitalpalireader.changeHier('m')"
+                id="hier-m" /><input type="button" class="hierbutton" value="A"
+                onclick="digitalpalireader.changeHier('a')" id="hier-a" /><input type="button"
+                class="hierbutton" value="T" onclick="digitalpalireader.changeHier('t')" id="hier-t" /></td>
+            </div>
+            <div id="nav-title-div">
+              <input id="nav-title" type="button" />
+            </div>
+            <div class="subnav-cont">
+              <select id="nav-meta" class="navselect" onchange="digitalpalireader.updateSubnav(1)"></select><br
+                class="clear" /><input id="nav-meta-button" class="navbutton" type="button"
+                onclick="digitalpalireader.loadSection()" value="&rArr;" />
+            </div>
+            <div class="subnav-cont">
+              <select id="nav-volume" class="navselect" onchange="digitalpalireader.updateSubnav(2)"></select><br
+                class="clear" /><input id="nav-volume-button" class="navbutton" type="button"
+                onclick="digitalpalireader.loadSection()" value="&rArr;" />
+            </div>
+            <div class="subnav-cont">
+              <select id="nav-vagga" class="navselect" onchange="digitalpalireader.updateSubnav(3)"></select><br
+                class="clear" /><input id="nav-vagga-button" class="navbutton" type="button"
+                onclick="digitalpalireader.loadSection()" value="&rArr;" />
+            </div>
+            <div class="subnav-cont">
+              <select id="nav-sutta" class="navselect" onchange="digitalpalireader.updateSubnav(4)"></select><br
+                class="clear" /><input id="nav-sutta-button" class="navbutton" type="button"
+                onclick="digitalpalireader.loadSection()" value="&rArr;" />
+            </div>
+            <div class="subnav-cont">
+              <select id="nav-section" class="navselect"></select><br class="clear" /><input
+                id="nav-section-button" class="navbutton" type="button"
+                onclick="digitalpalireader.loadSection()" value="&rArr;" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 
 </html>

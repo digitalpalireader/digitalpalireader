@@ -1,4 +1,4 @@
-// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh  
+// āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 //«»
 var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
@@ -15,13 +15,13 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 	G_lastcolour = 0; // reset colour changing
 
 	// remove sutta bolding
-	
+
 	if(!which && place[7] == 'm' && ('dmas'.indexOf(place[0]) >= 0 || (place[0] == 'k' && parseInt(place[1]) < 15)) ) {
 		data = data.replace(/\^e*b\^/g, '');
 	}
 
 	var inarray = preparepali(data,which);
-		
+
 	var finout = inarray[0];
 
 	if(!which) { // not from textpad
@@ -44,45 +44,45 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 		transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
 		if (transin) {
 			transout += transin.join('&nbsp;');
-			document.getElementById('maftrans').innerHTML += transout; 
+			document.getElementById('maftrans').innerHTML += transout;
 		}
-		
+
 		var convDiv = document.createElement('div');
 		convDiv.setAttribute('id','convi');
 		convDiv.innerHTML = convout;
 		document.getElementById('mafbc').appendChild(convDiv);
-		
+
 		var saveDiv = $('#savei');
 		saveDiv.html(saveDiv.html()+saveout);
 	}
-	
+
 	var outDiv =  document.createElement('div');
 	outDiv.innerHTML = finout;
 	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
-	
-	document.getElementById('maf').scrollTop = 0; 
-	
+
+	document.getElementById('maf').scrollTop = 0;
+
 }
 
 
 function formatuniout(data,which) { // which = 1 prepare without links, 2 with links
-	
+
 	var convout = '';
 	var saveout = '';
-	
+
 	var indexpage = '';
 	var pageno = '';
 	var pagetitle = '';
-	
+
 	var altread = 0;
-	var altplus = '';	
-	var altplusf = '';	
+	var altplus = '';
+	var altplusf = '';
 	var endpt = 0;
 	var unioutb = '';
 	var finout = '';
 	var outarray = new Array();
-	
+
 	data = data.replace(/ -- /g, ' — ');
 	data = data.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
 	data = data.replace(/([AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ])0(?!>)/g, "$1.");
@@ -102,12 +102,12 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 	data = data.replace(/['’]+<\/@>nti/g, 'n’</@> ’ti');
 	data = data.replace(/["]+<\/@>ti/g, '”</@> ”ti');
 	data = data.replace(/['’]+<\/@>ti/g, '’</@> ’ti');
-	
+
 	if(DPR_prefs['nigahita']) {
 		data = data.replace(/ṃ/g, 'ṁ');
 		data = data.replace(/Ṃ/g, 'Ṁ');
 	}
-	
+
 	if(!DPR_prefs['showPages']) data = data.replace(/ *\^a\^[^^]*\^ea\^ */g,' ');
 	else {
 		data = data.replace(/\^a\^\"/g, ' z');
@@ -115,13 +115,13 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 		data = data.replace(/\^a\^/g, ' z');
 		data = data.replace(/\^ea\^/g, 'z ');
 	}
-	
+
 	//data = data.replace(/\^v/g, '');
 	//data = data.replace(/v\^/g, '');
 
 	if(!DPR_prefs['showVariants']) data = data.replace(/ *\{[^}]*\} */g,' ');
 	else data = data.replace(/\}/g, '} ').replace(/\{/g, ' {');
-	
+
 	data = data.replace(/   */g, ' ');
 
 	data = data.replace(/([^.])\.\.(?!\.)/g, "$1."); // double periods
@@ -135,28 +135,28 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 	var wb;
 	var b = 0;
 	var space = ' ';
-	
+
 	for (var a = 0; a < wordbyword.length; a++)
 	{
-		
+
 		wb = wordbyword[a];
-		
+
 		if (/^[,;.!?]$/.exec(wb)) {
 			convout += wb + ' ';
 			saveout += wb + ' ';
 			finout += wb + ' ';
 			continue;
 		}
-		
+
 		// remove space where extra quotes were
 		space = ' ';
 		if(/[”’]/.exec(wb.charAt(wb.length-1)) && wordbyword[a+1] && wb.charAt(wb.length-1) == wordbyword[a+1].charAt(0)) {
 			space = '';
 		}
 
-		
+
 		// VAR readings
-		
+
 		if (altread == 1) {
 			endpt = wb.length-1;
 			if (wb.charAt(endpt) == '}') {
@@ -219,7 +219,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			while (wb.indexOf('<c') >= 0) {
 				cp = wb.indexOf('<c');
 				if(cp > 0) { // something before
-					if (which) {  
+					if (which) {
 						finout += translit(toUni(wb.substring(0,cp))); b++;
 					}
 					else {
@@ -231,12 +231,12 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				}
 
 				var cno = wb.substring(cp,cp+4); // <c1>
-				
+
 				wb = wb.substring(cp+4);
-				
+
 				var cm = wb.search('<xc>');
 
-				if (which == 1) {  
+				if (which == 1) {
 					finout += cno + translit(toUni(wb.substring(0,cm)))+'<xc>'; b++;
 				}
 				else {
@@ -250,7 +250,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 				wb = wb.substring(cm+4);
 			}
 			if(wb.length > 0) { // anything left?
-				if (which == 1) {  
+				if (which == 1) {
 					finout += translit(toUni(wb)); b++;
 				}
 				else {
@@ -265,7 +265,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			finout += space;
 			saveout += space;
 			convout += space;
-		}		
+		}
 		else if (/^&nbsp;/.exec(wb)) {
 			finout += wb + space;
 			saveout += wb + space;
@@ -282,7 +282,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer '+(G_thisPara && G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
 			saveout += '<p class="paratype'+ptype+'"'+'>';
 			paran++;
-		}		
+		}
 		else if (wb.charAt(0) == 'z') // page numbers
 		{
 			indexpage = wb.charAt(1);
@@ -301,17 +301,17 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 					pagetitle = 'Thai';
 					break;
 			}
-			
-			
+
+
 			var ref = pageno.split('.');
-		
+
 			if(!ref[1])
 				pagetitle += ' '+pageno;
 			else if(/[^0-9]/.exec(ref[0])) { // Thai
 				var vp = ref[1].split(',');
 				if(vp.length < 2)
 					pagetitle += ' '+pageno;
-				else 
+				else
 					pagetitle += ' '+ref[0]+'. ' + vp[0] + ', p. ' + vp[1].replace(/^0+/,"");
 				if(DPR_prefs['showPagesFull'])
 					indexpage = ref[0]+'.' + vp[0] + ',' + vp[1].replace(/^0+/,"");
@@ -336,7 +336,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			unioutb = translit(unioutb);
 			finout += unioutb + space;
 			saveout += unioutb + space;
-		} 
+		}
 		else  // with links
 		{
 			convout += wb.replace(/<[^>]*>/g, '') + space;
@@ -348,15 +348,15 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 			b++;
 		}
 	}
-	
+
 	finout = finout.replace(/<@>/g, '<b>');
 	finout = finout.replace(/<\/@>/g, '</b>');
 	finout = finout.replace(/ +([,;])/g, "$1");
-	
+
 	saveout = saveout.replace(/<@>/g, '<b>');
 	saveout = saveout.replace(/<\/@>/g, '</b>');
 	saveout = saveout.replace(/ +([,;])/g, "$1");
-	
+
 	outarray[0] = finout;
 	outarray[1] = toUni(convout);
 	outarray[2] = toUni(saveout);
@@ -364,10 +364,10 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 }
 
 function preparepali(data,which) { // standard text prep for algorithm
-	
+
 	var finout = formatuniout(data,which);
-	
-	
+
+
 	// add search markers
 
 	finout[0] = finout[0].replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">');
@@ -376,8 +376,8 @@ function preparepali(data,which) { // standard text prep for algorithm
 	finout[0] = finout[0].replace(/<xc>/g, '</span>');
 
 	finout[0] = finout[0].replace(/> +([,;.!?] )/g, ">$1");
-	
-	
+
+
 	return finout;
 
 }
@@ -390,7 +390,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 {
 	var lmt = 60;
 	var lgt = una.length;
-	
+
 	book = getBookName(nikaya,hiert,book-1);
 	var title = '',save = '',raw = '';
 
@@ -398,12 +398,12 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 		var nn = '<b>'+G_nikFullFullNames[nikaya]+'</b>';
 		title += (click?wrapLink(nn,click):nn) + ', ';
 	}
-	
+
 	var col = ['colped','coldppn','colcpd','colped','coldppn','colcpd','colped','coldppn','colcpd'];
 	var w = 0;
-	
+
 	// dppn title links
-	
+
 	var namea = [una,vna,wna,xna,yna,zna];
 	var namen = [null,null,null,null,null,null];
 	if (DPR_prefs['showNames']) {
@@ -417,10 +417,10 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 			}
 		}
 	}
-	
+
 	for (i=0; i < namea.length;i++) {
 		var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
-		
+
 		if (thisname.length <2 )
 			continue;
 
@@ -440,15 +440,15 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 		save += '<h'+w+'>'+thisname+'</h'+w+'>';
 		raw += thisname+(i < namea.length-1?"<br/>":"");
 	}
-	
+
 	return [title,save,raw];
 }
 
 
 function analyzeTextPad(text) {
-	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' '); 
+	var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' ');
 	$('#mafbc').html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
-	outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2); 
+	outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
 }
 
 var pleasewait =  document.createElement('div');
@@ -458,19 +458,20 @@ pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="'+DPR_PAL.contentFolde
 
 
 function permalinkClick(link,url) {
-	copyToClipboard(link);
-	if(url) {
-		try {
+  try {
+    copyToClipboard(link);
+    if(url) {
 			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
 		}
-		catch(ex) {
-		}
+    alertFlash("Permalink copied to clipboard.",'green');
 	}
-	alertFlash("Permalink copied to clipboard.",'green');
+  catch(ex) {
+    alertFlash("Unable to copy permalink.",'red');
+  }
 }
-	
+
 function copyToClipboard(text) {
-	const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);  
+	const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
 	clipboardHelper.copyString(text);
 }
 
@@ -479,10 +480,10 @@ var G_alertFlashStart = 0;
 function alertFlash(text,color) {
 	if(!$) // sidebar
 		return alert(text);
-	
-	G_alertFlashStart++; // give us an alert Id 
+
+	G_alertFlashStart++; // give us an alert Id
 	if(color) {
-		
+
 		switch (color) {
 			case 'red':
 			color = 'RGBa(255,64,64,1)';
@@ -495,11 +496,11 @@ function alertFlash(text,color) {
 			break;
 		}
 		$('#alert').css('background-color',color);
-	
+
 	}
 	$('#alert').html(text);
 	$('#alertc').fadeIn('fast').delay(2000).fadeOut('fast');
-		
+
 	//fadeInOut(G_alertFlashStart,'alertc',10,Math.sqrt(text.length)*500,100);
 }
 
@@ -511,11 +512,11 @@ function fadeInOut(AID,id, sIn, L, sOut) {
 function fadeIn(AID,id,speed,L,sOut) {
 	if(AID != G_alertFlashStart) return;
 	if(parseFloat(document.getElementById(id).style.opacity) < 1) {
-		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)+0.1;  
+		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)+0.1;
 		setTimeout(function() { fadeIn(AID,id,speed*0.9,L,sOut); }, speed*0.9);
 	}
 	else {
-		document.getElementById(id).style.display='block'; 
+		document.getElementById(id).style.display='block';
 		if(L) setTimeout(function() { fadeOut(AID,id,sOut); }, L);
 	}
 }
@@ -523,10 +524,10 @@ function fadeIn(AID,id,speed,L,sOut) {
 function fadeOut(AID,id,speed) {
 	if(AID != G_alertFlashStart) return;
 	if(parseFloat(document.getElementById(id).style.opacity) > 0.1) {
-		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)-0.1;  
+		document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)-0.1;
 		setTimeout(function() { fadeOut(AID,id,speed*0.9); }, speed*0.9);
 	}
-	else document.getElementById(id).style.display='none'; 
+	else document.getElementById(id).style.display='none';
 }
 
 function clearDivs(which) { // place divs to be cleared here
@@ -548,7 +549,7 @@ function clearDivs(which) { // place divs to be cleared here
 		$('#mafbc').html('');
 		$('#matrelc').html('');
 	}
-	
+
 	if (!which || which.indexOf('search') > -1) { // search frame stuff
 		$('#sbfa').html('');
 		$('#sbfb').html('');
@@ -571,7 +572,7 @@ function makeToolbox(main,aux,title,conv,ex,save,trans) {
 		return;
 	}
 	$('#tbContainer').show();
-	
+
 	var but = ['l','m','r'];
 	var bn = 0;
 	var pre = '<div class="tiny tbtitle">'+title+'</div><hr style="margin-bottom:10px"/>';
@@ -585,7 +586,7 @@ function makeToolbox(main,aux,title,conv,ex,save,trans) {
 		pre += '<span class="abut '+but[bn++]+'but small" onmousedown="saveCompilation()" title="save text to Desktop">save</span>';
 	}
 	main = pre + ' ' + main;
-	
+
 	$('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
 }
 
@@ -605,9 +606,9 @@ function makeTable(text,cls) {
 
 function linkToPED(base,word) {
 	addJS(['ped']);
-	
+
 	var vbase = toVel(base);
-	
+
 	if(typeof(P[vbase]) == 'object') {
 		word = '<span style="color:'+DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
 	}

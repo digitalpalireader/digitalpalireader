@@ -21,7 +21,7 @@ G_prefTypes['boolean'] = 'Bool';
 
 function XUL_getPref(name) {
 	var type = G_prefTypes[typeof(DPR_prefsD[name])];
-	var ret; 
+	var ret;
 	try{
 		switch(type) {
 			case "Int":
@@ -42,7 +42,7 @@ function XUL_getPref(name) {
 
 function XUL_setPref(name,val) {
 	var type = G_prefTypes[typeof(val)];
-	var ret; 
+	var ret;
 	try{
 		switch(type) {
 			case "Int":
@@ -59,7 +59,7 @@ function XUL_setPref(name,val) {
 	catch(ex) {
 	}
 	return ret;
-	
+
 }
 
 function XUL_setPrefs() {
@@ -171,45 +171,21 @@ function WEB_setPrefs() {
 		var pref = WEB_getPref(i);
 		if(pref === null)
 			pref = DPR_prefsD[i];
-		
+
 		DPR_prefs[i] = pref;
 	}
-
-	// perform changes
-	
-	var baseSize = 28;
-	var textmag = DPR_prefs['textmag'];
-	
-	var magSize = Math.round(baseSize*textmag/100);
-	var magSize2 = Math.round(baseSize*textmag/200);
-	var magSize3 = Math.round(baseSize*textmag/300);
-		
-	$('head').append('<style id="addedCSS" type="text/css">p,span,td,select,option,input,.bottom-open-close,.left-open-close { font-size: '+magSize3+'pt; }  #prefs-button { top: '+magSize2+'px; height: '+magSize2+'px; width:'+magSize2+'px; } #topdiv,#divb,#content,#close-bottom, #open-bottom{left:'+magSize+'px} #close-bottom,#open-bottom { height: '+magSize+' !important; } .left-open-close, #close-left,#open-left { width: '+magSize+'px !important; } .bottom-open-close { height: '+ Math.round(magSize/1.8)+'px !important;  } #nav-title,.navbutton,.navselect{width:'+ Math.round(2.1*textmag)+'px} #sidebar{width:'+ Math.round(2.4*textmag)+'px} #anft{margin-right:'+magSize2+'px}</style>'); 
-	
-	$('#div2').css('margin-top',$('#nav-rel-div').height()+'px');
-	
-	// set pref inputs
-	$('#text-size-input').val(DPR_prefs['textmag']);
 }
 
 function WEB_savePrefs() {
-	
-	var textmag = $('#text-size-input').val();
-	if(!/[^0-9]/.test(textmag) && parseInt(textmag) < 501 && parseInt(textmag) > 49) {
-		WEB_setPref('textmag',textmag);
-	}
-	else
-		$('#text-size-input').val(DPR_prefs['textmag']);
-
 	WEB_setPrefs();
 }
 
 function WEB_setPref(name,value) {
-    var expires = "";
+  var expires = "";
 	var date = new Date();
 	date.setTime(date.getTime() + (3650*24*60*60*1000));
 	expires = "; expires=" + date.toUTCString();
-    document.cookie = name + "=" + value + expires + "; path=/";
+  document.cookie = name + "=" + value + expires + "; path=/";
 }
 
 function WEB_getPref(name) {
