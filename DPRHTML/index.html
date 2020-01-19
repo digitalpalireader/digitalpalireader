@@ -117,10 +117,10 @@
 
     $(document).ready(function() {
       $('.bottomFrame .bottomFrameHandle').on('click', function() {
-        $('.bottomFrame .bottomFrameContent').slideToggle();
+        DPR_PAL.toggleBottomFrame();
       });
 
-      $('#sidebar').modal("show");
+      DPR_PAL.openSideBar();
 
       $('.helpbutton').each(function() {
         $(this).popover({
@@ -168,7 +168,7 @@
       <div class="col">
         <div class="bottomFrame">
           <div class="bottomFrameHandle">open</div>
-          <div class="bottomFrameContent" id="bottom-frame">
+          <div class="bottomFrameContent" id="bottom-content">
             <div id="anf" style="text-align: right" class="chromeback">
               <div id="brtop"></div>
               <div id="brmid"></div>
@@ -190,7 +190,7 @@
                 </div>
               </div>
             </div>
-            <div id="bottom-frame-content">
+            <div id="bottom">
               <div id="difout" class="difout">
                 <div id="cdif" class="cdif">
                   <div id="dif" class="dif paperback">

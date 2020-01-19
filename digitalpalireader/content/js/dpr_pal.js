@@ -1,9 +1,9 @@
 /*
  * Platform abstraction library for DPR.
  *
- * To keep the rest of the codebase uniform across XUL, web and FF/Chrome plugins, 
+ * To keep the rest of the codebase uniform across XUL, web and FF/Chrome plugins,
  * we move all platform specific code into this namespace.
- * 
+ *
  * Depending on where we are running, this module does the right thing.
  */
 
@@ -13,24 +13,24 @@ console.log('Loading DPR_PAL...');
   const defineReadOnlyProperty = (name, value) => Object.defineProperty(DPR_PAL, name, { value: value });
 
   defineReadOnlyProperty(
-    "isXUL", 
+    "isXUL",
     !!navigator.userAgent.match(/( Waterfox\/)|( PaleMoon\/)/g));
 
   defineReadOnlyProperty(
-    "isWeb", 
+    "isWeb",
     !DPR_PAL.isXUL);
 
   defineReadOnlyProperty(
-    "baseUrl", 
+    "baseUrl",
     DPR_PAL.isXUL ? "chrome://" : "/");
 
   defineReadOnlyProperty(
-    "dprHomePage", 
+    "dprHomePage",
     DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/DPRHTML/index.html");
 
   defineReadOnlyProperty(
-    "mainWindow", 
-    DPR_PAL.isXUL 
+    "mainWindow",
+    DPR_PAL.isXUL
       ? window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
         .getInterface(Components.interfaces.nsIWebNavigation)
         .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -40,15 +40,15 @@ console.log('Loading DPR_PAL...');
       : null);
 
   defineReadOnlyProperty(
-    "contentWindow", 
+    "contentWindow",
     DPR_PAL.isXUL ? DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow : window);
 
   defineReadOnlyProperty(
-    "contentDocument", 
+    "contentDocument",
     DPR_PAL.isXUL ? DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument : window.document);
 
   defineReadOnlyProperty(
-    "contentFolder", 
+    "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/digitalpalireader/content/');
 
   DPR_PAL.addJS = files => {
@@ -63,7 +63,7 @@ console.log('Loading DPR_PAL...');
         catch (ex) {
           return [ex, files[i]];
         }
-      }  
+      }
     } else {
       // Not loading dynamically yet. It's preloaded by index.html for now.
     }
@@ -75,7 +75,7 @@ console.log('Loading DPR_PAL...');
       document.getElementById('mafbc').appendChild(pleasewait);
     } else {
       $('#mafbc').empty();
-      $('#mafbc').append(pleasewait);  
+      $('#mafbc').append(pleasewait);
     }
   };
 
@@ -91,7 +91,48 @@ console.log('Loading DPR_PAL...');
     catch(ex) {
       return false;
     }
-    return true;  
+    return true;
+  };
+
+  DPR_PAL.openSideBar = () => {
+    if (DPR_PAL.isWeb) {
+      $('#sidebar').modal("show");
+    } else {
+      console.error("Not implemented for XUL");
+    }
+  }
+
+  DPR_PAL.closeSideBar = () => {
+    if (DPR_PAL.isWeb) {
+      $('#sidebar').modal("hide");
+    } else {
+      console.error("Not implemented for XUL");
+    }
+  }
+
+  const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
+  DPR_PAL.openBottomFrame = () => {
+    if (DPR_PAL.isWeb) {
+      $(bottomFrameSelector).show();
+    } else {
+      console.error("Not implemented for XUL");
+    }
+  }
+
+  DPR_PAL.closeBottomFrame = () => {
+    if (DPR_PAL.isWeb) {
+      $(bottomFrameSelector).hide();
+    } else {
+      console.error("Not implemented for XUL");
+    }
+  }
+
+  DPR_PAL.toggleBottomFrame = () => {
+    if (DPR_PAL.isWeb) {
+      $(bottomFrameSelector).slideToggle();
+    } else {
+      console.error("Not implemented for XUL");
+    }
   }
 
   console.log('Loaded DPR_PAL!', DPR_PAL);

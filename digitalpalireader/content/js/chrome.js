@@ -271,11 +271,9 @@ function DPRSidebarHamburgerMenu() {
 }
 
 function DPRBottomPaneToggleVisiblity() {
-	if (!DPR_PAL.isWeb) {
-		return;
-	}
+  if (!DPR_PAL.isWeb) {
+    return;
+  }
 
-  //
-  // Make changes here to show the bottom pane
-  //
+  DPR_PAL.openBottomFrame();
 }

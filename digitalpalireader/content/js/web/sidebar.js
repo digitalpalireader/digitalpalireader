@@ -285,7 +285,7 @@ var digitalpalireader = {
 		else { return false };
 	},
 
-	loadSection:function(context){
+  loadSection:function(context){
     var aplace;
     switch(context) {
       case 1: // quick links
@@ -302,8 +302,9 @@ var digitalpalireader = {
       case 2: // book hierarchy
         aplace = this.getSubNavArray();
         loadXMLSection("","",aplace);
-        $("#close-left").click();
         break;
     }
-	},
+
+    DPR_PAL.closeSideBar();
+  },
 }
