@@ -4,23 +4,6 @@ if (DPR_PAL.isWeb) {
     console.log('Cannot DPR_PAL_Sidebar for the wrong platform', DPR_PAL);
 }
 
-$(document).ready(function() {
-  $('.helpbutton').each(function() {
-    $(this).popover({
-      html : true,
-      title : $(this).attr("popover-title"),
-      content: function() {
-        return $('#quicklinks-popover-content').html();
-      }
-    }).tooltip({
-      placement : 'right',
-      title : $(this).attr("tooltip-title")
-    }).on('show.bs.popover', function() {
-      $(this).tooltip('hide')
-    })
-  })
-});
-
 var digitalpalireader = {
 	changeSet() {
 		var nik = $('#nav-set').val();

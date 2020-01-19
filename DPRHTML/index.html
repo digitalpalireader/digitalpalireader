@@ -121,6 +121,21 @@
       });
 
       $('#sidebar').modal("show");
+
+      $('.helpbutton').each(function() {
+        $(this).popover({
+          html : true,
+          title : $(this).attr("popover-title"),
+          content: function() {
+            return $('#quicklinks-popover-content').html();
+          }
+        }).tooltip({
+          placement : 'right',
+          title : $(this).attr("tooltip-title")
+        }).on('show.bs.popover', function() {
+          $(this).tooltip('hide')
+        })
+      })
     });
 	</script>
 </head>
