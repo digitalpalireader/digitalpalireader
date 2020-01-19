@@ -112,3 +112,7 @@ body {
   background-color: #cccccc;
   display: none;
 }
+
+.popover{
+  max-width: 50%;
+}
