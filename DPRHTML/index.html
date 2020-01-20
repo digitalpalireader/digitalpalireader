@@ -93,7 +93,9 @@
 			setPrefs();
 			const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
 			let bookList = 'd';
-			let place = [];
+      let place = [];
+      let query = '';
+      let para = '';
 			urlParams.forEach(parameter => {
 				parameterSections = parameter.split('=');
 				switch (parameterSections[0]) {
@@ -102,7 +104,13 @@
 						if (place.length == 8) {
 							bookList = place[0];
 						}
-						break;
+            break;
+          case 'para':
+            para = parameterSections[1];
+            break;
+          case 'query':
+            query = parameterSections[1];
+            break;
 				}
 			});
 			// update navigation
@@ -148,9 +156,8 @@
         })
 			})
 
-
 			if (place.length == 8) {
-				loadXMLSection("", "", place);
+				loadXMLSection(query, para, place);
 			} else {
 				DPR_PAL.openSideBar();
 			}
