@@ -22,11 +22,11 @@ console.log('Loading DPR_PAL...');
 
   defineReadOnlyProperty(
     "baseUrl",
-    DPR_PAL.isXUL ? "chrome://" : "/");
+    DPR_PAL.isXUL ? "chrome://" : `${window.location.origin}/`);
 
   defineReadOnlyProperty(
     "dprHomePage",
-    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : "/DPRHTML/index.html");
+    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : `${DPR_PAL.baseUrl}DPRHTML/index.html`);
 
   defineReadOnlyProperty(
     "mainWindow",
@@ -132,6 +132,30 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).slideToggle();
     } else {
       console.error("Not implemented for XUL");
+    }
+  }
+
+  DPR_PAL.copyToClipboard = text => {
+    if (DPR_PAL.isWeb) {
+      var clipboardStaging = document.createElement("input");
+      clipboardStaging.style = "position: absolute; left: -1000px; top: -1000px";
+      clipboardStaging.value = text;
+      document.body.appendChild(clipboardStaging);
+      clipboardStaging.select();
+      document.execCommand("copy");
+      document.body.removeChild(clipboardStaging);
+    } else {
+      const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
+      clipboardHelper.copyString(text);
+    }
+  }
+
+  const dprSchemeUriCracker = /^(dpr):(.+)\?(.*)$/;
+  DPR_PAL.normalizeDprSchemeUri = uri => {
+    if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
+      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$2.html?$3`);
+    } else {
+      return uri;
     }
   }
 

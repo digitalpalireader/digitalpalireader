@@ -83,7 +83,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // permalink
 
-	var permalink = 'dpr:index?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
+	var permalink = `${bareurl}loc=${nikaya}.${bookno}.${meta}.${volume}.${vagga}.${sutta}.${section}.${hier}`;
 
 	// get string from query
 
@@ -101,9 +102,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 
 	var oldurl = DPR_PAL.contentDocument.location.href;
-
-	var bareurl = 'dpr:index?';
-
 
 	var newparams = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
