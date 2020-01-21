@@ -1,8 +1,28 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
+
+.intro-space {
+  position: relative;
+  margin-top: 12%;
+  color: lightgrey;
+  text-align: center;
+}
+
+.intro-message {
+  position: absolute;
+  left: 32%;
+  top: 44%;
+  display:center;
+  color: lightgrey;
+}
+
+
+.grey {
+  color: lightgrey;
+}
+
 
 #main-window {
   top: 0px;
@@ -11,7 +31,7 @@ body {
   right: 0px;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: auto;
 }
 
 #nav-set, #nav-book {
@@ -28,12 +48,13 @@ body {
 
 #bottom {
   position: relative;
-  height: 100%;
-  overflow: auto;
+  height: 78%;
+  /* overflow: auto; */
 }
 
 #bottom-content {
   position: relative;
+  overflow: auto;
 }
 
 #anf {
@@ -75,6 +96,8 @@ body {
     width: 80%;
   }
 }
+
+
 .modal-dialog-slideout {
   min-height: 100%;
   margin: 0 auto 0 0;
@@ -102,8 +125,7 @@ body {
 }
 
 .bottomFrame .bottomFrameHandle {
-  text-align: right;
-  padding-right: 10px;
+  text-align: center;
   background-color: #eeeeee;
 }
 
@@ -113,6 +135,23 @@ body {
   display: none;
 }
 
+
 .popover{
   max-width: 50%;
 }
+
+  /* CHEVRON ROTATION CODE*/
+
+  .rotate{
+    -moz-transition: all .3s linear;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+}
+
+.rotate.down{
+    -moz-transform:rotate(180deg);
+    -webkit-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+

@@ -8,7 +8,8 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link rel="stylesheet" href="/DPRHTML/index.css">
-	<link rel="stylesheet" href="/DPRHTML/styles.css">
+  <link rel="stylesheet" href="/DPRHTML/styles.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 	<script type="text/javascript">
 		const deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
@@ -32,6 +33,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
   <script type="application/x-javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
 	<script>
 		var devCheck = 0;
@@ -57,7 +59,7 @@
 	<script src="/digitalpalireader/content/js/translations.js"></script>
 	<script src="/digitalpalireader/content/js/format.js"></script>
 	<script src="/digitalpalireader/content/js/xml.js"></script>
-	<script src="/digitalpalireader/content/js/history.js"></script>
+  <script src="/digitalpalireader/content/js/history.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/convert.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
@@ -90,6 +92,8 @@
 	<script src="/digitalpalireader/content/js/web/sidebar.js"></script>
 	<script>
 
+
+
 		$(document).ready(function() {
 			setPrefs();
 			const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
@@ -113,7 +117,12 @@
             query = parameterSections[1];
             break;
 				}
-			});
+      });
+
+
+
+
+
 			// update navigation
 
 			var navset = $("#nav-set");
@@ -130,7 +139,7 @@
 				digitalpalireader.updateSubnav(0);
 			});
 
-			setPrefs();
+      setPrefs();
 
 			$(window).resize(function () {
 				setPrefs();
@@ -138,8 +147,7 @@
 
       $('.bottomFrame .bottomFrameHandle').on('click', function() {
         DPR_PAL.toggleBottomFrame();
-			});
-
+      });
 
 
       $('.helpbutton').each(function() {
@@ -159,10 +167,12 @@
 
 			if (place.length == 8) {
 				loadXMLSection(query, para, place);
-			} else {
-				DPR_PAL.openSideBar();
-			}
+      }
     });
+
+
+
+
 	</script>
 </head>
 
@@ -178,7 +188,7 @@
                 <div style="text-align: left" id="mafa" class="paperback"></div>
                 <div style="text-align: justify" id="mafb" class="paperback">
                   <div id="mafbc">
-                    <a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
+                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" >
                       <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
                     </a>
                   </div>
@@ -189,11 +199,22 @@
           </div>
         </div>
       </div>
+
     </div>
+    <div class="intro-space">
+
+      <div class="intro-message">
+      <p class="grey"> This is the Digital Pali Reader.</p>
+        <p class="grey">To get started, click on the menu button in the top left corner.</p>
+      </div>
+      </div>
     <div class="row">
+
       <div class="col">
         <div class="bottomFrame">
-          <div class="bottomFrameHandle">open</div>
+          <div class="bottomFrameHandle">
+            <a href="#"><div class="fa fa-2x fa-angle-double-up grey rotate"></div></a>
+      </div>
           <div class="bottomFrameContent" id="bottom-content">
             <div id="anf" style="text-align: right" class="chromeback">
               <div id="brtop"></div>
@@ -233,7 +254,6 @@
       </div>
     </div>
   </div>
-
   <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-slideout" role="document">
       <div class="modal-content">
