@@ -33,23 +33,25 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="https://kit.fontawesome.com/c676843ce4.js" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/io.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/prefload.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/xml_load.js"></script>
+  <script src="https://kit.fontawesome.com/c676843ce4.js" crossorigin="anonymous"></script>
+  <script src="/digitalpalireader/content/js/dpr_pal.js"></script>
+  <script src="/digitalpalireader/content/js/io.js"></script>
+  <script src="/digitalpalireader/content/js/send.js"></script>
+  <script src="/digitalpalireader/content/js/send_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/prefload.js"></script>
+  <script src="/digitalpalireader/content/js/xml_load.js"></script>
 
-  <script type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/send.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/receive.js"></script>
+  <script src="/digitalpalireader/content/js/chrome.js"></script>
+  <script src="/digitalpalireader/content/js/send.js"></script>
+  <script src="/digitalpalireader/content/js/receive.js"></script>
 
-  <script type="text/javascript" src="/digitalpalireader/content/js/config.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/translit.js"></script>
-	<script type="text/javascript" src="/digitalpalireader/content/js/dhpv.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/navigation_common.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/navigation.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/format.js"></script>
-  <!-- <script type="text/javascript" src="/digitalpalireader/content/js/prompt.js"></script> -->
+  <script src="/digitalpalireader/content/js/config.js"></script>
+  <script src="/digitalpalireader/content/js/translit.js"></script>
+	<script src="/digitalpalireader/content/js/dhpv.js"></script>
+  <script src="/digitalpalireader/content/js/navigation_common.js"></script>
+  <script src="/digitalpalireader/content/js/navigation.js"></script>
+  <script src="/digitalpalireader/content/js/format.js"></script>
+  <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
   <script>
     function onDocLoad() {
       giveIDtoTabs();
@@ -73,13 +75,20 @@
     function devO() { }
     function dalert(a) { }
     function ddump(a) { }
-  </script>
 
+    $(document).ready(function() {
+      DPR_PAL.openSideBar();
+    });
+
+  </script>
 </head>
 
 <body onload="onDocLoad();">
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
+      <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
+    </a>
     <button class="btn btn-danger btn-sm mr-2" id="cancel-search" icon="cancel" onmouseup="stopSearch()"
       title="Cancel search...">X</button>
     <span class="navbar-brand mb-0">Search results for </span>
@@ -118,8 +127,6 @@
           <div class="card mb-1">
             <div id="sbfab" class="card-body" style="text-align: justify;">
             </div>
-            <!-- <div id="showing" class="label chromeback pointer" style="display:none; text-align: justify;"
-              onclick="showonly('xyz');" title="Remove search filter"></div> -->
           </div>
           <div class="card mb-1">
             <div id="sbfb" class="card-body" style="text-align: justify;">
@@ -143,15 +150,63 @@
         </div>
       </div>
     </div>
+
+    <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-slideout" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h6 class="modal-title" id="sidebarHeader">Search</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-12 mb-1">
+                  <div class="input-group">
+                    <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Search for word or phrase in selected volumes" onclick="DPRSend.sendSearch(DPRSend.eventSend(event));">
+                        <img src="/digitalpalireader/content/images/bi/search.svg" alt="" width="auto" height="auto" title="Open side bar">
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-10 mb-1">
+                  <label for="tipType">Search type</label>
+                  <select id="tipType" class="form-control" title="Choose a search type - hover over the name for description">
+                    <option title="Search multiple sets" label="Multiple Sets" selected></option>
+                    <option title="Search multiple books in a single set" label="Books in Set"></option>
+                    <option title="Search a single book" label="Single Book"></option>
+                    <option title="Search part of a single book" label="Partial Book"></option>
+                  </select>
+                </div>
+                <div class="form-group col-md-2" style="margin-top: 2.5rem;">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soregexp" title="Use Regular Expressions for wildcards in search">
+                    <label class="form-check-label" for="gridCheck">
+                      RegEx
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-  <script type="text/javascript" src="/digitalpalireader/content/js/web/search.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/search.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/web/search.js"></script>
+  <script src="/digitalpalireader/content/js/search.js"></script>
+  <script src="/digitalpalireader/content/js/sortaz.js"></script>
 
-  <script type="text/javascript" src="/digitalpalireader/content/js/listsm.js"></script>
-  <script type="text/javascript" src="/digitalpalireader/content/js/listam.js"></script>
+  <script src="/digitalpalireader/content/js/listsm.js"></script>
+  <script src="/digitalpalireader/content/js/listam.js"></script>
 
 </body>
 
