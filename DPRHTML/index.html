@@ -89,17 +89,39 @@
 
 	<script src="/digitalpalireader/content/js/web/sidebar.js"></script>
 	<script>
-		$(function () {
-			setPrefs();
 
+		$(document).ready(function() {
+			setPrefs();
+			const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+			let bookList = 'd';
+      let place = [];
+      let query = '';
+      let para = '';
+			urlParams.forEach(parameter => {
+				parameterSections = parameter.split('=');
+				switch (parameterSections[0]) {
+					case 'loc':
+						place = parameterSections[1].split('.');
+						if (place.length == 8) {
+							bookList = place[0];
+						}
+            break;
+          case 'para':
+            para = parameterSections[1];
+            break;
+          case 'query':
+            query = parameterSections[1];
+            break;
+				}
+			});
 			// update navigation
 
 			var navset = $("#nav-set");
 			for (var i in G_nikFullNames) {
 				navset.append($("<option />").val(i).text(G_nikFullNames[i]));
 			}
-			navset.val('d');
-			digitalpalireader.setBookList('d');
+			navset.val(bookList);
+			digitalpalireader.setBookList(bookList);
 			digitalpalireader.changeSet();
 			navset.change(function () {
 				digitalpalireader.changeSet();
@@ -114,14 +136,11 @@
 				setPrefs();
 			});
 
-    });
-
-    $(document).ready(function() {
       $('.bottomFrame .bottomFrameHandle').on('click', function() {
         DPR_PAL.toggleBottomFrame();
-      });
+			});
 
-      DPR_PAL.openSideBar();
+
 
       $('.helpbutton').each(function() {
         $(this).popover({
@@ -136,7 +155,13 @@
         }).on('show.bs.popover', function() {
           $(this).tooltip('hide')
         })
-      })
+			})
+
+			if (place.length == 8) {
+				loadXMLSection(query, para, place);
+			} else {
+				DPR_PAL.openSideBar();
+			}
     });
 	</script>
 </head>
