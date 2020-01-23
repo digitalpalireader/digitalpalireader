@@ -14,8 +14,13 @@ var DPRSend = {
 
 	importXML:function(section,labelsearch,para,isPL,add,scroll,cat) {
 
-		var nikaya = document.getElementById('set').value;
-		var bookno = parseInt(document.getElementById('book').value)-1;
+    if(DPR_PAL.isXUL) {
+      var nikaya = document.getElementById('set').value;
+      var bookno = parseInt(document.getElementById('book').value)-1;
+    } else {
+      var nikaya = document.getElementById('nav-set').value;
+      var bookno = parseInt(document.getElementById('nav-book').value)-1;
+    }
 
 		var sutta = 'x', vagga = 'x', volume = 'x', meta = 'x';
 
@@ -59,7 +64,7 @@ var DPRSend = {
 
 
 
-		if(!add) { // reuse old tab
+		if(!add && DPR_PAL.isXUL) { // reuse old tab
 			var thisTab = DPRChrome.isThisDPRTab('DPRm');
 			if(thisTab) {
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
@@ -77,7 +82,7 @@ var DPRSend = {
 				oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLSection(labelsearch,para,[nikaya,bookno,meta,volume,vagga,sutta,section,G_hier]);
 			}
 		}
-		else if (add == 'shift') {
+		else if (add == 'shift' && DPR_PAL.isXUL) {
 			var thisTab = DPRChrome.isThisDPRTab('DPRm');
 			if(thisTab) {
 				var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
@@ -113,11 +118,14 @@ var DPRSend = {
 				return;
 			}
 		}
-		else {
+		else if (DPR_PAL.isXUL) {
 			var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+G_hier+(labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '')+(para ? '&para=' + para : '')+(scroll ? '&scroll=' + scroll : '');
 			DPRChrome.openDPRTab(permalink,'DPRm');
-		}
-
+    }
+    else {
+      let aplace = [nikaya,bookno,meta,volume,vagga,sutta,section,G_hier];
+      Web_Send_OpenPlace(aplace, para, "", add);
+    }
 	},
 
 	importXMLindex:function(add) {
@@ -396,8 +404,7 @@ var DPRSend = {
 			DPRChrome.openDPRTab(permalink,'DPRm');
     } else {
       let aplace = [nikaya,book,meta,volume,vagga,sutta,section,hiert];
-      loadXMLSection("","",aplace);
-      $("#close-left").click();
+      Web_Send_OpenPlace(aplace, '', '', 'internal');
     }
 	},
 
