@@ -22,6 +22,12 @@ body {
   min-width: 4rem;
 }
 
+#nav-title-button {
+  position: absolute;
+  right: 0px;
+  height: 33.5px;
+}
+
 #top-frame {
   width: 100%;
 }
@@ -66,8 +72,20 @@ body {
   padding: 0 20px;
 }
 
+#mafbc tr {
+  font-weight: bold;
+}
+
+hr {
+  width: 100vw;
+}
+
 .btn {
   margin-bottom: 15px;
+}
+
+.navbutton {
+  width: 32px;
 }
 
 @media (max-width: 576px) {

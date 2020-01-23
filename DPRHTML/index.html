@@ -140,7 +140,7 @@
         DPR_PAL.toggleBottomFrame();
 			});
 
-
+      $('#nav-title').prop('title', 'View index for this book');
 
       $('.helpbutton').each(function() {
         $(this).popover({
@@ -273,10 +273,11 @@
             </div>
 
             <div class="form-group">
-              <label class="font-weight-bold">Quick links</label>
+              <label class="font-weight-bold">Quick Link</label>
               <button id="help-quicklinks-button" class="helpbutton" type="button"
-              tooltip-title="What is this?"
-              popover-title="Usage of quick links">?</button>
+                tooltip-title="What is this?"
+                popover-title="Usage of quick links">?
+              </button>
               <div id="quicklinks-popover-content" style="display: none">
                 Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
                 1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
@@ -297,34 +298,37 @@
 
             <div class="form-group">
               <label class="font-weight-bold">Book Hierarchy</label>
-              <div id="nav-title-div">
-                <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 100%; margin-bottom: 0px;" />
+              <div id="nav-title-div" class="subnav-cont input-group">
+                <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
+                  onclick="digitalpalireader.loadIndex(1)" />
+                <br class="clear" />
+                <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
               </div>
               <div class="subnav-cont input-group">
                 <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
                 </select>
                 <br class="clear" />
-                <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
+                <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
               </div>
               <div class="subnav-cont input-group">
                 <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
                 <br class="clear" />
-                <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
+                <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
               </div>
               <div class="subnav-cont input-group">
                 <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
                 <br class="clear" />
-                <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
+                <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
               </div>
               <div class="subnav-cont input-group">
                 <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
                 <br class="clear" />
-                <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
+                <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
               </div>
               <div class="subnav-cont input-group">
                 <select id="nav-section" class="custom-select navselect"></select>
                 <br class="clear" />
-                <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
+                <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
               </div>
             </div>
           </form>
