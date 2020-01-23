@@ -945,9 +945,10 @@ function loadXMLindex(place,compare) {
 	if(isDev)
 		return [tabT,saveout];
 
-	$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
+  $('#mafbc').html(`<table width=100%><tr><td align=left>${DPRSidebarHamburgerMenu()}</td><td align=left>`+tabT+'</td></tr></table><hr></hr>');
+  $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
 	$('#mafbc').append('<div id="savei">'+saveout+'</div>');
-	$('#mafbc').append('<div id="convi">'+convout+'</div>');
+  $('#mafbc').append('<div id="convi">'+convout+'</div>');
 
 	// title, tab, link
 
@@ -976,7 +977,7 @@ function loadXMLindex(place,compare) {
 	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
 
-	$('#mafbc').append('<div>'+theDatao+'</div>');
+  $('#mafbc').append('<div>'+theDatao+'</div>');
 	document.getElementById('maf').scrollTop = 0;
 	// refresh history box
 
