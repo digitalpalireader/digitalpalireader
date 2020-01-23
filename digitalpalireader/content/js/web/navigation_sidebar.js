@@ -75,7 +75,7 @@ var DPRNav = {
 
     for (i = 0; i < titles.length; i++) {
       // menu
-      bookNode.append(`${translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]), ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1))}`);
+      bookNode.append(`<option value="${((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1))}">${translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i])}</option>`);
       bookNode.prop('selectedIndex', 0);
 
       // check boxes
@@ -96,8 +96,8 @@ var DPRNav = {
       bookNode2.append(newCheck);
 
     }
-    console.error('start fixing from here!');
-    // DPRXML.updateSearchHierarchy(0)
+
+    DPRXML.updateSearchHierarchy(0)
   },
 
   switchhier: function (htmp) {

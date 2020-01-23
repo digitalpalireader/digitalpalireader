@@ -1,9 +1,3 @@
-if (DPR_PAL.isXUL) {
-  console.log('Loading opts_sidebar.js...');
-} else {
-  console.log('Cannot opts_sidebar.js for the wrong platform', DPR_PAL);
-}
-
 var DPROpts = {
 	tipitakaOptions: function () {
 		document.getElementById('tsoContainer').setAttribute('collapsed',true);
@@ -18,8 +12,7 @@ var DPROpts = {
 		document.getElementById('tsoCO3').setAttribute('collapsed',true);
 		document.getElementById('tsoBO').setAttribute('collapsed',true);
 
-    var which = document.getElementById('tipType').selectedIndex;
-    alert('>>>> ' + which);
+		var which = document.getElementById('tipType').selectedIndex;
 		switch(which) {
 			case 0:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
@@ -63,7 +56,7 @@ var DPROpts = {
 
 	selAll:function(id) {
 		var box = document.getElementById(id);
-		var sels = box.getElementsByTagName('checkbox');
+		var sels = box.getElementsByTagName(DPR_PAL.isWeb ? 'input' : 'checkbox');
 
 		var cnt = 0;
 
