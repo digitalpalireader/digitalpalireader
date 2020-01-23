@@ -1,3 +1,9 @@
+if (DPR_PAL.isXUL) {
+  console.log('Loading opts_sidebar.js...');
+} else {
+  console.log('Cannot opts_sidebar.js for the wrong platform', DPR_PAL);
+}
+
 var DPROpts = {
 	tipitakaOptions: function () {
 		document.getElementById('tsoContainer').setAttribute('collapsed',true);
@@ -11,8 +17,9 @@ var DPROpts = {
 		document.getElementById('tsoCO2').setAttribute('collapsed',true);
 		document.getElementById('tsoCO3').setAttribute('collapsed',true);
 		document.getElementById('tsoBO').setAttribute('collapsed',true);
-		
-		var which = document.getElementById('tipType').selectedIndex;
+
+    var which = document.getElementById('tipType').selectedIndex;
+    alert('>>>> ' + which);
 		switch(which) {
 			case 0:
 				document.getElementById('tsoContainer').removeAttribute('collapsed');
@@ -57,9 +64,9 @@ var DPROpts = {
 	selAll:function(id) {
 		var box = document.getElementById(id);
 		var sels = box.getElementsByTagName('checkbox');
-		
+
 		var cnt = 0;
-		
+
 		// check if all selected
 		for(x=0; x < sels.length; x++) {
 			if(sels[x].getAttribute('checked') == 'true') cnt++;
@@ -70,13 +77,13 @@ var DPROpts = {
 			sels[x].setAttribute('checked',(cnt != sels.length));
 		}
 	},
-	
+
 	dictAdvToggle:function() {
 		var ao = document.getElementById('dictAdvOpts');
 		if(!ao.getAttribute('collapsed')) ao.setAttribute('collapsed',true);
-		else ao.removeAttribute('collapsed'); 
+		else ao.removeAttribute('collapsed');
 	},
-	
+
 	dictOptions:function () {
 		var which = document.getElementById('dictType').value;
 
@@ -188,5 +195,5 @@ var DPROpts = {
 		}
 
 	},
-	
+
 }
