@@ -159,22 +159,22 @@
     <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-slideout" role="document">
         <div class="modal-content">
-        <div class="modal-header p-0">
-          <ul class="nav nav-tabs">
-            <li class="nav-item">
-              <a class="nav-link" href="/DPRHTML/index.html">Navigation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="/DPRHTML/search.html">Search</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/DPRHTML/dict.html">Dictionary</a>
-            </li>
-          </ul>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
+          <div class="modal-header p-0">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link" href="/DPRHTML/index.html">Navigation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/DPRHTML/search.html">Search</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/DPRHTML/dict.html">Dictionary</a>
+              </li>
+            </ul>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
           <div class="modal-body">
             <form>
               <div class="form-row align-items-center">
@@ -210,32 +210,36 @@
                 </div>
               </div>
 
-              <div class="form-row">
-                <div id="tsoSET" class="form-group col mb-1">
-                  <label class="sr-only" for="tsoSETm">tsoSETm</label>
-                  <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
-                    <option value="v" label="Vinaya" selected></option>
-                    <option value="d" label="Dīgha" ></option>
-                    <option value="m" label="Majjhima" ></option>
-                    <option value="s" label="Saṃyutta" ></option>
-                    <option value="a" label="Aṅguttara" ></option>
-                    <option value="k" label="Khuddaka" ></option>
-                    <option value="y" label="Abhidhamma" ></option>
-                    <option value="x" label="Vism" ></option>
-                    <option value="b" label="Abhidh-s" ></option>
-                    <option value="g" label="Byākaraṇa" ></option>
-                    <option value="n" label="Añña" ></option>
-                  </select>
-                </div>
-                <div id="tsoMAT2" class="form-group col mb-1">
-                  <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
-                  <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
-                    <option value="m" label="Mūla" selected></option>
-                    <option value="a" label="Aṭṭhakathā"></option>
-                    <option value="t" label="Ṭīka"></option>
-                  </select>
-                </div>
-              </div>
+              <!-- <div class="card mb-2" id="tsoContainer">
+                <div class="card-body p-1"> -->
+                  <div class="form-row">
+                    <div id="tsoSET" class="form-group col mb-1">
+                      <label class="sr-only" for="tsoSETm">tsoSETm</label>
+                      <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
+                        <option value="v" label="Vinaya" selected></option>
+                        <option value="d" label="Dīgha" ></option>
+                        <option value="m" label="Majjhima" ></option>
+                        <option value="s" label="Saṃyutta" ></option>
+                        <option value="a" label="Aṅguttara" ></option>
+                        <option value="k" label="Khuddaka" ></option>
+                        <option value="y" label="Abhidhamma" ></option>
+                        <option value="x" label="Vism" ></option>
+                        <option value="b" label="Abhidh-s" ></option>
+                        <option value="g" label="Byākaraṇa" ></option>
+                        <option value="n" label="Añña" ></option>
+                      </select>
+                    </div>
+                    <div id="tsoMAT2" class="form-group col mb-1">
+                      <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
+                      <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
+                        <option value="m" label="Mūla" selected></option>
+                        <option value="a" label="Aṭṭhakathā"></option>
+                        <option value="t" label="Ṭīka"></option>
+                      </select>
+                    </div>
+                  </div>
+                <!-- </div>
+              </div> -->
 
               <div class="card" id="tsoBOOK">
                 <div class="card-body p-2">
