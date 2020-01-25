@@ -560,6 +560,7 @@ function clearDivs(which) { // place divs to be cleared here
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if (DPR_PAL.isWeb) {
+    $('#nav-context-div').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
 		return;
 	}
 
