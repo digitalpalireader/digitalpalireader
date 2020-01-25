@@ -470,7 +470,7 @@ function permalinkClick(link,url) {
   }
 }
 
-const copyToClipboard = DPR_PAL.copyToClipboard;
+copyToClipboard = DPR_PAL.copyToClipboard;
 
 var G_alertFlashStart = 0;
 
