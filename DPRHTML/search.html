@@ -4,38 +4,7 @@
 <head>
   <title>Digital Pali Reader - Search</title>
   <script>
-    $('body').ready(function(){
-      giveIDtoTabs();
-      getconfig();
-      if (document.location.href.indexOf('?') > 10000) { //-1
-        searchTipitaka();
-        $("#mafbc").load("search-result.html");
-      } else {
-        var link = document.location.href.split('?')[0];
-        link += '?type=0&query=arahant&MAT=m&set=dmsak&book=1&part=1&rx=false';
-        $("#mafbc").load("search-result.html");
-      }
-    });
-    function scrollToId(a, b) {
-      if (a == 'search') a = 'sbfbc';
-      if (a == 'dif') a = 'cdif';
-      document.getElementById(a).scrollTop = (typeof (b) == 'number' ? b : document.getElementById(b).offsetTop);
-    }
-
-    // external dev function
-
-    var devCheck = 0;
-
-    function devO() { }
-    function dalert(a) { }
-    function ddump(a) { }
-
-    $(document).ready(function() {
-      DPR_PAL.openSideBar();
-      DPRNav.setSearchBookList();
-      DPROpts.tipitakaOptions();
-    });
-
+    $("#mafbc").load("search-result.html");
   </script>
 </head>
 
@@ -297,15 +266,6 @@
       </div>
     </div>
   </div>
-
-
-
-  <script src="/digitalpalireader/content/js/web/search.js"></script>
-  <script src="/digitalpalireader/content/js/search.js"></script>
-  <script src="/digitalpalireader/content/js/sortaz.js"></script>
-
-  <script src="/digitalpalireader/content/js/listsm.js"></script>
-  <script src="/digitalpalireader/content/js/listam.js"></script>
 
 </body>
 

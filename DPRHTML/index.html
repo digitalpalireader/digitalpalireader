@@ -64,6 +64,11 @@
 	<script src="/digitalpalireader/content/js/xml.js"></script>
   <script src="/digitalpalireader/content/js/history.js"></script>
   <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
+  <script src="/digitalpalireader/content/js/web/search.js"></script>
+  <script src="/digitalpalireader/content/js/search.js"></script>
+  <script src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/listsm.js"></script>
+  <script src="/digitalpalireader/content/js/listam.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/convert.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
@@ -102,13 +107,15 @@
         $(".nav-link").on("click",function(e) {
           e.preventDefault();
           let tabId = this.id.substring(0, this.id.length - 3);
-          let i = 0;
           $("#formContent").load(tabId+".html");
-          $("#navTabs li").eq(i).addClass('active');
+          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            localStorage.setItem('activeTab', $(e.target).attr('id'));
+          });
         });
       });
-    })
-    ;
+
+    });
+
 	</script>
 </head>
 
@@ -188,16 +195,16 @@
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" id="modalBody">
           <ul id="navTabs" class="nav nav-tabs">
             <li class="nav-item">
-              <a id="navigationTab" class="nav-link active" href="">Navigation</a>
+              <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
             </li>
             <li class="nav-item">
-              <a id="searchTab" class="nav-link" href="">Search</a>
+              <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
             </li>
             <li class="nav-item">
-              <a id="toolsTab" class="nav-link" href="">Tools</a>
+              <a id="toolsTab" data-toggle="tab" class="nav-link" href="">Tools</a>
             </li>
           </ul>
           <form id="formContent">
