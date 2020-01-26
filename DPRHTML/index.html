@@ -103,11 +103,11 @@
 
 		$(document).ready(function() {
       $(function() {
-        $("#formContent").load("navigation.html");
+        $("#mainContent").load("navigation.html");
         $(".nav-link").on("click",function(e) {
           e.preventDefault();
           let tabId = this.id.substring(0, this.id.length - 3);
-          $("#formContent").load(tabId+".html");
+          $("#mainContent").load(tabId+".html");
           $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             localStorage.setItem('activeTab', $(e.target).attr('id'));
           });
@@ -207,8 +207,8 @@
               <a id="toolsTab" data-toggle="tab" class="nav-link" href="">Tools</a>
             </li>
           </ul>
-          <form id="formContent">
-          </form>
+          <div id="mainContent">
+          </div>
         </div>
       </div>
     </div>
