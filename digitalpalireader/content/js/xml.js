@@ -555,6 +555,28 @@ function loadXMLindex(place,compare) {
 			}
 		}
 
+    // permalink
+
+    var permalink = `${DPR_PAL.dprHomePage}?`;
+
+    var oldurl = DPR_PAL.contentDocument.location.href;
+
+    var bareurl = 'dpr:index?';
+
+    var newparams = 'loc='+place.slice(0,8).join('.');
+
+    bareurl += newparams;
+
+    var oldparams = oldurl.split('?')[1];
+    if(oldparams) {
+      oldparams = oldparams.split('|');
+      oldparams[compare-1] = newparams;
+      newparams = oldparams.join('|');
+    }
+    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+
+    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+
 		whichcol[0] = 1; // bump up to let the second color know
 
 		theDatao += (devCheck == 1 && DshowH ? '[a]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData)) + '</span>'+namen;
@@ -952,27 +974,7 @@ function loadXMLindex(place,compare) {
 
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 
-	// permalink
 
-	var permalink = `${DPR_PAL.dprHomePage}?`;
-
-	var oldurl = DPR_PAL.contentDocument.location.href;
-
-	var bareurl = 'dpr:index?';
-
-	var newparams = 'loc='+place.slice(0,8).join('.');
-
-	bareurl += newparams;
-
-	var oldparams = oldurl.split('?')[1];
-	if(oldparams) {
-		oldparams = oldparams.split('|');
-		oldparams[compare-1] = newparams;
-		newparams = oldparams.join('|');
-	}
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
 	if (DPR_PAL.isWeb){
     theDatao = theDatao.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,
