@@ -493,9 +493,7 @@ function loadXMLindex(place,compare) {
 	else
 		var xset = isPlace?(place[8]?place[8]:0):0;
 
-	$('mafbc').html('');
-	$('mafbc').append(pleasewait);
-
+  DPR_PAL.showLoadingMarquee();
 
 	var nikaya = place[0];
 	var bookno = parseInt(place[1]);
@@ -976,6 +974,10 @@ function loadXMLindex(place,compare) {
 
 	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
+	if (DPR_PAL.isWeb){
+    theDatao = theDatao.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,
+    'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
+  }
 
   $('#mafbc').append('<div>'+theDatao+'</div>');
 	document.getElementById('maf').scrollTop = 0;

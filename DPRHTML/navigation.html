@@ -73,11 +73,17 @@
         })
 			})
 
-			if (place.length == 8) {
-				loadXMLSection(query, para, place);
-			} else {
-				DPR_PAL.openSideBar();
-			}
+      switch(place.length){
+        case 3:
+          loadXMLindex(place,false);
+          break;
+        case 8:
+          loadXMLSection(query, para, place);
+          break;
+			  default:
+          DPR_PAL.openSideBar();
+          break;
+      }
     });
 	</script>
 </head>
