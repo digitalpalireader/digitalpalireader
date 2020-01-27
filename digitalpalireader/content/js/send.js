@@ -304,7 +304,10 @@ function sendPlace(place) {
 	var sidebar = DPRSidebarWindow();
 	if (sidebar) {
 		sidebar.DPRNav.gotoPlace(place);
-	}
+  }
+  else{
+    DPRNav.gotoPlace(place);
+  }
 
 }
 
