@@ -7,7 +7,8 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="/DPRHTML/index.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/DPRHTML/index.css">
 	<link rel="stylesheet" href="/DPRHTML/styles.css">
 
 	<script type="text/javascript">
@@ -131,8 +132,8 @@
                 <div style="text-align: left" id="mafa" class="paperback"></div>
                 <div style="text-align: justify" id="mafb" class="paperback">
                   <div id="mafbc">
-                    <a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
-                      <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
+                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1">
+                      <i class="fa fa-bars" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -143,10 +144,18 @@
         </div>
       </div>
     </div>
+    <div class="intro-space">
+      <div class="intro-message">
+        <p class="grey">Digital Pali Reader.</p>
+        <p class="grey">To get started, click on the menu button in the top left corner.</p>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <div class="bottomFrame">
-          <div class="bottomFrameHandle">open</div>
+          <div class="bottomFrameHandle">
+            <a href="#"><div class="fa fa-2x fa-angle-double-up grey rotate"></div></a>
+          </div>
           <div class="bottomFrameContent" id="bottom-content">
             <div id="anf" style="text-align: right" class="chromeback">
               <div id="brtop"></div>
@@ -204,7 +213,7 @@
               <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
             </li>
             <li class="nav-item">
-              <a id="toolsTab" data-toggle="tab" class="nav-link" href="">Tools</a>
+              <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
             </li>
           </ul>
           <div id="mainContent">

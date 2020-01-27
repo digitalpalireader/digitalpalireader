@@ -4,23 +4,23 @@
 <head>
   <title>Digital Pali Reader -Navigation</title>
   <link rel="stylesheet" href="/DPRHTML/navigation.css">
-	<script>
+  <script>
 
-		$(document).ready(function() {
-			setPrefs();
-			const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-			let bookList = 'd';
+    $(document).ready(function() {
+      setPrefs();
+      const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+      let bookList = 'd';
       let place = [];
       let query = '';
       let para = '';
-			urlParams.forEach(parameter => {
-				parameterSections = parameter.split('=');
-				switch (parameterSections[0]) {
-					case 'loc':
-						place = parameterSections[1].split('.');
-						if (place.length == 8) {
-							bookList = place[0];
-						}
+      urlParams.forEach(parameter => {
+        parameterSections = parameter.split('=');
+        switch (parameterSections[0]) {
+          case 'loc':
+            place = parameterSections[1].split('.');
+            if (place.length == 8) {
+              bookList = place[0];
+            }
             break;
           case 'para':
             para = parameterSections[1];
@@ -28,33 +28,33 @@
           case 'query':
             query = parameterSections[1];
             break;
-				}
-			});
-			// update navigation
+        }
+      });
+      // update navigation
 
-			var navset = $("#nav-set");
-			for (var i in G_nikFullNames) {
-				navset.append($("<option />").val(i).text(G_nikFullNames[i]));
-			}
-			navset.val(bookList);
-			digitalpalireader.setBookList(bookList);
-			digitalpalireader.changeSet();
-			navset.change(function () {
-				digitalpalireader.changeSet();
-			});
-			$("#nav-book").change(function () {
-				digitalpalireader.updateSubnav(0);
-			});
+      var navset = $("#nav-set");
+      for (var i in G_nikFullNames) {
+        navset.append($("<option />").val(i).text(G_nikFullNames[i]));
+      }
+      navset.val(bookList);
+      digitalpalireader.setBookList(bookList);
+      digitalpalireader.changeSet();
+      navset.change(function () {
+        digitalpalireader.changeSet();
+      });
+      $("#nav-book").change(function () {
+        digitalpalireader.updateSubnav(0);
+      });
 
-			setPrefs();
+      setPrefs();
 
-			$(window).resize(function () {
-				setPrefs();
-			});
+      $(window).resize(function () {
+        setPrefs();
+      });
 
       $('.bottomFrame .bottomFrameHandle').on('click', function() {
         DPR_PAL.toggleBottomFrame();
-			});
+      });
 
       $('#nav-title').prop('title', 'View index for this book');
 
@@ -71,7 +71,7 @@
         }).on('show.bs.popover', function() {
           $(this).tooltip('hide')
         })
-			})
+      })
 
       switch(place.length){
         case 3:
@@ -80,12 +80,11 @@
         case 8:
           loadXMLSection(query, para, place);
           break;
-			  default:
-          DPR_PAL.openSideBar();
+        default:
           break;
       }
     });
-	</script>
+  </script>
 </head>
 
 <body>

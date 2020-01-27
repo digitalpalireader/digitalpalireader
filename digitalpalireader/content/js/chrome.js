@@ -262,7 +262,7 @@ function DPRBottomPaneUpdateStyle() {
 function DPRSidebarHamburgerMenu() {
 	if (DPR_PAL.isWeb) {
     return `
-<a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
+<a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1">
   <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
 </a>`;
 	} else {

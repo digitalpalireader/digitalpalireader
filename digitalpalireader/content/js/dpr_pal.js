@@ -114,14 +114,9 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.openBottomFrame = () => {
     if (DPR_PAL.isWeb) {
       $(bottomFrameSelector).show();
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.closeBottomFrame = () => {
-    if (DPR_PAL.isWeb) {
-      $(bottomFrameSelector).hide();
+      if ($(bottomFrameSelector).is(":visible")) {
+        $(".rotate").toggleClass("down");
+      }
     } else {
       console.error("Not implemented for XUL");
     }
@@ -130,6 +125,9 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.toggleBottomFrame = () => {
     if (DPR_PAL.isWeb) {
       $(bottomFrameSelector).slideToggle();
+      if ($(bottomFrameSelector).is(":visible")) {
+        $(".rotate").toggleClass("down");
+      }
     } else {
       console.error("Not implemented for XUL");
     }
