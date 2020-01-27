@@ -104,15 +104,21 @@
 
 		$(document).ready(function() {
       $(function() {
-        $("#mainContent").load("navigation.html");
-        $(".nav-link").on("click",function(e) {
-          e.preventDefault();
-          let tabId = this.id.substring(0, this.id.length - 3);
-          $("#mainContent").load(tabId+".html");
-          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            localStorage.setItem('activeTab', $(e.target).attr('id'));
+        if (document.location.href.indexOf('?feature=search') > -1) {
+          $("#mainContent").load("search.html");
+        } else if (document.location.href.indexOf('?feature=dictionary') > -1) {
+          $("#mainContent").load("dictionary.html");
+        } else {
+          $("#mainContent").load("navigation.html");
+          $(".nav-link").on("click",function(e) {
+            e.preventDefault();
+            let tabId = this.id.substring(0, this.id.length - 3);
+            $("#mainContent").load(tabId+".html");
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+              localStorage.setItem('activeTab', $(e.target).attr('id'));
+            });
           });
-        });
+        }
       });
 
     });

@@ -10,10 +10,7 @@
       giveIDtoTabs();
       getconfig();
       if (document.location.href.indexOf('?feature=search') > -1) {
-        searchTipitaka();
-      } else {
-        // TODO: Nuke this else case once search is implemented.
-        searchTipitaka(0, 'arahant', 'm', 'dmsak', 1, 1, false);
+        searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
       }
     });
     function scrollToId(a, b) {

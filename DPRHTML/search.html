@@ -5,7 +5,45 @@
   <title>Digital Pali Reader - Search</title>
   <link rel="stylesheet" href="/DPRHTML/search.css">
   <script>
-    $("#mafbc").load("search-results.html");
+    let searchType = 0;
+    let searchString = '';
+    let searchMAT = '';
+    let searchSet = '';
+    let searchBook = 0;
+    let searchPart = 0;
+    let searchRX = false;
+    $(document).ready(function() {
+      setPrefs();
+      const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+      urlParams.forEach(parameter => {
+        parameterSections = parameter.split('=');
+        switch (parameterSections[0]) {
+          case 'type':
+            searchType = parseInt(parameterSections[1], 10);
+            break;
+          case 'query':
+            searchString = parameterSections[1];
+            break;
+          case 'MAT':
+            searchMAT = parameterSections[1];
+            break;
+          case 'set':
+            searchSet = parameterSections[1];
+            break;
+          case 'book':
+            searchBook = parseInt(parameterSections[1], 10);
+            break;
+          case 'part':
+            searchPart = parseInt(parameterSections[1], 10);
+            break;
+          case 'rx':
+            parameterSections[1] == true ? searchRX = true : searchRX = false;
+            break;
+        }
+      });
+
+      $("#mafbc").load("search-results.html");
+    });
   </script>
 </head>
 
