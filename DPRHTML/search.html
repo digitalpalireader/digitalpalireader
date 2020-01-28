@@ -49,19 +49,9 @@
 
 <body>
 
-  <div class="row">
-    <div id="lower" class="col-sm-12 px-0 mb-1">
-      <div id="search-progress" class="progress" style="height: 0.5em; display: none">
-        <div id="search-current-progress" class="progress-bar progress-bar-striped progress-bar-animated"
-          role="progressbar" style="width: 0%;"></div>
-      </div>
-      <div id="finished" pack="start"></div>
-    </div>
-  </div>
-
   <div class="form-row align-items-center">
     <div class="col-md-10">
-      <label class="sr-only" for="isearch">Search term</label>
+      <label class="sr-only" for="isearch">isearch</label>
       <div class="input-group">
         <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
         <div class="input-group-append">
@@ -92,36 +82,32 @@
     </div>
   </div>
 
-  <!-- <div class="card mb-2" id="tsoContainer">
-    <div class="card-body p-1"> -->
-      <div class="form-row">
-        <div id="tsoSET" class="form-group col mb-1">
-          <label class="sr-only" for="tsoSETm">tsoSETm</label>
-          <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
-            <option value="v" label="Vinaya" selected></option>
-            <option value="d" label="Dīgha" ></option>
-            <option value="m" label="Majjhima" ></option>
-            <option value="s" label="Saṃyutta" ></option>
-            <option value="a" label="Aṅguttara" ></option>
-            <option value="k" label="Khuddaka" ></option>
-            <option value="y" label="Abhidhamma" ></option>
-            <option value="x" label="Vism" ></option>
-            <option value="b" label="Abhidh-s" ></option>
-            <option value="g" label="Byākaraṇa" ></option>
-            <option value="n" label="Añña" ></option>
-          </select>
-        </div>
-        <div id="tsoMAT2" class="form-group col mb-1">
-          <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
-          <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
-            <option value="m" label="Mūla" selected></option>
-            <option value="a" label="Aṭṭhakathā"></option>
-            <option value="t" label="Ṭīka"></option>
-          </select>
-        </div>
-      </div>
-    <!-- </div>
-  </div> -->
+  <div class="form-row">
+    <div id="tsoSET" class="form-group col mb-1">
+      <label class="sr-only" for="tsoSETm">tsoSETm</label>
+      <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
+        <option value="v" label="Vinaya" selected></option>
+        <option value="d" label="Dīgha" ></option>
+        <option value="m" label="Majjhima" ></option>
+        <option value="s" label="Saṃyutta" ></option>
+        <option value="a" label="Aṅguttara" ></option>
+        <option value="k" label="Khuddaka" ></option>
+        <option value="y" label="Abhidhamma" ></option>
+        <option value="x" label="Vism" ></option>
+        <option value="b" label="Abhidh-s" ></option>
+        <option value="g" label="Byākaraṇa" ></option>
+        <option value="n" label="Añña" ></option>
+      </select>
+    </div>
+    <div id="tsoMAT2" class="form-group col mb-1">
+      <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
+      <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
+        <option value="m" label="Mūla" selected></option>
+        <option value="a" label="Aṭṭhakathā"></option>
+        <option value="t" label="Ṭīka"></option>
+      </select>
+    </div>
+  </div>
 
   <div class="card" id="tsoBOOK">
     <div class="card-body p-2">
