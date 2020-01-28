@@ -41,7 +41,7 @@
 	</script>
 	<script src="/digitalpalireader/content/dev.js"></script>
 
-	<script src="/digitalpalireader/content/js/io.js"></script>
+	<script src="/digitalpalireader/content/js/web/io.js"></script>
   <script src="/digitalpalireader/content/js/send.js"></script>
   <script src="/digitalpalireader/content/js/receive.js"></script>
   <script src="/digitalpalireader/content/js/send_sidebar.js"></script>
@@ -67,6 +67,7 @@
   <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
   <script src="/digitalpalireader/content/js/web/search.js"></script>
   <script src="/digitalpalireader/content/js/search.js"></script>
+  <script src="/digitalpalireader/content/js/search_history.js"></script>
   <script src="/digitalpalireader/content/js/sortaz.js"></script>
   <script src="/digitalpalireader/content/js/listsm.js"></script>
   <script src="/digitalpalireader/content/js/listam.js"></script>
@@ -103,25 +104,58 @@
 	<script>
 
 		$(document).ready(function() {
-      $(function() {
-        if (document.location.href.indexOf('?feature=search') > -1) {
-          $("#mainContent").load("search.html");
-        } else if (document.location.href.indexOf('?feature=dictionary') > -1) {
-          $("#mainContent").load("dictionary.html");
-        } else {
-          $("#mainContent").load("navigation.html");
-          $(".nav-link").on("click",function(e) {
-            e.preventDefault();
-            let tabId = this.id.substring(0, this.id.length - 3);
-            $("#mainContent").load(tabId+".html");
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-              localStorage.setItem('activeTab', $(e.target).attr('id'));
-            });
-          });
+
+      $("#navigationDiv").show();
+      $("#searchDiv").hide();
+      $("#dictionaryDiv").hide();
+
+      $('#sidebarButton').on('click', function() {
+        loadSidebarDivs();
+      });
+      if (document.location.href.indexOf('?loc=') > -1) {
+        loadSidebarDivs();
+      }
+      else if (document.location.href.indexOf('?feature=search') > -1) {
+        loadSidebarDivs();
+        $("#mafbc").load("search-results.html");
+      } else if (document.location.href.indexOf('?feature=dictionary') > -1) {
+        loadSidebarDivs();
+        $("#mafbc").load("dictionary-results.html");
+      }
+      $(".nav-link").on("click",function(e) {
+        e.preventDefault();
+        let tabId = this.id.substring(0, this.id.length - 3);
+        switch (tabId) {
+          case 'navigation':
+            $("#navigationDiv").show();
+            $("#searchDiv").hide();
+            $("#dictionaryDiv").hide();
+            break;
+          case 'search':
+            $("#navigationDiv").hide();
+            $("#searchDiv").show();
+            $("#dictionaryDiv").hide();
+            break;
+          case 'search':
+            $("#navigationDiv").hide();
+            $("#searchDiv").hide();
+            $("#dictionaryDiv").show();
+            break;
         }
+        //$("#mainContent").load(tabId+".html");
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          localStorage.setItem('activeTab', $(e.target).attr('id'));
+        });
       });
 
     });
+
+    function loadSidebarDivs(){
+      $(".intro-space").hide();
+      $("#navigationDiv").load("navigation.html");
+      $("#searchDiv").load("search.html");
+      $("#dictionaryDiv").load("dictionary.html");
+    }
 
 	</script>
 </head>
@@ -138,8 +172,8 @@
                 <div style="text-align: left" id="mafa" class="paperback"></div>
                 <div style="text-align: justify" id="mafb" class="paperback">
                   <div id="mafbc">
-                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" title="Open side bar">
-                      <i class="fa fa-bars" aria-hidden="true"></i>
+                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton"
+                      class="p-1" title="Open side bar"> <i class="fa fa-bars" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -222,7 +256,11 @@
               <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
             </li>
           </ul>
-          <div id="mainContent">
+          <div id="navigationDiv" class="mainContent">
+          </div>
+          <div id="searchDiv" class="mainContent">
+          </div>
+          <div id="dictionaryDiv" class="mainContent">
           </div>
         </div>
       </div>

@@ -513,7 +513,7 @@ var DPRSend = {
 
 			var which = document.getElementById('tipType').selectedIndex;
 
-			if(getstring == '_dev') { // Dev
+			if(getstring == '_dev' && DPR_PAL.isXUL) { // Dev
 				DPRChrome.openDPRTab('chrome://digitalpalireader/content/dev.xul','DPRd');
 				return;
 			}
@@ -575,7 +575,7 @@ var DPRSend = {
 			var part = searchPart;
 			var rx = searchRX;
 		}
-		if(!add) { // reuse old tab
+		if(!add && DPR_PAL.isXUL) { // reuse old tab
 			var oldTab = DPRChrome.findDPRTab('DPR-search');
 
 			if (!oldTab) {
@@ -588,10 +588,13 @@ var DPRSend = {
 				oldTabBrowser.contentDocument.getElementById('dpr-search-browser').contentWindow.searchTipitaka(which,getstring,MAT,sets,book,part,rx);
 			}
 		}
-		else {
+		else if (DPR_PAL.isXUL) {
 			var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type='+which+'&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx;
 			DPRChrome.openDPRTab(permalink,'DPRs');
-		}
+		} else {
+      const url = DPR_PAL.dprHomePage + '?feature=search&type='+which+'&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx;
+      window.history.pushState("object or string", "Title", url);
+    }
 
 
 	},

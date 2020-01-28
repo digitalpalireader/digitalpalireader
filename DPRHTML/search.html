@@ -5,15 +5,17 @@
   <title>Digital Pali Reader - Search</title>
   <link rel="stylesheet" href="/DPRHTML/search.css">
   <script>
-    let searchType = 0;
-    let searchString = '';
-    let searchMAT = '';
-    let searchSet = '';
-    let searchBook = 0;
-    let searchPart = 0;
-    let searchRX = false;
-    $(document).ready(function() {
+    var searchType = 0;
+    var searchString = '';
+    var searchMAT = '';
+    var searchSet = '';
+    var searchBook = 0;
+    var searchPart = 0;
+    var searchRX = false;
+    function setSearchParams() {
       setPrefs();
+      DPRNav.setSearchBookList();
+      DPROpts.tipitakaOptions();
       const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
       urlParams.forEach(parameter => {
         parameterSections = parameter.split('=');
@@ -41,8 +43,14 @@
             break;
         }
       });
-
-      $("#mafbc").load("search-results.html");
+    }
+    $(document).ready(function() {
+      setSearchParams();
+      $('#button-addon2').on('click', function() {
+        DPR_PAL.closeSideBar();
+        setSearchParams();
+        $("#mafbc").load("search-results.html");
+      });
     });
   </script>
 </head>
@@ -74,10 +82,10 @@
     <div class="form-group col-md-12 mb-2">
       <label class="sr-only" for="tipType">tipType</label>
       <select id="tipType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.tipitakaOptions()">
-        <option title="Search multiple sets" label="Multiple Sets" selected></option>
-        <option title="Search multiple books in a single set" label="Books in Set"></option>
-        <option title="Search a single book" label="Single Book"></option>
-        <option title="Search part of a single book" label="Partial Book"></option>
+        <option title="Search multiple sets" label="Multiple Sets" selected>Multiple Sets</option>
+        <option title="Search multiple books in a single set" label="Books in Set">Books in Set</option>
+        <option title="Search a single book" label="Single Book">Single Book</option>
+        <option title="Search part of a single book" label="Partial Book">Partial Book</option>
       </select>
     </div>
   </div>
@@ -86,25 +94,25 @@
     <div id="tsoSET" class="form-group col mb-1">
       <label class="sr-only" for="tsoSETm">tsoSETm</label>
       <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
-        <option value="v" label="Vinaya" selected></option>
-        <option value="d" label="Dīgha" ></option>
-        <option value="m" label="Majjhima" ></option>
-        <option value="s" label="Saṃyutta" ></option>
-        <option value="a" label="Aṅguttara" ></option>
-        <option value="k" label="Khuddaka" ></option>
-        <option value="y" label="Abhidhamma" ></option>
-        <option value="x" label="Vism" ></option>
-        <option value="b" label="Abhidh-s" ></option>
-        <option value="g" label="Byākaraṇa" ></option>
-        <option value="n" label="Añña" ></option>
+        <option value="v" label="Vinaya" selected>Vinaya</option>
+        <option value="d" label="Dīgha" >Dīgha</option>
+        <option value="m" label="Majjhima" >Majjhima</option>
+        <option value="s" label="Saṃyutta" >Saṃyutta</option>
+        <option value="a" label="Aṅguttara" >Aṅguttara</option>
+        <option value="k" label="Khuddaka" >Khuddaka</option>
+        <option value="y" label="Abhidhamma" >Abhidhamma</option>
+        <option value="x" label="Vism" >Vism</option>
+        <option value="b" label="Abhidh-s" >Abhidh-s</option>
+        <option value="g" label="Byākaraṇa" >Byākaraṇa</option>
+        <option value="n" label="Añña" >Añña</option>
       </select>
     </div>
     <div id="tsoMAT2" class="form-group col mb-1">
       <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
       <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
-        <option value="m" label="Mūla" selected></option>
-        <option value="a" label="Aṭṭhakathā"></option>
-        <option value="t" label="Ṭīka"></option>
+        <option value="m" label="Mūla" selected>Mūla</option>
+        <option value="a" label="Aṭṭhakathā">Aṭṭhakathā</option>
+        <option value="t" label="Ṭīka">Ṭīka</option>
       </select>
     </div>
   </div>
@@ -115,7 +123,7 @@
         <div class="form-group col-md-12 m-0">
           <label class="sr-only" for="tsoBOOKm">tsoBOOKm</label>
           <select id="tsoBOOKm" class="form-control" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(0)">
-            <option value="tobedeleted" label="To be deleted" selected></option>
+            <option value="tobedeleted" label="To be deleted" selected>To be deleted</option>
           </select>
         </div>
       </div>
@@ -125,35 +133,35 @@
   <div class="card" id="tsoPart">
     <div class="card-body p-2">
       <div class="form-row">
-        <div class="form-group col-md-12 m-0">
+        <div id="tsoPR" class="form-group col-md-12 m-0">
           <div id="tsoP1" class="form-check">
             <input id="tsoH1" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(1)" checked>
             <select id="tsoPmeta" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(1)">
-              <option value="tobedeleted" label="tsoPmeta" selected></option>
+              <option value="tobedeleted" label="tsoPmeta" selected>tsoPmeta</option>
             </select>
           </div>
           <div id="tsoP2" class="form-check">
             <input id="tsoH2" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(2)">
             <select id="tsoPvolume" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(2)">
-              <option value="tobedeleted" label="tsoPvolume" selected></option>
+              <option value="tobedeleted" label="tsoPvolume" selected>tsoPvolume</option>
             </select>
           </div>
           <div id="tsoP3" class="form-check">
             <input id="tsoH3" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(3)">
             <select id="tsoPvagga" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(3)">
-              <option value="tobedeleted" label="tsoPvagga" selected></option>
+              <option value="tobedeleted" label="tsoPvagga" selected>tsoPvagga</option>
             </select>
           </div>
           <div id="tsoP4" class="form-check">
             <input id="tsoH4" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(4)">
             <select id="tsoPsutta" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(4)">
-              <option value="tobedeleted" label="tsoPsutta" selected></option>
+              <option value="tobedeleted" label="tsoPsutta" selected>tsoPsutta</option>
             </select>
           </div>
           <div id="tsoP5" class="form-check">
             <input id="tsoH5" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(5)">
             <select id="tsoPsection" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(5)">
-              <option value="tobedeleted" label="tsoPsection" selected></option>
+              <option value="tobedeleted" label="tsoPsection" selected>tsoPsection</option>
             </select>
           </div>
         </div>
