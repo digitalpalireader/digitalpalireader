@@ -3,265 +3,183 @@
 
 <head>
   <title>Digital Pali Reader - Search</title>
-  <link rel="stylesheet" href="/DPRHTML/search.css">
+  <link rel="stylesheet" href="/DPRHTML/dictionary.css">
   <script>
     $("#mafbc").load("dictionary-results.html");
+    DPR_PAL.openSideBar();
+    $("#intro-space").hide();
   </script>
 </head>
 
 <body>
 
-  <div class="row">
-    <div id="lower" class="col-sm-12 px-0 mb-1">
-      <div id="search-progress" class="progress" style="height: 0.5em; display: none">
-        <div id="search-current-progress" class="progress-bar progress-bar-striped progress-bar-animated"
-          role="progressbar" style="width: 0%;"></div>
-      </div>
-      <div id="finished" pack="start"></div>
-    </div>
-  </div>
-
   <div class="form-row align-items-center">
-    <div class="col-md-10">
-      <label class="sr-only" for="isearch">Search term</label>
+    <div class="col">
+      <label class="sr-only" for="dictin">dictin</label>
       <div class="input-group">
-        <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
+        <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode." onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Search for word or phrase in selected volumes" onclick="DPRSend.sendSearch(DPRSend.eventSend(event));">
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
       </div>
     </div>
-    <div class="col-md-2">
-      <div class="form-check mb-2">
-        <input class="form-check-input" type="checkbox" id="tsoRx" title="Use Regular Expressions for wildcards in search">
-        <label class="form-check-label" for="tsoRx">
-          RegEx
-        </label>
-      </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-12 mb-2">
+      <label class="sr-only" for="dictType">dictType</label>
+      <select id="dictType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.dictOptions()">
+        <option title="Search multiple sets" label="Multiple Sets" selected></option>
+        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+        <option title="Search multiple books in a single set" label="Books in Set"></option>
+        <option title="Search a single book" label="Single Book"></option>
+        <option title="Search part of a single book" label="Partial Book"></option>
+
+        <option title="Analyze Word" value="DPR" label="DPR" selected></option>
+        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+        <option title="Pali-English Dictionary" value="PED" label="PED"></option>
+        <option title="Dict. of Pali Names" value="DPPN" label="DPPN"></option>
+        <option title="Concise Pali-English Dictionary" value="CPED" label="CPED"></option>
+        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+        <option title="PED, DPPN and CPED combined" value="MULTI" label="Multi"></option>
+        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+        <option title="Concise English-Pali Dictionary" value="CEPD" label="CEPD"></option>
+        <option title="Aṭṭhakathā Term Search" value="ATT" label="Aṭṭh"></option>
+        <option title="Ṭīka Term Search" value="TIK" label="Ṭīka"></option>
+        <option title="Title Search" value="TIT" label="Title"></option>
+        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+        <option title="Dhātumālā Roots" value="PRT" label="Pali Roots"></option>
+        <option title="M.W. Sanskrit Dictionary" value="SKT" label="Sanskrit Dictionary"></option>
+        <option title="Whitney's Sanskrit Roots" value="SKR" label="Sanskrit Roots"></option>
+      </select>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
-      <label class="sr-only" for="tipType">tipType</label>
-      <select id="tipType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.tipitakaOptions()">
-        <option title="Search multiple sets" label="Multiple Sets" selected></option>
-        <option title="Search multiple books in a single set" label="Books in Set"></option>
-        <option title="Search a single book" label="Single Book"></option>
-        <option title="Search part of a single book" label="Partial Book"></option>
-      </select>
-    </div>
-  </div>
+      <div id="dictAdvOpts" class="card">
+        <div class="card-header" style="line-height: 1rem;">
+          <a role="button" data-toggle="collapse" data-parent="#dictAdvOpts" href="#dictAdvOpts-collapse-1">
+            Advanced options
+          </a>
+        </div>
+        <div id="dictAdvOpts-collapse-1" class="collapse">
+          <div class="card-body p-1">
+            <div id="dictAdvOpts1" class="card mb-1">
+              <div class="row">
+                <div class="col-md-2 text-center my-auto">
+                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts1');">√</button>
+                </div>
+                <div class="col-md-10 px-0">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soRX">
+                    <label class="form-check-label" for="soRX" title="Use Regular Expressions for wildcards in search.">
+                      RegEx
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soFZ">
+                    <label class="form-check-label" for="soFZ" title="Enable fuzzy search (removes diacritics).">
+                      Fuzzy
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soFT">
+                    <label class="form-check-label" for="soFT" title="Search dictionary definitions, not only entry names.">
+                      Full Text
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soSW">
+                    <label class="form-check-label" for="soSW" title="Search only from the beginning of the word.">
+                      Start of Word Only
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <!-- <div class="card mb-2" id="tsoContainer">
-    <div class="card-body p-1"> -->
-      <div class="form-row">
-        <div id="tsoSET" class="form-group col mb-1">
-          <label class="sr-only" for="tsoSETm">tsoSETm</label>
-          <select id="tsoSETm" class="form-control" title="Choose which set to search" onchange="DPRNav.setSearchBookList()">
-            <option value="v" label="Vinaya" selected></option>
-            <option value="d" label="Dīgha" ></option>
-            <option value="m" label="Majjhima" ></option>
-            <option value="s" label="Saṃyutta" ></option>
-            <option value="a" label="Aṅguttara" ></option>
-            <option value="k" label="Khuddaka" ></option>
-            <option value="y" label="Abhidhamma" ></option>
-            <option value="x" label="Vism" ></option>
-            <option value="b" label="Abhidh-s" ></option>
-            <option value="g" label="Byākaraṇa" ></option>
-            <option value="n" label="Añña" ></option>
-          </select>
-        </div>
-        <div id="tsoMAT2" class="form-group col mb-1">
-          <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
-          <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search" onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)">
-            <option value="m" label="Mūla" selected></option>
-            <option value="a" label="Aṭṭhakathā"></option>
-            <option value="t" label="Ṭīka"></option>
-          </select>
-        </div>
-      </div>
-    <!-- </div>
-  </div> -->
+            <div id="dictAdvOpts2" class="card mb-1">
+              <div class="row">
+                <div class="col-md-2 text-center my-auto">
+                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts2');">√</button>
+                </div>
+                <div class="col-md-10 px-0">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soMATm">
+                    <label class="form-check-label" for="soMATm" title="Include in search.">
+                      Mula
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soMATa">
+                    <label class="form-check-label" for="soMATa" title="Include in search.">
+                      Aṭṭhakathā
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soMATt">
+                    <label class="form-check-label" for="soMATt" title="Include in search.">
+                      Ṭīka
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="card" id="tsoBOOK">
-    <div class="card-body p-2">
-      <div class="form-row">
-        <div class="form-group col-md-12 m-0">
-          <label class="sr-only" for="tsoBOOKm">tsoBOOKm</label>
-          <select id="tsoBOOKm" class="form-control" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(0)">
-            <option value="tobedeleted" label="To be deleted" selected></option>
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
+            <div id="dictAdvOpts3" class="card mb-1">
+              <div class="row">
+                <div class="col-md-2 text-center my-auto">
+                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts3');">√</button>
+                </div>
+                <div class="col-md-10 px-0">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSv">
+                    <label class="form-check-label" for="soNSv" title="Include in search.">
+                      Vin
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSd">
+                    <label class="form-check-label" for="soNSd" title="Include in search.">
+                      DN
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSa">
+                    <label class="form-check-label" for="soNSa" title="Include in search.">
+                      AN
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSm">
+                    <label class="form-check-label" for="soNSm" title="Include in search.">
+                      MN
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSk">
+                    <label class="form-check-label" for="soNSk" title="Include in search.">
+                      KN
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSs">
+                    <label class="form-check-label" for="soNSs" title="Include in search.">
+                      SN
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="soNSy">
+                    <label class="form-check-label" for="soNSy" title="Include in search.">
+                      Abhi
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-  <div class="card" id="tsoPart">
-    <div class="card-body p-2">
-      <div class="form-row">
-        <div class="form-group col-md-12 m-0">
-          <div id="tsoP1" class="form-check">
-            <input id="tsoH1" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(1)" checked>
-            <select id="tsoPmeta" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(1)">
-              <option value="tobedeleted" label="tsoPmeta" selected></option>
-            </select>
-          </div>
-          <div id="tsoP2" class="form-check">
-            <input id="tsoH2" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(2)">
-            <select id="tsoPvolume" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(2)">
-              <option value="tobedeleted" label="tsoPvolume" selected></option>
-            </select>
-          </div>
-          <div id="tsoP3" class="form-check">
-            <input id="tsoH3" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(3)">
-            <select id="tsoPvagga" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(3)">
-              <option value="tobedeleted" label="tsoPvagga" selected></option>
-            </select>
-          </div>
-          <div id="tsoP4" class="form-check">
-            <input id="tsoH4" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(4)">
-            <select id="tsoPsutta" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(4)">
-              <option value="tobedeleted" label="tsoPsutta" selected></option>
-            </select>
-          </div>
-          <div id="tsoP5" class="form-check">
-            <input id="tsoH5" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(5)">
-            <select id="tsoPsection" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(5)">
-              <option value="tobedeleted" label="tsoPsection" selected></option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card" id="tsoSetContainer">
-    <div class="card-body p-1">
-      <div class="row">
-        <div class="col-md-2 text-center my-auto">
-          <button id="selAllS" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('tsoSetContainer');">√</button>
-        </div>
-        <div class="col-md-10 px-0">
-          <div id="tsoCO1">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOv">
-              <label class="form-check-label" for="tsoCOv">
-                Vinaya
-              </label>
-            </div>
-          </div>
-          <div id="tsoCO2">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOd" checked>
-              <label class="form-check-label" for="tsoCOd">
-                Dīgha
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOm" checked>
-              <label class="form-check-label" for="tsoCOm">
-                Majjhima
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOs" checked>
-              <label class="form-check-label" for="tsoCOs">
-                Saṃyutta
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOa" checked>
-              <label class="form-check-label" for="tsoCOa">
-                Aṅguttara
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOk" checked>
-              <label class="form-check-label" for="tsoCOk">
-                Khuddaka
-              </label>
-            </div>
-          </div>
-          <div id="tsoCO3">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOy">
-              <label class="form-check-label" for="tsoCOy">
-                Abhidhamma
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOx">
-              <label class="form-check-label" for="tsoCOx">
-                Vism
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOb">
-              <label class="form-check-label" for="tsoCOb">
-                Abhidh-s
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOg">
-              <label class="form-check-label" for="tsoCOg">
-                Byākaraṇa
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="tsoCOn">
-              <label class="form-check-label" for="tsoCOn">
-                Añña
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="card" id="tsoBO">
-    <div class="card-body p-1">
-      <div class="row">
-        <div class="col-md-2 text-center my-auto">
-          <button id="selAllB" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('tsoBO');">√</button>
-        </div>
-        <div class="col-md-10 px-0">
-          <div class="row">
-            <div id="tsoBOA" class="col-md-6">
-            </div>
-            <div id="tsoBOB" class="col-md-6">
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card" id="tsoMAT">
-    <div class="card-body p-1">
-      <div class="row">
-        <div class="col-md-2 text-center my-auto">
-          <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('tsoMAT');">√</button>
-        </div>
-        <div class="col-md-10 px-0">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoMATm" checked>
-            <label class="form-check-label" for="tsoMATm">
-              Mūla
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoMATa">
-            <label class="form-check-label" for="tsoMATa">
-              Aṭṭhakathā
-            </label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoMATt">
-            <label class="form-check-label" for="tsoMATt">
-              Ṭīka
-            </label>
           </div>
         </div>
       </div>
