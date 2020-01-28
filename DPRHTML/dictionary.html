@@ -8,6 +8,9 @@
     $("#mafbc").load("dictionary-results.html");
     DPR_PAL.openSideBar();
     $("#intro-space").hide();
+    $(document).ready(function() {
+      DPROpts.dictOptions();
+    });
   </script>
 </head>
 
@@ -30,12 +33,6 @@
     <div class="form-group col-md-12 mb-2">
       <label class="sr-only" for="dictType">dictType</label>
       <select id="dictType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.dictOptions()">
-        <option title="Search multiple sets" label="Multiple Sets" selected></option>
-        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
-        <option title="Search multiple books in a single set" label="Books in Set"></option>
-        <option title="Search a single book" label="Single Book"></option>
-        <option title="Search part of a single book" label="Partial Book"></option>
-
         <option title="Analyze Word" value="DPR" label="DPR" selected></option>
         <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
         <option title="Pali-English Dictionary" value="PED" label="PED"></option>
@@ -65,6 +62,13 @@
         </div>
         <div id="dictAdvOpts-collapse-1" class="collapse">
           <div class="card-body p-1">
+            <div id="soNO" class="card mb-1">
+              <div class="row">
+                <div class="col text-center my-auto">
+                  No advanced options available
+                </div>
+              </div>
+            </div>
             <div id="dictAdvOpts1" class="card mb-1">
               <div class="row">
                 <div class="col-md-2 text-center my-auto">
