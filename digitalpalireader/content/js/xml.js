@@ -979,7 +979,7 @@ function loadXMLindex(place,compare) {
     'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
   }
 
-$('#mafbc').append('<div id="main-content">	'+theDatao+'</div>');
+$('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
 	document.getElementById('maf').scrollTop = 0;
 	// refresh history box
 

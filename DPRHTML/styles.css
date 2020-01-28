@@ -5,11 +5,6 @@ body, p, table, div, a, font, select, input, textarea, span {
 	color: #111;
 }
 
-#main-content{
-	overflow-y: scroll;
-	height:calc(100vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
-}
-
 body {
 	font-family: Verdana;
 }
@@ -240,8 +235,9 @@ left:20px;
 }
 
 
-#main-content {
-	overflow-y: scroll; height:calc(100vh -  4Rem);
+#paliTextContent{
+	overflow-y: scroll;
+	height:calc(100vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
 }
 
 #cpopen {
