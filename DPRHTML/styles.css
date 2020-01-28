@@ -235,8 +235,9 @@ left:20px;
 }
 
 
-#content {
-
+#paliTextContent{
+	overflow-y: scroll;
+	height:calc(100vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
 }
 
 #cpopen {
