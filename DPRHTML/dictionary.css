@@ -23,3 +23,10 @@ body {
 #dictAdvOpts .card-header > a[aria-expanded="true"]:after {
   content: "\f077"; /* fa-chevron-up */
 }
+
+
+
+
+.intro-message {
+  display: none;
+}
