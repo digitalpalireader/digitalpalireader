@@ -5,7 +5,6 @@
   <title>Digital Pali Reader - Search</title>
   <link rel="stylesheet" href="/DPRHTML/dictionary.css">
   <script>
-    $("#mafbc").load("dictionary-results.html");
     DPR_PAL.openSideBar();
     $("#intro-space").hide();
     $(document).ready(function() {
@@ -22,7 +21,7 @@
       <div class="input-group">
         <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode." onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
+          <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
