@@ -41,7 +41,6 @@ body {
 
 #bottom-content {
   position: relative;
-  overflow: auto;
 }
 
 #anf {
@@ -144,10 +143,8 @@ hr {
 }
 
 .intro-message {
-  position: absolute;
-  left: 32%;
-  top: 44%;
-  display:center;
+  position: relative;
+  padding-top: 50px;
   color: lightgrey;
 }
 
