@@ -9,8 +9,8 @@ function searchHistoryXML(){
 function eraseSearchHistory(gofrom)
 {
 	var answer = confirm('Are you sure you want to erase the search history?')
-	if(answer) 
-	{	
+	if(answer)
+	{
         eraseFile('DPR_Search_History');
 		DPRNav.searchHistoryBox();
 	}
@@ -27,7 +27,7 @@ function simSearchHistory(event){
 		return;
 	var item = document.getElementById('searches').selectedItem.getAttribute('value').split('|');
 	var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
-	
+
 	document.getElementById('tipType').selectedIndex = searchType;
 	DPROpts.tipitakaOptions();
 	document.getElementById('isearch').value = '';
@@ -45,9 +45,9 @@ function simSearchHistory(event){
 		DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0);
 	}
 
-	if(searchType == 0 || searchType == 5) { 
+	if(searchType == 0 || searchType == 5) {
 		for (i in G_nikToNumber) {
-			if(searchSet.search(i) > -1) 
+			if(searchSet.search(i) > -1)
 				document.getElementById('tsoCO'+i).checked = true;
 			else
 				document.getElementById('tsoCO'+i).checked = false;
@@ -86,12 +86,12 @@ function simSearchHistory(event){
 function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {
 	var xmlDoc = searchHistoryXML();
 	var newNode = xmlDoc.createElement('search');
-	
+
 	var subNode = xmlDoc.createElement('query');
 	var text = xmlDoc.createTextNode(query);
 	subNode.appendChild(text);
 	newNode.appendChild(subNode);
-	
+
 	subNode = xmlDoc.createElement('searchType');
 	text = xmlDoc.createTextNode(searchType);
 	subNode.appendChild(text);
@@ -121,9 +121,9 @@ function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {
 	text = xmlDoc.createTextNode(part);
 	subNode.appendChild(text);
 	newNode.appendChild(subNode);
-	
+
 	xmlDoc.documentElement.appendChild(newNode);
-	
+
 	var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
 	writeFile('DPR_Search_History', outfile);
@@ -141,22 +141,27 @@ function dictHistoryXML(){
 function eraseDictHistory(gofrom)
 {
 	var answer = confirm('Are you sure you want to erase the lookup history?')
-	if(answer) 
-	{	
+	if(answer)
+	{
         eraseFile('DPR_Dict_History');
 		DPRNav.dictHistoryBox();
 	}
 }
 
 function saveDictHistory(query,type,opts) {
+  if (DPR_PAL.isWeb) {
+    console.log("saveDictHistory not implemented");
+    return;
+  }
+
 	var xmlDoc = dictHistoryXML();
 	var newNode = xmlDoc.createElement('dict');
-	
+
 	var subNode = xmlDoc.createElement('query');
 	var text = xmlDoc.createTextNode(query);
 	subNode.appendChild(text);
 	newNode.appendChild(subNode);
-	
+
 	subNode = xmlDoc.createElement('type');
 	text = xmlDoc.createTextNode(type);
 	subNode.appendChild(text);
@@ -166,9 +171,9 @@ function saveDictHistory(query,type,opts) {
 	text = xmlDoc.createTextNode(opts);
 	subNode.appendChild(text);
 	newNode.appendChild(subNode);
-	
+
 	xmlDoc.documentElement.appendChild(newNode);
-	
+
 	var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
 	writeFile('DPR_Dict_History', outfile);

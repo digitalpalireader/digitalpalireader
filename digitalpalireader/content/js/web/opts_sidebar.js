@@ -89,69 +89,69 @@ var DPROpts = {
     $('#dictAdvOpts1').hide(); // misc
     $('#dictAdvOpts2').hide(); // mat
     $('#dictAdvOpts3').hide(); // sets
-    DPROpts.hideCheckbox('soNO');
-    DPROpts.hideCheckbox('soFT');
-    DPROpts.hideCheckbox('soSW');
-    DPROpts.hideCheckbox('soRX');
-    DPROpts.hideCheckbox('soFZ');
+    $('#soNO').hide();
+    $('#soFT').hide();
+    $('#soSW').hide();
+    $('#soRX').hide();
+    $('#soFZ').hide();
 
     switch (which) {
       case 'PED': // ped
         $('#dictAdvOpts1').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soFT');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soFT').show();
+        $('#soSW').show();
         break;
       case 'DPPN': // dppn
         $('#dictAdvOpts1').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soFT');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soFT').show();
+        $('#soSW').show();
         break;
       case 'CPED': // CPED
         $('#dictAdvOpts1').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soFT');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'CEPD': // CEPD
         $('#dictAdvOpts1').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soFT');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'MULTI': // Multi
         $('#dictAdvOpts1').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soFT');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'ATT': // ATTH
         $('#dictAdvOpts1').show();
         $('#dictAdvOpts3').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'TIK': // TIKA
         $('#dictAdvOpts1').show();
         $('#dictAdvOpts3').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'TIT': // Title
         $('#dictAdvOpts1').show();
         $('#dictAdvOpts2').show();
         $('#dictAdvOpts3').show();
-        DPROpts.showCheckbox('soFZ');
-        DPROpts.showCheckbox('soRX');
-        DPROpts.showCheckbox('soSW');
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       default:
         $('#soNO').show();

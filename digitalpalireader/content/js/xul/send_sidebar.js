@@ -1,3 +1,8 @@
+if (DPR_PAL.isXul) {
+  console.log('Loading DPR_PAL_Send_Sidebar...');
+} else {
+  console.log('Cannot DPR_PAL_Send_Sidebar for the wrong platform', DPR_PAL);
+}
 
 var DPRSend = {
 

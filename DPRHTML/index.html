@@ -44,7 +44,7 @@
 	<script src="/digitalpalireader/content/js/io.js"></script>
   <script src="/digitalpalireader/content/js/send.js"></script>
   <script src="/digitalpalireader/content/js/receive.js"></script>
-  <script src="/digitalpalireader/content/js/send_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
 	<script src="/digitalpalireader/content/js/dhpv.js"></script>
   <script src="/digitalpalireader/content/js/navigation_common.js"></script>
   <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
@@ -68,6 +68,10 @@
   <script src="/digitalpalireader/content/js/web/search.js"></script>
   <script src="/digitalpalireader/content/js/search.js"></script>
   <script src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/dict.js"></script>
+  <script src="/digitalpalireader/content/js/irreg.js"></script>
+  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
+
   <script src="/digitalpalireader/content/js/listsm.js"></script>
   <script src="/digitalpalireader/content/js/listam.js"></script>
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
@@ -100,24 +104,25 @@
 	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/titles.js"></script>
 
 	<script src="/digitalpalireader/content/js/web/sidebar.js"></script>
-	<script>
+	<script src="/digitalpalireader/content/js/search_history.js"></script>
+  <script>
 
-		$(document).ready(function() {
+    $(document).ready(function() {
       $(function() {
-        $("#mainContent").load("navigation.html");
+        $("#mainContent").load("dictionary.html");
         $(".nav-link").on("click",function(e) {
           e.preventDefault();
           let tabId = this.id.substring(0, this.id.length - 3);
           $("#mainContent").load(tabId+".html");
-          $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          $("#intro-space").hide();
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             localStorage.setItem('activeTab', $(e.target).attr('id'));
           });
         });
       });
-
     });
 
-	</script>
+</script>
 </head>
 
 <body>
@@ -144,7 +149,7 @@
         </div>
       </div>
     </div>
-    <div class="intro-space">
+    <div id="intro-space" class="intro-space">
       <div class="intro-message">
         <p class="grey">Digital Pali Reader.</p>
         <p class="grey">To get started, click on the menu button in the top left corner.</p>
@@ -207,13 +212,13 @@
         <div class="modal-body" id="modalBody">
           <ul id="navTabs" class="nav nav-tabs">
             <li class="nav-item">
-              <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
+              <a id="navigationTab" data-toggle="tab" class="nav-link" href="">Navigation</a>
             </li>
             <li class="nav-item">
               <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
             </li>
             <li class="nav-item">
-              <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
+              <a id="dictionaryTab" data-toggle="tab" class="nav-link active" href="">Dictionary</a>
             </li>
           </ul>
           <div id="mainContent">

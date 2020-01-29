@@ -507,7 +507,7 @@
 	<script type="application/x-javascript" src="js/prompt.js"/>
 
 	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
-	<script type="application/x-javascript" src="js/send_sidebar.js"/>
+	<script type="application/x-javascript" src="js/xul/send_sidebar.js"/>
 	<script type="application/x-javascript" src="js/xul/opts_sidebar.js"/>
 
 	<script type="application/x-javascript" src="js/search_history.js"/>
