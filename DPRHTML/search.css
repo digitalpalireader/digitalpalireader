@@ -3,3 +3,7 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+.intro-message {
+  display: none;
+}

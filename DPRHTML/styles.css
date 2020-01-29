@@ -235,10 +235,18 @@ left:20px;
 }
 
 
+#paliTextContent.COLLAPSE{
+	overflow-y: scroll;
+	height:calc(67vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
+}
+
+
 #paliTextContent{
 	overflow-y: scroll;
-	height:calc(100vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
+	height:calc(99vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
 }
+
+
 
 #cpopen {
 position:absolute;
@@ -295,6 +303,12 @@ height:20px;
 .index1{
 	font-weight:bold;
 }
+
+.intromessage {
+		display: none;
+}
+
+
 .placeIndex{
 	font-weight:bold;
 }
@@ -776,7 +790,7 @@ font-family: 'courier new';
 
 /* paragraph types */
 
-.paratype03{
+.paratype03, .paratype01{
   margin: 2%;
 }
 
