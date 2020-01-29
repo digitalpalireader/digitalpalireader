@@ -109,7 +109,7 @@
 
     $(document).ready(function() {
       $(function() {
-        $("#mainContent").load("dictionary.html");
+        $("#mainContent").load("navigation.html");
         $(".nav-link").on("click",function(e) {
           e.preventDefault();
           let tabId = this.id.substring(0, this.id.length - 3);
@@ -212,13 +212,13 @@
         <div class="modal-body" id="modalBody">
           <ul id="navTabs" class="nav nav-tabs">
             <li class="nav-item">
-              <a id="navigationTab" data-toggle="tab" class="nav-link" href="">Navigation</a>
+              <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
             </li>
             <li class="nav-item">
               <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
             </li>
             <li class="nav-item">
-              <a id="dictionaryTab" data-toggle="tab" class="nav-link active" href="">Dictionary</a>
+              <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
             </li>
           </ul>
           <div id="mainContent">
