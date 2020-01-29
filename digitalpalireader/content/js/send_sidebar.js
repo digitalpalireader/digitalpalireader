@@ -592,8 +592,8 @@ var DPRSend = {
 			var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type='+which+'&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx;
 			DPRChrome.openDPRTab(permalink,'DPRs');
 		} else {
-      const url = DPR_PAL.dprHomePage + '?feature=search&type='+which+'&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx;
-      window.history.pushState("object or string", "Title", url);
+      const url = `${DPR_PAL.dprHomePage}?feature=search&type=${which}&query=${getstring}&MAT=${MAT}&set=${sets}&book=${book}&part=${part}&rx=${rx}`;
+      window.history.pushState("string", "DPR search string", url);
     }
 
 

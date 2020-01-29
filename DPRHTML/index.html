@@ -112,37 +112,20 @@
       $('#sidebarButton').on('click', function() {
         loadSidebarDivs();
       });
-      if (document.location.href.indexOf('?loc=') > -1) {
+      var location = document.location.href;
+      if (location.indexOf('?') > -1) {
         loadSidebarDivs();
-      }
-      else if (document.location.href.indexOf('?feature=search') > -1) {
-        loadSidebarDivs();
-        $("#mafbc").load("search-results.html");
-      } else if (document.location.href.indexOf('?feature=dictionary') > -1) {
-        loadSidebarDivs();
-        $("#mafbc").load("dictionary-results.html");
+        if (location.indexOf('?feature=search') > -1) {
+          $("#mafbc").load("search-results.html");
+        } else if (location.indexOf('?feature=dictionary') > -1) {
+          $("#mafbc").load("dictionary-results.html");
+        }
       }
       $(".nav-link").on("click",function(e) {
         e.preventDefault();
         let tabId = this.id.substring(0, this.id.length - 3);
-        switch (tabId) {
-          case 'navigation':
-            $("#navigationDiv").show();
-            $("#searchDiv").hide();
-            $("#dictionaryDiv").hide();
-            break;
-          case 'search':
-            $("#navigationDiv").hide();
-            $("#searchDiv").show();
-            $("#dictionaryDiv").hide();
-            break;
-          case 'search':
-            $("#navigationDiv").hide();
-            $("#searchDiv").hide();
-            $("#dictionaryDiv").show();
-            break;
-        }
-        //$("#mainContent").load(tabId+".html");
+        $(".mainContent").hide();
+        $("#"+tabId+"Div").show();
         $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
           localStorage.setItem('activeTab', $(e.target).attr('id'));
         });

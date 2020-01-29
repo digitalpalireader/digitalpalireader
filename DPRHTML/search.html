@@ -46,7 +46,7 @@
     }
     $(document).ready(function() {
       setSearchParams();
-      $('#button-addon2').on('click', function() {
+      $('#searchButton').on('click', function() {
         DPR_PAL.closeSideBar();
         setSearchParams();
         $("#mafbc").load("search-results.html");
@@ -63,7 +63,7 @@
       <div class="input-group">
         <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2" title="Search for word or phrase in selected volumes" onclick="DPRSend.sendSearch(DPRSend.eventSend(event));">
+          <button class="btn btn-outline-secondary" type="button" id="searchButton" title="Search for word or phrase in selected volumes" onclick="DPRSend.sendSearch(DPRSend.eventSend(event));">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
