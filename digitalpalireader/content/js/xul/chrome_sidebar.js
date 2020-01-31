@@ -1,13 +1,19 @@
+if (DPR_PAL.isXUL) {
+  console.log('Loading DPR_PAL_Chrome_Sidebar...');
+} else {
+  console.log('Cannot DPR_PAL_Chrome_Sidebar for the wrong platform', DPR_PAL);
+}
+
 var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 			   .getInterface(Components.interfaces.nsIWebNavigation)
 			   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
 			   .rootTreeItem
 			   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-			   .getInterface(Components.interfaces.nsIDOMWindow); 
+			   .getInterface(Components.interfaces.nsIDOMWindow);
 
 var DPRChrome = {
-	giveIDtoTabs:function() { // startup function, give ids to 
-		
+	giveIDtoTabs:function() { // startup function, give ids to
+
 		var main = 0; //no main dpr tabs
 		var dict = 0; // no dict tabs
 		var search = 0; // no dict tabs
@@ -25,9 +31,9 @@ var DPRChrome = {
 				else if(/search\.xul/.test(ctloc)) currentTab.setAttribute('id',(search++==0?'DPR-search':'DPRs'));
 				else currentTab.setAttribute('id',(etc++==0?'DPR-x':'DPRx'));
 			}
-		}	
+		}
 		if(main > 0) return true;
-		return false;	
+		return false;
 	},
 	openDPRTab:function(permalink,id,reuse) {
 
@@ -45,7 +51,7 @@ var DPRChrome = {
 
 		var start = 0;  // no DPR tabs yet
 		var newIdx = 0;
-		
+
 		for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 
 			// Get the next tab
@@ -115,7 +121,7 @@ var DPRChrome = {
 
 		if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
 			return sidebar;
-		} 
+		}
 		else return false
 	},
 	openSidebar: function() {

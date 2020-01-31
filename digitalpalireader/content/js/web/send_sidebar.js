@@ -507,8 +507,8 @@ var DPRSend = {
         var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type=' + which + '&query=' + encodeURIComponent(getstring) + '&opts=' + opts.join(',');
         DPRChrome.openDPRTab(permalink, 'DPRd');
       } else {
-        const url = `${DPR_PAL.dprHomePage}?feature=dictionary&type=${which}&query=${encodeURIComponent(getstring)}&opts=${opts.join(',')}`;
-        window.history.pushState("string", "DPR dictionary search string", url);
+        const permalink = `${DPR_PAL.dprHomePage}?feature=dictionary&type=${which}&query=${encodeURIComponent(getstring)}&opts=${opts.join(',')}`;
+        DPRChrome.openDPRTab(permalink, 'DPRd');
       }
     }
   },
@@ -602,8 +602,8 @@ var DPRSend = {
       var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type=' + which + '&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx;
       DPRChrome.openDPRTab(permalink, 'DPRs');
     } else {
-      const url = `${DPR_PAL.dprHomePage}?feature=search&type=${which}&query=${getstring}&MAT=${MAT}&set=${sets}&book=${book}&part=${part}&rx=${rx}`;
-      window.history.pushState("string", "DPR search string", url);
+      const permalink = `${DPR_PAL.dprHomePage}?feature=search&type=${which}&query=${getstring}&MAT=${MAT}&set=${sets}&book=${book}&part=${part}&rx=${rx}`;
+      DPRChrome.openDPRTab(permalink, 'DPRs');
     }
   },
 
