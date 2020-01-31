@@ -2,67 +2,70 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>Digital Pali Reader (alpha)</title>
-	<link rel="icon" href="./favicon.png" />
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>Digital Pali Reader (alpha)</title>
+  <link rel="icon" href="./favicon.png" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/DPRHTML/index.css">
-	<link rel="stylesheet" href="/DPRHTML/styles.css">
+  <link rel="stylesheet" href="/DPRHTML/styles.css">
 
-	<script type="text/javascript">
-		const deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
-		const deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
-		const deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
-		const deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
+  <script type="text/javascript">
+    const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
-		const appInsightsInstrumentationKey = deploymentAppInsightsInstrumentationKey.startsWith('#{')
-			? '00000000-0000-0000-0000-000000000000'
-			: deploymentAppInsightsInstrumentationKey;
+    var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
+    var deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
+    var deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
+    var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
 
-		var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
-			{
-				instrumentationKey: appInsightsInstrumentationKey
-			}
-		); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
-	</script>
+    var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
+    var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
+    var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
+    var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
 
-	<!-- PAL must be the first script. -->
+    var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+      {
+        instrumentationKey: appInsightsInstrumentationKey
+      }
+    ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+  </script>
+
+  <!-- PAL must be the first script. -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="application/x-javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
-	<script>
-		var devCheck = 0;
-		window.dump = window.dump || devCheck ? console.log : () => { };
-		function moveFrame() { }
-	</script>
-	<script src="/digitalpalireader/content/dev.js"></script>
+  <script>
+    var devCheck = 0;
+    window.dump = window.dump || devCheck ? console.log : () => { };
+    function moveFrame() { }
+  </script>
+  <script src="/digitalpalireader/content/dev.js"></script>
 
-	<script src="/digitalpalireader/content/js/web/io.js"></script>
+  <script src="/digitalpalireader/content/js/web/io.js"></script>
   <script src="/digitalpalireader/content/js/send.js"></script>
   <script src="/digitalpalireader/content/js/receive.js"></script>
   <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
-	<script src="/digitalpalireader/content/js/dhpv.js"></script>
+  <script src="/digitalpalireader/content/js/dhpv.js"></script>
   <script src="/digitalpalireader/content/js/navigation_common.js"></script>
   <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
   <script src="/digitalpalireader/content/js/prefload.js"></script>
   <script src="/digitalpalireader/content/js/web/xml_sidebar.js"></script>
-	<script src="/digitalpalireader/content/js/translit.js"></script>
-	<script src="/digitalpalireader/content/js/config.js"></script>
-	<script src="/digitalpalireader/content/js/xml_load.js"></script>
+  <script src="/digitalpalireader/content/js/translit.js"></script>
+  <script src="/digitalpalireader/content/js/config.js"></script>
+  <script src="/digitalpalireader/content/js/xml_load.js"></script>
   <script src="/digitalpalireader/content/js/navigation.js"></script>
   <script src="/digitalpalireader/content/js/format.js"></script>
   <script src="/digitalpalireader/content/js/web/opts_sidebar.js"></script>
-	<script src="/digitalpalireader/content/js/relmul.js"></script>
-	<script src="/digitalpalireader/content/js/relatt.js"></script>
-	<script src="/digitalpalireader/content/js/reltik.js"></script>
-	<script src="/digitalpalireader/content/js/dppn.js"></script>
-	<script src="/digitalpalireader/content/js/translations.js"></script>
-	<script src="/digitalpalireader/content/js/format.js"></script>
-	<script src="/digitalpalireader/content/js/xml.js"></script>
+  <script src="/digitalpalireader/content/js/relmul.js"></script>
+  <script src="/digitalpalireader/content/js/relatt.js"></script>
+  <script src="/digitalpalireader/content/js/reltik.js"></script>
+  <script src="/digitalpalireader/content/js/dppn.js"></script>
+  <script src="/digitalpalireader/content/js/translations.js"></script>
+  <script src="/digitalpalireader/content/js/format.js"></script>
+  <script src="/digitalpalireader/content/js/xml.js"></script>
   <script src="/digitalpalireader/content/js/history.js"></script>
   <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
   <script src="/digitalpalireader/content/js/web/search.js"></script>
@@ -75,40 +78,36 @@
 
   <script src="/digitalpalireader/content/js/listsm.js"></script>
   <script src="/digitalpalireader/content/js/listam.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/convert.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/move.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/dict_xml.js"></script>
+  <script src="/digitalpalireader/content/js/chrome.js"></script>
+  <script src="/digitalpalireader/content/js/convert.js"></script>
+  <script src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/move.js"></script>
+  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_output.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_declension.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_arrays.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_function.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_output.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/grammar.js"></script>
+  <script src="/digitalpalireader/content/js/inflect.js"></script>
+  <script src="/digitalpalireader/content/js/grammar.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/listsm.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/listam.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/dppn.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/nameno.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/attlist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/tiklist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/titles.js"></script>
+  <script src="/digitalpalireader/content/js/listsm.js"></script>
+  <script src="/digitalpalireader/content/js/listam.js"></script>
+  <script src="/digitalpalireader/content/js/ped.js"></script>
+  <script src="/digitalpalireader/content/js/dppn.js"></script>
+  <script src="/digitalpalireader/content/js/nameno.js"></script>
+  <script src="/digitalpalireader/content/js/english.js"></script>
+  <script src="/digitalpalireader/content/js/irreg.js"></script>
+  <script src="/digitalpalireader/content/js/attlist.js"></script>
+  <script src="/digitalpalireader/content/js/tiklist.js"></script>
+  <script src="/digitalpalireader/content/js/titles.js"></script>
 
-	<script src="/digitalpalireader/content/js/web/sidebar.js"></script>
-	<script src="/digitalpalireader/content/js/search_history.js"></script>
+  <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/search_history.js"></script>
   <script>
 
-		$(document).ready(function() {
+    $(document).ready(function() {
 
       $("#navigationDiv").show();
       $("#searchDiv").hide();
@@ -143,7 +142,7 @@
       $("#dictionaryDiv").load("dictionary.html");
     }
 
-	</script>
+  </script>
 </head>
 
 <body>
@@ -172,8 +171,11 @@
     </div>
     <div id="intro-space" class="intro-space">
       <div class="intro-message">
-        <p class="grey">Digital Pali Reader.</p>
-        <p class="grey">To get started, click on the menu button in the top left corner.</p>
+        <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
+        <p class="intro-message-tiny">To start, simply choose a set, book and section in <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton" class="intro-message-green" title="Open side bar..." onclick="$('#sidebarButton').trigger('click');">the sidebar</a>.</p>
+        <p class="intro-message-tiny">For detailed instructions, click <a href="help.html" class="intro-message-green" title="Open help page...">here for the help page</a>.</p>
+        <p class="intro-message-tiny">For information on updates, visit <a href="" class="intro-message-green" title="Open project site...">the project site</a>.</p>
+        <p class="intro-message-tiny">If you have questions or feedback, please contact me at <a href="mailto:yuttadhammo+dpr@gmail.com" class="intro-message-green" title="Send me email...">yuttadhammo+dpr@gmail.com</a>.</p>
       </div>
     </div>
     <div class="row">
