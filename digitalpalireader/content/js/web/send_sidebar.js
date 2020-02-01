@@ -417,6 +417,7 @@ var DPRSend = {
   sendAnalysisToOutput: function (input, frombox, add) {
     if (DPR_PAL.isWeb) {
       outputAnalysis(input,frombox);
+      DPR_PAL.closeSideBar();
       return;
     }
 
