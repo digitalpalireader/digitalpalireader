@@ -23,5 +23,5 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RE
 
 echo ------ Compress stuff
 export RootDir="$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop"
-ls "$RootDir/bin/asge/"
-dotnet "$RootDir/bin/asge/ASGE.dll" -- -e .css .js .htm .html .xml -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+ls -laF "$RootDir/bin/asge/"
+dotnet "$RootDir/bin/asge/ASGE.dll" -- -e .xml -x 846000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
