@@ -33,10 +33,10 @@
             searchSet = parameterSections[1];
             break;
           case 'book':
-            searchBook = parseInt(parameterSections[1], 10);
+            searchBook = parameterSections[1];
             break;
           case 'part':
-            searchPart = parseInt(parameterSections[1], 10);
+            searchPart = parameterSections[1];
             break;
           case 'rx':
             parameterSections[1] == true ? searchRX = true : searchRX = false;
@@ -161,7 +161,7 @@
           </div>
           <div id="tsoP5" class="form-check">
             <input id="tsoH5" class="form-check-input my-3" type="radio" name="tsoPR" title="Search this part" onclick="DPROpts.chooseSearchHier(5)">
-            <select id="tsoPsection" class="form-control mb-1" title="Choose which book to search" onchange="DPRXML.updateSearchHierarchy(5)">
+            <select id="tsoPsection" class="form-control mb-1" title="Choose which book to search">
               <option value="tobedeleted" label="tsoPsection" selected>tsoPsection</option>
             </select>
           </div>

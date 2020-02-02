@@ -560,7 +560,7 @@ var DPRSend = {
         }
         else {
           for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value + document.getElementById('tsoMAT2m').value].length; i++) {
-            if (document.getElementById('tsoBObook' + i).checked) book.push(document.getElementById('tsoBObook' + i).getAttribute('value'));
+            if (document.getElementById('tsoBObook' + i).checked) book.push(document.getElementById('tsoBObook' + i).getAttribute('data-value'));
           }
         }
         book = book.join(',');
@@ -568,7 +568,7 @@ var DPRSend = {
       else book = document.getElementById('tsoBOOKm').value;
 
       if (which == 3) { // get parts
-        var part = document.getElementById('tsoPR').selectedIndex + '.' + document.getElementById('tsoPmeta').selectedIndex + '.' + document.getElementById('tsoPvolume').selectedIndex + '.' + document.getElementById('tsoPvagga').selectedIndex + '.' + document.getElementById('tsoPsutta').selectedIndex + '.' + document.getElementById('tsoPsection').selectedIndex;
+        var part = document.getElementById('tsoPR').value - 1 + '.' + document.getElementById('tsoPmeta').selectedIndex + '.' + document.getElementById('tsoPvolume').selectedIndex + '.' + document.getElementById('tsoPvagga').selectedIndex + '.' + document.getElementById('tsoPsutta').selectedIndex + '.' + document.getElementById('tsoPsection').selectedIndex;
       }
       else part = 1;
 
