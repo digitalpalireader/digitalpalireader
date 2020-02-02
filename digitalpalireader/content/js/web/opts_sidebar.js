@@ -162,6 +162,7 @@ var DPROpts = {
   chooseSearchHier: function (depth) { // deactivate lower hierarchy in partial search
     //$('#tsoPart input[name=tsoPR]:visible:first').attr('checked', true);
     if (!depth) depth = $('input[name=tsoPR]:checked', '#tsoPart').index() + 1;
+    $("#tsoPR").val(depth);
     switch (depth) {
       case 1:
         $('#tsoPvolume').attr('disabled', 'disabled');
