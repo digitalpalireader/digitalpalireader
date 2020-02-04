@@ -186,7 +186,7 @@ function checkLastTab() {
 
 function DPRSidebarWindow() {
 	if (!DPR_PAL.isXUL) {
-		return false;
+		return {DPRNav};
 	}
 
 	var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
