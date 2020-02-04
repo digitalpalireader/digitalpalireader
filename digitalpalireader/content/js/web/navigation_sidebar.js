@@ -308,14 +308,17 @@ var DPRNav = {
   },
 
   gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    document.getElementById('nav-set').value = nikaya;
-    $("#hier-"+hiert).click();
-    document.getElementById('nav-book').selectedIndex = book;
-    document.getElementById('nav-meta').selectedIndex = meta;
-    document.getElementById('nav-volume').selectedIndex = volume;
-    document.getElementById('nav-vagga').selectedIndex = vagga;
-    document.getElementById('nav-sutta').selectedIndex = sutta;
-    document.getElementById('nav-section').selectedIndex = section;
+    $('#nav-set').val(nikaya);
+    $(".hierlabel.active").removeClass("active");
+    $("#hier-"+hiert).parent().addClass("active");
+    $("#hier-"+hiert).prop("checked",true);
+    digitalpalireader.changeHier(hiert);
+    $('#nav-book').prop("selectedIndex",book);
+    $('#nav-meta').prop("selectedIndex", meta);
+    $('#nav-volume').prop("selectedIndex", volume);
+    $('#nav-vagga').prop("selectedIndex", vagga);
+    $('#nav-sutta').prop("selectedIndex", sutta);
+    $('#nav-section').prop("selectedIndex", section);
 
   },
 
