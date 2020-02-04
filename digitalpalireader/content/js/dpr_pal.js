@@ -143,28 +143,12 @@ console.log('Loading DPR_PAL...');
   */
 
   DPR_PAL.copyToClipboard = text => {
-    SourceisModal = document.getElementsByClassName("modal-open").length;
     if (DPR_PAL.isWeb) {
-      var clipboardStaging = document.createElement("input");
-      clipboardStaging.style =
-        "position: absolute; left: -1000px; top: -1000px";
-      clipboardStaging.value = text;
-      if (SourceisModal) {
-        document
-          .getElementsByClassName("modal-body")[0]
-          .appendChild(clipboardStaging);
-      } else {
-        document.body.appendChild(clipboardStaging);
-      }
-      clipboardStaging.select();
+      var targetElement = $(".modal-open").length?$(".modal-body"):$('body');
+      $('<input>').attr('class','clipboardCopy').attr('style','position: absolute; left: -1000px; top: -1000px').val(text).appendTo(targetElement);
+      $('.clipboardCopy').select();
       document.execCommand("copy");
-      if (SourceisModal) {
-        document
-          .getElementsByClassName("modal-body")[0]
-          .removeChild(clipboardStaging);
-      } else {
-        document.body.removeChild(clipboardStaging);
-      }
+      $('.clipboardCopy').remove();
     } else {
       const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
       clipboardHelper.copyString(text);
