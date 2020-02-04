@@ -1,3 +1,8 @@
 #searchb .card {
   background-color: #FFD;
 }
+
+th, td {
+  padding-right: 15px;
+  text-align: left;
+}

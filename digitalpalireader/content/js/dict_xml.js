@@ -19,17 +19,17 @@ function paliXML(filein,which,add)
 	var file = toUni(filein);
 	clearDivs('dif');
 	moveFrame(1);
-	
+
 	if(!which) { // not from select
 		var G_pedhistt = [];
 		G_pedhist = G_pedhist.slice(0,G_phmark+1); // cut old future
 		for (i in G_pedhist) {
 			if (G_pedhist[i] != file) { G_pedhistt.push(G_pedhist[i]); }
 		}
-		G_pedhist = G_pedhistt.concat([file]); // add latest 
+		G_pedhist = G_pedhistt.concat([file]); // add latest
 		G_phmark = G_pedhist.length; // set mark to latest
 	}
-	
+
 	var filea = file.split(',');
 	var ttit = filea[1].replace(/˚/g,'`');
 	file = filea[0];
@@ -42,9 +42,9 @@ function paliXML(filein,which,add)
 			ttit = G_irregVerb[toVel(ttit)];
 		}
 	}
-	
+
 	var tloc = file.split('/');
-	var t1 = tloc[1];	
+	var t1 = tloc[1];
 	var t2 = tloc[2];
 	pedfileget = t1 + '/' + t2;
 	var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1+'/ped.xml';;
@@ -54,11 +54,11 @@ function paliXML(filein,which,add)
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
-	
-	data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>"); 
-	
+
+	data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>");
+
 	if(DPR_prefs['showPedLinks']) {
-	
+
 		// add links
 		var dataa = data.split(' ');
 		var datat = '';
@@ -71,15 +71,15 @@ function paliXML(filein,which,add)
 				else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
 				else datat += ' ' + dataa[i];
 				i++
-				
+
 				// add inner <a b c d> b,c parts
-				
+
 				while(dataa[i] && !/^[^<>]*>/.exec(dataa[i])) {
 					datat += ' ' + dataa[i++];
 				}
-				
+
 				// add d part
-				
+
 				if(dataa[i]) {
 					datat += ' ' + dataa[i].match(/^[^<>]*>/)[0];
 					dataa[i] = dataa[i].replace(/^[^<>]*>/,'');
@@ -93,7 +93,7 @@ function paliXML(filein,which,add)
 				datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
 			}
 			else datat += ' ' + dataa[i];
-			
+
 		}
 		data = datat.substring(1);
 	}
@@ -151,7 +151,7 @@ function paliXML(filein,which,add)
 	else document.getElementById('dictc').scrollTop=0;
 
 	// permalink
-	
+
 	if(/dict\.htm/.exec(document.location.href)) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
@@ -197,7 +197,7 @@ function DPPNXML(filein,which,add)
 
 	moveFrame(1);
 	var file = filein;
-	
+
 	var filea = file.split(',');
 	var tloc = filea[0].split('/');
 	if (Dn[tloc[2]+'^'+filea[1]]) { // fudge
@@ -208,27 +208,27 @@ function DPPNXML(filein,which,add)
 		}
 		tloc = [tt].concat(D[tt][0].split('/'));
 	}
-	
+
 	tloc[0] = toVel(tloc[0]);
-	
+
 	clearDivs('dif');
 	moveFrame(1);
-	
+
 	if(!which) { // not from select
 		var dppnhistt = [];
 		G_dppnhist = G_dppnhist.slice(0,G_dhmark+1); // cut old future
 		for (i in G_dppnhist) {
 			if (G_dppnhist[i] != file) { dppnhistt.push(G_dppnhist[i]); }
 		}
-		G_dppnhist = dppnhistt.concat([file]); // add latest 
+		G_dppnhist = dppnhistt.concat([file]); // add latest
 		G_dhmark = G_dppnhist.length; // set mark to latest
 	}
-	
-	
 
-	
+
+
+
 	// xml
-	
+
 	var dppnf = DPR_PAL.contentFolder + 'etc/XML2/'+tloc[1]+'.xml';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", dppnf, false);
@@ -236,14 +236,14 @@ function DPPNXML(filein,which,add)
 	var xmlDoc = xmlhttp.responseXML.documentElement;
 
 	var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
-	
+
 	// output
 
     displayDictData(data);
-	
+
 	// get number
 	var tname, lname, nname;
-	
+
 	if(G_dppn.length == 0) {
 		for (i in D) {
 			for (j in D[i]) {
@@ -263,9 +263,9 @@ function DPPNXML(filein,which,add)
 	}
 	if (!tname) lname = null;
 	// buttons
-	
+
 	var tout = '';
-	
+
 	if (G_dppnhist.length > 1) { // show select
 		var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
 		for (i = G_dppnhist.length-1; i >= 0; i--) {
@@ -278,10 +278,10 @@ function DPPNXML(filein,which,add)
 		tout += (tout.length > 0 ? ' ' : '') + showing;
 
 	}
-	
+
 	if (lname) tout += '<span class="abut lbut tiny" onclick="DPPNXML('+lname+')" />&lt;</span>';
 	if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
-	
+
 
 	$('#difhist').html('<table><tr><td>' + tout + '</td></tr></table>');
 	if(document.getElementById('bottom')) {
@@ -289,9 +289,9 @@ function DPPNXML(filein,which,add)
 		DPRBottomPaneUpdateStyle();
 	}
 	else document.getElementById('dictc').scrollTop=0;
-	
+
 	// permalink
-	
+
 	if(/dict\.htm/.exec(document.location.href)) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
@@ -304,7 +304,7 @@ function DPPNXML(filein,which,add)
 		catch(ex) {
 		}
 	}
-	
+
 }
 
 var G_skt = [];
@@ -318,11 +318,11 @@ function sktRXML(no,add)
 		//sendDPPNXML(toVel(filein),true);
 		//return;
 	}
-	
+
 	//moveFrame(1);
 
 	clearDivs('dif');
-	
+
 	if(/[^0-9]/.test(no)) {
 		for(var i = 0; i < sktR.length;i++) {
 			if (sktR[i] == no) {
@@ -333,19 +333,39 @@ function sktRXML(no,add)
 		if(/[^0-9]/.test(no))
 			return;
 	}
-	
+
 	// xml
-	
-	var file = 'chrome://sanskrit/content/skt-roots/'+sktR[no]+'.htm';
-	var xmlhttp = new window.XMLHttpRequest();
-	xmlhttp.open("GET", file, false);
-	xmlhttp.send(null);
-	var xmlDoc = xmlhttp.responseXML.documentElement;
-	var s = new XMLSerializer();  
+
+  if(DPR_PAL.isXUL) {
+    var file = 'chrome://sanskrit/content/skt-roots/'+sktR[no]+'.htm';
+  } else {
+    var file = '../../../sanskrit/content/skt-roots/'+sktR[no]+'.htm';
+  }
+  if(DPR_PAL.isXUL) {
+    var xmlhttp = new window.XMLHttpRequest();
+    xmlhttp.open("GET", file, false);
+    xmlhttp.send(null);
+  } else {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+      outputSktRoots(xmlhttp.responseXML);
+    }
+    xmlhttp.onerror = function() {
+      dump("Error while getting XML.");
+    }
+    xmlhttp.open("GET", file);
+    xmlhttp.responseType = "document";
+    xmlhttp.send();
+  }
+}
+
+function outputSktRoots(xmlhttpResponseXML) {
+  var xmlDoc = xmlhttpResponseXML.documentElement;
+	var s = new XMLSerializer();
 	var data = s.serializeToString(xmlDoc);
-	
+
 	data = data.replace(/<p><a href="index.htm">Index<\/a><\/p>/,'').replace(/<a href="([^.]+)[^>]+/g,"<a class=\"green\" href=\"javascript:void(0)\" onclick=\"sktRXML('$1')\"");
-	
+
 	// output
 
     displayDictData(data);
@@ -357,9 +377,9 @@ function sktRXML(no,add)
 		DPRBottomPaneUpdateStyle();
 	}
 	else document.getElementById('dictc').scrollTop=0;
-	
+
 	// permalink
-	
+
 	if(/dict\.htm/.exec(document.location.href)) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
@@ -372,7 +392,6 @@ function sktRXML(no,add)
 		catch(ex) {
 		}
 	}
-	
 }
 
 
@@ -387,25 +406,29 @@ function sktXML(entry,idx,which,add)
 	}
 
 	clearDivs('dif');
-	
+
 	var char = entry.charAt(0);
 
-	var xml = 'chrome://sanskrit/content/xml/'+char+'.xml';
+  if(DPR_PAL.isXUL) {
+    var xml = 'chrome://sanskrit/content/xml/'+char+'.xml';
+  } else {
+    var xml = '../../../sanskrit/content/xml/'+char+'.xml';
+  }
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", xml, false);
 	xmlhttp.send(null);
 	var xmlDoc = xmlhttp.responseXML.documentElement;
-	
+
 	var data = xmlDoc.getElementsByTagName('u')[idx];
 	var ser = new XMLSerializer();
 	data = ser.serializeToString(data);
-	
+
 	data = data.replace(/<(\/*)d/g,"<$1td").replace(/<(\/*)u/g,"<$1table").replace(/<(\/*)r/g,"<$1tr").replace(/<(\/*)f/g,"<$1font").replace(/ c=["']g/g,' style="color:green').replace(/ c=["']b/g,' style="color:blue').replace(/ c=["']r/g,' style="color:red').replace(/ s=["']-1/g,'  style="font-size:75%').replace(/" style="/g,';');
 
     displayDictData(data);
 
 	// permalink
-	
+
 	if(/dict\.htm/.exec(document.location.href)) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
@@ -423,7 +446,7 @@ function sktXML(entry,idx,which,add)
 }
 
 
-function getAtthXML(num,type,niklist) { // get atthakatha or tika word 
+function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 
 
     if(type == 'a') {
@@ -436,20 +459,20 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 		var loca = tiklist[num].split('#');
 		var word = loca.shift();
 	}
-	
+
     var finout = '';
-    
+
     location:
     for (i in loca) {
         var pca = loca[i].split('^');
         var nikaya = pca[0];
-        
-        // specify nikayas 
-        
+
+        // specify nikayas
+
 		if(niklist.indexOf(nikaya) == -1) continue;
 
         var book = parseInt(pca[1])+1;
-        
+
         var bookload = nikaya + book + type;
         var xmlDoc = loadXMLFile(bookload,0);
 
@@ -464,9 +487,9 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var meta = pca[2];
         var volume = pca[3];
         var vagga = pca[4];
-        var sutta = pca[5];	
-        var section = pca[6];	
-        var para = pca[7];	
+        var sutta = pca[5];
+        var section = pca[6];
+        var para = pca[7];
 
         var metalist = '';
         var volumelist = '';
@@ -487,7 +510,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var y = x[sutta].getElementsByTagName("h4");
         if (y.length > 1) placen += '.' + (parseInt(section)+1);
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
-                
+
         placen += ' Para. ' + (parseInt(para)+1);
         finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
@@ -496,26 +519,26 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 
     setCurrentTitle(toUni(word)+' in the '+G_hTitles[G_hNumbers[type]]);
 }
- 
-function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search 
+
+function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 	addJS(['titles']);
 
 
 	var loca = titlelist[num].split('#');
 	var word = loca.shift();
-	
+
     var finout = '';
-    
+
     location:
     for (i in loca) {
         var pca = loca[i].split('^');
 
 		// separate mat
 		if((pca[7] == 'm' && !mul) || (pca[7] == 'a' && !att) || (pca[7] == 't' && !tik)) continue;
-        
-        // specify nikayas 
+
+        // specify nikayas
         var nikaya = pca[0];
-        
+
 		if(niklist.indexOf(nikaya) == -1) continue;
 
 
@@ -537,9 +560,9 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
         var meta = pca[2];
         var volume = pca[3];
         var vagga = pca[4];
-        var sutta = pca[5];	
+        var sutta = pca[5];
         var section = pca[6];
-        var depth = pca[8];	
+        var depth = pca[8];
 
         var metalist = '';
         var volumelist = '';
@@ -594,7 +617,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 		//dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
 		var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
 		var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1)[0] + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
-		
+
         finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
     displayDictData(finout);
@@ -622,7 +645,7 @@ function displayDictData(data) {
 		document.getElementById('difb').appendChild(dataNode);
 		document.getElementById('cdif').scrollTop=0;
 	} else {
-		var dataNode = $('<div></div>').html(data); 
+		var dataNode = $('<div></div>').html(data);
 		$('#difb').html('');
 		$('#difb').append(dataNode);
 		$('#cdif').scrollTop(0);

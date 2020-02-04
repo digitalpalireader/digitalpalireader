@@ -29,9 +29,7 @@ var DPRChrome = {
     return false;
   },
   openDPRTab: function (permalink, id, reuse) {
-      // TODO: We should probably use window.history.pushState, but is behavior is not consistent.
-      //window.history.pushState("string", id, permalink);
-      window.location.href = permalink;
+      window.history.pushState("string", id, permalink);
   },
   openFirstDPRTab: function () {
     if (!this.findDPRTab()) this.openDPRTab('chrome://digitalpalireader/content/index.xul', 'DPR-main');
