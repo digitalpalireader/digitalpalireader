@@ -216,12 +216,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 					relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 				else if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-          if(DPR_PAL.isWeb) {
-						relouta.push(`<span class="abut ${button_order[ht]}but small" onmouseup="matButton = 1; loadXMLSection('','',['${relherea[0]}',${relherea[1]},${relherea[2]},${relherea[3]},${relherea[4]},${relherea[5]},${relherea[6]},'${hi[ht]}']);" title="Relative section in ${G_hTitles[ht]}+'">${hi[ht]}</span>`);
-					}
-					else {
-						relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
-          }
+       		relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
           matButton = 0;
 				}
 				else
@@ -296,10 +291,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   //prev and next - nextprev | thai-myanmar alternation - thaibut
 
-  if(DPR_PAL.isWeb) {
-		var nextprev = (prev ? `<span id="pSect" class="lbut abut small" onmouseup="loadXMLSection('','${(place[8] ? ',1' : '')}',['${prev.join("','")}']);" title="go to previous section">&larr;</span>`:`<span class="lbut abut small" title="no previous section">&nbsp;</span>`)+`<span id="indexButton" class="abut mbut small" onmouseup="loadXMLindex(['${nikaya}',${bookno},'${hier}'],false);" title="open book index">&uarr;</span>` + (next ? `<span id="nSect" class="rbut abut small" onmouseup="loadXMLSection('','${(place[8] ? ',1' : '')}',['${next.join("','")}']);" title="go to next section">&rarr;</span>`:`<span class="rbut abut small" title="no next section">&nbsp;</span>`);
-    thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="loadXMLSection(\'\',\'\',[\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="loadXMLSection(\'\',\'\',[\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1])" title="Switch to Thai Tipitaka">T</span>':''));
-	} else {
 		var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
     if(!chromeFileExists('DPRThai/content/exists')) {
       //thaibut = ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')" title="Install Thai Tipitaka">T</span>';
@@ -307,7 +298,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     else {
       thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event,1))" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event,1))" title="Switch to Thai Tipitaka">T</span>':''));
     }
-  }
 
 	// bookmark button
 
@@ -980,9 +970,9 @@ function loadXMLindex(place,compare) {
 
 	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
-	if (DPR_PAL.isWeb){
-    theDatao = theDatao.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,
-    'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
+
+  if (DPR_PAL.isWeb){
+    theDatao=digitalpalireader.makeWebAppropriate(theDatao);
   }
 
   $('#mafbc').append('<div>'+theDatao+'</div>');
