@@ -67,7 +67,7 @@ function DPR_PAL_Search_AddSectionLink() {
 
 function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
     var val = $('#matches' + nikayaat).text().replace(/: .+/, ': ');
-    $('#matches' + nikayaat).text(val + thiscount);	
+    $('#matches' + nikayaat).text(val + thiscount);
 }
 
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
@@ -89,7 +89,7 @@ function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
 }
 
 function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {
-    $('#search-matches').text(count);	
+    $('#search-matches').text(count);
 }
 
 function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {

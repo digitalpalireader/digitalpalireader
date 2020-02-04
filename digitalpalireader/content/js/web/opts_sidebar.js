@@ -67,90 +67,102 @@ var DPROpts = {
   },
 
   dictAdvToggle: function () {
+    console.error("This should not have been invoked on web.");
     var ao = $('#dictAdvOpts');
-    if (!ao.getAttribute('collapsed')) ao.setAttribute('collapsed', true);
-    else ao.removeAttr('collapsed');
+    if (!ao.getAttribute('collapsed')) ao.hide();
+    else ao.show();
+  },
+
+  showCheckbox: function (id) {
+    $(`#${id}`).show();
+    $(`label[for='${id}']`).show();
+  },
+
+  hideCheckbox: function (id) {
+    $(`#${id}`).hide();
+    $(`label[for='${id}']`).hide();
   },
 
   dictOptions: function () {
-    var which = $('#dictType').value;
+    var which = $('#dictType').prop("value");
 
-    $('#dictAdvOpts1').setAttribute('collapsed', true); // misc
-    $('#dictAdvOpts2').setAttribute('collapsed', true); // mat
-    $('#dictAdvOpts3').setAttribute('collapsed', true); // sets
-    $('#soNO').collapsed = 'true';
-    $('#soFT').collapsed = 'true';
-    $('#soSW').collapsed = 'true';
-    $('#soRX').collapsed = 'true';
-    $('#soFZ').collapsed = 'true';
+    $('#dictAdvOpts1').hide(); // misc
+    $('#dictAdvOpts2').hide(); // mat
+    $('#dictAdvOpts3').hide(); // sets
+    $('#soNO').hide();
+    $('#soFT').hide();
+    $('#soSW').hide();
+    $('#soRX').hide();
+    $('#soFZ').hide();
+
     switch (which) {
-      case 'DPR': //dpr
-        $('#soNO').removeAttr('collapsed');
-        break;
       case 'PED': // ped
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soFT').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soFT').show();
+        $('#soSW').show();
         break;
       case 'DPPN': // dppn
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soFT').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soFT').show();
+        $('#soSW').show();
         break;
       case 'CPED': // CPED
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soFT').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'CEPD': // CEPD
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soFT').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'MULTI': // Multi
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        //$('#soFT').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#soFZ').show();
+        $('#soFT').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'ATT': // ATTH
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#dictAdvOpts3').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#dictAdvOpts3').show();
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'TIK': // TIKA
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#dictAdvOpts3').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#dictAdvOpts3').show();
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
       case 'TIT': // Title
-        $('#dictAdvOpts1').removeAttr('collapsed');
-        $('#dictAdvOpts2').removeAttr('collapsed');
-        $('#dictAdvOpts3').removeAttr('collapsed');
-        $('#soFZ').removeAttr('collapsed');
-        $('#soRX').removeAttr('collapsed');
-        $('#soSW').removeAttr('collapsed');
+        $('#dictAdvOpts1').show();
+        $('#dictAdvOpts2').show();
+        $('#dictAdvOpts3').show();
+        $('#soFZ').show();
+        $('#soRX').show();
+        $('#soSW').show();
         break;
-
+      default:
+        $('#soNO').show();
+        break;
     }
   },
 
   chooseSearchHier: function (depth) { // deactivate lower hierarchy in partial search
     //$('#tsoPart input[name=tsoPR]:visible:first').attr('checked', true);
     if (!depth) depth = $('input[name=tsoPR]:checked', '#tsoPart').index() + 1;
+    $("#tsoPR").val(depth);
     switch (depth) {
       case 1:
         $('#tsoPvolume').attr('disabled', 'disabled');

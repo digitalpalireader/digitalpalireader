@@ -194,6 +194,8 @@ var DPRNav = {
   },
 
   searchHistoryBox: function () {
+    console.log("History not yet implemented.");
+    return;
     var xmlDoc = this.readXML('DPR_Search_History');
 
     var bNodes = xmlDoc.getElementsByTagName('search');

@@ -10,10 +10,7 @@
       giveIDtoTabs();
       getconfig();
       if (document.location.href.indexOf('?feature=search') > -1) {
-        searchTipitaka();
-      } else {
-        // TODO: Nuke this else case once search is implemented.
-        searchTipitaka(0, 'arahant', 'm', 'dmsak', 1, 1, false);
+        searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
       }
     });
     function scrollToId(a, b) {
@@ -30,19 +27,18 @@
     function dalert(a) { }
     function ddump(a) { }
 
-    $(document).ready(function() {
-      DPRNav.setSearchBookList();
-      DPROpts.tipitakaOptions();
-    });
   </script>
 </head>
 
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1">
+    <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" title="Open side bar">
       <i class="fa fa-bars" aria-hidden="true"></i>
     </a>
+    <button class="btn btn-danger btn-sm m-2" id="cancel-search" icon="cancel" onmouseup="stopSearch()">
+      <i class="fa fa-stop-circle-o" aria-hidden="true"></i>
+    </button>
     <span class="navbar-brand mb-0">Search results for </span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
       aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">

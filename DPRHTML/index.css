@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+  background-color: #FFD;
 }
 
 #main-window {
@@ -41,7 +42,6 @@ body {
 
 #bottom-content {
   position: relative;
-  overflow: auto;
 }
 
 #anf {
@@ -71,7 +71,7 @@ body {
 }
 
 #dif {
-  padding: 0 20px;
+  padding: 0px;
 }
 
 #mafbc tr {
@@ -80,6 +80,10 @@ body {
 
 hr {
   width: 100vw;
+}
+
+.mainContent {
+  margin-top: 15px;
 }
 
 .btn {
@@ -144,15 +148,22 @@ hr {
 }
 
 .intro-message {
-  position: absolute;
-  left: 32%;
-  top: 44%;
-  display:center;
-  color: lightgrey;
+  position: relative;
+  padding-top: 50px;
+  color: #111;
 }
 
-.grey {
-  color: lightgrey;
+.intro-message-huge {
+  font-size: xx-large;
+}
+
+.intro-message-tiny {
+  font-size: large;
+}
+
+.intro-message-green {
+  color: green;
+  font-weight: bold;
 }
 
 /* CHEVRON ROTATION CODE*/
