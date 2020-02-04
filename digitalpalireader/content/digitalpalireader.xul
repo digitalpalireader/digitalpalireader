@@ -39,7 +39,7 @@
 								<listitem value="b" label="Abhidh-s"/>
 								<listitem value="g" label="Byākaraṇa"/>
 								<listitem value="n" label="Añña"/>
-							</listbox>			
+							</listbox>
 						</vbox>
 						<vbox align="stretch" pack="stretch" flex="1">
 							<hbox pack="center"><label class="large bold" value="&sBook.label;" /></hbox>
@@ -47,7 +47,7 @@
 								<listitem value="1" label="1" selected="true"/>
 								<listitem value="2" label="2"/>
 								<listitem value="3" label="3"/>
-							</listbox>			
+							</listbox>
 						</vbox>
 					</hbox>
 					<hbox pack="center" align="center">
@@ -165,7 +165,7 @@
 					</vbox>
 				</vbox>
 			</tabpanel>
-			
+
 			<tabpanel class="chromeback" id="searchTab">
 
 				<form orient="vertical" id="sForm" flex="1">
@@ -259,7 +259,7 @@
 									<menulist flex="1" class="sel tiny" id="tsoPsection">
 										<menupopup>
 										</menupopup>
-									</menulist>							
+									</menulist>
 								</hbox>
 							</radiogroup>
 						</groupbox>
@@ -323,7 +323,7 @@
 					</vbox>
 
 					<separator class="groove" />
-					
+
 					<vbox id="sh-box" collapsed="true">
 						<menulist flex="1" class="sel" id="searches" tooltiptext="&search_history;">
 							<menupopup>
@@ -443,7 +443,7 @@
 								</groupbox>
 							</vbox>
 						</vbox>
-					
+
 						<hbox id="dh-box" collapsed="true">
 							<menulist flex="1" class="sel" id="dicts" tooltiptext="&dict_history;">
 								<menupopup>
@@ -452,7 +452,7 @@
 							<toolbarbutton onclick="eraseDictHistory()" id="clear_dict" tooltiptext="&clear_dict;" role="button">
 								<label value="x" />
 							</toolbarbutton>
-						</hbox>	
+						</hbox>
 					</form>
 					<separator class="groove" />
 					<vbox pack="stretch" align="left" id="buttons">
@@ -482,7 +482,7 @@
 				</vbox>
 			</tabpanel>
 		</tabpanels>
-	</tabbox>		
+	</tabbox>
 	<!-- PAL must be the first script after JQuery. -->
 	<script type="application/x-javascript" src="js/jquery.js" />
 	<script type="application/x-javascript" src="js/jquery-ui.js" />
@@ -494,22 +494,22 @@
 	<script type="application/x-javascript" src="js/prefload.js"/>
 
 	<script type="application/x-javascript" src="js/translit.js"/>
-	<script type="application/x-javascript" src="js/xml_sidebar.js"/>
+	<script type="application/x-javascript" src="js/xul/xml_sidebar.js"/>
 	<script type="application/x-javascript" src="js/xml_load.js"/>
 	<script type="application/x-javascript" src="js/listsm.js"/>
 	<script type="application/x-javascript" src="js/listam.js"/>
 	<script type="application/x-javascript" src="js/dhpv.js"/>
 	<script type="application/x-javascript" src="js/navigation_common.js"/>
-	<script type="application/x-javascript" src="js/navigation_sidebar.js"/>
+	<script type="application/x-javascript" src="js/xul/navigation_sidebar.js"/>
 	<script type="application/x-javascript" src="js/format.js"/>
 	<script type="application/x-javascript" src="js/sortaz.js"/>
 
 	<script type="application/x-javascript" src="js/prompt.js"/>
 
-	<script type="application/x-javascript" src="js/chrome_sidebar.js"/>
-	<script type="application/x-javascript" src="js/send_sidebar.js"/>
-	<script type="application/x-javascript" src="js/opts_sidebar.js"/>
-	
+	<script type="application/x-javascript" src="js/xul/chrome_sidebar.js"/>
+	<script type="application/x-javascript" src="js/xul/send_sidebar.js"/>
+	<script type="application/x-javascript" src="js/xul/opts_sidebar.js"/>
+
 	<script type="application/x-javascript" src="js/search_history.js"/>
 	<script type="application/x-javascript" src="js/history.js"/>
 	<script type="application/x-javascript" src="js/bv.js"/>

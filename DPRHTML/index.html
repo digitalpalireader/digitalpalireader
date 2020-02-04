@@ -2,173 +2,148 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
-	<title>Digital Pali Reader (alpha)</title>
-	<link rel="icon" href="./favicon.png" />
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <title>Digital Pali Reader (alpha)</title>
+  <link rel="icon" href="./favicon.png" />
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link rel="stylesheet" href="/DPRHTML/index.css">
-	<link rel="stylesheet" href="/DPRHTML/styles.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/DPRHTML/index.css">
+  <link rel="stylesheet" href="/DPRHTML/styles.css">
 
-	<script type="text/javascript">
-		const deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
-		const deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
-		const deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
-		const deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
+  <script type="text/javascript">
+    const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
-		const appInsightsInstrumentationKey = deploymentAppInsightsInstrumentationKey.startsWith('#{')
-			? '00000000-0000-0000-0000-000000000000'
-			: deploymentAppInsightsInstrumentationKey;
+    var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
+    var deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
+    var deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
+    var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
 
-		var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
-			{
-				instrumentationKey: appInsightsInstrumentationKey
-			}
-		); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
-	</script>
+    var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
+    var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
+    var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
+    var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
 
-	<!-- PAL must be the first script. -->
+    var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+      {
+        instrumentationKey: appInsightsInstrumentationKey
+      }
+    ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+  </script>
+
+  <!-- PAL must be the first script. -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script type="application/x-javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
-	<script>
-		var devCheck = 0;
-		window.dump = window.dump || devCheck ? console.log : () => { };
-		function moveFrame() { }
-	</script>
-	<script src="/digitalpalireader/content/dev.js"></script>
+  <script>
+    var devCheck = 0;
+    window.dump = window.dump || devCheck ? console.log : () => { };
+    function moveFrame() { }
+  </script>
+  <script src="/digitalpalireader/content/dev.js"></script>
 
-	<script src="/digitalpalireader/content/js/io.js"></script>
+  <script src="/digitalpalireader/content/js/web/io.js"></script>
   <script src="/digitalpalireader/content/js/send.js"></script>
-  <script src="/digitalpalireader/content/js/send_sidebar.js"></script>
-	<script src="/digitalpalireader/content/js/navigation_common.js"></script>
-	<script src="/digitalpalireader/content/js/prefload.js"></script>
-	<script src="/digitalpalireader/content/js/translit.js"></script>
-	<script src="/digitalpalireader/content/js/config.js"></script>
-	<script src="/digitalpalireader/content/js/xml_load.js"></script>
-	<script src="/digitalpalireader/content/js/navigation.js"></script>
-	<script src="/digitalpalireader/content/js/relmul.js"></script>
-	<script src="/digitalpalireader/content/js/relatt.js"></script>
-	<script src="/digitalpalireader/content/js/reltik.js"></script>
-	<script src="/digitalpalireader/content/js/dppn.js"></script>
-	<script src="/digitalpalireader/content/js/translations.js"></script>
-	<script src="/digitalpalireader/content/js/format.js"></script>
-	<script src="/digitalpalireader/content/js/xml.js"></script>
-	<script src="/digitalpalireader/content/js/history.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/chrome.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/convert.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/move.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/dict_xml.js"></script>
+  <script src="/digitalpalireader/content/js/receive.js"></script>
+  <script src="/digitalpalireader/content/js/web/chrome_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/dhpv.js"></script>
+  <script src="/digitalpalireader/content/js/navigation_common.js"></script>
+  <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/prefload.js"></script>
+  <script src="/digitalpalireader/content/js/web/xml_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/translit.js"></script>
+  <script src="/digitalpalireader/content/js/config.js"></script>
+  <script src="/digitalpalireader/content/js/xml_load.js"></script>
+  <script src="/digitalpalireader/content/js/navigation.js"></script>
+  <script src="/digitalpalireader/content/js/format.js"></script>
+  <script src="/digitalpalireader/content/js/web/opts_sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/relmul.js"></script>
+  <script src="/digitalpalireader/content/js/relatt.js"></script>
+  <script src="/digitalpalireader/content/js/reltik.js"></script>
+  <script src="/digitalpalireader/content/js/dppn.js"></script>
+  <script src="/digitalpalireader/content/js/translations.js"></script>
+  <script src="/digitalpalireader/content/js/format.js"></script>
+  <script src="/digitalpalireader/content/js/xml.js"></script>
+  <script src="/digitalpalireader/content/js/history.js"></script>
+  <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
+  <script src="/digitalpalireader/content/js/web/search.js"></script>
+  <script src="/digitalpalireader/content/js/search.js"></script>
+  <script src="/digitalpalireader/content/js/search_history.js"></script>
+  <script src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/dict.js"></script>
+  <script src="/digitalpalireader/content/js/irreg.js"></script>
+  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript"
-		src="/digitalpalireader/content/js/analysis_output.js"></script>
+  <script src="/digitalpalireader/content/js/listsm.js"></script>
+  <script src="/digitalpalireader/content/js/listam.js"></script>
+  <script src="/digitalpalireader/content/js/chrome.js"></script>
+  <script src="/digitalpalireader/content/js/convert.js"></script>
+  <script src="/digitalpalireader/content/js/sortaz.js"></script>
+  <script src="/digitalpalireader/content/js/move.js"></script>
+  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/grammar.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_declension.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_arrays.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_function.js"></script>
+  <script src="/digitalpalireader/content/js/analysis_output.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/listsm.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/listam.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/dppn.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/nameno.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/attlist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/tiklist.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="/digitalpalireader/content/js/titles.js"></script>
+  <script src="/digitalpalireader/content/js/inflect.js"></script>
+  <script src="/digitalpalireader/content/js/grammar.js"></script>
 
-	<script src="/digitalpalireader/content/js/web/sidebar.js"></script>
-	<script>
+  <script src="/digitalpalireader/content/js/listsm.js"></script>
+  <script src="/digitalpalireader/content/js/listam.js"></script>
+  <script src="/digitalpalireader/content/js/ped.js"></script>
+  <script src="/digitalpalireader/content/js/dppn.js"></script>
+  <script src="/digitalpalireader/content/js/nameno.js"></script>
+  <script src="/digitalpalireader/content/js/english.js"></script>
+  <script src="/digitalpalireader/content/js/irreg.js"></script>
+  <script src="/digitalpalireader/content/js/attlist.js"></script>
+  <script src="/digitalpalireader/content/js/tiklist.js"></script>
+  <script src="/digitalpalireader/content/js/titles.js"></script>
 
-		$(document).ready(function() {
-			setPrefs();
-			const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-			let bookList = 'd';
-      let place = [];
-      let query = '';
-      let para = '';
-			urlParams.forEach(parameter => {
-				parameterSections = parameter.split('=');
-				switch (parameterSections[0]) {
-					case 'loc':
-						place = parameterSections[1].split('.');
-						if (place.length == 8) {
-							bookList = place[0];
-						}
-            break;
-          case 'para':
-            para = parameterSections[1];
-            break;
-          case 'query':
-            query = parameterSections[1];
-            break;
-				}
-			});
-			// update navigation
+  <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
+  <script src="/digitalpalireader/content/js/search_history.js"></script>
+  <script>
 
-			var navset = $("#nav-set");
-			for (var i in G_nikFullNames) {
-				navset.append($("<option />").val(i).text(G_nikFullNames[i]));
-			}
-			navset.val(bookList);
-			digitalpalireader.setBookList(bookList);
-			digitalpalireader.changeSet();
-			navset.change(function () {
-				digitalpalireader.changeSet();
-			});
-			$("#nav-book").change(function () {
-				digitalpalireader.updateSubnav(0);
-			});
+    $(document).ready(function() {
 
-			setPrefs();
+      $("#navigationDiv").show();
+      $("#searchDiv").hide();
+      $("#dictionaryDiv").hide();
 
-			$(window).resize(function () {
-				setPrefs();
-			});
-
-      $('.bottomFrame .bottomFrameHandle').on('click', function() {
-        DPR_PAL.toggleBottomFrame();
-			});
-
-
-
-      $('.helpbutton').each(function() {
-        $(this).popover({
-          html : true,
-          title : $(this).attr("popover-title"),
-          content: function() {
-            return $('#quicklinks-popover-content').html();
-          }
-        }).tooltip({
-          placement : 'right',
-          title : $(this).attr("tooltip-title")
-        }).on('show.bs.popover', function() {
-          $(this).tooltip('hide')
-        })
-			})
-
-      switch(place.length){
-        case 3:
-          loadXMLindex(place,false);
-          break;
-        case 8:
-          loadXMLSection(query, para, place);
-          break;
-			  default:
-          DPR_PAL.openSideBar();
-          break;
-			}
+      $('#sidebarButton').on('click', function() {
+        loadSidebarDivs();
+      });
+      var location = document.location.href;
+      if (location.indexOf('?') > -1) {
+        loadSidebarDivs();
+        if (location.indexOf('?feature=search') > -1) {
+          $("#mafbc").load("search-results.html");
+        } else if (location.indexOf('?feature=dictionary') > -1) {
+          $("#mafbc").load("dictionary-results.html");
+        }
+      }
+      $(".nav-link").on("click",function(e) {
+        e.preventDefault();
+        let tabId = this.id.substring(0, this.id.length - 3);
+        $(".mainContent").hide();
+        $("#"+tabId+"Div").show();
+        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+          localStorage.setItem('activeTab', $(e.target).attr('id'));
+        });
+      });
     });
-	</script>
+
+    function loadSidebarDivs(){
+      $("#navigationDiv").load("navigation.html");
+      $("#searchDiv").load("search.html");
+      $("#dictionaryDiv").load("dictionary.html");
+    }
+
+  </script>
 </head>
 
 <body>
@@ -183,8 +158,8 @@
                 <div style="text-align: left" id="mafa" class="paperback"></div>
                 <div style="text-align: justify" id="mafb" class="paperback">
                   <div id="mafbc">
-                    <a data-toggle="modal" href="#" data-target="#sidebar" role="button" class="p-1">
-                      <img src="/digitalpalireader/content/images/bi/list.svg" alt="" width="32px" height="32px" title="Open side bar">
+                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton"
+                      class="p-1" title="Open side bar"> <i class="fa fa-bars" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -195,10 +170,21 @@
         </div>
       </div>
     </div>
+    <div id="intro-space" class="intro-space">
+      <div class="intro-message">
+        <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
+        <p class="intro-message-tiny">To start, simply choose a set, book and section in <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton" class="intro-message-green" title="Open side bar..." onclick="$('#sidebarButton').trigger('click');">the sidebar</a>.</p>
+        <p class="intro-message-tiny">For detailed instructions, click <a href="help.html" class="intro-message-green" title="Open help page...">here for the help page</a>.</p>
+        <p class="intro-message-tiny">For information on updates, visit <a href="" class="intro-message-green" title="Open project site...">the project site</a>.</p>
+        <p class="intro-message-tiny">If you have questions or feedback, please contact me at <a href="mailto:yuttadhammo+dpr@gmail.com" class="intro-message-green" title="Send me email...">yuttadhammo+dpr@gmail.com</a>.</p>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <div class="bottomFrame">
-          <div class="bottomFrameHandle">open</div>
+          <div class="bottomFrameHandle">
+            <a href="#"><div class="fa fa-2x fa-angle-double-up grey rotate"></div></a>
+          </div>
           <div class="bottomFrameContent" id="bottom-content">
             <div id="anf" style="text-align: right" class="chromeback">
               <div id="brtop"></div>
@@ -238,107 +224,33 @@
       </div>
     </div>
   </div>
-
   <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-slideout" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h6 class="modal-title" id="sidebarHeader">Navigation</h6>
+          <h6 class="modal-title" id="sidebarHeader">Digital Pali Reader</h6>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">
-
-
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-6" id="nav-set-div">
-                <label class="font-weight-bold" for="nav-set">Set</label>
-                <select class="custom-select" size="5" id="nav-set"></select>
-              </div>
-              <div class="form-group col-md-6" id="nav-book-div">
-                <label class="font-weight-bold" for="nav-book">Book</label>
-                <select class="custom-select" size="5" id="nav-book" class="sbut"></select>
-              </div>
-            </div>
-
-            <div class="form-group" style="text-align: center;">
-              <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
-                <label class="btn btn-outline-primary btn-sm active">
-                  <input type="radio" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
-                </label>
-                <label class="btn btn-outline-primary btn-sm">
-                  <input type="radio" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
-                </label>
-                <label class="btn btn-outline-primary btn-sm">
-                  <input type="radio" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
-                </label>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="font-weight-bold">Quick links</label>
-              <button id="help-quicklinks-button" class="helpbutton" type="button"
-              tooltip-title="What is this?"
-              popover-title="Usage of quick links">?</button>
-              <div id="quicklinks-popover-content" style="display: none">
-                Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
-                1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
-                reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
-                2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
-                comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
-                in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
-                Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
-                (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
-                Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
-              </div>
-              <div class="subnav-cont input-group">
-                <input id="nav-quicklinks" class="form-control" placeholder="e.g.: mn 10.2" onchange="digitalpalireader.updateSubnav(3)"></input>
-                <br class="clear" />
-                <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="font-weight-bold">Book Hierarchy</label>
-              <div id="nav-title-div">
-                <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 100%; margin-bottom: 0px;" />
-              </div>
-              <div class="subnav-cont input-group">
-                <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
-                </select>
-                <br class="clear" />
-                <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
-              </div>
-              <div class="subnav-cont input-group">
-                <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
-                <br class="clear" />
-                <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
-              </div>
-              <div class="subnav-cont input-group">
-                <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
-                <br class="clear" />
-                <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
-              </div>
-              <div class="subnav-cont input-group">
-                <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
-                <br class="clear" />
-                <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
-              </div>
-              <div class="subnav-cont input-group">
-                <select id="nav-section" class="custom-select navselect"></select>
-                <br class="clear" />
-                <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&rArr;" />
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="font-weight-bold">Context Menu</label>
-              <div id="nav-context-div">
-
-              </div>
-            </div>
-          </form>
+        <div class="modal-body" id="modalBody">
+          <ul id="navTabs" class="nav nav-tabs">
+            <li class="nav-item">
+              <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
+            </li>
+            <li class="nav-item">
+              <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
+            </li>
+            <li class="nav-item">
+              <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
+            </li>
+          </ul>
+          <div id="navigationDiv" class="mainContent">
+          </div>
+          <div id="searchDiv" class="mainContent">
+          </div>
+          <div id="dictionaryDiv" class="mainContent">
+          </div>
         </div>
       </div>
     </div>

@@ -58,6 +58,7 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 
 	var outDiv =  document.createElement('div');
 	outDiv.innerHTML = finout;
+	outDiv.id="paliTextContent";
 	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
 
@@ -460,20 +461,17 @@ pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="'+DPR_PAL.contentFolde
 function permalinkClick(link,url) {
   try {
     copyToClipboard(link);
-    if(url) {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
-		}
+    if(url && DPR_PAL.mainWindow) {
+      mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
+    }
     alertFlash("Permalink copied to clipboard.",'green');
-	}
+  }
   catch(ex) {
     alertFlash("Unable to copy permalink.",'red');
   }
 }
 
-function copyToClipboard(text) {
-	const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
-	clipboardHelper.copyString(text);
-}
+copyToClipboard = DPR_PAL.copyToClipboard;
 
 var G_alertFlashStart = 0;
 

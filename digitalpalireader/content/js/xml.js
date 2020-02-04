@@ -83,7 +83,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // permalink
 
-	var permalink = 'dpr:index?loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+	var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
+	var permalink = `${bareurl}loc=${nikaya}.${bookno}.${meta}.${volume}.${vagga}.${sutta}.${section}.${hier}`;
 
 	// get string from query
 
@@ -101,9 +102,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 
 	var oldurl = DPR_PAL.contentDocument.location.href;
-
-	var bareurl = 'dpr:index?';
-
 
 	var newparams = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
@@ -502,9 +500,7 @@ function loadXMLindex(place,compare) {
 	else
 		var xset = isPlace?(place[8]?place[8]:0):0;
 
-	$('mafbc').html('');
-	$('mafbc').append(pleasewait);
-
+  DPR_PAL.showLoadingMarquee();
 
 	var nikaya = place[0];
 	var bookno = parseInt(place[1]);
@@ -565,6 +561,28 @@ function loadXMLindex(place,compare) {
 				}
 			}
 		}
+
+    // permalink
+
+    var permalink = `${DPR_PAL.dprHomePage}?`;
+
+    var oldurl = DPR_PAL.contentDocument.location.href;
+
+    var bareurl = 'dpr:index?';
+
+    var newparams = 'loc='+place.slice(0,8).join('.');
+
+    bareurl += newparams;
+
+    var oldparams = oldurl.split('?')[1];
+    if(oldparams) {
+      oldparams = oldparams.split('|');
+      oldparams[compare-1] = newparams;
+      newparams = oldparams.join('|');
+    }
+    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+
+    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
 
 		whichcol[0] = 1; // bump up to let the second color know
 
@@ -954,42 +972,23 @@ function loadXMLindex(place,compare) {
 	if(isDev)
 		return [tabT,saveout];
 
-	$('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
+  $('#mafbc').html(`<table width=100%><tr><td align=left>${DPRSidebarHamburgerMenu()}</td><td align=left>`+tabT+'</td></tr></table><hr></hr>');
+  $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
 	$('#mafbc').append('<div id="savei">'+saveout+'</div>');
-	$('#mafbc').append('<div id="convi">'+convout+'</div>');
+  $('#mafbc').append('<div id="convi">'+convout+'</div>');
 
 	// title, tab, link
 
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 
-	// permalink
 
-	var permalink = `${DPR_PAL.dprHomePage}?`;
 
-	var oldurl = DPR_PAL.contentDocument.location.href;
-
-	var bareurl = 'dpr:index?';
-
-	var newparams = 'loc='+place.slice(0,8).join('.');
-
-	bareurl += newparams;
-
-	var oldparams = oldurl.split('?')[1];
-	if(oldparams) {
-		oldparams = oldparams.split('|');
-		oldparams[compare-1] = newparams;
-		newparams = oldparams.join('|');
-	}
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-
-  if (DPR_PAL.isWeb){
+	if (DPR_PAL.isWeb){
     theDatao = theDatao.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,
     'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
   }
 
-	$('#mafbc').append('<div>'+theDatao+'</div>');
+$('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
 	document.getElementById('maf').scrollTop = 0;
 	// refresh history box
 

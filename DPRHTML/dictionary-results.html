@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Digital Pali Reader - Dictionary Search Result</title>
+    <link rel="stylesheet" href="/DPRHTML/dictionary-results.css" />
+    <script>
+      $("body").ready(function() {
+        giveIDtoTabs();
+        getconfig();
+        if (document.location.href.indexOf("?feature=dictionary") > -1) {
+          startDictLookup();
+        }
+      });
+
+      /* TODO: Enable if necessary
+      $("body").unload(function() {
+        checkLastTab();
+      });
+      */
+
+      function moveFrame() {}
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" title="Open side bar">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+      </a>
+    </nav>
+
+    <div style="display:none">
+      <div id="dif"><div id="cdif"></div></div>
+    </div>
+    <div id="dictc">
+      <div id="dicthead"></div>
+      <div id="odif">
+        <div id="difb"></div>
+      </div>
+      <div id="dict"></div>
+      <div id="difhist" class="hoverShow"></div>
+    </div>
+  </body>
+</html>

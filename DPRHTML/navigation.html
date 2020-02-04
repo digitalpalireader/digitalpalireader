@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+  <title>Digital Pali Reader -Navigation</title>
+  <link rel="stylesheet" href="/DPRHTML/navigation.css">
+  <script>
+
+    $(document).ready(function() {
+      setPrefs();
+      const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+      let bookList = 'd';
+      let place = [];
+      let query = '';
+      let para = '';
+      urlParams.forEach(parameter => {
+        parameterSections = parameter.split('=');
+        switch (parameterSections[0]) {
+          case 'loc':
+            place = parameterSections[1].split('.');
+            if (place.length == 8) {
+              bookList = place[0];
+            }
+            break;
+          case 'para':
+            para = parameterSections[1];
+            break;
+          case 'query':
+            query = parameterSections[1];
+            break;
+        }
+      });
+      // update navigation
+
+      var navset = $("#nav-set");
+      for (var i in G_nikFullNames) {
+        navset.append($("<option />").val(i).text(G_nikFullNames[i]));
+      }
+      navset.val(bookList);
+      digitalpalireader.setBookList(bookList);
+      digitalpalireader.changeSet();
+      navset.change(function () {
+        digitalpalireader.changeSet();
+      });
+      $("#nav-book").change(function () {
+        digitalpalireader.updateSubnav(0);
+      });
+
+      setPrefs();
+
+      $(window).resize(function () {
+        setPrefs();
+      });
+
+      $('.bottomFrame .bottomFrameHandle').on('click', function() {
+        DPR_PAL.toggleBottomFrame();
+      });
+
+      $('#nav-title').prop('title', 'View index for this book');
+
+      $('.helpbutton').each(function() {
+        $(this).popover({
+          html : true,
+          title : $(this).attr("popover-title"),
+          content: function() {
+            return $('#quicklinks-popover-content').html();
+          }
+        }).tooltip({
+          placement : 'right',
+          title : $(this).attr("tooltip-title")
+        }).on('show.bs.popover', function() {
+          $(this).tooltip('hide')
+        })
+      })
+
+      switch(place.length){
+        case 3:
+          loadXMLindex(place,false);
+          break;
+        case 8:
+          loadXMLSection(query, para, place);
+          break;
+        default:
+          break;
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <div class="form-row">
+    <div class="form-group col-md-6" id="nav-set-div">
+      <label class="font-weight-bold" for="nav-set">Set</label>
+      <select class="custom-select" size="5" id="nav-set"></select>
+    </div>
+    <div class="form-group col-md-6" id="nav-book-div">
+      <label class="font-weight-bold" for="nav-book">Book</label>
+      <select class="custom-select" size="5" id="nav-book" class="sbut"></select>
+    </div>
+  </div>
+
+  <div class="form-group" style="text-align: center;">
+    <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
+      <label class="btn btn-outline-primary btn-sm active">
+        <input type="radio" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
+      </label>
+      <label class="btn btn-outline-primary btn-sm">
+        <input type="radio" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
+      </label>
+      <label class="btn btn-outline-primary btn-sm">
+        <input type="radio" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="font-weight-bold">Quick Link</label>
+    <button id="help-quicklinks-button" class="helpbutton" type="button"
+      tooltip-title="What is this?"
+      popover-title="Usage of quick links">?
+    </button>
+    <div id="quicklinks-popover-content" style="display: none">
+      Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
+      1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
+      reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
+      2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
+      comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
+      in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
+      Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
+      (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
+      Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
+    </div>
+    <div class="subnav-cont input-group">
+      <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
+        onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
+      <br class="clear" />
+      <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="font-weight-bold">Book Hierarchy</label>
+    <div id="nav-title-div" class="subnav-cont input-group">
+      <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
+        onclick="digitalpalireader.loadIndex(1)" />
+      <br class="clear" />
+      <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
+    </div>
+    <div class="subnav-cont input-group">
+      <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
+      </select>
+      <br class="clear" />
+      <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+    </div>
+    <div class="subnav-cont input-group">
+      <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
+      <br class="clear" />
+      <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+    </div>
+    <div class="subnav-cont input-group">
+      <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
+      <br class="clear" />
+      <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+    </div>
+    <div class="subnav-cont input-group">
+      <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
+      <br class="clear" />
+      <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+    </div>
+    <div class="subnav-cont input-group">
+      <select id="nav-section" class="custom-select navselect"></select>
+      <br class="clear" />
+      <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+    </div>
+  </div>
+
+</body>
+
+</html>

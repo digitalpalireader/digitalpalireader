@@ -51,7 +51,9 @@ var digitalpalireader = {
 
 	updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
-		var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),$('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),$('#nav-section-button').is(":visible")];
+    var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
+      $('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),
+      $('#nav-section-button').is(":visible")];
 
 		document.activeElement.blur();
 
@@ -186,26 +188,35 @@ var digitalpalireader = {
 		}
 
     $('.navbutton').hide();
-    $('#nav-quicklinks-button').show();
+    $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
+    $('#nav-title-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections');
 
     if (navShown[4]) {
-      $('#nav-section-button').show();
+      $('#nav-section-button').show().prop('value', '\u21D2').prop('title', 'View this section');
     }
 
     if (navShown[3]) {
-      $('#nav-sutta-button').show();
+      navShown[4] ?
+        $('#nav-sutta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
+        $('#nav-sutta-button').show().prop('value', '\u21D2').prop('title', 'View this section');
     }
 
     if (navShown[2]) {
-      $('#nav-vagga-button').show();
+      navShown[3] || navShown[4] ?
+        $('#nav-vagga-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
+        $('#nav-vagga-button').show().prop('value', '\u21D2').prop('title', 'View this section');
     }
 
     if (navShown[1]) {
-      $('#nav-volume-button').show();
+      navShown[2] || navShown[3] || navShown[4] ?
+        $('#nav-volume-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
+        $('#nav-volume-button').show().prop('value', '\u21D2').prop('title', 'View this section');
     }
 
     if (navShown[0]) {
-      $('#nav-meta-button').show();
+      navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
+        $('#nav-meta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
+        $('#nav-meta-button').show().prop('value', '\u21D2').prop('title', 'View this section');
     }
 	},
 
@@ -283,7 +294,20 @@ var digitalpalireader = {
 	limitt:function(nikn) {
 		if (nikn == 5 || nikn > 6) { return true; }
 		else { return false };
-	},
+  },
+
+  loadIndex:function(context){
+    switch(context) {
+      case 1:
+        importXMLindex("");
+        break;
+      case 2:
+        DPRSend.importXML(false,null,null,null,'internal',null,1);
+        break;
+    }
+
+    DPR_PAL.closeSideBar();
+  },
 
   loadSection:function(context){
     var aplace;
@@ -297,6 +321,8 @@ var digitalpalireader = {
           }
           catch(err) {
             alert("Invalid quick link.");
+            aplace = this.getSubNavArray();
+            loadXMLSection("","",aplace);
           }
         break;
       case 2: // book hierarchy

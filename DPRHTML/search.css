@@ -1,3 +1,10 @@
-#searchb .card {
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
   background-color: #FFD;
+}
+
+.intro-message {
+  display: none;
 }
