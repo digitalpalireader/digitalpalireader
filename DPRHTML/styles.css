@@ -237,13 +237,15 @@ left:20px;
 
 #paliTextContent.COLLAPSE{
 	overflow-y: scroll;
-	height:calc(67vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
+	height:calc(99vh - 4Rem - 250px); /*screenheight - approx height of topbar , bottombar (decided by font 1.5Rem each and bottomFrameContent (255px)*/
+  transition: height 0.3s;
 }
 
 
 #paliTextContent{
 	overflow-y: scroll;
-	height:calc(99vh -  4Rem); /*screenwidth - approx height of topbar and bottombar (decided by font 1.5Rem each*/
+	height:calc(99vh -  4Rem); /*screenheight - approx height of topbar and bottombar (decided by font 1.5Rem each*/
+  transition: height 0.3s;
 }
 
 
