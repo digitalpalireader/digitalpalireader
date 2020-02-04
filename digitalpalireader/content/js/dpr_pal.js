@@ -115,8 +115,8 @@ console.log('Loading DPR_PAL...');
     if (DPR_PAL.isWeb) {
       $(bottomFrameSelector).show();
       if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").toggleClass("down");
-        $("#paliTextContent").toggleClass("COLLAPSE");
+        $(".rotate").addClass("down");
+        $("#paliTextContent").addClass("COLLAPSE");
       }
     } else {
       console.error("Not implemented for XUL");
