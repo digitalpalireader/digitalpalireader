@@ -17,7 +17,7 @@
         parameterSections = parameter.split('=');
         switch (parameterSections[0]) {
           case 'loc':
-            place = parameterSections[1].split('.');
+            place = makeLocPlace(parameterSections[1]);
             if (place.length == 8) {
               bookList = place[0];
             }
