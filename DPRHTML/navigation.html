@@ -84,6 +84,16 @@
           break;
       }
     });
+    onpopstate = (event) => {
+        var location = document.location.href;
+        if (location.indexOf('?feature=search') > -1) {
+          $("#mafbc").load("search-results.html");
+        } else if (location.indexOf('?feature=dictionary') > -1) {
+          $("#mafbc").load("dictionary-results.html");
+        } else {
+          window.location.href = location;
+        }
+      }
   </script>
 </head>
 
