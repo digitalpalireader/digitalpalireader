@@ -17,7 +17,7 @@
         parameterSections = parameter.split('=');
         switch (parameterSections[0]) {
           case 'loc':
-            place = parameterSections[1].split('.');
+            place = makeLocPlace(parameterSections[1]);
             if (place.length == 8) {
               bookList = place[0];
             }
@@ -60,17 +60,14 @@
 
       $('.helpbutton').each(function() {
         $(this).popover({
+          trigger:'focus',
           html : true,
           title : $(this).attr("popover-title"),
           content: function() {
             return $('#quicklinks-popover-content').html();
           }
-        }).tooltip({
-          placement : 'right',
-          title : $(this).attr("tooltip-title")
-        }).on('show.bs.popover', function() {
-          $(this).tooltip('hide')
         })
+        $(this).attr("title","What is this?");
       })
 
       switch(place.length){
@@ -126,7 +123,6 @@
   <div class="form-group">
     <label class="font-weight-bold">Quick Link</label>
     <button id="help-quicklinks-button" class="helpbutton" type="button"
-      tooltip-title="What is this?"
       popover-title="Usage of quick links">?
     </button>
     <div id="quicklinks-popover-content" style="display: none">
