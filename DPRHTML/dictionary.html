@@ -8,6 +8,10 @@
     $("#intro-space").hide();
     $(document).ready(function() {
       DPROpts.dictOptions();
+      $('#dictButton').on('click', function() {
+        DPR_PAL.closeSideBar();
+        $("#mafbc").load("dictionary-results.html");
+      });
     });
   </script>
 </head>
@@ -136,43 +140,43 @@
                 </div>
                 <div class="col-md-10 px-0">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSv">
+                    <input class="form-check-input" type="checkbox" id="soNSv" checked>
                     <label class="form-check-label" for="soNSv" title="Include in search.">
                       Vin
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSd">
+                    <input class="form-check-input" type="checkbox" id="soNSd" checked>
                     <label class="form-check-label" for="soNSd" title="Include in search.">
                       DN
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSa">
+                    <input class="form-check-input" type="checkbox" id="soNSa" checked>
                     <label class="form-check-label" for="soNSa" title="Include in search.">
                       AN
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSm">
+                    <input class="form-check-input" type="checkbox" id="soNSm" checked>
                     <label class="form-check-label" for="soNSm" title="Include in search.">
                       MN
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSk">
+                    <input class="form-check-input" type="checkbox" id="soNSk" checked>
                     <label class="form-check-label" for="soNSk" title="Include in search.">
                       KN
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSs">
+                    <input class="form-check-input" type="checkbox" id="soNSs" checked>
                     <label class="form-check-label" for="soNSs" title="Include in search.">
                       SN
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSy">
+                    <input class="form-check-input" type="checkbox" id="soNSy" checked>
                     <label class="form-check-label" for="soNSy" title="Include in search.">
                       Abhi
                     </label>
