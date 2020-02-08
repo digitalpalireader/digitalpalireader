@@ -308,7 +308,7 @@ var digitalpalireader = {
     DPR_PAL.closeSideBar();
   },
 
-  loadSection:function(context,cat){
+  loadSection:function(context,category=6){
     var aplace;
     switch(context) {
       case 1: // quick links
@@ -325,13 +325,7 @@ var digitalpalireader = {
           }
         break;
       case 2: // book hierarchy
-        aplace = this.getSubNavArray();
-        if(cat){
-          while(cat<6){
-            cat=cat+1;
-            aplace[cat]="x";
-          }
-        }
+        aplace = (this.getSubNavArray().map((x,y)=>{return (y<(category+1) || y>6 )?x:"x"}));
         console.log(aplace);
         loadXMLSection("","",aplace);
         break;
