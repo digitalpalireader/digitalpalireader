@@ -310,26 +310,17 @@ var DPRNav = {
   },
 
   gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    document.getElementById('set').value = nikaya;
-    for (i in G_hshort) {
-      if (i == hiert)
-        document.getElementById(G_hshort[i]).setAttribute('checked', true);
-      else
-        document.getElementById(G_hshort[i]).checked = false;
-    }
-    this.changeSet(1, book);
-    this.switchhier(hiert);
-    document.getElementById('book').selectedIndex = book;
-    DPRXML.updateHierarchy(0);
-    document.getElementById('meta').selectedIndex = meta;
-    DPRXML.updateHierarchy(1);
-    document.getElementById('volume').selectedIndex = volume;
-    DPRXML.updateHierarchy(2);
-    document.getElementById('vagga').selectedIndex = vagga;
-    DPRXML.updateHierarchy(3);
-    document.getElementById('sutta').selectedIndex = sutta;
-    DPRXML.updateHierarchy(4);
-    document.getElementById('section').selectedIndex = section;
+    $('#nav-set').val(nikaya);
+    $(".hierlabel.active").removeClass("active");
+    $("#hier-"+hiert).parent().addClass("active");
+    $("#hier-"+hiert).prop("checked",true);
+    digitalpalireader.changeHier(hiert);
+    $('#nav-book').prop("selectedIndex",book);
+    $('#nav-meta').prop("selectedIndex", meta);
+    $('#nav-volume').prop("selectedIndex", volume);
+    $('#nav-vagga').prop("selectedIndex", vagga);
+    $('#nav-sutta').prop("selectedIndex", sutta);
+    $('#nav-section').prop("selectedIndex", section);
 
   },
 

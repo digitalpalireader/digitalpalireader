@@ -301,11 +301,7 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendPlace(place) {
-	var sidebar = DPRSidebarWindow();
-	if (sidebar) {
-		sidebar.DPRNav.gotoPlace(place);
-	}
-
+  DPRSidebarWindow().DPRNav.gotoPlace(place);
 }
 
 function sendUpdateBookmarks() {

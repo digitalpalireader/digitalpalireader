@@ -135,15 +135,22 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  /*
+  if 'copy permalink to clipboard' button on the modal is pressed , the focus is on the modal .
+  thus execCommand("copy") does not copy from the element appended to the body .
+
+  one workaround is to append an element to the modal itself when the modal is open.
+
+  refer : https://stackoverflow.com/questions/48866903/copy-to-clipboard-action-doesnt-work-when-modal-is-open
+  */
+
   DPR_PAL.copyToClipboard = text => {
     if (DPR_PAL.isWeb) {
-      var clipboardStaging = document.createElement("input");
-      clipboardStaging.style = "position: absolute; left: -1000px; top: -1000px";
-      clipboardStaging.value = text;
-      document.body.appendChild(clipboardStaging);
-      clipboardStaging.select();
+      var targetElement = $(".modal-open").length?$(".modal-body"):$('body');
+      $('<input>').attr('class','clipboardCopy').attr('style','position: absolute; left: -1000px; top: -1000px').val(text).appendTo(targetElement);
+      $('.clipboardCopy').select();
       document.execCommand("copy");
-      document.body.removeChild(clipboardStaging);
+      $('.clipboardCopy').remove();
     } else {
       const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
       clipboardHelper.copyString(text);

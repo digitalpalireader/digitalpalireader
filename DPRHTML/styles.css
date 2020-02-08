@@ -803,3 +803,13 @@ font-family: 'courier new';
 	margin: 0 0 0 24px;
 }
 
+/*
+temp
+
+Remove once search , bookmark button , close-panel is implemented .
+*/
+
+#search-book,#close,#bkButton{
+  pointer-events: none;
+  opacity:0.5 ;
+}
