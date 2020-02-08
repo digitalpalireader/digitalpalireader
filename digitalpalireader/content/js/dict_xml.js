@@ -137,7 +137,7 @@ function paliXML (filein, which, add) {
     '<p>' +
     data.replace(/\[([^\]]*)\]/g, '[<em style="color:grey">$1</em>]') +
     '<hr/>'
-  displayDictData(outdata)
+  displayDictData(outdata, 1)
   var tout = ''
   if (G_pedhist.length > 1) {
     // show select
@@ -286,7 +286,7 @@ function DPPNXML (filein, which, add) {
 
   // output
 
-  displayDictData(data)
+  displayDictData(data, 0)
 
   // get number
   var tname, lname, nname
@@ -441,7 +441,7 @@ function outputSktRoots (xmlhttpResponseXML) {
 
   // output
 
-  displayDictData(data)
+  displayDictData(data, 0)
 
   // scroll
 
@@ -501,7 +501,7 @@ function sktXML (entry, idx, which, add) {
     .replace(/ s=["']-1/g, '  style="font-size:75%')
     .replace(/" style="/g, ';')
 
-  displayDictData(data)
+  displayDictData(data, 0)
 
   // permalink
 
@@ -606,7 +606,7 @@ function getAtthXML (num, type, niklist) {
       '</p>'
   }
 
-  displayDictData(finout)
+  displayDictData(finout, 0)
 
   setCurrentTitle(toUni(word) + ' in the ' + G_hTitles[G_hNumbers[type]])
 }
@@ -745,7 +745,7 @@ function getTitleXML (num, mul, att, tik, niklist) {
       hiert +
       '\'],null,null,eventSend(event));">go</span></p>'
   }
-  displayDictData(finout)
+  displayDictData(finout, 0)
 }
 
 function getDppnData (link) {
@@ -767,7 +767,7 @@ function getDppnData (link) {
   return data
 }
 
-function displayDictData (data) {
+function displayDictData (data, context) {
   if (DPR_PAL.isXUL) {
     var dataNode = document.createElement('div')
     dataNode.innerHTML = data
@@ -776,8 +776,16 @@ function displayDictData (data) {
     document.getElementById('cdif').scrollTop = 0
   } else {
     var dataNode = $('<div></div>').html(data)
-    $('#difb').html('')
-    $('#difb').append(dataNode)
+    switch(context) {
+      case 0:
+        $('#difb').html('')
+        $('#difb').append(dataNode)
+      break;
+      case 1:
+        $('#difb2').html('')
+        $('#difb2').append(dataNode)
+      break;
+    }
     $('#cdif').scrollTop(0)
   }
 }
