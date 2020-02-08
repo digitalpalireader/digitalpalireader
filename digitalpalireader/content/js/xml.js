@@ -216,12 +216,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 					relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 				else if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-					if(DPR_PAL.isWeb) {
-						relouta.push(`<span class="abut ${button_order[ht]}but small" onmouseup="matButton = 1; loadXMLSection('','',['${relherea[0]}',${relherea[1]},${relherea[2]},${relherea[3]},${relherea[4]},${relherea[5]},${relherea[6]},'${hi[ht]}']);" title="Relative section in ${G_hTitles[ht]}+'">${hi[ht]}</span>`);
-					}
-					else {
-						relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
-					}
+					relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 					matButton = 0;
 				}
 				else
@@ -293,11 +288,9 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			next = [nikaya,bookno,meta+1,0,0,0,0,hier];
 		break;
 	}
-	if(DPR_PAL.isWeb) {
-		var nextprev = (prev ? `<span id="pSect" class="lbut abut small" onmouseup="loadXMLSection('','${(place[8] ? ',1' : '')}',['${prev.join("','")}']);" title="go to previous section">&larr;</span>`:`<span class="lbut abut small" title="no previous section">&nbsp;</span>`)+`<span id="indexButton" class="abut mbut small" onmouseup="loadXMLindex(['${nikaya}',${bookno},'${hier}'],false);" title="open book index">&uarr;</span>` + (next ? `<span id="nSect" class="rbut abut small" onmouseup="loadXMLSection('','${(place[8] ? ',1' : '')}',['${next.join("','")}']);" title="go to next section">&rarr;</span>`:`<span class="rbut abut small" title="no next section">&nbsp;</span>`);
-  } else {
-		var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
-	}
+
+	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
+
 
 	// bookmark button
 
