@@ -325,8 +325,7 @@ var digitalpalireader = {
           }
         break;
       case 2: // book hierarchy
-        aplace = (this.getSubNavArray().map((x,y)=>{return (y<(category+1) || y>6 )?x:"x"}));
-        console.log(aplace);
+        aplace = this.getSubNavArray().map((x,y)=>(y<(category+1) || y>6 )?x:"x");
         loadXMLSection("","",aplace);
         break;
     }
