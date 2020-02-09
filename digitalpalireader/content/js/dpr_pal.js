@@ -80,18 +80,7 @@ console.log('Loading DPR_PAL...');
   };
 
   DPR_PAL.chromeFileExists = fileLoc => {
-    var xmlhttp = new window.XMLHttpRequest();
-    try {
-      xmlhttp.open("GET", `${DPR_PAL.baseUrl}${fileLoc}`, false);
-      xmlhttp.onreadystatechange=function() {
-        xmlhttp.abort();
-      }
-      xmlhttp.send(null);
-    }
-    catch(ex) {
-      return false;
-    }
-    return true;
+    return $.ajax({type:"HEAD",url: `${DPR_PAL.baseUrl}${fileLoc}`,async: false}).status!=404;
   };
 
   DPR_PAL.openSideBar = () => {
