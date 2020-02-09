@@ -335,7 +335,7 @@ var digitalpalireader = {
   },
 
   makeWebAppropriate:function(data){
-    data.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
+    data=data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');
     return data;
   }
 }
