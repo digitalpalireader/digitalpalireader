@@ -334,8 +334,5 @@ var digitalpalireader = {
     DPR_PAL.closeSideBar();
   },
 
-  makeWebAppropriate:function(data){
-    data=data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');
-    return data;
-  }
+  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }
