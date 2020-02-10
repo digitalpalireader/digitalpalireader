@@ -334,8 +334,5 @@ var digitalpalireader = {
     DPR_PAL.closeSideBar();
   },
 
-  makeWebAppropriate:function(data){
-    data.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
-    return data;
-  }
+  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }

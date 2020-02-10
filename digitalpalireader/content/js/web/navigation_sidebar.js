@@ -152,6 +152,9 @@ var DPRNav = {
   },
 
   historyBox: function () {
+    if (!DPR_PAL.isXUL) {
+      return true;
+    }
 
     // history
 

@@ -120,7 +120,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
       loadXMLindex([nikaya,bookno,hier]);
 		}
 	}
-	else if (add == 'internal' && DPR_PAL.isXUL) {
+	else if (add == 'internal' ) {
 		loadXMLindex([nikaya,bookno,hier]);
 	}
 	else if (add == 'shift' && DPR_PAL.isXUL) {
