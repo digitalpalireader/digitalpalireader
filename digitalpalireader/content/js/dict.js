@@ -1,6 +1,6 @@
 G_dictType = '';
 var G_dictQuery = '';
-var G_dictOpts = []; // 
+var G_dictOpts = []; //
 var G_dictEntry = '';
 var G_dictUnicode = false;
 var G_similar_min = 75;
@@ -37,7 +37,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		G_dictQuery = dictQuery;
 		G_dictOpts = dictOpts;
 		G_dictEntry = dictEntry;
-		
+
 		var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
 		try {
 			window.history.replaceState('Object', 'Title', permalink);
@@ -45,9 +45,9 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 		catch(ex) {
 		}
 	}
-	
+
 	var js =[];
-	
+
 	js['PED'] = ['ped'];
 	js['DPPN'] = ['dppn','nameno'];
 	js['CPED'] = ['english'];
@@ -59,9 +59,9 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	js['PRT'] = ['roots','roots_link'];
 	js['SKT'] = ['skt'];
 	js['SKR'] = ['skt_roots'];
-	
+
 	var error = addJS(js[G_dictType]);
-	
+
 	if(error)
 		return alert('error loading resource: '+error[1]+'\n'+error[0]);
 
@@ -83,13 +83,13 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 	// tab title
 
 	var tabT = "Dict: '" + (G_dictQuery != ''?G_dictQuery:toUni(G_dictEntry.split(',')[1])) + '\' in ' + st[G_dictType];
-	
+
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 	$('#difb').html('');
 	$('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + toUni(G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + toUni(G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
-	
+
 	G_dictQuery = G_dictQuery.toLowerCase();
-	
+
 
 	switch (G_dictType) {
 		case 'PED':
@@ -141,9 +141,9 @@ function pedsearchstart(hard)
 		sendPaliXML('dev/'+getstring+',dev');
 		return;
 	}
-	
+
 	if(/ft/.exec(G_dictOpts)) { // full text search
-		
+
 		pedFullTextSearch(getstring);
 		return;
 	}
@@ -151,7 +151,7 @@ function pedsearchstart(hard)
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
@@ -173,13 +173,13 @@ function pedsearchstart(hard)
 		if(yessir)
 		{
 			for (z = 0; z < P[pedt].length; z++) {
-			
+
 				var loc = P[pedt][z];
-				
+
 				uniout = pedt;
-				
+
 				uniout = toUni(uniout).replace(/`/g,'˚');
-				
+
 				finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
 				y++;
@@ -188,13 +188,13 @@ function pedsearchstart(hard)
 	}
 
 	$('#dicthead').append('<p>PED entry search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
-	
+
 	var outDiv = document.createElement('div');
-	
+
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
-		
+
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 			var simlist = findSimilarWords(toFuzzy(getstring),P,G_similar_min,1);
 			if(simlist) {
@@ -202,13 +202,13 @@ function pedsearchstart(hard)
 				for (i in simlist) {
 					pedt = simlist[i][1];
 					for (z = 0; z < P[pedt].length; z++) {
-					
+
 						var loc = P[pedt][z];
-						
+
 						uniout = pedt;
-						
+
 						uniout = toUni(uniout).replace(/`/g,'˚');
-						
+
 						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
@@ -236,39 +236,43 @@ function pedsearchstart(hard)
 	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
-	
+
 	if(G_dictEntry) paliXML(toUni(G_dictEntry));
-	
+
 	yut = 0;
 }
 
 function pedFullTextSearch(getstring) {
-	
+
 	getstring = toUni(getstring);
-	
+
 	var finalout = '';
-	
+
 	var listouta = [];
-	
+
 	for (i = 0; i < 5; i++) {
-		
-		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
+
+    var xmlhttp = new window.XMLHttpRequest();
+    if (DPR_PAL.isXUL) {
+      xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
+    } else {
+      xmlhttp.open("GET", '../digitalpalireader/content/etc/XML1/'+i+'/ped.xml', false);
+    }
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		
+
+
 		var allp = xmlDoc.getElementsByTagName('d');
-		
+
 		for (j =0; j < allp.length; j++) {
 			var texttomatch = allp[j].textContent;
 			startmatch = texttomatch.search(getstring);
 			postpara = '';
 			if (startmatch >= 0)
 			{
-				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>'); 
+				listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>');
 				while (startmatch >= 0)
-				{				
+				{
 					gotstring = texttomatch.match(getstring)[0];
 					endmatch = startmatch + gotstring.length;
 					beforem = texttomatch.substring(0,startmatch);
@@ -280,7 +284,7 @@ function pedFullTextSearch(getstring) {
 				postpara += afterm;
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-				
+
 				finalout += '<a name="pedo'+i+'/'+j+'"><p><a href="#diftop" class="small" style="color:'+DPR_prefs['colped']+'">top</a></p><p>' + postpara + '</p><hr>';
 			}
 		}
@@ -293,7 +297,7 @@ function pedFullTextSearch(getstring) {
 	var y = listouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
+
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
@@ -302,8 +306,8 @@ function pedFullTextSearch(getstring) {
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}	
-	
+	}
+
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -320,12 +324,12 @@ var G_dppn = [];
 function dppnsearchstart(hard)
 {
 	var getstring = G_dictQuery;
-    
+
     if(getstring == '') {
         DPPNXML(toUni(G_dictEntry));
         return;
     }
-    
+
 	if(!/[^0-9\/]/.exec(getstring) && devCheck == 1) { // dev link
 		sendDPPNXML('dppn/'+getstring);
 		return;
@@ -340,9 +344,9 @@ function dppnsearchstart(hard)
 	$('#dict').html('');
 	document.getElementById('dict').appendChild(pleasewait);
 
-	
+
 	if(/ft/.exec(G_dictOpts)) { // full text search
-		
+
 		dppnFullTextSearch(getstring);
 		return;
 	}
@@ -352,8 +356,8 @@ function dppnsearchstart(hard)
 	}
 
 	var gslength = getstring.length;
-	var loc = '';	
-	
+	var loc = '';
+
 	var gletter = getstring.charAt(0);
 
 	var foldersw = new Array();
@@ -361,7 +365,7 @@ function dppnsearchstart(hard)
 	var f1 = 0;
 
 	var dict = '../DPPN/';
-	
+
 	var finouta = new Array();
 	var finout = '';
 
@@ -369,14 +373,14 @@ function dppnsearchstart(hard)
 	{
 
 		var dppnt = x;
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			dppnt = toFuzzy(dppnt);
 		}
-		
+
 		var totest = dppnt;
 		if(G_dictUnicode) totest = toUni(totest);
-		
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (totest.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && totest.search(getstring) > -1));
 		}
@@ -386,11 +390,11 @@ function dppnsearchstart(hard)
 		if(yessir)
 		{
 			for (z = 0; z < D[x].length; z++) {
-			
+
 				loc = D[x][z];
-				
+
 				uniout = toUni(dppnt);
-					
+
 				finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
@@ -400,12 +404,12 @@ function dppnsearchstart(hard)
 	$('#dicthead').append('<p>DPPN entry search for <b style="color:'+DPR_prefs['coldppn']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr />');
 
 	var listoutf = '';
-	
+
 
 	if(finouta.length == 0) {
 		listoutf += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
-		
+
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 			var simlist = findSimilarWords(toFuzzy(getstring),D,G_similar_min,1);
 			if(simlist) {
@@ -413,13 +417,13 @@ function dppnsearchstart(hard)
 				for (i in simlist) {
 					pedt = simlist[i][1];
 					for (z = 0; z < D[pedt].length; z++) {
-					
+
 						var loc = D[pedt][z];
-						
+
 						uniout = pedt;
-						
+
 						uniout = toUni(uniout).replace(/`/g,'˚');
-						
+
 						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 					}
@@ -436,9 +440,9 @@ function dppnsearchstart(hard)
 	var y = finouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
+
 	listoutf += '<table width="100%">';
-	
+
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -449,31 +453,31 @@ function dppnsearchstart(hard)
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
 	yut = 0;
-	
+
 	if(G_dictEntry) DPPNXML(toUni(G_dictEntry));
 
-	
+
 }
 
 function dppnFullTextSearch(getstring) {
-	
+
 	var finalouta = [];
-	
+
 	var listouta = [];
 	getstring = toUni(getstring);
 	for (i = 1; i < 10; i++) {
-		
+
 		var xmlhttp = new window.XMLHttpRequest();
 		xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
-		
-		
+
+
 		var allp = xmlDoc.getElementsByTagName('e');
-		
+
 		for (j =0; j < allp.length; j++) {
-			var addend = ''; 
-			
+			var addend = '';
+
 			var texttomatch = allp[j].textContent;
 			if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
 			if(texttomatch.indexOf('"huge"]') > -1) var ttitle = texttomatch.substring(texttomatch.indexOf('"huge"]')+7,texttomatch.indexOf('[/div]'));
@@ -488,7 +492,7 @@ function dppnFullTextSearch(getstring) {
 			{
 				listouta.push(ttitle+'###<a href="#dppno'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + ttitle + '</a><br>');
 				while (startmatch >= 0)
-				{				
+				{
 					gotstring = texttomatch.match(getstring)[0];
 					endmatch = startmatch + gotstring.length;
 					beforem = texttomatch.substring(0,startmatch);
@@ -500,7 +504,7 @@ function dppnFullTextSearch(getstring) {
 				postpara += afterm;
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-				
+
 				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'dictc\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
 			}
 		}
@@ -514,7 +518,7 @@ function dppnFullTextSearch(getstring) {
 	var y = listouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
+
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
@@ -523,8 +527,8 @@ function dppnFullTextSearch(getstring) {
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}	
-	
+	}
+
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -553,18 +557,18 @@ function mlsearchstart(hard)
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var gslength = getstring.length;
 	var gsplit = new Array();
-	
-	
+
+
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var finout = '';
 	if( G_cpedAlt = []) {
 		for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
 	}
-		
+
 	var cnt = 0;
 	for (x = 0; x < G_cpedAlt.length; x++)
 	{
@@ -579,13 +583,13 @@ function mlsearchstart(hard)
 		else {
 			var tosearch = G_cpedAlt[x][0]+' '+G_cpedAlt[x][3]+' '+G_cpedAlt[x][2];
 		}
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
 
 		if(G_dictUnicode) tosearch = toUni(tosearch);
-        
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
@@ -597,30 +601,30 @@ function mlsearchstart(hard)
 			cnt++;
 			us = toUni(gsplit[0]);
 			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
-			
+
 			finouta.push('<div><b><a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+us+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
-	
+
 	$('#dicthead').append('<p>CPED search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:<hr /><table width=100%><tr><td valign="top">');
 
 	if(finouta.length == 0) {
 		finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
-		
+
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 			var simlist = findSimilarWords(toFuzzy(getstring),yt,G_similar_min,1);
 			if(simlist) {
 				finout += '<p>Did you mean:</p>';
 				for (i in simlist) {
 					pedt = simlist[i][1];
-					
+
 					var loc = yt[pedt];
-					
+
 					us = toUni(pedt);
 					ud = toUni(yt[pedt][2] + ' (' + yt[pedt][1] + ')');
-					
+
 					finouta.push('<div><b><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cpedsim'+i+'\').innerHTML == \'\') { conjugate(\''+us+'\',\'cpedsim'+i+'\')} else { document.getElementById(\'cpedsim'+i+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cpedsim'+i+'"></div></div>');
 
 				}
@@ -632,7 +636,7 @@ function mlsearchstart(hard)
 
 		}
 	}
-	
+
 	finout += '<table>'
 	for (z = 0; z < finouta.length; z++)
 	{
@@ -656,7 +660,7 @@ function multisearchstart(hard)
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
@@ -682,13 +686,13 @@ function multisearchstart(hard)
 		if(yessir)
 		{
 			for (z = 0; z < P[pedt].length; z++) {
-			
+
 				var loc = P[pedt][z];
-				
+
 				uniout = pedt;
-				
+
 				uniout = toUni(uniout).replace(/`/g,'˚');
-				
+
 				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
@@ -701,7 +705,7 @@ function multisearchstart(hard)
 			dppnt = toFuzzy(dppnt);
 		}
 		var tosearch = dppnt;
-		
+
 		if(G_dictUnicode) tosearch = toUni(tosearch);
 
         if (/rx/.exec(G_dictOpts)) { // reg exp
@@ -713,22 +717,22 @@ function multisearchstart(hard)
 		if(yessir)
 		{
 			for (z = 0; z < D[x].length; z++) {
-			
+
 				loc = D[x][z];
-				
+
 				uniout = toUni(dppnt);
-					
+
 				finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 			}
 		}
 	}
 
 	// get cped
-	
+
 	if( G_cpedAlt = []) {
 		for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
 	}
-		
+
 	var cnt = 0;
 	for (x = 0; x < G_cpedAlt.length; x++)
 	{
@@ -743,13 +747,13 @@ function multisearchstart(hard)
 		else {
 			var tosearch = G_cpedAlt[x][0]+' '+G_cpedAlt[x][3]+' '+G_cpedAlt[x][2];
 		}
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			tosearch = toFuzzy(tosearch);
 		}
-		
- 		if(G_dictUnicode) tosearch = toUni(tosearch);       
-        
+
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
@@ -761,38 +765,38 @@ function multisearchstart(hard)
 			cnt++;
 			us = toUni(gsplit[0]);
 			ud = toUni(gsplit[1] + ' (' + gsplit[2] + ')');
-			
+
 			finouta.push(us+'###<div><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick=" conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
 		}
 	}
-	
-	
+
+
 	var outDiv = document.createElement('div');
-	
+
 	$('#dicthead').append('<p><span style="color:'+DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />');
 
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
-		
+
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 			var simlistp = findSimilarWords(toFuzzy(getstring),P,G_similar_min,1);
 			var simlistd = findSimilarWords(toFuzzy(getstring),D,G_similar_min,1);
 			var simlistc = findSimilarWords(toFuzzy(getstring),yt,G_similar_min,1);
-			
+
 			if(simlistp || simlistd || simlistc) {
 				outDiv.innerHTML += '<p>Did you mean:</p>';
 				for (i in simlistp) {
 					pedt = simlistp[i][1];
 					for (z = 0; z < P[pedt].length; z++) {
-					
+
 						var loc = P[pedt][z];
-						
+
 						uniout = pedt;
-						
+
 						uniout = toUni(uniout).replace(/`/g,'˚');
-						
+
 						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
@@ -801,13 +805,13 @@ function multisearchstart(hard)
 				for (i in simlistd) {
 					pedt = simlistd[i][1];
 					for (z = 0; z < D[pedt].length; z++) {
-					
+
 						var loc = D[pedt][z];
-						
+
 						uniout = pedt;
-						
+
 						uniout = toUni(uniout).replace(/`/g,'˚');
-						
+
 						finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onclick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
 						y++;
@@ -815,12 +819,12 @@ function multisearchstart(hard)
 				}
 				for (i in simlistc) {
 					pedt = simlistc[i][1];
-					
+
 					var loc = yt[pedt];
-					
+
 					us = toUni(pedt);
 					ud = toUni(yt[pedt][2] + ' (' + yt[pedt][1] + ')');
-					
+
 					finouta.push('<div><a style="color:'+DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cpedsim'+i+'\').innerHTML == \'\') { document.getElementById(\'cpedsim'+i+'\').innerHTML = \''+ud +'\'} else { document.getElementById(\'cpedsim'+i+'\').innerHTML = \'\';}">' + us + '</a><br><div class="conjc" id="cpedsim'+i+'"></div></div>');
 
 				}
@@ -833,7 +837,7 @@ function multisearchstart(hard)
 		}
 	}
 	else finouta = sortaz(finouta);
-	
+
 	var findiv = Math.ceil(finouta.length/3);
 	var listoutf = '<table width="100%">';
 	for (z = 0; z < findiv; z++)
@@ -857,25 +861,25 @@ function epdsearchstart()
 	}
 
 	clearDivs('dict');
-	
+
 	var getstring = G_dictQuery;
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var gslength = getstring.length;
 	var gsplit = new Array();
-	
-	
+
+
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
-	
+
 	for (x = 0; x < epd.length; x++)
 	{
 		gsplit = epd[x].split('^');
-		
+
 		if(!/ft/.exec(G_dictOpts)) {
 			var tosearch = gsplit[0];
 		}
@@ -886,8 +890,8 @@ function epdsearchstart()
 			tosearch = toFuzzy(tosearch);
 		}
 
-  		if(G_dictUnicode) tosearch = toUni(tosearch);       
-       
+  		if(G_dictUnicode) tosearch = toUni(tosearch);
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
@@ -896,14 +900,14 @@ function epdsearchstart()
 		}
 		if(yessir)
 		{
-			
+
 			finouta.push('<b><font style="color:'+DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +'<br>');
 
 		}
 	}
-	
+
 	$('#dicthead').append('<p>CEPD search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:');
-	
+
 	finout = '<hr /><table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
@@ -912,11 +916,11 @@ function epdsearchstart()
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}		
+	}
 	for (var z = 0; z < finouta.length; z++)
 	{
 		finout += finouta[z];
-	}	
+	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = finout + '</td></tr></table>';
 	$('#dict').html('');
@@ -932,15 +936,15 @@ function attsearchstart()
 		return;
 	}
 	clearDivs('dict');
-	
+
 	var getstring = G_dictQuery;
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	else getstring = toUni(getstring);
-	
+
 	var gslength = getstring.length;
-	var gsplit = new Array();	
+	var gsplit = new Array();
 	var hsplit = [];
 	var gletter = getstring.charAt(0);
 	var foldersw = new Array();
@@ -956,13 +960,13 @@ function attsearchstart()
 	{
 		outnik = '';
 		var attt = attlist[x].split('#')[0];
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			attt = toFuzzy(attt);
 		}
-		
+
 		var tosearch = attt;
- 		if(G_dictUnicode) tosearch = toUni(tosearch);       
+ 		if(G_dictUnicode) tosearch = toUni(tosearch);
 
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.test(G_dictOpts) && tosearch.search(getstring) > -1));
@@ -975,7 +979,7 @@ function attsearchstart()
 			var entries = attlist[x].split('#');
 			gsplit = entries.shift();
 			uniout = toUni(gsplit);
-			
+
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
@@ -983,7 +987,7 @@ function attsearchstart()
 				else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
 			}
 			if (entries.length == 0) continue;
-                       
+
 			finouta[y] = '<span class="pointer style="color:'+DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
 			y++;
 		}
@@ -991,9 +995,9 @@ function attsearchstart()
 	var y = finouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
+
 	$('#dicthead').append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:');
-	
+
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
@@ -1002,8 +1006,8 @@ function attsearchstart()
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}	
-		
+	}
+
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -1024,14 +1028,14 @@ function tiksearchstart()
 	}
 
 	clearDivs('dict');
-	
+
 	var getstring = G_dictQuery;
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var gslength = getstring.length;
-	var gsplit = new Array();	
+	var gsplit = new Array();
 	var hsplit = [];
 	var gletter = getstring.charAt(0);
 	var foldersw = new Array();
@@ -1047,7 +1051,7 @@ function tiksearchstart()
 	{
 		outnik = '';
 		var tikt = tiklist[x].split('#')[0];
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			tikt = toFuzzy(tikt);
 		}
@@ -1067,7 +1071,7 @@ function tiksearchstart()
 			var entries = tiklist[x].split('#');
 			gsplit = entries.shift();
 			uniout = toUni(gsplit);
-			
+
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
@@ -1083,9 +1087,9 @@ function tiksearchstart()
 	var y = finouta.length;
 
 	var findiv = Math.ceil(y/3);
-	
+
 	$('#dicthead').append('<p>Ṭīka term search for <b style="color:'+DPR_prefs['colped']+'">'+toUni(getstring)+'</b>:');
-	
+
 	var listoutf = '<hr /><table width="100%">';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
@@ -1094,8 +1098,8 @@ function tiksearchstart()
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}	
-		
+	}
+
 	for (z = 0; z < findiv; z++)
 	{
 		listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
@@ -1116,17 +1120,17 @@ function titlesearchstart()
 	}
 
 	clearDivs('dict');
-	
+
 	var getstring = G_dictQuery;
-	if(/fz/.exec(G_dictOpts)) { 
+	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
 	else {
 		getstring = toUni(getstring);
 	}
-	
+
 	var gslength = getstring.length;
-	var gsplit = new Array();	
+	var gsplit = new Array();
 	var hsplit = [];
 	var gletter = getstring.charAt(0);
 	var foldersw = new Array();
@@ -1141,9 +1145,9 @@ function titlesearchstart()
 
 	for (x = 0; x < titlelist.length; x++)
 	{
-		
+
 		outnik = '';
-		
+
 		var titt = titlelist[x].split('#')[0];
 		if(/fz/.exec(G_dictOpts)) {
 			titt = toFuzzy(titt);
@@ -1160,7 +1164,7 @@ function titlesearchstart()
 		}
 		if(yessir)
 		{
-			
+
 			// separate mat
 			var entries = titlelist[x].split('#');
 			gsplit = entries.shift();
@@ -1172,7 +1176,7 @@ function titlesearchstart()
 				}
 			}
 			if (entries.length == 0) continue;
-			
+
 			// nikayas
 			for(a = 0; a < entries.length; a++) {
 				var tnik = entries[a].charAt(0);
@@ -1211,9 +1215,9 @@ function titlesearchstart()
 	y = finouta.length;
 
 	var findiv = Math.ceil(y/2);
-	
+
 	$('#dicthead').append('<p>Title search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b>:');
-	
+
 	var listoutf = '<hr />';
 	if(y == 0) {
 		var outDiv = document.createElement('div');
@@ -1222,17 +1226,17 @@ function titlesearchstart()
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}	
+	}
 	var finol = '';
 	var finor = '';
-	
+
 	for (z = 0; z < findiv; z++)
 	{
 		finol +=finouta[z]
-		finor += (finouta[findiv+z]?finouta[findiv+z]:''); 
+		finor += (finouta[findiv+z]?finouta[findiv+z]:'');
 	}
 	listoutf += '<table width="100%"><tr><td>'+finol+'</td><td>'+finor+'</td></tr></table>';
-	
+
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = listoutf;
 	$('#dict').html('');
@@ -1249,25 +1253,25 @@ function paliRootsearchstart(hard)
 	}
 
 	clearDivs('dict');
-	
+
 	var getstring = G_dictQuery;
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var gslength = getstring.length;
 	var gsplit = new Array();
-	
-	
+
+
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
-	
+
 	for (x = 0; x < proots.length; x++)
 	{
 		gsplit = proots[x].split('^');
-		
+
 		if(!/ft/.exec(G_dictOpts)) {
 			var tosearch = gsplit[0];
 		}
@@ -1278,8 +1282,8 @@ function paliRootsearchstart(hard)
 			tosearch = toFuzzy(tosearch);
 		}
 
-  		if(G_dictUnicode) tosearch = toUni(tosearch);       
-       
+  		if(G_dictUnicode) tosearch = toUni(tosearch);
+
         if (/rx/.exec(G_dictOpts)) { // reg exp
 			var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(G_dictOpts) && tosearch.search(getstring) > -1));
 		}
@@ -1299,9 +1303,9 @@ function paliRootsearchstart(hard)
 
 		}
 	}
-	
+
 	$('#dicthead').append('<p>Pali Roots search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(getstring):toUni(getstring))+'</b>:');
-	
+
 	finout = '<table width=100%><tr><td valign="top">';
 	if(finouta.length == 0) {
 		var outDiv = document.createElement('div');
@@ -1310,11 +1314,11 @@ function paliRootsearchstart(hard)
 		document.getElementById('dict').appendChild(outDiv);
 		document.getElementById('odif').scrollTop=0;
 		return;
-	}		
+	}
 	for (var z = 0; z < finouta.length; z++)
 	{
 		finout += finouta[z];
-	}	
+	}
 	var outDiv = document.createElement('div');
 	outDiv.innerHTML = finout + '</td></tr></table>';
 	$('#dict').html('');
@@ -1332,17 +1336,17 @@ function sktsearchstart()
 	}
 
 	clearDivs('dict');
-	
+
 	var char = G_dictQuery.charAt(0);
-	
+
 	var getstring = toSkt(toVel(G_dictQuery));
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
-	}	
-	
+	}
+
 	var gslength = getstring.length;
 	var gsplit = new Array();
-	
+
 	var gletter = getstring.charAt(0);
 	var finouta = new Array();
 	var y = 0;
@@ -1356,11 +1360,11 @@ function sktsearchstart()
 				G_sktR[skt[w][x]] = x;
 		}
 	}
-	
+
 	for (var x = 0; x < skt[char].length; x++)
 	{
 		var sx = skt[char][x];
-		
+
 		if(/fz/.exec(G_dictOpts)) {
 			sx = toFuzzy(sx);
 		}
@@ -1382,16 +1386,16 @@ function sktsearchstart()
 			y++;
 		}
 	}
-	
+
 	$('#dicthead').append('<p>Sanskrit search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictQuery):toUni(G_dictQuery))+'</b>:');
-	
-	
+
+
 	var outDiv = document.createElement('div');
-	
+
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 
-		
+
 		if(/hd/.exec(G_dictOpts) || hard) { // find similar words if hard search
 
 			var simlist = findSimilarWords(toFuzzy(getstring),G_sktR[char],G_similar_min,1);
@@ -1426,9 +1430,9 @@ function sktsearchstart()
 	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
-	
+
 	if(G_dictEntry) sktXML(G_dictEntry,G_sktR[G_dictEntry]);
-	
+
 	yut = 0;
 }
 
@@ -1453,7 +1457,7 @@ function sktRootsearchstart(hard)
 	if(/fz/.exec(G_dictOpts)) {
 		getstring = toFuzzy(getstring);
 	}
-	
+
 	var finouta = new Array();
 	var y = 0;
 	var finout = '';
@@ -1484,9 +1488,9 @@ function sktRootsearchstart(hard)
 	}
 
 	$('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_prefs['colped']+'">'+(/rx/.exec(G_dictOpts)?toUniRegEx(G_dictQuery):toUni(G_dictQuery))+'</b>:<hr />');
-	
+
 	var outDiv = document.createElement('div');
-	
+
 	if(finouta.length == 0) {
 		outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
 	}
@@ -1504,8 +1508,8 @@ function sktRootsearchstart(hard)
 	$('#dict').html('');
 	document.getElementById('dict').appendChild(outDiv);
 	document.getElementById('odif').scrollTop=0;
-	
+
 	if(G_dictEntry) sktRXML(toUni(G_dictEntry));
-	
+
 	yut = 0;
 }

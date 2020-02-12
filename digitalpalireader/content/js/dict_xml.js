@@ -286,7 +286,7 @@ function DPPNXML (filein, which, add) {
 
   // output
 
-  displayDictData(data, 0)
+  displayDictData(data, 1)
 
   // get number
   var tname, lname, nname
@@ -777,11 +777,11 @@ function displayDictData (data, context) {
   } else {
     var dataNode = $('<div></div>').html(data)
     switch(context) {
-      case 0:
+      case 0: //in the mainpane
         $('#difb').html('')
         $('#difb').append(dataNode)
       break;
-      case 1:
+      case 1: //in the bottompane
         $('#difb2').html('')
         $('#difb2').append(dataNode)
       break;
