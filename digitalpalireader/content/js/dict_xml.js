@@ -625,9 +625,11 @@ function getTitleXML (num, mul, att, tik, niklist) {
 
     // separate mat
     if (
-      (pca[7] == 'm' && !mul) ||
-      (pca[7] == 'a' && !att) ||
-      (pca[7] == 't' && !tik)
+      DPR_PAL.isXUL && (
+        (pca[7] == 'm' && !mul) ||
+        (pca[7] == 'a' && !att) ||
+        (pca[7] == 't' && !tik)
+      )
     )
       continue
 
