@@ -1,812 +1,236 @@
 <?xml version="1.0"?>
 <xml>
-<n>qABI</n>
+<n>QakAra</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍābhī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81378]</f></b></d>
-<d> <q><f s="-1" c="1">N.</f></q> of a family , <f c="1" s="-1"><a> Ratnak. </a></f>    </d></r>
+<r><d><b>(H3) <f c="b">ḍha--kāra</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81480]</f></b></d>
+<d> <em><f c="1">m.</f></em> the letter <f c="b">ḍh</f>.    </d></r>
 </u>
-<n>qAgineya</n>
+<n>QakkadeSIya</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāgineya</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81374]</f></b></d>
-<d> <f c="r">°</f><f c="b">yaka</f> <q><f s="-1" c="1">N.</f></q> of a gambler , <f c="1" s="-1">cxxi , 33ff</f>.    </d></r>
+<r><d><b>(H3) <f c="b">ḍhakka--</f><f c="r">°</f> <f c="b">deśīya</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81491]</f></b></d>
+<d> <em><f c="1">mfn.</f></em> spoken in the district of <f c="t">ḍhakka</f> <f c="1" s="-1"><a> Mr2icch. </a> </f><q><f c="1" s="-1">Sch.</f></q><f c="1" s="-1"> Introd.</f>    </d></r>
 </u>
-<n>qAginI</n>
+<n>Qakkana</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāginī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81373]</f></b></d>
-<d> Prakrit form for <f c="b">dākinī</f> (<q><f s="-1" c="1">q.v.</f></q>) <f c="1" s="-1"><a> Katha1s. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhakkana</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81492]</f></b></d>
+<d> <em><f c="1">n.</f></em> shutting (of a door) <f c="1" s="-1"><a> S3i1l. </a></f>  </d></r>
+<r><d><b>(H1B) <f c="b">ḍhakkana</f><f s="-1"> [L=81493]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man <f c="1" s="-1"><a> Ra1jat. </a> vi , 230f.</f> (<q><f s="-1" c="1">v.l.</f></q> <f c="r">°</f><f c="b">kkama</f>).     </d></r>
 </u>
-<n>qAhADISa</n>
+<n>QakkArI</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāhā</f><f c="r">*</f> <f c="b">dhī</f><f c="r">*</f> <f c="b">śa</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81393]</f></b></d>
-<d> <em><f c="1">m.</f></em> a <f c="t">ḍāhala</f> prince <f c="1" s="-1"><a> Vcar. </a> xviii , 95.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhakkārī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81494]</f></b></d>
+<d> <em><f c="1">f.</f></em> <q><f s="-1" c="1">N.</f></q> of the goddess <f c="t">tārā</f> or <f c="t">tāriṇī</f> , <f c="1" s="-1"> Kulasadbh. ??</f>    </d></r>
 </u>
-<n>qahAla</n>
+<n>Qakka</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍahāla</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81367]</f></b></d>
-<d>  in Prakrit for <f c="b">daśā</f><f c="r">*</f><f c="b">rṇa</f> <f c="1" s="-1"><a> Ba1lar. </a> iii , 39</f><f c="r">÷</f><f c="1" s="-1">40</f>     </d></r>
-<r><d><b><f s="-1"> [L=81367.1]</f></b></d>
-<d> <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍāh</f><f c="r">°</f>.      
-</d></r>
+<r><d><b>(H1) <f c="b">ḍhakka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81487]</f></b></d>
+<d> <em><f c="1">m.</f></em> a large sacred building <f c="1" s="-1"><a> Ra1jat. </a> iii , v</f>  </d></r>
+<r><d><b><f s="-1"> [L=81488]</f></b></d>
+<d>  <q><f s="-1" c="1">N.</f></q> of a locality (<q><f s="-1" c="1">cf.</f></q> <f c="b">ṭakka</f>) <f c="1" s="-1"> Mricch. ?? </f><q><f c="1" s="-1">Sch.</f></q> Introd.   </d></r>
+<r><d><b>(H1B) <f c="b">ḍhakkā</f><f s="-1"> [L=81489]</f></b></d>
+<d> <em><f c="1">f.</f></em> a large drum (<q><f s="-1" c="1">cf.</f></q> <f c="b">gaja-</f> , <f c="b">jaya-</f>) <f c="1" s="-1"><a> Ra1jat. </a> vi , 133</f>   </d></r>
+<r><d><b>(H1B) <f c="b">ḍhakkā</f><f s="-1"> [L=81490]</f></b></d>
+<d>  <em><f c="1">f.</f></em> covering , disappearance <f c="1" s="-1"><a> W. </a></f>    </d></r>
 </u>
-<n>qAhala</n>
+<n>QakkA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāhala</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81392]</f></b></d>
-<d> <em><f c="1">m. </f></em><em><f c="1">pl.</f></em> <q><f s="-1" c="1">N.</f></q> of a people (<f c="p">=</f> <f c="b">cedi</f> <f c="1" s="-1"><a> L. </a></f> ;  <f s="-1">sg.</f> their country <f c="1" s="-1"><a> L. </a></f>) <f c="1" s="-1"><a> Romakas. </a></f> <f c="1" s="-1"><a> Ratnak. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhakka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81487]</f></b></d>
+<d> <em><f c="1">m.</f></em> a large sacred building <f c="1" s="-1"><a> Ra1jat. </a> iii , v</f>  </d></r>
+<r><d><b><f s="-1"> [L=81488]</f></b></d>
+<d>  <q><f s="-1" c="1">N.</f></q> of a locality (<q><f s="-1" c="1">cf.</f></q> <f c="b">ṭakka</f>) <f c="1" s="-1"> Mricch. ?? </f><q><f c="1" s="-1">Sch.</f></q> Introd.   </d></r>
+<r><d><b>(H1B) <f c="b">ḍhakkā</f><f s="-1"> [L=81489]</f></b></d>
+<d> <em><f c="1">f.</f></em> a large drum (<q><f s="-1" c="1">cf.</f></q> <f c="b">gaja-</f> , <f c="b">jaya-</f>) <f c="1" s="-1"><a> Ra1jat. </a> vi , 133</f>   </d></r>
+<r><d><b>(H1B) <f c="b">ḍhakkā</f><f s="-1"> [L=81490]</f></b></d>
+<d>  <em><f c="1">f.</f></em> covering , disappearance <f c="1" s="-1"><a> W. </a></f>    </d></r>
 </u>
-<n>qAhAla</n>
+<n>QAla</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāhāla</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81394]</f></b></d>
-<d> <em><f c="1">m. </f></em><em><f c="1">pl.</f></em> (<q><f s="-1" c="1">cf.</f></q> <f c="b">ḍah</f><f c="r">°</f>) <f c="p">=</f> <f c="r">°</f><f c="b">hala</f> <f c="1" s="-1"><a> Vcar. </a> xviii , 93.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhāla</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81500]</f></b></d>
+<d> <em><f c="1">n.</f></em> " a shield " <f c="p">»</f> <f c="r">°</f><f c="b">lin</f>.    </d></r>
 </u>
-<n>qAhuka</n>
+<n>QAlin</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāhuka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81395]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍātyūha</f> , a gallinule <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H2) <f c="b">ḍhālin</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81501]</f></b></d>
+<d> <em><f c="1">mfn.</f></em> armed with a shield , <f c="1" s="-1"> Rudraj. ??</f>    </d></r>
 </u>
-<n>qahu</n>
+<n>QAmarA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍahu</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81368]</f></b></d>
-<d>   <em><f c="1">m.</f></em> <f c="b" s="-1">Artocarpus Lakuca</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhāmarā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81498]</f></b></d>
+<d> <em><f c="1">f.</f></em> a goose <f c="1" s="-1"><a> Dhanam2j. </a></f>    </d></r>
 </u>
-<n>qahU</n>
+<n>QaNka</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍahū</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81368.1]</f></b></d>
-<d>  <em><f c="1">m.</f></em> <f c="b" s="-1">Artocarpus Lakuca</f> <f c="1" s="-1"><a> L. </a></f>     </d></r>
+<r><d><b>(H1) <f c="b">ḍhaṅka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81495]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a mountain <f c="1" s="-1"><a> S3atr. </a> i.</f>    </d></r>
 </u>
-<n>qakAra</n>
+<n>QaqQara</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍa--kāra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81326]</f></b></d>
-<d> <em><f c="1">m.</f></em> the letter <f c="b">ḍ</f> <f c="1" s="-1"><a> TPra1t. </a> iv , 38 </f><q><f c="1" s="-1">Sch.</f></q>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhaḍḍhara</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81496]</f></b></d>
+<d> <q><f s="-1" c="1">N.</f></q> of a man <f c="1" s="-1"><a> HParis3. </a> . xiii.</f>    </d></r>
 </u>
-<n>qAka</n>
+<n>QArikA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81369]</f></b></d>
-<d> <em><f c="1">m.</f></em> an imp attending <f c="t">kālī</f> <f c="1" s="-1"><a> Ka1lac. </a> v , 38.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhārikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81499]</f></b></d>
+<d> <em><f c="1">f.</f></em> the julus <f c="1" s="-1"><a> A1pGr2. </a> , .</f>    </d></r>
 </u>
-<n>qAkinItva</n>
+<n>QaRwI</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍākinī--tva</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81372]</f></b></d>
-<d> <em><f c="1">n.</f></em> the condition of a female imp <f c="1" s="-1"><a> Das3. </a> xi , 302.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhaṇṭī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81497]</f></b></d>
+<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">vākya-viśeṣa</f> <f c="1" s="-1"><a> Rudray. </a></f>    </d></r>
 </u>
-<n>qAkinI</n>
+<n>Qa</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍākinī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81370]</f></b></d>
-<d> <em><f c="1">f.</f></em> (of <f c="r">°</f><f c="b">ka</f> <f c="1" s="-1"><a> Pa1n2. </a> 4-2 , 51</f> <f c="1" s="-1"><a> Pat. </a></f>) a female imp attending <f c="t">kālī</f> (feeding on human flesh) <f c="1" s="-1"><a> BhP. </a> x</f> <f c="1" s="-1"><a> BrahmaP. </a></f> <f c="1" s="-1"><a> Ma1rkP. </a></f> <f c="1" s="-1"><a> Katha1s. </a></f> (<f c="b">ḍāginī</f> , <f c="1" s="-1">cii , cviii f.</f>) (<q><f s="-1" c="1">cf.</f></q> <f c="b">śāk</f><f c="r">°</f>)  </d></r>
-<r><d><b><f s="-1"> [L=81371]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of a locality <f c="1" s="-1"><a> S3ivaP. </a> i , 38 , 18.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍha</f><f c="r"> 1</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81479]</f></b></d>
+<d> the aspirate of the preceding letter ,   </d></r>
+<r><d><b>(H1) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81481]</f></b></d>
+<d> <em><f c="1">mfn.</f></em> <f c="p">=</f> <f c="b">nir-guṇa</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
+<r><d><b>(H1B) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81482]</f></b></d>
+<d> <em><f c="1">m.</f></em> an imitative sound <f c="1" s="-1"><a> L. </a></f>   </d></r>
+<r><d><b>(H1B) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81483]</f></b></d>
+<d> <em><f c="1">m.</f></em> a large drum <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H1B) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81484]</f></b></d>
+<d> <em><f c="1">m.</f></em> a dog <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H1B) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81485]</f></b></d>
+<d> <em><f c="1">m.</f></em> a dog's tail <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H1B) <f c="b">ḍha</f><f c="r"> 2</f><f s="-1"> [L=81486]</f></b></d>
+<d> <em><f c="1">m.</f></em> a serpent <f c="1" s="-1"><a> W. </a></f>      </d></r>
 </u>
-<n>qakkArI</n>
+<n>QeNka</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍakkārī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81334]</f></b></d>
-<d> <em><f c="1">f.</f></em> the <f c="t">cāṇḍāla</f> lute <f c="1" s="-1"><a> L. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍheṅka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81513]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a bird <f c="1" s="-1"><a> Vasantar. </a> viii , 12</f>  </d></r>
+<r><d><b>(H1B) <f c="b">ḍheṅkī</f><f s="-1"> [L=81514]</f></b></d>
+<d> <em><f c="1">f.</f></em> a kind of dance.    </d></r>
 </u>
-<n>qAlacandra</n>
+<n>QeNkikAtAla</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāla-candra</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332340]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a king, <f c="1" s="-1"><a> Cat. </a></f></d></r>
+<r><d><b>(H4) <f c="b">ḍheṅkikā---tāla</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81516]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">id.</f></q>     </d></r>
 </u>
-<n>qalaka</n>
+<n>QeNkikA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍalaka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81361]</f></b></d>
-<d> <f c="p">»</f> <f c="b">ḍall</f><f c="r">°</f>    </d></r>
+<r><d><b>(H3) <f c="b">ḍheṅkikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81515]</f></b></d>
+<d> <em><f c="1">f.</f></em> (in music)  a kind of measure  </d></r>
 </u>
-<n>qalana</n>
+<n>QeNkI</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍalana</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81362]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍall</f><f c="r">°</f>.    </d></r>
+<r><d><b>(H1) <f c="b">ḍheṅka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81513]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a bird <f c="1" s="-1"><a> Vasantar. </a> viii , 12</f>  </d></r>
+<r><d><b>(H1B) <f c="b">ḍheṅkī</f><f s="-1"> [L=81514]</f></b></d>
+<d> <em><f c="1">f.</f></em> a kind of dance.    </d></r>
 </u>
-<n>qAla</n>
+<n>QevvukA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāla</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81390]</f></b></d>
-<d> a branch , <f c="1" s="-1"><a> S3i1l. </a> </f> on <f c="1" s="-1"><a> A1ca1r. </a> ii.</f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhevvukā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81517]</f></b></d>
+<d> <em><f c="1">f.</f></em> a coin , <f c="1" s="-1"><a> Katha7rn2. </a></f>    </d></r>
 </u>
-<n>qAlima</n>
+<n>QillikA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍālima</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81391]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍāḍima</f> <f c="1" s="-1"><a> L. </a> </f><q><f c="1" s="-1">Sch.</f></q>    </d></r>
+<r><d><b>(H2) <f c="b">ḍhillikā</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332392]</f></b></d>
+<d>  <em><f c="1">f.</f></em> the city Delhi, <f c="1" s="-1"><a> Inscr. </a></f></d></r>
 </u>
-<n>qallaka</n>
+<n>QillI</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍallaka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81363]</f></b></d>
-<d> <em><f c="1">n.</f></em> a <f c="t">dūlī</f> carried on men's shoulders by means of a stick and ropes like the beam and strings of a balance (also <f c="b">ḍalaka</f> <f c="1" s="-1"><a> W. </a></f>) <f c="1" s="-1"><a> BrahmaP. </a></f>  </d></r>
-<r><d><b>(H1B) <f c="b">ḍallaka</f><f s="-1"> [L=81364]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man <f c="1" s="-1"><a> Ra1jat. </a> vii , . 189 and 198.</f>     </d></r>
+<r><d><b>(H2) <f c="b">ḍhillī</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332391]</f></b></d>
+<d>  <em><f c="1">f.</f></em> the city Delhi, <f c="1" s="-1"><a> Inscr. </a></f></d></r>
 </u>
-<n>qallana</n>
+<n>QiRQiRikA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍallana</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81365]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a scholiast on <f c="1" s="-1"><a> Sus3r. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhiṇḍhiṇikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81502]</f></b></d>
+<d> <f c="p">»</f> <f c="b">ṭiṇṭiṇ</f><f c="r">°</f>.    </d></r>
 </u>
-<n>qAmaraBEravatantra</n>
+<n>QlI</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍāmara--bhairava-tantra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81386]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">N.</f></q> of a <f c="t">tantra</f>.    </d></r>
+<r><d><b>(H2) <f c="b">ḍhlī</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332390]</f></b></d>
+<d> <em><f c="1">f.</f></em> the city Delhi, <f c="1" s="-1"><a> Inscr. </a></f></d></r>
 </u>
-<n>qAmaratantra</n>
+<n>QOkana</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍāmara--tantra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81385]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">N.</f></q> of a <f c="t">tantra</f> ,<f c="1" s="-1"> Nirn2ayas. ii , 7</f>.   </d></r>
+<r><d><b>(H3) <f c="b">ḍhaukana</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81524]</f></b></d>
+<d> <em><f c="1">n.</f></em> offering , present <f c="1" s="-1"><a> Ra1jat. </a> vi , 166</f> <f c="1" s="-1"><a> S3atr. </a> xiv</f> <f c="1" s="-1"><a> Ka1tyS3r. </a> </f><q><f c="1" s="-1">Sch.</f></q>  </d></r>
+<r><d><b><f s="-1"> [L=81525]</f></b></d>
+<d>   <q><f s="-1" c="1">cf.</f></q> <f c="b">upa-</f>.     </d></r>
+<r><d><b>(H2) <f c="b">ḍhaukana</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332400]</f></b></d>
+<d> <em><f c="1">n.</f></em> (also) bringing near (in <f c="b">svayam</f>-<f c="b">asana</f>-<f c="b">ḍh</f><f c="r">°</f>, see <q><f s="-1" c="1">p.</f></q> 1278).</d></r>
 </u>
-<n>qAmaratva</n>
+<n>QOkita</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāmara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81379]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> " causing tumult (<f c="b">ḍam</f><f c="r">°</f>.) " , extraordinary , surprising <f c="1" s="-1"><a> Ma1lati1m. </a></f> (<f c="b">-tva</f>  <em><f c="1">n.</f></em> abstr.) <f c="1" s="-1"><a> Gi1t. </a> xii , 23</f>  </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81380]</f></b></d>
-<d> <em><f c="1">m.</f></em> surprise , sight <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81381]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍam</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81382]</f></b></d>
-<d> <em><f c="1">m.</f></em> a lord (probably = baron , knight) <f c="1" s="-1"><a> Ra1jat. </a></f>    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81383]</f></b></d>
-<d> <em><f c="1">m.</f></em> a <q><f s="-1" c="1">N.</f></q> of 6 <f c="t">tantra</f>s (<f c="b">yoga-</f> , <f c="b">śiva-</f> , <f c="b">durgā-</f> , <f c="b">sārasvata-</f> , <f c="b">brahma-</f> , <f c="b">gandharva-</f>)    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81384]</f></b></d>
-<d> <em><f c="1">m.</f></em> of an attendant of <f c="t">śiva</f> , <f c="1" s="-1"><a> BrahmaP. </a></f>     </d></r>
+<r><d><b>(H2) <f c="b">ḍhaukita</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81526]</f></b></d>
+<d> <em><f c="1">mfn.</f></em> brought near <f c="1" s="-1"><a> MBh. </a> xii , 4138.</f>    </d></r>
 </u>
-<n>qAmarava</n>
+<n>QOk</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍāmarava</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81387]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> coming from a drum , <f c="1" s="-1"><a> Hastar. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhauk</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81523]</f></b></d>
+<d><p>  <em>cl.1 A1.</em> <f c="r">°</f><f c="b">kate</f> (<q><f s="-1" c="1">pf.</f></q> <f c="b">ḍuḍhauke</f> [<f c="1" s="-1"><a> Pa1n2. </a> 7-4 , 59</f> <f c="1" s="-1"><a> Ka1s3. </a></f>] <f c="1" s="-1"><a> Hcar. </a></f> <f c="1" s="-1"><a> Bhat2t2. </a></f>) , to approach  (with  <q><f s="-1" c="1">acc.</f></q>) <f c="1" s="-1"><a> Ka1d. </a></f> <f c="1" s="-1"><a> Hcar. </a></f> <f c="1" s="-1"><a> Bhat2t2. </a></f> :  <q><f s="-1" c="1">Caus.</f></q> <f c="b">ḍhaukayati</f> (<q><f s="-1" c="1">aor.</f></q> <f c="b">aḍuḍhaukat</f> <f c="1" s="-1"><a> Pa1n2. </a> 7-4 , 2 and 59</f> <f c="1" s="-1"><a> Ka1s3. </a></f>) , to bring near  (to  <q><f s="-1" c="1">gen.</f></q>) , cause to come near , offer , to any one (<q><f s="-1" c="1">dat.</f></q>) <f c="1" s="-1"><a> Katha1s. </a></f> <f c="1" s="-1"><a> Ra1jat. </a></f> <f c="1" s="-1"><a> Bhat2t2. </a></f> <f c="1" s="-1"><a> Ka1tyS3r. </a>  </f><q><f c="1" s="-1">Sch.</f></q>: <q><f s="-1" c="1">Desid.</f></q> <f c="b">ḍuḍkaukiṣate</f> <f c="1" s="-1"><a> Pa1n2. </a> 7-4 , 59 and viii , 4 , 54</f> <f c="1" s="-1"><a> Ka1s3. </a></f> :   <q><f s="-1" c="1">Intens.</f></q> <f c="b">ḍoḍhaukyate</f> , <f c="1" s="-1">vii , 4 , 82</f> <f s="-1">Va1rtt. 1</f> <f c="1" s="-1"><a> Pat. </a></f> <f c="p"> ; </f></p><p> <q><f s="-1" c="1">cf.</f></q> <f c="b">upa</f>. ,   </p></d></r>
 </u>
-<n>qamara</n>
+<n>QolAsamudra</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍamara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81342]</f></b></d>
-<d> <em><f c="1">m.</f></em> (<em><f c="1">n.</f></em> <f c="1" s="-1"><a> L. </a></f>) a riot , tumult <f c="1" s="-1"><a> VarBr2S. </a></f> <f c="1" s="-1"><a> Katha1s. </a> c</f> <f c="1" s="-1"><a> Pa1rs3van. </a> iv , 186 ;</f> <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍām</f><f c="r">°</f>.    </d></r>
-<r><d><b>(H2) <f c="b">ḍamara</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332310]</f></b></d>
-<d> <em><f c="1">m.</f></em> (also) a portent, evil omen, <f c="1" s="-1"><a> L. </a></f></d></r>
+<r><d><b>(H3) <f c="b">ḍholā-samudra</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81519]</f></b></d>
+<d> <f c="p">=</f> <f c="b">ḍhora-s</f><f c="r">°</f> <f c="1" s="-1"><a> W. </a></f>    </d></r>
 </u>
-<n>qAmara</n>
+<n>QolasamudrikA</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍāmara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81379]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> " causing tumult (<f c="b">ḍam</f><f c="r">°</f>.) " , extraordinary , surprising <f c="1" s="-1"><a> Ma1lati1m. </a></f> (<f c="b">-tva</f>  <em><f c="1">n.</f></em> abstr.) <f c="1" s="-1"><a> Gi1t. </a> xii , 23</f>  </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81380]</f></b></d>
-<d> <em><f c="1">m.</f></em> surprise , sight <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81381]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍam</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81382]</f></b></d>
-<d> <em><f c="1">m.</f></em> a lord (probably = baron , knight) <f c="1" s="-1"><a> Ra1jat. </a></f>    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81383]</f></b></d>
-<d> <em><f c="1">m.</f></em> a <q><f s="-1" c="1">N.</f></q> of 6 <f c="t">tantra</f>s (<f c="b">yoga-</f> , <f c="b">śiva-</f> , <f c="b">durgā-</f> , <f c="b">sārasvata-</f> , <f c="b">brahma-</f> , <f c="b">gandharva-</f>)    </d></r>
-<r><d><b>(H1B) <f c="b">ḍāmara</f><f s="-1"> [L=81384]</f></b></d>
-<d> <em><f c="1">m.</f></em> of an attendant of <f c="t">śiva</f> , <f c="1" s="-1"><a> BrahmaP. </a></f>     </d></r>
+<r><d><b>(H3) <f c="b">ḍhola--</f><f c="r">°</f> <f c="b">samudrikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81521]</f></b></d>
+<d> <em><f c="1">f.</f></em> " coming from or growing in <f c="t">ḍhola-samudra</f> (- <f c="b">ḍhora-s</f><f c="r">°</f>) " , <f c="b" s="-1">Leea macrophylla</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
 </u>
-<n>qamarin</n>
+<n>Qola</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍamarin</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81343]</f></b></d>
-<d> <em><f c="1">m.</f></em> a sort of drum <f c="1" s="-1"><a> BhP. </a> viii , 10 , 7.</f>    </d></r>
+<r><d><b>(H2) <f c="b">ḍhola</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81520]</f></b></d>
+<d> <em><f c="1">m.</f></em> a large drum , <f c="1" s="-1"> Rudraj. ??</f>   </d></r>
 </u>
-<n>qamaruka</n>
+<n>QollarI</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍamaruka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81346]</f></b></d>
-<d>  <em>mf</em>(<f c="b">ā</f><em> </em><f c="b">ī</f>)<em><f c="1">n.</f></em> (<em><f c="1">n.</f></em> <f c="1" s="-1"><a> L. </a></f>)  <f c="p">=</f> <f c="r">°</f><f c="b">rin</f> <f c="1" s="-1"><a> Va1tsya1y. </a> </f><f s="-1"> &amp;c </f>     </d></r>
+<r><d><b>(H1) <f c="b">ḍhollarī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81522]</f></b></d>
+<d> <em><f c="1">f.</f></em> a kind of composition.    </d></r>
 </u>
-<n>qamaru</n>
+<n>Qorasamudra</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍamaru</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81344]</f></b></d>
-<d>  <em><f c="1">m.</f></em> (<f c="1" s="-1"><a> L. </a></f>) <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1"><a> Ra1jat. </a> ii , 99</f> <f c="1" s="-1"><a> Prab. </a> iii , 14</f>    </d></r>
-<r><d><b><f s="-1"> [L=81344.1]</f></b></d>
-<d>  surprise <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H2) <f c="b">ḍamaru</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332320]</f></b></d>
-<d> <em><f c="1">m.</f></em> (add "a sacred drum, shaped like an hour, glass, used by the god <f c="t">śiva</f> and by Buddhist mendicant monks for a musical accompaniment in chanting", <q><f s="-1" c="1">cf.</f></q> <f c="1" s="-1"><a> MWB. </a></f>384, 385).</d></r>
+<r><d><b>(H1) <f c="b">ḍhora-samudra</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,2]</f><f s="-1"> [L=81518]</f></b></d>
+<d> <q><f s="-1" c="1">N.</f></q> of a locality <f c="1" s="-1"><a> Romakas. </a></f>   </d></r>
 </u>
-<n>qamaruyantra</n>
+<n>QuQi</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍamaru--yantra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81345]</f></b></d>
-<d> <em><f c="1">n.</f></em> a kind of pan <f c="1" s="-1"><a> Bhpr. </a></f>    </d></r>
+<r><d><b>(H1) <f c="b">ḍhuḍhi</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81503]</f></b></d>
+<d> <q><f s="-1" c="1">v.l.</f></q> for <f c="b">ḍhuṇḍhi</f>.    </d></r>
 </u>
-<n>qama</n>
+<n>QuRQana</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍama</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81341]</f></b></d>
-<d> <em><f c="1">m.</f></em> a despised mixed caste (son of a <f c="t">cāṇḍāli</f> and a <f c="t">leṭa</f>) <f c="1" s="-1"><a> BrahmaP. </a></f>    </d></r>
+<r><d><b>(H2) <f c="b">ḍhuṇḍhana</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81505]</f></b></d>
+<d> <em><f c="1">n.</f></em> searching , investigating <f c="1" s="-1"><a> W. </a></f>    </d></r>
 </u>
-<n>qambaranAman</n>
+<n>QuRQikA</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍambara--nāman</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81355]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> having a high-sounding name , <f c="1" s="-1"><a> Ma1lati1m. </a> i , 4</f><f c="r">÷</f><f c="1" s="-1">5</f>    </d></r>
+<r><d><b>(H2) <f c="b">ḍhuṇḍhikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81511]</f></b></d>
+<d> <em><f c="1">f.</f></em> a gloss (?).    </d></r>
 </u>
-<n>qambarasiMha</n>
+<n>QuRQirAjAKyAna</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍambara-siṃha</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332330]</f></b></d>
-<d> <em><f c="1">m.</f></em> (with <f c="b">para</f>-<f c="b">mara</f>) <q><f s="-1" c="1">N.</f></q> of a king, <f c="1" s="-1"><a> Inscr. </a></f></d></r>
+<r><d><b>(H4) <f c="b">ḍhuṇḍhi--rā</f><f c="r">°</f> <f c="b">jā</f><f c="r">*</f> <f c="b">khyāna</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81510]</f></b></d>
+<d> <em><f c="1">n.</f></em>  <q><f s="-1" c="1">N.</f></q> of <f c="1" s="-1"><a> Gan2P. </a> ii , 43.</f>     </d></r>
 </u>
-<n>qambara</n>
+<n>QuRQirAja</n>
 <u>
-<r><d><b>(H1) <f c="b">ḍambara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81349]</f></b></d>
-<d> <em><f c="1">m.</f></em> great noise , loud assertion of  (in  <q><f s="-1" c="1">comp.</f></q>) , verbosity <f c="1" s="-1"><a> Katha1s. </a> cvii , 5</f> <f c="1" s="-1"><a> Prata1par. </a></f> <f c="1" s="-1"><a> Sa1h. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81350]</f></b></d>
-<d>  entanglement , multitude , mass <f c="1" s="-1"><a> Ma1lati1m. </a></f> <f c="1" s="-1"><a> Mcar. </a></f> <f c="1" s="-1"><a> Katha1s. </a>lxxi</f>   </d></r>
-<r><d><b><f s="-1"> [L=81351]</f></b></d>
-<d>  beauty <f c="1" s="-1"><a> Uttarar. </a></f> <f c="1" s="-1"><a> Viddh. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81352]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of an attendant of <f c="t">skanda</f> <f c="1" s="-1"><a> MBh. </a> ix , 2541</f>   </d></r>
-<r><d><b><f s="-1"> [L=81353]</f></b></d>
-<d>  of a <f c="t">gandharva</f> <f c="1" s="-1"><a> Hariv. </a></f> (<q><f s="-1" c="1">v.l.</f></q> <f c="b">ḍumb</f><f c="r">°</f>)   </d></r>
-<r><d><b><f s="-1"> [L=81354]</f></b></d>
-<d>   <q><f s="-1" c="1">cf.</f></q> <f c="b">ā-</f>.    </d></r>
+<r><d><b>(H3) <f c="b">ḍhuṇḍhi--rāja</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81507]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of the author of a work on nativities  </d></r>
+<r><d><b><f s="-1"> [L=81508]</f></b></d>
+<d>  of <f c="t">bālakṛṣṇa</f>'s father   </d></r>
+<r><d><b><f s="-1"> [L=81509]</f></b></d>
+<d>  of <f c="t">vināyaka-bhaṭṭa</f>'s father (about 1800 A.D.)   </d></r>
 </u>
-<n>qamBa</n>
+<n>QuRQita</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍambha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81358]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man <f c="1" s="-1"><a> Ra1jat. </a> viii , 1135</f>  </d></r>
-<r><d><b>(H2B) <f c="b">ḍambhā</f><f s="-1"> [L=81359]</f></b></d>
-<d> <em><f c="1">f.</f></em> <q><f s="-1" c="1">N.</f></q> of a weapon <f c="1" s="-1"><a> Buddh. </a></f> <f c="1" s="-1"><a> L. </a></f>     </d></r>
+<r><d><b>(H2) <f c="b">ḍhuṇḍhita</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81512]</f></b></d>
+<d> <em><f c="1">mfn.</f></em> sought , inquired <f c="1" s="-1"><a> W. </a></f>    </d></r>
 </u>
-<n>qamBA</n>
+<n>QuRQi</n>
 <u>
-<r><d><b>(H2) <f c="b">ḍambha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81358]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man <f c="1" s="-1"><a> Ra1jat. </a> viii , 1135</f>  </d></r>
-<r><d><b>(H2B) <f c="b">ḍambhā</f><f s="-1"> [L=81359]</f></b></d>
-<d> <em><f c="1">f.</f></em> <q><f s="-1" c="1">N.</f></q> of a weapon <f c="1" s="-1"><a> Buddh. </a></f> <f c="1" s="-1"><a> L. </a></f>     </d></r>
+<r><d><b>(H2) <f c="b">ḍhuṇḍhi</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81506]</f></b></d>
+<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of <f c="t">gaṇeśa</f> <f c="1" s="-1"><a> Ka1s3i1Kh. </a></f>   </d></r>
 </u>
-<n>qAmBiwwatva</n>
+<n>QuRQ</n>
 <u>
-<r><d><b>(H3) <f c="b">ḍāmbhiṭṭa--tva</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81389]</f></b></d>
-<d> <em><f c="1">n.</f></em> an act of a man of <f c="t">ḍāmbhiṭṭa</f>'s kind <f c="1" s="-1">ib.</f>    </d></r>
-</u>
-<n>qAmBiwwa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍāmbhiṭṭa</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81388]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man , man of <f c="t">ḍāmbhiṭṭa</f>'s kind  (?mentioned along with <f c="t">ḍittha</f> ; <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍavittha</f>) <f c="1" s="-1"><a> Pa1n2. </a> 5-1 , 1 19</f> <f s="-1">Va1rtt. 5</f> <f c="1" s="-1"><a> Pat. </a></f>   </d></r>
-</u>
-<n>qambura</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍambura</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81356]</f></b></d>
-<d> ? <f c="1" s="-1"><a> Hcat. </a> i , 9 , 49.</f>    </d></r>
-</u>
-<n>qamb</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍamb</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81348]</f></b></d>
-<d><p>  <em>cl.10.</em> <f c="r">°</f><f c="b">bayati</f> , to push , throw <f c="1" s="-1"><a> Vop. </a></f> (<f c="1" s="-1"><a> Dha1tup. </a> xxxii , 132</f>) <f c="p"> ; </f></p><p> <q><f s="-1" c="1">cf.</f></q> <f c="b">vi-</f>.    </p></d></r>
-</u>
-<n>qamB</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍambh</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81357]</f></b></d>
-<d>  <em>cl.10 A1.</em> , <q><f s="-1" c="1">v.l.</f></q> for  √<f c="b">ḍap</f>.    </d></r>
-</u>
-<n>qAMkfti</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍāṃkṛti</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81375]</f></b></d>
-<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">ṭaṃkṛta</f> <f c="1" s="-1"><a> Prab. </a> iii , 14.</f>    </d></r>
-</u>
-<n>qamp</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍamp</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81347]</f></b></d>
-<d>  <em>cl.10 A1.</em> <q><f s="-1" c="1">v.l.</f></q> for  √<f c="b">ḍap</f>.    </d></r>
-</u>
-<n>qam</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍam</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81340]</f></b></d>
-<d>  <em>cl.1 P.</em> (<q><f s="-1" c="1">p.</f></q> <f c="r">°</f><f c="b">mat</f>) to sound (as a drum) <f c="1" s="-1"><a> Prab. </a> iii , 14.</f>    </d></r>
-</u>
-<n>qaNgara</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍaṅgara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81335]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍiṅg</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81336]</f></b></d>
-<d>  throwing (or " an expression of contempt ") <f c="1" s="-1"><a> L. </a></f> (also <f c="b">ḍiṅg</f><f c="r">°</f>)   </d></r>
-<r><d><b>(H1B) <f c="b">ḍaṅgarī</f><f s="-1"> [L=81337]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of gourd <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qaNgarI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍaṅgara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81335]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍiṅg</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81336]</f></b></d>
-<d>  throwing (or " an expression of contempt ") <f c="1" s="-1"><a> L. </a></f> (also <f c="b">ḍiṅg</f><f c="r">°</f>)   </d></r>
-<r><d><b>(H1B) <f c="b">ḍaṅgarī</f><f s="-1"> [L=81337]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of gourd <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qaNgArI</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍaṅgārī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81338]</f></b></d>
-<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="r">°</f><f c="b">garī</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qANgarI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍāṅgarī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81376]</f></b></d>
-<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">ḍaṅg</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qaNkamAhAtmya</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍaṅka-māhātmya</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332300]</f></b></d>
-<d> <em><f c="1">n.</f></em> (? for <f c="b">dhaṅka</f>-<f c="b">m</f> <q><f s="-1" c="1">N.</f></q> of <q><f s="-1" c="1">wk.</f></q></d></r>
-</u>
-<n>qap</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍap</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81339]</f></b></d>
-<d>  <em>cl.10 A1.</em> <f c="b">ḍāpayate</f> , to accumulate <f c="1" s="-1"><a> Dha1tup. </a> xxxiii , 4.</f>    </d></r>
-</u>
-<n>qAtkfti</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍāt-kṛti</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81377]</f></b></d>
-<d> <em><f c="1">f.</f></em> (<f c="p">=</f> <f c="b">ḍāṃ-</f> ; <f c="b">ṭaṃ-kāra</f>) howling , <f c="1" s="-1"><a> Ma1lati1m. </a> v , 19</f>.    </d></r>
-</u>
-<n>qavitTa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍavittha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81366]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man  (named along with <f c="t">ḍittha</f> ; <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍāmbhiṭṭa</f>) <f c="1" s="-1"><a> Pa1n2. </a> 1-2 , 45 </f><q><f c="1" s="-1">Sch.</f></q> (<f c="b">kapittha</f> <f c="1" s="-1"><a> Ka1s3. </a></f>) <f c="1" s="-1"><a> Ba1dar. </a> ii , 4 , 20  </f><q><f c="1" s="-1">Sch.</f></q> <f c="1" s="-1"><a> Sa1h. </a> ii , 4</f><f c="r">÷</f><f c="1" s="-1">5</f> a wooden antelope <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍa</f><f c="r"> 1</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,1]</f><f s="-1"> [L=81325]</f></b></d>
-<d> the 3rd cerebral consonant  (pronounced like <f c="b">d</f> in <f c="b">drum</f> by slightly turning the tip of the tongue upwards  ; and often in Bengal like a hard <f c="b">r</f>).  </d></r>
-<r><d><b>(H1) <f c="b">ḍa</f><f c="r"> 2</f><f s="-1"> [L=81327]</f></b></d>
-<d> <em><f c="1">m.</f></em> a sound <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81328]</f></b></d>
-<d>  a kind of drum <f c="1" s="-1"><a> W. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81329]</f></b></d>
-<d>  fear <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81330]</f></b></d>
-<d>  submarine fire <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81331]</f></b></d>
-<d>  <f c="t">śiva</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍā</f><f c="r"> 2</f><f s="-1"> [L=81332]</f></b></d>
-<d> <em><f c="1">f.</f></em> a <f c="t">ḍākinī</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍā</f><f c="r"> 2</f><f s="-1"> [L=81333]</f></b></d>
-<d>  <em><f c="1">f.</f></em> a basket <f s="-1"> &amp;c </f> carried by a sling <f c="1" s="-1"><a> L. </a></f>      </d></r>
-</u>
-<n>qA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍa</f><f c="r"> 2</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81327]</f></b></d>
-<d> <em><f c="1">m.</f></em> a sound <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81328]</f></b></d>
-<d>  a kind of drum <f c="1" s="-1"><a> W. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81329]</f></b></d>
-<d>  fear <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81330]</f></b></d>
-<d>  submarine fire <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81331]</f></b></d>
-<d>  <f c="t">śiva</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍā</f><f c="r"> 2</f><f s="-1"> [L=81332]</f></b></d>
-<d> <em><f c="1">f.</f></em> a <f c="t">ḍākinī</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍā</f><f c="r"> 2</f><f s="-1"> [L=81333]</f></b></d>
-<d>  <em><f c="1">f.</f></em> a basket <f s="-1"> &amp;c </f> carried by a sling <f c="1" s="-1"><a> L. </a></f>      </d></r>
-</u>
-<n>qayana</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍayana</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,2]</f><f s="-1"> [L=81360]</f></b></d>
-<d> <f c="p">»</f>  √<f c="b">ḍī</f>.    </d></r>
-<r><d><b>(H2) <f c="b">ḍayana</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81443]</f></b></d>
-<d> <em><f c="1">n.</f></em> a bird's flight <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81444]</f></b></d>
-<d>  a palanquin <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qerikA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍerikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81463]</f></b></d>
-<d> <em><f c="1">f.</f></em> a musk rat <f c="1" s="-1"><a> A1p. </a> i , 25 , 13.</f>    </d></r>
-</u>
-<n>qikkarikA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍik-karikā</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81396]</f></b></d>
-<d> <f c="p">=</f> <f c="b">ḍik-karī</f> , <f c="1" s="-1"><a> S3i1l. </a></f>    </d></r>
-</u>
-<n>qilli</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍilli</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81441]</f></b></d>
-<d> <f c="r">°</f><f c="b">llī</f> , the town Delhi.    </d></r>
-</u>
-<n>qima</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍima</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81419]</f></b></d>
-<d> <em><f c="1">m.</f></em> a dramatic exhibition of a siege  (as of <f c="t">tripura-dāha</f> <q><f s="-1" c="1">q.v.</f></q>) <f c="1" s="-1"><a> Das3ar. </a></f> <f c="1" s="-1"><a> Prata1par. </a></f> <f c="1" s="-1"><a> Sa1h. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81420]</f></b></d>
-<d>  a kind of mixed caste <f c="1" s="-1"><a> BrahmaP. </a> i , 10 , 105.</f>     </d></r>
-</u>
-<n>qimBacakra</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍimbha--cakra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81436]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">N.</f></q> of a mystical diagram.   </d></r>
-</u>
-<n>qimbAhava</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍimbā</f><f c="r">*</f> <f c="b">hava</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81424]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1"><a> Mn. </a> v , 95</f> <f c="1" s="-1"><a> MBh. </a> i , 1219.</f>   </d></r>
-</u>
-<n>qimBaka</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍimbhaka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81438]</f></b></d>
-<d> <em><f c="1">m.</f></em> a new-born child , young animal <f c="1" s="-1"><a> S3ak. </a></f> (in Prakrit  <q><f s="-1" c="1">v.l.</f></q>)  </d></r>
-<r><d><b>(H2) <f c="b">ḍimbhikā</f><f s="-1"> [L=81439]</f></b></d>
-<d>  <em><f c="1">f.</f></em> a new-born child , young animal <f c="1" s="-1"><a> S3ak. </a></f> (in Prakrit  <q><f s="-1" c="1">v.l.</f></q>)    </d></r>
-<r><d><b>(H2B) <f c="b">ḍimbhaka</f><f s="-1"> [L=81440]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a general of <f c="t">jarā-saṃdha</f> <f c="1" s="-1"><a> MBh. </a> ii , 576 and 601 ff.</f> <f c="1" s="-1"><a> Hariv. </a></f>     </d></r>
-</u>
-<n>qimBAqimBa</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍimbhā</f><f c="r">*</f> <f c="b">ḍimbha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81437]</f></b></d>
-<d> <f c="p">=</f> <f c="b">ḍimbā</f><f c="r">*</f><f c="b">hava</f> (?) <f c="1" s="-1"><a> Hcat. </a> i , 6.</f>    </d></r>
-</u>
-<n>qimba</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍimba</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81422]</f></b></d>
-<d>  <em>mn.</em> (<f c="1" s="-1"><a> L. </a></f>) " affray , riot " <f c="p">»</f> <f c="r">°</f><f c="b">bā</f><f c="r">*</f><f c="b">hava</f>    </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.05]</f></b></d>
-<d>  <em><f c="1">m.</f></em> an egg <f c="1" s="-1"> Ma1latim. ??</f> <f c="1" s="-1"><a> Pan5car. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.10]</f></b></d>
-<d> <em><f c="1">m.</f></em> a chrysalis <f c="1" s="-1"><a> W. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.15]</f></b></d>
-<d> <em><f c="1">m.</f></em> the recently-formed embryo <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.20]</f></b></d>
-<d> <em><f c="1">m.</f></em> (for <f c="r">°</f><f c="b">mbha</f>) a new-born child , a child <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.25]</f></b></d>
-<d> <em><f c="1">m.</f></em> a young animal <f c="1" s="-1"><a> W. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.30]</f></b></d>
-<d> <em><f c="1">m.</f></em> an idiot <f c="1" s="-1"><a> Ra1jat. </a> vii , 1074 ; viii , 1707</f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.35]</f></b></d>
-<d> <em><f c="1">m.</f></em> a ball <f c="1" s="-1"><a> W. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.40]</f></b></d>
-<d> <em><f c="1">m.</f></em> a humming top <f c="1" s="-1"><a> Naish. </a> xxii , 53</f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.45]</f></b></d>
-<d> <em><f c="1">m.</f></em> the body <f c="1" s="-1"><a> S3is3. </a> xviii , 77</f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.50]</f></b></d>
-<d> <em><f c="1">m.</f></em> the lungs <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.55]</f></b></d>
-<d> <em><f c="1">m.</f></em> the spleen <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.60]</f></b></d>
-<d> <em><f c="1">m.</f></em> the uterus <f c="1" s="-1"><a> W. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.65]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="b" s="-1">Ricinus</f> <f c="b" s="-1">communis</f> <f c="1" s="-1"><a> L. </a></f>     </d></r>
-<r><d><b>(H1B) <f c="b">ḍimba</f><f s="-1"> [L=81422.70]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">cf.</f></q> <f c="b">ujjūṭa-</f> , <f c="b">jala-</f>     </d></r>
-</u>
-<n>qimBa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍimbha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81429]</f></b></d>
-<d> <em><f c="1">m.</f></em> (<q><f s="-1" c="1">cf.</f></q> <f c="b">mba</f>) a new-born child , child , boy , young animal <f c="1" s="-1"><a> S3ak. </a></f> <f c="1" s="-1"><a> Ha1l. </a></f> <f c="1" s="-1"><a> Naish. </a></f> <f c="1" s="-1"><a> Ba1lar. </a></f> <f c="1" s="-1"><a> Pan5car. </a></f> <f c="1" s="-1"><a> S3a1n3khGr2. </a> </f><q><f c="1" s="-1">Sch.</f></q>  </d></r>
-<r><d><b><f s="-1"> [L=81430]</f></b></d>
-<d>  an idiot <f c="1" s="-1"><a> Ma1lati1m. </a></f> <f c="1" s="-1"><a> Sa1h. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81431]</f></b></d>
-<d>  a young shoot <f c="1" s="-1"><a> Naish. </a> viii , 2</f>   </d></r>
-<r><d><b><f s="-1"> [L=81432]</f></b></d>
-<d>  an egg <f c="1" s="-1"><a> Pan5car. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81433]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of a <f c="t">dānava</f> <f c="1" s="-1"><a> Hariv. </a> ii , 102 , 10</f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍimbhā</f><f s="-1"> [L=81434]</f></b></d>
-<d> <em><f c="1">f.</f></em> an infant <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍimbha</f><f s="-1"> [L=81435]</f></b></d>
-<d> <em><f c="1">f.</f></em>  <q><f s="-1" c="1">cf.</f></q> <f c="b">toya-</f>.    </d></r>
-</u>
-<n>qimBA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍimbha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81429]</f></b></d>
-<d> <em><f c="1">m.</f></em> (<q><f s="-1" c="1">cf.</f></q> <f c="b">mba</f>) a new-born child , child , boy , young animal <f c="1" s="-1"><a> S3ak. </a></f> <f c="1" s="-1"><a> Ha1l. </a></f> <f c="1" s="-1"><a> Naish. </a></f> <f c="1" s="-1"><a> Ba1lar. </a></f> <f c="1" s="-1"><a> Pan5car. </a></f> <f c="1" s="-1"><a> S3a1n3khGr2. </a> </f><q><f c="1" s="-1">Sch.</f></q>  </d></r>
-<r><d><b><f s="-1"> [L=81430]</f></b></d>
-<d>  an idiot <f c="1" s="-1"><a> Ma1lati1m. </a></f> <f c="1" s="-1"><a> Sa1h. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81431]</f></b></d>
-<d>  a young shoot <f c="1" s="-1"><a> Naish. </a> viii , 2</f>   </d></r>
-<r><d><b><f s="-1"> [L=81432]</f></b></d>
-<d>  an egg <f c="1" s="-1"><a> Pan5car. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81433]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of a <f c="t">dānava</f> <f c="1" s="-1"><a> Hariv. </a> ii , 102 , 10</f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍimbhā</f><f s="-1"> [L=81434]</f></b></d>
-<d> <em><f c="1">f.</f></em> an infant <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍimbha</f><f s="-1"> [L=81435]</f></b></d>
-<d> <em><f c="1">f.</f></em>  <q><f s="-1" c="1">cf.</f></q> <f c="b">toya-</f>.    </d></r>
-</u>
-<n>qimbayudDa</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍimba--yuddha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81423]</f></b></d>
-<d> <em><f c="1">n.</f></em> affray , riot <f c="1" s="-1"><a> W. </a></f>   </d></r>
-</u>
-<n>qimbikA</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍimbikā</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81425]</f></b></d>
-<d> <em><f c="1">f.</f></em> a lustful woman <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81426]</f></b></d>
-<d>  a bubble <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81427]</f></b></d>
-<d> <em><f c="1">f.</f></em>  <f c="p">=</f> <f c="b">moṇaka</f> , or <f c="b">śoṇ</f><f c="r">°</f> (<f c="b" s="-1">Bignonia</f> <f c="b" s="-1">indica</f>) <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qimBikA</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍimbhikā</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81439]</f></b></d>
-<d>  <em><f c="1">f.</f></em> a new-born child , young animal <f c="1" s="-1"><a> S3ak. </a></f> (in Prakrit  <q><f s="-1" c="1">v.l.</f></q>)   </d></r>
-<r><d><b>(H2B) <f c="b">ḍimbhaka</f><f s="-1"> [L=81440]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a general of <f c="t">jarā-saṃdha</f> <f c="1" s="-1"><a> MBh. </a> ii , 576 and 601 ff.</f> <f c="1" s="-1"><a> Hariv. </a></f>     </d></r>
-</u>
-<n>qimB</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍimbh</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81428]</f></b></d>
-<d> <f c="p">»</f>  √<f c="b">ḍip</f>.    </d></r>
-</u>
-<n>qimp</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍimp</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81421]</f></b></d>
-<d> <f c="b">ḍimb</f> <f c="p">»</f>  √<f c="b">ḍip</f>.    </d></r>
-</u>
-<n>qim</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍim</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81418]</f></b></d>
-<d> (a <f c="t">sautra</f> root)  , to injure.    </d></r>
-</u>
-<n>qInaqInaka</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍīna--ḍīnaka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81448]</f></b></d>
-<d> <em><f c="1">n.</f></em> flying reiteratedly <f c="1" s="-1">ib.</f>    </d></r>
-</u>
-<n>qIna</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍīna</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81445]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> (<q><f s="-1" c="1">cf.</f></q> <f c="1" s="-1"><a> Pa1n2. </a> 7-2 , 14 ; viii , 2 , 45</f> <f c="1" s="-1"><a> Ka1s3. </a></f>) flown , flying <f c="1" s="-1"><a> W. </a></f>  </d></r>
-<r><d><b>(H2B) <f c="b">ḍīna</f><f s="-1"> [L=81446]</f></b></d>
-<d> <em><f c="1">n.</f></em> a bird's flight <f c="1" s="-1"><a> MBh. </a> viii , 1899 f.</f>   </d></r>
-<r><d><b>(H2B) <f c="b">ḍīna</f><f s="-1"> [L=81447]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">cf.</f></q> <f c="b">ati-</f> , <f c="b">abhi-</f> , <f c="b">ava-</f> , <f c="b">ni-</f> , <f c="b">nir-</f> , <f c="b">parā-</f> , <f c="b">pari-</f> , <f c="b">punar-</f> , <f s="-1"> &amp;c </f>     </d></r>
-</u>
-<n>qiNgara</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṅgara</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81397]</f></b></d>
-<d> <em><f c="1">m.</f></em> a servant <f c="1" s="-1"><a> L. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81398]</f></b></d>
-<d>  a rogue , cheat <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b><f s="-1"> [L=81399]</f></b></d>
-<d>   <f c="p">=</f> <f c="b">ḍaṅg</f><f c="r">°</f> (<q><f s="-1" c="1">q.v.</f></q> ; " a fat man " <f c="1" s="-1"><a> W. </a></f>) <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qip</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍip</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81417]</f></b></d>
-<d>  <f c="b">ḍimp</f>,<f c="b">ḍimbh</f> <em>cl.10 A1.</em> <f c="b">ḍepayate</f>,<f c="b">ḍimp</f><f c="r">°</f>,<f c="b">ḍimbh</f><f c="r">°</f> , to heap together <f c="1" s="-1"><a> Dha1tup. </a> xxxiii , 4</f> :  <em>cl.4.6.10.</em> <em><f c="1">P.</f></em> <f c="b">ḍipyati</f>,<f c="b">ḍipati</f>,<f c="b">depayati</f> (<q><f s="-1" c="1">v.l.</f></q> <f c="b">ṭep</f><f c="r">°</f> <f c="1" s="-1"><a> Vop. </a></f>) <em><f c="1">A1.</f></em> <f c="b">ḍimbayate</f> , to throw <f c="1" s="-1"><a> Dha1tup. </a></f>    </d></r>
-</u>
-<n>qiqimARaka</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiḍimāṇaka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81400]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a bird of the <f c="t">pratuda</f> class <f c="1" s="-1"><a> Sus3r. </a></f>  </d></r>
-<r><d><b><f s="-1"> [L=81401]</f></b></d>
-<d>   (<f c="b">ḍiṇḍimāṇava</f> <f c="1" s="-1"><a> Car. </a> i , 27.</f>)     </d></r>
-</u>
-<n>qiRqiBa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍibha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81403]</f></b></d>
-<d> <em><f c="1">m.</f></em> a water-snake <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qiRqika</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍika</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81402]</f></b></d>
-<d> <q><f s="-1" c="1">N.</f></q> of a mouse <f c="1" s="-1"><a> MBh. </a> v.</f>    </d></r>
-<r><d><b>(H2) <f c="b">ḍiṇḍika</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332350]</f></b></d>
-<d> <em><f c="1">m.</f></em> a <q><f s="-1" c="1">partic.</f></q> mixed caste, <f c="1" s="-1"><a> L. </a></f></d></r>
-</u>
-<n>qiRqimARava</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍimāṇava</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81409]</f></b></d>
-<d> <f c="p">»</f> <f c="b">ḍiḍimāṇaka</f>.    </d></r>
-</u>
-<n>qiRqimatva</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍima</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81404]</f></b></d>
-<d>  <em><f c="1">m.</f></em> a kind of drum , <f c="1" s="-1">vii , ix</f> <f c="1" s="-1"><a> Hariv. </a></f> (once  <em>f</em>(<f c="r">°</f><f c="b">mā</f>)<em>.</em> <f c="1" s="-1">14836</f>) <f c="1" s="-1"><a> R. </a> v</f> <f c="1" s="-1"><a> Katha1s. </a></f> (once  <em><f c="1">n.</f></em> <f c="1" s="-1">xci , 23</f>)  <f s="-1"> &amp;c </f> (<q><f s="-1" c="1">ifc.</f></q>  <em>f</em>(<f c="b">ā</f>)<em>.</em> <f c="1" s="-1"><a> Amar. </a></f>)   </d></r>
-<r><d><b><f s="-1"> [L=81405]</f></b></d>
-<d>  great noise , murmuring , clamour , loud assertion <f c="1" s="-1"><a> Ka1d. </a></f> <f c="1" s="-1"><a> Ba1lar. </a></f> <f c="1" s="-1"><a> Vcar. </a></f> (<f c="b">-tva</f>  <em><f c="1">n.</f></em> abstr.)  <f s="-1"> &amp;c </f>   </d></r>
-<r><d><b><f s="-1"> [L=81406]</f></b></d>
-<d>  <f c="b" s="-1">Carissa</f> <f c="b" s="-1">Carandas</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍiṇḍima</f><f s="-1"> [L=81407]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> humming <f c="1" s="-1"><a> Ka1d. </a> ii , 154.</f>    </d></r>
-</u>
-<n>qiRqima</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍima</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81404]</f></b></d>
-<d>  <em><f c="1">m.</f></em> a kind of drum , <f c="1" s="-1">vii , ix</f> <f c="1" s="-1"><a> Hariv. </a></f> (once  <em>f</em>(<f c="r">°</f><f c="b">mā</f>)<em>.</em> <f c="1" s="-1">14836</f>) <f c="1" s="-1"><a> R. </a> v</f> <f c="1" s="-1"><a> Katha1s. </a></f> (once  <em><f c="1">n.</f></em> <f c="1" s="-1">xci , 23</f>)  <f s="-1"> &amp;c </f> (<q><f s="-1" c="1">ifc.</f></q>  <em>f</em>(<f c="b">ā</f>)<em>.</em> <f c="1" s="-1"><a> Amar. </a></f>)   </d></r>
-<r><d><b><f s="-1"> [L=81405]</f></b></d>
-<d>  great noise , murmuring , clamour , loud assertion <f c="1" s="-1"><a> Ka1d. </a></f> <f c="1" s="-1"><a> Ba1lar. </a></f> <f c="1" s="-1"><a> Vcar. </a></f> (<f c="b">-tva</f>  <em><f c="1">n.</f></em> abstr.)  <f s="-1"> &amp;c </f>   </d></r>
-<r><d><b><f s="-1"> [L=81406]</f></b></d>
-<d>  <f c="b" s="-1">Carissa</f> <f c="b" s="-1">Carandas</f> <f c="1" s="-1"><a> L. </a></f>   </d></r>
-<r><d><b>(H1B) <f c="b">ḍiṇḍima</f><f s="-1"> [L=81407]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> humming <f c="1" s="-1"><a> Ka1d. </a> ii , 154.</f>    </d></r>
-</u>
-<n>qiRqimeSvaratIrTa</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍiṇḍime</f><f c="r">*</f> <f c="b">śvaratīrtha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81408]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">N.</f></q> of a <f c="t">tīrtha</f> <f c="1" s="-1"><a> Reva1Kh. </a> cccxi.</f>    </d></r>
-</u>
-<n>qiRqiramodaka</n>
-<u>
-<r><d><b>(H3) <f c="b">ḍiṇḍira--modaka</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81411]</f></b></d>
-<d> <em><f c="1">n.</f></em> garlic <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qiRqira</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍira</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81410]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">hiṇḍ</f><f c="r">°</f> , os sepiae <f c="1" s="-1"><a> L. </a></f>   </d></r>
-</u>
-<n>qiRqIra</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍiṇḍīra</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81412]</f></b></d>
-<d>  <em><f c="1">m.</f></em> (<f c="1" s="-1"><a> L. </a></f>) <f c="p">=</f> <f c="r">°</f><f c="b">ḍira</f> <f c="1" s="-1"><a> Vcar. </a></f>     </d></r>
-<r><d><b><f s="-1"> [L=81412.1]</f></b></d>
-<d>  (<q><f s="-1" c="1">ifc.</f></q> <em>f</em>(<f c="b">ā</f>)<em>.</em>) <f c="1" s="-1"><a> Katha1s. </a></f>      </d></r>
-<r><d><b>(H1) <f c="b">ḍiṇḍīra</f><f s="-1"> [L=81414]</f></b></d>
-<d> <f c="p">»</f> <f c="r">°</f><f c="b">ḍira</f>.     </d></r>
-</u>
-<n>qiRqiSa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍiṇḍiśa</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81413]</f></b></d>
-<d> <f c="p">=</f> <f c="b">ṭiṇḍ</f><f c="r">°</f> <f c="p">=</f> <f c="b">tindiśa</f> <f c="1" s="-1"><a> Bhpr. </a></f>    </d></r>
-</u>
-<n>qitTatA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍittha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81415]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man , man of <f c="t">ḍittha</f>'s kind  (? ; " a handsome dark-complexioned man conversant with every branch of learning " <f c="1" s="-1"><a> L. </a></f> ; <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍavittha</f> and <f c="b">ḍāmbhiṭṭa</f>) <f c="1" s="-1"><a> Pa1n2. </a> 5-1 , 119</f> <f s="-1">Va1rtt. 5</f> <f c="1" s="-1"><a> Pat. </a></f> (also <f c="b">-tā</f>  <em><f c="1">f.</f></em> <f c="b">-tva</f>  <em><f c="1">n.</f></em> " an act of a man of <f c="t">ḍittha</f>'s kind ") <f c="1" s="-1"> ; i , 2 , 45</f> <f c="1" s="-1"><a> Ka1s3. </a></f> <f c="1" s="-1"><a> Ba1dar. </a> ii , 4 , 20  </f><q><f c="1" s="-1">Sch.</f></q> <f c="1" s="-1"><a> Kpr. </a></f> <f c="1" s="-1"><a> Sa1h. </a> ii , 4</f><f c="r">÷</f><f c="1" s="-1">5</f> <f c="1" s="-1"><a> Tarkas. </a> 59</f>  </d></r>
-<r><d><b><f s="-1"> [L=81416]</f></b></d>
-<d>  a wooden elephant <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qitTatva</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍittha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81415]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man , man of <f c="t">ḍittha</f>'s kind  (? ; " a handsome dark-complexioned man conversant with every branch of learning " <f c="1" s="-1"><a> L. </a></f> ; <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍavittha</f> and <f c="b">ḍāmbhiṭṭa</f>) <f c="1" s="-1"><a> Pa1n2. </a> 5-1 , 119</f> <f s="-1">Va1rtt. 5</f> <f c="1" s="-1"><a> Pat. </a></f> (also <f c="b">-tā</f>  <em><f c="1">f.</f></em> <f c="b">-tva</f>  <em><f c="1">n.</f></em> " an act of a man of <f c="t">ḍittha</f>'s kind ") <f c="1" s="-1"> ; i , 2 , 45</f> <f c="1" s="-1"><a> Ka1s3. </a></f> <f c="1" s="-1"><a> Ba1dar. </a> ii , 4 , 20  </f><q><f c="1" s="-1">Sch.</f></q> <f c="1" s="-1"><a> Kpr. </a></f> <f c="1" s="-1"><a> Sa1h. </a> ii , 4</f><f c="r">÷</f><f c="1" s="-1">5</f> <f c="1" s="-1"><a> Tarkas. </a> 59</f>  </d></r>
-<r><d><b><f s="-1"> [L=81416]</f></b></d>
-<d>  a wooden elephant <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qitTa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍittha</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81415]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a man , man of <f c="t">ḍittha</f>'s kind  (? ; " a handsome dark-complexioned man conversant with every branch of learning " <f c="1" s="-1"><a> L. </a></f> ; <q><f s="-1" c="1">cf.</f></q> <f c="b">ḍavittha</f> and <f c="b">ḍāmbhiṭṭa</f>) <f c="1" s="-1"><a> Pa1n2. </a> 5-1 , 119</f> <f s="-1">Va1rtt. 5</f> <f c="1" s="-1"><a> Pat. </a></f> (also <f c="b">-tā</f>  <em><f c="1">f.</f></em> <f c="b">-tva</f>  <em><f c="1">n.</f></em> " an act of a man of <f c="t">ḍittha</f>'s kind ") <f c="1" s="-1"> ; i , 2 , 45</f> <f c="1" s="-1"><a> Ka1s3. </a></f> <f c="1" s="-1"><a> Ba1dar. </a> ii , 4 , 20  </f><q><f c="1" s="-1">Sch.</f></q> <f c="1" s="-1"><a> Kpr. </a></f> <f c="1" s="-1"><a> Sa1h. </a> ii , 4</f><f c="r">÷</f><f c="1" s="-1">5</f> <f c="1" s="-1"><a> Tarkas. </a> 59</f>  </d></r>
-<r><d><b><f s="-1"> [L=81416]</f></b></d>
-<d>  a wooden elephant <f c="1" s="-1"><a> L. </a></f>     </d></r>
-</u>
-<n>qI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍī</f><f s="-1"> [p= <c h="0430-TIkA">430</c>,3]</f><f s="-1"> [L=81442]</f></b></d>
-<d><p>  <em>cl.1.4.</em> <em><f c="1">A1.</f></em> <f c="b">ḍayate</f> , <f c="b">ḍī́yate</f> (<f c="1" s="-1"><a> Naigh. </a> ii , 14</f> <f c="1" s="-1"><a> Pa1n2. </a> 7-2 , 10</f> <f s="-1">Va1rtt. 7</f> <f c="1" s="-1"><a> Pat. </a></f> ;  <q><f s="-1" c="1">pf.</f></q> <f c="b">ḍiḍye</f> , <f c="1" s="-1">viii , 4 , 54</f> <f c="1" s="-1"><a> Ka1s3. </a></f> ; <f s="-1">pr. p.</f> , <f c="b">ḍayamāna</f> , <f c="1" s="-1">59</f> <f c="1" s="-1"><a> Ka1s3. </a></f> ;  <q><f s="-1" c="1">aor.</f></q> <f c="b">aḍayiṣṭa</f> <f c="1" s="-1"><a> Vop. </a></f>) to fly <f c="1" s="-1"><a> Dha1tup. </a></f> <f c="p"> ; </f></p><p> <q><f s="-1" c="1">cf.</f></q> <f c="b">uḍ-</f> , <f c="b">pro</f><f c="r">*</f><f c="b">ḍ-</f>.    </p></d></r>
-</u>
-<n>qolA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍolā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81476]</f></b></d>
-<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">ḍolā</f> , a swing <f c="1" s="-1"><a> Ba1lar. </a> vii.</f>    </d></r>
-</u>
-<n>qoma</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍoma</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81468]</f></b></d>
-<d> <em><f c="1">m.</f></em> a man of low caste (living by singing and music) , <f c="1" s="-1"> Tantr. ??</f>    </d></r>
-</u>
-<n>qomba</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍomba</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81469]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1"><a> VarBr2S. </a> lxxxvii , 33</f> (<q><f s="-1" c="1">v.l.</f></q> <f c="b">ḍumba</f>) <f c="1" s="-1"><a> Katha1s. </a> xiii , 96ff.</f> <f c="1" s="-1"><a> Ra1jat. </a> vf.</f>  </d></r>
-<r><d><b><f s="-1"> [L=81470]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of a man ,<f c="1" s="-1"> vii , 1070 and 1136</f>   </d></r>
-<r><d><b>(H2B) <f c="b">ḍombī</f><f s="-1"> [L=81471]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of drama <f c="1" s="-1"><a> Das3ar. </a> i , 8 </f><q><f c="1" s="-1">Sch.</f></q>     </d></r>
-</u>
-<n>qombI</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍomba</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81469]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1"><a> VarBr2S. </a> lxxxvii , 33</f> (<q><f s="-1" c="1">v.l.</f></q> <f c="b">ḍumba</f>) <f c="1" s="-1"><a> Katha1s. </a> xiii , 96ff.</f> <f c="1" s="-1"><a> Ra1jat. </a> vf.</f>  </d></r>
-<r><d><b><f s="-1"> [L=81470]</f></b></d>
-<d>  <q><f s="-1" c="1">N.</f></q> of a man ,<f c="1" s="-1"> vii , 1070 and 1136</f>   </d></r>
-<r><d><b>(H2B) <f c="b">ḍombī</f><f s="-1"> [L=81471]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of drama <f c="1" s="-1"><a> Das3ar. </a> i , 8 </f><q><f c="1" s="-1">Sch.</f></q>     </d></r>
-</u>
-<n>qombulI</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍombulī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81472]</f></b></d>
-<d> <em><f c="1">f.</f></em> (in music)  a kind of measure.    </d></r>
-</u>
-<n>qoqahI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍoḍahī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81467]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of flute.    </d></r>
-</u>
-<n>qoqa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍoḍa</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81464]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a royal family , <f c="1" s="-1"><a> Ratnak. </a></f>  </d></r>
-<r><d><b>(H1B) <f c="b">ḍoḍī</f><f s="-1"> [L=81465]</f></b></d>
-<d>  <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">kṣupa-ḍoḍa-muṣṭi</f> <f c="1" s="-1"><a> Pan5cad. </a> ii , 71.</f>      </d></r>
-</u>
-<n>qoqI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍoḍa</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81464]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">N.</f></q> of a royal family , <f c="1" s="-1"><a> Ratnak. </a></f>  </d></r>
-<r><d><b>(H1B) <f c="b">ḍoḍī</f><f s="-1"> [L=81465]</f></b></d>
-<d>  <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">kṣupa-ḍoḍa-muṣṭi</f> <f c="1" s="-1"><a> Pan5cad. </a> ii , 71.</f>      </d></r>
-</u>
-<n>qoqIyA</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍoḍīyā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81466]</f></b></d>
-<d> <em><f c="1">f.</f></em> <q><f s="-1" c="1">N.</f></q> of a royal family , <f c="1" s="-1"><a> Ratnak. </a></f>    </d></r>
-</u>
-<n>qoraka</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍoráka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81474]</f></b></d>
-<d> <em><f c="1">n.</f></em> (<f c="p">=</f> <f c="b">dor</f><f c="r">°</f>) <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1">ib.</f>    </d></r>
-</u>
-<n>qoraqI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍoraḍī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81475]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of <f c="b" s="-1">Solanum</f> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qora</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍora</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81473]</f></b></d>
-<d> <em><f c="1">m.</f></em> <em><f c="1">n.</f></em> a string <f c="1" s="-1"><a> BhavP. </a></f>    </d></r>
-</u>
-<n>qORquBa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍauṇḍubha</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81477]</f></b></d>
-<d> <em><f c="1">mfn.</f></em> belonging to a <f c="b">ḍuṇḍubha</f> <f c="1" s="-1"><a> MBh. </a> i , 1006.</f>    </d></r>
-</u>
-<n>qula</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍula</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81457]</f></b></d>
-<d> <q><f s="-1" c="1">g.</f></q> <f c="b">balā</f><f c="r">*</f><f c="b">di</f>.    </d></r>
-</u>
-<n>qulikA</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍulikā</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81459]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of wagtail <f c="1" s="-1"><a> L. </a></f>   </d></r>
-</u>
-<n>quli</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍuli</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81458]</f></b></d>
-<d> <em><f c="1">f.</f></em> <f c="p">=</f> <f c="b">duli</f> , a turtle <f c="1" s="-1"><a> L. </a> </f><q><f c="1" s="-1">Sch.</f></q>    </d></r>
-</u>
-<n>qulI</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍulī</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81460]</f></b></d>
-<d> <em><f c="1">f.</f></em> a kind of pot-herb (<f c="b">cillī-</f>) <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qUlUvESvAnara</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍūlū-vaiśvānara</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81462]</f></b></d>
-<d> <em><f c="1">n.</f></em> <q><f s="-1" c="1">N.</f></q> of a <f c="t">tīrtha</f> <f c="1" s="-1"><a> Rasik. </a> xi , 79.</f>    </d></r>
-</u>
-<n>qulya</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍulya</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81461]</f></b></d>
-<d> <q><f s="-1" c="1">g.</f></q> <f c="b">balā</f><f c="r">*</f><f c="b">di</f>.    </d></r>
-</u>
-<n>qumbara</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍumbara</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81456]</f></b></d>
-<d> <q><f s="-1" c="1">v.l.</f></q> for <f c="b">ḍamb</f><f c="r">°</f> , q. V.    </d></r>
-</u>
-<n>qumba</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍumba</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81454]</f></b></d>
-<d> <em><f c="1">m.</f></em> <q><f s="-1" c="1">v.l.</f></q> for <f c="b">ḍomba</f> <q><f s="-1" c="1">q.v.</f></q>  </d></r>
-<r><d><b><f s="-1"> [L=81455]</f></b></d>
-<d>   <q><f s="-1" c="1">cf.</f></q> <f c="b">go-</f>.     </d></r>
-</u>
-<n>qunduka</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍunduka</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81453]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍāhuka</f> , a gallinule <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>ququBa</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍuḍubha</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81449]</f></b></d>
-<d> <em><f c="1">m.</f></em> <f c="p">=</f> <f c="b">ḍuṇḍ</f><f c="r">°</f> <f c="1" s="-1"><a> L. </a> </f><q><f c="1" s="-1">Sch.</f></q>    </d></r>
-</u>
-<n>quRDI</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍuṇdhī</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332370]</f></b></d>
-<d> (also) <q><f s="-1" c="1">N.</f></q> of various authors, <f c="1" s="-1"><a> Cat. </a></f></d></r>
-</u>
-<n>quRquBa</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍuṇḍubha</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81451]</f></b></d>
-<d>  <em><f c="1">m.</f></em> a kind of lizard , <f c="1" s="-1">i , 984ff. ; vii , 6905 </f> (B ;  <q><f s="-1" c="1">ifc.</f></q>  <em>f</em>(<f c="b">ā</f>)<em>.</em>) <f c="1" s="-1"><a> Katha1s. </a> xiv , 74 and 83 f.</f>     </d></r>
-</u>
-<n>quRqula</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍuṇḍula</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81452]</f></b></d>
-<d> <em><f c="1">m.</f></em> a small owl <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>quRqura</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍuṇḍura</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332360]</f></b></d>
-<d> <em><f c="1">m.</f></em> an upper bedroom, <f c="1" s="-1"><a> L. </a></f></d></r>
-</u>
-<n>quRqu</n>
-<u>
-<r><d><b>(H2) <f c="b">ḍuṇḍu</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81450]</f></b></d>
-<d> <em><f c="1">f.</f></em> <q><f s="-1" c="1">id.</f></q> <f c="1" s="-1"><a> L. </a></f>    </d></r>
-</u>
-<n>qval</n>
-<u>
-<r><d><b>(H1) <f c="b">ḍval</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81478]</f></b></d>
-<d> (=  √ <f c="b">ṭval</f>). <f c="p">»</f> <f c="b">ā-</f>.    </d></r>
-<r><d><b>(H2) <f c="b">ḍval</f><f s="-1"> [p= <c h="1328">1328</c>,1]</f><f s="-1"> [L=332380]</f></b></d>
-<d> (see <f c="b">ā</f>-<f c="b">ḍval</f> <q><f s="-1" c="1">p.</f></q> 1319, <q><f s="-1" c="1">col.</f></q> 2).</d></r>
+<r><d><b>(H1) <f c="b">ḍhuṇḍh</f><f s="-1"> [p= <c h="0431-DuDubha">431</c>,1]</f><f s="-1"> [L=81504]</f></b></d>
+<d> (a <f c="t">sautra</f> root)  , to search.    </d></r>
 </u>
 </xml>
