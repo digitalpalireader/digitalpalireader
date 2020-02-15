@@ -3,3 +3,25 @@ body {
   padding: 0;
   background-color: #FFD;
 }
+
+
+.nav-title-div{
+  margin: none;
+}
+
+.nav-title-div.navbutton{
+  margin: none;
+  padding: none;
+}
+.navbutton{
+  background-color: #F5F5F5;
+  margin: 5px;
+  padding: 5px;
+}
+
+
+.navselect{
+  border: none;
+  background-color: #F5F5F5;
+  margin: 5px;
+}

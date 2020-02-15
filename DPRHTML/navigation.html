@@ -129,11 +129,11 @@
       <div class="form-row">
         <div class="form-group col mb-1">
           <label class="font-weight-bold">Book Hierarchy</label>
-          <div id="nav-title-div" class="subnav-cont input-group">
-            <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
+          <div id="nav-title-div" class="subnav-cont input-group" style="margin-bottom: 5px;">
+            <input id="nav-title" type="button" class="btn btn-light btn-lg" style="margin-left: 5px; width: 88%; height: 120%;  margin-bottom: 5px;"
               onclick="digitalpalireader.loadIndex(1)" />
-            <br class="clear" />
-            <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
+            <!-- <br class="clear" /> -->
+            <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)" style=" margin-bottom: 10px;" />
           </div>
           <div class="subnav-cont input-group">
             <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
@@ -159,7 +159,7 @@
           <div class="subnav-cont input-group">
             <select id="nav-section" class="custom-select navselect"></select>
             <br class="clear" />
-            <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+            <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)" value="&#8594;" />
           </div>
         </div>
       </div>
@@ -189,7 +189,7 @@
             <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
               onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
             <br class="clear" />
-            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&#8594;" />
           </div>
         </div>
       </div>
