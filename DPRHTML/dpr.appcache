@@ -164,5 +164,23 @@ CACHE MANIFEST
 /DPRMyanmar/content/xml/k15a.xml
 /DPRMyanmar/content/xml/y1a.xml
 
+/digitalpalireader/content/etc/XML1/0/ped.xml
+/digitalpalireader/content/etc/XML1/1/ped.xml
+/digitalpalireader/content/etc/XML1/2/ped.xml
+/digitalpalireader/content/etc/XML1/3/ped.xml
+/digitalpalireader/content/etc/XML1/4/ped.xml
+
+/digitalpalireader/content/etc/XML2/1.xml
+/digitalpalireader/content/etc/XML2/2.xml
+/digitalpalireader/content/etc/XML2/3.xml
+/digitalpalireader/content/etc/XML2/4.xml
+/digitalpalireader/content/etc/XML2/5.xml
+/digitalpalireader/content/etc/XML2/6.xml
+/digitalpalireader/content/etc/XML2/7.xml
+/digitalpalireader/content/etc/XML2/8.xml
+/digitalpalireader/content/etc/XML2/9.xml
+/digitalpalireader/content/etc/XML2/10.xml
+/digitalpalireader/content/etc/XML2/abbrev.xml
+
 NETWORK:
 *
