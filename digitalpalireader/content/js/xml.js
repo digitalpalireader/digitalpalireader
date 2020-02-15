@@ -441,10 +441,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(opara) {
-        document.getElementById('maf').scrollTop = document.getElementById('para'+opara).offsetTop;
+        document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop;
 	}
 	else if(scroll) {
-		document.getElementById('maf').scrollTop = scroll;
+		document.getElementById('paliTextContent').scrollTop = scroll;
 	}
 
 // add to history
