@@ -561,7 +561,7 @@ function clearDivs(which) { // place divs to be cleared here
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if (DPR_PAL.isWeb) {
-    $('#nav-context-div').html('<label class="font-weight-bold">Context Menu</label><div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>');
+    $('#nav-context-div').html('<label class="font-weight-bold">Context Menu</label><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>');
 		return;
 	}//TODO:MovetoMarkupLater
 

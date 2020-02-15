@@ -306,7 +306,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 	// first toolbar row
 
-	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+' <span class="abut obut small" id="close" onclick="closePanel(G_compare)" title="close panel">x</span>';
+	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'');
 
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
@@ -909,7 +909,7 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}
 
-	var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>&nbsp;<span class="abut obut small" id="close" onclick="closePanel()" title="close panel">x</span>';
+	var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>';
 
 	$('#mafbc').html('');
 
