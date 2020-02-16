@@ -236,14 +236,14 @@ left:20px;
 
 
 #paliTextContent.COLLAPSE{
-	height:calc(100vh - 6Rem - 250px);
+  height:calc(100vh - 6Rem - 250px);
   transition: height 0.5s;
 }
 
 
 #paliTextContent{
   overflow-y: scroll;
-	height:calc(100vh -  6Rem);
+  height:calc(100vh -  6Rem);
   transition: height 0.5s;
 }
 
