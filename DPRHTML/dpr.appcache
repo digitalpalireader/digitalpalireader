@@ -1,11 +1,5 @@
 CACHE MANIFEST
-# version 1
 
-/digitalpalireader/content/css/jquery-ui.min.css
-/digitalpalireader/content/js/jquery.js
-/digitalpalireader/content/js/jquery-ui.js
-/index.html
-/DPRHTML/index.css
 /DPRMyanmar/content/xml/m2a.xml
 /DPRMyanmar/content/xml/a8m.xml
 /DPRMyanmar/content/xml/k2m.xml
@@ -169,17 +163,24 @@ CACHE MANIFEST
 /DPRMyanmar/content/xml/a5t.xml
 /DPRMyanmar/content/xml/k15a.xml
 /DPRMyanmar/content/xml/y1a.xml
-/digitalpalireader/content/js/reltik.js
-/digitalpalireader/content/js/web/sidebar.js
-/digitalpalireader/content/js/translit.js
-/digitalpalireader/content/js/dppn.js
-/digitalpalireader/content/js/relmul.js
-/digitalpalireader/content/js/relatt.js
-/digitalpalireader/content/js/xml_load.js
-/digitalpalireader/content/js/navigation_common.js
-/digitalpalireader/content/js/prefload.js
-/digitalpalireader/content/js/xml.js
-/digitalpalireader/content/js/navigation.js
-/digitalpalireader/content/js/format.js
-/digitalpalireader/content/js/translations.js
-/digitalpalireader/content/js/send_sidebar.js
+
+/digitalpalireader/content/etc/XML1/0/ped.xml
+/digitalpalireader/content/etc/XML1/1/ped.xml
+/digitalpalireader/content/etc/XML1/2/ped.xml
+/digitalpalireader/content/etc/XML1/3/ped.xml
+/digitalpalireader/content/etc/XML1/4/ped.xml
+
+/digitalpalireader/content/etc/XML2/1.xml
+/digitalpalireader/content/etc/XML2/2.xml
+/digitalpalireader/content/etc/XML2/3.xml
+/digitalpalireader/content/etc/XML2/4.xml
+/digitalpalireader/content/etc/XML2/5.xml
+/digitalpalireader/content/etc/XML2/6.xml
+/digitalpalireader/content/etc/XML2/7.xml
+/digitalpalireader/content/etc/XML2/8.xml
+/digitalpalireader/content/etc/XML2/9.xml
+/digitalpalireader/content/etc/XML2/10.xml
+/digitalpalireader/content/etc/XML2/abbrev.xml
+
+NETWORK:
+*

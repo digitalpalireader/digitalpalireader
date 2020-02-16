@@ -1,17 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="dpr.appcache">
 
 <head>
   <title>Digital Pali Reader (alpha)</title>
   <link rel="icon" href="./favicon.png" />
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/digitalpalireader/content/js/external/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/DPRHTML/index.css">
   <link rel="stylesheet" href="/DPRHTML/styles.css">
 
-  <script type="text/javascript">
+  <script>
     const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
     var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
@@ -32,11 +32,11 @@
   </script>
 
   <!-- PAL must be the first script. -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <script type="application/x-javascript" src="/digitalpalireader/content/js/dpr_pal.js"></script>
+  <script src="/digitalpalireader/content/js/external/jquery-3.2.1.min.js"></script>
+  <script src="/digitalpalireader/content/js/external/ui/1.12.1/jquery-ui.min.js"></script>
+  <script src="/digitalpalireader/content/js/external/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="/digitalpalireader/content/js/external/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="/digitalpalireader/content/js/dpr_pal.js"></script>
   <script>
     var devCheck = 0;
     window.dump = window.dump || devCheck ? console.log : () => { };
@@ -180,8 +180,7 @@
         <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
         <p class="intro-message-tiny">To start, simply choose a set, book and section in <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton" class="intro-message-green" title="Open side bar..." onclick="$('#sidebarButton').trigger('click');">the sidebar</a>.</p>
         <p class="intro-message-tiny">For detailed instructions, click <a href="help.html" class="intro-message-green" title="Open help page...">here for the help page</a>.</p>
-        <p class="intro-message-tiny">For information on updates, visit <a href="" class="intro-message-green" title="Open project site...">the project site</a>.</p>
-        <p class="intro-message-tiny">If you have questions or feedback, please contact me at <a href="mailto:yuttadhammo+dpr@gmail.com" class="intro-message-green" title="Send me email...">yuttadhammo+dpr@gmail.com</a>.</p>
+        <p class="intro-message-tiny">If you have questions or feedback, send email to <a href="mailto:yuttadhammo+dpr@gmail.com" class="intro-message-green" title="Send me email...">yuttadhammo+dpr@gmail.com</a>.</p>
       </div>
     </div>
     <div class="row">
