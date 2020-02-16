@@ -328,7 +328,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 // output header
 
 
-	$('#mafbc').html(`<table width=100%><tr><td align=center>${DPRSidebarHamburgerMenu()}</td><td align=center>`+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
+  $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+(place[8]?'<span class="tiny">(Thai)</span>':'')+`</nav>`);
+
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
@@ -961,7 +962,7 @@ function loadXMLindex(place,compare) {
 	if(isDev)
 		return [tabT,saveout];
 
-  $('#mafbc').html(`<table width=100%><tr><td align=left>${DPRSidebarHamburgerMenu()}</td><td align=left>`+tabT+'</td></tr></table><hr></hr>');
+  $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+tabT+`</nav>`);
   $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
 	$('#mafbc').append('<div id="savei">'+saveout+'</div>');
   $('#mafbc').append('<div id="convi">'+convout+'</div>');
