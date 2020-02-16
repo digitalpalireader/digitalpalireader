@@ -44,13 +44,14 @@
         }
       });
     }
+    searchHandler = (event)=>{
+      DPR_PAL.closeSideBar();
+      DPRSend.sendSearch(DPRSend.eventSend(event));
+      setSearchParams();
+      $("#mafbc").load("search-results.html");
+    }
     $(document).ready(function() {
       setSearchParams();
-      $('#searchButton').on('click', function() {
-        DPR_PAL.closeSideBar();
-        setSearchParams();
-        $("#mafbc").load("search-results.html");
-      });
     });
   </script>
 </head>
@@ -62,9 +63,9 @@
       <label class="sr-only" for="isearch">isearch</label>
       <div class="input-group">
         <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)"
-          onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;">
+          onkeydown="if(event.keyCode==13) searchHandler(); event.keyCode=0;">
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="searchButton" title="Search for word or phrase in selected volumes" onclick="DPRSend.sendSearch(DPRSend.eventSend(event));">
+          <button class="btn btn-outline-secondary" type="button" id="searchButton" title="Search for word or phrase in selected volumes" onclick="searchHandler(event)">
             <i class="fa fa-search" aria-hidden="true"></i>
           </button>
         </div>
