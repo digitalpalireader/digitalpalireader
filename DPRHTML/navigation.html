@@ -73,6 +73,7 @@
           break;
       }
     });
+    onpopstate = DPRChrome.historyPopstateHandler;
   </script>
 </head>
 
@@ -135,11 +136,11 @@
       <div class="form-row mb-2">
         <div class="form-group col-md-6 mb-1" id="nav-set-div">
           <label class="small-bold-font" for="nav-set">Set</label>
-          <select class="custom-select" size="5" id="nav-set"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set"></select>
         </div>
         <div class="form-group col-md-6 mb-1" id="nav-book-div">
           <label class="small-bold-font" for="nav-book">Book</label>
-          <select class="custom-select" size="5" id="nav-book" class="sbut"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" class="sbut"></select>
         </div>
       </div>
 

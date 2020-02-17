@@ -149,8 +149,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		newparams = oldparams.join('|')+bparams;
 	}
 
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+  var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+  if (oldurl != newurl){
+    DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
+  }
 
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
 
@@ -572,7 +574,9 @@ function loadXMLindex(place,compare) {
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
-    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+    if (oldurl != newurl){
+      DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
+    }
 
 		whichcol[0] = 1; // bump up to let the second color know
 
