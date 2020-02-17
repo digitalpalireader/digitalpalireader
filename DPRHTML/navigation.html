@@ -58,23 +58,9 @@
 
       $('#nav-title').prop('title', 'View index for this book');
 
-      $('#quicklinks-info')
-        .each(function() {
-          $(this).popover({
-            trigger: 'hover',
-            html : true,
-            content: () => $('#quicklinks-info-popover-content').html(),
-          })
-        });
+      DPR_PAL.enablePopover('#quicklinks-info', 'hover');
 
-        $('#navigate-book-hierarchy-info')
-        .each(function() {
-          $(this).popover({
-            trigger: 'hover',
-            html : true,
-            content: () => $('#navigate-book-hierarchy-info-popover-content').html(),
-          })
-        });
+      DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
 
       switch(place.length){
         case 3:

@@ -155,5 +155,16 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.enablePopover = (id, trigger) => {
+    $(id)
+      .each(function() {
+        $(this).popover({
+          trigger: trigger,
+          html: true,
+          content: () => $(`${id}-popover-content`).html(),
+        })
+      });
+  }
+
   console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);

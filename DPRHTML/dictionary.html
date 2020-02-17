@@ -12,14 +12,8 @@
         DPR_PAL.closeSideBar();
         $("#mafbc").load("dictionary-results.html");
       });
-      $('#dictinInfo')
-        .each(function() {
-          $(this).popover({
-            trigger: 'click',
-            html : true,
-            content: () => $('#dictinInfo-popover-content').html(),
-          })
-        });
+
+      DPR_PAL.enablePopover('#dictinInfo', 'click');
     });
   </script>
 </head>
