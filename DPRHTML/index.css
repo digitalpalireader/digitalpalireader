@@ -166,6 +166,11 @@ hr {
   font-weight: bold;
 }
 
+.small-bold-font {
+  font-size: small;
+  font-weight: bold;
+}
+
 /* CHEVRON ROTATION CODE*/
 .rotate{
   -moz-transition: all .3s linear;
@@ -178,7 +183,6 @@ hr {
   -webkit-transform:rotate(180deg);
   transform:rotate(180deg);
 }
-
 
 .force-show-scrollbar-on-macos::-webkit-scrollbar {
   -webkit-appearance: none;

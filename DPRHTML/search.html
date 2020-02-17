@@ -52,14 +52,8 @@
     }
     $(document).ready(function() {
       setSearchParams();
-      $('#isearchInfo')
-        .each(function() {
-          $(this).popover({
-            trigger: 'click',
-            html : true,
-            content: () => $('#isearch-popover-content').html(),
-          })
-        });
+
+      DPR_PAL.enablePopover('#isearchInfo', 'focus');
     });
   </script>
 </head>
@@ -74,7 +68,7 @@
           <button id="isearchInfo" class="btn btn-outline-secondary" type="button" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
             <i class="fa fa-info" aria-hidden="true"></i>
           </button>
-          <div id="isearch-popover-content" style="display: none">
+          <div id="isearchInfo-popover-content" style="display: none">
             Enter search terms using Velthuis or Unicode. Separate terms with '+' (for page search, see the help file).
             <br>
             E.g. aa for ā, .m for ṃ etc.
