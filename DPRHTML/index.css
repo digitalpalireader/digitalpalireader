@@ -166,6 +166,11 @@ hr {
   font-weight: bold;
 }
 
+.small-bold-font {
+  font-size: small;
+  font-weight: bold;
+}
+
 /* CHEVRON ROTATION CODE*/
 .rotate{
   -moz-transition: all .3s linear;
