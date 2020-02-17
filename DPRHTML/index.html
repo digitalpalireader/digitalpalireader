@@ -140,6 +140,13 @@
           localStorage.setItem('activeTab', $(e.target).attr('id'));
         });
       });
+
+      // NOTE: This hides all popover that have click as trigger;
+      $('html').on('click', function (e) {
+          if ($(e.target).data('toggle') !== 'popover') {
+              $('[data-toggle="popover"]').popover('hide');
+          }
+      });;
     });
 
     function loadSidebarDivs(){
@@ -234,10 +241,10 @@
         <div class="modal-header">
           <h6 class="modal-title" id="sidebarHeader">Digital Pali Reader</h6>
           <div class="ml-auto">
-            <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences...">
+            <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="display: none;">
               <i class="fa fa-gear" aria-hidden="true"></i>
             </button>
-            <a type="button" class="btn btn-sm btn-light mb-0" href="help.html" title="Open help...">
+            <a type="button" class="btn btn-sm btn-light mb-0" href="help.html" title="Open help..." style="display: none;">
               <i class="fa fa-question" aria-hidden="true"></i>
             </a>
             <button type="button" class="btn btn-sm btn-light mb-0" data-dismiss="modal" title="Close sidebar">

@@ -12,6 +12,14 @@
         DPR_PAL.closeSideBar();
         $("#mafbc").load("dictionary-results.html");
       });
+      $('#dictinInfo')
+        .each(function() {
+          $(this).popover({
+            trigger: 'click',
+            html : true,
+            content: () => $('#dictinInfo-popover-content').html(),
+          })
+        });
     });
   </script>
 </head>
@@ -22,6 +30,17 @@
     <div class="col">
       <label class="sr-only" for="dictin">dictin</label>
       <div class="input-group">
+        <div class="input-group-prepend">
+          <button id="dictinInfo" class="btn btn-outline-secondary" type="button" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
+            <i class="fa fa-info" aria-hidden="true"></i>
+          </button>
+          <div id="dictinInfo-popover-content" style="display: none">
+            Enter word or partial word using Velthuis or Unicode. E.g. aa for ā, .m for ṃ etc.
+            <br>
+            <br>
+            Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' style='color: blue;'>Velthuis on Wikipedia</a> for the entire list.
+          </div>
+        </div>
         <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode." onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">

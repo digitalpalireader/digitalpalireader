@@ -52,6 +52,14 @@
     }
     $(document).ready(function() {
       setSearchParams();
+      $('#isearchInfo')
+        .each(function() {
+          $(this).popover({
+            trigger: 'click',
+            html : true,
+            content: () => $('#isearch-popover-content').html(),
+          })
+        });
     });
   </script>
 </head>
@@ -62,7 +70,20 @@
     <div class="col-md-10">
       <label class="sr-only" for="isearch">isearch</label>
       <div class="input-group">
-        <input type="text" id="isearch" class="form-control" placeholder="Search term" title="Enter search terms using Velthuis or Unicode.  Separate terms with '+' (for page search, see the help file)"
+        <div class="input-group-prepend">
+          <button id="isearchInfo" class="btn btn-outline-secondary" type="button" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
+            <i class="fa fa-info" aria-hidden="true"></i>
+          </button>
+          <div id="isearch-popover-content" style="display: none">
+            Enter search terms using Velthuis or Unicode. Separate terms with '+' (for page search, see the help file).
+            <br>
+            E.g. aa for ā, .m for ṃ etc.
+            <br>
+            <br>
+            Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' style='color: blue;'>Velthuis on Wikipedia</a> for the entire list.
+          </div>
+        </div>
+        <input type="text" id="isearch" class="form-control" placeholder="Search term"
           onkeydown="if(event.keyCode==13) searchHandler(); event.keyCode=0;">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="searchButton" title="Search for word or phrase in selected volumes" onclick="searchHandler(event)">
