@@ -233,9 +233,17 @@
       <div class="modal-content">
         <div class="modal-header">
           <h6 class="modal-title" id="sidebarHeader">Digital Pali Reader</h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
+          <div class="ml-auto">
+            <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences...">
+              <i class="fa fa-gear" aria-hidden="true"></i>
+            </button>
+            <a type="button" class="btn btn-sm btn-light mb-0" href="help.html" title="Open help...">
+              <i class="fa fa-question" aria-hidden="true"></i>
+            </a>
+            <button type="button" class="btn btn-sm btn-light mb-0" data-dismiss="modal" title="Close sidebar">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
         </div>
         <div class="modal-body" id="modalBody">
           <ul id="navTabs" class="nav nav-tabs">
@@ -255,6 +263,25 @@
           </div>
           <div id="dictionaryDiv" class="mainContent">
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade show" id="setingsDialog" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header p-2">
+          <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer p-2">
+          <button type="button" class="btn btn-secondary btn-sm mb-0" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary btn-sm mb-0">Save changes</button>
         </div>
       </div>
     </div>
