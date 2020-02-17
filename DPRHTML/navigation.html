@@ -105,6 +105,38 @@
 
   <div class="card mb-2">
     <div class="card-header" style="line-height: 1.35rem;">
+      Quick Link
+      <button id="quicklinks-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
+        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+      </button>
+      <div id="quicklinks-info-popover-content" style="display: none">
+        Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
+        1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
+        reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
+        2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
+        comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
+        in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
+        Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
+        (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
+        Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
+      </div>
+    </div>
+    <div class="card-body p-2">
+      <div class="form-row">
+        <div class="form-group col mb-1">
+          <div class="subnav-cont input-group">
+            <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
+              onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
+            <br class="clear" />
+            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb-2">
+    <div class="card-header" style="line-height: 1.35rem;">
       Navigate book hierarchy
       <button id="navigate-book-hierarchy-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
         <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
@@ -175,38 +207,6 @@
             <select id="nav-section" class="custom-select navselect"></select>
             <br class="clear" />
             <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="card mb-2">
-    <div class="card-header" style="line-height: 1.35rem;">
-      Quick Link
-      <button id="quicklinks-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
-        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
-      </button>
-      <div id="quicklinks-info-popover-content" style="display: none">
-        Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
-        1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
-        reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
-        2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
-        comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
-        in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
-        Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
-        (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
-        Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
-      </div>
-    </div>
-    <div class="card-body p-2">
-      <div class="form-row">
-        <div class="form-group col mb-1">
-          <div class="subnav-cont input-group">
-            <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
-              onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
-            <br class="clear" />
-            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
           </div>
         </div>
       </div>
