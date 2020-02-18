@@ -747,7 +747,10 @@ function getTitleXML (num, mul, att, tik, niklist) {
       hiert +
       '\'],null,null,eventSend(event));">go</span></p>'
   }
-  displayDictData(finout, 0)
+  displayDictData(finout, 0);
+  if (!DPR_PAL.isXUL) {
+    document.getElementById('paliTextContent').scrollTop = 0;
+  }
 }
 
 function getDppnData (link) {
