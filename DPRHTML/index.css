@@ -57,13 +57,6 @@ body {
   padding-right: 20px;
 }
 
-#dictc {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-  padding: 0 10px 0 10px;
-}
-
 #odif {
   position: relative;
   width: 100%;
