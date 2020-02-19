@@ -533,7 +533,7 @@ function fadeOut(AID,id,speed) {
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
 		$('#difhist').html('');
-		$('#difb').html('');
+		$('#difb2').html('');
 	}
 	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
 		$('#dict').html('');
