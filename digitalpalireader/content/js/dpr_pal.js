@@ -51,6 +51,8 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/digitalpalireader/content/');
 
+  var bottomFrameUp = false;
+
   DPR_PAL.addJS = files => {
     if (DPR_PAL.isXUL) {
       var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
@@ -99,13 +101,18 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.setPaliTextContentHeight = () => {
+    bottomFrameUp?$("#paliTextContent").addClass("COLLAPSE"):$("#paliTextContent").removeClass("COLLAPSE");
+  }
+
   const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
   DPR_PAL.openBottomFrame = () => {
     if (DPR_PAL.isWeb) {
       $(bottomFrameSelector).show();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").addClass("down");
-        $("#paliTextContent").addClass("COLLAPSE");
+        bottomFrameUp = true;
+        DPR_PAL.setPaliTextContentHeight();
       }
     } else {
       console.error("Not implemented for XUL");
@@ -117,8 +124,9 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).slideToggle();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").toggleClass("down");
-        $(".rotate").hasClass("down")?$("#paliTextContent").addClass("COLLAPSE"):$("#paliTextContent").removeClass("COLLAPSE");
+        $(".rotate").hasClass("down") ? bottomFrameUp=true : bottomFrameUp=false;
       }
+      DPR_PAL.setPaliTextContentHeight();
     } else {
       console.error("Not implemented for XUL");
     }
