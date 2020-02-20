@@ -26,7 +26,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 
 
-	DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee();
 
 	var nikaya = place[0];
 	var book = place[1]+1;
@@ -441,14 +441,15 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			}
 		}
 	}
-	var outData = outputFormattedData(theData,0,place);
+  var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(opara) {
         document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop;
 	}
 	else if(scroll) {
 		document.getElementById('paliTextContent').scrollTop = scroll;
-	}
+  }
+  DPR_PAL.setPaliTextContentHeight();
 
 // add to history
 
@@ -964,26 +965,44 @@ function loadXMLindex(place,compare) {
 	saveout = '<div id="menu">'+saveheader.replace(clfirst,"$1<div class=\"csection\">$2").replace(clinner,"$1</div>$2").replace(cllast,"$1</div>")+'</div>'+saveout;
 
 	if(isDev)
-		return [tabT,saveout];
+    return [tabT,saveout];
 
-  $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+tabT+`</nav>`);
+  if (DPR_PAL.isWeb){
+    $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+tabT+`</nav>`);
+  }
   $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
-	$('#mafbc').append('<div id="savei">'+saveout+'</div>');
+  $('#mafbc').append('<div id="savei">'+saveout+'</div>');
   $('#mafbc').append('<div id="convi">'+convout+'</div>');
+
 
 	// title, tab, link
 
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 
-
-
-
   if (DPR_PAL.isWeb){
     theDatao=digitalpalireader.makeWebAppropriate(theDatao);
-  }
+    $('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
+    DPR_PAL.setPaliTextContentHeight();
+  } else {
+    // permalink
+    var permalink = `${DPR_PAL.dprHomePage}?`;
+    var oldurl = DPR_PAL.contentDocument.location.href;
+    var bareurl = 'dpr:index?';
+    var newparams = 'loc='+place.slice(0,8).join('.');
+    bareurl += newparams;
+    var oldparams = oldurl.split('?')[1];
+    if(oldparams) {
+      oldparams = oldparams.split('|');
+      oldparams[compare-1] = newparams;
+      newparams = oldparams.join('|');
+    }
+    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
-$('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
-	document.getElementById('maf').scrollTop = 0;
+    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+    $('#mafbc').append('<div>'+theDatao+'</div>');
+  }
+  document.getElementById('maf').scrollTop = 0;
+
 	// refresh history box
 
 	var sidebar = DPRSidebarWindow();
