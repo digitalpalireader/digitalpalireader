@@ -102,7 +102,7 @@ console.log('Loading DPR_PAL...');
   }
 
   DPR_PAL.setPaliTextContentHeight = () => {
-    bottomFrameUp?$("#paliTextContent").addClass("COLLAPSE"):$("#paliTextContent").removeClass("COLLAPSE");
+    bottomFrameUp ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
   }
 
   const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
@@ -124,7 +124,7 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).slideToggle();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").toggleClass("down");
-        $(".rotate").hasClass("down") ? bottomFrameUp=true : bottomFrameUp=false;
+        bottomFrameUp = $(".rotate").hasClass("down");
       }
       DPR_PAL.setPaliTextContentHeight();
     } else {
