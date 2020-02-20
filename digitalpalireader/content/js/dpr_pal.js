@@ -51,7 +51,7 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/digitalpalireader/content/');
 
-  var bottomFrameUp = false;
+  DPR_PAL.bottomFrameUp = () => { return $(".rotate").hasClass("down") };
 
   DPR_PAL.addJS = files => {
     if (DPR_PAL.isXUL) {
@@ -102,7 +102,7 @@ console.log('Loading DPR_PAL...');
   }
 
   DPR_PAL.setPaliTextContentHeight = () => {
-    bottomFrameUp ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
+    DPR_PAL.bottomFrameUp() ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
   }
 
   const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
@@ -111,7 +111,6 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).show();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").addClass("down");
-        bottomFrameUp = true;
         DPR_PAL.setPaliTextContentHeight();
       }
     } else {
@@ -124,7 +123,6 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).slideToggle();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").toggleClass("down");
-        bottomFrameUp = $(".rotate").hasClass("down");
       }
       DPR_PAL.setPaliTextContentHeight();
     } else {
