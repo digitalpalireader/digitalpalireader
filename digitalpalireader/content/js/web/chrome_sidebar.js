@@ -29,7 +29,18 @@ var DPRChrome = {
     return false;
   },
   openDPRTab: function (permalink, id, reuse) {
+
       window.history.pushState("string", id, permalink);
+
+      if (permalink.indexOf('?feature=search') > -1) {
+        $("#mafbc").load("search-results.html");
+      } else if (permalink.indexOf('?feature=dictionary') > -1) {
+        $("#mafbc").load("dictionary-results.html");
+      }
+      else {
+        window.location.href = permalink;
+      }
+
   },
   openFirstDPRTab: function () {
     if (!this.findDPRTab()) this.openDPRTab('chrome://digitalpalireader/content/index.xul', 'DPR-main');
@@ -83,5 +94,16 @@ var DPRChrome = {
   openSidebar: function () {
     toggleSidebar('viewDPR');
   },
+  historyPopstateHandler: function() {
+    var location = document.location.href;
+    if (location.indexOf('?feature=search') > -1) {
+      $("#mafbc").load("search-results.html");
+    } else if (location.indexOf('?feature=dictionary') > -1 &&
+      location.indexOf('#') == -1) {
+      $("#mafbc").load("dictionary-results.html");
+    } else {
+      $("#navigationDiv").load("navigation.html");
+    }
+  }
 }
 

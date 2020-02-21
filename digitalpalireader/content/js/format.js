@@ -57,8 +57,10 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 	}
 
 	var outDiv =  document.createElement('div');
-	outDiv.innerHTML = finout;
-	outDiv.id="paliTextContent";
+  outDiv.innerHTML = finout;
+  if (!DPR_PAL.isXUL) {
+    outDiv.id="paliTextContent";
+  }
 	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
 
@@ -531,7 +533,7 @@ function fadeOut(AID,id,speed) {
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
 		$('#difhist').html('');
-		$('#difb').html('');
+		$('#difb2').html('');
 	}
 	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
 		$('#dict').html('');
@@ -561,7 +563,7 @@ function clearDivs(which) { // place divs to be cleared here
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if (DPR_PAL.isWeb) {
-    $('#nav-context-div').html('<label class="font-weight-bold">Context Menu</label><div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>');
+    $('#nav-context-div').html('<label class="font-weight-bold">Context Menu</label><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>');
 		return;
 	}//TODO:MovetoMarkupLater
 
