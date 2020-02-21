@@ -23,9 +23,9 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RE
 
 echo ------ Download asge
 export RootDir="$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop"
-$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy 'https://dprproduction.blob.core.windows.net/asge/asge' "$RootDir/bin/asge" --recursive
+$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy 'https://dprproduction.blob.core.windows.net/asge' "$RootDir/bin" --recursive
 
 echo ------ Compress stuff
-ls -laF "$RootDir/bin/asge/"
-dotnet "$RootDir/bin/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
-dotnet "$RootDir/bin/asge/ASGE.dll" -- -e .js .css -x 8640 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+ls -laF "$RootDir/bin/asge/asge/"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .js .css -x 8640 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
