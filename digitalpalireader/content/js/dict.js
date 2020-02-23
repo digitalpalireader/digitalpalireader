@@ -592,7 +592,15 @@ function dppnFullTextSearch (getstring) {
   getstring = toUni(getstring)
   for (i = 1; i < 10; i++) {
     var xmlhttp = new window.XMLHttpRequest()
-    xmlhttp.open('GET', 'etc/XML2/' + i + '.xml', false)
+    if (DPR_PAL.isXUL) {
+      xmlhttp.open('GET', 'etc/XML2/' + i + '.xml', false)
+    } else {
+      xmlhttp.open(
+        'GET',
+        '../digitalpalireader/content/etc/XML2/' + i + '.xml',
+        false
+      )
+    }
     xmlhttp.send(null)
     var xmlDoc = xmlhttp.responseXML.documentElement
 

@@ -30,12 +30,8 @@ var DPRChrome = {
   },
   openDPRTab: function (permalink, id, reuse) {
 
-      if (permalink.indexOf('?feature=search') > -1) {
-        var newSearchTab = window.open(permalink, id).focus();
-        newSearchTab.$("#mafbc").load("search-results.html");
-      } else if (permalink.indexOf('?feature=dictionary') > -1) {
-        var newDictTab = window.open(permalink, id).focus();
-        newDictTab.$("#mafbc").load("dictionary-results.html");
+      if (permalink.indexOf('?feature=search') > -1 || permalink.indexOf('?feature=dictionary') > -1) {
+        window.open(permalink, id).focus();
       }
       else {
         window.location.href = permalink;
