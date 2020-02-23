@@ -808,7 +808,7 @@ temp
 Remove once search , bookmark button , close-panel is implemented .
 */
 
-#search-book,#close,#bkButton{
+#close,#bkButton{
   pointer-events: none;
   opacity:0.5 ;
 }
