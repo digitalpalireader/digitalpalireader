@@ -30,15 +30,16 @@ var DPRChrome = {
   },
   openDPRTab: function (permalink, id, reuse) {
 
-      window.history.pushState("string", id, permalink);
-
       if (permalink.indexOf('?feature=search') > -1) {
-        $("#mafbc").load("search-results.html");
+        var newSearchTab = window.open(permalink, id).focus();
+        newSearchTab.$("#mafbc").load("search-results.html");
       } else if (permalink.indexOf('?feature=dictionary') > -1) {
-        $("#mafbc").load("dictionary-results.html");
+        var newDictTab = window.open(permalink, id).focus();
+        newDictTab.$("#mafbc").load("dictionary-results.html");
       }
       else {
         window.location.href = permalink;
+        window.history.pushState("string", id, permalink);
       }
 
   },

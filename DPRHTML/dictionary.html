@@ -7,11 +7,6 @@
   <script>
    $(document).ready(function() {
       DPROpts.dictOptions();
-      $('#dictButton').on('click', function() {
-        DPR_PAL.closeSideBar();
-        $("#mafbc").load("dictionary-results.html");
-      });
-
       DPR_PAL.enablePopover('#dictinInfo', 'focus');
     });
   </script>
