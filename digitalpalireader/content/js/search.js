@@ -151,8 +151,9 @@ function DPR_PAL_Search_ScrollSearch(what) {
 		document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
 	} else {
 		const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
-		document.getElementById('search').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
-	}
+		document.getElementById('paliTextContent').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
+  }
+  return false;
 }
 
 function resetvalues() {
