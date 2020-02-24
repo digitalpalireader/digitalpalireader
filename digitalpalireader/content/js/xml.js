@@ -444,7 +444,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(opara) {
-        document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop;
+        document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop - $("#mafbc > nav").outerHeight();
 	}
 	else if(scroll) {
 		document.getElementById('paliTextContent').scrollTop = scroll;
