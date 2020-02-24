@@ -413,7 +413,7 @@ function sktRXML (no, add) {
     xmlhttp.open('GET', file, false)
     xmlhttp.send(null)
   } else {
-    var file = '../../../sanskrit/content/skt-roots/' + sktR[no] + '.htm'
+    var file = '/sanskrit/content/skt-roots/' + sktR[no] + '.htm'
     var xmlhttp = new XMLHttpRequest()
     xmlhttp.onload = function () {
       outputSktRoots(xmlhttp.responseXML)
@@ -479,7 +479,7 @@ function sktXML (entry, idx, which, add) {
   if (DPR_PAL.isXUL) {
     var xml = 'chrome://sanskrit/content/xml/' + char + '.xml'
   } else {
-    var xml = '../../../sanskrit/content/xml/' + char + '.xml'
+    var xml = '/sanskrit/content/xml/' + char + '.xml'
   }
   var xmlhttp = new window.XMLHttpRequest()
   xmlhttp.open('GET', xml, false)
