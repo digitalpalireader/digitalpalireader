@@ -15,7 +15,37 @@ body {
   overflow: auto;
   width: 100%;
 }
-
+.feedback-button-wrapper {
+  position: absolute;
+  top: 1px;
+  right: 1em;
+  width: auto;
+  text-align: center;
+  z-index: 1;
+  
+}
+.feedback-button {
+  height: 4em;
+  width: 8em;
+  font-size: 14px;
+  border-radius: 10%;
+  border: 0 none;
+  background: #72ab59;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transform: scale(1);
+  transition: all 200ms ease;
+}
+#feedbackFormLink {
+  color: rgba(252, 252, 252, 0.945);
+}
+.feedback-button:hover,
+.feedback-button:focus,
+.feedback-button:active {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  outline: 0;
+}
 #nav-set, #nav-book {
   height: 7rem;
 }
