@@ -24,7 +24,7 @@
             searchType = parseInt(parameterSections[1], 10);
             break;
           case 'query':
-            searchString = parameterSections[1];
+            searchString = decodeURIComponent(parameterSections[1]);
             break;
           case 'MAT':
             searchMAT = parameterSections[1];
