@@ -629,6 +629,6 @@ function displayDictData(data) {
 		var dataNode = $('<div></div>').html(data);
 		$(difbId).html('');
 		$(difbId).append(dataNode);
-		$('#cdif').scrollTop(0);
+    $('#paliTextContent').scrollTop(0);
 	}
 }
