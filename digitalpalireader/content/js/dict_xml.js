@@ -5,6 +5,19 @@ var G_pedhist = [];
 var G_phmark = 0;
 
 var pedfileget = '';
+
+const makeUniqueStringForCaseInsensitiveFS = s => {
+  const charToHexStr = c => Number(c.charCodeAt(0)).toString(16).padStart(2, '0').toUpperCase();
+
+  const uniqueStr =
+    [...s]
+      .reverse()
+      .map(charToHexStr)
+      .reduce((current, previous) => previous + current, '');
+
+  return `${s}-${uniqueStr}`;
+}
+
 function paliXML(filein,which,add)
 {
 
@@ -336,7 +349,7 @@ function sktRXML(no,add)
 
 	// xml
 
-	var file = DPR_PAL.baseUrl + 'sanskrit/content/skt-roots/'+sktR[no]+'.htm';
+	var file = `${DPR_PAL.baseUrl}sanskrit/content/skt-roots/${makeUniqueStringForCaseInsensitiveFS(sktR[no])}.xml`;
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", file, false);
 	xmlhttp.send(null);
@@ -390,7 +403,7 @@ function sktXML(entry,idx,which,add)
 
 	var char = entry.charAt(0);
 
-	var xml = DPR_PAL.baseUrl + 'sanskrit/content/xml/'+char+'.xml';
+	var xml = `${DPR_PAL.baseUrl}sanskrit/content/xml/${makeUniqueStringForCaseInsensitiveFS(char)}.xml`;
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", xml, false);
 	xmlhttp.send(null);
