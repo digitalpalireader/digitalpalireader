@@ -253,7 +253,7 @@ function pedFullTextSearch(getstring) {
 	for (i = 0; i < 5; i++) {
 
 		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
+    xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML1/'+i+'/ped.xml', false);
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 
@@ -464,7 +464,7 @@ function dppnFullTextSearch(getstring) {
 	for (i = 1; i < 10; i++) {
 
 		var xmlhttp = new window.XMLHttpRequest();
-		xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
+    xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML2/'+i+'.xml', false);
 		xmlhttp.send(null);
 		var xmlDoc = xmlhttp.responseXML.documentElement;
 
@@ -501,7 +501,9 @@ function dppnFullTextSearch(getstring) {
 
 				postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
 
-				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\'dictc\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
+				let scrollTopElem = DPR_PAL.isXUL ? "dictc" : "paliTextContent";
+
+				finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\''+scrollTopElem+'\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
 			}
 		}
 	}

@@ -152,7 +152,7 @@ function paliXML(filein,which,add)
 
 	// permalink
 
-	if(/dict\.htm/.exec(document.location.href)) {
+	if(DPR_PAL.isDictionaryFeature()) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
@@ -292,7 +292,7 @@ function DPPNXML(filein,which,add)
 
 	// permalink
 
-	if(/dict\.htm/.exec(document.location.href)) {
+	if(DPR_PAL.isDictionaryFeature()) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
@@ -336,7 +336,7 @@ function sktRXML(no,add)
 
 	// xml
 
-	var file = 'chrome://sanskrit/content/skt-roots/'+sktR[no]+'.htm';
+	var file = DPR_PAL.baseUrl + 'sanskrit/content/skt-roots/'+sktR[no]+'.htm';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", file, false);
 	xmlhttp.send(null);
@@ -360,7 +360,7 @@ function sktRXML(no,add)
 
 	// permalink
 
-	if(/dict\.htm/.exec(document.location.href)) {
+	if(DPR_PAL.isDictionaryFeature()) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+no);
@@ -390,7 +390,7 @@ function sktXML(entry,idx,which,add)
 
 	var char = entry.charAt(0);
 
-	var xml = 'chrome://sanskrit/content/xml/'+char+'.xml';
+	var xml = DPR_PAL.baseUrl + 'sanskrit/content/xml/'+char+'.xml';
 	var xmlhttp = new window.XMLHttpRequest();
 	xmlhttp.open("GET", xml, false);
 	xmlhttp.send(null);
@@ -406,7 +406,7 @@ function sktXML(entry,idx,which,add)
 
 	// permalink
 
-	if(/dict\.htm/.exec(document.location.href)) {
+	if(DPR_PAL.isDictionaryFeature()) {
 		var permalink = document.location.href;
 		if(/\&entry=/.exec(permalink)) {
 			permalink = permalink.replace(/&entry=[^&]*/,'&entry='+entry);
@@ -598,6 +598,9 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
         finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
     displayDictData(finout);
+		if (!DPR_PAL.isXUL) {
+			document.getElementById('paliTextContent').scrollTop = 0;
+		}
 }
 
 
@@ -622,9 +625,10 @@ function displayDictData(data) {
 		document.getElementById('difb').appendChild(dataNode);
 		document.getElementById('cdif').scrollTop=0;
 	} else {
+    const difbId = `#${DPR_PAL.getDifId()}`;
 		var dataNode = $('<div></div>').html(data);
-		$('#difb').html('');
-		$('#difb').append(dataNode);
+		$(difbId).html('');
+		$(difbId).append(dataNode);
 		$('#cdif').scrollTop(0);
 	}
 }

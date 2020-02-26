@@ -172,5 +172,12 @@ console.log('Loading DPR_PAL...');
       });
   }
 
+  DPR_PAL.getDifId = () => /frombox=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
+
+  DPR_PAL.isDictionaryFeature = () => {
+    const matcher = DPR_PAL.isWeb ? /feature=dictionary/ : /dict\.htm/;
+    return matcher.exec(document.location.href);
+  }
+
   console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);

@@ -47,7 +47,7 @@ function conjugate(word, id, which) {
 	if(id == 'dif') {
 		clearDivs('dif');
 		outNode.innerHTML = '<div class="conj">'+out+'</div>';
-		document.getElementById('difb2').appendChild(outNode);
+		document.getElementById(DPR_PAL.getDifId()).appendChild(outNode);
 	}
 	else {
 		outNode.innerHTML = '<div class="conj">'+out+'</div><div class="x" onclick="this.parentNode.innerHTML=null">x</div>';
