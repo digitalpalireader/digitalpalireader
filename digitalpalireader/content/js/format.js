@@ -538,7 +538,7 @@ function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
 		$('#dict').html('');
 		$('#difhist').html('');
-		$('#difb').html('');
+		$(`#${DPR_PAL.getDifId()}`).html('');
 	}
 	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
 		$('#anfs').html('');
