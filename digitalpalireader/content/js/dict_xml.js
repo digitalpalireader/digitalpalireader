@@ -388,6 +388,7 @@ function sktRXML(no,add)
 
 }
 
+
 function sktXML(entry,idx,which,add)
 {
 	addJS(['skt']);
