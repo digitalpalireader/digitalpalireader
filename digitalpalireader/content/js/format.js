@@ -563,7 +563,7 @@ function clearDivs(which) { // place divs to be cleared here
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if (DPR_PAL.isWeb) {
-    $('.nav-context-div').html('<button type="button" id="contextButton" data-html="true" data-container="body" data-toggle="popover" data-placement="right">\u2234</button><div id="tbContainer2" style="display: none"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>'+'</div>');
+    $('.nav-context-div').html('<button type="button" id="contextButton" data-html="true" data-container="body" data-toggle="popover">\u2234</button><div id="tbContainer2" style="display: none"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>'+'</div>');
     $('.nav-context-div').popover({
       trigger: 'focus',
       html: true,

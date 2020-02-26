@@ -328,8 +328,8 @@ var DPRNav = {
   },
 
   searchBook: function (nik, book, hiert) {
+    DPR_PAL.openSideBar();
     $("#searchTab").click();
-    console.log(hiert);
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();
     document.getElementById('tsoSETm').selectedIndex = G_nikToNumber[nik];

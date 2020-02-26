@@ -260,9 +260,10 @@
             <a type="button" class="btn btn-sm btn-light mb-0" href="help.html" title="Open help..." style="display: none;">
               <i class="fa fa-question" aria-hidden="true"></i>
             </a>
-            <button type="button" class="btn btn-sm btn-light mb-0" data-dismiss="modal" title="Close sidebar">
+            <button type="button" id="closeSbButton" class="btn btn-sm btn-light mb-0" data-dismiss="modal" title="Close sidebar">
               <i class="fa fa-times" aria-hidden="true"></i>
             </button>
+            <div class="nav-context-div contextMenuSbOpen"></div>
           </div>
         </div>
         <div class="modal-body" id="modalBody">
@@ -286,7 +287,6 @@
         </div>
       </div>
     </div>
-    <div class="nav-context-div contextMenuSbOpen"></div>
   </div>
   <div class="modal fade show" id="setingsDialog" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered" role="document">

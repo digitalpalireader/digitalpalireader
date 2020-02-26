@@ -17,17 +17,16 @@ body {
 }
 
 .contextMenuSbOpen {
-  float: left;
   position: relative;
-  left: 500px;
-  top: -736px;
+  left: 45px;
   background-color: white;
 }
 .contextMenuSbClosed {
   position: absolute;
-  top: 60px;
-  left: 1px;
+  top: 13px;
+  right: 135px;
   background-color: white;
+  z-index: 1;
 }
 
 .feedback-button-wrapper {
@@ -60,6 +59,12 @@ body {
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
   outline: 0;
 }
+
+#closeSbButton {
+  position: absolute;
+  right: 16px;
+}
+
 #nav-set, #nav-book {
   height: 7rem;
 }
