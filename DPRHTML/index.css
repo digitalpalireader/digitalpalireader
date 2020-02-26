@@ -15,6 +15,21 @@ body {
   overflow: auto;
   width: 100%;
 }
+
+.contextMenuSbOpen {
+  float: left;
+  position: relative;
+  left: 500px;
+  top: -736px;
+  background-color: white;
+}
+.contextMenuSbClosed {
+  position: absolute;
+  top: 60px;
+  left: 1px;
+  background-color: white;
+}
+
 .feedback-button-wrapper {
   position: absolute;
   top: 1px;
@@ -22,7 +37,6 @@ body {
   width: auto;
   text-align: center;
   z-index: 1;
-  
 }
 .feedback-button {
   height: 4em;
