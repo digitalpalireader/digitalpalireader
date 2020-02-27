@@ -6,7 +6,7 @@ var G_phmark = 0;
 
 var pedfileget = '';
 
-const makeUniqueStringForCaseInsensitiveFS = s => {
+function makeUniqueStringForCaseInsensitiveFS(s) {
   const charToHexStr = c => Number(c.charCodeAt(0)).toString(16).padStart(2, '0').toUpperCase();
 
   const uniqueStr =
