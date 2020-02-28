@@ -154,7 +154,8 @@
 
       const env = `${environmentName}.${releaseNumber}`;
       const url = encodeURIComponent(document.location.href);
-      $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}`);
+      const userAgent = encodeURIComponent(navigator.userAgent);
+      $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
     });
 
     function loadSidebarDivs(){
