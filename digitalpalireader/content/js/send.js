@@ -120,7 +120,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
       loadXMLindex([nikaya,bookno,hier]);
 		}
 	}
-	else if (add == 'internal' && DPR_PAL.isXUL) {
+	else if (add == 'internal' ) {
 		loadXMLindex([nikaya,bookno,hier]);
 	}
 	else if (add == 'shift' && DPR_PAL.isXUL) {
@@ -301,11 +301,7 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendPlace(place) {
-	var sidebar = DPRSidebarWindow();
-	if (sidebar) {
-		sidebar.DPRNav.gotoPlace(place);
-	}
-
+  DPRSidebarWindow().DPRNav.gotoPlace(place);
 }
 
 function sendUpdateBookmarks() {

@@ -5,13 +5,9 @@
   <title>Digital Pali Reader - Search</title>
   <link rel="stylesheet" href="/DPRHTML/dictionary.css">
   <script>
-    $("#intro-space").hide();
-    $(document).ready(function() {
+   $(document).ready(function() {
       DPROpts.dictOptions();
-      $('#dictButton').on('click', function() {
-        DPR_PAL.closeSideBar();
-        $("#mafbc").load("dictionary-results.html");
-      });
+      DPR_PAL.enablePopover('#dictinInfo', 'focus');
     });
   </script>
 </head>
@@ -22,6 +18,17 @@
     <div class="col">
       <label class="sr-only" for="dictin">dictin</label>
       <div class="input-group">
+        <div class="input-group-prepend">
+          <button id="dictinInfo" class="btn btn-outline-secondary" type="button" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
+            <i class="fa fa-info" aria-hidden="true"></i>
+          </button>
+          <div id="dictinInfo-popover-content" style="display: none">
+            Enter word or partial word using Velthuis or Unicode. E.g. aa for ā, .m for ṃ etc.
+            <br>
+            <br>
+            Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' style='color: blue;'>Velthuis on Wikipedia</a> for the entire list.
+          </div>
+        </div>
         <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode." onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;">
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
@@ -112,19 +119,19 @@
                 </div>
                 <div class="col-md-10 px-0">
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATm">
+                    <input class="form-check-input" type="checkbox" id="soMATm" checked>
                     <label class="form-check-label" for="soMATm" title="Include in search.">
                       Mula
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATa">
+                    <input class="form-check-input" type="checkbox" id="soMATa" checked>
                     <label class="form-check-label" for="soMATa" title="Include in search.">
                       Aṭṭhakathā
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATt">
+                    <input class="form-check-input" type="checkbox" id="soMATt" checked>
                     <label class="form-check-label" for="soMATt" title="Include in search.">
                       Ṭīka
                     </label>

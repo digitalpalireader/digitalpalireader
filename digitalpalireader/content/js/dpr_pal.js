@@ -51,6 +51,8 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/digitalpalireader/content/');
 
+  DPR_PAL.bottomFrameUp = () => { return $(".rotate").hasClass("down") };
+
   DPR_PAL.addJS = files => {
     if (DPR_PAL.isXUL) {
       var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
@@ -80,18 +82,7 @@ console.log('Loading DPR_PAL...');
   };
 
   DPR_PAL.chromeFileExists = fileLoc => {
-    var xmlhttp = new window.XMLHttpRequest();
-    try {
-      xmlhttp.open("GET", `${DPR_PAL.baseUrl}${fileLoc}`, false);
-      xmlhttp.onreadystatechange=function() {
-        xmlhttp.abort();
-      }
-      xmlhttp.send(null);
-    }
-    catch(ex) {
-      return false;
-    }
-    return true;
+    return $.ajax({type:"HEAD",url: `${DPR_PAL.baseUrl}${fileLoc}`,async: false}).status!=404;
   };
 
   DPR_PAL.openSideBar = () => {
@@ -110,12 +101,17 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.setPaliTextContentHeight = () => {
+    DPR_PAL.bottomFrameUp() ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
+  }
+
   const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
   DPR_PAL.openBottomFrame = () => {
     if (DPR_PAL.isWeb) {
       $(bottomFrameSelector).show();
       if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").toggleClass("down");
+        $(".rotate").addClass("down");
+        DPR_PAL.setPaliTextContentHeight();
       }
     } else {
       console.error("Not implemented for XUL");
@@ -127,23 +123,29 @@ console.log('Loading DPR_PAL...');
       $(bottomFrameSelector).slideToggle();
       if ($(bottomFrameSelector).is(":visible")) {
         $(".rotate").toggleClass("down");
-
-        $("#paliTextContent").toggleClass("COLLAPSE");
       }
+      DPR_PAL.setPaliTextContentHeight();
     } else {
       console.error("Not implemented for XUL");
     }
   }
 
+  /*
+  if 'copy permalink to clipboard' button on the modal is pressed , the focus is on the modal .
+  thus execCommand("copy") does not copy from the element appended to the body .
+
+  one workaround is to append an element to the modal itself when the modal is open.
+
+  refer : https://stackoverflow.com/questions/48866903/copy-to-clipboard-action-doesnt-work-when-modal-is-open
+  */
+
   DPR_PAL.copyToClipboard = text => {
     if (DPR_PAL.isWeb) {
-      var clipboardStaging = document.createElement("input");
-      clipboardStaging.style = "position: absolute; left: -1000px; top: -1000px";
-      clipboardStaging.value = text;
-      document.body.appendChild(clipboardStaging);
-      clipboardStaging.select();
+      var targetElement = $(".modal-open").length?$(".modal-body"):$('body');
+      $('<input>').attr('class','clipboardCopy').attr('style','position: absolute; left: -1000px; top: -1000px').val(text).appendTo(targetElement);
+      $('.clipboardCopy').select();
       document.execCommand("copy");
-      document.body.removeChild(clipboardStaging);
+      $('.clipboardCopy').remove();
     } else {
       const clipboardHelper = Components.classes["@mozilla.org/widget/clipboardhelper;1"].getService(Components.interfaces.nsIClipboardHelper);
       clipboardHelper.copyString(text);
@@ -157,6 +159,24 @@ console.log('Loading DPR_PAL...');
     } else {
       return uri;
     }
+  }
+
+  DPR_PAL.enablePopover = (id, trigger) => {
+    $(id)
+      .each(function() {
+        $(this).popover({
+          trigger: trigger,
+          html: true,
+          content: () => $(`${id}-popover-content`).html(),
+        })
+      });
+  }
+
+  DPR_PAL.getDifId = () => /analysis=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
+
+  DPR_PAL.isDictionaryFeature = () => {
+    const matcher = DPR_PAL.isWeb ? /feature=dictionary/ : /dict\.htm/;
+    return matcher.exec(document.location.href);
   }
 
   console.log('Loaded DPR_PAL!', DPR_PAL);

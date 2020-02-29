@@ -21,7 +21,11 @@ find ./azcopy_linux_amd64_*/azcopy -name azcopy -exec cp -var {} "$SYSTEM_DEFAUL
 echo ------ Do azcopy
 $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/*" 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"'' --recursive=true
 
-echo ------ Compress stuff
+echo ------ Download asge
 export RootDir="$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop"
-ls -laF "$RootDir/bin/asge/"
-dotnet "$RootDir/bin/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy 'https://dprproduction.blob.core.windows.net/asge' "$RootDir/bin" --recursive
+
+echo ------ Compress stuff
+ls -laF "$RootDir/bin/asge/asge/"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .js .css -x 8640 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"

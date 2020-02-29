@@ -2,7 +2,6 @@
   background-color: #FFD;
 }
 
-
-.intro-message {
-  display: none;
+#search {
+  padding: 0 25px 45px 20px;
 }

@@ -16,6 +16,55 @@ body {
   width: 100%;
 }
 
+.contextMenuSbOpen {
+  position: relative;
+  left: 45px;
+  background-color: white;
+}
+.contextMenuSbClosed {
+  position: absolute;
+  top: 13px;
+  right: 135px;
+  background-color: white;
+  z-index: 1;
+}
+
+.feedback-button-wrapper {
+  position: absolute;
+  top: 1px;
+  right: 1em;
+  width: auto;
+  text-align: center;
+  z-index: 1;
+}
+.feedback-button {
+  height: 4em;
+  width: 8em;
+  font-size: 14px;
+  border-radius: 10%;
+  border: 0 none;
+  background: #72ab59;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  transform: scale(1);
+  transition: all 200ms ease;
+}
+#feedbackFormLink {
+  color: rgba(252, 252, 252, 0.945);
+}
+.feedback-button:hover,
+.feedback-button:focus,
+.feedback-button:active {
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2);
+  outline: 0;
+}
+
+#closeSbButton {
+  position: absolute;
+  right: 16px;
+}
+
 #nav-set, #nav-book {
   height: 7rem;
 }
@@ -57,13 +106,6 @@ body {
   padding-right: 20px;
 }
 
-#dictc {
-  position: relative;
-  height: 100%;
-  overflow: auto;
-  padding: 0 10px 0 10px;
-}
-
 #odif {
   position: relative;
   width: 100%;
@@ -79,7 +121,7 @@ body {
 }
 
 hr {
-  width: 100vw;
+  /*width: 100vw;*/
 }
 
 .mainContent {
@@ -166,6 +208,11 @@ hr {
   font-weight: bold;
 }
 
+.small-bold-font {
+  font-size: small;
+  font-weight: bold;
+}
+
 /* CHEVRON ROTATION CODE*/
 .rotate{
   -moz-transition: all .3s linear;
@@ -177,4 +224,22 @@ hr {
   -moz-transform:rotate(180deg);
   -webkit-transform:rotate(180deg);
   transform:rotate(180deg);
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
 }

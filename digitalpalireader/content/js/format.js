@@ -57,8 +57,10 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
 	}
 
 	var outDiv =  document.createElement('div');
-	outDiv.innerHTML = finout;
-	outDiv.id="paliTextContent";
+  outDiv.innerHTML = finout;
+  if (!DPR_PAL.isXUL) {
+    outDiv.id="paliTextContent";
+  }
 	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
 
@@ -531,12 +533,12 @@ function fadeOut(AID,id,speed) {
 function clearDivs(which) { // place divs to be cleared here
 	if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
 		$('#difhist').html('');
-		$('#difb').html('');
+		$(`#${DPR_PAL.getDifId()}`).html('');
 	}
 	if (!which || which.indexOf('dict') > -1) { // dictionary search stuff
 		$('#dict').html('');
 		$('#difhist').html('');
-		$('#difb').html('');
+		$(`#${DPR_PAL.getDifId()}`).html('');
 	}
 	if (!which || which.indexOf('anf') > -1) { // analyze frame stuff
 		$('#anfs').html('');
@@ -561,8 +563,14 @@ function clearDivs(which) { // place divs to be cleared here
 
 function makeToolbox(main,aux,title,conv,ex,save,trans) {
 	if (DPR_PAL.isWeb) {
-		return;
-	}
+    $('.nav-context-div').html('<button type="button" id="contextButton" data-html="true" data-container="body" data-toggle="popover">\u2234</button><div id="tbContainer2" style="display: none"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>'+'</div>');
+    $('.nav-context-div').popover({
+      trigger: 'click',
+      html: true,
+      content: () => $('#tbContainer2').html(),
+    })
+    return;
+	}//TODO:MovetoMarkupLater
 
 	if(main === false) {
 		$('#tbContainer').html('');

@@ -26,7 +26,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 	}
 
 
-	DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee();
 
 	var nikaya = place[0];
 	var book = place[1]+1;
@@ -149,8 +149,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		newparams = oldparams.join('|')+bparams;
 	}
 
-	var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-	DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+  var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+  if (oldurl != newurl){
+    DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
+  }
 
 	var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
 
@@ -216,8 +218,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 					relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
 				else if (relhere.split('#')[hic] != '') {
 					var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-					relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
-					matButton = 0;
+       		relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+          matButton = 0;
 				}
 				else
 					relouta.push('<span class="abut dbut '+button_order[ht]+'but small" title="no relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
@@ -289,28 +291,24 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 		break;
 	}
 
-	var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
+  //prev and next - nextprev | thai-myanmar alternation - thaibut
 
+		var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
+    if(!chromeFileExists('DPRThai/content/exists')) {
+      //thaibut = ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')" title="Install Thai Tipitaka">T</span>';
+    }//TODO: PWA case
+    else {
+      thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event,1))" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event,1))" title="Switch to Thai Tipitaka">T</span>':''));
+    }
 
 	// bookmark button
 
 	var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())" title="bookmark section">&dagger;</span>';
 
 
-	// Thai alt button
-
-	var thaibut = '';
-
-	if(!chromeFileExists('DPRThai/content/exists')) {
-		//thaibut = ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')" title="Install Thai Tipitaka">T</span>';
-	}
-	else {
-		thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event,1))" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event,1))" title="Switch to Thai Tipitaka">T</span>':''));
-	}
-
 	// first toolbar row
 
-	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'')+' <span class="abut obut small" id="close" onclick="closePanel(G_compare)" title="close panel">x</span>';
+	var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'');
 
 	var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
@@ -332,7 +330,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 // output header
 
 
-	$('#mafbc').html(`<table width=100%><tr><td align=center>${DPRSidebarHamburgerMenu()}</td><td align=center>`+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+'</td>'+(place[8]?'<td><span class="tiny">(Thai)</span></td>':'')+'</tr></table>');
+  $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+(place[8]?'<span class="tiny">(Thai)</span>':'')+`</nav>`);
+
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
@@ -442,14 +441,15 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 			}
 		}
 	}
-	var outData = outputFormattedData(theData,0,place);
+  var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(opara) {
-        document.getElementById('maf').scrollTop = document.getElementById('para'+opara).offsetTop;
+        document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop - $("#mafbc > nav").outerHeight();
 	}
 	else if(scroll) {
-		document.getElementById('maf').scrollTop = scroll;
-	}
+		document.getElementById('paliTextContent').scrollTop = scroll;
+  }
+  DPR_PAL.setPaliTextContentHeight();
 
 // add to history
 
@@ -575,7 +575,9 @@ function loadXMLindex(place,compare) {
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
-    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+    if (oldurl != newurl){
+      DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
+    }
 
 		whichcol[0] = 1; // bump up to let the second color know
 
@@ -913,7 +915,7 @@ function loadXMLindex(place,compare) {
 		theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
 	}
 
-	var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>&nbsp;<span class="abut obut small" id="close" onclick="closePanel()" title="close panel">x</span>';
+	var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>';
 
 	$('#mafbc').html('');
 
@@ -963,26 +965,44 @@ function loadXMLindex(place,compare) {
 	saveout = '<div id="menu">'+saveheader.replace(clfirst,"$1<div class=\"csection\">$2").replace(clinner,"$1</div>$2").replace(cllast,"$1</div>")+'</div>'+saveout;
 
 	if(isDev)
-		return [tabT,saveout];
+    return [tabT,saveout];
 
-  $('#mafbc').html(`<table width=100%><tr><td align=left>${DPRSidebarHamburgerMenu()}</td><td align=left>`+tabT+'</td></tr></table><hr></hr>');
+  if (DPR_PAL.isWeb){
+    $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+tabT+`</nav>`);
+  }
   $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
-	$('#mafbc').append('<div id="savei">'+saveout+'</div>');
+  $('#mafbc').append('<div id="savei">'+saveout+'</div>');
   $('#mafbc').append('<div id="convi">'+convout+'</div>');
+
 
 	// title, tab, link
 
 	document.getElementsByTagName('title')[0].innerHTML = tabT;
 
+  if (DPR_PAL.isWeb){
+    theDatao=digitalpalireader.makeWebAppropriate(theDatao);
+    $('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
+    DPR_PAL.setPaliTextContentHeight();
+  } else {
+    // permalink
+    var permalink = `${DPR_PAL.dprHomePage}?`;
+    var oldurl = DPR_PAL.contentDocument.location.href;
+    var bareurl = 'dpr:index?';
+    var newparams = 'loc='+place.slice(0,8).join('.');
+    bareurl += newparams;
+    var oldparams = oldurl.split('?')[1];
+    if(oldparams) {
+      oldparams = oldparams.split('|');
+      oldparams[compare-1] = newparams;
+      newparams = oldparams.join('|');
+    }
+    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
-
-	if (DPR_PAL.isWeb){
-    theDatao = theDatao.replace(/openPlace\(\[([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+),([^,]+)\],([^,]+),([^,]+),eventSend\(event,1\)\);/g,
-    'loadXMLSection($9,$10,[$1,$2,$3,$4,$5,$6,$7,$8]);');
+    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+    $('#mafbc').append('<div>'+theDatao+'</div>');
   }
+  document.getElementById('maf').scrollTop = 0;
 
-$('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
-	document.getElementById('maf').scrollTop = 0;
 	// refresh history box
 
 	var sidebar = DPRSidebarWindow();

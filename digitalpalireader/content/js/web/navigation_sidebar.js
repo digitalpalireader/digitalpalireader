@@ -152,6 +152,9 @@ var DPRNav = {
   },
 
   historyBox: function () {
+    if (!DPR_PAL.isXUL) {
+      return true;
+    }
 
     // history
 
@@ -310,31 +313,23 @@ var DPRNav = {
   },
 
   gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    document.getElementById('set').value = nikaya;
-    for (i in G_hshort) {
-      if (i == hiert)
-        document.getElementById(G_hshort[i]).setAttribute('checked', true);
-      else
-        document.getElementById(G_hshort[i]).checked = false;
-    }
-    this.changeSet(1, book);
-    this.switchhier(hiert);
-    document.getElementById('book').selectedIndex = book;
-    DPRXML.updateHierarchy(0);
-    document.getElementById('meta').selectedIndex = meta;
-    DPRXML.updateHierarchy(1);
-    document.getElementById('volume').selectedIndex = volume;
-    DPRXML.updateHierarchy(2);
-    document.getElementById('vagga').selectedIndex = vagga;
-    DPRXML.updateHierarchy(3);
-    document.getElementById('sutta').selectedIndex = sutta;
-    DPRXML.updateHierarchy(4);
-    document.getElementById('section').selectedIndex = section;
+    $('#nav-set').val(nikaya);
+    $(".hierlabel.active").removeClass("active");
+    $("#hier-"+hiert).parent().addClass("active");
+    $("#hier-"+hiert).prop("checked",true);
+    digitalpalireader.changeHier(hiert);
+    $('#nav-book').prop("selectedIndex",book);
+    $('#nav-meta').prop("selectedIndex", meta);
+    $('#nav-volume').prop("selectedIndex", volume);
+    $('#nav-vagga').prop("selectedIndex", vagga);
+    $('#nav-sutta').prop("selectedIndex", sutta);
+    $('#nav-section').prop("selectedIndex", section);
 
   },
 
   searchBook: function (nik, book, hiert) {
-    document.getElementById("tabbox").selectedIndex = 1;
+    DPR_PAL.openSideBar();
+    $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();
     document.getElementById('tsoSETm').selectedIndex = G_nikToNumber[nik];
@@ -342,9 +337,9 @@ var DPRNav = {
 
     document.getElementById('tsoBOOKm').selectedIndex = book - 1;
     DPRXML.updateSearchHierarchy(0);
-    document.getElementById('tsoMATm').setAttribute('checked', hiert == 'm');
-    document.getElementById('tsoMATa').setAttribute('checked', hiert == 'a');
-    document.getElementById('tsoMATt').setAttribute('checked', hiert == 't');
+    document.getElementById('tsoMATm').checked= (hiert == 'm');
+    document.getElementById('tsoMATa').checked= (hiert == 'a');
+    document.getElementById('tsoMATt').checked= (hiert == 't');
   },
 
 }

@@ -190,33 +190,32 @@ var digitalpalireader = {
     $('.navbutton').hide();
     $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
     $('#nav-title-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections');
-
     if (navShown[4]) {
-      $('#nav-section-button').show().prop('value', '\u21D2').prop('title', 'View this section');
+      $('#nav-section-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[3]) {
       navShown[4] ?
-        $('#nav-sutta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
-        $('#nav-sutta-button').show().prop('value', '\u21D2').prop('title', 'View this section');
+        $('#nav-sutta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
+        $('#nav-sutta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[2]) {
       navShown[3] || navShown[4] ?
-        $('#nav-vagga-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
-        $('#nav-vagga-button').show().prop('value', '\u21D2').prop('title', 'View this section');
+        $('#nav-vagga-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
+        $('#nav-vagga-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[1]) {
       navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-volume-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
-        $('#nav-volume-button').show().prop('value', '\u21D2').prop('title', 'View this section');
+        $('#nav-volume-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
+        $('#nav-volume-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[0]) {
       navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-meta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections') :
-        $('#nav-meta-button').show().prop('value', '\u21D2').prop('title', 'View this section');
+        $('#nav-meta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
+        $('#nav-meta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 	},
 
@@ -309,7 +308,7 @@ var digitalpalireader = {
     DPR_PAL.closeSideBar();
   },
 
-  loadSection:function(context){
+  loadSection:function(context,category=6){
     var aplace;
     switch(context) {
       case 1: // quick links
@@ -326,11 +325,13 @@ var digitalpalireader = {
           }
         break;
       case 2: // book hierarchy
-        aplace = this.getSubNavArray();
+        aplace = this.getSubNavArray().map((x,y)=>(y<(category+1) || y>6 )?x:"x");
         loadXMLSection("","",aplace);
         break;
     }
 
     DPR_PAL.closeSideBar();
   },
+
+  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }

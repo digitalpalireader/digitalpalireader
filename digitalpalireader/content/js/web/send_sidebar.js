@@ -450,6 +450,8 @@ var DPRSend = {
 
   sendDict: function (hard, add, which, getstring, opts) {
 
+    DPR_PAL.closeSideBar();
+
     var start = Date.now();
     var end, mid, elapsed;
 

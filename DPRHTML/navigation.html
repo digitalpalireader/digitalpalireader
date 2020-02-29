@@ -52,23 +52,11 @@
         setPrefs();
       });
 
-      $('.bottomFrame .bottomFrameHandle').on('click', function() {
-        DPR_PAL.toggleBottomFrame();
-      });
-
       $('#nav-title').prop('title', 'View index for this book');
 
-      $('.helpbutton').each(function() {
-        $(this).popover({
-          trigger:'focus',
-          html : true,
-          title : $(this).attr("popover-title"),
-          content: function() {
-            return $('#quicklinks-popover-content').html();
-          }
-        })
-        $(this).attr("title","What is this?");
-      })
+      DPR_PAL.enablePopover('#quicklinks-info', 'hover');
+
+      DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
 
       switch(place.length){
         case 3:
@@ -81,92 +69,119 @@
           break;
       }
     });
+    onpopstate = DPRChrome.historyPopstateHandler;
   </script>
 </head>
 
 <body>
-  <div class="form-row">
-    <div class="form-group col-md-6" id="nav-set-div">
-      <label class="font-weight-bold" for="nav-set">Set</label>
-      <select class="custom-select" size="5" id="nav-set"></select>
+
+  <div class="card mb-2">
+    <div class="card-header" style="line-height: 1.35rem;">
+      Quick Link
+      <button id="quicklinks-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
+        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+      </button>
+      <div id="quicklinks-info-popover-content" style="display: none">
+        Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
+        1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
+        reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
+        2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
+        comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
+        in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
+        Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
+        (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
+        Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
+      </div>
     </div>
-    <div class="form-group col-md-6" id="nav-book-div">
-      <label class="font-weight-bold" for="nav-book">Book</label>
-      <select class="custom-select" size="5" id="nav-book" class="sbut"></select>
+    <div class="card-body p-2">
+      <div class="form-row">
+        <div class="form-group col mb-1">
+          <div class="subnav-cont input-group">
+            <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
+              onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
+            <br class="clear" />
+            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="form-group" style="text-align: center;">
-    <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
-      <label class="btn btn-outline-primary btn-sm active">
-        <input type="radio" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
-      </label>
-      <label class="btn btn-outline-primary btn-sm">
-        <input type="radio" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
-      </label>
-      <label class="btn btn-outline-primary btn-sm">
-        <input type="radio" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
-      </label>
+  <div class="card mb-2">
+    <div class="card-header" style="line-height: 1.35rem;">
+      Navigate book hierarchy
+      <button id="navigate-book-hierarchy-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
+        <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
+      </button>
+      <div id="navigate-book-hierarchy-info-popover-content" style="display: none">
+        Choose a Set, book, M/A/T, hierarchy and click the ⇒ or ≡ button to see the contents.
+      </div>
     </div>
-  </div>
+    <div class="card-body p-2">
+      <div class="form-row mb-2">
+        <div class="form-group col-md-6 mb-1" id="nav-set-div">
+          <label class="small-bold-font" for="nav-set">Set</label>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set"></select>
+        </div>
+        <div class="form-group col-md-6 mb-1" id="nav-book-div">
+          <label class="small-bold-font" for="nav-book">Book</label>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" class="sbut"></select>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="font-weight-bold">Quick Link</label>
-    <button id="help-quicklinks-button" class="helpbutton" type="button"
-      popover-title="Usage of quick links">?
-    </button>
-    <div id="quicklinks-popover-content" style="display: none">
-      Use this box to quickly navigate to a specific sutta, section, etc..  Quick links are of two forms, as follows:<br><br>
-      1. 'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya (D,M,S,A, or K), then an N, then the first
-      reference number, then a period, then the second reference number.  The N is now optional, so D1.1 also works.<br><br>
-      2. For the first fifteen books in the Khuddaka Nikaya, the following syntax is also recognized: 'dhp1', 'it1', etc.,
-      comprised of the shorthand name for that book, followed by the reference number.  The shorthand names for the books are,
-      in order:<br>'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'<br><br>
-      Note, for the Jataka (ja), this syntax represents the jataka number, so 'ja547' will open the last jataka in book 15
-      (Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1).'<br><br>
-      Dhammapada verses are also recognized, using 'dhpv' followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc.
-    </div>
-    <div class="subnav-cont input-group">
-      <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
-        onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
-      <br class="clear" />
-      <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
-    </div>
-  </div>
+      <div class="form-row mb-2">
+        <div class="form-group col mb-1" style="text-align: center;">
+          <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
+            <label class="btn btn-outline-primary btn-sm active" title="Switch to Mūla (canon)">
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
+            </label>
+            <label class="btn btn-outline-primary btn-sm" title="Switch to Aṭṭhakathā (commentary)">
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
+            </label>
+            <label class="btn btn-outline-primary btn-sm" title="Switch to Ṭīkā (sub-commentary)">
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
+            </label>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label class="font-weight-bold">Book Hierarchy</label>
-    <div id="nav-title-div" class="subnav-cont input-group">
-      <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
-        onclick="digitalpalireader.loadIndex(1)" />
-      <br class="clear" />
-      <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
-    </div>
-    <div class="subnav-cont input-group">
-      <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
-      </select>
-      <br class="clear" />
-      <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-    </div>
-    <div class="subnav-cont input-group">
-      <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
-      <br class="clear" />
-      <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-    </div>
-    <div class="subnav-cont input-group">
-      <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
-      <br class="clear" />
-      <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-    </div>
-    <div class="subnav-cont input-group">
-      <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
-      <br class="clear" />
-      <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-    </div>
-    <div class="subnav-cont input-group">
-      <select id="nav-section" class="custom-select navselect"></select>
-      <br class="clear" />
-      <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+      <div class="form-row">
+        <div class="form-group col mb-1">
+          <label class="small-bold-font">Hierarchy</label>
+          <div id="nav-title-div" class="subnav-cont input-group">
+            <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
+              onclick="digitalpalireader.loadIndex(1)" />
+            <br class="clear" />
+            <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
+          </div>
+          <div class="subnav-cont input-group">
+            <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
+            </select>
+            <br class="clear" />
+            <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+          </div>
+          <div class="subnav-cont input-group">
+            <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
+            <br class="clear" />
+            <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+          </div>
+          <div class="subnav-cont input-group">
+            <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
+            <br class="clear" />
+            <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+          </div>
+          <div class="subnav-cont input-group">
+            <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
+            <br class="clear" />
+            <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+          </div>
+          <div class="subnav-cont input-group">
+            <select id="nav-section" class="custom-select navselect"></select>
+            <br class="clear" />
+            <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 

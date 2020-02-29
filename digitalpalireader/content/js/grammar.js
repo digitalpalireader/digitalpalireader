@@ -4,18 +4,18 @@ function conjugate(word, id, which) {
 	if(DPR_prefs['nigahita'] && which) {
 		which = which.replace(/ṁ/g, 'ṃ');
 		which = which.replace(/Ṁ/g, 'Ṃ');
-	}	
+	}
 	word = toVel(word);
-	
+
 	var yto = yt[word];
-	
+
 	if(yto == undefined) {
 		alertFlash('Word not found','yellow');
 		return;
 	}
-	
+
 	var out;
-	
+
 	if(yto[4] == 'V') { // verb
 		if(yto[9] == 'N') out = conjugateIrrVerb(word,which);
 		else out = conjugateVerb(word);
@@ -24,11 +24,11 @@ function conjugate(word, id, which) {
 		if(yto[9] == 'N') out = conjugateIrrNoun(word);
 		else out = conjugateNoun(word);
 	}
-		
+
 	if (out == undefined) {
 		return;
 	}
-	
+
 	if(which) {
 		var whichR = new RegExp('([> ])'+which+'([<,])','gi');
 		out = out.replace(whichR, "$1<span style=\"color:"+DPR_prefs['colped']+"\">"+which+"</span>$2");
@@ -37,22 +37,22 @@ function conjugate(word, id, which) {
 	if(DPR_prefs['nigahita']) {
 		out = out.replace(/ṃ/g, 'ṁ');
 		out = out.replace(/Ṃ/g, 'Ṁ');
-	}	
-	
+	}
+
 	var outNode = document.createElement('div');
-	
+
 	if (!id) {
 		return out;
 	}
 	if(id == 'dif') {
 		clearDivs('dif');
 		outNode.innerHTML = '<div class="conj">'+out+'</div>';
-		document.getElementById('difb').appendChild(outNode);
+		document.getElementById(DPR_PAL.getDifId()).appendChild(outNode);
 	}
 	else {
 		outNode.innerHTML = '<div class="conj">'+out+'</div><div class="x" onclick="this.parentNode.innerHTML=null">x</div>';
 		document.getElementById(id).appendChild(outNode);
-	}	
+	}
 }
 
 var decNames = ['nom','voc','acc','ins','dat','abl','gen','loc'];
@@ -68,9 +68,9 @@ function conjugateNoun(word) {
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
 	outword = toUni(outword);
-	
 
-	var stem = yto[8]; 
+
+	var stem = yto[8];
 
 	for (q in yto5) {
 		var type1 = yto[4]+'#'+yto5[q];
@@ -78,14 +78,14 @@ function conjugateNoun(word) {
 		if(type2 == undefined) {
 			continue;
 		}
-		
+
 		var descript = (q > 0 ? '<hr>':'')+'<div><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
-		
+
 		if (type2[1] == '' && type2[2] == '' && type2[3] == '') {
 			out += descript;
 			continue;
 		}
-			
+
 		var gender = yto[1];
 		switch(gender) {
 			case 'm.':
@@ -102,11 +102,11 @@ function conjugateNoun(word) {
 					out += '</tr>';
 
 					for (i in decNames) { // per number
-						
+
 						var di = decNames[i];
 
 						out += '<tr><td class="sidecol"><b>'+di + '</b></td>';
-						
+
 						for(j in noun) {
 							out+='<td class="decb small">';
 							if(noun[j][di] == undefined) {
@@ -138,13 +138,13 @@ function conjugateNoun(word) {
 					if(noun[1] != undefined) out += '<td class="toprow">pl.</td>';
 
 					out += '</tr>';
-					
+
 					for (i in decNames) { // per number
-						
+
 						var di = decNames[i];
 
 						out += '<tr><td class="sidecol"><b>'+di + '</b></td>';
-						
+
 						for(j in noun) {
 							out+='<td class="decb small">';
 							if(noun[j][di] == undefined) {
@@ -179,11 +179,11 @@ function conjugateNoun(word) {
 					out += '</tr>';
 
 					for (i in decNames) { // per number
-						
+
 						var di = decNames[i];
 
 						out += '<tr><td class="sidecol"><b>'+di + '</b></td>';
-						
+
 						for(j in noun) {
 							out+='<td class="decb small">';
 							if(noun[j][di] == undefined) {
@@ -224,7 +224,7 @@ function conjugateNoun(word) {
 								if(noun[0] != undefined) out += '<td class="toprow">'+gendNames[k-1]+'.s.</td>';
 								if(noun[1] != undefined) out += '<td class="toprow">'+gendNames[k-1]+'.pl.</td>';
 							}
-							
+
 							for(j in noun) {
 								outt+='<td class="decb small '+ ((cnt == 1 || cnt == 3) ? '' : 'whiteb') + '">'
 								if(noun[j][di] == undefined) {
@@ -264,8 +264,8 @@ function conjugateVerb(word) {
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
 	outword = toUni(outword);
-	
-	var stem = yto[8]; 
+
+	var stem = yto[8];
 
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = iI[type1];
@@ -273,13 +273,13 @@ function conjugateVerb(word) {
 		alertFlash('Verb not found','yellow');
 		return;
 	}
-	
+
 	out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br/><br/></div>'; // description
-	
+
 	var verbCTense = yto[5].split('.')[1];
-	
+
 	// if not present tense, only output the current tense
-	
+
 	if(verbCTense != 'pres') {
 		out += '<table class="conjtable"><tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 		var verb = iV[yto[5]];
@@ -310,16 +310,16 @@ function conjugateVerb(word) {
 	var verbTense = ['pres', 'impv', 'opt', 'fut', 'cond'];
 	var verbName = ['Present', 'Imperative', 'Optative', 'Future', 'Conditional'];
 	var verbVoice = yto[5].split('.')[0];
-	var verbType = yto[5].replace(/.+\..+\./,'.'); 
-	
+	var verbType = yto[5].replace(/.+\..+\./,'.');
+
 	var verbAdd = [];
 	verbAdd[0] = ['','','eyy','iss','iss'];
 	verbAdd[1] = ['','','eyy','ess','ess'];
-	
-	if(verbType == '.') verbType = '';		
+
+	if(verbType == '.') verbType = '';
 
 	for (m in verbName) {
-		
+
 		out += '<table class="butc"><tr><td class="toprow"></td><td class="toprow" colspan="4">'+verbName[m]+'</td></tr><tr><td class="toprow"></td><td class="toprow" colspan="2">Parassapada</td><td class="toprow" colspan="2">Attanopada</td></tr><tr><td class="toprow"></td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 		for(j =0; j < 3; j++) { // 3 persons
 			var pi = personNames[j];
@@ -357,8 +357,8 @@ function conjugateIrrNoun(word) {
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
 	outword = toUni(outword);
-	
-	var stem = ''; 
+
+	var stem = '';
 
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = iI[type1];
@@ -366,9 +366,9 @@ function conjugateIrrNoun(word) {
 		alertFlash('Noun not found','yellow');
 		return;
 	}
-	
+
 		out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')</div>'; // description
-	
+
 	var noun = iNI[outword];
 	if(noun == undefined) {
 		alertFlash('Noun not found','yellow');
@@ -406,7 +406,7 @@ function conjugateIrrNoun(word) {
 	out += '</table>';
 	return out;
 
-	
+
 }
 
 function conjugateIrrVerb(word,which) {
@@ -417,8 +417,8 @@ function conjugateIrrVerb(word,which) {
 	outword = outword.replace(/,/g, '.');
 	if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
 	outword = toUni(outword);
-	
-	var stem = yto[8]; 
+
+	var stem = yto[8];
 
 	var type1 = yto[4]+'#'+yto[5];
 	var type2 = iI[type1];
@@ -426,14 +426,14 @@ function conjugateIrrVerb(word,which) {
 		alert('Noun not found');
 		return;
 	}
-	
+
 		out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br/></div>'; // description
-	
+
 	var verbNumbers = ['65535','1','4','3','7','2','12','13','14','16','19','22'];
 	var verbNames = ['Present','Imperative','Optative','Future','Caus. Pass','Imperative','Att. Pres.','Att. Impv','Aorist','Att. Opt.','Caus. Impv','Caus. Opt'];
-	
 
-		
+
+
 	var verbC = iVI[yto[6]];
 	if(verbC == undefined) {
 		alertFlash('Verb not found','yellow');
@@ -454,7 +454,7 @@ function conjugateIrrVerb(word,which) {
 						for (y in verbC[v][w][x]) {
 							for (z in verbC[v][w][x][y]) {
 								if(verbC[v][w][x][y][z] == which) {
-									verb = verbC[v]; 
+									verb = verbC[v];
 									break out;
 								}
 							}
@@ -465,10 +465,10 @@ function conjugateIrrVerb(word,which) {
 		}
 		if(verb == undefined || verb[verbno] == undefined) {
 			if(yto[6] != outword || verbC['def'] == undefined || verbC['def'][verbno] == undefined) continue;
-			else verb = verbC['def']; 
+			else verb = verbC['def'];
 		}
 		out += '<table class="butc">'+(yto[6] == outword ? '<tr><td class="toprow" colspan="3">'+verbNames[k]+'</td></tr>':'')+'<tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
-		
+
 		for(j =0; j < 3; j++) { // 3 persons
 			var pi = personNames[j];
 			out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
@@ -500,7 +500,7 @@ function conjugateWord(word,form) {
 		return;
 	if(yt[toVel(word)])
 		return conjugate(word,null,form);
-	
+
 	if(form)
 		var oneConj = formatConjugation(form);
 	else
@@ -549,7 +549,7 @@ function makeGrammarTerms([trans,type,deca,word,meta]) {
 		default:
 			return (yt[meta['orig']]?yt[meta['orig']][1]:'');
 	}
-			
+
 }
 
 function typeAndGender(t) {

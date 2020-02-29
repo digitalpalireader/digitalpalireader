@@ -36,7 +36,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 		G_searchSet = searchSet;
 		G_searchBook = ','+searchBook+',';
 		G_searchPart = searchPart;
-		G_searchRX = searchRX;
+    G_searchRX = searchRX;
 
 		var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
 
@@ -75,7 +75,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 					G_searchPart = option[1];
 				break;
 				case 'rx':
-					G_searchRX = (option[1] == 'false' ? false : true);
+          G_searchRX = (option[1] == 'true');
 				break;
 			}
 		}
@@ -151,8 +151,9 @@ function DPR_PAL_Search_ScrollSearch(what) {
 		document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
 	} else {
 		const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
-		document.getElementById('search').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
-	}
+		document.getElementById('paliTextContent').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
+  }
+  return false;
 }
 
 function resetvalues() {
@@ -467,6 +468,21 @@ function createTdForMatch(dups, match) {
 
 function createTables(xmlDoc,hiert)
 {
+  //TO DO (comment DO 2020-02-22): This is a temporary fix search for alpha release.
+  //This piece of code makes using the RegEx checkbox having the right effect.
+  //After removing XUL, this whome file has to be tidied up and refactored.
+  if (!DPR_PAL.isXUL) {
+    var options = MD.location.href.split('?')[1].split('#')[0].split('&');
+    for (i in options) {
+      var option = options[i].split('=');
+      switch(option[0]) {
+        case 'rx':
+          G_searchRX = (option[1] == 'true');
+        break;
+      }
+    }
+  }
+
 	//alert(bookload);
 	var u = xmlDoc.getElementsByTagName("h0");
 
@@ -599,7 +615,7 @@ function createTables(xmlDoc,hiert)
 							if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
 							//texttomatch = texttomatch.replace(/\^b\^/g, '');
-							//texttomatch = texttomatch.replace(/\^eb\^/g, '');
+              //texttomatch = texttomatch.replace(/\^eb\^/g, '');
 
 							texttomatch = texttomatch.replace(/  */g, ' ');
 							texttomatch = texttomatch.replace(/''nti/g, 'n”ti');
@@ -613,8 +629,8 @@ function createTables(xmlDoc,hiert)
 							texttomatch = texttomatch.replace(/''/g, '”');
 							texttomatch = texttomatch.replace(/'/g, '’');
 							texttomatch = texttomatch.replace(/\.\.\.pe0\.\.\./g, ' ... pe ...');
-							texttomatch = texttomatch.replace(/\.\./g, '.');
-							if (yesplus >= 0) // multiple search terms
+              texttomatch = texttomatch.replace(/\.\./g, '.');
+              if (yesplus >= 0) // multiple search terms
 							{
 								tagtitle = '';
 								tempexword = [];
@@ -752,7 +768,7 @@ function createTables(xmlDoc,hiert)
 							else // single search term
 							{
 
-								tempexword = [];
+                tempexword = [];
 
 								if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
 								else startmatch = texttomatch.indexOf(getstring)
@@ -772,7 +788,7 @@ function createTables(xmlDoc,hiert)
                                         }
                                         afterm = texttomatch.substring(endmatch,texttomatch.length);
 										postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
-										texttomatch = texttomatch.substring(endmatch);
+                    texttomatch = texttomatch.substring(endmatch);
 
 										if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
 										else startmatch = texttomatch.indexOf(getstring)
