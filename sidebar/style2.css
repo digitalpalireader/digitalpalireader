@@ -1,90 +1,124 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+:root {
+  --main-footer-height: 1rem;
+  --main-content-header-height: 3rem;
+  --main-sidebar-width: 20rem;
+  --splitter-width: 0.75rem;
+  --splitter-background: center center no-repeat #b3b3b3;
+  --v-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png)
+    var(--splitter-background);
+  --h-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/hsizegrip.png)
+    var(--splitter-background);
+}
+
+html,
 body {
-  font-family: "Poppins", sans-serif;
-  padding:0;
-  margin:0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #FFD;
+  height: 100%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding: 0px;
+  margin: 0px;
+  overflow: auto;
 }
 
-#body-wrapper {
+#main-container {
+  height: 100%;
+  width: 100%;
+}
+
+#main-panel {
   display: flex;
-  width: 100%;
+  flex-direction: row;
+  height: calc(100% - var(--main-footer-height));
+  overflow: auto;
 }
 
-#sidebar {
-  width: 250px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  z-index: 999;
-  background-color: white;
-  transition: all 0.3s;
-  border-right: 1px solid #e7e7e7;
+#main-footer {
+  height: var(--main-footer-height);
+  font-size: calc(0.75 * var(--main-footer-height));
 }
 
-#sidebar.active {
-  margin-left: -250px;
+#main-sidebar {
+  flex: 0 0 auto;
+  min-width: var(--main-sidebar-width);
+  overflow: auto;
 }
 
-#sidebar #sidebar-header {
-  padding: 1rem;
+#main-panel-splitter {
+  flex: 0 0 auto;
+  width: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: col-resize;
 }
 
-#sidebar #sidebar-body {
-  padding: 1rem;
+#main-content {
+  flex: 1 1 auto;
+  overflow: auto;
 }
 
-#page {
-  width: calc(100% - 250px);
-  padding: 40px;
-  min-height: 100vh;
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-#page.active {
-  width: 100%;
-}
-
-#page-header {
-  height: 3rem;
+#main-content-header {
+  height: var(--main-content-header-height);
   background-color: #f8f8f8;
   border-bottom: 1px solid #e7e7e7;
 }
 
-#page-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+#main-content-panel {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - var(--main-content-header-height));
+  overflow: hidden;
+}
+
+#main-pane {
+  flex: 0 0 auto;
+  width: 100%;
+}
+
+#main-content-panel-splitter {
+  flex: 0 0 auto;
+  height: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: row-resize;
+}
+
+#main-bottom-pane {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#main-pane-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
   overflow: auto;
-  padding: 16px;
+}
+
+#main-pane-text-container {
+  flex: 0 0 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#main-pane-container-splitter {
+  flex: 0 0 auto;
+  width: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: col-resize;
+}
+
+#main-pane-translations-container {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
-  #sidebar {
-    margin-left: -250px;
+  #main-sidebar {
+    margin-left: calc(-1 * var(--main-sidebar-width));
+    min-width: calc(0.5 * var(--main-sidebar-width));
   }
 
-  #sidebar.active {
-    margin-left: 0;
-  }
-
-  #page {
-    width: 100%;
-  }
-
-  #page.active {
-    width: calc(100% - 250px);
-  }
-
-  #sidebarCollapse span {
+  #main-panel-splitter {
     display: none;
   }
 }
