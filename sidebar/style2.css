@@ -70,6 +70,7 @@ body {
 
 #main-pane {
   flex: 0 0 auto;
+  height: 75%;
   width: 100%;
 }
 
@@ -95,6 +96,7 @@ body {
 
 #main-pane-text-container {
   flex: 0 0 auto;
+  width: 50%;
   overflow-x: hidden;
   overflow-y: auto;
 }
