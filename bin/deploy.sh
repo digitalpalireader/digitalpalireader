@@ -28,4 +28,3 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy 'https://dprproduction.blob.core.win
 echo ------ Compress stuff
 ls -laF "$RootDir/bin/asge/asge/"
 dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
-dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .js .css -x 8640 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
