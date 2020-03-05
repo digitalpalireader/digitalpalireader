@@ -12,7 +12,7 @@ To get DRP running on the local machine:
 1. Run live-server in root folder: `live-server`
 1. Browse to `http://localhost:8080`
 
-## Working with legacy codebase
+## Working effectively with legacy code
 
 The current codebase has organically evolved since the last decade. Every piece of code implements some critical functionality.
 
@@ -22,9 +22,9 @@ For the following reasons working with the code base is tricky:
 - Code and markup aren't cleanly separated, special care must be taken to not break stuff when changing the code.
 - Manual testing process are not yet streamlined.
 
-Over a period of time with care and above infrastructure support (linters, prettiers, tests) the code base will evolve to be more amenable to change.
+Over a period of time with care and above infrastructure support (linters, prettiers, testing processes), the code base will evolve to be much easier to change.
 
-Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-CODE/dp/0131177052) for techniques for working with legacy code.
+Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-CODE/dp/0131177052) for techniques for working effectively with legacy code.
 
 ### Guidelines for contributions
 
