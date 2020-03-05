@@ -9,7 +9,12 @@
         getconfig();
         DPR_PAL.setPaliTextContentHeight();
         if (document.location.href.indexOf("?feature=dictionary") > -1) {
-          startDictLookup();
+          try{
+            startDictLookup();
+          }
+          catch{
+
+          }
         }
       });
 
