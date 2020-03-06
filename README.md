@@ -2,43 +2,52 @@
 
 # Digital Pali Reader
 
-The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader, facilitating study of the Pali language at an advanced level. Rather than offering a translation for the text being read, a reader usually includes a dictionary with all of the difficult words found in the reader.
+The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader. It includes the collections of scriptures including the Pali canon, commentaries, sub-commentaries, Visuddhimagga and other texts in the Pali language. It also includes a dictionary to facilitate reading the texts and is useful in the study of the Pali language at an advanced level.
 
 ## Build and test instructions
 
-### PaleMoon/Waterfox extension
+To get DRP running on the local machine:
 
-Each set is in its own subfolder, and each set has a build.sh script that will create the xpi for use with PaleMoon/Waterfox.  Better than this, though, is to simply create a link to the set directory in your PaleMoon/Waterfox profile's "extensions" directory.  
+1. Install live-server: `npm i live-server -g`
+1. Run live-server in root folder: `live-server`
+1. Browse to `http://localhost:8080`
 
-To do this, create a file for the set, named:
+## Working effectively with legacy code
 
-> &lt;directory&gt;@yuttadhammo.bhikkhu
-> 
-> with the location of the directory as the first and only line of the file, i.e.:
-> 
-> /path/to/directory
-> 
-> For example, create a file in your profile's "extensions" directory called:
-> 
-> digitalpalireader@yuttadhammo.bhikkhu
-> 
-> and put the following in it:
-> 
-> /path/to/digitalpalireader
-> 
-> (replacing "/path/to" with the actual path of the digitalpalireader directory on your machine).
+The current codebase has organically evolved since the last decade. Every piece of code implements some critical functionality.
 
-Do this for each extension and then restart browser.
+For the following reasons working with the code base is tricky:
 
-### DPR Web
+- Lots of students, professors, monastics depend on DPR for their day to day work.
+- Code and markup aren't cleanly separated, special care must be taken to not break stuff when changing the code.
+- Manual testing process are not yet streamlined.
 
-To get DRP web running on the local machine:
+Over a period of time with care and above infrastructure support (linters, prettiers, testing processes), the code base will evolve to be much easier to change.
 
-> Install live-server: `npm i live-server -g`
-> 
-> Run live-server in root folder: `live-server`
-> 
-> Browse to `http://localhost:8080`
+Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-CODE/dp/0131177052) for techniques for working effectively with legacy code.
+
+### Guidelines for contributions
+
+> This is a 'live' section. Feel free to suggest amendments through PRs.
+
+1. **DO** reuse existing code. Remember that features that are being ported over from XUL to Web are already working.
+1. **DO** make only the minimum changes necessary for implementing features, fixing bugs. VSCode will auto format those changes as per .editorconfig and other settings.
+1. **DO** abstract out HTML ids behind PAL interface. E.g. ```DPR_PAL.getDifId();```
+1. **DO** ask for buddy testing.
+1. **DO** test all scenarios (TBD: Link to manual test scenarios that every commit must pass)
+1. **DO** resolve all PR comments through discussion.
+1. **DO** follow the project conventions: [ES6](coding-conventions/es6.md), [jQuery](coding-conventions/jquery.md), [HTML5](coding-conventions/html5.md), [CSS3](coding-conventions/css3.md), [Bootstrap](coding-conventions/bootstrap.md).
+1. **DON'T** bulk format files. This makes it very hard to trace the exact changes in case a revert is required.
+1. **DON'T** do non-trivial refactoring. It becomes hard to track changes across commit and revert selectively when necessary.
+1. **DON'T** change HTML class names or ids. It is hard to tell which is being directly referenced form the code.
+
+check modernization issue for other points
+
+### Upcoming Infrastructure support to make codebase easy to change
+
+- Linters.
+- Unit tests.
+- Effective manual testing process.
 
 ## Useful links
 
