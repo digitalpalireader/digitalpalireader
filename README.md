@@ -36,12 +36,10 @@ Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-C
 1. **DO** ask for buddy testing.
 1. **DO** test all scenarios (TBD: Link to manual test scenarios that every commit must pass)
 1. **DO** resolve all PR comments through discussion.
-1. **DO** follow the project conventions: [ES6](coding-conventions/es6.md), [jQuery](coding-conventions/jquery.md), [HTML5](coding-conventions/html5.md), [CSS3](coding-conventions/css3.md), [Bootstrap](coding-conventions/bootstrap.md).
+1. **DO** follow the project conventions for all **new code**: [ES6](coding-conventions/es6.md), [jQuery](coding-conventions/jquery.md), [HTML5](coding-conventions/html5.md), [CSS3](coding-conventions/css3.md), [Bootstrap](coding-conventions/bootstrap.md).
 1. **DON'T** bulk format files. This makes it very hard to trace the exact changes in case a revert is required.
 1. **DON'T** do non-trivial refactoring. It becomes hard to track changes across commit and revert selectively when necessary.
 1. **DON'T** change HTML class names or ids. It is hard to tell which is being directly referenced form the code.
-
-check modernization issue for other points
 
 ### Upcoming Infrastructure support to make codebase easy to change
 

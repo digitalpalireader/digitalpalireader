@@ -1,0 +1,165 @@
+:root {
+  --main-footer-height: 1rem;
+  --main-content-header-height: 3rem;
+  --main-sidebar-width: 20rem;
+  --splitter-width: 0.75rem;
+  --splitter-background: center center no-repeat #b3b3b3;
+  --v-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png)
+    var(--splitter-background);
+  --h-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/hsizegrip.png)
+    var(--splitter-background);
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  padding: 0px;
+  margin: 0px;
+  overflow: auto;
+}
+
+#main-container {
+  height: 100%;
+  width: 100%;
+}
+
+#main-panel {
+  display: flex;
+  flex-direction: row;
+  height: calc(100% - var(--main-footer-height));
+  overflow: auto;
+}
+
+#main-footer {
+  height: var(--main-footer-height);
+  font-size: calc(0.75 * var(--main-footer-height));
+}
+
+#main-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#main-footer ul li {
+  margin: 0 0.25rem;
+}
+
+#main-sidebar {
+  flex: 0 0 auto;
+  min-width: var(--main-sidebar-width);
+  overflow: auto;
+}
+
+#main-sidebar #main-sidebar-content {
+  height: 100%;
+  width: 100%;
+  border: 0px;
+}
+
+#main-panel-splitter {
+  flex: 0 0 auto;
+  width: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: col-resize;
+}
+
+#main-content {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+#main-content-header {
+  height: var(--main-content-header-height);
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #e7e7e7;
+}
+
+#main-content-panel {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - var(--main-content-header-height));
+  overflow: hidden;
+}
+
+#main-pane {
+  flex: 0 0 auto;
+  height: 75%;
+  width: 100%;
+}
+
+#main-content-panel-splitter {
+  flex: 0 0 auto;
+  height: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: row-resize;
+}
+
+#main-bottom-pane {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#main-pane-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  overflow: auto;
+}
+
+#main-pane-text-container {
+  flex: 0 0 auto;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+#main-pane-container-splitter {
+  flex: 0 0 auto;
+  width: var(--splitter-width);
+  background: var(--splitter-background);
+  cursor: col-resize;
+}
+
+#main-pane-translations-container {
+  flex: 1 1 auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+@media (max-width: 768px) {
+  #main-sidebar {
+    margin-left: calc(-1 * var(--main-sidebar-width));
+    min-width: calc(0.5 * var(--main-sidebar-width));
+  }
+
+  #main-panel-splitter {
+    display: none;
+  }
+}
