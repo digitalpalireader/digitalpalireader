@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="dpr.appcache">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
   <title>Digital Pali Reader (alpha)</title>
   <link rel="icon" href="./favicon.png" />
+  <meta name="description" content="The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader. It includes the collections of scriptures including the Pali canon, commentaries, sub-commentaries, Visuddhimagga and other texts in the Pali language. It also includes a dictionary to facilitate reading the texts and is useful in the study of the Pali language at an advanced level.">
+  <meta name="theme-color" content="#fffbc9"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   <link rel="manifest" href="/manifest.json">
@@ -119,6 +121,16 @@
   <script src="/digitalpalireader/content/js/search_history.js"></script>
   <script>
 
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/service_worker.js').then(function(registration) {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        }, function(err) {
+          console.log('ServiceWorker registration failed: ', err);
+        });
+      });
+    }
+
     $(document).ready(function() {
 
       $("#navigationDiv").show();
@@ -199,6 +211,7 @@
                         <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
                         <p class="intro-message-tiny">To start, open <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton" class="intro-message-green" title="Open side bar..." onclick="$('#sidebarButton').trigger('click');">the sidebar</a> then choose a set, book, M/A/T, hierarchy and click the ⇒ or ≡ button to see the contents.</p>
                         <p class="intro-message-tiny">You could also view the sutta by directly entering the Set shortname and Sutta number (for instance mn 10) in quick links.</p>
+                        <button class="add-button">Add to home screen</button>
                       </div>
                     </div>
                   </div>
@@ -317,5 +330,32 @@
 </div>
 
 </body>
+
+<script>
+
+  let deferredPrompt;
+  const addBtn = document.querySelector('.add-button');
+  addBtn.style.display = 'none';
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    addBtn.style.display = 'inline-block';
+
+    addBtn.addEventListener('click', (e) => {
+      addBtn.style.display = 'none';
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        deferredPrompt = null;
+      });
+    });
+  });
+
+</script>
 
 </html>
