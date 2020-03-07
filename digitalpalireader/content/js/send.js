@@ -322,6 +322,30 @@ var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
 
+  // Highlight the clicked element and un-highlight any previously clicked one.
+  // This should be done in both versions: Web and Extension
+  if (divclicked) {
+    divclicked = 'W' + divclicked;
+    var cdiv = document.getElementById(divclicked);
+
+    if (cdiv) {
+      var ldiv = document.getElementById(G_lastcolour);
+      if (ldiv) {
+        var lcn = ldiv.className;
+        if (/varc/.test(lcn))
+          ldiv.style.color = DPR_prefs['grey'];
+        else
+          ldiv.style.color = DPR_prefs['coltext'];
+        ldiv.style.textDecoration = 'none';
+      }
+      cdiv.style.color = DPR_prefs['colsel'];
+      cdiv.style.textDecoration = 'underline';
+      G_lastcolour = divclicked;
+    }
+    if (DPR_prefs['copyWord'])
+      copyToClipboard(input);
+  }
+
 	if (DPR_PAL.isWeb) {
 		outputAnalysis(input,frombox);
 		return;
@@ -331,29 +355,6 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 	if(window.getSelection().toString())
 		return;
 
-	if(divclicked) {
-		divclicked = 'W'+divclicked;
-		var cdiv = document.getElementById(divclicked);
-
-		if (cdiv)
-		{
-			var ldiv = document.getElementById(G_lastcolour);
-			if (ldiv)
-			{
-				var lcn = ldiv.className;
-				if(/varc/.test(lcn))
-					ldiv.style.color = DPR_prefs['grey'];
-				else
-					ldiv.style.color = DPR_prefs['coltext'];
-				ldiv.style.textDecoration = 'none';
-			}
-			cdiv.style.color = DPR_prefs['colsel'];
-			cdiv.style.textDecoration = 'underline';
-			G_lastcolour = divclicked;
-		}
-		if(DPR_prefs['copyWord'])
-			copyToClipboard(input);
-	}
 	if(add != true) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
 		if(thisTab) {
