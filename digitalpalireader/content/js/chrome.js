@@ -292,3 +292,21 @@ const closeBottomFrame = () => {
   // NOTE: #main-bottom-pane takes up the remaining space.
   $("#main-pane").height("100%");
 }
+
+const toggleNewSidebarVisibility = () => {
+  if ($('#main-sidebar').css('margin-left').startsWith("-")) {
+    openNewSidebar();
+  } else {
+    closeNewSidebar();
+  }
+}
+
+const closeNewSidebar = () => {
+  $("#main-sidebar").animate({ marginLeft: "-" + $('#main-sidebar').css('width') }, 300);
+  $("#main-panel-splitter").css("display", "none");
+}
+
+const openNewSidebar = () => {
+  $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
+  $("#main-panel-splitter").css("display", "block");
+}

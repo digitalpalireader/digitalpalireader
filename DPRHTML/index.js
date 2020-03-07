@@ -39,16 +39,6 @@ const initMainPane = () => {
   $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height())
 }
 
-const toggleSidebarVisibility = () => {
-  if ($('#main-sidebar').css('margin-left').startsWith("-")) {
-    $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
-    $("#main-panel-splitter").css("display", "block");
-  } else {
-    $("#main-sidebar").animate({ marginLeft: "-" + $('#main-sidebar').css('width') }, 300);
-    $("#main-panel-splitter").css("display", "none");
-  }
-}
-
 const initFooter = () => {
   $("#main-footer-timestamp").text(`Deployed: ${window.createdTimestamp.toLocaleString()}`);
   $("#main-footer-version").text(`Version: ${window.releaseNumber}`);

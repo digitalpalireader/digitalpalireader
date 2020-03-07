@@ -45,7 +45,6 @@
       });
     }
     searchHandler = event => {
-      DPR_PAL.closeSideBar();
       DPRSend.sendSearch(DPRSend.eventSend(event));
       setSearchParams();
     }
