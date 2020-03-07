@@ -85,51 +85,6 @@ console.log('Loading DPR_PAL...');
     return $.ajax({type:"HEAD",url: `${DPR_PAL.baseUrl}${fileLoc}`,async: false}).status!=404;
   };
 
-  DPR_PAL.openSideBar = () => {
-    if (DPR_PAL.isWeb) {
-      $('#sidebar').modal("show");
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.closeSideBar = () => {
-    if (DPR_PAL.isWeb) {
-      $('#sidebar').modal("hide");
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.setPaliTextContentHeight = () => {
-    DPR_PAL.bottomFrameUp() ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
-  }
-
-  const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
-  DPR_PAL.openBottomFrame = () => {
-    if (DPR_PAL.isWeb) {
-      $(bottomFrameSelector).show();
-      if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").addClass("down");
-        DPR_PAL.setPaliTextContentHeight();
-      }
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.toggleBottomFrame = () => {
-    if (DPR_PAL.isWeb) {
-      $(bottomFrameSelector).slideToggle();
-      if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").toggleClass("down");
-      }
-      DPR_PAL.setPaliTextContentHeight();
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
   /*
   if 'copy permalink to clipboard' button on the modal is pressed , the focus is on the modal .
   thus execCommand("copy") does not copy from the element appended to the body .

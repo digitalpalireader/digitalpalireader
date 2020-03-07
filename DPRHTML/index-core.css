@@ -35,6 +35,7 @@ body {
 #main-footer {
   height: var(--main-footer-height);
   font-size: calc(0.75 * var(--main-footer-height));
+  background-color: #f2f2f2;
 }
 
 #main-footer ul {
@@ -80,6 +81,15 @@ body {
   height: var(--main-content-header-height);
   background-color: #f8f8f8;
   border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#main-content-header-contents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #main-content-panel {
@@ -91,7 +101,7 @@ body {
 
 #main-pane {
   flex: 0 0 auto;
-  height: 75%;
+  height: 100%;
   width: 100%;
 }
 

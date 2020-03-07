@@ -1,316 +1,254 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" manifest="dpr.appcache">
+<!DOCTYPE html>
+<html lang="en" manifest="dpr.appcache">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <title>Digital Pali Reader (alpha)</title>
-  <link rel="icon" href="./favicon.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <link rel="stylesheet" href="/digitalpalireader/content/js/external/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/DPRHTML/index.css">
-  <link rel="stylesheet" href="/DPRHTML/styles.css">
+    <title>Digital Pali Reader (alpha)</title>
 
-  <script>
-    const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
+    <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/DPRHTML/index-core.css" />
+    <link rel="stylesheet" href="/DPRHTML/index.css">
+    <link rel="stylesheet" href="/DPRHTML/styles.css">
+    <link rel="stylesheet" href="/DPRHTML/index-override.css" />
+    <script>
+      const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
-    var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
-    var deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
-    var deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
-    var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
+      var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
+      var deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
+      var deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
+      var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
 
-    var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
-    var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
-    var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
-    var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
+      var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
+      var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
+      var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
+      var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
 
-    var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
-      {
-        instrumentationKey: appInsightsInstrumentationKey
-      }
-    ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
-  </script>
-
-  <!-- PAL must be the first script. -->
-  <script src="/digitalpalireader/content/js/external/jquery-3.2.1.min.js"></script>
-  <script src="/digitalpalireader/content/js/external/ui/1.12.1/jquery-ui.min.js"></script>
-  <script src="/digitalpalireader/content/js/external/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-  <script src="/digitalpalireader/content/js/external/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-  <script src="/digitalpalireader/content/js/dpr_pal.js"></script>
-  <script>
-    var devCheck = 0;
-    window.dump = window.dump || devCheck ? console.log : () => { };
-    function moveFrame() { }
-  </script>
-  <script src="/digitalpalireader/content/dev.js"></script>
-
-  <script src="/digitalpalireader/content/js/web/io.js"></script>
-  <script src="/digitalpalireader/content/js/send.js"></script>
-  <script src="/digitalpalireader/content/js/receive.js"></script>
-  <script src="/digitalpalireader/content/js/web/chrome_sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/dhpv.js"></script>
-  <script src="/digitalpalireader/content/js/navigation_common.js"></script>
-  <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/prefload.js"></script>
-  <script src="/digitalpalireader/content/js/web/xml_sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/translit.js"></script>
-  <script src="/digitalpalireader/content/js/config.js"></script>
-  <script src="/digitalpalireader/content/js/xml_load.js"></script>
-  <script src="/digitalpalireader/content/js/navigation.js"></script>
-  <script src="/digitalpalireader/content/js/format.js"></script>
-  <script src="/digitalpalireader/content/js/web/opts_sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/relmul.js"></script>
-  <script src="/digitalpalireader/content/js/relatt.js"></script>
-  <script src="/digitalpalireader/content/js/reltik.js"></script>
-  <script src="/digitalpalireader/content/js/dppn.js"></script>
-  <script src="/digitalpalireader/content/js/translations.js"></script>
-  <script src="/digitalpalireader/content/js/format.js"></script>
-  <script src="/digitalpalireader/content/js/xml.js"></script>
-  <script src="/digitalpalireader/content/js/history.js"></script>
-  <!-- <script src="/digitalpalireader/content/js/prompt.js"></script> -->
-  <script src="/digitalpalireader/content/js/web/search.js"></script>
-  <script src="/digitalpalireader/content/js/search.js"></script>
-  <script src="/digitalpalireader/content/js/search_history.js"></script>
-  <script src="/digitalpalireader/content/js/sortaz.js"></script>
-  <script src="/digitalpalireader/content/js/dict.js"></script>
-  <script src="/digitalpalireader/content/js/irreg.js"></script>
-  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
-
-  <script src="/digitalpalireader/content/js/listsm.js"></script>
-  <script src="/digitalpalireader/content/js/listam.js"></script>
-  <script src="/digitalpalireader/content/js/chrome.js"></script>
-  <script src="/digitalpalireader/content/js/convert.js"></script>
-  <script src="/digitalpalireader/content/js/sortaz.js"></script>
-  <script src="/digitalpalireader/content/js/move.js"></script>
-  <script src="/digitalpalireader/content/js/dict_xml.js"></script>
-
-  <script src="/digitalpalireader/content/js/analysis_declension.js"></script>
-  <script src="/digitalpalireader/content/js/analysis_arrays.js"></script>
-  <script src="/digitalpalireader/content/js/analysis_function.js"></script>
-  <script src="/digitalpalireader/content/js/analysis_output.js"></script>
-
-  <script src="/digitalpalireader/content/js/inflect.js"></script>
-  <script src="/digitalpalireader/content/js/grammar.js"></script>
-
-  <script src="/digitalpalireader/content/js/listsm.js"></script>
-  <script src="/digitalpalireader/content/js/listam.js"></script>
-  <script src="/digitalpalireader/content/js/ped.js"></script>
-  <script src="/digitalpalireader/content/js/dppn.js"></script>
-  <script src="/digitalpalireader/content/js/nameno.js"></script>
-  <script src="/digitalpalireader/content/js/english.js"></script>
-  <script src="/digitalpalireader/content/js/epd.js"></script>
-  <script src="/digitalpalireader/content/js/roots.js"></script>
-  <script src="/digitalpalireader/content/js/roots_link.js"></script>
-  <script src="/digitalpalireader/content/js/skt.js"></script>
-  <script src="/digitalpalireader/content/js/skt_roots.js"></script>
-  <script src="/digitalpalireader/content/js/irreg.js"></script>
-  <script src="/digitalpalireader/content/js/attlist.js"></script>
-  <script src="/digitalpalireader/content/js/tiklist.js"></script>
-  <script src="/digitalpalireader/content/js/titles.js"></script>
-
-  <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
-  <script src="/digitalpalireader/content/js/search_history.js"></script>
-  <script>
-
-    $(document).ready(function() {
-
-      $("#navigationDiv").show();
-      $("#searchDiv").hide();
-      $("#dictionaryDiv").hide();
-
-      $('#sidebarButton').on('click', function() {
-        loadSidebarDivs();
-      });
-      var location = document.location.href;
-      if (location.indexOf('?') > -1) {
-        loadSidebarDivs();
-        if (location.indexOf('?feature=search') > -1) {
-          $("#mafbc").load("search-results.html");
-        } else if (location.indexOf('?feature=dictionary') > -1) {
-          $("#mafbc").load("dictionary-results.html");
+      var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+        {
+          instrumentationKey: appInsightsInstrumentationKey
         }
-      }
-      $(".nav-link").on("click",function(e) {
-        e.preventDefault();
-        let tabId = this.id.substring(0, this.id.length - 3);
-        $(".mainContent").hide();
-        $("#"+tabId+"Div").show();
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-          localStorage.setItem('activeTab', $(e.target).attr('id'));
-        });
-      });
+      ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+    </script>
+  </head>
 
-      // NOTE: This hides all popover that have click as trigger;
-      $('html').on('click', function (e) {
-        if ($(e.target).data('toggle') !== 'popover') {
-          $('[data-toggle="popover"]').popover('hide');
-        }
-      });
-
-      $('.bottomFrame .bottomFrameHandle').on('click', function() {
-        DPR_PAL.toggleBottomFrame();
-      });
-
-      const env = `${environmentName}.${releaseNumber}`;
-      const url = encodeURIComponent(document.location.href);
-      const userAgent = encodeURIComponent(navigator.userAgent);
-      $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
-    });
-
-    function loadSidebarDivs(){
-      $("#navigationDiv").load("navigation.html");
-      $("#searchDiv").load("search.html");
-      $("#dictionaryDiv").load("dictionary.html");
-    }
-
-    onpopstate = DPRChrome.historyPopstateHandler;
-  </script>
-</head>
-
-<body>
-  <div class="containerRoot">
-    <div class="row">
-      <div id="main-window">
-        <div class="nav-context-div contextMenuSbClosed"></div>
-        <div class='feedback-button-wrapper'>
-          <button class='feedback-button'><span><a id="feedbackFormLink" href="#" target="_blank" title="Contact us...">Give Feedback!</a></span></button>
+  <body>
+    <div id="main-container">
+      <div id="main-panel">
+        <div id="main-sidebar">
+          <div id="main-sidebar-content" class="card">
+            <div class="card-header">
+              Digital Pali Reader
+              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right; display: none;">
+                <i class="fa fa-gear" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="card-body p-2">
+              <ul id="navTabs" class="nav nav-tabs">
+                <li class="nav-item">
+                  <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
+                </li>
+                <li class="nav-item">
+                  <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
+                </li>
+                <li class="nav-item">
+                  <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
+                </li>
+              </ul>
+              <div id="navigationDiv" class="mainContent">
+              </div>
+              <div id="searchDiv" class="mainContent">
+              </div>
+              <div id="dictionaryDiv" class="mainContent">
+              </div>
+            </div>
+          </div>
         </div>
-        <div id="content">
-            <div id="top-frame">
-            <div id="matrelc"></div>
-            <div id="diva" onmouseover="document.body.style.cursor='auto'">
-              <div id="maf">
-                <div style="text-align: left" id="mafa" class="paperback"></div>
-                <div style="text-align: justify" id="mafb" class="paperback">
-                  <div id="mafbc">
-                    <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton"
-                      class="p-1" title="Open side bar"> <i class="fa fa-bars" aria-hidden="true"></i>
-                    </a>
-                    <div id="intro-space" class="intro-space">
-                      <div class="intro-message">
+        <div id="main-panel-splitter" ondblclick="toggleSidebarVisibility()"></div>
+        <div id="main-content">
+          <header id="main-content-header">
+            <button type="button" id="sidebar-toggler" class="btn btn-light m-0" onclick="toggleSidebarVisibility()">
+              <i class="fa fa-bars"></i>
+            </button>
+            <span>Reading:&nbsp;</span>
+            <div id="main-content-header-contents"></div>
+          </header>
+          <div id="main-content-panel">
+            <div id="main-pane">
+              <div id="main-pane-container">
+                <div id="main-pane-text-container">
+                  <div id="content">
+                      <div id="top-frame">
+                      <div id="matrelc"></div>
+                      <div id="diva" onmouseover="document.body.style.cursor='auto'">
+                        <div id="maf">
+                          <div style="text-align: left" id="mafa" class="paperback"></div>
+                          <div style="text-align: justify" id="mafb" class="paperback">
+                            <div id="mafbc">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="alertc"><span id="alert"></span></div>
+                    </div>
+                  </div>
+                </div>
 
-                        <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
-                        <p class="intro-message-tiny">To start, open <a data-toggle="modal" href="" data-target="#sidebar" role="button" id="sidebarButton" class="intro-message-green" title="Open side bar..." onclick="$('#sidebarButton').trigger('click');">the sidebar</a> then choose a set, book, M/A/T, hierarchy and click the ⇒ or ≡ button to see the contents.</p>
-                        <p class="intro-message-tiny">You could also view the sutta by directly entering the Set shortname and Sutta number (for instance mn 10) in quick links.</p>
+                <div id="main-pane-container-splitter" style="display: none;"></div>
+
+                <div id="main-pane-translations-container" style="display: none;">
+                  Translations panel
+                </div>
+              </div>
+            </div>
+
+            <div id="main-content-panel-splitter" ondblclick="closeBottomFrame()"></div>
+
+            <div id="main-bottom-pane">
+              <div id="anf" style="text-align: right" class="chromeback">
+                <div id="brtop"></div>
+                <div id="brmid"></div>
+                <div id="brbot"></div>
+                <div id="anft">
+                  <div style="text-align: center" id="anfa"></div>
+                  <div style="text-align: center" id="anfb">
+                    <table cellspacing="0" cellpadding="0" width=100%>
+                      <tr>
+                        <td style="text-align: left" valign="top" id="anfleft"></td>
+                        <td valign=top style="text-align: center" id="anfcenter"></td>
+                        <td valign="top" style="text-align: right" id="anfright"></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div style="position:relative">
+                    <div id="anfs"></div>
+                    <div id="anfsd"></div>
+                  </div>
+                </div>
+              </div>
+              <div id="bottom">
+                <div id="difout" class="difout">
+                  <div id="cdif" class="cdif">
+                    <div id="dif" class="dif paperback">
+                      <div id="difb-bottom" class="difb">
                       </div>
                     </div>
                   </div>
+                  <div id="difhist" class="hoverShow"></div>
                 </div>
               </div>
+              <div id="alertc"><span id="alert"></span></div>
             </div>
-            <div id="alertc"><span id="alert"></span></div>
           </div>
         </div>
       </div>
+      <footer id="main-footer">
+        <ul>
+          <li>&copy; Yuttadhammo Bhikkhu</li>
+          <li>|</li>
+          <li id="main-footer-timestamp"></li>
+          <li>|</li>
+          <li id="main-footer-version"></li>
+        </ul>
+      </footer>
     </div>
-    <div class="row">
-      <div class="col">
-        <div class="bottomFrame">
-          <div class="bottomFrameHandle">
-            <a href="#"><div class="fa fa-2x fa-angle-double-up grey rotate"></div></a>
-          </div>
-          <div class="bottomFrameContent" id="bottom-content">
-            <div id="anf" style="text-align: right" class="chromeback">
-              <div id="brtop"></div>
-              <div id="brmid"></div>
-              <div id="brbot"></div>
-              <div id="anft">
-                <div style="text-align: center" id="anfa"></div>
-                <div style="text-align: center" id="anfb">
-                  <table cellspacing="0" cellpadding="0" width=100%>
-                    <tr>
-                      <td style="text-align: left" valign="top" id="anfleft"></td>
-                      <td valign=top style="text-align: center" id="anfcenter"></td>
-                      <td valign="top" style="text-align: right" id="anfright"></td>
-                    </tr>
-                  </table>
-                </div>
-                <div style="position:relative">
-                  <div id="anfs"></div>
-                  <div id="anfsd"></div>
-                </div>
-              </div>
-            </div>
-            <div id="bottom">
-              <div id="difout" class="difout">
-                <div id="cdif" class="cdif">
-                  <div id="dif" class="dif paperback">
-                    <div id="difb-bottom" class="difb">
-                    </div>
-                  </div>
-                </div>
-                <div id="difhist" class="hoverShow"></div>
-              </div>
-            </div>
-            <div id="alertc"><span id="alert"></span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="sidebar" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-slideout" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="modal-title" id="sidebarHeader">Digital Pali Reader</h6>
-          <div class="ml-auto">
-            <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="display: none;">
-              <i class="fa fa-gear" aria-hidden="true"></i>
+    <div class="modal fade show" id="setingsDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header p-2">
+            <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
             </button>
-            <a type="button" class="btn btn-sm btn-light mb-0" href="help.html" title="Open help..." style="display: none;">
-              <i class="fa fa-question" aria-hidden="true"></i>
-            </a>
-            <button type="button" id="closeSbButton" class="btn btn-sm btn-light mb-0" data-dismiss="modal" title="Close sidebar">
-              <i class="fa fa-times" aria-hidden="true"></i>
-            </button>
-            <div class="nav-context-div contextMenuSbOpen"></div>
           </div>
-        </div>
-        <div class="modal-body" id="modalBody">
-          <ul id="navTabs" class="nav nav-tabs">
-            <li class="nav-item">
-              <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
-            </li>
-            <li class="nav-item">
-              <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
-            </li>
-            <li class="nav-item">
-              <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
-            </li>
-          </ul>
-          <div id="navigationDiv" class="mainContent">
+          <div class="modal-body">
+            ...
           </div>
-          <div id="searchDiv" class="mainContent">
-          </div>
-          <div id="dictionaryDiv" class="mainContent">
+          <div class="modal-footer p-2">
+            <button type="button" class="btn btn-secondary btn-sm mb-0" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary btn-sm mb-0">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade show" id="setingsDialog" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header p-2">
-          <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer p-2">
-          <button type="button" class="btn btn-secondary btn-sm mb-0" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary btn-sm mb-0">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-</body>
+    <script src="/digitalpalireader/content/js/external//jquery-3.4.1.min.js"></script>
+    <script src="/digitalpalireader/content/js/external/ajax/libs/popper.js/1.16.0/dist/umd/popper.min.js"></script>
+    <script src="/digitalpalireader/content/js/external/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/digitalpalireader/content/js/external/jquery-resizable.js"></script>
+    <script src="/digitalpalireader/content/js/dpr_pal.js"></script>
+    <script src="/digitalpalireader/content/dev.js"></script>
+    <script src="/digitalpalireader/content/js/web/io.js"></script>
+    <script src="/digitalpalireader/content/js/send.js"></script>
+    <script src="/digitalpalireader/content/js/receive.js"></script>
+    <script src="/digitalpalireader/content/js/web/chrome_sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/dhpv.js"></script>
+    <script src="/digitalpalireader/content/js/navigation_common.js"></script>
+    <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/prefload.js"></script>
+    <script src="/digitalpalireader/content/js/web/xml_sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/translit.js"></script>
+    <script src="/digitalpalireader/content/js/config.js"></script>
+    <script src="/digitalpalireader/content/js/xml_load.js"></script>
+    <script src="/digitalpalireader/content/js/navigation.js"></script>
+    <script src="/digitalpalireader/content/js/format.js"></script>
+    <script src="/digitalpalireader/content/js/web/opts_sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/relmul.js"></script>
+    <script src="/digitalpalireader/content/js/relatt.js"></script>
+    <script src="/digitalpalireader/content/js/reltik.js"></script>
+    <script src="/digitalpalireader/content/js/dppn.js"></script>
+    <script src="/digitalpalireader/content/js/translations.js"></script>
+    <script src="/digitalpalireader/content/js/format.js"></script>
+    <script src="/digitalpalireader/content/js/xml.js"></script>
+    <script src="/digitalpalireader/content/js/history.js"></script>
+    <script src="/digitalpalireader/content/js/web/search.js"></script>
+    <script src="/digitalpalireader/content/js/search.js"></script>
+    <script src="/digitalpalireader/content/js/search_history.js"></script>
+    <script src="/digitalpalireader/content/js/sortaz.js"></script>
+    <script src="/digitalpalireader/content/js/dict.js"></script>
+    <script src="/digitalpalireader/content/js/irreg.js"></script>
+    <script src="/digitalpalireader/content/js/dict_xml.js"></script>
+    <script src="/digitalpalireader/content/js/listsm.js"></script>
+    <script src="/digitalpalireader/content/js/listam.js"></script>
+    <script src="/digitalpalireader/content/js/chrome.js"></script>
+    <script src="/digitalpalireader/content/js/convert.js"></script>
+    <script src="/digitalpalireader/content/js/sortaz.js"></script>
+    <script src="/digitalpalireader/content/js/move.js"></script>
+    <script src="/digitalpalireader/content/js/dict_xml.js"></script>
+    <script src="/digitalpalireader/content/js/analysis_declension.js"></script>
+    <script src="/digitalpalireader/content/js/analysis_arrays.js"></script>
+    <script src="/digitalpalireader/content/js/analysis_function.js"></script>
+    <script src="/digitalpalireader/content/js/analysis_output.js"></script>
+    <script src="/digitalpalireader/content/js/inflect.js"></script>
+    <script src="/digitalpalireader/content/js/grammar.js"></script>
+    <script src="/digitalpalireader/content/js/listsm.js"></script>
+    <script src="/digitalpalireader/content/js/listam.js"></script>
+    <script src="/digitalpalireader/content/js/ped.js"></script>
+    <script src="/digitalpalireader/content/js/dppn.js"></script>
+    <script src="/digitalpalireader/content/js/nameno.js"></script>
+    <script src="/digitalpalireader/content/js/english.js"></script>
+    <script src="/digitalpalireader/content/js/epd.js"></script>
+    <script src="/digitalpalireader/content/js/roots.js"></script>
+    <script src="/digitalpalireader/content/js/roots_link.js"></script>
+    <script src="/digitalpalireader/content/js/skt.js"></script>
+    <script src="/digitalpalireader/content/js/skt_roots.js"></script>
+    <script src="/digitalpalireader/content/js/irreg.js"></script>
+    <script src="/digitalpalireader/content/js/attlist.js"></script>
+    <script src="/digitalpalireader/content/js/tiklist.js"></script>
+    <script src="/digitalpalireader/content/js/titles.js"></script>
+    <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
+    <script src="/digitalpalireader/content/js/search_history.js"></script>
 
+    <script src="/DPRHTML/index.js"></script>
+    <script type="text/javascript">
+      var devCheck = 0;
+      window.dump = window.dump || devCheck ? console.log : () => { };
+      function moveFrame() { }
+
+      $(document).ready(initialize);
+    </script>
+  </body>
 </html>

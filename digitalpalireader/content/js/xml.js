@@ -329,9 +329,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // output header
 
-
-  $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+titleout[0]+' '+modt+(range?' <span class="tiny">para. '+range.join('-')+'</span>':'')+(place[8]?'<span class="tiny">(Thai)</span>':'')+`</nav>`);
-
+  initializeMainPaneOutput();
+  writeNavigationHeaderForSection(titleout[0], modt, range, place[8]);
 
 	$('#mafbc').append('<div id="savetitle">'+G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
@@ -444,12 +443,11 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var outData = outputFormattedData(theData,0,place);
 	//document.textpad.pad.value=theData;
 	if(opara) {
-        document.getElementById('paliTextContent').scrollTop = document.getElementById('para'+opara).offsetTop - $("#mafbc > nav").outerHeight();
+		scrollMainPane(document.getElementById('para'+opara).offsetTop);
 	}
 	else if(scroll) {
-		document.getElementById('paliTextContent').scrollTop = scroll;
+		scrollMainPane(scroll);
   }
-  DPR_PAL.setPaliTextContentHeight();
 
 // add to history
 
@@ -968,7 +966,8 @@ function loadXMLindex(place,compare) {
     return [tabT,saveout];
 
   if (DPR_PAL.isWeb){
-    $('#mafbc').html(`<nav class="navbar navbar-expand-lg navbar-light bg-light">${DPRSidebarHamburgerMenu()}`+`<span class="navbar-brand mb-0">Reading :</span>`+tabT+`</nav>`);
+    initializeMainPaneOutput();
+    writeNavigationHeader(tabT);
   }
   $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
   $('#mafbc').append('<div id="savei">'+saveout+'</div>');
@@ -982,7 +981,6 @@ function loadXMLindex(place,compare) {
   if (DPR_PAL.isWeb){
     theDatao=digitalpalireader.makeWebAppropriate(theDatao);
     $('#mafbc').append('<div id="paliTextContent">	'+theDatao+'</div>');
-    DPR_PAL.setPaliTextContentHeight();
   } else {
     // permalink
     var permalink = `${DPR_PAL.dprHomePage}?`;

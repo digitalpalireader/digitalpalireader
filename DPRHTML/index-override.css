@@ -1,0 +1,42 @@
+#content {
+  width: 100%;
+  height: 100%;
+}
+
+#top-frame {
+  width: 100%;
+  height: 100%;
+}
+
+#diva {
+  width: 100%;
+  height: 100%;
+}
+
+#maf {
+  width: 100%;
+  height: 100%;
+}
+
+#mafb {
+  width: 100%;
+  height: 100%;
+}
+
+#mafbc {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+}
+
+#paliTextContent {
+  width: 100%;
+  height: unset;
+  overflow: hidden;
+}
+
+#bottom {
+  position: unset;
+  height: unset;
+  overflow: unset;
+}
