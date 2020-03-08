@@ -322,6 +322,11 @@ var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
 
+  // these are needed regardless of the container - Web / Extension
+  if(add == 'right') return;
+  if(window.getSelection().toString())
+    return;
+
   // Highlight the clicked element and un-highlight any previously clicked one.
   // This should be done in both versions: Web and Extension
   if (divclicked) {
@@ -350,10 +355,6 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
 		outputAnalysis(input,frombox);
 		return;
 	}
-
-	if(add == 'right') return;
-	if(window.getSelection().toString())
-		return;
 
 	if(add != true) { // reuse old tab
 		var thisTab = isDPRTab('DPRm');
