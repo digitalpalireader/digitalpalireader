@@ -123,6 +123,14 @@
   <script src="/digitalpalireader/content/js/search_history.js"></script>
   <script>
 
+    checkAnalysis  = () => {
+      let location=document.location.href;
+      if(location.indexOf('analysis')>-1){
+          let x= new URL(location);
+          outputAnalysis(x.searchParams.get("analysis"),x.searchParams.get("frombox"));
+        }
+    }//TODO: handle most parameters in a single function after Beta.
+
     $(document).ready(function() {
 
       $("#navigationDiv").show();
@@ -140,7 +148,8 @@
         } else if (location.indexOf('?feature=dictionary') > -1) {
           $("#mafbc").load("dictionary-results.html");
         }
-      }
+        checkAnalysis();
+        }
       $(".nav-link").on("click",function(e) {
         e.preventDefault();
         let tabId = this.id.substring(0, this.id.length - 3);
@@ -173,6 +182,7 @@
       $("#searchDiv").load("search.html");
       $("#dictionaryDiv").load("dictionary.html");
     }
+
 
     onpopstate = DPRChrome.historyPopstateHandler;
   </script>
