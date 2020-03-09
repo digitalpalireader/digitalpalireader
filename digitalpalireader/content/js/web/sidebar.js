@@ -304,8 +304,6 @@ var digitalpalireader = {
         DPRSend.importXML(false,null,null,null,'internal',null,1);
         break;
     }
-
-    DPR_PAL.closeSideBar();
   },
 
   loadSection:function(context,category=6){
@@ -329,8 +327,6 @@ var digitalpalireader = {
         loadXMLSection("","",aplace);
         break;
     }
-
-    DPR_PAL.closeSideBar();
   },
 
   makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
