@@ -129,8 +129,17 @@ console.log('Loading DPR_PAL...');
 
   DPR_PAL.getDifId = () => /analysis=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
 
+  DPR_PAL.isLandingPageFeature = () => {
+    return document.location.href.indexOf('?') === -1;
+  }
+
+  DPR_PAL.isSearchFeature = () => {
+    const matcher = DPR_PAL.isWeb ? /\?feature=search/i : /search\.htm/i;
+    return matcher.exec(document.location.href);
+  }
+
   DPR_PAL.isDictionaryFeature = () => {
-    const matcher = DPR_PAL.isWeb ? /feature=dictionary/ : /dict\.htm/;
+    const matcher = DPR_PAL.isWeb ? /\?feature=dictionary/i : /dict\.htm/i;
     return matcher.exec(document.location.href);
   }
 

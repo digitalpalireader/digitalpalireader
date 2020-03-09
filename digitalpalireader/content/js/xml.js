@@ -12,7 +12,9 @@ var G_thisPara = null;
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
-	 G_thisPara = null;
+  __dprViewModel.showNavigationFeature();
+
+  G_thisPara = null;
 
 	if(compare)
 		G_compare = compare;
@@ -463,7 +465,9 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 }
 
 function loadXMLindex(place,compare) {
-	var isDev = false; // dev tool
+  __dprViewModel.showNavigationFeature();
+
+  var isDev = false; // dev tool
 	var DshowH = false; // dev tool
 	//var devCheck = 1; // dev tool
 

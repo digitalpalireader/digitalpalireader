@@ -4,6 +4,8 @@
 
 The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader. It includes the collections of scriptures including the Pali canon, commentaries, sub-commentaries, Visuddhimagga and other texts in the Pali language. It also includes a dictionary to facilitate reading the texts and is useful in the study of the Pali language at an advanced level.
 
+Current backlog is maintained [here](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
+
 ## Build and test instructions
 
 To get DRP running on the local machine:

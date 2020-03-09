@@ -1,18 +1,50 @@
 /*
- TODO
- - Bring back start page
- - Bring back feedback button
- - Bring back context menu
- - 2 x navigation Info icons to show popups
- */
+
+TODO
+- Bring back start page
+- Bring back feedback button
+- Bring back context menu
+- 2 x navigation Info icons to show popups
+- correct tab is not selected in sidebar
+
+*/
+
+class DprViewModel {
+  constructor() {
+    this.loadingFeatureVisible = ko.observable(true)
+    this.landingFeatureVisible = ko.observable(false);
+    this.navigationFeatureVisible = ko.observable(false);
+  }
+
+  showLandingFeature() {
+    this.loadingFeatureVisible(false);
+    this.landingFeatureVisible(true);
+    this.navigationFeatureVisible(false);
+  }
+
+  showNavigationFeature() {
+    this.loadingFeatureVisible(false);
+    this.landingFeatureVisible(false);
+    this.navigationFeatureVisible(true);
+  }
+}
+
+const __dprViewModel = new DprViewModel();
+ko.applyBindings(__dprViewModel);
 
 function initialize() {
   initSplitters();
   initMainPane();
   initFooter();
 
+  if (DPR_PAL.isLandingPageFeature()) {
+    __dprViewModel.showLandingFeature();
+  }
+
+  //closeNewSidebar();
   initPage();
 
+  // TODO: Delay load this.
   loadSidebarDivs();
 
   onpopstate = DPRChrome.historyPopstateHandler;
