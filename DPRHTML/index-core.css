@@ -4,9 +4,9 @@
   --main-sidebar-width: 20rem;
   --splitter-width: 0.75rem;
   --splitter-background: center center no-repeat #b3b3b3;
-  --v-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png)
+  --v-splitter-background: url(/digitalpalireader/content/images/vsizegrip.png)
     var(--splitter-background);
-  --h-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/hsizegrip.png)
+  --h-splitter-background: url(/digitalpalireader/content/images/hsizegrip.png)
     var(--splitter-background);
 }
 
@@ -94,7 +94,7 @@ body {
 #main-panel-splitter {
   flex: 0 0 auto;
   width: var(--splitter-width);
-  background: var(--splitter-background);
+  background: var(--v-splitter-background);
   cursor: col-resize;
   display: none;
 }
@@ -107,7 +107,6 @@ body {
 #main-content {
   flex: 1 1 auto;
   overflow: auto;
-  display: none;
 }
 
 #main-content-header {
@@ -141,7 +140,7 @@ body {
 #main-content-panel-splitter {
   flex: 0 0 auto;
   height: var(--splitter-width);
-  background: var(--splitter-background);
+  background: var(--h-splitter-background);
   cursor: row-resize;
 }
 

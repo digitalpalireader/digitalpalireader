@@ -130,7 +130,12 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.getDifId = () => /analysis=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
 
   DPR_PAL.isLandingPageFeature = () => {
-    return document.location.href.indexOf('?') === -1;
+    const indexOfQM = document.location.href.indexOf('?');
+    return indexOfQM === -1 || indexOfQM == (document.location.href.length - 1);
+  }
+
+  DPR_PAL.isNavigationFeature = () => {
+    return !DPR_PAL.isLandingPageFeature() && document.location.href.indexOf('?feature') === -1;
   }
 
   DPR_PAL.isSearchFeature = () => {
