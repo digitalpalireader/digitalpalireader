@@ -7,8 +7,23 @@ TODO
 - 2 x navigation Info icons to show popups
 - correct tab is not selected in sidebar
 - test onpopstatehandler
+- scollstate is retained in navigation
+- random widths in the sidebar tabs
+
+o after comit
+  - format search
+  - format dictionary
 */
 
+/* Legacy stuff */
+var devCheck = 0;
+window.dump = window.dump || devCheck ? console.log : () => { };
+function moveFrame() { }
+function devO() { }
+function dalert(a) { }
+function ddump(a) { }
+
+/* Application view model */
 class DprViewModel {
   constructor() {
     this.loadingFeatureVisible = ko.observable(true)
@@ -46,21 +61,46 @@ function mainInitialize() {
   initFooter();
   ensureHidePopoversWithClickTriggers();
   initFeedbackFormParameters();
+  loadSidebarTabs();
+  initFeatureTabs();
 
   if (DPR_PAL.isLandingPageFeature()) {
     __dprViewModel.showLandingFeature();
-  } else if (DPR_PAL.isNavigationFeature()) {
-    $("#navigationDiv")
-      .load("navigation.html", (r, s, x) => {
-        __dprViewModel.showNavigationFeature();
-        initializeNavigationFeature();
-        checkAnalysis();
-        initMainPane();
-      });
+    return;
   }
 
-  initPage();
+  if (DPR_PAL.isNavigationFeature()) {
+    __dprViewModel.showNavigationFeature();
+    initializeNavigationFeature();
+  } else if (DPR_PAL.isSearchFeature()) {
+    __dprViewModel.showNavigationFeature();
+    $("#mafbc").load("search-results.html", initializeSearchFeature);
+  } else if (DPR_PAL.isDictionaryFeature()) {
+    __dprViewModel.showNavigationFeature();
+    $("#mafbc").load("dictionary-results.html", initializeDictionaryFeature);
+  }
+
+  checkAnalysis();
 }
+
+//const initPage = () => {
+  // $("#navigationTab").show();
+  // $("#searchTab").hide();
+  // $("#dictionaryTab").hide();
+
+  // var location = document.location.href;
+  // if (location.indexOf('?') > -1) {
+  //   loadSidebarTabs();
+  //   if (location.indexOf('?feature=search') > -1) {
+  //     $("#mafbc").load("search-results.html");
+  //   } else if (location.indexOf('?feature=dictionary') > -1) {
+  //     $("#mafbc").load("dictionary-results.html");
+  //   }
+  //   checkAnalysis();
+  // }
+
+
+//}
 
 const initSplitters = () => {
   $("#main-sidebar").resizable({
@@ -88,38 +128,26 @@ const initFooter = () => {
   $("#main-footer-version").text(`Version: ${window.releaseNumber}`);
 }
 
-const initPage = () => {
-  // $("#navigationDiv").show();
-  // $("#searchDiv").hide();
-  // $("#dictionaryDiv").hide();
-
-  // var location = document.location.href;
-  // if (location.indexOf('?') > -1) {
-  //   loadSidebarDivs();
-  //   if (location.indexOf('?feature=search') > -1) {
-  //     $("#mafbc").load("search-results.html");
-  //   } else if (location.indexOf('?feature=dictionary') > -1) {
-  //     $("#mafbc").load("dictionary-results.html");
-  //   }
-  //   checkAnalysis();
-  // }
-
-  // $(".nav-link").on("click",function(e) {
-  //   e.preventDefault();
-  //   let tabId = this.id.substring(0, this.id.length - 3);
-  //   $(".mainContent").hide();
-  //   $("#"+tabId+"Div").show();
-  //   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-  //     localStorage.setItem('activeTab', $(e.target).attr('id'));
-  //   });
-  // });
-
+const loadSidebarTabs = () => {
+  $("#navigationTabPane").load("navigation.html", initializeNavigationSidebarTab);
+  $("#searchTabPane").load("search.html", initializeSearchSidebarTab);
+  $("#dictionaryTabPane").load("dictionary.html", initializeDictionarySidebarTab);
 }
 
-const loadSidebarDivs = () => {
-  $("#navigationDiv").load("navigation.html");
-  $("#searchDiv").load("search.html");
-  $("#dictionaryDiv").load("dictionary.html");
+const initFeatureTabs = () => {
+  $("#navigationTabPane").show();
+  $("#searchTabPane").hide();
+  $("#dictionaryTabPane").hide();
+
+  $(".nav-link").on("click", function (e) {
+    e.preventDefault();
+    $(".featureTabContent").hide();
+    let tabId = this.id.substring(0, this.id.length - 3);
+    $(`#${tabId}TabPane`).show();
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      localStorage.setItem('activeTab', $(e.target).attr('id'));
+    });
+  });
 }
 
 const checkAnalysis = () => {
@@ -146,6 +174,8 @@ const initFeedbackFormParameters = () => {
   $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
 
+/* Start: Navigation stuff */
+
 const initializeNavigationFeature = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
   let bookList = 'd';
@@ -169,8 +199,21 @@ const initializeNavigationFeature = () => {
         break;
     }
   });
-  // update navigation
 
+  switch(place.length){
+    case 3:
+      loadXMLindex(place,false);
+      break;
+    case 8:
+      loadXMLSection(query, para, place);
+      break;
+    default:
+      break;
+  }
+}
+
+const initializeNavigationSidebarTab = () => {
+  let bookList = 'd';
   var navset = $("#nav-set");
   for (var i in G_nikFullNames) {
     navset.append($("<option />").val(i).text(G_nikFullNames[i]));
@@ -190,16 +233,84 @@ const initializeNavigationFeature = () => {
   DPR_PAL.enablePopover('#quicklinks-info', 'hover');
 
   DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
+}
 
-  switch(place.length){
-    case 3:
-      loadXMLindex(place,false);
-      break;
-    case 8:
-      loadXMLSection(query, para, place);
-      break;
-    default:
-      break;
+/* End: Navigation stuff */
+
+/* Start: Search stuff */
+
+var searchType = 0;
+var searchString = '';
+var searchMAT = '';
+var searchSet = '';
+var searchBook = 0;
+var searchPart = 0;
+var searchRX = false;
+
+const setSearchParams = () => {
+  DPRNav.setSearchBookList();
+  DPROpts.tipitakaOptions();
+  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+  urlParams.forEach(parameter => {
+    parameterSections = parameter.split('=');
+    switch (parameterSections[0]) {
+      case 'type':
+        searchType = parseInt(parameterSections[1], 10);
+        break;
+      case 'query':
+        searchString = decodeURIComponent(parameterSections[1]);
+        break;
+      case 'MAT':
+        searchMAT = parameterSections[1];
+        break;
+      case 'set':
+        searchSet = parameterSections[1];
+        break;
+      case 'book':
+        searchBook = parameterSections[1];
+        break;
+      case 'part':
+        searchPart = parameterSections[1];
+        break;
+      case 'rx':
+        searchRX = parameterSections[1];
+        break;
+    }
+  });
+}
+
+searchHandler = event => {
+  DPRSend.sendSearch(DPRSend.eventSend(event));
+  setSearchParams();
+}
+
+const initializeSearchSidebarTab = () => {
+  setSearchParams();
+
+  DPR_PAL.enablePopover('#isearchInfo', 'focus');
+}
+
+const initializeSearchFeature = () => {
+  getconfig();
+  searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
+}
+
+/* End: Search stuff */
+
+/* Begin: Dictionary stuff */
+
+const initializeDictionarySidebarTab = () => {
+  DPROpts.dictOptions();
+  DPR_PAL.enablePopover('#dictinInfo', 'focus');
+}
+
+const initializeDictionaryFeature = () => {
+  getconfig();
+  try {
+    startDictLookup();
+  } catch(ex) {
+    console.log('Unexpected exception. Is a bug. Find and fix.', ex);
   }
 }
 
+/* End: Dictionary stuff */

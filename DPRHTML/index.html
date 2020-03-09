@@ -60,11 +60,11 @@
                   <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
                 </li>
               </ul>
-              <div id="navigationDiv" class="mainContent">
+              <div id="navigationTabPane" class="featureTabContent">
               </div>
-              <div id="searchDiv" class="mainContent">
+              <div id="searchTabPane" class="featureTabContent">
               </div>
-              <div id="dictionaryDiv" class="mainContent">
+              <div id="dictionaryTabPane" class="featureTabContent">
               </div>
             </div>
           </div>
@@ -260,10 +260,6 @@
 
     <script src="/DPRHTML/index.js"></script>
     <script type="text/javascript">
-      var devCheck = 0;
-      window.dump = window.dump || devCheck ? console.log : () => { };
-      function moveFrame() { }
-
       $(document).ready(mainInitialize);
     </script>
   </body>
