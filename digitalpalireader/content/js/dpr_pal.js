@@ -116,12 +116,15 @@ console.log('Loading DPR_PAL...');
     }
   }
 
-  DPR_PAL.enablePopover = (id, trigger) => {
+  DPR_PAL.enablePopover = (id, trigger, placement) => {
     $(id)
       .each(function() {
         $(this).popover({
           trigger: trigger,
           html: true,
+          container: "body",
+          boundary: "window",
+          placement: placement,
           content: () => $(`${id}-popover-content`).html(),
         })
       });

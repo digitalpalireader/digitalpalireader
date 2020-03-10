@@ -18,7 +18,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 	DPR_PAL_Search_ShowCancelButton();
 	DPR_PAL_Search_ShowProgressBar();
 
-	DPR_PAL_Search_ClearSectionLinks();
+	DPR_PAL_Search_InitializeSectionLinks();
 
 	DPR_PAL_Search_RemoveCopyPermaLinkElement();
 
@@ -143,7 +143,7 @@ function stopSearch() {
 }
 
 function scrollSearch(what) {
-	DPR_PAL_Search_ScrollSearch(what);
+	return DPR_PAL_Search_ScrollSearch(what);
 }
 
 function DPR_PAL_Search_ScrollSearch(what) {
@@ -151,7 +151,8 @@ function DPR_PAL_Search_ScrollSearch(what) {
 		document.getElementById('search').scrollTop = what?document.getElementById(what).offsetTop:0;
 	} else {
 		const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
-		document.getElementById('paliTextContent').scrollTop = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
+		const scrollBy = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
+    scrollMainPane(scrollBy)
   }
   return false;
 }

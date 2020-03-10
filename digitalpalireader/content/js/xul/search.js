@@ -34,7 +34,7 @@ function DPR_PAL_Search_HideCancelButton() {
 	MD.getElementById('cancel-search').setAttribute('collapsed',true);
 }
 
-function DPR_PAL_Search_ClearSectionLinks() {
+function DPR_PAL_Search_InitializeSectionLinks() {
 	var element = MD.getElementById("search-sets");
 	while (element.hasChildNodes()) {
 		element.removeChild(element.firstChild);
@@ -76,7 +76,7 @@ function DPR_PAL_Search_AddSectionLink() {
 
 function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
 	var val = MD.getElementById('matches' + nikayaat).getAttribute('value').replace(/: .+/, ': ');
-	MD.getElementById('matches' + nikayaat).setAttribute('value', val + thiscount);	
+	MD.getElementById('matches' + nikayaat).setAttribute('value', val + thiscount);
 }
 
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
@@ -85,17 +85,17 @@ function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
 	thisterm.setAttribute('id','search-term');
 	thisterm.setAttribute('class','search-bold');
 	thisterm.setAttribute('crop','center');
-	
+
 	var thismatches = MD.createElement('label');
 	thismatches.setAttribute('value','0');
 	thismatches.setAttribute('id','search-matches');
 	thismatches.setAttribute('class','search-bold');
-	
+
 	var thisinter = MD.createElement('label');
 	thisinter.setAttribute('value',' matches in ');
 	thisinter.setAttribute('class','search-label');
 	thisinter.setAttribute('id','inter');
-	
+
 	var thisset = MD.createElement('label');
 	thisset.setAttribute('value',sectionInfo);
 	thisset.setAttribute('class','search-bold');
@@ -103,7 +103,7 @@ function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
 	MD.getElementById('search-sets').appendChild(thisterm);
 	MD.getElementById('search-sets').appendChild(thismatches);
 	MD.getElementById('search-sets').appendChild(thisinter);
-	MD.getElementById('search-sets').appendChild(thisset);	
+	MD.getElementById('search-sets').appendChild(thisset);
 }
 
 function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {
@@ -142,6 +142,6 @@ function DPR_PAL_Search_CreateSectionHeader(newnikaya) {
 	headingNode.setAttribute('name', 'xyz');
 	headingNode.setAttribute('class', 'huge');
 	headingNode.innerHTML = G_nikLongName[newnikaya] + '<hr>';
-	return headingNode;	
+	return headingNode;
 }
 

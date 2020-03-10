@@ -1,18 +1,20 @@
 /*
 
 TODO
-- Bring back start page
-- Bring back feedback button
+v go home from anywhere
+v Bring back feedback button
+v dwheel for rotating gif
+v 2 x navigation Info icons to show popups
+v bksubhuti's suggestion on poppers
+v format search
+
+- format dictionary
 - Bring back context menu
-- 2 x navigation Info icons to show popups
-- correct tab is not selected in sidebar
 - test onpopstatehandler
 - scollstate is retained in navigation
 - random widths in the sidebar tabs
-
-o after comit
-  - format search
-  - format dictionary
+- refactor into features
+- tika terms hanging bug
 */
 
 /* Legacy stuff */
@@ -59,10 +61,10 @@ function mainInitialize() {
   initSplitters();
   initMainPane();
   initFooter();
-  ensureHidePopoversWithClickTriggers();
   initFeedbackFormParameters();
   loadSidebarTabs();
   initFeatureTabs();
+  ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isLandingPageFeature()) {
     __dprViewModel.showLandingFeature();
@@ -82,25 +84,6 @@ function mainInitialize() {
 
   checkAnalysis();
 }
-
-//const initPage = () => {
-  // $("#navigationTab").show();
-  // $("#searchTab").hide();
-  // $("#dictionaryTab").hide();
-
-  // var location = document.location.href;
-  // if (location.indexOf('?') > -1) {
-  //   loadSidebarTabs();
-  //   if (location.indexOf('?feature=search') > -1) {
-  //     $("#mafbc").load("search-results.html");
-  //   } else if (location.indexOf('?feature=dictionary') > -1) {
-  //     $("#mafbc").load("dictionary-results.html");
-  //   }
-  //   checkAnalysis();
-  // }
-
-
-//}
 
 const initSplitters = () => {
   $("#main-sidebar").resizable({
@@ -171,7 +154,7 @@ const initFeedbackFormParameters = () => {
   const env = `${environmentName}.${releaseNumber}`;
   const url = encodeURIComponent(document.location.href);
   const userAgent = encodeURIComponent(navigator.userAgent);
-  $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
+  $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
 
 /* Start: Navigation stuff */
@@ -230,9 +213,9 @@ const initializeNavigationSidebarTab = () => {
 
   $('#nav-title').prop('title', 'View index for this book');
 
-  DPR_PAL.enablePopover('#quicklinks-info', 'hover');
+  DPR_PAL.enablePopover('#quicklinks-info', 'hover', 'right');
 
-  DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
+  DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover', 'right');
 }
 
 /* End: Navigation stuff */
@@ -287,7 +270,7 @@ searchHandler = event => {
 const initializeSearchSidebarTab = () => {
   setSearchParams();
 
-  DPR_PAL.enablePopover('#isearchInfo', 'focus');
+  DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }
 
 const initializeSearchFeature = () => {
@@ -301,7 +284,7 @@ const initializeSearchFeature = () => {
 
 const initializeDictionarySidebarTab = () => {
   DPROpts.dictOptions();
-  DPR_PAL.enablePopover('#dictinInfo', 'focus');
+  DPR_PAL.enablePopover('#dictinInfo', 'click', 'bottom');
 }
 
 const initializeDictionaryFeature = () => {
