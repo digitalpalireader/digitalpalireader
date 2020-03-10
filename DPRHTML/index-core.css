@@ -4,9 +4,9 @@
   --main-sidebar-width: 20rem;
   --splitter-width: 0.75rem;
   --splitter-background: center center no-repeat #b3b3b3;
-  --v-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/vsizegrip.png)
+  --v-splitter-background: url(/digitalpalireader/content/images/vsizegrip.png)
     var(--splitter-background);
-  --h-splitter-background: url(https://raw.githubusercontent.com/RickStrahl/jquery-resizable/master/assets/hsizegrip.png)
+  --h-splitter-background: url(/digitalpalireader/content/images/hsizegrip.png)
     var(--splitter-background);
 }
 
@@ -18,6 +18,30 @@ body {
   padding: 0px;
   margin: 0px;
   overflow: auto;
+}
+
+#main-container-loading-page {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 1000;
+  background-color: #FFD;
+}
+
+#main-container-loading-page-spinner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  animation: main-container-loading-page-spinner-rotation 8s infinite linear;
+}
+
+@keyframes main-container-loading-page-spinner-rotation {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(359deg);
+  }
 }
 
 #main-container {
@@ -35,19 +59,49 @@ body {
 #main-footer {
   height: var(--main-footer-height);
   font-size: calc(0.75 * var(--main-footer-height));
+  background-color: #f2f2f2;
+}
+
+#main-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#main-footer ul li {
+  margin: 0 0.25rem;
 }
 
 #main-sidebar {
   flex: 0 0 auto;
   min-width: var(--main-sidebar-width);
   overflow: auto;
+  display: none;
+  margin-left: calc(0rem - var(--main-sidebar-width));
+}
+
+#main-sidebar #main-sidebar-content {
+  height: 100%;
+  width: 100%;
+  border: 0px;
 }
 
 #main-panel-splitter {
   flex: 0 0 auto;
   width: var(--splitter-width);
-  background: var(--splitter-background);
+  background: var(--v-splitter-background);
   cursor: col-resize;
+  display: none;
+}
+
+#main-content-landing-page {
+  height: 100%;
+  width: 100%;
 }
 
 #main-content {
@@ -59,6 +113,15 @@ body {
   height: var(--main-content-header-height);
   background-color: #f8f8f8;
   border-bottom: 1px solid #e7e7e7;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#main-content-header-contents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #main-content-panel {
@@ -70,14 +133,14 @@ body {
 
 #main-pane {
   flex: 0 0 auto;
-  height: 75%;
+  height: 100%;
   width: 100%;
 }
 
 #main-content-panel-splitter {
   flex: 0 0 auto;
   height: var(--splitter-width);
-  background: var(--splitter-background);
+  background: var(--h-splitter-background);
   cursor: row-resize;
 }
 
@@ -96,7 +159,7 @@ body {
 
 #main-pane-text-container {
   flex: 0 0 auto;
-  width: 50%;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -112,6 +175,24 @@ body {
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.force-show-scrollbar-on-macos::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
 }
 
 @media (max-width: 768px) {

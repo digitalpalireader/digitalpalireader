@@ -61,7 +61,6 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
   if (!DPR_PAL.isXUL) {
     outDiv.id="paliTextContent";
   }
-	document.getElementById('mafbc').appendChild(document.createElement('hr'));
 	document.getElementById('mafbc').appendChild(outDiv);
 
 	document.getElementById('maf').scrollTop = 0;

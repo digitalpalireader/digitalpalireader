@@ -9,15 +9,7 @@ echo "SOURCEDIR = $SOURCEDIR"
 
 mkdir -p $OUTDIR
 
-cd digitalpalireader
-./build.sh $OUTDIR
-cd ../DPRMyanmar
-./build.sh $OUTDIR
-cd ../DPRThai
-./build.sh $OUTDIR
-cd ../sanskrit
-./build.sh $OUTDIR
-cd ../DPRHTML
+cd ./DPRHTML
 ./build.sh $OUTDIR $SOURCEDIR
 cd ..
 

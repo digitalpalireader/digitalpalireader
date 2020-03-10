@@ -417,7 +417,6 @@ var DPRSend = {
   sendAnalysisToOutput: function (input, frombox, add) {
     if (DPR_PAL.isWeb) {
       outputAnalysis(input,frombox);
-      DPR_PAL.closeSideBar();
       return;
     }
 
@@ -449,8 +448,6 @@ var DPRSend = {
 
 
   sendDict: function (hard, add, which, getstring, opts) {
-
-    DPR_PAL.closeSideBar();
 
     var start = Date.now();
     var end, mid, elapsed;

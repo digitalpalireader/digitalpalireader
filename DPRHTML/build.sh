@@ -2,14 +2,6 @@ APP_NAME=dprweb
 OUTDIR="${1:-../../build}"
 SOURCEDIR="${2:-$OUTDIR/..}"
 
-echo "Building dprweb extensions"
-pushd extensions
-yarn install
-yarn lint
-yarn build
-yarn citest
-popd
-
 rm -f $OUTDIR/$APP_NAME.zip
 
 # generate the ZIP file

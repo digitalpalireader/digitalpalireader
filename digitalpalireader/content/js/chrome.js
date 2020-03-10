@@ -259,21 +259,57 @@ function DPRBottomPaneUpdateStyle() {
 	document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 
-function DPRSidebarHamburgerMenu() {
-	if (DPR_PAL.isWeb) {
-    return `
-<a data-toggle="modal" href="" data-target="#sidebar" role="button" class="p-1" title="Open side bar">
-  <i class="fa fa-bars" aria-hidden="true"></i>
-</a>`;
-	} else {
-		return '';
-  }
-}
-
-function DPRBottomPaneToggleVisiblity() {
+function DPRShowBottomPane() {
   if (!DPR_PAL.isWeb) {
     return;
   }
 
-  DPR_PAL.openBottomFrame();
+  openBottomFrame();
+}
+
+const initializeMainPaneOutput = () => {
+  $('#mafbc').html('');
+}
+
+const writeNavigationHeader = (tabT) => {
+  $('#main-content-header-title').text("Reading: ")
+  $('#main-content-header-contents').html(tabT);
+}
+
+const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
+  $('#main-content-header-title').text("Reading: ")
+  $('#main-content-header-contents').html(titleout0 + ' ' + modt + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+}
+
+const scrollMainPane = (scrollTop) => {
+  $('#main-pane-text-container').scrollTop(scrollTop - $("#main-content-header").outerHeight());
+}
+
+const openBottomFrame = () => {
+  // NOTE: #main-bottom-pane takes up the remaining space.
+  $("#main-pane").height("75%");
+}
+
+const closeBottomFrame = () => {
+  // NOTE: #main-bottom-pane takes up the remaining space.
+  $("#main-pane").height("100%");
+}
+
+const toggleNewSidebarVisibility = () => {
+  if ($('#main-sidebar').css('margin-left').startsWith("-")) {
+    openNewSidebar();
+  } else {
+    closeNewSidebar();
+  }
+}
+
+const closeNewSidebar = () => {
+  $("#main-sidebar").animate({ marginLeft: "-" + $('#main-sidebar').css('width') }, 300);
+  $("#main-panel-splitter").css("display", "none");
+}
+
+const openNewSidebar = () => {
+  $("#main-sidebar").show();
+  $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
+  $("#main-panel-splitter").css("display", "block");
 }
