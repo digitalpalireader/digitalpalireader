@@ -280,7 +280,7 @@ const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-text-container').scrollTop(scrollTop - $("#main-content-header").outerHeight());
+  $('#main-pane-text-container').scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {

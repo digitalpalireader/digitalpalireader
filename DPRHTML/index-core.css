@@ -121,7 +121,7 @@ body {
   align-items: center;
 }
 
-#main-content-header-contents {
+#main-content-header-context-commands, #main-content-header-contents {
   display: flex;
   flex-direction: row;
   align-items: center;

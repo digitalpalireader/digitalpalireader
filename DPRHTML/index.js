@@ -4,15 +4,17 @@ TODO
 v go home from anywhere
 v Bring back feedback button
 v dwheel for rotating gif
+v 2 x navigation Info icons to show popups
+v bksubhuti's suggestion on poppers
+v format search
+
+- format dictionary
 - Bring back context menu
-- 2 x navigation Info icons to show popups
-- bksubhuti's suggestion on poppers
 - test onpopstatehandler
 - scollstate is retained in navigation
 - random widths in the sidebar tabs
-- format search
-- format dictionary
 - refactor into features
+- tika terms hanging bug
 */
 
 /* Legacy stuff */
