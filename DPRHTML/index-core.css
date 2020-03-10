@@ -15,6 +15,7 @@ body {
   height: 100%;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
+  font-size: 16px;
   padding: 0px;
   margin: 0px;
   overflow: auto;
@@ -78,6 +79,7 @@ body {
 
 #main-footer ul li {
   margin: 0 0.25rem;
+  font-size: calc(0.75 * var(--main-footer-height));
 }
 
 #main-sidebar {

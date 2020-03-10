@@ -13,8 +13,11 @@ v format search
 - test onpopstatehandler
 - scollstate is retained in navigation
 - random widths in the sidebar tabs
+
 - refactor into features
+
 - tika terms hanging bug
+- multi word search result navigation highlighting is broken
 */
 
 /* Legacy stuff */
@@ -59,7 +62,6 @@ onpopstate = DPRChrome.historyPopstateHandler;
 function mainInitialize() {
   setPrefs();
   initSplitters();
-  initMainPane();
   initFooter();
   initFeedbackFormParameters();
   loadSidebarTabs();
@@ -82,6 +84,7 @@ function mainInitialize() {
     $("#mafbc").load("dictionary-results.html", initializeDictionaryFeature);
   }
 
+  initMainPane();
   checkAnalysis();
 }
 
