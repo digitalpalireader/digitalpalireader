@@ -65,3 +65,7 @@
   content: "\f077"; /* fa-chevron-up */
 }
 
+.popover-link {
+  color: blue;
+  text-decoration: underline !important;
+}

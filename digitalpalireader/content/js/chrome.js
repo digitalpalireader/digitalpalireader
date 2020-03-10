@@ -272,12 +272,10 @@ const initializeMainPaneOutput = () => {
 }
 
 const writeNavigationHeader = (tabT) => {
-  $('#main-content-header-title').text("Reading: ")
   $('#main-content-header-contents').html(tabT);
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-title').text("Reading: ")
   $('#main-content-header-contents').html(titleout0 + ' ' + modt + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 

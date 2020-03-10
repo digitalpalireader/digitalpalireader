@@ -36,7 +36,7 @@
 
   <body>
     <div id="main-container-loading-page" data-bind="visible: loadingFeatureVisible">
-      <img id="main-container-loading-page-spinner" src="/digitalpalireader/content/images/dwheel.png" alt="Loading...">
+      <img id="main-container-loading-page-spinner" class="spin-img-infinitely" src="/digitalpalireader/content/images/dwheel.png" alt="Loading...">
     </div>
     <div id="main-container" data-bind="hidden: loadingFeatureVisible">
       <div id="main-panel">
@@ -74,6 +74,9 @@
           <button type="button" class="btn btn-light m-2" onclick="toggleNewSidebarVisibility()">
             <i class="fa fa-bars"></i>
           </button>
+          <a href="#" target="_blank" class="btn btn-success m-0 feedback-form-link" role="button" style="font-size: x-small;">
+            Give feedback!
+          </a>
           <div id="intro-space" class="intro-space">
             <div class="intro-message">
               <p class="intro-message-huge">Welcome to the Digital Pali Reader 5.0 <span class="intro-message-tiny intro-message-green">(alpha)</span></p>
@@ -87,7 +90,13 @@
             <button type="button" class="btn btn-light m-0" onclick="toggleNewSidebarVisibility()">
               <i class="fa fa-bars"></i>
             </button>
-            <span id="main-content-header-title"></span>
+            <a href="/" class="btn btn-light m-0" role="button">
+              <i class="fa fa-home"></i>
+            </a>
+            <a href="#" target="_blank" class="btn btn-success m-0 feedback-form-link" role="button" style="font-size: x-small;">
+              Give feedback!
+            </a>
+            <span id="main-content-header-title" class="ml-3"></span>
             <div id="main-content-header-contents"></div>
           </header>
           <div id="main-content-panel">

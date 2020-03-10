@@ -455,7 +455,7 @@ function analyzeTextPad(text) {
 
 var pleasewait =  document.createElement('div');
 pleasewait.setAttribute('align','center');
-pleasewait.innerHTML = '<br/><br/><br/><br/><h1><img src="'+DPR_PAL.contentFolder+'images/ajax-loader.gif" /> please wait...</h1>';
+pleasewait.innerHTML = '<br/><br/><br/><br/><img class="spin-img-infinitely" src="'+DPR_PAL.contentFolder+'images/dwheel.png" /><br/><br/><br/><br/>';
 
 
 

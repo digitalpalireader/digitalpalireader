@@ -32,10 +32,13 @@ body {
   position: absolute;
   left: 50%;
   top: 50%;
-  animation: main-container-loading-page-spinner-rotation 8s infinite linear;
 }
 
-@keyframes main-container-loading-page-spinner-rotation {
+.spin-img-infinitely {
+  animation: spin-img-infinitely-kfs 8s infinite linear;
+}
+
+@keyframes spin-img-infinitely-kfs {
   from {
     transform: translate(-50%, -50%) rotate(0deg);
   }
