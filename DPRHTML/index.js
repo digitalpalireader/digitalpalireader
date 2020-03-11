@@ -1,48 +1,11 @@
-/*
-
-TODO
-- Bring back start page
-- Bring back feedback button
-- Bring back context menu
-- 2 x navigation Info icons to show popups
-- correct tab is not selected in sidebar
-- test onpopstatehandler
-- scollstate is retained in navigation
-- random widths in the sidebar tabs
-
-o after comit
-  - format search
-  - format dictionary
-*/
-
-/* Legacy stuff */
+/* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };
 function moveFrame() { }
 function devO() { }
 function dalert(a) { }
 function ddump(a) { }
-
-/* Application view model */
-class DprViewModel {
-  constructor() {
-    this.loadingFeatureVisible = ko.observable(true)
-    this.landingFeatureVisible = ko.observable(false);
-    this.navigationFeatureVisible = ko.observable(false);
-  }
-
-  showLandingFeature() {
-    this.loadingFeatureVisible(false);
-    this.landingFeatureVisible(true);
-    this.navigationFeatureVisible(false);
-  }
-
-  showNavigationFeature() {
-    this.loadingFeatureVisible(false);
-    this.landingFeatureVisible(false);
-    this.navigationFeatureVisible(true);
-  }
-}
+/* End: Legacy stuff. */
 
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
@@ -57,50 +20,46 @@ onpopstate = DPRChrome.historyPopstateHandler;
 function mainInitialize() {
   setPrefs();
   initSplitters();
-  initMainPane();
   initFooter();
-  ensureHidePopoversWithClickTriggers();
-  initFeedbackFormParameters();
   loadSidebarTabs();
   initFeatureTabs();
+  ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isLandingPageFeature()) {
-    __dprViewModel.showLandingFeature();
+    $("#main-content-landing-page")
+      .load(
+          `features/landing-page/main-pane.html`,
+          () => {
+            __dprViewModel.showLandingFeature();
+            initFeedbackFormParameters();
+          });
     return;
   }
 
   if (DPR_PAL.isNavigationFeature()) {
-    __dprViewModel.showNavigationFeature();
-    initializeNavigationFeature();
+    loadFeature('navigation', initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    __dprViewModel.showNavigationFeature();
-    $("#mafbc").load("search-results.html", initializeSearchFeature);
+    loadFeature('search', initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    __dprViewModel.showNavigationFeature();
-    $("#mafbc").load("dictionary-results.html", initializeDictionaryFeature);
+    loadFeature('dictionary', initializeDictionaryFeature);
+  } else {
+    console.error('Unsupported feature', document.location.href);
   }
 
+  initMainPane();
   checkAnalysis();
 }
 
-//const initPage = () => {
-  // $("#navigationTab").show();
-  // $("#searchTab").hide();
-  // $("#dictionaryTab").hide();
-
-  // var location = document.location.href;
-  // if (location.indexOf('?') > -1) {
-  //   loadSidebarTabs();
-  //   if (location.indexOf('?feature=search') > -1) {
-  //     $("#mafbc").load("search-results.html");
-  //   } else if (location.indexOf('?feature=dictionary') > -1) {
-  //     $("#mafbc").load("dictionary-results.html");
-  //   }
-  //   checkAnalysis();
-  // }
-
-
-//}
+const loadFeature = (name, initFn) => {
+  $("#mafbc")
+  .load(
+    `features/${name}/main-pane.html`,
+    () => {
+      initFn();
+      __dprViewModel.showMainFeatures();
+      initFeedbackFormParameters();
+    });
+}
 
 const initSplitters = () => {
   $("#main-sidebar").resizable({
@@ -129,9 +88,9 @@ const initFooter = () => {
 }
 
 const loadSidebarTabs = () => {
-  $("#navigationTabPane").load("navigation.html", initializeNavigationSidebarTab);
-  $("#searchTabPane").load("search.html", initializeSearchSidebarTab);
-  $("#dictionaryTabPane").load("dictionary.html", initializeDictionarySidebarTab);
+  $("#navigationTabPane").load("features/navigation/tab.html", initializeNavigationSidebarTab);
+  $("#searchTabPane").load("features/search/tab.html", initializeSearchSidebarTab);
+  $("#dictionaryTabPane").load("features/dictionary/tab.html", initializeDictionarySidebarTab);
 }
 
 const initFeatureTabs = () => {
@@ -171,146 +130,5 @@ const initFeedbackFormParameters = () => {
   const env = `${environmentName}.${releaseNumber}`;
   const url = encodeURIComponent(document.location.href);
   const userAgent = encodeURIComponent(navigator.userAgent);
-  $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
+  $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
-
-/* Start: Navigation stuff */
-
-const initializeNavigationFeature = () => {
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  let bookList = 'd';
-  let place = [];
-  let query = '';
-  let para = '';
-  urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
-    switch (parameterSections[0]) {
-      case 'loc':
-        place = makeLocPlace(parameterSections[1]);
-        if (place.length == 8) {
-          bookList = place[0];
-        }
-        break;
-      case 'para':
-        para = parameterSections[1];
-        break;
-      case 'query':
-        query = parameterSections[1];
-        break;
-    }
-  });
-
-  switch(place.length){
-    case 3:
-      loadXMLindex(place,false);
-      break;
-    case 8:
-      loadXMLSection(query, para, place);
-      break;
-    default:
-      break;
-  }
-}
-
-const initializeNavigationSidebarTab = () => {
-  let bookList = 'd';
-  var navset = $("#nav-set");
-  for (var i in G_nikFullNames) {
-    navset.append($("<option />").val(i).text(G_nikFullNames[i]));
-  }
-  navset.val(bookList);
-  digitalpalireader.setBookList(bookList);
-  digitalpalireader.changeSet();
-  navset.change(function () {
-    digitalpalireader.changeSet();
-  });
-  $("#nav-book").change(function () {
-    digitalpalireader.updateSubnav(0);
-  });
-
-  $('#nav-title').prop('title', 'View index for this book');
-
-  DPR_PAL.enablePopover('#quicklinks-info', 'hover');
-
-  DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
-}
-
-/* End: Navigation stuff */
-
-/* Start: Search stuff */
-
-var searchType = 0;
-var searchString = '';
-var searchMAT = '';
-var searchSet = '';
-var searchBook = 0;
-var searchPart = 0;
-var searchRX = false;
-
-const setSearchParams = () => {
-  DPRNav.setSearchBookList();
-  DPROpts.tipitakaOptions();
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
-    switch (parameterSections[0]) {
-      case 'type':
-        searchType = parseInt(parameterSections[1], 10);
-        break;
-      case 'query':
-        searchString = decodeURIComponent(parameterSections[1]);
-        break;
-      case 'MAT':
-        searchMAT = parameterSections[1];
-        break;
-      case 'set':
-        searchSet = parameterSections[1];
-        break;
-      case 'book':
-        searchBook = parameterSections[1];
-        break;
-      case 'part':
-        searchPart = parameterSections[1];
-        break;
-      case 'rx':
-        searchRX = parameterSections[1];
-        break;
-    }
-  });
-}
-
-searchHandler = event => {
-  DPRSend.sendSearch(DPRSend.eventSend(event));
-  setSearchParams();
-}
-
-const initializeSearchSidebarTab = () => {
-  setSearchParams();
-
-  DPR_PAL.enablePopover('#isearchInfo', 'focus');
-}
-
-const initializeSearchFeature = () => {
-  getconfig();
-  searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
-}
-
-/* End: Search stuff */
-
-/* Begin: Dictionary stuff */
-
-const initializeDictionarySidebarTab = () => {
-  DPROpts.dictOptions();
-  DPR_PAL.enablePopover('#dictinInfo', 'focus');
-}
-
-const initializeDictionaryFeature = () => {
-  getconfig();
-  try {
-    startDictLookup();
-  } catch(ex) {
-    console.log('Unexpected exception. Is a bug. Find and fix.', ex);
-  }
-}
-
-/* End: Dictionary stuff */

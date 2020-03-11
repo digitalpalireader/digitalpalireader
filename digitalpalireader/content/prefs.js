@@ -308,7 +308,8 @@ var G_interval = [];
 function installSetPref(set,setName,id) {
 	if(!installSetPrompt(set,setName,id)) return;
 	var loadNode = document.createElement('image');
-	loadNode.setAttribute('src',"chrome://digitalpalireader/content/images/ajax-loader-bar.gif");
+	loadNode.setAttribute('src',"/digitalpalireader/content/images/dwheel.png");
+	loadNode.setAttribute('class', 'spin-img-infinitely');
 	document.getElementById(set).removeChild(document.getElementById(set).firstChild);
 	document.getElementById(set).appendChild(loadNode);
 	G_interval[set] = window.setInterval(function(){ checkInstalled(set) },1000);

@@ -116,12 +116,15 @@ console.log('Loading DPR_PAL...');
     }
   }
 
-  DPR_PAL.enablePopover = (id, trigger) => {
+  DPR_PAL.enablePopover = (id, trigger, placement) => {
     $(id)
       .each(function() {
         $(this).popover({
           trigger: trigger,
           html: true,
+          container: "body",
+          boundary: "window",
+          placement: placement,
           content: () => $(`${id}-popover-content`).html(),
         })
       });
@@ -139,12 +142,12 @@ console.log('Loading DPR_PAL...');
   }
 
   DPR_PAL.isSearchFeature = () => {
-    const matcher = DPR_PAL.isWeb ? /\?feature=search/i : /search\.htm/i;
+    const matcher = DPR_PAL.isWeb ? /\?feature=search&/i : /search\.htm/i;
     return matcher.exec(document.location.href);
   }
 
   DPR_PAL.isDictionaryFeature = () => {
-    const matcher = DPR_PAL.isWeb ? /\?feature=dictionary/i : /dict\.htm/i;
+    const matcher = DPR_PAL.isWeb ? /\?feature=dictionary&/i : /dict\.htm/i;
     return matcher.exec(document.location.href);
   }
 
