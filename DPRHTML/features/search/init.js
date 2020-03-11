@@ -15,24 +15,31 @@ const setSearchParams = () => {
     switch (parameterSections[0]) {
       case 'type':
         searchType = parseInt(parameterSections[1], 10);
+        __dprViewModel.searchTab.searchType(searchType);
         break;
       case 'query':
         searchString = decodeURIComponent(parameterSections[1]);
+        __dprViewModel.searchTab.searchString(searchString);
         break;
       case 'MAT':
         searchMAT = parameterSections[1];
+        __dprViewModel.searchTab.searchMAT(searchMAT);
         break;
       case 'set':
         searchSet = parameterSections[1];
+        __dprViewModel.searchTab.searchSet(searchSet);
         break;
       case 'book':
         searchBook = parameterSections[1];
+        __dprViewModel.searchTab.searchBook(searchBook);
         break;
       case 'part':
         searchPart = parameterSections[1];
+        __dprViewModel.searchTab.searchPart(searchPart);
         break;
       case 'rx':
         searchRX = parameterSections[1];
+        __dprViewModel.searchTab.searchRX(searchRX);
         break;
     }
   });
@@ -44,7 +51,9 @@ searchHandler = event => {
 }
 
 const initializeSearchSidebarTab = () => {
+  let sidebarTab = $("#searchTabPane :first-child")[0];
   setSearchParams();
+  ko.applyBindings(__dprViewModel.searchTab, sidebarTab);
 
   DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }

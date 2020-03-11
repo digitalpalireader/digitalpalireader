@@ -1,3 +1,4 @@
+<div id="searchTabContent">
 <div class="form-row align-items-center">
   <div class="col-md-10">
     <label class="sr-only" for="isearch">isearch</label>
@@ -15,7 +16,7 @@
           Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' class='popover-link'>Velthuis on Wikipedia</a> for the entire list.
         </div>
       </div>
-      <input type="text" id="isearch" class="form-control" placeholder="Search term"
+      <input type="text" id="isearch" class="form-control" placeholder="Search term" data-bind="textInput: searchString"
         onkeydown="if(event.keyCode==13) searchHandler(); event.keyCode=0;">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="searchButton" title="Search for word or phrase in selected volumes" onclick="searchHandler(event)">
@@ -26,7 +27,7 @@
   </div>
   <div class="col-md-2">
     <div class="form-check mb-2">
-      <input class="form-check-input" type="checkbox" id="tsoRx" title="Use Regular Expressions for wildcards in search">
+      <input class="form-check-input" type="checkbox" id="tsoRx" title="Use Regular Expressions for wildcards in search" data-bind="checked: searchRX">
       <label class="form-check-label" for="tsoRx">
         RegEx
       </label>
@@ -132,7 +133,7 @@
       <div class="col-md-10 px-0">
         <div id="tsoCO1">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOv">
+            <input class="form-check-input" type="checkbox" id="tsoCOv" data-bind="checked: searchSetV">
             <label class="form-check-label" for="tsoCOv">
               Vinaya
             </label>
@@ -140,31 +141,31 @@
         </div>
         <div id="tsoCO2">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOd" checked>
+            <input class="form-check-input" type="checkbox" id="tsoCOd" data-bind="checked: searchSetD">
             <label class="form-check-label" for="tsoCOd">
               Dīgha
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOm" checked>
+            <input class="form-check-input" type="checkbox" id="tsoCOm" data-bind="checked: searchSetM">
             <label class="form-check-label" for="tsoCOm">
               Majjhima
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOs" checked>
+            <input class="form-check-input" type="checkbox" id="tsoCOs" data-bind="checked: searchSetS">
             <label class="form-check-label" for="tsoCOs">
               Saṃyutta
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOa" checked>
+            <input class="form-check-input" type="checkbox" id="tsoCOa" data-bind="checked: searchSetA">
             <label class="form-check-label" for="tsoCOa">
               Aṅguttara
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOk" checked>
+            <input class="form-check-input" type="checkbox" id="tsoCOk" data-bind="checked: searchSetK">
             <label class="form-check-label" for="tsoCOk">
               Khuddaka
             </label>
@@ -172,31 +173,31 @@
         </div>
         <div id="tsoCO3">
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOy">
+            <input class="form-check-input" type="checkbox" id="tsoCOy" data-bind="checked: searchSetY">
             <label class="form-check-label" for="tsoCOy">
               Abhidhamma
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOx">
+            <input class="form-check-input" type="checkbox" id="tsoCOx" data-bind="checked: searchSetX">
             <label class="form-check-label" for="tsoCOx">
               Vism
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOb">
+            <input class="form-check-input" type="checkbox" id="tsoCOb" data-bind="checked: searchSetB">
             <label class="form-check-label" for="tsoCOb">
               Abhidh-s
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOg">
+            <input class="form-check-input" type="checkbox" id="tsoCOg" data-bind="checked: searchSetG">
             <label class="form-check-label" for="tsoCOg">
               Byākaraṇa
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="tsoCOn">
+            <input class="form-check-input" type="checkbox" id="tsoCOn" data-bind="checked: searchSetN">
             <label class="form-check-label" for="tsoCOn">
               Añña
             </label>
@@ -233,19 +234,19 @@
       </div>
       <div class="col-md-10 px-0">
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="tsoMATm" checked>
+          <input class="form-check-input" type="checkbox" id="tsoMATm" data-bind="checked: searchM"/>
           <label class="form-check-label" for="tsoMATm">
             Mūla
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="tsoMATa">
+          <input class="form-check-input" type="checkbox" id="tsoMATa" data-bind="checked: searchA"/>
           <label class="form-check-label" for="tsoMATa">
             Aṭṭhakathā
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="tsoMATt">
+          <input class="form-check-input" type="checkbox" id="tsoMATt" data-bind="checked: searchT"/>
           <label class="form-check-label" for="tsoMATt">
             Ṭīka
           </label>
@@ -253,4 +254,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

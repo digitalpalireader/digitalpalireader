@@ -7,6 +7,10 @@ function dalert(a) { }
 function ddump(a) { }
 /* End: Legacy stuff. */
 
+const navigationFeatureName = "navigation";
+const dictionaryFeatureName = "dictionary";
+const searchFeatureName = "search";
+
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 
@@ -37,11 +41,11 @@ function mainInitialize() {
   }
 
   if (DPR_PAL.isNavigationFeature()) {
-    loadFeature('navigation', initializeNavigationFeature);
+    loadFeature(navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    loadFeature('search', initializeSearchFeature);
+    loadFeature(searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    loadFeature('dictionary', initializeDictionaryFeature);
+    loadFeature(dictionaryFeatureName, initializeDictionaryFeature);
   } else {
     console.error('Unsupported feature', document.location.href);
   }
@@ -94,9 +98,15 @@ const loadSidebarTabs = () => {
 }
 
 const initFeatureTabs = () => {
-  $("#navigationTabPane").show();
+  $("#navigationTabPane").hide();
   $("#searchTabPane").hide();
   $("#dictionaryTabPane").hide();
+
+  const activeTab = __dprViewModel.activeTab();
+  $(`#${activeTab}TabPane`).show();
+  $(".nav-link").removeClass('active');
+  $(`#${activeTab}Tab`).addClass('active');
+  localStorage.setItem('activeTab', `${__dprViewModel.activeTab()}Tab`);
 
   $(".nav-link").on("click", function (e) {
     e.preventDefault();
