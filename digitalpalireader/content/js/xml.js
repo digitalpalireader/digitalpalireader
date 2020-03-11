@@ -12,7 +12,7 @@ var G_thisPara = null;
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
-  __dprViewModel.showNavigationFeature();
+  __dprViewModel.showMainFeatures();
 
   G_thisPara = null;
 
@@ -464,7 +464,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 }
 
 function loadXMLindex(place,compare) {
-  __dprViewModel.showNavigationFeature();
+  __dprViewModel.showMainFeatures();
 
   var isDev = false; // dev tool
 	var DshowH = false; // dev tool
