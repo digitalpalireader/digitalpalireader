@@ -49,6 +49,30 @@ var digitalpalireader = {
 		this.updateSubnav(0);
 	},
 
+  updateDepth(heir, n, tag, id, navShown) {
+    const lista = this.makeTitleSelect(heir, tag);
+
+    const listNode = $(`#${id}`);
+    listNode.empty();
+    const listNodeButton = $(`#${id}-button`)
+
+    if (lista.length == 1 && lista[0] == this.unnamed ) {
+      navShown[n] = false;
+      listNode.hide();
+      listNodeButton.hide();
+      listNode.append($("<option />").val(0).text(this.unnamed));
+    }
+    else {
+      navShown[n] = true;
+      for(idx in lista){
+        listNode.append($("<option />").val(idx).text(lista[idx]));
+      }
+      listNode.show();
+      listNodeButton.show();
+    }
+    listNode.val(0);
+  },
+
 	updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
     var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
@@ -76,7 +100,7 @@ var digitalpalireader = {
 		if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
 		else name = this.unnamed;
 		var outname = translit(toUni(name));
-		$('#nav-title').val(outname);
+		$('#nav-title').text(outname);
 
 		var u = xmlDoc.getElementsByTagName("h0");
 		var v = u[meta].getElementsByTagName("h1");
@@ -84,138 +108,54 @@ var digitalpalireader = {
 		var x = w[vagga].getElementsByTagName("h3");
 		var y = x[sutta].getElementsByTagName("h4");
 
-		var listNode;
+    switch(true) {
+      case (depth == 0): // remake meta list
+        this.updateDepth(u, 0, 'h0n', 'nav-meta', navShown);
 
-		switch(true) {
-			case (depth == 0): // remake meta list
-				lista = this.makeTitleSelect(u,'h0n');
+      case  (depth < 2): // remake volume list
+        this.updateDepth(v, 1, 'h1n', 'nav-volume', navShown);
 
-				listNode = $('#nav-meta');
-				listNode.empty();
+      case  (depth < 3): // remake vaggalist
+        this.updateDepth(w, 2, 'h2n', 'nav-vagga', navShown);
 
-				if (lista.length == 1 && lista[0] == this.unnamed ) {
-					listNode.parent().hide();
-					listNode.append($("<option />").val(0).text(this.unnamed));
-					navShown[0] = false;
-				}
-				else {
-					navShown[0] = true;
-					for(idx in lista){
-						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}
-					listNode.parent().show();
-				}
-				listNode.val(0);
-			case  (depth < 2): // remake volume list
-				lista = this.makeTitleSelect(v,'h1n');
+      case  (depth < 4): // remake sutta list on depth = 0, 1, 2, or 3
+        this.updateDepth(x, 3, 'h3n', 'nav-sutta', navShown);
 
-				listNode = $('#nav-volume');
-				listNode.empty();
+      default: // remake section list
+        this.updateDepth(y, 4, 'h4n', 'nav-section', navShown);
 
-				if (lista.length == 1 && lista[0] == this.unnamed ) {
-					navShown[1] = false;
-					listNode.parent().hide();
-					listNode.append($("<option />").val(0).text(this.unnamed));
-				}
-				else {
-					navShown[1] = true;
-					for(idx in lista){
-						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}
-					listNode.parent().show();
-				}
-				listNode.val(0);
-
-			case  (depth < 3): // remake vaggalist
-				lista = this.makeTitleSelect(w,'h2n');
-				listNode = $('#nav-vagga');
-				listNode.empty();
-
-				if (lista.length == 1 && lista[0] == this.unnamed ) {
-					navShown[2] = false;
-					listNode.parent().hide();
-					listNode.append($("<option />").val(0).text(this.unnamed));
-				}
-				else {
-					navShown[2] = true;
-					for(idx in lista){
-						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}
-					listNode.parent().show();
-				}
-				listNode.val(0);
-
-			case  (depth < 4): // remake sutta list on depth = 0, 1, 2, or 3
-				lista = this.makeTitleSelect(x,'h3n');
-
-				listNode = $('#nav-sutta');
-				listNode.empty();
-
-				if (lista.length == 1 && lista[0] == this.unnamed ) {
-					navShown[3] = false;
-					listNode.parent().hide();
-					listNode.append($("<option />").val(0).text(this.unnamed));
-				}
-				else {
-					navShown[3] = true;
-					for(idx in lista){
-						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}
-					listNode.parent().show();
-				}
-				listNode.val(0);
-			default: // remake section list
-
-				lista = this.makeTitleSelect(y,'h4n');
-
-				listNode = $('#nav-section');
-				listNode.empty();
-
-				if (lista.length == 1 && lista[0] == this.unnamed ) {
-					navShown[4] = false;
-					listNode.parent().hide();
-					listNode.append($("<option />").val(0).text(this.unnamed));
-				}
-				else {
-					navShown[4] = true;
-					for(idx in lista){
-						listNode.append($("<option />").val(idx).text(lista[idx]));
-					}
-					listNode.parent().show();
-				}
-				listNode.val(0);
-			break;
-		}
+      break;
+    }
 
     $('.navbutton').hide();
     $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
-    $('#nav-title-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections');
+    $('#nav-title-button').show().text('≡').prop('title', 'Combine all sub-sections');
     if (navShown[4]) {
-      $('#nav-section-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+      $('#nav-section-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[3]) {
       navShown[4] ?
-        $('#nav-sutta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
-        $('#nav-sutta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-sutta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
+        $('#nav-sutta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[2]) {
       navShown[3] || navShown[4] ?
-        $('#nav-vagga-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
-        $('#nav-vagga-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-vagga-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
+        $('#nav-vagga-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[1]) {
       navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-volume-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
-        $('#nav-volume-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-volume-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
+        $('#nav-volume-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 
     if (navShown[0]) {
       navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-meta-button').show().prop('value', '≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
-        $('#nav-meta-button').show().prop('value', '\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-meta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
+        $('#nav-meta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
     }
 	},
 

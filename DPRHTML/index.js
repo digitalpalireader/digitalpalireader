@@ -21,7 +21,6 @@ function mainInitialize() {
   setPrefs();
   initSplitters();
   initFooter();
-  initFeedbackFormParameters();
   loadSidebarTabs();
   initFeatureTabs();
   ensureHidePopoversWithClickTriggers();
@@ -30,7 +29,10 @@ function mainInitialize() {
     $("#main-content-landing-page")
       .load(
           `features/landing-page/main-pane.html`,
-          () => __dprViewModel.showLandingFeature());
+          () => {
+            __dprViewModel.showLandingFeature();
+            initFeedbackFormParameters();
+          });
     return;
   }
 
@@ -55,6 +57,7 @@ const loadFeature = (name, initFn) => {
     () => {
       initFn();
       __dprViewModel.showMainFeatures();
+      initFeedbackFormParameters();
     });
 }
 

@@ -93,3 +93,11 @@
 #search-sets li a {
   text-decoration: underline;
 }
+
+#navigation-hierarchy {
+  display: grid;
+  grid-template-columns: auto 2rem;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  grid-gap: 0.1rem 0.1rem;
+}
