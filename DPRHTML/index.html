@@ -44,7 +44,7 @@
           <div id="main-sidebar-content" class="card">
             <div class="card-header">
               Digital Pali Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right; display: none;">
+              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
@@ -171,16 +171,17 @@
         <div class="modal-content">
           <div class="modal-header p-2">
             <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
+            <button type="button" class="btn btn-outline-danger btn-sm mb-0" data-dismiss="modal" title="Close without saving...">
+              <span>×</span>
             </button>
           </div>
           <div class="modal-body">
             ...
           </div>
           <div class="modal-footer p-2">
-            <button type="button" class="btn btn-secondary btn-sm mb-0" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary btn-sm mb-0">Save changes</button>
+            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults...">Defaults</button>
+            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>

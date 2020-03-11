@@ -20,11 +20,12 @@
     <div class="card-body p-2">
       <div class="form-row">
         <div class="form-group col mb-1">
-          <div class="subnav-cont input-group">
+          <div class="navigation-hierarchy-layout">
             <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
               onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
-            <br class="clear" />
-            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+            <button id="nav-quicklinks-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(1)">
+              &rArr;
+            </button>
           </div>
         </div>
       </div>
@@ -72,7 +73,7 @@
       <div class="form-row">
         <div class="form-group col mb-1">
           <label class="small-bold-font">Hierarchy</label>
-          <div id="navigation-hierarchy">
+          <div id="navigation-hierarchy" class="navigation-hierarchy-layout">
             <button id="nav-title" type="button" class="btn btn-light m-0" onclick="digitalpalireader.loadIndex(1)">
             </button>
             <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadIndex(2)">
