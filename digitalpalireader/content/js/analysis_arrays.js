@@ -38,7 +38,7 @@ G_altStemComp['niiya'] = ['niya',0,0];
 G_altStemComp['aa'] = ['',0,0];
 G_altStemComp['ii'] = ['a',0,0];
 
-var G_altInnerStem = [];  // inner replacements i = existing part, [i][0] = replacement, [i][1] = Noun, Verb 
+var G_altInnerStem = [];  // inner replacements i = existing part, [i][0] = replacement, [i][1] = Noun, Verb
 //G_altInnerStem['gaah'] = ['gah','N'];
 G_altInnerStem['.mk'] = ['"nk','N'];
 G_altInnerStem['.mg'] = ['"ng','N'];
@@ -96,12 +96,12 @@ G_uncompoundable['hi'] = 1;
 G_uncompoundable['a.na'] = 1;
 //G_uncompoundable['aadi'] = 3;
 
-var G_indeclinableEnding = new Array(); 
+var G_indeclinableEnding = new Array();
 /* endings
  * [0][x][0]=suffix to add, [1]=suf in dictionary
  * [1][0] =ending to add for analysis, [1] = ending to add for output
  */
-G_indeclinableEnding["nti"] = [[['ti','ti']],['.m','n']]; 
+G_indeclinableEnding["nti"] = [[['ti','ti']],['.m','n']];
 G_indeclinableEnding["iiti"] = [[['ti','ti']],['i','ii']];  // these won't work with verb conjugations...
 G_indeclinableEnding["aati"] = [[['ti','ti']],['a','aa']];
 G_indeclinableEnding["uuti"] = [[['ti','ti']],['u','uu']];

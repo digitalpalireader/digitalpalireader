@@ -9,19 +9,19 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIWebNavigation)
-				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-				   .rootTreeItem
-				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIDOMWindow); 
+           .getInterface(Components.interfaces.nsIWebNavigation)
+           .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+           .rootTreeItem
+           .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+           .getInterface(Components.interfaces.nsIDOMWindow);
 function onDocLoad() {
-	getconfig();
-	//openDPRSidebar();
+  getconfig();
+  //openDPRSidebar();
 
-	showBv();
+  showBv();
 }
 function showMenu() {
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
+  mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>

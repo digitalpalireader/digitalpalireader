@@ -12,45 +12,45 @@ function loadIntoWindow(window) {
 
 // 1
 
-	var doc = window.document;
+  var doc = window.document;
 
-	// Get the add-on bar for that window
+  // Get the add-on bar for that window
 
-	var addonBar = doc.getElementById("addon-bar");
+  var addonBar = doc.getElementById("addon-bar");
 
-	// Construct the new toolbar item
+  // Construct the new toolbar item
 
-	var newItem = doc.createElement("toolbaritem");
-	var itemLabel = doc.createElement("label");
+  var newItem = doc.createElement("toolbaritem");
+  var itemLabel = doc.createElement("label");
 
-	// Add the item to the toolbar and set its text label
+  // Add the item to the toolbar and set its text label
 
-	newItem.appendChild(itemLabel);
-	addonBar.appendChild(newItem);
-	itemLabel.value = "Hello world!";
+  newItem.appendChild(itemLabel);
+  addonBar.appendChild(newItem);
+  itemLabel.value = "Hello world!";
 
 // 2
 
-	let anchor = window.document.getElementById("status-bar");
+  let anchor = window.document.getElementById("status-bar");
 
-	let button = window.document.createElement("button");
-	button.setAttribute("id", "DPRStatusBar");
-	button.setAttribute("value", "test");
-	button.setAttribute("tooltiptext", "Digital Pali Reader");
-	button.setAttribute("role", "button");
-	button.addEventListener("click", function() {
-		var theTab          = window.gBrowser.addTab('chrome://digitalpalireader/content/index.htm');
-		theTab.label        = "Digital Pali Reader";
-		gBrowser.selectedTab = theTab;
-		var func = function () { window.gBrowser.setIcon(theTab, "chrome://digitalpalireader/skin/icons/logo.png"); };
-		setTimeout(func, 500);
-	}, false);
+  let button = window.document.createElement("button");
+  button.setAttribute("id", "DPRStatusBar");
+  button.setAttribute("value", "test");
+  button.setAttribute("tooltiptext", "Digital Pali Reader");
+  button.setAttribute("role", "button");
+  button.addEventListener("click", function() {
+    var theTab          = window.gBrowser.addTab('chrome://digitalpalireader/content/index.htm');
+    theTab.label        = "Digital Pali Reader";
+    gBrowser.selectedTab = theTab;
+    var func = function () { window.gBrowser.setIcon(theTab, "chrome://digitalpalireader/skin/icons/logo.png"); };
+    setTimeout(func, 500);
+  }, false);
 
-	let image = window.document.createElement('image');
-	image.setAttribute('id', 'dpr-button');
-	button.appendChild(image);
+  let image = window.document.createElement('image');
+  image.setAttribute('id', 'dpr-button');
+  button.appendChild(image);
 
-	anchor.appendChild(button);
+  anchor.appendChild(button);
 }
 
 function unloadFromWindow(window) {

@@ -14,7 +14,7 @@ Dn['a2_al^Ajitajana']='ajitajana';
 Dn['a2_al^Ajitañjaya']='ajita~njaya';
 Dn['a2_al^Amitañjala']='amita~njala';
 Dn['a3_an^Āmisakiñcikkha Sutta']='aamisaki~ncikkhasutta';
-Dn['a3_an^Anujjā']='anujjaa'; 
+Dn['a3_an^Anujjā']='anujjaa';
 Dn['a3_an^Anussati Sutta']='anussatisutta';
 Dn['a5_az^Athalayūru']='athalayuurunadaalvaara';
 Dn['a5_az^Atthakanagara']='a.t.thakanagara';
@@ -2602,16 +2602,16 @@ Dn['verhacaani^Verehaccānigotta']='';
 
 // temp
 //~ if(typeof(D) != 'undefined') {
-	//~ D['kaalaama']=['6/161'];
-	//~ D['susima']=['5/233'];
-	//~ D['maalukyaa']=['9/5707'];
-	//~ D['maalukyaaputta']=['7/269'];
-	//~ D['maalukyaaputtasutta']=['7/269'];
-	//~ D['maalukyaputta']=['7/269'];
-	//~ D['maalukyaputtasutta']=['7/269'];
-	//~ D['paa.tikasutta']=['4/173'];
-	//~ D['paathika']=['4/173'];
-	//~ D['paathikasutta']=['4/173'];
-	//~ D['bhesaka.laavana']=['1/272'];
+  //~ D['kaalaama']=['6/161'];
+  //~ D['susima']=['5/233'];
+  //~ D['maalukyaa']=['9/5707'];
+  //~ D['maalukyaaputta']=['7/269'];
+  //~ D['maalukyaaputtasutta']=['7/269'];
+  //~ D['maalukyaputta']=['7/269'];
+  //~ D['maalukyaputtasutta']=['7/269'];
+  //~ D['paa.tikasutta']=['4/173'];
+  //~ D['paathika']=['4/173'];
+  //~ D['paathikasutta']=['4/173'];
+  //~ D['bhesaka.laavana']=['1/272'];
 //~ }
 

@@ -5,9 +5,9 @@
 
 
 <page id="digitalpalireader" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	persist="screenX screenY"
-	onload="confirmRestart('Set downloaded.  Please restart Firefox to complete the installation.')"
-	>
-	<script type="application/x-javascript" src="js/prompt.js"/>
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  persist="screenX screenY"
+  onload="confirmRestart('Set downloaded.  Please restart Firefox to complete the installation.')"
+  >
+  <script type="application/x-javascript" src="js/prompt.js"/>
 </page>

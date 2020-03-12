@@ -1,4 +1,4 @@
-var EXPORTED_SYMBOLS = ["rela"];  
+var EXPORTED_SYMBOLS = ["rela"];
 
 var rela = [];
 

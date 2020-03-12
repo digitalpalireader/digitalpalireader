@@ -1,4 +1,4 @@
-var EXPORTED_SYMBOLS = ["P"];  
+var EXPORTED_SYMBOLS = ["P"];
 
 var P=[];
 

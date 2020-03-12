@@ -4,19 +4,19 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" title="&HTML.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<tabbox class="chromeback" flex="1">
-		<tabs class="chromeback">
-			<tab class="chromeback" label="Grammar"/>
-			<tab class="chromeback" label="Etc."/>
-		</tabs>
-		<tabpanels class="chromeback" flex="1">
-			<tabpanel class="chromeback" id="grammar">
-				<browser disablehistory="true" type="content" id="grammar-browser" src="grammar.xul" flex="1" persist="height"/>
-			</tabpanel>
-			<tabpanel class="chromeback" id="etc">
-				<browser disablehistory="true" type="content" id="etc-browser" src="etc.xul" flex="1" persist="height"/>
-			</tabpanel>
-		</tabpanels>
-	</tabbox>
+  <tabbox class="chromeback" flex="1">
+    <tabs class="chromeback">
+      <tab class="chromeback" label="Grammar"/>
+      <tab class="chromeback" label="Etc."/>
+    </tabs>
+    <tabpanels class="chromeback" flex="1">
+      <tabpanel class="chromeback" id="grammar">
+        <browser disablehistory="true" type="content" id="grammar-browser" src="grammar.xul" flex="1" persist="height"/>
+      </tabpanel>
+      <tabpanel class="chromeback" id="etc">
+        <browser disablehistory="true" type="content" id="etc-browser" src="etc.xul" flex="1" persist="height"/>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
 </window>
 

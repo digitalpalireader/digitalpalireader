@@ -4,226 +4,226 @@
 <!DOCTYPE page SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 
 <prefwindow id="dprPrefs" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	persist="screenX screenY"
-	title="&pTitle.label;" onload="loadPrefs();"
-	buttons="accept,cancel,extra1"
-	buttonlabelextra1="Defaults">
-	<prefpane id="generalTab" label="&pGeneral.label;">
-		<preferences>
-			<preference id="showPages" name="extensions.digitalpalireader.Bool.showPages" type="bool"/>
-			<preference id="showPagesFull" name="extensions.digitalpalireader.Bool.showPagesFull" type="bool"/>
-			<preference id="showVariants" name="extensions.digitalpalireader.Bool.showVariants" type="bool"/>
-			<preference id="showPermalinks" name="extensions.digitalpalireader.Bool.showPermalinks" type="bool"/>
-			<preference id="showNames" name="extensions.digitalpalireader.Bool.showNames" type="bool"/>
-			<preference id="showPedLinks" name="extensions.digitalpalireader.Bool.showPedLinks" type="bool"/>
-			<preference id="nigahita" name="extensions.digitalpalireader.Bool.nigahita" type="bool"/>
-			<preference id="ctrans" name="extensions.digitalpalireader.Bool.ctrans" type="bool"/>
-			<preference id="autodict" name="extensions.digitalpalireader.Bool.autodict" type="bool"/>
-			<preference id="allContext" name="extensions.digitalpalireader.Bool.allContext" type="bool"/>
-			<preference id="contextSelected" name="extensions.digitalpalireader.Bool.contextSelected" type="bool"/>
-			<preference id="noContext" name="extensions.digitalpalireader.Bool.noContext" type="bool"/>
-			<preference id="altlimit" name="extensions.digitalpalireader.Int.altlimit" type="int"/>
-			<preference id="catioff" name="extensions.digitalpalireader.Bool.catioff" type="bool"/>
-			<preference id="catiloc" name="extensions.digitalpalireader.Char.catiloc" type="string"/>
-		</preferences>
-			
-		<vbox flex="1">
-			<hbox flex="1">
-				<groupbox flex="1">
-						<caption label="&pShow.label;"/>
-						
-						<box orient="vertical">
-							<checkbox id="showPages" label="&pShowPages.label;" preference="showPages"/>
-							<checkbox id="showPagesFull" label="&showPagesFull.label;" preference="showPagesFull"/>
-							<checkbox id="showVariants" label="&pShowVariants.label;" preference="showVariants"/>
-							<checkbox id="showPermalinks" label="&pShowPermalinks.label;" preference="showPermalinks"/>
-							<checkbox id="showNames" label="&pShowNames.label;" preference="showNames"/>
-							<checkbox id="showPedLinks" label="&pShowPedLinks.label;" preference="showPedLinks"/>
-						</box>
-				</groupbox>
-				<groupbox flex="1">
-						<caption label="&pMiscPrefs.label;"/>
-						<box orient="vertical">
-							<checkbox id="nigahita" label="&pnigahita.label;" preference="nigahita"/>
-							<checkbox id="ctrans" label="&pctrans.label;" preference="ctrans"/>
-							<checkbox id="autodict" label="&pautodict.label;" preference="autodict"/>
-							<caption label="&context.label;"/>
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  persist="screenX screenY"
+  title="&pTitle.label;" onload="loadPrefs();"
+  buttons="accept,cancel,extra1"
+  buttonlabelextra1="Defaults">
+  <prefpane id="generalTab" label="&pGeneral.label;">
+    <preferences>
+      <preference id="showPages" name="extensions.digitalpalireader.Bool.showPages" type="bool"/>
+      <preference id="showPagesFull" name="extensions.digitalpalireader.Bool.showPagesFull" type="bool"/>
+      <preference id="showVariants" name="extensions.digitalpalireader.Bool.showVariants" type="bool"/>
+      <preference id="showPermalinks" name="extensions.digitalpalireader.Bool.showPermalinks" type="bool"/>
+      <preference id="showNames" name="extensions.digitalpalireader.Bool.showNames" type="bool"/>
+      <preference id="showPedLinks" name="extensions.digitalpalireader.Bool.showPedLinks" type="bool"/>
+      <preference id="nigahita" name="extensions.digitalpalireader.Bool.nigahita" type="bool"/>
+      <preference id="ctrans" name="extensions.digitalpalireader.Bool.ctrans" type="bool"/>
+      <preference id="autodict" name="extensions.digitalpalireader.Bool.autodict" type="bool"/>
+      <preference id="allContext" name="extensions.digitalpalireader.Bool.allContext" type="bool"/>
+      <preference id="contextSelected" name="extensions.digitalpalireader.Bool.contextSelected" type="bool"/>
+      <preference id="noContext" name="extensions.digitalpalireader.Bool.noContext" type="bool"/>
+      <preference id="altlimit" name="extensions.digitalpalireader.Int.altlimit" type="int"/>
+      <preference id="catioff" name="extensions.digitalpalireader.Bool.catioff" type="bool"/>
+      <preference id="catiloc" name="extensions.digitalpalireader.Char.catiloc" type="string"/>
+    </preferences>
 
-							<radiogroup id="selectMode" preference="allContext" orient="horizontal">
-								<radio id="allContext" label="&allContext.label;"/>
-								<radio id="contextSelected" label="&contextSelected.label;"/>
-								<radio id="noContext" label="&noContext.label;"/>
-							</radiogroup>
+    <vbox flex="1">
+      <hbox flex="1">
+        <groupbox flex="1">
+            <caption label="&pShow.label;"/>
 
-							<hbox align="center"><label id="paltlimit" value="&paltlimit.label;" selected="true" /><spacer flex="1"/><textbox id="altlimit" size="3" preference="altlimit"/></hbox>
-						</box>
-				</groupbox>
-			</hbox>
-			
-			<groupbox flex="1">
-				<caption label="&pATI.label;"/>
-				<box orient="vertical">
-			<checkbox id="catioff" onclick="if(this.checked) document.getElementById('catiloc').disabled = true;  else document.getElementById('catiloc').disabled = false" label="&pcatioff.label;" preference="catioff"/>
-			<hbox align="center">
-				<label id="ATILocLabel" value="&pATILoc.label;" />
-				<textbox id="catiloc" style="min-width:180px;" preference="catiloc" flex="1"/>
-				<button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
-			</hbox>
-				</box>
-			</groupbox>
-		</vbox>
-	</prefpane>
-	
-	<prefpane id="layoutTab" label="&pLayout.label;" flex="1">
-		<preferences>
-			<preference id="colbk" name="extensions.digitalpalireader.Char.colbk" type="string"/>
-			<preference id="imgbk" name="extensions.digitalpalireader.Char.imgbk" type="string"/>
-			<preference id="colbkcp" name="extensions.digitalpalireader.Char.colbkcp" type="string"/>
-			<preference id="imgbkcp" name="extensions.digitalpalireader.Char.imgbkcp" type="string"/>
-			<preference id="colInput" name="extensions.digitalpalireader.Char.colInput" type="string"/>
-			<preference id="colButton" name="extensions.digitalpalireader.Char.colButton" type="string"/>
-			<preference id="colButtonSel" name="extensions.digitalpalireader.Char.colButtonSel" type="string"/>
-			<preference id="setRows" name="extensions.digitalpalireader.Int.setRows" type="int"/>
-		</preferences>
-		<grid flex="1">
-			<rows>
-				<row flex="1" />
-				<row flex="1" />
-			</rows>
-			<columns>
-				<column align="left" flex="1">
-					<groupbox flex="1">
-						<caption label="&pWinBackground.label;"/>
-						<vbox>
-							<hbox align="center" pack="start"><checkbox id="pcolbk" label="&pcolbk.label;" onclick="if(!this.checked) { document.getElementById('colbk').disabled=false;} else { document.getElementById('colbk').disabled=true;}"/><spacer flex="1"/><textbox id="colbk" preference="colbk"/><colorpicker flex="1" id="cpick1" type="button" onchange="document.getElementById('colbk').value = this.color"/></hbox>
-							<hbox align="center" pack="start"><checkbox id="pimgbk" label="&pimgbk.label;" onclick="if(!this.checked) { document.getElementById('imgbk').disabled=false;} else { document.getElementById('imgbk').disabled=true;}"/><spacer flex="1"/><textbox id="imgbk" preference="imgbk"/></hbox>
-						</vbox>
-				   </groupbox>
-				   <groupbox flex="1">
-						<caption label="&pSidebarBackground.label;"/>
-						<vbox>
-							<hbox align="left"><checkbox id="pcolbkcp" label="&pcolbkcp.label;" onclick="if(!this.checked) { document.getElementById('colbkcp').disabled=false;} else { document.getElementById('colbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="colbkcp" preference="colbkcp"/></hbox>
-							<hbox align="left"><checkbox id="pimgbkcp" label="&pimgbkcp.label;" onclick="if(!this.checked) { document.getElementById('imgbkcp').disabled=false;} else { document.getElementById('imgbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="imgbkcp" preference="imgbkcp"/></hbox>
-						</vbox>
-				   </groupbox>
-				</column>
-				<column flex="1">
-					<groupbox flex="1">
-						<caption label="&pWidgetColors.label;"/>
-						<hbox align="left"><label id="pcolInput" value="&pcolInput.label;" /><spacer flex="1"/><textbox id="colInput" preference="colInput"/></hbox>
-						<hbox align="left"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colButton" preference="colButton"/></hbox>
-						<hbox align="left"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colButtonSel" preference="colButtonSel"/></hbox>
-				   </groupbox>
-				   <groupbox flex="1">
-						<caption label="&pMiscLayout.label;"/>
-						<vbox>
-							<hbox align="left"><label id="psetRows" value="&psetRows.label;"  /><spacer flex="1"/><textbox id="setRows" preference="setRows"/></hbox>
-						</vbox>
-				   </groupbox>
-				</column>
-			</columns>
-		</grid>
-	</prefpane>
+            <box orient="vertical">
+              <checkbox id="showPages" label="&pShowPages.label;" preference="showPages"/>
+              <checkbox id="showPagesFull" label="&showPagesFull.label;" preference="showPagesFull"/>
+              <checkbox id="showVariants" label="&pShowVariants.label;" preference="showVariants"/>
+              <checkbox id="showPermalinks" label="&pShowPermalinks.label;" preference="showPermalinks"/>
+              <checkbox id="showNames" label="&pShowNames.label;" preference="showNames"/>
+              <checkbox id="showPedLinks" label="&pShowPedLinks.label;" preference="showPedLinks"/>
+            </box>
+        </groupbox>
+        <groupbox flex="1">
+            <caption label="&pMiscPrefs.label;"/>
+            <box orient="vertical">
+              <checkbox id="nigahita" label="&pnigahita.label;" preference="nigahita"/>
+              <checkbox id="ctrans" label="&pctrans.label;" preference="ctrans"/>
+              <checkbox id="autodict" label="&pautodict.label;" preference="autodict"/>
+              <caption label="&context.label;"/>
 
-	
-	<prefpane id="textTab" label="&pText.label;">
-		<preferences>
-			<preference id="coltext" name="extensions.digitalpalireader.Char.coltext" type="string"/>
-			<preference id="colsel" name="extensions.digitalpalireader.Char.colsel" type="string"/>
-			<preference id="coldppn" name="extensions.digitalpalireader.Char.coldppn" type="string"/>
-			<preference id="colped" name="extensions.digitalpalireader.Char.colped" type="string"/>
-			<preference id="colcpd" name="extensions.digitalpalireader.Char.colcpd" type="string"/>
-			<preference id="colfont" name="extensions.digitalpalireader.Char.colfont" type="string"/>
-			<preference id="colsize" name="extensions.digitalpalireader.Char.colsize" type="string"/>
-		</preferences>
-		<vbox flex="1">
-			<hbox flex="1">
-				<groupbox flex="1">
-					<caption label="&pColors.label;"/>
-					
-					<box orient="vertical">
-						<hbox align="center"><label id="pcoltext" value="&pcoltext.label;" /><spacer flex="1"/><textbox id="coltext" preference="coltext"/></hbox>
-						<hbox align="center"><label id="pcolsel" value="&pcolsel.label;" /><spacer flex="1"/><textbox id="colsel" preference="colsel"/></hbox>
-						<hbox align="center"><label id="pcoldppn" value="&pcoldppn.label;" /><spacer flex="1"/><textbox id="coldppn" preference="coldppn"/></hbox>
-						<hbox align="center"><label id="pcolped" value="&pcolped.label;" /><spacer flex="1"/><textbox id="colped" preference="colped"/></hbox>
-						<hbox align="center"><label id="pcolcpd" value="&pcolcpd.label;" /><spacer flex="1"/><textbox id="colcpd" preference="colcpd"/></hbox>
-					</box>
-				</groupbox>
-				<groupbox flex="1">
-					<caption label="&pFont.label;"/>
-					<box orient="vertical">
-						<hbox align="center"><label id="pcolfont" value="&pcolfont.label;" /><spacer flex="1"/><textbox id="colfont" preference="colfont"/></hbox>
-						<hbox align="center"><label id="pcolsize" value="&pcolsize.label;" /><spacer flex="1"/><textbox id="colsize" preference="colsize"/></hbox>
-						<hbox align="center"><label id="ptranslits" value="&ptranslits.label;" />
-						<menulist flex="1" id="translits">
-							<menupopup>
-								<menuitem id="pRoman" label="&pRoman.label;" selected="true"/>
-								<menuitem id="pThai" label="&pThai.label;"/>
-								<menuitem id="pDeva" label="&pDeva.label;"/>
-								<menuitem id="pMyan" label="&pMyan.label;"/>
-								<menuitem id="pSiha" label="&pSiha.label;"/>
-							</menupopup>
-						</menulist>
-						</hbox>
-					</box>
-				</groupbox>
-			</hbox>
-			
-		</vbox>
+              <radiogroup id="selectMode" preference="allContext" orient="horizontal">
+                <radio id="allContext" label="&allContext.label;"/>
+                <radio id="contextSelected" label="&contextSelected.label;"/>
+                <radio id="noContext" label="&noContext.label;"/>
+              </radiogroup>
 
-	</prefpane>
+              <hbox align="center"><label id="paltlimit" value="&paltlimit.label;" selected="true" /><spacer flex="1"/><textbox id="altlimit" size="3" preference="altlimit"/></hbox>
+            </box>
+        </groupbox>
+      </hbox>
 
-	
-	<prefpane id="setsTab" label="&pSets.label;">
-		<preferences>
-		</preferences>
-		<vbox flex="1">
-			<richlistbox>
-				<grid id="setsGrid" flex="1">
-					<columns>
-						<column label="Name"/>
-						<column label="Installed"/>
-					</columns>
-					<rows id="setsRows">
-						<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
-							<row flex="1" align="center">
-								<label flex="1" value="Myanmar Tipitaka (required)"/>
-								<hbox id="DPRMyanmar" style="padding-right:10px"><label id="myanmarInstalled" class="link" value="&setInstall;"/></hbox>
-							</row>
-						</richlistitem>
-						<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
-							<row flex="1" align="center">
-								<label flex="1" value="Thai Tipitaka (optional)"/>
-								<hbox id="DPRThai" style="padding-right:10px"><label id="thaiInstalled" class="link" value="&setInstall;"/></hbox>
-							</row>
-						</richlistitem>
-					</rows>
-				</grid>
-			</richlistbox>
-			<hbox flex="1" pack="stretch"><browser flex="1" id="setBrowser" src="" disablehistory="true" type="content"/></hbox>
-			<label id="installed" collapsed="true" value="&setInstalled;" />
-			<label id="restart" collapsed="true" value="&setStaged;" />
-		</vbox>
-	</prefpane>
-	<separator class="thin"/>
-	
-	<hbox>
-			<button label="&pDefaults.label;" oncommand="loadDefaults();"/>
-			<spacer flex="1"/>
-		<hbox pack="end">
-			<button label="&pCancel.label;" oncommand="window.close();"/>
-			<button label="&pApply.label;" oncommand="savePrefs();"/>
-			<button label="&pOK.label;" oncommand="savePrefs(1); "/>
-		</hbox>
-	</hbox>
-	<separator class="thin"/>  
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/dpr_pal.js"></script>
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prompt.js"/>
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
-	<script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
-  	<stringbundleset id="stringbundleset">
-  			<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
-  	</stringbundleset>	
+      <groupbox flex="1">
+        <caption label="&pATI.label;"/>
+        <box orient="vertical">
+      <checkbox id="catioff" onclick="if(this.checked) document.getElementById('catiloc').disabled = true;  else document.getElementById('catiloc').disabled = false" label="&pcatioff.label;" preference="catioff"/>
+      <hbox align="center">
+        <label id="ATILocLabel" value="&pATILoc.label;" />
+        <textbox id="catiloc" style="min-width:180px;" preference="catiloc" flex="1"/>
+        <button id="fileDialog" label="Browse..." style="max-width:30px;" oncommand="fileDialog('catiloc', 'ATIFileDialog');"/>
+      </hbox>
+        </box>
+      </groupbox>
+    </vbox>
+  </prefpane>
+
+  <prefpane id="layoutTab" label="&pLayout.label;" flex="1">
+    <preferences>
+      <preference id="colbk" name="extensions.digitalpalireader.Char.colbk" type="string"/>
+      <preference id="imgbk" name="extensions.digitalpalireader.Char.imgbk" type="string"/>
+      <preference id="colbkcp" name="extensions.digitalpalireader.Char.colbkcp" type="string"/>
+      <preference id="imgbkcp" name="extensions.digitalpalireader.Char.imgbkcp" type="string"/>
+      <preference id="colInput" name="extensions.digitalpalireader.Char.colInput" type="string"/>
+      <preference id="colButton" name="extensions.digitalpalireader.Char.colButton" type="string"/>
+      <preference id="colButtonSel" name="extensions.digitalpalireader.Char.colButtonSel" type="string"/>
+      <preference id="setRows" name="extensions.digitalpalireader.Int.setRows" type="int"/>
+    </preferences>
+    <grid flex="1">
+      <rows>
+        <row flex="1" />
+        <row flex="1" />
+      </rows>
+      <columns>
+        <column align="left" flex="1">
+          <groupbox flex="1">
+            <caption label="&pWinBackground.label;"/>
+            <vbox>
+              <hbox align="center" pack="start"><checkbox id="pcolbk" label="&pcolbk.label;" onclick="if(!this.checked) { document.getElementById('colbk').disabled=false;} else { document.getElementById('colbk').disabled=true;}"/><spacer flex="1"/><textbox id="colbk" preference="colbk"/><colorpicker flex="1" id="cpick1" type="button" onchange="document.getElementById('colbk').value = this.color"/></hbox>
+              <hbox align="center" pack="start"><checkbox id="pimgbk" label="&pimgbk.label;" onclick="if(!this.checked) { document.getElementById('imgbk').disabled=false;} else { document.getElementById('imgbk').disabled=true;}"/><spacer flex="1"/><textbox id="imgbk" preference="imgbk"/></hbox>
+            </vbox>
+           </groupbox>
+           <groupbox flex="1">
+            <caption label="&pSidebarBackground.label;"/>
+            <vbox>
+              <hbox align="left"><checkbox id="pcolbkcp" label="&pcolbkcp.label;" onclick="if(!this.checked) { document.getElementById('colbkcp').disabled=false;} else { document.getElementById('colbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="colbkcp" preference="colbkcp"/></hbox>
+              <hbox align="left"><checkbox id="pimgbkcp" label="&pimgbkcp.label;" onclick="if(!this.checked) { document.getElementById('imgbkcp').disabled=false;} else { document.getElementById('imgbkcp').disabled=true;}"/><spacer flex="1"/><textbox id="imgbkcp" preference="imgbkcp"/></hbox>
+            </vbox>
+           </groupbox>
+        </column>
+        <column flex="1">
+          <groupbox flex="1">
+            <caption label="&pWidgetColors.label;"/>
+            <hbox align="left"><label id="pcolInput" value="&pcolInput.label;" /><spacer flex="1"/><textbox id="colInput" preference="colInput"/></hbox>
+            <hbox align="left"><label id="pcolButton" value="&pcolButton.label;" /><spacer flex="1"/><textbox id="colButton" preference="colButton"/></hbox>
+            <hbox align="left"><label id="pcolButtonSel" value="&pcolButtonSel.label;" /><spacer flex="1"/><textbox id="colButtonSel" preference="colButtonSel"/></hbox>
+           </groupbox>
+           <groupbox flex="1">
+            <caption label="&pMiscLayout.label;"/>
+            <vbox>
+              <hbox align="left"><label id="psetRows" value="&psetRows.label;"  /><spacer flex="1"/><textbox id="setRows" preference="setRows"/></hbox>
+            </vbox>
+           </groupbox>
+        </column>
+      </columns>
+    </grid>
+  </prefpane>
+
+
+  <prefpane id="textTab" label="&pText.label;">
+    <preferences>
+      <preference id="coltext" name="extensions.digitalpalireader.Char.coltext" type="string"/>
+      <preference id="colsel" name="extensions.digitalpalireader.Char.colsel" type="string"/>
+      <preference id="coldppn" name="extensions.digitalpalireader.Char.coldppn" type="string"/>
+      <preference id="colped" name="extensions.digitalpalireader.Char.colped" type="string"/>
+      <preference id="colcpd" name="extensions.digitalpalireader.Char.colcpd" type="string"/>
+      <preference id="colfont" name="extensions.digitalpalireader.Char.colfont" type="string"/>
+      <preference id="colsize" name="extensions.digitalpalireader.Char.colsize" type="string"/>
+    </preferences>
+    <vbox flex="1">
+      <hbox flex="1">
+        <groupbox flex="1">
+          <caption label="&pColors.label;"/>
+
+          <box orient="vertical">
+            <hbox align="center"><label id="pcoltext" value="&pcoltext.label;" /><spacer flex="1"/><textbox id="coltext" preference="coltext"/></hbox>
+            <hbox align="center"><label id="pcolsel" value="&pcolsel.label;" /><spacer flex="1"/><textbox id="colsel" preference="colsel"/></hbox>
+            <hbox align="center"><label id="pcoldppn" value="&pcoldppn.label;" /><spacer flex="1"/><textbox id="coldppn" preference="coldppn"/></hbox>
+            <hbox align="center"><label id="pcolped" value="&pcolped.label;" /><spacer flex="1"/><textbox id="colped" preference="colped"/></hbox>
+            <hbox align="center"><label id="pcolcpd" value="&pcolcpd.label;" /><spacer flex="1"/><textbox id="colcpd" preference="colcpd"/></hbox>
+          </box>
+        </groupbox>
+        <groupbox flex="1">
+          <caption label="&pFont.label;"/>
+          <box orient="vertical">
+            <hbox align="center"><label id="pcolfont" value="&pcolfont.label;" /><spacer flex="1"/><textbox id="colfont" preference="colfont"/></hbox>
+            <hbox align="center"><label id="pcolsize" value="&pcolsize.label;" /><spacer flex="1"/><textbox id="colsize" preference="colsize"/></hbox>
+            <hbox align="center"><label id="ptranslits" value="&ptranslits.label;" />
+            <menulist flex="1" id="translits">
+              <menupopup>
+                <menuitem id="pRoman" label="&pRoman.label;" selected="true"/>
+                <menuitem id="pThai" label="&pThai.label;"/>
+                <menuitem id="pDeva" label="&pDeva.label;"/>
+                <menuitem id="pMyan" label="&pMyan.label;"/>
+                <menuitem id="pSiha" label="&pSiha.label;"/>
+              </menupopup>
+            </menulist>
+            </hbox>
+          </box>
+        </groupbox>
+      </hbox>
+
+    </vbox>
+
+  </prefpane>
+
+
+  <prefpane id="setsTab" label="&pSets.label;">
+    <preferences>
+    </preferences>
+    <vbox flex="1">
+      <richlistbox>
+        <grid id="setsGrid" flex="1">
+          <columns>
+            <column label="Name"/>
+            <column label="Installed"/>
+          </columns>
+          <rows id="setsRows">
+            <richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+              <row flex="1" align="center">
+                <label flex="1" value="Myanmar Tipitaka (required)"/>
+                <hbox id="DPRMyanmar" style="padding-right:10px"><label id="myanmarInstalled" class="link" value="&setInstall;"/></hbox>
+              </row>
+            </richlistitem>
+            <richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+              <row flex="1" align="center">
+                <label flex="1" value="Thai Tipitaka (optional)"/>
+                <hbox id="DPRThai" style="padding-right:10px"><label id="thaiInstalled" class="link" value="&setInstall;"/></hbox>
+              </row>
+            </richlistitem>
+          </rows>
+        </grid>
+      </richlistbox>
+      <hbox flex="1" pack="stretch"><browser flex="1" id="setBrowser" src="" disablehistory="true" type="content"/></hbox>
+      <label id="installed" collapsed="true" value="&setInstalled;" />
+      <label id="restart" collapsed="true" value="&setStaged;" />
+    </vbox>
+  </prefpane>
+  <separator class="thin"/>
+
+  <hbox>
+      <button label="&pDefaults.label;" oncommand="loadDefaults();"/>
+      <spacer flex="1"/>
+    <hbox pack="end">
+      <button label="&pCancel.label;" oncommand="window.close();"/>
+      <button label="&pApply.label;" oncommand="savePrefs();"/>
+      <button label="&pOK.label;" oncommand="savePrefs(1); "/>
+    </hbox>
+  </hbox>
+  <separator class="thin"/>
+  <script type="application/x-javascript" src="chrome://digitalpalireader/content/js/dpr_pal.js"></script>
+  <script type="application/x-javascript" src="chrome://digitalpalireader/content/prefs.js"/>
+  <script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prompt.js"/>
+  <script type="application/x-javascript" src="chrome://digitalpalireader/content/js/io.js"/>
+  <script type="application/x-javascript" src="chrome://digitalpalireader/content/js/prefload.js"/>
+    <stringbundleset id="stringbundleset">
+        <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+    </stringbundleset>
 </prefwindow>

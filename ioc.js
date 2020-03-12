@@ -62,7 +62,7 @@ function changeName(name, nam) {
     var nName = "DPB"+nam;
     var nDes = "DPD"+nam;
     var nScroll = "DPS"+nam;
-    
+
     localStorage.setItem(nName, localStorage[Name]);
     localStorage.setItem(nDes, localStorage[Des]);
     localStorage.setItem(nScroll, localStorage[Scroll]);
@@ -72,53 +72,53 @@ function changeName(name, nam) {
 }
 
 function removeHistory(value) {
-	var storeHistory = [];
-	for (var i = 0; i < 100; i++) {
-		if (localStorage['DPR_History_'+i]) { 
-			if (localStorage['DPR_History_'+i] == value) { continue; }
-			storeHistory.push(localStorage['DPR_History_'+i]); 
-		}
-		else break;
-	}
-	var k = 0;
-	for (j in storeHistory) {
-		k++;
-		localStorage['DPR_History_'+j] = storeHistory[j];
-	}
-	delete localStorage['DPR_History_'+k];
-	bookmarkframe(1);
+  var storeHistory = [];
+  for (var i = 0; i < 100; i++) {
+    if (localStorage['DPR_History_'+i]) {
+      if (localStorage['DPR_History_'+i] == value) { continue; }
+      storeHistory.push(localStorage['DPR_History_'+i]);
+    }
+    else break;
+  }
+  var k = 0;
+  for (j in storeHistory) {
+    k++;
+    localStorage['DPR_History_'+j] = storeHistory[j];
+  }
+  delete localStorage['DPR_History_'+k];
+  bookmarkframe(1);
 }
 
 function clearHistory(cp) {
-	var answer = confirm('Are you sure you want to erase the history?');
-	if(!answer) { return; }
-	for (var i = 0; i < 100; i++) {
-		if (localStorage['DPR_History_'+i]) { delete localStorage['DPR_History_'+i]; }
-		else break;
-	}	
-	if(!cp) { bookmarkframe(1); }
-	historyBox();
-}	
+  var answer = confirm('Are you sure you want to erase the history?');
+  if(!answer) { return; }
+  for (var i = 0; i < 100; i++) {
+    if (localStorage['DPR_History_'+i]) { delete localStorage['DPR_History_'+i]; }
+    else break;
+  }
+  if(!cp) { bookmarkframe(1); }
+  historyBox();
+}
 
 function getHistory() {
-	var sendHistory = [];
-	for (var i = 0; i < 100; i++) {
-		if (localStorage['DPR_History_'+i]) { sendHistory.push(localStorage['DPR_History_'+i]); }
-		else break;
-	}
-	return sendHistory;
+  var sendHistory = [];
+  for (var i = 0; i < 100; i++) {
+    if (localStorage['DPR_History_'+i]) { sendHistory.push(localStorage['DPR_History_'+i]); }
+    else break;
+  }
+  return sendHistory;
 }
 
 function addHistory(value) {
-	var storeHistory = [value];
-	for (var i = 0; i < 100; i++) {
-		if (localStorage['DPR_History_'+i]) { 
-			if (localStorage['DPR_History_'+i] == value) { continue; }
-			storeHistory.push(localStorage['DPR_History_'+i]); 
-		}
-		else break;
-	}
-	for (j in storeHistory) {
-		localStorage['DPR_History_'+j] = storeHistory[j];
-	}
+  var storeHistory = [value];
+  for (var i = 0; i < 100; i++) {
+    if (localStorage['DPR_History_'+i]) {
+      if (localStorage['DPR_History_'+i] == value) { continue; }
+      storeHistory.push(localStorage['DPR_History_'+i]);
+    }
+    else break;
+  }
+  for (j in storeHistory) {
+    localStorage['DPR_History_'+j] = storeHistory[j];
+  }
 }

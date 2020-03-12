@@ -8,24 +8,24 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
 {
-	if(a == 'dif' || a == 'cdif') a = 'difout';
+  if(a == 'dif' || a == 'cdif') a = 'difout';
 
-	if(!b)
-		b = a;
+  if(!b)
+    b = a;
 
-	if (moveat == 1) moveframex(2);
-	
+  if (moveat == 1) moveframex(2);
+
     $('#difout').hide();
-	$('#cof').hide();
-	$('#scf').hide();
-	$('#transf').hide();
-	$('#conjf').hide();
-	$('#bvf').hide();
-	
-	$('.bbart td').removeClass('sbarb');
-	$('#'+a+'M').addClass('sbarb');
+  $('#cof').hide();
+  $('#scf').hide();
+  $('#transf').hide();
+  $('#conjf').hide();
+  $('#bvf').hide();
 
-	$('#'+b).show();
+  $('.bbart td').removeClass('sbarb');
+  $('#'+a+'M').addClass('sbarb');
+
+  $('#'+b).show();
 }
 
 var cpout = 1;
@@ -44,28 +44,28 @@ function openCP(wR) {
 }
 
 function cpFlatten(cpin) {
-	var cpt = document.getElementById(cpin);
-	var cptt = document.getElementById(cpin+'t');
-	if(cpt.style.display=='none') {
-		cpt.style.display='block';
-		cptt.style.display='none';
-		setMiscPref(cpin,'1');
-	}
-	else {
-		cpt.style.display='none';
-		cptt.style.display='block';
-		setMiscPref(cpin,'0');
-	}
+  var cpt = document.getElementById(cpin);
+  var cptt = document.getElementById(cpin+'t');
+  if(cpt.style.display=='none') {
+    cpt.style.display='block';
+    cptt.style.display='none';
+    setMiscPref(cpin,'1');
+  }
+  else {
+    cpt.style.display='none';
+    cptt.style.display='block';
+    setMiscPref(cpin,'0');
+  }
 }
 
 function showHideId(a) {
-	var sopts = document.getElementById(a);
-	if(sopts.style.display=='block') {
-		sopts.style.display='none';
-	}
-	else {
-		sopts.style.display='block';
-	}
+  var sopts = document.getElementById(a);
+  if(sopts.style.display=='block') {
+    sopts.style.display='none';
+  }
+  else {
+    sopts.style.display='block';
+  }
 }
 
 function moves(a) // search open / close
@@ -78,19 +78,19 @@ function moveanf(which) {
 
 function scrolldown(much)
 {
-	if (much == 'alert')
-	{
-		//alert('Scroll distance = ' + document.getElementById('maf').scrollTop);
-		scrollmuch=document.getElementById('maf').scrollTop;
-	}
-	else document.getElementById('maf').scrollTop=much;
+  if (much == 'alert')
+  {
+    //alert('Scroll distance = ' + document.getElementById('maf').scrollTop);
+    scrollmuch=document.getElementById('maf').scrollTop;
+  }
+  else document.getElementById('maf').scrollTop=much;
 }
 
 function getlink(which)
 {
-	var linkfile = which + '.htm';
-	parent.mainFrame.location = linkfile;
-	scrollmuch = bookmarklink[which-1];
+  var linkfile = which + '.htm';
+  parent.mainFrame.location = linkfile;
+  scrollmuch = bookmarklink[which-1];
 }
 
 
@@ -100,7 +100,7 @@ function go_anchor(mydiv,n){
 
 
 function scrollToId(a,b) {
-	if(a=='search') a = 'sbfbc';
-	if(a=='dif') a = 'cdif';
-	document.getElementById(a).scrollTop=(typeof(b) == 'number' ? b : document.getElementById(b).offsetTop);
+  if(a=='search') a = 'sbfbc';
+  if(a=='dif') a = 'cdif';
+  document.getElementById(a).scrollTop=(typeof(b) == 'number' ? b : document.getElementById(b).offsetTop);
 }
