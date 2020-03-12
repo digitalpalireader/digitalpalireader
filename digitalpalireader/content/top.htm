@@ -10,123 +10,123 @@
 <script type="text/javascript" src="js/dpr_pal.js"></script>
 <script type="text/javascript">
 var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIWebNavigation)
-				   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-				   .rootTreeItem
-				   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-				   .getInterface(Components.interfaces.nsIDOMWindow); 
+           .getInterface(Components.interfaces.nsIWebNavigation)
+           .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+           .rootTreeItem
+           .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+           .getInterface(Components.interfaces.nsIDOMWindow);
 
 function onDocLoad() {
-	//openDPRSidebar();
+  //openDPRSidebar();
 
-	getconfig();
+  getconfig();
 
-	if(document.location.href.indexOf('?') > -1) getLinkPlace();
-	else
-		refreshit();
+  if(document.location.href.indexOf('?') > -1) getLinkPlace();
+  else
+    refreshit();
 
-	document.onkeypress = function(e){
-		var Main = mainWindow.gBrowser.selectedTab.linkedBrowser;
-		var wBot, dBot, wMain, dMain;
-		if(Main.contentDocument.getElementById('dict').contentDocument) {
-			wBot = Main.contentDocument.getElementById('dict').contentWindow;
-			dBot = Main.contentDocument.getElementById('dict').contentDocument;
-		}
-		wMain = Main.contentWindow;
-		dMain = Main.contentDocument;
-		
-		if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
-		if (e.charCode == 112) { if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup(e); return }  // p
-		if (e.charCode == 110) { if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup(e); return } // n
+  document.onkeypress = function(e){
+    var Main = mainWindow.gBrowser.selectedTab.linkedBrowser;
+    var wBot, dBot, wMain, dMain;
+    if(Main.contentDocument.getElementById('dict').contentDocument) {
+      wBot = Main.contentDocument.getElementById('dict').contentWindow;
+      dBot = Main.contentDocument.getElementById('dict').contentDocument;
+    }
+    wMain = Main.contentWindow;
+    dMain = Main.contentDocument;
 
-		if (e.charCode == 115) {  // s
-			if(window.getSelection().toString() != '') {
-				wMain.sendtoconvert(window.getSelection().toString()+'');
-			} 
-			else if(wBot.getSelection().toString() != '') {
-				wMain.sendtoconvert(wBot.getSelection().toString()+'');
-			} 
-			else if(document.getElementById('convi')) { wMain.sendtoconvert(document.getElementById('convi').innerHTML); }
-			else alertFlash('You must select some text to send to the convertor','yellow');
-			return; 
-		}
+    if(document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) { return; }
+    if (e.charCode == 112) { if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup(e); return }  // p
+    if (e.charCode == 110) { if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup(e); return } // n
 
-		if (e.charCode == 101) {  // e
-			if(window.getSelection().toString() != '') {
-				wMain.sendtoPad(window.getSelection().toString()+'');
-			} 
-			else if(wBot.getSelection().toString() != '') {
-				wMain.sendtoPad(wBot.getSelection().toString()+'');
-			} 
-			else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML); }
-			else alertFlash('You must select some text to send to the textpad','yellow');
-			return; 
-		}
-		if (e.charCode == 69) {  // E
-			if(window.getSelection().toString() != '') {
-				wMain.sendtoPad(window.getSelection().toString()+'',true);
-			} 
-			else if(wBot.getSelection().toString() != '') {
-				wMain.sendtoPad(wBot.getSelection().toString()+'',true);
-			} 
-			else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML,true); }
-			else alertFlash('You must select some text to send to the textpad','yellow');
-			return; 
-		}
+    if (e.charCode == 115) {  // s
+      if(window.getSelection().toString() != '') {
+        wMain.sendtoconvert(window.getSelection().toString()+'');
+      }
+      else if(wBot.getSelection().toString() != '') {
+        wMain.sendtoconvert(wBot.getSelection().toString()+'');
+      }
+      else if(document.getElementById('convi')) { wMain.sendtoconvert(document.getElementById('convi').innerHTML); }
+      else alertFlash('You must select some text to send to the convertor','yellow');
+      return;
+    }
 
-		if (e.charCode == 44) { // ,
-			if(dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
-			else if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
-			return; 
-		} 
-		
-		if (e.charCode == 46) { // .
-			if(dBot.getElementById('bout')) dBot.getElementById('bout').onclick(); 
-			else if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
-			return; 
-		} 
-		if (e.charCode == 113) { // q
-			
-			var check = {value: false};                  // default the checkbox to false
+    if (e.charCode == 101) {  // e
+      if(window.getSelection().toString() != '') {
+        wMain.sendtoPad(window.getSelection().toString()+'');
+      }
+      else if(wBot.getSelection().toString() != '') {
+        wMain.sendtoPad(wBot.getSelection().toString()+'');
+      }
+      else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML); }
+      else alertFlash('You must select some text to send to the textpad','yellow');
+      return;
+    }
+    if (e.charCode == 69) {  // E
+      if(window.getSelection().toString() != '') {
+        wMain.sendtoPad(window.getSelection().toString()+'',true);
+      }
+      else if(wBot.getSelection().toString() != '') {
+        wMain.sendtoPad(wBot.getSelection().toString()+'',true);
+      }
+      else if(document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML,true); }
+      else alertFlash('You must select some text to send to the textpad','yellow');
+      return;
+    }
 
-			var input = {value: ""};           
+    if (e.charCode == 44) { // ,
+      if(dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
+      else if(document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
+      return;
+    }
 
-			var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
-			
-			// result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
-			
-			if(!result) return;
+    if (e.charCode == 46) { // .
+      if(dBot.getElementById('bout')) dBot.getElementById('bout').onclick();
+      else if(document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
+      return;
+    }
+    if (e.charCode == 113) { // q
 
-			var place = input.value;
-			
-			var outplace = convertShortLink(place);
-			if(outplace[0] === false) return alertFlash(outplace[1],outplace[2]);
-			//dalert(outplace);
-			
-			var para = outplace.pop();
-			openPlace(outplace,para);
-		} 
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
+      var check = {value: false};                  // default the checkbox to false
+
+      var input = {value: ""};
+
+      var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
+
+      // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
+
+      if(!result) return;
+
+      var place = input.value;
+
+      var outplace = convertShortLink(place);
+      if(outplace[0] === false) return alertFlash(outplace[1],outplace[2]);
+      //dalert(outplace);
+
+      var para = outplace.pop();
+      openPlace(outplace,para);
+    }
+    mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.keyPressed(e);
 
 
-	};
+  };
 }
 
 function sendTextToConvertor() {
-		if(window.getSelection().toString() != '') {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoconvert(window.getSelection().toString()+'');
-		} 
-		else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoconvert(document.getElementById('convi').innerHTML); }
+    if(window.getSelection().toString() != '') {
+      mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoconvert(window.getSelection().toString()+'');
+    }
+    else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoconvert(document.getElementById('convi').innerHTML); }
 }
 function sendTextToTextpad(event) {
-		if(window.getSelection().toString() != '') {
-			sendtoPad(window.getSelection().toString()+'',event.shiftKey);
-		} 
-		else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
+    if(window.getSelection().toString() != '') {
+      sendtoPad(window.getSelection().toString()+'',event.shiftKey);
+    }
+    else if(document.getElementById('convi')) { mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.sendtoPad(document.getElementById('convi').innerHTML,event.shiftKey); }
 }
 
 function moveFrame(idx) {
-	mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.moveFrame(idx);
+  mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.moveFrame(idx);
 }
 
 
@@ -158,25 +158,25 @@ function moveFrame(idx) {
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="matrelc"></div>
-	<div id="right" onmouseover="document.body.style.cursor='auto'">
-		<div id="maf">
-			<div align="left" id="mafa" class="paperback"></div>
-			<div align="justify" id="mafb" class="paperback">
-				<div id="mafbc">
-					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
-					<div id="mafe" align=center>
-					</div>
-					<div id="mafd" align=center>
-					</div>
-					<div id="mafdebug"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="tbContainer" style="display:none" class="chromeback" onmouseover="$('#tbContainer2').show(); $('#tbOpener').hide();" onmouseout="$('#tbContainer2').hide();$('#tbOpener').show();"></div>
+  <div id="matrelc"></div>
+  <div id="right" onmouseover="document.body.style.cursor='auto'">
+    <div id="maf">
+      <div align="left" id="mafa" class="paperback"></div>
+      <div align="justify" id="mafb" class="paperback">
+        <div id="mafbc">
+          <div align="center"><br><br><br><br><br><h1>loading...</h1></div>
+          <div id="mafe" align=center>
+          </div>
+          <div id="mafd" align=center>
+          </div>
+          <div id="mafdebug"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="tbContainer" style="display:none" class="chromeback" onmouseover="$('#tbContainer2').show(); $('#tbOpener').hide();" onmouseout="$('#tbContainer2').hide();$('#tbOpener').show();"></div>
 
-	<div id="alertc"><span id="alert"></span></div>
+  <div id="alertc"><span id="alert"></span></div>
 </div>
 <script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 
@@ -196,11 +196,11 @@ function moveFrame(idx) {
 
 
 <script>
-	//D_batchOutput();	
-	var devCheck = 0;
-	function devO() {}
-	function dalert(a) {}
-	function ddump(a) {}
+  //D_batchOutput();
+  var devCheck = 0;
+  function devO() {}
+  function dalert(a) {}
+  function ddump(a) {}
 
 </script>
 </body>

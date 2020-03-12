@@ -1,18 +1,18 @@
 .link {
-	color:blue;
+  color:blue;
 }
 .link:hover {
-	cursor:pointer;
+  cursor:pointer;
 }
-	
+
 .restart {
-	color:red;
+  color:red;
 }
 .restart:hover {
-	cursor:pointer;
+  cursor:pointer;
 }
 
 .installed {
-	color:green;
+  color:green;
 }
-	
+
