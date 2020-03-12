@@ -97,7 +97,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     else if(/^\/.+\/$/.test(querystring)) {
       var queryt = querystring.substring(1,querystring.length-1).split('+');
       var query = [];
-      for(i in queryt) {
+      for(var i in queryt) {
         query[i] = new RegExp(queryt[i].replace(/\\/g,'\\'));
       }
     }
@@ -199,7 +199,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   nikaya+"^"+bookno+"^"+meta+"^"+volume+"^*^*^*",
   nikaya+"^"+bookno+"^"+meta+"^*^*^*^*",
   nikaya+"^"+bookno+"^*^*^*^*^*"];
-  for (i in relwhere) {
+  for (var i in relwhere) {
     var relhere;
 
     switch(hier) {
@@ -399,7 +399,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
               var opsm = ops.match(/x/g);
               var xlt = lt;
               var getit;
-              for (j = 0; j < opsm.length; j++) {
+              for (var j = 0; j < opsm.length; j++) {
                 var getit1 = onepar.search(/\{/);
                 var getit2 = onepar.search(/\^/);
                 if(getit1 < 0) getit = onepar.match(/( *\^a\^[^^]*\^ea\^|\^e*b\^)/)[0];
@@ -604,7 +604,7 @@ function loadXMLindex(place,compare) {
 
   }
   y = z[tmp].getElementsByTagName("h0");
-  for (tmp2 = 0; tmp2 < y.length; tmp2++) // meta
+  for (var tmp2 = 0; tmp2 < y.length; tmp2++) // meta
   {
     if(isPlace && place[2] != 'x' && tmp2 != place[2])
       continue;
@@ -629,7 +629,7 @@ function loadXMLindex(place,compare) {
       wcs = whichcol[0]; // either 0 or 1
       whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
       var spaces = '';
-      for(f = 0; f < wcs; f++) {
+      for(var f = 0; f < wcs; f++) {
         spaces += '&nbsp;&nbsp;';
       }
 
@@ -658,7 +658,7 @@ function loadXMLindex(place,compare) {
 
     }
     x = y[tmp2].getElementsByTagName("h1");
-    for (tmp3 = 0; tmp3 < x.length; tmp3++) // volume
+    for (var tmp3 = 0; tmp3 < x.length; tmp3++) // volume
     {
       if(isPlace && place[3] != 'x' && tmp3 != place[3])
         continue;
@@ -684,7 +684,7 @@ function loadXMLindex(place,compare) {
         whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 
         spaces = '';
-        for(f = 0; f < wcs; f++) {
+        for(var f = 0; f < wcs; f++) {
           spaces += '&nbsp;&nbsp;';
         }
 
@@ -713,7 +713,7 @@ function loadXMLindex(place,compare) {
 
       }
       w = x[tmp3].getElementsByTagName("h2");
-      for (tmp4 = 0; tmp4 < w.length; tmp4++) // vagga
+      for (var tmp4 = 0; tmp4 < w.length; tmp4++) // vagga
       {
         if(isPlace && place[4] != 'x' && tmp4 != place[4])
           continue;
@@ -741,7 +741,7 @@ function loadXMLindex(place,compare) {
           whichcol[3] = 1; // bump
 
           spaces = '';
-          for(f = 0; f < wcs; f++) {
+          for(var f = 0; f < wcs; f++) {
             spaces += '&nbsp;&nbsp;';
           }
 
@@ -772,7 +772,7 @@ function loadXMLindex(place,compare) {
           saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
         }
         v = w[tmp4].getElementsByTagName("h3");
-        for (tmp5 = 0; tmp5 < v.length; tmp5++) // sutta
+        for (var tmp5 = 0; tmp5 < v.length; tmp5++) // sutta
         {
           if(isPlace && place[5] != 'x' && tmp5 != place[5])
             continue;
@@ -798,7 +798,7 @@ function loadXMLindex(place,compare) {
             whichcol[4] = 1; // bump
 
             spaces = '';
-            for(f = 0; f < wcs; f++) {
+            for(var f = 0; f < wcs; f++) {
               spaces += '&nbsp;&nbsp;';
             }
 
@@ -828,7 +828,7 @@ function loadXMLindex(place,compare) {
 
           u = v[tmp5].getElementsByTagName("h4");
 
-          for (tmp6 = 0; tmp6 < u.length; tmp6++) // section
+          for (var tmp6 = 0; tmp6 < u.length; tmp6++) // section
           {
 
 
@@ -855,7 +855,7 @@ function loadXMLindex(place,compare) {
 
               wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
               spaces = '';
-              for(f = 0; f < wcs; f++) {
+              for(var f = 0; f < wcs; f++) {
                 spaces += '&nbsp;&nbsp;';
               }
 
@@ -888,7 +888,7 @@ function loadXMLindex(place,compare) {
             if(isPlace) {
               var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
               var t = u[tmp6].getElementsByTagName("p");
-              for (tmp7 = 0; tmp7 < t.length; tmp7++) {
+              for (var tmp7 = 0; tmp7 < t.length; tmp7++) {
                 if(xset) { // thai
                   if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.test(t[tmp7].textContent) && !DPR_prefs['showPages']) {
                     continue;
@@ -1046,10 +1046,10 @@ function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],
 
   var myan = '', thai = '';
 
-  for (i in myanA) {
+  for (var i in myanA) {
     myan += (myan?' ':'')+myanA[i].textContent;
   }
-  for (i in thaiA) {
+  for (var i in thaiA) {
     thai += (thai?' ':'')+thaiA[i].textContent;
   }
 
@@ -1075,9 +1075,9 @@ function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],
 
   var out = iterCompare(0,0,0,myan,thai);
   alert(out);
-  for(i in myan) {
+  for(var i in myan) {
     var oldpercent = [0,''];
-    for (j in thai) {
+    for (var j in thai) {
       var percent = findSimilarWords(myan[i],[thai[j]]);
       if(percent == 100) break;
       if(percent[0] > oldpercent[0])
@@ -1119,7 +1119,7 @@ function iterCompare(p1,p2,iter, one, two) {
 
 function countVals(a) {
   var count = 0;
-  for (i=0;i<a.length;i++) {
+  for (var i=0;i<a.length;i++) {
     count+=a[i][0];
   }
   return count;
