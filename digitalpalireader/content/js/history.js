@@ -1,3 +1,4 @@
+'use strict';
 
 function removeHistory(value) {
   if (!DPR_PAL.isXUL) {

@@ -1,3 +1,4 @@
+'use strict';
 
 function toUni(input) {
   if(!input || input == '') return input;

@@ -6,6 +6,7 @@
  *
  * Depending on where we are running, this module does the right thing.
  */
+'use strict';
 
 console.log('Loading DPR_PAL...');
 

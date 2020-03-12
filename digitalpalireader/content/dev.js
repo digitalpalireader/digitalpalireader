@@ -1,3 +1,5 @@
+'use strict';
+
 var devCheck = 0;
 
 function devMode(string) {
@@ -2431,7 +2433,7 @@ function DtestSort() {
   dalert(list);
 }
 
-D_outputStore = '';
+var D_outputStore = '';
 
 function DgroupBySimilarity() {
   devCheck = 2;
@@ -3818,7 +3820,7 @@ function DFixXMLshowArrayMove(h,way,i,j,k,l,m,n) {
   DFixXMLshowArrayShow();
 }
 
-DFixXMLtoggleParaOn = false;
+var DFixXMLtoggleParaOn = false;
 
 function DFixXMLtogglePara() {
   $(".para").toggle();

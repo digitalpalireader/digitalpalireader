@@ -1,3 +1,5 @@
+'use strict';
+
 var G_hier = 'm';
 
 var oldnikaya = 0;
@@ -98,7 +100,7 @@ G_XMLFileArray['n7'] = [1,0,0];
 G_XMLFileArray['n8'] = [1,0,0];
 G_XMLFileArray['n9'] = [1,0,0];
 
-G_listTitles = ['meta','volume','vagga','sutta','section'];
+var G_listTitles = ['meta','volume','vagga','sutta','section'];
 
 var G_hNumbers = [];
 G_hNumbers['m'] = 0;

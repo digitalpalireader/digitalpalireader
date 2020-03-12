@@ -1,3 +1,5 @@
+'use strict';
+
 const initializeNavigationFeature = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
   let bookList = 'd';
@@ -5,7 +7,7 @@ const initializeNavigationFeature = () => {
   let query = '';
   let para = '';
   urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
+    var parameterSections = parameter.split('=');
     switch (parameterSections[0]) {
       case 'loc':
         place = makeLocPlace(parameterSections[1]);

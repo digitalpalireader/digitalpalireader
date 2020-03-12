@@ -1,3 +1,5 @@
+'use strict';
+
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 //«»
@@ -219,7 +221,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       fullwordout[0] = '';
       fullwordout[1] = '';
       while (wb.indexOf('<c') >= 0) {
-        cp = wb.indexOf('<c');
+        var cp = wb.indexOf('<c');
         if(cp > 0) { // something before
           if (which) {
             finout += translit(toUni(wb.substring(0,cp))); b++;
@@ -410,7 +412,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var namen = [null,null,null,null,null,null];
   if (DPR_prefs['showNames']) {
     addJS(['dppn']);
-    for (i in namea) {
+    for (var i in namea) {
       var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
       if(tt.length < 2) continue;
       var dEI = getDppnEntry(tt);
@@ -420,7 +422,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
     }
   }
 
-  for (i=0; i < namea.length;i++) {
+  for (var i=0; i < namea.length;i++) {
     var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
 
     if (thisname.length <2 )
@@ -472,7 +474,7 @@ function permalinkClick(link,url) {
   }
 }
 
-copyToClipboard = DPR_PAL.copyToClipboard;
+var copyToClipboard = DPR_PAL.copyToClipboard;
 
 var G_alertFlashStart = 0;
 

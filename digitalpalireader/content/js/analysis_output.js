@@ -1,3 +1,4 @@
+'use strict';
 
 function outputDef(which,first,frombox)
 {
@@ -54,7 +55,7 @@ function outputDef(which,first,frombox)
     }
   }
 
-  for (c in owparts) { // per part (with many variants)
+  for (var c in owparts) { // per part (with many variants)
 
     var partvars = owparts[c].split('#');
     if (c > 0) {
@@ -135,7 +136,7 @@ function outputDef(which,first,frombox)
   if (G_shortdefpost[which]) {
     thisconcise = G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$');
 
-    for (x = 0; x < thisconcise.length; x++)
+    for (var x = 0; x < thisconcise.length; x++)
     {
       if (thisconcise[x].length == 0) { continue; }
 

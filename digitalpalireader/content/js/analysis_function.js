@@ -1,3 +1,5 @@
+'use strict';
+
 var G_outwords = new Array();  // the raw output
 var G_shortdefpost = new Array();
 
@@ -11,7 +13,7 @@ function outputAnalysis(input,frombox) {
 
   //ddump('',1,1);
   G_outwords = [];
-  shortdefpre = [];
+  var shortdefpre = [];
   G_shortdefpost = [];
 
   input = toVel(input);
@@ -619,7 +621,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
                 sufdefs.push(P[tw][oneno] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
               }
               else {
-                for (k in P[tw]) {
+                for (var k in P[tw]) {
                   sufdefs.push(P[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
                 }
               }

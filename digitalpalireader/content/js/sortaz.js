@@ -1,3 +1,5 @@
+'use strict';
+
 var reorder = new Array();
 reorder.push('#');
 reorder.push('0');
@@ -123,7 +125,7 @@ for(var w = 0; w < reorder.length; w++) {
 function sortaz(mydata){  // sort pali array
 
   mydata = mydata.sort(comparePaliAlphabet);
-  for (i in mydata) {
+  for (var i in mydata) {
     mydata[i] = mydata[i].replace(/^.*###/,''); // remove sorted words, return the rest
   }
   return mydata;
@@ -144,7 +146,7 @@ function comparePaliAlphabet(a,b) {
 
   var two = [sortStrip(a),sortStrip(b)];
   var nwo = [];
-  for(i = 0; i < two.length; i++) {
+  for(var i = 0; i < two.length; i++) {
     var wordval = '';
     for (var c = 0; c < two[i].length; c++) {
 

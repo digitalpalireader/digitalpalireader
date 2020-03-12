@@ -1,3 +1,5 @@
+'use strict';
+
 function searchHistoryXML(){
   var cont = readFile('DPR_Search_History');
   cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');

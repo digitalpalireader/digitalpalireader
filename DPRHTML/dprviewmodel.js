@@ -1,3 +1,5 @@
+'use strict';
+
 class DprViewModel {
   constructor() {
     this.loadingFeatureVisible = ko.observable(true)

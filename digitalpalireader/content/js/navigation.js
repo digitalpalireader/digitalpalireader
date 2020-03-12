@@ -1,3 +1,4 @@
+'use strict';
 
 function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
 
@@ -28,7 +29,7 @@ function getDppnEntry(term) {
   }
   var dEI = [];
   if(dppnEntry.length > 0) {
-    for(d in dppnEntry) {
+    for(var d in dppnEntry) {
       dEI.push(dppnEntry[d]);
     }
   }

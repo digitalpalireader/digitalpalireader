@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO: Needs to be pulled into the PAL.
 const setDefPrefs = DPR_PAL.isXUL ? XUL_setDefPrefs : WEB_setDefPrefs;
 const setPrefs = DPR_PAL.isXUL ? XUL_setPrefs : WEB_setPrefs;

@@ -1,3 +1,5 @@
+'use strict';
+
 var D=[];
 
 D['akata~n~nujaataka']=['1/360'];

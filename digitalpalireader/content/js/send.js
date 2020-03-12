@@ -1,3 +1,4 @@
+'use strict';
 
 function eventSend(event,internal) {
 

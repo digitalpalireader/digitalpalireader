@@ -1,3 +1,5 @@
+'use strict';
+
 var EXPORTED_SYMBOLS = ["G_irregVerb","G_irregNoun","G_irregDec"];
 
 

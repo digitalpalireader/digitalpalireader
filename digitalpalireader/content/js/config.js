@@ -1,3 +1,4 @@
+'use strict';
 
 /*
 
@@ -16,7 +17,7 @@ var atiIns = 0;
 
 
 function getconfig() {
-  for (i in DPR_prefs) {
+  for (var i in DPR_prefs) {
     DPR_prefs[i] = getPref(i);
   }
 

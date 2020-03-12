@@ -1,3 +1,5 @@
+'use strict';
+
 function loadXMLFile(file,setNo) {
   var setName;
   if(typeof(setNo) == 'undefined')

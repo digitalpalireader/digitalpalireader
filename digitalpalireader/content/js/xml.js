@@ -1,3 +1,5 @@
+'use strict';
+
 var unnamed = '[unnamed]';
 
 var matButton = 0; // tells us we've clicked an in-section mat button.
@@ -215,7 +217,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
       var hi = ['m','a','t'];
       var button_order = ['l','m','r'];
       var hic = 0;
-      for (ht = 0; ht < hi.length; ht++) {
+      for (var ht = 0; ht < hi.length; ht++) {
         if(hi[ht] == hier)
           relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
         else if (relhere.split('#')[hic] != '') {
@@ -295,6 +297,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   //prev and next - nextprev | thai-myanmar alternation - thaibut
 
+    var thaibut;
     var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
     if(!chromeFileExists('DPRThai/content/exists')) {
       //thaibut = ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')" title="Install Thai Tipitaka">T</span>';
@@ -344,7 +347,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   // check if there is a search going on and add the labels
   if (query) {
     atlabel:
-    for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++)
+    for (var tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++)
     {
       var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
 
@@ -355,7 +358,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
         onepar = onepar.replace(/Ṃ/g, 'Ṁ');
       }
       var onepars = onepar.replace(/ *\{[^}]*\} */g, ' ').replace(/\^a\^[^^]*\^ea\^/g, '').replace(/\^e*b\^/g, '').replace(/  +/g, ' ').toLowerCase();
-      for (tmpl = 0; tmpl < query.length; tmpl++)
+      for (var tmpl = 0; tmpl < query.length; tmpl++)
       {
         var obj = (typeof(query[tmpl]) == 'object');
         if ((obj ? onepars.search(query[tmpl]) : onepars.indexOf(query[tmpl])) == -1) { // at least one of the strings was not found -> no match
@@ -428,7 +431,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   }
   else {
     if(place[8]) { // thai
-      for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
+      for (var tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
         if(/^-- \^a\^Thai [0-9.]+\^ea\^ --$/.test(z[tmp].textContent) && !DPR_prefs['showPages']) {
           continue;
         }
@@ -436,7 +439,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
       }
     }
     else {
-      for (tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
+      for (var tmp = (range?range[0]-1:0); tmp < (range?range[1]:z.length); tmp++) {
         var ptype = /^ *\[[0-9]+\] */.exec(z[tmp].textContent);
         theData += ' <p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+permalink+'&para='+(tmp+1)+'|> ' + z[tmp].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ');
       }

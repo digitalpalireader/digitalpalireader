@@ -1,3 +1,4 @@
+'use strict';
 
 var DPRNav = {
   changeSet: function (noget, book) {
@@ -73,7 +74,7 @@ var DPRNav = {
     let bookNode2 = $('#tsoBOA');
     bookNode2.empty();
 
-    for (i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
       // menu
       bookNode.append(`<option value="${((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1))}">${translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i])}</option>`);
       bookNode.prop('selectedIndex', 0);

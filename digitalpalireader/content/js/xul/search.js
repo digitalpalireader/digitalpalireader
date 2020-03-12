@@ -59,13 +59,13 @@ function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {
   MD.getElementById('search-sets').appendChild(tsep);
 }
 
-function DPR_PAL_Search_AddSectionLink() {
+function DPR_PAL_Search_AddSectionLink(nik) {
   var thisset = MD.createElement('toolbarbutton');
   thisset.setAttribute('class', 'search-set');
-  thisset.setAttribute('onmouseup', 'scrollSearch(\'sbfN' + G_numberToNik[i] + '\')');
+  thisset.setAttribute('onmouseup', 'scrollSearch(\'sbfN' + nik + '\')');
   var setlabel = MD.createElement('label');
-  setlabel.setAttribute('value', G_nikLongName[G_numberToNik[i]] + ': 0');
-  setlabel.setAttribute('id', 'matches' + G_numberToNik[i]);
+  setlabel.setAttribute('value', G_nikLongName[nik] + ': 0');
+  setlabel.setAttribute('id', 'matches' + nik);
   setlabel.setAttribute('class', 'search-button-label');
   thisset.appendChild(setlabel);
   var sep = MD.createElement('toolbarseparator');

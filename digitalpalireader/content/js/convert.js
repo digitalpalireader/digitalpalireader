@@ -1,3 +1,5 @@
+'use strict';
+
 function getSelected() {
   var txt = '';
   if (window.getSelection) {

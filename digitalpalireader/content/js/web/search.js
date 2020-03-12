@@ -1,3 +1,5 @@
+//'use strict';
+
 if (DPR_PAL.isWeb) {
   console.log('Loading DPR_PAL_Search...');
 } else {
@@ -66,12 +68,12 @@ function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {
   MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
 
-function DPR_PAL_Search_AddSectionLink() {
-  const scrollTo = `sbfN${G_numberToNik[i]}`;
-  const id = `matches${G_numberToNik[i]}`;
+function DPR_PAL_Search_AddSectionLink(nik) {
+  const scrollTo = `sbfN${nik}`;
+  const id = `matches${nik}`;
   const html = `
 <li>
-  <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${G_nikLongName[G_numberToNik[i]] + ': 0'}</a>
+  <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${G_nikLongName[nik] + ': 0'}</a>
 </li>`;
   MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }

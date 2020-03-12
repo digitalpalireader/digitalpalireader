@@ -1,3 +1,5 @@
+'use strict';
+
 var proots = ['aka^kuṭilagatiyaṃ',
 'aka^gatiyaṃ',
 'aki^lakkhaṇe',

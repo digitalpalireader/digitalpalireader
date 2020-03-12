@@ -1,3 +1,5 @@
+'use strict';
+
 var moveat = 2;
 
 function moveframex(a,temp) //read, etc
@@ -35,7 +37,7 @@ function moveframec() // open close control panel
 {
 
 }
-G_cpspeed = 50;
+var G_cpspeed = 50;
 function closeCP(wR) {
 
 }

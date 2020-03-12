@@ -1,3 +1,4 @@
+'use strict';
 
 var G_peda = [];
 
@@ -36,7 +37,7 @@ function paliXML(filein,which,add)
   if(!which) { // not from select
     var G_pedhistt = [];
     G_pedhist = G_pedhist.slice(0,G_phmark+1); // cut old future
-    for (i in G_pedhist) {
+    for (var i in G_pedhist) {
       if (G_pedhist[i] != file) { G_pedhistt.push(G_pedhist[i]); }
     }
     G_pedhist = G_pedhistt.concat([file]); // add latest
@@ -230,7 +231,7 @@ function DPPNXML(filein,which,add)
   if(!which) { // not from select
     var dppnhistt = [];
     G_dppnhist = G_dppnhist.slice(0,G_dhmark+1); // cut old future
-    for (i in G_dppnhist) {
+    for (var i in G_dppnhist) {
       if (G_dppnhist[i] != file) { dppnhistt.push(G_dppnhist[i]); }
     }
     G_dppnhist = dppnhistt.concat([file]); // add latest
@@ -258,13 +259,13 @@ function DPPNXML(filein,which,add)
   var tname, lname, nname;
 
   if(G_dppn.length == 0) {
-    for (i in D) {
-      for (j in D[i]) {
+    for (var i in D) {
+      for (var j in D[i]) {
         G_dppn.push([i,D[i][j]]);
       }
     }
   }
-  for (i in G_dppn) {
+  for (var i in G_dppn) {
     if(tname) {
       nname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
       break;
@@ -281,7 +282,7 @@ function DPPNXML(filein,which,add)
 
   if (G_dppnhist.length > 1) { // show select
     var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
-    for (i = G_dppnhist.length-1; i >= 0; i--) {
+    for (var i = G_dppnhist.length-1; i >= 0; i--) {
       showing += '<option value="'+G_dppnhist[i]+'"';
       if (i == G_dhmark) { showing += ' selected'; }
       var dhs = G_dppnhist[i].split(',');
@@ -453,7 +454,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
     var finout = '';
 
     location:
-    for (i in loca) {
+    for (var i in loca) {
         var pca = loca[i].split('^');
         var nikaya = pca[0];
 
@@ -520,7 +521,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
     var finout = '';
 
     location:
-    for (i in loca) {
+    for (var i in loca) {
         var pca = loca[i].split('^');
 
     // separate mat

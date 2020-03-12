@@ -1,3 +1,5 @@
+'use strict';
+
 /* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };

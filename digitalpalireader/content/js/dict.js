@@ -1,4 +1,6 @@
-G_dictType = '';
+'use strict';
+
+var G_dictType = '';
 var G_dictQuery = '';
 var G_dictOpts = []; //
 var G_dictEntry = '';
@@ -13,7 +15,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   if(!dictType) { // make opt list from url
     var options = document.location.href.split('?')[1].split('#')[0].split('&');
-        for(i = 0; i < options.length; i++) {
+        for(var i = 0; i < options.length; i++) {
             var option = options[i].split('=');
             switch(option[0]) {
                 case 'type':
@@ -156,7 +158,7 @@ function pedsearchstart(hard)
   var y = 0;
   var finout = '';
 
-  for (pedt in P)
+  for (var pedt in P)
   {
     var totest = pedt;
     if(/fz/.exec(G_dictOpts)) {
@@ -172,11 +174,11 @@ function pedsearchstart(hard)
     }
     if(yessir)
     {
-      for (z = 0; z < P[pedt].length; z++) {
+      for (var z = 0; z < P[pedt].length; z++) {
 
         var loc = P[pedt][z];
 
-        uniout = pedt;
+        var uniout = pedt;
 
         uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -199,13 +201,13 @@ function pedsearchstart(hard)
       var simlist = findSimilarWords(toFuzzy(getstring),P,G_similar_min,1);
       if(simlist) {
         outDiv.innerHTML += '<p>Did you mean:</p>';
-        for (i in simlist) {
+        for (var i in simlist) {
           pedt = simlist[i][1];
-          for (z = 0; z < P[pedt].length; z++) {
+          for (var z = 0; z < P[pedt].length; z++) {
 
             var loc = P[pedt][z];
 
-            uniout = pedt;
+            var uniout = pedt;
 
             uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -227,7 +229,7 @@ function pedsearchstart(hard)
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -239,7 +241,7 @@ function pedsearchstart(hard)
 
   if(G_dictEntry) paliXML(toUni(G_dictEntry));
 
-  yut = 0;
+  var yut = 0;
 }
 
 function pedFullTextSearch(getstring) {
@@ -250,7 +252,7 @@ function pedFullTextSearch(getstring) {
 
   var listouta = [];
 
-  for (i = 0; i < 5; i++) {
+  for (var i = 0; i < 5; i++) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML1/'+i+'/ped.xml', false);
@@ -260,7 +262,7 @@ function pedFullTextSearch(getstring) {
 
     var allp = xmlDoc.getElementsByTagName('d');
 
-    for (j =0; j < allp.length; j++) {
+    for (var j =0; j < allp.length; j++) {
       var texttomatch = allp[j].textContent;
       startmatch = texttomatch.search(getstring);
       postpara = '';
@@ -304,7 +306,7 @@ function pedFullTextSearch(getstring) {
     return;
   }
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -365,7 +367,7 @@ function dppnsearchstart(hard)
   var finouta = new Array();
   var finout = '';
 
-    for (x in D)
+    for (var x in D)
   {
 
     var dppnt = x;
@@ -385,11 +387,11 @@ function dppnsearchstart(hard)
     }
     if(yessir)
     {
-      for (z = 0; z < D[x].length; z++) {
+      for (var z = 0; z < D[x].length; z++) {
 
         loc = D[x][z];
 
-        uniout = toUni(dppnt);
+        var uniout = toUni(dppnt);
 
         finouta.push('<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
@@ -410,13 +412,13 @@ function dppnsearchstart(hard)
       var simlist = findSimilarWords(toFuzzy(getstring),D,G_similar_min,1);
       if(simlist) {
         listoutf += '<p>Did you mean:</p>';
-        for (i in simlist) {
+        for (var i in simlist) {
           pedt = simlist[i][1];
-          for (z = 0; z < D[pedt].length; z++) {
+          for (var z = 0; z < D[pedt].length; z++) {
 
             var loc = D[pedt][z];
 
-            uniout = pedt;
+            var uniout = pedt;
 
             uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -439,7 +441,7 @@ function dppnsearchstart(hard)
 
   listoutf += '<table width="100%">';
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -448,7 +450,7 @@ function dppnsearchstart(hard)
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 
   if(G_dictEntry) DPPNXML(toUni(G_dictEntry));
 
@@ -461,7 +463,7 @@ function dppnFullTextSearch(getstring) {
 
   var listouta = [];
   getstring = toUni(getstring);
-  for (i = 1; i < 10; i++) {
+  for (var i = 1; i < 10; i++) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML2/'+i+'.xml', false);
@@ -471,7 +473,7 @@ function dppnFullTextSearch(getstring) {
 
     var allp = xmlDoc.getElementsByTagName('e');
 
-    for (j =0; j < allp.length; j++) {
+    for (var j =0; j < allp.length; j++) {
       var addend = '';
 
       var texttomatch = allp[j].textContent;
@@ -527,7 +529,7 @@ function dppnFullTextSearch(getstring) {
     return;
   }
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -564,11 +566,11 @@ function mlsearchstart(hard)
   var finouta = new Array();
   var finout = '';
   if( G_cpedAlt = []) {
-    for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
+    for (var a in yt) G_cpedAlt.push([a].concat(yt[a]));
   }
 
   var cnt = 0;
-  for (x = 0; x < G_cpedAlt.length; x++)
+  for (var x = 0; x < G_cpedAlt.length; x++)
   {
     var us = '';
     var ud = '';
@@ -615,7 +617,7 @@ function mlsearchstart(hard)
       var simlist = findSimilarWords(toFuzzy(getstring),yt,G_similar_min,1);
       if(simlist) {
         finout += '<p>Did you mean:</p>';
-        for (i in simlist) {
+        for (var i in simlist) {
           pedt = simlist[i][1];
 
           var loc = yt[pedt];
@@ -636,7 +638,7 @@ function mlsearchstart(hard)
   }
 
   finout += '<table>'
-  for (z = 0; z < finouta.length; z++)
+  for (var z = 0; z < finouta.length; z++)
   {
     finout += '<tr><td>'+finouta[z]+'</td></tr>';
   }
@@ -645,7 +647,7 @@ function mlsearchstart(hard)
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 // multi dictionary PED, DPPN, CPED
@@ -665,7 +667,7 @@ function multisearchstart(hard)
 
   // get ped
 
-  for (pedt in P)
+  for (var pedt in P)
   {
     var tosearch = pedt;
 
@@ -683,11 +685,11 @@ function multisearchstart(hard)
     }
     if(yessir)
     {
-      for (z = 0; z < P[pedt].length; z++) {
+      for (var z = 0; z < P[pedt].length; z++) {
 
         var loc = P[pedt][z];
 
-        uniout = pedt;
+        var uniout = pedt;
 
         uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -696,7 +698,7 @@ function multisearchstart(hard)
     }
   }
 
-    for (x in D)
+    for (var x in D)
   {
     var dppnt = x;
     if(/fz/.exec(G_dictOpts)) {
@@ -714,11 +716,11 @@ function multisearchstart(hard)
     }
     if(yessir)
     {
-      for (z = 0; z < D[x].length; z++) {
+      for (var z = 0; z < D[x].length; z++) {
 
         loc = D[x][z];
 
-        uniout = toUni(dppnt);
+        var uniout = toUni(dppnt);
 
         finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_prefs['coldppn']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
@@ -728,11 +730,11 @@ function multisearchstart(hard)
   // get cped
 
   if( G_cpedAlt = []) {
-    for (a in yt) G_cpedAlt.push([a].concat(yt[a]));
+    for (var a in yt) G_cpedAlt.push([a].concat(yt[a]));
   }
 
   var cnt = 0;
-  for (x = 0; x < G_cpedAlt.length; x++)
+  for (var x = 0; x < G_cpedAlt.length; x++)
   {
     var us = '';
     var ud = '';
@@ -785,13 +787,13 @@ function multisearchstart(hard)
 
       if(simlistp || simlistd || simlistc) {
         outDiv.innerHTML += '<p>Did you mean:</p>';
-        for (i in simlistp) {
+        for (var i in simlistp) {
           pedt = simlistp[i][1];
-          for (z = 0; z < P[pedt].length; z++) {
+          for (var z = 0; z < P[pedt].length; z++) {
 
             var loc = P[pedt][z];
 
-            uniout = pedt;
+            var uniout = pedt;
 
             uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -800,13 +802,13 @@ function multisearchstart(hard)
             y++;
           }
         }
-        for (i in simlistd) {
+        for (var i in simlistd) {
           pedt = simlistd[i][1];
-          for (z = 0; z < D[pedt].length; z++) {
+          for (var z = 0; z < D[pedt].length; z++) {
 
             var loc = D[pedt][z];
 
-            uniout = pedt;
+            var uniout = pedt;
 
             uniout = toUni(uniout).replace(/`/g,'˚');
 
@@ -815,7 +817,7 @@ function multisearchstart(hard)
             y++;
           }
         }
-        for (i in simlistc) {
+        for (var i in simlistc) {
           pedt = simlistc[i][1];
 
           var loc = yt[pedt];
@@ -838,7 +840,7 @@ function multisearchstart(hard)
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -847,7 +849,7 @@ function multisearchstart(hard)
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -874,7 +876,7 @@ function epdsearchstart()
   var y = 0;
   var finout = '';
 
-  for (x = 0; x < epd.length; x++)
+  for (var x = 0; x < epd.length; x++)
   {
     gsplit = epd[x].split('^');
 
@@ -924,7 +926,7 @@ function epdsearchstart()
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -954,7 +956,7 @@ function attsearchstart()
   var finout = '';
   var outnik = '';
 
-  for (x = 0; x < attlist.length; x++)
+  for (var x = 0; x < attlist.length; x++)
   {
     outnik = '';
     var attt = attlist[x].split('#')[0];
@@ -976,10 +978,10 @@ function attsearchstart()
     {
       var entries = attlist[x].split('#');
       gsplit = entries.shift();
-      uniout = toUni(gsplit);
+      var uniout = toUni(gsplit);
 
       // nikayas
-      for(a = 0; a < entries.length; a++) {
+      for(var a = 0; a < entries.length; a++) {
         var tnik = entries[a].charAt(0);
         if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
         else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
@@ -1006,7 +1008,7 @@ function attsearchstart()
     return;
   }
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -1015,7 +1017,7 @@ function attsearchstart()
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -1045,7 +1047,7 @@ function tiksearchstart()
   var finout = '';
   var outnik = '';
 
-  for (x = 0; x < tiklist.length; x++)
+  for (var x = 0; x < tiklist.length; x++)
   {
     outnik = '';
     var tikt = tiklist[x].split('#')[0];
@@ -1068,10 +1070,10 @@ function tiksearchstart()
 
       var entries = tiklist[x].split('#');
       gsplit = entries.shift();
-      uniout = toUni(gsplit);
+      var uniout = toUni(gsplit);
 
       // nikayas
-      for(a = 0; a < entries.length; a++) {
+      for(var a = 0; a < entries.length; a++) {
         var tnik = entries[a].charAt(0);
         if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
         else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
@@ -1098,7 +1100,7 @@ function tiksearchstart()
     return;
   }
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -1107,7 +1109,7 @@ function tiksearchstart()
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -1141,7 +1143,7 @@ function titlesearchstart()
 
   var outnik = '';
 
-  for (x = 0; x < titlelist.length; x++)
+  for (var x = 0; x < titlelist.length; x++)
   {
 
     outnik = '';
@@ -1166,9 +1168,9 @@ function titlesearchstart()
       // separate mat
       var entries = titlelist[x].split('#');
       gsplit = entries.shift();
-      uniout = toUni(gsplit);
+      var uniout = toUni(gsplit);
 
-      for(a = 0; a < entries.length; a++) {
+      for(var a = 0; a < entries.length; a++) {
         if(!G_dictOpts.indexOf('m'+entries[a].charAt(entries[a].length-3))) {
           entries.splice(a--,1);
         }
@@ -1176,7 +1178,7 @@ function titlesearchstart()
       if (entries.length == 0) continue;
 
       // nikayas
-      for(a = 0; a < entries.length; a++) {
+      for(var a = 0; a < entries.length; a++) {
         var tnik = entries[a].charAt(0);
         if(G_dictOpts.indexOf('x'+tnik) == -1) entries.splice(a--,1);
         else if(outnik.indexOf(tnik) == -1) outnik+=tnik;
@@ -1200,7 +1202,7 @@ function titlesearchstart()
       var dEI = '';
       var dEO = '';
       if(dppnEntry.length > 0) {
-        for(d in dppnEntry) {
+        for(var d in dppnEntry) {
 
           dEI += '&nbsp;<span class="pointer" style="color:'+DPR_prefs['coldppn']+'" title="DPPN entry" onclick="toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
           dEO += '<div class="hide round" id="titleS'+x+'^'+d+'"></div>'
@@ -1228,7 +1230,7 @@ function titlesearchstart()
   var finol = '';
   var finor = '';
 
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     finol +=finouta[z]
     finor += (finouta[findiv+z]?finouta[findiv+z]:'');
@@ -1240,7 +1242,7 @@ function titlesearchstart()
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -1266,7 +1268,7 @@ function paliRootsearchstart(hard)
   var y = 0;
   var finout = '';
 
-  for (x = 0; x < proots.length; x++)
+  for (var x = 0; x < proots.length; x++)
   {
     gsplit = proots[x].split('^');
 
@@ -1322,7 +1324,7 @@ function paliRootsearchstart(hard)
   $('#dict').html('');
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
-  yut = 0;
+  var yut = 0;
 }
 
 var G_sktR = [];
@@ -1377,7 +1379,7 @@ function sktsearchstart()
     }
     if(yessir)
     {
-      uniout = toUni(toSkt(sx,true));
+      var uniout = toUni(toSkt(sx,true));
       last = x;
       finouta[y] = '<span class="pointer" style="color:'+DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + x +');">' + uniout + '</span><br>';
 
@@ -1401,7 +1403,7 @@ function sktsearchstart()
         outDiv.innerHTML += '<p>Did you mean:</p>';
         for (var x = 0; x < simlist.length; x++) {
           sx = simlist[x][1];
-          uniout = toUni(toSkt(sx,true));
+          var uniout = toUni(toSkt(sx,true));
           finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + G_sktR[sx]+');">' + uniout + '</a><br>';
 
           y++;
@@ -1419,7 +1421,7 @@ function sktsearchstart()
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -1431,7 +1433,7 @@ function sktsearchstart()
 
   if(G_dictEntry) sktXML(G_dictEntry,G_sktR[G_dictEntry]);
 
-  yut = 0;
+  var yut = 0;
 }
 
 
@@ -1477,7 +1479,7 @@ function sktRootsearchstart(hard)
     }
     if(yessir)
     {
-      uniout = j;
+      var uniout = j;
       uniout = toUni(toSkt(uniout,true));
       finouta[y] = '<span class="pointer" style="color:'+DPR_prefs['coltext']+'" onclick="sktRXML('+i+');">√' + uniout + '</a><br>';
 
@@ -1497,7 +1499,7 @@ function sktRootsearchstart(hard)
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
-  for (z = 0; z < findiv; z++)
+  for (var z = 0; z < findiv; z++)
   {
     listoutf += '<tr><td>'+finouta[z]+'</td><td>'+(finouta[findiv+z]?finouta[findiv+z]:'')+'</td><td>'+(finouta[(findiv*2)+z]?finouta[(findiv*2)+z]:'')+'</td></tr>';
   }
@@ -1509,5 +1511,5 @@ function sktRootsearchstart(hard)
 
   if(G_dictEntry) sktRXML(toUni(G_dictEntry));
 
-  yut = 0;
+  var yut = 0;
 }

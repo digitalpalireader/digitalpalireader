@@ -1,3 +1,5 @@
+'use strict';
+
 function getLinkPlace() { // permalinks
 
   var options = document.location.href.split('?')[1].split('#')[0];
@@ -62,7 +64,7 @@ function makeLinkPlace(options,PL) {
 
 function makeLocPlace(inplace) {
   var outplace;
-  place = inplace.split('.');
+  var place = inplace.split('.');
 
   if (place.length == 8 || /[vdmaskyxbgn]\.[0-9]+\.[mat]/.test(inplace)) {
     outplace = place;

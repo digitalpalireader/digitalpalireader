@@ -1,3 +1,5 @@
+'use strict';
+
 if (DPR_PAL.isWeb) {
     console.log('Loading DPR_PAL_Sidebar...');
 } else {
@@ -32,7 +34,7 @@ var digitalpalireader = {
     else titles = nikvoladi[nik+G_hier];
     var bookNode = $('#nav-book');
     bookNode.empty();
-    for (i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
       var title;
       var val;
       if(nik == 'k' || nik == 'y') {
@@ -64,7 +66,7 @@ var digitalpalireader = {
     }
     else {
       navShown[n] = true;
-      for(idx in lista){
+      for(var idx in lista){
         listNode.append($("<option />").val(idx).text(lista[idx]));
       }
       listNode.show();

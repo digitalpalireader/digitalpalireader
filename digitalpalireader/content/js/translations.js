@@ -1,3 +1,4 @@
+'use strict';
 
 function transLink(which,where,url,title) {
   var image = 'images/ati.ico';

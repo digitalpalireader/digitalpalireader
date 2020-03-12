@@ -1,3 +1,5 @@
+'use strict';
+
 var G_endings = new Array();
 
 // in the following: 0=to be found, 1=cut offset, 2=length of stem must be greater than this, 3=whattoadd, 4= noun, verb, participle, 5=type&declension
@@ -461,7 +463,7 @@ function makeDeclensions(oneword,lastpart,nextpart) {
     endings[oneword.substring(k)] = k;
   }
 
-  for(i in G_endings) {
+  for(var i in G_endings) {
     var gend = G_endings[i];  // gend[0] is ending, [1] is offset, [2] is min length of stem, [3] is new ending to add, [4] says is a verb
     if(endings[gend[0]] && endings[gend[0]] > gend[2]) {
       var dec = oneword.substring(0, endings[gend[0]]+gend[1]) + gend[3];
@@ -480,11 +482,11 @@ function makeDeclensions(oneword,lastpart,nextpart) {
         }
       }
     }
-    for (stem in G_altStem) {
+    for (var stem in G_altStem) {
       //if(/^ga/.exec(oneword)) ddump('-- try ' + oneword +  ' ' +stem+ ' ' + gend[0]);
       if (endings[stem + gend[0]] && endings[stem + gend[0]] > gend[2] && (G_altStem[stem][1] && gend[4] == 'v' || !G_altStem[stem][1] && gend[4] == 'n'))
       {
-        for(gas0 in G_altStem[stem][0]) {
+        for(var gas0 in G_altStem[stem][0]) {
           var dec = oneword.substring(0, endings[stem + gend[0]]) + G_altStem[stem][0][gas0];
           //if(/^ga/.exec(oneword)) ddump('-- got ' + dec + ' ' +stem+ ' ' + gend[0]);
           if(G_altStem[stem][2]) {

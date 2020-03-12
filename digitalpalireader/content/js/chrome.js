@@ -1,3 +1,5 @@
+'use strict';
+
 function openFirstDPRTab() {
   if (!DPR_PAL.isXUL) {
     return;

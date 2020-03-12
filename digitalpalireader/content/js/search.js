@@ -1,3 +1,5 @@
+'use strict';
+
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
 var MD = DPR_PAL.contentDocument;
@@ -52,7 +54,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
     var options = MD.location.href.split('?')[1].split('#')[0].split('&');
 
     // parse options
-    for (i in options) {
+    for (var i in options) {
 
       var option = options[i].split('=');
       switch(option[0]) {
@@ -240,10 +242,10 @@ function pausesall()
     }
   }
 
-  for(w in G_XMLFileArray) {
+  for(var w in G_XMLFileArray) {
     if (G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
-    for (x = 0; x < 3; x++) {
+    for (var x = 0; x < 3; x++) {
       if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
         if(cbooks && cbooks[cniks[w.charAt(0)]] && cbooks[cniks[w.charAt(0)]].indexOf(','+w.substring(1)+',') == -1) continue; // skip unspecified books for custom search
 
@@ -263,9 +265,9 @@ function pausesall()
 
   DPR_PAL_SearchAddSearchTermSectionLink(G_searchRX ? G_searchString : toUni(G_searchString));
 
-  for (i = 0; i < G_numberToNik.length; i++) {
+  for (var i = 0; i < G_numberToNik.length; i++) {
     if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-    DPR_PAL_Search_AddSectionLink();
+    DPR_PAL_Search_AddSectionLink(G_numberToNik[i]);
   }
 
   DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
@@ -374,7 +376,7 @@ function importXMLs(cnt)
     bookat = bookfile.substring(1,bookfile.length-1);
     bookperm = bookat;
     nikperm = nikayaat;
-    hiert = bookfile.charAt(bookfile.length-1);
+    var hiert = bookfile.charAt(bookfile.length-1);
 
     //devO(bookload);
 
@@ -899,7 +901,7 @@ function createTables(xmlDoc,hiert)
 
                   thiscount++;
                   countmatch++;
-                  cmval = '';
+                  var cmval = '';
 
                 }
               }
@@ -976,7 +978,7 @@ function createTables(xmlDoc,hiert)
 
       exwordout = '<table width=100%>';
 
-      for (ex = 0; ex < findiv; ex++)
+      for (var ex = 0; ex < findiv; ex++)
       {
         exwordout += `<tr><td>${createTdForMatch(dups, exnodups[ex])}</td><td>${createTdForMatch(dups, exnodups[findiv + ex])}</td></tr>`;
       }
@@ -1009,7 +1011,7 @@ function showonly(string) {
   }
   else {
     string = string.replace(/ +/g,'_')
-    for (x = 0; x < da.length; x++) {
+    for (var x = 0; x < da.length; x++) {
       if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
       else da[x].style.display = "none";
     }
