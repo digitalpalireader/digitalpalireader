@@ -287,7 +287,9 @@ const scrollMainPane = (scrollTop) => {
 
 const openBottomFrame = () => {
   // NOTE: #main-bottom-pane takes up the remaining space.
-  $("#main-pane").height("75%");
+  if ($("#main-pane").height() / $("#main-pane").parent().height() > 0.85){
+    $("#main-pane").height("75%");
+  }
 }
 
 const closeBottomFrame = () => {

@@ -108,10 +108,10 @@ console.log('Loading DPR_PAL...');
     }
   }
 
-  const dprSchemeUriCracker = /^(dpr):(.+)\?(.*)$/;
+  const dprSchemeUriCracker = /^dpr:(.+)\?(.*)$/;
   DPR_PAL.normalizeDprSchemeUri = uri => {
     if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
-      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$2.html?$3`);
+      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$1.html?$2`);
     } else {
       return uri;
     }

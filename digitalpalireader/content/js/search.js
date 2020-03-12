@@ -281,11 +281,11 @@ function pausetwo() { // init function for single collection
   var which = G_searchType;
   var nikaya = G_searchSet;
 
-  for(w in G_XMLFileArray) {
+  for(var w in G_XMLFileArray) {
     if (w.charAt(0) != nikaya) continue; // only this collection
     if (G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books
 
-    for (x = 0; x < 3; x++) {
+    for (var x = 0; x < 3; x++) {
       if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
         G_searchFileArray.push(w+G_hLetters[x]);
       }
@@ -317,7 +317,7 @@ function pausethree() {
   var nikbook = nikaya+book;
   var getstring = G_searchString;
   if(which == 2) { // single book, multiple hier
-    for (x = 0; x < 3; x++) {
+    for (var x = 0; x < 3; x++) {
       if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[nikbook][x] == 1) { // this hier is checked and the file exists in this hier
         G_searchFileArray.push(nikbook+G_hLetters[x]);
       }
@@ -1251,9 +1251,9 @@ function atiSearchOffline(d, getstring) {
 }
 
 function findRegEx(text,string) {
-  rstring = new RegExp(toUniRegEx(string));
-  bstring = new RegExp(toUniRegEx(string.replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)")));
-  match = text.search(rstring);
+  var rstring = new RegExp(toUniRegEx(string));
+  var bstring = new RegExp(toUniRegEx(string.replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)")));
+  var match = text.search(rstring);
   if(match > -1 && string.indexOf("\\b") > -1 && (text.search(bstring) == -1 || text.search(bstring) > match)) {
     match = -1;
   }
