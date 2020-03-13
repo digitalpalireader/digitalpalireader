@@ -2,7 +2,7 @@
 module.exports = {
   globDirectory: "./",
   globPatterns: [
-    "**/*.{xml,png,eot,otf,svg,ttf,woff,woff2}"
+    "**/*.{html,htm,css,js,xml,png,eot,otf,svg,ttf,woff,woff2,map}"
   ],
   globIgnores: [
     "**/service_worker.js"

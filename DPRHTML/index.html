@@ -329,20 +329,23 @@
       </div>
     </div>
   </div>
-</div>
 
 </body>
 
-<script>
+<script type="module">
+
+import {Workbox} from '/digitalpalireader/content/js/external/workbox-v5.0.0/workbox-window.prod.mjs';
 
   if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service_worker.js').then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-      }, function(err) {
-        console.log('ServiceWorker registration failed: ', err);
+    const wb = new Workbox('/service_worker.js');
+    wb.addEventListener('waiting', (event) => {
+      wb.addEventListener('controlling', (event) => {
+        window.location.reload();
       });
+      wb.messageSW({type: 'SKIP_WAITING'});
     });
+
+    wb.register();
   }
 
   let deferredPrompt;
