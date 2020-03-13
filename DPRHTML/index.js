@@ -85,8 +85,11 @@ const initMainPane = () => {
 }
 
 const initFooter = () => {
-  $("#main-footer-timestamp").text(`Deployed: ${window.createdTimestamp.toLocaleString()}`);
-  $("#main-footer-version").text(`Version: ${window.releaseNumber}`);
+  const padNum = n => ("0" + n).slice(-2);
+  const formatDate = d => `${d.getFullYear()}-${padNum(d.getMonth() + 1)}-${padNum(d.getDate())} ${padNum(d.getHours())}:${padNum(d.getMinutes())}:${padNum(d.getSeconds())}`;
+
+  $("#main-footer-timestamp").text(`${formatDate(window.createdTimestamp)}`);
+  $("#main-footer-version").text(`${window.releaseNumber}`);
 }
 
 const loadSidebarTabs = () => {
