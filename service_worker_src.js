@@ -10,8 +10,7 @@ addEventListener('message', (event) => {
   }
 });
 
-workbox.routing.setDefaultHandler(new workbox.strategies.StaleWhileRevalidate());
-
+workbox.routing.setDefaultHandler(new workbox.strategies.CacheFirst());
 
 
 

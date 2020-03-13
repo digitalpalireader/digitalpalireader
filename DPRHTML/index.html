@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" manifest="dpr.appcache">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="./favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Digital Pali Reader (alpha)</title>
-
+    <meta name="description" content="The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader. It includes the collections of scriptures including the Pali canon, commentaries, sub-commentaries, Visuddhimagga and other texts in the Pali language. It also includes a dictionary to facilitate reading the texts and is useful in the study of the Pali language at an advanced level.">
+    <meta name="theme-color" content="#fffbc9"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="DPR">
+    <link rel="apple-touch-icon" href="/digitalpalireader/content/images/logo152.png">
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/DPRHTML/index-core.css" />
@@ -159,6 +167,7 @@
       <footer id="main-footer">
         <ul>
           <li><a href="https://pali.sirimangalo.org/" target="_blank">Home</a></li>
+          <li><button id="add-home">Add to home screen</button></li>
           <li>|</li>
           <li id="main-footer-timestamp"></li>
           <li>|</li>
@@ -255,7 +264,6 @@
     <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
     <script src="/digitalpalireader/content/js/search_history.js"></script>
 
-
     <script src="/DPRHTML/features/navigation/init.js"></script>
     <script src="/DPRHTML/features/search/init.js"></script>
     <script src="/DPRHTML/features/dictionary/init.js"></script>
@@ -263,6 +271,45 @@
     <script src="/DPRHTML/index.js"></script>
     <script type="text/javascript">
       $(document).ready(mainInitialize);
+    </script>
+    <script type="module">
+
+      import {Workbox} from '/digitalpalireader/content/js/external/workbox-v5.0.0/workbox-window.prod.mjs';
+
+      if ('serviceWorker' in navigator) {
+        const wb = new Workbox('/service_worker.js');
+        wb.addEventListener('waiting', (event) => {
+          wb.addEventListener('controlling', (event) => {
+            window.location.reload();
+          });
+          wb.messageSW({type: 'SKIP_WAITING'});
+        });
+
+        wb.register();
+      }
+
+      let deferredPrompt;
+      const addBtn = document.querySelector('#add-home');
+      addBtn.style.display = 'none';
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        addBtn.style.display = 'inline-block';
+
+        addBtn.addEventListener('click', (e) => {
+          addBtn.style.display = 'none';
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
     </script>
   </body>
 </html>
