@@ -1,3 +1,5 @@
+'use strict';
+
 var reorder = new Array();
 reorder.push('#');
 reorder.push('0');
@@ -116,178 +118,178 @@ oldorder.push('z');
 var neworder = new Array();
 var roo = '';
 for(var w = 0; w < reorder.length; w++) {
-	roo = reorder[w];
-	neworder[roo] = oldorder[w];
+  roo = reorder[w];
+  neworder[roo] = oldorder[w];
 }
 
 function sortaz(mydata){  // sort pali array
 
-	mydata = mydata.sort(comparePaliAlphabet);
-	for (i in mydata) {
-		mydata[i] = mydata[i].replace(/^.*###/,''); // remove sorted words, return the rest
-	} 
-	return mydata;
+  mydata = mydata.sort(comparePaliAlphabet);
+  for (var i in mydata) {
+    mydata[i] = mydata[i].replace(/^.*###/,''); // remove sorted words, return the rest
+  }
+  return mydata;
 }
 
 function sortStrip(word) {
-	if(DPR_prefs['nigahita']) {
-		word = word.replace(/ṁ/g, 'ṃ');
-		word = word.replace(/Ṁ/g, 'Ṃ');
-	}
-	word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ#]/g,'');
-	return word;
+  if(DPR_prefs['nigahita']) {
+    word = word.replace(/ṁ/g, 'ṃ');
+    word = word.replace(/Ṁ/g, 'Ṃ');
+  }
+  word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ#]/g,'');
+  return word;
 }
 
 function comparePaliAlphabet(a,b) {
-	
-	if (a.length == 0 || b.length == 0) return;
 
-	var two = [sortStrip(a),sortStrip(b)];
-	var nwo = [];
-	for(i = 0; i < two.length; i++) {
-		var wordval = '';
-		for (var c = 0; c < two[i].length; c++) {
-			
-			var onechar = two[i].charAt(c);
-			if(onechar == '#') break;
-			
-			var twochar = onechar + two[i].charAt(c+1);
-			
-			if (neworder[twochar]) {
-				wordval+=neworder[twochar];
-				c++;
-			}
-			else if (neworder[onechar]) {
-				wordval+=neworder[onechar];
-			}
-			else {
-				wordval+=onechar;
-			}
-		}
-		two[i] = wordval;
-		nwo[i] = wordval;
-	}
-	nwo.sort();
-	//dalert(a+' '+nwo+' '+b+' ' + two+' '+(nwo[0] == two[0]));
-	if(nwo[0] != two[0]) return 1;
-	else return -1;
-	
+  if (a.length == 0 || b.length == 0) return;
+
+  var two = [sortStrip(a),sortStrip(b)];
+  var nwo = [];
+  for(var i = 0; i < two.length; i++) {
+    var wordval = '';
+    for (var c = 0; c < two[i].length; c++) {
+
+      var onechar = two[i].charAt(c);
+      if(onechar == '#') break;
+
+      var twochar = onechar + two[i].charAt(c+1);
+
+      if (neworder[twochar]) {
+        wordval+=neworder[twochar];
+        c++;
+      }
+      else if (neworder[onechar]) {
+        wordval+=neworder[onechar];
+      }
+      else {
+        wordval+=onechar;
+      }
+    }
+    two[i] = wordval;
+    nwo[i] = wordval;
+  }
+  nwo.sort();
+  //dalert(a+' '+nwo+' '+b+' ' + two+' '+(nwo[0] == two[0]));
+  if(nwo[0] != two[0]) return 1;
+  else return -1;
+
 }
 
 
 function findSimilarWords(word,list,min,fuzzy) {
-	
-	var simlist = [];
-	var count = 0;
-	for (i in list) {
-//		if(word == list[i]) continue; // don't duplicate
 
-		if(list.length == 0) {
-			var inthisword = i; // for associative arrays
-		}
-		else var inthisword = list[i];
-		
-		if(!inthisword) continue;
-		
-		if(fuzzy) var thisword = toFuzzy(inthisword);
-		else var thisword = inthisword;
-		
-		var start = 0;
-		var lstart = thisword.length;
-		var sim = 0;
-		//ddump([word,thisword]);
-		for (x in word) {
-			var tsim = 0;
-			start = thisword.indexOf(word[x]);
-			//ddump(['start',start,word[x],'last start ',lstart]); 
-			if (start > -1 && start <= lstart) { // letter occurs before first occurrance of last letter
-				lstart = start;
-				var k = x;
-				while (start < thisword.length && k < word.length) {
-					if(thisword.substring(start).indexOf(word[k]) >= 0){
-						start += thisword.substring(start).indexOf(word[k])+1;
-						//ddump(['yes',k,word[k],start-1,thisword[start-1]]); 
-						tsim++;
-					}
-					//else ddump(['no',k,word[k],start-1,thisword[start-1]]); 
-					k++
-				}
-			}
-			if (tsim > sim) sim = tsim;
-		}
-		var ld = thisword.length-word.length;
-		if (ld < 0) ld = ld*(-1);
-		var percent = Math.round((sim-ld)/word.length*100);
-		if(!min || percent > min) {
-			if(percent < 0) percent = 0;
-			simlist.push([percent,inthisword]);
-			count++;
-		}
-		//ddump([word,thisword,ld,Math.round((sim-ld)/word.length*100) + '%']);
-	}
-	if(count > 0) {
-		simlist.sort(function(a,b){ return parseInt(b[0]) - parseInt(a[0])});
-		return simlist;
-	}
-	return null;
+  var simlist = [];
+  var count = 0;
+  for (i in list) {
+//    if(word == list[i]) continue; // don't duplicate
+
+    if(list.length == 0) {
+      var inthisword = i; // for associative arrays
+    }
+    else var inthisword = list[i];
+
+    if(!inthisword) continue;
+
+    if(fuzzy) var thisword = toFuzzy(inthisword);
+    else var thisword = inthisword;
+
+    var start = 0;
+    var lstart = thisword.length;
+    var sim = 0;
+    //ddump([word,thisword]);
+    for (x in word) {
+      var tsim = 0;
+      start = thisword.indexOf(word[x]);
+      //ddump(['start',start,word[x],'last start ',lstart]);
+      if (start > -1 && start <= lstart) { // letter occurs before first occurrance of last letter
+        lstart = start;
+        var k = x;
+        while (start < thisword.length && k < word.length) {
+          if(thisword.substring(start).indexOf(word[k]) >= 0){
+            start += thisword.substring(start).indexOf(word[k])+1;
+            //ddump(['yes',k,word[k],start-1,thisword[start-1]]);
+            tsim++;
+          }
+          //else ddump(['no',k,word[k],start-1,thisword[start-1]]);
+          k++
+        }
+      }
+      if (tsim > sim) sim = tsim;
+    }
+    var ld = thisword.length-word.length;
+    if (ld < 0) ld = ld*(-1);
+    var percent = Math.round((sim-ld)/word.length*100);
+    if(!min || percent > min) {
+      if(percent < 0) percent = 0;
+      simlist.push([percent,inthisword]);
+      count++;
+    }
+    //ddump([word,thisword,ld,Math.round((sim-ld)/word.length*100) + '%']);
+  }
+  if(count > 0) {
+    simlist.sort(function(a,b){ return parseInt(b[0]) - parseInt(a[0])});
+    return simlist;
+  }
+  return null;
 }
 
 function groupBySimilarity(list,minsim) {
 
-	var simlist = [];
-	var listloc = [];
-	
-	for (f = 0; f < list.length; f++) {
-		if(devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
-		var thisword = list[f]
+  var simlist = [];
+  var listloc = [];
 
-		var thislist = findSimilarWords(thisword,list.slice(f+1));
+  for (f = 0; f < list.length; f++) {
+    if(devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
+    var thisword = list[f]
 
-		for (j in thislist) {
-			var oneword = thislist[j][1];
-			if(listloc[oneword] == -1) continue;
-			//if(f==0) ddump([simpc,'similar ' + thislist[j].split('^')[1] + ' & ' + list[i]]);
-			var simpc =thislist[j][0];
-			if(simpc > minsim) {
-				if(listloc[thisword] && !listloc[oneword]) {
-					simlist[listloc[thisword]].push(oneword);
-					listloc[oneword] = listloc[thisword];
-				}
-				else if(!listloc[thisword] && listloc[oneword]) {
-					simlist[listloc[oneword]].push(thisword);
-					listloc[thisword] = listloc[oneword];
-				}
-				else if (!listloc[thisword] && !listloc[oneword]) { // make new similar group
-					simlist.push([thisword,oneword]);
-					listloc[oneword] = simlist.length-1;
-					listloc[thisword] = listloc[oneword];
-				}
+    var thislist = findSimilarWords(thisword,list.slice(f+1));
 
-				//ddump([simlist.length,thisword,oneword]);
-			}
-		}
-		if (!listloc[thisword]) { // nothing similar
-			simlist.push([thisword]);
-			listloc[thisword] = -1;
-		}
-	}
-	for (i in simlist) {
-		//if(simlist[i].length = 0) continue;
-		simlist[i] = sortaz(simlist[i]); // sort groups internally alphabetically
-	}
-	simlist = simlist.sort(function(a,b){return(b.length - a.length);});  // by number of elements 
-	simlist = simlist.sort(function(a,b){if(b.length == a.length) return comparePaliAlphabet(a[0],b[0]);});  // alphabeticcaly by first element
-	return simlist;
+    for (j in thislist) {
+      var oneword = thislist[j][1];
+      if(listloc[oneword] == -1) continue;
+      //if(f==0) ddump([simpc,'similar ' + thislist[j].split('^')[1] + ' & ' + list[i]]);
+      var simpc =thislist[j][0];
+      if(simpc > minsim) {
+        if(listloc[thisword] && !listloc[oneword]) {
+          simlist[listloc[thisword]].push(oneword);
+          listloc[oneword] = listloc[thisword];
+        }
+        else if(!listloc[thisword] && listloc[oneword]) {
+          simlist[listloc[oneword]].push(thisword);
+          listloc[thisword] = listloc[oneword];
+        }
+        else if (!listloc[thisword] && !listloc[oneword]) { // make new similar group
+          simlist.push([thisword,oneword]);
+          listloc[oneword] = simlist.length-1;
+          listloc[thisword] = listloc[oneword];
+        }
+
+        //ddump([simlist.length,thisword,oneword]);
+      }
+    }
+    if (!listloc[thisword]) { // nothing similar
+      simlist.push([thisword]);
+      listloc[thisword] = -1;
+    }
+  }
+  for (i in simlist) {
+    //if(simlist[i].length = 0) continue;
+    simlist[i] = sortaz(simlist[i]); // sort groups internally alphabetically
+  }
+  simlist = simlist.sort(function(a,b){return(b.length - a.length);});  // by number of elements
+  simlist = simlist.sort(function(a,b){if(b.length == a.length) return comparePaliAlphabet(a[0],b[0]);});  // alphabeticcaly by first element
+  return simlist;
 }
 
 function removeDuplicatesFromArray(list){
-	var templist = [];
-	var outlist = [];
-	for (i in list) {
-		templist[i] = 1;
-	}
-	for (i in templist) {
-		outlist.push(i);
-	}
-	return outlist;
+  var templist = [];
+  var outlist = [];
+  for (i in list) {
+    templist[i] = 1;
+  }
+  for (i in templist) {
+    outlist.push(i);
+  }
+  return outlist;
 }

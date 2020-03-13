@@ -9,7 +9,7 @@
 
 <!ENTITY close.tip "Close section">
 
-	<!-- nav -->
+  <!-- nav -->
 
 <!ENTITY sNav.label "Navigation">
 <!ENTITY sSet.label "Set">
@@ -28,7 +28,7 @@
 <!ENTITY bookmark.text "Choose bookmarked section">
 <!ENTITY history.text "Choose previous section">
 
-	<!-- search -->
+  <!-- search -->
 
 <!ENTITY sSearch.label "Search">
 <!ENTITY searchHead "Text Search">
@@ -44,7 +44,7 @@
 <!ENTITY sim_history "Use these search options with a different query">
 <!ENTITY same_history "Run this search with the same options">
 
-	<!-- dict -->
+  <!-- dict -->
 
 <!ENTITY sTools.label "Tools">
 <!ENTITY dictHead "Dictionary">
@@ -66,7 +66,7 @@
 <!ENTITY dict_history "list of previous dictionary searches">
 <!ENTITY clear_dict "clear all history entries">
 
-	<!-- buttons -->
+  <!-- buttons -->
 
 <!ENTITY bBookmarks "Bookmarks ⇒">
 <!ENTITY bQuiz "Pali Quiz ⇒">

@@ -1,3 +1,5 @@
+'use strict';
+
 var DPRXML = {
   updateHierarchy: function (depth, event) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
@@ -45,7 +47,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -61,7 +63,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -78,7 +80,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -94,7 +96,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -241,7 +243,7 @@ var DPRXML = {
         }
 
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           $('#tsoP1').show();
@@ -259,7 +261,7 @@ var DPRXML = {
         }
 
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           $('#tsoP2').show();
@@ -278,7 +280,7 @@ var DPRXML = {
         }
 
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           $('#tsoP3').show();
@@ -296,7 +298,7 @@ var DPRXML = {
         }
 
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           $('#tsoP4').show();

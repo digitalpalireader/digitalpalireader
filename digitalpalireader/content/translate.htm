@@ -27,49 +27,49 @@
 <script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
 <script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
 <script>
-	var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-					   .getInterface(Components.interfaces.nsIWebNavigation)
-					   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-					   .rootTreeItem
-					   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-					   .getInterface(Components.interfaces.nsIDOMWindow); 
-	function onDocLoad() {
-		getconfig();
-		var link = document.location.href.split('?')[1];
-		if (link) {
-			var opts = link.split('&amp;');
-			var linkt = '';
-			var linkb = '';
-			for (i in opts) {
-				option = opts[i].split('=');
-				switch(option[0]) {
-					case 'phrase':
-						var phrase = decodeURIComponent(option[1]);
-				}
-			}
-			if(phrase) {
-				$('#input').val(phrase);
-				translateText();
-			}
-		}
-	}
-	function insertWordByWord() {
-		var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(G_uniRegExpNSG,'');
-		var words = conjugateWords(input);
-		var out = "";
-		for(var i = 0; i < words.length; i++) {
-			var options = "";
-			for(var j = 0; j < words[i].length; j++) {
-				options += '<li><span class="decl-grammar">'+words[i][j][0]+' form of '+words[i][j][1]+'</span><br/><span class="decl-english">'+words[i][j][2]+'</span></li>';
-				options = "$('#').html(unescape('"+escape('<ol>' + options + '</ol>')+"'))";
-			}
-			out += '<b>'+words[i][0][3]+'</b> '+words[i][0][2]+' ';
-		}
-		$('#translation').html(out);
-	}
-	function showMenu() {
-		mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
-	}
+  var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+             .getInterface(Components.interfaces.nsIWebNavigation)
+             .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+             .rootTreeItem
+             .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+             .getInterface(Components.interfaces.nsIDOMWindow);
+  function onDocLoad() {
+    getconfig();
+    var link = document.location.href.split('?')[1];
+    if (link) {
+      var opts = link.split('&amp;');
+      var linkt = '';
+      var linkb = '';
+      for (i in opts) {
+        option = opts[i].split('=');
+        switch(option[0]) {
+          case 'phrase':
+            var phrase = decodeURIComponent(option[1]);
+        }
+      }
+      if(phrase) {
+        $('#input').val(phrase);
+        translateText();
+      }
+    }
+  }
+  function insertWordByWord() {
+    var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(G_uniRegExpNSG,'');
+    var words = conjugateWords(input);
+    var out = "";
+    for(var i = 0; i < words.length; i++) {
+      var options = "";
+      for(var j = 0; j < words[i].length; j++) {
+        options += '<li><span class="decl-grammar">'+words[i][j][0]+' form of '+words[i][j][1]+'</span><br/><span class="decl-english">'+words[i][j][2]+'</span></li>';
+        options = "$('#').html(unescape('"+escape('<ol>' + options + '</ol>')+"'))";
+      }
+      out += '<b>'+words[i][0][3]+'</b> '+words[i][0][2]+' ';
+    }
+    $('#translation').html(out);
+  }
+  function showMenu() {
+    mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
+  }
 </script>
 
 
@@ -78,36 +78,36 @@
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="maf">
-		<div id="mafbc">
-			<p></p>
-			<input type="hidden" id="QwhichS" value="10" />
-			<p id="QwhichT" class="txt"></p>
-			<p class="oneDec">
-			  Enter a single Pali sentence below (Velthuis or Unicode):
-			</p>
-			<div align="center">
-				<textarea type="text" id="input" value="" class="dect" rows="3" cols="50"></textarea>
-				<p id="translation"/>
-				<p id="altTable"/>
-			</div>
-			<p class="controls">
-			  <button type="button" id="translate" class="control" onclick="translateText()" title="Translate the text">Translate</button>
-			  <button type="button" id="clear" class="control" onclick="insertWordByWord()" title="Translate each word">Word-by-word</button>
-			  <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
-			</p>
-			<hr/>
-			<div align="center">
-				<div align="justify" class="center tiny" style="width:600px;">
-					<i>Notes: this translation tool is highly experimental.  &nbsp;Most actual Pali sentences found in the Tipitaka probably won't translate completely, if it all. &nbsp;For an example of a sentence that does work, try clicking on this one:<br/><br/>
-				</div>
-				<div align="center" class="center tiny" style="width:600px;">
-					<a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">dhammikā upāsakā pāpakehi manussehi mā carantu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div id="alertc"><span id="alert" class="large"></span></div>
+  <div id="maf">
+    <div id="mafbc">
+      <p></p>
+      <input type="hidden" id="QwhichS" value="10" />
+      <p id="QwhichT" class="txt"></p>
+      <p class="oneDec">
+        Enter a single Pali sentence below (Velthuis or Unicode):
+      </p>
+      <div align="center">
+        <textarea type="text" id="input" value="" class="dect" rows="3" cols="50"></textarea>
+        <p id="translation"/>
+        <p id="altTable"/>
+      </div>
+      <p class="controls">
+        <button type="button" id="translate" class="control" onclick="translateText()" title="Translate the text">Translate</button>
+        <button type="button" id="clear" class="control" onclick="insertWordByWord()" title="Translate each word">Word-by-word</button>
+        <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
+      </p>
+      <hr/>
+      <div align="center">
+        <div align="justify" class="center tiny" style="width:600px;">
+          <i>Notes: this translation tool is highly experimental.  &nbsp;Most actual Pali sentences found in the Tipitaka probably won't translate completely, if it all. &nbsp;For an example of a sentence that does work, try clicking on this one:<br/><br/>
+        </div>
+        <div align="center" class="center tiny" style="width:600px;">
+          <a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">dhammikā upāsakā pāpakehi manussehi mā carantu</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="alertc"><span id="alert" class="large"></span></div>
 </div>
 
 </body>

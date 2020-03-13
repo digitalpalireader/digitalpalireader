@@ -73,12 +73,6 @@ body {
   min-width: 4rem;
 }
 
-#nav-title-button {
-  position: absolute;
-  right: 0px;
-  height: 33.5px;
-}
-
 #top-frame {
   width: 100%;
 }
@@ -124,7 +118,7 @@ hr {
   /*width: 100vw;*/
 }
 
-.mainContent {
+.featureTabContent {
   margin-top: 15px;
 }
 

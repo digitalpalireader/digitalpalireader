@@ -7,7 +7,7 @@
 
 <!ENTITY close.tip "Close section">
 
-	<!-- nav -->
+  <!-- nav -->
 
 <!ENTITY sSet.label "Set">
 <!ENTITY sBook.label "Book">
@@ -16,14 +16,14 @@
 <!ENTITY tik_text "Switch to Ṭīkā">
 <!ENTITY go_text "Load current section">
 
-	<!-- search -->
+  <!-- search -->
 
 <!ENTITY searchHead "Text Search">
 <!ENTITY searchGo.text "Search for word or phrase in selected volumes">
 <!ENTITY searchRx.text "Regular Expression Search">
 <!ENTITY searchRx.label "Rx">
 
-	<!-- dict -->
+  <!-- dict -->
 
 <!ENTITY dictHead "Dictionary">
 <!ENTITY dict_go "Lookup word in selected dictionary">
@@ -40,7 +40,7 @@
 <!ENTITY Ṭīka "Ṭīka Terms">
 <!ENTITY Title "Title Search">
 
-	<!-- buttons -->
+  <!-- buttons -->
 
 <!ENTITY bookmark.label "Bookmarks">
 <!ENTITY quiz.label "Pali Quiz">

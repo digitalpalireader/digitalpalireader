@@ -6,6 +6,7 @@
  *
  * Depending on where we are running, this module does the right thing.
  */
+'use strict';
 
 console.log('Loading DPR_PAL...');
 
@@ -85,51 +86,6 @@ console.log('Loading DPR_PAL...');
     return $.ajax({type:"HEAD",url: `${DPR_PAL.baseUrl}${fileLoc}`,async: false}).status!=404;
   };
 
-  DPR_PAL.openSideBar = () => {
-    if (DPR_PAL.isWeb) {
-      $('#sidebar').modal("show");
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.closeSideBar = () => {
-    if (DPR_PAL.isWeb) {
-      $('#sidebar').modal("hide");
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.setPaliTextContentHeight = () => {
-    DPR_PAL.bottomFrameUp() ? $("#paliTextContent").addClass("COLLAPSE") : $("#paliTextContent").removeClass("COLLAPSE");
-  }
-
-  const bottomFrameSelector = ".bottomFrame .bottomFrameContent";
-  DPR_PAL.openBottomFrame = () => {
-    if (DPR_PAL.isWeb) {
-      $(bottomFrameSelector).show();
-      if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").addClass("down");
-        DPR_PAL.setPaliTextContentHeight();
-      }
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
-  DPR_PAL.toggleBottomFrame = () => {
-    if (DPR_PAL.isWeb) {
-      $(bottomFrameSelector).slideToggle();
-      if ($(bottomFrameSelector).is(":visible")) {
-        $(".rotate").toggleClass("down");
-      }
-      DPR_PAL.setPaliTextContentHeight();
-    } else {
-      console.error("Not implemented for XUL");
-    }
-  }
-
   /*
   if 'copy permalink to clipboard' button on the modal is pressed , the focus is on the modal .
   thus execCommand("copy") does not copy from the element appended to the body .
@@ -152,21 +108,24 @@ console.log('Loading DPR_PAL...');
     }
   }
 
-  const dprSchemeUriCracker = /^(dpr):(.+)\?(.*)$/;
+  const dprSchemeUriCracker = /^dpr:(.+)\?(.*)$/;
   DPR_PAL.normalizeDprSchemeUri = uri => {
     if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
-      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$2.html?$3`);
+      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$1.html?$2`);
     } else {
       return uri;
     }
   }
 
-  DPR_PAL.enablePopover = (id, trigger) => {
+  DPR_PAL.enablePopover = (id, trigger, placement) => {
     $(id)
       .each(function() {
         $(this).popover({
           trigger: trigger,
           html: true,
+          container: "body",
+          boundary: "window",
+          placement: placement,
           content: () => $(`${id}-popover-content`).html(),
         })
       });
@@ -174,8 +133,22 @@ console.log('Loading DPR_PAL...');
 
   DPR_PAL.getDifId = () => /analysis=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
 
+  DPR_PAL.isLandingPageFeature = () => {
+    const indexOfQM = document.location.href.indexOf('?');
+    return indexOfQM === -1 || indexOfQM == (document.location.href.length - 1);
+  }
+
+  DPR_PAL.isNavigationFeature = () => {
+    return !DPR_PAL.isLandingPageFeature() && document.location.href.indexOf('?feature') === -1;
+  }
+
+  DPR_PAL.isSearchFeature = () => {
+    const matcher = DPR_PAL.isWeb ? /\?feature=search&/i : /search\.htm/i;
+    return matcher.exec(document.location.href);
+  }
+
   DPR_PAL.isDictionaryFeature = () => {
-    const matcher = DPR_PAL.isWeb ? /feature=dictionary/ : /dict\.htm/;
+    const matcher = DPR_PAL.isWeb ? /\?feature=dictionary&/i : /dict\.htm/i;
     return matcher.exec(document.location.href);
   }
 

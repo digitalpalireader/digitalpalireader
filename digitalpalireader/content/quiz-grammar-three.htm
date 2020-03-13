@@ -23,147 +23,147 @@
 <script type="text/javascript">
 
 function onDocLoad() {
-	getconfig();
-	newDMquiz();
-	init();
+  getconfig();
+  newDMquiz();
+  init();
 }
- 
+
 </script>
 </head>
 
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="maf">
-		<div id="mafbc">
-			<p></p>
-			<input type="hidden" id="QwhichS" value="10" />
-			<p id="QwhichT" class="txt"></p>
-			<p id="QwhichC" class="cite"></p>
-			<table id="Qdeclension" class="dec">
-			  <tbody>
-				<tr>
-				  <th class="dec" />
-				  <th class="toprow">SINGULAR</th>
-				  <th class="toprow">PLURAL</th>
-				</tr>
-				<tr>
-				  <th class="dec">NOM</th>
-				  
-				  <td class="decr" id="decr0"><div class="drag" id="drag0">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr1"><div class="drag" id="drag1">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">ACC</th>
-				  
-				  <td class="decr" id="decr2"><div class="drag" id="drag2">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr3"><div class="drag" id="drag3">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">INST</th>
-				  
-				  <td class="decr" id="decr4"><div class="drag" id="drag4">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr5"><div class="drag" id="drag5">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">DAT</th>
-				  
-				  <td class="decr" id="decr6"><div class="drag" id="drag6">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr7"><div class="drag" id="drag7">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">ABL</th>
-				  
-				  <td class="decr" id="decr8"><div class="drag" id="drag8">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr9"><div class="drag" id="drag9">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">GEN</th>
-				  
-				  <td class="decr" id="decr10"><div class="drag" id="drag10">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr11"><div class="drag" id="drag11">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">LOC</th>
-				  
-				  <td class="decr" id="decr12"><div class="drag" id="drag12">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr13"><div class="drag" id="drag13">
-					</div>
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">VOC</th>
-				  
-				  <td class="decr" id="decr14"><div class="drag" id="drag14">
-					</div>
-				  </td>
-				  
-				  <td class="decr" id="decr15"><div class="drag" id="drag15">
-					</div>
-				  </td>
-				</tr>
-			  </tbody>
-			</table>
-			<p class="controls">
-			  <button type="button" id="QcheckAns" class="control" onclick="checkMAnswers()" title="Check your answers (1)">Check</button>
-			  <button type="button" id="Qnew" class="control" onclick="resetMTable()" title="Get a new declension (4)">New</button>
-			</p>
-			<hr />
-			<div align="center">
-				<table>
-					<tr>
-						<td>
-							<b>Include:</b><br/>
-							<input type="checkbox" id="reg" checked> Regular Nouns<br/>
-							<input type="checkbox" id="irreg"> Irregular Nouns<br/>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+  <div id="maf">
+    <div id="mafbc">
+      <p></p>
+      <input type="hidden" id="QwhichS" value="10" />
+      <p id="QwhichT" class="txt"></p>
+      <p id="QwhichC" class="cite"></p>
+      <table id="Qdeclension" class="dec">
+        <tbody>
+        <tr>
+          <th class="dec" />
+          <th class="toprow">SINGULAR</th>
+          <th class="toprow">PLURAL</th>
+        </tr>
+        <tr>
+          <th class="dec">NOM</th>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+          <td class="decr" id="decr0"><div class="drag" id="drag0">
+          </div>
+          </td>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+          <td class="decr" id="decr1"><div class="drag" id="drag1">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">ACC</th>
 
-	<div id="alertc"><span id="alert" class="large"></span></div>
+          <td class="decr" id="decr2"><div class="drag" id="drag2">
+          </div>
+          </td>
+
+          <td class="decr" id="decr3"><div class="drag" id="drag3">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">INST</th>
+
+          <td class="decr" id="decr4"><div class="drag" id="drag4">
+          </div>
+          </td>
+
+          <td class="decr" id="decr5"><div class="drag" id="drag5">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">DAT</th>
+
+          <td class="decr" id="decr6"><div class="drag" id="drag6">
+          </div>
+          </td>
+
+          <td class="decr" id="decr7"><div class="drag" id="drag7">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">ABL</th>
+
+          <td class="decr" id="decr8"><div class="drag" id="drag8">
+          </div>
+          </td>
+
+          <td class="decr" id="decr9"><div class="drag" id="drag9">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">GEN</th>
+
+          <td class="decr" id="decr10"><div class="drag" id="drag10">
+          </div>
+          </td>
+
+          <td class="decr" id="decr11"><div class="drag" id="drag11">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">LOC</th>
+
+          <td class="decr" id="decr12"><div class="drag" id="drag12">
+          </div>
+          </td>
+
+          <td class="decr" id="decr13"><div class="drag" id="drag13">
+          </div>
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">VOC</th>
+
+          <td class="decr" id="decr14"><div class="drag" id="drag14">
+          </div>
+          </td>
+
+          <td class="decr" id="decr15"><div class="drag" id="drag15">
+          </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="controls">
+        <button type="button" id="QcheckAns" class="control" onclick="checkMAnswers()" title="Check your answers (1)">Check</button>
+        <button type="button" id="Qnew" class="control" onclick="resetMTable()" title="Get a new declension (4)">New</button>
+      </p>
+      <hr />
+      <div align="center">
+        <table>
+          <tr>
+            <td>
+              <b>Include:</b><br/>
+              <input type="checkbox" id="reg" checked> Regular Nouns<br/>
+              <input type="checkbox" id="irreg"> Irregular Nouns<br/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+
+  <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+
+  <script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+
+  <div id="alertc"><span id="alert" class="large"></span></div>
 </div>
 
 </body>

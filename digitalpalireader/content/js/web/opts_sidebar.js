@@ -1,3 +1,5 @@
+'use strict';
+
 if (DPR_PAL.isWeb) {
   console.log('Loading opts_sidebar.js...');
 } else {

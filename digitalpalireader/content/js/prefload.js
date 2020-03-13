@@ -1,3 +1,5 @@
+'use strict';
+
 // TODO: Needs to be pulled into the PAL.
 const setDefPrefs = DPR_PAL.isXUL ? XUL_setDefPrefs : WEB_setDefPrefs;
 const setPrefs = DPR_PAL.isXUL ? XUL_setPrefs : WEB_setPrefs;
@@ -7,11 +9,11 @@ const getPref = DPR_PAL.isXUL ? XUL_getPref : WEB_getPref;
 const erasePref = DPR_PAL.isXUL ? XUL_erasePref : WEB_erasePref;
 
 if (DPR_PAL.isXUL) {
-	var prefStem = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+  var prefStem = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 
-	var G_BoolPrefs = prefStem.getBranch("extensions.digitalpalireader.Bool.");
-	var G_CharPrefs = prefStem.getBranch("extensions.digitalpalireader.Char.");
-	var G_IntPrefs = prefStem.getBranch("extensions.digitalpalireader.Int.");
+  var G_BoolPrefs = prefStem.getBranch("extensions.digitalpalireader.Bool.");
+  var G_CharPrefs = prefStem.getBranch("extensions.digitalpalireader.Char.");
+  var G_IntPrefs = prefStem.getBranch("extensions.digitalpalireader.Int.");
 }
 
 var G_prefTypes = [];
@@ -20,45 +22,45 @@ G_prefTypes['string'] = 'Char';
 G_prefTypes['boolean'] = 'Bool';
 
 function XUL_getPref(name) {
-	var type = G_prefTypes[typeof(DPR_prefsD[name])];
-	var ret;
-	try{
-		switch(type) {
-			case "Int":
-				ret = G_IntPrefs.getIntPref(name);
-				break;
-			case "Char":
-				ret = G_CharPrefs.getCharPref(name);
-				break;
-			case "Bool":
-				ret = G_BoolPrefs.getBoolPref(name);
-				break;
-		}
-	}
-	catch(ex) {
-	}
-	return ret;
+  var type = G_prefTypes[typeof(DPR_prefsD[name])];
+  var ret;
+  try{
+    switch(type) {
+      case "Int":
+        ret = G_IntPrefs.getIntPref(name);
+        break;
+      case "Char":
+        ret = G_CharPrefs.getCharPref(name);
+        break;
+      case "Bool":
+        ret = G_BoolPrefs.getBoolPref(name);
+        break;
+    }
+  }
+  catch(ex) {
+  }
+  return ret;
 }
 
 function XUL_setPref(name,val) {
-	var type = G_prefTypes[typeof(val)];
-	var ret;
-	try{
-		switch(type) {
-			case "Int":
-				ret = G_IntPrefs.setIntPref(name,val);
-				break;
-			case "Char":
-				ret = G_CharPrefs.setCharPref(name,val);
-				break;
-			case "Bool":
-				ret = G_BoolPrefs.setBoolPref(name,val);
-				break;
-		}
-	}
-	catch(ex) {
-	}
-	return ret;
+  var type = G_prefTypes[typeof(val)];
+  var ret;
+  try{
+    switch(type) {
+      case "Int":
+        ret = G_IntPrefs.setIntPref(name,val);
+        break;
+      case "Char":
+        ret = G_CharPrefs.setCharPref(name,val);
+        break;
+      case "Bool":
+        ret = G_BoolPrefs.setBoolPref(name,val);
+        break;
+    }
+  }
+  catch(ex) {
+  }
+  return ret;
 
 }
 
@@ -152,45 +154,45 @@ DPR_prefsD['altlimit'] = 20;
 var DPR_prefs = [];
 
 function XUL_setDefPrefs() {
-	var i;
-	for (i in DPR_prefsD) {
-		DPR_prefs[i] = getPref(i);
-	}
+  var i;
+  for (i in DPR_prefsD) {
+    DPR_prefs[i] = getPref(i);
+  }
 }
 setDefPrefs();
 
 function WEB_setDefPrefs() {
-	for (const i in DPR_prefsD) {
-		DPR_prefs[i] = getPref(i);
-	}
+  for (const i in DPR_prefsD) {
+    DPR_prefs[i] = getPref(i);
+  }
 }
 
 function WEB_setPrefs() {
-	var i;
-	for (i in DPR_prefsD) {
-		var pref = WEB_getPref(i);
-		if(pref === null)
-			pref = DPR_prefsD[i];
+  var i;
+  for (i in DPR_prefsD) {
+    var pref = WEB_getPref(i);
+    if(pref === null)
+      pref = DPR_prefsD[i];
 
-		DPR_prefs[i] = pref;
-	}
+    DPR_prefs[i] = pref;
+  }
 }
 
 function WEB_savePrefs() {
-	WEB_setPrefs();
+  WEB_setPrefs();
 }
 
 function WEB_setPref(name,value) {
   var expires = "";
-	var date = new Date();
-	date.setTime(date.getTime() + (3650*24*60*60*1000));
-	expires = "; expires=" + date.toUTCString();
+  var date = new Date();
+  date.setTime(date.getTime() + (3650*24*60*60*1000));
+  expires = "; expires=" + date.toUTCString();
   document.cookie = name + "=" + value + expires + "; path=/";
 }
 
 function WEB_getPref(name) {
-	const pref = DPR_prefsD[name];
-	return /(chrome:)/.test(pref) ? '' : pref;
+  const pref = DPR_prefsD[name];
+  return /(chrome:)/.test(pref) ? '' : pref;
 }
 
 function WEB_getPref_FromStore(name) {

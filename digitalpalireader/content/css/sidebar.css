@@ -2,7 +2,7 @@
 
 /*font*/
 
-caption,listbox,menulist,listitem,menuitem, input, textarea,checkbox,button,toolbarbutton { 
+caption,listbox,menulist,listitem,menuitem, input, textarea,checkbox,button,toolbarbutton {
 }
 
 /*color & normal size */
@@ -39,7 +39,7 @@ button,toolbarbutton {
 /* end static */
 
 .bold {
-	font-weight:bold;
+  font-weight:bold;
 }
 
 #outer {
@@ -48,23 +48,23 @@ padding:10px;
 }
 
 menulist {
-	min-height:28px;
-	max-height:34px;
+  min-height:28px;
+  max-height:34px;
 }
 textbox {
-	min-height:20px;
-	max-height:25px;
+  min-height:20px;
+  max-height:25px;
 }
 toolbarbutton {
-	min-height:30px;
-	max-height:40px;
+  min-height:30px;
+  max-height:40px;
 }
 
 .pointer:hover{
-	cursor:pointer;
+  cursor:pointer;
 }
 
 
 listbox {
-	width:auto;
+  width:auto;
 }

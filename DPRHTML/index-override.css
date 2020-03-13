@@ -1,0 +1,103 @@
+#content {
+  width: 100%;
+  height: 100%;
+}
+
+#top-frame {
+  width: 100%;
+  height: 100%;
+}
+
+#diva {
+  width: 100%;
+  height: 100%;
+}
+
+#maf {
+  width: 100%;
+  height: 100%;
+}
+
+#mafb {
+  width: 100%;
+  height: 100%;
+}
+
+#mafbc {
+  width: 100%;
+  /* height: 100%; */
+  padding: 0px;
+}
+
+#paliTextContent {
+  width: 100%;
+  height: unset;
+  overflow: hidden;
+}
+
+#paliTextContent .card {
+  background-color: transparent;
+}
+
+#bottom {
+  position: unset;
+  height: unset;
+  overflow: unset;
+}
+
+.dictType-seperator-option {
+  font-size: 0.2em;
+}
+
+#dictAdvOpts .card-header > a {
+  display: block;
+  position: relative;
+}
+
+#dictAdvOpts .card-header > a:after {
+  content: "\f078"; /* fa-chevron-down */
+  font-family: 'FontAwesome';
+  position: absolute;
+  right: 0;
+}
+
+#dictAdvOpts .card-header > a[aria-expanded="true"]:after {
+  content: "\f077"; /* fa-chevron-up */
+}
+
+.popover-link {
+  color: blue;
+  text-decoration: underline !important;
+}
+
+#search {
+  overflow: hidden;
+  position: static;
+}
+
+#search-sets, #search-header-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#search-sets li {
+  margin: 0.5rem;
+}
+
+#search-sets li a {
+  text-decoration: underline;
+}
+
+.navigation-hierarchy-layout {
+  display: grid;
+  grid-template-columns: auto 2rem;
+  grid-auto-rows: auto;
+  grid-auto-flow: row;
+  grid-gap: 0.1rem 0.1rem;
+}

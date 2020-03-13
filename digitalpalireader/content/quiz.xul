@@ -4,23 +4,23 @@
 <!DOCTYPE window SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <window id="DPR" title="&quiz.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<tabbox class="chromeback" flex="1">
-		<tabs class="chromeback">
-			<tab class="chromeback" label="Vocab"/>
-			<tab class="chromeback" label="Nouns"/>
-			<tab class="chromeback" label="Verbs"/>
-		</tabs>
-		<tabpanels class="chromeback" flex="1">
-			<tabpanel class="chromeback" id="vocab">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-vocab.xul" flex="1" persist="height"/>
-			</tabpanel>
-			<tabpanel class="chromeback" id="nouns">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-declensions.xul" flex="1" persist="height"/>
-			</tabpanel>
-			<tabpanel class="chromeback" id="verbs">
-				<browser disablehistory="true" type="content" id="quiz-browser" src="quiz-verbs.xul" flex="1" persist="height"/>
-			</tabpanel>
-		</tabpanels>
-	</tabbox>
+  <tabbox class="chromeback" flex="1">
+    <tabs class="chromeback">
+      <tab class="chromeback" label="Vocab"/>
+      <tab class="chromeback" label="Nouns"/>
+      <tab class="chromeback" label="Verbs"/>
+    </tabs>
+    <tabpanels class="chromeback" flex="1">
+      <tabpanel class="chromeback" id="vocab">
+        <browser disablehistory="true" type="content" id="quiz-browser" src="quiz-vocab.xul" flex="1" persist="height"/>
+      </tabpanel>
+      <tabpanel class="chromeback" id="nouns">
+        <browser disablehistory="true" type="content" id="quiz-browser" src="quiz-declensions.xul" flex="1" persist="height"/>
+      </tabpanel>
+      <tabpanel class="chromeback" id="verbs">
+        <browser disablehistory="true" type="content" id="quiz-browser" src="quiz-verbs.xul" flex="1" persist="height"/>
+      </tabpanel>
+    </tabpanels>
+  </tabbox>
 </window>
 

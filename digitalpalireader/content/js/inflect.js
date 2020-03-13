@@ -1,3 +1,5 @@
+'use strict';
+
 //ilectGroup#InflectInfo = InflectInfoDesc,NounMascSubGroup,NounNeutSubGroup,NounFemSubGroup
 
 var iI = [];

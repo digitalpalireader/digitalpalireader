@@ -4,19 +4,18 @@ root = true
 [*]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
-tab_width = 4
+tab_width = 2
 
 [*.{js,ts,fs,css,json,jsx,tsx,rc,*rc,*ignore,*config}]
 indent_size = 2
 
 [*.md]
 max_line_length = off
-trim_trailing_whitespace = false
 
-[*.{html,xml,csproj,targets}]
+[*.{html,htm,xul,xml,csproj,targets}]
 indent_size = 2
 tab_width = 2
 

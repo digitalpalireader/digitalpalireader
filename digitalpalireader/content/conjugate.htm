@@ -2,104 +2,104 @@
 
 <html>
 <head>
-	<title>DPR Conjugation</title>
-	<link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
-	<link rel="stylesheet" type="text/css" href="css/styles.css">
-	<link rel="stylesheet" type="text/css" href="css/quiz.css">
-	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<script>
-		var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-						   .getInterface(Components.interfaces.nsIWebNavigation)
-						   .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
-						   .rootTreeItem
-						   .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-						   .getInterface(Components.interfaces.nsIDOMWindow); 
-		function onDocLoad() {
-			getconfig();
-			var link = document.location.href.split('?')[1];
-			if (link) {
-				var opts = link.split('&amp;');
-				var linkt = '';
-				var linkb = '';
-				for (i in opts) {
-					option = opts[i].split('=');
-					switch(option[0]) {
-						case 'word':
-							var word = option[1];
-							break;
-						case 'form':
-							var form = option[1];
-							break;
-					}
-				}
-				if(word)
-					$('#word').val(word);
-				if(form)
-					$('#form').val(form);
-				insertConj();
-			}
-		}
-		function insertConj() {
-			var word = $('#word').val();
-			var form = $('#form').val();
-			history.pushState({}, 'Title', 'chrome://digitalpalireader/content/conjugate.htm'+(word.length?'?word='+toVel(word):'')+(form.length?(word?'&':'?')+'form='+toVel(form):''));
-			$('#word').val(toUni(word));
-			$('#form').val(toUni(form));
-			var out = conjugateWord(word,form);
-			$('#conjugation').html(out?out:'<span class="red">no conjugation found</span>');
-		}
-		function showMenu() {
-			mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
-		}
-	</script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
-	<!-- PAL must be the first script after JQuery. -->
-	<script language="JavaScript1.3" type="text/javascript" src="js/dpr_pal.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translate.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/eglossary.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/eng_verbs.js"></script>
+  <title>DPR Conjugation</title>
+  <link rel="shortcut icon" href="chrome://digitalpalireader/skin/icons/logo.png">
+  <link rel="stylesheet" type="text/css" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" href="css/quiz.css">
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <script>
+    var mainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+               .getInterface(Components.interfaces.nsIWebNavigation)
+               .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
+               .rootTreeItem
+               .QueryInterface(Components.interfaces.nsIInterfaceRequestor)
+               .getInterface(Components.interfaces.nsIDOMWindow);
+    function onDocLoad() {
+      getconfig();
+      var link = document.location.href.split('?')[1];
+      if (link) {
+        var opts = link.split('&amp;');
+        var linkt = '';
+        var linkb = '';
+        for (i in opts) {
+          option = opts[i].split('=');
+          switch(option[0]) {
+            case 'word':
+              var word = option[1];
+              break;
+            case 'form':
+              var form = option[1];
+              break;
+          }
+        }
+        if(word)
+          $('#word').val(word);
+        if(form)
+          $('#form').val(form);
+        insertConj();
+      }
+    }
+    function insertConj() {
+      var word = $('#word').val();
+      var form = $('#form').val();
+      history.pushState({}, 'Title', 'chrome://digitalpalireader/content/conjugate.htm'+(word.length?'?word='+toVel(word):'')+(form.length?(word?'&':'?')+'form='+toVel(form):''));
+      $('#word').val(toUni(word));
+      $('#form').val(toUni(form));
+      var out = conjugateWord(word,form);
+      $('#conjugation').html(out?out:'<span class="red">no conjugation found</span>');
+    }
+    function showMenu() {
+      mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.openBottomMenu();
+    }
+  </script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
+  <!-- PAL must be the first script after JQuery. -->
+  <script language="JavaScript1.3" type="text/javascript" src="js/dpr_pal.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/prefload.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/config.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/translit.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/translate.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/format.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/ped.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/eglossary.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/analysis_declension.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/analysis_arrays.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/analysis_function.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/eng_verbs.js"></script>
 </head>
 
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="maf">
-		<div id="mafbc">
-			<form onsubmit="insertConj(); return false">
-				<p></p>
-				<input type="hidden" id="QwhichS" value="10" />
-				<p id="QwhichT" class="txt"></p>
-				<p id="QwhichC" class="cite"></p>
-				<p class="oneDec">
-				  Enter a word to conjugate, and/or declension form:
-				</p>
-				<div align="center">
-					word: <input type="text" id="word" value="" class="dect" /><br/>
-					form: <input type="text" id="form" value="" class="dect" />
-					<p id="conjugation"/>
-				</div>
-				<p class="controls">
-				  <input type="button" id="conjugate" class="control" onclick="insertConj()" title="Translate the text" value="Conjugate">
-				  <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
-				</p>
-			</form>
-			<hr/>
-		</div>
-	</div>
-	<div id="alertc"><span id="alert" class="large"></span></div>
+  <div id="maf">
+    <div id="mafbc">
+      <form onsubmit="insertConj(); return false">
+        <p></p>
+        <input type="hidden" id="QwhichS" value="10" />
+        <p id="QwhichT" class="txt"></p>
+        <p id="QwhichC" class="cite"></p>
+        <p class="oneDec">
+          Enter a word to conjugate, and/or declension form:
+        </p>
+        <div align="center">
+          word: <input type="text" id="word" value="" class="dect" /><br/>
+          form: <input type="text" id="form" value="" class="dect" />
+          <p id="conjugation"/>
+        </div>
+        <p class="controls">
+          <input type="button" id="conjugate" class="control" onclick="insertConj()" title="Translate the text" value="Conjugate">
+          <button type="button" id="clear" class="control" onclick="clearText()" title="Clear text">Clear</button>
+        </p>
+      </form>
+      <hr/>
+    </div>
+  </div>
+  <div id="alertc"><span id="alert" class="large"></span></div>
 </div>
 
 </body>
