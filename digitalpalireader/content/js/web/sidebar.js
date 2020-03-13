@@ -259,6 +259,7 @@ var digitalpalireader = {
             DPRSend.sendQuickLink("", $('#nav-quicklinks').val());
           }
           catch(err) {
+            console.error('Potentially a bug.', err);
             alert("Invalid quick link.");
             aplace = this.getSubNavArray();
             loadXMLSection("","",aplace);

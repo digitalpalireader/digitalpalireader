@@ -465,9 +465,9 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
       book = a1 - 1;
       var found = 0;
       out:
-      for (vagga in amlist[book]) {
-        for(sutta in amlist[book][vagga]) {
-          for(section in amlist[book][vagga][sutta]) {
+      for (var vagga in amlist[book]) {
+        for(var sutta in amlist[book][vagga]) {
+          for(var section in amlist[book][vagga][sutta]) {
             if (parseInt(amlist[book][vagga][sutta][section][0]) == a2 || (parseInt(amlist[book][vagga][sutta][section][0]) < a2 && parseInt(amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]) > a2)) {
               found = 1;
               break out;
@@ -499,8 +499,8 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
       }
       var found = 0;
       out:
-      for(sutta in smlist[a1]) {
-        for(section in smlist[a1][sutta]) {
+      for(var sutta in smlist[a1]) {
+        for(var section in smlist[a1][sutta]) {
           if (parseInt(smlist[a1][sutta][section]) == a2) {
             found = 1;
             break out;
@@ -550,7 +550,7 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
     return (a2 > vs[0]?null:[a2-1,0,0]);
   }
   var cnt = 0;
-  for (i in ss) {
+  for (var i in ss) {
     cnt+=ss[i];
   }
   if(vss[4])
@@ -565,7 +565,7 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
   var sutta = 0;
   var section = 0;
 
-  for (i in ss) {
+  for (var i in ss) {
     cnt+=ss[i];
     if(a2 > cnt) {
       cnt2++;
@@ -577,7 +577,7 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
     }
     else {
       section = a2 - 1;
-      for(j=0;j<cnt2; j++) {
+      for(var j=0;j<cnt2; j++) {
         section -= ss[j];
       }
       break;
