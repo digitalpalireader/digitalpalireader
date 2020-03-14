@@ -114,6 +114,14 @@ body {
   font-weight: bold;
 }
 
+#add-home-button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: Verdana, sans-serif;
+  color: rgb(0, 119, 10);
+}
+
 hr {
   /*width: 100vw;*/
 }

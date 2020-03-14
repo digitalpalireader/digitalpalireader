@@ -14,7 +14,7 @@ export function initServiceWorker() {
   }
 
   let deferredPrompt;
-  const addBtn = document.querySelector('#add-home');
+  const addBtn = document.querySelector('#add-home-button');
   addBtn.style.display = 'none';
 
   window.addEventListener('beforeinstallprompt', (e) => {

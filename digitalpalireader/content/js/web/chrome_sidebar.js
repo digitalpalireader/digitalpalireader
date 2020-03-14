@@ -32,7 +32,8 @@ var DPRChrome = {
   },
   openDPRTab: function (permalink, id, reuse) {
 
-      if (permalink.indexOf('?feature=search') > -1 || permalink.indexOf('?feature=dictionary') > -1) {
+      if (window.matchMedia('(display-mode: standalone)').matches && (
+        permalink.indexOf('?feature=search') > -1 || permalink.indexOf('?feature=dictionary') > -1)) {
         window.open(permalink, id).focus();
       }
       else {
