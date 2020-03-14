@@ -48,7 +48,7 @@ function bookmarkframe(refresh)
   var theHistory = getHistory();
   var hout = '';
   var isclear = '';
-  for (i in theHistory) {
+  for (var i in theHistory) {
     var thist = theHistory[i].split('@');
 
     if(DPR_prefs['nigahita']) {
@@ -169,7 +169,7 @@ function convertOldBookmarks() {
     }
   }
 
-  for (i in ba) {
+  for (var i in ba) {
     saveBookmark(i,ba[i]['loc'],ba[i]['desc'],ba[i]['scroll'],1);
   }
 }

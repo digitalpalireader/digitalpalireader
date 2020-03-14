@@ -43,7 +43,7 @@ var DPRNav = {
     else var titles = nikvoladi[nik + G_hier];
     var bookNode = document.getElementById('book');
     while (bookNode.itemCount > 0) bookNode.removeItemAt(0);
-    for (i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
       if (nik == 'k' || nik == 'y' || nik == 'n') {
         var title = G_kynames[nik][titles[i]];
         var val = titles[i] + 1;

@@ -5,11 +5,11 @@ function translateTextx() {
   var y = '';
   var z = '';
   var cnt = 0;
-  for (i in yt) {
+  for (var i in yt) {
     window.dump(cnt+' of 20926 - '+ Math.floor((cnt++)/20926*100)+'% finished\n');
     var aa = [],bb = [];
     var a = new RegExp('(^|[ .,;])'+toUni(i)+'($|[ .,;])');
-    for(j in epd) {
+    for(var j in epd) {
       b = epd[j].split('^');
       if(a.test(b[1])) {
         c = yt[i][2].search(b[0]);
@@ -22,12 +22,12 @@ function translateTextx() {
       }
     }
     if(aa.length)
-      for(j in aa) {
+      for(var j in aa) {
         cc[i] = aa[j];
         break;
       }
     //~ else if(bb.length)
-      //~ for(j in bb) {
+      //~ for(var j in bb) {
         //~ cc[i] = bb[j];
         //~ break;
       //~ }
@@ -35,9 +35,9 @@ function translateTextx() {
       dd[i] = 'unknown';
   }
 
-  for (i in cc)
+  for (var i in cc)
     x+='eg["'+i+'"] = "'+cc[i]+'";<br/>';
-  for (i in dd)
+  for (var i in dd)
     y+='eg["'+i+'"] = "'+dd[i]+'";<br/>';
 
   $('#translation').html(x+'<hr/><hr/><hr/>'+y);
@@ -155,13 +155,13 @@ function arrangeWords(wordst,alts) {
 
     // prefer special words
 
-    for(j=0;j<wordst[i].length;j++) {
+    for(var j=0;j<wordst[i].length;j++) {
       if(wordst[i][j][5] && wordst[i][j][4]['special']) {
         wgtemp.push(wordst[i][j]);
       }
     }
     if(wgtemp.length) {
-      for(j=0;j<wordst[i].length;j++) {
+      for(var j=0;j<wordst[i].length;j++) {
         if(!wordst[i][j][5] || wordst[i][j][4]['special'])
           wgtemp.push = wordst[i][j];
       }
@@ -169,13 +169,13 @@ function arrangeWords(wordst,alts) {
     }
     // prefer genitives
 
-    for(j=0;j<wordst[i].length;j++) {
+    for(var j=0;j<wordst[i].length;j++) {
       if(wordst[i][j][2] && wordst[i][j][2][1] == 6) {
         wgtemp.push(wordst[i][j]);
       }
     }
     if(wgtemp.length) {
-      for(j=0;j<wordst[i].length;j++) {
+      for(var j=0;j<wordst[i].length;j++) {
         if(!wordst[i][j][2] || wordst[i][j][2][1] != 6)
           wgtemp.push = wordst[i][j];
       }
@@ -186,7 +186,7 @@ function arrangeWords(wordst,alts) {
   }
   for(var i=0;i<words.length;i++) {
 
-    for(j=0;j<words[i].length;j++) {
+    for(var j=0;j<words[i].length;j++) {
       if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative
         continue;
       if(!words[i][j][1] && !words[i][j][2])
@@ -229,7 +229,7 @@ function arrangeWords(wordst,alts) {
   if(inter[0].length) { // subjects
     compat = checkCompatibleNoun(inter[0],chosen,words);
     if(compat[1]) { // decided
-      for(i in compat[0]) {
+      for(var i in compat[0]) {
         if(!chosen[compat[0][i][0]])
           chosen[compat[0][i][0]] = [0,compat[0][i][1]];
       }
@@ -246,13 +246,13 @@ function arrangeWords(wordst,alts) {
     // remove chosen;
     var choices1 = [];
 
-    for (i in inter[1])
+    for (var i in inter[1])
       if(!chosen[inter[1][i][0]])
         choices1.push(inter[1][i]);
 
     compat = checkCompatibleNoun(choices1,chosen,words);
     if(compat[1]) {
-      for(i in compat[0]) {
+      for(var i in compat[0]) {
         if(!chosen[compat[0][i][0]])
           chosen[compat[0][i][0]] = [1,compat[0][i][1]];
       }
@@ -261,7 +261,7 @@ function arrangeWords(wordst,alts) {
     }
     else { // punting
       inter[1] = [];
-      for(i in compat[0]) {
+      for(var i in compat[0]) {
         inter[1].push(compat[0][i]);
       }
     }
@@ -271,13 +271,13 @@ function arrangeWords(wordst,alts) {
     // remove chosen;
     var choicesV = [];
 
-    for (i in inter['v'])
+    for (var i in inter['v'])
       if(!chosen[inter['v'][i][0]])
         choicesV.push(inter['v'][i]);
 
     compat = checkCompatibleVerb(choicesV,chosen,words);
     if(compat[1]) {
-      for(i in compat[0]) {
+      for(var i in compat[0]) {
         if(!chosen[compat[0][i][0]])
           chosen[compat[0][i][0]] = ['v',compat[0][i][1]];
       }
@@ -287,7 +287,7 @@ function arrangeWords(wordst,alts) {
     }
     else { // punting
       inter['v'] = [];
-      for(i in compat[0]) {
+      for(var i in compat[0]) {
         inter['v'].push(compat[0][i]);
       }
     }
@@ -298,14 +298,14 @@ function arrangeWords(wordst,alts) {
   if(inter[0].length && G_verbDecl) {
     // remove chosen;
     var choices0 = [];
-    for (i in inter[0]) {
+    for (var i in inter[0]) {
       if(!chosen[inter[0][i][0]])
         choices0.push(inter[0][i]);
     }
     if(choices0.length) {
       compat = checkCompatibleNoun(choices0,chosen,words);
       if(compat[1]) {
-        for(i in compat[0]) {
+        for(var i in compat[0]) {
           if(!chosen[compat[0][i][0]])
             chosen[compat[0][i][0]] = [0,compat[0][i][1]];
         }
@@ -323,7 +323,7 @@ function arrangeWords(wordst,alts) {
 
   // now, just fill them in, noting where we've forced. (this may have to change)
 
-  for(i in words) {
+  for(var i in words) {
     if(chosen[i]) {
       if(!alts) // don't recreate if we are using it
         G_altChoices[i] = [words[i],j];
@@ -336,7 +336,7 @@ function arrangeWords(wordst,alts) {
         continue;
       }
       if(pendI.length) {
-        for (k in pendI) {
+        for (var k in pendI) {
           outer[chosen[i][0]].push(pendI[k]);
         }
         pendI = [];
@@ -344,14 +344,14 @@ function arrangeWords(wordst,alts) {
       outer[chosen[i][0]].push(words[i][chosen[i][1]]);
       if(pendG.length) {
         outer[chosen[i][0]].push(G_joints['n'][5]); // push preposition
-        for (k in pendG) {
+        for (var k in pendG) {
           outer[chosen[i][0]].push(pendG[k]);
         }
         pendG = [];
       }
       continue;
     }
-    for(j in words[i]) {  // for the rest, choose first, then alt the rest
+    for(var j in words[i]) {  // for the rest, choose first, then alt the rest
 
       if(alts && alts[i] && alts[i][1] != 0 && alts[i][1] != j) // chose another alternative
         continue;
@@ -380,12 +380,12 @@ function arrangeWords(wordst,alts) {
       else
         tint = 'o';
       if (pendI.length) { // add indeclinables
-        for (k in pendI)
+        for (var k in pendI)
           outer[tint].push(pendI[k]);
         pendI = [];
       }
       if (pendG.length) { // add genitives
-        for (k in pendG)
+        for (var k in pendG)
           outer[tint].push(pendG[k]);
         pendG = [];
       }
@@ -396,7 +396,7 @@ function arrangeWords(wordst,alts) {
 
   // now put it all together
 
-  for (i in outer) {
+  for (var i in outer) {
     if(outer[i].length > 1 || (outer[i].length == 1 && outer[i][0].length > 1)) {
       var joined = '';
       if(i != 'v' && i != 'o') // nominal, add prepositions, plural
@@ -404,7 +404,7 @@ function arrangeWords(wordst,alts) {
       else if(i == 'v') // verbal, add prepositions
         joined = addPhrasePreps(outer[i],G_verbDecl[0]-1,'v',true);
       else
-        for(j=0;j<outer[i].length;j++) {
+        for(var j=0;j<outer[i].length;j++) {
           if(typeof(outer[i][j]) == 'string') {
             joined += (j>0?' ':'')+outer[i][j];
           }
@@ -435,7 +435,7 @@ function checkCompatibleNoun(input,chosen,words) {
 
     var og = 7;
     // first, check for words that are already chosen for this array, use their gender
-    for(i in chosen) {
+    for(var i in chosen) {
       var ww = words[i];
       if(ww[0][2] && ww[0][2][0]!=7) {
         var og = ww[0][2][0];
@@ -449,7 +449,7 @@ function checkCompatibleNoun(input,chosen,words) {
     }
 
     // filter out other genders, tenses and numbers (TODO tenses)
-    for (i in input) {
+    for (var i in input) {
       var g = words[input[i][0]][input[i][1]][2];
       if(g[0] & og && (!vn || g[2] == vn)) // okay
         choices.push(input[i]);
@@ -458,17 +458,17 @@ function checkCompatibleNoun(input,chosen,words) {
     // if still multi, check and see if compatible
     if((og > 4 || og == 3) && choices.length > 1) {
       var gg = [0,0,0];
-      for(i in choices) {
+      for(var i in choices) {
         g = words[choices[i][0]][choices[i][1]][2][0];
-        for(j in gg){
+        for(var j in gg){
           if(j & g)
             gg[j]++;
         }
       }
       // check compat
-      for(j in gg){
+      for(var j in gg){
         if(gg[j] == choices.length) { // all compatible
-          for(i in choices) {
+          for(var i in choices) {
             outerb.push(choices[i]);
           }
           choices = [];
@@ -477,12 +477,12 @@ function checkCompatibleNoun(input,chosen,words) {
       }
       // if still choices, punt
       input = [];
-      for(i in choices) {
+      for(var i in choices) {
         input.push(choices[i]);
       }
     }
     else {
-      for(i in choices) {
+      for(var i in choices) {
         outerb.push(choices[i]);
       }
       input = [];
@@ -508,7 +508,7 @@ function checkCompatibleVerb(input,chosen,words) {
     // tense
 
     // first, check for words that are only this array, use their tense
-    for(i in chosen) {
+    for(var i in chosen) {
       if(words[i][0][2]) {
         var ww = words[i][0][2][0];
         break; // only one verb per sentence...
@@ -516,7 +516,7 @@ function checkCompatibleVerb(input,chosen,words) {
     }
 
     // if forced tense, filter out other tenses
-    for (i in input) {
+    for (var i in input) {
       var t = words[input[i][0]][input[i][1]][2][0];
       if(!ww || ww == t) // okay
         choices.push(input[i]);
@@ -525,7 +525,7 @@ function checkCompatibleVerb(input,chosen,words) {
     // if still multi, check and see if compatible, multiple verbs (this IS rare...)
     if(choices.length > 1) {
       var tt = [];
-      for(i in choices) {
+      for(var i in choices) {
         t = words[choices[i][0]][choices[i][1]][2][0];
         if(!tt[t])
           tt[t] = 1;
@@ -533,9 +533,9 @@ function checkCompatibleVerb(input,chosen,words) {
           tt[t]++;
       }
       // check compat
-      for(j in tt){
+      for(var j in tt){
         if(tt[j] == choices.length) { // all compatible
-          for(i in choices) {
+          for(var i in choices) {
             outerb.push(choices[i]);
           }
           choices = [];
@@ -544,12 +544,12 @@ function checkCompatibleVerb(input,chosen,words) {
       }
       // if still choices, punt
       input = [];
-      for(i in choices) {
+      for(var i in choices) {
         input.push(choices[i]);
       }
     }
     else {
-      for(i in choices) {
+      for(var i in choices) {
         outerb.push(choices[i]);
       }
       input = [];
@@ -601,7 +601,7 @@ function translateWord(word,idx) {
       outs.push([trans,type,deca,word,meta,idx]);
     }
     else{
-      for(i in G_defDecl[type]) {
+      for(var i in G_defDecl[type]) {
         if(G_defDecl[type][i][0].test(vword)){
           deca = G_defDecl[type][i][1][0];
           meta = [];
@@ -614,7 +614,7 @@ function translateWord(word,idx) {
   else if(engVerbs[word]) {
     type = 'v';
     trans = engVerbs[word];
-    for(i in G_defDecl['v']) {
+    for(var i in G_defDecl['v']) {
       if(G_defDecl['v'][i][0].test(vword)){
         deca = G_defDecl['v'][i][1][0];
         meta = [];
@@ -636,10 +636,10 @@ function translateWord(word,idx) {
       }
       else {
         first:
-        for(i in G_defDecl[type]) {
+        for(var i in G_defDecl[type]) {
           if(G_defDecl[type][i][0].test(vword)){
             decls = G_defDecl[type][i][1];
-            for(c in decls) { // just get the first one for now
+            for(var c in decls) { // just get the first one for now
               var deft = true;
               trans = stripEnglish(yt[vword][2]);
               deca = decls[c];
@@ -658,7 +658,7 @@ function translateWord(word,idx) {
       }
     }
     else if (typeof(P[vword]) == 'object') {
-      for(p in P[temp]) {
+      for(var p in P[temp]) {
         var tloc = P[vword][p].split('/');
         var t1 = tloc[0];
         var t2 = tloc[1];
@@ -685,10 +685,10 @@ function translateWord(word,idx) {
         else
           type = 'n';
 
-        for(i in G_defDecl[type]) {
+        for(var i in G_defDecl[type]) {
           if(G_defDecl[type][i][0].test(vword)){
             decls = G_defDecl[type][i][1];
-            for(c in decls) { // just get the first one for now
+            for(var c in decls) { // just get the first one for now
               var deft = true;
               deca = decls[c];
               meta = [];
@@ -710,14 +710,14 @@ function translateWord(word,idx) {
     wtr = endings[0].concat(endings[1]);
     wtr = wtr.sort(sortLongerDec);
     second:
-    for (a in wtr) {
+    for (var a in wtr) {
       type = G_endings[wtr[a][1]][4];
       var temp = wtr[a][0];
       var declt = G_endings[wtr[a][1]][5];
       decls = [];
       if(yt[temp] && yt[temp][4] != 'I') {
         var gender = yt[temp][1];
-        for(c in declt) {
+        for(var c in declt) {
           if(type=='v' || /adj\./.test(yt[temp][1]) || (1 & declt[c][0] && G_nTx[0].test(gender)) || (2 & declt[c][0] && G_nTx[1].test(gender)) || (4 & declt[c][0] && G_nTx[2].test(gender))) {
             decls.push(declt[c]);
           }
@@ -726,7 +726,7 @@ function translateWord(word,idx) {
         if(yt[temp][4] == 'P' || yt[temp][1] == 'adj.')
           type = 'p';
         if(eg[temp]) {
-          for(c in decls) {
+          for(var c in decls) {
             trans = eg[temp];
             deca = decls[c];
             meta = [];
@@ -735,7 +735,7 @@ function translateWord(word,idx) {
           }
         }
         if (engVerbs[toUni(temp)]) {
-          for(c in decls) {
+          for(var c in decls) {
             trans = engVerbs[toUni(temp)];
             deca = decls[c];
             meta = [];
@@ -743,7 +743,7 @@ function translateWord(word,idx) {
             outs.push([trans,type,deca,word,meta,idx]);
           }
         }
-        for(c in decls) {
+        for(var c in decls) {
           trans = stripEnglish(yt[temp][2]);
           deca = decls[c];
           meta = [];
@@ -754,7 +754,7 @@ function translateWord(word,idx) {
       else if (G_irregDec[temp] && typeof(yt[G_irregDec[temp][0]]) == 'object') {
         if(yt[G_irregDec[temp][0]][4] == 'P' || yt[G_irregDec[temp][0]][1] == 'adj.')
           type = 'p';
-        for(c in decls) {
+        for(var c in decls) {
           trans = stripEnglish(yt[G_irregDec[temp][0]][2]);
           deca = decls[c];
           meta = [];
@@ -763,7 +763,7 @@ function translateWord(word,idx) {
         }
       }
       else if (typeof(P[temp]) == 'object') {
-        for(p in P[temp]) {
+        for(var p in P[temp]) {
           var tloc = P[temp][p].split('/');
           var t1 = tloc[0];
           var t2 = tloc[1];
@@ -796,7 +796,7 @@ function translateWord(word,idx) {
           else
             type = G_endings[wtr[a][1]][4];
 
-          for(c in declt) {
+          for(var c in declt) {
             deca = declt[c];
             meta = [];
             meta['orig'] = temp;
@@ -807,10 +807,10 @@ function translateWord(word,idx) {
     }
     if(!trans.replace(/ /g,'')) {
       if(wtr.length) {
-        for (a in wtr) {
+        for (var a in wtr) {
           var temp = wtr[a][0];
           var declt = G_endings[wtr[a][1]][5];
-          for (c in declt) {
+          for (var c in declt) {
             type = G_endings[wtr[a][1]][4];
             deca = declt[c];
             meta = [];
@@ -829,11 +829,11 @@ function translateWord(word,idx) {
   var dups = [];
   var outfin = [];
   dupsl:
-  for (i=0;i<outs.length;i++) {
+  for (var i=0;i<outs.length;i++) {
     if(outs[i][0] != outs[i][3]) {
       outs[i][0] = transMod(outs[i]);
     }
-    for(j=0;j<dups.length;j++) {
+    for(var j=0;j<dups.length;j++) {
       if(dups[j][1] == outs[i][1] && ((!dups[j][2] && !outs[i][2]) || (dups[j][2] && outs[i][2] && dups[j][2][0] == outs[i][2][0] && dups[j][2][1] == outs[i][2][1] && dups[j][2][2] == outs[i][2][2]))) {
         continue dupsl;
       }
@@ -886,7 +886,7 @@ function addPlural(word,type) {
 
 function addPhrasePreps(words,i,type,alts) {
   var joined = '';
-  for(j = 0;j < words.length;j++) {
+  for(var j = 0;j < words.length;j++) {
     if(typeof(words[j]) == 'string') {
       joined += (j>0?' ':'')+words[j];
     }
@@ -938,7 +938,7 @@ function stripEnglish(input) {
 
 function simpleWordTranslation(word) {
   words = translateWord(word);
-  for(i in words) {
+  for(var i in words) {
     words[i] = addPhrasePreps(words[i]);
   }
   return words;
@@ -952,7 +952,7 @@ function showAltTable(idx) {
     out += makeGrammarTerms(w[0]);
   else if(w.length > 1) {
     out += '<select onclick="changeAlt(this,'+idx+')">';
-    for(i in w) {
+    for(var i in w) {
       out+='<option>'+makeGrammarTerms(w[i])+'</option>';
     }
     out+='</select>';

@@ -200,7 +200,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   if (typeof(P[oneword]) == 'object')
   {
     if(devDump > 0) ddump('added PED exact: ' + oneword);
-    for (i in P[oneword]) {
+    for (var i in P[oneword]) {
       res.push([oneword,P[oneword][i]]);
     }
   }
@@ -212,7 +212,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       res.push([oneword,P[irregword][irregno]]);
     }
     else {
-      for (i in P[G_irregNoun[oneword]]) {
+      for (var i in P[G_irregNoun[oneword]]) {
         res.push([oneword,P[G_irregNoun[oneword]][i]]);
       }
     }
@@ -225,7 +225,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       res.push([oneword,P[irregword][irregno]]);
     }
     else {
-      for (i in P[irregword]) {
+      for (var i in P[irregword]) {
         res.push([oneword,P[irregword][i]]);
       }
     }
@@ -238,7 +238,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       res.push([oneword,P[irregword][irregno]]);
     }
     else {
-      for (i in P[irregword]) {
+      for (var i in P[irregword]) {
         res.push([oneword,P[irregword][i]]);
       }
     }
@@ -277,7 +277,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     resn.push([oneword,D[oneword]]);
   }
   else {
-    for (i in G_dppnEnd) {
+    for (var i in G_dppnEnd) {
       if (D[oneword+G_dppnEnd[i]])
       {
         if(devDump > 0) ddump('added DPPN exact (ending added): ' + oneword);
@@ -295,13 +295,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
     var wtrDN = [];
     var wtrDV = [];
-    for (i in wtrBoth[0]) {
+    for (var i in wtrBoth[0]) {
       if(wtrDN[wtrBoth[0][i][0]])
         continue;
       wtrDN[wtrBoth[0][i][0]] = true;
       wtrN.push(wtrBoth[0][i][0]);
     }
-    for (i in wtrBoth[1]) {
+    for (var i in wtrBoth[1]) {
       if(wtrDV[wtrBoth[1][i][0]])
         continue;
       wtrDV[wtrBoth[1][i][0]] = true;
@@ -324,7 +324,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         var temp = wtr[b];
         if (P[temp] && !isIndec(temp))
         {
-          for (i in P[temp]) {
+          for (var i in P[temp]) {
             res.push([temp,P[temp][i]]);
           }
         }
@@ -334,7 +334,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
             res.push([oneword,P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
           }
           else {
-            for (i in P[irregword]) {
+            for (var i in P[irregword]) {
               res.push([oneword,P[irregword]]);
             }
           }
@@ -372,7 +372,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
           resn.push([wtr[b],D[wtr[b]]]);
         }
         else {
-          for (i in G_dppnEnd) {
+          for (var i in G_dppnEnd) {
             if (D[wtr[b]+G_dppnEnd[i]])
             {
               if(devDump > 0) ddump('added DPPN declension (ending added): ' + wtr[b]);
@@ -408,7 +408,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         var temp = wtrN[b];
         if (P[temp] && !isIndec(temp))
         {
-          for (i in P[temp]) {
+          for (var i in P[temp]) {
             res.push([temp,P[temp][i]]);
           }
         }
@@ -418,7 +418,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
             res.push([oneword,P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
           }
           else {
-            for (i in P[irregword]) {
+            for (var i in P[irregword]) {
               res.push([oneword,P[irregword]]);
             }
           }
@@ -438,7 +438,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
           resn.push([wtrN[b],D[wtrN[b]]]);
         }
         else {
-          for (i in G_dppnEnd) {
+          for (var i in G_dppnEnd) {
             if (D[wtrN[b]+G_dppnEnd[i]])
             {
               if(devDump > 0) ddump('added DPPN compound end declension (ending added): ' + wtrN[b]+G_dppnEnd[i]);
@@ -480,7 +480,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
           if (P[temp] && !isIndec(temp))
           {
             if(devDump > 0) ddump('added compound verb: ' + temp + ' -> '+P[temp][i]);
-            for (i in P[temp]) {
+            for (var i in P[temp]) {
               res.push([temp,P[temp][i]]);
             }
           }
@@ -508,7 +508,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
 // alternative stems in compounds (see declension.js)
 
-  for (b in G_altStemComp)
+  for (var b in G_altStemComp)
   {
     var asrx = new RegExp(b.replace(/\./,'\\.')+'$');
     if(!asrx.exec(oneword)) continue;
@@ -519,7 +519,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       if (P[temp])
       {
         if(devDump > 0) ddump('added alt stem in compound: ' + temp);
-        for (i in P[temp]) {
+        for (var i in P[temp]) {
           res.push([temp,P[temp][i]]);
         }
       }
@@ -530,7 +530,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         }
         else {
           if(devDump > 0) ddump('added alt stem in compound (irreg): ' + temp);
-          for (i in P[irregword]) {
+          for (var i in P[irregword]) {
             res.push([oneword,P[irregword]]);
           }
         }
@@ -611,7 +611,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
             var sufadefs = [];
             var sufashorts = [];
 
-            for (i in sufa[0]) {
+            for (var i in sufa[0]) {
               var sufdefs = [];
               sufanames.push(sufa[0][i][0]);
 
@@ -626,7 +626,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
                 }
               }
               if(typeof(D[tw]) == 'object') {
-                for (k in D[tw]) {
+                for (var k in D[tw]) {
                   sufdefs.push(D[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
                 }
               }
@@ -648,7 +648,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   // inner replacements
 
   if (res.length == 0 && resn.length == 0 && !resy && !trick) {
-    for(i in G_altInnerStem) {
+    for(var i in G_altInnerStem) {
       if(oneword.indexOf(i) > 0 && oneword.indexOf(i) < oneword.length - i.length) {
         var ist = G_altInnerStem[i][0];
         var trickmatch = findmatch(oneword.replace(i,ist),lastpart,nextpart,partslength,1);
@@ -1117,7 +1117,7 @@ function manualCompound(fullword) {
   var parta = []
   var infoa = [];
   var shorta = [];
-  for(j in i) {
+  for(var j in i) {
     var da = [];
     var oneword = i[j][1].replace(/[0-9]$/,'');
     if(oneword != i[j][1]) {
@@ -1125,12 +1125,12 @@ function manualCompound(fullword) {
       da.push(P[oneword][oneno] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
     }
     else {
-      for (k in P[oneword]) {
+      for (var k in P[oneword]) {
         da.push(P[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
       }
     }
     if(typeof(D[oneword]) == 'object') {
-      for (k in D[oneword]) {
+      for (var k in D[oneword]) {
         da.push(D[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
       }
     }

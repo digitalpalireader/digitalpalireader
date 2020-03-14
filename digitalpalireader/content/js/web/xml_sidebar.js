@@ -114,7 +114,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx = 0; idx < lista.length; idx++) {
+          for (var idx = 0; idx < lista.length; idx++) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -316,7 +316,7 @@ var DPRXML = {
           $('#tsoP5').hide();
         }
         else {
-          for (idx = 0; idx < lista.length; idx++) {
+          for (var idx = 0; idx < lista.length; idx++) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           $('#tsoP5').show();

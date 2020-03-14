@@ -47,12 +47,12 @@ function DevInput(string) {
 function DdppnFixzz() {
   var foa = [];
   var fout = '';
-  for (i in Dna) {
+  for (var i in Dna) {
     if (D[i]) {
       foa.push(i+'#[\''+D[i].concat(Dna[i]).join("','")+"'];\n");
     }
     else {
-      for (z in D) {
+      for (var z in D) {
         if(!/\./.exec(z)) continue;
         if(z.replace(/\./g,'') == i.replace(/\./g,'')) {
           foa.push(z+'#[\''+D[z].concat(Dna[i]).join("','")+"'];\n");
@@ -64,7 +64,7 @@ function DdppnFixzz() {
     }
   }
   foa = sortaz(foa);
-  for (q in foa) {
+  for (var q in foa) {
     var y = foa[q].split('#');
     fout += "D['"+y[0]+"'] = " + y[1];
   }
@@ -75,17 +75,17 @@ function DdppnFixa() {
   var fout = '';
   var listouta = [];
 
-  for (d in D) {
+  for (var d in D) {
     var foa = [];
     if(D[d].length == 1) {
       fout+="D['"+d+"'] = ['" + D[d] +"'];\n"
       continue;
     }
     var sa = [];
-    for (e = 0; e < D[d].length; e++) {
+    for (var e = 0; e < D[d].length; e++) {
       var s = 0;
       var sb = D[d][e].split('/');
-      for (f = 0; f < D[d].length; f++) {
+      for (var f = 0; f < D[d].length; f++) {
         if (e == f) continue;
         var sc = D[d][f].split('/');
         if(parseInt(sc[0]) < parseInt(sb[0]) || (parseInt(sc[0]) == parseInt(sb[0]) && parseInt(sc[1]) < parseInt(sb[1]))) s++;
@@ -94,7 +94,7 @@ function DdppnFixa() {
     }
     var t = 0;
     fout+="D['"+d+"'] = [";
-    for (i in foa) {
+    for (var i in foa) {
       fout += "'" + foa['a'+(t++)] + "',"
     }
     fout = fout.replace(/,$/, '');
@@ -105,7 +105,7 @@ function DdppnFixa() {
 
 function DdppnFixConcat() { // concat unlisted (Dd) with D
   var fo = [];
-  for (i in Dd) {
+  for (var i in Dd) {
     if (D[i]) fo.push("D['"+i+"'] = ['"+D[i].join("','")+"','"+Dd[i][0]+"']; // joined");
     else fo.push("D['"+i+"'] = ['"+Dd[i][0]+"']; // new");
   }
@@ -118,13 +118,13 @@ function DdppnFixy() { // find unlisted entries
 
   var listouta = [];
 
-  for (d in D) {
-    for(e in D[d]) {
+  for (var d in D) {
+    for(var e in D[d]) {
       dup[D[d][e]] = d;
     }
   }
 
-  for (i = 1; i < 10; i++) {
+  for (var i = 1; i < 10; i++) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
@@ -134,7 +134,7 @@ function DdppnFixy() { // find unlisted entries
 
     var allp = xmlDoc.getElementsByTagName('entry');
 
-    for (j =0; j < allp.length; j++) {
+    for (var j =0; j < allp.length; j++) {
       if (dup[i+'/'+j]) continue;
       var texttomatch = allp[j].textContent;
       if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
@@ -154,7 +154,7 @@ function DdppnFixy() { // find unlisted entries
 
   foa = sortaz(foa);
 
-  for (q in foa) {
+  for (var q in foa) {
     var y = foa[q].split('#');
     fout += "D['"+y[0]+"'] = ['" + y[1] +"'];\n";
   }
@@ -164,7 +164,7 @@ function DdppnFixy() { // find unlisted entries
 
 function DdppnFixx() {
   var fout = '';
-  for (i in nameno) {
+  for (var i in nameno) {
     var x = nameno[i];
     if(x == '') {
       fout += "nameno['"+i+"'] = [''];\n";
@@ -173,7 +173,7 @@ function DdppnFixx() {
     if(D[x]) fout += "nameno['"+i+"'] = ['" + D[x].join("','") + "'];\n";
     else {
       var yes = 0;
-      for (z in D) {
+      for (var z in D) {
         if(!/\./.exec(z)) continue;
         if(toFuzzy(z) == toFuzzy(x)) {
           fout += "nameno['"+i+"'] = ['" + D[z].join("','") + "'];\n";
@@ -192,7 +192,7 @@ function DdppnFix() {
   var matchout = [];
 
   var listouta = [];
-  for (i = 1; i < 10; i++) {
+  for (var i = 1; i < 10; i++) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", 'etc/XML2/'+i+'.xml', false);
@@ -202,7 +202,7 @@ function DdppnFix() {
 
     var allp = xmlDoc.getElementsByTagName('entry');
 
-    for (j =0; j < allp.length; j++) {
+    for (var j =0; j < allp.length; j++) {
       var texttomatch = allp[j].textContent;
       if(texttomatch.indexOf('Pali Proper Names') >=0) continue;
       if(texttomatch.indexOf('"huge"]') > -1) var ttitle = toVel(texttomatch.substring(texttomatch.indexOf('"huge"]')+7,texttomatch.indexOf('[/div]')));
@@ -228,7 +228,7 @@ function DdppnFix() {
 
   matchout = sortaz(matchout);
 
-  for (q in matchout) {
+  for (var q in matchout) {
     var y = matchout[q];
     fout += "D['"+y+"'] = ['" + listouta[y].join("','") + "']; " + (D[y] ? '// '+D[y] : '') + "\n";
   }
@@ -238,7 +238,7 @@ function DdppnFix() {
 function DpedFix() {
   var out = [];
   var fout = [];
-  for (i in mainda) {
+  for (var i in mainda) {
     var x = i.replace(/z[0-9]$/,'');
 
     if(x != i) {
@@ -248,7 +248,7 @@ function DpedFix() {
     else out[i] = [mainda[i]];
   }
 
-  for (y in out) {
+  for (var y in out) {
     fout += "mainda['"+y+"'] = ['" + out[y].join("','") + "'];\n";
   }
   devO(fout);
@@ -257,10 +257,10 @@ function DpedFix() {
 function Ddppn5() {
   var finout = '';
 
-    for (x in DnameDa)
+    for (var x in DnameDa)
   {
     var y = DnameDa[x][0].replace(/, /g, ',').split(',');
-    for (z in y) {
+    for (var z in y) {
       finout +="D['"+toVel(y[z].replace(/[-(). ]/g,''))+"'] = '"+DnameDa[x][1]+"';\n";
     }
   }
@@ -273,7 +273,7 @@ function Ddppn4() {  // compare nameno with D
   var unmatched = [];
   var w,x, y;
   out:
-  for (i in dppng) {
+  for (var i in dppng) {
      x = dppng[i][0].replace(/_th$/,'thera').replace(/_v_s$/,'vagga').replace(/_s_v$/,'sutta').replace(/_s$/,'sutta').replace(/_jat_.+/,'jaataka').replace(/_j_.+/,'jaataka').replace(/_/g,'');
      w = toVel(dppng[i][1].toLowerCase()).replace(/[ -]/g, '');
     if (D[x]) {
@@ -285,7 +285,7 @@ function Ddppn4() {  // compare nameno with D
       continue out;
     }
     y = dppng[i][1].toLowerCase();
-    for (j in D) {
+    for (var j in D) {
       if (j.indexOf(x) == 0 || toFuzzy(j).indexOf(toFuzzy(x)) == 0  || toFuzzy(j).indexOf(toFuzzy(w)) == 0 || D[j][0].indexOf(y) == 0) {
         matched[dppng[i][0]+'x^'+dppng[i][1]] = j;
         continue out;
@@ -297,13 +297,13 @@ function Ddppn4() {  // compare nameno with D
 
   var outs = 'var nameno = [];\n// matched\n';
 
-  for (i in matched) {
+  for (var i in matched) {
     outs += "nameno['"+i+"'] = '"+matched[i]+"';\n";
   }
 
   outs += '\n\n\n// unmatched\n\n';
 
-  for (i in unmatched) {
+  for (var i in unmatched) {
     outs += "nameno['"+i+"'] = '';\n";
   }
   devO(outs);
@@ -311,10 +311,10 @@ function Ddppn4() {  // compare nameno with D
 
 function Ddppn3() {
   var sorta = [];
-  for (i in Ddppn) {
+  for (var i in Ddppn) {
     var j = Ddppn[i].split('#');
     var k = j[0].split('x^');
-    for (x in k) {
+    for (var x in k) {
       var m = k[x].toLowerCase().replace(/^  */,'').replace(/  *$/,'');
       if (k[x].length > 0) {
         var l = toVel(k[x].toLowerCase().replace(/\(no\..+\)/g,'').replace(/[^ñāīūa-z]/g,''));
@@ -325,7 +325,7 @@ function Ddppn3() {
 //  alert(sorta.length);
   var sorta2 = sortaz(sorta);
   var out = 'var D = [];\n';
-  for (i in sorta2) {
+  for (var i in sorta2) {
     var z = sorta2[i].split('x^');
     var j = z[1].split('#');
     out +="D['"+z[0]+"'] = ['"+j[0]+"','"+j[1]+"'];\n";
@@ -350,9 +350,9 @@ function DcheckWords() {
   var wordst = 0;
   var hw = 0;
   var text;
-  for (j=0; j < niks.length; j++) {
+  for (var j=0; j < niks.length; j++) {
     var nik = niks[j];
-    for (k=0; k < nikvoladi[nik].length; k++) {
+    for (var k=0; k < nikvoladi[nik].length; k++) {
       var xmlhttp = new window.XMLHttpRequest();
       xmlhttp.open("GET", 'xml/'+nik+(k+1)+her+'.xml', false);
       xmlhttp.send(null);
@@ -390,7 +390,7 @@ function DcheckWords() {
                   var zzc = 1;
 
                   word:
-                  for (zz in text) {
+                  for (var zz in text) {
                     G_stopAnalyzing = 0
 
                     window.dump(zz > zzc*10 ? (zzc++)*10 : '.');
@@ -446,7 +446,7 @@ function DcheckWords() {
                     }
                     else if(!out3[input]) {
                       var otmp = [];
-                      for(tmp in G_outwords) {
+                      for(var tmp in G_outwords) {
                         var cpds = G_outwords[tmp][0];
                         otmp.push(cpds);
                       }
@@ -467,7 +467,7 @@ function DcheckWords() {
       var out4 = [];
       var hwo = [];
       window.dump("____________ finished, outputting... ___________________\n");
-      for (i in out) {
+      for (var i in out) {
         var oi = out[i]+'';
         while(oi.length < 5) oi = '0'+oi;
         out2.push(oi + ' ' + i);
@@ -475,14 +475,14 @@ function DcheckWords() {
       out2.sort();
       out2.reverse();
 
-      for (i in out3) {
+      for (var i in out3) {
         var oi = out3[i];
         out4.push(oi[0] + ' ' + i + '\n\t' + oi[1].join('\n\t'));
       }
       out4.sort();
       out4.reverse();
 
-      for(i in hardword) {
+      for(var i in hardword) {
         hwo.push(i + ' ' + hardword[i]);
         hwo.sort();
         hwo.reverse();
@@ -507,7 +507,7 @@ var n = ['','1st','2nd','3rd'];
   out+= "DinfN['"+x[0]+"']['"+x[2]+"']['"+x[4]+"'] = [];\n";
   out+= "DinfN['"+x[0]+"']['"+x[2]+"']['"+x[4]+"']['"+x[5]+"'] = [];\n";
   out+= "DinfN['"+x[0]+"']['"+x[2]+"']['"+x[4]+"']['"+x[5]+"']['"+(x[6] == 's' ? 0 : 1)+"'] = ['"+x[9]+"'";
-  for (i = 1; i < DinfN.length; i++) {
+  for (var i = 1; i < DinfN.length; i++) {
     if(x[0] != DinfN[i][0]) out+= "];\nDinfN['"+DinfN[i][0]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"'] = [];;\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"']['"+(DinfN[i][6] == 's' ? 0 : 1)+"'] = ['"+DinfN[i][9]+"'";
     else if(x[2] != DinfN[i][2]) out+= "];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"'] = [];;\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"']['"+(DinfN[i][6] == 's' ? 0 : 1)+"'] = ['"+DinfN[i][9]+"'";
     else if(x[4] != DinfN[i][4]) out+= "];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"'] = [];\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"'] = [];;\nDinfN['"+DinfN[i][0]+"']['"+DinfN[i][2]+"']['"+DinfN[i][4]+"']['"+DinfN[i][5]+"']['"+(DinfN[i][6] == 's' ? 0 : 1)+"'] = ['"+DinfN[i][9]+"'";
@@ -533,7 +533,7 @@ function DconvertMATtoReal() {
   var relm = [];
   var rela = [];
   var relt = [];
-  for (i in Drelmul) {
+  for (var i in Drelmul) {
     if(relm[Drelmul[i]] || Drelmul[i] == '') continue;
     relm[Drelmul[i]] = 1;
     fin += "relm['"+Drelmul[i]+"'] = '"+Drelatt[i]+'#'+Dreltik[i]+"';\n";
@@ -542,7 +542,7 @@ function DconvertMATtoReal() {
   document.getElementById('rel1').value = fin;
 
   fin = '';
-  for (i in Drelatt) {
+  for (var i in Drelatt) {
     if(rela[Drelatt[i]] || Drelatt[i] == '') continue;
     rela[Drelatt[i]] = 1;
     fin += "rela['"+Drelatt[i]+"'] = '"+Drelmul[i]+'#'+Dreltik[i]+"';\n";
@@ -550,7 +550,7 @@ function DconvertMATtoReal() {
   document.getElementById('rel2').value = fin;
 
   fin = '';
-  for (i in Dreltik) {
+  for (var i in Dreltik) {
     if(relt[Dreltik[i]] || Dreltik[i] == '') continue;
     relt[Dreltik[i]] = 1;
     fin += "relt['"+Dreltik[i]+"'] = '"+Drelmul[i]+'#'+Drelatt[i]+"';\n";
@@ -564,9 +564,9 @@ function DcompareMAT() {
   var finalout = '<table><tr>';
   var out = [];
 
-  for (h = 0; h < hi.length; h++) {
+  for (var h = 0; h < hi.length; h++) {
     out[hi[h]] = [];
-    for (j=0; j < books; j++) {
+    for (var j=0; j < books; j++) {
       var i = j;
 /*
       if (h > 0) {
@@ -637,7 +637,7 @@ function DcompareMAT() {
   finalout += '</tr>';
   finalout += '</table>';
   $('#mafbc').html(finalout);
-  for (h = 0; h < hi.length; h++) {
+  for (var h = 0; h < hi.length; h++) {
       document.getElementById(hi[h]).value=out[hi[h]].join('\n');
   }
 }
@@ -647,8 +647,8 @@ function DtitleSearchCreate() {
 
   var out = [];
   var dup = [];
-  for (i in G_XMLFileArray) {
-    for (ii = 0; ii < 3; ii++) {
+  for (var i in G_XMLFileArray) {
+    for (var ii = 0; ii < 3; ii++) {
       if(!G_XMLFileArray[i][ii]) continue;
       var fi = i;
       var xmlhttp = new window.XMLHttpRequest();
@@ -715,7 +715,7 @@ function DtitleSearchCreate() {
       }
     }
   }
-  for (j in out) {
+  for (var j in out) {
     dup.push(j+'#'+out[j]);
   }
   dup=sortaz(dup);
@@ -731,7 +731,7 @@ function replaceInXML(file) {
 
   var fiat = file.split(',');
 
-  for (i in fiat) {
+  for (var i in fiat) {
     var fi = fiat[i];
 
     var xmlhttp = new window.XMLHttpRequest();
@@ -804,20 +804,20 @@ function replaceInXML(file) {
             var countv = -1;
             var countc = 0;
 
-            for (a = 0; a < w.length; a++) {
+            for (var a = 0; a < w.length; a++) {
         out+='amlist['+a+'] = [];\n';
         var x = w[a].getElementsByTagName('av');
-        for(b = 0; b < x.length; b++) {
+        for(var b = 0; b < x.length; b++) {
           out+='amlist['+a+']['+b+'] = [];\n';
           countc = 0;
           var y = x[b].getElementsByTagName('as');
-          for(c = 0; c < y.length; c++) {
+          for(var c = 0; c < y.length; c++) {
             out+='amlist['+a+']['+b+']['+c+'] = [];\n';
             var z = y[c].getElementsByTagName('ac');
-            for(d = 0; d < z.length; d++) {
+            for(var d = 0; d < z.length; d++) {
               out+='amlist['+a+']['+b+']['+c+']['+d+'] = [];\n';
               var zz = z[d].getElementsByTagName('ap');
-              for(e = 0; e < zz.length; e++) {
+              for(var e = 0; e < zz.length; e++) {
                 out+='amlist['+a+']['+b+']['+c+']['+d+']['+e+'] = '+zz[e].childNodes[0].nodeValue+';\n';
               }
             }
@@ -837,7 +837,7 @@ function makeSin() {
 
   var padOut = '';
 
-  for(i in sinV) {
+  for(var i in sinV) {
   padOut += "vowel['"+vowel[i] + "'] = '" + sinV[i] + "';\n";
   }
   document.textpad.pad.value = padOut;
@@ -847,7 +847,7 @@ function getWordList(){
 
   var dataout = [];
 
-  for (i = 0; i < 4; i++) {
+  for (var i = 0; i < 4; i++) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", 'etc/XML1/'+i+'/ped.xml', false);
@@ -856,12 +856,12 @@ function getWordList(){
 
     var allp = xmlDoc.getElementsByTagName('data');
 
-    for (j =0; j < allp.length; j++) {
+    for (var j =0; j < allp.length; j++) {
       var alld = allp[j].textContent.replace(/<[^>]*>/g, '').replace(/   */g, ' ').split(' ');
 
       var thisterms = [];
 
-      for (k = 0; k < alld.length; k++) {
+      for (var k = 0; k < alld.length; k++) {
         var thisd = 'XYZ'+alld[k].replace(/[0-9\/\+\%";.\-\&\*!,)(:<=>?\[\]_˚ɔ≈\\]+/g, '').replace(/'$/g, '').replace(/^[~']/g, '').toLowerCase();
         if (thisd.length < 7) continue;
         if(thisterms[thisd]) continue;
@@ -874,7 +874,7 @@ function getWordList(){
     }
   }
   var outputD = [];
-  for (l in dataout) {
+  for (var l in dataout) {
     outputD.push(l.substring(3) + '#' + dataout[l]);
   }
   outputD = outputD.sort();
@@ -886,8 +886,8 @@ function PEDcat() {
 
   var dataout = '';
   var ma = [];
-  for (a in mainda) {
-    for (b in mainda[a]) {
+  for (var a in mainda) {
+    for (var b in mainda[a]) {
       var entry = mainda[a][b].split('/');
       var i = parseInt(entry[0],10);
       var j = parseInt(entry[1],10);
@@ -896,7 +896,7 @@ function PEDcat() {
     }
   }
 
-  for (a in ma) {
+  for (var a in ma) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", 'etc/XML1/'+a+'/ped.xml', false);
@@ -905,7 +905,7 @@ function PEDcat() {
 
     var allp = xmlDoc.getElementsByTagName('data');
 
-    for (b in ma[a]) {
+    for (var b in ma[a]) {
 
       var alld = allp[b].textContent; //.replace(/<[^>]*>/g, '').replace(/   */g, ' ');
 
@@ -919,8 +919,8 @@ function DPPNcat() {
 
   var dataout = '';
   var ma = [];
-  for (a in D) {
-    for (b in D[a]) {
+  for (var a in D) {
+    for (var b in D[a]) {
       var entry = D[a][b].split('/');
       var i = parseInt(entry[0],10);
       var j = parseInt(entry[1],10);
@@ -929,7 +929,7 @@ function DPPNcat() {
     }
   }
 
-  for (a in ma) {
+  for (var a in ma) {
 
     var xmlhttp = new window.XMLHttpRequest();
     xmlhttp.open("GET", 'etc/XML2/'+a+'.xml', false);
@@ -938,7 +938,7 @@ function DPPNcat() {
 
     var allp = xmlDoc.getElementsByTagName('entry');
 
-    for (b in ma[a]) {
+    for (var b in ma[a]) {
 
       var alld = allp[b].textContent; //.replace(/<[^>]*>/g, '').replace(/   */g, ' ');
 
@@ -952,7 +952,7 @@ function DPPNcat() {
 function noah11()
 {
   var dataout = '';
-  for (i = 0; i <= 4; i++) {
+  for (var i = 0; i <= 4; i++) {
 
     var pedp = 'etc/XML1/'+ i +'/ped.xml';
 
@@ -965,14 +965,14 @@ function noah11()
     var noc = '';
     var nocd = 'x';
     var nocdo;
-    for (e = 0; e < cntx; e++) {
+    for (var e = 0; e < cntx; e++) {
       noc = i+'/'+e;
       if ( noahda[noc]) {
         if ( noahda[noc].charAt(0) != nocd.charAt(0)) { dataout += '<h1>' + noahda[noc].charAt(0) + '</h1>\n'; }
         nocd = noahda[noc];
         var dataa = xmlDoc.getElementsByTagName('data')[e].getElementsByTagName('sdata');
         var data = '';
-        for (j=0; j<dataa.length; j++) {
+        for (var j=0; j<dataa.length; j++) {
           data += dataa[j].textContent;
         }
         nocdo = nocd.replace(/aa/g, 'ā');
@@ -998,7 +998,7 @@ function noah11()
 function noah22()
 {
   var dataout = '';
-  for (i = 1; i <= 8; i++) {
+  for (var i = 1; i <= 8; i++) {
 
     var dn = 'etc/XML2/'+ i +'.xml';
 
@@ -1008,10 +1008,10 @@ function noah22()
     var xmlDoc = xmlhttp.responseXML.documentElement;
 
     var en = xmlDoc.getElementsByTagName('entry');
-    for (j = 0; j < en.length; j++) {
+    for (var j = 0; j < en.length; j++) {
       var out = '';
       var da = en[j].getElementsByTagName('data');
-      for (k = 0; k < da.length; k++) {
+      for (var k = 0; k < da.length; k++) {
         if(da[k].childNodes[0]) {
           var data = da[k].textContent;
           out += data;
@@ -1029,7 +1029,7 @@ function noahddd() {
 //  alert('yes');
   var out = '';
   var x=0;
-  for (i = 0; i< devmain.length; i++) {
+  for (var i = 0; i< devmain.length; i++) {
     if (devmain[i+1] && devmain[i][0] == devmain[i+1][0]) {
       x++;
       out+='mainda["'+devmain[i][0]+'z'+x+'"] = "'+devmain[i][1]+'"; //'+devmain[i][2]+'\n';
@@ -1048,7 +1048,7 @@ function noahddd() {
 function noahd() {
   var engN = sortaz(newE);
   out = '';
-  for (i in engN) {
+  for (var i in engN) {
     var x = engN[i].split(',');
     out += 'yt['+toVel(x.shift()).replace(/"n/g, '`n').replace(/\./g, ',')+'] = ['+x.join(',')+'];\n';
   }
@@ -1061,7 +1061,7 @@ function Dloaded() {
 
   var x = [];
 
-  for (i in D) {
+  for (var i in D) {
     x.push(i.replace(/`n/g, '"n').replace(/,/g, '.').replace("f", "!")+'#'+D[i]);
   }
   var y = sortaz(x);
@@ -1080,13 +1080,13 @@ function DloadFileAsXML() {
 function Dnda() {
   var out = '';
   var na = [];
-  for (i in D) {
+  for (var i in D) {
     var s = D[i].split('#');
     var f = 1;
     while(na[s[0]+'f'+f]) { f++; }
     na[s[0]+'f' + f] = s[1];
   }
-  for (j in na) {
+  for (var j in na) {
     out += "D['"+j+"'] = '"+na[j]+"';";
   }
   $('#pad').html(out + '];');
@@ -1099,7 +1099,7 @@ function DnameDa () {
   var newda = [];
   var noneda = [];
 
-  for (i in D) {
+  for (var i in D) {
     var s = D[i].split('/');
     var t = toUni(i.split('f')[0]);
     var u = t.charAt(t.length-1);
@@ -1146,7 +1146,7 @@ function DnameDa2 () {
   var newda = [];
   var noneda = [];
 
-  for (i = 1; i < 10; i++) {
+  for (var i = 1; i < 10; i++) {
 
     var dppnf = 'etc/XML2/'+i+'.xml';
 
@@ -1157,7 +1157,7 @@ function DnameDa2 () {
 
     var dataa = xmlDoc.getElementsByTagName('entry');
 
-    for (j = 0; j < dataa.length; j++) {
+    for (var j = 0; j < dataa.length; j++) {
 
       var data = dataa[j].textContent.replace(/huge"\]/);
       if(data) data = data[0].replace(/\&lt;\/*h2\&gt;/g,'');
@@ -1187,9 +1187,9 @@ function DdppnNameNo() {
 
   var out = '';
   var t=0;
-  for (i in nameno) {
+  for (var i in nameno) {
     t=0;
-    for (j in nn) {
+    for (var j in nn) {
       if (nn[j].search(nameno[i]+'/') == 0) {
         out += "nameno['"+i+"'] = '"+nn[j]+"';\n";
         t=1;
@@ -1240,14 +1240,14 @@ function Ddppnsearchstart(getstring)
 
 
   if (dppn.length == 0) {
-    for (a in D) {
-      for (b in D[a]) {
+    for (var a in D) {
+      for (var b in D[a]) {
         dppn.push([a,D[a][b]]);
       }
     }
   }
 
-    for (x in dppn)
+    for (var x in dppn)
   {
     var dppnt = dppn[x][0];
     var yessir = (dppnt.search(getstring) > -1);
@@ -1258,7 +1258,7 @@ function Ddppnsearchstart(getstring)
       if (!/[tdn]/.exec(dppntb)) dppntb = dppntb.replace(/l/g, '.l');
       dppntb = toUni(dppnt.replace(/([tdn])/g, ".$1").replace(/([.~"])\./g, "$1").replace(/su\.t\.ta$/, "sutta").replace(/\.tissa$/, "tissa").replace(/\.thera$/, "thera").replace(/\.therii$/, "therii").replace(/va\.t\.thu$/, "vatthu").replace(/jaa\.taka$/, "jaataka").replace(/^./, ""));
       var dppntc = '';
-      for (y = 0; y < dppntb.length; y++) {
+      for (var y = 0; y < dppntb.length; y++) {
         var th = dppntb[y];
         if(Dev_tl[th]) dppntc += '<a class="huge" href="javascript:void(0)" onclick="this.blur(); this.innerHTML = Dev_tl[this.innerHTML]">'+th+'</a>';
         else dppntc += th;
@@ -1298,12 +1298,12 @@ function DdppnSave(terma,dup) {
   D[termn] = D[term];
   if(!dup) delete D[term];
   var sorta = [];
-  for (i in D) {
+  for (var i in D) {
     sorta.push(i);
   }
   var sorta2 = sortaz(sorta);
   var outs = 'var D = [];\n\n';
-  for (i in sorta2) {
+  for (var i in sorta2) {
     var sa = sorta2[i];
     outs+= 'D[\''+sa+'\'] = [\''+D[sa].join("','")+'\'];\n';
   }
@@ -1313,7 +1313,7 @@ function DdppnSave(terma,dup) {
 function DdppnSortCSV() {
   var sorta = [];
   var outs = '';
-  for (i in D) {
+  for (var i in D) {
     sorta.push(i);
   }
   var sorta2 = sortaz(sorta);
@@ -1356,7 +1356,7 @@ function DdppnShow(file,which) {
   if(!which) { // not from select
     var dppnhistt = [];
     dppnhist = dppnhist.slice(0,dhmark+1); // cut old future
-    for (i in dppnhist) {
+    for (var i in dppnhist) {
       if (dppnhist[i] != file) { dppnhistt.push(dppnhist[i]); }
     }
     dppnhist = dppnhistt.concat([file]); // add latest
@@ -1390,7 +1390,7 @@ function DgetThaiBook(book) {
     var xmlDoc = xmlhttp.responseXML.documentElement;
   var pages = xmlDoc.getElementsByTagName('page');
   var xmlo = '<?xml version="1.0"?><body><ha><han></han><h0><h0n></h0n><h1><h1n></h1n><h2><h2n></h2n><h3><h3n></h3n><h4><h4n></h4n><p>';
-  for (i = 0; i < pages.length; i++) {
+  for (var i = 0; i < pages.length; i++) {
 
     var pageno = pages[i].getElementsByTagName('pageno')[0].textContent;
 
@@ -1398,7 +1398,7 @@ function DgetThaiBook(book) {
 
     var fnotesa = pages[i].getElementsByTagName('fnote');
     var fnotes = '';
-    for (j = 0; j < fnotesa.length; j++) {
+    for (var j = 0; j < fnotesa.length; j++) {
       fnotes += fnotesa[j].textContent + (j < fnotesa.length-1 ? ' ' : '');
     }
     var fna = [];
@@ -1409,7 +1409,7 @@ function DgetThaiBook(book) {
       if(/^[ 0-9]+-/.exec(tf)) { // multi footnote
         var l = tf.match(/[ 0-9]+-[ 0-9]+/)[0];
         var la = l.replace(/ /g, '').split('-');
-        for (j = 0; j < parseInt(la[1]); j++) {
+        for (var j = 0; j < parseInt(la[1]); j++) {
           fna.push( ' ' + (j+1) + ' ' + tf.replace(l,''));
         }
       }
@@ -1422,12 +1422,12 @@ function DgetThaiBook(book) {
     xmlo += 'x^a^Thai '+book+'.'+i+'x^ea^ ';
 
     var lines = '';
-    for (j = 0; j < linesa.length; j++) {
+    for (var j = 0; j < linesa.length; j++) {
       var tl = linesa[j].textContent;
 
       if(/[0-9]+-/.exec(tl)) { // footnote replacing
         var fn = tl.match(/[0-9]+-/g);
-        for (k in fn) {
+        for (var k in fn) {
           var fnn = parseInt(fn[k].slice(0,-1));
           tl = tl.replace(fn[k], '{'+fna[fnn-1] + '}');
         }
@@ -1470,7 +1470,7 @@ function DthaiOut(){
   var col = ['coltext','colsel','colped','coldppn','colcpd'];
   var whichcol = [0,0,0,0,0,0];
   var wcs = 0;
-  for (tmp = 0; tmp < z.length; tmp++)
+  for (var tmp = 0; tmp < z.length; tmp++)
   {
     if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
     if (z.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1481,7 +1481,7 @@ function DthaiOut(){
       theDatao += '<font style="color:'+DPR_prefs[col[wcs]]+'"><b>' + toVel(theData) + '</b></font></a><br />';
     }
     y = z[tmp].getElementsByTagName("h0");
-    for (tmp2 = 0; tmp2 < y.length; tmp2++)
+    for (var tmp2 = 0; tmp2 < y.length; tmp2++)
     {
       if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
       if (y.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1490,7 +1490,7 @@ function DthaiOut(){
         wcs = whichcol[0]; // either 0 or 1
         whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
         var spaces = '';
-        for(f = 0; f < wcs; f++) {
+        for(var f = 0; f < wcs; f++) {
           spaces += '&nbsp;&nbsp;';
         }
 
@@ -1500,7 +1500,7 @@ function DthaiOut(){
         theDatao += '<br />';
       }
       x = y[tmp2].getElementsByTagName("h1");
-      for (tmp3 = 0; tmp3 < x.length; tmp3++)
+      for (var tmp3 = 0; tmp3 < x.length; tmp3++)
       {
         if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
         if (x.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1510,7 +1510,7 @@ function DthaiOut(){
           whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 
           spaces = '';
-          for(f = 0; f < wcs; f++) {
+          for(var f = 0; f < wcs; f++) {
             spaces += '&nbsp;&nbsp;';
           }
 
@@ -1520,7 +1520,7 @@ function DthaiOut(){
           theDatao += '<br />';
         }
         w = x[tmp3].getElementsByTagName("h2");
-        for (tmp4 = 0; tmp4 < w.length; tmp4++)
+        for (var tmp4 = 0; tmp4 < w.length; tmp4++)
         {
           if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
           if (w.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1530,7 +1530,7 @@ function DthaiOut(){
             whichcol[3] = 1; // bump
 
             spaces = '';
-            for(f = 0; f < wcs; f++) {
+            for(var f = 0; f < wcs; f++) {
               spaces += '&nbsp;&nbsp;';
             }
 
@@ -1540,7 +1540,7 @@ function DthaiOut(){
                     }
 
           v = w[tmp4].getElementsByTagName("h3");
-          for (tmp5 = 0; tmp5 < v.length; tmp5++)
+          for (var tmp5 = 0; tmp5 < v.length; tmp5++)
           {
             if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
             if (v.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1550,7 +1550,7 @@ function DthaiOut(){
               whichcol[4] = 1; // bump
 
               spaces = '';
-              for(f = 0; f < wcs; f++) {
+              for(var f = 0; f < wcs; f++) {
                 spaces += '&nbsp;&nbsp;';
               }
 
@@ -1561,7 +1561,7 @@ function DthaiOut(){
 
 
             u = v[tmp5].getElementsByTagName("h4");
-            for (tmp6 = 0; tmp6 < u.length; tmp6++)
+            for (var tmp6 = 0; tmp6 < u.length; tmp6++)
             {
               if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
               if (u.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1569,7 +1569,7 @@ function DthaiOut(){
 
                 wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
                 spaces = '';
-                for(f = 0; f < wcs; f++) {
+                for(var f = 0; f < wcs; f++) {
                   spaces += '&nbsp;&nbsp;';
                 }
                 whichcol[5] = 1; // bump
@@ -1581,12 +1581,12 @@ function DthaiOut(){
               t = u[tmp6].getElementsByTagName("p");
               theDatao += tmp2 + '.' + tmp3 + '.' + tmp4 + '.' + tmp5 + '.' + tmp6 + ': ' + t.length + '<br />';
 
-              for (tmp7 = 0; tmp7 < t.length; tmp7++)
+              for (var tmp7 = 0; tmp7 < t.length; tmp7++)
               {
 
                 wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4] + whichcol[5]; // 0, 1, 2, 3, 4 or 5
                 spaces = '';
-                for(f = 0; f < wcs; f++) {
+                for(var f = 0; f < wcs; f++) {
                   spaces += '&nbsp;&nbsp;';
                 }
 
@@ -1677,7 +1677,7 @@ function DthaiL(w,type) {
 
         var pars = G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p");
         var count = parent.getElementsByTagName('p').length;
-        for (x = w[5]; x < count; x++) {
+        for (var x = w[5]; x < count; x++) {
           var npar = parent.getElementsByTagName("p")[w[5]];
           var npv = npar.textContent;
 
@@ -1719,7 +1719,7 @@ function DthaiL(w,type) {
 
         var pars = G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4");
         var count = pars.length;
-        for (x = w[4]; x < count; x++) {
+        for (var x = w[4]; x < count; x++) {
           var npar = parent.getElementsByTagName("h4")[w[4]];
           newh.appendChild(npar);
         }
@@ -1755,7 +1755,7 @@ function DthaiL(w,type) {
 
         var pars = G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3");
         var count = pars.length;
-        for (x = w[3]; x < count; x++) {
+        for (var x = w[3]; x < count; x++) {
           var npar = parent.getElementsByTagName("h3")[w[3]];
           newh.appendChild(npar);
         }
@@ -1791,7 +1791,7 @@ function DthaiL(w,type) {
 
         var pars = G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2");
         var count = pars.length;
-        for (x = w[2]; x < count; x++) {
+        for (var x = w[2]; x < count; x++) {
           var npar = parent.getElementsByTagName("h2")[w[2]];
           newh.appendChild(npar);
         }
@@ -1827,7 +1827,7 @@ function DthaiL(w,type) {
 
         var pars = G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1");
         var count = pars.length;
-        for (x = w[1]; x < count; x++) {
+        for (var x = w[1]; x < count; x++) {
           var npar = parent.getElementsByTagName("h1")[w[1]];
           newh.appendChild(npar);
         }
@@ -1930,7 +1930,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
   var col = ['coltext','colsel','colped','coldppn','colcpd'];
   var whichcol = [0,0,0,0,0];
   var wcs = 0;
-  for (tmp = 0; tmp < z.length; tmp++)
+  for (var tmp = 0; tmp < z.length; tmp++)
   {
     if (z[tmp].getElementsByTagName("han")[0].childNodes[0]) theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
     if (z.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1943,7 +1943,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
       theDatao += (devCheck == 1 && DshowH ? '[a]':'')+'<a href="javascript:void(0)" class="tiny" onclick="window.find(\''+toUni(theData)+'\', false, false)"/><font style="color:'+DPR_prefs[col[wcs]]+'"><b>' + translit(toUni(theData)) + '</b></font></a><br />';
     }
     y = z[tmp].getElementsByTagName("h0");
-    for (tmp2 = 0; tmp2 < y.length; tmp2++)
+    for (var tmp2 = 0; tmp2 < y.length; tmp2++)
     {
       if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
       if (y.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1953,7 +1953,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
         wcs = whichcol[0]; // either 0 or 1
         whichcol[1] = 1; // bump up for the next color, if no data, this will still be 0, next color will get 0
         var spaces = '';
-        for(f = 0; f < wcs; f++) {
+        for(var f = 0; f < wcs; f++) {
           spaces += '&nbsp;&nbsp;';
         }
 
@@ -1963,7 +1963,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
         theDatao += '<br />';
       }
       x = y[tmp2].getElementsByTagName("h1");
-      for (tmp3 = 0; tmp3 < x.length; tmp3++)
+      for (var tmp3 = 0; tmp3 < x.length; tmp3++)
       {
         if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
         if (x.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1974,7 +1974,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
           whichcol[2] = 1; // bump up for the next color, if no data, this will still be -1, next color will get 0
 
           spaces = '';
-          for(f = 0; f < wcs; f++) {
+          for(var f = 0; f < wcs; f++) {
             spaces += '&nbsp;&nbsp;';
           }
 
@@ -1983,7 +1983,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
           theDatao += '<br />';
         }
         w = x[tmp3].getElementsByTagName("h2");
-        for (tmp4 = 0; tmp4 < w.length; tmp4++)
+        for (var tmp4 = 0; tmp4 < w.length; tmp4++)
         {
           if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
           if (w.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -1994,7 +1994,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
             whichcol[3] = 1; // bump
 
             spaces = '';
-            for(f = 0; f < wcs; f++) {
+            for(var f = 0; f < wcs; f++) {
               spaces += '&nbsp;&nbsp;';
             }
 
@@ -2004,7 +2004,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
                     }
 
           v = w[tmp4].getElementsByTagName("h3");
-          for (tmp5 = 0; tmp5 < v.length; tmp5++)
+          for (var tmp5 = 0; tmp5 < v.length; tmp5++)
           {
             if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
             if (v.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -2015,7 +2015,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
               whichcol[4] = 1; // bump
 
               spaces = '';
-              for(f = 0; f < wcs; f++) {
+              for(var f = 0; f < wcs; f++) {
                 spaces += '&nbsp;&nbsp;';
               }
 
@@ -2026,7 +2026,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 
 
             u = v[tmp5].getElementsByTagName("h4");
-            for (tmp6 = 0; tmp6 < u.length; tmp6++)
+            for (var tmp6 = 0; tmp6 < u.length; tmp6++)
             {
               if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
               if (u.length > 1 && theData == '') { theData = 'unnamed'; }
@@ -2035,7 +2035,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
                 DAv.push([4, theData]);
                 wcs = whichcol[0] + whichcol[1] + whichcol[2] + whichcol[3] + whichcol[4]; // 0, 1, 2, 3, 4 or 5
                 spaces = '';
-                for(f = 0; f < wcs; f++) {
+                for(var f = 0; f < wcs; f++) {
                   spaces += '&nbsp;&nbsp;';
                 }
 
@@ -2052,7 +2052,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
               t = t.replace(/[".,;`']/g,'');
 
               var tw = t.split(' ',40);
-              for (i in tw) {
+              for (var i in tw) {
                 tw[i] = '<a href="javascript:void(0)" onclick="window.find(\''+tw[i]+'\', false, false)">'+tw[i]+'</a> ';
               }
 
@@ -2074,7 +2074,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
   DAp = DthaiOut2(thaibook);
   var out = '';
   var last = false;
-  for (i=0; i < DAp.length; i++) {
+  for (var i=0; i < DAp.length; i++) {
     var t = DAp[i];
     var cx = '';
     var ac = '';
@@ -2109,7 +2109,7 @@ function DXMLThai(nikaya,book,hier,thaibook) {
 
   var w = 0;
   var cbxs = document.getElementsByName('Dcbx');
-  for (j=0;j<cbxs.length;j++) {
+  for (var j=0;j<cbxs.length;j++) {
     if(typeof(DAv[w]) == 'undefined') break;
     if(document.getElementsByName('Dcbx')[j].checked) {
       document.getElementsByName('Dtxt')[j].value = DAv[w][1];
@@ -2130,7 +2130,7 @@ function DthaiOut2(booka) {
   var footnotelist = '';
 
   out:
-  for (e in booka) {
+  for (var e in booka) {
 
     book = booka[e][0];
 
@@ -2141,7 +2141,7 @@ function DthaiOut2(booka) {
 
     var pages = xmlDoc.getElementsByTagName('page');
     var firstpage = (booka[e][1]?booka[e][1]:0); // first page (pageno - 1)
-    for (i = firstpage; i < pages.length; i++) {
+    for (var i = firstpage; i < pages.length; i++) {
       var pageno = pages[i].getElementsByTagName('pageno')[0].textContent;
 
       if(booka[e][2] && parseInt(pageno,10) > booka[e][2]) break out; // hit page limit
@@ -2154,7 +2154,7 @@ function DthaiOut2(booka) {
       var fnotes = '';
       var nfloc = 0; // next fn location
 
-      for (j = 0; j < fnotesa.length; j++) {
+      for (var j = 0; j < fnotesa.length; j++) {
         fnotes += fnotesa[j].textContent + (j < fnotesa.length-1 ? ' ' : '');
       }
 
@@ -2171,7 +2171,7 @@ function DthaiOut2(booka) {
 
           var la = l.replace(/ /g, '').split('-');
           var nfn = parseInt(la[0])+1; // initial next
-          for(q = 0; q < la.length; q++) {
+          for(var q = 0; q < la.length; q++) {
             var tfn = parseInt(la[q]);
             if(tfn == nfn) nfn++; // as long as we have consecutive nos, increase next
             tempfna.push(tfn);
@@ -2183,7 +2183,7 @@ function DthaiOut2(booka) {
           nfloc = (nfloc>-1?nfloc + l.length:fnotes.length);
 
           var tf = fnotes.substring(l.length,nfloc);
-          for (qq=0; qq < tempfna.length;qq++) {
+          for (var qq=0; qq < tempfna.length;qq++) {
             fna[tempfna[qq]+'-'] = ' ' + tempfna[qq] + ' ' + tf;
           }
         }
@@ -2213,12 +2213,12 @@ function DthaiOut2(booka) {
         //if(i == 39) dalert(fnotes);
       }
       var linesa = pages[i].getElementsByTagName('line');
-      for (j = 0; j < linesa.length; j++) {
+      for (var j = 0; j < linesa.length; j++) {
         var tl = linesa[j].textContent;
 
         if(/[0-9]+-/.exec(tl)) { // footnote replacing
           var fn = tl.match(/[0-9]+-/g);
-          for (k=0;k<fn.length;k++) {
+          for (var k=0;k<fn.length;k++) {
             tl = tl.replace(fn[k], '{'+fna[fn[k]] + '}');
             footnotelist +=(i+1)+', '+(j+1)+', '+fna[fn[k]]+'\n';
           }
@@ -2251,7 +2251,7 @@ function DaddThaiH(i,checked) {
   }
   var w = 0;
   var cbxs = document.getElementsByName('Dcbx');
-  for (j=0;j<cbxs.length;j++) {
+  for (var j=0;j<cbxs.length;j++) {
     if(typeof(DAv[w]) == 'undefined') break;
     if(document.getElementsByName('Dcbx')[j].checked) {
       document.getElementsByName('Dtxt')[j].value = DAv[w][1];
@@ -2268,16 +2268,16 @@ function DsaveXML2(name) {
   var DAt = [];
   var w = 0;
   var cbxs = document.getElementsByName('Dcbx');
-  for (j=0;j<cbxs.length;j++) {
+  for (var j=0;j<cbxs.length;j++) {
     if(document.getElementsByName('Dcbx')[j].checked) {
       DAt.push([cbxs[j].value,parseInt(document.getElementsByName('Dhead')[j].innerHTML),document.getElementsByName('Dtxt')[j].value]);
     }
   }
 
   var outfile = '<?xml version="1.0"?><body>';
-  for (i in DAp) {
+  for (var i in DAp) {
     var lastHead = -1;
-    for (j in DAt) {
+    for (var j in DAt) {
       if(DAt[j][0] == i) {
         switch(DAt[j][1]) {
           case 9:
@@ -2441,7 +2441,7 @@ function DgroupBySimilarity() {
   var list = toUni(input.replace(/[0-9 ]/g,'')).split(',');
   var simlist = groupBySimilarity(list,60);
   var output = '';
-  for (i in simlist) {
+  for (var i in simlist) {
     output += simlist[i].join('\n')+'\n\n';
   }
   writeExtFile('/home/noah/Extensions/work/simwords',output);
@@ -2459,11 +2459,11 @@ javascript:writeExtFile('/home/noah/Extensions/work/unmatched','test');
 function DMakeAttArray(h) {
   var outa = [];
   var getstring = /\^b\^[^^]+\^eb\^/;
-  for (i in G_XMLFileArray) {
+  for (var i in G_XMLFileArray) {
     if(i.charAt(0) == 'x') continue;
     if (G_XMLFileArray[i][h] == 1) {
       var a = Dsearch(i+(h==1?'a':'t'),getstring);
-      for(c = 0; c < a.length; c++) {
+      for(var c = 0; c < a.length; c++) {
 
         var b = '#'+i.charAt(0)+'x^'+(parseInt(i.substring(1))-1)+'x^'+a[c][0]+'x^'+a[c][1]+'x^'+a[c][2]+'x^'+a[c][3]+'x^'+a[c][4]+'x^'+a[c][5];
         if(typeof(outa[a[c][6]]) == 'string') outa[a[c][6]] += b;
@@ -2475,14 +2475,14 @@ function DMakeAttArray(h) {
   var a2 = [];
 
 
-  for (i in outa) {
+  for (var i in outa) {
     a2.push(i+outa[i]);
   }
   a2 = sortaz(a2);
 
   var out = h==1?"var attlist = [":"tiklist[";
 
-  for (i = 0; i < a2.length-1; i++) {
+  for (var i = 0; i < a2.length-1; i++) {
     out+="'"+a2[i]+"',\n";
   }
   out+="'"+a2[i]+"',\n";
@@ -2571,7 +2571,7 @@ function Dsearch(file,getstring)
                   if(os.length > 1) {
                     if(/\. /.exec(os)) {
                       var ss = os.split(/ *\. /);
-                      for (q=0;q<ss.length;q++) {
+                      for (var q=0;q<ss.length;q++) {
                         ss[q] = ss[q].replace(/^ +/g, '');
                         ss[q] = ss[q].replace(/ +$/g, '');
                         ss[q] = ss[q].replace(/\.$/g, '');
@@ -2783,12 +2783,12 @@ function tipitakaDB() {
   etc['a'] = [];
   etc['t'] = [];
 
-  for (i in G_XMLFileArray) {
+  for (var i in G_XMLFileArray) {
     var nik = i.charAt(0);
     var volume = i.charAt(1);
     //if(nik!='d'&&nik!='m')
     //  continue;
-    for (ii = 0; ii < 3; ii++) {
+    for (var ii = 0; ii < 3; ii++) {
       pages = 0;
       var name = [];
       if(!G_XMLFileArray[i][ii]) continue;
@@ -2954,11 +2954,11 @@ function devCommonWords() {
 
   var words = [];
 
-  for (i in G_XMLFileArray) {
+  for (var i in G_XMLFileArray) {
     var nik = i.charAt(0);
     if(nik!='d'&&nik!='m')
       continue;
-    for (ii = 0; ii < 3; ii++) {
+    for (var ii = 0; ii < 3; ii++) {
       pages = 0;
       var name = [];
       if(!G_XMLFileArray[i][ii]) continue;

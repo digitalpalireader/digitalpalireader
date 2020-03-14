@@ -5,7 +5,7 @@ function getLinkPlaceBottom() { // permalinks
   var para;
   var query;
   var outplace;
-  for (i in options) {
+  for (var i in options) {
 
     var option = options[i].split('=');
     option[1] = option[1].replace(/\%22/g,'"');

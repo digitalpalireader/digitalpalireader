@@ -599,9 +599,9 @@ function makeToolbox(main,aux,title,conv,ex,save,trans) {
 
 function makeTable(text,cls) {
   var out = '<table class="'+cls+'-table">';
-  for(i in text) {
+  for(var i in text) {
     out += '<tr class="'+cls+'-row-'+(parseInt(i)+1)+'">';
-    for(j in text[i]) {
+    for(var j in text[i]) {
       out += '<td class="'+cls+'">'+text[i][j]+'</td>';
     }
     out += '</tr>';

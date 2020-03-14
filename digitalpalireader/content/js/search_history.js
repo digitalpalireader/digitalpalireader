@@ -35,7 +35,7 @@ function simSearchHistory(event){
   document.getElementById('isearch').value = '';
 
   if(searchType == 0 || searchType == 2) {
-    for(i in G_hLetters){
+    for(var i in G_hLetters){
       if(searchMAT.search(G_hLetters[i]) > -1)
         document.getElementById('tsoMAT'+G_hLetters[i]).checked = true;
       else
@@ -48,7 +48,7 @@ function simSearchHistory(event){
   }
 
   if(searchType == 0 || searchType == 5) {
-    for (i in G_nikToNumber) {
+    for (var i in G_nikToNumber) {
       if(searchSet.search(i) > -1)
         document.getElementById('tsoCO'+i).checked = true;
       else
@@ -60,7 +60,7 @@ function simSearchHistory(event){
     DPRNav.setSearchBookList();
   }
   if(searchType == 1) {
-    for (i=0;i< document.getElementById('tsoBOOKm').itemCount;i++) {
+    for (var i=0;i< document.getElementById('tsoBOOKm').itemCount;i++) {
       if(searchBook.search(i+1) > -1)
         document.getElementById('tsoBObook' + i).checked = true;
       else
@@ -74,7 +74,7 @@ function simSearchHistory(event){
 
   if(searchType == 3) {
     var parts = searchPart.split('.');
-    for(i=1;i<parts.length;i++) {
+    for(var i=1;i<parts.length;i++) {
       document.getElementById('tsoP'+G_listTitles[i-1]).selectedIndex = parts[i];
       DPRXML.updateSearchHierarchy(i);
     }

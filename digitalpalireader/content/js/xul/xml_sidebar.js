@@ -45,7 +45,7 @@ var DPRXML = {
           listNode.parentNode.collapsed = true;
         }
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           listNode.parentNode.collapsed = false;
@@ -61,7 +61,7 @@ var DPRXML = {
           listNode.parentNode.collapsed = true;
         }
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           listNode.parentNode.collapsed = false;
@@ -78,7 +78,7 @@ var DPRXML = {
           listNode.parentNode.collapsed = true;
         }
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           listNode.parentNode.collapsed = false;
@@ -94,7 +94,7 @@ var DPRXML = {
           listNode.parentNode.collapsed = true;
         }
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           listNode.parentNode.collapsed = false;
@@ -112,7 +112,7 @@ var DPRXML = {
           listNode.parentNode.collapsed = true;
         }
         else {
-          for(idx = 0; idx < lista.length; idx++){
+          for(var idx = 0; idx < lista.length; idx++){
             listNode.appendItem(lista[idx]);
           }
           listNode.parentNode.collapsed = false;
@@ -241,7 +241,7 @@ var DPRXML = {
         }
 
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           document.getElementById('tsoP1').collapsed = false;
@@ -259,7 +259,7 @@ var DPRXML = {
         }
 
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           document.getElementById('tsoP2').collapsed = false;
@@ -278,7 +278,7 @@ var DPRXML = {
         }
 
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           document.getElementById('tsoP3').collapsed = false;
@@ -296,7 +296,7 @@ var DPRXML = {
         }
 
         else {
-          for(idx in lista){
+          for(var idx in lista){
             listNode.appendItem(lista[idx]);
           }
           document.getElementById('tsoP4').collapsed = false;
@@ -314,7 +314,7 @@ var DPRXML = {
           document.getElementById('tsoP5').collapsed = true;
         }
         else {
-          for(idx = 0; idx < lista.length; idx++){
+          for(var idx = 0; idx < lista.length; idx++){
             listNode.appendItem(lista[idx]);
           }
           document.getElementById('tsoP5').collapsed = false;

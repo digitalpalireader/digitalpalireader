@@ -42,7 +42,7 @@ var DPRNav = {
     else var titles = nikvoladi[nik+G_hier];
     var bookNode = document.getElementById('book');
     while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
-    for (i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
       if(nik == 'k' || nik == 'y' || nik == 'n') {
         var title = G_kynames[nik][titles[i]];
         var val = titles[i]+1;
@@ -75,7 +75,7 @@ var DPRNav = {
     var bookNode2 = document.getElementById('tsoBOA');
     while(bookNode2.hasChildNodes()) bookNode2.removeChild(bookNode2.firstChild);
 
-    for (i = 0; i < titles.length; i++) {
+    for (var i = 0; i < titles.length; i++) {
 
       // menu
       bookNode.appendItem(translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
@@ -309,7 +309,7 @@ var DPRNav = {
 
   gotoPlace:function([nikaya,book,meta,volume,vagga,sutta,section,hiert]) {
     document.getElementById('set').value = nikaya;
-    for(i in G_hshort) {
+    for(var i in G_hshort) {
       if(i == hiert)
         document.getElementById(G_hshort[i]).setAttribute('checked',true);
       else

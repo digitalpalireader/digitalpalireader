@@ -181,7 +181,7 @@ function findSimilarWords(word,list,min,fuzzy) {
 
   var simlist = [];
   var count = 0;
-  for (i in list) {
+  for (var i in list) {
 //    if(word == list[i]) continue; // don't duplicate
 
     if(list.length == 0) {
@@ -198,7 +198,7 @@ function findSimilarWords(word,list,min,fuzzy) {
     var lstart = thisword.length;
     var sim = 0;
     //ddump([word,thisword]);
-    for (x in word) {
+    for (var x in word) {
       var tsim = 0;
       start = thisword.indexOf(word[x]);
       //ddump(['start',start,word[x],'last start ',lstart]);
@@ -239,13 +239,13 @@ function groupBySimilarity(list,minsim) {
   var simlist = [];
   var listloc = [];
 
-  for (f = 0; f < list.length; f++) {
+  for (var f = 0; f < list.length; f++) {
     if(devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
     var thisword = list[f]
 
     var thislist = findSimilarWords(thisword,list.slice(f+1));
 
-    for (j in thislist) {
+    for (var j in thislist) {
       var oneword = thislist[j][1];
       if(listloc[oneword] == -1) continue;
       //if(f==0) ddump([simpc,'similar ' + thislist[j].split('^')[1] + ' & ' + list[i]]);
@@ -273,7 +273,7 @@ function groupBySimilarity(list,minsim) {
       listloc[thisword] = -1;
     }
   }
-  for (i in simlist) {
+  for (var i in simlist) {
     //if(simlist[i].length = 0) continue;
     simlist[i] = sortaz(simlist[i]); // sort groups internally alphabetically
   }
@@ -285,10 +285,10 @@ function groupBySimilarity(list,minsim) {
 function removeDuplicatesFromArray(list){
   var templist = [];
   var outlist = [];
-  for (i in list) {
+  for (var i in list) {
     templist[i] = 1;
   }
-  for (i in templist) {
+  for (var i in templist) {
     outlist.push(i);
   }
   return outlist;

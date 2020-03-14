@@ -23,7 +23,7 @@ function bv(rnd,static) {
   var cite = '';
   var link = '';
   var ps = verse.getElementsByTagName('p');
-  for(i in ps) {
+  for(var i in ps) {
     if (ps[i].className == 'text') {
       text.push(ps[i].innerHTML);
     }
@@ -71,12 +71,12 @@ function showBv(rnd) {
 function citation(cite,event) {
   var paramsa = cite.split('&');
   var param = [];
-  for(i in paramsa) {
+  for(var i in paramsa) {
     var tp = paramsa[i].split('=');
     param[tp[0]] = tp[1];
   }
   var loc = param['loc'].split('.');
-  for (i = 1; i < loc.length -1;i++) {
+  for (var i = 1; i < loc.length -1;i++) {
     loc[i] = parseInt(loc[i]);
   }
   mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));

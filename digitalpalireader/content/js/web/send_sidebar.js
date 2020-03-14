@@ -207,7 +207,7 @@ var DPRSend = {
       stringra = stringra.replace(/`/g, '"');
       stringra = stringra.split('#');
       if (G_searchRX == 'true') {
-        for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
+        for (var i in stringra) { stringra[i] = new RegExp(stringra[i]); }
       }
     }
     if (!add) { // reuse old tab

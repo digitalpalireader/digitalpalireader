@@ -285,7 +285,7 @@ function conjugateVerb(word) {
   if(verbCTense != 'pres') {
     out += '<table class="conjtable"><tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
     var verb = iV[yto[5]];
-    for(j =0; j < 3; j++) { // 3 persons
+    for(var j =0; j < 3; j++) { // 3 persons
       var pi = personNames[j];
       out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
       for (var i = 0; i <= 1; i++) {
@@ -323,7 +323,7 @@ function conjugateVerb(word) {
   for (var m in verbName) {
 
     out += '<table class="butc"><tr><td class="toprow"></td><td class="toprow" colspan="4">'+verbName[m]+'</td></tr><tr><td class="toprow"></td><td class="toprow" colspan="2">Parassapada</td><td class="toprow" colspan="2">Attanopada</td></tr><tr><td class="toprow"></td><td class="toprow">s.</td><td class="toprow">pl.</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
-    for(j =0; j < 3; j++) { // 3 persons
+    for(var j =0; j < 3; j++) { // 3 persons
       var pi = personNames[j];
       out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
       for (var n = 0; n < 2; n++) { // per voice
