@@ -8,6 +8,7 @@
     var(--splitter-background);
   --h-splitter-background: url(/digitalpalireader/content/images/hsizegrip.png)
     var(--splitter-background);
+  --bottom-pane-tab-side-length: 2.1rem;
 }
 
 html,
@@ -156,7 +157,59 @@ body {
 #main-bottom-pane {
   flex: 1 1 auto;
   overflow-x: hidden;
+  overflow-y: hidden;
+  display: grid;
+  grid-template-columns: var(--bottom-pane-tab-side-length) 1fr;
+  grid-template-rows: auto;
+  grid-gap: 0.1rem;
+}
+
+#main-bottom-pane-tabs {
+  width: 100%;
+  height: 100%;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  padding: 0.15rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1px var(--bottom-pane-tab-side-length)) auto;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab {
+  text-align: center;
+  margin: 1px;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab span {
+  vertical-align: middle;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab:hover{
+  background-color: lightblue;
+  cursor: default;
+}
+
+.main-bottom-pane-tab-pressed {
+  background-color: lightblue;
+  cursor: default;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab-separator {
+  border: 1px ridge #e7e7e7;
+  height: 1px;
+}
+
+#main-bottom-pane-tab-panes {
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  border: 2px ridge #e7e7e7;
+}
+
+#main-bottom-pane-tab-panes .main-bottom-pane-tab-pane {
+  margin: 0.15rem;
 }
 
 #main-pane-container {
