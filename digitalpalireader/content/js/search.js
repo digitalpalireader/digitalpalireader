@@ -614,7 +614,9 @@ function createTables(xmlDoc,hiert)
                 texttomatch = texttomatch.replace(/Ṃ/g, 'Ṁ');
               }
 
-              texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+              if(!DPR_prefs['showVariantsInline'])
+				texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+				
               if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
               //texttomatch = texttomatch.replace(/\^b\^/g, '');

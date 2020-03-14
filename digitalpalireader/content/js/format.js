@@ -170,7 +170,12 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_prefs['showVariantsInline']) {
-          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+		  if(which != 1) {
+		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+		  }
+		  else {
+		    altplusf += '<span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" id="W' + b + '">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+		  }
           finout += altplusf + space;
           b++;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
@@ -207,8 +212,13 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       else {
         altread = 1;
         altplus = wb.substring(1) + space;
-        if(DPR_prefs['showVariantsInline'] && which  != 1) {
-          altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
+        if(DPR_prefs['showVariantsInline']) {
+          if(which  != 1) {
+			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
+		  }
+		  else {
+			altplusf = '{<span class="text tiny varc" style="color:'+DPR_prefs['grey']+'" id="W' + b + '">' + toUni(wb.substring(1)) + '</span>' + space;
+		  }
           b++;
         }
       }
