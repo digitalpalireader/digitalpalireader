@@ -11,7 +11,7 @@ echo ------------------------------------------------------------
 
 # Get azcopy
 echo ------ Running wget
-wget -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux
+wget -O azcopy.tar.gz https://azcopyvnext.azureedge.net/release20200124/azcopy_linux_amd64_10.3.4.tar.gz
 echo ------ Running tar
 tar -xf azcopy.tar.gz
 echo ------ Copy azcopy
