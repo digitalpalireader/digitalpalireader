@@ -96,7 +96,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
   var st = [];
   var matst = [];
-  for (i in G_searchMAT) matst.push(G_searchMAT[i]);
+  for (var i in G_searchMAT) matst.push(G_searchMAT[i]);
 
   st[0] = 'Multiple Sets';
   st[1] = G_nikLongName[G_searchSet] + ' Books';
@@ -237,7 +237,7 @@ function pausesall()
     G_searchBook = G_searchBook.replace(/\|/g,',|,');
     var cbooks = G_searchBook.split('|');
     var cniks = [];
-    for(i in G_searchSet) {
+    for(var i in G_searchSet) {
       cniks[G_searchSet[i]] = i;
     }
   }
@@ -476,7 +476,7 @@ function createTables(xmlDoc,hiert)
   //After removing XUL, this whome file has to be tidied up and refactored.
   if (!DPR_PAL.isXUL) {
     var options = MD.location.href.split('?')[1].split('#')[0].split('&');
-    for (i in options) {
+    for (var i in options) {
       var option = options[i].split('=');
       switch(option[0]) {
         case 'rx':
@@ -614,7 +614,9 @@ function createTables(xmlDoc,hiert)
                 texttomatch = texttomatch.replace(/Ṃ/g, 'Ṁ');
               }
 
-              texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+              if(!DPR_prefs['showVariantsInline'])
+				texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+				
               if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
               //texttomatch = texttomatch.replace(/\^b\^/g, '');
@@ -637,7 +639,7 @@ function createTables(xmlDoc,hiert)
               {
                 tagtitle = '';
                 tempexword = [];
-                for (d = 0; d < stringra.length; d++)
+                for (var d = 0; d < stringra.length; d++)
                 {
                   perstring = stringra[d];
 
@@ -946,7 +948,7 @@ function createTables(xmlDoc,hiert)
         }
         exnodups[t] = sortaz(exnodups[t]);
         exwordout += '<td valign="top">';
-        for (ex = 0; ex < exnodups[t].length; ex++)
+        for (var ex = 0; ex < exnodups[t].length; ex++)
         {
           exwordout += `<div>${createTdForMatch(dups, exnodups[t][ex])}</div>`;
         }
@@ -1003,7 +1005,7 @@ function showonly(string) {
 
   var da = document.getElementById('sbfb').getElementsByTagName('div');
   if (string == 'xyz') {
-    for (x = 0; x < da.length; x++) {
+    for (var x = 0; x < da.length; x++) {
       da[x].style.display = "block";
     }
     document.getElementById('showing').style.display = 'none';
@@ -1064,7 +1066,7 @@ function atiSearchStart() {
 
     MD.getElementById('search-sets').appendChild(thisterm);
     MD.getElementById('search-sets').appendChild(tsep);
-    for (i = 0; i < G_numberToNik.length; i++) {
+    for (var i = 0; i < G_numberToNik.length; i++) {
       if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
 
       var thisset = MD.createElement('toolbarbutton');
@@ -1167,7 +1169,7 @@ function atiSearchOffline(d, getstring) {
     var xmlDoc = parser.parseFromString(cont,'text/xml');
     var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
     var data = xmlDoc.getElementsByTagName('div');
-    for (j in data) {
+    for (var j in data) {
       if(data[j].id == 'H_content') {
       var texttomatch = data[j].textContent;
         if(G_searchRX) startmatch = texttomatch.search(getstring);

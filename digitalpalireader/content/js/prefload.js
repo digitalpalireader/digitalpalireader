@@ -154,22 +154,20 @@ DPR_prefsD['altlimit'] = 20;
 var DPR_prefs = [];
 
 function XUL_setDefPrefs() {
-  var i;
-  for (i in DPR_prefsD) {
+  for (var i in DPR_prefsD) {
     DPR_prefs[i] = getPref(i);
   }
 }
 setDefPrefs();
 
 function WEB_setDefPrefs() {
-  for (const i in DPR_prefsD) {
+  for (var i in DPR_prefsD) {
     DPR_prefs[i] = getPref(i);
   }
 }
 
 function WEB_setPrefs() {
-  var i;
-  for (i in DPR_prefsD) {
+  for (var i in DPR_prefsD) {
     var pref = WEB_getPref(i);
     if(pref === null)
       pref = DPR_prefsD[i];

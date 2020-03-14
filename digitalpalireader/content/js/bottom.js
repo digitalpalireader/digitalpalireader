@@ -19,7 +19,7 @@ function onDocLoadx() {
     var opts = link.split('&');
     var linkt = '';
     var linkb = '';
-    for (i in opts) {
+    for (var i in opts) {
       switch(opts[i].split('=')[0]) {
         case 'analysis':
         case 'ped':

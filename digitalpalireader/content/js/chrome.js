@@ -30,7 +30,7 @@ function openDPRTab(permalink,id,reuse) {
     var start = 0;  // no DPR tabs yet
     var newIdx = 0;
 
-    for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+    for (var index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
 
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
@@ -124,7 +124,7 @@ function updatePrefs() {
 
   getconfig();
   changeSet(1);
-  for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+  for (var index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
@@ -152,7 +152,7 @@ function giveIDtoTabs() { // startup function, give ids to
   var dict = 0; // no dict tabs
   var search = 0; // no dict tabs
   var etc = 0;
-  for (index = 0, tb = DPR_PAL.mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
+  for (var index = 0, tb = DPR_PAL.mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
 
     // Get the next tab
     var currentTab = tb.tabContainer.childNodes[index];
@@ -174,7 +174,7 @@ function checkLastTab() {
     return false;
   }
 
-  for (index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+  for (var index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;

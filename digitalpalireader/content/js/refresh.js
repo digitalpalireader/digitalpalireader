@@ -7,7 +7,7 @@ function refreshit()
     var xmlDoc = xmlhttp.responseXML.documentElement;
     var newsx = xmlDoc.getElementsByTagName('news');
     var news = [];
-    for(i=0;i<5;i++) {
+    for(var i=0;i<5;i++) {
       if(!newsx[i])
         break;
       news.push(newsx[i].textContent);

@@ -127,39 +127,83 @@
             <div id="main-content-panel-splitter" ondblclick="closeBottomFrame()"></div>
 
             <div id="main-bottom-pane">
-              <div id="anf" style="text-align: right" class="chromeback">
-                <div id="brtop"></div>
-                <div id="brmid"></div>
-                <div id="brbot"></div>
-                <div id="anft">
-                  <div style="text-align: center" id="anfa"></div>
-                  <div style="text-align: center" id="anfb">
-                    <table cellspacing="0" cellpadding="0" width=100%>
-                      <tr>
-                        <td style="text-align: left" valign="top" id="anfleft"></td>
-                        <td valign=top style="text-align: center" id="anfcenter"></td>
-                        <td valign="top" style="text-align: right" id="anfright"></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div style="position:relative">
-                    <div id="anfs"></div>
-                    <div id="anfsd"></div>
-                  </div>
-                </div>
+              <div id="main-bottom-pane-tabs">
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab main-bottom-pane-tab-pressed"><span>D</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab"><span>Cv</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab"><span>Tp</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab"><span>Tr</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab"><span>Cj</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
+                <div class="main-bottom-pane-tab"><span>Bv</span></div>
+                <div class="main-bottom-pane-tab-separator"></div>
               </div>
-              <div id="bottom">
-                <div id="difout" class="difout">
-                  <div id="cdif" class="cdif">
-                    <div id="dif" class="dif paperback">
-                      <div id="difb-bottom" class="difb">
+              <div id="main-bottom-pane-tab-panes">
+                <div id="main-bottom-pane-tab-panes-D" class="main-bottom-pane-tab-pane">
+                  <div id="anf" style="text-align: right" class="chromeback">
+                    <div id="brtop"></div>
+                    <div id="brmid"></div>
+                    <div id="brbot"></div>
+                    <div id="anft">
+                      <div style="text-align: center" id="anfa"></div>
+                      <div style="text-align: center" id="anfb">
+                        <table width="100%" cellspacing="0" cellpadding="0">
+                          <tbody><tr>
+                            <td style="text-align: left" id="anfleft" valign="top"><table style="float:left" id="data-table" cellspacing="0" cellpadding="0"><tbody><tr><td valign="top" align="center"><span class="pointer" onmouseover="showShortDef('pavatta')" onmouseup="paliXML('PED/2/2487,pavatta',null,eventSend(event))"><b style="color:#C40">pavatt</b></span><br><font size="2"><span class="pointer" onmouseup="DPPNXML('pavattā/9/2037,pavattā',null,eventSend(event))"><b style="color:#0B0">n</b></span></font></td><td valign="top"><b>-</b></td><td valign="top" align="center"><span class="pointer" onmouseover="showShortDef('atta')" onmouseup="paliXML('PED/0/533,attā',null,eventSend(event))"><b style="color:#C40">attā</b></span></td><td class="conjc" valign="top">&nbsp;<a href="javascript:void(0);" onclick="conjugate('atta','dif','attā')" title="conjugate this word" class="small" style="color:green"><sup>c</sup></a></td><td class="pointer" onclick="$('#data-table').hide(); $('#modify-box').show();$('#modify').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(/digitalpalireader/content/images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></tbody></table><div style="float:left; display:none" id="modify-box"><input type="text" size="12" id="modify" value="pavattattaa" onkeypress="if(event.keyCode === 13) reanalyze('pavattattaa')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze('pavattattaa',true)" title="cancel edits">x</span></div></td>
+                            <td style="text-align: center" id="anfcenter" valign="top"></td>
+                            <td style="text-align: right" id="anfright" valign="top"><b style="color:#44D">pavatta</b>: going on; fallen down. (nt.) the circle of existence. (adj.)</td>
+                          </tr>
+                        </tbody></table>
+                      </div>
+                      <div style="position:relative">
+                        <div id="anfs"><form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"><option>pavatt-attā</option><option>pa-vatt-attā</option><option>pavatta-t-tā</option><option>pa-vatta-t-tā</option></select></form></div>
+                        <div id="anfsd"></div>
                       </div>
                     </div>
                   </div>
-                  <div id="difhist" class="hoverShow"></div>
+                  <div id="bottom">
+                    <div id="difout" class="difout">
+                      <div id="cdif" class="cdif">
+                        <div id="dif" class="dif paperback">
+                          <div id="difb-bottom" class="difb"><div><p>  <b>Pavatta</b> (adj.) [<em style="color:grey">pp. of <a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/2488,pavattati')">pavattati</a></em>] 1. (adj.) happening, going on, procedure, resulting Th 2, 220 (<a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/0/2515,assu')">assu</a> <a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/1/1501,ca')">ca</a> pavattaŋ taken by Mrs. Rh. D. as "tears shed"); ThA 179; PvA 35, 83 (gāthāyo), 120, esp. with ref. to natural products as "that which comes," i. e. normal, natural raw; <b>˚<a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/3247,phala')">phala</a></b> ready or natural, wild fruit (gained without exertion of picking), in cpds. <b>˚<a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/3257,phalika')">phalika</a></b> SnA 295 sq. <b>˚<a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/3813,bhojana')">bhojana</a></b> (adj.) J <smallcaps>i.</smallcaps>6; <smallcaps>iii.</smallcaps>365; Vism 422, and, <b>˚bhojin</b> one who lives on wild fruit (a certain class of ascetics tāpasā) D <smallcaps>i.</smallcaps>101; M <smallcaps>i.</smallcaps>78, 343; A <smallcaps>i.</smallcaps>241; <smallcaps>ii.</smallcaps>206; cp DA <smallcaps>i.</smallcaps>269 sq. &amp; SnA 295, 296. ;<b>˚maŋsa</b> fresh or raw meat (flesh) Vin <smallcaps>i.</smallcaps>217 (cp. <i>Vin. Texts</i> <smallcaps>ii.</smallcaps>81). <br><br><b>2.</b> (nt. "that which goes on," i. e. the circle or whirl of existence Miln 197, 326 (cp. <i>Miln trsl<sup>n</sup></i> <smallcaps>ii.</smallcaps>200 "starting afresh in innumerable births," quot. fr. C.), opp <b>appavatta</b> freedom from Saŋsāra, i. e. Nibbāna ibid <br><br><b>3.</b> founded on, dealing with, relating to, being in S <smallcaps>iv.</smallcaps>115 (kuraraghare p. <a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/1760,pabbata')">pabbata</a>); DA <smallcaps>i.</smallcaps>92 (ādinaya˚), 217 (˚<a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/2/2983,pīti')">pīti</a> -- <a style="color:#550" href="javascript:void(0)" onclick="paliXML('PED/4/840,sukha')">sukha</a> being in a state of happiness). </p><hr></div></div>
+                        </div>
+                      </div>
+                      <div id="difhist" class="hoverShow"><table><tbody><tr><td><span class="abut lbut tiny" onclick="paliXML('PED/2/2486,pavati')"></span>&lt;<span class="abut rbut tiny" onclick="paliXML('PED/2/2488,pavattati')"></span>&gt;</td></tr></tbody></table></div>
+                    </div>
+                  </div>
+                </div>
+                <div id="main-bottom-pane-tab-panes-Cv" style="display: none;">
+                  Cv
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor aut beatae quos exercitationem architecto, minus facilis odit laudantium consequatur nesciunt fugiat dolorum cumque labore quibusdam voluptatibus nulla voluptas ea consectetur iure iste autem iusto ut! Fugiat quibusdam commodi voluptas nisi incidunt quod veniam adipisci magni error quas, vel at harum amet. Odio accusantium dolorum tenetur distinctio deleniti ea aliquam accusamus, et voluptate facilis quisquam blanditiis adipisci recusandae iure ut rem ipsam numquam harum expedita dicta iusto! Vitae perferendis fuga quae numquam quod, illo alias, odit perspiciatis aperiam veritatis amet eveniet cupiditate quos dolorum quo in nostrum sit quas? Eveniet, et animi, dolores atque voluptates architecto cupiditate quia corporis consequuntur odit vel culpa eligendi omnis quasi dolore! Vero velit culpa quae quia obcaecati eveniet beatae odit blanditiis ipsum iste? Autem aliquid ipsam necessitatibus explicabo id cupiditate sunt quaerat illo inventore animi dolorem enim, dolore magni quibusdam laborum? Distinctio est dolore repudiandae!
+                  </p>
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor aut beatae quos exercitationem architecto, minus facilis odit laudantium consequatur nesciunt fugiat dolorum cumque labore quibusdam voluptatibus nulla voluptas ea consectetur iure iste autem iusto ut! Fugiat quibusdam commodi voluptas nisi incidunt quod veniam adipisci magni error quas, vel at harum amet. Odio accusantium dolorum tenetur distinctio deleniti ea aliquam accusamus, et voluptate facilis quisquam blanditiis adipisci recusandae iure ut rem ipsam numquam harum expedita dicta iusto! Vitae perferendis fuga quae numquam quod, illo alias, odit perspiciatis aperiam veritatis amet eveniet cupiditate quos dolorum quo in nostrum sit quas? Eveniet, et animi, dolores atque voluptates architecto cupiditate quia corporis consequuntur odit vel culpa eligendi omnis quasi dolore! Vero velit culpa quae quia obcaecati eveniet beatae odit blanditiis ipsum iste? Autem aliquid ipsam necessitatibus explicabo id cupiditate sunt quaerat illo inventore animi dolorem enim, dolore magni quibusdam laborum? Distinctio est dolore repudiandae!
+                  </p>
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor aut beatae quos exercitationem architecto, minus facilis odit laudantium consequatur nesciunt fugiat dolorum cumque labore quibusdam voluptatibus nulla voluptas ea consectetur iure iste autem iusto ut! Fugiat quibusdam commodi voluptas nisi incidunt quod veniam adipisci magni error quas, vel at harum amet. Odio accusantium dolorum tenetur distinctio deleniti ea aliquam accusamus, et voluptate facilis quisquam blanditiis adipisci recusandae iure ut rem ipsam numquam harum expedita dicta iusto! Vitae perferendis fuga quae numquam quod, illo alias, odit perspiciatis aperiam veritatis amet eveniet cupiditate quos dolorum quo in nostrum sit quas? Eveniet, et animi, dolores atque voluptates architecto cupiditate quia corporis consequuntur odit vel culpa eligendi omnis quasi dolore! Vero velit culpa quae quia obcaecati eveniet beatae odit blanditiis ipsum iste? Autem aliquid ipsam necessitatibus explicabo id cupiditate sunt quaerat illo inventore animi dolorem enim, dolore magni quibusdam laborum? Distinctio est dolore repudiandae!
+                  </p>
+                  <p>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolor aut beatae quos exercitationem architecto, minus facilis odit laudantium consequatur nesciunt fugiat dolorum cumque labore quibusdam voluptatibus nulla voluptas ea consectetur iure iste autem iusto ut! Fugiat quibusdam commodi voluptas nisi incidunt quod veniam adipisci magni error quas, vel at harum amet. Odio accusantium dolorum tenetur distinctio deleniti ea aliquam accusamus, et voluptate facilis quisquam blanditiis adipisci recusandae iure ut rem ipsam numquam harum expedita dicta iusto! Vitae perferendis fuga quae numquam quod, illo alias, odit perspiciatis aperiam veritatis amet eveniet cupiditate quos dolorum quo in nostrum sit quas? Eveniet, et animi, dolores atque voluptates architecto cupiditate quia corporis consequuntur odit vel culpa eligendi omnis quasi dolore! Vero velit culpa quae quia obcaecati eveniet beatae odit blanditiis ipsum iste? Autem aliquid ipsam necessitatibus explicabo id cupiditate sunt quaerat illo inventore animi dolorem enim, dolore magni quibusdam laborum? Distinctio est dolore repudiandae!
+                  </p>
+                </div>
+                <div id="main-bottom-pane-tab-panes-Tp" style="display: none;">
+                  Tp
+                </div>
+                <div id="main-bottom-pane-tab-panes-Tr" style="display: none;">
+                  Tr
+                </div>
+                <div id="main-bottom-pane-tab-panes-Cj" style="display: none;">
+                  Cj
+                </div>
+                <div id="main-bottom-pane-tab-panes-Bv" style="display: none;">
+                  Bv
                 </div>
               </div>
-              <div id="alertc"><span id="alert"></span></div>
             </div>
           </div>
         </div>

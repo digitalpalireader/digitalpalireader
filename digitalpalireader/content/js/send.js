@@ -307,7 +307,7 @@ function sendPlace(place) {
 
 function sendUpdateBookmarks() {
   var oldTabs = findDPRTabs('DPR-bm');
-  for (i = 0; i < oldTabs.length; i++) {
+  for (var i = 0; i < oldTabs.length; i++) {
     var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTabs[i]);
     oldTabBrowser.contentWindow.bookmarkframe();
   }

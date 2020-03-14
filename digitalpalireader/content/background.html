@@ -3,17 +3,17 @@
 <script type="text/javascript" src="js/dpr_pal.js"></script>
 <script type="text/javascript" src="js/prefload.js"></script>
 <script>
-for (i = 0; i < cPrefs.length; i++) {
+for (var i = 0; i < cPrefs.length; i++) {
     var Pref = cPrefs[i];
     var Val = cPrefVals[i];
     if (!localStorage[Pref]) localStorage[Pref] = Val;
 }
-for (i = 0; i < sPrefs.length; i++) {
+for (var i = 0; i < sPrefs.length; i++) {
     var Pref = sPrefs[i];
     var Val = sPrefVals[i];
     if (!localStorage[Pref]) localStorage[Pref] = Val;
 }
-for (i = 0; i < mPrefs.length; i++) {
+for (var i = 0; i < mPrefs.length; i++) {
     var Pref = mPrefs[i];
     var Val = mPrefVals[i];
     if (!localStorage[Pref]) localStorage[Pref] = Val;

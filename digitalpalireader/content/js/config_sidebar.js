@@ -1,6 +1,6 @@
 var DPRConfig = {
   sidebarConfig:function() {
-    for (i in DPR_prefs) {
+    for (var i in DPR_prefs) {
       DPR_prefs[i] = getPref(i);
     }
     DPRNav.historyBox();

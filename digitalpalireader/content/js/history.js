@@ -9,7 +9,7 @@ function removeHistory(value) {
   var content = readFile('History_List_DPR');
 
   var oldHistory = content.join('#').split('#'); // legacy support
-  for (j in oldHistory) {
+  for (var j in oldHistory) {
     if (oldHistory[j] != value) { storeHistory.push(oldHistory[j]); }
     if (j > 99) { break; }
   }
@@ -50,7 +50,7 @@ function addHistory(value) {
   var storeHistory = [value];
   if(!fileExists('History_List_DPR')) var data = [];
   else var data = readFile('History_List_DPR').join('#').split('#');
-  for (j in data) {
+  for (var j in data) {
     if (data[j] != value) { storeHistory.push(data[j]); }
     if (j > 99) { break; }
   }

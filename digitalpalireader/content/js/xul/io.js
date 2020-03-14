@@ -191,7 +191,7 @@ function profFileExists (file) {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
 
   var dirs = file.split('/')
-  for (i in dirs) {
+  for (var i in dirs) {
     dir.append(dirs[i])
     if (!dir.exists()) return false
   }

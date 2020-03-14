@@ -362,7 +362,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
         var z = amlist[book][vagga][sutta][section];
         out:
-        for (a = 0;a < atiA.length; a++) {
+        for (var a = 0;a < atiA.length; a++) {
           if(parseInt(atiA[a].split('/')[1].substring(2),10) == bookn) {
             var atiAs = atiA[a].split('.');
             if(atiAs[1].indexOf('-')>=0) b=atiAs[1].split('-');
@@ -484,7 +484,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         //document.getElementById('difb').innerHTML += countc;
 
         out:
-        for (a = 0;a < atiS.length; a++) {
+        for (var a = 0;a < atiS.length; a++) {
           if(parseInt(atiS[a].split('/')[1].substring(2),10) == (vagga+1)) {
             if(atiS[a].split('.')[1].indexOf('-')>=0) b=atiS[a].split('.')[1].split('-');
             else {b=null;}
@@ -519,7 +519,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
           // kn/khp/khp.1-9.than.html
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'khp') {
                 if(atiK[a].split('.')[1].indexOf('-')>=0) b=atiK[a].split('.')[1].split('-');
                 else {b=null;}
@@ -548,7 +548,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
               // kn/dhp/dhp.24.budd.html
               //alert(vagga + ' ' + sutta + ' ' + section);
               out:
-              for (a = 0;a < atiK.length; a++) {
+              for (var a = 0;a < atiK.length; a++) {
                 if(atiK[a].split('/')[1] == 'dhp') {
                   d=(vagga+1)+"";
                   if (d.length < 2) { d = '0'+d; }
@@ -605,7 +605,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
             // kn/ud/ud.2.01.irel.html
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'ud' && (vagga+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}
@@ -689,7 +689,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
                 break;
             }
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'iti' && (vagga+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}
@@ -721,7 +721,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             if (vagga == 4) section--;
 
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'snp' && (vagga+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) b=atiK[a].split('.')[2].split('-');
                 else {b=null;}
@@ -757,7 +757,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             // kn/ud/ud.2.01.irel.html
             if (vagga == 1) {sutta +=4;}
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'vv' && (sutta+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}
@@ -786,7 +786,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
             // kn/ud/ud.2.01.irel.html
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'pv' && (vagga+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}
@@ -818,7 +818,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             section += (sutta*10);
             //alert(vagga + ' ' + sutta + ' ' + section);
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'thag' && vagga == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}
@@ -848,7 +848,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             // kn/ud/ud.2.01.irel.html
             //alert(vagga + ' ' + sutta + ' ' + section);
             out:
-            for (a = 0;a < atiK.length; a++) {
+            for (var a = 0;a < atiK.length; a++) {
               if(atiK[a].split('/')[1] == 'thig' && (vagga+1) == atiK[a].split('.')[1]) {
                 if(atiK[a].split('.')[2].indexOf('-')>=0) {b=atiK[a].split('.')[2].split('-');}
                 else {b=null;}

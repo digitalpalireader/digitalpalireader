@@ -65,7 +65,7 @@ var digitalpalireader =
   updatePrefs: function() {
     window.dump('updatePrefs');
     DPRConfig.sidebarConfig();
-    for (index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
+    for (var index = 0, tabbrowser = mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;

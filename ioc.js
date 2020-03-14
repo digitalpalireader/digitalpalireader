@@ -81,7 +81,7 @@ function removeHistory(value) {
     else break;
   }
   var k = 0;
-  for (j in storeHistory) {
+  for (var j in storeHistory) {
     k++;
     localStorage['DPR_History_'+j] = storeHistory[j];
   }
@@ -118,7 +118,7 @@ function addHistory(value) {
     }
     else break;
   }
-  for (j in storeHistory) {
+  for (var j in storeHistory) {
     localStorage['DPR_History_'+j] = storeHistory[j];
   }
 }
