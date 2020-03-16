@@ -11,7 +11,7 @@ addEventListener('message', (event) => {
 });
 
 workbox.routing.registerRoute(
-  /\.(?:html|htm|css|js,)$/,
+  /\.(?:html|htm|css|js|json)$/,
   new workbox.strategies.StaleWhileRevalidate({
     cacheName: 'assets-cache',
     plugins: [
