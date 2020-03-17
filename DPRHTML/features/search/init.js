@@ -7,8 +7,8 @@ var searchPart = 0;
 var searchRX = false;
 
 const setSearchParams = () => {
-  DPRNav.setSearchBookList();
-  DPROpts.tipitakaOptions();
+  //DPRNav.setSearchBookList();
+  //DPROpts.tipitakaOptions();
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
   urlParams.forEach(parameter => {
     parameterSections = parameter.split('=');
@@ -31,7 +31,7 @@ const setSearchParams = () => {
         break;
       case 'book':
         searchBook = parameterSections[1];
-        __dprViewModel.searchTab.searchBook(searchBook);
+        __dprViewModel.searchTab.searchBookString(searchBook);
         break;
       case 'part':
         searchPart = parameterSections[1];
@@ -47,14 +47,17 @@ const setSearchParams = () => {
 
 searchHandler = event => {
   DPRSend.sendSearch(DPRSend.eventSend(event));
-  setSearchParams();
+  //setSearchParams();
+  //DPROpts.tipitakaOptions();
+  //DPRNav.setSearchBookList();
 }
 
 const initializeSearchSidebarTab = () => {
-  let sidebarTab = $("#searchTabPane :first-child")[0];
+  const sidebarTab = $(`#${searchFeatureName}TabContent`)[0];
   setSearchParams();
   ko.applyBindings(__dprViewModel.searchTab, sidebarTab);
-
+  DPROpts.tipitakaOptions();
+  DPRNav.setSearchBookList();
   DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }
 
