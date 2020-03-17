@@ -1,7 +1,7 @@
 :root {
   --main-footer-height: 1rem;
   --main-content-header-height: 3rem;
-  --main-sidebar-width: 20rem;
+  --main-sidebar-width: 22rem;
   --splitter-width: 0.75rem;
   --splitter-background: center center no-repeat #b3b3b3;
   --v-splitter-background: url(/digitalpalireader/content/images/vsizegrip.png)
@@ -90,7 +90,9 @@ body {
 #main-sidebar {
   flex: 0 0 auto;
   min-width: var(--main-sidebar-width);
-  overflow: auto;
+  width: var(--main-sidebar-width);
+  overflow-x: hidden;
+  overflow-y: auto;
   display: none;
   margin-left: calc(0rem - var(--main-sidebar-width));
 }
@@ -137,7 +139,7 @@ body {
 #main-content-panel {
   display: flex;
   flex-direction: column;
-  height: calc(100% - var(--main-content-header-height));
+  height: 100%;
   overflow: hidden;
 }
 
