@@ -12,6 +12,10 @@ function dalert(a) { }
 function ddump(a) { }
 /* End: Legacy stuff. */
 
+const navigationFeatureName = "navigation";
+const searchFeatureName = "search";
+const dictionaryFeatureName = "dictionary";
+
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 
@@ -23,11 +27,11 @@ async function mainInitialize() {
   ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isNavigationFeature()) {
-    await loadFeatureAsync('navigation', initializeNavigationFeature);
+    await loadFeatureAsync(navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    await loadFeatureAsync('search', initializeSearchFeature);
+    await loadFeatureAsync(searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    await loadFeatureAsync('dictionary', initializeDictionaryFeature);
+    await loadFeatureAsync(dictionaryFeatureName, initializeDictionaryFeature);
   } else {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
@@ -109,9 +113,15 @@ const loadPanesAsync = async () => {
 }
 
 const initFeatureTabs = () => {
-  $("#navigationTabPane").show();
+  $("#navigationTabPane").hide();
   $("#searchTabPane").hide();
   $("#dictionaryTabPane").hide();
+
+  const activeTab = __dprViewModel.activeTab();
+  $(`#${activeTab}TabPane`).show();
+  $(".nav-link").removeClass('active');
+  $(`#${activeTab}Tab`).addClass('active');
+  localStorage.setItem('activeTab', `${__dprViewModel.activeTab()}Tab`);
 
   $(".nav-link").on("click", function (e) {
     e.preventDefault();
