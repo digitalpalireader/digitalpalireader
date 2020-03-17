@@ -5,48 +5,48 @@
 
 
 <page id="" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	persist="screenX screenY"
-	title="Digital Pali Reader Web Installer"
-	onload="var intId = window.setInterval(function(){checkInstalled()},1000)">
-	<script type="application/x-javascript" src="js.js"/>
-	<vbox pack="center" align="center">
-		<vbox>
-			<vbox align="center">
-				<label value="Welcome to the Digital Pali Reader Web Installer."/>
-				<label value="This utility allows you to download the DPR and it's accompanying Tipitaka archives."/>
-				<label value="Once you have downloaded them, please restart Firefox to finish the installation."/>
-				<label value="Note that the Myanmar Tipitaka is required for operation; the Thai Tipitaka is optional."/>
-			</vbox>
-			<richlistbox flex="1">
-				<grid flex="1" id="setsGrid">
-					<columns>
-						<column label="Name"/>
-						<column label="Installed"/>
-					</columns>
-					<rows id="setsRows">
-						<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
-							<row flex="1" align="center">
-								<label flex="1" value="Digital Pali Reader"/>
-								<label id="digitalpalireader" class="link" value="&setInstall;"/>
-							</row>
-						</richlistitem>
-						<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
-							<row flex="1" align="center">
-								<label flex="1" value="Myanmar Tipitaka"/>
-								<label id="DPRMyanmar" class="link" value="&setInstall;"/>
-							</row>
-						</richlistitem>
-						<richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
-							<row flex="1" align="center">
-								<label flex="1" value="Thai Tipitaka"/>
-								<label id="DPRThai" class="link" value="&setInstall;"/>
-							</row>
-						</richlistitem>
-					</rows>
-				</grid>
-			</richlistbox>
-			<label collapsed="true" id="installed" value="&setInstalled;"/>
-		</vbox>
-	</vbox>
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  persist="screenX screenY"
+  title="Digital Pali Reader Web Installer"
+  onload="var intId = window.setInterval(function(){checkInstalled()},1000)">
+  <script type="application/x-javascript" src="js.js"/>
+  <vbox pack="center" align="center">
+    <vbox>
+      <vbox align="center">
+        <label value="Welcome to the Digital Pali Reader Web Installer."/>
+        <label value="This utility allows you to download the DPR and it's accompanying Tipitaka archives."/>
+        <label value="Once you have downloaded them, please restart Firefox to finish the installation."/>
+        <label value="Note that the Myanmar Tipitaka is required for operation; the Thai Tipitaka is optional."/>
+      </vbox>
+      <richlistbox flex="1">
+        <grid flex="1" id="setsGrid">
+          <columns>
+            <column label="Name"/>
+            <column label="Installed"/>
+          </columns>
+          <rows id="setsRows">
+            <richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+              <row flex="1" align="center">
+                <label flex="1" value="Digital Pali Reader"/>
+                <label id="digitalpalireader" class="link" value="&setInstall;"/>
+              </row>
+            </richlistitem>
+            <richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+              <row flex="1" align="center">
+                <label flex="1" value="Myanmar Tipitaka"/>
+                <label id="DPRMyanmar" class="link" value="&setInstall;"/>
+              </row>
+            </richlistitem>
+            <richlistitem onmouseover="this.selected=true" onmouseout="this.selected=false">
+              <row flex="1" align="center">
+                <label flex="1" value="Thai Tipitaka"/>
+                <label id="DPRThai" class="link" value="&setInstall;"/>
+              </row>
+            </richlistitem>
+          </rows>
+        </grid>
+      </richlistbox>
+      <label collapsed="true" id="installed" value="&setInstalled;"/>
+    </vbox>
+  </vbox>
 </page>

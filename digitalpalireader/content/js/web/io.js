@@ -1,8 +1,10 @@
+'use strict';
+
 function setI () {
   i = 1
 }
 
-ioCheck = true
+var ioCheck = true
 
 function readFile (aFileKey) {
   console.log('History not yet implemented.')
@@ -55,7 +57,7 @@ function writeFile (aFileKey, aContent) {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
   dir.append('DPR')
   if (!dir.exists()) {
-    dir.create(dir.DIRECTORY_TYPE, 0700)
+    dir.create(dir.DIRECTORY_TYPE, parseInt('0700', 8))
   }
 
   var aFile = dir.clone()
@@ -69,7 +71,7 @@ function writeFile (aFileKey, aContent) {
     ].createInstance(Components.interfaces.nsIFileOutputStream)
 
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0)
+    foStream.init(aFile, 0x02 | 0x08 | 0x20, parseInt('0666', 8), 0)
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.
@@ -146,7 +148,7 @@ function writeExtFile (fileLoc, aContent) {
     ].createInstance(Components.interfaces.nsIFileOutputStream)
 
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0)
+    foStream.init(aFile, 0x02 | 0x08 | 0x20, parseInt('0666', 8), 0)
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.
@@ -195,7 +197,7 @@ function profFileExists (file) {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
 
   var dirs = file.split('/')
-  for (i in dirs) {
+  for (var i in dirs) {
     dir.append(dirs[i])
     if (!dir.exists()) return false
   }
@@ -233,7 +235,7 @@ function readDir () {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
   dir.append('DPR')
   if (!dir.exists()) {
-    dir.create(dir.DIRECTORY_TYPE, 0700)
+    dir.create(dir.DIRECTORY_TYPE, parseInt('0700', 8))
   }
 
   var entries = dir.directoryEntries
@@ -259,7 +261,7 @@ function eraseFile (name) {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
   dir.append('DPR')
   if (!dir.exists()) {
-    dir.create(dir.DIRECTORY_TYPE, 0700)
+    dir.create(dir.DIRECTORY_TYPE, parseInt('0700', 8))
   }
 
   var aFile = dir.clone()
@@ -317,7 +319,7 @@ function writeToDesktop (aFileKey, aContent) {
     ].createInstance(Components.interfaces.nsIFileOutputStream)
 
     // use 0x02 | 0x10 to open file for appending.
-    foStream.init(aFile, 0x02 | 0x08 | 0x20, 0666, 0)
+    foStream.init(aFile, 0x02 | 0x08 | 0x20, parseInt('0666', 8), 0)
     // write, create, truncate
     // In a c file operation, we have no need to set file mode with or operation,
     // directly using "r" or "w" usually.
@@ -347,7 +349,7 @@ function eraseItem (name) {
   var dir = DIR.get('ProfD', Components.interfaces.nsIFile)
   dir.append('DPR')
   if (!dir.exists()) {
-    dir.create(dir.DIRECTORY_TYPE, 0700)
+    dir.create(dir.DIRECTORY_TYPE, parseInt('0700', 8))
   }
 
   var aFile = dir.clone()

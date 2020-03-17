@@ -94,7 +94,7 @@
   text-decoration: underline;
 }
 
-#navigation-hierarchy {
+.navigation-hierarchy-layout {
   display: grid;
   grid-template-columns: auto 2rem;
   grid-auto-rows: auto;

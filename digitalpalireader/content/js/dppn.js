@@ -1,3 +1,5 @@
+'use strict';
+
 var D=[];
 
 D['akata~n~nujaataka']=['1/360'];
@@ -10199,4 +10201,4 @@ D['hsuantsang']=['6/507'];
 
 var G_dppnEnd=['thera','therii','putta','maa.nava','braahma.na','se.t.thi'];
 
-var EXPORTED_SYMBOLS = ["G_dppnEnd","D"];  
+var EXPORTED_SYMBOLS = ["G_dppnEnd","D"];

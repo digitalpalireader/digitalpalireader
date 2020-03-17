@@ -1,4 +1,4 @@
-content	thunDPR	content/
-locale	thunDPR	en-US	locale/en-US/
+content  thunDPR  content/
+locale  thunDPR  en-US  locale/en-US/
 overlay chrome://messenger/content/messenger.xul chrome://thunDPR/content/overlay.xul
 overlay chrome://messenger/content/messengercompose/messengercompose.xul chrome://thunDPR/content/overlay.xul

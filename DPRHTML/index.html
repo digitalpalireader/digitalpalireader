@@ -44,7 +44,7 @@
           <div id="main-sidebar-content" class="card">
             <div class="card-header">
               Digital Pali Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right; display: none;">
+              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
@@ -70,26 +70,25 @@
           </div>
         </div>
         <div id="main-panel-splitter" ondblclick="toggleNewSidebarVisibility()"></div>
-        <div id="main-content-landing-page" data-bind="visible: landingFeatureVisible">
-        </div>
-        <div id="main-content" data-bind="visible: mainFeaturesVisible">
-          <header id="main-content-header">
-            <button type="button" class="btn btn-light m-0" onclick="toggleNewSidebarVisibility()">
-              <i class="fa fa-bars"></i>
-            </button>
-            <a href="/" class="btn btn-light m-0" role="button">
-              <i class="fa fa-home"></i>
-            </a>
-            <a href="#" target="_blank" class="btn btn-success m-0 feedback-form-link" role="button" style="font-size: x-small;">
-              Give feedback!
-            </a>
-            <div id="main-content-header-context-commands"></div>
-            <span id="main-content-header-title" class="ml-3"></span>
-            <div id="main-content-header-contents"></div>
-          </header>
+        <div id="main-content">
           <div id="main-content-panel">
+            <header id="main-content-header" data-bind="visible: mainFeaturesVisible">
+              <button type="button" class="btn btn-light m-0" onclick="toggleNewSidebarVisibility()">
+                <i class="fa fa-bars"></i>
+              </button>
+              <a href="/" class="btn btn-light m-0" role="button">
+                <i class="fa fa-home"></i>
+              </a>
+              <a href="#" target="_blank" class="btn btn-success m-0 feedback-form-link" role="button" style="font-size: x-small;">
+                Give feedback!
+              </a>
+              <div id="main-content-header-context-commands"></div>
+              <span id="main-content-header-title" class="ml-3"></span>
+              <div id="main-content-header-contents"></div>
+            </header>
+
             <div id="main-pane">
-              <div id="main-pane-container">
+              <div id="main-pane-container" data-bind="visible: mainFeaturesVisible">
                 <div id="main-pane-text-container">
                   <div id="content">
                       <div id="top-frame">
@@ -114,51 +113,20 @@
                   Translations panel
                 </div>
               </div>
+              <div id="main-content-landing-page" data-bind="visible: landingFeatureVisible">
+              </div>
             </div>
 
             <div id="main-content-panel-splitter" ondblclick="closeBottomFrame()"></div>
 
             <div id="main-bottom-pane">
-              <div id="anf" style="text-align: right" class="chromeback">
-                <div id="brtop"></div>
-                <div id="brmid"></div>
-                <div id="brbot"></div>
-                <div id="anft">
-                  <div style="text-align: center" id="anfa"></div>
-                  <div style="text-align: center" id="anfb">
-                    <table cellspacing="0" cellpadding="0" width=100%>
-                      <tr>
-                        <td style="text-align: left" valign="top" id="anfleft"></td>
-                        <td valign=top style="text-align: center" id="anfcenter"></td>
-                        <td valign="top" style="text-align: right" id="anfright"></td>
-                      </tr>
-                    </table>
-                  </div>
-                  <div style="position:relative">
-                    <div id="anfs"></div>
-                    <div id="anfsd"></div>
-                  </div>
-                </div>
-              </div>
-              <div id="bottom">
-                <div id="difout" class="difout">
-                  <div id="cdif" class="cdif">
-                    <div id="dif" class="dif paperback">
-                      <div id="difb-bottom" class="difb">
-                      </div>
-                    </div>
-                  </div>
-                  <div id="difhist" class="hoverShow"></div>
-                </div>
-              </div>
-              <div id="alertc"><span id="alert"></span></div>
             </div>
           </div>
         </div>
       </div>
       <footer id="main-footer">
         <ul>
-          <li>&copy; Yuttadhammo Bhikkhu</li>
+          <li><a href="https://pali.sirimangalo.org/" target="_blank">Home</a></li>
           <li>|</li>
           <li id="main-footer-timestamp"></li>
           <li>|</li>
@@ -171,16 +139,17 @@
         <div class="modal-content">
           <div class="modal-header p-2">
             <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
+            <button type="button" class="btn btn-outline-danger btn-sm mb-0" data-dismiss="modal" title="Close without saving...">
+              <span>×</span>
             </button>
           </div>
           <div class="modal-body">
             ...
           </div>
           <div class="modal-footer p-2">
-            <button type="button" class="btn btn-secondary btn-sm mb-0" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary btn-sm mb-0">Save changes</button>
+            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults...">Defaults</button>
+            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
           </div>
         </div>
       </div>
@@ -214,7 +183,6 @@
     <script src="/digitalpalireader/content/js/reltik.js"></script>
     <script src="/digitalpalireader/content/js/dppn.js"></script>
     <script src="/digitalpalireader/content/js/translations.js"></script>
-    <script src="/digitalpalireader/content/js/format.js"></script>
     <script src="/digitalpalireader/content/js/xml.js"></script>
     <script src="/digitalpalireader/content/js/history.js"></script>
     <script src="/digitalpalireader/content/js/web/search.js"></script>

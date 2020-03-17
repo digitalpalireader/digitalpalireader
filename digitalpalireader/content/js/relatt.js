@@ -1,4 +1,6 @@
-var EXPORTED_SYMBOLS = ["rela"];  
+'use strict';
+
+var EXPORTED_SYMBOLS = ["rela"];
 
 var rela = [];
 

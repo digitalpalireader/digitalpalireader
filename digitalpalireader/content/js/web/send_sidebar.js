@@ -1,3 +1,5 @@
+'use strict';
+
 if (DPR_PAL.isWeb) {
   console.log('Loading DPR_PAL_Send_Sidebar...');
 } else {
@@ -205,7 +207,7 @@ var DPRSend = {
       stringra = stringra.replace(/`/g, '"');
       stringra = stringra.split('#');
       if (G_searchRX == 'true') {
-        for (i in stringra) { stringra[i] = new RegExp(stringra[i]); }
+        for (var i in stringra) { stringra[i] = new RegExp(stringra[i]); }
       }
     }
     if (!add) { // reuse old tab
@@ -466,10 +468,10 @@ var DPRSend = {
 
       var opts = [];
 
-      for (i in G_nikToNumber) {
+      for (var i in G_nikToNumber) {
         if ($('#soNS' + i) && $('#soNS' + i).prop("checked")) opts.push('x' + i);
       }
-      for (i in G_hNumbers) {
+      for (var i in G_hNumbers) {
         if ($('#soMAT' + i).prop("checked")) opts.push('m' + i);
       }
 
@@ -538,13 +540,13 @@ var DPRSend = {
 
       if (which == 0) { // get sets
         var sets = ''
-        for (i in G_nikToNumber) {
+        for (var i in G_nikToNumber) {
           if (document.getElementById('tsoCO' + i).checked) sets += i;
         }
       }
       else if (which == 5) {
         var sets = ''
-        for (i in 'dmsak') {
+        for (var i in 'dmsak') {
           if (document.getElementById('tsoCO' + 'dmsak'[i]).checked) sets += 'dmsak'[i];
         }
       }
@@ -553,12 +555,12 @@ var DPRSend = {
       if (which == 1) { // get books
         var book = [];
         if (nikvoladi[document.getElementById('tsoSETm').value]) {
-          for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
+          for (var i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
             if (document.getElementById('tsoBObook' + i).checked) book.push(i);
           }
         }
         else {
-          for (i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value + document.getElementById('tsoMAT2m').value].length; i++) {
+          for (var i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value + document.getElementById('tsoMAT2m').value].length; i++) {
             if (document.getElementById('tsoBObook' + i).checked) book.push(document.getElementById('tsoBObook' + i).getAttribute('data-value'));
           }
         }

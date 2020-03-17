@@ -1,4 +1,6 @@
-var EXPORTED_SYMBOLS = ["relt"];  
+'use strict';
+
+var EXPORTED_SYMBOLS = ["relt"];
 
 var relt = [];
 

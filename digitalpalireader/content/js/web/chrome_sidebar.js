@@ -1,3 +1,5 @@
+'use strict';
+
 if (DPR_PAL.isWeb) {
   console.log('Loading DPR_PAL_Chrome_Sidebar...');
 } else {
@@ -11,7 +13,7 @@ var DPRChrome = {
     var dict = 0; // no dict tabs
     var search = 0; // no dict tabs
     var etc = 0;
-    for (index = 0, tb = mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
+    for (var index = 0, tb = mainWindow.gBrowser; index < tb.tabContainer.childNodes.length; index++) {
 
       // Get the next tab
       var currentTab = tb.tabContainer.childNodes[index];

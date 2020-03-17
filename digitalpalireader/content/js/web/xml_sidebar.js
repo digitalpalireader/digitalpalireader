@@ -1,3 +1,5 @@
+'use strict';
+
 var DPRXML = {
   updateHierarchy: function (depth, event) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
@@ -45,7 +47,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -61,7 +63,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -78,7 +80,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -94,7 +96,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -112,7 +114,7 @@ var DPRXML = {
           listNode.parentNode.hide();
         }
         else {
-          for (idx = 0; idx < lista.length; idx++) {
+          for (var idx = 0; idx < lista.length; idx++) {
             listNode.append(`<option>${lista[idx]}</option>`);
           }
           listNode.parentNode.show();
@@ -238,7 +240,7 @@ var DPRXML = {
         }
 
         else {
-          for (idx in lista) {
+          for (var idx in lista) {
             __dprViewModel.searchTab.metaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP1').show();
@@ -253,7 +255,7 @@ var DPRXML = {
           __dprViewModel.searchTab.volumeList.push({label: this.unnamed, value: 0});
           $('#tsoP2').hide();
         } else {
-          for (idx in lista) {
+          for (var idx in lista) {
             __dprViewModel.searchTab.volumeList.push({label: lista[idx], value: idx});
           }
           $('#tsoP2').show();
@@ -268,7 +270,7 @@ var DPRXML = {
           __dprViewModel.searchTab.vaggaList.push({label: this.unnamed, value: 0});
           $('#tsoP3').hide();
         } else {
-          for (idx in lista) {
+          for (var idx in lista) {
             __dprViewModel.searchTab.vaggaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP3').show();
@@ -281,7 +283,7 @@ var DPRXML = {
           __dprViewModel.searchTab.suttaList.push({label: this.unnamed, value: 0});
           $('#tsoP4').hide();
         } else {
-          for (idx in lista) {
+          for (var idx in lista) {
             __dprViewModel.searchTab.suttaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP4').show();
@@ -296,7 +298,7 @@ var DPRXML = {
           __dprViewModel.searchTab.sectionList.push({label: this.unnamed, value: 0});
           $('#tsoP5').hide();
         } else {
-          for (idx = 0; idx < lista.length; idx++) {
+          for (var idx = 0; idx < lista.length; idx++) {
             __dprViewModel.searchTab.sectionList.push({label: lista[idx], value: idx});
           }
           $('#tsoP5').show();

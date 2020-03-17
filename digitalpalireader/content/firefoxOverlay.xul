@@ -2,148 +2,148 @@
 <?xml-stylesheet href="chrome://digitalpalireader/skin/overlay.css" type="text/css"?>
 <!DOCTYPE overlay SYSTEM "chrome://digitalpalireader/locale/digitalpalireader.dtd">
 <overlay id="digitalpalireader-overlay"
-		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-	<script>
-	</script>
-	<script type="application/x-javascript" src="js/dpr_pal.js"></script>
-	<script type="application/x-javascript" src="js/prefload.js"/>
-	<script type="application/x-javascript" src="js/translit_overlay.js"/>
-	<script type="application/x-javascript" src="js/chrome_overlay.js"/>
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
-	</stringbundleset>
-	<menupopup id="contentAreaContextMenu">
-		<menu id="dpr-sub-context" 
-			class="menu-iconic" 
-			label="DPR">
-			<menupopup>
-				<menuitem label="Convert to Unicode" 
-					oncommand="DPROverlay.rightClick('Cv','u');"/>  
-				<menuitem label="Convert to Velthuis" 
-					oncommand="DPROverlay.rightClick('Cv','v');"/>  
-				<menu id="dpr-conv-context"
-					label="Convert to...">
-					<menupopup>
-						<menuitem label="Devanagari" 
-							oncommand="DPROverlay.rightClick('Cv','d');"/>  
-						<menuitem label="Myanmar" 
-							oncommand="DPROverlay.rightClick('Cv','m');"/>  
-						<menuitem label="Sinhala" 
-							oncommand="DPROverlay.rightClick('Cv','s');"/>  
-						<menuitem label="Thai" 
-							oncommand="DPROverlay.rightClick('Cv','t');"/>  
-					</menupopup> 
-				</menu>
-				<menuseparator/>
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <script>
+  </script>
+  <script type="application/x-javascript" src="js/dpr_pal.js"></script>
+  <script type="application/x-javascript" src="js/prefload.js"/>
+  <script type="application/x-javascript" src="js/translit_overlay.js"/>
+  <script type="application/x-javascript" src="js/chrome_overlay.js"/>
+  <stringbundleset id="stringbundleset">
+    <stringbundle id="digitalpalireader-strings" src="chrome://digitalpalireader/locale/digitalpalireader.properties"/>
+  </stringbundleset>
+  <menupopup id="contentAreaContextMenu">
+    <menu id="dpr-sub-context"
+      class="menu-iconic"
+      label="DPR">
+      <menupopup>
+        <menuitem label="Convert to Unicode"
+          oncommand="DPROverlay.rightClick('Cv','u');"/>
+        <menuitem label="Convert to Velthuis"
+          oncommand="DPROverlay.rightClick('Cv','v');"/>
+        <menu id="dpr-conv-context"
+          label="Convert to...">
+          <menupopup>
+            <menuitem label="Devanagari"
+              oncommand="DPROverlay.rightClick('Cv','d');"/>
+            <menuitem label="Myanmar"
+              oncommand="DPROverlay.rightClick('Cv','m');"/>
+            <menuitem label="Sinhala"
+              oncommand="DPROverlay.rightClick('Cv','s');"/>
+            <menuitem label="Thai"
+              oncommand="DPROverlay.rightClick('Cv','t');"/>
+          </menupopup>
+        </menu>
+        <menuseparator/>
 <!--
-				<menu label="Send">
-					<menupopup>
-						<menuitem label="to Analyze" 
-							oncommand="DPROverlay.rightClick('Send','a');"/>  
-						<menuitem label="to Textpad" 
-							oncommand="DPROverlay.rightClick('Send','p');"/>  
-						<menuitem label="to Converter" 
-							oncommand="DPROverlay.rightClick('Send','c');"/>  
-					</menupopup> 
-				</menu>
+        <menu label="Send">
+          <menupopup>
+            <menuitem label="to Analyze"
+              oncommand="DPROverlay.rightClick('Send','a');"/>
+            <menuitem label="to Textpad"
+              oncommand="DPROverlay.rightClick('Send','p');"/>
+            <menuitem label="to Converter"
+              oncommand="DPROverlay.rightClick('Send','c');"/>
+          </menupopup>
+        </menu>
 -->
-				<menuitem
-					label="Analyze" 
-					oncommand="DPROverlay.rightClick('A');"/>  
+        <menuitem
+          label="Analyze"
+          oncommand="DPROverlay.rightClick('A');"/>
 
-				<menuitem id="dpr-conj-item" 
-					label="Conjugate" 
-					oncommand="DPROverlay.rightClick('Cj');"/>  
-				<menuitem id="dpr-trans-item" 
-					label="Translate" 
-					oncommand="DPROverlay.rightClick('Tr');"/>  
-				<menu id="dpr-sub-dict" 
-					label="Dictionary">
-					<menupopup>
-						<menuitem label="Pali-English" 
-							oncommand="DPROverlay.rightClick('PED');"/>  
-						<menuitem label="Pali Proper Names" 
-							oncommand="DPROverlay.rightClick('DPPN');"/>  
-						<menuitem label="Concise Pali-English" 
-							oncommand="DPROverlay.rightClick('CPED');"/>  
-						<menuseparator/>
-						<menuitem label="All Above" 
-							oncommand="DPROverlay.rightClick('MULTI');"/>  
-						<menuseparator/>
-						<menuitem label="English-Pali" 
-							oncommand="DPROverlay.rightClick('CEPD');"/>  
-					</menupopup> 
-				</menu>
-				<menu id="dpr-sub-search" 
-					label="Search">
-					<menupopup>
-						<menuitem label="All Sets" 
-							oncommand="DPROverlay.rightClick('vdmsakyxbg');"/>  
-						<menuseparator/>
-						<menu id="dpr-sub-menu" 
-							label="Choose Set">
-							<menupopup>
-								<menuitem label="Vinaya" 
-									oncommand="DPROverlay.rightClick('v');"/>  
-								<menuitem label="DN" 
-									oncommand="DPROverlay.rightClick('d');"/>  
-								<menuitem label="MN" 
-									oncommand="DPROverlay.rightClick('m');"/>  
-								<menuitem label="SN" 
-									oncommand="DPROverlay.rightClick('s');"/>  
-								<menuitem label="AN" 
-									oncommand="DPROverlay.rightClick('a');"/>  
-								<menuitem label="KN" 
-									oncommand="DPROverlay.rightClick('k');"/>  
-								<menuitem label="Abhidhamma" 
-									oncommand="DPROverlay.rightClick('y');"/>  
-								<menuitem label="Vism." 
-									oncommand="DPROverlay.rightClick('x');"/>  
-								<menuitem label="Abhi-s" 
-									oncommand="DPROverlay.rightClick('b');"/>  
-							</menupopup> 
-						</menu>
-					</menupopup> 
-				</menu>
-			</menupopup> 
-		</menu>
-	</menupopup> 
-	<menupopup id="menu_ToolsPopup">
-		<menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
-	</menupopup>
-	<vbox id="appmenuSecondaryPane">
-		<spacer id="appmenuSecondaryPane-spacer-dpr"/>
-		<menuitem id="appmenu_dpr" command="viewDPR" key="key_openDPR" label="Digital Pali Reader" class="menuitem-iconic menuitem-iconic-tooltip"/>
-	</vbox>
-	<toolbarpalette  id="BrowserToolbarPalette">
-		<toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR - Alt+Shift+D" key="key_openDPR"/>
-	</toolbarpalette>
-	<statusbar id="status-bar">
-		<statusbarpanel id="DPRStatusBar" 
-						role="button" 
-						context="_child"
-						observes="viewDPR"
-						tooltiptext="Digital Pali Reader">
-			<toolbarbutton id="dpr-statusbar-button"
-			  	class="toolbarbutton-1"
-				image="chrome://digitalpalireader/skin/icons/logo.png"
-				orient="horizontal"/>
-		</statusbarpanel>
-	</statusbar>
-  
-	<keyset id="mainKeyset">
-		<key id="key_openDPR" command="viewDPR"
-			key="&openDPR.commandkey;" 
-			modifiers="&openDPR.modifierskey;" />
-	</keyset>
-	<broadcasterset id="mainBroadcasterSet"> 
-		<broadcaster id="viewDPR" 
-			label="&digitalpalireader.title;"
-			autoCheck="false"
-			type="checkbox"
-			group="sidebar"
-			sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
-			sidebartitle="&digitalpalireader.title;"
-			oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
-	</broadcasterset>
+        <menuitem id="dpr-conj-item"
+          label="Conjugate"
+          oncommand="DPROverlay.rightClick('Cj');"/>
+        <menuitem id="dpr-trans-item"
+          label="Translate"
+          oncommand="DPROverlay.rightClick('Tr');"/>
+        <menu id="dpr-sub-dict"
+          label="Dictionary">
+          <menupopup>
+            <menuitem label="Pali-English"
+              oncommand="DPROverlay.rightClick('PED');"/>
+            <menuitem label="Pali Proper Names"
+              oncommand="DPROverlay.rightClick('DPPN');"/>
+            <menuitem label="Concise Pali-English"
+              oncommand="DPROverlay.rightClick('CPED');"/>
+            <menuseparator/>
+            <menuitem label="All Above"
+              oncommand="DPROverlay.rightClick('MULTI');"/>
+            <menuseparator/>
+            <menuitem label="English-Pali"
+              oncommand="DPROverlay.rightClick('CEPD');"/>
+          </menupopup>
+        </menu>
+        <menu id="dpr-sub-search"
+          label="Search">
+          <menupopup>
+            <menuitem label="All Sets"
+              oncommand="DPROverlay.rightClick('vdmsakyxbg');"/>
+            <menuseparator/>
+            <menu id="dpr-sub-menu"
+              label="Choose Set">
+              <menupopup>
+                <menuitem label="Vinaya"
+                  oncommand="DPROverlay.rightClick('v');"/>
+                <menuitem label="DN"
+                  oncommand="DPROverlay.rightClick('d');"/>
+                <menuitem label="MN"
+                  oncommand="DPROverlay.rightClick('m');"/>
+                <menuitem label="SN"
+                  oncommand="DPROverlay.rightClick('s');"/>
+                <menuitem label="AN"
+                  oncommand="DPROverlay.rightClick('a');"/>
+                <menuitem label="KN"
+                  oncommand="DPROverlay.rightClick('k');"/>
+                <menuitem label="Abhidhamma"
+                  oncommand="DPROverlay.rightClick('y');"/>
+                <menuitem label="Vism."
+                  oncommand="DPROverlay.rightClick('x');"/>
+                <menuitem label="Abhi-s"
+                  oncommand="DPROverlay.rightClick('b');"/>
+              </menupopup>
+            </menu>
+          </menupopup>
+        </menu>
+      </menupopup>
+    </menu>
+  </menupopup>
+  <menupopup id="menu_ToolsPopup">
+    <menuitem label="DPR" key="key_openDPR" observes="viewDPR"  />
+  </menupopup>
+  <vbox id="appmenuSecondaryPane">
+    <spacer id="appmenuSecondaryPane-spacer-dpr"/>
+    <menuitem id="appmenu_dpr" command="viewDPR" key="key_openDPR" label="Digital Pali Reader" class="menuitem-iconic menuitem-iconic-tooltip"/>
+  </vbox>
+  <toolbarpalette  id="BrowserToolbarPalette">
+    <toolbarbutton id="dpr-button" label="DPR" observes="viewDPR" class="toolbarbutton-1" tooltiptext="DPR - Alt+Shift+D" key="key_openDPR"/>
+  </toolbarpalette>
+  <statusbar id="status-bar">
+    <statusbarpanel id="DPRStatusBar"
+            role="button"
+            context="_child"
+            observes="viewDPR"
+            tooltiptext="Digital Pali Reader">
+      <toolbarbutton id="dpr-statusbar-button"
+          class="toolbarbutton-1"
+        image="chrome://digitalpalireader/skin/icons/logo.png"
+        orient="horizontal"/>
+    </statusbarpanel>
+  </statusbar>
+
+  <keyset id="mainKeyset">
+    <key id="key_openDPR" command="viewDPR"
+      key="&openDPR.commandkey;"
+      modifiers="&openDPR.modifierskey;" />
+  </keyset>
+  <broadcasterset id="mainBroadcasterSet">
+    <broadcaster id="viewDPR"
+      label="&digitalpalireader.title;"
+      autoCheck="false"
+      type="checkbox"
+      group="sidebar"
+      sidebarurl="chrome://digitalpalireader/content/digitalpalireader.xul"
+      sidebartitle="&digitalpalireader.title;"
+      oncommand="if(!DPROverlay.DPRSidebarDocument()) {DPROverlay.openFirstDPRTab();} DPROverlay.openSidebar();" />
+  </broadcasterset>
 </overlay>

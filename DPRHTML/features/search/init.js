@@ -1,3 +1,5 @@
+'use strict';
+
 var searchType = 0;
 var searchString = '';
 var searchMAT = '';
@@ -11,7 +13,7 @@ const setSearchParams = () => {
   //DPROpts.tipitakaOptions();
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
   urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
+    var parameterSections = parameter.split('=');
     switch (parameterSections[0]) {
       case 'type':
         searchType = parseInt(parameterSections[1], 10);
@@ -45,7 +47,7 @@ const setSearchParams = () => {
   });
 }
 
-searchHandler = event => {
+const searchHandler = event => {
   DPRSend.sendSearch(DPRSend.eventSend(event));
   //setSearchParams();
   //DPROpts.tipitakaOptions();

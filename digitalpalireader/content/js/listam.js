@@ -1,3 +1,5 @@
+'use strict';
+
 var amlist = [];
 amlist[0] = [];
 amlist[0][0] = [];

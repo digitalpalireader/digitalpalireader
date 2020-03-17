@@ -6,12 +6,12 @@ echo ------------------------------------------------------------
 echo ------------------------------------------------------------
 ls -laF
 echo ------------------------------------------------------------
-ls -laF '$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS'
+ls -laF "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS"
 echo ------------------------------------------------------------
 
 # Get azcopy
 echo ------ Running wget
-wget -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux
+wget -O azcopy.tar.gz https://azcopyvnext.azureedge.net/release20200124/azcopy_linux_amd64_10.3.4.tar.gz
 echo ------ Running tar
 tar -xf azcopy.tar.gz
 echo ------ Copy azcopy
@@ -27,4 +27,4 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy 'https://dprproduction.blob.core.win
 
 echo ------ Compress stuff
 ls -laF "$RootDir/bin/asge/asge/"
-dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml -x 864000 -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml .js .css. .html .htm -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"

@@ -1,3 +1,8 @@
+'use strict';
+
+// NOTE: Ensure this is the very first line.
+installGlobalHandlers();
+
 /* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };
@@ -8,61 +13,57 @@ function ddump(a) { }
 /* End: Legacy stuff. */
 
 const navigationFeatureName = "navigation";
-const dictionaryFeatureName = "dictionary";
 const searchFeatureName = "search";
+const dictionaryFeatureName = "dictionary";
 
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 
-$(window).resize(() => {
-  setPrefs();
-  initMainPane();
-});
-
-onpopstate = DPRChrome.historyPopstateHandler;
-
-function mainInitialize() {
+async function mainInitialize() {
   setPrefs();
   initSplitters();
   initFooter();
-  loadSidebarTabs();
-  initFeatureTabs();
+  await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
 
-  if (DPR_PAL.isLandingPageFeature()) {
-    $("#main-content-landing-page")
-      .load(
-          `features/landing-page/main-pane.html`,
-          () => {
-            __dprViewModel.showLandingFeature();
-            initFeedbackFormParameters();
-          });
-    return;
-  }
-
   if (DPR_PAL.isNavigationFeature()) {
-    loadFeature(navigationFeatureName, initializeNavigationFeature);
+    await loadFeatureAsync(navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    loadFeature(searchFeatureName, initializeSearchFeature);
+    await loadFeatureAsync(searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    loadFeature(dictionaryFeatureName, initializeDictionaryFeature);
+    await loadFeatureAsync(dictionaryFeatureName, initializeDictionaryFeature);
   } else {
-    console.error('Unsupported feature', document.location.href);
+    await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
+    __dprViewModel.showLandingFeature();
+    initFeedbackFormParameters();
   }
 
   initMainPane();
   checkAnalysis();
 }
 
-const loadFeature = (name, initFn) => {
-  $("#mafbc")
-  .load(
-    `features/${name}/main-pane.html`,
-    () => {
-      initFn();
-      __dprViewModel.showMainFeatures();
-      initFeedbackFormParameters();
-    });
+function installGlobalHandlers() {
+  window.onresize = () => {
+    setPrefs();
+    initMainPane();
+  };
+
+  window.onunhandledrejection = event => {
+    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+  };
+
+  window.onpopstate = DPRChrome.historyPopstateHandler;
+
+  window.onerror = error => {
+    console.error(">>>> Unhandled error: ", error);
+  };
+}
+
+const loadFeatureAsync = async (name, initFn) => {
+  await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
+  initFn();
+  __dprViewModel.showMainFeatures();
+  initFeedbackFormParameters();
 }
 
 const initSplitters = () => {
@@ -83,18 +84,32 @@ const initSplitters = () => {
 }
 
 const initMainPane = () => {
-  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height())
+  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height());
 }
 
 const initFooter = () => {
-  $("#main-footer-timestamp").text(`Deployed: ${window.createdTimestamp.toLocaleString()}`);
-  $("#main-footer-version").text(`Version: ${window.releaseNumber}`);
+  const padNum = n => ("0" + n).slice(-2);
+  const formatDate = d => `${d.getFullYear()}-${padNum(d.getMonth() + 1)}-${padNum(d.getDate())} ${padNum(d.getHours())}:${padNum(d.getMinutes())}:${padNum(d.getSeconds())}`;
+
+  $("#main-footer-timestamp").text(`${formatDate(new Date(window.createdTimestamp))}`);
+  $("#main-footer-version").text(`${window.releaseNumber}`);
 }
 
-const loadSidebarTabs = () => {
-  $("#navigationTabPane").load("features/navigation/tab.html", initializeNavigationSidebarTab);
-  $("#searchTabPane").load("features/search/tab.html", initializeSearchSidebarTab);
-  $("#dictionaryTabPane").load("features/dictionary/tab.html", initializeDictionarySidebarTab);
+const loadPanesAsync = async () => {
+  const allTabs = [
+    ['navigation', initializeNavigationSidebarTab],
+    ['search', initializeSearchSidebarTab],
+    ['dictionary', initializeDictionarySidebarTab]
+  ];
+
+  const all = [
+    ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`),
+  ];
+
+  await Promise.all(all);
+
+  initFeatureTabs();
 }
 
 const initFeatureTabs = () => {
@@ -142,3 +157,14 @@ const initFeedbackFormParameters = () => {
   const userAgent = encodeURIComponent(navigator.userAgent);
   $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
+
+const loadHtmlFragmentAsync = (id, src) =>
+  new Promise((resolve, reject) => {
+    $(id).load(src, (_, status, xhr) => {
+      if (status === "success" || status === "notmodified") {
+        resolve(status);
+      } else {
+        reject(new Error(`Error loading html status: ${status}, xhrStatus: ${xhr.status}, xhrStatusText: ${xhr.statusText}`));
+      }
+    });
+  })

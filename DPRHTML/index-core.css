@@ -1,13 +1,14 @@
 :root {
   --main-footer-height: 1rem;
   --main-content-header-height: 3rem;
-  --main-sidebar-width: 20rem;
+  --main-sidebar-width: 22rem;
   --splitter-width: 0.75rem;
   --splitter-background: center center no-repeat #b3b3b3;
   --v-splitter-background: url(/digitalpalireader/content/images/vsizegrip.png)
     var(--splitter-background);
   --h-splitter-background: url(/digitalpalireader/content/images/hsizegrip.png)
     var(--splitter-background);
+  --bottom-pane-tab-side-length: 2.1rem;
 }
 
 html,
@@ -82,10 +83,16 @@ body {
   font-size: calc(0.75 * var(--main-footer-height));
 }
 
+#main-footer ul li a {
+  color: blue;
+}
+
 #main-sidebar {
   flex: 0 0 auto;
   min-width: var(--main-sidebar-width);
-  overflow: auto;
+  width: var(--main-sidebar-width);
+  overflow-x: hidden;
+  overflow-y: auto;
   display: none;
   margin-left: calc(0rem - var(--main-sidebar-width));
 }
@@ -132,7 +139,7 @@ body {
 #main-content-panel {
   display: flex;
   flex-direction: column;
-  height: calc(100% - var(--main-content-header-height));
+  height: 100%;
   overflow: hidden;
 }
 
@@ -152,7 +159,59 @@ body {
 #main-bottom-pane {
   flex: 1 1 auto;
   overflow-x: hidden;
+  overflow-y: hidden;
+  display: grid;
+  grid-template-columns: var(--bottom-pane-tab-side-length) 1fr;
+  grid-template-rows: auto;
+  grid-gap: 0.1rem;
+}
+
+#main-bottom-pane-tabs {
+  width: 100%;
+  height: 100%;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  padding: 0.15rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(6, 1px var(--bottom-pane-tab-side-length)) auto;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab {
+  text-align: center;
+  margin: 1px;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab span {
+  vertical-align: middle;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab:hover{
+  background-color: lightblue;
+  cursor: default;
+}
+
+.main-bottom-pane-tab-pressed {
+  background-color: lightblue;
+  cursor: default;
+}
+
+#main-bottom-pane-tabs .main-bottom-pane-tab-separator {
+  border: 1px ridge #e7e7e7;
+  height: 1px;
+}
+
+#main-bottom-pane-tab-panes {
+  width: 100%;
+  height: 100%;
   overflow-y: auto;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  border: 2px ridge #e7e7e7;
+}
+
+#main-bottom-pane-tab-panes .main-bottom-pane-tab-pane {
+  margin: 0.15rem;
 }
 
 #main-pane-container {
