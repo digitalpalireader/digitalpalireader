@@ -21,14 +21,17 @@ class DprViewModel {
     this.landingFeatureVisible(false);
     this.mainFeaturesVisible(true);
   }
+
   parseURLParameters() {
     var location = document.location.href;
-    if (location.indexOf('?feature=search') > -1) {
+    if (DPR_PAL.isNavigationFeature()) {
+      this.activeTab(navigationFeatureName)
+    } else if (DPR_PAL.isSearchFeature()) {
       this.activeTab(searchFeatureName);
-    } else if (location.indexOf('?feature=dictionary') > -1) {
+    } else if (DPR_PAL.isDictionaryFeature()) {
       this.activeTab(dictionaryFeatureName);
     } else {
-      this.activeTab(navigationFeatureName)
+      console.error('Unknown feature', location);
     }
   }
 }
