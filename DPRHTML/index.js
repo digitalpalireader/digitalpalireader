@@ -1,5 +1,8 @@
 'use strict';
 
+// NOTE: Ensure this is the very first line.
+installGlobalHandlers();
+
 /* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };
@@ -11,13 +14,6 @@ function ddump(a) { }
 
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
-
-$(window).resize(() => {
-  setPrefs();
-  initMainPane();
-});
-
-onpopstate = DPRChrome.historyPopstateHandler;
 
 function mainInitialize() {
   setPrefs();
@@ -50,6 +46,23 @@ function mainInitialize() {
 
   initMainPane();
   checkAnalysis();
+}
+
+function installGlobalHandlers() {
+  window.onresize = () => {
+    setPrefs();
+    initMainPane();
+  };
+
+  window.onunhandledrejection = event => {
+    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+  };
+
+  window.onpopstate = DPRChrome.historyPopstateHandler;
+
+  window.onerror = error => {
+    console.error(">>>> Unhandled error: ", error);
+  };
 }
 
 const loadFeature = (name, initFn) => {
