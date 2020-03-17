@@ -9,8 +9,8 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
-	getconfig();
-	newDquiz();
+  getconfig();
+  newDquiz();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
@@ -31,170 +31,170 @@ function onDocLoad() {
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div align="justify" id="mafb" class="paperback">
-		<div id="mafbc">
-			<p></p>
-			<input type="hidden" id="QwhichS" value="10" />
-			<p id="QwhichT" class="txt"></p>
-			<p id="QwhichC" class="cite"></p>
-			<table id="Qdeclension" class="dec">
-			  <tbody>
-				<tr>
-				  <th class="dec" />
-				  <th class="toprow" colspan="2">SINGULAR</th>
-				  <th class="toprow" colspan="2">PLURAL</th>
-				</tr>
-				<tr>
-				  <th class="dec">NOM</th>
-				  <td class="dec">
-					<span id="nomSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="nomSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="nomPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" onfocus="this.value=this.value;" id="nomPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">ACC</th>
-				  <td class="dec">
-					<span id="accSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="accSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="accPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="accPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">INST</th>
-				  <td class="dec">
-					<span id="insSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="insSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="insPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="insPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">DAT</th>
-				  <td class="dec">
-					<span id="datSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="datSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="datPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="datPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">ABL</th>
-				  <td class="dec">
-					<span id="ablSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="ablSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="ablPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="ablPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">GEN</th>
-				  <td class="dec">
-					<span id="genSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="genSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="genPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="genPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">LOC</th>
-				  <td class="dec">
-					<span id="locSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="locSint" value="" class="dect" />
-				  </td>
-				  <td class="dec">
-					<span id="locPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="locPlt" value="" class="dect" />
-				  </td>
-				</tr>
-				<tr>
-				  <th class="dec">VOC</th>
-				  <td class="dec">
-					<span id="vocSins" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="vocSint" value="" class="dect" disabled="" />
-				  </td>
-				  <td class="dec">
-					<span id="vocPls" />
-				  </td>
-				  <td class="decr">
-					<input type="text" onkeyup="textType(this)" id="vocPlt" value="" class="dect" disabled="" />
-				  </td>
-				</tr>
-			  </tbody>
-			</table>
-			<p class="controls">
-			  <button type="button" id="QcheckAns" class="control" onclick="checkAnswers()" title="Check your answers (1)">Check</button>
-			  <button type="button" id="Qclear" class="control" onclick="clearAnswers()" title="Clear table (2)">Clear</button>
-			  <button type="button" id="Qshow" class="control" onclick="showAnswers()" title="Show correct answers (3)">Show</button>
-			  <button type="button" id="Qnew" class="control" onclick="resetTable()" title="Get a new declension (4)">New</button>
-			</p>
-			<hr />
-			<div align="center">
-				<table>
-					<tr>
-						<td>
-							<b>Include:</b><br/>
-							<input type="checkbox" id="reg" checked> Regular Nouns<br/>
-							<input type="checkbox" id="irreg"> Irregular Nouns<br/>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-	</div>
-	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
+  <div align="justify" id="mafb" class="paperback">
+    <div id="mafbc">
+      <p></p>
+      <input type="hidden" id="QwhichS" value="10" />
+      <p id="QwhichT" class="txt"></p>
+      <p id="QwhichC" class="cite"></p>
+      <table id="Qdeclension" class="dec">
+        <tbody>
+        <tr>
+          <th class="dec" />
+          <th class="toprow" colspan="2">SINGULAR</th>
+          <th class="toprow" colspan="2">PLURAL</th>
+        </tr>
+        <tr>
+          <th class="dec">NOM</th>
+          <td class="dec">
+          <span id="nomSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="nomSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="nomPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" onfocus="this.value=this.value;" id="nomPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">ACC</th>
+          <td class="dec">
+          <span id="accSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="accSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="accPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="accPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">INST</th>
+          <td class="dec">
+          <span id="insSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="insSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="insPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="insPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">DAT</th>
+          <td class="dec">
+          <span id="datSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="datSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="datPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="datPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">ABL</th>
+          <td class="dec">
+          <span id="ablSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="ablSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="ablPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="ablPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">GEN</th>
+          <td class="dec">
+          <span id="genSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="genSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="genPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="genPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">LOC</th>
+          <td class="dec">
+          <span id="locSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="locSint" value="" class="dect" />
+          </td>
+          <td class="dec">
+          <span id="locPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="locPlt" value="" class="dect" />
+          </td>
+        </tr>
+        <tr>
+          <th class="dec">VOC</th>
+          <td class="dec">
+          <span id="vocSins" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="vocSint" value="" class="dect" disabled="" />
+          </td>
+          <td class="dec">
+          <span id="vocPls" />
+          </td>
+          <td class="decr">
+          <input type="text" onkeyup="textType(this)" id="vocPlt" value="" class="dect" disabled="" />
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="controls">
+        <button type="button" id="QcheckAns" class="control" onclick="checkAnswers()" title="Check your answers (1)">Check</button>
+        <button type="button" id="Qclear" class="control" onclick="clearAnswers()" title="Clear table (2)">Clear</button>
+        <button type="button" id="Qshow" class="control" onclick="showAnswers()" title="Show correct answers (3)">Show</button>
+        <button type="button" id="Qnew" class="control" onclick="resetTable()" title="Get a new declension (4)">New</button>
+      </p>
+      <hr />
+      <div align="center">
+        <table>
+          <tr>
+            <td>
+              <b>Include:</b><br/>
+              <input type="checkbox" id="reg" checked> Regular Nouns<br/>
+              <input type="checkbox" id="irreg"> Irregular Nouns<br/>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/english.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/translations.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
 
-	<div id="alertc"><span id="alert" class="large"></span></div>
+  <div id="alertc"><span id="alert" class="large"></span></div>
 </div>
 
 </body>

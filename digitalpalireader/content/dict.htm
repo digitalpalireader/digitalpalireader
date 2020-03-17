@@ -9,12 +9,12 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
-	giveIDtoTabs();
-	getconfig();
-	if(document.location.href.indexOf('?') > -1) startDictLookup();		
+  giveIDtoTabs();
+  getconfig();
+  if(document.location.href.indexOf('?') > -1) startDictLookup();
 }
 function moveFrame() {
-	// dummy
+  // dummy
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
@@ -41,58 +41,58 @@ function moveFrame() {
 
 <body onunload="checkLastTab()" onload="onDocLoad();">
 <div id="content">
-	<div style="display:none"><div id="dif"><div id="cdif"></div></div></div>
-	<div id="dictc">
-		<div id="dicthead">
-		</div>
-		<div id="odif">
-			<div id="difb">
-			</div>
-		</div>
-		<div id="dict">
-		</div>
-		<div id="difhist" class="hoverShow"></div>
-	</div>
-	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+  <div style="display:none"><div id="dif"><div id="cdif"></div></div></div>
+  <div id="dictc">
+    <div id="dicthead">
+    </div>
+    <div id="odif">
+      <div id="difb">
+      </div>
+    </div>
+    <div id="dict">
+    </div>
+    <div id="difhist" class="hoverShow"></div>
+  </div>
+  <script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
-
-
-
-	<script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
-	
-	<script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/sortaz.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/dict.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/irreg.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/dict_xml.js"></script>
 
 
-	<div id="alertc"><span id="alert"></span></div>
+
+  <script language="JavaScript1.3" type="text/javascript" src="js/inflect.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/grammar.js"></script>
+
+  <script language="JavaScript1.3" type="text/javascript" src="js/listsm.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/listam.js"></script>
+
+
+  <div id="alertc"><span id="alert"></span></div>
 </div>
 <script>
-	
-	var devCheck = 0;
-	if(extFileExists('/home/noah/Extensions/work/dev.js')) {
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
-		headID.appendChild(newScript);
-		
-		var headID2 = document.getElementsByTagName("head")[0];         
-		var newScript2 = document.createElement('script');
-		newScript2.type = 'text/javascript';
-		newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
-		headID2.appendChild(newScript2);
 
-	}
-	else { // null functions
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	}
+  var devCheck = 0;
+  if(extFileExists('/home/noah/Extensions/work/dev.js')) {
+    var headID = document.getElementsByTagName("head")[0];
+    var newScript = document.createElement('script');
+    newScript.type = 'text/javascript';
+    newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
+    headID.appendChild(newScript);
+
+    var headID2 = document.getElementsByTagName("head")[0];
+    var newScript2 = document.createElement('script');
+    newScript2.type = 'text/javascript';
+    newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+    headID2.appendChild(newScript2);
+
+  }
+  else { // null functions
+    function devO() {}
+    function dalert(a) {}
+    function ddump(a) {}
+  }
 
 </script>
 </body>

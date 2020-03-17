@@ -1,4 +1,6 @@
-var EXPORTED_SYMBOLS = ["G_irregVerb","G_irregNoun","G_irregDec"];  
+'use strict';
+
+var EXPORTED_SYMBOLS = ["G_irregVerb","G_irregNoun","G_irregDec"];
 
 
 var G_irregVerb = [];
@@ -1498,7 +1500,7 @@ G_irregNoun['bhoto'] = 'bhavanta';
 // added
 
 G_irregVerb['yamaamase'] = 'yamati';
-G_irregVerb['ahu'] = 'bhavati'; 
+G_irregVerb['ahu'] = 'bhavati';
 G_irregVerb['abhinivissa'] = 'abhinivesa';
 G_irregVerb['.thassati'] = 'ti.t.thati';
 G_irregVerb['.thassanti'] = 'ti.t.thati';
@@ -1511,7 +1513,7 @@ G_irregNoun['kenaci'] = 'ka';
 G_irregNoun['kassaci'] = 'ka';
 
 G_irregNoun['yida.m'] = 'ida';
-G_irregNoun['nti'] = 'iti'; 
+G_irregNoun['nti'] = 'iti';
 
 
 
@@ -1541,8 +1543,8 @@ var G_irregDec = [];
 G_irregDec['majjhanhika'] = ['majjhantika','N'];
 G_irregDec['gaaminii'] = ['gaamii','N'];
 G_irregDec['upapajjanta'] = ['upapajjati','N'];
-G_irregDec['kalevara'] = ['ka.lebara','N']; 
-G_irregDec['ka.levara'] = ['ka.lebara','N']; 
+G_irregDec['kalevara'] = ['ka.lebara','N'];
+G_irregDec['ka.levara'] = ['ka.lebara','N'];
 G_irregDec['sammukhii'] = ['sammukha','N'];
 G_irregDec['nibbe.theta'] = ['nibbe.thita','N'];
 G_irregDec['kaasaava'] = ['kaasaaya','N']; // added
@@ -1564,10 +1566,10 @@ G_irregDec['kathina'] = ['ka.thina','N'];
 G_irregDec['jaanant'] = ['jaananta','N'];
 G_irregDec['atta'] = ['attaa','N'];
 G_irregDec['ganta'] = ['gata','N']; // fake participle
-G_irregDec['aahaarata'] = ['aahaareti','N']; 
-G_irregDec['pa.tiviisa'] = ['pa.tivi.msa','N']; 
+G_irregDec['aahaarata'] = ['aahaareti','N'];
+G_irregDec['pa.tiviisa'] = ['pa.tivi.msa','N'];
 G_irregDec['viisa'] = ['viisati','N'];
-G_irregDec['kalebara'] = ['ka.lebara','N']; 
+G_irregDec['kalebara'] = ['ka.lebara','N'];
 G_irregDec['saayanha'] = ['saaya.nha','N'];
 G_irregDec['udosita'] = ['uddosita','N'];
 G_irregDec['bassa'] = ['vassa','N'];
@@ -1588,12 +1590,12 @@ G_irregDec['~naatati'] = ['jaanaati','V'];  // fake verb
 G_irregDec['da.t.thati'] = ['dassati0','V']; // fake verb
 G_irregDec['gamati'] = ['gacchati','V']; // fake verb
 G_irregDec['abhikiirati'] = ['abhikirati','V'];
-G_irregDec['paavisati'] = ['pavisati','V']; 
-G_irregDec['vedayati'] = ['vedeti','V']; 
-G_irregDec['bhujjati'] = ['bhu~njati','V']; 
-G_irregDec['khiyyati'] = ['khiiyati','V']; 
-G_irregDec['sandiiyati'] = ['sandiyyati','V']; 
-G_irregDec['pa.tiggaheti'] = ['pa.tigga.nhaati','V']; 
+G_irregDec['paavisati'] = ['pavisati','V'];
+G_irregDec['vedayati'] = ['vedeti','V'];
+G_irregDec['bhujjati'] = ['bhu~njati','V'];
+G_irregDec['khiyyati'] = ['khiiyati','V'];
+G_irregDec['sandiiyati'] = ['sandiyyati','V'];
+G_irregDec['pa.tiggaheti'] = ['pa.tigga.nhaati','V'];
 G_irregDec['pa.tisa.mvedayati'] = ['pa.tisa.mvedeti','V'];
 G_irregDec['potheti'] = ['po.theti','V'];
 G_irregDec['paccaasiisati'] = ['paccaasi.msati','V'];

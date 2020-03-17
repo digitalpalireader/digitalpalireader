@@ -5,133 +5,133 @@
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript">
-	var G_count_browsers = 1;
-	var devCheck = 0;
-	function minDict(){
-		if (document.getElementById('bottom-box').collapsed === true)
-			document.getElementById('bottom-box').collapsed = false;
-		else document.getElementById('bottom-box').collapsed = true;
-	}
+  var G_count_browsers = 1;
+  var devCheck = 0;
+  function minDict(){
+    if (document.getElementById('bottom-box').collapsed === true)
+      document.getElementById('bottom-box').collapsed = false;
+    else document.getElementById('bottom-box').collapsed = true;
+  }
 </script>
 <!--
 <script type="application/x-javascript" src="dev.js"/>
 -->
 <script>
-	if(!devCheck) {
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	}
+  if(!devCheck) {
+    function devO() {}
+    function dalert(a) {}
+    function ddump(a) {}
+  }
 </script>
-	<hbox id="dpr-tops" style="height:600px" flex="1" persist="height">
-	</hbox>
-	<splitter id="PanelSplitter" align="left">
-		<label style="height:4px;width:8px;background:black" onclick="minDict()" tooltiptext="Minimize Panel" value=" "/>
-	</splitter>
-	<hbox flex="1" id="bottom-box" persist="height">
-		<tabbox orient="horizontal" class="chromeback" flex="1">
-			<tabs orient="vertical" class="chromeback" id="tabs">
-				<tab class="chromeback" label="D" tooltiptext="Dictionary"/>
-				<tab class="chromeback" label="Cv" tooltiptext="Conversion"/>
-				<tab class="chromeback" label="Tp" tooltiptext="Dictionary"/>
-				<tab class="chromeback" label="Tr" tooltiptext="Translation"/>
-				<tab class="chromeback" label="Cj" tooltiptext="Conjugation"/>
-				<tab class="chromeback" label="Bv" tooltiptext="Buddha Vacana Quote"/>
-			</tabs>
-			<tabpanels id="panels" class="chromeback" flex="1" style="margin:0;padding:0">
-				<tabpanel id="tabD">
-					<vbox flex="1">
-						<browser disablehistory="true" height="300" type="content" id="dict" src=""  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
-					</vbox>
-				</tabpanel>
-				<tabpanel id="tabCv">
-					<hbox flex="1" pack="center" align="center">
-						<textbox id="cinput" onkeyup="convert(true)" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
-						<hbox>
-							<vbox pack="top">
-								<label value="From"/>
-								<listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(1)">
-									<listitem label="Unicode"/>
-									<listitem label="Velthuis" selected="true"/>
-									<listitem label="Thai"/>
-									<listitem label="Devanagari" disabled="true"/>
-									<listitem label="Myanmar" disabled="true"/>
-									<listitem label="Sinhala"/>
-								</listbox>
-							</vbox>
-							<vbox pack="center">
-								<toolbarbutton  onclick="convert(false,document.getElementById('lower').checked)" tooltiptext="Convert from one format to another"><label value="Convert"/></toolbarbutton>
-								<toolbarbutton  onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');" tooltiptext="Sort input by Pali word order"><label value="Sort"/></toolbarbutton>
-								<toolbarbutton onclick="clearboth()" tooltiptext="clear both boxes"><label value="Clear"/></toolbarbutton>
-								<checkbox id="lower" tooltiptext="convert to lowercase" label="lowercase"/>
-							</vbox>
-							<vbox pack="top">
-								<label value="To"/>
-								<listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(2)">
-									<listitem label="Unicode" selected="true"/>
-									<listitem label="Velthuis"/>
-									<listitem label="Thai"/>
-									<listitem label="Devanagari"/>
-									<listitem label="Myanmar"/>
-									<listitem label="Sinhala"/>
-								</listbox>
-							</vbox>
-						</hbox>
-						<textbox id="coutput" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
-					</hbox>
-				</tabpanel>
-				<tabpanel id="tabTp">
-					<vbox flex="1" pack="center" align="center">
-						<textbox id="pad" multiline="true" cols="400" rows="10" resizable="true" flex="1"></textbox>
-						<hbox pack="center">
-							<toolbarbutton  onclick="clearPad()" tooltiptext="Erase all text"><label value="Clear"/></toolbarbutton>
-							<toolbarseparator id=""/>
-							<toolbarbutton  tooltiptext="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)"><label value="Velthuis"/></toolbarbutton>
-							<toolbarbutton  tooltiptext="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)"><label value="Unicode"/></toolbarbutton>
-							<toolbarseparator id=""/>
-							<toolbarbutton  tooltiptext="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))"><label value="Analyze"/></toolbarbutton>
-							<toolbarseparator id=""/>
-							<toolbarbutton  onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');" tooltiptext="Copy text to clipboard"><label value="Copy"/></toolbarbutton>
-							<toolbarbutton onclick="savePad()" tooltiptext="save textpad content to file"><label value="Save"/></toolbarbutton>
+  <hbox id="dpr-tops" style="height:600px" flex="1" persist="height">
+  </hbox>
+  <splitter id="PanelSplitter" align="left">
+    <label style="height:4px;width:8px;background:black" onclick="minDict()" tooltiptext="Minimize Panel" value=" "/>
+  </splitter>
+  <hbox flex="1" id="bottom-box" persist="height">
+    <tabbox orient="horizontal" class="chromeback" flex="1">
+      <tabs orient="vertical" class="chromeback" id="tabs">
+        <tab class="chromeback" label="D" tooltiptext="Dictionary"/>
+        <tab class="chromeback" label="Cv" tooltiptext="Conversion"/>
+        <tab class="chromeback" label="Tp" tooltiptext="Dictionary"/>
+        <tab class="chromeback" label="Tr" tooltiptext="Translation"/>
+        <tab class="chromeback" label="Cj" tooltiptext="Conjugation"/>
+        <tab class="chromeback" label="Bv" tooltiptext="Buddha Vacana Quote"/>
+      </tabs>
+      <tabpanels id="panels" class="chromeback" flex="1" style="margin:0;padding:0">
+        <tabpanel id="tabD">
+          <vbox flex="1">
+            <browser disablehistory="true" height="300" type="content" id="dict" src=""  style="max-width:50%;max-height:99%" flex="1" persist="height"/>
+          </vbox>
+        </tabpanel>
+        <tabpanel id="tabCv">
+          <hbox flex="1" pack="center" align="center">
+            <textbox id="cinput" onkeyup="convert(true)" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
+            <hbox>
+              <vbox pack="top">
+                <label value="From"/>
+                <listbox rows="7" id="cinform" style="padding:0;margin:0" onclick="changeConversion(1)">
+                  <listitem label="Unicode"/>
+                  <listitem label="Velthuis" selected="true"/>
+                  <listitem label="Thai"/>
+                  <listitem label="Devanagari" disabled="true"/>
+                  <listitem label="Myanmar" disabled="true"/>
+                  <listitem label="Sinhala"/>
+                </listbox>
+              </vbox>
+              <vbox pack="center">
+                <toolbarbutton  onclick="convert(false,document.getElementById('lower').checked)" tooltiptext="Convert from one format to another"><label value="Convert"/></toolbarbutton>
+                <toolbarbutton  onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');" tooltiptext="Sort input by Pali word order"><label value="Sort"/></toolbarbutton>
+                <toolbarbutton onclick="clearboth()" tooltiptext="clear both boxes"><label value="Clear"/></toolbarbutton>
+                <checkbox id="lower" tooltiptext="convert to lowercase" label="lowercase"/>
+              </vbox>
+              <vbox pack="top">
+                <label value="To"/>
+                <listbox rows="7" id="coutform" style="padding:0;margin:0" onclick="changeConversion(2)">
+                  <listitem label="Unicode" selected="true"/>
+                  <listitem label="Velthuis"/>
+                  <listitem label="Thai"/>
+                  <listitem label="Devanagari"/>
+                  <listitem label="Myanmar"/>
+                  <listitem label="Sinhala"/>
+                </listbox>
+              </vbox>
+            </hbox>
+            <textbox id="coutput" multiline="true" cols="50" rows="10" resizable="true" flex="1"></textbox>
+          </hbox>
+        </tabpanel>
+        <tabpanel id="tabTp">
+          <vbox flex="1" pack="center" align="center">
+            <textbox id="pad" multiline="true" cols="400" rows="10" resizable="true" flex="1"></textbox>
+            <hbox pack="center">
+              <toolbarbutton  onclick="clearPad()" tooltiptext="Erase all text"><label value="Clear"/></toolbarbutton>
+              <toolbarseparator id=""/>
+              <toolbarbutton  tooltiptext="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)"><label value="Velthuis"/></toolbarbutton>
+              <toolbarbutton  tooltiptext="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)"><label value="Unicode"/></toolbarbutton>
+              <toolbarseparator id=""/>
+              <toolbarbutton  tooltiptext="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))"><label value="Analyze"/></toolbarbutton>
+              <toolbarseparator id=""/>
+              <toolbarbutton  onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');" tooltiptext="Copy text to clipboard"><label value="Copy"/></toolbarbutton>
+              <toolbarbutton onclick="savePad()" tooltiptext="save textpad content to file"><label value="Save"/></toolbarbutton>
 
-						</hbox>
-					</vbox>
-				</tabpanel>
-				<tabpanel id="tabTr">
-					<vbox flex="1">
-						<browser disablehistory="true" height="300" type="content" id="trans" src="translate.htm" flex="1" persist="height"/>
-					</vbox>
-				</tabpanel>
-				<tabpanel id="tabCj">
-					<vbox flex="1">
-						<browser disablehistory="true" height="300" type="content" id="conj" src="conjugate.htm" flex="1" persist="height"/>
-					</vbox>
-				</tabpanel>
-				<tabpanel id="tabBv">
-					<vbox flex="1">
-						<browser disablehistory="true" height="300" type="content" id="bv" src="bv.htm" flex="1" persist="height"/>
-					</vbox>
-				</tabpanel>
-			</tabpanels>
-		</tabbox>
-	</hbox>
-	<script type="application/x-javascript" src="js/jquery.js" />
-	<!-- PAL must be the first script after JQuery. -->
-	<script type="application/x-javascript" src="js/dpr_pal.js" />
-	<script type="application/x-javascript" src="js/io.js" />
+            </hbox>
+          </vbox>
+        </tabpanel>
+        <tabpanel id="tabTr">
+          <vbox flex="1">
+            <browser disablehistory="true" height="300" type="content" id="trans" src="translate.htm" flex="1" persist="height"/>
+          </vbox>
+        </tabpanel>
+        <tabpanel id="tabCj">
+          <vbox flex="1">
+            <browser disablehistory="true" height="300" type="content" id="conj" src="conjugate.htm" flex="1" persist="height"/>
+          </vbox>
+        </tabpanel>
+        <tabpanel id="tabBv">
+          <vbox flex="1">
+            <browser disablehistory="true" height="300" type="content" id="bv" src="bv.htm" flex="1" persist="height"/>
+          </vbox>
+        </tabpanel>
+      </tabpanels>
+    </tabbox>
+  </hbox>
+  <script type="application/x-javascript" src="js/jquery.js" />
+  <!-- PAL must be the first script after JQuery. -->
+  <script type="application/x-javascript" src="js/dpr_pal.js" />
+  <script type="application/x-javascript" src="js/io.js" />
 
-	<script type="application/x-javascript" src="js/prefload.js"/>
-	<script type="application/x-javascript" src="js/index.js" />
-	<script type="application/x-javascript" src="js/keypress_index.js" />
-	<script type="application/x-javascript" src="js/navigation_common.js"/>
-	<script type="application/x-javascript" src="js/navigation.js"/>
-	<script type="application/x-javascript" src="js/chrome.js" />
-	<script type="application/x-javascript" src="js/prompt.js" />
-	<script type="application/x-javascript" src="js/bottom.js" />
-	<script type="application/x-javascript" src="js/convert.js"/>
-	<script type="application/x-javascript" src="js/send_bottom.js"/>
-	<script type="application/x-javascript" src="js/translit.js"/>
-	<script type="application/x-javascript" src="js/sortaz.js"/>
-	<script type="application/x-javascript" src="js/format.js"/>
+  <script type="application/x-javascript" src="js/prefload.js"/>
+  <script type="application/x-javascript" src="js/index.js" />
+  <script type="application/x-javascript" src="js/keypress_index.js" />
+  <script type="application/x-javascript" src="js/navigation_common.js"/>
+  <script type="application/x-javascript" src="js/navigation.js"/>
+  <script type="application/x-javascript" src="js/chrome.js" />
+  <script type="application/x-javascript" src="js/prompt.js" />
+  <script type="application/x-javascript" src="js/bottom.js" />
+  <script type="application/x-javascript" src="js/convert.js"/>
+  <script type="application/x-javascript" src="js/send_bottom.js"/>
+  <script type="application/x-javascript" src="js/translit.js"/>
+  <script type="application/x-javascript" src="js/sortaz.js"/>
+  <script type="application/x-javascript" src="js/format.js"/>
 </window>
 

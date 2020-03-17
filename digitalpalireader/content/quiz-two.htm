@@ -9,8 +9,8 @@
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script>
 function onDocLoad() {
-	getconfig();
-	newquizE();
+  getconfig();
+  newquizE();
 }
 </script>
 <script language="JavaScript1.3" type="text/javascript" src="js/jquery.js"></script>
@@ -29,51 +29,51 @@ function onDocLoad() {
 
 <body onload="onDocLoad();">
 <div id="content">
-	<div id="matrelc"></div>
-	<div id="right" onmouseover="document.body.style.cursor='auto'">
-		<div id="maf">
-			<div align="left" id="mafa" class="paperback"></div>
-			<div align="justify" id="mafb" class="paperback">
-				<div id="mafbc">
-					<div align="center"><br><br><br><br><br><h1>loading...</h1></div>
-					<div id="mafe" align=center>
-					</div>
-					<div id="mafd" align=center>
-					</div>
-					<div id="mafdebug"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
-	<script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
+  <div id="matrelc"></div>
+  <div id="right" onmouseover="document.body.style.cursor='auto'">
+    <div id="maf">
+      <div align="left" id="mafa" class="paperback"></div>
+      <div align="justify" id="mafb" class="paperback">
+        <div id="mafbc">
+          <div align="center"><br><br><br><br><br><h1>loading...</h1></div>
+          <div id="mafe" align=center>
+          </div>
+          <div id="mafd" align=center>
+          </div>
+          <div id="mafdebug"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script language="JavaScript1.3" type="text/javascript" src="version.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/epd.js"></script>
 
-	<script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
+  <script language="JavaScript1.3" type="text/javascript" src="js/keypress.js"></script>
 
-	<div id="alertc"><span id="alert"></span></div>
+  <div id="alertc"><span id="alert"></span></div>
 </div>
 <script>
-	
-	var devCheck = 0;
-	if(extFileExists('/home/noah/Extensions/work/dev.js')) {
-		var headID = document.getElementsByTagName("head")[0];         
-		var newScript = document.createElement('script');
-		newScript.type = 'text/javascript';
-		newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
-		headID.appendChild(newScript);
-		
-		var headID2 = document.getElementsByTagName("head")[0];         
-		var newScript2 = document.createElement('script');
-		newScript2.type = 'text/javascript';
-		newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
-		headID2.appendChild(newScript2);
 
-	}
-	else { // null functions
-		function devO() {}
-		function dalert(a) {}
-		function ddump(a) {}
-	}
+  var devCheck = 0;
+  if(extFileExists('/home/noah/Extensions/work/dev.js')) {
+    var headID = document.getElementsByTagName("head")[0];
+    var newScript = document.createElement('script');
+    newScript.type = 'text/javascript';
+    newScript.src = 'file://'+getHomePath()+'/Extensions/work/dev.js';
+    headID.appendChild(newScript);
+
+    var headID2 = document.getElementsByTagName("head")[0];
+    var newScript2 = document.createElement('script');
+    newScript2.type = 'text/javascript';
+    newScript2.src = 'file://'+getHomePath()+'/Extensions/work/dev2.js';
+    headID2.appendChild(newScript2);
+
+  }
+  else { // null functions
+    function devO() {}
+    function dalert(a) {}
+    function ddump(a) {}
+  }
 
 </script>
 </body>

@@ -5,10 +5,10 @@
 
 
 <page id="digitalpalireader" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-	xmlns:html="http://www.w3.org/1999/xhtml"
-	persist="screenX screenY"
-	onload="window.setInterval('checkInstalled',1000)"
-	>
-	<vbox id="content"></vbox>
-	<script type="application/x-javascript" src="js.js"/>
+  xmlns:html="http://www.w3.org/1999/xhtml"
+  persist="screenX screenY"
+  onload="window.setInterval('checkInstalled',1000)"
+  >
+  <vbox id="content"></vbox>
+  <script type="application/x-javascript" src="js.js"/>
 </page>

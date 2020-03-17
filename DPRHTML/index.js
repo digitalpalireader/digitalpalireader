@@ -1,106 +1,66 @@
-/*
+'use strict';
 
-TODO
-- Bring back start page
-- Bring back feedback button
-- Bring back context menu
-- 2 x navigation Info icons to show popups
-- correct tab is not selected in sidebar
-- test onpopstatehandler
-- scollstate is retained in navigation
-- random widths in the sidebar tabs
+// NOTE: Ensure this is the very first line.
+installGlobalHandlers();
 
-o after comit
-  - format search
-  - format dictionary
-*/
-
-/* Legacy stuff */
+/* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };
 function moveFrame() { }
 function devO() { }
 function dalert(a) { }
 function ddump(a) { }
-
-/* Application view model */
-class DprViewModel {
-  constructor() {
-    this.loadingFeatureVisible = ko.observable(true)
-    this.landingFeatureVisible = ko.observable(false);
-    this.navigationFeatureVisible = ko.observable(false);
-  }
-
-  showLandingFeature() {
-    this.loadingFeatureVisible(false);
-    this.landingFeatureVisible(true);
-    this.navigationFeatureVisible(false);
-  }
-
-  showNavigationFeature() {
-    this.loadingFeatureVisible(false);
-    this.landingFeatureVisible(false);
-    this.navigationFeatureVisible(true);
-  }
-}
+/* End: Legacy stuff. */
 
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 
-$(window).resize(() => {
-  setPrefs();
-  initMainPane();
-});
-
-onpopstate = DPRChrome.historyPopstateHandler;
-
-function mainInitialize() {
+async function mainInitialize() {
   setPrefs();
   initSplitters();
-  initMainPane();
   initFooter();
+  await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
-  initFeedbackFormParameters();
-  loadSidebarTabs();
-  initFeatureTabs();
-
-  if (DPR_PAL.isLandingPageFeature()) {
-    __dprViewModel.showLandingFeature();
-    return;
-  }
 
   if (DPR_PAL.isNavigationFeature()) {
-    __dprViewModel.showNavigationFeature();
-    initializeNavigationFeature();
+    await loadFeatureAsync('navigation', initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    __dprViewModel.showNavigationFeature();
-    $("#mafbc").load("search-results.html", initializeSearchFeature);
+    await loadFeatureAsync('search', initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    __dprViewModel.showNavigationFeature();
-    $("#mafbc").load("dictionary-results.html", initializeDictionaryFeature);
+    await loadFeatureAsync('dictionary', initializeDictionaryFeature);
+  } else {
+    await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
+    __dprViewModel.showLandingFeature();
+    initFeedbackFormParameters();
   }
 
+  initMainPane();
   checkAnalysis();
 }
 
-//const initPage = () => {
-  // $("#navigationTab").show();
-  // $("#searchTab").hide();
-  // $("#dictionaryTab").hide();
+function installGlobalHandlers() {
+  window.onresize = () => {
+    setPrefs();
+    initMainPane();
+  };
 
-  // var location = document.location.href;
-  // if (location.indexOf('?') > -1) {
-  //   loadSidebarTabs();
-  //   if (location.indexOf('?feature=search') > -1) {
-  //     $("#mafbc").load("search-results.html");
-  //   } else if (location.indexOf('?feature=dictionary') > -1) {
-  //     $("#mafbc").load("dictionary-results.html");
-  //   }
-  //   checkAnalysis();
-  // }
+  window.onunhandledrejection = event => {
+    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+  };
 
+  window.onpopstate = DPRChrome.historyPopstateHandler;
 
-//}
+  window.onerror = error => {
+    console.error(">>>> Unhandled error: ", error);
+  };
+}
+
+const loadFeatureAsync = async (name, initFn) => {
+  await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
+  initFn();
+  __dprViewModel.showMainFeatures();
+  initFeedbackFormParameters();
+}
 
 const initSplitters = () => {
   $("#main-sidebar").resizable({
@@ -120,18 +80,32 @@ const initSplitters = () => {
 }
 
 const initMainPane = () => {
-  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height())
+  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height());
 }
 
 const initFooter = () => {
-  $("#main-footer-timestamp").text(`Deployed: ${window.createdTimestamp.toLocaleString()}`);
-  $("#main-footer-version").text(`Version: ${window.releaseNumber}`);
+  const padNum = n => ("0" + n).slice(-2);
+  const formatDate = d => `${d.getFullYear()}-${padNum(d.getMonth() + 1)}-${padNum(d.getDate())} ${padNum(d.getHours())}:${padNum(d.getMinutes())}:${padNum(d.getSeconds())}`;
+
+  $("#main-footer-timestamp").text(`${formatDate(new Date(window.createdTimestamp))}`);
+  $("#main-footer-version").text(`${window.releaseNumber}`);
 }
 
-const loadSidebarTabs = () => {
-  $("#navigationTabPane").load("navigation.html", initializeNavigationSidebarTab);
-  $("#searchTabPane").load("search.html", initializeSearchSidebarTab);
-  $("#dictionaryTabPane").load("dictionary.html", initializeDictionarySidebarTab);
+const loadPanesAsync = async () => {
+  const allTabs = [
+    ['navigation', initializeNavigationSidebarTab],
+    ['search', initializeSearchSidebarTab],
+    ['dictionary', initializeDictionarySidebarTab]
+  ];
+
+  const all = [
+    ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`),
+  ];
+
+  await Promise.all(all);
+
+  initFeatureTabs();
 }
 
 const initFeatureTabs = () => {
@@ -171,146 +145,16 @@ const initFeedbackFormParameters = () => {
   const env = `${environmentName}.${releaseNumber}`;
   const url = encodeURIComponent(document.location.href);
   const userAgent = encodeURIComponent(navigator.userAgent);
-  $("#feedbackFormLink").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
+  $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
 
-/* Start: Navigation stuff */
-
-const initializeNavigationFeature = () => {
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  let bookList = 'd';
-  let place = [];
-  let query = '';
-  let para = '';
-  urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
-    switch (parameterSections[0]) {
-      case 'loc':
-        place = makeLocPlace(parameterSections[1]);
-        if (place.length == 8) {
-          bookList = place[0];
-        }
-        break;
-      case 'para':
-        para = parameterSections[1];
-        break;
-      case 'query':
-        query = parameterSections[1];
-        break;
-    }
-  });
-
-  switch(place.length){
-    case 3:
-      loadXMLindex(place,false);
-      break;
-    case 8:
-      loadXMLSection(query, para, place);
-      break;
-    default:
-      break;
-  }
-}
-
-const initializeNavigationSidebarTab = () => {
-  let bookList = 'd';
-  var navset = $("#nav-set");
-  for (var i in G_nikFullNames) {
-    navset.append($("<option />").val(i).text(G_nikFullNames[i]));
-  }
-  navset.val(bookList);
-  digitalpalireader.setBookList(bookList);
-  digitalpalireader.changeSet();
-  navset.change(function () {
-    digitalpalireader.changeSet();
-  });
-  $("#nav-book").change(function () {
-    digitalpalireader.updateSubnav(0);
-  });
-
-  $('#nav-title').prop('title', 'View index for this book');
-
-  DPR_PAL.enablePopover('#quicklinks-info', 'hover');
-
-  DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover');
-}
-
-/* End: Navigation stuff */
-
-/* Start: Search stuff */
-
-var searchType = 0;
-var searchString = '';
-var searchMAT = '';
-var searchSet = '';
-var searchBook = 0;
-var searchPart = 0;
-var searchRX = false;
-
-const setSearchParams = () => {
-  DPRNav.setSearchBookList();
-  DPROpts.tipitakaOptions();
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  urlParams.forEach(parameter => {
-    parameterSections = parameter.split('=');
-    switch (parameterSections[0]) {
-      case 'type':
-        searchType = parseInt(parameterSections[1], 10);
-        break;
-      case 'query':
-        searchString = decodeURIComponent(parameterSections[1]);
-        break;
-      case 'MAT':
-        searchMAT = parameterSections[1];
-        break;
-      case 'set':
-        searchSet = parameterSections[1];
-        break;
-      case 'book':
-        searchBook = parameterSections[1];
-        break;
-      case 'part':
-        searchPart = parameterSections[1];
-        break;
-      case 'rx':
-        searchRX = parameterSections[1];
-        break;
-    }
-  });
-}
-
-searchHandler = event => {
-  DPRSend.sendSearch(DPRSend.eventSend(event));
-  setSearchParams();
-}
-
-const initializeSearchSidebarTab = () => {
-  setSearchParams();
-
-  DPR_PAL.enablePopover('#isearchInfo', 'focus');
-}
-
-const initializeSearchFeature = () => {
-  getconfig();
-  searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
-}
-
-/* End: Search stuff */
-
-/* Begin: Dictionary stuff */
-
-const initializeDictionarySidebarTab = () => {
-  DPROpts.dictOptions();
-  DPR_PAL.enablePopover('#dictinInfo', 'focus');
-}
-
-const initializeDictionaryFeature = () => {
-  getconfig();
-  try {
-    startDictLookup();
-  } catch(ex) {
-    console.log('Unexpected exception. Is a bug. Find and fix.', ex);
-  }
-}
-
-/* End: Dictionary stuff */
+const loadHtmlFragmentAsync = (id, src) =>
+  new Promise((resolve, reject) => {
+    $(id).load(src, (_, status, xhr) => {
+      if (status === "success" || status === "notmodified") {
+        resolve(status);
+      } else {
+        reject(new Error(`Error loading html status: ${status}, xhrStatus: ${xhr.status}, xhrStatusText: ${xhr.statusText}`));
+      }
+    });
+  })

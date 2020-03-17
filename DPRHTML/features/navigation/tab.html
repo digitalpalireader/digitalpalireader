@@ -2,7 +2,7 @@
   <div class="card mb-2">
     <div class="card-header" style="line-height: 1.35rem;">
       Quick Link
-      <button id="quicklinks-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
+      <button id="quicklinks-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right">
         <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
       </button>
       <div id="quicklinks-info-popover-content" style="display: none">
@@ -20,11 +20,12 @@
     <div class="card-body p-2">
       <div class="form-row">
         <div class="form-group col mb-1">
-          <div class="subnav-cont input-group">
+          <div class="navigation-hierarchy-layout">
             <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
               onkeydown="if(event.keyCode==13) digitalpalireader.loadSection(1); event.keyCode=0;"></input>
-            <br class="clear" />
-            <input id="nav-quicklinks-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(1)" value="&rArr;" />
+            <button id="nav-quicklinks-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(1)">
+              &rArr;
+            </button>
           </div>
         </div>
       </div>
@@ -34,7 +35,7 @@
   <div class="card mb-2">
     <div class="card-header" style="line-height: 1.35rem;">
       Navigate book hierarchy
-      <button id="navigate-book-hierarchy-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right" data-html="true" data-container="body" data-toggle="popover" data-placement="right">
+      <button id="navigate-book-hierarchy-info" type="button" class="btn btn-sm btn-light mb-0 p-0 float-right">
         <i class="fa fa-info-circle fa-lg" aria-hidden="true"></i>
       </button>
       <div id="navigate-book-hierarchy-info-popover-content" style="display: none">
@@ -72,37 +73,38 @@
       <div class="form-row">
         <div class="form-group col mb-1">
           <label class="small-bold-font">Hierarchy</label>
-          <div id="nav-title-div" class="subnav-cont input-group">
-            <input id="nav-title" type="button" class="btn btn-light btn-lg" style="width: 93%; margin-bottom: 0px;"
-              onclick="digitalpalireader.loadIndex(1)" />
-            <br class="clear" />
-            <input id="nav-title-button" class="navbutton" type="button" onclick="digitalpalireader.loadIndex(2)"/>
-          </div>
-          <div class="subnav-cont input-group">
+          <div id="navigation-hierarchy" class="navigation-hierarchy-layout">
+            <button id="nav-title" type="button" class="btn btn-light m-0" onclick="digitalpalireader.loadIndex(1)">
+            </button>
+            <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadIndex(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
             </select>
-            <br class="clear" />
-            <input id="nav-meta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-          </div>
-          <div class="subnav-cont input-group">
+            <button id="nav-meta-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
-            <br class="clear" />
-            <input id="nav-volume-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-          </div>
-          <div class="subnav-cont input-group">
+            <button id="nav-volume-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
-            <br class="clear" />
-            <input id="nav-vagga-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-          </div>
-          <div class="subnav-cont input-group">
+            <button id="nav-vagga-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
-            <br class="clear" />
-            <input id="nav-sutta-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
-          </div>
-          <div class="subnav-cont input-group">
+            <button id="nav-sutta-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+
             <select id="nav-section" class="custom-select navselect"></select>
-            <br class="clear" />
-            <input id="nav-section-button" class="navbutton" type="button" onclick="digitalpalireader.loadSection(2)"/>
+            <button id="nav-section-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
+              <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
           </div>
         </div>
       </div>
