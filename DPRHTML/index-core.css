@@ -156,7 +156,8 @@ body {
   cursor: row-resize;
 }
 
-#main-bottom-pane {
+#main-bottom-pane-root {
+  height: 14rem;
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: hidden;

@@ -23,15 +23,14 @@ class DprViewModel {
   }
 
   parseURLParameters() {
-    var location = document.location.href;
     if (DPR_PAL.isNavigationFeature()) {
-      this.activeTab(navigationFeatureName)
+      this.activeTab(navigationFeatureName);
     } else if (DPR_PAL.isSearchFeature()) {
       this.activeTab(searchFeatureName);
     } else if (DPR_PAL.isDictionaryFeature()) {
       this.activeTab(dictionaryFeatureName);
     } else {
-      console.error('Unknown feature', location);
+      // NOTE: Default is navigation tab.
     }
   }
 }
