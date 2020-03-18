@@ -68,15 +68,15 @@ var DPRNav = {
 
     const titles = nikvoladi[nik] ? nikvoladi[nik] : nikvoladi[nik + $('#tsoMAT2m').val()];
 
-    __dprViewModel.searchTab.bookListA.removeAll();
-    __dprViewModel.searchTab.bookListB.removeAll();
-    __dprViewModel.searchTab.bookMenu.removeAll();
+    __searchTabViewModel.bookListA.removeAll();
+    __searchTabViewModel.bookListB.removeAll();
+    __searchTabViewModel.bookMenu.removeAll();
     for (var i = 0; i < titles.length; i++) {
       // menu
       let menuValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
       let menuText = translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]);
 
-      __dprViewModel.searchTab.bookMenu.push({label: menuText, value: menuValue});
+      __searchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
 
       // check boxes
       const label = ((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : (typeof (titles[i]) == 'number' ? 'Book ' : '') + titles[i]);
@@ -84,9 +84,9 @@ var DPRNav = {
 
     if (i >= Math.ceil(titles.length / 2)) {
 
-        __dprViewModel.searchTab.bookListB.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __dprViewModel.searchTab.searchBookCheckbox(i+1)});
+        __searchTabViewModel.bookListB.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
       } else{
-        __dprViewModel.searchTab.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __dprViewModel.searchTab.searchBookCheckbox(i+1)});
+        __searchTabViewModel.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
       }
     }
     DPRXML.updateSearchHierarchy(0);
