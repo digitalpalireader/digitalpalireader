@@ -9,32 +9,38 @@ var G_similar_min = 75;
 function moveframey() {
 } // fake
 
+function parseDictURLParameters(){
+  if(document.location.href.indexOf('?') > -1){
+    var options = document.location.href.split('?')[1].split('#')[0].split('&');
+    for(var i = 0; i < options.length; i++) {
+      var option = options[i].split('=');
+      switch(option[0]) {
+          case 'type':
+            __dprViewModel.dictionaryTab.type(option[1]);
+            G_dictType = option[1];
+          break;
+          case 'query':
+            __dprViewModel.dictionaryTab.query(option[1]);
+            G_dictQuery = decodeURIComponent(option[1]);
+          break;
+          case 'opts':
+            __dprViewModel.dictionaryTab.options(option[1].split(','));
+            G_dictOpts = option[1].split(',');
+          break;
+          case 'entry':
+            __dprViewModel.dictionaryTab.entry(option[1]);
+            G_dictEntry = decodeURIComponent(option[1]);
+          break;
+      }
+    }
+  }
+}
+
 function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
     G_dictEntry = '';
 
-  if(!dictType) { // make opt list from url
-    var options = document.location.href.split('?')[1].split('#')[0].split('&');
-        for(var i = 0; i < options.length; i++) {
-            var option = options[i].split('=');
-            switch(option[0]) {
-                case 'type':
-                G_dictType = option[1];
-                break;
-                case 'query':
-                G_dictQuery = decodeURIComponent(option[1]);
-                break;
-                case 'opts':
-                G_dictOpts = option[1].split(',');
-                break;
-                case 'entry':
-                G_dictEntry = decodeURIComponent(option[1]);
-                break;
-            }
-        }
-
-  }
-  else { // replace url
+  if(dictType) {  // replace url
     G_dictType = dictType;
     G_dictQuery = dictQuery;
     G_dictOpts = dictOpts;

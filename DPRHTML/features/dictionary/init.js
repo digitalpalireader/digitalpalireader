@@ -1,6 +1,9 @@
 'use strict';
 
 const initializeDictionarySidebarTab = () => {
+  const sidebarTab = $(`#${dictionaryFeatureName}TabContent`)[0];
+  ko.applyBindings(__dprViewModel.dictionaryTab, sidebarTab);
+  parseDictURLParameters();
   DPROpts.dictOptions();
   DPR_PAL.enablePopover('#dictinInfo', 'click', 'bottom');
 }

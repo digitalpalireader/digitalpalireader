@@ -8,6 +8,7 @@ class DprViewModel {
     this.activeTab = ko.observable(navigationFeatureName);
     this.parseURLParameters();
     this.searchTab = new SearchTabViewModel();
+    this.dictionaryTab = new DictionaryTabViewModel();
   }
 
   showLandingFeature() {
@@ -33,6 +34,26 @@ class DprViewModel {
     } else {
       console.error('Unknown feature', location);
     }
+  }
+}
+
+class DictionaryTabViewModel{
+  constructor(){
+    this.query = ko.observable('');
+    this.type = ko.observable('');
+    this.showAdvancedOptions = ko.observable(false);
+    this.options = ko.observableArray();
+    this.entry = ko.observable('');
+    for (var i in G_nikToNumber) {
+      this.options.push('x' + i);
+    }
+    for (var i in G_hNumbers) {
+      this.options.push('m' + i);
+    }
+  }
+
+  option(optionName){
+    return this.options.indexOf(optionName) > -1;
   }
 }
 
@@ -132,17 +153,7 @@ class SearchTabViewModel{
 
   searchMAT(MAT) {
     MAT = MAT.toLowerCase();
-    let MATArray = [];
-    if (MAT.indexOf('m') > -1) {
-      MATArray.push('m');
-    }
-    if (MAT.indexOf('a') > -1) {
-      MATArray.push('a');
-    }
-    if (MAT.indexOf('t') > -1) {
-      MATArray.push('t');
-    }
-    this.searchHierarchy(MATArray);
+    this.searchHierarchy([...MAT]);
     this.searchM(MAT.indexOf('m') > -1);
     this.searchA(MAT.indexOf('a') > -1);
     this.searchT(MAT.indexOf('t') > -1);
