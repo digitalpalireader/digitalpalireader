@@ -1,8 +1,21 @@
 'use strict';
 
+class NavigationTabViewModel {
+  constructor(){
+    this.set = ko.observable('');
+    this.book = ko.observable('');
+    this.M = ko.observable(true);
+    this.A = ko.observable(false);
+    this.T = ko.observable(false);
+    this.place = ko.observableArray();
+    this.navset = ko.observableArray();
+  }
+}
+
+const __navigationTabViewModel = new NavigationTabViewModel();
+
 const initializeNavigationFeature = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  let bookList = 'd';
   let place = [];
   let query = '';
   let para = '';
@@ -11,9 +24,8 @@ const initializeNavigationFeature = () => {
     switch (parameterSections[0]) {
       case 'loc':
         place = makeLocPlace(parameterSections[1]);
-        if (place.length == 8) {
-          bookList = place[0];
-        }
+        __navigationTabViewModel.place(place);
+        __navigationTabViewModel.book(place[0]);
         break;
       case 'para':
         para = parameterSections[1];
@@ -37,12 +49,15 @@ const initializeNavigationFeature = () => {
 }
 
 const initializeNavigationSidebarTab = () => {
+  const sidebarTab = $(`#${navigationFeatureName}TabContent`)[0];
+  ko.applyBindings(__navigationTabViewModel, sidebarTab);
   let bookList = 'd';
   var navset = $("#nav-set");
   for (var i in G_nikFullNames) {
-    navset.append($("<option />").val(i).text(G_nikFullNames[i]));
+    __navigationTabViewModel.navset.push({value: i, label: G_nikFullNames[i]});
   }
   navset.val(bookList);
+
   digitalpalireader.setBookList(bookList);
   digitalpalireader.changeSet();
   navset.change(function () {

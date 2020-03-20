@@ -20,9 +20,11 @@ class DictionaryTabViewModel{
   }
 }
 
+const __dictionaryTabViewModel = new DictionaryTabViewModel();
+
 const initializeDictionarySidebarTab = () => {
   const sidebarTab = $(`#${dictionaryFeatureName}TabContent`)[0];
-  ko.applyBindings(__dprViewModel.dictionaryTab, sidebarTab);
+  ko.applyBindings(__dictionaryTabViewModel, sidebarTab);
   parseDictURLParameters();
   DPROpts.dictOptions();
   DPR_PAL.enablePopover('#dictinInfo', 'click', 'bottom');

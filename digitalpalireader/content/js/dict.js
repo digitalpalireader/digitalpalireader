@@ -16,19 +16,19 @@ function parseDictURLParameters(){
       var option = options[i].split('=');
       switch(option[0]) {
           case 'type':
-            __dprViewModel.dictionaryTab.type(option[1]);
+            __dictionaryTabViewModel.type(option[1]);
             G_dictType = option[1];
           break;
           case 'query':
-            __dprViewModel.dictionaryTab.query(option[1]);
+            __dictionaryTabViewModel.query(decodeURIComponent(option[1]));
             G_dictQuery = decodeURIComponent(option[1]);
           break;
           case 'opts':
-            __dprViewModel.dictionaryTab.options(option[1].split(','));
+            __dictionaryTabViewModel.options(option[1].split(','));
             G_dictOpts = option[1].split(',');
           break;
           case 'entry':
-            __dprViewModel.dictionaryTab.entry(option[1]);
+            __dictionaryTabViewModel.entry(decodeURIComponent(option[1]));
             G_dictEntry = decodeURIComponent(option[1]);
           break;
       }
