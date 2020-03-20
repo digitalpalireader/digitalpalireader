@@ -232,16 +232,16 @@ var DPRXML = {
         lista = this.makeTitleSelect(u, 'h0n');
 
         var listNode = $('#tsoPmeta');
-        __dprViewModel.searchTab.metaList.removeAll();
+        __searchTabViewModel.metaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __dprViewModel.searchTab.metaList.push({label: this.unnamed, value: 0});
+          __searchTabViewModel.metaList.push({label: this.unnamed, value: 0});
           $('#tsoP1').hide();
         }
 
         else {
           for (var idx in lista) {
-            __dprViewModel.searchTab.metaList.push({label: lista[idx], value: idx});
+            __searchTabViewModel.metaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP1').show();
         }
@@ -249,14 +249,14 @@ var DPRXML = {
         lista = this.makeTitleSelect(v, 'h1n');
         var listNode = $('#tsoPvolume');
         listNode.empty();
-        __dprViewModel.searchTab.volumeList.removeAll();
+        __searchTabViewModel.volumeList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __dprViewModel.searchTab.volumeList.push({label: this.unnamed, value: 0});
+          __searchTabViewModel.volumeList.push({label: this.unnamed, value: 0});
           $('#tsoP2').hide();
         } else {
           for (var idx in lista) {
-            __dprViewModel.searchTab.volumeList.push({label: lista[idx], value: idx});
+            __searchTabViewModel.volumeList.push({label: lista[idx], value: idx});
           }
           $('#tsoP2').show();
         }
@@ -264,27 +264,27 @@ var DPRXML = {
       case (depth < 3): // remake vaggalist
         lista = this.makeTitleSelect(w, 'h2n');
         var listNode = $('#tsoPvagga');
-        __dprViewModel.searchTab.vaggaList.removeAll();
+        __searchTabViewModel.vaggaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __dprViewModel.searchTab.vaggaList.push({label: this.unnamed, value: 0});
+          __searchTabViewModel.vaggaList.push({label: this.unnamed, value: 0});
           $('#tsoP3').hide();
         } else {
           for (var idx in lista) {
-            __dprViewModel.searchTab.vaggaList.push({label: lista[idx], value: idx});
+            __searchTabViewModel.vaggaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP3').show();
         }
       case (depth < 4): // remake sutta list on depth = 0, 2, or 3
         lista = this.makeTitleSelect(x, 'h3n');
-        __dprViewModel.searchTab.suttaList.removeAll();
+        __searchTabViewModel.suttaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __dprViewModel.searchTab.suttaList.push({label: this.unnamed, value: 0});
+          __searchTabViewModel.suttaList.push({label: this.unnamed, value: 0});
           $('#tsoP4').hide();
         } else {
           for (var idx in lista) {
-            __dprViewModel.searchTab.suttaList.push({label: lista[idx], value: idx});
+            __searchTabViewModel.suttaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP4').show();
         }
@@ -292,14 +292,14 @@ var DPRXML = {
 
         lista = this.makeTitleSelect(y, 'h4n');
 
-        __dprViewModel.searchTab.sectionList.removeAll();
+        __searchTabViewModel.sectionList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __dprViewModel.searchTab.sectionList.push({label: this.unnamed, value: 0});
+          __searchTabViewModel.sectionList.push({label: this.unnamed, value: 0});
           $('#tsoP5').hide();
         } else {
           for (var idx = 0; idx < lista.length; idx++) {
-            __dprViewModel.searchTab.sectionList.push({label: lista[idx], value: idx});
+            __searchTabViewModel.sectionList.push({label: lista[idx], value: idx});
           }
           $('#tsoP5').show();
         }
@@ -307,7 +307,7 @@ var DPRXML = {
     }
 
     if ($('#tsoPart input[name=tsoPR]:visible').length > 0 && $('#tsoPart input[name=tsoPR]:visible:checked').length == 0) {
-      __dprViewModel.searchTab.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
+      __searchTabViewModel.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
     }
 
   },

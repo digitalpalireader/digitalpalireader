@@ -104,7 +104,7 @@ const loadPanesAsync = async () => {
 
   const all = [
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
-    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, new BottomPaneTabsViewModel()),
   ];
 
   await Promise.all(all);
@@ -158,10 +158,14 @@ const initFeedbackFormParameters = () => {
   $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
 
-const loadHtmlFragmentAsync = (id, src) =>
+const loadHtmlFragmentAsync = (id, src, vm = null) =>
   new Promise((resolve, reject) => {
     $(id).load(src, (_, status, xhr) => {
       if (status === "success" || status === "notmodified") {
+        if (vm) {
+          ko.applyBindings(vm, $(`${id}-root`)[0]);
+        }
+
         resolve(status);
       } else {
         reject(new Error(`Error loading html status: ${status}, xhrStatus: ${xhr.status}, xhrStatusText: ${xhr.statusText}`));
