@@ -51,7 +51,8 @@ Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-C
 
 ## Useful links
 
-- Work items & Execution: [v5 Release](https://github.com/yuttadhammo/digitalpalireader/projects/1).
+- Work items & Execution: [v5 Release](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
 - Pipeline: [Build](https://yuttadhammo.visualstudio.com/digitalpalireader/_build), [Deployment](https://yuttadhammo.visualstudio.com/digitalpalireader/_release).
-- Deployments: [Staging](https://dprstaging.z24.web.core.windows.net/), [Production](https://dprproduction.z13.web.core.windows.net/).
+- Deployments: [Staging](https://staging.digitalpalireader.online/), [Production](https://www.digitalpalireader.online/).
 - Telemetry: [Staging](https://portal.azure.com/#@parthopdaslive.onmicrosoft.com/resource/subscriptions/dc9c3151-f906-4b6a-b7d3-040337cbcc79/resourceGroups/sirimangalo-staging/providers/microsoft.insights/components/sirimangalo-staging/sessions), [Production](https://portal.azure.com/#@parthopdaslive.onmicrosoft.com/resource/subscriptions/dc9c3151-f906-4b6a-b7d3-040337cbcc79/resourceGroups/sirimangalo-production/providers/microsoft.insights/components/sirimangalo-production/sessions).
+- Cache: [Staging & Production](https://dash.cloudflare.com/00036149346f3b0b04ec248437537497/digitalpalireader.online)
