@@ -178,9 +178,16 @@ hr {
 
 .intro-space {
   position: relative;
-  margin-top: 12%;
+  padding-top: 12%;
   color: lightgrey;
   text-align: center;
+  /* TODO
+   *  these 54 pixels come from trying to guess the correct height visually, in reality this should be the difference
+   *  from the hamburger button height and the bottom panel and its controls (the #main-content-panel-splitter), however
+   *  all of those elements' CSS is scattered.
+   */
+  height: calc(100% - 54px);
+  overflow-y: auto;
 }
 
 .intro-message {
