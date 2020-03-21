@@ -34,6 +34,7 @@ function mainInitialize() {
           () => {
             __dprViewModel.showLandingFeature();
             initFeedbackFormParameters();
+            showBv();
           });
     return;
   }
