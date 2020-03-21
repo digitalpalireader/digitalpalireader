@@ -1,7 +1,16 @@
 function bv(rnd,static) {
   var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", 'chrome://digitalpalireader/content/etc/dbv.html', false);
+
+  let url = 'chrome://digitalpalireader/content/etc/dbv.html';
+  if (DPR_PAL.isWeb) {
+    url = DPR_PAL.contentFolder + 'etc/dbv.html';
+    // if this isn't done the request won't contain a 'responseXML' property with the parsed document
+    xmlhttp.overrideMimeType('text/xml');
+  }
+
+  xmlhttp.open("GET", url, false);
   xmlhttp.send(null);
+
   var xmlDoc = xmlhttp.responseXML.documentElement;
   var divs = xmlDoc.getElementsByTagName('div');
   if(static) {
@@ -79,7 +88,12 @@ function citation(cite,event) {
   for (var i = 1; i < loc.length -1;i++) {
     loc[i] = parseInt(loc[i]);
   }
-  mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
+  if (DPR_PAL.isWeb) {
+    openPlace(loc,param['para'],null,eventSend(event));
+  } else {
+    mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
+  }
+
 }
 function eventSend(event,internal) {
 

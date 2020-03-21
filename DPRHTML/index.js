@@ -36,6 +36,7 @@ async function mainInitialize() {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
     initFeedbackFormParameters();
+    showBv();
   }
 
   initMainPane();
