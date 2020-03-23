@@ -32,7 +32,7 @@ var digitalpalireader = {
     var titles;
     if (nikvoladi[nik]) titles = nikvoladi[nik];
     else titles = nikvoladi[nik+G_hier];
-    __navigationTabViewModel.navbook.removeAll();
+    __navigationTabViewModel.navBook.removeAll();
 
     for (var i = 0; i < titles.length; i++) {
       var title;
@@ -45,7 +45,7 @@ var digitalpalireader = {
         title = titles[i];
         val = i+1;
       }
-      __navigationTabViewModel.navbook.push({value: val, label: translit(title)});
+      __navigationTabViewModel.navBook.push({value: val, label: translit(title)});
     }
     this.updateSubnav(0);
   },
@@ -57,19 +57,19 @@ var digitalpalireader = {
     let selectList = null;
     switch(n){
       case 0:
-        selectList = __navigationTabViewModel.navmeta;
+        selectList = __navigationTabViewModel.navMeta;
         break;
       case 1:
-        selectList = __navigationTabViewModel.navvolume;
+        selectList = __navigationTabViewModel.navVolume;
         break;
       case 2:
-        selectList = __navigationTabViewModel.navvagga;
+        selectList = __navigationTabViewModel.navVagga;
         break;
       case 3:
-        selectList = __navigationTabViewModel.navsutta;
+        selectList = __navigationTabViewModel.navSutta;
         break;
       case 4:
-        selectList = __navigationTabViewModel.navsection;
+        selectList = __navigationTabViewModel.navSection;
         break;
     }
     selectList.removeAll();

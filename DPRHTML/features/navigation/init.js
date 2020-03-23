@@ -13,12 +13,12 @@ class NavigationTabViewModel {
     this.sutta = ko.observable('0');
     this.section = ko.observable('0');
 
-    this.navbook = ko.observableArray();
-    this.navmeta = ko.observableArray();
-    this.navvolume = ko.observableArray();
-    this.navvagga = ko.observableArray();
-    this.navsutta = ko.observableArray();
-    this.navsection = ko.observableArray();
+    this.navBook = ko.observableArray();
+    this.navMeta = ko.observableArray();
+    this.navVolume = ko.observableArray();
+    this.navVagga = ko.observableArray();
+    this.navSutta = ko.observableArray();
+    this.navSection = ko.observableArray();
 
     this.placeArray = ko.observableArray();
     this.query = ko.observable('');
