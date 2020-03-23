@@ -32,8 +32,8 @@ var digitalpalireader = {
     var titles;
     if (nikvoladi[nik]) titles = nikvoladi[nik];
     else titles = nikvoladi[nik+G_hier];
-    var bookNode = $('#nav-book');
-    bookNode.empty();
+    __navigationTabViewModel.navbook.removeAll();
+
     for (var i = 0; i < titles.length; i++) {
       var title;
       var val;
@@ -45,9 +45,8 @@ var digitalpalireader = {
         title = titles[i];
         val = i+1;
       }
-      bookNode.append($("<option />").val(val).text(translit(title)));
+      __navigationTabViewModel.navbook.push({value: val, label: translit(title)});
     }
-    bookNode.val(book?book:1);
     this.updateSubnav(0);
   },
 
@@ -55,24 +54,41 @@ var digitalpalireader = {
     const lista = this.makeTitleSelect(heir, tag);
 
     const listNode = $(`#${id}`);
-    listNode.empty();
+    let selectList = null;
+    switch(n){
+      case 0:
+        selectList = __navigationTabViewModel.navmeta;
+        break;
+      case 1:
+        selectList = __navigationTabViewModel.navvolume;
+        break;
+      case 2:
+        selectList = __navigationTabViewModel.navvagga;
+        break;
+      case 3:
+        selectList = __navigationTabViewModel.navsutta;
+        break;
+      case 4:
+        selectList = __navigationTabViewModel.navsection;
+        break;
+    }
+    selectList.removeAll();
     const listNodeButton = $(`#${id}-button`)
 
     if (lista.length == 1 && lista[0] == this.unnamed ) {
       navShown[n] = false;
       listNode.hide();
       listNodeButton.hide();
-      listNode.append($("<option />").val(0).text(this.unnamed));
+      selectList.push({value: 0, label: this.unnamed});
     }
     else {
       navShown[n] = true;
       for(var idx in lista){
-        listNode.append($("<option />").val(idx).text(lista[idx]));
+        selectList.push({value: idx, label: lista[idx]});
       }
       listNode.show();
       listNodeButton.show();
     }
-    listNode.val(0);
   },
 
   updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all

@@ -46,11 +46,11 @@
       <div class="form-row mb-2">
         <div class="form-group col-md-6 mb-1" id="nav-set-div">
           <label class="small-bold-font" for="nav-set">Set</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set" data-bind="options: navset, optionsText: 'label', optionsValue: 'value', value: book"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set" data-bind="options: navset, optionsText: 'label', optionsValue: 'value', value: set, valueAllowUnset: true"></select>
         </div>
         <div class="form-group col-md-6 mb-1" id="nav-book-div">
           <label class="small-bold-font" for="nav-book">Book</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" class="sbut"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" data-bind="options: navbook, optionsText: 'label', optionsValue: 'value', value: book, valueAllowUnset: true" class="sbut"></select>
         </div>
       </div>
 
@@ -58,13 +58,13 @@
         <div class="form-group col mb-1" style="text-align: center;">
           <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
             <label class="btn btn-outline-primary btn-sm active" title="Switch to Mūla (canon)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" onchange="digitalpalireader.changeHier('m')" checked>M
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" value="m" onchange="digitalpalireader.changeHier('m')" data-bind="checked: MAT">M
             </label>
             <label class="btn btn-outline-primary btn-sm" title="Switch to Aṭṭhakathā (commentary)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" onchange="digitalpalireader.changeHier('a')">A
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" value="a" onchange="digitalpalireader.changeHier('a')" data-bind="checked: MAT">A
             </label>
             <label class="btn btn-outline-primary btn-sm" title="Switch to Ṭīkā (sub-commentary)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" onchange="digitalpalireader.changeHier('t')">T
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" value="t" onchange="digitalpalireader.changeHier('t')" data-bind="checked: MAT">T
             </label>
           </div>
         </div>
@@ -80,28 +80,32 @@
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
-            <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)">
+            <select id="nav-meta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(1)" data-bind="options: navmeta, optionsText: 'label', optionsValue: 'value', value: meta, valueAllowUnset: true">
             </select>
             <button id="nav-meta-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
-            <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)"></select>
+            <select id="nav-volume" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(2)" data-bind="options: navvolume, optionsText: 'label', optionsValue: 'value', value: volume, valueAllowUnset: true">
+            </select>
             <button id="nav-volume-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
-            <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)"></select>
+            <select id="nav-vagga" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(3)" data-bind="options: navvagga, optionsText: 'label', optionsValue: 'value', value: vagga, valueAllowUnset: true">
+            </select>
             <button id="nav-vagga-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
-            <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)"></select>
+            <select id="nav-sutta" class="custom-select navselect" onchange="digitalpalireader.updateSubnav(4)" data-bind="options: navsutta, optionsText: 'label', optionsValue: 'value', value: sutta, valueAllowUnset: true">
+            </select>
             <button id="nav-sutta-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
 
-            <select id="nav-section" class="custom-select navselect"></select>
+            <select id="nav-section" class="custom-select navselect" data-bind="options: navsection, optionsText: 'label', optionsValue: 'value', value: section, valueAllowUnset: true">
+            </select>
             <button id="nav-section-button" type="button" class="btn btn-light m-0 p-1" onclick="digitalpalireader.loadSection(2)">
               <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
