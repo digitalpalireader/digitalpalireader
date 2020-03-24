@@ -172,6 +172,40 @@ hr {
   display: none;
 }
 
+.cv{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+input.cv {
+  min-width: 120px;
+  width: 20%;
+  height: 200px;
+  display: inline-block;
+}
+
+.form-row.cv {
+  width: 380px;
+}
+
+#cinform, #coutform {
+  width: 120px;
+}
+
+.btn-group {
+  background-color: Transparent;
+  border: none;
+  margin-left: 20px;
+  display: block;
+  font-size: smaller;
+}
+
+label.btn-group {
+  font-size: x-small;
+  display: inline-block;
+  text-align: right;
+}​
+
 .popover{
   max-width: 50%;
 }
