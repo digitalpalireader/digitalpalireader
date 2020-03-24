@@ -31,11 +31,11 @@ class NavigationTabViewModel {
     this.MAT(place[place.length-1]);
     this.book(`${parseInt(place[1])+1}`);
     if (place.length === 8) {
-      this.meta(place[2]);
-      this.volume(place[3]);
-      this.vagga(place[4]);
-      this.sutta(place[5]);
-      this.section(place[6]);
+      this.meta(place[2].replace('x','0'));
+      this.volume(place[3].replace('x','0'));
+      this.vagga(place[4].replace('x','0'));
+      this.sutta(place[5].replace('x','0'));
+      this.section(place[6].replace('x','0'));
     }
   }
 }
