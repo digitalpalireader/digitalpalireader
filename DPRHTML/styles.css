@@ -549,8 +549,11 @@ z-index:3;
 
 
 #bvb {
-padding:0 20px;
-overflow:auto;
+  padding:0 20px;
+  overflow:auto;
+  position: relative;
+  max-width: 640px;
+  margin: 50px auto;
 }
 
 .bframe {

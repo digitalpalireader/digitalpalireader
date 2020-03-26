@@ -68,37 +68,28 @@ var DPRNav = {
 
     const titles = nikvoladi[nik] ? nikvoladi[nik] : nikvoladi[nik + $('#tsoMAT2m').val()];
 
-    const bookNode = $('#tsoBOOKm');
-    bookNode.empty();
-
-    let bookNode2 = $('#tsoBOA');
-    bookNode2.empty();
-
+    __searchTabViewModel.bookListA.removeAll();
+    __searchTabViewModel.bookListB.removeAll();
+    __searchTabViewModel.bookMenu.removeAll();
     for (var i = 0; i < titles.length; i++) {
       // menu
-      bookNode.append(`<option value="${((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1))}">${translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i])}</option>`);
-      bookNode.prop('selectedIndex', 0);
+      let menuValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
+      let menuText = translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]);
+
+      __searchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
 
       // check boxes
       const label = ((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : (typeof (titles[i]) == 'number' ? 'Book ' : '') + titles[i]);
       const cbValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
-      const newCheck = `
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" id="${'tsoBObook' + (i + 1)}" data-value="${cbValue}" checked>
-  <label class="form-check-label" for="tsoCOv">
-    ${label}
-  </label>
-</div>
-`;
-    if (i == Math.ceil(titles.length / 2)) {
-        bookNode2 = $('#tsoBOB');
-        bookNode2.empty();
+
+    if (i >= Math.ceil(titles.length / 2)) {
+
+        __searchTabViewModel.bookListB.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
+      } else{
+        __searchTabViewModel.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
       }
-      bookNode2.append(newCheck);
-
     }
-
-    DPRXML.updateSearchHierarchy(0)
+    DPRXML.updateSearchHierarchy(0);
   },
 
   switchhier: function (htmp) {

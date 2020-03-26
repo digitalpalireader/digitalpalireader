@@ -49,6 +49,7 @@ var DPROpts = {
         $('#tsoSET').show();
         $('#tsoBOOK').show();
         $('#tsoMAT2').show();
+        DPRNav.setSearchBookList(); // populate books
         DPRXML.updateSearchHierarchy(0); // populate sections
         break;
       case 5:
@@ -160,43 +161,4 @@ var DPROpts = {
         break;
     }
   },
-
-  chooseSearchHier: function (depth) { // deactivate lower hierarchy in partial search
-    //$('#tsoPart input[name=tsoPR]:visible:first').attr('checked', true);
-    if (!depth) depth = $('input[name=tsoPR]:checked', '#tsoPart').index() + 1;
-    $("#tsoPR").val(depth);
-    switch (depth) {
-      case 1:
-        $('#tsoPvolume').attr('disabled', 'disabled');
-        $('#tsoPvagga').attr('disabled', 'disabled');
-        $('#tsoPsutta').attr('disabled', 'disabled');
-        $('#tsoPsection').attr('disabled', 'disabled');
-        break;
-      case 2:
-        $('#tsoPvolume').removeAttr('disabled');
-        $('#tsoPvagga').attr('disabled', 'disabled');
-        $('#tsoPsutta').attr('disabled', 'disabled');
-        $('#tsoPsection').attr('disabled', 'disabled');
-        break;
-      case 3:
-        $('#tsoPvolume').removeAttr('disabled');
-        $('#tsoPvagga').removeAttr('disabled');
-        $('#tsoPsutta').attr('disabled', 'disabled');
-        $('#tsoPsection').attr('disabled', 'disabled');
-        break;
-      case 4:
-        $('#tsoPvolume').removeAttr('disabled');
-        $('#tsoPvagga').removeAttr('disabled');
-        $('#tsoPsutta').removeAttr('disabled');
-        $('#tsoPsection').attr('disabled', 'disabled');
-        break;
-      case 5:
-        $('#tsoPvolume').removeAttr('disabled');
-        $('#tsoPvagga').removeAttr('disabled');
-        $('#tsoPsutta').removeAttr('disabled');
-        $('#tsoPsection').removeAttr('disabled');
-        break;
-    }
-  },
-
 }

@@ -227,105 +227,89 @@ var DPRXML = {
     var x = w[vagga].getElementsByTagName("h3");
     var y = x[sutta].getElementsByTagName("h4");
 
-    $('#tsoPR').prop('selectedIndex', 0);
-
     switch (true) {
       case (depth == 0): // remake meta list
         lista = this.makeTitleSelect(u, 'h0n');
 
         var listNode = $('#tsoPmeta');
-        listNode.empty();
+        __searchTabViewModel.metaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          listNode.append(`<option>${this.unnamed}</option>`);
+          __searchTabViewModel.metaList.push({label: this.unnamed, value: 0});
           $('#tsoP1').hide();
-          $('#tsoPR').prop('selectedIndex', 1);
         }
 
         else {
           for (var idx in lista) {
-            listNode.append(`<option>${lista[idx]}</option>`);
+            __searchTabViewModel.metaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP1').show();
         }
-        listNode.prop('selectedIndex', 0);
       case (depth < 2): // remake volume list
         lista = this.makeTitleSelect(v, 'h1n');
         var listNode = $('#tsoPvolume');
         listNode.empty();
+        __searchTabViewModel.volumeList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          listNode.append(`<option>${this.unnamed}</option>`);
+          __searchTabViewModel.volumeList.push({label: this.unnamed, value: 0});
           $('#tsoP2').hide();
-          if ($('#tsoPR').prop('selectedIndex') == 1) $('#tsoPR').prop('selectedIndex', 2);
-        }
-
-        else {
+        } else {
           for (var idx in lista) {
-            listNode.append(`<option>${lista[idx]}</option>`);
+            __searchTabViewModel.volumeList.push({label: lista[idx], value: idx});
           }
           $('#tsoP2').show();
         }
-        listNode.prop('selectedIndex', 0);
 
       case (depth < 3): // remake vaggalist
         lista = this.makeTitleSelect(w, 'h2n');
         var listNode = $('#tsoPvagga');
-        listNode.empty();
+        __searchTabViewModel.vaggaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          listNode.append(`<option>${this.unnamed}</option>`);
+          __searchTabViewModel.vaggaList.push({label: this.unnamed, value: 0});
           $('#tsoP3').hide();
-          if ($('#tsoPR').prop('selectedIndex') == 2) $('#tsoPR').prop('selectedIndex', 3);
-        }
-
-        else {
+        } else {
           for (var idx in lista) {
-            listNode.append(`<option>${lista[idx]}</option>`);
+            __searchTabViewModel.vaggaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP3').show();
         }
-        listNode.prop('selectedIndex', 0);
       case (depth < 4): // remake sutta list on depth = 0, 2, or 3
         lista = this.makeTitleSelect(x, 'h3n');
-        var listNode = $('#tsoPsutta');
-        listNode.empty();
+        __searchTabViewModel.suttaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          listNode.append(`<option>${this.unnamed}</option>`);
+          __searchTabViewModel.suttaList.push({label: this.unnamed, value: 0});
           $('#tsoP4').hide();
-          if ($('#tsoPR').prop('selectedIndex') == 3) $('#tsoPR').prop('selectedIndex', 4);
-        }
-
-        else {
+        } else {
           for (var idx in lista) {
-            listNode.append(`<option>${lista[idx]}</option>`);
+            __searchTabViewModel.suttaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP4').show();
         }
-        listNode.prop('selectedIndex', 0);
       default: // remake section list
 
         lista = this.makeTitleSelect(y, 'h4n');
 
-        listNode = $('#tsoPsection');
-        listNode.empty();
+        __searchTabViewModel.sectionList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          listNode.append(`<option>${this.unnamed}</option>`);
+          __searchTabViewModel.sectionList.push({label: this.unnamed, value: 0});
           $('#tsoP5').hide();
-        }
-        else {
+        } else {
           for (var idx = 0; idx < lista.length; idx++) {
-            listNode.append(`<option>${lista[idx]}</option>`);
+            __searchTabViewModel.sectionList.push({label: lista[idx], value: idx});
           }
           $('#tsoP5').show();
         }
-        listNode.prop('selectedIndex', 0);
         break;
     }
 
-    DPROpts.chooseSearchHier();
+    if ($('#tsoPart input[name=tsoPR]:visible').length > 0 && $('#tsoPart input[name=tsoPR]:visible:checked').length == 0) {
+      __searchTabViewModel.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
+    }
+
   },
 
   makeTitleSelect: function (xml, tag) { // output menupopup tag with titles in menuitems

@@ -1,5 +1,8 @@
 'use strict';
 
+// NOTE: Ensure this is the very first line.
+installGlobalHandlers();
+
 /* Start: Legacy stuff - Don't mess with it! */
 var devCheck = 0;
 window.dump = window.dump || devCheck ? console.log : () => { };
@@ -9,58 +12,59 @@ function dalert(a) { }
 function ddump(a) { }
 /* End: Legacy stuff. */
 
+const navigationFeatureName = "navigation";
+const searchFeatureName = "search";
+const dictionaryFeatureName = "dictionary";
+
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 
-$(window).resize(() => {
-  setPrefs();
-  initMainPane();
-});
-
-onpopstate = DPRChrome.historyPopstateHandler;
-
-function mainInitialize() {
+async function mainInitialize() {
   setPrefs();
   initSplitters();
   initFooter();
-  loadSidebarTabs();
-  initFeatureTabs();
+  await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
 
-  if (DPR_PAL.isLandingPageFeature()) {
-    $("#main-content-landing-page")
-      .load(
-          `features/landing-page/main-pane.html`,
-          () => {
-            __dprViewModel.showLandingFeature();
-            initFeedbackFormParameters();
-          });
-    return;
-  }
-
   if (DPR_PAL.isNavigationFeature()) {
-    loadFeature('navigation', initializeNavigationFeature);
+    await loadFeatureAsync(navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    loadFeature('search', initializeSearchFeature);
+    await loadFeatureAsync(searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    loadFeature('dictionary', initializeDictionaryFeature);
+    await loadFeatureAsync(dictionaryFeatureName, initializeDictionaryFeature);
   } else {
-    console.error('Unsupported feature', document.location.href);
+    await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
+    __dprViewModel.showLandingFeature();
+    initFeedbackFormParameters();
+    showBv();
   }
 
   initMainPane();
   checkAnalysis();
 }
 
-const loadFeature = (name, initFn) => {
-  $("#mafbc")
-  .load(
-    `features/${name}/main-pane.html`,
-    () => {
-      initFn();
-      __dprViewModel.showMainFeatures();
-      initFeedbackFormParameters();
-    });
+function installGlobalHandlers() {
+  window.onresize = () => {
+    setPrefs();
+    initMainPane();
+  };
+
+  window.onunhandledrejection = event => {
+    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+  };
+
+  window.onpopstate = DPRChrome.historyPopstateHandler;
+
+  window.onerror = error => {
+    console.error(">>>> Unhandled error: ", error);
+  };
+}
+
+const loadFeatureAsync = async (name, initFn) => {
+  await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
+  initFn();
+  __dprViewModel.showMainFeatures();
+  initFeedbackFormParameters();
 }
 
 const initSplitters = () => {
@@ -81,7 +85,7 @@ const initSplitters = () => {
 }
 
 const initMainPane = () => {
-  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height())
+  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height());
 }
 
 const initFooter = () => {
@@ -92,16 +96,33 @@ const initFooter = () => {
   $("#main-footer-version").text(`${window.releaseNumber}`);
 }
 
-const loadSidebarTabs = () => {
-  $("#navigationTabPane").load("features/navigation/tab.html", initializeNavigationSidebarTab);
-  $("#searchTabPane").load("features/search/tab.html", initializeSearchSidebarTab);
-  $("#dictionaryTabPane").load("features/dictionary/tab.html", initializeDictionarySidebarTab);
+const loadPanesAsync = async () => {
+  const allTabs = [
+    ['navigation', initializeNavigationSidebarTab],
+    ['search', initializeSearchSidebarTab],
+    ['dictionary', initializeDictionarySidebarTab]
+  ];
+
+  const all = [
+    ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, new BottomPaneTabsViewModel()),
+  ];
+
+  await Promise.all(all);
+
+  initFeatureTabs();
 }
 
 const initFeatureTabs = () => {
-  $("#navigationTabPane").show();
+  $("#navigationTabPane").hide();
   $("#searchTabPane").hide();
   $("#dictionaryTabPane").hide();
+
+  const activeTab = __dprViewModel.activeTab();
+  $(`#${activeTab}TabPane`).show();
+  $(".nav-link").removeClass('active');
+  $(`#${activeTab}Tab`).addClass('active');
+  localStorage.setItem('activeTab', `${__dprViewModel.activeTab()}Tab`);
 
   $(".nav-link").on("click", function (e) {
     e.preventDefault();
@@ -137,3 +158,18 @@ const initFeedbackFormParameters = () => {
   const userAgent = encodeURIComponent(navigator.userAgent);
   $(".feedback-form-link").attr("href", `https://docs.google.com/forms/d/e/1FAIpQLSfkpd2GEExiez9q2s87KyGEwIe2Gqh_IWcVAWgyiF3HlFvZpg/viewform?entry.1186851452=${env}&entry.1256879647=${url}&entry.1719542298=${userAgent}`);
 }
+
+const loadHtmlFragmentAsync = (id, src, vm = null) =>
+  new Promise((resolve, reject) => {
+    $(id).load(src, (_, status, xhr) => {
+      if (status === "success" || status === "notmodified") {
+        if (vm) {
+          ko.applyBindings(vm, $(`${id}-root`)[0]);
+        }
+
+        resolve(status);
+      } else {
+        reject(new Error(`Error loading html status: ${status}, xhrStatus: ${xhr.status}, xhrStatusText: ${xhr.statusText}`));
+      }
+    });
+  })
