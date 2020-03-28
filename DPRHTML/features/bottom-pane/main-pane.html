@@ -48,44 +48,43 @@
       </div>
     </div>
     <div id="main-bottom-pane-tab-panes-Cv" class="main-bottom-pane-tab-pane" data-bind="visible: isCvTabSelected">
-      <div style="text-align:center;">
-        <input id="cinput" class="form-control cv" onkeydown="if(event.keyCode==13) convert(true); event.keyCode=0;"></input>
-        <div class="form-row cv">
-          <div class="form-group col-xs-4 col-md-4 cv" id="cinform-div">
-            <label class="small-bold-font" for="cinform">From</label>
-            <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform">
-              <option name="Unicode">Unicode</option>
-              <option name="Velthuis" selected>Velthuis</option>
-              <option name="Thai">Thai</option>
-              <option name="Devanagari" disabled>Devanagari</option>
-              <option name="Myanmar" disabled>Myanmar</option>
-              <option name="Sinhala">Sinhala</option>
-            </select>
-          </div>
-          <div class="cv">
-            <button id="buttonCvConv" class="btn-group" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
-              data-original-title="Convert from one format to another">Convert</button>
-            <button class="btn-group" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
-              data-toggle="tooltip" data-placement="right" data-original-title="Sort input by Pali word order">Sort</button>
-            <button class="btn-group" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
-              data-original-title="clear both boxes">Clear</button>
-            <input class="btn-group" type="checkbox" id="lower" name="lower" data-toggle="tooltip" data-placement="right"
-              data-original-title="convert to lowercase"/>
-            <label for="lower" class="btn-group">lowercase</label>
-          </div>
-          <div class="form-group col-xs-4 col-md-4 cv" id="coutform-div">
-            <label class="small-bold-font" for="coutform">To</label>
-            <select class="custom-select force-show-scrollbar-on-macos" size="8" id="coutform">
-              <option name="Unicode" selected>Unicode</option>
-              <option name="Velthuis">Velthuis</option>
-              <option name="Thai">Thai</option>
-              <option name="Devanagari">Devanagari</option>
-              <option name="Myanmar">Myanmar</option>
-              <option name="Sinhala">Sinhala</option>
-            </select>
-          </div>
+      <div class="cv-container force-show-scrollbar-on-macos">
+        <textarea id="cinput" class="form-control cv-item" rows="10" onkeydown="if(event.keyCode==13) convert(true); event.keyCode=0;"></textarea>
+        <div class="form-group col-xs-4 col-md-4 cv-item" id="cinform-div">
+          <label class="small-bold-font" for="cinform">From</label>
+          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform" onclick="changeConversion(1)">
+            <option name="Unicode">Unicode</option>
+            <option name="Velthuis" selected>Velthuis</option>
+            <option name="Thai">Thai</option>
+            <option name="Devanagari" disabled>Devanagari</option>
+            <option name="Myanmar" disabled>Myanmar</option>
+            <option name="Sinhala">Sinhala</option>
+          </select>
         </div>
-        <input id="coutput" class="form-control cv"></input>
+        <div class="cv-item">
+          <br>
+          <button id="buttonCvConv" class="btn btn-light cv-btn-group" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
+            title="Convert from one format to another">Convert</button>
+          <button class="btn btn-light cv-btn-group" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
+            data-toggle="tooltip" data-placement="right" title="Sort input by Pali word order">Sort</button>
+          <button class="btn btn-light cv-btn-group" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
+            title="clear both boxes">Clear</button><br><br>
+          <input class="btn btn-light cv-btn-group" type="checkbox" id="lower" name="lower" data-toggle="tooltip" data-placement="right"
+            title="convert to lowercase"/>
+          <label for="lower" class="cv-btn-group">lowercase</label>
+        </div>
+        <div class="form-group col-xs-4 col-md-4 cv-item" id="coutform-div">
+          <label class="small-bold-font" for="coutform">To</label>
+          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="coutform" onclick="changeConversion(2)">
+            <option name="Unicode" selected>Unicode</option>
+            <option name="Velthuis">Velthuis</option>
+            <option name="Thai">Thai</option>
+            <option name="Devanagari">Devanagari</option>
+            <option name="Myanmar">Myanmar</option>
+            <option name="Sinhala">Sinhala</option>
+          </select>
+        </div>
+        <textarea id="coutput" class="form-control cv-item" rows="10"></textarea>
       </div>
     </div>
     <div id="main-bottom-pane-tab-panes-Tp" class="main-bottom-pane-tab-pane" data-bind="visible: isTpTabSelected">

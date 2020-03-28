@@ -172,39 +172,33 @@ hr {
   display: none;
 }
 
-.cv{
-  display: inline-block;
+.cv-container {
+  display: flex;
+  text-align: center;
+}
+
+.cv-item {
+  flex: 1 1 auto;
   vertical-align: middle;
 }
 
-input.cv {
-  min-width: 120px;
-  width: 20%;
+textarea.cv-item {
+  margin-top: 15px;
   height: 200px;
-  display: inline-block;
-}
-
-.form-row.cv {
-  width: 380px;
+  min-width: 120px;
 }
 
 #cinform, #coutform {
-  width: 120px;
+  min-width: 120px;
 }
 
-.btn-group {
+.cv-btn-group {
+  margin: 0px;
   background-color: Transparent;
   border: none;
-  margin-left: 20px;
-  display: block;
   font-size: smaller;
+  text-align: center;
 }
-
-label.btn-group {
-  font-size: x-small;
-  display: inline-block;
-  text-align: right;
-}​
 
 .popover{
   max-width: 50%;
