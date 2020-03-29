@@ -688,6 +688,7 @@ function toThai(input) {
   var i5 = '';
   var output = '';
   var i = 0;
+  var im = '';
 
   input = input.replace(/\&quot;/g, '`');
 
@@ -757,6 +758,8 @@ function toThai(input) {
 }
 
 function fromThai(input) {
+
+  let output = "";
 
   output = input.replace(/([อกขคฆงจฉชฌญฏฐฑฒณตถทธนปผพภมยรลฬวสห])(?!ฺ)/g, "$1a").replace(/([เโ])([อกขคฆงจฉชฌญฏฐฑฒณตถทธนปผพภมยรลฬวสหฺฺ]+a)/g, "$2$1").replace(/[a]([าิีึุูเโ])/g, "$1").replace(/ฺ/g, "");
 
