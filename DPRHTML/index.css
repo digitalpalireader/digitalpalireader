@@ -172,17 +172,30 @@ hr {
   display: none;
 }
 
-.cv-container {
+.bottom-container {
   display: flex;
   text-align: center;
 }
 
-.cv-item {
+.bottom-item {
   flex: 1 1 auto;
   vertical-align: middle;
 }
 
-textarea.cv-item {
+#input.bottom-item{
+  height: 55px;
+  width: 60%;
+  display: block;
+  margin: auto;
+}
+
+.center {
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+
+textarea.bottom-item {
   margin-top: 15px;
   height: 200px;
   min-width: 120px;
