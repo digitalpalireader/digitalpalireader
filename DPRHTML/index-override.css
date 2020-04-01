@@ -38,12 +38,6 @@
   background-color: transparent;
 }
 
-#bottom {
-  position: unset;
-  height: unset;
-  overflow: unset;
-}
-
 .dictType-seperator-option {
   font-size: 0.2em;
 }

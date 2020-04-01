@@ -80,6 +80,11 @@ const initSplitters = () => {
 
   $("#main-pane").resizable({
     handleSelector: "#main-content-panel-splitter",
+    onDragEnd: (event, $el, passed) => {
+      const h = $("#main-bottom-pane-root").height();
+      $("#main-bottom-pane-tabs").height(h);
+      $("#main-bottom-pane-tab-panes").height(h);
+    },
     resizeWidth: false
   });
 }

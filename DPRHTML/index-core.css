@@ -272,6 +272,11 @@ body {
 
 #main-bottom-pane-tab-panes-D {
   height: 100%;
+}
+
+#main-bottom-pane-tab-panes-D #main-bottom-pane-tab-panes-D-container {
+  height: 100%;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -281,7 +286,6 @@ body {
 }
 
 #main-bottom-pane-tab-panes-Cv .cv-container {
-  border: 1px solid red;
   height: 100%;
   display: grid;
   grid-template-columns: repeat(1, 1fr) repeat(3, auto) repeat(1, 1fr);
@@ -348,12 +352,4 @@ body {
   grid-row: 1;
   resize: unset;
   margin: 0.5rem;
-}
-
-.cv-btn-group {
-  margin: 0px;
-  background-color: Transparent;
-  border: none;
-  font-size: smaller;
-  text-align: center;
 }

@@ -77,16 +77,6 @@ body {
   width: 100%;
 }
 
-#bottom {
-  position: relative;
-  height: 78%;
-  overflow: auto;
-}
-
-#bottom-content {
-  position: relative;
-}
-
 #anf {
   position: relative;
   width: 100%;
@@ -151,25 +141,6 @@ hr {
 }
 .modal-dialog-slideout .modal-content {
   border: 0;
-}
-
-.bottomFrame {
-  background-color: #eeeeee;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
-
-.bottomFrame .bottomFrameHandle {
-  text-align: center;
-  background-color: #eeeeee;
-}
-
-.bottomFrame .bottomFrameContent {
-  height: 250px;
-  background-color: #cccccc;
-  display: none;
 }
 
 .popover{
