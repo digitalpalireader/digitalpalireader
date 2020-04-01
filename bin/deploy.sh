@@ -18,8 +18,13 @@ echo ------ Copy azcopy
 ls -laF
 find ./azcopy_linux_amd64_*/azcopy -name azcopy -exec cp -var {} "$SYSTEM_DEFAULTWORKINGDIRECTORY" \;
 
+echo ------ Clean up container
+$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy remove 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"'' --recursive=true
+$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy list 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"''
+
 echo ------ Do azcopy
 $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/*" 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"'' --recursive=true
+$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy list 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"''
 
 echo ------ Download asge
 export RootDir="$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop"
