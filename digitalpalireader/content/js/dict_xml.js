@@ -61,7 +61,7 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   pedfileget = t1 + '/' + t2;
-  var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1+'/ped.xml';;
+  var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1+'/ped.xml';
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", pedp, false);
   xmlhttp.send(null);

@@ -50,7 +50,8 @@ function translateText(alts) {
   var outparts = [];
   var input = toUni($('#input').val().toLowerCase()).replace(G_uniRegExpNSG,'');
 
-  history.pushState({}, 'Title', 'chrome://digitalpalireader/content/translate.htm?phrase='+toVel(input));
+  var translUrl = `digitalpalireader/content/translate.htm?phrase='${toVel(input)}`;
+  DPR_PAL.contentWindow.history.pushState({}, 'Title', translUrl);
 
   $('#input').val(input);
   input=input.split(' ');
@@ -568,7 +569,7 @@ function checkCompatibleVerb(input,chosen,words) {
 }
 
 function makeWord(word,pl,alts) {
-  return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href="dpr:index?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
+  return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
 function translateWord(word,idx) {
@@ -582,6 +583,8 @@ function translateWord(word,idx) {
   var trans = '';
   var wtr = [];
   var outs = [];
+  var eg = [];
+  var engVerbs = [];
   if(G_specWords[word]) {
     type = G_specWords[word][0];
     trans = G_specWords[word][1];
@@ -768,7 +771,7 @@ function translateWord(word,idx) {
           var t1 = tloc[0];
           var t2 = tloc[1];
           var pedfileget = t1 + '/' + t2;
-          var pedp = 'etc/XML1/'+ t1+'/ped.xml';
+          var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1 +'/ped.xml';
           var xmlhttp = new window.XMLHttpRequest();
           xmlhttp.open("GET", pedp, false);
           xmlhttp.send(null);
@@ -969,6 +972,27 @@ function changeAlt(e,i) {
   var alt = e.selectedIndex;
   G_altChoices[i][1] = alt;
   translateText(G_altChoices);
+}
+
+function insertWordByWord() {
+  var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(G_uniRegExpNSG,'');
+  var words = conjugateWords(input);
+  var out = "";
+  for(var i = 0; i < words.length; i++) {
+    var options = "";
+    for(var j = 0; j < words[i].length; j++) {
+      options += '<li><span class="decl-grammar">'+words[i][j][0]+' form of '+words[i][j][1]+'</span><br/><span class="decl-english">'+words[i][j][2]+'</span></li>';
+      options = "$('#').html(unescape('"+escape('<ol>' + options + '</ol>')+"'))";
+    }
+    out += '<b>'+words[i][0][3]+'</b> '+words[i][0][2]+' ';
+  }
+  $('#translation').html(out);
+}
+
+function clearText() {
+  $('#translation').empty();
+  $('#altTable').empty();
+  $('#input').val('');
 }
 
 var G_subDecl = [];
