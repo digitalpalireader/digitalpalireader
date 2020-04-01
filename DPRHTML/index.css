@@ -172,34 +172,6 @@ hr {
   display: none;
 }
 
-.cv-container {
-  display: flex;
-  text-align: center;
-}
-
-.cv-item {
-  flex: 1 1 auto;
-  vertical-align: middle;
-}
-
-textarea.cv-item {
-  margin-top: 15px;
-  height: 200px;
-  min-width: 120px;
-}
-
-#cinform, #coutform {
-  min-width: 120px;
-}
-
-.cv-btn-group {
-  margin: 0px;
-  background-color: Transparent;
-  border: none;
-  font-size: smaller;
-  text-align: center;
-}
-
 .popover{
   max-width: 50%;
 }

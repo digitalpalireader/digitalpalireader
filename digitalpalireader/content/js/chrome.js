@@ -278,7 +278,7 @@ const writeNavigationHeader = (tabT) => {
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-contents').html(titleout0 + ' ' + modt + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $('#main-content-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
