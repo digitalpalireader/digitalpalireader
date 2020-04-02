@@ -77,16 +77,6 @@ body {
   width: 100%;
 }
 
-#bottom {
-  position: relative;
-  height: 78%;
-  overflow: auto;
-}
-
-#bottom-content {
-  position: relative;
-}
-
 #anf {
   position: relative;
   width: 100%;
@@ -197,8 +187,7 @@ hr {
 }
 
 #translation {
-  margin: auto;
-  width: 40%;
+  margin-left: 20%;
 }
 
 @media (max-width: 576px) {

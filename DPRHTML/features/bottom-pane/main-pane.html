@@ -14,36 +14,38 @@
   </div>
   <div id="main-bottom-pane-tab-panes">
     <div id="main-bottom-pane-tab-panes-D" class="main-bottom-pane-tab-pane" data-bind="visible: isDTabSelected">
-      <div id="anf" style="text-align: right" class="chromeback">
-        <div id="brtop"></div>
-        <div id="brmid"></div>
-        <div id="brbot"></div>
-        <div id="anft">
-          <div style="text-align: center" id="anfa"></div>
-          <div style="text-align: center" id="anfb">
-            <table cellspacing="0" cellpadding="0" width=100%>
-              <tr>
-                <td style="text-align: left" valign="top" id="anfleft"></td>
-                <td valign=top style="text-align: center" id="anfcenter"></td>
-                <td valign="top" style="text-align: right" id="anfright"></td>
-              </tr>
-            </table>
-          </div>
-          <div style="position:relative">
-            <div id="anfs"></div>
-            <div id="anfsd"></div>
-          </div>
-        </div>
-      </div>
-      <div id="bottom">
-        <div id="difout" class="difout">
-          <div id="cdif" class="cdif">
-            <div id="dif" class="dif paperback">
-              <div id="difb-bottom" class="difb">
-              </div>
+      <div id="main-bottom-pane-tab-panes-D-container">
+        <div id="anf" style="text-align: right" class="chromeback">
+          <div id="brtop"></div>
+          <div id="brmid"></div>
+          <div id="brbot"></div>
+          <div id="anft">
+            <div style="text-align: center" id="anfa"></div>
+            <div style="text-align: center" id="anfb">
+              <table cellspacing="0" cellpadding="0" width=100%>
+                <tr>
+                  <td style="text-align: left" valign="top" id="anfleft"></td>
+                  <td valign=top style="text-align: center" id="anfcenter"></td>
+                  <td valign="top" style="text-align: right" id="anfright"></td>
+                </tr>
+              </table>
+            </div>
+            <div style="position:relative">
+              <div id="anfs"></div>
+              <div id="anfsd"></div>
             </div>
           </div>
-          <div id="difhist" class="hoverShow"></div>
+        </div>
+        <div id="bottom">
+          <div id="difout" class="difout">
+            <div id="cdif" class="cdif">
+              <div id="dif" class="dif paperback">
+                <div id="difb-bottom" class="difb">
+                </div>
+              </div>
+            </div>
+            <div id="difhist" class="hoverShow"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -65,7 +67,7 @@
           <br>
           <button id="buttonCvConv" class="btn btn-light cv-btn-group" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
             title="Convert from one format to another">Convert</button>
-          <button class="btn btn-light cv-btn-group" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
+          <button class="btn btn-sm btn-light cv-btn-group my-1" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
             data-toggle="tooltip" data-placement="right" title="Sort input by Pali word order">Sort</button>
           <button class="btn btn-light cv-btn-group" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
             title="clear both boxes">Clear</button><br><br>

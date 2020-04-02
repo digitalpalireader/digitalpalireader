@@ -266,6 +266,7 @@ function DPRShowBottomPane() {
     return;
   }
 
+  __bottomPaneTabsViewModel.updateActiveTabId('D');
   openBottomFrame();
 }
 
@@ -278,7 +279,7 @@ const writeNavigationHeader = (tabT) => {
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-contents').html(titleout0 + ' ' + modt + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $('#main-content-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
@@ -290,6 +291,15 @@ const openBottomFrame = () => {
   if ($("#main-pane").height() / $("#main-pane").parent().height() > 0.85){
     $("#main-pane").height("75%");
   }
+
+  updateBottomFrameDimensions();
+}
+
+const updateBottomFrameDimensions = () => {
+  // NOTE: This is a hack to get the scroll bar to show in the bottom pane D tab.
+  const h = $("#main-bottom-pane-root").height();
+  $("#main-bottom-pane-tabs").height(h);
+  $("#main-bottom-pane-tab-panes").height(h);
 }
 
 const closeBottomFrame = () => {

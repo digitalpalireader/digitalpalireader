@@ -1,8 +1,63 @@
 'use strict';
 
+class NavigationTabViewModel {
+  constructor(){
+    this.set = ko.observable('d');
+    this.book = ko.observable('1');
+    this.MAT = ko.observable('m');
+    this.navset = ko.observableArray();
+
+    this.meta = ko.observable('0');
+    this.volume = ko.observable('0');
+    this.vagga = ko.observable('0');
+    this.sutta = ko.observable('0');
+    this.section = ko.observable('0');
+
+    this.navBook = ko.observableArray();
+    this.navMeta = ko.observableArray();
+    this.navVolume = ko.observableArray();
+    this.navVagga = ko.observableArray();
+    this.navSutta = ko.observableArray();
+    this.navSection = ko.observableArray();
+
+    this.placeArray = ko.observableArray();
+    this.query = ko.observable('');
+    this.para = ko.observable('');
+  }
+
+  place(place){
+    this.placeArray(place);
+    this.set(place[0]);
+    this.MAT(place[place.length-1]);
+    this.book(`${parseInt(place[1])+1}`);
+    if (place.length === 8) {
+      this.meta(place[2].replace('x','0'));
+      this.volume(place[3].replace('x','0'));
+      this.vagga(place[4].replace('x','0'));
+      this.sutta(place[5].replace('x','0'));
+      this.section(place[6].replace('x','0'));
+    }
+  }
+}
+
+const __navigationTabViewModel = new NavigationTabViewModel();
+
 const initializeNavigationFeature = () => {
+  let place = __navigationTabViewModel.placeArray();
+  switch(place.length){
+    case 3:
+      loadXMLindex(place,false);
+      break;
+    case 8:
+      loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
+      break;
+    default:
+      break;
+  }
+}
+
+const parseNavigationURLParams = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  let bookList = 'd';
   let place = [];
   let query = '';
   let para = '';
@@ -11,41 +66,34 @@ const initializeNavigationFeature = () => {
     switch (parameterSections[0]) {
       case 'loc':
         place = makeLocPlace(parameterSections[1]);
-        if (place.length == 8) {
-          bookList = place[0];
-        }
+        __navigationTabViewModel.place(place);
         break;
       case 'para':
         para = parameterSections[1];
+        __navigationTabViewModel.para(para);
         break;
       case 'query':
         query = parameterSections[1];
+        __navigationTabViewModel.query(query);
         break;
     }
   });
-
-  switch(place.length){
-    case 3:
-      loadXMLindex(place,false);
-      break;
-    case 8:
-      loadXMLSection(query, para, place);
-      break;
-    default:
-      break;
-  }
 }
 
 const initializeNavigationSidebarTab = () => {
-  let bookList = 'd';
+  parseNavigationURLParams();
+  const sidebarTab = $(`#${navigationFeatureName}TabContent`)[0];
+  ko.applyBindings(__navigationTabViewModel, sidebarTab);
   var navset = $("#nav-set");
   for (var i in G_nikFullNames) {
-    navset.append($("<option />").val(i).text(G_nikFullNames[i]));
+    __navigationTabViewModel.navset.push({value: i, label: G_nikFullNames[i]});
   }
-  navset.val(bookList);
-  digitalpalireader.setBookList(bookList);
+
+
+  digitalpalireader.setBookList(__navigationTabViewModel.set());
   digitalpalireader.changeSet();
   navset.change(function () {
+    __navigationTabViewModel.book('1');
     digitalpalireader.changeSet();
   });
   $("#nav-book").change(function () {

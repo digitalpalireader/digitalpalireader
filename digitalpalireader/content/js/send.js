@@ -233,7 +233,9 @@ function sendPaliXML(link,add) {
   }
 }
 
-function sendDPPNXML(link,add) {
+var sendDPPNXML = DPR_PAL.isXUL ? XUL_sendDPPNXML : Web_sendDPPNXML;
+
+function XUL_sendDPPNXML(link,add) {
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
@@ -253,6 +255,17 @@ function sendDPPNXML(link,add) {
   }
   else if(add!='right') {
         var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
+    openDPRTab(permalink,'DPRd');
+  }
+}
+
+function Web_sendDPPNXML(link,add) {
+  if(!add) {
+    DPRShowBottomPane();
+    DPPNXML(link);
+  } else if (add!='right') {
+    console.error('Scenario not yet implemented.');
+    var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
     openDPRTab(permalink,'DPRd');
   }
 }
@@ -342,10 +355,11 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
           ldiv.style.color = DPR_prefs['grey'];
         else
           ldiv.style.color = DPR_prefs['coltext'];
-        ldiv.style.textDecoration = 'none';
+        ldiv.style.border = 'none';
       }
-      cdiv.style.color = DPR_prefs['colsel'];
-      cdiv.style.textDecoration = 'underline';
+      const colsel = DPR_prefs['colsel'];
+      cdiv.style.color = colsel;
+      cdiv.style.border = `2px inset ${colsel}`;
       G_lastcolour = divclicked;
     }
     if (DPR_prefs['copyWord'])
@@ -353,7 +367,14 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
   }
 
   if (DPR_PAL.isWeb) {
-    outputAnalysis(input,frombox);
+    if(add != true) { // reuse old tab
+      outputAnalysis(input,frombox);
+    } else {
+      console.error('Not yet implemented');
+      var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
+      openDPRTab(permalink,'DPRx');
+    }
+
     return;
   }
 
