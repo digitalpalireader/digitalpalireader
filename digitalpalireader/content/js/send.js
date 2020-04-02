@@ -355,7 +355,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
           ldiv.style.color = DPR_prefs['grey'];
         else
           ldiv.style.color = DPR_prefs['coltext'];
-        ldiv.style.border = 'revert';
+        ldiv.style.border = 'none';
       }
       const colsel = DPR_prefs['colsel'];
       cdiv.style.color = colsel;
