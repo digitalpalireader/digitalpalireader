@@ -18,6 +18,7 @@ const dictionaryFeatureName = "dictionary";
 
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
+const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 
 async function mainInitialize() {
   setPrefs();
@@ -80,10 +81,8 @@ const initSplitters = () => {
 
   $("#main-pane").resizable({
     handleSelector: "#main-content-panel-splitter",
-    onDragEnd: (event, $el, passed) => {
-      const h = $("#main-bottom-pane-root").height();
-      $("#main-bottom-pane-tabs").height(h);
-      $("#main-bottom-pane-tab-panes").height(h);
+    onDrag: (event, $el, passed) => {
+      updateBottomFrameDimensions();
     },
     resizeWidth: false
   });
@@ -110,7 +109,7 @@ const loadPanesAsync = async () => {
 
   const all = [
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
-    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, new BottomPaneTabsViewModel()),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, __bottomPaneTabsViewModel),
   ];
 
   await Promise.all(all);

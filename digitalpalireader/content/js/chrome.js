@@ -266,6 +266,7 @@ function DPRShowBottomPane() {
     return;
   }
 
+  __bottomPaneTabsViewModel.updateActiveTabId('D');
   openBottomFrame();
 }
 
@@ -290,6 +291,15 @@ const openBottomFrame = () => {
   if ($("#main-pane").height() / $("#main-pane").parent().height() > 0.85){
     $("#main-pane").height("75%");
   }
+
+  updateBottomFrameDimensions();
+}
+
+const updateBottomFrameDimensions = () => {
+  // NOTE: This is a hack to get the scroll bar to show in the bottom pane D tab.
+  const h = $("#main-bottom-pane-root").height();
+  $("#main-bottom-pane-tabs").height(h);
+  $("#main-bottom-pane-tab-panes").height(h);
 }
 
 const closeBottomFrame = () => {

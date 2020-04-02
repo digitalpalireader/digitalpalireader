@@ -9,12 +9,16 @@ class BottomPaneTabsViewModel {
     this.isCjTabSelected = ko.observable(false);
   }
 
-  updateActiveTab(_, event) {
+  updateActiveTabId(tabId) {
     Object
       .entries(this)
       .filter(([n, _]) => n.indexOf("TabSelected") !== -1)
       .forEach(([_, fn]) => fn(false));
 
-    this[`is${$(event.currentTarget).data("tabid")}TabSelected`](true);
+    this[`is${tabId}TabSelected`](true);
+  }
+
+  updateActiveTab(_, event) {
+    this.updateActiveTabId($(event.currentTarget).data("tabid"));
   }
 }
