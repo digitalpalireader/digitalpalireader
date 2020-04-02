@@ -183,16 +183,29 @@ hr {
 }
 
 #input.bottom-item{
-  height: 55px;
+  height: 70px;
   width: 60%;
   display: block;
   margin: auto;
 }
 
-.center {
+.bottom-center {
   text-align: center;
   display: block;
   margin: auto;
+  width: 90%;
+}
+
+#translation {
+  margin: auto;
+  width: 40%;
+}
+
+@media (max-width: 576px) {
+  #translation {
+    margin: auto;
+    width: 90%;
+  }
 }
 
 textarea.bottom-item {
@@ -206,8 +219,9 @@ textarea.bottom-item {
 }
 
 .cv-btn-group {
-  margin: 0px;
-  background-color: Transparent;
+  margin: 2px;
+  width: 120px;
+  background-color: rgb(238, 238, 238);
   border: none;
   font-size: smaller;
   text-align: center;
