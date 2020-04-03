@@ -261,12 +261,8 @@ function DPRBottomPaneUpdateStyle() {
   document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 
-function DPRShowBottomPane() {
-  if (!DPR_PAL.isWeb) {
-    return;
-  }
-
-  __bottomPaneTabsViewModel.updateActiveTabId('D');
+function DPRShowBottomPane(tabIdToActivate = 'D') {
+  __bottomPaneTabsViewModel.updateActiveTabId(tabIdToActivate);
   openBottomFrame();
 }
 
