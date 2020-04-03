@@ -148,5 +148,9 @@ console.log('Loading DPR_PAL...');
     return matcher.exec(document.location.href);
   }
 
+  DPR_PAL.isPaliFeature = () => {
+    return /\?feature=pali/i.exec(document.location.href);
+  }
+
   console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);

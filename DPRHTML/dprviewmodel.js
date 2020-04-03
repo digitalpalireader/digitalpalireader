@@ -28,6 +28,8 @@ class DprViewModel {
       this.activeTab(searchFeatureName);
     } else if (DPR_PAL.isDictionaryFeature()) {
       this.activeTab(dictionaryFeatureName);
+    } else if (DPR_PAL.isPaliFeature()) {
+      this.activeTab(paliFeatureName);
     } else {
       // NOTE: Default is navigation tab.
     }
