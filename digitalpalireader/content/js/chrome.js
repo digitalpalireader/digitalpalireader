@@ -8,11 +8,15 @@ function openFirstDPRTab() {
   if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
 }
 
-function openDPRTab(permalink,id,reuse) {
-  if (!DPR_PAL.isXUL) {
+function openDPRTab(permalink, id, reuse) {
+  if (DPR_PAL.isWeb) {
+    if (reuse) {
+      window.location.href = permalink;
+    } else {
+      window.open(permalink, '_blank');
+    }
     return false;
   }
-
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -261,11 +265,8 @@ function DPRBottomPaneUpdateStyle() {
   document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 
-function DPRShowBottomPane() {
-  if (!DPR_PAL.isWeb) {
-    return;
-  }
-
+function DPRShowBottomPane(tabIdToActivate = 'D') {
+  __bottomPaneTabsViewModel.updateActiveTabId(tabIdToActivate);
   openBottomFrame();
 }
 
@@ -278,7 +279,7 @@ const writeNavigationHeader = (tabT) => {
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-contents').html(titleout0 + ' ' + modt + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $('#main-content-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
@@ -290,6 +291,15 @@ const openBottomFrame = () => {
   if ($("#main-pane").height() / $("#main-pane").parent().height() > 0.85){
     $("#main-pane").height("75%");
   }
+
+  updateBottomFrameDimensions();
+}
+
+const updateBottomFrameDimensions = () => {
+  // NOTE: This is a hack to get the scroll bar to show in the bottom pane D tab.
+  const h = $("#main-bottom-pane-root").height();
+  $("#main-bottom-pane-tabs").height(h);
+  $("#main-bottom-pane-tab-panes").height(h);
 }
 
 const closeBottomFrame = () => {

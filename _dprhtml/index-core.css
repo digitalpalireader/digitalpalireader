@@ -156,11 +156,15 @@ body {
   cursor: row-resize;
 }
 
-#main-bottom-pane-root {
-  height: 14rem;
+#main-bottom-pane {
+  height: 100%;
+  overflow: hidden;
   flex: 1 1 auto;
-  overflow-x: hidden;
-  overflow-y: hidden;
+}
+
+#main-bottom-pane-root {
+  height: 100%;
+  overflow: hidden;
   display: grid;
   grid-template-columns: var(--bottom-pane-tab-side-length) 1fr;
   grid-template-rows: auto;
@@ -205,14 +209,9 @@ body {
 #main-bottom-pane-tab-panes {
   width: 100%;
   height: 100%;
-  overflow-y: auto;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   border: 2px ridge #e7e7e7;
-}
-
-#main-bottom-pane-tab-panes .main-bottom-pane-tab-pane {
-  margin: 0.15rem;
 }
 
 #main-pane-container {
@@ -269,4 +268,94 @@ body {
   #main-panel-splitter {
     display: none;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .main-footer-help {
+    display: none;
+  }
+}
+
+#main-bottom-pane-tab-panes-D {
+  height: 100%;
+}
+
+#main-bottom-pane-tab-panes-D #main-bottom-pane-tab-panes-D-container {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+#main-bottom-pane-tab-panes-Cv {
+  height: 100%;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr) repeat(3, auto) repeat(1, 1fr);
+  grid-template-rows: 1fr;
+  grid-gap: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cinput {
+  grid-column: 1 / span 1;
+  grid-row: 1;
+  resize: unset;
+  margin: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cinform-div {
+  grid-column: 2 / span 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cinform-div label, #main-bottom-pane-tab-panes-Cv .cv-container #coutform-div label {
+  align-self: center;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cinform-div #cinform {
+  width: 100%;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cactions {
+  grid-column: 3 / span 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #cactions #cactions-lowercase {
+  display: flex;
+  flex-direction: row;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #coutform-div #coutform {
+  width: 100%;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #coutform-div {
+  grid-column: 4 / span 1;
+  grid-row: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#main-bottom-pane-tab-panes-Cv .cv-container #coutput {
+  grid-column: 5 / span 1;
+  grid-row: 1;
+  resize: unset;
+  margin: 0.5rem;
 }

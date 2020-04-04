@@ -27,7 +27,7 @@ console.log('Loading DPR_PAL...');
 
   defineReadOnlyProperty(
     "dprHomePage",
-    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : `${DPR_PAL.baseUrl}DPRHTML/index.html`);
+    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : `${DPR_PAL.baseUrl}_dprhtml/index.html`);
 
   defineReadOnlyProperty(
     "mainWindow",
@@ -111,7 +111,7 @@ console.log('Loading DPR_PAL...');
   const dprSchemeUriCracker = /^dpr:(.+)\?(.*)$/;
   DPR_PAL.normalizeDprSchemeUri = uri => {
     if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
-      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}DPRHTML/$1.html?$2`);
+      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}_dprhtml/$1.html?$2`);
     } else {
       return uri;
     }
