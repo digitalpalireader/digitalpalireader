@@ -9,7 +9,7 @@ echo "SOURCEDIR = $SOURCEDIR"
 
 mkdir -p $OUTDIR
 
-cd ./DPRHTML
+cd ./_dprhtml
 ./build.sh $OUTDIR $SOURCEDIR
 cd ..
 
