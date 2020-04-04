@@ -95,15 +95,6 @@ function citation(cite,event) {
   }
 
 }
-function eventSend(event,internal) {
-
-  if(!event) return;
-  if(event.ctrlKey || event.which == 2) return true;
-  if(event.shiftKey) return 'shift';
-  if(event.which == 1 && internal) return 'internal';
-  if (event.which == 1) return false;
-  return 'right';
-}
 
 function bvAlert(bva) {
   var prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]

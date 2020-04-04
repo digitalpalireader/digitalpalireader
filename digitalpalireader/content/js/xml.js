@@ -12,6 +12,8 @@ matValue['t'] = '';
 var G_compare = 1;
 var G_thisPara = null;
 
+const emptyFn = `(() => {})()`;
+
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
@@ -174,6 +176,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
   setCurrentTitle(tabT);
 
+  const shortcutFns = createShortcutFns();
 
 // toolbars
 
@@ -222,7 +225,8 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
           relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
         else if (relhere.split('#')[hic] != '') {
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-           relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace([\''+relherea[0]+"',"+relherea[1]+","+relherea[2]+","+relherea[3]+","+relherea[4]+","+relherea[5]+","+relherea[6]+',\''+hi[ht] + '\'],null,null,eventSend(event,1));" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+          shortcutFns[`gotoRel${hi[ht]}`] = `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1));`;
+          relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
           matButton = 0;
         }
         else
@@ -296,15 +300,21 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   }
 
   //prev and next - nextprev | thai-myanmar alternation - thaibut
+  shortcutFns.gotoPrev = prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
+  shortcutFns.gotoIndex = `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`;
+  shortcutFns.gotoNext = next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
+  shortcutFns.gotoMyanmar = place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFn;
+  shortcutFns.gotoThai = !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFn;
+  shortcutFns.copyPermalink = DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFn;
 
-    var thaibut;
-    var nextprev = (prev ? '<span id="pSect" class="lbut abut small" onmouseup="openPlace([\''+prev.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to previous section">&larr;</span>':'<span class="lbut abut small" title="no previous section">&nbsp;</span>')+'<span id="indexButton" class="abut mbut small" onmouseup="openXMLindex(\''+nikaya+'\','+bookno+',\''+hier+'\',eventSend(event,1))" title="open book index">&uarr;</span>' + (next ? '<span id="nSect" class="rbut abut small" onmouseup="openPlace([\''+next.join("\',\'")+'\''+(place[8]?',1':'')+'],null,null,eventSend(event,1));" title="go to next section">&rarr;</span>':'<span class="rbut abut small" title="no next section">&nbsp;</span>');
-    if(!chromeFileExists('DPRThai/content/exists')) {
-      //thaibut = ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="installSetPrompt(\'DPRThai\', \'Thai Tipitaka\')" title="Install Thai Tipitaka">T</span>';
-    }//TODO: PWA case
-    else {
-      thaibut = (place[8]?' <span id="thaiButton" class="abut lbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'],null,null,eventSend(event,1))" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>':(chromeFileExists('DPRThai/content/xml/'+nikbookhier+'.xml')? ' <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="openPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\',1],null,null,eventSend(event,1))" title="Switch to Thai Tipitaka">T</span>':''));
-    }
+  const nextprev =
+    (prev ? `<span id="pSect" class="lbut abut small" onmouseup="${shortcutFns.gotoPrev}" title="go to previous section">&larr;</span>` : '<span class="lbut abut small" title="no previous section">&nbsp;</span>')
+    + `<span id="indexButton" class="abut mbut small" onmouseup="${shortcutFns.gotoIndex}" title="open book index">&uarr;</span>`
+    + (next ? `<span id="nSect" class="rbut abut small" onmouseup="${shortcutFns.gotoNext}" title="go to next section">&rarr;</span>` : '<span class="rbut abut small" title="no next section">&nbsp;</span>');
+  const thaibut =
+    place[8]
+    ? ` <span id="thaiButton" class="abut lbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>`
+    : ` <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Thai Tipitaka">T</span>`;
 
   // bookmark button
 
@@ -313,10 +323,11 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   // first toolbar row
 
-  var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="permalinkClick(\''+permalink+(querystring ? '&query=' + querystring : '')+(place[8]?'&alt=1':'')+'\',null);" title="copy permalink to clipboard">&diams;</span>' :'');
+  var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="' + shortcutFns.copyPermalink + '" title="copy permalink to clipboard">&diams;</span>' : '');
 
   var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
+  resolveShortcuts(shortcutFns);
   makeToolbox(main,aux,titleout[2],true,true,true);
 
   // paragraph range
@@ -464,6 +475,10 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   if (sidebar) {
     sidebar.DPRNav.historyBox();
   }
+}
+
+function resolveShortcuts(shortcutFns) {
+  $("body").append(`<script>/*XML.JS*/\r\n${Object.entries(shortcutFns).map(x => `var __${x[0]} = () => ${x[1]};`).join('\r\n')}</script>`);
 }
 
 function loadXMLindex(place,compare) {
@@ -960,6 +975,9 @@ function loadXMLindex(place,compare) {
 
   }
 
+  const shortcutFns = createShortcutFns();
+  resolveShortcuts(shortcutFns);
+
   // add header to saveout
 
   var clinner = new RegExp('(<\\/c'+(lowest+1)+'>)(<c[^'+(lowest+1)+'])','g');
@@ -1014,6 +1032,20 @@ function loadXMLindex(place,compare) {
   if (sidebar) {
     sidebar.DPRNav.historyBox();
   }
+}
+
+function createShortcutFns() {
+  return {
+    'gotoPrev': emptyFn,
+    'gotoIndex': emptyFn,
+    'gotoNext': emptyFn,
+    'gotoMyanmar': emptyFn,
+    'gotoThai': emptyFn,
+    'gotoRelm': emptyFn,
+    'gotoRela': emptyFn,
+    'gotoRelt': emptyFn,
+    'copyPermalink': emptyFn,
+  };
 }
 
 function saveCompilation() {
