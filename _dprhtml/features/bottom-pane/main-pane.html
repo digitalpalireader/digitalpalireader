@@ -64,16 +64,16 @@
           </select>
         </div>
         <div id="cactions">
-          <button id="buttonCvConv" class="btn btn-sm btn-light cv-btn-group my-1" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
+          <button id="buttonCvConv" class="btn btn-sm btn-light my-1" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
             title="Convert from one format to another">Convert</button>
-          <button class="btn btn-sm btn-light cv-btn-group my-1" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
+          <button class="btn btn-sm btn-light my-1" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
             data-toggle="tooltip" data-placement="right" title="Sort input by Pali word order">Sort</button>
-          <button class="btn btn-sm btn-light cv-btn-group my-1" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
+          <button class="btn btn-sm btn-light my-1" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
             title="clear both boxes">Clear</button>
-          <div id="cactions-lowercase my-1">
-            <input class="btn btn-sm btn-light cv-btn-group m-0" type="checkbox" id="lower" name="lower" data-toggle="tooltip" data-placement="right"
+          <div id="cactions-lowercase">
+            <input class="btn btn-sm btn-light m-0" type="checkbox" id="lower" name="lower" data-toggle="tooltip" data-placement="right"
               title="convert to lowercase"/>
-            <label for="lower" class="cv-btn-group pl-1">lowercase</label>
+            <label for="lower" class="pl-1 mt-2">lowercase</label>
           </div>
         </div>
         <div id="coutform-div">
