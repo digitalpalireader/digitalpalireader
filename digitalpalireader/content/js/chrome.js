@@ -8,11 +8,15 @@ function openFirstDPRTab() {
   if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
 }
 
-function openDPRTab(permalink,id,reuse) {
-  if (!DPR_PAL.isXUL) {
+function openDPRTab(permalink, id, reuse) {
+  if (DPR_PAL.isWeb) {
+    if (reuse) {
+      window.location.href = permalink;
+    } else {
+      window.open(permalink, '_blank');
+    }
     return false;
   }
-
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
