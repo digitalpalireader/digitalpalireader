@@ -10,46 +10,44 @@ function keyPressed1(e) {
     return;
   }
 
-  // p
-
-  // g
-
-  // n
-
-  if (e.charCode > 48 && e.charCode < 54) { // 1-6
+  if (e.charCode > 48 && e.charCode < 54) { // 1-5
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[e.charCode - 49]);
     return;
   }
 
-  if (e.charCode == 37) { // %
-    $('#settingsDialog').modal('show');
+  if (e.charCode == 112) { // p
+    if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup(e);
     return;
   }
 
-  if (e.charCode == 104) { // h
-    openDPRTab('help.html', 'DPR-help', 0);
+  // g
+
+  if (e.charCode == 110) { // n
+    if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup(e);
     return;
   }
 
-  // @
+  if (e.charCode == 113) { // q
 
-  if (e.charCode == 63) { // ?
-    $('#helpDialog').modal('show');
-    return;
+    var check = { value: false };                  // default the checkbox to false
+
+    var input = { value: "" };
+
+    var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
+
+    // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
+
+    if (!result) return;
+
+    var place = input.value;
+
+    var outplace = convertShortLink(place);
+    if (outplace[0] === false) return alertFlash(outplace[1], outplace[2]);
+    //dalert(outplace);
+
+    var para = outplace.pop();
+    openPlace(outplace, para);
   }
-
-  // var Main = mainWindow.gBrowser.selectedTab.linkedBrowser;
-  // var wBot, dBot, wMain, dMain;
-  // if(Main.contentDocument.getElementById('dict').contentDocument) {
-  //   wBot = Main.contentDocument.getElementById('dict').contentWindow;
-  //   dBot = Main.contentDocument.getElementById('dict').contentDocument;
-  // }
-  // wMain = Main.contentWindow;
-  // dMain = Main.contentDocument;
-
-
-  if (e.charCode == 112) { if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup(e); return }  // p
-  if (e.charCode == 110) { if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup(e); return } // n
 
   if (e.charCode == 115) {  // s
     if (window.getSelection().toString() != '') {
@@ -74,6 +72,7 @@ function keyPressed1(e) {
     else alertFlash('You must select some text to send to the textpad', 'yellow');
     return;
   }
+
   if (e.charCode == 69) {  // E
     if (window.getSelection().toString() != '') {
       wMain.sendtoPad(window.getSelection().toString() + '', true);
@@ -97,51 +96,40 @@ function keyPressed1(e) {
     else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
     return;
   }
-  if (e.charCode == 113) { // q
 
-    var check = { value: false };                  // default the checkbox to false
-
-    var input = { value: "" };
-
-    var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
-
-    // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
-
-    if (!result) return;
-
-    var place = input.value;
-
-    var outplace = convertShortLink(place);
-    if (outplace[0] === false) return alertFlash(outplace[1], outplace[2]);
-    //dalert(outplace);
-
-    var para = outplace.pop();
-    openPlace(outplace, para);
+  if (e.charCode == 37) { // %
+    $('#settingsDialog').modal('show');
+    return;
   }
 
-  keyPressed2(e);
-}
+  if (e.charCode == 33) { // !
+    eraseOptions();
+    return;
+  }
 
-function keyPressed2(e) {
-  if (document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
-  var dTop = null; //document.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentDocument;
-  var dBot = document;
+  if (e.charCode == 35) { // #
+    newquiz();
+    return;
+  }
 
-  var wTop = null; //document.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow;
-  var wBot = window;
-  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || document.activeElement.tagName == "html:textarea" || e.altKey || e.ctrlKey) { return; }
+  if (e.charCode == 42) { // *
+    bvAlert(bv()); return;
+  }
 
+  if (e.charCode == 98) { // b
+    dTop.getElementById('bkButton').onmousedown();
+    return;
+  }
 
+  if (e.charCode == 104) { // h
+    openDPRTab('help.html', 'DPR-help', 0);
+    return;
+  }
 
-  // if(document.getElementById('dpr-tops').getElementsByTagName('browser').length == 1) {
-  //   if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(e); return }  // p
-  //   if (e.charCode == 110) { if(dTop.getElementById('nSect')) dTop.getElementById('nSect').onmouseup(e); return } // n
-  // }
+  // @
 
-
-
-  if (e.charCode == 118) { wBot.showBv(); return; } // v
-  if (e.charCode == 98) { dTop.getElementById('bkButton').onmousedown(); return; } // b
-
-
+  if (e.charCode == 63) { // ?
+    $('#helpDialog').modal('show');
+    return;
+  }
 }
