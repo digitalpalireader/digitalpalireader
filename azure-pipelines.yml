@@ -12,6 +12,7 @@ steps:
       sudo npm i yarn -g
       sudo chown -R $USER:$GROUP ~/.npm
       sudo chown -R $USER:$GROUP ~/.config
+      sudo chomod +x build.sh
 
   - task: Bash@3
     inputs:
