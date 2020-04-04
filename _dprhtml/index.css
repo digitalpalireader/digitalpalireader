@@ -143,25 +143,6 @@ hr {
   border: 0;
 }
 
-.bottomFrame {
-  background-color: #eeeeee;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-}
-
-.bottomFrame .bottomFrameHandle {
-  text-align: center;
-  background-color: #eeeeee;
-}
-
-.bottomFrame .bottomFrameContent {
-  height: 250px;
-  background-color: #cccccc;
-  display: none;
-}
-
 .bottom-container {
   display: flex;
   text-align: center;
