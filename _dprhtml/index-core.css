@@ -270,6 +270,12 @@ body {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .main-footer-help {
+    display: none;
+  }
+}
+
 #main-bottom-pane-tab-panes-D {
   height: 100%;
 }

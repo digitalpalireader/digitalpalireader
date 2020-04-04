@@ -22,3 +22,5 @@ class BottomPaneTabsViewModel {
     this.updateActiveTabId($(event.currentTarget).data("tabid"));
   }
 }
+
+BottomPaneTabsViewModel.TabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj'];

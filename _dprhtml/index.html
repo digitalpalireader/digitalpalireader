@@ -6,13 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Digital Pali Reader (alpha)</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/DPRHTML/index-core.css" />
-    <link rel="stylesheet" href="/DPRHTML/index.css" />
-    <link rel="stylesheet" href="/DPRHTML/styles.css" />
-    <link rel="stylesheet" href="/DPRHTML/index-override.css" />
+    <link rel="stylesheet" href="/_dprhtml/index-core.css" />
+    <link rel="stylesheet" href="/_dprhtml/index.css" />
+    <link rel="stylesheet" href="/_dprhtml/styles.css" />
+    <link rel="stylesheet" href="/_dprhtml/index-override.css" />
     <script>
       const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
@@ -44,7 +47,7 @@
           <div id="main-sidebar-content" class="card">
             <div class="card-header">
               Digital Pali Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#setingsDialog" title="Launch preferences..." style="float: right">
+              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#settingsDialog" title="Launch preferences..." style="float: right">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
@@ -131,10 +134,12 @@
           <li id="main-footer-timestamp"></li>
           <li>|</li>
           <li id="main-footer-version"></li>
+          <li class="main-footer-help">|</li>
+          <li class="main-footer-help">Press '?' for help</li>
         </ul>
       </footer>
     </div>
-    <div class="modal fade show" id="setingsDialog" tabindex="-1" role="dialog">
+    <div class="modal fade show" id="settingsDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header p-2">
@@ -149,6 +154,49 @@
           <div class="modal-footer p-2">
             <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults...">Defaults</button>
             <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade show" id="helpDialog" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="font-size: smaller;">
+          <div class="modal-header p-2">
+            <h6 class="modal-title" id="exampleModalLongTitle"><i class="fa fa-info-circle fx-2x" aria-hidden="true"></i>&nbsp;Keyboard Shortcuts</h6>
+          </div>
+          <div class="modal-body">
+            <div>The following is a current list of all shortcut keys available to the DPR. <strong>Note</strong>: These keys will not function if the cursor is located in an input field.</div>
+            <br>
+            <table>
+              <tr><td>v</td><td>&nbsp;Go home, show Buddha Vachana</td></tr>
+              <tr><td>1,2...5</td><td>&nbsp;Bring up bottom pane tabs</td></tr>
+              <tr><td>i</td><td>&nbsp;Display index</td></tr>
+              <tr><td>p</td><td>&nbsp;Display previous section</td></tr>
+              <tr><td>n</td><td>&nbsp;Display next section</td></tr>
+              <tr><td>c</td><td>&nbsp;Copy permalink to clipboard</td></tr>
+              <tr><td>u</td><td>&nbsp;Switch to section in Mūla</td></tr>
+              <tr><td>a</td><td>&nbsp;Switch to relative section in Aṭṭhakathā</td></tr>
+              <tr><td>k</td><td>&nbsp;Switch to relative section in Ṭīkā</td></tr>
+              <!-- <tr><td>m</td><td>&nbsp;Switch to Myanmar tipitaka</td></tr>
+              <tr><td>t</td><td>&nbsp;Switch to Thai tipitaka</td></tr>
+              <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr>
+              <tr><td>s</td><td>&nbsp;Send selected text to convertor</td></tr>
+              <tr><td>e</td><td>&nbsp;Send selected text to textpad</td></tr>
+              <tr><td>E</td><td>&nbsp;Append selected text to textpad</td></tr>
+              <tr><td>,</td><td>&nbsp;Display previous PED or DPPN entry</td></tr>
+              <tr><td>.</td><td>&nbsp;Display next PED or DPPN entry</td></tr> -->
+              <tr><td>%</td><td>&nbsp;Display DPR settings</td></tr>
+              <!-- <tr><td>!</td><td>&nbsp;Reset options</td></tr>
+              <tr><td>#</td><td>&nbsp;Display Pali quiz</td></tr>
+              <tr><td>*</td><td>&nbsp;Display Pali quote</td></tr>
+              <tr><td>b</td><td>&nbsp;Save bookmark</td></tr> -->
+              <tr><td>h</td><td>&nbsp;Display help</td></tr>
+              <tr><td>@</td><td>&nbsp;Launch feedback form</td></tr>
+              <!-- <tr><td>?</td><td>&nbsp;Show this list of shortcuts</td></tr> -->
+            </table>
+            </div>
+          <div class="modal-footer p-2">
             <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
           </div>
         </div>
@@ -217,12 +265,13 @@
     <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
     <script src="/digitalpalireader/content/js/bv.js"></script>
     <script src="/digitalpalireader/content/js/translate.js"></script>
-    <script src="/DPRHTML/features/bottom-pane/init.js"></script>
-    <script src="/DPRHTML/features/navigation/init.js"></script>
-    <script src="/DPRHTML/features/search/init.js"></script>
-    <script src="/DPRHTML/features/dictionary/init.js"></script>
-    <script src="/DPRHTML/dprviewmodel.js"></script>
-    <script src="/DPRHTML/index.js"></script>
+    <script src="/_dprhtml/keyboard_shortcuts.js"></script>
+    <script src="/_dprhtml/features/bottom-pane/init.js"></script>
+    <script src="/_dprhtml/features/navigation/init.js"></script>
+    <script src="/_dprhtml/features/search/init.js"></script>
+    <script src="/_dprhtml/features/dictionary/init.js"></script>
+    <script src="/_dprhtml/dprviewmodel.js"></script>
+    <script src="/_dprhtml/index.js"></script>
     <script type="text/javascript">
       $(document).ready(mainInitialize);
     </script>

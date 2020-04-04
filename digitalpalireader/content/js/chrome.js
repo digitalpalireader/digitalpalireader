@@ -8,11 +8,15 @@ function openFirstDPRTab() {
   if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
 }
 
-function openDPRTab(permalink,id,reuse) {
-  if (!DPR_PAL.isXUL) {
+function openDPRTab(permalink, id, reuse) {
+  if (DPR_PAL.isWeb) {
+    if (reuse) {
+      window.location.href = permalink;
+    } else {
+      window.open(permalink, '_blank');
+    }
     return false;
   }
-
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -261,12 +265,8 @@ function DPRBottomPaneUpdateStyle() {
   document.getElementById('bottom').style.top = (document.getElementById('anf').offsetHeight - 4) + 'px';
 }
 
-function DPRShowBottomPane() {
-  if (!DPR_PAL.isWeb) {
-    return;
-  }
-
-  __bottomPaneTabsViewModel.updateActiveTabId('D');
+function DPRShowBottomPane(tabIdToActivate = 'D') {
+  __bottomPaneTabsViewModel.updateActiveTabId(tabIdToActivate);
   openBottomFrame();
 }
 
