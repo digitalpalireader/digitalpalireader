@@ -47,7 +47,7 @@
           <div id="main-sidebar-content" class="card">
             <div class="card-header">
               Digital Pali Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#settingsDialog" title="Launch preferences..." style="float: right">
+              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences..." style="float: right">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
@@ -139,25 +139,7 @@
         </ul>
       </footer>
     </div>
-    <div class="modal fade show" id="settingsDialog" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header p-2">
-            <h6 class="modal-title" id="exampleModalLongTitle">Digital Pali Reader Preferences</h6>
-            <button type="button" class="btn btn-outline-danger btn-sm mb-0" data-dismiss="modal" title="Close without saving...">
-              <span>×</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer p-2">
-            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults...">Defaults</button>
-            <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
-          </div>
-        </div>
-      </div>
+    <div id="settings-dialog">
     </div>
     <div class="modal fade show" id="helpDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -176,8 +158,8 @@
               <tr><td>n</td><td>&nbsp;Display next section</td></tr>
               <tr><td>c</td><td>&nbsp;Copy permalink to clipboard</td></tr>
               <tr><td>u</td><td>&nbsp;Switch to section in Mūla</td></tr>
-              <tr><td>a</td><td>&nbsp;Switch to relative section in Aṭṭhakathā</td></tr>
-              <tr><td>k</td><td>&nbsp;Switch to relative section in Ṭīkā</td></tr>
+              <tr><td>a</td><td>&nbsp;Switch to section in Aṭṭhakathā</td></tr>
+              <tr><td>k</td><td>&nbsp;Switch to section in Ṭīkā</td></tr>
               <!-- <tr><td>m</td><td>&nbsp;Switch to Myanmar tipitaka</td></tr>
               <tr><td>t</td><td>&nbsp;Switch to Thai tipitaka</td></tr>
               <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr>
@@ -270,6 +252,7 @@
     <script src="/_dprhtml/features/navigation/init.js"></script>
     <script src="/_dprhtml/features/search/init.js"></script>
     <script src="/_dprhtml/features/dictionary/init.js"></script>
+    <script src="/_dprhtml/features/settings-dialog/init.js"></script>
     <script src="/_dprhtml/dprviewmodel.js"></script>
     <script src="/_dprhtml/index.js"></script>
     <script type="text/javascript">

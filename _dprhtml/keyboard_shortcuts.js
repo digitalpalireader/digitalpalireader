@@ -131,7 +131,7 @@ function keyPressed1(e) {
   }
 
   if (e.charCode == 37) { // %
-    $('#settingsDialog').modal('show');
+    $('#settings-dialog-root').modal('show');
     return;
   }
 

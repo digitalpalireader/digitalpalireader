@@ -359,3 +359,68 @@ body {
   resize: unset;
   margin: 0.5rem;
 }
+
+/*
+  Settings dialog
+*/
+#settings-pane #settings-pane-tabs {
+  display: flex;
+  flex-direction: row;
+}
+
+#settings-pane #settings-pane-tabs .settings-pane-tab {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #ccc;
+}
+
+#settings-pane #settings-pane-tabs .settings-pane-tab:hover {
+  background-color: lightblue;
+}
+
+#settings-pane #settings-pane-tabs .settings-pane-tab.settings-pane-tab-selected {
+  background-color: #eee;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane {
+  border: 1px solid #ccc;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
+  width: 100%;
+  height: 100%;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section {
+  display: grid;
+  grid-auto-rows: minmax(min-content, max-content);
+  grid-gap: 0.25rem;
+  border: 1px solid #eee;
+  padding: 0.15rem 0.5rem 0.5rem 0.5rem;
+  margin: 0.5rem;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section * {
+  margin: 0;
+  align-self: center;
+  justify-self: start;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-header {
+  grid-column: 1 / -1;
+  font-weight: bolder;
+  font-size: smaller;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-2col-grid {
+  grid-template-columns: minmax(min-content, min-content) auto;
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-4col-grid {
+  grid-template-columns: minmax(min-content, min-content) minmax(min-content, max-content) auto minmax(min-content, min-content);
+}
+
+#settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-3col-grid {
+  grid-template-columns: minmax(min-content, max-content) auto minmax(min-content, min-content);
+}

@@ -19,6 +19,7 @@ const dictionaryFeatureName = "dictionary";
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
+const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 
 async function mainInitialize() {
   setPrefs();
@@ -110,6 +111,7 @@ const loadPanesAsync = async () => {
   const all = [
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
     loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, __bottomPaneTabsViewModel),
+    loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, __settingsDialogViewModel),
   ];
 
   await Promise.all(all);
