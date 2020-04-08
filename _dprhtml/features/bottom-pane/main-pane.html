@@ -122,7 +122,38 @@
       </div>
     </div>
     <div id="main-bottom-pane-tab-panes-Cj" class="main-bottom-pane-tab-pane" data-bind="visible: isCjTabSelected">
-      Conjugation: Coming soon...
+      <form onsubmit="insertConj(); return false">
+        <p></p>
+        <input type="hidden" id="QwhichS" value="10" />
+        <p id="QwhichT" class="txt"></p>
+        <p id="QwhichC" class="cite"></p>
+        <p class="oneDec">
+          Enter a word to conjugate, and/or declension form:
+        </p>
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-1">
+              word:
+            </div>
+            <div class="col-md-auto">
+              <input type="text" id="word" value="" class="dect my-1" />
+            </div>
+          </div>
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-1">
+              form:
+            </div>
+            <div class="col-md-auto">
+              <input type="text" id="form" value="" class="dect my-1" />
+            </div>
+          </div>
+        <p class="controls">
+          <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="insertConj()"
+            title="Translate the text">Conjugate</button>
+          <button type="button" id="clear" class="btn btn-light cv-btn-group" onclick="clearText()"
+            title="Clear text">Clear</button>
+        </p>
+      </form>
     </div>
   </div>
 </div>
