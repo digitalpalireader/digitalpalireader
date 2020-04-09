@@ -320,7 +320,7 @@ var DPRNav = {
   },
 
   searchBook: function (nik, book, hiert) {
-    openNewSideBar();
+    openNewSidebar();
     $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();

@@ -57,6 +57,12 @@ const DPR_CMD_GOTO_RELM = 'gotoRelmCmd';
 const DPR_CMD_GOTO_RELA = 'gotoRelaCmd';
 const DPR_CMD_GOTO_RELT = 'gotoReltCmd';
 const DPR_CMD_COPY_PERMALINK = 'copyPermalinkCmd';
+const DPR_CMD_SEND_TO_CONVERTER = 'sendToConverter';
+const DPR_CMD_SEND_TO_TEXTPAD = 'sendToTextPad';
+const DPR_CMD_SAVE_TO_DESKTOP = 'saveToDesktop';
+const DPR_CMD_SEARCH_IN_BOOK = 'searchInBook';
+const DPR_CMD_COPY_PLACE_TO_SIDEBAR = 'copyPlaceToSidebar';
+const DPR_CMD_BOOKMARK_SECTION = 'bookmarkSection';
 
 const emptyFn = () => {};
 
@@ -132,6 +138,54 @@ const dprCommandList = [
     visible: false,
     title: "Copy permalink to clipboard (Keyboard shortcut: c)",
     matchKey: e => e.charCode === 99,
+  },
+  {
+    id: DPR_CMD_SEND_TO_CONVERTER,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Send text to converter (Keyboard shortcut: s)",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_SEND_TO_TEXTPAD,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Send text to textpad (Keyboard shortcut: e)",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_SAVE_TO_DESKTOP,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Save text to desktop",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_SEARCH_IN_BOOK,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Search in book",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_COPY_PLACE_TO_SIDEBAR,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Copy place to sidebar",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_BOOKMARK_SECTION,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: "Bookmark section (Keyboard shortcut: b)",
+    matchKey: e => false,
   },
 ];
 

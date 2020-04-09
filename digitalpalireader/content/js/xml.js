@@ -362,18 +362,30 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     visibleStr: DPR_prefs['showPermalinks'] ? 'true' : 'false',
   };
 
+  shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
+    canExecuteStr: 'true',
+    executeStr: `bookmarkSavePrompt('${nikaya}#${bookno}#${meta}#${volume}#${vagga}#${sutta}#${section}#${hier}', '${bknameme}', window.getSelection().toString())`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+
+  shortcutFns[DPR_CMD_COPY_PLACE_TO_SIDEBAR] = {
+    canExecuteStr: 'true',
+    executeStr: `sendPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'])`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+
   const nextprev = '';
   const thaibut = '';
-
-  // bookmark button
-  var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())" title="bookmark section">&dagger;</span>';
+  var bkbut = '';
 
   // first toolbar row
-  var main = '<span id="sidebarButton" class="abut ' + (DPR_prefs['showPermalinks'] ? 'l' : 'o') + 'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>';
-  var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
+  var main = '';
+  var aux = '<table><tr><td>'+ nextprev + ' ' + relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
   resolveCommands(shortcutFns);
-  makeToolbox(main,aux,titleout[2],true,true,true);
+  makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
   // paragraph range
   if(para) {
@@ -1002,7 +1014,15 @@ function loadXMLindex(place,compare) {
     theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
   }
 
-  var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>';
+  const shortcutFns = createShortcutFns();
+
+  shortcutFns[DPR_CMD_SEARCH_IN_BOOK] = {
+    canExecuteStr: 'true',
+    executeStr: `sidebarSearch('${nikaya}', ${book}, '${hier}')`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+  var main = '';
 
   $('#mafbc').html('');
 
@@ -1029,21 +1049,20 @@ function loadXMLindex(place,compare) {
     var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
 
     if(!isDev)
-      makeToolbox(main,'',tabT,true,true,true);
+      makeToolbox(shortcutFns, main,'',tabT,true,true,true);
   }
   else {
     if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
     else bknameme = '';
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
     addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
-    makeToolbox(main?main:false);
+    makeToolbox(shortcutFns, main?main:false);
 
     var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
-    makeToolbox(main,'',tabT,true,true,true);
+    makeToolbox(shortcutFns, main,'',tabT,true,true,true);
 
   }
 
-  const shortcutFns = createShortcutFns();
   resolveCommands(shortcutFns);
 
   // add header to saveout
@@ -1064,7 +1083,6 @@ function loadXMLindex(place,compare) {
   $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
   $('#mafbc').append('<div id="savei">'+saveout+'</div>');
   $('#mafbc').append('<div id="convi">'+convout+'</div>');
-
 
   // title, tab, link
 
@@ -1104,15 +1122,21 @@ function loadXMLindex(place,compare) {
 
 function createShortcutFns() {
   return {
-    [DPR_CMD_GOTO_PREV]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_INDEX]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_NEXT]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_MYANMAR]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_THAI]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_RELM]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_RELA]: { executeStr: emptyFnStr },
-    [DPR_CMD_GOTO_RELT]: { executeStr: emptyFnStr },
-    [DPR_CMD_COPY_PERMALINK]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_PREV]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_INDEX]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_NEXT]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_MYANMAR]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_THAI]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_RELM]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_RELA]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_GOTO_RELT]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_COPY_PERMALINK]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_SEND_TO_CONVERTER]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_SEND_TO_TEXTPAD]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_SAVE_TO_DESKTOP]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_SEARCH_IN_BOOK]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_COPY_PLACE_TO_SIDEBAR]: { executeStr: emptyFnStr, visibleStr: 'false', },
+    [DPR_CMD_BOOKMARK_SECTION]: { executeStr: emptyFnStr, visibleStr: 'false', },
   };
 }
 

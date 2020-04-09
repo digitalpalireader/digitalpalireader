@@ -572,39 +572,37 @@ function clearDivs(which) { // place divs to be cleared here
   }
 }
 
-function makeToolbox(main,aux,title,conv,ex,save,trans) {
-  if (DPR_PAL.isWeb) {
-    $('.nav-context-div').html('<button type="button" id="contextButton" data-html="true" data-container="body" data-toggle="popover">\u2234</button><div id="tbContainer2" style="display: none"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>'+'</div>');
-    $('.nav-context-div').popover({
-      trigger: 'click',
-      html: true,
-      content: () => $('#tbContainer2').html(),
-    })
-    return;
-  }//TODO:MovetoMarkupLater
-
+function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(main === false) {
-    $('#tbContainer').html('');
-    $('#tbContainer').hide();
     return;
   }
-  $('#tbContainer').show();
 
-  var but = ['l','m','r'];
-  var bn = 0;
-  var pre = '<div class="tiny tbtitle">'+title+'</div><hr style="margin-bottom:10px"/>';
   if(conv) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span>';
+    shortcutFns[DPR_CMD_SEND_TO_CONVERTER] = {
+      canExecuteStr: 'true',
+      executeStr: 'sendTextToConvertor()',
+      titleStr: null,
+      visibleStr: 'true',
+    };
   }
-  if(ex) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToTextpad(event)" title="send text to textpad (e)">export</span>';
-  }
-  if(save) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="saveCompilation()" title="save text to Desktop">save</span>';
-  }
-  main = pre + ' ' + main;
 
-  $('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
+  if(ex) {
+    shortcutFns[DPR_CMD_SEND_TO_TEXTPAD] = {
+      canExecuteStr: 'true',
+      executeStr: 'sendTextToTextpad(event)',
+      titleStr: null,
+      visibleStr: 'true',
+    };
+  }
+
+  if(save) {
+    shortcutFns[DPR_CMD_SAVE_TO_DESKTOP] = {
+      canExecuteStr: 'true',
+      executeStr: 'saveCompilation()',
+      titleStr: null,
+      visibleStr: 'true',
+    };
+  }
 }
 
 function makeTable(text,cls) {
