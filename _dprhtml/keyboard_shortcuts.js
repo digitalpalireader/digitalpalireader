@@ -17,7 +17,7 @@ function keyPressed1(e) {
 
 
   const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchKey(e));
-  if (cmd[1]() && cmd[1]().canExecute && cmd[1]().visible) {
+  if (cmd && cmd[1]().canExecute && cmd[1]().visible) {
     cmd[1]().execute();
     return;
   }
