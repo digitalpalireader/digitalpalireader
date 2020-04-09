@@ -85,7 +85,11 @@
                 <button type="button" class="btn btn-sm btn-light" title="Save to desktop"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
                 <div class="context-menu-command-separator"></div>
                 <button type="button" class="btn btn-sm btn-light" title="Copy place to sidebar"><i class="fa fa-exchange" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-sm btn-light" title="Copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></button>
+                <!--ko let: { cmd: commands.copyPermalinkCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
+                  <i class="fa fa-link" aria-hidden="true"></i>
+                </button>
+                <!--/ko-->
                 <div class="context-menu-command-separator"></div>
                 <button type="button" class="btn btn-sm btn-light" title="Search in book"><i class="fa fa-search" aria-hidden="true"></i></button>
                 <div class="context-menu-command-separator"></div>
@@ -112,8 +116,12 @@
                 <button type="button" class="btn btn-sm btn-light" title="Relative section in Aṭṭhakathā">a</button>
                 <button type="button" class="btn btn-sm btn-light" title="Relative section in Ṭīkā">t</button>
                 <div class="context-menu-command-separator"></div>
-                <button type="button" class="btn btn-sm btn-light" title="Currently viewing Myanmar tipitaka">M</button>
-                <button type="button" class="btn btn-sm btn-light" title="Switch to Thai tipitika">T</button>
+                <!--ko let: { cmd: commands.gotoMyanmarCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">M</button>
+                <!--/ko-->
+                <!--ko let: { cmd: commands.gotoThaiCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">T</button>
+                <!--/ko-->
               </div>
             </div>
           </div>

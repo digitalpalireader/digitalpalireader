@@ -135,6 +135,10 @@ const dprCommandList = [
   },
 ];
 
+const __dprCommandsMap = {};
+dprCommandList.forEach(x => __dprCommandsMap[x.id] = x);
+Object.freeze(__dprCommandsMap);
+
 function createCommands() {
   const cmds = {};
   dprCommandList.forEach(x => cmds[x.id] = ko.observable(x));

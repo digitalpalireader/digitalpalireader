@@ -491,7 +491,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 }
 
 const getTitleStr = (id, cmdCfg) =>
-  cmdCfg.titleStr ? cmdCfg.titleStr : __dprViewModel.commands[id]().title;
+  cmdCfg.titleStr ? cmdCfg.titleStr : __dprCommandsMap[id].title;
 
 const resolveCommand = (id, cmdCfg) => `
   __dprViewModel.updateCommand(
