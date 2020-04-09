@@ -12,7 +12,7 @@ matValue['t'] = '';
 var G_compare = 1;
 var G_thisPara = null;
 
-const emptyFn = `(() => {})()`;
+const emptyFnStr = `(() => {})()`;
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
@@ -299,35 +299,48 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     break;
   }
 
-  //prev and next - nextprev | thai-myanmar alternation - thaibut
-  shortcutFns.gotoPrev = prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoIndex = `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`;
-  shortcutFns.gotoNext = next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoMyanmar = place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoThai = !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.copyPermalink = DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFn;
+  // Configure commands
+  shortcutFns[DPR_CMD_GOTO_PREV].canExecuteStr = !!prev ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_PREV].executeStr = !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr;
+  shortcutFns[DPR_CMD_GOTO_PREV].titleStr = !!prev ? null : 'No previous section';
+  shortcutFns[DPR_CMD_GOTO_PREV].visibleStr = 'true';
 
-  const nextprev =
-    (prev ? `<span id="pSect" class="lbut abut small" onmouseup="${shortcutFns.gotoPrev}" title="go to previous section">&larr;</span>` : '<span class="lbut abut small" title="no previous section">&nbsp;</span>')
-    + `<span id="indexButton" class="abut mbut small" onmouseup="${shortcutFns.gotoIndex}" title="open book index">&uarr;</span>`
-    + (next ? `<span id="nSect" class="rbut abut small" onmouseup="${shortcutFns.gotoNext}" title="go to next section">&rarr;</span>` : '<span class="rbut abut small" title="no next section">&nbsp;</span>');
-  const thaibut =
-    place[8]
-    ? ` <span id="thaiButton" class="abut lbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>`
-    : ` <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Thai Tipitaka">T</span>`;
+  shortcutFns[DPR_CMD_GOTO_INDEX].canExecuteStr = 'true';
+  shortcutFns[DPR_CMD_GOTO_INDEX].executeStr = `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`;
+  shortcutFns[DPR_CMD_GOTO_INDEX].titleStr = null;
+  shortcutFns[DPR_CMD_GOTO_INDEX].visibleStr = 'true';
+
+  shortcutFns[DPR_CMD_GOTO_NEXT].canExecuteStr = !!next ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_NEXT].executeStr = !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr;
+  shortcutFns[DPR_CMD_GOTO_NEXT].titleStr = !!next ? null : 'No next section';
+  shortcutFns[DPR_CMD_GOTO_NEXT].visibleStr = 'true';
+
+  shortcutFns[DPR_CMD_GOTO_MYANMAR].canExecuteStr = !!place[8] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_MYANMAR].executeStr = !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr;
+  shortcutFns[DPR_CMD_GOTO_MYANMAR].titleStr = null;
+  shortcutFns[DPR_CMD_GOTO_MYANMAR].visibleStr = !!place[8] ? 'true' : 'false';
+
+  shortcutFns[DPR_CMD_GOTO_THAI].canExecuteStr = !place[8] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_THAI].executeStr = !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr;
+  shortcutFns[DPR_CMD_GOTO_THAI].titleStr = null;
+  shortcutFns[DPR_CMD_GOTO_THAI].visibleStr = !place[8] ? 'true' : 'false';
+
+  shortcutFns[DPR_CMD_COPY_PERMALINK].canExecuteStr = DPR_prefs['showPermalinks'] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_COPY_PERMALINK].executeStr = DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr;
+  shortcutFns[DPR_CMD_COPY_PERMALINK].titleStr = null;
+  shortcutFns[DPR_CMD_COPY_PERMALINK].visibleStr = DPR_prefs['showPermalinks'] ? 'true' : 'false';
+
+  const nextprev = '';
+  const thaibut = '';
 
   // bookmark button
-
   var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())" title="bookmark section">&dagger;</span>';
 
-
   // first toolbar row
-
-  var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="' + shortcutFns.copyPermalink + '" title="copy permalink to clipboard">&diams;</span>' : '');
-
+  var main = '<span id="sidebarButton" class="abut ' + (DPR_prefs['showPermalinks'] ? 'l' : 'o') + 'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>';
   var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
-  resolveShortcuts(shortcutFns);
+  resolveCommands(shortcutFns);
   makeToolbox(main,aux,titleout[2],true,true,true);
 
   // paragraph range
@@ -477,8 +490,31 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   }
 }
 
-function resolveShortcuts(shortcutFns) {
-  $("body").append(`<script>/*XML.JS*/\r\n${Object.entries(shortcutFns).map(x => `var __${x[0]} = () => ${x[1]};`).join('\r\n')}</script>`);
+const getTitleStr = (id, cmdCfg) =>
+  cmdCfg.titleStr ? cmdCfg.titleStr : __dprViewModel.commands[id]().title;
+
+const resolveCommand = (id, cmdCfg) => `
+  __dprViewModel.updateCommand(
+    '${id}',
+    {
+      canExecute: ${cmdCfg.canExecuteStr},
+      execute: () => ${cmdCfg.executeStr},
+      visible: ${cmdCfg.visibleStr},
+      title: '${getTitleStr(id, cmdCfg)}',
+    });
+`;
+
+function resolveCommands(shortcutFns) {
+  const cmdCfgs = Object.entries(shortcutFns).filter(x => x[1].executeStr).map(x => resolveCommand(x[0], x[1]));
+  const scriptStr = `
+<script data-type="XMLJS">
+  /* Inserted by XML.JS */
+  ${cmdCfgs.join('')}
+</script>
+  `;
+
+  $('script[data-type="XMLJS"]').remove();
+  $("body").append(scriptStr);
 }
 
 function loadXMLindex(place,compare) {
@@ -976,7 +1012,7 @@ function loadXMLindex(place,compare) {
   }
 
   const shortcutFns = createShortcutFns();
-  resolveShortcuts(shortcutFns);
+  resolveCommands(shortcutFns);
 
   // add header to saveout
 
@@ -1036,15 +1072,15 @@ function loadXMLindex(place,compare) {
 
 function createShortcutFns() {
   return {
-    'gotoPrev': emptyFn,
-    'gotoIndex': emptyFn,
-    'gotoNext': emptyFn,
-    'gotoMyanmar': emptyFn,
-    'gotoThai': emptyFn,
-    'gotoRelm': emptyFn,
-    'gotoRela': emptyFn,
-    'gotoRelt': emptyFn,
-    'copyPermalink': emptyFn,
+    [DPR_CMD_GOTO_PREV]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_INDEX]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_NEXT]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_MYANMAR]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_THAI]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_RELM]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_RELA]: { executeStr: emptyFnStr },
+    [DPR_CMD_GOTO_RELT]: { executeStr: emptyFnStr },
+    [DPR_CMD_COPY_PERMALINK]: { executeStr: emptyFnStr },
   };
 }
 

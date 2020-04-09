@@ -15,48 +15,10 @@ function keyPressed1(e) {
     return;
   }
 
-  if (e.charCode == 105) { // i
-    __gotoIndex();
-    return;
-  }
 
-  if (e.charCode == 112) { // p
-    __gotoPrev();
-    return;
-  }
-
-  if (e.charCode == 110) { // n
-    __gotoNext();
-    return;
-  }
-
-  if (e.charCode == 99) { // c
-    __copyPermalink();
-    return;
-  }
-
-  if (e.charCode == 117) { // u
-    __gotoRelm();
-    return;
-  }
-
-  if (e.charCode == 97) { // a
-    __gotoRela();
-    return;
-  }
-
-  if (e.charCode == 107) { // k
-    __gotoRelt();
-    return;
-  }
-
-  if (e.charCode == 109) { // m
-    __gotoMyanmar();
-    return;
-  }
-
-  if (e.charCode == 116) { // t
-    __gotoThai();
+  const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchKey(e));
+  if (cmd[1]() && cmd[1]().canExecute && cmd[1]().visible) {
+    cmd[1]().execute();
     return;
   }
 

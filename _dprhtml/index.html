@@ -92,9 +92,21 @@
                 <button type="button" class="btn btn-sm btn-light" title="Bookmark section" disabled><i class="fa fa-bookmark" aria-hidden="true"></i></button>
               </div>
               <div class="context-menu-main-row" id="context-menu-main-row2">
-                <button type="button" class="btn btn-sm btn-light" title="Goto previous section"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-sm btn-light" title="Open book index"><i class="fa fa-list" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-sm btn-light" title="Go to next section"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                <!--ko let: { cmd: commands.gotoPrevCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
+                  <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </button>
+                <!--/ko-->
+                <!--ko let: { cmd: commands.gotoIndexCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
+                  <i class="fa fa-list" aria-hidden="true"></i>
+                </button>
+                <!--/ko-->
+                <!--ko let: { cmd: commands.gotoNextCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
+                  <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                </button>
+                <!--/ko-->
                 <div class="context-menu-command-separator"></div>
                 <button type="button" class="btn btn-sm btn-light" title="Relative section in Mūla">m</button>
                 <button type="button" class="btn btn-sm btn-light" title="Relative section in Aṭṭhakathā">a</button>
