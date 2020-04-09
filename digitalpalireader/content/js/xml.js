@@ -219,18 +219,38 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     if (relhere) {
       var hi = ['m','a','t'];
       var button_order = ['l','m','r'];
+      const cmds = {
+        ['m']: DPR_CMD_GOTO_RELM,
+        ['a']: DPR_CMD_GOTO_RELA,
+        ['t']: DPR_CMD_GOTO_RELT,
+      };
       var hic = 0;
       for (var ht = 0; ht < hi.length; ht++) {
-        if(hi[ht] == hier)
-          relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
-        else if (relhere.split('#')[hic] != '') {
+        if(hi[ht] == hier) {
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'false',
+            executeStr: emptyFnStr,
+            titleStr: `Currently viewing section in ${G_hTitles[ht]}`,
+            visibleStr: 'true',
+          };
+        } else if (relhere.split('#')[hic] != '') {
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-          shortcutFns[`gotoRel${hi[ht]}`] = `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1));`;
-          relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'true',
+            executeStr: `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
+            titleStr: null,
+            visibleStr: 'true',
+          };
           matButton = 0;
         }
-        else
-          relouta.push('<span class="abut dbut '+button_order[ht]+'but small" title="no relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+        else {
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'false',
+            executeStr: emptyFnStr,
+            titleStr: `No relative section in ${G_hTitles[ht]}`,
+            visibleStr: 'true',
+          };
+        }
       }
       break;
     }
@@ -300,35 +320,47 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   }
 
   // Configure commands
-  shortcutFns[DPR_CMD_GOTO_PREV].canExecuteStr = !!prev ? 'true' : 'false';
-  shortcutFns[DPR_CMD_GOTO_PREV].executeStr = !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr;
-  shortcutFns[DPR_CMD_GOTO_PREV].titleStr = !!prev ? null : 'No previous section';
-  shortcutFns[DPR_CMD_GOTO_PREV].visibleStr = 'true';
+  shortcutFns[DPR_CMD_GOTO_PREV] = {
+    canExecuteStr: !!prev ? 'true' : 'false',
+    executeStr: !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!prev ? null : 'No previous section',
+    visibleStr: 'true',
+  };
 
-  shortcutFns[DPR_CMD_GOTO_INDEX].canExecuteStr = 'true';
-  shortcutFns[DPR_CMD_GOTO_INDEX].executeStr = `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`;
-  shortcutFns[DPR_CMD_GOTO_INDEX].titleStr = null;
-  shortcutFns[DPR_CMD_GOTO_INDEX].visibleStr = 'true';
+  shortcutFns[DPR_CMD_GOTO_INDEX] = {
+    canExecuteStr: 'true',
+    executeStr: `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
 
-  shortcutFns[DPR_CMD_GOTO_NEXT].canExecuteStr = !!next ? 'true' : 'false';
-  shortcutFns[DPR_CMD_GOTO_NEXT].executeStr = !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr;
-  shortcutFns[DPR_CMD_GOTO_NEXT].titleStr = !!next ? null : 'No next section';
-  shortcutFns[DPR_CMD_GOTO_NEXT].visibleStr = 'true';
+  shortcutFns[DPR_CMD_GOTO_NEXT] = {
+    canExecuteStr: !!next ? 'true' : 'false',
+    executeStr: !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!next ? null : 'No next section',
+    visibleStr: 'true',
+  };
 
-  shortcutFns[DPR_CMD_GOTO_MYANMAR].canExecuteStr = !!place[8] ? 'true' : 'false';
-  shortcutFns[DPR_CMD_GOTO_MYANMAR].executeStr = !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr;
-  shortcutFns[DPR_CMD_GOTO_MYANMAR].titleStr = null;
-  shortcutFns[DPR_CMD_GOTO_MYANMAR].visibleStr = !!place[8] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_MYANMAR] = {
+    canExecuteStr: !!place[8] ? 'true' : 'false',
+    executeStr: !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!place[8] ? null : 'Currently viewing Myanmar Tipitaka',
+    visibleStr: 'true',
+  };
 
-  shortcutFns[DPR_CMD_GOTO_THAI].canExecuteStr = !place[8] ? 'true' : 'false';
-  shortcutFns[DPR_CMD_GOTO_THAI].executeStr = !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr;
-  shortcutFns[DPR_CMD_GOTO_THAI].titleStr = null;
-  shortcutFns[DPR_CMD_GOTO_THAI].visibleStr = !place[8] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_GOTO_THAI] = {
+    canExecuteStr: !place[8] ? 'true' : 'false',
+    executeStr: !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !place[8] ? null : 'Currently viewing Thai Tipitaka',
+    visibleStr: 'true',
+  };
 
-  shortcutFns[DPR_CMD_COPY_PERMALINK].canExecuteStr = DPR_prefs['showPermalinks'] ? 'true' : 'false';
-  shortcutFns[DPR_CMD_COPY_PERMALINK].executeStr = DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr;
-  shortcutFns[DPR_CMD_COPY_PERMALINK].titleStr = null;
-  shortcutFns[DPR_CMD_COPY_PERMALINK].visibleStr = DPR_prefs['showPermalinks'] ? 'true' : 'false';
+  shortcutFns[DPR_CMD_COPY_PERMALINK] = {
+    canExecuteStr: DPR_prefs['showPermalinks'] ? 'true' : 'false',
+    executeStr: DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr,
+    titleStr: null,
+    visibleStr: DPR_prefs['showPermalinks'] ? 'true' : 'false',
+  };
 
   const nextprev = '';
   const thaibut = '';

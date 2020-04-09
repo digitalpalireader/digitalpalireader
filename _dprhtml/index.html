@@ -112,9 +112,15 @@
                 </button>
                 <!--/ko-->
                 <div class="context-menu-command-separator"></div>
-                <button type="button" class="btn btn-sm btn-light" title="Relative section in Mūla">m</button>
-                <button type="button" class="btn btn-sm btn-light" title="Relative section in Aṭṭhakathā">a</button>
-                <button type="button" class="btn btn-sm btn-light" title="Relative section in Ṭīkā">t</button>
+                <!--ko let: { cmd: commands.gotoRelmCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">m</button>
+                <!--/ko-->
+                <!--ko let: { cmd: commands.gotoRelaCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">a</button>
+                <!--/ko-->
+                <!--ko let: { cmd: commands.gotoReltCmd() }-->
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">t</button>
+                <!--/ko-->
                 <div class="context-menu-command-separator"></div>
                 <!--ko let: { cmd: commands.gotoMyanmarCmd() }-->
                 <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">M</button>
