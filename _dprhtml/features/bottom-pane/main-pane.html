@@ -12,7 +12,7 @@
     <div class="main-bottom-pane-tab" title="Conjugation: A tool to conjugate or decline individual words" data-tabid="Cj" data-bind="click: updateActiveTab, css: { 'main-bottom-pane-tab-pressed': isCjTabSelected }"><span>Cj</span></div>
     <div class="main-bottom-pane-tab-separator"></div>
   </div>
-  <div id="main-bottom-pane-tab-panes">
+  <div id="main-bottom-pane-tab-panes" style="overflow: auto">
     <div id="main-bottom-pane-tab-panes-D" class="main-bottom-pane-tab-pane" data-bind="visible: isDTabSelected">
       <div id="main-bottom-pane-tab-panes-D-container">
         <div id="anf" style="text-align: right" class="chromeback">
@@ -147,6 +147,10 @@
               <input type="text" id="form" value="" class="dect my-1" />
             </div>
           </div>
+          <div class="row justify-content-md-center">
+            <p id="conjugation"></p>
+          </div>
+        </div>
         <p class="controls">
           <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="insertConj()"
             title="Translate the text">Conjugate</button>
