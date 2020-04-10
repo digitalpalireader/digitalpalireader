@@ -12,8 +12,8 @@
     <div class="main-bottom-pane-tab" title="Conjugation: A tool to conjugate or decline individual words" data-tabid="Cj" data-bind="click: updateActiveTab, css: { 'main-bottom-pane-tab-pressed': isCjTabSelected }"><span>Cj</span></div>
     <div class="main-bottom-pane-tab-separator"></div>
   </div>
-  <div id="main-bottom-pane-tab-panes" style="overflow: auto">
-    <div id="main-bottom-pane-tab-panes-D" class="main-bottom-pane-tab-pane" data-bind="visible: isDTabSelected">
+  <div id="main-bottom-pane-tab-panes">
+    <div id="main-bottom-pane-tab-panes-D" data-bind="visible: isDTabSelected">
       <div id="main-bottom-pane-tab-panes-D-container">
         <div id="anf" style="text-align: right" class="chromeback">
           <div id="brtop"></div>
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div id="main-bottom-pane-tab-panes-Cv" class="main-bottom-pane-tab-pane" data-bind="visible: isCvTabSelected">
+    <div id="main-bottom-pane-tab-panes-Cv" data-bind="visible: isCvTabSelected">
       <div class="cv-container force-show-scrollbar-on-macos">
         <textarea id="cinput" onkeydown="if(event.keyCode==13) convert(true); event.keyCode=0;"></textarea>
         <div id="cinform-div">
@@ -90,38 +90,36 @@
         <textarea id="coutput"></textarea>
       </div>
     </div>
-    <div id="main-bottom-pane-tab-panes-Tp" class="main-bottom-pane-tab-pane" data-bind="visible: isTpTabSelected">
+    <div id="main-bottom-pane-tab-panes-Tp" data-bind="visible: isTpTabSelected">
       Textpad: Coming soon...
     </div>
-    <div id="main-bottom-pane-tab-panes-Tr" class="main-bottom-pane-tab-pane" data-bind="visible: isTrTabSelected">
-      <div class="force-show-scrollbar-on-macos">
-        <p class="oneDec">
-          Enter a single Pali sentence below (Velthuis or Unicode):
-        </p>
-        <textarea id="input" class="bottom-item" rows="2">
-        </textarea>
-        <p id="translation" class="bottom-center"></p>
-        <p id="altTable" class="bottom-center"></p>
-        <div class="bottom-container bottom-center">
-          <button id="translate" class="btn btn-light cv-btn-group" onclick="translateText()" data-toggle="tooltip" data-placement="right"
-            title="Translate the text">Translate</button>
-          <button class="btn btn-light cv-btn-group" onclick="insertWordByWord()"
-            data-toggle="tooltip" data-placement="right" title="Translate each word">Word-by-word</button>
-          <button id="clear" class="btn btn-light cv-btn-group" onclick="clearText()" data-toggle="tooltip" data-placement="right"
-            title="Clear text">Clear</button>
-        </div>
-        <div class="bottom-center" style="font-size: small;">
-          Notes: this translation tool is highly experimental.  Most actual Pali sentences found in the Tipitaka probably won't
-          translate completely, if it all. For an example of a sentence that does work, try clicking on this one:
-        </div>
-        <div class="bottom-center" style="font-size: small;">
-          <a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">
-            dhammikā upāsakā pāpakehi manussehi mā carantu
-          </a>
-        </div>
+    <div id="main-bottom-pane-tab-panes-Tr" data-bind="visible: isTrTabSelected">
+      <p class="oneDec">
+        Enter a single Pali sentence below (Velthuis or Unicode):
+      </p>
+      <textarea id="input" class="bottom-item" rows="2">
+      </textarea>
+      <p id="translation" class="bottom-center"></p>
+      <p id="altTable" class="bottom-center"></p>
+      <div class="bottom-container bottom-center">
+        <button id="translate" class="btn btn-light cv-btn-group" onclick="translateText()" data-toggle="tooltip" data-placement="right"
+          title="Translate the text">Translate</button>
+        <button class="btn btn-light cv-btn-group" onclick="insertWordByWord()"
+          data-toggle="tooltip" data-placement="right" title="Translate each word">Word-by-word</button>
+        <button id="clear" class="btn btn-light cv-btn-group" onclick="clearText()" data-toggle="tooltip" data-placement="right"
+          title="Clear text">Clear</button>
+      </div>
+      <div class="bottom-center" style="font-size: small;">
+        Notes: this translation tool is highly experimental.  Most actual Pali sentences found in the Tipitaka probably won't
+        translate completely, if it all. For an example of a sentence that does work, try clicking on this one:
+      </div>
+      <div class="bottom-center" style="font-size: small;">
+        <a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">
+          dhammikā upāsakā pāpakehi manussehi mā carantu
+        </a>
       </div>
     </div>
-    <div id="main-bottom-pane-tab-panes-Cj" class="main-bottom-pane-tab-pane" data-bind="visible: isCjTabSelected">
+    <div id="main-bottom-pane-tab-panes-Cj" data-bind="visible: isCjTabSelected">
       <form onsubmit="insertConj(); return false">
         <p></p>
         <input type="hidden" id="QwhichS" value="10" />
@@ -130,33 +128,29 @@
         <p class="oneDec">
           Enter a word to conjugate, and/or declension form:
         </p>
-        <div class="container">
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-1">
-              word:
-            </div>
-            <div class="col-md-auto">
-              <input type="text" id="word" value="" class="dect my-1" />
-            </div>
+        <div id="main-bottom-pane-tab-panes-Cj-form">
+          <div id="word-div">
+            word:
           </div>
-          <div class="row justify-content-md-center">
-            <div class="col col-lg-1">
-              form:
-            </div>
-            <div class="col-md-auto">
-              <input type="text" id="form" value="" class="dect my-1" />
-            </div>
+          <div id="word-input">
+            <input type="text" id="word" value="" class="dect" />
           </div>
-          <div class="row justify-content-md-center">
-            <p id="conjugation"></p>
+          <div id="form-div">
+            form:
+          </div>
+          <div id="form-input">
+            <input type="text" id="form" value="" class="dect" />
           </div>
         </div>
-        <p class="controls">
+        <div class="center">
+          <p id="conjugation"></p>
+        </div>
+        <div class="center">
           <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="insertConj()"
             title="Translate the text">Conjugate</button>
           <button type="button" id="clear" class="btn btn-light cv-btn-group" onclick="clearText()"
             title="Clear text">Clear</button>
-        </p>
+        </div>
       </form>
     </div>
   </div>
