@@ -41,4 +41,6 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RE
 
 echo ------ Compress stuff
 ls -laF "$RootDir/bin/asge/asge/"
+# NOTE: html cache age needs to be explicitly set to 0 on server side. http-equiv is not a valid HTML5 tag
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -x 0 -e .html .htm -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
 dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -x 864000 -e .xml .js .css -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
