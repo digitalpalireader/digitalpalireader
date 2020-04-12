@@ -23,6 +23,10 @@ body {
   overflow: auto;
 }
 
+.center {
+  text-align: center;
+}
+
 #main-container-loading-page {
   position: fixed;
   height: 100%;
@@ -358,6 +362,50 @@ body {
 #main-bottom-pane-tab-panes-Cv .cv-container #coutput {
   grid-column: 5 / span 1;
   grid-row: 1;
+  resize: unset;
+  margin: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cj {
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+#main-bottom-pane-tab-panes-Cj-form {
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-template-rows: 30px 30px;
+  grid-gap: 0.5rem;
+  align-items: center;
+  justify-items: center;
+}
+
+#main-bottom-pane-tab-panes-Cj-form #word-div {
+  grid-column: 1 / span 1;
+  grid-row: 1;
+  resize: unset;
+  margin: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cj-form #word-input {
+  grid-column: 2 / span 1;
+  grid-row: 1;
+  resize: unset;
+  margin: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cj-form #form-div {
+  grid-column: 1 / span 1;
+  grid-row: 2;
+  resize: unset;
+  margin: 0.5rem;
+}
+
+#main-bottom-pane-tab-panes-Cj-form #form-input {
+  grid-column: 2 / span 1;
+  grid-row: 2;
   resize: unset;
   margin: 0.5rem;
 }
