@@ -11,7 +11,7 @@ var G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍ�
 var G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
 
-function outputFormattedData(data,which,place) // calls text prep, then outputs it to preFrame
+function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
 
   G_lastcolour = 0; // reset colour changing
@@ -39,14 +39,22 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
     var section = place[6]
     var hier = place[7];
 
-
-
-    var transin;
-    var transout='';
-    transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
-    if (transin) {
-      transout += transin.join('&nbsp;');
-      document.getElementById('maftrans').innerHTML += transout;
+    var transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
+    if(transin && shortcutFns) {
+      $
+        .parseHTML(transin.join(''))
+        .map(x => $(x).find('img'))
+        .filter(x => x.length)
+        .map(x => ({ title: $(x).attr('title'), src: $(x).attr('src'), onmouseup: $(x).attr('onmouseup') }))
+        .forEach((x, i) => {
+          shortcutFns[`${DPR_CMD_TRANSLATE_}${i}`] = {
+            canExecuteStr: 'true',
+            executeStr: x.onmouseup,
+            titleStr: x.title,
+            visibleStr: 'true',
+            icon: x.src,
+          };
+        });
     }
 
     var convDiv = document.createElement('div');

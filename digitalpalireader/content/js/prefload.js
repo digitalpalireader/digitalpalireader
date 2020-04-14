@@ -119,14 +119,14 @@ DPR_prefsD['red'] = 'red';
 
 DPR_prefsD['blueh'] = 'powderblue';
 
-DPR_prefsD['ctrans'] = false;
-DPR_prefsD['catioff'] = false;
-DPR_prefsD['catiloc'] = '<none>';
+DPR_prefsD['ctrans'] = true;
+DPR_prefsD['catioff'] = true;
+DPR_prefsD['catiloc'] = 'https://tipitaka.digitalpalireader.online/ati';
 DPR_prefsD['autodict'] = false;
 DPR_prefsD['bkgimg'] = true;
 
-DPR_prefsD['buddhist_texts'] = false;
-DPR_prefsD['btloc'] = '<none>';
+DPR_prefsD['buddhist_texts'] = true;
+DPR_prefsD['btloc'] = 'https://tipitaka.digitalpalireader.online/bt';
 
 
 DPR_prefsD['allContext'] = true;

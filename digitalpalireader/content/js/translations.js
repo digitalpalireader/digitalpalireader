@@ -1,14 +1,15 @@
 'use strict';
 
 function transLink(which,where,url,title) {
-  var image = 'images/ati.ico';
+  const imgBase = '/digitalpalireader/content/images';
+  var image = `${imgBase}/ati.ico`;
 
   switch(where) {
     case 1:
-      image = 'images/abt.gif';
+      image = `${imgBase}/abt.gif`;
       break;
     case 2:
-      image = 'images/wisdom.png';
+      image = `${imgBase}/wisdom.png`;
       break;
   }
   return '&nbsp;<span class="hoverShow pointer"><img width="16" style="vertical-align:middle" src="' + image +'" title="'+title+'" onmouseup="openTranslation(\''+url+'\',eventSend(event))"></span>';
@@ -144,13 +145,13 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       // BuddhistTexts
       if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/dn/dn_e_'+mysn+'.htm','Translation of DN '+mysn+' by Walshe'));
+        output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/dn/dn_e_'+mysn+'.htm','Translation of DN '+mysn+' by Walshe'));
         cnt++;
       }
 
       // ATI
       if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
-        mys = mysn + "";
+        var mys = mysn + "";
         if (mys.length < 2) { mys = '0'+mys; }
         var atid = 'dn/dn.'+mys;
         for (var x = 0;x < atiD.length; x++) {
@@ -320,7 +321,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       // BuddhistTexts
 
       if(DPR_prefs['buddhist_texts'] && which < 3) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/mn/mn_e_'+mysn+'.htm','Translation of MN '+mysn+' by Bodhi'));
+        output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/mn/mn_e_'+mysn+'.htm','Translation of MN '+mysn+' by Bodhi'));
         cnt++;
       }
 
@@ -350,7 +351,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(DPR_prefs['buddhist_texts'] && (which == 6 || which == 0)) {
         var n = which == 0 ? getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
 
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
+        output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
         cnt++;
       }
       if (which > 1) return null;
@@ -467,7 +468,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 
       if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
+        output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
         cnt++;
       }
 
@@ -587,7 +588,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
             story += sutta;
 
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/dhpa/dhpa_e_'+(parseInt(story)+1)+'.htm','Translation of Dhp-A '+story+' by Burlingame'));
+            output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/dhpa/dhpa_e_'+(parseInt(story)+1)+'.htm','Translation of Dhp-A '+story+' by Burlingame'));
             cnt++;
           }
 
@@ -873,7 +874,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           // BuddhistTexts
           if(DPR_prefs['buddhist_texts']) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+            output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
         break
@@ -881,7 +882,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           // BuddhistTexts
           if(DPR_prefs['buddhist_texts']) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+            output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
         break;
@@ -901,7 +902,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         if(book == 1)
           meta += 12;
 
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/vi/vi_e_'+(parseInt(meta)+1)+'.htm','Translation of Vism '+meta+' by Nyanamoli'));
+        output.push(transLink(which,2,DPR_PAL.toUrl(DPR_prefs['btloc'])+'/vi/vi_e_'+(parseInt(meta)+1)+'.htm','Translation of Vism '+meta+' by Nyanamoli'));
         cnt++;
       }
 

@@ -461,7 +461,7 @@ function openTranslation(url,add) {
   }
   else {
     if(!/^http/.test(url) && !/^file:/.test(url))
-      url = (DPR_prefs['catioff'] ? 'file://'+DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
+      url = (DPR_prefs['catioff'] ? DPR_PAL.toUrl(DPR_prefs['catiloc'])+'/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
 
     openDPRTab(url,'DPRx');
   }

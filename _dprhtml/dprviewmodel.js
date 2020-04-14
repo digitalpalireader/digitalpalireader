@@ -63,6 +63,11 @@ const DPR_CMD_SAVE_TO_DESKTOP = 'saveToDesktop';
 const DPR_CMD_SEARCH_IN_BOOK = 'searchInBook';
 const DPR_CMD_COPY_PLACE_TO_SIDEBAR = 'copyPlaceToSidebar';
 const DPR_CMD_BOOKMARK_SECTION = 'bookmarkSection';
+const DPR_CMD_TRANSLATE_ = 'translate';
+const DPR_CMD_TRANSLATE_0 = 'translate0';
+const DPR_CMD_TRANSLATE_1 = 'translate1';
+const DPR_CMD_TRANSLATE_2 = 'translate2';
+const DPR_CMD_TRANSLATE_3 = 'translate3';
 
 const emptyFn = () => {};
 
@@ -185,6 +190,42 @@ const dprCommandList = [
     execute: emptyFn,
     visible: false,
     title: "Bookmark section (Keyboard shortcut: b)",
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_0,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_1,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_2,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_3,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
     matchKey: e => false,
   },
 ];

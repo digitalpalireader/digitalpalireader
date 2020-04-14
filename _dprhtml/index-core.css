@@ -489,6 +489,7 @@ body {
   opacity: 1.0;
   transition-duration: 0.3s;
   border-radius: 0 0.3rem 0.3rem 0;
+  z-index: 900;
 }
 
 #context-menu #context-menu-main {
@@ -512,10 +513,6 @@ body {
   left: var(--context-menu-width);
   opacity: 1;
 }
-
-/* #context-menu: hover #context-menu-main {
-  left: 0rem;
-} */
 
 #context-menu:hover #context-menu-handle {
   transform: rotate(180deg);
@@ -542,4 +539,11 @@ body {
 #context-menu #context-menu-main .context-menu-main-row .context-menu-command-separator {
   border: 1px ridge black;
   width: 1px;
+}
+
+#context-menu #context-menu-main .context-menu-main-row button .context-menu-command-icon {
+  width: 0.75rem;
+  height: 0.875rem;
+  margin: 0px;
+  padding: 0px;
 }

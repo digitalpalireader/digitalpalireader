@@ -384,9 +384,6 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var main = '';
   var aux = '<table><tr><td>'+ nextprev + ' ' + relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
-  resolveCommands(shortcutFns);
-  makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
-
   // paragraph range
   if(para) {
     para = para.toString().replace(/[^-0-9]/g,'');
@@ -513,7 +510,11 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
       }
     }
   }
-  var outData = outputFormattedData(theData,0,place);
+
+  var outData = outputFormattedData(theData,0,place,shortcutFns);
+  resolveCommands(shortcutFns);
+  makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
+
   if(opara) {
     scrollMainPane(document.getElementById('para'+opara).offsetTop - $("#main-content-header").outerHeight());
   }
@@ -537,6 +538,9 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 const getTitleStr = (id, cmdCfg) =>
   cmdCfg.titleStr ? cmdCfg.titleStr : __dprCommandsMap[id].title;
 
+const getCmdIcon = (cmdCfg) =>
+  cmdCfg.icon ? `'${cmdCfg.icon}'` : null;
+
 const resolveCommand = (id, cmdCfg) => `
   __dprViewModel.updateCommand(
     '${id}',
@@ -545,6 +549,7 @@ const resolveCommand = (id, cmdCfg) => `
       execute: () => ${cmdCfg.executeStr},
       visible: ${cmdCfg.visibleStr},
       title: '${getTitleStr(id, cmdCfg)}',
+      icon: ${getCmdIcon(cmdCfg)},
     });
 `;
 
@@ -660,7 +665,7 @@ function loadXMLindex(place,compare) {
 
     var oldurl = DPR_PAL.contentDocument.location.href;
 
-    var bareurl = 'dpr:index?';
+    var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
 
     var newparams = 'loc='+place.slice(0,8).join('.');
 
@@ -1121,23 +1126,9 @@ function loadXMLindex(place,compare) {
 }
 
 function createShortcutFns() {
-  return {
-    [DPR_CMD_GOTO_PREV]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_INDEX]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_NEXT]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_MYANMAR]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_THAI]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_RELM]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_RELA]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_GOTO_RELT]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_COPY_PERMALINK]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_SEND_TO_CONVERTER]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_SEND_TO_TEXTPAD]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_SAVE_TO_DESKTOP]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_SEARCH_IN_BOOK]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_COPY_PLACE_TO_SIDEBAR]: { executeStr: emptyFnStr, visibleStr: 'false', },
-    [DPR_CMD_BOOKMARK_SECTION]: { executeStr: emptyFnStr, visibleStr: 'false', },
-  };
+  const shortcutFns = {};
+  dprCommandList.forEach(x => shortcutFns[x.id] = { executeStr: emptyFnStr, visibleStr: 'false', });
+  return shortcutFns;
 }
 
 function saveCompilation() {

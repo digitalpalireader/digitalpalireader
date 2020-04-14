@@ -148,5 +148,13 @@ console.log('Loading DPR_PAL...');
     return matcher.exec(document.location.href);
   }
 
+  DPR_PAL.toUrl = x => {
+    if (/^http/.test(new URL(x).protocol)) {
+      return x;
+    } else {
+      return 'file://' + x.replace(/\\/g,'/');
+    }
+  }
+
   console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);

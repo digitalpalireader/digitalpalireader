@@ -133,7 +133,7 @@
                 <!--/ko-->
 
                 <!--ko let: { copyPlaceToSidebar: commands.copyPlaceToSidebar(), copyPermalinkCmd: commands.copyPermalinkCmd() }-->
-                <div class="context-menu-command-separator" data-bind="visible: copyPlaceToSidebar.visible && copyPermalinkCmd.visible"></div>
+                <div class="context-menu-command-separator" data-bind="visible: copyPlaceToSidebar.visible || copyPermalinkCmd.visible"></div>
                 <button type="button" class="btn btn-sm btn-light" data-bind="visible: copyPlaceToSidebar.visible, enable: copyPlaceToSidebar.canExecute, click: copyPlaceToSidebar.execute(), attr: { title: copyPlaceToSidebar.title }">
                   <i class="fa fa-exchange" aria-hidden="true"></i>
                 </button>
@@ -153,6 +153,22 @@
                 <div class="context-menu-command-separator" data-bind="visible: cmd.visible"></div>
                 <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                   <i class="fa fa-bookmark" aria-hidden="true"></i>
+                </button>
+                <!--/ko-->
+
+                <!--ko let: { translate0: commands.translate0(), translate1: commands.translate1(), translate2: commands.translate2(), translate3: commands.translate3() }-->
+                <div class="context-menu-command-separator" data-bind="visible: translate0.visible || translate1.visible || translate2.visible || translate3.visible"></div>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate0.visible, enable: translate0.canExecute, click: translate0.execute(), attr: { title: translate0.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate0.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate1.visible, enable: translate1.canExecute, click: translate1.execute(), attr: { title: translate1.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate1.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate2.visible, enable: translate2.canExecute, click: translate2.execute(), attr: { title: translate2.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate2.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate3.visible, enable: translate3.canExecute, click: translate3.execute(), attr: { title: translate3.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
                 </button>
                 <!--/ko-->
               </div>
@@ -294,6 +310,7 @@
     <script src="/digitalpalireader/content/js/relatt.js"></script>
     <script src="/digitalpalireader/content/js/reltik.js"></script>
     <script src="/digitalpalireader/content/js/dppn.js"></script>
+    <script src="/digitalpalireader/content/js/ati_list.js"></script>
     <script src="/digitalpalireader/content/js/translations.js"></script>
     <script src="/digitalpalireader/content/js/xml.js"></script>
     <script src="/digitalpalireader/content/js/history.js"></script>
