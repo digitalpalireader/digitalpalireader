@@ -689,7 +689,7 @@ function loadXMLindex(place,compare) {
 
     // translations
 
-    transin = addtrans(hier,6,nikaya,bookno);
+    transin = DPR_Translations.addtrans(hier,6,nikaya,bookno);
     if (transin) {
       theDatao += transin.join('&nbsp;');
     }
@@ -740,7 +740,7 @@ function loadXMLindex(place,compare) {
       var transin;
       var transout='';
 
-      transin = addtrans(hier,5,nikaya,bookno,tmp2);
+      transin = DPR_Translations.addtrans(hier,5,nikaya,bookno,tmp2);
       if (transin) {
         theDatao += transin.join('&nbsp;');
       }
@@ -795,7 +795,7 @@ function loadXMLindex(place,compare) {
         var transin;
         var transout='';
 
-        transin = addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
+        transin = DPR_Translations.addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
         if (transin) {
           theDatao += transin.join('&nbsp;');
         }
@@ -855,7 +855,7 @@ function loadXMLindex(place,compare) {
           var transin;
           var transout='';
 
-          transin = addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
+          transin = DPR_Translations.addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
           if (transin) {
             theDatao += transin.join('&nbsp;');
           }
@@ -908,7 +908,7 @@ function loadXMLindex(place,compare) {
 
             var transin;
             var transout='';
-            transin = addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
+            transin = DPR_Translations.addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
             if (transin) {
               theDatao += transin.join('&nbsp;');
             }
@@ -968,7 +968,7 @@ function loadXMLindex(place,compare) {
               var transin;
               var transout='';
 
-              transin = addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+              transin = DPR_Translations.addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
               //if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
               if (transin) {
                 theDatao += transin.join('&nbsp;');
