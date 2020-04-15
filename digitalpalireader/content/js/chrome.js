@@ -283,7 +283,7 @@ const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-text-container').scrollTop(scrollTop);
+  $('#main-pane-text-container-0').scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {
@@ -325,3 +325,38 @@ const openNewSidebar = () => {
   $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
   $("#main-panel-splitter").css("display", "block");
 }
+
+const DPR_Chrome = (function () {
+  const addMainPanelSections = places => {
+    const html = places
+      .slice(1)
+      .map((x, i) => `
+    <div class="main-pane-container-splitter" id="main-pane-container-splitter-${i + 1}"></div>
+    <div class="main-pane-container-section" id="main-pane-translations-container-${i + 1}" style="background: ${DPR_Translations.trProps[x.id].background}">
+      <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${i + 1}" src="${DPR_Translations.trProps[x.id].baseUrl}/${x.place}">
+      </iframe>
+    </div>`)
+      .join('\n');
+
+    $("#main-pane-container").append(`${html}`);
+
+    $(".main-pane-container-section")
+      .toArray()
+      .forEach(
+        (e, i) => {
+          $(e).resizable({
+            handleSelector: `#main-pane-container-splitter-${i + 1}`,
+            resizeHeight: false
+          });
+        });
+
+    document.documentElement.style
+      .setProperty(
+        '--main-pane-container-section-width',
+        `${100.0 / places.length}%`);
+  }
+
+  return {
+    addMainPanelSections: addMainPanelSections,
+  };
+})();

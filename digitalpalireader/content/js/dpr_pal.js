@@ -117,6 +117,8 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.fixupDprBaseUrl = url => url.replace(' dprhtml', '_dprhtml');
+
   DPR_PAL.enablePopover = (id, trigger, placement) => {
     $(id)
       .each(function() {

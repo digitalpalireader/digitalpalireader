@@ -75,11 +75,6 @@ const initSplitters = () => {
     resizeHeight: false
   });
 
-  $("#main-pane-text-container").resizable({
-    handleSelector: "#main-pane-container-splitter",
-    resizeHeight: false
-  });
-
   $("#main-pane").resizable({
     handleSelector: "#main-content-panel-splitter",
     onDrag: (event, $el, passed) => {

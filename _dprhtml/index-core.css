@@ -10,6 +10,7 @@
     var(--splitter-background);
   --bottom-pane-tab-side-length: 2.1rem;
   --context-menu-width: 19.25rem;
+  --main-pane-container-section-width: 100%;
 }
 
 html,
@@ -99,7 +100,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   display: none;
-  margin-left: calc(0rem - var(--main-sidebar-width));
+  margin-left: calc(-1 * var(--main-sidebar-width));
 }
 
 #main-sidebar #main-sidebar-content {
@@ -227,24 +228,24 @@ body {
   overflow: auto;
 }
 
-#main-pane-text-container {
+.main-pane-container-section {
   flex: 0 0 auto;
-  width: 100%;
+  width: var(--main-pane-container-section-width);
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-#main-pane-container-splitter {
+.main-pane-container-section-iframe {
+  height: 99%;
+  width: 100%;
+  border: 0px;
+}
+
+.main-pane-container-splitter {
   flex: 0 0 auto;
   width: var(--splitter-width);
-  background: var(--splitter-background);
+  background: var(--v-splitter-background);
   cursor: col-resize;
-}
-
-#main-pane-translations-container {
-  flex: 1 1 auto;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .force-show-scrollbar-on-macos::-webkit-scrollbar {

@@ -23,6 +23,8 @@ class NavigationTabViewModel {
     this.placeArray = ko.observableArray();
     this.query = ko.observable('');
     this.para = ko.observable('');
+
+    this.places = ko.observableArray();
   }
 
   place(place){
@@ -38,6 +40,11 @@ class NavigationTabViewModel {
       this.section(place[6].replace('x','0'));
     }
   }
+
+  setPlaces(places) {
+    this.places(places);
+    this.place(places[0].place)
+  }
 }
 
 const __navigationTabViewModel = new NavigationTabViewModel();
@@ -52,21 +59,22 @@ const initializeNavigationFeature = () => {
       loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
       break;
     default:
+      console.error('Unsupported place format ', place);
       break;
   }
+
+  DPR_Chrome.addMainPanelSections(__navigationTabViewModel.places());
 }
 
 const parseNavigationURLParams = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  let place = [];
   let query = '';
   let para = '';
   urlParams.forEach(parameter => {
     var parameterSections = parameter.split('=');
     switch (parameterSections[0]) {
       case 'loc':
-        place = makeLocPlace(parameterSections[1]);
-        __navigationTabViewModel.place(place);
+        __navigationTabViewModel.setPlaces(parameterSections[1].split('|').map(DPR_Translations.parsePlace));
         break;
       case 'para':
         para = parameterSections[1];

@@ -1,5 +1,25 @@
 'use strict';
 
+const DPR_Translations = (function () {
+
+const trProps = {
+  ati: {
+    baseUrl: `${DPR_PAL.toUrl(DPR_prefs['catiloc'])}/tipitaka`,
+    background: 'white',
+  },
+  bt: {
+    baseUrl: DPR_PAL.toUrl(DPR_prefs['btloc']),
+    background: 'transparent',
+  },
+}
+
+const parsePlace = inplace => {
+  const pparts = /^((ati|bt):\/\/)?(.*)$/.exec(inplace);
+  return pparts[2]
+    ? { id: pparts[2], place: pparts[3], }
+    : { id: 'dpr', place: makeLocPlace(pparts[3]), };
+}
+
 function transLink(which,where,url,title) {
   const imgBase = '/digitalpalireader/content/images';
   var image = `${imgBase}/ati.ico`;
@@ -910,3 +930,11 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
   }
   if (cnt > 0) { return output; }
 }
+
+return {
+  trProps: trProps,
+  parsePlace: parsePlace,
+  addtrans: addtrans,
+};
+
+})();

@@ -39,7 +39,7 @@ function outputFormattedData(data,which,place,shortcutFns) // calls text prep, t
     var section = place[6]
     var hier = place[7];
 
-    var transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
+    var transin = DPR_Translations.addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
     if(transin && shortcutFns) {
       $
         .parseHTML(transin.join(''))
@@ -299,7 +299,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
     else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
       var parap = wb.split('|');
       var ptype = parap[1];
-      var permalink = parap[2].replace(/_/g,' ');
+      var permalink = DPR_PAL.fixupDprBaseUrl(parap[2].replace(/_/g,' '));
       if(convout.length>1) convout += '\n\n';
       finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer '+(G_thisPara && G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
       saveout += '<p class="paratype'+ptype+'"'+'>';

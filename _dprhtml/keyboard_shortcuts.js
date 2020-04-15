@@ -1,24 +1,31 @@
-document.onkeypress = keyPressed1;
+document.onkeypress = DPR_keypress;
 
-function keyPressed1(e) {
+function DPR_keypress(e) {
   if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) {
     return;
   }
 
-  if (e.charCode == 118) { // v
+  if (e.key === 'v') {
     openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
+    return;
+  }
+
+  if (e.key === '`') {
+    toggleNewSidebarVisibility();
+    event.preventDefault();
     return;
   }
 
   if (e.charCode > 48 && e.charCode < 54) { // 1-5
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[e.charCode - 49]);
+    event.preventDefault();
     return;
   }
-
 
   const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchKey(e));
   if (cmd && cmd[1]().canExecute && cmd[1]().visible) {
     cmd[1]().execute();
+    event.preventDefault();
     return;
   }
 
