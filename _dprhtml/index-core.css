@@ -10,7 +10,6 @@
     var(--splitter-background);
   --bottom-pane-tab-side-length: 2.1rem;
   --context-menu-width: 19.25rem;
-  --main-pane-container-section-width: 100%;
 }
 
 html,
@@ -234,7 +233,7 @@ body.modal-open {
 
 .main-pane-container-section {
   flex: 0 0 auto;
-  width: var(--main-pane-container-section-width);
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 }

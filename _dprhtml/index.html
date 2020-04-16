@@ -156,8 +156,8 @@
                 </button>
                 <!--/ko-->
 
-                <!--ko let: { translate0: commands.translate0(), translate1: commands.translate1(), translate2: commands.translate2(), translate3: commands.translate3() }-->
-                <div class="context-menu-command-separator" data-bind="visible: translate0.visible || translate1.visible || translate2.visible || translate3.visible"></div>
+                <!--ko let: { translate0: commands.translate0(), translate1: commands.translate1(), translate2: commands.translate2(), translate3: commands.translate3(), translate4: commands.translate4(), translate5: commands.translate5(), translate6: commands.translate6(), translate7: commands.translate7(), translate8: commands.translate8(), translate9: commands.translate9(), translate10: commands.translate10() }-->
+                <div class="context-menu-command-separator" data-bind="visible: translate0.visible || translate1.visible || translate2.visible || translate3.visible || translate4.visible || translate5.visible || translate6.visible || translate7.visible || translate8.visible || translate9.visible || translate10.visible"></div>
                 <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate0.visible, enable: translate0.canExecute, click: translate0.execute(), attr: { title: translate0.title }">
                   <img class="context-menu-command-icon" data-bind="attr: { src: translate0.icon }"></i>
                 </button>
@@ -168,6 +168,27 @@
                   <img class="context-menu-command-icon" data-bind="attr: { src: translate2.icon }"></i>
                 </button>
                 <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate3.visible, enable: translate3.canExecute, click: translate3.execute(), attr: { title: translate3.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate4.visible, enable: translate4.canExecute, click: translate4.execute(), attr: { title: translate4.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate5.visible, enable: translate5.canExecute, click: translate5.execute(), attr: { title: translate5.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate6.visible, enable: translate6.canExecute, click: translate6.execute(), attr: { title: translate6.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate7.visible, enable: translate7.canExecute, click: translate7.execute(), attr: { title: translate7.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate8.visible, enable: translate8.canExecute, click: translate8.execute(), attr: { title: translate8.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate9.visible, enable: translate9.canExecute, click: translate9.execute(), attr: { title: translate9.title }">
+                  <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
+                </button>
+                <button type="button" class="btn btn-sm btn-light" data-bind="visible: translate10.visible, enable: translate10.canExecute, click: translate10.execute(), attr: { title: translate10.title }">
                   <img class="context-menu-command-icon" data-bind="attr: { src: translate3.icon }"></i>
                 </button>
                 <!--/ko-->
@@ -192,7 +213,7 @@
 
             <div id="main-pane">
               <div id="main-pane-container" data-bind="visible: mainFeaturesVisible">
-                <div class="main-pane-container-section" id="main-pane-text-container-0">
+                <div class="main-pane-container-section" id="main-pane-container-section-0">
                   <div id="content">
                     <div id="top-frame">
                       <div id="matrelc"></div>

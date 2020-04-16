@@ -97,7 +97,6 @@ const initializeNavigationSidebarTab = () => {
     __navigationTabViewModel.navset.push({value: i, label: G_nikFullNames[i]});
   }
 
-
   digitalpalireader.setBookList(__navigationTabViewModel.set());
   digitalpalireader.changeSet();
   navset.change(function () {

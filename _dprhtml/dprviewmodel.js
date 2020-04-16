@@ -41,7 +41,11 @@ class DprViewModel {
         .find(([_, x]) => x().id === id);
 
     if (cmdVM) {
-      cmdVM[1]({...cmdVM[1](), ...cmd})
+      let c = cmd;
+      if (cmdVM[1]().id.startsWith(DPR_CMD_TRANSLATE_)) {
+        c = {...c, ...{ title: `${cmd.title} (Shift + click to open side by side)`}};
+      }
+      cmdVM[1]({...cmdVM[1](), ...c});
     } else {
       console.error('Unable to find command:', id, 'to update with', cmd);
     }
@@ -68,6 +72,13 @@ const DPR_CMD_TRANSLATE_0 = 'translate0';
 const DPR_CMD_TRANSLATE_1 = 'translate1';
 const DPR_CMD_TRANSLATE_2 = 'translate2';
 const DPR_CMD_TRANSLATE_3 = 'translate3';
+const DPR_CMD_TRANSLATE_4 = 'translate4';
+const DPR_CMD_TRANSLATE_5 = 'translate5';
+const DPR_CMD_TRANSLATE_6 = 'translate6';
+const DPR_CMD_TRANSLATE_7 = 'translate7';
+const DPR_CMD_TRANSLATE_8 = 'translate8';
+const DPR_CMD_TRANSLATE_9 = 'translate9';
+const DPR_CMD_TRANSLATE_10 = 'translate10';
 
 const emptyFn = () => {};
 
@@ -239,6 +250,76 @@ const dprCommandList = [
   },
   {
     id: DPR_CMD_TRANSLATE_3,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_4,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_5,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_6,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_7,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_8,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_9,
+    notImplemented: false,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    title: '',
+    icon: null,
+    matchKey: e => false,
+  },
+  {
+    id: DPR_CMD_TRANSLATE_10,
     notImplemented: false,
     canExecute: false,
     execute: emptyFn,

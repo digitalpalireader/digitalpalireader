@@ -461,7 +461,7 @@ function openTranslation(url,add) {
   }
   else {
     if(!/^http/.test(url) && !/^file:/.test(url))
-      url = (DPR_prefs['catioff'] ? DPR_PAL.toUrl(DPR_prefs['catiloc'])+'/tipitaka/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
+      url = (DPR_prefs['catioff'] ? DPR_Translations.trProps.ati.baseUrl + '/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
 
     openDPRTab(url,'DPRx');
   }
@@ -561,3 +561,22 @@ function sidebarSearch(nik,book,hiert) {
     1000
   );
 }
+
+const DPR_Send = (function () {
+  const openTranslation = (uri, add) => {
+    if (add == 'right') {
+      return;
+    }
+
+    const sInfo = DPR_Translations.parsePlace(uri);
+    if (add == 'shift') {
+      DPR_Chrome.addMainPanelSection(sInfo);
+    } else {
+      openDPRTab(`${DPR_Translations.resolveUri(sInfo)}`, 'DPRx');
+    }
+  }
+
+  return {
+    openTranslation: openTranslation,
+  };
+})();

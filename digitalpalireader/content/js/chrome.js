@@ -283,7 +283,7 @@ const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-text-container-0').scrollTop(scrollTop);
+  $('#main-pane-container-section-0').scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {
@@ -327,36 +327,51 @@ const openNewSidebar = () => {
 }
 
 const DPR_Chrome = (function () {
-  const addMainPanelSections = places => {
-    const html = places
-      .slice(1)
-      .map((x, i) => `
-    <div class="main-pane-container-splitter" id="main-pane-container-splitter-${i + 1}"></div>
-    <div class="main-pane-container-section" id="main-pane-translations-container-${i + 1}" style="background: ${DPR_Translations.trProps[x.id].background}">
-      <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${i + 1}" src="${DPR_Translations.trProps[x.id].baseUrl}/${x.place}">
-      </iframe>
-    </div>`)
-      .join('\n');
-
-    $("#main-pane-container").append(`${html}`);
-
-    $(".main-pane-container-section")
+  const fixupLayoutMainPanelSections = () => {
+    const availableWidth = $('#main-pane-container').width();
+    const totalSplitterWidth = $('.main-pane-container-splitter')
       .toArray()
-      .forEach(
-        (e, i) => {
-          $(e).resizable({
-            handleSelector: `#main-pane-container-splitter-${i + 1}`,
-            resizeHeight: false
-          });
-        });
+      .reduce((acc, e) => acc + $(e).width(), 0);
+    const sections = $('.main-pane-container-section').toArray();
 
-    document.documentElement.style
-      .setProperty(
-        '--main-pane-container-section-width',
-        `${100.0 / places.length}%`);
+    sections.forEach(x => $(x).width((availableWidth - totalSplitterWidth) / sections.length));
+  }
+
+  const addMainPanelSection = (sInfo, sPos = Number.MAX_VALUE, fixupLayout = true) => {
+    if (sInfo.type === 'dpr') {
+      return;
+    }
+
+    if (sPos === Number.MAX_VALUE) {
+      sPos = $('.main-pane-container-section').length;
+    }
+
+    const html = `
+  <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
+  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
+    </iframe>
+  </div>`;
+
+    $('#main-pane-container').append(`${html}`);
+
+    $(`#main-pane-container-section-${sPos - 1}`).resizable({
+      handleSelector: `#main-pane-container-splitter-${sPos}`,
+      resizeHeight: false,
+    });
+
+    if (fixupLayout) {
+      fixupLayoutMainPanelSections();
+    }
+  }
+
+  const addMainPanelSections = places => {
+    places.forEach((p, i) => addMainPanelSection(p, i, false));
+    fixupLayoutMainPanelSections();
   }
 
   return {
+    addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
   };
 })();
