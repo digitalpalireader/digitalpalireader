@@ -24,6 +24,10 @@ body {
   overflow: auto;
 }
 
+body.modal-open {
+  padding-right: 0 !important;
+}
+
 .center {
   text-align: center;
 }

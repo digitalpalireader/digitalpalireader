@@ -16,20 +16,20 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (e.charCode > 48 && e.charCode < 54) { // 1-5
+  if (['1', '2', '3', '4', '5'].includes(e.key)) {
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[e.charCode - 49]);
     event.preventDefault();
     return;
   }
 
   const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchKey(e));
-  if (cmd && cmd[1]().canExecute && cmd[1]().visible) {
+  if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
     cmd[1]().execute();
     event.preventDefault();
     return;
   }
 
-  if (e.charCode == 113) { // q
+  if (false && e.key === 'q') { // q
 
     var check = { value: false };                  // default the checkbox to false
 
@@ -51,7 +51,7 @@ function DPR_keypress(e) {
     openPlace(outplace, para);
   }
 
-  if (e.charCode == 115) {  // s
+  if (false && e.key === 's') {
     if (window.getSelection().toString() != '') {
       wMain.sendtoconvert(window.getSelection().toString() + '');
     }
@@ -63,7 +63,7 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (e.charCode == 101) {  // e
+  if (false && e.key === e) {
     if (window.getSelection().toString() != '') {
       wMain.sendtoPad(window.getSelection().toString() + '');
     }
@@ -75,7 +75,7 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (e.charCode == 69) {  // E
+  if (false && e.key === 'E') {
     if (window.getSelection().toString() != '') {
       wMain.sendtoPad(window.getSelection().toString() + '', true);
     }
@@ -87,50 +87,53 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (e.charCode == 44) { // ,
+  if (false && e.key === ',') {
     if (dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
     else if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
     return;
   }
 
-  if (e.charCode == 46) { // .
+  if (false && e.key === '.') {
     if (dBot.getElementById('bout')) dBot.getElementById('bout').onclick();
     else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
     return;
   }
 
-  if (e.charCode == 37) { // %
+  if (e.key === '%') {
     $('#settings-dialog-root').modal('show');
     return;
   }
 
-  if (e.charCode == 33) { // !
+  if (false && e.key === '!') {
     eraseOptions();
     return;
   }
 
-  if (e.charCode == 35) { // #
+  if (false && e.key === '#') {
     newquiz();
     return;
   }
 
-  if (e.charCode == 42) { // *
+  if (false && e.key === '*') {
     bvAlert(bv()); return;
   }
 
-  if (e.charCode == 98) { // b
+  if (false && e.key === 'b') {
     dTop.getElementById('bkButton').onmousedown();
     return;
   }
 
-  if (e.charCode == 104) { // h
+  if (e.key === 'h') {
     openDPRTab('help.html', 'DPR-help', 0);
     return;
   }
 
-  // @
+  if (false && e.key === '@') {
+    // Launch feedback form.
+    return;
+  }
 
-  if (e.charCode == 63) { // ?
+  if (e.key === '?') { // ?
     $('#helpDialog').modal('show');
     return;
   }
