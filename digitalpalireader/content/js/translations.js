@@ -31,6 +31,8 @@ const trProps = {
 
 const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 
+const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
+
 const parsePlace = inplace => {
   const pparts = /^((ati|abt|bt):\/\/)?(.*)$/.exec(inplace);
   return pparts[2]
@@ -957,6 +959,7 @@ return {
   parsePlace: parsePlace,
   addtrans: addtrans,
   resolveUri: resolveUri,
+  makeUri: makeUri,
 };
 
 })();

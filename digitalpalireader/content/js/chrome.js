@@ -327,17 +327,31 @@ const openNewSidebar = () => {
 }
 
 const DPR_Chrome = (function () {
-  const fixupLayoutMainPanelSections = () => {
+  const fixupUrlAndMainPanelSectionsLayout = () => {
     const availableWidth = $('#main-pane-container').width();
     const totalSplitterWidth = $('.main-pane-container-splitter')
       .toArray()
       .reduce((acc, e) => acc + $(e).width(), 0);
     const sections = $('.main-pane-container-section').toArray();
-
     sections.forEach(x => $(x).width((availableWidth - totalSplitterWidth) / sections.length));
+
+    const uris = $('.main-pane-container-section').toArray().map(x => $(x).data('dpruri')).filter(x => x);
+    const locMutator = loc => {
+      const [first, ..._] = loc.split('|');
+      return `${[first, ...uris].join('|')}`;
+    };
+
+    const oldUrl = DPR_PAL.contentDocument.location.href;
+    const newUrl = DPR_PAL.modifyUrlPart(oldUrl, 'loc', locMutator);
+    if (oldUrl !== newUrl) {
+      console.log('URLs are not same. Updating...');
+      DPR_PAL.contentWindow.history.pushState({}, 'Title', newUrl);
+    } else {
+      console.log('URLs are same. Not updating!');
+    }
   }
 
-  const addMainPanelSection = (sInfo, sPos = Number.MAX_VALUE, fixupLayout = true) => {
+  const addMainPanelSection = (sInfo, sPos = Number.MAX_VALUE, fixupUrlAndLayout = true) => {
     if (sInfo.type === 'dpr') {
       return;
     }
@@ -348,7 +362,7 @@ const DPR_Chrome = (function () {
 
     const html = `
   <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
-  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
     <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
     </iframe>
   </div>`;
@@ -360,14 +374,14 @@ const DPR_Chrome = (function () {
       resizeHeight: false,
     });
 
-    if (fixupLayout) {
-      fixupLayoutMainPanelSections();
+    if (fixupUrlAndLayout) {
+      fixupUrlAndMainPanelSectionsLayout();
     }
   }
 
   const addMainPanelSections = places => {
     places.forEach((p, i) => addMainPanelSection(p, i, false));
-    fixupLayoutMainPanelSections();
+    fixupUrlAndMainPanelSectionsLayout();
   }
 
   return {

@@ -22,7 +22,6 @@ function Web_Send_OpenPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,a
   else if (add == 'internal') {
     let aplace = [nikaya,book,meta,volume,vagga,sutta,section,hiert];
     loadXMLSection("","",aplace);
-    $("#close-left").click();
   } else {
     throw `Web_Send_OpenPlace:${add} not implemented`;
   }
@@ -419,51 +418,6 @@ function sendTranslate(input, add){
   else {
     var permalink = 'chrome://digitalpalireader/content/translate.htm' + '?phrase='+toVel(input);
     openDPRTab(permalink,'DPRx');
-  }
-}
-
-
-function openTranslation(url,add) {
-  if(add == 'right') return;
-
-  if (add == 'shift') {
-    url = 'chrome://digitalpalireader/content/ati.xul?ati='+url;
-    if (window.getSelection)
-      window.getSelection().removeAllRanges();
-    var thisTab = isDPRTab('DPRm');
-    if(thisTab) {
-      var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      var doc = thisTabBrowser.contentDocument;
-      var elem = doc.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var node = createBrowser(doc,url,count);
-      elem.appendChild(node);
-      return;
-    }
-    var oldTab = findDPRTab('DPR-main');
-    if (!oldTab) {
-      openDPRTab(url,'DPRx');
-    }
-    else {
-      DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
-      var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      var doc = oldTabBrowser.contentDocument;
-      var elem = doc.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var node = createBrowser(doc,url,count);
-      var splitter = createSplitter(doc,count);
-
-      elem.appendChild(splitter);
-      elem.appendChild(node);
-
-      return;
-    }
-  }
-  else {
-    if(!/^http/.test(url) && !/^file:/.test(url))
-      url = (DPR_prefs['catioff'] ? DPR_Translations.trProps.ati.baseUrl + '/' : 'http://www.accesstoinsight.org/tipitaka/')+url;
-
-    openDPRTab(url,'DPRx');
   }
 }
 

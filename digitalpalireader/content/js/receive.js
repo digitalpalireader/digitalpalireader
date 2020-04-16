@@ -129,3 +129,8 @@ function createSplitter(thisDocument,count){
 
   return splitter;
 }
+
+const DPR_Receive = (function () {
+  return {
+  };
+})();

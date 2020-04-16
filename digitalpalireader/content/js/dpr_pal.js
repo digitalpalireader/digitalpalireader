@@ -158,5 +158,18 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.modifyUrlPart = (url, queryKey, f) => {
+    const [baseUrl, qps] = url.split('?');
+    const newQps = qps
+      .split('&')
+      .map(qp => {
+        const [key, value] = qp.split('=');
+        const newValue = (key === queryKey) ? f(value) : value;
+        return `${key}=${newValue}`;
+      });
+
+    return `${baseUrl}?${newQps.join('&')}`;
+  }
+
   console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);
