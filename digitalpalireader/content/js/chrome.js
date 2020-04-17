@@ -335,7 +335,7 @@ const DPR_Chrome = (function () {
     const sections = $('.main-pane-container-section').toArray();
     sections.forEach(x => $(x).width((availableWidth - totalSplitterWidth) / sections.length));
 
-    const uris = $('.main-pane-container-section').toArray().map(x => $(x).data('dpruri')).filter(x => x);
+    const uris = $('.main-pane-container-section').toArray().map(x => $(x).attr('data-dpruri')).filter(x => x);
     const locMutator = loc => {
       const [first, ..._] = loc.split('|');
       return `${[first, ...uris].join('|')}`;
@@ -351,23 +351,25 @@ const DPR_Chrome = (function () {
     }
   }
 
-  const addMainPanelSection = (sInfo, sPos = Number.MAX_VALUE, fixupUrlAndLayout = true) => {
+  const addMainPanelSection = (sInfo, fixupUrlAndLayout = true) => {
     if (sInfo.type === 'dpr') {
       return;
     }
 
-    if (sPos === Number.MAX_VALUE) {
-      sPos = $('.main-pane-container-section').length;
-    }
+    const sPos = parseInt($('#main-pane-container').attr('data-nextspos') ?? '1');
 
     const html = `
   <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
   <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
     <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
     </iframe>
   </div>`;
 
     $('#main-pane-container').append(`${html}`);
+    $('#main-pane-container').attr('data-nextspos', sPos + 1);
 
     $(`#main-pane-container-section-${sPos - 1}`).resizable({
       handleSelector: `#main-pane-container-splitter-${sPos}`,
@@ -380,12 +382,19 @@ const DPR_Chrome = (function () {
   }
 
   const addMainPanelSections = places => {
-    places.forEach((p, i) => addMainPanelSection(p, i, false));
+    places.forEach(p => addMainPanelSection(p, false));
+    fixupUrlAndMainPanelSectionsLayout();
+  }
+
+  const closeContainerSection = position => {
+    $(`#main-pane-container-splitter-${position}`).remove();
+    $(`#main-pane-container-section-${position}`).remove();
     fixupUrlAndMainPanelSectionsLayout();
   }
 
   return {
     addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
+    closeContainerSection: closeContainerSection,
   };
 })();
