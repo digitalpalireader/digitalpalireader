@@ -11,7 +11,7 @@ const trProps = {
   },
   abt: {
     id: 1,
-    baseUrl: `http://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+    baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
     icon: `abt.gif`,
     background: 'rgb(255, 248, 240)',
   },
