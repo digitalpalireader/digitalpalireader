@@ -11,7 +11,7 @@ function DPR_keypress(e) {
   }
 
   if (e.key === '`') {
-    toggleNewSidebarVisibility();
+    DPR_Chrome.toggleNewSidebarVisibility();
     event.preventDefault();
     return;
   }

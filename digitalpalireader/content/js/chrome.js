@@ -307,26 +307,25 @@ const closeBottomFrame = () => {
   $("#main-pane").height("100%");
 }
 
-const toggleNewSidebarVisibility = () => {
-  if ($('#main-sidebar').css('margin-left').startsWith("-")) {
-    openNewSidebar();
-  } else {
-    closeNewSidebar();
-  }
-}
-
-const closeNewSidebar = () => {
-  $("#main-sidebar").animate({ marginLeft: "-" + $('#main-sidebar').css('width') }, 300);
-  $("#main-panel-splitter").css("display", "none");
-}
-
-const openNewSidebar = () => {
-  $("#main-sidebar").show();
-  $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
-  $("#main-panel-splitter").css("display", "block");
-}
-
 const DPR_Chrome = (function () {
+  const toggleNewSidebarVisibility = () => {
+    if ($('#main-sidebar').is(":visible")) {
+      closeNewSidebar();
+    } else {
+      openNewSidebar();
+    }
+  }
+
+  const closeNewSidebar = () => {
+    $("#main-sidebar").hide();
+    $("#main-panel-splitter").hide();
+  }
+
+  const openNewSidebar = () => {
+    $("#main-sidebar").show();
+    $("#main-panel-splitter").show();
+  }
+
   const fixupUrlAndMainPanelSectionsLayout = () => {
     const availableWidth = $('#main-pane-container').width();
     const totalSplitterWidth = $('.main-pane-container-splitter')
@@ -393,6 +392,8 @@ const DPR_Chrome = (function () {
   }
 
   return {
+    toggleNewSidebarVisibility: toggleNewSidebarVisibility,
+    openNewSidebar: openNewSidebar,
     addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
