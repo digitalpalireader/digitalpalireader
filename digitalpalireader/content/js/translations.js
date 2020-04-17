@@ -208,7 +208,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       if (mysn == 16) {
         if (which > 0) {
-            var surl = 'index.htm';
+            var surl = [ 'index.htm' ];
             var ssect = '';
           }
         else {
