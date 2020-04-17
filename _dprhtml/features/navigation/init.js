@@ -74,7 +74,10 @@ const parseNavigationURLParams = () => {
     var parameterSections = parameter.split('=');
     switch (parameterSections[0]) {
       case 'loc':
-        __navigationTabViewModel.setPlaces(parameterSections[1].split('|').map(DPR_Translations.parsePlace));
+        __navigationTabViewModel.setPlaces(
+          decodeURIComponent(parameterSections[1])
+            .split('|')
+            .map(DPR_Translations.parsePlace));
         break;
       case 'para':
         para = parameterSections[1];

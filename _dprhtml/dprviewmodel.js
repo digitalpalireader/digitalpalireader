@@ -43,7 +43,7 @@ class DprViewModel {
     if (cmdVM) {
       let c = cmd;
       if (cmdVM[1]().id.startsWith(DPR_CMD_TRANSLATE_)) {
-        c = {...c, ...{ title: `${cmd.title} (Shift + click to open side by side)`}};
+        c = {...c, ...{ title: `${cmd.title} (Shift + click to open in new window)`}};
       }
       cmdVM[1]({...cmdVM[1](), ...c});
     } else {

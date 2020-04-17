@@ -524,9 +524,9 @@ const DPR_Send = (function () {
 
     const sInfo = DPR_Translations.parsePlace(uri);
     if (add == 'shift') {
-      DPR_Chrome.addMainPanelSection(sInfo);
-    } else {
       openDPRTab(`${DPR_Translations.resolveUri(sInfo)}`, 'DPRx');
+    } else {
+      DPR_Chrome.addMainPanelSection(sInfo);
     }
   }
 
