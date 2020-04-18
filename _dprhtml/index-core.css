@@ -496,41 +496,46 @@ body .btn {
 
 #context-menu {
   position: absolute;
-  top: calc(0.1rem + var(--main-content-header-height));
-  left: 0rem;
-  padding: 0.5rem;
-  text-align: center;
-  background: lightgrey;
-  opacity: 1.0;
-  transition-duration: 0.3s;
-  border-radius: 0 0.3rem 0.3rem 0;
+  top: calc(1rem + var(--main-content-header-height));
+  left: 1rem;
+  display: flex;
+  flex-direction: column;
   z-index: 900;
 }
 
-#context-menu #context-menu-main {
-  position: absolute;
-  top: 0rem;
-  left: calc(-1 * var(--context-menu-width));
-  background: lightgrey;
-  width: var(--context-menu-width);
-  transition-duration: 0.3s;
-  text-align: left;
-  border-radius: 0 0 0.3rem 0;
-  display: flex;
-  flex-direction: column;
-}
-
 #context-menu #context-menu-handle {
-  transition: transform .3s ease-in-out;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  opacity: 0.7;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  text-align: center;
+  background-color: darkgrey;
 }
 
-#context-menu:hover {
-  left: var(--context-menu-width);
-  opacity: 1;
+#context-menu #context-menu-handle #context-menu-launcher-icon {
+  transition: transform .1s ease-in-out;
+}
+
+#context-menu #context-menu-main {
+  background-color: darkgrey;
+  display: none;
+  border-radius: 5px;
 }
 
 #context-menu:hover #context-menu-handle {
+  opacity: 1.0;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+#context-menu:hover #context-menu-handle #context-menu-launcher-icon {
   transform: rotate(180deg);
+}
+
+#context-menu:hover #context-menu-main {
+  display: unset;
+  border-top-left-radius: 0px;
 }
 
 #context-menu #context-menu-main #context-menu-main-row1 {
@@ -545,18 +550,22 @@ body .btn {
   display: flex;
   flex-direction: row;
   padding: 0.15rem;
+  justify-content: center;
+  align-content: center;
+  align-items: center
 }
 
-#context-menu #context-menu-main .context-menu-main-row * {
-  margin: 0.15rem;
+#context-menu #context-menu-main .context-menu-main-row .context-menu-main-row-group {
+  margin: 0rem 0.3rem;
 }
 
-#context-menu #context-menu-main .context-menu-main-row .context-menu-command-separator {
-  border: 1px ridge black;
-  width: 1px;
+#context-menu #context-menu-main .context-menu-main-row .context-menu-main-row-group button {
+  width: 2rem;
+  height: 2rem;
+  margin: 0px;
 }
 
-#context-menu #context-menu-main .context-menu-main-row button .context-menu-command-icon {
+#context-menu #context-menu-main .context-menu-main-row .context-menu-main-row-group button .context-menu-command-icon {
   width: 0.75rem;
   height: 0.875rem;
   margin: 0px;
