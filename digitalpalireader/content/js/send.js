@@ -516,7 +516,7 @@ function sidebarSearch(nik,book,hiert) {
   );
 }
 
-const DPR_Send = (function () {
+var DPR_Send = (function () {
   const openTranslation = (uri, add) => {
     if (add == 'right') {
       return;

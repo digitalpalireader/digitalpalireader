@@ -51,15 +51,7 @@ function installGlobalHandlers() {
     initMainPane();
   };
 
-  window.onunhandledrejection = event => {
-    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
-  };
-
   window.onpopstate = DPRChrome.historyPopstateHandler;
-
-  window.onerror = (message, source, lineno, colno, error) => {
-    console.error(">>>> Unhandled error: ", message, source, lineno, colno, error);
-  };
 }
 
 const loadFeatureAsync = async (name, initFn) => {

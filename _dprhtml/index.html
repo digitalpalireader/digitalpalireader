@@ -9,6 +9,15 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
+    <script type="text/javascript">
+      window.onerror = (message, source, lineno, colno, error) => {
+        console.error(">>>> Unhandled error: ", message, source, lineno, colno, error, error.stack);
+      };
+
+      window.onunhandledrejection = event => {
+        console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+      };
+    </script>
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -371,7 +380,7 @@
     <script src="/_dprhtml/features/settings-dialog/init.js"></script>
     <script src="/_dprhtml/dprviewmodel.js"></script>
     <script src="/_dprhtml/index.js"></script>
-    <script type="text/javascript">
+    <script>
       $(document).ready(mainInitialize);
     </script>
   </body>

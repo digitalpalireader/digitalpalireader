@@ -1,6 +1,6 @@
 'use strict';
 
-const DPR_Translations = (function () {
+var DPR_Translations = (function () {
 
 const trProps = {
   ati: {

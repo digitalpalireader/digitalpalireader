@@ -307,7 +307,7 @@ const closeBottomFrame = () => {
   $("#main-pane").height("100%");
 }
 
-const DPR_Chrome = (function () {
+var DPR_Chrome = (function () {
   const toggleNewSidebarVisibility = () => {
     if ($('#main-sidebar').is(":visible")) {
       closeNewSidebar();
