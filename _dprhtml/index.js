@@ -57,8 +57,8 @@ function installGlobalHandlers() {
 
   window.onpopstate = DPRChrome.historyPopstateHandler;
 
-  window.onerror = error => {
-    console.error(">>>> Unhandled error: ", error);
+  window.onerror = (message, source, lineno, colno, error) => {
+    console.error(">>>> Unhandled error: ", message, source, lineno, colno, error);
   };
 }
 
