@@ -1,15 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en" manifest="dpr.appcache">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <title>Digital Pali Reader (beta)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./favicon.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Digital Pali Reader (alpha)</title>
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-    <meta http-equiv="Pragma" content="no-cache" />
-    <meta http-equiv="Expires" content="0" />
-    <script type="text/javascript">
+    <script>
       window.onerror = (message, source, lineno, colno, error) => {
         console.error(">>>> Unhandled error: ", message, source, lineno, colno, error, error.stack);
       };
