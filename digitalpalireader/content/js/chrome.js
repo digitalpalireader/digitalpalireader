@@ -355,7 +355,8 @@ var DPR_Chrome = (function () {
       return;
     }
 
-    const sPos = parseInt($('#main-pane-container').attr('data-nextspos') ?? '1');
+    let sPos = $('#main-pane-container').attr('data-nextspos');
+    sPos = parseInt(sPos ? sPos : '1');
 
     const html = `
   <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
