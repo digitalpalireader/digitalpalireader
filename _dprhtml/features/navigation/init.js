@@ -67,12 +67,8 @@ const initializeNavigationFeature = () => {
 }
 
 const parseNavigationURLParams = () => {
-<<<<<<< HEAD
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-=======
   const urlParams = decodeURIComponent(window.location.search).substring(1, window.location.search.length).split('&');
   let place = [];
->>>>>>> Highlights all search terms. Handles spaces and special characters from original search url query by decoding
   let query = '';
   let para = '';
   urlParams.forEach(parameter => {
