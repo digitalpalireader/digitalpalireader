@@ -189,7 +189,20 @@ function WEB_setPref(name,value) {
 }
 
 function WEB_getPref(name) {
-  const pref = DPR_prefsD[name];
+  let pref = DPR_prefsD[name];
+  let prefType = localStorage['DPR_Prefs_type_'+name] === undefined ? 'string' : localStorage['DPR_Prefs_type_'+name];
+
+  if (!(localStorage['DPR_Prefs_'+name] === undefined)){
+    switch (prefType){
+      case 'int':
+        pref = parseInt(localStorage['DPR_Prefs_'+name]);
+        break;
+      default:
+        pref = localStorage['DPR_Prefs_'+name];
+        break;
+    }
+  }
+
   return /(chrome:)/.test(pref) ? '' : pref;
 }
 
