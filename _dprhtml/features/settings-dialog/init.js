@@ -40,7 +40,6 @@ class SettingsDialogTabsViewModel {
 
   cancelPreferences()
   {
-    console.log(DPR_prefs['colsize']);
     this.fontFamily(DPR_prefs['colfont']);
     this.textSize(DPR_prefs['colsize']);
     this.textScript(DPR_prefs['translits']);
