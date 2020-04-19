@@ -57,7 +57,7 @@ const initializeNavigationFeature = () => {
 }
 
 const parseNavigationURLParams = () => {
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+  const urlParams = decodeURIComponent(window.location.search).substring(1, window.location.search.length).split('&');
   let place = [];
   let query = '';
   let para = '';
