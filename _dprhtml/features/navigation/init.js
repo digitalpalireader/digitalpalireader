@@ -67,7 +67,8 @@ const initializeNavigationFeature = () => {
 }
 
 const parseNavigationURLParams = () => {
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
+  const urlParams = decodeURIComponent(window.location.search).substring(1, window.location.search.length).split('&');
+  let place = [];
   let query = '';
   let para = '';
   urlParams.forEach(parameter => {
@@ -75,7 +76,7 @@ const parseNavigationURLParams = () => {
     switch (parameterSections[0]) {
       case 'loc':
         __navigationTabViewModel.setPlaces(
-          decodeURIComponent(parameterSections[1])
+          parameterSections[1]
             .split('|')
             .map(DPR_Translations.parsePlace));
         break;
