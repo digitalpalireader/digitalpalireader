@@ -179,7 +179,7 @@ kudvala['9'] = 8;
 kudvala['10'] = 9;
 kudvala['12'] = 10;
 kudvala['13'] = 11;
-kudvala['14'] = 12;
+kudvala['14'] = 13;
 kudvala['15'] = 13;
 
 var abhivala = [];
