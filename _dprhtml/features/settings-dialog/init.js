@@ -1,48 +1,39 @@
 'use strict';
 
-const fontFamilyDefault = 'Verdana';
-const textSizeDefault = '16';
-const textScriptDefault = '0';
-
-const preferenceFontFamily = 'preferenceFontFamily';
-const preferenceTextSize = 'preferenceTextSize';
-const preferenceTextScript = 'preferenceTextScript';
-
-
 class SettingsDialogTabsViewModel {
   constructor() {
     this.isGeneralSettingsTabSelected = ko.observable(true);
     this.isLayoutSettingsTabSelected = ko.observable(false);
     this.isTextSettingsTabSelected = ko.observable(false);
 
-    this.fontFamily = ko.observable(getPref('colfont'));
-    this.textSize = ko.observable(getPref('colsize'));
-    this.textScript = ko.observable(getPref('translits'));
+    this.colfont = ko.observable(getPref('colfont'));
+    this.colsize = ko.observable(getPref('colsize'));
+    this.translits = ko.observable(getPref('translits'));
   }
 
   savePreferences() {
-    localStorage['DPR_Prefs_colfont'] = this.fontFamily();
-    localStorage['DPR_Prefs_colsize'] = this.textSize();
-    localStorage['DPR_Prefs_translits'] = this.textScript();
+    localStorage['DPR_Prefs_colfont'] = this.colfont();
+    localStorage['DPR_Prefs_colsize'] = this.colsize();
+    localStorage['DPR_Prefs_translits'] = this.translits();
     localStorage['DPR_Prefs_type_translits'] = 'int';
-    DPR_prefs['colfont'] = this.fontFamily();
-    DPR_prefs['colsize'] = this.textSize();
-    DPR_prefs['translits'] = this.textScript();
+    DPR_prefs['colfont'] = this.colfont();
+    DPR_prefs['colsize'] = this.colsize();
+    DPR_prefs['translits'] = this.translits();
     //reload in order to update window with changed preferences - ideally there should be a more elegant way of doing this
-    location.reload();
+    window.location.reload();
   }
 
   defaultPreferences() {
-    this.fontFamily(fontFamilyDefault);
-    this.textSize(textSizeDefault);
-    this.textScript(textScriptDefault);
+    this.colfont(DPR_prefsD['colfont']);
+    this.colsize(DPR_prefsD['colsize']);
+    this.translits(DPR_prefsD['translits']);
   }
 
   cancelPreferences()
   {
-    this.fontFamily(DPR_prefs['colfont']);
-    this.textSize(DPR_prefs['colsize']);
-    this.textScript(DPR_prefs['translits']);
+    this.colfont(DPR_prefs['colfont']);
+    this.colsize(DPR_prefs['colsize']);
+    this.translits(DPR_prefs['translits']);
   }
 
   updateActiveSettingsTabId(tabId) {
