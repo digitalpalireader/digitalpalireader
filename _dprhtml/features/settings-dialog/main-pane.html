@@ -154,13 +154,13 @@
                 <div class="settings-pane-tab-pane-section-header">Text formatting</div>
 
                 <label for="colfont" style="white-space: nowrap;">Font Family</label>
-                <input class="ml-1" id="colfont" name="colfont" type="text" maxlength="16" style="justify-self: stretch;"/>
+                <input class="ml-1" id="colfont" name="colfont" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colfont"/>
 
                 <label for="colsize" style="white-space: nowrap;">Text Size</label>
-                <input class="ml-1" id="colsize" name="colsize" type="text" maxlength="16" style="justify-self: stretch;"/>
+                <input class="ml-1" id="colsize" name="colsize" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colsize"/>
 
                 <label for="translits" style="white-space: nowrap;">Text Script</label>
-                <select class="ml-1" id="translits" style="justify-self: stretch;">
+                <select class="ml-1" id="translits" style="justify-self: stretch;" data-bind="value: translits">
                   <option value="0">Roman</option>
                   <option value="1">Thai</option>
                   <option value="2">Devanagari</option>
@@ -173,9 +173,9 @@
         </div>
       </div>
       <div class="modal-footer p-2">
-        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults...">Defaults</button>
-        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults..." data-bind="click: defaultPreferences">Defaults</button>
+        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-bind="click: cancelPreferences" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-bind="click: savePreferences" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
