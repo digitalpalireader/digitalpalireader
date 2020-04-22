@@ -451,6 +451,11 @@ G_endings.push(['essa.m',1,2,'ti','v']);
 G_endings.push(['essaama',1,2,'ti','v']);
 
 
+// additional unsorted endings
+
+G_endings.push(['e',0,2,'ati','v']);
+
+
 // special pres. participle ending
 
 G_endings.push(['a.m',1,3,'ti','v']);
