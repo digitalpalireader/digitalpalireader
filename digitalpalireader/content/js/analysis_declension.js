@@ -235,6 +235,10 @@ G_endings.push(['aati',4,0,'','v',[[1,1,1]]]);
 G_endings.push(['eti',3,0,'','v',[[1,1,1]]]);
 G_endings.push(['oti',3,0,'','v',[[1,1,1]]]);
 
+//attanopada
+
+G_endings.push(['e',0,0,'i','v',[[1,1,1],[1,1,2]]]);
+
   // a stem pres.
 
 G_endings.push(['anti',1,0,'ti','v',[[1,1,2]]]);
