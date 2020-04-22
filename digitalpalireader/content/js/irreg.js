@@ -1521,6 +1521,7 @@ G_irregNoun['nti'] = 'iti';
 // compounds
 
 G_irregNoun['aha"n`'] = 'aha.m';
+G_irregNoun['uddha"n`'] = 'uddha.m';
 G_irregNoun['idam`'] = 'ida';
 G_irregNoun['etad`'] = 'eta';
 G_irregNoun['khv`'] = 'kho';
