@@ -865,7 +865,8 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
     // m as in ...
 
-      if (oneword.charAt(oneword.length-1) == 'm' && /aiu/.exec(oneword.charAt(oneword.length-2)) && oneword.length > 3)
+
+      if (oneword.charAt(oneword.length-1) == 'm' && /[aiu]/.exec(oneword.charAt(oneword.length-2)) && oneword.length > 3)
       {
         if(oneword.substring(oneword.length-3,oneword.length-1) == 'aa') { // aami as in icchaamaha.m
           var trickmatch = findmatch(oneword.substring(0,oneword.length-2)+'ti',lastpart,nextpart,partslength,1);
@@ -874,7 +875,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
             return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : ''),nextpart,1];
           }
         }
-        else if (!/aiu/.exec(oneword.charAt(oneword.length-3))) {
+        else if (!/[aiu]/.exec(oneword.charAt(oneword.length-3))) {
           var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
           if (trickmatch) {
             if(devCheck > 0 && devDump == 1) ddump('trick8');
