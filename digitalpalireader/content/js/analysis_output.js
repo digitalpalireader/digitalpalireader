@@ -14,26 +14,40 @@ function outputDef(which,first,frombox)
 
     $('#anfs').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
 
-    // sort compounds, first by number of parts (ascending), then by number of tricks (ascending), then by size of first part (descending)
+    // sort by average size descending
 
+    G_outwords.sort(function (a, b) {
+
+      var al = a[0].split('-');
+      var ac = 0;
+      for(var i = 0; i < al.length; i++){
+        ac += al[i].length ** 2;
+      }
+      var bl = b[0].split('-');
+      var bc = 0;
+      for(var i = 0; i < bl.length; i++){
+        bc += bl[i].length ** 2;
+      }
+      if (ac > bc) {
+          return -1;
+      }
+      if (bc > ac) {
+          return 1;
+      }
+      return 0;
+    });
+    
     var sorta = [];
-    var sortb = [];
+
     for (var b = 0; b < G_outwords.length; b++)
     {
-      var lg = '0' + G_outwords[b][0].split('-').length;
-      var left = '0' + G_outwords[b][0].length - G_outwords[b][0].split('-')[0].length;
-      while(lg.length < 5) lg = '0' + lg;
-      while(left.length < 5) left = '0' + left;
-      sorta.push(lg + ' ' + G_outwords[b][2] + ' ' + left + ' ' + G_outwords[b][0]+'$'+G_outwords[b][1]+'!'+G_shortdefpost[b]);
+      sorta.push(G_outwords[b][0]+'$'+G_outwords[b][1]+'!'+G_shortdefpost[b]);
     }
 
-    sorta.sort();
     for (var b = 0; b < sorta.length; b++)
     {
-      var s = sorta[b].split(' ');
-      s.splice(0,3);
-      G_outwords[b] = s.join(' ').split('!')[0].split('$');
-      G_shortdefpost[b] = s.join(' ').split('!')[1]
+      G_outwords[b] = sorta[b].split('!')[0].split('$');
+      G_shortdefpost[b] = sorta[b].split('!')[1]
     }
 
     // get the word names
