@@ -450,6 +450,9 @@ G_endings.push(['essatha',1,2,'ti','v']);
 G_endings.push(['essa.m',1,2,'ti','v']);
 G_endings.push(['essaama',1,2,'ti','v']);
 
+
+// special pres. participle ending
+
 G_endings.push(['a.m',1,3,'ti','v']);
 
 
