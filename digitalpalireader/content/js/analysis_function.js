@@ -878,7 +878,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
           var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
           if (trickmatch) {
             if(devCheck > 0 && devDump == 1) ddump('trick8');
-            return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : ''),nextpart,1];
+            return Array(trickmatch[0] + '-' + oneword.charAt(oneword.length-1), trickmatch[1] +'@0^' + oneword.charAt(oneword.length-1) + '^3', '$' + (trickmatch[2] ? trickmatch[2] : ''));
           }
         }
       }

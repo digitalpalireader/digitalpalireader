@@ -7,11 +7,6 @@ etadakiñci (etaṃ + akiñci)
 
 >>> akiñci = kiñci or negation?
 
-- some compounds where "d" gets inserted between two vowels due to sandhi, e.g.
-kismiñcideva (kismiñci + d + eva)
-kocideva (koci + d + eva)
-bahudeva (bahu + d + eva)
-
 - some compounds where "y" gets inserted between two vowels due to sandhi, e.g.
 nayimassa (na + y + imassa)
 navayime ( nava + y + ime)
@@ -21,10 +16,13 @@ dasayimāni (dasa + y + imāni)
 nayidha (na + y + idha)
 sāyeva (sā + y + eva)
 
+>>> these already work but are not default match, are you not aware of the dropdown list of alternative matches?
+
 - some compounds where "m" gets inserted between two vowels due to sandhi, e.g.
-idhamāhu (idha + m + āhu),
 ca mavajānāti (ca + m + avajānāti),
 uggahaṇanti maññe (uggahaṇanti + m + aññe)
+
+>>> deferring these for later
 
 - some compounds where "r" gets inserted between two vowels due to sandhi, e.g.
 punareti (puna + r + eti)
