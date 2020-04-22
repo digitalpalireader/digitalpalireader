@@ -868,7 +868,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
       if (oneword.charAt(oneword.length-1) == 'm' && /[aiu]/.exec(oneword.charAt(oneword.length-2)) && oneword.length > 3)
       {
-		alert(oneword);
         if(oneword.substring(oneword.length-3,oneword.length-1) == 'aa') { // aami as in icchaamaha.m
           var trickmatch = findmatch(oneword.substring(0,oneword.length-2)+'ti',lastpart,nextpart,partslength,1);
           if (trickmatch) {
