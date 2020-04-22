@@ -183,8 +183,10 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   if (typeof(P[oneword]) == 'object')
   {
     if(devDump > 0) ddump('added PED exact: ' + oneword);
-    for (var i in P[oneword]) {
-      res.push([oneword,P[oneword][i]]);
+    if(!isUncomp(oneword,lastpart,nextpart)){
+      for (var i in P[oneword]) {
+        res.push([oneword,P[oneword][i]]);
+      }
     }
   }
   else if (typeof(G_irregNoun[oneword]) == 'string') {
@@ -233,8 +235,10 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
   if (yt[oneword] && (!nextpart || yt[oneword][4] != 'V'))
   {
-    if(devDump > 0) ddump('added CPED exact: ' + oneword);
-    resy = oneword; // for matching the dictionary entry in the output
+    if(!isUncomp(oneword,lastpart,nextpart)){
+      if(devDump > 0) ddump('added CPED exact: ' + oneword);
+      resy = oneword; // for matching the dictionary entry in the output
+    }
   }
   else if (typeof(G_irregNoun[oneword]) == 'string') {
     if(devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
@@ -1148,7 +1152,8 @@ function isIndec(word) { // indeclinible
 }
 
 function isUncomp(word,lp,np) { // uncompoundable
-  if(typeof(G_uncompoundable[word]) != 'number' || (!np && !lp)) return false;
+
+  if(G_uncompoundable[word] == null || (!np && !lp)) return false;
   var uct = G_uncompoundable[word];
 
   switch(uct) {

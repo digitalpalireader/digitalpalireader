@@ -14,19 +14,59 @@ function outputDef(which,first,frombox)
 
     $('#anfs').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
 
-    // sort by average size descending
+    // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
 
     G_outwords.sort(function (a, b) {
 
+      var af = 0;
+      var a1 = a[1].split('@');
+      for(var i = 0; i < a1.length; i++){
+        if(/\//.exec(a1[i].split('^')[0]) && toUni(a[0].split('-')[i]).length > toUni(a[0].replace('-','')).length/3){ // contains PED match, and is longer than 4
+          af++;
+        }
+        if(i > 0 && toUni(a[0].split('-')[i]).length < 4 && toUni(a[0].split('-')[i]).length > 1){
+          af--;
+        } // penalize small middle 
+      }
+
+      var bf = 0;
+      var b1 = b[1].split('@');
+      for(var i = 0; i < b1.length; i++){
+        if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){ 
+          bf++;
+        }
+        if(i > 0 && toUni(b[0].split('-')[i]).length < 4 && toUni(b[0].split('-')[i]).length > 1){
+          bf--;
+        } // penalize small middle 
+      }
+
+      if (af/a1.length > bf/b1.length) {
+        return -1;
+      }
+      if (af/a1.length < bf/b1.length) {
+        return 1;
+      }
+
+      if (a1.length < b1.length) {
+        return -1;
+      }
+      if (a1.length > b1.length) {
+        return 1;
+      }
+
       var al = a[0].split('-');
       var ac = 0;
+      var ae = 0;
       for(var i = 0; i < al.length; i++){
         ac += al[i].length ** 2;
+        ae += al[i].length * i;
       }
       var bl = b[0].split('-');
       var bc = 0;
+      var be = 0;
       for(var i = 0; i < bl.length; i++){
         bc += bl[i].length ** 2;
+        be += bl[i].length * i;
       }
       if (ac > bc) {
           return -1;
@@ -34,7 +74,14 @@ function outputDef(which,first,frombox)
       if (bc > ac) {
           return 1;
       }
+      if (ae > be) {
+          return 1;
+      }
+      if (be > ae) {
+          return -1;
+      }
       return 0;
+
     });
     
     var sorta = [];
