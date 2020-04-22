@@ -157,6 +157,7 @@ G_manualCompoundInd['cevida.m'] = [['c','ca'],['ev','eva'],['ida.m','aya.m']];
 G_manualCompoundInd['natveva'] = [['na','na'],['tv','tu'],['eva','eva']];
 G_manualCompoundInd['tu.nhassa'] = [['tu.nh','tu.nhii'],['assa','assa4']];
 G_manualCompoundInd['svassa'] = [['sv','su'],['assa','assa4']];
+G_manualCompoundInd['ya~n~nadeva'] = [['ya~n','ya'],['~nad','ya'],['eva','eva']];
 
 var G_manualCompoundDec = [];
 G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];

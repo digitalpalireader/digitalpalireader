@@ -165,22 +165,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
   if(oneword == 'a' && nextpart && nextpart.charAt(0) == 'a') return;
 
-// tricks for parts that won't match otherwise
-
-  if(nextpart && !trick) {
-
-  // consonant insertion - for chayime, gives cha-y-ime, for ki~ncideva gives ki~nci-d-eva
-
-    if (/[dy]/.exec(oneword.charAt(oneword.length-1)) && /[aiueo]/.exec(nextpart.charAt(0)) && /[aiueo]/.exec(oneword.charAt(oneword.length-2)))
-    {
-      var trickmatch = findmatch(oneword.slice(0,-1),lastpart,nextpart,partslength,1);
-      if (trickmatch) {
-        if(devCheck > 0 && devDump == 1) ddump('trick16');
-        return [trickmatch[0]+'-' + oneword.charAt(oneword.length-1), trickmatch[1]+'@0^' + oneword.charAt(0) + '^3', (trickmatch[2] ? trickmatch[2] : '')+'$',nextpart,1];
-      }
-    }
-  }
-
 
   //if((lastpart || nextpart) && oneword.length == 1 && !/[na]/.exec(oneword)) return null;
 
@@ -191,7 +175,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   var wtr = [];
   var wtrN = [];
   var wtrV = [];
-
 
 // exact maches
 
@@ -286,6 +269,22 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     }
   }
 
+
+// tricks for parts that won't match otherwise
+
+  if(nextpart && !trick) {
+
+  // consonant insertion - for chayime, gives cha-y-ime, for ki~ncideva gives ki~nci-d-eva
+
+    if (!G_irregNoun[oneword] && /[dy]/.exec(oneword.charAt(oneword.length-1)) && /[aiueo]/.exec(nextpart.charAt(0)) && /[aiueo]/.exec(oneword.charAt(oneword.length-2)))
+    {
+      var trickmatch = findmatch(oneword.slice(0,-1),lastpart,nextpart,partslength,1);
+      if (trickmatch) {
+        if(devCheck > 0 && devDump == 1) ddump('trick16');
+        return [trickmatch[0]+'-' + oneword.charAt(oneword.length-1), trickmatch[1]+'@0^' + oneword.charAt(0) + '^3', (trickmatch[2] ? trickmatch[2] : '')+'$',nextpart,1];
+      }
+    }
+  }
 
 // make declensions
 
@@ -661,11 +660,12 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   }
 
   if(nextpart) {
-  // do this if compound part (not end)
+
+    // do this if compound part (not end)
 
   // tricks
 
-    if (res.length == 0 && resn.length == 0 && !resy && !trick) {
+    if (!trick) {
 
 
       var aiu1 = /[aiu]/.exec(oneword.charAt(oneword.length-1));
@@ -678,12 +678,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
     // verb + ukaam words (khu.msetukaamo, etc.)
 
-      if(!lastpart && oneword.charAt(oneword.length-1) == 'u' && /^kaam/.exec(nextpart) && !aiueom) {
-        if(/itu$/.exec(oneword) && oneword.length > 3) {
+      if(oneword.charAt(oneword.length-1) == 'u' && /^kaam/.exec(nextpart) && !aiueom) {
+        if(/[ei]tu$/.exec(oneword) && oneword.length > 3) {
           var oa = [];
           oa[0] = [];
           oa[1] = [];
-
           if (!isUncomp(oneword.slice(0,-3)+'ati',lastpart,nextpart)) {
             var trickmatch = findmatch(oneword.slice(0,-3)+'ati',lastpart,nextpart,partslength,2);
             if (trickmatch) {
@@ -693,7 +692,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
             }
           }
           if (!isUncomp(oneword.slice(0,-3)+'eti',lastpart,nextpart)) {
-            var trickmatch = findmatch(oneword.slice(0,-3)+'aati',lastpart,nextpart,partslength,2);
+            var trickmatch = findmatch(oneword.slice(0,-3)+'eti',lastpart,nextpart,partslength,2);
             if (trickmatch) {
               if(devCheck > 0 && devDump == 2) ddump('trick01 ' + oneword + ' ' + lastpart + ' '  + nextpart + ' '  + trickmatch[2]);
               oa[0].push(trickmatch[1]);
