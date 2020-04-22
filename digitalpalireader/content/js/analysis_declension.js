@@ -270,11 +270,11 @@ G_endings.push(['emi',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
 G_endings.push(['ema',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 
-  // a stem impv.
+  // a, aa stem impv.
 
-G_endings.push(['hi',0,3,'ti','v',[[2,2,1]]]);
-G_endings.push(['atu',1,2,'ti','v',[[2,1,1]]]);
-G_endings.push(['antu',1,1,'ti','v',[[2,1,2]]]);
+G_endings.push(['ahi',0,3,'ati','v',[[2,2,1]]]);
+G_endings.push(['atu',0,2,'ati','v',[[2,1,1]]]);
+G_endings.push(['antu',0,1,'ati','v',[[2,1,2]]]);
 
   // o stem impv.
 
