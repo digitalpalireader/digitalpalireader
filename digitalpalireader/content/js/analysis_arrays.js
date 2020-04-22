@@ -17,6 +17,7 @@ G_altStem['iiy'] = [['ati','aati','oti','eti'],1,1,0,'ati'];
 G_altStem['iiyiss'] = [['ati','aati','oti','eti'],1,1,0,'ati'];
 G_altStem['iss'] = [['ati','aati','oti'],1,1,0,'ati'];
 G_altStem['ess'] = [['ati','eti'],1,1,0,'ati'];
+G_altStem['ay'] = [['eti'],1,1,0,'ati'];
 
 // n to v
 G_altStem['iiyamaan'] = [['ati','aati','oti','eti'],0,1,0,'a'];
