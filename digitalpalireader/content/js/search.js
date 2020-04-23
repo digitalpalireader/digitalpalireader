@@ -181,7 +181,7 @@ function finishSearch() {
   DPR_PAL_Search_HideCancelButton();
 
   const searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook.slice(1,-1) + '&part=' + G_searchPart + '&rx=' + G_searchRX;
-  G_searchLink = DPR_PAL.normalizeDprSchemeUri(searchLink);
+  G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
 
   DPR_PAL_Search_AddCopyPermaLinkElement();
 
@@ -616,7 +616,7 @@ function createTables(xmlDoc,hiert)
 
               if(!DPR_prefs['showVariantsInline'])
 				texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
-				
+
               if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
               //texttomatch = texttomatch.replace(/\^b\^/g, '');

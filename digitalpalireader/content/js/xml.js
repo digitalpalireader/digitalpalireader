@@ -89,7 +89,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // permalink
 
-  var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
+  var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
   var permalink = `${bareurl}loc=${nikaya}.${bookno}.${meta}.${volume}.${vagga}.${sutta}.${section}.${hier}`;
 
   // get string from query
@@ -665,7 +665,7 @@ function loadXMLindex(place,compare) {
 
     var oldurl = DPR_PAL.contentDocument.location.href;
 
-    var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
+    var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
 
     var newparams = 'loc='+place.slice(0,8).join('.');
 
@@ -986,7 +986,7 @@ function loadXMLindex(place,compare) {
               saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
             }
             if(isPlace) {
-              var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
+              var link =  DPR_PAL.normalizeDprUri('dpr:index') + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
               var t = u[tmp6].getElementsByTagName("p");
               for (var tmp7 = 0; tmp7 < t.length; tmp7++) {
                 if(xset) { // thai
@@ -1100,7 +1100,7 @@ function loadXMLindex(place,compare) {
     // permalink
     var permalink = `${DPR_PAL.dprHomePage}?`;
     var oldurl = DPR_PAL.contentDocument.location.href;
-    var bareurl = 'dpr:index?';
+    var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
     var newparams = 'loc='+place.slice(0,8).join('.');
     bareurl += newparams;
     var oldparams = oldurl.split('?')[1];

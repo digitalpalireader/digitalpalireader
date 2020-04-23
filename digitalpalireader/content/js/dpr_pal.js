@@ -109,7 +109,7 @@ console.log('Loading DPR_PAL...');
   }
 
   const dprSchemeUriCracker = /^dpr:(.+)\?(.*)$/;
-  DPR_PAL.normalizeDprSchemeUri = uri => {
+  DPR_PAL.normalizeDprUri = uri => {
     if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
       return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}_dprhtml/$1.html?$2`);
     } else {

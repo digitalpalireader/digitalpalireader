@@ -93,16 +93,5 @@ var DPRChrome = {
   openSidebar: function () {
     toggleSidebar('viewDPR');
   },
-  historyPopstateHandler: function() {
-    var location = document.location.href;
-    if (location.indexOf('?feature=search') > -1) {
-      $("#mafbc").load("search-results.html");
-    } else if (location.indexOf('?feature=dictionary') > -1 &&
-      location.indexOf('#') == -1) {
-      $("#mafbc").load("dictionary-results.html");
-    } else {
-      $("#navigationDiv").load("navigation.html");
-    }
-  }
 }
 
