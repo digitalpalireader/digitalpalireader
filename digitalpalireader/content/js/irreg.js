@@ -392,6 +392,7 @@ G_irregVerb['jaaneyyaama'] = 'jaanaati';
 G_irregVerb['jaaniyaama'] = 'jaanaati';
 G_irregVerb['jaanemu'] = 'jaanaati';
 G_irregVerb['a~n~naasi'] = 'jaanaati';
+G_irregVerb['a~n~naasi.m'] = 'jaanaati';
 G_irregVerb['~nassati'] = 'jaanaati';
 G_irregVerb['~nassasi'] = 'jaanaati';
 G_irregVerb['jaananti'] = 'jaanaati';
