@@ -273,24 +273,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     }
   }
 
-
-// tricks for parts that won't match otherwise
-
-  if(nextpart && !trick) {
-
-  // consonant insertion - for chayime, gives cha-y-ime, for ki~ncideva gives ki~nci-d-eva
-
-    if (!G_irregNoun[oneword] && /[dy]/.exec(oneword.charAt(oneword.length-1)) && /[aiueo]/.exec(nextpart.charAt(0)) && /[aiueo]/.exec(oneword.charAt(oneword.length-2)))
-    {
-      var trickmatch = findmatch(oneword.slice(0,-1),lastpart,nextpart,partslength,1);
-      if (trickmatch) {
-        if(devCheck > 0 && devDump == 1) ddump('trick16');
-        return [trickmatch[0]+'-' + oneword.charAt(oneword.length-1), trickmatch[1]+'@0^' + oneword.charAt(0) + '^3', (trickmatch[2] ? trickmatch[2] : '')+'$',nextpart,1];
-      }
-    }
-  }
-
-// make declensions
+  // make declensions
 
   if(!nextpart) { // don't do stem matching on compound parts
 
@@ -636,6 +619,9 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
               if(typeof(yt[tw]) == 'object') {
                 sufashorts.push(tw);
               }
+              if(sufdefs.length == 0){
+                sufdefs.push('0^' + tw + '^3');
+              }
               sufadefs.push(sufdefs.join('#'));
             }
             if(devCheck > 0 && devDump == 1) ddump('match for special suffix '+cutsuf + ' with ' + oneword.substring(0,oneword.length-tempsuf)+(sufa[1] ? sufa[1][1] : ''));
@@ -882,6 +868,17 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
           var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
           if (trickmatch) {
             if(devCheck > 0 && devDump == 1) ddump('trick8');
+            return Array(trickmatch[0] + '-' + oneword.charAt(oneword.length-1), trickmatch[1] +'@0^' + oneword.charAt(oneword.length-1) + '^3', '$' + (trickmatch[2] ? trickmatch[2] : ''));
+          }
+        }
+      }
+
+      if (oneword.charAt(oneword.length-1) == 'r' && /[aiu]/.exec(oneword.charAt(oneword.length-2)) && oneword.length > 3)
+      {
+        if (!/[aiu]/.exec(oneword.charAt(oneword.length-3))) {
+          var trickmatch = findmatch(oneword.substring(0,oneword.length-1),lastpart,nextpart,partslength,1);
+          if (trickmatch) {
+            if(devCheck > 0 && devDump == 1) ddump('trick8c');
             return Array(trickmatch[0] + '-' + oneword.charAt(oneword.length-1), trickmatch[1] +'@0^' + oneword.charAt(oneword.length-1) + '^3', '$' + (trickmatch[2] ? trickmatch[2] : ''));
           }
         }

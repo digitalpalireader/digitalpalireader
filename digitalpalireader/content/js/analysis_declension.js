@@ -75,6 +75,7 @@ G_endings.push(['uuni',1,2,'','n',[[2,1,2],[2,2,2]]]);
 
 // f. aa
 G_endings.push(['a',1,2,'a','n']);
+G_endings.push(['aano',1,0,'','n',[[4,4,1],[4,6,1]]]);
 G_endings.push(['aayo',1,0,'','n',[[4,1,2],[4,2,2],[4,8,2]]]);
 G_endings.push(['aahi',1,0,'','n',[[4,3,2],[4,5,2]]]);
 G_endings.push(['aabhi',1,0,'','n',[[4,3,2],[4,5,2]]]);
@@ -213,6 +214,11 @@ G_endings.push(['oto',1,2,'ti','n']);
 G_endings.push(['otaa',1,2,'ti','n']);
 
 
+// indeclinable sandhi
+
+G_endings.push(['a',1,0,'.m','n']);
+
+
 // unsorted
 
 G_endings.push(['ahi',1,1,'','n']);
@@ -223,6 +229,7 @@ G_endings.push(['inna.m',1,1,'','n']);
 G_endings.push(['ataa',2,1,'i','n']);
 G_endings.push(['iya',0,2,'a','n']);
 G_endings.push(['uya.m',0,0,'','n']);
+
 
 //G_endings.push(['abba.m',1,1,'']);
 
