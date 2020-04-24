@@ -1504,6 +1504,8 @@ G_irregVerb['ahu'] = 'bhavati';
 G_irregVerb['abhinivissa'] = 'abhinivesa';
 G_irregVerb['.thassati'] = 'ti.t.thati';
 G_irregVerb['.thassanti'] = 'ti.t.thati';
+G_irregVerb['bhottu.m'] = 'bhu~njati';
+G_irregVerb['ujjaaleti'] = 'ujjalati';
 
 G_irregNoun['katihi'] = 'kati';
 G_irregNoun['keci'] = 'ka';
@@ -1515,11 +1517,18 @@ G_irregNoun['kassaci'] = 'ka';
 G_irregNoun['yida.m'] = 'ida';
 G_irregNoun['nti'] = 'iti';
 
+G_irregNoun['aki~nci'] = 'ki~nci'; // same?
+
 
 
 
 // compounds
 
+G_irregNoun['bhottu`'] = 'bhu~njati'; // fudge
+G_irregNoun['ujjaaletu'] = 'ujjalati';
+G_irregNoun['etad'] = 'eta';
+G_irregNoun['aha"n`'] = 'aha.m';
+G_irregNoun['uddha"n`'] = 'uddha.m';
 G_irregNoun['idam`'] = 'ida';
 G_irregNoun['etad`'] = 'eta';
 G_irregNoun['khv`'] = 'kho';
@@ -1532,6 +1541,9 @@ G_irregNoun['daatu`'] = 'dadaati';
 G_irregNoun['siitii`'] = 'siita0';
 G_irregNoun['siiti`'] = 'siita0';
 G_irregNoun['c`'] = 'ca';
+
+
+
 //G_irregNoun['ki~ncid`'] = 'ka';
 
 G_irregVerb['`mhi'] = 'atthi';

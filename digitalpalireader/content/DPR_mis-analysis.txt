@@ -1,0 +1,49 @@
+
+- optative 3rd 2nd 1st person singular ending in -e, e.g. pive (=piveyya). this should also be added to the conjugation table.
+
+>>> need declensions
+
+etadakiñci (etaṃ + akiñci)
+
+>>> akiñci = kiñci or negation?
+
+- some compounds where "y" gets inserted between two vowels due to sandhi, e.g.
+nayimassa (na + y + imassa)
+navayime ( nava + y + ime)
+chayimāni (cha + y + imāni)
+chayime (cha + y + ime)
+dasayimāni (dasa + y + imāni)
+nayidha (na + y + idha)
+sāyeva (sā + y + eva)
+
+>>> these already work but are not default match, are you not aware of the dropdown list of alternative matches?
+
+- some compounds where "m" gets inserted between two vowels due to sandhi, e.g.
+ca mavajānāti (ca + m + avajānāti),
+uggahaṇanti maññe (uggahaṇanti + m + aññe)
+
+>>> deferring these for later
+
+- some compounds where "r" gets inserted between two vowels due to sandhi, e.g.
+punareti (puna + r + eti)
+
+- some compounds where "t" gets inserted between two vowels due to sandhi, e.g.
+aṅganteva (aṅgaṃ + t + eva)
+
+- some compounds where sandi creates a long vowel at the beginning of the second word, e.g.
+sudāhaṃ (sudaṃ + ahaṃ)
+
+- some 3 word sandhis, e.g.
+ahaññeveko (ahaṃ + eva + eko)
+kiṃsūdha (kim + su + idha)
+kiñcetaṃ (kiṃ + ca + etaṃ)
+
+- words ending in -ī are sometimes confused with aorist 3rd sg ending in -i, e.g.
+jhāyinaṃ, jhāyiṃ (acc sg of jhāyī, seen as aor jhāyi)
+
+- words ending the suffixes -tta and -tā (state of) which often aren't headwords in the dictionary, e.g.
+bhītatta (bhīta + tta)
+
+- word where the 1st word of the compound ends in -a, which is mistaken for a negative of the second word e.g.
+gandhabbamānusā (seens as gandhabb-amānusā instead of gandhabba-mānusā)
+vutthabhāvena (vutth-abhāvena instead of vuttha-bhāvena)

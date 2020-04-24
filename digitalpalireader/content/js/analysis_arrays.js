@@ -17,6 +17,7 @@ G_altStem['iiy'] = [['ati','aati','oti','eti'],1,1,0,'ati'];
 G_altStem['iiyiss'] = [['ati','aati','oti','eti'],1,1,0,'ati'];
 G_altStem['iss'] = [['ati','aati','oti'],1,1,0,'ati'];
 G_altStem['ess'] = [['ati','eti'],1,1,0,'ati'];
+G_altStem['ay'] = [['eti'],1,1,0,'ati'];
 
 // n to v
 G_altStem['iiyamaan'] = [['ati','aati','oti','eti'],0,1,0,'a'];
@@ -57,6 +58,7 @@ G_uncompoundable['i'] = 1;
 G_uncompoundable['ii'] = 1;
 G_uncompoundable['u'] = 1;
 G_uncompoundable['uu'] = 1;
+G_uncompoundable['ena'] = 5;
 G_uncompoundable['ko'] = 1;
 G_uncompoundable['ka'] = 2;
 G_uncompoundable['kha'] = 1;
@@ -85,7 +87,9 @@ G_uncompoundable['vaa'] = 1;
 G_uncompoundable['ra'] = 1;
 G_uncompoundable['la'] = 1;
 G_uncompoundable['ha'] = 3;
+G_uncompoundable['so'] = 1;
 G_uncompoundable['se'] = 1;
+G_uncompoundable['sii'] = 5;
 G_uncompoundable['saa'] = 1;
 G_uncompoundable['saz1'] = 1;
 G_uncompoundable['saz2'] = 1;
@@ -156,6 +160,7 @@ G_manualCompoundInd['cevida.m'] = [['c','ca'],['ev','eva'],['ida.m','aya.m']];
 G_manualCompoundInd['natveva'] = [['na','na'],['tv','tu'],['eva','eva']];
 G_manualCompoundInd['tu.nhassa'] = [['tu.nh','tu.nhii'],['assa','assa4']];
 G_manualCompoundInd['svassa'] = [['sv','su'],['assa','assa4']];
+G_manualCompoundInd['ya~n~nadeva'] = [['ya~n','ya'],['~nad','ya'],['eva','eva']];
 
 var G_manualCompoundDec = [];
 G_manualCompoundDec['vi~n~naa.na~ncaayatana'] = [['vi~n~naa.na','vi~n~naa.na'],['~nca','aana~nca'],['ayatana','aayatana']];
