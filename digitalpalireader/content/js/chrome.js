@@ -5,6 +5,8 @@ function openFirstDPRTab() {
 }
 
 function openDPRTab(permalink, id, reuse) {
+  permalink = DPR_PAL.convertXulUrl(permalink);
+
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
 

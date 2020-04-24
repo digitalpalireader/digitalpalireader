@@ -54,7 +54,7 @@ var DPROverlay = {
     return false;
   },
   openDPRTab:function(permalink,id,reuse) {
-
+    permalink = DPR_PAL.convertXulUrl(permalink);
 
     if(reuse) { // reuse old tab
       var oldTab = this.findDPRTab(id);
