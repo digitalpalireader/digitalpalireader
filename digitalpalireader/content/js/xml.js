@@ -1093,27 +1093,22 @@ function loadXMLindex(place,compare) {
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
 
-  if (DPR_PAL.isWeb){
-    theDatao=digitalpalireader.makeWebAppropriate(theDatao);
-    $('#mafbc').append('<div id="paliTextContent">  '+theDatao+'</div>');
-  } else {
-    // permalink
-    var permalink = `${DPR_PAL.dprHomePage}?`;
-    var oldurl = DPR_PAL.contentDocument.location.href;
-    var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
-    var newparams = 'loc='+place.slice(0,8).join('.');
-    bareurl += newparams;
-    var oldparams = oldurl.split('?')[1];
-    if(oldparams) {
-      oldparams = oldparams.split('|');
-      oldparams[compare-1] = newparams;
-      newparams = oldparams.join('|');
-    }
-    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-
-    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-    $('#mafbc').append('<div>'+theDatao+'</div>');
+  // permalink
+  var permalink = `${DPR_PAL.dprHomePage}?`;
+  var oldurl = DPR_PAL.contentDocument.location.href;
+  var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
+  var newparams = 'loc='+place.slice(0,8).join('.');
+  bareurl += newparams;
+  var oldparams = oldurl.split('?')[1];
+  if(oldparams) {
+    oldparams = oldparams.split('|');
+    oldparams[compare-1] = newparams;
+    newparams = oldparams.join('|');
   }
+  var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+
+  DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+  $('#mafbc').append(`<div id="paliTextContent">${theDatao}</div>`);
   document.getElementById('maf').scrollTop = 0;
 
   // refresh history box

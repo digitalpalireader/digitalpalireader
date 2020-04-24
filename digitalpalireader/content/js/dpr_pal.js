@@ -167,7 +167,9 @@ console.log('Loading DPR_PAL...');
       .replace('?&', '?');
   };
 
-
+  //
+  // mainWindow.gBrowser emulation layer.
+  //
 
   DPR_PAL.windowHasFocus = false;
   let _mainWindow = null;

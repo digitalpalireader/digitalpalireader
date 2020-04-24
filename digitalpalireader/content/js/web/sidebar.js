@@ -252,6 +252,4 @@ var digitalpalireader = {
     if (nikn == 5 || nikn > 6) { return true; }
     else { return false };
   },
-
-  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }
