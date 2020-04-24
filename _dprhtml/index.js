@@ -46,12 +46,12 @@ async function mainInitialize() {
 }
 
 function installGlobalHandlers() {
-  window.onresize = () => {
+  window.addEventListener('resize', () => {
     setPrefs();
     initMainPane();
-  };
+  });
 
-  window.onpopstate = historyPopstateHandler;
+  window.addEventListener('popstate', () => historyPopstateHandler());
 }
 
 const loadFeatureAsync = async (name, initFn) => {

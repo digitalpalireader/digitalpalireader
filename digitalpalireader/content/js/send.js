@@ -463,7 +463,7 @@ function closePanel() {
     return;
   }
 
-  window.onunload=function(){ cW.reindexPanels() }
+  window.addEventListener('unload', function(){ cW.reindexPanels() });
   var url = cD.location.href.split('?');
   var params = url[1];
 

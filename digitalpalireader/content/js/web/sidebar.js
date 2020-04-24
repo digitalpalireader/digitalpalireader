@@ -149,31 +149,31 @@ var digitalpalireader = {
     $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
     $('#nav-title-button').show().text('≡').prop('title', 'Combine all sub-sections');
     if (navShown[4]) {
-      $('#nav-section-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+      $('#nav-section-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[3]) {
       navShown[4] ?
-        $('#nav-sutta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
-        $('#nav-sutta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-sutta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,5)") :
+        $('#nav-sutta-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[2]) {
       navShown[3] || navShown[4] ?
-        $('#nav-vagga-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
-        $('#nav-vagga-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-vagga-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)") :
+        $('#nav-vagga-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[1]) {
       navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-volume-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
-        $('#nav-volume-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-volume-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)") :
+        $('#nav-volume-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[0]) {
       navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-meta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
-        $('#nav-meta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-meta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)") :
+        $('#nav-meta-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
   },
 
@@ -251,41 +251,6 @@ var digitalpalireader = {
   limitt:function(nikn) {
     if (nikn == 5 || nikn > 6) { return true; }
     else { return false };
-  },
-
-  loadIndex:function(context){
-    switch(context) {
-      case 1:
-        importXMLindex("");
-        break;
-      case 2:
-        DPRSend.importXML(false,null,null,null,'internal',null,1);
-        break;
-    }
-  },
-
-  loadSection:function(context,category=6){
-    var aplace;
-    switch(context) {
-      case 1: // quick links
-        if($.trim($('#nav-quicklinks').val()) == ''){
-          alert('Input can not be left blank.');
-        } else
-          try {
-            DPRSend.sendQuickLink("", $('#nav-quicklinks').val());
-          }
-          catch(err) {
-            console.error('Potentially a bug.', err);
-            alert("Invalid quick link.");
-            aplace = this.getSubNavArray();
-            loadXMLSection("","",aplace);
-          }
-        break;
-      case 2: // book hierarchy
-        aplace = this.getSubNavArray().map((x,y)=>(y<(category+1) || y>6 )?x:"x");
-        loadXMLSection("","",aplace);
-        break;
-    }
   },
 
   makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
