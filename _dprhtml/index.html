@@ -7,13 +7,14 @@
     <link rel="icon" href="./favicon.png" />
 
     <script>
-      window.onerror = (message, source, lineno, colno, error) => {
-        console.error(">>>> Unhandled error: ", message, source, lineno, colno, error, error.stack);
-      };
+      window.addEventListener('error', e => {
+        const { message, source, lineno, colno, error } = e;
+        console.error(">>>> Unhandled error: ", message, source, lineno, colno, error, e);
+      });
 
-      window.onunhandledrejection = event => {
+      window.addEventListener('unhandledrejection', event => {
         console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
-      };
+      });
     </script>
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />

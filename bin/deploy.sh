@@ -39,5 +39,5 @@ echo ------ Compress stuff
 ls -laF "$RootDir/bin/asge/asge/"
 
 # NOTE: html cache age needs to be explicitly set to 0 on server side. http-equiv is not a valid HTML5 tag
-dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .html .htm .cache  -h 'no-cache, no-store'     -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
-dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml               -h 'public, max-age=864000' -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .html .htm .cache  -h 'no-store'                           -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml .css .js      -h 'public, max-age=2592000, immutable' -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"

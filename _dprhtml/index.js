@@ -46,12 +46,12 @@ async function mainInitialize() {
 }
 
 function installGlobalHandlers() {
-  window.onresize = () => {
+  window.addEventListener('resize', () => {
     setPrefs();
     initMainPane();
-  };
+  });
 
-  window.onpopstate = DPRChrome.historyPopstateHandler;
+  window.addEventListener('popstate', () => historyPopstateHandler());
 }
 
 const loadFeatureAsync = async (name, initFn) => {
@@ -166,3 +166,15 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
       }
     });
   })
+
+const  historyPopstateHandler = () => {
+  if (DPR_PAL.isNavigationFeature()) {
+    $("#navigationDiv").load("navigation.html");
+  } else if (DPR_PAL.isSearchFeature()) {
+    $("#mafbc").load("search-results.html");
+  } else if (DPR_PAL.isDictionaryFeature() && location.indexOf('#') == -1) {
+    $("#mafbc").load("dictionary-results.html");
+  } else {
+    console.error('Unknown feature');
+  }
+}

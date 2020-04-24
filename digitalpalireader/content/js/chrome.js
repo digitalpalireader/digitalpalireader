@@ -1,22 +1,11 @@
 'use strict';
 
 function openFirstDPRTab() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
-
   if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
 }
 
 function openDPRTab(permalink, id, reuse) {
-  if (DPR_PAL.isWeb) {
-    if (reuse) {
-      window.location.href = permalink;
-    } else {
-      window.open(permalink, '_blank');
-    }
-    return false;
-  }
+  permalink = DPR_PAL.convertXulUrl(permalink);
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -60,10 +49,6 @@ function openDPRTab(permalink, id, reuse) {
 
 
 function findDPRTab(id,loc) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
     // Get the next tab
@@ -80,10 +65,6 @@ function findDPRTab(id,loc) {
 }
 
 function findDPRTabs(id,loc) {
-  if (!DPR_PAL.isXUL) {
-    return [];
-  }
-
   var tabs = [];
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
@@ -101,10 +82,6 @@ function findDPRTabs(id,loc) {
 }
 
 function findDPRTabByLoc(loc) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   loc = new RegExp(loc);
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
@@ -139,16 +116,13 @@ function updatePrefs() {
 }
 
 function isDPRTab(id) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   if(DPR_PAL.mainWindow.gBrowser.selectedTab.id == id) return DPR_PAL.mainWindow.gBrowser.selectedTab;
   else return false;
 }
 
 function giveIDtoTabs() { // startup function, give ids to
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -175,6 +149,7 @@ function giveIDtoTabs() { // startup function, give ids to
 
 function checkLastTab() {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -205,6 +180,7 @@ function DPRSidebarWindow() {
 
 function DPRSidebarDocument() {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -218,6 +194,7 @@ function DPRSidebarDocument() {
 
 function closeDPRSidebar() {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return;
   }
 
@@ -229,6 +206,7 @@ function closeDPRSidebar() {
 }
 function openDPRSidebar() {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return;
   }
 
@@ -239,15 +217,16 @@ function openDPRSidebar() {
 }
 
 function setCurrentTitle(title) {
-    if (DPR_PAL.isXUL) {
+  if (DPR_PAL.isXUL) {
     DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-    } else {
+  } else {
     document.title = title;
-    }
   }
+}
 
 function closeBrowser(id) {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return;
   }
 
@@ -259,6 +238,7 @@ function closeBrowser(id) {
 
 function DPRBottomPaneUpdateStyle() {
   if (!DPR_PAL.isXUL) {
+    console.error('Not handled for web scenario');
     return;
   }
 
