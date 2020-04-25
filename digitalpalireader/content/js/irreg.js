@@ -9,6 +9,17 @@ var G_irregNoun = [];
 
 // Irregular Verbs
 
+G_irregVerb['abbuhati'] = 'abbahati';
+G_irregVerb['abbaha'] = 'abbahati';
+G_irregVerb['abbahi'] = 'abbahati';
+G_irregVerb['abbahī'] = 'abbahati';
+G_irregVerb['abbuhi'] = 'abbahati';
+G_irregVerb['abbuyha'] = 'abbahati';
+G_irregVerb['avyuyha'] = 'abbahati';
+G_irregVerb['abbuḷha'] = 'abbahati';
+G_irregVerb['abbāheti'] = 'abbahati';
+G_irregVerb['abbāhitvā'] = 'abbahati';
+
 G_irregVerb['abhijaanaasi'] = 'abhijaanaati';
 G_irregVerb['abhijaananti'] = 'abhijaanaati';
 G_irregVerb['abhijaanaatha'] = 'abhijaanaati';
@@ -392,6 +403,7 @@ G_irregVerb['jaaneyyaama'] = 'jaanaati';
 G_irregVerb['jaaniyaama'] = 'jaanaati';
 G_irregVerb['jaanemu'] = 'jaanaati';
 G_irregVerb['a~n~naasi'] = 'jaanaati';
+G_irregVerb['a~n~naasi.m'] = 'jaanaati';
 G_irregVerb['~nassati'] = 'jaanaati';
 G_irregVerb['~nassasi'] = 'jaanaati';
 G_irregVerb['jaananti'] = 'jaanaati';
@@ -1524,6 +1536,7 @@ G_irregNoun['aki~nci'] = 'ki~nci'; // same?
 
 // compounds
 
+G_irregNoun['ta.nha'] = 'ta.nhaa';// fudge
 G_irregNoun['bhottu`'] = 'bhu~njati'; // fudge
 G_irregNoun['ujjaaletu'] = 'ujjalati';
 G_irregNoun['etad'] = 'eta';

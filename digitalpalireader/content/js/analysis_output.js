@@ -15,6 +15,10 @@ function outputDef(which,first,frombox)
     $('#anfs').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
 
     // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
+    for(var i = 0; i < G_outwords.length; i++)
+    {
+      G_outwords[i].push(G_shortdefpost[i]);
+    }
 
     G_outwords.sort(function (a, b) {
 
@@ -84,6 +88,12 @@ function outputDef(which,first,frombox)
 
     });
     
+    for(var i = 0; i < G_outwords.length; i++)
+    {
+      G_shortdefpost[i] = G_outwords[i][G_outwords[i].length-1];
+    }
+
+
     var sorta = [];
 
     for (var b = 0; b < G_outwords.length; b++)
