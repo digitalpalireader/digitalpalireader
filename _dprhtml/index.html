@@ -10,10 +10,13 @@
       window.addEventListener('error', e => {
         const { message, source, lineno, colno, error } = e;
         console.error(">>>> Unhandled error: ", message, source, lineno, colno, error, e);
+        appInsights.flush();
       });
 
       window.addEventListener('unhandledrejection', event => {
         console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
+        appInsights.trackException({ message: 'unhandledrejection', promise: event.promise, reason: event.reason, });
+        appInsights.flush();
       });
     </script>
 
@@ -41,6 +44,15 @@
           instrumentationKey: appInsightsInstrumentationKey
         }
       ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+
+      appInsights.addTelemetryInitializer(
+        e => {
+          e.data['dpr.environment.name'] = environmentName;
+          e.data['dpr.release.number'] = releaseNumber;
+          e.data['dpr.created.timestamp'] = createdTimestamp;
+          return true;
+        }
+      );
     </script>
   </head>
 
