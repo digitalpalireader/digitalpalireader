@@ -18,7 +18,7 @@ var DPRChrome = {
       // Get the next tab
       var currentTab = tb.tabContainer.childNodes[index];
       var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) { // a dpr tab
+      if (DPR_PAL.dprUrlMatcher.test(ctloc)) { // a dpr tab
         tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
         if (/^DPR/.test(currentTab.id)) continue;
         if (/index\.xul/.test(ctloc)) currentTab.setAttribute('id', (main++ == 0 ? 'DPR-main' : 'DPRm'));
@@ -100,7 +100,7 @@ var DPRChrome = {
       var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
       // Does this tab contain our custom attribute?
-      if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) {
+      if (DPR_PAL.dprUrlMatcher.test(ctloc)) {
 
         return currentTab;
       }

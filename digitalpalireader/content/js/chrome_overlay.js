@@ -42,7 +42,7 @@ var DPROverlay = {
       // Get the next tab
       var currentTab = tb.tabContainer.childNodes[index];
       var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+      if (DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
         tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
         if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
         else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
@@ -75,7 +75,7 @@ var DPROverlay = {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
+      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !DPR_PAL.dprUrlMatcher.exec(ctloc)) { // not a dpr tab
         if (start == 1) { // prev was a DPR tab
           newIdx = index;
           break;
@@ -104,7 +104,7 @@ var DPROverlay = {
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
       // Does this tab contain our custom attribute?
-      if ((id && currentTab.getAttribute('id') == id || !id && /^DPR/.exec(currentTab.getAttribute('id'))) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+      if ((id && currentTab.getAttribute('id') == id || !id && /^DPR/.exec(currentTab.getAttribute('id'))) && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
         return currentTab;
       }
@@ -123,7 +123,7 @@ var DPROverlay = {
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
       // Does this tab contain our custom attribute?
-      if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+      if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
         return currentTab;
       }

@@ -28,7 +28,7 @@ function openDPRTab(permalink, id, reuse) {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
+      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !DPR_PAL.dprUrlMatcher.exec(ctloc)) { // not a dpr tab
         if (start == 1) { // prev was a DPR tab
           newIdx = index;
           break;
@@ -56,7 +56,7 @@ function findDPRTab(id,loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+    if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
       return currentTab;
     }
@@ -73,7 +73,7 @@ function findDPRTabs(id,loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+    if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
       tabs.push(currentTab);
     }
@@ -90,7 +90,7 @@ function findDPRTabByLoc(loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && loc.exec(ctloc)) {
+    if (DPR_PAL.dprUrlMatcher.exec(ctloc) && loc.exec(ctloc)) {
 
       return currentTab;
     }
@@ -109,7 +109,7 @@ function updatePrefs() {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-    if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       currentTab.linkedBrowser.contentWindow.getconfig();
     }
   }
@@ -135,7 +135,7 @@ function giveIDtoTabs() { // startup function, give ids to
     // Get the next tab
     var currentTab = tb.tabContainer.childNodes[index];
     var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-    if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
       if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
       else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
@@ -157,7 +157,7 @@ function checkLastTab() {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
-    if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       return false; // still one open tab
     }
   }

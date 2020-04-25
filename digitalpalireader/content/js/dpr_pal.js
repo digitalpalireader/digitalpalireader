@@ -178,15 +178,22 @@ console.log('Loading DPR_PAL...');
     'mainWindow',
     {
       get() {
-        if (window.opener && !window.opener.closed) {
-          return window.opener.DPR_PAL.mainWindow;
-        } else {
-          if (!_mainWindow) {
-            _mainWindow = DPR_PAL.createMainWindow(window);
-          }
-
-          return _mainWindow;
+        if (!_mainWindow) {
+          _mainWindow = DPR_PAL.createMainWindow(window);
         }
+
+        return _mainWindow;
+
+        // TODO: Enable once we have a solution for https://github.com/digitalpalireader/digitalpalireader/issues/185
+        // if (window.opener && !window.opener.closed) {
+        //   return window.opener.DPR_PAL.mainWindow;
+        // } else {
+        //   if (!_mainWindow) {
+        //     _mainWindow = DPR_PAL.createMainWindow(window);
+        //   }
+
+        //   return _mainWindow;
+        // }
       },
       enumerable: true,
       configurable: true,
@@ -285,6 +292,7 @@ console.log('Loading DPR_PAL...');
 
       getBrowserForTab(tab) {
         return {
+          contentWindow: tab._window,
           contentDocument: {
             location: tab._window.document.location,
             getElementById: id => {
@@ -328,7 +336,7 @@ console.log('Loading DPR_PAL...');
       get tabContainer() {
         return {
           childNodes: [
-          ...this._childNodes.filter(x => !x._window.closed),
+            ...this._childNodes.filter(x => !x._window.closed),
           ],
         };
       },
@@ -339,6 +347,7 @@ console.log('Loading DPR_PAL...');
 
     return {
       gBrowser: gBrowser,
+      document: window.document,
     };
   };
 

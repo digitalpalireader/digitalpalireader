@@ -91,10 +91,12 @@ function openXMLindex(nikaya,bookno,hier,add) {
       openDPRTab(permalink,'DPR-main');
     }
     else {
-      loadXMLindex([nikaya,bookno,hier]);
+      DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
+      var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
+      oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLindex([nikaya,bookno,hier]);
     }
   }
-  else if (add == 'internal' ) {
+  else if (add == 'internal') {
     loadXMLindex([nikaya,bookno,hier]);
   }
   else if (add == 'shift') {
@@ -268,7 +270,13 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendPlace(place) {
-  DPRSidebarWindow().DPRNav.gotoPlace(place);
+  var sidebar = DPRSidebarWindow();
+  if (sidebar) {
+    sidebar.DPRNav.gotoPlace(place);
+  }
+  else{
+    DPRNav.gotoPlace(place);
+  }
 }
 
 function sendUpdateBookmarks() {
@@ -289,22 +297,19 @@ var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
 
-  // these are needed regardless of the container - Web / Extension
   if(add == 'right') return;
   if(window.getSelection().toString())
     return;
-
-  // Highlight the clicked element and un-highlight any previously clicked one.
-  // This should be done in both versions: Web and Extension
-  if (divclicked) {
-    divclicked = 'W' + divclicked;
+  if(divclicked) {
+    divclicked = 'W'+divclicked;
     var cdiv = document.getElementById(divclicked);
-
-    if (cdiv) {
+    if (cdiv)
+    {
       var ldiv = document.getElementById(G_lastcolour);
-      if (ldiv) {
+      if (ldiv)
+      {
         var lcn = ldiv.className;
-        if (/varc/.test(lcn))
+        if(/varc/.test(lcn))
           ldiv.style.color = DPR_prefs['grey'];
         else
           ldiv.style.color = DPR_prefs['coltext'];
@@ -315,22 +320,9 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
       cdiv.style.border = `2px inset ${colsel}`;
       G_lastcolour = divclicked;
     }
-    if (DPR_prefs['copyWord'])
+    if(DPR_prefs['copyWord'])
       copyToClipboard(input);
   }
-
-  if (DPR_PAL.isWeb) {
-    if(add != true) { // reuse old tab
-      outputAnalysis(input,frombox);
-    } else {
-      console.error('Not yet implemented');
-      var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
-      openDPRTab(permalink,'DPRx');
-    }
-
-    return;
-  }
-
   if(add != true) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
@@ -380,6 +372,37 @@ function sendTranslate(input, add){
   else {
     var permalink = 'chrome://digitalpalireader/content/translate.htm' + '?phrase='+toVel(input);
     openDPRTab(permalink,'DPRx');
+  }
+}
+
+function openTranslation(url,add) {
+  if(add == 'right') return;
+
+  const sInfo = DPR_Translations.parsePlace(url);
+  if (add == 'shift') {
+    openDPRTab(`${DPR_Translations.resolveUri(sInfo)}`, 'DPRx');
+  }
+  else {
+    var thisTab = isDPRTab('DPRm');
+    if(thisTab) {
+      var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
+      var doc = thisTabBrowser.contentDocument;
+      var elem = doc.getElementById('dpr-tops');
+      DPR_Chrome.addMainPanelSection(sInfo);
+      return;
+    }
+    var oldTab = findDPRTab('DPR-main');
+    if (!oldTab) {
+      openDPRTab(url,'DPRx');
+    }
+    else {
+      DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
+      var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
+      var doc = oldTabBrowser.contentDocument;
+      var elem = doc.getElementById('dpr-tops');
+      DPR_Chrome.addMainPanelSection(sInfo);
+      return;
+    }
   }
 }
 
@@ -479,19 +502,6 @@ function sidebarSearch(nik,book,hiert) {
 }
 
 var DPR_Send = (function () {
-  const openTranslation = (uri, add) => {
-    if (add == 'right') {
-      return;
-    }
-
-    const sInfo = DPR_Translations.parsePlace(uri);
-    if (add == 'shift') {
-      openDPRTab(`${DPR_Translations.resolveUri(sInfo)}`, 'DPRx');
-    } else {
-      DPR_Chrome.addMainPanelSection(sInfo);
-    }
-  }
-
   return {
     openTranslation: openTranslation,
   };
