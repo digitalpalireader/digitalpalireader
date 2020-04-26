@@ -39,6 +39,10 @@ body .btn {
   background-color: #FFD;
 }
 
+#main-container-loading-page-progressbar.nanobar .bar {
+  background-color: #38f;
+}
+
 #main-container-loading-page-spinner {
   position: absolute;
   left: 50%;

@@ -124,7 +124,7 @@ function DPR_keypress(e) {
   }
 
   if (e.key === 'h') {
-    openDPRTab('help.html', 'DPR-help', 0);
+    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
     return;
   }
 
