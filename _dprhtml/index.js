@@ -51,7 +51,7 @@ function installGlobalHandlers() {
     initMainPane();
   });
 
-  window.addEventListener('popstate', () => historyPopstateHandler());
+  window.addEventListener('popstate', e => historyPopstateHandler(e));
 }
 
 const loadFeatureAsync = async (name, initFn) => {
@@ -167,7 +167,8 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
     });
   })
 
-const  historyPopstateHandler = () => {
+const  historyPopstateHandler = e => {
+  console.warn('>>>> historyPopstateHandler', e);
   if (DPR_PAL.isNavigationFeature()) {
     $("#navigationDiv").load("navigation.html");
   } else if (DPR_PAL.isSearchFeature()) {
