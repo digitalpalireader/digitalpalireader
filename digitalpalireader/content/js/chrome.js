@@ -122,7 +122,6 @@ function isDPRTab(id) {
 
 function giveIDtoTabs() { // startup function, give ids to
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -149,7 +148,6 @@ function giveIDtoTabs() { // startup function, give ids to
 
 function checkLastTab() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -180,7 +178,6 @@ function DPRSidebarWindow() {
 
 function DPRSidebarDocument() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -194,7 +191,6 @@ function DPRSidebarDocument() {
 
 function closeDPRSidebar() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
@@ -206,7 +202,6 @@ function closeDPRSidebar() {
 }
 function openDPRSidebar() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
@@ -226,7 +221,6 @@ function setCurrentTitle(title) {
 
 function closeBrowser(id) {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
@@ -238,7 +232,6 @@ function closeBrowser(id) {
 
 function DPRBottomPaneUpdateStyle() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
