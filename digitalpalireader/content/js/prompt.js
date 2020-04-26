@@ -13,13 +13,13 @@ function aboutPrompt() {
   // that was selected. Get the item using items[selected].value.
   switch(selected.value) {
     case 0:
-      openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1);
+      openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/help.htm'),'DPR-help',1);
     break;
     case 1:
       openDPRTab('http://pali.sirimangalo.org/');
     break;
     case 2:
-      openDPRTab('chrome://digitalpalireader/content/contact.htm','DPRc');
+      openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/contact.htm'),'DPRc');
     break;
   }
 }

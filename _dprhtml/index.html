@@ -129,7 +129,7 @@
                 <!--ko let: { gotoMyanmarCmd: commands.gotoMyanmarCmd(), gotoThaiCmd: commands.gotoThaiCmd() }-->
                 <div class="context-menu-main-row-group" data-bind="visible: gotoMyanmarCmd.visible || gotoThaiCmd.visible">
                   <button type="button" class="btn btn-sm btn-light" data-bind="visible: gotoMyanmarCmd.visible, enable: gotoMyanmarCmd.canExecute, click: gotoMyanmarCmd.execute(), attr: { title: gotoMyanmarCmd.title }">M</button>
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: gotoThaiCmd.visible, enable: false,          click: gotoThaiCmd.execute(), attr: { title: gotoThaiCmd.title }">T</button>
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: gotoThaiCmd.visible, enable: gotoThaiCmd.canExecute, click: gotoThaiCmd.execute(), attr: { title: gotoThaiCmd.title }">T</button>
                 </div>
                 <!--/ko-->
               </div>

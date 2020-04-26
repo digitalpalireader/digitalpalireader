@@ -39,7 +39,7 @@ function loadIntoWindow(window) {
   button.setAttribute("tooltiptext", "Digital Pali Reader");
   button.setAttribute("role", "button");
   button.addEventListener("click", function() {
-    var theTab          = window.gBrowser.addTab('chrome://digitalpalireader/content/index.htm');
+    var theTab          = window.gBrowser.addTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.htm'));
     theTab.label        = "Digital Pali Reader";
     gBrowser.selectedTab = theTab;
     var func = function () { window.gBrowser.setIcon(theTab, "chrome://digitalpalireader/skin/icons/logo.png"); };

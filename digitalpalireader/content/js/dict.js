@@ -46,7 +46,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
     G_dictOpts = dictOpts;
     G_dictEntry = dictEntry;
 
-    var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:''));
     try {
       window.history.replaceState('Object', 'Title', permalink);
     }

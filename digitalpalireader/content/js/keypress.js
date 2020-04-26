@@ -109,7 +109,7 @@ function keyPressed(e) {
     return;
   }
 
-  if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.htm'; return;} // r
+  if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href=DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.htm'); return;} // r
 
   //devO(e.charCode);
 }

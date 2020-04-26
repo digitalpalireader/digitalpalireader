@@ -1,11 +1,11 @@
 'use strict';
 
 function openFirstDPRTab() {
-  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
+  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main',DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'),'');
 }
 
 function openDPRTab(permalink, id, reuse) {
-  permalink = DPR_PAL.convertXulUrl(permalink);
+  permalink = DPR_PAL.toWebUrl(permalink);
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -172,7 +172,7 @@ function DPRSidebarWindow() {
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
 
-  if (sidebar.contentDocument.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.contentDocument.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar.contentWindow;
   }
   else return false
@@ -186,7 +186,7 @@ function DPRSidebarDocument() {
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar;
   }
   else return false
@@ -200,7 +200,7 @@ function closeDPRSidebar() {
 
   var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebarWindow.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return DPR_PAL.mainWindow.toggleSidebar();
   }
 }
@@ -211,7 +211,7 @@ function openDPRSidebar() {
   }
 
   var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-  if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebarWindow.location.href != DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
   }
 }

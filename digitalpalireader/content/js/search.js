@@ -40,7 +40,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
     G_searchPart = searchPart;
     G_searchRX = searchRX;
 
-    var permalink = 'chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX);
 
     try {
       MW.history.replaceState('Object', 'Title', permalink);

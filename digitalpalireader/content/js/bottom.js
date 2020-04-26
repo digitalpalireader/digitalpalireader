@@ -30,11 +30,11 @@ function onDocLoadx() {
           break;
       }
     }
-    document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
+    document.getElementById('dict').contentDocument.location.href = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/bottom.htm'+linkb);
   }
   else {
     moveFrame(6);
-    document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm';
+    document.getElementById('dict').contentDocument.location.href = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/bottom.htm');
   }
 }
 function getconfigx() {

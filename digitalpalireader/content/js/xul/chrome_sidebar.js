@@ -23,7 +23,7 @@ var DPRChrome = {
       // Get the next tab
       var currentTab = tb.tabContainer.childNodes[index];
       var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) { // a dpr tab
+      if (DPR_PAL.dprUrlMatcher.test(ctloc)) { // a dpr tab
         tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
         if(/^DPR/.test(currentTab.id)) continue;
         if(/index\.xul/.test(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
@@ -57,7 +57,7 @@ var DPRChrome = {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (!/^DPR/.test(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) { // not a dpr tab
+      if (!/^DPR/.test(currentTab.getAttribute('id')) || !DPR_PAL.dprUrlMatcher.test(ctloc)) { // not a dpr tab
         if (start == 1) { // prev was a DPR tab
           newIdx = index;
           break;
@@ -75,7 +75,7 @@ var DPRChrome = {
 
   },
   openFirstDPRTab:function() {
-    if(!this.findDPRTab()) this.openDPRTab('chrome://digitalpalireader/content/index.xul','DPR-main');
+    if(!this.findDPRTab()) this.openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'),'DPR-main');
   },
 
   findDPRTab:function(id) {
@@ -84,7 +84,7 @@ var DPRChrome = {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.test(ctloc) && (!DPR_tabs[id] || DPR_tabs[id].test(ctloc))) {
+      if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_tabs[id] || DPR_tabs[id].test(ctloc))) {
 
         return currentTab;
       }
@@ -94,7 +94,7 @@ var DPRChrome = {
   isThisDPRTab:function(id) {
     var currentTab = mainWindow.gBrowser.selectedTab;
     var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-    if(mainWindow.gBrowser.selectedTab.id == id && /chrome:\/\/digitalpalireader\/content\//.test(ctloc) && (!DPR_tabs[id] || DPR_tabs[id].test(ctloc))) return mainWindow.gBrowser.selectedTab;
+    if(mainWindow.gBrowser.selectedTab.id == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_tabs[id] || DPR_tabs[id].test(ctloc))) return mainWindow.gBrowser.selectedTab;
     else return false;
   },
   DPRTab:function(id) {
@@ -105,7 +105,7 @@ var DPRChrome = {
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
       // Does this tab contain our custom attribute?
-      if (/chrome:\/\/digitalpalireader\/content\//.test(ctloc)) {
+      if (DPR_PAL.dprUrlMatcher.test(ctloc)) {
 
         return currentTab;
       }
@@ -119,7 +119,7 @@ var DPRChrome = {
   DPRSidebarDocument: function() {
     var sidebar = mainWindow.document.getElementById("sidebar").contentDocument;
 
-    if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+    if (sidebar.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
       return sidebar;
     }
     else return false

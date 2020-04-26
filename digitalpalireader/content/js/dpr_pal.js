@@ -38,7 +38,7 @@ console.log('Loading DPR_PAL...');
       var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
       for (var i = 0; i < files.length; i++) {
         if (!/\.js$/.test(files[i]))
-          files[i] = 'chrome://digitalpalireader/content/js/' + files[i] + '.js';
+          files[i] = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/js/' + files[i] + '.js');
         try {
           loader.loadSubScript(files[i], null, 'UTF-8');
         }
@@ -157,7 +157,7 @@ console.log('Loading DPR_PAL...');
     return `${baseUrl}?${newQps.join('&')}`;
   };
 
-  DPR_PAL.convertXulUrl = url => {
+  DPR_PAL.toWebUrl = url => {
     const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict)\.(xul|htm)(\?)?(.*)$/i
 
     return url

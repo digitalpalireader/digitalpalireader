@@ -121,7 +121,7 @@ const dprCommandList = [
   },
   {
     id: DPR_CMD_GOTO_THAI,
-    notImplemented: true,
+    notImplemented: false,
     canExecute: false,
     execute: emptyFn,
     visible: false,
