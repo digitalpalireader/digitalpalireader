@@ -80,6 +80,7 @@ const DPR_CMD_TRANSLATE_8 = 'translate8';
 const DPR_CMD_TRANSLATE_9 = 'translate9';
 const DPR_CMD_TRANSLATE_10 = 'translate10';
 const DPR_CMD_ENTER_QUICK_REFERENCE = 'enterQuickReference';
+const DPR_CMD_OPEN_SETTINGS = 'openSettings';
 
 const emptyFn = () => {};
 
@@ -356,10 +357,20 @@ const dprCommandList = [
     matchKey: e => false,
   },
   {
+    id: DPR_CMD_OPEN_SETTINGS,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __settingsDialogViewModel.showSettingsDialog(),
+    visible: true,
+    isDymanic: false,
+    title: "Open settings dialog (Keyboard shortcut: %)",
+    matchKey: e => e.key === '%',
+  },
+  {
     id: DPR_CMD_ENTER_QUICK_REFERENCE,
     notImplemented: false,
     canExecute: true,
-    execute: () => emptyFn,
+    execute: () => __otherDialogsViewModel.showQuickLinksDialog(),
     visible: true,
     isDymanic: false,
     title: "Enter quick reference (Keyboard shortcut: q)",

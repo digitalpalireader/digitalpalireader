@@ -11,6 +11,11 @@ class SettingsDialogTabsViewModel {
     this.translits = ko.observable(getPref('translits'));
   }
 
+  showSettingsDialog() {
+    $('#settings-dialog-root').modal('show');
+    return;
+  }
+
   savePreferences() {
     localStorage['DPR_Prefs_colfont'] = this.colfont();
     localStorage['DPR_Prefs_colsize'] = this.colsize();

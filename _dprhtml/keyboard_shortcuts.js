@@ -29,28 +29,6 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (false && e.key === 'q') { // q
-
-    var check = { value: false };                  // default the checkbox to false
-
-    var input = { value: "" };
-
-    var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
-
-    // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
-
-    if (!result) return;
-
-    var place = input.value;
-
-    var outplace = convertShortLink(place);
-    if (outplace[0] === false) return alertFlash(outplace[1], outplace[2]);
-    //dalert(outplace);
-
-    var para = outplace.pop();
-    openPlace(outplace, para);
-  }
-
   if (false && e.key === 's') {
     if (window.getSelection().toString() != '') {
       wMain.sendtoconvert(window.getSelection().toString() + '');
@@ -96,11 +74,6 @@ function DPR_keypress(e) {
   if (false && e.key === '.') {
     if (dBot.getElementById('bout')) dBot.getElementById('bout').onclick();
     else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
-    return;
-  }
-
-  if (e.key === '%') {
-    $('#settings-dialog-root').modal('show');
     return;
   }
 
