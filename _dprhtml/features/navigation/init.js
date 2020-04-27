@@ -94,26 +94,15 @@ const parseNavigationURLParams = () => {
 
 const initializeNavigationSidebarTab = () => {
   parseNavigationURLParams();
-  const sidebarTab = $(`#${navigationFeatureName}TabContent`)[0];
-  ko.applyBindings(__navigationTabViewModel, sidebarTab);
-  var navset = $("#nav-set");
-  for (var i in G_nikFullNames) {
-    __navigationTabViewModel.navset.push({value: i, label: G_nikFullNames[i]});
-  }
-
-  digitalpalireader.setBookList(__navigationTabViewModel.set());
-  digitalpalireader.changeSet();
-  navset.change(function () {
-    __navigationTabViewModel.book('1');
-    digitalpalireader.changeSet();
-  });
-  $("#nav-book").change(function () {
-    digitalpalireader.updateSubnav(0);
-  });
-
-  $('#nav-title').prop('title', 'View index for this book');
 
   DPR_PAL.enablePopover('#quicklinks-info', 'hover', 'right');
-
   DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover', 'right');
+
+  ko.applyBindings(__navigationTabViewModel, $(`#${navigationFeatureName}TabContent`)[0]);
+
+  Object
+    .entries(G_nikFullNames)
+    .forEach(([value, label]) => __navigationTabViewModel.navset.push({ value, label }))
+
+  DPRNav.changeSet(1);
 }

@@ -2,26 +2,26 @@
 
 var DPRNav = {
   changeSet: function (noget, book) {
-    var nik = document.getElementById('set').value;
-    if (G_hier == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
-      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
-      document.getElementById('set').selectedIndex = oldnikaya;
+    var nik = document.getElementById('nav-set').value;
+    if (G_hier == 't' && this.limitt(document.getElementById('nav-set').selectedIndex)) {
+      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('nav-set').value] + '.');
+      document.getElementById('nav-set').selectedIndex = oldnikaya;
       return;
     }
-    if (G_hier == 'a' && document.getElementById('set').value == 'g') {
+    if (G_hier == 'a' && document.getElementById('nav-set').value == 'g') {
       alert('Atthakatha not available for Gram.');
-      document.getElementById('set').selectedIndex = oldnikaya;
+      document.getElementById('nav-set').selectedIndex = oldnikaya;
       return;
     }
-    if (G_hier == 'a' && document.getElementById('set').value == 'b') {
+    if (G_hier == 'a' && document.getElementById('nav-set').value == 'b') {
       alert('Atthakatha not available for Abhidh-s.');
-      document.getElementById('set').selectedIndex = oldnikaya;
+      document.getElementById('nav-set').selectedIndex = oldnikaya;
       return;
     }
-    oldnikaya = document.getElementById('set').selectedIndex;
+    oldnikaya = document.getElementById('nav-set').selectedIndex;
 
     this.setBookList(nik, book);
-    DPRXML.updateHierarchy(0);
+    //DPRXML.updateHierarchy(0);
   },
 
 
@@ -37,11 +37,12 @@ var DPRNav = {
   },
 
   setBookList: function (nik, book) {
-    var checkNikaya = '<table><tr><td valign="top">';
+    __navigationTabViewModel.navBook.removeAll();
 
-    if (nikvoladi[nik]) var titles = nikvoladi[nik];
-    else var titles = nikvoladi[nik + G_hier];
-    var bookNode = document.getElementById('book');
+    var titles;
+    if (nikvoladi[nik]) titles = nikvoladi[nik];
+    else titles = nikvoladi[nik + G_hier];
+    var bookNode = document.getElementById('nav-book');
     while (bookNode.itemCount > 0) bookNode.removeItemAt(0);
     for (var i = 0; i < titles.length; i++) {
       if (nik == 'k' || nik == 'y' || nik == 'n') {
@@ -52,8 +53,7 @@ var DPRNav = {
         var title = titles[i];
         var val = i + 1;
       }
-      bookNode.appendItem(translit(title));
-      bookNode.getItemAtIndex(i).value = val;
+      __navigationTabViewModel.navBook.push({value: val, label: translit(title)});
     }
     bookNode.selectedIndex = book ? book : 0;
   },
@@ -98,19 +98,19 @@ var DPRNav = {
 
     var himg = ['l', 'm', 'r'];
 
-    if (htmp == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
+    if (htmp == 't' && this.limitt(document.getElementById('nav-set').selectedIndex)) {
       var MAT = document.getElementById('mul').checked == true ? 'mul' : 'att';
-      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
+      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('nav-set').value] + '.');
       setTimeout(function () { document.getElementById(MAT).checked = true }, 10);
       return;
     }
-    if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
-      alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
+    if (htmp == 'a' && document.getElementById('nav-set').selectedIndex > 7) {
+      alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('nav-set').value] + '.');
       setTimeout(function () { document.getElementById('mul').checked = true }, 10);
       return;
     }
-    if (document.getElementById('set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('book').value] == undefined) {
-      alert('Aṭṭhakathā not available for ' + this.getBookName(document.getElementById('set').value, htmp, document.getElementById('book').selectedIndex) + '.');
+    if (document.getElementById('nav-set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('nav-book').value] == undefined) {
+      alert('Aṭṭhakathā not available for ' + this.getBookName(document.getElementById('nav-set').value, htmp, document.getElementById('nav-book').selectedIndex) + '.');
       setTimeout(function () { document.getElementById('mul').checked = true }, 10);
       return;
     }
@@ -118,8 +118,8 @@ var DPRNav = {
     G_hier = htmp;
 
 
-    var book = document.getElementById('book').value;
-    if (document.getElementById('set').value == 'k') {
+    var book = document.getElementById('nav-book').value;
+    if (document.getElementById('nav-set').value == 'k') {
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -127,8 +127,8 @@ var DPRNav = {
         book = kudvala[book];
       }
     }
-    else if (document.getElementById('set').value == 'y') {
-      var book = document.getElementById('book').value;
+    else if (document.getElementById('nav-set').value == 'y') {
+      var book = document.getElementById('nav-book').value;
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -320,7 +320,7 @@ var DPRNav = {
   },
 
   searchBook: function (nik, book, hiert) {
-    DPR_Chrome.openNewSidebar();
+    DPR_Chrome.openDPRSidebar();
     $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();

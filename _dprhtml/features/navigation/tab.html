@@ -46,11 +46,11 @@
       <div class="form-row mb-2">
         <div class="form-group col-md-6 mb-1" id="nav-set-div">
           <label class="small-bold-font" for="nav-set">Set</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set" data-bind="options: navset, optionsText: 'label', optionsValue: 'value', value: set, valueAllowUnset: true"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-set" onchange="DPRNav.changeSet()" data-bind="options: navset, optionsText: 'label', optionsValue: 'value', value: set, valueAllowUnset: true"></select>
         </div>
         <div class="form-group col-md-6 mb-1" id="nav-book-div">
           <label class="small-bold-font" for="nav-book">Book</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" data-bind="options: navBook, optionsText: 'label', optionsValue: 'value', value: book, valueAllowUnset: true" class="sbut"></select>
+          <select class="custom-select force-show-scrollbar-on-macos" size="5" id="nav-book" onchange="DPRXML.updateHierarchy(0)" data-bind="options: navBook, optionsText: 'label', optionsValue: 'value', value: book, valueAllowUnset: true" class="sbut"></select>
         </div>
       </div>
 
@@ -58,13 +58,13 @@
         <div class="form-group col mb-1" style="text-align: center;">
           <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
             <label class="btn btn-outline-primary btn-sm active" title="Switch to Mūla (canon)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" value="m" onchange="digitalpalireader.changeHier('m')" data-bind="checked: MAT">M
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" value="m" onchange="DPRNav.switchhier('m')" data-bind="checked: MAT">M
             </label>
             <label class="btn btn-outline-primary btn-sm" title="Switch to Aṭṭhakathā (commentary)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" value="a" onchange="digitalpalireader.changeHier('a')" data-bind="checked: MAT">A
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" value="a" onchange="DPRNav.switchhier('a')" data-bind="checked: MAT">A
             </label>
             <label class="btn btn-outline-primary btn-sm" title="Switch to Ṭīkā (sub-commentary)">
-              <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" value="t" onchange="digitalpalireader.changeHier('t')" data-bind="checked: MAT">T
+              <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" value="t" onchange="DPRNav.switchhier('t')" data-bind="checked: MAT">T
             </label>
           </div>
         </div>
@@ -74,7 +74,7 @@
         <div class="form-group col mb-1">
           <label class="small-bold-font">Hierarchy</label>
           <div id="navigation-hierarchy" class="navigation-hierarchy-layout">
-            <button id="nav-title" type="button" class="btn btn-light m-0" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
+            <button id="nav-title" type="button" class="btn btn-light m-0" title="View index for this book" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));">
             </button>
             <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
               <i class="fa fa-bars" aria-hidden="true"></i>

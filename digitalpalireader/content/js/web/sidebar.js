@@ -7,7 +7,7 @@ if (DPR_PAL.isWeb) {
 }
 
 var digitalpalireader = {
-  changeSet() {
+  changeSetx() {
     var nik = $('#nav-set').val();
     if (G_hier == 't' && (nik == 'k' || nik == 'x' || nik == 'g' || nik == 'b')) {
       alert('Ṭīkā not available for '+G_nikLongName[nik]+'.');
@@ -28,7 +28,7 @@ var digitalpalireader = {
     this.setBookList(nik);
   },
 
-  setBookList(nik,book){
+  setBookListx(nik,book){
     var titles;
     if (nikvoladi[nik]) titles = nikvoladi[nik];
     else titles = nikvoladi[nik+G_hier];
@@ -50,7 +50,7 @@ var digitalpalireader = {
     this.updateSubnav(0);
   },
 
-  updateDepth(heir, n, tag, id, navShown) {
+  updateDepthx(heir, n, tag, id, navShown) {
     const lista = this.makeTitleSelect(heir, tag);
 
     const listNode = $(`#${id}`);
@@ -91,7 +91,7 @@ var digitalpalireader = {
     }
   },
 
-  updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+  updateSubnavx:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
     var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
       $('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),
@@ -177,7 +177,7 @@ var digitalpalireader = {
     }
   },
 
-  changeHier:function(htmp) {
+  changeHierx:function(htmp) {
 
     if(G_hier == htmp) return;
 
@@ -224,11 +224,11 @@ var digitalpalireader = {
     this.changeSet();
   },
 
-  getSubNavArray:function(){
+  getSubNavArrayx:function(){
     return [$('#nav-set').val(),$('#nav-book option:selected').index(),$('#nav-meta option:selected').index(),$('#nav-volume option:selected').index(),$('#nav-vagga option:selected').index(),$('#nav-sutta option:selected').index(),$('#nav-section option:selected').index(),G_hier];
   },
 
-  makeTitleSelect:function(xml,tag) { // output menupopup tag with titles in menuitems
+  makeTitleSelectx:function(xml,tag) { // output menupopup tag with titles in menuitems
     var name, namea;
     var outlist = [];
     for (var a = 0; a < xml.length; a++)
@@ -248,7 +248,7 @@ var digitalpalireader = {
   },
   unnamed:'[unnamed]',
 
-  limitt:function(nikn) {
+  limittx:function(nikn) {
     if (nikn == 5 || nikn > 6) { return true; }
     else { return false };
   },

@@ -5,8 +5,8 @@ var DPRXML = {
 
     document.activeElement.blur();
 
-    var nikaya = $('#set').value;
-    var book = $('#book').value;
+    var nikaya = $('#nav-set').val();
+    var book = $('#nav-book').val();
     var nikbookhier = nikaya + book + G_hier;
     var xmlDoc = loadXMLFile(nikbookhier, 0);
 

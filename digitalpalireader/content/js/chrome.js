@@ -190,32 +190,37 @@ function DPRSidebarDocument() {
 }
 
 function closeDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(false);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-
-  if (sidebarWindow.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
-    return DPR_PAL.mainWindow.toggleSidebar();
+    if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar();
+    }
   }
 }
-function openDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-  if (sidebarWindow.location.href != DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
-    return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+function openDPRSidebar() {
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(true);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+    if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+    }
   }
+}
+
+function toggleDPRSidebar() {
+  __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
 }
 
 function setCurrentTitle(title) {
-  if (DPR_PAL.isXUL) {
-    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-  } else {
+  if (DPR_PAL.isWeb) {
     document.title = title;
+  } else {
+    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
   }
 }
 
@@ -281,24 +286,6 @@ const closeBottomFrame = () => {
 }
 
 var DPR_Chrome = (function () {
-  const toggleNewSidebarVisibility = () => {
-    if ($('#main-sidebar').is(":visible")) {
-      closeNewSidebar();
-    } else {
-      openNewSidebar();
-    }
-  }
-
-  const closeNewSidebar = () => {
-    $("#main-sidebar").hide();
-    $("#main-panel-splitter").hide();
-  }
-
-  const openNewSidebar = () => {
-    $("#main-sidebar").show();
-    $("#main-panel-splitter").show();
-  }
-
   const fixupUrlAndMainPanelSectionsLayout = () => {
     const availableWidth = $('#main-pane-container').width();
     const totalSplitterWidth = $('.main-pane-container-splitter')
@@ -366,8 +353,9 @@ var DPR_Chrome = (function () {
   }
 
   return {
-    toggleNewSidebarVisibility: toggleNewSidebarVisibility,
-    openNewSidebar: openNewSidebar,
+    toggleDPRSidebar: toggleDPRSidebar,
+    openDPRSidebar: openDPRSidebar,
+    closeDPRSidebar: openDPRSidebar,
     addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,

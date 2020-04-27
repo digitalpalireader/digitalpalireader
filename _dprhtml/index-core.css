@@ -106,7 +106,6 @@ body .btn {
   width: var(--main-sidebar-width);
   overflow-x: hidden;
   overflow-y: auto;
-  display: none;
 }
 
 #main-sidebar #main-sidebar-content {
@@ -120,7 +119,6 @@ body .btn {
   width: var(--splitter-width);
   background: var(--v-splitter-background);
   cursor: col-resize;
-  display: none;
 }
 
 #main-content-landing-page {
