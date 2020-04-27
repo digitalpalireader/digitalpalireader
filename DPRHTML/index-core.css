@@ -209,8 +209,41 @@ body {
   grid-column: 2 / 3;
   grid-row: 1 / 2;
   border: 2px ridge #e7e7e7;
+  position: relative;
 }
-
+#main-bottom-pane-tab-panes-Tp textarea {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  left: 5px;
+  bottom: 40px;
+  width: calc(100% - 10px);
+  max-width: calc(100% - 10px);
+  min-width: 55px;
+  resize: horizontal;
+}
+#main-bottom-pane-tab-panes-Tp .text-pad-buttons {
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  display: flex;
+  align-items: center;
+}
+#main-bottom-pane-tab-panes-Tp .text-pad-buttons button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#main-bottom-pane-tab-panes-Tp .text-pad-buttons button:first-child {
+  margin-left: 0;
+}
+#main-bottom-pane-tab-panes-Tp .separator {
+  width: 1px;
+  height: 25px;
+  background-color: #777;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
 #main-bottom-pane-tab-panes .main-bottom-pane-tab-pane {
   margin: 0.15rem;
 }

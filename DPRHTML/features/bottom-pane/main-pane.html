@@ -50,9 +50,34 @@
     <div id="main-bottom-pane-tab-panes-Cv" class="main-bottom-pane-tab-pane" data-bind="visible: isCvTabSelected">
       Conversion: Coming soon...
     </div>
+
+    <!-- TEXT PAD -->
     <div id="main-bottom-pane-tab-panes-Tp" class="main-bottom-pane-tab-pane" data-bind="visible: isTpTabSelected">
-      Textpad: Coming soon...
+
+      <!--
+        Autocomplete attribute weirdness is explained here:
+        - https://stackoverflow.com/questions/43217431/how-to-stop-chrome-from-autocompleting-text-areas
+        - https://bugs.chromium.org/p/chromium/issues/detail?id=914451
+      -->
+      <textarea id="pad" spellcheck="false" autocomplete="nope"></textarea>
+      
+      <div class="text-pad-buttons">
+        <button  onclick="clearPad()" title="Erase all text">Clear</button>
+        <span class="separator"></span>
+        <button  title="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)">Velthuis</button>
+        <button  title="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)">Unicode</button>
+        <span class="separator"></span>
+        <button  title="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))">Analyze</button>
+        <span class="separator"></span>
+        <button
+          onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');"
+          title="Copy text to clipboard">Copy</button>
+        <button onclick="savePad()" title="save textpad content to file">Save</button>
+      </div>
+
     </div>
+
+
     <div id="main-bottom-pane-tab-panes-Tr" class="main-bottom-pane-tab-pane" data-bind="visible: isTrTabSelected">
       Translations: Coming soon...
     </div>
