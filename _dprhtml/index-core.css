@@ -31,6 +31,11 @@ body .btn {
   box-shadow: 0 0 0 transparent !important;
 }
 
+body .bd-highlight {
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid rgba(86,61,124,.15);
+}
+
 #main-container-loading-page {
   position: fixed;
   height: 100%;
@@ -490,6 +495,38 @@ body .btn {
 
 #settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-3col-grid {
   grid-template-columns: minmax(min-content, max-content) auto minmax(min-content, min-content);
+}
+
+/*
+ Navigation Tab
+ */
+
+#navigationTabContent #mat-button-group {
+  margin: 10px;
+}
+
+#navigationTabContent #mat-button-group input[type="radio"] {
+  opacity: 0;
+  width: 0;
+}
+
+#navigationTabContent #mat-button-group label {
+  display: inline-block;
+  background-color: #ddd;
+  padding: 10px 20px;
+  font-family: sans-serif, Arial;
+  font-size: 16px;
+  border: 2px solid #444;
+  border-radius: 4px;
+}
+
+#navigationTabContent #mat-button-group label:hover {
+  background-color: #dfd;
+}
+
+#navigationTabContent #mat-button-group input[type="radio"]:checked + label {
+  background-color: #bfb;
+  border-color: #4c4;
 }
 
 /*

@@ -54,9 +54,9 @@
         </div>
       </div>
 
-      <div class="form-row mb-2">
+      <!-- <div class="form-row mb-2">
         <div class="form-group col mb-1" style="text-align: center;">
-          <div class="btn-group btn-group-toggle" id="nav-hier-div" data-toggle="buttons">
+          <div class="btn-group btn-group-togglex" id="nav-hier-div" data-toggle="buttons">
             <label class="btn btn-outline-primary btn-sm active" title="Switch to Mūla (canon)">
               <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" value="m" onchange="DPRNav.switchhier('m')" data-bind="checked: MAT">M
             </label>
@@ -67,6 +67,17 @@
               <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" value="t" onchange="DPRNav.switchhier('t')" data-bind="checked: MAT">T
             </label>
           </div>
+        </div>
+      </div> -->
+
+      <div class="form-row mb-2">
+        <div id="mat-button-group" class="form-group col mb-1 d-flex flex-row bd-highlight">
+          <input type="radio" name="hier_val" class="hierbutton" id="hier-m" autocomplete="off" value="m" onchange="DPRNav.switchhier('m')" data-bind="checked: MAT">
+          <label class="" for="hier-m" title="Switch to Mūla (canon)">M</label>
+          <input type="radio" name="hier_val" class="hierbutton" id="hier-a" autocomplete="off" value="a" onchange="DPRNav.switchhier('a')" data-bind="checked: MAT">
+          <label class="" for="hier-a" title="Switch to Aṭṭhakathā (commentary)">A</label>
+          <input type="radio" name="hier_val" class="hierbutton" id="hier-t" autocomplete="off" value="t" onchange="DPRNav.switchhier('t')" data-bind="checked: MAT">
+          <label class="" for="hier-t" title="Switch to Ṭīkā (sub-commentary)">T</label>
         </div>
       </div>
 
