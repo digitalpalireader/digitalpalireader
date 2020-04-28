@@ -99,7 +99,9 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
     matchedword = findmatch(oneword); // check for a single match
     if(devCheck == 2 && matchedword) return true;
   }
-  else if (oneword.length > 1) { matchedword = findmatch(oneword,lastpart,null,parts.length); }  // check for an ending match
+  else if (oneword.length > 1) { 
+    matchedword = findmatch(oneword,lastpart,null,parts.length);
+  }  // check for an ending match
 
   if (matchedword) {
     fullnames = partnames.concat([matchedword[0]]);
@@ -144,7 +146,6 @@ function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttric
       nexttrick = parttrick + (newpart[4] ? newpart[4] : 0);
       analyzeword((newpart[3] ? newpart[3] : restword), nextparts, nextpartnames, (newpart[2] ? shortdefpre.concat(newpart[2]) : shortdefpre), partword,nexttrick); // repeat passing the old parts to be added;  newpart[3] is a modified version of the rest of the word
     }
-
   }
   return false;
   // dalert(parts + ' | ' + partnames + ' | ' + G_outwords);
@@ -177,7 +178,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   var wtrV = [];
 
 // exact maches
-
+  var exactMatch = false;
   // PED matches
 
   if (typeof(P[oneword]) == 'object')
@@ -187,6 +188,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       for (var i in P[oneword]) {
         res.push([oneword,P[oneword][i]]);
       }
+      exactMatch = true;
     }
   }
   else if (typeof(G_irregNoun[oneword]) == 'string') {
@@ -201,6 +203,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         res.push([oneword,P[G_irregNoun[oneword]][i]]);
       }
     }
+    exactMatch = true;
   }
   else if (typeof(G_irregDec[oneword]) == 'object') {
     if(devDump > 0) ddump('added IrregDec exact: ' + oneword);
@@ -214,6 +217,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         res.push([oneword,P[irregword][i]]);
       }
     }
+    exactMatch = true;
   }
   else if (!nextpart && typeof(G_irregVerb[oneword]) == 'string') {
     if(devDump > 0) ddump('added IrregVerb exact: ' + oneword);
@@ -227,6 +231,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         res.push([oneword,P[irregword][i]]);
       }
     }
+    exactMatch = true;
   }
 
   // concise matches
@@ -239,21 +244,25 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       if(devDump > 0) ddump('added CPED exact: ' + oneword);
       resy = oneword; // for matching the dictionary entry in the output
     }
+    exactMatch = true;
   }
   else if (typeof(G_irregNoun[oneword]) == 'string') {
     if(devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = G_irregNoun[oneword].replace(/[0-9]$/,'');
     if(typeof(yt[irregword]) == 'object') resy = irregword;
+    exactMatch = true;
   }
   else if (typeof(G_irregDec[oneword]) == 'object') {
     if(devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = G_irregDec[oneword][0].replace(/[0-9]$/,'');
     if(typeof(yt[irregword]) == 'object') resy = irregword;
+    exactMatch = true;
   }
   else if (!nextpart && typeof(G_irregVerb[oneword]) == 'string') {
     if(devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = G_irregVerb[oneword].replace(/[0-9]$/,'');
     if(typeof(yt[irregword]) == 'object') resy = irregword;
+    exactMatch = true;
   }
 
   // DPPN matches
@@ -262,6 +271,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   {
     if(devDump > 0) ddump('added DPPN exact: ' + oneword);
     resn.push([oneword,D[oneword]]);
+    exactMatch = true;
   }
   else {
     for (var i in G_dppnEnd) {
@@ -270,6 +280,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         if(devDump > 0) ddump('added DPPN exact (ending added): ' + oneword);
         resn.push([oneword+G_dppnEnd[i],D[oneword+G_dppnEnd[i]]]);
       }
+      exactMatch = true;
     }
   }
 
@@ -720,7 +731,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
     // shortened end vowel before next consonant; double end of this one
 
-      if (aiu1 && !aiu2 && oneword.length > 2)
+      if (oneword.charAt(oneword.length-1) != oneword.charAt(oneword.length-2) && aiu1 && !aiu2 && oneword.length > 2)
       {
         if (!isUncomp(oneword+aiu1,lastpart,nextpart)) {
           var trickmatch = findmatch(oneword+oneword.charAt(oneword.length-1),lastpart,nextpart,partslength,1);
@@ -853,7 +864,6 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   // compounded conjugations, sandhi
 
     // m as in ...
-
 
       if (oneword.charAt(oneword.length-1) == 'm' && /[aiu]/.exec(oneword.charAt(oneword.length-2)) && oneword.length > 3)
       {
@@ -1105,7 +1115,9 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     altarray.push('0^' + oneword.replace(/`$/,'') + '^2^' + resy);
   }
   else {
-    if (res.length != 0) { for (var i in res) { altarray.push(res[i][1] + '^' + res[i][0] + '^0' + (resy ? '^'+resy : '')); } }
+    if (res.length != 0) { for (var i in res) { 
+      altarray.push(res[i][1] + '^' + res[i][0] + '^0' + (resy ? '^'+resy : '')); } 
+    }
     if (resn.length != 0) { for (var j in resn) { altarray.push(resn[j][1] + '^' + resn[j][0] + '^1' + (resy ? '^'+resy : '')); } }
   }
   if(res.length == 0 && resn.length == 0 && !resy) { return; }
