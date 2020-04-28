@@ -1518,6 +1518,7 @@ G_irregVerb['.thassati'] = 'ti.t.thati';
 G_irregVerb['.thassanti'] = 'ti.t.thati';
 G_irregVerb['bhottu.m'] = 'bhu~njati';
 G_irregVerb['ujjaaleti'] = 'ujjalati';
+G_irregVerb['yanti'] = 'yaati';
 
 G_irregNoun['katihi'] = 'kati';
 G_irregNoun['keci'] = 'ka';
