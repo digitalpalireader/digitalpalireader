@@ -143,6 +143,56 @@ hr {
   border: 0;
 }
 
+.bottom-container {
+  display: flex;
+  text-align: center;
+}
+
+.bottom-item {
+  flex: 1 1 auto;
+  vertical-align: middle;
+}
+
+#input.bottom-item{
+  height: 70px;
+  width: 60%;
+  display: block;
+  margin: auto;
+}
+
+.bottom-center {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 90%;
+}
+
+#translation {
+  margin-left: 20%;
+}
+
+@media (max-width: 576px) {
+  #translation {
+    margin: auto;
+    width: 90%;
+  }
+}
+
+textarea.bottom-item {
+  margin-top: 15px;
+  height: 200px;
+  min-width: 120px;
+}
+
+.cv-btn-group {
+  margin: 2px;
+  width: 120px;
+  background-color: rgb(238, 238, 238);
+  border: none;
+  font-size: smaller;
+  text-align: center;
+}
+
 .popover{
   max-width: 50%;
 }

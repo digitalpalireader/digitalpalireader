@@ -266,7 +266,7 @@ function updatePrefs(close) {
              .getInterface(Components.interfaces.nsIDOMWindow);
     var sidebarWindow = mainWindow.document.getElementById("sidebar").contentWindow;
 
-    if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+    if (sidebarWindow.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
       sidebarWindow.digitalpalireader.updatePrefs();
     }
   }

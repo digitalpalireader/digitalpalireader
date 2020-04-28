@@ -12,7 +12,7 @@ matValue['t'] = '';
 var G_compare = 1;
 var G_thisPara = null;
 
-const emptyFn = `(() => {})()`;
+const emptyFnStr = `(() => {})()`;
 
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
@@ -89,7 +89,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // permalink
 
-  var bareurl = DPR_PAL.normalizeDprSchemeUri('dpr:index?');
+  var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
   var permalink = `${bareurl}loc=${nikaya}.${bookno}.${meta}.${volume}.${vagga}.${sutta}.${section}.${hier}`;
 
   // get string from query
@@ -219,18 +219,38 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     if (relhere) {
       var hi = ['m','a','t'];
       var button_order = ['l','m','r'];
+      const cmds = {
+        ['m']: DPR_CMD_GOTO_RELM,
+        ['a']: DPR_CMD_GOTO_RELA,
+        ['t']: DPR_CMD_GOTO_RELT,
+      };
       var hic = 0;
       for (var ht = 0; ht < hi.length; ht++) {
-        if(hi[ht] == hier)
-          relouta.push('<span class="abut sbut '+button_order[ht]+'but small" title="currently viewing section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
-        else if (relhere.split('#')[hic] != '') {
+        if(hi[ht] == hier) {
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'false',
+            executeStr: emptyFnStr,
+            titleStr: `Currently viewing section in ${G_hTitles[ht]}`,
+            visibleStr: 'true',
+          };
+        } else if (relhere.split('#')[hic] != '') {
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
-          shortcutFns[`gotoRel${hi[ht]}`] = `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1));`;
-          relouta.push('<span class="abut '+button_order[ht]+'but small" onmouseup="matButton = 1; openPlace();" title="Relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'true',
+            executeStr: `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
+            titleStr: null,
+            visibleStr: 'true',
+          };
           matButton = 0;
         }
-        else
-          relouta.push('<span class="abut dbut '+button_order[ht]+'but small" title="no relative section in '+G_hTitles[ht]+'">'+hi[ht]+'</span>');
+        else {
+          shortcutFns[cmds[hi[ht]]] = {
+            canExecuteStr: 'false',
+            executeStr: emptyFnStr,
+            titleStr: `No relative section in ${G_hTitles[ht]}`,
+            visibleStr: 'true',
+          };
+        }
       }
       break;
     }
@@ -299,36 +319,70 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     break;
   }
 
-  //prev and next - nextprev | thai-myanmar alternation - thaibut
-  shortcutFns.gotoPrev = prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoIndex = `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`;
-  shortcutFns.gotoNext = next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoMyanmar = place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.gotoThai = !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFn;
-  shortcutFns.copyPermalink = DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFn;
+  // Configure commands
+  shortcutFns[DPR_CMD_GOTO_PREV] = {
+    canExecuteStr: !!prev ? 'true' : 'false',
+    executeStr: !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!prev ? null : 'No previous section',
+    visibleStr: 'true',
+  };
 
-  const nextprev =
-    (prev ? `<span id="pSect" class="lbut abut small" onmouseup="${shortcutFns.gotoPrev}" title="go to previous section">&larr;</span>` : '<span class="lbut abut small" title="no previous section">&nbsp;</span>')
-    + `<span id="indexButton" class="abut mbut small" onmouseup="${shortcutFns.gotoIndex}" title="open book index">&uarr;</span>`
-    + (next ? `<span id="nSect" class="rbut abut small" onmouseup="${shortcutFns.gotoNext}" title="go to next section">&rarr;</span>` : '<span class="rbut abut small" title="no next section">&nbsp;</span>');
-  const thaibut =
-    place[8]
-    ? ` <span id="thaiButton" class="abut lbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut sbut small" title="Currently viewing Thai Tipitaka">T</span>`
-    : ` <span id="myanButton" class="abut lbut sbut small" title="Currently viewing Myanmar Tipitaka">M</span><span id="thaiButton" class="abut rbut small" onmouseup="${shortcutFns.gotoThai}" title="Switch to Thai Tipitaka">T</span>`;
+  shortcutFns[DPR_CMD_GOTO_INDEX] = {
+    canExecuteStr: 'true',
+    executeStr: `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
 
-  // bookmark button
+  shortcutFns[DPR_CMD_GOTO_NEXT] = {
+    canExecuteStr: !!next ? 'true' : 'false',
+    executeStr: !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!next ? null : 'No next section',
+    visibleStr: 'true',
+  };
 
-  var bkbut = '<span id="bkButton" class="abut obut small" onmousedown="bookmarkSavePrompt(\''+nikaya+'#'+bookno+'#'+meta+'#'+volume+'#'+vagga+'#'+sutta+'#'+section+'#'+hier+'\',\''+bknameme+'\',window.getSelection().toString())" title="bookmark section">&dagger;</span>';
+  shortcutFns[DPR_CMD_GOTO_MYANMAR] = {
+    canExecuteStr: !!place[8] ? 'true' : 'false',
+    executeStr: !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !!place[8] ? null : 'Currently viewing Myanmar Tipitaka',
+    visibleStr: 'true',
+  };
 
+  shortcutFns[DPR_CMD_GOTO_THAI] = {
+    canExecuteStr: !place[8] ? 'true' : 'false',
+    executeStr: !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
+    titleStr: !place[8] ? null : 'Currently viewing Thai Tipitaka',
+    visibleStr: 'true',
+  };
+
+  shortcutFns[DPR_CMD_COPY_PERMALINK] = {
+    canExecuteStr: DPR_prefs['showPermalinks'] ? 'true' : 'false',
+    executeStr: DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr,
+    titleStr: null,
+    visibleStr: DPR_prefs['showPermalinks'] ? 'true' : 'false',
+  };
+
+  shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
+    canExecuteStr: 'true',
+    executeStr: `bookmarkSavePrompt('${nikaya}#${bookno}#${meta}#${volume}#${vagga}#${sutta}#${section}#${hier}', '${bknameme}', window.getSelection().toString())`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+
+  shortcutFns[DPR_CMD_COPY_PLACE_TO_SIDEBAR] = {
+    canExecuteStr: 'true',
+    executeStr: `sendPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'])`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+
+  const nextprev = '';
+  const thaibut = '';
+  var bkbut = '';
 
   // first toolbar row
-
-  var main = '<span id="sidebarButton" class="abut '+(DPR_prefs['showPermalinks'] ?'l':'o')+'but small" onmouseup="sendPlace([\''+nikaya+'\','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+',\''+hier+'\'])" title="copy place to sidebar">&lArr;</span>'+(DPR_prefs['showPermalinks'] ? '<span class="abut rbut small" onclick="' + shortcutFns.copyPermalink + '" title="copy permalink to clipboard">&diams;</span>' : '');
-
-  var aux = '<table><tr><td>'+nextprev+ ' ' +relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
-
-  resolveShortcuts(shortcutFns);
-  makeToolbox(main,aux,titleout[2],true,true,true);
+  var main = '';
+  var aux = '<table><tr><td>'+ nextprev + ' ' + relout + ' ' + bkbut + thaibut + '</td><td id="maftrans" align="right"></td></tr><table>';
 
   // paragraph range
   if(para) {
@@ -456,7 +510,11 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
       }
     }
   }
-  var outData = outputFormattedData(theData,0,place);
+
+  var outData = outputFormattedData(theData,0,place,shortcutFns);
+  resolveCommands(shortcutFns);
+  makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
+
   if(opara) {
     scrollMainPane(document.getElementById('para'+opara).offsetTop - $("#main-content-header").outerHeight());
   }
@@ -477,8 +535,35 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   }
 }
 
-function resolveShortcuts(shortcutFns) {
-  $("body").append(`<script>/*XML.JS*/\r\n${Object.entries(shortcutFns).map(x => `var __${x[0]} = () => ${x[1]};`).join('\r\n')}</script>`);
+const getTitleStr = (id, cmdCfg) =>
+  cmdCfg.titleStr ? cmdCfg.titleStr : __dprCommandsMap[id].title;
+
+const getCmdIcon = (cmdCfg) =>
+  cmdCfg.icon ? `'${cmdCfg.icon}'` : null;
+
+const resolveCommand = (id, cmdCfg) => `
+  __dprViewModel.updateCommand(
+    '${id}',
+    {
+      canExecute: ${cmdCfg.canExecuteStr},
+      execute: () => ${cmdCfg.executeStr},
+      visible: ${cmdCfg.visibleStr},
+      title: '${getTitleStr(id, cmdCfg)}',
+      icon: ${getCmdIcon(cmdCfg)},
+    });
+`;
+
+function resolveCommands(shortcutFns) {
+  const cmdCfgs = Object.entries(shortcutFns).filter(x => x[1].executeStr).map(x => resolveCommand(x[0], x[1]));
+  const scriptStr = `
+<script data-type="XMLJS">
+  /* Inserted by XML.JS */
+  ${cmdCfgs.join('')}
+</script>
+  `;
+
+  $('script[data-type="XMLJS"]').remove();
+  $("body").append(scriptStr);
 }
 
 function loadXMLindex(place,compare) {
@@ -580,7 +665,7 @@ function loadXMLindex(place,compare) {
 
     var oldurl = DPR_PAL.contentDocument.location.href;
 
-    var bareurl = 'dpr:index?';
+    var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
 
     var newparams = 'loc='+place.slice(0,8).join('.');
 
@@ -604,7 +689,7 @@ function loadXMLindex(place,compare) {
 
     // translations
 
-    transin = addtrans(hier,6,nikaya,bookno);
+    transin = DPR_Translations.addtrans(hier,6,nikaya,bookno);
     if (transin) {
       theDatao += transin.join('&nbsp;');
     }
@@ -655,7 +740,7 @@ function loadXMLindex(place,compare) {
       var transin;
       var transout='';
 
-      transin = addtrans(hier,5,nikaya,bookno,tmp2);
+      transin = DPR_Translations.addtrans(hier,5,nikaya,bookno,tmp2);
       if (transin) {
         theDatao += transin.join('&nbsp;');
       }
@@ -710,7 +795,7 @@ function loadXMLindex(place,compare) {
         var transin;
         var transout='';
 
-        transin = addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
+        transin = DPR_Translations.addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
         if (transin) {
           theDatao += transin.join('&nbsp;');
         }
@@ -770,7 +855,7 @@ function loadXMLindex(place,compare) {
           var transin;
           var transout='';
 
-          transin = addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
+          transin = DPR_Translations.addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
           if (transin) {
             theDatao += transin.join('&nbsp;');
           }
@@ -823,7 +908,7 @@ function loadXMLindex(place,compare) {
 
             var transin;
             var transout='';
-            transin = addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
+            transin = DPR_Translations.addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
             if (transin) {
               theDatao += transin.join('&nbsp;');
             }
@@ -883,7 +968,7 @@ function loadXMLindex(place,compare) {
               var transin;
               var transout='';
 
-              transin = addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+              transin = DPR_Translations.addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
               //if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
               if (transin) {
                 theDatao += transin.join('&nbsp;');
@@ -901,7 +986,7 @@ function loadXMLindex(place,compare) {
               saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+translit(toUni(theData))+'</a></c'+(wcs+1)+'>';
             }
             if(isPlace) {
-              var link = 'dpr:index' + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
+              var link =  DPR_PAL.normalizeDprUri('dpr:index') + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
               var t = u[tmp6].getElementsByTagName("p");
               for (var tmp7 = 0; tmp7 < t.length; tmp7++) {
                 if(xset) { // thai
@@ -934,7 +1019,15 @@ function loadXMLindex(place,compare) {
     theDatao = theDatao.replace(/Ṃ/g, 'Ṁ');
   }
 
-  var main = '<span class="abut obut small" id="search-book" onclick="sidebarSearch(\''+nikaya+'\','+book+',\''+hier+'\')" title="search in book">s</span>';
+  const shortcutFns = createShortcutFns();
+
+  shortcutFns[DPR_CMD_SEARCH_IN_BOOK] = {
+    canExecuteStr: 'true',
+    executeStr: `sidebarSearch('${nikaya}', ${book}, '${hier}')`,
+    titleStr: null,
+    visibleStr: 'true',
+  };
+  var main = '';
 
   $('#mafbc').html('');
 
@@ -961,22 +1054,21 @@ function loadXMLindex(place,compare) {
     var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
 
     if(!isDev)
-      makeToolbox(main,'',tabT,true,true,true);
+      makeToolbox(shortcutFns, main,'',tabT,true,true,true);
   }
   else {
     if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
     else bknameme = '';
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
     addHistory(G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
-    makeToolbox(main?main:false);
+    makeToolbox(shortcutFns, main?main:false);
 
     var tabT = G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
-    makeToolbox(main,'',tabT,true,true,true);
+    makeToolbox(shortcutFns, main,'',tabT,true,true,true);
 
   }
 
-  const shortcutFns = createShortcutFns();
-  resolveShortcuts(shortcutFns);
+  resolveCommands(shortcutFns);
 
   // add header to saveout
 
@@ -997,32 +1089,26 @@ function loadXMLindex(place,compare) {
   $('#mafbc').append('<div id="savei">'+saveout+'</div>');
   $('#mafbc').append('<div id="convi">'+convout+'</div>');
 
-
   // title, tab, link
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
 
-  if (DPR_PAL.isWeb){
-    theDatao=digitalpalireader.makeWebAppropriate(theDatao);
-    $('#mafbc').append('<div id="paliTextContent">  '+theDatao+'</div>');
-  } else {
-    // permalink
-    var permalink = `${DPR_PAL.dprHomePage}?`;
-    var oldurl = DPR_PAL.contentDocument.location.href;
-    var bareurl = 'dpr:index?';
-    var newparams = 'loc='+place.slice(0,8).join('.');
-    bareurl += newparams;
-    var oldparams = oldurl.split('?')[1];
-    if(oldparams) {
-      oldparams = oldparams.split('|');
-      oldparams[compare-1] = newparams;
-      newparams = oldparams.join('|');
-    }
-    var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
-
-    DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-    $('#mafbc').append('<div>'+theDatao+'</div>');
+  // permalink
+  var permalink = `${DPR_PAL.dprHomePage}?`;
+  var oldurl = DPR_PAL.contentDocument.location.href;
+  var bareurl = DPR_PAL.normalizeDprUri('dpr:index?');
+  var newparams = 'loc='+place.slice(0,8).join('.');
+  bareurl += newparams;
+  var oldparams = oldurl.split('?')[1];
+  if(oldparams) {
+    oldparams = oldparams.split('|');
+    oldparams[compare-1] = newparams;
+    newparams = oldparams.join('|');
   }
+  var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
+
+  DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
+  $('#mafbc').append(`<div id="paliTextContent">${theDatao}</div>`);
   document.getElementById('maf').scrollTop = 0;
 
   // refresh history box
@@ -1035,17 +1121,9 @@ function loadXMLindex(place,compare) {
 }
 
 function createShortcutFns() {
-  return {
-    'gotoPrev': emptyFn,
-    'gotoIndex': emptyFn,
-    'gotoNext': emptyFn,
-    'gotoMyanmar': emptyFn,
-    'gotoThai': emptyFn,
-    'gotoRelm': emptyFn,
-    'gotoRela': emptyFn,
-    'gotoRelt': emptyFn,
-    'copyPermalink': emptyFn,
-  };
+  const shortcutFns = {};
+  dprCommandList.forEach(x => shortcutFns[x.id] = { executeStr: emptyFnStr, visibleStr: 'false', });
+  return shortcutFns;
 }
 
 function saveCompilation() {

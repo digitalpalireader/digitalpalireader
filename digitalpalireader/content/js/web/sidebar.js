@@ -7,7 +7,7 @@ if (DPR_PAL.isWeb) {
 }
 
 var digitalpalireader = {
-  changeSet() {
+  changeSetx() {
     var nik = $('#nav-set').val();
     if (G_hier == 't' && (nik == 'k' || nik == 'x' || nik == 'g' || nik == 'b')) {
       alert('Ṭīkā not available for '+G_nikLongName[nik]+'.');
@@ -28,7 +28,7 @@ var digitalpalireader = {
     this.setBookList(nik);
   },
 
-  setBookList(nik,book){
+  setBookListx(nik,book){
     var titles;
     if (nikvoladi[nik]) titles = nikvoladi[nik];
     else titles = nikvoladi[nik+G_hier];
@@ -50,7 +50,7 @@ var digitalpalireader = {
     this.updateSubnav(0);
   },
 
-  updateDepth(heir, n, tag, id, navShown) {
+  updateDepthx(heir, n, tag, id, navShown) {
     const lista = this.makeTitleSelect(heir, tag);
 
     const listNode = $(`#${id}`);
@@ -91,11 +91,15 @@ var digitalpalireader = {
     }
   },
 
-  updateSubnav:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+  updateSubnavx:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
-    var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
-      $('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),
-      $('#nav-section-button').is(":visible")];
+    var navShown = [
+      $('#nav-meta-button').is(":visible"),
+      $('#nav-volume-button').is(":visible"),
+      $('#nav-vagga-button').is(":visible"),
+      $('#nav-sutta-button').is(":visible"),
+      $('#nav-section-button').is(":visible")
+    ];
 
     document.activeElement.blur();
 
@@ -149,35 +153,35 @@ var digitalpalireader = {
     $('#nav-quicklinks-button').show().prop('title', 'Open Quick Link');
     $('#nav-title-button').show().text('≡').prop('title', 'Combine all sub-sections');
     if (navShown[4]) {
-      $('#nav-section-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+      $('#nav-section-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[3]) {
       navShown[4] ?
-        $('#nav-sutta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,5)") :
-        $('#nav-sutta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-sutta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,5)") :
+        $('#nav-sutta-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[2]) {
       navShown[3] || navShown[4] ?
-        $('#nav-vagga-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,4)") :
-        $('#nav-vagga-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-vagga-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,4)") :
+        $('#nav-vagga-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[1]) {
       navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-volume-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,3)") :
-        $('#nav-volume-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-volume-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,3)") :
+        $('#nav-volume-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
 
     if (navShown[0]) {
       navShown[1] || navShown[2] || navShown[3] || navShown[4] ?
-        $('#nav-meta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onclick","digitalpalireader.loadSection(2,2)") :
-        $('#nav-meta-button').show().text('\u21D2').prop('title', 'View this section').attr("onclick","digitalpalireader.loadSection(2)");
+        $('#nav-meta-button').show().text('≡').prop('title', 'Combine all sub-sections').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,2)") :
+        $('#nav-meta-button').show().text('\u21D2').prop('title', 'View this section').attr("onmouseup","DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))");
     }
   },
 
-  changeHier:function(htmp) {
+  changeHierx:function(htmp) {
 
     if(G_hier == htmp) return;
 
@@ -224,11 +228,11 @@ var digitalpalireader = {
     this.changeSet();
   },
 
-  getSubNavArray:function(){
+  getSubNavArrayx:function(){
     return [$('#nav-set').val(),$('#nav-book option:selected').index(),$('#nav-meta option:selected').index(),$('#nav-volume option:selected').index(),$('#nav-vagga option:selected').index(),$('#nav-sutta option:selected').index(),$('#nav-section option:selected').index(),G_hier];
   },
 
-  makeTitleSelect:function(xml,tag) { // output menupopup tag with titles in menuitems
+  makeTitleSelectx:function(xml,tag) { // output menupopup tag with titles in menuitems
     var name, namea;
     var outlist = [];
     for (var a = 0; a < xml.length; a++)
@@ -248,45 +252,8 @@ var digitalpalireader = {
   },
   unnamed:'[unnamed]',
 
-  limitt:function(nikn) {
+  limittx:function(nikn) {
     if (nikn == 5 || nikn > 6) { return true; }
     else { return false };
   },
-
-  loadIndex:function(context){
-    switch(context) {
-      case 1:
-        importXMLindex("");
-        break;
-      case 2:
-        DPRSend.importXML(false,null,null,null,'internal',null,1);
-        break;
-    }
-  },
-
-  loadSection:function(context,category=6){
-    var aplace;
-    switch(context) {
-      case 1: // quick links
-        if($.trim($('#nav-quicklinks').val()) == ''){
-          alert('Input can not be left blank.');
-        } else
-          try {
-            DPRSend.sendQuickLink("", $('#nav-quicklinks').val());
-          }
-          catch(err) {
-            console.error('Potentially a bug.', err);
-            alert("Invalid quick link.");
-            aplace = this.getSubNavArray();
-            loadXMLSection("","",aplace);
-          }
-        break;
-      case 2: // book hierarchy
-        aplace = this.getSubNavArray().map((x,y)=>(y<(category+1) || y>6 )?x:"x");
-        loadXMLSection("","",aplace);
-        break;
-    }
-  },
-
-  makeWebAppropriate:(data)=>{ return data.replace(/openPlace\(\[(.*?)\],([^,]+),([^,]+),eventSend\(event,1\)\)/g,'loadXMLSection($2,$3,[$1])');}
 }

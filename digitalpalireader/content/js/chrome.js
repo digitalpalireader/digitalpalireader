@@ -1,22 +1,11 @@
 'use strict';
 
 function openFirstDPRTab() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
-
-  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
+  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main',DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'),'');
 }
 
 function openDPRTab(permalink, id, reuse) {
-  if (DPR_PAL.isWeb) {
-    if (reuse) {
-      window.location.href = permalink;
-    } else {
-      window.open(permalink, '_blank');
-    }
-    return false;
-  }
+  permalink = DPR_PAL.toWebUrl(permalink);
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -39,7 +28,7 @@ function openDPRTab(permalink, id, reuse) {
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // not a dpr tab
+      if (!/^DPR/.exec(currentTab.getAttribute('id')) || !DPR_PAL.dprUrlMatcher.exec(ctloc)) { // not a dpr tab
         if (start == 1) { // prev was a DPR tab
           newIdx = index;
           break;
@@ -60,10 +49,6 @@ function openDPRTab(permalink, id, reuse) {
 
 
 function findDPRTab(id,loc) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
     // Get the next tab
@@ -71,7 +56,7 @@ function findDPRTab(id,loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+    if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
       return currentTab;
     }
@@ -80,10 +65,6 @@ function findDPRTab(id,loc) {
 }
 
 function findDPRTabs(id,loc) {
-  if (!DPR_PAL.isXUL) {
-    return [];
-  }
-
   var tabs = [];
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
@@ -92,7 +73,7 @@ function findDPRTabs(id,loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (currentTab.getAttribute('id') == id && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) {
+    if (currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.exec(ctloc)) {
 
       tabs.push(currentTab);
     }
@@ -101,10 +82,6 @@ function findDPRTabs(id,loc) {
 }
 
 function findDPRTabByLoc(loc) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   loc = new RegExp(loc);
   for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
@@ -113,7 +90,7 @@ function findDPRTabByLoc(loc) {
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
     // Does this tab contain our custom attribute?
-    if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc) && loc.exec(ctloc)) {
+    if (DPR_PAL.dprUrlMatcher.exec(ctloc) && loc.exec(ctloc)) {
 
       return currentTab;
     }
@@ -132,17 +109,13 @@ function updatePrefs() {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-    if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       currentTab.linkedBrowser.contentWindow.getconfig();
     }
   }
 }
 
 function isDPRTab(id) {
-  if (!DPR_PAL.isXUL) {
-    return false;
-  }
-
   if(DPR_PAL.mainWindow.gBrowser.selectedTab.id == id) return DPR_PAL.mainWindow.gBrowser.selectedTab;
   else return false;
 }
@@ -161,7 +134,7 @@ function giveIDtoTabs() { // startup function, give ids to
     // Get the next tab
     var currentTab = tb.tabContainer.childNodes[index];
     var ctloc = tb.getBrowserForTab(currentTab).contentDocument.location.href;
-    if (/chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       tb.setIcon(currentTab, "chrome://digitalpalireader/skin/icons/logo.png");
       if(/index\.xul/.exec(ctloc)) currentTab.setAttribute('id',(main++==0?'DPR-main':'DPRm'));
       else if(/dict\.htm/.exec(ctloc)) currentTab.setAttribute('id',(dict++==0?'DPR-dict':'DPRd'));
@@ -182,7 +155,7 @@ function checkLastTab() {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentWindow.location.href;
-    if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+    if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
       return false; // still one open tab
     }
   }
@@ -197,7 +170,7 @@ function DPRSidebarWindow() {
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
 
-  if (sidebar.contentDocument.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.contentDocument.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar.contentWindow;
   }
   else return false
@@ -210,41 +183,46 @@ function DPRSidebarDocument() {
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar;
   }
   else return false
 }
 
 function closeDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(false);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-
-  if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-    return DPR_PAL.mainWindow.toggleSidebar();
+    if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar();
+    }
   }
 }
-function openDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-  if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
-    return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+function openDPRSidebar() {
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(true);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+    if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+    }
   }
+}
+
+function toggleDPRSidebar() {
+  __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
 }
 
 function setCurrentTitle(title) {
-    if (DPR_PAL.isXUL) {
-    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-    } else {
+  if (DPR_PAL.isWeb) {
     document.title = title;
-    }
+  } else {
+    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
   }
+}
 
 function closeBrowser(id) {
   if (!DPR_PAL.isXUL) {
@@ -283,7 +261,7 @@ const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-text-container').scrollTop(scrollTop);
+  $('#main-pane-container-section-0').scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {
@@ -307,21 +285,120 @@ const closeBottomFrame = () => {
   $("#main-pane").height("100%");
 }
 
-const toggleNewSidebarVisibility = () => {
-  if ($('#main-sidebar').css('margin-left').startsWith("-")) {
-    openNewSidebar();
-  } else {
-    closeNewSidebar();
+var DPR_Chrome = (function () {
+  const fixupUrlAndMainPanelSectionsLayout = () => {
+    const availableWidth = $('#main-pane-container').width();
+    const totalSplitterWidth = $('.main-pane-container-splitter')
+      .toArray()
+      .reduce((acc, e) => acc + $(e).width(), 0);
+    const sections = $('.main-pane-container-section').toArray();
+    sections.forEach(x => $(x).width((availableWidth - totalSplitterWidth) / sections.length));
+
+    const uris = $('.main-pane-container-section').toArray().map(x => $(x).attr('data-dpruri')).filter(x => x);
+    const locMutator = loc => {
+      const [first, ..._] = loc.split('|');
+      return `${[first, ...uris].join('|')}`;
+    };
+
+    const oldUrl = DPR_PAL.contentDocument.location.href;
+    const newUrl = DPR_PAL.modifyUrlPart(oldUrl, 'loc', locMutator);
+    if (oldUrl !== newUrl) {
+      console.log('URLs are not same. Updating...');
+      DPR_PAL.contentWindow.history.pushState({}, 'Title', newUrl);
+    } else {
+      console.log('URLs are same. Not updating!');
+    }
   }
-}
 
-const closeNewSidebar = () => {
-  $("#main-sidebar").animate({ marginLeft: "-" + $('#main-sidebar').css('width') }, 300);
-  $("#main-panel-splitter").css("display", "none");
-}
+  const addMainPanelSection = (sInfo, fixupUrlAndLayout = true) => {
+    if (sInfo.type === 'dpr') {
+      return;
+    }
 
-const openNewSidebar = () => {
-  $("#main-sidebar").show();
-  $("#main-sidebar").animate({ marginLeft: '0px' }, 300);
-  $("#main-panel-splitter").css("display", "block");
-}
+    let sPos = $('#main-pane-container').attr('data-nextspos');
+    sPos = parseInt(sPos ? sPos : '1');
+
+    const html = `
+  <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
+  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
+    </iframe>
+  </div>`;
+
+    $('#main-pane-container').append(`${html}`);
+    $('#main-pane-container').attr('data-nextspos', sPos + 1);
+
+    $(`#main-pane-container-section-${sPos - 1}`).resizable({
+      handleSelector: `#main-pane-container-splitter-${sPos}`,
+      resizeHeight: false,
+    });
+
+    if (fixupUrlAndLayout) {
+      fixupUrlAndMainPanelSectionsLayout();
+    }
+  }
+
+  const addMainPanelSections = places => {
+    places.forEach(p => addMainPanelSection(p, false));
+    fixupUrlAndMainPanelSectionsLayout();
+  }
+
+  const closeContainerSection = position => {
+    $(`#main-pane-container-splitter-${position}`).remove();
+    $(`#main-pane-container-section-${position}`).remove();
+    fixupUrlAndMainPanelSectionsLayout();
+  }
+
+  const ToastTypeError = 'Error';
+  const ToastTypeWarning = 'Warning';
+  const ToastTypeSuccess = 'Success';
+  const ToastTypeInfo = 'Information';
+  const createToast = (type, message, delay) => {
+    let typeClasses = null;
+    if (type === ToastTypeError) {
+      typeClasses = 'bg-danger text-light';
+    } else if (type === ToastTypeWarning) {
+      typeClasses = 'bg-warning text-light';
+    } else if (type === ToastTypeSuccess) {
+      typeClasses = 'bg-green text-light';
+    } else /* Information */ {
+      typeClasses = '';
+    }
+
+    $("#main-container-toast-container").append(`
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
+        <div class="toast-header ${typeClasses}">
+          <strong class="mr-auto">${type}</strong>
+          <small></small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true"><small>&times;</small></span>
+          </button>
+        </div>
+        <div class="toast-body ${typeClasses}">
+          ${message}
+        </div>
+      </div>
+    `);
+
+    $(".toast").toast("show");
+
+    $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
+  }
+
+  const showErrorToast = (message) => {
+    createToast(ToastTypeError, message, 2000);
+  }
+
+  return {
+    toggleDPRSidebar: toggleDPRSidebar,
+    openDPRSidebar: openDPRSidebar,
+    closeDPRSidebar: openDPRSidebar,
+    addMainPanelSection: addMainPanelSection,
+    addMainPanelSections: addMainPanelSections,
+    closeContainerSection: closeContainerSection,
+    showErrorToast: showErrorToast,
+  };
+})();

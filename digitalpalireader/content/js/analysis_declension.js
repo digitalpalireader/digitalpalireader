@@ -75,6 +75,7 @@ G_endings.push(['uuni',1,2,'','n',[[2,1,2],[2,2,2]]]);
 
 // f. aa
 G_endings.push(['a',1,2,'a','n']);
+G_endings.push(['aano',1,0,'','n',[[4,4,1],[4,6,1]]]);
 G_endings.push(['aayo',1,0,'','n',[[4,1,2],[4,2,2],[4,8,2]]]);
 G_endings.push(['aahi',1,0,'','n',[[4,3,2],[4,5,2]]]);
 G_endings.push(['aabhi',1,0,'','n',[[4,3,2],[4,5,2]]]);
@@ -213,6 +214,11 @@ G_endings.push(['oto',1,2,'ti','n']);
 G_endings.push(['otaa',1,2,'ti','n']);
 
 
+// indeclinable sandhi
+
+G_endings.push(['a',1,0,'.m','n']);
+
+
 // unsorted
 
 G_endings.push(['ahi',1,1,'','n']);
@@ -224,6 +230,7 @@ G_endings.push(['ataa',2,1,'i','n']);
 G_endings.push(['iya',0,2,'a','n']);
 G_endings.push(['uya.m',0,0,'','n']);
 
+
 //G_endings.push(['abba.m',1,1,'']);
 
 
@@ -234,6 +241,10 @@ G_endings.push(['ati',3,0,'','v',[[1,1,1]]]);
 G_endings.push(['aati',4,0,'','v',[[1,1,1]]]);
 G_endings.push(['eti',3,0,'','v',[[1,1,1]]]);
 G_endings.push(['oti',3,0,'','v',[[1,1,1]]]);
+
+//attanopada
+
+G_endings.push(['e',0,0,'i','v',[[1,1,1],[1,1,2]]]);
 
   // a stem pres.
 
@@ -266,11 +277,11 @@ G_endings.push(['emi',1,0,'ti','v',[[1,3,1],[2,3,1]]]);
 G_endings.push(['ema',1,0,'ti','v',[[1,3,2],[2,3,2]]]);
 
 
-  // a stem impv.
+  // a, aa stem impv.
 
-G_endings.push(['hi',0,3,'ti','v',[[2,2,1]]]);
-G_endings.push(['atu',1,2,'ti','v',[[2,1,1]]]);
-G_endings.push(['antu',1,1,'ti','v',[[2,1,2]]]);
+G_endings.push(['ahi',0,3,'ati','v',[[2,2,1]]]);
+G_endings.push(['atu',0,2,'ati','v',[[2,1,1]]]);
+G_endings.push(['antu',0,1,'ati','v',[[2,1,2]]]);
 
   // o stem impv.
 
@@ -445,6 +456,16 @@ G_endings.push(['essa',1,2,'ti','v']);
 G_endings.push(['essatha',1,2,'ti','v']);
 G_endings.push(['essa.m',1,2,'ti','v']);
 G_endings.push(['essaama',1,2,'ti','v']);
+
+
+// additional unsorted endings
+
+G_endings.push(['e',0,2,'ati','v']);
+
+
+// special pres. participle ending
+
+G_endings.push(['a.m',1,3,'ti','v']);
 
 
 // ---------- stem matching and converting ----------

@@ -160,10 +160,6 @@ const setSearchParams = () => {
   });
 }
 
-const searchHandler = event => {
-  DPRSend.sendSearch(DPRSend.eventSend(event));
-}
-
 const initializeSearchSidebarTab = () => {
   const sidebarTab = $(`#${searchFeatureName}TabContent`)[0];
   setSearchParams();

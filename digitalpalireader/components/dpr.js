@@ -33,8 +33,8 @@ DPRProtocol.prototype = {
     {
         try {
             var ios = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService);
-            
-            var loc = 'chrome://digitalpalireader/content/load.htm';;
+
+            var loc = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/load.htm');;
             var channel = ios.newChannel(loc, null, null).QueryInterface(Ci.nsIChannel);
 
             channel.contentType = 'text/html';
@@ -51,7 +51,7 @@ DPRProtocol.prototype = {
             //ch = ch.QueryInterface(Ci.nsIHTTPChannel);
             //dump(ch+'\n');
             //channel.setRequestHeader("X-Moz-Is-Feed", "1", false);
-            var ch = ios.newChannel('chrome://digitalpalireader/content/load.htm', null, null);
+            var ch = ios.newChannel(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/load.htm'), null, null);
             dump(ch+'\n');
             dump(channel+'\n');
             dump(ch.contentType+'\n');
@@ -65,7 +65,7 @@ DPRProtocol.prototype = {
         }
         catch (e) {
             dump(e.toString());
-        }        
+        }
     },
     classDescription: "DPR Protocol Handler",
     contractID: "@mozilla.org/network/protocol;1?name=dpr",
@@ -100,7 +100,7 @@ function chromeToPath (aPath) {
    if (!aPath || !(/^chrome:/.test(aPath)))
       return; //not a chrome url
    var rv;
-   
+
       var ios = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces["nsIIOService"]);
         var uri = ios.newURI(aPath, "UTF-8", null);
         var cr = Components.classes['@mozilla.org/chrome/chrome-registry;1'].getService(Components.interfaces["nsIChromeRegistry"]);

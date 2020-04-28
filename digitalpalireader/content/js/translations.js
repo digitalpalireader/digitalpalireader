@@ -1,17 +1,59 @@
 'use strict';
 
-function transLink(which,where,url,title) {
-  var image = 'images/ati.ico';
+var DPR_Translations = (function () {
 
-  switch(where) {
-    case 1:
-      image = 'images/abt.gif';
-      break;
-    case 2:
-      image = 'images/wisdom.png';
-      break;
+const trProps = {
+  ati: {
+    id: 0,
+    baseUrl: `${DPR_PAL.toUrl(DPR_prefs['catiloc'])}/tipitaka`,
+    icon: `ati.ico`,
+    background: 'white',
+  },
+  abt: {
+    id: 1,
+    baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+    icon: `abt.gif`,
+    background: 'rgb(255, 248, 240)',
+  },
+  bt: {
+    id: 2,
+    baseUrl: DPR_PAL.toUrl(DPR_prefs['btloc']),
+    icon: `wisdom.png`,
+    background: 'transparent',
+  },
+  dpr: {
+    id: 3,
+    baseUrl: `Not yet implemented`,
+    icon: `?`,
+    background: 'red',
+  },
+}
+
+const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
+
+const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
+
+const parsePlace = inplace => {
+  const pparts = /^((ati|abt|bt):\/\/)?(.*)$/.exec(inplace);
+  return pparts[2]
+    ? { type: pparts[2], place: pparts[3], }
+    : { type: 'dpr', place: makeLocPlace(pparts[3]), };
+}
+
+function transLink(which,where,url,title) {
+  const type = Object
+    .keys(trProps)
+    .find(k => trProps[k].id === where);
+
+  if (!type) {
+    console.error('Unable to find id', where, 'in', trProps);
   }
-  return '&nbsp;<span class="hoverShow pointer"><img width="16" style="vertical-align:middle" src="' + image +'" title="'+title+'" onmouseup="openTranslation(\''+url+'\',eventSend(event))"></span>';
+
+  return `
+    &nbsp;
+    <span class="hoverShow pointer">
+      <img width="16" style="vertical-align:middle" src="/digitalpalireader/content/images/${trProps[type].icon}" title="${title}" onmouseup="DPR_Send.openTranslation('${type}://${url}', eventSend(event))">
+    </span>`;
 }
 
 function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
@@ -116,7 +158,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             }
           }
           if (surl) {
-            output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahakhandhako/'+surl,'Translation of Mahakhandhako by Anandajoti'));
+            output.push(transLink(which,1,'Mahakhandhako/'+surl,'Translation of Mahakhandhako by Anandajoti'));
             cnt++;
           }
           break;
@@ -144,13 +186,13 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       // BuddhistTexts
       if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/dn/dn_e_'+mysn+'.htm','Translation of DN '+mysn+' by Walshe'));
+        output.push(transLink(which,2,'dn/dn_e_'+mysn+'.htm','Translation of DN '+mysn+' by Walshe'));
         cnt++;
       }
 
       // ATI
       if(DPR_prefs['catioff'] && typeof(atiD) != 'undefined') {
-        mys = mysn + "";
+        var mys = mysn + "";
         if (mys.length < 2) { mys = '0'+mys; }
         var atid = 'dn/dn.'+mys;
         for (var x = 0;x < atiD.length; x++) {
@@ -166,124 +208,126 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       if (mysn == 16) {
         if (which > 0) {
-            var surl = 'index.htm';
+            var surl = [ 'index.htm' ];
             var ssect = '';
           }
         else {
           var ssect = '.' + (section+1);
           switch (section) {
             case 0: case 1:
-              var surl = '01-King-Ajatasattu.htm';
+              var surl = [ '01-King-Ajatasattu.htm' ];
               break;
             case 2:
-              var surl = '02-Prevent-Vajji-Decline.htm';
+              var surl = [ '02-Prevent-Vajji-Decline.htm' ];
               break;
             case 3:
-              var surl = '03-Prevent-Community-Decline-1.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/04-Prevent-Community-Decline-2.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/05-Prevent-Community-Decline-3.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/06-Prevent-Community-Decline-4.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/07-Prevent-Community-Decline-5.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/08-Prevent-Community-Decline-6.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/09-Ambalatthika.htm';
+              var surl = [ '03-Prevent-Community-Decline-1.htm', '04-Prevent-Community-Decline-2.htm', '05-Prevent-Community-Decline-3.htm', '06-Prevent-Community-Decline-4.htm', '07-Prevent-Community-Decline-5.htm', '08-Prevent-Community-Decline-6.htm', '09-Ambalatthika.htm' ];
               break;
             case 4:
-              var surl = '10-Sariputta.htm';
+              var surl = [ '10-Sariputta.htm' ];
               break;
             case 5:
-              var surl = '11-Virtue.htm';
+              var surl = [ '11-Virtue.htm' ];
               break;
             case 6:
-              var surl = '11-Virtue.htm';
+              var surl = [ '11-Virtue.htm' ];
               break;
             case 7:
-              var surl = '12-Building.htm';
+              var surl = [ '12-Building.htm' ];
               break;
             case 8:
-              var surl = '13-Truths.htm';
+              var surl = [ '13-Truths.htm' ];
               break;
             case 9:
-              var surl = '14-Mirror.htm';
+              var surl = [ '14-Mirror.htm' ];
               break;
             case 10:
-              var surl = '14-Mirror.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/15-Ambapali.htm';
+              var surl = [ '14-Mirror.htm', '15-Ambapali.htm' ];
               break;
             case 11:
-              var surl = '15-Ambapali.htm';
+              var surl = [ '15-Ambapali.htm' ];
               break;
             case 12:
-              var surl = '16-Sickness.htm';
+              var surl = [ '16-Sickness.htm' ];
               break;
             case 13:
-              var surl = '17-Ananda\'s-Failure.htm';
+              var surl = [ '17-Ananda%27s-Failure.htm' ];
               break;
             case 14: case 15:
-              var surl = '18-Relinquishment.htm';
+              var surl = [ '18-Relinquishment.htm' ];
               break;
             case 16:
-              var surl = '19-Earthquakes.htm';
+              var surl = [ '19-Earthquakes.htm' ];
               break;
             case 17:
-              var surl = '20-Assemblies.htm';
+              var surl = [ '20-Assemblies.htm' ];
               break;
             case 18:
-              var surl = '21-Mind-Mastery.htm';
+              var surl = [ '21-Mind-Mastery.htm' ];
               break;
             case 19:
-              var surl = '22-Liberations.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/23-Ananda\\\'s-Fault.htm';
+              var surl = [ '22-Liberations.htm', '23-Ananda%27s-Fault.htm' ];
               break;
             case 20:
-              var surl = '23-Ananda\\\'s-Fault.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/24-Ananda-at-Rajagaha.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/25-Ananda-at-Vesali.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/26-Thirty-Seven-Things.htm';
+              var surl = [ '23-Ananda%27s-Fault.htm', '24-Ananda-at-Rajagaha.htm', '25-Ananda-at-Vesali.htm', '26-Thirty-Seven-Things.htm' ];
               break;
             case 21:
-              var surl = '27-Noble-Things.htm';
+              var surl = [ '27-Noble-Things.htm' ];
               break;
             case 22:
-              var surl = '28-References.htm';
+              var surl = [ '28-References.htm' ];
               break;
             case 23:
-              var surl = '29-Last-Meal.htm';
+              var surl = [ '29-Last-Meal.htm' ];
               break;
             case 24:
-              var surl = '30-Drinking-Water.htm';
+              var surl = [ '30-Drinking-Water.htm' ];
               break;
             case 25:
-              var surl = '31-Pukkusa.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/32-Cunda.htm';
+              var surl = [ '31-Pukkusa.htm', '32-Cunda.htm' ];
               break;
             case 26:
-              var surl = '33-Worshipping.htm';
+              var surl = [ '33-Worshipping.htm' ];
               break;
             case 27:
-              var surl = '34-Divinities.htm';
+              var surl = [ '34-Divinities.htm' ];
               break;
             case 28: case 29: case 30:
-              var surl = '35-Four-Places.htm';
+              var surl = [ '35-Four-Places.htm' ];
               break;
             case 31:
-              var surl = '36-Ananda\\\'s-Qualities.htm';
+              var surl = [ '36-Ananda%27s-Qualities.htm' ];
               break;
             case 32:
-              var surl = '37-Kusinara.htm';
+              var surl = [ '37-Kusinara.htm' ];
               break;
             case 33:
-              var surl = '38-Mallas.htm';
+              var surl = [ '38-Mallas.htm' ];
               break;
             case 34:
-              var surl = '39-Subhadda.htm';
+              var surl = [ '39-Subhadda.htm' ];
               break;
             case 35:
-              var surl = '40-Last-Instructions.htm';
+              var surl = [ '40-Last-Instructions.htm' ];
               break;
             case 36:
-              var surl = '41-Final-Emancipation.htm\'); window.open(\'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/42-Preperation-of-Body.htm';
+              var surl = [ '41-Final-Emancipation.htm', '42-Preperation-of-Body.htm' ];
               break;
             case 37:
-              var surl = '42-Preperation-of-Body.htm';
+              var surl = [ '42-Preperation-of-Body.htm' ];
               break;
             case 38:
-              var surl = '43-Mahakassapa.htm';
+              var surl = [ '43-Mahakassapa.htm' ];
               break;
             case 39: case 40:
-              var surl = '44-Distribution.htm';
+              var surl = [ '44-Distribution.htm' ];
               break;
           }
         }
-        output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Mahaparinibbanasuttam/'+surl,'Translation of DN 16'+ssect+' by Anandajoti'));
-        cnt++;
+        surl.forEach(x => {
+          output.push(transLink(which,1,'Mahaparinibbanasuttam/'+x,'Translation of DN 16'+ssect+' by Anandajoti'));
+          cnt++;
+        });
       }
       if (mysn == 22) {
         if (which > 0) {
@@ -304,7 +348,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           }
           surl += sect0 + '.htm';
         }
-        output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Satipatthana/'+surl,'Translation of DN 22'+ssect+' by Anandajoti'));
+        output.push(transLink(which,1,'Satipatthana/'+surl,'Translation of DN 22'+ssect+' by Anandajoti'));
         cnt++;
       }
       break;
@@ -320,7 +364,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       // BuddhistTexts
 
       if(DPR_prefs['buddhist_texts'] && which < 3) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/mn/mn_e_'+mysn+'.htm','Translation of MN '+mysn+' by Bodhi'));
+        output.push(transLink(which,2,'mn/mn_e_'+mysn+'.htm','Translation of MN '+mysn+' by Bodhi'));
         cnt++;
       }
 
@@ -350,7 +394,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(DPR_prefs['buddhist_texts'] && (which == 6 || which == 0)) {
         var n = which == 0 ? getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
 
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
+        output.push(transLink(which,2,'an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
         cnt++;
       }
       if (which > 1) return null;
@@ -467,7 +511,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 
       if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
+        output.push(transLink(which,2,'sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
         cnt++;
       }
 
@@ -536,7 +580,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
               }
             }
           }
-          output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Khuddakapatha/Khuddakapatha.htm','Translation of KhP by Anandajoti'));
+          output.push(transLink(which,1,'Khuddakapatha/Khuddakapatha.htm','Translation of KhP by Anandajoti'));
           cnt++;
         break;
         case 2: // dhp
@@ -587,7 +631,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
             story += sutta;
 
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/dhpa/dhpa_e_'+(parseInt(story)+1)+'.htm','Translation of Dhp-A '+story+' by Burlingame'));
+            output.push(transLink(which,2,'dhpa/dhpa_e_'+(parseInt(story)+1)+'.htm','Translation of Dhp-A '+story+' by Burlingame'));
             cnt++;
           }
 
@@ -664,7 +708,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
             if (sect0 < 10) { sect0 = '0'+sect0; }
             surl += sect0 + '.htm';
           }
-          output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Udana/'+surl,'Translation of Udana '+ssect+' by Anandajoti'));
+          output.push(transLink(which,1,'Udana/'+surl,'Translation of Udana '+ssect+' by Anandajoti'));
           cnt++;
         break;
         case 4: // iti
@@ -742,7 +786,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           }
 
           if (vagga == 4) {
-            output.push(transLink(which,1,'http://www.ancient-buddhist-texts.net/Texts-and-Translations/Parayanavagga/index.htm','Translation of Sn 5 by Anandajoti'));
+            output.push(transLink(which,1,'Parayanavagga/index.htm','Translation of Sn 5 by Anandajoti'));
             cnt++;
           }
         break;
@@ -873,7 +917,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           // BuddhistTexts
           if(DPR_prefs['buddhist_texts']) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+            output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
         break
@@ -881,7 +925,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           // BuddhistTexts
           if(DPR_prefs['buddhist_texts']) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
-            output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
+            output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
         break;
@@ -901,7 +945,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         if(book == 1)
           meta += 12;
 
-        output.push(transLink(which,2,'file://'+DPR_prefs['btloc'].replace(/\\/g,'/')+'/vi/vi_e_'+(parseInt(meta)+1)+'.htm','Translation of Vism '+meta+' by Nyanamoli'));
+        output.push(transLink(which,2,'vi/vi_e_'+(parseInt(meta)+1)+'.htm','Translation of Vism '+meta+' by Nyanamoli'));
         cnt++;
       }
 
@@ -909,3 +953,13 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
   }
   if (cnt > 0) { return output; }
 }
+
+return {
+  trProps: Object.freeze(trProps),
+  parsePlace: parsePlace,
+  addtrans: addtrans,
+  resolveUri: resolveUri,
+  makeUri: makeUri,
+};
+
+})();

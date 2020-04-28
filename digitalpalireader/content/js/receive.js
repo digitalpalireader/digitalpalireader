@@ -87,7 +87,7 @@ function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],c
 
   var tab = mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');
-  var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+'&compare='+count;
+  var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+'&compare='+count);
 
   var node = createBrowser(tab.contentDocument,permalink,count);
   var splitter = createSplitter(tab.contentDocument,count);
@@ -101,7 +101,7 @@ function makeNewPanelIndex([nikaya,book,hiert],count) {
 
   var tab = mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');
-  var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count;
+  var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count);
 
   var node = createBrowser(tab.contentDocument,permalink,count);
   var splitter = createSplitter(tab.contentDocument,count);
@@ -129,3 +129,8 @@ function createSplitter(thisDocument,count){
 
   return splitter;
 }
+
+var DPR_Receive = (function () {
+  return {
+  };
+})();

@@ -11,7 +11,7 @@ var G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍ�
 var G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
 
-function outputFormattedData(data,which,place) // calls text prep, then outputs it to preFrame
+function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
 
   G_lastcolour = 0; // reset colour changing
@@ -39,14 +39,22 @@ function outputFormattedData(data,which,place) // calls text prep, then outputs 
     var section = place[6]
     var hier = place[7];
 
-
-
-    var transin;
-    var transout='';
-    transin = addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
-    if (transin) {
-      transout += transin.join('&nbsp;');
-      document.getElementById('maftrans').innerHTML += transout;
+    var transin = DPR_Translations.addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
+    if(transin && shortcutFns) {
+      $
+        .parseHTML(transin.join(''))
+        .map(x => $(x).find('img'))
+        .filter(x => x.length)
+        .map(x => ({ title: $(x).attr('title'), src: $(x).attr('src'), onmouseup: $(x).attr('onmouseup') }))
+        .forEach((x, i) => {
+          shortcutFns[`${DPR_CMD_TRANSLATE_}${i}`] = {
+            canExecuteStr: 'true',
+            executeStr: x.onmouseup,
+            titleStr: x.title,
+            visibleStr: 'true',
+            icon: x.src,
+          };
+        });
     }
 
     var convDiv = document.createElement('div');
@@ -291,7 +299,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
     else if (/^<p/.exec(wb) && which !=2) { // 2 means coming from textbox
       var parap = wb.split('|');
       var ptype = parap[1];
-      var permalink = parap[2].replace(/_/g,' ');
+      var permalink = DPR_PAL.fixupDprBaseUrl(parap[2].replace(/_/g,' '));
       if(convout.length>1) convout += '\n\n';
       finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer '+(G_thisPara && G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
       saveout += '<p class="paratype'+ptype+'"'+'>';
@@ -572,39 +580,37 @@ function clearDivs(which) { // place divs to be cleared here
   }
 }
 
-function makeToolbox(main,aux,title,conv,ex,save,trans) {
-  if (DPR_PAL.isWeb) {
-    $('.nav-context-div').html('<button type="button" id="contextButton" data-html="true" data-container="body" data-toggle="popover">\u2234</button><div id="tbContainer2" style="display: none"><div id="MainToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(main)+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+digitalpalireader.makeWebAppropriate(aux)+'</div>':'')+'</div>'+'</div>');
-    $('.nav-context-div').popover({
-      trigger: 'click',
-      html: true,
-      content: () => $('#tbContainer2').html(),
-    })
-    return;
-  }//TODO:MovetoMarkupLater
-
+function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(main === false) {
-    $('#tbContainer').html('');
-    $('#tbContainer').hide();
     return;
   }
-  $('#tbContainer').show();
 
-  var but = ['l','m','r'];
-  var bn = 0;
-  var pre = '<div class="tiny tbtitle">'+title+'</div><hr style="margin-bottom:10px"/>';
   if(conv) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToConvertor()" title="send text to convertor (s)">convert</span>';
+    shortcutFns[DPR_CMD_SEND_TO_CONVERTER] = {
+      canExecuteStr: 'true',
+      executeStr: 'sendTextToConvertor()',
+      titleStr: null,
+      visibleStr: 'true',
+    };
   }
-  if(ex) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="sendTextToTextpad(event)" title="send text to textpad (e)">export</span>';
-  }
-  if(save) {
-    pre += '<span class="abut '+but[bn++]+'but small" onmousedown="saveCompilation()" title="save text to Desktop">save</span>';
-  }
-  main = pre + ' ' + main;
 
-  $('#tbContainer').html('<div id="tbOpener" class="tiny">&there4;</div><div id="tbContainer2"><div id="MainToolbar" class="obutc">'+main+'</div>'+(aux?'<div id="auxToolbar" class="obutc">'+aux+'</div>':'')+'</div>');
+  if(ex) {
+    shortcutFns[DPR_CMD_SEND_TO_TEXTPAD] = {
+      canExecuteStr: 'true',
+      executeStr: 'sendTextToTextpad(event)',
+      titleStr: null,
+      visibleStr: 'true',
+    };
+  }
+
+  if(save) {
+    shortcutFns[DPR_CMD_SAVE_TO_DESKTOP] = {
+      canExecuteStr: 'true',
+      executeStr: 'saveCompilation()',
+      titleStr: null,
+      visibleStr: 'true',
+    };
+  }
 }
 
 function makeTable(text,cls) {

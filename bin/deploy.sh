@@ -27,10 +27,6 @@ cp -v "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/
 cp -v "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/index-upgrade.html" "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/index.html"
 $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/index.html" 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"''
 
-echo ------ Clean up container
-$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy remove 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"'' --recursive=true --exclude-path index.html
-$SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy list 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"''
-
 echo ------ Do azcopy
 $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RELEASE_PRIMARYARTIFACTSOURCEALIAS/drop/*" 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"'' --recursive=true
 $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy list 'https://'"$AzureStorageAccount"'.blob.core.windows.net/$web'"$WebContainerSASToken"''
@@ -41,4 +37,7 @@ $SYSTEM_DEFAULTWORKINGDIRECTORY/azcopy copy "$SYSTEM_DEFAULTWORKINGDIRECTORY/$RE
 
 echo ------ Compress stuff
 ls -laF "$RootDir/bin/asge/asge/"
-dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -x 864000 -e .xml .js .css -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+
+# NOTE: html cache age needs to be explicitly set to 0 on server side. http-equiv is not a valid HTML5 tag
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .html .htm .cache  -h 'no-store'                           -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"
+dotnet "$RootDir/bin/asge/asge/ASGE.dll" -- -e .xml .css .js      -h 'public, max-age=2592000, immutable' -r -f '$web' -n .gz -a "$AzureStorageAccount" -k "$AzureStorageKey"

@@ -46,7 +46,7 @@ function onLoad() {
 
   // bottom
 
-  document.getElementById('dict').contentDocument.location.href = 'chrome://digitalpalireader/content/bottom.htm'+linkb;
+  document.getElementById('dict').contentDocument.location.href = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/bottom.htm'+linkb);
 
   if(!linkb.length) {
     moveFrame(6);
@@ -78,11 +78,11 @@ function getBrowserCount() {
 function createTopPanel(params) {
   var elem = document.getElementById('dpr-tops');
   if(/loc=/.test(params))
-    var permalink = 'chrome://digitalpalireader/content/top.htm'+params;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm'+params);
   else if(/ati=/.test(params))
-    var permalink = 'chrome://digitalpalireader/content/ati.xul'+params;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/ati.xul'+params);
   else
-    var permalink = 'chrome://digitalpalireader/content/top.htm';
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm');
 
   var node = createBrowser(permalink);
   var splitter = document.createElement('splitter');

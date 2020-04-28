@@ -1,5 +1,7 @@
 'use strict';
 
+var G_unnamed = '[unnamed]';
+
 var G_hier = 'm';
 
 var oldnikaya = 0;
@@ -150,6 +152,8 @@ G_nikToNumber['b'] = "8";
 G_nikToNumber['g'] = "9";
 G_nikToNumber['n'] = "10";
 
+var G_nikToNumber2 = Object.entries(G_nikToNumber).reduce((acc, [k, v]) => { acc[k] = parseInt(v); return acc; }, []);
+
 var G_numberToNik = [];
 G_numberToNik.push('v');
 G_numberToNik.push('d');
@@ -179,7 +183,7 @@ kudvala['9'] = 8;
 kudvala['10'] = 9;
 kudvala['12'] = 10;
 kudvala['13'] = 11;
-kudvala['14'] = 12;
+kudvala['14'] = 13;
 kudvala['15'] = 13;
 
 var abhivala = [];

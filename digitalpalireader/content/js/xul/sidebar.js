@@ -69,7 +69,7 @@ var digitalpalireader =
       // Get the next tab
       var currentTab = tabbrowser.tabContainer.childNodes[index];
       var ctloc = mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
-      if (/^DPR/.exec(currentTab.getAttribute('id')) && /chrome:\/\/digitalpalireader\/content\//.exec(ctloc)) { // a dpr tab
+      if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
         try{currentTab.linkedBrowser.contentWindow.getconfig();}
         catch(ex){}
       }

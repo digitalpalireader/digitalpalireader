@@ -20,6 +20,7 @@ const paliFeatureName = "pali"
 const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
+const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 
 async function mainInitialize() {
   setPrefs();
@@ -49,20 +50,12 @@ async function mainInitialize() {
 }
 
 function installGlobalHandlers() {
-  window.onresize = () => {
+  window.addEventListener('resize', () => {
     setPrefs();
     initMainPane();
-  };
+  });
 
-  window.onunhandledrejection = event => {
-    console.error('>>>> Unhandled promise rejection: Promise: ', event.promise, "Reason: ", event.reason);
-  };
-
-  window.onpopstate = DPRChrome.historyPopstateHandler;
-
-  window.onerror = error => {
-    console.error(">>>> Unhandled error: ", error);
-  };
+  window.addEventListener('popstate', e => historyPopstateHandler(e));
 }
 
 const loadFeatureAsync = async (name, initFn) => {
@@ -75,11 +68,6 @@ const loadFeatureAsync = async (name, initFn) => {
 const initSplitters = () => {
   $("#main-sidebar").resizable({
     handleSelector: "#main-panel-splitter",
-    resizeHeight: false
-  });
-
-  $("#main-pane-text-container").resizable({
-    handleSelector: "#main-pane-container-splitter",
     resizeHeight: false
   });
 
@@ -115,6 +103,7 @@ const loadPanesAsync = async () => {
   const all = [
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
     loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, __bottomPaneTabsViewModel),
+    loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, __settingsDialogViewModel),
   ];
 
   await Promise.all(all);
@@ -184,3 +173,16 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
       }
     });
   })
+
+const  historyPopstateHandler = e => {
+  console.warn('>>>> historyPopstateHandler', e);
+  if (DPR_PAL.isNavigationFeature()) {
+    $("#navigationDiv").load("navigation.html");
+  } else if (DPR_PAL.isSearchFeature()) {
+    $("#mafbc").load("search-results.html");
+  } else if (DPR_PAL.isDictionaryFeature() && location.indexOf('#') == -1) {
+    $("#mafbc").load("dictionary-results.html");
+  } else {
+    console.error('Unknown feature');
+  }
+}

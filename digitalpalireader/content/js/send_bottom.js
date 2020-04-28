@@ -7,7 +7,7 @@ function sendTextPad(add){
     return;
   }
   else {
-    var permalink = 'chrome://digitalpalireader/content/index.xul?text='+toVel(input);
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+toVel(input));
     openDPRTab(permalink,'DPRm');
   }
 }

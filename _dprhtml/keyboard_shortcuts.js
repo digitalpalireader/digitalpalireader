@@ -1,66 +1,35 @@
-document.onkeypress = keyPressed1;
+document.onkeypress = DPR_keypress;
 
-function keyPressed1(e) {
+function DPR_keypress(e) {
   if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) {
     return;
   }
 
-  if (e.charCode == 118) { // v
+  if (e.key === 'v') {
     openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
     return;
   }
 
-  if (e.charCode > 48 && e.charCode < 54) { // 1-5
+  if (e.key === '`') {
+    DPR_Chrome.toggleDPRSidebar();
+    event.preventDefault();
+    return;
+  }
+
+  if (['1', '2', '3', '4', '5'].includes(e.key)) {
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[e.charCode - 49]);
+    event.preventDefault();
     return;
   }
 
-  if (e.charCode == 105) { // i
-    __gotoIndex();
+  const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchKey(e));
+  if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
+    cmd[1]().execute();
+    event.preventDefault();
     return;
   }
 
-  if (e.charCode == 112) { // p
-    __gotoPrev();
-    return;
-  }
-
-  if (e.charCode == 110) { // n
-    __gotoNext();
-    return;
-  }
-
-  if (e.charCode == 99) { // c
-    __copyPermalink();
-    return;
-  }
-
-  if (e.charCode == 117) { // u
-    __gotoRelm();
-    return;
-  }
-
-  if (e.charCode == 97) { // a
-    __gotoRela();
-    return;
-  }
-
-  if (e.charCode == 107) { // k
-    __gotoRelt();
-    return;
-  }
-
-  if (e.charCode == 109) { // m
-    __gotoMyanmar();
-    return;
-  }
-
-  if (e.charCode == 116) { // t
-    __gotoThai();
-    return;
-  }
-
-  if (e.charCode == 113) { // q
+  if (false && e.key === 'q') { // q
 
     var check = { value: false };                  // default the checkbox to false
 
@@ -82,7 +51,7 @@ function keyPressed1(e) {
     openPlace(outplace, para);
   }
 
-  if (e.charCode == 115) {  // s
+  if (false && e.key === 's') {
     if (window.getSelection().toString() != '') {
       wMain.sendtoconvert(window.getSelection().toString() + '');
     }
@@ -94,7 +63,7 @@ function keyPressed1(e) {
     return;
   }
 
-  if (e.charCode == 101) {  // e
+  if (false && e.key === e) {
     if (window.getSelection().toString() != '') {
       wMain.sendtoPad(window.getSelection().toString() + '');
     }
@@ -106,7 +75,7 @@ function keyPressed1(e) {
     return;
   }
 
-  if (e.charCode == 69) {  // E
+  if (false && e.key === 'E') {
     if (window.getSelection().toString() != '') {
       wMain.sendtoPad(window.getSelection().toString() + '', true);
     }
@@ -118,50 +87,53 @@ function keyPressed1(e) {
     return;
   }
 
-  if (e.charCode == 44) { // ,
+  if (false && e.key === ',') {
     if (dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
     else if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
     return;
   }
 
-  if (e.charCode == 46) { // .
+  if (false && e.key === '.') {
     if (dBot.getElementById('bout')) dBot.getElementById('bout').onclick();
     else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
     return;
   }
 
-  if (e.charCode == 37) { // %
-    $('#settingsDialog').modal('show');
+  if (e.key === '%') {
+    $('#settings-dialog-root').modal('show');
     return;
   }
 
-  if (e.charCode == 33) { // !
+  if (false && e.key === '!') {
     eraseOptions();
     return;
   }
 
-  if (e.charCode == 35) { // #
+  if (false && e.key === '#') {
     newquiz();
     return;
   }
 
-  if (e.charCode == 42) { // *
+  if (false && e.key === '*') {
     bvAlert(bv()); return;
   }
 
-  if (e.charCode == 98) { // b
+  if (false && e.key === 'b') {
     dTop.getElementById('bkButton').onmousedown();
     return;
   }
 
-  if (e.charCode == 104) { // h
-    openDPRTab('help.html', 'DPR-help', 0);
+  if (e.key === 'h') {
+    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
     return;
   }
 
-  // @
+  if (false && e.key === '@') {
+    // Launch feedback form.
+    return;
+  }
 
-  if (e.charCode == 63) { // ?
+  if (e.key === '?') { // ?
     $('#helpDialog').modal('show');
     return;
   }

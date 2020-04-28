@@ -93,7 +93,7 @@ DPR_prefsD['colsize'] = '16';
 
 DPR_prefsD['bktype'] = 'colimg';
 DPR_prefsD['colbk'] = '#FFD';
-DPR_prefsD['imgbk'] = 'url(chrome://digitalpalireader/content/images/background.png)';
+DPR_prefsD['imgbk'] = 'url(/digitalpalireader/content/images/imgbk.png)';
 
 DPR_prefsD['bkcptype'] = 'col';
 DPR_prefsD['colbkcp'] = '#F4F4F4';
@@ -119,14 +119,14 @@ DPR_prefsD['red'] = 'red';
 
 DPR_prefsD['blueh'] = 'powderblue';
 
-DPR_prefsD['ctrans'] = false;
-DPR_prefsD['catioff'] = false;
-DPR_prefsD['catiloc'] = '<none>';
+DPR_prefsD['ctrans'] = true;
+DPR_prefsD['catioff'] = true;
+DPR_prefsD['catiloc'] = 'https://tipitaka.digitalpalireader.online/ati';
 DPR_prefsD['autodict'] = false;
 DPR_prefsD['bkgimg'] = true;
 
-DPR_prefsD['buddhist_texts'] = false;
-DPR_prefsD['btloc'] = '<none>';
+DPR_prefsD['buddhist_texts'] = true;
+DPR_prefsD['btloc'] = 'https://tipitaka.digitalpalireader.online/bt';
 
 
 DPR_prefsD['allContext'] = true;
@@ -189,7 +189,20 @@ function WEB_setPref(name,value) {
 }
 
 function WEB_getPref(name) {
-  const pref = DPR_prefsD[name];
+  let pref = DPR_prefsD[name];
+  let prefType = localStorage['DPR_Prefs_type_'+name] === undefined ? 'string' : localStorage['DPR_Prefs_type_'+name];
+
+  if (!(localStorage['DPR_Prefs_'+name] === undefined)){
+    switch (prefType){
+      case 'int':
+        pref = parseInt(localStorage['DPR_Prefs_'+name]);
+        break;
+      default:
+        pref = localStorage['DPR_Prefs_'+name];
+        break;
+    }
+  }
+
   return /(chrome:)/.test(pref) ? '' : pref;
 }
 
