@@ -1,5 +1,7 @@
 'use strict';
 
+var G_unnamed = '[unnamed]';
+
 var G_hier = 'm';
 
 var oldnikaya = 0;
@@ -149,6 +151,8 @@ G_nikToNumber['x'] = "7";
 G_nikToNumber['b'] = "8";
 G_nikToNumber['g'] = "9";
 G_nikToNumber['n'] = "10";
+
+var G_nikToNumber2 = Object.entries(G_nikToNumber).reduce((acc, [k, v]) => { acc[k] = parseInt(v); return acc; }, []);
 
 var G_numberToNik = [];
 G_numberToNik.push('v');

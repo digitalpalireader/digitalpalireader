@@ -93,9 +93,13 @@ var digitalpalireader = {
 
   updateSubnavx:function (depth,event){ // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
 
-    var navShown = [$('#nav-meta-button').is(":visible"),$('#nav-volume-button').is(":visible"),
-      $('#nav-vagga-button').is(":visible"),$('#nav-sutta-button').is(":visible"),
-      $('#nav-section-button').is(":visible")];
+    var navShown = [
+      $('#nav-meta-button').is(":visible"),
+      $('#nav-volume-button').is(":visible"),
+      $('#nav-vagga-button').is(":visible"),
+      $('#nav-sutta-button').is(":visible"),
+      $('#nav-section-button').is(":visible")
+    ];
 
     document.activeElement.blur();
 
