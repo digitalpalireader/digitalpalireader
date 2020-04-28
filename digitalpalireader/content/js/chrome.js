@@ -190,32 +190,37 @@ function DPRSidebarDocument() {
 }
 
 function closeDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(false);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-
-  if (sidebarWindow.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
-    return DPR_PAL.mainWindow.toggleSidebar();
+    if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar();
+    }
   }
 }
-function openDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-  if (sidebarWindow.location.href != DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
-    return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+function openDPRSidebar() {
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(true);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+    if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+    }
   }
+}
+
+function toggleDPRSidebar() {
+  __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
 }
 
 function setCurrentTitle(title) {
-  if (DPR_PAL.isXUL) {
-    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-  } else {
+  if (DPR_PAL.isWeb) {
     document.title = title;
+  } else {
+    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
   }
 }
 
@@ -281,24 +286,6 @@ const closeBottomFrame = () => {
 }
 
 var DPR_Chrome = (function () {
-  const toggleNewSidebarVisibility = () => {
-    if ($('#main-sidebar').is(":visible")) {
-      closeNewSidebar();
-    } else {
-      openNewSidebar();
-    }
-  }
-
-  const closeNewSidebar = () => {
-    $("#main-sidebar").hide();
-    $("#main-panel-splitter").hide();
-  }
-
-  const openNewSidebar = () => {
-    $("#main-sidebar").show();
-    $("#main-panel-splitter").show();
-  }
-
   const fixupUrlAndMainPanelSectionsLayout = () => {
     const availableWidth = $('#main-pane-container').width();
     const totalSplitterWidth = $('.main-pane-container-splitter')
@@ -365,11 +352,53 @@ var DPR_Chrome = (function () {
     fixupUrlAndMainPanelSectionsLayout();
   }
 
+  const ToastTypeError = 'Error';
+  const ToastTypeWarning = 'Warning';
+  const ToastTypeSuccess = 'Success';
+  const ToastTypeInfo = 'Information';
+  const createToast = (type, message, delay) => {
+    let typeClasses = null;
+    if (type === ToastTypeError) {
+      typeClasses = 'bg-danger text-light';
+    } else if (type === ToastTypeWarning) {
+      typeClasses = 'bg-warning text-light';
+    } else if (type === ToastTypeSuccess) {
+      typeClasses = 'bg-green text-light';
+    } else /* Information */ {
+      typeClasses = '';
+    }
+
+    $("#main-container-toast-container").append(`
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
+        <div class="toast-header ${typeClasses}">
+          <strong class="mr-auto">${type}</strong>
+          <small></small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true"><small>&times;</small></span>
+          </button>
+        </div>
+        <div class="toast-body ${typeClasses}">
+          ${message}
+        </div>
+      </div>
+    `);
+
+    $(".toast").toast("show");
+
+    $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
+  }
+
+  const showErrorToast = (message) => {
+    createToast(ToastTypeError, message, 2000);
+  }
+
   return {
-    toggleNewSidebarVisibility: toggleNewSidebarVisibility,
-    openNewSidebar: openNewSidebar,
+    toggleDPRSidebar: toggleDPRSidebar,
+    openDPRSidebar: openDPRSidebar,
+    closeDPRSidebar: openDPRSidebar,
     addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
+    showErrorToast: showErrorToast,
   };
 })();

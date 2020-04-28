@@ -31,6 +31,22 @@ body .btn {
   box-shadow: 0 0 0 transparent !important;
 }
 
+body .bd-highlight {
+  background-color: rgba(86,61,124,.15);
+  border: 1px solid rgba(86,61,124,.15);
+}
+
+#main-container-toast-container {
+  top: 2rem;
+  right: 2rem;
+}
+
+#main-container-toast-container .toast {
+  position: relative;
+  z-index: 1000;
+}
+
+
 #main-container-loading-page {
   position: fixed;
   height: 100%;
@@ -106,7 +122,6 @@ body .btn {
   width: var(--main-sidebar-width);
   overflow-x: hidden;
   overflow-y: auto;
-  display: none;
 }
 
 #main-sidebar #main-sidebar-content {
@@ -120,7 +135,6 @@ body .btn {
   width: var(--splitter-width);
   background: var(--v-splitter-background);
   cursor: col-resize;
-  display: none;
 }
 
 #main-content-landing-page {
@@ -492,6 +506,43 @@ body .btn {
 
 #settings-pane #settings-pane-tab-panes .settings-pane-tab-pane .settings-pane-tab-pane-section-3col-grid {
   grid-template-columns: minmax(min-content, max-content) auto minmax(min-content, min-content);
+}
+
+/*
+ Navigation Tab
+ */
+
+#navigationTabContent #mat-button-group .mat-button-group-seperator {
+  margin: 0rem 0.2rem;
+  border-radius: 1px;
+  border: 1px ridge lightgray;
+}
+
+#navigationTabContent #mat-button-group input[type="radio"] {
+  position: fixed;
+  opacity: 0;
+  width: 0;
+}
+
+#navigationTabContent #mat-button-group label {
+  display: inline-block;
+  padding: 0.3rem 1.5rem;
+  margin: 0;
+}
+
+#navigationTabContent #mat-button-group label:hover {
+  background-color: #DBE9F5;
+}
+
+#navigationTabContent #mat-button-group input[type="radio"]:checked + label {
+  background-color: #C3DFF6;
+}
+
+#navigationTabContent #mat-button-group input[type="radio"]:focus + label {
+  color: #495057;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
 }
 
 /*

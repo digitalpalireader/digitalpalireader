@@ -57,12 +57,16 @@
   </head>
 
   <body>
+    <div aria-live="polite" aria-atomic="true" class="position-relative">
+      <div id="main-container-toast-container" class="position-absolute">
+      </div>
+    </div>
     <div id="main-container-loading-page" data-bind="visible: loadingFeatureVisible">
       <img id="main-container-loading-page-spinner" class="spin-img-infinitely" src="/digitalpalireader/content/images/dwheel.png" alt="Loading...">
     </div>
     <div id="main-container" data-bind="hidden: loadingFeatureVisible">
       <div id="main-panel">
-        <div id="main-sidebar">
+        <div id="main-sidebar" data-bind="visible: sidebarVisible()">
           <div id="main-sidebar-content" class="card">
             <div class="card-header">
               Digital Pali Reader
@@ -91,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div id="main-panel-splitter" ondblclick="DPR_Chrome.toggleNewSidebarVisibility()"></div>
+        <div id="main-panel-splitter" data-bind="visible: sidebarVisible()" ondblclick="DPR_Chrome.toggleDPRSidebar()"></div>
         <div id="main-content">
 
           <div id="context-menu" data-bind="visible: mainFeaturesVisible() && activeTab() === 'navigation'">
@@ -222,7 +226,7 @@
 
           <div id="main-content-panel">
             <header id="main-content-header" data-bind="visible: mainFeaturesVisible">
-              <button type="button" class="btn btn-light m-0" onclick="DPR_Chrome.toggleNewSidebarVisibility()" title="Toggle sidebar (Keyboard shortcut: `)">
+              <button type="button" class="btn btn-light m-0" onclick="DPR_Chrome.toggleDPRSidebar()" title="Toggle sidebar (Keyboard shortcut: `)">
                 <i class="fa fa-bars"></i>
               </button>
               <a href="/" class="btn btn-light m-0" role="button" title="Home/Buddha Vachana (Keyboard shortcut: v)">

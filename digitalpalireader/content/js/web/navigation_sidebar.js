@@ -1,34 +1,33 @@
 'use strict';
 
 var DPRNav = {
-  changeSet: function (noget, book) {
-    var nik = document.getElementById('set').value;
-    if (G_hier == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
-      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
-      document.getElementById('set').selectedIndex = oldnikaya;
-      return;
-    }
-    if (G_hier == 'a' && document.getElementById('set').value == 'g') {
-      alert('Atthakatha not available for Gram.');
-      document.getElementById('set').selectedIndex = oldnikaya;
-      return;
-    }
-    if (G_hier == 'a' && document.getElementById('set').value == 'b') {
-      alert('Atthakatha not available for Abhidh-s.');
-      document.getElementById('set').selectedIndex = oldnikaya;
-      return;
-    }
-    oldnikaya = document.getElementById('set').selectedIndex;
+  changeSet: async function (nik) {
+    __navigationTabViewModel.set(nik);
 
-    this.setBookList(nik, book);
-    DPRXML.updateHierarchy(0);
+    const prevSet = G_numberToNik[__navigationTabViewModel.prevSetIndex]
+    if (G_hier == 't' && this.limitt(G_nikToNumber2[__navigationTabViewModel.set()])) {
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.')
+      __navigationTabViewModel.set(prevSet);
+      return;
+    }
+    if (G_hier == 'a' && __navigationTabViewModel.set() == 'g') {
+      DPR_Chrome.showErrorToast('Atthakatha not available for Gram.')
+      __navigationTabViewModel.set(prevSet);
+      return;
+    }
+    if (G_hier == 'a' && __navigationTabViewModel.set() == 'b') {
+      DPR_Chrome.showErrorToast('Atthakatha not available for Abhidh-s.');
+      __navigationTabViewModel.set(prevSet);
+      return;
+    }
+
+    __navigationTabViewModel.prevSetIndex = G_nikToNumber2[nik];
+
+    this.setBookList(nik);
   },
 
-
   getBookName: function (nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
-
-
-    if (nik == 'k' || nik == 'y' || nik == 'n') {
+    if (Object.keys(G_kynames).includes(nik)) {
       no = G_kynames[nik][no];
       if (ht != 'm') no = no.replace(/([^a]) 1$/, '$1');
     }
@@ -37,25 +36,26 @@ var DPRNav = {
   },
 
   setBookList: function (nik, book) {
-    var checkNikaya = '<table><tr><td valign="top">';
+    var titles;
+    if (nikvoladi[nik]) titles = nikvoladi[nik];
+    else titles = nikvoladi[nik+G_hier];
+    __navigationTabViewModel.navBook.removeAll();
 
-    if (nikvoladi[nik]) var titles = nikvoladi[nik];
-    else var titles = nikvoladi[nik + G_hier];
-    var bookNode = document.getElementById('book');
-    while (bookNode.itemCount > 0) bookNode.removeItemAt(0);
     for (var i = 0; i < titles.length; i++) {
-      if (nik == 'k' || nik == 'y' || nik == 'n') {
-        var title = G_kynames[nik][titles[i]];
-        var val = titles[i] + 1;
+      var title;
+      var val;
+      if(Object.keys(G_kynames).includes(nik)) {
+        title = G_kynames[nik][titles[i]];
+        val = titles[i]+1;
       }
       else {
-        var title = titles[i];
-        var val = i + 1;
+        title = titles[i];
+        val = i+1;
       }
-      bookNode.appendItem(translit(title));
-      bookNode.getItemAtIndex(i).value = val;
+      __navigationTabViewModel.navBook.push({value: val, label: translit(title)});
     }
-    bookNode.selectedIndex = book ? book : 0;
+
+    __navigationTabViewModel.book(book ? book : __navigationTabViewModel.navBook()[0].value);
   },
 
   limitt: function (nikn) {
@@ -96,30 +96,27 @@ var DPRNav = {
 
     if (G_hier == htmp) return;
 
-    var himg = ['l', 'm', 'r'];
-
-    if (htmp == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
-      var MAT = document.getElementById('mul').checked == true ? 'mul' : 'att';
-      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
-      setTimeout(function () { document.getElementById(MAT).checked = true }, 10);
+    if (htmp == 't' && this.limitt(__navigationTabViewModel.prevSetIndex)) {
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.');
+      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
-    if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
-      alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value] + '.');
-      setTimeout(function () { document.getElementById('mul').checked = true }, 10);
+    if (htmp == 'a' && __navigationTabViewModel.prevSetIndex > 7) {
+      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.');
+      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
-    if (document.getElementById('set').value == 'k' && htmp == 'a' && kudvala[document.getElementById('book').value] == undefined) {
-      alert('Aṭṭhakathā not available for ' + this.getBookName(document.getElementById('set').value, htmp, document.getElementById('book').selectedIndex) + '.');
-      setTimeout(function () { document.getElementById('mul').checked = true }, 10);
+    if (__navigationTabViewModel.set() == 'k' && htmp == 'a' && kudvala[__navigationTabViewModel.book()] == undefined) {
+      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + this.getBookName(__navigationTabViewModel.set(), htmp, __navigationTabViewModel.navBook().findIndex(x => x.value === __navigationTabViewModel.book())) + '.');
+      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
 
     G_hier = htmp;
+    __navigationTabViewModel.prevMat = htmp;
 
-
-    var book = document.getElementById('book').value;
-    if (document.getElementById('set').value == 'k') {
+    var book = __navigationTabViewModel.book();
+    if (__navigationTabViewModel.set() == 'k') {
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -127,8 +124,8 @@ var DPRNav = {
         book = kudvala[book];
       }
     }
-    else if (document.getElementById('set').value == 'y') {
-      var book = document.getElementById('book').value;
+    else if (__navigationTabViewModel.set() == 'y') {
+      var book = __navigationTabViewModel.book();
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -139,9 +136,8 @@ var DPRNav = {
     else
       book = parseInt(book) - 1;
 
-    this.changeSet(1, book);
-    DPRXML.updateHierarchy(0);
-  },
+      this.setBookList(__navigationTabViewModel.set(), book);
+    },
 
   historyBox: function () {
     if (!DPR_PAL.isXUL) {
@@ -305,22 +301,19 @@ var DPRNav = {
   },
 
   gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    $('#nav-set').val(nikaya);
-    $(".hierlabel.active").removeClass("active");
-    $("#hier-"+hiert).parent().addClass("active");
-    $("#hier-"+hiert).prop("checked",true);
-    digitalpalireader.changeHier(hiert);
-    $('#nav-book').prop("selectedIndex",book);
-    $('#nav-meta').prop("selectedIndex", meta);
-    $('#nav-volume').prop("selectedIndex", volume);
-    $('#nav-vagga').prop("selectedIndex", vagga);
-    $('#nav-sutta').prop("selectedIndex", sutta);
-    $('#nav-section').prop("selectedIndex", section);
-
+    __navigationTabViewModel.set(nikaya);
+    __navigationTabViewModel.MAT(hiert);
+    const b = __navigationTabViewModel.navBook().findIndex(x => x.value === book + 1);
+    __navigationTabViewModel.book(__navigationTabViewModel.navBook()[b].value);
+    __navigationTabViewModel.meta(meta);
+    __navigationTabViewModel.volume(volume);
+    __navigationTabViewModel.vagga(vagga);
+    __navigationTabViewModel.sutta(sutta);
+    __navigationTabViewModel.section(section);
   },
 
   searchBook: function (nik, book, hiert) {
-    DPR_Chrome.openNewSidebar();
+    DPR_Chrome.openDPRSidebar();
     $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();

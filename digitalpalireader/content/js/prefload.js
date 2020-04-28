@@ -93,7 +93,7 @@ DPR_prefsD['colsize'] = '16';
 
 DPR_prefsD['bktype'] = 'colimg';
 DPR_prefsD['colbk'] = '#FFD';
-DPR_prefsD['imgbk'] = 'url(/digitalpalireader/content/images/background.png)';
+DPR_prefsD['imgbk'] = 'url(/digitalpalireader/content/images/imgbk.png)';
 
 DPR_prefsD['bkcptype'] = 'col';
 DPR_prefsD['colbkcp'] = '#F4F4F4';
