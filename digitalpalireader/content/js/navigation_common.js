@@ -350,6 +350,10 @@ G_SNAdjustNumbers[23] = [];
 G_SNAdjustNumbers[23][23] = 10;
 G_SNAdjustNumbers[23][25] = 10;
 
+G_SNAdjustNumbers[24][19] = 16;
+G_SNAdjustNumbers[24][29] = 24;
+G_SNAdjustNumbers[24][31] = 24;
+
 G_SNAdjustNumbers[29] = [];
 G_SNAdjustNumbers[29][11] = 9;
 G_SNAdjustNumbers[29][12] = 29;
@@ -535,17 +539,17 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
       if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
       no = (vagga+1);
       var noend = "";
-      var sno = parseInt(smlist[vagga][sutta][section]); 
+      var sno = parseInt(smlist[vagga][sutta][section]);
       var add = 0;
       if(G_SNAdjustNumbers[no] != null){
 
         for(var key in G_SNAdjustNumbers[no]){
-          if(G_SNAdjustNumbers[no].hasOwnProperty(key)&&        
-          /^0$|^[1-9]\d*$/.test(key) &&    
-          key <= 4294967294                
+          if(G_SNAdjustNumbers[no].hasOwnProperty(key)&&
+          /^0$|^[1-9]\d*$/.test(key) &&
+          key <= 4294967294
           ){
             var keyint = parseInt(key)+add;
-            
+
             if(sno+add == keyint){
               noend = "-"+(keyint+G_SNAdjustNumbers[no][key]);
               break;
@@ -553,7 +557,7 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
             else if(sno+add < keyint){
               break;
             }
-            
+
             add += G_SNAdjustNumbers[no][key];
           }
         }
@@ -666,9 +670,9 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
       if(hiert != 'm') return;
       if(G_SNAdjustNumbers[a1] != null){
         for(var key in G_SNAdjustNumbers[a1]){
-          if(G_SNAdjustNumbers[a1].hasOwnProperty(key)&&        
-          /^0$|^[1-9]\d*$/.test(key) &&    
-          key <= 4294967294                
+          if(G_SNAdjustNumbers[a1].hasOwnProperty(key)&&
+          /^0$|^[1-9]\d*$/.test(key) &&
+          key <= 4294967294
           ){
             if(parseInt(a2) < parseInt(key)){
               break;
