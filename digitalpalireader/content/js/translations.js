@@ -500,6 +500,8 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(hier != 'm')
         break;
 
+      var shortLink = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier);
+
       var bookn = book+1;
 
       if (bookn > 1) {vagga+=11;}
@@ -511,7 +513,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
 
       if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
+        output.push(transLink(which,2,'sn/sn_e_'+(vagga+1)+'.htm#'+shortLink,'Translation of SN '+(vagga+1)+' by Bodhi'));
         cnt++;
       }
 
