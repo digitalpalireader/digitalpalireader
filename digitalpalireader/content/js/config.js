@@ -13,8 +13,7 @@ window.onerror = function(message, file, lineNumber) {
 
 var atiIns = 0;
 
-
-
+const dprBaseStyleSheet = Object.entries(document.styleSheets).find(([_, ss]) => ss.href && ss.href.match(/.*_dprhtml\/StYlEs\.css$/i))[1];
 
 function getconfig() {
   for (var i in DPR_prefs) {
@@ -31,21 +30,21 @@ function getconfig() {
 
   // update fonts, colors
 
-  document.styleSheets[1]['cssRules'][0].style.color = DPR_prefs['coltext'];
-  document.styleSheets[1]['cssRules'][0].style.fontFamily = DPR_prefs['colfont'];
-  document.styleSheets[1]['cssRules'][1].style.fontSize = DPR_prefs['colsize'] + 'px';
+  dprBaseStyleSheet['cssRules'][0].style.color = DPR_prefs['coltext'];
+  dprBaseStyleSheet['cssRules'][0].style.fontFamily = DPR_prefs['colfont'];
+  dprBaseStyleSheet['cssRules'][1].style.fontSize = DPR_prefs['colsize'] + 'px';
 
-  document.styleSheets[1]['cssRules'][2].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.9) + 'px';  // select, etc.
-  document.styleSheets[1]['cssRules'][2].style.backgroundColor = DPR_prefs['colInput'];  // select, etc.
+  dprBaseStyleSheet['cssRules'][2].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.9) + 'px';  // select, etc.
+  dprBaseStyleSheet['cssRules'][2].style.backgroundColor = DPR_prefs['colInput'];  // select, etc.
 
-  document.styleSheets[1]['cssRules'][3].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // small
-  document.styleSheets[1]['cssRules'][4].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.7) + 'px';  // tiny
-  document.styleSheets[1]['cssRules'][5].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.25) + 'px';  // large
-  document.styleSheets[1]['cssRules'][6].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.5) + 'px';  // huge
+  dprBaseStyleSheet['cssRules'][3].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // small
+  dprBaseStyleSheet['cssRules'][4].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.7) + 'px';  // tiny
+  dprBaseStyleSheet['cssRules'][5].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.25) + 'px';  // large
+  dprBaseStyleSheet['cssRules'][6].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.5) + 'px';  // huge
 
-  document.styleSheets[1]['cssRules'][9].style.backgroundColor = DPR_prefs['colButton'];  // buttons
-  document.styleSheets[1]['cssRules'][10].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
-  document.styleSheets[1]['cssRules'][11].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
+  dprBaseStyleSheet['cssRules'][9].style.backgroundColor = DPR_prefs['colButton'];  // buttons
+  dprBaseStyleSheet['cssRules'][10].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
+  dprBaseStyleSheet['cssRules'][11].style.backgroundImage = '-moz-radial-gradient('+DPR_prefs['colButtonSel']+','+DPR_prefs['colbkcp']+')';  // buttons
 }
 
 function changecss(myclass,element,value) {
@@ -56,9 +55,9 @@ function changecss(myclass,element,value) {
   else if (document.getElementById) {
     CSSRules = 'cssRules'
   }
-  for (var i = 0; i < document.styleSheets[1][CSSRules].length; i++) {
-    if (document.styleSheets[1][CSSRules][i].selectorText == myclass) {
-      document.styleSheets[1][CSSRules][i].style[element] = value
+  for (var i = 0; i < dprBaseStyleSheet[CSSRules].length; i++) {
+    if (dprBaseStyleSheet[CSSRules][i].selectorText == myclass) {
+      dprBaseStyleSheet[CSSRules][i].style[element] = value
     }
   }
 }
@@ -67,35 +66,35 @@ function checkbackground() {
   var wbk = DPR_prefs['bktype'];
 
   if(/col/.exec(wbk)) {
-    document.styleSheets[1]['cssRules'][7].style.backgroundColor = DPR_prefs['colbk'];  // paperback
+    dprBaseStyleSheet['cssRules'][7].style.backgroundColor = DPR_prefs['colbk'];  // paperback
     document.body.style.backgroundColor = DPR_prefs['colbk'];
   }
   else {
-    document.styleSheets[1]['cssRules'][7].style.backgroundColor = '';  // paperback
+    dprBaseStyleSheet['cssRules'][7].style.backgroundColor = '';  // paperback
     document.body.style.backgroundColor = '';
   }
   if(/img/.exec(wbk)) {
-    document.styleSheets[1]['cssRules'][7].style.backgroundImage = DPR_prefs['imgbk'];  // paperback
+    dprBaseStyleSheet['cssRules'][7].style.backgroundImage = DPR_prefs['imgbk'];  // paperback
     document.body.style.backgroundImage = DPR_prefs['imgbk'];
   }
   else {
-    document.styleSheets[1]['cssRules'][7].style.backgroundImage = '';  // paperback
+    dprBaseStyleSheet['cssRules'][7].style.backgroundImage = '';  // paperback
     document.body.style.backgroundImage = '';
   }
 
   var sbk = DPR_prefs['bkcptype'];
 
   if(/col/.exec(sbk)) {
-    document.styleSheets[1]['cssRules'][8].style.backgroundColor = DPR_prefs['colbkcp'];  // chromeback
+    dprBaseStyleSheet['cssRules'][8].style.backgroundColor = DPR_prefs['colbkcp'];  // chromeback
   }
   else {
-    document.styleSheets[1]['cssRules'][8].style.backgroundColor = '';  // chromeback
+    dprBaseStyleSheet['cssRules'][8].style.backgroundColor = '';  // chromeback
   }
   if(/img/.exec(sbk)) {
-    document.styleSheets[1]['cssRules'][8].style.backgroundImage = DPR_prefs['imgbkcp'];  // chromeback
+    dprBaseStyleSheet['cssRules'][8].style.backgroundImage = DPR_prefs['imgbkcp'];  // chromeback
   }
   else {
-    document.styleSheets[1]['cssRules'][8].style.backgroundImage = '';  // chromeback
+    dprBaseStyleSheet['cssRules'][8].style.backgroundImage = '';  // chromeback
   }
 }
 
