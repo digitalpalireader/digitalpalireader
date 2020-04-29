@@ -2,7 +2,7 @@
 
 function outputDef(which,first,frombox)
 {
-  $('#anfright').html('');
+  $('#anfs').html('');
 
   var osout = '<table style="float:left" id="data-table" cellspacing="0" cellpadding="0"><tr>';
 
@@ -12,8 +12,7 @@ function outputDef(which,first,frombox)
 
   if (G_outwords.length > 1 && first) {
 
-    $('#anfs').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
-
+    $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
     // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
     for(var i = 0; i < G_outwords.length; i++)
     {
@@ -30,18 +29,18 @@ function outputDef(which,first,frombox)
         }
         if(i > 0 && toUni(a[0].split('-')[i]).length < 4 && toUni(a[0].split('-')[i]).length > 1){
           af--;
-        } // penalize small middle 
+        } // penalize small middle
       }
 
       var bf = 0;
       var b1 = b[1].split('@');
       for(var i = 0; i < b1.length; i++){
-        if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){ 
+        if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){
           bf++;
         }
         if(i > 0 && toUni(b[0].split('-')[i]).length < 4 && toUni(b[0].split('-')[i]).length > 1){
           bf--;
-        } // penalize small middle 
+        } // penalize small middle
       }
 
       if (af/a1.length > bf/b1.length) {
@@ -87,7 +86,7 @@ function outputDef(which,first,frombox)
       return 0;
 
     });
-    
+
     for(var i = 0; i < G_outwords.length; i++)
     {
       G_shortdefpost[i] = G_outwords[i][G_outwords[i].length-1];
@@ -143,7 +142,7 @@ function outputDef(which,first,frombox)
         // data[3] = short def (if avail)
         // for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
       var dataout = translit(toUni(G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
-      var conciseCode = (data[3]?'onmouseover="showShortDef(\''+toUni(data[3])+'\')" ':'');
+      var conciseCode = "";
       if (d == 0) { // first match (will go on top)
         switch (data[2]) {
           case '0':
@@ -232,13 +231,19 @@ function outputDef(which,first,frombox)
       conciseword = toUni(conciseword);
 
       G_thisConcise[conciseword] = concisedef;
-      if(x== 0)
+      if(x == 0){
+
         var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;
+      }
+      conciseoutput += '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef +'<br/>';
     }
 
   }
-  if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0))
-    $('#anfright').html(sdfirst);
+  if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0)){
+
+    $('#anfs').html(conciseoutput);
+    //$('#anfright').html(sdfirst);
+  }
 
   //alert(G_thisConcise);
   if (hotlink) {
@@ -256,12 +261,12 @@ function outputDef(which,first,frombox)
 var G_thisConcise = [];
 
 function showShortDef(word) {
-  $('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + G_thisConcise[word]);
+  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + G_thisConcise[word]);
 }
 
 function conciseChange(value) {
   var spdcol = value.split(':');
-  $('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
+  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
 }
 
 function reanalyze(word,cancel) {
