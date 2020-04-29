@@ -199,7 +199,7 @@ function triggerUpdateCheck() {
 
   const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
     /^(localdev|staging)$/i.test(window.environmentName)
-    ? [1, 2/60]
+    ? [5, 1]
     : [5, 3];
 
   setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
