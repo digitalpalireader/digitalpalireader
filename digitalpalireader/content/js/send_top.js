@@ -2,8 +2,8 @@
 function sendTextPad(input, add){
 
   if(!add) { // reuse old tab
-    var thisTab = mainWindow.gBrowser.selectedTab;
-    var thisTabBrowser = mainWindow.gBrowser.getBrowserForTab(thisTab);
+    var thisTab = DPR_PAL.mainWindow.gBrowser.selectedTab;
+    var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
     thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
     return;
   }

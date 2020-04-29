@@ -270,17 +270,17 @@ function pedFullTextSearch(getstring) {
 
     for (var j =0; j < allp.length; j++) {
       var texttomatch = allp[j].textContent;
-      startmatch = texttomatch.search(getstring);
-      postpara = '';
+      var startmatch = texttomatch.search(getstring);
+      var postpara = '';
       if (startmatch >= 0)
       {
         listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>');
         while (startmatch >= 0)
         {
-          gotstring = texttomatch.match(getstring)[0];
-          endmatch = startmatch + gotstring.length;
-          beforem = texttomatch.substring(0,startmatch);
-          afterm = texttomatch.substring(endmatch,texttomatch.length);
+          var gotstring = texttomatch.match(getstring)[0];
+          var endmatch = startmatch + gotstring.length;
+          var beforem = texttomatch.substring(0,startmatch);
+          var afterm = texttomatch.substring(endmatch,texttomatch.length);
           postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
           texttomatch = texttomatch.substring(endmatch);
           startmatch = texttomatch.search(getstring);
@@ -500,7 +500,7 @@ function dppnFullTextSearch(getstring) {
           gotstring = texttomatch.match(getstring)[0];
           endmatch = startmatch + gotstring.length;
           beforem = texttomatch.substring(0,startmatch);
-          afterm = texttomatch.substring(endmatch,texttomatch.length);
+          var afterm = texttomatch.substring(endmatch,texttomatch.length);
           postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
           texttomatch = texttomatch.substring(endmatch);
           startmatch = texttomatch.search(getstring);

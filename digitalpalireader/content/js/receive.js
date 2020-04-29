@@ -85,7 +85,7 @@ function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],c
   if(count == 1)
     return loadXMLSection(null,null,[nikaya,book,meta,volume,vagga,sutta,section,hiert],null,null,1);
 
-  var tab = mainWindow.gBrowser.selectedTab.linkedBrowser;
+  var tab = DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');
   var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+'&compare='+count);
 
@@ -99,7 +99,7 @@ function makeNewPanelIndex([nikaya,book,hiert],count) {
   if(count == 1)
     return loadXMLindex([nikaya,book,hiert],1);
 
-  var tab = mainWindow.gBrowser.selectedTab.linkedBrowser;
+  var tab = DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');
   var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+hiert+'&compare='+count);
 

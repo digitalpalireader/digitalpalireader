@@ -2,8 +2,8 @@
 
 class DprViewModel {
   constructor() {
-    this.sidebarVisible = ko.observable(true)
-    this.loadingFeatureVisible = ko.observable(true)
+    this.sidebarVisible = ko.observable(false);
+    this.loadingFeatureVisible = ko.observable(true);
     this.landingFeatureVisible = ko.observable(false);
     this.mainFeaturesVisible = ko.observable(false);
     this.activeTab = ko.observable(navigationFeatureName);

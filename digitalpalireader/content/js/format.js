@@ -482,8 +482,8 @@ pleasewait.innerHTML = '<br/><br/><br/><br/><img class="spin-img-infinitely" src
 function permalinkClick(link,url) {
   try {
     copyToClipboard(link);
-    if(url && DPR_PAL.mainWindow) {
-      mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
+    if(url) {
+      DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
     }
     alertFlash("Permalink copied to clipboard.",'green');
   }
@@ -497,30 +497,27 @@ var copyToClipboard = DPR_PAL.copyToClipboard;
 var G_alertFlashStart = 0;
 
 function alertFlash(text,color) {
-  if(!$) // sidebar
-    return alert(text);
+  let fn;
 
-  G_alertFlashStart++; // give us an alert Id
   if(color) {
-
     switch (color) {
       case 'red':
-      color = 'RGBa(255,64,64,1)';
+        fn = DPR_Chrome.showErrorToast;
       break;
       case 'green':
-      color = 'RGBa(64,255,64,1)';
+        fn = DPR_Chrome.showSuccessToast;
       break;
       case 'yellow':
-      color = 'RGBa(255,255,64,1)';
+        fn = DPR_Chrome.showWarningToast;
+      break;
+      default:
+        console.error('Unknown color passed to alertFlash', color)
       break;
     }
-    $('#alert').css('background-color',color);
-
   }
-  $('#alert').html(text);
-  $('#alertc').fadeIn('fast').delay(2000).fadeOut('fast');
 
-  //fadeInOut(G_alertFlashStart,'alertc',10,Math.sqrt(text.length)*500,100);
+  console.warn('alertFlash is deprecated. Use DPR_Chrome.show*Toast functions.')
+  fn(text);
 }
 
 

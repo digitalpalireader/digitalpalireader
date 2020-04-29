@@ -363,9 +363,10 @@ var DPR_Chrome = (function () {
     } else if (type === ToastTypeWarning) {
       typeClasses = 'bg-warning text-light';
     } else if (type === ToastTypeSuccess) {
-      typeClasses = 'bg-green text-light';
-    } else /* Information */ {
-      typeClasses = '';
+      typeClasses = 'bg-success text-light';
+    } else if (type === ToastTypeInfo) {
+    } else {
+      console.error('Unknown type', type);
     }
 
     $("#main-container-toast-container").append(`
@@ -388,9 +389,11 @@ var DPR_Chrome = (function () {
     $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
   }
 
-  const showErrorToast = (message) => {
-    createToast(ToastTypeError, message, 2000);
-  }
+  const toastVisibleForMilliseconds = 2000;
+  const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds);
+  const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds);
+  const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds);
+  const showInformationToast = (message) => createToast(ToastTypeInformation, message, toastVisibleForMilliseconds);
 
   return {
     toggleDPRSidebar: toggleDPRSidebar,
@@ -400,5 +403,8 @@ var DPR_Chrome = (function () {
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
     showErrorToast: showErrorToast,
+    showWarningToast: showWarningToast,
+    showSuccessToast: showSuccessToast,
+    showInformationToast: showInformationToast,
   };
 })();
