@@ -678,13 +678,14 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
     case 's':
       if(a1 > 56) return;
       if(hiert != 'm') return;
+
       if(G_SNAdjustNumbers[a1] != null){
         for(var key in G_SNAdjustNumbers[a1]){
           if(G_SNAdjustNumbers[a1].hasOwnProperty(key)&&
           /^0$|^[1-9]\d*$/.test(key) &&
           key <= 4294967294
           ){
-            if(parseInt(a2) < parseInt(key)){
+            if(a2 < parseInt(key)){
               break;
             }
             if(a2 < parseInt(key) + G_SNAdjustNumbers[a1][key]){
@@ -695,6 +696,13 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
           }
         }
       }
+
+      if(a1 == 46){
+        if(a2 > 57){
+          a2 += 5;
+        }
+      }
+
       a1--;
       vagga = a1;
       switch (true) {
