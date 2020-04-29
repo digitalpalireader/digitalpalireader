@@ -356,8 +356,9 @@ var DPR_Chrome = (function () {
   const ToastTypeWarning = 'Warning';
   const ToastTypeSuccess = 'Success';
   const ToastTypeInfo = 'Information';
-  const createToast = (type, message, delay) => {
-    let typeClasses = null;
+  const createToast = (type, message, delay, text) => {
+    let typeClasses = '';
+    let style = ''
     if (type === ToastTypeError) {
       typeClasses = 'bg-danger text-light';
     } else if (type === ToastTypeWarning) {
@@ -365,20 +366,21 @@ var DPR_Chrome = (function () {
     } else if (type === ToastTypeSuccess) {
       typeClasses = 'bg-success text-light';
     } else if (type === ToastTypeInfo) {
+      style = 'color: #004085; background-color: #cce5ff;';
     } else {
       console.error('Unknown type', type);
     }
 
     $("#main-container-toast-container").append(`
       <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
-        <div class="toast-header ${typeClasses}">
-          <strong class="mr-auto">${type}</strong>
+        <div class="toast-header ${typeClasses}" style="${style}">
+          <strong class="mr-auto">${text || type}</strong>
           <small></small>
           <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
             <span aria-hidden="true"><small>&times;</small></span>
           </button>
         </div>
-        <div class="toast-body ${typeClasses}">
+        <div class="toast-body ${typeClasses}" style="${style}">
           ${message}
         </div>
       </div>
@@ -406,5 +408,7 @@ var DPR_Chrome = (function () {
     showWarningToast: showWarningToast,
     showSuccessToast: showSuccessToast,
     showInformationToast: showInformationToast,
+    createToast: createToast,
+    ToastTypeInfo: ToastTypeInfo,
   };
 })();

@@ -22,6 +22,7 @@ const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 
 async function mainInitialize() {
+  triggerUpdateCheck();
   setPrefs();
   initSplitters();
   initFooter();
@@ -178,4 +179,29 @@ const  historyPopstateHandler = e => {
   } else {
     console.error('Unknown feature');
   }
+}
+
+
+function triggerUpdateCheck() {
+  const updateCheck = async () => {
+    console.debug('Checking for updates...');
+    try {
+      const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText);
+      console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
+      if (verStr !== window.releaseNumber) {
+        const message = `A new version of Digital Pali Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
+        DPR_Chrome.createToast(DPR_Chrome.ToastTypeInfo, message, 5 * 60 * 1000, 'Digital Pali Reader update');
+      }
+    } catch (e) {
+      console.error('Update check failed with error:', e);
+    }
+  }
+
+  const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
+    /^(localdev|staging)$/i.test(window.environmentName)
+    ? [1, 2/60]
+    : [5, 3];
+
+  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
+  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
 }

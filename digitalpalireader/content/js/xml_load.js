@@ -31,7 +31,7 @@ function loadXMLFile(file,setNo) {
 }
 
 var XML_Load = (function () {
-  const xhrGetAsync = request => {
+  const xhrGetAsync = (request, procFn) => {
     return new Promise((resolve, reject) => {
       let xhr = new XMLHttpRequest();
       xhr.open(request.method || "GET", request.url);
@@ -42,7 +42,7 @@ var XML_Load = (function () {
       }
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
-          resolve(xhr.responseXML.documentElement);
+          resolve(procFn(xhr));
         } else {
           reject(xhr.statusText);
         }
@@ -68,7 +68,7 @@ var XML_Load = (function () {
         break;
     }
     try {
-      const xmlDoc = await xhrGetAsync({ url: `${DPR_PAL.baseUrl}${setPack}/content/xml/${file}.xml` });
+      const xmlDoc = await xhrGetAsync({ url: `${DPR_PAL.baseUrl}${setPack}/content/xml/${file}.xml` }, xhr => xhr.responseXML.documentElement);
       return xmlDoc;
     }
     catch(ex) {
@@ -78,6 +78,7 @@ var XML_Load = (function () {
   }
 
   return {
+    xhrGetAsync: xhrGetAsync,
     loadXMLFile: loadXMLFile,
   };
 })();
