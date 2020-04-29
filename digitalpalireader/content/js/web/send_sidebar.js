@@ -66,13 +66,14 @@ var DPRSend = {
       return;
     }
 
-
+    const loadXmlSectionParams = [nikaya, bookno, meta, volume, vagga, sutta, section, G_hier];
+    appInsights.trackEvent({ name: 'Go to sutta(s)',  properties: { params: loadXmlSectionParams, }});
 
     if (!add) { // reuse old tab
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLSection(labelsearch, para, [nikaya, bookno, meta, volume, vagga, sutta, section, G_hier]);
+        thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLSection(labelsearch, para, loadXmlSectionParams);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -83,7 +84,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLSection(labelsearch, para, [nikaya, bookno, meta, volume, vagga, sutta, section, G_hier]);
+        oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLSection(labelsearch, para, loadXmlSectionParams);
       }
     }
     else if (add == 'shift') {
@@ -132,11 +133,14 @@ var DPRSend = {
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
 
+    const loadXmlIndexParams = [nikaya, bookno, G_hier];
+    appInsights.trackEvent({ name: 'Go to index',  properties: { params: loadXmlIndexParams, }});
+
     if (!add) { // reuse old tab
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLindex([nikaya, bookno, G_hier]);
+        thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLindex(loadXmlIndexParams);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -148,7 +152,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLindex([nikaya, bookno, G_hier]);
+        oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.loadXMLindex(loadXmlIndexParams);
       }
     }
     else if (add == 'shift') {
@@ -329,8 +333,11 @@ var DPRSend = {
     if (!ql)
       return;
     if (ql[0] === false) {
-      return alert(ql[1]);
+      return DPR_Chrome.showErrorToast(ql[1]);
     }
+
+    appInsights.trackEvent({ name: 'Send quick link',  properties: { ql: ql, }});
+
     var nikaya = ql[0];
     var book = ql[1];
     var meta = ql[2];
@@ -437,8 +444,7 @@ var DPRSend = {
 
   sendDict: function (hard, add, which, getstring, opts) {
 
-    var start = Date.now();
-    var end, mid, elapsed;
+    appInsights.trackEvent({ name: 'Search',  properties: { hard, add, which, getstring, opts, }});
 
     if (add == 'right') return;
     if (!getstring) {
@@ -499,6 +505,9 @@ var DPRSend = {
   },
 
   sendSearch: function (add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX) {
+
+    appInsights.trackEvent({ name: 'Search',  properties: { add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX, }});
+
     if (add == 'right') return;
 
     if (!searchString) { // not direct from box

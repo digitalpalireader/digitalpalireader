@@ -10,6 +10,8 @@ function eventSend(event,internal) {
 }
 
 function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
+  appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
+
   if(add == 'right') return;
 
   if(!add) { // reuse old tab
@@ -77,6 +79,8 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
 
 
 function openXMLindex(nikaya,bookno,hier,add) {
+  appInsights.trackEvent({ name: 'Open XML Index',  properties: { nikaya, bookno, hier, add, }});
+
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
@@ -376,6 +380,8 @@ function sendTranslate(input, add){
 }
 
 function openTranslation(url,add) {
+  appInsights.trackEvent({ name: 'Open Translation',  properties: { url, add, }});
+
   if(add == 'right') return;
 
   const sInfo = DPR_Translations.parsePlace(url);
