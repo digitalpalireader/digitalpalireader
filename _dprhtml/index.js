@@ -188,7 +188,7 @@ function triggerUpdateCheck() {
     try {
       const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText);
       console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
-      if (verStr !== window.releaseNumber) {
+      if (verStr.trim() !== window.releaseNumber) {
         const message = `A new version of Digital Pali Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
         DPR_Chrome.createToast(DPR_Chrome.ToastTypeInfo, message, 5 * 60 * 1000, 'Digital Pali Reader update');
       }
