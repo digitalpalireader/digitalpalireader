@@ -534,14 +534,12 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
         break;
       }
 
-      //G_SNAdjustNumbers[45][42] = 5;
-      //G_SNAdjustNumbers[45][45] = 4;
-
       if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
       no = (vagga+1);
-      var noend = "";
+      var noend = 0;
       var sno = parseInt(smlist[vagga][sutta][section]);
       var add = 0;
+
       if(G_SNAdjustNumbers[no] != null){
 
         for(var key in G_SNAdjustNumbers[no]){
@@ -552,7 +550,7 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
             var keyint = parseInt(key)+add;
 
             if(sno+add == keyint){
-              noend = "-"+(keyint+G_SNAdjustNumbers[no][key]);
+              noend = (keyint+G_SNAdjustNumbers[no][key]);
               break;
             }
             else if(sno+add < keyint){
@@ -562,10 +560,21 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
             add += G_SNAdjustNumbers[no][key];
           }
         }
-        sno = (sno+add) + noend;
+        sno = (sno+add);
+      }
+      if(no == 46){
+        if(sno > 57 && sno < 63){
+          sno = 57;
+        }
+        else if(sno > 62){
+          sno -= 5;
+          if(noend > 0){
+            noend -= 5;
+          }
+        }
       }
 
-      no += '.' + sno;
+      no += '.' + sno + (noend>0?"-"+noend:"");
       break;
     case 'k':
       var kv = G_kVaggas[book+1];
