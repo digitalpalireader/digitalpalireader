@@ -350,6 +350,7 @@ G_SNAdjustNumbers[23] = [];
 G_SNAdjustNumbers[23][23] = 10;
 G_SNAdjustNumbers[23][25] = 10;
 
+G_SNAdjustNumbers[24] = [];
 G_SNAdjustNumbers[24][19] = 16;
 G_SNAdjustNumbers[24][29] = 24;
 G_SNAdjustNumbers[24][31] = 24;
