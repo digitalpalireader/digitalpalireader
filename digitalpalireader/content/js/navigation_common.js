@@ -333,6 +333,155 @@ function makekVaggas() {
 makekVaggas();
 
 
+var G_SNAdjustNumbers = [];
+G_SNAdjustNumbers[12] = [];
+G_SNAdjustNumbers[12][72] = 9;
+G_SNAdjustNumbers[12][74] = 9;
+G_SNAdjustNumbers[12][75] = 10;
+
+G_SNAdjustNumbers[17] = [];
+G_SNAdjustNumbers[17][13] = 7;
+G_SNAdjustNumbers[17][31] = 5;
+
+G_SNAdjustNumbers[18] = [];
+G_SNAdjustNumbers[18][12] = 8;
+
+G_SNAdjustNumbers[23] = [];
+G_SNAdjustNumbers[23][23] = 10;
+G_SNAdjustNumbers[23][25] = 10;
+
+G_SNAdjustNumbers[29] = [];
+G_SNAdjustNumbers[29][11] = 9;
+G_SNAdjustNumbers[29][12] = 29;
+
+G_SNAdjustNumbers[30] = [];
+G_SNAdjustNumbers[30][4] = 2;
+G_SNAdjustNumbers[30][5] = 9;
+G_SNAdjustNumbers[30][6] = 29;
+
+G_SNAdjustNumbers[31] = [];
+G_SNAdjustNumbers[31][4] = 8;
+G_SNAdjustNumbers[31][5] = 9;
+G_SNAdjustNumbers[31][6] = 89;
+
+G_SNAdjustNumbers[32] = [];
+G_SNAdjustNumbers[32][3] = 9;
+G_SNAdjustNumbers[32][4] = 39;
+
+G_SNAdjustNumbers[33] = [];
+G_SNAdjustNumbers[33][6] = 4;
+G_SNAdjustNumbers[33][7] = 4;
+G_SNAdjustNumbers[33][8] = 4;
+G_SNAdjustNumbers[33][9] = 4;
+G_SNAdjustNumbers[33][10] = 4;
+G_SNAdjustNumbers[33][11] = 4;
+G_SNAdjustNumbers[33][12] = 4;
+G_SNAdjustNumbers[33][13] = 4;
+G_SNAdjustNumbers[33][14] = 4;
+G_SNAdjustNumbers[33][15] = 4;
+
+G_SNAdjustNumbers[34] = [];
+G_SNAdjustNumbers[34][20] = 7;
+G_SNAdjustNumbers[34][21] = 6;
+G_SNAdjustNumbers[34][22] = 5;
+G_SNAdjustNumbers[34][23] = 4;
+G_SNAdjustNumbers[34][24] = 3;
+G_SNAdjustNumbers[34][25] = 2;
+G_SNAdjustNumbers[34][26] = 1;
+
+G_SNAdjustNumbers[35] = [];
+G_SNAdjustNumbers[35][33] = 9;
+G_SNAdjustNumbers[35][34] = 8;
+G_SNAdjustNumbers[35][154] = 2;
+G_SNAdjustNumbers[35][155] = 2;
+G_SNAdjustNumbers[35][156] = 2;
+G_SNAdjustNumbers[35][157] = 2;
+G_SNAdjustNumbers[35][158] = 2;
+G_SNAdjustNumbers[35][162] = 2;
+G_SNAdjustNumbers[35][163] = 2;
+G_SNAdjustNumbers[35][164] = 2;
+G_SNAdjustNumbers[35][165] = 2;
+G_SNAdjustNumbers[35][166] = 2;
+G_SNAdjustNumbers[35][170] = 2;
+G_SNAdjustNumbers[35][171] = 2;
+G_SNAdjustNumbers[35][172] = 2;
+G_SNAdjustNumbers[35][173] = 2;
+G_SNAdjustNumbers[35][174] = 2;
+
+G_SNAdjustNumbers[43] = [];
+G_SNAdjustNumbers[43][14] = 29;
+
+G_SNAdjustNumbers[45] = [];
+G_SNAdjustNumbers[45][42] = 5;
+G_SNAdjustNumbers[45][45] = 4;
+G_SNAdjustNumbers[45][48] = 4;
+G_SNAdjustNumbers[45][51] = 4;
+G_SNAdjustNumbers[45][54] = 4;
+G_SNAdjustNumbers[45][57] = 4;
+G_SNAdjustNumbers[45][60] = 4;
+G_SNAdjustNumbers[45][63] = 3;
+G_SNAdjustNumbers[45][66] = 4;
+G_SNAdjustNumbers[45][68] = 4;
+G_SNAdjustNumbers[45][70] = 4;
+G_SNAdjustNumbers[45][72] = 4;
+G_SNAdjustNumbers[45][74] = 4;
+G_SNAdjustNumbers[45][76] = 4;
+G_SNAdjustNumbers[45][78] = 4;
+G_SNAdjustNumbers[45][81] = 4;
+G_SNAdjustNumbers[45][82] = 2;
+
+G_SNAdjustNumbers[46] = [];
+G_SNAdjustNumbers[46][82] = 11;
+G_SNAdjustNumbers[46][83] = 9;
+G_SNAdjustNumbers[46][84] = 11;
+G_SNAdjustNumbers[46][85] = 9;
+G_SNAdjustNumbers[46][86] = 7;
+
+G_SNAdjustNumbers[47] = [];
+G_SNAdjustNumbers[47][51] = 11;
+G_SNAdjustNumbers[47][52] = 9;
+G_SNAdjustNumbers[47][53] = 11;
+G_SNAdjustNumbers[47][54] = 9;
+G_SNAdjustNumbers[47][55] = 9;
+
+G_SNAdjustNumbers[48] = [];
+G_SNAdjustNumbers[48][71] = 11;
+G_SNAdjustNumbers[48][72] = 9;
+G_SNAdjustNumbers[48][73] = 11;
+G_SNAdjustNumbers[48][74] = 9;
+
+G_SNAdjustNumbers[49] = [];
+G_SNAdjustNumbers[49][1] = 11;
+G_SNAdjustNumbers[49][3] = 11;
+G_SNAdjustNumbers[49][4] = 9;
+G_SNAdjustNumbers[49][5] = 9;
+
+G_SNAdjustNumbers[50] = [];
+G_SNAdjustNumbers[50][1] = 11;
+G_SNAdjustNumbers[50][3] = 9;
+G_SNAdjustNumbers[50][4] = 11;
+G_SNAdjustNumbers[50][5] = 11;
+G_SNAdjustNumbers[50][6] = 9;
+
+G_SNAdjustNumbers[51] = [];
+G_SNAdjustNumbers[51][33] = 11;
+G_SNAdjustNumbers[51][34] = 9;
+
+G_SNAdjustNumbers[53] = [];
+G_SNAdjustNumbers[53][1] = 11;
+G_SNAdjustNumbers[53][2] = 9;
+
+G_SNAdjustNumbers[56] = [];
+G_SNAdjustNumbers[56][96] = 5;
+G_SNAdjustNumbers[56][100] = 2;
+G_SNAdjustNumbers[56][101] = 2;
+G_SNAdjustNumbers[56][102] = 2;
+G_SNAdjustNumbers[56][103] = 2;
+G_SNAdjustNumbers[56][104] = 2;
+G_SNAdjustNumbers[56][105] = 2;
+G_SNAdjustNumbers[56][106] = 2;
+G_SNAdjustNumbers[56][107] = 2;
+G_SNAdjustNumbers[56][108] = 1;
 
 function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength,which) { // book, meta, etc. should be -1 (0,1,2...)
 
@@ -379,9 +528,40 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
           vagga += 11;
         break;
       }
+
+      //G_SNAdjustNumbers[45][42] = 5;
+      //G_SNAdjustNumbers[45][45] = 4;
+
       if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
-      no = (vagga+1) + '.' + smlist[vagga][sutta][section];
-    break;
+      no = (vagga+1);
+      var noend = "";
+      var sno = parseInt(smlist[vagga][sutta][section]); 
+      var add = 0;
+      if(G_SNAdjustNumbers[no] != null){
+
+        for(var key in G_SNAdjustNumbers[no]){
+          if(G_SNAdjustNumbers[no].hasOwnProperty(key)&&        
+          /^0$|^[1-9]\d*$/.test(key) &&    
+          key <= 4294967294                
+          ){
+            var keyint = parseInt(key)+add;
+            
+            if(sno+add == keyint){
+              noend = "-"+(keyint+G_SNAdjustNumbers[no][key]);
+              break;
+            }
+            else if(sno+add < keyint){
+              break;
+            }
+            
+            add += G_SNAdjustNumbers[no][key];
+          }
+        }
+        sno = (sno+add) + noend;
+      }
+
+      no += '.' + sno;
+      break;
     case 'k':
       var kv = G_kVaggas[book+1];
       if(hier != 'm' || !kv || (which && kv[2] != which)) return;
@@ -484,6 +664,23 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
     case 's':
       if(a1 > 56) return;
       if(hiert != 'm') return;
+      if(G_SNAdjustNumbers[a1] != null){
+        for(var key in G_SNAdjustNumbers[a1]){
+          if(G_SNAdjustNumbers[a1].hasOwnProperty(key)&&        
+          /^0$|^[1-9]\d*$/.test(key) &&    
+          key <= 4294967294                
+          ){
+            if(parseInt(a2) < parseInt(key)){
+              break;
+            }
+            if(a2 < parseInt(key) + G_SNAdjustNumbers[a1][key]){
+              a2 = key;
+              break;
+            }
+            a2 -= G_SNAdjustNumbers[a1][key];
+          }
+        }
+      }
       a1--;
       vagga = a1;
       switch (true) {
