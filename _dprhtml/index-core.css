@@ -22,6 +22,9 @@ body {
   overflow: auto;
 }
 
+/*
+ General utilites
+ */
 .dpr-collapsible-card.card .card-header > a {
   display: block;
   position: relative;
@@ -36,6 +39,12 @@ body {
 
 .dpr-collapsible-card.card .card-header > a[aria-expanded="true"]:after {
   content: "\f077"; /* fa-chevron-up */
+}
+
+.mat-button-group-seperator {
+  margin: 0rem 0.2rem;
+  border-radius: 1px;
+  border: 1px ridge lightgray;
 }
 
 body.modal-open {
@@ -453,9 +462,19 @@ body .bd-highlight {
   margin: 0.5rem;
 }
 
+#main-bottom-pane-tab-panes-Tp .separator {
+  width: 1px;
+  height: 25px;
+  background-color: #777;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 /*
   Settings dialog
 */
+
 #settings-pane #settings-pane-tabs {
   display: flex;
   flex-direction: row;
@@ -521,12 +540,6 @@ body .bd-highlight {
 /*
  Navigation Tab
  */
-
-#navigationTabContent #mat-button-group .mat-button-group-seperator {
-  margin: 0rem 0.2rem;
-  border-radius: 1px;
-  border: 1px ridge lightgray;
-}
 
 #navigationTabContent #mat-button-group input[type="radio"] {
   position: fixed;

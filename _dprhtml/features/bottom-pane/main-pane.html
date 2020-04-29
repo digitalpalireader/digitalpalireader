@@ -90,9 +90,32 @@
         <textarea id="coutput"></textarea>
       </div>
     </div>
-    <div id="main-bottom-pane-tab-panes-Tp" data-bind="visible: isTpTabSelected">
-      Textpad: Coming soon...
+
+    <!-- TEXT PAD -->
+    <div id="main-bottom-pane-tab-panes-Tp" class="h-100" data-bind="visible: isTpTabSelected">
+      <!--
+        Autocomplete attribute weirdness is explained here:
+        - https://stackoverflow.com/questions/43217431/how-to-stop-chrome-from-autocompleting-text-areas
+        - https://bugs.chromium.org/p/chromium/issues/detail?id=914451
+      -->
+      <div id="main-bottom-pane-tab-panes-Tp-container" class="d-flex flex-column h-100">
+        <textarea class="h-100 m-1" id="pad" spellcheck="false" autocomplete="nope" style="resize: none;"></textarea>
+        <div class="d-flex justify-content-center m-1">
+          <button class="btn btn-light mb-0" onclick="clearPad()" title="Erase all text">Clear</button>
+          <span class="mat-button-group-seperator"></span>
+          <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)">Velthuis</button>
+          <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)">Unicode</button>
+          <span class="mat-button-group-seperator"></span>
+          <button class="btn btn-light mb-0" title="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))">Analyze</button>
+          <span class="mat-button-group-seperator"></span>
+          <button class="btn btn-light mb-0 mr-1"
+            onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');"
+            title="Copy text to clipboard">Copy</button>
+          <button class="btn btn-light mb-0" onclick="savePad()" title="save textpad content to file">Save</button>
+        </div>
+      </div>
     </div>
+
     <div id="main-bottom-pane-tab-panes-Tr" data-bind="visible: isTrTabSelected">
       <p class="oneDec">
         Enter a single Pali sentence below (Velthuis or Unicode):
@@ -153,5 +176,6 @@
         </div>
       </form>
     </div>
+
   </div>
 </div>
