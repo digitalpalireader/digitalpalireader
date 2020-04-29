@@ -13,7 +13,7 @@ window.onerror = function(message, file, lineNumber) {
 
 var atiIns = 0;
 
-const dprBaseStyleSheet = Object.entries(document.styleSheets).find(([_, ss]) => ss.href && ss.href.match(/.*_dprhtml\/StYlEs.*\.css$/i))[1]
+const dprBaseStyleSheet = Object.entries(document.styleSheets).find(([_, ss]) => ss.href && ss.href.match(DPR_PAL.mainStylesMatcher))[1]
 
 function getconfig() {
   for (var i in DPR_prefs) {

@@ -96,6 +96,7 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.mainStylesMatcher = /.*_dprhtml\/StYlEs.*\.css$/i;
   DPR_PAL.dprUrlMatcher = /\/_dprhtml\/index\.html/;
 
   DPR_PAL.fixupDprBaseUrl = url => url.replace(' dprhtml', '_dprhtml');
@@ -158,13 +159,18 @@ console.log('Loading DPR_PAL...');
   };
 
   DPR_PAL.toWebUrl = url => {
-    const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict)\.(xul|htm)(\?)?(.*)$/i
+    const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict|dbv)\.(xul|htm|html)(\?)?(.*)$/i
 
-    return url
+    let newUrl = url
       .replace(xulUrlCracker, `${DPR_PAL.baseUrl}_dprhtml/index.html?feature=$1&$4`)
       .replace('feature=index', '')
       .replace('feature=dict&', 'feature=dictionary&')
       .replace('?&', '?');
+
+    // NOTE: Following is best guess.
+    newUrl = newUrl.replace(/^chrome:\/\//i, DPR_PAL.baseUrl);
+
+    return newUrl;
   };
 
   //
