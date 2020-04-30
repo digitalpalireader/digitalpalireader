@@ -148,7 +148,7 @@ var DPR_prefsInfo = {
     defaultValue: true,
   },
   catiloc: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'https://tipitaka.digitalpalireader.online/ati',
   },
   autodict: {
