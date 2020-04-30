@@ -138,7 +138,16 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
 
   DPR_PAL.toUrl = x => {
-    if (/^http/.test(new URL(x).protocol)) {
+    let url = undefined;
+    try {
+      url = new URL(x)
+    } catch {}
+
+    if (!url) {
+      return x;
+    }
+
+    if (/^http/.test(url.protocol)) {
       return x;
     } else {
       return 'file://' + x.replace(/\\/g,'/');

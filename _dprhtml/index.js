@@ -181,7 +181,6 @@ const  historyPopstateHandler = e => {
   }
 }
 
-
 function triggerUpdateCheck() {
   const updateCheck = async () => {
     console.debug('Checking for updates...');
@@ -200,7 +199,7 @@ function triggerUpdateCheck() {
   const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
     /^(localdev|staging)$/i.test(window.environmentName)
     ? [5, 1]
-    : [5, 3];
+    : [5, 1];
 
   setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
   setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);

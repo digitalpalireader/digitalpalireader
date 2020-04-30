@@ -1,7 +1,7 @@
 document.onkeypress = DPR_keypress;
 
 function DPR_keypress(e) {
-  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) {
+  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey || e.metaKey) {
     return;
   }
 
@@ -104,8 +104,9 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (false && e.key === '!') {
-    eraseOptions();
+  if (e.key === '^') {
+    resetAllDprSettings();
+    window.location.reload();
     return;
   }
 
@@ -137,4 +138,8 @@ function DPR_keypress(e) {
     $('#helpDialog').modal('show');
     return;
   }
+}
+
+function resetAllDprSettings() {
+  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
 }

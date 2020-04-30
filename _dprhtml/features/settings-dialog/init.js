@@ -6,34 +6,45 @@ class SettingsDialogTabsViewModel {
     this.isLayoutSettingsTabSelected = ko.observable(false);
     this.isTextSettingsTabSelected = ko.observable(false);
 
-    this.colfont = ko.observable(getPref('colfont'));
-    this.colsize = ko.observable(getPref('colsize'));
-    this.translits = ko.observable(getPref('translits'));
+    this.settings = this.createSettings();
+  }
+
+  createSettings() {
+    return Object
+      .entries(DPR_prefsInfo)
+      .reduce((acc, [k, v]) => {
+          acc[k] = ko.observable(getPref(k));
+          return acc;
+        },
+        {});
   }
 
   savePreferences() {
-    localStorage['DPR_Prefs_colfont'] = this.colfont();
-    localStorage['DPR_Prefs_colsize'] = this.colsize();
-    localStorage['DPR_Prefs_translits'] = this.translits();
-    localStorage['DPR_Prefs_type_translits'] = 'int';
-    DPR_prefs['colfont'] = this.colfont();
-    DPR_prefs['colsize'] = this.colsize();
-    DPR_prefs['translits'] = this.translits();
-    //reload in order to update window with changed preferences - ideally there should be a more elegant way of doing this
+    Object
+      .entries(DPR_prefsInfo)
+      .forEach(([k, v]) => {
+          localStorage[`DPR_Prefs_${k}_type`] = v.type;
+          localStorage[`DPR_Prefs_${k}`] = this.settings[k]();
+          DPR_prefs['colfont'] = this.settings[k]();
+        });
+
     window.location.reload();
   }
 
   defaultPreferences() {
-    this.colfont(DPR_prefsD['colfont']);
-    this.colsize(DPR_prefsD['colsize']);
-    this.translits(DPR_prefsD['translits']);
+    Object
+      .entries(DPR_prefsInfo)
+      .forEach(([k, v]) => {
+          this.settings[k](DPR_prefsD[k]);
+        });
   }
 
-  cancelPreferences()
-  {
-    this.colfont(DPR_prefs['colfont']);
-    this.colsize(DPR_prefs['colsize']);
-    this.translits(DPR_prefs['translits']);
+  cancelPreferences() {
+    Object
+      .entries(DPR_prefsInfo)
+      .forEach(([k, v]) => {
+          this.settings[k](DPR_prefs[k]);
+        });
   }
 
   updateActiveSettingsTabId(tabId) {
