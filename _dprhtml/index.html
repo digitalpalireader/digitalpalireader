@@ -26,6 +26,7 @@
         isFirefox: typeof InstallTrigger !== 'undefined',
         isChrome: !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime) && (navigator.userAgent.indexOf("Edg") == -1),
         isEdgeChromium: this.isChrome && (navigator.userAgent.indexOf("Edg") != -1),
+        isSafari: /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)),
       };
       console.log('Browser info', browserInfo);
     </script>
