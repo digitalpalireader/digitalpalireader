@@ -27,6 +27,8 @@ function convert(check,lower)
   var inScript = document.getElementById('cinform').selectedIndex
   var outScript = document.getElementById('coutform').selectedIndex
 
+  appInsights.trackEvent({ name: 'convert',  properties: { inScript, outScript, length: spell && spell.length }});
+
   switch(inScript) {
     case 0:
       switch(outScript) {
@@ -141,6 +143,8 @@ function clearboth()
 
 function sendtoconvert(data,shift)
 {
+  appInsights.trackEvent({ name: 'sendtoconvert',  properties: { }});
+
   data = data.replace(/” ”/g, '”');
   data = data.replace(/’ ’/g, '’');
   data = data.replace(/\u00B7/g, '\'');
@@ -164,6 +168,8 @@ function sendtoconvert(data,shift)
 
 function sendtoPad(data,shift)
 {
+  appInsights.trackEvent({ name: 'sendtoPad',  properties: { }});
+
   moveFrame(3)
 
   data = data.replace(/\t/g, ' ');
@@ -194,6 +200,8 @@ function clearPad() {
 }
 
 function savePad() {
+  appInsights.trackEvent({ name: 'savePad',  properties: { }});
+
   var data = document.getElementById('pad').value;
   file = fileSaveDialog('Choose a location to export the text');
 //  file = file.replace(/\\/g,'/');

@@ -21,6 +21,7 @@ function makeUniqueStringForCaseInsensitiveFS(s) {
 
 function paliXML(filein,which,add)
 {
+  appInsights.trackEvent({ name: 'Lookup word',  properties: { filein,which,add, }});
 
   addJS(['ped']);
 
@@ -183,6 +184,8 @@ function paliXML(filein,which,add)
 }
 
 function toggleDppnTitle(link,id) {
+  appInsights.trackEvent({ name: 'toggleDppnTitle',  properties: { link,id, }});
+
   if(document.getElementById(id).innerHTML.length > 0) {
     document.getElementById(id).style.display = 'none';
     document.getElementById(id).innerHTML = '';
@@ -201,6 +204,8 @@ var G_dhmark = 0;
 
 function DPPNXML(filein,which,add)
 {
+  appInsights.trackEvent({ name: 'DPPNXML',  properties: { filein,which,add, }});
+
   addJS(['dppn','nameno']);
 
   if(add == 'right') return;
@@ -327,6 +332,8 @@ var G_shmark = 0;
 
 function sktRXML(no,add)
 {
+  appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
+
   if(add == 'right') return;
   if(add == true) {
     //sendDPPNXML(toVel(filein),true);
@@ -392,6 +399,8 @@ function sktRXML(no,add)
 
 function sktXML(entry,idx,which,add)
 {
+  appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
+
   addJS(['skt']);
 
   if(add == 'right') return;
@@ -438,7 +447,7 @@ function sktXML(entry,idx,which,add)
 
 
 function getAtthXML(num,type,niklist) { // get atthakatha or tika word
-
+  appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
     if(type == 'a') {
     addJS(['attlist']);
@@ -512,6 +521,8 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 }
 
 function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
+  appInsights.trackEvent({ name: 'getTitleXML',  properties: { num,mul,att,tik,niklist, }});
+
   addJS(['titles']);
 
 
@@ -620,6 +631,8 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
 
 function getDppnData(link){
+  appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
+
   var dppnf = DPR_PAL.contentFolder + 'etc/XML2/'+link.split('/')[0]+'.xml';
 
   var xmlhttp = new window.XMLHttpRequest();

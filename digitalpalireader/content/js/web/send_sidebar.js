@@ -410,10 +410,7 @@ var DPRSend = {
 
 
   sendAnalysisToOutput: function (input, frombox, add) {
-    if (DPR_PAL.isWeb) {
-      outputAnalysis(input,frombox);
-      return;
-    }
+    appInsights.trackEvent({ name: 'Sidebar - DPR Analysis',  properties: { input, frombox, add, }});
 
     if (add == 'right') return;
 

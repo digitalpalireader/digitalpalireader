@@ -49,9 +49,10 @@
         </div>
       </div>
     </div>
+
     <div id="main-bottom-pane-tab-panes-Cv" data-bind="visible: isCvTabSelected">
       <div class="cv-container force-show-scrollbar-on-macos">
-        <textarea id="cinput" onkeydown="if(event.keyCode==13) convert(true); event.keyCode=0;"></textarea>
+        <textarea id="cinput" onkeydown="if(event.keyCode==13) DPR_BottomPane.cvConvert(true); event.keyCode=0;"></textarea>
         <div id="cinform-div">
           <label class="small-bold-font" for="cinform">From</label>
           <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform" onclick="changeConversion(1)">
@@ -64,9 +65,9 @@
           </select>
         </div>
         <div id="cactions">
-          <button id="buttonCvConv" class="btn btn-sm btn-light my-1" onclick="convert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
+          <button id="buttonCvConv" class="btn btn-sm btn-light my-1" onclick="DPR_BottomPane.cvConvert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
             title="Convert from one format to another">Convert</button>
-          <button class="btn btn-sm btn-light my-1" onclick="document.getElementById('coutput').value=sortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
+          <button class="btn btn-sm btn-light my-1" onclick="document.getElementById('coutput').value=DPR_BottomPane.cvSortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
             data-toggle="tooltip" data-placement="right" title="Sort input by Pali word order">Sort</button>
           <button class="btn btn-sm btn-light my-1" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
             title="clear both boxes">Clear</button>
@@ -103,15 +104,15 @@
         <div class="d-flex justify-content-center m-1">
           <button class="btn btn-light mb-0" onclick="clearPad()" title="Erase all text">Clear</button>
           <span class="mat-button-group-seperator"></span>
-          <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = toVel(document.getElementById('pad').value)">Velthuis</button>
-          <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = toUni(document.getElementById('pad').value)">Unicode</button>
+          <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToVel(document.getElementById('pad').value)">Velthuis</button>
+          <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToUni(document.getElementById('pad').value)">Unicode</button>
           <span class="mat-button-group-seperator"></span>
-          <button class="btn btn-light mb-0" title="analyze text as Pali passage" onmouseup="sendTextPad(eventSend(event))">Analyze</button>
+          <button class="btn btn-light mb-0" title="analyze text as Pali passage" onmouseup="DPR_BottomPane.tpSendTextPad(eventSend(event))">Analyze</button>
           <span class="mat-button-group-seperator"></span>
           <button class="btn btn-light mb-0 mr-1"
-            onclick="copyToClipboard(document.getElementById('pad').value); sendAlertFlash('Text copied to clipboard.','green');"
+            onclick="copyToClipboard(document.getElementById('pad').value); alertFlash('Text copied to clipboard.','green');"
             title="Copy text to clipboard">Copy</button>
-          <button class="btn btn-light mb-0" onclick="savePad()" title="save textpad content to file">Save</button>
+          <button class="btn btn-light mb-0" onclick="DPR_BottomPane.tpSavePad()" title="save textpad content to file">Save</button>
         </div>
       </div>
     </div>
@@ -125,9 +126,9 @@
       <p id="translation" class="bottom-center"></p>
       <p id="altTable" class="bottom-center"></p>
       <div class="bottom-container bottom-center">
-        <button id="translate" class="btn btn-light cv-btn-group" onclick="translateText()" data-toggle="tooltip" data-placement="right"
+        <button id="translate" class="btn btn-light cv-btn-group" onclick="DPR_BottomPane.trTranslateText()" data-toggle="tooltip" data-placement="right"
           title="Translate the text">Translate</button>
-        <button class="btn btn-light cv-btn-group" onclick="insertWordByWord()"
+        <button class="btn btn-light cv-btn-group" onclick="DPR_BottomPane.trInsertWordByWord()"
           data-toggle="tooltip" data-placement="right" title="Translate each word">Word-by-word</button>
         <button id="clear" class="btn btn-light cv-btn-group" onclick="clearText()" data-toggle="tooltip" data-placement="right"
           title="Clear text">Clear</button>
@@ -137,11 +138,12 @@
         translate completely, if it all. For an example of a sentence that does work, try clicking on this one:
       </div>
       <div class="bottom-center" style="font-size: small;">
-        <a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); translateText();">
+        <a class="green tiny" href="javascript:void(0)" onclick="$('#input').val($(this).html()); DPR_BottomPane.trTranslateText();">
           dhammikā upāsakā pāpakehi manussehi mā carantu
         </a>
       </div>
     </div>
+
     <div id="main-bottom-pane-tab-panes-Cj" data-bind="visible: isCjTabSelected">
       <form onsubmit="insertConj(); return false">
         <p></p>
@@ -169,7 +171,7 @@
           <p id="conjugation"></p>
         </div>
         <div class="center">
-          <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="insertConj()"
+          <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="DPR_BottomPane.cjInsertConj()"
             title="Translate the text">Conjugate</button>
           <button type="button" id="clear" class="btn btn-light cv-btn-group" onclick="clearText()"
             title="Clear text">Clear</button>

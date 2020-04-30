@@ -300,6 +300,7 @@ function sendUpdateBookmarks() {
 var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
+  appInsights.trackEvent({ name: 'Reading - DPR Analysis',  properties: { input, divclicked, frombox, add, }});
 
   if(add == 'right') return;
   if(window.getSelection().toString())
