@@ -162,11 +162,11 @@ var DPR_prefsInfo = {
 
   buddhist_texts: {
     type: Boolean.name,
-    defaultValue: true,
+    defaultValue: false,
   },
   btloc: {
     type: String.name,
-    defaultValue: 'https://tipitaka.digitalpalireader.online/bt',
+    defaultValue: '',
   },
 
 
