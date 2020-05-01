@@ -1,11 +1,11 @@
 'use strict';
 
 function openFirstDPRTab() {
-  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main','chrome://digitalpalireader/content/index.xul','');
+  if(!findDPRTab('DPR-main')) openDPRMain('DPR-main',DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'),'');
 }
 
 function openDPRTab(permalink, id, reuse) {
-  permalink = DPR_PAL.convertXulUrl(permalink);
+  permalink = DPR_PAL.toWebUrl(permalink);
 
   if(reuse) { // reuse old tab
     var oldTab = findDPRTab(id);
@@ -122,7 +122,6 @@ function isDPRTab(id) {
 
 function giveIDtoTabs() { // startup function, give ids to
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -149,7 +148,6 @@ function giveIDtoTabs() { // startup function, give ids to
 
 function checkLastTab() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
@@ -172,7 +170,7 @@ function DPRSidebarWindow() {
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar");
 
-  if (sidebar.contentDocument.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.contentDocument.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar.contentWindow;
   }
   else return false
@@ -180,53 +178,54 @@ function DPRSidebarWindow() {
 
 function DPRSidebarDocument() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return false;
   }
 
   var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  if (sidebar.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+  if (sidebar.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
     return sidebar;
   }
   else return false
 }
 
 function closeDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
-    return;
-  }
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(false);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-
-  if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
-    return DPR_PAL.mainWindow.toggleSidebar();
+    if (sidebarWindow.location.href == "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar();
+    }
   }
 }
-function openDPRSidebar() {
-  if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
-    return;
-  }
 
-  var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
-  if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
-    return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+function openDPRSidebar() {
+  if (DPR_PAL.isWeb) {
+    __dprViewModel.sidebarVisible(true);
+  } else {
+    var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
+    if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
+      return DPR_PAL.mainWindow.toggleSidebar('viewDPR');
+    }
   }
+}
+
+function toggleDPRSidebar() {
+  __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
 }
 
 function setCurrentTitle(title) {
-  if (DPR_PAL.isXUL) {
-    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
-  } else {
+  if (DPR_PAL.isWeb) {
     document.title = title;
+  } else {
+    DPR_PAL.mainWindow.gBrowser.selectedTab.setAttribute('label',title);
   }
 }
 
 function closeBrowser(id) {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
@@ -238,7 +237,6 @@ function closeBrowser(id) {
 
 function DPRBottomPaneUpdateStyle() {
   if (!DPR_PAL.isXUL) {
-    console.error('Not handled for web scenario');
     return;
   }
 
@@ -288,24 +286,6 @@ const closeBottomFrame = () => {
 }
 
 var DPR_Chrome = (function () {
-  const toggleNewSidebarVisibility = () => {
-    if ($('#main-sidebar').is(":visible")) {
-      closeNewSidebar();
-    } else {
-      openNewSidebar();
-    }
-  }
-
-  const closeNewSidebar = () => {
-    $("#main-sidebar").hide();
-    $("#main-panel-splitter").hide();
-  }
-
-  const openNewSidebar = () => {
-    $("#main-sidebar").show();
-    $("#main-panel-splitter").show();
-  }
-
   const fixupUrlAndMainPanelSectionsLayout = () => {
     const availableWidth = $('#main-pane-container').width();
     const totalSplitterWidth = $('.main-pane-container-splitter')
@@ -372,11 +352,63 @@ var DPR_Chrome = (function () {
     fixupUrlAndMainPanelSectionsLayout();
   }
 
+  const ToastTypeError = 'Error';
+  const ToastTypeWarning = 'Warning';
+  const ToastTypeSuccess = 'Success';
+  const ToastTypeInfo = 'Information';
+  const createToast = (type, message, delay, text) => {
+    let typeClasses = '';
+    let style = ''
+    if (type === ToastTypeError) {
+      typeClasses = 'bg-danger text-light';
+    } else if (type === ToastTypeWarning) {
+      typeClasses = 'bg-warning text-light';
+    } else if (type === ToastTypeSuccess) {
+      typeClasses = 'bg-success text-light';
+    } else if (type === ToastTypeInfo) {
+      style = 'color: #004085; background-color: #cce5ff;';
+    } else {
+      console.error('Unknown type', type);
+    }
+
+    $("#main-container-toast-container").append(`
+      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
+        <div class="toast-header ${typeClasses}" style="${style}">
+          <strong class="mr-auto">${text || type}</strong>
+          <small></small>
+          <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+            <span aria-hidden="true"><small>&times;</small></span>
+          </button>
+        </div>
+        <div class="toast-body ${typeClasses}" style="${style}">
+          ${message}
+        </div>
+      </div>
+    `);
+
+    $(".toast").toast("show");
+
+    $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
+  }
+
+  const toastVisibleForMilliseconds = 2000;
+  const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds);
+  const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds);
+  const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds);
+  const showInformationToast = (message) => createToast(ToastTypeInformation, message, toastVisibleForMilliseconds);
+
   return {
-    toggleNewSidebarVisibility: toggleNewSidebarVisibility,
-    openNewSidebar: openNewSidebar,
+    toggleDPRSidebar: toggleDPRSidebar,
+    openDPRSidebar: openDPRSidebar,
+    closeDPRSidebar: openDPRSidebar,
     addMainPanelSection: addMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
+    showErrorToast: showErrorToast,
+    showWarningToast: showWarningToast,
+    showSuccessToast: showSuccessToast,
+    showInformationToast: showInformationToast,
+    createToast: createToast,
+    ToastTypeInfo: ToastTypeInfo,
   };
 })();

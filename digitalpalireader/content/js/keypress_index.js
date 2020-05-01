@@ -14,9 +14,9 @@ function keyPressed(e) {
     wBot.moveFrame(e.charCode - 48); return;
   }
 
-  if (e.charCode == 37) {  window.open('chrome://digitalpalireader/content/prefs.xul', 'DPR_prefs', 'chrome'); return; } // %
+  if (e.charCode == 37) {  window.open(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/prefs.xul'), 'DPR_prefs', 'chrome'); return; } // %
   if (e.charCode == 118) { wBot.showBv(); return; } // v
-  if (e.charCode == 63) { openDPRTab('chrome://digitalpalireader/content/help.htm','DPR-help',1); return; } // ?
+  if (e.charCode == 63) { openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/help.htm'),'DPR-help',1); return; } // ?
   if (e.charCode == 98) { dTop.getElementById('bkButton').onmousedown(); return; } // b
 
 
@@ -25,7 +25,7 @@ function keyPressed(e) {
     return;
   }
 
-  if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href='chrome://digitalpalireader/content/index.xul'; return;} // r
+  if (e.charCode == 114) { if(confirm('Reload the reader?')) document.location.href=DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'); return;} // r
 
   if(document.getElementById('dpr-tops').getElementsByTagName('browser').length == 1) {
     if (e.charCode == 112) { if(dTop.getElementById('pSect')) dTop.getElementById('pSect').onmouseup(e); return }  // p

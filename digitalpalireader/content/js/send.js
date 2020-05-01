@@ -2,7 +2,7 @@
 
 function eventSend(event,internal) {
   if(!event) return;
-  if(event.ctrlKey || event.which == 2) return true;
+  if(event.ctrlKey || event.metaKey || event.which == 2) return true;
   if(event.shiftKey) return 'shift';
   if((event.which == 1 || event.charCode) && internal) return 'internal';
   if (event.which == 1) return false;
@@ -10,6 +10,8 @@ function eventSend(event,internal) {
 }
 
 function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
+  appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
+
   if(add == 'right') return;
 
   if(!add) { // reuse old tab
@@ -21,7 +23,7 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
     }
     var oldTab = findDPRTab('DPR-main');
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : '');
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -41,7 +43,7 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
       var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
       var count = getBrowserCount()+1;
-      var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : '');
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
 
       var node = createBrowser(thisTabBrowser.contentDocument,permalink,count);
 
@@ -50,7 +52,7 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
     }
     var oldTab = findDPRTab('DPR-main');
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : '');
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
       openDPRTab(permalink,'DPR-main');
       return;
     }
@@ -59,7 +61,7 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
       var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
       var count = getBrowserCount()+1;
-      var permalink = 'chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : '');
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
 
       var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
       var splitter = createSplitter(oldTabBrowser.contentDocument,count);
@@ -70,13 +72,15 @@ function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,
     }
   }
   else {
-    var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : '');
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
     openDPRTab(permalink,'DPRm');
   }
 }
 
 
 function openXMLindex(nikaya,bookno,hier,add) {
+  appInsights.trackEvent({ name: 'Open XML Index',  properties: { nikaya, bookno, hier, add, }});
+
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
@@ -87,7 +91,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -108,7 +112,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
       var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
       var count = getBrowserCount()+1;
-      var permalink = 'chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier);
 
       var node = createBrowser(thisTabBrowser.contentDocument,permalink,count);
 
@@ -117,7 +121,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
     }
     var oldTab = findDPRTab('DPR-main');
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier);
       openDPRTab(permalink,'DPR-main');
       return;
     }
@@ -126,7 +130,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
       var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
       var count = getBrowserCount()+1;
-      var permalink = 'chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier);
 
       var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
       var splitter = createSplitter(oldTabBrowser.contentDocument,count);
@@ -137,7 +141,7 @@ function openXMLindex(nikaya,bookno,hier,add) {
     }
   }
   else if(add != 'right'){
-    var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+hier);
     openDPRTab(permalink,'DPRm');
   }
 }
@@ -157,7 +161,7 @@ function importXMLindex(add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc='+nikaya+'.'+bookno+'.'+G_hier);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -167,7 +171,7 @@ function importXMLindex(add) {
     }
   }
   else if(add != 'right') {
-    var permalink = 'chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+G_hier;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?loc='+nikaya+'.'+bookno+'.'+G_hier);
     openDPRTab(permalink,'DPRm');
   }
   else {
@@ -185,7 +189,7 @@ function sendPaliXML(link,add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link;
+            var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link);
       openDPRTab(permalink,'DPRd');
     }
     else {
@@ -195,7 +199,7 @@ function sendPaliXML(link,add) {
     }
   }
   else if(add!='right') {
-        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link;
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm?type=PED&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+link);
     openDPRTab(permalink,'DPRd');
   }
 }
@@ -210,7 +214,7 @@ function sendDPPNXML(link,add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-            var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
+            var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link));
       openDPRTab(permalink,'DPRd');
     }
     else {
@@ -219,7 +223,7 @@ function sendDPPNXML(link,add) {
     }
   }
   else if(add!='right') {
-        var permalink = 'chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm?type=DPPN&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd&query='+toVel(link));
     openDPRTab(permalink,'DPRd');
   }
 }
@@ -230,7 +234,7 @@ function sendAtt(x,type,nik,add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?atth='+x+','+type+','+nik;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?atth='+x+','+type+','+nik);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -239,7 +243,7 @@ function sendAtt(x,type,nik,add) {
     }
   }
   else if(add!='right'){
-    var permalink = 'chrome://digitalpalireader/content/index.xul' + '?atth='+x+','+type+','+nik;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?atth='+x+','+type+','+nik);
     openDPRTab(permalink,'DPRm');
   }
 }
@@ -250,7 +254,7 @@ function sendTitle(x,m,a,t,nik,add) {
     var oldTab = findDPRTab('DPR-main');
 
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?title='+x+','+m+','+a+','+t+','+nik;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?title='+x+','+m+','+a+','+t+','+nik);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -260,7 +264,7 @@ function sendTitle(x,m,a,t,nik,add) {
     }
   }
   else if(add!='right') {
-    var permalink = 'chrome://digitalpalireader/content/index.xul' + '?title='+x+','+m+','+a+','+t+','+nik;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?title='+x+','+m+','+a+','+t+','+nik);
     openDPRTab(permalink,'DPRm');
   }
 }
@@ -296,6 +300,7 @@ function sendUpdateBookmarks() {
 var G_lastcolour = 0;
 
 function sendAnalysisToOutput(input, divclicked, frombox, add){
+  appInsights.trackEvent({ name: 'Reading - DPR Analysis',  properties: { input, divclicked, frombox, add, }});
 
   if(add == 'right') return;
   if(window.getSelection().toString())
@@ -332,7 +337,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
     }
     var oldTab = findDPRTab('DPR-main');
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -342,7 +347,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
     }
   }
   else {
-    var permalink = 'chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox;
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/bottom.htm' + '?analysis='+toVel(input)+'&frombox='+frombox);
     openDPRTab(permalink,'DPRx');
   }
 }
@@ -360,7 +365,7 @@ function sendTranslate(input, add){
     }
     var oldTab = findDPRTab('DPR-main');
     if (!oldTab) {
-      var permalink = 'chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox;
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?analysis='+toVel(input)+'&options='+frombox);
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -370,12 +375,14 @@ function sendTranslate(input, add){
     }
   }
   else {
-    var permalink = 'chrome://digitalpalireader/content/translate.htm' + '?phrase='+toVel(input);
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/translate.htm' + '?phrase='+toVel(input));
     openDPRTab(permalink,'DPRx');
   }
 }
 
 function openTranslation(url,add) {
+  appInsights.trackEvent({ name: 'Open Translation',  properties: { url, add, }});
+
   if(add == 'right') return;
 
   const sInfo = DPR_Translations.parsePlace(url);
@@ -444,7 +451,7 @@ function closePanel() {
     reindexPanels();
     browsers[0].contentWindow.refreshit();
     browsers[0].contentWindow.makeToolbox(false);
-    cW.history.replaceState({}, 'Title', 'chrome://digitalpalireader/content/index.xul');
+    cW.history.replaceState({}, 'Title', DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'));
     return;
   }
 

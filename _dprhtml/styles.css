@@ -5,8 +5,12 @@ body, p, table, div, a, font, select, input, textarea, span {
   color: #111;
 }
 
-body {
-  font-family: Verdana;
+body, p, table, div, a, font, span {
+  font-size: 16px;
+}
+
+select, input, textarea {
+  font-size: 14px;
 }
 
 .small {

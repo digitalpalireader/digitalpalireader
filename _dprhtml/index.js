@@ -23,9 +23,11 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 const __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
+  triggerUpdateCheck();
   setPrefs();
   initSplitters();
   initFooter();
+  await setupBTForRG();
   await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
 
@@ -52,7 +54,7 @@ function installGlobalHandlers() {
     initMainPane();
   });
 
-  window.addEventListener('popstate', () => historyPopstateHandler());
+  window.addEventListener('popstate', e => historyPopstateHandler(e));
 }
 
 const loadFeatureAsync = async (name, initFn) => {
@@ -169,7 +171,8 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
     });
   })
 
-const  historyPopstateHandler = () => {
+const  historyPopstateHandler = e => {
+  console.warn('>>>> historyPopstateHandler', e);
   if (DPR_PAL.isNavigationFeature()) {
     $("#navigationDiv").load("navigation.html");
   } else if (DPR_PAL.isSearchFeature()) {
@@ -179,4 +182,38 @@ const  historyPopstateHandler = () => {
   } else {
     console.error('Unknown feature');
   }
+}
+
+function triggerUpdateCheck() {
+  const updateCheck = async () => {
+    console.debug('Checking for updates...');
+    try {
+      const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText);
+      console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
+      if (verStr.trim() !== window.releaseNumber) {
+        const message = `A new version of Digital Pali Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
+        DPR_Chrome.createToast(DPR_Chrome.ToastTypeInfo, message, 5 * 60 * 1000, 'Digital Pali Reader update');
+      }
+    } catch (e) {
+      console.error('Update check failed with error:', e);
+    }
+  }
+
+  const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
+    /^(localdev|staging)$/i.test(window.environmentName)
+    ? [5, 1]
+    : [5, 1];
+
+  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
+  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
+}
+
+async function setupBTForRG() {
+  try {
+    const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText)
+    DPR_prefs['btloc'] = btloc.trim().replace(/\/+$/g, '');
+    DPR_prefs['buddhist_texts'] = true;
+    DPR_Translations.createTrProps();
+  } catch { }
+  console.log('setupBTForRG:', DPR_prefs['buddhist_texts'], DPR_prefs['btloc']);
 }

@@ -2,32 +2,41 @@
 
 var DPR_Translations = (function () {
 
-const trProps = {
-  ati: {
-    id: 0,
-    baseUrl: `${DPR_PAL.toUrl(DPR_prefs['catiloc'])}/tipitaka`,
-    icon: `ati.ico`,
-    background: 'white',
-  },
-  abt: {
-    id: 1,
-    baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
-    icon: `abt.gif`,
-    background: 'rgb(255, 248, 240)',
-  },
-  bt: {
-    id: 2,
-    baseUrl: DPR_PAL.toUrl(DPR_prefs['btloc']),
-    icon: `wisdom.png`,
-    background: 'transparent',
-  },
-  dpr: {
-    id: 3,
-    baseUrl: `Not yet implemented`,
-    icon: `?`,
-    background: 'red',
-  },
-}
+const trimLastWhacks = x => x.replace(/\/+$/g, '');
+
+let trProps = null;
+
+const createTrProps = () => {
+  trProps = {
+    ati: {
+      id: 0,
+      baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['catiloc']))}/tipitaka`,
+      icon: `ati.ico`,
+      background: 'white',
+    },
+    abt: {
+      id: 1,
+      baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+      icon: `abt.gif`,
+      background: 'rgb(255, 248, 240)',
+    },
+    bt: {
+      id: 2,
+      baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['btloc'])),
+      enabled: DPR_prefs['buddhist_texts'],
+      icon: `wisdom.png`,
+      background: 'transparent',
+    },
+    dpr: {
+      id: 3,
+      baseUrl: `Not yet implemented`,
+      icon: `?`,
+      background: 'red',
+    },
+  }
+};
+
+createTrProps();
 
 const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 
@@ -185,7 +194,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       var mysn = book+vagga;
 
       // BuddhistTexts
-      if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
+      if(trProps.bt.enabled && (which == 3 || which == 0)) {
         output.push(transLink(which,2,'dn/dn_e_'+mysn+'.htm','Translation of DN '+mysn+' by Walshe'));
         cnt++;
       }
@@ -363,7 +372,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       // BuddhistTexts
 
-      if(DPR_prefs['buddhist_texts'] && which < 3) {
+      if(trProps.bt.enabled && which < 3) {
         output.push(transLink(which,2,'mn/mn_e_'+mysn+'.htm','Translation of MN '+mysn+' by Bodhi'));
         cnt++;
       }
@@ -391,7 +400,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if (!section) section = 0;
 
       // BuddhistTexts
-      if(DPR_prefs['buddhist_texts'] && (which == 6 || which == 0)) {
+      if(trProps.bt.enabled && (which == 6 || which == 0)) {
         var n = which == 0 ? getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
 
         output.push(transLink(which,2,'an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
@@ -500,6 +509,8 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(hier != 'm')
         break;
 
+      var shortLink = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier);
+
       var bookn = book+1;
 
       if (bookn > 1) {vagga+=11;}
@@ -510,8 +521,8 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       // BuddhistTexts
 
 
-      if(DPR_prefs['buddhist_texts'] && (which == 3 || which == 0)) {
-        output.push(transLink(which,2,'sn/sn_e_'+(vagga+1)+'.htm','Translation of SN '+(vagga+1)+' by Bodhi'));
+      if(trProps.bt.enabled && (which == 3 || which == 0)) {
+        output.push(transLink(which,2,'sn/sn_e_'+(vagga+1)+'.htm#'+shortLink,'Translation of SN '+(vagga+1)+' by Bodhi'));
         cnt++;
       }
 
@@ -610,7 +621,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
           }
 
           // BuddhistTexts
-          if(DPR_prefs['buddhist_texts'] && hier == 'a') {
+          if(trProps.bt.enabled && hier == 'a') {
 
             var dhpVaggas = [1,14,9,9,12,15,11,10,14]; // stories per vagga (first section)
 
@@ -915,7 +926,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         break;
         case 14: // Jat
           // BuddhistTexts
-          if(DPR_prefs['buddhist_texts']) {
+          if(trProps.bt.enabled) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
             output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
@@ -923,7 +934,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         break
         case 15: // Jat
           // BuddhistTexts
-          if(DPR_prefs['buddhist_texts']) {
+          if(trProps.bt.enabled) {
             var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
             output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
@@ -941,7 +952,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         break;
 
       // BuddhistTexts
-      if(DPR_prefs['buddhist_texts']) {
+      if(trProps.bt.enabled) {
         if(book == 1)
           meta += 12;
 
@@ -955,7 +966,8 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 }
 
 return {
-  trProps: Object.freeze(trProps),
+  trProps: trProps,
+  createTrProps: createTrProps,
   parsePlace: parsePlace,
   addtrans: addtrans,
   resolveUri: resolveUri,

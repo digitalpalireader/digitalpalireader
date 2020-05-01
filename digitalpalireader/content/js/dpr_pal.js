@@ -38,7 +38,7 @@ console.log('Loading DPR_PAL...');
       var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
       for (var i = 0; i < files.length; i++) {
         if (!/\.js$/.test(files[i]))
-          files[i] = 'chrome://digitalpalireader/content/js/' + files[i] + '.js';
+          files[i] = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/js/' + files[i] + '.js');
         try {
           loader.loadSubScript(files[i], null, 'UTF-8');
         }
@@ -96,6 +96,7 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.mainStylesMatcher = /.*_dprhtml\/StYlEs.*\.css$/i;
   DPR_PAL.dprUrlMatcher = /\/_dprhtml\/index\.html/;
 
   DPR_PAL.fixupDprBaseUrl = url => url.replace(' dprhtml', '_dprhtml');
@@ -137,7 +138,16 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
 
   DPR_PAL.toUrl = x => {
-    if (/^http/.test(new URL(x).protocol)) {
+    let url = undefined;
+    try {
+      url = new URL(x)
+    } catch {}
+
+    if (!url) {
+      return x;
+    }
+
+    if (/^http/.test(url.protocol)) {
       return x;
     } else {
       return 'file://' + x.replace(/\\/g,'/');
@@ -157,14 +167,19 @@ console.log('Loading DPR_PAL...');
     return `${baseUrl}?${newQps.join('&')}`;
   };
 
-  DPR_PAL.convertXulUrl = url => {
-    const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict)\.(xul|htm)(\?)?(.*)$/i
+  DPR_PAL.toWebUrl = url => {
+    const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict|dbv)\.(xul|htm|html)(\?)?(.*)$/i
 
-    return url
+    let newUrl = url
       .replace(xulUrlCracker, `${DPR_PAL.baseUrl}_dprhtml/index.html?feature=$1&$4`)
       .replace('feature=index', '')
       .replace('feature=dict&', 'feature=dictionary&')
       .replace('?&', '?');
+
+    // NOTE: Following is best guess.
+    newUrl = newUrl.replace(/^chrome:\/\//i, DPR_PAL.baseUrl);
+
+    return newUrl;
   };
 
   //

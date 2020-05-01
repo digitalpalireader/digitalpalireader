@@ -24,3 +24,27 @@ class BottomPaneTabsViewModel {
 }
 
 BottomPaneTabsViewModel.TabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj'];
+
+var DPR_BottomPane = (function () {
+  const wrapWithTelemetry = function(fn) {
+    return function() {
+      appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`,  properties: { }});
+      return fn.apply(this, arguments);
+    };
+  };
+
+  return {
+    cvConvert: wrapWithTelemetry(convert),
+    cvSortaz: wrapWithTelemetry(sortaz),
+
+    tpToVel: wrapWithTelemetry(toVel),
+    tpToUni: wrapWithTelemetry(toUni),
+    tpSendTextPad: wrapWithTelemetry(sendTextPad),
+    tpSavePad: wrapWithTelemetry(savePad),
+
+    trTranslateText: wrapWithTelemetry(translateText),
+    trInsertWordByWord: wrapWithTelemetry(insertWordByWord),
+
+    cjInsertConj: wrapWithTelemetry(insertConj),
+  };
+})();

@@ -1,7 +1,7 @@
 function bv(rnd,static) {
   var xmlhttp = new window.XMLHttpRequest();
 
-  let url = 'chrome://digitalpalireader/content/etc/dbv.html';
+  let url = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/etc/dbv.html');
   if (DPR_PAL.isWeb) {
     url = DPR_PAL.contentFolder + 'etc/dbv.html';
     // if this isn't done the request won't contain a 'responseXML' property with the parsed document

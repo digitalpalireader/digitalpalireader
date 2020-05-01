@@ -46,7 +46,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
     G_dictOpts = dictOpts;
     G_dictEntry = dictEntry;
 
-    var permalink = 'chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:'');
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/dict.htm' + '?type='+G_dictType+(G_dictQuery?'&query=' + G_dictQuery:'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + G_dictEntry:''));
     try {
       window.history.replaceState('Object', 'Title', permalink);
     }
@@ -94,7 +94,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
   $(`#${DPR_PAL.getDifId()}`).html('');
-  $('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+'dpr:dict?type='+G_dictType+(G_dictQuery?'&query=' + toUni(G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + toUni(G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+  $('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+G_dictType+(G_dictQuery?'&query=' + toUni(G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + G_dictOpts.join(',') + (G_dictEntry?'&entry=' + toUni(G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 
   G_dictQuery = G_dictQuery.toLowerCase();
 
@@ -270,17 +270,17 @@ function pedFullTextSearch(getstring) {
 
     for (var j =0; j < allp.length; j++) {
       var texttomatch = allp[j].textContent;
-      startmatch = texttomatch.search(getstring);
-      postpara = '';
+      var startmatch = texttomatch.search(getstring);
+      var postpara = '';
       if (startmatch >= 0)
       {
         listouta.push('<a href="#pedo'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + texttomatch.substring(0,texttomatch.search(/\/b/)-1).replace(/<b>/,'') + '</a><br>');
         while (startmatch >= 0)
         {
-          gotstring = texttomatch.match(getstring)[0];
-          endmatch = startmatch + gotstring.length;
-          beforem = texttomatch.substring(0,startmatch);
-          afterm = texttomatch.substring(endmatch,texttomatch.length);
+          var gotstring = texttomatch.match(getstring)[0];
+          var endmatch = startmatch + gotstring.length;
+          var beforem = texttomatch.substring(0,startmatch);
+          var afterm = texttomatch.substring(endmatch,texttomatch.length);
           postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
           texttomatch = texttomatch.substring(endmatch);
           startmatch = texttomatch.search(getstring);
@@ -500,7 +500,7 @@ function dppnFullTextSearch(getstring) {
           gotstring = texttomatch.match(getstring)[0];
           endmatch = startmatch + gotstring.length;
           beforem = texttomatch.substring(0,startmatch);
-          afterm = texttomatch.substring(endmatch,texttomatch.length);
+          var afterm = texttomatch.substring(endmatch,texttomatch.length);
           postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
           texttomatch = texttomatch.substring(endmatch);
           startmatch = texttomatch.search(getstring);

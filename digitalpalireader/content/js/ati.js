@@ -32,7 +32,7 @@ function onLoad() {
       oldparams[G_compare-1] = link;
       newparams = oldparams.join('|');
 
-      var newurl = 'chrome://digitalpalireader/content/index.xul?'+newparams;
+      var newurl = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?'+newparams);
       mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState({}, 'Title', newurl);
 
       // ati kungfu
@@ -62,7 +62,7 @@ function closePanel() {
     reindexPanels();
     browsers[0].contentWindow.refreshit();
     browsers[0].contentWindow.makeToolbox(false);
-    cW.history.replaceState({}, 'Title', 'chrome://digitalpalireader/content/index.xul');
+    cW.history.replaceState({}, 'Title', DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'));
     return;
   }
 

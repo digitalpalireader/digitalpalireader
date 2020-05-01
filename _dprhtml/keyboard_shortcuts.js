@@ -1,7 +1,7 @@
 document.onkeypress = DPR_keypress;
 
 function DPR_keypress(e) {
-  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey) {
+  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey || e.metaKey) {
     return;
   }
 
@@ -11,7 +11,7 @@ function DPR_keypress(e) {
   }
 
   if (e.key === '`') {
-    DPR_Chrome.toggleNewSidebarVisibility();
+    DPR_Chrome.toggleDPRSidebar();
     event.preventDefault();
     return;
   }
@@ -77,8 +77,9 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (false && e.key === '!') {
-    eraseOptions();
+  if (e.key === '^') {
+    resetAllDprSettings();
+    window.location.reload();
     return;
   }
 
@@ -97,7 +98,7 @@ function DPR_keypress(e) {
   }
 
   if (e.key === 'h') {
-    openDPRTab('help.html', 'DPR-help', 0);
+    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
     return;
   }
 
@@ -110,4 +111,8 @@ function DPR_keypress(e) {
     $('#helpDialog').modal('show');
     return;
   }
+}
+
+function resetAllDprSettings() {
+  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
 }

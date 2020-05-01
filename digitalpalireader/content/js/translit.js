@@ -542,6 +542,7 @@ function toDeva(input,type) {
   devar['s'] = 'स';
   devar['h'] = 'ह';
 
+  var im = '';
   var i0 = '';
   var i1 = '';
   var i2 = '';
@@ -555,6 +556,7 @@ function toDeva(input,type) {
   input = input.replace(/\&quot;/g, '`');
 
   while (i < input.length) {
+    im = input.charAt(i-2);
     i0 = input.charAt(i-1);
     i1 = input.charAt(i);
     i2 = input.charAt(i+1);

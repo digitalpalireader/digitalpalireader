@@ -1,184 +1,224 @@
 <div id="dictionaryTabContent">
-  <div class="form-row align-items-center">
-    <div class="col">
-      <label class="sr-only" for="dictin">dictin</label>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <button id="dictinInfo" class="btn btn-outline-secondary" type="button" data-toggle="popover">
-            <i class="fa fa-info" aria-hidden="true"></i>
-          </button>
-          <div id="dictinInfo-popover-content" style="display: none">
-            Enter word or partial word using Velthuis or Unicode. E.g. aa for ā, .m for ṃ etc.
-            <br>
-            <br>
-            Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' class='popover-link'>Velthuis on Wikipedia</a> for the entire list.
+  <div class="card mb-2">
+    <div class="card-header" style="line-height: 1.35rem;">
+      Dictionary
+    </div>
+    <div class="card-body p-2">
+      <div class="form-row align-items-center">
+        <div class="col">
+          <label class="sr-only" for="dictin">dictin</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <button id="dictinInfo" class="btn btn-outline-secondary" type="button" data-toggle="popover">
+                <i class="fa fa-info" aria-hidden="true"></i>
+              </button>
+              <div id="dictinInfo-popover-content" style="display: none">
+                Enter word or partial word using Velthuis or Unicode. E.g. aa for ā, .m for ṃ etc.
+                <br>
+                <br>
+                Refer <a href='https://en.wikipedia.org/wiki/Velthuis#Transliteration_scheme' target='_blank' class='popover-link'>Velthuis on Wikipedia</a> for the entire list.
+              </div>
+            </div>
+            <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode."
+              onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" data-bind="textInput: query">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
+                <i class="fa fa-search" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
         </div>
-        <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode."
-          onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" data-bind="textInput: query">
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 mb-2">
+          <label class="sr-only" for="dictType">dictType</label>
+          <select id="dictType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.dictOptions()" data-bind="value: type">
+            <option title="Analyze Word" value="DPR" selected>DPR Analysis</option>
+            <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+            <option title="Pali-English Dictionary" value="PED">PED - Pali-English</option>
+            <option title="Dict. of Pali Names" value="DPPN">DPPN - Pali Proper Names</option>
+            <option title="Concise Pali-English Dictionary" value="CPED">CPED - Concise Pali-English</option>
+            <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+            <option title="PED, DPPN and CPED combined" value="MULTI">PED, DPPN &amp; CPED</option>
+            <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+            <option title="Concise English-Pali Dictionary" value="CEPD">CEPD - Concise English-Pali</option>
+            <option title="Aṭṭhakathā Term Search" value="ATT">Aṭṭhakathā Terms</option>
+            <option title="Ṭīka Term Search" value="TIK">Ṭīka Terms</option>
+            <option title="Title Search" value="TIT">Title Search</option>
+            <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
+            <option title="Dhātumālā Roots" value="PRT" label="Pali Roots">Pali Roots</option>
+            <option title="M.W. Sanskrit Dictionary" value="SKT">Sanskrit Dictionary</option>
+            <option title="Whitney's Sanskrit Roots" value="SKR">Sanskrit Roots</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-12 mb-1">
+          <div id="dictAdvOpts" class="card dpr-collapsible-card">
+            <div class="card-header" style="line-height: 1rem;">
+              <a role="button" data-toggle="collapse" data-parent="#dictAdvOpts" href="#dictAdvOpts-collapse-1">
+                Advanced options
+              </a>
+            </div>
+            <div id="dictAdvOpts-collapse-1" class="collapse">
+              <div class="card-body p-1">
+                <div id="soNO" class="card mb-1">
+                  <div class="row">
+                    <div class="col text-center my-auto">
+                      No advanced options available
+                    </div>
+                  </div>
+                </div>
+                <div id="dictAdvOpts1" class="card mb-1">
+                  <div class="row">
+                    <div class="col-md-2 text-center my-auto">
+                      <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts1');">√</button>
+                    </div>
+                    <div class="col-md-10 px-0">
+                      <div id="soRX" class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soregexp" value="rx" data-bind="checked: option('rx')">
+                        <label class="form-check-label" for="soregexp" title="Use Regular Expressions for wildcards in search.">
+                          RegEx
+                        </label>
+                      </div>
+                      <div id="soFZ" class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sofuzzy" value="fz" data-bind="checked: option('fz')">
+                        <label class="form-check-label" for="sofuzzy" title="Enable fuzzy search (removes diacritics).">
+                          Fuzzy
+                        </label>
+                      </div>
+                      <div id="soFT" class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sofulltext" value="ft" data-bind="checked: option('ft')">
+                        <label class="form-check-label" for="sofulltext" title="Search dictionary definitions, not only entry names.">
+                          Full Text
+                        </label>
+                      </div>
+                      <div id="soSW" class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sostartword" value="sw" data-bind="checked: option('sw')">
+                        <label class="form-check-label" for="sostartword" title="Search only from the beginning of the word.">
+                          Start of Word Only
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="dictAdvOpts2" class="card mb-1">
+                  <div class="row">
+                    <div class="col-md-2 text-center my-auto">
+                      <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts2');">√</button>
+                    </div>
+                    <div class="col-md-10 px-0">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soMATm" data-bind="checked: option('mm')">
+                        <label class="form-check-label" for="soMATm" title="Include in search.">
+                          Mula
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soMATa" data-bind="checked: option('ma')">
+                        <label class="form-check-label" for="soMATa" title="Include in search.">
+                          Aṭṭhakathā
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soMATt" data-bind="checked: option('mt')">
+                        <label class="form-check-label" for="soMATt" title="Include in search.">
+                          Ṭīka
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="dictAdvOpts3" class="card mb-1">
+                  <div class="row">
+                    <div class="col-md-2 text-center my-auto">
+                      <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts3');">√</button>
+                    </div>
+                    <div class="col-md-10 px-0">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSv" value="xv" data-bind="checked: option('xv')">
+                        <label class="form-check-label" for="soNSv" title="Include in search.">
+                          Vin
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSd" value="xd" data-bind="checked: option('xd')">
+                        <label class="form-check-label" for="soNSd" title="Include in search.">
+                          DN
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSa" value="xa" data-bind="checked: option('xa')">
+                        <label class="form-check-label" for="soNSa" title="Include in search.">
+                          AN
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSm" value="xm" data-bind="checked: option('xm')">
+                        <label class="form-check-label" for="soNSm" title="Include in search.">
+                          MN
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSk" value="xk" data-bind="checked: option('xk')">
+                        <label class="form-check-label" for="soNSk" title="Include in search.">
+                          KN
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSs" value="xs" data-bind="checked: option('xs')">
+                        <label class="form-check-label" for="soNSs" title="Include in search.">
+                          SN
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="soNSy" value="xy" data-bind="checked: option('xy')">
+                        <label class="form-check-label" for="soNSy" title="Include in search.">
+                          Abhi
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
   <div class="form-row">
     <div class="form-group col-md-12 mb-2">
-      <label class="sr-only" for="dictType">dictType</label>
-      <select id="dictType" class="form-control" title="Choose a search type - hover over the name for description" onchange="DPROpts.dictOptions()" data-bind="value: type">
-        <option title="Analyze Word" value="DPR" selected>DPR Analysis</option>
-        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
-        <option title="Pali-English Dictionary" value="PED">PED - Pali-English</option>
-        <option title="Dict. of Pali Names" value="DPPN">DPPN - Pali Proper Names</option>
-        <option title="Concise Pali-English Dictionary" value="CPED">CPED - Concise Pali-English</option>
-        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
-        <option title="PED, DPPN and CPED combined" value="MULTI">PED, DPPN &amp; CPED</option>
-        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
-        <option title="Concise English-Pali Dictionary" value="CEPD">CEPD - Concise English-Pali</option>
-        <option title="Aṭṭhakathā Term Search" value="ATT">Aṭṭhakathā Terms</option>
-        <option title="Ṭīka Term Search" value="TIK">Ṭīka Terms</option>
-        <option title="Title Search" value="TIT">Title Search</option>
-        <option class="dictType-seperator-option" disabled>────────────────────────────────────────────────────────────────────── </option>
-        <option title="Dhātumālā Roots" value="PRT" label="Pali Roots">Pali Roots</option>
-        <option title="M.W. Sanskrit Dictionary" value="SKT">Sanskrit Dictionary</option>
-        <option title="Whitney's Sanskrit Roots" value="SKR">Sanskrit Roots</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-12 mb-2">
-      <div id="dictAdvOpts" class="card">
+      <div id="paliLangResources" class="dpr-collapsible-card card">
         <div class="card-header" style="line-height: 1rem;">
-          <a role="button" data-toggle="collapse" data-parent="#dictAdvOpts" href="#dictAdvOpts-collapse-1">
-            Advanced options
+          <a role="button" data-toggle="collapse" data-parent="#paliLangResources" href="#paliLangResources-collapse-1">
+            Pali language resources
           </a>
         </div>
-        <div id="dictAdvOpts-collapse-1" class="collapse">
+        <div id="paliLangResources-collapse-1" class="collapse">
           <div class="card-body p-1">
-            <div id="soNO" class="card mb-1">
-              <div class="row">
-                <div class="col text-center my-auto">
-                  No advanced options available
-                </div>
-              </div>
-            </div>
-            <div id="dictAdvOpts1" class="card mb-1">
-              <div class="row">
-                <div class="col-md-2 text-center my-auto">
-                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts1');">√</button>
-                </div>
-                <div class="col-md-10 px-0">
-                  <div id="soRX" class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soregexp" value="rx" data-bind="checked: option('rx')">
-                    <label class="form-check-label" for="soregexp" title="Use Regular Expressions for wildcards in search.">
-                      RegEx
-                    </label>
-                  </div>
-                  <div id="soFZ" class="form-check">
-                    <input class="form-check-input" type="checkbox" id="sofuzzy" value="fz" data-bind="checked: option('fz')">
-                    <label class="form-check-label" for="sofuzzy" title="Enable fuzzy search (removes diacritics).">
-                      Fuzzy
-                    </label>
-                  </div>
-                  <div id="soFT" class="form-check">
-                    <input class="form-check-input" type="checkbox" id="sofulltext" value="ft" data-bind="checked: option('ft')">
-                    <label class="form-check-label" for="sofulltext" title="Search dictionary definitions, not only entry names.">
-                      Full Text
-                    </label>
-                  </div>
-                  <div id="soSW" class="form-check">
-                    <input class="form-check-input" type="checkbox" id="sostartword" value="sw" data-bind="checked: option('sw')">
-                    <label class="form-check-label" for="sostartword" title="Search only from the beginning of the word.">
-                      Start of Word Only
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="dictAdvOpts2" class="card mb-1">
-              <div class="row">
-                <div class="col-md-2 text-center my-auto">
-                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts2');">√</button>
-                </div>
-                <div class="col-md-10 px-0">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATm" data-bind="checked: option('mm')">
-                    <label class="form-check-label" for="soMATm" title="Include in search.">
-                      Mula
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATa" data-bind="checked: option('ma')">
-                    <label class="form-check-label" for="soMATa" title="Include in search.">
-                      Aṭṭhakathā
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soMATt" data-bind="checked: option('mt')">
-                    <label class="form-check-label" for="soMATt" title="Include in search.">
-                      Ṭīka
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div id="dictAdvOpts3" class="card mb-1">
-              <div class="row">
-                <div class="col-md-2 text-center my-auto">
-                  <button id="selAllM" type="button" class="btn btn-light btn-sm m-0" title="Select All/None" onclick="DPROpts.selAll('dictAdvOpts3');">√</button>
-                </div>
-                <div class="col-md-10 px-0">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSv" value="xv" data-bind="checked: option('xv')">
-                    <label class="form-check-label" for="soNSv" title="Include in search.">
-                      Vin
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSd" value="xd" data-bind="checked: option('xd')">
-                    <label class="form-check-label" for="soNSd" title="Include in search.">
-                      DN
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSa" value="xa" data-bind="checked: option('xa')">
-                    <label class="form-check-label" for="soNSa" title="Include in search.">
-                      AN
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSm" value="xm" data-bind="checked: option('xm')">
-                    <label class="form-check-label" for="soNSm" title="Include in search.">
-                      MN
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSk" value="xk" data-bind="checked: option('xk')">
-                    <label class="form-check-label" for="soNSk" title="Include in search.">
-                      KN
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSs" value="xs" data-bind="checked: option('xs')">
-                    <label class="form-check-label" for="soNSs" title="Include in search.">
-                      SN
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="soNSy" value="xy" data-bind="checked: option('xy')">
-                    <label class="form-check-label" for="soNSy" title="Include in search.">
-                      Abhi
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
+            <ul class="list-group">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="btn btn-link m-0 p-0 text-truncate" href="/digitalpalireader/content/etc/grammar/GMD" target="_blank" title="A Practical Grammar of the Pāli Language by Charles Duroiselle">A Practical Grammar of the Pāli Language by Charles Duroiselle</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="btn btn-link m-0 p-0 text-truncate" href="/digitalpalireader/content/etc/grammar/cheat.htm" target="_blank" title="Pali Translation Cheat Sheet by Alan McClure">Pali Translation Cheat Sheet by Alan McClure</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="btn btn-link m-0 p-0 text-truncate" href="/digitalpalireader/content/etc/grammar/compound.htm" target="_blank" title="Elementary Pali Compound Reference Sheet By Alan McClure">Elementary Pali Compound Reference Sheet By Alan McClure</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="btn btn-link m-0 p-0 text-truncate" href="/digitalpalireader/content/etc/grammar/ped-abbv.htm" target="_blank" title="PED Abbreviations">PED Abbreviations</a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a class="btn btn-link m-0 p-0 text-truncate" href="/digitalpalireader/content/etc/grammar/cped-abbv.htm" target="_blank" title="CPED Abbreviations">CPED Abbreviations</a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
