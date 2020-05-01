@@ -46,7 +46,7 @@
                 <input id="nigahita" name="nigahita" type="checkbox" />
                 <label for="nigahita">Use ṁ instead of ṃ</label>
 
-                <input id="ctrans" name="ctrans" type="checkbox" data-bind="checked: settings.ctrans" />
+                <input id="ctrans" name="ctrans" type="checkbox" data-bind="checked: ctrans" />
                 <label for="ctrans">Show Translations</label>
 
                 <input id="autodict" name="autodict" type="checkbox" />
@@ -74,14 +74,14 @@
                   </div>
                 </div>
               </div>
-              <div class="settings-pane-tab-pane-section d-flex flex-column" style="border: 1px solid red; grid-column: span 2;">
+              <div class="settings-pane-tab-pane-section d-flex flex-column" style="grid-column: span 2;">
                 <div class="d-flex w-100 justify-content-start">
-                  <input id="buddhist_texts" class="mr-1" name="buddhist_texts" type="checkbox" data-bind="checked: settings.buddhist_texts"/>
+                  <input id="buddhist_texts" class="mr-1" name="buddhist_texts" type="checkbox" data-bind="checked: buddhist_texts"/>
                   <label for="buddhist_texts">Use BuddhistTexts Archive</label>
                   </div>
                 <div class="d-flex w-100 justify-content-start">
                   <label class="mr-1 text-nowrap" for="btloc">BuddhistTexts Archive URL:</label>
-                  <input id="btloc" class="w-100 m-auto" name="btloc" type="text" placeholder="Url for BuddhistTexts e.g. https://www.buddhisttexts.net/"  data-bind="enable: settings.buddhist_texts, value: settings.btloc" />
+                  <input id="btloc" class="w-100 m-auto" name="btloc" type="text" placeholder="Url for BuddhistTexts e.g. https://www.buddhisttexts.net/"  data-bind="enable: buddhist_texts, value: btloc" />
                 </div>
               </div>
             </div>
@@ -164,13 +164,13 @@
                 <div class="settings-pane-tab-pane-section-header">Text formatting</div>
 
                 <label for="colfont" style="white-space: nowrap;">Font Family</label>
-                <input class="ml-1" id="colfont" name="colfont" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: settings.colfont"/>
+                <input class="ml-1" id="colfont" name="colfont" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colfont"/>
 
                 <label for="colsize" style="white-space: nowrap;">Text Size</label>
-                <input class="ml-1" id="colsize" name="colsize" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: settings.colsize"/>
+                <input class="ml-1" id="colsize" name="colsize" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colsize"/>
 
                 <label for="translits" style="white-space: nowrap;">Text Script</label>
-                <select class="ml-1" id="translits" style="justify-self: stretch;" data-bind="value: settings.translits">
+                <select class="ml-1" id="translits" style="justify-self: stretch;" data-bind="value: translits">
                   <option value="0">Roman</option>
                   <option value="1">Thai</option>
                   <option value="2">Devanagari</option>
