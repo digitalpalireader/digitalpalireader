@@ -3,8 +3,6 @@
 var DPR_Translations = (function () {
 
 const trimLastWhacks = x => x.replace(/\/+$/g, '');
-// NOTE: For internal sirimangalo reading group only usage.
-const isInternalReadingGroupStudent = () => (/simc-rg=1/i.test(window.location.href) && 'https://tipitaka.digitalpalireader.online/bt-simc-rg');
 
 const trProps = {
   ati: {
@@ -21,8 +19,8 @@ const trProps = {
   },
   bt: {
     id: 2,
-    baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['btloc'])) || isInternalReadingGroupStudent(),
-    enabled: DPR_prefs['buddhist_texts'] || isInternalReadingGroupStudent(),
+    baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['btloc'])),
+    enabled: DPR_prefs['buddhist_texts'],
     icon: `wisdom.png`,
     background: 'transparent',
   },
