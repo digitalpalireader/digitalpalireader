@@ -1,4 +1,5 @@
 CACHE MANIFEST
+# #{DeploymentEnvironmentName}# #{DeploymentReleaseNumber}# #{DeploymentCreatedTimestamp}#
 
 /DPRMyanmar/content/xml/m2a.xml
 /DPRMyanmar/content/xml/a8m.xml

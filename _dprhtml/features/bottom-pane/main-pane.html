@@ -68,7 +68,7 @@
           <button id="buttonCvConv" class="btn btn-sm btn-light my-1" onclick="DPR_BottomPane.cvConvert(false,document.getElementById('lower').checked)" data-toggle="tooltip" data-placement="right"
             title="Convert from one format to another">Convert</button>
           <button class="btn btn-sm btn-light my-1" onclick="document.getElementById('coutput').value=DPR_BottomPane.cvSortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
-            data-toggle="tooltip" data-placement="right" title="Sort input by Pali word order">Sort</button>
+            data-toggle="tooltip" data-placement="right" title="Sort input by Pāli word order">Sort</button>
           <button class="btn btn-sm btn-light my-1" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
             title="clear both boxes">Clear</button>
           <div id="cactions-lowercase">
@@ -107,7 +107,7 @@
           <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToVel(document.getElementById('pad').value)">Velthuis</button>
           <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToUni(document.getElementById('pad').value)">Unicode</button>
           <span class="mat-button-group-seperator"></span>
-          <button class="btn btn-light mb-0" title="analyze text as Pali passage" onmouseup="DPR_BottomPane.tpSendTextPad(eventSend(event))">Analyze</button>
+          <button class="btn btn-light mb-0" title="analyze text as Pāli passage" onmouseup="DPR_BottomPane.tpSendTextPad(eventSend(event))">Analyze</button>
           <span class="mat-button-group-seperator"></span>
           <button class="btn btn-light mb-0 mr-1"
             onclick="copyToClipboard(document.getElementById('pad').value); alertFlash('Text copied to clipboard.','green');"
@@ -119,7 +119,7 @@
 
     <div id="main-bottom-pane-tab-panes-Tr" data-bind="visible: isTrTabSelected">
       <p class="oneDec">
-        Enter a single Pali sentence below (Velthuis or Unicode):
+        Enter a single Pāli sentence below (Velthuis or Unicode):
       </p>
       <textarea id="input" class="bottom-item" rows="2">
       </textarea>
@@ -134,7 +134,7 @@
           title="Clear text">Clear</button>
       </div>
       <div class="bottom-center" style="font-size: small;">
-        Notes: this translation tool is highly experimental.  Most actual Pali sentences found in the Tipitaka probably won't
+        Notes: this translation tool is highly experimental.  Most actual Pāli sentences found in the Tipitaka probably won't
         translate completely, if it all. For an example of a sentence that does work, try clicking on this one:
       </div>
       <div class="bottom-center" style="font-size: small;">

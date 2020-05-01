@@ -173,7 +173,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 
-  var tabT = 'Pali: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+  var tabT = 'Pāli: ' + G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
   setCurrentTitle(tabT);
 
   const shortcutFns = createShortcutFns();

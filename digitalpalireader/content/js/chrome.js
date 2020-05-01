@@ -356,7 +356,14 @@ var DPR_Chrome = (function () {
   const ToastTypeWarning = 'Warning';
   const ToastTypeSuccess = 'Success';
   const ToastTypeInfo = 'Information';
-  const createToast = (type, message, delay, text) => {
+  const createToast = (type, message, delay, text, uniqueId) => {
+    const containerId = "#main-container-toast-container";
+    if ($(containerId).find(`#${uniqueId}`).length) {
+      console.log('Notification with id:', uniqueId, 'already exists. Not creating another.');
+      // NOTE: Singleton notifications.
+      return;
+    }
+
     let typeClasses = '';
     let style = ''
     if (type === ToastTypeError) {
@@ -371,8 +378,8 @@ var DPR_Chrome = (function () {
       console.error('Unknown type', type);
     }
 
-    $("#main-container-toast-container").append(`
-      <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
+    $(containerId).append(`
+      <div id="${uniqueId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
         <div class="toast-header ${typeClasses}" style="${style}">
           <strong class="mr-auto">${text || type}</strong>
           <small></small>

@@ -188,11 +188,16 @@ function triggerUpdateCheck() {
   const updateCheck = async () => {
     console.debug('Checking for updates...');
     try {
-      const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText);
+      const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText.trim());
       console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
-      if (verStr.trim() !== window.releaseNumber) {
-        const message = `A new version of Digital Pali Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
-        DPR_Chrome.createToast(DPR_Chrome.ToastTypeInfo, message, 5 * 60 * 1000, 'Digital Pali Reader update');
+      if (verStr !== window.releaseNumber) {
+        const message = `A new version of Digital Pāli Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
+        DPR_Chrome.createToast(
+          DPR_Chrome.ToastTypeInfo,
+          message,
+          15 * 60 * 1000,
+          'Digital Pāli Reader update',
+          'dpr-update-available-notification');
       }
     } catch (e) {
       console.error('Update check failed with error:', e);
@@ -210,8 +215,8 @@ function triggerUpdateCheck() {
 
 async function setupBTForRG() {
   try {
-    const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText)
-    DPR_prefs['btloc'] = btloc.trim().replace(/\/+$/g, '');
+    const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText.trim())
+    DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
     DPR_prefs['buddhist_texts'] = true;
     DPR_Translations.createTrProps();
   } catch { }
