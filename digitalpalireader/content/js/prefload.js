@@ -2,37 +2,37 @@
 
 var DPR_prefsInfo = {
   DictH: {
-    type: Boolean.name,
+    type: Number.name,
     defaultValue: 250,
   },
 
   translits: {
     type: Boolean.name,
-    defaultValue: 0,
+    defaultValue: false,
   },
   textmag: {
-    type: Boolean.name,
+    type: Number.name,
     defaultValue: 100,
   },
   coltext: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#111',
   },
   colsel: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#550',
   },
 
   coldppn: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#0B0',
   },
   colped: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#C40',
   },
   colcpd: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#44D',
   },
 
@@ -42,100 +42,100 @@ var DPR_prefsInfo = {
   },
   colsize: {
     type: Number.name,
-    defaultValue: '16',
+    defaultValue: 16,
   },
 
   bktype: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'colimg',
   },
   colbk: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#FFD',
   },
   imgbk: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'url(/digitalpalireader/content/images/imgbk.png)',
   },
 
   bkcptype: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'col',
   },
   colbkcp: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#F4F4F4',
   },
   imgbkcp: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)',
   },
 
   colInput: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#FFF',
   },
   colButton: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'RGBa(200,200,200,0.1)',
   },
   imgButton: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '-moz-linear-gradient(left,#DDC,#FFF,#DDC,#DDC)',
   },
   colButtonSel: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#FFF',
   },
   colbk1: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'yellow',
   },
   colbk2: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'aqua',
   },
   colbk3: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'green',
   },
 
   colsearch0: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'yellow',
   },
   colsearch1: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'blue',
   },
   colsearch2: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'green',
   },
 
   green: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#00B900',
   },
   blue: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#5353D5',
   },
   brown: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: '#000000',
   },
   grey: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'grey',
   },
   red: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'red',
   },
 
   blueh: {
-    type: Boolean.name,
+    type: String.name,
     defaultValue: 'powderblue',
   },
 
@@ -233,7 +233,7 @@ var DPR_prefsInfo = {
   },
 
   altlimit: {
-    type: Boolean.name,
+    type: Number.name,
     defaultValue: 20,
   },
 }
@@ -241,6 +241,7 @@ var DPR_prefsInfo = {
 // default prefs
 
 var DPR_prefsD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc[k] = v.defaultValue; return acc; }, []);
+var DPR_prefTypesD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc[k] = v.type; return acc; }, []);
 
 var DPR_prefs = [];
 
@@ -276,7 +277,7 @@ function setPref(name,value) {
 
 function getPref(name) {
   let pref = DPR_prefsD[name];
-  let prefType = localStorage[`DPR_Prefs_${name}_type`] === undefined ? Boolean.name : localStorage[`DPR_Prefs_${name}_type`];
+  let prefType = DPR_prefTypesD[name];
 
   if (!(localStorage['DPR_Prefs_'+name] === undefined)){
     switch (prefType){
