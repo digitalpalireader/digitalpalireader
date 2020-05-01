@@ -5,17 +5,6 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (e.key === 'v') {
-    openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
-    return;
-  }
-
-  if (e.key === '`') {
-    DPR_Chrome.toggleDPRSidebar();
-    event.preventDefault();
-    return;
-  }
-
   if (['1', '2', '3', '4', '5'].includes(e.key)) {
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[e.charCode - 49]);
     event.preventDefault();
@@ -26,18 +15,6 @@ function DPR_keypress(e) {
   if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
     cmd[1]().execute();
     event.preventDefault();
-    return;
-  }
-
-  if (false && e.key === 's') {
-    if (window.getSelection().toString() != '') {
-      wMain.sendtoconvert(window.getSelection().toString() + '');
-    }
-    else if (wBot.getSelection().toString() != '') {
-      wMain.sendtoconvert(wBot.getSelection().toString() + '');
-    }
-    else if (document.getElementById('convi')) { wMain.sendtoconvert(document.getElementById('convi').innerHTML); }
-    else alertFlash('You must select some text to send to the convertor', 'yellow');
     return;
   }
 
