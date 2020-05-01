@@ -19,46 +19,46 @@
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-2col-grid">
                 <div class="settings-pane-tab-pane-section-header">Show in Text</div>
 
-                <input id="showPages" name="showPages" type="checkbox" />
+                <input id="showPages" name="showPages" type="checkbox" data-bind="checked: showPages"/>
                 <label for="showPages">Page Numbers</label>
 
-                <input id="showPagesFull" name="showPagesFull" type="checkbox" />
+                <input id="showPagesFull" name="showPagesFull" type="checkbox" data-bind="checked: showPagesFull"/>
                 <label for="showPagesFull">Full Page Numbers</label>
 
-                <input id="showVariants" name="showVariants" type="checkbox" />
+                <input id="showVariants" name="showVariants" type="checkbox" data-bind="checked: showVariants"/>
                 <label for="showVariants">Variant Readings</label>
 
-                <input id="showVariantsInline" name="showVariantsInline" type="checkbox" />
+                <input id="showVariantsInline" name="showVariantsInline" type="checkbox" data-bind="checked: showVariantsInline"/>
                 <label for="showVariantsInline">Variants Inline</label>
 
-                <input id="showPermalinks" name="showPermalinks" type="checkbox" />
+                <input id="showPermalinks" name="showPermalinks" type="checkbox" data-bind="checked: showPermalinks"/>
                 <label for="showPermalinks">Permalinks</label>
 
-                <input id="showNames" name="showNames" type="checkbox" />
+                <input id="showNames" name="showNames" type="checkbox" data-bind="checked: showNames"/>
                 <label for="showNames">DPPN Links</label>
 
-                <input id="showPedLinks" name="showPedLinks" type="checkbox" />
+                <input id="showPedLinks" name="showPedLinks" type="checkbox" data-bind="checked: showPedLinks"/>
                 <label for="showPedLinks">Add Word Links to PED Entries</label>
               </div>
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-2col-grid">
                 <div class="settings-pane-tab-pane-section-header">Misc. Preferences</div>
 
-                <input id="nigahita" name="nigahita" type="checkbox" />
+                <input id="nigahita" name="nigahita" type="checkbox" data-bind="checked: nigahita"/>
                 <label for="nigahita">Use ṁ instead of ṃ</label>
 
-                <input id="ctrans" name="ctrans" type="checkbox" data-bind="checked: ctrans" />
+                <input id="ctrans" name="ctrans" type="checkbox" data-bind="checked: ctrans"/>
                 <label for="ctrans">Show Translations</label>
 
-                <input id="autodict" name="autodict" type="checkbox" />
+                <input id="autodict" name="autodict" type="checkbox" data-bind="checked: autodict"/>
                 <label for="autodict">Enable Dictionary search-as-you-type</label>
 
-                <input id="copyWord" name="copyWord" type="checkbox" />
+                <input id="copyWord" name="copyWord" type="checkbox" data-bind="checked: copyWord"/>
                 <label for="copyWord">Copy words to clipboard on click</label>
 
                 <div style="grid-column: 1 / 3; grid-row: span 2;">
                   <div>Show context menu item:</div>
                   <div style="display: flex;">
-                    <input class="mr-1" type="radio" id="allContext" name="selectMode" selecte="true">
+                    <input class="mr-1" type="radio" id="allContext" name="selectMode" checked="true">
                     <label class="mr-3" for="allContext">always</label><br>
                     <input class="mr-1" type="radio" id="contextSelected" name="selectMode">
                     <label class="mr-3 text-nowrap" for="contextSelected">when text selected</label><br>
@@ -69,8 +69,8 @@
 
                 <div style="grid-column: 1 / 3; grid-row: span 2;">
                   <div style="display: flex;">
-                    <label for="paltlimit" class="text-nowrap" >Maximum Definitions Per Compound:</label>
-                    <input class="ml-1" id="paltlimit" name="paltlimit" type="text" size="3" maxlength="16" />
+                    <label for="altlimit" class="text-nowrap" >Maximum Definitions Per Compound:</label>
+                    <input class="ml-1" id="altlimit" name="altlimit" type="text" size="3" maxlength="16" data-bind="value: altlimit"/>
                   </div>
                 </div>
               </div>
