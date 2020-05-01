@@ -6,6 +6,8 @@ class SettingsDialogTabsViewModel {
     this.isLayoutSettingsTabSelected = ko.observable(false);
     this.isTextSettingsTabSelected = ko.observable(false);
 
+    // NOTE: Keep this initialization. At times there appears to be a race condition with ctor and ko.
+    this.settings = {};
     this.settings = this.createSettings();
   }
 
