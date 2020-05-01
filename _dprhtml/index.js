@@ -189,12 +189,12 @@ function triggerUpdateCheck() {
       const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText.trim());
       console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
       if (verStr !== window.releaseNumber) {
-        const message = `A new version of Digital Pali Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
+        const message = `A new version of Digital Pāli Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
         DPR_Chrome.createToast(
           DPR_Chrome.ToastTypeInfo,
           message,
           15 * 60 * 1000,
-          'Digital Pali Reader update',
+          'Digital Pāli Reader update',
           'dpr-update-available-notification');
       }
     } catch (e) {

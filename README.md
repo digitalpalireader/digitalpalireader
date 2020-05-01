@@ -1,8 +1,8 @@
 [![Build Status](https://dev.azure.com/digitalpalireader/digitalpalireader/_apis/build/status/digitalpalireader%20-%20build?branchName=master)](https://dev.azure.com/digitalpalireader/digitalpalireader/_build/latest?definitionId=1&branchName=master) [![Release Status](https://vsrm.dev.azure.com/digitalpalireader/_apis/public/Release/badge/5c79c309-a1e5-4a73-b2a5-4faa0c2a2cce/1/2)](https://dev.azure.com/digitalpalireader/digitalpalireader/_release?_a=releases&view=mine&definitionId=1)
 
-# Digital Pali Reader
+# Digital Pāli Reader
 
-The Digital Pali Reader (DPR) is a tool much like a hard-copy language reader. It includes the collections of scriptures including the Pali canon, commentaries, sub-commentaries, Visuddhimagga and other texts in the Pali language. It also includes a dictionary to facilitate reading the texts and is useful in the study of the Pali language at an advanced level.
+The Digital Pāli Reader is a tool much like a hard-copy language reader. The tool includes the Pāli canon and related scriptures. It includes multiple dictionaries to facilitate reading the scriptures. In addition to enabling an immersive experience for the study of the Tipitaka, it is also useful in the study of the Pali language at an advanced level. The Digital Pāli Reader is used by Buddhist monks in their Pāli studies, at Universities around the world and by lay users for study at home.
 
 Current backlog is maintained [here](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
 

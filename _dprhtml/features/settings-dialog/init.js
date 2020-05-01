@@ -24,8 +24,8 @@ class SettingsDialogTabsViewModel {
     Object
       .entries(DPR_prefsInfo)
       .forEach(([k, v]) => {
-          localStorage[`DPR_Prefs_${k}_type`] = v.type;
-          localStorage[`DPR_Prefs_${k}`] = this[k]();
+          localStorage[getPrefTypeStorageKey(k)] = v.type;
+          localStorage[getPrefStorageKey(k)] = this[k]();
           DPR_prefs['colfont'] = this[k]();
         });
 
