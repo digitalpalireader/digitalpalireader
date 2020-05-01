@@ -26,6 +26,7 @@ async function mainInitialize() {
   setPrefs();
   initSplitters();
   initFooter();
+  await setupBTForRG();
   await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
 
@@ -203,4 +204,14 @@ function triggerUpdateCheck() {
 
   setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
   setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
+}
+
+async function setupBTForRG() {
+  try {
+    const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText)
+    DPR_prefs['btloc'] = btloc.trim().replace(/\/+$/g, '');
+    DPR_prefs['buddhist_texts'] = true;
+    DPR_Translations.createTrProps();
+  } catch { }
+  console.log('setupBTForRG:', DPR_prefs['buddhist_texts'], DPR_prefs['btloc']);
 }

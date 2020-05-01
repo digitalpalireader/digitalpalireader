@@ -4,33 +4,39 @@ var DPR_Translations = (function () {
 
 const trimLastWhacks = x => x.replace(/\/+$/g, '');
 
-const trProps = {
-  ati: {
-    id: 0,
-    baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['catiloc']))}/tipitaka`,
-    icon: `ati.ico`,
-    background: 'white',
-  },
-  abt: {
-    id: 1,
-    baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
-    icon: `abt.gif`,
-    background: 'rgb(255, 248, 240)',
-  },
-  bt: {
-    id: 2,
-    baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['btloc'])),
-    enabled: DPR_prefs['buddhist_texts'],
-    icon: `wisdom.png`,
-    background: 'transparent',
-  },
-  dpr: {
-    id: 3,
-    baseUrl: `Not yet implemented`,
-    icon: `?`,
-    background: 'red',
-  },
-}
+let trProps = null;
+
+const createTrProps = () => {
+  trProps = {
+    ati: {
+      id: 0,
+      baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['catiloc']))}/tipitaka`,
+      icon: `ati.ico`,
+      background: 'white',
+    },
+    abt: {
+      id: 1,
+      baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+      icon: `abt.gif`,
+      background: 'rgb(255, 248, 240)',
+    },
+    bt: {
+      id: 2,
+      baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_prefs['btloc'])),
+      enabled: DPR_prefs['buddhist_texts'],
+      icon: `wisdom.png`,
+      background: 'transparent',
+    },
+    dpr: {
+      id: 3,
+      baseUrl: `Not yet implemented`,
+      icon: `?`,
+      background: 'red',
+    },
+  }
+};
+
+createTrProps();
 
 const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 
@@ -960,7 +966,8 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 }
 
 return {
-  trProps: Object.freeze(trProps),
+  trProps: trProps,
+  createTrProps: createTrProps,
   parsePlace: parsePlace,
   addtrans: addtrans,
   resolveUri: resolveUri,
