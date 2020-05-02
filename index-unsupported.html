@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" manifest="dpr.appcache">
+  <head>
+    <meta charset="utf-8">
+    <title>Digital Pāli Reader (beta)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="./favicon.png" />
+
+    <title>Digital Pāli Reader (beta)</title>
+
+    <script>
+      const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
+
+      var deploymentEnvironmentName = '#{DeploymentEnvironmentName}#';
+      var deploymentReleaseNumber = '#{DeploymentReleaseNumber}#';
+      var deploymentCreatedTimestamp = '#{DeploymentCreatedTimestamp}#';
+      var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
+
+      var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
+      var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
+      var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
+      var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
+
+      var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
+        {
+          instrumentationKey: appInsightsInstrumentationKey
+        }
+      ); window[aiName] = aisdk, aisdk.queue && 0 === aisdk.queue.length && aisdk.trackPageView({});
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        font-size: 16px;
+        padding: 0;
+        margin: 0;
+        overflow: auto;
+        background-color: #FFD;
+      }
+
+      #main-container-unsupported-page {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        font-size: larger;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="main-container-unsupported-page">
+      <div style="margin: 2rem;">
+        Digital Pāli Reader is not supported on the current browser. Please use <a target="_blank" href="https://www.google.com/chrome/">Chrome</a>, <a target="_blank" href="https://www.microsoft.com/en-us/edge">Edge (Chromium)</a>, <a target="_blank" href="https://www.mozilla.org/en-US/exp/firefox/new/">Firefox</a> or <a target="_blank" href="https://support.apple.com/downloads/safari">Safari</a>.
+      </div>
+    </div>
+  </body>
+</html>

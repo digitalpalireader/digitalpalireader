@@ -29,6 +29,11 @@
         isSafari: /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)),
       };
       console.log('Browser info', browserInfo);
+
+      if (!browserInfo.isFirefox && !browserInfo.isChrome && !browserInfo.isEdgeChromium && !browserInfo.isSafari) {
+        // NOTE: This should take care of 85%+ of internet browsing as per https://en.wikipedia.org/wiki/Usage_share_of_web_browsers.
+        window.location.replace('/index-unsupported.html');
+      }
     </script>
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />

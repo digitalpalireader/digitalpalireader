@@ -2,7 +2,7 @@
 
 # Digital Pāli Reader
 
-The Digital Pāli Reader is a tool much like a hard-copy language reader. The tool includes the Pāli canon and related scriptures. It includes multiple dictionaries to facilitate reading the scriptures. In addition to enabling an immersive experience for the study of the Tipitaka, it is also useful in the study of the Pali language at an advanced level. The Digital Pāli Reader is used by Buddhist monks in their Pāli studies, at Universities around the world and by lay users for study at home.
+The Digital Pāli Reader is a tool much like a hard-copy language reader. The tool includes the Pāli canon and related scriptures. It includes multiple dictionaries to facilitate reading the scriptures. In addition to enabling an immersive experience for the study of the Tipitaka, it is also useful in the study of the Pāli language at an advanced level. The Digital Pāli Reader is used by Buddhist monks in their Pāli studies, at Universities around the world and by lay users for study at home.
 
 Current backlog is maintained [here](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
 
