@@ -64,6 +64,7 @@ const DPR_CMD_GOTO_RELT = 'gotoReltCmd';
 const DPR_CMD_COPY_PERMALINK = 'copyPermalinkCmd';
 const DPR_CMD_SEND_TO_CONVERTER = 'sendToConverter';
 const DPR_CMD_SEND_TO_TEXTPAD = 'sendToTextPad';
+const DPR_CMD_APPEND_TO_TEXTPAD = 'appendToTextpad';
 const DPR_CMD_SAVE_TO_DESKTOP = 'saveToDesktop';
 const DPR_CMD_SEARCH_IN_BOOK = 'searchInBook';
 const DPR_CMD_COPY_PLACE_TO_SIDEBAR = 'copyPlaceToSidebar';
@@ -85,7 +86,6 @@ const DPR_CMD_OPEN_SETTINGS = 'openSettings';
 const DPR_CMD_GOTO_HOME = 'gotoHome';
 const DPR_CMD_TOGGLE_DPR_SIDEBAR = 'toggleDPRSidebar';
 const DPR_CMD_SHOW_BOTTOM_PANE = 'showBottomPane';
-const DPR_CMD_SEND_TO_CONVERT = 'sendToConvert';
 
 const emptyFn = () => {};
 
@@ -182,23 +182,33 @@ const dprCommandList = [
   },
   {
     id: DPR_CMD_SEND_TO_CONVERTER,
-    notImplemented: true,
-    canExecute: false,
-    execute: emptyFn,
-    visible: false,
-    isDynamic: true,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.sendToConvert(),
+    visible: true,
+    isDynamic: false,
     title: "Send text to converter (Keyboard shortcut: s)",
     matchKey: e => e.key === 's',
   },
   {
     id: DPR_CMD_SEND_TO_TEXTPAD,
-    notImplemented: true,
-    canExecute: false,
-    execute: emptyFn,
-    visible: false,
-    isDynamic: true,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.sendToTextpad(),
+    visible: true,
+    isDynamic: false,
     title: "Send text to textpad (Keyboard shortcut: e)",
     matchKey: e => e.key === 'e',
+  },
+  {
+    id: DPR_CMD_APPEND_TO_TEXTPAD,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.appendToTextpad(),
+    visible: true,
+    isDynamic: false,
+    title: "Append selection to textpad (Keyboard shortcut: E)",
+    matchKey: e => e.key === 'E',
   },
   {
     id: DPR_CMD_SAVE_TO_DESKTOP,
@@ -410,16 +420,6 @@ const dprCommandList = [
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
     matchKey: e => ['1', '2', '3', '4', '5'].includes(e.key),
-  },
-  {
-    id: DPR_CMD_SEND_TO_CONVERT,
-    notImplemented: false,
-    canExecute: true,
-    execute: () => __otherDialogsViewModel.sendToConvert(),
-    visible: true,
-    isDynamic: false,
-    title: "Send selection to convert (Keyboard shortcut: S)",
-    matchKey: e => e.key === 'S',
   },
 ];
 

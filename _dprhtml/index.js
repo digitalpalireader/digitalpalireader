@@ -20,7 +20,7 @@ const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
-const __otherDialogsViewModel = new OtherDialogsViewModel();
+var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
   triggerUpdateCheck();

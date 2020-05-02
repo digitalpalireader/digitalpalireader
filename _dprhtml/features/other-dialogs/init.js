@@ -33,13 +33,41 @@ class OtherDialogsViewModel {
   }
 
   sendToConvert() {
-    let wMain = window;
     if (window.getSelection().toString() != '') {
-      wMain.sendtoconvert(window.getSelection().toString() + '');
+      window.sendtoconvert(window.getSelection().toString() + '');
+      this.showBottomPane(1);
     }
-    else if (document.getElementById('convi')) { wMain.sendtoconvert(document.getElementById('convi').innerHTML); }
+    else if (document.getElementById('convi')) {
+      window.sendtoconvert(document.getElementById('convi').innerHTML);
+      this.showBottomPane(1);
+    }
     else alertFlash('You must select some text to send to the convertor', 'yellow');
-    this.showBottomPane(1);
+    return;
+  }
+
+  sendToTextpad() {
+    if (window.getSelection().toString() != '') {
+      window.sendtoPad(window.getSelection().toString() + '');
+      this.showBottomPane(2);
+    }
+    else if (document.getElementById('convi')) {
+      window.sendtoPad(document.getElementById('convi').innerHTML);
+      this.showBottomPane(2);
+    }
+    else alertFlash('You must select some text to send to the textpad', 'yellow');
+    return;
+  }
+
+  appendToTextpad() {
+    if (window.getSelection().toString() != '') {
+      window.sendtoPad(window.getSelection().toString() + '', true);
+      this.showBottomPane(2);
+    }
+    else if (document.getElementById('convi')) {
+      window.sendtoPad(document.getElementById('convi').innerHTML, true);
+      this.showBottomPane(2);
+    }
+    else alertFlash('You must select some text to send to the textpad', 'yellow');
     return;
   }
 }
