@@ -23,7 +23,6 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 
 async function mainInitialize() {
   triggerUpdateCheck();
-  setPrefs();
   initSplitters();
   initFooter();
   await setupBTForRG();
@@ -49,7 +48,7 @@ async function mainInitialize() {
 
 function installGlobalHandlers() {
   window.addEventListener('resize', () => {
-    setPrefs();
+    loadPreference();
     initMainPane();
   });
 

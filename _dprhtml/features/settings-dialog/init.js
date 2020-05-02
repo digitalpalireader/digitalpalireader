@@ -6,14 +6,13 @@ class SettingsDialogTabsViewModel {
     this.isLayoutSettingsTabSelected = ko.observable(false);
     this.isTextSettingsTabSelected = ko.observable(false);
 
-    // NOTE: Keep this initialization. At times there appears to be a race condition with ctor and ko.
     this.createSettings();
   }
 
   createSettings() {
     return Object
       .entries(DPR_prefsInfo)
-      .reduce((acc, [k, v]) => {
+      .reduce((acc, [k, _]) => {
           acc[k] = ko.observable(getPref(k));
           return acc;
         },
@@ -21,31 +20,20 @@ class SettingsDialogTabsViewModel {
   }
 
   savePreferences() {
-    Object
-      .entries(DPR_prefsInfo)
-      .forEach(([k, v]) => {
-          localStorage[`DPR_Prefs_${k}_type`] = v.type;
-          localStorage[`DPR_Prefs_${k}`] = this[k]();
-          DPR_prefs[k] = this[k]();
-        });
-
+    savePreferences(x => this[x]());
     window.location.reload();
   }
 
   defaultPreferences() {
     Object
       .entries(DPR_prefsInfo)
-      .forEach(([k, v]) => {
-          this[k](DPR_prefsD[k]);
-        });
+      .forEach(([k, _]) => this[k](DPR_prefsD[k]));
   }
 
   cancelPreferences() {
     Object
       .entries(DPR_prefsInfo)
-      .forEach(([k, v]) => {
-          this[k](DPR_prefs[k]);
-        });
+      .forEach(([k, _]) => this[k](DPR_prefs[k]));
   }
 
   updateActiveSettingsTabId(tabId) {

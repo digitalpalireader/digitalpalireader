@@ -238,8 +238,8 @@ var DPR_prefsInfo = {
   },
 }
 
-const getPrefStorageKey = n => `DPR.Prefs_${n}`;
-const getPrefTypeStorageKey = n => `DPR.Prefs.${n}.Type`;
+const getPrefStorageKey = n => `DPR.Prefsv2_${n}`;
+const getPrefTypeStorageKey = n => `DPR.Prefsv2.${n}.Type`;
 
 // default prefs
 
@@ -248,34 +248,25 @@ var DPR_prefTypesD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc
 
 var DPR_prefs = [];
 
-setDefPrefs();
+loadPreference();
 
-function setDefPrefs() {
-  for (var i in DPR_prefsD) {
-    DPR_prefs[i] = getPref(i);
-  }
+function loadPreference() {
+  Object
+    .entries(DPR_prefsInfo)
+    .reduce((acc, [k, _]) => {
+        acc[k] = getPref(k);
+        return acc;
+      },
+      DPR_prefs);
 }
 
-function setPrefs() {
-  for (var i in DPR_prefsD) {
-    var pref = getPref(i);
-    if(pref === null)
-      pref = DPR_prefsD[i];
-
-    DPR_prefs[i] = pref;
-  }
-}
-
-function savePrefs() {
-  setPrefs();
-}
-
-function setPref(name,value) {
-  var expires = "";
-  var date = new Date();
-  date.setTime(date.getTime() + (3650*24*60*60*1000));
-  expires = "; expires=" + date.toUTCString();
-  document.cookie = name + "=" + value + expires + "; path=/";
+function savePreferences(getPrefFn) {
+  Object
+  .entries(DPR_prefsInfo)
+  .forEach(([k, v]) => {
+      localStorage[getPrefTypeStorageKey(k)] = v.type;
+      localStorage[getPrefStorageKey(k)] = getPrefFn(k);
+    });
 }
 
 function getPref(name) {
@@ -301,19 +292,4 @@ function getPref(name) {
   }
 
   return pref;
-}
-
-function getPref_FromStore(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-
-function erasePref(name) {
-  createCookie(name,"",-1);
 }
