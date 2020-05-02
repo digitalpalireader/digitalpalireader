@@ -18,30 +18,6 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (false && e.key === e) {
-    if (window.getSelection().toString() != '') {
-      wMain.sendtoPad(window.getSelection().toString() + '');
-    }
-    else if (wBot.getSelection().toString() != '') {
-      wMain.sendtoPad(wBot.getSelection().toString() + '');
-    }
-    else if (document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML); }
-    else alertFlash('You must select some text to send to the textpad', 'yellow');
-    return;
-  }
-
-  if (false && e.key === 'E') {
-    if (window.getSelection().toString() != '') {
-      wMain.sendtoPad(window.getSelection().toString() + '', true);
-    }
-    else if (wBot.getSelection().toString() != '') {
-      wMain.sendtoPad(wBot.getSelection().toString() + '', true);
-    }
-    else if (document.getElementById('convi')) { wMain.sendtoPad(document.getElementById('convi').innerHTML, true); }
-    else alertFlash('You must select some text to send to the textpad', 'yellow');
-    return;
-  }
-
   if (false && e.key === ',') {
     if (dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
     else if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
