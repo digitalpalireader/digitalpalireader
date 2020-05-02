@@ -238,6 +238,9 @@ var DPR_prefsInfo = {
   },
 }
 
+const getPrefStorageKey = n => `DPR.Prefs_${n}`;
+const getPrefTypeStorageKey = n => `DPR.Prefs.${n}.Type`;
+
 // default prefs
 
 var DPR_prefsD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc[k] = v.defaultValue; return acc; }, []);
@@ -279,16 +282,17 @@ function getPref(name) {
   let pref = DPR_prefsD[name];
   let prefType = DPR_prefTypesD[name];
 
-  if (!(localStorage['DPR_Prefs_'+name] === undefined)){
+  const prefStorageKey = getPrefStorageKey(name);
+  if (!(localStorage[prefStorageKey] === undefined)){
     switch (prefType){
       case Number.name:
-        pref = parseInt(localStorage['DPR_Prefs_'+name]);
+        pref = parseInt(localStorage[prefStorageKey]);
         break;
       case String.name:
-        pref = localStorage['DPR_Prefs_'+name];
+        pref = localStorage[prefStorageKey];
         break;
       case Boolean.name:
-        pref = localStorage['DPR_Prefs_'+name] === 'true';
+        pref = localStorage[prefStorageKey] === 'true';
         break;
       default:
         console.error('Unknown type', prefStem, 'for preference', name);
