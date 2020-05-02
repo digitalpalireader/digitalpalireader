@@ -1464,8 +1464,6 @@ function sktRootsearchstart(hard)
     getstring = toFuzzy(getstring);
   }
 
-  alert(getstring);
-
   var finouta = new Array();
   var y = 0;
   var finout = '';
