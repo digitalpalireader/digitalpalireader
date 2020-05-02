@@ -32,7 +32,8 @@
 
       if (!browserInfo.isFirefox && !browserInfo.isChrome && !browserInfo.isEdgeChromium && !browserInfo.isSafari) {
         // NOTE: This should take care of 85%+ of internet browsing as per https://en.wikipedia.org/wiki/Usage_share_of_web_browsers.
-        window.location.replace('/index-unsupported.html');
+        // Does not work on Chrome mobile - will be enabled shortly.
+        // window.location.replace('/index-unsupported.html');
       }
     </script>
 

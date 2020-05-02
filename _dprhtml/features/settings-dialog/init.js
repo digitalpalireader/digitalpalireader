@@ -17,7 +17,7 @@ class SettingsDialogTabsViewModel {
 
   savePreferences() {
     savePreferences(x => this[x]());
-    window.location.reload();
+    window.location.reload(false);
   }
 
   defaultPreferences() {

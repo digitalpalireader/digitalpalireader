@@ -188,7 +188,7 @@ function triggerUpdateCheck() {
       const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText.trim());
       console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
       if (verStr !== window.releaseNumber) {
-        const message = `A new version of Digital Pāli Reader just became available. Please <a class="underline" href="${window.location.href}">refresh this page</a> to activate it.`;
+        const message = `A new version of Digital Pāli Reader just became available. Please <a class="underline" href="" onclick="window.location.reload(true)">refresh this page</a> to activate it.`;
         DPR_Chrome.createToast(
           DPR_Chrome.ToastTypeInfo,
           message,
@@ -203,11 +203,11 @@ function triggerUpdateCheck() {
 
   const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
     /^(localdev|staging)$/i.test(window.environmentName)
-    ? [5, 1]
+    ? [1, 1]
     : [5, 1];
 
-  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
-  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
+  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 1000);
+  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 1000);
 }
 
 async function setupBTForRG() {
