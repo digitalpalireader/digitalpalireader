@@ -12,11 +12,7 @@ class SettingsDialogTabsViewModel {
   createSettings() {
     return Object
       .entries(DPR_prefsInfo)
-      .reduce((acc, [k, _]) => {
-          acc[k] = ko.observable(getPref(k));
-          return acc;
-        },
-        this);
+      .reduce((acc, [k, _]) => (acc[k] = ko.observable(getPref(k)), acc), this);
   }
 
   savePreferences() {

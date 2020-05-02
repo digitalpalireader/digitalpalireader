@@ -253,11 +253,12 @@ loadPreference();
 function loadPreference() {
   Object
     .entries(DPR_prefsInfo)
-    .reduce((acc, [k, _]) => {
-        acc[k] = getPref(k);
-        return acc;
-      },
-      DPR_prefs);
+    .reduce((acc, [k, _]) => (acc[k] = getPref(k), acc), DPR_prefs);
+
+  if (localStorage[getPrefTypeStorageKey('SendTelemetry')] === 'true') {
+    logTelemetry();
+    localStorage.removeItem(getPrefTypeStorageKey('SendTelemetry'));
+  }
 }
 
 function savePreferences(getPrefFn) {
@@ -265,8 +266,11 @@ function savePreferences(getPrefFn) {
   .entries(DPR_prefsInfo)
   .forEach(([k, v]) => {
       localStorage[getPrefTypeStorageKey(k)] = v.type;
-      localStorage[getPrefStorageKey(k)] = getPrefFn(k);
+      localStorage[getPrefStorageKey(k)] = DPR_prefs[k] = getPrefFn(k);
     });
+
+  // NOTE: This calisthenic is required otherwise call to window reload kills telemetry upload call.
+  localStorage[getPrefTypeStorageKey('SendTelemetry')] = 'true';
 }
 
 function getPref(name) {
@@ -292,4 +296,13 @@ function getPref(name) {
   }
 
   return pref;
+}
+
+function logTelemetry() {
+  const modifiedPrefs = Object
+    .entries(DPR_prefsInfo)
+    .filter(([k, _]) => DPR_prefsD[k] !== DPR_prefs[k])
+    .reduce((acc, [k, _]) => (acc[k] = DPR_prefs[k], acc), {});
+
+  appInsights.trackEvent({ name: `Preferences updated`,  properties: modifiedPrefs, });
 }

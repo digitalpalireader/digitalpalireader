@@ -274,6 +274,8 @@ function sendTitle(x,m,a,t,nik,add) {
 
 
 function sendPlace(place) {
+  appInsights.trackEvent({ name: 'Sync sidebar',  properties: { place }});
+
   var sidebar = DPRSidebarWindow();
   if (sidebar) {
     sidebar.DPRNav.gotoPlace(place);

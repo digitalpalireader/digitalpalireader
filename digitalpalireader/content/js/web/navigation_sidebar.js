@@ -301,8 +301,6 @@ var DPRNav = {
   },
 
   gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    appInsights.trackEvent({ name: 'Sync sidebar',  properties: { params: [nikaya, book, meta, volume, vagga, sutta, section, hiert] }});
-
     __navigationTabViewModel.set(nikaya);
     __navigationTabViewModel.MAT(hiert);
     const b = __navigationTabViewModel.navBook().findIndex(x => x.value === book + 1);
