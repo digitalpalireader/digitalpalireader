@@ -1448,7 +1448,7 @@ function sktRootsearchstart(hard)
   if(typeof(sktR) == 'undefined') {
     return;
   }
-  var getstring = toSkt(G_dictQuery);
+  var getstring = toSkt(toVel(G_dictQuery));
 
     if(getstring == '') {
         sktRXML(toUni(G_dictEntry));
