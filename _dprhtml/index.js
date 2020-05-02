@@ -203,11 +203,11 @@ function triggerUpdateCheck() {
 
   const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
     /^(localdev|staging)$/i.test(window.environmentName)
-    ? [1, 1]
+    ? [5, 1]
     : [5, 1];
 
-  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 1000);
-  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 1000);
+  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
+  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
 }
 
 async function setupBTForRG() {
