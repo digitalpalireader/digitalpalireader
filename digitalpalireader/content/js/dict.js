@@ -1450,14 +1450,14 @@ function sktRootsearchstart(hard)
   }
   var getstring = toSkt(toVel(G_dictQuery));
 
-    if(getstring == '') {
-        sktRXML(toUni(G_dictEntry));
-        return;
-    }
+  if(getstring == '') {
+      sktRXML(toUni(G_dictEntry));
+      return;
+  }
 
   if(/ft/.exec(G_dictOpts)) { // full text search
-    sktRootFullTextSearch(getstring);
-    return;
+    //sktRootFullTextSearch(getstring);
+    //return;
   }
 
   if(/fz/.exec(G_dictOpts)) {
