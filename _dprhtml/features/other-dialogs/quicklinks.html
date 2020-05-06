@@ -1,5 +1,5 @@
 <div class="modal fade show" id="quicklink-dialog-root" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <form data-bind="submit: sendQuickLinkFromDialog">
         <div class="modal-header p-2">
@@ -8,21 +8,12 @@
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
         </div>
-        <div class="modal-body">
-          <div id="quicklink-pane">
-            <div id="settings-pane-tab-panes">
-              <div id="settings-pane-tab-panes-layout" class="settings-pane-tab-pane">
-                <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-2col-grid">
-                  <div class="settings-pane-tab-pane-section-header">Enter link (DN 1.1, etc.)</div>
-                  <input class="ml-1 mr-0" id="dialog-quicklinks" name="setQuicklink" type="text" style="justify-self: stretch; width: 100%"
-                    data-bind="value: quicklinkInput"/>
-                </div>
-                <div id="open-new-tab">
-                  <input class="btn btn-sm btn-light m-0" type="checkbox" id="quicklink-new-tab" data-bind="checked: quicklinkInNewTab"/>
-                  <label for="quicklink-new-tab" class="pl-1 mt-2">open in new tab (not yet implemented)</label>
-                </div>
-              </div>
-            </div>
+        <div class="modal-body d-flex flex-column">
+          <label class="mb-2" for="dialog-quicklinkInput">Enter link (DN 1.1, etc.)</label>
+          <input id="dialog-quicklinkInput" class="mb-2" name="dialog-quicklinkInput" type="text" data-bind="value: quicklinkInput" autofocus/>
+          <div>
+            <input id="quicklink-new-tab" name="quicklink-new-tab" type="checkbox" data-bind="enable: false, checked: quicklinkInNewTab"/>
+            <label for="quicklink-new-tab">Open in new tab</label>
           </div>
         </div>
         <div class="modal-footer p-2">

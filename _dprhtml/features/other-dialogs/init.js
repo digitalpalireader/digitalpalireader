@@ -7,29 +7,36 @@ class OtherDialogsViewModel {
   }
 
   showQuickLinksDialog() {
+    this.quicklinkInput('');
+    this.quicklinkInNewTab(false);
+    $('#quicklink-dialog-root').on('shown.bs.modal', () => $('#dialog-quicklinkInput').trigger('focus'));
     $('#quicklink-dialog-root').modal('show');
-    return;
   }
 
   sendQuickLinkFromDialog() {
-    DPRSend.sendQuickLink(null, null, this.quicklinkInput(), this.quicklinkInNewTab());
+    // TODO: Handle this.quicklinkInNewTab().
+    var place = this.quicklinkInput();
+    var outplace = convertShortLink(place);
+    if(outplace[0] === false) {
+      return alertFlash(outplace[1], outplace[2]);
+    }
+
+    //var para = outplace.pop();
+    openPlace(outplace);
   }
 
   gotoHome() {
     openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
-    return;
   }
 
   toggleDPRSidebar() {
     DPR_Chrome.toggleDPRSidebar();
     event.preventDefault();
-    return;
   }
 
   showBottomPane(key) {
     DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key]);
     event.preventDefault();
-    return;
   }
 
   sendToConvert() {
@@ -42,7 +49,6 @@ class OtherDialogsViewModel {
       this.showBottomPane(1);
     }
     else alertFlash('You must select some text to send to the convertor', 'yellow');
-    return;
   }
 
   sendToTextpad() {
@@ -55,7 +61,6 @@ class OtherDialogsViewModel {
       this.showBottomPane(2);
     }
     else alertFlash('You must select some text to send to the textpad', 'yellow');
-    return;
   }
 
   appendToTextpad() {
@@ -68,6 +73,5 @@ class OtherDialogsViewModel {
       this.showBottomPane(2);
     }
     else alertFlash('You must select some text to send to the textpad', 'yellow');
-    return;
   }
 }

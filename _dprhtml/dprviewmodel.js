@@ -408,8 +408,8 @@ const dprCommandList = [
     execute: () => __otherDialogsViewModel.toggleDPRSidebar(),
     visible: true,
     isDynamic: false,
-    title: "Toggle DPR Sidebar (Keyboard shortcut: &)",
-    matchKey: e => e.key === '&',
+    title: "Toggle DPR Sidebar (Keyboard shortcut: `)",
+    matchKey: e => e.key === '`',
   },
   {
     id: DPR_CMD_SHOW_BOTTOM_PANE,
