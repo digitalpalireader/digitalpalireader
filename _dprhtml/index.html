@@ -157,17 +157,17 @@
               <div class="context-menu-main-row" id="context-menu-main-row2">
                 <div class="context-menu-main-row-group">
                   <!--ko let: { cmd: commands.sendToConverter() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-language" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
                   <!--ko let: { cmd: commands.sendToTextPad() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-share-square-o" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
                   <!--ko let: { cmd: commands.saveToDesktop() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
@@ -304,6 +304,8 @@
     </div>
     <div id="settings-dialog">
     </div>
+    <div id="quicklink-dialog">
+    </div>
     <div class="modal fade show" id="helpDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="font-size: smaller;">
@@ -323,17 +325,16 @@
               <tr><td>m</td><td>&nbsp;Switch to section in Mūla</td></tr>
               <tr><td>a</td><td>&nbsp;Switch to section in Aṭṭhakathā</td></tr>
               <tr><td>t</td><td>&nbsp;Switch to section in Ṭīkā</td></tr>
-              <!-- <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr> -->
-              <!-- <tr><td>s</td><td>&nbsp;Send selected text to convertor</td></tr>
+              <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr>
+              <tr><td>s</td><td>&nbsp;Send selected text to convertor</td></tr>
               <tr><td>e</td><td>&nbsp;Send selected text to textpad</td></tr>
-              <tr><td>E</td><td>&nbsp;Append selected text to textpad</td></tr> -->
+              <tr><td>E</td><td>&nbsp;Append selected text to textpad</td></tr>
               <!-- <tr><td>,</td><td>&nbsp;Display previous PED or DPPN entry</td></tr>
               <tr><td>.</td><td>&nbsp;Display next PED or DPPN entry</td></tr> -->
               <tr><td>%</td><td>&nbsp;Display DPR settings</td></tr>
               <tr><td>^</td><td>&nbsp;Reset all DPR settings</td></tr>
-              <!-- <tr><td>#</td><td>&nbsp;Display Pāli quiz</td></tr>
-              <tr><td>*</td><td>&nbsp;Display Pāli quote</td></tr> -->
-              <tr><td>`</td><td>&nbsp;Toggle sidebar</td></tr>
+              <!-- <tr><td>*</td><td>&nbsp;Display Pali quote</td></tr> -->
+              <tr><td>&</td><td>&nbsp;Toggle sidebar</td></tr>
               <!-- <tr><td>b</td><td>&nbsp;Save bookmark</td></tr> -->
               <tr><td>h</td><td>&nbsp;Open help</td></tr>
               <!-- <tr><td>@</td><td>&nbsp;Launch feedback form</td></tr> -->
@@ -429,6 +430,7 @@
     <script src="/_dprhtml/features/search/init.js"></script>
     <script src="/_dprhtml/features/dictionary/init.js"></script>
     <script src="/_dprhtml/features/settings-dialog/init.js"></script>
+    <script src="/_dprhtml/features/other-dialogs/init.js"></script>
     <script src="/_dprhtml/dprviewmodel.js"></script>
     <script src="/_dprhtml/index.js"></script>
     <script>progressBar.go(100)</script>

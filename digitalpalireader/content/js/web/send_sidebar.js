@@ -327,9 +327,12 @@ var DPRSend = {
     }
   },
 
-  sendQuickLink: function (add, value) {
+  sendQuickLink: function (add, value, quickLinkFromDialog, newTab) {
+    //DO DO: handle newTab boolean parameter
+    let quicklink = '';
+    quickLinkFromDialog ? quicklink = quickLinkFromDialog : quicklink = $('#nav-quicklinks').val();
     if (add == 'right') return;
-    var ql = convertShortLink($.trim($('#nav-quicklinks').val()));
+    var ql = convertShortLink($.trim(quicklink));
     if (!ql)
       return;
     if (ql[0] === false) {
@@ -406,6 +409,8 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + hiert + (para ? '&para=' + para : ''));
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
+    $('#dialog-quicklinks').val('');
+    $('#quicklink-new-tab').prop('checked', false);
   },
 
 

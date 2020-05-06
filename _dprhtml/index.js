@@ -20,6 +20,7 @@ const __dprViewModel = new DprViewModel();
 ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
+var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
   triggerUpdateCheck();
@@ -100,6 +101,7 @@ const loadPanesAsync = async () => {
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
     loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, __bottomPaneTabsViewModel),
     loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, __settingsDialogViewModel),
+    loadHtmlFragmentAsync(`#quicklink-dialog`, `features/other-dialogs/quicklinks.html`, __otherDialogsViewModel),
   ];
 
   await Promise.all(all);

@@ -15,6 +15,11 @@ class SettingsDialogTabsViewModel {
       .reduce((acc, [k, _]) => (acc[k] = ko.observable(getPref(k)), acc), this);
   }
 
+  showSettingsDialog() {
+    $('#settings-dialog-root').modal('show');
+    return;
+  }
+
   savePreferences() {
     savePreferences(x => this[x]());
     window.location.reload(false);

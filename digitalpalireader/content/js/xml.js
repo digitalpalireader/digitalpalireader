@@ -1122,7 +1122,9 @@ function loadXMLindex(place,compare) {
 
 function createShortcutFns() {
   const shortcutFns = {};
-  dprCommandList.forEach(x => shortcutFns[x.id] = { executeStr: emptyFnStr, visibleStr: 'false', });
+  dprCommandList
+    .filter(x => {return x.isDynamic === true})
+    .forEach(x => shortcutFns[x.id] = { executeStr: emptyFnStr, visibleStr: 'false', });
   return shortcutFns;
 }
 
