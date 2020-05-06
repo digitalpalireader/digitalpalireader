@@ -21,7 +21,6 @@ class OtherDialogsViewModel {
       return alertFlash(outplace[1], outplace[2]);
     }
 
-    //var para = outplace.pop();
     openPlace(outplace);
   }
 
