@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./favicon.png" />
     <script>
-      let initObjList=Object.keys(window);
-      const diffVarList = (whitelist= []) => {
-       return Object.keys(window).filter(a=>!((typeof(eval(a))=="function") || whitelist.includes(a) || initObjList.includes(a)))
+      const initObjList = Object.keys(window);
+      const diffVarList = (whitelist = []) => {
+        return Object.keys(window).filter(a => !((typeof(eval(a)) === "function") || whitelist.includes(a) || initObjList.includes(a)))
       }
     </script>
     <script>
