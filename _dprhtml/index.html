@@ -7,9 +7,7 @@
     <link rel="icon" href="./favicon.png" />
     <script>
       const initObjList = Object.keys(window);
-      const diffVarList = (whitelist = []) => {
-        return Object.keys(window).filter(a => !((typeof(eval(a)) === "function") || whitelist.includes(a) || initObjList.includes(a)))
-      }
+      const diffVarList = (whitelist = []) => Object.keys(window).filter(a => !((typeof(eval(a)) === "function") || whitelist.includes(a) || initObjList.includes(a)))
     </script>
     <script>
       window.addEventListener('error', e => {
