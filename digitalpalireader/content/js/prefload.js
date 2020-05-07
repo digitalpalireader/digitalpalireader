@@ -17,23 +17,23 @@ var DPR_prefsInfo = {
 
   coltext: {
     type: String.name,
-    defaultValue: '#111',
+    defaultValue: '#111111',
   },
   colsel: {
     type: String.name,
-    defaultValue: '#550',
+    defaultValue: '#555500',
   },
   coldppn: {
     type: String.name,
-    defaultValue: '#0B0',
+    defaultValue: '#00BB00',
   },
   colped: {
     type: String.name,
-    defaultValue: '#C40',
+    defaultValue: '#CC4400',
   },
   colcpd: {
     type: String.name,
-    defaultValue: '#44D',
+    defaultValue: '#4444DD',
   },
 
   colfont: {
@@ -55,7 +55,7 @@ var DPR_prefsInfo = {
   },
   colbk: {
     type: String.name,
-    defaultValue: '#FFD',
+    defaultValue: '#FFFFDD',
   },
   pimgbk: {
     type: Boolean.name,
@@ -89,7 +89,7 @@ var DPR_prefsInfo = {
 
   colInput: {
     type: String.name,
-    defaultValue: '#FFF',
+    defaultValue: '#FFFFFF',
   },
   colButton: {
     type: String.name,
@@ -101,7 +101,7 @@ var DPR_prefsInfo = {
   },
   colButtonSel: {
     type: String.name,
-    defaultValue: '#FFF',
+    defaultValue: '#FFFFFF',
   },
   colbk1: {
     type: String.name,
