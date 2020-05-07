@@ -17,7 +17,6 @@ class SettingsDialogTabsViewModel {
 
   showSettingsDialog() {
     $('#settings-dialog-root').modal('show');
-    return;
   }
 
   savePreferences() {

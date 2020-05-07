@@ -2,7 +2,7 @@
 <html lang="en" manifest="dpr.appcache">
   <head>
     <meta charset="utf-8">
-    <title>Digital Pāli Reader (beta)</title>
+    <title>Digital Pāli Reader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./favicon.png" />
 
@@ -18,23 +18,6 @@
         appInsights.trackException({ message: 'unhandledrejection', promise: event.promise, reason: event.reason, });
         appInsights.flush();
       });
-
-      //
-      // Following browser detection code is from https://stackoverflow.com/a/9851769/6196679.
-      //
-      var browserInfo = {
-        isFirefox: typeof InstallTrigger !== 'undefined',
-        isChrome: !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime) && (navigator.userAgent.indexOf("Edg") == -1),
-        isEdgeChromium: this.isChrome && (navigator.userAgent.indexOf("Edg") != -1),
-        isSafari: /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)),
-      };
-      console.log('Browser info', browserInfo);
-
-      if (!browserInfo.isFirefox && !browserInfo.isChrome && !browserInfo.isEdgeChromium && !browserInfo.isSafari) {
-        // NOTE: This should take care of 85%+ of internet browsing as per https://en.wikipedia.org/wiki/Usage_share_of_web_browsers.
-        // Does not work on Chrome mobile - will be enabled shortly.
-        // window.location.replace('/index-unsupported.html');
-      }
     </script>
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
