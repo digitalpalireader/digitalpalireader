@@ -7,7 +7,42 @@
     <link rel="icon" href="./favicon.png" />
     <script>
       const initObjList = Object.keys(window);
-      const diffVarList = (whitelist = []) => Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a)))
+      const whitelist = [
+        "initObjList",
+        "whitelist",
+        "diffVarList",
+        "deploymentEnvironmentName",
+        "deploymentReleaseNumber",
+        "deploymentCreatedTimestamp",
+        "deploymentAppInsightsInstrumentationKey",
+        "environmentName",
+        "releaseNumber",
+        "createdTimestamp",
+        "appInsightsInstrumentationKey",
+        "sdkInstance",
+        "aiName",
+        "aisdk",
+        "appInsightsSDK",
+        "appInsights",
+        "progressBar",
+        "ko",
+        "bootstrap",
+        "DPR_PAL",
+        "DPR_Send",
+        "DPR_Receive",
+        "DPRChrome",
+        "DPRSend",
+        "DPRNav",
+        "DPRXML",
+        "XML_Load",
+        "DPROpts",
+        "DPR_Translations",
+        "DPR_Chrome",
+        "digitalpalireader",
+        "DPR_BottomPane",
+        "__otherDialogsViewModel",
+      ];
+      const diffVarList = () => Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a)))
     </script>
     <script>
       window.addEventListener('error', e => {
