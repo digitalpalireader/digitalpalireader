@@ -53,20 +53,20 @@ var DPRSend = {
     }
 
 
-    if (G_hier == 't' && DPRNav.limitt()) {
-      alertFlash('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value] + '.', 'RGBa(255,0,0,0.8)');
+    if (DPR_G.G_hier == 't' && DPRNav.limitt()) {
+      alertFlash('Ṭīkā not available for ' + DPR_G.G_nikLongName[document.getElementById('set').value] + '.', 'RGBa(255,0,0,0.8)');
       return;
     }
-    if (G_hier == 'a' && nikaya == 'g') {
+    if (DPR_G.G_hier == 'a' && nikaya == 'g') {
       alertFlash('Atthakatha not available for grammar.', 'RGBa(255,0,0,0.8)');
       return;
     }
-    if (G_hier == 'a' && nikaya == 'b') {
+    if (DPR_G.G_hier == 'a' && nikaya == 'b') {
       alertFlash('Atthakatha not available for Abhidh-s.', 'RGBa(255,0,0,0.8)');
       return;
     }
 
-    const loadXmlSectionParams = [nikaya, bookno, meta, volume, vagga, sutta, section, G_hier];
+    const loadXmlSectionParams = [nikaya, bookno, meta, volume, vagga, sutta, section, DPR_G.G_hier];
     appInsights.trackEvent({ name: 'Go to sutta(s)',  properties: { params: loadXmlSectionParams, }});
 
     if (!add) { // reuse old tab
@@ -78,7 +78,7 @@ var DPRSend = {
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
         DPRChrome.openDPRTab(permalink, 'DPR-main');
       }
       else {
@@ -93,7 +93,7 @@ var DPRSend = {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
         var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
         var count = thisTabBrowser.contentWindow.getBrowserCount() + 1;
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : '') + '&compare=' + count);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : '') + '&compare=' + count);
 
         var node = this.createBrowser(thisTabBrowser.contentDocument, permalink, count);
         var splitter = this.createSplitter(thisTabBrowser.contentDocument, count);
@@ -104,7 +104,7 @@ var DPRSend = {
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
         openDPRTab(permalink, 'DPR-main');
         return;
       }
@@ -113,7 +113,7 @@ var DPRSend = {
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
         var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
         var count = oldTabBrowser.contentWindow.getBrowserCount() + 1;
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : '') + '&compare=' + count);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : '') + '&compare=' + count);
 
         var node = this.createBrowser(oldTabBrowser.contentDocument, permalink, count);
         var splitter = this.createSplitter(oldTabBrowser.contentDocument, count);
@@ -124,7 +124,7 @@ var DPRSend = {
       }
     }
     else {
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + toVel(labelsearch.join('+')) : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
   },
@@ -133,7 +133,7 @@ var DPRSend = {
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
 
-    const loadXmlIndexParams = [nikaya, bookno, G_hier];
+    const loadXmlIndexParams = [nikaya, bookno, DPR_G.G_hier];
     appInsights.trackEvent({ name: 'Go to index',  properties: { params: loadXmlIndexParams, }});
 
     if (!add) { // reuse old tab
@@ -146,7 +146,7 @@ var DPRSend = {
       var oldTab = DPRChrome.findDPRTab('DPR-main');
 
       if (!oldTab) {
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + G_hier);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier);
         DPRChrome.openDPRTab(permalink, 'DPR-main');
       }
       else {
@@ -161,7 +161,7 @@ var DPRSend = {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
         var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
         var count = thisTabBrowser.contentWindow.getBrowserCount() + 1;
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + G_hier + '&compare=' + count);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier + '&compare=' + count);
 
         var node = this.createBrowser(thisTabBrowser.contentDocument, permalink, count);
         var splitter = this.createSplitter(thisTabBrowser.contentDocument, count);
@@ -172,7 +172,7 @@ var DPRSend = {
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + G_hier);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier);
         openDPRTab(permalink, 'DPR-main');
         return;
       }
@@ -181,7 +181,7 @@ var DPRSend = {
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
         var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
         var count = oldTabBrowser.contentWindow.getBrowserCount() + 1;
-        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + G_hier + '&compare=' + count);
+        var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier + '&compare=' + count);
 
         var node = this.createBrowser(oldTabBrowser.contentDocument, permalink, count);
         var splitter = this.createSplitter(oldTabBrowser.contentDocument, count);
@@ -192,7 +192,7 @@ var DPRSend = {
       }
     }
     else {
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + G_hier);
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier);
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
   },
@@ -203,7 +203,7 @@ var DPRSend = {
     if (stringra) {
       stringra = stringra.replace(/`/g, '"');
       stringra = stringra.split('#');
-      if (G_searchRX == 'true') {
+      if (DPR_G.G_searchRX == 'true') {
         for (var i in stringra) { stringra[i] = new RegExp(stringra[i]); }
       }
     }
@@ -448,19 +448,19 @@ var DPRSend = {
       var getstring = $('#dictin').prop("value");
 
       if (!hard) {
-        if (getstring == this.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
+        if (getstring == DPR_G.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
       }
 
-      this.G_lastsearch = getstring;
+      DPR_G.G_lastsearch = getstring;
 
       var which = $('#dictType').prop("value");
 
       var opts = [];
 
-      for (var i in G_nikToNumber) {
+      for (var i in DPR_G.G_nikToNumber) {
         if ($('#soNS' + i) && $('#soNS' + i).prop("checked")) opts.push('x' + i);
       }
-      for (var i in G_hNumbers) {
+      for (var i in DPR_G.G_hNumbers) {
         if ($('#soMAT' + i).prop("checked")) opts.push('m' + i);
       }
 
@@ -529,7 +529,7 @@ var DPRSend = {
 
       if (which == 0) { // get sets
         var sets = ''
-        for (var i in G_nikToNumber) {
+        for (var i in DPR_G.G_nikToNumber) {
           if (document.getElementById('tsoCO' + i).checked) sets += i;
         }
       }

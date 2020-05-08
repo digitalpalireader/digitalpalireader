@@ -88,10 +88,10 @@ function bookmarkframe(refresh)
 
       if(loc[7] == 'm') {
         var sname = getSuttaNumber(loc[0],loc[1],loc[2],loc[3],loc[4],loc[5],loc[6],loc[7],0);
-        if(sname) sname = ' ('+G_nikLongName[loc[0]]+' '+sname+')';
+        if(sname) sname = ' ('+DPR_G.G_nikLongName[loc[0]]+' '+sname+')';
         else sname = '';
       }
-      else var sname = ' ('+G_nikLongName[loc[0]]+')';
+      else var sname = ' ('+DPR_G.G_nikLongName[loc[0]]+')';
       loc[0] = "'"+loc[0]+"'";
       loc[7] = "'"+loc[7]+"'";
 
@@ -156,7 +156,7 @@ function convertOldBookmarks() {
       ba[name] = [];
       ba[name]['loc'] = readFile(ca[i])[0];
       var nik = ba[name]['loc'].match(/^[0-9]+/)[0];
-      ba[name]['loc'] = ba[name]['loc'].replace(/^([0-9]+)/,G_numberToNik[nik]);
+      ba[name]['loc'] = ba[name]['loc'].replace(/^([0-9]+)/,DPR_G.G_numberToNik[nik]);
 
     }
     else if (/^DPD/.exec(ca[i])) {

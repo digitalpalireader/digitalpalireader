@@ -2,17 +2,17 @@
 var DPRNav = {
   changeSet:function(noget,book){
     var nik = document.getElementById('set').value;
-    if (G_hier == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
-      alert('Ṭīkā not available for '+G_nikLongName[document.getElementById('set').value]+'.');
+    if (DPR_G.G_hier == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
+      alert('Ṭīkā not available for '+DPR_G.G_nikLongName[document.getElementById('set').value]+'.');
       document.getElementById('set').selectedIndex = oldnikaya;
       return;
     }
-    if (G_hier == 'a' && document.getElementById('set').value == 'g') {
+    if (DPR_G.G_hier == 'a' && document.getElementById('set').value == 'g') {
       alert('Atthakatha not available for Gram.');
       document.getElementById('set').selectedIndex = oldnikaya;
       return;
     }
-    if (G_hier == 'a' && document.getElementById('set').value == 'b') {
+    if (DPR_G.G_hier == 'a' && document.getElementById('set').value == 'b') {
       alert('Atthakatha not available for Abhidh-s.');
       document.getElementById('set').selectedIndex = oldnikaya;
       return;
@@ -24,11 +24,11 @@ var DPRNav = {
   },
 
 
-  getBookName:function (nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
+  getBookName:function (nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1
 
 
     if (nik == 'k' || nik == 'y' || nik == 'n') {
-      no = G_kynames[nik][no];
+      no = DPR_G.G_kynames[nik][no];
       if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
     }
     else no++;
@@ -39,12 +39,12 @@ var DPRNav = {
     var checkNikaya = '<table><tr><td valign="top">';
 
     if (nikvoladi[nik]) var titles = nikvoladi[nik];
-    else var titles = nikvoladi[nik+G_hier];
+    else var titles = nikvoladi[nik+DPR_G.G_hier];
     var bookNode = document.getElementById('book');
     while(bookNode.itemCount > 0) bookNode.removeItemAt(0);
     for (var i = 0; i < titles.length; i++) {
       if(nik == 'k' || nik == 'y' || nik == 'n') {
-        var title = G_kynames[nik][titles[i]];
+        var title = DPR_G.G_kynames[nik][titles[i]];
         var val = titles[i]+1;
       }
       else {
@@ -78,7 +78,7 @@ var DPRNav = {
     for (var i = 0; i < titles.length; i++) {
 
       // menu
-      bookNode.appendItem(translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
+      bookNode.appendItem(translit((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : DPR_G.G_nikLongName[nik] + ' ' + titles[i]),((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
       bookNode.selectedIndex = 0;
 
       // check boxes
@@ -86,7 +86,7 @@ var DPRNav = {
       var newCheck = document.createElement('checkbox');
       newCheck.setAttribute('checked',true);
       newCheck.setAttribute('class','tiny');
-      newCheck.setAttribute('label',((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
+      newCheck.setAttribute('label',((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : (typeof(titles[i]) == 'number' ? 'Book ' : '') + titles[i]));
       newCheck.setAttribute('id','tsoBObook'+(i+1));
       newCheck.setAttribute('value',((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i]+1) : (i+1)));
       if(i == Math.ceil(titles.length/2)) {
@@ -102,18 +102,18 @@ var DPRNav = {
 
   switchhier:function(htmp) {
 
-    if(G_hier == htmp) return;
+    if(DPR_G.G_hier == htmp) return;
 
     var himg = ['l','m','r'];
 
     if (htmp == 't' && this.limitt(document.getElementById('set').selectedIndex)) {
       var MAT = document.getElementById('mul').checked==true?'mul':'att';
-      alert('Ṭīkā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
+      alert('Ṭīkā not available for ' + DPR_G.G_nikLongName[document.getElementById('set').value]+'.');
       setTimeout(function(){document.getElementById(MAT).checked=true},10);
       return;
     }
     if (htmp == 'a' && document.getElementById('set').selectedIndex > 7) {
-      alert('Aṭṭhakathā not available for ' + G_nikLongName[document.getElementById('set').value]+'.');
+      alert('Aṭṭhakathā not available for ' + DPR_G.G_nikLongName[document.getElementById('set').value]+'.');
       setTimeout(function(){document.getElementById('mul').checked=true},10);
       return;
     }
@@ -123,7 +123,7 @@ var DPRNav = {
       return;
     }
 
-    G_hier = htmp;
+    DPR_G.G_hier = htmp;
 
 
     var book = document.getElementById('book').value;
@@ -226,12 +226,12 @@ var DPRNav = {
             place = searchSet.split('').join(',');
             break;
           case 1:
-            place = G_nikLongName[searchSet];
+            place = DPR_G.G_nikLongName[searchSet];
             break;
           case 2:
           case 3:
           case 4:
-            place = G_nikLongName[searchSet]+' '+searchBook.split('').join(',');
+            place = DPR_G.G_nikLongName[searchSet]+' '+searchBook.split('').join(',');
             break;
         }
 
@@ -309,11 +309,11 @@ var DPRNav = {
 
   gotoPlace:function([nikaya,book,meta,volume,vagga,sutta,section,hiert]) {
     document.getElementById('set').value = nikaya;
-    for(var i in G_hshort) {
+    for(var i in DPR_G.G_hshort) {
       if(i == hiert)
-        document.getElementById(G_hshort[i]).setAttribute('checked',true);
+        document.getElementById(DPR_G.G_hshort[i]).setAttribute('checked',true);
       else
-        document.getElementById(G_hshort[i]).checked = false;
+        document.getElementById(DPR_G.G_hshort[i]).checked = false;
     }
     this.changeSet(1,book);
     this.switchhier(hiert);
@@ -335,7 +335,7 @@ var DPRNav = {
     document.getElementById("tabbox").selectedIndex = 1;
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();
-    document.getElementById('tsoSETm').selectedIndex = G_nikToNumber[nik];
+    document.getElementById('tsoSETm').selectedIndex = DPR_G.G_nikToNumber[nik];
     this.setSearchBookList();
 
     document.getElementById('tsoBOOKm').selectedIndex = book-1;

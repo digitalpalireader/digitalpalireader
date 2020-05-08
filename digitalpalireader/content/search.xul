@@ -31,7 +31,7 @@
     function permalinkClick(a,b) {
       document.getElementById('dpr-search-browser').contentWindow.permalinkClick(a,b);
     }
-    var G_count_browsers = 1;
+    DPR_G.G_count_browsers = 1;
     var devCheck = 0;
   </script>
   <script type="application/x-javascript" src="dev.js"/>
