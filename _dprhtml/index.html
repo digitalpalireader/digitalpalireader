@@ -2,10 +2,49 @@
 <html lang="en" manifest="dpr.appcache">
   <head>
     <meta charset="utf-8">
-    <title>Digital Pāli Reader (beta)</title>
+    <title>Digital Pāli Reader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./favicon.png" />
     <script src="./globalObject.js"></script>
+    <script>
+      const initObjList = Object.keys(window);
+      const whitelist = [
+        "initObjList",
+        "whitelist",
+        "diffVarList",
+        "deploymentEnvironmentName",
+        "deploymentReleaseNumber",
+        "deploymentCreatedTimestamp",
+        "deploymentAppInsightsInstrumentationKey",
+        "environmentName",
+        "releaseNumber",
+        "createdTimestamp",
+        "appInsightsInstrumentationKey",
+        "sdkInstance",
+        "aiName",
+        "aisdk",
+        "appInsightsSDK",
+        "appInsights",
+        "progressBar",
+        "ko",
+        "bootstrap",
+        "DPR_PAL",
+        "DPR_Send",
+        "DPR_Receive",
+        "DPRChrome",
+        "DPRSend",
+        "DPRNav",
+        "DPRXML",
+        "XML_Load",
+        "DPROpts",
+        "DPR_Translations",
+        "DPR_Chrome",
+        "digitalpalireader",
+        "DPR_BottomPane",
+        "__otherDialogsViewModel",
+      ];
+      const diffVarList = () => Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a)))
+    </script>
     <script>
       window.addEventListener('error', e => {
         const { message, source, lineno, colno, error } = e;
@@ -18,23 +57,6 @@
         appInsights.trackException({ message: 'unhandledrejection', promise: event.promise, reason: event.reason, });
         appInsights.flush();
       });
-
-      //
-      // Following browser detection code is from https://stackoverflow.com/a/9851769/6196679.
-      //
-      var browserInfo = {
-        isFirefox: typeof InstallTrigger !== 'undefined',
-        isChrome: !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime) && (navigator.userAgent.indexOf("Edg") == -1),
-        isEdgeChromium: this.isChrome && (navigator.userAgent.indexOf("Edg") != -1),
-        isSafari: /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification)),
-      };
-      console.log('Browser info', browserInfo);
-
-      if (!browserInfo.isFirefox && !browserInfo.isChrome && !browserInfo.isEdgeChromium && !browserInfo.isSafari) {
-        // NOTE: This should take care of 85%+ of internet browsing as per https://en.wikipedia.org/wiki/Usage_share_of_web_browsers.
-        // Does not work on Chrome mobile - will be enabled shortly.
-        // window.location.replace('/index-unsupported.html');
-      }
     </script>
 
     <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
@@ -157,17 +179,17 @@
               <div class="context-menu-main-row" id="context-menu-main-row2">
                 <div class="context-menu-main-row-group">
                   <!--ko let: { cmd: commands.sendToConverter() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-language" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
                   <!--ko let: { cmd: commands.sendToTextPad() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-share-square-o" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
                   <!--ko let: { cmd: commands.saveToDesktop() }-->
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                   </button>
                   <!--/ko-->
@@ -304,6 +326,8 @@
     </div>
     <div id="settings-dialog">
     </div>
+    <div id="quicklink-dialog">
+    </div>
     <div class="modal fade show" id="helpDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="font-size: smaller;">
@@ -323,17 +347,16 @@
               <tr><td>m</td><td>&nbsp;Switch to section in Mūla</td></tr>
               <tr><td>a</td><td>&nbsp;Switch to section in Aṭṭhakathā</td></tr>
               <tr><td>t</td><td>&nbsp;Switch to section in Ṭīkā</td></tr>
-              <!-- <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr> -->
-              <!-- <tr><td>s</td><td>&nbsp;Send selected text to convertor</td></tr>
+              <tr><td>q</td><td>&nbsp;Enter quick reference (DN, MN, SN, & AN only)</td></tr>
+              <tr><td>s</td><td>&nbsp;Send selected text to convertor</td></tr>
               <tr><td>e</td><td>&nbsp;Send selected text to textpad</td></tr>
-              <tr><td>E</td><td>&nbsp;Append selected text to textpad</td></tr> -->
+              <tr><td>E</td><td>&nbsp;Append selected text to textpad</td></tr>
               <!-- <tr><td>,</td><td>&nbsp;Display previous PED or DPPN entry</td></tr>
               <tr><td>.</td><td>&nbsp;Display next PED or DPPN entry</td></tr> -->
               <tr><td>%</td><td>&nbsp;Display DPR settings</td></tr>
               <tr><td>^</td><td>&nbsp;Reset all DPR settings</td></tr>
-              <!-- <tr><td>#</td><td>&nbsp;Display Pāli quiz</td></tr>
-              <tr><td>*</td><td>&nbsp;Display Pāli quote</td></tr> -->
-              <tr><td>`</td><td>&nbsp;Toggle sidebar</td></tr>
+              <!-- <tr><td>*</td><td>&nbsp;Display Pali quote</td></tr> -->
+              <tr><td>&grave;</td><td>&nbsp;Toggle sidebar</td></tr>
               <!-- <tr><td>b</td><td>&nbsp;Save bookmark</td></tr> -->
               <tr><td>h</td><td>&nbsp;Open help</td></tr>
               <!-- <tr><td>@</td><td>&nbsp;Launch feedback form</td></tr> -->
@@ -429,6 +452,7 @@
     <script src="/_dprhtml/features/search/init.js"></script>
     <script src="/_dprhtml/features/dictionary/init.js"></script>
     <script src="/_dprhtml/features/settings-dialog/init.js"></script>
+    <script src="/_dprhtml/features/other-dialogs/init.js"></script>
     <script src="/_dprhtml/dprviewmodel.js"></script>
     <script src="/_dprhtml/index.js"></script>
     <script>progressBar.go(100)</script>

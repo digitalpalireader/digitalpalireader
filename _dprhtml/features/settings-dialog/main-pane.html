@@ -58,11 +58,11 @@
                 <div style="grid-column: 1 / 3; grid-row: span 2;">
                   <div>Show context menu item:</div>
                   <div style="display: flex;">
-                    <input class="mr-1" type="radio" id="allContext" name="selectMode" checked="true">
+                    <input class="mr-1" type="radio" id="allContext" name="selectMode" data-bind="enable: false, checkedValue: true, checked: allContext" />
                     <label class="mr-3" for="allContext">always</label><br>
-                    <input class="mr-1" type="radio" id="contextSelected" name="selectMode">
+                    <input class="mr-1" type="radio" id="contextSelected" name="selectMode" data-bind="enable: false, checkedValue: true, checked: contextSelected" />
                     <label class="mr-3 text-nowrap" for="contextSelected">when text selected</label><br>
-                    <input class="mr-1" type="radio" id="noContext" name="selectMode" />
+                    <input class="mr-1" type="radio" id="noContext" name="selectMode" data-bind="enable: false, checkedValue: true, checked: noContext" />
                     <label class="mr-3" for="noContext">never</label>
                   </div>
                 </div>
@@ -90,50 +90,50 @@
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-4col-grid">
                 <div class="settings-pane-tab-pane-section-header">Page Background</div>
 
-                <input id="pcolbk" name="pcolbk" type="checkbox" />
+                <input id="pcolbk" name="pcolbk" type="checkbox" data-bind="checked: pcolbk" />
                 <label class="ml-1" for="pcolbk">Color</label>
-                <input class="ml-1" id="colbk" name="colbk" type="text" maxlength="16" style="justify-self: stretch;" />
-                <input class="ml-1" id="colbkc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colbk" name="colbk" type="text" maxlength="16" style="justify-self: stretch;" data-bind="enable: pcolbk, value: colbk" />
+                <input class="ml-1" id="colbkc" type="color" data-bind="enable: pcolbk, value: colbk" />
 
-                <input id="pimgbk" name="pimgbk" type="checkbox" />
+                <input id="pimgbk" name="pimgbk" type="checkbox" data-bind="checked: pimgbk" />
                 <label class="ml-1" for="pimgbk">Image</label>
-                <input class="ml-1 mr-0" id="imgbk" name="imgbk" type="text" style="grid-column: 3 / span 2; justify-self: stretch;" />
+                <input class="ml-1 mr-0" id="imgbk" name="imgbk" type="text" style="grid-column: 3 / span 2; justify-self: stretch;" data-bind="enable: pimgbk, value: imgbk" />
               </div>
 
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-3col-grid">
                 <div class="settings-pane-tab-pane-section-header">Other colors</div>
 
                 <label for="colInput">Input Boxes</label>
-                <input class="ml-1" id="colInput" name="colInput" type="text" maxlength="16" style="justify-self: stretch;" />
-                <input class="ml-1" id="colInputc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colInput" name="colInput" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colInput" />
+                <input class="ml-1" id="colInputc" type="color" data-bind="value: colInput" />
 
                 <label for="colButton">Buttons (normal)</label>
-                <input class="ml-1" id="colButton" name="colButton" type="text" maxlength="16" style="justify-self: stretch;" />
-                <input class="ml-1" id="colButtonc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colButton" name="colButton" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colButton" >
+                <input class="ml-1" id="colButtonc" type="color" data-bind="value: colButton" />
 
                 <label for="colButtonSel">Buttons (on hover)</label>
-                <input class="ml-1" id="colButtonSel" name="colButtonSel" type="text" maxlength="16" style="justify-self: stretch;" />
-                <input class="ml-1" id="colButtonSelc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colButtonSel" name="colButtonSel" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colButtonSel" />
+                <input class="ml-1" id="colButtonSelc" type="color" data-bind="value: colButtonSel" />
               </div>
 
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-4col-grid">
                 <div class="settings-pane-tab-pane-section-header">Sidebar Background</div>
 
-                <input id="pcolbkcp" name="pcolbkcp" type="checkbox" />
+                <input id="pcolbkcp" name="pcolbkcp" type="checkbox" data-bind="checked: pcolbkcp" />
                 <label class="ml-1" for="pcolbkcp">Color</label>
-                <input class="ml-1" id="colbkcp" name="colbkcp" type="text" maxlength="16" style="justify-self: stretch;" />
-                <input class="ml-1" id="colbkcpc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colbkcp" name="colbkcp" type="text" maxlength="16" style="justify-self: stretch;" data-bind="enable: pcolbkcp, value: colbkcp" />
+                <input class="ml-1" id="colbkcpc" type="color" data-bind="enable: pcolbkcp, value: colbkcp" />
 
-                <input id="pimgbkcp" name="pimgbkcp" type="checkbox" />
+                <input id="pimgbkcp" name="pimgbkcp" type="checkbox" data-bind="checked: pimgbkcp" />
                 <label class="ml-1" for="pimgbkcp">Image</label>
-                <input class="ml-1 mr-0" id="imgbkcp" name="imgbkcp" type="text" size="20" style="grid-column: 3 / span 2; justify-self: stretch;" />
+                <input class="ml-1 mr-0" id="imgbkcp" name="imgbkcp" type="text" size="20" style="grid-column: 3 / span 2; justify-self: stretch;" data-bind="enable: pimgbkcp, value: imgbkcp" />
               </div>
 
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-2col-grid">
                 <div class="settings-pane-tab-pane-section-header">Misc.</div>
 
                 <label for="setRows" style="justify-self: stretch; white-space: nowrap;" >Sidebar Set Rows</label>
-                <input class="ml-1 mr-0" id="setRows" name="setRows" type="text" size="20" style="justify-self: stretch;" />
+                <input class="ml-1 mr-0" id="setRows" name="setRows" type="text" size="20" style="justify-self: stretch;" data-bind="value: setRows" />
               </div>
             </div>
             <div id="settings-pane-tab-panes-text" class="settings-pane-tab-pane" data-bind="visible: isTextSettingsTabSelected">
@@ -141,24 +141,24 @@
                 <div class="settings-pane-tab-pane-section-header">Text colors</div>
 
                 <label for="coltext">Normal</label>
-                <input class="ml-1" id="coltext" name="coltext" type="text" maxlength="16" style="justify-self: stretch;"/>
-                <input class="ml-1" id="coltextc" type="color" value="#ff0000" />
+                <input class="ml-1" id="coltext" name="coltext" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: coltext" />
+                <input class="ml-1" id="coltextc" type="color" data-bind="value: coltext" />
 
                 <label for="colsel">Selected</label>
-                <input class="ml-1" id="colsel" name="colsel" type="text" maxlength="16" style="justify-self: stretch;"/>
-                <input class="ml-1" id="colselc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colsel" name="colsel" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colsel" />
+                <input class="ml-1" id="colselc" type="color" data-bind="value: colsel" />
 
                 <label for="coldppn">DPPN</label>
-                <input class="ml-1" id="coldppn" name="coldppn" type="text" maxlength="16" style="justify-self: stretch;"/>
-                <input class="ml-1" id="coldppnc" type="color" value="#ff0000" />
+                <input class="ml-1" id="coldppn" name="coldppn" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: coldppn" />
+                <input class="ml-1" id="coldppnc" type="color" data-bind="value: coldppn" />
 
                 <label for="colped">PED</label>
-                <input class="ml-1" id="colped" name="colped" type="text" maxlength="16" style="justify-self: stretch;"/>
-                <input class="ml-1" id="colpedc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colped" name="colped" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colped" />
+                <input class="ml-1" id="colpedc" type="color" data-bind="value: colped" />
 
                 <label for="colcpd">CPED</label>
-                <input class="ml-1" id="colcpd" name="colcpd" type="text" maxlength="16" style="justify-self: stretch;"/>
-                <input class="ml-1" id="colcpdc" type="color" value="#ff0000" />
+                <input class="ml-1" id="colcpd" name="colcpd" type="text" maxlength="16" style="justify-self: stretch;" data-bind="value: colcpd" />
+                <input class="ml-1" id="colcpdc" type="color" data-bind="value: colcpd" />
               </div>
               <div class="settings-pane-tab-pane-section settings-pane-tab-pane-section-2col-grid">
                 <div class="settings-pane-tab-pane-section-header">Text formatting</div>

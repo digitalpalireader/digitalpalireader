@@ -1,0 +1,26 @@
+<div class="modal fade show" id="quicklink-dialog-root" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+      <form data-bind="submit: sendQuickLinkFromDialog">
+        <div class="modal-header p-2">
+          <h6 class="modal-title" id="exampleModalLongTitle">Shorthand Link</h6>
+          <button type="button" class="btn btn-outline-danger btn-sm mb-0" data-dismiss="modal" title="Close without saving...">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="modal-body d-flex flex-column">
+          <label class="mb-2" for="dialog-quicklinkInput">Enter link (DN 1.1, etc.)</label>
+          <input id="dialog-quicklinkInput" class="mb-2" name="dialog-quicklinkInput" type="text" data-bind="value: quicklinkInput" autofocus/>
+          <div>
+            <input id="quicklink-new-tab" name="quicklink-new-tab" type="checkbox" data-bind="enable: false, checked: quicklinkInNewTab"/>
+            <label for="quicklink-new-tab">Open in new tab</label>
+          </div>
+        </div>
+        <div class="modal-footer p-2">
+          <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-dismiss="modal">Cancel</button>
+          <button data-bind="click: sendQuickLinkFromDialog" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-dismiss="modal">OK</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

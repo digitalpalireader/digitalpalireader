@@ -369,7 +369,7 @@ var DPR_Chrome = (function () {
     if (type === ToastTypeError) {
       typeClasses = 'bg-danger text-light';
     } else if (type === ToastTypeWarning) {
-      typeClasses = 'bg-warning text-light';
+      typeClasses = 'bg-warning text-dark';
     } else if (type === ToastTypeSuccess) {
       typeClasses = 'bg-success text-light';
     } else if (type === ToastTypeInfo) {

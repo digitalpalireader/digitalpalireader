@@ -14,26 +14,26 @@ var DPR_prefsInfo = {
     type: Number.name,
     defaultValue: 100,
   },
+
   coltext: {
     type: String.name,
-    defaultValue: '#111',
+    defaultValue: '#111111',
   },
   colsel: {
     type: String.name,
-    defaultValue: '#550',
+    defaultValue: '#555500',
   },
-
   coldppn: {
     type: String.name,
-    defaultValue: '#0B0',
+    defaultValue: '#00BB00',
   },
   colped: {
     type: String.name,
-    defaultValue: '#C40',
+    defaultValue: '#CC4400',
   },
   colcpd: {
     type: String.name,
-    defaultValue: '#44D',
+    defaultValue: '#4444DD',
   },
 
   colfont: {
@@ -49,9 +49,17 @@ var DPR_prefsInfo = {
     type: String.name,
     defaultValue: 'colimg',
   },
+  pcolbk: {
+    type: Boolean.name,
+    defaultValue: true,
+  },
   colbk: {
     type: String.name,
-    defaultValue: '#FFD',
+    defaultValue: '#FFFFDD',
+  },
+  pimgbk: {
+    type: Boolean.name,
+    defaultValue: true,
   },
   imgbk: {
     type: String.name,
@@ -62,9 +70,17 @@ var DPR_prefsInfo = {
     type: String.name,
     defaultValue: 'col',
   },
+  pcolbkcp: {
+    type: Boolean.name,
+    defaultValue: true,
+  },
   colbkcp: {
     type: String.name,
     defaultValue: '#F4F4F4',
+  },
+  pimgbkcp: {
+    type: Boolean.name,
+    defaultValue: false,
   },
   imgbkcp: {
     type: String.name,
@@ -73,7 +89,7 @@ var DPR_prefsInfo = {
 
   colInput: {
     type: String.name,
-    defaultValue: '#FFF',
+    defaultValue: '#FFFFFF',
   },
   colButton: {
     type: String.name,
@@ -85,7 +101,7 @@ var DPR_prefsInfo = {
   },
   colButtonSel: {
     type: String.name,
-    defaultValue: '#FFF',
+    defaultValue: '#FFFFFF',
   },
   colbk1: {
     type: String.name,
@@ -189,7 +205,7 @@ var DPR_prefsInfo = {
   },
 
   setRows: {
-    type: Boolean.name,
+    type: Number.name,
     defaultValue: 7,
   },
 
@@ -285,6 +301,7 @@ function getPref(name) {
         break;
       case String.name:
         pref = localStorage[prefStorageKey];
+        pref = pref && pref.trim().replace(/^#([0-9a-f])([0-9a-f])([0-9a-f])$/i, '#$1$1$2$2$3$3')
         break;
       case Boolean.name:
         pref = localStorage[prefStorageKey] === 'true';
