@@ -14,15 +14,15 @@ function getSelected() {
   return txt;
 }
 
-glblObj.G_oldConvert = '';
+DPR_G.G_oldConvert = '';
 
 function convert(check,lower)
 {
   var spell = document.getElementById('cinput').value;
 
-  if (check && spell == glblObj.G_oldConvert)
+  if (check && spell == DPR_G.G_oldConvert)
     return;
-  glblObj.G_oldConvert = spell;
+  DPR_G.G_oldConvert = spell;
 
   var inScript = document.getElementById('cinform').selectedIndex
   var outScript = document.getElementById('coutform').selectedIndex

@@ -1,6 +1,6 @@
 "use strict";
 
-const glblObj = {
+const DPR_G = {
   G_xmlDoc : null,
   G_lastcolour : null,
   G_unnamed : null,

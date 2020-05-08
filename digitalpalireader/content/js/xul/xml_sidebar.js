@@ -5,7 +5,7 @@ var DPRXML = {
 
     var nikaya = document.getElementById('set').value;
     var book = document.getElementById('book').value;
-    var nikbookhier = nikaya + book + glblObj.G_hier;
+    var nikbookhier = nikaya + book + DPR_G.G_hier;
     var xmlDoc = loadXMLFile(nikbookhier,0);
 
 

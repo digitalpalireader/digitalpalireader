@@ -10,16 +10,16 @@ function outputDef(which,first,frombox)
 
   var conjWord = [] // word to pass to conjugate
 
-  if (glblObj.G_outwords.length > 1 && first) {
+  if (DPR_G.G_outwords.length > 1 && first) {
 
     $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
     // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
-    for(var i = 0; i < glblObj.G_outwords.length; i++)
+    for(var i = 0; i < DPR_G.G_outwords.length; i++)
     {
-      glblObj.G_outwords[i].push(glblObj.G_shortdefpost[i]);
+      DPR_G.G_outwords[i].push(DPR_G.G_shortdefpost[i]);
     }
 
-    glblObj.G_outwords.sort(function (a, b) {
+    DPR_G.G_outwords.sort(function (a, b) {
 
       var af = 0;
       var a1 = a[1].split('@');
@@ -87,40 +87,40 @@ function outputDef(which,first,frombox)
 
     });
 
-    for(var i = 0; i < glblObj.G_outwords.length; i++)
+    for(var i = 0; i < DPR_G.G_outwords.length; i++)
     {
-      glblObj.G_shortdefpost[i] = glblObj.G_outwords[i][glblObj.G_outwords[i].length-1];
+      DPR_G.G_shortdefpost[i] = DPR_G.G_outwords[i][DPR_G.G_outwords[i].length-1];
     }
 
 
     var sorta = [];
 
-    for (var b = 0; b < glblObj.G_outwords.length; b++)
+    for (var b = 0; b < DPR_G.G_outwords.length; b++)
     {
-      sorta.push(glblObj.G_outwords[b][0]+'$'+glblObj.G_outwords[b][1]+'!'+glblObj.G_shortdefpost[b]);
+      sorta.push(DPR_G.G_outwords[b][0]+'$'+DPR_G.G_outwords[b][1]+'!'+DPR_G.G_shortdefpost[b]);
     }
 
     for (var b = 0; b < sorta.length; b++)
     {
-      glblObj.G_outwords[b] = sorta[b].split('!')[0].split('$');
-      glblObj.G_shortdefpost[b] = sorta[b].split('!')[1]
+      DPR_G.G_outwords[b] = sorta[b].split('!')[0].split('$');
+      DPR_G.G_shortdefpost[b] = sorta[b].split('!')[1]
     }
 
     // get the word names
 
-    for (var b = 0; b < glblObj.G_outwords.length; b++)
+    for (var b = 0; b < DPR_G.G_outwords.length; b++)
     {
-      var outword = glblObj.G_outwords[b][0];
+      var outword = DPR_G.G_outwords[b][0];
       document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>';
     }
   }
 
-  var owparts = glblObj.G_outwords[which][1].split('@');
+  var owparts = DPR_G.G_outwords[which][1].split('@');
 
   var myConj = owparts[owparts.length-1].split('#')[0].split('^');
   if(myConj[3]) { // if root form is found, set up conjugation
     if(yt[myConj[3]][4] != 'I') {
-      conjWord.form = toUni(glblObj.G_outwords[which][0].split('-').pop());
+      conjWord.form = toUni(DPR_G.G_outwords[which][0].split('-').pop());
       conjWord.root = toUni(myConj[3]);
     }
   }
@@ -141,7 +141,7 @@ function outputDef(which,first,frombox)
         // data[2] = category
         // data[3] = short def (if avail)
         // for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-      var dataout = translit(toUni(glblObj.G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
+      var dataout = translit(toUni(DPR_G.G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
       var conciseCode = "";
       if (d == 0) { // first match (will go on top)
         switch (data[2]) {
@@ -192,7 +192,7 @@ function outputDef(which,first,frombox)
 
   osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(' + DPR_PAL.contentFolder + 'images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
 
-  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+glblObj.G_outwords[which][0].length+'" id="modify" value="'+glblObj.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="if(event.keyCode === 13) reanalyze(\''+glblObj.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+glblObj.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
+  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+DPR_G.G_outwords[which][0].length+'" id="modify" value="'+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="if(event.keyCode === 13) reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
 
   // output
 
@@ -203,8 +203,8 @@ function outputDef(which,first,frombox)
   var thisconcise = [];
   var conciseoutput = '';
 
-  if (glblObj.G_shortdefpost[which]) {
-    thisconcise = glblObj.G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$');
+  if (DPR_G.G_shortdefpost[which]) {
+    thisconcise = DPR_G.G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$');
 
     for (var x = 0; x < thisconcise.length; x++)
     {
@@ -230,7 +230,7 @@ function outputDef(which,first,frombox)
       var conciseword = thisconcise[x];
       conciseword = toUni(conciseword);
 
-      glblObj.G_thisConcise[conciseword] = concisedef;
+      DPR_G.G_thisConcise[conciseword] = concisedef;
       if(x == 0){
 
         var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;
@@ -245,7 +245,7 @@ function outputDef(which,first,frombox)
     //$('#anfright').html(sdfirst);
   }
 
-  //alert(glblObj.G_thisConcise);
+  //alert(DPR_G.G_thisConcise);
   if (hotlink) {
     if (hotlink.search('PED') >= 0) paliXML(hotlink);
     else DPPNXML(hotlink);
@@ -258,10 +258,10 @@ function outputDef(which,first,frombox)
   DPRShowBottomPane();
 }
 
-glblObj.G_thisConcise = [];
+DPR_G.G_thisConcise = [];
 
 function showShortDef(word) {
-  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + glblObj.G_thisConcise[word]);
+  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + DPR_G.G_thisConcise[word]);
 }
 
 function conciseChange(value) {

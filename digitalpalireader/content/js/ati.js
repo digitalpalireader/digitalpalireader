@@ -29,7 +29,7 @@ function onLoad() {
       var oldurl = DPR_PAL.contentDocument.location.href;
       var oldparams = oldurl.split('?')[1];
       oldparams = oldparams.split('|');
-      oldparams[glblObj.G_compare-1] = link;
+      oldparams[DPR_G.G_compare-1] = link;
       newparams = oldparams.join('|');
 
       var newurl = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?'+newparams);
@@ -69,14 +69,14 @@ function closePanel() {
   window.onunload=function(){ cW.reindexPanels() }
   var url = cD.location.href.split('?');
   var panels = url[1].split('|');
-  panels.splice(glblObj.G_compare-1,1);
+  panels.splice(DPR_G.G_compare-1,1);
   panels = panels.join('|');
   url[1] = panels;
   var newurl = url.join('?').replace(/\?$/,'');
   cW.history.replaceState({}, 'Title', newurl);
 
-  elem.removeChild(elem.getElementsByTagName('splitter')[glblObj.G_compare-1]);
-  elem.removeChild(browsers[glblObj.G_compare-1]);
+  elem.removeChild(elem.getElementsByTagName('splitter')[DPR_G.G_compare-1]);
+  elem.removeChild(browsers[DPR_G.G_compare-1]);
 
   // collapse first splitter
 

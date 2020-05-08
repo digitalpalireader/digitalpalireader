@@ -9,8 +9,8 @@ matValue['a'] = '';
 matValue['t'] = '';
 
 
-glblObj.G_compare = 1;
-glblObj.G_thisPara = null;
+DPR_G.G_compare = 1;
+DPR_G.G_thisPara = null;
 
 const emptyFnStr = `(() => {})()`;
 
@@ -18,11 +18,11 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
 
-  glblObj.G_thisPara = null;
+  DPR_G.G_thisPara = null;
 
   if(compare)
-    glblObj.G_compare = compare;
-  else compare = glblObj.G_compare;
+    DPR_G.G_compare = compare;
+  else compare = DPR_G.G_compare;
 
   for(var i=1;i<7;i++) {
     if(place[i] == 'x') {
@@ -68,7 +68,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   if(hier == 'm') {
     var modno = getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hier,y.length);
-    var modt =   (modno ? ' (<b class="small" style="color:'+DPR_prefs['colsel']+'">' + glblObj.G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
+    var modt =   (modno ? ' (<b class="small" style="color:'+DPR_prefs['colsel']+'">' + DPR_G.G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
   }
 
 
@@ -173,7 +173,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 
-  var tabT = 'Pāli: ' + glblObj.G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
+  var tabT = 'Pāli: ' + DPR_G.G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
   setCurrentTitle(tabT);
 
   const shortcutFns = createShortcutFns();
@@ -230,7 +230,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'false',
             executeStr: emptyFnStr,
-            titleStr: `Currently viewing section in ${glblObj.G_hTitles[ht]}`,
+            titleStr: `Currently viewing section in ${DPR_G.G_hTitles[ht]}`,
             visibleStr: 'true',
           };
         } else if (relhere.split('#')[hic] != '') {
@@ -247,7 +247,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'false',
             executeStr: emptyFnStr,
-            titleStr: `No relative section in ${glblObj.G_hTitles[ht]}`,
+            titleStr: `No relative section in ${DPR_G.G_hTitles[ht]}`,
             visibleStr: 'true',
           };
         }
@@ -393,7 +393,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     }
     else {
       var opara = parseInt(para);
-      glblObj.G_thisPara = opara;
+      DPR_G.G_thisPara = opara;
     }
   }
 
@@ -402,7 +402,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   initializeMainPaneOutput();
   writeNavigationHeaderForSection(titleout[0], modt, range, place[8]);
 
-  $('#mafbc').append('<div id="savetitle">'+glblObj.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
+  $('#mafbc').append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
   $('#mafbc').append('<div id="savei">'+titleout[1]+'</div>');
 
@@ -524,7 +524,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // add to history
 
-  addHistory(glblObj.G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+nikaya+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+  addHistory(DPR_G.G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+nikaya+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
   // refresh history box
 
@@ -574,9 +574,9 @@ function loadXMLindex(place,compare) {
   //var devCheck = 1; // dev tool
 
   if(compare)
-    glblObj.G_compare = compare;
+    DPR_G.G_compare = compare;
   else
-    compare = glblObj.G_compare;
+    compare = DPR_G.G_compare;
 
   var isPlace = place.length > 3?true:false;
 
@@ -848,7 +848,7 @@ function loadXMLindex(place,compare) {
           var suno = getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0,4);  // short reference
 
 
-          theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData))+(suno?'&nbsp;<d class="small">('+glblObj.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+          theDatao += spaces+(devCheck == 1 && DshowH ? '[2]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_prefs[col[wcs]]+'">' + translit(toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
           // translations
 
@@ -961,7 +961,7 @@ function loadXMLindex(place,compare) {
 
               var suno = getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,0,6);  // short reference
 
-              theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (suno?'&nbsp;<d class="small">('+glblObj.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+              theDatao += spaces+(devCheck == 1 && DshowH ? '[4]':'')+(DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + translit(toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
               // translations
 
@@ -1049,9 +1049,9 @@ function loadXMLindex(place,compare) {
 
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
     var places = (place[2]+','+place[3]+','+place[4]+','+place[5]+','+place[6]).replace(/x/g,"'x'");
-    addHistory(glblObj.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
+    addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
 
-    var tabT = glblObj.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
+    var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
 
     if(!isDev)
       makeToolbox(shortcutFns, main,'',tabT,true,true,true);
@@ -1060,10 +1060,10 @@ function loadXMLindex(place,compare) {
     if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
     else bknameme = '';
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
-    addHistory(glblObj.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
+    addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
     makeToolbox(shortcutFns, main?main:false);
 
-    var tabT = glblObj.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
+    var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
     makeToolbox(shortcutFns, main,'',tabT,true,true,true);
 
   }

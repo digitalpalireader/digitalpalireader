@@ -84,7 +84,7 @@ function keyPressed(e) {
   }
 
   if (e.charCode == 107) { // k
-    promptData("DPR Keyboard Shortcuts", glblObj.G_keysList.join('\n'));
+    promptData("DPR Keyboard Shortcuts", DPR_G.G_keysList.join('\n'));
     return;
   }
 
@@ -93,7 +93,7 @@ function keyPressed(e) {
 
     var input = {value: ""};
 
-    var result = glblObj.G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, null, check);
+    var result = DPR_G.G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, null, check);
 
     // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
 

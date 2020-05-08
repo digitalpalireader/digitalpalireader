@@ -391,11 +391,11 @@ function DcheckWords() {
 
                   word:
                   for (var zz in text) {
-                    glblObj.G_stopAnalyzing = 0
+                    DPR_G.G_stopAnalyzing = 0
 
                     window.dump(zz > zzc*10 ? (zzc++)*10 : '.');
-                    glblObj.G_outwords = [];
-                    glblObj.G_shortdefpost = [];
+                    DPR_G.G_outwords = [];
+                    DPR_G.G_shortdefpost = [];
                     var input = text[zz];
 
                     if (input.length < 2) continue;
@@ -424,12 +424,12 @@ function DcheckWords() {
                     var matchit = '';
 
 
-                    if(typeof(glblObj.G_manualCompoundInd[input]) == 'object' || typeof(glblObj.G_manualCompoundDec[input]) == 'object') manualCompound(input); // let it tell us what is the match
-                    else var matchit = analyzeword(input);  // will populate glblObj.G_outwords, which is nested array - 1) full alternative compounds/words seperated by array entry "space", 2) parts of the alt. compounds seperated by "@", 3) alt. defs of the parts, seperated by "#", 4) info for each alt. def. seperated by "^"
+                    if(typeof(DPR_G.G_manualCompoundInd[input]) == 'object' || typeof(DPR_G.G_manualCompoundDec[input]) == 'object') manualCompound(input); // let it tell us what is the match
+                    else var matchit = analyzeword(input);  // will populate DPR_G.G_outwords, which is nested array - 1) full alternative compounds/words seperated by array entry "space", 2) parts of the alt. compounds seperated by "@", 3) alt. defs of the parts, seperated by "#", 4) info for each alt. def. seperated by "^"
 
                     var endtime = new Date;
                     var totaltime = Math.round((endtime.getTime() - starttime)*10/6)/1000;
-                    if(totaltime > 5 || glblObj.G_outwords.length > 50) {
+                    if(totaltime > 5 || DPR_G.G_outwords.length > 50) {
                       hw++;
                       hardword[input] = totaltime;
                     }
@@ -438,7 +438,7 @@ function DcheckWords() {
                       //ddump('found: '+input);
                       outmatch[input] =  1;
                     }
-                    else if (glblObj.G_outwords.length == 0) {
+                    else if (DPR_G.G_outwords.length == 0) {
                       //ddump('\nnot found: '+input);
                       out[input] = 1;
                       notrecog++;
@@ -446,8 +446,8 @@ function DcheckWords() {
                     }
                     else if(!out3[input]) {
                       var otmp = [];
-                      for(var tmp in glblObj.G_outwords) {
-                        var cpds = glblObj.G_outwords[tmp][0];
+                      for(var tmp in DPR_G.G_outwords) {
+                        var cpds = DPR_G.G_outwords[tmp][0];
                         otmp.push(cpds);
                       }
                       componly++;
@@ -647,18 +647,18 @@ function DtitleSearchCreate() {
 
   var out = [];
   var dup = [];
-  for (var i in glblObj.G_XMLFileArray) {
+  for (var i in DPR_G.G_XMLFileArray) {
     for (var ii = 0; ii < 3; ii++) {
-      if(!glblObj.G_XMLFileArray[i][ii]) continue;
+      if(!DPR_G.G_XMLFileArray[i][ii]) continue;
       var fi = i;
       var xmlhttp = new window.XMLHttpRequest();
-      xmlhttp.open("GET", 'xml/'+fi+glblObj.G_hLetters[ii]+'.xml', false);
+      xmlhttp.open("GET", 'xml/'+fi+DPR_G.G_hLetters[ii]+'.xml', false);
       xmlhttp.send(null);
       var xmlDoc = xmlhttp.responseXML.documentElement;
 
       var name = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 
-      out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^0^0^0^0^0^'+glblObj.G_hLetters[ii]+'x^0';
+      out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^0^0^0^0^0^'+DPR_G.G_hLetters[ii]+'x^0';
 
       var u = xmlDoc.getElementsByTagName("h0");
 
@@ -669,8 +669,8 @@ function DtitleSearchCreate() {
       {
         name = u[sx].getElementsByTagName("h0n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
         if(name && name != ' ') {
-          if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+glblObj.G_hLetters[ii]+'x^1';
-          else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+glblObj.G_hLetters[ii]+'x^1';
+          if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+DPR_G.G_hLetters[ii]+'x^1';
+          else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^0^0^0^0^'+DPR_G.G_hLetters[ii]+'x^1';
         }
         var v = u[sx].getElementsByTagName("h1");
 
@@ -678,8 +678,8 @@ function DtitleSearchCreate() {
         {
           name = v[sy].getElementsByTagName("h1n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
           if(name && name != ' ') {
-            if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+glblObj.G_hLetters[ii]+'x^2';
-            else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+glblObj.G_hLetters[ii]+'x^2';
+            if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+DPR_G.G_hLetters[ii]+'x^2';
+            else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^0^0^0^'+DPR_G.G_hLetters[ii]+'x^2';
           }
           var w = v[sy].getElementsByTagName("h2");
 
@@ -687,8 +687,8 @@ function DtitleSearchCreate() {
           {
             name = w[sz].getElementsByTagName("h2n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
             if(name && name != ' ') {
-              if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+glblObj.G_hLetters[ii]+'x^3';
-              else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+glblObj.G_hLetters[ii]+'x^3';
+              if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+DPR_G.G_hLetters[ii]+'x^3';
+              else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^0^0^'+DPR_G.G_hLetters[ii]+'x^3';
             }
             var x = w[sz].getElementsByTagName("h3");
 
@@ -696,8 +696,8 @@ function DtitleSearchCreate() {
             {
               name = x[s].getElementsByTagName("h3n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
               if(name && name != ' ') {
-                if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+glblObj.G_hLetters[ii]+'x^4';
-                else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+glblObj.G_hLetters[ii]+'x^4';
+                if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+DPR_G.G_hLetters[ii]+'x^4';
+                else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^0^'+DPR_G.G_hLetters[ii]+'x^4';
               }
               var y = x[s].getElementsByTagName("h4");
 
@@ -705,8 +705,8 @@ function DtitleSearchCreate() {
               {
                 name = y[se].getElementsByTagName("h4n")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
                 if(name && name != ' ') {
-                  if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+glblObj.G_hLetters[ii]+'x^5';
-                  else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+glblObj.G_hLetters[ii]+'x^5';
+                  if(out[name]) out[name] += '#'+fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+DPR_G.G_hLetters[ii]+'x^5';
+                  else out[name] = fi.charAt(0)+'x^'+fi.substring(1)+'x^'+sx+'x^'+sy+'x^'+sz+'x^'+s+'x^'+se+'x^'+DPR_G.G_hLetters[ii]+'x^5';
                 }
               }
             }
@@ -1379,7 +1379,7 @@ function DdppnShow(file,which) {
   window.alert(file+' | ' +data);
 }
 
-glblObj.G_xmlDoc;
+DPR_G.G_xmlDoc;
 
 function DgetThaiBook(book) {
 
@@ -1441,14 +1441,14 @@ function DgetThaiBook(book) {
   }
   xmlo += '</p></h4></h3></h2></h1></h0></ha></body>';
   var parser=new DOMParser();
-  glblObj.G_xmlDoc = parser.parseFromString(xmlo,'text/xml');
+  DPR_G.G_xmlDoc = parser.parseFromString(xmlo,'text/xml');
   DthaiOut();
 }
 
 function DthaiOut(){
 
 
-  var z = glblObj.G_xmlDoc.getElementsByTagName("ha");
+  var z = DPR_G.G_xmlDoc.getElementsByTagName("ha");
   var y = '';
   var x = '';
   var w = '';
@@ -1602,7 +1602,7 @@ function DthaiOut(){
 
   // save button
 
-  theDatao +='<p><span class="abut obut" onclick="DsaveXML(glblObj.G_xmlDoc)">save</span></p>';
+  theDatao +='<p><span class="abut obut" onclick="DsaveXML(DPR_G.G_xmlDoc)">save</span></p>';
 
   var theDataDiv = document.createElement('div');
   theDataDiv.innerHTML = theDatao;
@@ -1615,35 +1615,35 @@ function DthaiOut(){
 }
 
 function DthaiR(w,type) {
-  glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]].childNodes[0].nodeValue = document.form.isearch.value;
+  DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]].childNodes[0].nodeValue = document.form.isearch.value;
   DthaiOut();
 
 }
 
 function DthaiA(w,type) {
-  var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]];
-  var mpar = glblObj.G_xmlDoc.createElement('p');
+  var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]];
+  var mpar = DPR_G.G_xmlDoc.createElement('p');
   var npv = document.form.isearch.value;
-  var mt = glblObj.G_xmlDoc.createTextNode(npv);
+  var mt = DPR_G.G_xmlDoc.createTextNode(npv);
   mpar.appendChild(mt);
-  glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].insertBefore(mpar,tpar);
+  DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].insertBefore(mpar,tpar);
   DthaiOut();
 
 }
 
 function DthaiB(w,type) {
-  var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]];
+  var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]];
 
-  var mpar = glblObj.G_xmlDoc.createElement('p');
+  var mpar = DPR_G.G_xmlDoc.createElement('p');
   var npv = document.form.isearch.value;
-  var mt = glblObj.G_xmlDoc.createTextNode(npv);
+  var mt = DPR_G.G_xmlDoc.createTextNode(npv);
   mpar.appendChild(mt);
 
   if(w[5] == parent.length-1) {
     parent.appendChild(mpar);
   }
   else {
-    var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]+1];
+    var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]+1];
     parent.insertBefore(mpar,tpar);
   }
   DthaiOut();
@@ -1658,24 +1658,24 @@ function DthaiL(w,type) {
 
       // move this p to h4n
 
-      var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]];
+      var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p")[w[5]];
       var tpv = tpar.textContent;
-      var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]];
+      var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]];
       parent.removeChild(parent.getElementsByTagName("p")[w[5]]);
 
       if(w[5] == 0) { // just shift it up
         parent.getElementsByTagName("h4n")[0].childNodes[0].nodeValue=tpv;
       }
       else { // add a new h4
-        var newh = glblObj.G_xmlDoc.createElement('h4');
-        var newhn = glblObj.G_xmlDoc.createElement('h4n');
-        var newhnt = glblObj.G_xmlDoc.createTextNode(tpv);
+        var newh = DPR_G.G_xmlDoc.createElement('h4');
+        var newhn = DPR_G.G_xmlDoc.createElement('h4n');
+        var newhnt = DPR_G.G_xmlDoc.createTextNode(tpv);
         newhn.appendChild(newhnt);
         newh.appendChild(newhn);
 
         // move pars after to this h4
 
-        var pars = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p");
+        var pars = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("p");
         var count = parent.getElementsByTagName('p').length;
         for (var x = w[5]; x < count; x++) {
           var npar = parent.getElementsByTagName("p")[w[5]];
@@ -1683,13 +1683,13 @@ function DthaiL(w,type) {
 
           parent.removeChild(parent.getElementsByTagName("p")[w[5]]);
 
-          var mpar = glblObj.G_xmlDoc.createElement('p');
-          var mt = glblObj.G_xmlDoc.createTextNode(npv);
+          var mpar = DPR_G.G_xmlDoc.createElement('p');
+          var mt = DPR_G.G_xmlDoc.createTextNode(npv);
           mpar.appendChild(mt);
           newh.appendChild(mpar);
         }
 
-        var gparent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]];
+        var gparent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]];
         gparent.appendChild(newh);
       }
 
@@ -1698,18 +1698,18 @@ function DthaiL(w,type) {
 
       // move this h4n to h3n
 
-      var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("h4n")[0];
+      var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4")[w[4]].getElementsByTagName("h4n")[0];
       var tpv = tpar.textContent;
-      var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]];
+      var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]];
 
       if(w[4] == 0) { // just shift it up
         tpar.childNodes[0].nodeValue='';
         parent.getElementsByTagName("h3n")[0].childNodes[0].nodeValue=tpv;
       }
       else { // add a new h3
-        var newh = glblObj.G_xmlDoc.createElement('h3');
-        var newhn = glblObj.G_xmlDoc.createElement('h3n');
-        var newhnt = glblObj.G_xmlDoc.createTextNode(tpv);
+        var newh = DPR_G.G_xmlDoc.createElement('h3');
+        var newhn = DPR_G.G_xmlDoc.createElement('h3n');
+        var newhnt = DPR_G.G_xmlDoc.createTextNode(tpv);
         newhn.appendChild(newhnt);
         newh.appendChild(newhn);
         newh.appendChild(parent.getElementsByTagName("h4")[w[4]]);
@@ -1717,14 +1717,14 @@ function DthaiL(w,type) {
 
         // move h4s after to this h3
 
-        var pars = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4");
+        var pars = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h4");
         var count = pars.length;
         for (var x = w[4]; x < count; x++) {
           var npar = parent.getElementsByTagName("h4")[w[4]];
           newh.appendChild(npar);
         }
 
-        var gparent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]];
+        var gparent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]];
         gparent.appendChild(newh);
       }
 
@@ -1734,18 +1734,18 @@ function DthaiL(w,type) {
 
       // move this h3n to h2n
 
-      var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h3n")[0];
+      var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3")[w[3]].getElementsByTagName("h3n")[0];
       var tpv = tpar.textContent;
-      var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]];
+      var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]];
 
       if(w[3] == 0) { // just shift it up
         tpar.childNodes[0].nodeValue='';
         parent.getElementsByTagName("h2n")[0].childNodes[0].nodeValue=tpv;
       }
       else { // add a new h2
-        var newh = glblObj.G_xmlDoc.createElement('h2');
-        var newhn = glblObj.G_xmlDoc.createElement('h2n');
-        var newhnt = glblObj.G_xmlDoc.createTextNode(tpv);
+        var newh = DPR_G.G_xmlDoc.createElement('h2');
+        var newhn = DPR_G.G_xmlDoc.createElement('h2n');
+        var newhnt = DPR_G.G_xmlDoc.createTextNode(tpv);
         newhn.appendChild(newhnt);
         newh.appendChild(newhn);
         newh.appendChild(parent.getElementsByTagName("h3")[w[3]]);
@@ -1753,14 +1753,14 @@ function DthaiL(w,type) {
 
         // move h3s after to this h2
 
-        var pars = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3");
+        var pars = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h3");
         var count = pars.length;
         for (var x = w[3]; x < count; x++) {
           var npar = parent.getElementsByTagName("h3")[w[3]];
           newh.appendChild(npar);
         }
 
-        var gparent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]];
+        var gparent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]];
         gparent.appendChild(newh);
       }
 
@@ -1770,18 +1770,18 @@ function DthaiL(w,type) {
 
       // move this h2n to h1n
 
-      var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h2n")[0];
+      var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2")[w[2]].getElementsByTagName("h2n")[0];
       var tpv = tpar.textContent;
-      var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]];
+      var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]];
 
       if(w[2] == 0) { // just shift it up
         tpar.childNodes[0].nodeValue='';
         parent.getElementsByTagName("h2n")[0].childNodes[0].nodeValue=tpv;
       }
       else { // add a new h1
-        var newh = glblObj.G_xmlDoc.createElement('h1');
-        var newhn = glblObj.G_xmlDoc.createElement('h1n');
-        var newhnt = glblObj.G_xmlDoc.createTextNode(tpv);
+        var newh = DPR_G.G_xmlDoc.createElement('h1');
+        var newhn = DPR_G.G_xmlDoc.createElement('h1n');
+        var newhnt = DPR_G.G_xmlDoc.createTextNode(tpv);
         newhn.appendChild(newhnt);
         newh.appendChild(newhn);
         newh.appendChild(parent.getElementsByTagName("h2")[w[2]]);
@@ -1789,14 +1789,14 @@ function DthaiL(w,type) {
 
         // move h2s after to this h1
 
-        var pars = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2");
+        var pars = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h2");
         var count = pars.length;
         for (var x = w[2]; x < count; x++) {
           var npar = parent.getElementsByTagName("h2")[w[2]];
           newh.appendChild(npar);
         }
 
-        var gparent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]];
+        var gparent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]];
         gparent.appendChild(newh);
       }
 
@@ -1806,18 +1806,18 @@ function DthaiL(w,type) {
 
       // move this h1n to h0n
 
-      var tpar = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h1n")[0];
+      var tpar = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1")[w[1]].getElementsByTagName("h1n")[0];
       var tpv = tpar.textContent;
-      var parent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]];
+      var parent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]];
 
       if(w[1] == 0) { // just shift it up
         tpar.childNodes[0].nodeValue='';
         parent.getElementsByTagName("h0n")[0].childNodes[0].nodeValue=tpv;
       }
       else { // add a new h0
-        var newh = glblObj.G_xmlDoc.createElement('h0');
-        var newhn = glblObj.G_xmlDoc.createElement('h0n');
-        var newhnt = glblObj.G_xmlDoc.createTextNode(tpv);
+        var newh = DPR_G.G_xmlDoc.createElement('h0');
+        var newhn = DPR_G.G_xmlDoc.createElement('h0n');
+        var newhnt = DPR_G.G_xmlDoc.createTextNode(tpv);
         newhn.appendChild(newhnt);
         newh.appendChild(newhn);
         newh.appendChild(parent.getElementsByTagName("h1")[w[1]]);
@@ -1825,14 +1825,14 @@ function DthaiL(w,type) {
 
         // move h1s after to this h0
 
-        var pars = glblObj.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1");
+        var pars = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0].getElementsByTagName("h0")[w[0]].getElementsByTagName("h1");
         var count = pars.length;
         for (var x = w[1]; x < count; x++) {
           var npar = parent.getElementsByTagName("h1")[w[1]];
           newh.appendChild(npar);
         }
 
-        var gparent = glblObj.G_xmlDoc.getElementsByTagName("ha")[0];
+        var gparent = DPR_G.G_xmlDoc.getElementsByTagName("ha")[0];
         gparent.appendChild(newh);
       }
 
@@ -2459,9 +2459,9 @@ javascript:writeExtFile('/home/noah/Extensions/work/unmatched','test');
 function DMakeAttArray(h) {
   var outa = [];
   var getstring = /\^b\^[^^]+\^eb\^/;
-  for (var i in glblObj.G_XMLFileArray) {
+  for (var i in DPR_G.G_XMLFileArray) {
     if(i.charAt(0) == 'x') continue;
-    if (glblObj.G_XMLFileArray[i][h] == 1) {
+    if (DPR_G.G_XMLFileArray[i][h] == 1) {
       var a = Dsearch(i+(h==1?'a':'t'),getstring);
       for(var c = 0; c < a.length; c++) {
 
@@ -2783,7 +2783,7 @@ function tipitakaDB() {
   etc['a'] = [];
   etc['t'] = [];
 
-  for (var i in glblObj.G_XMLFileArray) {
+  for (var i in DPR_G.G_XMLFileArray) {
     var nik = i.charAt(0);
     var volume = i.charAt(1);
     //if(nik!='d'&&nik!='m')
@@ -2791,11 +2791,11 @@ function tipitakaDB() {
     for (var ii = 0; ii < 3; ii++) {
       pages = 0;
       var name = [];
-      if(!glblObj.G_XMLFileArray[i][ii]) continue;
+      if(!DPR_G.G_XMLFileArray[i][ii]) continue;
       var fi = i;
-      var hier = glblObj.G_hLetters[ii];
+      var hier = DPR_G.G_hLetters[ii];
 
-      var xmlDoc = loadXMLFile(i+glblObj.G_hLetters[ii],0);
+      var xmlDoc = loadXMLFile(i+DPR_G.G_hLetters[ii],0);
 
       name[0] = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 
@@ -2863,20 +2863,20 @@ function tipitakaDB() {
       //out3.push(pages);
       //~ switch(nik) {
         //~ case 'v':
-          //~ vin[glblObj.G_hLetters[ii]].push(volume);
+          //~ vin[DPR_G.G_hLetters[ii]].push(volume);
           //~ break;
         //~ case 'd':
         //~ case 'm':
         //~ case 'a':
         //~ case 's':
         //~ case 'k':
-          //~ sut[glblObj.G_hLetters[ii]].push(volume);
+          //~ sut[DPR_G.G_hLetters[ii]].push(volume);
           //~ break;
         //~ case 'y':
-          //~ abhi[glblObj.G_hLetters[ii]].push(volume);
+          //~ abhi[DPR_G.G_hLetters[ii]].push(volume);
           //~ break;
         //~ default:
-          //~ etc[glblObj.G_hLetters[ii]].push(volume);
+          //~ etc[DPR_G.G_hLetters[ii]].push(volume);
           //~ break;
       //~ }
       //~ volume++;
@@ -2954,17 +2954,17 @@ function devCommonWords() {
 
   var words = [];
 
-  for (var i in glblObj.G_XMLFileArray) {
+  for (var i in DPR_G.G_XMLFileArray) {
     var nik = i.charAt(0);
     if(nik!='d'&&nik!='m')
       continue;
     for (var ii = 0; ii < 3; ii++) {
       pages = 0;
       var name = [];
-      if(!glblObj.G_XMLFileArray[i][ii]) continue;
+      if(!DPR_G.G_XMLFileArray[i][ii]) continue;
       var fi = i;
 
-      var xmlDoc = loadXMLFile(i+glblObj.G_hLetters[ii],0);
+      var xmlDoc = loadXMLFile(i+DPR_G.G_hLetters[ii],0);
 
       name[0] = xmlDoc.getElementsByTagName("han")[0].textContent.replace(/^[()0-9-. ]*[)0-9-. ]+/,'').replace(/[()0-9-]/g,'').replace(/ +$/,'').toLowerCase();
 
@@ -2999,7 +2999,7 @@ function devCommonWords() {
                 var z = y[se].getElementsByTagName("p");
                 var paras = [];
                 for (var p = 0; p < z.length; p++) { // per p
-                  var wl = toUni(toVel(z[p].textContent).toLowerCase().replace(/\.\.\.pe0\.\.\./g, ' pe ').replace(/\^b\^/g, '').replace(/\^eb\^/g, '').replace(/['’”"]+nti/g, '.m ti').replace(/([aiu])[aiu]['’”"]+ti\b/g, '$1 ti').replace(/"n/g, 'xn').replace(/[ .]+pe[ .]+/g, ' ').replace(/\^[be]b{0,1}\^/g, ' ').replace(/\^a\^[^^]*\^ea\^/g, ' ').replace(/\{[^}]*\}/g, ' ').replace(/[0-9\[\]()]/g, ' ').replace(/\.+([^nmltd])/g, "$1").replace(/ "/g, " ").replace(/n[’”]/g, ".m").replace(/([aiu])[aiu][’”]/g, "$1").replace(/[‘“’”`',{}?;!"-]/g, '').replace(/xn/g, '"n').replace(/\.+pe/g, "").replace(/\.(?![tdnml])/g, " ")).replace(glblObj.G_uniRegExpNSG," ").split(' ');
+                  var wl = toUni(toVel(z[p].textContent).toLowerCase().replace(/\.\.\.pe0\.\.\./g, ' pe ').replace(/\^b\^/g, '').replace(/\^eb\^/g, '').replace(/['’”"]+nti/g, '.m ti').replace(/([aiu])[aiu]['’”"]+ti\b/g, '$1 ti').replace(/"n/g, 'xn').replace(/[ .]+pe[ .]+/g, ' ').replace(/\^[be]b{0,1}\^/g, ' ').replace(/\^a\^[^^]*\^ea\^/g, ' ').replace(/\{[^}]*\}/g, ' ').replace(/[0-9\[\]()]/g, ' ').replace(/\.+([^nmltd])/g, "$1").replace(/ "/g, " ").replace(/n[’”]/g, ".m").replace(/([aiu])[aiu][’”]/g, "$1").replace(/[‘“’”`',{}?;!"-]/g, '').replace(/xn/g, '"n').replace(/\.+pe/g, "").replace(/\.(?![tdnml])/g, " ")).replace(DPR_G.G_uniRegExpNSG," ").split(' ');
 
                   for (var q = 0; q < wl.length; q++) { // per word
                     if(wl[q].length < 3)
