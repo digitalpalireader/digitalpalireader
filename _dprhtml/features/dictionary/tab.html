@@ -20,7 +20,7 @@
               </div>
             </div>
             <input type="text" id="dictin" class="form-control" placeholder="Search term" title="Enter word or partial word using Velthuis or Unicode."
-              onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" data-bind="textInput: query">
+                onkeyup="TextToUniDictionary()"; onkeydown="event.keyCode == 13 && DPRSend.sendDict(1,DPRSend.eventSend(event)); event.keyCode=0;" data-bind="textInput: query">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" id="dictButton" title="Lookup word in selected dictionary." onclick="DPRSend.sendDict(1,DPRSend.eventSend(event));">
                 <i class="fa fa-search" aria-hidden="true"></i>

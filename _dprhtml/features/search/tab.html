@@ -21,7 +21,7 @@
           </div>
         </div>
         <input type="text" id="isearch" class="form-control" placeholder="Search term"
-          data-bind="textInput: searchString" onkeydown="if(event.keyCode==13) DPRSend.sendSearch(); event.keyCode=0;" />
+            data-bind="textInput: searchString"; onkeyup="TextToUniSearch()"; onkeydown="if(event.keyCode==13) searchHandler(); event.keyCode=0;" />
         <div class="input-group-append">
           <button class="btn btn-outline-secondary" type="button" id="searchButton"
             title="Search for word or phrase in selected volumes" onmouseup="DPRSend.sendSearch(DPRSend.eventSend(event));">
