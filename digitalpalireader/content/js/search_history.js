@@ -35,20 +35,20 @@ function simSearchHistory(event){
   document.getElementById('isearch').value = '';
 
   if(searchType == 0 || searchType == 2) {
-    for(var i in G_hLetters){
-      if(searchMAT.search(G_hLetters[i]) > -1)
-        document.getElementById('tsoMAT'+G_hLetters[i]).checked = true;
+    for(var i in glblObj.G_hLetters){
+      if(searchMAT.search(glblObj.G_hLetters[i]) > -1)
+        document.getElementById('tsoMAT'+glblObj.G_hLetters[i]).checked = true;
       else
-        document.getElementById('tsoMAT'+G_hLetters[i]).checked = false;
+        document.getElementById('tsoMAT'+glblObj.G_hLetters[i]).checked = false;
     }
   }
   else {
-    document.getElementById('tsoMAT2m').selectedIndex = G_hNumbers[searchMAT];
+    document.getElementById('tsoMAT2m').selectedIndex = glblObj.G_hNumbers[searchMAT];
     DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0);
   }
 
   if(searchType == 0 || searchType == 5) {
-    for (var i in G_nikToNumber) {
+    for (var i in glblObj.G_nikToNumber) {
       if(searchSet.search(i) > -1)
         document.getElementById('tsoCO'+i).checked = true;
       else
@@ -75,7 +75,7 @@ function simSearchHistory(event){
   if(searchType == 3) {
     var parts = searchPart.split('.');
     for(var i=1;i<parts.length;i++) {
-      document.getElementById('tsoP'+G_listTitles[i-1]).selectedIndex = parts[i];
+      document.getElementById('tsoP'+glblObj.G_listTitles[i-1]).selectedIndex = parts[i];
       DPRXML.updateSearchHierarchy(i);
     }
     document.getElementById('tsoPR').selectedIndex = parts[0];

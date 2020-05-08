@@ -68,7 +68,7 @@ function citation(cite) {
 function reindexPanels() {
   var tops = document.getElementById('dpr-tops').getElementsByTagName('browser');
   for(var x = 0;x< tops.length;x++) {
-    tops[x].contentWindow.G_compare = x+1;
+    tops[x].contentWindow.glblObj.G_compare = x+1;
   }
 }
 function getBrowserCount() {

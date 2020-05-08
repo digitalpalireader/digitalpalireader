@@ -21,7 +21,7 @@ function keyPressed(e) {
 
 
   if (e.charCode == 107) { // k
-    promptData("DPR Keyboard Shortcuts", G_keysList.join('\n'));
+    promptData("DPR Keyboard Shortcuts", glblObj.G_keysList.join('\n'));
     return;
   }
 
@@ -34,49 +34,49 @@ function keyPressed(e) {
 
 }
 
-var G_keysList = [];
+glblObj.G_keysList = [];
 
-G_keysList.push('The following is a current list of all shortcut keys available to the DPR.  Note that these keys will not function if the cursor is located in an input field.');
+glblObj.G_keysList.push('The following is a current list of all shortcut keys available to the DPR.  Note that these keys will not function if the cursor is located in an input field.');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('p\tdisplay previous section');
-G_keysList.push('g\tdisplay current section');
-G_keysList.push('n\tdisplay next section');
+glblObj.G_keysList.push('p\tdisplay previous section');
+glblObj.G_keysList.push('g\tdisplay current section');
+glblObj.G_keysList.push('n\tdisplay next section');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)');
+glblObj.G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('1-6\tswitch between bottom frames');
+glblObj.G_keysList.push('1-6\tswitch between bottom frames');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('s\tsend selected text to convertor');
-G_keysList.push('e\tsend selected text to textpad');
-G_keysList.push('E\tappend selected text to textpad');
+glblObj.G_keysList.push('s\tsend selected text to convertor');
+glblObj.G_keysList.push('e\tsend selected text to textpad');
+glblObj.G_keysList.push('E\tappend selected text to textpad');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push(',\tdisplay previous PED or DPPN entry');
-G_keysList.push('.\tdisplay next PED or DPPN entry');
+glblObj.G_keysList.push(',\tdisplay previous PED or DPPN entry');
+glblObj.G_keysList.push('.\tdisplay next PED or DPPN entry');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('%\tdisplay options configuration');
-G_keysList.push('!\treset options');
-G_keysList.push('#\tdisplay Pali quiz');
-G_keysList.push('*\tdisplay Pali quote');
-G_keysList.push('?\tdisplay help');
-G_keysList.push('@\tdisplay feedback form');
+glblObj.G_keysList.push('%\tdisplay options configuration');
+glblObj.G_keysList.push('!\treset options');
+glblObj.G_keysList.push('#\tdisplay Pali quiz');
+glblObj.G_keysList.push('*\tdisplay Pali quote');
+glblObj.G_keysList.push('?\tdisplay help');
+glblObj.G_keysList.push('@\tdisplay feedback form');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('r\treload the reader');
+glblObj.G_keysList.push('r\treload the reader');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('k\tshow this list of shortcuts');
+glblObj.G_keysList.push('k\tshow this list of shortcuts');
 

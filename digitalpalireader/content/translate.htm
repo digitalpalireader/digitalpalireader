@@ -54,7 +54,7 @@
     }
   }
   function insertWordByWord() {
-    var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(G_uniRegExpNSG,'');
+    var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(glblObj.G_uniRegExpNSG,'');
     var words = conjugateWords(input);
     var out = "";
     for(var i = 0; i < words.length; i++) {

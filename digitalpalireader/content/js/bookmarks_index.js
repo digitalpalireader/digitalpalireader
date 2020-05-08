@@ -4,7 +4,7 @@ function bookmarkSavePrompt(loc,name,desc){
 
   var input = {value: name};
 
-  var result = G_prompts.prompt(null, "Save Bookmark", "Enter Bookmark Name", input, null, check);
+  var result = glblObj.G_prompts.prompt(null, "Save Bookmark", "Enter Bookmark Name", input, null, check);
 
   // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
 

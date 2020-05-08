@@ -55,7 +55,7 @@ var DPRConfig = {
     // translit
     var sets = document.getElementById('set').childNodes;
     for(var i = 0; i < sets.length;i++) {
-      sets[i].label = translit(G_nikFullNames[sets[i].value]);
+      sets[i].label = translit(glblObj.G_nikFullNames[sets[i].value]);
     }
 
   },

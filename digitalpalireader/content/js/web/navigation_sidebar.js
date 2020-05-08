@@ -4,31 +4,31 @@ var DPRNav = {
   changeSet: async function (nik) {
     __navigationTabViewModel.set(nik);
 
-    const prevSet = G_numberToNik[__navigationTabViewModel.prevSetIndex]
-    if (G_hier == 't' && this.limitt(G_nikToNumber2[__navigationTabViewModel.set()])) {
-      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.')
+    const prevSet = glblObj.G_numberToNik[__navigationTabViewModel.prevSetIndex]
+    if (glblObj.G_hier == 't' && this.limitt(glblObj.G_nikToNumber2[__navigationTabViewModel.set()])) {
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + glblObj.G_nikLongName[__navigationTabViewModel.set()] + '.')
       __navigationTabViewModel.set(prevSet);
       return;
     }
-    if (G_hier == 'a' && __navigationTabViewModel.set() == 'g') {
+    if (glblObj.G_hier == 'a' && __navigationTabViewModel.set() == 'g') {
       DPR_Chrome.showErrorToast('Atthakatha not available for Gram.')
       __navigationTabViewModel.set(prevSet);
       return;
     }
-    if (G_hier == 'a' && __navigationTabViewModel.set() == 'b') {
+    if (glblObj.G_hier == 'a' && __navigationTabViewModel.set() == 'b') {
       DPR_Chrome.showErrorToast('Atthakatha not available for Abhidh-s.');
       __navigationTabViewModel.set(prevSet);
       return;
     }
 
-    __navigationTabViewModel.prevSetIndex = G_nikToNumber2[nik];
+    __navigationTabViewModel.prevSetIndex = glblObj.G_nikToNumber2[nik];
 
     this.setBookList(nik);
   },
 
-  getBookName: function (nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
-    if (Object.keys(G_kynames).includes(nik)) {
-      no = G_kynames[nik][no];
+  getBookName: function (nik, ht, no) { // nik is nikaya, ht is a glblObj.G_hier, no will be xml no - 1
+    if (Object.keys(glblObj.G_kynames).includes(nik)) {
+      no = glblObj.G_kynames[nik][no];
       if (ht != 'm') no = no.replace(/([^a]) 1$/, '$1');
     }
     else no++;
@@ -38,14 +38,14 @@ var DPRNav = {
   setBookList: function (nik, book) {
     var titles;
     if (nikvoladi[nik]) titles = nikvoladi[nik];
-    else titles = nikvoladi[nik+G_hier];
+    else titles = nikvoladi[nik+glblObj.G_hier];
     __navigationTabViewModel.navBook.removeAll();
 
     for (var i = 0; i < titles.length; i++) {
       var title;
       var val;
-      if(Object.keys(G_kynames).includes(nik)) {
-        title = G_kynames[nik][titles[i]];
+      if(Object.keys(glblObj.G_kynames).includes(nik)) {
+        title = glblObj.G_kynames[nik][titles[i]];
         val = titles[i]+1;
       }
       else {
@@ -74,12 +74,12 @@ var DPRNav = {
     for (var i = 0; i < titles.length; i++) {
       // menu
       let menuValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
-      let menuText = translit((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : G_nikLongName[nik] + ' ' + titles[i]);
+      let menuText = translit((nik == 'k' || nik == 'y' || nik == 'n') ? glblObj.G_kynames[nik][titles[i]] : glblObj.G_nikLongName[nik] + ' ' + titles[i]);
 
       __searchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
 
       // check boxes
-      const label = ((nik == 'k' || nik == 'y' || nik == 'n') ? G_kynames[nik][titles[i]] : (typeof (titles[i]) == 'number' ? 'Book ' : '') + titles[i]);
+      const label = ((nik == 'k' || nik == 'y' || nik == 'n') ? glblObj.G_kynames[nik][titles[i]] : (typeof (titles[i]) == 'number' ? 'Book ' : '') + titles[i]);
       const cbValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
 
     if (i >= Math.ceil(titles.length / 2)) {
@@ -94,15 +94,15 @@ var DPRNav = {
 
   switchhier: function (htmp) {
 
-    if (G_hier == htmp) return;
+    if (glblObj.G_hier == htmp) return;
 
     if (htmp == 't' && this.limitt(__navigationTabViewModel.prevSetIndex)) {
-      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.');
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + glblObj.G_nikLongName[__navigationTabViewModel.set()] + '.');
       __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
     if (htmp == 'a' && __navigationTabViewModel.prevSetIndex > 7) {
-      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + G_nikLongName[__navigationTabViewModel.set()] + '.');
+      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + glblObj.G_nikLongName[__navigationTabViewModel.set()] + '.');
       __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
@@ -112,7 +112,7 @@ var DPRNav = {
       return;
     }
 
-    G_hier = htmp;
+    glblObj.G_hier = htmp;
     __navigationTabViewModel.prevMat = htmp;
 
     var book = __navigationTabViewModel.book();
@@ -219,12 +219,12 @@ var DPRNav = {
             place = searchSet.split('').join(',');
             break;
           case 1:
-            place = G_nikLongName[searchSet];
+            place = glblObj.G_nikLongName[searchSet];
             break;
           case 2:
           case 3:
           case 4:
-            place = G_nikLongName[searchSet] + ' ' + searchBook.split('').join(',');
+            place = glblObj.G_nikLongName[searchSet] + ' ' + searchBook.split('').join(',');
             break;
         }
 
@@ -319,7 +319,7 @@ var DPRNav = {
     $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
     DPROpts.tipitakaOptions();
-    document.getElementById('tsoSETm').selectedIndex = G_nikToNumber[nik];
+    document.getElementById('tsoSETm').selectedIndex = glblObj.G_nikToNumber[nik];
     this.setSearchBookList();
 
     document.getElementById('tsoBOOKm').selectedIndex = book - 1;

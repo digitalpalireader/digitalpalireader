@@ -35,7 +35,7 @@ function DPR_keypress(e) {
 
     var input = { value: "" };
 
-    var result = G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
+    var result = glblObj.G_prompts.prompt(null, "Shorthand Link", "Enter link (DN 1.1, etc.)", input, 'open in new tab', check);
 
     // result is true if OK is pressed, false if Cancel. input.value holds the value of the edit field if "OK" was pressed.
 

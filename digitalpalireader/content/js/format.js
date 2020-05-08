@@ -3,18 +3,18 @@
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 //«»
-var G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
-var G_uniRegExpG = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
-var G_uniRegExpN = /[^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
-var G_uniRegExpNG = /[^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
-var G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
-var G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
+glblObj.G_uniRegExp = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
+glblObj.G_uniRegExpG = /[AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
+glblObj.G_uniRegExpN = /[^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
+glblObj.G_uniRegExpNG = /[^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
+glblObj.G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
+glblObj.G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
 
 function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
 
-  G_lastcolour = 0; // reset colour changing
+  glblObj.G_lastcolour = 0; // reset colour changing
 
   // remove sutta bolding
 
@@ -301,7 +301,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       var ptype = parap[1];
       var permalink = DPR_PAL.fixupDprBaseUrl(parap[2].replace(/_/g,' '));
       if(convout.length>1) convout += '\n\n';
-      finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer '+(G_thisPara && G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
+      finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_prefs['showPermalinks'] ? '<span class="pointer '+(glblObj.G_thisPara && glblObj.G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
       saveout += '<p class="paratype'+ptype+'"'+'>';
       paran++;
     }
@@ -416,8 +416,8 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   book = getBookName(nikaya,hiert,book-1);
   var title = '',save = '',raw = '';
 
-  if (G_nikFullFullNames[nikaya]) {
-    var nn = '<b>'+G_nikFullFullNames[nikaya]+'</b>';
+  if (glblObj.G_nikFullFullNames[nikaya]) {
+    var nn = '<b>'+glblObj.G_nikFullFullNames[nikaya]+'</b>';
     title += (click?wrapLink(nn,click):nn) + ', ';
   }
 
@@ -494,7 +494,7 @@ function permalinkClick(link,url) {
 
 var copyToClipboard = DPR_PAL.copyToClipboard;
 
-var G_alertFlashStart = 0;
+glblObj.G_alertFlashStart = 0;
 
 function alertFlash(text,color) {
   let fn;
@@ -522,11 +522,11 @@ function alertFlash(text,color) {
 
 
 function fadeInOut(AID,id, sIn, L, sOut) {
-  if(AID != G_alertFlashStart) return;
+  if(AID != glblObj.G_alertFlashStart) return;
   fadeIn(AID,id,sIn,L,sOut);
 }
 function fadeIn(AID,id,speed,L,sOut) {
-  if(AID != G_alertFlashStart) return;
+  if(AID != glblObj.G_alertFlashStart) return;
   if(parseFloat(document.getElementById(id).style.opacity) < 1) {
     document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)+0.1;
     setTimeout(function() { fadeIn(AID,id,speed*0.9,L,sOut); }, speed*0.9);
@@ -538,7 +538,7 @@ function fadeIn(AID,id,speed,L,sOut) {
 }
 
 function fadeOut(AID,id,speed) {
-  if(AID != G_alertFlashStart) return;
+  if(AID != glblObj.G_alertFlashStart) return;
   if(parseFloat(document.getElementById(id).style.opacity) > 0.1) {
     document.getElementById(id).style.opacity = parseFloat(document.getElementById(id).style.opacity)-0.1;
     setTimeout(function() { fadeOut(AID,id,speed*0.9); }, speed*0.9);

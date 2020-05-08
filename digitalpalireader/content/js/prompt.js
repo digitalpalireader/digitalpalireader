@@ -1,4 +1,4 @@
-var G_prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
+glblObj.G_prompts = Components.classes["@mozilla.org/embedcomp/prompt-service;1"]
                         .getService(Components.interfaces.nsIPromptService);
 
 function aboutPrompt() {
@@ -7,7 +7,7 @@ function aboutPrompt() {
 
   var selected = {};
 
-  var result = G_prompts.select(null, 'Digital Pali Reader v. ' + version, 'For more information:', items.length, items, selected);
+  var result = glblObj.G_prompts.select(null, 'Digital Pali Reader v. ' + version, 'For more information:', items.length, items, selected);
 
   // result is true if OK was pressed, false if cancel. selected is the index of the item array
   // that was selected. Get the item using items[selected].value.
@@ -25,21 +25,21 @@ function aboutPrompt() {
 }
 
 function promptConfirm(title, question) {
-  return G_prompts.confirm(null, title, question);
+  return glblObj.G_prompts.confirm(null, title, question);
 
 // returns true if OK was clicked, and false if cancel was clicked
 }
 
 function promptData(title,data) {
-  G_prompts.alert(null, title, data);
+  glblObj.G_prompts.alert(null, title, data);
 }
 
 function promptThreeButton(title,data,one,two,three) {
   var check = {value: false};                  // default the checkbox to false
-  var flags = G_prompts.BUTTON_POS_0 * G_prompts.BUTTON_TITLE_IS_STRING +
-            G_prompts.BUTTON_POS_1 * G_prompts.BUTTON_TITLE_IS_STRING  +
-            G_prompts.BUTTON_POS_2 * G_prompts.BUTTON_TITLE_IS_STRING;
-  return G_prompts.confirmEx(null, title, data,flags,one,two,three,null,check);
+  var flags = glblObj.G_prompts.BUTTON_POS_0 * glblObj.G_prompts.BUTTON_TITLE_IS_STRING +
+            glblObj.G_prompts.BUTTON_POS_1 * glblObj.G_prompts.BUTTON_TITLE_IS_STRING  +
+            glblObj.G_prompts.BUTTON_POS_2 * glblObj.G_prompts.BUTTON_TITLE_IS_STRING;
+  return glblObj.G_prompts.confirmEx(null, title, data,flags,one,two,three,null,check);
 }
 
 function DPR_restartFirefox() {
@@ -62,47 +62,47 @@ function installSetPrompt(set, setName,id) {
 }
 
 
-var G_keysList = [];
+glblObj.G_keysList = [];
 
-G_keysList.push('The following is a current list of all shortcut keys available to the DPR.  Note that these keys will not function if the cursor is located in an input field.');
+glblObj.G_keysList.push('The following is a current list of all shortcut keys available to the DPR.  Note that these keys will not function if the cursor is located in an input field.');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('p\tdisplay previous section');
-G_keysList.push('g\tdisplay current section');
-G_keysList.push('n\tdisplay next section');
-G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)');
+glblObj.G_keysList.push('p\tdisplay previous section');
+glblObj.G_keysList.push('g\tdisplay current section');
+glblObj.G_keysList.push('n\tdisplay next section');
+glblObj.G_keysList.push('q\tenter quick reference (DN, MN, SN, & AN only)');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('d\tshow dictionary');
-G_keysList.push('c\tshow convertor');
-G_keysList.push('t\tshow textpad');
+glblObj.G_keysList.push('d\tshow dictionary');
+glblObj.G_keysList.push('c\tshow convertor');
+glblObj.G_keysList.push('t\tshow textpad');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('s\tsend selected text to convertor');
-G_keysList.push('e\tsend selected text to textpad');
-G_keysList.push('E\tappend selected text to textpad');
+glblObj.G_keysList.push('s\tsend selected text to convertor');
+glblObj.G_keysList.push('e\tsend selected text to textpad');
+glblObj.G_keysList.push('E\tappend selected text to textpad');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push(',\tdisplay previous PED or DPPN entry');
-G_keysList.push('.\tdisplay next PED or DPPN entry');
+glblObj.G_keysList.push(',\tdisplay previous PED or DPPN entry');
+glblObj.G_keysList.push('.\tdisplay next PED or DPPN entry');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('%\tdisplay options configuration');
-G_keysList.push('!\treset options');
-G_keysList.push('#\tdisplay Pali quiz');
-G_keysList.push('*\tdisplay Pali quote');
-G_keysList.push('?\tdisplay help');
-G_keysList.push('@\tdisplay feedback form');
+glblObj.G_keysList.push('%\tdisplay options configuration');
+glblObj.G_keysList.push('!\treset options');
+glblObj.G_keysList.push('#\tdisplay Pali quiz');
+glblObj.G_keysList.push('*\tdisplay Pali quote');
+glblObj.G_keysList.push('?\tdisplay help');
+glblObj.G_keysList.push('@\tdisplay feedback form');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('r\treload the reader');
+glblObj.G_keysList.push('r\treload the reader');
 
-G_keysList.push('');
+glblObj.G_keysList.push('');
 
-G_keysList.push('k\tshow this list of shortcuts');
+glblObj.G_keysList.push('k\tshow this list of shortcuts');

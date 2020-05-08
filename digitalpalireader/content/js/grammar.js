@@ -545,11 +545,11 @@ function getConjugation(form,bare) {
 function makeGrammarTerms([trans,type,deca,word,meta]) {
   switch(type) {
     case 'n':
-      return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':G_vibhatti[deca[1]]+' '+G_vacana[deca[2]]);
+      return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':glblObj.G_vibhatti[deca[1]]+' '+glblObj.G_vacana[deca[2]]);
     case 'p':
-      return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':G_vibhatti[deca[1]]+' '+G_vacana[deca[2]]);
+      return (yt[meta['orig']]?'('+yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':glblObj.G_vibhatti[deca[1]]+' '+glblObj.G_vacana[deca[2]]);
     case 'v':
-      return '(v.) '+(deca == null?'indeclinable':G_tenses[deca[0]]+' '+G_persons[deca[1]]+' person '+G_vacana[deca[2]]);
+      return '(v.) '+(deca == null?'indeclinable':glblObj.G_tenses[deca[0]]+' '+glblObj.G_persons[deca[1]]+' person '+glblObj.G_vacana[deca[2]]);
     default:
       return (yt[meta['orig']]?yt[meta['orig']][1]:'');
   }
@@ -569,10 +569,10 @@ function typeAndGender(t) {
   return 'noun, '+out.join (', ');
 }
 
-var G_persons = ['','3rd','2nd','1st'];
-var G_vibhatti = ['','nominative','accusative','instrumental','dative','ablative','genitive','locative','vocative'];
-var G_vacana = ['','singular','plural'];
-var G_tenses = ['','present','imperative','optative','future','past','causative'];
+glblObj.G_persons = ['','3rd','2nd','1st'];
+glblObj.G_vibhatti = ['','nominative','accusative','instrumental','dative','ablative','genitive','locative','vocative'];
+glblObj.G_vacana = ['','singular','plural'];
+glblObj.G_tenses = ['','present','imperative','optative','future','past','causative'];
 
 
 // used in word-by-word translation

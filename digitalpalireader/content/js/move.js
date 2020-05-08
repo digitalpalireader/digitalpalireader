@@ -37,7 +37,7 @@ function moveframec() // open close control panel
 {
 
 }
-var G_cpspeed = 50;
+glblObj.G_cpspeed = 50;
 function closeCP(wR) {
 
 }

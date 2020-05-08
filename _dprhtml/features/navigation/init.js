@@ -65,7 +65,7 @@ class NavigationTabViewModel {
 
   initializeSets() {
     Object
-    .entries(G_nikFullNames)
+    .entries(glblObj.G_nikFullNames)
     .forEach(([value, label]) => this.navset.push({ value, label }));
   }
 
@@ -89,7 +89,7 @@ class NavigationTabViewModel {
   }
 
   navPartOptionsEmpty(opts) {
-    return !(opts().length === 0 || (opts().length === 1 && opts()[0].label === G_unnamed));
+    return !(opts().length === 0 || (opts().length === 1 && opts()[0].label === glblObj.G_unnamed));
   }
 
   computePartInfo(part) {

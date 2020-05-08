@@ -5,7 +5,7 @@
 <window id="DPR" onload="onLoad()" title="&digitalpalireader.title;"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="application/x-javascript">
-  var G_count_browsers = 1;
+  glblObj.G_count_browsers = 1;
   var devCheck = 0;
   function minDict(){
     if (document.getElementById('bottom-box').collapsed === true)
