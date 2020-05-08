@@ -123,8 +123,6 @@ for(var w = 0; w < reorder.length; w++) {
 }
 
 function sortaz(mydata){  // sort pali array
-  appInsights.trackEvent({ name: 'sortaz',  properties: { }});
-
   mydata = mydata.sort(comparePaliAlphabet);
   for (var i in mydata) {
     mydata[i] = mydata[i].replace(/^.*###/,''); // remove sorted words, return the rest

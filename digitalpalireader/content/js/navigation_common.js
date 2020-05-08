@@ -838,8 +838,8 @@ function convertShortLink(place) {
     arr['snp'] = 5;
     arr['vv'] = 6;
     arr['pv'] = 7;
-    arr['th'] = 8;
     arr['thi'] = 9;
+    arr['th'] = 8;
     arr['apa'] = 10;
     arr['api'] = 11;
     arr['bv'] = 12;
