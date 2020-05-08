@@ -485,6 +485,122 @@ function toMyanmar(input,type) {
 
 
 
+function toBengali(input,type) {
+
+  input = input.toLowerCase().replace(/ṁ/g,'ṃ');
+
+  var vowel = [];
+  vowel['a'] = " অ";
+  vowel['i'] = " ই";
+  vowel['u'] = " উ";
+  vowel['ā'] = " আ";
+  vowel['ī'] = " ঈ";
+  vowel['ū'] = " ঊ";
+  vowel['e'] = " এ";
+  vowel['o'] = " ও";
+
+  var bengalir = [];
+
+  bengalir['ā'] = 'া';
+  bengalir['i'] = 'ি';
+  bengalir['ī'] = 'ী';
+  bengalir['u'] = 'ু';
+  bengalir['ū'] = 'ূ';
+  bengalir['e'] = 'े';
+  bengalir['o'] = 'ो';
+  bengalir['ṃ'] = 'ং';
+  bengalir['k'] = 'ক';
+  bengalir['kh'] = 'খ';
+  bengalir['g'] = 'গ';
+  bengalir['gh'] = 'ঘ';
+  bengalir['ṅ'] = 'ঙ';
+  bengalir['c'] = 'চ';
+  bengalir['ch'] = 'ছ';
+  bengalir['j'] = 'জ';
+  bengalir['jh'] = 'ঝ';
+  bengalir['ñ'] = 'ঞ';
+  bengalir['ṭ'] = 'ট';
+  bengalir['ṭh'] = 'ঠ';
+  bengalir['ḍ'] = 'ড';
+  bengalir['ḍh'] = 'ঢ';
+  bengalir['ṇ'] = 'ণ';
+  bengalir['t'] = 'ত';
+  bengalir['th'] = 'থ';
+  bengalir['d'] = 'দ';
+  bengalir['dh'] = 'ধ';
+  bengalir['n'] = 'ন';
+  bengalir['p'] = 'প';
+  bengalir['ph'] = 'ফ';
+  bengalir['b'] = 'ব';
+  bengalir['bh'] = 'ভ';
+  bengalir['m'] = 'ম';
+  bengalir['y'] = 'য়';
+  bengalir['r'] = 'র';
+  bengalir['l'] = 'ল';
+  bengalir['ḷ'] = 'ল';
+  bengalir['v'] = 'ব';
+  bengalir['s'] = 'শ';
+  bengalir['h'] = 'হ';
+
+  var im = '';
+  var i0 = '';
+  var i1 = '';
+  var i2 = '';
+  var i3 = '';
+  var i4 = '';
+  var i5 = '';
+  var output = '';
+  var cons = 0;
+  var i = 0;
+  var bstop = '্';
+
+  input = input.replace(/\&quot;/g, '`');
+
+  while (i < input.length) {
+    im = input.charAt(i-2);
+    i0 = input.charAt(i-1);
+    i1 = input.charAt(i);
+    i2 = input.charAt(i+1);
+    i3 = input.charAt(i+2);
+    i4 = input.charAt(i+3);
+    i5 = input.charAt(i+4);
+
+    if (i == 0 && vowel[i1]) { // first letter vowel
+      output += vowel[i1];
+      i += 1;
+    }
+    else if (i2 == 'h' && bengalir[i1+i2]) {    // two character match
+      output += bengalir[i1+i2];
+      if (i3 && !vowel[i3] && i2 != 'ṃ') {
+        output += bstop;
+      }
+      i += 2;
+    }
+    else if (bengalir[i1]) {  // one character match except a
+      output += bengalir[i1];
+      if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
+        output += bstop;
+      }
+      i++;
+    }
+    else if (i1 != 'a') {
+      if (cons[i0] || (i0 == 'h' && cons[im])) output += bstop; // end word consonant
+      output += i1;
+      i++;
+      if(vowel[i2]) {
+        output+=vowel[i2];
+        i++;
+      }
+    }
+    else i++; // a
+  }
+  if (cons[i1]) output += bstop;
+  output = output.replace(/\`+/g, '"');
+  return output;
+}
+
+
+
 function toDeva(input,type) {
 
   input = input.toLowerCase().replace(/ṁ/g,'ṃ');
@@ -793,6 +909,9 @@ function translit(data) {
     break;
     case 4:
       out = toSin(data);
+    break;
+    case 5:
+      out = toBengali(data);
     break;
   }
   return out;

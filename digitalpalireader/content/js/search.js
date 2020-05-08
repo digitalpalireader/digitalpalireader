@@ -5,16 +5,16 @@
 var MD = DPR_PAL.contentDocument;
 var MW = DPR_PAL.contentWindow;
 
-var G_searchStartTime;
+DPR_G.G_searchStartTime;
 
-var G_searchType;
-var G_searchString;
-var G_searchMAT;
-var G_searchSet;
-var G_searchBook;
-var G_searchPart;
-var G_searchRX;
-var G_searchLink;
+DPR_G.G_searchType;
+DPR_G.G_searchString;
+DPR_G.G_searchMAT;
+DPR_G.G_searchSet;
+DPR_G.G_searchBook;
+DPR_G.G_searchPart;
+DPR_G.G_searchRX;
+DPR_G.G_searchLink;
 
 function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
   DPR_PAL_Search_ShowCancelButton();
@@ -32,13 +32,13 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
   clearDivs('search');
   resetvalues();
   if(searchString) { // update url
-    G_searchType = searchType;
-    G_searchString = searchString;
-    G_searchMAT = searchMAT;
-    G_searchSet = searchSet;
-    G_searchBook = ','+searchBook+',';
-    G_searchPart = searchPart;
-    G_searchRX = searchRX;
+    DPR_G.G_searchType = searchType;
+    DPR_G.G_searchString = searchString;
+    DPR_G.G_searchMAT = searchMAT;
+    DPR_G.G_searchSet = searchSet;
+    DPR_G.G_searchBook = ','+searchBook+',';
+    DPR_G.G_searchPart = searchPart;
+    DPR_G.G_searchRX = searchRX;
 
     var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX);
 
@@ -59,70 +59,70 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
       var option = options[i].split('=');
       switch(option[0]) {
         case 'type':
-          G_searchType = parseInt(option[1]);
+          DPR_G.G_searchType = parseInt(option[1]);
         break;
         case 'query':
-          G_searchString = decodeURIComponent(option[1]);
+          DPR_G.G_searchString = decodeURIComponent(option[1]);
         break;
         case 'MAT':
-          G_searchMAT = option[1];
+          DPR_G.G_searchMAT = option[1];
         break;
         case 'set':
-          G_searchSet = option[1];
+          DPR_G.G_searchSet = option[1];
         break;
         case 'book':
-          G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
+          DPR_G.G_searchBook = ','+option[1]+','; // add commas so each will be findable with comma at end and beginning
         break;
         case 'part':
-          G_searchPart = option[1];
+          DPR_G.G_searchPart = option[1];
         break;
         case 'rx':
-          G_searchRX = (option[1] == 'true');
+          DPR_G.G_searchRX = (option[1] == 'true');
         break;
       }
     }
   }
 
-  if(!G_searchString) {
+  if(!DPR_G.G_searchString) {
     var check = {value: false};                  // default the checkbox to false
     var input = {value: ''};
-    var result = G_prompts.prompt(null, "Enter Query", "Enter query for custom search:", input, null, check);
+    var result = DPR_G.G_prompts.prompt(null, "Enter Query", "Enter query for custom search:", input, null, check);
     if(!result)
       return;
     if(!input.value)
       return;
-    G_searchString = input.value;
+    DPR_G.G_searchString = input.value;
   }
 
   var st = [];
   var matst = [];
-  for (var i in G_searchMAT) matst.push(G_searchMAT[i]);
+  for (var i in DPR_G.G_searchMAT) matst.push(DPR_G.G_searchMAT[i]);
 
   st[0] = 'Multiple Sets';
-  st[1] = G_nikLongName[G_searchSet] + ' Books';
-  st[2] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1);
-  st[3] = G_nikLongName[G_searchSet] + ' ' + G_searchBook.slice(1,-1) + ' (partial)';
+  st[1] = DPR_G.G_nikLongName[DPR_G.G_searchSet] + ' Books';
+  st[2] = DPR_G.G_nikLongName[DPR_G.G_searchSet] + ' ' + DPR_G.G_searchBook.slice(1,-1);
+  st[3] = DPR_G.G_nikLongName[DPR_G.G_searchSet] + ' ' + DPR_G.G_searchBook.slice(1,-1) + ' (partial)';
   st[5] = 'ATI Translations';
 
-  if(G_searchType == 0 && /\|/.test(G_searchBook)) // custom search
+  if(DPR_G.G_searchType == 0 && /\|/.test(DPR_G.G_searchBook)) // custom search
     st[0]+=' (custom)';
 
 
   // tab title
 
-  var tabT = 'Search: \'' + (G_searchRX?toUniRegEx(G_searchString):toUni(G_searchString)) + '\' in ' + st[G_searchType];
+  var tabT = 'Search: \'' + (DPR_G.G_searchRX?toUniRegEx(DPR_G.G_searchString):toUni(DPR_G.G_searchString)) + '\' in ' + st[DPR_G.G_searchType];
 
   DPR_PAL_Search_SetTitle(tabT);
 
-  if (/^[TPVMtpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(G_searchString)) {  // page search
-    G_searchString = G_searchString.toUpperCase();
+  if (/^[TPVMtpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(DPR_G.G_searchString)) {  // page search
+    DPR_G.G_searchString = DPR_G.G_searchString.toUpperCase();
   }
-  else if(G_searchType != 5) {
-    G_searchString = G_searchString.toLowerCase();
+  else if(DPR_G.G_searchType != 5) {
+    DPR_G.G_searchString = DPR_G.G_searchString.toLowerCase();
   }
 
 
-  switch(G_searchType) {
+  switch(DPR_G.G_searchType) {
     case 0:
       pausesall();
     break;
@@ -160,7 +160,7 @@ function DPR_PAL_Search_ScrollSearch(what) {
 }
 
 function resetvalues() {
-  G_searchFileArray = [];
+  DPR_G.G_searchFileArray = [];
   exword.length=0;
   stopsearch = 0;
   bookperm = 1;
@@ -180,8 +180,8 @@ function finishSearch() {
   DPR_PAL_Search_HideProgressBar();
   DPR_PAL_Search_HideCancelButton();
 
-  const searchLink = 'dpr:search?type='+G_searchType+'&query=' + toVel(G_searchString) + '&MAT=' + G_searchMAT + '&set=' + G_searchSet + '&book=' + G_searchBook.slice(1,-1) + '&part=' + G_searchPart + '&rx=' + G_searchRX;
-  G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
+  const searchLink = 'dpr:search?type='+DPR_G.G_searchType+'&query=' + toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
+  DPR_G.G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
 
   DPR_PAL_Search_AddCopyPermaLinkElement();
 
@@ -193,7 +193,7 @@ function finishSearch() {
 
 }
 
-var G_searchFileArray = [];
+DPR_G.G_searchFileArray = [];
 
 var bookfile = '';
 var count = 0;
@@ -230,111 +230,111 @@ function DPR_PAL_Search_ClearSearchResults() {
 
 function pausesall()
 {
-  // make G_searchFileArray
-  var which = G_searchType;
+  // make DPR_G.G_searchFileArray
+  var which = DPR_G.G_searchType;
 
-  if(/\|/.test(G_searchBook)) { // custom search
-    G_searchBook = G_searchBook.replace(/\|/g,',|,');
-    var cbooks = G_searchBook.split('|');
+  if(/\|/.test(DPR_G.G_searchBook)) { // custom search
+    DPR_G.G_searchBook = DPR_G.G_searchBook.replace(/\|/g,',|,');
+    var cbooks = DPR_G.G_searchBook.split('|');
     var cniks = [];
-    for(var i in G_searchSet) {
-      cniks[G_searchSet[i]] = i;
+    for(var i in DPR_G.G_searchSet) {
+      cniks[DPR_G.G_searchSet[i]] = i;
     }
   }
 
-  for(var w in G_XMLFileArray) {
-    if (G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
+  for(var w in DPR_G.G_XMLFileArray) {
+    if (DPR_G.G_searchSet.indexOf(w.charAt(0)) == -1) continue; // don't add unchecked collections
 
     for (var x = 0; x < 3; x++) {
-      if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+      if(DPR_G.G_searchMAT.indexOf(DPR_G.G_hLetters[x]) > -1 && DPR_G.G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
         if(cbooks && cbooks[cniks[w.charAt(0)]] && cbooks[cniks[w.charAt(0)]].indexOf(','+w.substring(1)+',') == -1) continue; // skip unspecified books for custom search
 
-        G_searchFileArray.push(w+G_hLetters[x]);
+        DPR_G.G_searchFileArray.push(w+DPR_G.G_hLetters[x]);
       }
     }
   }
 
-  if(G_searchFileArray.length == 0) {
+  if(DPR_G.G_searchFileArray.length == 0) {
     alert('No books in selection');
     return;
   }
 
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
 
   DPR_PAL_Search_ClearSearchResults();
 
-  DPR_PAL_SearchAddSearchTermSectionLink(G_searchRX ? G_searchString : toUni(G_searchString));
+  DPR_PAL_SearchAddSearchTermSectionLink(DPR_G.G_searchRX ? DPR_G.G_searchString : toUni(DPR_G.G_searchString));
 
-  for (var i = 0; i < G_numberToNik.length; i++) {
-    if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-    DPR_PAL_Search_AddSectionLink(G_numberToNik[i]);
+  for (var i = 0; i < DPR_G.G_numberToNik.length; i++) {
+    if (DPR_G.G_searchSet.indexOf(DPR_G.G_numberToNik[i]) == -1) continue; // don't add unchecked collections
+    DPR_PAL_Search_AddSectionLink(DPR_G.G_numberToNik[i]);
   }
 
-  DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
+  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
   importXMLs(1);
 }
 
 function pausetwo() { // init function for single collection
 
-  // make G_searchFileArray
-  var which = G_searchType;
-  var nikaya = G_searchSet;
+  // make DPR_G.G_searchFileArray
+  var which = DPR_G.G_searchType;
+  var nikaya = DPR_G.G_searchSet;
 
-  for(var w in G_XMLFileArray) {
+  for(var w in DPR_G.G_XMLFileArray) {
     if (w.charAt(0) != nikaya) continue; // only this collection
-    if (G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books
+    if (DPR_G.G_searchBook.indexOf(','+w.substring(1)+',') == -1) continue; // skip unchecked books
 
     for (var x = 0; x < 3; x++) {
-      if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
-        G_searchFileArray.push(w+G_hLetters[x]);
+      if(DPR_G.G_searchMAT.indexOf(DPR_G.G_hLetters[x]) > -1 && DPR_G.G_XMLFileArray[w][x] == 1) { // this hier is checked and the file exists in this hier
+        DPR_G.G_searchFileArray.push(w+DPR_G.G_hLetters[x]);
       }
     }
   }
 
-  if(G_searchFileArray.length == 0) {
+  if(DPR_G.G_searchFileArray.length == 0) {
     alert('No books in selection');
     return;
   }
 
-  DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
+  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
 
   DPR_PAL_Search_ClearSearchResults();
 
-  DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]);
+  DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]);
 
   importXMLs(2);
 }
 
 function pausethree() {
 
-  var which = G_searchType;
-  var nikaya = G_searchSet;
-  var book = G_searchBook.slice(1,-1);
+  var which = DPR_G.G_searchType;
+  var nikaya = DPR_G.G_searchSet;
+  var book = DPR_G.G_searchBook.slice(1,-1);
 
   var nikbook = nikaya+book;
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
   if(which == 2) { // single book, multiple hier
     for (var x = 0; x < 3; x++) {
-      if(G_searchMAT.indexOf(G_hLetters[x]) > -1 && G_XMLFileArray[nikbook][x] == 1) { // this hier is checked and the file exists in this hier
-        G_searchFileArray.push(nikbook+G_hLetters[x]);
+      if(DPR_G.G_searchMAT.indexOf(DPR_G.G_hLetters[x]) > -1 && DPR_G.G_XMLFileArray[nikbook][x] == 1) { // this hier is checked and the file exists in this hier
+        DPR_G.G_searchFileArray.push(nikbook+DPR_G.G_hLetters[x]);
       }
     }
   }
   else { // single book (partial)
-    G_searchFileArray = [nikbook+G_searchMAT];
+    DPR_G.G_searchFileArray = [nikbook+DPR_G.G_searchMAT];
   }
 
-  if(G_searchFileArray.length == 0) {
+  if(DPR_G.G_searchFileArray.length == 0) {
     alert('No books in selection');
     return;
   }
 
-  DPR_PAL_Search_MakeProgressTable(G_searchFileArray.length - 1);
+  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
-  DPR_PAL_Search_AddSearchTermSectionInfo(G_nikLongName[nikaya]+' '+book + (G_searchPart != '1'?' (partial)':''));
+  DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]+' '+book + (DPR_G.G_searchPart != '1'?' (partial)':''));
 
   importXMLs(3);
 }
@@ -358,12 +358,12 @@ function importXMLs(cnt)
   var endloop = 0;
   var yellowcount = 0;
 
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
   var stringra = new Array();
 
   if (cnt == 1) // whole tipitaka or multiple collections
   {
-    bookfile = G_searchFileArray[qz];
+    bookfile = DPR_G.G_searchFileArray[qz];
     newnikaya = bookfile.charAt(0);
     if (nikayaat != newnikaya)
     {
@@ -386,9 +386,9 @@ function importXMLs(cnt)
 
     DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount);
 
-    if (qz < G_searchFileArray.length-1)
+    if (qz < DPR_G.G_searchFileArray.length-1)
     {
-      nextbookfile = G_searchFileArray[qz+1];
+      nextbookfile = DPR_G.G_searchFileArray[qz+1];
       if (nextbookfile.charAt(0) != nikayaat) $('#stfH'+nikayaat).css('color',DPR_prefs['colsel']);
       qz++;
       bounce(1);
@@ -402,10 +402,10 @@ function importXMLs(cnt)
   }
   else if (cnt == 2) // nikaya
   {
-    var nikaya = G_searchSet;
+    var nikaya = DPR_G.G_searchSet;
 
 
-    bookfile = G_searchFileArray[qz];
+    bookfile = DPR_G.G_searchFileArray[qz];
     bookat = bookfile.substring(1,bookfile.length-1);
     bookperm = bookat;
     hiert = bookfile.charAt(bookfile.length-1);
@@ -415,7 +415,7 @@ function importXMLs(cnt)
 
     DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 
-    if (qz < G_searchFileArray.length-1)
+    if (qz < DPR_G.G_searchFileArray.length-1)
     {
       qz++;
       bounce(2);
@@ -429,10 +429,10 @@ function importXMLs(cnt)
   }
   else if (cnt == 3) // this book
   {
-    var nikaya = G_searchSet;
-    var book = G_searchBook.slice(1,-1);
+    var nikaya = DPR_G.G_searchSet;
+    var book = DPR_G.G_searchBook.slice(1,-1);
 
-    bookfile = G_searchFileArray[qz];
+    bookfile = DPR_G.G_searchFileArray[qz];
     hiert = bookfile.charAt(bookfile.length-1);
 
     var xmlDoc = loadXMLFile(bookfile,0);
@@ -441,7 +441,7 @@ function importXMLs(cnt)
 
     DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
 
-    if (qz < G_searchFileArray.length-1)
+    if (qz < DPR_G.G_searchFileArray.length-1)
     {
       qz++;
       bounce(3);
@@ -480,7 +480,7 @@ function createTables(xmlDoc,hiert)
       var option = options[i].split('=');
       switch(option[0]) {
         case 'rx':
-          G_searchRX = (option[1] == 'true');
+          DPR_G.G_searchRX = (option[1] == 'true');
         break;
       }
     }
@@ -489,11 +489,11 @@ function createTables(xmlDoc,hiert)
   //alert(bookload);
   var u = xmlDoc.getElementsByTagName("h0");
 
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
 
   var gotstring;
-  var nikaya = G_searchSet;
-  var book = G_searchBook.slice(1,-1);
+  var nikaya = DPR_G.G_searchSet;
+  var book = DPR_G.G_searchBook.slice(1,-1);
 
   if (count == 1 || count == 2) {
     book = bookperm;
@@ -554,38 +554,38 @@ function createTables(xmlDoc,hiert)
 
   var yesplus = getstring.indexOf('+'); // look for multi matches
   if (yesplus >= 0) {
-    stringra = (G_searchRX?toUniRegEx(getstring):toUni(getstring)).split('+');
+    stringra = (DPR_G.G_searchRX?toUniRegEx(getstring):toUni(getstring)).split('+');
   }
   else {
     stringra[0] = getstring;
-    if(G_searchRX) getstring = toUniRegEx(getstring);
+    if(DPR_G.G_searchRX) getstring = toUniRegEx(getstring);
     else getstring = toUni(getstring);
   }
   var sraout = stringra.join('#');
   sraout = sraout.replace(/"/g, '`');
-  //if(G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
+  //if(DPR_G.G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
 
   var part;
-  if(G_searchPart != '1') part = G_searchPart.split('.');
+  if(DPR_G.G_searchPart != '1') part = DPR_G.G_searchPart.split('.');
 
   for (var sx = 0; sx < u.length; sx++) // per h0
   {
 
-    if(G_searchType == 3 && part[0] >= 0 && sx != parseInt(part[1])) continue;
+    if(DPR_G.G_searchType == 3 && part[0] >= 0 && sx != parseInt(part[1])) continue;
 
     var v = u[sx].getElementsByTagName("h1");
 
     for (var sy = 0; sy < v.length; sy++) // per h1
     {
 
-      if(G_searchType == 3 && part[0] >= 1 && sy != parseInt(part[2])) continue;
+      if(DPR_G.G_searchType == 3 && part[0] >= 1 && sy != parseInt(part[2])) continue;
 
       var w = v[sy].getElementsByTagName("h2");
 
       for (var sz = 0; sz < w.length; sz++) // per h2
       {
 
-        if(G_searchType == 3 && part[0] >= 2 && sz != parseInt(part[3])) continue;
+        if(DPR_G.G_searchType == 3 && part[0] >= 2 && sz != parseInt(part[3])) continue;
 
         var x = w[sz].getElementsByTagName("h3");
 
@@ -593,14 +593,14 @@ function createTables(xmlDoc,hiert)
         for (var s = 0; s < x.length; s++) // per h3
         {
 
-          if(G_searchType == 3 && part[0] >= 3 && s != parseInt(part[4])) continue;
+          if(DPR_G.G_searchType == 3 && part[0] >= 3 && s != parseInt(part[4])) continue;
 
           var y = x[s].getElementsByTagName("h4");
 
           for (var se = 0; se < y.length; se++) // per h4
           {
 
-            if(G_searchType == 3 && part[0] >= 4 && se != parseInt(part[5])) continue;
+            if(DPR_G.G_searchType == 3 && part[0] >= 4 && se != parseInt(part[5])) continue;
 
             var z = y[se].getElementsByTagName("p");
 
@@ -617,7 +617,7 @@ function createTables(xmlDoc,hiert)
               if(!DPR_prefs['showVariantsInline'])
 				texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 
-              if (!/[0-9]/.exec(G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
+              if (!/[0-9]/.exec(DPR_G.G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
               //texttomatch = texttomatch.replace(/\^b\^/g, '');
               //texttomatch = texttomatch.replace(/\^eb\^/g, '');
@@ -643,7 +643,7 @@ function createTables(xmlDoc,hiert)
                 {
                   perstring = stringra[d];
 
-                  if(G_searchRX)
+                  if(DPR_G.G_searchRX)
                     startmatch = findRegEx(texttomatch,perstring);
                   else
                     startmatch = texttomatch.indexOf(perstring)
@@ -657,7 +657,7 @@ function createTables(xmlDoc,hiert)
 
                     while (startmatch >= 0)
                     {
-                      if(G_searchRX) gotstring = texttomatch.match(perstring)[0];
+                      if(DPR_G.G_searchRX) gotstring = texttomatch.match(perstring)[0];
                       else gotstring = perstring;
 
 
@@ -681,7 +681,7 @@ function createTables(xmlDoc,hiert)
                       else postpara += beforem+gotstring;
 
                       texttomatch = texttomatch.substring(endmatch);
-                      if(G_searchRX) startmatch = findRegEx(texttomatch,perstring);
+                      if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,perstring);
                       else startmatch = texttomatch.indexOf(perstring)
 
                     }
@@ -707,10 +707,10 @@ function createTables(xmlDoc,hiert)
                       }
                       else {
                         tempexword[t][i] = tempexword[t][i].replace(/\^e*b\^/g,'');
-                        while (!G_uniRegExp.exec(tempexword[t][i].charAt(0)) && !/[0-9]/.exec(tempexword[t][i].charAt(0))) {
+                        while (!DPR_G.G_uniRegExp.exec(tempexword[t][i].charAt(0)) && !/[0-9]/.exec(tempexword[t][i].charAt(0))) {
                           tempexword[t][i] = tempexword[t][i].substring(1);
                         }
-                        while (!G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1)) && !/[0-9]/.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
+                        while (!DPR_G.G_uniRegExp.exec(tempexword[t][i].charAt(tempexword[t][i].length-1)) && !/[0-9]/.exec(tempexword[t][i].charAt(tempexword[t][i].length-1))) {
                           tempexword[t][i] = tempexword[t][i].slice(0,-1);
                         }
                       }
@@ -735,7 +735,7 @@ function createTables(xmlDoc,hiert)
                     exword[t] = exword[t].concat(texnodups[t]);
                   }
 
-                  finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+                  finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + DPR_G.G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
@@ -775,7 +775,7 @@ function createTables(xmlDoc,hiert)
 
                 tempexword = [];
 
-                if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
+                if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,getstring);
                 else startmatch = texttomatch.indexOf(getstring)
                 postpara = '';
                 if (startmatch >= 0)
@@ -783,7 +783,7 @@ function createTables(xmlDoc,hiert)
                   while (startmatch >= 0)
                   {
                     match = 1;
-                                        if(G_searchRX) gotstring = texttomatch.match(getstring)[0];
+                                        if(DPR_G.G_searchRX) gotstring = texttomatch.match(getstring)[0];
                                         else gotstring = getstring;
                     endmatch = startmatch + gotstring.length;
                     beforem = texttomatch.substring(0,startmatch);
@@ -795,7 +795,7 @@ function createTables(xmlDoc,hiert)
                     postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
                     texttomatch = texttomatch.substring(endmatch);
 
-                    if(G_searchRX) startmatch = findRegEx(texttomatch,getstring);
+                    if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,getstring);
                     else startmatch = texttomatch.indexOf(getstring)
 
                     // get words
@@ -839,10 +839,10 @@ function createTables(xmlDoc,hiert)
                   else {
                     for(var i=0; i<l; i++) {
                       tempexword[i] = tempexword[i].replace(/\^e*b\^/g,'');
-                      while (!G_uniRegExp.exec(tempexword[i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
+                      while (!DPR_G.G_uniRegExp.exec(tempexword[i].charAt(0)) && !/[0-9]/.exec(tempexword[i].charAt(0))) {
                         tempexword[i] = tempexword[i].substring(1);
                       }
-                      while (!G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(tempexword[i].length-1))) {
+                      while (!DPR_G.G_uniRegExp.exec(tempexword[i].charAt(tempexword[i].length-1)) && !/[0-9]/.exec(tempexword[i].charAt(tempexword[i].length-1))) {
                         tempexword[i] = tempexword[i].slice(0,-1);
                       }
                     }
@@ -864,7 +864,7 @@ function createTables(xmlDoc,hiert)
 
                   // titles
 
-                  finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
+                  finalout += '<div id='+countmatch + tagtitle+'><p><span><b style="color:' + DPR_prefs['colsel'] + '">' + DPR_G.G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
@@ -892,7 +892,7 @@ function createTables(xmlDoc,hiert)
                     var modt = '';
                     var modn;
                     var modno = getSuttaNumber(nikaya,(parseInt(book)-1),sx,sy,sz,s,se,hiert,z.length);
-                    finalout +=  (modno ? ' (<b class="small" style="color:'+DPR_prefs['colsel']+'">' + G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + modno + '</b>)' : '');
+                    finalout +=  (modno ? ' (<b class="small" style="color:'+DPR_prefs['colsel']+'">' + DPR_G.G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + modno + '</b>)' : '');
                   }
 
 
@@ -1037,7 +1037,7 @@ function atiSearchStart() {
 
   document.getElementById('sbfb').appendChild(pleasewait);
 
-  var getstring = G_searchString;
+  var getstring = DPR_G.G_searchString;
 
   var atiurl = (DPR_prefs['catioff'] ? 'file://' + DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/' : 'http://www.accesstoinsight.org/');
 
@@ -1047,7 +1047,7 @@ function atiSearchStart() {
     addJS(['ati_list']);
 
 //    $('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
-    DPR_PAL_Search_MakeProgressTable(G_searchSet.length);
+    DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchSet.length);
 
     var thisterm = MD.createElement('toolbarbutton');
     thisterm.setAttribute('id','search-term');
@@ -1055,7 +1055,7 @@ function atiSearchStart() {
     thisterm.setAttribute('class','search-set');
 
     var setlabel = MD.createElement('label');
-    setlabel.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString)));
+    setlabel.setAttribute('value',(DPR_G.G_searchRX?DPR_G.G_searchString:toUni(DPR_G.G_searchString)));
     setlabel.setAttribute('id','search-term');
     setlabel.setAttribute('crop','center');
     setlabel.setAttribute('class','search-button-label');
@@ -1066,16 +1066,16 @@ function atiSearchStart() {
 
     MD.getElementById('search-sets').appendChild(thisterm);
     MD.getElementById('search-sets').appendChild(tsep);
-    for (var i = 0; i < G_numberToNik.length; i++) {
-      if (G_searchSet.indexOf(G_numberToNik[i]) == -1) continue; // don't add unchecked collections
+    for (var i = 0; i < DPR_G.G_numberToNik.length; i++) {
+      if (DPR_G.G_searchSet.indexOf(DPR_G.G_numberToNik[i]) == -1) continue; // don't add unchecked collections
 
       var thisset = MD.createElement('toolbarbutton');
       thisset.setAttribute('class','search-set');
-      thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+G_numberToNik[i]+'\')');
+      thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+DPR_G.G_numberToNik[i]+'\')');
 
       var setlabel = MD.createElement('label');
-      setlabel.setAttribute('value',G_nikLongName[G_numberToNik[i]]+': 0');
-      setlabel.setAttribute('id','matches'+G_numberToNik[i]);
+      setlabel.setAttribute('value',DPR_G.G_nikLongName[DPR_G.G_numberToNik[i]]+': 0');
+      setlabel.setAttribute('id','matches'+DPR_G.G_numberToNik[i]);
       setlabel.setAttribute('class','search-button-label');
 
       thisset.appendChild(setlabel);
@@ -1083,7 +1083,7 @@ function atiSearchStart() {
       var sep = MD.createElement('toolbarseparator');
 
       MD.getElementById('search-sets').appendChild(thisset);
-      if(i < G_searchSet.length)
+      if(i < DPR_G.G_searchSet.length)
         MD.getElementById('search-sets').appendChild(sep);
     }
 
@@ -1116,7 +1116,7 @@ function atiSearchOffline(d, getstring) {
   DPR_PAL_Search_UpdateProgressBar();
 
   var nikA = ['d','m','s','a','k'];
-  while (G_searchSet.indexOf(nikA[d]) == -1) {
+  while (DPR_G.G_searchSet.indexOf(nikA[d]) == -1) {
     d++;
     if(d == nikA.length) { // end
       scrollToId('search',0);
@@ -1172,7 +1172,7 @@ function atiSearchOffline(d, getstring) {
     for (var j in data) {
       if(data[j].id == 'H_content') {
       var texttomatch = data[j].textContent;
-        if(G_searchRX) startmatch = texttomatch.search(getstring);
+        if(DPR_G.G_searchRX) startmatch = texttomatch.search(getstring);
         else startmatch = texttomatch.indexOf(getstring)
         postpara = '';
         if (startmatch >= 0)
@@ -1181,7 +1181,7 @@ function atiSearchOffline(d, getstring) {
           while (startmatch >= 0)
           {
             count++;
-            if(G_searchRX) gotstring = texttomatch.match(getstring)[0];
+            if(DPR_G.G_searchRX) gotstring = texttomatch.match(getstring)[0];
             else gotstring = getstring;
             var endmatch = startmatch + gotstring.length;
 
@@ -1227,7 +1227,7 @@ function atiSearchOffline(d, getstring) {
   document.getElementById('dictList').appendChild(listNode);
 
   var cellNode = document.createElement('td');
-  cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+G_nikLongName[nik] + '</a>: ' + count + '; ';
+  cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+DPR_G.G_nikLongName[nik] + '</a>: ' + count + '; ';
 
   var val = MD.getElementById('matches'+nikA[d]).getAttribute('value').replace(/: .+/,': ');
   MD.getElementById('matches'+nikA[d]).setAttribute('value',val+count);

@@ -108,7 +108,7 @@ var DPRChrome = {
     return false;
   },
   promptData: function (title, data) {
-    this.G_prompts.alert(null, title, data);
+    DPR_G.G_prompts.alert(null, title, data);
   },
   DPRSidebarDocument: function () {
     var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;

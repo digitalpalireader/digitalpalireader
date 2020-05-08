@@ -112,9 +112,9 @@ var DPRChrome = {
     }
     return false;
   },
-  G_prompts: Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService),
+  DPR_G.G_prompts: Components.classes["@mozilla.org/embedcomp/prompt-service;1"].getService(Components.interfaces.nsIPromptService),
   promptData:function(title,data) {
-    this.G_prompts.alert(null, title, data);
+    DPR_G.G_prompts.alert(null, title, data);
   },
   DPRSidebarDocument: function() {
     var sidebar = mainWindow.document.getElementById("sidebar").contentDocument;

@@ -1,10 +1,10 @@
 'use strict';
 
-function getBookName(nik, ht, no) { // nik is nikaya, ht is a G_hier, no will be xml no - 1
+function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1
 
 
   if (nik == 'k' || nik == 'y') {
-    no = G_kynames[nik][no];
+    no = DPR_G.G_kynames[nik][no];
     if(ht != 'm') no = no.replace(/([^a]) 1$/,'$1');
   }
   else no++;

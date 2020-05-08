@@ -5,7 +5,7 @@ function citation(cite) {
 function reindexPanels(idx) {
   var x = 1;
   while(document.getElementById('dpr-index-top-'+x)) {
-    document.getElementById('dpr-index-top-'+x).contentWindow.G_compare = x;
+    document.getElementById('dpr-index-top-'+x).contentWindow.DPR_G.G_compare = x;
     if(idx)
       if(x > parseInt(idx)) {
         document.getElementById('dpr-index-top-'+x).setAttribute('id','dpr-index-top-'+(x-1));

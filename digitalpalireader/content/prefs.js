@@ -303,7 +303,7 @@ function fileDialog(id, titleIn) {
   }
 }
 
-var G_interval = [];
+DPR_G.G_interval = [];
 
 function installSetPref(set,setName,id) {
   if(!installSetPrompt(set,setName,id)) return;
@@ -312,12 +312,12 @@ function installSetPref(set,setName,id) {
   loadNode.setAttribute('class', 'spin-img-infinitely');
   document.getElementById(set).removeChild(document.getElementById(set).firstChild);
   document.getElementById(set).appendChild(loadNode);
-  G_interval[set] = window.setInterval(function(){ checkInstalled(set) },1000);
+  DPR_G.G_interval[set] = window.setInterval(function(){ checkInstalled(set) },1000);
 }
 
 function checkInstalled(set) {
   if(!profFileExists('extensions/staged/'+set+'@noah.yuttadhammo.xpi')) return;
-  window.clearInterval(G_interval[set]);
+  window.clearInterval(DPR_G.G_interval[set]);
   var loadNode = document.createElement('label');
   loadNode.setAttribute('value', document.getElementById('restart').value);
   loadNode.setAttribute('id', set+'Restart');

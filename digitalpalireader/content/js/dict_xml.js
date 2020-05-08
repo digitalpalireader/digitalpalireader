@@ -1,9 +1,9 @@
 'use strict';
 
-var G_peda = [];
+DPR_G.G_peda = [];
 
-var G_pedhist = [];
-var G_phmark = 0;
+DPR_G.G_pedhist = [];
+DPR_G.G_phmark = 0;
 
 var pedfileget = '';
 
@@ -36,13 +36,13 @@ function paliXML(filein,which,add)
   moveFrame(1);
 
   if(!which) { // not from select
-    var G_pedhistt = [];
-    G_pedhist = G_pedhist.slice(0,G_phmark+1); // cut old future
-    for (var i in G_pedhist) {
-      if (G_pedhist[i] != file) { G_pedhistt.push(G_pedhist[i]); }
+    DPR_G.G_pedhistt = [];
+    DPR_G.G_pedhist = DPR_G.G_pedhist.slice(0,DPR_G.G_phmark+1); // cut old future
+    for (var i in DPR_G.G_pedhist) {
+      if (DPR_G.G_pedhist[i] != file) { DPR_G.G_pedhistt.push(DPR_G.G_pedhist[i]); }
     }
-    G_pedhist = G_pedhistt.concat([file]); // add latest
-    G_phmark = G_pedhist.length; // set mark to latest
+    DPR_G.G_pedhist = DPR_G.G_pedhistt.concat([file]); // add latest
+    DPR_G.G_phmark = DPR_G.G_pedhist.length; // set mark to latest
   }
 
   var filea = file.split(',');
@@ -50,11 +50,11 @@ function paliXML(filein,which,add)
   file = filea[0];
 
   if(!P[toVel(ttit)]) {
-    if(G_irregNoun[toVel(ttit)]) {
-      ttit = G_irregNoun[toVel(ttit)];
+    if(DPR_G.G_irregNoun[toVel(ttit)]) {
+      ttit = DPR_G.G_irregNoun[toVel(ttit)];
     }
-    else if(G_irregVerb[toVel(ttit)]) {
-      ttit = G_irregVerb[toVel(ttit)];
+    else if(DPR_G.G_irregVerb[toVel(ttit)]) {
+      ttit = DPR_G.G_irregVerb[toVel(ttit)];
     }
   }
 
@@ -117,12 +117,12 @@ function paliXML(filein,which,add)
   var outdata = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]")+'<hr/>';
   displayDictData(outdata);
   var tout = '';
-  if (G_pedhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
-    for (var i = G_pedhist.length-1; i >= 0; i--) {
-      showing += '<option value="'+G_pedhist[i]+'"';
-      if (i == G_phmark) { showing += ' selected'; }
-      var dhs = G_pedhist[i].split(',');
+  if (DPR_G.G_pedhist.length > 1) { // show select
+    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { DPR_G.G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+    for (var i = DPR_G.G_pedhist.length-1; i >= 0; i--) {
+      showing += '<option value="'+DPR_G.G_pedhist[i]+'"';
+      if (i == DPR_G.G_phmark) { showing += ' selected'; }
+      var dhs = DPR_G.G_pedhist[i].split(',');
       showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
     }
     showing += '</select>';
@@ -134,22 +134,22 @@ function paliXML(filein,which,add)
   var tname, lname, nname;
 
   if(P[toVel(ttit)]) {
-    if(G_peda.length == 0) {
+    if(DPR_G.G_peda.length == 0) {
       for (var i in P) {
         for (var j in P[i]) {
-          G_peda.push([i,P[i][j]]);
+          DPR_G.G_peda.push([i,P[i][j]]);
         }
       }
     }
-    for (var i=0; i < G_peda.length;i++) {
+    for (var i=0; i < DPR_G.G_peda.length;i++) {
       if(tname) {
-        nname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+        nname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
         break;
       }
-      if (G_peda[i][0] == toVel(ttit) && G_peda[i][1] == pedfileget) {
-        tname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+      if (DPR_G.G_peda[i][0] == toVel(ttit) && DPR_G.G_peda[i][1] == pedfileget) {
+        tname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
       }
-      else lname = G_peda[i][1]+","+toUni(G_peda[i][0]);
+      else lname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
     }
   }
 
@@ -198,9 +198,9 @@ function toggleDppnTitle(link,id) {
   document.getElementById(id).innerHTML =  data;
 }
 
-var G_dppn = [];
-var G_dppnhist = [];
-var G_dhmark = 0;
+DPR_G.G_dppn = [];
+DPR_G.G_dppnhist = [];
+DPR_G.G_dhmark = 0;
 
 function DPPNXML(filein,which,add)
 {
@@ -235,12 +235,12 @@ function DPPNXML(filein,which,add)
 
   if(!which) { // not from select
     var dppnhistt = [];
-    G_dppnhist = G_dppnhist.slice(0,G_dhmark+1); // cut old future
-    for (var i in G_dppnhist) {
-      if (G_dppnhist[i] != file) { dppnhistt.push(G_dppnhist[i]); }
+    DPR_G.G_dppnhist = DPR_G.G_dppnhist.slice(0,DPR_G.G_dhmark+1); // cut old future
+    for (var i in DPR_G.G_dppnhist) {
+      if (DPR_G.G_dppnhist[i] != file) { dppnhistt.push(DPR_G.G_dppnhist[i]); }
     }
-    G_dppnhist = dppnhistt.concat([file]); // add latest
-    G_dhmark = G_dppnhist.length; // set mark to latest
+    DPR_G.G_dppnhist = dppnhistt.concat([file]); // add latest
+    DPR_G.G_dhmark = DPR_G.G_dppnhist.length; // set mark to latest
   }
 
 
@@ -263,34 +263,34 @@ function DPPNXML(filein,which,add)
   // get number
   var tname, lname, nname;
 
-  if(G_dppn.length == 0) {
+  if(DPR_G.G_dppn.length == 0) {
     for (var i in D) {
       for (var j in D[i]) {
-        G_dppn.push([i,D[i][j]]);
+        DPR_G.G_dppn.push([i,D[i][j]]);
       }
     }
   }
-  for (var i in G_dppn) {
+  for (var i in DPR_G.G_dppn) {
     if(tname) {
-      nname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
+      nname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
       break;
     }
-    if (G_dppn[i][0] == tloc[0] && G_dppn[i][1] == tloc[1]+'/'+tloc[2]) {
-      tname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
+    if (DPR_G.G_dppn[i][0] == tloc[0] && DPR_G.G_dppn[i][1] == tloc[1]+'/'+tloc[2]) {
+      tname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
     }
-    else lname = "'"+toUni(G_dppn[i][0])+'/'+G_dppn[i][1]+"','"+toUni(G_dppn[i][0])+"'";
+    else lname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
   }
   if (!tname) lname = null;
   // buttons
 
   var tout = '';
 
-  if (G_dppnhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
-    for (var i = G_dppnhist.length-1; i >= 0; i--) {
-      showing += '<option value="'+G_dppnhist[i]+'"';
-      if (i == G_dhmark) { showing += ' selected'; }
-      var dhs = G_dppnhist[i].split(',');
+  if (DPR_G.G_dppnhist.length > 1) { // show select
+    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { DPR_G.G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+    for (var i = DPR_G.G_dppnhist.length-1; i >= 0; i--) {
+      showing += '<option value="'+DPR_G.G_dppnhist[i]+'"';
+      if (i == DPR_G.G_dhmark) { showing += ' selected'; }
+      var dhs = DPR_G.G_dppnhist[i].split(',');
       showing += '>' + (dhs[1] ? dhs[1] : dhs[0]) + '</option>';
     }
     showing += '</select>';
@@ -326,9 +326,9 @@ function DPPNXML(filein,which,add)
 
 }
 
-var G_skt = [];
-var G_skthist = [];
-var G_shmark = 0;
+DPR_G.G_skt = [];
+DPR_G.G_skthist = [];
+DPR_G.G_shmark = 0;
 
 function sktRXML(no,add)
 {
@@ -497,7 +497,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var suttalist = '';
         var sectionlist = '';
 
-        var placen = G_nikLongName[nikaya] + '-'+type+' ' + book;
+        var placen = DPR_G.G_nikLongName[nikaya] + '-'+type+' ' + book;
 
         var u = xmlDoc.getElementsByTagName("h0");
         if (u.length > 1) placen += '.' + (parseInt(meta)+1);
@@ -517,7 +517,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 
     displayDictData(finout);
 
-    setCurrentTitle(toUni(word)+' in the '+G_hTitles[G_hNumbers[type]]);
+    setCurrentTitle(toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
 }
 
 function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
@@ -618,7 +618,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
     }
     //dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
     var sn = (hiert == 'm' ? getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
-    var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1)[0] + (sn ? ' (' + G_nikLongName[nikaya] + ' ' + sn + ')' : '');
+    var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1)[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 
         finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }

@@ -73,7 +73,7 @@ function DPR_PAL_Search_AddSectionLink(nik) {
   const id = `matches${nik}`;
   const html = `
 <li>
-  <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${G_nikLongName[nik] + ': 0'}</a>
+  <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${DPR_G.G_nikLongName[nik] + ': 0'}</a>
 </li>`;
   MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
@@ -86,7 +86,7 @@ function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
   const html = `
 <li>
-  <label class="m-0" id="search-term" style="font-weight: bold;">${(G_searchRX?G_searchString:toUni(G_searchString))+': '}</label>
+  <label class="m-0" id="search-term" style="font-weight: bold;">${(DPR_G.G_searchRX?DPR_G.G_searchString:toUni(DPR_G.G_searchString))+': '}</label>
 </li>
 <li>
   <label class="m-0" id="search-matches" style="font-weight: bold;">0</label>
@@ -115,7 +115,7 @@ function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {
 
 function DPR_PAL_Search_AddCopyPermaLinkElement() {
   const html = `
-<a class="btn btn-success btn-light btn-small m-0" onclick="permalinkClick('${G_searchLink}')" title="Click to copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
+<a class="btn btn-success btn-light btn-small m-0" onclick="permalinkClick('${DPR_G.G_searchLink}')" title="Click to copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
 `;
   MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
 }
@@ -129,7 +129,7 @@ function DPR_PAL_Search_RemoveCopyPermaLinkElement() {
 
 function DPR_PAL_Search_CreateSectionHeader(newnikaya) {
   const id = `sbfN${newnikaya}`;
-  const html = `<h4 id='${id}' name='xyz' class="card-title huge">${G_nikLongName[newnikaya]}</h4>`;
+  const html = `<h4 id='${id}' name='xyz' class="card-title huge">${DPR_G.G_nikLongName[newnikaya]}</h4>`;
   const headingNode = document.createElement('div');
   headingNode.innerHTML = html;
   return headingNode.children[0];

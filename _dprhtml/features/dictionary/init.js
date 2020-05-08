@@ -7,10 +7,10 @@ class DictionaryTabViewModel{
     this.showAdvancedOptions = ko.observable(false);
     this.options = ko.observableArray();
     this.entry = ko.observable('');
-    for (var i in G_nikToNumber) {
+    for (var i in DPR_G.G_nikToNumber) {
       this.options.push('x' + i);
     }
-    for (var i in G_hNumbers) {
+    for (var i in DPR_G.G_hNumbers) {
       this.options.push('m' + i);
     }
   }

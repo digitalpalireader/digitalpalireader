@@ -10,7 +10,7 @@ var DPRXML = {
 
     var nikaya = __navigationTabViewModel.set();
     var book = __navigationTabViewModel.book();
-    var nikbookhier = nikaya + book + G_hier;
+    var nikbookhier = nikaya + book + DPR_G.G_hier;
     var xmlDoc = loadXMLFile(nikbookhier, 0);
 
     var meta = (depth > 0  ? __navigationTabViewModel.meta() : 0);
@@ -208,5 +208,5 @@ var DPRXML = {
     return outlist;
   },
 
-  unnamed: G_unnamed,
+  unnamed: DPR_G.G_unnamed,
 }

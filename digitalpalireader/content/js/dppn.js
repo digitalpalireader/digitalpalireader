@@ -10199,6 +10199,6 @@ D['homagaama']=['9/4797'];
 D['hsuantsang']=['6/507'];
 
 
-var G_dppnEnd=['thera','therii','putta','maa.nava','braahma.na','se.t.thi'];
+DPR_G.G_dppnEnd=['thera','therii','putta','maa.nava','braahma.na','se.t.thi'];
 
-var EXPORTED_SYMBOLS = ["G_dppnEnd","D"];
+var EXPORTED_SYMBOLS = ["DPR_G.G_dppnEnd","D"];

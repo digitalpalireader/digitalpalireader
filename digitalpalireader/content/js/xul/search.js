@@ -64,13 +64,13 @@ function DPR_PAL_Search_AddSectionLink(nik) {
   thisset.setAttribute('class', 'search-set');
   thisset.setAttribute('onmouseup', 'scrollSearch(\'sbfN' + nik + '\')');
   var setlabel = MD.createElement('label');
-  setlabel.setAttribute('value', G_nikLongName[nik] + ': 0');
+  setlabel.setAttribute('value', DPR_G.G_nikLongName[nik] + ': 0');
   setlabel.setAttribute('id', 'matches' + nik);
   setlabel.setAttribute('class', 'search-button-label');
   thisset.appendChild(setlabel);
   var sep = MD.createElement('toolbarseparator');
   MD.getElementById('search-sets').appendChild(thisset);
-  if (i < G_searchSet.length)
+  if (i < DPR_G.G_searchSet.length)
     MD.getElementById('search-sets').appendChild(sep);
 }
 
@@ -81,7 +81,7 @@ function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
 
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
   var thisterm = MD.createElement('label');
-  thisterm.setAttribute('value',(G_searchRX?G_searchString:toUni(G_searchString))+': ');
+  thisterm.setAttribute('value',(DPR_G.G_searchRX?DPR_G.G_searchString:toUni(DPR_G.G_searchString))+': ');
   thisterm.setAttribute('id','search-term');
   thisterm.setAttribute('class','search-bold');
   thisterm.setAttribute('crop','center');
@@ -123,7 +123,7 @@ function DPR_PAL_Search_AddCopyPermaLinkElement() {
   var mlink = MD.createElement('toolbarbutton');
   mlink.setAttribute('class','search-button');
   mlink.setAttribute('label','♦');
-  mlink.setAttribute('onmouseup','permalinkClick(\''+G_searchLink+'\',1)');
+  mlink.setAttribute('onmouseup','permalinkClick(\''+DPR_G.G_searchLink+'\',1)');
   mlink.setAttribute('tooltiptext','Click to copy permalink to clipboard');
 
   MD.getElementById('search-link').appendChild(mlink);
@@ -141,7 +141,7 @@ function DPR_PAL_Search_CreateSectionHeader(newnikaya) {
   headingNode.setAttribute('id', 'sbfN' + newnikaya);
   headingNode.setAttribute('name', 'xyz');
   headingNode.setAttribute('class', 'huge');
-  headingNode.innerHTML = G_nikLongName[newnikaya] + '<hr>';
+  headingNode.innerHTML = DPR_G.G_nikLongName[newnikaya] + '<hr>';
   return headingNode;
 }
 
