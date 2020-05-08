@@ -484,7 +484,7 @@ function toMyanmar(input,type) {
 }
 
 
-
+// Refer: https://en.wikipedia.org/wiki/Bengali_(Unicode_block)
 function toBengali(input,type) {
 
   input = input.toLowerCase().replace(/ṁ/g,'ṃ');
@@ -506,8 +506,8 @@ function toBengali(input,type) {
   bengalir['ī'] = 'ী';
   bengalir['u'] = 'ু';
   bengalir['ū'] = 'ূ';
-  bengalir['e'] = 'े';
-  bengalir['o'] = 'ो';
+  bengalir['e'] = 'ে';
+  bengalir['o'] = 'ো';
   bengalir['ṃ'] = 'ং';
   bengalir['k'] = 'ক';
   bengalir['kh'] = 'খ';
@@ -601,6 +601,7 @@ function toBengali(input,type) {
 
 
 
+// Refer: https://en.wikipedia.org/wiki/Devanagari_(Unicode_block)
 function toDeva(input,type) {
 
   input = input.toLowerCase().replace(/ṁ/g,'ṃ');

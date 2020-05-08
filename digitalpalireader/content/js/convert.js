@@ -47,6 +47,9 @@ function convert(check,lower)
         case 5:
           spell = toSin(spell);
           break;
+        case 6:
+          spell = toBengali(spell);
+          break;
       }
       break;
     case 1:
@@ -65,6 +68,9 @@ function convert(check,lower)
           break;
         case 5:
           spell = toSin(spell);
+          break;
+        case 6:
+          spell = toBengali(spell);
           break;
       }
       break;
@@ -85,6 +91,9 @@ function convert(check,lower)
         case 5:
           spell = toSin(spell);
           break;
+        case 6:
+          spell = toBengali(spell);
+          break;
       }
       break;
     case 5: // from Sinhala
@@ -103,6 +112,9 @@ function convert(check,lower)
           break;
         case 4:
           spell = toMyanmar(spell);
+          break;
+        case 6:
+          spell = toBengali(spell);
           break;
       }
       break;
