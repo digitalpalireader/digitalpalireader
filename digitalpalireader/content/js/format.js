@@ -417,7 +417,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var title = '',save = '',raw = '';
 
   if (DPR_G.G_nikFullFullNames[nikaya]) {
-    var nn = '<b>'+DPR_G.G_nikFullFullNames[nikaya]+'</b>';
+    var nn = '<b>'+translit(DPR_G.G_nikFullFullNames[nikaya])+'</b>';
     title += (click?wrapLink(nn,click):nn) + ', ';
   }
 

@@ -66,7 +66,7 @@ class NavigationTabViewModel {
   initializeSets() {
     Object
     .entries(DPR_G.G_nikFullNames)
-    .forEach(([value, label]) => this.navset.push({ value, label }));
+    .forEach(([value, label]) => this.navset.push({ value, label: translit(label) }));
   }
 
   place(place){
