@@ -1,0 +1,64 @@
+var DPRConfig = {
+  sidebarConfig:function() {
+    for (var i in DPR_prefs) {
+      DPR_prefs[i] = getPref(i);
+    }
+    DPRNav.historyBox();
+    DPRNav.bookmarkBox();
+    DPRNav.searchHistoryBox();
+    DPRNav.dictHistoryBox();
+    DPRXML.updateHierarchy(0);
+
+    var x = 0;
+
+    document.styleSheets[2]['cssRules'][x].style.fontFamily = DPR_prefs['colfont'];
+
+    document.styleSheets[2]['cssRules'][++x].style.color = DPR_prefs['coltext'];
+    document.styleSheets[2]['cssRules'][x].style.fontSize = DPR_prefs['colsize'] + 'px';
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // select, etc.
+
+    document.styleSheets[2]['cssRules'][++x].style.backgroundColor = DPR_prefs['colInput'];  // select, etc.
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.8) + 'px';  // buttons
+
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.7) + 'px';  // small
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*.6) + 'px';  // tiny
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1) + 'px';  // large
+
+    document.styleSheets[2]['cssRules'][++x].style.fontSize = Math.round(parseInt(DPR_prefs['colsize'])*1.2) + 'px';  // huge
+
+
+    var sbk = DPR_prefs['bkcptype'];
+
+    if(/col/.exec(sbk)) {
+      document.styleSheets[2]['cssRules'][++x].style.backgroundColor = DPR_prefs['colbkcp'];  // chromeback
+    }
+    else {
+      document.styleSheets[2]['cssRules'][++x].style.backgroundColor = '';  // chromeback
+    }
+    if(/img/.exec(sbk)) {
+      document.styleSheets[2]['cssRules'][x].style.backgroundImage = DPR_prefs['imgbkcp'];  // chromeback
+    }
+    else {
+      document.styleSheets[2]['cssRules'][x].style.backgroundImage = '';  // chromeback
+    }
+
+    // list sizes
+
+    document.getElementById('set').setAttribute('rows',DPR_prefs['setRows']);
+    document.getElementById('book').setAttribute('rows',DPR_prefs['setRows']);
+
+    // translit
+    var sets = document.getElementById('set').childNodes;
+    for(var i = 0; i < sets.length;i++) {
+      sets[i].label = translit(DPR_G.G_nikFullNames[sets[i].value]);
+    }
+
+  },
+}
+
+
