@@ -357,7 +357,7 @@ function sktRXML(no,add)
 
   // xml
 
-  var file = `${DPR_PAL.baseUrl}sanskrit/content/skt-roots/${makeUniqueStringForCaseInsensitiveFS(sktR[no])}.xml`;
+  var file = `${DPR_PAL.baseUrl}sa/roots/${makeUniqueStringForCaseInsensitiveFS(sktR[no])}.xml`;
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", file, false);
   xmlhttp.send(null);
@@ -413,7 +413,7 @@ function sktXML(entry,idx,which,add)
 
   var char = entry.charAt(0);
 
-  var xml = `${DPR_PAL.baseUrl}sanskrit/content/xml/${makeUniqueStringForCaseInsensitiveFS(char)}.xml`;
+  var xml = `${DPR_PAL.baseUrl}sa/dict/${makeUniqueStringForCaseInsensitiveFS(char)}.xml`;
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", xml, false);
   xmlhttp.send(null);
