@@ -86,6 +86,7 @@ const DPR_CMD_OPEN_SETTINGS = 'openSettings';
 const DPR_CMD_GOTO_HOME = 'gotoHome';
 const DPR_CMD_TOGGLE_DPR_SIDEBAR = 'toggleDPRSidebar';
 const DPR_CMD_SHOW_BOTTOM_PANE = 'showBottomPane';
+const DPR_CMD_SHOW_PALI_QUOTE = 'showPaliQuote';
 
 const emptyFn = () => {};
 
@@ -420,6 +421,16 @@ const dprCommandList = [
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
     matchKey: e => ['1', '2', '3', '4', '5'].includes(e.key),
+  },
+  {
+    id: DPR_CMD_SHOW_PALI_QUOTE,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.displayPaliQuote(),
+    visible: true,
+    isDynamic: false,
+    title: "Display Pali Quote (Keyboard shortcut: *)",
+    matchKey: e => e.key === '*',
   },
 ];
 

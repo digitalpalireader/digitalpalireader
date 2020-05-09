@@ -73,4 +73,9 @@ class OtherDialogsViewModel {
     }
     else alertFlash('You must select some text to send to the textpad', 'yellow');
   }
+
+  displayPaliQuote() {
+    showBv();
+    $('#paliquote-dialog-root').modal('show');
+  }
 }

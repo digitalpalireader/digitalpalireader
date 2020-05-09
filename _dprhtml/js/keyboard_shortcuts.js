@@ -41,10 +41,6 @@ function DPR_keypress(e) {
     return;
   }
 
-  if (false && e.key === '*') {
-    bvAlert(bv()); return;
-  }
-
   if (false && e.key === 'b') {
     dTop.getElementById('bkButton').onmousedown();
     return;
