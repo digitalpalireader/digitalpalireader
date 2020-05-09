@@ -165,23 +165,23 @@ CACHE MANIFEST
 /tipitaka/my/k15a.xml
 /tipitaka/my/y1a.xml
 
-/digitalpalireader/content/etc/XML1/0/ped.xml
-/digitalpalireader/content/etc/XML1/1/ped.xml
-/digitalpalireader/content/etc/XML1/2/ped.xml
-/digitalpalireader/content/etc/XML1/3/ped.xml
-/digitalpalireader/content/etc/XML1/4/ped.xml
+/en/ped/0/ped.xml
+/en/ped/1/ped.xml
+/en/ped/2/ped.xml
+/en/ped/3/ped.xml
+/en/ped/4/ped.xml
 
-/digitalpalireader/content/etc/XML2/1.xml
-/digitalpalireader/content/etc/XML2/2.xml
-/digitalpalireader/content/etc/XML2/3.xml
-/digitalpalireader/content/etc/XML2/4.xml
-/digitalpalireader/content/etc/XML2/5.xml
-/digitalpalireader/content/etc/XML2/6.xml
-/digitalpalireader/content/etc/XML2/7.xml
-/digitalpalireader/content/etc/XML2/8.xml
-/digitalpalireader/content/etc/XML2/9.xml
-/digitalpalireader/content/etc/XML2/10.xml
-/digitalpalireader/content/etc/XML2/abbrev.xml
+/en/dppn/1.xml
+/en/dppn/2.xml
+/en/dppn/3.xml
+/en/dppn/4.xml
+/en/dppn/5.xml
+/en/dppn/6.xml
+/en/dppn/7.xml
+/en/dppn/8.xml
+/en/dppn/9.xml
+/en/dppn/10.xml
+/en/dppn/abbrev.xml
 
 NETWORK:
 *

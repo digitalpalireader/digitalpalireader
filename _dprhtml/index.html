@@ -58,12 +58,12 @@
       });
     </script>
 
-    <link rel="stylesheet" href="/digitalpalireader/content/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/digitalpalireader/content/js/external/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="/_dprhtml/index-core.css" />
-    <link rel="stylesheet" href="/_dprhtml/index.css" />
-    <link rel="stylesheet" href="/_dprhtml/styles.css" />
-    <link rel="stylesheet" href="/_dprhtml/index-override.css" />
+    <link rel="stylesheet" href="/_dprhtml/js/external/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/_dprhtml/js/external/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/_dprhtml/css/index-core.css" />
+    <link rel="stylesheet" href="/_dprhtml/css/index.css" />
+    <link rel="stylesheet" href="/_dprhtml/css/styles.css" />
+    <link rel="stylesheet" href="/_dprhtml/css/index-override.css" />
     <script>
       const getDeploymentVar = (depVar, defVal) => depVar.startsWith('#{') ? defVal : depVar;
 
@@ -100,7 +100,7 @@
       </div>
     </div>
     <div id="main-container-loading-page" data-bind="visible: loadingFeatureVisible">
-      <img id="main-container-loading-page-spinner" class="spin-img-infinitely" src="/digitalpalireader/content/images/dwheel.png" alt="Loading...">
+      <img id="main-container-loading-page-spinner" class="spin-img-infinitely" src="/_dprhtml/images/dwheel.png" alt="Loading...">
     </div>
     <div id="main-container" data-bind="hidden: loadingFeatureVisible">
       <div id="main-panel">
@@ -368,93 +368,93 @@
         </div>
       </div>
     </div>
-    <script src="/digitalpalireader/content/js/external/nanobar-0.4.2.min.js"></script>
+    <script src="/_dprhtml/js/external/nanobar-0.4.2.min.js"></script>
     <script>
       var progressBar = new Nanobar({ id: 'main-container-loading-page-progressbar' });
       progressBar.go(10);
     </script>
-    <script src="/digitalpalireader/content/js/external/jquery-3.4.1.min.js"></script>
+    <script src="/_dprhtml/js/external/jquery-3.4.1.min.js"></script>
     <script>progressBar.go(30)</script>
-    <script src="/digitalpalireader/content/js/external/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
-    <script src="/digitalpalireader/content/js/external/ajax/libs/popper.js/1.16.0/dist/umd/popper.min.js"></script>
+    <script src="/_dprhtml/js/external/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script src="/_dprhtml/js/external/ajax/libs/popper.js/1.16.0/dist/umd/popper.min.js"></script>
     <script>progressBar.go(40)</script>
-    <script src="/digitalpalireader/content/js/external/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="/digitalpalireader/content/js/external/jquery-resizable.js"></script>
+    <script src="/_dprhtml/js/external/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="/_dprhtml/js/external/jquery-resizable.js"></script>
     <script>progressBar.go(50)</script>
-    <script src="/digitalpalireader/content/js/dpr_pal.js"></script>
-    <script src="/_dprhtml/globalObject.js"></script>
-    <script src="/digitalpalireader/content/dev.js"></script>
-    <script src="/digitalpalireader/content/js/web/io.js"></script>
-    <script src="/digitalpalireader/content/js/send.js"></script>
-    <script src="/digitalpalireader/content/js/receive.js"></script>
-    <script src="/digitalpalireader/content/js/web/chrome_sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/web/send_sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/send_bottom.js"></script>
-    <script src="/digitalpalireader/content/js/dhpv.js"></script>
-    <script src="/digitalpalireader/content/js/navigation_common.js"></script>
-    <script src="/digitalpalireader/content/js/web/navigation_sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/prefload.js"></script>
-    <script src="/digitalpalireader/content/js/web/xml_sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/translit.js"></script>
-    <script src="/digitalpalireader/content/js/config.js"></script>
+    <script src="/_dprhtml/js/dpr_pal.js"></script>
+    <script src="/_dprhtml/js/globalObject.js"></script>
+    <script src="/_dprhtml/js/dev.js"></script>
+    <script src="/_dprhtml/js/web/io.js"></script>
+    <script src="/_dprhtml/js/send.js"></script>
+    <script src="/_dprhtml/js/receive.js"></script>
+    <script src="/_dprhtml/js/web/chrome_sidebar.js"></script>
+    <script src="/_dprhtml/js/web/send_sidebar.js"></script>
+    <script src="/_dprhtml/js/send_bottom.js"></script>
+    <script src="/_dprhtml/js/dhpv.js"></script>
+    <script src="/_dprhtml/js/navigation_common.js"></script>
+    <script src="/_dprhtml/js/web/navigation_sidebar.js"></script>
+    <script src="/_dprhtml/js/prefload.js"></script>
+    <script src="/_dprhtml/js/web/xml_sidebar.js"></script>
+    <script src="/_dprhtml/js/translit.js"></script>
+    <script src="/_dprhtml/js/config.js"></script>
     <script>progressBar.go(60)</script>
-    <script src="/digitalpalireader/content/js/xml_load.js"></script>
-    <script src="/digitalpalireader/content/js/navigation.js"></script>
-    <script src="/digitalpalireader/content/js/format.js"></script>
-    <script src="/digitalpalireader/content/js/web/opts_sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/relmul.js"></script>
-    <script src="/digitalpalireader/content/js/relatt.js"></script>
-    <script src="/digitalpalireader/content/js/reltik.js"></script>
-    <script src="/digitalpalireader/content/js/dppn.js"></script>
-    <script src="/digitalpalireader/content/js/ati_list.js"></script>
-    <script src="/digitalpalireader/content/js/translations.js"></script>
-    <script src="/digitalpalireader/content/js/xml.js"></script>
-    <script src="/digitalpalireader/content/js/history.js"></script>
+    <script src="/_dprhtml/js/xml_load.js"></script>
+    <script src="/_dprhtml/js/navigation.js"></script>
+    <script src="/_dprhtml/js/format.js"></script>
+    <script src="/_dprhtml/js/web/opts_sidebar.js"></script>
+    <script src="/_dprhtml/js/relmul.js"></script>
+    <script src="/_dprhtml/js/relatt.js"></script>
+    <script src="/_dprhtml/js/reltik.js"></script>
+    <script src="/_dprhtml/js/dppn.js"></script>
+    <script src="/_dprhtml/js/ati_list.js"></script>
+    <script src="/_dprhtml/js/translations.js"></script>
+    <script src="/_dprhtml/js/xml.js"></script>
+    <script src="/_dprhtml/js/history.js"></script>
     <script>progressBar.go(70)</script>
-    <script src="/digitalpalireader/content/js/web/search.js"></script>
-    <script src="/digitalpalireader/content/js/search.js"></script>
-    <script src="/digitalpalireader/content/js/search_history.js"></script>
-    <script src="/digitalpalireader/content/js/sortaz.js"></script>
-    <script src="/digitalpalireader/content/js/dict.js"></script>
-    <script src="/digitalpalireader/content/js/irreg.js"></script>
-    <script src="/digitalpalireader/content/js/dict_xml.js"></script>
-    <script src="/digitalpalireader/content/js/listsm.js"></script>
-    <script src="/digitalpalireader/content/js/listam.js"></script>
-    <script src="/digitalpalireader/content/js/chrome.js"></script>
-    <script src="/digitalpalireader/content/js/convert.js"></script>
-    <script src="/digitalpalireader/content/js/move.js"></script>
-    <script src="/digitalpalireader/content/js/analysis_declension.js"></script>
-    <script src="/digitalpalireader/content/js/analysis_arrays.js"></script>
-    <script src="/digitalpalireader/content/js/analysis_function.js"></script>
+    <script src="/_dprhtml/js/web/search.js"></script>
+    <script src="/_dprhtml/js/search.js"></script>
+    <script src="/_dprhtml/js/search_history.js"></script>
+    <script src="/_dprhtml/js/sortaz.js"></script>
+    <script src="/_dprhtml/js/dict.js"></script>
+    <script src="/_dprhtml/js/irreg.js"></script>
+    <script src="/_dprhtml/js/dict_xml.js"></script>
+    <script src="/_dprhtml/js/listsm.js"></script>
+    <script src="/_dprhtml/js/listam.js"></script>
+    <script src="/_dprhtml/js/chrome.js"></script>
+    <script src="/_dprhtml/js/convert.js"></script>
+    <script src="/_dprhtml/js/move.js"></script>
+    <script src="/_dprhtml/js/analysis_declension.js"></script>
+    <script src="/_dprhtml/js/analysis_arrays.js"></script>
+    <script src="/_dprhtml/js/analysis_function.js"></script>
     <script>progressBar.go(80)</script>
-    <script src="/digitalpalireader/content/js/analysis_output.js"></script>
-    <script src="/digitalpalireader/content/js/inflect.js"></script>
-    <script src="/digitalpalireader/content/js/grammar.js"></script>
-    <script src="/digitalpalireader/content/js/ped.js"></script>
-    <script src="/digitalpalireader/content/js/nameno.js"></script>
-    <script src="/digitalpalireader/content/js/roots.js"></script>
-    <script src="/digitalpalireader/content/js/roots_link.js"></script>
-    <script src="/digitalpalireader/content/js/attlist.js"></script>
+    <script src="/_dprhtml/js/analysis_output.js"></script>
+    <script src="/_dprhtml/js/inflect.js"></script>
+    <script src="/_dprhtml/js/grammar.js"></script>
+    <script src="/_dprhtml/js/ped.js"></script>
+    <script src="/_dprhtml/js/nameno.js"></script>
+    <script src="/_dprhtml/js/roots.js"></script>
+    <script src="/_dprhtml/js/roots_link.js"></script>
+    <script src="/_dprhtml/js/attlist.js"></script>
     <script>progressBar.go(90)</script>
-    <script src="/digitalpalireader/content/js/tiklist.js"></script>
-    <script src="/digitalpalireader/content/js/titles.js"></script>
-    <script src="/digitalpalireader/content/js/web/sidebar.js"></script>
-    <script src="/digitalpalireader/content/js/bv.js"></script>
-    <script src="/digitalpalireader/content/js/translate.js"></script>
-    <script src="/digitalpalireader/content/js/conjugate.js"></script>
+    <script src="/_dprhtml/js/tiklist.js"></script>
+    <script src="/_dprhtml/js/titles.js"></script>
+    <script src="/_dprhtml/js/web/sidebar.js"></script>
+    <script src="/_dprhtml/js/bv.js"></script>
+    <script src="/_dprhtml/js/translate.js"></script>
+    <script src="/_dprhtml/js/conjugate.js"></script>
     <script src="/en/cepd/index.js"></script>
     <script src="/en/cped/index.js"></script>
     <script src="/sa/dict/index.js"></script>
     <script src="/sa/roots/index.js"></script>
-    <script src="/_dprhtml/keyboard_shortcuts.js"></script>
     <script src="/_dprhtml/features/bottom-pane/init.js"></script>
     <script src="/_dprhtml/features/navigation/init.js"></script>
     <script src="/_dprhtml/features/search/init.js"></script>
     <script src="/_dprhtml/features/dictionary/init.js"></script>
     <script src="/_dprhtml/features/settings-dialog/init.js"></script>
     <script src="/_dprhtml/features/other-dialogs/init.js"></script>
-    <script src="/_dprhtml/dprviewmodel.js"></script>
-    <script src="/_dprhtml/index.js"></script>
+    <script src="/_dprhtml/js/keyboard_shortcuts.js"></script>
+    <script src="/_dprhtml/js/dprviewmodel.js"></script>
+    <script src="/_dprhtml/js/index.js"></script>
     <script>progressBar.go(100)</script>
     <script>
       $(document).ready(mainInitialize);
