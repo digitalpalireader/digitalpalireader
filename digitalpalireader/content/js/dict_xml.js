@@ -62,7 +62,7 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   pedfileget = t1 + '/' + t2;
-  var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1+'/ped.xml';
+  var pedp = `${DPR_PAL.baseUrl}en/ped/${t1}/ped.xml`;
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", pedp, false);
   xmlhttp.send(null);
@@ -248,7 +248,7 @@ function DPPNXML(filein,which,add)
 
   // xml
 
-  var dppnf = DPR_PAL.contentFolder + 'etc/XML2/'+tloc[1]+'.xml';
+  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${tloc[1]}.xml`;
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", dppnf, false);
   xmlhttp.send(null);
@@ -633,7 +633,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 function getDppnData(link){
   appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
 
-  var dppnf = DPR_PAL.contentFolder + 'etc/XML2/'+link.split('/')[0]+'.xml';
+  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${link.split('/')[0]}.xml`;
 
   var xmlhttp = new window.XMLHttpRequest();
   xmlhttp.open("GET", dppnf, false);
