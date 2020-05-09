@@ -733,11 +733,13 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
       if (oneword.charAt(oneword.length-1) != oneword.charAt(oneword.length-2) && aiu1 && !aiu2 && oneword.length > 2)
       {
-        if (!isUncomp(oneword+aiu1,lastpart,nextpart)) {
-          var trickmatch = findmatch(oneword+oneword.charAt(oneword.length-1),lastpart,nextpart,partslength,1);
-          if (trickmatch) {
-            if(devCheck > 0 && devDump == 1) ddump('trick1');
-            return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1];
+        if (res.length == 0 && resn.length == 0 && !resy) {
+          if (!isUncomp(oneword+aiu1,lastpart,nextpart)) {
+            var trickmatch = findmatch(oneword+oneword.charAt(oneword.length-1),lastpart,nextpart,partslength,1);
+            if (trickmatch) {
+              if(devCheck > 0 && devDump == 1) ddump('trick1');
+              return [oneword, trickmatch[1], (trickmatch[2] ? trickmatch[2] : '') + '$',nextpart,1];
+            }
           }
         }
       }
