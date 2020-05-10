@@ -103,6 +103,7 @@ const loadPanesAsync = async () => {
     loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, __settingsDialogViewModel),
     loadHtmlFragmentAsync(`#quicklink-dialog`, `features/other-dialogs/quicklinks.html`, __otherDialogsViewModel),
     loadHtmlFragmentAsync(`#paliquote-dialog`, `features/other-dialogs/paliquote.html`, __otherDialogsViewModel),
+    loadHtmlFragmentAsync(`#bookmark-dialog`, `features/other-dialogs/bookmarks.html`, __otherDialogsViewModel),
   ];
 
   await Promise.all(all);

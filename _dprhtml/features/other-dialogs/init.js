@@ -4,6 +4,7 @@ class OtherDialogsViewModel {
   constructor() {
     this.quicklinkInput = ko.observable();
     this.quicklinkInNewTab = ko.observable(false);
+    this.bookmarkInput = ko.observable();
   }
 
   showQuickLinksDialog() {
@@ -77,5 +78,23 @@ class OtherDialogsViewModel {
   displayPaliQuote() {
     showBv();
     $('#paliquote-dialog-root').modal('show');
+  }
+
+  showBookmarksDialog() {
+    this.bookmarkInput('');
+    $('#bookmark-dialog-root').modal('show');
+  }
+
+  sendBookmarkFromDialog(loc, name, desc) {
+    // TODO: Handle this.quicklinkInNewTab().
+    /*
+    var place = this.quicklinkInput();
+    var outplace = convertShortLink(place);
+    if(outplace[0] === false) {
+      return alertFlash(outplace[1], outplace[2]);
+    }
+
+    openPlace(outplace);
+    */
   }
 }
