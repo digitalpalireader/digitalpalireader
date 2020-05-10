@@ -38,3 +38,7 @@ const initializeDictionaryFeature = () => {
     console.error('Unexpected exception. Is a bug. Find and fix.', ex);
   }
 }
+function TextToUniDictionary(){
+  const key = toUniRegEx(document.getElementById('dictin').value.toLowerCase().trim());
+  document.getElementById('dictin').value = key;
+}
