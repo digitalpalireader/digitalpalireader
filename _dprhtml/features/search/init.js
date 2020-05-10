@@ -4,6 +4,7 @@ class SearchTabViewModel{
   constructor() {
     this.searchType = ko.observable(0);
     this.searchString = ko.observable('');
+    this.searchString.subscribe(x => this.searchString(toUniRegEx(x)), this);
     this.searchM = ko.observable(true);
     this.searchA = ko.observable(true);
     this.searchT = ko.observable(true);
@@ -172,9 +173,4 @@ const initializeSearchSidebarTab = () => {
 const initializeSearchFeature = () => {
   getconfig();
   searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
-}
-
-function TextToUniSearch(){
-  const key = toUniRegEx(document.getElementById('isearch').value.toLowerCase().trim());
-  document.getElementById('isearch').value = key;
 }

@@ -3,6 +3,7 @@
 class DictionaryTabViewModel{
   constructor(){
     this.query = ko.observable('');
+    this.query.subscribe(x => this.query(toUniRegEx(x)), this);
     this.type = ko.observable('');
     this.showAdvancedOptions = ko.observable(false);
     this.options = ko.observableArray();
@@ -37,8 +38,4 @@ const initializeDictionaryFeature = () => {
   } catch(ex) {
     console.error('Unexpected exception. Is a bug. Find and fix.', ex);
   }
-}
-function TextToUniDictionary(){
-  const key = toUniRegEx(document.getElementById('dictin').value.toLowerCase().trim());
-  document.getElementById('dictin').value = key;
 }
