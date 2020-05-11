@@ -1284,13 +1284,16 @@ function paliRootsearchstart(hard)
     else {
       var tosearch = proots[x];
     }
+
+    tosearch = toVel(tosearch);
+
     if(/fz/.exec(DPR_G.G_dictOpts)) {
       tosearch = toFuzzy(tosearch);
     }
 
-      if(DPR_G.G_dictUnicode) tosearch = toUni(tosearch);
+    if(DPR_G.G_dictUnicode) tosearch = toUni(tosearch);
 
-        if (/rx/.exec(DPR_G.G_dictOpts)) { // reg exp
+    if (/rx/.exec(DPR_G.G_dictOpts)) { // reg exp
       var yessir = (tosearch.search(getstring) == 0 || (!/sw/.exec(DPR_G.G_dictOpts) && tosearch.search(getstring) > -1));
     }
     else { // non reg exp
