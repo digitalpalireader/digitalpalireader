@@ -398,7 +398,7 @@ var DPR_Chrome = (function () {
     $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
   }
 
-  const toastVisibleForMilliseconds = 2000;
+  const toastVisibleForMilliseconds = 4000;
   const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds);
   const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds);
   const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds);

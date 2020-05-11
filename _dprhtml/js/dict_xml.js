@@ -62,11 +62,7 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   pedfileget = t1 + '/' + t2;
-  var pedp = `${DPR_PAL.baseUrl}en/ped/${t1}/ped.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", pedp, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadPXD(t1);
 
   var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -248,11 +244,7 @@ function DPPNXML(filein,which,add)
 
   // xml
 
-  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${tloc[1]}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", dppnf, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadXDPPN(tloc[1]);
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 
@@ -357,11 +349,7 @@ function sktRXML(no,add)
 
   // xml
 
-  var file = `${DPR_PAL.baseUrl}sa/roots/${makeUniqueStringForCaseInsensitiveFS(sktR[no])}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", file, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(sktR[no]));
   var s = new XMLSerializer();
   var data = s.serializeToString(xmlDoc);
 
@@ -413,11 +401,7 @@ function sktXML(entry,idx,which,add)
 
   var char = entry.charAt(0);
 
-  var xml = `${DPR_PAL.baseUrl}sa/dict/${makeUniqueStringForCaseInsensitiveFS(char)}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", xml, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
 
   var data = xmlDoc.getElementsByTagName('u')[idx];
   var ser = new XMLSerializer();
@@ -624,7 +608,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
     }
     displayDictData(finout);
     if (!DPR_PAL.isXUL) {
-      document.getElementById('paliTextContent').scrollTop = 0;
+      scrollMainPane(0);
     }
 }
 
@@ -633,12 +617,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 function getDppnData(link){
   appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
 
-  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${link.split('/')[0]}.xml`;
-
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", dppnf, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
   return data;

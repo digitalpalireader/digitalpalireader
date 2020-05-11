@@ -260,11 +260,7 @@ function pedFullTextSearch(getstring) {
 
   for (var i = 0; i < 5; i++) {
 
-    var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML1/'+i+'/ped.xml', false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
+    var xmlDoc = DPR_DataLoader.loadPXD(i);
 
     var allp = xmlDoc.getElementsByTagName('d');
 
@@ -471,11 +467,7 @@ function dppnFullTextSearch(getstring) {
   getstring = toUni(getstring);
   for (var i = 1; i < 10; i++) {
 
-    var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", DPR_PAL.contentFolder + 'etc/XML2/'+i+'.xml', false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
-
+    var xmlDoc = DPR_DataLoader.loadXDPPN(i);;
 
     var allp = xmlDoc.getElementsByTagName('e');
 
@@ -490,16 +482,16 @@ function dppnFullTextSearch(getstring) {
       }
       else continue;
       texttomatch = texttomatch.replace(/\[\/*a[^]]*\]/g, '');
-      startmatch = texttomatch.search(getstring);
-      postpara = '';
+      var startmatch = texttomatch.search(getstring);
+      var postpara = '';
       if (startmatch >= 0)
       {
         listouta.push(ttitle+'###<a href="#dppno'+i+'/'+j+'" style="color:'+DPR_prefs['colped']+'">' + ttitle + '</a><br>');
         while (startmatch >= 0)
         {
-          gotstring = texttomatch.match(getstring)[0];
-          endmatch = startmatch + gotstring.length;
-          beforem = texttomatch.substring(0,startmatch);
+          var gotstring = texttomatch.match(getstring)[0];
+          var endmatch = startmatch + gotstring.length;
+          var beforem = texttomatch.substring(0,startmatch);
           var afterm = texttomatch.substring(endmatch,texttomatch.length);
           postpara += beforem + '<c0>' + gotstring.replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>';
           texttomatch = texttomatch.substring(endmatch);
@@ -511,7 +503,7 @@ function dppnFullTextSearch(getstring) {
 
         let scrollTopElem = DPR_PAL.isXUL ? "dictc" : "paliTextContent";
 
-        finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="document.getElementById(\''+scrollTopElem+'\').scrollTop = 0;" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
+        finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="scrollMainPane(0);" class="small" style="color:'+DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
       }
     }
   }
