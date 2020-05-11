@@ -1,125 +1,125 @@
 'use strict';
 
-var reorder = new Array();
-reorder.push('#');
-reorder.push('0');
-reorder.push('1');
-reorder.push('2');
-reorder.push('3');
-reorder.push('4');
-reorder.push('5');
-reorder.push('6');
-reorder.push('7');
-reorder.push('8');
-reorder.push('9');
+DPR_G.reorder = new Array();
+DPR_G.reorder.push('#');
+DPR_G.reorder.push('0');
+DPR_G.reorder.push('1');
+DPR_G.reorder.push('2');
+DPR_G.reorder.push('3');
+DPR_G.reorder.push('4');
+DPR_G.reorder.push('5');
+DPR_G.reorder.push('6');
+DPR_G.reorder.push('7');
+DPR_G.reorder.push('8');
+DPR_G.reorder.push('9');
 
-reorder.push('a');
-reorder.push('ā');
-reorder.push('i');
-reorder.push('ī');
-reorder.push('u');
-reorder.push('ū');
-reorder.push('e');
-reorder.push('o');
-reorder.push('ṃ');
-reorder.push('k');
-reorder.push('kh');
-reorder.push('g');
-reorder.push('gh');
-reorder.push('ṅ');
-reorder.push('c');
-reorder.push('ch');
-reorder.push('j');
-reorder.push('jh');
-reorder.push('ñ');
-reorder.push('ṭ');
-reorder.push('ṭh');
-reorder.push('ḍ');
-reorder.push('ḍh');
-reorder.push('ṇ');
-reorder.push('t');
-reorder.push('th');
-reorder.push('d');
-reorder.push('dh');
-reorder.push('n');
-reorder.push('p');
-reorder.push('ph');
-reorder.push('b');
-reorder.push('bh');
-reorder.push('m');
-reorder.push('y');
-reorder.push('r');
-reorder.push('l');
-reorder.push('ḷ');
-reorder.push('v');
-reorder.push('s');
-reorder.push('h');
+DPR_G.reorder.push('a');
+DPR_G.reorder.push('ā');
+DPR_G.reorder.push('i');
+DPR_G.reorder.push('ī');
+DPR_G.reorder.push('u');
+DPR_G.reorder.push('ū');
+DPR_G.reorder.push('e');
+DPR_G.reorder.push('o');
+DPR_G.reorder.push('ṃ');
+DPR_G.reorder.push('k');
+DPR_G.reorder.push('kh');
+DPR_G.reorder.push('g');
+DPR_G.reorder.push('gh');
+DPR_G.reorder.push('ṅ');
+DPR_G.reorder.push('c');
+DPR_G.reorder.push('ch');
+DPR_G.reorder.push('j');
+DPR_G.reorder.push('jh');
+DPR_G.reorder.push('ñ');
+DPR_G.reorder.push('ṭ');
+DPR_G.reorder.push('ṭh');
+DPR_G.reorder.push('ḍ');
+DPR_G.reorder.push('ḍh');
+DPR_G.reorder.push('ṇ');
+DPR_G.reorder.push('t');
+DPR_G.reorder.push('th');
+DPR_G.reorder.push('d');
+DPR_G.reorder.push('dh');
+DPR_G.reorder.push('n');
+DPR_G.reorder.push('p');
+DPR_G.reorder.push('ph');
+DPR_G.reorder.push('b');
+DPR_G.reorder.push('bh');
+DPR_G.reorder.push('m');
+DPR_G.reorder.push('y');
+DPR_G.reorder.push('r');
+DPR_G.reorder.push('l');
+DPR_G.reorder.push('ḷ');
+DPR_G.reorder.push('v');
+DPR_G.reorder.push('s');
+DPR_G.reorder.push('h');
 
-var oldorder = new Array();
-oldorder.push('#');
-oldorder.push('0');
-oldorder.push('1');
-oldorder.push('2');
-oldorder.push('3');
-oldorder.push('4');
-oldorder.push('5');
-oldorder.push('6');
-oldorder.push('7');
-oldorder.push('8');
-oldorder.push('9');
+DPR_G.oldorder = new Array();
+DPR_G.oldorder.push('#');
+DPR_G.oldorder.push('0');
+DPR_G.oldorder.push('1');
+DPR_G.oldorder.push('2');
+DPR_G.oldorder.push('3');
+DPR_G.oldorder.push('4');
+DPR_G.oldorder.push('5');
+DPR_G.oldorder.push('6');
+DPR_G.oldorder.push('7');
+DPR_G.oldorder.push('8');
+DPR_G.oldorder.push('9');
 
-oldorder.push('A');
-oldorder.push('B');
-oldorder.push('C');
-oldorder.push('D');
-oldorder.push('E');
-oldorder.push('F');
-oldorder.push('G');
-oldorder.push('H');
-oldorder.push('I');
-oldorder.push('J');
-oldorder.push('K');
-oldorder.push('L');
-oldorder.push('M');
-oldorder.push('N');
-oldorder.push('O');
-oldorder.push('P');
-oldorder.push('Q');
-oldorder.push('R');
-oldorder.push('S');
-oldorder.push('T');
-oldorder.push('a');
-oldorder.push('b');
-oldorder.push('c');
-oldorder.push('d');
-oldorder.push('e');
-oldorder.push('f');
-oldorder.push('g');
-oldorder.push('h');
-oldorder.push('i');
-oldorder.push('j');
-oldorder.push('k');
-oldorder.push('l');
-oldorder.push('m');
-oldorder.push('n');
-oldorder.push('o');
-oldorder.push('p');
-oldorder.push('q');
-oldorder.push('r');
-oldorder.push('s');
-oldorder.push('t');
-oldorder.push('u');
-oldorder.push('v');
-oldorder.push('w');
-oldorder.push('x');
-oldorder.push('y');
-oldorder.push('z');
+DPR_G.oldorder.push('A');
+DPR_G.oldorder.push('B');
+DPR_G.oldorder.push('C');
+DPR_G.oldorder.push('D');
+DPR_G.oldorder.push('E');
+DPR_G.oldorder.push('F');
+DPR_G.oldorder.push('G');
+DPR_G.oldorder.push('H');
+DPR_G.oldorder.push('I');
+DPR_G.oldorder.push('J');
+DPR_G.oldorder.push('K');
+DPR_G.oldorder.push('L');
+DPR_G.oldorder.push('M');
+DPR_G.oldorder.push('N');
+DPR_G.oldorder.push('O');
+DPR_G.oldorder.push('P');
+DPR_G.oldorder.push('Q');
+DPR_G.oldorder.push('R');
+DPR_G.oldorder.push('S');
+DPR_G.oldorder.push('T');
+DPR_G.oldorder.push('a');
+DPR_G.oldorder.push('b');
+DPR_G.oldorder.push('c');
+DPR_G.oldorder.push('d');
+DPR_G.oldorder.push('e');
+DPR_G.oldorder.push('f');
+DPR_G.oldorder.push('g');
+DPR_G.oldorder.push('h');
+DPR_G.oldorder.push('i');
+DPR_G.oldorder.push('j');
+DPR_G.oldorder.push('k');
+DPR_G.oldorder.push('l');
+DPR_G.oldorder.push('m');
+DPR_G.oldorder.push('n');
+DPR_G.oldorder.push('o');
+DPR_G.oldorder.push('p');
+DPR_G.oldorder.push('q');
+DPR_G.oldorder.push('r');
+DPR_G.oldorder.push('s');
+DPR_G.oldorder.push('t');
+DPR_G.oldorder.push('u');
+DPR_G.oldorder.push('v');
+DPR_G.oldorder.push('w');
+DPR_G.oldorder.push('x');
+DPR_G.oldorder.push('y');
+DPR_G.oldorder.push('z');
 
-var neworder = new Array();
+DPR_G.neworder = new Array();
 var roo = '';
-for(var w = 0; w < reorder.length; w++) {
-  roo = reorder[w];
-  neworder[roo] = oldorder[w];
+for(var w = 0; w < DPR_G.reorder.length; w++) {
+  roo = DPR_G.reorder[w];
+  DPR_G.neworder[roo] = DPR_G.oldorder[w];
 }
 
 function sortaz(mydata){  // sort pali array
@@ -131,7 +131,7 @@ function sortaz(mydata){  // sort pali array
 }
 
 function sortStrip(word) {
-  if(DPR_prefs['nigahita']) {
+  if(DPR_G.DPR_prefs['nigahita']) {
     word = word.replace(/ṁ/g, 'ṃ');
     word = word.replace(/Ṁ/g, 'Ṃ');
   }
@@ -154,12 +154,12 @@ function comparePaliAlphabet(a,b) {
 
       var twochar = onechar + two[i].charAt(c+1);
 
-      if (neworder[twochar]) {
-        wordval+=neworder[twochar];
+      if (DPR_G.neworder[twochar]) {
+        wordval+=DPR_G.neworder[twochar];
         c++;
       }
-      else if (neworder[onechar]) {
-        wordval+=neworder[onechar];
+      else if (DPR_G.neworder[onechar]) {
+        wordval+=DPR_G.neworder[onechar];
       }
       else {
         wordval+=onechar;
@@ -239,7 +239,7 @@ function groupBySimilarity(list,minsim) {
   var listloc = [];
 
   for (var f = 0; f < list.length; f++) {
-    if(devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
+    if(DPR_G.devCheck) ddump([f+1,'of',list.length,'words,',simlist.length,'groups']);
     var thisword = list[f]
 
     var thislist = findSimilarWords(thisword,list.slice(f+1));

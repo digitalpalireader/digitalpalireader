@@ -4,7 +4,7 @@ DPR_G.G_unnamed = '[unnamed]';
 
 DPR_G.G_hier = 'm';
 
-var oldnikaya = 0;
+DPR_G.oldnikaya = 0;
 
 
 DPR_G.G_XMLFileArray = []; // [nik+book] = [m,a,t]
@@ -169,39 +169,39 @@ DPR_G.G_numberToNik.push('n');
 
 
 
-var kudvala = [];
+DPR_G.kudvala = [];
 
-kudvala['1'] = 0;
-kudvala['2'] = 1;
-kudvala['3'] = 2;
-kudvala['4'] = 3;
-kudvala['5'] = 4;
-kudvala['6'] = 5;
-kudvala['7'] = 6;
-kudvala['8'] = 7;
-kudvala['9'] = 8;
-kudvala['10'] = 9;
-kudvala['12'] = 10;
-kudvala['13'] = 11;
-kudvala['14'] = 13;
-kudvala['15'] = 13;
+DPR_G.kudvala['1'] = 0;
+DPR_G.kudvala['2'] = 1;
+DPR_G.kudvala['3'] = 2;
+DPR_G.kudvala['4'] = 3;
+DPR_G.kudvala['5'] = 4;
+DPR_G.kudvala['6'] = 5;
+DPR_G.kudvala['7'] = 6;
+DPR_G.kudvala['8'] = 7;
+DPR_G.kudvala['9'] = 8;
+DPR_G.kudvala['10'] = 9;
+DPR_G.kudvala['12'] = 10;
+DPR_G.kudvala['13'] = 11;
+DPR_G.kudvala['14'] = 13;
+DPR_G.kudvala['15'] = 13;
 
-var abhivala = [];
+DPR_G.abhivala = [];
 
-abhivala['1'] = 0;
-abhivala['2'] = 1;
-abhivala['3'] = 2;
-abhivala['4'] = 3;
-abhivala['5'] = 4;
-abhivala['6'] = 5;
-abhivala['7'] = 5;
-abhivala['8'] = 5;
-abhivala['9'] = 6;
-abhivala['10'] = 6;
-abhivala['11'] = 6;
-abhivala['12'] = 6;
-abhivala['13'] = 6;
-abhivala['14'] = 6;
+DPR_G.abhivala['1'] = 0;
+DPR_G.abhivala['2'] = 1;
+DPR_G.abhivala['3'] = 2;
+DPR_G.abhivala['4'] = 3;
+DPR_G.abhivala['5'] = 4;
+DPR_G.abhivala['6'] = 5;
+DPR_G.abhivala['7'] = 5;
+DPR_G.abhivala['8'] = 5;
+DPR_G.abhivala['9'] = 6;
+DPR_G.abhivala['10'] = 6;
+DPR_G.abhivala['11'] = 6;
+DPR_G.abhivala['12'] = 6;
+DPR_G.abhivala['13'] = 6;
+DPR_G.abhivala['14'] = 6;
 
 DPR_G.G_kynames = [];
 DPR_G.G_kynames['k'] = [];
@@ -256,26 +256,26 @@ DPR_G.G_kynames['n'].push('Abhi-Mat');
 DPR_G.G_kynames['n'].push('Mohavicch');
 
 
-var nikvoladi = new Array();
-nikvoladi['d'] = [1,2,3];
-nikvoladi['m'] = [1,2,3];
-nikvoladi['s'] = [1,2,3,4,5];
-nikvoladi['a'] = [1,2,3,4,5,6,7,8,9,10,11];
-nikvoladi['km'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-nikvoladi['ka'] = [0,1,2,3,4,5,6,7,8,9,11,12,13,14];
-nikvoladi['kt'] = [];
-nikvoladi['vm'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv'];
-nikvoladi['va'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv'];
-nikvoladi['vt'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv','Dvem','Vin.S-A','Vaj.B-T','Vim-T','Vin.L-T','K.v.P-T','K.v.An-T','Vin.Vin','Vin.Vin-T','Ut.Vin-T','Pāc.Yoj','Khud.Sik '];
-nikvoladi['ym'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
-nikvoladi['ya'] = [0,1,2,3,4,5,8];
-nikvoladi['yt'] = [0,1,2,3,4,5,8];
-nikvoladi['x'] = [1,2];
-nikvoladi['b'] = ['Mūla','Ṭīkā'];
-nikvoladi['gm'] = ['Mog','Kac','S.P.M.','S.Dh.M.','P.R.S.'];
-nikvoladi['ga'] = [];
-nikvoladi['gt'] = [];
-nikvoladi['n'] = [0,1,2,3,4,5,6,7,8];
+DPR_G.nikvoladi = new Array();
+DPR_G.nikvoladi['d'] = [1,2,3];
+DPR_G.nikvoladi['m'] = [1,2,3];
+DPR_G.nikvoladi['s'] = [1,2,3,4,5];
+DPR_G.nikvoladi['a'] = [1,2,3,4,5,6,7,8,9,10,11];
+DPR_G.nikvoladi['km'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
+DPR_G.nikvoladi['ka'] = [0,1,2,3,4,5,6,7,8,9,11,12,13,14];
+DPR_G.nikvoladi['kt'] = [];
+DPR_G.nikvoladi['vm'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv'];
+DPR_G.nikvoladi['va'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv'];
+DPR_G.nikvoladi['vt'] = ['Pārā','Pāc','Bhī.V.','M.v.','C.v.','Pariv','Dvem','Vin.S-A','Vaj.B-T','Vim-T','Vin.L-T','K.v.P-T','K.v.An-T','Vin.Vin','Vin.Vin-T','Ut.Vin-T','Pāc.Yoj','Khud.Sik '];
+DPR_G.nikvoladi['ym'] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13];
+DPR_G.nikvoladi['ya'] = [0,1,2,3,4,5,8];
+DPR_G.nikvoladi['yt'] = [0,1,2,3,4,5,8];
+DPR_G.nikvoladi['x'] = [1,2];
+DPR_G.nikvoladi['b'] = ['Mūla','Ṭīkā'];
+DPR_G.nikvoladi['gm'] = ['Mog','Kac','S.P.M.','S.Dh.M.','P.R.S.'];
+DPR_G.nikvoladi['ga'] = [];
+DPR_G.nikvoladi['gt'] = [];
+DPR_G.nikvoladi['n'] = [0,1,2,3,4,5,6,7,8];
 
 DPR_G.G_nikFullNames = [];
 DPR_G.G_nikFullNames['v'] = 'Vinaya';

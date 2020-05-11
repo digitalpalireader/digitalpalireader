@@ -7,7 +7,7 @@ if (DPR_PAL.isWeb) {
 }
 
 function DPR_PAL_Search_SetTitle(title) {
-  MD.title = title;
+  DPR_G.MD.title = title;
 }
 
 function DPR_PAL_Search_ShowProgressBar() {
@@ -65,7 +65,7 @@ function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {
 <li>
   <a href="#" onclick="return scrollSearch()">${searchTerm}</a>
 </li>`;
-  MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
+  DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
 
 function DPR_PAL_Search_AddSectionLink(nik) {
@@ -75,7 +75,7 @@ function DPR_PAL_Search_AddSectionLink(nik) {
 <li>
   <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${DPR_G.G_nikLongName[nik] + ': 0'}</a>
 </li>`;
-  MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
+  DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
 
 function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
@@ -98,7 +98,7 @@ function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
   <label class="m-0" style="font-weight: bold;">${sectionInfo}</label>
 </li>
 `;
-  MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
+  DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
 }
 
 function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {
@@ -106,10 +106,10 @@ function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {
 }
 
 function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {
-  var val = parseInt(MD.getElementById('search-matches').innerHTML);
+  var val = parseInt(DPR_G.MD.getElementById('search-matches').innerHTML);
   if(val == 1) {
-    var str = MD.getElementById('inter').innerHTML.replace('matches','match');
-    MD.getElementById('inter').innerHTML = str;
+    var str = DPR_G.MD.getElementById('inter').innerHTML.replace('matches','match');
+    DPR_G.MD.getElementById('inter').innerHTML = str;
   }
 }
 
@@ -117,11 +117,11 @@ function DPR_PAL_Search_AddCopyPermaLinkElement() {
   const html = `
 <a class="btn btn-success btn-light btn-small m-0" onclick="permalinkClick('${DPR_G.G_searchLink}')" title="Click to copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
 `;
-  MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
+  DPR_G.MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
 }
 
 function DPR_PAL_Search_RemoveCopyPermaLinkElement() {
-  var element = MD.getElementById("search-link");
+  var element = DPR_G.MD.getElementById("search-link");
   while(element.hasChildNodes()){
   element.removeChild(element.firstChild);
   }

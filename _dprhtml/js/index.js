@@ -4,8 +4,8 @@
 installGlobalHandlers();
 
 /* Start: Legacy stuff - Don't mess with it! */
-var devCheck = 0;
-window.dump = window.dump || devCheck ? console.log : () => { };
+DPR_G.devCheck = 0;
+window.dump = window.dump || DPR_G.devCheck ? console.log : () => { };
 function moveFrame() { }
 function devO() { }
 function dalert(a) { }
@@ -202,9 +202,9 @@ function triggerUpdateCheck() {
 async function setupBTForRG() {
   try {
     const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText.trim())
-    DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
-    DPR_prefs['buddhist_texts'] = true;
+    DPR_G.DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
+    DPR_G.DPR_prefs['buddhist_texts'] = true;
     DPR_Translations.createTrProps();
   } catch { }
-  console.log('setupBTForRG:', DPR_prefs['buddhist_texts'], DPR_prefs['btloc']);
+  console.log('setupBTForRG:', DPR_G.DPR_prefs['buddhist_texts'], DPR_G.DPR_prefs['btloc']);
 }

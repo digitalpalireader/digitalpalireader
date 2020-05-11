@@ -54,10 +54,10 @@ console.log('Loading DPR_PAL...');
   DPR_PAL.showLoadingMarquee = () => {
     if (DPR_PAL.isXUL) {
       $('#mafbc').html('');
-      document.getElementById('mafbc').appendChild(pleasewait);
+      document.getElementById('mafbc').appendChild(DPR_G.pleasewait);
     } else {
       $('#mafbc').empty();
-      $('#mafbc').append(pleasewait);
+      $('#mafbc').append(DPR_G.pleasewait);
     }
   };
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var EXPORTED_SYMBOLS = ["DPR_G.G_irregVerb","DPR_G.G_irregNoun","DPR_G.G_irregDec"];
+DPR_G.EXPORTED_SYMBOLS = ["DPR_G.G_irregVerb","DPR_G.G_irregNoun","DPR_G.G_irregDec"];
 
 
 DPR_G.G_irregVerb = [];

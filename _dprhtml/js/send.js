@@ -317,17 +317,17 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
       {
         var lcn = ldiv.className;
         if(/varc/.test(lcn))
-          ldiv.style.color = DPR_prefs['grey'];
+          ldiv.style.color = DPR_G.DPR_prefs['grey'];
         else
-          ldiv.style.color = DPR_prefs['coltext'];
+          ldiv.style.color = DPR_G.DPR_prefs['coltext'];
         ldiv.style.border = 'none';
       }
-      const colsel = DPR_prefs['colsel'];
+      const colsel = DPR_G.DPR_prefs['colsel'];
       cdiv.style.color = colsel;
       cdiv.style.border = `2px inset ${colsel}`;
       DPR_G.G_lastcolour = divclicked;
     }
-    if(DPR_prefs['copyWord'])
+    if(DPR_G.DPR_prefs['copyWord'])
       copyToClipboard(input);
   }
   if(add != true) { // reuse old tab

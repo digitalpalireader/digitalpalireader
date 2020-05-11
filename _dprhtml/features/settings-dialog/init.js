@@ -11,7 +11,7 @@ class SettingsDialogTabsViewModel {
 
   createSettings() {
     return Object
-      .entries(DPR_prefsInfo)
+      .entries(DPR_G.DPR_prefsinfo)
       .reduce((acc, [k, _]) => (acc[k] = ko.observable(getPref(k)), acc), this);
   }
 
@@ -26,14 +26,14 @@ class SettingsDialogTabsViewModel {
 
   defaultPreferences() {
     Object
-      .entries(DPR_prefsInfo)
-      .forEach(([k, _]) => this[k](DPR_prefsD[k]));
+      .entries(DPR_G.DPR_prefsinfo)
+      .forEach(([k, _]) => this[k](DPR_G.DPR_prefsD[k]));
   }
 
   cancelPreferences() {
     Object
-      .entries(DPR_prefsInfo)
-      .forEach(([k, _]) => this[k](DPR_prefs[k]));
+      .entries(DPR_G.DPR_prefsInfo)
+      .forEach(([k, _]) => this[k](DPR_G.DPR_prefs[k]));
   }
 
   hardReset() {
