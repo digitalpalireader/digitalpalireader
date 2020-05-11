@@ -50,6 +50,9 @@ function convert(check,lower)
         case 6:
           spell = toBengali(spell);
           break;
+        case 7:
+          spell = toTelugu(spell);
+          break;
       }
       break;
     case 1:
@@ -71,6 +74,9 @@ function convert(check,lower)
           break;
         case 6:
           spell = toBengali(spell);
+          break;
+        case 7:
+          spell = toTelugu(spell);
           break;
       }
       break;
@@ -94,6 +100,9 @@ function convert(check,lower)
         case 6:
           spell = toBengali(spell);
           break;
+        case 7:
+          spell = toTelugu(spell);
+          break;
       }
       break;
     case 5: // from Sinhala
@@ -115,6 +124,9 @@ function convert(check,lower)
           break;
         case 6:
           spell = toBengali(spell);
+          break;
+        case 7:
+          spell = toTelugu(spell);
           break;
       }
       break;
