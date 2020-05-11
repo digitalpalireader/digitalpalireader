@@ -4,7 +4,7 @@ class SearchTabViewModel{
   constructor() {
     this.searchType = ko.observable(0);
     this.searchString = ko.observable('');
-    this.searchString.subscribe(x => this.searchString(toUniRegEx(x)), this);
+    this.searchString.subscribe(x => this.searchString(this.searchRegex() ? toUniRegEx(x) : toUni(x)), this);
     this.searchM = ko.observable(true);
     this.searchA = ko.observable(true);
     this.searchT = ko.observable(true);

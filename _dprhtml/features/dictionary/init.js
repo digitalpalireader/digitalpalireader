@@ -3,7 +3,7 @@
 class DictionaryTabViewModel{
   constructor(){
     this.query = ko.observable('');
-    this.query.subscribe(x => this.query(toUniRegEx(x)), this);
+    this.query.subscribe(x => this.query(this.rx() ? toUniRegEx(x) : toUni(x)), this);
     this.type = ko.observable('');
     this.showAdvancedOptions = ko.observable(false);
     this.options = ko.observableArray();
@@ -14,6 +14,20 @@ class DictionaryTabViewModel{
     for (var i in DPR_G.G_hNumbers) {
       this.options.push('m' + i);
     }
+
+    this.rx = ko.computed({
+      read: function() {
+        return this.option('rx');
+      },
+      write: function (val) {
+        let opts = this.options().filter(x => x.toLowerCase() !== 'rx');
+        if (val) {
+          opts = [...opts, 'rx'];
+        }
+        this.options(opts);
+      },
+      owner: this,
+    });
   }
 
   option(optionName){
