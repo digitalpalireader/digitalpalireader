@@ -715,6 +715,121 @@ function toDeva(input,type) {
   return output;
 }
 
+// Refer: https://en.m.wikipedia.org/wiki/Telugu_(Unicode_block)
+function toTelugu(input,type) {
+
+  input = input.toLowerCase().replace(/ṁ/g,'ṃ');
+
+  var vowel = [];
+  vowel['a'] = " అ";
+  vowel['i'] = " ఇ";
+  vowel['u'] = " ఉ";
+  vowel['ā'] = " ఆ";
+  vowel['ī'] = " ఈ";
+  vowel['ū'] = " ఊ";
+  vowel['e'] = " ఎ";
+  vowel['o'] = " ఒ";
+
+  var telugur = [];
+
+  telugur['ā'] = 'ా';
+  telugur['i'] = 'ి';
+  telugur['ī'] = 'ీ';
+  telugur['u'] = 'ు';
+  telugur['ū'] = 'ూ';
+  telugur['e'] = 'ె';
+  telugur['o'] = 'ొ';
+  telugur['ṃ'] = 'ం';
+  telugur['k'] = 'క';
+  telugur['kh'] = 'ఖ';
+  telugur['g'] = 'గ';
+  telugur['gh'] = 'ఘ';
+  telugur['ṅ'] = 'ఙ';
+  telugur['c'] = 'చ';
+  telugur['ch'] = 'ఛ';
+  telugur['j'] = 'జ';
+  telugur['jh'] = 'ఝ';
+  telugur['ñ'] = 'ఞ';
+  telugur['ṭ'] = 'ట';
+  telugur['ṭh'] = 'ఠ';
+  telugur['ḍ'] = 'డ';
+  telugur['ḍh'] = 'ఢ';
+  telugur['ṇ'] = 'ణ';
+  telugur['t'] = 'త';
+  telugur['th'] = 'థ';
+  telugur['d'] = 'ద';
+  telugur['dh'] = 'ధ';
+  telugur['n'] = 'న';
+  telugur['p'] = 'ప';
+  telugur['ph'] = 'ఫ';
+  telugur['b'] = 'బ';
+  telugur['bh'] = 'భ';
+  telugur['m'] = 'మ';
+  telugur['y'] = 'య';
+  telugur['r'] = 'ర';
+  telugur['l'] = 'ల';
+  telugur['ḷ'] = 'ళ';
+  telugur['v'] = 'వ';
+  telugur['s'] = 'స';
+  telugur['h'] = 'హ';
+
+  var im = '';
+  var i0 = '';
+  var i1 = '';
+  var i2 = '';
+  var i3 = '';
+  var i4 = '';
+  var i5 = '';
+  var output = '';
+  var cons = 0;
+  var i = 0;
+  var virama = '్';
+
+  input = input.replace(/\&quot;/g, '`');
+
+  while (i < input.length) {
+    im = input.charAt(i-2);
+    i0 = input.charAt(i-1);
+    i1 = input.charAt(i);
+    i2 = input.charAt(i+1);
+    i3 = input.charAt(i+2);
+    i4 = input.charAt(i+3);
+    i5 = input.charAt(i+4);
+
+    if (i == 0 && vowel[i1]) { // first letter vowel
+      output += vowel[i1];
+      i += 1;
+    }
+    else if (i2 == 'h' && telugur[i1+i2]) {    // two character match
+      output += telugur[i1+i2];
+      if (i3 && !vowel[i3] && i2 != 'ṃ') {
+        output += virama;
+      }
+      i += 2;
+    }
+    else if (telugur[i1]) {  // one character match except a
+      output += telugur[i1];
+      if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
+        output += virama;
+      }
+      i++;
+    }
+    else if (i1 != 'a') {
+      if (cons[i0] || (i0 == 'h' && cons[im])) output += virama; // end word consonant
+      output += i1;
+      i++;
+      if(vowel[i2]) {
+        output+=vowel[i2];
+        i++;
+      }
+    }
+    else i++; // a
+  }
+  if (cons[i1]) output += virama;
+  output = output.replace(/\`+/g, '"');
+  return output;
+}
+
 function toThai(input) {
   input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 
@@ -913,6 +1028,9 @@ function translit(data) {
     break;
     case 5:
       out = toBengali(data);
+    break;
+    case 6:
+      out = toTelugu(data);
     break;
   }
   return out;
