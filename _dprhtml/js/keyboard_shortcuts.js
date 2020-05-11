@@ -32,7 +32,6 @@ function DPR_keypress(e) {
 
   if (e.key === '^') {
     resetAllDprSettings();
-    window.location.reload();
     return;
   }
 
@@ -64,8 +63,4 @@ function DPR_keypress(e) {
     $('#helpDialog').modal('show');
     return;
   }
-}
-
-function resetAllDprSettings() {
-  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
 }

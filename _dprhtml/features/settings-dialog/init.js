@@ -36,6 +36,10 @@ class SettingsDialogTabsViewModel {
       .forEach(([k, _]) => this[k](DPR_prefs[k]));
   }
 
+  hardReset() {
+    resetAllDprSettings();
+  }
+
   updateActiveSettingsTabId(tabId) {
     Object
       .entries(this)

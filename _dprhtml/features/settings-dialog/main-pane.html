@@ -183,7 +183,8 @@
           </div>
         </div>
       </div>
-      <div class="modal-footer p-2">
+      <div class="modal-footer p-2 d-flex">
+        <button type="button" class="btn btn-danger btn-sm mb-0 mr-auto" title="Hard reset all settings..." data-bind="click: hardReset">Hard reset</button>
         <button type="button" class="btn btn-secondary btn-sm mb-0" title="Restore defaults..." data-bind="click: defaultPreferences">Defaults</button>
         <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes..." data-bind="click: cancelPreferences" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-bind="click: savePreferences" data-dismiss="modal">OK</button>

@@ -118,16 +118,12 @@ const initFeatureTabs = () => {
   $(`#${activeTab}TabPane`).show();
   $(".nav-link").removeClass('active');
   $(`#${activeTab}Tab`).addClass('active');
-  localStorage.setItem('activeTab', `${__dprViewModel.activeTab()}Tab`);
 
   $(".nav-link").on("click", function (e) {
     e.preventDefault();
     $(".featureTabContent").hide();
     let tabId = this.id.substring(0, this.id.length - 3);
     $(`#${tabId}TabPane`).show();
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      localStorage.setItem('activeTab', $(e.target).attr('id'));
-    });
   });
 }
 

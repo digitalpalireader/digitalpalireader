@@ -323,3 +323,8 @@ function logTelemetry() {
 
   appInsights.trackEvent({ name: `Preferences updated`,  properties: modifiedPrefs, });
 }
+
+function resetAllDprSettings() {
+  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
+  window.location.reload();
+}
