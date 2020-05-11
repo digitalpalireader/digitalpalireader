@@ -615,7 +615,7 @@ function createTables(xmlDoc,hiert)
               }
 
               if(!DPR_prefs['showVariantsInline'])
-				texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
+				        texttomatch = texttomatch.replace(/\{[^}]+\}/g, '');
 
               if (!/[0-9]/.exec(DPR_G.G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
@@ -783,15 +783,15 @@ function createTables(xmlDoc,hiert)
                   while (startmatch >= 0)
                   {
                     match = 1;
-                                        if(DPR_G.G_searchRX) gotstring = texttomatch.match(getstring)[0];
-                                        else gotstring = getstring;
+                    if(DPR_G.G_searchRX) gotstring = texttomatch.match(getRegExtSearchString(getstring))[0];
+                    else gotstring = getstring;
                     endmatch = startmatch + gotstring.length;
                     beforem = texttomatch.substring(0,startmatch);
                     if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(getstring)) {  // page search
-                                            beforem = beforem.substring(0,beforem.length - 3);
-                                            endmatch += 4;
-                                        }
-                                        afterm = texttomatch.substring(endmatch,texttomatch.length);
+                        beforem = beforem.substring(0,beforem.length - 3);
+                        endmatch += 4;
+                    }
+                    afterm = texttomatch.substring(endmatch,texttomatch.length);
                     postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
                     texttomatch = texttomatch.substring(endmatch);
 
@@ -1254,10 +1254,16 @@ function atiSearchOffline(d, getstring) {
 
 function findRegEx(text,string) {
   var rstring = new RegExp(toUniRegEx(string));
-  var bstring = new RegExp(toUniRegEx(string.replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)")));
-  var match = text.search(rstring);
-  if(match > -1 && string.indexOf("\\b") > -1 && (text.search(bstring) == -1 || text.search(bstring) > match)) {
-    match = -1;
-  }
+  var bstring = getRegExtSearchString(string);
+  //alert(bstring);
+  var match = text.search(bstring);
+
+  //if(match > -1 && string.indexOf("\\b") > -1 && (text.search(bstring) == -1 || text.search(bstring) > match)) {
+  //  match = -1;
+  //}
   return match
 }
+function getRegExtSearchString(string) {
+  return new RegExp(toUniRegEx(string).replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)"));
+}
+
