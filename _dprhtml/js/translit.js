@@ -716,7 +716,7 @@ function toDeva(input,type) {
 }
 
 // Refer: https://en.m.wikipedia.org/wiki/Telugu_(Unicode_block)
-function toTelugu(input, type) {
+function toTelugu(input,type) {
 
   input = input.toLowerCase().replace(/ṁ/g,'ṃ');
 
@@ -770,7 +770,7 @@ function toTelugu(input, type) {
   telugur['l'] = 'ల';
   telugur['ḷ'] = 'ళ';
   telugur['v'] = 'వ';
-  telugur['s'] = 'శ';
+  telugur['s'] = 'స';
   telugur['h'] = 'హ';
 
   var im = '';
@@ -783,6 +783,7 @@ function toTelugu(input, type) {
   var output = '';
   var cons = 0;
   var i = 0;
+  var virama = '్';
 
   input = input.replace(/\&quot;/g, '`');
 
@@ -802,19 +803,19 @@ function toTelugu(input, type) {
     else if (i2 == 'h' && telugur[i1+i2]) {    // two character match
       output += telugur[i1+i2];
       if (i3 && !vowel[i3] && i2 != 'ṃ') {
-        output += '्';
+        output += virama;
       }
       i += 2;
     }
     else if (telugur[i1]) {  // one character match except a
       output += telugur[i1];
       if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
-        output += '्';
+        output += virama;
       }
       i++;
     }
     else if (i1 != 'a') {
-      if (cons[i0] || (i0 == 'h' && cons[im])) output += '्'; // end word consonant
+      if (cons[i0] || (i0 == 'h' && cons[im])) output += virama; // end word consonant
       output += i1;
       i++;
       if(vowel[i2]) {
@@ -824,7 +825,7 @@ function toTelugu(input, type) {
     }
     else i++; // a
   }
-  if (cons[i1]) output += '्';
+  if (cons[i1]) output += virama;
   output = output.replace(/\`+/g, '"');
   return output;
 }
