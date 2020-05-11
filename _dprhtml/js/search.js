@@ -40,7 +40,7 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
     DPR_G.G_searchPart = searchPart;
     DPR_G.G_searchRX = searchRX;
 
-    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + toVel(searchString) + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX);
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type='+searchType+'&query=' + searchString + '&MAT=' + searchMAT + '&set=' + searchSet + '&book=' + searchBook + '&part=' + searchPart + '&rx=' + searchRX);
 
     try {
       MW.history.replaceState('Object', 'Title', permalink);
@@ -561,6 +561,7 @@ function createTables(xmlDoc,hiert)
     if(DPR_G.G_searchRX) getstring = toUniRegEx(getstring);
     else getstring = toUni(getstring);
   }
+
   var sraout = stringra.join('#');
   sraout = sraout.replace(/"/g, '`');
   //if(DPR_G.G_searchRX) sraout = '/'+sraout.replace(/\\/g,'\\\\')+'/';
@@ -657,7 +658,7 @@ function createTables(xmlDoc,hiert)
 
                     while (startmatch >= 0)
                     {
-                      if(DPR_G.G_searchRX) gotstring = texttomatch.match(perstring)[0];
+                      if(DPR_G.G_searchRX) gotstring = texttomatch.match(getRegExtSearchString(perstring))[0];
                       else gotstring = perstring;
 
 
@@ -777,6 +778,7 @@ function createTables(xmlDoc,hiert)
 
                 if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,getstring);
                 else startmatch = texttomatch.indexOf(getstring)
+
                 postpara = '';
                 if (startmatch >= 0)
                 {
