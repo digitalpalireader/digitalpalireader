@@ -534,12 +534,12 @@ function toBengali(input,type) {
   bengalir['b'] = 'ব';
   bengalir['bh'] = 'ভ';
   bengalir['m'] = 'ম';
-  bengalir['y'] = 'য়';
+  bengalir['y'] = 'য';
   bengalir['r'] = 'র';
   bengalir['l'] = 'ল';
-  bengalir['ḷ'] = 'ল';
-  bengalir['v'] = 'ব';
-  bengalir['s'] = 'শ';
+  bengalir['ḷ'] = 'ল়';
+  bengalir['v'] = 'ৱ';
+  bengalir['s'] = 'স';
   bengalir['h'] = 'হ';
 
   var im = '';
