@@ -87,6 +87,11 @@ const DPR_CMD_GOTO_HOME = 'gotoHome';
 const DPR_CMD_TOGGLE_DPR_SIDEBAR = 'toggleDPRSidebar';
 const DPR_CMD_SHOW_BOTTOM_PANE = 'showBottomPane';
 const DPR_CMD_SHOW_PALI_QUOTE = 'showPaliQuote';
+const DPR_CMD_RESET_SETTINGS = 'resetSettings';
+const DPR_CMD_OPEN_NEW_QUIZZ = 'openNewQuizz';
+const DPR_CMD_OPEN_HELP = 'openHelp';
+const DPR_CMD_OPEN_HELP_VIDEO = 'openHelpVideo';
+const DPR_CMD_LAUNCH_FEEDBACK_FORM = 'launchFeedbackForm';
 
 const emptyFn = () => {};
 
@@ -409,8 +414,8 @@ const dprCommandList = [
     execute: () => __otherDialogsViewModel.toggleDPRSidebar(),
     visible: true,
     isDynamic: false,
-    title: "Toggle DPR Sidebar (Keyboard shortcut: `)",
-    matchKey: e => e.key === '`',
+    title: "Toggle DPR Sidebar (Keyboard shortcut: &)",
+    matchKey: e => e.key === '&',
   },
   {
     id: DPR_CMD_SHOW_BOTTOM_PANE,
@@ -431,6 +436,56 @@ const dprCommandList = [
     isDynamic: false,
     title: "Display Pali Quote (Keyboard shortcut: *)",
     matchKey: e => e.key === '*',
+  },
+  {
+    id: DPR_CMD_RESET_SETTINGS,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.resetSettings(),
+    visible: true,
+    isDynamic: false,
+    title: "Reset all settings (Keyboard shortcut: r)",
+    matchKey: e => e.key === 'r',
+  },
+  {
+    id: DPR_CMD_OPEN_NEW_QUIZZ,
+    notImplemented: true,
+    canExecute: false,
+    execute: () => __otherDialogsViewModel.openNewQuizz(),
+    visible: true,
+    isDynamic: false,
+    title: "Open new quizz (Keyboard shortcut: #)",
+    matchKey: e => e.key === '#',
+  },
+  {
+    id: DPR_CMD_OPEN_HELP,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.openHelp(),
+    visible: true,
+    isDynamic: false,
+    title: "Open help dialog (Keyboard shortcut: ?)",
+    matchKey: e => e.key === '?',
+  },
+  {
+    id: DPR_CMD_OPEN_HELP_VIDEO,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.openHelpVideo(),
+    visible: true,
+    isDynamic: false,
+    title: "Open help video (Keyboard shortcut: h)",
+    matchKey: e => e.key === 'h',
+  },
+  {
+    id: DPR_CMD_LAUNCH_FEEDBACK_FORM,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.launchFeedbackForm(),
+    visible: true,
+    isDynamic: false,
+    title: "Launch feedback form (Keyboard shortcut: @)",
+    matchKey: e => e.key === '@',
   },
 ];
 

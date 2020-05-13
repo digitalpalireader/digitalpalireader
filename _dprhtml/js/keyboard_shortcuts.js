@@ -29,37 +29,6 @@ function DPR_keypress(e) {
     else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
     return;
   }
-
-  if (e.key === '^') {
-    resetAllDprSettings();
-    window.location.reload();
-    return;
-  }
-
-  if (false && e.key === '#') {
-    newquiz();
-    return;
-  }
-
-  if (false && e.key === 'b') {
-    dTop.getElementById('bkButton').onmousedown();
-    return;
-  }
-
-  if (e.key === 'h') {
-    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
-    return;
-  }
-
-  if (false && e.key === '@') {
-    // Launch feedback form.
-    return;
-  }
-
-  if (e.key === '?') { // ?
-    $('#helpDialog').modal('show');
-    return;
-  }
 }
 
 function resetAllDprSettings() {

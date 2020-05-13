@@ -86,15 +86,27 @@ class OtherDialogsViewModel {
   }
 
   sendBookmarkFromDialog(loc, name, desc) {
-    // TODO: Handle this.quicklinkInNewTab().
-    /*
-    var place = this.quicklinkInput();
-    var outplace = convertShortLink(place);
-    if(outplace[0] === false) {
-      return alertFlash(outplace[1], outplace[2]);
-    }
+    // TODO when bookmarks is implemented
+  }
 
-    openPlace(outplace);
-    */
+  resetSettings() {
+    resetAllDprSettings();
+    window.location.reload();
+  }
+
+  openNewQuizz() {
+    // TODO when quizz is implemented
+  }
+
+  openHelp() {
+    $('#helpDialog').modal('show');
+  }
+
+  openHelpVideo() {
+    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
+  }
+
+  launchFeedbackForm() {
+    openDPRTab($(".feedback-form-link").attr("href"), 'DPR-feedback', 0);
   }
 }
