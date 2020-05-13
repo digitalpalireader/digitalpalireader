@@ -665,12 +665,7 @@ function translateWord(word,idx) {
         var tloc = P[vword][p].split('/');
         var t1 = tloc[0];
         var t2 = tloc[1];
-        var pedfileget = t1 + '/' + t2;
-        var pedp = 'etc/XML1/'+ t1+'/ped.xml';
-        var xmlhttp = new window.XMLHttpRequest();
-        xmlhttp.open("GET", pedp, false);
-        xmlhttp.send(null);
-        var xmlDoc = xmlhttp.responseXML.documentElement;
+        var xmlDoc = DPR_DataLoader.loadPXD(t1);
 
         var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -770,12 +765,7 @@ function translateWord(word,idx) {
           var tloc = P[temp][p].split('/');
           var t1 = tloc[0];
           var t2 = tloc[1];
-          var pedfileget = t1 + '/' + t2;
-          var pedp = DPR_PAL.contentFolder + 'etc/XML1/'+ t1 +'/ped.xml';
-          var xmlhttp = new window.XMLHttpRequest();
-          xmlhttp.open("GET", pedp, false);
-          xmlhttp.send(null);
-          var xmlDoc = xmlhttp.responseXML.documentElement;
+          var xmlDoc = DPR_DataLoader.loadPXD(t1);
 
           var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 

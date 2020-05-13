@@ -1,45 +1,89 @@
 'use strict';
 
-function loadXMLFile(file,setNo) {
-  var setName;
+var DPR_DataLoader = (function() {
+  const xhrGet = url => {
+    var xmlDoc = XML_Load.xhrGet({ url }, xhr => xhr.responseXML.documentElement);
+    return xmlDoc;
+  }
+
+  const loadTipitaka = (id, set) => {
+    var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
+    return xhrGet(url);
+  };
+
+  const loadPXD = id => {
+    var url = `${DPR_PAL.baseUrl}en/ped/${id}/ped.xml`;
+    return xhrGet(url);
+  };
+
+  const loadXDPPN = id => {
+    var url = `${DPR_PAL.baseUrl}en/dppn/${id}.xml`;
+    return xhrGet(url);
+  };
+
+  const loadSARoots = id => {
+    var url = `${DPR_PAL.baseUrl}sa/roots/${id}.xml`;
+    return xhrGet(url);
+  };
+
+  const loadSADictionary = id => {
+    var url = `${DPR_PAL.baseUrl}sa/dict/${id}.xml`;
+    return xhrGet(url);
+  };
+
+  const wrapExceptionHandler = function(fn) {
+    return function() {
+      try {
+        return fn.apply(this, arguments);
+      } catch (e) {
+        DPR_Chrome.showErrorToast(`Data files for [${[...arguments].join(',')}] not found. Ensure you have the latest components installed. More info: ${e.message}`);
+        return null;
+      }
+    };
+  };
+
+  return {
+    loadTipitaka: wrapExceptionHandler(loadTipitaka),
+    loadPXD: wrapExceptionHandler(loadPXD),
+    loadXDPPN: wrapExceptionHandler(loadXDPPN),
+    loadSARoots: wrapExceptionHandler(loadSARoots),
+    loadSADictionary: wrapExceptionHandler(loadSADictionary),
+  };
+})();
+
+function loadXMLFile(file, setNo) {
   if(typeof(setNo) == 'undefined')
     setNo = 0;
 
   switch(setNo) {
     case 0:
-      var setPack = 'my';
-      var setName = 'Myanmar';
+      var set = 'my';
       break;
     case 1:
-      var setPack = 'th';
-      var setName = 'Thai';
+      var set = 'th';
       break;
   }
-  try {
-    var bookload = `${DPR_PAL.baseUrl}tipitaka/${setPack}/${file}.xml`;
-    var xmlhttp = new window.XMLHttpRequest();
-    xmlhttp.open("GET", bookload, false);
-    xmlhttp.send(null);
-    var xmlDoc = xmlhttp.responseXML.documentElement;
 
-    return xmlDoc;
-  }
-  catch(ex) {
-    DPR_Chrome.showErrorToast('XML file '+file+'.xml not found.  Do you have the latest ' + setName + ' Tipitaka extension installed?');
-    return null;
-  }
+  return DPR_DataLoader.loadTipitaka(file, set);
 }
 
 var XML_Load = (function () {
+  const createXhr = (request, async = true) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open(request.method || "GET", request.url, async);
+    if (request.headers) {
+      Object.keys(request.headers).forEach(key => {
+        xhr.setRequestHeader(key, request.headers[key]);
+      });
+    }
+
+    return xhr;
+  }
+
+  // REFER: http://ccoenraets.github.io/es6-tutorial-data/promisify/.
   const xhrGetAsync = (request, procFn) => {
     return new Promise((resolve, reject) => {
-      let xhr = new XMLHttpRequest();
-      xhr.open(request.method || "GET", request.url);
-      if (request.headers) {
-        requestect.keys(request.headers).forEach(key => {
-          xhr.setRequestHeader(key, request.headers[key]);
-        });
-      }
+      let xhr = createXhr(request);
       xhr.onload = () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           resolve(procFn(xhr));
@@ -52,33 +96,14 @@ var XML_Load = (function () {
     });
   };
 
-  const loadXMLFile = async (file, setNo) => {
-    var setName;
-    if(typeof(setNo) == 'undefined')
-      setNo = 0;
-
-    switch(setNo) {
-      case 0:
-        var setPack = 'DPRMyanmar';
-        var setName = 'Myanmar';
-        break;
-      case 1:
-        var setPack = 'DPRThai';
-        var setName = 'Thai';
-        break;
-    }
-    try {
-      const xmlDoc = await xhrGetAsync({ url: `${DPR_PAL.baseUrl}${setPack}/content/xml/${file}.xml` }, xhr => xhr.responseXML.documentElement);
-      return xmlDoc;
-    }
-    catch(ex) {
-      DPR_Chrome.showErrorToast('XML file ' + file + '.xml not found.  Do you have the latest ' + setName + ' Tipitaka extension installed?');
-      return null;
-    }
+  const xhrGet = (request, procFn) => {
+    let xhr = createXhr(request, false);
+    xhr.send(request.body);
+    return procFn(xhr);
   }
 
   return {
     xhrGetAsync: xhrGetAsync,
-    loadXMLFile: loadXMLFile,
+    xhrGet: xhrGet,
   };
 })();

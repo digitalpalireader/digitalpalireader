@@ -62,17 +62,13 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   pedfileget = t1 + '/' + t2;
-  var pedp = `${DPR_PAL.baseUrl}en/ped/${t1}/ped.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", pedp, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadPXD(t1);
 
   var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
   data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>");
 
-  if(DPR_prefs['showPedLinks']) {
+  if(DPR_G.DPR_prefs['showPedLinks']) {
 
     // add links
     var dataa = data.split(' ');
@@ -83,7 +79,7 @@ function paliXML(filein,which,add)
         if(!tda || tda.length < 2) {
           datat += ' ' + dataa[i];
         }
-        else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+        else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
         else datat += ' ' + dataa[i];
         i++
 
@@ -105,7 +101,7 @@ function paliXML(filein,which,add)
         datat += ' ' + dataa[i];
       }
       else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) {
-        datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+        datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
       }
       else datat += ' ' + dataa[i];
 
@@ -248,11 +244,7 @@ function DPPNXML(filein,which,add)
 
   // xml
 
-  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${tloc[1]}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", dppnf, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadXDPPN(tloc[1]);
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 
@@ -357,11 +349,7 @@ function sktRXML(no,add)
 
   // xml
 
-  var file = `${DPR_PAL.baseUrl}sa/roots/${makeUniqueStringForCaseInsensitiveFS(sktR[no])}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", file, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(sktR[no]));
   var s = new XMLSerializer();
   var data = s.serializeToString(xmlDoc);
 
@@ -413,11 +401,7 @@ function sktXML(entry,idx,which,add)
 
   var char = entry.charAt(0);
 
-  var xml = `${DPR_PAL.baseUrl}sa/dict/${makeUniqueStringForCaseInsensitiveFS(char)}.xml`;
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", xml, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
 
   var data = xmlDoc.getElementsByTagName('u')[idx];
   var ser = new XMLSerializer();
@@ -477,10 +461,10 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var xmlDoc = loadXMLFile(bookload,0);
 
     if (nikaya == 'k') {
-      var bookno = kudvala[book];
+      var bookno = DPR_G.kudvala[book];
     }
     else if(nikaya == 'y') {
-      var bookno = abhivala[book];
+      var bookno = DPR_G.abhivala[book];
     }
     else var bookno = pca[1];
 
@@ -552,10 +536,10 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
 
     if (hiert != 'm' && nikaya == 'k') {
-      var bookno = kudvala[pca[1]];
+      var bookno = DPR_G.kudvala[pca[1]];
     }
     else if (hiert != 'm' && nikaya == 'k') {
-      var bookno = abhivala[pca[1]];
+      var bookno = DPR_G.abhivala[pca[1]];
     }
     else var bookno = parseInt(pca[1])-1;
 
@@ -624,7 +608,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
     }
     displayDictData(finout);
     if (!DPR_PAL.isXUL) {
-      document.getElementById('paliTextContent').scrollTop = 0;
+      scrollMainPane(0);
     }
 }
 
@@ -633,12 +617,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 function getDppnData(link){
   appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
 
-  var dppnf = `${DPR_PAL.baseUrl}en/dppn/${link.split('/')[0]}.xml`;
-
-  var xmlhttp = new window.XMLHttpRequest();
-  xmlhttp.open("GET", dppnf, false);
-  xmlhttp.send(null);
-  var xmlDoc = xmlhttp.responseXML.documentElement;
+  var xmlDoc = DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
   return data;

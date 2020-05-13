@@ -1,6 +1,6 @@
 'use strict';
 
-var DPR_prefsInfo = {
+DPR_G.DPR_prefsinfo = {
   DictH: {
     type: Number.name,
     defaultValue: 250,
@@ -259,17 +259,17 @@ const getPrefTypeStorageKey = n => `DPR.Prefsv2.${n}.Type`;
 
 // default prefs
 
-var DPR_prefsD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc[k] = v.defaultValue; return acc; }, []);
-var DPR_prefTypesD = Object.entries(DPR_prefsInfo).reduce((acc, [k, v]) => { acc[k] = v.type; return acc; }, []);
+DPR_G.DPR_prefsD = Object.entries(DPR_G.DPR_prefsinfo).reduce((acc, [k, v]) => { acc[k] = v.defaultValue; return acc; }, []);
+DPR_G.DPR_prefTypesD = Object.entries(DPR_G.DPR_prefsinfo).reduce((acc, [k, v]) => { acc[k] = v.type; return acc; }, []);
 
-var DPR_prefs = [];
+DPR_G.DPR_prefs = [];
 
 loadPreference();
 
 function loadPreference() {
   Object
-    .entries(DPR_prefsInfo)
-    .reduce((acc, [k, _]) => (acc[k] = getPref(k), acc), DPR_prefs);
+    .entries(DPR_G.DPR_prefsinfo)
+    .reduce((acc, [k, _]) => (acc[k] = getPref(k), acc), DPR_G.DPR_prefs);
 
   if (localStorage[getPrefTypeStorageKey('SendTelemetry')] === 'true') {
     logTelemetry();
@@ -279,10 +279,10 @@ function loadPreference() {
 
 function savePreferences(getPrefFn) {
   Object
-  .entries(DPR_prefsInfo)
+  .entries(DPR_G.DPR_prefsinfo)
   .forEach(([k, v]) => {
       localStorage[getPrefTypeStorageKey(k)] = v.type;
-      localStorage[getPrefStorageKey(k)] = DPR_prefs[k] = getPrefFn(k);
+      localStorage[getPrefStorageKey(k)] = DPR_G.DPR_prefs[k] = getPrefFn(k);
     });
 
   // NOTE: This calisthenic is required otherwise call to window reload kills telemetry upload call.
@@ -290,8 +290,8 @@ function savePreferences(getPrefFn) {
 }
 
 function getPref(name) {
-  let pref = DPR_prefsD[name];
-  let prefType = DPR_prefTypesD[name];
+  let pref = DPR_G.DPR_prefsD[name];
+  let prefType = DPR_G.DPR_prefTypesD[name];
 
   const prefStorageKey = getPrefStorageKey(name);
   if (!(localStorage[prefStorageKey] === undefined)){
@@ -317,9 +317,14 @@ function getPref(name) {
 
 function logTelemetry() {
   const modifiedPrefs = Object
-    .entries(DPR_prefsInfo)
-    .filter(([k, _]) => DPR_prefsD[k] !== DPR_prefs[k])
-    .reduce((acc, [k, _]) => (acc[k] = DPR_prefs[k], acc), {});
+    .entries(DPR_G.DPR_prefsinfo)
+    .filter(([k, _]) => DPR_G.DPR_prefsD[k] !== DPR_G.DPR_prefs[k])
+    .reduce((acc, [k, _]) => (acc[k] = DPR_G.DPR_prefs[k], acc), {});
 
   appInsights.trackEvent({ name: `Preferences updated`,  properties: modifiedPrefs, });
+}
+
+function resetAllDprSettings() {
+  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
+  window.location.reload();
 }

@@ -147,17 +147,17 @@ function outputDef(which,first,frombox)
         switch (data[2]) {
           case '0':
             if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + dataout + '</b></span>';
+            osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + dataout + '</b></span>';
             break;
           case '1':
             if (frombox !=2 && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
+            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
             break;
           case '2':
-            osout += '<b '+conciseCode+'style="color:' + DPR_prefs['colcpd'] + '">' + dataout + '</b>';
+            osout += '<b '+conciseCode+'style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + dataout + '</b>';
             break;
           case '3':
-            osout += '<b style="color:' + DPR_prefs['coltext'] + '">' + dataout + '</b>';
+            osout += '<b style="color:' + DPR_G.DPR_prefs['coltext'] + '">' + dataout + '</b>';
             break;
         }
       }
@@ -167,10 +167,10 @@ function outputDef(which,first,frombox)
         }
         switch (data[2]) {
           case '0':
-            osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
             break;
           case '1':
-            osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
             break;
         }
       }
@@ -233,9 +233,9 @@ function outputDef(which,first,frombox)
       DPR_G.G_thisConcise[conciseword] = concisedef;
       if(x == 0){
 
-        var sdfirst = '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;
+        var sdfirst = '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;
       }
-      conciseoutput += '<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef +'<br/>';
+      conciseoutput += '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef +'<br/>';
     }
 
   }
@@ -261,12 +261,12 @@ function outputDef(which,first,frombox)
 DPR_G.G_thisConcise = [];
 
 function showShortDef(word) {
-  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + DPR_G.G_thisConcise[word]);
+  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + DPR_G.G_thisConcise[word]);
 }
 
 function conciseChange(value) {
   var spdcol = value.split(':');
-  //$('#anfright').html('<b style="color:' + DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
+  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
 }
 
 function reanalyze(word,cancel) {

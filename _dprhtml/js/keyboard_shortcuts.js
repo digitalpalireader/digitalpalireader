@@ -30,7 +30,3 @@ function DPR_keypress(e) {
     return;
   }
 }
-
-function resetAllDprSettings() {
-  Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
-}

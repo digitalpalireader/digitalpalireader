@@ -1,17 +1,7 @@
-function bv(rnd,static) {
-  var xmlhttp = new window.XMLHttpRequest();
+async function bv(rnd,static) {
+  let url = `${DPR_PAL.contentFolder}etc/dbv.xml`;
+  const xmlDoc = await XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
 
-  let url = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/etc/dbv.html');
-  if (DPR_PAL.isWeb) {
-    url = DPR_PAL.contentFolder + 'etc/dbv.html';
-    // if this isn't done the request won't contain a 'responseXML' property with the parsed document
-    xmlhttp.overrideMimeType('text/xml');
-  }
-
-  xmlhttp.open("GET", url, false);
-  xmlhttp.send(null);
-
-  var xmlDoc = xmlhttp.responseXML.documentElement;
   var divs = xmlDoc.getElementsByTagName('div');
   if(static) {
     var no = rnd-1;
@@ -45,8 +35,8 @@ function bv(rnd,static) {
   return [head,text,cite,link,no];
 }
 
-function showBv(rnd) {
-  var abv = bv(rnd);
+async function showBv(rnd) {
+  var abv = await bv(rnd);
   var today = '';
   if(!rnd) {
     var date = new Date();

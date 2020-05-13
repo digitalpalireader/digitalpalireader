@@ -42,8 +42,13 @@
         "DPR_BottomPane",
         "__otherDialogsViewModel",
       ];
-      const diffVarList = () => Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a)))
-    </script>
+      const diffVarLists = () => {
+      console.log("Global Variables introduced by DPR-")
+      console.log(Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a))))
+      console.log("Keys added to DPR_G after init-")
+      console.log(Object.keys(DPR_G).filter(a => !(whitelist.includes(a) || initDPR_GList.includes(a))))
+      }
+ </script>
     <script>
       window.addEventListener('error', e => {
         const { message, source, lineno, colno, error } = e;
@@ -388,7 +393,6 @@
     <script>progressBar.go(50)</script>
     <script src="/_dprhtml/js/dpr_pal.js"></script>
     <script src="/_dprhtml/js/globalObject.js"></script>
-    <script src="/_dprhtml/js/dev.js"></script>
     <script src="/_dprhtml/js/web/io.js"></script>
     <script src="/_dprhtml/js/send.js"></script>
     <script src="/_dprhtml/js/receive.js"></script>

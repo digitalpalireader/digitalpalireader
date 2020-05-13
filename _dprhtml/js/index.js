@@ -4,8 +4,8 @@
 installGlobalHandlers();
 
 /* Start: Legacy stuff - Don't mess with it! */
-var devCheck = 0;
-window.dump = window.dump || devCheck ? console.log : () => { };
+DPR_G.devCheck = 0;
+window.dump = window.dump || DPR_G.devCheck ? console.log : () => { };
 function moveFrame() { }
 function devO() { }
 function dalert(a) { }
@@ -40,7 +40,7 @@ async function mainInitialize() {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
     initFeedbackFormParameters();
-    showBv();
+    await showBv();
   }
 
   initMainPane();
@@ -120,16 +120,12 @@ const initFeatureTabs = () => {
   $(`#${activeTab}TabPane`).show();
   $(".nav-link").removeClass('active');
   $(`#${activeTab}Tab`).addClass('active');
-  localStorage.setItem('activeTab', `${__dprViewModel.activeTab()}Tab`);
 
   $(".nav-link").on("click", function (e) {
     e.preventDefault();
     $(".featureTabContent").hide();
     let tabId = this.id.substring(0, this.id.length - 3);
     $(`#${tabId}TabPane`).show();
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-      localStorage.setItem('activeTab', $(e.target).attr('id'));
-    });
   });
 }
 
@@ -174,15 +170,6 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
 
 const  historyPopstateHandler = e => {
   console.warn('>>>> historyPopstateHandler', e);
-  if (DPR_PAL.isNavigationFeature()) {
-    $("#navigationDiv").load("navigation.html");
-  } else if (DPR_PAL.isSearchFeature()) {
-    $("#mafbc").load("search-results.html");
-  } else if (DPR_PAL.isDictionaryFeature() && location.indexOf('#') == -1) {
-    $("#mafbc").load("dictionary-results.html");
-  } else {
-    console.error('Unknown feature');
-  }
 }
 
 function triggerUpdateCheck() {
@@ -217,9 +204,9 @@ function triggerUpdateCheck() {
 async function setupBTForRG() {
   try {
     const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText.trim())
-    DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
-    DPR_prefs['buddhist_texts'] = true;
+    DPR_G.DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
+    DPR_G.DPR_prefs['buddhist_texts'] = true;
     DPR_Translations.createTrProps();
   } catch { }
-  console.log('setupBTForRG:', DPR_prefs['buddhist_texts'], DPR_prefs['btloc']);
+  console.log('setupBTForRG:', DPR_G.DPR_prefs['buddhist_texts'], DPR_G.DPR_prefs['btloc']);
 }

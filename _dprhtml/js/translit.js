@@ -2,8 +2,8 @@
 
 function toUni(input) {
   if(!input || input == '') return input;
-  var nigahita = (DPR_prefs['nigahita']?'ṁ':'ṃ');
-  var Nigahita = (DPR_prefs['nigahita']?'Ṁ':'Ṃ');
+  var nigahita = (DPR_G.DPR_prefs['nigahita']?'ṁ':'ṃ');
+  var Nigahita = (DPR_G.DPR_prefs['nigahita']?'Ṁ':'Ṃ');
 
   input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\.t/g, 'ṭ').replace(/\.d/g, 'ḍ').replace(/\"n\b/g, 'ṅ').replace(/\"nk/g, 'ṅk').replace(/\"ng/g, 'ṅg').replace(/\.n/g, 'ṇ').replace(/\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\.T/g, 'Ṭ').replace(/\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\.N/g, 'Ṇ').replace(/\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\.L/g, 'Ḷ').replace(/\.ll/g,'ḹ').replace(/\.r/g,'ṛ').replace(/\.rr/g,'ṝ').replace(/\.s/g,'ṣ').replace(/"s/g,'ś').replace(/\.h/g,'ḥ');
 
@@ -12,8 +12,8 @@ function toUni(input) {
 
 function toUniRegEx(input) {
   if(!input || input == '') return input;
-  var nigahita = (DPR_prefs['nigahita']?'ṁ':'ṃ');
-  var Nigahita = (DPR_prefs['nigahita']?'Ṁ':'Ṃ');
+  var nigahita = (DPR_G.DPR_prefs['nigahita']?'ṁ':'ṃ');
+  var Nigahita = (DPR_G.DPR_prefs['nigahita']?'Ṁ':'Ṃ');
   input = input.replace(/aa/g, 'ā').replace(/ii/g, 'ī').replace(/uu/g, 'ū').replace(/\\\.t/g, 'ṭ').replace(/\\\.d/g, 'ḍ').replace(/\"n\b/g, 'ṅ').replace(/\"nk/g, 'ṅk').replace(/\"ng/g, 'ṅg').replace(/\\\.n/g, 'ṇ').replace(/\\\.m/g, nigahita).replace(/\u1E41/g, nigahita).replace(/\~n/g, 'ñ').replace(/\\\.l/g, 'ḷ').replace(/AA/g, 'Ā').replace(/II/g, 'Ī').replace(/UU/g, 'Ū').replace(/\\\.T/g, 'Ṭ').replace(/\\\.D/g, 'Ḍ').replace(/\"N/g, 'Ṅ').replace(/\\\.N/g, 'Ṇ').replace(/\\\.M/g, Nigahita).replace(/\~N/g, 'Ñ').replace(/\\\.L/g, 'Ḷ');
   return input;
 }
@@ -534,12 +534,12 @@ function toBengali(input,type) {
   bengalir['b'] = 'ব';
   bengalir['bh'] = 'ভ';
   bengalir['m'] = 'ম';
-  bengalir['y'] = 'য়';
+  bengalir['y'] = 'য';
   bengalir['r'] = 'র';
   bengalir['l'] = 'ল';
-  bengalir['ḷ'] = 'ল';
-  bengalir['v'] = 'ব';
-  bengalir['s'] = 'শ';
+  bengalir['ḷ'] = 'ল়';
+  bengalir['v'] = 'ৱ';
+  bengalir['s'] = 'স';
   bengalir['h'] = 'হ';
 
   var im = '';
@@ -711,6 +711,121 @@ function toDeva(input,type) {
     else i++; // a
   }
   if (cons[i1]) output += '्';
+  output = output.replace(/\`+/g, '"');
+  return output;
+}
+
+// Refer: https://en.m.wikipedia.org/wiki/Telugu_(Unicode_block)
+function toTelugu(input,type) {
+
+  input = input.toLowerCase().replace(/ṁ/g,'ṃ');
+
+  var vowel = [];
+  vowel['a'] = " అ";
+  vowel['i'] = " ఇ";
+  vowel['u'] = " ఉ";
+  vowel['ā'] = " ఆ";
+  vowel['ī'] = " ఈ";
+  vowel['ū'] = " ఊ";
+  vowel['e'] = " ఎ";
+  vowel['o'] = " ఒ";
+
+  var telugur = [];
+
+  telugur['ā'] = 'ా';
+  telugur['i'] = 'ి';
+  telugur['ī'] = 'ీ';
+  telugur['u'] = 'ు';
+  telugur['ū'] = 'ూ';
+  telugur['e'] = 'ె';
+  telugur['o'] = 'ొ';
+  telugur['ṃ'] = 'ం';
+  telugur['k'] = 'క';
+  telugur['kh'] = 'ఖ';
+  telugur['g'] = 'గ';
+  telugur['gh'] = 'ఘ';
+  telugur['ṅ'] = 'ఙ';
+  telugur['c'] = 'చ';
+  telugur['ch'] = 'ఛ';
+  telugur['j'] = 'జ';
+  telugur['jh'] = 'ఝ';
+  telugur['ñ'] = 'ఞ';
+  telugur['ṭ'] = 'ట';
+  telugur['ṭh'] = 'ఠ';
+  telugur['ḍ'] = 'డ';
+  telugur['ḍh'] = 'ఢ';
+  telugur['ṇ'] = 'ణ';
+  telugur['t'] = 'త';
+  telugur['th'] = 'థ';
+  telugur['d'] = 'ద';
+  telugur['dh'] = 'ధ';
+  telugur['n'] = 'న';
+  telugur['p'] = 'ప';
+  telugur['ph'] = 'ఫ';
+  telugur['b'] = 'బ';
+  telugur['bh'] = 'భ';
+  telugur['m'] = 'మ';
+  telugur['y'] = 'య';
+  telugur['r'] = 'ర';
+  telugur['l'] = 'ల';
+  telugur['ḷ'] = 'ళ';
+  telugur['v'] = 'వ';
+  telugur['s'] = 'స';
+  telugur['h'] = 'హ';
+
+  var im = '';
+  var i0 = '';
+  var i1 = '';
+  var i2 = '';
+  var i3 = '';
+  var i4 = '';
+  var i5 = '';
+  var output = '';
+  var cons = 0;
+  var i = 0;
+  var virama = '్';
+
+  input = input.replace(/\&quot;/g, '`');
+
+  while (i < input.length) {
+    im = input.charAt(i-2);
+    i0 = input.charAt(i-1);
+    i1 = input.charAt(i);
+    i2 = input.charAt(i+1);
+    i3 = input.charAt(i+2);
+    i4 = input.charAt(i+3);
+    i5 = input.charAt(i+4);
+
+    if (i == 0 && vowel[i1]) { // first letter vowel
+      output += vowel[i1];
+      i += 1;
+    }
+    else if (i2 == 'h' && telugur[i1+i2]) {    // two character match
+      output += telugur[i1+i2];
+      if (i3 && !vowel[i3] && i2 != 'ṃ') {
+        output += virama;
+      }
+      i += 2;
+    }
+    else if (telugur[i1]) {  // one character match except a
+      output += telugur[i1];
+      if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
+        output += virama;
+      }
+      i++;
+    }
+    else if (i1 != 'a') {
+      if (cons[i0] || (i0 == 'h' && cons[im])) output += virama; // end word consonant
+      output += i1;
+      i++;
+      if(vowel[i2]) {
+        output+=vowel[i2];
+        i++;
+      }
+    }
+    else i++; // a
+  }
+  if (cons[i1]) output += virama;
   output = output.replace(/\`+/g, '"');
   return output;
 }
@@ -893,7 +1008,7 @@ function translit(data) {
   if(!data || data == '' || typeof(data) != 'string')
     return data;
   data = data.replace(/\&nbsp;/g,' ');
-  var script = DPR_prefs['translits'];
+  var script = DPR_G.DPR_prefs['translits'];
   var out = '';
   switch (script) {
     case 0:
@@ -913,6 +1028,9 @@ function translit(data) {
     break;
     case 5:
       out = toBengali(data);
+    break;
+    case 6:
+      out = toTelugu(data);
     break;
   }
   return out;

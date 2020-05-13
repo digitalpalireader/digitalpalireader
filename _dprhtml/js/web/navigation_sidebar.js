@@ -37,8 +37,8 @@ var DPRNav = {
 
   setBookList: function (nik, book) {
     var titles;
-    if (nikvoladi[nik]) titles = nikvoladi[nik];
-    else titles = nikvoladi[nik+DPR_G.G_hier];
+    if (DPR_G.nikvoladi[nik]) titles = DPR_G.nikvoladi[nik];
+    else titles = DPR_G.nikvoladi[nik+DPR_G.G_hier];
     __navigationTabViewModel.navBook.removeAll();
 
     for (var i = 0; i < titles.length; i++) {
@@ -66,7 +66,7 @@ var DPRNav = {
   setSearchBookList: function () {
     const nik = $('#tsoSETm').val();
 
-    const titles = nikvoladi[nik] ? nikvoladi[nik] : nikvoladi[nik + $('#tsoMAT2m').val()];
+    const titles = DPR_G.nikvoladi[nik] ? DPR_G.nikvoladi[nik] : DPR_G.nikvoladi[nik + $('#tsoMAT2m').val()];
 
     __searchTabViewModel.bookListA.removeAll();
     __searchTabViewModel.bookListB.removeAll();
@@ -106,7 +106,7 @@ var DPRNav = {
       __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
     }
-    if (__navigationTabViewModel.set() == 'k' && htmp == 'a' && kudvala[__navigationTabViewModel.book()] == undefined) {
+    if (__navigationTabViewModel.set() == 'k' && htmp == 'a' && DPR_G.kudvala[__navigationTabViewModel.book()] == undefined) {
       DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + this.getBookName(__navigationTabViewModel.set(), htmp, __navigationTabViewModel.navBook().findIndex(x => x.value === __navigationTabViewModel.book())) + '.');
       __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
       return;
@@ -121,7 +121,7 @@ var DPRNav = {
         book = parseInt(book) - 1;
       }
       else {
-        book = kudvala[book];
+        book = DPR_G.kudvala[book];
       }
     }
     else if (__navigationTabViewModel.set() == 'y') {
@@ -130,7 +130,7 @@ var DPRNav = {
         book = parseInt(book) - 1;
       }
       else {
-        book = abhivala[book];
+        book = DPR_G.abhivala[book];
       }
     }
     else
