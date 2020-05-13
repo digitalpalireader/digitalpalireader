@@ -729,6 +729,31 @@ function toTelugu(input,type) {
   vowel['ū'] = " ఊ";
   vowel['e'] = " ఎ";
   vowel['o'] = " ఒ";
+  vowel['e'] = " ఏ";
+  vowel['me'] = " మే";
+  vowel['ne'] = " నే";
+  vowel['te'] = " తే";
+  vowel['he'] = " హే";
+  vowel['vo'] = " వో";
+  vowel['to'] = " తో";
+  vowel['de'] = " డే";
+  vowel['ve'] = " వే";
+  vowel['re'] = " రే";
+  vowel['le'] = " లే";
+  vowel['se'] = " సే";
+  vowel['yo'] = " యో";
+  vowel['ko'] = " కో";
+  vowel['kho'] = " ఖో";
+  vowel['o'] = " ఓ";
+  vowel['ro'] = " రో";
+  vowel['tho'] = " తో";
+  vowel['cch'] = " చ్చే";
+  vowel['dho'] = " ధో";
+  vowel['do'] = " దో";
+  vowel['je'] = " జే";
+  vowel['no'] = " నో";
+  vowel['ho'] = " హో";
+  vowel['so'] = " సో";
 
   var telugur = [];
 
