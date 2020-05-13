@@ -10201,4 +10201,4 @@ D['hsuantsang']=['6/507'];
 
 DPR_G.G_dppnEnd=['thera','therii','putta','maa.nava','braahma.na','se.t.thi'];
 
-var EXPORTED_SYMBOLS = ["DPR_G.G_dppnEnd","D"];
+DPR_G.EXPORTED_SYMBOLS = ["DPR_G.G_dppnEnd","D"];

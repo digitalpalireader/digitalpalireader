@@ -201,7 +201,7 @@ function sendtoPad(data,shift)
   data = data.replace(/’ ’/g, '’');
   data = data.replace(/\u00B7/g, '\'');
   data = data.replace(/\u00B4/g, '\"');
-  if(DPR_prefs['showPagesFull']) {
+  if(DPR_G.DPR_prefs['showPagesFull']) {
     data = data.replace(/ *[MVPT]\.[0-9]+\.[0-9]+/g, '');
   }
   else{

@@ -68,7 +68,7 @@ function paliXML(filein,which,add)
 
   data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>");
 
-  if(DPR_prefs['showPedLinks']) {
+  if(DPR_G.DPR_prefs['showPedLinks']) {
 
     // add links
     var dataa = data.split(' ');
@@ -79,7 +79,7 @@ function paliXML(filein,which,add)
         if(!tda || tda.length < 2) {
           datat += ' ' + dataa[i];
         }
-        else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+        else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
         else datat += ' ' + dataa[i];
         i++
 
@@ -101,7 +101,7 @@ function paliXML(filein,which,add)
         datat += ' ' + dataa[i];
       }
       else if(typeof(P[tda]) == 'object' && tda != toVel(ttit)) {
-        datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+        datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
       }
       else datat += ' ' + dataa[i];
 
@@ -461,10 +461,10 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var xmlDoc = loadXMLFile(bookload,0);
 
     if (nikaya == 'k') {
-      var bookno = kudvala[book];
+      var bookno = DPR_G.kudvala[book];
     }
     else if(nikaya == 'y') {
-      var bookno = abhivala[book];
+      var bookno = DPR_G.abhivala[book];
     }
     else var bookno = pca[1];
 
@@ -536,10 +536,10 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
 
     if (hiert != 'm' && nikaya == 'k') {
-      var bookno = kudvala[pca[1]];
+      var bookno = DPR_G.kudvala[pca[1]];
     }
     else if (hiert != 'm' && nikaya == 'k') {
-      var bookno = abhivala[pca[1]];
+      var bookno = DPR_G.abhivala[pca[1]];
     }
     else var bookno = parseInt(pca[1])-1;
 

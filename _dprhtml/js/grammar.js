@@ -5,7 +5,7 @@
 function conjugate(word, id, which) {
   appInsights.trackEvent({ name: 'Conjugate',  properties: { word, id, which, }});
 
-  if(DPR_prefs['nigahita'] && which) {
+  if(DPR_G.DPR_prefs['nigahita'] && which) {
     which = which.replace(/ṁ/g, 'ṃ');
     which = which.replace(/Ṁ/g, 'Ṃ');
   }
@@ -35,10 +35,10 @@ function conjugate(word, id, which) {
 
   if(which) {
     var whichR = new RegExp('([> ])'+which+'([<,])','gi');
-    out = out.replace(whichR, "$1<span style=\"color:"+DPR_prefs['colped']+"\">"+which+"</span>$2");
+    out = out.replace(whichR, "$1<span style=\"color:"+DPR_G.DPR_prefs['colped']+"\">"+which+"</span>$2");
   }
 
-  if(DPR_prefs['nigahita']) {
+  if(DPR_G.DPR_prefs['nigahita']) {
     out = out.replace(/ṃ/g, 'ṁ');
     out = out.replace(/Ṃ/g, 'Ṁ');
   }

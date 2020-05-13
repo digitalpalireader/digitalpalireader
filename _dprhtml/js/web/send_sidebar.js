@@ -448,10 +448,10 @@ var DPRSend = {
       var getstring = $('#dictin').prop("value");
 
       if (!hard) {
-        if (getstring == DPR_G.G_lastsearch || getstring == '' || !DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
+        if (getstring == this.G_lastsearch || getstring == '' || !DPR_G.DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
       }
 
-      DPR_G.G_lastsearch = getstring;
+      this.G_lastsearch = getstring;
 
       var which = $('#dictType').prop("value");
 
@@ -543,13 +543,13 @@ var DPRSend = {
 
       if (which == 1) { // get books
         var book = [];
-        if (nikvoladi[document.getElementById('tsoSETm').value]) {
-          for (var i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
+        if (DPR_G.nikvoladi[document.getElementById('tsoSETm').value]) {
+          for (var i = 1; i <= DPR_G.nikvoladi[document.getElementById('tsoSETm').value].length; i++) {
             if (document.getElementById('tsoBObook' + i).checked) book.push(i);
           }
         }
         else {
-          for (var i = 1; i <= nikvoladi[document.getElementById('tsoSETm').value + document.getElementById('tsoMAT2m').value].length; i++) {
+          for (var i = 1; i <= DPR_G.nikvoladi[document.getElementById('tsoSETm').value + document.getElementById('tsoMAT2m').value].length; i++) {
             if (document.getElementById('tsoBObook' + i).checked) book.push(document.getElementById('tsoBObook' + i).getAttribute('data-value'));
           }
         }

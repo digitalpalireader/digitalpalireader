@@ -1,6 +1,6 @@
 'use strict';
 
-var EXPORTED_SYMBOLS = ["Dn"];
+DPR_G.EXPORTED_SYMBOLS = ["Dn"];
 
 
 var Dn=[];

@@ -58,7 +58,7 @@ class SearchTabViewModel{
   }
 
   searchBookDropdown(){
-    if(this.searchBookString() == '' || searchType < 2){
+    if(this.searchBookString() == '' || DPR_G.searchType < 2){
       return '1';
     } else {
       return this.searchBookString();
@@ -116,13 +116,13 @@ class SearchTabViewModel{
 
 const __searchTabViewModel = new SearchTabViewModel();
 
-var searchType = 0;
-var searchString = '';
-var searchMAT = '';
-var searchSet = '';
-var searchBook = 0;
-var searchPart = 0;
-var searchRX = false;
+DPR_G.searchType = 0;
+DPR_G.searchString = '';
+DPR_G.searchMAT = '';
+DPR_G.searchSet = '';
+DPR_G.searchBook = 0;
+DPR_G.searchPart = 0;
+DPR_G.searchRX = false;
 
 const setSearchParams = () => {
   const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
@@ -130,32 +130,32 @@ const setSearchParams = () => {
     var parameterSections = parameter.split('=');
     switch (parameterSections[0]) {
       case 'type':
-        searchType = parseInt(parameterSections[1], 10);
-        __searchTabViewModel.searchType(searchType);
+        DPR_G.searchType = parseInt(parameterSections[1], 10);
+        __searchTabViewModel.searchType(DPR_G.searchType);
         break;
       case 'query':
-        searchString = decodeURIComponent(parameterSections[1]);
-        __searchTabViewModel.searchString(searchString);
+        DPR_G.searchString = decodeURIComponent(parameterSections[1]);
+        __searchTabViewModel.searchString(DPR_G.searchString);
         break;
       case 'MAT':
-        searchMAT = parameterSections[1];
-        __searchTabViewModel.searchMAT(searchMAT);
+        DPR_G.searchMAT = parameterSections[1];
+        __searchTabViewModel.searchMAT(DPR_G.searchMAT);
         break;
       case 'set':
-        searchSet = parameterSections[1];
-        __searchTabViewModel.searchSet(searchSet);
+        DPR_G.searchSet = parameterSections[1];
+        __searchTabViewModel.searchSet(DPR_G.searchSet);
         break;
       case 'book':
-        searchBook = parameterSections[1];
-        __searchTabViewModel.searchBookString(searchBook);
+        DPR_G.searchBook = parameterSections[1];
+        __searchTabViewModel.searchBookString(DPR_G.searchBook);
         break;
       case 'part':
-        searchPart = parameterSections[1];
-        __searchTabViewModel.searchPart(searchPart);
+        DPR_G.searchPart = parameterSections[1];
+        __searchTabViewModel.searchPart(DPR_G.searchPart);
         break;
       case 'rx':
-        searchRX = parameterSections[1];
-        __searchTabViewModel.searchRX(searchRX);
+        DPR_G.searchRX = parameterSections[1];
+        __searchTabViewModel.searchRX(DPR_G.searchRX);
         break;
     }
   });
@@ -172,5 +172,5 @@ const initializeSearchSidebarTab = () => {
 
 const initializeSearchFeature = () => {
   getconfig();
-  searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
+  searchTipitaka(DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
 }
