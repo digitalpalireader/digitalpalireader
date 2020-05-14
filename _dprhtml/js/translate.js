@@ -5,14 +5,14 @@ function translateTextx() {
   var y = '';
   var z = '';
   var cnt = 0;
-  for (var i in yt) {
+  for (var i in DPR_G.yt) {
     window.dump(cnt+' of 20926 - '+ Math.floor((cnt++)/20926*100)+'% finished\n');
     var aa = [],bb = [];
     var a = new RegExp('(^|[ .,;])'+toUni(i)+'($|[ .,;])');
     for(var j in epd) {
       b = epd[j].split('^');
       if(a.test(b[1])) {
-        c = yt[i][2].search(b[0]);
+        c = DPR_G.yt[i][2].search(b[0]);
         if(c > -1) {
           window.dump(i+' in '+b[0]+'\n');
           aa[c] = b[0];
@@ -596,7 +596,7 @@ function translateWord(word,idx) {
   }
   if(eg[vword]) {
     meta = [];
-    type = yt[vword][4].toLowerCase();
+    type = DPR_G.yt[vword][4].toLowerCase();
     trans = eg[vword];
     if(type == 'i' || type == 'p') {
       meta['orig'] = vword;
@@ -628,10 +628,10 @@ function translateWord(word,idx) {
   }
   else {
 
-    if(yt[vword]) {
-      type = yt[vword][4].toLowerCase();
+    if(DPR_G.yt[vword]) {
+      type = DPR_G.yt[vword][4].toLowerCase();
       if(type == 'i' || type == 'p') {
-        trans = stripEnglish(yt[vword][2]);
+        trans = stripEnglish(DPR_G.yt[vword][2]);
         deca = null;
         meta = [];
         meta['orig'] = vword;
@@ -644,7 +644,7 @@ function translateWord(word,idx) {
             decls = DPR_G.G_defDecl[type][i][1];
             for(var c in decls) { // just get the first one for now
               var deft = true;
-              trans = stripEnglish(yt[vword][2]);
+              trans = stripEnglish(DPR_G.yt[vword][2]);
               deca = decls[c];
               meta = [];
               meta['orig'] = vword;
@@ -653,19 +653,19 @@ function translateWord(word,idx) {
           }
         }
         if(!deft) {
-          trans = stripEnglish(yt[vword][2]);
+          trans = stripEnglish(DPR_G.yt[vword][2]);
           outs.push([trans,type,null,word,meta,idx]);
           meta = [];
           meta['orig'] = vword;
         }
       }
     }
-    else if (typeof(P[vword]) == 'object') {
-      for(var p in P[temp]) {
-        var tloc = P[vword][p].split('/');
+    else if (typeof(DPR_G.P[vword]) == 'object') {
+      for(var p in DPR_G.P[temp]) {
+        var tloc = DPR_G.P[vword][p].split('/');
         var t1 = tloc[0];
         var t2 = tloc[1];
-        var xmlDoc = DPR_DataLoader.loadPXD(t1);
+        var xmlDoc = DPR_G.DPR_DataLoader.loadPXD(t1);
 
         var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -713,15 +713,15 @@ function translateWord(word,idx) {
       var temp = wtr[a][0];
       var declt = DPR_G.G_endings[wtr[a][1]][5];
       decls = [];
-      if(yt[temp] && yt[temp][4] != 'I') {
-        var gender = yt[temp][1];
+      if(DPR_G.yt[temp] && DPR_G.yt[temp][4] != 'I') {
+        var gender = DPR_G.yt[temp][1];
         for(var c in declt) {
-          if(type=='v' || /adj\./.test(yt[temp][1]) || (1 & declt[c][0] && DPR_G.G_nTx[0].test(gender)) || (2 & declt[c][0] && DPR_G.G_nTx[1].test(gender)) || (4 & declt[c][0] && DPR_G.G_nTx[2].test(gender))) {
+          if(type=='v' || /adj\./.test(DPR_G.yt[temp][1]) || (1 & declt[c][0] && DPR_G.G_nTx[0].test(gender)) || (2 & declt[c][0] && DPR_G.G_nTx[1].test(gender)) || (4 & declt[c][0] && DPR_G.G_nTx[2].test(gender))) {
             decls.push(declt[c]);
           }
         }
 
-        if(yt[temp][4] == 'P' || yt[temp][1] == 'adj.')
+        if(DPR_G.yt[temp][4] == 'P' || DPR_G.yt[temp][1] == 'adj.')
           type = 'p';
         if(eg[temp]) {
           for(var c in decls) {
@@ -742,30 +742,30 @@ function translateWord(word,idx) {
           }
         }
         for(var c in decls) {
-          trans = stripEnglish(yt[temp][2]);
+          trans = stripEnglish(DPR_G.yt[temp][2]);
           deca = decls[c];
           meta = [];
           meta['orig'] = temp;
           outs.push([trans,type,deca,word,meta,idx]);
         }
       }
-      else if (DPR_G.G_irregDec[temp] && typeof(yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
-        if(yt[DPR_G.G_irregDec[temp][0]][4] == 'P' || yt[DPR_G.G_irregDec[temp][0]][1] == 'adj.')
+      else if (DPR_G.G_irregDec[temp] && typeof(DPR_G.yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
+        if(DPR_G.yt[DPR_G.G_irregDec[temp][0]][4] == 'P' || DPR_G.yt[DPR_G.G_irregDec[temp][0]][1] == 'adj.')
           type = 'p';
         for(var c in decls) {
-          trans = stripEnglish(yt[DPR_G.G_irregDec[temp][0]][2]);
+          trans = stripEnglish(DPR_G.yt[DPR_G.G_irregDec[temp][0]][2]);
           deca = decls[c];
           meta = [];
           meta['orig'] = temp;
           outs.push([trans,type,deca,word,meta,idx]);
         }
       }
-      else if (typeof(P[temp]) == 'object') {
-        for(var p in P[temp]) {
-          var tloc = P[temp][p].split('/');
+      else if (typeof(DPR_G.P[temp]) == 'object') {
+        for(var p in DPR_G.P[temp]) {
+          var tloc = DPR_G.P[temp][p].split('/');
           var t1 = tloc[0];
           var t2 = tloc[1];
-          var xmlDoc = DPR_DataLoader.loadPXD(t1);
+          var xmlDoc = DPR_G.DPR_DataLoader.loadPXD(t1);
 
           var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 

@@ -119,7 +119,7 @@ function outputDef(which,first,frombox)
 
   var myConj = owparts[owparts.length-1].split('#')[0].split('^');
   if(myConj[3]) { // if root form is found, set up conjugation
-    if(yt[myConj[3]][4] != 'I') {
+    if(DPR_G.yt[myConj[3]][4] != 'I') {
       conjWord.form = toUni(DPR_G.G_outwords[which][0].split('-').pop());
       conjWord.root = toUni(myConj[3]);
     }
@@ -210,7 +210,7 @@ function outputDef(which,first,frombox)
     {
       if (thisconcise[x].length == 0) { continue; }
 
-      var concisedefa = yt[thisconcise[x]];
+      var concisedefa = DPR_G.yt[thisconcise[x]];
 
       var condefnotype = concisedefa[2];
       if (condefnotype.length > 100) {
@@ -249,7 +249,7 @@ function outputDef(which,first,frombox)
   if (hotlink) {
     if (hotlink.search('PED') >= 0) paliXML(hotlink);
     else DPPNXML(hotlink);
-    //if(moveat == 2) { moveFrame(1); }
+    //if(DPR_G.moveat == 2) { moveFrame(1); }
   }
   else clearDivs('dif');
 

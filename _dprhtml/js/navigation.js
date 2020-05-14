@@ -13,18 +13,18 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no w
 
 
 function getDppnEntry(term) {
-  if(typeof(D) == 'undefined')
+  if(typeof(DPR_G.D) == 'undefined')
     addJS(['dppn']);
   var dppnEntry = [];
-  if(typeof(D[term]) == 'object') {
-    dppnEntry = D[term];
+  if(typeof(DPR_G.D[term]) == 'object') {
+    dppnEntry = DPR_G.D[term];
   }
   else {
-    if(typeof(D[term.replace(/\.m$/,'')]) == 'object') {
-      dppnEntry = D[term.replace(/\.m$/,'')];
+    if(typeof(DPR_G.D[term.replace(/\.m$/,'')]) == 'object') {
+      dppnEntry = DPR_G.D[term.replace(/\.m$/,'')];
     }
-    else if(typeof(D[term.replace(/o$/,'a')]) == 'object') {
-      dppnEntry = D[term.replace(/o$/,'a')];
+    else if(typeof(DPR_G.D[term.replace(/o$/,'a')]) == 'object') {
+      dppnEntry = DPR_G.D[term.replace(/o$/,'a')];
     }
   }
   var dEI = [];

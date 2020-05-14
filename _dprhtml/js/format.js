@@ -629,8 +629,8 @@ function linkToPED(base,word) {
 
   var vbase = toVel(base);
 
-  if(typeof(P[vbase]) == 'object') {
-    word = '<span style="color:'+DPR_G.DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
+  if(typeof(DPR_G.P[vbase]) == 'object') {
+    word = '<span style="color:'+DPR_G.DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + DPR_G.P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
   }
   return word;
 }

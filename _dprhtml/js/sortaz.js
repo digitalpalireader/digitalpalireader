@@ -116,10 +116,10 @@ DPR_G.oldorder.push('y');
 DPR_G.oldorder.push('z');
 
 DPR_G.neworder = new Array();
-var roo = '';
+DPR_G.roo = '';
 for(var w = 0; w < DPR_G.reorder.length; w++) {
-  roo = DPR_G.reorder[w];
-  DPR_G.neworder[roo] = DPR_G.oldorder[w];
+  DPR_G.roo = DPR_G.reorder[w];
+  DPR_G.neworder[DPR_G.roo] = DPR_G.oldorder[w];
 }
 
 function sortaz(mydata){  // sort pali array
