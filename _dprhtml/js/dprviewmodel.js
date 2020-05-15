@@ -84,6 +84,8 @@ const DPR_CMD_TRANSLATE_10 = 'translate10';
 const DPR_CMD_ENTER_QUICK_REFERENCE = 'enterQuickReference';
 const DPR_CMD_OPEN_SETTINGS = 'openSettings';
 const DPR_CMD_GOTO_HOME = 'gotoHome';
+const DPR_CMD_GOTO_PREV_DICT_ENTRY = 'gotoPrevDictEntry';
+const DPR_CMD_GOTO_NEXT_DICT_ENTRY = 'gotoNextDictEntry';
 const DPR_CMD_TOGGLE_DPR_SIDEBAR = 'toggleDPRSidebar';
 const DPR_CMD_SHOW_BOTTOM_PANE = 'showBottomPane';
 const DPR_CMD_SHOW_PALI_QUOTE = 'showPaliQuote';
@@ -408,6 +410,26 @@ const dprCommandList = [
     matchKey: e => e.key === 'v',
   },
   {
+    id: DPR_CMD_GOTO_PREV_DICT_ENTRY,
+    notImplemented: true,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    isDynamic: false,
+    title: "Go to previous dictionary entry (Keyboard shortcut: ,)",
+    matchKey: e => e.key === ',',
+  },
+  {
+    id: DPR_CMD_GOTO_NEXT_DICT_ENTRY,
+    notImplemented: true,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    isDynamic: false,
+    title: "Go to next dictionary entry (Keyboard shortcut: .)",
+    matchKey: e => e.key === '.',
+  },
+  {
     id: DPR_CMD_TOGGLE_DPR_SIDEBAR,
     notImplemented: false,
     canExecute: true,
@@ -419,9 +441,9 @@ const dprCommandList = [
   },
   {
     id: DPR_CMD_SHOW_BOTTOM_PANE,
-    notImplemented: true,
+    notImplemented: false,
     canExecute: true,
-    execute: () => emptyFn,
+    execute: (e) => __otherDialogsViewModel.showBottomPane(e.key),
     visible: true,
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",

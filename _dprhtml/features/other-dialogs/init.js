@@ -29,13 +29,25 @@ class OtherDialogsViewModel {
     openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
   }
 
+  gotoPrevDictEntry() {
+    //TO DO
+    if (dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
+    else if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
+  }
+
+  gotoNextDictEntry() {
+    //TO DO
+    if (dBot.getElementById('bout')) { dBot.getElementById('bout').onclick(); }
+    else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
+  }
+
   toggleDPRSidebar() {
     DPR_Chrome.toggleDPRSidebar();
     event.preventDefault();
   }
 
   showBottomPane(key) {
-    DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key]);
+    DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key - 1]);
     event.preventDefault();
   }
 
