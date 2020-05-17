@@ -444,17 +444,17 @@ function getRandomNoun() {
 
 
   var type1 = yto[4]+'#'+yto[5];
-  var type2 = iI[type1];
+  var type2 = DPR_G.iI[type1];
   if(type2[1] == '--') { // irreg
     yto[8] = '';
-    var noun = iNI[toUni(word)][yto[5].replace(/\..+/,'')];
+    var noun = DPR_G.iNI[toUni(word)][yto[5].replace(/\..+/,'')];
   }
   else if(type2[1])
-    var noun = iN[type2[1]];
+    var noun = DPR_G.iN[type2[1]];
   else if(type2[2])
-    var noun = iN[type2[2]];
+    var noun = DPR_G.iN[type2[2]];
   else if(type2[3])
-    var noun = iN[type2[3]];
+    var noun = DPR_G.iN[type2[3]];
   else {
     return getRandomNoun();
   }
@@ -844,7 +844,7 @@ function getRandomVerb() {
   var type = yto[5].replace(/.+\./,'');
   if(yto[9] == 'N') { // irreg
     yto[8] = '';
-    var verb = getRandomIVerbTense(DPR_G.G_verbTenses[rn2],toUni(word),iVI[toUni(DPR_G.G_quiza[rn][1])]?iVI[toUni(DPR_G.G_quiza[rn][1])]:iVI[yto[6]]);
+    var verb = getRandomIVerbTense(DPR_G.G_verbTenses[rn2],toUni(word),DPR_G.iVI[toUni(DPR_G.G_quiza[rn][1])]?DPR_G.iVI[toUni(DPR_G.G_quiza[rn][1])]:DPR_G.iVI[yto[6]]);
     if(!verb)
       return getRandomVerb();
   }
@@ -863,14 +863,14 @@ DPR_G.G_verbTenses = [];
 function getRandomVerbTense(tense,type) {
   switch(tense) {
     case 'pres':
-      if(iV['ac.pres.'+type])
-        return iV['ac.pres.'+type];
+      if(DPR_G.iV['ac.pres.'+type])
+        return DPR_G.iV['ac.pres.'+type];
     case 'imp':
-      if(iV['ac.impv.'+type])
-        return iV['ac.impv.'+type];
+      if(DPR_G.iV['ac.impv.'+type])
+        return DPR_G.iV['ac.impv.'+type];
     default:
-      if(iV['ac.'+tense])
-        return iV['ac.'+tense];
+      if(DPR_G.iV['ac.'+tense])
+        return DPR_G.iV['ac.'+tense];
   }
 }
 function getRandomIVerbTense(tense,word,verb) {
@@ -1074,7 +1074,7 @@ function checkVAnswer2() {
     return alertFlash("You must select all three fields.",'red');
 
   if(DPR_G.G_oneVerb[5].charAt(0) == 'x') { // irreg
-    var verb = getRandomIVerbTense(DPR_G.G_verbTenses[tense],toUni(word),iVI[toUni(word)]);
+    var verb = getRandomIVerbTense(DPR_G.G_verbTenses[tense],toUni(word),DPR_G.iVI[toUni(word)]);
   }
   else {
     var verb = getRandomVerbTense(DPR_G.G_verbTenses[tense],DPR_G.G_oneVerb[5]);
@@ -1328,7 +1328,7 @@ function resetVETable() {
   var type = yto[5].replace(/.+\./,'');
   if(yto[9] == 'N') { // irreg
     yto[8] = '';
-    var verb = getRandomIVerbTense(tense,DPR_G.G_quiza[rn],iVI[DPR_G.G_quiza[rn]]?iVI[DPR_G.G_quiza[rn]]:iVI[yto[6]]);
+    var verb = getRandomIVerbTense(tense,DPR_G.G_quiza[rn],DPR_G.iVI[DPR_G.G_quiza[rn]]?DPR_G.iVI[DPR_G.G_quiza[rn]]:DPR_G.iVI[yto[6]]);
   }
   else {
     var verb = getRandomVerbTense(tense,type);

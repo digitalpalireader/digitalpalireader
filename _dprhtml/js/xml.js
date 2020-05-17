@@ -1,6 +1,6 @@
 'use strict';
 
-var unnamed = '[unnamed]';
+DPR_G.unnamed = '[unnamed]';
 
 DPR_G.matButton = 0; // tells us we've clicked an in-section mat button.
 DPR_G.matValue = []; // for storing values from section after clicking mat button in section
@@ -642,7 +642,7 @@ function loadXMLindex(place,compare) {
     theData = z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'');
   }
   else theData = '';
-  if (z.length > 1 && theData == '') { theData = unnamed; }
+  if (z.length > 1 && theData == '') { theData = DPR_G.unnamed; }
 
   if (theData != '') {
 
@@ -710,7 +710,7 @@ function loadXMLindex(place,compare) {
       continue;
 
     if (y[tmp2].getElementsByTagName("h0n")[0].childNodes[0]) theData = y[tmp2].getElementsByTagName("h0n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-    if (y.length > 1 && theData == '') { theData = unnamed; }
+    if (y.length > 1 && theData == '') { theData = DPR_G.unnamed; }
     if (theData != '') {
       namen = '';
       if (DPR_G.DPR_prefs['showNames']) {
@@ -763,7 +763,7 @@ function loadXMLindex(place,compare) {
       if(isPlace && place[3] != 'x' && tmp3 != place[3])
         continue;
       if (x[tmp3].getElementsByTagName("h1n")[0].childNodes[0]) theData = x[tmp3].getElementsByTagName("h1n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-      if (x.length > 1 && theData == '') { theData = unnamed; }
+      if (x.length > 1 && theData == '') { theData = DPR_G.unnamed; }
       if (theData != '') {
 
         namen = '';
@@ -818,7 +818,7 @@ function loadXMLindex(place,compare) {
         if(isPlace && place[4] != 'x' && tmp4 != place[4])
           continue;
         if (w[tmp4].getElementsByTagName("h2n")[0].childNodes[0]) theData = w[tmp4].getElementsByTagName("h2n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-        if (w.length > 1 && theData == '') { theData = unnamed; }
+        if (w.length > 1 && theData == '') { theData = DPR_G.unnamed; }
         if (theData != '') {
 
 
@@ -877,7 +877,7 @@ function loadXMLindex(place,compare) {
           if(isPlace && place[5] != 'x' && tmp5 != place[5])
             continue;
           if (v[tmp5].getElementsByTagName("h3n")[0].childNodes[0]) theData = v[tmp5].getElementsByTagName("h3n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-          if (v.length > 1 && theData == '') { theData = unnamed; }
+          if (v.length > 1 && theData == '') { theData = DPR_G.unnamed; }
           if (theData != '') {
 
             namen = '';
@@ -935,7 +935,7 @@ function loadXMLindex(place,compare) {
             if(isPlace && place[6] != 'x' && tmp6 != place[6])
               continue;
             if (u[tmp6].getElementsByTagName("h4n")[0].childNodes[0]) theData = u[tmp6].getElementsByTagName("h4n")[0].textContent.replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,''); else theData = '';
-            if (u.length > 1 && theData == '') { theData = unnamed; }
+            if (u.length > 1 && theData == '') { theData = DPR_G.unnamed; }
             if (theData != '') {
 
               namen = '';

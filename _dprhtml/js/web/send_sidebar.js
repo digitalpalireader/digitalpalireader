@@ -448,10 +448,10 @@ var DPRSend = {
       var getstring = $('#dictin').prop("value");
 
       if (!hard) {
-        if (getstring == this.G_lastsearch || getstring == '' || !DPR_G.DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
+        if (getstring == DPR_G.G_lastsearch || getstring == '' || !DPR_G.DPR_prefs['autodict'] || $('#soregexp').prop("checked") || $('#sofulltext').prop("checked")) return;
       }
 
-      this.G_lastsearch = getstring;
+      DPR_G.G_lastsearch = getstring;
 
       var which = $('#dictType').prop("value");
 

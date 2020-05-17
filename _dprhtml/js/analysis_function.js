@@ -181,12 +181,12 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   var exactMatch = false;
   // PED matches
 
-  if (typeof(P[oneword]) == 'object')
+  if (typeof(DPR_G.P[oneword]) == 'object')
   {
     if(DPR_G.devDump > 0) ddump('added PED exact: ' + oneword);
     if(!isUncomp(oneword,lastpart,nextpart)){
-      for (var i in P[oneword]) {
-        res.push([oneword,P[oneword][i]]);
+      for (var i in DPR_G.P[oneword]) {
+        res.push([oneword,DPR_G.P[oneword][i]]);
       }
       exactMatch = true;
     }
@@ -196,11 +196,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     var irregword = DPR_G.G_irregNoun[oneword].replace(/[0-9]$/,'');
     if(irregword != DPR_G.G_irregNoun[oneword]) {
       var irregno = parseInt(DPR_G.G_irregNoun[oneword].charAt(DPR_G.G_irregNoun[oneword].length-1));
-      res.push([oneword,P[irregword][irregno]]);
+      res.push([oneword,DPR_G.P[irregword][irregno]]);
     }
     else {
-      for (var i in P[DPR_G.G_irregNoun[oneword]]) {
-        res.push([oneword,P[DPR_G.G_irregNoun[oneword]][i]]);
+      for (var i in DPR_G.P[DPR_G.G_irregNoun[oneword]]) {
+        res.push([oneword,DPR_G.P[DPR_G.G_irregNoun[oneword]][i]]);
       }
     }
     exactMatch = true;
@@ -210,11 +210,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     var irregword = DPR_G.G_irregDec[oneword][0].replace(/[0-9]$/,'');
     if(irregword != DPR_G.G_irregDec[oneword][0]) {
       var irregno = parseInt(DPR_G.G_irregDec[oneword][0].charAt(DPR_G.G_irregDec[oneword][0].length-1));
-      res.push([oneword,P[irregword][irregno]]);
+      res.push([oneword,DPR_G.P[irregword][irregno]]);
     }
     else {
-      for (var i in P[irregword]) {
-        res.push([oneword,P[irregword][i]]);
+      for (var i in DPR_G.P[irregword]) {
+        res.push([oneword,DPR_G.P[irregword][i]]);
       }
     }
     exactMatch = true;
@@ -224,11 +224,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     var irregword = DPR_G.G_irregVerb[oneword].replace(/[0-9]$/,'');
     if(irregword != DPR_G.G_irregVerb[oneword]) {
       var irregno = parseInt(DPR_G.G_irregVerb[oneword].charAt(DPR_G.G_irregVerb[oneword].length-1));
-      res.push([oneword,P[irregword][irregno]]);
+      res.push([oneword,DPR_G.P[irregword][irregno]]);
     }
     else {
-      for (var i in P[irregword]) {
-        res.push([oneword,P[irregword][i]]);
+      for (var i in DPR_G.P[irregword]) {
+        res.push([oneword,DPR_G.P[irregword][i]]);
       }
     }
     exactMatch = true;
@@ -238,7 +238,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
   var resy = '';
 
-  if (yt[oneword] && (!nextpart || yt[oneword][4] != 'V'))
+  if (DPR_G.yt[oneword] && (!nextpart || DPR_G.yt[oneword][4] != 'V'))
   {
     if(!isUncomp(oneword,lastpart,nextpart)){
       if(DPR_G.devDump > 0) ddump('added CPED exact: ' + oneword);
@@ -249,36 +249,36 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
   else if (typeof(DPR_G.G_irregNoun[oneword]) == 'string') {
     if(DPR_G.devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = DPR_G.G_irregNoun[oneword].replace(/[0-9]$/,'');
-    if(typeof(yt[irregword]) == 'object') resy = irregword;
+    if(typeof(DPR_G.yt[irregword]) == 'object') resy = irregword;
     exactMatch = true;
   }
   else if (typeof(DPR_G.G_irregDec[oneword]) == 'object') {
     if(DPR_G.devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = DPR_G.G_irregDec[oneword][0].replace(/[0-9]$/,'');
-    if(typeof(yt[irregword]) == 'object') resy = irregword;
+    if(typeof(DPR_G.yt[irregword]) == 'object') resy = irregword;
     exactMatch = true;
   }
   else if (!nextpart && typeof(DPR_G.G_irregVerb[oneword]) == 'string') {
     if(DPR_G.devDump > 0) ddump('added CPED Irreg exact: ' + oneword);
     var irregword = DPR_G.G_irregVerb[oneword].replace(/[0-9]$/,'');
-    if(typeof(yt[irregword]) == 'object') resy = irregword;
+    if(typeof(DPR_G.yt[irregword]) == 'object') resy = irregword;
     exactMatch = true;
   }
 
   // DPPN matches
 
-  if (D[oneword])
+  if (DPR_G.D[oneword])
   {
     if(DPR_G.devDump > 0) ddump('added DPPN exact: ' + oneword);
-    resn.push([oneword,D[oneword]]);
+    resn.push([oneword,DPR_G.D[oneword]]);
     exactMatch = true;
   }
   else {
     for (var i in DPR_G.G_dppnEnd) {
-      if (D[oneword+DPR_G.G_dppnEnd[i]])
+      if (DPR_G.D[oneword+DPR_G.G_dppnEnd[i]])
       {
         if(DPR_G.devDump > 0) ddump('added DPPN exact (ending added): ' + oneword);
-        resn.push([oneword+DPR_G.G_dppnEnd[i],D[oneword+DPR_G.G_dppnEnd[i]]]);
+        resn.push([oneword+DPR_G.G_dppnEnd[i],DPR_G.D[oneword+DPR_G.G_dppnEnd[i]]]);
       }
       exactMatch = true;
     }
@@ -319,20 +319,20 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       for (var b = 0; b < wtr.length; b++) // check through wtr variants that we set at the beginning
       {
         var temp = wtr[b];
-        if (P[temp] && !isIndec(temp))
+        if (DPR_G.P[temp] && !isIndec(temp))
         {
-          for (var i in P[temp]) {
-            res.push([temp,P[temp][i]]);
+          for (var i in DPR_G.P[temp]) {
+            res.push([temp,DPR_G.P[temp][i]]);
           }
         }
         else if (typeof(DPR_G.G_irregDec[temp]) == 'object') {
           var irregword = DPR_G.G_irregDec[temp][0];
           if(/[0-9]$/.exec(irregword)) { // specific
-            res.push([oneword,P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
+            res.push([oneword,DPR_G.P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
           }
           else {
-            for (var i in P[irregword]) {
-              res.push([oneword,P[irregword]]);
+            for (var i in DPR_G.P[irregword]) {
+              res.push([oneword,DPR_G.P[irregword]]);
             }
           }
         }
@@ -347,11 +347,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       {
         var temp = wtr[b];
 
-        if (yt[temp] && !resy && !isIndec(temp))
+        if (DPR_G.yt[temp] && !resy && !isIndec(temp))
         {
           resy = temp; // for matching the dictionary entry in the output
         }
-        else if (DPR_G.G_irregDec[temp] && typeof(yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
+        else if (DPR_G.G_irregDec[temp] && typeof(DPR_G.yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
           resy = DPR_G.G_irregDec[temp][0];
         }
 
@@ -364,16 +364,16 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     {
       for (var b = 0; b < wtr.length; b++) // b for alternative types wtr
       {
-        if (D[wtr[b]])
+        if (DPR_G.D[wtr[b]])
         {
-          resn.push([wtr[b],D[wtr[b]]]);
+          resn.push([wtr[b],DPR_G.D[wtr[b]]]);
         }
         else {
           for (var i in DPR_G.G_dppnEnd) {
-            if (D[wtr[b]+DPR_G.G_dppnEnd[i]])
+            if (DPR_G.D[wtr[b]+DPR_G.G_dppnEnd[i]])
             {
               if(DPR_G.devDump > 0) ddump('added DPPN declension (ending added): ' + wtr[b]);
-              resn.push([wtr[b]+DPR_G.G_dppnEnd[i],D[wtr[b]+DPR_G.G_dppnEnd[i]]]);
+              resn.push([wtr[b]+DPR_G.G_dppnEnd[i],DPR_G.D[wtr[b]+DPR_G.G_dppnEnd[i]]]);
             }
           }
         }
@@ -403,20 +403,20 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
       for (var b = 0; b < wtrN.length; b++) // check through wtrN variants that we set at the beginning
       {
         var temp = wtrN[b];
-        if (P[temp] && !isIndec(temp))
+        if (DPR_G.P[temp] && !isIndec(temp))
         {
-          for (var i in P[temp]) {
-            res.push([temp,P[temp][i]]);
+          for (var i in DPR_G.P[temp]) {
+            res.push([temp,DPR_G.P[temp][i]]);
           }
         }
         else if (typeof(DPR_G.G_irregDec[temp]) == 'object' && DPR_G.G_irregDec[temp][1] == 'N') {
           var irregword = DPR_G.G_irregDec[temp][0];
           if(/[0-9]$/.exec(irregword)) { // specific
-            res.push([oneword,P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
+            res.push([oneword,DPR_G.P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
           }
           else {
-            for (var i in P[irregword]) {
-              res.push([oneword,P[irregword]]);
+            for (var i in DPR_G.P[irregword]) {
+              res.push([oneword,DPR_G.P[irregword]]);
             }
           }
         }
@@ -430,16 +430,16 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     {
       for (var b = 0; b < wtrN.length; b++) // b for alternative types wtr
       {
-        if (D[wtrN[b]])
+        if (DPR_G.D[wtrN[b]])
         {
-          resn.push([wtrN[b],D[wtrN[b]]]);
+          resn.push([wtrN[b],DPR_G.D[wtrN[b]]]);
         }
         else {
           for (var i in DPR_G.G_dppnEnd) {
-            if (D[wtrN[b]+DPR_G.G_dppnEnd[i]])
+            if (DPR_G.D[wtrN[b]+DPR_G.G_dppnEnd[i]])
             {
               if(DPR_G.devDump > 0) ddump('added DPPN compound end declension (ending added): ' + wtrN[b]+DPR_G.G_dppnEnd[i]);
-              resn.push([wtrN[b]+DPR_G.G_dppnEnd[i],D[oneword+DPR_G.G_dppnEnd[i]]]);
+              resn.push([wtrN[b]+DPR_G.G_dppnEnd[i],DPR_G.D[oneword+DPR_G.G_dppnEnd[i]]]);
             }
           }
         }
@@ -456,12 +456,12 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
         var temp = wtrN[b];
 
-        if (yt[temp] && !resy && !isIndec(temp))
+        if (DPR_G.yt[temp] && !resy && !isIndec(temp))
         {
           if(DPR_G.devDump > 0) ddump('added CPED compound end declension noun: ' + temp);
           resy = temp; // for matching the dictionary entry in the output
         }
-        else if (DPR_G.G_irregDec[temp] && DPR_G.G_irregDec[temp][1] == 'N' && typeof(yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
+        else if (DPR_G.G_irregDec[temp] && DPR_G.G_irregDec[temp][1] == 'N' && typeof(DPR_G.yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
           if(DPR_G.devDump > 0) ddump('added CPED compound end declension (irreg): ' + temp + ' -> ' +DPR_G.G_irregDec[temp][0]);
           resy = DPR_G.G_irregDec[temp][0];
         }
@@ -474,11 +474,11 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
         for (var b = 0; b < wtrV.length; b++) // check through wtrV variants that we set at the beginning
         {
           var temp = wtrV[b];
-          if (P[temp] && !isIndec(temp))
+          if (DPR_G.P[temp] && !isIndec(temp))
           {
-            if(DPR_G.devDump > 0) ddump('added compound verb: ' + temp + ' -> '+P[temp][i]);
-            for (var i in P[temp]) {
-              res.push([temp,P[temp][i]]);
+            if(DPR_G.devDump > 0) ddump('added compound verb: ' + temp + ' -> '+DPR_G.P[temp][i]);
+            for (var i in DPR_G.P[temp]) {
+              res.push([temp,DPR_G.P[temp][i]]);
             }
           }
         }
@@ -493,7 +493,7 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
           var temp = wtrV[b];
 
-          if (yt[temp] && !resy && !isIndec(temp))
+          if (DPR_G.yt[temp] && !resy && !isIndec(temp))
           {
             if(DPR_G.devDump > 0) ddump('added CPED compound end declension noun: ' + temp);
             resy = temp; // for matching the dictionary entry in the output
@@ -513,22 +513,22 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
     //if(!lastpart) dalert(temp);
     if (res.length == 0)
     {
-      if (P[temp])
+      if (DPR_G.P[temp])
       {
         if(DPR_G.devDump > 0) ddump('added alt stem in compound: ' + temp);
-        for (var i in P[temp]) {
-          res.push([temp,P[temp][i]]);
+        for (var i in DPR_G.P[temp]) {
+          res.push([temp,DPR_G.P[temp][i]]);
         }
       }
       else if (typeof(DPR_G.G_irregDec[temp]) == 'object') {
         var irregword = DPR_G.G_irregDec[temp][0];
         if(/[0-9]$/.exec(irregword)) { // specific
-          res.push([oneword,P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
+          res.push([oneword,DPR_G.P[irregword.slice(0,-1)][parseInt(irregword.charAt(irregword.length-1))]]);
         }
         else {
           if(DPR_G.devDump > 0) ddump('added alt stem in compound (irreg): ' + temp);
-          for (var i in P[irregword]) {
-            res.push([oneword,P[irregword]]);
+          for (var i in DPR_G.P[irregword]) {
+            res.push([oneword,DPR_G.P[irregword]]);
           }
         }
       }
@@ -538,12 +538,12 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
 
     if (!resy)
     {
-      if (yt[temp] && !resy && !isIndec(temp))
+      if (DPR_G.yt[temp] && !resy && !isIndec(temp))
       {
         if(DPR_G.devDump > 0) ddump('added alt stem in compound (CPED): ' + temp);
         resy = temp; // for matching the dictionary entry in the output
       }
-      else if (DPR_G.G_irregDec[temp] && typeof(yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
+      else if (DPR_G.G_irregDec[temp] && typeof(DPR_G.yt[DPR_G.G_irregDec[temp][0]]) == 'object') {
         if(DPR_G.devDump > 0) ddump('added alt stem in compound (CPED irreg): ' + temp);
         resy = DPR_G.G_irregDec[temp][0];
       }
@@ -615,19 +615,19 @@ function findmatch(oneword,lastpart,nextpart,partslength,trick)
               var tw = sufa[0][i][1].replace(/[0-9]$/,'');
               if(tw != sufa[0][i][1]) {
                 oneno = parseInt(sufa[0][i][1].match(/[0-9]$/)[0]);
-                sufdefs.push(P[tw][oneno] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+                sufdefs.push(DPR_G.P[tw][oneno] + '^' + tw + '^0' + (DPR_G.yt[tw] ? '^'+tw : ''));
               }
               else {
-                for (var k in P[tw]) {
-                  sufdefs.push(P[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+                for (var k in DPR_G.P[tw]) {
+                  sufdefs.push(DPR_G.P[tw][k] + '^' + tw + '^0' + (DPR_G.yt[tw] ? '^'+tw : ''));
                 }
               }
-              if(typeof(D[tw]) == 'object') {
-                for (var k in D[tw]) {
-                  sufdefs.push(D[tw][k] + '^' + tw + '^0' + (yt[tw] ? '^'+tw : ''));
+              if(typeof(DPR_G.D[tw]) == 'object') {
+                for (var k in DPR_G.D[tw]) {
+                  sufdefs.push(DPR_G.D[tw][k] + '^' + tw + '^0' + (DPR_G.yt[tw] ? '^'+tw : ''));
                 }
               }
-              if(typeof(yt[tw]) == 'object') {
+              if(typeof(DPR_G.yt[tw]) == 'object') {
                 sufashorts.push(tw);
               }
               if(sufdefs.length == 0){
@@ -1137,28 +1137,28 @@ function manualCompound(fullword) {
     var oneword = i[j][1].replace(/[0-9]$/,'');
     if(oneword != i[j][1]) {
       oneno = parseInt(i[j][1].match(/[0-9]$/)[0]);
-      da.push(P[oneword][oneno] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
+      da.push(DPR_G.P[oneword][oneno] + '^' + oneword + '^0' + (DPR_G.yt[oneword] ? '^'+oneword : ''));
     }
     else {
-      for (var k in P[oneword]) {
-        da.push(P[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
+      for (var k in DPR_G.P[oneword]) {
+        da.push(DPR_G.P[oneword][k] + '^' + oneword + '^0' + (DPR_G.yt[oneword] ? '^'+oneword : ''));
       }
     }
-    if(typeof(D[oneword]) == 'object') {
-      for (var k in D[oneword]) {
-        da.push(D[oneword][k] + '^' + oneword + '^0' + (yt[oneword] ? '^'+oneword : ''));
+    if(typeof(DPR_G.D[oneword]) == 'object') {
+      for (var k in DPR_G.D[oneword]) {
+        da.push(DPR_G.D[oneword][k] + '^' + oneword + '^0' + (DPR_G.yt[oneword] ? '^'+oneword : ''));
       }
     }
     parta.push(i[j][0]);
     infoa.push(da.join('#'));
-    shorta.push(yt[oneword] ? oneword : '');
+    shorta.push(DPR_G.yt[oneword] ? oneword : '');
   }
   DPR_G.G_outwords = [[parta.join('-'),infoa.join('@'),0]];
   DPR_G.G_shortdefpost = [shorta.join('$')];
 }
 
 function isIndec(word) { // indeclinible
-  if(typeof(yt[word]) != 'object' || yt[word][1] != 'ind.') return false;
+  if(typeof(DPR_G.yt[word]) != 'object' || DPR_G.yt[word][1] != 'ind.') return false;
   else return true;
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var proots = ['aka^kuṭilagatiyaṃ',
+DPR_G.proots = ['aka^kuṭilagatiyaṃ',
 'aka^gatiyaṃ',
 'aki^lakkhaṇe',
 'aki^lakkhaṇe',

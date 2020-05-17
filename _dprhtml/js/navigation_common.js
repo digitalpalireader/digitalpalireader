@@ -520,7 +520,7 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
     break;
     case 'a':
       if(hier != 'm') return;
-      no = (book+1) + '.' + amlist[book][vagga][sutta][section][0] + (amlist[book][vagga][sutta][section].length > 1 ? '-' + amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]:'');
+      no = (book+1) + '.' + DPR_G.amlist[book][vagga][sutta][section][0] + (DPR_G.amlist[book][vagga][sutta][section].length > 1 ? '-' + DPR_G.amlist[book][vagga][sutta][section][DPR_G.amlist[book][vagga][sutta][section].length-1]:'');
     break;
     case 's':
       if(hier != 'm') return;
@@ -536,10 +536,10 @@ function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength
         break;
       }
 
-      if(!smlist[vagga] || !smlist[vagga][sutta] || !smlist[vagga][sutta][section]) break;
+      if(!DPR_G.smlist[vagga] || !DPR_G.smlist[vagga][sutta] || !DPR_G.smlist[vagga][sutta][section]) break;
       no = (vagga+1);
       var noend = 0;
-      var sno = parseInt(smlist[vagga][sutta][section]);
+      var sno = parseInt(DPR_G.smlist[vagga][sutta][section]);
       var add = 0;
 
       if(DPR_G.G_SNAdjustNumbers[no] != null){
@@ -665,10 +665,10 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
       book = a1 - 1;
       var found = 0;
       out:
-      for (var vagga in amlist[book]) {
-        for(var sutta in amlist[book][vagga]) {
-          for(var section in amlist[book][vagga][sutta]) {
-            if (parseInt(amlist[book][vagga][sutta][section][0]) == a2 || (parseInt(amlist[book][vagga][sutta][section][0]) < a2 && parseInt(amlist[book][vagga][sutta][section][amlist[book][vagga][sutta][section].length-1]) > a2)) {
+      for (var vagga in DPR_G.amlist[book]) {
+        for(var sutta in DPR_G.amlist[book][vagga]) {
+          for(var section in DPR_G.amlist[book][vagga][sutta]) {
+            if (parseInt(DPR_G.amlist[book][vagga][sutta][section][0]) == a2 || (parseInt(DPR_G.amlist[book][vagga][sutta][section][0]) < a2 && parseInt(DPR_G.amlist[book][vagga][sutta][section][DPR_G.amlist[book][vagga][sutta][section].length-1]) > a2)) {
               found = 1;
               break out;
             }
@@ -724,9 +724,9 @@ function getSuttaFromNumber(is) { // should be in array format SN,1,1
       }
       var found = 0;
       out:
-      for(var sutta in smlist[a1]) {
-        for(var section in smlist[a1][sutta]) {
-          if (parseInt(smlist[a1][sutta][section]) == a2) {
+      for(var sutta in DPR_G.smlist[a1]) {
+        for(var section in DPR_G.smlist[a1][sutta]) {
+          if (parseInt(DPR_G.smlist[a1][sutta][section]) == a2) {
             found = 1;
             break out;
           }

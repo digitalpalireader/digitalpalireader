@@ -4,7 +4,7 @@ function setI () {
   i = 1
 }
 
-var ioCheck = true
+DPR_G.ioCheck = true
 
 function readFile (aFileKey) {
   console.log('History not yet implemented.')

@@ -413,7 +413,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(DPR_G.DPR_prefs['catioff'] && typeof(DPR_G.atiD) != 'undefined') {
 
 
-        var z = amlist[book][vagga][sutta][section];
+        var z = DPR_G.amlist[book][vagga][sutta][section];
         out:
         for (var a = 0;a < DPR_G.atiA.length; a++) {
           if(parseInt(DPR_G.atiA[a].split('/')[1].substring(2),10) == bookn) {
@@ -532,7 +532,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       if(DPR_G.DPR_prefs['catioff'] && typeof(DPR_G.atiD) != 'undefined') {
 
-        var countc = smlist[vagga][sutta][section];
+        var countc = DPR_G.smlist[vagga][sutta][section];
 
         //if(bookn == 5) document.getElementById('mafbc').innerHTML += vagga+' '+sutta+'|';
 

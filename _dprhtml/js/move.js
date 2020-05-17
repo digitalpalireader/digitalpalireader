@@ -1,6 +1,6 @@
 'use strict';
 
-var moveat = 2;
+DPR_G.moveat = 2;
 
 function moveframex(a,temp) //read, etc
 {
@@ -15,7 +15,7 @@ function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
   if(!b)
     b = a;
 
-  if (moveat == 1) moveframex(2);
+  if (DPR_G.moveat == 1) moveframex(2);
 
     $('#difout').hide();
   $('#cof').hide();
@@ -30,7 +30,7 @@ function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
   $('#'+b).show();
 }
 
-var cpout = 1;
+DPR_G.cpout = 1;
 
 
 function moveframec() // open close control panel
