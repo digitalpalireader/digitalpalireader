@@ -84,8 +84,16 @@ const DPR_CMD_TRANSLATE_10 = 'translate10';
 const DPR_CMD_ENTER_QUICK_REFERENCE = 'enterQuickReference';
 const DPR_CMD_OPEN_SETTINGS = 'openSettings';
 const DPR_CMD_GOTO_HOME = 'gotoHome';
+const DPR_CMD_GOTO_PREV_DICT_ENTRY = 'gotoPrevDictEntry';
+const DPR_CMD_GOTO_NEXT_DICT_ENTRY = 'gotoNextDictEntry';
 const DPR_CMD_TOGGLE_DPR_SIDEBAR = 'toggleDPRSidebar';
 const DPR_CMD_SHOW_BOTTOM_PANE = 'showBottomPane';
+const DPR_CMD_SHOW_PALI_QUOTE = 'showPaliQuote';
+const DPR_CMD_RESET_SETTINGS = 'resetSettings';
+const DPR_CMD_OPEN_NEW_QUIZZ = 'openNewQuizz';
+const DPR_CMD_OPEN_HELP = 'openHelp';
+const DPR_CMD_OPEN_HELP_VIDEO = 'openHelpVideo';
+const DPR_CMD_LAUNCH_FEEDBACK_FORM = 'launchFeedbackForm';
 
 const emptyFn = () => {};
 
@@ -244,7 +252,7 @@ const dprCommandList = [
     id: DPR_CMD_BOOKMARK_SECTION,
     notImplemented: true,
     canExecute: false,
-    execute: emptyFn,
+    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
     visible: false,
     isDynamic: true,
     title: "Bookmark section (Keyboard shortcut: b)",
@@ -402,24 +410,104 @@ const dprCommandList = [
     matchKey: e => e.key === 'v',
   },
   {
+    id: DPR_CMD_GOTO_PREV_DICT_ENTRY,
+    notImplemented: true,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    isDynamic: false,
+    title: "Go to previous dictionary entry (Keyboard shortcut: ,)",
+    matchKey: e => e.key === ',',
+  },
+  {
+    id: DPR_CMD_GOTO_NEXT_DICT_ENTRY,
+    notImplemented: true,
+    canExecute: false,
+    execute: emptyFn,
+    visible: false,
+    isDynamic: false,
+    title: "Go to next dictionary entry (Keyboard shortcut: .)",
+    matchKey: e => e.key === '.',
+  },
+  {
     id: DPR_CMD_TOGGLE_DPR_SIDEBAR,
     notImplemented: false,
     canExecute: true,
     execute: () => __otherDialogsViewModel.toggleDPRSidebar(),
     visible: true,
     isDynamic: false,
-    title: "Toggle DPR Sidebar (Keyboard shortcut: `)",
-    matchKey: e => e.key === '`',
+    title: "Toggle DPR Sidebar (Keyboard shortcut: &)",
+    matchKey: e => e.key === '&',
   },
   {
     id: DPR_CMD_SHOW_BOTTOM_PANE,
-    notImplemented: true,
+    notImplemented: false,
     canExecute: true,
-    execute: () => emptyFn,
+    execute: (e) => __otherDialogsViewModel.showBottomPane(e.key),
     visible: true,
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
     matchKey: e => ['1', '2', '3', '4', '5'].includes(e.key),
+  },
+  {
+    id: DPR_CMD_SHOW_PALI_QUOTE,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.displayPaliQuote(),
+    visible: true,
+    isDynamic: false,
+    title: "Display Pali Quote (Keyboard shortcut: *)",
+    matchKey: e => e.key === '*',
+  },
+  {
+    id: DPR_CMD_RESET_SETTINGS,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.resetSettings(),
+    visible: true,
+    isDynamic: false,
+    title: "Reset all settings (Keyboard shortcut: r)",
+    matchKey: e => e.key === 'r',
+  },
+  {
+    id: DPR_CMD_OPEN_NEW_QUIZZ,
+    notImplemented: true,
+    canExecute: false,
+    execute: () => __otherDialogsViewModel.openNewQuizz(),
+    visible: true,
+    isDynamic: false,
+    title: "Open new quizz (Keyboard shortcut: #)",
+    matchKey: e => e.key === '#',
+  },
+  {
+    id: DPR_CMD_OPEN_HELP,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.openHelp(),
+    visible: true,
+    isDynamic: false,
+    title: "Open help dialog (Keyboard shortcut: ?)",
+    matchKey: e => e.key === '?',
+  },
+  {
+    id: DPR_CMD_OPEN_HELP_VIDEO,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.openHelpVideo(),
+    visible: true,
+    isDynamic: false,
+    title: "Open help video (Keyboard shortcut: h)",
+    matchKey: e => e.key === 'h',
+  },
+  {
+    id: DPR_CMD_LAUNCH_FEEDBACK_FORM,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __otherDialogsViewModel.launchFeedbackForm(),
+    visible: true,
+    isDynamic: false,
+    title: "Launch feedback form (Keyboard shortcut: @)",
+    matchKey: e => e.key === '@',
   },
 ];
 

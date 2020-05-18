@@ -585,7 +585,7 @@ function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(conv) {
     shortcutFns[DPR_CMD_SEND_TO_CONVERTER] = {
       canExecuteStr: 'true',
-      executeStr: 'sendTextToConvertor()',
+      execute: () => __dprViewModel.DPR_CMD_SEND_TO_CONVERTER,
       titleStr: null,
       visibleStr: 'true',
     };
@@ -594,7 +594,7 @@ function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(ex) {
     shortcutFns[DPR_CMD_SEND_TO_TEXTPAD] = {
       canExecuteStr: 'true',
-      executeStr: 'sendTextToTextpad(event)',
+      execute: () => __dprViewModel.DPR_CMD_SEND_TO_TEXTPAD,
       titleStr: null,
       visibleStr: 'true',
     };

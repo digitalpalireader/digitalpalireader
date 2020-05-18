@@ -364,7 +364,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
     canExecuteStr: 'true',
-    executeStr: `bookmarkSavePrompt('${nikaya}#${bookno}#${meta}#${volume}#${vagga}#${sutta}#${section}#${hier}', '${bknameme}', window.getSelection().toString())`,
+    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
     titleStr: null,
     visibleStr: 'true',
   };
