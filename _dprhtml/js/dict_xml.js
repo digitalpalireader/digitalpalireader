@@ -510,7 +510,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
   addJS(['titles']);
 
 
-  var loca = titlelist[num].split('#');
+  var loca = DPR_G.titlelist[num].split('#');
   var word = loca.shift();
 
     var finout = '';
