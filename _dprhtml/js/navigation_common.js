@@ -826,7 +826,7 @@ function convertShortLink(place) {
   if(/^dhpv[ .]*[0-9]+$/.test(place)) { // dhp verses
 
     var dhpno = parseInt(place.replace(/[^0-9]/g,''));
-    var dp = dhpv[dhpno];
+    var dp = DPR_G.dhpv[dhpno];
     return ['k',1,0,0,dp[0],0,0,'m',dp[1]+1];
   }
   else if(/^dhpv-a[ .]*[0-9]+$/.test(place)) { // dhp verses

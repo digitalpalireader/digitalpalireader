@@ -57,7 +57,6 @@ select, input, textarea {
 
 /* end static */
 .dbut {
-  -moz-opacity:0.5;
   opacity:0.5;
 }
 
@@ -76,24 +75,20 @@ select, input, textarea {
 
 .lbut {
   border-radius:4px 0 0 4px;
-  -moz-border-radius:4px 0 0 4px;
 }
 
 
 .rbut {
   border-left:none;
   border-radius:0 4px 4px 0;
-  -moz-border-radius:0 4px 4px 0;
 }
 
 .tbut {
   border-radius:4px 4px 0 0;
-  -moz-border-radius:4px 4px 0 0;
 }
 
 .bbut {
   border-radius:0 0 4px 4px;
-  -moz-border-radius:0 0 4px 4px;
 }
 
 
@@ -106,7 +101,6 @@ select, input, textarea {
 .obut {
   padding:2px 5px;
   border-radius:4px;
-  -moz-border-radius:4px;
 }
 
 .buttont {
@@ -206,11 +200,9 @@ position:relative;
 }
 
 .hoverShow {
--moz-opacity:0.2;
 opacity:0.2
 }
 .hoverShow:hover {
--moz-opacity:1.0;
 opacity:1.0
 }
 
@@ -225,7 +217,6 @@ opacity:1.0
   padding:10px;
   background-color: RGBa(255,255,255,0.5);
   border-radius:16px;
-  -moz-border-radius:16px;
 }
 
 .super {
@@ -242,7 +233,6 @@ display:none;
 border:silver solid 1px;
 padding:4px;
 border-radius:4px;
--moz-border-radius:4px;
 bottom:-16px;
 left:20px;
 }
@@ -507,7 +497,6 @@ padding-top:10px;
   left:50%;
   padding:10px;
   background-color: RGBa(255,255,255,0.2);
-  -moz-border-radius: 20px;
   border-radius: 20px;
 }
 
@@ -635,7 +624,6 @@ border-spacing:0px;
 .cp-d:hover {
   cursor:pointer;
   opacity: 0.8;
-  -moz-opacity: 0.8;
 }
 
 .cp-d {
@@ -645,7 +633,6 @@ border-spacing:0px;
   width:12px;
   height:12px;
   opacity: 0.3;
-  -moz-opacity: 0.3;
 }
 
 .cpsp {
@@ -695,19 +682,17 @@ border-spacing:0px;
 
 #DPRLogo {
   border-radius:8px;
-  -moz-border-radius:8px;
   padding:10px 5px 5px 10px;
   border: 1px silver solid;
   position:absolute;
   z-index:4;
   top:-8px;
   left:-8px;
-  background-image: -moz-linear-gradient(left top,silver,white);
+  background: linear-gradient(left top,silver,white);
 }
 
 #DPRLogo:hover {
   opacity:1;
-  -moz-opacity:1;
 }
 .conjc {
   position:relative;
@@ -719,7 +704,6 @@ border-spacing:0px;
   margin-bottom:20px;
   padding:20px;
   border-radius:24px;
-  -moz-border-radius:24px;
   background-color: silver;
   background-color: RGBa(200,200,200,0.5);
 }
@@ -734,7 +718,6 @@ border-spacing:0px;
   background-color: white;
   background-color: RGBa(255,255,255,0.5);
   border-radius:8px;
-  -moz-border-radius:8px;
 }
 
 #conjc {
@@ -848,7 +831,6 @@ padding: 4px;
 }
 .quizc {
 border-radius: 4px;
--moz-border-radius: 4px;
 border:1px grey solid;
 padding-left: 10px;
 padding-right: 10px;
@@ -952,7 +934,7 @@ text-align:center;
 }
 
 .drag {
-  cursor:-moz-grab;
+  cursor:grab;
   z-index:1;
   background-color:#eee;
   text-align:center;

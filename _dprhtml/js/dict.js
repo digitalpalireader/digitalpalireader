@@ -58,15 +58,15 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   js['PED'] = ['ped'];
   js['DPPN'] = ['dppn','nameno'];
-  js['CPED'] = ['english'];
-  js['MULTI'] = ['ped','dppn','nameno','english'];
-  js['CEPD'] = ['epd'];
+  js['CPED'] = ['/en/cped/index.js'];
+  js['MULTI'] = ['ped','dppn','nameno','/en/cped/index.js'];
+  js['CEPD'] = ['/en/cepd/index.js'];
   js['ATT'] = ['attlist'];
   js['TIK'] = ['tiklist'];
   js['TIT'] = ['titles','dppn','nameno'];
   js['PRT'] = ['roots','roots_link'];
-  js['SKT'] = ['skt'];
-  js['SKR'] = ['skt_roots'];
+  js['SKT'] = ['/sa/dict/index.js'];
+  js['SKR'] = ['/sa/roots/index.js'];
 
   var error = addJS(js[DPR_G.G_dictType]);
 
@@ -260,7 +260,7 @@ function pedFullTextSearch(getstring) {
 
   for (var i = 0; i < 5; i++) {
 
-    var xmlDoc = DPR_G.DPR_DataLoader.loadPXD(i);
+    var xmlDoc = DPR_DataLoader.loadPXD(i);
 
     var allp = xmlDoc.getElementsByTagName('d');
 
@@ -467,7 +467,7 @@ function dppnFullTextSearch(getstring) {
   getstring = toUni(getstring);
   for (var i = 1; i < 10; i++) {
 
-    var xmlDoc = DPR_G.DPR_DataLoader.loadXDPPN(i);;
+    var xmlDoc = DPR_DataLoader.loadXDPPN(i);;
 
     var allp = xmlDoc.getElementsByTagName('e');
 
@@ -854,7 +854,7 @@ function multisearchstart(hard)
 
 function epdsearchstart()
 {
-  if(typeof(epd) == 'undefined') {
+  if(typeof(DPR_G.epd) == 'undefined') {
     return;
   }
 
@@ -874,15 +874,15 @@ function epdsearchstart()
   var y = 0;
   var finout = '';
 
-  for (var x = 0; x < epd.length; x++)
+  for (var x = 0; x < DPR_G.epd.length; x++)
   {
-    gsplit = epd[x].split('^');
+    gsplit = DPR_G.epd[x].split('^');
 
     if(!/ft/.exec(DPR_G.G_dictOpts)) {
       var tosearch = gsplit[0];
     }
     else {
-      var tosearch = epd[x];
+      var tosearch = DPR_G.epd[x];
     }
     if(/fz/.exec(DPR_G.G_dictOpts)) {
       tosearch = toFuzzy(tosearch);
@@ -1021,7 +1021,7 @@ function attsearchstart()
 
 function tiksearchstart()
 {
-  if(typeof(tiklist) == 'undefined') {
+  if(typeof(DPR_G.tiklist) == 'undefined') {
     return;
   }
 
@@ -1045,10 +1045,10 @@ function tiksearchstart()
   var finout = '';
   var outnik = '';
 
-  for (var x = 0; x < tiklist.length; x++)
+  for (var x = 0; x < DPR_G.tiklist.length; x++)
   {
     outnik = '';
-    var tikt = tiklist[x].split('#')[0];
+    var tikt = DPR_G.tiklist[x].split('#')[0];
 
     if(/fz/.exec(DPR_G.G_dictOpts)) {
       tikt = toFuzzy(tikt);
@@ -1066,7 +1066,7 @@ function tiksearchstart()
     if(yessir)
     {
 
-      var entries = tiklist[x].split('#');
+      var entries = DPR_G.tiklist[x].split('#');
       gsplit = entries.shift();
       var uniout = toUni(gsplit);
 
@@ -1440,7 +1440,7 @@ function sktsearchstart()
 
 function sktRootsearchstart(hard)
 {
-  if(typeof(sktR) == 'undefined') {
+  if(typeof(DPR_G.sktR) == 'undefined') {
     return;
   }
   var getstring = toSkt(toVel(DPR_G.G_dictQuery));
@@ -1463,9 +1463,9 @@ function sktRootsearchstart(hard)
   var y = 0;
   var finout = '';
 
-  for (var i=0; i < sktR.length; i++)
+  for (var i=0; i < DPR_G.sktR.length; i++)
   {
-    var j = sktR[i];
+    var j = DPR_G.sktR[i];
     if(/fz/.exec(DPR_G.G_dictOpts)) {
       j = toFuzzy(j);
     }
