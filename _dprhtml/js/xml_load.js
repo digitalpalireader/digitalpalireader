@@ -1,6 +1,6 @@
 'use strict';
 
-DPR_DataLoader = (function() {
+var DPR_DataLoader = (function() {
   const xhrGet = url => {
     var xmlDoc = XML_Load.xhrGet({ url }, xhr => xhr.responseXML.documentElement);
     return xmlDoc;

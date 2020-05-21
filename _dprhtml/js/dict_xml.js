@@ -389,7 +389,7 @@ function sktXML(entry,idx,which,add)
 {
   appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
 
-  addJS(['skt']);
+  addJS(['/sa/dict/index.js']);
 
   if(add == 'right') return;
   if(add == true) {

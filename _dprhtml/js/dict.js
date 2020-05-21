@@ -58,15 +58,15 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   js['PED'] = ['ped'];
   js['DPPN'] = ['dppn','nameno'];
-  js['CPED'] = ['english'];
-  js['MULTI'] = ['ped','dppn','nameno','english'];
-  js['CEPD'] = ['epd'];
+  js['CPED'] = ['/en/cped/index.js'];
+  js['MULTI'] = ['ped','dppn','nameno','/en/cped/index.js'];
+  js['CEPD'] = ['/en/cepd/index.js'];
   js['ATT'] = ['attlist'];
   js['TIK'] = ['tiklist'];
   js['TIT'] = ['titles','dppn','nameno'];
   js['PRT'] = ['roots','roots_link'];
-  js['SKT'] = ['skt'];
-  js['SKR'] = ['skt_roots'];
+  js['SKT'] = ['/sa/dict/index.js'];
+  js['SKR'] = ['/sa/roots/index.js'];
 
   var error = addJS(js[DPR_G.G_dictType]);
 

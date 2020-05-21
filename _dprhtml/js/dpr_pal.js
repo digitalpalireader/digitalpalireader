@@ -33,22 +33,26 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/_dprhtml/');
 
+  const loadedScripts = {};
   DPR_PAL.addJS = files => {
-    if (DPR_PAL.isXUL) {
-      var loader = Components.classes["@mozilla.org/moz/jssubscript-loader;1"].getService(Components.interfaces.mozIJSSubScriptLoader);
-      for (var i = 0; i < files.length; i++) {
-        if (!/\.js$/.test(files[i]))
-          files[i] = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/js/' + files[i] + '.js');
-        try {
-          loader.loadSubScript(files[i], null, 'UTF-8');
-        }
-        catch (ex) {
-          return [ex, files[i]];
-        }
+    files.forEach(file => {
+      const url = /^\//i.test(file) ? file : `${DPR_PAL.contentFolder}js/${file}.js`;
+
+      if (loadedScripts[url.toLowerCase()]) {
+        console.log('>>>> addJS: Already loaded:', url.toLowerCase());
+        return;
       }
-    } else {
-      // Not loading dynamically yet. It's preloaded by index.html for now.
-    }
+
+      console.log('>>>> addJS: Loading script:', url);
+      $.ajax({
+        url,
+        dataType: 'script',
+        async: false,
+        cache: true,
+      });
+
+      loadedScripts[url.toLowerCase()] = true;
+    });
   };
 
   DPR_PAL.showLoadingMarquee = () => {

@@ -9,7 +9,7 @@ DPR_G.G_stopAnalyzing = 0;
 
 function outputAnalysis(input,frombox) {
 
-  addJS(['ped','dppn','nameno','english','irreg','attlist','tiklist','titles']);
+  addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
 
   //ddump('',1,1);
   DPR_G.G_outwords = [];
