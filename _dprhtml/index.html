@@ -1,5 +1,5 @@
 ﻿<!doctype html>
-<html lang="en" manifest="dpr.appcache">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Digital Pāli Reader</title>
@@ -45,12 +45,12 @@
         "Microsoft"
       ];
       const diffVarLists = () => {
-      console.log("Global Variables introduced by DPR-")
-      console.log(Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a))))
-      console.log("Keys added to DPR_G after init-")
-      console.log(Object.keys(DPR_G).filter(a => !(whitelist.includes(a) || initDPR_GList.includes(a))))
+        console.log("Global Variables introduced by DPR-")
+        console.log(Object.keys(window).filter(a => !((typeof window[a] === "function") || whitelist.includes(a) || initObjList.includes(a))))
+        console.log("Keys added to DPR_G after init-")
+        console.log(Object.keys(DPR_G).filter(a => !(whitelist.includes(a) || initDPR_GList.includes(a))))
       }
- </script>
+    </script>
     <script>
       window.addEventListener('error', e => {
         const { message, source, lineno, colno, error } = e;

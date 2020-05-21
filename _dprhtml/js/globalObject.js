@@ -198,7 +198,6 @@ const DPR_G = {
   xyt : null,
   skt : null,
   sktR : null,
-  DPR_DataLoader : null,
   G_lastsearch : null
 };
 

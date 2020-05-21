@@ -1,6 +1,6 @@
 'use strict';
 
-DPR_G.DPR_DataLoader = (function() {
+DPR_DataLoader = (function() {
   const xhrGet = url => {
     var xmlDoc = XML_Load.xhrGet({ url }, xhr => xhr.responseXML.documentElement);
     return xmlDoc;
@@ -64,7 +64,7 @@ function loadXMLFile(file, setNo) {
       break;
   }
 
-  return DPR_G.DPR_DataLoader.loadTipitaka(file, set);
+  return DPR_DataLoader.loadTipitaka(file, set);
 }
 
 var XML_Load = (function () {

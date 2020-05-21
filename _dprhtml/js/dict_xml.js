@@ -62,7 +62,7 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   DPR_G.pedfileget = t1 + '/' + t2;
-  var xmlDoc = DPR_G.DPR_DataLoader.loadPXD(t1);
+  var xmlDoc = DPR_DataLoader.loadPXD(t1);
 
   var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -244,7 +244,7 @@ function DPPNXML(filein,which,add)
 
   // xml
 
-  var xmlDoc = DPR_G.DPR_DataLoader.loadXDPPN(tloc[1]);
+  var xmlDoc = DPR_DataLoader.loadXDPPN(tloc[1]);
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 
@@ -349,7 +349,7 @@ function sktRXML(no,add)
 
   // xml
 
-  var xmlDoc = DPR_G.DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(DPR_G.sktR[no]));
+  var xmlDoc = DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(DPR_G.sktR[no]));
   var s = new XMLSerializer();
   var data = s.serializeToString(xmlDoc);
 
@@ -401,7 +401,7 @@ function sktXML(entry,idx,which,add)
 
   var char = entry.charAt(0);
 
-  var xmlDoc = DPR_G.DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
+  var xmlDoc = DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
 
   var data = xmlDoc.getElementsByTagName('u')[idx];
   var ser = new XMLSerializer();
@@ -617,7 +617,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 function getDppnData(link){
   appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
 
-  var xmlDoc = DPR_G.DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
+  var xmlDoc = DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
   return data;

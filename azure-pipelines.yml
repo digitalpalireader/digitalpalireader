@@ -9,7 +9,7 @@ pool:
 steps:
   - script: |
       sudo apt-get install zip
-      sudo npm i yarn -g
+      sudo npm i yarn workbox-cli -g
       sudo chown -R $USER:$GROUP ~/.npm
       sudo chown -R $USER:$GROUP ~/.config
       sudo chmod +x build.sh

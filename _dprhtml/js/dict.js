@@ -260,7 +260,7 @@ function pedFullTextSearch(getstring) {
 
   for (var i = 0; i < 5; i++) {
 
-    var xmlDoc = DPR_G.DPR_DataLoader.loadPXD(i);
+    var xmlDoc = DPR_DataLoader.loadPXD(i);
 
     var allp = xmlDoc.getElementsByTagName('d');
 
@@ -467,7 +467,7 @@ function dppnFullTextSearch(getstring) {
   getstring = toUni(getstring);
   for (var i = 1; i < 10; i++) {
 
-    var xmlDoc = DPR_G.DPR_DataLoader.loadXDPPN(i);;
+    var xmlDoc = DPR_DataLoader.loadXDPPN(i);;
 
     var allp = xmlDoc.getElementsByTagName('e');
 
