@@ -33,26 +33,24 @@ function clearHistory(cp) {
 }
 
 function getHistory() {
-  if (!DPR_PAL.isXUL) {
-    return [];
-  }
 
-  if(!fileExists('History_List_DPR')) return [];
-  var content = readFile('History_List_DPR');
+  let content = __navigationTabViewModel.navHistoryArray;
   return content.join('#').split('#');
+
 }
 
 function addHistory(value) {
-  if (!DPR_PAL.isXUL) {
-    return;
-  }
 
-  var storeHistory = [value];
-  if(!fileExists('History_List_DPR')) var data = [];
-  else var data = readFile('History_List_DPR').join('#').split('#');
-  for (var j in data) {
-    if (data[j] != value) { storeHistory.push(data[j]); }
-    if (j > 99) { break; }
+  if (typeof(Storage) !== "undefined") {
+    let navHistoryArrayFromStorage = localStorage.getItem("navHistoryArray");
+    if (navHistoryArrayFromStorage) {
+      let data = JSON.parse(navHistoryArrayFromStorage);
+      for (var i in data) {
+        if (data[i].localeCompare(value) === 0 || i > 99) return;
+      }
+      data.push(value);
+      localStorage.setItem("navHistoryArray", JSON.stringify(data));
+      __navigationTabViewModel.updateHistory();
+    }
   }
-  writeFile('History_List_DPR',storeHistory.join('\n'),'UTF-8');
 }

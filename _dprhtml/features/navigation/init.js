@@ -60,7 +60,12 @@ class NavigationTabViewModel {
 
     this.places = ko.observableArray();
 
+    this.navHistoryArray = ko.observableArray();
+    this.selectedHistoryItem = ko.observable(),
+    this.historyInfo = ko.computed(function() { return this.computeHistoryInfo(); }, this);
+
     this.initializeSets();
+    this.updateHistory();
   }
 
   initializeSets() {
@@ -101,6 +106,27 @@ class NavigationTabViewModel {
     return isIndex
       ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
       : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
+  }
+
+  sendSelectedHistoryItem(ctx) {
+    if(ctx.selectedHistoryItem()) {
+      alert('You selected: ' + ctx.selectedHistoryItem());
+    }
+  }
+
+  computeHistoryInfo() {
+    return { text: '\u21D2', title: 'Open bookmarks and history window', onmouseup: 'alert("Bookmarks and history page not yet implemented")'}
+  }
+
+  updateHistory() {
+    if (typeof(Storage) !== "undefined") {
+      let navHistoryArrayFromStorage = localStorage.getItem("navHistoryArray");
+      if (navHistoryArrayFromStorage) {
+        this.navHistoryArray(JSON.parse(navHistoryArrayFromStorage));
+      } else {
+        localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]));
+      }
+    }
   }
 }
 
@@ -161,3 +187,7 @@ const initializeNavigationSidebarTab = () => {
     __navigationTabViewModel.set('d');
   }
 }
+
+
+
+
