@@ -118,7 +118,13 @@
           <div id="navigation-history-bookmarks" class="navigation-hierarchy-layout">
 
             <!--ko let: { info: historyInfo() || {} }-->
-            <select id="nav-history" class="custom-select navselect" data-bind="options: navHistoryArray, value: selectedHistoryItem, event: {change: sendSelectedHistoryItem}">
+            <select id="nav-history" class="custom-select navselect"
+              data-bind="options: navHistoryArray,
+                optionsText: function(item) {
+                  return item.indexOf('@') === -1 ? item : item.substring(0, item.indexOf('@'));
+                },
+                value: selectedHistoryItem,
+                event: {change: sendSelectedHistoryItem}">
             </select>
             <button id="nav-history-button" type="button" class="btn btn-light m-0 p-1" data-bind="text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }">
             </button>

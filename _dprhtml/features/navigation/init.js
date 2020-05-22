@@ -122,12 +122,10 @@ class NavigationTabViewModel {
 
   updateHistory() {
     if (typeof(Storage) !== "undefined") {
-      let navHistoryArrayFromStorage = localStorage.getItem("navHistoryArray");
-      if (navHistoryArrayFromStorage) {
-        this.navHistoryArray(JSON.parse(navHistoryArrayFromStorage));
-      } else {
-        localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]));
+      if (!localStorage.getItem("navHistoryArray")) {
+        localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]))
       }
+      this.navHistoryArray(JSON.parse(localStorage.getItem("navHistoryArray")));
     }
   }
 }
