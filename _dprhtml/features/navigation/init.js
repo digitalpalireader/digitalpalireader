@@ -112,12 +112,13 @@ class NavigationTabViewModel {
     if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
       let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
       let x = selectedHistItem[1].split(',');
-      x.length > 3 ? openPlace(x) : openIndex(x);
+      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
     }
   }
 
   computeHistoryInfo() {
-    return { text: '\u21D2', title: 'Open bookmarks and history window', onmouseup: 'alert("Bookmarks and history page not yet implemented")'}
+    return { text: '\u21D2', title: 'Open bookmarks and history window',
+      onmouseup: 'alert("Bookmarks and history page not yet implemented")'}
   }
 
   updateHistory() {
