@@ -109,8 +109,10 @@ class NavigationTabViewModel {
   }
 
   sendSelectedHistoryItem(ctx) {
-    if(ctx.selectedHistoryItem()) {
-      alert('You selected: ' + ctx.selectedHistoryItem());
+    if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
+      let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
+      let x = selectedHistItem[1].split(',');
+      x.length > 3 ? openPlace(x) : openIndex(x);
     }
   }
 
@@ -187,7 +189,3 @@ const initializeNavigationSidebarTab = () => {
     __navigationTabViewModel.set('d');
   }
 }
-
-
-
-
