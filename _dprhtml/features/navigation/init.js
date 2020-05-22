@@ -60,6 +60,7 @@ class NavigationTabViewModel {
 
     this.places = ko.observableArray();
 
+    this.navHistoryVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
     this.navHistoryArray = ko.observableArray();
     this.selectedHistoryItem = ko.observable(),
     this.historyInfo = ko.computed(function() { return this.computeHistoryInfo(); }, this);
@@ -106,6 +107,10 @@ class NavigationTabViewModel {
     return isIndex
       ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
       : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
+  }
+
+  isStorageSupportedByBrowser() {
+    return typeof(Storage) !== "undefined";
   }
 
   sendSelectedHistoryItem(ctx) {

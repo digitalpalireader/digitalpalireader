@@ -16,14 +16,14 @@ function getDppnEntry(term) {
   if(typeof(DPR_G.D) == 'undefined')
     addJS(['dppn']);
   var dppnEntry = [];
-  if(typeof(DPR_G.D[term]) == 'object') {
+  if(DPR_G.D && typeof(DPR_G.D[term]) == 'object') {
     dppnEntry = DPR_G.D[term];
   }
   else {
-    if(typeof(DPR_G.D[term.replace(/\.m$/,'')]) == 'object') {
+    if(DPR_G.D && typeof(DPR_G.D[term.replace(/\.m$/,'')]) == 'object') {
       dppnEntry = DPR_G.D[term.replace(/\.m$/,'')];
     }
-    else if(typeof(DPR_G.D[term.replace(/o$/,'a')]) == 'object') {
+    else if(DPR_G.D && typeof(DPR_G.D[term.replace(/o$/,'a')]) == 'object') {
       dppnEntry = DPR_G.D[term.replace(/o$/,'a')];
     }
   }
