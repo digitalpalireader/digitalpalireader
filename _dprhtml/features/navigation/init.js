@@ -123,11 +123,11 @@ class NavigationTabViewModel {
 
   computeHistoryInfo() {
     return { text: '\u21D2', title: 'Open bookmarks and history window',
-      onmouseup: 'alert("Bookmarks and history page not yet implemented")'}
+      onmouseup: 'bookmarkframe(1)'}
   }
 
   updateHistory() {
-    if (typeof(Storage) !== "undefined") {
+    if (this.isStorageSupportedByBrowser) {
       if (!localStorage.getItem("navHistoryArray")) {
         localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]))
       }
