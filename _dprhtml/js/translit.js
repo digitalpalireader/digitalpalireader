@@ -576,12 +576,21 @@ function toBengali(input,type) {
       output += vowel[i1];
       i += 1;
     }
-    else if (i2 == 'h' && bengalir[i1+i2]) {    // two character match
-      output += bengalir[i1+i2];
-      if (i3 && !vowel[i3] && i2 != 'ṃ') {
-        output += bstop;
+    else if ((i2 == 'h' || i2 == 'v') && bengalir[i1+i2]) {    // two character match
+      if (i2 == 'h' && i3 == 'v' && bengalir[i1+i2+i3]) { // three character match
+        output += bengalir[i1+i2+i3];
+        if (i4 && !vowel[i4] && i3 != 'ṃ') {
+          output += bstop;
+        }
+        i += 3;
       }
-      i += 2;
+      else {
+        output += bengalir[i1+i2];
+        if (i3 && !vowel[i3] && i2 != 'ṃ') {
+          output += bstop;
+        }
+        i += 2;
+      }
     }
     else if (bengalir[i1]) {  // one character match except a
       output += bengalir[i1];
