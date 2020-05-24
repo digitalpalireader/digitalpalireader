@@ -1,7 +1,18 @@
 'use strict';
 
-function removeHistory(value) {
-  //TO DO
+function removeHistory(i) {
+
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let navHistoryArrayFromStorage = localStorage.getItem("navHistoryArray");
+    let data = [];
+    if (navHistoryArrayFromStorage) {
+      data = JSON.parse(navHistoryArrayFromStorage).slice();
+      data.splice(i, 1);
+      localStorage.setItem("navHistoryArray", JSON.stringify(data));
+      __navigationTabViewModel.updateHistory();
+      bookmarkframe(0);
+    }
+  }
 }
 
 function clearHistory(cp) {
@@ -13,7 +24,7 @@ function clearHistory(cp) {
     if (navHistoryArrayFromStorage) {
       localStorage.removeItem("navHistoryArray");
       __navigationTabViewModel.updateHistory();
-      bookmarkframe();
+      bookmarkframe(0);
     }
   }
 }

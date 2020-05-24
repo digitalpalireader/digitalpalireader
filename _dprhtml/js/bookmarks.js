@@ -52,7 +52,7 @@ function bookmarkframe(refresh) {
 
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-      hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + theHistory[i] + '\');"></a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!hout) { hout = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
@@ -66,7 +66,7 @@ function bookmarkframe(refresh) {
 
   if (bNodes.length == 0)
   {
-    if (refresh) {
+    if (refresh === 1) {
       DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width="1">&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
@@ -110,7 +110,9 @@ function bookmarkframe(refresh) {
     outputList += '</table></form>';
     outputList += '<hr><div class="obutc"><b>' + bNodes.length + ' Bookmark'+(bNodes.length == 1?'':'s')+' Stored</b>';
     outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="eraseBookmarks(\'go\')">erase&nbsp;all</span></div>';
-    DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+    if (refresh === 1) {
+      DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+    }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width=100>&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>'+outputList+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
 
