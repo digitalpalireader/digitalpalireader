@@ -60,7 +60,13 @@ class NavigationTabViewModel {
 
     this.places = ko.observableArray();
 
+    this.navHistoryVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
+    this.navHistoryArray = ko.observableArray();
+    this.selectedHistoryItem = ko.observable(),
+    this.historyInfo = ko.computed(function() { return this.computeHistoryInfo(); }, this);
+
     this.initializeSets();
+    this.updateHistory();
   }
 
   initializeSets() {
@@ -101,6 +107,32 @@ class NavigationTabViewModel {
     return isIndex
       ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
       : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
+  }
+
+  isStorageSupportedByBrowser() {
+    return typeof(Storage) !== "undefined";
+  }
+
+  sendSelectedHistoryItem(ctx) {
+    if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
+      let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
+      let x = selectedHistItem[1].split(',');
+      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
+    }
+  }
+
+  computeHistoryInfo() {
+    return { text: '\u21D2', title: 'Open bookmarks and history window',
+      onmouseup: 'bookmarkframe(1)'}
+  }
+
+  updateHistory() {
+    if (this.isStorageSupportedByBrowser) {
+      if (!localStorage.getItem("navHistoryArray")) {
+        localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]))
+      }
+      this.navHistoryArray(JSON.parse(localStorage.getItem("navHistoryArray")));
+    }
   }
 }
 
