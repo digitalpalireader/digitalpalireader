@@ -1,0 +1,1138 @@
+[
+  {
+    "name": "DPPNXML",
+    "declLine1": "function DPPNXML(filein,which,add)"
+  },
+  {
+    "name": "DPRBottomPaneUpdateStyle",
+    "declLine1": "function DPRBottomPaneUpdateStyle() {"
+  },
+  {
+    "name": "DPRShowBottomPane",
+    "declLine1": "function DPRShowBottomPane(tabIdToActivate = 'D') {"
+  },
+  {
+    "name": "DPRSidebarDocument",
+    "declLine1": "function DPRSidebarDocument() {"
+  },
+  {
+    "name": "DPRSidebarWindow",
+    "declLine1": "function DPRSidebarWindow() {"
+  },
+  {
+    "name": "DPR_PAL_SearchAddSearchTermSectionLink",
+    "declLine1": "function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {"
+  },
+  {
+    "name": "DPR_PAL_Search_AddCopyPermaLinkElement",
+    "declLine1": "function DPR_PAL_Search_AddCopyPermaLinkElement() {"
+  },
+  {
+    "name": "DPR_PAL_Search_AddSearchTermSectionInfo",
+    "declLine1": "function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {"
+  },
+  {
+    "name": "DPR_PAL_Search_AddSectionLink",
+    "declLine1": "function DPR_PAL_Search_AddSectionLink(nik) {"
+  },
+  {
+    "name": "DPR_PAL_Search_ClearSearchResults",
+    "declLine1": "function DPR_PAL_Search_ClearSearchResults() {"
+  },
+  {
+    "name": "DPR_PAL_Search_CreateSectionHeader",
+    "declLine1": "function DPR_PAL_Search_CreateSectionHeader(newnikaya) {"
+  },
+  {
+    "name": "DPR_PAL_Search_FixPluralInSearchTermSectionInfo",
+    "declLine1": "function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {"
+  },
+  {
+    "name": "DPR_PAL_Search_HideCancelButton",
+    "declLine1": "function DPR_PAL_Search_HideCancelButton() {"
+  },
+  {
+    "name": "DPR_PAL_Search_HideProgressBar",
+    "declLine1": "function DPR_PAL_Search_HideProgressBar() {"
+  },
+  {
+    "name": "DPR_PAL_Search_InitializeSectionLinks",
+    "declLine1": "function DPR_PAL_Search_InitializeSectionLinks() {"
+  },
+  {
+    "name": "DPR_PAL_Search_MakeProgressTable",
+    "declLine1": "function DPR_PAL_Search_MakeProgressTable(maxVal) {"
+  },
+  {
+    "name": "DPR_PAL_Search_RemoveCopyPermaLinkElement",
+    "declLine1": "function DPR_PAL_Search_RemoveCopyPermaLinkElement() {"
+  },
+  {
+    "name": "DPR_PAL_Search_ScrollSearch",
+    "declLine1": "function DPR_PAL_Search_ScrollSearch(what) {"
+  },
+  {
+    "name": "DPR_PAL_Search_SetTitle",
+    "declLine1": "function DPR_PAL_Search_SetTitle(title) {"
+  },
+  {
+    "name": "DPR_PAL_Search_ShowCancelButton",
+    "declLine1": "function DPR_PAL_Search_ShowCancelButton() {"
+  },
+  {
+    "name": "DPR_PAL_Search_ShowProgressBar",
+    "declLine1": "function DPR_PAL_Search_ShowProgressBar() {"
+  },
+  {
+    "name": "DPR_PAL_Search_UpdateProgressBar",
+    "declLine1": "function DPR_PAL_Search_UpdateProgressBar() {"
+  },
+  {
+    "name": "DPR_PAL_Search_UpdateSearchTermSectionInfo",
+    "declLine1": "function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {"
+  },
+  {
+    "name": "DPR_PAL_Search_UpdateSectionLink",
+    "declLine1": "function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {"
+  },
+  {
+    "name": "DPR_keypress",
+    "declLine1": "function DPR_keypress(e) {"
+  },
+  {
+    "name": "addATIJS",
+    "declLine1": "function addATIJS() {"
+  },
+  {
+    "name": "addHistory",
+    "declLine1": "function addHistory(value) {"
+  },
+  {
+    "name": "addJS",
+    "declLine1": "function addJS(files) {"
+  },
+  {
+    "name": "addPhrasePreps",
+    "declLine1": "function addPhrasePreps(words,i,type,alts) {"
+  },
+  {
+    "name": "addPlural",
+    "declLine1": "function addPlural(word,type) {"
+  },
+  {
+    "name": "alertFlash",
+    "declLine1": "function alertFlash(text,color) {"
+  },
+  {
+    "name": "analyzeTextPad",
+    "declLine1": "function analyzeTextPad(text) {"
+  },
+  {
+    "name": "analyzeword",
+    "declLine1": "function analyzeword (oneword, parts, partnames, shortdefpre, lastpart, parttrick) {"
+  },
+  {
+    "name": "arrangeWords",
+    "declLine1": "function arrangeWords(wordst,alts) {"
+  },
+  {
+    "name": "atiPause",
+    "declLine1": "function atiPause(getstring) {"
+  },
+  {
+    "name": "atiSearchOffline",
+    "declLine1": "function atiSearchOffline(d, getstring) {"
+  },
+  {
+    "name": "atiSearchStart",
+    "declLine1": "function atiSearchStart() {"
+  },
+  {
+    "name": "attsearchstart",
+    "declLine1": "function attsearchstart()"
+  },
+  {
+    "name": "bookmarkXML",
+    "declLine1": "function bookmarkXML() {"
+  },
+  {
+    "name": "bookmarkframe",
+    "declLine1": "function bookmarkframe(refresh) {"
+  },
+  {
+    "name": "bookmarkxd",
+    "declLine1": "function bookmarkxd(desc,idx) {"
+  },
+  {
+    "name": "bookmarkxn",
+    "declLine1": "function bookmarkxn(name,idx) {"
+  },
+  {
+    "name": "bounce",
+    "declLine1": "function bounce(sct)"
+  },
+  {
+    "name": "bv",
+    "declLine1": "async function bv(rnd,static) {"
+  },
+  {
+    "name": "bvAlert",
+    "declLine1": "function bvAlert(bva) {"
+  },
+  {
+    "name": "changeAlt",
+    "declLine1": "function changeAlt(e,i) {"
+  },
+  {
+    "name": "changeConversion",
+    "declLine1": "function changeConversion(inout)"
+  },
+  {
+    "name": "changeName",
+    "declLine1": "function changeName (name, nam) {"
+  },
+  {
+    "name": "changecss",
+    "declLine1": "function changecss(myclass,element,value) {"
+  },
+  {
+    "name": "checkCompatibleNoun",
+    "declLine1": "function checkCompatibleNoun(input,chosen,words) {"
+  },
+  {
+    "name": "checkCompatibleVerb",
+    "declLine1": "function checkCompatibleVerb(input,chosen,words) {"
+  },
+  {
+    "name": "checkLastTab",
+    "declLine1": "function checkLastTab() {"
+  },
+  {
+    "name": "checkbackground",
+    "declLine1": "function checkbackground() {"
+  },
+  {
+    "name": "chromeFileExists",
+    "declLine1": "function chromeFileExists (fileLoc) {"
+  },
+  {
+    "name": "citation",
+    "declLine1": "function citation(cite,event) {"
+  },
+  {
+    "name": "clearDivs",
+    "declLine1": "function clearDivs(which) { // place divs to be cleared here"
+  },
+  {
+    "name": "clearHistory",
+    "declLine1": "function clearHistory(cp) {"
+  },
+  {
+    "name": "clearPad",
+    "declLine1": "function clearPad() {"
+  },
+  {
+    "name": "clearText",
+    "declLine1": "function clearText() {"
+  },
+  {
+    "name": "clearboth",
+    "declLine1": "function clearboth()"
+  },
+  {
+    "name": "closeBrowser",
+    "declLine1": "function closeBrowser(id) {"
+  },
+  {
+    "name": "closeCP",
+    "declLine1": "function closeCP(wR) {"
+  },
+  {
+    "name": "closeDPRSidebar",
+    "declLine1": "function closeDPRSidebar() {"
+  },
+  {
+    "name": "closePanel",
+    "declLine1": "function closePanel() {"
+  },
+  {
+    "name": "comparePaliAlphabet",
+    "declLine1": "function comparePaliAlphabet(a,b) {"
+  },
+  {
+    "name": "compareVersions",
+    "declLine1": "function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {"
+  },
+  {
+    "name": "conciseChange",
+    "declLine1": "function conciseChange(value) {"
+  },
+  {
+    "name": "conjugate",
+    "declLine1": "function conjugate(word, id, which) {"
+  },
+  {
+    "name": "conjugateIrrNoun",
+    "declLine1": "function conjugateIrrNoun(word) {"
+  },
+  {
+    "name": "conjugateIrrVerb",
+    "declLine1": "function conjugateIrrVerb(word,which) {"
+  },
+  {
+    "name": "conjugateNoun",
+    "declLine1": "function conjugateNoun(word) {"
+  },
+  {
+    "name": "conjugateVerb",
+    "declLine1": "function conjugateVerb(word) {"
+  },
+  {
+    "name": "conjugateWord",
+    "declLine1": "function conjugateWord(word,form) {"
+  },
+  {
+    "name": "conjugateWords",
+    "declLine1": "function conjugateWords(input) {"
+  },
+  {
+    "name": "convert",
+    "declLine1": "function convert(check,lower)"
+  },
+  {
+    "name": "convertOldBookmarks",
+    "declLine1": "function convertOldBookmarks() {"
+  },
+  {
+    "name": "convertShortLink",
+    "declLine1": "function convertShortLink(place) {"
+  },
+  {
+    "name": "convtitle",
+    "declLine1": "function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)"
+  },
+  {
+    "name": "copyToClipboard",
+    "declLine1": "text => {"
+  },
+  {
+    "name": "countVals",
+    "declLine1": "function countVals(a) {"
+  },
+  {
+    "name": "cpFlatten",
+    "declLine1": "function cpFlatten(cpin) {"
+  },
+  {
+    "name": "createBrowser",
+    "declLine1": "function createBrowser(thisDocument,url,count){"
+  },
+  {
+    "name": "createCommands",
+    "declLine1": "function createCommands() {"
+  },
+  {
+    "name": "createShortcutFns",
+    "declLine1": "function createShortcutFns() {"
+  },
+  {
+    "name": "createSplitter",
+    "declLine1": "function createSplitter(thisDocument,count){"
+  },
+  {
+    "name": "createTables",
+    "declLine1": "function createTables(xmlDoc,hiert)"
+  },
+  {
+    "name": "createTdForMatch",
+    "declLine1": "function createTdForMatch(dups, match) {"
+  },
+  {
+    "name": "dalert",
+    "declLine1": "function dalert(a) { }"
+  },
+  {
+    "name": "ddump",
+    "declLine1": "function ddump(a) { }"
+  },
+  {
+    "name": "devO",
+    "declLine1": "function devO() { }"
+  },
+  {
+    "name": "dictHistoryXML",
+    "declLine1": "function dictHistoryXML(){"
+  },
+  {
+    "name": "displayDictData",
+    "declLine1": "function displayDictData(data) {"
+  },
+  {
+    "name": "dppnFullTextSearch",
+    "declLine1": "function dppnFullTextSearch(getstring) {"
+  },
+  {
+    "name": "dppnsearchstart",
+    "declLine1": "function dppnsearchstart(hard)"
+  },
+  {
+    "name": "epdsearchstart",
+    "declLine1": "function epdsearchstart()"
+  },
+  {
+    "name": "eraseAll",
+    "declLine1": "function eraseAll () {"
+  },
+  {
+    "name": "eraseBookmark",
+    "declLine1": "function eraseBookmark(idx) {"
+  },
+  {
+    "name": "eraseBookmarks",
+    "declLine1": "function eraseBookmarks(gofrom) {"
+  },
+  {
+    "name": "eraseDictHistory",
+    "declLine1": "function eraseDictHistory(gofrom)"
+  },
+  {
+    "name": "eraseFile",
+    "declLine1": "function eraseFile (name) {"
+  },
+  {
+    "name": "eraseItem",
+    "declLine1": "function eraseItem (name) {"
+  },
+  {
+    "name": "eraseSearchHistory",
+    "declLine1": "function eraseSearchHistory(gofrom)"
+  },
+  {
+    "name": "eventSend",
+    "declLine1": "function eventSend(event,internal) {"
+  },
+  {
+    "name": "extFileExists",
+    "declLine1": "function extFileExists (fileLoc) {"
+  },
+  {
+    "name": "fadeIn",
+    "declLine1": "function fadeIn(AID,id,speed,L,sOut) {"
+  },
+  {
+    "name": "fadeInOut",
+    "declLine1": "function fadeInOut(AID,id, sIn, L, sOut) {"
+  },
+  {
+    "name": "fadeOut",
+    "declLine1": "function fadeOut(AID,id,speed) {"
+  },
+  {
+    "name": "fileExists",
+    "declLine1": "function fileExists (aFileKey) {"
+  },
+  {
+    "name": "fileSaveDialog",
+    "declLine1": "function fileSaveDialog (title) {"
+  },
+  {
+    "name": "findDPRTab",
+    "declLine1": "function findDPRTab(id,loc) {"
+  },
+  {
+    "name": "findDPRTabByLoc",
+    "declLine1": "function findDPRTabByLoc(loc) {"
+  },
+  {
+    "name": "findDPRTabs",
+    "declLine1": "function findDPRTabs(id,loc) {"
+  },
+  {
+    "name": "findRegEx",
+    "declLine1": "function findRegEx(text,string) {"
+  },
+  {
+    "name": "findSimilarWords",
+    "declLine1": "function findSimilarWords(word,list,min,fuzzy) {"
+  },
+  {
+    "name": "findmatch",
+    "declLine1": "function findmatch(oneword,lastpart,nextpart,partslength,trick)"
+  },
+  {
+    "name": "finishSearch",
+    "declLine1": "function finishSearch() {"
+  },
+  {
+    "name": "formatConjugation",
+    "declLine1": "function formatConjugation(word) {"
+  },
+  {
+    "name": "formatuniout",
+    "declLine1": "function formatuniout(data,which) { // which = 1 prepare without links, 2 with links"
+  },
+  {
+    "name": "fromSin",
+    "declLine1": "function fromSin(input,type) {"
+  },
+  {
+    "name": "fromThai",
+    "declLine1": "function fromThai(input) {"
+  },
+  {
+    "name": "getAtthXML",
+    "declLine1": "function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
+  },
+  {
+    "name": "getBookName",
+    "declLine1": "function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1"
+  },
+  {
+    "name": "getBrowserCount",
+    "declLine1": "function getBrowserCount() {"
+  },
+  {
+    "name": "getConjugation",
+    "declLine1": "function getConjugation(form,bare) {"
+  },
+  {
+    "name": "getDppnData",
+    "declLine1": "function getDppnData(link){"
+  },
+  {
+    "name": "getDppnEntry",
+    "declLine1": "function getDppnEntry(term) {"
+  },
+  {
+    "name": "getHistory",
+    "declLine1": "function getHistory() {"
+  },
+  {
+    "name": "getHomePath",
+    "declLine1": "function getHomePath () {"
+  },
+  {
+    "name": "getLinkPlace",
+    "declLine1": "function getLinkPlace() { // permalinks"
+  },
+  {
+    "name": "getNameHTML",
+    "declLine1": "function getNameHTML(dEI,tt) {"
+  },
+  {
+    "name": "getPref",
+    "declLine1": "function getPref(name) {"
+  },
+  {
+    "name": "getRegExtSearchString",
+    "declLine1": "function getRegExtSearchString(string) {"
+  },
+  {
+    "name": "getSelected",
+    "declLine1": "function getSelected() {"
+  },
+  {
+    "name": "getSuttaFromNumber",
+    "declLine1": "function getSuttaFromNumber(is) { // should be in array format SN,1,1"
+  },
+  {
+    "name": "getSuttaNumber",
+    "declLine1": "function getSuttaNumber(nik,book,meta,volume,vagga,sutta,section,hier,sectlength,which) { // book, meta, etc. should be -1 (0,1,2...)"
+  },
+  {
+    "name": "getTitleXML",
+    "declLine1": "function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search"
+  },
+  {
+    "name": "getconfig",
+    "declLine1": "function getconfig() {"
+  },
+  {
+    "name": "getlink",
+    "declLine1": "function getlink(which)"
+  },
+  {
+    "name": "giveIDtoTabs",
+    "declLine1": "function giveIDtoTabs() { // startup function, give ids to"
+  },
+  {
+    "name": "go_anchor",
+    "declLine1": "function go_anchor(mydiv,n){"
+  },
+  {
+    "name": "groupBySimilarity",
+    "declLine1": "function groupBySimilarity(list,minsim) {"
+  },
+  {
+    "name": "importXMLindex",
+    "declLine1": "function importXMLindex(add) {"
+  },
+  {
+    "name": "importXMLs",
+    "declLine1": "function importXMLs(cnt)"
+  },
+  {
+    "name": "insertConj",
+    "declLine1": "function insertConj() {"
+  },
+  {
+    "name": "insertWordByWord",
+    "declLine1": "function insertWordByWord() {"
+  },
+  {
+    "name": "installGlobalHandlers",
+    "declLine1": "function installGlobalHandlers() {"
+  },
+  {
+    "name": "isDPRTab",
+    "declLine1": "function isDPRTab(id) {"
+  },
+  {
+    "name": "isIndec",
+    "declLine1": "function isIndec(word) { // indeclinible"
+  },
+  {
+    "name": "isUncomp",
+    "declLine1": "function isUncomp(word,lp,np) { // uncompoundable"
+  },
+  {
+    "name": "iterCompare",
+    "declLine1": "function iterCompare(p1,p2,iter, one, two) {"
+  },
+  {
+    "name": "joinArray",
+    "declLine1": "function joinArray(s,a) {"
+  },
+  {
+    "name": "linkToPED",
+    "declLine1": "function linkToPED(base,word) {"
+  },
+  {
+    "name": "loadPreference",
+    "declLine1": "function loadPreference() {"
+  },
+  {
+    "name": "loadXMLFile",
+    "declLine1": "function loadXMLFile(file, setNo) {"
+  },
+  {
+    "name": "loadXMLSection",
+    "declLine1": "function loadXMLSection(querystring,para,place,isPL,scroll,compare)"
+  },
+  {
+    "name": "loadXMLindex",
+    "declLine1": "function loadXMLindex(place,compare) {"
+  },
+  {
+    "name": "logTelemetry",
+    "declLine1": "function logTelemetry() {"
+  },
+  {
+    "name": "mainInitialize",
+    "declLine1": "async function mainInitialize() {"
+  },
+  {
+    "name": "makeDeclensions",
+    "declLine1": "function makeDeclensions(oneword,lastpart,nextpart) {"
+  },
+  {
+    "name": "makeGrammarTerms",
+    "declLine1": "function makeGrammarTerms([trans,type,deca,word,meta]) {"
+  },
+  {
+    "name": "makeLinkPlace",
+    "declLine1": "function makeLinkPlace(options,PL) {"
+  },
+  {
+    "name": "makeLocPlace",
+    "declLine1": "function makeLocPlace(inplace) {"
+  },
+  {
+    "name": "makeNewPanelIndex",
+    "declLine1": "function makeNewPanelIndex([nikaya,book,hiert],count) {"
+  },
+  {
+    "name": "makeNewPanelPlace",
+    "declLine1": "function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {"
+  },
+  {
+    "name": "makeTable",
+    "declLine1": "function makeTable(text,cls) {"
+  },
+  {
+    "name": "makeToolbox",
+    "declLine1": "function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {"
+  },
+  {
+    "name": "makeUniqueStringForCaseInsensitiveFS",
+    "declLine1": "function makeUniqueStringForCaseInsensitiveFS(s) {"
+  },
+  {
+    "name": "makeWord",
+    "declLine1": "function makeWord(word,pl,alts) {"
+  },
+  {
+    "name": "makekVaggas",
+    "declLine1": "function makekVaggas() {"
+  },
+  {
+    "name": "manualCompound",
+    "declLine1": "function manualCompound(fullword) {"
+  },
+  {
+    "name": "mlsearchstart",
+    "declLine1": "function mlsearchstart(hard)"
+  },
+  {
+    "name": "moveFrame",
+    "declLine1": "function moveFrame() { }"
+  },
+  {
+    "name": "moveanf",
+    "declLine1": "function moveanf(which) {"
+  },
+  {
+    "name": "moveframec",
+    "declLine1": "function moveframec() // open close control panel"
+  },
+  {
+    "name": "moveframex",
+    "declLine1": "function moveframex(a,temp) //read, etc"
+  },
+  {
+    "name": "moveframey",
+    "declLine1": "function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)"
+  },
+  {
+    "name": "moves",
+    "declLine1": "function moves(a) // search open / close"
+  },
+  {
+    "name": "multisearchstart",
+    "declLine1": "function multisearchstart(hard)"
+  },
+  {
+    "name": "normalizeLongSearchResult",
+    "declLine1": "function normalizeLongSearchResult(match) {"
+  },
+  {
+    "name": "openCP",
+    "declLine1": "function openCP(wR) {"
+  },
+  {
+    "name": "openDPRSidebar",
+    "declLine1": "function openDPRSidebar() {"
+  },
+  {
+    "name": "openDPRTab",
+    "declLine1": "function openDPRTab(permalink, id, reuse) {"
+  },
+  {
+    "name": "openFirstDPRTab",
+    "declLine1": "function openFirstDPRTab() {"
+  },
+  {
+    "name": "openPlace",
+    "declLine1": "function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {"
+  },
+  {
+    "name": "openTranslation",
+    "declLine1": "function openTranslation(url,add) {"
+  },
+  {
+    "name": "openXMLindex",
+    "declLine1": "function openXMLindex(nikaya,bookno,hier,add) {"
+  },
+  {
+    "name": "outputAnalysis",
+    "declLine1": "function outputAnalysis(input,frombox) {"
+  },
+  {
+    "name": "outputDef",
+    "declLine1": "function outputDef(which,first,frombox)"
+  },
+  {
+    "name": "outputFormattedData",
+    "declLine1": "function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame"
+  },
+  {
+    "name": "paliRootsearchstart",
+    "declLine1": "function paliRootsearchstart(hard)"
+  },
+  {
+    "name": "paliXML",
+    "declLine1": "function paliXML(filein,which,add)"
+  },
+  {
+    "name": "parseDictURLParameters",
+    "declLine1": "function parseDictURLParameters(){"
+  },
+  {
+    "name": "pausesall",
+    "declLine1": "function pausesall()"
+  },
+  {
+    "name": "pausethree",
+    "declLine1": "function pausethree() {"
+  },
+  {
+    "name": "pausetwo",
+    "declLine1": "function pausetwo() { // init function for single collection"
+  },
+  {
+    "name": "pedFullTextSearch",
+    "declLine1": "function pedFullTextSearch(getstring) {"
+  },
+  {
+    "name": "pedsearchstart",
+    "declLine1": "function pedsearchstart(hard)"
+  },
+  {
+    "name": "permalinkClick",
+    "declLine1": "function permalinkClick(link,url) {"
+  },
+  {
+    "name": "preparepali",
+    "declLine1": "function preparepali(data,which) { // standard text prep for algorithm"
+  },
+  {
+    "name": "profFileExists",
+    "declLine1": "function profFileExists (file) {"
+  },
+  {
+    "name": "readDir",
+    "declLine1": "function readDir () {"
+  },
+  {
+    "name": "readExtFile",
+    "declLine1": "function readExtFile (fileLoc) {"
+  },
+  {
+    "name": "readFile",
+    "declLine1": "function readFile (aFileKey) {"
+  },
+  {
+    "name": "reanalyze",
+    "declLine1": "function reanalyze(word,cancel) {"
+  },
+  {
+    "name": "reindexPanels",
+    "declLine1": "function reindexPanels() {"
+  },
+  {
+    "name": "removeDuplicatesFromArray",
+    "declLine1": "function removeDuplicatesFromArray(list){"
+  },
+  {
+    "name": "removeHistory",
+    "declLine1": "function removeHistory(i) {"
+  },
+  {
+    "name": "resetAllDprSettings",
+    "declLine1": "function resetAllDprSettings() {"
+  },
+  {
+    "name": "resetvalues",
+    "declLine1": "function resetvalues() {"
+  },
+  {
+    "name": "resolveCommands",
+    "declLine1": "function resolveCommands(shortcutFns) {"
+  },
+  {
+    "name": "sameSearchHistory",
+    "declLine1": "function sameSearchHistory(event){"
+  },
+  {
+    "name": "saveBookmark",
+    "declLine1": "function saveBookmark(name,loc,desc,scroll,supress) {"
+  },
+  {
+    "name": "saveCompilation",
+    "declLine1": "function saveCompilation() {"
+  },
+  {
+    "name": "saveDictHistory",
+    "declLine1": "function saveDictHistory(query,type,opts) {"
+  },
+  {
+    "name": "savePad",
+    "declLine1": "function savePad() {"
+  },
+  {
+    "name": "savePreferences",
+    "declLine1": "function savePreferences(getPrefFn) {"
+  },
+  {
+    "name": "saveSearchHistory",
+    "declLine1": "function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {"
+  },
+  {
+    "name": "scrollSearch",
+    "declLine1": "function scrollSearch(what) {"
+  },
+  {
+    "name": "scrollToId",
+    "declLine1": "function scrollToId(a,b) {"
+  },
+  {
+    "name": "scrolldown",
+    "declLine1": "function scrolldown(much)"
+  },
+  {
+    "name": "searchHistoryXML",
+    "declLine1": "function searchHistoryXML(){"
+  },
+  {
+    "name": "searchTipitaka",
+    "declLine1": "function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {"
+  },
+  {
+    "name": "sendAnalysisToOutput",
+    "declLine1": "function sendAnalysisToOutput(input, divclicked, frombox, add){"
+  },
+  {
+    "name": "sendAtt",
+    "declLine1": "function sendAtt(x,type,nik,add) {"
+  },
+  {
+    "name": "sendDPPNXML",
+    "declLine1": "function sendDPPNXML(link,add) {"
+  },
+  {
+    "name": "sendPaliXML",
+    "declLine1": "function sendPaliXML(link,add) {"
+  },
+  {
+    "name": "sendPlace",
+    "declLine1": "function sendPlace(place) {"
+  },
+  {
+    "name": "sendTextPad",
+    "declLine1": "function sendTextPad(add){"
+  },
+  {
+    "name": "sendTitle",
+    "declLine1": "function sendTitle(x,m,a,t,nik,add) {"
+  },
+  {
+    "name": "sendTranslate",
+    "declLine1": "function sendTranslate(input, add){"
+  },
+  {
+    "name": "sendUpdateBookmarks",
+    "declLine1": "function sendUpdateBookmarks() {"
+  },
+  {
+    "name": "sendtoPad",
+    "declLine1": "function sendtoPad(data,shift)"
+  },
+  {
+    "name": "sendtoconvert",
+    "declLine1": "function sendtoconvert(data,shift)"
+  },
+  {
+    "name": "setCurrentTitle",
+    "declLine1": "function setCurrentTitle(title) {"
+  },
+  {
+    "name": "setI",
+    "declLine1": "function setI () {"
+  },
+  {
+    "name": "setupBTForRG",
+    "declLine1": "async function setupBTForRG() {"
+  },
+  {
+    "name": "showAltTable",
+    "declLine1": "function showAltTable(idx) {"
+  },
+  {
+    "name": "showBv",
+    "declLine1": "async function showBv(rnd) {"
+  },
+  {
+    "name": "showHideId",
+    "declLine1": "function showHideId(a) {"
+  },
+  {
+    "name": "showShortDef",
+    "declLine1": "function showShortDef(word) {"
+  },
+  {
+    "name": "showonly",
+    "declLine1": "function showonly(string) {"
+  },
+  {
+    "name": "sidebarSearch",
+    "declLine1": "function sidebarSearch(nik,book,hiert) {"
+  },
+  {
+    "name": "simSearchHistory",
+    "declLine1": "function simSearchHistory(event){"
+  },
+  {
+    "name": "simpleWordTranslation",
+    "declLine1": "function simpleWordTranslation(word) {"
+  },
+  {
+    "name": "sktRXML",
+    "declLine1": "function sktRXML(no,add)"
+  },
+  {
+    "name": "sktRootsearchstart",
+    "declLine1": "function sktRootsearchstart(hard)"
+  },
+  {
+    "name": "sktXML",
+    "declLine1": "function sktXML(entry,idx,which,add)"
+  },
+  {
+    "name": "sktsearchstart",
+    "declLine1": "function sktsearchstart()"
+  },
+  {
+    "name": "sortLongerDec",
+    "declLine1": "function sortLongerDec(a,b) {"
+  },
+  {
+    "name": "sortStrip",
+    "declLine1": "function sortStrip(word) {"
+  },
+  {
+    "name": "sortaz",
+    "declLine1": "function sortaz(mydata){  // sort pali array"
+  },
+  {
+    "name": "startDictLookup",
+    "declLine1": "function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {"
+  },
+  {
+    "name": "stopSearch",
+    "declLine1": "function stopSearch() {"
+  },
+  {
+    "name": "stripEnglish",
+    "declLine1": "function stripEnglish(input) {"
+  },
+  {
+    "name": "tiksearchstart",
+    "declLine1": "function tiksearchstart()"
+  },
+  {
+    "name": "titlesearchstart",
+    "declLine1": "function titlesearchstart()"
+  },
+  {
+    "name": "toBengali",
+    "declLine1": "function toBengali(input,type) {"
+  },
+  {
+    "name": "toDeva",
+    "declLine1": "function toDeva(input,type) {"
+  },
+  {
+    "name": "toFuzzy",
+    "declLine1": "function toFuzzy(input){"
+  },
+  {
+    "name": "toMyanmar",
+    "declLine1": "function toMyanmar(input,type) {"
+  },
+  {
+    "name": "toSin",
+    "declLine1": "function toSin(input,type) {"
+  },
+  {
+    "name": "toSkt",
+    "declLine1": "function toSkt(input,rv) {"
+  },
+  {
+    "name": "toTelugu",
+    "declLine1": "function toTelugu(input,type) {"
+  },
+  {
+    "name": "toThai",
+    "declLine1": "function toThai(input) {"
+  },
+  {
+    "name": "toUni",
+    "declLine1": "function toUni(input) {"
+  },
+  {
+    "name": "toUniRegEx",
+    "declLine1": "function toUniRegEx(input) {"
+  },
+  {
+    "name": "toVel",
+    "declLine1": "function toVel(input) {"
+  },
+  {
+    "name": "toVelRegEx",
+    "declLine1": "function toVelRegEx(input) {"
+  },
+  {
+    "name": "toggleDPRSidebar",
+    "declLine1": "function toggleDPRSidebar() {"
+  },
+  {
+    "name": "toggleDppnTitle",
+    "declLine1": "function toggleDppnTitle(link,id) {"
+  },
+  {
+    "name": "transMod",
+    "declLine1": "function transMod([trans,type,deca,word,meta]) {"
+  },
+  {
+    "name": "translateText",
+    "declLine1": "function translateText(alts) {"
+  },
+  {
+    "name": "translateTextx",
+    "declLine1": "function translateTextx() {"
+  },
+  {
+    "name": "translateWord",
+    "declLine1": "function translateWord(word,idx) {"
+  },
+  {
+    "name": "translit",
+    "declLine1": "function translit(data) {"
+  },
+  {
+    "name": "triggerUpdateCheck",
+    "declLine1": "function triggerUpdateCheck() {"
+  },
+  {
+    "name": "typeAndGender",
+    "declLine1": "function typeAndGender(t) {"
+  },
+  {
+    "name": "updatePrefs",
+    "declLine1": "function updatePrefs() {"
+  },
+  {
+    "name": "vssCalc",
+    "declLine1": "function vssCalc(a1,a2) { // calculate a three dimensional hierarchy"
+  },
+  {
+    "name": "wrapLink",
+    "declLine1": "function wrapLink(text,click,url) {"
+  },
+  {
+    "name": "writeExtFile",
+    "declLine1": "function writeExtFile (fileLoc, aContent) {"
+  },
+  {
+    "name": "writeFile",
+    "declLine1": "function writeFile (aFileKey, aContent) {"
+  },
+  {
+    "name": "writeFileToDesk",
+    "declLine1": "function writeFileToDesk (file, data) {"
+  },
+  {
+    "name": "writeToDesktop",
+    "declLine1": "function writeToDesktop (aFileKey, aContent) {"
+  }
+]

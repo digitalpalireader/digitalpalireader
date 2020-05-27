@@ -458,10 +458,11 @@
     <script>progressBar.go(100)</script>
     <script>
       $(document).ready(mainInitialize);
-      const getFuncList = () => `{
-        "functions" : ${JSON.stringify(keys(window).filter(a => !( whitelist.includes(a) || initObjList.includes(a))))},
-        "declrLine1" : ${JSON.stringify(Object.keys(window).filter(a => !( whitelist.includes(a) || initObjList.includes(a))).map(x=>window[x].toString().split('\n')[0]))}
-      }`
+      const getFuncList = () => JSON.stringify(
+        Object.keys(window)
+          .sort()
+          .filter(k => !(whitelist.includes(k) || initObjList.includes(k)))
+          .map(name => ({ name, declLine1: window[name].toString().split('\n')[0].trim() })))
     </script>
   </body>
 </html>

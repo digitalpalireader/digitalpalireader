@@ -1,0 +1,639 @@
+{
+  "DPPNXML": {
+    "Declared": "..\\..\\_dprhtml\\js\\dict_xml.js:201",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [154, 173, 251],
+      "..\\..\\_dprhtml\\js\\dict.js": [329, 340, 398, 427, 457, 723, 813]
+    }
+  },
+  "DPRShowBottomPane": {
+    "Declared": "..\\..\\_dprhtml\\js\\chrome.js:246",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [50],
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [258]
+    }
+  },
+  "addJS": {
+    "Declared": "..\\..\\_dprhtml\\js\\config.js:119",
+    "Called": { "..\\..\\_dprhtml\\js\\analysis_function.js": [12] }
+  },
+  "addPhrasePreps": {
+    "Declared": "..\\..\\_dprhtml\\js\\translate.js:880",
+    "Called": { "..\\..\\_dprhtml\\js\\grammar.js": [539] }
+  },
+  "alertFlash": {
+    "Declared": "..\\..\\_dprhtml\\js\\format.js:499",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\bottom-pane\\main-pane.html": [117],
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [22, 63, 75, 87],
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [212]
+    }
+  },
+  "bookmarkframe": {
+    "Declared": "..\\..\\_dprhtml\\js\\bookmarks.js:40",
+    "Called": { "..\\..\\_dprhtml\\features\\navigation\\init.js": [126] }
+  },
+  "bv": {
+    "Declared": "..\\..\\_dprhtml\\js\\bv.js:1",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [446],
+      "..\\..\\_dprhtml\\features\\navigation\\tab.html": [14]
+    }
+  },
+  "clearDivs": {
+    "Declared": "..\\..\\_dprhtml\\js\\format.js:549",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [254],
+      "..\\..\\_dprhtml\\js\\dict.js": [553, 861, 936, 1028, 1120, 1253, 1339],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [35, 229, 337, 400]
+    }
+  },
+  "conjugate": {
+    "Declared": "..\\..\\_dprhtml\\js\\grammar.js:5",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [448],
+      "..\\..\\_dprhtml\\features\\bottom-pane\\main-pane.html": [12, 158, 178],
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [11, 189],
+      "..\\..\\_dprhtml\\js\\conjugate.js": [8],
+      "..\\..\\_dprhtml\\js\\dict.js": [603, 626, 767]
+    }
+  },
+  "convert": {
+    "Declared": "..\\..\\_dprhtml\\js\\convert.js:19",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [434],
+      "..\\..\\_dprhtml\\features\\bottom-pane\\init.js": [37],
+      "..\\..\\_dprhtml\\features\\bottom-pane\\main-pane.html": [78, 111, 112],
+      "..\\..\\_dprhtml\\js\\conjugate.js": [5]
+    }
+  },
+  "dalert": {
+    "Declared": "..\\..\\_dprhtml\\js\\index.js:11",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_function.js": [151, 513, 603, 769, 778],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [603]
+    }
+  },
+  "ddump": {
+    "Declared": "..\\..\\_dprhtml\\js\\index.js:12",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_declension.js": [507, 512],
+      "..\\..\\_dprhtml\\js\\analysis_function.js": [
+        14,
+        115,
+        159,
+        160,
+        186,
+        195,
+        209,
+        223,
+        244,
+        250,
+        256,
+        262,
+        272,
+        280,
+        375,
+        441,
+        461,
+        465,
+        473,
+        479,
+        498,
+        518,
+        529,
+        543,
+        547,
+        565,
+        584,
+        604,
+        638,
+        656,
+        690,
+        698,
+        706,
+        718,
+        725,
+        740,
+        754,
+        772,
+        781,
+        789,
+        797,
+        816,
+        829,
+        835,
+        850,
+        860,
+        875,
+        882,
+        893,
+        905,
+        916,
+        927,
+        938,
+        949,
+        955,
+        967,
+        973,
+        985,
+        997,
+        1033,
+        1045,
+        1072,
+        1080,
+        1088,
+        1126
+      ]
+    }
+  },
+  "eraseFile": {
+    "Declared": "..\\..\\_dprhtml\\js\\web\\io.js:257",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [31],
+      "..\\..\\_dprhtml\\js\\search_history.js": [16, 148]
+    }
+  },
+  "eventSend": {
+    "Declared": "..\\..\\_dprhtml\\js\\send.js:3",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\bottom-pane\\main-pane.html": [114],
+      "..\\..\\_dprhtml\\features\\dictionary\\tab.html": [23, 25],
+      "..\\..\\_dprhtml\\features\\navigation\\init.js": [108, 109],
+      "..\\..\\_dprhtml\\features\\navigation\\tab.html": [26, 27, 75, 79],
+      "..\\..\\_dprhtml\\features\\search\\tab.html": [27],
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [150, 154, 170, 173],
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [55, 70, 102, 114],
+      "..\\..\\_dprhtml\\js\\bv.js": [82, 84],
+      "..\\..\\_dprhtml\\js\\dict.js": [1303],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [499, 607],
+      "..\\..\\_dprhtml\\js\\format.js": [
+        182,
+        199,
+        211,
+        225,
+        285,
+        368,
+        438,
+        648
+      ],
+      "..\\..\\_dprhtml\\js\\search.js": [765, 901],
+      "..\\..\\_dprhtml\\js\\search_history.js": [25]
+    }
+  },
+  "fileSaveDialog": {
+    "Declared": "..\\..\\_dprhtml\\js\\web\\io.js:274",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\convert.js": [230],
+      "..\\..\\_dprhtml\\js\\xml.js": [1136]
+    }
+  },
+  "getPref": {
+    "Declared": "..\\..\\_dprhtml\\js\\prefload.js:292",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\settings-dialog\\init.js": [15],
+      "..\\..\\_dprhtml\\js\\config.js": [20]
+    }
+  },
+  "getSuttaNumber": {
+    "Declared": "..\\..\\_dprhtml\\js\\navigation_common.js:493",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [90],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [604]
+    }
+  },
+  "getconfig": {
+    "Declared": "..\\..\\_dprhtml\\js\\config.js:18",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\dictionary\\init.js": [49],
+      "..\\..\\_dprhtml\\features\\search\\init.js": [174],
+      "..\\..\\_dprhtml\\js\\chrome.js": [106, 113]
+    }
+  },
+  "insertConj": {
+    "Declared": "..\\..\\_dprhtml\\js\\conjugate.js:1",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\bottom-pane\\init.js": [48],
+      "..\\..\\_dprhtml\\features\\bottom-pane\\main-pane.html": [152]
+    }
+  },
+  "isUncomp": {
+    "Declared": "..\\..\\_dprhtml\\js\\analysis_function.js:1165",
+    "Called": { "..\\..\\_dprhtml\\js\\analysis_declension.js": [492, 515] }
+  },
+  "linkToPED": {
+    "Declared": "..\\..\\_dprhtml\\js\\format.js:627",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [225],
+      "..\\..\\_dprhtml\\js\\dict.js": [1299]
+    }
+  },
+  "loadPreference": {
+    "Declared": "..\\..\\_dprhtml\\js\\prefload.js:269",
+    "Called": { "..\\..\\_dprhtml\\js\\index.js": [52] }
+  },
+  "loadXMLFile": {
+    "Declared": "..\\..\\_dprhtml\\js\\xml_load.js:54",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [461, 535],
+      "..\\..\\_dprhtml\\js\\search.js": [383, 413, 438],
+      "..\\..\\_dprhtml\\js\\xml.js": [42, 607, 1154]
+    }
+  },
+  "loadXMLSection": {
+    "Declared": "..\\..\\_dprhtml\\js\\xml.js:17",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\navigation\\init.js": [148],
+      "..\\..\\_dprhtml\\js\\receive.js": [62, 86],
+      "..\\..\\_dprhtml\\js\\send.js": [21, 32, 36]
+    }
+  },
+  "loadXMLindex": {
+    "Declared": "..\\..\\_dprhtml\\js\\xml.js:569",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\navigation\\init.js": [145],
+      "..\\..\\_dprhtml\\js\\receive.js": [60, 100],
+      "..\\..\\_dprhtml\\js\\send.js": [88, 100, 104, 158, 170]
+    }
+  },
+  "moveFrame": {
+    "Declared": "..\\..\\_dprhtml\\js\\index.js:9",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [252],
+      "..\\..\\_dprhtml\\js\\convert.js": [185, 197],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [33, 36, 213, 230, 335]
+    }
+  },
+  "openDPRTab": {
+    "Declared": "..\\..\\_dprhtml\\js\\chrome.js:7",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [29, 118, 122],
+      "..\\..\\_dprhtml\\js\\bv.js": [102]
+    }
+  },
+  "openPlace": {
+    "Declared": "..\\..\\_dprhtml\\js\\send.js:12",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\navigation\\init.js": [120],
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [25],
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [55, 102],
+      "..\\..\\_dprhtml\\js\\bv.js": [82, 84],
+      "..\\..\\_dprhtml\\js\\dict.js": [1303],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [499, 607],
+      "..\\..\\_dprhtml\\js\\search.js": [765, 901]
+    }
+  },
+  "paliXML": {
+    "Declared": "..\\..\\_dprhtml\\js\\dict_xml.js:22",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [150, 170, 250],
+      "..\\..\\_dprhtml\\js\\dict.js": [144, 191, 220, 234, 248, 694, 798]
+    }
+  },
+  "permalinkClick": {
+    "Declared": "..\\..\\_dprhtml\\js\\format.js:482",
+    "Called": { "..\\..\\_dprhtml\\js\\dict.js": [97] }
+  },
+  "preparepali": {
+    "Declared": "..\\..\\_dprhtml\\js\\format.js:388",
+    "Called": { "..\\..\\_dprhtml\\js\\dict_xml.js": [499] }
+  },
+  "readFile": {
+    "Declared": "..\\..\\_dprhtml\\js\\web\\io.js:9",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [2, 159, 166, 170],
+      "..\\..\\_dprhtml\\js\\search_history.js": [4, 136]
+    }
+  },
+  "resetAllDprSettings": {
+    "Declared": "..\\..\\_dprhtml\\js\\prefload.js:327",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [105],
+      "..\\..\\_dprhtml\\features\\settings-dialog\\init.js": [40]
+    }
+  },
+  "savePreferences": {
+    "Declared": "..\\..\\_dprhtml\\js\\prefload.js:280",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\settings-dialog\\init.js": [22, 23],
+      "..\\..\\_dprhtml\\features\\settings-dialog\\main-pane.html": [191]
+    }
+  },
+  "sendDPPNXML": {
+    "Declared": "..\\..\\_dprhtml\\js\\send.js:207",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\dict.js": [334],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [209, 331],
+      "..\\..\\_dprhtml\\js\\format.js": [438, 648]
+    }
+  },
+  "sendPaliXML": {
+    "Declared": "..\\..\\_dprhtml\\js\\send.js:182",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\dict.js": [149],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [30, 396]
+    }
+  },
+  "sortaz": {
+    "Declared": "..\\..\\_dprhtml\\js\\sortaz.js:125",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [428],
+      "..\\..\\_dprhtml\\features\\bottom-pane\\init.js": [38],
+      "..\\..\\_dprhtml\\js\\dict.js": [514, 537, 837],
+      "..\\..\\_dprhtml\\js\\search.js": [950, 978]
+    }
+  },
+  "toFuzzy": {
+    "Declared": "..\\..\\_dprhtml\\js\\translit.js:33",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\dict.js": [
+        160,
+        171,
+        207,
+        355,
+        378,
+        414,
+        556,
+        586,
+        615,
+        659,
+        673,
+        703,
+        750,
+        782,
+        783,
+        784,
+        865,
+        888,
+        940,
+        963,
+        1032,
+        1054,
+        1124,
+        1151,
+        1257,
+        1283,
+        1345,
+        1370,
+        1402,
+        1459,
+        1470
+      ],
+      "..\\..\\_dprhtml\\js\\sortaz.js": [193]
+    }
+  },
+  "toUni": {
+    "Declared": "..\\..\\_dprhtml\\js\\translit.js:3",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\bottom-pane\\init.js": [41],
+      "..\\..\\_dprhtml\\features\\dictionary\\init.js": [6],
+      "..\\..\\_dprhtml\\features\\search\\init.js": [7],
+      "..\\..\\_dprhtml\\js\\analysis_function.js": [63],
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [
+        27,
+        30,
+        38,
+        41,
+        114,
+        123,
+        124,
+        144,
+        149,
+        150,
+        153,
+        154,
+        170,
+        173,
+        228,
+        231
+      ],
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [157, 165, 166, 169, 170],
+      "..\\..\\_dprhtml\\js\\conjugate.js": [10, 11],
+      "..\\..\\_dprhtml\\js\\convert.js": [59],
+      "..\\..\\_dprhtml\\js\\dict.js": [
+        93,
+        97,
+        144,
+        173,
+        189,
+        198,
+        218,
+        248,
+        255,
+        293,
+        329,
+        339,
+        382,
+        396,
+        404,
+        425,
+        457,
+        467,
+        589,
+        600,
+        601,
+        608,
+        623,
+        624,
+        676,
+        692,
+        707,
+        721,
+        753,
+        764,
+        765,
+        796,
+        811,
+        823,
+        824,
+        891,
+        907,
+        942,
+        967,
+        979,
+        997,
+        1058,
+        1071,
+        1089,
+        1127,
+        1155,
+        1169,
+        1286,
+        1308,
+        1373,
+        1383,
+        1391,
+        1407,
+        1449,
+        1473,
+        1484,
+        1491,
+        1513
+      ],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [
+        34,
+        82,
+        104,
+        142,
+        146,
+        148,
+        267,
+        271,
+        273,
+        499,
+        504
+      ],
+      "..\\..\\_dprhtml\\js\\format.js": [
+        141,
+        177,
+        182,
+        185,
+        199,
+        207,
+        211,
+        225,
+        228,
+        245,
+        249,
+        262,
+        266,
+        276,
+        280,
+        383,
+        384,
+        438,
+        444,
+        460,
+        648
+      ],
+      "..\\..\\_dprhtml\\js\\grammar.js": [74, 270, 363, 423],
+      "..\\..\\_dprhtml\\js\\receive.js": [51, 52],
+      "..\\..\\_dprhtml\\js\\search.js": [
+        113,
+        266,
+        557,
+        562,
+        743,
+        747,
+        751,
+        757,
+        762,
+        872,
+        876,
+        880,
+        885,
+        890,
+        1021,
+        1059,
+        1171
+      ],
+      "..\\..\\_dprhtml\\js\\sortaz.js": [138],
+      "..\\..\\_dprhtml\\js\\translate.js": [11, 51, 735, 737, 811, 968]
+    }
+  },
+  "toUniRegEx": {
+    "Declared": "..\\..\\_dprhtml\\js\\translit.js:13",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\dictionary\\init.js": [6],
+      "..\\..\\_dprhtml\\features\\search\\init.js": [7],
+      "..\\..\\_dprhtml\\js\\dict.js": [
+        198,
+        293,
+        404,
+        608,
+        907,
+        1308,
+        1391,
+        1491
+      ],
+      "..\\..\\_dprhtml\\js\\search.js": [113, 557, 561, 1257, 1268]
+    }
+  },
+  "toVel": {
+    "Declared": "..\\..\\_dprhtml\\js\\translit.js:21",
+    "Called": {
+      "..\\..\\_dprhtml\\features\\bottom-pane\\init.js": [40],
+      "..\\..\\_dprhtml\\js\\analysis_function.js": [19],
+      "..\\..\\_dprhtml\\js\\conjugate.js": [8],
+      "..\\..\\_dprhtml\\js\\convert.js": [36, 89, 114],
+      "..\\..\\_dprhtml\\js\\dict.js": [1280, 1343, 1446],
+      "..\\..\\_dprhtml\\js\\dict_xml.js": [
+        30,
+        52,
+        53,
+        54,
+        56,
+        57,
+        78,
+        82,
+        99,
+        103,
+        132,
+        145,
+        169,
+        171,
+        209,
+        227,
+        309,
+        311,
+        331,
+        396
+      ],
+      "..\\..\\_dprhtml\\js\\format.js": [434, 630],
+      "..\\..\\_dprhtml\\js\\grammar.js": [12, 505],
+      "..\\..\\_dprhtml\\js\\search.js": [183],
+      "..\\..\\_dprhtml\\js\\send.js": [217, 226, 342, 352, 370, 380],
+      "..\\..\\_dprhtml\\js\\send_bottom.js": [15, 24],
+      "..\\..\\_dprhtml\\js\\translate.js": [53, 572, 581]
+    }
+  },
+  "toggleDPRSidebar": {
+    "Declared": "..\\..\\_dprhtml\\js\\chrome.js:215",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [148, 279],
+      "..\\..\\_dprhtml\\features\\landing-page\\main-pane.html": [1, 13],
+      "..\\..\\_dprhtml\\features\\other-dialogs\\init.js": [44, 45]
+    }
+  },
+  "translateWord": {
+    "Declared": "..\\..\\_dprhtml\\js\\translate.js:575",
+    "Called": { "..\\..\\_dprhtml\\js\\grammar.js": [535] }
+  },
+  "translit": {
+    "Declared": "..\\..\\_dprhtml\\js\\translit.js:1007",
+    "Called": {
+      "..\\..\\_dprhtml\\index.html": [414],
+      "..\\..\\_dprhtml\\features\\navigation\\init.js": [75],
+      "..\\..\\_dprhtml\\js\\analysis_output.js": [144, 236, 238, 264, 269],
+      "..\\..\\_dprhtml\\js\\format.js": [
+        177,
+        207,
+        245,
+        249,
+        262,
+        266,
+        276,
+        280,
+        358,
+        367,
+        420,
+        444,
+        460
+      ]
+    }
+  },
+  "writeExtFile": {
+    "Declared": "..\\..\\_dprhtml\\js\\web\\io.js:137",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\convert.js": [237],
+      "..\\..\\_dprhtml\\js\\xml.js": [1143]
+    }
+  },
+  "writeFile": {
+    "Declared": "..\\..\\_dprhtml\\js\\web\\io.js:51",
+    "Called": {
+      "..\\..\\_dprhtml\\js\\bookmarks.js": [18, 131, 142, 211],
+      "..\\..\\_dprhtml\\js\\search_history.js": [131, 181]
+    }
+  }
+}
