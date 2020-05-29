@@ -29,6 +29,7 @@ funcXfileDeclr = {}
 expByFile = {}
 
 leftFunc = functools.reduce(lambda acc,e : acc.update({e["name"]: e["declLine1"]}) or acc, json.load(open("funcInfo.json")), {})
+allFunc = dict(leftFunc)
 
 for i in leftFunc:
     funcToFile[i] = {}
@@ -45,7 +46,7 @@ def searchDeclr(line, fileName, lnNo):
 
 
 def searchCall(line, fileName, lnNo):
-    for i in leftFunc:
+    for i in allFunc:
         y = re.match(r'.*\b'+re.escape(i)+r'\b', line)
         if(y):
             print(i+" called at line:"+str(lnNo))
@@ -88,11 +89,35 @@ CallSites = {a: b for (a, b) in funcToFile.items()
 for i in CallSites:  # step5
     CallSites[i].pop(DeclareSites[i].split(":")[0], None)
 
-finFile = {}
+finDict = {}
 for i in CallSites:
-    finFile[i] = {}
-    finFile[i]["Declared"] = DeclareSites[i]
-    finFile[i]["Called"] = CallSites[i]
+    finDict[i] = {}
+    finDict[i]["Declared"] = DeclareSites[i]
+    finDict[i]["Called"] = CallSites[i]
+
+finFile = sorted(finDict.items(),key=lambda a:len(a[1]["Called"]) )
 
 with open("callsAndDecls.json", "w", encoding="utf8") as f:
     json.dump(finFile, f)
+
+func2Exp4File = {finDict[v]["Declared"].split(":")[0]:[] for v in finDict}
+
+for i in finDict:
+        [fileN,lnNo]=finDict[i]["Declared"].split(":")
+        func2Exp4File[fileN].append({'name':i,'Line':lnNo,'Called@':finDict[i]["Called"]})
+
+numOfChangesForFile={}
+
+for i in func2Exp4File:
+    x=0
+    for j in func2Exp4File[i]:
+        for k in j["Called@"]:
+                x+=(len(j["Called@"][k]) )
+    numOfChangesForFile[i]=x
+
+func2Exp4FileSorted = sorted(func2Exp4File.items(),key=lambda a:numOfChangesForFile[a[0]] )
+
+with open("file2Exp4File.json", "w", encoding="utf8") as f:
+    json.dump(func2Exp4FileSorted, f)
+
+
