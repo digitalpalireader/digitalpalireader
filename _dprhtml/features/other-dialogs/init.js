@@ -136,7 +136,7 @@ class OtherDialogsViewModel {
 
     xmlDoc.documentElement.appendChild(newNode);
 
-    __navigationTabViewModel.updateBookmarks(xmlDoc);
+    //__navigationTabViewModel.updateBookmarks(xmlDoc);
     alertFlash('Bookmark Saved','green');
 
     //sendUpdateBookmarks();
