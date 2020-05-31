@@ -49,7 +49,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var volume = place[3];
   var vagga = place[4];
   var sutta = place[5];
-  var section = place[6]
+  var section = place[6];
 
   var t = xmlDoc.getElementsByTagName("ha");
   var u = t[0].getElementsByTagName("h0");

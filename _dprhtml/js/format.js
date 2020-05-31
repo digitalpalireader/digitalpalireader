@@ -458,6 +458,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
     }
 
     var onet = '<b style="color:'+DPR_G.DPR_prefs[col[w++]]+'">' + translit(toUni(thisname)) + '</b>';
+    $('#dialog-bookmarkInput').val(translit(toUni(thisname)));
     title += (click?wrapLink(onet,click):onet) + (namen[i] ? namen[i] :'');
     save += '<h'+w+'>'+thisname+'</h'+w+'>';
     raw += thisname+(i < namea.length-1?"<br/>":"");

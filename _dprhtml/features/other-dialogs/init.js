@@ -4,7 +4,7 @@ class OtherDialogsViewModel {
   constructor() {
     this.quicklinkInput = ko.observable();
     this.quicklinkInNewTab = ko.observable(false);
-    this.bookmarkInput = ko.observable();
+    this.bookmarkName = ko.observable();
   }
 
   showQuickLinksDialog() {
@@ -93,12 +93,54 @@ class OtherDialogsViewModel {
   }
 
   showBookmarksDialog() {
-    this.bookmarkInput('');
     $('#bookmark-dialog-root').modal('show');
   }
 
-  sendBookmarkFromDialog(loc, name, desc) {
-    // TODO when bookmarks is implemented
+  sendBookmarkFromDialog() {
+
+    var loc = __navigationTabViewModel.placeArray();
+    var name = $('#dialog-bookmarkInput').val();
+    var desc = "";
+    var check = {value: false};                  // default the checkbox to false
+
+    var scroll = document.getElementById('maf').scrollTop;
+
+    var cont = bookmarkXML();
+    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
+    var parser=new DOMParser();
+    var xmlDoc = parser.parseFromString(cont,'text/xml');
+
+    var newNode = xmlDoc.createElement('bookmark');
+    var newNodeName = xmlDoc.createElement('name');
+    var newNodeLoc = xmlDoc.createElement('location');
+    var newNodeScroll = xmlDoc.createElement('scroll');
+    var newNodeDesc = xmlDoc.createElement('description');
+
+    //document.form.nik.selectedIndex + '#' + document.form.book.selectedIndex  + '#' + document.form.meta.selectedIndex  + '#' + document.form.volume.selectedIndex  + '#' + document.form.vagga.selectedIndex  + '#' + document.form.sutta.selectedIndex + '#' + document.form.section.selectedIndex + '#' + hier;
+
+    var tLoc = xmlDoc.createTextNode(loc);
+    newNodeLoc.appendChild(tLoc);
+    newNode.appendChild(newNodeLoc);
+
+    var tName = xmlDoc.createTextNode(name);
+    newNodeName.appendChild(tName);
+    newNode.appendChild(newNodeName);
+
+    var tScroll = xmlDoc.createTextNode(scroll);
+    newNodeScroll.appendChild(tScroll);
+    newNode.appendChild(newNodeScroll);
+
+    var tDesc = xmlDoc.createTextNode(desc);
+    newNodeDesc.appendChild(tDesc);
+    newNode.appendChild(newNodeDesc);
+
+    xmlDoc.documentElement.appendChild(newNode);
+
+    __navigationTabViewModel.updateBookmarks(xmlDoc);
+    alertFlash('Bookmark Saved','green');
+
+    //sendUpdateBookmarks();
+
   }
 
   resetSettings() {

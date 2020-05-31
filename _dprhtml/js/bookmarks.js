@@ -1,39 +1,55 @@
-function bookmarkXML() {
-  var cont = readFile('DPR_Bookmarks');
-  cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-  var parser=new DOMParser();
-  var xmlDoc = parser.parseFromString(cont,'text/xml');
-  return xmlDoc;
-}
-
-function eraseBookmark(idx) {
-  var xmlDoc = bookmarkXML();
-  var thisNode = xmlDoc.getElementsByTagName('bookmark')[idx];
-  var answer = confirm('Are you sure you want to erase the bookmark "' + thisNode.getElementsByTagName('name')[0].textContent + '"?')
-  if(answer)
-  {
-        xmlDoc.documentElement.removeChild(thisNode);
-
-    var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
-    writeFile('DPR_Bookmarks', outfile);
-    var sidebar = DPRSidebarWindow();
-    if (sidebar) {
-      sidebar.DPRNav.bookmarkBox();
+function eraseBookmark(i) {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    let data = [];
+    if (bookmarksArrayFromStorage) {
+      data = JSON.parse(bookmarksArrayFromStorage).slice();
+      data.splice(i, 1);
+      localStorage.setItem("bookmarksArray", JSON.stringify(data));
+      __navigationTabViewModel.updateBookmarks();
+      bookmarkframe(0);
     }
-        bookmarkframe(1);
   }
 }
 
 function eraseBookmarks(gofrom) {
-  var answer = confirm('Are you sure you want to erase all of the stored bookmarks?')
-  if(answer)
-  {
-        eraseFile('DPR_Bookmarks');
-    var sidebar = DPRSidebarWindow();
-    if (sidebar) {
-      sidebar.DPRNav.bookmarkBox();
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    var answer = confirm('Are you sure you want to erase all of the stored bookmarks?');
+    if(!answer) { return; }
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    if (bookmarksArrayFromStorage) {
+      localStorage.removeItem("bookmarksArray");
+      __navigationTabViewModel.updateBookmarks();
+      bookmarkframe(0);
     }
-    bookmarkframe();
+  }
+}
+
+function bookmarkXML() {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    let content = [];
+    if (bookmarksArrayFromStorage) {
+      let data = JSON.parse(bookmarksArrayFromStorage);
+      for (var i in data) {
+        content.push(data[i]);
+      }
+    }
+    return content;
+  }
+}
+
+function addBookmark(value) {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    if (bookmarksArrayFromStorage) {
+      let data = JSON.parse(bookmarksArrayFromStorage);
+      for (var i in data) {
+        if (data[i].localeCompare(value) === 0 || i > 99) return;
+      }
+      data.push(value);
+      localStorage.setItem("bookmarksArray", JSON.stringify(data));
+    }
   }
 }
 
@@ -58,10 +74,10 @@ function bookmarkframe(refresh) {
   if(!hout) { hout = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
   else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
-  //TO DO: implement Bookmarks
-  //var xmlDoc = bookmarkXML();
 
-  //var bNodes = xmlDoc.getElementsByTagName('bookmark');
+  var xmlDoc = bookmarkXML();
+
+  var bNodes = xmlDoc.getElementsByTagName('bookmark');
   bNodes = [];
 
   if (bNodes.length == 0)

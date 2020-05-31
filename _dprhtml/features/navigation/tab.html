@@ -130,6 +130,20 @@
               data-bind="text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }">
             </button>
             <!--/ko-->
+
+            <!--ko let: { info: bookmarksInfo() || {} }-->
+            <select id="nav-history" class="custom-select navselect"
+              data-bind="options: bookmarksArray,
+                optionsText: function(item) {
+                  return item.indexOf('@') === -1 ? item : item.substring(0, item.indexOf('@'));
+                },
+                value: selectedBookmarksItem,
+                event: {change: sendSelectedBookmarksItem}">
+            </select>
+            <button id="nav-bookmarks-button" type="button" class="btn btn-light m-0 p-1"
+              data-bind="text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }">
+            </button>
+            <!--/ko-->
           </div>
         </div>
       </div>
