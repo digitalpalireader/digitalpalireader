@@ -819,7 +819,7 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 
 function convertShortLink(place) {
 
-  place = place.toLowerCase();
+  place = place.toLowerCase().replace(/\./g,"");
 
   if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
 
