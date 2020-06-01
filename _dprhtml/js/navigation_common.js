@@ -819,8 +819,8 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 
 function convertShortLink(place) {
 
-  place = place.toLowerCase().replace(/\./g,"");
-
+  place = place.toLowerCase().replace(/([a-z])\./g,"$1");
+  alert(place);
   if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
 
   if(/^dhpv[ .]*[0-9]+$/.test(place)) { // dhp verses
