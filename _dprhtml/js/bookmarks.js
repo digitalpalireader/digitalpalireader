@@ -39,16 +39,18 @@ function bookmarkXML() {
   }
 }
 
-function addBookmark(value) {
+function addBookmark() {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
     if (bookmarksArrayFromStorage) {
+      let value = `${$('#dialog-bookmarkInput').val()}@${__navigationTabViewModel.locPlace}`;
       let data = JSON.parse(bookmarksArrayFromStorage);
       for (var i in data) {
-        if (data[i].localeCompare(value) === 0 || i > 99) return;
+        if (data[i].toString().localeCompare(value) === 0 || i > 99) return;
       }
       data.push(value);
       localStorage.setItem("bookmarksArray", JSON.stringify(data));
+      __navigationTabViewModel.updateBookmarks();
     }
   }
 }
@@ -75,9 +77,9 @@ function bookmarkframe(refresh) {
   else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
 
-  var xmlDoc = bookmarkXML();
+  //var xmlDoc = bookmarkXML();
 
-  var bNodes = xmlDoc.getElementsByTagName('bookmark');
+  //var bNodes = xmlDoc.getElementsByTagName('bookmark');
   bNodes = [];
 
   if (bNodes.length == 0)

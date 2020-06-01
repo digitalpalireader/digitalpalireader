@@ -59,6 +59,7 @@ class NavigationTabViewModel {
     this.para = ko.observable('');
 
     this.places = ko.observableArray();
+    this.locPlace = ko.observableArray();
 
     this.navHistoryVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
     this.navHistoryArray = ko.observableArray();
@@ -97,7 +98,7 @@ class NavigationTabViewModel {
 
   setPlaces(places) {
     this.places(places);
-    this.place(places[0].place)
+    this.place(places[0].place);
   }
 
   navPartOptionsEmpty(opts) {
