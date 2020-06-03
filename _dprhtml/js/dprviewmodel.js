@@ -251,7 +251,7 @@ const dprCommandList = [
   {
     id: DPR_CMD_BOOKMARK_SECTION,
     notImplemented: false,
-    canExecute: true,
+    canExecute: false,
     execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
     visible: true,
     isDynamic: true,

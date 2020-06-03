@@ -105,7 +105,7 @@ class OtherDialogsViewModel {
 
     var scroll = document.getElementById('maf').scrollTop;
 
-    var cont = bookmarkXML();
+    var cont = getBookmarks();
     cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
     var parser=new DOMParser();
     var xmlDoc = parser.parseFromString(cont,'text/xml');

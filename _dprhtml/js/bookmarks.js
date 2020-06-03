@@ -12,7 +12,7 @@ function eraseBookmark(i) {
   }
 }
 
-function eraseBookmarks(gofrom) {
+function clearBookmarks(gofrom) {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     var answer = confirm('Are you sure you want to erase all of the stored bookmarks?');
     if(!answer) { return; }
@@ -25,7 +25,7 @@ function eraseBookmarks(gofrom) {
   }
 }
 
-function bookmarkXML() {
+function getBookmarks() {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
     let content = [];
@@ -77,9 +77,10 @@ function bookmarkframe(refresh) {
   else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
 
-  //var xmlDoc = bookmarkXML();
+  //var xmlDoc = getBookmarks();
 
   //var bNodes = xmlDoc.getElementsByTagName('bookmark');
+  var isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="clearBookmarks()"><b>clear</b></a>';
   bNodes = [];
 
   if (bNodes.length == 0)
@@ -87,7 +88,7 @@ function bookmarkframe(refresh) {
     if (refresh === 1) {
       DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
-    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width="1">&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
+    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span>'+isClearBm+'</td><td width="1"></td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>[List not yet implemented]</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
   else
   {
@@ -140,7 +141,7 @@ function bookmarkframe(refresh) {
 
 
 function bookmarkxd(desc,idx) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('description')[0];
   bk.textContent = desc;
 
@@ -151,7 +152,7 @@ function bookmarkxd(desc,idx) {
 }
 
 function bookmarkxn(name,idx) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('name')[0];
   bk.textContent = name;
 
@@ -195,7 +196,7 @@ function convertOldBookmarks() {
 }
 
 function saveBookmark(name,loc,desc,scroll,supress) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var newNode = xmlDoc.createElement('bookmark');
   var newNodeName = xmlDoc.createElement('name');
   var newNodeLoc = xmlDoc.createElement('location');
