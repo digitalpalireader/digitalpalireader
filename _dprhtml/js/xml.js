@@ -365,7 +365,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
     canExecuteStr: 'true',
-    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
+    executeStr: `__otherDialogsViewModel.showBookmarksDialog()`,
     titleStr: null,
     visibleStr: 'true',
   };
