@@ -1,7 +1,8 @@
 import json ,re
 file2Exp4file = json.load(open("file2Exp4file.json"))
 for DeclfileObj in file2Exp4file[0:2]:
-    fModName=DeclfileObj[0].split("/")[-1].split(".")[0]
+    print(DeclfileObj[0])
+    fModName="DPR_"+DeclfileObj[0].split("/")[-1].split(".")[0]+"_mod"
     for funcs in (DeclfileObj[1]):
         print("\nfunction - ",funcs['name'],"\n")
         for callFile,lnNo in (funcs['Called@'].items()):
