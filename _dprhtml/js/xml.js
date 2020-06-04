@@ -68,7 +68,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   if(hier == 'm') {
     var modno = getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hier,y.length);
-    var modt =   (modno ? ' (<b class="small" style="color:'+DPR_G.DPR_prefs['colsel']+'">' + DPR_G.G_nikLongName[nikaya] + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
+    var modt =   (modno ? ' (<b class="small" style="color:'+DPR_G.DPR_prefs['colsel']+'">' + DPR_G.G_nikLongName[nikaya].replace(/\./g,"") + (hier == 'm' ? '' : '-'+hier) + '&nbsp;' + modno + '</b>)' : '');
   }
 
 

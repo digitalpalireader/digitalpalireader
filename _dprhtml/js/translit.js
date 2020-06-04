@@ -510,7 +510,9 @@ function toBengali(input,type) {
   bengalir['o'] = 'ো';
   bengalir['ṃ'] = 'ং';
   bengalir['k'] = 'ক';
+  bengalir['kv'] = 'ক্ব';
   bengalir['kh'] = 'খ';
+  bengalir['khv'] = 'খ্ব';
   bengalir['g'] = 'গ';
   bengalir['gh'] = 'ঘ';
   bengalir['ṅ'] = 'ঙ';
@@ -525,21 +527,26 @@ function toBengali(input,type) {
   bengalir['ḍh'] = 'ঢ';
   bengalir['ṇ'] = 'ণ';
   bengalir['t'] = 'ত';
+  bengalir['tv'] = 'ত্ব';
   bengalir['th'] = 'থ';
   bengalir['d'] = 'দ';
+  bengalir['dv'] = 'দ্ব';
   bengalir['dh'] = 'ধ';
   bengalir['n'] = 'ন';
+  bengalir['nv'] = 'ন্ব';
   bengalir['p'] = 'প';
   bengalir['ph'] = 'ফ';
   bengalir['b'] = 'ব';
   bengalir['bh'] = 'ভ';
   bengalir['m'] = 'ম';
   bengalir['y'] = 'য';
+  bengalir['yv'] = 'য্ব';
   bengalir['r'] = 'র';
   bengalir['l'] = 'ল';
   bengalir['ḷ'] = 'ল়';
   bengalir['v'] = 'ৱ';
   bengalir['s'] = 'স';
+  bengalir['sv'] = 'স্ব';
   bengalir['h'] = 'হ';
 
   var im = '';
@@ -569,12 +576,21 @@ function toBengali(input,type) {
       output += vowel[i1];
       i += 1;
     }
-    else if (i2 == 'h' && bengalir[i1+i2]) {    // two character match
-      output += bengalir[i1+i2];
-      if (i3 && !vowel[i3] && i2 != 'ṃ') {
-        output += bstop;
+    else if ((i2 == 'h' || i2 == 'v') && bengalir[i1+i2]) {    // two character match
+      if (i2 == 'h' && i3 == 'v' && bengalir[i1+i2+i3]) { // three character match
+        output += bengalir[i1+i2+i3];
+        if (i4 && !vowel[i4] && i3 != 'ṃ') {
+          output += bstop;
+        }
+        i += 3;
       }
-      i += 2;
+      else {
+        output += bengalir[i1+i2];
+        if (i3 && !vowel[i3] && i2 != 'ṃ') {
+          output += bstop;
+        }
+        i += 2;
+      }
     }
     else if (bengalir[i1]) {  // one character match except a
       output += bengalir[i1];

@@ -439,7 +439,7 @@ function importXMLs(cnt)
 
     createTables(xmlDoc,hiert);
 
-    DPR_PAL_Search_UpdateSearchTermSectionInfo(thiscount);
+    DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
 
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
