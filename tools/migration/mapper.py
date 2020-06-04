@@ -85,9 +85,9 @@ DeclareSites = {a: b for (a, b) in funcXfileDeclr.items()
                if a in listOfFunc2Exp}
 CallSites = {a: b for (a, b) in funcToFile.items()
               if a in listOfFunc2Exp}
-
 for i in CallSites:  # step5
-    CallSites[i].pop(DeclareSites[i].split(":")[0], None)
+    fN,lN=DeclareSites[i].split(":")
+    CallSites[i][fN].remove(int(lN))
 
 finDict = {}
 for i in CallSites:
