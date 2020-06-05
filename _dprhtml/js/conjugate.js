@@ -1,3 +1,4 @@
+var DPR_conjugate_mod = (function(){
 function insertConj() {
   var word = $('#word').val();
   var form = $('#form').val();
@@ -18,3 +19,7 @@ function clearText() {
   $('#word').val('');
   $('#form').val('');
 }
+return{
+  insertConj:insertConj
+}
+}())
