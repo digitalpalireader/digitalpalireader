@@ -439,7 +439,7 @@ var DPRSend = {
   },
 
 
-  sendDict: function (hard, add, which, getstring, opts) {
+  sendDict: async function (hard, add, which, getstring, opts) {
 
     appInsights.trackEvent({ name: 'Search',  properties: { hard, add, which, getstring, opts, }});
 
@@ -491,7 +491,7 @@ var DPRSend = {
         else {
           DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
           var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-          oldTabBrowser.contentWindow.startDictLookup(which, getstring, opts);
+          await oldTabBrowser.contentWindow.startDictLookup(which, getstring, opts);
         }
       }
       else if (hard) {

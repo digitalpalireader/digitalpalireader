@@ -170,7 +170,8 @@ const initializeSearchSidebarTab = () => {
   DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }
 
-const initializeSearchFeature = () => {
+const initializeSearchFeature = async () => {
   getconfig();
   searchTipitaka(DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
+  await Promise.resolve();
 }

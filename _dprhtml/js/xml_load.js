@@ -6,6 +6,11 @@ var DPR_DataLoader = (function() {
     return xmlDoc;
   }
 
+  const xhrGetAsync = url => {
+    var xmlDoc = XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
+    return xmlDoc;
+  }
+
   const loadTipitaka = (id, set) => {
     var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
     return xhrGet(url);
@@ -23,7 +28,7 @@ var DPR_DataLoader = (function() {
 
   const loadSARoots = id => {
     var url = `${DPR_PAL.baseUrl}sa/roots/${id}.xml`;
-    return xhrGet(url);
+    return xhrGetAsync(url);
   };
 
   const loadSADictionary = id => {
@@ -42,11 +47,22 @@ var DPR_DataLoader = (function() {
     };
   };
 
+  const wrapExceptionHandlerAsync = function(fn) {
+    return async function() {
+      try {
+        return await fn.apply(this, arguments);
+      } catch (e) {
+        DPR_Chrome.showErrorToast(`Data files for [${[...arguments].join(',')}] not found. Ensure you have the latest components installed. More info: ${e.message}`);
+        return null;
+      }
+    };
+  };
+
   return {
     loadTipitaka: wrapExceptionHandler(loadTipitaka),
     loadPXD: wrapExceptionHandler(loadPXD),
     loadXDPPN: wrapExceptionHandler(loadXDPPN),
-    loadSARoots: wrapExceptionHandler(loadSARoots),
+    loadSARoots: wrapExceptionHandlerAsync(loadSARoots),
     loadSADictionary: wrapExceptionHandler(loadSADictionary),
   };
 })();

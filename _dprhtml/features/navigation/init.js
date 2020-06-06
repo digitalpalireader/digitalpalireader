@@ -138,7 +138,7 @@ class NavigationTabViewModel {
 
 const __navigationTabViewModel = new NavigationTabViewModel();
 
-const initializeNavigationFeature = () => {
+const initializeNavigationFeature = async () => {
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
@@ -153,6 +153,8 @@ const initializeNavigationFeature = () => {
   }
 
   DPR_Chrome.addMainPanelSections(__navigationTabViewModel.places());
+
+  await Promise.resolve();
 }
 
 const parseNavigationURLParams = () => {

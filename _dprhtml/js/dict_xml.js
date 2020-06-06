@@ -322,7 +322,7 @@ DPR_G.G_skt = [];
 DPR_G.G_skthist = [];
 DPR_G.G_shmark = 0;
 
-function sktRXML(no,add)
+async function sktRXML(no,add)
 {
   appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
 
@@ -349,7 +349,7 @@ function sktRXML(no,add)
 
   // xml
 
-  var xmlDoc = DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(DPR_G.sktR[no]));
+  var xmlDoc = await DPR_DataLoader.loadSARoots(makeUniqueStringForCaseInsensitiveFS(DPR_G.sktR[no]));
   var s = new XMLSerializer();
   var data = s.serializeToString(xmlDoc);
 

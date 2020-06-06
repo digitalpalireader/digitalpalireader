@@ -36,7 +36,7 @@ function parseDictURLParameters(){
   }
 }
 
-function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
+async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
     DPR_G.G_dictEntry = '';
 
@@ -131,7 +131,7 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
       sktsearchstart();
       break;
     case 'SKR':
-      sktRootsearchstart();
+      await sktRootsearchstart();
       break;
   }
 }
@@ -1438,7 +1438,7 @@ function sktsearchstart()
 }
 
 
-function sktRootsearchstart(hard)
+async function sktRootsearchstart(hard)
 {
   if(typeof(DPR_G.sktR) == 'undefined') {
     return;
@@ -1446,7 +1446,7 @@ function sktRootsearchstart(hard)
   var getstring = toSkt(toVel(DPR_G.G_dictQuery));
 
   if(getstring == '') {
-      sktRXML(toUni(DPR_G.G_dictEntry));
+      await sktRXML(toUni(DPR_G.G_dictEntry));
       return;
   }
 
@@ -1496,7 +1496,7 @@ function sktRootsearchstart(hard)
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
   }
   else if(finouta.length == 1)
-    sktRXML(0);
+    await sktRXML(0);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1510,7 +1510,7 @@ function sktRootsearchstart(hard)
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) sktRXML(toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await sktRXML(toUni(DPR_G.G_dictEntry));
 
   var yut = 0;
 }
