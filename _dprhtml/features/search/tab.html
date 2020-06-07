@@ -74,7 +74,7 @@
     <div id="tsoMAT2" class="form-group col mb-1">
       <label class="sr-only" for="tsoMAT2m">tsoMAT2</label>
       <select id="tsoMAT2m" class="form-control" title="Choose which heirarchy to search"
-        onchange="DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0)"
+        onchange="DPRXML.updateSearchHierarchyAfterSetSearchBookList(0)"
         data-bind="selectedOptions: searchHierarchy">
         <option value="m" label="Mūla" selected>Mūla</option>
         <option value="a" label="Aṭṭhakathā">Aṭṭhakathā</option>

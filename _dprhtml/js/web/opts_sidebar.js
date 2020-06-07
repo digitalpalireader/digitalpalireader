@@ -7,7 +7,7 @@ if (DPR_PAL.isWeb) {
 }
 
 var DPROpts = {
-  tipitakaOptions: function () {
+  tipitakaOptions: async function () {
     $('#tsoContainer').hide();
     $('#tsoSetContainer').hide();
     $('#tsoSET').hide();
@@ -41,7 +41,7 @@ var DPROpts = {
         $('#tsoSET').show();
         $('#tsoBOOK').show();
         $('#tsoMAT').show();
-        DPRNav.setSearchBookList(); // populate books
+        await DPRNav.setSearchBookList(); // populate books
         break;
       case 3:
         $('#tsoPart').show();
@@ -49,8 +49,7 @@ var DPROpts = {
         $('#tsoSET').show();
         $('#tsoBOOK').show();
         $('#tsoMAT2').show();
-        DPRNav.setSearchBookList(); // populate books
-        DPRXML.updateSearchHierarchy(0); // populate sections
+        await DPRXML.updateSearchHierarchyAfterSetSearchBookList(0); // populate sections
         break;
       case 5:
         $('#tsoContainer').show();
