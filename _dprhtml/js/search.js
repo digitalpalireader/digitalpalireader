@@ -339,10 +339,11 @@ async function pausethree() {
   await importXMLs(3);
 }
 
-function bounce(sct)
+async function bounce(sct)
 {
   DPR_PAL_Search_UpdateProgressBar()
-  setTimeout('importXMLs('+sct+')', 10)
+  await DPR_PAL.delay(10);
+  await importXMLs(sct);
 }
 
 
@@ -391,7 +392,7 @@ async function importXMLs(cnt)
       DPR_G.nextbookfile = DPR_G.G_searchFileArray[DPR_G.qz+1];
       if (DPR_G.nextbookfile.charAt(0) != DPR_G.nikayaat) $('#stfH'+DPR_G.nikayaat).css('color',DPR_G.DPR_prefs['colsel']);
       DPR_G.qz++;
-      bounce(1);
+      await bounce(1);
     }
     else {
       DPR_G.qz = 0;
@@ -418,7 +419,7 @@ async function importXMLs(cnt)
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
       DPR_G.qz++;
-      bounce(2);
+      await bounce(2);
     }
     else {
       DPR_G.qz = 0;
@@ -444,7 +445,7 @@ async function importXMLs(cnt)
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
       DPR_G.qz++;
-      bounce(3);
+      await bounce(3);
     }
     else {
       DPR_G.qz = 0;

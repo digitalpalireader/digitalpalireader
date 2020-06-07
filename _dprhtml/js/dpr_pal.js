@@ -82,6 +82,8 @@ console.log('Loading DPR_PAL...');
     }
   }
 
+  DPR_PAL.delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+
   DPR_PAL.mainStylesMatcher = /.*_dprhtml\/css\/styles.*\.css$/i;
   DPR_PAL.dprUrlMatcher = /\/_dprhtml\/index\.html/;
 

@@ -24,14 +24,14 @@ async function sameSearchHistory(event){
   var searchType = parseInt(item[0]), searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = (item[6]=='true');
   await DPRSend.sendSearch(DPRSend.eventSend(event),searchType, searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
 }
-function simSearchHistory(event){
+async function simSearchHistory(event){
   if(document.getElementById('searches').selectedIndex == 0)
     return;
   var item = document.getElementById('searches').selectedItem.getAttribute('value').split('|');
   var searchType = item[0], searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = item[6];
 
   document.getElementById('tipType').selectedIndex = searchType;
-  DPROpts.tipitakaOptions();
+  await DPROpts.tipitakaOptions();
   document.getElementById('isearch').value = '';
 
   if(searchType == 0 || searchType == 2) {
@@ -44,7 +44,7 @@ function simSearchHistory(event){
   }
   else {
     document.getElementById('tsoMAT2m').selectedIndex = DPR_G.G_hNumbers[searchMAT];
-    DPRNav.setSearchBookList(); DPRXML.updateSearchHierarchy(0);
+    await DPRXML.updateSearchHierarchyAfterSetSearchBookList(0);
   }
 
   if(searchType == 0 || searchType == 5) {
@@ -57,7 +57,7 @@ function simSearchHistory(event){
   }
   else {
     document.getElementById('tsoSETm').value = searchSet;
-    DPRNav.setSearchBookList();
+    await DPRNav.setSearchBookList();
   }
   if(searchType == 1) {
     for (var i=0;i< document.getElementById('tsoBOOKm').itemCount;i++) {
@@ -69,14 +69,14 @@ function simSearchHistory(event){
   }
   else {
     document.getElementById('tsoBOOKm').value = searchBook;
-    DPRXML.updateSearchHierarchy(0);
+    await DPRXML.updateSearchHierarchy(0);
   }
 
   if(searchType == 3) {
     var parts = searchPart.split('.');
     for(var i=1;i<parts.length;i++) {
       document.getElementById('tsoP'+DPR_G.G_listTitles[i-1]).selectedIndex = parts[i];
-      DPRXML.updateSearchHierarchy(i);
+      await DPRXML.updateSearchHierarchy(i);
     }
     document.getElementById('tsoPR').selectedIndex = parts[0];
     DPROpts.chooseSearchHier(parseInt(parts[0])+1);

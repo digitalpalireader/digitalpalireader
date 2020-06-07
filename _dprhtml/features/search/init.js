@@ -161,12 +161,12 @@ const setSearchParams = () => {
   });
 }
 
-const initializeSearchSidebarTab = () => {
+const initializeSearchSidebarTab = async () => {
   const sidebarTab = $(`#${searchFeatureName}TabContent`)[0];
   setSearchParams();
   ko.applyBindings(__searchTabViewModel, sidebarTab);
-  DPROpts.tipitakaOptions();
-  DPRNav.setSearchBookList();
+  await DPROpts.tipitakaOptions();
+  await DPRNav.setSearchBookList();
   DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }
 

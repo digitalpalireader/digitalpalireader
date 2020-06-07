@@ -1,20 +1,10 @@
 'use strict';
 
 var DPR_DataLoader = (function() {
-  const xhrGet = url => {
-    var xmlDoc = XML_Load.xhrGet({ url }, xhr => xhr.responseXML.documentElement);
-    return xmlDoc;
-  }
-
   const xhrGetAsync = url => {
     var xmlDoc = XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
     return xmlDoc;
   }
-
-  const loadTipitaka = (id, set) => {
-    var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
-    return xhrGet(url);
-  };
 
   const loadTipitakaAsync = (id, set) => {
     var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
@@ -65,29 +55,12 @@ var DPR_DataLoader = (function() {
 
   return {
     loadTipitakaAsync: wrapExceptionHandler(loadTipitakaAsync),
-    loadTipitaka: wrapExceptionHandler(loadTipitaka),
     loadPXD: wrapExceptionHandlerAsync(loadPXD),
     loadXDPPN: wrapExceptionHandlerAsync(loadXDPPN),
     loadSARoots: wrapExceptionHandlerAsync(loadSARoots),
     loadSADictionary: wrapExceptionHandlerAsync(loadSADictionary),
   };
 })();
-
-function loadXMLFile(file, setNo) {
-  if(typeof(setNo) == 'undefined')
-    setNo = 0;
-
-  switch(setNo) {
-    case 0:
-      var set = 'my';
-      break;
-    case 1:
-      var set = 'th';
-      break;
-  }
-
-  return DPR_DataLoader.loadTipitaka(file, set);
-}
 
 function loadXMLFileAsync(file, setNo) {
   if(typeof(setNo) == 'undefined')
@@ -134,14 +107,7 @@ var XML_Load = (function () {
     });
   };
 
-  const xhrGet = (request, procFn) => {
-    let xhr = createXhr(request, false);
-    xhr.send(request.body);
-    return procFn(xhr);
-  }
-
   return {
     xhrGetAsync: xhrGetAsync,
-    xhrGet: xhrGet,
   };
 })();

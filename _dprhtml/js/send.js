@@ -493,21 +493,18 @@ function closePanel() {
   elem.getElementsByTagName('splitter')[0].setAttribute('collapsed','true');
 }
 
-function sidebarSearch(nik,book,hiert) {
+async function sidebarSearch(nik,book,hiert) {
   var sidebar = DPRSidebarWindow();
   if (sidebar) {
-    sidebar.DPRNav.searchBook(nik,book,hiert);
+    await sidebar.DPRNav.searchBook(nik,book,hiert);
     return;
   }
   openDPRSidebar();
-  window.setTimeout(
-    function() {
-      sidebar = DPRSidebarWindow();
-      if (sidebar)
-        sidebar.DPRNav.searchBook(nik,book,hiert);
-    },
-    1000
-  );
+  await DPR_PAL.delay(1000);
+  sidebar = DPRSidebarWindow();
+  if (sidebar) {
+    await sidebar.DPRNav.searchBook(nik,book,hiert);
+  }
 }
 
 var DPR_Send = (function () {
