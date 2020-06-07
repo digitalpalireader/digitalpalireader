@@ -385,7 +385,7 @@ async function sktRXML(no,add)
 }
 
 
-function sktXML(entry,idx,which,add)
+async function sktXML(entry,idx,which,add)
 {
   appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
 
@@ -401,7 +401,7 @@ function sktXML(entry,idx,which,add)
 
   var char = entry.charAt(0);
 
-  var xmlDoc = DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
+  var xmlDoc = await DPR_DataLoader.loadSADictionary(makeUniqueStringForCaseInsensitiveFS(char));;
 
   var data = xmlDoc.getElementsByTagName('u')[idx];
   var ser = new XMLSerializer();

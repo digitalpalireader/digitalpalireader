@@ -33,7 +33,7 @@ var DPR_DataLoader = (function() {
 
   const loadSADictionary = id => {
     var url = `${DPR_PAL.baseUrl}sa/dict/${id}.xml`;
-    return xhrGet(url);
+    return xhrGetAsync(url);
   };
 
   const wrapExceptionHandler = function(fn) {
@@ -63,7 +63,7 @@ var DPR_DataLoader = (function() {
     loadPXD: wrapExceptionHandler(loadPXD),
     loadXDPPN: wrapExceptionHandler(loadXDPPN),
     loadSARoots: wrapExceptionHandlerAsync(loadSARoots),
-    loadSADictionary: wrapExceptionHandler(loadSADictionary),
+    loadSADictionary: wrapExceptionHandlerAsync(loadSADictionary),
   };
 })();
 

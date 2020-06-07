@@ -128,7 +128,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
       paliRootsearchstart();
       break;
     case 'SKT':
-      sktsearchstart();
+      await sktsearchstart();
       break;
     case 'SKR':
       await sktRootsearchstart();
@@ -1330,7 +1330,7 @@ function paliRootsearchstart(hard)
 
 DPR_G.G_sktR = [];
 
-function sktsearchstart()
+async function sktsearchstart()
 {
   if(typeof(DPR_G.skt) == 'undefined') {
     return;
@@ -1418,7 +1418,7 @@ function sktsearchstart()
     }
   }
   else if(finouta.length == 1)
-    sktXML(last+','+uniout);
+    await sktXML(last+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1432,7 +1432,7 @@ function sktsearchstart()
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
+  if(DPR_G.G_dictEntry) await sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
 
   var yut = 0;
 }
