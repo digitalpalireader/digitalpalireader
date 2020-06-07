@@ -179,11 +179,11 @@ function importXMLindex(add) {
   }
 }
 
-function sendPaliXML(link,add) {
+async function sendPaliXML(link,add) {
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
-      DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.paliXML(link);
+      await DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.paliXML(link);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -195,7 +195,7 @@ function sendPaliXML(link,add) {
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      oldTabBrowser.contentWindow.paliXML(link);
+      await oldTabBrowser.contentWindow.paliXML(link);
     }
   }
   else if(add!='right') {

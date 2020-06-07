@@ -101,7 +101,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   switch (DPR_G.G_dictType) {
     case 'PED':
-      pedsearchstart();
+      await pedsearchstart();
       break;
     case 'DPPN':
       await dppnsearchstart();
@@ -136,23 +136,23 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
   }
 }
 
-function pedsearchstart(hard)
+async function pedsearchstart(hard)
 {
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        paliXML(toUni(DPR_G.G_dictEntry));
+        await paliXML(toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    sendPaliXML('dev/'+getstring+',dev');
+    await sendPaliXML('dev/'+getstring+',dev');
     return;
   }
 
   if(/ft/.exec(DPR_G.G_dictOpts)) { // full text search
 
-    pedFullTextSearch(getstring);
+    await pedFullTextSearch(getstring);
     return;
   }
 
@@ -231,7 +231,7 @@ function pedsearchstart(hard)
     }
   }
   else if(finouta.length == 1)
-    paliXML('PED/' + loc+','+uniout);
+    await paliXML('PED/' + loc+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -250,7 +250,7 @@ function pedsearchstart(hard)
   var yut = 0;
 }
 
-function pedFullTextSearch(getstring) {
+async function pedFullTextSearch(getstring) {
 
   getstring = toUni(getstring);
 
@@ -260,7 +260,7 @@ function pedFullTextSearch(getstring) {
 
   for (var i = 0; i < 5; i++) {
 
-    var xmlDoc = DPR_DataLoader.loadPXD(i);
+    var xmlDoc = await DPR_DataLoader.loadPXD(i);
 
     var allp = xmlDoc.getElementsByTagName('d');
 

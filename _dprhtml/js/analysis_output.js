@@ -247,7 +247,7 @@ async function outputDef(which,first,frombox)
 
   //alert(DPR_G.G_thisConcise);
   if (hotlink) {
-    if (hotlink.search('PED') >= 0) paliXML(hotlink);
+    if (hotlink.search('PED') >= 0) await paliXML(hotlink);
     else await DPPNXML(hotlink);
     //if(DPR_G.moveat == 2) { moveFrame(1); }
   }

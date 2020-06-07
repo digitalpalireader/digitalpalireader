@@ -19,7 +19,14 @@ function makeUniqueStringForCaseInsensitiveFS(s) {
   return `${s}-${uniqueStr}`;
 }
 
-function paliXML(filein,which,add)
+async function paliXMLHistory(opts) {
+  if(opts.selectedIndex != 0) {
+    DPR_G.G_phmark = opts.length - 1 - opts.selectedIndex;
+    await paliXML(opts.options[opts.selectedIndex].value,1);
+  }
+}
+
+async function paliXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'Lookup word',  properties: { filein,which,add, }});
 
@@ -27,7 +34,7 @@ function paliXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    sendPaliXML(toVel(filein.split(',')[1]),true);
+    await sendPaliXML(toVel(filein.split(',')[1]),true);
     return;
   }
   moveFrame(1);
@@ -62,7 +69,7 @@ function paliXML(filein,which,add)
   var t1 = tloc[1];
   var t2 = tloc[2];
   DPR_G.pedfileget = t1 + '/' + t2;
-  var xmlDoc = DPR_DataLoader.loadPXD(t1);
+  var xmlDoc = await DPR_DataLoader.loadPXD(t1);
 
   var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -114,7 +121,7 @@ function paliXML(filein,which,add)
   displayDictData(outdata);
   var tout = '';
   if (DPR_G.G_pedhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { DPR_G.G_phmark=this.length-1-this.selectedIndex; paliXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+    var showing = '<select title="go to history" onchange="paliXMLHistory(this);"><option>- history -</option>';
     for (var i = DPR_G.G_pedhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_pedhist[i]+'"';
       if (i == DPR_G.G_phmark) { showing += ' selected'; }
@@ -400,7 +407,7 @@ async function sktXML(entry,idx,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    //sendPaliXML(toVel(filein.split(',')[1]),true);
+    //await sendPaliXML(toVel(filein.split(',')[1]),true);
     return;
   }
 

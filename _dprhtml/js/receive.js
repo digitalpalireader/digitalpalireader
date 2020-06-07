@@ -25,7 +25,7 @@ async function makeLinkPlace(options,PL) {
     }
     if(option[0] == 'ped') {
       var link = option[1].split(',');
-      paliXML(link[0]+'/'+link[1]+'/'+link[2]+','+link[3]);
+      await paliXML(link[0]+'/'+link[1]+'/'+link[2]+','+link[3]);
       return;
     }
     if(option[0] == 'dppn') {

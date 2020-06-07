@@ -42,7 +42,13 @@ function translateTextx() {
 
   $('#translation').html(x+'<hr/><hr/><hr/>'+y);
 }
-function translateText(alts) {
+
+async function translateTextFromBottomPane(element) {
+  $('#input').val($(element).html());
+  await translateText();
+}
+
+async function translateText(alts) {
   if(/^zzz/.test($('#input').val()))
     return translateTextx();
   var words = [];
@@ -56,7 +62,7 @@ function translateText(alts) {
   $('#input').val(input);
   input=input.split(' ');
   for (var i = 0; i < input.length; i++) {
-    var trans = translateWord(input[i],i);
+    var trans = await translateWord(input[i],i);
     words.push(trans);
   }
   var out = arrangeWords(words,alts);
@@ -572,7 +578,7 @@ function makeWord(word,pl,alts) {
   return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
-function translateWord(word,idx) {
+async function translateWord(word,idx) {
   DPR_G.G_thisWord = word;
   var decls = [];
   var yto = [];
@@ -665,7 +671,7 @@ function translateWord(word,idx) {
         var tloc = DPR_G.P[vword][p].split('/');
         var t1 = tloc[0];
         var t2 = tloc[1];
-        var xmlDoc = DPR_DataLoader.loadPXD(t1);
+        var xmlDoc = await DPR_DataLoader.loadPXD(t1);
 
         var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -765,7 +771,7 @@ function translateWord(word,idx) {
           var tloc = DPR_G.P[temp][p].split('/');
           var t1 = tloc[0];
           var t2 = tloc[1];
-          var xmlDoc = DPR_DataLoader.loadPXD(t1);
+          var xmlDoc = await DPR_DataLoader.loadPXD(t1);
 
           var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
@@ -929,8 +935,8 @@ function stripEnglish(input) {
   return out;
 }
 
-function simpleWordTranslation(word) {
-  words = translateWord(word);
+async function simpleWordTranslation(word) {
+  words = await translateWord(word);
   for(var i in words) {
     words[i] = addPhrasePreps(words[i]);
   }
@@ -958,15 +964,15 @@ function showAltTable(idx) {
   $('#altTable').fadeIn('fast');
 }
 
-function changeAlt(e,i) {
+async function changeAlt(e,i) {
   var alt = e.selectedIndex;
   DPR_G.G_altChoices[i][1] = alt;
-  translateText(DPR_G.G_altChoices);
+  await translateText(DPR_G.G_altChoices);
 }
 
-function insertWordByWord() {
+async function insertWordByWord() {
   var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(DPR_G.G_uniRegExpNSG,'');
-  var words = conjugateWords(input);
+  var words = await conjugateWords(input);
   var out = "";
   for(var i = 0; i < words.length; i++) {
     var options = "";
