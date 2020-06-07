@@ -43,6 +43,7 @@ var DPR_BottomPane = (function () {
     tpSavePad: wrapWithTelemetry(savePad),
 
     trTranslateText: wrapWithTelemetry(translateText),
+    trTranslateTextFromBottomPane: wrapWithTelemetry(translateTextFromBottomPane),
     trInsertWordByWord: wrapWithTelemetry(insertWordByWord),
 
     cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),

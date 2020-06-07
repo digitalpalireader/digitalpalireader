@@ -120,11 +120,11 @@ class NavigationTabViewModel {
     return typeof(Storage) !== "undefined";
   }
 
-  sendSelectedHistoryItem(ctx) {
+  async sendSelectedHistoryItem(ctx) {
     if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
       let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
       let x = selectedHistItem[1].split(',');
-      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
+      x.length > 3 ? await DPRSend.openPlace(x) : await DPRSend.openIndex(x);
     }
   }
 
@@ -167,14 +167,14 @@ class NavigationTabViewModel {
 
 const __navigationTabViewModel = new NavigationTabViewModel();
 
-const initializeNavigationFeature = () => {
+const initializeNavigationFeature = async () => {
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
-      loadXMLindex(place,false);
+      await loadXMLindex(place,false);
       break;
     case 8:
-      loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
+      await loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
       break;
     default:
       console.error('Unsupported place format ', place);

@@ -7,7 +7,7 @@ DPR_G.devDump = 0;
 
 DPR_G.G_stopAnalyzing = 0;
 
-function outputAnalysis(input,frombox) {
+async function outputAnalysis(input,frombox) {
 
   addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
 
@@ -74,7 +74,7 @@ function outputAnalysis(input,frombox) {
     DPR_G.G_outwords.push([input,'0^' + input + '^3']);
   }
 
-  outputDef(0,1,frombox); // perform the function in analysis_output.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
+  await outputDef(0,1,frombox); // perform the function in analysis_output.js; 0 means first match, 1 means this is coming from this js as opposed to the select box,frombox tells the output that we're coming from the input box (don't load hotlinks).
 }
 
 

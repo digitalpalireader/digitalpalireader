@@ -14,7 +14,7 @@ class OtherDialogsViewModel {
     $('#quicklink-dialog-root').modal('show');
   }
 
-  sendQuickLinkFromDialog() {
+  async sendQuickLinkFromDialog() {
     // TODO: Handle this.quicklinkInNewTab().
     var place = this.quicklinkInput();
     var outplace = convertShortLink(place);
@@ -22,7 +22,7 @@ class OtherDialogsViewModel {
       return alertFlash(outplace[1], outplace[2]);
     }
 
-    openPlace(outplace);
+    await openPlace(outplace);
   }
 
   gotoHome() {

@@ -1,4 +1,4 @@
-function eraseBookmark(i) {
+async function eraseBookmark(i) {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
     let data = [];
@@ -7,12 +7,12 @@ function eraseBookmark(i) {
       data.splice(i, 1);
       localStorage.setItem("bookmarksArray", JSON.stringify(data));
       __navigationTabViewModel.updateBookmarks();
-      bookmarkframe(0);
+      await bookmarkframe(0);
     }
   }
 }
 
-function clearBookmarks(gofrom) {
+async function clearBookmarks(gofrom) {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     var answer = confirm('Are you sure you want to erase all of the stored bookmarks?');
     if(!answer) { return; }
@@ -20,7 +20,7 @@ function clearBookmarks(gofrom) {
     if (bookmarksArrayFromStorage) {
       localStorage.removeItem("bookmarksArray");
       __navigationTabViewModel.updateBookmarks();
-      bookmarkframe(0);
+      await bookmarkframe(0);
     }
   }
 }
@@ -39,7 +39,7 @@ function getBookmarks() {
   }
 }
 
-function addBookmark() {
+async function addBookmark() {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
     if (bookmarksArrayFromStorage) {
@@ -50,12 +50,12 @@ function addBookmark() {
       }
       data.push(value);
       localStorage.setItem("bookmarksArray", JSON.stringify(data));
-      __navigationTabViewModel.updateBookmarks();
+      await __navigationTabViewModel.updateBookmarks();
     }
   }
 }
 
-function bookmarkframe(refresh) {
+async function bookmarkframe(refresh) {
   var theHistory = getHistory();
   var hout = '';
   var isclear = '';
@@ -86,7 +86,7 @@ function bookmarkframe(refresh) {
   if (bNodes.length == 0)
   {
     if (refresh === 1) {
-      DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span>'+isClearBm+'</td><td width="1"></td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>[List not yet implemented]</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
@@ -130,7 +130,7 @@ function bookmarkframe(refresh) {
     outputList += '<hr><div class="obutc"><b>' + bNodes.length + ' Bookmark'+(bNodes.length == 1?'':'s')+' Stored</b>';
     outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="eraseBookmarks(\'go\')">erase&nbsp;all</span></div>';
     if (refresh === 1) {
-      DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width=100>&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>'+outputList+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
@@ -140,7 +140,7 @@ function bookmarkframe(refresh) {
 }
 
 
-function bookmarkxd(desc,idx) {
+async function bookmarkxd(desc,idx) {
   var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('description')[0];
   bk.textContent = desc;
@@ -148,10 +148,10 @@ function bookmarkxd(desc,idx) {
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
   writeFile('DPR_Bookmarks', outfile);
-  bookmarkframe();
+  await bookmarkframe();
 }
 
-function bookmarkxn(name,idx) {
+async function bookmarkxn(name,idx) {
   var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('name')[0];
   bk.textContent = name;
@@ -159,7 +159,7 @@ function bookmarkxn(name,idx) {
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
   writeFile('DPR_Bookmarks', outfile);
-  bookmarkframe();
+  await bookmarkframe();
 }
 
 

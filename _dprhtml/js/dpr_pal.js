@@ -33,26 +33,8 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/_dprhtml/');
 
-  const loadedScripts = {};
   DPR_PAL.addJS = files => {
-    files.forEach(file => {
-      const url = /^\//i.test(file) ? file : `${DPR_PAL.contentFolder}js/${file}.js`;
-
-      if (loadedScripts[url.toLowerCase()]) {
-        console.log('>>>> addJS: Already loaded:', url.toLowerCase());
-        return;
-      }
-
-      console.log('>>>> addJS: Loading script:', url);
-      $.ajax({
-        url,
-        dataType: 'script',
-        async: false,
-        cache: true,
-      });
-
-      loadedScripts[url.toLowerCase()] = true;
-    });
+    // NOTE: All files are preloaded. We wont need this once we switch to ES6 modules.
   };
 
   DPR_PAL.showLoadingMarquee = () => {

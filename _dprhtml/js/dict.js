@@ -36,7 +36,7 @@ function parseDictURLParameters(){
   }
 }
 
-function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
+async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
     DPR_G.G_dictEntry = '';
 
@@ -101,10 +101,10 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   switch (DPR_G.G_dictType) {
     case 'PED':
-      pedsearchstart();
+      await pedsearchstart();
       break;
     case 'DPPN':
-      dppnsearchstart();
+      await dppnsearchstart();
       break;
     case 'CPED':
       mlsearchstart();
@@ -128,31 +128,31 @@ function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
       paliRootsearchstart();
       break;
     case 'SKT':
-      sktsearchstart();
+      await sktsearchstart();
       break;
     case 'SKR':
-      sktRootsearchstart();
+      await sktRootsearchstart();
       break;
   }
 }
 
-function pedsearchstart(hard)
+async function pedsearchstart(hard)
 {
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        paliXML(toUni(DPR_G.G_dictEntry));
+        await paliXML(toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    sendPaliXML('dev/'+getstring+',dev');
+    await sendPaliXML('dev/'+getstring+',dev');
     return;
   }
 
   if(/ft/.exec(DPR_G.G_dictOpts)) { // full text search
 
-    pedFullTextSearch(getstring);
+    await pedFullTextSearch(getstring);
     return;
   }
 
@@ -231,7 +231,7 @@ function pedsearchstart(hard)
     }
   }
   else if(finouta.length == 1)
-    paliXML('PED/' + loc+','+uniout);
+    await paliXML('PED/' + loc+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -250,7 +250,7 @@ function pedsearchstart(hard)
   var yut = 0;
 }
 
-function pedFullTextSearch(getstring) {
+async function pedFullTextSearch(getstring) {
 
   getstring = toUni(getstring);
 
@@ -260,7 +260,7 @@ function pedFullTextSearch(getstring) {
 
   for (var i = 0; i < 5; i++) {
 
-    var xmlDoc = DPR_DataLoader.loadPXD(i);
+    var xmlDoc = await DPR_DataLoader.loadPXD(i);
 
     var allp = xmlDoc.getElementsByTagName('d');
 
@@ -321,23 +321,23 @@ function pedFullTextSearch(getstring) {
 
 DPR_G.G_dppn = [];
 
-function dppnsearchstart(hard)
+async function dppnsearchstart(hard)
 {
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        DPPNXML(toUni(DPR_G.G_dictEntry));
+        await DPPNXML(toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    sendDPPNXML('dppn/'+getstring);
+    await sendDPPNXML('dppn/'+getstring);
     return;
   }
 
   if(/\//.exec(getstring)) { // direct link
     var link = toUni(getstring).split(',');
-    DPPNXML(link[0],link[1]);
+    await DPPNXML(link[0],link[1]);
     return;
   }
 
@@ -347,7 +347,7 @@ function dppnsearchstart(hard)
 
   if(/ft/.exec(DPR_G.G_dictOpts)) { // full text search
 
-    dppnFullTextSearch(getstring);
+    await dppnFullTextSearch(getstring);
     return;
   }
 
@@ -415,7 +415,7 @@ function dppnsearchstart(hard)
       if(simlist) {
         listoutf += '<p>Did you mean:</p>';
         for (var i in simlist) {
-          pedt = simlist[i][1];
+          var pedt = simlist[i][1];
           for (var z = 0; z < DPR_G.D[pedt].length; z++) {
 
             var loc = DPR_G.D[pedt][z];
@@ -454,12 +454,12 @@ function dppnsearchstart(hard)
   document.getElementById('odif').scrollTop=0;
   var yut = 0;
 
-  if(DPR_G.G_dictEntry) DPPNXML(toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await DPPNXML(toUni(DPR_G.G_dictEntry));
 
 
 }
 
-function dppnFullTextSearch(getstring) {
+async function dppnFullTextSearch(getstring) {
 
   var finalouta = [];
 
@@ -467,7 +467,7 @@ function dppnFullTextSearch(getstring) {
   getstring = toUni(getstring);
   for (var i = 1; i < 10; i++) {
 
-    var xmlDoc = DPR_DataLoader.loadXDPPN(i);;
+    var xmlDoc = await DPR_DataLoader.loadXDPPN(i);;
 
     var allp = xmlDoc.getElementsByTagName('e');
 
@@ -1330,7 +1330,7 @@ function paliRootsearchstart(hard)
 
 DPR_G.G_sktR = [];
 
-function sktsearchstart()
+async function sktsearchstart()
 {
   if(typeof(DPR_G.skt) == 'undefined') {
     return;
@@ -1418,7 +1418,7 @@ function sktsearchstart()
     }
   }
   else if(finouta.length == 1)
-    sktXML(last+','+uniout);
+    await sktXML(last+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1432,13 +1432,13 @@ function sktsearchstart()
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
+  if(DPR_G.G_dictEntry) await sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
 
   var yut = 0;
 }
 
 
-function sktRootsearchstart(hard)
+async function sktRootsearchstart(hard)
 {
   if(typeof(DPR_G.sktR) == 'undefined') {
     return;
@@ -1446,7 +1446,7 @@ function sktRootsearchstart(hard)
   var getstring = toSkt(toVel(DPR_G.G_dictQuery));
 
   if(getstring == '') {
-      sktRXML(toUni(DPR_G.G_dictEntry));
+      await sktRXML(toUni(DPR_G.G_dictEntry));
       return;
   }
 
@@ -1496,7 +1496,7 @@ function sktRootsearchstart(hard)
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
   }
   else if(finouta.length == 1)
-    sktRXML(0);
+    await sktRXML(0);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1510,7 +1510,7 @@ function sktRootsearchstart(hard)
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) sktRXML(toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await sktRXML(toUni(DPR_G.G_dictEntry));
 
   var yut = 0;
 }

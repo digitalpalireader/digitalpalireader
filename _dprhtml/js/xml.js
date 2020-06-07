@@ -14,7 +14,7 @@ DPR_G.G_thisPara = null;
 
 const emptyFnStr = `(() => {})()`;
 
-function loadXMLSection(querystring,para,place,isPL,scroll,compare)
+async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
@@ -27,7 +27,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   for(var i=1;i<7;i++) {
     if(place[i] == 'x') {
-      return loadXMLindex(place);
+      return await loadXMLindex(place);
     }
     else place[i] = parseInt(place[i]);
   }
@@ -40,7 +40,7 @@ function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var hier=place[7];
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = loadXMLFile(nikbookhier,place[8]?place[8]:0);
+    var xmlDoc = await loadXMLFileAsync(nikbookhier,place[8]?place[8]:0);
 
 
   if(xmlDoc == null) return refreshit();
@@ -567,7 +567,7 @@ function resolveCommands(shortcutFns) {
   $("body").append(scriptStr);
 }
 
-function loadXMLindex(place,compare) {
+async function loadXMLindex(place,compare) {
   __dprViewModel.showMainFeatures();
 
   var isDev = false; // dev tool
@@ -605,7 +605,7 @@ function loadXMLindex(place,compare) {
   var book = bookno+1;
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = loadXMLFile(nikbookhier,xset);
+    var xmlDoc = await loadXMLFileAsync(nikbookhier,xset);
 
   var z = xmlDoc.getElementsByTagName("ha");
   var y = '';
@@ -1148,11 +1148,11 @@ function saveCompilation() {
 }
 
 
-function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
+async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
 
   var nikbookhier = nikaya + (book+1) + hier;
 
-    var xmlDoc = [loadXMLFile(nikbookhier,0),loadXMLFile(nikbookhier,1)];
+    var xmlDoc = [await loadXMLFileAsync(nikbookhier,0), await loadXMLFileAsync(nikbookhier,1)];
 
   var myanA = xmlDoc[0].getElementsByTagName("ha")[0].getElementsByTagName("h0")[meta].getElementsByTagName("h1")[volume].getElementsByTagName("h2")[vagga].getElementsByTagName("h3")[sutta].getElementsByTagName("h4")[section].getElementsByTagName("p");
   var thaiA = xmlDoc[1].getElementsByTagName("ha")[0].getElementsByTagName("h0")[meta].getElementsByTagName("h1")[volume].getElementsByTagName("h2")[vagga].getElementsByTagName("h3")[sutta].getElementsByTagName("h4")[section].getElementsByTagName("p");
