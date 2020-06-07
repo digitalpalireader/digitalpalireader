@@ -35,7 +35,7 @@ async function makeLinkPlace(options,PL) {
     }
     if(option[0] == 'atth') {
       var link = option[1].split(',');
-      getAtthXML(link[0],link[1],link[2]);
+      await getAtthXML(link[0],link[1],link[2]);
       return;
     }
     if (option.length == 1 || option[0] == 'loc') {
@@ -57,9 +57,9 @@ async function makeLinkPlace(options,PL) {
     else if (option[0] == 'compare') compare = option[1];
   }
   reindexPanels();
-  if(index) loadXMLindex(index);
+  if(index) await loadXMLindex(index);
   else if(typeof(outplace) == 'object')
-    loadXMLSection(query,para,outplace,PL,scroll);
+    await loadXMLSection(query,para,outplace,PL,scroll);
 }
 
 function makeLocPlace(inplace) {
@@ -81,9 +81,9 @@ function makeLocPlace(inplace) {
   return outplace;
 }
 
-function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {
+async function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {
   if(count == 1)
-    return loadXMLSection(null,null,[nikaya,book,meta,volume,vagga,sutta,section,hiert],null,null,1);
+    return await loadXMLSection(null,null,[nikaya,book,meta,volume,vagga,sutta,section,hiert],null,null,1);
 
   var tab = DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');
@@ -95,9 +95,9 @@ function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],c
   elem.appendChild(splitter);
   elem.appendChild(node);
 }
-function makeNewPanelIndex([nikaya,book,hiert],count) {
+async function makeNewPanelIndex([nikaya,book,hiert],count) {
   if(count == 1)
-    return loadXMLindex([nikaya,book,hiert],1);
+    return await loadXMLindex([nikaya,book,hiert],1);
 
   var tab = DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser;
   var elem = tab.contentDocument.getElementById('dpr-tops');

@@ -16,6 +16,11 @@ var DPR_DataLoader = (function() {
     return xhrGet(url);
   };
 
+  const loadTipitakaAsync = (id, set) => {
+    var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
+    return xhrGetAsync(url);
+  };
+
   const loadPXD = id => {
     var url = `${DPR_PAL.baseUrl}en/ped/${id}/ped.xml`;
     return xhrGetAsync(url);
@@ -59,6 +64,7 @@ var DPR_DataLoader = (function() {
   };
 
   return {
+    loadTipitakaAsync: wrapExceptionHandler(loadTipitakaAsync),
     loadTipitaka: wrapExceptionHandler(loadTipitaka),
     loadPXD: wrapExceptionHandlerAsync(loadPXD),
     loadXDPPN: wrapExceptionHandlerAsync(loadXDPPN),
@@ -81,6 +87,22 @@ function loadXMLFile(file, setNo) {
   }
 
   return DPR_DataLoader.loadTipitaka(file, set);
+}
+
+function loadXMLFileAsync(file, setNo) {
+  if(typeof(setNo) == 'undefined')
+    setNo = 0;
+
+  switch(setNo) {
+    case 0:
+      var set = 'my';
+      break;
+    case 1:
+      var set = 'th';
+      break;
+  }
+
+  return DPR_DataLoader.loadTipitakaAsync(file, set);
 }
 
 var XML_Load = (function () {

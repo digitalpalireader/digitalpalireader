@@ -67,7 +67,7 @@ async function showBv(rnd) {
   $('#bvb, #paliquote-dialog-content').html('<div style="position:absolute;top:5px;right:5px;">'+rd+dd+'</div>'+'<p><b class="text">'+(rnd?'Random':'Daily')+' Buddha Vacana</b></p>'+today+'<p name="changecolor">' + abv[1].join('</p><p name="changecolor">') + '</p>'+(abv[2] ? '<p>-- '+(abv[3]?'<span class="green pointer" onclick="citation(\''+abv[3].replace(/^[^?]+\?/,'')+'\',event); return false">' + abv[2] +'</span>':abv[2])+'</p>':''));
 }
 
-function citation(cite,event) {
+async function citation(cite,event) {
   var paramsa = cite.split('&');
   var param = [];
   for(var i in paramsa) {
@@ -79,9 +79,9 @@ function citation(cite,event) {
     loc[i] = parseInt(loc[i]);
   }
   if (DPR_PAL.isWeb) {
-    openPlace(loc,param['para'],null,eventSend(event));
+    await openPlace(loc,param['para'],null,eventSend(event));
   } else {
-    mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
+    await mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
   }
 
 }

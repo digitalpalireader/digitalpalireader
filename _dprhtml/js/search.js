@@ -16,7 +16,7 @@ DPR_G.G_searchPart;
 DPR_G.G_searchRX;
 DPR_G.G_searchLink;
 
-function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
+async function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
   DPR_PAL_Search_ShowCancelButton();
   DPR_PAL_Search_ShowProgressBar();
 
@@ -124,14 +124,14 @@ function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,s
 
   switch(DPR_G.G_searchType) {
     case 0:
-      pausesall();
+      await pausesall();
     break;
     case 1:
-      pausetwo();
+      await pausetwo();
     break;
     case 2:
     case 3:
-      pausethree();
+      await pausethree();
     break;
     case 5: // ATI
       atiSearchStart();
@@ -228,7 +228,7 @@ function DPR_PAL_Search_ClearSearchResults() {
   }
 }
 
-function pausesall()
+async function pausesall()
 {
   // make DPR_G.G_searchFileArray
   var which = DPR_G.G_searchType;
@@ -272,10 +272,10 @@ function pausesall()
 
   DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
-  importXMLs(1);
+  await importXMLs(1);
 }
 
-function pausetwo() { // init function for single collection
+async function pausetwo() { // init function for single collection
 
   // make DPR_G.G_searchFileArray
   var which = DPR_G.G_searchType;
@@ -305,10 +305,10 @@ function pausetwo() { // init function for single collection
 
   DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]);
 
-  importXMLs(2);
+  await importXMLs(2);
 }
 
-function pausethree() {
+async function pausethree() {
 
   var which = DPR_G.G_searchType;
   var nikaya = DPR_G.G_searchSet;
@@ -336,7 +336,7 @@ function pausethree() {
 
   DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]+' '+book + (DPR_G.G_searchPart != '1'?' (partial)':''));
 
-  importXMLs(3);
+  await importXMLs(3);
 }
 
 function bounce(sct)
@@ -346,7 +346,7 @@ function bounce(sct)
 }
 
 
-function importXMLs(cnt)
+async function importXMLs(cnt)
 {
   if (DPR_G.stopsearch==1) {
     finishSearch();
@@ -380,7 +380,7 @@ function importXMLs(cnt)
 
     //devO(bookload);
 
-    var xmlDoc = loadXMLFile(DPR_G.bookfile,0);
+    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
 
     createTables(xmlDoc,hiert);
 
@@ -410,7 +410,7 @@ function importXMLs(cnt)
     DPR_G.bookperm = DPR_G.bookat;
     hiert = DPR_G.bookfile.charAt(DPR_G.bookfile.length-1);
 
-    var xmlDoc = loadXMLFile(DPR_G.bookfile,0);
+    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
     createTables(xmlDoc,hiert);
 
     DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
@@ -435,7 +435,7 @@ function importXMLs(cnt)
     DPR_G.bookfile = DPR_G.G_searchFileArray[DPR_G.qz];
     hiert = DPR_G.bookfile.charAt(DPR_G.bookfile.length-1);
 
-    var xmlDoc = loadXMLFile(DPR_G.bookfile,0);
+    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
 
     createTables(xmlDoc,hiert);
 

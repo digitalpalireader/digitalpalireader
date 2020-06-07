@@ -17,12 +17,12 @@ function eraseSearchHistory(gofrom)
     DPRNav.searchHistoryBox();
   }
 }
-function sameSearchHistory(event){
+async function sameSearchHistory(event){
   if(document.getElementById('searches').selectedIndex == 0)
     return;
   var item = document.getElementById('searches').selectedItem.getAttribute('value').split('|');
   var searchType = parseInt(item[0]), searchString = item[1], searchMAT = item[2], searchSet = item[3], searchBook = item[4], searchPart = item[5], searchRX = (item[6]=='true');
-  DPRSend.sendSearch(DPRSend.eventSend(event),searchType, searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
+  await DPRSend.sendSearch(DPRSend.eventSend(event),searchType, searchString,searchMAT,searchSet,searchBook,searchPart,searchRX);
 }
 function simSearchHistory(event){
   if(document.getElementById('searches').selectedIndex == 0)

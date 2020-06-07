@@ -6,7 +6,7 @@ function bookmarkXML() {
   return xmlDoc;
 }
 
-function eraseBookmark(idx) {
+async function eraseBookmark(idx) {
   var xmlDoc = bookmarkXML();
   var thisNode = xmlDoc.getElementsByTagName('bookmark')[idx];
   var answer = confirm('Are you sure you want to erase the bookmark "' + thisNode.getElementsByTagName('name')[0].textContent + '"?')
@@ -20,11 +20,11 @@ function eraseBookmark(idx) {
     if (sidebar) {
       sidebar.DPRNav.bookmarkBox();
     }
-        bookmarkframe(1);
+        await bookmarkframe(1);
   }
 }
 
-function eraseBookmarks(gofrom) {
+async function eraseBookmarks(gofrom) {
   var answer = confirm('Are you sure you want to erase all of the stored bookmarks?')
   if(answer)
   {
@@ -33,11 +33,11 @@ function eraseBookmarks(gofrom) {
     if (sidebar) {
       sidebar.DPRNav.bookmarkBox();
     }
-    bookmarkframe();
+    await bookmarkframe();
   }
 }
 
-function bookmarkframe(refresh) {
+async function bookmarkframe(refresh) {
   var theHistory = getHistory();
   var hout = '';
   var isclear = '';
@@ -67,7 +67,7 @@ function bookmarkframe(refresh) {
   if (bNodes.length == 0)
   {
     if (refresh === 1) {
-      DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width="1">&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
@@ -111,7 +111,7 @@ function bookmarkframe(refresh) {
     outputList += '<hr><div class="obutc"><b>' + bNodes.length + ' Bookmark'+(bNodes.length == 1?'':'s')+' Stored</b>';
     outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="eraseBookmarks(\'go\')">erase&nbsp;all</span></div>';
     if (refresh === 1) {
-      DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
+      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
     $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width=100>&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>'+outputList+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
@@ -121,7 +121,7 @@ function bookmarkframe(refresh) {
 }
 
 
-function bookmarkxd(desc,idx) {
+async function bookmarkxd(desc,idx) {
   var xmlDoc = bookmarkXML();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('description')[0];
   bk.textContent = desc;
@@ -129,10 +129,10 @@ function bookmarkxd(desc,idx) {
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
   writeFile('DPR_Bookmarks', outfile);
-  bookmarkframe();
+  await bookmarkframe();
 }
 
-function bookmarkxn(name,idx) {
+async function bookmarkxn(name,idx) {
   var xmlDoc = bookmarkXML();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('name')[0];
   bk.textContent = name;
@@ -140,7 +140,7 @@ function bookmarkxn(name,idx) {
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
   writeFile('DPR_Bookmarks', outfile);
-  bookmarkframe();
+  await bookmarkframe();
 }
 
 

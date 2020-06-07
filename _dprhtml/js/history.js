@@ -1,6 +1,6 @@
 'use strict';
 
-function removeHistory(i) {
+async function removeHistory(i) {
 
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let navHistoryArrayFromStorage = localStorage.getItem("navHistoryArray");
@@ -10,12 +10,12 @@ function removeHistory(i) {
       data.splice(i, 1);
       localStorage.setItem("navHistoryArray", JSON.stringify(data));
       __navigationTabViewModel.updateHistory();
-      bookmarkframe(0);
+      await bookmarkframe(0);
     }
   }
 }
 
-function clearHistory(cp) {
+async function clearHistory(cp) {
 
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     var answer = confirm('Are you sure you want to erase the history?');
@@ -24,7 +24,7 @@ function clearHistory(cp) {
     if (navHistoryArrayFromStorage) {
       localStorage.removeItem("navHistoryArray");
       __navigationTabViewModel.updateHistory();
-      bookmarkframe(0);
+      await bookmarkframe(0);
     }
   }
 }

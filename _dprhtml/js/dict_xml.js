@@ -444,7 +444,7 @@ async function sktXML(entry,idx,which,add)
 }
 
 
-function getAtthXML(num,type,niklist) { // get atthakatha or tika word
+async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
   appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
     if(type == 'a') {
@@ -472,7 +472,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var book = parseInt(pca[1])+1;
 
         var bookload = nikaya + book + type;
-        var xmlDoc = loadXMLFile(bookload,0);
+        var xmlDoc = await loadXMLFileAsync(bookload,0);
 
     if (nikaya == 'k') {
       var bookno = DPR_G.kudvala[book];
@@ -518,7 +518,7 @@ function getAtthXML(num,type,niklist) { // get atthakatha or tika word
     setCurrentTitle(toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
 }
 
-function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
+async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
   appInsights.trackEvent({ name: 'getTitleXML',  properties: { num,mul,att,tik,niklist, }});
 
   addJS(['titles']);
@@ -546,7 +546,7 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
         var hiert = pca[7];
         var bookload = nikaya + book + hiert;
 
-        var xmlDoc = loadXMLFile(bookload,0);
+        var xmlDoc = await loadXMLFileAsync(bookload,0);
 
 
     if (hiert != 'm' && nikaya == 'k') {
