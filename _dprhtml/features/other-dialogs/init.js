@@ -99,7 +99,7 @@ class OtherDialogsViewModel {
   sendBookmarkFromDialog() {
 
     var loc = __navigationTabViewModel.placeArray();
-    var name = $('#dialog-bookmarkInput').val();
+    var name = this.bookmarkName();
     var desc = "";
     var check = {value: false};                  // default the checkbox to false
 

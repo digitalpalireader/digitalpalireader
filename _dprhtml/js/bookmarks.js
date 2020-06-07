@@ -43,7 +43,7 @@ function addBookmark() {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
     if (bookmarksArrayFromStorage) {
-      let value = `${$('#dialog-bookmarkInput').val()}@${__navigationTabViewModel.locPlace}`;
+      let value = `${__otherDialogsViewModel.bookmarkName()}@${__navigationTabViewModel.sectionPlace}`;
       let data = JSON.parse(bookmarksArrayFromStorage);
       for (var i in data) {
         if (data[i].toString().localeCompare(value) === 0 || i > 99) return;

@@ -17,7 +17,7 @@ const emptyFnStr = `(() => {})()`;
 function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
-  __navigationTabViewModel.locPlace = place;
+  __navigationTabViewModel.sectionPlace = place;
 
   DPR_G.G_thisPara = null;
 
