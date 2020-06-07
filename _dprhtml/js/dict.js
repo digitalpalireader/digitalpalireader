@@ -104,7 +104,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
       pedsearchstart();
       break;
     case 'DPPN':
-      dppnsearchstart();
+      await dppnsearchstart();
       break;
     case 'CPED':
       mlsearchstart();
@@ -321,23 +321,23 @@ function pedFullTextSearch(getstring) {
 
 DPR_G.G_dppn = [];
 
-function dppnsearchstart(hard)
+async function dppnsearchstart(hard)
 {
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        DPPNXML(toUni(DPR_G.G_dictEntry));
+        await DPPNXML(toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    sendDPPNXML('dppn/'+getstring);
+    await sendDPPNXML('dppn/'+getstring);
     return;
   }
 
   if(/\//.exec(getstring)) { // direct link
     var link = toUni(getstring).split(',');
-    DPPNXML(link[0],link[1]);
+    await DPPNXML(link[0],link[1]);
     return;
   }
 
@@ -347,7 +347,7 @@ function dppnsearchstart(hard)
 
   if(/ft/.exec(DPR_G.G_dictOpts)) { // full text search
 
-    dppnFullTextSearch(getstring);
+    await dppnFullTextSearch(getstring);
     return;
   }
 
@@ -415,7 +415,7 @@ function dppnsearchstart(hard)
       if(simlist) {
         listoutf += '<p>Did you mean:</p>';
         for (var i in simlist) {
-          pedt = simlist[i][1];
+          var pedt = simlist[i][1];
           for (var z = 0; z < DPR_G.D[pedt].length; z++) {
 
             var loc = DPR_G.D[pedt][z];
@@ -454,12 +454,12 @@ function dppnsearchstart(hard)
   document.getElementById('odif').scrollTop=0;
   var yut = 0;
 
-  if(DPR_G.G_dictEntry) DPPNXML(toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await DPPNXML(toUni(DPR_G.G_dictEntry));
 
 
 }
 
-function dppnFullTextSearch(getstring) {
+async function dppnFullTextSearch(getstring) {
 
   var finalouta = [];
 
@@ -467,7 +467,7 @@ function dppnFullTextSearch(getstring) {
   getstring = toUni(getstring);
   for (var i = 1; i < 10; i++) {
 
-    var xmlDoc = DPR_DataLoader.loadXDPPN(i);;
+    var xmlDoc = await DPR_DataLoader.loadXDPPN(i);;
 
     var allp = xmlDoc.getElementsByTagName('e');
 

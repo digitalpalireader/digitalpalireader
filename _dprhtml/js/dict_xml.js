@@ -179,7 +179,7 @@ function paliXML(filein,which,add)
 
 }
 
-function toggleDppnTitle(link,id) {
+async function toggleDppnTitle(link,id) {
   appInsights.trackEvent({ name: 'toggleDppnTitle',  properties: { link,id, }});
 
   if(document.getElementById(id).innerHTML.length > 0) {
@@ -188,7 +188,7 @@ function toggleDppnTitle(link,id) {
     return;
   }
 
-  var data = getDppnData(link);
+  var data = await getDppnData(link);
 
   document.getElementById(id).style.display = 'block';
   document.getElementById(id).innerHTML =  data;
@@ -198,7 +198,14 @@ DPR_G.G_dppn = [];
 DPR_G.G_dppnhist = [];
 DPR_G.G_dhmark = 0;
 
-function DPPNXML(filein,which,add)
+async function DPPNXMLHistory(opts) {
+  if(opts.selectedIndex != 0) {
+    DPR_G.G_dhmark = opts.length - 1 - opts.selectedIndex;
+    await DPPNXML(opts.options[opts.selectedIndex].value,1);
+  }
+}
+
+async function DPPNXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'DPPNXML',  properties: { filein,which,add, }});
 
@@ -206,7 +213,7 @@ function DPPNXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    sendDPPNXML(toVel(filein),true);
+    await sendDPPNXML(toVel(filein),true);
     return;
   }
 
@@ -244,7 +251,7 @@ function DPPNXML(filein,which,add)
 
   // xml
 
-  var xmlDoc = DPR_DataLoader.loadXDPPN(tloc[1]);
+  var xmlDoc = await DPR_DataLoader.loadXDPPN(tloc[1]);
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[tloc[2]].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
 
@@ -278,7 +285,7 @@ function DPPNXML(filein,which,add)
   var tout = '';
 
   if (DPR_G.G_dppnhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="if(this.selectedIndex != 0) { DPR_G.G_dhmark=this.length-1-this.selectedIndex; DPPNXML(this.options[this.selectedIndex].value,1);}"><option>- history -</option>';
+    var showing = '<select title="go to history" onchange="DPPNXMLHistory(this)"><option>- history -</option>';
     for (var i = DPR_G.G_dppnhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_dppnhist[i]+'"';
       if (i == DPR_G.G_dhmark) { showing += ' selected'; }
@@ -328,7 +335,7 @@ async function sktRXML(no,add)
 
   if(add == 'right') return;
   if(add == true) {
-    //sendDPPNXML(toVel(filein),true);
+    //await sendDPPNXML(toVel(filein),true);
     //return;
   }
 
@@ -614,10 +621,10 @@ function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
 
 
 
-function getDppnData(link){
+async function getDppnData(link){
   appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
 
-  var xmlDoc = DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
+  var xmlDoc = await DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
 
   var data = ' ' + xmlDoc.getElementsByTagName('e')[parseInt(link.split('/')[1])].textContent.replace(/\[/g, '<').replace(/\]/g, '>').replace(/href/g, 'style="color:blue" href').replace(/\.  /g, '.&nbsp; ');
   return data;

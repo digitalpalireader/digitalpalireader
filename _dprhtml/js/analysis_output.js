@@ -1,6 +1,6 @@
 'use strict';
 
-function outputDef(which,first,frombox)
+async function outputDef(which,first,frombox)
 {
   $('#anfs').html('');
 
@@ -192,7 +192,7 @@ function outputDef(which,first,frombox)
 
   osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(' + DPR_PAL.contentFolder + 'images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
 
-  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+DPR_G.G_outwords[which][0].length+'" id="modify" value="'+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="if(event.keyCode === 13) reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
+  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+DPR_G.G_outwords[which][0].length+'" id="modify" value="'+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="reanalyzeOnEnterKey(event.keyCode,\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
 
   // output
 
@@ -248,7 +248,7 @@ function outputDef(which,first,frombox)
   //alert(DPR_G.G_thisConcise);
   if (hotlink) {
     if (hotlink.search('PED') >= 0) paliXML(hotlink);
-    else DPPNXML(hotlink);
+    else await DPPNXML(hotlink);
     //if(DPR_G.moveat == 2) { moveFrame(1); }
   }
   else clearDivs('dif');
@@ -269,7 +269,13 @@ function conciseChange(value) {
   //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
 }
 
-function reanalyze(word,cancel) {
+async function reanalyzeOnEnterKey(keyCode, word,cancel) {
+  if(keyCode === 13) {
+    await reanalyze(word,cancel);
+  }
+}
+
+async function reanalyze(word,cancel) {
 
   $('#data-table').show();
   $('#modify-box').hide();
@@ -280,5 +286,5 @@ function reanalyze(word,cancel) {
   }
 
   if($('#modify').val() != word)
-    outputAnalysis($('#modify').val(),null);
+    await outputAnalysis($('#modify').val(),null);
 }

@@ -1,11 +1,11 @@
 'use strict';
 
-function getLinkPlace() { // permalinks
+async function getLinkPlace() { // permalinks
 
   var options = document.location.href.split('?')[1].split('#')[0];
-  makeLinkPlace(options,true);
+  await makeLinkPlace(options,true);
 }
-function makeLinkPlace(options,PL) {
+async function makeLinkPlace(options,PL) {
   options = options.split('&');
 
   var place,index,para,query,scroll,compare,outplace;
@@ -30,7 +30,7 @@ function makeLinkPlace(options,PL) {
     }
     if(option[0] == 'dppn') {
       var link = option[1].split(',');
-      DPPNXML(link[0]+'/'+link[1]+'/'+link[2]+','+link[3]);
+      await DPPNXML(link[0]+'/'+link[1]+'/'+link[2]+','+link[3]);
       return;
     }
     if(option[0] == 'atth') {

@@ -409,7 +409,7 @@ var DPRSend = {
   },
 
 
-  sendAnalysisToOutput: function (input, frombox, add) {
+  sendAnalysisToOutput: async function (input, frombox, add) {
     appInsights.trackEvent({ name: 'Sidebar - DPR Analysis',  properties: { input, frombox, add, }});
 
     if (add == 'right') return;
@@ -418,7 +418,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        thisTabBrowser.contentWindow.outputAnalysis(input, frombox);
+        await thisTabBrowser.contentWindow.outputAnalysis(input, frombox);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -429,7 +429,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        oldTabBrowser.contentWindow.outputAnalysis(input, frombox);
+        await oldTabBrowser.contentWindow.outputAnalysis(input, frombox);
       }
     }
     else {
@@ -477,7 +477,7 @@ var DPRSend = {
     if (which == 'DPR') {
       var text = toVel(getstring);
 
-      this.sendAnalysisToOutput(text, (hard ? 1 : 2), add);
+      await this.sendAnalysisToOutput(text, (hard ? 1 : 2), add);
     }
     else {
       if (!add) { // reuse old tab

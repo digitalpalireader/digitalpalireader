@@ -204,11 +204,11 @@ function sendPaliXML(link,add) {
   }
 }
 
-function sendDPPNXML(link,add) {
+async function sendDPPNXML(link,add) {
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
-      DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.DPPNXML(link);
+      await DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab).contentWindow.DPPNXML(link);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -219,7 +219,7 @@ function sendDPPNXML(link,add) {
     }
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
-      DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab).contentWindow.DPPNXML(link);
+      await DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab).contentWindow.DPPNXML(link);
     }
   }
   else if(add!='right') {
@@ -301,7 +301,7 @@ function sendUpdateBookmarks() {
 
 DPR_G.G_lastcolour = 0;
 
-function sendAnalysisToOutput(input, divclicked, frombox, add){
+async function sendAnalysisToOutput(input, divclicked, frombox, add){
   appInsights.trackEvent({ name: 'Reading - DPR Analysis',  properties: { input, divclicked, frombox, add, }});
 
   if(add == 'right') return;
@@ -334,7 +334,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -345,7 +345,7 @@ function sendAnalysisToOutput(input, divclicked, frombox, add){
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
     }
   }
   else {

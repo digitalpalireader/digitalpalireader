@@ -23,7 +23,7 @@ var DPR_DataLoader = (function() {
 
   const loadXDPPN = id => {
     var url = `${DPR_PAL.baseUrl}en/dppn/${id}.xml`;
-    return xhrGet(url);
+    return xhrGetAsync(url);
   };
 
   const loadSARoots = id => {
@@ -61,7 +61,7 @@ var DPR_DataLoader = (function() {
   return {
     loadTipitaka: wrapExceptionHandler(loadTipitaka),
     loadPXD: wrapExceptionHandler(loadPXD),
-    loadXDPPN: wrapExceptionHandler(loadXDPPN),
+    loadXDPPN: wrapExceptionHandlerAsync(loadXDPPN),
     loadSARoots: wrapExceptionHandlerAsync(loadSARoots),
     loadSADictionary: wrapExceptionHandlerAsync(loadSADictionary),
   };
