@@ -1,34 +1,29 @@
 'use strict';
 
 var DPR_DataLoader = (function() {
-  const xhrGetAsync = url => {
-    var xmlDoc = XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
-    return xmlDoc;
-  }
-
   const loadTipitakaAsync = (id, set) => {
     var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
-    return xhrGetAsync(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadPXD = id => {
     var url = `${DPR_PAL.baseUrl}en/ped/${id}/ped.xml`;
-    return xhrGetAsync(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadXDPPN = id => {
     var url = `${DPR_PAL.baseUrl}en/dppn/${id}.xml`;
-    return xhrGetAsync(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSARoots = id => {
     var url = `${DPR_PAL.baseUrl}sa/roots/${id}.xml`;
-    return xhrGetAsync(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSADictionary = id => {
     var url = `${DPR_PAL.baseUrl}sa/dict/${id}.xml`;
-    return xhrGetAsync(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const wrapExceptionHandler = function(fn) {
