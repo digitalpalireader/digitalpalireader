@@ -10,108 +10,110 @@ async function outputDef(which,first,frombox)
 
   var conjWord = [] // word to pass to conjugate
 
-  if (DPR_G.G_outwords.length > 1 && first) {
+  if (first) {
+    $('#anfright').html("");
+    if(DPR_G.G_outwords.length > 1){
+      $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
+      // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
+      for(var i = 0; i < DPR_G.G_outwords.length; i++)
+      {
+        DPR_G.G_outwords[i].push(DPR_G.G_shortdefpost[i]);
+      }
 
-    $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
-    // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
-    for(var i = 0; i < DPR_G.G_outwords.length; i++)
-    {
-      DPR_G.G_outwords[i].push(DPR_G.G_shortdefpost[i]);
-    }
+      DPR_G.G_outwords.sort(function (a, b) {
 
-    DPR_G.G_outwords.sort(function (a, b) {
-
-      var af = 0;
-      var a1 = a[1].split('@');
-      for(var i = 0; i < a1.length; i++){
-        if(/\//.exec(a1[i].split('^')[0]) && toUni(a[0].split('-')[i]).length > toUni(a[0].replace('-','')).length/3){ // contains PED match, and is longer than 4
-          af++;
+        var af = 0;
+        var a1 = a[1].split('@');
+        for(var i = 0; i < a1.length; i++){
+          if(/\//.exec(a1[i].split('^')[0]) && toUni(a[0].split('-')[i]).length > toUni(a[0].replace('-','')).length/3){ // contains PED match, and is longer than 4
+            af++;
+          }
+          if(i > 0 && toUni(a[0].split('-')[i]).length < 4 && toUni(a[0].split('-')[i]).length > 1){
+            af--;
+          } // penalize small middle
         }
-        if(i > 0 && toUni(a[0].split('-')[i]).length < 4 && toUni(a[0].split('-')[i]).length > 1){
-          af--;
-        } // penalize small middle
-      }
 
-      var bf = 0;
-      var b1 = b[1].split('@');
-      for(var i = 0; i < b1.length; i++){
-        if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){
-          bf++;
+        var bf = 0;
+        var b1 = b[1].split('@');
+        for(var i = 0; i < b1.length; i++){
+          if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){
+            bf++;
+          }
+          if(i > 0 && toUni(b[0].split('-')[i]).length < 4 && toUni(b[0].split('-')[i]).length > 1){
+            bf--;
+          } // penalize small middle
         }
-        if(i > 0 && toUni(b[0].split('-')[i]).length < 4 && toUni(b[0].split('-')[i]).length > 1){
-          bf--;
-        } // penalize small middle
-      }
 
-      if (af/a1.length > bf/b1.length) {
-        return -1;
-      }
-      if (af/a1.length < bf/b1.length) {
-        return 1;
-      }
-
-      if (a1.length < b1.length) {
-        return -1;
-      }
-      if (a1.length > b1.length) {
-        return 1;
-      }
-
-      var al = a[0].split('-');
-      var ac = 0;
-      var ae = 0;
-      for(var i = 0; i < al.length; i++){
-        ac += al[i].length ** 2;
-        ae += al[i].length * i;
-      }
-      var bl = b[0].split('-');
-      var bc = 0;
-      var be = 0;
-      for(var i = 0; i < bl.length; i++){
-        bc += bl[i].length ** 2;
-        be += bl[i].length * i;
-      }
-      if (ac > bc) {
+        if (af/a1.length > bf/b1.length) {
           return -1;
-      }
-      if (bc > ac) {
+        }
+        if (af/a1.length < bf/b1.length) {
           return 1;
-      }
-      if (ae > be) {
-          return 1;
-      }
-      if (be > ae) {
+        }
+
+        if (a1.length < b1.length) {
           return -1;
+        }
+        if (a1.length > b1.length) {
+          return 1;
+        }
+
+        var al = a[0].split('-');
+        var ac = 0;
+        var ae = 0;
+        for(var i = 0; i < al.length; i++){
+          ac += al[i].length ** 2;
+          ae += al[i].length * i;
+        }
+        var bl = b[0].split('-');
+        var bc = 0;
+        var be = 0;
+        for(var i = 0; i < bl.length; i++){
+          bc += bl[i].length ** 2;
+          be += bl[i].length * i;
+        }
+        if (ac > bc) {
+            return -1;
+        }
+        if (bc > ac) {
+            return 1;
+        }
+        if (ae > be) {
+            return 1;
+        }
+        if (be > ae) {
+            return -1;
+        }
+        return 0;
+
+      });
+
+      for(var i = 0; i < DPR_G.G_outwords.length; i++)
+      {
+        DPR_G.G_shortdefpost[i] = DPR_G.G_outwords[i][DPR_G.G_outwords[i].length-1];
       }
-      return 0;
-
-    });
-
-    for(var i = 0; i < DPR_G.G_outwords.length; i++)
-    {
-      DPR_G.G_shortdefpost[i] = DPR_G.G_outwords[i][DPR_G.G_outwords[i].length-1];
-    }
 
 
-    var sorta = [];
+      var sorta = [];
 
-    for (var b = 0; b < DPR_G.G_outwords.length; b++)
-    {
-      sorta.push(DPR_G.G_outwords[b][0]+'$'+DPR_G.G_outwords[b][1]+'!'+DPR_G.G_shortdefpost[b]);
-    }
+      for (var b = 0; b < DPR_G.G_outwords.length; b++)
+      {
+        sorta.push(DPR_G.G_outwords[b][0]+'$'+DPR_G.G_outwords[b][1]+'!'+DPR_G.G_shortdefpost[b]);
+      }
 
-    for (var b = 0; b < sorta.length; b++)
-    {
-      DPR_G.G_outwords[b] = sorta[b].split('!')[0].split('$');
-      DPR_G.G_shortdefpost[b] = sorta[b].split('!')[1]
-    }
+      for (var b = 0; b < sorta.length; b++)
+      {
+        DPR_G.G_outwords[b] = sorta[b].split('!')[0].split('$');
+        DPR_G.G_shortdefpost[b] = sorta[b].split('!')[1]
+      }
 
-    // get the word names
+      // get the word names
 
-    for (var b = 0; b < DPR_G.G_outwords.length; b++)
-    {
-      var outword = DPR_G.G_outwords[b][0];
-      document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>';
+      for (var b = 0; b < DPR_G.G_outwords.length; b++)
+      {
+        var outword = DPR_G.G_outwords[b][0];
+        document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>';
+      }
     }
   }
 
