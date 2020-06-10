@@ -9,7 +9,6 @@ async function outputDef(which,first,frombox)
   var hotlink;
 
   var conjWord = [] // word to pass to conjugate
-
   if (first) {
     $('#anfright').html("");
     if(DPR_G.G_outwords.length > 1){
@@ -207,6 +206,11 @@ async function outputDef(which,first,frombox)
 
   if (DPR_G.G_shortdefpost[which]) {
     thisconcise = DPR_G.G_shortdefpost[which].replace(/\$\$+/,'$').replace(/^\$/,'').replace(/\$$/,'').split('$');
+
+    var seen = {};
+    thisconcise = thisconcise.filter(function(item) {
+        return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    });
 
     for (var x = 0; x < thisconcise.length; x++)
     {
