@@ -120,14 +120,14 @@ DPR_G.G_hshort['t'] = 'tik';
 
 DPR_G.G_nikLongName = new Array();
 DPR_G.G_nikLongName['v'] = "Vin";
-DPR_G.G_nikLongName['d'] = "D.N.";
-DPR_G.G_nikLongName['m'] = "M.N.";
-DPR_G.G_nikLongName['s'] = "S.N.";
-DPR_G.G_nikLongName['a'] = "A.N.";
-DPR_G.G_nikLongName['k'] = "K.N.";
+DPR_G.G_nikLongName['d'] = "DN";
+DPR_G.G_nikLongName['m'] = "MN";
+DPR_G.G_nikLongName['s'] = "SN";
+DPR_G.G_nikLongName['a'] = "AN";
+DPR_G.G_nikLongName['k'] = "KN";
 DPR_G.G_nikLongName['y'] = "Abhi";
 DPR_G.G_nikLongName['x'] = "Visuddhi";
-DPR_G.G_nikLongName['b'] = "Abhi.S";
+DPR_G.G_nikLongName['b'] = "AbhiS";
 DPR_G.G_nikLongName['g'] = "Byā";
 DPR_G.G_nikLongName['n'] = "Añña";
 
@@ -819,8 +819,7 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 
 function convertShortLink(place) {
 
-  place = place.toLowerCase();
-
+  place = place.toLowerCase().replace(/([a-z])\./g,"$1");
   if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
 
   if(/^dhpv[ .]*[0-9]+$/.test(place)) { // dhp verses

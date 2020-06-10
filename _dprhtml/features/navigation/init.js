@@ -60,7 +60,13 @@ class NavigationTabViewModel {
 
     this.places = ko.observableArray();
 
+    this.navHistoryVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
+    this.navHistoryArray = ko.observableArray();
+    this.selectedHistoryItem = ko.observable(),
+    this.historyInfo = ko.computed(function() { return this.computeHistoryInfo(); }, this);
+
     this.initializeSets();
+    this.updateHistory();
   }
 
   initializeSets() {
@@ -102,18 +108,44 @@ class NavigationTabViewModel {
       ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
       : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
   }
+
+  isStorageSupportedByBrowser() {
+    return typeof(Storage) !== "undefined";
+  }
+
+  async sendSelectedHistoryItem(ctx) {
+    if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
+      let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
+      let x = selectedHistItem[1].split(',');
+      x.length > 3 ? await DPRSend.openPlace(x) : await DPRSend.openIndex(x);
+    }
+  }
+
+  computeHistoryInfo() {
+    return { text: '\u21D2', title: 'Open bookmarks and history window',
+      onmouseup: 'bookmarkframe(1)'}
+  }
+
+  updateHistory() {
+    if (this.isStorageSupportedByBrowser) {
+      if (!localStorage.getItem("navHistoryArray")) {
+        localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]))
+      }
+      this.navHistoryArray(JSON.parse(localStorage.getItem("navHistoryArray")));
+    }
+  }
 }
 
 const __navigationTabViewModel = new NavigationTabViewModel();
 
-const initializeNavigationFeature = () => {
+const initializeNavigationFeature = async () => {
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
-      loadXMLindex(place,false);
+      await loadXMLindex(place,false);
       break;
     case 8:
-      loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
+      await loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
       break;
     default:
       console.error('Unsupported place format ', place);

@@ -1,34 +1,29 @@
 'use strict';
 
 var DPR_DataLoader = (function() {
-  const xhrGet = url => {
-    var xmlDoc = XML_Load.xhrGet({ url }, xhr => xhr.responseXML.documentElement);
-    return xmlDoc;
-  }
-
-  const loadTipitaka = (id, set) => {
+  const loadTipitakaAsync = (id, set) => {
     var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
-    return xhrGet(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadPXD = id => {
     var url = `${DPR_PAL.baseUrl}en/ped/${id}/ped.xml`;
-    return xhrGet(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadXDPPN = id => {
     var url = `${DPR_PAL.baseUrl}en/dppn/${id}.xml`;
-    return xhrGet(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSARoots = id => {
     var url = `${DPR_PAL.baseUrl}sa/roots/${id}.xml`;
-    return xhrGet(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSADictionary = id => {
     var url = `${DPR_PAL.baseUrl}sa/dict/${id}.xml`;
-    return xhrGet(url);
+    return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const wrapExceptionHandler = function(fn) {
@@ -42,16 +37,27 @@ var DPR_DataLoader = (function() {
     };
   };
 
+  const wrapExceptionHandlerAsync = function(fn) {
+    return async function() {
+      try {
+        return await fn.apply(this, arguments);
+      } catch (e) {
+        DPR_Chrome.showErrorToast(`Data files for [${[...arguments].join(',')}] not found. Ensure you have the latest components installed. More info: ${e.message}`);
+        return null;
+      }
+    };
+  };
+
   return {
-    loadTipitaka: wrapExceptionHandler(loadTipitaka),
-    loadPXD: wrapExceptionHandler(loadPXD),
-    loadXDPPN: wrapExceptionHandler(loadXDPPN),
-    loadSARoots: wrapExceptionHandler(loadSARoots),
-    loadSADictionary: wrapExceptionHandler(loadSADictionary),
+    loadTipitakaAsync: wrapExceptionHandler(loadTipitakaAsync),
+    loadPXD: wrapExceptionHandlerAsync(loadPXD),
+    loadXDPPN: wrapExceptionHandlerAsync(loadXDPPN),
+    loadSARoots: wrapExceptionHandlerAsync(loadSARoots),
+    loadSADictionary: wrapExceptionHandlerAsync(loadSADictionary),
   };
 })();
 
-function loadXMLFile(file, setNo) {
+function loadXMLFileAsync(file, setNo) {
   if(typeof(setNo) == 'undefined')
     setNo = 0;
 
@@ -64,7 +70,7 @@ function loadXMLFile(file, setNo) {
       break;
   }
 
-  return DPR_DataLoader.loadTipitaka(file, set);
+  return DPR_DataLoader.loadTipitakaAsync(file, set);
 }
 
 var XML_Load = (function () {
@@ -96,14 +102,7 @@ var XML_Load = (function () {
     });
   };
 
-  const xhrGet = (request, procFn) => {
-    let xhr = createXhr(request, false);
-    xhr.send(request.body);
-    return procFn(xhr);
-  }
-
   return {
     xhrGetAsync: xhrGetAsync,
-    xhrGet: xhrGet,
   };
 })();

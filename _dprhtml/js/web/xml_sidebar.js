@@ -11,7 +11,7 @@ var DPRXML = {
     var nikaya = __navigationTabViewModel.set();
     var book = __navigationTabViewModel.book();
     var nikbookhier = nikaya + book + DPR_G.G_hier;
-    var xmlDoc = loadXMLFile(nikbookhier, 0);
+    var xmlDoc = await loadXMLFileAsync(nikbookhier, 0);
 
     var meta = (depth > 0  ? __navigationTabViewModel.meta() : 0);
     var volume = (depth > 1 ? __navigationTabViewModel.volume() : 0);
@@ -73,7 +73,12 @@ var DPRXML = {
     selectList(entries);
   },
 
-  updateSearchHierarchy: function (depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+  updateSearchHierarchyAfterSetSearchBookList: async function (depth) {
+    await DPRNav.setSearchBookList();
+    await updateSearchHierarchy(depth);
+  },
+
+  updateSearchHierarchy: async function (depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
     document.activeElement.blur();
 
     var nikaya = $('#tsoSETm').val();
@@ -81,7 +86,7 @@ var DPRXML = {
     var hiert = $('#tsoMAT2m').val();
     var nikbookhier = nikaya + book + hiert;
 
-    var xmlDoc = loadXMLFile(nikbookhier, 0);
+    var xmlDoc = await loadXMLFileAsync(nikbookhier, 0);
 
     var nik = nikaya;
 

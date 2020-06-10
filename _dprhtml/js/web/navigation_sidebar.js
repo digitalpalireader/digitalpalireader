@@ -63,7 +63,7 @@ var DPRNav = {
     else { return false };
   },
 
-  setSearchBookList: function () {
+  setSearchBookList: async function () {
     const nik = $('#tsoSETm').val();
 
     const titles = DPR_G.nikvoladi[nik] ? DPR_G.nikvoladi[nik] : DPR_G.nikvoladi[nik + $('#tsoMAT2m').val()];
@@ -89,7 +89,7 @@ var DPRNav = {
         __searchTabViewModel.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
       }
     }
-    DPRXML.updateSearchHierarchy(0);
+    await DPRXML.updateSearchHierarchy(0);
   },
 
   switchhier: function (htmp) {
@@ -312,18 +312,18 @@ var DPRNav = {
     __navigationTabViewModel.section(section);
   },
 
-  searchBook: function (nik, book, hiert) {
+  searchBook: async function (nik, book, hiert) {
     appInsights.trackEvent({ name: 'Search book',  properties: { nik, book, hiert }});
 
     DPR_Chrome.openDPRSidebar();
     $("#searchTab").click();
     document.getElementById('tipType').selectedIndex = 2;
-    DPROpts.tipitakaOptions();
+    await DPROpts.tipitakaOptions();
     document.getElementById('tsoSETm').selectedIndex = DPR_G.G_nikToNumber[nik];
-    this.setSearchBookList();
+    await this.setSearchBookList();
 
     document.getElementById('tsoBOOKm').selectedIndex = book - 1;
-    DPRXML.updateSearchHierarchy(0);
+    await DPRXML.updateSearchHierarchy(0);
     document.getElementById('tsoMATm').checked= (hiert == 'm');
     document.getElementById('tsoMATa').checked= (hiert == 'a');
     document.getElementById('tsoMATt').checked= (hiert == 't');

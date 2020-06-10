@@ -43,7 +43,7 @@ async function mainInitialize() {
   }
 
   initMainPane();
-  checkAnalysis();
+  await checkAnalysis();
 }
 
 function installGlobalHandlers() {
@@ -57,8 +57,8 @@ function installGlobalHandlers() {
 
 const loadFeatureAsync = async (name, initFn) => {
   await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
-  initFn();
   __dprViewModel.showMainFeatures();
+  await initFn();
   initFeedbackFormParameters();
 }
 
@@ -128,11 +128,11 @@ const initFeatureTabs = () => {
   });
 }
 
-const checkAnalysis = () => {
+const checkAnalysis = async () => {
   const location = document.location.href;
   if(location.indexOf('analysis')>-1) {
     const x = new URL(location);
-    outputAnalysis(x.searchParams.get("analysis"), x.searchParams.get("frombox"));
+    await outputAnalysis(x.searchParams.get("analysis"), x.searchParams.get("frombox"));
   }
 } //TODO: handle most parameters in a single function after Beta.
 

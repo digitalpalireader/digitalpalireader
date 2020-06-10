@@ -39,12 +39,13 @@ var DPR_BottomPane = (function () {
 
     tpToVel: wrapWithTelemetry(toVel),
     tpToUni: wrapWithTelemetry(toUni),
-    tpSendTextPad: wrapWithTelemetry(sendTextPad),
+    tpSendTextPad: wrapWithTelemetry(DPR_send_bottom_mod.sendTextPad),
     tpSavePad: wrapWithTelemetry(savePad),
 
     trTranslateText: wrapWithTelemetry(translateText),
+    trTranslateTextFromBottomPane: wrapWithTelemetry(translateTextFromBottomPane),
     trInsertWordByWord: wrapWithTelemetry(insertWordByWord),
 
-    cjInsertConj: wrapWithTelemetry(insertConj),
+    cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),
   };
 })();

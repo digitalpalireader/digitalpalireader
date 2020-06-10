@@ -23,7 +23,7 @@
         <div class="form-group col mb-1">
           <div class="navigation-hierarchy-layout">
             <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
-              onkeydown="if(event.keyCode==13) DPRSend.sendQuickLink(DPRSend.eventSend(event)); event.keyCode=0;"></input>
+              onkeydown="DPRSend.sendQuickLinkOnEnterKey(event, DPRSend.eventSend(event));"></input>
             <button id="nav-quicklinks-button" type="button" class="btn btn-light m-0 p-1" title="Open quick link..." onmouseup="DPRSend.sendQuickLink(DPRSend.eventSend(event));">
               &rArr;
             </button>
@@ -108,6 +108,27 @@
             <select id="nav-section" class="custom-select navselect" data-bind="visible: visible, options: navSection, optionsText: 'label', optionsValue: 'value', value: section, valueAllowUnset: true">
             </select>
             <button id="nav-section-button" type="button" class="btn btn-light m-0 p-1" data-bind="visible: visible, text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }"></button>
+            <!--/ko-->
+          </div>
+        </div>
+      </div>
+      <div class="form-row" data-bind="visible: navHistoryVisible">
+        <div class="form-group col mb-1">
+          <label class="small-bold-font"></label>
+          <div id="navigation-history-bookmarks" class="navigation-hierarchy-layout">
+
+            <!--ko let: { info: historyInfo() || {} }-->
+            <select id="nav-history" class="custom-select navselect"
+              data-bind="options: navHistoryArray,
+                optionsText: function(item) {
+                  return item.indexOf('@') === -1 ? item : item.substring(0, item.indexOf('@'));
+                },
+                value: selectedHistoryItem,
+                event: {change: sendSelectedHistoryItem}">
+            </select>
+            <button id="nav-history-button" type="button" class="btn btn-light m-0 p-1"
+              data-bind="text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }">
+            </button>
             <!--/ko-->
           </div>
         </div>

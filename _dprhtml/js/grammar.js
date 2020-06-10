@@ -499,22 +499,22 @@ function conjugateIrrVerb(word,which) {
 
 }
 
-function conjugateWord(word,form) {
+async function conjugateWord(word,form) {
   if(!word && !form)
     return;
   if(DPR_G.yt[toVel(word)])
     return conjugate(word,null,form);
 
   if(form)
-    var oneConj = formatConjugation(form);
+    var oneConj = await formatConjugation(form);
   else
-    var oneConj = formatConjugation(word);
+    var oneConj = await formatConjugation(word);
 
   return oneConj?oneConj:null;
 }
 
-function formatConjugation(word) {
-  var oneConj = getConjugation(word);
+async function formatConjugation(word) {
+  var oneConj = await getConjugation(word);
   if(oneConj !== null)
   {
     var out = "";
@@ -531,8 +531,8 @@ function formatConjugation(word) {
 
 //[trans,type,deca,word,meta];
 
-function getConjugation(form,bare) {
-  var word = translateWord(form,0);
+async function getConjugation(form,bare) {
+  var word = await translateWord(form,0);
   var out = [];
   for(var i = 0; i < word.length; i++) {
     var grammar = makeGrammarTerms(word[i]);
@@ -577,11 +577,11 @@ DPR_G.G_tenses = ['','present','imperative','optative','future','past','causativ
 
 // used in word-by-word translation
 
-function conjugateWords(input) {
+async function conjugateWords(input) {
   var ina = input.split(' ');
   var outa = [];
   for(var i = 0; i < ina.length; i++) {
-    var word = getConjugation(ina[i],true);
+    var word = await getConjugation(ina[i],true);
     if(typeof(word[0]) != 'undefined')
       word[0].push(ina[i]); // add form
     else

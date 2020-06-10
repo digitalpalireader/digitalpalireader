@@ -6,8 +6,8 @@ class SearchTabViewModel{
     this.searchString = ko.observable('');
     this.searchString.subscribe(x => this.searchString(this.searchRegex() ? toUniRegEx(x) : toUni(x)), this);
     this.searchM = ko.observable(true);
-    this.searchA = ko.observable(true);
-    this.searchT = ko.observable(true);
+    this.searchA = ko.observable(false);
+    this.searchT = ko.observable(false);
     this.searchBookString = ko.observable('');
     this.searchRegex = ko.observable(false);
 
@@ -161,16 +161,16 @@ const setSearchParams = () => {
   });
 }
 
-const initializeSearchSidebarTab = () => {
+const initializeSearchSidebarTab = async () => {
   const sidebarTab = $(`#${searchFeatureName}TabContent`)[0];
   setSearchParams();
   ko.applyBindings(__searchTabViewModel, sidebarTab);
-  DPROpts.tipitakaOptions();
-  DPRNav.setSearchBookList();
+  await DPROpts.tipitakaOptions();
+  await DPRNav.setSearchBookList();
   DPR_PAL.enablePopover('#isearchInfo', 'click', 'bottom');
 }
 
-const initializeSearchFeature = () => {
+const initializeSearchFeature = async () => {
   getconfig();
-  searchTipitaka(DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
+  await searchTipitaka(DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
 }
