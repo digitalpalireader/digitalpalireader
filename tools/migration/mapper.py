@@ -63,7 +63,9 @@ findDeclrandCalls()
 
 # step4
 
-listOfFunc2Exp = [a for a in funcToFile if len(funcToFile[a]) > 1]
+#listOfFunc2Exp = [a for a in funcToFile if len(funcToFile[a]) > 1]
+
+listOfFunc2Exp = [a for a in funcToFile if len(funcToFile[a])]
 
 DeclareSites = {a: b for (a, b) in funcXfileDeclr.items()
                 if a in listOfFunc2Exp}
