@@ -6,12 +6,14 @@
 
 3. Get call sites for each functions in the above map . Output = ` callsite:Map <funcName , (file x line)>`
 
-4. From `callsite:Map` leave out values of key that are declr lines . Output = `callsite:Map <funcName , (file x line)> `
+4. From `callsite:Map` leave out keys that have no values
 
-5. Create `Func2Exp4File:Map<filename:(funcObject)>` (contains functions to expose by file and every calledsite of each function).
+5. From `callsite:Map` leave out values of key that are declr lines . Output = `callsite:Map <funcName , (file x line)> `
 
-6. Get files from `Func2Exp4File:Map<filename:(funcObject)>` → For each file , add the ` var modname = (function return {...})()` , get callSite for each funcName and for each , replace with DPR_filename_mod.funcName.
+6. Create `Func2Exp4File:Map<filename:(funcObject)>` (contains functions to expose by file and every calledsite of each function).
 
-7. Check Modification in declared file.
+7. Get files from `Func2Exp4File:Map<filename:(funcObject)>` → For each file , add the ` var modname = (function return {...})()` , get callSite for each funcName and for each , replace with DPR_filename_mod.funcName.
 
-8. Add DPR_filename_mod to whitelist for each file modified.
+8. Check Modification in declared file.
+
+9. Add DPR_filename_mod to whitelist for each file modified.
