@@ -1,11 +1,19 @@
 import json
 import re
-bg = 0
-e = 0
+bg = 1
+e = 2
 file2Exp4file = json.load(open("file2Exp4File.json"))
 for DeclfileObj in file2Exp4file[bg:e]:
     print(DeclfileObj[0])
     fModName = "DPR_"+DeclfileObj[0].split("/")[-1].split(".")[0]+"_mod"
+    f = (open(DeclfileObj[0], 'r+'))
+    ftext = f.readlines()
+    ftext.append("\nvar "+fModName+" = ( function () {\nreturn {\n")
+    [ftext.append("{0} : {0}".format(x["name"])) for x in DeclfileObj[1]]
+    ftext.append("\n}\n})()\n")
+    f.seek(0)
+    f.writelines(ftext)
+    f.close
     for funcs in (DeclfileObj[1]):
         print("\nfunction - ", funcs['name'], "\n")
         for callFile, lnNo in (funcs['Called@'].items()):
