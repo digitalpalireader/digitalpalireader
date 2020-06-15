@@ -1,19 +1,37 @@
-###Steps to Convert Files to Modules
+# Steps to Convert Files to Modules
 
-1. From keys of the Window Object , get list of all DPR global functions.
+1. At the homepage,  open console window and run `copy(getFuncList())` on the console window and paste it into cleared `tools/migration/funcInfo.json`.
 
-2.  Get func decl sites using regex + .toString() first line OR errors . Output = `declSite:Map<funcName , (file x line)>`
+2. `cd` into `tools/migration/` folder and run `python3 mapper.py`.
 
-3. Get call sites for each functions in the above map . Output = ` callsite:Map <funcName , (file x line)>`
+3. Once the script finishes execution, edit parameter values `beginningIndex` and `endIndex` in `modifier.py` to choose the range of files in `functionsToExposeForFile.json` that need to be converted to modules. Run `python3 modifier.py`.
 
-4. From `callsite:Map` leave out keys that have no values
+4. Check modifications in each file with function declarations (filenames printed to the terminal).
 
-5. From `callsite:Map` leave out values of key that are declr lines . Output = `callsite:Map <funcName , (file x line)> `
+5. Add newly added modules to whitelist.
 
-6. Create `Func2Exp4File:Map<filename:(funcObject)>` (contains functions to expose by file and every calledsite of each function).
+# Under the Hood
 
-7. Get files from `Func2Exp4File:Map<filename:(funcObject)>` → For each file , add the ` var modname = (function return {...})()` , get callSite for each funcName and for each , replace with DPR_filename_mod.funcName.
+1. `getFuncList` in `digitalpalireader/_dprhtml/index.html`
+   <br/> Input(s): Object.keys(Window)
+   <br/> Output(s): Sorted List Of global functions and the first line of their declarations
 
-8. Check Modification in declared file.
+2. `findDeclrandCalls` at `digitalpalireader/tools/migration/mapper.py`
+    <br/> Input(s): files in `../../_dprhtml`
+    <br/> Output(s): allFunctionCallSites, funcDeclLocations
 
-9. Add DPR_filename_mod to whitelist for each file modified.
+3. `filterFuncs` at `digitalpalireader/tools/migration/mapper.py`
+    <br/> Input(s): list of all function call sites, list of all function declaration sites
+    <br/> Output(s): list of all call sites and list of declaration sites of functions that are called atleast once
+
+4. `removeDeclSiteFromCallSite` at `digitalpalireader/tools/migration/mapper.py`
+    <br/> Input(s): filtered list of call sites, filtered list of declaration sites of functions
+    <br/> Output(s): call sites with declaration sites removed
+
+5. `writeToFiles` at `digitalpalireader/tools/migration/mapper.py`
+    <br/> Input(s): call sites, declaration sites
+    <br/> Output(s): functionsToExposeForFile.json and callsAndDecls.json
+
+6. `exposeFiles` at `digitalpalireader/tools/migration/modifier.py`
+   <br/> Input(s): fileName of dataFile ie functionsToExposeForFile.json, range of files to be converted to modules
+    <br/> Output(s): files to be converted to module appended with snippet and instances of functions declared in the file prefixed with moduleName
