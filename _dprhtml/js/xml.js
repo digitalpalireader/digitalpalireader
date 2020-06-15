@@ -17,6 +17,7 @@ const emptyFnStr = `(() => {})()`;
 async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
+  __navigationTabViewModel.sectionPlace = place;
 
   DPR_G.G_thisPara = null;
 
@@ -49,7 +50,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var volume = place[3];
   var vagga = place[4];
   var sutta = place[5];
-  var section = place[6]
+  var section = place[6];
 
   var t = xmlDoc.getElementsByTagName("ha");
   var u = t[0].getElementsByTagName("h0");
@@ -364,7 +365,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
     canExecuteStr: 'true',
-    execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
+    executeStr: `__otherDialogsViewModel.showBookmarksDialog()`,
     titleStr: null,
     visibleStr: 'true',
   };
