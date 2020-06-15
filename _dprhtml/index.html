@@ -229,7 +229,7 @@
 
                 <!--ko let: { cmd: commands.bookmarkSection() }-->
                 <div class="context-menu-main-row-group" data-bind="visible: cmd.visible">
-                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: false,          click: cmd.execute(), attr: { title: cmd.title }">
+                  <button type="button" class="btn btn-sm btn-light" data-bind="visible: cmd.visible, enable: cmd.canExecute, click: cmd.execute(), attr: { title: cmd.title }">
                     <i class="fa fa-bookmark" aria-hidden="true"></i>
                   </button>
                 </div>

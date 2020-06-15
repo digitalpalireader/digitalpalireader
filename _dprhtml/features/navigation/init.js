@@ -59,14 +59,21 @@ class NavigationTabViewModel {
     this.para = ko.observable('');
 
     this.places = ko.observableArray();
+    this.sectionPlace = ko.observableArray();
 
     this.navHistoryVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
     this.navHistoryArray = ko.observableArray();
     this.selectedHistoryItem = ko.observable(),
     this.historyInfo = ko.computed(function() { return this.computeHistoryInfo(); }, this);
 
+    this.bookmarksVisible = ko.computed(function() { return this.isStorageSupportedByBrowser(); }, this);
+    this.bookmarksArray = ko.observableArray();
+    this.selectedBookmarksItem = ko.observable();
+    this.bookmarksInfo = ko.computed(function() { return this.computeBookmarksInfo(); }, this);
+
     this.initializeSets();
     this.updateHistory();
+    this.updateBookmarks();
   }
 
   initializeSets() {
@@ -132,6 +139,28 @@ class NavigationTabViewModel {
         localStorage.setItem("navHistoryArray", JSON.stringify(["-- History --"]))
       }
       this.navHistoryArray(JSON.parse(localStorage.getItem("navHistoryArray")));
+    }
+  }
+
+  sendSelectedBookmarksItem(ctx) {
+    if(ctx.selectedBookmarksItem() && ctx.selectedBookmarksItem() !== "-- Bookmarks --") {
+      let selectedBookmItem = ctx.selectedBookmarksItem().toString().replace(/'/g, '').split('@');
+      let x = selectedBookmItem[1].split(',');
+      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
+    }
+  }
+
+  computeBookmarksInfo() {
+    return { text: '\u21D2', title: 'Open bookmarks and history window',
+      onmouseup: 'bookmarkframe(1)'}
+  }
+
+  updateBookmarks() {
+    if (this.isStorageSupportedByBrowser) {
+      if (!localStorage.getItem("bookmarksArray")) {
+        localStorage.setItem("bookmarksArray", JSON.stringify(["-- Bookmarks --"]))
+      }
+      this.bookmarksArray(JSON.parse(localStorage.getItem("bookmarksArray")));
     }
   }
 }
