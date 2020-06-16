@@ -9,7 +9,6 @@ def handleFileOfDeclaration(element4File2Exp, moduleName):
     [fileOfDeclarationText.append("{0} : {0}".format(
         element4Func2Exp["name"])) for element4Func2Exp in element4File2Exp[1]]
     fileOfDeclarationText.append("\n}\n})()\n")
-    print(fileOfDeclarationText)
     fileOfDeclaration.seek(0)
     fileOfDeclaration.writelines(fileOfDeclarationText)
     fileOfDeclaration.close()
