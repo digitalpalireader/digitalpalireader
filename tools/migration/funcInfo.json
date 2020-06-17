@@ -116,6 +116,10 @@
     "declLine1": "function addATIJS() {"
   },
   {
+    "name": "addBookmark",
+    "declLine1": "async function addBookmark() {"
+  },
+  {
     "name": "addHistory",
     "declLine1": "function addHistory(value) {"
   },
@@ -162,10 +166,6 @@
   {
     "name": "attsearchstart",
     "declLine1": "function attsearchstart()"
-  },
-  {
-    "name": "bookmarkXML",
-    "declLine1": "function bookmarkXML() {"
   },
   {
     "name": "bookmarkframe",
@@ -230,6 +230,10 @@
   {
     "name": "citation",
     "declLine1": "async function citation(cite,event) {"
+  },
+  {
+    "name": "clearBookmarks",
+    "declLine1": "async function clearBookmarks(gofrom) {"
   },
   {
     "name": "clearDivs",
@@ -397,11 +401,7 @@
   },
   {
     "name": "eraseBookmark",
-    "declLine1": "async function eraseBookmark(idx) {"
-  },
-  {
-    "name": "eraseBookmarks",
-    "declLine1": "async function eraseBookmarks(gofrom) {"
+    "declLine1": "async function eraseBookmark(i) {"
   },
   {
     "name": "eraseDictHistory",
@@ -498,6 +498,10 @@
   {
     "name": "getBookName",
     "declLine1": "function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1"
+  },
+  {
+    "name": "getBookmarks",
+    "declLine1": "function getBookmarks() {"
   },
   {
     "name": "getBrowserCount",
