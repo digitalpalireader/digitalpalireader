@@ -6,7 +6,7 @@ def handleFileOfDeclaration(element4File2Exp, moduleName):
     fileOfDeclarationText = fileOfDeclaration.readlines()
     fileOfDeclarationText.append(
         "\nvar "+moduleName+" = ( function () {\nreturn {\n")
-    [fileOfDeclarationText.append("{0} : {0}".format(
+    [fileOfDeclarationText.append("\n{0} : {0},".format(
         element4Func2Exp["name"])) for element4Func2Exp in element4File2Exp[1]]
     fileOfDeclarationText.append("\n}\n})()\n")
     fileOfDeclaration.seek(0)
