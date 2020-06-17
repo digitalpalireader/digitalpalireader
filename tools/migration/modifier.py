@@ -29,9 +29,11 @@ def handleCallSites4Func(element4Func2Exp, moduleName):
 def genModuleName(fileName):
     return "DPR_"+fileName.split("/")[-1].split(".")[0]+"_mod"
 
-def exposeFiles(dataFileName,beginningIndex,endIndex):
-  funcsToExpByfile = json.load(open(dataFileName,"r",encoding="utf8"))
-  for element4File2Exp in funcsToExpByfile[beginningIndex:endIndex]:
+def exposeFiles(dataFileName,filesExcluded,beginningIndex,endIndex):
+  funcsToExpByfile = json.load(open(dataFileName, "r", encoding="utf8"))
+  listOfFilesExcluded = (json.load(open(filesExcluded, "r", encoding="utf8")))["listOfFilesExcluded"]
+  funcsToExpByfileUndealt = [fileElement for fileElement in funcsToExpByfile if fileElement[0] not in listOfFilesExcluded]
+  for element4File2Exp in funcsToExpByfileUndealt[beginningIndex:endIndex]:
       print(element4File2Exp[0])
       moduleName = genModuleName(element4File2Exp[0])
       handleFileOfDeclaration(element4File2Exp, moduleName)
@@ -39,4 +41,4 @@ def exposeFiles(dataFileName,beginningIndex,endIndex):
           print("\nfunction - ", element4Func2Exp['name'], "\n")
           handleCallSites4Func(element4Func2Exp, moduleName)
 
-exposeFiles("functionsToExposeForFile.json",beginningIndex=0,endIndex=2)
+exposeFiles("functionsToExposeForFile.json", "filesExcluded.json", beginningIndex=0, endIndex=4)
