@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_receive_mod = ( function () {
+
 async function getLinkPlace() { // permalinks
 
   var options = document.location.href.split('?')[1].split('#')[0];
@@ -130,7 +132,8 @@ function createSplitter(thisDocument,count){
   return splitter;
 }
 
-var DPR_Receive = (function () {
-  return {
-  };
-})();
+
+return {
+makeLocPlace : makeLocPlace
+}
+})()

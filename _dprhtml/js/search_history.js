@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_search_history_mod = ( function () {
+
 function searchHistoryXML(){
   var cont = readFile('DPR_Search_History');
   cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
@@ -152,7 +154,7 @@ function eraseDictHistory(gofrom)
 
 function saveDictHistory(query,type,opts) {
   if (DPR_PAL.isWeb) {
-    console.log("saveDictHistory not implemented");
+    console.log("DPR_search_history_mod.saveDictHistory not implemented");
     return;
   }
 
@@ -181,3 +183,9 @@ function saveDictHistory(query,type,opts) {
   writeFile('DPR_Dict_History', outfile);
   DPRNav.dictHistoryBox();
 }
+
+return {
+saveDictHistory : saveDictHistory,
+saveSearchHistory : saveSearchHistory
+}
+})()
