@@ -1,39 +1,57 @@
-function bookmarkXML() {
-  var cont = readFile('DPR_Bookmarks');
-  cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-  var parser=new DOMParser();
-  var xmlDoc = parser.parseFromString(cont,'text/xml');
-  return xmlDoc;
-}
-
-async function eraseBookmark(idx) {
-  var xmlDoc = bookmarkXML();
-  var thisNode = xmlDoc.getElementsByTagName('bookmark')[idx];
-  var answer = confirm('Are you sure you want to erase the bookmark "' + thisNode.getElementsByTagName('name')[0].textContent + '"?')
-  if(answer)
-  {
-        xmlDoc.documentElement.removeChild(thisNode);
-
-    var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
-    writeFile('DPR_Bookmarks', outfile);
-    var sidebar = DPRSidebarWindow();
-    if (sidebar) {
-      sidebar.DPRNav.bookmarkBox();
+async function eraseBookmark(i) {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    let data = [];
+    if (bookmarksArrayFromStorage) {
+      data = JSON.parse(bookmarksArrayFromStorage).slice();
+      data.splice(i, 1);
+      localStorage.setItem("bookmarksArray", JSON.stringify(data));
+      __navigationTabViewModel.updateBookmarks();
+      await bookmarkframe(0);
     }
-        await bookmarkframe(1);
   }
 }
 
-async function eraseBookmarks(gofrom) {
-  var answer = confirm('Are you sure you want to erase all of the stored bookmarks?')
-  if(answer)
-  {
-        eraseFile('DPR_Bookmarks');
-    var sidebar = DPRSidebarWindow();
-    if (sidebar) {
-      sidebar.DPRNav.bookmarkBox();
+async function clearBookmarks(gofrom) {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    var answer = confirm('Are you sure you want to erase all of the stored bookmarks?');
+    if(!answer) { return; }
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    if (bookmarksArrayFromStorage) {
+      localStorage.removeItem("bookmarksArray");
+      __navigationTabViewModel.updateBookmarks();
+      await bookmarkframe(0);
     }
-    await bookmarkframe();
+  }
+}
+
+function getBookmarks() {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    let content = [];
+    if (bookmarksArrayFromStorage) {
+      let data = JSON.parse(bookmarksArrayFromStorage);
+      for (var i in data) {
+        content.push(data[i]);
+      }
+    }
+    return content;
+  }
+}
+
+async function addBookmark() {
+  if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
+    if (bookmarksArrayFromStorage) {
+      let value = `${__otherDialogsViewModel.bookmarkName()}@${__navigationTabViewModel.sectionPlace}`;
+      let data = JSON.parse(bookmarksArrayFromStorage);
+      for (var i in data) {
+        if (data[i].toString().localeCompare(value) === 0 || i > 99) return;
+      }
+      data.push(value);
+      localStorage.setItem("bookmarksArray", JSON.stringify(data));
+      await __navigationTabViewModel.updateBookmarks();
+    }
   }
 }
 
@@ -58,10 +76,11 @@ async function bookmarkframe(refresh) {
   if(!hout) { hout = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
   else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
-  //TO DO: implement Bookmarks
-  //var xmlDoc = bookmarkXML();
+
+  //var xmlDoc = getBookmarks();
 
   //var bNodes = xmlDoc.getElementsByTagName('bookmark');
+  var isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="clearBookmarks()"><b>clear</b></a>';
   bNodes = [];
 
   if (bNodes.length == 0)
@@ -69,7 +88,7 @@ async function bookmarkframe(refresh) {
     if (refresh === 1) {
       await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
     }
-    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width="1">&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>No Bookmarks Stored</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
+    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span>'+isClearBm+'</td><td width="1"></td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>[List not yet implemented]</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
   }
   else
   {
@@ -122,7 +141,7 @@ async function bookmarkframe(refresh) {
 
 
 async function bookmarkxd(desc,idx) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('description')[0];
   bk.textContent = desc;
 
@@ -133,7 +152,7 @@ async function bookmarkxd(desc,idx) {
 }
 
 async function bookmarkxn(name,idx) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var bk = xmlDoc.getElementsByTagName('bookmark')[idx].getElementsByTagName('name')[0];
   bk.textContent = name;
 
@@ -177,7 +196,7 @@ function convertOldBookmarks() {
 }
 
 function saveBookmark(name,loc,desc,scroll,supress) {
-  var xmlDoc = bookmarkXML();
+  var xmlDoc = getBookmarks();
   var newNode = xmlDoc.createElement('bookmark');
   var newNodeName = xmlDoc.createElement('name');
   var newNodeLoc = xmlDoc.createElement('location');

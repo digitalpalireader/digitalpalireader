@@ -1,7 +1,11 @@
 [
   {
     "name": "DPPNXML",
-    "declLine1": "function DPPNXML(filein,which,add)"
+    "declLine1": "async function DPPNXML(filein,which,add)"
+  },
+  {
+    "name": "DPPNXMLHistory",
+    "declLine1": "async function DPPNXMLHistory(opts) {"
   },
   {
     "name": "DPRBottomPaneUpdateStyle",
@@ -100,6 +104,14 @@
     "declLine1": "function DPR_keypress(e) {"
   },
   {
+    "name": "__assign",
+    "declLine1": "function assign() {"
+  },
+  {
+    "name": "__extends",
+    "declLine1": "function(e,t){function n(){this.constructor=e}c(e,t),e[o]=null===t?i(t):(n[o]=t[o],new n)}"
+  },
+  {
     "name": "addATIJS",
     "declLine1": "function addATIJS() {"
   },
@@ -157,19 +169,19 @@
   },
   {
     "name": "bookmarkframe",
-    "declLine1": "function bookmarkframe(refresh) {"
+    "declLine1": "async function bookmarkframe(refresh) {"
   },
   {
     "name": "bookmarkxd",
-    "declLine1": "function bookmarkxd(desc,idx) {"
+    "declLine1": "async function bookmarkxd(desc,idx) {"
   },
   {
     "name": "bookmarkxn",
-    "declLine1": "function bookmarkxn(name,idx) {"
+    "declLine1": "async function bookmarkxn(name,idx) {"
   },
   {
     "name": "bounce",
-    "declLine1": "function bounce(sct)"
+    "declLine1": "async function bounce(sct)"
   },
   {
     "name": "bv",
@@ -181,7 +193,7 @@
   },
   {
     "name": "changeAlt",
-    "declLine1": "function changeAlt(e,i) {"
+    "declLine1": "async function changeAlt(e,i) {"
   },
   {
     "name": "changeConversion",
@@ -217,7 +229,7 @@
   },
   {
     "name": "citation",
-    "declLine1": "function citation(cite,event) {"
+    "declLine1": "async function citation(cite,event) {"
   },
   {
     "name": "clearDivs",
@@ -225,7 +237,7 @@
   },
   {
     "name": "clearHistory",
-    "declLine1": "function clearHistory(cp) {"
+    "declLine1": "async function clearHistory(cp) {"
   },
   {
     "name": "clearPad",
@@ -261,7 +273,7 @@
   },
   {
     "name": "compareVersions",
-    "declLine1": "function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {"
+    "declLine1": "async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {"
   },
   {
     "name": "conciseChange",
@@ -289,11 +301,11 @@
   },
   {
     "name": "conjugateWord",
-    "declLine1": "function conjugateWord(word,form) {"
+    "declLine1": "async function conjugateWord(word,form) {"
   },
   {
     "name": "conjugateWords",
-    "declLine1": "function conjugateWords(input) {"
+    "declLine1": "async function conjugateWords(input) {"
   },
   {
     "name": "convert",
@@ -369,11 +381,11 @@
   },
   {
     "name": "dppnFullTextSearch",
-    "declLine1": "function dppnFullTextSearch(getstring) {"
+    "declLine1": "async function dppnFullTextSearch(getstring) {"
   },
   {
     "name": "dppnsearchstart",
-    "declLine1": "function dppnsearchstart(hard)"
+    "declLine1": "async function dppnsearchstart(hard)"
   },
   {
     "name": "epdsearchstart",
@@ -385,11 +397,11 @@
   },
   {
     "name": "eraseBookmark",
-    "declLine1": "function eraseBookmark(idx) {"
+    "declLine1": "async function eraseBookmark(idx) {"
   },
   {
     "name": "eraseBookmarks",
-    "declLine1": "function eraseBookmarks(gofrom) {"
+    "declLine1": "async function eraseBookmarks(gofrom) {"
   },
   {
     "name": "eraseDictHistory",
@@ -465,7 +477,7 @@
   },
   {
     "name": "formatConjugation",
-    "declLine1": "function formatConjugation(word) {"
+    "declLine1": "async function formatConjugation(word) {"
   },
   {
     "name": "formatuniout",
@@ -481,7 +493,7 @@
   },
   {
     "name": "getAtthXML",
-    "declLine1": "function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
+    "declLine1": "async function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
   },
   {
     "name": "getBookName",
@@ -493,11 +505,11 @@
   },
   {
     "name": "getConjugation",
-    "declLine1": "function getConjugation(form,bare) {"
+    "declLine1": "async function getConjugation(form,bare) {"
   },
   {
     "name": "getDppnData",
-    "declLine1": "function getDppnData(link){"
+    "declLine1": "async function getDppnData(link){"
   },
   {
     "name": "getDppnEntry",
@@ -513,7 +525,7 @@
   },
   {
     "name": "getLinkPlace",
-    "declLine1": "function getLinkPlace() { // permalinks"
+    "declLine1": "async function getLinkPlace() { // permalinks"
   },
   {
     "name": "getNameHTML",
@@ -541,7 +553,7 @@
   },
   {
     "name": "getTitleXML",
-    "declLine1": "function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search"
+    "declLine1": "async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search"
   },
   {
     "name": "getconfig",
@@ -565,19 +577,15 @@
   },
   {
     "name": "importXMLindex",
-    "declLine1": "function importXMLindex(add) {"
+    "declLine1": "async function importXMLindex(add) {"
   },
   {
     "name": "importXMLs",
-    "declLine1": "function importXMLs(cnt)"
-  },
-  {
-    "name": "insertConj",
-    "declLine1": "function insertConj() {"
+    "declLine1": "async function importXMLs(cnt)"
   },
   {
     "name": "insertWordByWord",
-    "declLine1": "function insertWordByWord() {"
+    "declLine1": "async function insertWordByWord() {"
   },
   {
     "name": "installGlobalHandlers",
@@ -612,16 +620,16 @@
     "declLine1": "function loadPreference() {"
   },
   {
-    "name": "loadXMLFile",
-    "declLine1": "function loadXMLFile(file, setNo) {"
+    "name": "loadXMLFileAsync",
+    "declLine1": "function loadXMLFileAsync(file, setNo) {"
   },
   {
     "name": "loadXMLSection",
-    "declLine1": "function loadXMLSection(querystring,para,place,isPL,scroll,compare)"
+    "declLine1": "async function loadXMLSection(querystring,para,place,isPL,scroll,compare)"
   },
   {
     "name": "loadXMLindex",
-    "declLine1": "function loadXMLindex(place,compare) {"
+    "declLine1": "async function loadXMLindex(place,compare) {"
   },
   {
     "name": "logTelemetry",
@@ -641,7 +649,7 @@
   },
   {
     "name": "makeLinkPlace",
-    "declLine1": "function makeLinkPlace(options,PL) {"
+    "declLine1": "async function makeLinkPlace(options,PL) {"
   },
   {
     "name": "makeLocPlace",
@@ -649,11 +657,11 @@
   },
   {
     "name": "makeNewPanelIndex",
-    "declLine1": "function makeNewPanelIndex([nikaya,book,hiert],count) {"
+    "declLine1": "async function makeNewPanelIndex([nikaya,book,hiert],count) {"
   },
   {
     "name": "makeNewPanelPlace",
-    "declLine1": "function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {"
+    "declLine1": "async function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {"
   },
   {
     "name": "makeTable",
@@ -733,7 +741,7 @@
   },
   {
     "name": "openPlace",
-    "declLine1": "function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {"
+    "declLine1": "async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {"
   },
   {
     "name": "openTranslation",
@@ -741,15 +749,15 @@
   },
   {
     "name": "openXMLindex",
-    "declLine1": "function openXMLindex(nikaya,bookno,hier,add) {"
+    "declLine1": "async function openXMLindex(nikaya,bookno,hier,add) {"
   },
   {
     "name": "outputAnalysis",
-    "declLine1": "function outputAnalysis(input,frombox) {"
+    "declLine1": "async function outputAnalysis(input,frombox) {"
   },
   {
     "name": "outputDef",
-    "declLine1": "function outputDef(which,first,frombox)"
+    "declLine1": "async function outputDef(which,first,frombox)"
   },
   {
     "name": "outputFormattedData",
@@ -761,7 +769,11 @@
   },
   {
     "name": "paliXML",
-    "declLine1": "function paliXML(filein,which,add)"
+    "declLine1": "async function paliXML(filein,which,add)"
+  },
+  {
+    "name": "paliXMLHistory",
+    "declLine1": "async function paliXMLHistory(opts) {"
   },
   {
     "name": "parseDictURLParameters",
@@ -769,23 +781,23 @@
   },
   {
     "name": "pausesall",
-    "declLine1": "function pausesall()"
+    "declLine1": "async function pausesall()"
   },
   {
     "name": "pausethree",
-    "declLine1": "function pausethree() {"
+    "declLine1": "async function pausethree() {"
   },
   {
     "name": "pausetwo",
-    "declLine1": "function pausetwo() { // init function for single collection"
+    "declLine1": "async function pausetwo() { // init function for single collection"
   },
   {
     "name": "pedFullTextSearch",
-    "declLine1": "function pedFullTextSearch(getstring) {"
+    "declLine1": "async function pedFullTextSearch(getstring) {"
   },
   {
     "name": "pedsearchstart",
-    "declLine1": "function pedsearchstart(hard)"
+    "declLine1": "async function pedsearchstart(hard)"
   },
   {
     "name": "permalinkClick",
@@ -813,7 +825,11 @@
   },
   {
     "name": "reanalyze",
-    "declLine1": "function reanalyze(word,cancel) {"
+    "declLine1": "async function reanalyze(word,cancel) {"
+  },
+  {
+    "name": "reanalyzeOnEnterKey",
+    "declLine1": "async function reanalyzeOnEnterKey(keyCode, word,cancel) {"
   },
   {
     "name": "reindexPanels",
@@ -825,7 +841,7 @@
   },
   {
     "name": "removeHistory",
-    "declLine1": "function removeHistory(i) {"
+    "declLine1": "async function removeHistory(i) {"
   },
   {
     "name": "resetAllDprSettings",
@@ -841,7 +857,7 @@
   },
   {
     "name": "sameSearchHistory",
-    "declLine1": "function sameSearchHistory(event){"
+    "declLine1": "async function sameSearchHistory(event){"
   },
   {
     "name": "saveBookmark",
@@ -885,35 +901,31 @@
   },
   {
     "name": "searchTipitaka",
-    "declLine1": "function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {"
+    "declLine1": "async function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {"
   },
   {
     "name": "sendAnalysisToOutput",
-    "declLine1": "function sendAnalysisToOutput(input, divclicked, frombox, add){"
+    "declLine1": "async function sendAnalysisToOutput(input, divclicked, frombox, add){"
   },
   {
     "name": "sendAtt",
-    "declLine1": "function sendAtt(x,type,nik,add) {"
+    "declLine1": "async function sendAtt(x,type,nik,add) {"
   },
   {
     "name": "sendDPPNXML",
-    "declLine1": "function sendDPPNXML(link,add) {"
+    "declLine1": "async function sendDPPNXML(link,add) {"
   },
   {
     "name": "sendPaliXML",
-    "declLine1": "function sendPaliXML(link,add) {"
+    "declLine1": "async function sendPaliXML(link,add) {"
   },
   {
     "name": "sendPlace",
     "declLine1": "function sendPlace(place) {"
   },
   {
-    "name": "sendTextPad",
-    "declLine1": "function sendTextPad(add){"
-  },
-  {
     "name": "sendTitle",
-    "declLine1": "function sendTitle(x,m,a,t,nik,add) {"
+    "declLine1": "async function sendTitle(x,m,a,t,nik,add) {"
   },
   {
     "name": "sendTranslate",
@@ -921,7 +933,7 @@
   },
   {
     "name": "sendUpdateBookmarks",
-    "declLine1": "function sendUpdateBookmarks() {"
+    "declLine1": "async function sendUpdateBookmarks() {"
   },
   {
     "name": "sendtoPad",
@@ -965,31 +977,31 @@
   },
   {
     "name": "sidebarSearch",
-    "declLine1": "function sidebarSearch(nik,book,hiert) {"
+    "declLine1": "async function sidebarSearch(nik,book,hiert) {"
   },
   {
     "name": "simSearchHistory",
-    "declLine1": "function simSearchHistory(event){"
+    "declLine1": "async function simSearchHistory(event){"
   },
   {
     "name": "simpleWordTranslation",
-    "declLine1": "function simpleWordTranslation(word) {"
+    "declLine1": "async function simpleWordTranslation(word) {"
   },
   {
     "name": "sktRXML",
-    "declLine1": "function sktRXML(no,add)"
+    "declLine1": "async function sktRXML(no,add)"
   },
   {
     "name": "sktRootsearchstart",
-    "declLine1": "function sktRootsearchstart(hard)"
+    "declLine1": "async function sktRootsearchstart(hard)"
   },
   {
     "name": "sktXML",
-    "declLine1": "function sktXML(entry,idx,which,add)"
+    "declLine1": "async function sktXML(entry,idx,which,add)"
   },
   {
     "name": "sktsearchstart",
-    "declLine1": "function sktsearchstart()"
+    "declLine1": "async function sktsearchstart()"
   },
   {
     "name": "sortLongerDec",
@@ -1005,7 +1017,7 @@
   },
   {
     "name": "startDictLookup",
-    "declLine1": "function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {"
+    "declLine1": "async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {"
   },
   {
     "name": "stopSearch",
@@ -1077,7 +1089,7 @@
   },
   {
     "name": "toggleDppnTitle",
-    "declLine1": "function toggleDppnTitle(link,id) {"
+    "declLine1": "async function toggleDppnTitle(link,id) {"
   },
   {
     "name": "transMod",
@@ -1085,7 +1097,11 @@
   },
   {
     "name": "translateText",
-    "declLine1": "function translateText(alts) {"
+    "declLine1": "async function translateText(alts) {"
+  },
+  {
+    "name": "translateTextFromBottomPane",
+    "declLine1": "async function translateTextFromBottomPane(element) {"
   },
   {
     "name": "translateTextx",
@@ -1093,7 +1109,7 @@
   },
   {
     "name": "translateWord",
-    "declLine1": "function translateWord(word,idx) {"
+    "declLine1": "async function translateWord(word,idx) {"
   },
   {
     "name": "translit",
