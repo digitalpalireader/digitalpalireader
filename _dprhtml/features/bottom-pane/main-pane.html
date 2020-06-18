@@ -114,7 +114,7 @@
           <button class="btn btn-light mb-0" title="analyze text as Pāli passage" onmouseup="DPR_BottomPane.tpSendTextPad(eventSend(event))">Analyze</button>
           <span class="mat-button-group-seperator"></span>
           <button class="btn btn-light mb-0 mr-1"
-            onclick="copyToClipboard(document.getElementById('pad').value); alertFlash('Text copied to clipboard.','green');"
+            onclick="DPR_PAL.copyToClipboard(document.getElementById('pad').value); alertFlash('Text copied to clipboard.','green');"
             title="Copy text to clipboard">Copy</button>
           <button class="btn btn-light mb-0" onclick="DPR_BottomPane.tpSavePad()" title="save textpad content to file">Save</button>
         </div>
