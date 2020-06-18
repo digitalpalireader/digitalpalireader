@@ -13,12 +13,14 @@ const createTrProps = () => {
       baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['catiloc']))}/tipitaka`,
       icon: `ati.ico`,
       background: 'white',
+      priority: 3,
     },
     abt: {
       id: 1,
       baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
       icon: `abt.gif`,
       background: 'rgb(255, 248, 240)',
+      priority: 4,
     },
     bt: {
       id: 2,
@@ -26,12 +28,21 @@ const createTrProps = () => {
       enabled: DPR_G.DPR_prefs['buddhist_texts'],
       icon: `wisdom.png`,
       background: 'transparent',
+      priority: 2,
     },
     dpr: {
       id: 3,
       baseUrl: `Not yet implemented`,
       icon: `?`,
       background: 'red',
+      priority: 1,
+    },
+    dt: {
+      id: 4,
+      baseUrl: `https://www.dhammatalks.org/suttas/`,
+      icon: `dt.ico`,
+      background: 'white',
+      priority: 3,
     },
   }
 };
@@ -43,7 +54,7 @@ const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
 
 const parsePlace = inplace => {
-  const pparts = /^((ati|abt|bt):\/\/)?(.*)$/.exec(inplace);
+  const pparts = /^((ati|abt|bt|dt):\/\/)?(.*)$/.exec(inplace);
   return pparts[2]
     ? { type: pparts[2], place: pparts[3], }
     : { type: 'dpr', place: DPR_receive_mod.makeLocPlace(pparts[3]), };
@@ -58,11 +69,13 @@ function transLink(which,where,url,title) {
     console.error('Unable to find id', where, 'in', trProps);
   }
 
-  return `
-    &nbsp;
+  return {
+    priority: trProps[type].priority,
+    html: `&nbsp;
     <span class="hoverShow pointer">
       <img width="16" style="vertical-align:middle" src="/_dprhtml/images/${trProps[type].icon}" title="${title}" onmouseup="DPR_Send.openTranslation('${type}://${url}', eventSend(event))">
-    </span>`;
+    </span>`
+  };
 }
 
 function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
@@ -107,6 +120,14 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
   autha['wood'] = "Woodward";
   autha['yaho'] = "Yahoo!&nbsp;Pali";
 
+  // dhammatalks.org translations
+  const dtTrs = getDTTranslations(which, nikaya, book, meta, volume, vagga, sutta, section);
+  dtTrs.forEach(trs => output.push(trs));
+  cnt += dtTrs.length;
+
+  // TODO: PARTHO: Isolate & componentize the translations like above so each can be added on their own
+
+  // NOTE: Following adds translations from BT, ATI & ABT
   switch (nikaya) {
     case 'v':
 
@@ -964,7 +985,23 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
     break;
   }
-  if (cnt > 0) { return output; }
+
+  if (cnt > 0) {
+    // NOTE: Use _dprhtml/index.html?loc=d.1.0.0.2.0.3.m to test out a large set of translations.
+    return output
+      .sort((t1, t2) => t1.priority - t2.priority)
+      .map(t => t.html)
+      .slice(0, 10);
+  }
+}
+
+function getDTTranslations(which, nikaya,book,meta,volume,vagga,sutta,section) {
+  const dtIndicesObj = [book,meta,volume,vagga,sutta,section]
+    .reduce((acc, e) => ({indices: [...acc.indices, `${acc.indices[acc.i]}.${e}`], i: acc.i + 1}), {indices: [nikaya], i: 0})
+
+  const dtTranslations = dtIndicesObj.indices.map(idx => DT_LIST.translations[idx]).filter(x => x);
+
+  return dtTranslations.flatMap(tr => tr).map(tr => transLink(which, 4, tr.u, `${tr.d} by Thanissaro Bhikkhu`));
 }
 
 return {
