@@ -710,7 +710,7 @@ async function translateWord(word,idx) {
     }
     trans = '';
     type = '';
-    var endings = makeDeclensions(vword);
+    var endings = DPR_analysis_declension_mod.makeDeclensions(vword);
     wtr = endings[0].concat(endings[1]);
     wtr = wtr.sort(sortLongerDec);
     second:
