@@ -250,10 +250,10 @@ const dprCommandList = [
   },
   {
     id: DPR_CMD_BOOKMARK_SECTION,
-    notImplemented: true,
+    notImplemented: false,
     canExecute: false,
     execute: () => __otherDialogsViewModel && __otherDialogsViewModel.showBookmarksDialog(),
-    visible: false,
+    visible: true,
     isDynamic: true,
     title: "Bookmark section (Keyboard shortcut: b)",
     matchKey: e => e.key === 'b',
