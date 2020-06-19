@@ -328,7 +328,7 @@ async function sendAnalysisToOutput(input, divclicked, frombox, add){
       DPR_G.G_lastcolour = divclicked;
     }
     if(DPR_G.DPR_prefs['copyWord'])
-      copyToClipboard(input);
+      DPR_PAL.copyToClipboard(input);
   }
   if(add != true) { // reuse old tab
     var thisTab = isDPRTab('DPRm');

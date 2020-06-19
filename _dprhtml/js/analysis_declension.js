@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_analysis_declension_mod = ( function () {
+
 DPR_G.G_endings = new Array();
 
 // in the following: 0=to be found, 1=cut offset, 2=length of stem must be greater than this, 3=whattoadd, 4= noun, verb, participle, 5=type&declension
@@ -530,3 +532,8 @@ function makeDeclensions(oneword,lastpart,nextpart) {
   }
   return [wtrN,wtrV];
 }
+
+return {
+makeDeclensions : makeDeclensions
+}
+})()

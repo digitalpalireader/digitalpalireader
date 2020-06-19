@@ -477,7 +477,7 @@ var DPRSend = {
       if (hard) opts.push('hd');
 
       if (hard)
-        saveDictHistory(getstring, which, opts.join(','));
+        DPR_search_history_mod.saveDictHistory(getstring, which, opts.join(','));
 
     }
     if (which == 'DPR') {
@@ -577,7 +577,7 @@ var DPRSend = {
 
       var rx = document.getElementById('tsoRx').checked;
 
-      saveSearchHistory(getstring, which, rx, sets, MAT, book, part);
+      DPR_search_history_mod.saveSearchHistory(getstring, which, rx, sets, MAT, book, part);
     }
     else {
       var which = searchType;

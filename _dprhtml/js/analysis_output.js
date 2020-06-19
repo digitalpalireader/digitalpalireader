@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_analysis_output_mod = ( function () {
+
 async function outputDef(which,first,frombox)
 {
   $('#anfs').html('');
@@ -12,7 +14,7 @@ async function outputDef(which,first,frombox)
   if (first) {
     $('#anfright').html("");
     if(DPR_G.G_outwords.length > 1){
-      $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
+      $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="DPR_analysis_output_mod.outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
       // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
       for(var i = 0; i < DPR_G.G_outwords.length; i++)
       {
@@ -193,7 +195,7 @@ async function outputDef(which,first,frombox)
 
   osout += '<td class="pointer" onclick="$(\'#data-table\').hide(); $(\'#modify-box\').show();$(\'#modify\').focus();" title="edit word"><div id="edit-pencil" class="hoverShow" style="background-image:url(' + DPR_PAL.contentFolder + 'images/pencil.png);margin:2px 4px;width:12px;height:12px; background-size:100% 100%; background-repeat:no-repeat;"></div></td></tr></table>';
 
-  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+DPR_G.G_outwords[which][0].length+'" id="modify" value="'+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="reanalyzeOnEnterKey(event.keyCode,\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
+  osout += '<div style="float:left; display:none" id="modify-box"><input type="text" size="'+DPR_G.G_outwords[which][0].length+'" id="modify" value="'+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'" onkeypress="DPR_analysis_output_mod.reanalyzeOnEnterKey(event.keyCode,\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\')" title="type your changes, then hit ENTER to submit">&nbsp;<span class="pointer" onclick="DPR_analysis_output_mod.reanalyze(\''+DPR_G.G_outwords[which][0].replace(/-/g,'').replace(/"/g,'&quot;')+'\',true)" title="cancel edits">x</span></div>';
 
   // output
 
@@ -294,3 +296,10 @@ async function reanalyze(word,cancel) {
   if($('#modify').val() != word)
     await outputAnalysis($('#modify').val(),null);
 }
+
+return {
+outputDef : outputDef,
+reanalyze : reanalyze,
+reanalyzeOnEnterKey : reanalyzeOnEnterKey,
+}
+})()

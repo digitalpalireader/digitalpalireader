@@ -482,7 +482,7 @@ DPR_G.pleasewait.innerHTML = '<br/><br/><br/><br/><img class="spin-img-infinitel
 
 function permalinkClick(link,url) {
   try {
-    copyToClipboard(link);
+    DPR_PAL.copyToClipboard(link);
     if(url) {
       DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow.history.replaceState('Object', 'Title', link);
     }
@@ -492,8 +492,6 @@ function permalinkClick(link,url) {
     alertFlash("Unable to copy permalink.",'red');
   }
 }
-
-var copyToClipboard = DPR_PAL.copyToClipboard;
 
 DPR_G.G_alertFlashStart = 0;
 
