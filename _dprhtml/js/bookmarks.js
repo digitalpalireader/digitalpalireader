@@ -56,12 +56,33 @@ async function addBookmark() {
 }
 
 async function bookmarkframe(refresh) {
-  var theHistory = getHistory();
-  var hout = '';
-  var isclear = '';
-  for (var i in theHistory) {
-    if (theHistory[i].indexOf('@') > -1) {
-      var thist = theHistory[i].split('@');
+  var bookmList = getBookmarks();
+  var histList = getHistory();
+  var bookmOut = '';
+  var histOut = '';
+  var isClearBm = '';
+  var isclearHist = '';
+
+  for (var i in bookmList) {
+    if (bookmList[i].indexOf('@') > -1) {
+      var tbookm = bookmList[i].split('@');
+
+      if(DPR_G.DPR_prefs['nigahita']) {
+        tbookm[0] = tbookm[0].replace(/ṃ/g, 'ṁ');
+        tbookm[0] = tbookm[0].replace(/Ṃ/g, 'Ṁ');
+      }
+
+      var ttbm1 = tbookm[1].length-1;
+      tbookm[1] = "'"+tbookm[1].charAt(0)+"'"+tbookm[1].substring(1,ttbm1) + "'" + tbookm[1].charAt(ttbm1) + "'";
+      bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+tbookm[1]+'],null,null,eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
+    }
+  }
+  if(!bookmOut) { bookmOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;bookmarks</b>'; }
+  else { isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="clearBookmarks()"><b>clear</b></a>'; }
+
+  for (var i in histList) {
+    if (histList[i].indexOf('@') > -1) {
+      var thist = histList[i].split('@');
 
       if(DPR_G.DPR_prefs['nigahita']) {
         thist[0] = thist[0].replace(/ṃ/g, 'ṁ');
@@ -70,75 +91,19 @@ async function bookmarkframe(refresh) {
 
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-      hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
-  if(!hout) { hout = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
-  else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
+  if(!histOut) { histOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
+  else { isclearHist = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
 
-
-  //var xmlDoc = getBookmarks();
-
-  //var bNodes = xmlDoc.getElementsByTagName('bookmark');
-  var isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="clearBookmarks()"><b>clear</b></a>';
-  bNodes = [];
-
-  if (bNodes.length == 0)
-  {
-    if (refresh === 1) {
-      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
-    }
-    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span>'+isClearBm+'</td><td width="1"></td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>[List not yet implemented]</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
+  if (refresh === 1) {
+    await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
   }
-  else
-  {
-    var outputList = '<form name="bkform"><table width=100% border=0>';
-
-    for(var i=0; i < bNodes.length; i++)
-    {
-      var name = bNodes[i].getElementsByTagName('name')[0].textContent;
-
-      if(DPR_G.DPR_prefs['nigahita']) {
-        name = name.replace(/ṃ/g, 'ṁ');
-        name = name.replace(/Ṃ/g, 'Ṁ');
-      }
-
-      var loc = bNodes[i].getElementsByTagName('location')[0].textContent.split('#');
-
-      if(loc[7] == 'm') {
-        var sname = getSuttaNumber(loc[0],loc[1],loc[2],loc[3],loc[4],loc[5],loc[6],loc[7],0);
-        if(sname) sname = ' ('+DPR_G.G_nikLongName[loc[0]]+' '+sname+')';
-        else sname = '';
-      }
-      else var sname = ' ('+DPR_G.G_nikLongName[loc[0]]+')';
-      loc[0] = "'"+loc[0]+"'";
-      loc[7] = "'"+loc[7]+"'";
-
-      var scroll = bNodes[i].getElementsByTagName('scroll')[0].textContent;
-      var desc = bNodes[i].getElementsByTagName('description')[0].textContent;
-
-      outputList +=  '<tr><td><div class="round">';
-        outputList += '<table width=100%><tr><td width="100%"><span class="pointer" onmouseup="openPlace(['+loc.join(',')+'],null,null,eventSend(event),'+scroll+')"><b>' + (i+1) + '.&nbsp;' + name.replace(/ +/g,'&nbsp;') + sname + '</b></span></td><td width="1"><span class="abut obut" title="click here to edit this bookmark" id="hiderbutton' + i + '" onClick="hiddenout(\'' + i + '\')">+</span></td><td width="1"><span class="abut obut" onClick="eraseBookmark(\'' + i + '\')">x</span></td></tr><tr><td colspan=3><i><font id="title' + i + '">'+desc+'</font></i></td></tr></table>';
-
-        outputList +=  '<div class="hide" id="'+ i + '"><hr>';
-          outputList +=  '<table width=100%><tr><td><b>Edit Name</b></td></tr><tr><td align=center><input type=text value="'+name+'" id="newname' + i + '" title="Enter a new name for this bookmark" size=12></td><td align=center><span class="abut obut" onClick="bookmarkxn(document.getElementById(\'newname'+i+'\').value,\'' + i + '\')" title="Change Name">change</span></td></tr></table><hr>';
-        outputList += '<table width=100%><tr><td align=center><div class="hide" id="html' + i + '"><table width=100%><tr><td><b>Edit Text</b></td></tr><tr><td align=center><textarea id="newdesc' + i + '" title="Enter new text for this bookmark" value="' + desc + '">' + desc + '</textarea></td><td><span class="abut obut" onClick="bookmarkxd(document.getElementById(\'newdesc'+i+'\').value,\'' + i + '\')" title="Change Description">change</span></td></tr></table></td></tr></table></div>';
-      outputList += '</div></td></tr>';
-
-    }
-    outputList += '</table></form>';
-    outputList += '<hr><div class="obutc"><b>' + bNodes.length + ' Bookmark'+(bNodes.length == 1?'':'s')+' Stored</b>';
-    outputList += ' - <span class="abut obut" title="erase all stored bookmarks" onclick="eraseBookmarks(\'go\')">erase&nbsp;all</span></div>';
-    if (refresh === 1) {
-      await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));
-    }
-    $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span></td><td width=100>&nbsp;</td><td><span class="huge">History</span> '+isclear+'</td></tr><tr><td valign=top>'+outputList+'</td><td></td><td width="1" valign=top><div class="round">'+hout+'</div></td></tr></table>');
-  }
+  $('#paliTextContent').html('<table width="100%"><tr><td><span class="huge">Bookmarks</span>'+isClearBm+'</td><td width="1"></td><td><span class="huge">History</span> '+isclearHist+'</td></tr><tr><td valign=top><div class="round">'+bookmOut+'</div></td><td></td><td width="1" valign=top><div class="round">'+histOut+'</div></td></tr></table>');
 
   if (!refresh) document.getElementById('maf').scrollTop = 0;
-
 }
-
 
 async function bookmarkxd(desc,idx) {
   var xmlDoc = getBookmarks();
