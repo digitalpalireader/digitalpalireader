@@ -74,6 +74,7 @@ async function paliXML(filein,which,add)
   var data = xmlDoc.getElementsByTagName('d')[t2].textContent;
 
   data = data.replace(/-- *([0-9]+)\./g,"<br/><br/><b>$1.</b>");
+  data = data.replace(/ŋ/g,"ṃ");
 
   if(DPR_G.DPR_prefs['showPedLinks']) {
 
