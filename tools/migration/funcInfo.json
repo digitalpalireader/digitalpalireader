@@ -280,10 +280,6 @@
     "declLine1": "async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {"
   },
   {
-    "name": "conciseChange",
-    "declLine1": "function conciseChange(value) {"
-  },
-  {
     "name": "conjugate",
     "declLine1": "function conjugate(word, id, which) {"
   },
@@ -326,10 +322,6 @@
   {
     "name": "convtitle",
     "declLine1": "function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)"
-  },
-  {
-    "name": "copyToClipboard",
-    "declLine1": "text => {"
   },
   {
     "name": "countVals",
@@ -376,10 +368,6 @@
     "declLine1": "function devO() { }"
   },
   {
-    "name": "dictHistoryXML",
-    "declLine1": "function dictHistoryXML(){"
-  },
-  {
     "name": "displayDictData",
     "declLine1": "function displayDictData(data) {"
   },
@@ -404,20 +392,12 @@
     "declLine1": "async function eraseBookmark(i) {"
   },
   {
-    "name": "eraseDictHistory",
-    "declLine1": "function eraseDictHistory(gofrom)"
-  },
-  {
     "name": "eraseFile",
     "declLine1": "function eraseFile (name) {"
   },
   {
     "name": "eraseItem",
     "declLine1": "function eraseItem (name) {"
-  },
-  {
-    "name": "eraseSearchHistory",
-    "declLine1": "function eraseSearchHistory(gofrom)"
   },
   {
     "name": "eventSend",
@@ -526,10 +506,6 @@
   {
     "name": "getHomePath",
     "declLine1": "function getHomePath () {"
-  },
-  {
-    "name": "getLinkPlace",
-    "declLine1": "async function getLinkPlace() { // permalinks"
   },
   {
     "name": "getNameHTML",
@@ -644,28 +620,8 @@
     "declLine1": "async function mainInitialize() {"
   },
   {
-    "name": "makeDeclensions",
-    "declLine1": "function makeDeclensions(oneword,lastpart,nextpart) {"
-  },
-  {
     "name": "makeGrammarTerms",
     "declLine1": "function makeGrammarTerms([trans,type,deca,word,meta]) {"
-  },
-  {
-    "name": "makeLinkPlace",
-    "declLine1": "async function makeLinkPlace(options,PL) {"
-  },
-  {
-    "name": "makeLocPlace",
-    "declLine1": "function makeLocPlace(inplace) {"
-  },
-  {
-    "name": "makeNewPanelIndex",
-    "declLine1": "async function makeNewPanelIndex([nikaya,book,hiert],count) {"
-  },
-  {
-    "name": "makeNewPanelPlace",
-    "declLine1": "async function makeNewPanelPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert],count) {"
   },
   {
     "name": "makeTable",
@@ -760,10 +716,6 @@
     "declLine1": "async function outputAnalysis(input,frombox) {"
   },
   {
-    "name": "outputDef",
-    "declLine1": "async function outputDef(which,first,frombox)"
-  },
-  {
     "name": "outputFormattedData",
     "declLine1": "function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame"
   },
@@ -828,14 +780,6 @@
     "declLine1": "function readFile (aFileKey) {"
   },
   {
-    "name": "reanalyze",
-    "declLine1": "async function reanalyze(word,cancel) {"
-  },
-  {
-    "name": "reanalyzeOnEnterKey",
-    "declLine1": "async function reanalyzeOnEnterKey(keyCode, word,cancel) {"
-  },
-  {
     "name": "reindexPanels",
     "declLine1": "function reindexPanels() {"
   },
@@ -860,10 +804,6 @@
     "declLine1": "function resolveCommands(shortcutFns) {"
   },
   {
-    "name": "sameSearchHistory",
-    "declLine1": "async function sameSearchHistory(event){"
-  },
-  {
     "name": "saveBookmark",
     "declLine1": "function saveBookmark(name,loc,desc,scroll,supress) {"
   },
@@ -872,20 +812,12 @@
     "declLine1": "function saveCompilation() {"
   },
   {
-    "name": "saveDictHistory",
-    "declLine1": "function saveDictHistory(query,type,opts) {"
-  },
-  {
     "name": "savePad",
     "declLine1": "function savePad() {"
   },
   {
     "name": "savePreferences",
     "declLine1": "function savePreferences(getPrefFn) {"
-  },
-  {
-    "name": "saveSearchHistory",
-    "declLine1": "function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {"
   },
   {
     "name": "scrollSearch",
@@ -898,10 +830,6 @@
   {
     "name": "scrolldown",
     "declLine1": "function scrolldown(much)"
-  },
-  {
-    "name": "searchHistoryXML",
-    "declLine1": "function searchHistoryXML(){"
   },
   {
     "name": "searchTipitaka",
@@ -972,20 +900,12 @@
     "declLine1": "function showHideId(a) {"
   },
   {
-    "name": "showShortDef",
-    "declLine1": "function showShortDef(word) {"
-  },
-  {
     "name": "showonly",
     "declLine1": "function showonly(string) {"
   },
   {
     "name": "sidebarSearch",
     "declLine1": "async function sidebarSearch(nik,book,hiert) {"
-  },
-  {
-    "name": "simSearchHistory",
-    "declLine1": "async function simSearchHistory(event){"
   },
   {
     "name": "simpleWordTranslation",
@@ -1118,10 +1038,6 @@
   {
     "name": "translit",
     "declLine1": "function translit(data) {"
-  },
-  {
-    "name": "triggerUpdateCheck",
-    "declLine1": "function triggerUpdateCheck() {"
   },
   {
     "name": "typeAndGender",
