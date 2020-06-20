@@ -1,10 +1,11 @@
 ﻿<!doctype html>
-<html lang="en" manifest="dpr.appcache">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <title>Digital Pāli Reader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="./favicon.png" />
+    <script type="module" src="/_dprhtml/js/sw-configure.js"></script>
     <script>
       const initObjList = Object.keys(window);
       const whitelist = [
@@ -58,6 +59,7 @@
         console.log(Object.keys(DPR_G).filter(a => !(whitelist.includes(a) || initDPR_GList.includes(a))))
       }
     </script>
+
     <script>
       window.addEventListener('error', e => {
         const { message, source, lineno, colno, error } = e;
