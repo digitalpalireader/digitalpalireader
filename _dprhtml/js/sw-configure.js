@@ -1,6 +1,6 @@
 import { Workbox, messageSW } from 'https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-window.prod.mjs';
 
-import './chrome.js'
+import '/_dprhtml/js/chrome.A2858213981B7D0B87D1BEA6B6AEFE62.js'
 
 // NOTE: Reference code: https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users
 async function configureNewVersionCheck() {
