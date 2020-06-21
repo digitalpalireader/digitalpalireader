@@ -52,7 +52,7 @@ workbox.routing.registerRoute(
     cacheName: 'tipitaka-my',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
-        maxAgeSeconds: 90 * 24 * 60 * 60, // 3 months.
+        maxAgeSeconds: 180 * 24 * 60 * 60,
       }),
     ],
   }),
@@ -71,5 +71,17 @@ workbox.routing.registerRoute(
   new workbox.strategies.CacheFirst({
     cacheName: 'lang-sa',
     plugins: [],
+  }),
+);
+
+workbox.routing.registerRoute(
+  ({url}) => url.origin === self.location.origin && /^\/tipitaka\/th\//i.test(url.pathname),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'tipitaka-th',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 180 * 24 * 60 * 60,
+      }),
+    ],
   }),
 );
