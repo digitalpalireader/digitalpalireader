@@ -20,6 +20,7 @@ addEventListener('message', (event) => {
 
 // TODO: Temporary solution to warm the runtime caches. Eventually do this from UI with a progress bar so people know the status.
 self.addEventListener('install', (event) => {
+  /*
   const enDppnUrls =
     ['abbrev.xml']
     .concat(Array.from({ length: 10 }, (_, k)=> `${k + 1}.xml`))
@@ -37,6 +38,7 @@ self.addEventListener('install', (event) => {
     myFiles
     .map(f => `/tipitaka/my/${f}.xml`);
   event.waitUntil(caches.open('tipitaka-my').then((cache) => cache.addAll(myUrls)));
+  */
 });
 
 workbox.precaching.precacheAndRoute(
@@ -53,6 +55,7 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 180 * 24 * 60 * 60,
+        maxEntries: 100,
       }),
     ],
   }),
@@ -62,7 +65,11 @@ workbox.routing.registerRoute(
   ({url}) => url.origin === self.location.origin && /^\/en\//i.test(url.pathname),
   new workbox.strategies.CacheFirst({
     cacheName: 'lang-en',
-    plugins: [],
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 100,
+      }),
+    ],
   }),
 );
 
@@ -70,7 +77,11 @@ workbox.routing.registerRoute(
   ({url}) => url.origin === self.location.origin && /^\/sa\//i.test(url.pathname),
   new workbox.strategies.CacheFirst({
     cacheName: 'lang-sa',
-    plugins: [],
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxEntries: 100,
+      }),
+    ],
   }),
 );
 
@@ -81,6 +92,7 @@ workbox.routing.registerRoute(
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 180 * 24 * 60 * 60,
+        maxEntries: 100,
       }),
     ],
   }),
