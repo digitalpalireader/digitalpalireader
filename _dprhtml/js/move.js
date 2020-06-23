@@ -12,7 +12,7 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
 {
-  if(!a & !b){
+  if(!a && !b){
     return ;
   }
 
