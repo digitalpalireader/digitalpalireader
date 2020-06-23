@@ -147,7 +147,7 @@ var DPRNav = {
     // history
 
     var hout = '';
-    var theHistory = getHistory();
+    var theHistory = DPR_history_mod.getHistory();
     if (theHistory.length > 0) {
       document.getElementById('hist-box').collapsed = false;
       var histNode = document.getElementById('history');

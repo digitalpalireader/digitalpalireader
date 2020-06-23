@@ -473,7 +473,7 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var book = parseInt(pca[1])+1;
 
         var bookload = nikaya + book + type;
-        var xmlDoc = await loadXMLFileAsync(bookload,0);
+        var xmlDoc = await XML_Load.loadXMLFileAsync(bookload,0);
 
     if (nikaya == 'k') {
       var bookno = DPR_G.kudvala[book];
@@ -547,7 +547,7 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
         var hiert = pca[7];
         var bookload = nikaya + book + hiert;
 
-        var xmlDoc = await loadXMLFileAsync(bookload,0);
+        var xmlDoc = await XML_Load.loadXMLFileAsync(bookload,0);
 
 
     if (hiert != 'm' && nikaya == 'k') {

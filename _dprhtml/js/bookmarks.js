@@ -56,7 +56,7 @@ async function addBookmark() {
 }
 
 async function bookmarkframe(refresh) {
-  var theHistory = getHistory();
+  var theHistory = DPR_history_mod.getHistory();
   var hout = '';
   var isclear = '';
   for (var i in theHistory) {
@@ -70,11 +70,11 @@ async function bookmarkframe(refresh) {
 
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-      hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      hout += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_history_mod.removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!hout) { hout = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
-  else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
+  else { isclear = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="DPR_history_mod.clearHistory()"><b>clear</b></a>'; }
 
 
   //var xmlDoc = getBookmarks();

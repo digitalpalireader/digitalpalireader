@@ -28,216 +28,6 @@
     ]
   ],
   [
-    "../../_dprhtml/js/analysis_declension.js",
-    [
-      {
-        "name": "makeDeclensions",
-        "Line": "472",
-        "Called@": {
-          "../../_dprhtml/js/translate.js": [
-            713
-          ],
-          "../../_dprhtml/js/analysis_declension.js": [],
-          "../../_dprhtml/js/analysis_function.js": [
-            291
-          ]
-        }
-      }
-    ]
-  ],
-  [
-    "../../_dprhtml/js/receive.js",
-    [
-      {
-        "name": "getLinkPlace",
-        "Line": "3",
-        "Called@": {
-          "../../_dprhtml/js/receive.js": []
-        }
-      },
-      {
-        "name": "makeLinkPlace",
-        "Line": "8",
-        "Called@": {
-          "../../_dprhtml/js/receive.js": [
-            6
-          ]
-        }
-      },
-      {
-        "name": "makeLocPlace",
-        "Line": "65",
-        "Called@": {
-          "../../_dprhtml/js/translations.js": [
-            49
-          ],
-          "../../_dprhtml/js/receive.js": [
-            44
-          ]
-        }
-      },
-      {
-        "name": "makeNewPanelIndex",
-        "Line": "98",
-        "Called@": {
-          "../../_dprhtml/js/receive.js": []
-        }
-      },
-      {
-        "name": "makeNewPanelPlace",
-        "Line": "84",
-        "Called@": {
-          "../../_dprhtml/js/receive.js": []
-        }
-      }
-    ]
-  ],
-  [
-    "../../_dprhtml/js/dpr_pal.js",
-    [
-      {
-        "name": "copyToClipboard",
-        "Line": "63",
-        "Called@": {
-          "../../_dprhtml/js/send.js": [
-            331
-          ],
-          "../../_dprhtml/js/format.js": [
-            485,
-            496
-          ],
-          "../../_dprhtml/js/dpr_pal.js": [],
-          "../../_dprhtml/features/bottom-pane/main-pane.html": [
-            117
-          ]
-        }
-      }
-    ]
-  ],
-  [
-    "../../_dprhtml/js/analysis_output.js",
-    [
-      {
-        "name": "conciseChange",
-        "Line": "273",
-        "Called@": {
-          "../../_dprhtml/js/analysis_output.js": []
-        }
-      },
-      {
-        "name": "outputDef",
-        "Line": "3",
-        "Called@": {
-          "../../_dprhtml/js/analysis_output.js": [
-            15
-          ],
-          "../../_dprhtml/js/analysis_function.js": [
-            77
-          ]
-        }
-      },
-      {
-        "name": "reanalyze",
-        "Line": "284",
-        "Called@": {
-          "../../_dprhtml/js/analysis_output.js": [
-            196,
-            280
-          ]
-        }
-      },
-      {
-        "name": "reanalyzeOnEnterKey",
-        "Line": "278",
-        "Called@": {
-          "../../_dprhtml/js/analysis_output.js": [
-            196
-          ]
-        }
-      },
-      {
-        "name": "showShortDef",
-        "Line": "269",
-        "Called@": {
-          "../../_dprhtml/js/analysis_output.js": []
-        }
-      }
-    ]
-  ],
-  [
-    "../../_dprhtml/js/search_history.js",
-    [
-      {
-        "name": "dictHistoryXML",
-        "Line": "135",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": [
-            159
-          ]
-        }
-      },
-      {
-        "name": "eraseDictHistory",
-        "Line": "143",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": []
-        }
-      },
-      {
-        "name": "eraseSearchHistory",
-        "Line": "11",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": []
-        }
-      },
-      {
-        "name": "sameSearchHistory",
-        "Line": "20",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": []
-        }
-      },
-      {
-        "name": "saveDictHistory",
-        "Line": "153",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": [
-            155
-          ],
-          "../../_dprhtml/js/web/send_sidebar.js": [
-            480
-          ]
-        }
-      },
-      {
-        "name": "saveSearchHistory",
-        "Line": "88",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": [],
-          "../../_dprhtml/js/web/send_sidebar.js": [
-            580
-          ]
-        }
-      },
-      {
-        "name": "searchHistoryXML",
-        "Line": "3",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": [
-            89
-          ]
-        }
-      },
-      {
-        "name": "simSearchHistory",
-        "Line": "27",
-        "Called@": {
-          "../../_dprhtml/js/search_history.js": []
-        }
-      }
-    ]
-  ],
-  [
     "../../_dprhtml/js/history.js",
     [
       {
@@ -494,7 +284,7 @@
             267
           ],
           "../../_dprhtml/js/index.js": [
-            52
+            51
           ]
         }
       },
@@ -544,7 +334,10 @@
         "Line": "1",
         "Called@": {
           "../../_dprhtml/index.html": [
-            461
+            505
+          ],
+          "../../_dprhtml/sw.js": [
+            22
           ],
           "../../_dprhtml/js/translate.js": [
             122,
@@ -586,7 +379,7 @@
         "Line": "38",
         "Called@": {
           "../../_dprhtml/js/index.js": [
-            43
+            42
           ],
           "../../_dprhtml/js/bv.js": [
             62,
@@ -607,7 +400,7 @@
         "Line": "820",
         "Called@": {
           "../../_dprhtml/js/receive.js": [
-            77
+            79
           ],
           "../../_dprhtml/js/navigation_common.js": [],
           "../../_dprhtml/js/web/send_sidebar.js": [
@@ -632,10 +425,10 @@
         "Line": "493",
         "Called@": {
           "../../_dprhtml/js/translations.js": [
-            406,
-            514,
-            932,
-            940
+            427,
+            535,
+            953,
+            961
           ],
           "../../_dprhtml/js/dict_xml.js": [
             618
@@ -931,90 +724,6 @@
     ]
   ],
   [
-    "../../_dprhtml/js/sortaz.js",
-    [
-      {
-        "name": "comparePaliAlphabet",
-        "Line": "142",
-        "Called@": {
-          "../../_dprhtml/js/sortaz.js": [
-            126,
-            280
-          ]
-        }
-      },
-      {
-        "name": "findSimilarWords",
-        "Line": "179",
-        "Called@": {
-          "../../_dprhtml/js/xml.js": [
-            1194,
-            1211
-          ],
-          "../../_dprhtml/js/sortaz.js": [
-            245
-          ],
-          "../../_dprhtml/js/dict.js": [
-            207,
-            414,
-            615,
-            782,
-            783,
-            784,
-            1402
-          ]
-        }
-      },
-      {
-        "name": "groupBySimilarity",
-        "Line": "236",
-        "Called@": {
-          "../../_dprhtml/js/sortaz.js": []
-        }
-      },
-      {
-        "name": "removeDuplicatesFromArray",
-        "Line": "284",
-        "Called@": {
-          "../../_dprhtml/js/sortaz.js": []
-        }
-      },
-      {
-        "name": "sortStrip",
-        "Line": "133",
-        "Called@": {
-          "../../_dprhtml/js/sortaz.js": [
-            146
-          ]
-        }
-      },
-      {
-        "name": "sortaz",
-        "Line": "125",
-        "Called@": {
-          "../../_dprhtml/index.html": [
-            435
-          ],
-          "../../_dprhtml/js/sortaz.js": [
-            277
-          ],
-          "../../_dprhtml/js/dict.js": [
-            514,
-            537,
-            837
-          ],
-          "../../_dprhtml/js/search.js": [
-            951,
-            979
-          ],
-          "../../_dprhtml/features/bottom-pane/init.js": [
-            38
-          ]
-        }
-      }
-    ]
-  ],
-  [
     "../../_dprhtml/js/web/io.js",
     [
       {
@@ -1048,8 +757,8 @@
         "Line": "257",
         "Called@": {
           "../../_dprhtml/js/search_history.js": [
-            16,
-            148
+            18,
+            150
           ],
           "../../_dprhtml/js/web/io.js": []
         }
@@ -1127,8 +836,8 @@
         "Line": "9",
         "Called@": {
           "../../_dprhtml/js/search_history.js": [
-            4,
-            136
+            6,
+            138
           ],
           "../../_dprhtml/js/bookmarks.js": [
             178,
@@ -1168,8 +877,8 @@
         "Line": "51",
         "Called@": {
           "../../_dprhtml/js/search_history.js": [
-            131,
-            181
+            133,
+            183
           ],
           "../../_dprhtml/js/bookmarks.js": [
             150,
@@ -1191,6 +900,93 @@
         "Line": "305",
         "Called@": {
           "../../_dprhtml/js/web/io.js": []
+        }
+      }
+    ]
+  ],
+  [
+    "../../_dprhtml/js/sortaz.js",
+    [
+      {
+        "name": "comparePaliAlphabet",
+        "Line": "142",
+        "Called@": {
+          "../../_dprhtml/js/sortaz.js": [
+            126,
+            280
+          ]
+        }
+      },
+      {
+        "name": "findSimilarWords",
+        "Line": "179",
+        "Called@": {
+          "../../_dprhtml/js/xml.js": [
+            1194,
+            1211
+          ],
+          "../../_dprhtml/js/sortaz.js": [
+            245
+          ],
+          "../../_dprhtml/js/dict.js": [
+            207,
+            414,
+            615,
+            782,
+            783,
+            784,
+            1402
+          ]
+        }
+      },
+      {
+        "name": "groupBySimilarity",
+        "Line": "236",
+        "Called@": {
+          "../../_dprhtml/js/sortaz.js": []
+        }
+      },
+      {
+        "name": "removeDuplicatesFromArray",
+        "Line": "284",
+        "Called@": {
+          "../../_dprhtml/js/sortaz.js": []
+        }
+      },
+      {
+        "name": "sortStrip",
+        "Line": "133",
+        "Called@": {
+          "../../_dprhtml/js/sortaz.js": [
+            146
+          ]
+        }
+      },
+      {
+        "name": "sortaz",
+        "Line": "125",
+        "Called@": {
+          "../../_dprhtml/index.html": [
+            479
+          ],
+          "../../_dprhtml/sw.js": [
+            22
+          ],
+          "../../_dprhtml/js/sortaz.js": [
+            277
+          ],
+          "../../_dprhtml/js/dict.js": [
+            514,
+            537,
+            837
+          ],
+          "../../_dprhtml/js/search.js": [
+            951,
+            979
+          ],
+          "../../_dprhtml/features/bottom-pane/init.js": [
+            38
+          ]
         }
       }
     ]
@@ -1415,7 +1211,10 @@
         "Line": "19",
         "Called@": {
           "../../_dprhtml/index.html": [
-            442
+            486
+          ],
+          "../../_dprhtml/sw.js": [
+            22
           ],
           "../../_dprhtml/js/convert.js": [
             30,
@@ -1485,6 +1284,100 @@
     ]
   ],
   [
+    "../../_dprhtml/js/config.js",
+    [
+      {
+        "name": "addATIJS",
+        "Line": "101",
+        "Called@": {
+          "../../_dprhtml/js/config.js": [
+            24
+          ]
+        }
+      },
+      {
+        "name": "addJS",
+        "Line": "119",
+        "Called@": {
+          "../../_dprhtml/js/translations.js": [
+            82
+          ],
+          "../../_dprhtml/js/dict_xml.js": [
+            33,
+            219,
+            406,
+            451,
+            456,
+            524
+          ],
+          "../../_dprhtml/js/format.js": [
+            432,
+            627
+          ],
+          "../../_dprhtml/js/xml.js": [
+            186
+          ],
+          "../../_dprhtml/js/config.js": [
+            103,
+            120
+          ],
+          "../../_dprhtml/js/navigation.js": [
+            17
+          ],
+          "../../_dprhtml/js/dict.js": [
+            71
+          ],
+          "../../_dprhtml/js/analysis_function.js": [
+            12
+          ],
+          "../../_dprhtml/js/search.js": [
+            1048,
+            1049
+          ],
+          "../../_dprhtml/js/dpr_pal.js": [
+            36
+          ]
+        }
+      },
+      {
+        "name": "changecss",
+        "Line": "50",
+        "Called@": {
+          "../../_dprhtml/js/config.js": []
+        }
+      },
+      {
+        "name": "checkbackground",
+        "Line": "65",
+        "Called@": {
+          "../../_dprhtml/js/config.js": [
+            29
+          ]
+        }
+      },
+      {
+        "name": "getconfig",
+        "Line": "18",
+        "Called@": {
+          "../../_dprhtml/js/config.js": [],
+          "../../_dprhtml/js/chrome.js": [
+            106,
+            113
+          ],
+          "../../_dprhtml/js/move.js": [
+            7
+          ],
+          "../../_dprhtml/features/search/init.js": [
+            174
+          ],
+          "../../_dprhtml/features/dictionary/init.js": [
+            49
+          ]
+        }
+      }
+    ]
+  ],
+  [
     "../../_dprhtml/js/grammar.js",
     [
       {
@@ -1492,14 +1385,17 @@
         "Line": "5",
         "Called@": {
           "../../_dprhtml/index.html": [
-            463
+            507
+          ],
+          "../../_dprhtml/sw.js": [
+            22
           ],
           "../../_dprhtml/js/grammar.js": [
             506
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            11,
-            190
+            13,
+            192
           ],
           "../../_dprhtml/js/dict.js": [
             603,
@@ -1615,100 +1511,6 @@
     ]
   ],
   [
-    "../../_dprhtml/js/config.js",
-    [
-      {
-        "name": "addATIJS",
-        "Line": "101",
-        "Called@": {
-          "../../_dprhtml/js/config.js": [
-            24
-          ]
-        }
-      },
-      {
-        "name": "addJS",
-        "Line": "119",
-        "Called@": {
-          "../../_dprhtml/js/translations.js": [
-            69
-          ],
-          "../../_dprhtml/js/dict_xml.js": [
-            33,
-            219,
-            406,
-            451,
-            456,
-            524
-          ],
-          "../../_dprhtml/js/format.js": [
-            432,
-            629
-          ],
-          "../../_dprhtml/js/xml.js": [
-            186
-          ],
-          "../../_dprhtml/js/config.js": [
-            103,
-            120
-          ],
-          "../../_dprhtml/js/navigation.js": [
-            17
-          ],
-          "../../_dprhtml/js/dict.js": [
-            71
-          ],
-          "../../_dprhtml/js/analysis_function.js": [
-            12
-          ],
-          "../../_dprhtml/js/search.js": [
-            1048,
-            1049
-          ],
-          "../../_dprhtml/js/dpr_pal.js": [
-            36
-          ]
-        }
-      },
-      {
-        "name": "changecss",
-        "Line": "50",
-        "Called@": {
-          "../../_dprhtml/js/config.js": []
-        }
-      },
-      {
-        "name": "checkbackground",
-        "Line": "65",
-        "Called@": {
-          "../../_dprhtml/js/config.js": [
-            29
-          ]
-        }
-      },
-      {
-        "name": "getconfig",
-        "Line": "18",
-        "Called@": {
-          "../../_dprhtml/js/config.js": [],
-          "../../_dprhtml/js/chrome.js": [
-            106,
-            113
-          ],
-          "../../_dprhtml/js/move.js": [
-            7
-          ],
-          "../../_dprhtml/features/search/init.js": [
-            174
-          ],
-          "../../_dprhtml/features/dictionary/init.js": [
-            49
-          ]
-        }
-      }
-    ]
-  ],
-  [
     "../../_dprhtml/js/xml.js",
     [
       {
@@ -1758,8 +1560,8 @@
           ],
           "../../_dprhtml/js/xml.js": [],
           "../../_dprhtml/js/receive.js": [
-            62,
-            86
+            64,
+            88
           ],
           "../../_dprhtml/js/web/send_sidebar.js": [
             76,
@@ -1787,8 +1589,8 @@
             30
           ],
           "../../_dprhtml/js/receive.js": [
-            60,
-            100
+            62,
+            102
           ],
           "../../_dprhtml/js/web/send_sidebar.js": [
             143,
@@ -1816,7 +1618,7 @@
         "Line": "1132",
         "Called@": {
           "../../_dprhtml/js/format.js": [
-            607
+            605
           ],
           "../../_dprhtml/js/xml.js": []
         }
@@ -2262,12 +2064,12 @@
             308
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            155,
-            174,
-            257
+            157,
+            176,
+            259
           ],
           "../../_dprhtml/js/receive.js": [
-            33
+            35
           ],
           "../../_dprhtml/js/dict.js": [
             329,
@@ -2314,7 +2116,7 @@
             448
           ],
           "../../_dprhtml/js/receive.js": [
-            38
+            40
           ],
           "../../_dprhtml/js/dict.js": [
             989,
@@ -2373,15 +2175,15 @@
             160
           ],
           "../../_dprhtml/js/format.js": [
-            634
+            632
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            151,
-            171,
-            256
+            153,
+            173,
+            258
           ],
           "../../_dprhtml/js/receive.js": [
-            28
+            30
           ],
           "../../_dprhtml/js/dict.js": [
             144,
@@ -2532,8 +2334,8 @@
         "Line": "1165",
         "Called@": {
           "../../_dprhtml/js/analysis_declension.js": [
-            492,
-            515
+            494,
+            517
           ],
           "../../_dprhtml/js/analysis_function.js": [
             163,
@@ -2581,10 +2383,10 @@
             348
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            295
+            297
           ],
           "../../_dprhtml/js/index.js": [
-            136
+            135
           ],
           "../../_dprhtml/js/analysis_function.js": [],
           "../../_dprhtml/js/web/send_sidebar.js": [
@@ -2600,7 +2402,7 @@
     [
       {
         "name": "alertFlash",
-        "Line": "500",
+        "Line": "498",
         "Called@": {
           "../../_dprhtml/js/grammar.js": [
             17,
@@ -2612,8 +2414,8 @@
           "../../_dprhtml/js/format.js": [
             489,
             492,
-            515,
-            520
+            513,
+            518
           ],
           "../../_dprhtml/js/xml.js": [
             1141,
@@ -2649,7 +2451,7 @@
         "Called@": {
           "../../_dprhtml/js/format.js": [],
           "../../_dprhtml/js/receive.js": [
-            23
+            25
           ],
           "../../_dprhtml/js/send_bottom.js": [
             9,
@@ -2659,7 +2461,7 @@
       },
       {
         "name": "clearDivs",
-        "Line": "550",
+        "Line": "548",
         "Called@": {
           "../../_dprhtml/js/dict_xml.js": [
             42,
@@ -2672,7 +2474,7 @@
           ],
           "../../_dprhtml/js/format.js": [],
           "../../_dprhtml/js/analysis_output.js": [
-            260
+            262
           ],
           "../../_dprhtml/js/dict.js": [
             553,
@@ -2705,11 +2507,11 @@
       },
       {
         "name": "fadeIn",
-        "Line": "529",
+        "Line": "527",
         "Called@": {
           "../../_dprhtml/js/format.js": [
-            527,
-            533
+            525,
+            531
           ],
           "../../_dprhtml/js/translate.js": [
             964
@@ -2718,18 +2520,18 @@
       },
       {
         "name": "fadeInOut",
-        "Line": "525",
+        "Line": "523",
         "Called@": {
           "../../_dprhtml/js/format.js": []
         }
       },
       {
         "name": "fadeOut",
-        "Line": "541",
+        "Line": "539",
         "Called@": {
           "../../_dprhtml/js/format.js": [
-            537,
-            545
+            535,
+            543
           ]
         }
       },
@@ -2748,7 +2550,7 @@
       },
       {
         "name": "getNameHTML",
-        "Line": "648",
+        "Line": "646",
         "Called@": {
           "../../_dprhtml/js/format.js": [],
           "../../_dprhtml/js/xml.js": [
@@ -2763,18 +2565,18 @@
       },
       {
         "name": "joinArray",
-        "Line": "639",
+        "Line": "637",
         "Called@": {
           "../../_dprhtml/js/format.js": []
         }
       },
       {
         "name": "linkToPED",
-        "Line": "628",
+        "Line": "626",
         "Called@": {
           "../../_dprhtml/js/format.js": [],
           "../../_dprhtml/js/analysis_output.js": [
-            231
+            233
           ],
           "../../_dprhtml/js/dict.js": [
             1299
@@ -2783,7 +2585,7 @@
       },
       {
         "name": "makeTable",
-        "Line": "614",
+        "Line": "612",
         "Called@": {
           "../../_dprhtml/js/format.js": [],
           "../../_dprhtml/js/translate.js": [
@@ -2797,7 +2599,7 @@
       },
       {
         "name": "makeToolbox",
-        "Line": "581",
+        "Line": "579",
         "Called@": {
           "../../_dprhtml/js/send.js": [
             455
@@ -2921,8 +2723,8 @@
             267
           ],
           "../../_dprhtml/js/analysis_declension.js": [
-            507,
-            512
+            509,
+            514
           ],
           "../../_dprhtml/js/analysis_function.js": [
             14,
@@ -3005,7 +2807,7 @@
       },
       {
         "name": "installGlobalHandlers",
-        "Line": "50",
+        "Line": "49",
         "Called@": {
           "../../_dprhtml/js/index.js": [
             4
@@ -3017,7 +2819,7 @@
         "Line": "25",
         "Called@": {
           "../../_dprhtml/index.html": [
-            479
+            523
           ],
           "../../_dprhtml/js/index.js": []
         }
@@ -3038,27 +2840,18 @@
             349
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            258
+            260
           ],
           "../../_dprhtml/js/index.js": []
         }
       },
       {
         "name": "setupBTForRG",
-        "Line": "204",
+        "Line": "174",
         "Called@": {
           "../../_dprhtml/js/index.js": [
-            29,
-            211
-          ]
-        }
-      },
-      {
-        "name": "triggerUpdateCheck",
-        "Line": "175",
-        "Called@": {
-          "../../_dprhtml/js/index.js": [
-            26
+            28,
+            181
           ]
         }
       }
@@ -3077,7 +2870,7 @@
             380
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            262
+            264
           ],
           "../../_dprhtml/js/chrome.js": []
         }
@@ -3087,7 +2880,7 @@
         "Line": "246",
         "Called@": {
           "../../_dprhtml/js/analysis_output.js": [
-            264
+            266
           ],
           "../../_dprhtml/js/chrome.js": [],
           "../../_dprhtml/features/other-dialogs/init.js": [
@@ -3148,7 +2941,7 @@
         "Called@": {
           "../../_dprhtml/js/chrome.js": [
             162,
-            410
+            417
           ]
         }
       },
@@ -3253,8 +3046,8 @@
             502
           ],
           "../../_dprhtml/js/chrome.js": [
-            409,
-            410
+            416,
+            417
           ],
           "../../_dprhtml/js/web/navigation_sidebar.js": [
             318
@@ -3363,15 +3156,15 @@
         "Line": "215",
         "Called@": {
           "../../_dprhtml/index.html": [
-            150,
-            281
+            193,
+            324
           ],
           "../../_dprhtml/js/dprviewmodel.js": [
             89,
             436
           ],
           "../../_dprhtml/js/chrome.js": [
-            408
+            415
           ],
           "../../_dprhtml/features/other-dialogs/init.js": [
             44,
@@ -3413,9 +3206,9 @@
             135
           ],
           "../../_dprhtml/js/receive.js": [
-            92,
-            106,
-            113
+            94,
+            108,
+            115
           ],
           "../../_dprhtml/js/web/send_sidebar.js": [
             98,
@@ -3441,9 +3234,9 @@
             136
           ],
           "../../_dprhtml/js/receive.js": [
-            93,
-            107,
-            126
+            95,
+            109,
+            128
           ],
           "../../_dprhtml/js/web/send_sidebar.js": [
             99,
@@ -3465,10 +3258,10 @@
         "Line": "3",
         "Called@": {
           "../../_dprhtml/js/translations.js": [
-            64
+            76
           ],
           "../../_dprhtml/js/search_history.js": [
-            25
+            27
           ],
           "../../_dprhtml/js/send.js": [],
           "../../_dprhtml/js/dict_xml.js": [
@@ -3483,7 +3276,7 @@
             285,
             368,
             438,
-            649
+            647
           ],
           "../../_dprhtml/js/xml.js": [
             241,
@@ -3500,10 +3293,10 @@
             965
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            151,
-            155,
-            171,
-            174
+            153,
+            157,
+            173,
+            176
           ],
           "../../_dprhtml/js/bookmarks.js": [
             73,
@@ -3652,7 +3445,7 @@
         "Line": "385",
         "Called@": {
           "../../_dprhtml/js/translations.js": [
-            64
+            76
           ],
           "../../_dprhtml/js/send.js": [
             512
@@ -3681,7 +3474,7 @@
             460
           ],
           "../../_dprhtml/js/receive.js": [
-            59
+            61
           ]
         }
       },
@@ -3722,7 +3515,7 @@
           ],
           "../../_dprhtml/js/format.js": [
             438,
-            649
+            647
           ],
           "../../_dprhtml/js/dict.js": [
             334
@@ -4005,7 +3798,7 @@
             444,
             460,
             461,
-            649
+            647
           ],
           "../../_dprhtml/js/xml.js": [
             108,
@@ -4037,26 +3830,26 @@
             974
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            27,
-            30,
-            38,
-            41,
-            114,
-            124,
-            125,
-            145,
-            150,
-            151,
-            154,
-            155,
-            171,
-            174,
-            234,
-            237
+            29,
+            32,
+            40,
+            43,
+            116,
+            126,
+            127,
+            147,
+            152,
+            153,
+            156,
+            157,
+            173,
+            176,
+            236,
+            239
           ],
           "../../_dprhtml/js/receive.js": [
-            51,
-            52
+            53,
+            54
           ],
           "../../_dprhtml/js/sortaz.js": [
             138
@@ -4252,7 +4045,7 @@
           ],
           "../../_dprhtml/js/format.js": [
             434,
-            631
+            629
           ],
           "../../_dprhtml/js/xml.js": [
             654,
@@ -4315,7 +4108,10 @@
         "Line": "1023",
         "Called@": {
           "../../_dprhtml/index.html": [
-            416
+            459
+          ],
+          "../../_dprhtml/sw.js": [
+            22
           ],
           "../../_dprhtml/js/format.js": [
             177,
@@ -4354,11 +4150,11 @@
             987
           ],
           "../../_dprhtml/js/analysis_output.js": [
-            145,
-            242,
+            147,
             244,
-            270,
-            275
+            246,
+            272,
+            277
           ],
           "../../_dprhtml/js/translit.js": [],
           "../../_dprhtml/js/web/navigation_sidebar.js": [

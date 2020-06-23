@@ -6,8 +6,6 @@ DPR_G.G_dictOpts = []; //
 DPR_G.G_dictEntry = '';
 DPR_G.G_dictUnicode = false;
 DPR_G.G_similar_min = 75;
-function moveframey() {
-} // fake
 
 function parseDictURLParameters(){
   if(document.location.href.indexOf('?') > -1){
