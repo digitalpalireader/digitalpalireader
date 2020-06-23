@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_history_mod = ( function () {
+
 async function removeHistory(i) {
 
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
@@ -60,3 +62,12 @@ function addHistory(value) {
     }
   }
 }
+
+return {
+
+addHistory : addHistory,
+clearHistory : clearHistory,
+getHistory : getHistory,
+removeHistory : removeHistory,
+}
+})()

@@ -57,22 +57,6 @@ var DPR_DataLoader = (function() {
   };
 })();
 
-function loadXMLFileAsync(file, setNo) {
-  if(typeof(setNo) == 'undefined')
-    setNo = 0;
-
-  switch(setNo) {
-    case 0:
-      var set = 'my';
-      break;
-    case 1:
-      var set = 'th';
-      break;
-  }
-
-  return DPR_DataLoader.loadTipitakaAsync(file, set);
-}
-
 var XML_Load = (function () {
   const createXhr = (request, async = true) => {
     let xhr = new XMLHttpRequest();
@@ -84,6 +68,22 @@ var XML_Load = (function () {
     }
 
     return xhr;
+  }
+
+  function loadXMLFileAsync(file, setNo) {
+    if(typeof(setNo) == 'undefined')
+      setNo = 0;
+
+    switch(setNo) {
+      case 0:
+        var set = 'my';
+        break;
+      case 1:
+        var set = 'th';
+        break;
+    }
+
+    return DPR_DataLoader.loadTipitakaAsync(file, set);
   }
 
   // REFER: http://ccoenraets.github.io/es6-tutorial-data/promisify/.
@@ -104,5 +104,6 @@ var XML_Load = (function () {
 
   return {
     xhrGetAsync: xhrGetAsync,
+    loadXMLFileAsync: loadXMLFileAsync
   };
 })();

@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_move_mod = ( function () {
+
 DPR_G.moveat = 2;
 
 function moveframex(a,temp) //read, etc
@@ -10,6 +12,10 @@ function moveframex(a,temp) //read, etc
 
 function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
 {
+  if(!a & !b){
+    return ;
+  }
+
   if(a == 'dif' || a == 'cdif') a = 'difout';
 
   if(!b)
@@ -106,3 +112,10 @@ function scrollToId(a,b) {
   if(a=='dif') a = 'cdif';
   document.getElementById(a).scrollTop=(typeof(b) == 'number' ? b : document.getElementById(b).offsetTop);
 }
+
+return {
+getlink : getlink,
+moves : moves,
+scrollToId : scrollToId,
+}
+})()
