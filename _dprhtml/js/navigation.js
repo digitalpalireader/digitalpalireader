@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_navigation_mod = ( function () {
+
 function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1
 
 
@@ -35,3 +37,9 @@ function getDppnEntry(term) {
   }
   return dEI;
 }
+
+return {
+getBookName : getBookName,
+getDppnEntry : getDppnEntry,
+}
+})()

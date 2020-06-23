@@ -381,7 +381,7 @@ async function importXMLs(cnt)
 
     //devO(bookload);
 
-    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(DPR_G.bookfile,0);
 
     createTables(xmlDoc,hiert);
 
@@ -411,7 +411,7 @@ async function importXMLs(cnt)
     DPR_G.bookperm = DPR_G.bookat;
     hiert = DPR_G.bookfile.charAt(DPR_G.bookfile.length-1);
 
-    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(DPR_G.bookfile,0);
     createTables(xmlDoc,hiert);
 
     DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
@@ -436,7 +436,7 @@ async function importXMLs(cnt)
     DPR_G.bookfile = DPR_G.G_searchFileArray[DPR_G.qz];
     hiert = DPR_G.bookfile.charAt(DPR_G.bookfile.length-1);
 
-    var xmlDoc = await loadXMLFileAsync(DPR_G.bookfile,0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(DPR_G.bookfile,0);
 
     createTables(xmlDoc,hiert);
 
@@ -503,7 +503,7 @@ function createTables(xmlDoc,hiert)
   {
     nikaya = DPR_G.nikperm;
   }
-  var bookname = getBookName(nikaya,hiert,parseInt(book)-1);
+  var bookname = DPR_navigation_mod.getBookName(nikaya,hiert,parseInt(book)-1);
 
   var postpara ='';
   var theData = '';
@@ -1011,7 +1011,7 @@ function showonly(string) {
       da[x].style.display = "block";
     }
     document.getElementById('showing').style.display = 'none';
-    scrollToId('search',0);
+    DPR_move_mod.scrollToId('search',0);
   }
   else {
     string = string.replace(/ +/g,'_')
@@ -1022,7 +1022,7 @@ function showonly(string) {
     const linkText = normalizeLongSearchResult(toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
     $('#showing').html('<b style="color:'+DPR_G.DPR_prefs['colped']+'">' + linkText + '&nbsp;</b><b>x</b>');
     document.getElementById('showing').style.display = 'block';
-    scrollToId('search','sbfb');
+    DPR_move_mod.scrollToId('search','sbfb');
   }
 }
 
@@ -1121,7 +1121,7 @@ function atiSearchOffline(d, getstring) {
   while (DPR_G.G_searchSet.indexOf(nikA[d]) == -1) {
     d++;
     if(d == nikA.length) { // end
-      scrollToId('search',0);
+      DPR_move_mod.scrollToId('search',0);
       return;
     }
   }
@@ -1179,7 +1179,7 @@ function atiSearchOffline(d, getstring) {
         postpara = '';
         if (startmatch >= 0)
         {
-          listout += '<a href="javascript:void(0)" onclick="scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_G.DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">&rArr;</a><br/>';
+          listout += '<a href="javascript:void(0)" onclick="DPR_move_mod.scrollToId(\'search\',\'atio'+nik+c+'\')" style="color:'+DPR_G.DPR_prefs['colsel']+'" title="show results in sutta">' + title + '</a>&nbsp;<a class="small green" href="file://'+DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">&rArr;</a><br/>';
           while (startmatch >= 0)
           {
             count++;
@@ -1206,7 +1206,7 @@ function atiSearchOffline(d, getstring) {
           }
 
           postpara = postpara.replace(/<c0>/g, '<span style="color:'+DPR_G.DPR_prefs['colped']+'">').replace(/<xc>/g, '</span>');
-          finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">'+title+'</a></b> <a href="javascript:void(0)" onclick="scrollToId(\'search\',0);" class="small" style="color:'+DPR_G.DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
+          finalout += '<div id=atio'+nik+c+'><p><br><b><a class="green" href="file://'+DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/')+'/html/tipitaka/'+anik[c]+'" target="_blank" title="open sutta">'+title+'</a></b> <a href="javascript:void(0)" onclick="DPR_move_mod.scrollToId(\'search\',0);" class="small" style="color:'+DPR_G.DPR_prefs['coldppn']+'">top</a></p><p>' + postpara + '</p></div>';
         }
       }
     }
@@ -1229,7 +1229,7 @@ function atiSearchOffline(d, getstring) {
   document.getElementById('dictList').appendChild(listNode);
 
   var cellNode = document.createElement('td');
-  cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+DPR_G.G_nikLongName[nik] + '</a>: ' + count + '; ';
+  cellNode.innerHTML = '<a class="green" href="javascript:void(0)"'+(count > 0 ? ' onclick="DPR_move_mod.scrollToId(\'dif\',\'atiL'+nik+'\')"' : '')+'>'+DPR_G.G_nikLongName[nik] + '</a>: ' + count + '; ';
 
   var val = DPR_G.MD.getElementById('matches'+nikA[d]).getAttribute('value').replace(/: .+/,': ');
   DPR_G.MD.getElementById('matches'+nikA[d]).setAttribute('value',val+count);
@@ -1241,13 +1241,13 @@ function atiSearchOffline(d, getstring) {
   document.getElementById('atiT'+nik).appendChild(outNode);
 
   if(DPR_G.stopsearch == 1) {
-    scrollToId('search',0);
+    DPR_move_mod.scrollToId('search',0);
     return;
   }
 
 
   if(++d == nikA.length) {
-    scrollToId('search',0);
+    DPR_move_mod.scrollToId('search',0);
     return;
   }
 

@@ -1,4 +1,7 @@
+'use strict';
+
 var DPR_send_bottom_mod = (function(){
+
 function sendTextPad(add){
   var input = document.getElementById('pad').value;
 

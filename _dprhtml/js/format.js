@@ -413,7 +413,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var lmt = 60;
   var lgt = una.length;
 
-  book = getBookName(nikaya,hiert,book-1);
+  book = DPR_navigation_mod.getBookName(nikaya,hiert,book-1);
   var title = '',save = '',raw = '';
 
   if (DPR_G.G_nikFullFullNames[nikaya]) {
@@ -433,7 +433,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
     for (var i in namea) {
       var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
       if(tt.length < 2) continue;
-      var dEI = getDppnEntry(tt);
+      var dEI = DPR_navigation_mod.getDppnEntry(tt);
       if (dEI.length > 0) {
         namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event));">&nbsp;n</span>';
       }
