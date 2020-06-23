@@ -24,15 +24,19 @@
           DPR_Chrome.showSingletonInformationToast(
             'New version is available',
             'dpr-update-available-toast',
-            150,
-            async () => {
-              wb.addEventListener('controlling', (_) => {
-                window.location.reload();
-              });
+            600,
+            {
+              toastCommandName: 'Refresh',
+              toastCommandHandler:
+                async () => {
+                  wb.addEventListener('controlling', (_) => {
+                    window.location.reload();
+                  });
 
-              if (registration && registration.waiting) {
-                messageSW(registration.waiting, { type: 'SKIP_WAITING' });
-              }
+                  if (registration && registration.waiting) {
+                    messageSW(registration.waiting, { type: 'SKIP_WAITING' });
+                  }
+                },
             });
 
         wb.addEventListener('waiting', showSkipWaitingPrompt);

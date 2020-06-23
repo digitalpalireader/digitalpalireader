@@ -356,7 +356,7 @@ var DPR_Chrome = (function () {
   const ToastTypeWarning = 'Warning';
   const ToastTypeSuccess = 'Success';
   const ToastTypeInfo = 'Information';
-  const createToast = (type, message, delay, uniqueId, toastCommandHandler) => {
+  const createToast = (type, message, delay, uniqueId, {toastCommandName, toastCommandHandler, toastCommandLink}) => {
     const containerId = "#main-container-toast-container";
     if ($(containerId).find(`#${uniqueId}`).length) {
       console.log('Notification with id:', uniqueId, 'already exists. Not creating another.');
@@ -378,12 +378,16 @@ var DPR_Chrome = (function () {
       console.error('Unknown type', type);
     }
 
-    const toast = $.parseHTML(`
+    const toastHtml = $.parseHTML(`
       <div id="${uniqueId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="${delay}">
         <div class="toast-body d-flex flex-row align-items-center ${typeClasses}" style="${style}">
-          <div class="${typeClasses} mr-auto">${message}</div>
+          <div class="${typeClasses} mr-auto">
+            ${message}
+            <a id="toastCommandLink" type="button" class="btn btn-sm ${typeClasses} m-0 text-uppercase font-weight-bold text-nowrap"
+              style="display: none" href="${toastCommandLink}" target="_blank" rel="noreferrer">More details</a>
+          </div>
           <div id="toastCommandContainer" class="${typeClasses} mr-1" style="display: none">
-            <button id="toastCommand" type="button" class="btn btn-sm ${typeClasses} m-0 text-uppercase font-weight-bold" data-dismiss="toast">Refresh</button>
+            <button id="toastCommand" type="button" class="btn btn-sm ${typeClasses} m-0 text-uppercase font-weight-bold" data-dismiss="toast">${toastCommandName}</button>
           </div>
           <div class="${typeClasses}">
             <button type="button" class="btn btn-sm ${typeClasses} m-0" data-dismiss="toast"><i class="fa fa-times"></i></button>
@@ -392,12 +396,17 @@ var DPR_Chrome = (function () {
       </div>
     `);
 
+    const toastElement = $(toastHtml);
     if (toastCommandHandler) {
-      $(toast).find('#toastCommandContainer').show();
-      $(toast).find('#toastCommand').click(toastCommandHandler);
+      toastElement.find('#toastCommandContainer').show();
+      toastElement.find('#toastCommand').click(toastCommandHandler);
     }
 
-    $(containerId).append(toast);
+    if (toastCommandLink) {
+      toastElement.find('#toastCommandLink').show();
+    }
+
+    $(containerId).append(toastElement);
 
     $(".toast").toast("show");
 
@@ -409,7 +418,7 @@ var DPR_Chrome = (function () {
   const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds);
   const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds);
   const showSingletonInformationToast =
-    (message, uniqueId, toastVisibleForSeconds, toastCommandHandler) => createToast(ToastTypeInfo, message, toastVisibleForSeconds * 1000, uniqueId, toastCommandHandler);
+    (message, uniqueId, toastVisibleForSeconds, toastCommandInfo) => createToast(ToastTypeInfo, message, toastVisibleForSeconds * 1000, uniqueId, toastCommandInfo);
 
   return {
     toggleDPRSidebar: toggleDPRSidebar,

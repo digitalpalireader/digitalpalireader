@@ -23,6 +23,7 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
+  triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
   initFooter();
   await setupBTForRG();
@@ -179,4 +180,34 @@ async function setupBTForRG() {
     DPR_Translations.createTrProps();
   } catch { }
   console.log('setupBTForRG:', DPR_G.DPR_prefs['buddhist_texts'], DPR_G.DPR_prefs['btloc']);
+}
+
+function triggerPrivacyNoticeAcceptanceCheck() {
+  const PrivacyNoticeAccepted = 'privacyNoticeAccepted'
+  let setIntervalhandle; // NOTE: This is set below.
+  const checker = () => {
+    if (localStorage[PrivacyNoticeAccepted]) {
+      console.debug('Privacy notice accepted. Not going to check anymore...');
+      clearInterval(setIntervalhandle);
+      return;
+    }
+
+    DPR_Chrome.showSingletonInformationToast(
+      'We serve cookies on this site to remember your preferences and optimize your experience.',
+      'privacy-notice-toast',
+      600,
+      {
+        toastCommandName: 'Accept',
+        toastCommandHandler: () => localStorage[PrivacyNoticeAccepted] = 'True',
+        toastCommandLink: 'https://www.sirimangalo.org/info/our-privacy-policy/',
+      });
+  }
+
+  const [firstCheckIntervalInMins, checkIntervalInHours] =
+    /^(localdev|staging)$/i.test(window.environmentName)
+    ? [1, 0.5]
+    : [1, 0.5];
+
+  setTimeout(checker, firstCheckIntervalInMins * 60 * 1000);
+  setIntervalhandle = setInterval(checker, checkIntervalInHours * 60 * 60 * 1000);
 }
