@@ -168,6 +168,7 @@ class NavigationTabViewModel {
 const __navigationTabViewModel = new NavigationTabViewModel();
 
 const initializeNavigationFeature = async () => {
+  getconfig();
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
