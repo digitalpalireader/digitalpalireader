@@ -88,7 +88,7 @@ class OtherDialogsViewModel {
   }
 
   displayPaliQuote() {
-    showBv();
+    DPR_bv_mod.showBv();
     $('#paliquote-dialog-root').modal('show');
   }
 
@@ -144,7 +144,7 @@ class OtherDialogsViewModel {
   }
 
   resetSettings() {
-    resetAllDprSettings();
+    DPR_prefload_mod.resetAllDprSettings();
     window.location.reload();
   }
 

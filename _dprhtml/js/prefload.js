@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_prefload_mod = ( function () {
+
 DPR_G.DPR_prefsinfo = {
   DictH: {
     type: Number.name,
@@ -328,3 +330,11 @@ function resetAllDprSettings() {
   Object.entries(localStorage).forEach(([k, _]) => localStorage.removeItem(k));
   window.location.reload();
 }
+
+return {
+getPref : getPref,
+loadPreference : loadPreference,
+resetAllDprSettings : resetAllDprSettings,
+savePreferences : savePreferences,
+}
+})()
