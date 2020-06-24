@@ -1,11 +1,14 @@
+"use strict";
+"use strict";
+
 var DPR_bv_mod = ( function () {
 
-async function bv(rnd,static) {
+async function bv(rnd,isStatic) {
   let url = `${DPR_PAL.contentFolder}etc/dbv.xml`;
   const xmlDoc = await XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
 
   var divs = xmlDoc.getElementsByTagName('div');
-  if(static) {
+  if(isStatic) {
     var no = rnd-1;
   }
   else if(rnd) {
