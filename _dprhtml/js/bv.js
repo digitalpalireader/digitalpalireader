@@ -1,5 +1,4 @@
 "use strict";
-"use strict";
 
 var DPR_bv_mod = ( function () {
 
