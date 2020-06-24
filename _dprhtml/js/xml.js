@@ -547,7 +547,7 @@ const resolveCommand = (id, cmdCfg) => `
     '${id}',
     {
       canExecute: ${cmdCfg.canExecuteStr},
-      execute: () => ${cmdCfg.executeStr},
+      execute: () => { ${cmdCfg.executeStr} },
       visible: ${cmdCfg.visibleStr},
       title: '${getTitleStr(id, cmdCfg)}',
       icon: ${getCmdIcon(cmdCfg)},

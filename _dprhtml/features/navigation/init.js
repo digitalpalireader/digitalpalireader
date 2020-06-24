@@ -84,16 +84,7 @@ class NavigationTabViewModel {
 
   place(place){
     this.placeArray(place);
-    DPRNav.gotoPlace([
-      place[0],
-      parseInt(place[1]),
-      place[2].replace('x','0'),
-      place[3].replace('x','0'),
-      place[4].replace('x','0'),
-      place[5].replace('x','0'),
-      place[6].replace('x','0'),
-      place[place.length-1],
-    ]);
+    DPRNav.gotoPlace(place);
   }
 
   setPlaces(places) {
