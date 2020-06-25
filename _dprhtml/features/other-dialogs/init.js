@@ -15,14 +15,12 @@ class OtherDialogsViewModel {
   }
 
   async sendQuickLinkFromDialog() {
-    // TODO: Handle this.quicklinkInNewTab().
     var place = this.quicklinkInput();
     var outplace = convertShortLink(place);
     if(outplace[0] === false) {
       return alertFlash(outplace[1], outplace[2]);
     }
-
-    await openPlace(outplace);
+    this.quicklinkInNewTab() ? await openPlace(outplace,null,null,'new') : await openPlace(outplace);
   }
 
   gotoHome() {
@@ -88,7 +86,7 @@ class OtherDialogsViewModel {
   }
 
   displayPaliQuote() {
-    showBv();
+    DPR_bv_mod.showBv();
     $('#paliquote-dialog-root').modal('show');
   }
 
@@ -144,7 +142,7 @@ class OtherDialogsViewModel {
   }
 
   resetSettings() {
-    resetAllDprSettings();
+    DPR_prefload_mod.resetAllDprSettings();
     window.location.reload();
   }
 

@@ -40,7 +40,7 @@ async function mainInitialize() {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
     initFeedbackFormParameters();
-    await showBv();
+    await DPR_bv_mod.showBv();
   }
 
   initMainPane();
@@ -49,7 +49,7 @@ async function mainInitialize() {
 
 function installGlobalHandlers() {
   window.addEventListener('resize', () => {
-    loadPreference();
+    DPR_prefload_mod.loadPreference();
     initMainPane();
   });
 
