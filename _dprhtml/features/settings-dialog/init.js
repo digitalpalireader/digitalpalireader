@@ -32,7 +32,7 @@ class SettingsDialogTabsViewModel {
 
   cancelPreferences() {
     Object
-      .entries(DPR_G.DPR_prefsInfo)
+      .entries(DPR_G.DPR_prefsinfo)
       .forEach(([k, _]) => this[k](DPR_G.DPR_prefs[k]));
   }
 
