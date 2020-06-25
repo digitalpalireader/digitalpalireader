@@ -105,7 +105,7 @@
   },
   {
     "name": "__assign",
-    "declLine1": "function assign() {"
+    "declLine1": "function assign() { [native code] }"
   },
   {
     "name": "__extends",
@@ -118,10 +118,6 @@
   {
     "name": "addBookmark",
     "declLine1": "async function addBookmark() {"
-  },
-  {
-    "name": "addHistory",
-    "declLine1": "function addHistory(value) {"
   },
   {
     "name": "addJS",
@@ -240,10 +236,6 @@
     "declLine1": "function clearDivs(which) { // place divs to be cleared here"
   },
   {
-    "name": "clearHistory",
-    "declLine1": "async function clearHistory(cp) {"
-  },
-  {
     "name": "clearPad",
     "declLine1": "function clearPad() {"
   },
@@ -258,10 +250,6 @@
   {
     "name": "closeBrowser",
     "declLine1": "function closeBrowser(id) {"
-  },
-  {
-    "name": "closeCP",
-    "declLine1": "function closeCP(wR) {"
   },
   {
     "name": "closeDPRSidebar",
@@ -328,10 +316,6 @@
     "declLine1": "function countVals(a) {"
   },
   {
-    "name": "cpFlatten",
-    "declLine1": "function cpFlatten(cpin) {"
-  },
-  {
     "name": "createBrowser",
     "declLine1": "function createBrowser(thisDocument,url,count){"
   },
@@ -378,6 +362,10 @@
   {
     "name": "dppnsearchstart",
     "declLine1": "async function dppnsearchstart(hard)"
+  },
+  {
+    "name": "dump",
+    "declLine1": "() => { }"
   },
   {
     "name": "epdsearchstart",
@@ -476,10 +464,6 @@
     "declLine1": "async function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
   },
   {
-    "name": "getBookName",
-    "declLine1": "function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1"
-  },
-  {
     "name": "getBookmarks",
     "declLine1": "function getBookmarks() {"
   },
@@ -494,14 +478,6 @@
   {
     "name": "getDppnData",
     "declLine1": "async function getDppnData(link){"
-  },
-  {
-    "name": "getDppnEntry",
-    "declLine1": "function getDppnEntry(term) {"
-  },
-  {
-    "name": "getHistory",
-    "declLine1": "function getHistory() {"
   },
   {
     "name": "getHomePath",
@@ -540,16 +516,8 @@
     "declLine1": "function getconfig() {"
   },
   {
-    "name": "getlink",
-    "declLine1": "function getlink(which)"
-  },
-  {
     "name": "giveIDtoTabs",
     "declLine1": "function giveIDtoTabs() { // startup function, give ids to"
-  },
-  {
-    "name": "go_anchor",
-    "declLine1": "function go_anchor(mydiv,n){"
   },
   {
     "name": "groupBySimilarity",
@@ -598,10 +566,6 @@
   {
     "name": "loadPreference",
     "declLine1": "function loadPreference() {"
-  },
-  {
-    "name": "loadXMLFileAsync",
-    "declLine1": "function loadXMLFileAsync(file, setNo) {"
   },
   {
     "name": "loadXMLSection",
@@ -656,36 +620,12 @@
     "declLine1": "function moveFrame() { }"
   },
   {
-    "name": "moveanf",
-    "declLine1": "function moveanf(which) {"
-  },
-  {
-    "name": "moveframec",
-    "declLine1": "function moveframec() // open close control panel"
-  },
-  {
-    "name": "moveframex",
-    "declLine1": "function moveframex(a,temp) //read, etc"
-  },
-  {
-    "name": "moveframey",
-    "declLine1": "function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)"
-  },
-  {
-    "name": "moves",
-    "declLine1": "function moves(a) // search open / close"
-  },
-  {
     "name": "multisearchstart",
     "declLine1": "function multisearchstart(hard)"
   },
   {
     "name": "normalizeLongSearchResult",
     "declLine1": "function normalizeLongSearchResult(match) {"
-  },
-  {
-    "name": "openCP",
-    "declLine1": "function openCP(wR) {"
   },
   {
     "name": "openDPRSidebar",
@@ -788,10 +728,6 @@
     "declLine1": "function removeDuplicatesFromArray(list){"
   },
   {
-    "name": "removeHistory",
-    "declLine1": "async function removeHistory(i) {"
-  },
-  {
     "name": "resetAllDprSettings",
     "declLine1": "function resetAllDprSettings() {"
   },
@@ -822,14 +758,6 @@
   {
     "name": "scrollSearch",
     "declLine1": "function scrollSearch(what) {"
-  },
-  {
-    "name": "scrollToId",
-    "declLine1": "function scrollToId(a,b) {"
-  },
-  {
-    "name": "scrolldown",
-    "declLine1": "function scrolldown(much)"
   },
   {
     "name": "searchTipitaka",
@@ -894,10 +822,6 @@
   {
     "name": "showBv",
     "declLine1": "async function showBv(rnd) {"
-  },
-  {
-    "name": "showHideId",
-    "declLine1": "function showHideId(a) {"
   },
   {
     "name": "showonly",
@@ -1038,6 +962,10 @@
   {
     "name": "translit",
     "declLine1": "function translit(data) {"
+  },
+  {
+    "name": "triggerPrivacyNoticeAcceptanceCheck",
+    "declLine1": "function triggerPrivacyNoticeAcceptanceCheck() {"
   },
   {
     "name": "typeAndGender",

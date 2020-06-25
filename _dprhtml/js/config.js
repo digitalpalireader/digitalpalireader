@@ -17,7 +17,7 @@ const dprBaseStyleSheet = Object.entries(document.styleSheets).find(([_, ss]) =>
 
 function getconfig() {
   for (var i in DPR_G.DPR_prefs) {
-    DPR_G.DPR_prefs[i] = getPref(i);
+    DPR_G.DPR_prefs[i] = DPR_prefload_mod.getPref(i);
   }
 
   if (/top\.htm/.exec(document.location.href) && DPR_G.DPR_prefs["ctrans"] && typeof(DPR_G.atiD) == 'undefined') {
