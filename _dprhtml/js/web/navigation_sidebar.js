@@ -147,7 +147,7 @@ var DPRNav = {
     // history
 
     var hout = '';
-    var theHistory = getHistory();
+    var theHistory = DPR_history_mod.getHistory();
     if (theHistory.length > 0) {
       document.getElementById('hist-box').collapsed = false;
       var histNode = document.getElementById('history');
@@ -300,16 +300,18 @@ var DPRNav = {
     else document.getElementById('bm-box').collapsed = true;
   },
 
-  gotoPlace: function ([nikaya, book, meta, volume, vagga, sutta, section, hiert]) {
-    __navigationTabViewModel.set(nikaya);
-    __navigationTabViewModel.MAT(hiert);
-    const b = __navigationTabViewModel.navBook().findIndex(x => x.value === book + 1);
+  gotoPlace: function (place) {
+    __navigationTabViewModel.set(place[0]);
+    const b = __navigationTabViewModel.navBook().findIndex(x => x.value === parseInt(place[1]) + 1);
     __navigationTabViewModel.book(__navigationTabViewModel.navBook()[b].value);
-    __navigationTabViewModel.meta(meta);
-    __navigationTabViewModel.volume(volume);
-    __navigationTabViewModel.vagga(vagga);
-    __navigationTabViewModel.sutta(sutta);
-    __navigationTabViewModel.section(section);
+    __navigationTabViewModel.MAT(place[place.length-1]);
+    if (place.length > 3) {
+      __navigationTabViewModel.meta(place[2].replace('x','0'));
+      __navigationTabViewModel.volume(place[3].replace('x','0'));
+      __navigationTabViewModel.vagga(place[4].replace('x','0'));
+      __navigationTabViewModel.sutta(place[5].replace('x','0'));
+      __navigationTabViewModel.section(place[6].replace('x','0'));
+    }
   },
 
   searchBook: async function (nik, book, hiert) {

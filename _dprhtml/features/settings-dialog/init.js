@@ -12,7 +12,7 @@ class SettingsDialogTabsViewModel {
   createSettings() {
     return Object
       .entries(DPR_G.DPR_prefsinfo)
-      .reduce((acc, [k, _]) => (acc[k] = ko.observable(getPref(k)), acc), this);
+      .reduce((acc, [k, _]) => (acc[k] = ko.observable(DPR_prefload_mod.getPref(k)), acc), this);
   }
 
   showSettingsDialog() {
@@ -20,7 +20,7 @@ class SettingsDialogTabsViewModel {
   }
 
   savePreferences() {
-    savePreferences(x => this[x]());
+    DPR_prefload_mod.savePreferences(x => this[x]());
     window.location.reload(false);
   }
 
@@ -32,12 +32,12 @@ class SettingsDialogTabsViewModel {
 
   cancelPreferences() {
     Object
-      .entries(DPR_G.DPR_prefsInfo)
+      .entries(DPR_G.DPR_prefsinfo)
       .forEach(([k, _]) => this[k](DPR_G.DPR_prefs[k]));
   }
 
   hardReset() {
-    resetAllDprSettings();
+    DPR_prefload_mod.resetAllDprSettings();
   }
 
   updateActiveSettingsTabId(tabId) {

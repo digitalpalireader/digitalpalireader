@@ -57,7 +57,7 @@ async function addBookmark() {
 
 async function bookmarkframe(refresh) {
   var bookmList = getBookmarks();
-  var histList = getHistory();
+  var histList = DPR_history_mod.getHistory();
   var bookmOut = '';
   var histOut = '';
   var isClearBm = '';
@@ -91,11 +91,11 @@ async function bookmarkframe(refresh) {
 
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-      histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_history_mod.removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!histOut) { histOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
-  else { isclearHist = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="clearHistory()"><b>clear</b></a>'; }
+  else { isclearHist = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear History" onclick="DPR_history_mod.clearHistory()"><b>clear</b></a>'; }
 
   if (refresh === 1) {
     await DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event));

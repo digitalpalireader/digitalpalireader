@@ -40,7 +40,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   var hier=place[7];
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = await loadXMLFileAsync(nikbookhier,place[8]?place[8]:0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,place[8]?place[8]:0);
 
 
   if(xmlDoc == null) return refreshit();
@@ -525,7 +525,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // add to history
 
-  addHistory(DPR_G.G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+nikaya+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
+  DPR_history_mod.addHistory(DPR_G.G_nikLongName[nikaya]+(hierb!='m'?'-'+hierb:'')+' '+book+' - '+bknameme+"@"+nikaya+','+bookno+','+meta+','+volume+','+vagga+','+sutta+','+section+','+hierb);
 
   // refresh history box
 
@@ -547,7 +547,7 @@ const resolveCommand = (id, cmdCfg) => `
     '${id}',
     {
       canExecute: ${cmdCfg.canExecuteStr},
-      execute: () => ${cmdCfg.executeStr},
+      execute: () => { ${cmdCfg.executeStr} },
       visible: ${cmdCfg.visibleStr},
       title: '${getTitleStr(id, cmdCfg)}',
       icon: ${getCmdIcon(cmdCfg)},
@@ -605,7 +605,7 @@ async function loadXMLindex(place,compare) {
   var book = bookno+1;
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = await loadXMLFileAsync(nikbookhier,xset);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,xset);
 
   var z = xmlDoc.getElementsByTagName("ha");
   var y = '';
@@ -653,7 +653,7 @@ async function loadXMLindex(place,compare) {
 
       tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
       if(tt.length > 1) {
-        dEI = getDppnEntry(tt);
+        dEI = DPR_navigation_mod.getDppnEntry(tt);
         if (dEI.length > 0) {
           namen = getNameHTML(dEI,tt);
         }
@@ -720,7 +720,7 @@ async function loadXMLindex(place,compare) {
 
         tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
         if(tt.length > 1) {
-          dEI = getDppnEntry(tt);
+          dEI = DPR_navigation_mod.getDppnEntry(tt);
           if (dEI.length > 0) {
             namen = getNameHTML(dEI,tt);
           }
@@ -774,7 +774,7 @@ async function loadXMLindex(place,compare) {
 
           tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
           if(tt.length > 1) {
-            dEI = getDppnEntry(tt);
+            dEI = DPR_navigation_mod.getDppnEntry(tt);
             if (dEI.length > 0) {
               namen = getNameHTML(dEI,tt);
             }
@@ -829,7 +829,7 @@ async function loadXMLindex(place,compare) {
 
             tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
             if(tt.length > 1) {
-              dEI = getDppnEntry(tt);
+              dEI = DPR_navigation_mod.getDppnEntry(tt);
               if (dEI.length > 0) {
                 namen = getNameHTML(dEI,tt);
               }
@@ -887,7 +887,7 @@ async function loadXMLindex(place,compare) {
 
               tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
               if(tt.length > 1) {
-                dEI = getDppnEntry(tt);
+                dEI = DPR_navigation_mod.getDppnEntry(tt);
                 if (dEI.length > 0) {
                   namen = getNameHTML(dEI,tt);
                 }
@@ -945,7 +945,7 @@ async function loadXMLindex(place,compare) {
 
                 tt = toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
                 if(tt.length > 1) {
-                  dEI = getDppnEntry(tt);
+                  dEI = DPR_navigation_mod.getDppnEntry(tt);
                   if (dEI.length > 0) {
                     namen = getNameHTML(dEI,tt);
                   }
@@ -1050,7 +1050,7 @@ async function loadXMLindex(place,compare) {
 
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
     var places = (place[2]+','+place[3]+','+place[4]+','+place[5]+','+place[6]).replace(/x/g,"'x'");
-    addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
+    DPR_history_mod.addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (comb) - '+bknameme+"@"+nikaya+','+bookno+','+places+','+hier);
 
     var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
 
@@ -1061,7 +1061,7 @@ async function loadXMLindex(place,compare) {
     if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
     else bknameme = '';
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
-    addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
+    DPR_history_mod.addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
     makeToolbox(shortcutFns, main?main:false);
 
     var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
@@ -1152,7 +1152,7 @@ async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier
 
   var nikbookhier = nikaya + (book+1) + hier;
 
-    var xmlDoc = [await loadXMLFileAsync(nikbookhier,0), await loadXMLFileAsync(nikbookhier,1)];
+    var xmlDoc = [await XML_Load.loadXMLFileAsync(nikbookhier,0), await XML_Load.loadXMLFileAsync(nikbookhier,1)];
 
   var myanA = xmlDoc[0].getElementsByTagName("ha")[0].getElementsByTagName("h0")[meta].getElementsByTagName("h1")[volume].getElementsByTagName("h2")[vagga].getElementsByTagName("h3")[sutta].getElementsByTagName("h4")[section].getElementsByTagName("p");
   var thaiA = xmlDoc[1].getElementsByTagName("ha")[0].getElementsByTagName("h0")[meta].getElementsByTagName("h1")[volume].getElementsByTagName("h2")[vagga].getElementsByTagName("h3")[sutta].getElementsByTagName("h4")[section].getElementsByTagName("p");

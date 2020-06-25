@@ -11,7 +11,7 @@ var DPRXML = {
     var nikaya = __navigationTabViewModel.set();
     var book = __navigationTabViewModel.book();
     var nikbookhier = nikaya + book + DPR_G.G_hier;
-    var xmlDoc = await loadXMLFileAsync(nikbookhier, 0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier, 0);
 
     var meta = (depth > 0  ? __navigationTabViewModel.meta() : 0);
     var volume = (depth > 1 ? __navigationTabViewModel.volume() : 0);
@@ -86,7 +86,7 @@ var DPRXML = {
     var hiert = $('#tsoMAT2m').val();
     var nikbookhier = nikaya + book + hiert;
 
-    var xmlDoc = await loadXMLFileAsync(nikbookhier, 0);
+    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier, 0);
 
     var nik = nikaya;
 

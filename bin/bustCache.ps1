@@ -61,4 +61,30 @@ $contents = Get-Content $HtmlFilePath | ForEach-Object {
   }
 }
 
+# BEGIN: HACK
+# NOTE: This is a temporary but stable solution. Once we get webpack, all this gimmickery goes away.
+$chromeJsFileName = Get-ChildItem -Recurse -Filter "chrome.*js" $root
+if (-not $chromeJsFileName) {
+  throw 'Did not find chrome.js'
+} else {
+  Write-Output "Found $($chromeJsFileName.FullName)"
+}
+
+$chromeJsReplaced = $False
+$contents = $contents | ForEach-Object {
+  if ($_ -ceq "      import '/_dprhtml/js/chrome.js'") {
+    "      import '/_dprhtml/js/$($chromeJsFileName.Name)'"
+    $chromeJsReplaced = $True
+  } else {
+    $_
+  }
+}
+
+if (-not $chromeJsReplaced) {
+  throw 'Did not find chrome.js import in index.html'
+} else {
+  Write-Output "Updated chrome.js import..."
+}
+# END: HACK
+
 $contents | Out-File -FilePath $HtmlFilePath -Encoding utf8

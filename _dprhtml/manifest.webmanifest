@@ -1,0 +1,52 @@
+{
+  "short_name": "DPR",
+  "name": "Digital Pāli Reader",
+  "description": "A tool for immersive study of Pāli canon and the language.",
+  "icons": [{
+    "src": "/_dprhtml/images/logo.png",
+    "sizes": "16x16",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo24.png",
+    "sizes": "24x24",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo48.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo64.png",
+    "sizes": "64x64",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo128.png",
+    "sizes": "128x128",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo152.png",
+    "sizes": "152x152",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+    "src": "/_dprhtml/images/logo512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "start_url": "/_dprhtml/index.html",
+  "background_color": "#FFFFDD",
+  "display": "minimal-ui",
+  "scope": "/",
+  "theme_color": "#FFFFDD",
+  "shortcuts": [
+    {
+      "name": "Digital Pāli Reader",
+      "short_name": "DPR",
+      "description": "A tool for immersive study of Pāli canon and the language.",
+      "url": "/_dprhtml/index.html",
+      "icons": [{ "src": "/_dprhtml/images/logo192.png", "sizes": "192x192" }]
+    }
+  ]
+}

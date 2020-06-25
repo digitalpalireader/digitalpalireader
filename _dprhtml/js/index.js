@@ -23,7 +23,7 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
-  triggerUpdateCheck();
+  triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
   initFooter();
   await setupBTForRG();
@@ -40,7 +40,7 @@ async function mainInitialize() {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
     initFeedbackFormParameters();
-    await showBv();
+    await DPR_bv_mod.showBv();
   }
 
   initMainPane();
@@ -49,7 +49,7 @@ async function mainInitialize() {
 
 function installGlobalHandlers() {
   window.addEventListener('resize', () => {
-    loadPreference();
+    DPR_prefload_mod.loadPreference();
     initMainPane();
   });
 
@@ -172,35 +172,6 @@ const  historyPopstateHandler = e => {
   console.warn('>>>> historyPopstateHandler', e);
 }
 
-function triggerUpdateCheck() {
-  const updateCheck = async () => {
-    console.debug('Checking for updates...');
-    try {
-      const verStr = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.baseUrl}version.ver` }, xhr => xhr.responseText.trim());
-      console.debug('Version from server:', verStr, 'current version:', window.releaseNumber);
-      if (verStr !== window.releaseNumber) {
-        const message = `A new version of Digital Pāli Reader just became available. Please <a class="underline" href="" onclick="window.location.reload(true)">refresh this page</a> to activate it.`;
-        DPR_Chrome.createToast(
-          DPR_Chrome.ToastTypeInfo,
-          message,
-          15 * 60 * 1000,
-          'Digital Pāli Reader update',
-          'dpr-update-available-notification');
-      }
-    } catch (e) {
-      console.error('Update check failed with error:', e);
-    }
-  }
-
-  const [firstUpdateCheckIntervalInMins, updateCheckIntervalInHours] =
-    /^(localdev|staging)$/i.test(window.environmentName)
-    ? [5, 1]
-    : [5, 1];
-
-  setTimeout(updateCheck, firstUpdateCheckIntervalInMins * 60 * 1000);
-  setInterval(updateCheck, updateCheckIntervalInHours * 60 * 60 * 1000);
-}
-
 async function setupBTForRG() {
   try {
     const btloc = await XML_Load.xhrGetAsync({ url: 'https://tipitaka.digitalpalireader.online/simc-rg.loc' }, xhr => xhr.responseText.trim())
@@ -209,4 +180,34 @@ async function setupBTForRG() {
     DPR_Translations.createTrProps();
   } catch { }
   console.log('setupBTForRG:', DPR_G.DPR_prefs['buddhist_texts'], DPR_G.DPR_prefs['btloc']);
+}
+
+function triggerPrivacyNoticeAcceptanceCheck() {
+  const PrivacyNoticeAccepted = 'privacyNoticeAccepted'
+  let setIntervalhandle; // NOTE: This is set below.
+  const checker = () => {
+    if (localStorage[PrivacyNoticeAccepted]) {
+      console.debug('Privacy notice accepted. Not going to check anymore...');
+      clearInterval(setIntervalhandle);
+      return;
+    }
+
+    DPR_Chrome.showSingletonInformationToast(
+      'We serve cookies on this site to remember your preferences and optimize your experience.',
+      'privacy-notice-toast',
+      600,
+      {
+        toastCommandName: 'Accept',
+        toastCommandHandler: () => localStorage[PrivacyNoticeAccepted] = 'True',
+        toastCommandLink: 'https://www.sirimangalo.org/info/our-privacy-policy/',
+      });
+  }
+
+  const [firstCheckIntervalInMins, checkIntervalInHours] =
+    /^(localdev|staging)$/i.test(window.environmentName)
+    ? [1, 0.5]
+    : [1, 0.5];
+
+  setTimeout(checker, firstCheckIntervalInMins * 60 * 1000);
+  setIntervalhandle = setInterval(checker, checkIntervalInHours * 60 * 60 * 1000);
 }

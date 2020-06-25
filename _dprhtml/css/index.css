@@ -100,14 +100,6 @@ body {
   padding: 0px;
 }
 
-#mafbc tr {
-  font-weight: bold;
-}
-
-hr {
-  /*width: 100vw;*/
-}
-
 .featureTabContent {
   margin-top: 15px;
 }

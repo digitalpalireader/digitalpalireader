@@ -11,6 +11,7 @@ body, p, table, div, a, font, span {
 
 select, input, textarea {
   font-size: 14px;
+  border: 1px solid darkgrey;
 }
 
 .small {
@@ -35,9 +36,13 @@ select, input, textarea {
 
 
 .paperback {
+  /* NOTE: Style set at runtime from settings */
+  background-color: unset;
 }
 
 .chromeback {
+  /* NOTE: Style set at runtime from settings */
+  background-color: unset;
 }
 
 .abut {
