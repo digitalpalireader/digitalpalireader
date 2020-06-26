@@ -173,7 +173,7 @@ function convertOldBookmarks() {
   for(var i=0;i < ca.length;i++)
   {
     if (/^DPB/.exec(ca[i])) {
-      var name = toUni(ca[i].substring(3))
+      var name = DPR_translit_mod.toUni(ca[i].substring(3))
       ba[name] = [];
       ba[name]['loc'] = readFile(ca[i])[0];
       var nik = ba[name]['loc'].match(/^[0-9]+/)[0];
@@ -181,12 +181,12 @@ function convertOldBookmarks() {
 
     }
     else if (/^DPD/.exec(ca[i])) {
-      if(!ba[toUni(ca[i].substring(3))]) continue;
-      ba[toUni(ca[i].substring(3))]['desc'] = readFile(ca[i])[0];
+      if(!ba[DPR_translit_mod.toUni(ca[i].substring(3))]) continue;
+      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['desc'] = readFile(ca[i])[0];
     }
     else if (/^DPS/.exec(ca[i])) {
-      if(!ba[toUni(ca[i].substring(3))]) continue;
-      ba[toUni(ca[i].substring(3))]['scroll'] = readFile(ca[i])[0];
+      if(!ba[DPR_translit_mod.toUni(ca[i].substring(3))]) continue;
+      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['scroll'] = readFile(ca[i])[0];
     }
   }
 

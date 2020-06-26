@@ -34,11 +34,11 @@ async function paliXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    await sendPaliXML(toVel(filein.split(',')[1]),true);
+    await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
   moveFrame(1);
-  var file = toUni(filein);
+  var file = DPR_translit_mod.toUni(filein);
   clearDivs('dif');
   moveFrame(1);
 
@@ -56,12 +56,12 @@ async function paliXML(filein,which,add)
   var ttit = filea[1].replace(/˚/g,'`');
   file = filea[0];
 
-  if(!DPR_G.P[toVel(ttit)]) {
-    if(DPR_G.G_irregNoun[toVel(ttit)]) {
-      ttit = DPR_G.G_irregNoun[toVel(ttit)];
+  if(!DPR_G.P[DPR_translit_mod.toVel(ttit)]) {
+    if(DPR_G.G_irregNoun[DPR_translit_mod.toVel(ttit)]) {
+      ttit = DPR_G.G_irregNoun[DPR_translit_mod.toVel(ttit)];
     }
-    else if(DPR_G.G_irregVerb[toVel(ttit)]) {
-      ttit = DPR_G.G_irregVerb[toVel(ttit)];
+    else if(DPR_G.G_irregVerb[DPR_translit_mod.toVel(ttit)]) {
+      ttit = DPR_G.G_irregVerb[DPR_translit_mod.toVel(ttit)];
     }
   }
 
@@ -83,11 +83,11 @@ async function paliXML(filein,which,add)
     var datat = '';
     for (var i = 0; i < dataa.length; i++) {
       if(/<[^>]*$/.exec(dataa[i])) { // pesky broken up links
-        var tda = toVel(dataa[i].replace(/<[^>]*$/,'').replace(/<[^>]*>/g, '').replace(/ŋ/g, 'ṃ').toLowerCase().replace(/[^āīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
+        var tda = DPR_translit_mod.toVel(dataa[i].replace(/<[^>]*$/,'').replace(/<[^>]*>/g, '').replace(/ŋ/g, 'ṃ').toLowerCase().replace(/[^āīūṭḍṅṇṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
         if(!tda || tda.length < 2) {
           datat += ' ' + dataa[i];
         }
-        else if(typeof(DPR_G.P[tda]) == 'object' && tda != toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+        else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(DPR_translit_mod.toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
         else datat += ' ' + dataa[i];
         i++
 
@@ -104,12 +104,12 @@ async function paliXML(filein,which,add)
           dataa[i] = dataa[i].replace(/^[^<>]*>/,'');
         }
       }
-      var tda = toVel(dataa[i].replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
+      var tda = DPR_translit_mod.toVel(dataa[i].replace(/<[^>]*>/g, '').toLowerCase().replace(/[^āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶa-z]/g,''));
       if(!tda || tda.length < 2) {
         datat += ' ' + dataa[i];
       }
-      else if(typeof(DPR_G.P[tda]) == 'object' && tda != toVel(ttit)) {
-        datat += ' ' + dataa[i].replace(toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+toUni(tda)+'\')">'+toUni(tda)+'</a>');
+      else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) {
+        datat += ' ' + dataa[i].replace(DPR_translit_mod.toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>');
       }
       else datat += ' ' + dataa[i];
 
@@ -137,7 +137,7 @@ async function paliXML(filein,which,add)
   // get number
   var tname, lname, nname;
 
-  if(DPR_G.P[toVel(ttit)]) {
+  if(DPR_G.P[DPR_translit_mod.toVel(ttit)]) {
     if(DPR_G.G_peda.length == 0) {
       for (var i in DPR_G.P) {
         for (var j in DPR_G.P[i]) {
@@ -147,13 +147,13 @@ async function paliXML(filein,which,add)
     }
     for (var i=0; i < DPR_G.G_peda.length;i++) {
       if(tname) {
-        nname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
+        nname = DPR_G.G_peda[i][1]+","+DPR_translit_mod.toUni(DPR_G.G_peda[i][0]);
         break;
       }
-      if (DPR_G.G_peda[i][0] == toVel(ttit) && DPR_G.G_peda[i][1] == DPR_G.pedfileget) {
-        tname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
+      if (DPR_G.G_peda[i][0] == DPR_translit_mod.toVel(ttit) && DPR_G.G_peda[i][1] == DPR_G.pedfileget) {
+        tname = DPR_G.G_peda[i][1]+","+DPR_translit_mod.toUni(DPR_G.G_peda[i][0]);
       }
-      else lname = DPR_G.G_peda[i][1]+","+toUni(DPR_G.G_peda[i][0]);
+      else lname = DPR_G.G_peda[i][1]+","+DPR_translit_mod.toUni(DPR_G.G_peda[i][0]);
     }
   }
 
@@ -174,9 +174,9 @@ async function paliXML(filein,which,add)
   if(DPR_PAL.isDictionaryFeature()) {
     var permalink = document.location.href;
     if(/\&entry=/.exec(permalink)) {
-      permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
+      permalink = permalink.replace(/&entry=[^&]*/,'&entry='+DPR_translit_mod.toVel(filein));
     }
-    else permalink += '&entry='+toVel(filein);
+    else permalink += '&entry='+DPR_translit_mod.toVel(filein);
     try {
       window.history.replaceState('Object', 'Title', permalink);
     }
@@ -221,7 +221,7 @@ async function DPPNXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    await sendDPPNXML(toVel(filein),true);
+    await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
     return;
   }
 
@@ -239,7 +239,7 @@ async function DPPNXML(filein,which,add)
     tloc = [tt].concat(DPR_G.D[tt][0].split('/'));
   }
 
-  tloc[0] = toVel(tloc[0]);
+  tloc[0] = DPR_translit_mod.toVel(tloc[0]);
 
   clearDivs('dif');
   moveFrame(1);
@@ -279,13 +279,13 @@ async function DPPNXML(filein,which,add)
   }
   for (var i in DPR_G.G_dppn) {
     if(tname) {
-      nname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
+      nname = "'"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+"'";
       break;
     }
     if (DPR_G.G_dppn[i][0] == tloc[0] && DPR_G.G_dppn[i][1] == tloc[1]+'/'+tloc[2]) {
-      tname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
+      tname = "'"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+"'";
     }
-    else lname = "'"+toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+toUni(DPR_G.G_dppn[i][0])+"'";
+    else lname = "'"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+'/'+DPR_G.G_dppn[i][1]+"','"+DPR_translit_mod.toUni(DPR_G.G_dppn[i][0])+"'";
   }
   if (!tname) lname = null;
   // buttons
@@ -321,9 +321,9 @@ async function DPPNXML(filein,which,add)
   if(DPR_PAL.isDictionaryFeature()) {
     var permalink = document.location.href;
     if(/\&entry=/.exec(permalink)) {
-      permalink = permalink.replace(/&entry=[^&]*/,'&entry='+toVel(filein));
+      permalink = permalink.replace(/&entry=[^&]*/,'&entry='+DPR_translit_mod.toVel(filein));
     }
-    else permalink += '&entry='+toVel(filein);
+    else permalink += '&entry='+DPR_translit_mod.toVel(filein);
     try {
       window.history.replaceState('Object', 'Title', permalink);
     }
@@ -343,7 +343,7 @@ async function sktRXML(no,add)
 
   if(add == 'right') return;
   if(add == true) {
-    //await sendDPPNXML(toVel(filein),true);
+    //await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
     //return;
   }
 
@@ -408,7 +408,7 @@ async function sktXML(entry,idx,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    //await sendPaliXML(toVel(filein.split(',')[1]),true);
+    //await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
 
@@ -511,12 +511,12 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
     }
 
     displayDictData(finout);
 
-    setCurrentTitle(toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
+    setCurrentTitle(DPR_translit_mod.toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
 }
 
 async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search

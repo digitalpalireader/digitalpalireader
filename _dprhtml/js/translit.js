@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_translit_mod = ( function () {
+
 function toUni(input) {
   if(!input || input == '') return input;
   var nigahita = (DPR_G.DPR_prefs['nigahita']?'ṁ':'ṃ');
@@ -1051,3 +1053,21 @@ function translit(data) {
   }
   return out;
 }
+
+return {
+fromSin : fromSin,
+fromThai : fromThai,
+toBengali : toBengali,
+toDeva : toDeva,
+toFuzzy : toFuzzy,
+toMyanmar : toMyanmar,
+toSin : toSin,
+toSkt : toSkt,
+toTelugu : toTelugu,
+toThai : toThai,
+toUni : toUni,
+toUniRegEx : toUniRegEx,
+toVel : toVel,
+translit : translit
+}
+})()

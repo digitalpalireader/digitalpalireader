@@ -26,10 +26,10 @@ async function outputDef(which,first,frombox)
         var af = 0;
         var a1 = a[1].split('@');
         for(var i = 0; i < a1.length; i++){
-          if(/\//.exec(a1[i].split('^')[0]) && toUni(a[0].split('-')[i]).length > toUni(a[0].replace('-','')).length/3){ // contains PED match, and is longer than 4
+          if(/\//.exec(a1[i].split('^')[0]) && DPR_translit_mod.toUni(a[0].split('-')[i]).length > DPR_translit_mod.toUni(a[0].replace('-','')).length/3){ // contains PED match, and is longer than 4
             af++;
           }
-          if(i > 0 && toUni(a[0].split('-')[i]).length < 4 && toUni(a[0].split('-')[i]).length > 1){
+          if(i > 0 && DPR_translit_mod.toUni(a[0].split('-')[i]).length < 4 && DPR_translit_mod.toUni(a[0].split('-')[i]).length > 1){
             af--;
           } // penalize small middle
         }
@@ -37,10 +37,10 @@ async function outputDef(which,first,frombox)
         var bf = 0;
         var b1 = b[1].split('@');
         for(var i = 0; i < b1.length; i++){
-          if(/\//.exec(b1[i].split('^')[0]) && toUni(b[0].split('-')[i]).length > toUni(b[0].replace('-','')).length/3){
+          if(/\//.exec(b1[i].split('^')[0]) && DPR_translit_mod.toUni(b[0].split('-')[i]).length > DPR_translit_mod.toUni(b[0].replace('-','')).length/3){
             bf++;
           }
-          if(i > 0 && toUni(b[0].split('-')[i]).length < 4 && toUni(b[0].split('-')[i]).length > 1){
+          if(i > 0 && DPR_translit_mod.toUni(b[0].split('-')[i]).length < 4 && DPR_translit_mod.toUni(b[0].split('-')[i]).length > 1){
             bf--;
           } // penalize small middle
         }
@@ -113,7 +113,7 @@ async function outputDef(which,first,frombox)
       for (var b = 0; b < DPR_G.G_outwords.length; b++)
       {
         var outword = DPR_G.G_outwords[b][0];
-        document.forma.out.innerHTML += '<option>' + toUni(outword) + '</option>';
+        document.forma.out.innerHTML += '<option>' + DPR_translit_mod.toUni(outword) + '</option>';
       }
     }
   }
@@ -123,8 +123,8 @@ async function outputDef(which,first,frombox)
   var myConj = owparts[owparts.length-1].split('#')[0].split('^');
   if(myConj[3]) { // if root form is found, set up conjugation
     if(DPR_G.yt[myConj[3]][4] != 'I') {
-      conjWord.form = toUni(DPR_G.G_outwords[which][0].split('-').pop());
-      conjWord.root = toUni(myConj[3]);
+      conjWord.form = DPR_translit_mod.toUni(DPR_G.G_outwords[which][0].split('-').pop());
+      conjWord.root = DPR_translit_mod.toUni(myConj[3]);
     }
   }
 
@@ -144,17 +144,17 @@ async function outputDef(which,first,frombox)
         // data[2] = category
         // data[3] = short def (if avail)
         // for data[2]: 0 = main, 1 = name, 2 = concise, 3 = none
-      var dataout = translit(toUni(DPR_G.G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
+      var dataout = DPR_translit_mod.translit(DPR_translit_mod.toUni(DPR_G.G_outwords[which][0].split('-')[c])); // get the part name from the names part :)
       var conciseCode = "";
       if (d == 0) { // first match (will go on top)
         switch (data[2]) {
           case '0':
-            if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+toUni(data[1]) } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + dataout + '</b></span>';
+            if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+DPR_translit_mod.toUni(data[1]) } // opens link in lower frame
+            osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + dataout + '</b></span>';
             break;
           case '1':
-            if (frombox !=2 && !hotlink) { hotlink = toUni(data[1])+'/' + data[0] +','+ toUni(data[1]); } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+toUni(data[1])+'/' + data[0] +','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
+            if (frombox !=2 && !hotlink) { hotlink = DPR_translit_mod.toUni(data[1])+'/' + data[0] +','+ DPR_translit_mod.toUni(data[1]); } // opens link in lower frame
+            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0] +','+ DPR_translit_mod.toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
             break;
           case '2':
             osout += '<b '+conciseCode+'style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + dataout + '</b>';
@@ -170,10 +170,10 @@ async function outputDef(which,first,frombox)
         }
         switch (data[2]) {
           case '0':
-            osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
             break;
           case '1':
-            osout += '<span class="pointer" onmouseup="DPPNXML(\''+toUni(data[1])+'/' + data[0]+','+ toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0]+','+ DPR_translit_mod.toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
             break;
         }
       }
@@ -233,17 +233,17 @@ async function outputDef(which,first,frombox)
         concisedefa[1] = concisedefa[1].replace(base,linkToPED(base,base));
       }
 
-      concisedef = toUni(concisedef + ' (' + concisedefa[1] + ')');
+      concisedef = DPR_translit_mod.toUni(concisedef + ' (' + concisedefa[1] + ')');
 
       var conciseword = thisconcise[x];
-      conciseword = toUni(conciseword);
+      conciseword = DPR_translit_mod.toUni(conciseword);
 
       DPR_G.G_thisConcise[conciseword] = concisedef;
       if(x == 0){
 
-        var sdfirst = '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef;
+        var sdfirst = '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + DPR_translit_mod.translit(conciseword) + '</b>: ' + concisedef;
       }
-      conciseoutput += '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(conciseword) + '</b>: ' + concisedef +'<br/>';
+      conciseoutput += '<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + DPR_translit_mod.translit(conciseword) + '</b>: ' + concisedef +'<br/>';
     }
 
   }
@@ -269,12 +269,12 @@ async function outputDef(which,first,frombox)
 DPR_G.G_thisConcise = [];
 
 function showShortDef(word) {
-  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '";>' + translit(word) + '</b>: ' + DPR_G.G_thisConcise[word]);
+  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '";>' + DPR_translit_mod.translit(word) + '</b>: ' + DPR_G.G_thisConcise[word]);
 }
 
 function conciseChange(value) {
   var spdcol = value.split(':');
-  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + translit(spdcol[1]) + ':</b> ' + spdcol[2]);
+  //$('#anfright').html('<b style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + DPR_translit_mod.translit(spdcol[1]) + ':</b> ' + spdcol[2]);
 }
 
 async function reanalyzeOnEnterKey(keyCode, word,cancel) {

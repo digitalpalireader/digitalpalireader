@@ -110,7 +110,7 @@ async function searchTipitaka(searchType,searchString,searchMAT,searchSet,search
 
   // tab title
 
-  var tabT = 'Search: \'' + (DPR_G.G_searchRX?toUniRegEx(DPR_G.G_searchString):toUni(DPR_G.G_searchString)) + '\' in ' + st[DPR_G.G_searchType];
+  var tabT = 'Search: \'' + (DPR_G.G_searchRX?DPR_translit_mod.toUniRegEx(DPR_G.G_searchString):DPR_translit_mod.toUni(DPR_G.G_searchString)) + '\' in ' + st[DPR_G.G_searchType];
 
   DPR_PAL_Search_SetTitle(tabT);
 
@@ -180,7 +180,7 @@ function finishSearch() {
   DPR_PAL_Search_HideProgressBar();
   DPR_PAL_Search_HideCancelButton();
 
-  const searchLink = 'dpr:search?type='+DPR_G.G_searchType+'&query=' + toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
+  const searchLink = 'dpr:search?type='+DPR_G.G_searchType+'&query=' + DPR_translit_mod.toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
   DPR_G.G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
 
   DPR_PAL_Search_AddCopyPermaLinkElement();
@@ -263,7 +263,7 @@ async function pausesall()
 
   DPR_PAL_Search_ClearSearchResults();
 
-  DPR_PAL_SearchAddSearchTermSectionLink(DPR_G.G_searchRX ? DPR_G.G_searchString : toUni(DPR_G.G_searchString));
+  DPR_PAL_SearchAddSearchTermSectionLink(DPR_G.G_searchRX ? DPR_G.G_searchString : DPR_translit_mod.toUni(DPR_G.G_searchString));
 
   for (var i = 0; i < DPR_G.G_numberToNik.length; i++) {
     if (DPR_G.G_searchSet.indexOf(DPR_G.G_numberToNik[i]) == -1) continue; // don't add unchecked collections
@@ -555,12 +555,12 @@ function createTables(xmlDoc,hiert)
 
   var yesplus = getstring.indexOf('+'); // look for multi matches
   if (yesplus >= 0) {
-    stringra = (DPR_G.G_searchRX?toUniRegEx(getstring):toUni(getstring)).split('+');
+    stringra = (DPR_G.G_searchRX?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring)).split('+');
   }
   else {
     stringra[0] = getstring;
-    if(DPR_G.G_searchRX) getstring = toUniRegEx(getstring);
-    else getstring = toUni(getstring);
+    if(DPR_G.G_searchRX) getstring = DPR_translit_mod.toUniRegEx(getstring);
+    else getstring = DPR_translit_mod.toUni(getstring);
   }
 
   var sraout = stringra.join('#');
@@ -741,26 +741,26 @@ function createTables(xmlDoc,hiert)
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(v.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(w.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
 
                   if(x.length>1) {
                     if(colt == 3) colt = 0;
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(y.length>1) {
                     if(colt == 3) colt = 0;
-                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
@@ -870,25 +870,25 @@ function createTables(xmlDoc,hiert)
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(v.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(w.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(x.length>1) {
                     if(colt == 3) colt = 0;
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(y.length>1) {
                     if(colt == 3) colt = 0;
-                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
                    }
                   if(hiert == 'm') {
                     var modt = '';
@@ -1019,7 +1019,7 @@ function showonly(string) {
       if ((da[x].id.indexOf('q' + string + 'q') > -1 || !da[x].id) && da[x].id!='xyz') da[x].style.display = "block";
       else da[x].style.display = "none";
     }
-    const linkText = normalizeLongSearchResult(toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
+    const linkText = normalizeLongSearchResult(DPR_translit_mod.toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
     $('#showing').html('<b style="color:'+DPR_G.DPR_prefs['colped']+'">' + linkText + '&nbsp;</b><b>x</b>');
     document.getElementById('showing').style.display = 'block';
     DPR_move_mod.scrollToId('search','sbfb');
@@ -1057,7 +1057,7 @@ function atiSearchStart() {
     thisterm.setAttribute('class','search-set');
 
     var setlabel = DPR_G.MD.createElement('label');
-    setlabel.setAttribute('value',(DPR_G.G_searchRX?DPR_G.G_searchString:toUni(DPR_G.G_searchString)));
+    setlabel.setAttribute('value',(DPR_G.G_searchRX?DPR_G.G_searchString:DPR_translit_mod.toUni(DPR_G.G_searchString)));
     setlabel.setAttribute('id','search-term');
     setlabel.setAttribute('crop','center');
     setlabel.setAttribute('class','search-button-label');
@@ -1169,7 +1169,7 @@ function atiSearchOffline(d, getstring) {
     var cont = readExtFile(atiFile+anik[c]).join('\n');
     var parser=new DOMParser();
     var xmlDoc = parser.parseFromString(cont,'text/xml');
-    var title = toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
+    var title = DPR_translit_mod.toUni(xmlDoc.getElementsByTagName('title')[0].textContent);
     var data = xmlDoc.getElementsByTagName('div');
     for (var j in data) {
       if(data[j].id == 'H_content') {
@@ -1255,7 +1255,7 @@ function atiSearchOffline(d, getstring) {
 }
 
 function findRegEx(text,string) {
-  var rstring = new RegExp(toUniRegEx(string));
+  var rstring = new RegExp(DPR_translit_mod.toUniRegEx(string));
   var bstring = getRegExtSearchString(string);
   //alert(bstring);
   var match = text.search(bstring);
@@ -1266,6 +1266,6 @@ function findRegEx(text,string) {
   return match
 }
 function getRegExtSearchString(string) {
-  return new RegExp(toUniRegEx(string).replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)"));
+  return new RegExp(DPR_translit_mod.toUniRegEx(string).replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)"));
 }
 

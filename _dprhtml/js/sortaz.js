@@ -135,7 +135,7 @@ function sortStrip(word) {
     word = word.replace(/ṁ/g, 'ṃ');
     word = word.replace(/Ṁ/g, 'Ṃ');
   }
-  word = toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ#]/g,'');
+  word = DPR_translit_mod.toUni(word.toLowerCase()).replace(/[^a-zāīūṃṅñṭḍṇḷ#]/g,'');
   return word;
 }
 
@@ -190,7 +190,7 @@ function findSimilarWords(word,list,min,fuzzy) {
 
     if(!inthisword) continue;
 
-    if(fuzzy) var thisword = toFuzzy(inthisword);
+    if(fuzzy) var thisword = DPR_translit_mod.toFuzzy(inthisword);
     else var thisword = inthisword;
 
     var start = 0;
