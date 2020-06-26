@@ -180,14 +180,6 @@
     "declLine1": "async function bounce(sct)"
   },
   {
-    "name": "bv",
-    "declLine1": "async function bv(rnd,static) {"
-  },
-  {
-    "name": "bvAlert",
-    "declLine1": "function bvAlert(bva) {"
-  },
-  {
     "name": "changeAlt",
     "declLine1": "async function changeAlt(e,i) {"
   },
@@ -222,10 +214,6 @@
   {
     "name": "chromeFileExists",
     "declLine1": "function chromeFileExists (fileLoc) {"
-  },
-  {
-    "name": "citation",
-    "declLine1": "async function citation(cite,event) {"
   },
   {
     "name": "clearBookmarks",
@@ -488,10 +476,6 @@
     "declLine1": "function getNameHTML(dEI,tt) {"
   },
   {
-    "name": "getPref",
-    "declLine1": "function getPref(name) {"
-  },
-  {
     "name": "getRegExtSearchString",
     "declLine1": "function getRegExtSearchString(string) {"
   },
@@ -564,20 +548,12 @@
     "declLine1": "function linkToPED(base,word) {"
   },
   {
-    "name": "loadPreference",
-    "declLine1": "function loadPreference() {"
-  },
-  {
     "name": "loadXMLSection",
     "declLine1": "async function loadXMLSection(querystring,para,place,isPL,scroll,compare)"
   },
   {
     "name": "loadXMLindex",
     "declLine1": "async function loadXMLindex(place,compare) {"
-  },
-  {
-    "name": "logTelemetry",
-    "declLine1": "function logTelemetry() {"
   },
   {
     "name": "mainInitialize",
@@ -728,10 +704,6 @@
     "declLine1": "function removeDuplicatesFromArray(list){"
   },
   {
-    "name": "resetAllDprSettings",
-    "declLine1": "function resetAllDprSettings() {"
-  },
-  {
     "name": "resetvalues",
     "declLine1": "function resetvalues() {"
   },
@@ -750,10 +722,6 @@
   {
     "name": "savePad",
     "declLine1": "function savePad() {"
-  },
-  {
-    "name": "savePreferences",
-    "declLine1": "function savePreferences(getPrefFn) {"
   },
   {
     "name": "scrollSearch",
@@ -818,10 +786,6 @@
   {
     "name": "showAltTable",
     "declLine1": "function showAltTable(idx) {"
-  },
-  {
-    "name": "showBv",
-    "declLine1": "async function showBv(rnd) {"
   },
   {
     "name": "showonly",
