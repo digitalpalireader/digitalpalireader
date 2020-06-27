@@ -440,14 +440,6 @@
     "declLine1": "function formatuniout(data,which) { // which = 1 prepare without links, 2 with links"
   },
   {
-    "name": "fromSin",
-    "declLine1": "function fromSin(input,type) {"
-  },
-  {
-    "name": "fromThai",
-    "declLine1": "function fromThai(input) {"
-  },
-  {
     "name": "getAtthXML",
     "declLine1": "async function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
   },
@@ -848,54 +840,6 @@
     "declLine1": "function titlesearchstart()"
   },
   {
-    "name": "toBengali",
-    "declLine1": "function toBengali(input,type) {"
-  },
-  {
-    "name": "toDeva",
-    "declLine1": "function toDeva(input,type) {"
-  },
-  {
-    "name": "toFuzzy",
-    "declLine1": "function toFuzzy(input){"
-  },
-  {
-    "name": "toMyanmar",
-    "declLine1": "function toMyanmar(input,type) {"
-  },
-  {
-    "name": "toSin",
-    "declLine1": "function toSin(input,type) {"
-  },
-  {
-    "name": "toSkt",
-    "declLine1": "function toSkt(input,rv) {"
-  },
-  {
-    "name": "toTelugu",
-    "declLine1": "function toTelugu(input,type) {"
-  },
-  {
-    "name": "toThai",
-    "declLine1": "function toThai(input) {"
-  },
-  {
-    "name": "toUni",
-    "declLine1": "function toUni(input) {"
-  },
-  {
-    "name": "toUniRegEx",
-    "declLine1": "function toUniRegEx(input) {"
-  },
-  {
-    "name": "toVel",
-    "declLine1": "function toVel(input) {"
-  },
-  {
-    "name": "toVelRegEx",
-    "declLine1": "function toVelRegEx(input) {"
-  },
-  {
     "name": "toggleDPRSidebar",
     "declLine1": "function toggleDPRSidebar() {"
   },
@@ -922,10 +866,6 @@
   {
     "name": "translateWord",
     "declLine1": "async function translateWord(word,idx) {"
-  },
-  {
-    "name": "translit",
-    "declLine1": "function translit(data) {"
   },
   {
     "name": "triggerPrivacyNoticeAcceptanceCheck",
