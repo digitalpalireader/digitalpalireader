@@ -33,7 +33,7 @@ def exposeFiles(dataFileName,filesExcluded,beginningIndex,endIndex):
   funcsToExpByfile = json.load(open(dataFileName, "r", encoding="utf8"))
   listOfFilesExcluded = (json.load(open(filesExcluded, "r", encoding="utf8")))["listOfFilesExcluded"]
   funcsToExpByfileUndealt = [fileElement for fileElement in funcsToExpByfile if fileElement[0] not in listOfFilesExcluded]
-  for element4File2Exp in [funcsToExpByfileUndealt[-1]]:
+  for element4File2Exp in funcsToExpByfileUndealt[beginningIndex:endIndex]:
       print(element4File2Exp[0])
       moduleName = genModuleName(element4File2Exp[0])
       handleFileOfDeclaration(element4File2Exp, moduleName)
