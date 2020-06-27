@@ -139,22 +139,18 @@
   [
     "bookmarkxd",
     {
-      "Declared": "../../_dprhtml/js/bookmarks.js:143",
+      "Declared": "../../_dprhtml/js/bookmarks.js:108",
       "Called": {
-        "../../_dprhtml/js/bookmarks.js": [
-          125
-        ]
+        "../../_dprhtml/js/bookmarks.js": []
       }
     }
   ],
   [
     "bookmarkxn",
     {
-      "Declared": "../../_dprhtml/js/bookmarks.js:154",
+      "Declared": "../../_dprhtml/js/bookmarks.js:119",
       "Called": {
-        "../../_dprhtml/js/bookmarks.js": [
-          124
-        ]
+        "../../_dprhtml/js/bookmarks.js": []
       }
     }
   ],
@@ -250,7 +246,7 @@
       "Declared": "../../_dprhtml/js/bookmarks.js:15",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": [
-          83
+          81
         ]
       }
     }
@@ -353,7 +349,7 @@
   [
     "convertOldBookmarks",
     {
-      "Declared": "../../_dprhtml/js/bookmarks.js:166",
+      "Declared": "../../_dprhtml/js/bookmarks.js:131",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": []
       }
@@ -483,7 +479,7 @@
       "Declared": "../../_dprhtml/js/bookmarks.js:1",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": [
-          121
+          77
         ]
       }
     }
@@ -983,10 +979,10 @@
   [
     "saveBookmark",
     {
-      "Declared": "../../_dprhtml/js/bookmarks.js:198",
+      "Declared": "../../_dprhtml/js/bookmarks.js:163",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": [
-          194
+          159
         ]
       }
     }
@@ -1137,15 +1133,6 @@
         "../../_dprhtml/js/dict.js": [
           123
         ]
-      }
-    }
-  ],
-  [
-    "toVelRegEx",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:27",
-      "Called": {
-        "../../_dprhtml/js/translit.js": []
       }
     }
   ],
@@ -1622,39 +1609,15 @@
     }
   ],
   [
-    "fromSin",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:201",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          109
-        ],
-        "../../_dprhtml/js/translit.js": []
-      }
-    }
-  ],
-  [
-    "fromThai",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:1010",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          84
-        ],
-        "../../_dprhtml/js/translit.js": []
-      }
-    }
-  ],
-  [
     "getBookmarks",
     {
       "Declared": "../../_dprhtml/js/bookmarks.js:28",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": [
-          80,
-          144,
-          155,
-          199
+          59,
+          109,
+          120,
+          164
         ],
         "../../_dprhtml/features/other-dialogs/init.js": [
           106
@@ -1794,7 +1757,7 @@
       "Declared": "../../_dprhtml/js/index.js:25",
       "Called": {
         "../../_dprhtml/index.html": [
-          536
+          537
         ],
         "../../_dprhtml/js/index.js": []
       }
@@ -1903,7 +1866,7 @@
       "Declared": "../../_dprhtml/js/web/io.js:231",
       "Called": {
         "../../_dprhtml/js/bookmarks.js": [
-          168
+          133
         ],
         "../../_dprhtml/js/web/io.js": []
       }
@@ -2104,122 +2067,6 @@
         "../../_dprhtml/js/search.js": [],
         "../../_dprhtml/js/web/search.js": [
           39
-        ]
-      }
-    }
-  ],
-  [
-    "toBengali",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:488",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          51,
-          76,
-          101,
-          126
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1046
-        ]
-      }
-    }
-  ],
-  [
-    "toDeva",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:621",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          42,
-          67,
-          92,
-          120
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1037
-        ]
-      }
-    }
-  ],
-  [
-    "toMyanmar",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:317",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          45,
-          70,
-          95,
-          123
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1040
-        ]
-      }
-    }
-  ],
-  [
-    "toSin",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:52",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          48,
-          73,
-          98
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1043
-        ]
-      }
-    }
-  ],
-  [
-    "toSkt",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:39",
-      "Called": {
-        "../../_dprhtml/js/dict.js": [
-          1341,
-          1381,
-          1405,
-          1444,
-          1482
-        ],
-        "../../_dprhtml/js/translit.js": []
-      }
-    }
-  ],
-  [
-    "toTelugu",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:735",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          54,
-          79,
-          104,
-          129
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1049
-        ]
-      }
-    }
-  ],
-  [
-    "toThai",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:849",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          39,
-          64,
-          117
-        ],
-        "../../_dprhtml/js/translit.js": [
-          1034
         ]
       }
     }
@@ -2661,51 +2508,6 @@
     }
   ],
   [
-    "toFuzzy",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:33",
-      "Called": {
-        "../../_dprhtml/js/sortaz.js": [
-          193
-        ],
-        "../../_dprhtml/js/dict.js": [
-          158,
-          169,
-          205,
-          353,
-          376,
-          412,
-          554,
-          584,
-          613,
-          657,
-          671,
-          701,
-          748,
-          780,
-          781,
-          782,
-          863,
-          886,
-          938,
-          961,
-          1030,
-          1052,
-          1122,
-          1149,
-          1255,
-          1281,
-          1343,
-          1368,
-          1400,
-          1457,
-          1468
-        ],
-        "../../_dprhtml/js/translit.js": []
-      }
-    }
-  ],
-  [
     "writeExtFile",
     {
       "Declared": "../../_dprhtml/js/web/io.js:137",
@@ -2732,9 +2534,9 @@
           183
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          150,
-          161,
-          230
+          115,
+          126,
+          195
         ],
         "../../_dprhtml/js/web/io.js": []
       }
@@ -2756,7 +2558,7 @@
           1117
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          233
+          198
         ],
         "../../_dprhtml/js/chrome.js": []
       }
@@ -2773,8 +2575,8 @@
         "../../_dprhtml/js/bookmarks.js": [
           10,
           23,
-          151,
-          162
+          116,
+          127
         ],
         "../../_dprhtml/js/history.js": [
           15,
@@ -2995,9 +2797,9 @@
           138
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          178,
-          185,
-          189
+          143,
+          150,
+          154
         ],
         "../../_dprhtml/js/web/io.js": [],
         "../../_dprhtml/js/web/navigation_sidebar.js": [
@@ -3140,6 +2942,33 @@
     }
   ],
   [
+    "getSuttaNumber",
+    {
+      "Declared": "../../_dprhtml/js/navigation_common.js:493",
+      "Called": {
+        "../../_dprhtml/js/translations.js": [
+          427,
+          535,
+          953,
+          961
+        ],
+        "../../_dprhtml/js/dict_xml.js": [
+          619
+        ],
+        "../../_dprhtml/js/xml.js": [
+          71,
+          849,
+          906,
+          963
+        ],
+        "../../_dprhtml/js/navigation_common.js": [],
+        "../../_dprhtml/js/search.js": [
+          896
+        ]
+      }
+    }
+  ],
+  [
     "loadXMLSection",
     {
       "Declared": "../../_dprhtml/js/xml.js:17",
@@ -3221,45 +3050,13 @@
     }
   ],
   [
-    "toUniRegEx",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:13",
-      "Called": {
-        "../../_dprhtml/js/dict.js": [
-          196,
-          291,
-          402,
-          606,
-          905,
-          1306,
-          1389,
-          1489
-        ],
-        "../../_dprhtml/js/translit.js": [],
-        "../../_dprhtml/js/search.js": [
-          113,
-          558,
-          562,
-          1258,
-          1269
-        ],
-        "../../_dprhtml/features/search/init.js": [
-          7
-        ],
-        "../../_dprhtml/features/dictionary/init.js": [
-          6
-        ]
-      }
-    }
-  ],
-  [
     "toggleDPRSidebar",
     {
       "Declared": "../../_dprhtml/js/chrome.js:215",
       "Called": {
         "../../_dprhtml/index.html": [
-          206,
-          337
+          207,
+          338
         ],
         "../../_dprhtml/js/dprviewmodel.js": [
           89,
@@ -3318,7 +3115,7 @@
       "Declared": "../../_dprhtml/js/convert.js:19",
       "Called": {
         "../../_dprhtml/index.html": [
-          499
+          500
         ],
         "../../_dprhtml/sw.js": [
           45
@@ -3338,36 +3135,6 @@
           78,
           111,
           112
-        ]
-      }
-    }
-  ],
-  [
-    "getSuttaNumber",
-    {
-      "Declared": "../../_dprhtml/js/navigation_common.js:493",
-      "Called": {
-        "../../_dprhtml/js/translations.js": [
-          427,
-          535,
-          953,
-          961
-        ],
-        "../../_dprhtml/js/dict_xml.js": [
-          619
-        ],
-        "../../_dprhtml/js/xml.js": [
-          71,
-          849,
-          906,
-          963
-        ],
-        "../../_dprhtml/js/bookmarks.js": [
-          109
-        ],
-        "../../_dprhtml/js/navigation_common.js": [],
-        "../../_dprhtml/js/search.js": [
-          896
         ]
       }
     }
@@ -3442,7 +3209,7 @@
       "Declared": "../../_dprhtml/js/sortaz.js:125",
       "Called": {
         "../../_dprhtml/index.html": [
-          492
+          493
         ],
         "../../_dprhtml/sw.js": [
           45
@@ -3489,7 +3256,7 @@
           1146
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          231
+          196
         ],
         "../../_dprhtml/js/web/send_sidebar.js": [
           57,
@@ -3518,7 +3285,7 @@
       "Declared": "../../_dprhtml/js/grammar.js:5",
       "Called": {
         "../../_dprhtml/index.html": [
-          520
+          521
         ],
         "../../_dprhtml/sw.js": [
           45
@@ -3623,79 +3390,6 @@
     }
   ],
   [
-    "translit",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:1023",
-      "Called": {
-        "../../_dprhtml/index.html": [
-          472
-        ],
-        "../../_dprhtml/sw.js": [
-          45
-        ],
-        "../../_dprhtml/js/format.js": [
-          177,
-          207,
-          245,
-          249,
-          262,
-          266,
-          276,
-          280,
-          358,
-          367,
-          420,
-          444,
-          460,
-          461
-        ],
-        "../../_dprhtml/js/xml.js": [
-          689,
-          703,
-          704,
-          737,
-          756,
-          757,
-          792,
-          812,
-          813,
-          852,
-          872,
-          873,
-          906,
-          925,
-          926,
-          965,
-          986,
-          987
-        ],
-        "../../_dprhtml/js/analysis_output.js": [
-          147,
-          244,
-          246,
-          272,
-          277
-        ],
-        "../../_dprhtml/js/translit.js": [],
-        "../../_dprhtml/js/web/navigation_sidebar.js": [
-          55,
-          77,
-          161,
-          265,
-          291
-        ],
-        "../../_dprhtml/js/web/xml_sidebar.js": [
-          27,
-          104,
-          209
-        ],
-        "../../_dprhtml/features/navigation/init.js": [
-          82
-        ]
-      }
-    }
-  ],
-  [
     "addJS",
     {
       "Declared": "../../_dprhtml/js/config.js:119",
@@ -3765,8 +3459,8 @@
           965
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          73,
-          121
+          77,
+          94
         ],
         "../../_dprhtml/js/dict.js": [
           1301
@@ -3794,104 +3488,6 @@
         ],
         "../../_dprhtml/features/other-dialogs/init.js": [
           23
-        ]
-      }
-    }
-  ],
-  [
-    "toVel",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:21",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          36,
-          89,
-          114
-        ],
-        "../../_dprhtml/js/send.js": [
-          217,
-          226,
-          342,
-          352,
-          370,
-          380
-        ],
-        "../../_dprhtml/js/dict_xml.js": [
-          37,
-          59,
-          60,
-          61,
-          63,
-          64,
-          86,
-          90,
-          107,
-          111,
-          140,
-          153,
-          177,
-          179,
-          224,
-          242,
-          324,
-          326,
-          346,
-          411
-        ],
-        "../../_dprhtml/js/grammar.js": [
-          12,
-          505
-        ],
-        "../../_dprhtml/js/format.js": [
-          434,
-          629
-        ],
-        "../../_dprhtml/js/xml.js": [
-          654,
-          721,
-          775,
-          830,
-          888,
-          946
-        ],
-        "../../_dprhtml/js/translate.js": [
-          59,
-          578,
-          587
-        ],
-        "../../_dprhtml/js/send_bottom.js": [
-          18,
-          27
-        ],
-        "../../_dprhtml/js/dict.js": [
-          1278,
-          1341,
-          1444
-        ],
-        "../../_dprhtml/js/translit.js": [
-          35
-        ],
-        "../../_dprhtml/js/analysis_function.js": [
-          19
-        ],
-        "../../_dprhtml/js/search.js": [
-          183
-        ],
-        "../../_dprhtml/js/conjugate.js": [
-          9
-        ],
-        "../../_dprhtml/js/web/send_sidebar.js": [
-          219,
-          234,
-          245,
-          254,
-          264,
-          432,
-          442,
-          484
-        ],
-        "../../_dprhtml/features/bottom-pane/init.js": [
-          40
         ]
       }
     }
@@ -3943,10 +3539,9 @@
           176
         ],
         "../../_dprhtml/js/bookmarks.js": [
-          73,
-          89,
-          121,
-          133
+          77,
+          94,
+          101
         ],
         "../../_dprhtml/js/dict.js": [
           1301
@@ -3988,228 +3583,6 @@
         "../../_dprhtml/features/dictionary/tab.html": [
           23,
           25
-        ]
-      }
-    }
-  ],
-  [
-    "toUni",
-    {
-      "Declared": "../../_dprhtml/js/translit.js:3",
-      "Called": {
-        "../../_dprhtml/js/convert.js": [
-          59
-        ],
-        "../../_dprhtml/js/dict_xml.js": [
-          41,
-          90,
-          112,
-          150,
-          154,
-          156,
-          282,
-          286,
-          288,
-          514,
-          519
-        ],
-        "../../_dprhtml/js/grammar.js": [
-          74,
-          270,
-          363,
-          423
-        ],
-        "../../_dprhtml/js/format.js": [
-          141,
-          177,
-          182,
-          185,
-          199,
-          207,
-          211,
-          225,
-          228,
-          245,
-          249,
-          262,
-          266,
-          276,
-          280,
-          383,
-          384,
-          438,
-          444,
-          460,
-          461,
-          647
-        ],
-        "../../_dprhtml/js/xml.js": [
-          108,
-          689,
-          703,
-          704,
-          737,
-          756,
-          757,
-          792,
-          812,
-          813,
-          852,
-          872,
-          873,
-          906,
-          925,
-          926,
-          965,
-          986,
-          987
-        ],
-        "../../_dprhtml/js/translate.js": [
-          11,
-          57,
-          741,
-          743,
-          817,
-          974
-        ],
-        "../../_dprhtml/js/analysis_output.js": [
-          29,
-          32,
-          40,
-          43,
-          116,
-          126,
-          127,
-          147,
-          152,
-          153,
-          156,
-          157,
-          173,
-          176,
-          236,
-          239
-        ],
-        "../../_dprhtml/js/receive.js": [
-          53,
-          54
-        ],
-        "../../_dprhtml/js/sortaz.js": [
-          138
-        ],
-        "../../_dprhtml/js/bookmarks.js": [
-          176,
-          184,
-          185,
-          188,
-          189
-        ],
-        "../../_dprhtml/js/dict.js": [
-          91,
-          95,
-          142,
-          171,
-          187,
-          196,
-          216,
-          246,
-          253,
-          291,
-          327,
-          337,
-          380,
-          394,
-          402,
-          423,
-          455,
-          465,
-          587,
-          598,
-          599,
-          606,
-          621,
-          622,
-          674,
-          690,
-          705,
-          719,
-          751,
-          762,
-          763,
-          794,
-          809,
-          821,
-          822,
-          889,
-          905,
-          940,
-          965,
-          977,
-          995,
-          1056,
-          1069,
-          1087,
-          1125,
-          1153,
-          1167,
-          1284,
-          1306,
-          1371,
-          1381,
-          1389,
-          1405,
-          1447,
-          1471,
-          1482,
-          1489,
-          1511
-        ],
-        "../../_dprhtml/js/translit.js": [],
-        "../../_dprhtml/js/analysis_function.js": [
-          63
-        ],
-        "../../_dprhtml/js/search.js": [
-          113,
-          266,
-          558,
-          563,
-          744,
-          748,
-          752,
-          758,
-          763,
-          873,
-          877,
-          881,
-          886,
-          891,
-          1022,
-          1060,
-          1172
-        ],
-        "../../_dprhtml/js/conjugate.js": [
-          11,
-          12
-        ],
-        "../../_dprhtml/js/web/navigation_sidebar.js": [
-          159
-        ],
-        "../../_dprhtml/js/web/xml_sidebar.js": [
-          27,
-          104,
-          209
-        ],
-        "../../_dprhtml/js/web/search.js": [
-          89
-        ],
-        "../../_dprhtml/features/bottom-pane/init.js": [
-          41
-        ],
-        "../../_dprhtml/features/search/init.js": [
-          7
-        ],
-        "../../_dprhtml/features/dictionary/init.js": [
-          6
         ]
       }
     }
