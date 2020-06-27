@@ -882,9 +882,6 @@ function convertShortLink(place) {
 
 return {
 convertShortLink : convertShortLink,
-getSuttaFromNumber : getSuttaFromNumber,
-getSuttaNumber : getSuttaNumber,
-makekVaggas : makekVaggas,
-vssCalc : vssCalc
+getSuttaNumber : getSuttaNumber
 }
 })()
