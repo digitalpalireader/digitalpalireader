@@ -335,7 +335,7 @@ var DPRSend = {
 
   sendQuickLink: async function (add, value) {
     if (add == 'right') return;
-    var ql = convertShortLink($.trim($('#nav-quicklinks').val()));
+    var ql = DPR_navigation_common_mod.convertShortLink($.trim($('#nav-quicklinks').val()));
     if (!ql)
       return;
     if (ql[0] === false) {

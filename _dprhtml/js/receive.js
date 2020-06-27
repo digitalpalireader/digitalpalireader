@@ -76,7 +76,7 @@ function makeLocPlace(inplace) {
     outplace[8] = parseInt(outplace[8]);
   }
   else { // shorthand
-    outplace = convertShortLink(inplace);
+    outplace = DPR_navigation_common_mod.convertShortLink(inplace);
     if(outplace[0] === false)
       outplace = null;
   }

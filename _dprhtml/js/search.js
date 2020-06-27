@@ -893,7 +893,7 @@ function createTables(xmlDoc,hiert)
                   if(hiert == 'm') {
                     var modt = '';
                     var modn;
-                    var modno = getSuttaNumber(nikaya,(parseInt(book)-1),sx,sy,sz,s,se,hiert,z.length);
+                    var modno = DPR_navigation_common_mod.getSuttaNumber(nikaya,(parseInt(book)-1),sx,sy,sz,s,se,hiert,z.length);
                     finalout +=  (modno ? ' (<b class="small" style="color:'+DPR_G.DPR_prefs['colsel']+'">' + DPR_G.G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + '&nbsp;' + modno + '</b>)' : '');
                   }
 
