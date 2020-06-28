@@ -42,42 +42,9 @@
         wb.addEventListener('waiting', showSkipWaitingPrompt);
         wb.addEventListener('externalwaiting', showSkipWaitingPrompt);
 
-        registration = await wb.register();
-      }
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => navigator.serviceWorker.register().then(
-          registration => {
-            console.log(`Service Worker registered! Scope: ${registration.scope}`);
-          },
-          error => {
-            console.error(`Service Worker registration failed: ${error}`);
-          },
-        ));
+        registration = await wb.register('/_dprhtml/sw.js');
         configureNewVersionCheck();
       }
-
-      let deferredPrompt;
-      const addBtn = document.querySelector('#add-home-button');
-      addBtn.style.display = 'none';
-
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        addBtn.style.display = 'inline-block';
-
-        addBtn.addEventListener('click', (e) => {
-          addBtn.style.display = 'none';
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('User accepted the A2HS prompt');
-            } else {
-              console.log('User dismissed the A2HS prompt');
-            }
-            deferredPrompt = null;
-          });
-        });
-      });
     </script>
     <script>
       const initObjList = Object.keys(window);
@@ -564,6 +531,40 @@
     <script src="/_dprhtml/js/index.js"></script>
     <script>progressBar.go(100)</script>
     <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => navigator.serviceWorker.register('/_dprhtml/sw.js').then(
+          registration => {
+            console.log(`Service Worker registered! Scope: ${registration.scope}`);
+          },
+          error => {
+            console.error(`Service Worker registration failed: ${error}`);
+          },
+        ));
+      }
+
+      let deferredPrompt;
+      const addBtn = document.querySelector('#add-home-button');
+      addBtn.style.display = 'none';
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        addBtn.style.display = 'inline-block';
+
+        addBtn.addEventListener('click', (e) => {
+          addBtn.style.display = 'none';
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
+
       $(document).ready(mainInitialize);
       const getFuncList = () => JSON.stringify(
         Object.keys(window)
