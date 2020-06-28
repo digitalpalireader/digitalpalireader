@@ -176,9 +176,15 @@
       <div id="main-panel">
         <div id="main-sidebar" data-bind="visible: sidebarVisible()">
           <div id="main-sidebar-content" class="card chromeback">
-            <div class="card-header">
-              Digital Pāli Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences..." style="float: right">
+            <div class="card-header d-flex align-items-center">
+              <span class="mr-auto">Digital Pāli Reader</span>
+              <a href="/" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Home/Buddha Vachana (Keyboard shortcut: v)">
+                <i class="fa fa-home"></i>
+              </a>
+              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
+                <i class="fa fa-question-circle"></i>
+              </a>
+              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences...">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
@@ -205,7 +211,11 @@
         </div>
         <div id="main-panel-splitter" data-bind="visible: sidebarVisible()" ondblclick="DPR_Chrome.toggleDPRSidebar()"></div>
         <div id="main-content">
-
+          <div id="context-menu-top-level" data-bind="visible: mainFeaturesVisible()">
+            <button id="context-menu-top-level-open-sidebar" class="btn btn-sm btn-light m-0" role="button" onclick="DPR_Chrome.toggleDPRSidebar()" title="Toggle sidebar (Keyboard shortcut: & or `)">
+              <i id="context-menu-launcher-icon" class="fa fa-bars"></i>
+            </button>
+          </div>
           <div id="context-menu" data-bind="visible: mainFeaturesVisible() && activeTab() === 'navigation'">
             <a id="context-menu-handle" class="m-0" role="button">
               <i id="context-menu-launcher-icon" class="fa fa-chevron-down"></i>
