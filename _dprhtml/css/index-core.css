@@ -138,6 +138,14 @@ body .bd-highlight {
   color: blue;
 }
 
+#add-home-button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  font-family: Verdana, sans-serif;
+  color: rgb(0, 119, 10);
+}
+
 #main-sidebar {
   flex: 0 0 auto;
   min-width: var(--main-sidebar-width);

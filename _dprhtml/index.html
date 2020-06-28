@@ -46,9 +46,40 @@
       }
 
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => navigator.serviceWorker.register('/_dprhtml/sw.js'));
+        const wb = new Workbox('/_dprhtml/sw.js');
+        wb.addEventListener('waiting', (event) => {
+          wb.addEventListener('controlling', (event) => {
+            window.location.reload();
+          });
+          wb.messageSW({type: 'SKIP_WAITING'});
+        });
+
+        wb.register();
         configureNewVersionCheck();
       }
+
+      let deferredPrompt;
+      const addBtn = document.querySelector('#add-home-button');
+      addBtn.style.display = 'none';
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        addBtn.style.display = 'inline-block';
+
+        addBtn.addEventListener('click', (e) => {
+          addBtn.style.display = 'none';
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
+        });
+      });
     </script>
     <script>
       const initObjList = Object.keys(window);
@@ -385,6 +416,7 @@
       <footer id="main-footer">
         <ul>
           <li><a href="https://pali.sirimangalo.org/" target="_blank" rel="noreferrer">Home</a></li>
+          <li><button id="add-home-button" >| Add to home screen</button></li>
           <li>|</li>
           <li id="main-footer-timestamp"></li>
           <li>|</li>
