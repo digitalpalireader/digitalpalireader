@@ -211,12 +211,12 @@
         </div>
         <div id="main-panel-splitter" data-bind="visible: sidebarVisible()" ondblclick="DPR_Chrome.toggleDPRSidebar()"></div>
         <div id="main-content">
-          <div id="context-menu-top-level" data-bind="visible: mainFeaturesVisible()">
+          <div id="context-menu-top-level" data-bind="visible: navigationFeatureVisible() || searchFeatureVisible() || dictionaryFeatureVisible()">
             <button id="context-menu-top-level-open-sidebar" class="btn btn-sm btn-light m-0" role="button" onclick="DPR_Chrome.toggleDPRSidebar()" title="Toggle sidebar (Keyboard shortcut: & or `)">
               <i id="context-menu-launcher-icon" class="fa fa-bars"></i>
             </button>
           </div>
-          <div id="context-menu" data-bind="visible: mainFeaturesVisible() && activeTab() === 'navigation'">
+          <div id="context-menu" data-bind="visible: navigationFeatureVisible()">
             <a id="context-menu-handle" class="m-0" role="button">
               <i id="context-menu-launcher-icon" class="fa fa-chevron-down"></i>
             </a>
@@ -343,11 +343,16 @@
           </div>
 
           <div id="main-content-panel">
+            <div id="search-header" class="chromeback" data-bind="visible: searchFeatureVisible">
+              <div id="search-header-context-commands" class="ml-5"></div>
+              <span id="search-header-title" class="ml-3"></span>
+              <div id="search-header-contents"></div>
+            </div>
             <div id="main-pane">
               <div id="main-pane-container" data-bind="visible: mainFeaturesVisible">
                 <div class="main-pane-container-section" id="main-pane-container-section-0">
-                  <div id="navigation-header-contents" class="mt-2 px-2"></div>
-                  <hr class="mx-2 mb-0" />
+                  <div id="main-pane-container-section-0-header" class="mt-2 px-2" data-bind="visible: navigationFeatureVisible() || dictionaryFeatureVisible()"></div>
+                  <hr class="mx-2 mb-0" data-bind="visible: navigationFeatureVisible() || dictionaryFeatureVisible()" />
                   <div id="content">
                     <div id="top-frame">
                       <div id="matrelc"></div>
