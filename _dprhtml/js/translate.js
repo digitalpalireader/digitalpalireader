@@ -8,7 +8,7 @@ function translateTextx() {
   for (var i in DPR_G.yt) {
     window.dump(cnt+' of 20926 - '+ Math.floor((cnt++)/20926*100)+'% finished\n');
     var aa = [],bb = [];
-    var a = new RegExp('(^|[ .,;])'+toUni(i)+'($|[ .,;])');
+    var a = new RegExp('(^|[ .,;])'+DPR_translit_mod.toUni(i)+'($|[ .,;])');
     for(var j in epd) {
       b = epd[j].split('^');
       if(a.test(b[1])) {
@@ -54,9 +54,9 @@ async function translateText(alts) {
   var words = [];
   var subject = '';
   var outparts = [];
-  var input = toUni($('#input').val().toLowerCase()).replace(DPR_G.G_uniRegExpNSG,'');
+  var input = DPR_translit_mod.toUni($('#input').val().toLowerCase()).replace(DPR_G.G_uniRegExpNSG,'');
 
-  var translUrl = `digitalpalireader/content/translate.htm?phrase='${toVel(input)}`;
+  var translUrl = `digitalpalireader/content/translate.htm?phrase='${DPR_translit_mod.toVel(input)}`;
   DPR_PAL.contentWindow.history.pushState({}, 'Title', translUrl);
 
   $('#input').val(input);
@@ -575,7 +575,7 @@ function checkCompatibleVerb(input,chosen,words) {
 }
 
 function makeWord(word,pl,alts) {
-  return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
+  return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+DPR_translit_mod.toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
 async function translateWord(word,idx) {
@@ -584,7 +584,7 @@ async function translateWord(word,idx) {
   var yto = [];
   var deca = [];
   var meta = []; // anything
-  var vword = toVel(word);
+  var vword = DPR_translit_mod.toVel(word);
   var type = '';
   var trans = '';
   var wtr = [];
@@ -738,9 +738,9 @@ async function translateWord(word,idx) {
             outs.push([trans,type,deca,word,meta,idx]);
           }
         }
-        if (engVerbs[toUni(temp)]) {
+        if (engVerbs[DPR_translit_mod.toUni(temp)]) {
           for(var c in decls) {
-            trans = engVerbs[toUni(temp)];
+            trans = engVerbs[DPR_translit_mod.toUni(temp)];
             deca = decls[c];
             meta = [];
             meta['orig'] = temp;
@@ -814,7 +814,7 @@ async function translateWord(word,idx) {
             deca = declt[c];
             meta = [];
             meta['orig'] = vword;
-            outs.push([toUni(temp),type,deca,word,meta,idx]);
+            outs.push([DPR_translit_mod.toUni(temp),type,deca,word,meta,idx]);
           }
         }
       }
@@ -971,7 +971,7 @@ async function changeAlt(e,i) {
 }
 
 async function insertWordByWord() {
-  var input = toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(DPR_G.G_uniRegExpNSG,'');
+  var input = DPR_translit_mod.toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(DPR_G.G_uniRegExpNSG,'');
   var words = await conjugateWords(input);
   var out = "";
   for(var i = 0; i < words.length; i++) {

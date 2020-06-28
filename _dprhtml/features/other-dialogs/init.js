@@ -16,7 +16,7 @@ class OtherDialogsViewModel {
 
   async sendQuickLinkFromDialog() {
     var place = this.quicklinkInput();
-    var outplace = convertShortLink(place);
+    var outplace = DPR_navigation_common_mod.convertShortLink(place);
     if(outplace[0] === false) {
       return alertFlash(outplace[1], outplace[2]);
     }

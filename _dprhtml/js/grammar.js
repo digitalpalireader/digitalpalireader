@@ -9,7 +9,7 @@ function conjugate(word, id, which) {
     which = which.replace(/ṁ/g, 'ṃ');
     which = which.replace(/Ṁ/g, 'Ṃ');
   }
-  word = toVel(word);
+  word = DPR_translit_mod.toVel(word);
 
   var yto = DPR_G.yt[word];
 
@@ -71,7 +71,7 @@ function conjugateNoun(word) {
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
   if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-  outword = toUni(outword);
+  outword = DPR_translit_mod.toUni(outword);
 
 
   var stem = yto[8];
@@ -267,7 +267,7 @@ function conjugateVerb(word) {
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
   if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-  outword = toUni(outword);
+  outword = DPR_translit_mod.toUni(outword);
 
   var stem = yto[8];
 
@@ -360,7 +360,7 @@ function conjugateIrrNoun(word) {
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
   if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-  outword = toUni(outword);
+  outword = DPR_translit_mod.toUni(outword);
 
   var stem = '';
 
@@ -420,7 +420,7 @@ function conjugateIrrVerb(word,which) {
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
   if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
-  outword = toUni(outword);
+  outword = DPR_translit_mod.toUni(outword);
 
   var stem = yto[8];
 
@@ -502,7 +502,7 @@ function conjugateIrrVerb(word,which) {
 async function conjugateWord(word,form) {
   if(!word && !form)
     return;
-  if(DPR_G.yt[toVel(word)])
+  if(DPR_G.yt[DPR_translit_mod.toVel(word)])
     return conjugate(word,null,form);
 
   if(form)

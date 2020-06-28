@@ -180,14 +180,6 @@
     "declLine1": "async function bounce(sct)"
   },
   {
-    "name": "bv",
-    "declLine1": "async function bv(rnd,static) {"
-  },
-  {
-    "name": "bvAlert",
-    "declLine1": "function bvAlert(bva) {"
-  },
-  {
     "name": "changeAlt",
     "declLine1": "async function changeAlt(e,i) {"
   },
@@ -222,10 +214,6 @@
   {
     "name": "chromeFileExists",
     "declLine1": "function chromeFileExists (fileLoc) {"
-  },
-  {
-    "name": "citation",
-    "declLine1": "async function citation(cite,event) {"
   },
   {
     "name": "clearBookmarks",
@@ -452,14 +440,6 @@
     "declLine1": "function formatuniout(data,which) { // which = 1 prepare without links, 2 with links"
   },
   {
-    "name": "fromSin",
-    "declLine1": "function fromSin(input,type) {"
-  },
-  {
-    "name": "fromThai",
-    "declLine1": "function fromThai(input) {"
-  },
-  {
     "name": "getAtthXML",
     "declLine1": "async function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
   },
@@ -486,10 +466,6 @@
   {
     "name": "getNameHTML",
     "declLine1": "function getNameHTML(dEI,tt) {"
-  },
-  {
-    "name": "getPref",
-    "declLine1": "function getPref(name) {"
   },
   {
     "name": "getRegExtSearchString",
@@ -564,20 +540,12 @@
     "declLine1": "function linkToPED(base,word) {"
   },
   {
-    "name": "loadPreference",
-    "declLine1": "function loadPreference() {"
-  },
-  {
     "name": "loadXMLSection",
     "declLine1": "async function loadXMLSection(querystring,para,place,isPL,scroll,compare)"
   },
   {
     "name": "loadXMLindex",
     "declLine1": "async function loadXMLindex(place,compare) {"
-  },
-  {
-    "name": "logTelemetry",
-    "declLine1": "function logTelemetry() {"
   },
   {
     "name": "mainInitialize",
@@ -728,10 +696,6 @@
     "declLine1": "function removeDuplicatesFromArray(list){"
   },
   {
-    "name": "resetAllDprSettings",
-    "declLine1": "function resetAllDprSettings() {"
-  },
-  {
     "name": "resetvalues",
     "declLine1": "function resetvalues() {"
   },
@@ -750,10 +714,6 @@
   {
     "name": "savePad",
     "declLine1": "function savePad() {"
-  },
-  {
-    "name": "savePreferences",
-    "declLine1": "function savePreferences(getPrefFn) {"
   },
   {
     "name": "scrollSearch",
@@ -820,10 +780,6 @@
     "declLine1": "function showAltTable(idx) {"
   },
   {
-    "name": "showBv",
-    "declLine1": "async function showBv(rnd) {"
-  },
-  {
     "name": "showonly",
     "declLine1": "function showonly(string) {"
   },
@@ -884,54 +840,6 @@
     "declLine1": "function titlesearchstart()"
   },
   {
-    "name": "toBengali",
-    "declLine1": "function toBengali(input,type) {"
-  },
-  {
-    "name": "toDeva",
-    "declLine1": "function toDeva(input,type) {"
-  },
-  {
-    "name": "toFuzzy",
-    "declLine1": "function toFuzzy(input){"
-  },
-  {
-    "name": "toMyanmar",
-    "declLine1": "function toMyanmar(input,type) {"
-  },
-  {
-    "name": "toSin",
-    "declLine1": "function toSin(input,type) {"
-  },
-  {
-    "name": "toSkt",
-    "declLine1": "function toSkt(input,rv) {"
-  },
-  {
-    "name": "toTelugu",
-    "declLine1": "function toTelugu(input,type) {"
-  },
-  {
-    "name": "toThai",
-    "declLine1": "function toThai(input) {"
-  },
-  {
-    "name": "toUni",
-    "declLine1": "function toUni(input) {"
-  },
-  {
-    "name": "toUniRegEx",
-    "declLine1": "function toUniRegEx(input) {"
-  },
-  {
-    "name": "toVel",
-    "declLine1": "function toVel(input) {"
-  },
-  {
-    "name": "toVelRegEx",
-    "declLine1": "function toVelRegEx(input) {"
-  },
-  {
     "name": "toggleDPRSidebar",
     "declLine1": "function toggleDPRSidebar() {"
   },
@@ -958,10 +866,6 @@
   {
     "name": "translateWord",
     "declLine1": "async function translateWord(word,idx) {"
-  },
-  {
-    "name": "translit",
-    "declLine1": "function translit(data) {"
   },
   {
     "name": "triggerPrivacyNoticeAcceptanceCheck",

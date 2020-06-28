@@ -138,7 +138,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
 
   data = data.replace(/([^.])\.\.(?!\.)/g, "$1."); // double periods
 
-  var uniouta = toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
+  var uniouta = DPR_translit_mod.toUni(data).replace(/[”’] ([”’])/g, " $1").split(' ');
 
   var wordbyword = data.split(' ');
   var addpre = '';
@@ -174,15 +174,15 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       if (wb.charAt(endpt) == '}') {
         altplus += wb.substring(0,endpt);
         altread = 0;
-        altplus = translit(toUni(altplus));
+        altplus = DPR_translit_mod.translit(DPR_translit_mod.toUni(altplus));
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
 		  if(which != 1) {
-		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
 		  }
 		  else {
-		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  toUni(wb.substring(0,endpt)) + '</span>}';
+		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
 		  }
           finout += altplusf + space;
           b++;
@@ -196,7 +196,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       else {
         altplus += wb + ' ';
         if(DPR_G.DPR_prefs['showVariantsInline'] && which  != 1) {
-          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(wb) + '</span>' + space;
+          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
           b++;
         }
       }
@@ -204,11 +204,11 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
     else if (wb.charAt(0) == '{') {
       if (wb.charAt(wb.length-1) == '}') {
         altplus = wb.substring(1,wb.length-1) + ' ';
-        altplus = translit(toUni(altplus));
+        altplus = DPR_translit_mod.translit(DPR_translit_mod.toUni(altplus));
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
-          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  toUni(altplus) + '</span>}' + space;
+          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
           b++;
         }
@@ -222,10 +222,10 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         altplus = wb.substring(1) + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
           if(which  != 1) {
-			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
 		  }
 		  else {
-			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
 		  }
           b++;
         }
@@ -242,11 +242,11 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         var cp = wb.indexOf('<c');
         if(cp > 0) { // something before
           if (which) {
-            finout += translit(toUni(wb.substring(0,cp))); b++;
+            finout += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cp))); b++;
           }
           else {
             fullwordout[0] += wb.substring(0,cp).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-            fullwordout[1] += translit(toUni(wb.substring(0,cp)));
+            fullwordout[1] += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cp)));
           }
           convout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
           saveout += wb.substring(0,cp).replace(/<[^>]*>/g, '');
@@ -259,11 +259,11 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         var cm = wb.search('<xc>');
 
         if (which == 1) {
-          finout += cno + translit(toUni(wb.substring(0,cm)))+'<xc>'; b++;
+          finout += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>'; b++;
         }
         else {
           fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-          fullwordout[1] += cno + translit(toUni(wb.substring(0,cm))) + '<xc>';
+          fullwordout[1] += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm))) + '<xc>';
         }
 
         convout += wb.substring(0,cm).replace(/<[^>]*>/g, '');
@@ -273,11 +273,11 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       }
       if(wb.length > 0) { // anything left?
         if (which == 1) {
-          finout += translit(toUni(wb)); b++;
+          finout += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb)); b++;
         }
         else {
           fullwordout[0] += wb.replace(/"/g, 'x').replace(/<[^>]*>/g, '');
-          fullwordout[1] += translit(toUni(wb));
+          fullwordout[1] += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb));
         }
         convout += wb.replace(/<[^>]*>/g, '');
       }
@@ -355,7 +355,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       convout += wb + space;
       unioutb = uniouta[a];
       unioutb = unioutb.replace(/0/g, '.');
-      unioutb = translit(unioutb);
+      unioutb = DPR_translit_mod.translit(unioutb);
       finout += unioutb + space;
       saveout += unioutb + space;
     }
@@ -364,7 +364,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       convout += wb.replace(/<[^>]*>/g, '') + space;
       unioutb = uniouta[a];
       //unioutb = unioutb.replace(/0/g, '.');
-      unioutb = translit(unioutb);
+      unioutb = DPR_translit_mod.translit(unioutb);
       finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
       saveout += unioutb + space;
       b++;
@@ -380,8 +380,8 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
   saveout = saveout.replace(/ +([,;])/g, "$1");
 
   outarray[0] = finout;
-  outarray[1] = toUni(convout);
-  outarray[2] = toUni(saveout);
+  outarray[1] = DPR_translit_mod.toUni(convout);
+  outarray[2] = DPR_translit_mod.toUni(saveout);
   return outarray;
 }
 
@@ -417,7 +417,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var title = '',save = '',raw = '';
 
   if (DPR_G.G_nikFullFullNames[nikaya]) {
-    var nn = '<b>'+translit(DPR_G.G_nikFullFullNames[nikaya])+'</b>';
+    var nn = '<b>'+DPR_translit_mod.translit(DPR_G.G_nikFullFullNames[nikaya])+'</b>';
     title += (click?wrapLink(nn,click):nn) + ', ';
   }
 
@@ -431,17 +431,17 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   if (DPR_G.DPR_prefs['showNames']) {
     addJS(['dppn']);
     for (var i in namea) {
-      var tt = toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
+      var tt = DPR_translit_mod.toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
       if(tt.length < 2) continue;
       var dEI = DPR_navigation_mod.getDppnEntry(tt);
       if (dEI.length > 0) {
-        namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event));">&nbsp;n</span>';
+        namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span>';
       }
     }
   }
 
   for (var i=0; i < namea.length;i++) {
-    var thisname = translit(toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
+    var thisname = DPR_translit_mod.translit(DPR_translit_mod.toUni(namea[i])).replace(/([a-z])0/g,"$1.").replace(/\{(.*)\}/,"<a  class=\"tiny\" style=\"color:"+DPR_G.DPR_prefs['grey']+"\" href=\"javascript:void(0)\" title=\"$1\">VAR</a>").replace(/^  */, '').replace(/  *$/,'').replace(/ /g,'&nbsp;')
 
     if (thisname.length <2 )
       continue;
@@ -457,8 +457,8 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
       }
     }
 
-    var onet = '<b style="color:'+DPR_G.DPR_prefs[col[w++]]+'">' + translit(toUni(thisname)) + '</b>';
-    __otherDialogsViewModel.bookmarkName(translit(toUni(thisname)));
+    var onet = '<b style="color:'+DPR_G.DPR_prefs[col[w++]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(thisname)) + '</b>';
+    __otherDialogsViewModel.bookmarkName(DPR_translit_mod.translit(DPR_translit_mod.toUni(thisname)));
     title += (click?wrapLink(onet,click):onet) + (namen[i] ? namen[i] :'');
     save += '<h'+w+'>'+thisname+'</h'+w+'>';
     raw += thisname+(i < namea.length-1?"<br/>":"");
@@ -626,7 +626,7 @@ function makeTable(text,cls) {
 function linkToPED(base,word) {
   addJS(['ped']);
 
-  var vbase = toVel(base);
+  var vbase = DPR_translit_mod.toVel(base);
 
   if(typeof(DPR_G.P[vbase]) == 'object') {
     word = '<span style="color:'+DPR_G.DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + DPR_G.P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
@@ -644,6 +644,6 @@ function joinArray(s,a) {
 }
 
 function getNameHTML(dEI,tt) {
-  var namen = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/'+dEI.join(','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+toUni(tt)+'/')+','+toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+  var namen = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
   return namen;
 }

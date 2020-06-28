@@ -24,7 +24,7 @@ var DPRXML = {
     namea = axml[0].getElementsByTagName("han");
     if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
     else name = this.unnamed;
-    var outname = translit(toUni(name));
+    var outname = DPR_translit_mod.translit(DPR_translit_mod.toUni(name));
     __navigationTabViewModel.navTitle(outname);
 
     var u = xmlDoc.getElementsByTagName("h0");
@@ -101,7 +101,7 @@ var DPRXML = {
     namea = axml[0].getElementsByTagName("han");
     if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/, '').replace(/^  */, '').replace(/  *$/, '');
     else name = this.unnamed;
-    var outname = translit(toUni(name));
+    var outname = DPR_translit_mod.translit(DPR_translit_mod.toUni(name));
 
     var u = xmlDoc.getElementsByTagName("h0");
     var v = u[meta].getElementsByTagName("h1");
@@ -206,7 +206,7 @@ var DPRXML = {
         continue;
       }
 
-      namea = translit(toUni(namea));
+      namea = DPR_translit_mod.translit(DPR_translit_mod.toUni(namea));
 
       outlist.push(namea);
     }

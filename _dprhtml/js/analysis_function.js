@@ -16,7 +16,7 @@ async function outputAnalysis(input,frombox) {
   var shortdefpre = [];
   DPR_G.G_shortdefpost = [];
 
-  input = toVel(input);
+  input = DPR_translit_mod.toVel(input);
 
   // update permalink
 
@@ -60,7 +60,7 @@ async function outputAnalysis(input,frombox) {
 
   // send input to sidebar
 
-  if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=toUni(input);
+  if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=DPR_translit_mod.toUni(input);
 
   shortdefpre = [];
 

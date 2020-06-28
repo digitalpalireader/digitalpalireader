@@ -33,100 +33,100 @@ function convert(check,lower)
     case 0:
       switch(outScript) {
         case 1:
-          spell = toVel(spell);
+          spell = DPR_translit_mod.toVel(spell);
           break;
         case 2:
-          spell = toThai(spell);
+          spell = DPR_translit_mod.toThai(spell);
           break;
         case 3:
-          spell = toDeva(spell);
+          spell = DPR_translit_mod.toDeva(spell);
           break;
         case 4:
-          spell = toMyanmar(spell);
+          spell = DPR_translit_mod.toMyanmar(spell);
           break;
         case 5:
-          spell = toSin(spell);
+          spell = DPR_translit_mod.toSin(spell);
           break;
         case 6:
-          spell = toBengali(spell);
+          spell = DPR_translit_mod.toBengali(spell);
           break;
         case 7:
-          spell = toTelugu(spell);
+          spell = DPR_translit_mod.toTelugu(spell);
           break;
       }
       break;
     case 1:
-      spell = toUni(spell);
+      spell = DPR_translit_mod.toUni(spell);
       switch(outScript) {
         case 0:
           break;
         case 2:
-          spell = toThai(spell);
+          spell = DPR_translit_mod.toThai(spell);
           break;
         case 3:
-          spell = toDeva(spell);
+          spell = DPR_translit_mod.toDeva(spell);
           break;
         case 4:
-          spell = toMyanmar(spell);
+          spell = DPR_translit_mod.toMyanmar(spell);
           break;
         case 5:
-          spell = toSin(spell);
+          spell = DPR_translit_mod.toSin(spell);
           break;
         case 6:
-          spell = toBengali(spell);
+          spell = DPR_translit_mod.toBengali(spell);
           break;
         case 7:
-          spell = toTelugu(spell);
+          spell = DPR_translit_mod.toTelugu(spell);
           break;
       }
       break;
     case 2: // from Thai
-      spell = fromThai(spell);
+      spell = DPR_translit_mod.fromThai(spell);
       switch(outScript) {
         case 0:
           break;
         case 1:
-          spell = toVel(spell);
+          spell = DPR_translit_mod.toVel(spell);
           break;
         case 3:
-          spell = toDeva(spell);
+          spell = DPR_translit_mod.toDeva(spell);
           break;
         case 4:
-          spell = toMyanmar(spell);
+          spell = DPR_translit_mod.toMyanmar(spell);
           break;
         case 5:
-          spell = toSin(spell);
+          spell = DPR_translit_mod.toSin(spell);
           break;
         case 6:
-          spell = toBengali(spell);
+          spell = DPR_translit_mod.toBengali(spell);
           break;
         case 7:
-          spell = toTelugu(spell);
+          spell = DPR_translit_mod.toTelugu(spell);
           break;
       }
       break;
     case 5: // from Sinhala
-      spell = fromSin(spell);
+      spell = DPR_translit_mod.fromSin(spell);
       switch(outScript) {
         case 0:
           break;
         case 1:
-          spell = toVel(spell);
+          spell = DPR_translit_mod.toVel(spell);
           break;
         case 2:
-          spell = toThai(spell);
+          spell = DPR_translit_mod.toThai(spell);
           break;
         case 3:
-          spell = toDeva(spell);
+          spell = DPR_translit_mod.toDeva(spell);
           break;
         case 4:
-          spell = toMyanmar(spell);
+          spell = DPR_translit_mod.toMyanmar(spell);
           break;
         case 6:
-          spell = toBengali(spell);
+          spell = DPR_translit_mod.toBengali(spell);
           break;
         case 7:
-          spell = toTelugu(spell);
+          spell = DPR_translit_mod.toTelugu(spell);
           break;
       }
       break;
