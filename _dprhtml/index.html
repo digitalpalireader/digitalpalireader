@@ -44,17 +44,15 @@
 
         registration = await wb.register();
       }
-
       if ('serviceWorker' in navigator) {
-        const wb = new Workbox('/_dprhtml/sw.js');
-        wb.addEventListener('waiting', (event) => {
-          wb.addEventListener('controlling', (event) => {
-            window.location.reload();
-          });
-          wb.messageSW({type: 'SKIP_WAITING'});
-        });
-
-        wb.register();
+        window.addEventListener('load', () => navigator.serviceWorker.register().then(
+          registration => {
+            console.log(`Service Worker registered! Scope: ${registration.scope}`);
+          },
+          error => {
+            console.error(`Service Worker registration failed: ${error}`);
+          },
+        ));
         configureNewVersionCheck();
       }
 
