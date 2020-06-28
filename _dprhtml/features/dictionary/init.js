@@ -3,7 +3,7 @@
 class DictionaryTabViewModel{
   constructor(){
     this.query = ko.observable('');
-    this.query.subscribe(x => this.query(this.rx() ? toUniRegEx(x) : toUni(x)), this);
+    this.query.subscribe(x => this.query(this.rx() ? DPR_translit_mod.toUniRegEx(x) : DPR_translit_mod.toUni(x)), this);
     this.type = ko.observable('');
     this.showAdvancedOptions = ko.observable(false);
     this.options = ko.observableArray();

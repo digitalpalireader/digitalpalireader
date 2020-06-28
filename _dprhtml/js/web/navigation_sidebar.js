@@ -52,7 +52,7 @@ var DPRNav = {
         title = titles[i];
         val = i+1;
       }
-      __navigationTabViewModel.navBook.push({value: val, label: translit(title)});
+      __navigationTabViewModel.navBook.push({value: val, label: DPR_translit_mod.translit(title)});
     }
 
     __navigationTabViewModel.book(book ? book : __navigationTabViewModel.navBook()[0].value);
@@ -74,7 +74,7 @@ var DPRNav = {
     for (var i = 0; i < titles.length; i++) {
       // menu
       let menuValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
-      let menuText = translit((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : DPR_G.G_nikLongName[nik] + ' ' + titles[i]);
+      let menuText = DPR_translit_mod.translit((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : DPR_G.G_nikLongName[nik] + ' ' + titles[i]);
 
       __searchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
 
@@ -156,9 +156,9 @@ var DPRNav = {
       histNode.appendItem('-- History --', '0');
       for (var i = 0; i < theHistory.length; i++) {
         var thist = theHistory[i].split('@');
-        var thist0 = toUni(thist[0]);
+        var thist0 = DPR_translit_mod.toUni(thist[0]);
         thist0 = thist0.split('-');
-        thist0[thist0.length - 1] = translit(thist0[thist0.length - 1]);
+        thist0[thist0.length - 1] = DPR_translit_mod.translit(thist0[thist0.length - 1]);
         thist0 = thist0.join('-');
         histNode.appendItem(thist0, thist[1]);
 
@@ -262,7 +262,7 @@ var DPRNav = {
         bList.appendItem(query + ' (' + type + ')');
 
         var ch = bList.childNodes[0].childNodes;
-        ch[cnt].setAttribute('onclick', "DPRSend.sendDict(true,DPRSend.eventSend(event),'" + type + "','" + translit(query) + "',['" + opts + "']);");
+        ch[cnt].setAttribute('onclick', "DPRSend.sendDict(true,DPRSend.eventSend(event),'" + type + "','" + DPR_translit_mod.translit(query) + "',['" + opts + "']);");
         ch[cnt].setAttribute('tooltiptext', 'run lookup');
       }
       bList.selectedIndex = 0;
@@ -288,7 +288,7 @@ var DPRNav = {
         var scroll = bNodes[i].getElementsByTagName('scroll')[0].textContent;
         var desc = bNodes[i].getElementsByTagName('description')[0].textContent;
 
-        bList.appendItem(translit(name));
+        bList.appendItem(DPR_translit_mod.translit(name));
 
         var ch = bList.childNodes[0].childNodes;
         ch[i + 1].setAttribute('onclick', "DPRSend.openPlace(['" + loc[0] + "'," + loc[1] + "," + loc[2] + "," + loc[3] + "," + loc[4] + "," + loc[5] + "," + loc[6] + ",'" + loc[7] + "'],null,null,DPRSend.eventSend(event)," + scroll + ");");

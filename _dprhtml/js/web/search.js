@@ -86,7 +86,7 @@ function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {
 function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {
   const html = `
 <li>
-  <label class="m-0" id="search-term" style="font-weight: bold;">${(DPR_G.G_searchRX?DPR_G.G_searchString:toUni(DPR_G.G_searchString))+': '}</label>
+  <label class="m-0" id="search-term" style="font-weight: bold;">${(DPR_G.G_searchRX?DPR_G.G_searchString:DPR_translit_mod.toUni(DPR_G.G_searchString))+': '}</label>
 </li>
 <li>
   <label class="m-0" id="search-matches" style="font-weight: bold;">0</label>

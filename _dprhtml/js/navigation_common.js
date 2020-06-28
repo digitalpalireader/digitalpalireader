@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_navigation_common_mod = ( function () {
+
 DPR_G.G_unnamed = '[unnamed]';
 
 DPR_G.G_hier = 'm';
@@ -878,3 +880,9 @@ function convertShortLink(place) {
   if(!outplace) return [false,'Quick link does not resolve to any sutta.','yellow'];
   return outplace;
 }
+
+return {
+convertShortLink : convertShortLink,
+getSuttaNumber : getSuttaNumber
+}
+})()

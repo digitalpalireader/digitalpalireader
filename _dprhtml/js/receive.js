@@ -50,8 +50,8 @@ async function makeLinkPlace(options,PL) {
         outplace = tplace;
     }
     else if (option[0] == 'query') {
-      if(/^\//.test(option[1])) query = toUni(option[1]);
-      else query = toUni(decodeURIComponent(option[1]));
+      if(/^\//.test(option[1])) query = DPR_translit_mod.toUni(option[1]);
+      else query = DPR_translit_mod.toUni(decodeURIComponent(option[1]));
     }
     else if (option[0] == 'para') para = option[1];
     else if (option[0] == 'scroll') scroll = parseInt(option[1]);
@@ -76,7 +76,7 @@ function makeLocPlace(inplace) {
     outplace[8] = parseInt(outplace[8]);
   }
   else { // shorthand
-    outplace = convertShortLink(inplace);
+    outplace = DPR_navigation_common_mod.convertShortLink(inplace);
     if(outplace[0] === false)
       outplace = null;
   }

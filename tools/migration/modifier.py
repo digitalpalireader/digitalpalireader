@@ -41,4 +41,4 @@ def exposeFiles(dataFileName,filesExcluded,beginningIndex,endIndex):
           print("\nfunction - ", element4Func2Exp['name'], "\n")
           handleCallSites4Func(element4Func2Exp, moduleName)
 
-exposeFiles("functionsToExposeForFile.json", "filesExcluded.json", beginningIndex=0, endIndex=4)
+exposeFiles("functionsToExposeForFile.json", "filesExcluded.json", beginningIndex=-1, endIndex=-1)

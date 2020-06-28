@@ -15,7 +15,7 @@ function sendTextPad(add){
     var oldTab = DPRChrome.findDPRTab('DPR-main');
 
     if (!oldTab) {
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+toVel(input));
+      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+DPR_translit_mod.toVel(input));
       openDPRTab(permalink,'DPR-main');
     }
     else {
@@ -24,7 +24,7 @@ function sendTextPad(add){
       oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
     }
   } else {
-    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+toVel(input));
+    var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+DPR_translit_mod.toVel(input));
     openDPRTab(permalink,'DPRm');
   }
 }

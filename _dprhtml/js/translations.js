@@ -424,7 +424,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 
       // BuddhistTexts
       if(trProps.bt.enabled && (which == 6 || which == 0)) {
-        var n = which == 0 ? getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
+        var n = which == 0 ? DPR_navigation_common_mod.getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier,0,0).replace(/^[^.]*\./,'') : '';
 
         output.push(transLink(which,2,'an/an_e_'+(book+1)+'.htm'+(which == 0?'#s'+n:''),'Translation of AN '+(book+1)+(which == 0?'.'+n:'')+' by Bodhi'));
         cnt++;
@@ -532,7 +532,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
       if(hier != 'm')
         break;
 
-      var shortLink = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier);
+      var shortLink = DPR_navigation_common_mod.getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,hier);
 
       var bookn = book+1;
 
@@ -950,7 +950,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         case 14: // Jat
           // BuddhistTexts
           if(trProps.bt.enabled) {
-            var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
+            var jat = DPR_navigation_common_mod.getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
             output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
@@ -958,7 +958,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
         case 15: // Jat
           // BuddhistTexts
           if(trProps.bt.enabled) {
-            var jat = getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
+            var jat = DPR_navigation_common_mod.getSuttaNumber(nikaya,book,meta,volume,vagga,sutta,section,'m',1,false).replace(/^[^.]+\./,'');
             output.push(transLink(which,2,'ja/ja_e_'+(parseInt(jat)+6)+'.htm','Translation of Jat '+jat+' by Cowell'));
             cnt++;
           }
