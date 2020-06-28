@@ -253,11 +253,11 @@ const initializeMainPaneOutput = () => {
 }
 
 const writeNavigationHeader = (tabT) => {
-  $('#main-content-header-contents').html(tabT);
+  $('#navigation-header-contents').html(tabT);
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $('#navigation-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {

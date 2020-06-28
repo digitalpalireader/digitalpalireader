@@ -1,6 +1,5 @@
 :root {
   --main-footer-height: 1rem;
-  --main-content-header-height: 3rem;
   --main-sidebar-width: 22rem;
   --splitter-width: 0.75rem;
   --splitter-background: center center no-repeat #b3b3b3;
@@ -169,22 +168,6 @@ body .bd-highlight {
   position: relative;
   flex: 1 1 auto;
   overflow: auto;
-}
-
-#main-content-header {
-  min-height: var(--main-content-header-height);
-  max-height: var(--main-content-header-height);
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #e7e7e7;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-#main-content-header-context-commands, #main-content-header-contents {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 #main-content-panel {
@@ -472,8 +455,28 @@ body .bd-highlight {
 }
 
 /*
-  Settings dialog
-*/
+ * Navigation
+ */
+
+#main-pane-container-section-0 #navigation-header-contents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+#main-pane-container-section-0 #navigation-header-contents p {
+  margin: 0rem;
+}
+
+#main-pane-container-section-0 #navigation-header-contents div a {
+  margin: 0rem;
+}
+
+/*
+ * Settings dialog
+ */
 
 #settings-pane #settings-pane-tabs {
   display: flex;
@@ -574,7 +577,7 @@ body .bd-highlight {
 
 #context-menu {
   position: absolute;
-  top: calc(1rem + var(--main-content-header-height));
+  top: 1rem;
   left: 1rem;
   display: flex;
   flex-direction: column;

@@ -125,12 +125,11 @@ padding:0;
 }
 
 hr {
-margin-top:2px;
-margin-bottom:2px;
-color: #FFF;
-background-color: #FFF;
+  margin-block-start: 0.5em;
+  border-style: inset;
+  border-width: 1px;
+  border-color: lightgrey;
 }
-
 
 input.btn, input.go {
   font: bold 84% 'courier new';
@@ -795,7 +794,7 @@ font-family: 'courier new';
 /* paragraph types */
 
 .paratype03, .paratype01{
-  margin: 2%;
+  margin: 1.4rem;
 }
 
 .paratype06 {
