@@ -414,9 +414,9 @@ var DPR_Chrome = (function () {
   }
 
   const toastVisibleForMilliseconds = 4000;
-  const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds);
-  const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds);
-  const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds);
+  const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds, null, {});
+  const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds, null, {});
+  const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds, null, {});
   const showSingletonInformationToast =
     (message, uniqueId, toastVisibleForSeconds, toastCommandInfo) => createToast(ToastTypeInfo, message, toastVisibleForSeconds * 1000, uniqueId, toastCommandInfo);
 

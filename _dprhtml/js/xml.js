@@ -987,7 +987,7 @@ async function loadXMLindex(place,compare) {
               saveheader += '<c'+(wcs+1)+'><a name="'+whs+'" href="#'+whs+'b">'+DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+'</a></c'+(wcs+1)+'>';
             }
             if(isPlace) {
-              var link =  DPR_PAL.normalizeDprUri('dpr:index') + '?loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
+              var link =  DPR_PAL.normalizeDprUri('dpr:index?') + 'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier;
               var t = u[tmp6].getElementsByTagName("p");
               for (var tmp7 = 0; tmp7 < t.length; tmp7++) {
                 if(xset) { // thai
