@@ -37,12 +37,10 @@ select, input, textarea {
 
 .paperback {
   /* NOTE: Style set at runtime from settings */
-  background-color: unset;
 }
 
 .chromeback {
   /* NOTE: Style set at runtime from settings */
-  background-color: unset;
 }
 
 .abut {
