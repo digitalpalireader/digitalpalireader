@@ -593,7 +593,7 @@ body .bd-highlight {
   Context Menu
  */
 
-#context-menu-top-level #context-menu-top-level-open-sidebar {
+#context-menu-top-level {
   position: absolute;
   top: 1rem;
   left: 1rem;

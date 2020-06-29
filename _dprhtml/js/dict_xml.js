@@ -26,6 +26,26 @@ async function paliXMLHistory(opts) {
   }
 }
 
+const createXNavButtons = (type, html, lname, nname) => {
+  let onclickStrFn
+  if (type === 'PED') {
+    onclickStrFn = x => `paliXML('PED/${x}')`
+  } else if (type === 'DPPN') {
+    onclickStrFn = x => `DPPNXML(${x})`
+  } else {
+    throw `type is ${type}. Must be PED or DPPN.`
+  }
+
+  if (lname) html += `<button type="button" class="btn btn-sm btn-light m-0" onclick="${onclickStrFn(lname)}" title="Previous ${type} entry..."><i class="fa fa-chevron-left"></i></button>`
+  if (nname) html += `<button type="button" class="btn btn-sm btn-light m-0" onclick="${onclickStrFn(nname)}" title="Next ${type} entry..."><i class="fa fa-chevron-right"></i></button>`
+
+  $('#difhist').html(`<div class="d-flex flex-row">${html}</div>`);
+}
+
+const createPEDNavToolbar = (html, lname, nname) => createXNavButtons('PED', html, lname, nname)
+
+const createDPPNNavToolbar = (html, lname, nname) => createXNavButtons('DPPN', html, lname, nname)
+
 async function paliXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'Lookup word',  properties: { filein,which,add, }});
@@ -121,8 +141,9 @@ async function paliXML(filein,which,add)
   var outdata = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]")+'<hr/>';
   displayDictData(outdata);
   var tout = '';
+  // TODO: Following block is duplicated with corresponding one for DPPNXMLHistory. Make it DRY.
   if (DPR_G.G_pedhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="paliXMLHistory(this);"><option>- history -</option>';
+    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="paliXMLHistory(this);"><option>- history -</option>';
     for (var i = DPR_G.G_pedhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_pedhist[i]+'"';
       if (i == DPR_G.G_phmark) { showing += ' selected'; }
@@ -132,7 +153,6 @@ async function paliXML(filein,which,add)
     showing += '</select>';
     tout += (tout.length > 0 ? ' ' : '') + showing;
   }
-
 
   // get number
   var tname, lname, nname;
@@ -157,11 +177,7 @@ async function paliXML(filein,which,add)
     }
   }
 
-  if (lname) tout += '<span class="abut lbut tiny" onclick="paliXML(\'PED/'+lname+'\')" />&lt;</span>';
-  if (nname) tout += '<span class="abut rbut tiny" onclick="paliXML(\'PED/'+nname+'\')" />&gt;</span>';
-
-
-  $('#difhist').html('<table><tr><td>' + tout + '</td></tr></table>');
+  createPEDNavToolbar(tout, lname, nname)
 
   if(document.getElementById('bottom')) {
     document.getElementById('cdif').scrollTop=0;
@@ -292,8 +308,9 @@ async function DPPNXML(filein,which,add)
 
   var tout = '';
 
+  // TODO: Following block is duplicated with corresponding one for paliXMLHistory. Make it DRY.
   if (DPR_G.G_dppnhist.length > 1) { // show select
-    var showing = '<select title="go to history" onchange="DPPNXMLHistory(this)"><option>- history -</option>';
+    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="DPPNXMLHistory(this)"><option>- history -</option>';
     for (var i = DPR_G.G_dppnhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_dppnhist[i]+'"';
       if (i == DPR_G.G_dhmark) { showing += ' selected'; }
@@ -305,11 +322,8 @@ async function DPPNXML(filein,which,add)
 
   }
 
-  if (lname) tout += '<span class="abut lbut tiny" onclick="DPPNXML('+lname+')" />&lt;</span>';
-  if (nname) tout += '<span class="abut rbut tiny" onclick="DPPNXML('+nname+')" />&gt;</span>';
+  createDPPNNavToolbar(tout, lname, nname)
 
-
-  $('#difhist').html('<table><tr><td>' + tout + '</td></tr></table>');
   if(document.getElementById('bottom')) {
     document.getElementById('cdif').scrollTop=0;
     DPRBottomPaneUpdateStyle();
