@@ -5,11 +5,17 @@ class DprViewModel {
     this.sidebarVisible = ko.observable(false);
     this.loadingFeatureVisible = ko.observable(true);
     this.landingFeatureVisible = ko.observable(false);
-    this.navigationFeatureVisible = ko.observable(false);
-    this.searchFeatureVisible = ko.observable(false);
-    this.dictionaryFeatureVisible = ko.observable(false);
-    this.mainFeaturesVisible = ko.observable(false);
     this.activeTab = ko.observable(navigationFeatureName);
+    this.mainFeaturesVisible = ko.observable(false);
+    this.navigationFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === navigationFeatureName
+    }, this);
+    this.searchFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === searchFeatureName
+    }, this);
+    this.dictionaryFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === dictionaryFeatureName
+    }, this);
     this.commands = createCommands();
     this.parseURLParameters();
   }
@@ -29,13 +35,10 @@ class DprViewModel {
   parseURLParameters() {
     if (DPR_PAL.isNavigationFeature()) {
       this.activeTab(navigationFeatureName);
-      this.navigationFeatureVisible(true);
     } else if (DPR_PAL.isSearchFeature()) {
       this.activeTab(searchFeatureName);
-      this.searchFeatureVisible(true);
     } else if (DPR_PAL.isDictionaryFeature()) {
       this.activeTab(dictionaryFeatureName);
-      this.dictionaryFeatureVisible(true);
     } else {
       // NOTE: Default is navigation tab.
     }

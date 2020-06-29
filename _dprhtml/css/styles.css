@@ -202,10 +202,10 @@ position:relative;
 }
 
 .hoverShow {
-opacity:0.2
+  opacity: 0.5
 }
 .hoverShow:hover {
-opacity:1.0
+  opacity: 1.0
 }
 
 .thick {
