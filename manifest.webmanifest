@@ -37,7 +37,7 @@
   }],
   "start_url": "/_dprhtml/index.html",
   "background_color": "#FFFFDD",
-  "display": "minimal-ui",
+  "display": "standalone",
   "scope": "/",
   "theme_color": "#FFFFDD",
   "shortcuts": [
