@@ -1,13 +1,16 @@
 module.exports = {
   "maximumFileSizeToCacheInBytes": 5000000,
   "dontCacheBustURLsMatching": /\.\w{32}\./,
-  "globDirectory": "_dprhtml/",
+  "globDirectory": ".",
   "globPatterns": [
-    "**/*.*"
+    "_dprhtml/**/*.*",
+    "./*.html",
+    "./manifest.webmanifest",
+    "./favicon.png",
   ],
   "globIgnores": [
     "**/*.{map,sh}",
   ],
-  "swDest": "_dprhtml/sw.js",
-  "swSrc": "_dprhtml/sw-template.js",
+  "swDest": "sw.js",
+  "swSrc": "sw-template.js",
 };
