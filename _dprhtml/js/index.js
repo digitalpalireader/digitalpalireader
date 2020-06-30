@@ -79,7 +79,8 @@ const initSplitters = () => {
 }
 
 const initMainPane = () => {
-  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height());
+  $("#main-pane").css("max-height", $("#main-content-panel").height() - $("#main-content-panel-splitter").height())
+  $('#main-pane-container').css("max-width", window.innerWidth)
 }
 
 const initFooter = () => {

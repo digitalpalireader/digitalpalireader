@@ -94,7 +94,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
   $(`#${DPR_PAL.getDifId()}`).html('');
-  $('#dicthead').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+  $('#main-pane-container-section-0-header').html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 
   DPR_G.G_dictQuery = DPR_G.G_dictQuery.toLowerCase();
 
@@ -195,7 +195,7 @@ async function pedsearchstart(hard)
     }
   }
 
-  $('#dicthead').append('<p>PED entry search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<hr />');
+  $('#main-pane-container-section-0-header').append('<p>PED entry search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var outDiv = document.createElement('div');
 
@@ -290,7 +290,7 @@ async function pedFullTextSearch(getstring) {
     }
   }
 
-  $('#dicthead').append('<div><a name="diftop"><br />PED full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:</div>');
+  $('#main-pane-container-section-0-header').append('<div><a name="diftop">PED full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:</div>');
 
   // word list
 
@@ -298,7 +298,7 @@ async function pedFullTextSearch(getstring) {
 
   var findiv = Math.ceil(y/3);
 
-  var listoutf = '<hr /><table width="100%">';
+  var listoutf = '<table width="100%">';
   if(y == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -401,7 +401,7 @@ async function dppnsearchstart(hard)
   }
 
 
-  $('#dicthead').append('<p>DPPN entry search for <b style="color:'+DPR_G.DPR_prefs['coldppn']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<hr />');
+  $('#main-pane-container-section-0-header').append('<p>DPPN entry search for <b style="color:'+DPR_G.DPR_prefs['coldppn']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var listoutf = '';
 
@@ -517,7 +517,7 @@ async function dppnFullTextSearch(getstring) {
 
   var findiv = Math.ceil(y/3);
 
-  var listoutf = '<hr /><table width="100%">';
+  var listoutf = '<table width="100%">';
   if(y == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -532,7 +532,7 @@ async function dppnFullTextSearch(getstring) {
     listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
   }
 
-  $('#dicthead').append('<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
+  $('#main-pane-container-section-0-header').append('<div><a name="diftop">DPPN full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
 
   var finout = DPR_sortaz_mod.sortaz(finalouta).join('\n');
 
@@ -605,7 +605,7 @@ function mlsearchstart(hard)
     }
   }
 
-  $('#dicthead').append('<p>CPED search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<hr /><table width=100%><tr><td valign="top">');
+  $('#main-pane-container-section-0-header').append('<p>CPED search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<table width=100%><tr><td valign="top">');
 
   if(finouta.length == 0) {
     finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -772,7 +772,7 @@ function multisearchstart(hard)
 
   var outDiv = document.createElement('div');
 
-  $('#dicthead').append('<p><span style="color:'+DPR_G.DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_G.DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_G.DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_G.DPR_prefs['colsel']+'">'+getstring+'</b>:<hr />');
+  $('#main-pane-container-section-0-header').append('<p><span style="color:'+DPR_G.DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_G.DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_G.DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_G.DPR_prefs['colsel']+'">'+getstring+'</b>:');
 
   if(finouta.length == 0) {
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -904,9 +904,9 @@ function epdsearchstart()
     }
   }
 
-  $('#dicthead').append('<p>CEPD search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>CEPD search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
-  finout = '<hr /><table width=100%><tr><td valign="top">';
+  finout = '<table width=100%><tr><td valign="top">';
   if(finouta.length == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = finout + 'No results</td></tr></table>';
@@ -994,9 +994,9 @@ function attsearchstart()
 
   var findiv = Math.ceil(y/3);
 
-  $('#dicthead').append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
 
-  var listoutf = '<hr /><table width="100%">';
+  var listoutf = '<table width="100%">';
   if(y == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -1086,9 +1086,9 @@ function tiksearchstart()
 
   var findiv = Math.ceil(y/3);
 
-  $('#dicthead').append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
 
-  var listoutf = '<hr /><table width="100%">';
+  var listoutf = '<table width="100%">';
   if(y == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -1214,9 +1214,9 @@ function titlesearchstart()
 
   var findiv = Math.ceil(y/2);
 
-  $('#dicthead').append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:');
 
-  var listoutf = '<hr />';
+  var listoutf = '';
   if(y == 0) {
     var outDiv = document.createElement('div');
     outDiv.innerHTML = listoutf + '<tr><td>No results</td></tr></table><hr />';
@@ -1305,7 +1305,7 @@ function paliRootsearchstart(hard)
     }
   }
 
-  $('#dicthead').append('<p>Pali Roots search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>Pali Roots search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   finout = '<table width=100%><tr><td valign="top">';
   if(finouta.length == 0) {
@@ -1388,7 +1388,7 @@ async function sktsearchstart()
     }
   }
 
-  $('#dicthead').append('<p>Sanskrit search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
+  $('#main-pane-container-section-0-header').append('<p>Sanskrit search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
 
 
   var outDiv = document.createElement('div');
@@ -1488,7 +1488,7 @@ async function sktRootsearchstart(hard)
     }
   }
 
-  $('#dicthead').append('<p>Skt Root search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:<hr />');
+  $('#main-pane-container-section-0-header').append('<p>Skt Root search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
 
   var outDiv = document.createElement('div');
 

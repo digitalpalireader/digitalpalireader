@@ -183,22 +183,28 @@
       <div id="main-panel">
         <div id="main-sidebar" data-bind="visible: sidebarVisible()">
           <div id="main-sidebar-content" class="card chromeback">
-            <div class="card-header">
-              Digital Pāli Reader
-              <button type="button" class="btn btn-sm btn-light mb-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences..." style="float: right">
+            <div class="card-header d-flex align-items-center">
+              <span class="font-weight-bold mr-auto">Digital Pāli Reader</span>
+              <a href="/" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Home/Buddha Vachana (Keyboard shortcut: v)">
+                <i class="fa fa-home"></i>
+              </a>
+              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
+                <i class="fa fa-question-circle"></i>
+              </a>
+              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences...">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
             <div class="card-body p-2">
               <ul id="navTabs" class="nav nav-tabs">
                 <li class="nav-item">
-                  <a id="navigationTab" data-toggle="tab" class="nav-link active" href="">Navigation</a>
+                  <a id="navigationTab" data-toggle="tab" class="nav-link px-2 active" href="">Navigation</a>
                 </li>
                 <li class="nav-item">
-                  <a id="searchTab" data-toggle="tab" class="nav-link" href="">Search</a>
+                  <a id="searchTab" data-toggle="tab" class="nav-link px-2" href="">Search</a>
                 </li>
                 <li class="nav-item">
-                  <a id="dictionaryTab" data-toggle="tab" class="nav-link" href="">Dictionary</a>
+                  <a id="dictionaryTab" data-toggle="tab" class="nav-link px-2" href="">Dictionary</a>
                 </li>
               </ul>
               <div id="navigationTabPane" class="featureTabContent">
@@ -212,8 +218,12 @@
         </div>
         <div id="main-panel-splitter" data-bind="visible: sidebarVisible()" ondblclick="DPR_Chrome.toggleDPRSidebar()"></div>
         <div id="main-content">
-
-          <div id="context-menu" data-bind="visible: mainFeaturesVisible() && activeTab() === 'navigation'">
+          <div id="context-menu-top-level" data-bind="visible: navigationFeatureVisible() || searchFeatureVisible() || dictionaryFeatureVisible()">
+            <button id="context-menu-top-level-open-sidebar" class="btn btn-sm btn-light m-0" role="button" onclick="DPR_Chrome.toggleDPRSidebar()" title="Toggle sidebar (Keyboard shortcut: & or `)">
+              <i id="context-menu-launcher-icon" class="fa fa-bars"></i>
+            </button>
+          </div>
+          <div id="context-menu" data-bind="visible: navigationFeatureVisible()">
             <a id="context-menu-handle" class="m-0" role="button">
               <i id="context-menu-launcher-icon" class="fa fa-chevron-down"></i>
             </a>
@@ -340,27 +350,16 @@
           </div>
 
           <div id="main-content-panel">
-            <header id="main-content-header" data-bind="visible: mainFeaturesVisible">
-              <button type="button" class="btn btn-light m-0" onclick="DPR_Chrome.toggleDPRSidebar()" title="Toggle sidebar (Keyboard shortcut: `)">
-                <i class="fa fa-bars"></i>
-              </button>
-              <a href="/" class="btn btn-light m-0" role="button" title="Home/Buddha Vachana (Keyboard shortcut: v)">
-                <i class="fa fa-home"></i>
-              </a>
-              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn btn-light m-0" role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
-                <i class="fa fa-question-circle"></i>
-              </a>
-              <a href="#" target="_blank" rel="noreferrer" class="btn btn-sm btn-success m-0 feedback-form-link small text-nowrap" role="button" title="Give feedback on DPR (Keyboard shortcut: @)">
-                Give feedback
-              </a>
-              <div id="main-content-header-context-commands"></div>
-              <span id="main-content-header-title" class="ml-3"></span>
-              <div id="main-content-header-contents"></div>
-            </header>
-
+            <div id="search-header" class="chromeback" data-bind="visible: searchFeatureVisible">
+              <div id="search-header-context-commands" class="ml-5"></div>
+              <span id="search-header-title" class="ml-3"></span>
+              <div id="search-header-contents"></div>
+            </div>
             <div id="main-pane">
               <div id="main-pane-container" data-bind="visible: mainFeaturesVisible">
                 <div class="main-pane-container-section" id="main-pane-container-section-0">
+                  <div id="main-pane-container-section-0-header" class="mt-2 px-2" data-bind="visible: navigationFeatureVisible() || dictionaryFeatureVisible()"></div>
+                  <hr class="mx-2 mb-0" data-bind="visible: navigationFeatureVisible() || dictionaryFeatureVisible()" />
                   <div id="content">
                     <div id="top-frame">
                       <div id="matrelc"></div>

@@ -18,9 +18,7 @@ addEventListener('message', (event) => {
   }
 });
 
-// TODO: Temporary solution to warm the runtime caches. Eventually do this from UI with a progress bar so people know the status.
 self.addEventListener('install', (event) => {
-  /*
   const enDppnUrls =
     ['abbrev.xml']
     .concat(Array.from({ length: 10 }, (_, k)=> `${k + 1}.xml`))
@@ -38,7 +36,6 @@ self.addEventListener('install', (event) => {
     myFiles
     .map(f => `/tipitaka/my/${f}.xml`);
   event.waitUntil(caches.open('tipitaka-my').then((cache) => cache.addAll(myUrls)));
-  */
 });
 
 workbox.precaching.precacheAndRoute(

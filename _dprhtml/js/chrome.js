@@ -253,11 +253,11 @@ const initializeMainPaneOutput = () => {
 }
 
 const writeNavigationHeader = (tabT) => {
-  $('#main-content-header-contents').html(tabT);
+  $('#main-pane-container-section-0-header').html(tabT);
 }
 
 const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-content-header-contents').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $('#main-pane-container-section-0-header').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
@@ -286,15 +286,34 @@ const closeBottomFrame = () => {
 }
 
 var DPR_Chrome = (function () {
-  const fixupUrlAndMainPanelSectionsLayout = () => {
-    const availableWidth = $('#main-pane-container').width();
-    const totalSplitterWidth = $('.main-pane-container-splitter')
-      .toArray()
-      .reduce((acc, e) => acc + $(e).width(), 0);
-    const sections = $('.main-pane-container-section').toArray();
-    sections.forEach(x => $(x).width((availableWidth - totalSplitterWidth) / sections.length));
+  let sectionElements = {}
+  function createSectionElementsCache() {
+    const ses = {}
 
-    const uris = $('.main-pane-container-section').toArray().map(x => $(x).attr('data-dpruri')).filter(x => x);
+    ses.container = $('#main-pane-container')
+
+    ses.splitters = []
+    $('.main-pane-container-splitter').each(function () {
+      ses.splitters.push($(this))
+    })
+
+    ses.sections = []
+    $('.main-pane-container-section').each(function () {
+      ses.sections.push($(this))
+    })
+
+    ses.totalSplitterWidth = ses.splitters.reduce((acc, e) => acc + e.width(), 0)
+
+    return ses
+  }
+
+  const fixupUrlAndMainPanelSectionsLayout = () => {
+    sectionElements = createSectionElementsCache();
+
+    const availableWidth = sectionElements.container.width()
+    sectionElements.sections.forEach(x => x.width((availableWidth - sectionElements.totalSplitterWidth) / sectionElements.sections.length));
+
+    const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x);
     const locMutator = loc => {
       const [first, ..._] = loc.split('|');
       return `${[first, ...uris].join('|')}`;
@@ -308,6 +327,19 @@ var DPR_Chrome = (function () {
     } else {
       console.log('URLs are same. Not updating!');
     }
+  }
+
+  const splitterDragHandler = sPos => (_, element, newWidth, __, ___) => {
+    const delta = newWidth - element.width()
+    const newCurrentSectionWidth = newWidth
+    const newNextSectionWidth = sectionElements.sections[sPos].width() - delta
+
+    if (newCurrentSectionWidth >= 0 && newNextSectionWidth >= 0) {
+      sectionElements.sections[sPos - 1].width(newCurrentSectionWidth)
+      sectionElements.sections[sPos].width(newNextSectionWidth)
+    }
+
+    return false
   }
 
   const addMainPanelSection = (sInfo, fixupUrlAndLayout = true) => {
@@ -334,6 +366,7 @@ var DPR_Chrome = (function () {
     $(`#main-pane-container-section-${sPos - 1}`).resizable({
       handleSelector: `#main-pane-container-splitter-${sPos}`,
       resizeHeight: false,
+      onDrag: splitterDragHandler(sPos),
     });
 
     if (fixupUrlAndLayout) {

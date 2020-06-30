@@ -75,7 +75,7 @@ var DPRXML = {
 
   updateSearchHierarchyAfterSetSearchBookList: async function (depth) {
     await DPRNav.setSearchBookList();
-    await updateSearchHierarchy(depth);
+    await this.updateSearchHierarchy(depth);
   },
 
   updateSearchHierarchy: async function (depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all

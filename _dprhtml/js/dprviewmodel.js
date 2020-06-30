@@ -5,8 +5,17 @@ class DprViewModel {
     this.sidebarVisible = ko.observable(false);
     this.loadingFeatureVisible = ko.observable(true);
     this.landingFeatureVisible = ko.observable(false);
-    this.mainFeaturesVisible = ko.observable(false);
     this.activeTab = ko.observable(navigationFeatureName);
+    this.mainFeaturesVisible = ko.observable(false);
+    this.navigationFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === navigationFeatureName
+    }, this);
+    this.searchFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === searchFeatureName
+    }, this);
+    this.dictionaryFeatureVisible = ko.computed(function() {
+        return this.mainFeaturesVisible() && this.activeTab() === dictionaryFeatureName
+    }, this);
     this.commands = createCommands();
     this.parseURLParameters();
   }

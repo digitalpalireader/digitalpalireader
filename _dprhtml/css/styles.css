@@ -125,12 +125,11 @@ padding:0;
 }
 
 hr {
-margin-top:2px;
-margin-bottom:2px;
-color: #FFF;
-background-color: #FFF;
+  margin-block-start: 0.5em;
+  border-style: inset;
+  border-width: 1px;
+  border-color: lightgrey;
 }
-
 
 input.btn, input.go {
   font: bold 84% 'courier new';
@@ -203,10 +202,10 @@ position:relative;
 }
 
 .hoverShow {
-opacity:0.2
+  opacity: 0.5
 }
 .hoverShow:hover {
-opacity:1.0
+  opacity: 1.0
 }
 
 .thick {
@@ -612,8 +611,14 @@ font-size:14px;
   margin: 0px 0 3px 0;
 }
 
+#bottom {
+  position: relative;
+}
+
 #difhist {
-  display:none;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
 .butc {
@@ -795,7 +800,7 @@ font-family: 'courier new';
 /* paragraph types */
 
 .paratype03, .paratype01{
-  margin: 2%;
+  margin: 1.4rem;
 }
 
 .paratype06 {

@@ -42,15 +42,15 @@ function DPR_PAL_Search_ShowCancelButton() {
     <i class="fa fa-stop-circle-o"></i>
   </button>`;
 
-  $('#main-content-header-context-commands').html(html);
+  $('#search-header-context-commands').html(html);
 }
 
 function DPR_PAL_Search_HideCancelButton() {
-  $('#main-content-header-context-commands').empty();
+  $('#search-header-context-commands').empty();
 }
 
 function DPR_PAL_Search_InitializeSectionLinks() {
-  $("#main-content-header-title").text("Results for:");
+  $("#search-header-title").text("Results for:");
 
   const html = `
   <div id="search-header-items">
@@ -59,7 +59,7 @@ function DPR_PAL_Search_InitializeSectionLinks() {
   <span id="search-link"></span>
   </div>
   `;
-  $("#main-content-header-contents").html(html);
+  $("#search-header-contents").html(html);
 }
 
 function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {

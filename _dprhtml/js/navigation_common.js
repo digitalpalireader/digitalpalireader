@@ -821,8 +821,9 @@ function vssCalc(a1,a2) { // calculate a three dimensional hierarchy
 
 function convertShortLink(place) {
 
+  const parseError = 'Invalid quick link format. Refer quick link info icon on navigation tab.'
   place = place.toLowerCase().replace(/([a-z])\./g,"$1");
-  if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,'Syntax Error','yellow'];  // loose syntax
+  if(!/^[A-Za-z]{1,4}-{0,1}[atAT]{0,1} {0,1}[\d]{1,}\.{0,1}[\d]*$/.test(place)) return [false,parseError,'yellow'];  // loose syntax
 
   if(/^dhpv[ .]*[0-9]+$/.test(place)) { // dhp verses
 
@@ -871,12 +872,12 @@ function convertShortLink(place) {
     }
   }
   if(!/^[DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1} {0,1}[0-9]+\.{0,1}[0-9]*$/.test(place))
-    return [false,'Syntax Error','yellow'];
+    return [false,parseError,'yellow'];
 
   place = place.replace(/^([DMASKdmask][Nn]{0,1}-{0,1}[atAT]{0,1})([0-9])/,"$1,$2").replace(/[ .]/g,',');
 
   var outplace = getSuttaFromNumber(place.split(','));
-  if(!outplace) return [false,'Link not found','yellow'];
+  if(!outplace) return [false,'Quick link does not resolve to any sutta.','yellow'];
   return outplace;
 }
 
