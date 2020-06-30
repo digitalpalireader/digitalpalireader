@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_io_mod = ( function () {
+
 function setI () {
   i = 1
 }
@@ -407,3 +409,14 @@ function changeName (name, nam) {
   if (cFile.exists()) cFile.moveTo(null, 'DPD' + nam)
   return false
 }
+
+return {
+eraseFile : eraseFile,
+fileSaveDialog : fileSaveDialog,
+readDir : readDir,
+readExtFile : readExtFile,
+readFile : readFile,
+writeExtFile : writeExtFile,
+writeFile : writeFile
+}
+})()

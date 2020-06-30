@@ -227,14 +227,14 @@ function savePad() {
   appInsights.trackEvent({ name: 'savePad',  properties: { }});
 
   var data = document.getElementById('pad').value;
-  file = fileSaveDialog('Choose a location to export the text');
+  file = DPR_io_mod.fileSaveDialog('Choose a location to export the text');
 //  file = file.replace(/\\/g,'/');
   if(file == '') {
     sendAlertFlash('You must enter a file name', 'red');
     return;
   }
 
-  if(writeExtFile(file, data))
+  if(DPR_io_mod.writeExtFile(file, data))
     sendAlertFlash('Data saved to '+file, 'green');
   else {
     sendAlertFlash('Error saving file', 'red');

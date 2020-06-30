@@ -1,3 +1,5 @@
+var DPR_bookmarks_mod = ( function () {
+
 async function eraseBookmark(i) {
   if (__navigationTabViewModel.isStorageSupportedByBrowser) {
     let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
@@ -74,11 +76,11 @@ async function bookmarkframe(refresh) {
 
       var ttbm1 = tbookm[1].length-1;
       tbookm[1] = "'"+tbookm[1].charAt(0)+"'"+tbookm[1].substring(1,ttbm1) + "'" + tbookm[1].charAt(ttbm1) + "'";
-      bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+tbookm[1]+'],null,null,eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_bookmarks_mod.eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+tbookm[1]+'],null,null,eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!bookmOut) { bookmOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;bookmarks</b>'; }
-  else { isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="clearBookmarks()"><b>clear</b></a>'; }
+  else { isClearBm = '&nbsp;<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" title="Clear Bookmarks" onclick="DPR_bookmarks_mod.clearBookmarks()"><b>clear</b></a>'; }
 
   for (var i in histList) {
     if (histList[i].indexOf('@') > -1) {
@@ -112,7 +114,7 @@ async function bookmarkxd(desc,idx) {
 
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
-  writeFile('DPR_Bookmarks', outfile);
+  DPR_io_mod.writeFile('DPR_Bookmarks', outfile);
   await bookmarkframe();
 }
 
@@ -123,14 +125,14 @@ async function bookmarkxn(name,idx) {
 
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
-  writeFile('DPR_Bookmarks', outfile);
+  DPR_io_mod.writeFile('DPR_Bookmarks', outfile);
   await bookmarkframe();
 }
 
 
 function convertOldBookmarks() {
 
-    var ca = readDir();
+    var ca = DPR_io_mod.readDir();
     ca = ca.sort();
 
     var ba = [];
@@ -140,18 +142,18 @@ function convertOldBookmarks() {
     if (/^DPB/.exec(ca[i])) {
       var name = DPR_translit_mod.toUni(ca[i].substring(3))
       ba[name] = [];
-      ba[name]['loc'] = readFile(ca[i])[0];
+      ba[name]['loc'] = DPR_io_mod.readFile(ca[i])[0];
       var nik = ba[name]['loc'].match(/^[0-9]+/)[0];
       ba[name]['loc'] = ba[name]['loc'].replace(/^([0-9]+)/,DPR_G.G_numberToNik[nik]);
 
     }
     else if (/^DPD/.exec(ca[i])) {
       if(!ba[DPR_translit_mod.toUni(ca[i].substring(3))]) continue;
-      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['desc'] = readFile(ca[i])[0];
+      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['desc'] = DPR_io_mod.readFile(ca[i])[0];
     }
     else if (/^DPS/.exec(ca[i])) {
       if(!ba[DPR_translit_mod.toUni(ca[i].substring(3))]) continue;
-      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['scroll'] = readFile(ca[i])[0];
+      ba[DPR_translit_mod.toUni(ca[i].substring(3))]['scroll'] = DPR_io_mod.readFile(ca[i])[0];
     }
   }
 
@@ -192,7 +194,7 @@ function saveBookmark(name,loc,desc,scroll,supress) {
 
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
-  if(writeFile('DPR_Bookmarks', outfile)) {
+  if(DPR_io_mod.writeFile('DPR_Bookmarks', outfile)) {
     if(!supress) alertFlash('Bookmark Saved','green');
   }
   var sidebar = DPRSidebarWindow();
@@ -200,3 +202,12 @@ function saveBookmark(name,loc,desc,scroll,supress) {
     sidebar.DPRNav.bookmarkBox();
   }
 }
+
+return {
+addBookmark : addBookmark,
+bookmarkframe : bookmarkframe,
+clearBookmarks : clearBookmarks,
+eraseBookmark : eraseBookmark,
+getBookmarks : getBookmarks
+}
+})()

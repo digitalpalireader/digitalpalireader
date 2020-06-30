@@ -121,7 +121,7 @@ class NavigationTabViewModel {
 
   computeHistoryInfo() {
     return { text: '\u21D2', title: 'Open bookmarks and history window',
-      onmouseup: 'bookmarkframe(1)'}
+      onmouseup: 'DPR_bookmarks_mod.bookmarkframe(1)'}
   }
 
   updateHistory() {
@@ -143,7 +143,7 @@ class NavigationTabViewModel {
 
   computeBookmarksInfo() {
     return { text: '\u21D2', title: 'Open bookmarks and history window',
-      onmouseup: 'bookmarkframe(1)'}
+      onmouseup: 'DPR_bookmarks_mod.bookmarkframe(1)'}
   }
 
   updateBookmarks() {

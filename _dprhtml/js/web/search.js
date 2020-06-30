@@ -1,5 +1,7 @@
 //'use strict';
 
+var DPR_search_mod = ( function () {
+
 if (DPR_PAL.isWeb) {
   console.log('Loading DPR_PAL_Search...');
 } else {
@@ -134,3 +136,24 @@ function DPR_PAL_Search_CreateSectionHeader(newnikaya) {
   headingNode.innerHTML = html;
   return headingNode.children[0];
 }
+
+return {
+DPR_PAL_SearchAddSearchTermSectionLink : DPR_PAL_SearchAddSearchTermSectionLink,
+DPR_PAL_Search_AddCopyPermaLinkElement : DPR_PAL_Search_AddCopyPermaLinkElement,
+DPR_PAL_Search_AddSearchTermSectionInfo : DPR_PAL_Search_AddSearchTermSectionInfo,
+DPR_PAL_Search_AddSectikwonLink : DPR_PAL_Search_AddSectionLink,
+DPR_PAL_Search_CreateSectionHeader : DPR_PAL_Search_CreateSectionHeader,
+DPR_PAL_Search_FixPluralInSearchTermSectionInfo : DPR_PAL_Search_FixPluralInSearchTermSectionInfo,
+DPR_PAL_Search_HideCancelButton : DPR_PAL_Search_HideCancelButton,
+DPR_PAL_Search_HideProgressBar : DPR_PAL_Search_HideProgressBar,
+DPR_PAL_Search_InitializeSectionLinks : DPR_PAL_Search_InitializeSectionLinks,
+DPR_PAL_Search_MakeProgressTable : DPR_PAL_Search_MakeProgressTable,
+DPR_PAL_Search_RemoveCopyPermaLinkElement : DPR_PAL_Search_RemoveCopyPermaLinkElement,
+DPR_PAL_Search_SetTitle : DPR_PAL_Search_SetTitle,
+DPR_PAL_Search_ShowCancelButton : DPR_PAL_Search_ShowCancelButton,
+DPR_PAL_Search_ShowProgressBar : DPR_PAL_Search_ShowProgressBar,
+DPR_PAL_Search_UpdateProgressBar : DPR_PAL_Search_UpdateProgressBar,
+DPR_PAL_Search_UpdateSearchTermSectionInfo : DPR_PAL_Search_UpdateSearchTermSectionInfo,
+DPR_PAL_Search_UpdateSectionLink : DPR_PAL_Search_UpdateSectionLink
+}
+})()

@@ -497,7 +497,7 @@ var DPRSend = {
         else {
           DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
           var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-          await oldTabBrowser.contentWindow.startDictLookup(which, getstring, opts);
+          await oldTabBrowser.contentWindow.DPR_dict_mod.startDictLookup(which, getstring, opts);
         }
       }
       else if (hard) {

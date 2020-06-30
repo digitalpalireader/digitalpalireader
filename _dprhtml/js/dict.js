@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_dict_mod = ( function () {
+
 DPR_G.G_dictType = '';
 DPR_G.G_dictQuery = '';
 DPR_G.G_dictOpts = []; //
@@ -202,7 +204,7 @@ async function pedsearchstart(hard)
 
 
     if(/hd/.exec(DPR_G.G_dictOpts) || hard) { // find similar words if hard search
-      var simlist = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.P,DPR_G.G_similar_min,1);
+      var simlist = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.P,DPR_G.G_similar_min,1);
       if(simlist) {
         outDiv.innerHTML += '<p>Did you mean:</p>';
         for (var i in simlist) {
@@ -224,7 +226,7 @@ async function pedsearchstart(hard)
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(1)">Show Suggestions</a><br>');
 
     }
   }
@@ -409,7 +411,7 @@ async function dppnsearchstart(hard)
 
 
     if(/hd/.exec(DPR_G.G_dictOpts) || hard) { // find similar words if hard search
-      var simlist = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.D,DPR_G.G_similar_min,1);
+      var simlist = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.D,DPR_G.G_similar_min,1);
       if(simlist) {
         listoutf += '<p>Did you mean:</p>';
         for (var i in simlist) {
@@ -430,7 +432,7 @@ async function dppnsearchstart(hard)
       else listoutf += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="dppnsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.dppnsearchstart(1)">Show Suggestions</a><br>');
 
     }
   }
@@ -509,7 +511,7 @@ async function dppnFullTextSearch(getstring) {
 
   // word list
 
-  listouta = sortaz(listouta);
+  listouta = DPR_sortaz_mod.sortaz(listouta);
 
   var y = listouta.length;
 
@@ -532,7 +534,7 @@ async function dppnFullTextSearch(getstring) {
 
   $('#dicthead').append('<div><a name="diftop"><br />DPPN full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
 
-  var finout = sortaz(finalouta).join('\n');
+  var finout = DPR_sortaz_mod.sortaz(finalouta).join('\n');
 
 
   var outDiv = document.createElement('div');
@@ -610,7 +612,7 @@ function mlsearchstart(hard)
 
 
     if(/hd/.exec(DPR_G.G_dictOpts) || hard) { // find similar words if hard search
-      var simlist = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.yt,DPR_G.G_similar_min,1);
+      var simlist = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.yt,DPR_G.G_similar_min,1);
       if(simlist) {
         finout += '<p>Did you mean:</p>';
         for (var i in simlist) {
@@ -628,7 +630,7 @@ function mlsearchstart(hard)
       else finout += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="mlsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="DPR_dict_mod.mlsearchstart(1)">Show Suggestions</a><br>');
 
     }
   }
@@ -777,9 +779,9 @@ function multisearchstart(hard)
 
 
     if(/hd/.exec(DPR_G.G_dictOpts) || hard) { // find similar words if hard search
-      var simlistp = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.P,DPR_G.G_similar_min,1);
-      var simlistd = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.D,DPR_G.G_similar_min,1);
-      var simlistc = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.yt,DPR_G.G_similar_min,1);
+      var simlistp = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.P,DPR_G.G_similar_min,1);
+      var simlistd = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.D,DPR_G.G_similar_min,1);
+      var simlistc = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.yt,DPR_G.G_similar_min,1);
 
       if(simlistp || simlistd || simlistc) {
         outDiv.innerHTML += '<p>Did you mean:</p>';
@@ -828,11 +830,11 @@ function multisearchstart(hard)
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(1)">Show Suggestions</a><br>');
 
     }
   }
-  else finouta = sortaz(finouta);
+  else finouta = DPR_sortaz_mod.sortaz(finouta);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1397,7 +1399,7 @@ async function sktsearchstart()
 
     if(/hd/.exec(DPR_G.G_dictOpts) || hard) { // find similar words if hard search
 
-      var simlist = findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.G_sktR[char],DPR_G.G_similar_min,1);
+      var simlist = DPR_sortaz_mod.findSimilarWords(DPR_translit_mod.toFuzzy(getstring),DPR_G.G_sktR[char],DPR_G.G_similar_min,1);
       if(simlist) {
         outDiv.innerHTML += '<p>Did you mean:</p>';
         for (var x = 0; x < simlist.length; x++) {
@@ -1411,7 +1413,7 @@ async function sktsearchstart()
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="pedsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(1)">Show Suggestions</a><br>');
 
     }
   }
@@ -1512,3 +1514,12 @@ async function sktRootsearchstart(hard)
 
   var yut = 0;
 }
+
+return {
+dppnsearchstart : dppnsearchstart,
+mlsearchstart : mlsearchstart,
+parseDictURLParameters : parseDictURLParameters,
+pedsearchstart : pedsearchstart,
+startDictLookup : startDictLookup,
+}
+})()

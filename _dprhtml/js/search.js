@@ -17,12 +17,12 @@ DPR_G.G_searchRX;
 DPR_G.G_searchLink;
 
 async function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
-  DPR_PAL_Search_ShowCancelButton();
-  DPR_PAL_Search_ShowProgressBar();
+  DPR_search_mod.DPR_PAL_Search_ShowCancelButton();
+  DPR_search_mod.DPR_PAL_Search_ShowProgressBar();
 
-  DPR_PAL_Search_InitializeSectionLinks();
+  DPR_search_mod.DPR_PAL_Search_InitializeSectionLinks();
 
-  DPR_PAL_Search_RemoveCopyPermaLinkElement();
+  DPR_search_mod.DPR_PAL_Search_RemoveCopyPermaLinkElement();
 
   var element = DPR_G.MD.getElementById("finished");
   while(element.hasChildNodes()){
@@ -112,7 +112,7 @@ async function searchTipitaka(searchType,searchString,searchMAT,searchSet,search
 
   var tabT = 'Search: \'' + (DPR_G.G_searchRX?DPR_translit_mod.toUniRegEx(DPR_G.G_searchString):DPR_translit_mod.toUni(DPR_G.G_searchString)) + '\' in ' + st[DPR_G.G_searchType];
 
-  DPR_PAL_Search_SetTitle(tabT);
+  DPR_search_mod.DPR_PAL_Search_SetTitle(tabT);
 
   if (/^[TPVMtpvm][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(DPR_G.G_searchString)) {  // page search
     DPR_G.G_searchString = DPR_G.G_searchString.toUpperCase();
@@ -177,18 +177,18 @@ function resetvalues() {
 function finishSearch() {
   document.getElementById('sbfbc').scrollTop = 0;
 
-  DPR_PAL_Search_HideProgressBar();
-  DPR_PAL_Search_HideCancelButton();
+  DPR_search_mod.DPR_PAL_Search_HideProgressBar();
+  DPR_search_mod.DPR_PAL_Search_HideCancelButton();
 
   const searchLink = 'dpr:search?type='+DPR_G.G_searchType+'&query=' + DPR_translit_mod.toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
   DPR_G.G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
 
-  DPR_PAL_Search_AddCopyPermaLinkElement();
+  DPR_search_mod.DPR_PAL_Search_AddCopyPermaLinkElement();
 
   // fix plural
 
   if(DPR_G.MD.getElementById('inter')) {
-    DPR_PAL_Search_FixPluralInSearchTermSectionInfo()
+    DPR_search_mod.DPR_PAL_Search_FixPluralInSearchTermSectionInfo()
   }
 
 }
@@ -263,14 +263,14 @@ async function pausesall()
 
   DPR_PAL_Search_ClearSearchResults();
 
-  DPR_PAL_SearchAddSearchTermSectionLink(DPR_G.G_searchRX ? DPR_G.G_searchString : DPR_translit_mod.toUni(DPR_G.G_searchString));
+  DPR_search_mod.DPR_PAL_SearchAddSearchTermSectionLink(DPR_G.G_searchRX ? DPR_G.G_searchString : DPR_translit_mod.toUni(DPR_G.G_searchString));
 
   for (var i = 0; i < DPR_G.G_numberToNik.length; i++) {
     if (DPR_G.G_searchSet.indexOf(DPR_G.G_numberToNik[i]) == -1) continue; // don't add unchecked collections
-    DPR_PAL_Search_AddSectionLink(DPR_G.G_numberToNik[i]);
+    DPR_search_mod.DPR_PAL_Search_AddSectionLink(DPR_G.G_numberToNik[i]);
   }
 
-  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
+  DPR_search_mod.DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
   await importXMLs(1);
 }
@@ -297,13 +297,13 @@ async function pausetwo() { // init function for single collection
     return;
   }
 
-  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
+  DPR_search_mod.DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
   var getstring = DPR_G.G_searchString;
 
   DPR_PAL_Search_ClearSearchResults();
 
-  DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]);
+  DPR_search_mod.DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]);
 
   await importXMLs(2);
 }
@@ -332,16 +332,16 @@ async function pausethree() {
     return;
   }
 
-  DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
+  DPR_search_mod.DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchFileArray.length - 1);
 
-  DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]+' '+book + (DPR_G.G_searchPart != '1'?' (partial)':''));
+  DPR_search_mod.DPR_PAL_Search_AddSearchTermSectionInfo(DPR_G.G_nikLongName[nikaya]+' '+book + (DPR_G.G_searchPart != '1'?' (partial)':''));
 
   await importXMLs(3);
 }
 
 async function bounce(sct)
 {
-  DPR_PAL_Search_UpdateProgressBar()
+  DPR_search_mod.DPR_PAL_Search_UpdateProgressBar()
   await DPR_PAL.delay(10);
   await importXMLs(sct);
 }
@@ -368,7 +368,7 @@ async function importXMLs(cnt)
     DPR_G.newnikaya = DPR_G.bookfile.charAt(0);
     if (DPR_G.nikayaat != DPR_G.newnikaya)
     {
-      const headingNode = DPR_PAL_Search_CreateSectionHeader(DPR_G.newnikaya);
+      const headingNode = DPR_search_mod.DPR_PAL_Search_CreateSectionHeader(DPR_G.newnikaya);
       document.getElementById('sbfb').appendChild(headingNode);
       DPR_G.thiscount = 0;
       DPR_G.rescount++;
@@ -385,7 +385,7 @@ async function importXMLs(cnt)
 
     createTables(xmlDoc,hiert);
 
-    DPR_PAL_Search_UpdateSectionLink(DPR_G.nikayaat, DPR_G.thiscount);
+    DPR_search_mod.DPR_PAL_Search_UpdateSectionLink(DPR_G.nikayaat, DPR_G.thiscount);
 
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
@@ -414,7 +414,7 @@ async function importXMLs(cnt)
     var xmlDoc = await XML_Load.loadXMLFileAsync(DPR_G.bookfile,0);
     createTables(xmlDoc,hiert);
 
-    DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
+    DPR_search_mod.DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
 
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
@@ -440,7 +440,7 @@ async function importXMLs(cnt)
 
     createTables(xmlDoc,hiert);
 
-    DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
+    DPR_search_mod.DPR_PAL_Search_UpdateSearchTermSectionInfo(DPR_G.thiscount);
 
     if (DPR_G.qz < DPR_G.G_searchFileArray.length-1)
     {
@@ -948,7 +948,7 @@ function createTables(xmlDoc,hiert)
           if (dups[dupsx]) dups[dupsx]++;
           else dups[dupsx] = 1;
         }
-        exnodups[t] = sortaz(exnodups[t]);
+        exnodups[t] = DPR_sortaz_mod.sortaz(exnodups[t]);
         exwordout += '<td valign="top">';
         for (var ex = 0; ex < exnodups[t].length; ex++)
         {
@@ -976,7 +976,7 @@ function createTables(xmlDoc,hiert)
         if (dups[dupsx]) dups[dupsx]++;
         else dups[dupsx] = 1;
       }
-      exnodups = sortaz(exnodups);
+      exnodups = DPR_sortaz_mod.sortaz(exnodups);
 
       findiv = Math.ceil((exnodups.length)/2);
 
@@ -1049,7 +1049,7 @@ function atiSearchStart() {
     addJS(['ati_list']);
 
 //    $('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
-    DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchSet.length);
+    DPR_search_mod.DPR_PAL_Search_MakeProgressTable(DPR_G.G_searchSet.length);
 
     var thisterm = DPR_G.MD.createElement('toolbarbutton');
     thisterm.setAttribute('id','search-term');
@@ -1115,7 +1115,7 @@ function atiSearchStart() {
 
 
 function atiSearchOffline(d, getstring) {
-  DPR_PAL_Search_UpdateProgressBar();
+  DPR_search_mod.DPR_PAL_Search_UpdateProgressBar();
 
   var nikA = ['d','m','s','a','k'];
   while (DPR_G.G_searchSet.indexOf(nikA[d]) == -1) {
@@ -1166,7 +1166,7 @@ function atiSearchOffline(d, getstring) {
     else { // the rest of us
        var atiFile = atiloc + '/html/tipitaka/';
     }
-    var cont = readExtFile(atiFile+anik[c]).join('\n');
+    var cont = DPR_io_mod.readExtFile(atiFile+anik[c]).join('\n');
     var parser=new DOMParser();
     var xmlDoc = parser.parseFromString(cont,'text/xml');
     var title = DPR_translit_mod.toUni(xmlDoc.getElementsByTagName('title')[0].textContent);

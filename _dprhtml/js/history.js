@@ -12,7 +12,7 @@ async function removeHistory(i) {
       data.splice(i, 1);
       localStorage.setItem("navHistoryArray", JSON.stringify(data));
       __navigationTabViewModel.updateHistory();
-      await bookmarkframe(0);
+      await DPR_bookmarks_mod.bookmarkframe(0);
     }
   }
 }
@@ -26,7 +26,7 @@ async function clearHistory(cp) {
     if (navHistoryArrayFromStorage) {
       localStorage.removeItem("navHistoryArray");
       __navigationTabViewModel.updateHistory();
-      await bookmarkframe(0);
+      await DPR_bookmarks_mod.bookmarkframe(0);
     }
   }
 }

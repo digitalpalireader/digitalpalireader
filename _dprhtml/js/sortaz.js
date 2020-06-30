@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_sortaz_mod = ( function () {
+
 DPR_G.reorder = new Array();
 DPR_G.reorder.push('#');
 DPR_G.reorder.push('0');
@@ -292,3 +294,9 @@ function removeDuplicatesFromArray(list){
   }
   return outlist;
 }
+
+return {
+findSimilarWords : findSimilarWords,
+sortaz : sortaz
+}
+})()
