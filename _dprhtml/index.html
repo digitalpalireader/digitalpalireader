@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <title>Digital Pāli Reader</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="/_dprhtml/manifest.webmanifest">
+    <link rel="manifest" href="/manifest.webmanifest">
     <meta name="theme-color" content="#FFFFDD"/>
     <meta name="Description" content="A tool for immersive study of Pāli canon and the language.">
     <link rel="apple-touch-icon" href="/_dprhtml/images/logo192.png">
-    <link rel="icon" href="/_dprhtml/favicon.png" />
+    <link rel="icon" href="/favicon.png" />
     <script type="module">
       import { Workbox, messageSW } from 'https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-window.prod.mjs';
 
@@ -16,7 +16,7 @@
 
       // NOTE: Reference code: https://developers.google.com/web/tools/workbox/guides/advanced-recipes#offer_a_page_reload_for_users
       async function configureNewVersionCheck() {
-        const wb = new Workbox('/_dprhtml/sw.js');
+        const wb = new Workbox('/sw.js');
 
         let registration;
 
@@ -46,7 +46,7 @@
       }
 
       if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => navigator.serviceWorker.register('/_dprhtml/sw.js'));
+        window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
         configureNewVersionCheck();
       }
     </script>
