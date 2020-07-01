@@ -1520,6 +1520,6 @@ dppnsearchstart : dppnsearchstart,
 mlsearchstart : mlsearchstart,
 parseDictURLParameters : parseDictURLParameters,
 pedsearchstart : pedsearchstart,
-startDictLookup : startDictLookup,
+startDictLookup : startDictLookup
 }
 })()

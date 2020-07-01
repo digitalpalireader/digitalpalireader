@@ -1,3 +1,5 @@
+'use strict';
+
 var DPR_bookmarks_mod = ( function () {
 
 async function eraseBookmark(i) {

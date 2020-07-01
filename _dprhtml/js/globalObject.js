@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 const DPR_G = {
   G_xmlDoc : null,

@@ -1010,7 +1010,7 @@ return {
   parsePlace: parsePlace,
   addtrans: addtrans,
   resolveUri: resolveUri,
-  makeUri: makeUri,
+  makeUri: makeUri
 };
 
 })();

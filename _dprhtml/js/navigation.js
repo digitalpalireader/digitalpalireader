@@ -40,6 +40,6 @@ function getDppnEntry(term) {
 
 return {
 getBookName : getBookName,
-getDppnEntry : getDppnEntry,
+getDppnEntry : getDppnEntry
 }
 })()

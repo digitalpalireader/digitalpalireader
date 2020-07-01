@@ -300,6 +300,6 @@ async function reanalyze(word,cancel) {
 return {
 outputDef : outputDef,
 reanalyze : reanalyze,
-reanalyzeOnEnterKey : reanalyzeOnEnterKey,
+reanalyzeOnEnterKey : reanalyzeOnEnterKey
 }
 })()

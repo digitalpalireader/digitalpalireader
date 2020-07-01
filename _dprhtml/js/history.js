@@ -64,10 +64,9 @@ function addHistory(value) {
 }
 
 return {
-
 addHistory : addHistory,
 clearHistory : clearHistory,
 getHistory : getHistory,
-removeHistory : removeHistory,
+removeHistory : removeHistory
 }
 })()
