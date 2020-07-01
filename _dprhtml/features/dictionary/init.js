@@ -40,7 +40,7 @@ const __dictionaryTabViewModel = new DictionaryTabViewModel();
 const initializeDictionarySidebarTab = () => {
   const sidebarTab = $(`#${dictionaryFeatureName}TabContent`)[0];
   ko.applyBindings(__dictionaryTabViewModel, sidebarTab);
-  parseDictURLParameters();
+  DPR_dict_mod.parseDictURLParameters();
   DPROpts.dictOptions();
   DPR_PAL.enablePopover('#dictinInfo', 'click', 'bottom');
 }
@@ -48,7 +48,7 @@ const initializeDictionarySidebarTab = () => {
 const initializeDictionaryFeature = async () => {
   getconfig();
   try {
-    await startDictLookup();
+    await DPR_dict_mod.startDictLookup();
   } catch(ex) {
     console.error('Unexpected exception. Is a bug. Find and fix.', ex);
   }

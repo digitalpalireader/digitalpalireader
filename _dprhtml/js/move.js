@@ -116,6 +116,6 @@ function scrollToId(a,b) {
 return {
 getlink : getlink,
 moves : moves,
-scrollToId : scrollToId,
+scrollToId : scrollToId
 }
 })()

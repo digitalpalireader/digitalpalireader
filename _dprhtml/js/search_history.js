@@ -3,7 +3,7 @@
 var DPR_search_history_mod = ( function () {
 
 function searchHistoryXML(){
-  var cont = readFile('DPR_Search_History');
+  var cont = DPR_io_mod.readFile('DPR_Search_History');
   cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
   var parser=new DOMParser();
   var xmlDoc = parser.parseFromString(cont,'text/xml');
@@ -15,7 +15,7 @@ function eraseSearchHistory(gofrom)
   var answer = confirm('Are you sure you want to erase the search history?')
   if(answer)
   {
-        eraseFile('DPR_Search_History');
+        DPR_io_mod.eraseFile('DPR_Search_History');
     DPRNav.searchHistoryBox();
   }
 }
@@ -130,12 +130,12 @@ function saveSearchHistory(query,searchType,rx,sets,MAT,book,part) {
 
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
-  writeFile('DPR_Search_History', outfile);
+  DPR_io_mod.writeFile('DPR_Search_History', outfile);
   DPRNav.searchHistoryBox();
 }
 
 function dictHistoryXML(){
-  var cont = readFile('DPR_Dict_History');
+  var cont = DPR_io_mod.readFile('DPR_Dict_History');
   cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
   var parser=new DOMParser();
   var xmlDoc = parser.parseFromString(cont,'text/xml');
@@ -147,7 +147,7 @@ function eraseDictHistory(gofrom)
   var answer = confirm('Are you sure you want to erase the lookup history?')
   if(answer)
   {
-        eraseFile('DPR_Dict_History');
+        DPR_io_mod.eraseFile('DPR_Dict_History');
     DPRNav.dictHistoryBox();
   }
 }
@@ -180,7 +180,7 @@ function saveDictHistory(query,type,opts) {
 
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
-  writeFile('DPR_Dict_History', outfile);
+  DPR_io_mod.writeFile('DPR_Dict_History', outfile);
   DPRNav.dictHistoryBox();
 }
 

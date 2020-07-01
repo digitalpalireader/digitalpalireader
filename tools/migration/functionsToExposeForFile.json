@@ -28,79 +28,6 @@
     ]
   ],
   [
-    "../../_dprhtml/js/navigation_common.js",
-    [
-      {
-        "name": "convertShortLink",
-        "Line": "820",
-        "Called@": {
-          "../../_dprhtml/js/receive.js": [
-            79
-          ],
-          "../../_dprhtml/js/navigation_common.js": [],
-          "../../_dprhtml/js/web/send_sidebar.js": [
-            338
-          ],
-          "../../_dprhtml/features/other-dialogs/init.js": [
-            19
-          ]
-        }
-      },
-      {
-        "name": "getSuttaFromNumber",
-        "Line": "613",
-        "Called@": {
-          "../../_dprhtml/js/navigation_common.js": [
-            876
-          ]
-        }
-      },
-      {
-        "name": "getSuttaNumber",
-        "Line": "493",
-        "Called@": {
-          "../../_dprhtml/js/translations.js": [
-            427,
-            535,
-            953,
-            961
-          ],
-          "../../_dprhtml/js/dict_xml.js": [
-            619
-          ],
-          "../../_dprhtml/js/xml.js": [
-            71,
-            849,
-            906,
-            963
-          ],
-          "../../_dprhtml/js/navigation_common.js": [],
-          "../../_dprhtml/js/search.js": [
-            896
-          ]
-        }
-      },
-      {
-        "name": "makekVaggas",
-        "Line": "308",
-        "Called@": {
-          "../../_dprhtml/js/navigation_common.js": [
-            333
-          ]
-        }
-      },
-      {
-        "name": "vssCalc",
-        "Line": "767",
-        "Called@": {
-          "../../_dprhtml/js/navigation_common.js": [
-            751
-          ]
-        }
-      }
-    ]
-  ],
-  [
     "../../_dprhtml/js/bookmarks.js",
     [
       {
@@ -595,7 +522,7 @@
         "Line": "125",
         "Called@": {
           "../../_dprhtml/index.html": [
-            493
+            494
           ],
           "../../_dprhtml/sw.js": [
             45
@@ -839,7 +766,7 @@
         "Line": "19",
         "Called@": {
           "../../_dprhtml/index.html": [
-            500
+            501
           ],
           "../../_dprhtml/sw.js": [
             45
@@ -919,7 +846,7 @@
         "Line": "5",
         "Called@": {
           "../../_dprhtml/index.html": [
-            521
+            522
           ],
           "../../_dprhtml/sw.js": [
             45
@@ -2468,7 +2395,7 @@
         "Line": "25",
         "Called@": {
           "../../_dprhtml/index.html": [
-            537
+            538
           ],
           "../../_dprhtml/js/index.js": []
         }
@@ -2814,8 +2741,8 @@
         "Line": "215",
         "Called@": {
           "../../_dprhtml/index.html": [
-            207,
-            338
+            208,
+            339
           ],
           "../../_dprhtml/js/dprviewmodel.js": [
             89,

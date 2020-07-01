@@ -1134,14 +1134,14 @@ function saveCompilation() {
   var data = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">\n<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">\n<head>\n\t<title>'+title+'</title>\n\t<meta http-equiv="content-type" content="text/html;charset=utf-8" />\n<style>.varc{font-size:60%; color:'+DPR_G.DPR_prefs['grey']+'} .var{display:none; font-size: 100%; color:black; background-color:silver;} .pageno {font-size:60%; color:blue} .paratype06 {font-style:italic;  color:#999999;} p[class*="paratype2"]{ margin: 0 0 0 24px;} c1,c2,c3,c4,c5 { display:block; font-weight:bold; padding:10px 0 0;} c2 { margin-left:10px; font-size:90% } c3 { margin-left:20px; font-size:80% } c4 { margin-left:30px; font-size:70% } c5 { margin-left:40px; font-size:60% }  </style></head>\n<body>';
   data += $('#savei').html().replace(/ *<([hp])/g,"\n\t<$1");
   data += '\n</body>\n</html>';
-  var file = fileSaveDialog('Choose a location to export the HTML file');
+  var file = DPR_io_mod.fileSaveDialog('Choose a location to export the HTML file');
 //  file = file.replace(/\\/g,'/');
 
   if(file == '') {
     alertFlash('You must enter a file name', 'red');
     return;
   }
-  if(writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
+  if(DPR_io_mod.writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
   else {
     alertFlash('Error saving file', 'red');
   }
@@ -1191,7 +1191,7 @@ async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier
   for(var i in myan) {
     var oldpercent = [0,''];
     for (var j in thai) {
-      var percent = findSimilarWords(myan[i],[thai[j]]);
+      var percent = DPR_sortaz_mod.findSimilarWords(myan[i],[thai[j]]);
       if(percent == 100) break;
       if(percent[0] > oldpercent[0])
         oldpercent = percent;
@@ -1208,7 +1208,7 @@ function iterCompare(p1,p2,iter, one, two) {
   var oldv = 0, outa = [];
   var thisi,ina, newv;
   while(p1 < one.length) {
-    thisi = findSimilarWords(one[p1++],[two[p2++]]);
+    thisi = DPR_sortaz_mod.findSimilarWords(one[p1++],[two[p2++]]);
     if(p2 < two.length) {
       ina = iterCompare(p1,p2,(parseInt(iter)+1),one,two);
       alert('in '+ina);

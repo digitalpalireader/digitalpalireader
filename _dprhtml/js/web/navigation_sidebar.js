@@ -177,7 +177,7 @@ var DPRNav = {
   },
 
   readXML: function (file) {
-    var cont = readFile(file);
+    var cont = DPR_io_mod.readFile(file);
     cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
     var parser = new DOMParser();
     var xmlDoc = parser.parseFromString(cont, 'text/xml');

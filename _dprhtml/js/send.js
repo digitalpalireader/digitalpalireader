@@ -289,7 +289,7 @@ async function sendUpdateBookmarks() {
   var oldTabs = findDPRTabs('DPR-bm');
   for (var i = 0; i < oldTabs.length; i++) {
     var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTabs[i]);
-    await oldTabBrowser.contentWindow.bookmarkframe();
+    await oldTabBrowser.contentWindow.DPR_bookmarks_mod.bookmarkframe();
   }
 
   var sidebar = DPRSidebarWindow();

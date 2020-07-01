@@ -35,7 +35,7 @@ var DPR_BottomPane = (function () {
 
   return {
     cvConvert: wrapWithTelemetry(convert),
-    cvSortaz: wrapWithTelemetry(sortaz),
+    cvSortaz: wrapWithTelemetry(DPR_sortaz_mod.sortaz),
 
     tpToVel: wrapWithTelemetry(DPR_translit_mod.toVel),
     tpToUni: wrapWithTelemetry(DPR_translit_mod.toUni),
