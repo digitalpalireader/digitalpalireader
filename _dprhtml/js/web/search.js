@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 var DPR_search_mod = ( function () {
 
@@ -141,7 +141,7 @@ return {
 DPR_PAL_SearchAddSearchTermSectionLink : DPR_PAL_SearchAddSearchTermSectionLink,
 DPR_PAL_Search_AddCopyPermaLinkElement : DPR_PAL_Search_AddCopyPermaLinkElement,
 DPR_PAL_Search_AddSearchTermSectionInfo : DPR_PAL_Search_AddSearchTermSectionInfo,
-DPR_PAL_Search_AddSectikwonLink : DPR_PAL_Search_AddSectionLink,
+DPR_PAL_Search_AddSectionLink : DPR_PAL_Search_AddSectionLink,
 DPR_PAL_Search_CreateSectionHeader : DPR_PAL_Search_CreateSectionHeader,
 DPR_PAL_Search_FixPluralInSearchTermSectionInfo : DPR_PAL_Search_FixPluralInSearchTermSectionInfo,
 DPR_PAL_Search_HideCancelButton : DPR_PAL_Search_HideCancelButton,
