@@ -288,30 +288,40 @@ const closeBottomFrame = () => {
 var DPR_Chrome = (function () {
   let sectionElements = {}
   function createSectionElementsCache() {
-    const ses = {}
+    sectionElements = {}
 
-    ses.container = $('#main-pane-container')
-
-    ses.splitters = []
+    sectionElements.splitters = []
     $('.main-pane-container-splitter').each(function () {
-      ses.splitters.push($(this))
+      sectionElements.splitters.push($(this))
     })
 
-    ses.sections = []
+    sectionElements.sections = []
     $('.main-pane-container-section').each(function () {
-      ses.sections.push($(this))
+      sectionElements.sections.push($(this))
     })
 
-    ses.totalSplitterWidth = ses.splitters.reduce((acc, e) => acc + e.width(), 0)
+    return sectionElements
+  }
 
-    return ses
+  const reattachSplitters = () => {
+    for (let i = 0; i < sectionElements.sections.length - 1; i++) {
+      sectionElements.sections[i].resizable('destroy')
+      sectionElements.sections[i].resizable({
+        handleSelector: `#${sectionElements.splitters[i].attr('id')}`,
+        resizeHeight: false,
+        onDrag: splitterDragHandler(i),
+      });
+    }
   }
 
   const fixupUrlAndMainPanelSectionsLayout = () => {
-    sectionElements = createSectionElementsCache();
+    createSectionElementsCache()
 
-    const availableWidth = sectionElements.container.width()
-    sectionElements.sections.forEach(x => x.width((availableWidth - sectionElements.totalSplitterWidth) / sectionElements.sections.length));
+    reattachSplitters()
+
+    const availableWidth = $('#main-pane-container').width()
+    const totalSplitterWidth = sectionElements.splitters.reduce((acc, e) => acc + e.width(), 0)
+    sectionElements.sections.forEach(x => x.width((availableWidth - totalSplitterWidth) / sectionElements.sections.length));
 
     const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x);
     const locMutator = loc => {
@@ -322,21 +332,20 @@ var DPR_Chrome = (function () {
     const oldUrl = DPR_PAL.contentDocument.location.href;
     const newUrl = DPR_PAL.modifyUrlPart(oldUrl, 'loc', locMutator);
     if (oldUrl !== newUrl) {
-      console.log('URLs are not same. Updating...');
       DPR_PAL.contentWindow.history.pushState({}, 'Title', newUrl);
     } else {
-      console.log('URLs are same. Not updating!');
+      // URLs are same. Not updating!
     }
   }
 
   const splitterDragHandler = sPos => (_, element, newWidth, __, ___) => {
     const delta = newWidth - element.width()
     const newCurrentSectionWidth = newWidth
-    const newNextSectionWidth = sectionElements.sections[sPos].width() - delta
+    const newNextSectionWidth = sectionElements.sections[sPos + 1].width() - delta
 
     if (newCurrentSectionWidth >= 0 && newNextSectionWidth >= 0) {
-      sectionElements.sections[sPos - 1].width(newCurrentSectionWidth)
-      sectionElements.sections[sPos].width(newNextSectionWidth)
+      sectionElements.sections[sPos].width(newCurrentSectionWidth)
+      sectionElements.sections[sPos + 1].width(newNextSectionWidth)
     }
 
     return false
@@ -363,12 +372,6 @@ var DPR_Chrome = (function () {
     $('#main-pane-container').append(`${html}`);
     $('#main-pane-container').attr('data-nextspos', sPos + 1);
 
-    $(`#main-pane-container-section-${sPos - 1}`).resizable({
-      handleSelector: `#main-pane-container-splitter-${sPos}`,
-      resizeHeight: false,
-      onDrag: splitterDragHandler(sPos),
-    });
-
     if (fixupUrlAndLayout) {
       fixupUrlAndMainPanelSectionsLayout();
     }
@@ -380,9 +383,10 @@ var DPR_Chrome = (function () {
   }
 
   const closeContainerSection = position => {
-    $(`#main-pane-container-splitter-${position}`).remove();
-    $(`#main-pane-container-section-${position}`).remove();
-    fixupUrlAndMainPanelSectionsLayout();
+    $(`#main-pane-container-section-${position}`).resizable('destroy')
+    $(`#main-pane-container-splitter-${position}`).remove()
+    $(`#main-pane-container-section-${position}`).remove()
+    fixupUrlAndMainPanelSectionsLayout()
   }
 
   const ToastTypeError = 'Error';
