@@ -517,10 +517,10 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
   if(opara) {
-    scrollMainPane(document.getElementById('para'+opara).offsetTop - $("#main-content-header").outerHeight());
+    scrollMainPane(document.getElementById('para'+opara).offsetTop);
   }
   else if(scroll) {
-    scrollMainPane(scroll - $("#main-content-header").outerHeight());
+    scrollMainPane(scroll);
   }
 
 // add to history
