@@ -306,11 +306,11 @@ var DPRNav = {
     __navigationTabViewModel.book(__navigationTabViewModel.navBook()[b].value);
     __navigationTabViewModel.MAT(place[place.length-1]);
     if (place.length > 3) {
-      __navigationTabViewModel.meta(place[2].replace('x','0'));
-      __navigationTabViewModel.volume(place[3].replace('x','0'));
-      __navigationTabViewModel.vagga(place[4].replace('x','0'));
-      __navigationTabViewModel.sutta(place[5].replace('x','0'));
-      __navigationTabViewModel.section(place[6].replace('x','0'));
+      __navigationTabViewModel.meta(place[2].toString().replace('x','0'));
+      __navigationTabViewModel.volume(place[3].toString().replace('x','0'));
+      __navigationTabViewModel.vagga(place[4].toString().replace('x','0'));
+      __navigationTabViewModel.sutta(place[5].toString().replace('x','0'));
+      __navigationTabViewModel.section(place[6].toString().replace('x','0'));
     }
   },
 
