@@ -76,6 +76,7 @@ async function bookmarkframe(refresh) {
         tbookm[0] = tbookm[0].replace(/Ṃ/g, 'Ṁ');
       }
 
+      tbookm[1] = tbookm[1].replace(/,$/, '')
       var ttbm1 = tbookm[1].length-1;
       tbookm[1] = "'"+tbookm[1].charAt(0)+"'"+tbookm[1].substring(1,ttbm1) + "'" + tbookm[1].charAt(ttbm1) + "'";
       bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_bookmarks_mod.eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+tbookm[1]+'],null,null,eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
@@ -93,6 +94,7 @@ async function bookmarkframe(refresh) {
         thist[0] = thist[0].replace(/Ṃ/g, 'Ṁ');
       }
 
+      thist[1] = thist[1].replace(/,$/, '')
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
       histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_history_mod.removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
