@@ -24,80 +24,12 @@
     "declLine1": "function DPRSidebarWindow() {"
   },
   {
-    "name": "DPR_PAL_SearchAddSearchTermSectionLink",
-    "declLine1": "function DPR_PAL_SearchAddSearchTermSectionLink(searchTerm) {"
-  },
-  {
-    "name": "DPR_PAL_Search_AddCopyPermaLinkElement",
-    "declLine1": "function DPR_PAL_Search_AddCopyPermaLinkElement() {"
-  },
-  {
-    "name": "DPR_PAL_Search_AddSearchTermSectionInfo",
-    "declLine1": "function DPR_PAL_Search_AddSearchTermSectionInfo(sectionInfo) {"
-  },
-  {
-    "name": "DPR_PAL_Search_AddSectionLink",
-    "declLine1": "function DPR_PAL_Search_AddSectionLink(nik) {"
-  },
-  {
     "name": "DPR_PAL_Search_ClearSearchResults",
     "declLine1": "function DPR_PAL_Search_ClearSearchResults() {"
   },
   {
-    "name": "DPR_PAL_Search_CreateSectionHeader",
-    "declLine1": "function DPR_PAL_Search_CreateSectionHeader(newnikaya) {"
-  },
-  {
-    "name": "DPR_PAL_Search_FixPluralInSearchTermSectionInfo",
-    "declLine1": "function DPR_PAL_Search_FixPluralInSearchTermSectionInfo() {"
-  },
-  {
-    "name": "DPR_PAL_Search_HideCancelButton",
-    "declLine1": "function DPR_PAL_Search_HideCancelButton() {"
-  },
-  {
-    "name": "DPR_PAL_Search_HideProgressBar",
-    "declLine1": "function DPR_PAL_Search_HideProgressBar() {"
-  },
-  {
-    "name": "DPR_PAL_Search_InitializeSectionLinks",
-    "declLine1": "function DPR_PAL_Search_InitializeSectionLinks() {"
-  },
-  {
-    "name": "DPR_PAL_Search_MakeProgressTable",
-    "declLine1": "function DPR_PAL_Search_MakeProgressTable(maxVal) {"
-  },
-  {
-    "name": "DPR_PAL_Search_RemoveCopyPermaLinkElement",
-    "declLine1": "function DPR_PAL_Search_RemoveCopyPermaLinkElement() {"
-  },
-  {
     "name": "DPR_PAL_Search_ScrollSearch",
     "declLine1": "function DPR_PAL_Search_ScrollSearch(what) {"
-  },
-  {
-    "name": "DPR_PAL_Search_SetTitle",
-    "declLine1": "function DPR_PAL_Search_SetTitle(title) {"
-  },
-  {
-    "name": "DPR_PAL_Search_ShowCancelButton",
-    "declLine1": "function DPR_PAL_Search_ShowCancelButton() {"
-  },
-  {
-    "name": "DPR_PAL_Search_ShowProgressBar",
-    "declLine1": "function DPR_PAL_Search_ShowProgressBar() {"
-  },
-  {
-    "name": "DPR_PAL_Search_UpdateProgressBar",
-    "declLine1": "function DPR_PAL_Search_UpdateProgressBar() {"
-  },
-  {
-    "name": "DPR_PAL_Search_UpdateSearchTermSectionInfo",
-    "declLine1": "function DPR_PAL_Search_UpdateSearchTermSectionInfo(count) {"
-  },
-  {
-    "name": "DPR_PAL_Search_UpdateSectionLink",
-    "declLine1": "function DPR_PAL_Search_UpdateSectionLink(nikayaat, thiscount) {"
   },
   {
     "name": "DPR_keypress",
@@ -114,10 +46,6 @@
   {
     "name": "addATIJS",
     "declLine1": "function addATIJS() {"
-  },
-  {
-    "name": "addBookmark",
-    "declLine1": "async function addBookmark() {"
   },
   {
     "name": "addJS",
@@ -160,22 +88,6 @@
     "declLine1": "function atiSearchStart() {"
   },
   {
-    "name": "attsearchstart",
-    "declLine1": "function attsearchstart()"
-  },
-  {
-    "name": "bookmarkframe",
-    "declLine1": "async function bookmarkframe(refresh) {"
-  },
-  {
-    "name": "bookmarkxd",
-    "declLine1": "async function bookmarkxd(desc,idx) {"
-  },
-  {
-    "name": "bookmarkxn",
-    "declLine1": "async function bookmarkxn(name,idx) {"
-  },
-  {
     "name": "bounce",
     "declLine1": "async function bounce(sct)"
   },
@@ -186,10 +98,6 @@
   {
     "name": "changeConversion",
     "declLine1": "function changeConversion(inout)"
-  },
-  {
-    "name": "changeName",
-    "declLine1": "function changeName (name, nam) {"
   },
   {
     "name": "changecss",
@@ -210,14 +118,6 @@
   {
     "name": "checkbackground",
     "declLine1": "function checkbackground() {"
-  },
-  {
-    "name": "chromeFileExists",
-    "declLine1": "function chromeFileExists (fileLoc) {"
-  },
-  {
-    "name": "clearBookmarks",
-    "declLine1": "async function clearBookmarks(gofrom) {"
   },
   {
     "name": "clearDivs",
@@ -246,10 +146,6 @@
   {
     "name": "closePanel",
     "declLine1": "function closePanel() {"
-  },
-  {
-    "name": "comparePaliAlphabet",
-    "declLine1": "function comparePaliAlphabet(a,b) {"
   },
   {
     "name": "compareVersions",
@@ -286,10 +182,6 @@
   {
     "name": "convert",
     "declLine1": "function convert(check,lower)"
-  },
-  {
-    "name": "convertOldBookmarks",
-    "declLine1": "function convertOldBookmarks() {"
   },
   {
     "name": "convtitle",
@@ -340,44 +232,12 @@
     "declLine1": "function displayDictData(data) {"
   },
   {
-    "name": "dppnFullTextSearch",
-    "declLine1": "async function dppnFullTextSearch(getstring) {"
-  },
-  {
-    "name": "dppnsearchstart",
-    "declLine1": "async function dppnsearchstart(hard)"
-  },
-  {
     "name": "dump",
     "declLine1": "() => { }"
   },
   {
-    "name": "epdsearchstart",
-    "declLine1": "function epdsearchstart()"
-  },
-  {
-    "name": "eraseAll",
-    "declLine1": "function eraseAll () {"
-  },
-  {
-    "name": "eraseBookmark",
-    "declLine1": "async function eraseBookmark(i) {"
-  },
-  {
-    "name": "eraseFile",
-    "declLine1": "function eraseFile (name) {"
-  },
-  {
-    "name": "eraseItem",
-    "declLine1": "function eraseItem (name) {"
-  },
-  {
     "name": "eventSend",
     "declLine1": "function eventSend(event,internal) {"
-  },
-  {
-    "name": "extFileExists",
-    "declLine1": "function extFileExists (fileLoc) {"
   },
   {
     "name": "fadeIn",
@@ -390,14 +250,6 @@
   {
     "name": "fadeOut",
     "declLine1": "function fadeOut(AID,id,speed) {"
-  },
-  {
-    "name": "fileExists",
-    "declLine1": "function fileExists (aFileKey) {"
-  },
-  {
-    "name": "fileSaveDialog",
-    "declLine1": "function fileSaveDialog (title) {"
   },
   {
     "name": "findDPRTab",
@@ -414,10 +266,6 @@
   {
     "name": "findRegEx",
     "declLine1": "function findRegEx(text,string) {"
-  },
-  {
-    "name": "findSimilarWords",
-    "declLine1": "function findSimilarWords(word,list,min,fuzzy) {"
   },
   {
     "name": "findmatch",
@@ -440,10 +288,6 @@
     "declLine1": "async function getAtthXML(num,type,niklist) { // get atthakatha or tika word"
   },
   {
-    "name": "getBookmarks",
-    "declLine1": "function getBookmarks() {"
-  },
-  {
     "name": "getBrowserCount",
     "declLine1": "function getBrowserCount() {"
   },
@@ -454,10 +298,6 @@
   {
     "name": "getDppnData",
     "declLine1": "async function getDppnData(link){"
-  },
-  {
-    "name": "getHomePath",
-    "declLine1": "function getHomePath () {"
   },
   {
     "name": "getNameHTML",
@@ -482,10 +322,6 @@
   {
     "name": "giveIDtoTabs",
     "declLine1": "function giveIDtoTabs() { // startup function, give ids to"
-  },
-  {
-    "name": "groupBySimilarity",
-    "declLine1": "function groupBySimilarity(list,minsim) {"
   },
   {
     "name": "importXMLindex",
@@ -564,16 +400,8 @@
     "declLine1": "function manualCompound(fullword) {"
   },
   {
-    "name": "mlsearchstart",
-    "declLine1": "function mlsearchstart(hard)"
-  },
-  {
     "name": "moveFrame",
     "declLine1": "function moveFrame() { }"
-  },
-  {
-    "name": "multisearchstart",
-    "declLine1": "function multisearchstart(hard)"
   },
   {
     "name": "normalizeLongSearchResult",
@@ -612,20 +440,12 @@
     "declLine1": "function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame"
   },
   {
-    "name": "paliRootsearchstart",
-    "declLine1": "function paliRootsearchstart(hard)"
-  },
-  {
     "name": "paliXML",
     "declLine1": "async function paliXML(filein,which,add)"
   },
   {
     "name": "paliXMLHistory",
     "declLine1": "async function paliXMLHistory(opts) {"
-  },
-  {
-    "name": "parseDictURLParameters",
-    "declLine1": "function parseDictURLParameters(){"
   },
   {
     "name": "pausesall",
@@ -640,14 +460,6 @@
     "declLine1": "async function pausetwo() { // init function for single collection"
   },
   {
-    "name": "pedFullTextSearch",
-    "declLine1": "async function pedFullTextSearch(getstring) {"
-  },
-  {
-    "name": "pedsearchstart",
-    "declLine1": "async function pedsearchstart(hard)"
-  },
-  {
     "name": "permalinkClick",
     "declLine1": "function permalinkClick(link,url) {"
   },
@@ -656,28 +468,8 @@
     "declLine1": "function preparepali(data,which) { // standard text prep for algorithm"
   },
   {
-    "name": "profFileExists",
-    "declLine1": "function profFileExists (file) {"
-  },
-  {
-    "name": "readDir",
-    "declLine1": "function readDir () {"
-  },
-  {
-    "name": "readExtFile",
-    "declLine1": "function readExtFile (fileLoc) {"
-  },
-  {
-    "name": "readFile",
-    "declLine1": "function readFile (aFileKey) {"
-  },
-  {
     "name": "reindexPanels",
     "declLine1": "function reindexPanels() {"
-  },
-  {
-    "name": "removeDuplicatesFromArray",
-    "declLine1": "function removeDuplicatesFromArray(list){"
   },
   {
     "name": "resetvalues",
@@ -686,10 +478,6 @@
   {
     "name": "resolveCommands",
     "declLine1": "function resolveCommands(shortcutFns) {"
-  },
-  {
-    "name": "saveBookmark",
-    "declLine1": "function saveBookmark(name,loc,desc,scroll,supress) {"
   },
   {
     "name": "saveCompilation",
@@ -752,10 +540,6 @@
     "declLine1": "function setCurrentTitle(title) {"
   },
   {
-    "name": "setI",
-    "declLine1": "function setI () {"
-  },
-  {
     "name": "setupBTForRG",
     "declLine1": "async function setupBTForRG() {"
   },
@@ -780,32 +564,12 @@
     "declLine1": "async function sktRXML(no,add)"
   },
   {
-    "name": "sktRootsearchstart",
-    "declLine1": "async function sktRootsearchstart(hard)"
-  },
-  {
     "name": "sktXML",
     "declLine1": "async function sktXML(entry,idx,which,add)"
   },
   {
-    "name": "sktsearchstart",
-    "declLine1": "async function sktsearchstart()"
-  },
-  {
     "name": "sortLongerDec",
     "declLine1": "function sortLongerDec(a,b) {"
-  },
-  {
-    "name": "sortStrip",
-    "declLine1": "function sortStrip(word) {"
-  },
-  {
-    "name": "sortaz",
-    "declLine1": "function sortaz(mydata){  // sort pali array"
-  },
-  {
-    "name": "startDictLookup",
-    "declLine1": "async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {"
   },
   {
     "name": "stopSearch",
@@ -814,14 +578,6 @@
   {
     "name": "stripEnglish",
     "declLine1": "function stripEnglish(input) {"
-  },
-  {
-    "name": "tiksearchstart",
-    "declLine1": "function tiksearchstart()"
-  },
-  {
-    "name": "titlesearchstart",
-    "declLine1": "function titlesearchstart()"
   },
   {
     "name": "toggleDPRSidebar",
@@ -866,21 +622,5 @@
   {
     "name": "wrapLink",
     "declLine1": "function wrapLink(text,click,url) {"
-  },
-  {
-    "name": "writeExtFile",
-    "declLine1": "function writeExtFile (fileLoc, aContent) {"
-  },
-  {
-    "name": "writeFile",
-    "declLine1": "function writeFile (aFileKey, aContent) {"
-  },
-  {
-    "name": "writeFileToDesk",
-    "declLine1": "function writeFileToDesk (file, data) {"
-  },
-  {
-    "name": "writeToDesktop",
-    "declLine1": "function writeToDesktop (aFileKey, aContent) {"
   }
 ]
