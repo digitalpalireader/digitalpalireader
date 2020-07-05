@@ -429,7 +429,7 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var namea = [una,vna,wna,xna,yna,zna];
   var namen = [null,null,null,null,null,null];
   if (DPR_G.DPR_prefs['showNames']) {
-    addJS(['dppn']);
+    DPR_config_mod.addJS(['dppn']);
     for (var i in namea) {
       var tt = DPR_translit_mod.toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
       if(tt.length < 2) continue;
@@ -602,7 +602,7 @@ function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(save) {
     shortcutFns[DPR_CMD_SAVE_TO_DESKTOP] = {
       canExecuteStr: 'true',
-      executeStr: 'saveCompilation()',
+      executeStr: 'DPR_xml_mod.saveCompilation()',
       titleStr: null,
       visibleStr: 'true',
     };
@@ -624,7 +624,7 @@ function makeTable(text,cls) {
 
 
 function linkToPED(base,word) {
-  addJS(['ped']);
+  DPR_config_mod.addJS(['ped']);
 
   var vbase = DPR_translit_mod.toVel(base);
 

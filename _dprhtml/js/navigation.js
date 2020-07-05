@@ -16,7 +16,7 @@ function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no w
 
 function getDppnEntry(term) {
   if(typeof(DPR_G.D) == 'undefined')
-    addJS(['dppn']);
+    DPR_config_mod.addJS(['dppn']);
   var dppnEntry = [];
   if(DPR_G.D && typeof(DPR_G.D[term]) == 'object') {
     dppnEntry = DPR_G.D[term];

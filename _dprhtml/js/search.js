@@ -1045,8 +1045,8 @@ function atiSearchStart() {
 
   if(DPR_G.DPR_prefs['catioff']) {
     //var newScript = 'file://'+ DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
-    //addJS([newScript]);
-    addJS(['ati_list']);
+    //DPR_config_mod.addJS([newScript]);
+    DPR_config_mod.addJS(['ati_list']);
 
 //    $('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
     DPR_search_mod.makeProgressTable(DPR_G.G_searchSet.length);

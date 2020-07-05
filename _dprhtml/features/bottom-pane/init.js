@@ -34,17 +34,17 @@ var DPR_BottomPane = (function () {
   };
 
   return {
-    cvConvert: wrapWithTelemetry(convert),
+    cvConvert: wrapWithTelemetry(DPR_convert_mod.convert),
     cvSortaz: wrapWithTelemetry(DPR_sortaz_mod.sortaz),
 
     tpToVel: wrapWithTelemetry(DPR_translit_mod.toVel),
     tpToUni: wrapWithTelemetry(DPR_translit_mod.toUni),
     tpSendTextPad: wrapWithTelemetry(DPR_send_bottom_mod.sendTextPad),
-    tpSavePad: wrapWithTelemetry(savePad),
+    tpSavePad: wrapWithTelemetry(DPR_convert_mod.savePad),
 
-    trTranslateText: wrapWithTelemetry(translateText),
-    trTranslateTextFromBottomPane: wrapWithTelemetry(translateTextFromBottomPane),
-    trInsertWordByWord: wrapWithTelemetry(insertWordByWord),
+    trTranslateText: wrapWithTelemetry(DPR_translate_mod.translateText),
+    trTranslateTextFromBottomPane: wrapWithTelemetry(DPR_translate_mod.translateTextFromBottomPane),
+    trInsertWordByWord: wrapWithTelemetry(DPR_translate_mod.insertWordByWord),
 
     cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),
   };

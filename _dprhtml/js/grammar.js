@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_grammar_mod = ( function () {
+
 // uses inflect.js, english.js
 
 function conjugate(word, id, which) {
@@ -532,11 +534,11 @@ async function formatConjugation(word) {
 //[trans,type,deca,word,meta];
 
 async function getConjugation(form,bare) {
-  var word = await translateWord(form,0);
+  var word = await DPR_translate_mod.translateWord(form,0);
   var out = [];
   for(var i = 0; i < word.length; i++) {
     var grammar = makeGrammarTerms(word[i]);
-    var trans = bare?word[i][0]:addPhrasePreps([word[i]]);
+    var trans = bare?word[i][0]:DPR_translate_mod.addPhrasePreps([word[i]]);
     out.push([grammar,word[i][4]['orig'],trans]);
   }
   return out;
@@ -590,3 +592,11 @@ async function conjugateWords(input) {
   }
   return outa;
 }
+
+return {
+conjugate : conjugate,
+conjugateWord : conjugateWord,
+conjugateWords : conjugateWords,
+makeGrammarTerms : makeGrammarTerms
+}
+})()

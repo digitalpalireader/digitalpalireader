@@ -1,5 +1,6 @@
 'use strict';
 
+var DPR_config_mod = ( function () {
 /*
 
 window.onerror = function(message, file, lineNumber) {
@@ -119,3 +120,9 @@ function addATIJS() {
 function addJS(files) {
   DPR_PAL.addJS(files);
 }
+
+return {
+addJS : addJS,
+getconfig : getconfig
+}
+})()

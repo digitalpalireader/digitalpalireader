@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_convert_mod = ( function () {
+
 function getSelected() {
   var txt = '';
   if (window.getSelection) {
@@ -27,7 +29,7 @@ function convert(check,lower)
   var inScript = document.getElementById('cinform').selectedIndex
   var outScript = document.getElementById('coutform').selectedIndex
 
-  appInsights.trackEvent({ name: 'convert',  properties: { inScript, outScript, length: spell && spell.length }});
+  appInsights.trackEvent({ name: 'DPR_convert_mod.convert',  properties: { inScript, outScript, length: spell && spell.length }});
 
   switch(inScript) {
     case 0:
@@ -167,7 +169,7 @@ function clearboth()
 
 function sendtoconvert(data,shift)
 {
-  appInsights.trackEvent({ name: 'sendtoconvert',  properties: { }});
+  appInsights.trackEvent({ name: 'DPR_convert_mod.sendtoconvert',  properties: { }});
 
   data = data.replace(/” ”/g, '”');
   data = data.replace(/’ ’/g, '’');
@@ -192,7 +194,7 @@ function sendtoconvert(data,shift)
 
 function sendtoPad(data,shift)
 {
-  appInsights.trackEvent({ name: 'sendtoPad',  properties: { }});
+  appInsights.trackEvent({ name: 'DPR_convert_mod.sendtoPad',  properties: { }});
 
   moveFrame(3)
 
@@ -224,7 +226,7 @@ function clearPad() {
 }
 
 function savePad() {
-  appInsights.trackEvent({ name: 'savePad',  properties: { }});
+  appInsights.trackEvent({ name: 'DPR_convert_mod.savePad',  properties: { }});
 
   var data = document.getElementById('pad').value;
   file = DPR_io_mod.fileSaveDialog('Choose a location to export the text');
@@ -240,3 +242,14 @@ function savePad() {
     sendAlertFlash('Error saving file', 'red');
   }
 }
+
+return {
+changeConversion : changeConversion,
+clearPad : clearPad,
+clearboth : clearboth,
+convert : convert,
+savePad : savePad,
+sendtoPad : sendtoPad,
+sendtoconvert : sendtoconvert
+}
+})()

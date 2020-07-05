@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_xml_mod = ( function () {
+
 DPR_G.unnamed = '[unnamed]';
 
 DPR_G.matButton = 0; // tells us we've clicked an in-section mat button.
@@ -183,7 +185,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   // relative mat
 
-  addJS(['relmul','relatt','reltik']);
+  DPR_config_mod.addJS(['relmul','relatt','reltik']);
 
   var matButtonCount = 0;
   if (DPR_G.matButton == 1) {  // mat button pushed already, remember the place
@@ -1237,3 +1239,11 @@ function countVals(a) {
   }
   return count;
 }
+
+return {
+
+loadXMLSection : loadXMLSection,
+loadXMLindex : loadXMLindex,
+saveCompilation : saveCompilation
+}
+})()
