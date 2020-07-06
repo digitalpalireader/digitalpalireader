@@ -6,7 +6,7 @@ var DPR_conjugate_mod = (function(){
   var word = $('#word').val();
   var form = $('#form').val();
 
-  appInsights.trackEvent({ name: 'DPR_convert_mod.convert',  properties: { word, form, }});
+  appInsights.trackEvent({ name: 'convert',  properties: { word, form, }});
 
 
   var conjUrl = 'digitalpalireader/content/conjugate.htm'+(word.length?'?word='+DPR_translit_mod.toVel(word):'')+(form.length?(word?'&':'?')+'form='+DPR_translit_mod.toVel(form):'');
@@ -23,7 +23,7 @@ function clearText() {
   $('#form').val('');
 }
 return{
-  insertConj:insertConj,
-  clearText:clearText
+  insertConj : insertConj,
+  clearText : clearText
 }
 }())
