@@ -31,7 +31,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enDppnUrls)));
 
   const enPedUrls =
-    Array.from({ length: 4 }, (_, k)=> k)
+    Array.from({ length: 5 }, (_, k)=> k)
     .map(n => `/en/ped/${n}/ped.xml`);
   event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enPedUrls)));
 
