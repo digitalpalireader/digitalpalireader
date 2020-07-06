@@ -23,6 +23,7 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
+  getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
   initFooter();

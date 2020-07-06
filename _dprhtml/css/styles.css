@@ -553,7 +553,7 @@ z-index:3;
 
 
 #bvb {
-  background: beige;
+  border: 1px solid lightgrey;
   border-radius: 10px;
   padding: 30px;
   overflow: auto;
