@@ -1,3 +1,7 @@
+'use strict';
+
+var DPR_translate_mod = ( function () {
+
 function translateTextx() {
   var a,b,c,d;
   var cc = [],dd = [],ee = [];
@@ -575,7 +579,7 @@ function checkCompatibleVerb(input,chosen,words) {
 }
 
 function makeWord(word,pl,alts) {
-  return '<a class="green underline"'+(alts?' onmouseover="showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+DPR_translit_mod.toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
+  return '<a class="green underline"'+(alts?' onmouseover="DPR_translate_mod.showAltTable('+word[5]+')"':'')+' target="_blank" href='+DPR_PAL.dprHomePage+'?analysis='+DPR_translit_mod.toVel(word[3])+'" title="'+(word[0] == word[3]?'lookup ':'translation of ')+word[3]+'">'+(pl?addPlural(word[0]):word[0])+'</a>';
 }
 
 async function translateWord(word,idx) {
@@ -948,11 +952,11 @@ function showAltTable(idx) {
   var w = DPR_G.G_altChoices[idx][0];
   var out = '<b>'+w[0][3]+'</b> ';
   if(w.length == 1)
-    out += makeGrammarTerms(w[0]);
+    out += DPR_grammar_mod.makeGrammarTerms(w[0]);
   else if(w.length > 1) {
-    out += '<select onclick="changeAlt(this,'+idx+')">';
+    out += '<select onclick="DPR_translate_mod.changeAlt(this,'+idx+')">';
     for(var i in w) {
-      out+='<option>'+makeGrammarTerms(w[i])+'</option>';
+      out+='<option>'+DPR_grammar_mod.makeGrammarTerms(w[i])+'</option>';
     }
     out+='</select>';
   }
@@ -972,7 +976,7 @@ async function changeAlt(e,i) {
 
 async function insertWordByWord() {
   var input = DPR_translit_mod.toUni($('#input').val().toLowerCase()).replace(/(\n|\r)/g, ' ').replace(DPR_G.G_uniRegExpNSG,'');
-  var words = await conjugateWords(input);
+  var words = await DPR_grammar_mod.conjugateWords(input);
   var out = "";
   for(var i = 0; i < words.length; i++) {
     var options = "";
@@ -1025,3 +1029,15 @@ DPR_G.G_subjects = [['He/She/It','They'],['You','You all'],['I','We']];
 
 DPR_G.G_nTx = [/\bm\./,/\bnt\./,/\bf\./]; //rx
 DPR_G.G_vTypes = ['pres','imp','opt','fut','past','caus']; // binary
+
+return {
+addPhrasePreps : addPhrasePreps,
+changeAlt : changeAlt,
+clearText : clearText,
+insertWordByWord : insertWordByWord,
+showAltTable : showAltTable,
+translateText : translateText,
+translateTextFromBottomPane : translateTextFromBottomPane,
+translateWord : translateWord
+}
+})()

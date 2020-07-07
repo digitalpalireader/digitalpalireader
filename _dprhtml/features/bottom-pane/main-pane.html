@@ -55,7 +55,7 @@
         <textarea id="cinput" onkeydown="if(event.keyCode==13) DPR_BottomPane.cvConvert(true); event.keyCode=0;"></textarea>
         <div id="cinform-div">
           <label class="small-bold-font" for="cinform">From</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform" onclick="changeConversion(1)">
+          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform" onclick="DPR_convert_mod.changeConversion(1)">
             <option name="Unicode">Unicode</option>
             <option name="Velthuis" selected>Velthuis</option>
             <option name="Thai">ภาษาไทย</option>
@@ -71,7 +71,7 @@
             title="Convert from one format to another">Convert</button>
           <button class="btn btn-sm btn-light my-1" onclick="document.getElementById('coutput').value=DPR_BottomPane.cvSortaz(document.getElementById('cinput').value.replace(/\n/g,' ').replace(/\r/g,' ').split(' ')).join('\n');"
             data-toggle="tooltip" data-placement="right" title="Sort input by Pāli word order">Sort</button>
-          <button class="btn btn-sm btn-light my-1" onclick="clearboth()" data-toggle="tooltip" data-placement="right"
+          <button class="btn btn-sm btn-light my-1" onclick="DPR_convert_mod.clearboth()" data-toggle="tooltip" data-placement="right"
             title="clear both boxes">Clear</button>
           <div id="cactions-lowercase">
             <input class="btn btn-sm btn-light m-0" type="checkbox" id="lower" name="lower" data-toggle="tooltip" data-placement="right"
@@ -81,7 +81,7 @@
         </div>
         <div id="coutform-div">
           <label class="small-bold-font" for="coutform">To</label>
-          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="coutform" onclick="changeConversion(2)">
+          <select class="custom-select force-show-scrollbar-on-macos" size="8" id="coutform" onclick="DPR_convert_mod.changeConversion(2)">
             <option name="Unicode" selected>Unicode</option>
             <option name="Velthuis">Velthuis</option>
             <option name="Thai">ภาษาไทย</option>
@@ -106,7 +106,7 @@
       <div id="main-bottom-pane-tab-panes-Tp-container" class="d-flex flex-column h-100">
         <textarea class="h-100 m-1" id="pad" spellcheck="false" autocomplete="nope" style="resize: none;"></textarea>
         <div class="d-flex justify-content-center m-1">
-          <button class="btn btn-light mb-0" onclick="clearPad()" title="Erase all text">Clear</button>
+          <button class="btn btn-light mb-0" onclick="DPR_convert_mod.clearPad()" title="Erase all text">Clear</button>
           <span class="mat-button-group-seperator"></span>
           <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToVel(document.getElementById('pad').value)">Velthuis</button>
           <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToUni(document.getElementById('pad').value)">Unicode</button>
@@ -134,7 +134,7 @@
           title="Translate the text">Translate</button>
         <button class="btn btn-light cv-btn-group" onclick="DPR_BottomPane.trInsertWordByWord()"
           data-toggle="tooltip" data-placement="right" title="Translate each word">Word-by-word</button>
-        <button id="clear" class="btn btn-light cv-btn-group" onclick="clearText()" data-toggle="tooltip" data-placement="right"
+        <button id="clear" class="btn btn-light cv-btn-group" onclick="DPR_translate_mod.clearText()" data-toggle="tooltip" data-placement="right"
           title="Clear text">Clear</button>
       </div>
       <div class="bottom-center" style="font-size: small;">
@@ -177,7 +177,7 @@
         <div class="center">
           <button type="button" id="conjugate" class="btn btn-light cv-btn-group" onclick="DPR_BottomPane.cjInsertConj()"
             title="Translate the text">Conjugate</button>
-          <button type="button" id="clear" class="btn btn-light cv-btn-group" onclick="clearText()"
+          <button type="button" id="clear" class="btn btn-light cv-btn-group" onclick="DPR_conjugate_mod.clearText()"
             title="Clear text">Clear</button>
         </div>
       </form>

@@ -6,7 +6,7 @@ DPR_G.moveat = 2;
 
 function moveframex(a,temp) //read, etc
 {
-    if(!temp) getconfig();
+    if(!temp) DPR_config_mod.getconfig();
 
 }
 

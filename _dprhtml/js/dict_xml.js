@@ -50,7 +50,7 @@ async function paliXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'Lookup word',  properties: { filein,which,add, }});
 
-  addJS(['ped']);
+  DPR_config_mod.addJS(['ped']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -233,7 +233,7 @@ async function DPPNXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'DPPNXML',  properties: { filein,which,add, }});
 
-  addJS(['dppn','nameno']);
+  DPR_config_mod.addJS(['dppn','nameno']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -418,7 +418,7 @@ async function sktXML(entry,idx,which,add)
 {
   appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
 
-  addJS(['/sa/dict/index.js']);
+  DPR_config_mod.addJS(['/sa/dict/index.js']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -463,12 +463,12 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
   appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
     if(type == 'a') {
-    addJS(['attlist']);
+    DPR_config_mod.addJS(['attlist']);
     var loca = DPR_G.attlist[num].split('#');
     var word = loca.shift();
   }
   else {
-    addJS(['tiklist']);
+    DPR_config_mod.addJS(['tiklist']);
     var loca = DPR_G.tiklist[num].split('#');
     var word = loca.shift();
   }
@@ -536,7 +536,7 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
   appInsights.trackEvent({ name: 'getTitleXML',  properties: { num,mul,att,tik,niklist, }});
 
-  addJS(['titles']);
+  DPR_config_mod.addJS(['titles']);
 
 
   var loca = DPR_G.titlelist[num].split('#');

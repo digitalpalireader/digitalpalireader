@@ -51,11 +51,11 @@ class OtherDialogsViewModel {
 
   sendToConvert() {
     if (window.getSelection().toString() != '') {
-      window.sendtoconvert(window.getSelection().toString() + '');
+      window.DPR_convert_mod.sendtoconvert(window.getSelection().toString() + '');
       this.showBottomPane(2);
     }
     else if (document.getElementById('convi')) {
-      window.sendtoconvert(document.getElementById('convi').innerHTML);
+      window.DPR_convert_mod.sendtoconvert(document.getElementById('convi').innerHTML);
       this.showBottomPane(2);
     }
     else alertFlash('You must select some text to send to the convertor', 'yellow');
@@ -63,11 +63,11 @@ class OtherDialogsViewModel {
 
   sendToTextpad() {
     if (window.getSelection().toString() != '') {
-      window.sendtoPad(window.getSelection().toString() + '');
+      window.DPR_convert_mod.sendtoPad(window.getSelection().toString() + '');
       this.showBottomPane(3);
     }
     else if (document.getElementById('convi')) {
-      window.sendtoPad(document.getElementById('convi').innerHTML);
+      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML);
       this.showBottomPane(3);
     }
     else alertFlash('You must select some text to send to the textpad', 'yellow');
@@ -75,11 +75,11 @@ class OtherDialogsViewModel {
 
   appendToTextpad() {
     if (window.getSelection().toString() != '') {
-      window.sendtoPad(window.getSelection().toString() + '', true);
+      window.DPR_convert_mod.sendtoPad(window.getSelection().toString() + '', true);
       this.showBottomPane(3);
     }
     else if (document.getElementById('convi')) {
-      window.sendtoPad(document.getElementById('convi').innerHTML, true);
+      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML, true);
       this.showBottomPane(3);
     }
     else alertFlash('You must select some text to send to the textpad', 'yellow');

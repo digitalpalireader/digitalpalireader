@@ -103,14 +103,14 @@ function updatePrefs() {
     return;
   }
 
-  getconfig();
+  DPR_config_mod.getconfig();
   changeSet(1);
   for (var index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length; index++) {
     // Get the next tab
     var currentTab = tabbrowser.tabContainer.childNodes[index];
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
     if (/^DPR/.exec(currentTab.getAttribute('id')) && DPR_PAL.dprUrlMatcher.exec(ctloc)) { // a dpr tab
-      currentTab.linkedBrowser.contentWindow.getconfig();
+      currentTab.linkedBrowser.contentWindow.DPR_config_mod.getconfig();
     }
   }
 }

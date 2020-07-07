@@ -68,7 +68,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
   js['SKT'] = ['/sa/dict/index.js'];
   js['SKR'] = ['/sa/roots/index.js'];
 
-  var error = addJS(js[DPR_G.G_dictType]);
+  var error = DPR_config_mod.addJS(js[DPR_G.G_dictType]);
 
   if(error)
     return alert('error loading resource: '+error[1]+'\n'+error[0]);
@@ -600,7 +600,7 @@ function mlsearchstart(hard)
       us = DPR_translit_mod.toUni(gsplit[0]);
       ud = DPR_translit_mod.toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 
-      finouta.push('<div><b><a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { conjugate(\''+us+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
+      finouta.push('<div><b><a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cped'+cnt+'\').innerHTML == \'\') { DPR_grammar_mod.conjugate(\''+us+'\',\'cped'+cnt+'\')} else { document.getElementById(\'cped'+cnt+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
     }
   }
@@ -623,7 +623,7 @@ function mlsearchstart(hard)
           us = DPR_translit_mod.toUni(pedt);
           ud = DPR_translit_mod.toUni(DPR_G.yt[pedt][2] + ' (' + DPR_G.yt[pedt][1] + ')');
 
-          finouta.push('<div><b><a style="color:'+DPR_G.DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cpedsim'+i+'\').innerHTML == \'\') { conjugate(\''+us+'\',\'cpedsim'+i+'\')} else { document.getElementById(\'cpedsim'+i+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cpedsim'+i+'"></div></div>');
+          finouta.push('<div><b><a style="color:'+DPR_G.DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick="if(document.getElementById(\'cpedsim'+i+'\').innerHTML == \'\') { DPR_grammar_mod.conjugate(\''+us+'\',\'cpedsim'+i+'\')} else { document.getElementById(\'cpedsim'+i+'\').innerHTML = \'\';}">' + us + '</a></b>: '+ud +'<br><div class="conjc" id="cpedsim'+i+'"></div></div>');
 
         }
       }
@@ -764,7 +764,7 @@ function multisearchstart(hard)
       us = DPR_translit_mod.toUni(gsplit[0]);
       ud = DPR_translit_mod.toUni(gsplit[1] + ' (' + gsplit[2] + ')');
 
-      finouta.push(us+'###<div><a style="color:'+DPR_G.DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick=" conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
+      finouta.push(us+'###<div><a style="color:'+DPR_G.DPR_prefs['colcpd']+'" href="javascript:void(0)" onclick=" DPR_grammar_mod.conjugate(\''+us+'\',\'dif\')" title="'+ud.replace(/"/g,'&amp;quot;')+'">' + us + '</a><br><div class="conjc" id="cped'+cnt+'"></div></div>');
 
     }
   }

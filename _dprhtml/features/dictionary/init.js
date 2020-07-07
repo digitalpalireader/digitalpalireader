@@ -46,7 +46,7 @@ const initializeDictionarySidebarTab = () => {
 }
 
 const initializeDictionaryFeature = async () => {
-  getconfig();
+  DPR_config_mod.getconfig();
   try {
     await DPR_dict_mod.startDictLookup();
   } catch(ex) {
