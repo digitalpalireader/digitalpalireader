@@ -4,13 +4,13 @@ var DPR_move_mod = ( function () {
 
 DPR_G.moveat = 2;
 
-function moveframex(a,temp) //read, etc
+async function moveframex(a,temp) //read, etc
 {
-    if(!temp) DPR_config_mod.getconfig();
+    if(!temp) await DPR_config_mod.getconfig();
 
 }
 
-function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
+async function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
 {
   if(!a && !b){
     return ;
@@ -21,7 +21,7 @@ function moveframey(a,b) //dict, conv, pad, etc - a is button, b is div (opt)
   if(!b)
     b = a;
 
-  if (DPR_G.moveat == 1) moveframex(2);
+  if (DPR_G.moveat == 1) await moveframex(2);
 
     $('#difout').hide();
   $('#cof').hide();

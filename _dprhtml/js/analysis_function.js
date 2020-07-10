@@ -9,7 +9,7 @@ DPR_G.G_stopAnalyzing = 0;
 
 async function outputAnalysis(input,frombox) {
 
-  DPR_config_mod.addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
+  await DPR_PAL.addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
 
   //ddump('',1,1);
   DPR_G.G_outwords = [];

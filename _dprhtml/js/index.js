@@ -23,7 +23,7 @@ const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
 async function mainInitialize() {
-  DPR_config_mod.getconfig();
+  await DPR_config_mod.getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
   initFooter();

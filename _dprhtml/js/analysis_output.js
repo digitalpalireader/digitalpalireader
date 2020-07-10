@@ -230,7 +230,7 @@ async function outputDef(which,first,frombox)
 
       if(/ of /.test(concisedefa[1])) {
         var base = / of ([^;,. ]+)/.exec(concisedefa[1])[1];
-        concisedefa[1] = concisedefa[1].replace(base,linkToPED(base,base));
+        concisedefa[1] = concisedefa[1].replace(base, await linkToPED(base,base));
       }
 
       concisedef = DPR_translit_mod.toUni(concisedef + ' (' + concisedefa[1] + ')');

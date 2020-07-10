@@ -78,8 +78,8 @@ function transLink(which,where,url,title) {
   };
 }
 
-function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
-  DPR_config_mod.addJS(['ati_list']);
+async function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
+  await DPR_PAL.addJS(['ati_list']);
 
   if (!DPR_G.DPR_prefs["ctrans"] || typeof(DPR_G.atiD) == 'undefined') return;
 

@@ -68,10 +68,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
   js['SKT'] = ['/sa/dict/index.js'];
   js['SKR'] = ['/sa/roots/index.js'];
 
-  var error = DPR_config_mod.addJS(js[DPR_G.G_dictType]);
-
-  if(error)
-    return alert('error loading resource: '+error[1]+'\n'+error[0]);
+  await DPR_PAL.addJS(js[DPR_G.G_dictType]);
 
   DPR_G.G_dictUnicode = /[āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ]/.test(DPR_G.G_dictQuery);
 
@@ -125,7 +122,7 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
       titlesearchstart();
       break;
     case 'PRT':
-      paliRootsearchstart();
+      await paliRootsearchstart();
       break;
     case 'SKT':
       await sktsearchstart();
@@ -1244,7 +1241,7 @@ function titlesearchstart()
 }
 
 
-function paliRootsearchstart(hard)
+async function paliRootsearchstart(hard)
 {
   if(typeof(DPR_G.proots) == 'undefined') {
     return;
@@ -1296,7 +1293,7 @@ function paliRootsearchstart(hard)
       var gs1 = gsplit[1].split(' ');
       for(var i = 0;i<gs1.length;i++) {
         var base = gs1[i].replace(/e$/,'a').replace(/[āe]su$/,'a').replace(/īsu$/,'i').replace(/yaṃ$/,'').replace(/mhi$/,'');
-        gs1[i] = linkToPED(base,gs1[i]);
+        gs1[i] = await linkToPED(base,gs1[i]);
       }
       gsplit[1] = gs1.join(' ');
       var ln = DPR_G.rootsl[x].split('.');

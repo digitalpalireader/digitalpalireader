@@ -16,13 +16,13 @@ DPR_G.atiIns = 0
 
 const dprBaseStyleSheet = Object.entries(document.styleSheets).find(([_, ss]) => ss.href && ss.href.match(DPR_PAL.mainStylesMatcher))[1]
 
-function getconfig() {
+async function getconfig() {
   for (var i in DPR_G.DPR_prefs) {
     DPR_G.DPR_prefs[i] = DPR_prefload_mod.getPref(i);
   }
 
   if (/top\.htm/.exec(document.location.href) && DPR_G.DPR_prefs["ctrans"] && typeof(DPR_G.atiD) == 'undefined') {
-     addATIJS();
+     await addATIJS();
    }
 
   // update backgrounds
@@ -99,9 +99,9 @@ function checkbackground() {
   }
 }
 
-function addATIJS() {
+async function addATIJS() {
   if (DPR_G.DPR_prefs['catioff']) {
-    addJS(['ati_list']);
+    await DPR_PAL.addJS(['ati_list']);
     //var nsrc = 'file://'+ DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
   }
   else {
@@ -117,12 +117,7 @@ function addATIJS() {
   */
 }
 
-function addJS(files) {
-  DPR_PAL.addJS(files);
-}
-
 return {
-addJS : addJS,
 getconfig : getconfig
 }
 })()

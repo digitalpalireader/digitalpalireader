@@ -33,9 +33,33 @@ console.log('Loading DPR_PAL...');
     "contentFolder",
     DPR_PAL.isXUL ? '/content/' : '/_dprhtml/');
 
-  DPR_PAL.addJS = files => {
-    // NOTE: All files are preloaded. We wont need this once we switch to ES6 modules.
-  };
+  // NOTE: This has to be written using ES6 modules when the work is done.
+  const loadedScripts = {}
+  DPR_PAL.addOneJS = file => {
+    const url = /^\//i.test(file) ? file : `${DPR_PAL.contentFolder}js/${file}.js`
+
+    if (loadedScripts[url.toLowerCase()]) {
+      return Promise.resolve()
+    }
+
+    console.log('>>>> addOneJS: Loading script:', url)
+    return new Promise(function(resolve, reject) {
+      let script = document.createElement('script')
+      script.src = url
+      script.onload = () => {
+        loadedScripts[url.toLowerCase()] = true
+        resolve(script)
+      }
+      script.onerror = e => {
+        console.log('Error loading script', e)
+        reject(new Error(`Script load error for ${url}.`))
+      }
+
+      document.body.append(script)
+    })
+  }
+
+  DPR_PAL.addJS = async (files) => await Promise.all(files.map(DPR_PAL.addOneJS))
 
   DPR_PAL.showLoadingMarquee = () => {
     if (DPR_PAL.isXUL) {

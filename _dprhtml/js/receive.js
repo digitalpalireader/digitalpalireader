@@ -22,7 +22,7 @@ async function makeLinkPlace(options,PL) {
 
     var option = options[i].split('=');
     if(option[0] == 'text') {
-      analyzeTextPad(decodeURIComponent(option[1]));
+      await analyzeTextPad(decodeURIComponent(option[1]));
       return;
     }
     if(option[0] == 'ped') {

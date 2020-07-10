@@ -159,7 +159,7 @@ class NavigationTabViewModel {
 const __navigationTabViewModel = new NavigationTabViewModel();
 
 const initializeNavigationFeature = async () => {
-  DPR_config_mod.getconfig();
+  await DPR_config_mod.getconfig();
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
