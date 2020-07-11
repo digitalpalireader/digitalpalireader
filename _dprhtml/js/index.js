@@ -21,6 +21,7 @@ ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
+const __translationsViewModel = new TranslationsViewModel();
 
 async function mainInitialize() {
   await DPR_config_mod.getconfig();

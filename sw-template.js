@@ -102,7 +102,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  new RegExp('bt-simc-rg'),
+  new RegExp('bt-'),
   new workbox.strategies.CacheFirst({
     cacheName: 'translation-bt',
     plugins: [
