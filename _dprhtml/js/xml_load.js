@@ -26,17 +26,6 @@ var DPR_DataLoader = (function() {
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
-  const wrapExceptionHandler = function(fn) {
-    return function() {
-      try {
-        return fn.apply(this, arguments);
-      } catch (e) {
-        DPR_Chrome.showErrorToast(`Data files for [${[...arguments].join(',')}] not found. Ensure you have the latest components installed. More info: ${e.message}`);
-        return null;
-      }
-    };
-  };
-
   const wrapExceptionHandlerAsync = function(fn) {
     return async function() {
       try {
@@ -49,7 +38,7 @@ var DPR_DataLoader = (function() {
   };
 
   return {
-    loadTipitakaAsync: wrapExceptionHandler(loadTipitakaAsync),
+    loadTipitakaAsync: wrapExceptionHandlerAsync(loadTipitakaAsync),
     loadPXD: wrapExceptionHandlerAsync(loadPXD),
     loadXDPPN: wrapExceptionHandlerAsync(loadXDPPN),
     loadSARoots: wrapExceptionHandlerAsync(loadSARoots),

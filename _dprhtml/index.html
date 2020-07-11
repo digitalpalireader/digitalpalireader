@@ -111,7 +111,12 @@
         "DPR_search_mod",
         "DPR_sortaz_mod",
         "DPR_dict_mod",
-        "DPR_bookmarks_mod"
+        "DPR_bookmarks_mod",
+        "DPR_config_mod",
+        "DPR_xml_mod",
+        "DPR_convert_mod",
+        "DPR_grammar_mod",
+        "DPR_translate_mod"
       ];
       const diffVarLists = () => {
         console.log("Global Variables introduced by DPR-")
@@ -152,7 +157,8 @@
       var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
       var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
       var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
-      var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, '00000000-0000-0000-0000-000000000000');
+      const nullInstrumentationkey = '00000000-0000-0000-0000-000000000000';
+      var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, nullInstrumentationkey);
 
       var sdkInstance = "appInsightsSDK"; window[sdkInstance] = "appInsights"; var aiName = window[sdkInstance], aisdk = window[aiName] || function (e) { function n(e) { t[e] = function () { var n = arguments; t.queue.push(function () { t[e].apply(t, n) }) } } var t = { config: e }; t.initialize = !0; var i = document, a = window; setTimeout(function () { var n = i.createElement("script"); n.src = e.url || "https://az416426.vo.msecnd.net/scripts/b/ai.2.min.js", i.getElementsByTagName("script")[0].parentNode.appendChild(n) }); try { t.cookie = i.cookie } catch (e) { } t.queue = [], t.version = 2; for (var r = ["Event", "PageView", "Exception", "Trace", "DependencyData", "Metric", "PageViewPerformance"]; r.length;)n("track" + r.pop()); n("startTrackPage"), n("stopTrackPage"); var s = "Track" + r[0]; if (n("start" + s), n("stop" + s), n("addTelemetryInitializer"), n("setAuthenticatedUserContext"), n("clearAuthenticatedUserContext"), n("flush"), t.SeverityLevel = { Verbose: 0, Information: 1, Warning: 2, Error: 3, Critical: 4 }, !(!0 === e.disableExceptionTracking || e.extensionConfig && e.extensionConfig.ApplicationInsightsAnalytics && !0 === e.extensionConfig.ApplicationInsightsAnalytics.disableExceptionTracking)) { n("_" + (r = "onerror")); var o = a[r]; a[r] = function (e, n, i, a, s) { var c = o && o(e, n, i, a, s); return !0 !== c && t["_" + r]({ message: e, url: n, lineNumber: i, columnNumber: a, error: s }), c }, e.autoExceptionInstrumented = !0 } return t }(
         {
@@ -162,6 +168,10 @@
 
       appInsights.addTelemetryInitializer(
         e => {
+          if (appInsightsInstrumentationKey === nullInstrumentationkey) {
+            return false;
+          }
+
           e.data['dpr.environment.name'] = environmentName;
           e.data['dpr.release.number'] = releaseNumber;
           e.data['dpr.created.timestamp'] = createdTimestamp;
@@ -474,19 +484,14 @@
     <script src="/_dprhtml/js/navigation_common.js"></script>
     <script src="/_dprhtml/js/web/navigation_sidebar.js"></script>
     <script src="/_dprhtml/js/prefload.js"></script>
+    <script>progressBar.go(60)</script>
     <script src="/_dprhtml/js/web/xml_sidebar.js"></script>
     <script src="/_dprhtml/js/translit.js"></script>
     <script src="/_dprhtml/js/config.js"></script>
-    <script>progressBar.go(60)</script>
     <script src="/_dprhtml/js/xml_load.js"></script>
     <script src="/_dprhtml/js/navigation.js"></script>
     <script src="/_dprhtml/js/format.js"></script>
     <script src="/_dprhtml/js/web/opts_sidebar.js"></script>
-    <script src="/_dprhtml/js/relmul.js"></script>
-    <script src="/_dprhtml/js/relatt.js"></script>
-    <script src="/_dprhtml/js/reltik.js"></script>
-    <script src="/_dprhtml/js/dppn.js"></script>
-    <script src="/_dprhtml/js/ati_list.js"></script>
     <script src="/_dprhtml/js/dt_list.js"></script>
     <script src="/_dprhtml/js/translations.js"></script>
     <script src="/_dprhtml/js/xml.js"></script>
@@ -497,37 +502,25 @@
     <script src="/_dprhtml/js/search_history.js"></script>
     <script src="/_dprhtml/js/sortaz.js"></script>
     <script src="/_dprhtml/js/dict.js"></script>
-    <script src="/_dprhtml/js/irreg.js"></script>
     <script src="/_dprhtml/js/dict_xml.js"></script>
     <script src="/_dprhtml/js/listsm.js"></script>
     <script src="/_dprhtml/js/listam.js"></script>
     <script src="/_dprhtml/js/chrome.js"></script>
     <script src="/_dprhtml/js/convert.js"></script>
     <script src="/_dprhtml/js/move.js"></script>
+    <script>progressBar.go(80)</script>
     <script src="/_dprhtml/js/bookmarks.js"></script>
     <script src="/_dprhtml/js/analysis_declension.js"></script>
     <script src="/_dprhtml/js/analysis_arrays.js"></script>
     <script src="/_dprhtml/js/analysis_function.js"></script>
-    <script>progressBar.go(80)</script>
     <script src="/_dprhtml/js/analysis_output.js"></script>
     <script src="/_dprhtml/js/inflect.js"></script>
     <script src="/_dprhtml/js/grammar.js"></script>
-    <script src="/_dprhtml/js/ped.js"></script>
-    <script src="/_dprhtml/js/nameno.js"></script>
-    <script src="/_dprhtml/js/roots.js"></script>
-    <script src="/_dprhtml/js/roots_link.js"></script>
-    <script src="/_dprhtml/js/attlist.js"></script>
-    <script>progressBar.go(90)</script>
-    <script src="/_dprhtml/js/tiklist.js"></script>
-    <script src="/_dprhtml/js/titles.js"></script>
     <script src="/_dprhtml/js/web/sidebar.js"></script>
     <script src="/_dprhtml/js/bv.js"></script>
     <script src="/_dprhtml/js/translate.js"></script>
     <script src="/_dprhtml/js/conjugate.js"></script>
-    <script src="/en/cepd/index.js"></script>
-    <script src="/en/cped/index.js"></script>
-    <script src="/sa/dict/index.js"></script>
-    <script src="/sa/roots/index.js"></script>
+    <script>progressBar.go(90)</script>
     <script src="/_dprhtml/features/bottom-pane/init.js"></script>
     <script src="/_dprhtml/features/navigation/init.js"></script>
     <script src="/_dprhtml/features/search/init.js"></script>

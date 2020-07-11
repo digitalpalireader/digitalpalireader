@@ -26,6 +26,17 @@ class BottomPaneTabsViewModel {
 BottomPaneTabsViewModel.TabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj'];
 
 var DPR_BottomPane = (function () {
+  const wrapWithTelemetryAsync = function(fn) {
+    return async function() {
+      try {
+        appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`,  properties: { }});
+        return await fn.apply(this, arguments);
+      } catch (e) {
+        console.log('>>>> wrapWithTelemetryAsync', e);
+      }
+    };
+  };
+
   const wrapWithTelemetry = function(fn) {
     return function() {
       appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`,  properties: { }});
@@ -34,17 +45,17 @@ var DPR_BottomPane = (function () {
   };
 
   return {
-    cvConvert: wrapWithTelemetry(convert),
+    cvConvert: wrapWithTelemetry(DPR_convert_mod.convert),
     cvSortaz: wrapWithTelemetry(DPR_sortaz_mod.sortaz),
 
     tpToVel: wrapWithTelemetry(DPR_translit_mod.toVel),
     tpToUni: wrapWithTelemetry(DPR_translit_mod.toUni),
-    tpSendTextPad: wrapWithTelemetry(DPR_send_bottom_mod.sendTextPad),
-    tpSavePad: wrapWithTelemetry(savePad),
+    tpSendTextPad: wrapWithTelemetryAsync(DPR_send_bottom_mod.sendTextPad),
+    tpSavePad: wrapWithTelemetry(DPR_convert_mod.savePad),
 
-    trTranslateText: wrapWithTelemetry(translateText),
-    trTranslateTextFromBottomPane: wrapWithTelemetry(translateTextFromBottomPane),
-    trInsertWordByWord: wrapWithTelemetry(insertWordByWord),
+    trTranslateText: wrapWithTelemetry(DPR_translate_mod.translateText),
+    trTranslateTextFromBottomPane: wrapWithTelemetry(DPR_translate_mod.translateTextFromBottomPane),
+    trInsertWordByWord: wrapWithTelemetry(DPR_translate_mod.insertWordByWord),
 
     cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),
   };

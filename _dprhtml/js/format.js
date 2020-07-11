@@ -11,7 +11,7 @@ DPR_G.G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍ
 DPR_G.G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
 
-function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
+async function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
 
   DPR_G.G_lastcolour = 0; // reset colour changing
@@ -39,7 +39,7 @@ function outputFormattedData(data,which,place,shortcutFns) // calls text prep, t
     var section = place[6]
     var hier = place[7];
 
-    var transin = DPR_Translations.addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
+    var transin = await DPR_Translations.addtrans(hier,0,nikaya,book,meta,volume,vagga,sutta,section);
     if(transin && shortcutFns) {
       $
         .parseHTML(transin.join(''))
@@ -408,7 +408,7 @@ function wrapLink(text,click,url) {
   return '<'+(url?'a href="'+url+'"':'span class="pointer"')+(click?' onclick="'+click+'"':'')+'>'+text+'</'+(url?'a':'span')+'>';
 }
 
-function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
+async function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 {
   var lmt = 60;
   var lgt = una.length;
@@ -429,11 +429,11 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
   var namea = [una,vna,wna,xna,yna,zna];
   var namen = [null,null,null,null,null,null];
   if (DPR_G.DPR_prefs['showNames']) {
-    addJS(['dppn']);
+    await DPR_PAL.addJS(['dppn']);
     for (var i in namea) {
       var tt = DPR_translit_mod.toVel(namea[i]).replace(/^[ 0-9.]+ /,'').replace(/[- ]/g,'');
       if(tt.length < 2) continue;
-      var dEI = DPR_navigation_mod.getDppnEntry(tt);
+      var dEI = await DPR_navigation_mod.getDppnEntry(tt);
       if (dEI.length > 0) {
         namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span>';
       }
@@ -468,10 +468,10 @@ function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)
 }
 
 
-function analyzeTextPad(text) {
-  var titleout = convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' ');
+async function analyzeTextPad(text) {
+  var titleout = await convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' ');
   $('#mafbc').html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
-  outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
+  await outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
 }
 
 DPR_G.pleasewait =  document.createElement('div');
@@ -602,7 +602,7 @@ function makeToolbox(shortcutFns,main,aux,title,conv,ex,save,trans) {
   if(save) {
     shortcutFns[DPR_CMD_SAVE_TO_DESKTOP] = {
       canExecuteStr: 'true',
-      executeStr: 'saveCompilation()',
+      executeStr: 'DPR_xml_mod.saveCompilation()',
       titleStr: null,
       visibleStr: 'true',
     };
@@ -623,8 +623,8 @@ function makeTable(text,cls) {
 }
 
 
-function linkToPED(base,word) {
-  addJS(['ped']);
+async function linkToPED(base,word) {
+  await DPR_PAL.addJS(['ped']);
 
   var vbase = DPR_translit_mod.toVel(base);
 

@@ -78,8 +78,8 @@ function transLink(which,where,url,title) {
   };
 }
 
-function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
-  addJS(['ati_list']);
+async function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
+  await DPR_PAL.addJS(['ati_list']);
 
   if (!DPR_G.DPR_prefs["ctrans"] || typeof(DPR_G.atiD) == 'undefined') return;
 
@@ -996,7 +996,7 @@ function addtrans(hier,which,nikaya,book,meta,volume,vagga,sutta,section) {
 }
 
 function getDTTranslations(which, nikaya,book,meta,volume,vagga,sutta,section) {
-  const dtIndicesObj = [book,meta,volume,vagga,sutta,section]
+  const dtIndicesObj = [book, meta, volume, vagga || 0, sutta || 0, section || 0]
     .reduce((acc, e) => ({indices: [...acc.indices, `${acc.indices[acc.i]}.${e}`], i: acc.i + 1}), {indices: [nikaya], i: 0})
 
   const dtTranslations = dtIndicesObj.indices.map(idx => DT_LIST.translations[idx]).filter(x => x);

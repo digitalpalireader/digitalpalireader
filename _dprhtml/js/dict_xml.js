@@ -50,7 +50,7 @@ async function paliXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'Lookup word',  properties: { filein,which,add, }});
 
-  addJS(['ped']);
+  await DPR_PAL.addJS(['ped']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -233,7 +233,7 @@ async function DPPNXML(filein,which,add)
 {
   appInsights.trackEvent({ name: 'DPPNXML',  properties: { filein,which,add, }});
 
-  addJS(['dppn','nameno']);
+  await DPR_PAL.addJS(['dppn','nameno']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -418,7 +418,7 @@ async function sktXML(entry,idx,which,add)
 {
   appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
 
-  addJS(['/sa/dict/index.js']);
+  await DPR_PAL.addJS(['/sa/dict/index.js']);
 
   if(add == 'right') return;
   if(add == true) {
@@ -462,13 +462,13 @@ async function sktXML(entry,idx,which,add)
 async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
   appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
-    if(type == 'a') {
-    addJS(['attlist']);
+  if(type == 'a') {
+    await DPR_PAL.addJS(['attlist']);
     var loca = DPR_G.attlist[num].split('#');
     var word = loca.shift();
   }
   else {
-    addJS(['tiklist']);
+    await DPR_PAL.addJS(['tiklist']);
     var loca = DPR_G.tiklist[num].split('#');
     var word = loca.shift();
   }
@@ -536,7 +536,7 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
 async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
   appInsights.trackEvent({ name: 'getTitleXML',  properties: { num,mul,att,tik,niklist, }});
 
-  addJS(['titles']);
+  await DPR_PAL.addJS(['titles']);
 
 
   var loca = DPR_G.titlelist[num].split('#');
@@ -631,7 +631,8 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
     }
     //dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
     var sn = (hiert == 'm' ? DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
-    var placen = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1)[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
+    const title = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1);
+    var placen = title[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 
         finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }

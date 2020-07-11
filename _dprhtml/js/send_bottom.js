@@ -2,14 +2,14 @@
 
 var DPR_send_bottom_mod = (function(){
 
-function sendTextPad(add){
+async function sendTextPad(add){
   var input = document.getElementById('pad').value;
 
   if(!add) { // reuse old tab
     var thisTab = DPRChrome.isThisDPRTab('DPRm');
     if (thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
       return;
     }
     var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -21,7 +21,7 @@ function sendTextPad(add){
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.analyzeTextPad(input);
     }
   } else {
     var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul?text='+DPR_translit_mod.toVel(input));

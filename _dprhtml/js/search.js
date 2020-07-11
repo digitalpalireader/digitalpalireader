@@ -134,7 +134,7 @@ async function searchTipitaka(searchType,searchString,searchMAT,searchSet,search
       await pausethree();
     break;
     case 5: // ATI
-      atiSearchStart();
+      await atiSearchStart();
     break;
   }
 
@@ -1035,7 +1035,7 @@ function atiPause(getstring) {
   }
 }
 
-function atiSearchStart() {
+async function atiSearchStart() {
 
   document.getElementById('sbfb').appendChild(DPR_G.pleasewait);
 
@@ -1045,8 +1045,8 @@ function atiSearchStart() {
 
   if(DPR_G.DPR_prefs['catioff']) {
     //var newScript = 'file://'+ DPR_G.DPR_prefs['catiloc'].replace(/\\/g,'/') + '/html/_dpr/digital_pali_reader_suttas.js';
-    //addJS([newScript]);
-    addJS(['ati_list']);
+    //await DPR_PAL.addJS([newScript]);
+    await DPR_PAL.addJS(['ati_list']);
 
 //    $('#stfb').html('<table><tr id="atiNiks"><td width=1><a href="javascript:void(0)" onclick="this.blur(); stopsearch = 1" title="click to stop search"><img id="stfstop" src="images/stop.png" width=25></a></td><td><a href="http://www.accesstoinsight.org" title="Access To Insight Website"><img src="'+atiurl+'favicon.ico"> ATI</a> full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b> (off-line): </td></tr></table>');
     DPR_search_mod.makeProgressTable(DPR_G.G_searchSet.length);

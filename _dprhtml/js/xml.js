@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR_xml_mod = ( function () {
+
 DPR_G.unnamed = '[unnamed]';
 
 DPR_G.matButton = 0; // tells us we've clicked an in-section mat button.
@@ -161,7 +163,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
   }
 
-  var titleout = convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
+  var titleout = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
 
 // tab title
 
@@ -183,7 +185,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   // relative mat
 
-  addJS(['relmul','relatt','reltik']);
+  await DPR_PAL.addJS(['relmul','relatt','reltik']);
 
   var matButtonCount = 0;
   if (DPR_G.matButton == 1) {  // mat button pushed already, remember the place
@@ -512,7 +514,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     }
   }
 
-  var outData = outputFormattedData(theData,0,place,shortcutFns);
+  var outData = await outputFormattedData(theData,0,place,shortcutFns);
   resolveCommands(shortcutFns);
   makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
@@ -653,7 +655,7 @@ async function loadXMLindex(place,compare) {
 
       tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
       if(tt.length > 1) {
-        dEI = DPR_navigation_mod.getDppnEntry(tt);
+        dEI = await DPR_navigation_mod.getDppnEntry(tt);
         if (dEI.length > 0) {
           namen = getNameHTML(dEI,tt);
         }
@@ -690,7 +692,7 @@ async function loadXMLindex(place,compare) {
 
     // translations
 
-    transin = DPR_Translations.addtrans(hier,6,nikaya,bookno);
+    transin = await DPR_Translations.addtrans(hier,6,nikaya,bookno);
     if (transin) {
       theDatao += transin.join('&nbsp;');
     }
@@ -720,7 +722,7 @@ async function loadXMLindex(place,compare) {
 
         tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
         if(tt.length > 1) {
-          dEI = DPR_navigation_mod.getDppnEntry(tt);
+          dEI = await DPR_navigation_mod.getDppnEntry(tt);
           if (dEI.length > 0) {
             namen = getNameHTML(dEI,tt);
           }
@@ -741,7 +743,7 @@ async function loadXMLindex(place,compare) {
       var transin;
       var transout='';
 
-      transin = DPR_Translations.addtrans(hier,5,nikaya,bookno,tmp2);
+      transin = await DPR_Translations.addtrans(hier,5,nikaya,bookno,tmp2);
       if (transin) {
         theDatao += transin.join('&nbsp;');
       }
@@ -774,7 +776,7 @@ async function loadXMLindex(place,compare) {
 
           tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
           if(tt.length > 1) {
-            dEI = DPR_navigation_mod.getDppnEntry(tt);
+            dEI = await DPR_navigation_mod.getDppnEntry(tt);
             if (dEI.length > 0) {
               namen = getNameHTML(dEI,tt);
             }
@@ -796,7 +798,7 @@ async function loadXMLindex(place,compare) {
         var transin;
         var transout='';
 
-        transin = DPR_Translations.addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
+        transin = await DPR_Translations.addtrans(hier,4,nikaya,bookno,tmp2,tmp3);
         if (transin) {
           theDatao += transin.join('&nbsp;');
         }
@@ -829,7 +831,7 @@ async function loadXMLindex(place,compare) {
 
             tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
             if(tt.length > 1) {
-              dEI = DPR_navigation_mod.getDppnEntry(tt);
+              dEI = await DPR_navigation_mod.getDppnEntry(tt);
               if (dEI.length > 0) {
                 namen = getNameHTML(dEI,tt);
               }
@@ -856,7 +858,7 @@ async function loadXMLindex(place,compare) {
           var transin;
           var transout='';
 
-          transin = DPR_Translations.addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
+          transin = await DPR_Translations.addtrans(hier,3,nikaya,bookno,tmp2,tmp3,tmp4);
           if (transin) {
             theDatao += transin.join('&nbsp;');
           }
@@ -887,7 +889,7 @@ async function loadXMLindex(place,compare) {
 
               tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
               if(tt.length > 1) {
-                dEI = DPR_navigation_mod.getDppnEntry(tt);
+                dEI = await DPR_navigation_mod.getDppnEntry(tt);
                 if (dEI.length > 0) {
                   namen = getNameHTML(dEI,tt);
                 }
@@ -909,7 +911,7 @@ async function loadXMLindex(place,compare) {
 
             var transin;
             var transout='';
-            transin = DPR_Translations.addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
+            transin = await DPR_Translations.addtrans(hier,2,nikaya,bookno,tmp2,tmp3,tmp4,tmp5);
             if (transin) {
               theDatao += transin.join('&nbsp;');
             }
@@ -945,7 +947,7 @@ async function loadXMLindex(place,compare) {
 
                 tt = DPR_translit_mod.toVel(theData).replace(/^[ 0-9.]+ /,'').replace(/[-0-9 ()]+$/,'').replace(/[- ]/g,'');
                 if(tt.length > 1) {
-                  dEI = DPR_navigation_mod.getDppnEntry(tt);
+                  dEI = await DPR_navigation_mod.getDppnEntry(tt);
                   if (dEI.length > 0) {
                     namen = getNameHTML(dEI,tt);
                   }
@@ -969,7 +971,7 @@ async function loadXMLindex(place,compare) {
               var transin;
               var transout='';
 
-              transin = DPR_Translations.addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
+              transin = await DPR_Translations.addtrans(hier,1,nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6);
               //if(bookno == 4) document.getElementById('mafbc').innerHTML += theData;
               if (transin) {
                 theDatao += transin.join('&nbsp;');
@@ -1237,3 +1239,11 @@ function countVals(a) {
   }
   return count;
 }
+
+return {
+
+loadXMLSection : loadXMLSection,
+loadXMLindex : loadXMLindex,
+saveCompilation : saveCompilation
+}
+})()
