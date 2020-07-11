@@ -3,7 +3,6 @@
  */
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js');
-importScripts('./_dprhtml/js/translations_bt_list.js');
 
 workbox.core.setCacheNameDetails({
   prefix: 'dpr',
@@ -43,8 +42,6 @@ self.addEventListener('install', (event) => {
   // TODO: Generate this list from during the build process.
   const thFiles = ['a10m','a11m','a1m','a2m','a3m','a4m','a5m','a6m','a7m','a8m','a9m','d1m','d2m','d3m','k1m','k2m','k3m','k4m','k5m','m1m','m2m','m3m','s1m','s2m','s3m','s4m','s5m','v1m','v2m','v3m','v4m','v5m','v6m',]
   addTipitakaFilesToCache(event, 'th', thFiles)
-
-  event.waitUntil(caches.open('translation-bt').then((cache) => cache.addAll(btUrlsToPrefetch)));
 });
 
 workbox.precaching.precacheAndRoute(
@@ -105,13 +102,13 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-  new RegExp('^https://tipitaka.digitalpalireader.online/bt-simc-rg/'),
+  new RegExp('bt-simc-rg'),
   new workbox.strategies.CacheFirst({
     cacheName: 'translation-bt',
     plugins: [
       new workbox.expiration.ExpirationPlugin({
         maxAgeSeconds: 180 * 24 * 60 * 60,
-        maxEntries: 100,
+        maxEntries: 3000,
       }),
       new workbox.cacheableResponse.CacheableResponsePlugin({
         statuses: [0, 200],

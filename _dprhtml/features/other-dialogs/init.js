@@ -5,6 +5,22 @@ class OtherDialogsViewModel {
     this.quicklinkInput = ko.observable();
     this.quicklinkInNewTab = ko.observable(false);
     this.bookmarkName = ko.observable();
+    this.downloadTranslation("bt");
+  }
+
+  async downloadTranslation(source) {
+    await DPR_PAL.addOneJS(`translations_${source}_list`);
+    caches.open(`translation-${source}`).then((cache) => this.addTranslToCache(cache, source));
+  }
+
+  async addTranslToCache(cache, source) {
+    let translArray = Array();
+    translArray["bt"] = DPR_G.btUrlsToPrefetch;
+    // add here other transl. sources: ati, abt, dt
+    let sourceArray = translArray[source];
+    for (var i = 0; i < sourceArray.length; i++) {
+      await cache.add(sourceArray[i]);
+    }
   }
 
   showQuickLinksDialog() {

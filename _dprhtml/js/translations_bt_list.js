@@ -1,6 +1,8 @@
 'use strict';
 
-const btUrlsToPrefetch = [
+DPR_G.EXPORTED_SYMBOLS = ["btUrlsToPrefetch"];
+
+DPR_G.btUrlsToPrefetch = [
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/index.html',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/js.js',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/an/an_e_1.htm',
