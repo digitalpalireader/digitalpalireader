@@ -8,8 +8,6 @@
  */
 'use strict';
 
-console.log('Loading DPR_PAL...');
-
 (function (DPR_PAL, $, undefined) {
   const defineReadOnlyProperty = (name, value) => Object.defineProperty(DPR_PAL, name, { value: value });
 

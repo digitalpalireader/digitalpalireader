@@ -1,11 +1,5 @@
 'use strict';
 
-if (DPR_PAL.isWeb) {
-  console.log('Loading DPR_PAL_Chrome_Sidebar...');
-} else {
-  console.log('Cannot DPR_PAL_Chrome_Sidebar for the wrong platform', DPR_PAL);
-}
-
 var DPRChrome = {
   giveIDtoTabs: function () { // startup function, give ids to
 

@@ -1,11 +1,5 @@
 'use strict';
 
-if (DPR_PAL.isWeb) {
-  console.log('Loading opts_sidebar.js...');
-} else {
-  console.log('Cannot opts_sidebar.js for the wrong platform', DPR_PAL);
-}
-
 var DPROpts = {
   tipitakaOptions: async function () {
     $('#tsoContainer').hide();
