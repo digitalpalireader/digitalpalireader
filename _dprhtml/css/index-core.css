@@ -541,6 +541,31 @@ body .bd-highlight {
 }
 
 /*
+ * Installation
+ */
+
+#installation-pane #installation-pane-tab-panes .installation-pane-tab-pane .installation-pane-tab-pane-section * {
+  margin: 0;
+  align-self: center;
+  justify-self: start;
+}
+
+#installationProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#installationBar {
+  width: 0%;
+  height: 20px;
+  background-color: #2400ee;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 20px;
+  color: white;
+}
+
+/*
  * Navigation Tab
  */
 

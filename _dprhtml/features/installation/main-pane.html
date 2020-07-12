@@ -1,0 +1,31 @@
+<div class="modal fade show" id="installation-dialog-root" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header p-2">
+        <h6 class="modal-title" id="exampleModalLongTitle">Install DPR Offline App</h6>
+        <button type="button" class="btn btn-outline-danger btn-sm mb-0" data-dismiss="modal" title="Close without saving...">
+          <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id="installation-pane">
+          <div id="installation-pane-tab-panes">
+            <div id="installation-pane-tab-panes-general" class="installation-pane-tab-pane">
+              <div class="installation-pane-tab-pane-section d-flex flex-column" style="grid-column: span 2;">
+                <div class="d-flex w-100 justify-content-start">
+                  <input id="download_bt_checked" class="mr-1" name="download_bt_checked" type="checkbox"
+                    data-bind="checked: download_bt_checked"/>
+                  <label for="download_bt_checked">Download BuddhistTexts Archive</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer p-2 d-flex">
+        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm mb-0" title="Start Installation" data-bind="click: startInstallation, enable: installationActivated" data-dismiss="modal">Start Installation</button>
+      </div>
+    </div>
+  </div>
+</div>
