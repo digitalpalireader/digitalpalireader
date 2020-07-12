@@ -375,8 +375,6 @@
       document: window.document,
     };
   };
-
-  console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);
 
 // NOTE: Keep this out side the above.
