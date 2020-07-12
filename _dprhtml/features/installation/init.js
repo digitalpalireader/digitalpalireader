@@ -6,6 +6,10 @@ class InstallationViewModel {
     this.installationActivated = this.isAtLeastOneChecked();
   }
 
+  showInstallationDialog() {
+    $('#installation-dialog-root').modal('show');
+  }
+
   isAtLeastOneChecked() {
     return this.download_bt_checked;
   }

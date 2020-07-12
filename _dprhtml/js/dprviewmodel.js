@@ -103,6 +103,7 @@ const DPR_CMD_OPEN_NEW_QUIZZ = 'openNewQuizz';
 const DPR_CMD_OPEN_HELP = 'openHelp';
 const DPR_CMD_OPEN_HELP_VIDEO = 'openHelpVideo';
 const DPR_CMD_LAUNCH_FEEDBACK_FORM = 'launchFeedbackForm';
+const DPR_CMD_INSTALL_OFFLINE_APP = 'installOfflineApp';
 
 const emptyFn = () => {};
 
@@ -517,6 +518,16 @@ const dprCommandList = [
     isDynamic: false,
     title: "Launch feedback form (Keyboard shortcut: @)",
     matchKey: e => e.key === '@',
+  },
+  {
+    id: DPR_CMD_INSTALL_OFFLINE_APP,
+    notImplemented: false,
+    canExecute: true,
+    execute: () => __installationViewModel.showInstallationDialog(),
+    visible: true,
+    isDynamic: false,
+    title: "Launch installation dialog (Keyboard shortcut: I)",
+    matchKey: e => e.key === 'I',
   },
 ];
 
