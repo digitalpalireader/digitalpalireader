@@ -36,7 +36,7 @@ function parseDictURLParameters(){
   }
 }
 
-async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
+async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) {
 
     DPR_G.G_dictEntry = '';
 
@@ -98,37 +98,37 @@ async function startDictLookup(dictType,dictQuery,dictOpts,dictEntry) {
 
   switch (DPR_G.G_dictType) {
     case 'PED':
-      await pedsearchstart();
+      await pedsearchstart(sectionId);
       break;
     case 'DPPN':
-      await dppnsearchstart();
+      await dppnsearchstart(sectionId);
       break;
     case 'CPED':
-      mlsearchstart();
+      mlsearchstart(sectionId);
       break;
     case 'MULTI':
-      multisearchstart();
+      multisearchstart(sectionId);
       break;
     case 'CEPD':
-      epdsearchstart();
+      epdsearchstart(sectionId);
       break;
     case 'ATT':
-      attsearchstart();
+      attsearchstart(sectionId);
       break;
     case 'TIK':
-      tiksearchstart();
+      tiksearchstart(sectionId);
       break;
     case 'TIT':
-      titlesearchstart();
+      titlesearchstart(sectionId);
       break;
     case 'PRT':
-      await paliRootsearchstart();
+      await paliRootsearchstart(sectionId);
       break;
     case 'SKT':
-      await sktsearchstart();
+      await sktsearchstart(sectionId);
       break;
     case 'SKR':
-      await sktRootsearchstart();
+      await sktRootsearchstart(sectionId);
       break;
   }
 }
@@ -545,9 +545,9 @@ async function dppnFullTextSearch(getstring) {
 
 DPR_G.G_cpedAlt = [];
 
-function mlsearchstart(hard)
+function mlsearchstart(sectionId,hard)
 {
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
     getstring = DPR_translit_mod.toFuzzy(getstring);
@@ -627,7 +627,7 @@ function mlsearchstart(hard)
       else finout += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="DPR_dict_mod.mlsearchstart(1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="DPR_dict_mod.mlsearchstart(DPR_G.PrimaryMainPaneContainerSectionId,1)">Show Suggestions</a><br>');
 
     }
   }
@@ -849,13 +849,13 @@ function multisearchstart(hard)
 
 
 
-function epdsearchstart()
+function epdsearchstart(sectionId)
 {
   if(typeof(DPR_G.epd) == 'undefined') {
     return;
   }
 
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -925,12 +925,12 @@ function epdsearchstart()
 }
 
 
-function attsearchstart()
+function attsearchstart(sectionId)
 {
   if(typeof(DPR_G.attlist) == 'undefined') {
     return;
   }
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1016,13 +1016,13 @@ function attsearchstart()
 }
 
 
-function tiksearchstart()
+function tiksearchstart(sectionId)
 {
   if(typeof(DPR_G.tiklist) == 'undefined') {
     return;
   }
 
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1108,13 +1108,13 @@ function tiksearchstart()
 }
 
 
-function titlesearchstart()
+function titlesearchstart(sectionId)
 {
   if(typeof(DPR_G.titlelist) == 'undefined') {
     return;
   }
 
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1241,13 +1241,13 @@ function titlesearchstart()
 }
 
 
-async function paliRootsearchstart(hard)
+async function paliRootsearchstart(sectionId,hard)
 {
   if(typeof(DPR_G.proots) == 'undefined') {
     return;
   }
 
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1327,13 +1327,13 @@ async function paliRootsearchstart(hard)
 
 DPR_G.G_sktR = [];
 
-async function sktsearchstart()
+async function sktsearchstart(sectionId)
 {
   if(typeof(DPR_G.skt) == 'undefined') {
     return;
   }
 
-  clearDivs('dict');
+  clearDivs(sectionId,'dict');
 
   var char = DPR_G.G_dictQuery.charAt(0);
 

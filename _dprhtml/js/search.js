@@ -16,7 +16,7 @@ DPR_G.G_searchPart;
 DPR_G.G_searchRX;
 DPR_G.G_searchLink;
 
-async function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
+async function searchTipitaka(sectionId,searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
   DPR_search_mod.showCancelButton();
   DPR_search_mod.showProgressBar();
 
@@ -29,7 +29,7 @@ async function searchTipitaka(searchType,searchString,searchMAT,searchSet,search
     element.removeChild(element.firstChild);
   }
 
-  clearDivs('search');
+  clearDivs(sectionId,'search');
   resetvalues();
   if(searchString) { // update url
     DPR_G.G_searchType = searchType;

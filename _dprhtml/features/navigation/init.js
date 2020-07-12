@@ -158,15 +158,15 @@ class NavigationTabViewModel {
 
 const __navigationTabViewModel = new NavigationTabViewModel();
 
-const initializeNavigationFeature = async () => {
+const initializeNavigationFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
   let place = __navigationTabViewModel.placeArray();
   switch(place.length){
     case 3:
-      await DPR_xml_mod.loadXMLindex(place,false);
+      await DPR_xml_mod.loadXMLindex(sectionId, place,false);
       break;
     case 8:
-      await DPR_xml_mod.loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
+      await DPR_xml_mod.loadXMLSection(sectionId, __navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
       break;
     default:
       console.error('Unsupported place format ', place);

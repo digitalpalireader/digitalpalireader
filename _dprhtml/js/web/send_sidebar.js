@@ -21,6 +21,8 @@ var DPRSend = {
 
   importXML: async function (section, labelsearch, para, isPL, add, scroll, cat) {
 
+    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
 
@@ -73,7 +75,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(labelsearch, para, loadXmlSectionParams);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(sectionId, labelsearch, para, loadXmlSectionParams);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -84,7 +86,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(labelsearch, para, loadXmlSectionParams);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(sectionId, labelsearch, para, loadXmlSectionParams);
       }
     }
     else if (add == 'shift') {
@@ -129,7 +131,7 @@ var DPRSend = {
     }
   },
 
-  importXMLindex: async function (add) {
+  importXMLindex: async function (sectionId, add) {
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
 
@@ -140,7 +142,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(loadXmlIndexParams);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(sectionId, loadXmlIndexParams);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -152,7 +154,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(loadXmlIndexParams);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(sectionId, loadXmlIndexParams);
       }
     }
     else if (add == 'shift') {
@@ -198,6 +200,8 @@ var DPRSend = {
   },
 
   openPlace: async function ([nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
+    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
     if (!nikaya || add == 'right') return;
 
     if (stringra) {
@@ -211,7 +215,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(stringra, para, [nikaya, book, meta, volume, vagga, sutta, section, hiert]);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(sectionId, stringra, para, [nikaya, book, meta, volume, vagga, sutta, section, hiert]);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -222,7 +226,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(stringra, para, [nikaya, book, meta, volume, vagga, sutta, section, hiert]);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(sectionId, stringra, para, [nikaya, book, meta, volume, vagga, sutta, section, hiert]);
       }
     }
     else if (add == 'shift') {
@@ -267,12 +271,14 @@ var DPRSend = {
   },
 
   openIndex: async function ([nikaya, book, hiert], add) {
+    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
     if (!nikaya || add == 'right') return;
     if (!add) { // reuse old tab
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya, book, hiert]);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(sectionId, [nikaya, book, hiert]);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -283,7 +289,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya, book, hiert]);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex(sectionId, [nikaya, book, hiert]);
       }
     }
     else if (add == 'shift') {
@@ -449,6 +455,8 @@ var DPRSend = {
 
     appInsights.trackEvent({ name: 'Search',  properties: { hard, add, which, getstring, opts, }});
 
+    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
     if (add == 'right') return;
     if (!getstring) {
       var getstring = $('#dictin').prop("value");
@@ -497,7 +505,7 @@ var DPRSend = {
         else {
           DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
           var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-          await oldTabBrowser.contentWindow.DPR_dict_mod.startDictLookup(which, getstring, opts);
+          await oldTabBrowser.contentWindow.DPR_dict_mod.startDictLookup(sectionId,which, getstring, opts);
         }
       }
       else if (hard) {
@@ -516,6 +524,8 @@ var DPRSend = {
   sendSearch: async function (add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX) {
 
     appInsights.trackEvent({ name: 'Search',  properties: { add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX, }});
+
+    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
 
     if (add == 'right') return;
 
@@ -598,7 +608,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-search-browser').contentWindow.searchTipitaka(which, getstring, MAT, sets, book, part, rx);
+        await oldTabBrowser.contentDocument.getElementById('dpr-search-browser').contentWindow.searchTipitaka(sectionId, which, getstring, MAT, sets, book, part, rx);
       }
     }
     else {

@@ -11,7 +11,7 @@ DPR_G.G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍ
 DPR_G.G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
 
-async function outputFormattedData(data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
+async function outputFormattedData(sectionId, data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
 
   DPR_G.G_lastcolour = 0; // reset colour changing
@@ -60,7 +60,7 @@ async function outputFormattedData(data,which,place,shortcutFns) // calls text p
     var convDiv = document.createElement('div');
     convDiv.setAttribute('id','convi');
     convDiv.innerHTML = convout;
-    document.getElementById('mafbc').appendChild(convDiv);
+    $(`${sectionId} #mafbc`)[0].appendChild(convDiv);
 
     var saveDiv = $('#savei');
     saveDiv.html(saveDiv.html()+saveout);
@@ -71,9 +71,9 @@ async function outputFormattedData(data,which,place,shortcutFns) // calls text p
   if (!DPR_PAL.isXUL) {
     outDiv.id="paliTextContent";
   }
-  document.getElementById('mafbc').appendChild(outDiv);
+  $(`${sectionId} #mafbc`)[0].appendChild(outDiv);
 
-  document.getElementById('maf').scrollTop = 0;
+  $(`${sectionId} #maf`)[0].scrollTop = 0;
 
 }
 
@@ -468,10 +468,10 @@ async function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click
 }
 
 
-async function analyzeTextPad(text) {
+async function analyzeTextPad(sectionId, text) {
   var titleout = await convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' ');
-  $('#mafbc').html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
-  await outputFormattedData('<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
+  $(`${sectionId} #mafbc`).html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
+  await outputFormattedData(sectionId,'<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
 }
 
 DPR_G.pleasewait =  document.createElement('div');
@@ -545,7 +545,7 @@ function fadeOut(AID,id,speed) {
   else document.getElementById(id).style.display='none';
 }
 
-function clearDivs(which) { // place divs to be cleared here
+function clearDivs(sectionId, which) { // place divs to be cleared here
   if (!which || which.indexOf('dif') > -1) { // dictionary frame stuff
     $('#difhist').html('');
     $(`#${DPR_PAL.getDifId()}`).html('');
@@ -561,8 +561,8 @@ function clearDivs(which) { // place divs to be cleared here
     $('#anfb').html('<div align=left id="anfc"></div><div align=right id="anfd"></div>');
   }
   if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
-    $('#mafbc').html('');
-    $('#matrelc').html('');
+    $(`${sectionId} #mafbc`).html('');
+    $(`${sectionId} #matrelc`).html('');
   }
 
   if (!which || which.indexOf('search') > -1) { // search frame stuff

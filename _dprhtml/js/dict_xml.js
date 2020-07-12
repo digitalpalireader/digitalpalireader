@@ -52,6 +52,8 @@ async function paliXML(filein,which,add)
 
   await DPR_PAL.addJS(['ped']);
 
+  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
   if(add == 'right') return;
   if(add == true) {
     await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
@@ -59,7 +61,7 @@ async function paliXML(filein,which,add)
   }
   moveFrame(1);
   var file = DPR_translit_mod.toUni(filein);
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -235,6 +237,8 @@ async function DPPNXML(filein,which,add)
 
   await DPR_PAL.addJS(['dppn','nameno']);
 
+  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
   if(add == 'right') return;
   if(add == true) {
     await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
@@ -257,7 +261,7 @@ async function DPPNXML(filein,which,add)
 
   tloc[0] = DPR_translit_mod.toVel(tloc[0]);
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -355,6 +359,8 @@ async function sktRXML(no,add)
 {
   appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
 
+  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
   if(add == 'right') return;
   if(add == true) {
     //await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
@@ -363,7 +369,7 @@ async function sktRXML(no,add)
 
   //moveFrame(1);
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
 
   if(/[^0-9]/.test(no)) {
     for(var i = 0; i < DPR_G.sktR.length;i++) {
@@ -420,13 +426,15 @@ async function sktXML(entry,idx,which,add)
 
   await DPR_PAL.addJS(['/sa/dict/index.js']);
 
+  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+
   if(add == 'right') return;
   if(add == true) {
     //await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
 
   var char = entry.charAt(0);
 

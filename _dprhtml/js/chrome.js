@@ -248,8 +248,8 @@ function DPRShowBottomPane(tabIdToActivate = 'D') {
   openBottomFrame();
 }
 
-const initializeMainPaneOutput = () => {
-  $('#mafbc').html('');
+const initializeMainPaneOutput = sectionId => {
+  $(`${sectionId} #mafbc`).html('');
 }
 
 const writeNavigationHeader = (tabT) => {

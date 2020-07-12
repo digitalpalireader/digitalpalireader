@@ -22,7 +22,7 @@ const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
-async function mainInitialize() {
+async function mainInitialize(sectionId) {
   await DPR_config_mod.getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
@@ -32,11 +32,11 @@ async function mainInitialize() {
   ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isNavigationFeature()) {
-    await loadFeatureAsync(navigationFeatureName, initializeNavigationFeature);
+    await loadFeatureAsync(sectionId, navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    await loadFeatureAsync(searchFeatureName, initializeSearchFeature);
+    await loadFeatureAsync(sectionId, searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    await loadFeatureAsync(dictionaryFeatureName, initializeDictionaryFeature);
+    await loadFeatureAsync(sectionId, dictionaryFeatureName, initializeDictionaryFeature);
   } else {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
@@ -57,10 +57,10 @@ function installGlobalHandlers() {
   window.addEventListener('popstate', e => historyPopstateHandler(e));
 }
 
-const loadFeatureAsync = async (name, initFn) => {
-  await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
+const loadFeatureAsync = async (sectionId, name, initFn) => {
+  await loadHtmlFragmentAsync(`${sectionId} #mafbc`, `features/${name}/main-pane.html`);
   __dprViewModel.showMainFeatures();
-  await initFn();
+  await initFn(sectionId);
   initFeedbackFormParameters();
 }
 

@@ -2,7 +2,7 @@
 
 var DPR_analysis_output_mod = ( function () {
 
-async function outputDef(which,first,frombox)
+async function outputDef(sectionId,which,first,frombox)
 {
   $('#anfs').html('');
 
@@ -14,7 +14,7 @@ async function outputDef(which,first,frombox)
   if (first) {
     $('#anfright').html("");
     if(DPR_G.G_outwords.length > 1){
-      $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="DPR_analysis_output_mod.outputDef(this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
+      $('#anfright').html('<form name="forma"><select id="anfout" name="out" class="tiny" onchange="DPR_analysis_output_mod.outputDef(\'' + sectionId + '\', this.selectedIndex);" title="Select alternative interpretations here"></select></form>');
       // sort by percentage of PED big matches, then average of sizes squared descending, then word size by order
       for(var i = 0; i < DPR_G.G_outwords.length; i++)
       {
@@ -259,7 +259,7 @@ async function outputDef(which,first,frombox)
     else await DPPNXML(hotlink);
     //if(DPR_G.moveat == 2) { moveFrame(1); }
   }
-  else clearDivs('dif');
+  else clearDivs(sectionId,'dif');
 
   DPRBottomPaneUpdateStyle();
 

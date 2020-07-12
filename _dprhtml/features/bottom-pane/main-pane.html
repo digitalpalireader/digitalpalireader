@@ -111,7 +111,7 @@
           <button class="btn btn-light mb-0 mr-1" title="convert to Velthuis" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToVel(document.getElementById('pad').value)">Velthuis</button>
           <button class="btn btn-light mb-0" title="convert to Unicode" onmouseup="document.getElementById('pad').value = DPR_BottomPane.tpToUni(document.getElementById('pad').value)">Unicode</button>
           <span class="mat-button-group-seperator"></span>
-          <button class="btn btn-light mb-0" title="analyze text as Pāli passage" onmouseup="DPR_BottomPane.tpSendTextPad(eventSend(event))">Analyze</button>
+          <button class="btn btn-light mb-0" title="analyze text as Pāli passage" onmouseup="DPR_BottomPane.tpSendTextPad(DPR_G.PrimaryMainPaneContainerSectionId, eventSend(event))">Analyze</button>
           <span class="mat-button-group-seperator"></span>
           <button class="btn btn-light mb-0 mr-1"
             onclick="DPR_PAL.copyToClipboard(document.getElementById('pad').value); alertFlash('Text copied to clipboard.','green');"

@@ -61,13 +61,13 @@ console.log('Loading DPR_PAL...');
 
   DPR_PAL.addJS = async (files) => await Promise.all(files.map(DPR_PAL.addOneJS))
 
-  DPR_PAL.showLoadingMarquee = () => {
+  DPR_PAL.showLoadingMarquee = sectionId => {
     if (DPR_PAL.isXUL) {
-      $('#mafbc').html('');
+      $(`${sectionId} #mafbc`).html('');
       document.getElementById('mafbc').appendChild(DPR_G.pleasewait);
     } else {
-      $('#mafbc').empty();
-      $('#mafbc').append(DPR_G.pleasewait);
+      $(`${sectionId} #mafbc`).empty();
+      $(`${sectionId} #mafbc`).append(DPR_G.pleasewait);
     }
   };
 

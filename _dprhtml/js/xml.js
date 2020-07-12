@@ -16,7 +16,7 @@ DPR_G.G_thisPara = null;
 
 const emptyFnStr = `(() => {})()`;
 
-async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
+async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,compare)
 {
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
@@ -29,13 +29,13 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   for(var i=1;i<7;i++) {
     if(place[i] == 'x') {
-      return await loadXMLindex(place);
+      return await loadXMLindex(sectionId, place);
     }
     else place[i] = parseInt(place[i]);
   }
 
 
-  DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee(sectionId);
 
   var nikaya = place[0];
   var book = place[1]+1;
@@ -332,7 +332,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
   shortcutFns[DPR_CMD_GOTO_INDEX] = {
     canExecuteStr: 'true',
-    executeStr: `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
+    executeStr: `openXMLindex('${sectionId}', '${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
     titleStr: null,
     visibleStr: 'true',
   };
@@ -402,12 +402,12 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
 
 // output header
 
-  initializeMainPaneOutput();
+  initializeMainPaneOutput(sectionId);
   writeNavigationHeaderForSection(titleout[0], modt, range, place[8]);
 
-  $('#mafbc').append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
+  $(`${sectionId} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
-  $('#mafbc').append('<div id="savei">'+titleout[1]+'</div>');
+  $(`${sectionId} #mafbc`).append('<div id="savei">'+titleout[1]+'</div>');
 
 // output body
 
@@ -514,7 +514,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     }
   }
 
-  var outData = await outputFormattedData(theData,0,place,shortcutFns);
+  var outData = await outputFormattedData(sectionId,theData,0,place,shortcutFns);
   resolveCommands(shortcutFns);
   makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
@@ -569,7 +569,7 @@ function resolveCommands(shortcutFns) {
   $("body").append(scriptStr);
 }
 
-async function loadXMLindex(place,compare) {
+async function loadXMLindex(sectionId,place,compare) {
   __dprViewModel.showMainFeatures();
 
   var isDev = false; // dev tool
@@ -600,7 +600,7 @@ async function loadXMLindex(place,compare) {
   else
     var xset = isPlace?(place[8]?place[8]:0):0;
 
-  DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee(sectionId);
 
   var nikaya = place[0];
   var bookno = parseInt(place[1]);
@@ -1032,7 +1032,7 @@ async function loadXMLindex(place,compare) {
   };
   var main = '';
 
-  $('#mafbc').html('');
+  $(`${sectionId} #mafbc`).html('');
 
   // toolbox
 
@@ -1085,12 +1085,12 @@ async function loadXMLindex(place,compare) {
     return [tabT,saveout];
 
   if (DPR_PAL.isWeb){
-    initializeMainPaneOutput();
+    initializeMainPaneOutput(sectionId);
     writeNavigationHeader(tabT);
   }
-  $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
-  $('#mafbc').append('<div id="savei">'+saveout+'</div>');
-  $('#mafbc').append('<div id="convi">'+convout+'</div>');
+  $(`${sectionId} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
+  $(`${sectionId} #mafbc`).append('<div id="savei">'+saveout+'</div>');
+  $(`${sectionId} #mafbc`).append('<div id="convi">'+convout+'</div>');
 
   // title, tab, link
 
@@ -1111,7 +1111,7 @@ async function loadXMLindex(place,compare) {
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
   DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-  $('#mafbc').append(`<div id="paliTextContent">${theDatao}</div>`);
+  $(`${sectionId} #mafbc`).append(`<div id="paliTextContent">${theDatao}</div>`);
   document.getElementById('maf').scrollTop = 0;
 
   // refresh history box
@@ -1150,7 +1150,7 @@ function saveCompilation() {
 }
 
 
-async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
+async function compareVersions(sectionId, [nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
 
   var nikbookhier = nikaya + (book+1) + hier;
 
@@ -1200,7 +1200,7 @@ async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier
     }
   }
 
-  $('#mafbc').html(out);
+  $(`${sectionId} #mafbc`).html(out);
 }
 
 

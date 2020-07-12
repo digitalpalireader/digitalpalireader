@@ -198,7 +198,8 @@ const DPR_G = {
   xyt : null,
   skt : null,
   sktR : null,
-  G_lastsearch : null
+  G_lastsearch : null,
+  PrimaryMainPaneContainerSectionId: '#main-pane-container-section-0',
 };
 
 const initDPR_GList = Object.keys(DPR_G);
