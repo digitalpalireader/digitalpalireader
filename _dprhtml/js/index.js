@@ -58,7 +58,7 @@ function installGlobalHandlers() {
 }
 
 const loadFeatureAsync = async (sectionId, name, initFn) => {
-  await loadHtmlFragmentAsync(`#main-pane-container`, `features/${name}/main-pane.html`);
+  await loadHtmlFragmentAsync(`${sectionId} #mafbc`, `features/${name}/main-pane.html`);
   __dprViewModel.showMainFeatures();
   await initFn(sectionId);
   initFeedbackFormParameters();

@@ -16,16 +16,12 @@ DPR_G.G_thisPara = null;
 
 const emptyFnStr = `(() => {})()`;
 
-async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,compare)
+async function loadXMLSection(sectionId, querystring,para,place,isPL)
 {
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
 
   DPR_G.G_thisPara = null;
-
-  if(compare)
-    DPR_G.G_compare = compare;
-  else compare = DPR_G.G_compare;
 
   for(var i=1;i<7;i++) {
     if(place[i] == 'x') {
@@ -120,9 +116,6 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,comp
   if(para)
     newparams += '&para='+para;
 
-  if(scroll)
-    newparams += '&scroll='+scroll;
-
   if(place[8])
     newparams += '&alt=1';
 
@@ -153,9 +146,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,comp
 
     oldparams = oldparams.replace(/\&*(analysis|ped|dppn|frombox)=[^&]+/g,'').replace(/^\&/g,'');
 
-    oldparams = oldparams.split('|');
-    oldparams[compare-1] = newparams;
-    newparams = oldparams.join('|')+bparams;
+    newparams = oldparams + bparams;
   }
 
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
@@ -521,9 +512,6 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,comp
   if(opara) {
     scrollMainPane(document.getElementById('para'+opara).offsetTop);
   }
-  else if(scroll) {
-    scrollMainPane(scroll);
-  }
 
 // add to history
 
@@ -569,17 +557,12 @@ function resolveCommands(shortcutFns) {
   $("body").append(scriptStr);
 }
 
-async function loadXMLindex(sectionId,place,compare) {
+async function loadXMLindex(sectionId,place) {
   __dprViewModel.showMainFeatures();
 
   var isDev = false; // dev tool
   var DshowH = false; // dev tool
   //DPR_G.devCheck = 1; // dev tool
-
-  if(compare)
-    DPR_G.G_compare = compare;
-  else
-    compare = DPR_G.G_compare;
 
   var isPlace = place.length > 3?true:false;
 
@@ -676,9 +659,7 @@ async function loadXMLindex(sectionId,place,compare) {
 
     var oldparams = oldurl.split('?')[1];
     if(oldparams) {
-      oldparams = oldparams.split('|');
-      oldparams[compare-1] = newparams;
-      newparams = oldparams.join('|');
+      newparams = oldparams;
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
@@ -1104,15 +1085,13 @@ async function loadXMLindex(sectionId,place,compare) {
   bareurl += newparams;
   var oldparams = oldurl.split('?')[1];
   if(oldparams) {
-    oldparams = oldparams.split('|');
-    oldparams[compare-1] = newparams;
-    newparams = oldparams.join('|');
+    newparams = oldparams;
   }
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
   DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
   $(`${sectionId} #mafbc`).append(`<div id="paliTextContent">${theDatao}</div>`);
-  document.getElementById('maf').scrollTop = 0;
+  $(`${sectionId} #maf`)[0].scrollTop = 0;
 
   // refresh history box
 

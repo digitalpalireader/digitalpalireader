@@ -400,7 +400,7 @@ var DPR_Chrome = (function () {
   const loadSuttaSection = async (sInfo, sid, q, p) => {
     switch (sInfo.place.length) {
       case 3:
-        await DPR_xml_mod.loadXMLindex(sid, sInfo.place, false);
+        await DPR_xml_mod.loadXMLindex(sid, sInfo.place);
         break;
       case 8:
         await DPR_xml_mod.loadXMLSection(sid, q, p, sInfo.place);
@@ -417,7 +417,9 @@ var DPR_Chrome = (function () {
     const sectionIdName = `main-pane-container-section-${sPos}`
     const sectionId = `#${sectionIdName}`
 
-    createSectionFragment(sectionIdName, sPos, sInfo);
+    if (sectionId !== section0Id) {
+      createSectionFragment(sectionIdName, sPos, sInfo);
+    }
 
     if (sInfo.type === 'dpr') {
       await loadSuttaSection(sInfo, sectionId, section0Query, section0Para);
