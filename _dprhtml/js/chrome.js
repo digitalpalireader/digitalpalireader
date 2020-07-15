@@ -323,7 +323,7 @@ var DPR_Chrome = (function () {
     const totalSplitterWidth = sectionElements.splitters.reduce((acc, e) => acc + e.width(), 0)
     sectionElements.sections.forEach(x => x.width((availableWidth - totalSplitterWidth) / sectionElements.sections.length));
 
-    const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x);
+    const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x).slice(1);
     const locMutator = loc => {
       const [first, ..._] = loc.split('|');
       return `${[first, ...uris].join('|')}`;
@@ -351,25 +351,78 @@ var DPR_Chrome = (function () {
     return false
   }
 
-  const addMainPanelSection = (sInfo, fixupUrlAndLayout = true) => {
-    if (sInfo.type === 'dpr') {
-      return;
-    }
+  const createSuttaSectionContentFragment = () =>
+    `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>
+    <hr class="mx-2 mb-0" />
+    <div id="content">
+      <div id="top-frame">
+        <div id="matrelc"></div>
+        <div id="diva" onmouseover="document.body.style.cursor='auto'">
+          <div id="maf">
+            <div style="text-align: left" id="mafa" class="paperback"></div>
+            <div style="text-align: justify" id="mafb" class="paperback">
+              <div id="mafbc">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`
 
-    let sPos = $('#main-pane-container').attr('data-nextspos');
-    sPos = parseInt(sPos ? sPos : '1');
+  const createTranslationSectionContentFragment = (sPos, sInfo) =>
+    `<iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
+    </iframe>`
+
+  const createSectionFragment = (sectionIdName, sPos, sInfo) => {
+    const content = sInfo.type === 'dpr'
+      ? createSuttaSectionContentFragment()
+      : createTranslationSectionContentFragment(sPos, sInfo)
+
+    const splitter = sPos === 0
+      ? ''
+      : `<div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>`
+    const closeButton = sPos === 0
+      ? ''
+      : `<button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>`
 
     const html = `
-  <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
-  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
-    <button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
-    <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
-    </iframe>
-  </div>`;
+    ${splitter}
+    <div class="main-pane-container-section" id="${sectionIdName}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+      ${closeButton}
+      ${content}
+    </div>`;
 
     $('#main-pane-container').append(`${html}`);
+  }
+
+  const loadSuttaSection = async (sInfo, sid, q, p) => {
+    switch (sInfo.place.length) {
+      case 3:
+        await DPR_xml_mod.loadXMLindex(sid, sInfo.place, false);
+        break;
+      case 8:
+        await DPR_xml_mod.loadXMLSection(sid, q, p, sInfo.place);
+        break;
+      default:
+        console.error('Unsupported place format ', sInfo.place);
+        break;
+    }
+  }
+
+  const addMainPanelSection = async (sInfo, fixupUrlAndLayout = true, section0Id = null, section0Query = null, section0Para = null) => {
+    let sPos = $('#main-pane-container').attr('data-nextspos');
+    sPos = parseInt(sPos);
+    const sectionIdName = `main-pane-container-section-${sPos}`
+    const sectionId = `#${sectionIdName}`
+
+    createSectionFragment(sectionIdName, sPos, sInfo);
+
+    if (sInfo.type === 'dpr') {
+      await loadSuttaSection(sInfo, sectionId, section0Query, section0Para);
+    }
+
     $('#main-pane-container').attr('data-nextspos', sPos + 1);
 
     if (fixupUrlAndLayout) {
@@ -377,9 +430,12 @@ var DPR_Chrome = (function () {
     }
   }
 
-  const addMainPanelSections = places => {
-    places.forEach(p => addMainPanelSection(p, false));
-    fixupUrlAndMainPanelSectionsLayout();
+  const addMainPanelSections = async (sInfos, section0Id, section0Query, section0Para) => {
+    for (let i = 0; i < sInfos.length; i++) {
+      await addMainPanelSection(sInfos[i], false, section0Id, section0Query, section0Para)
+    }
+
+    fixupUrlAndMainPanelSectionsLayout()
   }
 
   const closeContainerSection = position => {

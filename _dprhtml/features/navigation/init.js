@@ -54,7 +54,6 @@ class NavigationTabViewModel {
     this.navSuttaInfo = ko.computed(function() { return this.computePartInfo(3); }, this);
     this.navSectionInfo = ko.computed(function() { return this.computePartInfo(4); }, this);
 
-    this.placeArray = ko.observableArray();
     this.query = ko.observable('');
     this.para = ko.observable('');
 
@@ -78,18 +77,13 @@ class NavigationTabViewModel {
 
   initializeSets() {
     Object
-    .entries(DPR_G.G_nikFullNames)
-    .forEach(([value, label]) => this.navset.push({ value, label: DPR_translit_mod.translit(label) }));
-  }
-
-  place(place){
-    this.placeArray(place);
-    DPRNav.gotoPlace(place);
+      .entries(DPR_G.G_nikFullNames)
+      .forEach(([value, label]) => this.navset.push({ value, label: DPR_translit_mod.translit(label) }));
   }
 
   setPlaces(places) {
-    this.places(places);
-    this.place(places[0].place)
+    this.places(places)
+    DPRNav.gotoPlace(places[0].place)
   }
 
   navPartOptionsEmpty(opts) {
@@ -160,20 +154,11 @@ const __navigationTabViewModel = new NavigationTabViewModel();
 
 const initializeNavigationFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
-  let place = __navigationTabViewModel.placeArray();
-  switch(place.length){
-    case 3:
-      await DPR_xml_mod.loadXMLindex(sectionId, place,false);
-      break;
-    case 8:
-      await DPR_xml_mod.loadXMLSection(sectionId, __navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
-      break;
-    default:
-      console.error('Unsupported place format ', place);
-      break;
-  }
-
-  DPR_Chrome.addMainPanelSections(__navigationTabViewModel.places());
+  await DPR_Chrome.addMainPanelSections(
+    __navigationTabViewModel.places(),
+    sectionId,
+    __navigationTabViewModel.query(),
+    __navigationTabViewModel.para());
 }
 
 const parseNavigationURLParams = () => {

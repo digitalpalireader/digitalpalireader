@@ -34,7 +34,7 @@ const createTrProps = () => {
       id: 3,
       baseUrl: `Not yet implemented`,
       icon: `?`,
-      background: 'red',
+      background: 'transparent',
       priority: 1,
     },
     dt: {
@@ -54,10 +54,10 @@ const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
 
 const parsePlace = inplace => {
-  const pparts = /^((ati|abt|bt|dt):\/\/)?(.*)$/.exec(inplace);
-  return pparts[2]
-    ? { type: pparts[2], place: pparts[3], }
-    : { type: 'dpr', place: DPR_receive_mod.makeLocPlace(pparts[3]), };
+  const pparts = /^((dpr|ati|abt|bt|dt):\/\/)?(.*)$/.exec(inplace);
+  return !pparts[2] || pparts[2] === 'dpr'
+    ? { type: 'dpr', place: DPR_receive_mod.makeLocPlace(pparts[3]), }
+    : { type: pparts[2], place: pparts[3], };
 }
 
 function transLink(which,where,url,title) {

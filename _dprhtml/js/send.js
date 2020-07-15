@@ -384,7 +384,7 @@ function sendTranslate(input, add){
   }
 }
 
-function openTranslation(url,add) {
+async function openTranslation(url,add) {
   appInsights.trackEvent({ name: 'Open Translation',  properties: { url, add, }});
 
   if(add == 'right') return;
@@ -399,7 +399,7 @@ function openTranslation(url,add) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
       var doc = thisTabBrowser.contentDocument;
       var elem = doc.getElementById('dpr-tops');
-      DPR_Chrome.addMainPanelSection(sInfo);
+      await DPR_Chrome.addMainPanelSection(sInfo);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -411,7 +411,7 @@ function openTranslation(url,add) {
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
       var doc = oldTabBrowser.contentDocument;
       var elem = doc.getElementById('dpr-tops');
-      DPR_Chrome.addMainPanelSection(sInfo);
+      await DPR_Chrome.addMainPanelSection(sInfo);
       return;
     }
   }
