@@ -400,16 +400,16 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL,scroll,comp
     }
   }
 
-// output header
+  // output header
 
   initializeMainPaneOutput(sectionId);
-  writeNavigationHeaderForSection(titleout[0], modt, range, place[8]);
+  writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
 
   $(`${sectionId} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
   $(`${sectionId} #mafbc`).append('<div id="savei">'+titleout[1]+'</div>');
 
-// output body
+  // output body
 
   var theData = '';
   // check if there is a search going on and add the labels
@@ -1086,7 +1086,7 @@ async function loadXMLindex(sectionId,place,compare) {
 
   if (DPR_PAL.isWeb){
     initializeMainPaneOutput(sectionId);
-    writeNavigationHeader(tabT);
+    writeNavigationHeader(sectionId, tabT);
   }
   $(`${sectionId} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
   $(`${sectionId} #mafbc`).append('<div id="savei">'+saveout+'</div>');

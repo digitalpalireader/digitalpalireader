@@ -252,12 +252,12 @@ const initializeMainPaneOutput = sectionId => {
   $(`${sectionId} #mafbc`).html('');
 }
 
-const writeNavigationHeader = (tabT) => {
-  $('#main-pane-container-section-0-header').html(tabT);
+const writeNavigationHeader = (sectionId, tabT) => {
+  $(`${sectionId} #main-pane-container-section-header`).html(tabT);
 }
 
-const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-pane-container-section-0-header').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+const writeNavigationHeaderForSection = (sectionId, titleout0, modt, range, place8) => {
+  $(`${sectionId} #main-pane-container-section-header`).html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {

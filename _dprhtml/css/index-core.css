@@ -458,7 +458,7 @@ body .bd-highlight {
  * Navigation
  */
 
-#main-pane-container-section-0 #main-pane-container-section-0-header {
+.main-pane-container-section #main-pane-container-section-header {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -466,11 +466,11 @@ body .bd-highlight {
   justify-content: center;
 }
 
-#main-pane-container-section-0 #main-pane-container-section-0-header p {
+.main-pane-container-section #main-pane-container-section-header p {
   margin: 0rem;
 }
 
-#main-pane-container-section-0 #main-pane-container-section-0-header div a {
+.main-pane-container-section #main-pane-container-section-header div a {
   margin: 0rem;
 }
 
