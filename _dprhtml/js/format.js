@@ -60,7 +60,7 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
     var convDiv = document.createElement('div');
     convDiv.setAttribute('id','convi');
     convDiv.innerHTML = convout;
-    $(`${sectionId} #mafbc`)[0].appendChild(convDiv);
+    $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`)[0].appendChild(convDiv);
 
     var saveDiv = $('#savei');
     saveDiv.html(saveDiv.html()+saveout);
@@ -71,9 +71,9 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
   if (!DPR_PAL.isXUL) {
     outDiv.id="paliTextContent";
   }
-  $(`${sectionId} #mafbc`)[0].appendChild(outDiv);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`)[0].appendChild(outDiv);
 
-  $(`${sectionId} #maf`)[0].scrollTop = 0;
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #maf`)[0].scrollTop = 0;
 
 }
 
@@ -470,7 +470,7 @@ async function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click
 
 async function analyzeTextPad(sectionId, text) {
   var titleout = await convtitle('Input From Scratchpad',' ',' ',' ',' ',' ',' ',' ');
-  $(`${sectionId} #mafbc`).html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('<table width=100%><tr><td align=left></td><td align=center>'+titleout[0]+'</td><td id="maftrans" align="right"></td></tr></table>');
   await outputFormattedData(sectionId,'<p> '+text.replace(/\n/g,' <p> ').replace(/\t/g,' '),2);
 }
 
@@ -561,8 +561,8 @@ function clearDivs(sectionId, which) { // place divs to be cleared here
     $('#anfb').html('<div align=left id="anfc"></div><div align=right id="anfd"></div>');
   }
   if (!which || which.indexOf('maf') > -1) { // analyze frame stuff
-    $(`${sectionId} #mafbc`).html('');
-    $(`${sectionId} #matrelc`).html('');
+    $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
+    $(`${DPR_Chrome.getSectionElementId(sectionId)} #matrelc`).html('');
   }
 
   if (!which || which.indexOf('search') > -1) { // search frame stuff

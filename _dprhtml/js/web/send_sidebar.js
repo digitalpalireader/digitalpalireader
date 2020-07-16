@@ -15,7 +15,7 @@ var DPRSend = {
 
   importXML: async function (section, labelsearch, para, isPL, add, scroll, cat) {
 
-    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+    const sectionId = DPR_Chrome.getPrimarySectionId()
 
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
@@ -194,7 +194,7 @@ var DPRSend = {
   },
 
   openPlace: async function ([nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
-    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+    const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (!nikaya || add == 'right') return;
 
@@ -265,7 +265,7 @@ var DPRSend = {
   },
 
   openIndex: async function ([nikaya, book, hiert], add) {
-    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+    const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (!nikaya || add == 'right') return;
     if (!add) { // reuse old tab
@@ -449,7 +449,7 @@ var DPRSend = {
 
     appInsights.trackEvent({ name: 'Search',  properties: { hard, add, which, getstring, opts, }});
 
-    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+    const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (add == 'right') return;
     if (!getstring) {
@@ -519,7 +519,7 @@ var DPRSend = {
 
     appInsights.trackEvent({ name: 'Search',  properties: { add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX, }});
 
-    const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+    const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (add == 'right') return;
 

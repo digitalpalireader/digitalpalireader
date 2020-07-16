@@ -52,7 +52,7 @@ async function paliXML(filein,which,add)
 
   await DPR_PAL.addJS(['ped']);
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
   if(add == true) {
@@ -237,7 +237,7 @@ async function DPPNXML(filein,which,add)
 
   await DPR_PAL.addJS(['dppn','nameno']);
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
   if(add == true) {
@@ -359,7 +359,7 @@ async function sktRXML(no,add)
 {
   appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
   if(add == true) {
@@ -426,7 +426,7 @@ async function sktXML(entry,idx,which,add)
 
   await DPR_PAL.addJS(['/sa/dict/index.js']);
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
   if(add == true) {

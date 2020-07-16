@@ -91,7 +91,7 @@ async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) 
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
   $(`#${DPR_PAL.getDifId()}`).html('');
-  $(`${sectionId} #main-pane-container-section-header`).html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 
   DPR_G.G_dictQuery = DPR_G.G_dictQuery.toLowerCase();
 
@@ -192,7 +192,7 @@ async function pedsearchstart(sectionId, hard)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>PED entry search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>PED entry search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var outDiv = document.createElement('div');
 
@@ -223,7 +223,7 @@ async function pedsearchstart(sectionId, hard)
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_G.PrimaryMainPaneContainerSectionId, 1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_Chrome.getPrimarySectionId(), 1)">Show Suggestions</a><br>');
 
     }
   }
@@ -287,7 +287,7 @@ async function pedFullTextSearch(sectionId, getstring) {
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<div><a name="diftop">PED full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<div><a name="diftop">PED full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:</div>');
 
   // word list
 
@@ -397,7 +397,7 @@ async function dppnsearchstart(sectionId, hard)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>DPPN entry search for <b style="color:'+DPR_G.DPR_prefs['coldppn']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>DPPN entry search for <b style="color:'+DPR_G.DPR_prefs['coldppn']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var listoutf = '';
 
@@ -428,7 +428,7 @@ async function dppnsearchstart(sectionId, hard)
       else listoutf += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.dppnsearchstart(DPR_G.PrimaryMainPaneContainerSectionId, 1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.dppnsearchstart(DPR_Chrome.getPrimarySectionId(), 1)">Show Suggestions</a><br>');
 
     }
   }
@@ -528,7 +528,7 @@ async function dppnFullTextSearch(sectionId, getstring) {
     listoutf += '<tr><td>'+listouta[z]+'</td><td>'+(listouta[findiv+z]?listouta[findiv+z]:'')+'</td><td>'+(listouta[(findiv*2)+z]?listouta[(findiv*2)+z]:'')+'</td></tr>';
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<div><a name="diftop">DPPN full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<div><a name="diftop">DPPN full-text search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:</div>'+ listoutf);
 
   var finout = DPR_sortaz_mod.sortaz(finalouta).join('\n');
 
@@ -601,7 +601,7 @@ function mlsearchstart(sectionId,hard)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>CPED search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<table width=100%><tr><td valign="top">');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>CPED search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:<table width=100%><tr><td valign="top">');
 
   if(finouta.length == 0) {
     finout += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -626,7 +626,7 @@ function mlsearchstart(sectionId,hard)
       else finout += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="DPR_dict_mod.mlsearchstart(DPR_G.PrimaryMainPaneContainerSectionId,1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colcpd']+'" onclick="DPR_dict_mod.mlsearchstart(DPR_Chrome.getPrimarySectionId(),1)">Show Suggestions</a><br>');
 
     }
   }
@@ -768,7 +768,7 @@ function multisearchstart(sectionId, hard)
 
   var outDiv = document.createElement('div');
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p><span style="color:'+DPR_G.DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_G.DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_G.DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_G.DPR_prefs['colsel']+'">'+getstring+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p><span style="color:'+DPR_G.DPR_prefs['colped']+'" >PED</span>, <span style="color:'+DPR_G.DPR_prefs['coldppn']+'" >DPPN</span>, &amp; <span style="color:'+DPR_G.DPR_prefs['colcpd']+'" >CPED</span> entry search for <b style="color:'+DPR_G.DPR_prefs['colsel']+'">'+getstring+'</b>:');
 
   if(finouta.length == 0) {
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
@@ -826,7 +826,7 @@ function multisearchstart(sectionId, hard)
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_G.PrimaryMainPaneContainerSectionId, 1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_Chrome.getPrimarySectionId(), 1)">Show Suggestions</a><br>');
 
     }
   }
@@ -900,7 +900,7 @@ function epdsearchstart(sectionId)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>CEPD search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>CEPD search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   finout = '<table width=100%><tr><td valign="top">';
   if(finouta.length == 0) {
@@ -990,7 +990,7 @@ function attsearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1082,7 +1082,7 @@ function tiksearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1210,7 +1210,7 @@ function titlesearchstart(sectionId)
 
   var findiv = Math.ceil(y/2);
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:');
 
   var listoutf = '';
   if(y == 0) {
@@ -1301,7 +1301,7 @@ async function paliRootsearchstart(sectionId)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Pali Roots search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Pali Roots search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(getstring):DPR_translit_mod.toUni(getstring))+'</b>:');
 
   finout = '<table width=100%><tr><td valign="top">';
   if(finouta.length == 0) {
@@ -1384,7 +1384,7 @@ async function sktsearchstart(sectionId)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Sanskrit search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Sanskrit search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
 
 
   var outDiv = document.createElement('div');
@@ -1409,7 +1409,7 @@ async function sktsearchstart(sectionId)
       else outDiv.innerHTML += '<p>No suggestions.</p>';
     }
     else {
-      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_G.PrimaryMainPaneContainerSectionId, 1)">Show Suggestions</a><br>');
+      finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR_dict_mod.pedsearchstart(DPR_Chrome.getPrimarySectionId(), 1)">Show Suggestions</a><br>');
 
     }
   }
@@ -1484,7 +1484,7 @@ async function sktRootsearchstart(sectionId)
     }
   }
 
-  $(`${sectionId} #main-pane-container-section-header`).append('<p>Skt Root search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Skt Root search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+(/rx/.exec(DPR_G.G_dictOpts)?DPR_translit_mod.toUniRegEx(DPR_G.G_dictQuery):DPR_translit_mod.toUni(DPR_G.G_dictQuery))+'</b>:');
 
   var outDiv = document.createElement('div');
 

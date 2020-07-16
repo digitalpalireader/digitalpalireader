@@ -249,19 +249,19 @@ function DPRShowBottomPane(tabIdToActivate = 'D') {
 }
 
 const initializeMainPaneOutput = sectionId => {
-  $(`${sectionId} #mafbc`).html('');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
 }
 
 const writeNavigationHeader = (sectionId, tabT) => {
-  $(`${sectionId} #main-pane-container-section-header`).html(tabT);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html(tabT);
 }
 
 const writeNavigationHeaderForSection = (sectionId, titleout0, modt, range, place8) => {
-  $(`${sectionId} #main-pane-container-section-header`).html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-container-section-0').scrollTop(scrollTop);
+  $(DPR_Chrome.getPrimarySectionElementId()).scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {
@@ -351,7 +351,19 @@ var DPR_Chrome = (function () {
     return false
   }
 
-  const isPrimarySectionId = id => id === DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionIdPrefix = 'main-pane-container-section-'
+
+  const sectionIdCracker = new RegExp(`^#(${sectionIdPrefix})(\\d+)$`)
+
+  const getPrimarySectionId = () => 0
+
+  const getSectionElementIdName = id => `${sectionIdPrefix}${id}`
+
+  const getSectionElementId = id => `#${getSectionElementIdName(id)}`
+
+  const getPrimarySectionElementId = () => getSectionElementId(getPrimarySectionId())
+
+  const isPrimarySectionId = id => id === getPrimarySectionId()
 
   const createSuttaSectionContentFragment = () =>
     `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>
@@ -375,7 +387,7 @@ var DPR_Chrome = (function () {
     `<iframe class="main-pane-container-section-iframe">
     </iframe>`
 
-  const createSectionFragment = (sectionIdName, sPos, sInfo) => {
+  const createSectionFragment = (sPos, sInfo) => {
     const splitter = sPos === 0
       ? ''
       : `<div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>`
@@ -392,7 +404,7 @@ var DPR_Chrome = (function () {
 
     const html = `
     ${splitter}
-    <div class="main-pane-container-section" id="${sectionIdName}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
       ${closeButton}
       ${content}
     </div>`;
@@ -400,13 +412,13 @@ var DPR_Chrome = (function () {
     $('#main-pane-container').append(`${html}`);
   }
 
-  const loadSuttaSection = async (sInfo, sid, q, p) => {
+  const loadSuttaSection = async (sInfo, sectionId, q, p) => {
     switch (sInfo.place.length) {
       case 3:
-        await DPR_xml_mod.loadXMLindex(sid, sInfo.place);
+        await DPR_xml_mod.loadXMLindex(sectionId, sInfo.place);
         break;
       case 8:
-        await DPR_xml_mod.loadXMLSection(sid, q, p, sInfo.place);
+        await DPR_xml_mod.loadXMLSection(sectionId, q, p, sInfo.place);
         break;
       default:
         console.error('Unsupported place format ', sInfo.place);
@@ -415,20 +427,19 @@ var DPR_Chrome = (function () {
   }
 
   const loadTranslationSection = (sInfo, sectionId) => {
-    $(`${sectionId} .main-pane-container-section-iframe`).attr('src', DPR_Translations.resolveUri(sInfo))
+    $(`${getSectionElementId(sectionId)} .main-pane-container-section-iframe`).attr('src', DPR_Translations.resolveUri(sInfo))
   }
 
   const addOrOpenMainPanelSection = async (sInfo, fixupUrlAndLayout = true, targetSectionId = null, section0Query = null, section0Para = null) => {
     let sectionId = targetSectionId
-    if (!sectionId) {
+    if (sectionId === null) { // NOTE: 0 is a valid value.
       let sPos = parseInt($('#main-pane-container').attr('data-nextspos'));
-      sectionId = `#main-pane-container-section-${sPos}`
+      sectionId = sPos
     }
 
-    if (!$(sectionId).length) {
-      const parts = sectionId.match(/#(main-pane-container-section-)(\d+)/)
-      const sPos = parseInt(parts[2])
-      createSectionFragment(`${parts[1]}${parts[2]}`, sPos, sInfo);
+    if ($(getSectionElementId(sectionId)).length === 0) {
+      const sPos = sectionId
+      createSectionFragment(sPos, sInfo);
       $('#main-pane-container').attr('data-nextspos', sPos + 1);
     }
 
@@ -453,9 +464,9 @@ var DPR_Chrome = (function () {
   }
 
   const closeContainerSection = position => {
-    $(`#main-pane-container-section-${position}`).resizable('destroy')
+    $(`${getSectionElementId(position)}`).resizable('destroy')
     $(`#main-pane-container-splitter-${position}`).remove()
-    $(`#main-pane-container-section-${position}`).remove()
+    $(`${getSectionElementId(position)}`).remove()
     fixupUrlAndMainPanelSectionsLayout()
   }
 
@@ -540,5 +551,8 @@ var DPR_Chrome = (function () {
     showSingletonInformationToast: showSingletonInformationToast,
     ToastTypeInfo: ToastTypeInfo,
     isPrimarySectionId: isPrimarySectionId,
+    getPrimarySectionId: getPrimarySectionId,
+    getSectionElementId: getSectionElementId,
+    getPrimarySectionElementId: getPrimarySectionElementId,
   };
 })();

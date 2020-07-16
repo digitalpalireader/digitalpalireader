@@ -12,7 +12,7 @@ function eventSend(event,internal) {
 async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
   appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
 

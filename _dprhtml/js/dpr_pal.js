@@ -61,11 +61,11 @@
 
   DPR_PAL.showLoadingMarquee = sectionId => {
     if (DPR_PAL.isXUL) {
-      $(`${sectionId} #mafbc`).html('');
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
       document.getElementById('mafbc').appendChild(DPR_G.pleasewait);
     } else {
-      $(`${sectionId} #mafbc`).empty();
-      $(`${sectionId} #mafbc`).append(DPR_G.pleasewait);
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).empty();
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append(DPR_G.pleasewait);
     }
   };
 

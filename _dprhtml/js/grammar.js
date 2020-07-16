@@ -7,7 +7,7 @@ var DPR_grammar_mod = ( function () {
 function conjugate(word, id, which) {
   appInsights.trackEvent({ name: 'Conjugate',  properties: { word, id, which, }});
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(DPR_G.DPR_prefs['nigahita'] && which) {
     which = which.replace(/ṁ/g, 'ṃ');

@@ -513,7 +513,7 @@
     <script src="/_dprhtml/js/index.js"></script>
     <script>progressBar.go(100)</script>
     <script>
-      $(document).ready(() => mainInitialize(DPR_G.PrimaryMainPaneContainerSectionId));
+      $(document).ready(mainInitialize);
       const getFuncList = () => JSON.stringify(
         Object.keys(window)
           .sort()

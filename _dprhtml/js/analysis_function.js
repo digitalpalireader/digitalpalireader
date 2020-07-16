@@ -11,7 +11,7 @@ async function outputAnalysis(input,frombox) {
 
   await DPR_PAL.addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
 
-  const sectionId = DPR_G.PrimaryMainPaneContainerSectionId
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   //ddump('',1,1);
   DPR_G.G_outwords = [];

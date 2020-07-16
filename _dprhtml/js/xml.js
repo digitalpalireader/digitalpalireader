@@ -400,9 +400,9 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   initializeMainPaneOutput(sectionId);
   writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
 
-  $(`${sectionId} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
-  $(`${sectionId} #mafbc`).append('<div id="savei">'+titleout[1]+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savei">'+titleout[1]+'</div>');
 
   // output body
 
@@ -549,7 +549,7 @@ const resolveCommand = (id, cmdCfg) => `
 `;
 
 function resolveCommands(sectionId, shortcutFns) {
-  if (sectionId !== DPR_G.PrimaryMainPaneContainerSectionId) {
+  if (!DPR_Chrome.isPrimarySectionId(sectionId)) {
     return
   }
 
@@ -1025,7 +1025,7 @@ async function loadXMLindex(sectionId,place) {
   };
   var main = '';
 
-  $(`${sectionId} #mafbc`).html('');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
 
   // toolbox
 
@@ -1082,9 +1082,9 @@ async function loadXMLindex(sectionId,place) {
     initializeMainPaneOutput(sectionId);
     writeNavigationHeader(sectionId, tabT);
   }
-  $(`${sectionId} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
-  $(`${sectionId} #mafbc`).append('<div id="savei">'+saveout+'</div>');
-  $(`${sectionId} #mafbc`).append('<div id="convi">'+convout+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savei">'+saveout+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="convi">'+convout+'</div>');
 
   // title, tab, link
 
@@ -1103,8 +1103,8 @@ async function loadXMLindex(sectionId,place) {
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
   DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-  $(`${sectionId} #mafbc`).append(`<div id="paliTextContent">${theDatao}</div>`);
-  $(`${sectionId} #maf`)[0].scrollTop = 0;
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append(`<div id="paliTextContent">${theDatao}</div>`);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #maf`)[0].scrollTop = 0;
 
   // refresh history box
 
@@ -1192,7 +1192,7 @@ async function compareVersions(sectionId, [nikaya,book,meta,volume,vagga,sutta,s
     }
   }
 
-  $(`${sectionId} #mafbc`).html(out);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html(out);
 }
 
 

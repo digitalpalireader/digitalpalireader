@@ -22,7 +22,8 @@ const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
 
-async function mainInitialize(sectionId) {
+async function mainInitialize() {
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   await DPR_config_mod.getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
