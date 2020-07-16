@@ -53,6 +53,8 @@ const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
 
 const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
 
+const makeDprPlace = place => ({ type: 'dpr', place })
+
 const parsePlace = inplace => {
   const pparts = /^((dpr|ati|abt|bt|dt):\/\/)?(.*)$/.exec(inplace);
   return !pparts[2] || pparts[2] === 'dpr'
@@ -1010,7 +1012,8 @@ return {
   parsePlace: parsePlace,
   addtrans: addtrans,
   resolveUri: resolveUri,
-  makeUri: makeUri
+  makeUri: makeUri,
+  makeDprPlace: makeDprPlace,
 };
 
 })();

@@ -146,7 +146,11 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
     oldparams = oldparams.replace(/\&*(analysis|ped|dppn|frombox)=[^&]+/g,'').replace(/^\&/g,'');
 
-    newparams = oldparams + bparams;
+    oldparams = oldparams.split('|');
+    if (DPR_Chrome.isPrimarySectionId(sectionId)) {
+      oldparams[0] = newparams;
+    }
+    newparams = oldparams.join('|')+bparams;
   }
 
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
@@ -506,7 +510,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   }
 
   var outData = await outputFormattedData(sectionId,theData,0,place,shortcutFns);
-  resolveCommands(shortcutFns);
+  resolveCommands(sectionId, shortcutFns);
   makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
   if(opara) {
@@ -544,7 +548,11 @@ const resolveCommand = (id, cmdCfg) => `
     });
 `;
 
-function resolveCommands(shortcutFns) {
+function resolveCommands(sectionId, shortcutFns) {
+  if (sectionId !== DPR_G.PrimaryMainPaneContainerSectionId) {
+    return
+  }
+
   const cmdCfgs = Object.entries(shortcutFns).filter(x => x[1].executeStr).map(x => resolveCommand(x[0], x[1]));
   const scriptStr = `
 <script data-type="XMLJS">
@@ -659,7 +667,11 @@ async function loadXMLindex(sectionId,place) {
 
     var oldparams = oldurl.split('?')[1];
     if(oldparams) {
-      newparams = oldparams;
+      oldparams = oldparams.split('|');
+      if (DPR_Chrome.isPrimarySectionId(sectionId)) {
+        oldparams[0] = newparams;
+      }
+      newparams = oldparams.join('|');
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
@@ -1052,7 +1064,8 @@ async function loadXMLindex(sectionId,place) {
 
   }
 
-  resolveCommands(shortcutFns);
+
+  resolveCommands(sectionId, shortcutFns);
 
   // add header to saveout
 

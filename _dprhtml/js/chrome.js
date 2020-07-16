@@ -351,6 +351,8 @@ var DPR_Chrome = (function () {
     return false
   }
 
+  const isPrimarySectionId = id => id === DPR_G.PrimaryMainPaneContainerSectionId
+
   const createSuttaSectionContentFragment = () =>
     `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>
     <hr class="mx-2 mb-0" />
@@ -369,23 +371,24 @@ var DPR_Chrome = (function () {
       </div>
     </div>`
 
-  const createTranslationSectionContentFragment = (sPos, sInfo) =>
-    `<iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
+  const createTranslationSectionContentFragment = () =>
+    `<iframe class="main-pane-container-section-iframe">
     </iframe>`
 
   const createSectionFragment = (sectionIdName, sPos, sInfo) => {
-    const content = sInfo.type === 'dpr'
-      ? createSuttaSectionContentFragment()
-      : createTranslationSectionContentFragment(sPos, sInfo)
-
     const splitter = sPos === 0
       ? ''
       : `<div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>`
+
     const closeButton = sPos === 0
       ? ''
       : `<button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
         <i class="fa fa-times" aria-hidden="true"></i>
       </button>`
+
+    const content = sInfo.type === 'dpr'
+      ? createSuttaSectionContentFragment()
+      : createTranslationSectionContentFragment()
 
     const html = `
     ${splitter}
@@ -411,21 +414,29 @@ var DPR_Chrome = (function () {
     }
   }
 
-  const addMainPanelSection = async (sInfo, fixupUrlAndLayout = true, section0Id = null, section0Query = null, section0Para = null) => {
-    let sPos = $('#main-pane-container').attr('data-nextspos');
-    sPos = parseInt(sPos);
-    const sectionIdName = `main-pane-container-section-${sPos}`
-    const sectionId = `#${sectionIdName}`
+  const loadTranslationSection = (sInfo, sectionId) => {
+    $(`${sectionId} .main-pane-container-section-iframe`).attr('src', DPR_Translations.resolveUri(sInfo))
+  }
 
-    if (sectionId !== section0Id) {
-      createSectionFragment(sectionIdName, sPos, sInfo);
+  const addOrOpenMainPanelSection = async (sInfo, fixupUrlAndLayout = true, targetSectionId = null, section0Query = null, section0Para = null) => {
+    let sectionId = targetSectionId
+    if (!sectionId) {
+      let sPos = parseInt($('#main-pane-container').attr('data-nextspos'));
+      sectionId = `#main-pane-container-section-${sPos}`
+    }
+
+    if (!$(sectionId).length) {
+      const parts = sectionId.match(/#(main-pane-container-section-)(\d+)/)
+      const sPos = parseInt(parts[2])
+      createSectionFragment(`${parts[1]}${parts[2]}`, sPos, sInfo);
+      $('#main-pane-container').attr('data-nextspos', sPos + 1);
     }
 
     if (sInfo.type === 'dpr') {
       await loadSuttaSection(sInfo, sectionId, section0Query, section0Para);
+    } else {
+      loadTranslationSection(sInfo, sectionId)
     }
-
-    $('#main-pane-container').attr('data-nextspos', sPos + 1);
 
     if (fixupUrlAndLayout) {
       fixupUrlAndMainPanelSectionsLayout();
@@ -434,7 +445,8 @@ var DPR_Chrome = (function () {
 
   const addMainPanelSections = async (sInfos, section0Id, section0Query, section0Para) => {
     for (let i = 0; i < sInfos.length; i++) {
-      await addMainPanelSection(sInfos[i], false, section0Id, section0Query, section0Para)
+      const targetSectionId = i === 0 ? section0Id : null
+      await addOrOpenMainPanelSection(sInfos[i], false, targetSectionId, section0Query, section0Para)
     }
 
     fixupUrlAndMainPanelSectionsLayout()
@@ -519,7 +531,7 @@ var DPR_Chrome = (function () {
     toggleDPRSidebar: toggleDPRSidebar,
     openDPRSidebar: openDPRSidebar,
     closeDPRSidebar: openDPRSidebar,
-    addMainPanelSection: addMainPanelSection,
+    addOrOpenMainPanelSection: addOrOpenMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
     showErrorToast: showErrorToast,
@@ -527,5 +539,6 @@ var DPR_Chrome = (function () {
     showSuccessToast: showSuccessToast,
     showSingletonInformationToast: showSingletonInformationToast,
     ToastTypeInfo: ToastTypeInfo,
+    isPrimarySectionId: isPrimarySectionId,
   };
 })();

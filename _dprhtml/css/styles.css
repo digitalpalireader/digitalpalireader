@@ -799,7 +799,7 @@ font-family: 'courier new';
 
 /* paragraph types */
 
-.paratype03, .paratype01{
+.paliTextContent .paratype03, .paratype01, p {
   margin: 1.4rem;
 }
 
