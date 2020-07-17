@@ -993,11 +993,11 @@ async function loadXMLindex(sectionId,place) {
                     //~ p1 = parseInt(p1)+1;
                     //~ return p1;
                   //~ }
-                  var para = formatuniout('<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
+                  var para = formatuniout(sectionId, '<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
                 }
                 else {
                   var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
-                  var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+                  var para = formatuniout(sectionId, '<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
                 }
                 theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
                 convout += para[1].replace(/  *,/g, ',');

@@ -303,18 +303,20 @@ async function sendUpdateBookmarks() {
 
 DPR_G.G_lastcolour = 0;
 
-async function sendAnalysisToOutput(input, divclicked, frombox, add){
+async function sendAnalysisToOutput(sectionId, input, divclicked, frombox, add){
   appInsights.trackEvent({ name: 'Reading - DPR Analysis',  properties: { input, divclicked, frombox, add, }});
+
+  const sectionElementId = DPR_Chrome.getSectionElementId(sectionId)
 
   if(add == 'right') return;
   if(window.getSelection().toString())
     return;
   if(divclicked) {
-    divclicked = 'W'+divclicked;
-    var cdiv = document.getElementById(divclicked);
+    divclicked = `${sectionElementId} #W${divclicked}`
+    var cdiv = $(divclicked)[0]
     if (cdiv)
     {
-      var ldiv = document.getElementById(DPR_G.G_lastcolour);
+      var ldiv = $(DPR_G.G_lastcolour)[0]
       if (ldiv)
       {
         var lcn = ldiv.className;
@@ -336,7 +338,7 @@ async function sendAnalysisToOutput(input, divclicked, frombox, add){
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      await thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await thisTabBrowser.contentWindow.outputAnalysis(sectionId, input,frombox);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -347,7 +349,7 @@ async function sendAnalysisToOutput(input, divclicked, frombox, add){
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      await oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await oldTabBrowser.contentWindow.outputAnalysis(sectionId, input,frombox);
     }
   }
   else {

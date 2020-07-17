@@ -22,7 +22,7 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
     data = data.replace(/\^e*b\^/g, '');
   }
 
-  var inarray = preparepali(data,which);
+  var inarray = preparepali(sectionId,data,which);
 
   var finout = inarray[0];
 
@@ -78,7 +78,7 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
 }
 
 
-function formatuniout(data,which) { // which = 1 prepare without links, 2 with links
+function formatuniout(sectionId, data,which) { // which = 1 prepare without links, 2 with links
 
   var convout = '';
   var saveout = '';
@@ -179,7 +179,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
 		  if(which != 1) {
-		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
+		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
 		  }
 		  else {
 		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
@@ -196,7 +196,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       else {
         altplus += wb + ' ';
         if(DPR_G.DPR_prefs['showVariantsInline'] && which  != 1) {
-          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
+          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
           b++;
         }
       }
@@ -208,7 +208,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
-          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
+          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
           b++;
         }
@@ -222,7 +222,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         altplus = wb.substring(1) + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
           if(which  != 1) {
-			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
 		  }
 		  else {
 			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
@@ -282,7 +282,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
         convout += wb.replace(/<[^>]*>/g, '');
       }
       if(!which == 1) {// put it together as one link
-        finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
+        finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
       }
       finout += space;
       saveout += space;
@@ -365,7 +365,7 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
       unioutb = uniouta[a];
       //unioutb = unioutb.replace(/0/g, '.');
       unioutb = DPR_translit_mod.translit(unioutb);
-      finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
+      finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
       saveout += unioutb + space;
       b++;
     }
@@ -385,9 +385,9 @@ function formatuniout(data,which) { // which = 1 prepare without links, 2 with l
   return outarray;
 }
 
-function preparepali(data,which) { // standard text prep for algorithm
+function preparepali(sectionId,data,which) { // standard text prep for algorithm
 
-  var finout = formatuniout(data,which);
+  var finout = formatuniout(sectionId, data,which);
 
 
   // add search markers

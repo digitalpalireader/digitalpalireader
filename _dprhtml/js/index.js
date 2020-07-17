@@ -46,7 +46,7 @@ async function mainInitialize() {
   }
 
   initMainPane();
-  await checkAnalysis();
+  await checkAnalysis(sectionId);
 }
 
 function installGlobalHandlers() {
@@ -132,11 +132,11 @@ const initFeatureTabs = () => {
   });
 }
 
-const checkAnalysis = async () => {
+const checkAnalysis = async (sectionId) => {
   const location = document.location.href;
   if(location.indexOf('analysis')>-1) {
     const x = new URL(location);
-    await outputAnalysis(x.searchParams.get("analysis"), x.searchParams.get("frombox"));
+    await outputAnalysis(sectionId, x.searchParams.get("analysis"), x.searchParams.get("frombox"));
   }
 } //TODO: handle most parameters in a single function after Beta.
 

@@ -284,6 +284,7 @@ async function reanalyzeOnEnterKey(keyCode, word,cancel) {
 }
 
 async function reanalyze(word,cancel) {
+  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   $('#data-table').show();
   $('#modify-box').hide();
@@ -294,7 +295,7 @@ async function reanalyze(word,cancel) {
   }
 
   if($('#modify').val() != word)
-    await outputAnalysis($('#modify').val(),null);
+    await outputAnalysis(sectionId, $('#modify').val(),null);
 }
 
 return {

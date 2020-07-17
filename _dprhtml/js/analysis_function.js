@@ -7,11 +7,9 @@ DPR_G.devDump = 0;
 
 DPR_G.G_stopAnalyzing = 0;
 
-async function outputAnalysis(input,frombox) {
+async function outputAnalysis(sectionId, input,frombox) {
 
   await DPR_PAL.addJS(['ped','dppn','nameno','/en/cped/index.js','irreg','attlist','tiklist','titles']);
-
-  const sectionId = DPR_Chrome.getPrimarySectionId()
 
   //ddump('',1,1);
   DPR_G.G_outwords = [];
