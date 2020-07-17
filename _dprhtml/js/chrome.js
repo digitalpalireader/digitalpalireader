@@ -417,7 +417,7 @@ var DPR_Chrome = (function () {
       case 3:
         await DPR_xml_mod.loadXMLindex(sectionId, sInfo.place);
         break;
-      case 8:
+      case 8: case 9:
         await DPR_xml_mod.loadXMLSection(sectionId, q, p, sInfo.place);
         break;
       default:
@@ -433,14 +433,12 @@ var DPR_Chrome = (function () {
   const addOrOpenMainPanelSection = async (sInfo, fixupUrlAndLayout = true, targetSectionId = null, section0Query = null, section0Para = null) => {
     let sectionId = targetSectionId
     if (sectionId === null) { // NOTE: 0 is a valid value.
-      let sPos = parseInt($('#main-pane-container').attr('data-nextspos'));
-      sectionId = sPos
+      sectionId = parseInt($('#main-pane-container').attr('data-nextsectionid'))
     }
 
     if ($(getSectionElementId(sectionId)).length === 0) {
-      const sPos = sectionId
-      createSectionFragment(sPos, sInfo);
-      $('#main-pane-container').attr('data-nextspos', sPos + 1);
+      createSectionFragment(sectionId, sInfo);
+      $('#main-pane-container').attr('data-nextsectionid', sectionId + 1)
     }
 
     if (sInfo.type === 'dpr') {

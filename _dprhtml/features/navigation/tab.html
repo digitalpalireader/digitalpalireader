@@ -72,11 +72,11 @@
         <div class="form-group col mb-1">
           <label class="small-bold-font">Hierarchy</label>
           <div id="navigation-hierarchy" class="navigation-hierarchy-layout">
-            <button id="nav-title" type="button" class="btn btn-light m-0" title="View index for this book" onmouseup="DPRSend.importXMLindex(DPR_Chrome.getPrimarySectionId(), DPRSend.eventSend(event));"
+            <button id="nav-title" type="button" class="btn btn-light m-0" title="View index for this book (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)" onmouseup="DPRSend.importXMLindex(DPR_Chrome.getPrimarySectionId(), DPRSend.eventSend(event));"
               data-bind="text: navTitle"
             >
             </button>
-            <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" title="Combine all sub-sections" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
+            <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" title="Combine all sub-sections (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
               ≡
             </button>
 

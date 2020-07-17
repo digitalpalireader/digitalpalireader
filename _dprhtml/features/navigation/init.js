@@ -99,8 +99,8 @@ class NavigationTabViewModel {
 
     const isIndex = this.partVisibility.slice(part + 1).some(x => x());
     return isIndex
-      ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
-      : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
+      ? { text: '≡', title: 'Combine all sub-sections (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
+      : { text: '\u21D2', title: 'View this section (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
   }
 
   isStorageSupportedByBrowser() {
