@@ -73,6 +73,8 @@ class NavigationTabViewModel {
     this.initializeSets();
     this.updateHistory();
     this.updateBookmarks();
+
+    this.sectionId = DPR_Chrome.getPrimarySectionId()
   }
 
   initializeSets() {
@@ -109,7 +111,7 @@ class NavigationTabViewModel {
     if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
       let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
       let x = selectedHistItem[1].split(',');
-      x.length > 3 ? await DPRSend.openPlace(x) : await DPRSend.openIndex(x);
+      x.length > 3 ? await DPRSend.openPlace(this.sectionId, x) : await DPRSend.openIndex(this.sectionId, x);
     }
   }
 
@@ -131,7 +133,8 @@ class NavigationTabViewModel {
     if(ctx.selectedBookmarksItem() && ctx.selectedBookmarksItem() !== "-- Bookmarks --") {
       let selectedBookmItem = ctx.selectedBookmarksItem().toString().replace(/'/g, '').split('@');
       let x = selectedBookmItem[1].split(',');
-      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
+      const sectionId = DPR_Chrome.getPrimarySectionId()
+      x.length > 3 ? DPRSend.openPlace(sectionId, x) : DPRSend.openIndex(sectionId, x);
     }
   }
 

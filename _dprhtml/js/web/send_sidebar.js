@@ -193,9 +193,7 @@ var DPRSend = {
     }
   },
 
-  openPlace: async function ([nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
-    const sectionId = DPR_Chrome.getPrimarySectionId()
-
+  openPlace: async function (sectionId, [nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
     if (!nikaya || add == 'right') return;
 
     if (stringra) {
@@ -264,8 +262,7 @@ var DPRSend = {
     }
   },
 
-  openIndex: async function ([nikaya, book, hiert], add) {
-    const sectionId = DPR_Chrome.getPrimarySectionId()
+  openIndex: async function (sectionId, [nikaya, book, hiert], add) {
 
     if (!nikaya || add == 'right') return;
     if (!add) { // reuse old tab

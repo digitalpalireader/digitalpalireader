@@ -72,6 +72,7 @@ async function showBv(rnd) {
 }
 
 async function citation(cite,event) {
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   var paramsa = cite.split('&');
   var param = [];
   for(var i in paramsa) {
@@ -83,9 +84,9 @@ async function citation(cite,event) {
     loc[i] = parseInt(loc[i]);
   }
   if (DPR_PAL.isWeb) {
-    await openPlace(loc,param['para'],null,eventSend(event));
+    await openPlace(sectionId,loc,param['para'],null,eventSend(event));
   } else {
-    await mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(loc,param['para'],null,eventSend(event));
+    await mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(sectionId,loc,param['para'],null,eventSend(event));
   }
 
 }

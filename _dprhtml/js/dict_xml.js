@@ -470,6 +470,7 @@ async function sktXML(entry,idx,which,add)
 async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
   appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   if(type == 'a') {
     await DPR_PAL.addJS(['attlist']);
     var loca = DPR_G.attlist[num].split('#');
@@ -533,7 +534,7 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(DPR_Chrome.getPrimarySectionId(),z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(sectionId,z,1)[0]+'</p>';
     }
 
     displayDictData(finout);
@@ -546,7 +547,7 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
 
   await DPR_PAL.addJS(['titles']);
 
-
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   var loca = DPR_G.titlelist[num].split('#');
   var word = loca.shift();
 
@@ -642,7 +643,7 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
     const title = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1);
     var placen = title[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 
-        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
     displayDictData(finout);
     if (!DPR_PAL.isXUL) {

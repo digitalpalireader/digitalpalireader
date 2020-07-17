@@ -1296,7 +1296,7 @@ async function paliRootsearchstart(sectionId)
       }
       gsplit[1] = gs1.join(' ');
       var ln = DPR_G.rootsl[x].split('.');
-      finouta.push('<b><font style="color:'+DPR_G.DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +' <span class="pointer hoverShow" title="go to entry in Dhātumālā" onclick="openPlace([\'g\',3,'+ln[0]+',0,'+ln[1]+',0,0,\'m\'],'+(parseInt(ln[2])+1)+',null,eventSend(event))">&rarr;</span><br>');
+      finouta.push('<b><font style="color:'+DPR_G.DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +' <span class="pointer hoverShow" title="go to entry in Dhātumālā" onclick="openPlace(' + `${sectionId}, ` + '[\'g\',3,'+ln[0]+',0,'+ln[1]+',0,0,\'m\'],'+(parseInt(ln[2])+1)+',null,eventSend(event))">&rarr;</span><br>');
 
     }
   }

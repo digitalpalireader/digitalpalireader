@@ -5,6 +5,7 @@ class OtherDialogsViewModel {
     this.quicklinkInput = ko.observable();
     this.quicklinkInNewTab = ko.observable(false);
     this.bookmarkName = ko.observable();
+    this.sectionId = DPR_Chrome.getPrimarySectionId()
   }
 
   showQuickLinksDialog() {
@@ -20,7 +21,7 @@ class OtherDialogsViewModel {
     if(outplace[0] === false) {
       return alertFlash(outplace[1], outplace[2]);
     }
-    this.quicklinkInNewTab() ? await openPlace(outplace,null,null,'new') : await openPlace(outplace);
+    this.quicklinkInNewTab() ? await openPlace(this.sectionId, outplace,null,null,'new') : await openPlace(this.sectionId, outplace);
   }
 
   gotoHome() {

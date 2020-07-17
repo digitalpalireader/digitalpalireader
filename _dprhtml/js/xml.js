@@ -147,9 +147,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
     oldparams = oldparams.replace(/\&*(analysis|ped|dppn|frombox)=[^&]+/g,'').replace(/^\&/g,'');
 
     oldparams = oldparams.split('|');
-    if (DPR_Chrome.isPrimarySectionId(sectionId)) {
-      oldparams[0] = newparams;
-    }
+    oldparams[parseInt(sectionId)] = newparams;
     newparams = oldparams.join('|')+bparams;
   }
 
@@ -235,7 +233,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'true',
-            executeStr: `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
+            executeStr: `openPlace(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
             titleStr: null,
             visibleStr: 'true',
           };
@@ -320,7 +318,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   // Configure commands
   shortcutFns[DPR_CMD_GOTO_PREV] = {
     canExecuteStr: !!prev ? 'true' : 'false',
-    executeStr: !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!prev ? `openPlace(${sectionId}, ['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!prev ? null : 'No previous section',
     visibleStr: 'true',
   };
@@ -334,21 +332,21 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   shortcutFns[DPR_CMD_GOTO_NEXT] = {
     canExecuteStr: !!next ? 'true' : 'false',
-    executeStr: !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!next ? `openPlace(${sectionId}, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!next ? null : 'No next section',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_MYANMAR] = {
     canExecuteStr: !!place[8] ? 'true' : 'false',
-    executeStr: !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!place[8] ? null : 'Currently viewing Myanmar Tipitaka',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_THAI] = {
     canExecuteStr: !place[8] ? 'true' : 'false',
-    executeStr: !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !place[8] ? null : 'Currently viewing Thai Tipitaka',
     visibleStr: 'true',
   };
@@ -668,9 +666,7 @@ async function loadXMLindex(sectionId,place) {
     var oldparams = oldurl.split('?')[1];
     if(oldparams) {
       oldparams = oldparams.split('|');
-      if (DPR_Chrome.isPrimarySectionId(sectionId)) {
-        oldparams[0] = newparams;
-      }
+      oldparams[parseInt(sectionId)] = newparams;
       newparams = oldparams.join('|');
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
@@ -681,7 +677,7 @@ async function loadXMLindex(sectionId,place) {
 
     whichcol[0] = 1; // bump up to let the second color know
 
-    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
     // translations
 
@@ -729,7 +725,7 @@ async function loadXMLindex(sectionId,place) {
         spaces += '&nbsp;&nbsp;';
       }
 
-      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
       // translations
 
@@ -784,7 +780,7 @@ async function loadXMLindex(sectionId,place) {
           spaces += '&nbsp;&nbsp;';
         }
 
-        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
         // translations
 
@@ -844,7 +840,7 @@ async function loadXMLindex(sectionId,place) {
           var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0,4);  // short reference
 
 
-          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
           // translations
 
@@ -898,7 +894,7 @@ async function loadXMLindex(sectionId,place) {
               spaces += '&nbsp;&nbsp;';
             }
 
-            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
 
             // translations
 
@@ -957,7 +953,7 @@ async function loadXMLindex(sectionId,place) {
 
               var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,0,6);  // short reference
 
-              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
               // translations
 

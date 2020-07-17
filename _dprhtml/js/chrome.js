@@ -363,7 +363,7 @@ var DPR_Chrome = (function () {
 
   const getPrimarySectionElementId = () => getSectionElementId(getPrimarySectionId())
 
-  const isPrimarySectionId = id => id === getPrimarySectionId()
+  const isPrimarySectionId = id => parseInt(id) === getPrimarySectionId()
 
   const createSuttaSectionContentFragment = () =>
     `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>

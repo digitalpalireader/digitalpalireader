@@ -140,6 +140,8 @@ var DPRNav = {
     },
 
   historyBox: function () {
+    const sectionId = DPR_Chrome.getPrimarySectionId()
+
     if (!DPR_PAL.isXUL) {
       return true;
     }
@@ -165,10 +167,10 @@ var DPRNav = {
         var ch = histNode.childNodes[0].childNodes;
         var x = thist[1].split(',');
         if (x.length > 3) {
-          ch[i + 1].setAttribute('onclick', "DPRSend.openPlace(['" + x[0] + "'," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," + x[5] + "," + x[6] + ",'" + x[7] + "'],null,null,DPRSend.eventSend(event));");
+          ch[i + 1].setAttribute('onclick', "DPRSend.openPlace(" + `${sectionId}, ` + "[" + x[0] + "'," + x[1] + "," + x[2] + "," + x[3] + "," + x[4] + "," + x[5] + "," + x[6] + ",'" + x[7] + "'],null,null,DPRSend.eventSend(event));");
         }
         else {
-          ch[i + 1].setAttribute('onclick', "DPRSend.openIndex(['" + x[0] + "'," + x[1] + ",'" + x[2] + "'],DPRSend.eventSend(event));");
+          ch[i + 1].setAttribute('onclick', "DPRSend.openIndex(" + `${sectionId}, ` + "['" + x[0] + "'," + x[1] + ",'" + x[2] + "'],DPRSend.eventSend(event));");
         }
       }
       histNode.selectedIndex = 0;
@@ -291,7 +293,7 @@ var DPRNav = {
         bList.appendItem(DPR_translit_mod.translit(name));
 
         var ch = bList.childNodes[0].childNodes;
-        ch[i + 1].setAttribute('onclick', "DPRSend.openPlace(['" + loc[0] + "'," + loc[1] + "," + loc[2] + "," + loc[3] + "," + loc[4] + "," + loc[5] + "," + loc[6] + ",'" + loc[7] + "'],null,null,DPRSend.eventSend(event)," + scroll + ");");
+        ch[i + 1].setAttribute('onclick', "DPRSend.openPlace(" + `${sectionId}` + "[" + loc[0] + "'," + loc[1] + "," + loc[2] + "," + loc[3] + "," + loc[4] + "," + loc[5] + "," + loc[6] + ",'" + loc[7] + "'],null,null,DPRSend.eventSend(event)," + scroll + ");");
         ch[i + 1].setAttribute('tooltiptext', desc);
       }
       bList.selectedIndex = 0;
