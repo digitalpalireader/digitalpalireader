@@ -2,6 +2,7 @@
   "listOfFilesExcluded":[
     "../../_dprhtml/js/keyboard_shortcuts.js",
     "../../_dprhtml/js/dprviewmodel.js",
-    "../../_dprhtml/js/dpr_pal.js"
+    "../../_dprhtml/js/dpr_pal.js",
+    "../../_dprhtml/js/index.js"
   ]
 }
