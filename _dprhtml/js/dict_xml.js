@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR1_dict_xml_mod = ( function () {
+
 DPR_G.G_peda = [];
 
 DPR_G.G_pedhist = [];
@@ -29,9 +31,9 @@ async function paliXMLHistory(opts) {
 const createXNavButtons = (type, html, lname, nname) => {
   let onclickStrFn
   if (type === 'PED') {
-    onclickStrFn = x => `paliXML('PED/${x}')`
+    onclickStrFn = x => `DPR1_dict_xml_mod.paliXML('PED/${x}')`
   } else if (type === 'DPPN') {
-    onclickStrFn = x => `DPPNXML(${x})`
+    onclickStrFn = x => `DPR1_dict_xml_mod.DPPNXML(${x})`
   } else {
     throw `type is ${type}. Must be PED or DPPN.`
   }
@@ -56,12 +58,12 @@ async function paliXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
+    await DPR1_send_mod.sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
   moveFrame(1);
   var file = DPR_translit_mod.toUni(filein);
-  clearDivs(sectionId,'dif');
+  DPR1_format_mod.clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -109,7 +111,7 @@ async function paliXML(filein,which,add)
         if(!tda || tda.length < 2) {
           datat += ' ' + dataa[i];
         }
-        else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(DPR_translit_mod.toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+        else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(DPR_translit_mod.toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
         else datat += ' ' + dataa[i];
         i++
 
@@ -131,7 +133,7 @@ async function paliXML(filein,which,add)
         datat += ' ' + dataa[i];
       }
       else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) {
-        datat += ' ' + dataa[i].replace(DPR_translit_mod.toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>');
+        datat += ' ' + dataa[i].replace(DPR_translit_mod.toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>');
       }
       else datat += ' ' + dataa[i];
 
@@ -143,9 +145,9 @@ async function paliXML(filein,which,add)
   var outdata = '<p>'+data.replace(/\[([^\]]*)\]/g, "[<em style=\"color:grey\">$1</em>]")+'<hr/>';
   displayDictData(outdata);
   var tout = '';
-  // TODO: Following block is duplicated with corresponding one for DPPNXMLHistory. Make it DRY.
+  // TODO: Following block is duplicated with corresponding one for DPR1_dict_xml_mod.DPPNXMLHistory. Make it DRY.
   if (DPR_G.G_pedhist.length > 1) { // show select
-    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="paliXMLHistory(this);"><option>- history -</option>';
+    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="DPR1_dict_xml_mod.paliXMLHistory(this);"><option>- history -</option>';
     for (var i = DPR_G.G_pedhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_pedhist[i]+'"';
       if (i == DPR_G.G_phmark) { showing += ' selected'; }
@@ -183,7 +185,7 @@ async function paliXML(filein,which,add)
 
   if(document.getElementById('bottom')) {
     document.getElementById('cdif').scrollTop=0;
-    DPRBottomPaneUpdateStyle()
+    DPR1_chrome_mod.DPRBottomPaneUpdateStyle()
   }
   else document.getElementById('dictc').scrollTop=0;
 
@@ -206,7 +208,7 @@ async function paliXML(filein,which,add)
 }
 
 async function toggleDppnTitle(link,id) {
-  appInsights.trackEvent({ name: 'toggleDppnTitle',  properties: { link,id, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.toggleDppnTitle',  properties: { link,id, }});
 
   if(document.getElementById(id).innerHTML.length > 0) {
     document.getElementById(id).style.display = 'none';
@@ -233,7 +235,7 @@ async function DPPNXMLHistory(opts) {
 
 async function DPPNXML(filein,which,add)
 {
-  appInsights.trackEvent({ name: 'DPPNXML',  properties: { filein,which,add, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.DPPNXML',  properties: { filein,which,add, }});
 
   await DPR_PAL.addJS(['dppn','nameno']);
 
@@ -241,7 +243,7 @@ async function DPPNXML(filein,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
+    await DPR1_send_mod.sendDPPNXML(DPR_translit_mod.toVel(filein),true);
     return;
   }
 
@@ -261,7 +263,7 @@ async function DPPNXML(filein,which,add)
 
   tloc[0] = DPR_translit_mod.toVel(tloc[0]);
 
-  clearDivs(sectionId,'dif');
+  DPR1_format_mod.clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -312,9 +314,9 @@ async function DPPNXML(filein,which,add)
 
   var tout = '';
 
-  // TODO: Following block is duplicated with corresponding one for paliXMLHistory. Make it DRY.
+  // TODO: Following block is duplicated with corresponding one for DPR1_dict_xml_mod.paliXMLHistory. Make it DRY.
   if (DPR_G.G_dppnhist.length > 1) { // show select
-    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="DPPNXMLHistory(this)"><option>- history -</option>';
+    var showing = '<select title="go to history" class="mr-1" style="max-width: 10rem;" onchange="DPR1_dict_xml_mod.DPPNXMLHistory(this)"><option>- history -</option>';
     for (var i = DPR_G.G_dppnhist.length-1; i >= 0; i--) {
       showing += '<option value="'+DPR_G.G_dppnhist[i]+'"';
       if (i == DPR_G.G_dhmark) { showing += ' selected'; }
@@ -330,7 +332,7 @@ async function DPPNXML(filein,which,add)
 
   if(document.getElementById('bottom')) {
     document.getElementById('cdif').scrollTop=0;
-    DPRBottomPaneUpdateStyle();
+    DPR1_chrome_mod.DPRBottomPaneUpdateStyle();
   }
   else document.getElementById('dictc').scrollTop=0;
 
@@ -357,19 +359,19 @@ DPR_G.G_shmark = 0;
 
 async function sktRXML(no,add)
 {
-  appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.sktRXML',  properties: { no,add, }});
 
   const sectionId = DPR_Chrome.getPrimarySectionId()
 
   if(add == 'right') return;
   if(add == true) {
-    //await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
+    //await DPR1_send_mod.sendDPPNXML(DPR_translit_mod.toVel(filein),true);
     //return;
   }
 
   //moveFrame(1);
 
-  clearDivs(sectionId,'dif');
+  DPR1_format_mod.clearDivs(sectionId,'dif');
 
   if(/[^0-9]/.test(no)) {
     for(var i = 0; i < DPR_G.sktR.length;i++) {
@@ -388,7 +390,7 @@ async function sktRXML(no,add)
   var s = new XMLSerializer();
   var data = s.serializeToString(xmlDoc);
 
-  data = data.replace(/<p><a href="index.htm">Index<\/a><\/p>/,'').replace(/<a href="([^.]+)[^>]+/g,"<a class=\"green\" href=\"javascript:void(0)\" onclick=\"sktRXML('$1')\"");
+  data = data.replace(/<p><a href="index.htm">Index<\/a><\/p>/,'').replace(/<a href="([^.]+)[^>]+/g,"<a class=\"green\" href=\"javascript:void(0)\" onclick=\"DPR1_dict_xml_mod.sktRXML('$1')\"");
 
   // output
 
@@ -398,7 +400,7 @@ async function sktRXML(no,add)
 
   if(document.getElementById('bottom')) {
     document.getElementById('cdif').scrollTop=0;
-    DPRBottomPaneUpdateStyle();
+    DPR1_chrome_mod.DPRBottomPaneUpdateStyle();
   }
   else document.getElementById('dictc').scrollTop=0;
 
@@ -422,7 +424,7 @@ async function sktRXML(no,add)
 
 async function sktXML(entry,idx,which,add)
 {
-  appInsights.trackEvent({ name: 'sktXML',  properties: { entry,idx,which,add, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.sktXML',  properties: { entry,idx,which,add, }});
 
   await DPR_PAL.addJS(['/sa/dict/index.js']);
 
@@ -430,11 +432,11 @@ async function sktXML(entry,idx,which,add)
 
   if(add == 'right') return;
   if(add == true) {
-    //await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
+    //await DPR1_send_mod.sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
 
-  clearDivs(sectionId,'dif');
+  DPR1_format_mod.clearDivs(sectionId,'dif');
 
   var char = entry.charAt(0);
 
@@ -468,7 +470,7 @@ async function sktXML(entry,idx,which,add)
 
 
 async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
-  appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.getAtthXML',  properties: { num,type,niklist, }});
 
   const sectionId = DPR_Chrome.getPrimarySectionId()
   if(type == 'a') {
@@ -534,16 +536,16 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(sectionId,z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],DPR1_send_mod.eventSend(event))">'+placen+'</span> '+DPR1_format_mod.preparepali(sectionId,z,1)[0]+'</p>';
     }
 
     displayDictData(finout);
 
-    setCurrentTitle(DPR_translit_mod.toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
+    DPR1_chrome_mod.setCurrentTitle(DPR_translit_mod.toUni(word)+' in the '+DPR_G.G_hTitles[DPR_G.G_hNumbers[type]]);
 }
 
 async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title search
-  appInsights.trackEvent({ name: 'getTitleXML',  properties: { num,mul,att,tik,niklist, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.getTitleXML',  properties: { num,mul,att,tik,niklist, }});
 
   await DPR_PAL.addJS(['titles']);
 
@@ -640,21 +642,21 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
     }
     //dalert([nikaya,bookno,meta,volume,vagga,sutta,section]);
     var sn = (hiert == 'm' ? DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,meta,volume,vagga,sutta,section,hiert,(y ? y.length : 1)) : null);
-    const title = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1);
+    const title = await DPR1_format_mod.convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1);
     var placen = title[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 
-        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,DPR1_send_mod.eventSend(event));">go</span></p>';
     }
     displayDictData(finout);
     if (!DPR_PAL.isXUL) {
-      scrollMainPane(0);
+      DPR1_chrome_mod.scrollMainPane(0);
     }
 }
 
 
 
 async function getDppnData(link){
-  appInsights.trackEvent({ name: 'getDppnData',  properties: { link, }});
+  appInsights.trackEvent({ name: 'DPR1_dict_xml_mod.getDppnData',  properties: { link, }});
 
   var xmlDoc = await DPR_DataLoader.loadXDPPN(link.split('/')[0]);;
 
@@ -677,3 +679,18 @@ function displayDictData(data) {
     $('#paliTextContent').scrollTop(0);
   }
 }
+
+return {
+
+DPPNXML : DPPNXML,
+DPPNXMLHistory : DPPNXMLHistory,
+getAtthXML : getAtthXML,
+getDppnData : getDppnData,
+getTitleXML : getTitleXML,
+paliXML : paliXML,
+paliXMLHistory : paliXMLHistory,
+sktRXML : sktRXML,
+sktXML : sktXML,
+toggleDppnTitle : toggleDppnTitle,
+}
+})()

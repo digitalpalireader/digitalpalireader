@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR1_chrome_mod = ( function () {
+
 function openFirstDPRTab() {
   if(!findDPRTab('DPR-main')) openDPRMain('DPR-main',DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'),'');
 }
@@ -285,6 +287,29 @@ const closeBottomFrame = () => {
   $("#main-pane").height("100%");
 }
 
+
+  return {
+  closeBottomFrame : closeBottomFrame,
+  updateBottomFrameDimensions : updateBottomFrameDimensions,
+  writeNavigationHeader : writeNavigationHeader,
+  writeNavigationHeaderForSection : writeNavigationHeaderForSection,
+  initializeMainPaneOutput : initializeMainPaneOutput,
+  scrollMainPane : scrollMainPane,
+  DPRBottomPaneUpdateStyle : DPRBottomPaneUpdateStyle,
+  DPRShowBottomPane : DPRShowBottomPane,
+  DPRSidebarDocument : DPRSidebarDocument,
+  DPRSidebarWindow : DPRSidebarWindow,
+  closeDPRSidebar : closeDPRSidebar,
+  findDPRTab : findDPRTab,
+  findDPRTabs : findDPRTabs,
+  isDPRTab : isDPRTab,
+  openDPRSidebar : openDPRSidebar,
+  openDPRTab : openDPRTab,
+  setCurrentTitle : setCurrentTitle,
+  toggleDPRSidebar : toggleDPRSidebar
+  }
+  })()
+
 var DPR_Chrome = (function () {
   let sectionElements = {}
   function createSectionElementsCache() {
@@ -537,9 +562,9 @@ var DPR_Chrome = (function () {
     (message, uniqueId, toastVisibleForSeconds, toastCommandInfo) => createToast(ToastTypeInfo, message, toastVisibleForSeconds * 1000, uniqueId, toastCommandInfo);
 
   return {
-    toggleDPRSidebar: toggleDPRSidebar,
-    openDPRSidebar: openDPRSidebar,
-    closeDPRSidebar: openDPRSidebar,
+    toggleDPRSidebar: DPR1_chrome_mod.toggleDPRSidebar,
+    openDPRSidebar: DPR1_chrome_mod.openDPRSidebar,
+    closeDPRSidebar: DPR1_chrome_mod.closeDPRSidebar,
     addOrOpenMainPanelSection: addOrOpenMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
@@ -554,3 +579,5 @@ var DPR_Chrome = (function () {
     getPrimarySectionElementId: getPrimarySectionElementId,
   };
 })();
+
+

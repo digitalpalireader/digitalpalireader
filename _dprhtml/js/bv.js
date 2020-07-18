@@ -84,9 +84,9 @@ async function citation(cite,event) {
     loc[i] = parseInt(loc[i]);
   }
   if (DPR_PAL.isWeb) {
-    await openPlace(sectionId,loc,param['para'],null,eventSend(event));
+    await DPR1_send_mod.openPlace(sectionId,loc,param['para'],null,DPR1_send_mod.eventSend(event));
   } else {
-    await mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(sectionId,loc,param['para'],null,eventSend(event));
+    await mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR1_send_mod.openPlace(sectionId,loc,param['para'],null,DPR1_send_mod.eventSend(event));
   }
 
 }
@@ -104,7 +104,7 @@ function bvAlert(bva) {
   flags, "Go", "Close", "", null, check);
 
   if(button == 0)
-    openDPRTab(bva[3],"DPR-main",true);
+    DPR1_chrome_mod.openDPRTab(bva[3],"DPR-main",true);
 }
 
 return {

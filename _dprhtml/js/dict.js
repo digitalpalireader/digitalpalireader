@@ -91,7 +91,7 @@ async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) 
 
   document.getElementsByTagName('title')[0].innerHTML = tabT;
   $(`#${DPR_PAL.getDifId()}`).html('');
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html('<span style="float:left" title="Click to copy permalink to clipboard" onclick="DPR1_format_mod.permalinkClick(\''+`${DPR_PAL.dprHomePage}?feature=dictionary&type=`+DPR_G.G_dictType+(DPR_G.G_dictQuery?'&query=' + DPR_translit_mod.toUni(DPR_G.G_dictQuery.replace(/ /g,'_')):'') + '&opts=' + DPR_G.G_dictOpts.join(',') + (DPR_G.G_dictEntry?'&entry=' + DPR_translit_mod.toUni(DPR_G.G_dictEntry.replace(/ /g,'_')):'')+'\',1);" class="pointer hoverShow">♦&nbsp;</span>');
 
   DPR_G.G_dictQuery = DPR_G.G_dictQuery.toLowerCase();
 
@@ -138,12 +138,12 @@ async function pedsearchstart(sectionId, hard)
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        await paliXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+        await DPR1_dict_xml_mod.paliXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    await sendPaliXML('dev/'+getstring+',dev');
+    await DPR1_send_mod.sendPaliXML('dev/'+getstring+',dev');
     return;
   }
 
@@ -185,7 +185,7 @@ async function pedsearchstart(sectionId, hard)
 
         uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-        finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
+        finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\');">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>';
 
         y++;
       }
@@ -214,7 +214,7 @@ async function pedsearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
             y++;
           }
@@ -228,7 +228,7 @@ async function pedsearchstart(sectionId, hard)
     }
   }
   else if(finouta.length == 1)
-    await paliXML('PED/' + loc+','+uniout);
+    await DPR1_dict_xml_mod.paliXML('PED/' + loc+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -242,7 +242,7 @@ async function pedsearchstart(sectionId, hard)
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) paliXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) DPR1_dict_xml_mod.paliXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
 
   var yut = 0;
 }
@@ -323,18 +323,18 @@ async function dppnsearchstart(sectionId, hard)
   var getstring = DPR_G.G_dictQuery;
 
     if(getstring == '') {
-        await DPPNXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+        await DPR1_dict_xml_mod.DPPNXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
         return;
     }
 
   if(!/[^0-9\/]/.exec(getstring) && DPR_G.devCheck == 1) { // dev link
-    await sendDPPNXML('dppn/'+getstring);
+    await DPR1_send_mod.sendDPPNXML('dppn/'+getstring);
     return;
   }
 
   if(/\//.exec(getstring)) { // direct link
     var link = DPR_translit_mod.toUni(getstring).split(',');
-    await DPPNXML(link[0],link[1]);
+    await DPR1_dict_xml_mod.DPPNXML(link[0],link[1]);
     return;
   }
 
@@ -392,7 +392,7 @@ async function dppnsearchstart(sectionId, hard)
 
         var uniout = DPR_translit_mod.toUni(dppnt);
 
-        finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+        finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onClick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
     }
   }
@@ -420,7 +420,7 @@ async function dppnsearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onClick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
           }
         }
@@ -450,7 +450,7 @@ async function dppnsearchstart(sectionId, hard)
   document.getElementById('odif').scrollTop=0;
   var yut = 0;
 
-  if(DPR_G.G_dictEntry) await DPPNXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await DPR1_dict_xml_mod.DPPNXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
 
 
 }
@@ -499,7 +499,7 @@ async function dppnFullTextSearch(sectionId, getstring) {
 
         let scrollTopElem = DPR_PAL.isXUL ? "dictc" : "paliTextContent";
 
-        finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="scrollMainPane(0);" class="small" style="color:'+DPR_G.DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
+        finalouta.push(ttitle+'###<hr class="thick"><a name="dppno'+i+'/'+j+'"><div style="position:relative"><div style="position:absolute;top:0px; left:0px;"><a href="javascript:void(0)" onclick="DPR1_chrome_mod.scrollMainPane(0);" class="small" style="color:'+DPR_G.DPR_prefs['colped']+'">top</a></div><br/>' + postpara.replace(/\[/g, '<').replace(/\]/g, '>') + addend + '</b></div>');
       }
     }
   }
@@ -546,7 +546,7 @@ DPR_G.G_cpedAlt = [];
 
 function mlsearchstart(sectionId,hard)
 {
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
     getstring = DPR_translit_mod.toFuzzy(getstring);
@@ -687,7 +687,7 @@ function multisearchstart(sectionId, hard)
 
         uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
     }
   }
@@ -716,7 +716,7 @@ function multisearchstart(sectionId, hard)
 
         var uniout = DPR_translit_mod.toUni(dppnt);
 
-        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onClick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onClick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
     }
   }
@@ -791,7 +791,7 @@ function multisearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
             y++;
           }
@@ -806,7 +806,7 @@ function multisearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onclick="DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onclick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
             y++;
           }
@@ -854,7 +854,7 @@ function epdsearchstart(sectionId)
     return;
   }
 
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -929,7 +929,7 @@ function attsearchstart(sectionId)
   if(typeof(DPR_G.attlist) == 'undefined') {
     return;
   }
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -982,7 +982,7 @@ function attsearchstart(sectionId)
       }
       if (entries.length == 0) continue;
 
-      finouta[y] = '<span class="pointer style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
+      finouta[y] = '<span class="pointer style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
       y++;
     }
   }
@@ -1021,7 +1021,7 @@ function tiksearchstart(sectionId)
     return;
   }
 
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1074,7 +1074,7 @@ function tiksearchstart(sectionId)
       }
       if (entries.length == 0) continue;
 
-      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
+      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
       y++;
     }
   }
@@ -1113,7 +1113,7 @@ function titlesearchstart(sectionId)
     return;
   }
 
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1198,11 +1198,11 @@ function titlesearchstart(sectionId)
       if(dppnEntry.length > 0) {
         for(var d in dppnEntry) {
 
-          dEI += '&nbsp;<span class="pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onclick="toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
+          dEI += '&nbsp;<span class="pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onclick="DPR1_dict_xml_mod.toggleDppnTitle(\''+dppnEntry[d]+'\',\'titleS'+x+'^'+d+'\');">n</span>';
           dEO += '<div class="hide round" id="titleS'+x+'^'+d+'"></div>'
         }
       }
-      finouta.push('<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="getTitleXML('+ x +','+ (DPR_G.G_dictOpts.indexOf('mm') > -1) +','+(DPR_G.G_dictOpts.indexOf('ma') > -1)+','+(DPR_G.G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</span>' + dEI + '<br>' + dEO);
+      finouta.push('<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getTitleXML('+ x +','+ (DPR_G.G_dictOpts.indexOf('mm') > -1) +','+(DPR_G.G_dictOpts.indexOf('ma') > -1)+','+(DPR_G.G_dictOpts.indexOf('mt') > -1)+',\''+outnik+'\')">' + uniout + ' (' + entries.length + ')</span>' + dEI + '<br>' + dEO);
 
     }
   }
@@ -1246,7 +1246,7 @@ async function paliRootsearchstart(sectionId)
     return;
   }
 
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var getstring = DPR_G.G_dictQuery;
   if(/fz/.exec(DPR_G.G_dictOpts)) {
@@ -1292,11 +1292,11 @@ async function paliRootsearchstart(sectionId)
       var gs1 = gsplit[1].split(' ');
       for(var i = 0;i<gs1.length;i++) {
         var base = gs1[i].replace(/e$/,'a').replace(/[āe]su$/,'a').replace(/īsu$/,'i').replace(/yaṃ$/,'').replace(/mhi$/,'');
-        gs1[i] = await linkToPED(base,gs1[i]);
+        gs1[i] = await DPR1_format_mod.linkToPED(base,gs1[i]);
       }
       gsplit[1] = gs1.join(' ');
       var ln = DPR_G.rootsl[x].split('.');
-      finouta.push('<b><font style="color:'+DPR_G.DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +' <span class="pointer hoverShow" title="go to entry in Dhātumālā" onclick="openPlace(' + `${sectionId}, ` + '[\'g\',3,'+ln[0]+',0,'+ln[1]+',0,0,\'m\'],'+(parseInt(ln[2])+1)+',null,eventSend(event))">&rarr;</span><br>');
+      finouta.push('<b><font style="color:'+DPR_G.DPR_prefs['colsel']+'">' + gsplit[0] + '</font></b>: '+gsplit[1] +' <span class="pointer hoverShow" title="go to entry in Dhātumālā" onclick="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\'g\',3,'+ln[0]+',0,'+ln[1]+',0,0,\'m\'],'+(parseInt(ln[2])+1)+',null,DPR1_send_mod.eventSend(event))">&rarr;</span><br>');
 
     }
   }
@@ -1332,7 +1332,7 @@ async function sktsearchstart(sectionId)
     return;
   }
 
-  clearDivs(sectionId,'dict');
+  DPR1_format_mod.clearDivs(sectionId,'dict');
 
   var char = DPR_G.G_dictQuery.charAt(0);
 
@@ -1378,7 +1378,7 @@ async function sktsearchstart(sectionId)
     {
       var uniout = DPR_translit_mod.toUni(DPR_translit_mod.toSkt(sx,true));
       last = x;
-      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + x +');">' + uniout + '</span><br>';
+      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.sktXML(\''+sx+'\',' + x +');">' + uniout + '</span><br>';
 
       y++;
     }
@@ -1401,7 +1401,7 @@ async function sktsearchstart(sectionId)
         for (var x = 0; x < simlist.length; x++) {
           sx = simlist[x][1];
           var uniout = DPR_translit_mod.toUni(DPR_translit_mod.toSkt(sx,true));
-          finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="sktXML(\''+sx+'\',' + DPR_G.G_sktR[sx]+');">' + uniout + '</a><br>';
+          finouta[y] = '<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.sktXML(\''+sx+'\',' + DPR_G.G_sktR[sx]+');">' + uniout + '</a><br>';
 
           y++;
         }
@@ -1414,7 +1414,7 @@ async function sktsearchstart(sectionId)
     }
   }
   else if(finouta.length == 1)
-    await sktXML(last+','+uniout);
+    await DPR1_dict_xml_mod.sktXML(last+','+uniout);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1428,7 +1428,7 @@ async function sktsearchstart(sectionId)
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) await sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
+  if(DPR_G.G_dictEntry) await DPR1_dict_xml_mod.sktXML(DPR_G.G_dictEntry,DPR_G.G_sktR[DPR_G.G_dictEntry]);
 
   var yut = 0;
 }
@@ -1442,7 +1442,7 @@ async function sktRootsearchstart(sectionId)
   var getstring = DPR_translit_mod.toSkt(DPR_translit_mod.toVel(DPR_G.G_dictQuery));
 
   if(getstring == '') {
-      await sktRXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+      await DPR1_dict_xml_mod.sktRXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
       return;
   }
 
@@ -1478,7 +1478,7 @@ async function sktRootsearchstart(sectionId)
     {
       var uniout = j;
       uniout = DPR_translit_mod.toUni(DPR_translit_mod.toSkt(uniout,true));
-      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="sktRXML('+i+');">√' + uniout + '</a><br>';
+      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.sktRXML('+i+');">√' + uniout + '</a><br>';
 
       y++;
     }
@@ -1492,7 +1492,7 @@ async function sktRootsearchstart(sectionId)
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
   }
   else if(finouta.length == 1)
-    await sktRXML(0);
+    await DPR1_dict_xml_mod.sktRXML(0);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
@@ -1506,7 +1506,7 @@ async function sktRootsearchstart(sectionId)
   document.getElementById('dict').appendChild(outDiv);
   document.getElementById('odif').scrollTop=0;
 
-  if(DPR_G.G_dictEntry) await sktRXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
+  if(DPR_G.G_dictEntry) await DPR1_dict_xml_mod.sktRXML(DPR_translit_mod.toUni(DPR_G.G_dictEntry));
 
   var yut = 0;
 }

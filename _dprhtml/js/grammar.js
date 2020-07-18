@@ -18,7 +18,7 @@ function conjugate(word, id, which) {
   var yto = DPR_G.yt[word];
 
   if(yto == undefined) {
-    alertFlash('Word not found','yellow');
+    DPR1_format_mod.alertFlash('Word not found','yellow');
     return;
   }
 
@@ -53,7 +53,7 @@ function conjugate(word, id, which) {
     return out;
   }
   if(id == 'dif') {
-    clearDivs(sectionId, 'dif');
+    DPR1_format_mod.clearDivs(sectionId, 'dif');
     outNode.innerHTML = '<div class="conj">'+out+'</div>';
     document.getElementById(DPR_PAL.getDifId()).appendChild(outNode);
   }
@@ -278,7 +278,7 @@ function conjugateVerb(word) {
   var type1 = yto[4]+'#'+yto[5];
   var type2 = DPR_G.iI[type1];
   if(type2 == undefined) {
-    alertFlash('Verb not found','yellow');
+    DPR1_format_mod.alertFlash('Verb not found','yellow');
     return;
   }
 
@@ -371,7 +371,7 @@ function conjugateIrrNoun(word) {
   var type1 = yto[4]+'#'+yto[5];
   var type2 = DPR_G.iI[type1];
   if(type2 == undefined) {
-    alertFlash('Noun not found','yellow');
+    DPR1_format_mod.alertFlash('Noun not found','yellow');
     return;
   }
 
@@ -379,7 +379,7 @@ function conjugateIrrNoun(word) {
 
   var noun = DPR_G.iNI[outword];
   if(noun == undefined) {
-    alertFlash('Noun not found','yellow');
+    DPR1_format_mod.alertFlash('Noun not found','yellow');
     return;
   }
   var cnt = 0;
@@ -444,7 +444,7 @@ function conjugateIrrVerb(word,which) {
 
   var verbC = DPR_G.iVI[yto[6]];
   if(verbC == undefined) {
-    alertFlash('Verb not found','yellow');
+    DPR1_format_mod.alertFlash('Verb not found','yellow');
     return;
   }
   var verb;

@@ -19,13 +19,13 @@ class OtherDialogsViewModel {
     var place = this.quicklinkInput();
     var outplace = DPR_navigation_common_mod.convertShortLink(place);
     if(outplace[0] === false) {
-      return alertFlash(outplace[1], outplace[2]);
+      return DPR1_format_mod.alertFlash(outplace[1], outplace[2]);
     }
-    this.quicklinkInNewTab() ? await openPlace(this.sectionId, outplace,null,null,'new') : await openPlace(this.sectionId, outplace);
+    this.quicklinkInNewTab() ? await DPR1_send_mod.openPlace(this.sectionId, outplace,null,null,'new') : await DPR1_send_mod.openPlace(this.sectionId, outplace);
   }
 
   gotoHome() {
-    openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
+    DPR1_chrome_mod.openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
   }
 
   gotoPrevDictEntry() {
@@ -46,7 +46,7 @@ class OtherDialogsViewModel {
   }
 
   showBottomPane(key) {
-    DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key - 1]);
+    DPR1_chrome_mod.DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key - 1]);
     event.preventDefault();
   }
 
@@ -59,7 +59,7 @@ class OtherDialogsViewModel {
       window.DPR_convert_mod.sendtoconvert(document.getElementById('convi').innerHTML);
       this.showBottomPane(2);
     }
-    else alertFlash('You must select some text to send to the convertor', 'yellow');
+    else DPR1_format_mod.alertFlash('You must select some text to send to the convertor', 'yellow');
   }
 
   sendToTextpad() {
@@ -71,7 +71,7 @@ class OtherDialogsViewModel {
       window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML);
       this.showBottomPane(3);
     }
-    else alertFlash('You must select some text to send to the textpad', 'yellow');
+    else DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow');
   }
 
   appendToTextpad() {
@@ -83,7 +83,7 @@ class OtherDialogsViewModel {
       window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML, true);
       this.showBottomPane(3);
     }
-    else alertFlash('You must select some text to send to the textpad', 'yellow');
+    else DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow');
   }
 
   displayPaliQuote() {
@@ -136,9 +136,9 @@ class OtherDialogsViewModel {
     xmlDoc.documentElement.appendChild(newNode);
 
     //__navigationTabViewModel.updateBookmarks(xmlDoc);
-    alertFlash('Bookmark Saved','green');
+    DPR1_format_mod.alertFlash('Bookmark Saved','green');
 
-    //sendUpdateBookmarks();
+    //DPR1_send_mod.sendUpdateBookmarks();
 
   }
 
@@ -156,10 +156,10 @@ class OtherDialogsViewModel {
   }
 
   openHelpVideo() {
-    openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
+    DPR1_chrome_mod.openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
   }
 
   launchFeedbackForm() {
-    openDPRTab($(".feedback-form-link").attr("href"), 'DPR-feedback', 0);
+    DPR1_chrome_mod.openDPRTab($(".feedback-form-link").attr("href"), 'DPR-feedback', 0);
   }
 }

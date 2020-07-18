@@ -31,7 +31,7 @@ var DPR_search_mod = (function () {
 
   function showCancelButton() {
     const html = `
-    <button class="btn btn-danger btn-sm m-2" id="cancel-search" icon="cancel" onmouseup="stopSearch()" title="Abort search">
+    <button class="btn btn-danger btn-sm m-2" id="cancel-search" icon="cancel" onmouseup="DPR1_search_mod.stopSearch()" title="Abort search">
       <i class="fa fa-stop-circle-o"></i>
     </button>`;
 
@@ -48,7 +48,7 @@ var DPR_search_mod = (function () {
     const html = `
     <div id="search-header-items">
     <ul id="search-sets"></ul>
-    <a id="showing" class="btn btn-outline-secondary m-0" style="display: none; text-align: justify;" onclick="showonly('xyz');" title="Remove search filter"></a>
+    <a id="showing" class="btn btn-outline-secondary m-0" style="display: none; text-align: justify;" onclick="DPR1_search_mod.showonly('xyz');" title="Remove search filter"></a>
     <span id="search-link"></span>
     </div>
     `;
@@ -58,7 +58,7 @@ var DPR_search_mod = (function () {
   function addSearchTermSectionLink(searchTerm) {
     const html = `
   <li>
-    <a href="#" onclick="return scrollSearch()">${searchTerm}</a>
+    <a href="#" onclick="return DPR1_search_mod.scrollSearch()">${searchTerm}</a>
   </li>`;
     DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
   }
@@ -68,7 +68,7 @@ var DPR_search_mod = (function () {
     const id = `matches${nik}`;
     const html = `
   <li>
-    <a id="${id}" href="#" onclick="return scrollSearch('${scrollTo}')">${DPR_G.G_nikLongName[nik] + ': 0'}</a>
+    <a id="${id}" href="#" onclick="return DPR1_search_mod.scrollSearch('${scrollTo}')">${DPR_G.G_nikLongName[nik] + ': 0'}</a>
   </li>`;
     DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
   }
@@ -110,7 +110,7 @@ var DPR_search_mod = (function () {
 
   function addCopyPermaLinkElement() {
     const html = `
-  <a class="btn btn-success btn-light btn-small m-0" onclick="permalinkClick('${DPR_G.G_searchLink}')" title="Click to copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
+  <a class="btn btn-success btn-light btn-small m-0" onclick="DPR1_format_mod.permalinkClick('${DPR_G.G_searchLink}')" title="Click to copy permalink to clipboard"><i class="fa fa-link" aria-hidden="true"></i></a>
   `;
     DPR_G.MD.getElementById('search-link').insertAdjacentHTML('beforeend', html);
   }
