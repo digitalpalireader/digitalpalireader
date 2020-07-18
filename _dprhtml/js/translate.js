@@ -85,15 +85,15 @@ async function translateText(alts) {
   var obj = (out.object.join()?out.object.join('&nbsp;'):'');
   var other = (out.other.join()?out.other.join('&nbsp;'):'');
   if(subject)
-    outparts.push(makeTable([[subject],['subject']],'sub'));
+    outparts.push(DPR1_format_mod.makeTable([[subject],['subject']],'sub'));
   if(verb)
-    outparts.push(makeTable([[verb],['verb']],'verb'));
+    outparts.push(DPR1_format_mod.makeTable([[verb],['verb']],'verb'));
   if(obj)
-    outparts.push(makeTable([[obj],['object']],'obj'));
+    outparts.push(DPR1_format_mod.makeTable([[obj],['object']],'obj'));
   if(other)
-    outparts.push(makeTable([[other],['other']],'other'));
+    outparts.push(DPR1_format_mod.makeTable([[other],['other']],'other'));
 
-  $('#translation').html(makeTable([outparts.concat([(DPR_G.G_verbDecl[0]==2?'!':'.')])],'trans'));
+  $('#translation').html(DPR1_format_mod.makeTable([outparts.concat([(DPR_G.G_verbDecl[0]==2?'!':'.')])],'trans'));
 }
 
 DPR_G.G_altChoices = []; // this is for later, when we offer alternatives

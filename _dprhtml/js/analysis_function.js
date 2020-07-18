@@ -1,5 +1,7 @@
 'use strict';
 
+var DPR1_analysis_function_mod = ( function () {
+
 DPR_G.G_outwords = new Array();  // the raw output
 DPR_G.G_shortdefpost = new Array();
 
@@ -60,7 +62,7 @@ async function outputAnalysis(sectionId, input,frombox) {
 
   // send input to sidebar
 
-  if(!frombox && DPRSidebarDocument()) DPRSidebarDocument().getElementById('dictin').value=DPR_translit_mod.toUni(input);
+  if(!frombox && DPR1_chrome_mod.DPRSidebarDocument()) DPR1_chrome_mod.DPRSidebarDocument().getElementById('dictin').value=DPR_translit_mod.toUni(input);
 
   shortdefpre = [];
 
@@ -1187,3 +1189,8 @@ function isUncomp(word,lp,np) { // uncompoundable
   return false;
 }
 
+return {
+isUncomp : isUncomp,
+outputAnalysis : outputAnalysis
+}
+})()

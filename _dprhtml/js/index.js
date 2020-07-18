@@ -75,7 +75,7 @@ const initSplitters = () => {
   $("#main-pane").resizable({
     handleSelector: "#main-content-panel-splitter",
     onDrag: (event, $el, passed) => {
-      updateBottomFrameDimensions();
+      DPR1_chrome_mod.updateBottomFrameDimensions();
     },
     resizeWidth: false
   });
@@ -139,7 +139,7 @@ const checkAnalysis = async (sectionId) => {
   const location = document.location.href;
   if(location.indexOf('analysis')>-1) {
     const x = new URL(location);
-    await outputAnalysis(sectionId, x.searchParams.get("analysis"), x.searchParams.get("frombox"));
+    await DPR1_analysis_function_mod.outputAnalysis(sectionId, x.searchParams.get("analysis"), x.searchParams.get("frombox"));
   }
 } //TODO: handle most parameters in a single function after Beta.
 

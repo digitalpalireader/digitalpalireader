@@ -1,5 +1,6 @@
 'use strict';
 
+var DPR1_format_mod = ( function () {
 // āīūṭḍṅṇṃṃñḷĀĪŪṬḌṄṆṂÑḶ  aiueokgcjtdnpbmyrlvsh
 
 //«»
@@ -179,7 +180,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
 		  if(which != 1) {
-		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
+		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
 		  }
 		  else {
 		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
@@ -196,7 +197,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       else {
         altplus += wb + ' ';
         if(DPR_G.DPR_prefs['showVariantsInline'] && which  != 1) {
-          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
+          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
           b++;
         }
       }
@@ -208,7 +209,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
-          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
+          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
           b++;
         }
@@ -222,7 +223,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = wb.substring(1) + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
           if(which  != 1) {
-			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
 		  }
 		  else {
 			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
@@ -282,7 +283,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         convout += wb.replace(/<[^>]*>/g, '');
       }
       if(!which == 1) {// put it together as one link
-        finout += '<span id="W' + b + '" class="pointer" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
+        finout += '<span id="W' + b + '" class="pointer" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
       }
       finout += space;
       saveout += space;
@@ -301,7 +302,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       var ptype = parap[1];
       var permalink = DPR_PAL.fixupDprBaseUrl(parap[2].replace(/_/g,' '));
       if(convout.length>1) convout += '\n\n';
-      finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer '+(DPR_G.G_thisPara && DPR_G.G_thisPara == paran?'green':'hoverShow')+'" onclick="permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
+      finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer '+(DPR_G.G_thisPara && DPR_G.G_thisPara == paran?'green':'hoverShow')+'" onclick="DPR1_format_mod.permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
       saveout += '<p class="paratype'+ptype+'"'+'>';
       paran++;
     }
@@ -365,7 +366,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       unioutb = uniouta[a];
       //unioutb = unioutb.replace(/0/g, '.');
       unioutb = DPR_translit_mod.translit(unioutb);
-      finout += '<span class="pointer" id="W' + b + '" onmouseup="sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,eventSend(event))">' +  unioutb + '</span>' + space;
+      finout += '<span class="pointer" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  unioutb + '</span>' + space;
       saveout += unioutb + space;
       b++;
     }
@@ -435,7 +436,7 @@ async function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click
       if(tt.length < 2) continue;
       var dEI = await DPR_navigation_mod.getDppnEntry(tt);
       if (dEI.length > 0) {
-        namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',eventSend(event));">&nbsp;n</span>';
+        namen[i] = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="DPR1_send_mod.sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',DPR1_send_mod.eventSend(event));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="DPR1_send_mod.sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',DPR1_send_mod.eventSend(event));">&nbsp;n</span>';
       }
     }
   }
@@ -510,12 +511,12 @@ function alertFlash(text,color) {
         fn = DPR_Chrome.showWarningToast;
       break;
       default:
-        console.error('Unknown color passed to alertFlash', color)
+        console.error('Unknown color passed to DPR1_format_mod.alertFlash', color)
       break;
     }
   }
 
-  console.warn('alertFlash is deprecated. Use DPR_Chrome.show*Toast functions.')
+  console.warn('DPR1_format_mod.alertFlash is deprecated. Use DPR_Chrome.show*Toast functions.')
   fn(text);
 }
 
@@ -629,7 +630,7 @@ async function linkToPED(base,word) {
   var vbase = DPR_translit_mod.toVel(base);
 
   if(typeof(DPR_G.P[vbase]) == 'object') {
-    word = '<span style="color:'+DPR_G.DPR_prefs['colsel']+'" class="pointer" onclick="paliXML(\'PED/' + DPR_G.P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
+    word = '<span style="color:'+DPR_G.DPR_prefs['colsel']+'" class="pointer" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[vbase][0] + ','+base+'\',true)">'+word+'</span>';
   }
   return word;
 }
@@ -644,6 +645,23 @@ function joinArray(s,a) {
 }
 
 function getNameHTML(dEI,tt) {
-  var namen = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',eventSend(event,1));">&nbsp;n</span>';
+  var namen = '<span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="DPR1_send_mod.sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/'+dEI.join(','+DPR_translit_mod.toUni(tt)+'\',DPR1_send_mod.eventSend(event,1));">&nbsp;n</span><span class="super tiny pointer" style="color:'+DPR_G.DPR_prefs['coldppn']+'" title="DPPN entry" onmouseup="DPR1_send_mod.sendDPPNXML(\''+DPR_translit_mod.toUni(tt)+'/')+','+DPR_translit_mod.toUni(tt)+'\',DPR1_send_mod.eventSend(event,1));">&nbsp;n</span>';
   return namen;
 }
+
+return {
+
+alertFlash : alertFlash,
+analyzeTextPad : analyzeTextPad,
+clearDivs : clearDivs,
+convtitle : convtitle,
+formatuniout : formatuniout,
+getNameHTML : getNameHTML,
+linkToPED : linkToPED,
+makeTable : makeTable,
+makeToolbox : makeToolbox,
+outputFormattedData : outputFormattedData,
+permalinkClick : permalinkClick,
+preparepali : preparepali
+}
+})()

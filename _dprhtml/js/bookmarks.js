@@ -80,7 +80,7 @@ async function bookmarkframe(refresh) {
       tbookm[1] = tbookm[1].replace(/,$/, '')
       var ttbm1 = tbookm[1].length-1;
       tbookm[1] = "'"+tbookm[1].charAt(0)+"'"+tbookm[1].substring(1,ttbm1) + "'" + tbookm[1].charAt(ttbm1) + "'";
-      bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_bookmarks_mod.eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(' + `${sectionId}, ` + '['+tbookm[1]+'],null,null,eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      bookmOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_bookmarks_mod.eraseBookmark(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '['+tbookm[1]+'],null,null,DPR1_send_mod.eventSend(event))">' + tbookm[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!bookmOut) { bookmOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;bookmarks</b>'; }
@@ -98,7 +98,7 @@ async function bookmarkframe(refresh) {
       thist[1] = thist[1].replace(/,$/, '')
       var tt1 = thist[1].length-1;
       thist[1] = "'"+thist[1].charAt(0)+"'"+thist[1].substring(1,tt1) + "'" + thist[1].charAt(tt1) + "'";
-      histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_history_mod.removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="openPlace(' + `${sectionId}, ` + '['+thist[1]+'],null,null,eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
+      histOut += '<a style="color:red" href="javascript:void(0)" title="delete item" onclick="DPR_history_mod.removeHistory(\'' + i + '\');">x</a>&nbsp<a href="javascript:void(0)" title="Load Section" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '['+thist[1]+'],null,null,DPR1_send_mod.eventSend(event))">' + thist[0].replace(/ /g, '&nbsp;') + '</a><br />';
     }
   }
   if(!histOut) { histOut = '<b style="color:'+DPR_G.DPR_prefs['colsel']+'">no&nbsp;history</b>'; }
@@ -200,9 +200,9 @@ function saveBookmark(name,loc,desc,scroll,supress) {
   var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
 
   if(DPR_io_mod.writeFile('DPR_Bookmarks', outfile)) {
-    if(!supress) alertFlash('Bookmark Saved','green');
+    if(!supress) DPR1_format_mod.alertFlash('Bookmark Saved','green');
   }
-  var sidebar = DPRSidebarWindow();
+  var sidebar = DPR1_chrome_mod.DPRSidebarWindow();
   if (sidebar) {
     sidebar.DPRNav.bookmarkBox();
   }

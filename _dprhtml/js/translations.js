@@ -75,7 +75,7 @@ function transLink(which,where,url,title) {
     priority: trProps[type].priority,
     html: `&nbsp;
     <span class="hoverShow pointer">
-      <img width="16" style="vertical-align:middle" src="/_dprhtml/images/${trProps[type].icon}" title="${title}" onmouseup="DPR_Send.openTranslation('${type}://${url}', eventSend(event))">
+      <img width="16" style="vertical-align:middle" src="/_dprhtml/images/${trProps[type].icon}" title="${title}" onmouseup="DPR_Send.openTranslation('${type}://${url}', DPR1_send_mod.eventSend(event))">
     </span>`
   };
 }

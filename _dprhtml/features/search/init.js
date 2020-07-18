@@ -172,5 +172,5 @@ const initializeSearchSidebarTab = async () => {
 
 const initializeSearchFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
-  await searchTipitaka(sectionId,DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
+  await DPR1_search_mod.searchTipitaka(sectionId,DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
 }
