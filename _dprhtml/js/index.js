@@ -24,6 +24,7 @@ var __otherDialogsViewModel = new OtherDialogsViewModel();
 const __installationViewModel = new InstallationViewModel();
 
 async function mainInitialize() {
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   await DPR_config_mod.getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
@@ -33,11 +34,11 @@ async function mainInitialize() {
   ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isNavigationFeature()) {
-    await loadFeatureAsync(navigationFeatureName, initializeNavigationFeature);
+    await loadFeatureAsync(sectionId, navigationFeatureName, initializeNavigationFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    await loadFeatureAsync(searchFeatureName, initializeSearchFeature);
+    await loadFeatureAsync(sectionId, searchFeatureName, initializeSearchFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    await loadFeatureAsync(dictionaryFeatureName, initializeDictionaryFeature);
+    await loadFeatureAsync(sectionId, dictionaryFeatureName, initializeDictionaryFeature);
   } else {
     await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
     __dprViewModel.showLandingFeature();
@@ -46,7 +47,7 @@ async function mainInitialize() {
   }
 
   initMainPane();
-  await checkAnalysis();
+  await checkAnalysis(sectionId);
 }
 
 function installGlobalHandlers() {
@@ -58,10 +59,10 @@ function installGlobalHandlers() {
   window.addEventListener('popstate', e => historyPopstateHandler(e));
 }
 
-const loadFeatureAsync = async (name, initFn) => {
-  await loadHtmlFragmentAsync("#mafbc", `features/${name}/main-pane.html`);
+const loadFeatureAsync = async (sectionId, name, initFn) => {
+  await loadHtmlFragmentAsync(`#main-pane-container`, `features/${name}/main-pane.html`);
   __dprViewModel.showMainFeatures();
-  await initFn();
+  await initFn(sectionId);
   initFeedbackFormParameters();
 }
 
@@ -134,11 +135,11 @@ const initFeatureTabs = () => {
   });
 }
 
-const checkAnalysis = async () => {
+const checkAnalysis = async (sectionId) => {
   const location = document.location.href;
   if(location.indexOf('analysis')>-1) {
     const x = new URL(location);
-    await outputAnalysis(x.searchParams.get("analysis"), x.searchParams.get("frombox"));
+    await outputAnalysis(sectionId, x.searchParams.get("analysis"), x.searchParams.get("frombox"));
   }
 } //TODO: handle most parameters in a single function after Beta.
 

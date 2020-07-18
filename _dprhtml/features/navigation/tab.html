@@ -24,7 +24,7 @@
           <div class="navigation-hierarchy-layout">
             <input id="nav-quicklinks" class="form-control" placeholder="e.g. mn 10.2"
               onkeydown="DPRSend.sendQuickLinkOnEnterKey(event, DPRSend.eventSend(event));"></input>
-            <button id="nav-quicklinks-button" type="button" class="btn btn-light m-0 p-1" title="Open quick link..." onmouseup="DPRSend.sendQuickLink(DPRSend.eventSend(event));">
+            <button id="nav-quicklinks-button" type="button" class="btn btn-light m-0 p-1" title="Open quick link (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)" onmouseup="DPRSend.sendQuickLink(DPRSend.eventSend(event));">
               &rArr;
             </button>
           </div>
@@ -72,11 +72,11 @@
         <div class="form-group col mb-1">
           <label class="small-bold-font">Hierarchy</label>
           <div id="navigation-hierarchy" class="navigation-hierarchy-layout">
-            <button id="nav-title" type="button" class="btn btn-light m-0" title="View index for this book" onmouseup="DPRSend.importXMLindex(DPRSend.eventSend(event));"
+            <button id="nav-title" type="button" class="btn btn-light m-0" title="View index for this book (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)" onmouseup="DPRSend.importXMLindex(DPR_Chrome.getPrimarySectionId(), DPRSend.eventSend(event));"
               data-bind="text: navTitle"
             >
             </button>
-            <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" title="Combine all sub-sections" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
+            <button id="nav-title-button" type="button" class="btn btn-light m-0 p-1" title="Combine all sub-sections (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)" onmouseup="DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,1)">
               ≡
             </button>
 

@@ -16,26 +16,22 @@ DPR_G.G_thisPara = null;
 
 const emptyFnStr = `(() => {})()`;
 
-async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
+async function loadXMLSection(sectionId, querystring,para,place,isPL)
 {
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
 
   DPR_G.G_thisPara = null;
 
-  if(compare)
-    DPR_G.G_compare = compare;
-  else compare = DPR_G.G_compare;
-
   for(var i=1;i<7;i++) {
     if(place[i] == 'x') {
-      return await loadXMLindex(place);
+      return await loadXMLindex(sectionId, place);
     }
     else place[i] = parseInt(place[i]);
   }
 
 
-  DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee(sectionId);
 
   var nikaya = place[0];
   var book = place[1]+1;
@@ -120,9 +116,6 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   if(para)
     newparams += '&para='+para;
 
-  if(scroll)
-    newparams += '&scroll='+scroll;
-
   if(place[8])
     newparams += '&alt=1';
 
@@ -154,7 +147,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     oldparams = oldparams.replace(/\&*(analysis|ped|dppn|frombox)=[^&]+/g,'').replace(/^\&/g,'');
 
     oldparams = oldparams.split('|');
-    oldparams[compare-1] = newparams;
+    oldparams[parseInt(sectionId)] = newparams;
     newparams = oldparams.join('|')+bparams;
   }
 
@@ -240,7 +233,7 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'true',
-            executeStr: `openPlace(['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
+            executeStr: `openPlace(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
             titleStr: null,
             visibleStr: 'true',
           };
@@ -325,35 +318,35 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
   // Configure commands
   shortcutFns[DPR_CMD_GOTO_PREV] = {
     canExecuteStr: !!prev ? 'true' : 'false',
-    executeStr: !!prev ? `openPlace(['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!prev ? `openPlace(${sectionId}, ['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!prev ? null : 'No previous section',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_INDEX] = {
     canExecuteStr: 'true',
-    executeStr: `openXMLindex('${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
+    executeStr: `openXMLindex('${sectionId}', '${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
     titleStr: null,
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_NEXT] = {
     canExecuteStr: !!next ? 'true' : 'false',
-    executeStr: !!next ? `openPlace(['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!next ? `openPlace(${sectionId}, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!next ? null : 'No next section',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_MYANMAR] = {
     canExecuteStr: !!place[8] ? 'true' : 'false',
-    executeStr: !!place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !!place[8] ? null : 'Currently viewing Myanmar Tipitaka',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_THAI] = {
     canExecuteStr: !place[8] ? 'true' : 'false',
-    executeStr: !place[8] ? `openPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
     titleStr: !place[8] ? null : 'Currently viewing Thai Tipitaka',
     visibleStr: 'true',
   };
@@ -400,16 +393,16 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     }
   }
 
-// output header
+  // output header
 
-  initializeMainPaneOutput();
-  writeNavigationHeaderForSection(titleout[0], modt, range, place[8]);
+  initializeMainPaneOutput(sectionId);
+  writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
 
-  $('#mafbc').append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
-  $('#mafbc').append('<div id="savei">'+titleout[1]+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savei">'+titleout[1]+'</div>');
 
-// output body
+  // output body
 
   var theData = '';
   // check if there is a search going on and add the labels
@@ -514,15 +507,12 @@ async function loadXMLSection(querystring,para,place,isPL,scroll,compare)
     }
   }
 
-  var outData = await outputFormattedData(theData,0,place,shortcutFns);
-  resolveCommands(shortcutFns);
+  var outData = await outputFormattedData(sectionId,theData,0,place,shortcutFns);
+  resolveCommands(sectionId, shortcutFns);
   makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
   if(opara) {
     scrollMainPane(document.getElementById('para'+opara).offsetTop);
-  }
-  else if(scroll) {
-    scrollMainPane(scroll);
   }
 
 // add to history
@@ -556,7 +546,11 @@ const resolveCommand = (id, cmdCfg) => `
     });
 `;
 
-function resolveCommands(shortcutFns) {
+function resolveCommands(sectionId, shortcutFns) {
+  if (!DPR_Chrome.isPrimarySectionId(sectionId)) {
+    return
+  }
+
   const cmdCfgs = Object.entries(shortcutFns).filter(x => x[1].executeStr).map(x => resolveCommand(x[0], x[1]));
   const scriptStr = `
 <script data-type="XMLJS">
@@ -569,17 +563,12 @@ function resolveCommands(shortcutFns) {
   $("body").append(scriptStr);
 }
 
-async function loadXMLindex(place,compare) {
+async function loadXMLindex(sectionId,place) {
   __dprViewModel.showMainFeatures();
 
   var isDev = false; // dev tool
   var DshowH = false; // dev tool
   //DPR_G.devCheck = 1; // dev tool
-
-  if(compare)
-    DPR_G.G_compare = compare;
-  else
-    compare = DPR_G.G_compare;
 
   var isPlace = place.length > 3?true:false;
 
@@ -600,7 +589,7 @@ async function loadXMLindex(place,compare) {
   else
     var xset = isPlace?(place[8]?place[8]:0):0;
 
-  DPR_PAL.showLoadingMarquee();
+  DPR_PAL.showLoadingMarquee(sectionId);
 
   var nikaya = place[0];
   var bookno = parseInt(place[1]);
@@ -677,7 +666,7 @@ async function loadXMLindex(place,compare) {
     var oldparams = oldurl.split('?')[1];
     if(oldparams) {
       oldparams = oldparams.split('|');
-      oldparams[compare-1] = newparams;
+      oldparams[parseInt(sectionId)] = newparams;
       newparams = oldparams.join('|');
     }
     var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
@@ -688,7 +677,7 @@ async function loadXMLindex(place,compare) {
 
     whichcol[0] = 1; // bump up to let the second color know
 
-    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
     // translations
 
@@ -736,7 +725,7 @@ async function loadXMLindex(place,compare) {
         spaces += '&nbsp;&nbsp;';
       }
 
-      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
       // translations
 
@@ -791,7 +780,7 @@ async function loadXMLindex(place,compare) {
           spaces += '&nbsp;&nbsp;';
         }
 
-        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
         // translations
 
@@ -851,7 +840,7 @@ async function loadXMLindex(place,compare) {
           var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0,4);  // short reference
 
 
-          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
           // translations
 
@@ -905,7 +894,7 @@ async function loadXMLindex(place,compare) {
               spaces += '&nbsp;&nbsp;';
             }
 
-            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
 
             // translations
 
@@ -964,7 +953,7 @@ async function loadXMLindex(place,compare) {
 
               var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,0,6);  // short reference
 
-              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace([\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
               // translations
 
@@ -1000,11 +989,11 @@ async function loadXMLindex(place,compare) {
                     //~ p1 = parseInt(p1)+1;
                     //~ return p1;
                   //~ }
-                  var para = formatuniout('<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
+                  var para = formatuniout(sectionId, '<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
                 }
                 else {
                   var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
-                  var para = formatuniout('<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+                  var para = formatuniout(sectionId, '<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
                 }
                 theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
                 convout += para[1].replace(/  *,/g, ',');
@@ -1032,7 +1021,7 @@ async function loadXMLindex(place,compare) {
   };
   var main = '';
 
-  $('#mafbc').html('');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
 
   // toolbox
 
@@ -1071,7 +1060,8 @@ async function loadXMLindex(place,compare) {
 
   }
 
-  resolveCommands(shortcutFns);
+
+  resolveCommands(sectionId, shortcutFns);
 
   // add header to saveout
 
@@ -1085,12 +1075,12 @@ async function loadXMLindex(place,compare) {
     return [tabT,saveout];
 
   if (DPR_PAL.isWeb){
-    initializeMainPaneOutput();
-    writeNavigationHeader(tabT);
+    initializeMainPaneOutput(sectionId);
+    writeNavigationHeader(sectionId, tabT);
   }
-  $('#mafbc').append('<div id="savetitle">'+tabT+'</div>');
-  $('#mafbc').append('<div id="savei">'+saveout+'</div>');
-  $('#mafbc').append('<div id="convi">'+convout+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savei">'+saveout+'</div>');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="convi">'+convout+'</div>');
 
   // title, tab, link
 
@@ -1104,15 +1094,13 @@ async function loadXMLindex(place,compare) {
   bareurl += newparams;
   var oldparams = oldurl.split('?')[1];
   if(oldparams) {
-    oldparams = oldparams.split('|');
-    oldparams[compare-1] = newparams;
-    newparams = oldparams.join('|');
+    newparams = oldparams;
   }
   var newurl = `${DPR_PAL.dprHomePage}?${newparams}`;
 
   DPR_PAL.contentWindow.history.replaceState({}, 'Title', newurl);
-  $('#mafbc').append(`<div id="paliTextContent">${theDatao}</div>`);
-  document.getElementById('maf').scrollTop = 0;
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append(`<div id="paliTextContent">${theDatao}</div>`);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #maf`)[0].scrollTop = 0;
 
   // refresh history box
 
@@ -1150,7 +1138,7 @@ function saveCompilation() {
 }
 
 
-async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
+async function compareVersions(sectionId, [nikaya,book,meta,volume,vagga,sutta,section,hier,alt],para,stringra,add) {
 
   var nikbookhier = nikaya + (book+1) + hier;
 
@@ -1200,7 +1188,7 @@ async function compareVersions([nikaya,book,meta,volume,vagga,sutta,section,hier
     }
   }
 
-  $('#mafbc').html(out);
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html(out);
 }
 
 

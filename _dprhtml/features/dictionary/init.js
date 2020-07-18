@@ -45,10 +45,10 @@ const initializeDictionarySidebarTab = () => {
   DPR_PAL.enablePopover('#dictinInfo', 'click', 'bottom');
 }
 
-const initializeDictionaryFeature = async () => {
+const initializeDictionaryFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
   try {
-    await DPR_dict_mod.startDictLookup();
+    await DPR_dict_mod.startDictLookup(sectionId);
   } catch(ex) {
     console.error('Unexpected exception. Is a bug. Find and fix.', ex);
   }

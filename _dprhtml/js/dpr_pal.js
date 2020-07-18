@@ -8,8 +8,6 @@
  */
 'use strict';
 
-console.log('Loading DPR_PAL...');
-
 (function (DPR_PAL, $, undefined) {
   const defineReadOnlyProperty = (name, value) => Object.defineProperty(DPR_PAL, name, { value: value });
 
@@ -61,13 +59,13 @@ console.log('Loading DPR_PAL...');
 
   DPR_PAL.addJS = async (files) => await Promise.all(files.map(DPR_PAL.addOneJS))
 
-  DPR_PAL.showLoadingMarquee = () => {
+  DPR_PAL.showLoadingMarquee = sectionId => {
     if (DPR_PAL.isXUL) {
-      $('#mafbc').html('');
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
       document.getElementById('mafbc').appendChild(DPR_G.pleasewait);
     } else {
-      $('#mafbc').empty();
-      $('#mafbc').append(DPR_G.pleasewait);
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).empty();
+      $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append(DPR_G.pleasewait);
     }
   };
 
@@ -377,8 +375,6 @@ console.log('Loading DPR_PAL...');
       document: window.document,
     };
   };
-
-  console.log('Loaded DPR_PAL!', DPR_PAL);
 })(window.DPR_PAL = window.DPR_PAL || {}, jQuery);
 
 // NOTE: Keep this out side the above.

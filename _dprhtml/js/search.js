@@ -16,7 +16,7 @@ DPR_G.G_searchPart;
 DPR_G.G_searchRX;
 DPR_G.G_searchLink;
 
-async function searchTipitaka(searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
+async function searchTipitaka(sectionId,searchType,searchString,searchMAT,searchSet,searchBook,searchPart,searchRX) {
   DPR_search_mod.showCancelButton();
   DPR_search_mod.showProgressBar();
 
@@ -29,7 +29,7 @@ async function searchTipitaka(searchType,searchString,searchMAT,searchSet,search
     element.removeChild(element.firstChild);
   }
 
-  clearDivs('search');
+  clearDivs(sectionId,'search');
   resetvalues();
   if(searchString) { // update url
     DPR_G.G_searchType = searchType;
@@ -472,6 +472,7 @@ function createTdForMatch(dups, match) {
 
 function createTables(xmlDoc,hiert)
 {
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   //TO DO (comment DO 2020-02-22): This is a temporary fix search for alpha release.
   //This piece of code makes using the RegEx checkbox having the right effect.
   //After removing XUL, this whome file has to be tidied up and refactored.
@@ -763,7 +764,7 @@ function createTables(xmlDoc,hiert)
                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
-                  finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+                  finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
 
                   match = 1;
                   DPR_G.thiscount++;
@@ -899,7 +900,7 @@ function createTables(xmlDoc,hiert)
 
 
                   // paragraph
-                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace([\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(postpara,1)[0] + '</p><hr></div>';
+                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
 
                   // mumble mumble
 

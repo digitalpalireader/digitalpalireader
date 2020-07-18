@@ -248,20 +248,20 @@ function DPRShowBottomPane(tabIdToActivate = 'D') {
   openBottomFrame();
 }
 
-const initializeMainPaneOutput = () => {
-  $('#mafbc').html('');
+const initializeMainPaneOutput = sectionId => {
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
 }
 
-const writeNavigationHeader = (tabT) => {
-  $('#main-pane-container-section-0-header').html(tabT);
+const writeNavigationHeader = (sectionId, tabT) => {
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html(tabT);
 }
 
-const writeNavigationHeaderForSection = (titleout0, modt, range, place8) => {
-  $('#main-pane-container-section-0-header').html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
+const writeNavigationHeaderForSection = (sectionId, titleout0, modt, range, place8) => {
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).html(modt + '&nbsp' + titleout0 + (range ? ' <span class="tiny">para. ' + range.join('-')+'</span>' : '') + (place8 ? '<span class="tiny">(Thai)</span>' : '') + `</nav>`);
 }
 
 const scrollMainPane = (scrollTop) => {
-  $('#main-pane-container-section-0').scrollTop(scrollTop);
+  $(DPR_Chrome.getPrimarySectionElementId()).scrollTop(scrollTop);
 }
 
 const openBottomFrame = () => {
@@ -323,7 +323,7 @@ var DPR_Chrome = (function () {
     const totalSplitterWidth = sectionElements.splitters.reduce((acc, e) => acc + e.width(), 0)
     sectionElements.sections.forEach(x => x.width((availableWidth - totalSplitterWidth) / sectionElements.sections.length));
 
-    const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x);
+    const uris = sectionElements.sections.map(x => x.attr('data-dpruri')).filter(x => x).slice(1);
     const locMutator = loc => {
       const [first, ..._] = loc.split('|');
       return `${[first, ...uris].join('|')}`;
@@ -351,41 +351,120 @@ var DPR_Chrome = (function () {
     return false
   }
 
-  const addMainPanelSection = (sInfo, fixupUrlAndLayout = true) => {
-    if (sInfo.type === 'dpr') {
-      return;
-    }
+  const sectionIdPrefix = 'main-pane-container-section-'
 
-    let sPos = $('#main-pane-container').attr('data-nextspos');
-    sPos = parseInt(sPos ? sPos : '1');
+  const sectionIdCracker = new RegExp(`^#(${sectionIdPrefix})(\\d+)$`)
+
+  const getPrimarySectionId = () => 0
+
+  const getSectionElementIdName = id => `${sectionIdPrefix}${id}`
+
+  const getSectionElementId = id => `#${getSectionElementIdName(id)}`
+
+  const getPrimarySectionElementId = () => getSectionElementId(getPrimarySectionId())
+
+  const isPrimarySectionId = id => parseInt(id) === getPrimarySectionId()
+
+  const createSuttaSectionContentFragment = () =>
+    `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>
+    <hr class="mx-2 mb-0" />
+    <div id="content">
+      <div id="top-frame">
+        <div id="matrelc"></div>
+        <div id="diva" onmouseover="document.body.style.cursor='auto'">
+          <div id="maf">
+            <div style="text-align: left" id="mafa" class="paperback"></div>
+            <div style="text-align: justify" id="mafb" class="paperback">
+              <div id="mafbc">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`
+
+  const createTranslationSectionContentFragment = () =>
+    `<iframe class="main-pane-container-section-iframe">
+    </iframe>`
+
+  const createSectionFragment = (sPos, sInfo) => {
+    const splitter = sPos === 0
+      ? ''
+      : `<div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>`
+
+    const closeButton = sPos === 0
+      ? ''
+      : `<button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
+        <i class="fa fa-times" aria-hidden="true"></i>
+      </button>`
+
+    const content = sInfo.type === 'dpr'
+      ? createSuttaSectionContentFragment()
+      : createTranslationSectionContentFragment()
 
     const html = `
-  <div class="main-pane-container-splitter" id="main-pane-container-splitter-${sPos}"></div>
-  <div class="main-pane-container-section" id="main-pane-container-section-${sPos}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
-    <button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
-      <i class="fa fa-times" aria-hidden="true"></i>
-    </button>
-    <iframe class="main-pane-container-section-iframe" id="main-pane-container-section-iframe-${sPos}" src="${DPR_Translations.resolveUri(sInfo)}">
-    </iframe>
-  </div>`;
+    ${splitter}
+    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+      ${closeButton}
+      ${content}
+    </div>`;
 
     $('#main-pane-container').append(`${html}`);
-    $('#main-pane-container').attr('data-nextspos', sPos + 1);
+  }
+
+  const loadSuttaSection = async (sInfo, sectionId, q, p) => {
+    switch (sInfo.place.length) {
+      case 3:
+        await DPR_xml_mod.loadXMLindex(sectionId, sInfo.place);
+        break;
+      case 8: case 9:
+        await DPR_xml_mod.loadXMLSection(sectionId, q, p, sInfo.place);
+        break;
+      default:
+        console.error('Unsupported place format ', sInfo.place);
+        break;
+    }
+  }
+
+  const loadTranslationSection = (sInfo, sectionId) => {
+    $(`${getSectionElementId(sectionId)} .main-pane-container-section-iframe`).attr('src', DPR_Translations.resolveUri(sInfo))
+  }
+
+  const addOrOpenMainPanelSection = async (sInfo, fixupUrlAndLayout = true, targetSectionId = null, section0Query = null, section0Para = null) => {
+    let sectionId = targetSectionId
+    if (sectionId === null) { // NOTE: 0 is a valid value.
+      sectionId = parseInt($('#main-pane-container').attr('data-nextsectionid'))
+    }
+
+    if ($(getSectionElementId(sectionId)).length === 0) {
+      createSectionFragment(sectionId, sInfo);
+      $('#main-pane-container').attr('data-nextsectionid', sectionId + 1)
+    }
+
+    if (sInfo.type === 'dpr') {
+      await loadSuttaSection(sInfo, sectionId, section0Query, section0Para);
+    } else {
+      loadTranslationSection(sInfo, sectionId)
+    }
 
     if (fixupUrlAndLayout) {
       fixupUrlAndMainPanelSectionsLayout();
     }
   }
 
-  const addMainPanelSections = places => {
-    places.forEach(p => addMainPanelSection(p, false));
-    fixupUrlAndMainPanelSectionsLayout();
+  const addMainPanelSections = async (sInfos, section0Id, section0Query, section0Para) => {
+    for (let i = 0; i < sInfos.length; i++) {
+      const targetSectionId = i === 0 ? section0Id : null
+      await addOrOpenMainPanelSection(sInfos[i], false, targetSectionId, section0Query, section0Para)
+    }
+
+    fixupUrlAndMainPanelSectionsLayout()
   }
 
   const closeContainerSection = position => {
-    $(`#main-pane-container-section-${position}`).resizable('destroy')
+    $(`${getSectionElementId(position)}`).resizable('destroy')
     $(`#main-pane-container-splitter-${position}`).remove()
-    $(`#main-pane-container-section-${position}`).remove()
+    $(`${getSectionElementId(position)}`).remove()
     fixupUrlAndMainPanelSectionsLayout()
   }
 
@@ -461,7 +540,7 @@ var DPR_Chrome = (function () {
     toggleDPRSidebar: toggleDPRSidebar,
     openDPRSidebar: openDPRSidebar,
     closeDPRSidebar: openDPRSidebar,
-    addMainPanelSection: addMainPanelSection,
+    addOrOpenMainPanelSection: addOrOpenMainPanelSection,
     addMainPanelSections: addMainPanelSections,
     closeContainerSection: closeContainerSection,
     showErrorToast: showErrorToast,
@@ -469,5 +548,9 @@ var DPR_Chrome = (function () {
     showSuccessToast: showSuccessToast,
     showSingletonInformationToast: showSingletonInformationToast,
     ToastTypeInfo: ToastTypeInfo,
+    isPrimarySectionId: isPrimarySectionId,
+    getPrimarySectionId: getPrimarySectionId,
+    getSectionElementId: getSectionElementId,
+    getPrimarySectionElementId: getPrimarySectionElementId,
   };
 })();

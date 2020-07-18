@@ -54,7 +54,6 @@ class NavigationTabViewModel {
     this.navSuttaInfo = ko.computed(function() { return this.computePartInfo(3); }, this);
     this.navSectionInfo = ko.computed(function() { return this.computePartInfo(4); }, this);
 
-    this.placeArray = ko.observableArray();
     this.query = ko.observable('');
     this.para = ko.observable('');
 
@@ -74,22 +73,19 @@ class NavigationTabViewModel {
     this.initializeSets();
     this.updateHistory();
     this.updateBookmarks();
+
+    this.sectionId = DPR_Chrome.getPrimarySectionId()
   }
 
   initializeSets() {
     Object
-    .entries(DPR_G.G_nikFullNames)
-    .forEach(([value, label]) => this.navset.push({ value, label: DPR_translit_mod.translit(label) }));
-  }
-
-  place(place){
-    this.placeArray(place);
-    DPRNav.gotoPlace(place);
+      .entries(DPR_G.G_nikFullNames)
+      .forEach(([value, label]) => this.navset.push({ value, label: DPR_translit_mod.translit(label) }));
   }
 
   setPlaces(places) {
-    this.places(places);
-    this.place(places[0].place)
+    this.places(places)
+    DPRNav.gotoPlace(places[0].place)
   }
 
   navPartOptionsEmpty(opts) {
@@ -103,8 +99,8 @@ class NavigationTabViewModel {
 
     const isIndex = this.partVisibility.slice(part + 1).some(x => x());
     return isIndex
-      ? { text: '≡', title: 'Combine all sub-sections', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
-      : { text: '\u21D2', title: 'View this section', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
+      ? { text: '≡', title: 'Combine all sub-sections (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)', onmouseup: `DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event),null,${part + 2})` }
+      : { text: '\u21D2', title: 'View this section (Click to open in primary section; Ctrl+Click to open in new tab; Shift+Click to open side by side)', onmouseup: 'DPRSend.importXML(false,null,null,null,DPRSend.eventSend(event))' };
   }
 
   isStorageSupportedByBrowser() {
@@ -115,7 +111,7 @@ class NavigationTabViewModel {
     if(ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== "-- History --") {
       let selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@');
       let x = selectedHistItem[1].split(',');
-      x.length > 3 ? await DPRSend.openPlace(x) : await DPRSend.openIndex(x);
+      x.length > 3 ? await DPRSend.openPlace(this.sectionId, x) : await DPRSend.openIndex(this.sectionId, x);
     }
   }
 
@@ -137,7 +133,8 @@ class NavigationTabViewModel {
     if(ctx.selectedBookmarksItem() && ctx.selectedBookmarksItem() !== "-- Bookmarks --") {
       let selectedBookmItem = ctx.selectedBookmarksItem().toString().replace(/'/g, '').split('@');
       let x = selectedBookmItem[1].split(',');
-      x.length > 3 ? DPRSend.openPlace(x) : DPRSend.openIndex(x);
+      const sectionId = DPR_Chrome.getPrimarySectionId()
+      x.length > 3 ? DPRSend.openPlace(sectionId, x) : DPRSend.openIndex(sectionId, x);
     }
   }
 
@@ -158,22 +155,13 @@ class NavigationTabViewModel {
 
 const __navigationTabViewModel = new NavigationTabViewModel();
 
-const initializeNavigationFeature = async () => {
+const initializeNavigationFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
-  let place = __navigationTabViewModel.placeArray();
-  switch(place.length){
-    case 3:
-      await DPR_xml_mod.loadXMLindex(place,false);
-      break;
-    case 8:
-      await DPR_xml_mod.loadXMLSection(__navigationTabViewModel.query(), __navigationTabViewModel.para(), place);
-      break;
-    default:
-      console.error('Unsupported place format ', place);
-      break;
-  }
-
-  DPR_Chrome.addMainPanelSections(__navigationTabViewModel.places());
+  await DPR_Chrome.addMainPanelSections(
+    __navigationTabViewModel.places(),
+    sectionId,
+    __navigationTabViewModel.query(),
+    __navigationTabViewModel.para());
 }
 
 const parseNavigationURLParams = () => {

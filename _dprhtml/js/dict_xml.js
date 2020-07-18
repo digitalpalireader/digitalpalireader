@@ -52,6 +52,8 @@ async function paliXML(filein,which,add)
 
   await DPR_PAL.addJS(['ped']);
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
+
   if(add == 'right') return;
   if(add == true) {
     await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
@@ -59,7 +61,7 @@ async function paliXML(filein,which,add)
   }
   moveFrame(1);
   var file = DPR_translit_mod.toUni(filein);
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -235,6 +237,8 @@ async function DPPNXML(filein,which,add)
 
   await DPR_PAL.addJS(['dppn','nameno']);
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
+
   if(add == 'right') return;
   if(add == true) {
     await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
@@ -257,7 +261,7 @@ async function DPPNXML(filein,which,add)
 
   tloc[0] = DPR_translit_mod.toVel(tloc[0]);
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
   moveFrame(1);
 
   if(!which) { // not from select
@@ -355,6 +359,8 @@ async function sktRXML(no,add)
 {
   appInsights.trackEvent({ name: 'sktRXML',  properties: { no,add, }});
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
+
   if(add == 'right') return;
   if(add == true) {
     //await sendDPPNXML(DPR_translit_mod.toVel(filein),true);
@@ -363,7 +369,7 @@ async function sktRXML(no,add)
 
   //moveFrame(1);
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
 
   if(/[^0-9]/.test(no)) {
     for(var i = 0; i < DPR_G.sktR.length;i++) {
@@ -420,13 +426,15 @@ async function sktXML(entry,idx,which,add)
 
   await DPR_PAL.addJS(['/sa/dict/index.js']);
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
+
   if(add == 'right') return;
   if(add == true) {
     //await sendPaliXML(DPR_translit_mod.toVel(filein.split(',')[1]),true);
     return;
   }
 
-  clearDivs('dif');
+  clearDivs(sectionId,'dif');
 
   var char = entry.charAt(0);
 
@@ -462,6 +470,7 @@ async function sktXML(entry,idx,which,add)
 async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
   appInsights.trackEvent({ name: 'getAtthXML',  properties: { num,type,niklist, }});
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   if(type == 'a') {
     await DPR_PAL.addJS(['attlist']);
     var loca = DPR_G.attlist[num].split('#');
@@ -525,7 +534,7 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="openPlace([\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(z,1)[0]+'</p>';
+        finout += '<p><span class="abut obut tiny" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],eventSend(event))">'+placen+'</span> '+preparepali(sectionId,z,1)[0]+'</p>';
     }
 
     displayDictData(finout);
@@ -538,7 +547,7 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
 
   await DPR_PAL.addJS(['titles']);
 
-
+  const sectionId = DPR_Chrome.getPrimarySectionId()
   var loca = DPR_G.titlelist[num].split('#');
   var word = loca.shift();
 
@@ -634,7 +643,7 @@ async function getTitleXML(num,mul,att,tik,niklist) { // get titles for title se
     const title = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,1);
     var placen = title[0] + (sn ? ' (' + DPR_G.G_nikLongName[nikaya] + ' ' + sn + ')' : '');
 
-        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace([\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
+        finout += '<p>'+placen+' <span class="abut obut" onclick="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',\''+bookno+'\',\''+pca[2]+'\',\''+pca[3]+'\',\''+pca[4]+'\',\''+pca[5]+'\',\''+pca[6]+'\',\''+hiert+'\'],null,null,eventSend(event));">go</span></p>';
     }
     displayDictData(finout);
     if (!DPR_PAL.isXUL) {

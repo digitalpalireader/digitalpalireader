@@ -7,6 +7,8 @@ var DPR_grammar_mod = ( function () {
 function conjugate(word, id, which) {
   appInsights.trackEvent({ name: 'Conjugate',  properties: { word, id, which, }});
 
+  const sectionId = DPR_Chrome.getPrimarySectionId()
+
   if(DPR_G.DPR_prefs['nigahita'] && which) {
     which = which.replace(/ṁ/g, 'ṃ');
     which = which.replace(/Ṁ/g, 'Ṃ');
@@ -51,7 +53,7 @@ function conjugate(word, id, which) {
     return out;
   }
   if(id == 'dif') {
-    clearDivs('dif');
+    clearDivs(sectionId, 'dif');
     outNode.innerHTML = '<div class="conj">'+out+'</div>';
     document.getElementById(DPR_PAL.getDifId()).appendChild(outNode);
   }

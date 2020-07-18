@@ -9,7 +9,7 @@ function eventSend(event,internal) {
   return 'right';
 }
 
-async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
+async function openPlace(sectionId,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
   appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
 
   if(add == 'right') return;
@@ -18,7 +18,7 @@ async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]), false, sectionId, stringra, para);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -29,11 +29,11 @@ async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLSection(stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]);
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]), false, sectionId, stringra, para);
     }
   }
   else if (add == 'internal') {
-    await DPR_xml_mod.loadXMLSection(stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],null,null);
+    await DPR_xml_mod.loadXMLSection(sectionId,stringra,para,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],null,null);
   }
   else if (add == 'shift') {
     if (window.getSelection)
@@ -41,13 +41,7 @@ async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
-
-      var node = createBrowser(thisTabBrowser.contentDocument,permalink,count);
-
-      elem.appendChild(node);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]));
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -59,16 +53,7 @@ async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm' + '?loc='+nikaya+'.'+book+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hiert+(stringra ? '&query=' + stringra : '')+(para ? '&para=' + para : '')+(alt ? '&alt='+alt : ''));
-
-      var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
-      var splitter = createSplitter(oldTabBrowser.contentDocument,count);
-
-      elem.appendChild(splitter);
-      elem.appendChild(node);
-      return;
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]));
     }
   }
   else {
@@ -78,14 +63,14 @@ async function openPlace([nikaya,book,meta,volume,vagga,sutta,section,hiert,alt]
 }
 
 
-async function openXMLindex(nikaya,bookno,hier,add) {
+async function openXMLindex(sectionId,nikaya,bookno,hier,add) {
   appInsights.trackEvent({ name: 'Open XML Index',  properties: { nikaya, bookno, hier, add, }});
 
   if(!add) { // reuse old tab
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya,bookno,hier]);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,hier]), false, sectionId);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -97,11 +82,11 @@ async function openXMLindex(nikaya,bookno,hier,add) {
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya,bookno,hier]);
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,hier]), false, sectionId);
     }
   }
   else if (add == 'internal') {
-    await DPR_xml_mod.loadXMLindex([nikaya,bookno,hier]);
+    await DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,hier]), false, sectionId);
   }
   else if (add == 'shift') {
     if (window.getSelection)
@@ -110,13 +95,7 @@ async function openXMLindex(nikaya,bookno,hier,add) {
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      var elem = thisTabBrowser.contentDocument.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier);
-
-      var node = createBrowser(thisTabBrowser.contentDocument,permalink,count);
-
-      elem.appendChild(node);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,hier]));
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -128,16 +107,7 @@ async function openXMLindex(nikaya,bookno,hier,add) {
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      var elem = oldTabBrowser.contentDocument.getElementById('dpr-tops');
-      var count = getBrowserCount()+1;
-      var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/top.htm?loc='+nikaya+'.'+bookno+'.'+hier);
-
-      var node = createBrowser(oldTabBrowser.contentDocument,permalink,count);
-      var splitter = createSplitter(oldTabBrowser.contentDocument,count);
-
-      elem.appendChild(splitter);
-      elem.appendChild(node);
-      return;
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,hier]));
     }
   }
   else if(add != 'right'){
@@ -146,7 +116,7 @@ async function openXMLindex(nikaya,bookno,hier,add) {
   }
 }
 
-async function importXMLindex(add) {
+async function importXMLindex(sectionId, add) {
 
   var nikaya = document.getElementById('nav-set').value;
   var bookno = document.getElementById('nav-book').value-1;
@@ -155,7 +125,7 @@ async function importXMLindex(add) {
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya,bookno,DPR_G.G_hier]);
+      await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,DPR_G.G_hier]), false, sectionId);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -167,7 +137,7 @@ async function importXMLindex(add) {
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_xml_mod.loadXMLindex([nikaya,bookno,DPR_G.G_hier]);
+      await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR_Chrome.addOrOpenMainPanelSection(DPR_Translations.makeDprPlace([nikaya,bookno,DPR_G.G_hier]), false, sectionId);
     }
   }
   else if(add != 'right') {
@@ -175,7 +145,7 @@ async function importXMLindex(add) {
     openDPRTab(permalink,'DPRm');
   }
   else {
-    await openXMLindex(nikaya,bookno,DPR_G.G_hier,add);
+    await openXMLindex(sectionId,nikaya,bookno,DPR_G.G_hier,add);
   }
 }
 
@@ -301,18 +271,20 @@ async function sendUpdateBookmarks() {
 
 DPR_G.G_lastcolour = 0;
 
-async function sendAnalysisToOutput(input, divclicked, frombox, add){
+async function sendAnalysisToOutput(sectionId, input, divclicked, frombox, add){
   appInsights.trackEvent({ name: 'Reading - DPR Analysis',  properties: { input, divclicked, frombox, add, }});
+
+  const sectionElementId = DPR_Chrome.getSectionElementId(sectionId)
 
   if(add == 'right') return;
   if(window.getSelection().toString())
     return;
   if(divclicked) {
-    divclicked = 'W'+divclicked;
-    var cdiv = document.getElementById(divclicked);
+    divclicked = `${sectionElementId} #W${divclicked}`
+    var cdiv = $(divclicked)[0]
     if (cdiv)
     {
-      var ldiv = document.getElementById(DPR_G.G_lastcolour);
+      var ldiv = $(DPR_G.G_lastcolour)[0]
       if (ldiv)
       {
         var lcn = ldiv.className;
@@ -334,7 +306,7 @@ async function sendAnalysisToOutput(input, divclicked, frombox, add){
     var thisTab = isDPRTab('DPRm');
     if(thisTab) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-      await thisTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await thisTabBrowser.contentWindow.outputAnalysis(sectionId, input,frombox);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -345,7 +317,7 @@ async function sendAnalysisToOutput(input, divclicked, frombox, add){
     else {
       DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-      await oldTabBrowser.contentWindow.outputAnalysis(input,frombox);
+      await oldTabBrowser.contentWindow.outputAnalysis(sectionId, input,frombox);
     }
   }
   else {
@@ -382,7 +354,7 @@ function sendTranslate(input, add){
   }
 }
 
-function openTranslation(url,add) {
+async function openTranslation(url,add) {
   appInsights.trackEvent({ name: 'Open Translation',  properties: { url, add, }});
 
   if(add == 'right') return;
@@ -397,7 +369,7 @@ function openTranslation(url,add) {
       var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
       var doc = thisTabBrowser.contentDocument;
       var elem = doc.getElementById('dpr-tops');
-      DPR_Chrome.addMainPanelSection(sInfo);
+      await DPR_Chrome.addOrOpenMainPanelSection(sInfo);
       return;
     }
     var oldTab = findDPRTab('DPR-main');
@@ -409,7 +381,7 @@ function openTranslation(url,add) {
       var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
       var doc = oldTabBrowser.contentDocument;
       var elem = doc.getElementById('dpr-tops');
-      DPR_Chrome.addMainPanelSection(sInfo);
+      await DPR_Chrome.addOrOpenMainPanelSection(sInfo);
       return;
     }
   }
