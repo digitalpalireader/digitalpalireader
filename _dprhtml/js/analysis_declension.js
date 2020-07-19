@@ -491,7 +491,7 @@ function makeDeclensions(oneword,lastpart,nextpart) {
     if(endings[gend[0]] && endings[gend[0]] > gend[2]) {
       var dec = oneword.substring(0, endings[gend[0]]+gend[1]) + gend[3];
 
-      if (!isUncomp(oneword,lastpart,nextpart) && !wtrDup[dec]) {
+      if (!DPR1_analysis_function_mod.isUncomp(oneword,lastpart,nextpart) && !wtrDup[dec]) {
         //wtrDup[dec] = 1;
 
         if (gend[4] == 'v') {
@@ -514,7 +514,7 @@ function makeDeclensions(oneword,lastpart,nextpart) {
           //if(/^ga/.exec(oneword)) ddump('-- got ' + dec + ' ' +stem+ ' ' + gend[0]);
           if(DPR_G.G_altStem[stem][2]) {
           }
-          if (isUncomp(oneword,lastpart,nextpart)) { continue; }
+          if (DPR1_analysis_function_mod.isUncomp(oneword,lastpart,nextpart)) { continue; }
 
           if(wtrDup[dec]) continue;
           //else wtrDup[dec] = 1;

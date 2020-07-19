@@ -156,7 +156,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
     DPR_PAL.contentWindow.history.pushState({}, 'Title', newurl);
   }
 
-  var titleout = await convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
+  var titleout = await DPR1_format_mod.convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hier,null,'DPR_PAL.contentDocument.location.href=\''+bareurl+'\'');
 
 // tab title
 
@@ -170,7 +170,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
 
   var tabT = 'Pāli: ' + DPR_G.G_nikLongName[nikaya] +  (modno ? ' ' + modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  + '';
-  setCurrentTitle(tabT);
+  DPR1_chrome_mod.setCurrentTitle(tabT);
 
   const shortcutFns = createShortcutFns();
 
@@ -233,7 +233,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'true',
-            executeStr: `openPlace(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, eventSend(event, 1))`,
+            executeStr: `DPR1_send_mod.openPlace(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, DPR1_send_mod.eventSend(event, 1))`,
             titleStr: null,
             visibleStr: 'true',
           };
@@ -318,42 +318,42 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   // Configure commands
   shortcutFns[DPR_CMD_GOTO_PREV] = {
     canExecuteStr: !!prev ? 'true' : 'false',
-    executeStr: !!prev ? `openPlace(${sectionId}, ['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!prev ? `DPR1_send_mod.openPlace(${sectionId}, ['${prev.join("', '")}'${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))` : emptyFnStr,
     titleStr: !!prev ? null : 'No previous section',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_INDEX] = {
     canExecuteStr: 'true',
-    executeStr: `openXMLindex('${sectionId}', '${nikaya}', ${bookno}, '${hier}', eventSend(event, 1))`,
+    executeStr: `DPR1_send_mod.openXMLindex('${sectionId}', '${nikaya}', ${bookno}, '${hier}', DPR1_send_mod.eventSend(event, 1))`,
     titleStr: null,
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_NEXT] = {
     canExecuteStr: !!next ? 'true' : 'false',
-    executeStr: !!next ? `openPlace(${sectionId}, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!next ? `DPR1_send_mod.openPlace(${sectionId}, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))` : emptyFnStr,
     titleStr: !!next ? null : 'No next section',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_MYANMAR] = {
     canExecuteStr: !!place[8] ? 'true' : 'false',
-    executeStr: !!place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !!place[8] ? `DPR1_send_mod.openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'], null, null, DPR1_send_mod.eventSend(event, 1))` : emptyFnStr,
     titleStr: !!place[8] ? null : 'Currently viewing Myanmar Tipitaka',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_GOTO_THAI] = {
     canExecuteStr: !place[8] ? 'true' : 'false',
-    executeStr: !place[8] ? `openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, eventSend(event, 1))` : emptyFnStr,
+    executeStr: !place[8] ? `DPR1_send_mod.openPlace(${sectionId}, ['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}', 1], null, null, DPR1_send_mod.eventSend(event, 1))` : emptyFnStr,
     titleStr: !place[8] ? null : 'Currently viewing Thai Tipitaka',
     visibleStr: 'true',
   };
 
   shortcutFns[DPR_CMD_COPY_PERMALINK] = {
     canExecuteStr: DPR_G.DPR_prefs['showPermalinks'] ? 'true' : 'false',
-    executeStr: DPR_G.DPR_prefs['showPermalinks'] ? `permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr,
+    executeStr: DPR_G.DPR_prefs['showPermalinks'] ? `DPR1_format_mod.permalinkClick('${permalink}${(querystring ? `&query=` + querystring : '')}${(place[8] ? `&alt=1` : '')}', null)` : emptyFnStr,
     titleStr: null,
     visibleStr: DPR_G.DPR_prefs['showPermalinks'] ? 'true' : 'false',
   };
@@ -367,7 +367,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   shortcutFns[DPR_CMD_COPY_PLACE_TO_SIDEBAR] = {
     canExecuteStr: 'true',
-    executeStr: `sendPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'])`,
+    executeStr: `DPR1_send_mod.sendPlace(['${nikaya}', ${bookno}, ${meta}, ${volume}, ${vagga}, ${sutta}, ${section}, '${hier}'])`,
     titleStr: null,
     visibleStr: 'true',
   };
@@ -395,8 +395,8 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   // output header
 
-  initializeMainPaneOutput(sectionId);
-  writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
+  DPR1_chrome_mod.initializeMainPaneOutput(sectionId);
+  DPR1_chrome_mod.writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
 
   $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+DPR_G.G_nikLongName[nikaya] +  (modno ? ' '+modno : (hierb !='m' ? '-'+hierb:'') + ' ' + (bookno+1)) + ' - ' + bknameme  +'</div>');
 
@@ -507,12 +507,12 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
     }
   }
 
-  var outData = await outputFormattedData(sectionId,theData,0,place,shortcutFns);
+  var outData = await DPR1_format_mod.outputFormattedData(sectionId,theData,0,place,shortcutFns);
   resolveCommands(sectionId, shortcutFns);
-  makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
+  DPR1_format_mod.makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
   if(opara) {
-    scrollMainPane(document.getElementById('para'+opara).offsetTop);
+    DPR1_chrome_mod.scrollMainPane(document.getElementById('para'+opara).offsetTop);
   }
 
 // add to history
@@ -521,7 +521,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   // refresh history box
 
-  var sidebar = DPRSidebarWindow();
+  var sidebar = DPR1_chrome_mod.DPRSidebarWindow();
 
   if (sidebar) {
     sidebar.DPRNav.historyBox();
@@ -646,7 +646,7 @@ async function loadXMLindex(sectionId,place) {
       if(tt.length > 1) {
         dEI = await DPR_navigation_mod.getDppnEntry(tt);
         if (dEI.length > 0) {
-          namen = getNameHTML(dEI,tt);
+          namen = DPR1_format_mod.getNameHTML(dEI,tt);
         }
       }
     }
@@ -677,7 +677,7 @@ async function loadXMLindex(sectionId,place) {
 
     whichcol[0] = 1; // bump up to let the second color know
 
-    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+    theDatao += (DPR_G.devCheck == 1 && DshowH ? '[a]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+x1+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index1" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
     // translations
 
@@ -713,7 +713,7 @@ async function loadXMLindex(sectionId,place) {
         if(tt.length > 1) {
           dEI = await DPR_navigation_mod.getDppnEntry(tt);
           if (dEI.length > 0) {
-            namen = getNameHTML(dEI,tt);
+            namen = DPR1_format_mod.getNameHTML(dEI,tt);
           }
         }
       }
@@ -725,7 +725,7 @@ async function loadXMLindex(sectionId,place) {
         spaces += '&nbsp;&nbsp;';
       }
 
-      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+      theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[0]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+x0+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+x1+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index2" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
       // translations
 
@@ -767,7 +767,7 @@ async function loadXMLindex(sectionId,place) {
           if(tt.length > 1) {
             dEI = await DPR_navigation_mod.getDppnEntry(tt);
             if (dEI.length > 0) {
-              namen = getNameHTML(dEI,tt);
+              namen = DPR1_format_mod.getNameHTML(dEI,tt);
             }
           }
         }
@@ -780,7 +780,7 @@ async function loadXMLindex(sectionId,place) {
           spaces += '&nbsp;&nbsp;';
         }
 
-        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
+        theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[1]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+x0+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+x1+','+x1+','+x1+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer'+(isPlace?' placeIndex':'')+' index3" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + '</span>'+namen;
 
         // translations
 
@@ -822,7 +822,7 @@ async function loadXMLindex(sectionId,place) {
             if(tt.length > 1) {
               dEI = await DPR_navigation_mod.getDppnEntry(tt);
               if (dEI.length > 0) {
-                namen = getNameHTML(dEI,tt);
+                namen = DPR1_format_mod.getNameHTML(dEI,tt);
               }
             }
           }
@@ -840,7 +840,7 @@ async function loadXMLindex(sectionId,place) {
           var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,0,0,hier,0,4);  // short reference
 
 
-          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+          theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[2]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+x0+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+x1+','+x1+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index4" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData))+(suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
           // translations
 
@@ -880,7 +880,7 @@ async function loadXMLindex(sectionId,place) {
               if(tt.length > 1) {
                 dEI = await DPR_navigation_mod.getDppnEntry(tt);
                 if (dEI.length > 0) {
-                  namen = getNameHTML(dEI,tt);
+                  namen = DPR1_format_mod.getNameHTML(dEI,tt);
                 }
               }
             }
@@ -894,7 +894,7 @@ async function loadXMLindex(sectionId,place) {
               spaces += '&nbsp;&nbsp;';
             }
 
-            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
+            theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[3]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+x0+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+x1+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index5" style="color:'+DPR_G.DPR_prefs[col[wcs]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (nikaya == 'm' && hier == 'm' ? '&nbsp;<d class="small">(MN&nbsp;'+DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,0,hier,0) + ')</d>' : '') + '</span>'+namen;
 
             // translations
 
@@ -938,7 +938,7 @@ async function loadXMLindex(sectionId,place) {
                 if(tt.length > 1) {
                   dEI = await DPR_navigation_mod.getDppnEntry(tt);
                   if (dEI.length > 0) {
-                    namen = getNameHTML(dEI,tt);
+                    namen = DPR1_format_mod.getNameHTML(dEI,tt);
                   }
                 }
               }
@@ -953,7 +953,7 @@ async function loadXMLindex(sectionId,place) {
 
               var suno = DPR_navigation_common_mod.getSuttaNumber(nikaya,bookno,tmp2,tmp3,tmp4,tmp5,tmp6,hier,0,6);  // short reference
 
-              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
+              theDatao += spaces+(DPR_G.devCheck == 1 && DshowH ? '[4]':'')+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer hoverShow" onmouseup="DPR1_format_mod.permalinkClick(\''+permalink+'loc='+nikaya+'.'+bookno+'.'+tmp2+'.'+tmp3+'.'+tmp4+'.'+tmp5+'.'+tmp6+'.'+hier+'\');" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>&nbsp;' :'')+'<span onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+tmp2+','+tmp3+','+tmp4+','+tmp5+','+tmp6+',\''+hier+'\'],null,null,DPR1_send_mod.eventSend(event,1));" class="pointer '+(isPlace?' placeIndex':'')+' index6" style="color:'+DPR_G.DPR_prefs[col[(wcs == 5 ? 0 : wcs)]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(theData)) + (suno?'&nbsp;<d class="small">('+DPR_G.G_nikLongName[nikaya]+'&nbsp;'+suno + ')</d>' : '') + '</span>'+namen;
 
               // translations
 
@@ -989,11 +989,11 @@ async function loadXMLindex(sectionId,place) {
                     //~ p1 = parseInt(p1)+1;
                     //~ return p1;
                   //~ }
-                  var para = formatuniout(sectionId, '<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
+                  var para = DPR1_format_mod.formatuniout(sectionId, '<p> ' + t[tmp7].textContent.replace(/#([0-9]+)#/,'').replace(/  +/g, ' ') + ' </p>');
                 }
                 else {
                   var ptype = /^ *\[[0-9]+\] */.exec(t[tmp7].textContent);
-                  var para = formatuniout(sectionId, '<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
+                  var para = DPR1_format_mod.formatuniout(sectionId, '<p|'+(ptype?ptype[0].replace(/[\[\] ]/g,''):'')+'|'+link+'&para='+(tmp7+1)+'|> ' + t[tmp7].textContent.replace(/^ *\[[0-9]+\] */,'').replace(/  +/g, ' ') + '</p>');
                 }
                 theDatao += '<div style="margin-left:'+(spaces.length+5)+'px">'+para[0]+'</div>';
                 convout += para[1].replace(/  *,/g, ',');
@@ -1015,7 +1015,7 @@ async function loadXMLindex(sectionId,place) {
 
   shortcutFns[DPR_CMD_SEARCH_IN_BOOK] = {
     canExecuteStr: 'true',
-    executeStr: `sidebarSearch('${nikaya}', ${book}, '${hier}')`,
+    executeStr: `DPR1_send_mod.sidebarSearch('${nikaya}', ${book}, '${hier}')`,
     titleStr: null,
     visibleStr: 'true',
   };
@@ -1046,17 +1046,17 @@ async function loadXMLindex(sectionId,place) {
     var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + (bknameme? ' - ' + bknameme:'') ;
 
     if(!isDev)
-      makeToolbox(shortcutFns, main,'',tabT,true,true,true);
+      DPR1_format_mod.makeToolbox(shortcutFns, main,'',tabT,true,true,true);
   }
   else {
     if (z[0].getElementsByTagName("han")[0].childNodes[0]) { var bknameme = z[tmp].getElementsByTagName("han")[0].childNodes[0].textContent }
     else bknameme = '';
     bknameme = bknameme.replace(/^ +/, '').replace(/ +$/, '');
     DPR_history_mod.addHistory(DPR_G.G_nikLongName[nikaya]+(hier!='m'?'-'+hier:'')+' '+book+' (idx) - '+bknameme+"@"+nikaya+','+bookno+','+hier);
-    makeToolbox(shortcutFns, main?main:false);
+    DPR1_format_mod.makeToolbox(shortcutFns, main?main:false);
 
     var tabT = DPR_G.G_nikLongName[nikaya] + (hier !='m' ? '-'+hier:'') + ' ' + book + ' index (' + z[tmp].getElementsByTagName("han")[0].textContent.replace(/([a-z])0/g,"$1.").  replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'') + ')';
-    makeToolbox(shortcutFns, main,'',tabT,true,true,true);
+    DPR1_format_mod.makeToolbox(shortcutFns, main,'',tabT,true,true,true);
 
   }
 
@@ -1075,8 +1075,8 @@ async function loadXMLindex(sectionId,place) {
     return [tabT,saveout];
 
   if (DPR_PAL.isWeb){
-    initializeMainPaneOutput(sectionId);
-    writeNavigationHeader(sectionId, tabT);
+    DPR1_chrome_mod.initializeMainPaneOutput(sectionId);
+    DPR1_chrome_mod.writeNavigationHeader(sectionId, tabT);
   }
   $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savetitle">'+tabT+'</div>');
   $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).append('<div id="savei">'+saveout+'</div>');
@@ -1104,7 +1104,7 @@ async function loadXMLindex(sectionId,place) {
 
   // refresh history box
 
-  var sidebar = DPRSidebarWindow();
+  var sidebar = DPR1_chrome_mod.DPRSidebarWindow();
 
   if (sidebar) {
     sidebar.DPRNav.historyBox();
@@ -1128,12 +1128,12 @@ function saveCompilation() {
 //  file = file.replace(/\\/g,'/');
 
   if(file == '') {
-    alertFlash('You must enter a file name', 'red');
+    DPR1_format_mod.alertFlash('You must enter a file name', 'red');
     return;
   }
-  if(DPR_io_mod.writeExtFile(file, data)) alertFlash('Data saved to '+file, 'green');
+  if(DPR_io_mod.writeExtFile(file, data)) DPR1_format_mod.alertFlash('Data saved to '+file, 'green');
   else {
-    alertFlash('Error saving file', 'red');
+    DPR1_format_mod.alertFlash('Error saving file', 'red');
   }
 }
 
