@@ -1,5 +1,6 @@
 'use strict';
 
+var DPR1_search_mod = ( function () {
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
 DPR_G.MD = DPR_PAL.contentDocument;
@@ -29,7 +30,7 @@ async function searchTipitaka(sectionId,searchType,searchString,searchMAT,search
     element.removeChild(element.firstChild);
   }
 
-  clearDivs(sectionId,'search');
+  DPR1_format_mod.clearDivs(sectionId,'search');
   resetvalues();
   if(searchString) { // update url
     DPR_G.G_searchType = searchType;
@@ -154,7 +155,7 @@ function DPR_PAL_Search_ScrollSearch(what) {
   } else {
     const searchHitsSectionHeight = document.getElementById('sbfab').offsetHeight
     const scrollBy = what ? document.getElementById(what).offsetTop + searchHitsSectionHeight : 0;
-    scrollMainPane(scrollBy)
+    DPR1_chrome_mod.scrollMainPane(scrollBy)
   }
   return false;
 }
@@ -467,7 +468,7 @@ function createTdForMatch(dups, match) {
   }
 
   const linkText = normalizeLongSearchResult(match);
-  return `<a href="javascript:void(0);" title="${match}" onclick="showonly('${match.replace(/\"/g, 'x')}')">${linkText}</a> (${dups[match]})`;
+  return `<a href="javascript:void(0);" title="${match}" onclick="DPR1_search_mod.showonly('${match.replace(/\"/g, 'x')}')">${linkText}</a> (${dups[match]})`;
 }
 
 function createTables(xmlDoc,hiert)
@@ -764,7 +765,7 @@ function createTables(xmlDoc,hiert)
                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
-                  finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
+                  finalout += '</span>, para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',DPR1_send_mod.eventSend(event))">&rArr;</span></span></p><p>' + DPR1_format_mod.preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
 
                   match = 1;
                   DPR_G.thiscount++;
@@ -900,7 +901,7 @@ function createTables(xmlDoc,hiert)
 
 
                   // paragraph
-                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',eventSend(event))">&rArr;</span></span></p><p>' + preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
+                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',DPR1_send_mod.eventSend(event))">&rArr;</span></span></p><p>' + DPR1_format_mod.preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
 
                   // mumble mumble
 
@@ -1054,7 +1055,7 @@ async function atiSearchStart() {
 
     var thisterm = DPR_G.MD.createElement('toolbarbutton');
     thisterm.setAttribute('id','search-term');
-    thisterm.setAttribute('onmouseup','scrollSearch()');
+    thisterm.setAttribute('onmouseup','DPR1_search_mod.scrollSearch()');
     thisterm.setAttribute('class','search-set');
 
     var setlabel = DPR_G.MD.createElement('label');
@@ -1074,7 +1075,7 @@ async function atiSearchStart() {
 
       var thisset = DPR_G.MD.createElement('toolbarbutton');
       thisset.setAttribute('class','search-set');
-      thisset.setAttribute('onmouseup','scrollSearch(\'sbfN'+DPR_G.G_numberToNik[i]+'\')');
+      thisset.setAttribute('onmouseup','DPR1_search_mod.scrollSearch(\'sbfN'+DPR_G.G_numberToNik[i]+'\')');
 
       var setlabel = DPR_G.MD.createElement('label');
       setlabel.setAttribute('value',DPR_G.G_nikLongName[DPR_G.G_numberToNik[i]]+': 0');
@@ -1270,3 +1271,11 @@ function getRegExtSearchString(string) {
   return new RegExp(DPR_translit_mod.toUniRegEx(string).replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)"));
 }
 
+
+return {
+scrollSearch : scrollSearch,
+searchTipitaka : searchTipitaka,
+showonly : showonly,
+stopSearch : stopSearch,
+}
+})()

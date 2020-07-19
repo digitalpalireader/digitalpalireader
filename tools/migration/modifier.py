@@ -27,7 +27,7 @@ def handleCallSites4Func(element4Func2Exp, moduleName):
         fileOfCallSite.close()
 
 def genModuleName(fileName):
-    return "DPR_"+fileName.split("/")[-1].split(".")[0]+"_mod"
+    return "DPR1_"+fileName.split("/")[-1].split(".")[0]+"_mod"
 
 def exposeFiles(dataFileName,filesExcluded,beginningIndex,endIndex):
   funcsToExpByfile = json.load(open(dataFileName, "r", encoding="utf8"))
@@ -41,4 +41,4 @@ def exposeFiles(dataFileName,filesExcluded,beginningIndex,endIndex):
           print("\nfunction - ", element4Func2Exp['name'], "\n")
           handleCallSites4Func(element4Func2Exp, moduleName)
 
-exposeFiles("functionsToExposeForFile.json", "filesExcluded.json", beginningIndex=-1, endIndex=-1)
+exposeFiles("functionsToExposeForFile.json", "filesExcluded.json", beginningIndex=0, endIndex=6)

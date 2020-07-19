@@ -150,11 +150,11 @@ async function outputDef(sectionId,which,first,frombox)
         switch (data[2]) {
           case '0':
             if (frombox !=2 && !hotlink) { hotlink = 'PED/' + data[0]+','+DPR_translit_mod.toUni(data[1]) } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmouseup="paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + dataout + '</b></span>';
+            osout += '<span class="pointer" '+conciseCode+'onmouseup="DPR1_dict_xml_mod.paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,DPR1_send_mod.eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + dataout + '</b></span>';
             break;
           case '1':
             if (frombox !=2 && !hotlink) { hotlink = DPR_translit_mod.toUni(data[1])+'/' + data[0] +','+ DPR_translit_mod.toUni(data[1]); } // opens link in lower frame
-            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0] +','+ DPR_translit_mod.toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
+            osout += '<span class="pointer" '+conciseCode+'onmousedown="DPR1_dict_xml_mod.DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0] +','+ DPR_translit_mod.toUni(data[1]) + '\',null,DPR1_send_mod.eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + dataout + '</b></span>';
             break;
           case '2':
             osout += '<b '+conciseCode+'style="color:' + DPR_G.DPR_prefs['colcpd'] + '">' + dataout + '</b>';
@@ -170,10 +170,10 @@ async function outputDef(sectionId,which,first,frombox)
         }
         switch (data[2]) {
           case '0':
-            osout += '<span class="pointer" onmouseup="paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="DPR1_dict_xml_mod.paliXML(\'PED/' + data[0] + ','+DPR_translit_mod.toUni(data[1])+'\',null,DPR1_send_mod.eventSend(event))" ' + '><b style="color:' + DPR_G.DPR_prefs['colped'] + '">' + (parseInt(d)+1) + '</b></span>&nbsp;';
             break;
           case '1':
-            osout += '<span class="pointer" onmouseup="DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0]+','+ DPR_translit_mod.toUni(data[1]) + '\',null,eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
+            osout += '<span class="pointer" onmouseup="DPR1_dict_xml_mod.DPPNXML(\''+DPR_translit_mod.toUni(data[1])+'/' + data[0]+','+ DPR_translit_mod.toUni(data[1]) + '\',null,DPR1_send_mod.eventSend(event))"><b style="color:' + DPR_G.DPR_prefs['coldppn'] + '">' + 'n' + '</b></span>&nbsp;';
             break;
         }
       }
@@ -230,7 +230,7 @@ async function outputDef(sectionId,which,first,frombox)
 
       if(/ of /.test(concisedefa[1])) {
         var base = / of ([^;,. ]+)/.exec(concisedefa[1])[1];
-        concisedefa[1] = concisedefa[1].replace(base, await linkToPED(base,base));
+        concisedefa[1] = concisedefa[1].replace(base, await DPR1_format_mod.linkToPED(base,base));
       }
 
       concisedef = DPR_translit_mod.toUni(concisedef + ' (' + concisedefa[1] + ')');
@@ -255,15 +255,15 @@ async function outputDef(sectionId,which,first,frombox)
 
   //alert(DPR_G.G_thisConcise);
   if (hotlink) {
-    if (hotlink.search('PED') >= 0) await paliXML(hotlink);
-    else await DPPNXML(hotlink);
+    if (hotlink.search('PED') >= 0) await DPR1_dict_xml_mod.paliXML(hotlink);
+    else await DPR1_dict_xml_mod.DPPNXML(hotlink);
     //if(DPR_G.moveat == 2) { moveFrame(1); }
   }
-  else clearDivs(sectionId,'dif');
+  else DPR1_format_mod.clearDivs(sectionId,'dif');
 
-  DPRBottomPaneUpdateStyle();
+  DPR1_chrome_mod.DPRBottomPaneUpdateStyle();
 
-  DPRShowBottomPane();
+  DPR1_chrome_mod.DPRShowBottomPane();
 }
 
 DPR_G.G_thisConcise = [];
@@ -295,7 +295,7 @@ async function reanalyze(word,cancel) {
   }
 
   if($('#modify').val() != word)
-    await outputAnalysis(sectionId, $('#modify').val(),null);
+    await DPR1_analysis_function_mod.outputAnalysis(sectionId, $('#modify').val(),null);
 }
 
 return {

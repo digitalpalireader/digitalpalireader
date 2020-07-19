@@ -50,15 +50,15 @@ var DPRSend = {
 
 
     if (DPR_G.G_hier == 't' && DPRNav.limitt()) {
-      alertFlash('Ṭīkā not available for ' + DPR_G.G_nikLongName[document.getElementById('set').value] + '.', 'RGBa(255,0,0,0.8)');
+      DPR1_format_mod.alertFlash('Ṭīkā not available for ' + DPR_G.G_nikLongName[document.getElementById('set').value] + '.', 'RGBa(255,0,0,0.8)');
       return;
     }
     if (DPR_G.G_hier == 'a' && nikaya == 'g') {
-      alertFlash('Atthakatha not available for grammar.', 'RGBa(255,0,0,0.8)');
+      DPR1_format_mod.alertFlash('Atthakatha not available for grammar.', 'RGBa(255,0,0,0.8)');
       return;
     }
     if (DPR_G.G_hier == 'a' && nikaya == 'b') {
-      alertFlash('Atthakatha not available for Abhidh-s.', 'RGBa(255,0,0,0.8)');
+      DPR1_format_mod.alertFlash('Atthakatha not available for Abhidh-s.', 'RGBa(255,0,0,0.8)');
       return;
     }
 
@@ -93,7 +93,7 @@ var DPRSend = {
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
         var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + labelsearch.join('+') : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
-        openDPRTab(permalink, 'DPR-main');
+        DPR1_chrome_mod.openDPRTab(permalink, 'DPR-main');
         return;
       }
       else {
@@ -144,7 +144,7 @@ var DPRSend = {
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
         var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier);
-        openDPRTab(permalink, 'DPR-main');
+        DPR1_chrome_mod.openDPRTab(permalink, 'DPR-main');
       }
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
@@ -196,7 +196,7 @@ var DPRSend = {
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
         var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + hiert + (stringra ? '&query=' + DPR_translit_mod.toVel(stringra.join('+')) : '') + (para ? '&para=' + (para + 1) : ''));
-        openDPRTab(permalink, 'DPR-main');
+        DPR1_chrome_mod.openDPRTab(permalink, 'DPR-main');
         return;
       }
       else {
@@ -242,7 +242,7 @@ var DPRSend = {
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
         var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + hiert + '&compare=' + count);
-        openDPRTab(permalink, 'DPR-main');
+        DPR1_chrome_mod.openDPRTab(permalink, 'DPR-main');
         return;
       }
       else {
@@ -290,7 +290,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(sectionId, ql, para, null, add);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR1_send_mod.openPlace(sectionId, ql, para, null, add);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -301,26 +301,26 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(sectionId, ql, para, null, add);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR1_send_mod.openPlace(sectionId, ql, para, null, add);
       }
     }
     else if (add == 'shift') {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(null, ql, para, null, add);
+        await thisTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR1_send_mod.openPlace(null, ql, para, null, add);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
       if (!oldTab) {
         var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + hiert + (para ? '&para=' + para : ''));
-        openDPRTab(permalink, 'DPR-main');
+        DPR1_chrome_mod.openDPRTab(permalink, 'DPR-main');
         return;
       }
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.openPlace(null, ql, para, null, add);
+        await oldTabBrowser.contentDocument.getElementById('dpr-tops').getElementsByTagName('browser')[0].contentWindow.DPR1_send_mod.openPlace(null, ql, para, null, add);
       }
     }
     else {
@@ -339,7 +339,7 @@ var DPRSend = {
       var thisTab = DPRChrome.isThisDPRTab('DPRm');
       if (thisTab) {
         var thisTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(thisTab);
-        await thisTabBrowser.contentWindow.outputAnalysis(sectionId, input, frombox);
+        await thisTabBrowser.contentWindow.DPR1_analysis_function_mod.outputAnalysis(sectionId, input, frombox);
         return;
       }
       var oldTab = DPRChrome.findDPRTab('DPR-main');
@@ -350,7 +350,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentWindow.outputAnalysis(sectionId, input, frombox);
+        await oldTabBrowser.contentWindow.DPR1_analysis_function_mod.outputAnalysis(sectionId, input, frombox);
       }
     }
     else {
@@ -517,7 +517,7 @@ var DPRSend = {
       else {
         DPR_PAL.mainWindow.gBrowser.selectedTab = oldTab;
         var oldTabBrowser = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(oldTab);
-        await oldTabBrowser.contentDocument.getElementById('dpr-search-browser').contentWindow.searchTipitaka(sectionId, which, getstring, MAT, sets, book, part, rx);
+        await oldTabBrowser.contentDocument.getElementById('dpr-search-browser').contentWindow.DPR1_search_mod.searchTipitaka(sectionId, which, getstring, MAT, sets, book, part, rx);
       }
     }
     else {
@@ -535,21 +535,21 @@ var DPRSend = {
       stringra = getstring.split('+');
     }
     if (getstring.length < 3) {
-      alertFlash("Minimum three letter search length", 'yellow');
+      DPR1_format_mod.alertFlash("Minimum three letter search length", 'yellow');
       $('#sbfb').html('<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>');
       $('#sbfa').html('');
       $('#sbfab').html('');
       return false;
     }
     if (stringra.length > 3) {
-      alertFlash("Maximum three strings per search", 'yellow');
+      DPR1_format_mod.alertFlash("Maximum three strings per search", 'yellow');
       $('#sbfb').html('<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>');
       $('#sbfa').html('');
       return false;
     }
     for (var s = 0; s < stringra.length; s++) {
       if (stringra[s].length < 3 && stringra.length > 0) {
-        alertFlash("Minimum three letter search length", 'yellow');
+        DPR1_format_mod.alertFlash("Minimum three letter search length", 'yellow');
         $('#sbfb').html('<div align = center><br><br><br><br><br><h1 id = "c">ready</h1></div>');
         $('#sbfa').html('');
         $('#sbfab').html('');

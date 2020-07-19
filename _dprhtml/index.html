@@ -116,7 +116,15 @@
         "DPR_xml_mod",
         "DPR_convert_mod",
         "DPR_grammar_mod",
-        "DPR_translate_mod"
+        "DPR_translate_mod",
+        "e",
+        "t",
+        "DPR1_send_mod",
+        "DPR1_format_mod",
+        "DPR1_search_mod",
+        "DPR1_dict_xml_mod",
+        "DPR1_chrome_mod",
+        "DPR1_analysis_function_mod"
       ];
       const diffVarLists = () => {
         console.log("Global Variables introduced by DPR-")
@@ -372,7 +380,7 @@
               </div>
             </div>
 
-            <div id="main-content-panel-splitter" ondblclick="closeBottomFrame()"></div>
+            <div id="main-content-panel-splitter" ondblclick="DPR1_chrome_mod.closeBottomFrame()"></div>
 
             <div id="main-bottom-pane">
             </div>
