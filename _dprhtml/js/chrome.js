@@ -288,27 +288,27 @@ const closeBottomFrame = () => {
 }
 
 
-  return {
-  closeBottomFrame : closeBottomFrame,
-  updateBottomFrameDimensions : updateBottomFrameDimensions,
-  writeNavigationHeader : writeNavigationHeader,
-  writeNavigationHeaderForSection : writeNavigationHeaderForSection,
-  initializeMainPaneOutput : initializeMainPaneOutput,
-  scrollMainPane : scrollMainPane,
-  DPRBottomPaneUpdateStyle : DPRBottomPaneUpdateStyle,
-  DPRShowBottomPane : DPRShowBottomPane,
-  DPRSidebarDocument : DPRSidebarDocument,
-  DPRSidebarWindow : DPRSidebarWindow,
-  closeDPRSidebar : closeDPRSidebar,
-  findDPRTab : findDPRTab,
-  findDPRTabs : findDPRTabs,
-  isDPRTab : isDPRTab,
-  openDPRSidebar : openDPRSidebar,
-  openDPRTab : openDPRTab,
-  setCurrentTitle : setCurrentTitle,
-  toggleDPRSidebar : toggleDPRSidebar
-  }
-  })()
+return {
+closeBottomFrame : closeBottomFrame,
+updateBottomFrameDimensions : updateBottomFrameDimensions,
+writeNavigationHeader : writeNavigationHeader,
+writeNavigationHeaderForSection : writeNavigationHeaderForSection,
+initializeMainPaneOutput : initializeMainPaneOutput,
+scrollMainPane : scrollMainPane,
+DPRBottomPaneUpdateStyle : DPRBottomPaneUpdateStyle,
+DPRShowBottomPane : DPRShowBottomPane,
+DPRSidebarDocument : DPRSidebarDocument,
+DPRSidebarWindow : DPRSidebarWindow,
+closeDPRSidebar : closeDPRSidebar,
+findDPRTab : findDPRTab,
+findDPRTabs : findDPRTabs,
+isDPRTab : isDPRTab,
+openDPRSidebar : openDPRSidebar,
+openDPRTab : openDPRTab,
+setCurrentTitle : setCurrentTitle,
+toggleDPRSidebar : toggleDPRSidebar
+}
+})()
 
 var DPR_Chrome = (function () {
   let sectionElements = {}
