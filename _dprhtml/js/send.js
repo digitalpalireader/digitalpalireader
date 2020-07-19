@@ -481,25 +481,25 @@ async function sidebarSearch(nik,book,hiert) {
   }
 }
 
-  return {
-  eventSend : eventSend,
-  getBrowserCount : getBrowserCount,
-  importXMLindex : importXMLindex,
-  openPlace : openPlace,
-  openTranslation : openTranslation,
-  openXMLindex : openXMLindex,
-  reindexPanels : reindexPanels,
-  sendAnalysisToOutput : sendAnalysisToOutput,
-  sendAtt : sendAtt,
-  sendDPPNXML : sendDPPNXML,
-  sendPaliXML : sendPaliXML,
-  sendPlace : sendPlace,
-  sendTitle : sendTitle,
-  sendTranslate : sendTranslate,
-  sendUpdateBookmarks : sendUpdateBookmarks,
-  sidebarSearch : sidebarSearch,
-  }
-  })()
+return {
+eventSend : eventSend,
+getBrowserCount : getBrowserCount,
+importXMLindex : importXMLindex,
+openPlace : openPlace,
+openTranslation : openTranslation,
+openXMLindex : openXMLindex,
+reindexPanels : reindexPanels,
+sendAnalysisToOutput : sendAnalysisToOutput,
+sendAtt : sendAtt,
+sendDPPNXML : sendDPPNXML,
+sendPaliXML : sendPaliXML,
+sendPlace : sendPlace,
+sendTitle : sendTitle,
+sendTranslate : sendTranslate,
+sendUpdateBookmarks : sendUpdateBookmarks,
+sidebarSearch : sidebarSearch,
+}
+})()
 
 
 var DPR_Send = (function () {

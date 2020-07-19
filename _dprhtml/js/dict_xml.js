@@ -681,7 +681,6 @@ function displayDictData(data) {
 }
 
 return {
-
 DPPNXML : DPPNXML,
 DPPNXMLHistory : DPPNXMLHistory,
 getAtthXML : getAtthXML,
