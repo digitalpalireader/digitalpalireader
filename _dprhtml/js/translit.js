@@ -745,8 +745,31 @@ function toTelugu(input,type) {
   vowel['ā'] = " ఆ";
   vowel['ī'] = " ఈ";
   vowel['ū'] = " ఊ";
-  vowel['e'] = " ఎ";
-  vowel['o'] = " ఒ";
+  vowel['e'] = " ఏ";
+  vowel['o'] = " ఓ";
+  vowel['me'] = " మే";
+  vowel['ne'] = " నే";
+  vowel['te'] = " తే";
+  vowel['he'] = " హే";
+  vowel['vo'] = " వో";
+  vowel['to'] = " తో";
+  vowel['de'] = " డే";
+  vowel['ve'] = " వే";
+  vowel['re'] = " రే";
+  vowel['le'] = " లే";
+  vowel['se'] = " సే";
+  vowel['yo'] = " యో";
+  vowel['ko'] = " కో";
+  vowel['kho'] = " ఖో";
+  vowel['ro'] = " రో";
+  vowel['tho'] = " తో";
+  vowel['cch'] = " చ్చే";
+  vowel['dho'] = " ధో";
+  vowel['do'] = " దో";
+  vowel['je'] = " జే";
+  vowel['no'] = " నో";
+  vowel['ho'] = " హో";
+  vowel['so'] = " సో";
 
   var telugur = [];
 
@@ -814,20 +837,40 @@ function toTelugu(input,type) {
     i4 = input.charAt(i+3);
     i5 = input.charAt(i+4);
 
-    if (i == 0 && vowel[i1]) { // first letter vowel
-      output += vowel[i1];
-      i += 1;
+    if (i == 0) {  // first letter vowel
+      if (i2 && i3 && vowel[i1+i2+i3]) {
+        output += vowel[i1+i2+i3];
+        i += 3;
+      }
+      else if (i2 && vowel[i1+i2]) {
+        output += vowel[i1+i2];
+        i += 2;
+      }
+      else if (vowel[i1]) {
+        output += vowel[i1];
+        i += 1;
+      }
+      if (i != 0)  // matched a vowel
+        continue;
     }
-    else if (i2 == 'h' && telugur[i1+i2]) {    // two character match
+    if (i2 == 'h' && telugur[i1+i2]) {    // two character match
       output += telugur[i1+i2];
-      if (i3 && !vowel[i3] && i2 != 'ṃ') {
-        output += virama;
+      if (i3 && i2 != 'ṃ' && !vowel[i1+i2]) {
+        // if this and next character(s) not vowel add virama
+        if ((!i4 || !i5 || !vowel[i3+i4+i5]) &&
+           (!i4 || !vowel[i3+i4]) &&
+           (!vowel[i3]))
+          output += virama;
       }
       i += 2;
     }
     else if (telugur[i1]) {  // one character match except a
       output += telugur[i1];
-      if (i2 && !vowel[i2] && !vowel[i1] && i1 != 'ṃ') {
+      if (i2 && i1 != 'ṃ' && !vowel[i1]) {
+        // if this and next character(s) not vowel add virama
+        if ((!i3 || !i4 || !vowel[i2+i3+i4]) &&
+           (!i3 || !vowel[i2+i3]) &&
+           (!vowel[i2]))
         output += virama;
       }
       i++;
@@ -836,9 +879,17 @@ function toTelugu(input,type) {
       if (cons[i0] || (i0 == 'h' && cons[im])) output += virama; // end word consonant
       output += i1;
       i++;
-      if(vowel[i2]) {
-        output+=vowel[i2];
-        i++;
+      if (i2 && i3 && i4 && vowel[i2+i3+i4]) {
+        output += vowel[i2+i3+i4];
+        i += 3;
+      }
+      else if (i2 && i3 && vowel[i2+i3]) {
+        output += vowel[i2+i3];
+        i += 2;
+      }
+      else if (i2 && vowel[i2]) {
+        output += vowel[i2];
+        i += 1;
       }
     }
     else i++; // a
