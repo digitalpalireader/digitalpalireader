@@ -92,7 +92,7 @@ class SearchTabViewModel{
   }
 
   searchRX(RX){
-    this.searchRegex(RX == 'true');
+    this.searchRegex(RX.toString() === 'true');
   }
 
   searchMAT(MAT) {
