@@ -5,11 +5,12 @@ class InstallationViewModel {
     this.downloadBtChecked = ko.observable(false);
     this.installationActivated = this.isAtLeastOneChecked();
     this.isBtInstalled = ko.observable(false);
-    this.isBtInstalled.subscribe(_ => isRessourceInstalled("bt"), this);
+    this.isBtConfirmationBoxVisible = ko.observable(false);
   }
 
   showInstallationDialog() {
     if (!__dprViewModel.installationOngoing()) {
+      this.isRessourceInstalled("bt");
       $('#installation-dialog-root').modal('show');
     }
   }
@@ -19,7 +20,8 @@ class InstallationViewModel {
   }
 
   async isRessourceInstalled(source) {
-    let result = await caches.has(`translation-${source}`);;
+    let result = await caches.has(`translation-${source}`);
+    this.isBtInstalled(result);
     return result;
   }
 
@@ -48,7 +50,30 @@ class InstallationViewModel {
     __dprViewModel.installationOngoing(false);
   }
 
-  async deleteTranslFromCache(source) {
-    return caches.delete(`translation-${source}`);
+  showConfirmationBox(source) {
+    switch(source) {
+      case "bt":
+        this.isBtConfirmationBoxVisible(true);
+        break;
+    }
+  }
+
+  cancelTranslDeletion(source) {
+    switch(source) {
+      case "bt":
+        this.isBtConfirmationBoxVisible(false);
+        break;
+    }
+  }
+
+  deleteTranslFromCache(source) {
+    switch(source) {
+      case "bt":
+        this.isBtConfirmationBoxVisible(false);
+        break;
+    }
+    let result = caches.delete(`translation-${source}`);
+    this.isRessourceInstalled("bt");
+    return result;
   }
 }
