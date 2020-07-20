@@ -216,6 +216,7 @@ function openDPRSidebar() {
 
 function toggleDPRSidebar() {
   __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
+  DPR_prefload_mod.saveSideBarVisibleState(__dprViewModel.sidebarVisible())
 }
 
 function setCurrentTitle(title) {

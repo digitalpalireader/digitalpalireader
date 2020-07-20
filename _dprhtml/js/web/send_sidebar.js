@@ -403,8 +403,11 @@ var DPRSend = {
       await this.sendAnalysisToOutput(sectionId, text, (hard ? 1 : 2), add);
     }
     else {
+      DPR_prefload_mod.saveDictionarySearchSettings(JSON.stringify({ type: which, query: getstring, opts: opts.join(','), entry: '', }))
+
       if (!add) { // reuse old tab
         var oldTab = DPRChrome.findDPRTab('DPR-dict');
+
         if (!oldTab) {
           if (!hard)
             return;
@@ -507,6 +510,9 @@ var DPRSend = {
       var part = searchPart;
       var rx = searchRX;
     }
+
+    DPR_prefload_mod.saveSearchSettings(JSON.stringify({ type: which, query: getstring, MAT, set: sets, book, part, rx }))
+
     if (!add) { // reuse old tab
       var oldTab = DPRChrome.findDPRTab('DPR-search');
 

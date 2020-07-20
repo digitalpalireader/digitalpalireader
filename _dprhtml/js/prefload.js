@@ -254,6 +254,21 @@ DPR_G.DPR_prefsinfo = {
     type: Number.name,
     defaultValue: 20,
   },
+
+  sideBarVisible: {
+    type: Boolean.name,
+    defaultValue: false,
+  },
+
+  searchSettings: {
+    type: String.name,
+    defaultValue: '{"type":0,"query":"","MAT":"m","set":"dmsak","book":"1","part":1,"rx":false}',
+  },
+
+  dictionarySearchSettings: {
+    type: String.name,
+    defaultValue: '{"type":"DPR","query":"","opts":"","entry":""}',
+  },
 }
 
 const getPrefStorageKey = n => `DPR.Prefsv2_${n}`;
@@ -266,9 +281,9 @@ DPR_G.DPR_prefTypesD = Object.entries(DPR_G.DPR_prefsinfo).reduce((acc, [k, v]) 
 
 DPR_G.DPR_prefs = [];
 
-loadPreference();
+loadPreferences();
 
-function loadPreference() {
+function loadPreferences() {
   Object
     .entries(DPR_G.DPR_prefsinfo)
     .reduce((acc, [k, _]) => (acc[k] = getPref(k), acc), DPR_G.DPR_prefs);
@@ -331,10 +346,31 @@ function resetAllDprSettings() {
   window.location.reload();
 }
 
+const setPref = (name, value) => {
+  const settingInfo = DPR_G.DPR_prefsinfo[name]
+  localStorage[getPrefTypeStorageKey(name)] = settingInfo.type;
+  localStorage[getPrefStorageKey(name)] = value;
+}
+
+const saveSideBarVisibleState = value => setPref('sideBarVisible', value)
+const loadSideBarVisibleState = () => getPref('sideBarVisible')
+
+const saveSearchSettings = value => setPref('searchSettings', value)
+const loadSearchSettings = () => getPref('searchSettings')
+
+const saveDictionarySearchSettings = value => setPref('dictionarySearchSettings', value)
+const loadDictionarySearchSettings = () => getPref('dictionarySearchSettings')
+
 return {
 getPref : getPref,
-loadPreference : loadPreference,
+loadPreferences : loadPreferences,
 resetAllDprSettings : resetAllDprSettings,
 savePreferences : savePreferences,
+saveSideBarVisibleState : saveSideBarVisibleState,
+loadSideBarVisibleState : loadSideBarVisibleState,
+saveSearchSettings : saveSearchSettings,
+loadSearchSettings : loadSearchSettings,
+saveDictionarySearchSettings : saveDictionarySearchSettings,
+loadDictionarySearchSettings : loadDictionarySearchSettings,
 }
 })()
