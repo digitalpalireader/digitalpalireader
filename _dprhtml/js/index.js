@@ -120,7 +120,7 @@ const initFeatureTabs = () => {
   $("#navigationTabPane").hide();
   $("#searchTabPane").hide();
   $("#dictionaryTabPane").hide();
-  $("#installationProgressDiv").hide();
+  $("#instProgressDiv").hide();
 
   const activeTab = __dprViewModel.activeTab();
   $(`#${activeTab}TabPane`).show();

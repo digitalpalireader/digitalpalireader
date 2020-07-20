@@ -13,9 +13,13 @@
             <div id="installation-pane-tab-panes-general" class="installation-pane-tab-pane">
               <div class="installation-pane-tab-pane-section d-flex flex-column" style="grid-column: span 2;">
                 <div class="d-flex w-100 justify-content-start">
-                  <input id="download_bt_checked" class="mr-1" name="download_bt_checked" type="checkbox"
-                    data-bind="checked: download_bt_checked"/>
-                  <label for="download_bt_checked">Download BuddhistTexts Archive</label>
+                  <input id="downloadBtChecked" class="mr-1" name="downloadBtChecked" type="checkbox"
+                    data-bind="checked: downloadBtChecked, disable: isBtInstalled">
+                  <label for="downloadBtChecked">Download BuddhistTexts Archive [~50 MB]</label>
+                  <button type="button" class="btn btn-sm mb-0" title="Delete this ressource..."
+                    data-bind="click: deleteTranslFromCache('bt'), enable: isBtInstalled">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
                 </div>
               </div>
             </div>

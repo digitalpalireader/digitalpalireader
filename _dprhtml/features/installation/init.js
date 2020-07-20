@@ -2,16 +2,25 @@
 
 class InstallationViewModel {
   constructor() {
-    this.download_bt_checked = ko.observable(false);
+    this.downloadBtChecked = ko.observable(false);
     this.installationActivated = this.isAtLeastOneChecked();
+    this.isBtInstalled = ko.observable(false);
+    this.isBtInstalled.subscribe(_ => isRessourceInstalled("bt"), this);
   }
 
   showInstallationDialog() {
-    $('#installation-dialog-root').modal('show');
+    if (!__dprViewModel.installationOngoing()) {
+      $('#installation-dialog-root').modal('show');
+    }
   }
 
   isAtLeastOneChecked() {
-    return this.download_bt_checked;
+    return this.downloadBtChecked;
+  }
+
+  async isRessourceInstalled(source) {
+    let result = await caches.has(`translation-${source}`);;
+    return result;
   }
 
   startInstallation() {
@@ -28,15 +37,18 @@ class InstallationViewModel {
     translArray["bt"] = DPR_G.btUrlsToPrefetch;
     // add here other transl. sources: ati, abt, dt
     let sourceArray = translArray[source];
-    $("#installationProgressDiv").show();
-    let installElem = document.getElementById("installationBar");
-    let installWidth = 0;
+    __dprViewModel.installationOngoing(true);
+    let installWidth;
     for (var i = 0; i < sourceArray.length; i++) {
       await cache.add(sourceArray[i]);
       installWidth = 100 * i / sourceArray.length;
-      installElem.style.width = installWidth + "%";
-      installElem.innerHTML = Math.round(installWidth) + "%";
+      __dprViewModel.installationBarWidth(installWidth + "%");
+      __dprViewModel.installationBar(Math.round(installWidth) + "%");
     }
-    $("#installationProgressDiv").hide();
+    __dprViewModel.installationOngoing(false);
+  }
+
+  async deleteTranslFromCache(source) {
+    return caches.delete(`translation-${source}`);
   }
 }

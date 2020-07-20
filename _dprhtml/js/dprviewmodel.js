@@ -16,6 +16,9 @@ class DprViewModel {
     this.dictionaryFeatureVisible = ko.computed(function() {
         return this.mainFeaturesVisible() && this.activeTab() === dictionaryFeatureName
     }, this);
+    this.installationOngoing = ko.observable(false);
+    this.installationBar = ko.observable();
+    this.installationBarWidth = ko.observable(0);
     this.commands = createCommands();
     this.parseURLParameters();
   }

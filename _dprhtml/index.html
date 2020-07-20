@@ -194,21 +194,24 @@
         <div id="main-sidebar" data-bind="visible: sidebarVisible()">
           <div id="main-sidebar-content" class="card chromeback">
             <div class="card-header d-flex align-items-center">
-              <span class="font-weight-bold mr-auto"><a href="/" title="Home/Buddha Vachana (Keyboard shortcut: v)">Digital Pāli Reader</a></span>
-              <button type="button" class="btn btn-sm btn-light m-0 mr-1" data-toggle="modal" data-target="#installation-dialog-root" title="Launch installation (Keyboard shortcut: I)">
+              <span class="font-weight-bold mr-auto"><a href="/" title="Home (Keyboard shortcut: v)">Digital Pāli Reader</a></span>
+              <button type="button" class="btn btn-sm btn-light m-0 mr-1" data-toggle="modal" data-target="#installation-dialog-root"
+                title="Launch installation (Keyboard shortcut: I)" data-bind="disable: installationOngoing">
                 <i class="fa fa-download" aria-hidden="true"></i>
               </button>
-              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn btn-sm btn-light m-0 mr-1" role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
+              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn btn-sm btn-light m-0 mr-1"
+                role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
                 <i class="fa fa-question-circle"></i>
               </a>
-              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences (Keyboard shortcut: %)">
+              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root"
+                title="Launch preferences (Keyboard shortcut: %)">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
             </div>
-            <div id="installationProgressDiv" class="card-header">
+            <div id="instProgressDiv" class="card-header" data-bind="visible: installationOngoing">
               <span>Installation Progress</span>
               <div id="installationProgress">
-                <div id="installationBar"></div>
+                <div id="installationBar" data-bind="html: installationBar, style: { width: installationBarWidth() }"></div>
               </div>
             </div>
             <div class="card-body p-2">
