@@ -21,6 +21,7 @@ ko.applyBindings(__dprViewModel);
 const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
 const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
 var __otherDialogsViewModel = new OtherDialogsViewModel();
+const __installationViewModel = new InstallationViewModel();
 
 async function mainInitialize() {
   const sectionId = DPR_Chrome.getPrimarySectionId()
@@ -107,6 +108,7 @@ const loadPanesAsync = async () => {
     loadHtmlFragmentAsync(`#quicklink-dialog`, `features/other-dialogs/quicklinks.html`, __otherDialogsViewModel),
     loadHtmlFragmentAsync(`#paliquote-dialog`, `features/other-dialogs/paliquote.html`, __otherDialogsViewModel),
     loadHtmlFragmentAsync(`#bookmark-dialog`, `features/other-dialogs/bookmarks.html`, __otherDialogsViewModel),
+    loadHtmlFragmentAsync(`#installation-dialog`, `features/installation/main-pane.html`, __installationViewModel),
   ];
 
   await Promise.all(all);
@@ -118,6 +120,7 @@ const initFeatureTabs = () => {
   $("#navigationTabPane").hide();
   $("#searchTabPane").hide();
   $("#dictionaryTabPane").hide();
+  $("#instProgressDiv").hide();
 
   const activeTab = __dprViewModel.activeTab();
   $(`#${activeTab}TabPane`).show();

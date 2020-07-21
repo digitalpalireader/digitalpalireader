@@ -202,16 +202,25 @@
         <div id="main-sidebar" data-bind="visible: sidebarVisible()">
           <div id="main-sidebar-content" class="card chromeback">
             <div class="card-header d-flex align-items-center">
-              <span class="font-weight-bold mr-auto">Digital Pāli Reader</span>
-              <a href="/" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Home/Buddha Vachana (Keyboard shortcut: v)">
-                <i class="fa fa-home"></i>
-              </a>
-              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
+              <span class="font-weight-bold mr-auto"><a href="/" title="Home (Keyboard shortcut: v)">Digital Pāli Reader</a></span>
+              <button type="button" class="btn btn-sm btn-light m-0 mr-1" data-toggle="modal" data-target="#installation-dialog-root"
+                title="Launch installation (Keyboard shortcut: I)" data-bind="disable: installationOngoing">
+                <i class="fa fa-download" aria-hidden="true"></i>
+              </button>
+              <a href="https://www.youtube.com/watch?v=8n_Tyh2itsQ" target="_blank" rel="noreferrer" class="btn btn-sm btn-light m-0 mr-1"
+                role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
                 <i class="fa fa-question-circle"></i>
               </a>
-              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root" title="Launch preferences...">
+              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root"
+                title="Launch preferences (Keyboard shortcut: %)">
                 <i class="fa fa-gear" aria-hidden="true"></i>
               </button>
+            </div>
+            <div id="instProgressDiv" class="card-header" data-bind="visible: installationOngoing">
+              <span>Installation Progress</span>
+              <div id="installationProgress">
+                <div id="installationBar" data-bind="html: installationBar, style: { width: installationBarWidth() }"></div>
+              </div>
             </div>
             <div class="card-body p-2">
               <ul id="navTabs" class="nav nav-tabs">
@@ -407,6 +416,8 @@
     </div>
     <div id="bookmark-dialog">
     </div>
+    <div id="installation-dialog">
+    </div>
     <div class="modal fade show" id="helpDialog" tabindex="-1" role="dialog">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="font-size: smaller;">
@@ -420,6 +431,7 @@
               <tr><td>v</td><td>&nbsp;Go home, show Buddha Vachana</td></tr>
               <tr><td>1,2...5</td><td>&nbsp;Bring up bottom pane tabs</td></tr>
               <tr><td>i</td><td>&nbsp;Display index</td></tr>
+              <tr><td>I</td><td>&nbsp;Install DPR offline app</td></tr>
               <tr><td>p</td><td>&nbsp;Display previous section</td></tr>
               <tr><td>n</td><td>&nbsp;Display next section</td></tr>
               <tr><td>c</td><td>&nbsp;Copy permalink to clipboard</td></tr>
@@ -516,6 +528,7 @@
     <script src="/_dprhtml/features/dictionary/init.js"></script>
     <script src="/_dprhtml/features/settings-dialog/init.js"></script>
     <script src="/_dprhtml/features/other-dialogs/init.js"></script>
+    <script src="/_dprhtml/features/installation/init.js"></script>
     <script src="/_dprhtml/js/keyboard_shortcuts.js"></script>
     <script src="/_dprhtml/js/dprviewmodel.js"></script>
     <script src="/_dprhtml/js/index.js"></script>

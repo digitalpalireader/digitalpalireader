@@ -100,3 +100,19 @@ workbox.routing.registerRoute(
     ],
   }),
 );
+
+workbox.routing.registerRoute(
+  new RegExp('bt-'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'translation-bt',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 180 * 24 * 60 * 60,
+        maxEntries: 3000,
+      }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      })
+    ],
+  }),
+);
