@@ -10,7 +10,7 @@ class InstallationViewModel {
 
   showInstallationDialog() {
     if (!__dprViewModel.installationOngoing()) {
-      this.isRessourceInstalled("bt");
+      this.isResourceInstalled("bt");
       $('#installation-dialog-root').modal('show');
     }
   }
@@ -19,7 +19,7 @@ class InstallationViewModel {
     return this.downloadBtChecked;
   }
 
-  async isRessourceInstalled(source) {
+  async isResourceInstalled(source) {
     let result = await caches.has(`translation-${source}`);
     this.isBtInstalled(result);
     return result;
@@ -73,7 +73,7 @@ class InstallationViewModel {
         break;
     }
     let result = caches.delete(`translation-${source}`);
-    this.isRessourceInstalled("bt");
+    this.isResourceInstalled("bt");
     return result;
   }
 }
