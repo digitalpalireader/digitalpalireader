@@ -10,30 +10,14 @@ DPR_G.G_dictUnicode = false;
 DPR_G.G_similar_min = 75;
 
 function parseDictURLParameters(){
-  if(document.location.href.indexOf('?') > -1){
-    var options = document.location.href.split('?')[1].split('#')[0].split('&');
-    for(var i = 0; i < options.length; i++) {
-      var option = options[i].split('=');
-      switch(option[0]) {
-          case 'type':
-            __dictionaryTabViewModel.type(option[1]);
-            DPR_G.G_dictType = option[1];
-          break;
-          case 'query':
-            __dictionaryTabViewModel.query(decodeURIComponent(option[1]));
-            DPR_G.G_dictQuery = decodeURIComponent(option[1]);
-          break;
-          case 'opts':
-            __dictionaryTabViewModel.options(option[1].split(','));
-            DPR_G.G_dictOpts = option[1].split(',');
-          break;
-          case 'entry':
-            __dictionaryTabViewModel.entry(decodeURIComponent(option[1]));
-            DPR_G.G_dictEntry = decodeURIComponent(option[1]);
-          break;
-      }
-    }
-  }
+  const urlDictionarySearchParams = new URLSearchParams(DPR_PAL.isDictionaryFeature() ? window.location.search : '')
+  const savedDictionarySearchParams = JSON.parse(DPR_prefload_mod.loadDictionarySearchSettings())
+  const getDictionarySearchParamValue = n => urlDictionarySearchParams.get(n) || savedDictionarySearchParams[n]
+
+  __dictionaryTabViewModel.type(DPR_G.G_dictType = getDictionarySearchParamValue('type'));
+  __dictionaryTabViewModel.query(DPR_G.G_dictQuery = decodeURIComponent(getDictionarySearchParamValue('query')));
+  __dictionaryTabViewModel.options(DPR_G.G_dictOpts = getDictionarySearchParamValue('opts').split(','));
+  __dictionaryTabViewModel.entry(DPR_G.G_dictEntry = decodeURIComponent(getDictionarySearchParamValue('entry')));
 }
 
 async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) {

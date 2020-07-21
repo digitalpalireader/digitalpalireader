@@ -52,7 +52,7 @@ async function mainInitialize() {
 
 function installGlobalHandlers() {
   window.addEventListener('resize', () => {
-    DPR_prefload_mod.loadPreference();
+    DPR_prefload_mod.loadPreferences();
     initMainPane();
   });
 

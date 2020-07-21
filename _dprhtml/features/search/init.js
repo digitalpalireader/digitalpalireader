@@ -46,7 +46,7 @@ class SearchTabViewModel{
 
 
   searchPart(part){
-    let searchParts = part.split('.');
+    let searchParts = part.toString().split('.');
     this.partialValue(`${parseInt(searchParts[0])+1}`);
     if (searchParts.length == 6){
       this.metaListValue(searchParts[1]);
@@ -125,40 +125,17 @@ DPR_G.searchPart = 0;
 DPR_G.searchRX = false;
 
 const setSearchParams = () => {
-  const urlParams = window.location.search.substring(1, window.location.search.length).split('&');
-  urlParams.forEach(parameter => {
-    var parameterSections = parameter.split('=');
-    switch (parameterSections[0]) {
-      case 'type':
-        DPR_G.searchType = parseInt(parameterSections[1], 10);
-        __searchTabViewModel.searchType(DPR_G.searchType);
-        break;
-      case 'query':
-        DPR_G.searchString = decodeURIComponent(parameterSections[1]);
-        __searchTabViewModel.searchString(DPR_G.searchString);
-        break;
-      case 'MAT':
-        DPR_G.searchMAT = parameterSections[1];
-        __searchTabViewModel.searchMAT(DPR_G.searchMAT);
-        break;
-      case 'set':
-        DPR_G.searchSet = parameterSections[1];
-        __searchTabViewModel.searchSet(DPR_G.searchSet);
-        break;
-      case 'book':
-        DPR_G.searchBook = parameterSections[1];
-        __searchTabViewModel.searchBookString(DPR_G.searchBook);
-        break;
-      case 'part':
-        DPR_G.searchPart = parameterSections[1];
-        __searchTabViewModel.searchPart(DPR_G.searchPart);
-        break;
-      case 'rx':
-        DPR_G.searchRX = parameterSections[1];
-        __searchTabViewModel.searchRX(DPR_G.searchRX);
-        break;
-    }
-  });
+  const urlSearchParams = new URLSearchParams(DPR_PAL.isSearchFeature() ? window.location.search : '')
+  const savedSearchParams = JSON.parse(DPR_prefload_mod.loadSearchSettings())
+  const getSearchParamValue = n => urlSearchParams.get(n) || savedSearchParams[n]
+
+  __searchTabViewModel.searchType(DPR_G.searchType = parseInt(getSearchParamValue('type'), 10));
+  __searchTabViewModel.searchString(DPR_G.searchString = decodeURIComponent(getSearchParamValue('query')));
+  __searchTabViewModel.searchMAT(DPR_G.searchMAT = getSearchParamValue('MAT'));
+  __searchTabViewModel.searchSet(DPR_G.searchSet = getSearchParamValue('set'));
+  __searchTabViewModel.searchBookString(DPR_G.searchBook = getSearchParamValue('book'));
+  __searchTabViewModel.searchPart(DPR_G.searchPart = getSearchParamValue('part'));
+  __searchTabViewModel.searchRX(DPR_G.searchRX = getSearchParamValue('rx'));
 }
 
 const initializeSearchSidebarTab = async () => {
@@ -172,5 +149,6 @@ const initializeSearchSidebarTab = async () => {
 
 const initializeSearchFeature = async (sectionId) => {
   await DPR_config_mod.getconfig();
+  setSearchParams();
   await DPR1_search_mod.searchTipitaka(sectionId,DPR_G.searchType,DPR_G.searchString,DPR_G.searchMAT,DPR_G.searchSet,DPR_G.searchBook,DPR_G.searchPart,DPR_G.searchRX);
 }
