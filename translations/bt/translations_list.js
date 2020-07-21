@@ -98,7 +98,7 @@ DPR_G.btUrlsToPrefetch = [
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_4.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_5.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_6.htm',
-  'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_7.htm',
+  /*'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_7.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_8.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dh/dh_p_9.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/dhpa/dhpa_e_1.htm',
@@ -2355,5 +2355,5 @@ DPR_G.btUrlsToPrefetch = [
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/vi/vi_p_6.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/vi/vi_p_7.htm',
   'https://tipitaka.digitalpalireader.online/bt-simc-rg/vi/vi_p_8.htm',
-  'https://tipitaka.digitalpalireader.online/bt-simc-rg/vi/vi_p_9.htm'
+  'https://tipitaka.digitalpalireader.online/bt-simc-rg/vi/vi_p_9.htm'*/
 ];

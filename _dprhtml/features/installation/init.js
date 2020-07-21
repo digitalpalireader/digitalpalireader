@@ -8,15 +8,15 @@ class InstallationViewModel {
     this.isBtConfirmationBoxVisible = ko.observable(false);
   }
 
-  showInstallationDialog() {
+  async showInstallationDialog() {
     if (!__dprViewModel.installationOngoing()) {
-      this.isResourceInstalled("bt");
+      await this.isResourceInstalled("bt");
       $('#installation-dialog-root').modal('show');
     }
   }
 
   isAtLeastOneChecked() {
-    return this.downloadBtChecked;
+    return this.downloadBtChecked();
   }
 
   async isResourceInstalled(source) {
@@ -25,17 +25,18 @@ class InstallationViewModel {
     return result;
   }
 
-  startInstallation() {
-    this.downloadTranslation("bt");
+  async startInstallation() {
+    await this.downloadTranslation("bt");
   }
 
   async downloadTranslation(source) {
     await DPR_PAL.addOneJS(`/translations/${source}/translations_list.js`);
-    caches.open(`translation-${source}`).then((cache) => this.addTranslToCache(cache, source));
+    const cache = await caches.open(`translation-${source}`)
+    await this.addTranslToCache(cache, source)
   }
 
   async addTranslToCache(cache, source) {
-    let translArray = Array();
+    let translArray = {};
     translArray["bt"] = DPR_G.btUrlsToPrefetch;
     // add here other transl. sources: ati, abt, dt
     let sourceArray = translArray[source];
@@ -66,14 +67,14 @@ class InstallationViewModel {
     }
   }
 
-  deleteTranslFromCache(source) {
+  async deleteTranslFromCache(source) {
     switch(source) {
       case "bt":
         this.isBtConfirmationBoxVisible(false);
         break;
     }
-    let result = caches.delete(`translation-${source}`);
-    this.isResourceInstalled("bt");
+    let result = await caches.delete(`translation-${source}`);
+    await this.isResourceInstalled("bt");
     return result;
   }
 }
