@@ -16,7 +16,7 @@ class InstallationViewModel {
   }
 
   isAtLeastOneChecked() {
-    return this.downloadBtChecked();
+    return this.downloadBtChecked;
   }
 
   async isResourceInstalled(source) {
@@ -38,7 +38,7 @@ class InstallationViewModel {
   async addTranslToCache(cache, source) {
     let translArray = {};
     translArray["bt"] = DPR_G.btUrlsToPrefetch;
-    // add here other transl. sources: ati, abt, dt
+    // add here other transl. sources: dt, ati
     let sourceArray = translArray[source];
     __dprViewModel.installationOngoing(true);
     let installWidth;
