@@ -116,3 +116,19 @@ workbox.routing.registerRoute(
     ],
   }),
 );
+
+workbox.routing.registerRoute(
+  new RegExp('dt\/suttas\/'),
+  new workbox.strategies.CacheFirst({
+    cacheName: 'translation-dt',
+    plugins: [
+      new workbox.expiration.ExpirationPlugin({
+        maxAgeSeconds: 180 * 24 * 60 * 60,
+        maxEntries: 2000,
+      }),
+      new workbox.cacheableResponse.CacheableResponsePlugin({
+        statuses: [0, 200],
+      })
+    ],
+  }),
+);
