@@ -9,7 +9,6 @@ class InstallationViewModel {
   }
 
   showInstallationDialog() {
-    console.log(localStorage.getItem("btTranslComp") !== null);
     this.downloadBtChecked(localStorage.getItem("btTranslComp") !== null);
     this.downloadDtChecked(localStorage.getItem("dtTranslComp") !== null);
     if (!__dprViewModel.installationOngoing()) {
