@@ -2,79 +2,68 @@
 
 class InstallationViewModel {
   constructor() {
-    this.downloadBtChecked = ko.observable(false);
-    this.installationActivated = this.isAtLeastOneChecked();
-    this.isBtInstalled = ko.observable(false);
-    this.isBtConfirmationBoxVisible = ko.observable(false);
+    this.downloadBtChecked = ko.observable();
+    this.downloadBtChecked.subscribe(_ => this.deleteTranslFromCache("bt"));
+    this.downloadDtChecked = ko.observable();
+    this.downloadDtChecked.subscribe(_ => this.deleteTranslFromCache("dt"));
   }
 
-  async showInstallationDialog() {
+  showInstallationDialog() {
+    console.log(localStorage.getItem("btTranslComp") !== null);
+    this.downloadBtChecked(localStorage.getItem("btTranslComp") !== null);
+    this.downloadDtChecked(localStorage.getItem("dtTranslComp") !== null);
     if (!__dprViewModel.installationOngoing()) {
-      await this.isResourceInstalled("bt");
       $('#installation-dialog-root').modal('show');
     }
   }
 
-  isAtLeastOneChecked() {
-    return this.downloadBtChecked;
-  }
-
-  async isResourceInstalled(source) {
-    let result = await caches.has(`translation-${source}`);
-    this.isBtInstalled(result);
-    return result;
-  }
-
   async startInstallation() {
-    await this.downloadTranslation("bt");
-  }
+    let urlArray = {};
+    let btUrlArray = [];
+    let dtUrlArray = [];
 
-  async downloadTranslation(source) {
-    await DPR_PAL.addOneJS(`/translations/${source}/translations_list.js`);
-    const cache = await caches.open(`translation-${source}`)
-    await this.addTranslToCache(cache, source)
-  }
-
-  async addTranslToCache(cache, source) {
-    let translArray = {};
-    translArray["bt"] = DPR_G.btUrlsToPrefetch;
-    // add here other transl. sources: dt, ati
-    let sourceArray = translArray[source];
+    if (this.downloadBtChecked()) {
+      await DPR_PAL.addOneJS("/translations/bt/translations_list.js");
+      const btCache = await caches.open("translation-bt");
+      btUrlArray = DPR_G.btUrlsToPrefetch;
+      urlArray["bt"] = btUrlArray;
+      urlArray["btCache"] = btCache;
+    }
+    if (this.downloadDtChecked()) {
+      const dtCache = await caches.open("translation-dt");
+      const dtBaseUrl = DPR_Translations.trProps.dt.baseUrl;
+      Object.keys(DT_LIST.translations).forEach(function (prop) {
+        dtUrlArray = dtUrlArray.concat(DT_LIST.translations[prop].map(c => `${dtBaseUrl}/${c.u}`));
+      });
+      urlArray["dt"] = dtUrlArray;
+      urlArray["dtCache"] = dtCache;
+    }
     __dprViewModel.installationOngoing(true);
     let installWidth;
-    for (var i = 0; i < sourceArray.length; i++) {
-      await cache.add(sourceArray[i]);
-      installWidth = 100 * i / sourceArray.length;
-      __dprViewModel.installationBarWidth(installWidth + "%");
-      __dprViewModel.installationBar(Math.round(installWidth) + "%");
+    let arraysSumLength = btUrlArray.length + dtUrlArray.length;
+    let progressCount = 0;
+    for (const prop in urlArray) {
+      let checkJ = 0;
+      for (var j = 0; j < urlArray[prop].length; j++) {
+        await urlArray[`${prop}Cache`].add(urlArray[prop][j]);
+        installWidth = 100 * (progressCount + j) / arraysSumLength;
+        __dprViewModel.installationBarWidth(installWidth + "%");
+        __dprViewModel.installationBar(Math.round(installWidth) + "%");
+        checkJ = j;
+      }
+    progressCount += Object.keys(urlArray[prop]).length;
+    let storeObj ={isLength: checkJ, shouldLength: Object.keys(urlArray[prop]).length};
+    localStorage.setItem(`${prop}TranslComp`, JSON.stringify(storeObj));
     }
     __dprViewModel.installationOngoing(false);
   }
 
-  showConfirmationBox(source) {
-    switch(source) {
-      case "bt":
-        this.isBtConfirmationBoxVisible(true);
-        break;
-    }
-  }
-
-  cancelTranslDeletion(source) {
-    switch(source) {
-      case "bt":
-        this.isBtConfirmationBoxVisible(false);
-        break;
-    }
-  }
-
   async deleteTranslFromCache(source) {
-    switch(source) {
-      case "bt":
-        this.isBtConfirmationBoxVisible(false);
-        break;
+    let result = false;
+    if (await caches.has(`translation-${source}`)) {
+      result = await caches.delete(`translation-${source}`);
+      localStorage.removeItem(`${source}TranslComp`);
     }
-    let result = await caches.delete(`translation-${source}`);
-    await this.isResourceInstalled("bt");
     return result;
   }
 }

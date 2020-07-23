@@ -39,7 +39,7 @@ const createTrProps = () => {
     },
     dt: {
       id: 4,
-      baseUrl: `https://www.dhammatalks.org/suttas/`,
+      baseUrl: `https://tipitaka.digitalpalireader.online/dt/suttas`,
       icon: `dt.ico`,
       background: 'white',
       priority: 3,
