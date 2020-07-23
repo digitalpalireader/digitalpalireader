@@ -529,7 +529,7 @@ const dprCommandList = [
     execute: () => __installationViewModel.showInstallationDialog(),
     visible: true,
     isDynamic: false,
-    title: "Launch installation dialog (Keyboard shortcut: I)",
+    title: "Install for offline use (Keyboard shortcut: I)",
     matchKey: e => e.key === 'I',
   },
 ];
