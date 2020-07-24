@@ -30,8 +30,6 @@ var DPRComponentRegistry = (function () {
 
   const componentInstallDoneMarkerKeyName = id => `Component: ${getComponentFromId(id).name} installed`
 
-  const componentInstallProgressMarkerKeyName = id => `Component: ${getComponentFromId(id).name} items downloaded`
-
   const isComponentInstalled = id => !!localStorage[componentInstallDoneMarkerKeyName(id)]
 
   const getComponentCacheName = id => `${getComponentFromId(id).isTranslation ? 'translation' : 'xxxx'}-${id}`
@@ -49,7 +47,6 @@ var DPRComponentRegistry = (function () {
   return {
     getComponentFromId: getComponentFromId,
     componentInstallDoneMarkerKeyName: componentInstallDoneMarkerKeyName,
-    componentInstallProgressMarkerKeyName: componentInstallProgressMarkerKeyName,
     isComponentInstalled: isComponentInstalled,
     getComponentCacheName: getComponentCacheName,
     getAvailableComponentVMs: getAvailableComponentVMs,
@@ -124,10 +121,9 @@ class InstallationViewModel {
     const component = DPRComponentRegistry.getComponentFromId(componentInfo.id)
     const cache = await caches.open(DPRComponentRegistry.getComponentCacheName(component.id))
     for (let i = 0; i < componentInfo.fileList.length; i++) {
-      await cache.add(componentInfo.fileList[i])
-
-      const installMarker = { isLength: i, shouldLength: componentInfo.fileList.length }
-      localStorage[DPRComponentRegistry.componentInstallProgressMarkerKeyName(component.id)] = JSON.stringify(installMarker)
+      if (!(await cache.match(componentInfo.fileList[i]))) {
+        await cache.add(componentInfo.fileList[i])
+      }
 
       this.updateProgressBar(filesDownloaded++ / totalFiles * 100)
     }
