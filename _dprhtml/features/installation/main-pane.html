@@ -1,5 +1,5 @@
 <div class="modal fade show" id="installation-dialog-root" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header p-2">
         <h6 class="modal-title" id="exampleModalLongTitle">Install components for offline use</h6>
@@ -11,23 +11,21 @@
         <div id="installation-pane">
           <div id="installation-pane-tab-panes">
             <div id="installation-pane-tab-panes-general" class="installation-pane-tab-pane">
-              <div class="installation-pane-tab-pane-section d-flex flex-column" style="grid-column: span 2;">
+              <div class="installation-pane-tab-pane-section d-flex flex-column">
+                <!--ko foreach: components -->
                 <div class="d-flex w-100 justify-content-start">
-                  <input id="downloadBtChecked" class="mr-1" name="downloadBtChecked" type="checkbox" data-bind="checked: downloadBtChecked">
-                  <label for="downloadBtChecked">BuddhistTexts Translations [~53 MB]</label>
+                  <input class="mr-2" type="checkbox" data-bind="checked: install, attr: { id: 'componentInstallState' + $index() }">
+                  <label data-bind="text: getName($data), attr: { for: 'componentInstallState' + $index() }"></label>
                 </div>
-                <div class="d-flex w-100 justify-content-start">
-                  <input id="downloadDtChecked" class="mr-1" name="downloadDtChecked" type="checkbox" data-bind="checked: downloadDtChecked">
-                  <label for="downloadDtChecked">DhammaTalks Translations [~15 MB]</label>
-                </div>
+                <!--/ko-->
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer p-2 d-flex">
-        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes and close..." data-bind="click: startInstallation, enable: downloadBtChecked() || downloadDtChecked()" data-dismiss="modal">OK</button>
+        <button type="button" class="btn btn-secondary btn-sm mb-0" title="Cancel changes" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm mb-0" title="Apply changes..." data-bind="click: applyChanges, enable: componentsToInstall().length || componentsToUninstall().length" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>

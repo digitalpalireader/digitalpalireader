@@ -500,7 +500,7 @@ var DPR_Chrome = (function () {
   const ToastTypeInfo = 'Information';
   const createToast = (type, message, delay, uniqueId, {toastCommandName, toastCommandHandler, toastCommandLink}) => {
     const containerId = "#main-container-toast-container";
-    if ($(containerId).find(`#${uniqueId}`).length) {
+    if (uniqueId && $(containerId).find(`#${uniqueId}`).length) {
       console.log('Notification with id:', uniqueId, 'already exists. Not creating another.');
       // NOTE: Singleton notifications.
       return;
@@ -555,10 +555,10 @@ var DPR_Chrome = (function () {
     $(".toast").on("hidden.bs.toast", e => $(e.currentTarget).remove());
   }
 
-  const toastVisibleForMilliseconds = 4000;
-  const showErrorToast = (message) => createToast(ToastTypeError, message, toastVisibleForMilliseconds, null, {});
-  const showWarningToast = (message) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds, null, {});
-  const showSuccessToast = (message) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds, null, {});
+  const defaultToastVisibleForMilliseconds = 4000;
+  const showErrorToast = (message, toastVisibleForMilliseconds = defaultToastVisibleForMilliseconds) => createToast(ToastTypeError, message, toastVisibleForMilliseconds, null, {});
+  const showWarningToast = (message, toastVisibleForMilliseconds = defaultToastVisibleForMilliseconds) => createToast(ToastTypeWarning, message, toastVisibleForMilliseconds, null, {});
+  const showSuccessToast = (message, toastVisibleForMilliseconds = defaultToastVisibleForMilliseconds) => createToast(ToastTypeSuccess, message, toastVisibleForMilliseconds, null, {});
   const showSingletonInformationToast =
     (message, uniqueId, toastVisibleForSeconds, toastCommandInfo) => createToast(ToastTypeInfo, message, toastVisibleForSeconds * 1000, uniqueId, toastCommandInfo);
 
