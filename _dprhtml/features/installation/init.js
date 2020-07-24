@@ -9,7 +9,8 @@ var DPRComponentRegistry = (function () {
     {
       id: 'bt',
       name: 'Buddhist Texts',
-      available: !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
+      routeRegExp: /digitalpalireader\.online\/bt-/i,
+      isAvailable: () => !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
       type: componentTypeTranslation,
       sizeMB: 53,
       getFileList: async () => {
@@ -20,9 +21,10 @@ var DPRComponentRegistry = (function () {
     {
       id: 'dt',
       name: 'DhammaTalks',
-      available: true,
+      routeRegExp: /digitalpalireader\.online\/dt\/suttas/i,
+      isAvailable: () => true,
       type: componentTypeTranslation,
-      sizeMB: 15,
+      sizeMB: 22,
       getFileList: async () => {
         await DPR_PAL.addOneJS('/components/dt/translations_list.js')
         return DPR_G.dtUrlsToPrefetch.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
@@ -43,10 +45,10 @@ var DPRComponentRegistry = (function () {
     name: c.name,
     sizeMB: c.sizeMB,
     install: ko.observable(isComponentInstalled(c.id)),
-    getName: _ => `${c.name} ${c.type} [${c.sizeMB} MB]`,
+    getName: _ => `${c.name} ${c.type} [${c.sizeMB} MB storage, ${Math.ceil(c.sizeMB * 0.4)} MB download]`,
   })
 
-  const getAvailableComponentVMs = () => registry.filter(c => c.available).map(componentToVM)
+  const getAvailableComponentVMs = () => registry.filter(c => c.isAvailable()).map(componentToVM)
 
   return {
     getComponentFromId: getComponentFromId,
@@ -54,6 +56,7 @@ var DPRComponentRegistry = (function () {
     isComponentInstalled: isComponentInstalled,
     getComponentCacheName: getComponentCacheName,
     getAvailableComponentVMs: getAvailableComponentVMs,
+    registry: Object.freeze(registry),
   }
 })()
 
@@ -79,16 +82,17 @@ class InstallationViewModel {
   }
 
   async applyChanges() {
+    const toastDisplayTimeMS = 600000
     try {
       this.initializeInstall()
 
       await this.installAllComponents(this.componentsToInstall())
       await this.uninstallAllComponents(this.componentsToUninstall())
 
-      DPR_Chrome.showSuccessToast('Installation completed successfully. You can now disconnect from the network and use DPR offline.', 600000)
+      DPR_Chrome.showSuccessToast('Installation completed successfully. You can now disconnect from the network and use DPR offline.', toastDisplayTimeMS)
     } catch (e) {
       console.error('Error during install', e)
-      DPR_Chrome.showErrorToast('Installation failed. Please try again.')
+      DPR_Chrome.showErrorToast('Installation failed. Please try the same steps again.', toastDisplayTimeMS)
     }
 
     this.finalizeInstall()

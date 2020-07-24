@@ -3,6 +3,8 @@
  */
 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js');
+importScripts('/_dprhtml/js/globalObject.js');
+importScripts('/_dprhtml/features/installation/init.js');
 
 workbox.core.setCacheNameDetails({
   prefix: 'dpr',
@@ -24,24 +26,24 @@ const addTipitakaFilesToCache = (event, lang, files) => {
 }
 
 self.addEventListener('install', (event) => {
-  const enDppnUrls =
-    ['abbrev.xml']
-    .concat(Array.from({ length: 10 }, (_, k)=> `${k + 1}.xml`))
-    .map(f => `/en/dppn/${f}`);
-  event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enDppnUrls)));
+  // const enDppnUrls =
+  //   ['abbrev.xml']
+  //   .concat(Array.from({ length: 10 }, (_, k)=> `${k + 1}.xml`))
+  //   .map(f => `/en/dppn/${f}`);
+  // event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enDppnUrls)));
 
-  const enPedUrls =
-    Array.from({ length: 5 }, (_, k)=> k)
-    .map(n => `/en/ped/${n}/ped.xml`);
-  event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enPedUrls)));
+  // const enPedUrls =
+  //   Array.from({ length: 5 }, (_, k)=> k)
+  //   .map(n => `/en/ped/${n}/ped.xml`);
+  // event.waitUntil(caches.open('lang-en').then((cache) => cache.addAll(enPedUrls)));
 
-  // TODO: Generate this list from during the build process.
-  const myFiles = ['a10a','a10m','a10t','a11a','a11m','a11t','a1a','a1m','a1t','a2a','a2m','a2t','a3a','a3m','a3t','a4a','a4m','a4t','a5a','a5m','a5t','a6a','a6m','a6t','a7a','a7m','a7t','a8a','a8m','a8t','a9a','a9m','a9t','b1m','b2m','d1a','d1m','d1t','d2a','d2m','d2t','d3a','d3m','d3t','g1m','g2m','g3m','g4m','g5m','k10a','k10m','k11m','k12a','k12m','k13a','k13m','k14a','k14m','k15a','k15m','k16m','k17m','k18m','k19m','k1a','k1m','k20m','k21m','k2a','k2m','k3a','k3m','k4a','k4m','k5a','k5m','k6a','k6m','k7a','k7m','k8a','k8m','k9a','k9m','m1a','m1m','m1t','m2a','m2m','m2t','m3a','m3m','m3t','n1m','n2m','n3m','n4m','n5m','n6m','n7m','n8m','n9m','s1a','s1m','s1t','s2a','s2m','s2t','s3a','s3m','s3t','s4a','s4m','s4t','s5a','s5m','s5t','v10t','v11t','v12t','v13t','v14t','v15t','v16t','v17t','v18t','v1a','v1m','v1t','v2a','v2m','v2t','v3a','v3m','v3t','v4a','v4m','v4t','v5a','v5m','v5t','v6a','v6m','v6t','v7t','v8t','v9t','x1a','x1m','x2a','x2m','y10m','y11m','y12m','y13m','y14m','y1a','y1m','y1t','y2a','y2m','y2t','y3a','y3m','y3t','y4a','y4m','y4t','y5a','y5m','y5t','y6a','y6m','y6t','y7m','y8m','y9a','y9m','y9t',]
-  addTipitakaFilesToCache(event, 'my', myFiles)
+  // // TODO: Generate this list from during the build process.
+  // const myFiles = ['a10a','a10m','a10t','a11a','a11m','a11t','a1a','a1m','a1t','a2a','a2m','a2t','a3a','a3m','a3t','a4a','a4m','a4t','a5a','a5m','a5t','a6a','a6m','a6t','a7a','a7m','a7t','a8a','a8m','a8t','a9a','a9m','a9t','b1m','b2m','d1a','d1m','d1t','d2a','d2m','d2t','d3a','d3m','d3t','g1m','g2m','g3m','g4m','g5m','k10a','k10m','k11m','k12a','k12m','k13a','k13m','k14a','k14m','k15a','k15m','k16m','k17m','k18m','k19m','k1a','k1m','k20m','k21m','k2a','k2m','k3a','k3m','k4a','k4m','k5a','k5m','k6a','k6m','k7a','k7m','k8a','k8m','k9a','k9m','m1a','m1m','m1t','m2a','m2m','m2t','m3a','m3m','m3t','n1m','n2m','n3m','n4m','n5m','n6m','n7m','n8m','n9m','s1a','s1m','s1t','s2a','s2m','s2t','s3a','s3m','s3t','s4a','s4m','s4t','s5a','s5m','s5t','v10t','v11t','v12t','v13t','v14t','v15t','v16t','v17t','v18t','v1a','v1m','v1t','v2a','v2m','v2t','v3a','v3m','v3t','v4a','v4m','v4t','v5a','v5m','v5t','v6a','v6m','v6t','v7t','v8t','v9t','x1a','x1m','x2a','x2m','y10m','y11m','y12m','y13m','y14m','y1a','y1m','y1t','y2a','y2m','y2t','y3a','y3m','y3t','y4a','y4m','y4t','y5a','y5m','y5t','y6a','y6m','y6t','y7m','y8m','y9a','y9m','y9t',]
+  // addTipitakaFilesToCache(event, 'my', myFiles)
 
-  // TODO: Generate this list from during the build process.
-  const thFiles = ['a10m','a11m','a1m','a2m','a3m','a4m','a5m','a6m','a7m','a8m','a9m','d1m','d2m','d3m','k1m','k2m','k3m','k4m','k5m','m1m','m2m','m3m','s1m','s2m','s3m','s4m','s5m','v1m','v2m','v3m','v4m','v5m','v6m',]
-  addTipitakaFilesToCache(event, 'th', thFiles)
+  // // TODO: Generate this list from during the build process.
+  // const thFiles = ['a10m','a11m','a1m','a2m','a3m','a4m','a5m','a6m','a7m','a8m','a9m','d1m','d2m','d3m','k1m','k2m','k3m','k4m','k5m','m1m','m2m','m3m','s1m','s2m','s3m','s4m','s5m','v1m','v2m','v3m','v4m','v5m','v6m',]
+  // addTipitakaFilesToCache(event, 'th', thFiles)
 });
 
 workbox.precaching.precacheAndRoute(
@@ -101,34 +103,22 @@ workbox.routing.registerRoute(
   }),
 );
 
-workbox.routing.registerRoute(
-  new RegExp('bt-'),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'translation-bt',
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxAgeSeconds: 180 * 24 * 60 * 60,
-        maxEntries: 3000,
+DPRComponentRegistry.registry.forEach(
+  component => {
+    workbox.routing.registerRoute(
+      component.routeRegExp,
+      new workbox.strategies.CacheFirst({
+        cacheName: DPRComponentRegistry.getComponentCacheName(component.id),
+        plugins: [
+          new workbox.expiration.ExpirationPlugin({
+            maxAgeSeconds: 720 * 24 * 60 * 60,
+            maxEntries: 10000,
+          }),
+          new workbox.cacheableResponse.CacheableResponsePlugin({
+            statuses: [0, 200],
+          })
+        ],
       }),
-      new workbox.cacheableResponse.CacheableResponsePlugin({
-        statuses: [0, 200],
-      })
-    ],
-  }),
-);
-
-workbox.routing.registerRoute(
-  new RegExp('dt\/suttas\/'),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'translation-dt',
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxAgeSeconds: 180 * 24 * 60 * 60,
-        maxEntries: 2000,
-      }),
-      new workbox.cacheableResponse.CacheableResponsePlugin({
-        statuses: [0, 200],
-      })
-    ],
-  }),
-);
+    );
+  }
+)
