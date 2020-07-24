@@ -110,7 +110,7 @@ class InstallationViewModel {
   }
 
   async installAllComponents(components) {
-    const tasks = components.map(c => DPRComponentRegistry.getComponentFromId(c.id).getFileList().then(fileList => ({ id: c.id, fileList: fileList.slice(0, 25) })))
+    const tasks = components.map(c => DPRComponentRegistry.getComponentFromId(c.id).getFileList().then(fileList => ({ id: c.id, fileList: fileList })))
     const componentInfos = await Promise.all(tasks)
 
     const totalFiles = componentInfos.reduce((acc, e) => acc + e.fileList.length, 0)
