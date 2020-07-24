@@ -1,15 +1,19 @@
 'use strict';
 
 var DPRComponentRegistry = (function () {
+  const componentTypeTranslation = 'translation'
+  const componentTypeTipitaka = 'tipitaka'
+  const componentTypeLanguage = 'lang'
+
   const registry = [
     {
       id: 'bt',
       name: 'Buddhist Texts',
       available: !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
-      isTranslation: true,
+      type: componentTypeTranslation,
       sizeMB: 53,
       getFileList: async () => {
-        await DPR_PAL.addOneJS('/translations/bt/translations_list.js')
+        await DPR_PAL.addOneJS('/components/bt/translations_list.js')
         return DPR_G.btUrlsToPrefetch.map(x => `${DPR_Translations.trProps.bt.baseUrl}/${x}`)
       },
     },
@@ -17,11 +21,11 @@ var DPRComponentRegistry = (function () {
       id: 'dt',
       name: 'DhammaTalks',
       available: true,
-      isTranslation: true,
+      type: componentTypeTranslation,
       sizeMB: 15,
       getFileList: async () => {
-        await DPR_PAL.addOneJS('/_dprhtml/js/dt_list.js')
-        return Object.keys(DT_LIST.translations).flatMap(prop => DT_LIST.translations[prop].map(c => `${DPR_Translations.trProps.dt.baseUrl}/${c.u}`))
+        await DPR_PAL.addOneJS('/components/dt/translations_list.js')
+        return DPR_G.dtUrlsToPrefetch.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
       },
     },
   ]
@@ -32,14 +36,14 @@ var DPRComponentRegistry = (function () {
 
   const isComponentInstalled = id => !!localStorage[componentInstallDoneMarkerKeyName(id)]
 
-  const getComponentCacheName = id => `${getComponentFromId(id).isTranslation ? 'translation' : 'xxxx'}-${id}`
+  const getComponentCacheName = id => `${getComponentFromId(id).type}-${id}`
 
   const componentToVM = c => ({
     id: c.id,
     name: c.name,
     sizeMB: c.sizeMB,
     install: ko.observable(isComponentInstalled(c.id)),
-    getName: _ => `${c.name} ${c.isTranslation ? 'translations' : 'xxxx'} [${c.sizeMB} MB]`,
+    getName: _ => `${c.name} ${c.type} [${c.sizeMB} MB]`,
   })
 
   const getAvailableComponentVMs = () => registry.filter(c => c.available).map(componentToVM)
@@ -107,7 +111,7 @@ class InstallationViewModel {
   }
 
   async installAllComponents(components) {
-    const tasks = components.map(c => DPRComponentRegistry.getComponentFromId(c.id).getFileList().then(fileList => ({ id: c.id, fileList: fileList })))
+    const tasks = components.map(c => DPRComponentRegistry.getComponentFromId(c.id).getFileList().then(fileList => ({ id: c.id, fileList })))
     const componentInfos = await Promise.all(tasks)
 
     const totalFiles = componentInfos.reduce((acc, e) => acc + e.fileList.length, 0)

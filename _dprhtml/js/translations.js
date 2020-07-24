@@ -10,7 +10,8 @@ const createTrProps = () => {
   trProps = {
     ati: {
       id: 0,
-      baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['catiloc']))}/tipitaka`,
+      baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['catiloc']))}`,
+      path: '/tipitaka',
       icon: `ati.ico`,
       background: 'white',
       priority: 3,
@@ -18,6 +19,7 @@ const createTrProps = () => {
     abt: {
       id: 1,
       baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+      path: '',
       icon: `abt.gif`,
       background: 'rgb(255, 248, 240)',
       priority: 4,
@@ -25,6 +27,7 @@ const createTrProps = () => {
     bt: {
       id: 2,
       baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['btloc'])),
+      path: '',
       enabled: DPR_G.DPR_prefs['buddhist_texts'],
       icon: `wisdom.png`,
       background: 'transparent',
@@ -33,13 +36,15 @@ const createTrProps = () => {
     dpr: {
       id: 3,
       baseUrl: `Not yet implemented`,
+      path: '',
       icon: `?`,
       background: 'transparent',
       priority: 1,
     },
     dt: {
       id: 4,
-      baseUrl: `https://tipitaka.digitalpalireader.online/dt/suttas`,
+      baseUrl: `https://tipitaka.digitalpalireader.online/dt`,
+      path: '/suttas',
       icon: `dt.ico`,
       background: 'white',
       priority: 3,
@@ -49,7 +54,7 @@ const createTrProps = () => {
 
 createTrProps();
 
-const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}/${sInfo.place}`;
+const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}${trProps[sInfo.type].path}/${sInfo.place}`;
 
 const makeUri = sInfo => `${sInfo.type}://${Array.isArray(sInfo.place) ? sInfo.place.join('.') : sInfo.place}`;
 

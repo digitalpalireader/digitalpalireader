@@ -513,6 +513,8 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   if(opara) {
     DPR1_chrome_mod.scrollMainPane(document.getElementById('para'+opara).offsetTop);
+  } else {
+    DPR1_chrome_mod.scrollMainPane(0);
   }
 
 // add to history
