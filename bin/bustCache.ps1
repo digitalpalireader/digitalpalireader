@@ -11,7 +11,13 @@ function AppendHashToFileName
 
   $fileHash = (Get-FileHash -Algorithm MD5 (Join-Path $root $filePath)).Hash
   $fileInfo = [IO.FileInfo] $filePath
-  "{0}.{1}{2}" -f (Join-Path $fileInfo.DirectoryName $fileInfo.BaseName), $fileHash, $fileInfo.Extension
+
+  $oldFilePathWithoutExtension = $filePath.Substring(0, $filePath.Length - $fileInfo.Extension.Length)
+  $newExtension = ".{0}{1}" -f $fileHash, $fileInfo.Extension
+
+  Write-Host (">>>> '$filePath' => '$($oldFilePathWithoutExtension)$($newExtension)'")
+
+  "$($oldFilePathWithoutExtension)$($newExtension)"
 }
 
 function rename-file
@@ -88,3 +94,44 @@ if (-not $chromeJsReplaced) {
 # END: HACK
 
 $contents | Out-File -FilePath $HtmlFilePath -Encoding utf8
+
+
+
+# BEGIN: HACK
+# NOTE: This is a temporary but stable solution. Once we get webpack, all this gimmickery goes away.
+function fixup-sw
+{
+  param($swJs, $jsFileToFixUpDir, $jsFileToFixUpName)
+
+  $jsFileToFixUp = Get-ChildItem -Recurse -Filter $jsFileToFixUpName (Join-Path $root $jsFileToFixUpDir)
+  if (-not $jsFileToFixUp) {
+    throw "Did not find $jsFileToFixUpName"
+  } else {
+    Write-Output "Found $($jsFileToFixUp.FullName)"
+  }
+
+  $swJscontents = Get-Content $swJs
+  $jsFileToFixUpReplaced = $False
+  $swJscontents = $swJscontents | ForEach-Object {
+    if ($_ -ceq "importScripts('/$($jsFileToFixUpDir)/$($jsFileToFixUpName.Replace('*', ''))');") {
+      "importScripts('/$($jsFileToFixUpDir)/$($jsFileToFixUp.Name)');"
+      $jsFileToFixUpReplaced = $True
+    } else {
+      $_
+    }
+  }
+
+  if (-not $jsFileToFixUpReplaced) {
+    throw "Did not find $jsFileToFixUpName import in $swJs"
+  } else {
+    Write-Output "Updated $jsFileToFixUpName import in $swJs"
+  }
+
+  $swJscontents | Out-File -FilePath $swJs -Encoding utf8
+}
+
+$swJs = Join-Path $root "sw-template.js"
+fixup-sw $swJs "_dprhtml/js" "globalObject.*js"
+fixup-sw $swJs "_dprhtml/features/installation" "init*.js"
+
+# END: HACK
