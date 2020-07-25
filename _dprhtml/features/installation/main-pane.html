@@ -11,7 +11,16 @@
         <div id="installation-pane">
           <div id="installation-pane-tab-panes">
             <div id="installation-pane-tab-panes-general" class="installation-pane-tab-pane">
-              <div class="installation-pane-tab-pane-section d-flex flex-column">
+              <div class="alert alert-primary" style="font-size: smaller;">
+                Select a component and press 'OK' to make that component available for offline use. Conversely if you wish to free up storage space, unselect one of the selected components and press 'OK'.
+                <br>
+                <br>
+                <strong>NOTE</strong>
+                <ul class="pl-3 mb-0">
+                  <li>If the download may runs into network errors, please retry the same steps. Download will be resumed from where it errored out.</li>
+                </ul>
+              </div>
+              <div class="installation-pane-tab-pane-section d-flex flex-column ml-1">
                 <!--ko foreach: components -->
                 <div class="d-flex w-100 justify-content-start">
                   <input class="mr-2" type="checkbox" data-bind="checked: install, attr: { id: 'componentInstallState' + $index() }">

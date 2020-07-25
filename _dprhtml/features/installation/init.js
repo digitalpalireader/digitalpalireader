@@ -3,12 +3,13 @@
 var DPRComponentRegistry = (function () {
   const componentTypeTranslation = 'translation'
   const componentTypeTipitaka = 'tipitaka'
-  const componentTypeLanguage = 'lang'
+  const componentTypeLanguage = 'language'
 
   const registry = [
     {
       id: 'bt',
       name: 'Buddhist Texts',
+      shortDescription: '',
       routeRegExp: /digitalpalireader\.online\/bt-/i,
       isAvailable: () => !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
       type: componentTypeTranslation,
@@ -21,6 +22,7 @@ var DPRComponentRegistry = (function () {
     {
       id: 'dt',
       name: 'DhammaTalks',
+      shortDescription: '',
       routeRegExp: /digitalpalireader\.online\/dt\/suttas/i,
       isAvailable: () => true,
       type: componentTypeTranslation,
@@ -45,7 +47,7 @@ var DPRComponentRegistry = (function () {
     name: c.name,
     sizeMB: c.sizeMB,
     install: ko.observable(isComponentInstalled(c.id)),
-    getName: _ => `${c.name} ${c.type} [${c.sizeMB} MB storage, ${Math.ceil(c.sizeMB * 0.4)} MB download]`,
+    getName: _ => `${c.name} ${c.type} ${c.shortDescription}[download ${Math.ceil(c.sizeMB * 0.2)}MB, uncompressed on disk ${c.sizeMB}MB]`,
   })
 
   const getAvailableComponentVMs = () => registry.filter(c => c.isAvailable()).map(componentToVM)
