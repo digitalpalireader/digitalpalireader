@@ -180,7 +180,6 @@ DPR_G.atiK.push('kn/ud/ud.8.04.irel.html');
 DPR_G.atiK.push('kn/vv/vv.1.16.irel.html');
 DPR_G.atiK.push('kn/vv/vv.3.07.irel.html');
 DPR_G.atiM.push('mn/Majjhima_Index.html');
-DPR_G.atiM.push('mn/generic-sutta.html');
 DPR_G.atiM.push('mn/mn.002.bpit.html');
 DPR_G.atiM.push('mn/mn.007.nypo.html');
 DPR_G.atiM.push('mn/mn.008.nypo.html');

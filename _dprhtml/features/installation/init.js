@@ -32,6 +32,19 @@ var DPRComponentRegistry = (function () {
         return DPR_G.dtUrlsToPrefetch.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
       },
     },
+    {
+      id: 'ati',
+      name: 'Access to Insight',
+      shortDescription: '',
+      routeRegExp: /digitalpalireader\.online\/ati\/tipitaka/i,
+      isAvailable: () => true,
+      type: componentTypeTranslation,
+      sizeMB: 6,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/_dprhtml/js/ati_list.js')
+        return [].concat(...[DPR_G.atiD, DPR_G.atiM, DPR_G.atiS, DPR_G.atiA, DPR_G.atiK, DPR_G.atiV]).map(c => `${DPR_Translations.trProps.ati.baseUrl}/tipitaka/${c}`);
+      },
+    },
   ]
 
   const getComponentFromId = id => registry.find(c => c.id === id)
