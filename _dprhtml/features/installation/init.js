@@ -94,14 +94,15 @@ class InstallationViewModel {
       DPR_Chrome.showSuccessToast('Installation completed successfully. You can now disconnect from the network and use DPR offline.', toastDisplayTimeMS)
     } catch (e) {
       console.error('Error during install', e)
-      DPR_Chrome.showErrorToast('Installation failed. Please try the same steps again.', toastDisplayTimeMS)
+      DPR_Chrome.showErrorToast('Installation failed, likely due to a transient network outage. Please try the same steps again. Download will resume from the point of error.', toastDisplayTimeMS)
     }
 
     this.finalizeInstall()
   }
 
   initializeInstall() {
-    DPR_Chrome.showSuccessToast('Installing DPR for offline use. You can continue to work as usual. You will be notified once installation is completed. Please stay connected to the network till then.')
+    const toastDisplayTimeMS = 60000
+    DPR_Chrome.showSuccessToast('Installing DPR for offline use. You may continue to work as per usual. You will be notified once installation is completed. Please stay connected to the network till then.', toastDisplayTimeMS)
     __dprViewModel.installationOngoing(true)
     this.updateProgressBar(0)
   }
@@ -135,7 +136,10 @@ class InstallationViewModel {
         await this.retryFunction(() => cache.add(componentInfo.fileList[i]))
       }
 
-      this.updateProgressBar(filesDownloaded++ / totalFiles * 100)
+      filesDownloaded += 1
+      if (filesDownloaded % Math.floor(totalFiles / 100) === 0) {
+        this.updateProgressBar(filesDownloaded / totalFiles * 100)
+      }
     }
 
     localStorage[DPRComponentRegistry.componentInstallDoneMarkerKeyName(component.id)] = true
@@ -166,7 +170,6 @@ class InstallationViewModel {
       let error = null
 
       try {
-        if (retryCount < 2) throw `failing ${retryCount}`
         await asyncFn()
       } catch (e) {
         error = e
@@ -174,7 +177,6 @@ class InstallationViewModel {
 
       if (error) {
         if (retryCount < maxRetries) {
-          console.warn('Hit error, but retrying', error, maxRetries, retryCount)
           continue
         } else {
           console.warn('Hit error too many times, giving up', error, maxRetries, retryCount)
