@@ -132,7 +132,7 @@ class InstallationViewModel {
     const cache = await caches.open(DPRComponentRegistry.getComponentCacheName(component.id))
     for (let i = 0; i < componentInfo.fileList.length; i++) {
       if (!(await cache.match(componentInfo.fileList[i]))) {
-        await cache.add(componentInfo.fileList[i])
+        await this.retryFunction(() => cache.add(componentInfo.fileList[i]))
       }
 
       this.updateProgressBar(filesDownloaded++ / totalFiles * 100)
@@ -158,6 +158,31 @@ class InstallationViewModel {
       }
     } catch (e) {
       console.warn('Failed to uninstall component', component, e)
+    }
+  }
+
+  async retryFunction(asyncFn, maxRetries = 3) {
+    for (let retryCount = 0; ; retryCount++) {
+      let error = null
+
+      try {
+        if (retryCount < 2) throw `failing ${retryCount}`
+        await asyncFn()
+      } catch (e) {
+        error = e
+      }
+
+      if (error) {
+        if (retryCount < maxRetries) {
+          console.warn('Hit error, but retrying', error, maxRetries, retryCount)
+          continue
+        } else {
+          console.warn('Hit error too many times, giving up', error, maxRetries, retryCount)
+          throw error
+        }
+      } else {
+        break
+      }
     }
   }
 }
