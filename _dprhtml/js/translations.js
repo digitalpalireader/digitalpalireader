@@ -4,9 +4,9 @@ var DPR_Translations = (function () {
 
 const trimLastWhacks = x => x.replace(/\/+$/g, '');
 
-const getEnvironmentBaseUrl = () => /localdev/i.test(window.environmentName) ? 'staging.digitalpalireader.online' : ''
+const getEnvironmentBaseUrl = () => /localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''
 
-const retargetTipitakaBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `$1${getEnvironmentBaseUrl()}/_tipitaka$3`)
+const retargetTipitakaBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${getEnvironmentBaseUrl()}/_tipitaka$3`)
 
 let trProps = null;
 
