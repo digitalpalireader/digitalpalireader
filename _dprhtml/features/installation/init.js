@@ -42,7 +42,7 @@ var DPRComponentRegistry = (function () {
       sizeMB: 19,
       getFileList: async () => {
         await DPR_PAL.addOneJS('/components/language/en/en_list.js')
-        return DPR_G.saFiles
+        return DPR_G.enFiles
       },
     },
     {
