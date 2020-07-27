@@ -23,7 +23,7 @@ var DPRComponentRegistry = (function () {
       id: 'dt',
       name: 'DhammaTalks',
       shortDescription: '',
-      routeRegExp: /digitalpalireader\.online\/dt\/suttas/i,
+      routeRegExp: /digitalpalireader\.online\/dt\//i,
       isAvailable: () => true,
       type: componentTypeTranslation,
       sizeMB: 22,
