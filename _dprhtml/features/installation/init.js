@@ -61,8 +61,8 @@ var DPRComponentRegistry = (function () {
       getFileList: async () => {
         await DPR_PAL.addOneJS('/components/sa/sa_dict_list.js')
         await DPR_PAL.addOneJS('/components/sa/sa_roots_list.js')
-        const saDictPath = '/components/sa/dict'
-        const saRootsPath = '/components/sa/roots'
+        const saDictPath = '/sa/dict'
+        const saRootsPath = '/sa/roots'
         const saDictFiles = DPR_G.saDictFiles.map(x => `${saDictPath}/${x}`)
         const saRootsFiles = DPR_G.saRootsFiles.map(x => `${saRootsPath}/${x}`)
         return [].concat(...[saDictFiles, saRootsFiles])
