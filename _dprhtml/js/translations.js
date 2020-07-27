@@ -4,6 +4,10 @@ var DPR_Translations = (function () {
 
 const trimLastWhacks = x => x.replace(/\/+$/g, '');
 
+const getEnvironmentBaseUrl = () => /localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''
+
+const retargetTipitakaBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${getEnvironmentBaseUrl()}/_tipitaka$3`)
+
 let trProps = null;
 
 const createTrProps = () => {
@@ -50,6 +54,8 @@ const createTrProps = () => {
       priority: 3,
     },
   }
+
+  Object.keys(trProps).forEach(k => trProps[k].baseUrl = retargetTipitakaBaseUrl(trProps[k].baseUrl))
 };
 
 createTrProps();

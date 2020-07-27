@@ -211,9 +211,13 @@
                 role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
                 <i class="fa fa-question-circle"></i>
               </a>
-              <button type="button" class="btn btn-sm btn-light m-0" data-toggle="modal" data-target="#settings-dialog-root"
+              <button type="button" class="btn btn-sm btn-light m-0 mr-1" data-toggle="modal" data-target="#settings-dialog-root"
                 title="Launch preferences (Keyboard shortcut: %)">
                 <i class="fa fa-gear" aria-hidden="true"></i>
+              </button>
+              <button id="context-menu-top-level-open-sidebar" class="btn btn-sm btn-light m-0" role="button" onclick="DPR_Chrome.toggleDPRSidebar()"
+                title="Toggle sidebar (Keyboard shortcut: & or `)">
+                <i id="context-menu-launcher-icon" class="fa fa-bars"></i>
               </button>
             </div>
             <div id="instProgressDiv" class="card-header" data-bind="visible: installationOngoing">
