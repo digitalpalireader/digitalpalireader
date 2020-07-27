@@ -30,7 +30,7 @@ workbox.precaching.precacheAndRoute(
 DPRComponentRegistry.registry.forEach(
   component => {
     workbox.routing.registerRoute(
-      component.routeRegExp,
+      component.capture,
       new workbox.strategies.CacheFirst({
         cacheName: DPRComponentRegistry.getComponentCacheName(component.id),
         plugins: [
