@@ -180,7 +180,7 @@ const  historyPopstateHandler = e => {
 
 async function setupBTForRG() {
   try {
-    const btloc = await XML_Load.xhrGetAsync({ url: 'https://www.digitalpalireader.online/_tipitaka/simc-rg.loc' }, xhr => xhr.responseText.trim())
+    const btloc = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.getTipitakaBaseUrl()}/simc-rg.loc` }, xhr => xhr.responseText.trim())
     DPR_G.DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
     DPR_G.DPR_prefs['buddhist_texts'] = true;
     DPR_Translations.createTrProps();
