@@ -1,6 +1,6 @@
 'use strict';
 
-DPR_G.btUrlsToPrefetch = [
+DPR_G.btFiles = [
   'index.html',
   'js.js',
   'an/an_e_1.htm',
