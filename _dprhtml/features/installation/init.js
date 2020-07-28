@@ -8,8 +8,8 @@ var DPRComponentRegistry = (function () {
   const registry = [
     {
       id: 'my',
-      name: 'Myanmar tipitaka (with commentary and sub-commentary)',
-      shortDescription: '',
+      name: 'Myanmar',
+      shortDescription: 'mūla, aṭṭhakathā, tīkā',
       capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/my\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeTipitaka,
@@ -21,8 +21,8 @@ var DPRComponentRegistry = (function () {
     },
     {
       id: 'th',
-      name: 'Thai tipitaka (with commentary and sub-commentary)',
-      shortDescription: '',
+      name: 'Thai',
+      shortDescription: 'mūla',
       capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/th\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeTipitaka,
@@ -34,35 +34,35 @@ var DPRComponentRegistry = (function () {
     },
     {
       id: 'en',
-      name: 'English language (dictionaries PED, CPED, DPPN)',
-      shortDescription: '',
+      name: 'English',
+      shortDescription: 'PED, CPED & DPPN',
       capture: ({url}) => url.origin === self.location.origin && /^\/en\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeLanguage,
       sizeMB: 19,
       getFileList: async () => {
         await DPR_PAL.addOneJS('/components/language/en/en_list.js')
-        return DPR_G.enFiles
+        return DPR_G.enFiles.map(f => `/en/${f}`)
       },
     },
     {
       id: 'sa',
-      name: 'Sanskrit language (dictionary and roots)',
-      shortDescription: '',
+      name: 'Sanskrit',
+      shortDescription: 'dictionary & roots',
       capture: ({url}) => url.origin === self.location.origin && /^\/sa\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeLanguage,
       sizeMB: 94,
       getFileList: async () => {
         await DPR_PAL.addOneJS('/components/language/sa/sa_list.js')
-        return DPR_G.saFiles
+        return DPR_G.saFiles.map(f => `/sa/${f}`)
       },
     },
     {
       id: 'bt',
       name: 'Buddhist Texts',
       shortDescription: '',
-      capture: /digitalpalireader\.online\/bt-/i,
+      capture: ({url}) => url.origin === self.location.origin && /^\/_translations\/bt-/i.test(url.pathname),
       isAvailable: () => !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
       type: componentTypeTranslation,
       sizeMB: 53,
@@ -75,7 +75,7 @@ var DPRComponentRegistry = (function () {
       id: 'dt',
       name: 'DhammaTalks',
       shortDescription: '',
-      capture: /digitalpalireader\.online\/dt\//i,
+      capture: ({url}) => url.origin === self.location.origin && /^\/_translations\/dt\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeTranslation,
       sizeMB: 22,
@@ -88,7 +88,7 @@ var DPRComponentRegistry = (function () {
       id: 'ati',
       name: 'Access to Insight',
       shortDescription: '',
-      capture: /digitalpalireader\.online\/ati\/tipitaka/i,
+      capture: ({url}) => url.origin === self.location.origin && /^\/_translations\/ati\//i.test(url.pathname),
       isAvailable: () => true,
       type: componentTypeTranslation,
       sizeMB: 6,
@@ -105,15 +105,23 @@ var DPRComponentRegistry = (function () {
 
   const isComponentInstalled = id => !!localStorage[componentInstallDoneMarkerKeyName(id)]
 
-  const getComponentCacheName = id => `${getComponentFromId(id).type}-${id}`
+  const getComponentCacheName = id => {
+    const prefix = getComponentFromId(id).type === componentTypeLanguage ? 'lang' : getComponentFromId(id).type
 
-  const componentToVM = c => ({
-    id: c.id,
-    name: c.name,
-    sizeMB: c.sizeMB,
-    install: ko.observable(isComponentInstalled(c.id)),
-    getName: _ => `${c.name} ${c.type} ${c.shortDescription}[download ${Math.ceil(c.sizeMB * 0.2)}MB, uncompressed on disk ${c.sizeMB}MB]`,
-  })
+    return `${prefix}-${id}`
+  }
+
+  const componentToVM = c => {
+    const description = c.shortDescription ? ` (${c.shortDescription})` : ''
+
+    return {
+      id: c.id,
+      name: c.name,
+      sizeMB: c.sizeMB,
+      install: ko.observable(isComponentInstalled(c.id)),
+      getName: _ => `${c.name} ${c.type}${description} [download ${Math.ceil(c.sizeMB * 0.2)}MB, uncompressed on disk ${c.sizeMB}MB]`,
+    }
+  }
 
   const getAvailableComponentVMs = () => registry.filter(c => c.isAvailable()).map(componentToVM)
 
@@ -159,7 +167,7 @@ class InstallationViewModel {
       DPR_Chrome.showSuccessToast('Installation completed successfully. You can now disconnect from the network and use DPR offline.', toastDisplayTimeMS)
     } catch (e) {
       console.error('Error during install', e)
-      DPR_Chrome.showErrorToast('Installation failed, likely due to a transient network outage. Please try the same steps again. Download will resume from the point of error.', toastDisplayTimeMS)
+      DPR_Chrome.showErrorToast('Installation failed. Please ensure the following and try the same steps again. <br><ul><li>Device is connected to the network</li><li>Ad or content blockers such as uBlock are not active</li></ul>Download will resume from the point of error.', toastDisplayTimeMS)
     }
 
     this.finalizeInstall()

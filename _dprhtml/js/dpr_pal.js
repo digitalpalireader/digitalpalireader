@@ -147,7 +147,7 @@
 
   DPR_PAL.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
 
-  DPR_PAL.getTipitakaBaseUrl = () => `${/localdevx/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''}/_tipitaka`
+  DPR_PAL.getTipitakaBaseUrl = () => `${/localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''}/_external/translations`
 
   DPR_PAL.toUrl = x => {
     let url = undefined;
