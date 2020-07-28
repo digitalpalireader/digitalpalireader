@@ -7,29 +7,94 @@ var DPRComponentRegistry = (function () {
 
   const registry = [
     {
+      id: 'my',
+      name: 'Myanmar tipitaka (with commentary and sub-commentary)',
+      shortDescription: '',
+      capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/my\//i.test(url.pathname),
+      isAvailable: () => true,
+      type: componentTypeTipitaka,
+      sizeMB: 113,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/components/tipitaka/my/my_list.js')
+        return DPR_G.myFiles.map(f => `/tipitaka/my/${f}.xml`)
+      },
+    },
+    {
+      id: 'th',
+      name: 'Thai tipitaka (with commentary and sub-commentary)',
+      shortDescription: '',
+      capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/th\//i.test(url.pathname),
+      isAvailable: () => true,
+      type: componentTypeTipitaka,
+      sizeMB: 21,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/components/tipitaka/th/th_list.js')
+        return DPR_G.thFiles.map(f => `/tipitaka/th/${f}.xml`)
+      },
+    },
+    {
+      id: 'en',
+      name: 'English language (dictionaries PED, CPED, DPPN)',
+      shortDescription: '',
+      capture: ({url}) => url.origin === self.location.origin && /^\/en\//i.test(url.pathname),
+      isAvailable: () => true,
+      type: componentTypeLanguage,
+      sizeMB: 19,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/components/language/en/en_list.js')
+        return DPR_G.enFiles
+      },
+    },
+    {
+      id: 'sa',
+      name: 'Sanskrit language (dictionary and roots)',
+      shortDescription: '',
+      capture: ({url}) => url.origin === self.location.origin && /^\/sa\//i.test(url.pathname),
+      isAvailable: () => true,
+      type: componentTypeLanguage,
+      sizeMB: 94,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/components/language/sa/sa_list.js')
+        return DPR_G.saFiles
+      },
+    },
+    {
       id: 'bt',
       name: 'Buddhist Texts',
       shortDescription: '',
-      routeRegExp: /digitalpalireader\.online\/bt-/i,
+      capture: /digitalpalireader\.online\/bt-/i,
       isAvailable: () => !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
       type: componentTypeTranslation,
       sizeMB: 53,
       getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/bt/translations_list.js')
-        return DPR_G.btUrlsToPrefetch.map(x => `${DPR_Translations.trProps.bt.baseUrl}/${x}`)
+        await DPR_PAL.addOneJS('/components/translation/bt/bt_list.js')
+        return DPR_G.btFiles.map(x => `${DPR_Translations.trProps.bt.baseUrl}/${x}`)
       },
     },
     {
       id: 'dt',
       name: 'DhammaTalks',
       shortDescription: '',
-      routeRegExp: /digitalpalireader\.online\/dt\//i,
+      capture: /digitalpalireader\.online\/dt\//i,
       isAvailable: () => true,
       type: componentTypeTranslation,
       sizeMB: 22,
       getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/dt/translations_list.js')
-        return DPR_G.dtUrlsToPrefetch.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
+        await DPR_PAL.addOneJS('/components/translation/dt/dt_list.js')
+        return DPR_G.dtFiles.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
+      },
+    },
+    {
+      id: 'ati',
+      name: 'Access to Insight',
+      shortDescription: '',
+      capture: /digitalpalireader\.online\/ati\/tipitaka/i,
+      isAvailable: () => true,
+      type: componentTypeTranslation,
+      sizeMB: 6,
+      getFileList: async () => {
+        await DPR_PAL.addOneJS('/components/translation/ati/ati_list.js')
+        return DPR_G.atiFiles.map(x => `${DPR_Translations.trProps.ati.baseUrl}/${x}`);
       },
     },
   ]
@@ -120,7 +185,6 @@ class InstallationViewModel {
   async installAllComponents(components) {
     const tasks = components.map(c => DPRComponentRegistry.getComponentFromId(c.id).getFileList().then(fileList => ({ id: c.id, fileList })))
     const componentInfos = await Promise.all(tasks)
-
     const totalFiles = componentInfos.reduce((acc, e) => acc + e.fileList.length, 0)
     let filesDownloaded = 0
     for (let i = 0; i < componentInfos.length; i++) {

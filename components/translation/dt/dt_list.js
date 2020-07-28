@@ -1,6 +1,6 @@
 'use strict';
 
-DPR_G.dtUrlsToPrefetch = [
+DPR_G.dtFiles = [
   'chant_index.html',
   'de_txt_index.html',
   'ebook_index.html',
