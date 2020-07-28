@@ -21,7 +21,7 @@
 
   defineReadOnlyProperty(
     "baseUrl",
-    DPR_PAL.isXUL ? "chrome://" : `${window.location.origin}/`);
+    DPR_PAL.isXUL ? "chrome://" : `/`);
 
   defineReadOnlyProperty(
     "dprHomePage",
