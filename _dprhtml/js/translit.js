@@ -290,8 +290,12 @@ function fromSin(input,type) {
   var output = '';
   var i = 0;
 
+  input = input.replace(/්‍ර/g, '්ර');
+  input = input.replace(/ඦ/g, 'ඤ්ජ');
+  input = input.replace(/ඬ/g, 'ණ්ඩ');
+  input = input.replace(/ඳ/g, 'න්ද');
+  input = input.replace(/ඹ/g, 'ම්බ');
   input = input.replace(/\&quot;/g, '`');
-
   while (i < input.length) {
     i1 = input.charAt(i);
 
@@ -301,7 +305,9 @@ function fromSin(input,type) {
       output += vowel[i1];
     }
     else if (sinhala[i1]) {
-      output += sinhala[i1]+'a';
+      output += sinhala[i1];
+      if (sinhala[i1] != 'ṃ')
+        output += 'a';
     }
     else
       output += i1;
