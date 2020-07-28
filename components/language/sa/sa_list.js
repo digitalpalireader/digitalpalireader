@@ -1,6 +1,7 @@
 'use strict';
 
 DPR_G.saFiles = [
+  'dict/index.js',
   'dict/A-41.xml',
   'dict/a-61.xml',
   'dict/B-42.xml',
@@ -49,6 +50,7 @@ DPR_G.saFiles = [
   'dict/Y-59.xml',
   'dict/y-79.xml',
   'dict/z-7A.xml',
+  'roots/index.js',
   'roots/ac-6163.xml',
   'roots/ad-6164.xml',
   'roots/ah-6168.xml',
