@@ -2,27 +2,27 @@
 
 var DPR_DataLoader = (function() {
   const loadTipitakaAsync = (id, set) => {
-    var url = `${DPR_PAL.baseUrl}tipitaka/${set}/${id}.xml`;
+    var url = `/tipitaka/${set}/${id}.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadPXD = id => {
-    var url = `${DPR_PAL.baseUrl}en/ped/${id}/ped.xml`;
+    var url = `/en/ped/${id}/ped.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadXDPPN = id => {
-    var url = `${DPR_PAL.baseUrl}en/dppn/${id}.xml`;
+    var url = `/en/dppn/${id}.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSARoots = id => {
-    var url = `${DPR_PAL.baseUrl}sa/roots/${id}.xml`;
+    var url = `/sa/roots/${id}.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 
   const loadSADictionary = id => {
-    var url = `${DPR_PAL.baseUrl}sa/dict/${id}.xml`;
+    var url = `/sa/dict/${id}.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
   };
 

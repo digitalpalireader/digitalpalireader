@@ -4,7 +4,7 @@ var DPR_Translations = (function () {
 
 const trimLastWhacks = x => x.replace(/\/+$/g, '');
 
-const retargetTipitakaBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${DPR_PAL.getTipitakaBaseUrl()}$3`)
+const retargetTranslationsBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${DPR_PAL.getTranslationsBaseUrl()}$3`)
 
 let trProps = null;
 
@@ -53,7 +53,7 @@ const createTrProps = () => {
     },
   }
 
-  Object.keys(trProps).forEach(k => trProps[k].baseUrl = retargetTipitakaBaseUrl(trProps[k].baseUrl))
+  Object.keys(trProps).forEach(k => trProps[k].baseUrl = retargetTranslationsBaseUrl(trProps[k].baseUrl))
 };
 
 createTrProps();
