@@ -2,6 +2,9 @@
 
 var DPR_prefload_mod = ( function () {
 
+const searchSettingsKeyName = 'searchSettingsv2'
+const dictionarySearchSettingsKeyName = 'dictionarySearchSettingsv2'
+
 DPR_G.DPR_prefsinfo = {
   DictH: {
     type: Number.name,
@@ -259,16 +262,16 @@ DPR_G.DPR_prefsinfo = {
     type: Boolean.name,
     defaultValue: false,
   },
+}
 
-  searchSettings: {
-    type: String.name,
-    defaultValue: '{"type":0,"query":"","MAT":"m","set":"dmsak","book":"1","part":1,"rx":false}',
-  },
+DPR_G.DPR_prefsinfo[`${searchSettingsKeyName}`] = {
+  type: String.name,
+  defaultValue: '{"type":0,"query":"","MAT":"m","set":"dmsak","book":"1","part":1,"rx":false}',
+}
 
-  dictionarySearchSettings: {
-    type: String.name,
-    defaultValue: '{"type":"DPR","query":"","opts":"","entry":""}',
-  },
+DPR_G.DPR_prefsinfo[`${dictionarySearchSettingsKeyName}`] = {
+  type: String.name,
+  defaultValue: '{"type":"DPR","query":"","opts":"xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,hd","entry":""}',
 }
 
 const getPrefStorageKey = n => `DPR.Prefsv2_${n}`;
@@ -355,11 +358,11 @@ const setPref = (name, value) => {
 const saveSideBarVisibleState = value => setPref('sideBarVisible', value)
 const loadSideBarVisibleState = () => getPref('sideBarVisible')
 
-const saveSearchSettings = value => setPref('searchSettings', value)
-const loadSearchSettings = () => getPref('searchSettings')
+const saveSearchSettings = value => setPref(searchSettingsKeyName, value)
+const loadSearchSettings = () => getPref(searchSettingsKeyName)
 
-const saveDictionarySearchSettings = value => setPref('dictionarySearchSettings', value)
-const loadDictionarySearchSettings = () => getPref('dictionarySearchSettings')
+const saveDictionarySearchSettings = value => setPref(dictionarySearchSettingsKeyName, value)
+const loadDictionarySearchSettings = () => getPref(dictionarySearchSettingsKeyName)
 
 return {
 getPref : getPref,

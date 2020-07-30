@@ -38,10 +38,12 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   var hier=place[7];
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,place[8]?place[8]:0);
+  var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,place[8]?place[8]:0);
 
-
-  if(xmlDoc == null) return refreshit();
+  if(!xmlDoc) {
+    DPR1_format_mod.alertFlash(`Unable to load data file for ${nikbookhier}-${place[8]}`, 'red')
+    return
+  }
 
   var bookno = place[1];
   var meta = place[2];
@@ -598,7 +600,11 @@ async function loadXMLindex(sectionId,place) {
   var book = bookno+1;
   var nikbookhier = nikaya + book + hier;
 
-    var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,xset);
+  var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier,xset);
+  if(!xmlDoc) {
+    DPR1_format_mod.alertFlash(`Unable to load data file for ${nikbookhier}-${xset}`, 'red')
+    return
+  }
 
   var z = xmlDoc.getElementsByTagName("ha");
   var y = '';
