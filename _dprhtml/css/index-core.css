@@ -264,7 +264,7 @@ body .bd-highlight {
 }
 
 .main-pane-container-section-close {
-  position: fixed;
+  float: right;
   padding: .25rem .5rem;
   font-size: .575rem;
 }
