@@ -64,13 +64,17 @@ const TranslitCoreScriptMap = [
   DPR_translitCore_mod.ScriptIds.CYRL,
 ]
 
+function getTranslitLangId() {
+  return TranslitCoreScriptMap[parseInt(DPR_G.DPR_prefs['translits'])];
+}
+
 function translit(data) {
   if(!data || data == '' || typeof(data) != 'string') {
     return data;
   }
 
   data = data.replace(/\&nbsp;/g,' ');
-  const script = TranslitCoreScriptMap[parseInt(DPR_G.DPR_prefs['translits'])];
+  const script = getTranslitLangId();
 
   if (script === DPR_translitCore_mod.ScriptIds.RO) {
     return data;
@@ -123,5 +127,6 @@ return {
   toVel: toVel,
   convertMain: convertMain,
   translit: translit,
+  getTranslitLangId: getTranslitLangId,
 }
 })()

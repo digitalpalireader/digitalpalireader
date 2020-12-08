@@ -48,28 +48,20 @@
 @font-face { src: url('../fonts/NotoSerif-Regular.ttf') format('truetype'); font-weight: normal; font-family: 'cyrillic'; }
 @font-face { src: url('../fonts/NotoSerif-Bold.ttf') format('truetype'); font-weight: bold; font-family: 'cyrillic'; }
 
-.UT[lang=en] { font-family: 'roman' !important; }
-.UT[lang=si] { font-family: 'sinhala' !important; line-height: 1.5rem !important; }
-.UT[lang=ch] { font-family: 'roman' !important;} /* TODO need a chinese font */
-.UT[lang=hi] { font-family: 'devanagari' !important;}
-.UT[lang=th] { font-family: 'thai' !important; font-size: 1.5rem !important; line-height: 1.7rem !important; }
-.UT[lang=my] { font-family: 'myanmar' !important;}
-.UT[lang=in],.UT[lang=es],.UT[lang=pt] { font-family: 'roman' !important;}
-
-.PT[script=si],.paratype01[script=si].paratype03[script=si] { font-family: 'sinhala' !important; line-height: 1.5rem !important; }
-.PT[script=hi],.paratype01[script=hi].paratype03[script=hi] { font-family: 'devanagari' !important; }
-.PT[script=ro],.paratype01[script=ro].paratype03[script=ro] { font-family: 'roman' !important; }
-.PT[script=th],.paratype01[script=th].paratype03[script=th] { font-family: 'thai' !important; font-size: 1.5rem !important; line-height: 1.7rem !important; }
-.PT[script=lo],.paratype01[script=lo].paratype03[script=lo] { font-family: 'lao' !important; line-height: 170% !important; /*font-size: 125%;*/ }
-.PT[script=my],.paratype01[script=my].paratype03[script=my] { font-family: 'myanmar' !important; }
-.PT[script=km],.paratype01[script=km].paratype03[script=km] { font-family: 'khmer' !important; }
-.PT[script=be],.paratype01[script=be].paratype03[script=be] { font-family: 'bengali' !important; }
-.PT[script=gm],.paratype01[script=gm].paratype03[script=gm] { font-family: 'gurmukhi' !important; }
-.PT[script=tt],.paratype01[script=tt].paratype03[script=tt] { font-family: 'tai tham' !important; font-size: 1.5rem !important; }
-.PT[script=gj],.paratype01[script=gj].paratype03[script=gj] { font-family: 'gujarati' !important; }
-.PT[script=te],.paratype01[script=te].paratype03[script=te] { font-family: 'telugu' !important; }
-.PT[script=ka],.paratype01[script=ka].paratype03[script=ka] { font-family: 'kannada' !important; }
-.PT[script=mm],.paratype01[script=mm].paratype03[script=mm] { font-family: 'malayalam' !important; }
-.PT[script=br],.paratype01[script=br].paratype03[script=br] { font-family: 'brahmi' !important; }
-.PT[script=tb],.paratype01[script=tb].paratype03[script=tb] { font-family: 'tibetan' !important; }
-.PT[script=cy],.paratype01[script=cy].paratype03[script=cy] { font-family: 'cyrillic' !important; }
+.localized[script=si] span { font-family: 'sinhala' !important; line-height: 1.5rem !important; }
+.localized[script=hi] span { font-family: 'devanagari' !important; }
+/* .localized[script=ro] span { font-family: 'roman' !important; } */
+.localized[script=th] span { font-family: 'thai' !important; font-size: 1.5rem !important; line-height: 1.7rem !important; }
+.localized[script=lo] span { font-family: 'lao' !important; line-height: 170% !important; /*font-size: 125%;*/ }
+.localized[script=my] span { font-family: 'myanmar' !important; }
+.localized[script=km] span { font-family: 'khmer' !important; }
+.localized[script=be] span { font-family: 'bengali' !important; }
+.localized[script=gm] span { font-family: 'gurmukhi' !important; }
+.localized[script=tt] span { font-family: 'tai tham' !important; font-size: 1.5rem !important; }
+.localized[script=gj] span { font-family: 'gujarati' !important; }
+.localized[script=te] span { font-family: 'telugu' !important; }
+.localized[script=ka] span { font-family: 'kannada' !important; }
+.localized[script=mm] span { font-family: 'malayalam' !important; }
+.localized[script=br] span { font-family: 'brahmi' !important; }
+.localized[script=tb] span { font-family: 'tibetan' !important; }
+.localized[script=cy] span { font-family: 'cyrillic' !important; }

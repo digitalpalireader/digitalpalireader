@@ -302,7 +302,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       var ptype = parap[1];
       var permalink = DPR_PAL.fixupDprBaseUrl(parap[2].replace(/_/g,' '));
       if(convout.length>1) convout += '\n\n';
-      finout += '<p class="paratype'+ptype+'" id="para'+paran+'">'+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer '+(DPR_G.G_thisPara && DPR_G.G_thisPara == paran?'green':'hoverShow')+'" onclick="DPR1_format_mod.permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
+      finout += '<p class="paratype'+ptype+' localized" script="'+DPR_translit_mod.getTranslitLangId()+'" id="para'+paran+'">'+(DPR_G.DPR_prefs['showPermalinks'] ? '<span class="pointer '+(DPR_G.G_thisPara && DPR_G.G_thisPara == paran?'green':'hoverShow')+'" onclick="DPR1_format_mod.permalinkClick(\''+permalink+'\',1);" title="Click to copy permalink to clipboard">&diams;&nbsp;</span>' :'');
       saveout += '<p class="paratype'+ptype+'"'+'>';
       paran++;
     }

@@ -318,7 +318,7 @@ function un_beautify_tibet(text) {
 const beautify_func_default = [];
 const beautify_func = {
     [Script.SI]: [beautify_sinh, beautify_common],
-    [Script.RO]: [beautify_common],
+    [Script.RO]: [beautify_common, /* capitalize */], // DPR does not capitalize.
     [Script.THAI]: [swap_e_o, beautify_thai, beautify_common],
     [Script.LAOS]: [swap_e_o, beautify_common],
     [Script.MY]: [beautify_mymr, beautify_common],
@@ -336,7 +336,7 @@ const un_beautify_func_default = [];
 const un_beautify_func = {
     [Script.SI] : [cleanup_zwj, un_beautify_sinh],
     [Script.HI] : [cleanup_zwj],   // original deva script (from tipitaka.org) text has zwj
-    [Script.RO]: [],
+    [Script.RO]: [un_capitalize],
     [Script.THAI]: [un_beautify_thai, un_swap_e_o],
     [Script.LAOS]: [un_swap_e_o],
     [Script.KM]: [un_beautify_khmer],
