@@ -264,9 +264,14 @@ body .bd-highlight {
 }
 
 .main-pane-container-section-close {
-  float: right;
+  position: fixed;
+  opacity: 0.3;
   padding: .25rem .5rem;
   font-size: .575rem;
+}
+
+.main-pane-container-section-close:hover {
+  opacity: 1.0;
 }
 
 .main-pane-container-section-close.btn:hover, .main-pane-container-section-close.btn:active {
