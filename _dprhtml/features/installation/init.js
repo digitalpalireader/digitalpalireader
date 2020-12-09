@@ -63,7 +63,7 @@ var DPRComponentRegistry = (function () {
       name: 'Buddhist Texts',
       shortDescription: '',
       capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/bt-/i.test(url.pathname),
-      isAvailable: () => !!DPR_G.DPR_prefs['buddhist_texts'] && !!DPR_G.DPR_prefs['btloc'],
+      isAvailable: () => true,
       type: componentTypeTranslation,
       sizeMB: 53,
       getFileList: async () => {

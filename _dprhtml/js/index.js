@@ -29,7 +29,6 @@ async function mainInitialize() {
   triggerPrivacyNoticeAcceptanceCheck();
   initSplitters();
   initFooter();
-  await setupBTForRG();
   await loadPanesAsync();
   ensureHidePopoversWithClickTriggers();
 
@@ -176,16 +175,6 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
 
 const  historyPopstateHandler = e => {
   console.warn('>>>> historyPopstateHandler', e);
-}
-
-async function setupBTForRG() {
-  try {
-    const btloc = await XML_Load.xhrGetAsync({ url: `${DPR_PAL.getTranslationsBaseUrl()}/simc-rg.loc` }, xhr => xhr.responseText.trim())
-    DPR_G.DPR_prefs['btloc'] = btloc.replace(/\/+$/g, '');
-    DPR_G.DPR_prefs['buddhist_texts'] = true;
-    DPR_Translations.createTrProps();
-  } catch { }
-  console.log('setupBTForRG:', DPR_G.DPR_prefs['buddhist_texts'], DPR_G.DPR_prefs['btloc']);
 }
 
 function triggerPrivacyNoticeAcceptanceCheck() {

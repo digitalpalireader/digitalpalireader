@@ -398,6 +398,7 @@ body .bd-highlight {
 #main-bottom-pane-tab-panes-Cv .cv-container #cactions #cactions-lowercase {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 #main-bottom-pane-tab-panes-Cv .cv-container #coutform-div #coutform {

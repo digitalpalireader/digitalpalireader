@@ -12,7 +12,7 @@ const createTrProps = () => {
   trProps = {
     ati: {
       id: 0,
-      baseUrl: `${DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['catiloc']))}`,
+      baseUrl: '/_external/translations/ati/',
       path: '/tipitaka',
       icon: `ati.ico`,
       background: 'white',
@@ -28,7 +28,7 @@ const createTrProps = () => {
     },
     bt: {
       id: 2,
-      baseUrl: DPR_PAL.toUrl(trimLastWhacks(DPR_G.DPR_prefs['btloc'])),
+      baseUrl: '/_external/translations/bt-bdhrs',
       path: '',
       enabled: DPR_G.DPR_prefs['buddhist_texts'],
       icon: `wisdom.png`,
@@ -45,7 +45,7 @@ const createTrProps = () => {
     },
     dt: {
       id: 4,
-      baseUrl: `https://tipitaka.digitalpalireader.online/dt`,
+      baseUrl: `/_external/translations/dt`,
       path: '/suttas',
       icon: `dt.ico`,
       background: 'white',

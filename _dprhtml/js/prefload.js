@@ -170,7 +170,7 @@ DPR_G.DPR_prefsinfo = {
   },
   catiloc: {
     type: String.name,
-    defaultValue: 'https://tipitaka.digitalpalireader.online/ati',
+    defaultValue: '_external/translations/ati',
   },
   autodict: {
     type: Boolean.name,
@@ -183,11 +183,11 @@ DPR_G.DPR_prefsinfo = {
 
   buddhist_texts: {
     type: Boolean.name,
-    defaultValue: false,
+    defaultValue: true,
   },
   btloc: {
     type: String.name,
-    defaultValue: '',
+    defaultValue: '/_external/translations/bt-bdhrs/',
   },
 
 
