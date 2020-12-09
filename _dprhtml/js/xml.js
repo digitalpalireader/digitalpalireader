@@ -216,7 +216,6 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
     }
     if (relhere) {
       var hi = ['m','a','t'];
-      var button_order = ['l','m','r'];
       const cmds = {
         ['m']: DPR_CMD_GOTO_RELM,
         ['a']: DPR_CMD_GOTO_RELA,
@@ -226,9 +225,9 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
       for (var ht = 0; ht < hi.length; ht++) {
         if(hi[ht] == hier) {
           shortcutFns[cmds[hi[ht]]] = {
-            canExecuteStr: 'false',
-            executeStr: emptyFnStr,
-            titleStr: `Currently viewing section in ${DPR_G.G_hTitles[ht]}`,
+            canExecuteStr: 'true',
+            executeStr: `DPR1_send_mod.openPlaceMATContextMenu(${sectionId}, ['${place[0]}', ${place[1]}, ${place[2]}, ${place[3]}, ${place[4]}, ${place[5]}, ${place[6]}, '${place[7]}'], null, null, DPR1_send_mod.eventSend(event, 1))`,
+            titleStr: `Open same section in ${DPR_G.G_hTitles[ht]} side by side. Shift+click to open in same pane.`,
             visibleStr: 'true',
           };
         } else if (relhere.split('#')[hic] != '') {
@@ -240,8 +239,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
             visibleStr: 'true',
           };
           DPR_G.matButton = 0;
-        }
-        else {
+        } else {
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'false',
             executeStr: emptyFnStr,
