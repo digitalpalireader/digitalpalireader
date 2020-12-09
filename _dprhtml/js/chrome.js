@@ -383,8 +383,6 @@ var DPR_Chrome = (function () {
 
   const sectionIdPrefix = 'main-pane-container-section-'
 
-  const sectionIdCracker = new RegExp(`^#(${sectionIdPrefix})(\\d+)$`)
-
   const getPrimarySectionId = () => 0
 
   const getSectionElementIdName = id => `${sectionIdPrefix}${id}`
@@ -394,6 +392,16 @@ var DPR_Chrome = (function () {
   const getPrimarySectionElementId = () => getSectionElementId(getPrimarySectionId())
 
   const isPrimarySectionId = id => parseInt(id) === getPrimarySectionId()
+
+  const paneCommandDataKeyName = 'data-dprcommands'
+
+  const getPaneCommandData = id => JSON.parse($(getSectionElementId(id)).attr(paneCommandDataKeyName) || "{}")
+
+  const setPaneCommandData = (id, data) => {
+    $(getSectionElementId(id)).attr(paneCommandDataKeyName, JSON.stringify(data))
+    $(`#main-pane-container-section-prev-${id}`).prop("disabled", !data.prev)
+    $(`#main-pane-container-section-next-${id}`).prop("disabled", !data.next)
+  }
 
   const createSuttaSectionContentFragment = () =>
     `<div id="main-pane-container-section-header" class="mt-2 px-2"></div>
@@ -424,9 +432,18 @@ var DPR_Chrome = (function () {
 
     const closeButton = sPos === 0
       ? ''
-      : `<button class="btn btn-light main-pane-container-section-close" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
-        <i class="fa fa-times" aria-hidden="true"></i>
-      </button>`
+      : `
+      <div class="d-flex main-pane-container-section-command-container">
+        <button class="btn btn-light main-pane-container-section-close main-pane-container-section-command" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
+          <i class="fa fa-close" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-prev-${sPos}" title="Go to previous section" onclick="DPR_Chrome.goPreviousInSecondaryPane(${sPos})">
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button>
+        <button class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-next-${sPos}" title="Go to next section" onclick="DPR_Chrome.goNextInSecondaryPane(${sPos})">
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </button>
+      </div>`
 
     const content = sInfo.type === 'dpr'
       ? createSuttaSectionContentFragment()
@@ -434,12 +451,24 @@ var DPR_Chrome = (function () {
 
     const html = `
     ${splitter}
-    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" data-${paneCommandDataKeyName}="{}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
       ${closeButton}
       ${content}
     </div>`;
 
     $('#main-pane-container').append(`${html}`);
+  }
+
+  const goPreviousInSecondaryPane = (id) => {
+    const cmdData = getPaneCommandData(id)
+    // DPR1_send_mod.openPlace(id, ['${prev.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))
+    DPR1_send_mod.openPlace(id, [...cmdData.prev, cmdData.place[8] ? 1 : ''], null, null, 'internal')
+  }
+
+  const goNextInSecondaryPane = (id) => {
+    const cmdData = getPaneCommandData(id)
+    // DPR1_send_mod.openPlace(id, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))
+    DPR1_send_mod.openPlace(id, [...cmdData.next, cmdData.place[8] ? 1 : ''], null, null, 'internal')
   }
 
   const loadSuttaSection = async (sInfo, sectionId, q, p) => {
@@ -582,6 +611,10 @@ var DPR_Chrome = (function () {
     getPrimarySectionId: getPrimarySectionId,
     getSectionElementId: getSectionElementId,
     getPrimarySectionElementId: getPrimarySectionElementId,
+    getPaneCommandData: getPaneCommandData,
+    setPaneCommandData: setPaneCommandData,
+    goPreviousInSecondaryPane: goPreviousInSecondaryPane,
+    goNextInSecondaryPane: goNextInSecondaryPane,
   };
 })();
 

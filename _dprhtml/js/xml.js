@@ -372,6 +372,9 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
     visibleStr: 'true',
   };
 
+  // Store some of the commands in the pane metadata for secondary panes to use
+  DPR_Chrome.setPaneCommandData(sectionId, { sectionId, prev, next, place })
+
   const nextprev = '';
   const thaibut = '';
   var bkbut = '';
