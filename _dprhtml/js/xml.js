@@ -235,7 +235,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
           var relherea = relhere.split('#')[hic++].replace(/\*/g,'0').split('^');
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'true',
-            executeStr: `DPR1_send_mod.openPlace(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, DPR1_send_mod.eventSend(event, 1))`,
+            executeStr: `DPR1_send_mod.openPlaceMATContextMenu(${sectionId}, ['${relherea[0]}', ${relherea[1]}, ${relherea[2]}, ${relherea[3]}, ${relherea[4]}, ${relherea[5]}, ${relherea[6]}, '${hi[ht]}'], null, null, DPR1_send_mod.eventSend(event, 1))`,
             titleStr: null,
             visibleStr: 'true',
           };

@@ -11,6 +11,18 @@ function eventSend(event,internal) {
   return 'right';
 }
 
+function openPlaceMATContextMenu(sectionId,hier,para,stringra,add) {
+  let addNew = add
+
+  if (add === 'internal') {
+    addNew = 'shift'
+  } else if (add === 'shift') {
+    addNew = 'internal'
+  }
+
+  return openPlace(sectionId,hier,para,stringra,addNew)
+}
+
 async function openPlace(sectionId,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
   appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
 
@@ -486,6 +498,7 @@ eventSend : eventSend,
 getBrowserCount : getBrowserCount,
 importXMLindex : importXMLindex,
 openPlace : openPlace,
+openPlaceMATContextMenu : openPlaceMATContextMenu,
 openTranslation : openTranslation,
 openXMLindex : openXMLindex,
 reindexPanels : reindexPanels,
