@@ -48,20 +48,20 @@
 @font-face { src: url('../fonts/NotoSerif-Regular.ttf') format('truetype'); font-weight: normal; font-family: 'cyrillic'; }
 @font-face { src: url('../fonts/NotoSerif-Bold.ttf') format('truetype'); font-weight: bold; font-family: 'cyrillic'; }
 
-.localized[script=si] span { font-family: 'sinhala' !important; line-height: 1.5rem !important; }
-.localized[script=hi] span { font-family: 'devanagari' !important; }
-/* .localized[script=ro] span { font-family: 'roman' !important; } */
-.localized[script=th] span { font-family: 'thai' !important; font-size: 1.5rem !important; line-height: 1.7rem !important; }
-.localized[script=lo] span { font-family: 'lao' !important; line-height: 170% !important; /*font-size: 125%;*/ }
-.localized[script=my] span { font-family: 'myanmar' !important; }
-.localized[script=km] span { font-family: 'khmer' !important; }
-.localized[script=be] span { font-family: 'bengali' !important; }
-.localized[script=gm] span { font-family: 'gurmukhi' !important; }
-.localized[script=tt] span { font-family: 'tai tham' !important; font-size: 1.5rem !important; }
-.localized[script=gj] span { font-family: 'gujarati' !important; }
-.localized[script=te] span { font-family: 'telugu' !important; }
-.localized[script=ka] span { font-family: 'kannada' !important; }
-.localized[script=mm] span { font-family: 'malayalam' !important; }
-.localized[script=br] span { font-family: 'brahmi' !important; }
-.localized[script=tb] span { font-family: 'tibetan' !important; }
-.localized[script=cy] span { font-family: 'cyrillic' !important; }
+.localized[script=si] span, .localized[script=si] select, .localized[script=si] button, .localized[script=si] textarea, .localized[script=si] p, .localized[script=si] a, .localized[script=si] b { font-family: 'sinhala' !important; line-height: 1.5rem !important; }
+.localized[script=hi] span, .localized[script=hi] select, .localized[script=hi] button, .localized[script=hi] textarea, .localized[script=hi] p, .localized[script=hi] a, .localized[script=hi] b { font-family: 'devanagari' !important; font-size: 1.3rem !important; }
+/* .localized[script=ro] span, .localized[script=ro] select, .localized[script=ro] button, .localized[script=ro] textarea, .localized[script=ro] p, .localized[script=ro] a, .localized[script=ro] b { font-family: 'roman' !important; } */
+.localized[script=th] span, .localized[script=th] select, .localized[script=th] button, .localized[script=th] textarea, .localized[script=th] p, .localized[script=th] a, .localized[script=th] b { font-family: 'thai' !important; font-size: 1.5rem !important; line-height: 1.7rem !important; }
+.localized[script=lo] span, .localized[script=lo] select, .localized[script=lo] button, .localized[script=lo] textarea, .localized[script=lo] p, .localized[script=lo] a, .localized[script=lo] b { font-family: 'lao' !important; line-height: 170% !important; /*font-size: 125%;*/ }
+.localized[script=my] span, .localized[script=my] select, .localized[script=my] button, .localized[script=my] textarea, .localized[script=my] p, .localized[script=my] a, .localized[script=my] b { font-family: 'myanmar' !important; }
+.localized[script=km] span, .localized[script=km] select, .localized[script=km] button, .localized[script=km] textarea, .localized[script=km] p, .localized[script=km] a, .localized[script=km] b { font-family: 'khmer' !important; }
+.localized[script=be] span, .localized[script=be] select, .localized[script=be] button, .localized[script=be] textarea, .localized[script=be] p, .localized[script=be] a, .localized[script=be] b { font-family: 'bengali' !important; }
+.localized[script=gm] span, .localized[script=gm] select, .localized[script=gm] button, .localized[script=gm] textarea, .localized[script=gm] p, .localized[script=gm] a, .localized[script=gm] b { font-family: 'gurmukhi' !important; }
+.localized[script=tt] span, .localized[script=tt] select, .localized[script=tt] button, .localized[script=tt] textarea, .localized[script=tt] p, .localized[script=tt] a, .localized[script=tt] b { font-family: 'tai tham' !important; font-size: 1.5rem !important; }
+.localized[script=gj] span, .localized[script=gj] select, .localized[script=gj] button, .localized[script=gj] textarea, .localized[script=gj] p, .localized[script=gj] a, .localized[script=gj] b { font-family: 'gujarati' !important; }
+.localized[script=te] span, .localized[script=te] select, .localized[script=te] button, .localized[script=te] textarea, .localized[script=te] p, .localized[script=te] a, .localized[script=te] b { font-family: 'telugu' !important; }
+.localized[script=ka] span, .localized[script=ka] select, .localized[script=ka] button, .localized[script=ka] textarea, .localized[script=ka] p, .localized[script=ka] a, .localized[script=ka] b { font-family: 'kannada' !important; }
+.localized[script=mm] span, .localized[script=mm] select, .localized[script=mm] button, .localized[script=mm] textarea, .localized[script=mm] p, .localized[script=mm] a, .localized[script=mm] b { font-family: 'malayalam' !important; }
+.localized[script=br] span, .localized[script=br] select, .localized[script=br] button, .localized[script=br] textarea, .localized[script=br] p, .localized[script=br] a, .localized[script=br] b { font-family: 'brahmi' !important; }
+.localized[script=tb] span, .localized[script=tb] select, .localized[script=tb] button, .localized[script=tb] textarea, .localized[script=tb] p, .localized[script=tb] a, .localized[script=tb] b { font-family: 'tibetan' !important; }
+.localized[script=cy] span, .localized[script=cy] select, .localized[script=cy] button, .localized[script=cy] textarea, .localized[script=cy] p, .localized[script=cy] a, .localized[script=cy] b { font-family: 'cyrillic' !important; }

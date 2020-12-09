@@ -180,7 +180,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
 		  if(which != 1) {
-		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
+		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.translit(wb.substring(0,endpt)) + '</span>}';
 		  }
 		  else {
 		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
@@ -197,7 +197,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       else {
         altplus += wb + ' ';
         if(DPR_G.DPR_prefs['showVariantsInline'] && which  != 1) {
-          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(wb) + '</span>' + space;
+          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.translit(wb) + '</span>' + space;
           b++;
         }
       }
@@ -209,7 +209,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
-          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.toUni(altplus) + '</span>}' + space;
+          finout += '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.translit(altplus) + '</span>}' + space;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
           b++;
         }
@@ -223,10 +223,10 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = wb.substring(1) + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
           if(which  != 1) {
-			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + DPR_translit_mod.translit(wb.substring(1)) + '</span>' + space;
 		  }
 		  else {
-			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.toUni(wb.substring(1)) + '</span>' + space;
+			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.translit(wb.substring(1)) + '</span>' + space;
 		  }
           b++;
         }
@@ -406,7 +406,7 @@ function preparepali(sectionId,data,which) { // standard text prep for algorithm
 }
 
 function wrapLink(text,click,url) {
-  return '<'+(url?'a href="'+url+'"':'span class="pointer"')+(click?' onclick="'+click+'"':'')+'>'+text+'</'+(url?'a':'span')+'>';
+  return '<'+(url?'a href="'+url+'"':'span class="pointer localized" script=' + `"${DPR_translit_mod.getTranslitLangId()}"`)+(click?' onclick="'+click+'"':'')+'>'+text+'</'+(url?'a':'span')+'>';
 }
 
 async function convtitle(nikaya,book,una,vna,wna,xna,yna,zna,hiert,oneline,click)

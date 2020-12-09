@@ -162,6 +162,8 @@ const initializeNavigationFeature = async (sectionId) => {
     sectionId,
     __navigationTabViewModel.query(),
     __navigationTabViewModel.para());
+  DPR1_chrome_mod.setTransLitScriptId('#navigation-hierarchy')
+  DPR1_chrome_mod.setTransLitScriptId('#nav-set-div')
 }
 
 const parseNavigationURLParams = () => {

@@ -79,6 +79,8 @@ async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) 
 
   DPR_G.G_dictQuery = DPR_G.G_dictQuery.toLowerCase();
 
+  DPR1_chrome_mod.setTransLitScriptId('#paliTextContent')
+  DPR1_chrome_mod.setTransLitScriptId('#main-pane-container-section-header')
 
   switch (DPR_G.G_dictType) {
     case 'PED':
@@ -671,7 +673,7 @@ function multisearchstart(sectionId, hard)
 
         uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + DPR_translit_mod.translit(uniout) + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
     }
   }
@@ -700,7 +702,7 @@ function multisearchstart(sectionId, hard)
 
         var uniout = DPR_translit_mod.toUni(dppnt);
 
-        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onClick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+        finouta.push(uniout+'###<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onClick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + DPR_translit_mod.translit(uniout) + (DPR_G.D[x].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
       }
     }
   }
@@ -775,7 +777,7 @@ function multisearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + uniout + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['colped']+'" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + loc+','+ uniout + '\')">' + DPR_translit_mod.translit(uniout) + (DPR_G.P[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
             y++;
           }
@@ -790,7 +792,7 @@ function multisearchstart(sectionId, hard)
 
             uniout = DPR_translit_mod.toUni(uniout).replace(/`/g,'˚');
 
-            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onclick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + uniout + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
+            finouta.push('<a href="javascript:void(0)" style="color:'+DPR_G.DPR_prefs['coldppn']+'" onclick="DPR1_dict_xml_mod.DPPNXML(\''+uniout+'/' + loc + ',' + DPR_translit_mod.translit(uniout) + '\')">' + uniout + (DPR_G.D[pedt].length > 1 ? ' ' + (z+1) : '') + '</a><br>');
 
             y++;
           }
@@ -956,7 +958,7 @@ function attsearchstart(sectionId)
     {
       var entries = DPR_G.attlist[x].split('#');
       gsplit = entries.shift();
-      var uniout = DPR_translit_mod.toUni(gsplit);
+      var uniout = DPR_translit_mod.translit(gsplit);
 
       // nikayas
       for(var a = 0; a < entries.length; a++) {
@@ -966,7 +968,7 @@ function attsearchstart(sectionId)
       }
       if (entries.length == 0) continue;
 
-      finouta[y] = '<span class="pointer style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
+      finouta[y] = '<span class="pointer style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'a\',\''+outnik+'\')">' + DPR_translit_mod.translit(uniout) + ' (' + (entries.length) + ')</span><br>';
       y++;
     }
   }
@@ -974,7 +976,7 @@ function attsearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1048,7 +1050,7 @@ function tiksearchstart(sectionId)
 
       var entries = DPR_G.tiklist[x].split('#');
       gsplit = entries.shift();
-      var uniout = DPR_translit_mod.toUni(gsplit);
+      var uniout = DPR_translit_mod.translit(gsplit);
 
       // nikayas
       for(var a = 0; a < entries.length; a++) {
@@ -1058,7 +1060,7 @@ function tiksearchstart(sectionId)
       }
       if (entries.length == 0) continue;
 
-      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + uniout + ' (' + (entries.length) + ')</span><br>';
+      finouta[y] = '<span class="pointer" style="color:'+DPR_G.DPR_prefs['coltext']+'" onclick="DPR1_dict_xml_mod.getAtthXML('+ x +',\'t\',\''+outnik+'\')">' + DPR_translit_mod.translit(uniout) + ' (' + (entries.length) + ')</span><br>';
       y++;
     }
   }
@@ -1066,7 +1068,7 @@ function tiksearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.toUni(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1194,7 +1196,7 @@ function titlesearchstart(sectionId)
 
   var findiv = Math.ceil(y/2);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+getstring+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
 
   var listoutf = '';
   if(y == 0) {

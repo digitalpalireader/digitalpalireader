@@ -46,19 +46,20 @@ var DPR_search_mod = (function () {
     $("#search-header-title").text("Results for:");
 
     const html = `
-    <div id="search-header-items">
+    <div id="search-header-items" class="localized" script="ro">
     <ul id="search-sets"></ul>
     <a id="showing" class="btn btn-outline-secondary m-0" style="display: none; text-align: justify;" onclick="DPR1_search_mod.showonly('xyz');" title="Remove search filter"></a>
     <span id="search-link"></span>
     </div>
     `;
     $("#search-header-contents").html(html);
+    DPR1_chrome_mod.setTransLitScriptId('#search-header-items')
   }
 
   function addSearchTermSectionLink(searchTerm) {
     const html = `
   <li>
-    <a href="#" onclick="return DPR1_search_mod.scrollSearch()">${searchTerm}</a>
+    <a href="#" onclick="return DPR1_search_mod.scrollSearch()">${DPR_translit_mod.translit(searchTerm)}</a>
   </li>`;
     DPR_G.MD.getElementById('search-sets').insertAdjacentHTML('beforeend', html);
   }

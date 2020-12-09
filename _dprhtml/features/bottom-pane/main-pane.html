@@ -31,7 +31,7 @@
               </table>
             </div>
             <div style="position:relative">
-              <div id="anfs"></div>
+              <div id="anfs" class="localized" script="ro"></div>
               <div id="anfsd"></div>
             </div>
           </div>
@@ -52,7 +52,9 @@
 
     <div id="main-bottom-pane-tab-panes-Cv" data-bind="visible: isCvTabSelected">
       <div class="cv-container force-show-scrollbar-on-macos">
-        <textarea id="cinput" onkeydown="if(event.keyCode==13) DPR_BottomPane.cvConvert(true); event.keyCode=0;"></textarea>
+        <div id="cinput-container" class="d-flex localized" script="ro">
+          <textarea id="cinput" onkeydown="if(event.keyCode==13) DPR_BottomPane.cvConvert(true); event.keyCode=0;"></textarea>
+        </div>
         <div id="cinform-div">
           <label class="small-bold-font" for="cinform">From</label>
           <select class="custom-select force-show-scrollbar-on-macos" size="8" id="cinform" onclick="DPR_convert_mod.changeConversion(1)">
@@ -112,7 +114,9 @@
             <option name="Cyrillic">кириллица</option>
           </select>
         </div>
-        <textarea id="coutput"></textarea>
+        <div id="coutput-container" class="d-flex localized" script="ro">
+          <textarea id="coutput"></textarea>
+        </div>
       </div>
     </div>
 

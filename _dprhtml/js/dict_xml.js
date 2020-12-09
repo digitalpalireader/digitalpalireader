@@ -111,7 +111,7 @@ async function paliXML(filein,which,add)
         if(!tda || tda.length < 2) {
           datat += ' ' + dataa[i];
         }
-        else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(DPR_translit_mod.toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
+        else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) datat += dataa[i].replace(/<[^>]*$/,'').replace(DPR_translit_mod.toUni(tda), ' <a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.translit(tda)+'</a>') + dataa[i].substring(dataa[i].indexOf(/<[^>]*$/));
         else datat += ' ' + dataa[i];
         i++
 
@@ -133,7 +133,7 @@ async function paliXML(filein,which,add)
         datat += ' ' + dataa[i];
       }
       else if(typeof(DPR_G.P[tda]) == 'object' && tda != DPR_translit_mod.toVel(ttit)) {
-        datat += ' ' + dataa[i].replace(DPR_translit_mod.toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.toUni(tda)+'</a>');
+        datat += ' ' + dataa[i].replace(DPR_translit_mod.toUni(tda), '<a style="color:'+DPR_G.DPR_prefs['colsel']+'" href="javascript:void(0)" onclick="DPR1_dict_xml_mod.paliXML(\'PED/' + DPR_G.P[tda][0] + ','+DPR_translit_mod.toUni(tda)+'\')">'+DPR_translit_mod.translit(tda)+'</a>');
       }
       else datat += ' ' + dataa[i];
 

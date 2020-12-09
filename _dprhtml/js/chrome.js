@@ -288,6 +288,9 @@ const closeBottomFrame = () => {
   $("#main-pane").height("100%");
 }
 
+const setTransLitScriptId = (selector) => {
+  $(selector).attr('script', DPR_translit_mod.getTranslitLangId());
+}
 
 return {
 closeBottomFrame : closeBottomFrame,
@@ -307,7 +310,8 @@ isDPRTab : isDPRTab,
 openDPRSidebar : openDPRSidebar,
 openDPRTab : openDPRTab,
 setCurrentTitle : setCurrentTitle,
-toggleDPRSidebar : toggleDPRSidebar
+toggleDPRSidebar : toggleDPRSidebar,
+setTransLitScriptId: setTransLitScriptId,
 }
 })()
 

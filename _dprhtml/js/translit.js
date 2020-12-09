@@ -91,13 +91,22 @@ function translit(data) {
 const ConvertCoreScriptMap = [...TranslitCoreScriptMap]
 ConvertCoreScriptMap.splice(1, 0, 'VEL');
 
+function getConvertLangId(index) {
+  const langId = ConvertCoreScriptMap[index];
+  if (langId === 'VEL') {
+    return DPR_translitCore_mod.ScriptIds.RO;
+  }
+
+  return langId;
+}
+
 function convertMain(text, inScriptIndex, outScriptIndex) {
   let newText = text
   if (inScriptIndex === outScriptIndex) {
     return newText;
   }
 
-  const inScript = ConvertCoreScriptMap[inScriptIndex];
+  let inScript = ConvertCoreScriptMap[inScriptIndex];
   const outScript = ConvertCoreScriptMap[outScriptIndex];
 
   if (outScript === 'VEL') {
@@ -109,6 +118,7 @@ function convertMain(text, inScriptIndex, outScriptIndex) {
     return newText;
   } else if (inScript === 'VEL') {
     newText = toUni(newText)
+    inScript = DPR_translitCore_mod.ScriptIds.RO;
   }
 
   newText = DPR_translitCore_mod.convertX2SI(newText, inScript);
@@ -128,5 +138,6 @@ return {
   convertMain: convertMain,
   translit: translit,
   getTranslitLangId: getTranslitLangId,
+  getConvertLangId: getConvertLangId,
 }
 })()

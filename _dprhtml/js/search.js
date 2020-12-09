@@ -468,7 +468,7 @@ function createTdForMatch(dups, match) {
   }
 
   const linkText = normalizeLongSearchResult(match);
-  return `<a href="javascript:void(0);" title="${match}" onclick="DPR1_search_mod.showonly('${match.replace(/\"/g, 'x')}')">${linkText}</a> (${dups[match]})`;
+  return `<a href="javascript:void(0);" title="${DPR_translit_mod.translit(match)}" onclick="DPR1_search_mod.showonly('${match.replace(/\"/g, 'x')}')">${DPR_translit_mod.translit(linkText)}</a> (${dups[match]})`;
 }
 
 function createTables(xmlDoc,hiert)
@@ -867,30 +867,29 @@ function createTables(xmlDoc,hiert)
 
 
                   // titles
-
                   finalout += '<div id='+DPR_G.countmatch + tagtitle+'><p><span><b style="color:' + DPR_G.DPR_prefs['colsel'] + '">' + DPR_G.G_nikLongName[nikaya] + (hiert == 'm' ? '' : '-'+hiert) + ' ' + bookname + '</b>';
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(v.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(w.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(x.length>1) {
                     if(colt == 3) colt = 0;
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
                      colt++;
                    }
                   if(y.length>1) {
                     if(colt == 3) colt = 0;
-                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
                    }
                   if(hiert == 'm') {
                     var modt = '';
@@ -993,9 +992,11 @@ function createTables(xmlDoc,hiert)
 
     exwordNode.innerHTML = exwordout;
     $('#sbfab').html('');
+    DPR1_chrome_mod.setTransLitScriptId('#sbfab')
     document.getElementById('sbfab').appendChild(exwordNode);
     outNode.innerHTML = finalout;
     document.getElementById('sbfb').appendChild(outNode);
+    DPR1_chrome_mod.setTransLitScriptId('#sbfb')
   }
   match = 0;
 }
@@ -1022,7 +1023,7 @@ function showonly(string) {
       else da[x].style.display = "none";
     }
     const linkText = normalizeLongSearchResult(DPR_translit_mod.toUni(string.replace(/xn/g,'"n').replace(/_/g,' ')));
-    $('#showing').html('<b style="color:'+DPR_G.DPR_prefs['colped']+'">' + linkText + '&nbsp;</b><b>x</b>');
+    $('#showing').html('<b style="color:'+DPR_G.DPR_prefs['colped']+'">' + DPR_translit_mod.translit(linkText) + '&nbsp;</b><b>x</b>');
     document.getElementById('showing').style.display = 'block';
     DPR_move_mod.scrollToId('search','sbfb');
   }

@@ -60,6 +60,8 @@ function changeConversion(inout)
     }
   }
 
+  $('#cinput-container').attr('script', DPR_translit_mod.getConvertLangId(ii));
+  $('#coutput-container').attr('script', DPR_translit_mod.getConvertLangId(oi));
   convert();
 }
 function clearboth()

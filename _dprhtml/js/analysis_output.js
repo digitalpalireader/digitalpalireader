@@ -132,10 +132,10 @@ async function outputDef(sectionId,which,first,frombox)
 
     var partvars = owparts[c].split('#');
     if (c > 0) {
-      osout += '<td valign="top"><b>-</b></td>';
+      osout += '<td valign="top" class="localized"' + ` script="${DPR_translit_mod.getTranslitLangId()}"` + '><b>-</b></td>';
     }
 
-    osout += '<td valign="top" align="center">';
+    osout += '<td valign="top" align="center" class="localized"' + ` script="${DPR_translit_mod.getTranslitLangId()}"` + '>';
 
     for (var d = 0; d < partvars.length; d++) { // per variant for each part
       var data = partvars[d].split('^');
@@ -250,7 +250,7 @@ async function outputDef(sectionId,which,first,frombox)
   if (thisconcise.length > 1 || (thisconcise[0] && thisconcise[0].length > 0)){
 
     $('#anfs').html(conciseoutput);
-    //$('#anfright').html(sdfirst);
+    DPR1_chrome_mod.setTransLitScriptId('#anfs')
   }
 
   //alert(DPR_G.G_thisConcise);
