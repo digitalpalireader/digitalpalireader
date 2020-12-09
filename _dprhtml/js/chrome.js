@@ -267,6 +267,10 @@ const scrollMainPane = (scrollTop) => {
   $(DPR_Chrome.getPrimarySectionElementId()).scrollTop(scrollTop);
 }
 
+const scrollPane = (id, scrollTop) => {
+  $(DPR_Chrome.getSectionElementId(id)).scrollTop(scrollTop);
+}
+
 const openBottomFrame = () => {
   // NOTE: #main-bottom-pane takes up the remaining space.
   if ($("#main-pane").height() / $("#main-pane").parent().height() > 0.85){
@@ -299,6 +303,7 @@ writeNavigationHeader : writeNavigationHeader,
 writeNavigationHeaderForSection : writeNavigationHeaderForSection,
 initializeMainPaneOutput : initializeMainPaneOutput,
 scrollMainPane : scrollMainPane,
+scrollPane : scrollPane,
 DPRBottomPaneUpdateStyle : DPRBottomPaneUpdateStyle,
 DPRShowBottomPane : DPRShowBottomPane,
 DPRSidebarDocument : DPRSidebarDocument,
@@ -437,10 +442,10 @@ var DPR_Chrome = (function () {
         <button class="btn btn-light main-pane-container-section-close main-pane-container-section-command" id="main-pane-container-section-close-${sPos}" title="Close panel section" onclick="DPR_Chrome.closeContainerSection(${sPos})">
           <i class="fa fa-close" aria-hidden="true"></i>
         </button>
-        <button class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-prev-${sPos}" title="Go to previous section" onclick="DPR_Chrome.goPreviousInSecondaryPane(${sPos})">
+        <button ${sInfo.type === 'dpr' || 'style="display: none"'} class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-prev-${sPos}" title="Go to previous section" onclick="DPR_Chrome.goPreviousInSecondaryPane(${sPos})">
           <i class="fa fa-arrow-left" aria-hidden="true"></i>
         </button>
-        <button class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-next-${sPos}" title="Go to next section" onclick="DPR_Chrome.goNextInSecondaryPane(${sPos})">
+        <button ${sInfo.type === 'dpr' || 'style="display: none"'} class="btn btn-light main-pane-container-section-command" id="main-pane-container-section-next-${sPos}" title="Go to next section" onclick="DPR_Chrome.goNextInSecondaryPane(${sPos})">
           <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </button>
       </div>`

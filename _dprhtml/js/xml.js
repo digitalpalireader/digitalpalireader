@@ -514,10 +514,10 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   resolveCommands(sectionId, shortcutFns);
   DPR1_format_mod.makeToolbox(shortcutFns, main,aux,titleout[2],true,true,true);
 
-  if(opara) {
+  if(opara && DPR_Chrome.isPrimarySectionId(sectionId)) {
     DPR1_chrome_mod.scrollMainPane(document.getElementById('para'+opara).offsetTop);
   } else {
-    DPR1_chrome_mod.scrollMainPane(0);
+    DPR1_chrome_mod.scrollPane(sectionId, 0);
   }
 
 // add to history
