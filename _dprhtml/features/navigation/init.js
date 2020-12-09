@@ -162,8 +162,6 @@ const initializeNavigationFeature = async (sectionId) => {
     sectionId,
     __navigationTabViewModel.query(),
     __navigationTabViewModel.para());
-  DPR1_chrome_mod.setTransLitScriptId('#navigation-hierarchy')
-  DPR1_chrome_mod.setTransLitScriptId('#nav-set-div')
 }
 
 const parseNavigationURLParams = () => {
@@ -194,6 +192,8 @@ const parseNavigationURLParams = () => {
 
 const initializeNavigationSidebarTab = () => {
   parseNavigationURLParams();
+  DPR1_chrome_mod.setTransLitScriptId('#navigation-hierarchy')
+  DPR1_chrome_mod.setTransLitScriptId('#nav-set-div')
 
   DPR_PAL.enablePopover('#quicklinks-info', 'hover', 'right');
   DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover', 'right');

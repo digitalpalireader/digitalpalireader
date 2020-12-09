@@ -4,6 +4,7 @@ module.exports = {
   "globDirectory": ".",
   "globPatterns": [
     "_dprhtml/**/*.*",
+    "misc/pali/*.*",
     "./*.html",
     "./manifest.webmanifest",
     "./favicon.png",

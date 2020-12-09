@@ -2,6 +2,7 @@
  * Version: #{DeploymentReleaseNumber}#
  */
 
+// NOTE: On updating the workbox version, need to change the corresponding in azure-pipelines.yml (build) and "Generate sw.js" step (release).
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js');
 importScripts('/_dprhtml/js/globalObject.js');
 importScripts('/_dprhtml/features/installation/init.js');
