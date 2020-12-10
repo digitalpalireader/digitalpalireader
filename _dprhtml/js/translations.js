@@ -28,7 +28,7 @@ const createTrProps = () => {
       id: 2,
       baseUrl: '/_external/translations/bt-bdhrs',
       path: '',
-      enabled: DPR_G.DPR_prefs['buddhist_texts'],
+      enabled: true,
       icon: `wisdom.png`,
       background: 'transparent',
       priority: 2,
