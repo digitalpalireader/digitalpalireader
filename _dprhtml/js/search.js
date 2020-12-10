@@ -871,25 +871,25 @@ function createTables(xmlDoc,hiert)
                   var colt = 0;
                   var cola = ['colped', 'coldppn', 'colsel'];
                   if(u.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(u[sx].getElementsByTagName("h0n")[0].textContent.replace(/ *$/, ""))) + '</b>';
                      colt++;
                    }
                   if(v.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(v[sy].getElementsByTagName("h1n")[0].textContent.replace(/ *$/, ""))) + '</b>';
                      colt++;
                    }
                   if(w.length>1) {
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(w[sz].getElementsByTagName("h2n")[0].textContent.replace(/ *$/, ""))) + '</b>';
                      colt++;
                    }
                   if(x.length>1) {
                     if(colt == 3) colt = 0;
-                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                     finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(x[s].getElementsByTagName("h3n")[0].textContent.replace(/ *$/, ""))) + '</b>';
                      colt++;
                    }
                   if(y.length>1) {
                     if(colt == 3) colt = 0;
-                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, "")) + '</b>';
+                    finalout += ', <b style="color:' + DPR_G.DPR_prefs[cola[colt]] + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(y[se].getElementsByTagName("h4n")[0].textContent.replace(/ *$/, ""))) + '</b>';
                    }
                   if(hiert == 'm') {
                     var modt = '';

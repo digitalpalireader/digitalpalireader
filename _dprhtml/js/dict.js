@@ -958,7 +958,7 @@ function attsearchstart(sectionId)
     {
       var entries = DPR_G.attlist[x].split('#');
       gsplit = entries.shift();
-      var uniout = DPR_translit_mod.translit(gsplit);
+      var uniout = DPR_translit_mod.translit(DPR_translit_mod.toUni(gsplit));
 
       // nikayas
       for(var a = 0; a < entries.length; a++) {
@@ -976,7 +976,7 @@ function attsearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Aṭṭhakathā term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1050,7 +1050,7 @@ function tiksearchstart(sectionId)
 
       var entries = DPR_G.tiklist[x].split('#');
       gsplit = entries.shift();
-      var uniout = DPR_translit_mod.translit(gsplit);
+      var uniout = DPR_translit_mod.translit(DPR_translit_mod.toUni(gsplit));
 
       // nikayas
       for(var a = 0; a < entries.length; a++) {
@@ -1068,7 +1068,7 @@ function tiksearchstart(sectionId)
 
   var findiv = Math.ceil(y/3);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Ṭīka term search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var listoutf = '<table width="100%">';
   if(y == 0) {
@@ -1196,7 +1196,7 @@ function titlesearchstart(sectionId)
 
   var findiv = Math.ceil(y/2);
 
-  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(getstring)+'</b>:');
+  $(`${DPR_Chrome.getSectionElementId(sectionId)} #main-pane-container-section-header`).append('<p>Title search for <b style="color:'+DPR_G.DPR_prefs['colped']+'">'+DPR_translit_mod.translit(DPR_translit_mod.toUni(getstring))+'</b>:');
 
   var listoutf = '';
   if(y == 0) {
