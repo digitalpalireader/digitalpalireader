@@ -456,7 +456,7 @@ var DPR_Chrome = (function () {
 
     const html = `
     ${splitter}
-    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" data-${paneCommandDataKeyName}="{}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" ${paneCommandDataKeyName}="{}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
       ${closeButton}
       ${content}
     </div>`;
@@ -464,16 +464,14 @@ var DPR_Chrome = (function () {
     $('#main-pane-container').append(`${html}`);
   }
 
-  const goPreviousInSecondaryPane = (id) => {
+  const goPreviousInSecondaryPane = async (id) => {
     const cmdData = getPaneCommandData(id)
-    // DPR1_send_mod.openPlace(id, ['${prev.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))
-    DPR1_send_mod.openPlace(id, [...cmdData.prev, cmdData.place[8] ? 1 : ''], null, null, 'internal')
+    await DPR1_send_mod.openPlace(id, [...cmdData.prev, cmdData.place[8] ? 1 : ''], null, null, 'internal')
   }
 
-  const goNextInSecondaryPane = (id) => {
+  const goNextInSecondaryPane = async (id) => {
     const cmdData = getPaneCommandData(id)
-    // DPR1_send_mod.openPlace(id, ['${next.join("', '")}' ${(place[8] ? ', 1' : '')}], null, null, DPR1_send_mod.eventSend(event, 1))
-    DPR1_send_mod.openPlace(id, [...cmdData.next, cmdData.place[8] ? 1 : ''], null, null, 'internal')
+    await DPR1_send_mod.openPlace(id, [...cmdData.next, cmdData.place[8] ? 1 : ''], null, null, 'internal')
   }
 
   const loadSuttaSection = async (sInfo, sectionId, q, p) => {

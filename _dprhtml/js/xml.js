@@ -110,7 +110,8 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
 
   var oldurl = DPR_PAL.contentDocument.location.href;
 
-  var newparams = 'loc='+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
+  const prefix = DPR_Chrome.isPrimarySectionId(sectionId) ? 'loc=' : 'dpr://'
+  var newparams = prefix+nikaya+'.'+bookno+'.'+meta+'.'+volume+'.'+vagga+'.'+sutta+'.'+section+'.'+hier;
 
   if(querystring) {
     newparams += '&query='+querystring;
