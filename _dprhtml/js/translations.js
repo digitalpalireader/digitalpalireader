@@ -2,8 +2,6 @@
 
 var DPR_Translations = (function () {
 
-const trimLastWhacks = x => x.replace(/\/+$/g, '');
-
 const retargetTranslationsBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${DPR_PAL.getTranslationsBaseUrl()}$3`)
 
 let trProps = null;
@@ -12,7 +10,7 @@ const createTrProps = () => {
   trProps = {
     ati: {
       id: 0,
-      baseUrl: '/_external/translations/ati/',
+      baseUrl: '/_external/translations/ati',
       path: '/tipitaka',
       icon: `ati.ico`,
       background: 'white',
