@@ -304,9 +304,9 @@ var DPRNav = {
 
   gotoPlace: function (place) {
     __navigationTabViewModel.set(place[0]);
+    __navigationTabViewModel.MAT(place[place.length-1]);
     const b = __navigationTabViewModel.navBook().findIndex(x => x.value === parseInt(place[1]) + 1);
     __navigationTabViewModel.book(__navigationTabViewModel.navBook()[b].value);
-    __navigationTabViewModel.MAT(place[place.length-1]);
     if (place.length > 3) {
       __navigationTabViewModel.meta(place[2].toString().replace('x','0'));
       __navigationTabViewModel.volume(place[3].toString().replace('x','0'));
