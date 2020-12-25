@@ -1477,8 +1477,6 @@ async function sktRootsearchstart(sectionId)
   if(finouta.length == 0) {
     outDiv.innerHTML += '<table width="100%"><tr><td>No results</td></tr></table><hr />';
   }
-  else if(finouta.length == 1)
-    await DPR1_dict_xml_mod.sktRXML(0);
 
   var findiv = Math.ceil(finouta.length/3);
   var listoutf = '<table width="100%">';
