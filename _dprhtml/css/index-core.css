@@ -376,6 +376,7 @@ body .bd-highlight {
   grid-row: 1;
   resize: unset;
   margin: 0.5rem;
+  width: 100%;
 }
 
 #main-bottom-pane-tab-panes-Cv .cv-container #cinform-div {
@@ -394,6 +395,7 @@ body .bd-highlight {
 
 #main-bottom-pane-tab-panes-Cv .cv-container #cinform-div #cinform {
   width: 100%;
+  height: 70%;
 }
 
 #main-bottom-pane-tab-panes-Cv .cv-container #cactions {
@@ -414,6 +416,7 @@ body .bd-highlight {
 
 #main-bottom-pane-tab-panes-Cv .cv-container #coutform-div #coutform {
   width: 100%;
+  height: 70%;
 }
 
 #main-bottom-pane-tab-panes-Cv .cv-container #coutform-div {
@@ -431,6 +434,7 @@ body .bd-highlight {
   grid-row: 1;
   resize: unset;
   margin: 0.5rem;
+  width: 100%;
 }
 
 #main-bottom-pane-tab-panes-Cj {
