@@ -375,5 +375,6 @@ saveSearchSettings : saveSearchSettings,
 loadSearchSettings : loadSearchSettings,
 saveDictionarySearchSettings : saveDictionarySearchSettings,
 loadDictionarySearchSettings : loadDictionarySearchSettings,
+searchSettingsKeyName : searchSettingsKeyName
 }
 })()

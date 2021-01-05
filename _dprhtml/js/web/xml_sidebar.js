@@ -90,7 +90,7 @@ var DPRXML = {
 
     if (xmlDoc === null){
       console.error('Error loading file', e)
-      DPR_Chrome.showErrorToast(`Data files for [${nikbookhier}] not found. More info: ${e.message}`);
+      DPR_prefload_mod.saveSearchSettings(DPR_G.DPR_prefsinfo[DPR_prefload_mod.searchSettingsKeyName].defaultValue);
       return;
     }
 
