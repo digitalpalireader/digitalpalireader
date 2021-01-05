@@ -88,6 +88,12 @@ var DPRXML = {
 
     var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier, 0);
 
+    if (xmlDoc === null){
+      console.error('Error loading file', e)
+      DPR_prefload_mod.saveSearchSettings(DPR_G.DPR_prefsinfo[DPR_prefload_mod.searchSettingsKeyName].defaultValue);
+      return;
+    }
+
     var nik = nikaya;
 
     var meta = (depth > 0 ? $('#tsoPmeta').prop('selectedIndex') : 0);
