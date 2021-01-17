@@ -1,7 +1,7 @@
 var startX = null;
 var startY = null;
 var minSwipeX = 40; //swipe must have 40px min over X
-var swipeRatioThreshold = 2; //movement on X should be at least 2 times on Y
+var swipeRatioThreshold = 1.2; //movement on X should be at least 1.2 times on Y
 
   // Add Touch Listener
   document.addEventListener('touchstart', touchStart, true);
