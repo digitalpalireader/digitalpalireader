@@ -29,16 +29,15 @@ var swipeRatioThreshold = 2; //movement on X should be at least 2 times on Y
 
       let swipeXDiff = endX - startX;
       let swipeYDiff = endY - startY;
-      let horizontalToVerticalRatio = swipeXDiff/swipeYDiff;
-
+      let horizontalToVerticalRatio = Math.abs(swipeXDiff/swipeYDiff);
       if (horizontalToVerticalRatio > swipeRatioThreshold) {
         if(endX > startX + minSwipeX){
-          //left -> right swipe
-          event.gesture = 'swipe_right';
-         }
-         if(endX < startX - minSwipeX ){
           //right -> left swipe
           event.gesture = 'swipe_left';
+         }
+         if(endX < startX - minSwipeX ){
+          //left -> right swipe
+          event.gesture = 'swipe_right';
          }
          //reset
          DPR_gesture(event);
