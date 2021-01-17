@@ -120,6 +120,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Go to previous section (Keyboard shortcut: p)",
     matchKey: e => e.key === 'p',
+    matchGesture: e => e.gesture === 'swipe_left',
   },
   {
     id: DPR_CMD_GOTO_INDEX,
@@ -130,6 +131,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Open book index (Keyboard shortcut: i)",
     matchKey: e => e.key === 'i',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_NEXT,
@@ -140,6 +142,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Go to next section (Keyboard shortcut: n)",
     matchKey: e => e.key === 'n',
+    matchGesture: e => e.gesture === 'swipe_right',
   },
   {
     id: DPR_CMD_GOTO_MYANMAR,
@@ -150,6 +153,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Switch to Myanmar tipitika",
     matchKey: _ => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_THAI,
@@ -160,6 +164,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Switch to Thai tipitika",
     matchKey: _ => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_RELM,
@@ -170,6 +175,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Open relative section in Mūla side by side (Keyboard shortcut: m). Shift+click to open in same pane.",
     matchKey: e => e.key === 'm',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_RELA,
@@ -180,6 +186,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Open relative section in Aṭṭhakathā side by side (Keyboard shortcut: a). Shift+click to open in same pane.",
     matchKey: e => e.key === 'a',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_RELT,
@@ -190,6 +197,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Open relative section in Ṭīkā side by side (Keyboard shortcut: t). Shift+click to open in same pane.",
     matchKey: e => e.key === 't',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_COPY_PERMALINK,
@@ -200,6 +208,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Copy permalink to clipboard (Keyboard shortcut: c)",
     matchKey: e => e.key === 'c',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SEND_TO_CONVERTER,
@@ -210,6 +219,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Send text to converter (Keyboard shortcut: s)",
     matchKey: e => e.key === 's',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SEND_TO_TEXTPAD,
@@ -220,6 +230,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Send text to textpad (Keyboard shortcut: e)",
     matchKey: e => e.key === 'e',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_APPEND_TO_TEXTPAD,
@@ -230,6 +241,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Append selection to textpad (Keyboard shortcut: E)",
     matchKey: e => e.key === 'E',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SAVE_TO_DESKTOP,
@@ -240,6 +252,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Save text to desktop",
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SEARCH_IN_BOOK,
@@ -250,6 +263,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Search in book",
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_COPY_PLACE_TO_SIDEBAR,
@@ -260,6 +274,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Copy place to sidebar",
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_BOOKMARK_SECTION,
@@ -270,6 +285,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Bookmark section (Keyboard shortcut: b)",
     matchKey: e => e.key === 'b',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_0,
@@ -281,6 +297,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_1,
@@ -292,6 +309,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_2,
@@ -303,6 +321,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_3,
@@ -314,6 +333,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_4,
@@ -325,6 +345,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_5,
@@ -336,6 +357,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_6,
@@ -347,6 +369,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_7,
@@ -358,6 +381,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_8,
@@ -369,6 +393,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_9,
@@ -380,6 +405,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TRANSLATE_10,
@@ -391,6 +417,7 @@ const dprCommandList = [
     title: '',
     icon: null,
     matchKey: e => false,
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_OPEN_SETTINGS,
@@ -401,6 +428,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Open settings dialog (Keyboard shortcut: %)",
     matchKey: e => e.key === '%',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_ENTER_QUICK_REFERENCE,
@@ -411,6 +439,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Enter quick reference (Keyboard shortcut: q)",
     matchKey: e => e.key === 'q',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_HOME,
@@ -421,6 +450,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Go to home page (Keyboard shortcut: v)",
     matchKey: e => e.key === 'v',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_PREV_DICT_ENTRY,
@@ -431,6 +461,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Go to previous dictionary entry (Keyboard shortcut: ,)",
     matchKey: e => e.key === ',',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_GOTO_NEXT_DICT_ENTRY,
@@ -441,6 +472,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Go to next dictionary entry (Keyboard shortcut: .)",
     matchKey: e => e.key === '.',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_TOGGLE_DPR_SIDEBAR,
@@ -451,6 +483,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Toggle DPR Sidebar (Keyboard shortcut: & or `)",
     matchKey: e => e.key === '&' || e.key === '`',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SHOW_BOTTOM_PANE,
@@ -461,6 +494,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
     matchKey: e => ['1', '2', '3', '4', '5'].includes(e.key),
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_SHOW_PALI_QUOTE,
@@ -471,6 +505,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Display Pali Quote (Keyboard shortcut: *)",
     matchKey: e => e.key === '*',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_RESET_SETTINGS,
@@ -481,6 +516,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Reset all settings (Keyboard shortcut: r)",
     matchKey: e => e.key === 'r',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_OPEN_NEW_QUIZZ,
@@ -491,6 +527,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Open new quizz (Keyboard shortcut: #)",
     matchKey: e => e.key === '#',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_OPEN_HELP,
@@ -501,6 +538,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Open help dialog (Keyboard shortcut: ?)",
     matchKey: e => e.key === '?',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_OPEN_HELP_VIDEO,
@@ -511,6 +549,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Open help video (Keyboard shortcut: h)",
     matchKey: e => e.key === 'h',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_LAUNCH_FEEDBACK_FORM,
@@ -521,6 +560,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Launch feedback form (Keyboard shortcut: @)",
     matchKey: e => e.key === '@',
+    matchGesture: _ => false,
   },
   {
     id: DPR_CMD_INSTALL_OFFLINE_APP,
@@ -531,6 +571,7 @@ const dprCommandList = [
     isDynamic: false,
     title: "Install for offline use (Keyboard shortcut: I)",
     matchKey: e => e.key === 'I',
+    matchGesture: _ => false,
   },
 ];
 
