@@ -120,7 +120,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Go to previous section (Keyboard shortcut: p)",
     matchKey: e => e.key === 'p',
-    matchGesture: e => e.gesture === 'swipe_left',
+    matchGesture: e => e.dpr_gesture === 'swipe_right',
   },
   {
     id: DPR_CMD_GOTO_INDEX,
@@ -142,7 +142,7 @@ const dprCommandList = [
     isDynamic: true,
     title: "Go to next section (Keyboard shortcut: n)",
     matchKey: e => e.key === 'n',
-    matchGesture: e => e.gesture === 'swipe_right',
+    matchGesture: e => e.dpr_gesture === 'swipe_left',
   },
   {
     id: DPR_CMD_GOTO_MYANMAR,

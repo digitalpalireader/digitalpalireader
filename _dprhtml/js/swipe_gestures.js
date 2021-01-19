@@ -1,54 +1,71 @@
-var startX = null;
-var startY = null;
-var minSwipeX = 40; //swipe must have 40px min over X
-var swipeRatioThreshold = 1.2; //movement on X should be at least 1.2 times on Y
+'use strict'
 
-  // Add Touch Listener
-  document.addEventListener('touchstart', touchStart, true);
-  document.addEventListener('touchend', touchEnd, true);
+var DPR_Gesture = (function () {
 
+  var startX = null;
+  var startY = null;
+  var minSwipeX = 40; //swipe must have 40px min on the X axis
+  var swipeRatioThreshold = 1.2; //movement on X should be at least this times more than on Y
 
-
-  function touchStart(event){
-    if(event.touches.length === 1){
-       //just one finger touched
-       startX = event.touches.item(0).clientX;
-       startY = event.touches.item(0).clientY;
-     }else{
-       //a second finger hit the screen, abort the touch
-       startX = null;
-       startY = null;
+  const touchStart = function (event) {
+    if (event.touches.length === 1) {
+      //just one finger touched
+      startX = event.touches.item(0).clientX;
+      startY = event.touches.item(0).clientY;
+    } else {
+      //a second finger hit the screen, abort the touch
+      startX = null;
+      startY = null;
     }
   }
 
-  function touchEnd(event){
-    if(startX || startY){
-      //the only finger that hit the screen left it
-      var endX = event.changedTouches.item(0).clientX;
-      var endY = event.changedTouches.item(0).clientY;
+  const touchEndFactory = function (sectionPosition) {
+    return function touchEnd(event) {
+      if (startX || startY) {
+        //the only finger that hit the screen left it
+        var endX = event.changedTouches.item(0).clientX;
+        var endY = event.changedTouches.item(0).clientY;
 
-      let swipeXDiff = endX - startX;
-      let swipeYDiff = endY - startY;
-      let horizontalToVerticalRatio = Math.abs(swipeXDiff/swipeYDiff);
-      if (horizontalToVerticalRatio > swipeRatioThreshold) {
-        if(endX > startX + minSwipeX){
-          //right -> left swipe
-          event.gesture = 'swipe_left';
-         }
-         if(endX < startX - minSwipeX ){
-          //left -> right swipe
-          event.gesture = 'swipe_right';
-         }
-         //reset
-         DPR_gesture(event);
-         startX = null;
-         startY = null;
+        let swipeXDiff = endX - startX;
+        let swipeYDiff = endY - startY;
+        let horizontalToVerticalRatio = Math.abs(swipeXDiff / swipeYDiff);
+        if (horizontalToVerticalRatio > swipeRatioThreshold) {
+          if (endX > startX + minSwipeX) {
+            //left -> right swipe
+            event.dpr_gesture = 'swipe_right';
+          }
+          if (endX < startX - minSwipeX) {
+            //right -> left swipe
+            event.dpr_gesture = 'swipe_left';
+          }
+          processGesture(event, sectionPosition);
+          //reset
+          startX = null;
+          startY = null;
+        }
       }
     }
   }
 
-  function DPR_gesture(e) {
+  function processGesture(e, sectionPosition) {
 
+    if (!sectionPosition) {
+      // In the primary pane or global
+      runMatchingCommand(e);
+    } else {
+      // In a secondary pane
+      switch (e.dpr_gesture) {
+        case 'swipe_left':
+          DPR_Chrome.goNextInSecondaryPane(sectionPosition);
+          break;
+        case 'swipe_right':
+          DPR_Chrome.goPreviousInSecondaryPane(sectionPosition);
+          break;
+      }
+    }
+  }
+
+  function runMatchingCommand(e) {
     const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchGesture(e));
     if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
       cmd[1]().execute(e);
@@ -57,3 +74,9 @@ var swipeRatioThreshold = 1.2; //movement on X should be at least 1.2 times on Y
     }
   }
 
+  return {
+    touchStart: touchStart,
+    touchEndFactory: touchEndFactory,
+  };
+
+})();
