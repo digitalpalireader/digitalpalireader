@@ -463,8 +463,8 @@ var DPR_Chrome = (function () {
 
     $('#main-pane-container').append(`${html}`);
       // Add event listeners for swipe gestures
-      document.getElementById('main-pane-container-section-' + sPos).addEventListener('touchstart', DPR_Gesture.touchStart, true);
-      document.getElementById('main-pane-container-section-' + sPos).addEventListener('touchend', DPR_Gesture.touchEndFactory(sPos), true);
+      document.getElementById(getSectionElementIdName(sPos)).addEventListener('touchstart', DPR_Gesture.touchStart, true);
+      document.getElementById(getSectionElementIdName(sPos)).addEventListener('touchend', DPR_Gesture.touchEndFactory(sPos), true);
 
   }
 

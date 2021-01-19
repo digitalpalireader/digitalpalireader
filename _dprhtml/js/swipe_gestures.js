@@ -65,18 +65,18 @@ var DPR_Gesture = (function () {
     }
   }
 
-    function runMatchingCommand(e) {
-      const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchGesture(e));
-      if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
-        cmd[1]().execute(e);
-        event.preventDefault();
-        return;
-      }
+  function runMatchingCommand(e) {
+    const cmd = Object.entries(__dprViewModel.commands).find(([_, x]) => x().matchGesture(e));
+    if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
+      cmd[1]().execute(e);
+      event.preventDefault();
+      return;
     }
+  }
 
-    return {
-      touchStart: touchStart,
-      touchEndFactory: touchEndFactory,
-    };
+  return {
+    touchStart: touchStart,
+    touchEndFactory: touchEndFactory,
+  };
 
-  }) ();
+})();
