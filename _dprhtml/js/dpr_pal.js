@@ -128,16 +128,17 @@
   DPR_PAL.getDifId = () => /analysis=[^&]/.test(window.location.href) ? 'difb-bottom' : 'difb';
 
    // NOTE: Keep DPR-main after DPRm, as was the order in palemoon.
+   // Search feature is also redirected to DPR-Main in order to have the bottom pane working on search results page.
   DPR_PAL.DPR_tabs = Object.freeze({
     'DPRm': { test: x => !x.includes('?feature='), },
-    'DPR-main': { test: x => !x.includes('?feature='), },
-    'DPRs': { test: x => /\?feature=search&/i.test(x), },
+    'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x), },
+    //'DPRs': { test: x => /\?feature=search&/i.test(x), },
     'DPRd': { test: x => /\?feature=dictionary&/i.test(x), },
   });
 
   DPR_PAL.DPR_initialTabs = Object.freeze({
-    'DPR-main': { test: x => !x.includes('?feature='), },
-    'DPR-search': { test: x => /\?feature=search&/i.test(x), },
+    'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x), },
+    //'DPR-search': { test: x => /\?feature=search&/i.test(x), },
     'DPR-dict': { test: x => /\?feature=dictionary&/i.test(x), },
   });
 

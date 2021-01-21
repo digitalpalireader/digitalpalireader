@@ -24,6 +24,7 @@ function openPlaceMATContextMenu(sectionId,hier,para,stringra,add) {
 }
 
 async function openPlace(sectionId,[nikaya,book,meta,volume,vagga,sutta,section,hiert,alt],para,stringra,add) {
+  console.log(sectionId + " ; " + para + " ; " + stringra + " ; " + add);
   appInsights.trackEvent({ name: 'Open place',  properties: { params: [nikaya,book,meta,volume,vagga,sutta,section,hiert,alt], para, stringra, add, }});
 
   if(add == 'right') return;

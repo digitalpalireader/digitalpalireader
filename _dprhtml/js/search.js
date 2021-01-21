@@ -900,7 +900,7 @@ function createTables(xmlDoc,hiert)
 
 
                   // paragraph
-                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',DPR1_send_mod.eventSend(event))">&rArr;</span></span></p><p>' + DPR1_format_mod.preparepali(sectionId,postpara,1)[0] + '</p><hr></div>';
+                  finalout += ', para. ' + (tmp + 1) + ' <span class="abut obut" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\',' + (book - 1) + ',' + sx + ',' + sy + ',' + sz + ',' + s + ',' + se + ',\''+hiert+'\'],' + (tmp+1) + ',\'' + sraout + '\',DPR1_send_mod.eventSend(event))">&rArr;</span></span></p><p>' + DPR1_format_mod.preparepali(sectionId,postpara,2)[0] + '</p><hr></div>';
 
                   // mumble mumble
 
