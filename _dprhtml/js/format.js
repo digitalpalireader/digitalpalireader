@@ -11,6 +11,8 @@ DPR_G.G_uniRegExpNG = /[^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍ�
 DPR_G.G_uniRegExpNS = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/;
 DPR_G.G_uniRegExpNSG = /[^ AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]/g;
 
+var b_global = 0;
+
 
 async function outputFormattedData(sectionId, data,which,place,shortcutFns) // calls text prep, then outputs it to preFrame
 {
@@ -79,7 +81,7 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
 }
 
 
-function formatuniout(sectionId, data,which) { // which = 1 prepare without links, 2 with links
+function formatuniout(sectionId, data,which) { // which = 1 prepare without links, 2 with links, 3 with links from search results page
 
   var convout = '';
   var saveout = '';
@@ -147,6 +149,9 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
 
   var wb;
   var b = 0;
+  if (which == 3) {
+    b = b_global;
+  }
   var space = ' ';
 
   for (var a = 0; a < wordbyword.length; a++)
@@ -179,12 +184,12 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = altplus.replace(/0/g, '.').replace(/ /g, '&nbsp;');
         //finout += '{'+altplus+'}' + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
-		  if(which != 1) {
-		    altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,endpt))) + '</span>}';
-		  }
-		  else {
-		    altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
-		  }
+        if(which != 1) {
+          altplusf += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,endpt))) + '</span>}';
+        }
+        else {
+          altplusf += '<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' +  DPR_translit_mod.toUni(wb.substring(0,endpt)) + '</span>}';
+        }
           finout += altplusf + space;
           b++;
           saveout += ' <span class="varc">'+altplus+'</span>' + space;
@@ -223,11 +228,11 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         altplus = wb.substring(1) + space;
         if(DPR_G.DPR_prefs['showVariantsInline']) {
           if(which  != 1) {
-			altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(1))) + '</span>' + space;
-		  }
-		  else {
-			altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(1))) + '</span>' + space;
-		  }
+            altplusf = '{<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(1))) + '</span>' + space;
+          }
+          else {
+            altplusf = '{<span class="text tiny varc" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(1))) + '</span>' + space;
+          }
           b++;
         }
       }
@@ -262,6 +267,9 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         if (which == 1) {
           finout += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>'; b++;
         }
+        else if (which == 3) {
+          finout += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>' + '</span>'; b++;
+        }
         else {
           fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
           fullwordout[1] += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm))) + '<xc>';
@@ -273,7 +281,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         wb = wb.substring(cm+4);
       }
       if(wb.length > 0) { // anything left?
-        if (which == 1) {
+        if (which == 1 || which == 3) {
           finout += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb)); b++;
         }
         else {
@@ -371,6 +379,8 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       b++;
     }
   }
+
+  b_global = b;
 
   finout = finout.replace(/<@>/g, '<b>');
   finout = finout.replace(/<\/@>/g, '</b>');
