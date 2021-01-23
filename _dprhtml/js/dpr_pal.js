@@ -137,7 +137,7 @@
 
   DPR_PAL.DPR_initialTabs = Object.freeze({
     'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x), },
-    'DPR-search': { test: x => /\?loc=/i.test(x) && /query=/i.test(x), },
+    'DPR-search': { test: x => (/\?feature=search&/i.test(x)), },
     'DPR-dict': { test: x => /\?feature=dictionary&/i.test(x), },
   });
 
