@@ -81,7 +81,7 @@ async function outputFormattedData(sectionId, data,which,place,shortcutFns) // c
 }
 
 
-function formatuniout(sectionId, data,which) { // which = 1 prepare without links, 2 with links
+function formatuniout(sectionId, data,which) { // which = 1 prepare without links, 2 with links, 3 with links from search results page
 
   var convout = '';
   var saveout = '';
@@ -149,7 +149,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
 
   var wb;
   var b = 0;
-  if (which == 3) { // from search results page
+  if (which == 3) {
     b = b_global;
   }
   var space = ' ';
