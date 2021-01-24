@@ -247,7 +247,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
       while (wb.indexOf('<c') >= 0) {
         var cp = wb.indexOf('<c');
         if(cp > 0) { // something before
-          if (which) {
+          if (which && which != 3) {
             finout += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cp))); b++;
           }
           else {
@@ -267,9 +267,9 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         if (which == 1) {
           finout += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>'; b++;
         }
-        else if (which == 3) {
-          finout += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>' + '</span>'; b++;
-        }
+        //else if (which == 3) {
+          //finout += '<span class="text tiny varc pointer" style="color:'+DPR_G.DPR_prefs['grey']+'" id="W' + b + '" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + wb.replace(/"/g,'x').replace(/<[^>]*>/g, '') + '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' + cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm)))+'<xc>' + '</span>'; b++;
+        //}
         else {
           fullwordout[0] += wb.substring(0,cm).replace(/"/g, 'x').replace(/<[^>]*>/g, '');
           fullwordout[1] += cno + DPR_translit_mod.translit(DPR_translit_mod.toUni(wb.substring(0,cm))) + '<xc>';
@@ -281,7 +281,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         wb = wb.substring(cm+4);
       }
       if(wb.length > 0) { // anything left?
-        if (which == 1 || which == 3) {
+        if (which == 1) {
           finout += DPR_translit_mod.translit(DPR_translit_mod.toUni(wb)); b++;
         }
         else {
@@ -290,7 +290,7 @@ function formatuniout(sectionId, data,which) { // which = 1 prepare without link
         }
         convout += wb.replace(/<[^>]*>/g, '');
       }
-      if(!which == 1) {// put it together as one link
+      if(which != 1) {// put it together as one link
         finout += '<span id="W' + b + '" class="pointer" onmouseup="DPR1_send_mod.sendAnalysisToOutput(' + `${sectionId}, ` + '&#39;' + fullwordout[0] +  '&#39;,' + b + ',0,DPR1_send_mod.eventSend(event))">' +  fullwordout[1] + '</span>'; b++;
       }
       finout += space;
