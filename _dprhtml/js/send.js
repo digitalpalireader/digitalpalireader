@@ -5,7 +5,6 @@ var DPR1_send_mod = ( function () {
 function eventSend(event,internal) {
   console.log("event: "+event);
   if(!event) return;
-  if(internal == 999) return 'search';
   if(event.ctrlKey || event.metaKey || event.which == 2) return true;
   if(event.shiftKey) return 'shift';
   if((event.which == 1 || event.charCode || event.dpr_gesture) && internal) return 'internal';
