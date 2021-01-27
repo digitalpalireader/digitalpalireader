@@ -156,7 +156,7 @@ class OtherDialogsViewModel {
   }
 
   openHelpVideo() {
-    DPR1_chrome_mod.openDPRTab('https://www.youtube.com/watch?v=8n_Tyh2itsQ', 'DPR-help', 0);
+    DPR1_chrome_mod.openDPRTab('https://www.youtube.com/watch?v=qP2i7xY2sRI', 'DPR-help', 0);
   }
 
   launchFeedbackForm() {
