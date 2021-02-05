@@ -264,6 +264,9 @@ var DPRSend = {
   },
 
   sendQuickLink: async function (add, value) {
+    if (DPRChrome.isThisSearchTab()) {
+      add = "new";
+    }
     if (add == 'right') return;
     var ql = DPR_navigation_common_mod.convertShortLink($.trim($('#nav-quicklinks').val()));
     if (!ql)

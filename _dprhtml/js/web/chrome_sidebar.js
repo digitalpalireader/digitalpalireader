@@ -88,6 +88,11 @@ var DPRChrome = {
     if (DPR_PAL.mainWindow.gBrowser.selectedTab.id == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_PAL.DPR_tabs[id] || DPR_PAL.DPR_tabs[id].test(ctloc))) return DPR_PAL.mainWindow.gBrowser.selectedTab;
     else return false;
   },
+  isThisSearchTab: function () {
+    var currentTab = DPR_PAL.mainWindow.gBrowser.selectedTab;
+    var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
+    return DPR_PAL.DPR_tabs["DPRs"].test(ctloc);
+  },
   DPRTab: function (id) {
     for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 

@@ -16,12 +16,16 @@ class OtherDialogsViewModel {
   }
 
   async sendQuickLinkFromDialog() {
+    var newTab = false;
+    if (DPRChrome.isThisSearchTab()) {
+      newTab = true;
+    }
     var place = this.quicklinkInput();
     var outplace = DPR_navigation_common_mod.convertShortLink(place);
     if(outplace[0] === false) {
       return DPR1_format_mod.alertFlash(outplace[1], outplace[2]);
     }
-    this.quicklinkInNewTab() ? await DPR1_send_mod.openPlace(this.sectionId, outplace,null,null,'new') : await DPR1_send_mod.openPlace(this.sectionId, outplace);
+    this.quicklinkInNewTab() || newTab ? await DPR1_send_mod.openPlace(this.sectionId, outplace,null,null,'new') : await DPR1_send_mod.openPlace(this.sectionId, outplace);
   }
 
   gotoHome() {
