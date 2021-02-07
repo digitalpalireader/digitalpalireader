@@ -21,10 +21,6 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
 
-  if (__dprViewModel.searchFeatureVisible()) {
-    location.reload();
-  };
-
   DPR_G.G_thisPara = null;
 
   for(var i=1;i<7;i++) {
@@ -402,6 +398,10 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   }
 
   // output header
+
+  if (__dprViewModel.searchFeatureVisible()) {
+    location.reload();
+  };
 
   DPR1_chrome_mod.initializeMainPaneOutput(sectionId);
   DPR1_chrome_mod.writeNavigationHeaderForSection(sectionId, titleout[0], modt, range, place[8]);
