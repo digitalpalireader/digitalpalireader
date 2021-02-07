@@ -21,6 +21,10 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
   __dprViewModel.showMainFeatures();
   __navigationTabViewModel.sectionPlace = place;
 
+  if (__dprViewModel.searchFeatureVisible()) {
+    location.reload();
+  };
+
   DPR_G.G_thisPara = null;
 
   for(var i=1;i<7;i++) {
