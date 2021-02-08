@@ -19,7 +19,6 @@ const emptyFnStr = `(() => {})()`;
 async function loadXMLSection(sectionId, querystring,para,place,isPL)
 {
   __dprViewModel.showMainFeatures();
-  __dprViewModel.isFromNavigation = true;
   __navigationTabViewModel.sectionPlace = place;
 
   DPR_G.G_thisPara = null;

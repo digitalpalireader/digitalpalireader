@@ -19,7 +19,7 @@ class DprViewModel {
     this.installationOngoing = ko.observable(false);
     this.installationBar = ko.observable();
     this.installationBarWidth = ko.observable(0);
-    this.isFromNavigation = ko.observable(false);
+    this.isFromSearch = ko.observable(false);
     this.commands = createCommands();
     this.parseURLParameters();
   }

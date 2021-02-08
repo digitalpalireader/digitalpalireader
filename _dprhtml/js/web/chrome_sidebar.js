@@ -76,7 +76,7 @@ var DPRChrome = {
 
       if ((currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_PAL.DPR_tabs[id] || DPR_PAL.DPR_tabs[id].test(ctloc)))
          || (currentTab.getAttribute('id') == "DPR-main" && DPR_PAL.DPR_tabs["DPRs"].test(ctloc)
-              && !__dprViewModel.isFromNavigation)) {
+              && __dprViewModel.isFromSearch())) {
 
         return currentTab;
       }

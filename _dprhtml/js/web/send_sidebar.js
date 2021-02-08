@@ -437,6 +437,8 @@ var DPRSend = {
 
     appInsights.trackEvent({ name: 'Search',  properties: { add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX, }});
 
+    __dprViewModel.isFromSearch(true);
+
     const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (add == 'right') return;
@@ -530,6 +532,8 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type=' + which + '&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx);
       DPRChrome.openDPRTab(permalink, 'DPRs');
     }
+
+    __dprViewModel.isFromSearch(false);
   },
 
   checkGetstring: function (getstring) {
