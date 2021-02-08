@@ -10,7 +10,6 @@ class OtherDialogsViewModel {
 
   showQuickLinksDialog() {
     this.quicklinkInput('');
-    this.quicklinkInNewTab(false);
     $('#quicklink-dialog-root').on('shown.bs.modal', () => $('#dialog-quicklinkInput').trigger('focus'));
     $('#quicklink-dialog-root').modal('show');
   }
@@ -21,7 +20,7 @@ class OtherDialogsViewModel {
     if(outplace[0] === false) {
       return DPR1_format_mod.alertFlash(outplace[1], outplace[2]);
     }
-    this.quicklinkInNewTab() ? await DPR1_send_mod.openPlace(this.sectionId, outplace,null,null,'new') : await DPR1_send_mod.openPlace(this.sectionId, outplace);
+    await DPR1_send_mod.openPlace(this.sectionId, outplace, null, null, 'new');
   }
 
   gotoHome() {
