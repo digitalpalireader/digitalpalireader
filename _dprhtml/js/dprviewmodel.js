@@ -173,8 +173,8 @@ const dprCommandList = [
     execute: emptyFn,
     visible: false,
     isDynamic: true,
-    title: "Open relative section in Mūla side by side (Keyboard shortcut: m). Shift+click to open in same pane.",
-    matchKey: e => e.key === 'm',
+    title: "Open relative section in Mūla side by side (Keyboard shortcut: m). Shift+click to open in same pane (Keyboard shortcut: M).",
+    matchKey: e => e.key === 'm' || e.key === 'M',
     matchGesture: _ => false,
   },
   {
@@ -184,8 +184,8 @@ const dprCommandList = [
     execute: emptyFn,
     visible: false,
     isDynamic: true,
-    title: "Open relative section in Aṭṭhakathā side by side (Keyboard shortcut: a). Shift+click to open in same pane.",
-    matchKey: e => e.key === 'a',
+    title: "Open relative section in Aṭṭhakathā side by side (Keyboard shortcut: a). Shift+click to open in same pane (Keyboard shortcut: A).",
+    matchKey: e => e.key === 'a' || e.key === 'A',
     matchGesture: _ => false,
   },
   {
@@ -195,8 +195,8 @@ const dprCommandList = [
     execute: emptyFn,
     visible: false,
     isDynamic: true,
-    title: "Open relative section in Ṭīkā side by side (Keyboard shortcut: t). Shift+click to open in same pane.",
-    matchKey: e => e.key === 't',
+    title: "Open relative section in Ṭīkā side by side (Keyboard shortcut: t). Shift+click to open in same pane (Keyboard shortcut: T).",
+    matchKey: e => e.key === 't' || e.key === 'T',
     matchGesture: _ => false,
   },
   {
