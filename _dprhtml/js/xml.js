@@ -228,7 +228,7 @@ async function loadXMLSection(sectionId, querystring,para,place,isPL)
           shortcutFns[cmds[hi[ht]]] = {
             canExecuteStr: 'true',
             executeStr: `DPR1_send_mod.openPlaceMATContextMenu(${sectionId}, ['${place[0]}', ${place[1]}, ${place[2]}, ${place[3]}, ${place[4]}, ${place[5]}, ${place[6]}, '${place[7]}'], null, null, DPR1_send_mod.eventSend(event, 1))`,
-            titleStr: `Open same section in ${DPR_G.G_hTitles[ht]} side by side. Shift+click to open in same pane.`,
+            titleStr: null,
             visibleStr: 'true',
           };
         } else if (relhere.split('#')[hic] != '') {
