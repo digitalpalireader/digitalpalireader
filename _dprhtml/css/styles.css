@@ -612,6 +612,7 @@ font-size:14px;
 }
 
 #bottom {
+  overflow-y: auto;
   position: relative;
 }
 
