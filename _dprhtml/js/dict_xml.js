@@ -680,7 +680,7 @@ function displayDictData(data) {
   }
 
   if (DPR_PAL.isNavigationFeature()) {
-    __otherDialogsViewModel.showBottomPane(BottomPaneTabsViewModel.TabNumber.DICTIONARY);
+    DPR1_chrome_mod.DPRShowBottomPane();
   }
 }
 
