@@ -1,6 +1,14 @@
 'use strict';
 
 class BottomPaneTabsViewModel {
+  static TabNumber = {
+    DICTIONARY: 1,
+    CONVERSION: 2,
+    TEXTPAD: 3,
+    TRANSLATION: 4,
+    CONJUGATION: 5,
+  };
+
   constructor() {
     this.isDTabSelected = ko.observable(true);
     this.isCvTabSelected = ko.observable(false);
