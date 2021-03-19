@@ -678,6 +678,10 @@ function displayDictData(data) {
     $(difbId).append(dataNode);
     $('#paliTextContent').scrollTop(0);
   }
+
+  if (DPR_PAL.isNavigationFeature()) {
+    DPR1_chrome_mod.DPRShowBottomPane();
+  }
 }
 
 return {
