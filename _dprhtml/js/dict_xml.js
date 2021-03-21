@@ -679,7 +679,7 @@ function displayDictData(data) {
     $('#paliTextContent').scrollTop(0);
   }
 
-  if (DPR_PAL.isNavigationFeature()) {
+  if (!DPR_PAL.isDictionaryFeature()) {
     DPR1_chrome_mod.DPRShowBottomPane();
   }
 }
