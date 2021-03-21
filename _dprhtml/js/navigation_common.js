@@ -183,10 +183,10 @@ DPR_G.kudvala['7'] = 6;
 DPR_G.kudvala['8'] = 7;
 DPR_G.kudvala['9'] = 8;
 DPR_G.kudvala['10'] = 9;
-DPR_G.kudvala['12'] = 10;
-DPR_G.kudvala['13'] = 11;
+DPR_G.kudvala['12'] = 11;
+DPR_G.kudvala['13'] = 12;
 DPR_G.kudvala['14'] = 13;
-DPR_G.kudvala['15'] = 13;
+DPR_G.kudvala['15'] = 14;
 
 DPR_G.abhivala = [];
 
