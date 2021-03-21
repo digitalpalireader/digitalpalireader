@@ -125,7 +125,7 @@
       });
   }
 
-  DPR_PAL.getDifId = () => DPR_PAL.isNavigationFeature() ? 'difb-bottom' : 'difb';
+  DPR_PAL.getDifId = () => DPR_PAL.isDictionaryFeature() ? 'difb' : 'difb-bottom';
 
    // NOTE: Keep DPR-main after DPRm, as was the order in palemoon.
   DPR_PAL.DPR_tabs = Object.freeze({
