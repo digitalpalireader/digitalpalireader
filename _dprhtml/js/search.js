@@ -778,8 +778,9 @@ function createTables(xmlDoc,hiert)
 
                 tempexword = [];
 
-                if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,getstring);
-                else startmatch = texttomatch.indexOf(getstring)
+                const searchPattern = DPR_G.G_searchRX ? getRegExtSearchString(getstring) : getstring;
+                let searchResult = searchAcrossBoldBoundary(texttomatch, searchPattern);
+                startmatch = searchResult === null ? -1 : searchResult.start;
 
                 postpara = '';
                 if (startmatch >= 0)
@@ -787,8 +788,7 @@ function createTables(xmlDoc,hiert)
                   while (startmatch >= 0)
                   {
                     match = 1;
-                    if(DPR_G.G_searchRX) gotstring = texttomatch.match(getRegExtSearchString(getstring))[0];
-                    else gotstring = getstring;
+                    gotstring = searchResult.match;
                     endmatch = startmatch + gotstring.length;
                     beforem = texttomatch.substring(0,startmatch);
                     if (/^[TPVM][0-9]\.[0-9][0-9][0-9][0-9]$/.exec(getstring)) {  // page search
@@ -796,11 +796,11 @@ function createTables(xmlDoc,hiert)
                         endmatch += 4;
                     }
                     afterm = texttomatch.substring(endmatch,texttomatch.length);
-                    postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
+                    postpara += beforem + (gotstring.charAt(0) == ' ' ? ' ' : '') + '<c0>' + gotstring.replace(/^ /g, '').replace(/ $/g, '').replace(/(.) (.)/g, "$1<xc> <c0>$2").replace(new RegExp(/(\^e?b\^)/, "g"), "<xc>$1<c0>") + '<xc>' + (gotstring.charAt(gotstring.length-1) == ' ' ? ' ' : '');
                     texttomatch = texttomatch.substring(endmatch);
 
-                    if(DPR_G.G_searchRX) startmatch = findRegEx(texttomatch,getstring);
-                    else startmatch = texttomatch.indexOf(getstring)
+                    searchResult = searchAcrossBoldBoundary(texttomatch, searchPattern);
+                    startmatch = searchResult === null ? -1 : searchResult.start;
 
                     // get words
                     spaceb = beforem.indexOf(' ');
@@ -1272,6 +1272,13 @@ function getRegExtSearchString(string) {
   return new RegExp(DPR_translit_mod.toUniRegEx(string).replace(/\\b/g,"([^AIUEOKGCJTDNPBMYRLVSHaiueokgcjtdnpbmyrlvshāīūṭḍṅṇṁṃñḷĀĪŪṬḌṄṆṀṂÑḶ]|^|$)"));
 }
 
+const searchAcrossBoldBoundary = (text, searchPattern) => {
+  return DPR_search_utils_mod.searchAcrossBoundary({
+    text,
+    searchPattern,
+    boundaryPattern: /\^e?b\^/,
+  });
+};
 
 return {
 scrollSearch : scrollSearch,
