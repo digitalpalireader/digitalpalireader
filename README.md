@@ -14,6 +14,12 @@ To get DRP running on the local machine:
 1. Run live-server in root folder: `live-server`
 1. Browse to `http://localhost:8080`
 
+To run tests:
+
+```shell
+yarn test
+```
+
 ## Working effectively with legacy code
 
 The current codebase has organically evolved since the last decade. Every piece of code implements some critical functionality.
