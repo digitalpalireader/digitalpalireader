@@ -1,4 +1,5 @@
 /build/
+/coverage/
 digitalpalireader/content/DPR_mis-analysis.txt
 node_modules/
 /.ionide/
