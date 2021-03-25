@@ -4,8 +4,8 @@
   "editor.renderWhitespace": "boundary",
   "editor.rulers": [140],
   "editor.formatOnSave": false,
-  "files.trimTrailingWhitespace": true,
-  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": false,
+  "files.insertFinalNewline": false,
 
   "eslint.validate": [
     "javascript",
@@ -17,7 +17,6 @@
   "search.exclude": {
     "public/**": true,
     "node_modules/**": true,
-    "xul/**": true,
     "_dprhtml/js/external/**": true,
   },
 }
