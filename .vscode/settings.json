@@ -4,12 +4,8 @@
   "editor.renderWhitespace": "boundary",
   "editor.rulers": [140],
   "editor.formatOnSave": false,
-  "files.encoding": "utf8",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
-
-  /* Disable this to stop ESLint Output window diagnostics */
-  "eslint.trace.server": "messages",
 
   "eslint.validate": [
     "javascript",
@@ -17,10 +13,6 @@
     "typescript",
     "typescriptreact"
   ],
-
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
 
   "search.exclude": {
     "public/**": true,
