@@ -1,10 +1,10 @@
-[![Build Status](https://dev.azure.com/digitalpalireader/digitalpalireader/_apis/build/status/digitalpalireader%20-%20build?branchName=master)](https://dev.azure.com/digitalpalireader/digitalpalireader/_build/latest?definitionId=1&branchName=master) [![Release Status](https://vsrm.dev.azure.com/digitalpalireader/_apis/public/Release/badge/5c79c309-a1e5-4a73-b2a5-4faa0c2a2cce/1/2)](https://dev.azure.com/digitalpalireader/digitalpalireader/_release?_a=releases&view=mine&definitionId=1)
+[![Build Status](https://dev.azure.com/digitalpalireader/digitalpalireader/_apis/build/status/digitalpalireader%20-%20build?branchName=master)](https://dev.azure.com/digitalpalireader/digitalpalireader/_build/latest?definitionId=1&branchName=master) [![Release Status](https://vsrm.dev.azure.com/digitalpalireader/_apis/public/Release/badge/5c79c309-a1e5-4a73-b2a5-4faa0c2a2cce/1/2)](https://dev.azure.com/digitalpalireader/digitalpalireader/_release?_a=releases&view=mine&definitionId=1) [![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 # Digital Pāli Reader
 
-The Digital Pāli Reader is a tool much like a hard-copy language reader. The tool includes the Pāli canon and related scriptures. It includes multiple dictionaries to facilitate reading the scriptures. In addition to enabling an immersive experience for the study of the Tipitaka, it is also useful in the study of the Pāli language at an advanced level. The Digital Pāli Reader is used by Buddhist monks in their Pāli studies, at Universities around the world and by lay users for study at home.
+> Current backlog is maintained [here](https://github.com/digitalpalireader/digitalpalireader/projects/2).
 
-Current backlog is maintained [here](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
+The Digital Pāli Reader is a tool much like a hard-copy language reader. The tool includes the Pāli canon and related scriptures. It includes multiple dictionaries to facilitate reading the scriptures. In addition to enabling an immersive experience for the study of the Tipitaka, it is also useful in the study of the Pāli language at an advanced level. The Digital Pāli Reader is used by Buddhist monks in their Pāli studies, at Universities around the world and by lay users for study at home.
 
 ## Build and test instructions
 
@@ -57,7 +57,7 @@ Here is an [excellent book](https://www.amazon.com.au/FEATHERS-WORK-EFFECT-LEG-C
 
 ## Useful links
 
-- Work items & Execution: [v5 Release](https://docs.google.com/spreadsheets/d/1WP4nPz46v6DiVX_sYOR2q9J0B5xt_Xdv5RN0RjKRTaw/edit#gid=2140333079).
+- Work items & Execution: [Backlog](https://github.com/digitalpalireader/digitalpalireader/projects/2).
 - Pipeline: [Build](https://yuttadhammo.visualstudio.com/digitalpalireader/_build), [Deployment](https://yuttadhammo.visualstudio.com/digitalpalireader/_release).
 - Deployments: [Staging](https://staging.digitalpalireader.online/), [Production](https://www.digitalpalireader.online/).
 - Telemetry: [Staging](https://portal.azure.com/#@parthopdaslive.onmicrosoft.com/resource/subscriptions/dc9c3151-f906-4b6a-b7d3-040337cbcc79/resourceGroups/sirimangalo-staging/providers/microsoft.insights/components/sirimangalo-staging/sessions), [Production](https://portal.azure.com/#@parthopdaslive.onmicrosoft.com/resource/subscriptions/dc9c3151-f906-4b6a-b7d3-040337cbcc79/resourceGroups/sirimangalo-production/providers/microsoft.insights/components/sirimangalo-production/sessions).
