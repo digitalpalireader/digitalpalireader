@@ -623,9 +623,6 @@ function createTables(xmlDoc,hiert)
 
               if (!/[0-9]/.exec(DPR_G.G_searchString)) texttomatch = texttomatch.replace(/\^a\^[^^]*\^ea\^/g, ''); // remove pesky page references unless we're searching for them.
 
-              //texttomatch = texttomatch.replace(/\^b\^/g, '');
-              //texttomatch = texttomatch.replace(/\^eb\^/g, '');
-
               texttomatch = texttomatch.replace(/  */g, ' ');
               texttomatch = texttomatch.replace(/''nti/g, 'n”ti');
               texttomatch = texttomatch.replace(/"nti/g, 'n”ti');
