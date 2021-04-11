@@ -382,3 +382,7 @@
 // NOTE: Keep this out side the above.
 window.addEventListener('focus', () => { DPR_PAL.windowHasFocus = true; });
 window.addEventListener('blur', () => { DPR_PAL.windowHasFocus = false; });
+
+if (typeof module !== "undefined") {
+  module.exports = DPR_PAL;
+}

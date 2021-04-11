@@ -202,3 +202,7 @@ const DPR_G = {
 };
 
 const initDPR_GList = Object.keys(DPR_G);
+
+if (typeof module !== "undefined") {
+  module.exports = DPR_G;
+}
