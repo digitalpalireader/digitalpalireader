@@ -514,8 +514,8 @@ const dprCommandList = [
     execute: () => __otherDialogsViewModel.resetSettings(),
     visible: true,
     isDynamic: false,
-    title: "Reset all settings (Keyboard shortcut: r)",
-    matchKey: e => e.key === 'r',
+    title: "Reset all settings (Keyboard shortcut: R)",
+    matchKey: e => e.key === 'R',
     matchGesture: _ => false,
   },
   {
@@ -585,4 +585,10 @@ function createCommands() {
   Object.freeze(cmds);
 
   return cmds;
+}
+
+if (typeof module !== "undefined") {
+  module.exports = {
+    DprViewModel,
+  };
 }

@@ -378,3 +378,7 @@ loadDictionarySearchSettings : loadDictionarySearchSettings,
 searchSettingsKeyName : searchSettingsKeyName
 }
 })()
+
+if (typeof module !== "undefined") {
+  module.exports = DPR_prefload_mod;
+}
