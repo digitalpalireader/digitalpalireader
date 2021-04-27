@@ -672,3 +672,7 @@ permalinkClick : permalinkClick,
 preparepali : preparepali
 }
 })()
+
+if (typeof module !== 'undefined') {
+  module.exports = DPR1_format_mod;
+}

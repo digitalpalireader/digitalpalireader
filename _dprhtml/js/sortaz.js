@@ -300,3 +300,7 @@ findSimilarWords : findSimilarWords,
 sortaz : sortaz
 }
 })()
+
+if (typeof module !== 'undefined') {
+  module.exports = DPR_sortaz_mod;
+}

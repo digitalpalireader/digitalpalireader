@@ -43,3 +43,7 @@ getBookName : getBookName,
 getDppnEntry : getDppnEntry
 }
 })()
+
+if (typeof module !== 'undefined') {
+  module.exports = DPR_navigation_mod;
+}
