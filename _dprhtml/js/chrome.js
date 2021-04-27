@@ -625,4 +625,9 @@ var DPR_Chrome = (function () {
   };
 })();
 
-
+if (typeof module !== 'undefined') {
+  module.exports = {
+    DPR_Chrome,
+    DPR1_chrome_mod,
+  };
+}
