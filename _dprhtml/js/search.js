@@ -1,6 +1,14 @@
 'use strict';
 
 var DPR1_search_mod = ( function () {
+
+const SearchType = {
+  MULTIPLE_SETS: 0,
+  BOOKS_IN_SET: 1,
+  SINGLE_BOOK: 2,
+  PARTIAL_BOOK: 3,
+};
+
 // xul buttons: accept, cancel, help, open, save, find, clear, yes, no, apply, close, print, add, remove, refresh, go-forward, go-back, properties, select-font, select-color, network
 
 DPR_G.MD = DPR_PAL.contentDocument;
@@ -181,7 +189,7 @@ function finishSearch() {
   DPR_search_mod.hideProgressBar();
   DPR_search_mod.hideCancelButton();
 
-  const searchLink = 'dpr:search?type='+DPR_G.G_searchType+'&query=' + DPR_translit_mod.toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
+  const searchLink = 'dpr:index?feature=search&type='+DPR_G.G_searchType+'&query=' + DPR_translit_mod.toVel(DPR_G.G_searchString) + '&MAT=' + DPR_G.G_searchMAT + '&set=' + DPR_G.G_searchSet + '&book=' + DPR_G.G_searchBook.slice(1,-1) + '&part=' + DPR_G.G_searchPart + '&rx=' + DPR_G.G_searchRX;
   DPR_G.G_searchLink = DPR_PAL.normalizeDprUri(searchLink);
 
   DPR_search_mod.addCopyPermaLinkElement();
@@ -1278,9 +1286,14 @@ const searchAcrossBoldBoundary = (text, searchPattern) => {
 };
 
 return {
+SearchType,
 scrollSearch : scrollSearch,
 searchTipitaka : searchTipitaka,
 showonly : showonly,
 stopSearch : stopSearch,
 }
 })()
+
+if (typeof module !== "undefined") {
+  module.exports = DPR1_search_mod;
+}

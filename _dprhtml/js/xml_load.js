@@ -96,3 +96,9 @@ var XML_Load = (function () {
     loadXMLFileAsync: loadXMLFileAsync
   };
 })();
+
+if (typeof module !== 'undefined') {
+  module.exports = {
+    XML_Load,
+  };
+}

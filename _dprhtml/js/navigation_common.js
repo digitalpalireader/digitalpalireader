@@ -886,3 +886,7 @@ convertShortLink : convertShortLink,
 getSuttaNumber : getSuttaNumber
 }
 })()
+
+if (typeof module !== 'undefined') {
+  module.exports = DPR_navigation_common_mod;
+}
