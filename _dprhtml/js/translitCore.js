@@ -33,7 +33,7 @@ const Script = Object.freeze({
 
 const paliScriptInfo = new Map ([
     [Script.SI, ['Sinhala', 'සිංහල', [[0x0D80, 0x0DFF]], {f: 'sl_flag.png'} ]],
-    [Script.HI, ['Devanagari', 'हिन्दी', [[0x0900, 0x097F]], {f: 'in_flag.png'} ]],
+    [Script.HI, ['Devanagari', 'देवनागरी', [[0x0900, 0x097F]], {f: 'in_flag.png'} ]],
     [Script.RO, ['Roman', 'Roman', [[0x0000, 0x017F], [0x1E00, 0x1EFF]], {f: 'uk_flag.png'} ]], // latin extended and latin extended additional blocks
     [Script.THAI, ['Thai', 'ไทย', [[0x0E00, 0x0E7F], 0xF70F, 0xF700], {f: 'th_flag.png'} ]], // thai special letters are outside the range
     [Script.LAOS, ['Laos', 'ລາວ', [[0x0E80, 0x0EFF]], {f: 'laos_flag.png'} ]],
