@@ -6,7 +6,7 @@ const getCPEDEntryAsObject = (velthiusWord) => {
   return { grammar, definition, inflectionGroup };
 };
 
-const DPR_cped_mod = {
+const CPED = {
   getDefinition(velthiusWord) {
     return getCPEDEntryAsObject(velthiusWord).definition;
   },
@@ -19,5 +19,5 @@ const DPR_cped_mod = {
 };
 
 if (typeof module !== "undefined") {
-  module.exports = DPR_cped_mod;
+  module.exports = CPED;
 }
