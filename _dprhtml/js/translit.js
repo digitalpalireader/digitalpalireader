@@ -141,3 +141,7 @@ return {
   getConvertLangId: getConvertLangId,
 }
 })()
+
+if (typeof module !== "undefined") {
+  module.exports = DPR_translit_mod;
+}
