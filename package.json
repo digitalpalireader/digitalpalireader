@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "start": "live-server",
     "test": "jest"
   },
   "devDependencies": {
@@ -10,6 +11,7 @@
     "@testing-library/user-event": "^13.1.2",
     "@types/jest": "^26.0.21",
     "babel-jest": "^26.6.3",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "live-server": "^1.2.1"
   }
 }
