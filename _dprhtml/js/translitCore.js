@@ -626,3 +626,7 @@ return {
   ScriptIds: Script,
 }
 })()
+
+if (typeof module !== "undefined") {
+  module.exports = DPR_translitCore_mod;
+}

@@ -8,3 +8,5 @@ window.ko = knockout;
 window.DPR_G = require('./_dprhtml/js/globalObject');
 window.DPR_PAL = require('./_dprhtml/js/dpr_pal');
 window.DPR_prefload_mod = require('./_dprhtml/js/prefload');
+window.DPR_translitCore_mod = require('./_dprhtml/js/translitCore');
+window.DPR_translit_mod = require('./_dprhtml/js/translit');
