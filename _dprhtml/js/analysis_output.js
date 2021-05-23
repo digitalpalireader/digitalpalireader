@@ -122,7 +122,7 @@ async function outputDef(sectionId,which,first,frombox)
 
   var myConj = owparts[owparts.length-1].split('#')[0].split('^');
   if(myConj[3]) { // if root form is found, set up conjugation
-    if(DPR_G.yt[myConj[3]][4] != 'I') {
+    if(CPED.getInflectionGroup(myConj[3]) != 'I') {
       conjWord.form = DPR_translit_mod.toUni(DPR_G.G_outwords[which][0].split('-').pop());
       conjWord.root = DPR_translit_mod.toUni(myConj[3]);
     }
@@ -218,22 +218,21 @@ async function outputDef(sectionId,which,first,frombox)
     {
       if (thisconcise[x].length == 0) { continue; }
 
-      var concisedefa = DPR_G.yt[thisconcise[x]];
-
-      var condefnotype = concisedefa[2];
+      let condefnotype = CPED.getDefinition(thisconcise[x]);
       if (condefnotype.length > 100) {
           condefnotype = condefnotype.substring(0,100);
         condefnotype += '...'
       }
 
-      var concisedef = concisedefa[2];
+      let concisedef = CPED.getDefinition(thisconcise[x]);
 
-      if(/ of /.test(concisedefa[1])) {
-        var base = / of ([^;,. ]+)/.exec(concisedefa[1])[1];
-        concisedefa[1] = concisedefa[1].replace(base, await DPR1_format_mod.linkToPED(base,base));
+      let grammar = CPED.getGrammar(thisconcise[x]);
+      if(/ of /.test(grammar)) {
+        var base = / of ([^;,. ]+)/.exec(grammar)[1];
+        grammar = grammar.replace(base, await DPR1_format_mod.linkToPED(base,base));
       }
 
-      concisedef = DPR_translit_mod.toUni(concisedef + ' (' + concisedefa[1] + ')');
+      concisedef = DPR_translit_mod.toUni(concisedef + ' (' + grammar + ')');
 
       var conciseword = thisconcise[x];
       conciseword = DPR_translit_mod.toUni(conciseword);

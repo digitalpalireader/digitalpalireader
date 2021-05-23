@@ -142,6 +142,6 @@ return {
 }
 })()
 
-if (typeof module !== 'undefined') {
+if (typeof module !== "undefined") {
   module.exports = DPR_translit_mod;
 }

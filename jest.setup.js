@@ -23,6 +23,8 @@ window.DPR_prefload_mod = require('./_dprhtml/js/prefload');
 window.DPR_search_mod = require('./_dprhtml/js/web/search');
 window.DPR_search_utils_mod = require('./_dprhtml/js/search_utils');
 window.DPR_sortaz_mod = require('./_dprhtml/js/sortaz');
+window.DPR_translitCore_mod = require('./_dprhtml/js/translitCore');
+window.DPR_translit_mod = require('./_dprhtml/js/translit');
 window.XML_Load = require('./_dprhtml/js/xml_load').XML_Load;
 
 window.focus = jest.fn();
