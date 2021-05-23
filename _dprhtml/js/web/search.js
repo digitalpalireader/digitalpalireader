@@ -151,3 +151,7 @@ var DPR_search_mod = (function () {
     updateSectionLink: updateSectionLink
   }
 })()
+
+if (typeof module !== 'undefined') {
+  module.exports = DPR_search_mod;
+}
