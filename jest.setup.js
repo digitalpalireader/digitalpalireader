@@ -1,9 +1,10 @@
-import { readFileSync } from 'fs';
-import { join } from 'path';
+import '@testing-library/jest-dom';
 
 // TODO [#339]: replace third-party libraries with NPM modules
 import jQuery from './_dprhtml/js/external/jquery-3.4.1.min';
 import knockout from './_dprhtml/js/external/ajax/libs/knockout/3.5.0/knockout-min';
+
+import { server } from './_dprhtml/js/mock-server';
 
 window.$ = jQuery;
 window.jQuery = jQuery;
@@ -26,9 +27,14 @@ window.XML_Load = require('./_dprhtml/js/xml_load').XML_Load;
 
 window.focus = jest.fn();
 
-window.XML_Load.xhrGetAsync = ({ url }, transformResponse) => {
-  const xmlFilepath = join(__dirname, url);
-  const xmlString = readFileSync(xmlFilepath).toString();
-  const responseXML = new DOMParser().parseFromString(xmlString, 'text/xml');
-  return transformResponse({ responseXML });
-};
+beforeAll(() => {
+  server.listen({ onUnhandledRequest: 'error' });
+});
+
+afterEach(() => {
+  server.resetHandlers();
+});
+
+afterAll(() => {
+  server.close();
+});
