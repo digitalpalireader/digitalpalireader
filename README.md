@@ -8,10 +8,10 @@ The Digital Pāli Reader is a tool much like a hard-copy language reader. The to
 
 ## Build and test instructions
 
-To get DRP running on the local machine:
+To get DPR running on the local machine:
 
-1. Install live-server: `npm i live-server -g`
-1. Run live-server in root folder: `live-server`
+1. Install dependencies: `yarn`
+1. Run "start" script in root folder: `yarn start`
 1. Browse to `http://localhost:8080`
 
 To run tests:
