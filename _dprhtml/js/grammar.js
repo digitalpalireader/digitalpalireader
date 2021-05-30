@@ -15,21 +15,21 @@ function conjugate(word, id, which) {
   }
   word = DPR_translit_mod.toVel(word);
 
-  var yto = DPR_G.yt[word];
-
-  if(yto == undefined) {
+  const inflectionGroup = CPED.getInflectionGroup(word);
+  if(inflectionGroup == undefined) {
     DPR1_format_mod.alertFlash('Word not found','yellow');
     return;
   }
 
   var out;
 
-  if(yto[4] == 'V') { // verb
-    if(yto[9] == 'N') out = conjugateIrrVerb(word,which);
+  const isIrregular = CPED.isIrregular(word);
+  if(inflectionGroup == 'V') { // verb
+    if(isIrregular) out = conjugateIrrVerb(word,which);
     else out = conjugateVerb(word);
   }
   else {
-    if(yto[9] == 'N') out = conjugateIrrNoun(word);
+    if(isIrregular) out = conjugateIrrNoun(word);
     else out = conjugateNoun(word);
   }
 
@@ -67,34 +67,32 @@ DPR_G.decNames = ['nom','voc','acc','ins','dat','abl','gen','loc'];
 DPR_G.gendNames = ['m','nt','f'];
 
 function conjugateNoun(word) {
-
-  var yto = DPR_G.yt[word];
-  var yto5 = yto[5].split(',');
+  var yto5 = CPED.getInflectionInfo(word).split(',');
   var out = '';
 
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
-  if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
+  if(CPED.getInflectionInfo(word).search(/\.[āīū],/) > -1 || CPED.getInflectionInfo(word).search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
   outword = DPR_translit_mod.toUni(outword);
 
 
-  var stem = yto[8];
+  var stem = CPED.getStem(word);
 
   for (var q in yto5) {
-    var type1 = yto[4]+'#'+yto5[q];
+    var type1 = CPED.getInflectionGroup(word)+'#'+yto5[q];
     var type2 = DPR_G.iI[type1];
     if(type2 == undefined) {
       continue;
     }
 
-    var descript = (q > 0 ? '<hr>':'')+'<div><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br /></div>';
+    var descript = (q > 0 ? '<hr>':'')+'<div><b>' + outword + ': ' + type2[0] + '</b><br/>' + CPED.getDefinition(word) + ' (' + CPED.getGrammar(word) + ')<br /></div>';
 
     if (type2[1] == '' && type2[2] == '' && type2[3] == '') {
       out += descript;
       continue;
     }
 
-    var gender = yto[1];
+    var gender = CPED.getGrammar(word);
     switch(gender) {
       case 'm.':
         if(type2[1] != '') {
@@ -264,33 +262,31 @@ function conjugateNoun(word) {
 DPR_G.personNames = ['3rd','2nd','1st'];
 
 function conjugateVerb(word) {
-
-  var yto = DPR_G.yt[word];
   var out = '';
 
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
-  if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
+  if(CPED.getInflectionInfo(word).search(/\.[āīū],/) > -1 || CPED.getInflectionInfo(word).search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
   outword = DPR_translit_mod.toUni(outword);
 
-  var stem = yto[8];
+  var stem = CPED.getStem(word);
 
-  var type1 = yto[4]+'#'+yto[5];
+  var type1 = CPED.getInflectionGroup(word)+'#'+CPED.getInflectionInfo(word);
   var type2 = DPR_G.iI[type1];
   if(type2 == undefined) {
     DPR1_format_mod.alertFlash('Verb not found','yellow');
     return;
   }
 
-  out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br/><br/></div>'; // description
+  out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + CPED.getDefinition(word) + ' (' + CPED.getGrammar(word) + ')<br/><br/></div>'; // description
 
-  var verbCTense = yto[5].split('.')[1];
+  var verbCTense = CPED.getInflectionInfo(word).split('.')[1];
 
   // if not present tense, only output the current tense
 
   if(verbCTense != 'pres') {
     out += '<table class="conjtable"><tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
-    var verb = DPR_G.iV[yto[5]];
+    var verb = DPR_G.iV[CPED.getInflectionInfo(word)];
     for(var j =0; j < 3; j++) { // 3 persons
       var pi = DPR_G.personNames[j];
       out += '<tr><td class="sidecol"><b>'+pi + '</b></td>';
@@ -317,8 +313,8 @@ function conjugateVerb(word) {
 
   var verbTense = ['pres', 'impv', 'opt', 'fut', 'cond'];
   var verbName = ['Present', 'Imperative', 'Optative', 'Future', 'Conditional'];
-  var verbVoice = yto[5].split('.')[0];
-  var verbType = yto[5].replace(/.+\..+\./,'.');
+  var verbVoice = CPED.getInflectionInfo(word).split('.')[0];
+  var verbType = CPED.getInflectionInfo(word).replace(/.+\..+\./,'.');
 
   var verbAdd = [];
   verbAdd[0] = ['','','eyy','iss','iss'];
@@ -358,24 +354,23 @@ function conjugateVerb(word) {
 }
 
 function conjugateIrrNoun(word) {
-  var yto = DPR_G.yt[word];
   var out = '';
 
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
-  if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
+  if(CPED.getInflectionInfo(word).search(/\.[āīū],/) > -1 || CPED.getInflectionInfo(word).search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
   outword = DPR_translit_mod.toUni(outword);
 
   var stem = '';
 
-  var type1 = yto[4]+'#'+yto[5];
+  var type1 = CPED.getInflectionGroup(word)+'#'+CPED.getInflectionInfo(word);
   var type2 = DPR_G.iI[type1];
   if(type2 == undefined) {
     DPR1_format_mod.alertFlash('Noun not found','yellow');
     return;
   }
 
-    out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')</div>'; // description
+    out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + CPED.getDefinition(word) + ' (' + CPED.getGrammar(word) + ')</div>'; // description
 
   var noun = DPR_G.iNI[outword];
   if(noun == undefined) {
@@ -418,31 +413,28 @@ function conjugateIrrNoun(word) {
 }
 
 function conjugateIrrVerb(word,which) {
-  var yto = DPR_G.yt[word];
   var out = '';
 
   var outword = word.replace(/\`/g, '"');
   outword = outword.replace(/,/g, '.');
-  if(yto[5].search(/\.[āīū],/) > -1 || yto[5].search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
+  if(CPED.getInflectionInfo(word).search(/\.[āīū],/) > -1 || CPED.getInflectionInfo(word).search(/\.[āīū]$/) > -1) outword = outword+outword.charAt(outword.length-1);
   outword = DPR_translit_mod.toUni(outword);
 
-  var stem = yto[8];
-
-  var type1 = yto[4]+'#'+yto[5];
+  var type1 = CPED.getInflectionGroup(word)+'#'+CPED.getInflectionInfo(word);
   var type2 = DPR_G.iI[type1];
   if(type2 == undefined) {
     alert('Noun not found');
     return;
   }
 
-    out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + yto[2] + ' (' + yto[1] + ')<br/></div>'; // description
+    out += '<div align="left"><b>' + outword + ': ' + type2[0] + '</b><br/>' + CPED.getDefinition(word) + ' (' + CPED.getGrammar(word) + ')<br/></div>'; // description
 
   var verbNumbers = ['65535','1','4','3','7','2','12','13','14','16','19','22'];
   var verbNames = ['Present','Imperative','Optative','Future','Caus. Pass','Imperative','Att. Pres.','Att. Impv','Aorist','Att. Opt.','Caus. Impv','Caus. Opt'];
 
 
 
-  var verbC = DPR_G.iVI[yto[6]];
+  var verbC = DPR_G.iVI[CPED.getBaseWord(word)];
   if(verbC == undefined) {
     DPR1_format_mod.alertFlash('Verb not found','yellow');
     return;
@@ -472,10 +464,10 @@ function conjugateIrrVerb(word,which) {
       }
     }
     if(verb == undefined || verb[verbno] == undefined) {
-      if(yto[6] != outword || verbC['def'] == undefined || verbC['def'][verbno] == undefined) continue;
+      if(CPED.getBaseWord(word) != outword || verbC['def'] == undefined || verbC['def'][verbno] == undefined) continue;
       else verb = verbC['def'];
     }
-    out += '<table class="butc">'+(yto[6] == outword ? '<tr><td class="toprow" colspan="3">'+verbNames[k]+'</td></tr>':'')+'<tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
+    out += '<table class="butc">'+(CPED.getBaseWord(word) == outword ? '<tr><td class="toprow" colspan="3">'+verbNames[k]+'</td></tr>':'')+'<tr><td class="toprow">person</td><td class="toprow">s.</td><td class="toprow">pl.</td></tr>';
 
     for(var j =0; j < 3; j++) { // 3 persons
       var pi = DPR_G.personNames[j];
@@ -506,7 +498,7 @@ function conjugateIrrVerb(word,which) {
 async function conjugateWord(word,form) {
   if(!word && !form)
     return;
-  if(DPR_G.yt[DPR_translit_mod.toVel(word)])
+  if(CPED.hasEntry(DPR_translit_mod.toVel(word)))
     return conjugate(word,null,form);
 
   if(form)
@@ -549,13 +541,13 @@ async function getConjugation(form,bare) {
 function makeGrammarTerms([trans,type,deca,word,meta]) {
   switch(type) {
     case 'n':
-      return (DPR_G.yt[meta['orig']]?'('+DPR_G.yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':DPR_G.G_vibhatti[deca[1]]+' '+DPR_G.G_vacana[deca[2]]);
+      return (CPED.hasEntry(meta['orig'])?'('+CPED.getGrammar(meta['orig'])+') ':'')+(deca == null?'indeclinable':DPR_G.G_vibhatti[deca[1]]+' '+DPR_G.G_vacana[deca[2]]);
     case 'p':
-      return (DPR_G.yt[meta['orig']]?'('+DPR_G.yt[meta['orig']][1]+') ':'')+(deca == null?'indeclinable':DPR_G.G_vibhatti[deca[1]]+' '+DPR_G.G_vacana[deca[2]]);
+      return (CPED.hasEntry(meta['orig'])?'('+CPED.getGrammar(meta['orig'])+') ':'')+(deca == null?'indeclinable':DPR_G.G_vibhatti[deca[1]]+' '+DPR_G.G_vacana[deca[2]]);
     case 'v':
       return '(v.) '+(deca == null?'indeclinable':DPR_G.G_tenses[deca[0]]+' '+DPR_G.G_persons[deca[1]]+' person '+DPR_G.G_vacana[deca[2]]);
     default:
-      return (DPR_G.yt[meta['orig']]?DPR_G.yt[meta['orig']][1]:'');
+      return (CPED.hasEntry(meta['orig'])?CPED.getGrammar(meta['orig']):'');
   }
 
 }
