@@ -142,6 +142,7 @@
   });
 
   DPR_PAL.mostRecentUrl = "";
+
   DPR_PAL.updateMostRecentUrl = () => DPR_PAL.mostRecentUrl = document.location.href;
 
   DPR_PAL.isNavigationFeature = () => /\?loc=/i.exec(document.location.href);
