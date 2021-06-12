@@ -209,18 +209,38 @@
               <a href="/" class="btn  btn-sm btn-light m-0 mr-1" role="button" title="Home/Buddha Vacana (Keyboard shortcut: v)">
                 <i class="fa fa-home"></i>
               </a>
-              <button type="button" class="btn btn-sm btn-light m-0 mr-1"
-                title="Install for offline use (Keyboard shortcut: I)" data-bind="disable: installationOngoing" onclick="__installationViewModel.showInstallationDialog()">
-                <i class="fa fa-download" aria-hidden="true"></i>
-              </button>
               <a href="https://www.youtube.com/watch?v=qP2i7xY2sRI" target="_blank" rel="noreferrer" class="btn btn-sm btn-light m-0 mr-1"
                 role="button" title="Digital Pāli Reader documentation (Keyboard shortcut: h)">
                 <i class="fa fa-question-circle"></i>
               </a>
-              <button type="button" class="btn btn-sm btn-light m-0 mr-1" data-toggle="modal" data-target="#settings-dialog-root"
-                title="Launch preferences (Keyboard shortcut: %)">
-                <i class="fa fa-gear" aria-hidden="true"></i>
-              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-light m-0 mr-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                </button>
+                <div class="dropdown-menu">
+                  <button type="button" class="btn btn-sm btn-light dropdown-item m-0" onclick="__settingsDialogViewModel.switchTheme('light')"
+                    title="Switch to light theme">
+                    Default (Light)
+                  </button>
+                  <button type="button" class="btn btn-sm btn-light dropdown-item m-0" onclick="__settingsDialogViewModel.switchTheme('high-contrast')"
+                    title="Switch to high contrast theme (use with Dark Reader)">
+                    High contrast (Dark Reader)
+                  </button>
+                </div>
+              </div>
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-light m-0 mr-1 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu">
+                  <button type="button" class="btn btn-sm btn-light dropdown-item m-0"
+                    title="Install for offline use (Keyboard shortcut: I)" data-bind="disable: installationOngoing" onclick="__installationViewModel.showInstallationDialog()">
+                    <i class="fa fa-download" aria-hidden="true"></i> Install...
+                  </button>
+                  <button type="button" class="btn btn-sm btn-light dropdown-item m-0" data-toggle="modal" data-target="#settings-dialog-root"
+                    title="Launch preferences (Keyboard shortcut: %)">
+                    <i class="fa fa-gear" aria-hidden="true"></i> Settings...
+                  </button>
+                </div>
+              </div>
               <button id="context-menu-top-level-open-sidebar" class="btn btn-sm btn-light m-0" role="button" onclick="DPR_Chrome.toggleDPRSidebar()"
                 title="Toggle sidebar (Keyboard shortcut: & or `)">
                 <i id="context-menu-launcher-icon" class="fa fa-bars"></i>
