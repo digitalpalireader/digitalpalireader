@@ -536,7 +536,9 @@ async function getAtthXML(num,type,niklist) { // get atthakatha or tika word
         var z = y[section].getElementsByTagName("p")[para].textContent.substring(4);
 
         placen += ' Para. ' + (parseInt(para)+1);
-        finout += '<p><span class="abut obut tiny" onclick="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],DPR1_send_mod.eventSend(event))">'+placen+'</span> '+DPR1_format_mod.preparepali(sectionId,z,1)[0]+'</p>';
+        DPR_PAL.updateMostRecentUrl();
+
+        finout += '<p><span class="abut obut" onmouseup="DPR1_send_mod.openPlace(' + `${sectionId}, ` + '[\''+nikaya+'\','+bookno+','+pca[2]+','+pca[3]+','+pca[4]+','+pca[5]+','+pca[6]+',\''+type+'\'],'+(parseInt(pca[7])+1)+',[\''+DPR_translit_mod.toUni(word)+'\'],\'dict\')">'+placen+'</span> '+DPR1_format_mod.preparepali(sectionId,z,3)[0]+'</p>';
     }
 
     displayDictData(finout);

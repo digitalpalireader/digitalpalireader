@@ -125,7 +125,7 @@
       });
   }
 
-  DPR_PAL.getDifId = () => DPR_PAL.isDictionaryFeature() ? 'difb' : 'difb-bottom';
+  DPR_PAL.getDifId = () => DPR_PAL.isDictionaryFeature() && !DPR_PAL.isDictionaryAnalysisFeature() ? 'difb' : 'difb-bottom';
 
    // NOTE: Keep DPR-main after DPRm, as was the order in palemoon.
   DPR_PAL.DPR_tabs = Object.freeze({
@@ -136,16 +136,22 @@
   });
 
   DPR_PAL.DPR_initialTabs = Object.freeze({
-    'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x), },
+    'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x) || /\?feature=dictionary&/i.test(x) },
     'DPR-search': { test: x => (/\?feature=search&/i.test(x)), },
     'DPR-dict': { test: x => /\?feature=dictionary&/i.test(x), },
   });
+
+  DPR_PAL.mostRecentUrl = "";
+
+  DPR_PAL.updateMostRecentUrl = () => DPR_PAL.mostRecentUrl = document.location.href;
 
   DPR_PAL.isNavigationFeature = () => /\?loc=/i.exec(document.location.href);
 
   DPR_PAL.isSearchFeature = () => /\?feature=search&/i.exec(document.location.href);
 
   DPR_PAL.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
+
+  DPR_PAL.isDictionaryAnalysisFeature = () => /&analysis=/i.exec(document.location.href) && document.location.href != DPR_PAL.mostRecentUrl;
 
   DPR_PAL.getTranslationsBaseUrl = () => `${/localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''}/_external/translations`
 
