@@ -39,10 +39,7 @@ async function mainInitialize() {
   } else if (DPR_PAL.isDictionaryFeature()) {
     await loadFeatureAsync(sectionId, dictionaryFeatureName, initializeDictionaryFeature);
   } else {
-    await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
-    __dprViewModel.showLandingFeature();
-    initFeedbackFormParameters();
-    await DPR_bv_mod.showBv();
+    await loadAndInitializeLandingPage();
   }
 
   initMainPane();
@@ -63,6 +60,13 @@ const loadFeatureAsync = async (sectionId, name, initFn) => {
   __dprViewModel.showMainFeatures();
   await initFn(sectionId);
   initFeedbackFormParameters();
+}
+
+const loadAndInitializeLandingPage = async () => {
+  await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
+  __dprViewModel.showLandingFeature();
+  initFeedbackFormParameters();
+  await DPR_bv_mod.showBv();
 }
 
 const initSplitters = () => {
@@ -173,8 +177,12 @@ const loadHtmlFragmentAsync = (id, src, vm = null) =>
     });
   })
 
-const  historyPopstateHandler = e => {
+const historyPopstateHandler = async e => {
   console.warn('>>>> historyPopstateHandler', e);
+
+  if (e.currentTarget.location.search === '') {
+    await loadAndInitializeLandingPage();
+  }
 }
 
 function triggerPrivacyNoticeAcceptanceCheck() {
