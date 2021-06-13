@@ -3,12 +3,14 @@ import '@testing-library/jest-dom';
 // TODO [#339]: replace third-party libraries with NPM modules
 import jQuery from './_dprhtml/js/external/jquery-3.4.1.min';
 import knockout from './_dprhtml/js/external/ajax/libs/knockout/3.5.0/knockout-min';
+import Shepherd from './_dprhtml/js/external/shepherd/8.3.1/js/shepherd.min.js';
 
 import { server } from './_dprhtml/js/mock-server';
 
 window.$ = jQuery;
 window.jQuery = jQuery;
 window.ko = knockout;
+window.Shepherd = Shepherd;
 
 window.DPR_G = require('./_dprhtml/js/globalObject');
 window.DPR_PAL = require('./_dprhtml/js/dpr_pal');

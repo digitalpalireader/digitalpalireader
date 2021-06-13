@@ -701,17 +701,20 @@ body .bd-highlight {
   border-radius: 5px;
 }
 
-#context-menu:hover #context-menu-handle {
+#context-menu:hover #context-menu-handle,
+#context-menu.visible #context-menu-handle {
   opacity: 1.0;
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
 }
 
-#context-menu:hover #context-menu-handle #context-menu-launcher-icon {
+#context-menu:hover #context-menu-handle #context-menu-launcher-icon,
+#context-menu.visible #context-menu-handle #context-menu-launcher-icon {
   transform: rotate(180deg);
 }
 
-#context-menu:hover #context-menu-main {
+#context-menu:hover #context-menu-main,
+#context-menu.visible #context-menu-main {
   display: unset;
   border-top-left-radius: 0px;
 }

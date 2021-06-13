@@ -1,0 +1,25 @@
+.shepherd-text .dhamma-talks-translation {
+  margin-bottom: 1rem;
+  padding-left: 4rem;
+}
+
+.shepherd-text .dhamma-talks-translation p {
+  font-family: serif;
+  margin: 0;
+}
+
+.dhamma-talks-translation p:first-child:before {
+  content: open-quote;
+}
+
+.dhamma-talks-translation p:last-child:after {
+  content: close-quote;
+}
+
+.shepherd-text .dhamma-talks-translation p.v2 {
+  text-indent: 25px;
+}
+
+.shepherd-text .dhamma-talks-translation p.v4 {
+  text-indent: 50px;
+}
