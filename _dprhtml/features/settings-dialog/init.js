@@ -6,6 +6,7 @@ class SettingsDialogTabsViewModel {
     this.isLayoutSettingsTabSelected = ko.observable(false);
     this.isTextSettingsTabSelected = ko.observable(false);
 
+    this.themes = this.createThemesObjects()
     this.createSettings();
   }
 
@@ -21,7 +22,7 @@ class SettingsDialogTabsViewModel {
 
   savePreferences() {
     DPR_prefload_mod.savePreferences(x => this[x]());
-    window.location.reload(false);
+    window.location.href = window.location.href;
   }
 
   defaultPreferences() {
@@ -40,6 +41,17 @@ class SettingsDialogTabsViewModel {
     DPR_prefload_mod.resetAllDprSettings();
   }
 
+  switchTheme(themeName) {
+    console.log(themeName)
+
+    if (!this.themes.has(themeName)) {
+      throw new Error('unknown theme', themeName)
+    }
+
+    this.themes.get(themeName).forEach((v, k) => this[k](v))
+    this.savePreferences()
+  }
+
   updateActiveSettingsTabId(tabId) {
     Object
       .entries(this)
@@ -51,5 +63,30 @@ class SettingsDialogTabsViewModel {
 
   updateActiveSettingsTab(_, event) {
     this.updateActiveSettingsTabId($(event.currentTarget).data("tabid"));
+  }
+
+  createThemesObjects() {
+    return new Map([
+      [
+        'light', new Map([
+          ['colbk', DPR_G.DPR_prefsD['colbk']],
+          ['colbkcp', DPR_G.DPR_prefsD['colbkcp']],
+          ['colInput', DPR_G.DPR_prefsD['colInput']],
+          ['colButtonSel', DPR_G.DPR_prefsD['colButtonSel']],
+          ['coltext', DPR_G.DPR_prefsD['coltext']],
+          ['colsel', DPR_G.DPR_prefsD['colsel']],
+        ])
+      ],
+      [
+        'high-contrast', new Map([
+          ['colbk', '#383838'],
+          ['colbkcp', '#383838'],
+          ['colInput', '#383838'],
+          ['colButtonSel', '#78861d'],
+          ['coltext', '#cfcfcf'],
+          ['colsel', '#cccc01'],
+        ])
+      ],
+    ])    
   }
 }
