@@ -41,7 +41,7 @@ const createXNavButtons = (type, html, lname, nname) => {
   if (lname) html += `<button type="button" class="btn btn-sm btn-light m-0" onclick="${onclickStrFn(lname)}" title="Previous ${type} entry..."><i class="fa fa-chevron-left"></i></button>`
   if (nname) html += `<button type="button" class="btn btn-sm btn-light m-0" onclick="${onclickStrFn(nname)}" title="Next ${type} entry..."><i class="fa fa-chevron-right"></i></button>`
 
-  $('#difhist').html(`<div class="d-flex flex-row">${html}</div>`);
+  $('#bottom #difhist').html(`<div class="d-flex flex-row">${html}</div>`);
 }
 
 const createPEDNavToolbar = (html, lname, nname) => createXNavButtons('PED', html, lname, nname)
