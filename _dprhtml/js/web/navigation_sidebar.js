@@ -1,7 +1,7 @@
 'use strict';
 
-var DPRNav = {
-  changeSet: async function (nik) {
+const DPR_Web_Navigation_Sidebar = (function () {
+  async function changeSet(nik) {
     __navigationTabViewModel.set(nik);
 
     const prevSet = DPR_G.G_numberToNik[__navigationTabViewModel.prevSetIndex]
@@ -24,18 +24,18 @@ var DPRNav = {
     __navigationTabViewModel.prevSetIndex = DPR_G.G_nikToNumber2[nik];
 
     this.setBookList(nik);
-  },
+  }
 
-  getBookName: function (nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1
+  function getBookName(nik, ht, no) { // nik is nikaya, ht is a DPR_G.G_hier, no will be xml no - 1
     if (Object.keys(DPR_G.G_kynames).includes(nik)) {
       no = DPR_G.G_kynames[nik][no];
       if (ht != 'm') no = no.replace(/([^a]) 1$/, '$1');
     }
     else no++;
     return no.toString();
-  },
+  }
 
-  setBookList: function (nik, book) {
+  function setBookList(nik, book) {
     var titles;
     if (DPR_G.nikvoladi[nik]) titles = DPR_G.nikvoladi[nik];
     else titles = DPR_G.nikvoladi[nik+DPR_G.G_hier];
@@ -56,14 +56,14 @@ var DPRNav = {
     }
 
     __navigationTabViewModel.book(book ? book : __navigationTabViewModel.navBook()[0].value);
-  },
+  }
 
-  limitt: function (nikn) {
+  function limitt(nikn) {
     if (nikn == 5 || nikn > 6) { return true; }
     else { return false };
-  },
+  }
 
-  setSearchBookList: async function () {
+  async function setSearchBookList() {
     const nik = $('#tsoSETm').val();
 
     const titles = DPR_G.nikvoladi[nik] ? DPR_G.nikvoladi[nik] : DPR_G.nikvoladi[nik + $('#tsoMAT2m').val()];
@@ -90,9 +90,9 @@ var DPRNav = {
       }
     }
     await DPRXML.updateSearchHierarchy(0);
-  },
+  }
 
-  switchhier: function (htmp) {
+  function switchhier(htmp) {
 
     if (DPR_G.G_hier == htmp) return;
 
@@ -136,10 +136,10 @@ var DPRNav = {
     else
       book = parseInt(book) - 1;
 
-      this.setBookList(__navigationTabViewModel.set(), book);
-    },
+    this.setBookList(__navigationTabViewModel.set(), book);
+  }
 
-  historyBox: function () {
+  function historyBox() {
     const sectionId = DPR_Chrome.getPrimarySectionId()
 
     if (!DPR_PAL.isXUL) {
@@ -176,17 +176,17 @@ var DPRNav = {
       histNode.selectedIndex = 0;
     }
     else document.getElementById('hist-box').collapsed = true;
-  },
+  }
 
-  readXML: function (file) {
+  function readXML(file) {
     var cont = DPR_io_mod.readFile(file);
     cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
     var parser = new DOMParser();
     var xmlDoc = parser.parseFromString(cont, 'text/xml');
     return xmlDoc;
-  },
+  }
 
-  searchHistoryBox: function () {
+  function searchHistoryBox() {
     console.log("History not yet implemented.");
     return;
     var xmlDoc = this.readXML('DPR_Search_History');
@@ -240,9 +240,9 @@ var DPRNav = {
 
     }
     else document.getElementById('sh-box').collapsed = true;
-  },
+  }
 
-  dictHistoryBox: function () {
+  function dictHistoryBox() {
     var xmlDoc = this.readXML('DPR_Dict_History');
 
     var bNodes = xmlDoc.getElementsByTagName('dict');
@@ -271,10 +271,9 @@ var DPRNav = {
 
     }
     else document.getElementById('dh-box').collapsed = true;
-  },
+  }
 
-
-  bookmarkBox: function () {
+  function bookmarkBox() {
     var xmlDoc = this.readXML('DPR_Bookmarks');
 
     var bNodes = xmlDoc.getElementsByTagName('bookmark');
@@ -300,9 +299,9 @@ var DPRNav = {
 
     }
     else document.getElementById('bm-box').collapsed = true;
-  },
+  }
 
-  gotoPlace: function (place) {
+  function gotoPlace(place) {
     __navigationTabViewModel.set(place[0]);
     __navigationTabViewModel.MAT(place[place.length-1]);
     const b = __navigationTabViewModel.navBook().findIndex(x => x.value === parseInt(place[1]) + 1);
@@ -314,9 +313,9 @@ var DPRNav = {
       __navigationTabViewModel.sutta(place[5].toString().replace('x','0'));
       __navigationTabViewModel.section(place[6].toString().replace('x','0'));
     }
-  },
+  }
 
-  searchBook: async function (nik, book, hiert) {
+  async function searchBook(nik, book, hiert) {
     appInsights.trackEvent({ name: 'Search book',  properties: { nik, book, hiert }});
 
     DPR_Chrome.openDPRSidebar();
@@ -331,6 +330,23 @@ var DPRNav = {
     document.getElementById('tsoMATm').checked= (hiert == 'm');
     document.getElementById('tsoMATa').checked= (hiert == 'a');
     document.getElementById('tsoMATt').checked= (hiert == 't');
-  },
+  }
 
-}
+  return {
+    changeSet,
+    getBookName,
+    setBookList,
+    limitt,
+    setSearchBookList,
+    switchhier,
+    historyBox,
+    readXML,
+    searchHistoryBox,
+    dictHistoryBox,
+    bookmarkBox,
+    gotoPlace,
+    searchBook,
+  }
+})()
+
+window.DPRNav = DPR_Web_Navigation_Sidebar

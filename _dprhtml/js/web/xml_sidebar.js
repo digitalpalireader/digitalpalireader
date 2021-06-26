@@ -1,7 +1,7 @@
 'use strict';
 
-var DPRXML = {
-  updateHierarchy: async function (depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+const DPR_Web_Xml_Sidebar = (function () {
+  async function updateHierarchy(depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
     if (__navigationTabViewModel.updatingHierarchy) {
       return;
     }
@@ -64,21 +64,21 @@ var DPRXML = {
     }
 
     __navigationTabViewModel.updatingHierarchy = false;
-  },
+  }
 
-  updateDepth(heir, selectList, tag) {
+  function updateDepth(heir, selectList, tag) {
     const lista = this.makeTitleSelect(heir, tag);
     const entries = lista.map((e, i) => ({ value: i, label: e }));
     selectList.removeAll();
     selectList(entries);
-  },
+  }
 
-  updateSearchHierarchyAfterSetSearchBookList: async function (depth) {
+  async function updateSearchHierarchyAfterSetSearchBookList(depth) {
     await DPRNav.setSearchBookList();
     await this.updateSearchHierarchy(depth);
-  },
+  }
 
-  updateSearchHierarchy: async function (depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
+  async function updateSearchHierarchy(depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
     document.activeElement.blur();
 
     var nikaya = $('#tsoSETm').val();
@@ -198,9 +198,9 @@ var DPRXML = {
       __searchTabViewModel.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
     }
 
-  },
+  }
 
-  makeTitleSelect: function (xml, tag) { // output menupopup tag with titles in menuitems
+  function makeTitleSelect(xml, tag) { // output menupopup tag with titles in menuitems
     var name, namea;
     var outlist = [];
     for (var a = 0; a < xml.length; a++) {
@@ -217,7 +217,18 @@ var DPRXML = {
       outlist.push(namea);
     }
     return outlist;
-  },
+  }
 
-  unnamed: DPR_G.G_unnamed,
-}
+  var unnamed = DPR_G.G_unnamed
+
+  return {
+    updateHierarchy,
+    updateDepth,
+    updateSearchHierarchyAfterSetSearchBookList,
+    updateSearchHierarchy,
+    makeTitleSelect,
+    unnamed,
+  }
+})()
+
+window.DPRXML = DPR_Web_Xml_Sidebar

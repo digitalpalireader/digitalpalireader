@@ -1,7 +1,7 @@
 'use strict';
 
-var DPROpts = {
-  tipitakaOptions: async function () {
+const DPR_Web_Opts_Sidebar = (function () {
+  async function tipitakaOptions() {
     $('#tsoContainer').hide();
     $('#tsoSetContainer').hide();
     $('#tsoSET').hide();
@@ -53,33 +53,33 @@ var DPROpts = {
       default:
         break;
     }
-  },
+  }
 
-  selAll: function (id) {
+  function selAll(id) {
     const cbSelector = `#${id} input`;
     const cbs = $(cbSelector);
     const checkedCbs = $(`#${id} input`).filter(":checked");
     cbs.prop('checked', cbs.length != checkedCbs.length);
-  },
+  }
 
-  dictAdvToggle: function () {
+  function dictAdvToggle() {
     console.error("This should not have been invoked on web.");
     var ao = $('#dictAdvOpts');
     if (!ao.getAttribute('collapsed')) ao.hide();
     else ao.show();
-  },
+  }
 
-  showCheckbox: function (id) {
+  function showCheckbox(id) {
     $(`#${id}`).show();
     $(`label[for='${id}']`).show();
-  },
+  }
 
-  hideCheckbox: function (id) {
+  function hideCheckbox(id) {
     $(`#${id}`).hide();
     $(`label[for='${id}']`).hide();
-  },
+  }
 
-  dictOptions: function () {
+  function dictOptions() {
     var which = $('#dictType').prop("value");
 
     $('#dictAdvOpts1').hide(); // misc
@@ -153,5 +153,16 @@ var DPROpts = {
         $('#soNO').show();
         break;
     }
-  },
-}
+  }
+
+  return {
+    tipitakaOptions,
+    selAll,
+    dictAdvToggle,
+    showCheckbox,
+    hideCheckbox,
+    dictOptions,
+  }
+})()
+
+window.DPROpts = DPR_Web_Opts_Sidebar

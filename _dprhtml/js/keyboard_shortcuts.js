@@ -1,6 +1,4 @@
-document.onkeypress = DPR_keypress;
-
-function DPR_keypress(e) {
+const DPR_keypress = (e) => {
   if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey || e.metaKey) {
     return;
   }
@@ -12,3 +10,5 @@ function DPR_keypress(e) {
     return;
   }
 }
+
+document.onkeypress = DPR_keypress;

@@ -1,8 +1,7 @@
 'use strict';
 
-var DPRSend = {
-
-  eventSend: function (event, internal) {
+const DPR_Web_Send_Sidebar = (function () {
+  function eventSend(event, internal) {
     if (!event) return;
     if (event.ctrlKey || event.metaKey || event.which == 2) return true;
     if (event.shiftKey) return 'shift';
@@ -10,10 +9,9 @@ var DPRSend = {
     if (event.which == 1) return false;
     if (event.keyCode) return false;
     return 'right';
-  },
+  }
 
-
-  importXML: async function (section, labelsearch, para, isPL, add, scroll, cat) {
+  async function importXML(section, labelsearch, para, isPL, add, scroll, cat) {
 
     const sectionId = DPR_Chrome.getPrimarySectionId()
 
@@ -106,9 +104,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + DPR_G.G_hier + (labelsearch ? '&query=' + labelsearch.join('+') : '') + (para ? '&para=' + para : '') + (scroll ? '&scroll=' + scroll : ''));
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-  importXMLindex: async function (sectionId, add) {
+  async function importXMLindex(sectionId, add) {
     var nikaya = document.getElementById('nav-set').value;
     var bookno = parseInt(document.getElementById('nav-book').value) - 1;
 
@@ -156,9 +154,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + bookno + '.' + DPR_G.G_hier);
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-  openPlace: async function (sectionId, [nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
+  async function openPlace(sectionId, [nikaya, book, meta, volume, vagga, sutta, section, hiert], para, stringra, add) {
     if (!nikaya || add == 'right') return;
 
     if (stringra) {
@@ -209,9 +207,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + hiert + (stringra ? '&query=' + DPR_translit_mod.toVel(stringra.join('+')) : '') + (para ? '&para=' + (para + 1) : ''));
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-  openIndex: async function (sectionId, [nikaya, book, hiert], add) {
+  async function openIndex(sectionId, [nikaya, book, hiert], add) {
 
     if (!nikaya || add == 'right') return;
     if (!add) { // reuse old tab
@@ -255,15 +253,15 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + hiert);
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-  sendQuickLinkOnEnterKey: async function (event) {
+  async function sendQuickLinkOnEnterKey(event) {
     if(event.keyCode == 13) {
       await DPRSend.sendQuickLink(DPRSend.eventSend(event));
     }
-  },
+  }
 
-  sendQuickLink: async function (add, value) {
+  async function sendQuickLink(add, value) {
     if (add == 'right') return;
     var ql = DPR_navigation_common_mod.convertShortLink($.trim($('#nav-quicklinks').val()));
     if (!ql)
@@ -327,10 +325,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?loc=' + nikaya + '.' + book + '.' + meta + '.' + volume + '.' + vagga + '.' + sutta + '.' + section + '.' + hiert + (para ? '&para=' + para : ''));
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-
-  sendAnalysisToOutput: async function (sectionId, input, frombox, add) {
+  async function sendAnalysisToOutput(sectionId, input, frombox, add) {
     appInsights.trackEvent({ name: 'Sidebar - DPR Analysis',  properties: { input, frombox, add, }});
 
     if (add == 'right') return;
@@ -357,10 +354,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul' + '?analysis=' + DPR_translit_mod.toVel(input) + '&frombox=' + frombox);
       DPRChrome.openDPRTab(permalink, 'DPRm');
     }
-  },
+  }
 
-
-  sendDict: async function (hard, add, which, getstring, opts) {
+  async function sendDict(hard, add, which, getstring, opts) {
 
     appInsights.trackEvent({ name: 'Search',  properties: { hard, add, which, getstring, opts, }});
 
@@ -425,15 +421,15 @@ var DPRSend = {
         DPRChrome.openDPRTab(permalink, 'DPRd');
       }
     }
-  },
+  }
 
-  sendSearchOnEnterKey: async function(event) {
+  async function sendSearchOnEnterKey(event) {
     if(event.keyCode == 13) {
       await DPRSend.sendSearch();
     }
-  },
+  }
 
-  sendSearch: async function (add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX) {
+  async function sendSearch(add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX) {
 
     appInsights.trackEvent({ name: 'Search',  properties: { add, searchType, searchString, searchMAT, searchSet, searchBook, searchPart, searchRX, }});
 
@@ -530,9 +526,9 @@ var DPRSend = {
       var permalink = DPR_PAL.toWebUrl('chrome://digitalpalireader/content/search.xul' + '?type=' + which + '&query=' + getstring + '&MAT=' + MAT + '&set=' + sets + '&book=' + book + '&part=' + part + '&rx=' + rx);
       DPRChrome.openDPRTab(permalink, 'DPRs');
     }
-  },
+  }
 
-  checkGetstring: function (getstring) {
+  function checkGetstring(getstring) {
 
     var stringra = [];
 
@@ -563,9 +559,9 @@ var DPRSend = {
       }
     }
     return true;
-  },
+  }
 
-  createBrowser: function (thisDocument, url, count) {
+  function createBrowser(thisDocument, url, count) {
     var browser = thisDocument.createElement('browser');
     browser.setAttribute('disablehistory', 'true');
     browser.setAttribute('type', 'content');
@@ -576,12 +572,31 @@ var DPRSend = {
     browser.setAttribute('id', 'dpr-index-top-' + count);
 
     return browser;
-  },
+  }
 
-  createSplitter: function (thisDocument, count) {
+  function createSplitter(thisDocument, count) {
     var splitter = thisDocument.createElement('splitter');
     splitter.setAttribute('id', 'dpr-index-top-' + count + '-splitter');
 
     return splitter;
-  },
-};
+  }
+
+  return {
+    eventSend,
+    importXML,
+    importXMLindex,
+    openPlace,
+    openIndex,
+    sendQuickLinkOnEnterKey,
+    sendQuickLink,
+    sendAnalysisToOutput,
+    sendDict,
+    sendSearchOnEnterKey,
+    sendSearch,
+    checkGetstring,
+    createBrowser,
+    createSplitter,
+  }
+})()
+
+window.DPRSend = DPR_Web_Send_Sidebar

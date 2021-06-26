@@ -8,8 +8,8 @@
  */
 'use strict';
 
-(function (DPR_PAL, $, undefined) {
-  const defineReadOnlyProperty = (name, value) => Object.defineProperty(DPR_PAL, name, { value: value });
+(function (DPR_Pal, $, undefined) {
+  const defineReadOnlyProperty = (name, value) => Object.defineProperty(DPR_Pal, name, { value: value });
 
   defineReadOnlyProperty(
     "isXUL",
@@ -17,24 +17,24 @@
 
   defineReadOnlyProperty(
     "isWeb",
-    !DPR_PAL.isXUL);
+    !DPR_Pal.isXUL);
 
   defineReadOnlyProperty(
     "baseUrl",
-    DPR_PAL.isXUL ? "chrome://" : `${window.location.origin}/`);
+    DPR_Pal.isXUL ? "chrome://" : `${window.location.origin}/`);
 
   defineReadOnlyProperty(
     "dprHomePage",
-    DPR_PAL.isXUL ? `${DPR_PAL.baseUrl}digitalpalireader/content/index.xul` : `${DPR_PAL.baseUrl}_dprhtml/index.html`);
+    DPR_Pal.isXUL ? `${DPR_Pal.baseUrl}digitalpalireader/content/index.xul` : `${DPR_Pal.baseUrl}_dprhtml/index.html`);
 
   defineReadOnlyProperty(
     "contentFolder",
-    DPR_PAL.isXUL ? '/content/' : '/_dprhtml/');
+    DPR_Pal.isXUL ? '/content/' : '/_dprhtml/');
 
   // NOTE: This has to be written using ES6 modules when the work is done.
   const loadedScripts = {}
-  DPR_PAL.addOneJS = file => {
-    const url = /^\//i.test(file) ? file : `${DPR_PAL.contentFolder}js/${file}.js`
+  DPR_Pal.addOneJS = file => {
+    const url = /^\//i.test(file) ? file : `${DPR_Pal.contentFolder}js/${file}.js`
 
     if (loadedScripts[url.toLowerCase()]) {
       return Promise.resolve()
@@ -57,10 +57,10 @@
     })
   }
 
-  DPR_PAL.addJS = async (files) => await Promise.all(files.map(DPR_PAL.addOneJS))
+  DPR_Pal.addJS = async (files) => await Promise.all(files.map(DPR_Pal.addOneJS))
 
-  DPR_PAL.showLoadingMarquee = sectionId => {
-    if (DPR_PAL.isXUL) {
+  DPR_Pal.showLoadingMarquee = sectionId => {
+    if (DPR_Pal.isXUL) {
       $(`${DPR_Chrome.getSectionElementId(sectionId)} #mafbc`).html('');
       document.getElementById('mafbc').appendChild(DPR_G.pleasewait);
     } else {
@@ -69,8 +69,8 @@
     }
   };
 
-  DPR_PAL.chromeFileExists = fileLoc => {
-    return $.ajax({type:"HEAD",url: `${DPR_PAL.baseUrl}${fileLoc}`,async: false}).status!=404;
+  DPR_Pal.chromeFileExists = fileLoc => {
+    return $.ajax({type:"HEAD",url: `${DPR_Pal.baseUrl}${fileLoc}`,async: false}).status!=404;
   };
 
   /*
@@ -82,8 +82,8 @@
   refer : https://stackoverflow.com/questions/48866903/copy-to-clipboard-action-doesnt-work-when-modal-is-open
   */
 
-  DPR_PAL.copyToClipboard = text => {
-    if (DPR_PAL.isWeb) {
+  DPR_Pal.copyToClipboard = text => {
+    if (DPR_Pal.isWeb) {
       var targetElement = $(".modal-open").length?$(".modal-body"):$('body');
       $('<input>').attr('class','clipboardCopy').attr('style','position: absolute; left: -1000px; top: -1000px').val(text).appendTo(targetElement);
       $('.clipboardCopy').select();
@@ -96,22 +96,22 @@
   }
 
   const dprSchemeUriCracker = /^dpr:(.+)\?(.*)$/;
-  DPR_PAL.normalizeDprUri = uri => {
-    if (DPR_PAL.isWeb && uri.match(dprSchemeUriCracker)) {
-      return uri.replace(dprSchemeUriCracker, `${DPR_PAL.baseUrl}_dprhtml/$1.html?$2`);
+  DPR_Pal.normalizeDprUri = uri => {
+    if (DPR_Pal.isWeb && uri.match(dprSchemeUriCracker)) {
+      return uri.replace(dprSchemeUriCracker, `${DPR_Pal.baseUrl}_dprhtml/$1.html?$2`);
     } else {
       return uri;
     }
   }
 
-  DPR_PAL.delay = ms => new Promise(resolve => setTimeout(resolve, ms));
+  DPR_Pal.delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-  DPR_PAL.mainStylesMatcher = /.*_dprhtml\/css\/styles.*\.css$/i;
-  DPR_PAL.dprUrlMatcher = /\/_dprhtml\/index\.html/;
+  DPR_Pal.mainStylesMatcher = /.*_dprhtml\/css\/styles.*\.css$/i;
+  DPR_Pal.dprUrlMatcher = /\/_dprhtml\/index\.html/;
 
-  DPR_PAL.fixupDprBaseUrl = url => url.replace(' dprhtml', '_dprhtml');
+  DPR_Pal.fixupDprBaseUrl = url => url.replace(' dprhtml', '_dprhtml');
 
-  DPR_PAL.enablePopover = (id, trigger, placement) => {
+  DPR_Pal.enablePopover = (id, trigger, placement) => {
     $(id)
       .each(function() {
         $(this).popover({
@@ -125,37 +125,37 @@
       });
   }
 
-  DPR_PAL.getDifId = () => DPR_PAL.isDictionaryFeature() && !DPR_PAL.isDictionaryAnalysisFeature() ? 'difb' : 'difb-bottom';
+  DPR_Pal.getDifId = () => DPR_Pal.isDictionaryFeature() && !DPR_Pal.isDictionaryAnalysisFeature() ? 'difb' : 'difb-bottom';
 
    // NOTE: Keep DPR-main after DPRm, as was the order in palemoon.
-  DPR_PAL.DPR_tabs = Object.freeze({
+  DPR_Pal.DPR_tabs = Object.freeze({
     'DPRm': { test: x => !x.includes('?feature='), },
     'DPR-main': { test: x => !x.includes('?feature='), },
     'DPRs': { test: x => /\?feature=search&/i.test(x), },
     'DPRd': { test: x => /\?feature=dictionary&/i.test(x), },
   });
 
-  DPR_PAL.DPR_initialTabs = Object.freeze({
+  DPR_Pal.DPR_initialTabs = Object.freeze({
     'DPR-main': { test: x => !x.includes('?feature=') || /\?feature=search&/i.test(x) || /\?feature=dictionary&/i.test(x) },
     'DPR-search': { test: x => (/\?feature=search&/i.test(x)), },
     'DPR-dict': { test: x => /\?feature=dictionary&/i.test(x), },
   });
 
-  DPR_PAL.mostRecentUrl = "";
+  DPR_Pal.mostRecentUrl = "";
 
-  DPR_PAL.updateMostRecentUrl = () => DPR_PAL.mostRecentUrl = document.location.href;
+  DPR_Pal.updateMostRecentUrl = () => DPR_Pal.mostRecentUrl = document.location.href;
 
-  DPR_PAL.isNavigationFeature = () => /\?loc=/i.exec(document.location.href);
+  DPR_Pal.isNavigationFeature = () => /\?loc=/i.exec(document.location.href);
 
-  DPR_PAL.isSearchFeature = () => /\?feature=search&/i.exec(document.location.href);
+  DPR_Pal.isSearchFeature = () => /\?feature=search&/i.exec(document.location.href);
 
-  DPR_PAL.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
+  DPR_Pal.isDictionaryFeature = () => /\?feature=dictionary&/i.exec(document.location.href);
 
-  DPR_PAL.isDictionaryAnalysisFeature = () => /&analysis=/i.exec(document.location.href) && document.location.href != DPR_PAL.mostRecentUrl;
+  DPR_Pal.isDictionaryAnalysisFeature = () => /&analysis=/i.exec(document.location.href) && document.location.href != DPR_Pal.mostRecentUrl;
 
-  DPR_PAL.getTranslationsBaseUrl = () => `${/localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''}/_external/translations`
+  DPR_Pal.getTranslationsBaseUrl = () => `${/localdev/i.test(window.environmentName) ? 'https://staging.digitalpalireader.online' : ''}/_external/translations`
 
-  DPR_PAL.toUrl = x => {
+  DPR_Pal.toUrl = x => {
     let url = undefined;
     try {
       url = new URL(x)
@@ -172,7 +172,7 @@
     }
   };
 
-  DPR_PAL.modifyUrlPart = (url, queryKey, f) => {
+  DPR_Pal.modifyUrlPart = (url, queryKey, f) => {
     const [baseUrl, qps] = url.split('?');
     const newQps = qps
       .split('&')
@@ -185,17 +185,17 @@
     return `${baseUrl}?${newQps.join('&')}`;
   };
 
-  DPR_PAL.toWebUrl = url => {
+  DPR_Pal.toWebUrl = url => {
     const xulUrlCracker = /^chrome:\/\/digitalpalireader\/content\/(index|search|dict|dbv)\.(xul|htm|html)(\?)?(.*)$/i
 
     let newUrl = url
-      .replace(xulUrlCracker, `${DPR_PAL.baseUrl}_dprhtml/index.html?feature=$1&$4`)
+      .replace(xulUrlCracker, `${DPR_Pal.baseUrl}_dprhtml/index.html?feature=$1&$4`)
       .replace('feature=index', '')
       .replace('feature=dict&', 'feature=dictionary&')
       .replace('?&', '?');
 
     // NOTE: Following is best guess.
-    newUrl = newUrl.replace(/^chrome:\/\//i, DPR_PAL.baseUrl);
+    newUrl = newUrl.replace(/^chrome:\/\//i, DPR_Pal.baseUrl);
 
     return newUrl;
   };
@@ -204,25 +204,25 @@
   // mainWindow.gBrowser emulation layer.
   //
 
-  DPR_PAL.windowHasFocus = false;
+  DPR_Pal.windowHasFocus = false;
   let _mainWindow = null;
   Object.defineProperty(
-    DPR_PAL,
+    DPR_Pal,
     'mainWindow',
     {
       get() {
         if (!_mainWindow) {
-          _mainWindow = DPR_PAL.createMainWindow(window);
+          _mainWindow = DPR_Pal.createMainWindow(window);
         }
 
         return _mainWindow;
 
         // TODO: Enable once we have a solution for https://github.com/digitalpalireader/digitalpalireader/issues/185
         // if (window.opener && !window.opener.closed) {
-        //   return window.opener.DPR_PAL.mainWindow;
+        //   return window.opener.DPR_Pal.mainWindow;
         // } else {
         //   if (!_mainWindow) {
-        //     _mainWindow = DPR_PAL.createMainWindow(window);
+        //     _mainWindow = DPR_Pal.createMainWindow(window);
         //   }
 
         //   return _mainWindow;
@@ -234,11 +234,11 @@
   );
 
   Object.defineProperty(
-    DPR_PAL,
+    DPR_Pal,
     'contentWindow',
     {
       get() {
-        return DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow;
+        return DPR_Pal.mainWindow.gBrowser.selectedTab.linkedBrowser.contentWindow;
       },
       enumerable: true,
       configurable: true,
@@ -246,34 +246,34 @@
   );
 
   Object.defineProperty(
-    DPR_PAL,
+    DPR_Pal,
     'contentDocument',
     {
       get() {
-        return DPR_PAL.mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument;
+        return DPR_Pal.mainWindow.gBrowser.selectedTab.linkedBrowser.contentDocument;
       },
       enumerable: true,
       configurable: true,
     }
   );
 
-  DPR_PAL.getId = url => {
+  DPR_Pal.getId = url => {
     var tabDef = Object
-      .entries(DPR_PAL.DPR_initialTabs)
+      .entries(DPR_Pal.DPR_initialTabs)
       .find(([_, x]) => x.test(url));
     if (tabDef) {
       return tabDef[0];
     } else {
-      console.error('Cannot get id of url.', url, DPR_PAL.DPR_initialTabs);
+      console.error('Cannot get id of url.', url, DPR_Pal.DPR_initialTabs);
       return undefined;
     }
   };
 
-  DPR_PAL.createTab = window => {
+  DPR_Pal.createTab = window => {
     return {
       _window: window,
 
-      _id: DPR_PAL.getId(window.location.href),
+      _id: DPR_Pal.getId(window.location.href),
       get id() {
         return this._id;
       },
@@ -305,10 +305,10 @@
     };
   };
 
-  DPR_PAL.createMainWindow =  window => {
+  DPR_Pal.createMainWindow =  window => {
     const gBrowser = {
       addTab(url) {
-        const t = DPR_PAL.createTab(window.open(url));
+        const t = DPR_Pal.createTab(window.open(url));
         this._childNodes.push(t);
         return t;
       },
@@ -357,7 +357,7 @@
 
       _selectedTab: null,
       get selectedTab() {
-        const tab = this.tabContainer.childNodes.find(t => t._window.DPR_PAL.windowHasFocus);
+        const tab = this.tabContainer.childNodes.find(t => t._window.DPR_Pal.windowHasFocus);
         return tab ? tab : this._selectedTab;
       },
       set selectedTab(val) {
@@ -375,7 +375,7 @@
       },
     };
 
-    gBrowser._childNodes = [ DPR_PAL.createTab(window), ];
+    gBrowser._childNodes = [ DPR_Pal.createTab(window), ];
     gBrowser.selectedTab = gBrowser.tabContainer.childNodes[0];
 
     return {
@@ -383,12 +383,14 @@
       document: window.document,
     };
   };
-})(window.DPR_PAL = window.DPR_PAL || {}, jQuery);
+})(window.DPR_Pal = window.DPR_Pal || {}, jQuery);
 
 // NOTE: Keep this out side the above.
-window.addEventListener('focus', () => { DPR_PAL.windowHasFocus = true; });
-window.addEventListener('blur', () => { DPR_PAL.windowHasFocus = false; });
+window.addEventListener('focus', () => { DPR_Pal.windowHasFocus = true; });
+window.addEventListener('blur', () => { DPR_Pal.windowHasFocus = false; });
+
+window.DPR_PAL = DPR_Pal
 
 if (typeof module !== "undefined") {
-  module.exports = DPR_PAL;
+  module.exports = DPR_Pal;
 }

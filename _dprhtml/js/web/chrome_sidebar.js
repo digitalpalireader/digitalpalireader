@@ -1,7 +1,7 @@
 'use strict';
 
-var DPRChrome = {
-  giveIDtoTabs: function () { // startup function, give ids to
+const DPR_Web_Chrome_Sidebar = (function () {
+  function giveIDtoTabs() { // startup function, give ids to
 
     var main = 0; //no main dpr tabs
     var dict = 0; // no dict tabs
@@ -23,8 +23,9 @@ var DPRChrome = {
     }
     if (main > 0) return true;
     return false;
-  },
-  openDPRTab:function(permalink,id,reuse) {
+  }
+
+  function openDPRTab(permalink,id,reuse) {
     permalink = DPR_PAL.toWebUrl(permalink);
 
     if(reuse) { // reuse old tab
@@ -62,12 +63,13 @@ var DPRChrome = {
     DPR_PAL.mainWindow.gBrowser.moveTabTo(newTab, newIdx)
     DPR_PAL.mainWindow.gBrowser.selectedTab = newTab;
 
-  },
-  openFirstDPRTab: function () {
-    if (!this.findDPRTab()) this.openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'), 'DPR-main');
-  },
+  }
 
-  findDPRTab: function (id) {
+  function openFirstDPRTab() {
+    if (!this.findDPRTab()) this.openDPRTab(DPR_PAL.toWebUrl('chrome://digitalpalireader/content/index.xul'), 'DPR-main');
+  }
+
+  function findDPRTab(id) {
     for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
       // Get the next tab
@@ -75,20 +77,22 @@ var DPRChrome = {
       var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
 
       if ((currentTab.getAttribute('id') == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_PAL.DPR_tabs[id] || DPR_PAL.DPR_tabs[id].test(ctloc)))
-         || (currentTab.getAttribute('id') == "DPR-main" && ((DPR_PAL.DPR_tabs["DPRs"].test(ctloc) && id == 'DPR-search') || (DPR_PAL.DPR_tabs["DPRd"].test(ctloc) && id == 'DPR-dict')))) {
+        || (currentTab.getAttribute('id') == "DPR-main" && ((DPR_PAL.DPR_tabs["DPRs"].test(ctloc) && id == 'DPR-search') || (DPR_PAL.DPR_tabs["DPRd"].test(ctloc) && id == 'DPR-dict')))) {
 
         return currentTab;
       }
     }
     return false;
-  },
-  isThisDPRTab: function (id) {
+  }
+
+  function isThisDPRTab(id) {
     var currentTab = DPR_PAL.mainWindow.gBrowser.selectedTab;
     var ctloc = DPR_PAL.mainWindow.gBrowser.getBrowserForTab(currentTab).contentDocument.location.href;
     if (DPR_PAL.mainWindow.gBrowser.selectedTab.id == id && DPR_PAL.dprUrlMatcher.test(ctloc) && (!DPR_PAL.DPR_tabs[id] || DPR_PAL.DPR_tabs[id].test(ctloc))) return DPR_PAL.mainWindow.gBrowser.selectedTab;
     else return false;
-  },
-  DPRTab: function (id) {
+  }
+
+  function DPRTab(id) {
     for (var found = false, index = 0, tabbrowser = DPR_PAL.mainWindow.gBrowser; index < tabbrowser.tabContainer.childNodes.length && !found; index++) {
 
       // Get the next tab
@@ -102,20 +106,36 @@ var DPRChrome = {
       }
     }
     return false;
-  },
-  promptData: function (title, data) {
+  }
+
+  function promptData(title, data) {
     DPR_G.G_prompts.alert(null, title, data);
-  },
-  DPRSidebarDocument: function () {
+  }
+
+  function DPRSidebarDocument() {
     var sidebar = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
     if (sidebar.location.href == DPR_PAL.toWebUrl("chrome://digitalpalireader/content/digitalpalireader.xul")) {
       return sidebar;
     }
     else return false
-  },
-  openSidebar: function () {
-    toggleSidebar('viewDPR');
-  },
-}
+  }
 
+  function openSidebar() {
+    toggleSidebar('viewDPR');
+  }
+
+  return {
+    giveIDtoTabs,
+    openDPRTab,
+    openFirstDPRTab,
+    findDPRTab,
+    isThisDPRTab,
+    DPRTab,
+    promptData,
+    DPRSidebarDocument,
+    openSidebar,
+  }
+})()
+
+window.DPRChrome = DPR_Web_Chrome_Sidebar;

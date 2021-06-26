@@ -1,22 +1,32 @@
 "use strict";
 
-const getCPEDEntryAsObject = (velthiusWord) => {
-  const entry = DPR_G.yt[velthiusWord] || [];
-  const [, grammar, definition, , inflectionGroup] = entry;
-  return { grammar, definition, inflectionGroup };
-};
-
-const CPED = {
-  getDefinition(velthiusWord) {
+const DPR_Cped = (function () {
+  const getCPEDEntryAsObject = (velthiusWord) => {
+    const entry = DPR_G.yt[velthiusWord] || [];
+    const [, grammar, definition, , inflectionGroup] = entry;
+    return { grammar, definition, inflectionGroup };
+  }
+  
+  function getDefinition(velthiusWord) {
     return getCPEDEntryAsObject(velthiusWord).definition;
-  },
-  getGrammar(velthiusWord) {
+  }
+
+  function getGrammar(velthiusWord) {
     return getCPEDEntryAsObject(velthiusWord).grammar;
-  },
-  getInflectionGroup(velthiusWord) {
+  }
+
+  function getInflectionGroup(velthiusWord) {
     return getCPEDEntryAsObject(velthiusWord).inflectionGroup;
-  },
-};
+  }
+  
+  return {
+    getDefinition,
+    getGrammar,
+    getInflectionGroup,
+  }
+})()
+
+window.CPED = DPR_Cped;
 
 if (typeof module !== "undefined") {
   module.exports = CPED;
