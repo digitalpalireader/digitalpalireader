@@ -1,4 +1,4 @@
-const DPR_search_utils_mod = (() => {
+const DPR_Search_Utils = (function () {
   const searchAcrossBoundary = ({ text, searchPattern, boundaryPattern }) => {
     const textWithoutBoundaries = removeBoundaries(text, boundaryPattern);
     const position = findPosition(textWithoutBoundaries, searchPattern);
@@ -62,7 +62,9 @@ const DPR_search_utils_mod = (() => {
   return {
     searchAcrossBoundary,
   };
-})();
+})()
+
+window.DPR_search_utils_mod = DPR_Search_Utils
 
 if (typeof module !== "undefined") {
   module.exports = DPR_search_utils_mod;

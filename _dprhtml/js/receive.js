@@ -1,27 +1,28 @@
 'use strict';
 
-var DPR_receive_mod = ( function () {
+const DPR_Receive = (function () {
+  function makeLocPlace(inplace) {
+    var outplace;
+    var place = inplace.split('.');
 
-function makeLocPlace(inplace) {
-  var outplace;
-  var place = inplace.split('.');
+    if (place.length == 8 || /[vdmaskyxbgn]\.[0-9]+\.[mat]/.test(inplace)) {
+      outplace = place;
+    }
+    else if (place.length == 9) {
+      outplace = place;
+      outplace[8] = parseInt(outplace[8]);
+    }
+    else { // shorthand
+      outplace = DPR_navigation_common_mod.convertShortLink(inplace);
+      if(outplace[0] === false)
+        outplace = null;
+    }
+    return outplace;
+  }
 
-  if (place.length == 8 || /[vdmaskyxbgn]\.[0-9]+\.[mat]/.test(inplace)) {
-    outplace = place;
+  return {
+    makeLocPlace,
   }
-  else if (place.length == 9) {
-    outplace = place;
-    outplace[8] = parseInt(outplace[8]);
-  }
-  else { // shorthand
-    outplace = DPR_navigation_common_mod.convertShortLink(inplace);
-    if(outplace[0] === false)
-      outplace = null;
-  }
-  return outplace;
-}
-
-return {
-makeLocPlace : makeLocPlace
-}
 })()
+
+window.DPR_receive_mod = DPR_Receive

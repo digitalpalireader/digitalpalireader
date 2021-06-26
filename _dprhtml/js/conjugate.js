@@ -1,6 +1,6 @@
 'use strict';
 
-var DPR_conjugate_mod = (function(){
+const DPR_Conjugate = (function () {
 
   async function insertConj() {
   var word = $('#word').val();
@@ -27,3 +27,5 @@ return{
   clearText : clearText
 }
 }())
+
+window.DPR_conjugate_mod = DPR_Conjugate

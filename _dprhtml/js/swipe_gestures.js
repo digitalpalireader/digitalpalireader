@@ -1,6 +1,6 @@
 'use strict'
 
-var DPR_Gesture = (function () {
+const DPR_Swipe_Gesture = (function () {
 
   var startX = null;
   var startY = null;
@@ -75,8 +75,10 @@ var DPR_Gesture = (function () {
   }
 
   return {
-    touchStart: touchStart,
-    touchEndFactory: touchEndFactory,
+    touchStart,
+    touchEndFactory,
   };
 
 })();
+
+window.DPR_Gesture = DPR_Swipe_Gesture

@@ -1,6 +1,6 @@
 'use strict';
 
-var DPR_search_mod = (function () {
+const DPR_Web_Search = (function () {
   function setTitle(title) {
     DPR_G.MD.title = title;
   }
@@ -132,25 +132,27 @@ var DPR_search_mod = (function () {
   }
 
   return {
-    addSearchTermSectionLink: addSearchTermSectionLink,
-    addCopyPermaLinkElement: addCopyPermaLinkElement,
-    addSearchTermSectionInfo: addSearchTermSectionInfo,
-    addSectionLink: addSectionLink,
-    createSectionHeader: createSectionHeader,
-    fixPluralInSearchTermSectionInfo: fixPluralInSearchTermSectionInfo,
-    hideCancelButton: hideCancelButton,
-    hideProgressBar: hideProgressBar,
-    initializeSectionLinks: initializeSectionLinks,
-    makeProgressTable: makeProgressTable,
-    removeCopyPermaLinkElement: removeCopyPermaLinkElement,
-    setTitle: setTitle,
-    showCancelButton: showCancelButton,
-    showProgressBar: showProgressBar,
-    updateProgressBar: updateProgressBar,
-    updateSearchTermSectionInfo: updateSearchTermSectionInfo,
-    updateSectionLink: updateSectionLink
+    addSearchTermSectionLink,
+    addCopyPermaLinkElement,
+    addSearchTermSectionInfo,
+    addSectionLink,
+    createSectionHeader,
+    fixPluralInSearchTermSectionInfo,
+    hideCancelButton,
+    hideProgressBar,
+    initializeSectionLinks,
+    makeProgressTable,
+    removeCopyPermaLinkElement,
+    setTitle,
+    showCancelButton,
+    showProgressBar,
+    updateProgressBar,
+    updateSearchTermSectionInfo,
+    updateSectionLink,
   }
 })()
+
+window.DPR_search_mod = DPR_Web_Search
 
 if (typeof module !== 'undefined') {
   module.exports = DPR_search_mod;

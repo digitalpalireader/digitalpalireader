@@ -1,6 +1,6 @@
 'use strict';
 
-var DPR_DataLoader = (function() {
+const DPR_DataLoader = (function() {
   const loadTipitakaAsync = (id, set) => {
     var url = `/tipitaka/${set}/${id}.xml`;
     return XML_Load.xhrGetAsync({ url }, xhr => xhr.responseXML.documentElement);
@@ -46,7 +46,9 @@ var DPR_DataLoader = (function() {
   };
 })();
 
-var XML_Load = (function () {
+window.DPR_DataLoader = DPR_DataLoader
+
+const DPR_Xml_Load = (function () {
   const createXhr = (request, async = true) => {
     let xhr = new XMLHttpRequest();
     xhr.open(request.method || "GET", request.url, async);
@@ -92,10 +94,12 @@ var XML_Load = (function () {
   };
 
   return {
-    xhrGetAsync: xhrGetAsync,
-    loadXMLFileAsync: loadXMLFileAsync
+    xhrGetAsync,
+    loadXMLFileAsync,
   };
 })();
+
+window.XML_Load = DPR_Xml_Load
 
 if (typeof module !== 'undefined') {
   module.exports = {
