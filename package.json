@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "start": "live-server",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint **/*.js"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
@@ -12,9 +13,25 @@
     "@testing-library/user-event": "^13.1.2",
     "@types/jest": "^26.0.21",
     "babel-jest": "^26.6.3",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4",
     "jest": "^26.6.3",
     "live-server": "^1.2.1",
     "msw": "^0.29.0",
     "prettier": "^2.3.0"
+  },
+  "dependencies": {
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0"
+  },
+  "lint-staged": {
+    "**/*.js": "yarn run lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run test"
+    }
   }
 }

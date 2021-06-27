@@ -1,6 +1,4 @@
-'use strict';
-
-class SettingsDialogTabsViewModel {
+export class SettingsDialogTabsViewModel {
   constructor() {
     this.isGeneralSettingsTabSelected = ko.observable(true);
     this.isLayoutSettingsTabSelected = ko.observable(false);
