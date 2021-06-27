@@ -8,16 +8,29 @@ The Digital Pāli Reader is a tool much like a hard-copy language reader. The to
 
 ## Build and test instructions
 
-To get DPR running on the local machine:
+### Run DPR on the local machine:
 
 1. Install dependencies: `yarn`
 1. Run "start" script in root folder: `yarn start`
 1. Browse to `http://localhost:8080`
 
-To run tests:
+### Run tests:
 
 ```shell
 yarn test
+```
+
+### Lint:
+
+```shell
+yarn lint
+```
+
+## Regenerate pwa manifest:
+
+```shell
+yarn global add workbox-cli@5.1.3
+workbox injectManifest workbox-config.js
 ```
 
 ## Working effectively with legacy code
