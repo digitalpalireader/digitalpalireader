@@ -1,0 +1,8 @@
+# Blacklist everything
+**/*.js
+
+# Except
+!.eslintrc.js
+!workbox-config.js
+!sw-template.js
+!dpr_globals.js
