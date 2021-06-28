@@ -12,7 +12,6 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'never'],
-    'linebreak-style': 'off',
     'no-underscore-dangle': ['error', { allowAfterThis: true }],
     'max-len': ['error', { code: 140 }],
   },
