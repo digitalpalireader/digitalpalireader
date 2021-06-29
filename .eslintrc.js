@@ -2,9 +2,13 @@ module.exports = {
   env: {
     browser: true,
     es6: true, // NOTE: Check https://kangax.github.io/compat-table/es2016plus/ before updating
+    'jest/globals': true,
   },
   extends: [
     'airbnb-base',
+  ],
+  plugins: [
+    'jest',
   ],
   parserOptions: {
     ecmaVersion: 10,
@@ -19,5 +23,6 @@ module.exports = {
     importScripts: true,
     workbox: true,
     self: true,
+    ko: true,
   },
 }
