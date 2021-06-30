@@ -1,6 +1,4 @@
-'use strict';
-
-class OtherDialogsViewModel {
+export class OtherDialogsViewModel {
   constructor() {
     this.quicklinkInput = ko.observable();
     this.quicklinkInNewTab = ko.observable(false);
@@ -46,7 +44,7 @@ class OtherDialogsViewModel {
   }
 
   showBottomPane(key) {
-    DPR1_chrome_mod.DPRShowBottomPane(BottomPaneTabsViewModel.TabIds[key - 1]);
+    DPR1_chrome_mod.DPRShowBottomPane(window.BottomPaneTabIds[key - 1]);
     event.preventDefault();
   }
 

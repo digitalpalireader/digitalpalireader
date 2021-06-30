@@ -1,17 +1,17 @@
 module.exports = {
-  "maximumFileSizeToCacheInBytes": 5000000,
-  "dontCacheBustURLsMatching": /\.\w{32}\./,
-  "globDirectory": ".",
-  "globPatterns": [
-    "_dprhtml/**/*.*",
-    "docs/**/*.*",
-    "./*.html",
-    "./manifest.webmanifest",
-    "./favicon.png",
+  maximumFileSizeToCacheInBytes: 5000000,
+  dontCacheBustURLsMatching: /\.\w{32}\./,
+  globDirectory: '.',
+  globPatterns: [
+    '_dprhtml/**/*.*',
+    'docs/**/*.*',
+    './*.html',
+    './manifest.webmanifest',
+    './favicon.png',
   ],
-  "globIgnores": [
-    "**/*.{map,sh}",
+  globIgnores: [
+    '**/*.{map,sh}',
   ],
-  "swDest": "sw.js",
-  "swSrc": "sw-template.js",
-};
+  swDest: 'sw.temp.js',
+  swSrc: 'sw.template.js',
+}

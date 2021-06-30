@@ -6,6 +6,7 @@
   "editor.formatOnSave": false,
   "files.trimTrailingWhitespace": false,
   "files.insertFinalNewline": false,
+  "files.eol": "\n",
 
   "eslint.validate": [
     "javascript",
