@@ -19,7 +19,7 @@ steps:
         echo ========================================================================
         echo Installing dependencies...
         echo ========================================================================
-        yarn
+        yarn --no-progress --non-interactive --frozen-lockfile
 
         echo ========================================================================
         echo Build service worker...
