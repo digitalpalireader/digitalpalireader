@@ -4,7 +4,7 @@
     "start": "yarn run http-server . --port 8085",
     "test": "jest",
     "lint": "eslint .",
-    "build:sw": "yarn run workbox injectManifest workbox-config.js && yarn run webpack --config .\\webpack.sw.config.js"
+    "build:sw": "yarn run workbox injectManifest workbox-config.js && yarn run webpack --config webpack.sw.config.js"
   },
   "dependencies": {
     "msw": "^0.29.0",
