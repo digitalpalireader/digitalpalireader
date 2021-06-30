@@ -1,141 +1,137 @@
-'use strict';
+const componentTypeTranslation = 'translation'
+const componentTypeTipitaka = 'tipitaka'
+const componentTypeLanguage = 'language'
 
-var DPRComponentRegistry = (function () {
-  const componentTypeTranslation = 'translation'
-  const componentTypeTipitaka = 'tipitaka'
-  const componentTypeLanguage = 'language'
-
-  const registry = [
-    {
-      id: 'my',
-      name: 'Myanmar',
-      shortDescription: 'mūla, aṭṭhakathā, tīkā',
-      capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/my\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeTipitaka,
-      sizeMB: 113,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/tipitaka/my/my_list.js')
-        return DPR_G.myFiles.map(f => `/tipitaka/my/${f}.xml`)
-      },
+const registry = [
+  {
+    id: 'my',
+    name: 'Myanmar',
+    shortDescription: 'mūla, aṭṭhakathā, tīkā',
+    capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/my\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeTipitaka,
+    sizeMB: 113,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/tipitaka/my/my_list.js')
+      return DPR_G.myFiles.map(f => `/tipitaka/my/${f}.xml`)
     },
-    {
-      id: 'th',
-      name: 'Thai',
-      shortDescription: 'mūla',
-      capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/th\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeTipitaka,
-      sizeMB: 21,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/tipitaka/th/th_list.js')
-        return DPR_G.thFiles.map(f => `/tipitaka/th/${f}.xml`)
-      },
+  },
+  {
+    id: 'th',
+    name: 'Thai',
+    shortDescription: 'mūla',
+    capture: ({url}) => url.origin === self.location.origin && /^\/tipitaka\/th\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeTipitaka,
+    sizeMB: 21,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/tipitaka/th/th_list.js')
+      return DPR_G.thFiles.map(f => `/tipitaka/th/${f}.xml`)
     },
-    {
-      id: 'en',
-      name: 'English',
-      shortDescription: 'PED, CPED & DPPN',
-      capture: ({url}) => url.origin === self.location.origin && /^\/en\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeLanguage,
-      sizeMB: 19,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/language/en/en_list.js')
-        return DPR_G.enFiles.map(f => `/en/${f}`)
-      },
+  },
+  {
+    id: 'en',
+    name: 'English',
+    shortDescription: 'PED, CPED & DPPN',
+    capture: ({url}) => url.origin === self.location.origin && /^\/en\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeLanguage,
+    sizeMB: 19,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/language/en/en_list.js')
+      return DPR_G.enFiles.map(f => `/en/${f}`)
     },
-    {
-      id: 'sa',
-      name: 'Sanskrit',
-      shortDescription: 'dictionary & roots',
-      capture: ({url}) => url.origin === self.location.origin && /^\/sa\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeLanguage,
-      sizeMB: 94,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/language/sa/sa_list.js')
-        return DPR_G.saFiles.map(f => `/sa/${f}`)
-      },
+  },
+  {
+    id: 'sa',
+    name: 'Sanskrit',
+    shortDescription: 'dictionary & roots',
+    capture: ({url}) => url.origin === self.location.origin && /^\/sa\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeLanguage,
+    sizeMB: 94,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/language/sa/sa_list.js')
+      return DPR_G.saFiles.map(f => `/sa/${f}`)
     },
-    {
-      id: 'bt',
-      name: 'Buddhist Texts',
-      shortDescription: '',
-      capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/bt-/i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeTranslation,
-      sizeMB: 53,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/translation/bt/bt_list.js')
-        return DPR_G.btFiles.map(x => `${DPR_Translations.trProps.bt.baseUrl}/${x}`)
-      },
+  },
+  {
+    id: 'bt',
+    name: 'Buddhist Texts',
+    shortDescription: '',
+    capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/bt-/i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeTranslation,
+    sizeMB: 53,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/translation/bt/bt_list.js')
+      return DPR_G.btFiles.map(x => `${DPR_Translations.trProps.bt.baseUrl}/${x}`)
     },
-    {
-      id: 'dt',
-      name: 'DhammaTalks',
-      shortDescription: '',
-      capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/dt\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeTranslation,
-      sizeMB: 22,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/translation/dt/dt_list.js')
-        return DPR_G.dtFiles.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
-      },
+  },
+  {
+    id: 'dt',
+    name: 'DhammaTalks',
+    shortDescription: '',
+    capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/dt\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeTranslation,
+    sizeMB: 22,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/translation/dt/dt_list.js')
+      return DPR_G.dtFiles.map(x => `${DPR_Translations.trProps.dt.baseUrl}/${x}`)
     },
-    {
-      id: 'ati',
-      name: 'Access to Insight',
-      shortDescription: '',
-      capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/ati\//i.test(url.pathname),
-      isAvailable: () => true,
-      type: componentTypeTranslation,
-      sizeMB: 6,
-      getFileList: async () => {
-        await DPR_PAL.addOneJS('/components/translation/ati/ati_list.js')
-        return DPR_G.atiFiles.map(x => `${DPR_Translations.trProps.ati.baseUrl}/${x}`);
-      },
+  },
+  {
+    id: 'ati',
+    name: 'Access to Insight',
+    shortDescription: '',
+    capture: ({url}) => url.origin === self.location.origin && /^\/_external\/translations\/ati\//i.test(url.pathname),
+    isAvailable: () => true,
+    type: componentTypeTranslation,
+    sizeMB: 6,
+    getFileList: async () => {
+      await DPR_PAL.addOneJS('/components/translation/ati/ati_list.js')
+      return DPR_G.atiFiles.map(x => `${DPR_Translations.trProps.ati.baseUrl}/${x}`);
     },
-  ]
+  },
+]
 
-  const getComponentFromId = id => registry.find(c => c.id === id)
+const getComponentFromId = id => registry.find(c => c.id === id)
 
-  const componentInstallDoneMarkerKeyName = id => `Component: ${getComponentFromId(id).name} installed`
+const componentInstallDoneMarkerKeyName = id => `Component: ${getComponentFromId(id).name} installed`
 
-  const isComponentInstalled = id => !!localStorage[componentInstallDoneMarkerKeyName(id)]
+const isComponentInstalled = id => !!localStorage[componentInstallDoneMarkerKeyName(id)]
 
-  const getComponentCacheName = id => {
-    const prefix = getComponentFromId(id).type === componentTypeLanguage ? 'lang' : getComponentFromId(id).type
+const getComponentCacheName = id => {
+  const prefix = getComponentFromId(id).type === componentTypeLanguage ? 'lang' : getComponentFromId(id).type
 
-    return `${prefix}-${id}`
-  }
+  return `${prefix}-${id}`
+}
 
-  const componentToVM = c => {
-    const description = c.shortDescription ? ` (${c.shortDescription})` : ''
-
-    return {
-      id: c.id,
-      name: c.name,
-      sizeMB: c.sizeMB,
-      install: ko.observable(isComponentInstalled(c.id)),
-      getName: _ => `${c.name} ${c.type}${description} [download ${Math.ceil(c.sizeMB * 0.2)}MB, uncompressed on disk ${c.sizeMB}MB]`,
-    }
-  }
-
-  const getAvailableComponentVMs = () => registry.filter(c => c.isAvailable()).map(componentToVM)
+const componentToVM = c => {
+  const description = c.shortDescription ? ` (${c.shortDescription})` : ''
 
   return {
-    getComponentFromId: getComponentFromId,
-    componentInstallDoneMarkerKeyName: componentInstallDoneMarkerKeyName,
-    isComponentInstalled: isComponentInstalled,
-    getComponentCacheName: getComponentCacheName,
-    getAvailableComponentVMs: getAvailableComponentVMs,
-    registry: Object.freeze(registry),
+    id: c.id,
+    name: c.name,
+    sizeMB: c.sizeMB,
+    install: ko.observable(isComponentInstalled(c.id)),
+    getName: _ => `${c.name} ${c.type}${description} [download ${Math.ceil(c.sizeMB * 0.2)}MB, uncompressed on disk ${c.sizeMB}MB]`,
   }
-})()
+}
 
-class InstallationViewModel {
+const getAvailableComponentVMs = () => registry.filter(c => c.isAvailable()).map(componentToVM)
+
+export const DPRComponentRegistry = {
+  getComponentFromId,
+  componentInstallDoneMarkerKeyName,
+  isComponentInstalled,
+  getComponentCacheName,
+  getAvailableComponentVMs,
+  registry,
+}
+
+export class InstallationViewModel {
   constructor() {
     this.components = ko.observableArray()
 

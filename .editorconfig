@@ -7,6 +7,7 @@ indent_size = 2
 insert_final_newline = false
 trim_trailing_whitespace = false
 tab_width = 2
+end_of_line = lf
 
 [*.{js,ts,fs,css,json,jsx,tsx,rc,*rc,*ignore,*config}]
 indent_size = 2

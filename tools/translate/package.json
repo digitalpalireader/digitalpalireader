@@ -1,7 +1,0 @@
-{
-  "name": "translate",
-  "version": "1.0.0",
-  "description": "language translations related",
-  "main": "index.js",
-  "license": "MIT"
-}
