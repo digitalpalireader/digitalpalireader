@@ -558,21 +558,15 @@
     <script src="/_dprhtml/js/translate.js"></script>
     <script src="/_dprhtml/js/conjugate.js"></script>
     <script>progressBar.go(90)</script>
-    <script src="/_dprhtml/features/bottom-pane/init.js"></script>
     <script src="/_dprhtml/features/navigation/init.js"></script>
     <script src="/_dprhtml/features/search/init.js"></script>
     <script src="/_dprhtml/features/dictionary/init.js"></script>
-    <script src="/_dprhtml/features/settings-dialog/init.js"></script>
-    <script src="/_dprhtml/features/other-dialogs/init.js"></script>
-    <script src="/_dprhtml/features/installation/init.js"></script>
     <script src="/_dprhtml/js/keyboard_shortcuts.js"></script>
     <script src="/_dprhtml/js/swipe_gestures.js"></script>
-    <script src="/_dprhtml/js/dprviewmodel.js"></script>
-    <script src="/_dprhtml/js/index.js"></script>
+    <script type="module" src="/_dprhtml/js/index.js"></script>
     <script>progressBar.go(100)</script>
-    <script>
-      $(document).ready(mainInitialize);
-      const getFuncList = () => JSON.stringify(
+    <script type="module">
+      window.getFuncList = () => JSON.stringify(
         Object.keys(window)
           .sort()
           .filter(k => !(whitelist.includes(k) || initObjList.includes(k)))

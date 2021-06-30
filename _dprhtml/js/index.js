@@ -1,4 +1,5 @@
-'use strict';
+import * as DprVM from './dprviewmodel.js'
+import * as F from '../features/index.js'
 
 // NOTE: Ensure this is the very first line.
 installGlobalHandlers();
@@ -6,24 +7,24 @@ installGlobalHandlers();
 /* Start: Legacy stuff - Don't mess with it! */
 DPR_G.devCheck = 0;
 window.dump = window.dump || DPR_G.devCheck ? console.log : () => { };
-function moveFrame() { }
-function devO() { }
-function dalert(a) { }
-function ddump(a) { }
+window.moveFrame = () => { }
+window.devO = () => { }
+window.dalert = (a) => { }
+window.ddump = (a) => { }
 /* End: Legacy stuff. */
 
-const navigationFeatureName = "navigation";
-const searchFeatureName = "search";
-const dictionaryFeatureName = "dictionary";
+window.navigationFeatureName = "navigation";
+window.searchFeatureName = "search";
+window.dictionaryFeatureName = "dictionary";
 
-const __dprViewModel = new DprViewModel();
+window.__dprViewModel = new DprVM.DprViewModel();
 ko.applyBindings(__dprViewModel);
-const __bottomPaneTabsViewModel = new BottomPaneTabsViewModel();
-const __settingsDialogViewModel = new SettingsDialogTabsViewModel();
-var __otherDialogsViewModel = new OtherDialogsViewModel();
-const __installationViewModel = new InstallationViewModel();
+window.__bottomPaneTabsViewModel = new F.BottomPane.BottomPaneTabsViewModel();
+window.__settingsDialogViewModel = new F.SettingsDialog.SettingsDialogTabsViewModel();
+window.__otherDialogsViewModel = new F.OtherDialogs.OtherDialogsViewModel();
+window.__installationViewModel = new F.Installation.InstallationViewModel();
 
-async function mainInitialize() {
+export async function mainInitialize() {
   const sectionId = DPR_Chrome.getPrimarySectionId()
   await DPR_config_mod.getconfig();
   triggerPrivacyNoticeAcceptanceCheck();
@@ -53,6 +54,8 @@ function installGlobalHandlers() {
   });
 
   window.addEventListener('popstate', e => historyPopstateHandler(e));
+
+  window.document.addEventListener("DOMContentLoaded", mainInitialize);
 }
 
 const loadFeatureAsync = async (sectionId, name, initFn) => {
