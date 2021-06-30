@@ -55,7 +55,6 @@ function installGlobalHandlers() {
 
   window.addEventListener('popstate', e => historyPopstateHandler(e));
 
-  //window.document.addEventListener('ready', mainInitialize);
   window.document.addEventListener("DOMContentLoaded", mainInitialize);
 }
 
