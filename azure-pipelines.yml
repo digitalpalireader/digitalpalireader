@@ -26,6 +26,16 @@ steps:
         echo ========================================================================
         yarn build:sw
 
+  - task: PowerShell@2
+    displayName: 'Run cache buster'
+    inputs:
+      targetType: filePath
+      filePath: '$(Build.SourcesDirectory)/bin/bustCache.ps1'
+      arguments: '"$(Build.SourcesDirectory)/_dprhtml/index.html"'
+      failOnStderr: true
+      pwsh: true
+      workingDirectory: '$(Build.SourcesDirectory)'
+
   - task: Bash@3
     inputs:
       filePath: "build.sh"

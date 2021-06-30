@@ -11,6 +11,8 @@ module.exports = {
   ],
   globIgnores: [
     '**/*.{map,sh}',
+    '**/sw.js',
+    'sw.js',
   ],
   swDest: 'sw.temp.js',
   swSrc: 'sw.template.js',
