@@ -20,3 +20,6 @@ jobs:
 
       - name: Lint
         run: yarn lint
+
+      - name: Build service worker
+        run: yarn build:sw

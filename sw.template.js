@@ -1,16 +1,21 @@
 /* eslint-disable no-restricted-globals */
-/*
- * Version: #{DeploymentReleaseNumber}#
- */
 
 // NOTE: On updating the workbox version, need to change the corresponding in azure-pipelines.yml (build)
 // and "Generate sw.js" step (release).
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.3/workbox-sw.js')
-importScripts('/_dprhtml/js/globalObject.js')
-importScripts('/_dprhtml/features/installation/init.js')
+import * as WBC from 'workbox-core'
+import * as WBP from 'workbox-precaching'
+import * as WBR from 'workbox-routing'
+import * as WBS from 'workbox-strategies'
+import * as WBCR from 'workbox-cacheable-response'
+import * as WBE from 'workbox-expiration'
+import * as Installer from './_dprhtml/features/installation/init'
 
-workbox.core.setCacheNameDetails({
+// NOTE: Do not remove this console log call. It is required to version the Service worker.
+// eslint-disable-next-line no-console
+console.log('DPR Service Worker version: #{DeploymentReleaseNumber}#')
+
+WBC.setCacheNameDetails({
   prefix: 'dpr',
   suffix: 'v5',
   precache: 'precache',
@@ -25,7 +30,7 @@ addEventListener('message', (event) => {
   }
 })
 
-workbox.precaching.precacheAndRoute(
+WBP.precacheAndRoute(
   // eslint-disable-next-line no-underscore-dangle
   self.__WB_MANIFEST,
   {
@@ -33,20 +38,18 @@ workbox.precaching.precacheAndRoute(
   },
 )
 
-// eslint-disable-next-line no-undef
-DPRComponentRegistry.registry.forEach(
+Installer.DPRComponentRegistry.registry.forEach(
   (component) => {
-    workbox.routing.registerRoute(
+    WBR.registerRoute(
       component.capture,
-      new workbox.strategies.CacheFirst({
-        // eslint-disable-next-line no-undef
-        cacheName: DPRComponentRegistry.getComponentCacheName(component.id),
+      new WBS.CacheFirst({
+        cacheName: Installer.DPRComponentRegistry.getComponentCacheName(component.id),
         plugins: [
-          new workbox.expiration.ExpirationPlugin({
+          new WBE.ExpirationPlugin({
             maxAgeSeconds: 720 * 24 * 60 * 60,
             maxEntries: 10000,
           }),
-          new workbox.cacheableResponse.CacheableResponsePlugin({
+          new WBCR.CacheableResponsePlugin({
             statuses: [0, 200],
           }),
         ],

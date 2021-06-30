@@ -12,7 +12,7 @@ The Digital Pāli Reader is a tool much like a hard-copy language reader. The to
 
 1. Install dependencies: `yarn`
 1. Run "start" script in root folder: `yarn start`
-1. Browse to `http://localhost:8080`
+1. Browse to `http://localhost:8085`
 
 ### Run tests:
 
@@ -26,11 +26,10 @@ yarn test
 yarn lint
 ```
 
-## Regenerate pwa manifest:
+## Build service worker:
 
 ```shell
-yarn global add workbox-cli@5.1.3
-workbox injectManifest workbox-config.js
+yarn build:sw
 ```
 
 ## Working effectively with legacy code
