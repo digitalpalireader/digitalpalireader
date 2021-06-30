@@ -14,6 +14,7 @@ steps:
       sudo chmod +x build.sh
 
   - task: CmdLine@2
+    displayName: Install dependencies...
     inputs:
       script: |
         echo ========================================================================
@@ -21,13 +22,8 @@ steps:
         echo ========================================================================
         yarn --no-progress --non-interactive --frozen-lockfile
 
-        echo ========================================================================
-        echo Build service worker...
-        echo ========================================================================
-        yarn build:sw
-
   - task: PowerShell@2
-    displayName: 'Run cache buster'
+    displayName: Run cache buster
     inputs:
       targetType: filePath
       filePath: '$(Build.SourcesDirectory)/bin/bustCache.ps1'
@@ -35,6 +31,15 @@ steps:
       failOnStderr: true
       pwsh: true
       workingDirectory: '$(Build.SourcesDirectory)'
+
+  - task: CmdLine@2
+    displayName: Build service worker...
+    inputs:
+      script: |
+        echo ========================================================================
+        echo Build service worker...
+        echo ========================================================================
+        yarn build:sw
 
   - task: Bash@3
     inputs:

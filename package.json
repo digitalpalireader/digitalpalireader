@@ -2,9 +2,11 @@
   "private": true,
   "scripts": {
     "start": "yarn run http-server . --port 8085",
+    "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack",
+    "build:sw:injectManifest": "yarn run workbox injectManifest workbox-config.js",
+    "build:sw:webpack": "yarn run webpack --config webpack.sw.config.js",
     "test": "jest",
-    "lint": "eslint .",
-    "build:sw": "yarn run workbox injectManifest workbox-config.js && yarn run webpack --config webpack.sw.config.js"
+    "lint": "eslint ."
   },
   "dependencies": {
     "msw": "^0.29.0",
