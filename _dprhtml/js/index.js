@@ -54,8 +54,6 @@ function installGlobalHandlers() {
   });
 
   window.addEventListener('popstate', e => historyPopstateHandler(e));
-
-  window.document.addEventListener("DOMContentLoaded", mainInitialize);
 }
 
 const loadFeatureAsync = async (sectionId, name, initFn) => {
@@ -217,3 +215,6 @@ function triggerPrivacyNoticeAcceptanceCheck() {
   setTimeout(checker, firstCheckIntervalInMins * 60 * 1000);
   setIntervalhandle = setInterval(checker, checkIntervalInHours * 60 * 60 * 1000);
 }
+
+// NOTE: Ensure this is the very last line.
+window.document.addEventListener("DOMContentLoaded", mainInitialize);

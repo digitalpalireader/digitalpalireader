@@ -48,13 +48,13 @@ function TransformScriptHrefElement
 {
   param($line)
 
-  if ($line -notmatch '^\s*\<script src=\"(.*)\"\>\<\/script\>\s*$') {
+  if ($line -notmatch '^\s*\<script (type=\"module\" )?src=\"(.*)\"\>\<\/script\>\s*$') {
     return "Error - unexpected format for script src."
   }
 
-  $fileName = AppendHashToFileName $Matches.1
-  rename-file $Matches.1
-  return "    <script src=""$fileName""></script>"
+  $fileName = AppendHashToFileName $Matches.2
+  rename-file $Matches.2
+  return "    <script $($Matches.1)src=""$fileName""></script>"
 }
 
 $contents = Get-Content $HtmlFilePath | ForEach-Object {
