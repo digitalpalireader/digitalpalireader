@@ -1,3 +1,6 @@
+import * as DprGlobals from '../../dpr_globals.js'
+import * as DprVM from '../../js/dprviewmodel.js'
+
 const componentTypeTranslation = 'translation'
 const componentTypeTipitaka = 'tipitaka'
 const componentTypeLanguage = 'language'
@@ -147,7 +150,7 @@ export class InstallationViewModel {
   showInstallationDialog() {
     this.components(DPRComponentRegistry.getAvailableComponentVMs())
 
-    if (!__dprViewModel.installationOngoing()) {
+    if (!DprVM.ViewModel.installationOngoing()) {
       $('#installation-dialog-root').modal('show')
     }
   }
@@ -172,18 +175,18 @@ export class InstallationViewModel {
   initializeInstall() {
     const toastDisplayTimeMS = 60000
     DPR_Chrome.showSuccessToast('Installing DPR for offline use. You may continue to work as per usual. You will be notified once installation is completed. Please stay connected to the network till then.', toastDisplayTimeMS)
-    __dprViewModel.installationOngoing(true)
+    DprVM.ViewModel.installationOngoing(true)
     this.updateProgressBar(0)
   }
 
   finalizeInstall() {
     this.updateProgressBar(100)
-    __dprViewModel.installationOngoing(false)
+    DprVM.ViewModel.installationOngoing(false)
   }
 
   updateProgressBar(percentDone) {
-    __dprViewModel.installationBarWidth(percentDone + '%');
-    __dprViewModel.installationBar(Math.round(percentDone) + '%');
+    DprVM.ViewModel.installationBarWidth(percentDone + '%');
+    DprVM.ViewModel.installationBar(Math.round(percentDone) + '%');
   }
 
   async installAllComponents(components) {
@@ -256,3 +259,6 @@ export class InstallationViewModel {
     }
   }
 }
+
+export const ViewModel = new InstallationViewModel();
+DprGlobals.singleton.InstallationViewModel = ViewModel

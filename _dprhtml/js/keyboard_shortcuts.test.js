@@ -12,8 +12,8 @@ const MockOtherDialogsViewModel = jest.fn().mockReturnValue({
 
 beforeEach(() => {
   window.navigationFeatureName = "";
-  window.__dprViewModel = new DprViewModel();
-  window.__otherDialogsViewModel = new MockOtherDialogsViewModel();
+  window.DPR_Globals.DprViewModel = new DprViewModel();
+  window.DPR_Globals.OtherDialogsViewModel = new MockOtherDialogsViewModel();
 });
 
 describe("DPR_keypress", () => {

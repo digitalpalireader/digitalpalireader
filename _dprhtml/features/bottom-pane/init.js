@@ -1,3 +1,5 @@
+import * as DprGlobals from '../../dpr_globals.js'
+
 export class BottomPaneTabsViewModel {
   constructor() {
     this.isDTabSelected = ko.observable(true);
@@ -56,3 +58,6 @@ window.DPR_BottomPane = {
 
   cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),
 }
+
+export const ViewModel = new BottomPaneTabsViewModel();
+DprGlobals.singleton.BottomPaneTabsViewModel = ViewModel

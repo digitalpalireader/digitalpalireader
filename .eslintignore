@@ -12,12 +12,9 @@ _dprhtml/sw.js
 ## - Remove old files that have been moved over.
 ##
 _dprhtml/features/bottom-pane/init.js
-_dprhtml/features/dictionary/init.js
 _dprhtml/features/index.js
 _dprhtml/features/installation/init.js
-_dprhtml/features/navigation/init.js
 _dprhtml/features/other-dialogs/init.js
-_dprhtml/features/search/init.js
 _dprhtml/features/settings-dialog/init.js
 _dprhtml/js/analysis_arrays.js
 _dprhtml/js/analysis_declension.js

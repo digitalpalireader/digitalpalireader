@@ -1,18 +1,21 @@
+import * as F from '../features/index.js'
+import * as DprGlobals from '../dpr_globals.js'
+
 export class DprViewModel {
   constructor() {
     this.sidebarVisible = ko.observable(DPR_prefload_mod.loadSideBarVisibleState());
     this.loadingFeatureVisible = ko.observable(true);
     this.landingFeatureVisible = ko.observable(false);
-    this.activeTab = ko.observable(navigationFeatureName);
+    this.activeTab = ko.observable(F.Navigation.featureName);
     this.mainFeaturesVisible = ko.observable(false);
     this.navigationFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === navigationFeatureName
+        return this.mainFeaturesVisible() && this.activeTab() === F.Navigation.featureName
     }, this);
     this.searchFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === searchFeatureName
+        return this.mainFeaturesVisible() && this.activeTab() === F.Search.featureName
     }, this);
     this.dictionaryFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === dictionaryFeatureName
+        return this.mainFeaturesVisible() && this.activeTab() === F.Dictionary.featureName
     }, this);
     this.installationOngoing = ko.observable(false);
     this.installationBar = ko.observable();
@@ -35,13 +38,14 @@ export class DprViewModel {
 
   parseURLParameters() {
     if (DPR_PAL.isNavigationFeature()) {
-      this.activeTab(navigationFeatureName);
+      this.activeTab(F.Navigation.featureName);
     } else if (DPR_PAL.isSearchFeature()) {
-      this.activeTab(searchFeatureName);
+      this.activeTab(F.Search.featureName);
     } else if (DPR_PAL.isDictionaryFeature()) {
-      this.activeTab(dictionaryFeatureName);
+      this.activeTab(F.Dictionary.featureName);
     } else {
       // NOTE: Default is navigation tab.
+      this.activeTab(F.Navigation.featureName);
     }
   }
 
@@ -212,7 +216,7 @@ const dprCommandList = [
     id: DPR_CMD_SEND_TO_CONVERTER,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel && window.__otherDialogsViewModel.sendToConvert(),
+    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.sendToConvert(),
     visible: true,
     isDynamic: false,
     title: "Send text to converter (Keyboard shortcut: s)",
@@ -223,7 +227,7 @@ const dprCommandList = [
     id: DPR_CMD_SEND_TO_TEXTPAD,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel && window.__otherDialogsViewModel.sendToTextpad(),
+    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.sendToTextpad(),
     visible: true,
     isDynamic: false,
     title: "Send text to textpad (Keyboard shortcut: e)",
@@ -234,7 +238,7 @@ const dprCommandList = [
     id: DPR_CMD_APPEND_TO_TEXTPAD,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.appendToTextpad(),
+    execute: () => F.OtherDialogs.ViewModel.appendToTextpad(),
     visible: true,
     isDynamic: false,
     title: "Append selection to textpad (Keyboard shortcut: E)",
@@ -278,7 +282,7 @@ const dprCommandList = [
     id: DPR_CMD_BOOKMARK_SECTION,
     notImplemented: false,
     canExecute: false,
-    execute: () => window.__otherDialogsViewModel && window.__otherDialogsViewModel.showBookmarksDialog(),
+    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.showBookmarksDialog(),
     visible: true,
     isDynamic: true,
     title: "Bookmark section (Keyboard shortcut: b)",
@@ -421,7 +425,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_SETTINGS,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__settingsDialogViewModel.showSettingsDialog(),
+    execute: () => F.SettingsDialog.ViewModel.showSettingsDialog(),
     visible: true,
     isDynamic: false,
     title: "Open settings dialog (Keyboard shortcut: %)",
@@ -432,7 +436,7 @@ const dprCommandList = [
     id: DPR_CMD_ENTER_QUICK_REFERENCE,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.showQuickLinksDialog(),
+    execute: () => F.OtherDialogs.ViewModel.showQuickLinksDialog(),
     visible: true,
     isDynamic: false,
     title: "Enter quick reference (Keyboard shortcut: q)",
@@ -443,7 +447,7 @@ const dprCommandList = [
     id: DPR_CMD_GOTO_HOME,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.gotoHome(),
+    execute: () => F.OtherDialogs.ViewModel.gotoHome(),
     visible: true,
     isDynamic: false,
     title: "Go to home page (Keyboard shortcut: v)",
@@ -476,7 +480,7 @@ const dprCommandList = [
     id: DPR_CMD_TOGGLE_DPR_SIDEBAR,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.toggleDPRSidebar(),
+    execute: () => F.OtherDialogs.ViewModel.toggleDPRSidebar(),
     visible: true,
     isDynamic: false,
     title: "Toggle DPR Sidebar (Keyboard shortcut: & or `)",
@@ -487,7 +491,7 @@ const dprCommandList = [
     id: DPR_CMD_SHOW_BOTTOM_PANE,
     notImplemented: false,
     canExecute: true,
-    execute: (e) => window.__otherDialogsViewModel.showBottomPane(e.key),
+    execute: (e) => F.OtherDialogs.ViewModel.showBottomPane(e.key),
     visible: true,
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
@@ -498,7 +502,7 @@ const dprCommandList = [
     id: DPR_CMD_SHOW_PALI_QUOTE,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.displayPaliQuote(),
+    execute: () => F.OtherDialogs.ViewModel.displayPaliQuote(),
     visible: true,
     isDynamic: false,
     title: "Display Pali Quote (Keyboard shortcut: *)",
@@ -509,7 +513,7 @@ const dprCommandList = [
     id: DPR_CMD_RESET_SETTINGS,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.resetSettings(),
+    execute: () => F.OtherDialogs.ViewModel.resetSettings(),
     visible: true,
     isDynamic: false,
     title: "Reset all settings (Keyboard shortcut: R)",
@@ -520,7 +524,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_NEW_QUIZZ,
     notImplemented: true,
     canExecute: false,
-    execute: () => window.__otherDialogsViewModel.openNewQuizz(),
+    execute: () => F.OtherDialogs.ViewModel.openNewQuizz(),
     visible: true,
     isDynamic: false,
     title: "Open new quizz (Keyboard shortcut: #)",
@@ -531,7 +535,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_HELP,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.openHelp(),
+    execute: () => F.OtherDialogs.ViewModel.openHelp(),
     visible: true,
     isDynamic: false,
     title: "Open help dialog (Keyboard shortcut: ?)",
@@ -542,7 +546,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_HELP_VIDEO,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.openHelpVideo(),
+    execute: () => F.OtherDialogs.ViewModel.openHelpVideo(),
     visible: true,
     isDynamic: false,
     title: "Open help video (Keyboard shortcut: h)",
@@ -553,7 +557,7 @@ const dprCommandList = [
     id: DPR_CMD_LAUNCH_FEEDBACK_FORM,
     notImplemented: false,
     canExecute: true,
-    execute: () => window.__otherDialogsViewModel.launchFeedbackForm(),
+    execute: () => F.OtherDialogs.ViewModel.launchFeedbackForm(),
     visible: true,
     isDynamic: false,
     title: "Launch feedback form (Keyboard shortcut: @)",
@@ -564,7 +568,7 @@ const dprCommandList = [
     id: DPR_CMD_INSTALL_OFFLINE_APP,
     notImplemented: false,
     canExecute: true,
-    execute: () => __installationViewModel.showInstallationDialog(),
+    execute: () => F.Installation.ViewModel.showInstallationDialog(),
     visible: true,
     isDynamic: false,
     title: "Install for offline use (Keyboard shortcut: I)",
@@ -593,3 +597,6 @@ if (typeof module !== "undefined") {
     DprViewModel,
   };
 }
+
+export const ViewModel = new DprViewModel();
+DprGlobals.singleton.DprViewModel = ViewModel

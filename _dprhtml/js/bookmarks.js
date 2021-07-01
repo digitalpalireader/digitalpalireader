@@ -3,34 +3,34 @@
 const DPR_Bookmarks = (function () {
 
   async function eraseBookmark(i) {
-    if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    if (window.DPR_Globals.NavigationTabViewModel.isStorageSupportedByBrowser) {
       let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
       let data = [];
       if (bookmarksArrayFromStorage) {
         data = JSON.parse(bookmarksArrayFromStorage).slice();
         data.splice(i, 1);
         localStorage.setItem("bookmarksArray", JSON.stringify(data));
-        __navigationTabViewModel.updateBookmarks();
+        window.DPR_Globals.NavigationTabViewModel.updateBookmarks();
         await bookmarkframe(0);
       }
     }
   }
 
   async function clearBookmarks(gofrom) {
-    if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    if (window.DPR_Globals.NavigationTabViewModel.isStorageSupportedByBrowser) {
       var answer = confirm('Are you sure you want to erase all of the stored bookmarks?');
       if(!answer) { return; }
       let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
       if (bookmarksArrayFromStorage) {
         localStorage.removeItem("bookmarksArray");
-        __navigationTabViewModel.updateBookmarks();
+        window.DPR_Globals.NavigationTabViewModel.updateBookmarks();
         await bookmarkframe(0);
       }
     }
   }
 
   function getBookmarks() {
-    if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    if (window.DPR_Globals.NavigationTabViewModel.isStorageSupportedByBrowser) {
       let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
       let content = [];
       if (bookmarksArrayFromStorage) {
@@ -44,17 +44,17 @@ const DPR_Bookmarks = (function () {
   }
 
   async function addBookmark() {
-    if (__navigationTabViewModel.isStorageSupportedByBrowser) {
+    if (window.DPR_Globals.NavigationTabViewModel.isStorageSupportedByBrowser) {
       let bookmarksArrayFromStorage = localStorage.getItem("bookmarksArray");
       if (bookmarksArrayFromStorage) {
-        let value = `${__otherDialogsViewModel.bookmarkName()}@${__navigationTabViewModel.sectionPlace}`;
+        let value = `${window.DPR_Globals.OtherDialogsViewModel.bookmarkName()}@${window.DPR_Globals.NavigationTabViewModel.sectionPlace}`;
         let data = JSON.parse(bookmarksArrayFromStorage);
         for (var i in data) {
           if (data[i].toString().localeCompare(value) === 0 || i > 99) return;
         }
         data.push(value);
         localStorage.setItem("bookmarksArray", JSON.stringify(data));
-        await __navigationTabViewModel.updateBookmarks();
+        await window.DPR_Globals.NavigationTabViewModel.updateBookmarks();
       }
     }
   }

@@ -466,7 +466,7 @@ const DPR_Format = (function () {
       }
 
       var onet = '<b style="color:'+DPR_G.DPR_prefs[col[w++]]+'">' + DPR_translit_mod.translit(DPR_translit_mod.toUni(thisname)) + '</b>';
-      __otherDialogsViewModel.bookmarkName(DPR_translit_mod.translit(DPR_translit_mod.toUni(thisname)));
+      window.DPR_Globals.OtherDialogsViewModel.bookmarkName(DPR_translit_mod.translit(DPR_translit_mod.toUni(thisname)));
       title += (click?wrapLink(onet,click):onet) + (namen[i] ? namen[i] :'');
       save += '<h'+w+'>'+thisname+'</h'+w+'>';
       raw += thisname+(i < namea.length-1?"<br/>":"");
@@ -592,7 +592,7 @@ const DPR_Format = (function () {
     if(conv) {
       shortcutFns[DPR_CMD_SEND_TO_CONVERTER] = {
         canExecuteStr: 'true',
-        execute: () => __dprViewModel.DPR_CMD_SEND_TO_CONVERTER,
+        execute: () => window.DPR_Globals.DprViewModel.DPR_CMD_SEND_TO_CONVERTER,
         titleStr: null,
         visibleStr: 'true',
       };
@@ -601,7 +601,7 @@ const DPR_Format = (function () {
     if(ex) {
       shortcutFns[DPR_CMD_SEND_TO_TEXTPAD] = {
         canExecuteStr: 'true',
-        execute: () => __dprViewModel.DPR_CMD_SEND_TO_TEXTPAD,
+        execute: () => window.DPR_Globals.DprViewModel.DPR_CMD_SEND_TO_TEXTPAD,
         titleStr: null,
         visibleStr: 'true',
       };

@@ -13,16 +13,7 @@ window.dalert = (a) => { }
 window.ddump = (a) => { }
 /* End: Legacy stuff. */
 
-window.navigationFeatureName = "navigation";
-window.searchFeatureName = "search";
-window.dictionaryFeatureName = "dictionary";
-
-window.__dprViewModel = new DprVM.DprViewModel();
-ko.applyBindings(__dprViewModel);
-window.__bottomPaneTabsViewModel = new F.BottomPane.BottomPaneTabsViewModel();
-window.__settingsDialogViewModel = new F.SettingsDialog.SettingsDialogTabsViewModel();
-window.__otherDialogsViewModel = new F.OtherDialogs.OtherDialogsViewModel();
-window.__installationViewModel = new F.Installation.InstallationViewModel();
+ko.applyBindings(DprVM.ViewModel);
 
 export async function mainInitialize() {
   const sectionId = DPR_Chrome.getPrimarySectionId()
@@ -34,11 +25,11 @@ export async function mainInitialize() {
   ensureHidePopoversWithClickTriggers();
 
   if (DPR_PAL.isNavigationFeature()) {
-    await loadFeatureAsync(sectionId, navigationFeatureName, initializeNavigationFeature);
+    await loadFeatureAsync(sectionId, F.Navigation.featureName, F.Navigation.initializeFeature);
   } else if (DPR_PAL.isSearchFeature()) {
-    await loadFeatureAsync(sectionId, searchFeatureName, initializeSearchFeature);
+    await loadFeatureAsync(sectionId, F.Search.featureName, F.Search.initializeFeature);
   } else if (DPR_PAL.isDictionaryFeature()) {
-    await loadFeatureAsync(sectionId, dictionaryFeatureName, initializeDictionaryFeature);
+    await loadFeatureAsync(sectionId, F.Dictionary.featureName, F.Dictionary.initializeFeature);
   } else {
     await loadAndInitializeLandingPage();
   }
@@ -58,14 +49,14 @@ function installGlobalHandlers() {
 
 const loadFeatureAsync = async (sectionId, name, initFn) => {
   await loadHtmlFragmentAsync(`#main-pane-container`, `features/${name}/main-pane.html`);
-  __dprViewModel.showMainFeatures();
+  DprVM.ViewModel.showMainFeatures();
   await initFn(sectionId);
   initFeedbackFormParameters();
 }
 
 const loadAndInitializeLandingPage = async () => {
   await loadHtmlFragmentAsync("#main-content-landing-page", 'features/landing-page/main-pane.html');
-  __dprViewModel.showLandingFeature();
+  DprVM.ViewModel.showLandingFeature();
   initFeedbackFormParameters();
   await DPR_bv_mod.showBv();
 }
@@ -100,19 +91,19 @@ const initFooter = () => {
 
 const loadPanesAsync = async () => {
   const allTabs = [
-    ['navigation', initializeNavigationSidebarTab],
-    ['search', initializeSearchSidebarTab],
-    ['dictionary', initializeDictionarySidebarTab]
+    [F.Navigation.featureName, F.Navigation.initializeSidebarTab],
+    [F.Search.featureName, F.Search.initializeSidebarTab],
+    [F.Dictionary.featureName, F.Dictionary.initializeSidebarTab]
   ];
 
   const all = [
     ...allTabs.map(([x, xFn]) => loadHtmlFragmentAsync(`#${x}TabPane`, `features/${x}/tab.html`).then(xFn)),
-    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, __bottomPaneTabsViewModel),
-    loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, __settingsDialogViewModel),
-    loadHtmlFragmentAsync(`#quicklink-dialog`, `features/other-dialogs/quicklinks.html`, __otherDialogsViewModel),
-    loadHtmlFragmentAsync(`#paliquote-dialog`, `features/other-dialogs/paliquote.html`, __otherDialogsViewModel),
-    loadHtmlFragmentAsync(`#bookmark-dialog`, `features/other-dialogs/bookmarks.html`, __otherDialogsViewModel),
-    loadHtmlFragmentAsync(`#installation-dialog`, `features/installation/main-pane.html`, __installationViewModel),
+    loadHtmlFragmentAsync(`#main-bottom-pane`, `features/bottom-pane/main-pane.html`, F.BottomPane.ViewModel),
+    loadHtmlFragmentAsync(`#settings-dialog`, `features/settings-dialog/main-pane.html`, F.SettingsDialog.ViewModel),
+    loadHtmlFragmentAsync(`#quicklink-dialog`, `features/other-dialogs/quicklinks.html`, F.OtherDialogs.ViewModel),
+    loadHtmlFragmentAsync(`#paliquote-dialog`, `features/other-dialogs/paliquote.html`, F.OtherDialogs.ViewModel),
+    loadHtmlFragmentAsync(`#bookmark-dialog`, `features/other-dialogs/bookmarks.html`, F.OtherDialogs.ViewModel),
+    loadHtmlFragmentAsync(`#installation-dialog`, `features/installation/main-pane.html`, F.Installation.ViewModel),
   ];
 
   await Promise.all(all);
@@ -126,7 +117,7 @@ const initFeatureTabs = () => {
   $("#dictionaryTabPane").hide();
   $("#instProgressDiv").hide();
 
-  const activeTab = __dprViewModel.activeTab();
+  const activeTab = DprVM.ViewModel.activeTab();
   $(`#${activeTab}TabPane`).show();
   $(".nav-link").removeClass('active');
   $(`#${activeTab}Tab`).addClass('active');
@@ -216,5 +207,5 @@ function triggerPrivacyNoticeAcceptanceCheck() {
   setIntervalhandle = setInterval(checker, checkIntervalInHours * 60 * 60 * 1000);
 }
 
-// NOTE: Ensure this is the very last line.
+// NOTE: Ensure these are the very last lines.
 window.document.addEventListener("DOMContentLoaded", mainInitialize);
