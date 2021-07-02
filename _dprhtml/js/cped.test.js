@@ -1,30 +1,30 @@
-import "../../en/cped";
+import '../../en/cped/index.js'
 
-import { getDefinition, getGrammar, getInflectionGroup } from "./cped";
+import { getDefinition, getGrammar, getInflectionGroup } from './cped.js'
 
-describe("getDefinition", () => {
+describe('getDefinition', () => {
   test.each([
-    ["bhikkhu", "a Buddhist monk."],
-    ["ambala.t.thikaa", "a mango plant."],
-  ])("%s => %s", (velthiusWord, definition) => {
-    expect(getDefinition(velthiusWord)).toBe(definition);
-  });
-});
+    ['bhikkhu', 'a Buddhist monk.'],
+    ['ambala.t.thikaa', 'a mango plant.'],
+  ])('%s => %s', (velthiusWord, definition) => {
+    expect(getDefinition(velthiusWord)).toBe(definition)
+  })
+})
 
-describe("getGrammar", () => {
+describe('getGrammar', () => {
   test.each([
-    ["bhikkhu", "m."],
-    ["ambala.t.thikaa", "f."],
-  ])("%s => %s", (velthiusWord, grammar) => {
-    expect(getGrammar(velthiusWord)).toBe(grammar);
-  });
-});
+    ['bhikkhu', 'm.'],
+    ['ambala.t.thikaa', 'f.'],
+  ])('%s => %s', (velthiusWord, grammar) => {
+    expect(getGrammar(velthiusWord)).toBe(grammar)
+  })
+})
 
-describe("getInflectionGroup", () => {
+describe('getInflectionGroup', () => {
   test.each([
-    ["bhikkhu", "N"],
-    ["bhiyyo", "I"],
-  ])("%s => %s", (velthiusWord, inflectionGroup) => {
-    expect(getInflectionGroup(velthiusWord)).toBe(inflectionGroup);
-  });
-});
+    ['bhikkhu', 'N'],
+    ['bhiyyo', 'I'],
+  ])('%s => %s', (velthiusWord, inflectionGroup) => {
+    expect(getInflectionGroup(velthiusWord)).toBe(inflectionGroup)
+  })
+})

@@ -577,6 +577,21 @@ const dprCommandList = [
   },
 ];
 
+export const ViewModel = new DprViewModel();
+
+export const DprKeyboardHandler = (e) => {
+  if (document.activeElement.type == "text" || document.activeElement.tagName == "TEXTAREA" || e.altKey || e.ctrlKey || e.metaKey) {
+    return null;
+  }
+
+  const cmd = Object.entries(ViewModel.commands).find(([_, x]) => x().matchKey(e));
+  if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
+    cmd[1]().execute(e);
+    event && event.preventDefault();
+    return cmd[1]();
+  }
+}
+
 const __dprCommandsMap = {};
 dprCommandList.forEach(x => __dprCommandsMap[x.id] = x);
 Object.freeze(__dprCommandsMap);
@@ -595,8 +610,8 @@ window.__dprCommandsMap = __dprCommandsMap
 if (typeof module !== "undefined") {
   module.exports = {
     DprViewModel,
+    DprKeyboardHandler,
   };
 }
 
-export const ViewModel = new DprViewModel();
 DprGlobals.singleton.DprViewModel = ViewModel

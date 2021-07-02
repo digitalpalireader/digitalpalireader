@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import * as DprGlobals from '../../dpr_globals'
+import * as DprGlobals from '../../dpr_globals.js'
 
 export const featureName = 'navigation'
 
@@ -66,7 +66,7 @@ export class NavigationTabViewModel {
     this.navHistoryVisible = ko.computed(() => NavigationTabViewModel.isStorageSupportedByBrowser(), this)
     this.navHistoryArray = ko.observableArray()
     this.selectedHistoryItem = ko.observable()
-    this.historyInfo = ko.computed(() => thisNavigationTabViewModel.computeHistoryInfo(), this)
+    this.historyInfo = ko.computed(() => NavigationTabViewModel.computeHistoryInfo(), this)
 
     this.bookmarksVisible = ko.computed(() => NavigationTabViewModel.isStorageSupportedByBrowser(), this)
     this.bookmarksArray = ko.observableArray()
@@ -77,13 +77,13 @@ export class NavigationTabViewModel {
     this.updateHistory()
     this.updateBookmarks()
 
-    this.sectionId = DPR_Chrome.getPrimarySectionId()
+    this.sectionId = window.DPR_Chrome.getPrimarySectionId()
   }
 
   initializeSets() {
     Object
-      .entries(DPR_G.G_nikFullNames)
-      .forEach(([value, label]) => this.navset.push({ value, label: DPR_translit_mod.translit(label) }))
+      .entries(window.DPR_G.G_nikFullNames)
+      .forEach(([value, label]) => this.navset.push({ value, label: window.DPR_translit_mod.translit(label) }))
   }
 
   setPlaces(places) {
@@ -92,7 +92,7 @@ export class NavigationTabViewModel {
   }
 
   static navPartOptionsEmpty(opts) {
-    return !(opts().length === 0 || (opts().length === 1 && opts()[0].label === DPR_G.G_unnamed))
+    return !(opts().length === 0 || (opts().length === 1 && opts()[0].label === window.DPR_G.G_unnamed))
   }
 
   computePartInfo(part) {
@@ -134,7 +134,7 @@ export class NavigationTabViewModel {
     return {
       text: '\u21D2',
       title: 'Open bookmarks and history window',
-      onmouseup: 'DPR_bookmarks_mod.bookmarkframe(1)',
+      onmouseup: 'window.DPR_bookmarks_mod.bookmarkframe(1)',
     }
   }
 
@@ -153,7 +153,7 @@ export class NavigationTabViewModel {
     if (ctx.selectedBookmarksItem() && ctx.selectedBookmarksItem() !== "-- Bookmarks --") {
       const selectedBookmItem = ctx.selectedBookmarksItem().toString().replace(/'/g, '').split('@')
       const x = selectedBookmItem[1].split(',')
-      const sectionId = DPR_Chrome.getPrimarySectionId()
+      const sectionId = window.DPR_Chrome.getPrimarySectionId()
       return x.length > 3 ? DPRSend.openPlace(sectionId, x) : DPRSend.openIndex(sectionId, x)
     }
 
@@ -164,7 +164,7 @@ export class NavigationTabViewModel {
     return {
       text: '\u21D2',
       title: 'Open bookmarks and history window',
-      onmouseup: 'DPR_bookmarks_mod.bookmarkframe(1)',
+      onmouseup: 'window.DPR_bookmarks_mod.bookmarkframe(1)',
     }
   }
 
@@ -182,8 +182,8 @@ export const ViewModel = new NavigationTabViewModel()
 DprGlobals.singleton.NavigationTabViewModel = ViewModel
 
 export const initializeFeature = async (sectionId) => {
-  await DPR_config_mod.getconfig()
-  await DPR_Chrome.addMainPanelSections(
+  await window.DPR_config_mod.getconfig()
+  await window.DPR_Chrome.addMainPanelSections(
     ViewModel.places(),
     sectionId,
     ViewModel.query(),
@@ -199,7 +199,7 @@ const parseNavigationURLParams = () => {
     const [psec0, psec1, ..._] = parameter.split('=')
     switch (psec0) {
       case 'loc':
-        ViewModel.setPlaces(psec1.split('|').map(DPR_Translations.parsePlace))
+        ViewModel.setPlaces(psec1.split('|').map(window.DPR_Translations.parsePlace))
         break
       case 'para':
         para = psec1
@@ -210,7 +210,8 @@ const parseNavigationURLParams = () => {
         ViewModel.query(query)
         break
       default:
-        throw new Error(`Unexpected case ${psec0}`)
+        // eslint-disable-next-line no-console
+        console.warn(`Unrecognized parameter ${psec0}=${[psec1]}`)
     }
   })
 }
@@ -220,8 +221,8 @@ export const initializeSidebarTab = () => {
   DPR1_chrome_mod.setTransLitScriptId('#navigation-hierarchy')
   DPR1_chrome_mod.setTransLitScriptId('#nav-set-div')
 
-  DPR_PAL.enablePopover('#quicklinks-info', 'hover', 'right')
-  DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover', 'right')
+  window.DPR_PAL.enablePopover('#quicklinks-info', 'hover', 'right')
+  window.DPR_PAL.enablePopover('#navigate-book-hierarchy-info', 'hover', 'right')
 
   ko.applyBindings(ViewModel, $(`#${featureName}TabContent`)[0])
 

@@ -208,4 +208,5 @@ function triggerPrivacyNoticeAcceptanceCheck() {
 }
 
 // NOTE: Ensure these are the very last lines.
-window.document.addEventListener("DOMContentLoaded", mainInitialize);
+document.addEventListener('keypress', DprVM.DprKeyboardHandler)
+window.document.addEventListener("DOMContentLoaded", mainInitialize)

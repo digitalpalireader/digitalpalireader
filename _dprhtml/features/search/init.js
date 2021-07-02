@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import * as DprGlobals from '../../dpr_globals'
+import * as DprGlobals from '../../dpr_globals.js'
 
 export const featureName = 'search'
 
@@ -100,7 +100,7 @@ export class SearchTabViewModel {
   }
 
   searchMAT(mat) {
-    matl = mat.toLowerCase()
+    const matl = mat.toLowerCase()
     const matArray = []
     if (matl.indexOf('m') > -1) {
       matArray.push('m')

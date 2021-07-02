@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import * as DprGlobals from '../../dpr_globals'
+import * as DprGlobals from '../../dpr_globals.js'
 
 export const featureName = 'dictionary'
 

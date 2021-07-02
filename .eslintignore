@@ -29,7 +29,6 @@ _dprhtml/js/config.js
 _dprhtml/js/conjugate.js
 _dprhtml/js/convert.js
 _dprhtml/js/cped.js
-_dprhtml/js/cped.test.js
 _dprhtml/js/dhpv.js
 _dprhtml/js/dict_xml.js
 _dprhtml/js/dict.js
@@ -45,7 +44,6 @@ _dprhtml/js/index.js
 _dprhtml/js/inflect.js
 _dprhtml/js/irreg.js
 _dprhtml/js/keyboard_shortcuts.js
-_dprhtml/js/keyboard_shortcuts.test.js
 _dprhtml/js/listam.js
 _dprhtml/js/listsm.js
 _dprhtml/js/mock-server/handlers.js
@@ -64,9 +62,7 @@ _dprhtml/js/roots_link.js
 _dprhtml/js/roots.js
 _dprhtml/js/search_history.js
 _dprhtml/js/search_utils.js
-_dprhtml/js/search_utils.test.js
 _dprhtml/js/search.js
-_dprhtml/js/search.test.js
 _dprhtml/js/send_bottom.js
 _dprhtml/js/send.js
 _dprhtml/js/sortaz.js
