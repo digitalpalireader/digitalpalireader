@@ -17,8 +17,8 @@ const DPR_Xml = (function () {
 
   async function loadXMLSection(sectionId, querystring,para,place,isPL)
   {
-    __dprViewModel.showMainFeatures();
-    __navigationTabViewModel.sectionPlace = place;
+    window.DPR_Globals.DprViewModel.showMainFeatures();
+    window.DPR_Globals.NavigationTabViewModel.sectionPlace = place;
 
     DPR_G.G_thisPara = null;
 
@@ -360,7 +360,7 @@ const DPR_Xml = (function () {
 
     shortcutFns[DPR_CMD_BOOKMARK_SECTION] = {
       canExecuteStr: 'true',
-      executeStr: `__otherDialogsViewModel.showBookmarksDialog()`,
+      executeStr: `window.DPR_Globals.OtherDialogsViewModel.showBookmarksDialog()`,
       titleStr: null,
       visibleStr: 'true',
     };
@@ -540,7 +540,7 @@ const DPR_Xml = (function () {
     cmdCfg.icon ? `'${cmdCfg.icon}'` : null;
 
   const resolveCommand = (id, cmdCfg) => `
-    __dprViewModel.updateCommand(
+    window.DPR_Globals.DprViewModel.updateCommand(
       '${id}',
       {
         canExecute: ${cmdCfg.canExecuteStr},
@@ -569,7 +569,7 @@ const DPR_Xml = (function () {
   }
 
   async function loadXMLindex(sectionId,place) {
-    __dprViewModel.showMainFeatures();
+    window.DPR_Globals.DprViewModel.showMainFeatures();
 
     var isDev = false; // dev tool
     var DshowH = false; // dev tool

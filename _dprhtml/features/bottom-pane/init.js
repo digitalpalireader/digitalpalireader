@@ -1,3 +1,5 @@
+import * as DprGlobals from '../../dpr_globals.js'
+
 export class BottomPaneTabsViewModel {
   constructor() {
     this.isDTabSelected = ko.observable(true);
@@ -42,17 +44,20 @@ const wrapWithTelemetry = function(fn) {
 window.BottomPaneTabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj'];
 
 window.DPR_BottomPane = {
-  cvConvert: wrapWithTelemetry(DPR_convert_mod.convert),
-  cvSortaz: wrapWithTelemetry(DPR_sortaz_mod.sortaz),
+  cvConvert: wrapWithTelemetry(window.DPR_convert_mod.convert),
+  cvSortaz: wrapWithTelemetry(window.DPR_sortaz_mod.sortaz),
 
-  tpToVel: wrapWithTelemetry(DPR_translit_mod.toVel),
-  tpToUni: wrapWithTelemetry(DPR_translit_mod.toUni),
-  tpSendTextPad: wrapWithTelemetryAsync(DPR_send_bottom_mod.sendTextPad),
-  tpSavePad: wrapWithTelemetry(DPR_convert_mod.savePad),
+  tpToVel: wrapWithTelemetry(window.DPR_translit_mod.toVel),
+  tpToUni: wrapWithTelemetry(window.DPR_translit_mod.toUni),
+  tpSendTextPad: wrapWithTelemetryAsync(window.DPR_send_bottom_mod.sendTextPad),
+  tpSavePad: wrapWithTelemetry(window.DPR_convert_mod.savePad),
 
-  trTranslateText: wrapWithTelemetry(DPR_translate_mod.translateText),
-  trTranslateTextFromBottomPane: wrapWithTelemetry(DPR_translate_mod.translateTextFromBottomPane),
-  trInsertWordByWord: wrapWithTelemetry(DPR_translate_mod.insertWordByWord),
+  trTranslateText: wrapWithTelemetry(window.DPR_translate_mod.translateText),
+  trTranslateTextFromBottomPane: wrapWithTelemetry(window.DPR_translate_mod.translateTextFromBottomPane),
+  trInsertWordByWord: wrapWithTelemetry(window.DPR_translate_mod.insertWordByWord),
 
-  cjInsertConj: wrapWithTelemetry(DPR_conjugate_mod.insertConj),
+  cjInsertConj: wrapWithTelemetry(window.DPR_conjugate_mod.insertConj),
 }
+
+export const ViewModel = new BottomPaneTabsViewModel();
+DprGlobals.singleton.BottomPaneTabsViewModel = ViewModel

@@ -1,6 +1,6 @@
 'use strict';
 
-const DPR_G = {
+window.DPR_G = {
   G_xmlDoc : null,
   G_lastcolour : null,
   G_unnamed : null,

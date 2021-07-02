@@ -193,7 +193,7 @@ const DPR_Chrome_Tabs = (function () {
 
   function closeDPRSidebar() {
     if (DPR_PAL.isWeb) {
-      __dprViewModel.sidebarVisible(false);
+      window.DPR_Globals.DprViewModel.sidebarVisible(false);
     } else {
       var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
 
@@ -205,7 +205,7 @@ const DPR_Chrome_Tabs = (function () {
 
   function openDPRSidebar() {
     if (DPR_PAL.isWeb) {
-      __dprViewModel.sidebarVisible(true);
+      window.DPR_Globals.DprViewModel.sidebarVisible(true);
     } else {
       var sidebarWindow = DPR_PAL.mainWindow.document.getElementById("sidebar").contentDocument;
       if (sidebarWindow.location.href != "chrome://digitalpalireader/content/digitalpalireader.xul") {
@@ -215,8 +215,8 @@ const DPR_Chrome_Tabs = (function () {
   }
 
   function toggleDPRSidebar() {
-    __dprViewModel.sidebarVisible(!__dprViewModel.sidebarVisible());
-    DPR_prefload_mod.saveSideBarVisibleState(__dprViewModel.sidebarVisible())
+    window.DPR_Globals.DprViewModel.sidebarVisible(!window.DPR_Globals.DprViewModel.sidebarVisible());
+    DPR_prefload_mod.saveSideBarVisibleState(window.DPR_Globals.DprViewModel.sidebarVisible())
   }
 
   function setCurrentTitle(title) {
@@ -247,7 +247,7 @@ const DPR_Chrome_Tabs = (function () {
   }
 
   function DPRShowBottomPane(tabIdToActivate = 'D') {
-    __bottomPaneTabsViewModel.updateActiveTabId(tabIdToActivate);
+    window.DPR_Globals.BottomPaneTabsViewModel.updateActiveTabId(tabIdToActivate);
     openBottomFrame();
   }
 

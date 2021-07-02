@@ -1,3 +1,5 @@
+import * as DprGlobals from '../../dpr_globals.js'
+
 export class SettingsDialogTabsViewModel {
   constructor() {
     this.isGeneralSettingsTabSelected = ko.observable(true);
@@ -88,3 +90,6 @@ export class SettingsDialogTabsViewModel {
     ])    
   }
 }
+
+export const ViewModel = new SettingsDialogTabsViewModel();
+DprGlobals.singleton.SettingsDialogTabsViewModel = ViewModel

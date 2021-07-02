@@ -10,19 +10,25 @@ module.exports = {
   plugins: [
     'jest',
   ],
+  parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 10,
     sourceType: 'module',
+    allowImportExportEverywhere: true,
   },
   rules: {
     semi: ['error', 'never'],
-    'no-underscore-dangle': ['error', { allowAfterThis: true }],
+    'no-underscore-dangle': 0,
+    'no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
     'max-len': ['error', { code: 140 }],
+    'func-names': ['error', 'as-needed'],
+    'import/extensions': ['error', { js: 'always', json: 'always' }],
   },
   globals: {
     importScripts: true,
     workbox: true,
     self: true,
     ko: true,
+    $: true,
   },
 }
