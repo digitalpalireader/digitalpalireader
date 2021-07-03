@@ -2,26 +2,26 @@
 
 const DPR_Web_Navigation_Sidebar = (function () {
   async function changeSet(nik) {
-    __navigationTabViewModel.set(nik);
+    window.DPR_Globals.NavigationTabViewModel.set(nik);
 
-    const prevSet = DPR_G.G_numberToNik[__navigationTabViewModel.prevSetIndex]
-    if (DPR_G.G_hier == 't' && this.limitt(DPR_G.G_nikToNumber2[__navigationTabViewModel.set()])) {
-      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + DPR_G.G_nikLongName[__navigationTabViewModel.set()] + '.')
-      __navigationTabViewModel.set(prevSet);
+    const prevSet = DPR_G.G_numberToNik[window.DPR_Globals.NavigationTabViewModel.prevSetIndex]
+    if (DPR_G.G_hier == 't' && this.limitt(DPR_G.G_nikToNumber2[window.DPR_Globals.NavigationTabViewModel.set()])) {
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + DPR_G.G_nikLongName[window.DPR_Globals.NavigationTabViewModel.set()] + '.')
+      window.DPR_Globals.NavigationTabViewModel.set(prevSet);
       return;
     }
-    if (DPR_G.G_hier == 'a' && __navigationTabViewModel.set() == 'g') {
+    if (DPR_G.G_hier == 'a' && window.DPR_Globals.NavigationTabViewModel.set() == 'g') {
       DPR_Chrome.showErrorToast('Atthakatha not available for Gram.')
-      __navigationTabViewModel.set(prevSet);
+      window.DPR_Globals.NavigationTabViewModel.set(prevSet);
       return;
     }
-    if (DPR_G.G_hier == 'a' && __navigationTabViewModel.set() == 'b') {
+    if (DPR_G.G_hier == 'a' && window.DPR_Globals.NavigationTabViewModel.set() == 'b') {
       DPR_Chrome.showErrorToast('Atthakatha not available for Abhidh-s.');
-      __navigationTabViewModel.set(prevSet);
+      window.DPR_Globals.NavigationTabViewModel.set(prevSet);
       return;
     }
 
-    __navigationTabViewModel.prevSetIndex = DPR_G.G_nikToNumber2[nik];
+    window.DPR_Globals.NavigationTabViewModel.prevSetIndex = DPR_G.G_nikToNumber2[nik];
 
     this.setBookList(nik);
   }
@@ -39,7 +39,7 @@ const DPR_Web_Navigation_Sidebar = (function () {
     var titles;
     if (DPR_G.nikvoladi[nik]) titles = DPR_G.nikvoladi[nik];
     else titles = DPR_G.nikvoladi[nik+DPR_G.G_hier];
-    __navigationTabViewModel.navBook.removeAll();
+    window.DPR_Globals.NavigationTabViewModel.navBook.removeAll();
 
     for (var i = 0; i < titles.length; i++) {
       var title;
@@ -52,10 +52,10 @@ const DPR_Web_Navigation_Sidebar = (function () {
         title = titles[i];
         val = i+1;
       }
-      __navigationTabViewModel.navBook.push({value: val, label: DPR_translit_mod.translit(title)});
+      window.DPR_Globals.NavigationTabViewModel.navBook.push({value: val, label: DPR_translit_mod.translit(title)});
     }
 
-    __navigationTabViewModel.book(book ? book : __navigationTabViewModel.navBook()[0].value);
+    window.DPR_Globals.NavigationTabViewModel.book(book ? book : window.DPR_Globals.NavigationTabViewModel.navBook()[0].value);
   }
 
   function limitt(nikn) {
@@ -68,15 +68,15 @@ const DPR_Web_Navigation_Sidebar = (function () {
 
     const titles = DPR_G.nikvoladi[nik] ? DPR_G.nikvoladi[nik] : DPR_G.nikvoladi[nik + $('#tsoMAT2m').val()];
 
-    __searchTabViewModel.bookListA.removeAll();
-    __searchTabViewModel.bookListB.removeAll();
-    __searchTabViewModel.bookMenu.removeAll();
+    window.DPR_Globals.SearchTabViewModel.bookListA.removeAll();
+    window.DPR_Globals.SearchTabViewModel.bookListB.removeAll();
+    window.DPR_Globals.SearchTabViewModel.bookMenu.removeAll();
     for (var i = 0; i < titles.length; i++) {
       // menu
       let menuValue = ((nik == 'k' || nik == 'y' || nik == 'n') ? (titles[i] + 1) : (i + 1));
       let menuText = DPR_translit_mod.translit((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : DPR_G.G_nikLongName[nik] + ' ' + titles[i]);
 
-      __searchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
+      window.DPR_Globals.SearchTabViewModel.bookMenu.push({label: menuText, value: menuValue});
 
       // check boxes
       const label = ((nik == 'k' || nik == 'y' || nik == 'n') ? DPR_G.G_kynames[nik][titles[i]] : (typeof (titles[i]) == 'number' ? 'Book ' : '') + titles[i]);
@@ -84,9 +84,9 @@ const DPR_Web_Navigation_Sidebar = (function () {
 
     if (i >= Math.ceil(titles.length / 2)) {
 
-        __searchTabViewModel.bookListB.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
+        window.DPR_Globals.SearchTabViewModel.bookListB.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: window.DPR_Globals.SearchTabViewModel.searchBookCheckbox(i+1)});
       } else{
-        __searchTabViewModel.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: __searchTabViewModel.searchBookCheckbox(i+1)});
+        window.DPR_Globals.SearchTabViewModel.bookListA.push({label: label, id:`tsoBObook${i+1}`, value: cbValue, selected: window.DPR_Globals.SearchTabViewModel.searchBookCheckbox(i+1)});
       }
     }
     await DPRXML.updateSearchHierarchy(0);
@@ -96,27 +96,27 @@ const DPR_Web_Navigation_Sidebar = (function () {
 
     if (DPR_G.G_hier == htmp) return;
 
-    if (htmp == 't' && this.limitt(__navigationTabViewModel.prevSetIndex)) {
-      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + DPR_G.G_nikLongName[__navigationTabViewModel.set()] + '.');
-      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
+    if (htmp == 't' && this.limitt(window.DPR_Globals.NavigationTabViewModel.prevSetIndex)) {
+      DPR_Chrome.showErrorToast('Ṭīkā not available for ' + DPR_G.G_nikLongName[window.DPR_Globals.NavigationTabViewModel.set()] + '.');
+      window.DPR_Globals.NavigationTabViewModel.MAT(window.DPR_Globals.NavigationTabViewModel.prevMat);
       return;
     }
-    if (htmp == 'a' && __navigationTabViewModel.prevSetIndex > 7) {
-      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + DPR_G.G_nikLongName[__navigationTabViewModel.set()] + '.');
-      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
+    if (htmp == 'a' && window.DPR_Globals.NavigationTabViewModel.prevSetIndex > 7) {
+      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + DPR_G.G_nikLongName[window.DPR_Globals.NavigationTabViewModel.set()] + '.');
+      window.DPR_Globals.NavigationTabViewModel.MAT(window.DPR_Globals.NavigationTabViewModel.prevMat);
       return;
     }
-    if (__navigationTabViewModel.set() == 'k' && htmp == 'a' && DPR_G.kudvala[__navigationTabViewModel.book()] == undefined) {
-      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + this.getBookName(__navigationTabViewModel.set(), htmp, __navigationTabViewModel.navBook().findIndex(x => x.value === __navigationTabViewModel.book())) + '.');
-      __navigationTabViewModel.MAT(__navigationTabViewModel.prevMat);
+    if (window.DPR_Globals.NavigationTabViewModel.set() == 'k' && htmp == 'a' && DPR_G.kudvala[window.DPR_Globals.NavigationTabViewModel.book()] == undefined) {
+      DPR_Chrome.showErrorToast('Aṭṭhakathā not available for ' + this.getBookName(window.DPR_Globals.NavigationTabViewModel.set(), htmp, window.DPR_Globals.NavigationTabViewModel.navBook().findIndex(x => x.value === window.DPR_Globals.NavigationTabViewModel.book())) + '.');
+      window.DPR_Globals.NavigationTabViewModel.MAT(window.DPR_Globals.NavigationTabViewModel.prevMat);
       return;
     }
 
     DPR_G.G_hier = htmp;
-    __navigationTabViewModel.prevMat = htmp;
+    window.DPR_Globals.NavigationTabViewModel.prevMat = htmp;
 
-    var book = __navigationTabViewModel.book();
-    if (__navigationTabViewModel.set() == 'k') {
+    var book = window.DPR_Globals.NavigationTabViewModel.book();
+    if (window.DPR_Globals.NavigationTabViewModel.set() == 'k') {
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -124,8 +124,8 @@ const DPR_Web_Navigation_Sidebar = (function () {
         book = DPR_G.kudvala[book];
       }
     }
-    else if (__navigationTabViewModel.set() == 'y') {
-      var book = __navigationTabViewModel.book();
+    else if (window.DPR_Globals.NavigationTabViewModel.set() == 'y') {
+      var book = window.DPR_Globals.NavigationTabViewModel.book();
       if (htmp == 'm') {
         book = parseInt(book) - 1;
       }
@@ -136,7 +136,7 @@ const DPR_Web_Navigation_Sidebar = (function () {
     else
       book = parseInt(book) - 1;
 
-    this.setBookList(__navigationTabViewModel.set(), book);
+    this.setBookList(window.DPR_Globals.NavigationTabViewModel.set(), book);
   }
 
   function historyBox() {
@@ -302,16 +302,16 @@ const DPR_Web_Navigation_Sidebar = (function () {
   }
 
   function gotoPlace(place) {
-    __navigationTabViewModel.set(place[0]);
-    __navigationTabViewModel.MAT(place[place.length-1]);
-    const b = __navigationTabViewModel.navBook().findIndex(x => x.value === parseInt(place[1]) + 1);
-    __navigationTabViewModel.book(__navigationTabViewModel.navBook()[b].value);
+    window.DPR_Globals.NavigationTabViewModel.set(place[0]);
+    window.DPR_Globals.NavigationTabViewModel.MAT(place[place.length-1]);
+    const b = window.DPR_Globals.NavigationTabViewModel.navBook().findIndex(x => x.value === parseInt(place[1]) + 1);
+    window.DPR_Globals.NavigationTabViewModel.book(window.DPR_Globals.NavigationTabViewModel.navBook()[b].value);
     if (place.length > 3) {
-      __navigationTabViewModel.meta(place[2].toString().replace('x','0'));
-      __navigationTabViewModel.volume(place[3].toString().replace('x','0'));
-      __navigationTabViewModel.vagga(place[4].toString().replace('x','0'));
-      __navigationTabViewModel.sutta(place[5].toString().replace('x','0'));
-      __navigationTabViewModel.section(place[6].toString().replace('x','0'));
+      window.DPR_Globals.NavigationTabViewModel.meta(place[2].toString().replace('x','0'));
+      window.DPR_Globals.NavigationTabViewModel.volume(place[3].toString().replace('x','0'));
+      window.DPR_Globals.NavigationTabViewModel.vagga(place[4].toString().replace('x','0'));
+      window.DPR_Globals.NavigationTabViewModel.sutta(place[5].toString().replace('x','0'));
+      window.DPR_Globals.NavigationTabViewModel.section(place[6].toString().replace('x','0'));
     }
   }
 

@@ -9,7 +9,7 @@ import * as WBR from 'workbox-routing'
 import * as WBS from 'workbox-strategies'
 import * as WBCR from 'workbox-cacheable-response'
 import * as WBE from 'workbox-expiration'
-import * as Installer from './_dprhtml/features/installation/init'
+import * as Installer from './_dprhtml/features/installation/init.js'
 
 // NOTE: Do not remove this console log call. It is required to version the Service worker.
 // eslint-disable-next-line no-console

@@ -22,6 +22,18 @@ steps:
         echo ========================================================================
         yarn --no-progress --non-interactive --frozen-lockfile
 
+  - task: CmdLine@2
+    displayName: Build service worker...
+    inputs:
+      script: |
+        yarn build:sw
+
+  - task: CmdLine@2
+    displayName: Build index.js
+    inputs:
+      script: |
+        yarn build
+
   - task: PowerShell@2
     displayName: Run cache buster
     inputs:
@@ -32,16 +44,8 @@ steps:
       pwsh: true
       workingDirectory: '$(Build.SourcesDirectory)'
 
-  - task: CmdLine@2
-    displayName: Build service worker...
-    inputs:
-      script: |
-        echo ========================================================================
-        echo Build service worker...
-        echo ========================================================================
-        yarn build:sw
-
   - task: Bash@3
+    displayName: Create build artifact
     inputs:
       filePath: "build.sh"
       arguments: $(Build.BinariesDirectory) $(Build.Repository.LocalPath)

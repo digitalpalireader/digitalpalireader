@@ -19,5 +19,6 @@
     "public/**": true,
     "node_modules/**": true,
     "_dprhtml/js/external/**": true,
+    "tools/migration/**": true,
   },
 }

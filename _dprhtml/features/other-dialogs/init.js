@@ -1,3 +1,7 @@
+import * as DprGlobals from '../../dpr_globals.js'
+import { InstallationViewModel } from '../installation/init.js';
+import * as Navigation from '../navigation/init.js'
+
 export class OtherDialogsViewModel {
   constructor() {
     this.quicklinkInput = ko.observable();
@@ -95,7 +99,7 @@ export class OtherDialogsViewModel {
 
   sendBookmarkFromDialog() {
 
-    var loc = __navigationTabViewModel.placeArray();
+    var loc = Navigation.ViewModel.placeArray();
     var name = this.bookmarkName();
     var desc = "";
     var check = {value: false};                  // default the checkbox to false
@@ -133,11 +137,7 @@ export class OtherDialogsViewModel {
 
     xmlDoc.documentElement.appendChild(newNode);
 
-    //__navigationTabViewModel.updateBookmarks(xmlDoc);
     DPR1_format_mod.alertFlash('Bookmark Saved','green');
-
-    //DPR1_send_mod.sendUpdateBookmarks();
-
   }
 
   resetSettings() {
@@ -161,3 +161,6 @@ export class OtherDialogsViewModel {
     DPR1_chrome_mod.openDPRTab($(".feedback-form-link").attr("href"), 'DPR-feedback', 0);
   }
 }
+
+export const ViewModel = new OtherDialogsViewModel();
+DprGlobals.singleton.OtherDialogsViewModel = ViewModel

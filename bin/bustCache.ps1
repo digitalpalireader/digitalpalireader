@@ -46,14 +46,19 @@ function FixLinkRelElement
 
 function TransformScriptHrefElement
 {
-  param($line)
+  param(
+    $line,
+    $retargetMap
+  )
 
   if ($line -notmatch '^\s*\<script (type=\"module\" )?src=\"(.*)\"\>\<\/script\>\s*$') {
     return "Error - unexpected format for script src."
   }
 
-  $fileName = AppendHashToFileName $Matches.2
-  rename-file $Matches.2
+  $originalFileName = $Matches.2
+  $retargettedFileName = if ($retargetMap.ContainsKey($originalFileName)) { $retargetMap[$originalFileName] } else { $originalFileName }
+  $fileName = AppendHashToFileName $retargettedFileName
+  rename-file $retargettedFileName
   return "    <script $($Matches.1)src=""$fileName""></script>"
 }
 
@@ -61,7 +66,7 @@ $contents = Get-Content $HtmlFilePath | ForEach-Object {
   if ($_ -imatch '\<link.*rel=.*stylesheet.*') {
     FixLinkRelElement $_
   } elseif ($_ -imatch '\<script.*src=.*') {
-    TransformScriptHrefElement $_
+    TransformScriptHrefElement $_ @{ "/_dprhtml/js/index.js" = "/dist/index.js" }
   } else {
     $_
   }
