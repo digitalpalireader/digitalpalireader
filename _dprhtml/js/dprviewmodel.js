@@ -607,11 +607,4 @@ function createCommands() {
 window.dprCommandList = dprCommandList
 window.__dprCommandsMap = __dprCommandsMap
 
-if (typeof module !== "undefined") {
-  module.exports = {
-    DprViewModel,
-    DprKeyboardHandler,
-  };
-}
-
 DprGlobals.singleton.DprViewModel = ViewModel

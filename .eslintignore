@@ -5,6 +5,7 @@ _dprhtml/js/external/**/*.js
 sw.temp.js
 sw.js
 _dprhtml/sw.js
+dist/*.js
 
 ##
 ## Blacklist existing code:

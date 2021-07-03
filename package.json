@@ -5,6 +5,7 @@
     "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack",
     "build:sw:injectManifest": "yarn run workbox injectManifest workbox-config.js",
     "build:sw:webpack": "yarn run webpack --config webpack.sw.config.js",
+    "build": "yarn run webpack --config webpack.config.js",
     "test": "jest",
     "lint": "eslint ."
   },
