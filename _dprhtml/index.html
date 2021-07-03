@@ -166,8 +166,8 @@
       var deploymentAppInsightsInstrumentationKey = '#{DeploymentAppInsightsInstrumentationKey}#';
 
       var environmentName = getDeploymentVar(deploymentEnvironmentName, 'localdev');
-      var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.0.0');
-      var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date());
+      var releaseNumber = getDeploymentVar(deploymentReleaseNumber, '0.00.0000.00');
+      var createdTimestamp = getDeploymentVar(deploymentCreatedTimestamp, new Date().toISOString().slice(0, 19).replace('T', ' ') + 'Z');
       const nullInstrumentationkey = '00000000-0000-0000-0000-000000000000';
       var appInsightsInstrumentationKey = getDeploymentVar(deploymentAppInsightsInstrumentationKey, nullInstrumentationkey);
 
@@ -506,6 +506,7 @@
     <script>progressBar.go(40)</script>
     <script src="/_dprhtml/js/external/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="/_dprhtml/js/external/jquery-resizable.js"></script>
+    <script src="/_dprhtml/js/external/ajax/libs/luxon/1.27.0/luxon.min.js"></script>
     <script>progressBar.go(50)</script>
     <script src="/_dprhtml/js/dpr_pal.js"></script>
     <script src="/_dprhtml/js/globalObject.js"></script>

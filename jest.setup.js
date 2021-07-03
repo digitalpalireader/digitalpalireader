@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 import jQuery from './_dprhtml/js/external/jquery-3.4.1.min.js'
 import knockout from './_dprhtml/js/external/ajax/libs/knockout/3.5.0/knockout-min.js'
 
-import { server } from './_dprhtml/js/mock-server/index.js'
+import server from './_dprhtml/js/mock-server/index.js'
 
 window.$ = jQuery
 window.jQuery = jQuery

@@ -137,11 +137,7 @@ export class OtherDialogsViewModel {
 
     xmlDoc.documentElement.appendChild(newNode);
 
-    //Navigation.ViewModel.updateBookmarks(xmlDoc);
     DPR1_format_mod.alertFlash('Bookmark Saved','green');
-
-    //DPR1_send_mod.sendUpdateBookmarks();
-
   }
 
   resetSettings() {

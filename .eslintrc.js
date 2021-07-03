@@ -22,7 +22,7 @@ module.exports = {
     'no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
     'max-len': ['error', { code: 140 }],
     'func-names': ['error', 'as-needed'],
-    'import/extensions': ['error', { js: 'always', json: 'always' }],
+    'import/extensions': ['error', { js: 'ignorePackages', json: 'ignorePackages' }],
   },
   globals: {
     importScripts: true,
@@ -30,5 +30,6 @@ module.exports = {
     self: true,
     ko: true,
     $: true,
+    luxon: true,
   },
 }

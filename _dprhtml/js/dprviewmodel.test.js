@@ -1,5 +1,4 @@
-/* eslint-disable no-param-reassign */
-const setupMockDprModules = (window) => {
+const setupMockDprModules = () => {
   window.DPR_convert_mod = { convert: () => { }, savePad: () => { } }
   window.DPR_sortaz_mod = { sortaz: () => { } }
   window.DPR_translit_mod = { toVel: () => { }, toUni: () => { }, translit: () => { } }
@@ -10,7 +9,7 @@ const setupMockDprModules = (window) => {
 
 describe('DPR_keypress', () => {
   test('capital R (but not lowercase r) resets settings', async () => {
-    setupMockDprModules(window)
+    setupMockDprModules()
 
     const dprVM = await import('./dprviewmodel.js')
 
