@@ -2,21 +2,21 @@
 
 const DPR_Web_Xml_Sidebar = (function () {
   async function updateHierarchy(depth) { // depth: 4=section, 3=sutta..., 2=vagga..., 1=volume..., 0=all
-    if (__navigationTabViewModel.updatingHierarchy) {
+    if (window.DPR_Globals.NavigationTabViewModel.updatingHierarchy) {
       return;
     }
 
-    __navigationTabViewModel.updatingHierarchy = true;
+    window.DPR_Globals.NavigationTabViewModel.updatingHierarchy = true;
 
-    var nikaya = __navigationTabViewModel.set();
-    var book = __navigationTabViewModel.book();
+    var nikaya = window.DPR_Globals.NavigationTabViewModel.set();
+    var book = window.DPR_Globals.NavigationTabViewModel.book();
     var nikbookhier = nikaya + book + DPR_G.G_hier;
     var xmlDoc = await XML_Load.loadXMLFileAsync(nikbookhier, 0);
 
-    var meta = (depth > 0  ? __navigationTabViewModel.meta() : 0);
-    var volume = (depth > 1 ? __navigationTabViewModel.volume() : 0);
-    var vagga = (depth > 2 ? __navigationTabViewModel.vagga() : 0);
-    var sutta = (depth > 3 ? __navigationTabViewModel.sutta() : 0);
+    var meta = (depth > 0  ? window.DPR_Globals.NavigationTabViewModel.meta() : 0);
+    var volume = (depth > 1 ? window.DPR_Globals.NavigationTabViewModel.volume() : 0);
+    var vagga = (depth > 2 ? window.DPR_Globals.NavigationTabViewModel.vagga() : 0);
+    var sutta = (depth > 3 ? window.DPR_Globals.NavigationTabViewModel.sutta() : 0);
 
     var axml,name,namea;
 
@@ -25,7 +25,7 @@ const DPR_Web_Xml_Sidebar = (function () {
     if (namea[0].childNodes[0] && namea[0].textContent.length > 1) name = namea[0].textContent.replace(/\{.*\}/,'').replace(/^  */, '').replace(/  *$/,'');
     else name = this.unnamed;
     var outname = DPR_translit_mod.translit(DPR_translit_mod.toUni(name));
-    __navigationTabViewModel.navTitle(outname);
+    window.DPR_Globals.NavigationTabViewModel.navTitle(outname);
 
     var u = xmlDoc.getElementsByTagName("h0");
     var v = u[meta].getElementsByTagName("h1");
@@ -35,35 +35,35 @@ const DPR_Web_Xml_Sidebar = (function () {
 
     switch(true) {
       case (depth < 1): // remake meta list
-        __navigationTabViewModel.meta(0);
-        this.updateDepth(u, __navigationTabViewModel.navMeta, 'h0n');
+        window.DPR_Globals.NavigationTabViewModel.meta(0);
+        this.updateDepth(u, window.DPR_Globals.NavigationTabViewModel.navMeta, 'h0n');
         // fall through.
 
       case (depth < 2): // remake volume list
-        __navigationTabViewModel.volume(0);
-        this.updateDepth(v, __navigationTabViewModel.navVolume, 'h1n');
+        window.DPR_Globals.NavigationTabViewModel.volume(0);
+        this.updateDepth(v, window.DPR_Globals.NavigationTabViewModel.navVolume, 'h1n');
         // fall through.
 
       case (depth < 3): // remake vaggalist
-        __navigationTabViewModel.vagga(0);
-        this.updateDepth(w, __navigationTabViewModel.navVagga, 'h2n');
+        window.DPR_Globals.NavigationTabViewModel.vagga(0);
+        this.updateDepth(w, window.DPR_Globals.NavigationTabViewModel.navVagga, 'h2n');
         // fall through.
 
       case (depth < 4): // remake sutta list on depth = 0, 1, 2, or 3
-        __navigationTabViewModel.sutta(0);
-        this.updateDepth(x, __navigationTabViewModel.navSutta, 'h3n');
+        window.DPR_Globals.NavigationTabViewModel.sutta(0);
+        this.updateDepth(x, window.DPR_Globals.NavigationTabViewModel.navSutta, 'h3n');
         // fall through.
 
       case (depth < 5): // remake section list
-        __navigationTabViewModel.section(0);
-        this.updateDepth(y, __navigationTabViewModel.navSection, 'h4n');
+        window.DPR_Globals.NavigationTabViewModel.section(0);
+        this.updateDepth(y, window.DPR_Globals.NavigationTabViewModel.navSection, 'h4n');
         break;
 
       default:
         console.error('Unsupported depth', depth);
     }
 
-    __navigationTabViewModel.updatingHierarchy = false;
+    window.DPR_Globals.NavigationTabViewModel.updatingHierarchy = false;
   }
 
   function updateDepth(heir, selectList, tag) {
@@ -120,16 +120,16 @@ const DPR_Web_Xml_Sidebar = (function () {
         lista = this.makeTitleSelect(u, 'h0n');
 
         var listNode = $('#tsoPmeta');
-        __searchTabViewModel.metaList.removeAll();
+        window.DPR_Globals.SearchTabViewModel.metaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __searchTabViewModel.metaList.push({label: this.unnamed, value: 0});
+          window.DPR_Globals.SearchTabViewModel.metaList.push({label: this.unnamed, value: 0});
           $('#tsoP1').hide();
         }
 
         else {
           for (var idx in lista) {
-            __searchTabViewModel.metaList.push({label: lista[idx], value: idx});
+            window.DPR_Globals.SearchTabViewModel.metaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP1').show();
         }
@@ -137,14 +137,14 @@ const DPR_Web_Xml_Sidebar = (function () {
         lista = this.makeTitleSelect(v, 'h1n');
         var listNode = $('#tsoPvolume');
         listNode.empty();
-        __searchTabViewModel.volumeList.removeAll();
+        window.DPR_Globals.SearchTabViewModel.volumeList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __searchTabViewModel.volumeList.push({label: this.unnamed, value: 0});
+          window.DPR_Globals.SearchTabViewModel.volumeList.push({label: this.unnamed, value: 0});
           $('#tsoP2').hide();
         } else {
           for (var idx in lista) {
-            __searchTabViewModel.volumeList.push({label: lista[idx], value: idx});
+            window.DPR_Globals.SearchTabViewModel.volumeList.push({label: lista[idx], value: idx});
           }
           $('#tsoP2').show();
         }
@@ -152,27 +152,27 @@ const DPR_Web_Xml_Sidebar = (function () {
       case (depth < 3): // remake vaggalist
         lista = this.makeTitleSelect(w, 'h2n');
         var listNode = $('#tsoPvagga');
-        __searchTabViewModel.vaggaList.removeAll();
+        window.DPR_Globals.SearchTabViewModel.vaggaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __searchTabViewModel.vaggaList.push({label: this.unnamed, value: 0});
+          window.DPR_Globals.SearchTabViewModel.vaggaList.push({label: this.unnamed, value: 0});
           $('#tsoP3').hide();
         } else {
           for (var idx in lista) {
-            __searchTabViewModel.vaggaList.push({label: lista[idx], value: idx});
+            window.DPR_Globals.SearchTabViewModel.vaggaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP3').show();
         }
       case (depth < 4): // remake sutta list on depth = 0, 2, or 3
         lista = this.makeTitleSelect(x, 'h3n');
-        __searchTabViewModel.suttaList.removeAll();
+        window.DPR_Globals.SearchTabViewModel.suttaList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __searchTabViewModel.suttaList.push({label: this.unnamed, value: 0});
+          window.DPR_Globals.SearchTabViewModel.suttaList.push({label: this.unnamed, value: 0});
           $('#tsoP4').hide();
         } else {
           for (var idx in lista) {
-            __searchTabViewModel.suttaList.push({label: lista[idx], value: idx});
+            window.DPR_Globals.SearchTabViewModel.suttaList.push({label: lista[idx], value: idx});
           }
           $('#tsoP4').show();
         }
@@ -180,14 +180,14 @@ const DPR_Web_Xml_Sidebar = (function () {
 
         lista = this.makeTitleSelect(y, 'h4n');
 
-        __searchTabViewModel.sectionList.removeAll();
+        window.DPR_Globals.SearchTabViewModel.sectionList.removeAll();
 
         if (lista.length == 1 && lista[0] == this.unnamed) {
-          __searchTabViewModel.sectionList.push({label: this.unnamed, value: 0});
+          window.DPR_Globals.SearchTabViewModel.sectionList.push({label: this.unnamed, value: 0});
           $('#tsoP5').hide();
         } else {
           for (var idx = 0; idx < lista.length; idx++) {
-            __searchTabViewModel.sectionList.push({label: lista[idx], value: idx});
+            window.DPR_Globals.SearchTabViewModel.sectionList.push({label: lista[idx], value: idx});
           }
           $('#tsoP5').show();
         }
@@ -195,7 +195,7 @@ const DPR_Web_Xml_Sidebar = (function () {
     }
 
     if ($('#tsoPart input[name=tsoPR]:visible').length > 0 && $('#tsoPart input[name=tsoPR]:visible:checked').length == 0) {
-      __searchTabViewModel.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
+      window.DPR_Globals.SearchTabViewModel.partialValue($('#tsoPart input[name=tsoPR]:visible:first')[0].value);
     }
 
   }
