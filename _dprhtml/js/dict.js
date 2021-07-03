@@ -14,10 +14,10 @@ const DPR_Dict = (function () {
     const savedDictionarySearchParams = JSON.parse(DPR_prefload_mod.loadDictionarySearchSettings())
     const getDictionarySearchParamValue = n => urlDictionarySearchParams.get(n) || savedDictionarySearchParams[n]
 
-    __dictionaryTabViewModel.type(DPR_G.G_dictType = getDictionarySearchParamValue('type'));
-    __dictionaryTabViewModel.query(DPR_G.G_dictQuery = decodeURIComponent(getDictionarySearchParamValue('query')));
-    __dictionaryTabViewModel.options(DPR_G.G_dictOpts = getDictionarySearchParamValue('opts').split(','));
-    __dictionaryTabViewModel.entry(DPR_G.G_dictEntry = decodeURIComponent(getDictionarySearchParamValue('entry')));
+    window.DPR_Globals.DictionaryTabViewModel.type(DPR_G.G_dictType = getDictionarySearchParamValue('type'));
+    window.DPR_Globals.DictionaryTabViewModel.query(DPR_G.G_dictQuery = decodeURIComponent(getDictionarySearchParamValue('query')));
+    window.DPR_Globals.DictionaryTabViewModel.options(DPR_G.G_dictOpts = getDictionarySearchParamValue('opts').split(','));
+    window.DPR_Globals.DictionaryTabViewModel.entry(DPR_G.G_dictEntry = decodeURIComponent(getDictionarySearchParamValue('entry')));
   }
 
   async function startDictLookup(sectionId,dictType,dictQuery,dictOpts,dictEntry) {
