@@ -55,7 +55,7 @@ function TransformScriptHrefElement
     return "Error - unexpected format for script src."
   }
 
-  $originalFileName = ($Matches.2).ToLower()
+  $originalFileName = $Matches.2
   $retargettedFileName = if ($retargetMap.ContainsKey($originalFileName)) { $retargetMap[$originalFileName] } else { $originalFileName }
   $fileName = AppendHashToFileName $retargettedFileName
   rename-file $retargettedFileName
