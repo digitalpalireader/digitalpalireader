@@ -1,6 +1,4 @@
-'use strict';
-
-DPR_G.saFiles = [
+export default [
   'dict/index.js',
   'dict/A-41.xml',
   'dict/a-61.xml',
@@ -1120,5 +1118,5 @@ DPR_G.saFiles = [
   'roots/yuD-797544.xml',
   'roots/yuj-79756A.xml',
   'roots/yup-797570.xml',
-  'roots/zWIv-7A574976.xml'
+  'roots/zWIv-7A574976.xml',
 ]

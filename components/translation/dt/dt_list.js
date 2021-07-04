@@ -1,6 +1,4 @@
-'use strict';
-
-DPR_G.dtFiles = [
+export default [
   'chant_index.html',
   'de_txt_index.html',
   'ebook_index.html',
@@ -1300,4 +1298,4 @@ DPR_G.dtFiles = [
   'images/actions/go-previous-symbolic-orange.png',
   'images/actions/go-top-symbolic-orange.png',
   'images/actions/search-symbolic-orange.png',
-];
+]

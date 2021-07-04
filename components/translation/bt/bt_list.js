@@ -1,6 +1,4 @@
-'use strict';
-
-DPR_G.btFiles = [
+export default [
   'index.html',
   'js.js',
   'an/an_e_1.htm',
@@ -2353,5 +2351,5 @@ DPR_G.btFiles = [
   'vi/vi_p_6.htm',
   'vi/vi_p_7.htm',
   'vi/vi_p_8.htm',
-  'vi/vi_p_9.htm'
-];
+  'vi/vi_p_9.htm',
+]

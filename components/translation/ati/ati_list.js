@@ -1,6 +1,4 @@
-'use strict';
-
-DPR_G.atiFiles = [
+export default [
   'css/bmc.css',
   'css/dropDown2.css',
   'css/handheld.css',
@@ -387,4 +385,4 @@ DPR_G.atiFiles = [
   'tipitaka/vin/sv/bhikkhu-pati-intro.html',
   'tipitaka/vin/sv/bhikkhu-pati.html',
   'tipitaka/vin/sv/bhikkhuni-pati.html',
-];
+]

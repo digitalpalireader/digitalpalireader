@@ -78,13 +78,6 @@ _dprhtml/js/web/send_sidebar.js
 _dprhtml/js/web/xml_sidebar.js
 _dprhtml/js/xml_load.js
 _dprhtml/js/xml.js
-components/language/en/en_list.js
-components/language/sa/sa_list.js
-components/tipitaka/my/my_list.js
-components/tipitaka/th/th_list.js
-components/translation/ati/ati_list.js
-components/translation/bt/bt_list.js
-components/translation/dt/dt_list.js
 en/cepd/index.js
 en/cped/index.js
 sa/dict/index.js

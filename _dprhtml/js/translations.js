@@ -9,7 +9,7 @@ const DPR_Translations = (function () {
     trProps = {
       ati: {
         id: 0,
-        baseUrl: '/_external/translations/ati',
+        baseUrl: window.DPR_Globals.ATITranslationsBaseUrl,
         path: '/tipitaka',
         icon: `ati.ico`,
         background: 'white',
@@ -25,7 +25,7 @@ const DPR_Translations = (function () {
       },
       bt: {
         id: 2,
-        baseUrl: '/_external/translations/bt-bdhrs',
+        baseUrl: window.DPR_Globals.BTTranslationsBaseUrl,
         path: '',
         enabled: true,
         icon: `wisdom.png`,
@@ -42,7 +42,7 @@ const DPR_Translations = (function () {
       },
       dt: {
         id: 4,
-        baseUrl: `/_external/translations/dt`,
+        baseUrl: window.DPR_Globals.DTTranslationsBaseUrl,
         path: '/suttas',
         icon: `dt.ico`,
         background: 'white',
