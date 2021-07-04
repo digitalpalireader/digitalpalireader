@@ -12,10 +12,6 @@ dist/*.js
 ## - New files must pass linting.
 ## - Remove old files that have been moved over.
 ##
-_dprhtml/features/bottom-pane/init.js
-_dprhtml/features/installation/init.js
-_dprhtml/features/other-dialogs/init.js
-_dprhtml/features/settings-dialog/init.js
 _dprhtml/js/analysis_arrays.js
 _dprhtml/js/analysis_declension.js
 _dprhtml/js/analysis_function.js

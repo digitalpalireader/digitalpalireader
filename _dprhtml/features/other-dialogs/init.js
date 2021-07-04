@@ -1,166 +1,207 @@
 import * as DprGlobals from '../../dpr_globals.js'
-import { InstallationViewModel } from '../installation/init.js';
 import * as Navigation from '../navigation/init.js'
 
 export class OtherDialogsViewModel {
   constructor() {
-    this.quicklinkInput = ko.observable();
-    this.quicklinkInNewTab = ko.observable(false);
-    this.bookmarkName = ko.observable();
-    this.sectionId = DPR_Chrome.getPrimarySectionId()
+    this.quicklinkInput = ko.observable()
+    this.quicklinkInNewTab = ko.observable(false)
+    this.bookmarkName = ko.observable()
+    this.sectionId = window.DPR_Chrome.getPrimarySectionId()
   }
 
   showQuickLinksDialog() {
-    this.quicklinkInput('');
-    this.quicklinkInNewTab(false);
-    $('#quicklink-dialog-root').on('shown.bs.modal', () => $('#dialog-quicklinkInput').trigger('focus'));
-    $('#quicklink-dialog-root').modal('show');
+    this.quicklinkInput('')
+    this.quicklinkInNewTab(false)
+    $('#quicklink-dialog-root').on('shown.bs.modal', () => $('#dialog-quicklinkInput').trigger('focus'))
+    $('#quicklink-dialog-root').modal('show')
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   async sendQuickLinkFromDialog() {
-    var place = this.quicklinkInput();
-    var outplace = DPR_navigation_common_mod.convertShortLink(place);
-    if(outplace[0] === false) {
-      return DPR1_format_mod.alertFlash(outplace[1], outplace[2]);
+    const place = this.quicklinkInput()
+    const outplace = window.DPR_navigation_common_mod.convertShortLink(place)
+    if (outplace[0] === false) {
+      window.DPR1_format_mod.alertFlash(outplace[1], outplace[2])
+      return
     }
-    this.quicklinkInNewTab() ? await DPR1_send_mod.openPlace(this.sectionId, outplace,null,null,'new') : await DPR1_send_mod.openPlace(this.sectionId, outplace);
+
+    if (this.quicklinkInNewTab()) {
+      await window.DPR1_send_mod.openPlace(this.sectionId, outplace, null, null, 'new')
+    } else {
+      await window.DPR1_send_mod.openPlace(this.sectionId, outplace)
+    }
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   gotoHome() {
-    DPR1_chrome_mod.openDPRTab(DPR_PAL.dprHomePage, 'DPR-main', 1);
+    window.DPR1_chrome_mod.openDPRTab(window.DPR_PAL.dprHomePage, 'DPR-main', 1)
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   gotoPrevDictEntry() {
-    //TO DO
-    if (dBot.getElementById('tout')) { dBot.getElementById('tout').onclick(); }
-    else if (document.getElementById('pSect')) document.getElementById('pSect').onmouseup();
+    // TODO: Following was the code. But I cannot find bout or dBot
+    const dBot = undefined
+    if (dBot.getElementById('tout')) {
+      dBot.getElementById('tout').onclick()
+    } else if (document.getElementById('pSect')) {
+      document.getElementById('pSect').onmouseup()
+    }
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   gotoNextDictEntry() {
-    //TO DO
-    if (dBot.getElementById('bout')) { dBot.getElementById('bout').onclick(); }
-    else if (document.getElementById('nSect')) document.getElementById('nSect').onmouseup();
+    // TODO: Following was the code. But I cannot find bout or dBot
+    const dBot = undefined
+    if (dBot.getElementById('bout')) {
+      dBot.getElementById('bout').onclick()
+    } else if (document.getElementById('nSect')) {
+      document.getElementById('nSect').onmouseup()
+    }
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   toggleDPRSidebar() {
-    DPR_Chrome.toggleDPRSidebar();
-    event.preventDefault();
+    window.DPR_Chrome.toggleDPRSidebar()
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   showBottomPane(key) {
-    DPR1_chrome_mod.DPRShowBottomPane(window.BottomPaneTabIds[key - 1]);
-    event.preventDefault();
+    window.DPR1_chrome_mod.DPRShowBottomPane(window.BottomPaneTabIds[key - 1])
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   sendToConvert() {
-    if (window.getSelection().toString() != '') {
-      window.DPR_convert_mod.sendtoconvert(window.getSelection().toString() + '');
-      this.showBottomPane(2);
+    if (window.getSelection().toString() !== '') {
+      window.DPR_convert_mod.sendtoconvert(window.getSelection().toString())
+      this.showBottomPane(2)
+    } else if (document.getElementById('convi')) {
+      window.DPR_convert_mod.sendtoconvert(document.getElementById('convi').innerHTML)
+      this.showBottomPane(2)
+    } else {
+      window.DPR1_format_mod.alertFlash('You must select some text to send to the convertor', 'yellow')
     }
-    else if (document.getElementById('convi')) {
-      window.DPR_convert_mod.sendtoconvert(document.getElementById('convi').innerHTML);
-      this.showBottomPane(2);
-    }
-    else DPR1_format_mod.alertFlash('You must select some text to send to the convertor', 'yellow');
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   sendToTextpad() {
-    if (window.getSelection().toString() != '') {
-      window.DPR_convert_mod.sendtoPad(window.getSelection().toString() + '');
-      this.showBottomPane(3);
+    if (window.getSelection().toString() !== '') {
+      window.DPR_convert_mod.sendtoPad(window.getSelection().toString())
+      this.showBottomPane(3)
+    } else if (document.getElementById('convi')) {
+      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML)
+      this.showBottomPane(3)
+    } else {
+      window.DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow')
     }
-    else if (document.getElementById('convi')) {
-      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML);
-      this.showBottomPane(3);
-    }
-    else DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow');
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   appendToTextpad() {
-    if (window.getSelection().toString() != '') {
-      window.DPR_convert_mod.sendtoPad(window.getSelection().toString() + '', true);
-      this.showBottomPane(3);
+    if (window.getSelection().toString() !== '') {
+      window.DPR_convert_mod.sendtoPad(window.getSelection().toString(), true)
+      this.showBottomPane(3)
+    } else if (document.getElementById('convi')) {
+      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML, true)
+      this.showBottomPane(3)
+    } else {
+      window.DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow')
     }
-    else if (document.getElementById('convi')) {
-      window.DPR_convert_mod.sendtoPad(document.getElementById('convi').innerHTML, true);
-      this.showBottomPane(3);
-    }
-    else DPR1_format_mod.alertFlash('You must select some text to send to the textpad', 'yellow');
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   displayPaliQuote() {
-    DPR_bv_mod.showBv();
-    $('#paliquote-dialog-root').modal('show');
+    window.DPR_bv_mod.showBv()
+    $('#paliquote-dialog-root').modal('show')
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   showBookmarksDialog() {
-    $('#bookmark-dialog-root').modal('show');
+    $('#bookmark-dialog-root').modal('show')
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   sendBookmarkFromDialog() {
+    const loc = Navigation.ViewModel.placeArray()
+    const name = this.bookmarkName()
+    const desc = ''
 
-    var loc = Navigation.ViewModel.placeArray();
-    var name = this.bookmarkName();
-    var desc = "";
-    var check = {value: false};                  // default the checkbox to false
+    const scroll = document.getElementById('maf').scrollTop
 
-    var scroll = document.getElementById('maf').scrollTop;
+    let cont = window.DPR_bookmarks_mod.getBookmarks()
+    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>')
+    const parser = new DOMParser()
+    const xmlDoc = parser.parseFromString(cont, 'text/xml')
 
-    var cont = DPR_bookmarks_mod.getBookmarks();
-    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-    var parser=new DOMParser();
-    var xmlDoc = parser.parseFromString(cont,'text/xml');
+    const newNode = xmlDoc.createElement('bookmark')
+    const newNodeName = xmlDoc.createElement('name')
+    const newNodeLoc = xmlDoc.createElement('location')
+    const newNodeScroll = xmlDoc.createElement('scroll')
+    const newNodeDesc = xmlDoc.createElement('description')
 
-    var newNode = xmlDoc.createElement('bookmark');
-    var newNodeName = xmlDoc.createElement('name');
-    var newNodeLoc = xmlDoc.createElement('location');
-    var newNodeScroll = xmlDoc.createElement('scroll');
-    var newNodeDesc = xmlDoc.createElement('description');
+    const tLoc = xmlDoc.createTextNode(loc)
+    newNodeLoc.appendChild(tLoc)
+    newNode.appendChild(newNodeLoc)
 
-    //document.form.nik.selectedIndex + '#' + document.form.book.selectedIndex  + '#' + document.form.meta.selectedIndex  + '#' + document.form.volume.selectedIndex  + '#' + document.form.vagga.selectedIndex  + '#' + document.form.sutta.selectedIndex + '#' + document.form.section.selectedIndex + '#' + hier;
+    const tName = xmlDoc.createTextNode(name)
+    newNodeName.appendChild(tName)
+    newNode.appendChild(newNodeName)
 
-    var tLoc = xmlDoc.createTextNode(loc);
-    newNodeLoc.appendChild(tLoc);
-    newNode.appendChild(newNodeLoc);
+    const tScroll = xmlDoc.createTextNode(scroll)
+    newNodeScroll.appendChild(tScroll)
+    newNode.appendChild(newNodeScroll)
 
-    var tName = xmlDoc.createTextNode(name);
-    newNodeName.appendChild(tName);
-    newNode.appendChild(newNodeName);
+    const tDesc = xmlDoc.createTextNode(desc)
+    newNodeDesc.appendChild(tDesc)
+    newNode.appendChild(newNodeDesc)
 
-    var tScroll = xmlDoc.createTextNode(scroll);
-    newNodeScroll.appendChild(tScroll);
-    newNode.appendChild(newNodeScroll);
+    xmlDoc.documentElement.appendChild(newNode)
 
-    var tDesc = xmlDoc.createTextNode(desc);
-    newNodeDesc.appendChild(tDesc);
-    newNode.appendChild(newNodeDesc);
-
-    xmlDoc.documentElement.appendChild(newNode);
-
-    DPR1_format_mod.alertFlash('Bookmark Saved','green');
+    window.DPR1_format_mod.alertFlash('Bookmark Saved', 'green')
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   resetSettings() {
-    DPR_prefload_mod.resetAllDprSettings();
-    window.location.reload();
+    window.DPR_prefload_mod.resetAllDprSettings()
+    window.location.reload()
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   openNewQuizz() {
-    // TODO when quizz is implemented
+    // TODO: when quiz is implemented
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   openHelp() {
-    $('#helpDialog').modal('show');
+    $('#helpDialog').modal('show')
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   openHelpVideo() {
-    DPR1_chrome_mod.openDPRTab('https://www.youtube.com/watch?v=qP2i7xY2sRI', 'DPR-help', 0);
+    window.DPR1_chrome_mod.openDPRTab('https://www.youtube.com/watch?v=qP2i7xY2sRI', 'DPR-help', 0)
   }
 
+  // NOTE: Needs to be a instance member as it is called from ko
+  // eslint-disable-next-line class-methods-use-this
   launchFeedbackForm() {
-    DPR1_chrome_mod.openDPRTab($(".feedback-form-link").attr("href"), 'DPR-feedback', 0);
+    window.DPR1_chrome_mod.openDPRTab($('.feedback-form-link').attr('href'), 'DPR-feedback', 0)
   }
 }
 
-export const ViewModel = new OtherDialogsViewModel();
+export const ViewModel = new OtherDialogsViewModel()
 DprGlobals.singleton.OtherDialogsViewModel = ViewModel

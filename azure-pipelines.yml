@@ -23,12 +23,6 @@ steps:
         yarn --no-progress --non-interactive --frozen-lockfile
 
   - task: CmdLine@2
-    displayName: Build service worker...
-    inputs:
-      script: |
-        yarn build:sw
-
-  - task: CmdLine@2
     displayName: Build index.js
     inputs:
       script: |
@@ -43,6 +37,12 @@ steps:
       failOnStderr: true
       pwsh: true
       workingDirectory: '$(Build.SourcesDirectory)'
+
+  - task: CmdLine@2
+    displayName: Build service worker...
+    inputs:
+      script: |
+        yarn build:sw
 
   - task: Bash@3
     displayName: Create build artifact

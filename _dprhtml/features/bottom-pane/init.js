@@ -2,46 +2,49 @@ import * as DprGlobals from '../../dpr_globals.js'
 
 export class BottomPaneTabsViewModel {
   constructor() {
-    this.isDTabSelected = ko.observable(true);
-    this.isCvTabSelected = ko.observable(false);
-    this.isTpTabSelected = ko.observable(false);
-    this.isTrTabSelected = ko.observable(false);
-    this.isCjTabSelected = ko.observable(false);
+    this.isDTabSelected = ko.observable(true)
+    this.isCvTabSelected = ko.observable(false)
+    this.isTpTabSelected = ko.observable(false)
+    this.isTrTabSelected = ko.observable(false)
+    this.isCjTabSelected = ko.observable(false)
   }
 
   updateActiveTabId(tabId) {
     Object
       .entries(this)
-      .filter(([n, _]) => n.indexOf("TabSelected") !== -1)
-      .forEach(([_, fn]) => fn(false));
+      .filter(([n, _]) => n.indexOf('TabSelected') !== -1)
+      .forEach(([_, fn]) => fn(false))
 
-    this[`is${tabId}TabSelected`](true);
+    this[`is${tabId}TabSelected`](true)
   }
 
   updateActiveTab(_, event) {
-    this.updateActiveTabId($(event.currentTarget).data("tabid"));
+    this.updateActiveTabId($(event.currentTarget).data('tabid'))
   }
 }
 
-const wrapWithTelemetryAsync = function(fn) {
-  return async function() {
+const wrapWithTelemetryAsync = function (fn) {
+  return async function _(...args) {
     try {
-      appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`,  properties: { }});
-      return await fn.apply(this, arguments);
+      window.appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`, properties: { } })
+      return await fn.apply(this, args)
     } catch (e) {
-      console.log('>>>> wrapWithTelemetryAsync', e);
+      // eslint-disable-next-line no-console
+      console.log('>>>> wrapWithTelemetryAsync error', e)
     }
-  };
-};
 
-const wrapWithTelemetry = function(fn) {
-  return function() {
-    appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`,  properties: { }});
-    return fn.apply(this, arguments);
-  };
-};
+    return null
+  }
+}
 
-window.BottomPaneTabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj'];
+const wrapWithTelemetry = function (fn) {
+  return function _(...args) {
+    window.appInsights.trackEvent({ name: `Bottom Pane: ${fn.name}`, properties: { } })
+    return fn.apply(this, args)
+  }
+}
+
+window.BottomPaneTabIds = ['D', 'Cv', 'Tp', 'Tr', 'Cj']
 
 window.DPR_BottomPane = {
   cvConvert: wrapWithTelemetry(window.DPR_convert_mod.convert),
@@ -59,5 +62,5 @@ window.DPR_BottomPane = {
   cjInsertConj: wrapWithTelemetry(window.DPR_conjugate_mod.insertConj),
 }
 
-export const ViewModel = new BottomPaneTabsViewModel();
+export const ViewModel = new BottomPaneTabsViewModel()
 DprGlobals.singleton.BottomPaneTabsViewModel = ViewModel
