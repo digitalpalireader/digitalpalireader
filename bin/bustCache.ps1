@@ -20,7 +20,7 @@ function AppendHashToFileName
   "$($oldFilePathWithoutExtension)$($newExtension)"
 }
 
-function rename-file
+function copy-file
 {
   param($filePath)
 
@@ -28,7 +28,7 @@ function rename-file
 
   $fileFullPath = (Join-Path $root $filePath)
   $newFileFullPath = (Join-Path $root $newFilePath)
-  Rename-Item $fileFullPath $newFileFullPath -Verbose
+  Copy-Item $fileFullPath $newFileFullPath -Verbose
 }
 
 function FixLinkRelElement
@@ -40,7 +40,7 @@ function FixLinkRelElement
   }
 
   $fileName = AppendHashToFileName $Matches.1
-  rename-file $Matches.1
+  copy-file $Matches.1
   return "    <link rel=""stylesheet"" href=""$fileName"" />"
 }
 
@@ -58,7 +58,7 @@ function TransformScriptHrefElement
   $originalFileName = $Matches.2
   $retargettedFileName = if ($retargetMap.ContainsKey($originalFileName)) { $retargetMap[$originalFileName] } else { $originalFileName }
   $fileName = AppendHashToFileName $retargettedFileName
-  rename-file $retargettedFileName
+  copy-file $retargettedFileName
   return "    <script $($Matches.1)src=""$fileName""></script>"
 }
 
