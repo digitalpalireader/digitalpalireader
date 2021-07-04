@@ -13,9 +13,6 @@ import * as DprComponentRegistry from './_dprhtml/features/installation/componen
 // eslint-disable-next-line no-console
 console.log('DPR Service Worker version: #{DeploymentReleaseNumber}#')
 
-// eslint-disable-next-line no-use-before-define
-const self = self
-
 WBC.setCacheNameDetails({
   prefix: 'dpr',
   suffix: 'v5',

@@ -3,7 +3,7 @@ module.exports = {
   entry: './sw.temp.js',
   devtool: 'source-map',
   output: {
-    filename: '../sw.js',
+    filename: './sw.js',
     clean: true,
   },
 }

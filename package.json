@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "yarn run live-server --port=8085 --quiet",
-    "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack",
+    "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack && yarn run copyfiles ./dist/sw.js ./",
     "build:sw:injectManifest": "yarn run workbox injectManifest workbox-config.js",
     "build:sw:webpack": "yarn run webpack --config webpack.sw.config.js",
     "build": "yarn run webpack --config webpack.config.js",
@@ -27,6 +27,7 @@
     "@types/jest": "^26.0.21",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "copyfiles": "^2.4.1",
     "eslint": "^7.29.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",

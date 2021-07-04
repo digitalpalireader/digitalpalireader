@@ -23,13 +23,13 @@ export class DprGlobals {
 
   createReadOnlyProperties() {
     const properties = [
-      ['ATITranslationsBaseUrl', '/_external/translations/ati'],
-      ['BTTranslationsBaseUrl', '/_external/translations/bt-bdhrs'],
-      ['DTTranslationsBaseUrl', '/_external/translations/dt'],
+      ['ATITranslationsBaseUrl', '/_external/translations/ati'], // Shared with translations.js
+      ['BTTranslationsBaseUrl', '/_external/translations/bt-bdhrs'], // Shared with translations.js
+      ['DTTranslationsBaseUrl', '/_external/translations/dt'], // Shared with translations.js
     ]
 
-    properties.forEach((value, key) => {
-      Object.defineProperty(this, key, {
+    properties.forEach(([name, value], _index) => {
+      Object.defineProperty(this, name, {
         get() {
           return value
         },
@@ -61,4 +61,4 @@ export class DprGlobals {
 }
 
 export const singleton = new DprGlobals()
-window.DPR_Globals = singleton
+self.DPR_Globals = singleton

@@ -458,7 +458,7 @@ const DPR_Chrome_UI = (function () {
 
     const html = `
     ${splitter}
-    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" ${paneCommandDataKeyName}="{}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.trProps[sInfo.type].background}">
+    <div class="main-pane-container-section" id="${getSectionElementIdName(sPos)}" ${paneCommandDataKeyName}="{}" data-dpruri="${DPR_Translations.makeUri(sInfo)}" style="background: ${DPR_Translations.getTrProps()[sInfo.type].background}">
       ${closeButton}
       ${content}
     </div>`;

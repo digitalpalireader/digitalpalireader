@@ -23,6 +23,7 @@ module.exports = {
     'max-len': ['error', { code: 140 }],
     'func-names': ['error', 'as-needed'],
     'import/extensions': ['error', { js: 'ignorePackages', json: 'ignorePackages' }],
+    'no-restricted-globals': ['error', 'event', 'fdescribe'],
   },
   globals: {
     importScripts: true,

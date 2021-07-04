@@ -1,59 +1,51 @@
 'use strict';
 
 const DPR_Translations = (function () {
-  const retargetTranslationsBaseUrl = x => x.replace(/^(https:\/\/)(tipitaka\.digitalpalireader\.online)(\/.*)$/i, `${DPR_PAL.getTranslationsBaseUrl()}$3`)
+  const trProps = {
+    ati: {
+      id: 0,
+      baseUrl: '/_external/translations/ati', // NOTE: Shared with dpr_globals.js.
+      path: '/tipitaka',
+      icon: `ati.ico`,
+      background: 'white',
+      priority: 3,
+    },
+    abt: {
+      id: 1,
+      baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
+      path: '',
+      icon: `abt.gif`,
+      background: 'rgb(255, 248, 240)',
+      priority: 4,
+    },
+    bt: {
+      id: 2,
+      baseUrl: '/_external/translations/bt-bdhrs',  // NOTE: Shared with dpr_globals.js.
+      path: '',
+      enabled: true,
+      icon: `wisdom.png`,
+      background: 'transparent',
+      priority: 2,
+    },
+    dpr: {
+      id: 3,
+      baseUrl: `Not yet implemented`,
+      path: '',
+      icon: `?`,
+      background: 'transparent',
+      priority: 1,
+    },
+    dt: {
+      id: 4,
+      baseUrl: '/_external/translations/dt',  // NOTE: Shared with dpr_globals.js.
+      path: '/suttas',
+      icon: `dt.ico`,
+      background: 'white',
+      priority: 3,
+    },
+  }
 
-  let trProps = null;
-
-  const createTrProps = () => {
-    trProps = {
-      ati: {
-        id: 0,
-        baseUrl: window.DPR_Globals.ATITranslationsBaseUrl,
-        path: '/tipitaka',
-        icon: `ati.ico`,
-        background: 'white',
-        priority: 3,
-      },
-      abt: {
-        id: 1,
-        baseUrl: `https://www.ancient-buddhist-texts.net/Texts-and-Translations`,
-        path: '',
-        icon: `abt.gif`,
-        background: 'rgb(255, 248, 240)',
-        priority: 4,
-      },
-      bt: {
-        id: 2,
-        baseUrl: window.DPR_Globals.BTTranslationsBaseUrl,
-        path: '',
-        enabled: true,
-        icon: `wisdom.png`,
-        background: 'transparent',
-        priority: 2,
-      },
-      dpr: {
-        id: 3,
-        baseUrl: `Not yet implemented`,
-        path: '',
-        icon: `?`,
-        background: 'transparent',
-        priority: 1,
-      },
-      dt: {
-        id: 4,
-        baseUrl: window.DPR_Globals.DTTranslationsBaseUrl,
-        path: '/suttas',
-        icon: `dt.ico`,
-        background: 'white',
-        priority: 3,
-      },
-    }
-
-    Object.keys(trProps).forEach(k => trProps[k].baseUrl = retargetTranslationsBaseUrl(trProps[k].baseUrl))
-  };
-
-  createTrProps();
+  const getTrProps = () => trProps
 
   const resolveUri = sInfo => `${trProps[sInfo.type].baseUrl}${trProps[sInfo.type].path}/${sInfo.place}`;
 
@@ -1013,8 +1005,7 @@ const DPR_Translations = (function () {
   }
 
   return {
-    trProps,
-    createTrProps,
+    getTrProps,
     parsePlace,
     addtrans,
     resolveUri,

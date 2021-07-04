@@ -8,9 +8,6 @@ const componentTypeTranslation = 'translation'
 const componentTypeTipitaka = 'tipitaka'
 const componentTypeLanguage = 'language'
 
-// eslint-disable-next-line no-use-before-define
-const self = window || self
-
 export const registry = [
   {
     id: 'my',
@@ -22,7 +19,7 @@ export const registry = [
     sizeMB: 113,
     getFileList: async () => {
       const files = await import('../../../components/tipitaka/my/my_list.js')
-      return files.map((f) => `/tipitaka/my/${f}.xml`)
+      return files.default.map((f) => `/tipitaka/my/${f}.xml`)
     },
   },
   {
@@ -35,7 +32,7 @@ export const registry = [
     sizeMB: 21,
     getFileList: async () => {
       const files = await import('../../../components/tipitaka/th/th_list.js')
-      return files.map((f) => `/tipitaka/th/${f}.xml`)
+      return files.default.map((f) => `/tipitaka/th/${f}.xml`)
     },
   },
   {
@@ -48,7 +45,7 @@ export const registry = [
     sizeMB: 19,
     getFileList: async () => {
       const files = await import('../../../components/language/en/en_list.js')
-      return files.map((f) => `/en/${f}`)
+      return files.default.map((f) => `/en/${f}`)
     },
   },
   {
@@ -61,7 +58,7 @@ export const registry = [
     sizeMB: 94,
     getFileList: async () => {
       const files = await import('../../../components/language/sa/sa_list.js')
-      return files.map((f) => `/sa/${f}`)
+      return files.default.map((f) => `/sa/${f}`)
     },
   },
   {
@@ -74,7 +71,7 @@ export const registry = [
     sizeMB: 53,
     getFileList: async () => {
       const files = await import('../../../components/translation/bt/bt_list.js')
-      return files.map((x) => `${DprGlobals.singleton.BTTranslationsBaseUrl}/${x}`)
+      return files.default.map((x) => `${DprGlobals.singleton.BTTranslationsBaseUrl}/${x}`)
     },
   },
   {
@@ -100,7 +97,7 @@ export const registry = [
     sizeMB: 6,
     getFileList: async () => {
       const files = await import('../../../components/translation/ati/ati_list.js')
-      return files.map((x) => `${DprGlobals.singleton.ATITranslationsBaseUrl}/${x}`)
+      return files.default.map((x) => `${DprGlobals.singleton.ATITranslationsBaseUrl}/${x}`)
     },
   },
 ]
