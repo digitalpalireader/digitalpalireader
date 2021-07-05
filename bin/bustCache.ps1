@@ -75,7 +75,7 @@ $contents = Get-Content $HtmlFilePath | ForEach-Object {
 
 # BEGIN: HACK
 # NOTE: This is a temporary but stable solution. Once we get webpack, all this gimmickery goes away.
-$chromeJsFileName = Get-ChildItem -Recurse -Filter "chrome.*js" $root
+$chromeJsFileName = Get-ChildItem -Recurse -Filter "chrome.*.js" $root
 if (-not $chromeJsFileName) {
   throw 'Did not find chrome.js'
 } else {

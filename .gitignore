@@ -1,5 +1,6 @@
 *.map
-/dist
+/public/
+/dist/
 sw.temp.js
 sw.js.map
 package-lock.json
