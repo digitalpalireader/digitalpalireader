@@ -1,3 +1,4 @@
+*.map
 /dist
 sw.temp.js
 sw.js.map

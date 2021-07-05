@@ -15,9 +15,10 @@ function AppendHashToFileName
   $oldFilePathWithoutExtension = $filePath.Substring(0, $filePath.Length - $fileInfo.Extension.Length)
   $newExtension = ".{0}{1}" -f $fileHash, $fileInfo.Extension
 
-  Write-Host (">>>> '$filePath' => '$($oldFilePathWithoutExtension)$($newExtension)'")
+  $newFileName = "$($oldFilePathWithoutExtension)$($newExtension)"
+  Write-Host ">>>> '$filePath' => '$newFileName'"
 
-  "$($oldFilePathWithoutExtension)$($newExtension)"
+  $newFileName
 }
 
 function copy-file
@@ -66,7 +67,7 @@ $contents = Get-Content $HtmlFilePath | ForEach-Object {
   if ($_ -imatch '\<link.*rel=.*stylesheet.*') {
     FixLinkRelElement $_
   } elseif ($_ -imatch '\<script.*src=.*') {
-    TransformScriptHrefElement $_ @{ "/_dprhtml/js/index.js" = "/dist/index.js" }
+    TransformScriptHrefElement $_ @{ "/_dprhtml/js/index.js" = "/public/index.js" }
   } else {
     $_
   }

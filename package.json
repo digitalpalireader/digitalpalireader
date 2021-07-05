@@ -2,10 +2,10 @@
   "private": true,
   "scripts": {
     "start": "yarn run live-server --port=8085 --quiet",
-    "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack && yarn run copyfiles ./dist/sw.js ./",
+    "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack && yarn run copyfiles ./dist/sw.js* ./",
     "build:sw:injectManifest": "yarn run workbox injectManifest workbox-config.js",
     "build:sw:webpack": "yarn run webpack --config webpack.sw.config.js",
-    "build": "yarn run webpack --config webpack.config.js",
+    "build": "yarn run webpack --config webpack.config.js && yarn run copyfiles ./dist/index.js* ./public --up 1",
     "test": "jest",
     "lint": "eslint ."
   },
