@@ -1,7 +1,9 @@
+*.log
+*.err
+*.wrn
 *.map
 /public/
 /dist/
-sw.temp.js
 sw.js.map
 package-lock.json
 /build/

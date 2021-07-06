@@ -14,6 +14,6 @@ module.exports = {
     '**/sw.js',
     'sw.js',
   ],
-  swDest: 'sw.temp.js',
+  swDest: 'sw.js',
   swSrc: 'sw.template.js',
 }

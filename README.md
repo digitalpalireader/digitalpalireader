@@ -32,6 +32,12 @@ yarn lint
 yarn build:sw
 ```
 
+## Modern HTML5/CSS3/ES6
+
+### webpack & friends
+
+- [Step by step webpack buildup](https://www.valentinog.com/blog/webpack/)
+
 ## Working effectively with legacy code
 
 The current codebase has organically evolved since the last decade. Every piece of code implements some critical functionality.

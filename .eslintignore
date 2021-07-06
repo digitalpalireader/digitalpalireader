@@ -2,10 +2,10 @@
 _dprhtml/js/external/**/*.js
 
 # Ignore auto-generated files
-sw.temp.js
 sw.js
 _dprhtml/sw.js
 dist/*.js
+public/*.js
 
 ##
 ## Blacklist existing code:
