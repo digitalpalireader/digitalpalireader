@@ -464,10 +464,10 @@ const DPR_Chrome_UI = (function () {
     </div>`;
 
     $('#main-pane-container').append(`${html}`);
-    // Add event listeners for swipe gestures
-    document.getElementById(getSectionElementIdName(sPos)).addEventListener('touchstart', DPR_Gesture.touchStart, true);
-    document.getElementById(getSectionElementIdName(sPos)).addEventListener('touchend', DPR_Gesture.touchEndFactory(sPos), true);
 
+    // Add event listeners for swipe gestures
+    window.DPR_Mediator.emit('DPR_Swipe_Gesture:touchstart', getSectionElementIdName(sPos))
+    window.DPR_Mediator.emit('DPR_Swipe_Gesture:touchend', getSectionElementIdName(sPos), sPos)
   }
 
   const goPreviousInSecondaryPane = async (id) => {
