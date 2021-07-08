@@ -1,4 +1,6 @@
-import * as F from '../features/index.js'
+import * as Navigation from '../features/navigation/init.js'
+import * as Search from '../features/search/init.js'
+import * as Dictionary from '../features/dictionary/init.js'
 import * as DprGlobals from '../dpr_globals.js'
 
 export class DprViewModel {
@@ -6,16 +8,16 @@ export class DprViewModel {
     this.sidebarVisible = ko.observable(DPR_prefload_mod.loadSideBarVisibleState());
     this.loadingFeatureVisible = ko.observable(true);
     this.landingFeatureVisible = ko.observable(false);
-    this.activeTab = ko.observable(F.Navigation.featureName);
+    this.activeTab = ko.observable(Navigation.featureName);
     this.mainFeaturesVisible = ko.observable(false);
     this.navigationFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === F.Navigation.featureName
+        return this.mainFeaturesVisible() && this.activeTab() === Navigation.featureName
     }, this);
     this.searchFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === F.Search.featureName
+        return this.mainFeaturesVisible() && this.activeTab() === Search.featureName
     }, this);
     this.dictionaryFeatureVisible = ko.computed(function() {
-        return this.mainFeaturesVisible() && this.activeTab() === F.Dictionary.featureName
+        return this.mainFeaturesVisible() && this.activeTab() === Dictionary.featureName
     }, this);
     this.installationOngoing = ko.observable(false);
     this.installationBar = ko.observable();
@@ -38,14 +40,14 @@ export class DprViewModel {
 
   parseURLParameters() {
     if (DPR_PAL.isNavigationFeature()) {
-      this.activeTab(F.Navigation.featureName);
+      this.activeTab(Navigation.featureName);
     } else if (DPR_PAL.isSearchFeature()) {
-      this.activeTab(F.Search.featureName);
+      this.activeTab(Search.featureName);
     } else if (DPR_PAL.isDictionaryFeature()) {
-      this.activeTab(F.Dictionary.featureName);
+      this.activeTab(Dictionary.featureName);
     } else {
       // NOTE: Default is navigation tab.
-      this.activeTab(F.Navigation.featureName);
+      this.activeTab(Navigation.featureName);
     }
   }
 
@@ -216,7 +218,7 @@ const dprCommandList = [
     id: DPR_CMD_SEND_TO_CONVERTER,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.sendToConvert(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:sendToConvert'),
     visible: true,
     isDynamic: false,
     title: "Send text to converter (Keyboard shortcut: s)",
@@ -227,7 +229,7 @@ const dprCommandList = [
     id: DPR_CMD_SEND_TO_TEXTPAD,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.sendToTextpad(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:sendToTextpad'),
     visible: true,
     isDynamic: false,
     title: "Send text to textpad (Keyboard shortcut: e)",
@@ -238,7 +240,7 @@ const dprCommandList = [
     id: DPR_CMD_APPEND_TO_TEXTPAD,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.appendToTextpad(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:appendToTextpad'),
     visible: true,
     isDynamic: false,
     title: "Append selection to textpad (Keyboard shortcut: E)",
@@ -282,7 +284,7 @@ const dprCommandList = [
     id: DPR_CMD_BOOKMARK_SECTION,
     notImplemented: false,
     canExecute: false,
-    execute: () => F.OtherDialogs.ViewModel && F.OtherDialogs.ViewModel.showBookmarksDialog(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:showBookmarksDialog'),
     visible: true,
     isDynamic: true,
     title: "Bookmark section (Keyboard shortcut: b)",
@@ -425,7 +427,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_SETTINGS,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.SettingsDialog.ViewModel.showSettingsDialog(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:showSettingsDialog'),
     visible: true,
     isDynamic: false,
     title: "Open settings dialog (Keyboard shortcut: %)",
@@ -436,7 +438,7 @@ const dprCommandList = [
     id: DPR_CMD_ENTER_QUICK_REFERENCE,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.showQuickLinksDialog(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:showQuickLinksDialog', { }), // F.OtherDialogs.ViewModel.showQuickLinksDialog(),
     visible: true,
     isDynamic: false,
     title: "Enter quick reference (Keyboard shortcut: q)",
@@ -447,7 +449,7 @@ const dprCommandList = [
     id: DPR_CMD_GOTO_HOME,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.gotoHome(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:gotoHome'),
     visible: true,
     isDynamic: false,
     title: "Go to home page (Keyboard shortcut: v)",
@@ -480,7 +482,7 @@ const dprCommandList = [
     id: DPR_CMD_TOGGLE_DPR_SIDEBAR,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.toggleDPRSidebar(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:toggleDPRSidebar'),
     visible: true,
     isDynamic: false,
     title: "Toggle DPR Sidebar (Keyboard shortcut: & or `)",
@@ -491,7 +493,7 @@ const dprCommandList = [
     id: DPR_CMD_SHOW_BOTTOM_PANE,
     notImplemented: false,
     canExecute: true,
-    execute: (e) => F.OtherDialogs.ViewModel.showBottomPane(e.key),
+    execute: (e) => window.DPR_Mediator.emit('OtherDialogs:showBottomPane'),
     visible: true,
     isDynamic: false,
     title: "Show bottom panes (Keyboard shortcuts: 1, 2, 3, 4, 5)",
@@ -502,7 +504,7 @@ const dprCommandList = [
     id: DPR_CMD_SHOW_PALI_QUOTE,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.displayPaliQuote(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:displayPaliQuote'),
     visible: true,
     isDynamic: false,
     title: "Display Pali Quote (Keyboard shortcut: *)",
@@ -513,7 +515,7 @@ const dprCommandList = [
     id: DPR_CMD_RESET_SETTINGS,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.resetSettings(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:resetSettings'),
     visible: true,
     isDynamic: false,
     title: "Reset all settings (Keyboard shortcut: R)",
@@ -524,7 +526,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_NEW_QUIZZ,
     notImplemented: true,
     canExecute: false,
-    execute: () => F.OtherDialogs.ViewModel.openNewQuizz(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:openNewQuizz'),
     visible: true,
     isDynamic: false,
     title: "Open new quizz (Keyboard shortcut: #)",
@@ -535,7 +537,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_HELP,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.openHelp(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:openHelp'),
     visible: true,
     isDynamic: false,
     title: "Open help dialog (Keyboard shortcut: ?)",
@@ -546,7 +548,7 @@ const dprCommandList = [
     id: DPR_CMD_OPEN_HELP_VIDEO,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.openHelpVideo(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:openHelpVideo'),
     visible: true,
     isDynamic: false,
     title: "Open help video (Keyboard shortcut: h)",
@@ -557,7 +559,7 @@ const dprCommandList = [
     id: DPR_CMD_LAUNCH_FEEDBACK_FORM,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.OtherDialogs.ViewModel.launchFeedbackForm(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:launchFeedbackForm'),
     visible: true,
     isDynamic: false,
     title: "Launch feedback form (Keyboard shortcut: @)",
@@ -568,7 +570,7 @@ const dprCommandList = [
     id: DPR_CMD_INSTALL_OFFLINE_APP,
     notImplemented: false,
     canExecute: true,
-    execute: () => F.Installation.ViewModel.showInstallationDialog(),
+    execute: () => window.DPR_Mediator.emit('OtherDialogs:showInstallationDialog'),
     visible: true,
     isDynamic: false,
     title: "Install for offline use (Keyboard shortcut: I)",

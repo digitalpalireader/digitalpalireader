@@ -7,6 +7,7 @@ export class OtherDialogsViewModel {
     this.quicklinkInNewTab = ko.observable(false)
     this.bookmarkName = ko.observable()
     this.sectionId = window.DPR_Chrome.getPrimarySectionId()
+    OtherDialogsViewModel.subscribeToEvents(this)
   }
 
   showQuickLinksDialog() {
@@ -200,6 +201,25 @@ export class OtherDialogsViewModel {
   // eslint-disable-next-line class-methods-use-this
   launchFeedbackForm() {
     window.DPR1_chrome_mod.openDPRTab($('.feedback-form-link').attr('href'), 'DPR-feedback', 0)
+  }
+
+  static subscribeToEvents(thisObj) {
+    window.DPR_Mediator.on('OtherDialogs:sendToConvert', () => thisObj.sendToConvert())
+    window.DPR_Mediator.on('OtherDialogs:sendToTextpad', () => thisObj.sendToTextpad())
+    window.DPR_Mediator.on('OtherDialogs:appendToTextpad', () => thisObj.appendToTextpad())
+    window.DPR_Mediator.on('OtherDialogs:showBookmarksDialog', () => thisObj.showBookmarksDialog())
+    window.DPR_Mediator.on('OtherDialogs:showSettingsDialog', () => thisObj.showSettingsDialog())
+    window.DPR_Mediator.on('OtherDialogs:showQuickLinksDialog', () => thisObj.showQuickLinksDialog())
+    window.DPR_Mediator.on('OtherDialogs:gotoHome', () => thisObj.gotoHome())
+    window.DPR_Mediator.on('OtherDialogs:toggleDPRSidebar', () => thisObj.toggleDPRSidebar())
+    window.DPR_Mediator.on('OtherDialogs:showBottomPane', () => thisObj.showBottomPane())
+    window.DPR_Mediator.on('OtherDialogs:displayPaliQuote', () => thisObj.displayPaliQuote())
+    window.DPR_Mediator.on('OtherDialogs:resetSettings', () => thisObj.resetSettings())
+    window.DPR_Mediator.on('OtherDialogs:openNewQuizz', () => thisObj.openNewQuizz())
+    window.DPR_Mediator.on('OtherDialogs:openHelp', () => thisObj.openHelp())
+    window.DPR_Mediator.on('OtherDialogs:openHelpVideo', () => thisObj.openHelpVideo())
+    window.DPR_Mediator.on('OtherDialogs:launchFeedbackForm', () => thisObj.launchFeedbackForm())
+    window.DPR_Mediator.on('OtherDialogs:showInstallationDialog', () => thisObj.showInstallationDialog())
   }
 }
 

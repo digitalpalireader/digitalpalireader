@@ -498,8 +498,10 @@
     <script>
       var progressBar = new Nanobar({ id: 'main-container-loading-page-progressbar' });
       progressBar.go(10);
+      window.module = { }
     </script>
     <script src="/_dprhtml/js/external/jquery-3.4.1.min.js"></script>
+    <script src="/_dprhtml/js/external/events-3.3.0.js"></script>
     <script>progressBar.go(30)</script>
     <script src="/_dprhtml/js/external/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
     <script src="/_dprhtml/js/external/ajax/libs/popper.js/1.16.0/dist/umd/popper.min.js"></script>
@@ -509,6 +511,7 @@
     <script src="/_dprhtml/js/external/ajax/libs/luxon/1.27.0/luxon.min.js"></script>
     <script>progressBar.go(50)</script>
     <script src="/_dprhtml/js/dpr_pal.js"></script>
+    <script src="/_dprhtml/dpr-mediator.js"></script>
     <script type="module" src="/_dprhtml/dpr_globals.js"></script>
     <script src="/_dprhtml/js/globalObject.js"></script>
     <script src="/_dprhtml/js/web/io.js"></script>
