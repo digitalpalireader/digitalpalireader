@@ -18,12 +18,15 @@ module.exports = {
   },
   rules: {
     semi: ['error', 'never'],
-    'no-underscore-dangle': 0,
     'no-unused-vars': ['error', { varsIgnorePattern: '^_', argsIgnorePattern: '^_' }],
     'max-len': ['error', { code: 140 }],
     'func-names': ['error', 'as-needed'],
     'import/extensions': ['error', { js: 'ignorePackages', json: 'ignorePackages' }],
-    'no-restricted-globals': ['error', 'event', 'fdescribe'],
+
+    // Rules that have been disabled.
+    'no-underscore-dangle': 0, // NOTE: So that we enable the convention for _ prefixes for private members and unused vars.
+    'no-restricted-globals': ['error', 'event', 'fdescribe'], // NOTE: So that self, globalThis etc. can be used.
+    strict: 0, // NOTE: So that ES5 can be brought under eslint
   },
   globals: {
     importScripts: true,

@@ -1,6 +1,5 @@
 /* eslint-disable no-await-in-loop */
 import * as DprGlobals from '../../dpr_globals.js'
-// eslint-disable-next-line import/no-cycle
 import * as DprVM from '../../js/dprviewmodel.js'
 import * as DprComponentRegistry from './component-registry.js'
 

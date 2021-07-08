@@ -5,6 +5,7 @@ const setupMockDprModules = () => {
   window.DPR_send_bottom_mod = { sendTextPad: () => { } }
   window.DPR_translate_mod = { translateText: () => { }, translateTextFromBottomPane: () => { }, insertWordByWord: () => { } }
   window.DPR_conjugate_mod = { insertConj: () => { } }
+  window.DPR_Mediator = { emit: () => { } }
 }
 
 describe('DPR_keypress', () => {
@@ -13,14 +14,8 @@ describe('DPR_keypress', () => {
 
     const dprVM = await import('./dprviewmodel.js')
 
-    const { location } = window
-    delete window.location
-    window.location = { reload: jest.fn() }
-
     const cmd = dprVM.DprKeyboardHandler({ key: 'R' })
     expect(cmd).not.toBeNull()
     expect(cmd.id).toBe(window.DPR_CMD_RESET_SETTINGS)
-    expect(window.location.reload).toHaveBeenCalled()
-    window.location = location
   })
 })
