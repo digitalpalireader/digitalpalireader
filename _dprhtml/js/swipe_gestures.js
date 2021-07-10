@@ -7,7 +7,25 @@ const DPR_Swipe_Gesture = (function () {
   var minSwipeX = 40; //swipe must have 40px min on the X axis
   var swipeRatioThreshold = 1.2; //movement on X should be at least this times more than on Y
 
-  const touchStart = function (event) {
+  window.DPR_Mediator.on(
+    'DPR_Swipe_Gesture:touchstart', 
+    (sectionElementId) => {
+      document
+        .getElementById(sectionElementId)
+        .addEventListener('touchstart', DPR_Gesture.touchStart, true)
+    },
+  )
+
+    window.DPR_Mediator.on(
+      'DPR_Swipe_Gesture:touchend', 
+      (sectionElementId, sectionPosition) => {
+        document
+          .getElementById(sectionElementId)
+          .addEventListener('touchend', DPR_Gesture.touchEndFactory(sectionPosition), true)
+      },
+    )
+  
+    const touchStart = function (event) {
     if (event.touches.length === 1) {
       //just one finger touched
       startX = event.touches.item(0).clientX;

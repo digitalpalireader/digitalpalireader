@@ -1,5 +1,6 @@
 import * as DprVM from './dprviewmodel.js'
 import * as F from '../features/index.js'
+import * as Installation from '../features/installation/init.js'
 
 const initSplitters = () => {
   $('#main-sidebar').resizable({
@@ -117,7 +118,7 @@ const loadPanesAsync = async () => {
     loadHtmlFragmentAsync('#quicklink-dialog', 'features/other-dialogs/quicklinks.html', F.OtherDialogs.ViewModel),
     loadHtmlFragmentAsync('#paliquote-dialog', 'features/other-dialogs/paliquote.html', F.OtherDialogs.ViewModel),
     loadHtmlFragmentAsync('#bookmark-dialog', 'features/other-dialogs/bookmarks.html', F.OtherDialogs.ViewModel),
-    loadHtmlFragmentAsync('#installation-dialog', 'features/installation/main-pane.html', F.Installation.ViewModel),
+    loadHtmlFragmentAsync('#installation-dialog', 'features/installation/main-pane.html', Installation.ViewModel),
   ]
 
   await Promise.all(all)
