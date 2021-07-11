@@ -5,7 +5,7 @@
     "build:sw": "yarn build:sw:injectManifest && yarn build:sw:webpack && yarn run cpx \"./dist/sw.js*\" ./",
     "build:sw:injectManifest": "yarn run workbox injectManifest workbox-config.js",
     "build:sw:webpack": "yarn run webpack --config webpack.config.js --entry ./sw.js --output-filename sw.js",
-    "build": "yarn run webpack --config webpack.config.js --entry ./_dprhtml/js/main.js --output-filename \"[name].[contenthash].js\" && yarn run cpx \"./dist/*\" ./public",
+    "build": "yarn run webpack --config webpack.config.js --entry ./_dprhtml/js/main.js --output-filename \"[name].[contenthash].js\" --output-public-path \"/public/\" && yarn run cpx \"./dist/*\" ./public",
     "test": "jest",
     "lint": "eslint ."
   },
