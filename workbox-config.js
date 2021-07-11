@@ -1,9 +1,10 @@
 module.exports = {
   maximumFileSizeToCacheInBytes: 5000000,
-  dontCacheBustURLsMatching: /\.\w{32}\./,
+  dontCacheBustURLsMatching: /\.\w{20,32}\./,
   globDirectory: '.',
   globPatterns: [
     '_dprhtml/**/*.*',
+    'public/**/*.*',
     'docs/**/*.*',
     './*.html',
     './manifest.webmanifest',

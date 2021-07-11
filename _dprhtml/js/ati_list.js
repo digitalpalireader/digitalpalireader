@@ -1,3 +1,5 @@
+'use strict';
+
 // This static file was generated from digital_pali_reader_suttas.php on 2012.05.18.17.35.00 by dpr_update.tcsh
 DPR_G.atiD = []
 DPR_G.atiM = []

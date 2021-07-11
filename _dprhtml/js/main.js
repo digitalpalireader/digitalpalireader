@@ -1,4 +1,4 @@
-import * as IH from './index-core.js'
+import * as IH from './main-core.js'
 import * as DprVM from './dprviewmodel.js'
 
 // NOTE: Ensure this is the very first line.

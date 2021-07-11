@@ -57,9 +57,13 @@ function TransformScriptHrefElement
   }
 
   $originalFileName = $Matches.2
-  $retargettedFileName = if ($retargetMap.ContainsKey($originalFileName)) { $retargetMap[$originalFileName] } else { $originalFileName }
-  $fileName = AppendHashToFileName $retargettedFileName
-  copy-file $retargettedFileName
+  $fileName = 
+    if ($retargetMap.ContainsKey($originalFileName)) { 
+      "$($retargetMap[$originalFileName])"
+    } else { 
+      copy-file $originalFileName | Out-Null
+      AppendHashToFileName $originalFileName
+    }
   return "    <script $($Matches.1)src=""$fileName""></script>"
 }
 
@@ -67,7 +71,7 @@ $contents = Get-Content $HtmlFilePath | ForEach-Object {
   if ($_ -imatch '\<link.*rel=.*stylesheet.*') {
     FixLinkRelElement $_
   } elseif ($_ -imatch '\<script.*src=.*') {
-    TransformScriptHrefElement $_ @{ "/_dprhtml/js/index.js" = "/public/index.js" }
+    TransformScriptHrefElement $_ @{ "/_dprhtml/js/main.js" = "/public/$((Get-ChildItem "$root/public/main.*.js").Name)" }
   } else {
     $_
   }
