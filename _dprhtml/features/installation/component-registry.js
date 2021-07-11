@@ -84,7 +84,7 @@ export const registry = [
     sizeMB: 22,
     getFileList: async () => {
       const files = await import('../../../components/translation/dt/dt_list.js')
-      return files.dtFiles.map((x) => `${DprGlobals.singleton.DTTranslationsBaseUrl}/${x}`)
+      return files.default.map((x) => `${DprGlobals.singleton.DTTranslationsBaseUrl}/${x}`)
     },
   },
   {
