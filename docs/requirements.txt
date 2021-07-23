@@ -1,0 +1,2 @@
+sphinx==4.0.2
+sphinx-intl==2.0.1

@@ -8,6 +8,8 @@ sw.js.map
 package-lock.json
 /build/
 /coverage/
+/docs/_build/
+/docs/locales/**/*.mo
 digitalpalireader/content/DPR_mis-analysis.txt
 node_modules/
 /.ionide/
