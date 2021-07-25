@@ -63,7 +63,7 @@ export class NavigationTabViewModel {
     this.places = ko.observableArray()
     this.sectionPlace = ko.observableArray()
 
-    this.navHistoryVisible = ko.computed(() => NavigationTabViewModel.isStorageSupportedByBrowser(), this)
+    this.isStorageSupportedByBrowser = ko.computed(() => NavigationTabViewModel.isStorageSupportedByBrowser(), this)
     this.navHistoryArray = ko.observableArray()
     this.selectedHistoryItem = ko.observable()
     this.historyInfo = ko.computed(() => NavigationTabViewModel.computeHistoryInfo(), this)
