@@ -875,15 +875,15 @@ distributed freely. May all be happy and well.
 Final Words
 -----------
 
-1. Please write to me any errors you may find, big or small. My email is
-   yuttadhammo@gmail.com .
+1. Digital Pāli Reader was originally created by Yuttadhammo Bhikkhu
+   (yuttadhammo@gmail.com).
 
-2. Please check the `DPR Homepage <http://pali.sirimangalo.org/>`__ for
+2. Please check the `DPR Homepage <http://d.pali.tools/>`__ for
    updates.
 
-3. Please visit the `DPR Forum <http://pali.sirimangalo.org/forum/>`__
+3. Please visit the `DPR Forum <https://discord.gg/qdUNgr57wg>`__
    to ask questions about the DPR and the Pali language in general.
 
 Best wishes and good luck,
 
-Yuttadhammo
+Digital Pāli Tools team
