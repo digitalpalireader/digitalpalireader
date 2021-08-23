@@ -1,8 +1,8 @@
 # Configuration file for the Sphinx documentation builder.
 # See: https://www.sphinx-doc.org/en/master/usage/configuration.html
 
-author = 'Sirimangalo International'
-copyright = '2021, Sirimangalo International'
+author = 'Digital Pāli Tools'
+copyright = '2021, <a href="https://d.pali.tools/">Digital Pāli Tools</a>'
 project = 'Digital Pāli Reader'
 release = '0.0.0'
 
