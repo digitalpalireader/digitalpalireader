@@ -1,0 +1,1206 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) <a href="https://d.pali.tools/">Digital Pāli Tools</a>
+# This file is distributed under the same license as the Digital Pāli Reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Digital Pāli Reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-09-10 10:25-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: ../../pages/welcome-to-dpr.rst:2 71222d92e49a4ec584749e34c29c2097
+msgid "Welcome to the Digital Pali Reader"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:4 6d5039bd2474473cadbbef02f42d20c9
+msgid ""
+"This is the help file, to help you get started using the Digital Pali "
+"Reader for the first time."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:8 b5ca8cc0fd714601b51e3d1c60f08b78
+msgid "Introduction"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:10 a50331188cb2463290efcfe3208030fd
+msgid ""
+"The Digital Pali Reader (DPR) is a tool, much like a hard-copy language "
+"reader, facilitating study of the Pali language at an advanced level. It "
+"contains the entire Myanmar version of the Pali Tipitaka as found on the "
+"Vipassana Research Institute's CSCD 3, as well as commentaries and sub-"
+"commentaries where available. It also includes the Visuddhimagga, "
+"Abhidhammatthasangaha and several ancient grammatical texts composed in "
+"Pali, all available for analysis and translation. Additionally, it is "
+"possible to install the Thai Tipitaka and commentaries (a work in "
+"progress) as an alternative to the VRI tipitaka."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:20 17f2785bf11a46dfa4521968fe917fa7
+msgid ""
+"Rather than offering a translation for the text being read, the DPR is "
+"like an ordinary text reader, in that it presents the untranslated texts "
+"and offers tools to assist in reading the original language. The idea is "
+"that it it is better to learn the language than to read translations, and"
+" better to learn the language by actively reading the original texts than"
+" by simply memorizing charts or vocabulary."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:27 f8d08fc72c694966b720153f16b05c1a
+msgid "The DPR differs from an ordinary reader in several respects:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:29 05dbcd5866bd4c6f8d05123849e2e67f
+msgid ""
+"The DPR allows for instant analysis and lookup of words and compounds, "
+"simply by clicking on a word in the passage being read. This avoids time "
+"spent looking for the word in a hard-copy dictionary or in another place "
+"on one's computer, and provides great assistance in analyzing complex "
+"words and compounds."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:34 79d47dbaba1e448e94f751b7b2eeb1af
+msgid ""
+"The DPR has a built in `text search <#text-search>`__ function similar to"
+" that of the CST4. The DPR provides great flexibility in searching "
+"multiple sets, multiple books, and multiple hierarchies of texts, as well"
+" as allowing advanced regular expression searches. There is also a built-"
+"in search of accesstoinsight.org's translations, either via the website "
+"or the off-line archive."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:40 e5036c80e44544c085720efa11173fbd
+msgid ""
+"The DPR includes several dictionaries: Pali-English, Pali Proper Names, "
+"Concise Pali-English, Concise English-Pali, Sanskrit, and Sanskrit Roots."
+" These may be searched individually or all together using the \"Multi\" "
+"option in the \"Dictionary\" section. There is also a searchable "
+"compilation of terms discussed in the commentaries and sub-commentaries, "
+"a title search for all books. All these can be directly accessed from the"
+" control panel under the \"Dictionary\" section. More information is "
+"available in the `Dictionary <#dictionary>`__ section below."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:50 80ec6777049e4b088449db0b83daffd1
+msgid ""
+"The dictionary files in the DPR were not designed specifically for the "
+"purpose at hand, and word-to-definition matches are sometimes incorrect "
+"due to imperfect analysis."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:53 a8ddf65860b240be896b99d5f6bbd8e7
+msgid "The DPR has a number of useful auxiliary features, including:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:55 0bbbcfd1c6174eaf891000e654796e8a
+msgid ""
+"`bookmarks <#bookmarking>`__ and quote clipboard for keeping important "
+"passages, and a history to keep track of recently viewed passages."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:58 afb1be2aa3964dcbb8f3e38f24bab37d
+msgid ""
+"`permalinks <#permalinks>`__ to each paragraph and search query for "
+"referencing passages and terms for other DPR users."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:60 1b243b7d756e42b59d9532863b7cbd4f
+msgid ""
+"links to and searching of `AccessToInsight.org "
+"<http://www.accesstoinsight.org/>`__'s list of translations"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:63 0e91a26ba420438f8d5bfa09e0740487
+msgid ""
+"a Pali conversion utility that converts to and from `Velthuis <#the-"
+"velthuis-scheme>`__ and Unicode scripts"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:65 406dbcbf6d9e4b4b868ae949a626cc53
+msgid "transliteration of Pali into Thai, Devanagari, Myanmar and Sinhala scripts"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:67 09d9ea96ea704935b9a1cbb7e878bf40
+msgid "conjugation lookup and tables"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:68 1c03ca461a3c41c087fb1fd7ab44e256
+msgid "basic sentence translation"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:69 3097f96857bc4d01917d10f23c050d1a
+msgid "multiple Pali language quizzes to test your vocabulary and grammar"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:70 5c8c03e91bba4902a4b1dd67f0e28cbf
+msgid "daily and random English Dhamma quotes from Buddhavacana, by S. Dhammika"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:73 22fa33e9a8bb42c1a1c882a2a24b0bb1
+msgid ""
+"While the DPR is far from perfect, it is sure to be useful for "
+"intermediate Pali students who wish to advance their studies to a higher "
+"level. Below is a brief explanation of the various parts of the DPR."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:80 59bb7c68f5ef4598aec8d8cb288a7835
+msgid "Contents"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:82 bdff7911d8214307915407490754073e
+msgid "`Introduction <#introduction>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:83 f454ee28a44645ca9494ca9d11e28cb1
+msgid "`Notes <#notes>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:84 f30ce2f907e449cb85531b3d3087356b
+msgid "`Usage <#usage>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:86 36b70815476344dfb572777ae7e67c36
+msgid "`Tipitaka Lookup <#tipitaka-lookup>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:87 3c6d99afa1dd4509941ecc2f2728a7f1
+msgid "`Reading Text <#reading-text>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:88 8000c74f368741eaa1d386a1f07322cb
+msgid "`Bookmarking <#bookmarking>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:89 e3aa404ae30f4a1893a3e4749b466bc4
+msgid "`Text Search <#text-search>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:90 67b8aae59985410c834d2849065df706
+msgid "`Dictionary <#dictionary>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:91 bda0f52d926f45f6a25f4365941747cb
+msgid "`Technical <#technical>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:93 d97e948b57884a6e8e99fac9329e30fc
+msgid "`Miscellany <#miscellany>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:95 dd678fbbf0794047b25cde665ac7efed
+msgid "`Permalinks <#permalinks>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:96 e9e25120ac014b91b377452349e4d8e0
+msgid "`Quick Links <#quick-links>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:97 c2883444116c453f8412b93ed1f44050
+msgid "`Right-Click Menu <#right-click-menu>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:98 3c222cc6964c4b689c3e0f370939bd16
+msgid "`The Velthuis Scheme <#the-velthuis-scheme>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:100 72fb7168102d437ba90fa61986acd894
+msgid "`Gratitude <#gratitude>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:101 37670fdfb63f4a34b1b422eacd52abc0
+msgid "`Final Words <#final-words>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:106 6cc5a95e25e941239189818b3d75f272
+msgid "Notes"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:108 a02f65d604a642398445a500a574c173
+msgid ""
+"You will need at least a basic unicode font to view the Pāḷi characters "
+"properly. If the word Pāḷi in this sentence shows up correctly, you are "
+"probably okay. Otherwise, you'll have to do a search for \"Unicode Font\""
+" on the Internet, and probably tell the DPR to use that font in the "
+"preferences dialog. The default font is \"Tahoma\", which should display "
+"the characters correctly. For alternative scripts, it gets a little bit "
+"more difficult, and YMMV. I use `the Padauk font "
+"<http://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=Padauk>`__ "
+"for Burmese and it works well, and `Bhashitha "
+"<http://www.locallanguages.lk/sinhala_unicode_converters>`__ seems to be "
+"the best for Sinhala. The rest of the scripts should work with any "
+"standard unicode font containing that script (google \"Thai unicode "
+"font\", etc.). There may be errors in the conversion still, so please "
+"send me (copy and paste in an email) any strange-looking words in regards"
+" to the alternative scripts."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:124 41692f025108402d81786b7c879858e6
+msgid ""
+"You will also need a recent version of `Mozilla Firefox "
+"<http://www.getfirefox.com/>`__ . Older versions may have "
+"incompatibilities that I am not aware of."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:127 51e3c510dc0648f8b13347740fa6b1c8
+msgid ""
+"Text entry fields accept either unicode Pali characters or characters "
+"based on the `Velthuis <#the-velthuis-scheme>`__ scheme."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:129 d86f0ce55c0144b5a409f15759724d85
+msgid ""
+"The reader was created for my own personal use, but anyone is welcome to "
+"use or distribute what I have made for their own benefit or the benefit "
+"of others."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:132 2e9c1e1f82f74c599a7ddac088e4366f
+msgid ""
+"For the latest version of the reader, please visit `pali.sirimangalo.org "
+"<http://pali.sirimangalo.org/>`__"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:134 4310cef317d94c358cbefc5b1ff58f53
+msgid ""
+"As of 2.0, the Myanmar Tipitaka is installed as an individual extension, "
+"in order to reduce the size of the main archive. Since the Tipitaka files"
+" are less frequently updated, this should improve the upgrade experience."
+" The Thai Tipitaka is also available as an extra extension, and may be "
+"installed via the preferences dialog . Switching between the sets is "
+"accomplished via the main window's toolbar (see below)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:141 d87aca6e691d49a09e27591922275dc7
+msgid ""
+"Many common tasks are now mapped to keys, which may be used instead of "
+"the buttons themselves. For a list of these keys, press the 'k' key"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:144 8fb03a02d6114c1f9453a1231783c167
+msgid ""
+"If any problem arises in the functioning of the reader, just press F5 to "
+"reset the reader"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:146 e67d4a5c956c4c3286150d3a1528f832
+msgid ""
+"I reserve no copyright over any work that I have done, and offer no "
+"warranty of any kind for this software. If it breaks, you get to keep "
+"both pieces."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:153 294b2e504c0040939d619fc920071089
+msgid "Usage"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:155 327be168761b49888495ddf97c6bf202
+msgid ""
+"The DPR is split up into tabs and a proper sidebar. The sidebar contains "
+"the main controls, and opens other windows as needed. Most buttons that "
+"interact with existing windows can also open new windows by CTRL+click or"
+" middle-clicking on them. For instance, to open a section in a new "
+"window, rather than the existing DPR Pali window, middle-click (or "
+"CTRL+click) on the » button. Text search and dictionary lookup now have "
+"their own tabs, and can be opened in multiple instances in the same way."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:163 41f73062b5a7463280aa2e84ba40e980
+msgid ""
+"**SHIFT+click** opens content into a new panel in the current window, if "
+"appropriate, allowing for side-by-side comparison of text."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:166 aefb9e2436904ea2b55400ff23b813e2
+msgid ""
+"Basic use of the DPR should require little explanation. What follows is a"
+" brief explanation of all of the controls in the sidebar, by section:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:170 d1c0499ae02f4f8db0277f14b8434889
+msgid "Tipitaka Lookup"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:172 ebfb9ebb4e26427c9f27753dc52026d1
+msgid ""
+"The top two sections on the control panel are for browsing through the "
+"tipitaka and ancillary works. At the top, there are two lists, of sets "
+"and books in each set. Below these, there are three buttons (M,A,T) for "
+"changing the hierarchy of texts to be studied. \"M\" switches to the root"
+" canonical text, \"A\" to the commentary, and \"T\" to the subcommentary."
+" Note that once a section has been retrieved, there will be buttons in "
+"the toolbox for the corresponding section in the other two hierarchies, "
+"if available."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:181 f208088ad7e24f2e8a150d6598b62236
+msgid ""
+"Below this group, there is a button and a set of hierarchical lists of "
+"the sections for the current book, with buttons beside each list. These "
+"allow one to navigate to a specific section. The button at the top opens "
+"a linked index of the selected set and book, with links to each section. "
+"As for the rest, changing each will result in changes to the ones below. "
+"All but the bottom list have a \"≡\" button beside them, which means it "
+"will group all the sections in the hierarchy below it together and "
+"display them all in the main window for analysis. The bottom list will "
+"have a \"»\" button; clicking on this will open that section in the main "
+"window for analysis."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:192 a1c56cf29a9245f7a3331742ab48a8e0
+msgid ""
+"Next, there is an input box for enter quick links to easily navigate to a"
+" passage you already know the location for. For more on this, see `quick "
+"links <#quick-links>`__, below."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:196 166e96993af94c2b9b717d84d7b6a9d9
+msgid ""
+"Finally, there are two more lists: (-- History --) and (-- Bookmarks --),"
+" with a history of previously viewed sections (max. 100) and a list of "
+"currently stored bookmarks. Clicking on an entry retrieves that section. "
+"Clicking on the buttons beside either list opens the bookmark/history "
+"tab, with further options relating to bookmarks and history."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:204 594fccf58ebd49c6adce515f5cfc9dbc
+msgid "Text View"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:206 ae512ceb0e994f56b04901a4c885869b
+msgid ""
+"Once you have retrieved a section of the text, it will display in the "
+"main window, which is split into (at least) two frames. The top frame (or"
+" frames) holds the actual text, the bottom serves as a dictionary frame, "
+"as well as providing access to the convertor and text pad. Both sections "
+"have their own toolbar, which is found by hovering over the \"∴\" in the "
+"top-left corner of the frame. The toolbar for the top window may contain "
+"any of the following tools:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:214 9e9cfc2ec65c40608634f84b896874b9
+msgid ""
+"``convert`` ``export`` - send the selected text to the convertor or "
+"textpad (an easier way to do this is press the \"s\" or \"e\" (or E to "
+"append) key once you have highlighted some text)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:218 da15ca9e7bd9496bb7a9f3b396bccc57
+msgid ""
+"``⇐`` ``♦`` - transfer the current location back to the sidebar, or copy "
+"the permalink to the clipboard."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:221 7cb7d9051132453a904f3ed020f42345
+msgid ""
+"``←`` ``↑`` ``→`` - forward and backward buttons to go to the next or "
+"previous section, and an up button to go to the curren text's index."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:224 3161d08ad5a743e2b511321985cfcfcc
+msgid ""
+"``m`` ``a`` ``t`` - buttons to retrieve the corresponding section in the "
+"other hierarchies (m=mūl/canon; a=aṭṭhakathā/commentary; t=ṭika/sub-"
+"commentary)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:228 4e740313885f4dfd94f727482c5594a3
+msgid "``†`` - bookmark the current section (see the bookmarks section below)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:231 ccae19e15ed04e7bae82cc50a895436d
+msgid ""
+"``M`` ``T`` - buttons to switch between alternative versions (Thai or "
+"Myanmar) of the current section (if available). The sets can be installed"
+" via the preferences dialog ."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:235 856904de052e4edb8ba1ef077ea73c7d
+msgid "``x`` - close the current panel in a multi-panel display."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:237 9f6f504147b846efa41aa4cc120ab257
+msgid ""
+"The bottom part of the main screen has six tabs on the left-hand side. "
+"They can also be accessed via the 1-6 keys on the keyboard. Their "
+"functions are as follows:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:241 30363319ebff4a0796ed8b20790ab001
+msgid ""
+"**D: Dictionary** - this frame is normally active when viewing a text. "
+"Clicking on a word in the text or analysis bar will display a definition "
+"from the PED or DPPN if available. Clicking on the small green \"c\" in "
+"the analysis frame will display conjugation or declension information if "
+"available."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:246 00527f50ad8a446fb7bde3f5bac49a74
+msgid ""
+"**Cv: Conversion** - this frame contains two text boxes, the left one for"
+" input, the right one for output. There are three main functions: 1) "
+"converting between Unicode and Velthuis; 2) converting from the Unicode "
+"Roman alphabet to a variety of Asian alphabets; and 3) sorting all words "
+"in a block of text into their Pāḷi alphabetical order. Converst by "
+"selecting an option in the \"to\" list. Sort by pressing the sort button."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:253 74e9161672884982bf5fa46771ee53a5
+msgid "**Tp: Textpad** - A simple text editor, with six buttons, as follows:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:254 ba32a8b60ab14e1f9c41b3fa118d0f3d
+msgid "**Clear** removes all text from the textpad."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:255 cea3ff55893a48c3865d234c4bd3b1c4
+msgid "**Velthuis** converts the text to Velthuis."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:256 1d0500be7a4041f3a65523226af18c9d
+msgid "**Unicode** converts the text to Unicode."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:257 d2f22bac0a034e47bd1c66470b142331
+msgid ""
+"**Analyze** sends the texpad text to the top frame as if it were a "
+"regular text in the reader with each word being clickable for analysis."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:260 6953621311594d84bf9313585d5685a7
+msgid "**Copy** copies the textpad text to the system's clipboard."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:261 845e81fd0450488295a61936ec263841
+msgid "**Save** brings up a file dialog to save the text as a file."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:262 cc181ad39f014a0fbec52dd572a6fc38
+msgid "**Tr: Translation** - And experimental sentence translator."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:263 4f8f7f9de6f04d0d84c73c20bf0d8dc4
+msgid "**Cj: Conjugation** - A tool to conjugate or decline individual words"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:264 67c15077698c4f0b88f5423d4d2643fd
+msgid ""
+"**Bv: Buddha Vacana** - A daily quote from Ven. Dhammika's The Buddha's "
+"Words . Clicking on the citation will put the Pāḷi in the top frame."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:268 8da95bc2f45a421699949cd30e27fef7
+msgid ""
+"The main function of the DPR is to analyze individual words and give "
+"appropriate definitions to each word or word part. Clicking on any word "
+"in the text brings up an analysis of the word in the top part of the "
+"bottom frame (the analysis bar) and hopefully at least one (hopefully "
+"correct) definition from one of the three dictionaries. If there are "
+"alternative ways of splitting up a compound, they can be accessed via a "
+"menu at the bottom left of the analysis bar, below the current analysis. "
+"The right side of the analysis bar shows a definition from the CPED of "
+"the first part of the analysis; the rest can be accessed via a menu at "
+"the bottom right of the analysis bar, below the current CPED definition."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:280 4d6af97fccd44059b2b6387c0a6096c9
+msgid "Bookmarking"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:282 35f404b87c044c1e9edc17288b917924
+msgid ""
+"The DPR allows saving bookmarks for later reference. All bookmark files "
+"are saved in an XML file in your firefox profile folder under \"DPR\". "
+"Clicking on the ☆ button opens up an advanced bookmark manager where you "
+"can view/add descriptions, change names, and delete bookmarks, as well as"
+" edit or clear the history box (see above)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:289 1d5fab43548e49a1823668a50bdc43aa
+msgid "Text Search"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:291 095389eb9ecf4b44b5c2e1034ee46505
+msgid ""
+"The DPR has a built-in text search function that allows flexible search "
+"of the tipitaka and ancillary texts, via the \"Text Search\" section of "
+"the control panel. There are many search options available, based on two "
+"variables: 1) whether you wish to search multiple sets, multiple books in"
+" the current collection, or the current book; and 2) whether you wish to "
+"search the current hierarchy or multiple hierarchies. There is also an "
+"option (\"Translations\" in the drop-down menu) to access the "
+"`AccessToInsight.org <http://www.accesstoinsight.org/>`__ Google custom "
+"search, or the off-line archive (if installed and linked via the options "
+"page) to search their English translations."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:302 9dc9da0b16954a039c749ee7324905a8
+msgid ""
+"If you wish to search within the current set, book, or hierarchy, first "
+"navigate to the appropriate place using the corresponding lists and "
+"buttons. If you are searching multiple collections or the Tipitaka, they "
+"will have no effect."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:307 fdc89dfd0c40491f8e6ad3ef4695d572
+msgid ""
+"Next, enter the string for which to search (or multiple strings seperated"
+" by the \"+\" sign) and then select a search type from the dropdown (set "
+"at \"Tipitaka\" by default). You will notice that various options appear "
+"based on the type of search you choose. Check the appropriate boxes, and "
+"then click the » button. A search tab will open once you click this "
+"button (or press enter while focus is on the text box) and search results"
+" will begin to appear, with words containing the search term(s) at the "
+"top, followed by a list of paragraphs with the matched search term(s) "
+"highlighted. There is a stop button that allows you to interrupt the "
+"search if necessary."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:318 fb0e045e2e3d4de1942a44cfaf96b52e
+msgid ""
+"Once the search is complete, clicking on a search term will hide all "
+"other paragraphs, showing only paragraphs containing the selected term. "
+"To show all results again, click the \"x\" beside the current word (in a "
+"box on the top right of the search frame, when viewing a single matched "
+"word). Clicking on the ``go`` button beside a paragraph will open the "
+"containing section in the Pali tab (or open a new tab, on middle-click or"
+" CTRL+click)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:326 95fa9f43742a48edb026f3daa14cb44b
+msgid ""
+"The \"RegEx\" checkbox allows javascript regular expressions to be used "
+"in the search (use with care!)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:329 f13132a9ba5145c69218aabe7abafa45
+msgid ""
+"To search for a page number, use the following syntax: P1.0001, P1.0002, "
+"etc., where \"P\" (or V, M, T) is the PTS pagination set, the first \"1\""
+" is the volume, and the following (must be four digits) is the page "
+"number."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:333 e29559407f0a416fb621759561f9b301
+msgid ""
+"At the bottom of the Search pane, there is a history list with past "
+"searches for easy repetition."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:337 52ca2ae660654ed4b4d710fe6fd24d34
+msgid "Dictionary"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:339 f31ec217adfd4a60be0624e8737ee0cb
+msgid ""
+"The dictionary lookup has nine options, some with advanced options "
+"available by clicking \"adv\". \"DPR\" runs an analysis on the word or "
+"passage at hand as it normally would. This only works for full words and "
+"phrases. \"PED\" searches the Pali-English Dictionary, \"DPPN\" the "
+"Dictionary of Pali Proper Names, \"CPED\" the Concise Pali-English "
+"Dictionary, and \"CEPD\" the Concise English-Pali Dictionary. \"Aṭṭha\" "
+"(Aṭṭhakathā) and \"Ṭīkā\", search through words or phrases explained in "
+"the commentaries and sub-commentaries respectively. \"Title\" gives a "
+"list of matching titles in all books."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:349 32242ad339e1485da4a198c9b8d687a0
+msgid "**Advanced Dictionary options:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:351 892d3c38ae06412281a60d5aa7580406
+msgid ""
+"Each dictionary has its own set of advanced options, some in common, some"
+" unique. All are explained here:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:354 e319f9602b634b3a83cc9f0c1deb0722
+msgid ""
+"**Reg. Exp.:** Allows javascript regular expressions to be used in the "
+"dictionary search."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:356 0a55449ead8743a189692d153ab29b22
+msgid ""
+"**Fuzzy:** This option allows you to ignore diacritics in your search. "
+"This equates long and short vowels, and ignores dots and the tilde."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:359 d585a5ed9c634e95ab39d0cc72e68e3e
+msgid ""
+"**Full Text:** Only for the dictionaries (PED, DPPN, CPED, CEPD), this "
+"allows full-text search, rather than searching just the entry titles."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:362 ea74f9ed68b94559865ff9ab5da36f65
+msgid ""
+"**Start of Word Only:** Enabled by default for the dictionaries, this "
+"limits the search to matches at the beginning of the word. To search "
+"within entries, uncheck this."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:366 10f8f4009cd344ebbefe29417ce37d7e
+msgid ""
+"If search-as-you-type is enabled in the option screen (see below), the "
+"results will be shown as you type. Otherwise, you will have to press the "
+"``»`` button to execute the search. If you choose \"PED\" and type \"aa\""
+" into the box, for example, it will come up with a list of Pali-English "
+"Dictionary entries starting with a long \"ā\". All lookup functions "
+"except DPR allow inner-word search and javascript-type regular "
+"expressions (wildcards) in advanced options. Note that these disable "
+"search-as-you-type."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:375 071173eefbbf49d2ad1a89cdb1b6c72f
+msgid ""
+"At the bottom of the Dictionary pane, there is a history list with past "
+"lookups for easy repetition."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:379 0047c54a4a5c4cac872820429f406d3f
+msgid "Technical"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:381 752ebde127ed414bad2fd0ab31821750
+msgid "The last set of buttons on the Tools pane provide miscellaneous tools:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:383 1078185691ef47f6b9715603085fd481
+msgid "**Bookmarks** - as mentioned, this opens the bookmark window."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:385 baeac14223064c35ac995b4a8d7fe7bb
+msgid ""
+"**Pali Quiz** - this button opens a set of Pali quizes to test your "
+"vocabulary and grammar."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:388 734f01cf5d5643c6945b6000d327f72e
+msgid ""
+"**Dhamma Quote** - this button displays a random quote from the book, "
+"Buddhavacana."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:391 7be9386e417f484a98c35534e6d6dca3
+msgid "**Grammar** - opens the Pali Grammar by Charles Duroiselle."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:393 75bef87cab8b4f43a324ec596d246042
+msgid "**Cheat Sheet** - open's Alan McClure's Pali Cheat Sheet."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:395 8f2c28390dbb4a098a5c6ce3bbd5cf4b
+msgid ""
+"**Preferences** - this button opens the preferences dialog , allowing one"
+" to adjust the layout and colors of the reader as well as other misc. "
+"options, via three tabs as follows:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:399 de020a3c02db4737bd80add0b48a3619
+msgid "**General:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:401 bf4919f962894025bf0d65acc043fa56
+msgid ""
+"**Show in text** allows you to show or hide page numbers, variant "
+"readings and permalinks (♦) in the text, as well as turn off internal PED"
+" linking and DPPN links for section titles."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:404 6adb74a54eec446087dc6cfe37bc0b13
+msgid ""
+"\"Show translations\" adds links to translations from accesstoinsight.org"
+" as well as ancient-buddhist-texts.org, if available. If you have "
+"downloaded the ATI offline archive, you can specify the location here, "
+"which will also enable off-line ATI search."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:409 5c766bbe2f63453ead548bad6218e691
+msgid ""
+"\"Enable Dictionary search-as-you-type\" causes the dictionaries to start"
+" outputting results as you type. Otherwise, pressing \"Enter\" or "
+"clicking the » button is required."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:413 64c2be1a96184fbba42a14a750e9bc09
+msgid ""
+"**Layout:** Specify colors or images of the various parts of the reader, "
+"using css notation. Some examples are given in the default preferences, "
+"including gradients and url-based images."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:417 c36e6cc234fc4427bc843a047edd5a9b
+msgid ""
+"**Text:** Specify colors, either by name or HTML code (\"black\" is the "
+"same as \"#000\" and \"#000000). Specify font family for the text, size "
+"of the normal text and the script to be used for reading the texts."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:422 c26c1de986784b7b982951209a627abc
+msgid ""
+"**Sets:** Install alternative Tipitaka sets, to be accessed via the main "
+"window's toolbar (see above)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:425 f1355b847aba4233833087734c98166a
+msgid "**Feedback Form** - this button allows you to contact me via email."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:427 c5e4f257262145259bffd0e2827e4f9b
+msgid "**Help** - this button shows this help file"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:432 6b2c498142c145b48b56ffa93a311c9b
+msgid "Miscellany"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:435 6b63f1d04b024752b48864732f79367d
+msgid "Permalinks:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:437 aacbf638e86741799928e99c8f557837
+msgid ""
+"A permalink is a special URL that, when entered in the Firefox address "
+"bar or clicked from a hyperlink (provided the DPR is installed), goes "
+"directly to the place it refers to, showing the results of a search, if "
+"specified. The structure for DPR permalinks is currently: "
+"**dpr:type[?params]** , where \"type\" is either one of \"index\" (for "
+"tipitaka sections), \"search\" (for tipitaka searches) or \"dict\" (for "
+"dictionary lookups), each of which has associated parameters which should"
+" be added after the \"?\", or else any htm file in the "
+"chrome://digitalpalireader/content/ directory, in which case there will "
+"be no parameters (or \"?\"). The parameters refer to everything in the "
+"page's url string after the \"?\"."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:449 5b060475feb843418415878e95c9afe6
+msgid "The \"♦\" button signifies a permalink, and is found in several places:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:451 ea4b9780a09a41648cc3a23b1cf07c1d
+msgid "in the index for a given book,"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:452 58273bee7c324f0eb21f2c2df11e0c66
+msgid "in the main window toolbox,"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:453 55cbeda6b9454a2aa627b1e4c9e08f61
+msgid "to the left of each paragraph."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:454 fc089bf19ad441e08c71ac3ef34a8d9b
+msgid "in the top-left corner of the search and dict windows."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:456 06e3b83e56f1445ca5ce06e583a830a6
+msgid ""
+"Clicking on a \"♦\" button causes the link to be copied to the clipboard "
+"for further use. The \"♦\" button at the beginning or each paragraph adds"
+" the paragraph number to the link. Some example permalinks are:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:460 c5a052ac70f44a0887944df13b059706
+msgid "**An index permalink:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:462 11d6426b172547dd81d18b659fcacf0a
+msgid "DN 1 Index *(dpr:index?loc=d.0.m)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:464 5ae70fb8b4214c489c7a2fc8af5d27fe
+msgid "**A section permalink:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:466 2f537e9a6d4547978526b1712f59817e
+msgid ""
+"DN 1, paragraph 4, with \"bhagavaa\" and \"bhikkhave\" highlighted "
+"*(dpr:index?loc=d.0.0.0.0.0.0.m&para=4&query=bhagavaa+bhikkhave)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:469 72ee3bc77d9d4366a7e3e2de091739b2
+msgid "**A multi-panel permalink:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:471 821240818096492cb075fd5c0e887929
+msgid ""
+"DN 1, paragraph 4, with \"bhagavaa\" and \"bhikkhave\" highlighted in the"
+" first panel, the commentary in the second panel, and the ATI translation"
+" in the third panel. "
+"*(dpr:index?loc=d.0.0.0.0.0.0.m&query=bhagavā+bhikkhave&para=4\\|loc=d.0.2.0.0.0.0.a\\|ati=dn/dn.01.0.bodh.html)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:476 a523d1911efe4ce7a0d384f503a50abc
+msgid "**A search query permalink:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:478 fd827376f4c444fba653789736747c22
+msgid ""
+"Search DN for \"bhagavaa\" and \"bhikkhave\" "
+"*(dpr:search?type=0&query=bhagavaa+bhikkhave&MAT=m&set=d&book=1&part=1&rx=false)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:481 2dac41d98b9d4ebb899a841286909f4a
+msgid "**A dictionary lookup permalink:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:483 987850c80e424a779aa2119d67bceb9b
+msgid ""
+"Lookup words starting with \"bhaga\" in PED "
+"*(dpr:dict?type=PED&query=bhaga&opts=xv,xd,xm,xs,xa,xk,xy,mm,ma,mt,sw,hd)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:486 34195d94dfc5486098643cb0bafb6e6f
+msgid "**A permalink to this help file:**"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:488 dc1648b7b8094e7da5600795ebb1b019
+msgid "Help *(dpr:help)*"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:490 4aca89018a1a4015a53a2722f84dee3a
+msgid ""
+"**Note:** Shorthand sutta references of the sort found on "
+"accesstoinsight.org or suttacentral.net, of the form \"DN 1.1\", etc. "
+"(see quick links, below), may be used to replace the standard \"loc=\" "
+"notation, replacing the space with a dot, e.g. \"DN.1.1\". For example:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:495 9da625013aa44241bde67603673d612d
+msgid "dpr:index?loc=DN.1.1&para=4&query=bhagavaa+bhikkhave"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:497 9210ab8ccfcf42e88e56c7bc2b0bdf02
+msgid "is the same as"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:499 c286800c09104594bf7af60190427962
+msgid "dpr:index?loc=d.0.0.0.0.0.0.m&para=4&query=bhagavaa+bhikkhave"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:502 bfe88d1823bb4e78ad3537a6cc1be720
+msgid "Quick Links:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:504 80033a47a5f6490db85a41d4c4c38d4f
+msgid ""
+"Shorthand sutta references are shown for the first four nikayas of the "
+"sutta pitaka and most of the fifth nikaya. To quickly navigate to a "
+"specific sutta, section, etc., use the 'q' keyboard shortcut from a main "
+"DPR tab, or use the 'Quick Link' text box in the sidebar. Quick links are"
+" of two forms, as follows:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:510 6319f5d011d443c89e5cb505ffe2277d
+msgid ""
+"'DN1.1', 'MN1', etc., comprised of the first letter of the nikaya "
+"(D,M,S,A, or K), then an N, then the first reference number, then a "
+"period, then the second reference number. The N is now optional, so D1.1 "
+"also works."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:515 9c7b7a337b0146338b7a63d9d37a065e
+msgid ""
+"For the first fifteen books in the Khuddaka Nikaya, the following syntax "
+"is also recognized: 'dhp1', 'it1', etc., comprised of the shorthand name "
+"for that book, followed by the reference number. The shorthand names for "
+"the books are, in order:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:520 18de33af50b5454fbcb00d29488b78be
+msgid "'khp','dhp','ud','it','snp','vv','pv','th','thi','apa','api','bv','cp','ja'"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:522 dd8b88e0d65244aeb5ca03609130ce1d
+msgid ""
+"Note, for the Jataka (ja), this syntax represents the jataka number "
+"across books 14 and 15, so 'ja547' will open the last jataka in book 15 "
+"(Jat. 2), whereas 'ja520' will open the last jataka in book 14 (Jat. 1)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:527 f7fae994b1124c3396ac077581ccb9c5
+msgid ""
+"For the Dhammapada, verse numbers are also recognized, using 'dhpv' "
+"followed by the verse number, e.g.: 'dhpv1', 'dhpv423', etc."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:531 38b12ed535c84a8fad16b337184d4930
+msgid "Right-Click Menu:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:533 9f7db63fd0384811a197f0c259fdf94e
+msgid ""
+"The DPR adds an entry to Firefox's right-click context menu that allows "
+"quick access to many of the DPR's functions from anywhere on the "
+"Internet. Most functions require text to be highlighted, but some allow "
+"right-clicking on an entire text box, to convert the contents to/from "
+"Unicode, for example. This behaviour can be tweaked from the preferences "
+"menu General tab."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:541 84a8196155824d71a88cbefd4ed4ee72
+msgid "The Velthuis Scheme:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:551 4e9fb261c3a4437696f5554c9a14209e
+msgid "Double the vowels, Punctuate the consonants"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:559 f283727dee3845a5b54b6065024e78da
+msgid ""
+"This scheme was originally developed in 1991 by Frans Velthuis for use "
+"with his devnag Devanagari font, designed for the TeX typesetting system."
+" Pali and Sanskrit scholars have since adopted it as a standard technique"
+" in Internet correspondence."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:569 e21bcd7c73fb4afabb0c5469aa921062
+msgid "In the Velthuis scheme, two basic rules are observed:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:577 8028cf2404e94228a9b1a8c901283f57
+msgid ""
+"Long vowels (those with a macron (bar) above them) are doubled: aa, ii, "
+"uu."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:586 3a780a0cb3174b80b3e180bc9c17b3e2
+msgid ""
+"For consonants, the diacritic mark precedes the letter it affects. Thus, "
+"the retroflex (cerebral) consonants (those with a dot underneath) are: .r"
+" .t .th .d .dh .n .m .s .l. The guttural nasals (m with a dot below or n "
+"with a dot above) are represented by \"m and \"n. The palatal nasal (n "
+"with a tilde) is ~n."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:598 8e08f44539ff4bc18b6a861fb83bfef2
+msgid ""
+"The scheme is precise, although it takes a while to get used to. Here is "
+"a table of the affected Pali letters in both unicode form and Velthuis "
+"scheme."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:608 181c9c6aff8f4ec8b329ebd018b09f2a
+msgid "Unicode"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:615 5644440a4bc44ba89df46ff0784b70e3
+msgid "Velthuis"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:624 f568624fa9b84cbdb130777b07ab3706
+msgid "(Long vowels)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:633 0a1a0bb3e4b146a99919bffa24ea85e7
+msgid "ā"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:640 d10eaf4a4b0d4570a8c9bb4af2eeaf85
+msgid "aa"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:649 08d0ffae17c84419b00fde5de914c93f
+msgid "ī"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:656 c530a8e6a6e34d7492fa1244235021d2
+msgid "ii"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:665 0d5456e2ab024642bdb7376c89ffc79c
+msgid "ū"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:672 ddd9aa76a2cd49b6900cef676cd87dcd
+msgid "uu"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:681 4f20dd47e845422c9452ee22797dfeba
+msgid "(Consonants)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:690 6d03a87e73e644819d6c611becc3ca0f
+msgid "ṅ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:697 1a0f9ad429624742bb2a9689febfefc5
+msgid "\"n"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:706 0dcf97ee295f4be89169255ace4b4098
+msgid "ñ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:713 288a1d8311094ad2a2f90c3d11800bd1
+msgid "~n"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:722 2c86b7f8d81e45f698f15e1896e54057
+msgid "ṭ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:729 c0db23bc68a5431b94f26e14f24ec96a
+msgid ".t"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:738 162730b149a445eb8bcbb6a7f04e97fc
+msgid "ṭh"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:745 f7ad4b9b7d41449481363e1f72db5414
+msgid ".th"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:754 e9d3214821d54cf9a77c58eeb3ba41c3
+msgid "ḍ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:761 6857006033c44481acf34364779c394b
+msgid ".d"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:770 0ade7d716332498aa0540ef4426f41b0
+msgid "ḍh"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:777 b517c0e7672b4a62a52108275a2fe336
+msgid ".dh"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:786 c385d9d18c48489185308767502773d1
+msgid "ṇ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:793 962c05e633ce46b6b5401bd8f2512797
+msgid ".n"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:802 905ca4e1fafd46c6a66f15df362b66b5
+msgid "ḷ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:809 9735330849654fe7a1a3790d6021585f
+msgid ".l"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:818 5c9ce39bf04f477899327b5490cba8bf
+msgid "ṃ"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:825 a1373466088d41f29e7b8eb77dcfeb77
+msgid ".m"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:837 9a0aa619a9a347d3aad8614c9fd2d73a
+msgid "Gratitude"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:839 e364ce6e8aab4630b469868493429f62
+msgid ""
+"Thanks first and foremost to Alexander Genaud, without whose initial help"
+" there would be no DPR. Special thanks also to Ven. Khemaratana for "
+"pointing out numerous bugs, offering useful suggestions and helping "
+"greatly with the DPPN, among other things. Thanks also to Alan McClure, "
+"Ven. Gavesako, Peter Masefield, Lin Qian, and Leland George for spotting "
+"errors in the script and offering encouragement and suggestions. Thanks "
+"to John Bullit for his link on `www.accesstoinsight.org "
+"<http://www.accesstoinsight.org/outsources/pali.html>`__ as well as for "
+"graciously hosting a PHP script providing the list of sutta translations "
+"used by the DPR and a means of allowing the DPR's offline ATI search. And"
+" thanks to everyone else who helped out in the project in any small or "
+"large way - sotthi vo hotu."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:852 98a4404a948a495faf89e529030dc0e8
+msgid ""
+"Special impersonal credit is due to all of those people involved in "
+"creating and providing publicly-available electronic versions of the "
+"following resources:"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:856 22d4ab985ed2466e96cdc7b55d4a9a6b
+msgid "The Myanmar Pali Tipitaka (VRI)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:857 27754284e0c64f9389ad1d1d383294a0
+msgid "The Thai Pali Tipitaka (Internet Source)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:858 5d8eec68893b46f79db61add0e1427cc
+msgid "The Pali English Dictionary (PTS)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:859 66ae0cce6e1f4320ad5a89fce94cda6c
+msgid "Concise Pali English Dictionary (Buddhadatta)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:860 554fb2533ff54bd2b57c7e5ddb2f8c18
+msgid "Concise English Pali Dictionary (Buddhadatta)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:861 0d9d69f989c04c128d15351f601e9b53
+msgid "Dictionary of Pali Proper Names (Malalasekera)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:862 b4d1c73567224ef8b66b8a064bf540ce
+msgid "Sanskrit-English Dictionary (Monier-Williams)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:863 aae9ec712d66426a843e0e4c36151b6c
+msgid "Sanskrit Roots (Whitney)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:864 c4531e1988cc4b438e427dd8400ae90a
+msgid "PaliLookup (?)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:865 e2c0f970c09647fdab4911f47103c507
+msgid "Buddha Vacana (Dhammika)"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:867 d870533aa64e4547b4075689b8b9bd53
+msgid ""
+"Should this software infringe upon anyone's felt right to forbid the "
+"copying of any of the above or other materials, I apologize for the felt "
+"violation. I am sorry to know that some people feel this way about "
+"generally useful things that benefit the public immensely when "
+"distributed freely. May all be happy and well."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:876 1d6939fea3ad4f769e679cf9d1a0256f
+msgid "Final Words"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:878 e65ab64fb95a4a3e96de504d57764b11
+msgid ""
+"Digital Pāli Reader was originally created by Yuttadhammo Bhikkhu "
+"(yuttadhammo@gmail.com)."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:881 aa4dc6276ad543af894723fff576268b
+msgid "Please check the `DPR Homepage <http://d.pali.tools/>`__ for updates."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:884 332ee2cfe63141ada16bf69186caa692
+msgid ""
+"Please visit the `DPR Forum <https://discord.gg/qdUNgr57wg>`__ to ask "
+"questions about the DPR and the Pali language in general."
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:887 eb629c5eba974403a4b218bee0e0415f
+msgid "Best wishes and good luck,"
+msgstr ""
+
+#: ../../pages/welcome-to-dpr.rst:889 0c1bb71bd1794e2bb67fb65320300bf7
+msgid "Digital Pāli Tools team"
+msgstr ""
+
