@@ -2,10 +2,17 @@
 
 const DPR_Swipe_Gesture = (function () {
 
-  var startX = null;
-  var startY = null;
-  var minSwipeX = 40; //swipe must have 40px min on the X axis
-  var swipeRatioThreshold = 1.2; //movement on X should be at least this times more than on Y
+  let startX = null;
+  let startY = null;
+  let startTime = null;
+  //swipe must have 40px min on the X axis
+  const minSwipeX = 40;
+  //movement on X should be at least this times more than on Y
+  const swipeRatioThreshold = 0.6;
+  // typical swipe speeds vary between 0.1 and 0.6
+  const speedThreshold = 0.19;
+  // acceptable variation around thresholds ( accept lower speed + high ratio or vice-versa )
+  const allowedSkew = 0.4;
 
   window.DPR_Mediator.on(
     'DPR_Swipe_Gesture:touchstart', 
@@ -30,10 +37,13 @@ const DPR_Swipe_Gesture = (function () {
       //just one finger touched
       startX = event.touches.item(0).clientX;
       startY = event.touches.item(0).clientY;
+      startTime = new Date().getTime();
+
     } else {
       //a second finger hit the screen, abort the touch
       startX = null;
       startY = null;
+      startTime = null;
     }
   }
 
@@ -41,13 +51,19 @@ const DPR_Swipe_Gesture = (function () {
     return function touchEnd(event) {
       if (startX || startY) {
         //the only finger that hit the screen left it
-        var endX = event.changedTouches.item(0).clientX;
-        var endY = event.changedTouches.item(0).clientY;
+        const endX = event.changedTouches.item(0).clientX;
+        const endY = event.changedTouches.item(0).clientY;
+        const endTime = new Date().getTime();
 
-        let swipeXDiff = endX - startX;
-        let swipeYDiff = endY - startY;
-        let horizontalToVerticalRatio = Math.abs(swipeXDiff / swipeYDiff);
-        if (horizontalToVerticalRatio > swipeRatioThreshold) {
+        const swipeXDiff = endX - startX;
+        const swipeYDiff = endY - startY;
+        const timeDiff = endTime - startTime;
+        const distance = Math.sqrt(endX * endX + endY * endY) / window.innerWidth * 100;
+        const speed = distance / timeDiff;
+        // the ratio is logarithmic in order to adjust for the exponential curve of the ratio (this facilitates applying the skew factor)
+        const horizontalToVerticalRatio = Math.log2(Math.abs(swipeXDiff / swipeYDiff));
+
+        if (matchesSwipeCriteria(horizontalToVerticalRatio, speed)) {
           if (endX > startX + minSwipeX) {
             //left -> right swipe
             event.dpr_gesture = 'swipe_right';
@@ -65,7 +81,15 @@ const DPR_Swipe_Gesture = (function () {
     }
   }
 
-  function processGesture(e, sectionPosition) {
+  const matchesSwipeCriteria = (horizontalToVerticalRatio, speed) => {
+    const validSpeedSkew = horizontalToVerticalRatio > (1 - allowedSkew) * swipeRatioThreshold && speed > (1 + allowedSkew) * speedThreshold;
+    const validRatioSkew = horizontalToVerticalRatio > (1 + allowedSkew) * swipeRatioThreshold && speed > (1 - allowedSkew) * speedThreshold;
+    const validNoSkew = horizontalToVerticalRatio > swipeRatioThreshold && speed > speedThreshold;
+
+    return validNoSkew || validRatioSkew || validSpeedSkew;
+  }
+
+  const processGesture = (e, sectionPosition) => {
 
     if (!sectionPosition) {
       // In the primary pane or global
@@ -83,7 +107,7 @@ const DPR_Swipe_Gesture = (function () {
     }
   }
 
-  function runMatchingCommand(e) {
+  const runMatchingCommand = (e) => {
     const cmd = Object.entries(window.DPR_Globals.DprViewModel.commands).find(([_, x]) => x().matchGesture(e));
     if (cmd && !cmd[1]().notImplemented && cmd[1]().canExecute && cmd[1]().visible) {
       cmd[1]().execute(e);
