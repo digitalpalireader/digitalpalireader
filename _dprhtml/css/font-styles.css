@@ -4,6 +4,9 @@
 @font-face { src: url('../fonts/NotoSerifDevanagari-Regular.ttf') format('truetype'); font-weight: normal; font-family: 'devanagari'; }
 @font-face { src: url('../fonts/NotoSerifDevanagari-Bold.ttf') format('truetype'); font-weight: bold; font-family: 'devanagari'; }
 
+@font-face { src: url('../fonts/NotoSans-Regular.ttf') format('truetype'); font-weight: normal; font-family: 'Noto Sans'; }
+@font-face { src: url('../fonts/NotoSans-Bold.ttf') format('truetype'); font-weight: bold; font-family: 'Noto Sans'; }
+
 @font-face { src: url('../fonts/NotoSerif-Regular.ttf') format('truetype'); font-weight: normal; font-family: 'roman'; }
 @font-face { src: url('../fonts/NotoSerif-Bold.ttf') format('truetype'); font-weight: bold; font-family: 'roman'; }
 

@@ -43,7 +43,7 @@ const DPR_Prefload = (function () {
 
     colfont: {
       type: String.name,
-      defaultValue: 'Verdana',
+      defaultValue: 'Noto Sans',
     },
     colsize: {
       type: Number.name,
