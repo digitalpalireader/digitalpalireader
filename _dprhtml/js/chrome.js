@@ -467,6 +467,7 @@ const DPR_Chrome_UI = (function () {
 
     // Add event listeners for swipe gestures
     window.DPR_Mediator.emit('DPR_Swipe_Gesture:touchstart', getSectionElementIdName(sPos))
+    window.DPR_Mediator.emit('DPR_Swipe_Gesture:touchmove', getSectionElementIdName(sPos))
     window.DPR_Mediator.emit('DPR_Swipe_Gesture:touchend', getSectionElementIdName(sPos), sPos)
   }
 
