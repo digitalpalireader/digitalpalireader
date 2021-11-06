@@ -296,4 +296,32 @@
       </div>
     </div>
   </div>
+  <div class="form-row">
+    <div class="form-group col mb-1">
+      <label class="small-bold-font"></label>
+      <div id="search-history">
+
+        <!--ko let: { info: historyInfo() || {} }-->
+        <select id="search-history" class="custom-select searchselect"
+          data-bind="options: searchHistoryArray,
+            value: selectedHistoryItem,
+            optionsText: 'query'">
+        </select>
+        <!--/ko-->
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row mb-2">
+    <div id="mat-button-group" class="form-group col mb-1 d-flex justify-content-center">
+      <button type="button" class="btn btn-light m-0 p-1" title="Clear all history entries" name="hist-clear" id="hist-clear" 
+        autocomplete="off" value="m" data-bind="click: clearSearchHistory">clear</button>
+      <div class="mat-button-group-seperator"></div>
+      <button type="button" class="btn btn-light m-0 p-1" title="Use these search options with a different query" name="hist-sim" id="hist-sim" 
+        autocomplete="off" value="a" data-bind="click: simSearchHistory">similar</button>
+      <div class="mat-button-group-seperator"></div>
+      <button type="button" class="btn btn-light m-0 p-1" title="Run this search with the same options" name="hist-same" id="hist-same" 
+        autocomplete="off" value="t" data-bind="click: sameSearchHistory">same</button>
+    </div>
+  </div>
 </div>

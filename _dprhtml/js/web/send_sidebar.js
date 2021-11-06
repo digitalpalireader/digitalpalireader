@@ -495,7 +495,7 @@ const DPR_Web_Send_Sidebar = (function () {
 
       var rx = document.getElementById('tsoRx').checked;
 
-      DPR_search_history_mod.saveSearchHistory(getstring, which, rx, sets, MAT, book, part);
+      DPR_search_history_mod.addSearchHistory(getstring, which, rx, sets, MAT, book, part);
     }
     else {
       var which = searchType;
