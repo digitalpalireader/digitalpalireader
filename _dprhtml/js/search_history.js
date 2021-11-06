@@ -23,7 +23,7 @@ const DPR_Search_History = (function () {
 
     let dataJsObj = ko.toJS(data);
 
-    if (dataJsObj.query.localeCompare("-- History --") !== 0)
+    if (dataJsObj.displayText.localeCompare("-- History --") !== 0)
     {
       await DPRSend.sendSearch(DPRSend.eventSend(),dataJsObj.searchType, dataJsObj.query, dataJsObj.MAT, dataJsObj.sets, dataJsObj.book, dataJsObj.part, dataJsObj.rx);
     }
@@ -33,7 +33,7 @@ const DPR_Search_History = (function () {
 
     let dataJsObj = ko.toJS(data);
 
-    if (dataJsObj.query.localeCompare("-- History --") !== 0)
+    if (dataJsObj.displayText.localeCompare("-- History --") !== 0)
     {
       let searchType = dataJsObj.searchType, searchString = dataJsObj.query, searchMAT = dataJsObj.MAT, searchSet = dataJsObj.sets, searchBook = dataJsObj.book, searchPart = dataJsObj.part, searchRX = dataJsObj.rx;
 
@@ -93,7 +93,7 @@ const DPR_Search_History = (function () {
     }
   }
 
-  function addSearchHistory(query,searchType,rx,sets,MAT,book,part) {   
+  function addSearchHistory(query, searchType, rx, sets, MAT, book, part) {   
     
     let searchHistStoreObj = 
     {
@@ -103,8 +103,11 @@ const DPR_Search_History = (function () {
       sets: sets,
       MAT: MAT,
       book: book,
-      part: part
+      part: part,
+      displayText: ''
     };
+
+    searchHistStoreObj.displayText = getSearchHistDisplayText(query, searchType, rx, sets, MAT, book, part);
 
     let searchHistoryArrayFromStorage = localStorage.getItem("searchHistoryArray");
     if (searchHistoryArrayFromStorage) {
@@ -119,6 +122,29 @@ const DPR_Search_History = (function () {
       localStorage.setItem("searchHistoryArray", JSON.stringify(data));
       window.DPR_Globals.SearchTabViewModel.updateHistory();
     }
+  }
+
+  function getSearchHistDisplayText(query, searchType, rx, sets, MAT, book, part) { 
+
+    let types = ['Sets', 'Books', 'Book', 'Part', '', 'ATI'];
+    let place = '';
+
+    switch (parseInt(searchType)) {
+      case 0:
+      case 5:
+        place = sets.split('').join(',');
+        break;
+      case 1:
+        place = DPR_G.G_nikLongName[sets[0]];
+        break;
+      case 2:
+      case 3:
+      case 4:
+        place = DPR_G.G_nikLongName[sets[0]] + ' ' + book.split('').join(',');
+        break;
+    }
+
+    return '\'' + query + '\' - ' + place + ' (' + types[parseInt(searchType)] + ')';
   }
 
   async function clearSearchHistory() {

@@ -77,7 +77,6 @@ export class SearchTabViewModel {
       owner: this
     });
 
-    this.getSearchHistoryItemText()
     this.updateHistory()
   }
 
@@ -175,16 +174,16 @@ export class SearchTabViewModel {
   updateHistory() {
     if (SearchTabViewModel.isStorageSupportedByBrowser()) {
 
-      let searchHistStoreDefaultObj;
-      searchHistStoreDefaultObj = 
+      let searchHistStoreDefaultObj = 
       {
-        query: '-- History --', 
+        query: '', 
         searchType: '', 
         rx: '',
         sets: '',
         MAT: '',
         book: '',
-        part: ''
+        part: '',
+        displayText: '-- History --'
       };
 
       if (!localStorage.getItem('searchHistoryArray')) {
