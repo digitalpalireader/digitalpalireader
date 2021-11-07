@@ -52,7 +52,7 @@ export class SearchTabViewModel {
     this.HistOptions = ko.observable('m')
     this.HistOptions.subscribe((x) => DPRNav.switchhier(x))
 
-    this.searchHistoryVisible = ko.computed(() => SearchTabViewModel.isStorageSupportedByBrowser(), this)
+    this.isStorageSupportedByBrowser = ko.computed(() => SearchTabViewModel.isStorageSupportedByBrowser(), this)
     this.searchHistoryArray = ko.observableArray()
     this.selectedHistoryItem = ko.observable()
     this.historyInfo = ko.computed(() => SearchTabViewModel.computeHistoryInfo(), this)

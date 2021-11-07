@@ -296,7 +296,7 @@
       </div>
     </div>
   </div>
-  <div class="form-row">
+  <div class="form-row" data-bind="visible: isStorageSupportedByBrowser">
     <div class="form-group col mb-1">
       <label class="small-bold-font"></label>
       <div id="search-history">
@@ -312,7 +312,7 @@
     </div>
   </div>
 
-  <div class="form-row mb-2">
+  <div class="form-row mb-2" data-bind="visible: isStorageSupportedByBrowser">
     <div id="mat-button-group" class="form-group col mb-1 d-flex justify-content-center">
       <button type="button" class="btn btn-light m-0 p-1" title="Clear all history entries" name="hist-clear" id="hist-clear" 
         autocomplete="off" value="m" data-bind="click: clearSearchHistory">clear</button>
