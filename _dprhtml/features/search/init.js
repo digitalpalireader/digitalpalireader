@@ -66,7 +66,7 @@ export class SearchTabViewModel {
     this.simSearchHistory = ko.pureComputed({
       read: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
       write: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
-      owner: this
+      owner: this,
     })
 
     this.updateHistory()
