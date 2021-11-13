@@ -48,6 +48,32 @@ export class SearchTabViewModel {
     this.suttaListValue = ko.observable('0')
     this.sectionListValue = ko.observable('0')
     this.partialValue = ko.observable('1')
+
+    this.HistOptions = ko.observable('m')
+    this.HistOptions.subscribe((x) => DPRNav.switchhier(x))
+
+    this.isStorageSupportedByBrowser = ko.computed(() => SearchTabViewModel.isStorageSupportedByBrowser(), this)
+    this.searchHistoryArray = ko.observableArray()
+    this.selectedHistoryItem = ko.observable()
+    this.historyInfo = ko.computed(() => SearchTabViewModel.computeHistoryInfo(), this)
+
+    this.sameSearchHistory = ko.pureComputed({
+      read: () => (DPR_Search_History.sameSearchHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Search_History.sameSearchHistory(this.selectedHistoryItem)),
+      owner: this,
+    })
+
+    this.simSearchHistory = ko.pureComputed({
+      read: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
+      owner: this,
+    })
+
+    this.updateHistory()
+  }
+
+  static isStorageSupportedByBrowser() {
+    return typeof Storage !== 'undefined'
   }
 
   searchPart(part) {
@@ -115,6 +141,51 @@ export class SearchTabViewModel {
     this.searchM(matl.indexOf('m') > -1)
     this.searchA(matl.indexOf('a') > -1)
     this.searchT(matl.indexOf('t') > -1)
+  }
+
+  async sendSelectedHistoryItem(ctx) {
+    if (ctx.selectedHistoryItem() && ctx.selectedHistoryItem() !== '-- History --') {
+      const selectedHistItem = ctx.selectedHistoryItem().toString().replace(/'/g, '').split('@')
+      const x = selectedHistItem[1].split(',')
+      if (x.length > 3) {
+        await DPRSend.openPlace(this.sectionId, x)
+      } else {
+        await DPRSend.openIndex(this.sectionId, x)
+      }
+    }
+  }
+
+  static computeHistoryInfo() {
+    return {
+      text: '\u21D2',
+      title: 'Open bookmarks and history window',
+      onmouseup: 'window.DPR_bookmarks_mod.bookmarkframe(1)',
+    }
+  }
+
+  updateHistory() {
+    if (SearchTabViewModel.isStorageSupportedByBrowser()) {
+      const searchHistStoreDefaultObj = {
+        query: '',
+        searchType: '',
+        rx: '',
+        sets: '',
+        MAT: '',
+        book: '',
+        part: '',
+        displayText: '-- History --',
+      }
+
+      if (!localStorage.getItem('searchHistoryArray')) {
+        localStorage.setItem('searchHistoryArray', JSON.stringify(searchHistStoreDefaultObj))
+      }
+
+      this.searchHistoryArray(JSON.parse(localStorage.getItem('searchHistoryArray')))
+    }
+  }
+
+  clearSearchHistory() {
+    DPR_Search_History.clearSearchHistory(this)
   }
 }
 
