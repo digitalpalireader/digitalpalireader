@@ -58,24 +58,16 @@ export class SearchTabViewModel {
     this.historyInfo = ko.computed(() => SearchTabViewModel.computeHistoryInfo(), this)
 
     this.sameSearchHistory = ko.pureComputed({
-      read: () => {
-          return DPR_Search_History.sameSearchHistory(this.selectedHistoryItem), this;
-      },
-      write: () => {
-        DPR_Search_History.sameSearchHistory(this.selectedHistoryItem), this
-      },
-      owner: this
-    });
+      read: () => (DPR_Search_History.sameSearchHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Search_History.sameSearchHistory(this.selectedHistoryItem)),
+      owner: this,
+    })
 
     this.simSearchHistory = ko.pureComputed({
-      read: () => {
-          return DPR_Search_History.simSearchHistory(this.selectedHistoryItem), this;
-      },
-      write: () => {
-        DPR_Search_History.simSearchHistory(this.selectedHistoryItem), this
-      },
+      read: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Search_History.simSearchHistory(this.selectedHistoryItem)),
       owner: this
-    });
+    })
 
     this.updateHistory()
   }
@@ -173,18 +165,16 @@ export class SearchTabViewModel {
 
   updateHistory() {
     if (SearchTabViewModel.isStorageSupportedByBrowser()) {
-
-      let searchHistStoreDefaultObj = 
-      {
-        query: '', 
-        searchType: '', 
+      const searchHistStoreDefaultObj = {
+        query: '',
+        searchType: '',
         rx: '',
         sets: '',
         MAT: '',
         book: '',
         part: '',
-        displayText: '-- History --'
-      };
+        displayText: '-- History --',
+      }
 
       if (!localStorage.getItem('searchHistoryArray')) {
         localStorage.setItem('searchHistoryArray', JSON.stringify(searchHistStoreDefaultObj))
@@ -195,7 +185,7 @@ export class SearchTabViewModel {
   }
 
   clearSearchHistory() {
-    DPR_Search_History.clearSearchHistory()
+    DPR_Search_History.clearSearchHistory(this)
   }
 }
 
