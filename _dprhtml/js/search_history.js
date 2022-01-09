@@ -212,6 +212,7 @@ const DPR_Search_History = (function () {
     simSearchHistory,
     addSearchHistory,
     clearSearchHistory,
+    saveDictHistory
   }
 })()
 
