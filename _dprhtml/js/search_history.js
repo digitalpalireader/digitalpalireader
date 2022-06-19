@@ -157,12 +157,14 @@ const DPR_Search_History = (function () {
     }
   }
 
-  function dictHistoryXML(){
-    var cont = DPR_io_mod.readFile('DPR_Dict_History');
-    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-    var parser=new DOMParser();
-    var xmlDoc = parser.parseFromString(cont,'text/xml');
-    return xmlDoc;
+  async function sendDictHistory(data){
+
+    let dataJsObj = ko.toJS(data);
+
+    if (dataJsObj.displayText.localeCompare("-- History --") !== 0)
+    {
+      await DPRSend.sendDict(true,DPRSend.eventSend(),dataJsObj.type, DPR_translit_mod.translit(dataJsObj.query), [dataJsObj.opts]);
+    }
   }
 
   function eraseDictHistory(gofrom)
@@ -170,41 +172,36 @@ const DPR_Search_History = (function () {
     var answer = confirm('Are you sure you want to erase the lookup history?')
     if(answer)
     {
-          DPR_io_mod.eraseFile('DPR_Dict_History');
+      DPR_io_mod.eraseFile('DPR_Dict_History');
       DPRNav.dictHistoryBox();
     }
   }
 
   function saveDictHistory(query,type,opts) {
-    if (DPR_PAL.isWeb) {
-      console.log("DPR_search_history_mod.saveDictHistory not implemented");
-      return;
+
+    let dictHistStoreObj = 
+    {
+      query: query, 
+      type: type,
+      opts: opts,
+      displayText: ''
+    };
+
+    dictHistStoreObj.displayText = query + ' (' + type + ')';
+
+    let dictHistoryArrayFromStorage = localStorage.getItem("dictHistoryArray");
+    if (dictHistoryArrayFromStorage) {
+      let data = JSON.parse(dictHistoryArrayFromStorage);
+      if(!(data instanceof Array)) {
+        data = [data];
+      }
+      for (var i in data) {
+        if (i > 99) return;
+      }
+      data.push(dictHistStoreObj);
+      localStorage.setItem("dictHistoryArray", JSON.stringify(data));
+      window.DPR_Globals.SearchTabViewModel.updateHistory();
     }
-
-    var xmlDoc = dictHistoryXML();
-    var newNode = xmlDoc.createElement('dict');
-
-    var subNode = xmlDoc.createElement('query');
-    var text = xmlDoc.createTextNode(query);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    subNode = xmlDoc.createElement('type');
-    text = xmlDoc.createTextNode(type);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    subNode = xmlDoc.createElement('opts');
-    text = xmlDoc.createTextNode(opts);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    xmlDoc.documentElement.appendChild(newNode);
-
-    var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
-
-    DPR_io_mod.writeFile('DPR_Dict_History', outfile);
-    DPRNav.dictHistoryBox();
   }
 
   return {
@@ -212,6 +209,7 @@ const DPR_Search_History = (function () {
     simSearchHistory,
     addSearchHistory,
     clearSearchHistory,
+    sendDictHistory,
     saveDictHistory
   }
 })()
