@@ -59,9 +59,9 @@ export class DictionaryTabViewModel {
 
   static computeHistoryInfo() {
     return {
-      text: '\u21D2',
-      title: 'Open bookmarks and history window',
-      onmouseup: 'window.DPR_bookmarks_mod.bookmarkframe(1)',
+      text: 'X',
+      title: 'Clear all history entries',
+      onmouseup: 'window.DPR_search_history_mod.clearDictHistory()',
     }
   }
 
@@ -80,6 +80,10 @@ export class DictionaryTabViewModel {
 
       this.dictHistoryArray(JSON.parse(localStorage.getItem('dictHistoryArray')))
     }
+  }
+
+  clearDictHistory() {
+    DPR_Search_History.clearDictHistory(this)
   }
 }
 

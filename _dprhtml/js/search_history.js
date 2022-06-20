@@ -167,13 +167,13 @@ const DPR_Search_History = (function () {
     }
   }
 
-  function eraseDictHistory(gofrom)
-  {
-    var answer = confirm('Are you sure you want to erase the lookup history?')
-    if(answer)
-    {
-      DPR_io_mod.eraseFile('DPR_Dict_History');
-      DPRNav.dictHistoryBox();
+  async function clearDictHistory() {
+    var answer = confirm('Are you sure you want to erase the lookup history?');
+    if(!answer) { return; }
+    let dictHistoryArrayFromStorage = localStorage.getItem("dictHistoryArray");
+    if (dictHistoryArrayFromStorage) {
+      localStorage.removeItem("dictHistoryArray");
+      window.DPR_Globals.DictionaryTabViewModel.updateHistory();
     }
   }
 
@@ -200,7 +200,7 @@ const DPR_Search_History = (function () {
       }
       data.push(dictHistStoreObj);
       localStorage.setItem("dictHistoryArray", JSON.stringify(data));
-      window.DPR_Globals.SearchTabViewModel.updateHistory();
+      window.DPR_Globals.DictionaryTabViewModel.updateHistory();
     }
   }
 
@@ -209,6 +209,7 @@ const DPR_Search_History = (function () {
     simSearchHistory,
     addSearchHistory,
     clearSearchHistory,
+    clearDictHistory,
     sendDictHistory,
     saveDictHistory
   }
