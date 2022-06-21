@@ -1,23 +1,6 @@
 'use strict';
 
 const DPR_Search_History = (function () {
-  function searchHistoryXML(){
-    var cont = DPR_io_mod.readFile('DPR_Search_History');
-    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-    var parser=new DOMParser();
-    var xmlDoc = parser.parseFromString(cont,'text/xml');
-    return xmlDoc;
-  }
-
-  function eraseSearchHistory(gofrom)
-  {
-    var answer = confirm('Are you sure you want to erase the search history?')
-    if(answer)
-    {
-          DPR_io_mod.eraseFile('DPR_Search_History');
-      DPRNav.searchHistoryBox();
-    }
-  }
 
   async function sameSearchHistory(data){
 
@@ -157,62 +140,11 @@ const DPR_Search_History = (function () {
     }
   }
 
-  function dictHistoryXML(){
-    var cont = DPR_io_mod.readFile('DPR_Dict_History');
-    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-    var parser=new DOMParser();
-    var xmlDoc = parser.parseFromString(cont,'text/xml');
-    return xmlDoc;
-  }
-
-  function eraseDictHistory(gofrom)
-  {
-    var answer = confirm('Are you sure you want to erase the lookup history?')
-    if(answer)
-    {
-          DPR_io_mod.eraseFile('DPR_Dict_History');
-      DPRNav.dictHistoryBox();
-    }
-  }
-
-  function saveDictHistory(query,type,opts) {
-    if (DPR_PAL.isWeb) {
-      console.log("DPR_search_history_mod.saveDictHistory not implemented");
-      return;
-    }
-
-    var xmlDoc = dictHistoryXML();
-    var newNode = xmlDoc.createElement('dict');
-
-    var subNode = xmlDoc.createElement('query');
-    var text = xmlDoc.createTextNode(query);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    subNode = xmlDoc.createElement('type');
-    text = xmlDoc.createTextNode(type);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    subNode = xmlDoc.createElement('opts');
-    text = xmlDoc.createTextNode(opts);
-    subNode.appendChild(text);
-    newNode.appendChild(subNode);
-
-    xmlDoc.documentElement.appendChild(newNode);
-
-    var outfile = (new XMLSerializer()).serializeToString(xmlDoc);
-
-    DPR_io_mod.writeFile('DPR_Dict_History', outfile);
-    DPRNav.dictHistoryBox();
-  }
-
   return {
     sameSearchHistory,
     simSearchHistory,
     addSearchHistory,
-    clearSearchHistory,
-    saveDictHistory
+    clearSearchHistory
   }
 })()
 

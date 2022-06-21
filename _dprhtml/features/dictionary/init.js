@@ -34,10 +34,56 @@ export class DictionaryTabViewModel {
       },
       owner: this,
     })
+
+    this.isStorageSupportedByBrowser = ko.computed(() => DictionaryTabViewModel.isStorageSupportedByBrowser(), this)
+    this.dictHistoryArray = ko.observableArray()
+    this.selectedHistoryItem = ko.observable()
+    this.historyInfo = ko.computed(() => DictionaryTabViewModel.computeHistoryInfo(), this)
+
+    this.sendSelectedHistoryItem = ko.pureComputed({
+      read: () => (DPR_Dict_History.sendDictHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Dict_History.sendDictHistory(this.selectedHistoryItem)),
+      owner: this,
+    })
+
+    this.updateHistory()
   }
 
   option(optionName) {
     return this.options.indexOf(optionName) > -1
+  }
+
+  static isStorageSupportedByBrowser() {
+    return typeof Storage !== 'undefined'
+  }
+
+  static computeHistoryInfo() {
+    return {
+      text: 'X',
+      title: 'Clear all history entries',
+      onmouseup: 'window.DPR_dict_history_mod.clearDictHistory()',
+    }
+  }
+
+  updateHistory() {
+    if (DictionaryTabViewModel.isStorageSupportedByBrowser()) {
+      const dictHistStoreDefaultObj = {
+        query: '',
+        type: '',
+        opts: '',
+        displayText: '-- History --',
+      }
+
+      if (!localStorage.getItem('dictHistoryArray')) {
+        localStorage.setItem('dictHistoryArray', JSON.stringify(dictHistStoreDefaultObj))
+      }
+
+      this.dictHistoryArray(JSON.parse(localStorage.getItem('dictHistoryArray')))
+    }
+  }
+
+  clearDictHistory() {
+    DPR_Dict_History.clearDictHistory(this)
   }
 }
 

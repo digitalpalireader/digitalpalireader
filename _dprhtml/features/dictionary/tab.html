@@ -178,10 +178,29 @@
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" data-bind="visible: isStorageSupportedByBrowser">
+        <div class="form-group col mb-1">
+          <label class="small-bold-font"></label>
+          <div id="dict-history" class="input-group">
+            
+            <!--ko let: { info: historyInfo() || {} }-->
+            <select id="dict-history" class="custom-select dictselect"
+              data-bind="options: dictHistoryArray,
+                value: selectedHistoryItem,
+                optionsText: 'displayText',
+                event: {change: sendSelectedHistoryItem}">
+            </select>
+            <div class="input-group-append">
+              <button id="dict-hist-clear-button" type="button" class="btn btn-outline-secondary" 
+                data-bind="text: info.text, attr: { title: info.title, onmouseup: info.onmouseup }">
+              </button>
+            </div>
+            <!--/ko-->
           </div>
         </div>
       </div>
