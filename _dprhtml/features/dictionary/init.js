@@ -46,7 +46,7 @@ export class DictionaryTabViewModel {
       owner: this,
     })
 
-    this.updateHistory();
+    this.updateHistory()
   }
 
   option(optionName) {
