@@ -41,8 +41,8 @@ export class DictionaryTabViewModel {
     this.historyInfo = ko.computed(() => DictionaryTabViewModel.computeHistoryInfo(), this)
 
     this.sendSelectedHistoryItem = ko.pureComputed({
-      read: () => (DPR_Search_History.sendDictHistory(this.selectedHistoryItem)),
-      write: () => (DPR_Search_History.sendDictHistory(this.selectedHistoryItem)),
+      read: () => (DPR_Dict_History.sendDictHistory(this.selectedHistoryItem)),
+      write: () => (DPR_Dict_History.sendDictHistory(this.selectedHistoryItem)),
       owner: this,
     })
 
@@ -61,7 +61,7 @@ export class DictionaryTabViewModel {
     return {
       text: 'X',
       title: 'Clear all history entries',
-      onmouseup: 'window.DPR_search_history_mod.clearDictHistory()',
+      onmouseup: 'window.DPR_dict_history_mod.clearDictHistory()',
     }
   }
 
@@ -83,7 +83,7 @@ export class DictionaryTabViewModel {
   }
 
   clearDictHistory() {
-    DPR_Search_History.clearDictHistory(this)
+    DPR_Dict_History.clearDictHistory(this)
   }
 }
 

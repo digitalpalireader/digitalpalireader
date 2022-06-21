@@ -1,23 +1,6 @@
 'use strict';
 
 const DPR_Search_History = (function () {
-  function searchHistoryXML(){
-    var cont = DPR_io_mod.readFile('DPR_Search_History');
-    cont = (cont ? cont.join('\n') : '<?xml version="1.0" encoding="UTF-8"?>\n<xml></xml>');
-    var parser=new DOMParser();
-    var xmlDoc = parser.parseFromString(cont,'text/xml');
-    return xmlDoc;
-  }
-
-  function eraseSearchHistory(gofrom)
-  {
-    var answer = confirm('Are you sure you want to erase the search history?')
-    if(answer)
-    {
-          DPR_io_mod.eraseFile('DPR_Search_History');
-      DPRNav.searchHistoryBox();
-    }
-  }
 
   async function sameSearchHistory(data){
 
@@ -157,61 +140,11 @@ const DPR_Search_History = (function () {
     }
   }
 
-  async function sendDictHistory(data){
-
-    let dataJsObj = ko.toJS(data);
-
-    if (dataJsObj.displayText.localeCompare("-- History --") !== 0)
-    {
-      await DPRSend.sendDict(true,DPRSend.eventSend(),dataJsObj.type, DPR_translit_mod.translit(dataJsObj.query), [dataJsObj.opts]);
-    }
-  }
-
-  async function clearDictHistory() {
-    var answer = confirm('Are you sure you want to erase the lookup history?');
-    if(!answer) { return; }
-    let dictHistoryArrayFromStorage = localStorage.getItem("dictHistoryArray");
-    if (dictHistoryArrayFromStorage) {
-      localStorage.removeItem("dictHistoryArray");
-      window.DPR_Globals.DictionaryTabViewModel.updateHistory();
-    }
-  }
-
-  function saveDictHistory(query,type,opts) {
-
-    let dictHistStoreObj = 
-    {
-      query: query, 
-      type: type,
-      opts: opts,
-      displayText: ''
-    };
-
-    dictHistStoreObj.displayText = query + ' (' + type + ')';
-
-    let dictHistoryArrayFromStorage = localStorage.getItem("dictHistoryArray");
-    if (dictHistoryArrayFromStorage) {
-      let data = JSON.parse(dictHistoryArrayFromStorage);
-      if(!(data instanceof Array)) {
-        data = [data];
-      }
-      for (var i in data) {
-        if (i > 99) return;
-      }
-      data.push(dictHistStoreObj);
-      localStorage.setItem("dictHistoryArray", JSON.stringify(data));
-      window.DPR_Globals.DictionaryTabViewModel.updateHistory();
-    }
-  }
-
   return {
     sameSearchHistory,
     simSearchHistory,
     addSearchHistory,
-    clearSearchHistory,
-    clearDictHistory,
-    sendDictHistory,
-    saveDictHistory
+    clearSearchHistory
   }
 })()
 

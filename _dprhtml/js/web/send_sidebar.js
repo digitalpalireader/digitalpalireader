@@ -389,7 +389,7 @@ const DPR_Web_Send_Sidebar = (function () {
       if ($('#sostartword').prop("checked")) opts.push('sw');
       if (hard) opts.push('hd');
 
-      DPR_search_history_mod.saveDictHistory(getstring, which, opts.join(','));
+      DPR_dict_history_mod.saveDictHistory(getstring, which, opts.join(','));
 
     }
     if (which == 'DPR') {
